@@ -291,10 +291,10 @@ var TopBar = function TopBar() {
 
 /***/ }),
 
-/***/ "./components/layouts/Router.js":
-/*!**************************************!*\
-  !*** ./components/layouts/Router.js ***!
-  \**************************************/
+/***/ "./components/layouts/AppLayout.js":
+/*!*****************************************!*\
+  !*** ./components/layouts/AppLayout.js ***!
+  \*****************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -305,13 +305,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/head */ "./node_modules/next/dist/next-server/lib/head.js");
 /* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _includes_Header_Header__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../includes/Header/Header */ "./components/includes/Header/Header.js");
-/* harmony import */ var _Router_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./Router.scss */ "./components/layouts/Router.scss");
-/* harmony import */ var _Router_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_Router_scss__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _AppLayout_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./AppLayout.scss */ "./components/layouts/AppLayout.scss");
+/* harmony import */ var _AppLayout_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_AppLayout_scss__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var _styles_styles_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../styles/styles.scss */ "./styles/styles.scss");
 /* harmony import */ var _styles_styles_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_styles_styles_scss__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../includes/TopBar/TopBar */ "./components/includes/TopBar/TopBar.js");
 /* harmony import */ var _includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../includes/Header/Navigation/Navigation */ "./components/includes/Header/Navigation/Navigation.js");
-var _jsxFileName = "G:\\Dev Project\\reactServerSideRenderingWithNext\\components\\layouts\\Router.js";
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -321,79 +320,42 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
-var Router = function Router(props) {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 12
-    },
-    __self: this
-  }, __jsx("title", {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 13
-    },
-    __self: this
-  }, "Website Title"), __jsx("meta", {
+var AppLayout = function AppLayout(props) {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, __jsx("title", null, "Website Title"), __jsx("meta", {
     name: "theme-color",
-    content: "#000000",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 14
-    },
-    __self: this
+    content: "#000000"
   }), __jsx("meta", {
     name: "viewport",
-    content: "width=device-width, initial-scale=1",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 15
-    },
-    __self: this
+    content: "width=device-width, initial-scale=1"
   }), __jsx("meta", {
-    charSet: "utf-8",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 16
-    },
-    __self: this
+    charSet: "utf-8"
   }), __jsx("script", {
     src: "https://kit.fontawesome.com/e9c7c74c80.js",
-    crossOrigin: "anonymous",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 17
-    },
-    __self: this
-  })), __jsx(_includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_5__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 19
-    },
-    __self: this
-  }), __jsx(_includes_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 20
-    },
-    __self: this
-  }), __jsx(_includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 21
-    },
-    __self: this
-  }), __jsx("div", {
-    className: "App",
-    __source: {
-      fileName: _jsxFileName,
-      lineNumber: 22
-    },
-    __self: this
+    crossOrigin: "anonymous"
+  }), __jsx("meta", {
+    name: "description",
+    content: "description of the site"
+  }), __jsx("meta", {
+    name: "keywords",
+    content: "key,word,for,SEO"
+  }), "/*", __jsx("meta", {
+    property: "og:title",
+    content: "The Rock"
+  }), __jsx("meta", {
+    property: "og:type",
+    content: "video.movie"
+  }), __jsx("meta", {
+    property: "og:url",
+    content: "http://www.imdb.com/title/tt0117500/"
+  }), __jsx("meta", {
+    property: "og:image",
+    content: "http://ia.media-imdb.com/images/rock.jpg"
+  }), "https://ogp.me/ */"), __jsx(_includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx(_includes_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), __jsx(_includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_6__["default"], null), __jsx("div", {
+    className: "App"
   }, props.children));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (Router);
+/* harmony default export */ __webpack_exports__["default"] = (AppLayout);
 
 /***/ }),
 
@@ -11059,7 +11021,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _babel_runtime_corejs2_helpers_esm_inherits__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/inherits */ "./node_modules/@babel/runtime-corejs2/helpers/esm/inherits.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_6__);
-/* harmony import */ var _components_layouts_Router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/layouts/Router */ "./components/layouts/Router.js");
+/* harmony import */ var _components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../components/layouts/AppLayout */ "./components/layouts/AppLayout.js");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./index.scss */ "./pages/index.scss");
 /* harmony import */ var _index_scss__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(_index_scss__WEBPACK_IMPORTED_MODULE_8__);
 
@@ -11087,7 +11049,7 @@ function (_Component) {
   Object(_babel_runtime_corejs2_helpers_esm_createClass__WEBPACK_IMPORTED_MODULE_2__["default"])(Home, [{
     key: "render",
     value: function render() {
-      return __jsx(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, null, __jsx(_components_layouts_Router__WEBPACK_IMPORTED_MODULE_7__["default"], null, __jsx("div", {
+      return __jsx(react__WEBPACK_IMPORTED_MODULE_6___default.a.Fragment, null, __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_7__["default"], null, __jsx("div", {
         className: "HomePage"
       }, __jsx("h1", null, "Header 1"))));
     }

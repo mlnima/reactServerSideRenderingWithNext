@@ -3,6 +3,7 @@ const next = require('next');
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const userController = require('./controllers/userControllers');
+const path = require('path')
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -15,10 +16,22 @@ mongoose.connect("mongodb://localhost:27017/nextDB", {
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
 
+//Issue with __dirname
+const robotsOptions = {
+    root:  './static/',
+    headers: {'Content-Type':'text/plain;charset=utf-8'}
+}
+
+
 app.prepare().then(()=>{
     const server = express();
     server.use(bodyParser.json())
     console.log(process.env.TEST );
+
+    server.get('/robots.txt',(req,res)=>{
+        console.log(path.dirname )
+        return res.status(200).sendFile('robots.txt',robotsOptions)
+    });
 
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});

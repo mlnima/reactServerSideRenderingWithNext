@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import Router from "../components/layouts/Router";
+import Router from "../components/layouts/AppLayout";
 
 import './index.scss'
 

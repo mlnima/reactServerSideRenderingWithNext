@@ -1,15 +1,20 @@
-import React, { useState } from 'react';
-import Router from "../../components/layouts/Router";
+import React, { useState,useRef } from 'react';
+import AppLayout from "../../components/layouts/AppLayout";
 import './registerLogin.scss';
 import withRouter from "next/dist/client/with-router";
 import axios from 'axios'
 
 const Register = props => {
+    const messageLabel = useRef(null);
     const [ state, setState ] = useState({
         username: undefined,
         email: undefined,
         password: undefined,
         password2: undefined
+    });
+    const [ data, setData ] = useState({
+        response:undefined,
+        type:undefined,
     });
 
     const onChangeHandler = e => {
@@ -21,11 +26,23 @@ const Register = props => {
 
     const onSubmitHandler = e => {
         e.preventDefault()
-        axios.post('/api/v1/users/register',state)
+        axios.post('/api/v1/users/register',state).then(res=>{
+            if (type === 'success'){
+                messageLabel.current.style.backgroundColor = 'green'
+            }else {
+                messageLabel.current.style.backgroundColor = 'red'
+            }
+
+            setData({
+                ...data,
+                response:res.data.response,
+                type:res.data.type,
+            })
+        }).catch(err=>console.log( err))
     };
 
     return (
-        <Router>
+        <AppLayout>
             <div className='Register authPage'>
                 <form className='authForm' onSubmit={e=>onSubmitHandler(e)}>
                     <div className="authFormItem">
@@ -47,7 +64,7 @@ const Register = props => {
                     <button type='submit' className='submitBtn'>Register</button>
                 </form>
             </div>
-        </Router>
+        </AppLayout>
     );
 };
 export default withRouter(Register);

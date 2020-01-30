@@ -1,0 +1,201 @@
+{
+  "mini-css-extract-plugin ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\pages\\index.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\pages\\auth\\registerLogin.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\layouts\\AppLayout.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\styles\\styles.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\includes\\Header\\Header.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\includes\\TopBar\\TopBar.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\includes\\Header\\Navigation\\Navigation.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "mini-css-extract-plugin ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\includes\\Header\\Logo\\Logo.scss": [
+    {
+      "modules": {
+        "byIdentifier": {},
+        "usedIds": {}
+      },
+      "chunks": {
+        "byName": {
+          "mini-css-extract-plugin": 0
+        },
+        "bySource": {},
+        "usedIds": [
+          0
+        ]
+      }
+    }
+  ],
+  "modules": {
+    "byIdentifier": {
+      "multi next-client-pages-loader?page=%2F_app&absolutePagePath=private-next-pages%2F_app.js! ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\next\\dist\\client\\router.js": 0,
+      "css ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\includes\\Header\\Header.scss 0": 1,
+      "css ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\includes\\Header\\Logo\\Logo.scss 0": 2,
+      "css ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\layouts\\AppLayout.scss 0": 3,
+      "css ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\styles\\styles.scss 0": 4,
+      "css ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\includes\\TopBar\\TopBar.scss 0": 5,
+      "css ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\components\\includes\\Header\\Navigation\\Navigation.scss 0": 6,
+      "css ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\pages\\auth\\registerLogin.scss 0": 7,
+      "css ../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\@zeit\\next-css\\node_modules\\css-loader\\index.js??ref--6-1!../../Dev Project\\reactServerSideRenderingWithNext\\node_modules\\sass-loader\\dist\\cjs.js??ref--6-2!../../Dev Project\\reactServerSideRenderingWithNext\\pages\\index.scss 0": 8
+    },
+    "usedIds": {
+      "0": 0,
+      "1": 1,
+      "2": 2,
+      "3": 3,
+      "4": 4,
+      "5": 5,
+      "6": 6,
+      "7": 7,
+      "8": 8
+    }
+  },
+  "chunks": {
+    "byName": {
+      "commons": 0,
+      "static/runtime/webpack.js": 1,
+      "framework": 2,
+      "e9b7858f826d54fe7e440620a4e116e62982fc54": 3,
+      "c2ff85dff318b9bf76a1ed286d52849eeb211511": 4,
+      "bacd066d613cdf6bfed0fe8234aa0dd3d665d360": 5,
+      "b0e8a671fc5b56bd316c5152f6ce1cddf5ee5216": 6,
+      "static/runtime/main.js": 7,
+      "static/runtime/polyfills.js": 8,
+      "static\\qlSxCQJoL-XJI_qAjNs41\\pages\\_app.js": 9,
+      "static\\qlSxCQJoL-XJI_qAjNs41\\pages\\_error.js": 10,
+      "static\\qlSxCQJoL-XJI_qAjNs41\\pages\\admin\\admin-panel.js": 11,
+      "static\\qlSxCQJoL-XJI_qAjNs41\\pages\\auth\\login.js": 12,
+      "static\\qlSxCQJoL-XJI_qAjNs41\\pages\\auth\\register.js": 13,
+      "static\\qlSxCQJoL-XJI_qAjNs41\\pages\\index.js": 14,
+      "styles": 15
+    },
+    "bySource": {},
+    "usedIds": [
+      0,
+      1,
+      10,
+      11,
+      12,
+      13,
+      14,
+      15,
+      2,
+      3,
+      4,
+      5,
+      6,
+      7,
+      8,
+      9
+    ]
+  }
+}

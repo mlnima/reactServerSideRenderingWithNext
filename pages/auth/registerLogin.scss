@@ -10,13 +10,25 @@
     justify-content: center;
     align-items: center;
     flex-direction: column;
+
+    .messageLabel {
+      width: 250px;
+      margin-top: 20px;
+      padding: 10px 0;
+      font-size: large;
+      font-weight: bold;
+      border-radius: 5px;
+      background-color: transparent;
+      text-align: center;
+    }
+
     .authFormItem {
       input {
         @include inputNormalWithRadius;
       }
 
-
     }
+
     .submitBtn {
       @include greenActionBtn;
     }

@@ -33,28 +33,29 @@ userControllers.register = (req, res) => {
                             let newUserData = userSchema(userData);
                             newUserData.save().then(() => {
                                 console.log(userData.username, ' registered')
-
+                                res.json({ response: 'You are Registered', type: 'success' });
+                                res.end()
                             }).catch(err => {
                                 console.log(err)
+                                res.json({ response: 'something went wrong', type: 'error' });
+                                res.end()
                             });
-                            res.json({ response: 'registered', type: 'success' });
-                            res.end()
+
                         }
                     });
                 } else {
-                    res.json({ response: 'passwordMismatch', type: 'error' });
+                    res.json({ response: 'Password Mismatch', type: 'error' });
                     res.end()
                 }
 
             }
         }).catch(err => {
         console.log(err);
-        res.json({ response: 'serverError', type: 'error' });
+        res.json({ response: 'server Error', type: 'error' });
         res.end()
     })
 
 };
-
 userControllers.login = async (req, res) => {
     const username = req.body.username;
     const password = req.body.password;
@@ -63,7 +64,7 @@ userControllers.login = async (req, res) => {
             if (user) {
                 bcrypt.compare(password, user.password, function (err, isCorrect) {
                     if (err || isCorrect === false) {
-                        res.json({ response: 'wrong username or password', type: 'error' });
+                        res.json({ response: 'wrong username or password !', type: 'error' });
                         res.end()
                     } else if (isCorrect) {
                         const token = jwt.sign({
@@ -74,7 +75,7 @@ userControllers.login = async (req, res) => {
                             { expiresIn: tokenExpireTime });
                         res.json({
                             token: token,
-                            response: 'loggedIn',
+                            response: 'successfully logged in ',
                             type: 'success'
                         });
 
@@ -83,12 +84,12 @@ userControllers.login = async (req, res) => {
 
                 })
             } else if (!user) {
-                res.json({ response: 'notExist', type: 'error' });
+                res.json({ response: 'account with this Username does not exist !', type: 'error' });
                 res.end()
             }
         }).catch(err => {
             console.log( err)
-            res.json({ response: 'serverError', type: 'error' })
+            res.json({ response: 'server Error !', type: 'error' })
         })
 };
 
