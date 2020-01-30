@@ -2,6 +2,7 @@ const withSass = require('@zeit/next-sass');
 const withCSS = require("@zeit/next-css");
 const { parsed: localEnv } = require('dotenv').config();
 const withPlugins = require('next-compose-plugins');
+const withImages = require('next-images')
 
 let BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : process.env.PRODUCTION_URL;
 
@@ -19,17 +20,21 @@ const scssConfig = {
         return config;
     }
 };
+
 const nextConfiguration = {
     publicRuntimeConfig: {
         base_url: BASE_URL,
     },
     webpack(config) {
-        config.plugins.push(new webpack.EnvironmentPlugin(localEnv));
+        config.plugins.push(new webpack.EnvironmentPlugin(localEnv))
         return config
+    },
+    node: {
+        fs: "empty"
     }
 };
-module.exports = withPlugins([
-    [ withCSS(withSass()), scssConfig ]
-], nextConfiguration);
+
+
+module.exports = withPlugins([ [ withCSS(withSass()), scssConfig ]], nextConfiguration);
 
 

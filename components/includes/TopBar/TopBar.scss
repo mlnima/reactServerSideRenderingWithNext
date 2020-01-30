@@ -1,15 +1,22 @@
 @import "../../../styles/colors";
+@import "../../../styles/buttons";
 
 .TopBar {
   display: flex;
   justify-content: flex-start;
   align-items: center;
   background-color: $dark90;
+  padding: 5px 10px;
+  height: 30px;
 
   a {
     text-decoration: none;
     color: white;
     padding: 5px 10px;
     margin: 0 10px;
+  }
+
+  button{
+    @include transparentLightTextBtn;
   }
 }

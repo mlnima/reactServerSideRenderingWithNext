@@ -28,6 +28,7 @@ userControllers.register = (req, res) => {
                             let userData = {
                                 username: username,
                                 email: email,
+                                role:'subscriber',
                                 password: hash,
                             };
                             let newUserData = userSchema(userData);
@@ -92,5 +93,14 @@ userControllers.login = async (req, res) => {
             res.json({ response: 'server Error !', type: 'error' })
         })
 };
-
+userControllers.getUserInfo = (req,res)=>{
+    userSchema.findById(req.userData._id).exec().then(user=>{
+        res.json({userData:user});
+        res.end()
+    }).catch(err=>{
+        console.log( err);
+        res.sendStatus(500);
+        res.end()
+    })
+};
 module.exports = userControllers;

@@ -14,7 +14,7 @@ const AppLayout = props => {
                 <meta name="theme-color" content="#000000"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta charSet="utf-8"/>
-                <script src="https://kit.fontawesome.com/e9c7c74c80.js" crossOrigin="anonymous"/>
+                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
                 <meta name="description" content="description of the site"/>
                 <meta name="keywords" content="key,word,for,SEO"/>
                                 /*

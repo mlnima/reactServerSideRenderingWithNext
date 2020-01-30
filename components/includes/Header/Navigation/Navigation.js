@@ -1,6 +1,8 @@
 import React, { useState, useRef , useEffect } from 'react';
 import Link from "next/link";
 import './Navigation.scss';
+import FA  from 'react-fontawesome'
+// import  BarsIcon from '../../../../styles/icons/bars-solid.svg'
 
 const Navigation = () => {
     const navigation = useRef(null)
@@ -39,7 +41,8 @@ const Navigation = () => {
 
     return (
         <>
-            <button className='navigationMobileBtn fas fa-bars' onClick={()=>onNavigationMobileBtnClickHandler()}>Menu</button>
+            <button className='navigationMobileBtn' onClick={()=>onNavigationMobileBtnClickHandler()}><FA className='fontawesomeMedium' name="bars" /> </button>
+
             <div ref={navigation} className='Navigation'>
                 <Link href='/'><a>Home</a></Link>
                 <Link href='/categories'><a>Categories</a></Link>

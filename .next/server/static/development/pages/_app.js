@@ -112,7 +112,17 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var jsonwebtoken__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(jsonwebtoken__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_4__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -122,25 +132,70 @@ const AppContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
 const AppProvider = props => {
   const {
     0: state,
-    1: setState
+    1: dispatchState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
   const {
-    0: userData,
-    1: setUserData
+    0: settings,
+    1: dispatchSettings
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    username: 'Guest'
+    adminPanelSideBar: false,
+    test: false
   });
+  const {
+    0: userData,
+    1: dispatchUserData
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const {
+    0: functions,
+    1: dispatchFunctions
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    getAndSetUserInfo: async () => {
+      if (localStorage.wt) {
+        await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/users/getUserInfo', {
+          token: localStorage.wt
+        }).then(res => {
+          dispatchUserData(_objectSpread({}, userData, {}, res.data.userData));
+        }).catch(err => {
+          console.log(err);
+        });
+      }
+    },
+    logOutUser: () => {
+      localStorage.removeItem('wt');
+      dispatchUserData({});
+      props.router.push('/');
+    },
+    goToAdminPanel: () => {
+      props.router.push('/admin');
+    },
+    goToHomePage: () => {
+      props.router.push('/');
+    }
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    functions.getAndSetUserInfo();
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (userData.username) {
+      if (props.router.pathname === '/auth/login' || props.router.pathname === '/auth/register') {
+        props.router.push('/');
+      }
+    }
+  }, [props.router.pathname]);
   return __jsx("div", null, __jsx(AppContext.Provider, {
     value: {
       state,
-      setState,
+      dispatchState,
+      settings,
+      dispatchSettings,
       userData,
-      setUserData
+      dispatchUserData,
+      functions
     }
   }, props.children));
 };
 
-const AppProviderWithRouter = AppProvider;
+const AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(AppProvider);
 
 /***/ }),
 
@@ -213,6 +268,17 @@ module.exports = require("jsonwebtoken");
 /***/ (function(module, exports) {
 
 module.exports = require("jwt-decode");
+
+/***/ }),
+
+/***/ "next/router":
+/*!******************************!*\
+  !*** external "next/router" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("next/router");
 
 /***/ }),
 

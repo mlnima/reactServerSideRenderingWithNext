@@ -1,4 +1,5 @@
 @import "./colors";
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -8,4 +9,14 @@ body {
   -moz-osx-font-smoothing: grayscale;
   background-color: $dark100;
   color: $light100;
+}
+
+.svgImage{
+  fill: white !important;
+  background-color: white;
+  color:white;
+}
+
+.fontawesomeMedium{
+  font-size: x-large;
 }

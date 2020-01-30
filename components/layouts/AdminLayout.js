@@ -1,10 +1,33 @@
-import React from 'react';
+import React, { useEffect, useContext, useState, useRef } from 'react';
 import Head from "next/head";
 import './AdminLayout.scss'
 import '../../styles/styles.scss';
-
+import TopBar from "../adminIncludes/TopBar/TopBar";
+import SideBar from "../adminIncludes/SideBar/SideBar";
+import { AppContext } from "../../context/AppContext";
+import {withRouter} from "next/router";
 
 const Panel = props => {
+    const contextData = useContext(AppContext);
+    const container = useRef(null);
+    const Admin = useRef(null);
+    const [ state, dispatchState ] = useState({});
+
+    useEffect(() => {
+        if (window.innerWidth > 768) {
+            contextData.dispatchSettings(settings => ({
+                ...settings,
+                adminPanelSideBar: true
+            }))
+        }
+    }, []);
+
+    useEffect(()=>{
+        if (contextData.userData.role !=='administrator'){
+            props.router.push('/')
+        }
+    },[ props.router]);
+
     return (
         <>
             <Head>
@@ -12,7 +35,7 @@ const Panel = props => {
                 <meta name="theme-color" content="#000000"/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta charSet="utf-8"/>
-                <script src="https://kit.fontawesome.com/e9c7c74c80.js" crossOrigin="anonymous"/>
+                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
                 <meta name="description" content="description of the site"/>
                 <meta name="keywords" content="key,word,for,SEO"/>
                 /*
@@ -23,13 +46,17 @@ const Panel = props => {
 
                 https://ogp.me/
                 */
-
-
-            <div className="Admin">
-                { props.children }
+            </Head>
+            <div ref={ container } className="container">
+                <TopBar/>
+                <SideBar/>
+                <div ref={ Admin } className="Admin">
+                    { props.children }
+                </div>
             </div>
+
         </>
     );
 };
 
-export default Panel;
+export default withRouter(Panel) ;

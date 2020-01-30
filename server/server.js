@@ -3,7 +3,8 @@ const next = require('next');
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const userController = require('./controllers/userControllers');
-const path = require('path')
+const path = require('path');
+const authMiddleware = require('./middlewares/authMiddleware');
 
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -32,9 +33,9 @@ app.prepare().then(()=>{
         console.log(path.dirname )
         return res.status(200).sendFile('robots.txt',robotsOptions)
     });
-
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
+    server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
 
     server.get('*',(req,res)=>{
         return handle(req,res)

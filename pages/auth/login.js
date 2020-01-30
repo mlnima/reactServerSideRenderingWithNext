@@ -1,14 +1,16 @@
-import React, { useState,useRef } from 'react';
+import React, { useState, useRef, useContext, useEffect } from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
 import './registerLogin.scss';
 import axios from 'axios'
+import { AppContext } from "../../context/AppContext";
 
 const Login = props => {
+    const contextData = useContext(AppContext);
     const messageLabel = useRef(null);
     const [ state, setState ] = useState({});
     const [ data, setData ] = useState({
-        response:undefined,
-        type:undefined,
+        response: undefined,
+        type: undefined,
     });
 
     const onChangeHandler = e => {
@@ -17,35 +19,35 @@ const Login = props => {
             [e.target.name]: e.target.value
         })
     };
-
     const onSubmitHandler = e => {
         e.preventDefault();
-        axios.post('/api/v1/users/login',state).then(res=>{
+        axios.post('/api/v1/users/login', state).then(res => {
             let type = res.data.type;
-            if (type === 'success'){
-                if (res.data.token){
-                    localStorage.setItem('wt',res.data.token)
+            if (type === 'success') {
+                if (res.data.token) {
+                    localStorage.setItem('wt', res.data.token)
                 }
-            }else {
+            } else {
 
             }
-
             setData({
                 ...data,
-                response:res.data.response,
-                type:res.data.type,
+                response: res.data.response,
+                type: res.data.type,
             })
 
-        }).catch(err=>console.log( err))
+        }).then(() => {
+            contextData.functions.getAndSetUserInfo();
+            contextData.functions.goToHomePage()
+        }).catch(err => console.log(err))
     };
-
 
 
     return (
         <AppLayout>
             <div className='Login authPage'>
-                <form className='authForm' onSubmit={e=>onSubmitHandler(e)}>
-                    <label className='messageLabel'>{data.response}</label>
+                <form className='authForm' onSubmit={ e => onSubmitHandler(e) }>
+                    <label className='messageLabel'>{ data.response }</label>
                     <div className="authFormItem">
                         <p>username</p>
                         <input name='username' onChange={ e => onChangeHandler(e) }/>
@@ -54,7 +56,7 @@ const Login = props => {
                         <p>password</p>
                         <input name='password' type='password' onChange={ e => onChangeHandler(e) }/>
                     </div>
-                    <button className='submitBtn' type='submit' >Login</button>
+                    <button className='submitBtn' type='submit'>Login</button>
                 </form>
             </div>
         </AppLayout>

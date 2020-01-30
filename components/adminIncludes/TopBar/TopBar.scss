@@ -1,0 +1,24 @@
+@import "../../../styles/buttons";
+@import "../../../styles/colors";
+
+.adminTopBar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 5px 10px;
+  height: 30px;
+  background-color:$AdminColor100;
+  grid-area: adminTopBar ;
+
+  .adminTopBarItem {
+    @include transparentLightTextBtn;
+  }
+}
+
+
+
+@media only screen and (min-width: 768px) {
+.adminSideBarMobileBtn{
+  display: none;
+}
+}

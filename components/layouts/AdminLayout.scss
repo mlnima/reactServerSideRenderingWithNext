@@ -1,0 +1,32 @@
+@import "../../styles/colors";
+
+.container {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'adminTopBar adminTopBar' 'adminContent adminContent'
+}
+
+.Admin {
+  grid-area: adminContent;
+  background-color: $AdminBackground50;
+  color: black;
+  padding: 20px;
+  min-height: 100vh;
+  float: left;
+  -webkit-font-smoothing: subpixel-antialiased;
+}
+
+@media only screen and (min-width: 768px) {
+  .container {
+    display: grid;
+    grid-template-columns: 200px 1fr;
+    grid-template-areas: 'adminTopBar adminTopBar' 'adminSideBar adminContent'
+  }
+}
+
+.blurArea {
+  -webkit-filter: blur(5px);
+  -moz-filter: blur(5px);
+  -o-filter: blur(5px);
+  -ms-filter: blur(5px);
+}
