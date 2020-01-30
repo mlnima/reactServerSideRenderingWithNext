@@ -21,7 +21,7 @@ const robotsOptions = {
     root:  './static/',
     headers: {'Content-Type':'text/plain;charset=utf-8'}
 }
-
+const PORT = process.env.PORT || 3000;
 
 app.prepare().then(()=>{
     const server = express();
@@ -39,9 +39,9 @@ app.prepare().then(()=>{
     server.get('*',(req,res)=>{
         return handle(req,res)
     });
-    server.listen(3000,(err)=>{
-        if (err) throw err
-        console.log( 'server is ready on 3000')
+    server.listen(PORT,(err)=>{
+        if (err) throw err;
+        console.log( `server run on ${PORT}`)
     })
 }).catch((ex)=>{
     console.log( 'exit error:',ex.stack)
