@@ -1,10 +1,14 @@
 import React from 'react';
+import { AppProviderWithRouter, AppContext } from "../context/AppContext";
 
 const MyApp = ({ Component, pageProps }) => {
 
-    console.log(pageProps )
+    return (
+        <AppProviderWithRouter>
+            <Component { ...pageProps } />
+        </AppProviderWithRouter>
+    )
 
-    return <Component {...pageProps} />
 };
 
 export default MyApp;
