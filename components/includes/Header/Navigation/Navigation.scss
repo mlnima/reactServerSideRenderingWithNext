@@ -1,0 +1,41 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+
+.navigationMobileBtn {
+  display: initial;
+  position: fixed;
+  top:50px ;
+  right: 20px;
+  @include transparentLightTextBtn;
+}
+
+.Navigation {
+  display: none;
+  justify-content: flex-start;
+  background-color: $dark90;
+  flex-direction: column;
+  position: fixed;
+  top: 70px;
+  //right: 50px;
+  width: 100%;
+  a {
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+    margin: 3px 10px;
+    border-bottom: $dark80 solid 1px;
+  }
+}
+
+
+@media only screen and (min-width: 768px) {
+  .navigationMobileBtn {
+    display: none;
+  }
+  .Navigation{
+    display: flex;
+    background: linear-gradient(to bottom, #222 0%, #333 50%, #222 51%, #151515 100%);
+    position: initial;
+    flex-direction: row;
+  }
+}

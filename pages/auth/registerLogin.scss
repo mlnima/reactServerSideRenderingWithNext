@@ -1,0 +1,24 @@
+@import "../../styles/inputs";
+@import "../../styles/buttons";
+
+.authPage {
+  display: flex;
+  justify-content: center;
+
+  .authForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    .authFormItem {
+      input {
+        @include inputNormalWithRadius;
+      }
+
+
+    }
+    .submitBtn {
+      @include greenActionBtn;
+    }
+  }
+}

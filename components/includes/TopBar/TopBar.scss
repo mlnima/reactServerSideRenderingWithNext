@@ -1,0 +1,15 @@
+@import "../../../styles/colors";
+
+.TopBar {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  background-color: $dark90;
+
+  a {
+    text-decoration: none;
+    color: white;
+    padding: 5px 10px;
+    margin: 0 10px;
+  }
+}
