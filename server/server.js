@@ -3,6 +3,7 @@ const next = require('next');
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const userController = require('./controllers/userControllers');
+const postsControllers = require('./controllers/postsControllers');
 const path = require('path');
 const authMiddleware = require('./middlewares/authMiddleware');
 
@@ -26,16 +27,18 @@ const PORT = process.env.PORT || 3000;
 
 app.prepare().then(()=>{
     const server = express();
-    server.use(bodyParser.json())
-    console.log(process.env.TEST );
+    server.use(bodyParser.json());
+    // console.log(process.env.TEST );
 
     server.get('/robots.txt',(req,res)=>{
-        console.log(path.dirname )
+        console.log(path.dirname );
         return res.status(200).sendFile('robots.txt',robotsOptions)
     });
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
+    server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
+    server.post('/api/v1/posts/createNewPost',authMiddleware,(req,res)=>{postsControllers.createNewPost(req,res)});
 
     server.get('*',(req,res)=>{
         return handle(req,res)

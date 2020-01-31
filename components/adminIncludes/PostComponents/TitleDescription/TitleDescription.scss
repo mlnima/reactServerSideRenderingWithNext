@@ -1,0 +1,28 @@
+@import "../../../../styles/inputs";
+
+.TitleDescription {
+  //display: flex;
+  //flex-direction: column;
+  //margin: auto;
+  padding: 10px;
+  width: 100%;
+
+  .TitleDescriptionTitle {
+    @include inputNormalWithRadius;
+    width: 95%;
+  }
+
+  .TitleDescriptionDescription {
+    margin-top: 10px;
+    min-height: 600px;
+    @include inputNormalWithRadius;
+    width: 95%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .TitleDescription {
+
+  }
+
+}

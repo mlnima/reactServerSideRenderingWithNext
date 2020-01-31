@@ -10,6 +10,27 @@
   width: 200px;
   background-color: $AdminColor100;
   padding:10px;
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+  .SideBarItem{
+    text-decoration: none;
+    color: white;
+    width: 100%;
+    padding: 5px 10px;
+
+    transition: .5s;
+    font-size: large;
+    margin: 5px ;
+    &:hover{
+      background-color: $AdminBackground50;
+      color: $AdminColor100;
+      font-weight: bold;
+    }
+    &:active{
+      background-color: yellow;
+    }
+  }
 }
 
 

@@ -22,11 +22,11 @@ const Panel = props => {
         }
     }, []);
 
-    useEffect(()=>{
-        if (contextData.userData.role !=='administrator'){
-            props.router.push('/')
-        }
-    },[ props.router]);
+    // useEffect(()=>{
+    //     if (contextData.userData.role !=='administrator' && props.router.pathname.includes('/admin')){
+    //         props.router.push('/')
+    //     }
+    // },[ props.router]);
 
     return (
         <>

@@ -29,7 +29,7 @@ const TopBar = props => {
     };
 
     const newAction = () => {
-        console.log('there is no action defined')
+        props.router.push('/admin/post')
     };
 
     const adminActionHandler = () => {

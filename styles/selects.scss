@@ -1,0 +1,8 @@
+@import "./colors";
+
+@mixin AdminSelect {
+  border: none;
+  background-color: $AdminBackground50;
+  padding: 4px;
+  border-radius: 5px;
+}

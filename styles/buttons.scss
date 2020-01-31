@@ -28,4 +28,20 @@
   box-sizing: border-box;
   margin-top: 10px;
   margin-bottom: 10px;
+};
+
+@mixin AdminLightBtn{
+  background-color: $AdminBackground50;
+  color: black;
+  outline: none;
+  border: none;
+  padding: 8px 10px;
+};
+
+@mixin AdminBluetBtn{
+  background-color: $lightBlue;
+  color: white;
+  outline: none;
+  border: none;
+  padding: 8px 10px;
 }

@@ -2,7 +2,7 @@ import React, { useEffect, useRef, useState } from 'react';
 import jwtDecode from "jwt-decode";
 import jwt from 'jsonwebtoken';
 import axios from "axios";
-import {withRouter} from "next/router";
+import { withRouter } from "next/router";
 
 export const AppContext = React.createContext();
 
@@ -14,42 +14,57 @@ const AppProvider = props => {
         test: false
     });
     const [ userData, dispatchUserData ] = useState({});
+    const [ editingPostData, dispatchEditingPostData ] = useState({});
+    const [ adminPosts, dispatchAdminPosts ] = useState([]);
     const [ functions, dispatchFunctions ] = useState({
-        getAndSetUserInfo: async ()=>{
-            if (localStorage.wt){
-                await axios.post('/api/v1/users/getUserInfo', { token: localStorage.wt }).then(res=>{
-                    dispatchUserData({...userData,...res.data.userData});
-                }).catch(err=>{
-                    console.log( err);
+        getAndSetUserInfo: async () => {
+            if (localStorage.wt) {
+                await axios.post('/api/v1/users/getUserInfo', { token: localStorage.wt }).then(res => {
+                    dispatchUserData({ ...userData, ...res.data.userData });
+                }).catch(err => {
+                    console.log(err);
                 })
             }
         },
-        logOutUser:()=>{
+        logOutUser: () => {
             localStorage.removeItem('wt');
             dispatchUserData({})
             props.router.push('/')
         },
-        goToAdminPanel:()=>{
+        goToAdminPanel: () => {
             props.router.push('/admin')
         },
-        goToHomePage:()=>{
-            props.router.push('/')
+        goToHomePage: () => {
+            // props.router.push('/')
+        },
+        savePosts: async (data) => {
+            const body = {
+                postData: data,
+                token: localStorage.wt
+            };
+            return axios.post('/api/v1/posts/createNewPost', body)
+        },
+        getPosts: async (limit, pageNo) => {
+            const body = {
+                limit,
+                pageNo,
+                token:localStorage.wt
+            };
+            return axios.post('/api/v1/posts', body)
         }
     });
 
-    useEffect(()=>{
+    useEffect(() => {
         functions.getAndSetUserInfo()
-    },[ ]);
+    }, []);
 
-
-    useEffect(()=>{
-        if (userData.username){
-            if(props.router.pathname === '/auth/login'||props.router.pathname === '/auth/register'){
+    useEffect(() => {
+        if (userData.username) {
+            if (props.router.pathname === '/auth/login' || props.router.pathname === '/auth/register') {
                 props.router.push('/')
             }
         }
-    },[ props.router.pathname]);
-
+    }, [ props.router.pathname ]);
 
     return (
         <div>
@@ -61,7 +76,11 @@ const AppProvider = props => {
                     dispatchSettings,
                     userData,
                     dispatchUserData,
-                    functions
+                    functions,
+                    editingPostData,
+                    dispatchEditingPostData,
+                    adminPosts,
+                    dispatchAdminPosts
                 } }>
 
                 { props.children }
@@ -70,4 +89,4 @@ const AppProvider = props => {
     )
 }
 
-export const  AppProviderWithRouter = withRouter(AppProvider);
+export const AppProviderWithRouter = withRouter(AppProvider);

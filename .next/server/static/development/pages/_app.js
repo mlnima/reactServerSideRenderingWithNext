@@ -146,6 +146,14 @@ const AppProvider = props => {
     1: dispatchUserData
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
   const {
+    0: editingPostData,
+    1: dispatchEditingPostData
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const {
+    0: adminPosts,
+    1: dispatchAdminPosts
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const {
     0: functions,
     1: dispatchFunctions
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
@@ -168,8 +176,22 @@ const AppProvider = props => {
     goToAdminPanel: () => {
       props.router.push('/admin');
     },
-    goToHomePage: () => {
-      props.router.push('/');
+    goToHomePage: () => {// props.router.push('/')
+    },
+    savePosts: async data => {
+      const body = {
+        postData: data,
+        token: localStorage.wt
+      };
+      return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/createNewPost', body);
+    },
+    getPosts: async (limit, pageNo) => {
+      const body = {
+        limit,
+        pageNo,
+        token: localStorage.wt
+      };
+      return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts', body);
     }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
@@ -190,7 +212,11 @@ const AppProvider = props => {
       dispatchSettings,
       userData,
       dispatchUserData,
-      functions
+      functions,
+      editingPostData,
+      dispatchEditingPostData,
+      adminPosts,
+      dispatchAdminPosts
     }
   }, props.children));
 };

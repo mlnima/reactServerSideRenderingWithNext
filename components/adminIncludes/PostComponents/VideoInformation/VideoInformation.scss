@@ -1,0 +1,49 @@
+@import "../../../../styles/inputs";
+@import "../../../../styles/colors";
+@import "../../../../styles/buttons";
+
+.VideoInformation {
+  width: 100%;
+
+  .VideoInformationSection {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    align-items: center;
+
+    .title {
+      padding: 2px;
+    }
+
+    .editor {
+      .option {
+        display: flex;
+        align-items: center;
+      }
+
+      .textInput {
+        @include inputNormalWithRadius;
+        background-color: $AdminBackground50;
+        width: 90%;
+      }
+
+      .textInputWithUpload {
+        @include inputNormalWithRadius;
+        background-color: $AdminBackground50;
+        width: 80%;
+
+
+      }
+      .uploadBtn {
+        @include AdminLightBtn;
+        margin: 0 3px;
+        border-radius: 5px;
+      }
+      .textareaInput {
+        @include inputNormalWithRadius;
+        background-color: $AdminBackground50;
+        width: 90%;
+        min-height: 200px;
+      }
+    }
+  }
+}

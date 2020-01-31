@@ -73,7 +73,15 @@ var AppProvider = function AppProvider(props) {
       userData = _useState3[0],
       dispatchUserData = _useState3[1];
 
-  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({}),
+      editingPostData = _useState4[0],
+      dispatchEditingPostData = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])([]),
+      adminPosts = _useState5[0],
+      dispatchAdminPosts = _useState5[1];
+
+  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_8__["useState"])({
     getAndSetUserInfo: function getAndSetUserInfo() {
       return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.async(function getAndSetUserInfo$(_context) {
         while (1) {
@@ -108,12 +116,50 @@ var AppProvider = function AppProvider(props) {
     goToAdminPanel: function goToAdminPanel() {
       props.router.push('/admin');
     },
-    goToHomePage: function goToHomePage() {
-      props.router.push('/');
+    goToHomePage: function goToHomePage() {// props.router.push('/')
+    },
+    savePosts: function savePosts(data) {
+      var body;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.async(function savePosts$(_context2) {
+        while (1) {
+          switch (_context2.prev = _context2.next) {
+            case 0:
+              body = {
+                postData: data,
+                token: localStorage.wt
+              };
+              return _context2.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_11___default.a.post('/api/v1/posts/createNewPost', body));
+
+            case 2:
+            case "end":
+              return _context2.stop();
+          }
+        }
+      });
+    },
+    getPosts: function getPosts(limit, pageNo) {
+      var body;
+      return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.async(function getPosts$(_context3) {
+        while (1) {
+          switch (_context3.prev = _context3.next) {
+            case 0:
+              body = {
+                limit: limit,
+                pageNo: pageNo,
+                token: localStorage.wt
+              };
+              return _context3.abrupt("return", axios__WEBPACK_IMPORTED_MODULE_11___default.a.post('/api/v1/posts', body));
+
+            case 2:
+            case "end":
+              return _context3.stop();
+          }
+        }
+      });
     }
   }),
-      functions = _useState4[0],
-      dispatchFunctions = _useState4[1];
+      functions = _useState6[0],
+      dispatchFunctions = _useState6[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_8__["useEffect"])(function () {
     functions.getAndSetUserInfo();
@@ -133,7 +179,11 @@ var AppProvider = function AppProvider(props) {
       dispatchSettings: dispatchSettings,
       userData: userData,
       dispatchUserData: dispatchUserData,
-      functions: functions
+      functions: functions,
+      editingPostData: editingPostData,
+      dispatchEditingPostData: dispatchEditingPostData,
+      adminPosts: adminPosts,
+      dispatchAdminPosts: dispatchAdminPosts
     }
   }, props.children));
 };

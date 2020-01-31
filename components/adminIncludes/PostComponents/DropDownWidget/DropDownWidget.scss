@@ -1,0 +1,45 @@
+@import "../../../../styles/colors";
+@import "../../../../styles/buttons";
+
+.DropDownWidget {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  padding: 10px;
+  .DropDownWidgetHead {
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+    padding: 0 10px;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #eee !important;
+    background-color: $light100;
+    .DropDownWidgetHeadTitle {
+
+    }
+
+    .DropDownWidgetHeadOpenCloseBtn {
+      @include transparentLightTextBtn;
+      color: black;
+
+
+      .fontawesomeMedium {
+        font-size: large;
+        height: 10px;
+      }
+
+    }
+  }
+  .DropDownWidgetComponent{
+    padding:10px;
+    width: 100%;
+    display: flex;justify-content: center;
+    background-color: $light100;
+  }
+}
+

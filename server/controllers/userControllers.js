@@ -89,7 +89,7 @@ userControllers.login = async (req, res) => {
                 res.end()
             }
         }).catch(err => {
-            console.log( err)
+            console.log( err);
             res.json({ response: 'server Error !', type: 'error' })
         })
 };
