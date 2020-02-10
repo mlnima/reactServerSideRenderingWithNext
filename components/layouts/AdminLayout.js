@@ -2,10 +2,11 @@ import React, { useEffect, useContext, useState, useRef } from 'react';
 import Head from "next/head";
 import './AdminLayout.scss'
 import '../../styles/styles.scss';
-import TopBar from "../adminIncludes/TopBar/TopBar";
+import TopBar from "../adminIncludes/TopBar/AdminTopBar";
 import SideBar from "../adminIncludes/SideBar/SideBar";
 import { AppContext } from "../../context/AppContext";
 import {withRouter} from "next/router";
+import Loading from "../includes/Loading/Loading";
 
 const Panel = props => {
     const contextData = useContext(AppContext);
@@ -53,6 +54,7 @@ const Panel = props => {
                 <div ref={ Admin } className="Admin">
                     { props.children }
                 </div>
+                <Loading/>
             </div>
 
         </>

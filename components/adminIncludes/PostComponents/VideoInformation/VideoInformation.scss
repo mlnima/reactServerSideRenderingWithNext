@@ -1,9 +1,22 @@
 @import "../../../../styles/inputs";
 @import "../../../../styles/colors";
 @import "../../../../styles/buttons";
+@import "../../../../styles/selects";
 
 .VideoInformation {
   width: 100%;
+
+  .saveBtn {
+    display: flex;
+    justify-content: center;
+
+    .SaveVideoDataBtn {
+      @include AdminBluetBtn;
+      padding: 5px 20px;
+      font-size: large;
+      border-radius: 5px;
+    }
+  }
 
   .VideoInformationSection {
     display: grid;
@@ -12,12 +25,59 @@
 
     .title {
       padding: 2px;
+      font-size: small;
+      @media only screen and (min-width: 768px) {
+        font-size: medium;
+      }
     }
 
     .editor {
+      iframe {
+        width: 240px;
+        height: auto;
+        @media only screen and (min-width: 768px) {
+          width: 100%;
+          min-height:400px;
+        }
+      }
+      img{
+        width: 240px;
+        height: auto;
+        @media only screen and (min-width: 768px) {
+          width: 100%;
+          min-height:400px;
+        }
+      }
       .option {
         display: flex;
         align-items: center;
+      }
+
+      .durationItems {
+        display: flex;
+
+        .durationItem {
+          margin: 0 5px;
+          display: flex;
+          background-color: $AdminBackground50;
+          padding: 5px;
+          border-radius: 5px;
+
+          label {
+            margin: 0 0px;
+            padding: 0 0px;
+          }
+
+          input {
+            border: none;
+            border-radius: 5px;
+            padding: 3px;
+          }
+        }
+      }
+
+      select {
+        @include AdminSelect;
       }
 
       .textInput {
@@ -31,13 +91,21 @@
         background-color: $AdminBackground50;
         width: 80%;
 
+      }
+
+      .TextInput {
+        @include inputNormalWithRadius;
+        background-color: $AdminBackground50;
+        width: 90%;
 
       }
+
       .uploadBtn {
         @include AdminLightBtn;
         margin: 0 3px;
         border-radius: 5px;
       }
+
       .textareaInput {
         @include inputNormalWithRadius;
         background-color: $AdminBackground50;
@@ -46,4 +114,7 @@
       }
     }
   }
+
+
+
 }

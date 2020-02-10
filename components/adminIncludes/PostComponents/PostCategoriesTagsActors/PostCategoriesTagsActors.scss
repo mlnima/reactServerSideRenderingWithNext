@@ -1,0 +1,27 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+.PostCategoriesTagsActors{
+  .items{
+    display:flex;
+    flex-wrap: wrap;
+    .item{
+      display:flex;
+      font-size: x-small;
+      button{
+        outline: none;
+        border: none;
+        background-color: transparent;
+        span{
+          color: $linkBlueColor;
+          //font-size: small;
+        }
+        &:active{
+          background-color: white;
+          color: black;
+        }
+
+      }
+
+    }
+  }
+}

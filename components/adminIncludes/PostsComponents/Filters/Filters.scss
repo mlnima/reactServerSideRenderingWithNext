@@ -1,0 +1,36 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+
+
+.Filters {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: space-between;
+
+  .FilterStatusBtn {
+    display: flex;
+    justify-content: flex-start;
+
+    button {
+      @include buttonLikeLink;
+    }
+
+    .active {
+      color: black;
+      background-color: white;
+      font-weight: bold;
+    }
+
+  }
+
+
+
+
+
+}
+
+@media only screen and (min-width: 768px) {
+  .Filters {
+    grid-template-columns: 1fr 400px;
+  }
+}

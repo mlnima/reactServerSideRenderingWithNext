@@ -20,3 +20,16 @@ body {
 .fontawesomeMedium{
   font-size: x-large;
 }
+
+input:focus, textarea:focus, select:focus{
+  outline: none;
+}
+input, textarea, select{
+  border: none;
+  background-color: $AdminBackground50;
+  padding: 5px;
+  border-radius: 5px;
+}
+a{
+  text-decoration: none;
+}

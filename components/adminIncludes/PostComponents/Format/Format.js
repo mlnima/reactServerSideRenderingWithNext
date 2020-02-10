@@ -1,17 +1,14 @@
-import React,{useEffect,useState,useContext} from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from "../../../../context/AppContext";
 import './Format.scss'
+
 const Format = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-    });
-    useEffect(()=>{
-        console.log(props )
-    },[props]);
+    const [ state, setState ] = useState({});
 
     return (
         <div className='Format'>
-            <select defaultValue={contextData.editingPostData.format} name='format' onChange={e=>props.onChangeHandler(e)}>
+            <select defaultValue={contextData.editingPostData.postType?contextData.editingPostData.postType:'standard'} name='format'  onChange={ e => props.onChangeHandler(e) }>
                 <option value='standard'>Standard</option>
                 <option value='video'>Video</option>
             </select>
@@ -19,9 +16,8 @@ const Format = props => {
     );
 };
 
-Format.getInitialProps =  ({ req }) => {
-    console.log(props )
-    return { }
+Format.getInitialProps = ({ req }) => {
+    return {}
 };
 
 export default Format;

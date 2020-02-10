@@ -1,0 +1,18 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+@import "../../../../styles/inputs";
+.FilterSearch{
+
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center;
+
+  input {
+    @include inputNormalWithRadius;
+    width: 200px;
+    background-color: $light100 !important;
+  }
+  .actionBtn{
+    @include AdminLightBtn;
+  }
+}

@@ -88,10 +88,904 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.js":
+/*!***********************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.js ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var _FilterDropDownActions_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FilterDropDownActions.scss */ "./components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.scss");
+/* harmony import */ var _FilterDropDownActions_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_FilterDropDownActions_scss__WEBPACK_IMPORTED_MODULE_2__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const FilterDropDownActions = props => {
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["AppContext"]);
+  const bulkAction = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const typeToDisplay = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}); // useEffect(() => {
+  //     typeToDisplay.current.value = contextData.postsData.type
+  // }, []);
+
+  const onFormatChangeHandler = () => {// if (bulkAction.current.value !== 'none') {
+    //     contextData.setState({
+    //         ...contextData.state,
+    //         loading:true
+    //     });
+    //     postsBulkAction(contextData.postsData.checkedPosts,bulkAction.current.value).then(()=>{
+    //        setData()
+    //     }).catch(err=>{
+    //         contextData.setState({
+    //             ...contextData.state,
+    //             loading:false
+    //         })
+    //     })
+    // }
+  };
+
+  const changePostsTypeToDisplay = e => {// if (e.target.value !== 'none') {
+    //     contextData.setPostsData({
+    //         ...contextData.postsData,
+    //         type: e.target.value
+    //     })
+    // }
+  };
+
+  const onEmptyTrashHandler = () => {// emptyTrash().then(res=>{
+    //     if (res.data.error){
+    //         contextData.setState({
+    //             ...contextData.state,
+    //             report:res.data.message,
+    //             reportColor:'red'
+    //         })
+    //     }else {
+    //         contextData.setState({
+    //             ...contextData.state,
+    //             loading: false
+    //         });
+    //         setData();
+    //         contextData.setState({
+    //             ...contextData.state,
+    //             report:res.data.message,
+    //             reportColor:'green'
+    //         })
+    //     }
+    // }).catch(()=>{
+    //     contextData.setState({
+    //         ...contextData.state,
+    //         report:'Can Not Communicate With Server'
+    //     })
+    // })
+  };
+
+  const EmptyTrash = () => {
+    // if (contextData.postsData.status === 'Trash'){
+    //     return (
+    //         <button onClick={()=>onEmptyTrashHandler()}>Empty Trash</button>
+    //     )
+    // }else
+    return null;
+  };
+
+  return __jsx("div", {
+    className: "FilterDropDownActions"
+  }, __jsx("div", {
+    className: "bulkAction"
+  }, __jsx("select", {
+    ref: bulkAction,
+    placeholder: "Bulk Actions"
+  }, __jsx("option", {
+    value: "none"
+  }, "Bulk Actions"), __jsx("option", {
+    value: "Published"
+  }, "Published"), __jsx("option", {
+    value: "Draft"
+  }, "Draft"), __jsx("option", {
+    value: "Trash"
+  }, "Trash")), __jsx("button", {
+    className: "actionBtn",
+    onClick: () => onFormatChangeHandler()
+  }, "Apply")), __jsx("div", {
+    className: "DateCategoryFotmat"
+  }, __jsx("select", {
+    ref: typeToDisplay,
+    onChange: e => changePostsTypeToDisplay(e)
+  }, __jsx("option", {
+    value: "Video"
+  }, "Video"), __jsx("option", {
+    value: "Standard"
+  }, "Standard"))), __jsx(EmptyTrash, null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FilterDropDownActions);
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.scss":
+/*!*************************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.scss ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/FilterPagination.js":
+/*!******************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/FilterPagination.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var _FilterPagination_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FilterPagination.scss */ "./components/adminIncludes/PostsComponents/Filters/FilterPagination.scss");
+/* harmony import */ var _FilterPagination_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_FilterPagination_scss__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! react-fontawesome */ "react-fontawesome");
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_3__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+
+const FilterPagination = props => {
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["AppContext"]);
+  let currentPageInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  let size = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null); // const [ state, setState ] = useState({
+  //     totalPosts: 0,
+  //     perPage: 0,
+  //     totalPage: 0,
+  //     currentPage: 1
+  // });
+  // useEffect(()=>{
+  //     currentPageInput.current.value = contextData.postsData.pageNo
+  //     size.current.value = contextData.postsData.size
+  // },[contextData.postsData.pageNo]);
+
+  let nextPage = () => {
+    const nextPage = contextData.adminPostsData.pageNo + 1;
+    contextData.dispatchAdminPostsData(_objectSpread({}, contextData.adminPostsData, {
+      pageNo: nextPage
+    }));
+  };
+
+  let previousPage = () => {
+    if (contextData.adminPostsData.pageNo - 1 <= 0) {
+      contextData.dispatchAdminPostsData(_objectSpread({}, contextData.adminPostsData, {
+        pageNo: 1
+      }));
+    } else {
+      contextData.dispatchAdminPostsData(_objectSpread({}, contextData.adminPostsData, {
+        pageNo: contextData.adminPostsData.pageNo - 1
+      }));
+    }
+  };
+
+  let lastPage = () => {
+    const lastPage = Math.floor(contextData.adminPostsData.totalPosts / contextData.adminPostsData.size);
+    contextData.dispatchAdminPostsData(_objectSpread({}, contextData.adminPostsData, {
+      pageNo: lastPage
+    }));
+  };
+
+  let firstPage = () => {
+    contextData.dispatchAdminPostsData(_objectSpread({}, contextData.adminPostsData, {
+      pageNo: 1
+    }));
+  };
+
+  let changePageNoManually = () => {
+    if (currentPageInput.current.value <= 0) {
+      contextData.dispatchAdminPostsData(_objectSpread({}, contextData.adminPostsData, {
+        pageNo: 1
+      }));
+      currentPageInput.current.value = 1;
+    } else {
+      contextData.dispatchAdminPostsData(_objectSpread({}, contextData.adminPostsData, {
+        pageNo: currentPageInput.current.value
+      }));
+    }
+  };
+
+  let changeSizeHandler = () => {
+    contextData.dispatchAdminPostsData(_objectSpread({}, contextData.adminPostsData, {
+      size: parseInt(size.current.value)
+    }));
+  };
+
+  return __jsx("div", {
+    className: "FilterPagination"
+  }, __jsx("div", {
+    className: "pagesNavigation"
+  }, __jsx("label", {
+    className: "totalPosts"
+  }, contextData.adminPostsData.totalPosts, " items"), __jsx("button", {
+    onClick: () => firstPage(),
+    className: "actionBtn"
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    className: "fontawesomeMedium",
+    name: "angle-double-left"
+  })), __jsx("button", {
+    onClick: () => previousPage(),
+    className: "actionBtn"
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    className: "fontawesomeMedium",
+    name: "angle-left"
+  })), __jsx("input", {
+    className: "pageNumberInput",
+    placeholder: contextData.adminPostsData.pageNo,
+    ref: currentPageInput,
+    type: "number",
+    min: 0
+  }), __jsx("button", {
+    onClick: () => nextPage(),
+    className: "actionBtn"
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    className: "fontawesomeMedium",
+    name: "angle-right"
+  })), __jsx("button", {
+    onClick: () => lastPage(),
+    className: "actionBtn"
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_3___default.a, {
+    className: "fontawesomeMedium",
+    name: "angle-double-right"
+  }))), __jsx("div", {
+    className: "pagesNavigationMoreAction"
+  }));
+};
+
+FilterPagination.getInitialProps = ctx => {
+  return {
+    ctx
+  };
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FilterPagination);
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/FilterPagination.scss":
+/*!********************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/FilterPagination.scss ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/FilterSearch.js":
+/*!**************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/FilterSearch.js ***!
+  \**************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var _FilterSearch_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FilterSearch.scss */ "./components/adminIncludes/PostsComponents/Filters/FilterSearch.scss");
+/* harmony import */ var _FilterSearch_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_FilterSearch_scss__WEBPACK_IMPORTED_MODULE_2__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+const FilterSearch = props => {
+  let searchInput = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["AppContext"]);
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    keyword: ''
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
+
+  let onSearchHandler = e => {
+    e.preventDefault();
+    contextData.dispatchAdminPostsData(adminPostsData => _objectSpread({}, adminPostsData, {
+      keyword: state.keyword,
+      pageNo: 1
+    }));
+  };
+
+  let onChangeHandler = e => {
+    setState(_objectSpread({}, state, {
+      keyword: e.target.value
+    }));
+  };
+
+  let onClearHandler = () => {// contextData.setPostsData({
+    //     ...contextData.postsData,
+    //     keyword: '',
+    //     pageNo:1
+    // })
+    // searchInput.current.value = ''
+  };
+
+  const RenderClearBtn = () => {
+    // if (state.keyword !== '') {
+    //     return (
+    //         <button type='button' onClick={() => onClearHandler()}>x</button>
+    //     )
+    // } else
+    return null;
+  };
+
+  return __jsx("form", {
+    className: "FilterSearch",
+    onSubmit: e => onSearchHandler(e)
+  }, __jsx("input", {
+    ref: searchInput,
+    onChange: e => onChangeHandler(e)
+  }), __jsx(RenderClearBtn, null), __jsx("button", {
+    className: "actionBtn",
+    type: "submit"
+  }, "Search Posts"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FilterSearch);
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/FilterSearch.scss":
+/*!****************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/FilterSearch.scss ***!
+  \****************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.js":
+/*!*****************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.js ***!
+  \*****************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+const FilterStatusBtn = props => {
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["AppContext"]);
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    buttons: ['all', 'published', 'draft', 'trash']
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
+
+  const onClickHandler = e => {
+    // contextData.dispatchAdminPostsData({
+    //     ...contextData.adminPostsData,
+    //     status:e.target.name,
+    //     pageNo:1,
+    //     author:'all'
+    // })
+    let status = e.target.name;
+    contextData.dispatchAdminPostsData(adminPostsData => _objectSpread({}, adminPostsData, {
+      status,
+      pageNo: 1,
+      author: 'all'
+    }));
+  };
+
+  let clickOnMineHandler = () => {// contextData.setPostsData({
+    //     ...contextData.postsData,
+    //     author:contextData.adminData._id
+    // })
+  };
+
+  return __jsx("div", {
+    className: "FilterStatusBtn"
+  }, __jsx("button", {
+    key: "all",
+    className: "all",
+    name: "all",
+    onClick: e => onClickHandler(e)
+  }, "All"), __jsx("button", {
+    key: "published",
+    className: "published",
+    name: "published",
+    onClick: e => onClickHandler(e)
+  }, "Published"), __jsx("button", {
+    key: "draft",
+    className: "draft",
+    name: "draft",
+    onClick: e => onClickHandler(e)
+  }, "Draft"), __jsx("button", {
+    key: "trash",
+    className: "trash",
+    name: "trash",
+    onClick: e => onClickHandler(e)
+  }, "Trash"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (FilterStatusBtn);
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/Filters.js":
+/*!*********************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/Filters.js ***!
+  \*********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Filters_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Filters.scss */ "./components/adminIncludes/PostsComponents/Filters/Filters.scss");
+/* harmony import */ var _Filters_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Filters_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _FilterStatusBtn__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./FilterStatusBtn */ "./components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.js");
+/* harmony import */ var _FilterSearch__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./FilterSearch */ "./components/adminIncludes/PostsComponents/Filters/FilterSearch.js");
+/* harmony import */ var _FilterDropDownActions__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./FilterDropDownActions */ "./components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.js");
+/* harmony import */ var _FilterPagination__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./FilterPagination */ "./components/adminIncludes/PostsComponents/Filters/FilterPagination.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+
+
+const Filters = props => {
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
+  return __jsx("div", {
+    className: "Filters"
+  }, __jsx(_FilterStatusBtn__WEBPACK_IMPORTED_MODULE_2__["default"], null), __jsx(_FilterSearch__WEBPACK_IMPORTED_MODULE_3__["default"], null), __jsx(_FilterDropDownActions__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_FilterPagination__WEBPACK_IMPORTED_MODULE_5__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Filters);
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/Filters/Filters.scss":
+/*!***********************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/Filters/Filters.scss ***!
+  \***********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js":
+/*!******************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js ***!
+  \******************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
+/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _BodyTable_scss__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ./BodyTable.scss */ "./components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.scss");
+/* harmony import */ var _BodyTable_scss__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_BodyTable_scss__WEBPACK_IMPORTED_MODULE_4__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+ // import {Link, withRouter} from "react-router-dom";
+// import {updatePostStatus, deletePost, postsBulkAction, getPosts} from "../../../../../variables/_ajaxPostsVariable";
+// import QuickEdit from "../QuickEdit/QuickEdit";
+// import {adminTokenValidator} from "../../../../../variables/_ajaxAuthVariables";
+
+
+
+
+
+
+const BodyTable = props => {
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["AppContext"]);
+  let selectBoxes = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(contextData.adminPosts.map(() => Object(react__WEBPACK_IMPORTED_MODULE_0__["createRef"])()));
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    hoveredId: '',
+    isMobile: false
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (window.innerWidth < 768) {
+      setState(_objectSpread({}, state, {
+        isMobile: true
+      }));
+    }
+  }, []);
+
+  const setData = () => {
+    // getPosts(
+    //     contextData.postsData.type, contextData.postsData.size, contextData.postsData.pageNo,
+    //     ['author', 'title', 'imageUrl', 'status', 'actors', 'tags', 'categories'], contextData.postsData.status,
+    //     contextData.postsData.author, contextData.postsData.keyword).then(res => {
+    //     contextData.setPostsData({
+    //         ...contextData.postsData,
+    //         posts: res.data.posts,
+    //         error: res.data.error,
+    //         totalCount: res.data.totalCount
+    //     });
+    //     contextData.setState({
+    //         ...contextData.state,
+    //         loading: false
+    //     });
+    // }).catch(() => {
+    //     contextData.setState({
+    //         ...contextData.state,
+    //         login: false
+    //     })
+    // })
+    return null;
+  };
+
+  const onTrashHandler = () => {
+    contextData.dispatchState(_objectSpread({}, contextData.state, {
+      loading: true
+    }));
+    contextData.functions.bulkActionPost([state.hoveredId], 'trash');
+  }; // const onDeletePermanentlyHandler = (id)=>{
+  //
+  // }
+
+
+  const onDeletePermanentlyHandler = () => {// deletePost(state.hoveredId).then(res => {
+    //     const posts = contextData.postsData.posts.filter(post => {
+    //         return post._id !== state.hoveredId
+    //     });
+    //     const report = contextData.state.reports.push(res.data.message)
+    //     contextData.setPostsData({
+    //         ...contextData.postsData,
+    //         posts
+    //     });
+    //     contextData.setState({
+    //         ...contextData.state,
+    //         report
+    //     })
+    // })
+  };
+
+  const onRestoreHandler = () => {// contextData.setState({
+    //     ...contextData.state,
+    //     loading: true
+    // });
+    // postsBulkAction([state.hoveredId], 'Draft').then(res => {
+    //     setData()
+    // }).catch(err => {
+    //     contextData.setState({
+    //         ...contextData.state,
+    //         loading: false
+    //     });
+    // })
+  };
+
+  let HoverOnTitle = props => {
+    if (props.post._id === state.hoveredId) {
+      let editPostPath = `/admin/Post?id=${props.post._id}`;
+
+      if (props.post.status === 'Trash') {
+        return __jsx("div", {
+          className: "postControlOptions"
+        }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+          to: editPostPath
+        }, "Edit"), __jsx("button", {
+          onClick: () => onDeletePermanentlyHandler(props.post._id)
+        }, "Delete Permanently"), __jsx("button", {
+          onClick: () => onRestoreHandler()
+        }, "Move to Draft"));
+      } else {
+        return __jsx("div", {
+          className: "postControlOptions"
+        }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+          href: editPostPath
+        }, __jsx("a", null, "Edit")), __jsx("button", {
+          onClick: () => onTrashHandler()
+        }, "Trash"), __jsx("button", null, "View"));
+      }
+    } else return __jsx("div", {
+      className: "postControlOptions"
+    });
+  };
+
+  const onCheckHandler = e => {//
+    // if (e.target.checked) {
+    //     if (!contextData.postsData.checkedPosts.includes(e.target.name)) {
+    //         let pushedItemArr = contextData.postsData.checkedPosts;
+    //         pushedItemArr.push(e.target.name);
+    //         pushedItemArr = [...new Set(pushedItemArr)]
+    //         contextData.setPostsData({
+    //             ...contextData.postsData,
+    //             checkedPosts: pushedItemArr
+    //         });
+    //     }
+    //
+    // } else {
+    //     if (contextData.postsData.checkedPosts.includes(e.target.name)) {
+    //         let pushedItemArr = contextData.postsData.checkedPosts.filter(id => {
+    //             return id !== e.target.name
+    //         });
+    //         pushedItemArr = [...new Set(pushedItemArr)];
+    //         contextData.setPostsData({
+    //             ...contextData.postsData,
+    //             checkedPosts: pushedItemArr
+    //         });
+    //     }
+    // }
+  };
+
+  let renderPosts = contextData.adminPosts.map(post => {
+    const renderTags = post.tags.map(item => {
+      return __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
+        href: "/",
+        key: item,
+        className: "tagPreviewItem"
+      }, " ", __jsx("a", null, item), ",");
+    });
+    let author = post.author;
+
+    if (post.author === contextData.userData._id) {
+      author = contextData.userData.username;
+    }
+
+    let isChecked = contextData.adminPostsData.checkedPosts.includes(post._id);
+    return __jsx("tr", {
+      key: post._id,
+      className: "BodyTableItems",
+      onTouchStart: () => {
+        setState(_objectSpread({}, state, {
+          hoveredId: post._id
+        }));
+      },
+      onMouseEnter: () => {
+        setState(_objectSpread({}, state, {
+          hoveredId: post._id
+        }));
+      }
+    }, __jsx("td", {
+      className: "postColumn"
+    }, __jsx("div", null, __jsx("input", {
+      name: post._id,
+      className: " BodyTableItemCheckBox",
+      type: "checkbox",
+      ref: e => selectBoxes.current[contextData.adminPosts.indexOf(post)] = e,
+      checked: isChecked,
+      onChange: e => onCheckHandler(e)
+    })), __jsx("div", null, __jsx("p", {
+      className: "BodyTableItem"
+    }, post.title), __jsx(HoverOnTitle, {
+      post: post
+    })), __jsx("div", null, __jsx("p", {
+      className: "BodyTableItem author noMobile"
+    }, author)), __jsx("div", {
+      className: "tagCategoriesActorsPreview BodyTableItem noMobile"
+    }, __jsx("span", null, "   ", post.categories + ' , ')), __jsx("div", {
+      className: "tagCategoriesActorsPreview BodyTableItem noMobile"
+    }, __jsx("span", null, "   ", post.tags + ' , ')), __jsx("div", {
+      className: "tagCategoriesActorsPreview BodyTableItem noMobile"
+    }, __jsx("span", null, "      ", post.actors + ' , ')), __jsx("div", null, __jsx("p", {
+      className: "BodyTableItem noMobile"
+    }, post.status)), __jsx("div", null, __jsx("img", {
+      className: "BodyTableItem noMobile",
+      src: post.mainThumbnail
+    }))));
+  });
+  return __jsx("tbody", {
+    className: "BodyTable"
+  }, renderPosts, "xxc");
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2___default()(BodyTable));
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.scss":
+/*!********************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.scss ***!
+  \********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable.js":
+/*!********************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable.js ***!
+  \********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var _HeaderTable_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./HeaderTable.scss */ "./components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable.scss");
+/* harmony import */ var _HeaderTable_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_HeaderTable_scss__WEBPACK_IMPORTED_MODULE_2__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const HeaderTable = props => {
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["AppContext"]);
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    selectAll: false
+  });
+
+  const selectAllHandler = e => {// if (e.target.checked) {
+    //
+    //     let allPosts = []
+    //     contextData.postsData.posts.forEach(post => {
+    //         allPosts.push(post._id)
+    //     });
+    //     contextData.setPostsData({
+    //         ...contextData.postsData,
+    //         checkedPosts: allPosts
+    //     })
+    // } else {
+    //     contextData.setPostsData({
+    //         ...contextData.postsData,
+    //         checkedPosts: []
+    //     })
+    // }
+  };
+
+  return __jsx("thead", {
+    className: "HeaderTable"
+  }, __jsx("tr", null, __jsx("th", null, __jsx("input", {
+    className: " HeaderTableItemCheckBox",
+    type: "checkbox",
+    onChange: e => selectAllHandler(e)
+  })), __jsx("th", {
+    className: "HeaderTableItem"
+  }, "Title"), __jsx("th", {
+    className: "HeaderTableItem hiddenOnMobile"
+  }, "Author"), __jsx("th", {
+    className: "HeaderTableItem hiddenOnMobile"
+  }, "Categories"), __jsx("th", {
+    className: "HeaderTableItem hiddenOnMobile"
+  }, "Post Tag"), __jsx("th", {
+    className: "HeaderTableItem hiddenOnMobile"
+  }, "Actors"), __jsx("th", {
+    className: "HeaderTableItem hiddenOnMobile"
+  }, "Status"), __jsx("th", {
+    className: "HeaderTableItem hiddenOnMobile"
+  }, "Thumb")));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (HeaderTable);
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable.scss":
+/*!**********************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable.scss ***!
+  \**********************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable.js":
+/*!***********************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable.js ***!
+  \***********************************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _HeaderTable__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./HeaderTable */ "./components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable.js");
+/* harmony import */ var _BodyTable__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./BodyTable */ "./components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js");
+/* harmony import */ var _PostsDataTable_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ./PostsDataTable.scss */ "./components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable.scss");
+/* harmony import */ var _PostsDataTable_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_PostsDataTable_scss__WEBPACK_IMPORTED_MODULE_3__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+
+const PostsDataTable = props => {
+  return __jsx("table", {
+    className: "DataTable"
+  }, __jsx(_HeaderTable__WEBPACK_IMPORTED_MODULE_1__["default"], null), __jsx(_BodyTable__WEBPACK_IMPORTED_MODULE_2__["default"], null));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (PostsDataTable);
+
+/***/ }),
+
+/***/ "./components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable.scss":
+/*!*************************************************************************************!*\
+  !*** ./components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable.scss ***!
+  \*************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
 
 /***/ "./components/adminIncludes/SideBar/SideBar.js":
 /*!*****************************************************!*\
@@ -109,7 +1003,10 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../context/AppContext */ "./context/AppContext.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_4__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -122,6 +1019,53 @@ const SideBar = props => {
     1: setState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
+
+  const generateFakeData = () => {
+    // const body = {
+    //     type: "Video",
+    //     size: 1000,
+    //     pageNo: 1,
+    //     fields: ["author", "title", "imageUrl", "status", "actors", "tags", "categories"],
+    //     status: "All",
+    //     author: "All",
+    //     keyword: ""
+    // };
+    axios__WEBPACK_IMPORTED_MODULE_4___default.a.post('http://localhost:4200/server/posts/admin-postsForTest').then(res => {
+      const posts = res.data.posts;
+      posts.forEach(async post => {
+        let data = {
+          title: post.title.en,
+          categories: post.categories,
+          comments: post.comments,
+          actors: post.actors,
+          tags: post.tags,
+          author: '5e322f0f8b2a0637dc3b6a16',
+          description: post.description.en,
+          disLikes: 0,
+          mainThumbnail: post.imageUrl,
+          videoTrailerUrl: post.imagePreviewUrl,
+          videoEmbedCode: post.iframe,
+          likes: 0,
+          quality: post.quality,
+          status: 'published',
+          postType: "video",
+          sourceSite: "Xhamster",
+          views: 0
+        }; // let dataToSave = {
+        //     title:post.title.en,
+        //     author:'5e322f0f8b2a0637dc3b6a16',
+        //     categories:post.categories,
+        //     actors:post.actors,
+        //     tags:post.tags,
+        //     mainThumbnail:post.imageUrl,
+        //     status:post.status,
+        //     type:post.type
+        // };
+
+        await contextData.functions.savePosts(data); // console.log(post. )
+      });
+    });
+  };
 
   if (contextData.settings.adminPanelSideBar) {
     return __jsx("div", {
@@ -227,10 +1171,10 @@ const AdminActionMenu = props => {
 
 /***/ }),
 
-/***/ "./components/adminIncludes/TopBar/TopBar.js":
-/*!***************************************************!*\
-  !*** ./components/adminIncludes/TopBar/TopBar.js ***!
-  \***************************************************/
+/***/ "./components/adminIncludes/TopBar/AdminTopBar.js":
+/*!********************************************************!*\
+  !*** ./components/adminIncludes/TopBar/AdminTopBar.js ***!
+  \********************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -238,14 +1182,15 @@ const AdminActionMenu = props => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _TopBar_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./TopBar.scss */ "./components/adminIncludes/TopBar/TopBar.scss");
-/* harmony import */ var _TopBar_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_TopBar_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _AdminTopBar_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./AdminTopBar.scss */ "./components/adminIncludes/TopBar/AdminTopBar.scss");
+/* harmony import */ var _AdminTopBar_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_AdminTopBar_scss__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../context/AppContext */ "./context/AppContext.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! react-fontawesome */ "react-fontawesome");
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_4__);
 /* harmony import */ var _AdminActionMenu_AdminActionMenu__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./AdminActionMenu/AdminActionMenu */ "./components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu.js");
+/* harmony import */ var _NewItemMenu_NewItemMenu__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./NewItemMenu/NewItemMenu */ "./components/adminIncludes/TopBar/NewItemMenu/NewItemMenu.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -259,15 +1204,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
  // import { setSprCache } from "next/dist/next-server/server/spr-cache";
 
-const TopBar = props => {
+const AdminTopBar = props => {
   const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_2__["AppContext"]);
   const {
     0: state,
     1: dispatchState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    AdminActionMenu: false
+    AdminActionMenu: false,
+    NewItemMenu: false
   });
 
   const AdminSideBarOpenCloseHandler = () => {
@@ -295,6 +1242,14 @@ const TopBar = props => {
     }));
   };
 
+  const newItemMenuHandler = () => {
+    state.NewItemMenu ? dispatchState(_objectSpread({}, state, {
+      NewItemMenu: false
+    })) : dispatchState(_objectSpread({}, state, {
+      NewItemMenu: true
+    }));
+  };
+
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("div", {
     className: "adminTopBar"
   }, __jsx("div", {
@@ -313,11 +1268,13 @@ const TopBar = props => {
     name: "home"
   })), __jsx("button", {
     className: "adminNewActionBtn adminTopBarItem",
-    onClick: () => newAction()
+    onClick: () => newItemMenuHandler()
   }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_4___default.a, {
     className: "fontawesomeMedium",
     name: "plus"
-  }))), __jsx("button", {
+  })), __jsx(_NewItemMenu_NewItemMenu__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    active: state.NewItemMenu
+  })), __jsx("button", {
     className: "adminActionBtn adminTopBarItem",
     onClick: () => adminActionHandler()
   }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_4___default.a, {
@@ -328,14 +1285,129 @@ const TopBar = props => {
   })));
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3___default()(TopBar));
+/* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3___default()(AdminTopBar));
 
 /***/ }),
 
-/***/ "./components/adminIncludes/TopBar/TopBar.scss":
-/*!*****************************************************!*\
-  !*** ./components/adminIncludes/TopBar/TopBar.scss ***!
-  \*****************************************************/
+/***/ "./components/adminIncludes/TopBar/AdminTopBar.scss":
+/*!**********************************************************!*\
+  !*** ./components/adminIncludes/TopBar/AdminTopBar.scss ***!
+  \**********************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/adminIncludes/TopBar/NewItemMenu/NewItemMenu.js":
+/*!********************************************************************!*\
+  !*** ./components/adminIncludes/TopBar/NewItemMenu/NewItemMenu.js ***!
+  \********************************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _NewItemMenu_scss__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ./NewItemMenu.scss */ "./components/adminIncludes/TopBar/NewItemMenu/NewItemMenu.scss");
+/* harmony import */ var _NewItemMenu_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_NewItemMenu_scss__WEBPACK_IMPORTED_MODULE_2__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+
+
+const NewItemMenu = props => {
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
+
+  if (props.active) {
+    return __jsx("div", {
+      className: "NewItemMenu"
+    }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      href: "/admin/post?new=1"
+    }, __jsx("a", {
+      className: "SideBarItem"
+    }, "New Post")));
+  } else return null;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (NewItemMenu);
+
+/***/ }),
+
+/***/ "./components/adminIncludes/TopBar/NewItemMenu/NewItemMenu.scss":
+/*!**********************************************************************!*\
+  !*** ./components/adminIncludes/TopBar/NewItemMenu/NewItemMenu.scss ***!
+  \**********************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+
+
+/***/ }),
+
+/***/ "./components/includes/Loading/Loading.js":
+/*!************************************************!*\
+  !*** ./components/includes/Loading/Loading.js ***!
+  \************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _Loading_scss__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ./Loading.scss */ "./components/includes/Loading/Loading.scss");
+/* harmony import */ var _Loading_scss__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_Loading_scss__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../context/AppContext */ "./context/AppContext.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
+
+const Loading = () => {
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_2__["AppContext"]);
+
+  const onStopLoadingHandler = () => {
+    contextData.dispatchState(_objectSpread({}, contextData.state, {
+      loading: false
+    }));
+  };
+
+  if (contextData.state.loading) {
+    return __jsx("div", {
+      className: "Loading"
+    }, __jsx("div", {
+      className: "lds-ring"
+    }, __jsx("div", null), __jsx("div", null), __jsx("div", null), __jsx("div", null)), __jsx("button", {
+      className: "stopLoading fas fa-times",
+      onClick: () => onStopLoadingHandler()
+    }));
+  } else return null;
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (Loading);
+
+/***/ }),
+
+/***/ "./components/includes/Loading/Loading.scss":
+/*!**************************************************!*\
+  !*** ./components/includes/Loading/Loading.scss ***!
+  \**************************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
@@ -360,11 +1432,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _AdminLayout_scss__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_AdminLayout_scss__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _styles_styles_scss__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../styles/styles.scss */ "./styles/styles.scss");
 /* harmony import */ var _styles_styles_scss__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_styles_styles_scss__WEBPACK_IMPORTED_MODULE_3__);
-/* harmony import */ var _adminIncludes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../adminIncludes/TopBar/TopBar */ "./components/adminIncludes/TopBar/TopBar.js");
+/* harmony import */ var _adminIncludes_TopBar_AdminTopBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../adminIncludes/TopBar/AdminTopBar */ "./components/adminIncludes/TopBar/AdminTopBar.js");
 /* harmony import */ var _adminIncludes_SideBar_SideBar__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../adminIncludes/SideBar/SideBar */ "./components/adminIncludes/SideBar/SideBar.js");
 /* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../context/AppContext */ "./context/AppContext.js");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/router */ "next/router");
 /* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../includes/Loading/Loading */ "./components/includes/Loading/Loading.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -372,6 +1445,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -434,10 +1508,10 @@ const Panel = props => {
   }), "https://ogp.me/ */"), __jsx("div", {
     ref: container,
     className: "container"
-  }, __jsx(_adminIncludes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_adminIncludes_SideBar_SideBar__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx("div", {
+  }, __jsx(_adminIncludes_TopBar_AdminTopBar__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_adminIncludes_SideBar_SideBar__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx("div", {
     ref: Admin,
     className: "Admin"
-  }, props.children)));
+  }, props.children), __jsx(_includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_8__["default"], null)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(next_router__WEBPACK_IMPORTED_MODULE_7__["withRouter"])(Panel));
@@ -495,7 +1569,9 @@ const AppProvider = props => {
   const {
     0: state,
     1: dispatchState
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    loading: false
+  });
   const {
     0: settings,
     1: dispatchSettings
@@ -510,11 +1586,42 @@ const AppProvider = props => {
   const {
     0: editingPostData,
     1: dispatchEditingPostData
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    categories: [],
+    actors: [],
+    tags: [],
+    title: '',
+    author: '',
+    description: '',
+    disLikes: 0,
+    mainThumbnail: '',
+    videoTrailerUrl: '',
+    videoEmbedCode: '',
+    likes: 0,
+    quality: '',
+    status: '',
+    postType: '',
+    sourceSite: '',
+    views: 0
+  });
   const {
     0: adminPosts,
     1: dispatchAdminPosts
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const {
+    0: adminPostsData,
+    1: dispatchAdminPostsData
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    pageNo: 1,
+    size: 30,
+    totalPosts: 0,
+    postType: 'all',
+    keyword: '',
+    status: 'all',
+    author: 'all',
+    fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
+    checkedPosts: []
+  });
   const {
     0: functions,
     1: dispatchFunctions
@@ -547,25 +1654,77 @@ const AppProvider = props => {
       };
       return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/createNewPost', body);
     },
-    getPosts: async (limit, pageNo) => {
+    updatePost: async data => {
       const body = {
-        limit,
-        pageNo,
+        postData: data,
         token: localStorage.wt
       };
-      return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts', body);
+      return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/updatePost', body);
+    },
+    getPosts: async data => {
+      const body = _objectSpread({}, data, {
+        token: localStorage.wt
+      });
+
+      return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts', body);
+    },
+    getPost: async _id => {
+      const body = {
+        _id,
+        token: localStorage.wt
+      };
+      return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/post', body);
+    },
+    setEditingPostData: (name, value) => {
+      dispatchEditingPostData(editingPostData => _objectSpread({}, editingPostData, {
+        [name]: value
+      }));
+    },
+    bulkActionPost: (ids, status) => {
+      dispatchState(_objectSpread({}, state, {
+        loading: true
+      }));
+      const body = {
+        ids,
+        status,
+        token: localStorage.wt
+      };
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/postsBulkAction', body).then(() => {
+        dispatchState(_objectSpread({}, state, {
+          loading: false
+        }));
+      }).catch(() => {
+        dispatchState(_objectSpread({}, state, {
+          loading: false
+        }));
+      });
+    },
+    deletePost: id => {
+      const body = {
+        _id: id,
+        token: localStorage.wt
+      };
+      return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/deletePost', body);
     }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     functions.getAndSetUserInfo();
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    if (userData.username) {
-      if (props.router.pathname === '/auth/login' || props.router.pathname === '/auth/register') {
-        props.router.push('/');
-      }
+    console.log(editingPostData);
+  }, [editingPostData]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(props);
+
+    if (props.router.pathname === '/admin/posts') {
+      functions.getPosts(adminPostsData).then(res => {
+        dispatchAdminPosts(res.data.posts);
+        dispatchAdminPostsData(_objectSpread({}, adminPostsData, {
+          totalPosts: parseInt(res.data.totalCount)
+        }));
+      });
     }
-  }, [props.router.pathname]);
+  }, [adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields]);
   return __jsx("div", null, __jsx(AppContext.Provider, {
     value: {
       state,
@@ -578,9 +1737,17 @@ const AppProvider = props => {
       editingPostData,
       dispatchEditingPostData,
       adminPosts,
-      dispatchAdminPosts
+      dispatchAdminPosts,
+      adminPostsData,
+      dispatchAdminPostsData
     }
   }, props.children));
+};
+
+AppProvider.getInitialProps = ctx => {
+  return {
+    ctx
+  };
 };
 
 const AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(AppProvider);
@@ -2273,37 +3440,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var _components_adminIncludes_PostsComponents_Filters_Filters__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../components/adminIncludes/PostsComponents/Filters/Filters */ "./components/adminIncludes/PostsComponents/Filters/Filters.js");
+/* harmony import */ var _components_adminIncludes_PostsComponents_PostsDataTable_PostsDataTable__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable */ "./components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
 
 
+
+
 const Index = props => {
-  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_3__["AppContext"]);
-  const {
-    0: state,
-    1: setState
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    pageNo: 1,
-    limit: 30
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    contextData.functions.getPosts(state.limit, state.pageNo).then(res => {
-      contextData.dispatchAdminPosts(previousPosts => [...previousPosts, ...res.data.posts]);
-    });
-  }, [state]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(contextData.adminPosts);
-  }, [contextData.adminPosts]);
-  const renderPost = contextData.adminPosts.map(post => {
-    return __jsx("p", {
-      key: contextData.adminPosts.indexOf(post)
-    }, post.title);
-  });
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_layouts_AdminLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx("div", {
     className: "Posts"
-  }, renderPost)));
+  }, __jsx(_components_adminIncludes_PostsComponents_Filters_Filters__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_components_adminIncludes_PostsComponents_PostsDataTable_PostsDataTable__WEBPACK_IMPORTED_MODULE_5__["default"], null))));
 };
 
 Index.getInitialProps = ({
@@ -2327,7 +3477,7 @@ Index.getInitialProps = ({
 
 /***/ }),
 
-/***/ 6:
+/***/ 5:
 /*!******************************************!*\
   !*** multi ./pages/admin/posts/index.js ***!
   \******************************************/

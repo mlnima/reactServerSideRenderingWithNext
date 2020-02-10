@@ -8,14 +8,44 @@ export const AppContext = React.createContext();
 
 const AppProvider = props => {
 
-    const [ state, dispatchState ] = useState({});
+    const [ state, dispatchState ] = useState({
+        loading: false
+    });
     const [ settings, dispatchSettings ] = useState({
         adminPanelSideBar: false,
         test: false
     });
     const [ userData, dispatchUserData ] = useState({});
-    const [ editingPostData, dispatchEditingPostData ] = useState({});
+    const [ editingPostData, dispatchEditingPostData ] = useState({
+        categories: [],
+        actors: [],
+        tags: [],
+        title: '',
+        author: '',
+        description: '',
+        disLikes: 0,
+        mainThumbnail: '',
+        videoTrailerUrl: '',
+        videoEmbedCode: '',
+        likes: 0,
+        quality: '',
+        status: '',
+        postType: '',
+        sourceSite: '',
+        views: 0,
+    });
     const [ adminPosts, dispatchAdminPosts ] = useState([]);
+    const [ adminPostsData, dispatchAdminPostsData ] = useState({
+        pageNo: 1,
+        size: 30,
+        totalPosts: 0,
+        postType: 'all',
+        keyword: '',
+        status: 'all',
+        author: 'all',
+        fields: [ 'author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories' ],
+        checkedPosts: [],
+    });
     const [ functions, dispatchFunctions ] = useState({
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
@@ -44,13 +74,62 @@ const AppProvider = props => {
             };
             return axios.post('/api/v1/posts/createNewPost', body)
         },
-        getPosts: async (limit, pageNo) => {
+        updatePost: async (data) => {
             const body = {
-                limit,
-                pageNo,
-                token:localStorage.wt
+                postData: data,
+                token: localStorage.wt
             };
-            return axios.post('/api/v1/posts', body)
+            return axios.post('/api/v1/posts/updatePost', body)
+        },
+        getPosts: async (data) => {
+            const body = {
+                ...data,
+                token: localStorage.wt
+            };
+            return await axios.post('/api/v1/posts', body)
+        },
+        getPost: async (_id) => {
+            const body = {
+                _id,
+                token: localStorage.wt
+            };
+            return await axios.post('/api/v1/posts/post', body)
+        },
+        setEditingPostData: (name, value) => {
+            dispatchEditingPostData(editingPostData => ({
+                ...editingPostData,
+                [name]: value
+            }))
+        },
+        bulkActionPost: (ids, status) => {
+            dispatchState({
+                ...state,
+                loading: true
+            });
+            const body = {
+                ids,
+                status,
+                token: localStorage.wt
+            };
+            axios.post('/api/v1/posts/postsBulkAction', body).then(() => {
+                dispatchState({
+                    ...state,
+                    loading: false
+                });
+
+            }).catch(() => {
+                dispatchState({
+                    ...state,
+                    loading: false
+                });
+            })
+        },
+        deletePost: (id) => {
+            const body = {
+                _id: id,
+                token: localStorage.wt
+            };
+            return axios.post('/api/v1/posts/deletePost', body)
         }
     });
 
@@ -59,12 +138,21 @@ const AppProvider = props => {
     }, []);
 
     useEffect(() => {
-        if (userData.username) {
-            if (props.router.pathname === '/auth/login' || props.router.pathname === '/auth/register') {
-                props.router.push('/')
-            }
+        console.log(editingPostData)
+    }, [ editingPostData ]);
+
+    useEffect(() => {
+        console.log(props)
+        if (props.router.pathname === '/admin/posts') {
+            functions.getPosts(adminPostsData).then(res => {
+                dispatchAdminPosts(res.data.posts);
+                dispatchAdminPostsData({
+                    ...adminPostsData,
+                    totalPosts: parseInt(res.data.totalCount),
+                })
+            })
         }
-    }, [ props.router.pathname ]);
+    }, [ adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields ]);
 
     return (
         <div>
@@ -80,13 +168,19 @@ const AppProvider = props => {
                     editingPostData,
                     dispatchEditingPostData,
                     adminPosts,
-                    dispatchAdminPosts
+                    dispatchAdminPosts,
+                    adminPostsData,
+                    dispatchAdminPostsData,
                 } }>
 
                 { props.children }
             </AppContext.Provider>
         </div>
     )
-}
+};
+
+AppProvider.getInitialProps = (ctx) => {
+    return { ctx }
+};
 
 export const AppProviderWithRouter = withRouter(AppProvider);

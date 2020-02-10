@@ -5,6 +5,7 @@ import './AppLayout.scss'
 import '../../styles/styles.scss';
 import TopBar from "../includes/TopBar/TopBar";
 import Navigation from "../includes/Header/Navigation/Navigation";
+import Loading from "../includes/Loading/Loading";
 
 const AppLayout = props => {
     return (
@@ -30,6 +31,7 @@ const AppLayout = props => {
             <TopBar/>
             <Header/>
             <Navigation/>
+            <Loading/>
             <div className="App">
                 { props.children }
             </div>

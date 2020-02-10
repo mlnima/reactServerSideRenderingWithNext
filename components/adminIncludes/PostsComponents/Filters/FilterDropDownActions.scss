@@ -1,0 +1,28 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+
+.FilterDropDownActions {
+
+  display: flex;
+  align-items: center;
+
+  select {
+
+    @include AdminLightBtn;
+    background-color: $light100;
+
+    option {
+      height: 32px;
+      padding: 5px 10px;
+    }
+  }
+
+  .actionBtn {
+    @include AdminLightBtn;
+    margin: 0 5px;
+  }
+
+  div {
+    margin-right: 4px;
+  }
+}

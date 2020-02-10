@@ -5,7 +5,9 @@
   color: $light100;
   outline: none;
   border: none;
-};
+}
+
+;
 
 @mixin greenActionBtn {
   background: linear-gradient(#67ae55, #578843);
@@ -18,7 +20,7 @@
   display: inline-block;
   letter-spacing: 1px;
   position: relative;
-  text-shadow: 0 1px 2px rgba(0,0,0,.5);
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
   width: 200px;
   height: 40px;
   min-width: 194px;
@@ -28,20 +30,35 @@
   box-sizing: border-box;
   margin-top: 10px;
   margin-bottom: 10px;
-};
+}
 
-@mixin AdminLightBtn{
+;
+
+@mixin AdminLightBtn {
   background-color: $AdminBackground50;
   color: black;
   outline: none;
-  border: none;
+  border: .4px $AdminColor20 solid;
   padding: 8px 10px;
-};
+  border-radius: 5px;
+  &:active{
+    background-color: white;
+    border:none;
+  }
+}
 
-@mixin AdminBluetBtn{
+;
+
+@mixin AdminBluetBtn {
   background-color: $lightBlue;
   color: white;
   outline: none;
   border: none;
   padding: 8px 10px;
+}
+
+@mixin buttonLikeLink{
+  border: none;
+  color: $linkBlueColor;
+  background: transparent;
 }

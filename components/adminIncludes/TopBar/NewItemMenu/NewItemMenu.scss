@@ -1,0 +1,16 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+
+.NewItemMenu {
+  position: fixed;
+  top: 40px;
+  background-color: $AdminColor80;
+  width: 150px;
+  padding:10px;
+
+  a {
+    color: $light100;
+
+    //width: 100px;
+  }
+}

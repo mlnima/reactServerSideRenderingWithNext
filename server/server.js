@@ -28,7 +28,6 @@ const PORT = process.env.PORT || 3000;
 app.prepare().then(()=>{
     const server = express();
     server.use(bodyParser.json());
-    // console.log(process.env.TEST );
 
     server.get('/robots.txt',(req,res)=>{
         console.log(path.dirname );
@@ -38,7 +37,11 @@ app.prepare().then(()=>{
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
     server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
+    server.post('/api/v1/posts/post',authMiddleware,(req,res)=>{postsControllers.getPostInfo(req,res)});
     server.post('/api/v1/posts/createNewPost',authMiddleware,(req,res)=>{postsControllers.createNewPost(req,res)});
+    server.post('/api/v1/posts/updatePost',authMiddleware,(req,res)=>{postsControllers.updatePost(req,res)});
+    server.post('/api/v1/posts/deletePost',authMiddleware,(req,res)=>{postsControllers.deletePost(req,res)});
+    server.post('/api/v1/posts/postsBulkAction',authMiddleware,(req,res)=>{postsControllers.postsBulkAction(req,res)});
 
     server.get('*',(req,res)=>{
         return handle(req,res)
@@ -49,8 +52,6 @@ app.prepare().then(()=>{
     })
 }).catch((ex)=>{
     console.log( 'exit error:',ex.stack)
-})
+});
 
 
-
-// video 16 server side support

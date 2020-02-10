@@ -133,7 +133,9 @@ const AppProvider = props => {
   const {
     0: state,
     1: dispatchState
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    loading: false
+  });
   const {
     0: settings,
     1: dispatchSettings
@@ -148,11 +150,42 @@ const AppProvider = props => {
   const {
     0: editingPostData,
     1: dispatchEditingPostData
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    categories: [],
+    actors: [],
+    tags: [],
+    title: '',
+    author: '',
+    description: '',
+    disLikes: 0,
+    mainThumbnail: '',
+    videoTrailerUrl: '',
+    videoEmbedCode: '',
+    likes: 0,
+    quality: '',
+    status: '',
+    postType: '',
+    sourceSite: '',
+    views: 0
+  });
   const {
     0: adminPosts,
     1: dispatchAdminPosts
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const {
+    0: adminPostsData,
+    1: dispatchAdminPostsData
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    pageNo: 1,
+    size: 30,
+    totalPosts: 0,
+    postType: 'all',
+    keyword: '',
+    status: 'all',
+    author: 'all',
+    fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
+    checkedPosts: []
+  });
   const {
     0: functions,
     1: dispatchFunctions
@@ -185,25 +218,77 @@ const AppProvider = props => {
       };
       return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/createNewPost', body);
     },
-    getPosts: async (limit, pageNo) => {
+    updatePost: async data => {
       const body = {
-        limit,
-        pageNo,
+        postData: data,
         token: localStorage.wt
       };
-      return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts', body);
+      return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/updatePost', body);
+    },
+    getPosts: async data => {
+      const body = _objectSpread({}, data, {
+        token: localStorage.wt
+      });
+
+      return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts', body);
+    },
+    getPost: async _id => {
+      const body = {
+        _id,
+        token: localStorage.wt
+      };
+      return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/post', body);
+    },
+    setEditingPostData: (name, value) => {
+      dispatchEditingPostData(editingPostData => _objectSpread({}, editingPostData, {
+        [name]: value
+      }));
+    },
+    bulkActionPost: (ids, status) => {
+      dispatchState(_objectSpread({}, state, {
+        loading: true
+      }));
+      const body = {
+        ids,
+        status,
+        token: localStorage.wt
+      };
+      axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/postsBulkAction', body).then(() => {
+        dispatchState(_objectSpread({}, state, {
+          loading: false
+        }));
+      }).catch(() => {
+        dispatchState(_objectSpread({}, state, {
+          loading: false
+        }));
+      });
+    },
+    deletePost: id => {
+      const body = {
+        _id: id,
+        token: localStorage.wt
+      };
+      return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/deletePost', body);
     }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     functions.getAndSetUserInfo();
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    if (userData.username) {
-      if (props.router.pathname === '/auth/login' || props.router.pathname === '/auth/register') {
-        props.router.push('/');
-      }
+    console.log(editingPostData);
+  }, [editingPostData]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(props);
+
+    if (props.router.pathname === '/admin/posts') {
+      functions.getPosts(adminPostsData).then(res => {
+        dispatchAdminPosts(res.data.posts);
+        dispatchAdminPostsData(_objectSpread({}, adminPostsData, {
+          totalPosts: parseInt(res.data.totalCount)
+        }));
+      });
     }
-  }, [props.router.pathname]);
+  }, [adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields]);
   return __jsx("div", null, __jsx(AppContext.Provider, {
     value: {
       state,
@@ -216,9 +301,17 @@ const AppProvider = props => {
       editingPostData,
       dispatchEditingPostData,
       adminPosts,
-      dispatchAdminPosts
+      dispatchAdminPosts,
+      adminPostsData,
+      dispatchAdminPostsData
     }
   }, props.children));
+};
+
+AppProvider.getInitialProps = ctx => {
+  return {
+    ctx
+  };
 };
 
 const AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(AppProvider);

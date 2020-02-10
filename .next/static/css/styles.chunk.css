@@ -40,6 +40,18 @@ body {
 .fontawesomeMedium {
   font-size: x-large; }
 
+input:focus, textarea:focus, select:focus {
+  outline: none; }
+
+input, textarea, select {
+  border: none;
+  background-color: #f1f1f1;
+  padding: 5px;
+  border-radius: 5px; }
+
+a {
+  text-decoration: none; }
+
 .adminTopBar {
   display: flex;
   align-items: center;
@@ -61,7 +73,7 @@ body {
 .AdminActionMenu {
   background-color: #33373c;
   position: fixed;
-  top: 50px;
+  top: 40px;
   right: 0;
   display: flex;
   flex-direction: column;
@@ -72,6 +84,15 @@ body {
     outline: none;
     border: none;
     padding: 10px; }
+
+.NewItemMenu {
+  position: fixed;
+  top: 40px;
+  background-color: #33373c;
+  width: 150px;
+  padding: 10px; }
+  .NewItemMenu a {
+    color: white; }
 
 .SideBar {
   position: fixed;
@@ -104,6 +125,58 @@ body {
   .SideBar {
     position: initial; } }
 
+.Loading {
+  background-color: rgba(0, 0, 0, 0.5);
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  z-index: 1000; }
+  .Loading .lds-ring {
+    display: inline-block;
+    position: relative;
+    width: 64px;
+    height: 64px; }
+  .Loading .lds-ring div {
+    box-sizing: border-box;
+    display: block;
+    position: absolute;
+    width: 51px;
+    height: 51px;
+    margin: 6px;
+    border: 6px solid;
+    border-radius: 50%;
+    animation: lds-ring 1.2s cubic-bezier(0.5, 0, 0.5, 1) infinite;
+    border-color: #fff transparent transparent transparent; }
+  .Loading .lds-ring div:nth-child(1) {
+    animation-delay: -0.45s; }
+  .Loading .lds-ring div:nth-child(2) {
+    animation-delay: -0.3s; }
+  .Loading .lds-ring div:nth-child(3) {
+    animation-delay: -0.15s; }
+  .Loading .stopLoading {
+    position: fixed;
+    top: 20px;
+    right: 20px;
+    font-size: xxx-large;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: white;
+    z-index: 10; }
+    .Loading .stopLoading:hover {
+      color: #916d07; }
+
+@keyframes lds-ring {
+  0% {
+    transform: rotate(0deg); }
+  100% {
+    transform: rotate(360deg); } }
+
 .TitleDescription {
   padding: 10px;
   width: 100%; }
@@ -114,7 +187,8 @@ body {
     padding: 3px 5px;
     width: 200px;
     height: 30px;
-    width: 95%; }
+    width: 95%;
+    background-color: white; }
   .TitleDescription .TitleDescriptionDescription {
     margin-top: 10px;
     min-height: 600px;
@@ -124,7 +198,8 @@ body {
     padding: 3px 5px;
     width: 200px;
     height: 30px;
-    width: 95%; }
+    width: 95%;
+    background-color: white; }
 
 .DropDownWidget {
   display: flex;
@@ -170,9 +245,13 @@ body {
       background-color: #f1f1f1;
       color: black;
       outline: none;
-      border: none;
+      border: 0.4px #9fa3a8 solid;
       padding: 8px 10px;
+      border-radius: 5px;
       border-radius: 5px; }
+      .ActionOnPost .ActionOnPostItem .saveDraftBtn:active, .ActionOnPost .ActionOnPostItem .previewBtn:active {
+        background-color: white;
+        border: none; }
       .ActionOnPost .ActionOnPostItem .saveDraftBtn:active, .ActionOnPost .ActionOnPostItem .previewBtn:active {
         background-color: white;
         color: #24282d; }
@@ -202,7 +281,8 @@ body {
 
 @media only screen and (min-width: 768px) {
   .Post {
-    grid-template-columns: 1fr 200px; } }
+    grid-template-columns: 1fr 200px;
+    grid-template-rows: none; } }
 
 .Format select {
   border: none;
@@ -210,17 +290,84 @@ body {
   padding: 4px;
   border-radius: 5px; }
 
+.PostCategoriesTagsActors .items {
+  display: flex;
+  flex-wrap: wrap; }
+  .PostCategoriesTagsActors .items .item {
+    display: flex;
+    font-size: x-small; }
+    .PostCategoriesTagsActors .items .item button {
+      outline: none;
+      border: none;
+      background-color: transparent; }
+      .PostCategoriesTagsActors .items .item button span {
+        color: #0073aa; }
+      .PostCategoriesTagsActors .items .item button:active {
+        background-color: white;
+        color: black; }
+
+
 .VideoInformation {
   width: 100%; }
+  .VideoInformation .saveBtn {
+    display: flex;
+    justify-content: center; }
+    .VideoInformation .saveBtn .SaveVideoDataBtn {
+      background-color: #0085ba;
+      color: white;
+      outline: none;
+      border: none;
+      padding: 8px 10px;
+      padding: 5px 20px;
+      font-size: large;
+      border-radius: 5px; }
   .VideoInformation .VideoInformationSection {
     display: grid;
     grid-template-columns: 30% 1fr;
     align-items: center; }
     .VideoInformation .VideoInformationSection .title {
-      padding: 2px; }
+      padding: 2px;
+      font-size: small; }
+      @media only screen and (min-width: 768px) {
+        .VideoInformation .VideoInformationSection .title {
+          font-size: medium; } }
+    .VideoInformation .VideoInformationSection .editor iframe {
+      width: 240px;
+      height: auto; }
+      @media only screen and (min-width: 768px) {
+        .VideoInformation .VideoInformationSection .editor iframe {
+          width: 100%;
+          min-height: 400px; } }
+    .VideoInformation .VideoInformationSection .editor img {
+      width: 240px;
+      height: auto; }
+      @media only screen and (min-width: 768px) {
+        .VideoInformation .VideoInformationSection .editor img {
+          width: 100%;
+          min-height: 400px; } }
     .VideoInformation .VideoInformationSection .editor .option {
       display: flex;
       align-items: center; }
+    .VideoInformation .VideoInformationSection .editor .durationItems {
+      display: flex; }
+      .VideoInformation .VideoInformationSection .editor .durationItems .durationItem {
+        margin: 0 5px;
+        display: flex;
+        background-color: #f1f1f1;
+        padding: 5px;
+        border-radius: 5px; }
+        .VideoInformation .VideoInformationSection .editor .durationItems .durationItem label {
+          margin: 0 0px;
+          padding: 0 0px; }
+        .VideoInformation .VideoInformationSection .editor .durationItems .durationItem input {
+          border: none;
+          border-radius: 5px;
+          padding: 3px; }
+    .VideoInformation .VideoInformationSection .editor select {
+      border: none;
+      background-color: #f1f1f1;
+      padding: 4px;
+      border-radius: 5px; }
     .VideoInformation .VideoInformationSection .editor .textInput {
       border-radius: 5px;
       outline: none;
@@ -239,14 +386,27 @@ body {
       height: 30px;
       background-color: #f1f1f1;
       width: 80%; }
+    .VideoInformation .VideoInformationSection .editor .TextInput {
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      padding: 3px 5px;
+      width: 200px;
+      height: 30px;
+      background-color: #f1f1f1;
+      width: 90%; }
     .VideoInformation .VideoInformationSection .editor .uploadBtn {
       background-color: #f1f1f1;
       color: black;
       outline: none;
-      border: none;
+      border: 0.4px #9fa3a8 solid;
       padding: 8px 10px;
+      border-radius: 5px;
       margin: 0 3px;
       border-radius: 5px; }
+      .VideoInformation .VideoInformationSection .editor .uploadBtn:active {
+        background-color: white;
+        border: none; }
     .VideoInformation .VideoInformationSection .editor .textareaInput {
       border-radius: 5px;
       outline: none;
@@ -259,6 +419,219 @@ body {
       min-height: 200px; }
 
 
+
+.Filters {
+  display: grid;
+  grid-template-columns: 1fr;
+  justify-content: space-between; }
+  .Filters .FilterStatusBtn {
+    display: flex;
+    justify-content: flex-start; }
+    .Filters .FilterStatusBtn button {
+      border: none;
+      color: #0073aa;
+      background: transparent; }
+    .Filters .FilterStatusBtn .active {
+      color: black;
+      background-color: white;
+      font-weight: bold; }
+
+@media only screen and (min-width: 768px) {
+  .Filters {
+    grid-template-columns: 1fr 400px; } }
+
+.FilterSearch {
+  display: flex;
+  justify-content: space-evenly;
+  align-items: center; }
+  .FilterSearch input {
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    padding: 3px 5px;
+    width: 200px;
+    height: 30px;
+    width: 200px;
+    background-color: white !important; }
+  .FilterSearch .actionBtn {
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: 0.4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px; }
+    .FilterSearch .actionBtn:active {
+      background-color: white;
+      border: none; }
+
+.FilterDropDownActions {
+  display: flex;
+  align-items: center; }
+  .FilterDropDownActions select {
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: 0.4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px;
+    background-color: white; }
+    .FilterDropDownActions select:active {
+      background-color: white;
+      border: none; }
+    .FilterDropDownActions select option {
+      height: 32px;
+      padding: 5px 10px; }
+  .FilterDropDownActions .actionBtn {
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: 0.4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px;
+    margin: 0 5px; }
+    .FilterDropDownActions .actionBtn:active {
+      background-color: white;
+      border: none; }
+  .FilterDropDownActions div {
+    margin-right: 4px; }
+
+.FilterPagination {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  max-width: 280px;
+  margin: auto;
+  font-size: 13px; }
+  .FilterPagination .pagesNavigation {
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .FilterPagination .pagesNavigation .totalPosts {
+      font-size: x-small; }
+    .FilterPagination .pagesNavigation .pageNumberInput {
+      text-align: center;
+      font-size: x-small; }
+    .FilterPagination .pagesNavigation button {
+      background-color: #f1f1f1;
+      color: black;
+      outline: none;
+      border: 0.4px #9fa3a8 solid;
+      padding: 8px 10px;
+      border-radius: 5px;
+      width: 30px;
+      height: 30px;
+      display: flex;
+      justify-content: center;
+      align-items: center; }
+      .FilterPagination .pagesNavigation button:active {
+        background-color: white;
+        border: none; }
+      .FilterPagination .pagesNavigation button span {
+        font-size: small; }
+  .FilterPagination .pagesNavigationMoreAction button {
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: 0.4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px; }
+    .FilterPagination .pagesNavigationMoreAction button:active {
+      background-color: white;
+      border: none; }
+    .FilterPagination .pagesNavigationMoreAction button span {
+      font-size: small; }
+  .FilterPagination input {
+    background-color: white !important;
+    max-width: 50px; }
+  .FilterPagination * {
+    margin: 0 3px; }
+  .FilterPagination .actionBtn i {
+    font-size: 8px; }
+  .FilterPagination input[type=number]::-webkit-inner-spin-button,
+  .FilterPagination input[type=number]::-webkit-outer-spin-button {
+    -webkit-appearance: none;
+    margin: 0; }
+
+.HeaderTable tr {
+  padding: 5px;
+  background-color: white;
+  align-items: center;
+  display: grid;
+  grid-template-columns: 30px 1fr;
+  grid-gap: 5px; }
+  .HeaderTable tr .HeaderTableItem {
+    max-width: 100px;
+    font-size: small; }
+  .HeaderTable tr .hiddenOnMobile {
+    display: none; }
+
+@media only screen and (min-width: 768px) {
+  .HeaderTable tr {
+    display: grid;
+    grid-template-columns: 3% 10% 12% 17% 17% 10% 7% 1fr;
+    grid-gap: 5px; }
+    .HeaderTable tr .hiddenOnMobile {
+      display: initial; } }
+
+.BodyTable .BodyTableItems {
+  display: grid; }
+  .BodyTable .BodyTableItems .tagCategoriesActorsPreview {
+    max-width: 100%;
+    overflow: hidden;
+    white-space: pre-wrap;
+    text-overflow: inherit; }
+    .BodyTable .BodyTableItems .tagCategoriesActorsPreview span {
+      color: #0073aa;
+      padding: 2px; }
+  .BodyTable .BodyTableItems .postColumn {
+    padding: 5px;
+    background-color: #f1f1f1;
+    display: grid;
+    grid-template-columns: 30px 1fr;
+    grid-gap: 5px;
+    align-items: center;
+    margin: 5px 0;
+    font-size: x-small; }
+    .BodyTable .BodyTableItems .postColumn .noMobile {
+      display: none; }
+    .BodyTable .BodyTableItems .postColumn img {
+      width: 170px; }
+    .BodyTable .BodyTableItems .postColumn .tagPreview {
+      grid-gap: 1px; }
+    .BodyTable .BodyTableItems .postColumn p {
+      text-align: left; }
+    .BodyTable .BodyTableItems .postColumn:hover {
+      background-color: #f1f1f1; }
+    .BodyTable .BodyTableItems .postColumn .author {
+      font-size: x-small; }
+    .BodyTable .BodyTableItems .postColumn .postControlOptions {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 32px; }
+      .BodyTable .BodyTableItems .postColumn .postControlOptions a, .BodyTable .BodyTableItems .postColumn .postControlOptions button {
+        font-size: xx-small;
+        border: none; }
+
+.BodyTable .author {
+  margin: 0 0 0 5px; }
+
+@media only screen and (min-width: 768px) {
+  .BodyTable .BodyTableItems .postColumn {
+    display: grid;
+    grid-template-columns: 3% 10% 12% 17% 17% 10% 7% 1fr;
+    grid-gap: 5px; }
+    .BodyTable .BodyTableItems .postColumn .noMobile {
+      display: initial; } }
+
+.DataTable {
+  width: 100%;
+  text-align: left; }
+  .DataTable * a {
+    padding: 3px;
+    text-decoration: none;
+    font-size: small; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

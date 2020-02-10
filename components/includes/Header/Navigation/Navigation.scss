@@ -25,6 +25,7 @@
     padding: 5px 10px;
     margin: 3px 10px;
     border-bottom: $dark80 solid 1px;
+
   }
 }
 
@@ -38,5 +39,8 @@
     background: linear-gradient(to bottom, #222 0%, #333 50%, #222 51%, #151515 100%);
     position: initial;
     flex-direction: row;
+      a{
+        border: none;
+    }
   }
 }
