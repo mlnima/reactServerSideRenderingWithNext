@@ -35,7 +35,6 @@ const postSchema = mongoose.Schema({
     durationM: Number,
     durationS: Number,
     lastModify: Date,
-    publishDate: Date,
     premium: Boolean,
     inSlideShow: Boolean
 });

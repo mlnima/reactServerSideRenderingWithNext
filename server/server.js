@@ -4,9 +4,12 @@ const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const userController = require('./controllers/userControllers');
 const postsControllers = require('./controllers/postsControllers');
+const siteMapController = require('./controllers/siteMapController');
+const siteMapsController = require('./controllers/siteMapsController');
+const subSiteMapsController = require('./controllers/subSiteMapsController');
 const path = require('path');
 const authMiddleware = require('./middlewares/authMiddleware');
-
+const xmlparser = require("express-xml-bodyparser");
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
@@ -28,11 +31,17 @@ const PORT = process.env.PORT || 3000;
 app.prepare().then(()=>{
     const server = express();
     server.use(bodyParser.json());
-
+    server.use(xmlparser());
     server.get('/robots.txt',(req,res)=>{
-        console.log(path.dirname );
         return res.status(200).sendFile('robots.txt',robotsOptions)
     });
+    server.get('/sitemap.xsl',(req,res)=>{ return res.status(200).sendFile('sitemap.xsl',robotsOptions) });
+
+
+    server.get('/sitemap.xml',(req,res)=>{siteMapController.siteMap(req,res)});
+    server.get('/sitemaps/:month',(req,res)=>{siteMapsController.siteMapMonths(req,res)});
+    server.get('/sitemap/:month/:pageNo',(req,res)=>{subSiteMapsController.siteMap(req,res)});
+
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});

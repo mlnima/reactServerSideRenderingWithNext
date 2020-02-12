@@ -43,6 +43,7 @@ const SideBar = props => {
                     postType : "video",
                     sourceSite : "Xhamster",
                     views : 0,
+                    lastModify:Date.now()
                 };
 
                 // let dataToSave = {
@@ -65,7 +66,7 @@ const SideBar = props => {
 if (contextData.settings.adminPanelSideBar){
     return (
         <div className='SideBar'>
-            {/*<button onClick={()=>generateFakeData()}>take fake data</button>*/}
+            <button onClick={()=>generateFakeData()}>take fake data</button>
             <Link href='/admin/posts'><a className='SideBarItem'>Posts</a></Link>
             <Link href='/admin/media'><a className='SideBarItem'>Media</a></Link>
             <Link href='/admin/psges'><a className='SideBarItem'>Pages</a></Link>
