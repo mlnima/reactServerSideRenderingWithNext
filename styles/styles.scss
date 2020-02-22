@@ -1,4 +1,38 @@
-@import "./colors";
+@import "../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost",
+"../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget",
+"../components/adminIncludes/PostComponents/Format/Format",
+"../components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors",
+"../components/adminIncludes/PostComponents/TitleDescription/TitleDescription",
+"../components/adminIncludes/PostComponents/VideoInformation/VideoInformation",
+"../components/adminIncludes/PostsComponents/Filters/FilterDropDownActions",
+"../components/adminIncludes/PostsComponents/Filters/FilterPagination",
+"../components/adminIncludes/PostsComponents/Filters/Filters",
+"../components/adminIncludes/PostsComponents/Filters/FilterSearch",
+"../components/adminIncludes/PostsComponents/Filters/FilterStatusBtn",
+"../components/adminIncludes/PostsComponents/PostsDataTable/BodyTable",
+"../components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable",
+"../components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable",
+"../components/adminIncludes/SideBar/SideBar",
+"../components/adminIncludes/TopBar/AdminTopBar",
+"../components/adminIncludes/TopBar/NewItemMenu/NewItemMenu",
+"../components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu",
+"../components/includes/Header/Header",
+"../components/includes/Header/Logo/Logo",
+"../components/includes/Header/Navigation/Navigation",
+"../components/includes/Loading/Loading",
+"../components/includes/Pagination/Pagination",
+"../components/includes/Posts/Posts",
+"../components/includes/ProgressBar/ProgressBar",
+"../components/includes/TopBar/TopBar",
+"../components/includes/VideoElement/VideoElement",
+"../components/includes/Widget/Widget",
+"../components/includes/Widget/WidgetFooter/WidgetFooter",
+"../components/includes/Widget/WidgetHeader/WidgetHeader",
+"../components/layouts/AdminLayout",
+"../components/layouts/AppLayout",
+"../pages/auth/registerLogin",
+"../pages/admin/post/post",
+"./colors";
 
 body {
   margin: 0;
@@ -11,25 +45,31 @@ body {
   color: $light100;
 }
 
-.svgImage{
+.svgImage {
   fill: white !important;
   background-color: white;
-  color:white;
+  color: white;
 }
 
-.fontawesomeMedium{
+.fontawesomeMedium {
   font-size: x-large;
 }
 
-input:focus, textarea:focus, select:focus{
+.fontawesomeSmall {
+  font-size: medium;
+}
+
+input:focus, textarea:focus, select:focus {
   outline: none;
 }
-input, textarea, select{
+
+input, textarea, select {
   border: none;
   background-color: $AdminBackground50;
   padding: 5px;
   border-radius: 5px;
 }
-a{
+
+a {
   text-decoration: none;
 }

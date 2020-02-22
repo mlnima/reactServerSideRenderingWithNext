@@ -1,6 +1,5 @@
 import React,{useEffect,useState,useContext} from 'react';
 import Link from "next/link";
-import './NewItemMenu.scss'
 const NewItemMenu = props => {
     const [state, setState] = useState({
     });

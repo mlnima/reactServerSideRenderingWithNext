@@ -2,14 +2,17 @@ import React, { useEffect, useRef, useState } from 'react';
 import jwtDecode from "jwt-decode";
 import jwt from 'jsonwebtoken';
 import axios from "axios";
+
 import { withRouter } from "next/router";
+
 
 export const AppContext = React.createContext();
 
 const AppProvider = props => {
 
     const [ state, dispatchState ] = useState({
-        loading: false
+        loading: false,
+        videoPreviewID:''
     });
     const [ settings, dispatchSettings ] = useState({
         adminPanelSideBar: false,
@@ -46,6 +49,19 @@ const AppProvider = props => {
         fields: [ 'author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories' ],
         checkedPosts: [],
     });
+    const [ Posts, dispatchPosts ] = useState([]);
+    const [ videoPostsDataForClient, dispatchVideoPostsDataForClient ] = useState({
+        pageNo: 1,
+        size: 12,
+        totalPosts: 0,
+        postType: 'all',
+        keyword: '',
+        status: 'all',
+        author: 'all',
+        fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
+        checkedPosts: [],
+    });
+
     const [ functions, dispatchFunctions ] = useState({
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
@@ -84,10 +100,10 @@ const AppProvider = props => {
         getPosts: async (data) => {
             const body = {
                 ...data,
-                token: localStorage.wt
             };
             return await axios.post('/api/v1/posts', body)
         },
+    //exported to variables file ----
         getPost: async (_id) => {
             const body = {
                 _id,
@@ -130,6 +146,27 @@ const AppProvider = props => {
                 token: localStorage.wt
             };
             return axios.post('/api/v1/posts/deletePost', body)
+        },
+        likeValueCalculator:(likes, dislikes) => {
+            let finalValue = 0;
+            if (likes > 0 && dislikes > 0) {
+                let total = likes + dislikes;
+                let likesTo100 = likes * 100;
+                let value = Math.round(likesTo100 / total);
+                finalValue = value;
+            }
+            if (likes === 0 && dislikes === 0) {
+                finalValue = 0;
+            }
+            if (likes === 0 && dislikes > 0) {
+                finalValue = 0;
+
+            }
+            if (likes > 0 && dislikes === 0) {
+                finalValue = 100
+            }
+            return finalValue
+
         }
     });
 
@@ -138,11 +175,6 @@ const AppProvider = props => {
     }, []);
 
     useEffect(() => {
-        console.log(editingPostData)
-    }, [ editingPostData ]);
-
-    useEffect(() => {
-        console.log(props)
         if (props.router.pathname === '/admin/posts') {
             functions.getPosts(adminPostsData).then(res => {
                 dispatchAdminPosts(res.data.posts);
@@ -152,7 +184,10 @@ const AppProvider = props => {
                 })
             })
         }
-    }, [ adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields ]);
+    }, [ props.router.pathname,adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields ]);
+
+
+
 
     return (
         <div>
@@ -171,16 +206,18 @@ const AppProvider = props => {
                     dispatchAdminPosts,
                     adminPostsData,
                     dispatchAdminPostsData,
+                    videoPostsDataForClient,
+                    dispatchVideoPostsDataForClient
                 } }>
 
-                { props.children }
+                {props.children }
             </AppContext.Provider>
         </div>
     )
 };
 
-AppProvider.getInitialProps = (ctx) => {
-    return { ctx }
-};
+
 
 export const AppProviderWithRouter = withRouter(AppProvider);
+
+//"dev": "nodemon -w ./server/server.js ./server/server.js",

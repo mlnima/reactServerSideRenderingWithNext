@@ -134,7 +134,8 @@ const AppProvider = props => {
     0: state,
     1: dispatchState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    loading: false
+    loading: false,
+    videoPreviewID: ''
   });
   const {
     0: settings,
@@ -187,6 +188,24 @@ const AppProvider = props => {
     checkedPosts: []
   });
   const {
+    0: Posts,
+    1: dispatchPosts
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const {
+    0: videoPostsDataForClient,
+    1: dispatchVideoPostsDataForClient
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    pageNo: 1,
+    size: 12,
+    totalPosts: 0,
+    postType: 'all',
+    keyword: '',
+    status: 'all',
+    author: 'all',
+    fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
+    checkedPosts: []
+  });
+  const {
     0: functions,
     1: dispatchFunctions
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
@@ -226,12 +245,11 @@ const AppProvider = props => {
       return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/updatePost', body);
     },
     getPosts: async data => {
-      const body = _objectSpread({}, data, {
-        token: localStorage.wt
-      });
+      const body = _objectSpread({}, data);
 
       return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts', body);
     },
+    //exported to variables file ----
     getPost: async _id => {
       const body = {
         _id,
@@ -269,17 +287,36 @@ const AppProvider = props => {
         token: localStorage.wt
       };
       return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/deletePost', body);
+    },
+    likeValueCalculator: (likes, dislikes) => {
+      let finalValue = 0;
+
+      if (likes > 0 && dislikes > 0) {
+        let total = likes + dislikes;
+        let likesTo100 = likes * 100;
+        let value = Math.round(likesTo100 / total);
+        finalValue = value;
+      }
+
+      if (likes === 0 && dislikes === 0) {
+        finalValue = 0;
+      }
+
+      if (likes === 0 && dislikes > 0) {
+        finalValue = 0;
+      }
+
+      if (likes > 0 && dislikes === 0) {
+        finalValue = 100;
+      }
+
+      return finalValue;
     }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     functions.getAndSetUserInfo();
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(editingPostData);
-  }, [editingPostData]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(props);
-
     if (props.router.pathname === '/admin/posts') {
       functions.getPosts(adminPostsData).then(res => {
         dispatchAdminPosts(res.data.posts);
@@ -288,7 +325,7 @@ const AppProvider = props => {
         }));
       });
     }
-  }, [adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields]);
+  }, [props.router.pathname, adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields]);
   return __jsx("div", null, __jsx(AppContext.Provider, {
     value: {
       state,
@@ -303,18 +340,14 @@ const AppProvider = props => {
       adminPosts,
       dispatchAdminPosts,
       adminPostsData,
-      dispatchAdminPostsData
+      dispatchAdminPostsData,
+      videoPostsDataForClient,
+      dispatchVideoPostsDataForClient
     }
   }, props.children));
 };
 
-AppProvider.getInitialProps = ctx => {
-  return {
-    ctx
-  };
-};
-
-const AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(AppProvider);
+const AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(AppProvider); //"dev": "nodemon -w ./server/server.js ./server/server.js",
 
 /***/ }),
 

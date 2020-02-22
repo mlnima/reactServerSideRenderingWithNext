@@ -3,7 +3,6 @@ import AdminLayout from "../../../components/layouts/AdminLayout";
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 import DropDownWidget from "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
-import './post.scss'
 import { AppContext } from "../../../context/AppContext";
 import Format from "../../../components/adminIncludes/PostComponents/Format/Format";
 import PostCategoriesTagsActors from "../../../components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors";
@@ -54,6 +53,8 @@ const Index = props => {
 
 Index.getInitialProps = async ({ query }) => {
 
-    return { query }
+    return { query,user:{
+            name:'nima'
+        } }
 };
 export default withRouter(Index);

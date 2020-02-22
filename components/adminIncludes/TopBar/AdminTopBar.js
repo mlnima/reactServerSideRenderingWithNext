@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import './AdminTopBar.scss';
 import { AppContext } from "../../../context/AppContext";
 import withRouter from "next/dist/client/with-router";
 import FA from "react-fontawesome";

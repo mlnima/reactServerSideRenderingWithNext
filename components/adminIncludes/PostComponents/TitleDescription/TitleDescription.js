@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useContext} from 'react';
-import './TitleDescription.scss'
+
 import { AppContext } from "../../../../context/AppContext";
 const TitleDescription = props => {
     const contextData = useContext(AppContext);

@@ -1,6 +1,6 @@
 import React, { useContext, useEffect } from 'react';
 import Link from "next/link";
-import './TopBar.scss';
+
 import { AppContext } from "../../../context/AppContext";
 import { withRouter } from "next/router";
 

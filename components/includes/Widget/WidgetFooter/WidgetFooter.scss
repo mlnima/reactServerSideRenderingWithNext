@@ -1,0 +1,10 @@
+@import "../../../../styles/colors";
+
+.WidgetFooter {
+  a {
+color: $light100;
+    background-color: $dark80;
+    padding: 10px;
+    border-radius: 5px;
+  }
+}

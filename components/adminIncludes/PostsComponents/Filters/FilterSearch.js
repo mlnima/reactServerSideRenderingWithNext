@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import { AppContext } from "../../../../context/AppContext";
-import './FilterSearch.scss'
 
 const FilterSearch = props => {
     let searchInput = useRef(null)

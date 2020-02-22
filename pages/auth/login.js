@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
-import './registerLogin.scss';
+
 import axios from 'axios'
 import { AppContext } from "../../context/AppContext";
 

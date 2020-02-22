@@ -1,6 +1,5 @@
 import React, { useState,useRef } from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
-import './registerLogin.scss';
 import withRouter from "next/dist/client/with-router";
 import axios from 'axios'
 

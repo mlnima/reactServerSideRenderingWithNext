@@ -1,5 +1,4 @@
 import React, {useContext} from 'react';
-import './Loading.scss'
 import { AppContext } from "../../../context/AppContext";
 
 

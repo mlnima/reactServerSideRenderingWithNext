@@ -1,0 +1,28 @@
+
+@mixin videoContentGridDesktop {
+
+  grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
+  grid-gap: 5px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+}
+
+
+
+@mixin videoContent {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  grid-gap: 10px;
+
+  @media only screen and (max-width: 320px) {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
+  }
+
+  @media only screen and (min-width: 1024px) {
+    @include videoContentGridDesktop;
+  }
+
+}

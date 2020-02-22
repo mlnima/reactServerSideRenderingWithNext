@@ -1,6 +1,5 @@
 import React, { useState, useRef , useEffect } from 'react';
 import Link from "next/link";
-import './Navigation.scss';
 import FA  from 'react-fontawesome'
 // import  BarsIcon from '../../../../styles/icons/bars-solid.svg'
 

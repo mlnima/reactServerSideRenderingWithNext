@@ -9,7 +9,6 @@ const Index = props => {
     return (
         <>
             <AdminLayout>
-
                 <div>
                     welcome to admin nima
                 </div>

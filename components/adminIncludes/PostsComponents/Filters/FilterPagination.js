@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from "../../../../context/AppContext";
-import './FilterPagination.scss'
 import FA from 'react-fontawesome';
 
 const FilterPagination = props => {

@@ -30,10 +30,7 @@ const postSchema = mongoose.Schema({
     price: Number,
     disLikes: Number,
     views: Number,
-    duration: Number,
-    durationH: Number,
-    durationM: Number,
-    durationS: Number,
+    duration: String,
     lastModify: Date,
     premium: Boolean,
     inSlideShow: Boolean

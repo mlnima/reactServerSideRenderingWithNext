@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState, useRef } from 'react';
 import Head from "next/head";
-import './AdminLayout.scss'
 import '../../styles/styles.scss';
 import TopBar from "../adminIncludes/TopBar/AdminTopBar";
 import SideBar from "../adminIncludes/SideBar/SideBar";

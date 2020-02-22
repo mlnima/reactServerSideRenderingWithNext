@@ -6,7 +6,7 @@ import React, { useEffect, useState, useContext, useRef, createRef } from 'react
 import { AppContext } from "../../../../context/AppContext";
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
-import './BodyTable.scss'
+
 
 const BodyTable = props => {
     const contextData = useContext(AppContext);
@@ -217,7 +217,6 @@ const BodyTable = props => {
     return (
         <tbody className='BodyTable'>
         { renderPosts }
-        xxc
         </tbody>
     );
 };

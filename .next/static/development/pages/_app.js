@@ -62,7 +62,8 @@ var AppContext = react__WEBPACK_IMPORTED_MODULE_9___default.a.createContext();
 
 var AppProvider = function AppProvider(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
-    loading: false
+    loading: false,
+    videoPreviewID: ''
   }),
       state = _useState[0],
       dispatchState = _useState[1];
@@ -117,7 +118,25 @@ var AppProvider = function AppProvider(props) {
       adminPostsData = _useState6[0],
       dispatchAdminPostsData = _useState6[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])([]),
+      Posts = _useState7[0],
+      dispatchPosts = _useState7[1];
+
+  var _useState8 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
+    pageNo: 1,
+    size: 12,
+    totalPosts: 0,
+    postType: 'all',
+    keyword: '',
+    status: 'all',
+    author: 'all',
+    fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
+    checkedPosts: []
+  }),
+      videoPostsDataForClient = _useState8[0],
+      dispatchVideoPostsDataForClient = _useState8[1];
+
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
     getAndSetUserInfo: function getAndSetUserInfo() {
       return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7___default.a.async(function getAndSetUserInfo$(_context) {
         while (1) {
@@ -198,9 +217,7 @@ var AppProvider = function AppProvider(props) {
         while (1) {
           switch (_context4.prev = _context4.next) {
             case 0:
-              body = _objectSpread({}, data, {
-                token: localStorage.wt
-              });
+              body = _objectSpread({}, data);
               _context4.next = 3;
               return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_12___default.a.post('/api/v1/posts', body));
 
@@ -214,6 +231,7 @@ var AppProvider = function AppProvider(props) {
         }
       });
     },
+    //exported to variables file ----
     getPost: function getPost(_id) {
       var body;
       return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7___default.a.async(function getPost$(_context5) {
@@ -267,20 +285,39 @@ var AppProvider = function AppProvider(props) {
         token: localStorage.wt
       };
       return axios__WEBPACK_IMPORTED_MODULE_12___default.a.post('/api/v1/posts/deletePost', body);
+    },
+    likeValueCalculator: function likeValueCalculator(likes, dislikes) {
+      var finalValue = 0;
+
+      if (likes > 0 && dislikes > 0) {
+        var total = likes + dislikes;
+        var likesTo100 = likes * 100;
+        var value = Math.round(likesTo100 / total);
+        finalValue = value;
+      }
+
+      if (likes === 0 && dislikes === 0) {
+        finalValue = 0;
+      }
+
+      if (likes === 0 && dislikes > 0) {
+        finalValue = 0;
+      }
+
+      if (likes > 0 && dislikes === 0) {
+        finalValue = 100;
+      }
+
+      return finalValue;
     }
   }),
-      functions = _useState7[0],
-      dispatchFunctions = _useState7[1];
+      functions = _useState9[0],
+      dispatchFunctions = _useState9[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_9__["useEffect"])(function () {
     functions.getAndSetUserInfo();
   }, []);
   Object(react__WEBPACK_IMPORTED_MODULE_9__["useEffect"])(function () {
-    console.log(editingPostData);
-  }, [editingPostData]);
-  Object(react__WEBPACK_IMPORTED_MODULE_9__["useEffect"])(function () {
-    console.log(props);
-
     if (props.router.pathname === '/admin/posts') {
       functions.getPosts(adminPostsData).then(function (res) {
         dispatchAdminPosts(res.data.posts);
@@ -289,7 +326,7 @@ var AppProvider = function AppProvider(props) {
         }));
       });
     }
-  }, [adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields]);
+  }, [props.router.pathname, adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields]);
   return __jsx("div", null, __jsx(AppContext.Provider, {
     value: {
       state: state,
@@ -304,18 +341,14 @@ var AppProvider = function AppProvider(props) {
       adminPosts: adminPosts,
       dispatchAdminPosts: dispatchAdminPosts,
       adminPostsData: adminPostsData,
-      dispatchAdminPostsData: dispatchAdminPostsData
+      dispatchAdminPostsData: dispatchAdminPostsData,
+      videoPostsDataForClient: videoPostsDataForClient,
+      dispatchVideoPostsDataForClient: dispatchVideoPostsDataForClient
     }
   }, props.children));
 };
 
-AppProvider.getInitialProps = function (ctx) {
-  return {
-    ctx: ctx
-  };
-};
-
-var AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_13__["withRouter"])(AppProvider);
+var AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_13__["withRouter"])(AppProvider); //"dev": "nodemon -w ./server/server.js ./server/server.js",
 
 /***/ }),
 

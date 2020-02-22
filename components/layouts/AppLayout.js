@@ -1,7 +1,6 @@
-import React from 'react';
+import React,{useContext} from 'react';
 import Head from "next/head";
 import Header from "../includes/Header/Header";
-import './AppLayout.scss'
 import '../../styles/styles.scss';
 import TopBar from "../includes/TopBar/TopBar";
 import Navigation from "../includes/Header/Navigation/Navigation";
@@ -38,5 +37,6 @@ const AppLayout = props => {
         </>
     );
 };
+
 
 export default AppLayout;

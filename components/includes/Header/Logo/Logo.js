@@ -1,5 +1,4 @@
 import React from 'react';
-import './Logo.scss';
 import Link from "next/link";
 
 const Logo = () => {

@@ -1,0 +1,12 @@
+.progressParent{
+  position: relative;
+  height: 15px;
+  background-color: black;
+  .progressChild{
+    height: 100%;
+    position: absolute;
+    background-color: gray;
+    color: white;
+    font-size: small;
+  }
+}

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from "../../../../context/AppContext";
 import FA from "react-fontawesome";
-import './PostCategoriesTagsActors.scss'
+
 const PostCategoriesTagsActors = props => {
     const contextData = useContext(AppContext);
     const [ items, setItems ] = useState([]);

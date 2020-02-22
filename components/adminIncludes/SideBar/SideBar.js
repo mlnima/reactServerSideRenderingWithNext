@@ -1,5 +1,5 @@
 import React,{useEffect,useState,useContext} from 'react';
-import './SideBar.scss'
+
 import { AppContext } from "../../../context/AppContext";
 import Link from "next/link";
 import axios from "axios";
@@ -38,6 +38,7 @@ const SideBar = props => {
                     videoTrailerUrl :post.imagePreviewUrl,
                     videoEmbedCode:post.iframe,
                     likes : 0,
+                    duration:post.duration,
                     quality : post.quality,
                     status : 'published',
                     postType : "video",

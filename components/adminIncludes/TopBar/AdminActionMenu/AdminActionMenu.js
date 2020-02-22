@@ -1,6 +1,5 @@
 import React from 'react';
 
-import './AdminActionMenu.scss'
 
 const AdminActionMenu = props => {
     if (props.active) {

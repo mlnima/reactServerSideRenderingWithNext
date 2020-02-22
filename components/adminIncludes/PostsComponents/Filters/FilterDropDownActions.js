@@ -1,7 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import { AppContext } from "../../../../context/AppContext";
-import './FilterDropDownActions.scss'
-
 
 const FilterDropDownActions = props => {
     const contextData = useContext(AppContext);

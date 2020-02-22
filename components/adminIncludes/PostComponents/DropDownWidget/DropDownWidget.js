@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext } from 'react';
-import './DropDownWidget.scss';
 import FA from "react-fontawesome";
 
 const DropDownWidget =props => {

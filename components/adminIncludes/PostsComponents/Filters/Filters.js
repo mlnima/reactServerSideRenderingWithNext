@@ -1,5 +1,4 @@
 import React,{useEffect,useState,useContext} from 'react';
-import './Filters.scss';
 import FilterStatusBtn from "./FilterStatusBtn";
 import FilterSearch from "./FilterSearch";
 import FilterDropDownActions from "./FilterDropDownActions";

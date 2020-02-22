@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import DropDownWidget from "../DropDownWidget/DropDownWidget";
 import { AppContext } from "../../../../context/AppContext";
-import './ActionOnPost.scss'
 import FA from "react-fontawesome";
 import withRouter from "next/dist/client/with-router";
 const ActionOnPost = props => {
@@ -21,6 +20,16 @@ const ActionOnPost = props => {
         }
     };
 
+
+    const onStatusChangeHandler = e =>{
+        contextData.dispatchEditingPostData(editingPostData=>({
+            ...editingPostData,
+            status:e.target.value
+        }))
+    };
+
+
+
     return (
         <div className='ActionOnPost'>
             <div className='ActionOnPostItem'>
@@ -29,11 +38,11 @@ const ActionOnPost = props => {
             </div>
             <div className='ActionOnPostItem'>
                 <p><FA className='fontawesomeMedium' name='key'/> Status:{ contextData.editingPostData.status }</p>
-                <select defaultValue={contextData.editingPostData.status?contextData.editingPostData.status:'draft'}>
-                    <option value={contextData.editingPostData.status}>{contextData.editingPostData.status}</option>
-                    <option value='Published'>Published</option>
-                    <option value='Draft'>Draft</option>
-                    <option value='Trash'>Trash</option>
+                <select defaultValue={contextData.editingPostData.status?contextData.editingPostData.status:'draft'} onChange={e=>onStatusChangeHandler(e)}>
+                    <option value={contextData.editingPostData.status}>{contextData.editingPostData.status.charAt(0).toUpperCase() + contextData.editingPostData.status.slice(1)}</option>
+                    <option value='published'>Published</option>
+                    <option value='draft'>Draft</option>
+                    <option value='trash'>Trash</option>
                 </select>
             </div>
             <div className='ActionOnPostItem'>

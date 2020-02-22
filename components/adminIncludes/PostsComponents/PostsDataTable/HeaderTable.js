@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext} from 'react';
 import { AppContext } from "../../../../context/AppContext";
-import './HeaderTable.scss'
+
 
 
 const HeaderTable = props => {
