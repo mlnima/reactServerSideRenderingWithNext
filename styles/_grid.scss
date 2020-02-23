@@ -1,4 +1,3 @@
-
 @mixin videoContentGridDesktop {
 
   grid-template-columns: repeat(auto-fill, minmax(256px, 1fr));
@@ -8,8 +7,6 @@
   margin: auto;
 
 }
-
-
 
 @mixin videoContent {
   display: grid;

@@ -4985,7 +4985,7 @@ function tryApplyUpdates(onHotUpdateSuccess) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          handleApplyUpdates = function _ref(err, updatedModules) {
+          handleApplyUpdates = function _ref2(err, updatedModules) {
             if (err || hadRuntimeError) {
               if (err) {
                 console.warn('Error while applying updates, reloading page', err);
@@ -6668,9 +6668,9 @@ var asPath = (0, _utils.getURL)();
 var pageLoader = new _pageLoader["default"](buildId, prefix);
 
 var register = function register(_ref) {
-  var _ref2 = _slicedToArray(_ref, 2),
-      r = _ref2[0],
-      f = _ref2[1];
+  var _ref6 = _slicedToArray(_ref, 2),
+      r = _ref6[0],
+      f = _ref6[1];
 
   return pageLoader.registerPage(r, f);
 };
@@ -6769,13 +6769,13 @@ var emitter = (0, _mitt["default"])();
 exports.emitter = emitter;
 
 var _default = function _default(_temp) {
-  var _ref, passedWebpackHMR, _ref3, app, mod, initialErr, _require, isValidElementType, renderCtx;
+  var _ref7, passedWebpackHMR, _ref8, app, mod, initialErr, _require, isValidElementType, renderCtx;
 
   return _regeneratorRuntime.async(function _default$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _ref = _temp === void 0 ? {} : _temp, passedWebpackHMR = _ref.webpackHMR; // This makes sure this specific lines are removed in production
+          _ref7 = _temp === void 0 ? {} : _temp, passedWebpackHMR = _ref7.webpackHMR; // This makes sure this specific lines are removed in production
 
           if (true) {
             webpackHMR = passedWebpackHMR;
@@ -6785,9 +6785,9 @@ var _default = function _default(_temp) {
           return _regeneratorRuntime.awrap(pageLoader.loadPageScript('/_app'));
 
         case 4:
-          _ref3 = _context.sent;
-          app = _ref3.page;
-          mod = _ref3.mod;
+          _ref8 = _context.sent;
+          app = _ref8.page;
+          mod = _ref8.mod;
           App = app;
 
           if (mod && mod.unstable_onPerformanceData) {

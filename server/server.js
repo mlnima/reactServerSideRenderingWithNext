@@ -47,15 +47,30 @@ app.prepare().then(()=>{
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts',(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts/post',authMiddleware,(req,res)=>{postsControllers.getPostInfo(req,res)});
+    server.post('/api/v1/posts/post',(req,res)=>{postsControllers.getPostInfo(req,res)});
     server.post('/api/v1/posts/createNewPost',authMiddleware,(req,res)=>{postsControllers.createNewPost(req,res)});
     server.post('/api/v1/posts/updatePost',authMiddleware,(req,res)=>{postsControllers.updatePost(req,res)});
     server.post('/api/v1/posts/deletePost',authMiddleware,(req,res)=>{postsControllers.deletePost(req,res)});
     server.post('/api/v1/posts/postsBulkAction',authMiddleware,(req,res)=>{postsControllers.postsBulkAction(req,res)});
 
+//-------------------post route bad for SEO----------------------
+    server.get('/post/:id/:postTitle',(req,res)=>{
+        const targetComponent = '/post';
+        app.render(req,res,targetComponent)
+
+    });
+//---------------------------------------------------------------
+    server.get('/:postTitle',(req,res)=>{
+        const targetComponent = '/post';
+        const params = {postTitle:req.params.postTitle}
+        app.render(req,res,targetComponent,params)
+
+    });
+
     server.get('*',(req,res)=>{
         return handle(req,res)
     });
+
     server.listen(PORT,(err)=>{
         if (err) throw err;
         console.log( `server run on ${PORT}`)

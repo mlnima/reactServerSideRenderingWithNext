@@ -1,0 +1,87 @@
+.post {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-rows: 2fr;
+  grid-template-areas: 'post-main' 'post-sidebar';
+
+  .post-sidebar {
+    grid-area: post-sidebar;
+  }
+
+  .main {
+    grid-area: post-main;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin: auto;
+   width:98%;
+
+    .video-player {
+      position: relative;
+      right: 0;
+      left: 0;
+      width: 100%;
+      //height: 100%;
+      .responsive-player{
+        overflow:hidden;
+        position: relative;
+        padding-bottom: 56.25%;
+        height: 0;
+        iframe{
+          position: absolute;
+          top: 0;
+          left: 0;
+          //bottom: 0;
+          //right: 0;
+          height:100%;
+          width:100%;
+        }
+      }
+
+    }
+
+    .download-link {
+      background-color: red;
+      color: white;
+      width: 250px;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      margin: 10px;
+    }
+
+    .post-info {
+      width: 100%;
+      max-width:1280px;
+      max-height:720px;
+       h1{
+         font-size: 1.25em;
+       }
+      .tags-categories {
+        margin: 10px 0;
+        max-width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+        grid-gap: 10px;
+
+        a {
+          background-color: #916d07;
+          color: white;
+          padding: 5px;
+          border-radius: 5px;
+        }
+      }
+    }
+  }
+
+}
+
+@media only screen and (min-width: 768px) {
+  .post {
+    grid-template-columns: 250px 1fr;
+
+    //grid-template-rows: 2fr;
+    grid-template-areas: 'post-sidebar post-main';
+  }
+}

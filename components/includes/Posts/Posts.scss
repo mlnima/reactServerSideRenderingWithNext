@@ -1,6 +1,7 @@
 @import "../../../styles/_grid";
-.Videos{
-  .videoContent{
+
+.Videos {
+  .videoContent {
     @include videoContent;
   }
 

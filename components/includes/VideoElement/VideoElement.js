@@ -112,7 +112,12 @@ const VideoElement = props => {
     }
     return (
         < div ref={element} className='videoElementDiv'>
-            <Link href={path}>
+            <Link as={`/${props.state.title}`} href={{
+                pathname:'/post',
+                query:{
+                    postTitle:props.state.title
+                }
+            }}>
                 <a>
                 <div className='VideoElement' key={props.state.title}>
                     <div className="image">

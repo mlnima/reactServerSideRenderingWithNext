@@ -6,7 +6,7 @@ import Posts from "../components/includes/Posts/Posts";
 import withRouter from "next/dist/client/with-router";
 import {getPosts} from "../_variables/ajaxPostsVariables";
 import axios from "axios";
-const fetch = require('node-fetch');
+
 const Home = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({});
@@ -19,9 +19,9 @@ const Home = props => {
             </div>
         )
     };
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [ props ]);
 
 
     return (
@@ -29,7 +29,7 @@ const Home = props => {
             <div className='HomePage'>
                 <h1>Header 1</h1>
                 {/*<Widget component={Videos} title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={true} contextData={contextData} />*/ }
-                <Posts />
+                <Posts posts={props.posts} />
             </div>
         </AppLayout>
     );
@@ -61,7 +61,7 @@ Home.getInitialProps = async ({pathname,query,req,res,err}) => {
     //     body: JSON.stringify(data) // body data type must match "Content-Type" header
     // })
 
-    return {posts:posts.data }
+    return {posts:posts.data.posts }
 };
 export default withRouter(Home);
 

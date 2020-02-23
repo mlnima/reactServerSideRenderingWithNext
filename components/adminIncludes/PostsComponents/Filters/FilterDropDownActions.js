@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from "../../../../context/AppContext";
 
 const FilterDropDownActions = props => {
@@ -6,7 +6,7 @@ const FilterDropDownActions = props => {
     const bulkAction = useRef(null);
     const typeToDisplay = useRef(null);
 
-    const [state, setState] = useState({});
+    const [ state, setState ] = useState({});
     // useEffect(() => {
     //     typeToDisplay.current.value = contextData.postsData.type
     // }, []);
@@ -28,8 +28,7 @@ const FilterDropDownActions = props => {
         // }
     };
 
-
-    const changePostsTypeToDisplay = e=>{
+    const changePostsTypeToDisplay = e => {
         // if (e.target.value !== 'none') {
         //     contextData.setPostsData({
         //         ...contextData.postsData,
@@ -38,8 +37,7 @@ const FilterDropDownActions = props => {
         // }
     };
 
-
-    const onEmptyTrashHandler = ()=>{
+    const onEmptyTrashHandler = () => {
         // emptyTrash().then(res=>{
         //     if (res.data.error){
         //         contextData.setState({
@@ -67,30 +65,29 @@ const FilterDropDownActions = props => {
         // })
     }
 
-
-    const EmptyTrash =()=>{
+    const EmptyTrash = () => {
         // if (contextData.postsData.status === 'Trash'){
         //     return (
         //         <button onClick={()=>onEmptyTrashHandler()}>Empty Trash</button>
         //     )
         // }else
-            return null
+        return null
     };
 
     return (
         <div className='FilterDropDownActions'>
             <div className="bulkAction">
-                <select ref={bulkAction} placeholder='Bulk Actions' >
+                <select ref={ bulkAction } placeholder='Bulk Actions'>
                     <option value='none'>Bulk Actions</option>
                     <option value='Published'>Published</option>
                     <option value='Draft'>Draft</option>
                     <option value='Trash'>Trash</option>
                 </select>
-                <button className='actionBtn' onClick={() => onFormatChangeHandler()}>Apply</button>
+                <button className='actionBtn' onClick={ () => onFormatChangeHandler() }>Apply</button>
             </div>
             <div className="DateCategoryFotmat">
-                <select ref={typeToDisplay} onChange={e => changePostsTypeToDisplay(e)}>
-                    {/*<option value='none'>All formats</option>*/}
+                <select ref={ typeToDisplay } onChange={ e => changePostsTypeToDisplay(e) }>
+                    {/*<option value='none'>All formats</option>*/ }
                     <option value='Video'>Video</option>
                     <option value='Standard'>Standard</option>
                 </select>
