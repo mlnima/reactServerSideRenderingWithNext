@@ -8,7 +8,10 @@ const DownloadLink = props => {
 
     if (props.downloadLink) {
         return (
-          <a href={ props.downloadLink } target='_blank' className='download-link'>Download</a>
+            <div id='download-url'>
+                <a href={ props.downloadLink } target='_blank' className='download-link'>Download</a>
+            </div>
+
         );
     } else return null
 

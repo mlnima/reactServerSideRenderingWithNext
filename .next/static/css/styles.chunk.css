@@ -535,7 +535,7 @@
 
 .navigationMobileBtn {
   display: initial;
-  position: fixed;
+  position: absolute;
   top: 50px;
   right: 20px;
   background-color: transparent;
@@ -546,18 +546,19 @@
 .Navigation {
   display: none;
   justify-content: flex-start;
-  background-color: #181818;
+  background-color: #282828;
   flex-direction: column;
   position: fixed;
   top: 100px;
   transition: 1s;
-  width: 100%; }
+  width: 100%;
+  z-index: 2; }
   .Navigation a {
     text-decoration: none;
     color: white;
-    padding: 5px 10px;
-    margin: 3px 10px;
-    border-bottom: #282828 solid 1px; }
+    padding: 10px;
+    box-sizing: border-box;
+    border-bottom: #181818 solid 1px; }
 
 @media only screen and (min-width: 768px) {
   .navigationMobileBtn {
@@ -915,36 +916,62 @@
           left: 0;
           height: 100%;
           width: 100%; }
-    .post .main .download-link {
-      background-color: red;
-      color: white;
-      width: 250px;
-      padding: 10px;
-      text-align: center;
-      border-radius: 5px;
-      margin: 10px; }
+    .post .main #download-url {
+      width: 100%;
+      margin: 20px 0; }
+      .post .main #download-url .download-link {
+        background-color: red;
+        color: white;
+        width: 250px;
+        padding: 10px;
+        text-align: center;
+        border-radius: 5px;
+        margin: 10px; }
     .post .main .post-info {
       width: 100%;
-      max-width: 1280px;
-      max-height: 720px; }
+      box-sizing: border-box;
+      padding: 10px;
+      background-color: #181818; }
       .post .main .post-info h1 {
         font-size: 1.25em; }
-      .post .main .post-info .tags-categories {
-        margin: 10px 0;
-        max-width: 100%;
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-        grid-gap: 10px; }
-        .post .main .post-info .tags-categories a {
-          background-color: #916d07;
-          color: white;
-          padding: 5px;
-          border-radius: 5px; }
+      .post .main .post-info .like button {
+        background-color: transparent;
+        color: white;
+        outline: none;
+        border: none; }
+        .post .main .post-info .like button:disabled {
+          color: #33373c; }
+      .post .main .post-info .tags-categories-actors {
+        margin: 30px 0; }
+        .post .main .post-info .tags-categories-actors span {
+          display: flex; }
+          .post .main .post-info .tags-categories-actors span span {
+            margin: 0 5px; }
+        .post .main .post-info .tags-categories-actors .content {
+          padding: 10px 0;
+          max-width: 100%;
+          display: flex;
+          flex-wrap: wrap; }
+          .post .main .post-info .tags-categories-actors .content a {
+            margin: 5px;
+            background-color: #FF3565;
+            color: white;
+            padding: 5px;
+            border-radius: 5px; }
+          .post .main .post-info .tags-categories-actors .content .actors {
+            background-color: transparent;
+            color: #FF3565; }
 
 @media only screen and (min-width: 768px) {
   .post {
-    grid-template-columns: 250px 1fr;
-    grid-template-areas: 'post-sidebar post-main'; } }
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 'post-sidebar post-main';
+    grid-gap: 10px; }
+    .post .main .video-player .responsive-player iframe {
+      padding: 15px; }
+    .post .main .post-info .tags-categories-actors {
+      display: flex;
+      align-items: center; } }
 
 body {
   margin: 0;

@@ -89,24 +89,22 @@ postsControllers.getPostsInfo = async (req, res) => {
 postsControllers.getPostInfo =  (req, res) =>{
     const _id = req.body._id;
     const postTitle = req.body.postTitle;
-    postSchema.findOne({title:postTitle}).exec().then(post=>{
-        res.json({ post, error: false });
-        res.end()
-    })
-
-
-
-
-
-    // postSchema.findById(_id).exec().then(post=>{
-    //     res.json({ post, error: false });
-    //     res.end()
-    // }).catch(err=>{
-    //     console.log( err);
-    //     return res.status(500).json({
-    //         message: 'Server Error'
-    //     })
-    // })
+    if (postTitle){
+        postSchema.findOne({title:postTitle}).exec().then(post=>{
+            res.json({ post, error: false });
+            res.end()
+        })
+    }else if (_id){
+        postSchema.findById(_id).exec().then(post=>{
+            res.json({ post, error: false });
+            res.end()
+        }).catch(err=>{
+            console.log( err);
+            return res.status(500).json({
+                message: 'Server Error'
+            })
+        })
+    }
 };
 
 

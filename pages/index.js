@@ -42,7 +42,7 @@ Home.getInitialProps = async ({pathname,query,req,res,err}) => {
         totalPosts: 0,
         postType: 'all',
         keyword: '',
-        status: 'all',
+        status: 'published',
         author: 'all',
         fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
         checkedPosts: [],

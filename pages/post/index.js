@@ -21,10 +21,11 @@ const Post = props => {
                 <Head>
                     <title>{ props.post.title }</title>
                     <meta name="description" content={ props.post.description }/>
-                    <meta name="keywords" content={ [ ...props.post.tags, ...props.post.categories ] }/>
+                    <meta name="keywords" content={ [ ...props.post.tags, ...props.post.categories,...props.post.actors ] }/>
                     <meta property="og:title" content={ props.post.title }/>
                     <meta property="og:type" content={ props.post.postType === 'video' ? props.post.postType + '.' + 'movies' : props.post.postType }/>
-                    <meta property="og:url" content={ props.post.source }/>
+                    {/*url should define*/}
+                    <meta property="og:url" content={ props.post.videoEmbedCode }/>
                     <meta property="og:image" content={ props.post.mainThumbnail }/>
                 </Head>
                 <div className='post'>
@@ -39,7 +40,7 @@ const Post = props => {
                             uploadDate: props.post.lastModify,
                         } }/>
                         <DownloadLink downloadLink={ props.post.videoEmbedCode }/>
-                        <PostInfo title={ props.post.title } description={ props.post.description } tags={ props.post.tags } categories={ props.post.categories }/>
+                        <PostInfo title={ props.post.title } description={ props.post.description } tags={ props.post.tags } actors={ props.post.actors } categories={ props.post.categories }/>
                     </div>
                 </div>
             </>

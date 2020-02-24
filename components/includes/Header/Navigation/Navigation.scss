@@ -3,7 +3,7 @@
 
 .navigationMobileBtn {
   display: initial;
-  position: fixed;
+  position: absolute;
   top:50px ;
   right: 20px;
   @include transparentLightTextBtn;
@@ -12,19 +12,21 @@
 .Navigation {
   display: none;
   justify-content: flex-start;
-  background-color: $dark90;
+  background-color: $dark80;
   flex-direction: column;
   position: fixed;
   top: 100px;
   transition: 1s;
   //right: 50px;
   width: 100%;
+  z-index: 2;
   a {
     text-decoration: none;
     color: white;
-    padding: 5px 10px;
-    margin: 3px 10px;
-    border-bottom: $dark80 solid 1px;
+    padding:  10px;
+    box-sizing: border-box;
+    //margin: 3px 10px;
+    border-bottom: $dark90 solid 1px;
 
   }
 }

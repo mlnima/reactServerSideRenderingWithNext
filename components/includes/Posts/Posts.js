@@ -6,6 +6,7 @@ import Pagination from "../Pagination/Pagination";
 import withRouter from "next/dist/client/with-router";
 import Home from "../../../pages";
 
+
 const Posts = props => {
     const contextData = useContext(AppContext);
     const [ postsData, setPostsData ] = useState({

@@ -252,8 +252,8 @@ const Navigation = () => {
     onClick: () => onNavigationMobileBtnClickHandler()
   }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: "fontawesomeMedium",
-    name: "bars"
-  }), " "), __jsx("div", {
+    name: navigationData.isOpen ? 'times' : 'bars'
+  })), __jsx("div", {
     ref: navigation,
     className: "Navigation"
   }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
@@ -342,11 +342,13 @@ const DownloadLink = props => {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
 
   if (props.downloadLink) {
-    return __jsx("a", {
+    return __jsx("div", {
+      id: "download-url"
+    }, __jsx("a", {
       href: props.downloadLink,
       target: "_blank",
       className: "download-link"
-    }, "Download");
+    }, "Download"));
   } else return null;
 };
 
@@ -417,8 +419,11 @@ const Iframe = props => {
 __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _TagsAndCategories_TagsAndCategories__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TagsAndCategories/TagsAndCategories */ "./components/includes/Post/TagsAndCategories/TagsAndCategories.js");
+/* harmony import */ var _TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TagsAndCategoriesActors/TagsAndCategoriesActors */ "./components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js");
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-fontawesome */ "react-fontawesome");
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_2__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
 
 
 
@@ -432,14 +437,23 @@ const PostInfo = props => {
     className: "post-info"
   }, __jsx("h1", null, props.title), __jsx("div", {
     className: "like"
-  }, __jsx("button", null, "like"), __jsx("button", null, "dislike")), __jsx("div", {
+  }, __jsx("button", null, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    className: "fontawesomeMedium",
+    name: "thumbs-up"
+  })), __jsx("button", null, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    className: "fontawesomeMedium",
+    name: "thumbs-down"
+  }))), __jsx("div", {
     className: "views"
   }), __jsx("div", {
     className: "description"
-  }, props.description), __jsx(_TagsAndCategories_TagsAndCategories__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, props.description), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
+    type: "actors",
+    data: props.actors
+  }), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
     type: "tags",
     data: props.tags
-  }), __jsx(_TagsAndCategories_TagsAndCategories__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
     type: "categories",
     data: props.categories
   }));
@@ -478,10 +492,10 @@ const PostSidebar = props => {
 
 /***/ }),
 
-/***/ "./components/includes/Post/TagsAndCategories/TagsAndCategories.js":
-/*!*************************************************************************!*\
-  !*** ./components/includes/Post/TagsAndCategories/TagsAndCategories.js ***!
-  \*************************************************************************/
+/***/ "./components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js":
+/*!*************************************************************************************!*\
+  !*** ./components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js ***!
+  \*************************************************************************************/
 /*! exports provided: default */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
@@ -491,34 +505,73 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-fontawesome */ "react-fontawesome");
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_2__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
-const TagsAndCategories = props => {
+
+
+
+const TagsAndCategoriesActors = props => {
   const {
     0: state,
     1: setState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     data: props.data || [],
-    type: props.type || 'tags'
+    type: props.type || 'tags',
+    fontawesome: ''
   });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    let fontawesome = '';
+
+    switch (props.type) {
+      case 'actors':
+        fontawesome = 'star';
+        break;
+
+      case 'tags':
+        fontawesome = 'tags';
+        break;
+
+      case 'categories':
+        fontawesome = 'folder';
+        break;
+    }
+
+    setState(_objectSpread({}, state, {
+      fontawesome
+    }));
+  }, []);
   const renderData = state.data.map(item => {
     const path = '/' + state.type + '/' + item;
     return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
       href: path,
       key: item
-    }, __jsx("a", null, item, "xx"));
+    }, __jsx("a", {
+      className: state.type
+    }, item));
   });
 
-  if (props.data) {
+  if (props.data.length > 1) {
     return __jsx("div", {
-      className: state.type + ' tags-categories'
-    }, renderData);
+      className: state.type + ' tags-categories-actors'
+    }, __jsx("span", null, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      className: "fontawesomeMedium",
+      name: state.fontawesome
+    }), " ", state.type.charAt(0).toUpperCase() + state.type.substring(1), ":"), __jsx("div", {
+      className: "content"
+    }, renderData));
   } else return null;
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (TagsAndCategories);
+/* harmony default export */ __webpack_exports__["default"] = (TagsAndCategoriesActors);
 
 /***/ }),
 
@@ -2610,7 +2663,7 @@ const Post = props => {
     content: props.post.description
   }), __jsx("meta", {
     name: "keywords",
-    content: [...props.post.tags, ...props.post.categories]
+    content: [...props.post.tags, ...props.post.categories, ...props.post.actors]
   }), __jsx("meta", {
     property: "og:title",
     content: props.post.title
@@ -2619,7 +2672,7 @@ const Post = props => {
     content: props.post.postType === 'video' ? props.post.postType + '.' + 'movies' : props.post.postType
   }), __jsx("meta", {
     property: "og:url",
-    content: props.post.source
+    content: props.post.videoEmbedCode
   }), __jsx("meta", {
     property: "og:image",
     content: props.post.mainThumbnail
@@ -2643,6 +2696,7 @@ const Post = props => {
     title: props.post.title,
     description: props.post.description,
     tags: props.post.tags,
+    actors: props.post.actors,
     categories: props.post.categories
   })))));
 };
