@@ -52,6 +52,7 @@ app.prepare().then(()=>{
     server.post('/api/v1/posts/updatePost',authMiddleware,(req,res)=>{postsControllers.updatePost(req,res)});
     server.post('/api/v1/posts/deletePost',authMiddleware,(req,res)=>{postsControllers.deletePost(req,res)});
     server.post('/api/v1/posts/postsBulkAction',authMiddleware,(req,res)=>{postsControllers.postsBulkAction(req,res)});
+    server.post('/api/v1/posts/likeDislikeView',(req,res)=>{postsControllers.likeDislikeView(req,res)});
 
 //-------------------post route bad for SEO----------------------
     server.get('/post/:id/:postTitle',(req,res)=>{

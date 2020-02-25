@@ -1,16 +1,51 @@
 (window["webpackJsonp"] = window["webpackJsonp"] || []).push([["static\\development\\pages\\post.js"],{
 
+/***/ "./_variables/_variables.js":
+/*!**********************************!*\
+  !*** ./_variables/_variables.js ***!
+  \**********************************/
+/*! exports provided: likeValueCalculator */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeValueCalculator", function() { return likeValueCalculator; });
+var likeValueCalculator = function likeValueCalculator(likes, dislikes) {
+  var finalValue = 0;
+  return likes > 0 && dislikes > 0 ? Math.round(likes * 100 / (likes + dislikes)) : likes === 0 && dislikes === 0 ? 0 : likes === 0 && dislikes > 0 ? 0 : likes > 0 && dislikes === 0 ? 100 : 0; //
+  // if (likes > 0 && dislikes > 0) {
+  //     let total = likes + dislikes;
+  //     let likesTo100 = likes * 100;
+  //     let value = Math.round(likesTo100 / total);
+  //     finalValue = value;
+  // }
+  // if (likes === 0 && dislikes === 0) {
+  //     finalValue = 0;
+  // }
+  // if (likes === 0 && dislikes > 0) {
+  //     finalValue = 0;
+  //
+  // }
+  // if (likes > 0 && dislikes === 0) {
+  //     finalValue = 100
+  // }
+  // return finalValue
+};
+
+/***/ }),
+
 /***/ "./_variables/ajaxPostsVariables.js":
 /*!******************************************!*\
   !*** ./_variables/ajaxPostsVariables.js ***!
   \******************************************/
-/*! exports provided: getPosts, getPost */
+/*! exports provided: getPosts, getPost, likeDislikeView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPosts", function() { return getPosts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPost", function() { return getPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeDislikeView", function() { return likeDislikeView; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-properties */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js");
@@ -78,6 +113,29 @@ var getPost = function getPost(data) {
         case 4:
         case "end":
           return _context2.stop();
+      }
+    }
+  });
+};
+var likeDislikeView = function likeDislikeView(id, type) {
+  var body;
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.async(function likeDislikeView$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          body = {
+            id: id,
+            type: type
+          };
+          _context3.next = 3;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_8___default.a.post('http://localhost:3000/api/v1/posts/likeDislikeView', body));
+
+        case 3:
+          return _context3.abrupt("return", _context3.sent);
+
+        case 4:
+        case "end":
+          return _context3.stop();
       }
     }
   });
@@ -417,43 +475,95 @@ var Iframe = function Iframe(props) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var _TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TagsAndCategoriesActors/TagsAndCategoriesActors */ "./components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js");
-/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-fontawesome */ "./node_modules/react-fontawesome/lib/index.js");
-/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_2__);
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-properties */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptors */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptors.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-descriptor */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-descriptor.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/get-own-property-symbols */ "./node_modules/@babel/runtime-corejs2/core-js/object/get-own-property-symbols.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/keys */ "./node_modules/@babel/runtime-corejs2/core-js/object/keys.js");
+/* harmony import */ var _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! @babel/runtime-corejs2/helpers/esm/defineProperty */ "./node_modules/@babel/runtime-corejs2/helpers/esm/defineProperty.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var _TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../TagsAndCategoriesActors/TagsAndCategoriesActors */ "./components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js");
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-fontawesome */ "./node_modules/react-fontawesome/lib/index.js");
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var _ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../ProgressBar/ProgressBar */ "./components/includes/ProgressBar/ProgressBar.js");
+/* harmony import */ var _variables_variables__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../_variables/_variables */ "./_variables/_variables.js");
+/* harmony import */ var _variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_12__ = __webpack_require__(/*! ../../../../_variables/ajaxPostsVariables */ "./_variables/ajaxPostsVariables.js");
+
+
+
+
+
+
+
+var __jsx = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
+
+
+
 
 
 
 
 var PostInfo = function PostInfo(props) {
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({}),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_7__["useState"])({
+    likeValue: 0
+  }),
       state = _useState[0],
       setState = _useState[1];
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {}, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_7__["useEffect"])(function () {
+    setState(_objectSpread({}, state, {
+      likeValue: Object(_variables_variables__WEBPACK_IMPORTED_MODULE_11__["likeValueCalculator"])(props.likes, props.disLikes)
+    }));
+    Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_12__["likeDislikeView"])(props.id, 'views');
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_7__["useEffect"])(function () {
+    console.log(props.likes, props.disLikes);
+    console.log(Object(_variables_variables__WEBPACK_IMPORTED_MODULE_11__["likeValueCalculator"])(1, 1));
+  }, [state]);
   return __jsx("div", {
     className: "post-info"
   }, __jsx("h1", null, props.title), __jsx("div", {
     className: "like"
-  }, __jsx("button", null, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, __jsx("button", {
+    onClick: function onClick() {
+      return Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_12__["likeDislikeView"])(props.id, 'likes');
+    }
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_9___default.a, {
     className: "fontawesomeMedium",
     name: "thumbs-up"
-  })), __jsx("button", null, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  })), __jsx("button", {
+    onClick: function onClick() {
+      return Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_12__["likeDislikeView"])(props.id, 'disLikes');
+    }
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_9___default.a, {
     className: "fontawesomeMedium",
     name: "thumbs-down"
   }))), __jsx("div", {
     className: "views"
+  }), __jsx(_ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_10__["default"], {
+    value: state.likeValue
   }), __jsx("div", {
     className: "description"
-  }, props.description), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }, props.description), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_8__["default"], {
     type: "actors",
     data: props.actors
-  }), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_8__["default"], {
     type: "tags",
     data: props.tags
-  }), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
+  }), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_8__["default"], {
     type: "categories",
     data: props.categories
   }));
@@ -590,6 +700,44 @@ var TagsAndCategoriesActors = function TagsAndCategoriesActors(props) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TagsAndCategoriesActors);
+
+/***/ }),
+
+/***/ "./components/includes/ProgressBar/ProgressBar.js":
+/*!********************************************************!*\
+  !*** ./components/includes/ProgressBar/ProgressBar.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "./node_modules/react/index.js");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+var ProgressBar = function ProgressBar(props) {
+  var valueStyle = {
+    width: props.value + '%'
+  };
+
+  if (props.value < 1) {
+    return __jsx("div", {
+      className: "progressParent"
+    }, __jsx("div", {
+      className: "progressChild",
+      style: valueStyle
+    }, " "));
+  } else return __jsx("div", {
+    className: "progressParent"
+  }, __jsx("div", {
+    className: "progressChild",
+    style: valueStyle
+  }, props.value, " %"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ProgressBar);
 
 /***/ }),
 
@@ -42731,7 +42879,11 @@ var Post = function Post(props) {
     description: props.post.description,
     tags: props.post.tags,
     actors: props.post.actors,
-    categories: props.post.categories
+    categories: props.post.categories,
+    id: props.post._id,
+    likes: props.post.likes,
+    disLikes: props.post.disLikes,
+    views: props.post.views
   })))));
 };
 
@@ -42822,7 +42974,7 @@ Post.getInitialProps = function _callee(_ref) {
 
 /***/ }),
 
-/***/ 7:
+/***/ 6:
 /*!******************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fpost&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cpost%5Cindex.js ***!
   \******************************************************************************************************************************************************/
@@ -42845,5 +42997,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[7,"static/runtime/webpack.js","styles"]]]);
+},[[6,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=post.js.map

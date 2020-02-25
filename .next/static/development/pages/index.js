@@ -4,13 +4,14 @@
 /*!******************************************!*\
   !*** ./_variables/ajaxPostsVariables.js ***!
   \******************************************/
-/*! exports provided: getPosts, getPost */
+/*! exports provided: getPosts, getPost, likeDislikeView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPosts", function() { return getPosts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPost", function() { return getPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeDislikeView", function() { return likeDislikeView; });
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-property */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-property.js");
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! @babel/runtime-corejs2/core-js/object/define-properties */ "./node_modules/@babel/runtime-corejs2/core-js/object/define-properties.js");
@@ -78,6 +79,29 @@ var getPost = function getPost(data) {
         case 4:
         case "end":
           return _context2.stop();
+      }
+    }
+  });
+};
+var likeDislikeView = function likeDislikeView(id, type) {
+  var body;
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.async(function likeDislikeView$(_context3) {
+    while (1) {
+      switch (_context3.prev = _context3.next) {
+        case 0:
+          body = {
+            id: id,
+            type: type
+          };
+          _context3.next = 3;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_8___default.a.post('http://localhost:3000/api/v1/posts/likeDislikeView', body));
+
+        case 3:
+          return _context3.abrupt("return", _context3.sent);
+
+        case 4:
+        case "end":
+          return _context3.stop();
       }
     }
   });
@@ -43080,18 +43104,6 @@ Home.getInitialProps = function _callee(_ref) {
 
 /***/ }),
 
-/***/ 12:
-/*!*******************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cindex.js ***!
-  \*******************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cindex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cindex.js!./");
-
-
-/***/ }),
-
 /***/ 2:
 /*!**********************!*\
   !*** util (ignored) ***!
@@ -43125,6 +43137,18 @@ module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absol
 
 /***/ }),
 
+/***/ 8:
+/*!*******************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cindex.js ***!
+  \*******************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cindex.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cindex.js!./");
+
+
+/***/ }),
+
 /***/ "dll-reference dll_ef0ff7c60362f24a921f":
 /*!*******************************************!*\
   !*** external "dll_ef0ff7c60362f24a921f" ***!
@@ -43136,5 +43160,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[12,"static/runtime/webpack.js","styles"]]]);
+},[[8,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

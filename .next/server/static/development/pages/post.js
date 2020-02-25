@@ -93,17 +93,52 @@ module.exports =
 /************************************************************************/
 /******/ ({
 
+/***/ "./_variables/_variables.js":
+/*!**********************************!*\
+  !*** ./_variables/_variables.js ***!
+  \**********************************/
+/*! exports provided: likeValueCalculator */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeValueCalculator", function() { return likeValueCalculator; });
+const likeValueCalculator = (likes, dislikes) => {
+  let finalValue = 0;
+  return likes > 0 && dislikes > 0 ? Math.round(likes * 100 / (likes + dislikes)) : likes === 0 && dislikes === 0 ? 0 : likes === 0 && dislikes > 0 ? 0 : likes > 0 && dislikes === 0 ? 100 : 0; //
+  // if (likes > 0 && dislikes > 0) {
+  //     let total = likes + dislikes;
+  //     let likesTo100 = likes * 100;
+  //     let value = Math.round(likesTo100 / total);
+  //     finalValue = value;
+  // }
+  // if (likes === 0 && dislikes === 0) {
+  //     finalValue = 0;
+  // }
+  // if (likes === 0 && dislikes > 0) {
+  //     finalValue = 0;
+  //
+  // }
+  // if (likes > 0 && dislikes === 0) {
+  //     finalValue = 100
+  // }
+  // return finalValue
+};
+
+/***/ }),
+
 /***/ "./_variables/ajaxPostsVariables.js":
 /*!******************************************!*\
   !*** ./_variables/ajaxPostsVariables.js ***!
   \******************************************/
-/*! exports provided: getPosts, getPost */
+/*! exports provided: getPosts, getPost, likeDislikeView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPosts", function() { return getPosts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPost", function() { return getPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeDislikeView", function() { return likeDislikeView; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -122,6 +157,13 @@ const getPost = async data => {
   const body = _objectSpread({}, data);
 
   return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/posts/post', body);
+};
+const likeDislikeView = async (id, type) => {
+  const body = {
+    id,
+    type
+  };
+  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/posts/likeDislikeView', body);
 };
 
 /***/ }),
@@ -422,7 +464,20 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../TagsAndCategoriesActors/TagsAndCategoriesActors */ "./components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js");
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-fontawesome */ "react-fontawesome");
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ProgressBar/ProgressBar */ "./components/includes/ProgressBar/ProgressBar.js");
+/* harmony import */ var _variables_variables__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../_variables/_variables */ "./_variables/_variables.js");
+/* harmony import */ var _variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../_variables/ajaxPostsVariables */ "./_variables/ajaxPostsVariables.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+
 
 
 
@@ -431,20 +486,37 @@ const PostInfo = props => {
   const {
     0: state,
     1: setState
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {}, []);
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    likeValue: 0
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    setState(_objectSpread({}, state, {
+      likeValue: Object(_variables_variables__WEBPACK_IMPORTED_MODULE_4__["likeValueCalculator"])(props.likes, props.disLikes)
+    }));
+    Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__["likeDislikeView"])(props.id, 'views');
+  }, []);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(props.likes, props.disLikes);
+    console.log(Object(_variables_variables__WEBPACK_IMPORTED_MODULE_4__["likeValueCalculator"])(1, 1));
+  }, [state]);
   return __jsx("div", {
     className: "post-info"
   }, __jsx("h1", null, props.title), __jsx("div", {
     className: "like"
-  }, __jsx("button", null, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  }, __jsx("button", {
+    onClick: () => Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__["likeDislikeView"])(props.id, 'likes')
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: "fontawesomeMedium",
     name: "thumbs-up"
-  })), __jsx("button", null, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+  })), __jsx("button", {
+    onClick: () => Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__["likeDislikeView"])(props.id, 'disLikes')
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: "fontawesomeMedium",
     name: "thumbs-down"
   }))), __jsx("div", {
     className: "views"
+  }), __jsx(_ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    value: state.likeValue
   }), __jsx("div", {
     className: "description"
   }, props.description), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -572,6 +644,44 @@ const TagsAndCategoriesActors = props => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (TagsAndCategoriesActors);
+
+/***/ }),
+
+/***/ "./components/includes/ProgressBar/ProgressBar.js":
+/*!********************************************************!*\
+  !*** ./components/includes/ProgressBar/ProgressBar.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+
+const ProgressBar = props => {
+  let valueStyle = {
+    width: props.value + '%'
+  };
+
+  if (props.value < 1) {
+    return __jsx("div", {
+      className: "progressParent"
+    }, __jsx("div", {
+      className: "progressChild",
+      style: valueStyle
+    }, " "));
+  } else return __jsx("div", {
+    className: "progressParent"
+  }, __jsx("div", {
+    className: "progressChild",
+    style: valueStyle
+  }, props.value, " %"));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (ProgressBar);
 
 /***/ }),
 
@@ -2697,7 +2807,11 @@ const Post = props => {
     description: props.post.description,
     tags: props.post.tags,
     actors: props.post.actors,
-    categories: props.post.categories
+    categories: props.post.categories,
+    id: props.post._id,
+    likes: props.post.likes,
+    disLikes: props.post.disLikes,
+    views: props.post.views
   })))));
 };
 

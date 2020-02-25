@@ -40,7 +40,17 @@ const Post = props => {
                             uploadDate: props.post.lastModify,
                         } }/>
                         <DownloadLink downloadLink={ props.post.videoEmbedCode }/>
-                        <PostInfo title={ props.post.title } description={ props.post.description } tags={ props.post.tags } actors={ props.post.actors } categories={ props.post.categories }/>
+                        <PostInfo
+                            title={ props.post.title }
+                            description={ props.post.description }
+                            tags={ props.post.tags }
+                            actors={ props.post.actors }
+                            categories={ props.post.categories }
+                            id={props.post._id}
+                            likes={props.post.likes}
+                            disLikes={props.post.disLikes}
+                           views={props.post.views}
+                        />
                     </div>
                 </div>
             </>

@@ -647,7 +647,8 @@
     position: absolute;
     background-color: gray;
     color: white;
-    font-size: small; }
+    font-size: small;
+    display: flex; }
 
 .TopBar {
   display: flex;

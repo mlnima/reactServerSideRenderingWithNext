@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 9);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -97,13 +97,14 @@ module.exports =
 /*!******************************************!*\
   !*** ./_variables/ajaxPostsVariables.js ***!
   \******************************************/
-/*! exports provided: getPosts, getPost */
+/*! exports provided: getPosts, getPost, likeDislikeView */
 /***/ (function(module, __webpack_exports__, __webpack_require__) {
 
 "use strict";
 __webpack_require__.r(__webpack_exports__);
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPosts", function() { return getPosts; });
 /* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getPost", function() { return getPost; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "likeDislikeView", function() { return likeDislikeView; });
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "axios");
 /* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -122,6 +123,13 @@ const getPost = async data => {
   const body = _objectSpread({}, data);
 
   return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/posts/post', body);
+};
+const likeDislikeView = async (id, type) => {
+  const body = {
+    id,
+    type
+  };
+  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/posts/likeDislikeView', body);
 };
 
 /***/ }),
@@ -3015,7 +3023,7 @@ Home.getInitialProps = async ({
 
 /***/ }),
 
-/***/ 9:
+/***/ 5:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

@@ -142,6 +142,11 @@ postsControllers.postsBulkAction = async (req, res) => {
     })
 };
 
+postsControllers.likeDislikeView = (req, res)=>{
+    postSchema.findByIdAndUpdate(req.body.id,{$inc:{[req.body.type]:1}},{new:true}).exec();
+    res.end()
+};
+
 function fieldGenerator(fields) {
     // if (fields[0] === 'all')
     let exportData = '';
@@ -150,5 +155,10 @@ function fieldGenerator(fields) {
     }
     return exportData
 };
+
+
+
+
+
 
 module.exports = postsControllers;
