@@ -2,7 +2,6 @@ let postsControllers = {};
 const postSchema = require('../models/postSchema');
 
 postsControllers.createNewPost = (req, res) => {
-    console.log(req.body.postData)
     const newPostData = new postSchema(req.body.postData);
     newPostData.save().then(savedPostData => {
         console.log(savedPostData, ' saved ');
@@ -16,12 +15,10 @@ postsControllers.createNewPost = (req, res) => {
 };
 
 postsControllers.updatePost = (req, res) => {
-
     const _id = req.body.id ;
     postSchema.findByIdAndUpdate(req.body.postData._id,req.body.postData,{new:true}).exec().then(updated=>{
-        console.log( updated)
+        console.log(_id, updated)
     }).catch(err=>{
-        console.log( err)
         res.sendStatus(500);
         res.end()
     })
@@ -39,46 +36,10 @@ postsControllers.getPostsInfo = async (req, res) => {
     let posts = await postSchema.find({$and:[postTypeQuery,statusQuery,authorQuery,searchQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort('-_id').exec();
     let postsCount = await postSchema.count({$and:[postTypeQuery,statusQuery,authorQuery,searchQuery]}).exec();
 
-    // if (keyword === '') {
-    //     if (status === 'all') {
-    //         posts = await postSchema.find({ $and: [ { status: { $ne: 'trash' } }, {}, { type } ] }).select(generatedFields).skip(size * (pageNo - 1)).limit(size).sort('-_id').exec();
-    //         postsCount = await postSchema.estimatedDocumentCount({}).exec()
-    //     } else {
-    //         posts = await postSchema.find({ $and: [ { status }, { type } ] }).select(generatedFields).skip(size * (pageNo - 1)).limit(size).sort('-_id').exec();
-    //         postsCount = await postSchema.count({ status: status }).exec()
-    //     }
-    // } else {
-    //     if (status === 'all') {
-    //         postsCount = await postSchema.count({ title: regexQuery }).exec();
-    //         posts = await postSchema.find({ title: regexQuery }).select(generatedFields).skip(size * pageNo).limit(size).exec()
-    //     } else {
-    //         postsCount = await postSchema.count({ $and: [ { title: regexQuery }, { status }, { type } ] }).exec();
-    //         posts = await postSchema.find({ $and: [ { title: regexQuery }, { status }, { type } ] }).select(generatedFields).skip(size * pageNo).limit(size).exec()
-    //     }
-    // }
-    // postsCount.then(postsCountData=>{
-    //     posts.then(postsData=>{
-    //         res.json({posts:postsData, error: false, totalCount: postsCountData})
-    //         res.end()
-    //     }).catch(err=>{
-    //         console.log(err);
-    //         return res.status(500).json({
-    //             message: 'Server Error'
-    //         })
-    //     })
-    // }).catch(err=>{
-    //     console.log(err);
-    //     return res.status(500).json({
-    //         message: 'Server Error'
-    //     })
-    // })
-
     Promise.all([ posts, postsCount ]).then(data => {
-        // console.log(data)
         res.json({ posts: data[0], error: false, totalCount: data[1] })
         res.end()
     }).catch(err => {
-        // console.log(err);
         return res.status(500).json({
             message: 'Server Error'
         })
@@ -107,10 +68,6 @@ postsControllers.getPostInfo =  (req, res) =>{
     }
 };
 
-
-
-
-
 postsControllers.deletePost = (req, res) => {
     const _id = req.body._id;
     postSchema.findByIdAndDelete(_id).then(() => {
@@ -120,7 +77,7 @@ postsControllers.deletePost = (req, res) => {
         res.json({ message: `Can Not Delete ${ _id } Something Went Wrong`, error: true });
         res.end()
     })
-}
+};
 
 postsControllers.postsBulkAction = async (req, res) => {
     const ids = req.body.ids;
@@ -135,7 +92,6 @@ postsControllers.postsBulkAction = async (req, res) => {
             message: 'all done'
         });
     }).catch(err => {
-        console.log(err )
         return res.status(500).json({
             message: 'Server Error'
         });

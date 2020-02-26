@@ -597,6 +597,7 @@ var ProgressBar = function ProgressBar(props) {
   var valueStyle = {
     width: props.value + '%'
   };
+  var textValue = props.percent ? props.value + ' %' : '';
 
   if (props.value < 1) {
     return __jsx("div", {
@@ -604,13 +605,13 @@ var ProgressBar = function ProgressBar(props) {
     }, __jsx("div", {
       className: "progressChild",
       style: valueStyle
-    }, " "));
+    }));
   } else return __jsx("div", {
     className: "progressParent"
   }, __jsx("div", {
     className: "progressChild",
     style: valueStyle
-  }, props.value, " %"));
+  }, " ", textValue));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ProgressBar);
@@ -885,7 +886,8 @@ var VideoElement = function VideoElement(props) {
     ref: durationLabel,
     className: "duration"
   }, props.state.duration)), __jsx(_ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_11__["default"], {
-    value: contextData.functions.likeValueCalculator(props.state.likes, props.state.disLikes)
+    value: contextData.functions.likeValueCalculator(props.state.likes, props.state.disLikes),
+    percent: true
   }), __jsx("h3", null, props.state.title)))), __jsx(MobilePreviewBtn, null));
 };
 
@@ -43137,7 +43139,7 @@ Home.getInitialProps = function _callee(_ref) {
 
 /***/ }),
 
-/***/ 8:
+/***/ 5:
 /*!*******************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cindex.js ***!
   \*******************************************************************************************************************************************/
@@ -43160,5 +43162,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[8,"static/runtime/webpack.js","styles"]]]);
+},[[5,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

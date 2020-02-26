@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 5);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -572,6 +572,7 @@ const ProgressBar = props => {
   let valueStyle = {
     width: props.value + '%'
   };
+  const textValue = props.percent ? props.value + ' %' : '';
 
   if (props.value < 1) {
     return __jsx("div", {
@@ -579,13 +580,13 @@ const ProgressBar = props => {
     }, __jsx("div", {
       className: "progressChild",
       style: valueStyle
-    }, " "));
+    }));
   } else return __jsx("div", {
     className: "progressParent"
   }, __jsx("div", {
     className: "progressChild",
     style: valueStyle
-  }, props.value, " %"));
+  }, " ", textValue));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ProgressBar);
@@ -833,7 +834,8 @@ const VideoElement = props => {
     ref: durationLabel,
     className: "duration"
   }, props.state.duration)), __jsx(_ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    value: contextData.functions.likeValueCalculator(props.state.likes, props.state.disLikes)
+    value: contextData.functions.likeValueCalculator(props.state.likes, props.state.disLikes),
+    percent: true
   }), __jsx("h3", null, props.state.title)))), __jsx(MobilePreviewBtn, null));
 };
 
@@ -3023,7 +3025,7 @@ Home.getInitialProps = async ({
 
 /***/ }),
 
-/***/ 5:
+/***/ 3:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

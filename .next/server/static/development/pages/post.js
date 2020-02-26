@@ -467,6 +467,9 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../ProgressBar/ProgressBar */ "./components/includes/ProgressBar/ProgressBar.js");
 /* harmony import */ var _variables_variables__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../_variables/_variables */ "./_variables/_variables.js");
 /* harmony import */ var _variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../../../_variables/ajaxPostsVariables */ "./_variables/ajaxPostsVariables.js");
+/* harmony import */ var _DownloadLink_DownloadLink__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../DownloadLink/DownloadLink */ "./components/includes/Post/DownloadLink/DownloadLink.js");
+/* harmony import */ var react_share__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! react-share */ "react-share");
+/* harmony import */ var react_share__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(react_share__WEBPACK_IMPORTED_MODULE_7__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -474,6 +477,8 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -501,23 +506,149 @@ const PostInfo = props => {
   }, [state]);
   return __jsx("div", {
     className: "post-info"
+  }, __jsx("div", {
+    className: "share"
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["FacebookShareButton"], {
+    url: window.location.href // quote={props.joke.setup + props.joke.punchline}
+    // hashtag="#programing joke"
+
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["FacebookIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["TwitterShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["TwitterIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["TelegramShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["TelegramIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["RedditShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["RedditIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["VKShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["VKIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["ViberShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["ViberIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["WhatsappShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["WhatsappIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["LinkedinShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["LinkedinIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["TumblrShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["TumblrIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["EmailShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["EmailIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["InstapaperShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["InstapaperIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["LineShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["LineIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["LivejournalShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["LivejournalIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["MailruShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["MailruIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["OKShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["OKIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["OKShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["OKIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["PinterestShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["PinterestIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["PocketShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["PocketIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  })), __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["WorkplaceShareButton"], {
+    url: window.location.href
+  }, __jsx(react_share__WEBPACK_IMPORTED_MODULE_7__["WorkplaceIcon"], {
+    size: 40,
+    logoFillColor: "white"
+  }))), __jsx("div", {
+    className: "post-info-head"
   }, __jsx("h1", null, props.title), __jsx("div", {
     className: "like"
   }, __jsx("button", {
-    onClick: () => Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__["likeDislikeView"])(props.id, 'likes')
+    onClick: e => {
+      Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__["likeDislikeView"])(props.id, 'likes');
+    }
   }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: "fontawesomeMedium",
     name: "thumbs-up"
   })), __jsx("button", {
-    onClick: () => Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__["likeDislikeView"])(props.id, 'disLikes')
+    onClick: e => {
+      Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_5__["likeDislikeView"])(props.id, 'disLikes');
+    }
   }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
     className: "fontawesomeMedium",
     name: "thumbs-down"
-  }))), __jsx("div", {
+  })))), __jsx("div", {
+    className: "post-info-body"
+  }, __jsx("div", {
     className: "views"
-  }), __jsx(_ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
-    value: state.likeValue
+  }, __jsx(_DownloadLink_DownloadLink__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    downloadLink: props.videoEmbedCode
+  }), __jsx("span", null, props.views, " views"), __jsx(_ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_3__["default"], {
+    value: state.likeValue,
+    percent: false
   }), __jsx("div", {
+    className: "post-rate"
+  }, __jsx("div", null, state.likeValue, " %"), __jsx("div", {
+    className: "like-disLike-count"
+  }, __jsx("span", {
+    className: "like-disLike-count-items"
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    className: "fontawesomeMedium",
+    name: "thumbs-up"
+  }), props.likes), __jsx("span", {
+    className: "like-disLike-count-items"
+  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    className: "fontawesomeMedium",
+    name: "thumbs-down"
+  }), props.disLikes)))), __jsx("div", {
+    className: "meta-description"
+  }, __jsx("div", {
     className: "description"
   }, props.description), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
     type: "actors",
@@ -528,7 +659,7 @@ const PostInfo = props => {
   }), __jsx(_TagsAndCategoriesActors_TagsAndCategoriesActors__WEBPACK_IMPORTED_MODULE_1__["default"], {
     type: "categories",
     data: props.categories
-  }));
+  }))));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (PostInfo);
@@ -665,6 +796,7 @@ const ProgressBar = props => {
   let valueStyle = {
     width: props.value + '%'
   };
+  const textValue = props.percent ? props.value + ' %' : '';
 
   if (props.value < 1) {
     return __jsx("div", {
@@ -672,13 +804,13 @@ const ProgressBar = props => {
     }, __jsx("div", {
       className: "progressChild",
       style: valueStyle
-    }, " "));
+    }));
   } else return __jsx("div", {
     className: "progressParent"
   }, __jsx("div", {
     className: "progressChild",
     style: valueStyle
-  }, props.value, " %"));
+  }, " ", textValue));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (ProgressBar);
@@ -2742,14 +2874,12 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../_variables/ajaxPostsVariables */ "./_variables/ajaxPostsVariables.js");
 /* harmony import */ var _components_includes_Post_Iframe_Iframe__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../components/includes/Post/Iframe/Iframe */ "./components/includes/Post/Iframe/Iframe.js");
 /* harmony import */ var _components_includes_Post_PostInfo_PostInfo__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../../components/includes/Post/PostInfo/PostInfo */ "./components/includes/Post/PostInfo/PostInfo.js");
-/* harmony import */ var _components_includes_Post_DownloadLink_DownloadLink__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../components/includes/Post/DownloadLink/DownloadLink */ "./components/includes/Post/DownloadLink/DownloadLink.js");
-/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
-/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_7__);
-/* harmony import */ var _components_includes_Post_PostSidebar_PostSidebar__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/includes/Post/PostSidebar/PostSidebar */ "./components/includes/Post/PostSidebar/PostSidebar.js");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! next/head */ "next/head");
-/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_9__);
+/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
+/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_6___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_6__);
+/* harmony import */ var _components_includes_Post_PostSidebar_PostSidebar__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ../../components/includes/Post/PostSidebar/PostSidebar */ "./components/includes/Post/PostSidebar/PostSidebar.js");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_8__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
 
 
 
@@ -2768,7 +2898,7 @@ const Post = props => {
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     console.log(props);
   }, [props]);
-  return __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_9___default.a, null, __jsx("title", null, props.post.title), __jsx("meta", {
+  return __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_8___default.a, null, __jsx("title", null, props.post.title), __jsx("meta", {
     name: "description",
     content: props.post.description
   }), __jsx("meta", {
@@ -2788,7 +2918,7 @@ const Post = props => {
     content: props.post.mainThumbnail
   })), __jsx("div", {
     className: "post"
-  }, __jsx(_components_includes_Post_PostSidebar_PostSidebar__WEBPACK_IMPORTED_MODULE_8__["default"], null), __jsx("div", {
+  }, __jsx(_components_includes_Post_PostSidebar_PostSidebar__WEBPACK_IMPORTED_MODULE_7__["default"], null), __jsx("div", {
     className: "main"
   }, __jsx(_components_includes_Post_Iframe_Iframe__WEBPACK_IMPORTED_MODULE_4__["default"], {
     iframeCode: props.post.videoEmbedCode,
@@ -2800,8 +2930,6 @@ const Post = props => {
       embedURL: props.post.videoEmbedCode,
       uploadDate: props.post.lastModify
     }
-  }), __jsx(_components_includes_Post_DownloadLink_DownloadLink__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    downloadLink: props.post.videoEmbedCode
   }), __jsx(_components_includes_Post_PostInfo_PostInfo__WEBPACK_IMPORTED_MODULE_5__["default"], {
     title: props.post.title,
     description: props.post.description,
@@ -2811,7 +2939,8 @@ const Post = props => {
     id: props.post._id,
     likes: props.post.likes,
     disLikes: props.post.disLikes,
-    views: props.post.views
+    views: props.post.views,
+    videoEmbedCode: props.post.videoEmbedCode
   })))));
 };
 
@@ -2840,7 +2969,7 @@ Post.getInitialProps = async ({
   };
 };
 
-/* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_7___default()(Post));
+/* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_6___default()(Post));
 
 /***/ }),
 
@@ -3029,6 +3158,17 @@ module.exports = require("react-fontawesome");
 /***/ (function(module, exports) {
 
 module.exports = require("react-is");
+
+/***/ }),
+
+/***/ "react-share":
+/*!******************************!*\
+  !*** external "react-share" ***!
+  \******************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("react-share");
 
 /***/ }),
 

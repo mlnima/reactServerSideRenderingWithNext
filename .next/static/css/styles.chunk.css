@@ -641,11 +641,14 @@
 .progressParent {
   position: relative;
   height: 15px;
-  background-color: black; }
+  background-color: #333 !important;
+  box-shadow: inset 0px 0px 2px 0px #000;
+  background: -webkit-linear-gradient(top, rgba(0, 0, 0, 0.3) 0%, rgba(0, 0, 0, 0) 70%);
+  border: 1px solid #333; }
   .progressParent .progressChild {
     height: 100%;
     position: absolute;
-    background-color: gray;
+    background-color: #FF3565;
     color: white;
     font-size: small;
     display: flex; }
@@ -921,9 +924,8 @@
       width: 100%;
       margin: 20px 0; }
       .post .main #download-url .download-link {
-        background-color: red;
+        background-color: #FF3565;
         color: white;
-        width: 250px;
         padding: 10px;
         text-align: center;
         border-radius: 5px;
@@ -931,35 +933,59 @@
     .post .main .post-info {
       width: 100%;
       box-sizing: border-box;
-      padding: 10px;
-      background-color: #181818; }
-      .post .main .post-info h1 {
-        font-size: 1.25em; }
-      .post .main .post-info .like button {
-        background-color: transparent;
-        color: white;
-        outline: none;
-        border: none; }
-        .post .main .post-info .like button:disabled {
-          color: #33373c; }
-      .post .main .post-info .tags-categories-actors {
+      padding: 10px; }
+      .post .main .post-info .share {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        grid-gap: 10px; }
+      .post .main .post-info .post-info-head {
+        background-color: #181818;
+        padding: 5px; }
+        .post .main .post-info .post-info-head h1 {
+          font-size: 1.25em;
+          text-align: center; }
+        .post .main .post-info .post-info-head .like {
+          display: flex;
+          justify-content: center;
+          align-items: center; }
+          .post .main .post-info .post-info-head .like button {
+            background-color: transparent;
+            color: white;
+            outline: none;
+            border: none;
+            margin: 0 10px; }
+            .post .main .post-info .post-info-head .like button:disabled {
+              color: #33373c; }
+      .post .main .post-info .post-info-body .views .post-rate {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        .post .main .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items {
+          margin: 0 10px; }
+          .post .main .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items span {
+            font-size: small; }
+      .post .main .post-info .post-info-body .views .progressParent {
+        max-width: 100%; }
+        .post .main .post-info .post-info-body .views .progressParent div {
+          transition: width 0.3s ease-in-out; }
+      .post .main .post-info .post-info-body .meta-description .tags-categories-actors {
         margin: 30px 0; }
-        .post .main .post-info .tags-categories-actors span {
+        .post .main .post-info .post-info-body .meta-description .tags-categories-actors span {
           display: flex; }
-          .post .main .post-info .tags-categories-actors span span {
+          .post .main .post-info .post-info-body .meta-description .tags-categories-actors span span {
             margin: 0 5px; }
-        .post .main .post-info .tags-categories-actors .content {
+        .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content {
           padding: 10px 0;
           max-width: 100%;
           display: flex;
           flex-wrap: wrap; }
-          .post .main .post-info .tags-categories-actors .content a {
+          .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content a {
             margin: 5px;
             background-color: #FF3565;
             color: white;
             padding: 5px;
             border-radius: 5px; }
-          .post .main .post-info .tags-categories-actors .content .actors {
+          .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content .actors {
             background-color: transparent;
             color: #FF3565; }
 
@@ -970,9 +996,15 @@
     grid-gap: 10px; }
     .post .main .video-player .responsive-player iframe {
       padding: 15px; }
-    .post .main .post-info .tags-categories-actors {
-      display: flex;
-      align-items: center; } }
+    .post .main .post-info .post-info-head .like {
+      justify-content: start; }
+    .post .main .post-info .post-info-body {
+      display: grid;
+      grid-template-columns: 200px 1fr;
+      grid-gap: 20px; }
+      .post .main .post-info .post-info-body .meta-description .tags-categories-actors {
+        display: flex;
+        align-items: center; } }
 
 body {
   margin: 0;

@@ -4,7 +4,7 @@ import axios from "axios";
 import { getPost } from "../../_variables/ajaxPostsVariables";
 import Iframe from "../../components/includes/Post/Iframe/Iframe";
 import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
-import DownloadLink from "../../components/includes/Post/DownloadLink/DownloadLink";
+
 import withRouter from "next/dist/client/with-router";
 import PostSidebar from "../../components/includes/Post/PostSidebar/PostSidebar";
 import Head from "next/head";
@@ -39,7 +39,7 @@ const Post = props => {
                             embedURL: props.post.videoEmbedCode,
                             uploadDate: props.post.lastModify,
                         } }/>
-                        <DownloadLink downloadLink={ props.post.videoEmbedCode }/>
+
                         <PostInfo
                             title={ props.post.title }
                             description={ props.post.description }
@@ -49,7 +49,8 @@ const Post = props => {
                             id={props.post._id}
                             likes={props.post.likes}
                             disLikes={props.post.disLikes}
-                           views={props.post.views}
+                            views={props.post.views}
+                            videoEmbedCode={props.post.videoEmbedCode}
                         />
                     </div>
                 </div>

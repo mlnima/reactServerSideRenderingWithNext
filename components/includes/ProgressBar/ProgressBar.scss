@@ -1,13 +1,19 @@
+@import "../../../styles/colors";
 .progressParent{
   position: relative;
   height: 15px;
-  background-color: black;
+  //background-color: black;
+  background-color: #333!important;
+  box-shadow: inset 0px 0px 2px 0px #000;
+  background: -webkit-linear-gradient(top, rgba(0,0,0,0.3) 0%,rgba(0,0,0,0) 70%);
+  border: 1px solid #333;
   .progressChild{
     height: 100%;
     position: absolute;
-    background-color: gray;
+    background-color: $red50;
     color: white;
     font-size: small;
     display: flex;
+
   }
 }

@@ -127,7 +127,7 @@ const VideoElement = props => {
                         <span ref={durationLabel} className='duration'>{props.state.duration}</span>
 
                     </div>
-                    <ProgressBar value={contextData.functions.likeValueCalculator(props.state.likes, props.state.disLikes)}/>
+                    <ProgressBar value={contextData.functions.likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/>
                     <h3>{props.state.title}</h3>
                 </div>
                 </a>

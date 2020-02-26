@@ -3,18 +3,20 @@ import React from 'react';
 const ProgressBar = props => {
 
     let valueStyle = {
-        width:props.value + '%'
+        width: props.value + '%'
     };
 
-    if(props.value<1){
+    const textValue = props.percent ? props.value + ' %' : '';
+
+    if (props.value < 1) {
         return (
             <div className='progressParent'>
-                <div className="progressChild" style={valueStyle}> </div>
+                <div className="progressChild" style={ valueStyle }></div>
             </div>
         );
-    }else return (
+    } else return (
         <div className='progressParent'>
-            <div className="progressChild" style={valueStyle}>{props.value} %</div>
+            <div className="progressChild" style={ valueStyle }> { textValue }</div>
         </div>
     )
 

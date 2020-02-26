@@ -47,13 +47,14 @@
     }
 
     #download-url {
-      width:100%;
+      width: 100%;
       margin: 20px 0;
+
       .download-link {
-        background-color: red;
+        background-color: $red50;
         color: white;
         //justify-items: start;
-        width: 250px;
+        //width:100%;
         padding: 10px;
         text-align: center;
         border-radius: 5px;
@@ -65,59 +66,113 @@
       width: 100%;
       box-sizing: border-box;
       padding: 10px;
-      background-color: $dark90;
 
-      h1 {
-        font-size: 1.25em;
-      }
-
-      .like {
+      .share {
+        //width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
+        grid-gap: 10px;
         button {
-          @include transparentLightTextBtn;
-
-          span {
-
-          }
-
-          &:disabled {
-            color: $AdminColor80;
-          }
+          //margin: 10px;
+          //width: 30px;
+          //height: 30px;
         }
       }
 
-      .tags-categories-actors {
+      .post-info-head {
+        background-color: $dark90;
+        padding: 5px;
 
-        margin: 30px 0;
-span{
-  display: flex;
-  span{
-    margin:0 5px;
-  }
-}
-        .content {
-          padding: 10px 0;
-          max-width: 100%;
-          //display: grid;
-          //grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-          //grid-gap: 10px;
+        h1 {
+          font-size: 1.25em;
+          text-align: center;
+        }
+
+        .like {
           display: flex;
-          flex-wrap: wrap;
+          justify-content: center;
+          align-items: center;
 
-          a {
-            margin: 5px;
-            background-color: $red50;
-            color: white;
-            padding: 5px;
-            border-radius: 5px;
+          button {
+            @include transparentLightTextBtn;
+            margin: 0 10px;
+
+            span {
+
+            }
+
+            &:disabled {
+              color: $AdminColor80;
+            }
+          }
+        }
+      }
+
+      .post-info-body {
+        .views {
+          .post-rate {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+
+            .like-disLike-count {
+              .like-disLike-count-items {
+                margin: 0 10px;
+
+                span {
+                  font-size: small;
+                }
+              }
+            }
           }
 
-          .actors {
-            background-color: transparent;
-            color: $red50;
+          .progressParent {
+            max-width: 100%;
+
+            div {
+              transition: width 0.3s ease-in-out;
+            }
+          }
+        }
+
+        .meta-description {
+          .tags-categories-actors {
+
+            margin: 30px 0;
+
+            span {
+              display: flex;
+
+              span {
+                margin: 0 5px;
+              }
+            }
+
+            .content {
+              padding: 10px 0;
+              max-width: 100%;
+              display: flex;
+              flex-wrap: wrap;
+
+              a {
+                margin: 5px;
+                background-color: $red50;
+                color: white;
+                padding: 5px;
+                border-radius: 5px;
+              }
+
+              .actors {
+                background-color: transparent;
+                color: $red50;
+              }
+            }
+
           }
         }
 
       }
+
     }
   }
 
@@ -139,10 +194,32 @@ span{
       }
 
       .post-info {
-        .tags-categories-actors {
-          display: flex;
-          align-items: center;
+        .post-info-head {
+          .like {
+            justify-content: start;
+          }
         }
+
+        .post-info-body {
+          display: grid;
+          grid-template-columns: 200px 1fr;
+          grid-gap: 20px;
+
+          .views {
+            .progressParent {
+              //max-width: 150px;
+            }
+          }
+
+          .meta-description {
+            .tags-categories-actors {
+              display: flex;
+              align-items: center;
+            }
+          }
+
+        }
+
       }
     }
   }
