@@ -7,8 +7,10 @@ const postsControllers = require('./controllers/postsControllers');
 const siteMapController = require('./controllers/siteMapController');
 const siteMapsController = require('./controllers/siteMapsController');
 const subSiteMapsController = require('./controllers/subSiteMapsController');
+const settingsControllers = require('./controllers/settingsControllers');
 const path = require('path');
 const authMiddleware = require('./middlewares/authMiddleware');
+const adminAuthMiddleware = require('./middlewares/adminAuthMiddleware');
 const xmlparser = require("express-xml-bodyparser");
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -35,24 +37,28 @@ app.prepare().then(()=>{
     server.get('/robots.txt',(req,res)=>{
         return res.status(200).sendFile('robots.txt',robotsOptions)
     });
+    server.get('/favicon.ico',(req,res)=>{
+        return res.status(200).sendFile('/images/favicon/favicon.ico',robotsOptions)
+    });
     server.get('/sitemap.xsl',(req,res)=>{ return res.status(200).sendFile('sitemap.xsl',robotsOptions) });
-
-
     server.get('/sitemap.xml',(req,res)=>{siteMapController.siteMap(req,res)});
     server.get('/sitemaps/:month',(req,res)=>{siteMapsController.siteMapMonths(req,res)});
     server.get('/sitemap/:month/:pageNo',(req,res)=>{subSiteMapsController.siteMap(req,res)});
 
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
-    server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
+    server.post('/api/v1/users/getUserInfo',adminAuthMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts',(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts/post',(req,res)=>{postsControllers.getPostInfo(req,res)});
-    server.post('/api/v1/posts/createNewPost',authMiddleware,(req,res)=>{postsControllers.createNewPost(req,res)});
-    server.post('/api/v1/posts/updatePost',authMiddleware,(req,res)=>{postsControllers.updatePost(req,res)});
-    server.post('/api/v1/posts/deletePost',authMiddleware,(req,res)=>{postsControllers.deletePost(req,res)});
-    server.post('/api/v1/posts/postsBulkAction',authMiddleware,(req,res)=>{postsControllers.postsBulkAction(req,res)});
+    server.post('/api/v1/posts/createNewPost',adminAuthMiddleware,(req,res)=>{postsControllers.createNewPost(req,res)});
+    server.post('/api/v1/posts/updatePost',adminAuthMiddleware,(req,res)=>{postsControllers.updatePost(req,res)});
+    server.post('/api/v1/posts/deletePost',adminAuthMiddleware,(req,res)=>{postsControllers.deletePost(req,res)});
+    server.post('/api/v1/posts/postsBulkAction',adminAuthMiddleware,(req,res)=>{postsControllers.postsBulkAction(req,res)});
     server.post('/api/v1/posts/likeDislikeView',(req,res)=>{postsControllers.likeDislikeView(req,res)});
+    server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
+    server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
+
 
 //-------------------post route bad for SEO----------------------
     server.get('/post/:id/:postTitle',(req,res)=>{

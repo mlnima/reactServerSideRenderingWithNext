@@ -10,10 +10,6 @@ import PostSidebar from "../../components/includes/Post/PostSidebar/PostSidebar"
 import Head from "next/head";
 
 const Post = props => {
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
 
     return (
         <AppLayout>
@@ -70,7 +66,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     } catch ( e ) {
         console.error(e)
     }
-    return { post, query }
+    return { post, query,}
 };
 
 export default withRouter(Post);

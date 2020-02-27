@@ -109,6 +109,77 @@ var likeDislikeView = function likeDislikeView(id, type) {
 
 /***/ }),
 
+/***/ "./_variables/ajaxVariables.js":
+/*!*************************************!*\
+  !*** ./_variables/ajaxVariables.js ***!
+  \*************************************/
+/*! exports provided: updateSetting, getSetting */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSetting", function() { return updateSetting; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSetting", function() { return getSetting; });
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! @babel/runtime-corejs2/regenerator */ "./node_modules/@babel/runtime-corejs2/regenerator/index.js");
+/* harmony import */ var _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(_babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_1__);
+
+
+var updateSetting = function updateSetting(type, data) {
+  var body;
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function updateSetting$(_context) {
+    while (1) {
+      switch (_context.prev = _context.next) {
+        case 0:
+          if (!localStorage.wt) {
+            _context.next = 5;
+            break;
+          }
+
+          body = {
+            token: localStorage.wt,
+            type: type,
+            data: data
+          };
+          _context.next = 4;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://localhost:3000/api/v1/settings/update', body));
+
+        case 4:
+          return _context.abrupt("return", _context.sent);
+
+        case 5:
+        case "end":
+          return _context.stop();
+      }
+    }
+  });
+};
+var getSetting = function getSetting(type) {
+  var body;
+  return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getSetting$(_context2) {
+    while (1) {
+      switch (_context2.prev = _context2.next) {
+        case 0:
+          body = {
+            type: type
+          };
+          _context2.next = 3;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_1___default.a.post('http://localhost:3000/api/v1/settings/get', body));
+
+        case 3:
+          return _context2.abrupt("return", _context2.sent);
+
+        case 4:
+        case "end":
+          return _context2.stop();
+      }
+    }
+  });
+};
+
+/***/ }),
+
 /***/ "./components/includes/Header/Header.js":
 /*!**********************************************!*\
   !*** ./components/includes/Header/Header.js ***!
@@ -158,7 +229,7 @@ var Logo = function Logo() {
   }, __jsx("div", {
     className: "Logo"
   }, __jsx("img", {
-    src: "/static/images/Logo.png"
+    src: "/static/images/logo/Logo.png"
   })));
 };
 
@@ -1014,24 +1085,10 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 var AppLayout = function AppLayout(props) {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, __jsx("title", null, "Website Title"), __jsx("meta", {
-    name: "theme-color",
-    content: "#000000"
-  }), __jsx("meta", {
-    name: "viewport",
-    content: "width=device-width, initial-scale=1"
-  }), __jsx("meta", {
-    charSet: "utf-8"
-  }), __jsx("link", {
-    href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
-    rel: "stylesheet"
-  }), __jsx("meta", {
-    name: "description",
-    content: "description of the site"
-  }), __jsx("meta", {
-    name: "keywords",
-    content: "key,word,for,SEO"
-  })), __jsx(_includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_includes_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), __jsx(_includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx(_includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), __jsx("div", {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(function () {
+    console.log(props);
+  }, [props]);
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_includes_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), __jsx(_includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx(_includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), __jsx("div", {
     className: "App"
   }, props.children));
 };
@@ -43009,8 +43066,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_14__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_14___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_14__);
 /* harmony import */ var _variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_15__ = __webpack_require__(/*! ../_variables/ajaxPostsVariables */ "./_variables/ajaxPostsVariables.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_16__ = __webpack_require__(/*! next/head */ "./node_modules/next/dist/next-server/lib/head.js");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_16___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_16__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_17__ = __webpack_require__(/*! axios */ "./node_modules/axios/index.js");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_17___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_17__);
+/* harmony import */ var _variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_18__ = __webpack_require__(/*! ../_variables/ajaxVariables */ "./_variables/ajaxVariables.js");
 
 
 
@@ -43035,21 +43095,48 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+
+
 var Home = function Home(props) {
   var contextData = Object(react__WEBPACK_IMPORTED_MODULE_9__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_10__["AppContext"]);
 
-  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({}),
+  var _useState = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
+    title: props.identity.title || '',
+    themeColor: props.identity.themeColor || '',
+    description: props.identity.description || '',
+    keywords: props.identity.keywords || []
+  }),
       state = _useState[0],
       setState = _useState[1];
 
   var FakeComponentForTest = function FakeComponentForTest() {
     return __jsx("div", null, __jsx("p", null, "test"));
-  }; // useEffect(() => {
-  //     console.log(props)
-  // }, [ props ]);
+  };
 
-
-  return __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_11__["default"], null, __jsx("div", {
+  Object(react__WEBPACK_IMPORTED_MODULE_9__["useEffect"])(function () {
+    console.log(props);
+  }, [props]);
+  return __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_11__["default"], null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_16___default.a, null, __jsx("title", null, state.title), __jsx("meta", {
+    name: "theme-color",
+    content: state.themeColor
+  }), __jsx("meta", {
+    name: "viewport",
+    content: "width=device-width, initial-scale=1"
+  }), __jsx("meta", {
+    charSet: "utf-8"
+  }), __jsx("link", {
+    href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
+    rel: "stylesheet"
+  }), __jsx("meta", {
+    name: "description",
+    content: state.description
+  }), __jsx("meta", {
+    name: "keywords",
+    content: state.keywords
+  }), __jsx("link", {
+    rel: "icon",
+    href: "/favicon.ico"
+  })), __jsx("div", {
     className: "HomePage"
   }, __jsx("h1", null, "Header 1"), __jsx(_components_includes_Posts_Posts__WEBPACK_IMPORTED_MODULE_13__["default"], {
     posts: props.posts
@@ -43057,7 +43144,7 @@ var Home = function Home(props) {
 };
 
 Home.getInitialProps = function _callee(_ref) {
-  var pathname, query, req, res, err, data, posts;
+  var pathname, query, req, res, err, data, posts, identity, returnData;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
@@ -43075,15 +43162,36 @@ Home.getInitialProps = function _callee(_ref) {
             checkedPosts: []
           };
           _context.next = 4;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_16___default.a.post('http://localhost:3000/api/v1/posts/', _objectSpread({}, data)));
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_17___default.a.post('http://localhost:3000/api/v1/posts/', _objectSpread({}, data)));
 
         case 4:
           posts = _context.sent;
-          return _context.abrupt("return", {
+          _context.next = 7;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_18__["getSetting"])('identity'));
+
+        case 7:
+          identity = _context.sent;
+          returnData = {
+            identity: identity.data.setting.data,
             posts: posts.data.posts
+          }; // const posts = await axios.get('https://jsonplaceholder.typicode.com/posts')
+          // let testData = {
+          //     name: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
+          //     pathname,
+          //     query
+          // };
+          // console.log(testData )
+          // const response = await fetch('http://localhost:3000/api/v1/posts/', {
+          //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
+          //     body: JSON.stringify(data) // body data type must match "Content-Type" header
+          // })
+
+          return _context.abrupt("return", {
+            posts: posts.data.posts,
+            identity: identity.data.setting.data
           });
 
-        case 6:
+        case 10:
         case "end":
           return _context.stop();
       }
@@ -43139,7 +43247,7 @@ Home.getInitialProps = function _callee(_ref) {
 
 /***/ }),
 
-/***/ 5:
+/***/ 8:
 /*!*******************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2F&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cindex.js ***!
   \*******************************************************************************************************************************************/
@@ -43162,5 +43270,5 @@ module.exports = dll_ef0ff7c60362f24a921f;
 
 /***/ })
 
-},[[5,"static/runtime/webpack.js","styles"]]]);
+},[[8,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=index.js.map

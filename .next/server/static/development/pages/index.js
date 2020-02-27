@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -130,6 +130,39 @@ const likeDislikeView = async (id, type) => {
     type
   };
   return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/posts/likeDislikeView', body);
+};
+
+/***/ }),
+
+/***/ "./_variables/ajaxVariables.js":
+/*!*************************************!*\
+  !*** ./_variables/ajaxVariables.js ***!
+  \*************************************/
+/*! exports provided: updateSetting, getSetting */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "updateSetting", function() { return updateSetting; });
+/* harmony export (binding) */ __webpack_require__.d(__webpack_exports__, "getSetting", function() { return getSetting; });
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_0__);
+
+const updateSetting = async (type, data) => {
+  if (localStorage.wt) {
+    const body = {
+      token: localStorage.wt,
+      type,
+      data
+    };
+    return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/settings/update', body);
+  }
+};
+const getSetting = async type => {
+  const body = {
+    type
+  };
+  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/settings/get', body);
 };
 
 /***/ }),
@@ -183,7 +216,7 @@ const Logo = () => {
   }, __jsx("div", {
     className: "Logo"
   }, __jsx("img", {
-    src: "/static/images/Logo.png"
+    src: "/static/images/logo/Logo.png"
   })));
 };
 
@@ -962,24 +995,10 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 const AppLayout = props => {
-  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_1___default.a, null, __jsx("title", null, "Website Title"), __jsx("meta", {
-    name: "theme-color",
-    content: "#000000"
-  }), __jsx("meta", {
-    name: "viewport",
-    content: "width=device-width, initial-scale=1"
-  }), __jsx("meta", {
-    charSet: "utf-8"
-  }), __jsx("link", {
-    href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
-    rel: "stylesheet"
-  }), __jsx("meta", {
-    name: "description",
-    content: "description of the site"
-  }), __jsx("meta", {
-    name: "keywords",
-    content: "key,word,for,SEO"
-  })), __jsx(_includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_includes_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), __jsx(_includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx(_includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), __jsx("div", {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(props);
+  }, [props]);
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_includes_Header_Header__WEBPACK_IMPORTED_MODULE_2__["default"], null), __jsx(_includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx(_includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_6__["default"], null), __jsx("div", {
     className: "App"
   }, props.children));
 };
@@ -2935,8 +2954,11 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_5__);
 /* harmony import */ var _variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../_variables/ajaxPostsVariables */ "./_variables/ajaxPostsVariables.js");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! axios */ "axios");
-/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! next/head */ "next/head");
+/* harmony import */ var next_head__WEBPACK_IMPORTED_MODULE_7___default = /*#__PURE__*/__webpack_require__.n(next_head__WEBPACK_IMPORTED_MODULE_7__);
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! axios */ "axios");
+/* harmony import */ var axios__WEBPACK_IMPORTED_MODULE_8___default = /*#__PURE__*/__webpack_require__.n(axios__WEBPACK_IMPORTED_MODULE_8__);
+/* harmony import */ var _variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../_variables/ajaxVariables */ "./_variables/ajaxVariables.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -2954,21 +2976,48 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
+
 const Home = props => {
   const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_1__["AppContext"]);
   const {
     0: state,
     1: setState
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    title: props.identity.title || '',
+    themeColor: props.identity.themeColor || '',
+    description: props.identity.description || '',
+    keywords: props.identity.keywords || []
+  });
 
   const FakeComponentForTest = () => {
     return __jsx("div", null, __jsx("p", null, "test"));
-  }; // useEffect(() => {
-  //     console.log(props)
-  // }, [ props ]);
+  };
 
-
-  return __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx("div", {
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(props);
+  }, [props]);
+  return __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, null, __jsx("title", null, state.title), __jsx("meta", {
+    name: "theme-color",
+    content: state.themeColor
+  }), __jsx("meta", {
+    name: "viewport",
+    content: "width=device-width, initial-scale=1"
+  }), __jsx("meta", {
+    charSet: "utf-8"
+  }), __jsx("link", {
+    href: "https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css",
+    rel: "stylesheet"
+  }), __jsx("meta", {
+    name: "description",
+    content: state.description
+  }), __jsx("meta", {
+    name: "keywords",
+    content: state.keywords
+  }), __jsx("link", {
+    rel: "icon",
+    href: "/favicon.ico"
+  })), __jsx("div", {
     className: "HomePage"
   }, __jsx("h1", null, "Header 1"), __jsx(_components_includes_Posts_Posts__WEBPACK_IMPORTED_MODULE_4__["default"], {
     posts: props.posts
@@ -2993,7 +3042,12 @@ Home.getInitialProps = async ({
     fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
     checkedPosts: []
   };
-  const posts = await axios__WEBPACK_IMPORTED_MODULE_7___default.a.post('http://localhost:3000/api/v1/posts/', _objectSpread({}, data)); // const posts = await axios.get('https://jsonplaceholder.typicode.com/posts')
+  const posts = await axios__WEBPACK_IMPORTED_MODULE_8___default.a.post('http://localhost:3000/api/v1/posts/', _objectSpread({}, data));
+  const identity = await Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_9__["getSetting"])('identity');
+  const returnData = {
+    identity: identity.data.setting.data,
+    posts: posts.data.posts
+  }; // const posts = await axios.get('https://jsonplaceholder.typicode.com/posts')
   // let testData = {
   //     name: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
   //     pathname,
@@ -3006,7 +3060,8 @@ Home.getInitialProps = async ({
   // })
 
   return {
-    posts: posts.data.posts
+    posts: posts.data.posts,
+    identity: identity.data.setting.data
   };
 };
 
@@ -3025,7 +3080,7 @@ Home.getInitialProps = async ({
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/
