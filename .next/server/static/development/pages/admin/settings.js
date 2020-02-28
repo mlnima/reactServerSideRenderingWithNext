@@ -2605,9 +2605,6 @@ const settings = props => {
       name: "times"
     })));
   });
-
-  const onNewKeywordHandler = () => {};
-
   return __jsx(_components_layouts_AdminLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx("form", {
     id: "site-settings-form",
     onSubmit: e => onSubmitHandler(e)
@@ -2619,13 +2616,7 @@ const settings = props => {
     onChange: e => onChangeHandler(e)
   })), __jsx("div", {
     className: "site-settings-form-section"
-  }, __jsx("p", null, "Theme Color"), __jsx("input", {
-    name: "themeColor",
-    value: state.themeColor,
-    onChange: e => onChangeHandler(e)
-  })), __jsx("div", {
-    className: "site-settings-form-section"
-  }, __jsx("p", null, "Description"), __jsx("textArea", {
+  }, __jsx("p", null, "Description"), __jsx("textarea", {
     name: "description",
     value: state.description,
     onChange: e => onChangeHandler(e)
@@ -2639,7 +2630,13 @@ const settings = props => {
     onClick: () => addKeyword()
   }, "add"), __jsx("div", {
     className: "items"
-  }, keywords)), __jsx("button", {
+  }, keywords)), __jsx("div", {
+    className: "site-settings-form-section"
+  }, __jsx("p", null, "Theme Color"), __jsx("input", {
+    name: "themeColor",
+    value: state.themeColor,
+    onChange: e => onChangeHandler(e)
+  })), __jsx("button", {
     type: "submit"
   }, "save settings")));
 };

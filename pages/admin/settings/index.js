@@ -81,9 +81,6 @@ const settings = props => {
         )
     });
 
-    const onNewKeywordHandler = ()=>{
-
-    }
 
     return (
         <AdminLayout>
@@ -93,13 +90,8 @@ const settings = props => {
                     <input name='title' value={state.title} onChange={e=>onChangeHandler(e)}/>
                 </div>
                 <div className="site-settings-form-section">
-                    <p>Theme Color</p>
-                    <input name='themeColor' value={state.themeColor}  onChange={e=>onChangeHandler(e)}/>
-                </div>
-
-                <div className="site-settings-form-section">
                     <p>Description</p>
-                    <textArea name='description' value={state.description} onChange={e=>onChangeHandler(e)}/>
+                    <textarea name='description' value={state.description} onChange={e=>onChangeHandler(e)} />
                 </div>
                 <div className="site-settings-form-section">
                     <p>Keywords</p>
@@ -109,6 +101,10 @@ const settings = props => {
                     <div className="items">
                         {keywords}
                     </div>
+                </div>
+                <div className="site-settings-form-section">
+                    <p>Theme Color</p>
+                    <input name='themeColor' value={state.themeColor}  onChange={e=>onChangeHandler(e)}/>
                 </div>
                 <button type='submit'>save settings</button>
             </form>

@@ -44,9 +44,10 @@
   #site-settings-form .site-settings-form-section input {
     background-color: white;
     margin: 10px; }
-  #site-settings-form .site-settings-form-section textArea {
+  #site-settings-form .site-settings-form-section textarea {
     background-color: white;
-    margin: 10px; }
+    margin: 10px;
+    width: 90%; }
   #site-settings-form .site-settings-form-section .items {
     display: flex;
     flex-wrap: wrap; }

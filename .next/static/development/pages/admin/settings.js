@@ -29009,12 +29009,12 @@ function plural(ms, msAbs, n, name) {
 
 /***/ "./node_modules/next/dist/build/polyfills/object-assign.js":
 /*!***********************************************************************************************************************!*\
-  !*** delegated ./node_modules/next/dist/build/polyfills/object-assign.js from dll-reference dll_ef0ff7c60362f24a921f ***!
+  !*** delegated ./node_modules/next/dist/build/polyfills/object-assign.js from dll-reference dll_82519ec661270f7f484f ***!
   \***********************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/next/dist/build/polyfills/object-assign.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_82519ec661270f7f484f */ "dll-reference dll_82519ec661270f7f484f"))("./node_modules/next/dist/build/polyfills/object-assign.js");
 
 /***/ }),
 
@@ -33526,12 +33526,12 @@ module.exports = exports['default'];
 
 /***/ "./node_modules/prop-types/checkPropTypes.js":
 /*!*********************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_ef0ff7c60362f24a921f ***!
+  !*** delegated ./node_modules/prop-types/checkPropTypes.js from dll-reference dll_82519ec661270f7f484f ***!
   \*********************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/prop-types/checkPropTypes.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_82519ec661270f7f484f */ "dll-reference dll_82519ec661270f7f484f"))("./node_modules/prop-types/checkPropTypes.js");
 
 /***/ }),
 
@@ -34166,12 +34166,12 @@ if (true) {
 
 /***/ "./node_modules/prop-types/lib/ReactPropTypesSecret.js":
 /*!*******************************************************************************************************************!*\
-  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_ef0ff7c60362f24a921f ***!
+  !*** delegated ./node_modules/prop-types/lib/ReactPropTypesSecret.js from dll-reference dll_82519ec661270f7f484f ***!
   \*******************************************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_82519ec661270f7f484f */ "dll-reference dll_82519ec661270f7f484f"))("./node_modules/prop-types/lib/ReactPropTypesSecret.js");
 
 /***/ }),
 
@@ -35285,12 +35285,12 @@ if (false) {} else {
 
 /***/ "./node_modules/react/index.js":
 /*!*******************************************************************************************!*\
-  !*** delegated ./node_modules/react/index.js from dll-reference dll_ef0ff7c60362f24a921f ***!
+  !*** delegated ./node_modules/react/index.js from dll-reference dll_82519ec661270f7f484f ***!
   \*******************************************************************************************/
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-module.exports = (__webpack_require__(/*! dll-reference dll_ef0ff7c60362f24a921f */ "dll-reference dll_ef0ff7c60362f24a921f"))("./node_modules/react/index.js");
+module.exports = (__webpack_require__(/*! dll-reference dll_82519ec661270f7f484f */ "dll-reference dll_82519ec661270f7f484f"))("./node_modules/react/index.js");
 
 /***/ }),
 
@@ -42713,9 +42713,6 @@ var settings = function settings(props) {
       name: "times"
     })));
   });
-
-  var onNewKeywordHandler = function onNewKeywordHandler() {};
-
   return __jsx(_components_layouts_AdminLayout__WEBPACK_IMPORTED_MODULE_10__["default"], null, __jsx("form", {
     id: "site-settings-form",
     onSubmit: function onSubmit(e) {
@@ -42731,15 +42728,7 @@ var settings = function settings(props) {
     }
   })), __jsx("div", {
     className: "site-settings-form-section"
-  }, __jsx("p", null, "Theme Color"), __jsx("input", {
-    name: "themeColor",
-    value: state.themeColor,
-    onChange: function onChange(e) {
-      return onChangeHandler(e);
-    }
-  })), __jsx("div", {
-    className: "site-settings-form-section"
-  }, __jsx("p", null, "Description"), __jsx("textArea", {
+  }, __jsx("p", null, "Description"), __jsx("textarea", {
     name: "description",
     value: state.description,
     onChange: function onChange(e) {
@@ -42757,7 +42746,15 @@ var settings = function settings(props) {
     }
   }, "add"), __jsx("div", {
     className: "items"
-  }, keywords)), __jsx("button", {
+  }, keywords)), __jsx("div", {
+    className: "site-settings-form-section"
+  }, __jsx("p", null, "Theme Color"), __jsx("input", {
+    name: "themeColor",
+    value: state.themeColor,
+    onChange: function onChange(e) {
+      return onChangeHandler(e);
+    }
+  })), __jsx("button", {
     type: "submit"
   }, "save settings")));
 };
@@ -42841,14 +42838,14 @@ module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2Fadmin%
 
 /***/ }),
 
-/***/ "dll-reference dll_ef0ff7c60362f24a921f":
+/***/ "dll-reference dll_82519ec661270f7f484f":
 /*!*******************************************!*\
-  !*** external "dll_ef0ff7c60362f24a921f" ***!
+  !*** external "dll_82519ec661270f7f484f" ***!
   \*******************************************/
 /*! no static exports found */
 /***/ (function(module, exports) {
 
-module.exports = dll_ef0ff7c60362f24a921f;
+module.exports = dll_82519ec661270f7f484f;
 
 /***/ })
 
