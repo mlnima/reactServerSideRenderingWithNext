@@ -149,6 +149,10 @@ const AppProvider = props => {
     1: dispatchUserData
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
   const {
+    0: navigationData,
+    1: dispatchNavigationData
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
+  const {
     0: editingPostData,
     1: dispatchEditingPostData
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
@@ -342,7 +346,9 @@ const AppProvider = props => {
       adminPostsData,
       dispatchAdminPostsData,
       videoPostsDataForClient,
-      dispatchVideoPostsDataForClient
+      dispatchVideoPostsDataForClient,
+      navigationData,
+      dispatchNavigationData
     }
   }, props.children));
 };

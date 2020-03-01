@@ -1,30 +1,118 @@
-#site-settings-form{
+@import "../../../styles/colors";
+@import "../../../styles/buttons";
+
+#settings{
+  display: flex;
+  flex-direction: column;
+  a{
+    @include greenActionBtn;
+  }
+}
+
+
+
+
+#site-settings-form {
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  .site-settings-form-section{
-    input{
-      background-color: white;
+  background-color: $light100;
+  padding: 20px;
+
+  button {
+    @include AdminLightBtn;
+    margin: 20px;
+  }
+
+  .submitBtn {
+    @include greenActionBtn
+  }
+
+  .keywords {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+
+  .site-settings-form-section {
+
+    input {
+      background-color: $light100;
       margin: 10px;
+      border: 1px solid $AdminColor80;
     }
-    textarea{
+
+    textarea {
       background-color: white;
       margin: 10px;
       width: 90%;
+      border: 1px solid $AdminColor80;
     }
-    .items{
+
+    .items {
       display: flex;
       flex-wrap: wrap;
 
-      .item{
+      .item {
         display: flex;
         align-items: center;
         margin: 10px;
-        button{
+
+        button {
           margin: 5px;
         }
       }
     }
+  }
+
+}
+
+#navigation-setting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: $light100;
+  padding: 20px;
+
+  .add-navigation-items {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+
+    input {
+      margin: 10px 0;
+    }
+
+    button {
+      @include AdminLightBtn
+    }
+  }
+
+  .items-preview {
+    border-radius: 5px;
+    //border: solid 1px black;
+    .items-preview-item {
+      padding: 5px;
+      margin: 5px;
+      border: solid 1px black;
+      border-radius: 5px;
+      width: 250px;
+      //height: 40px;
+      .item-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        button {
+          @include AdminLightBtn
+        }
+      }
+    }
+  }
+
+  .saveBtn {
+    @include greenActionBtn;
   }
 
 }

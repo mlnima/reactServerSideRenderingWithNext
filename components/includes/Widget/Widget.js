@@ -10,7 +10,7 @@ const Widget = props => {
     return (
         <div className='Widget'>
              <WidgetHeader {...props}/>
-             <props.component />
+             <props.component  {...props}/>
              <WidgetFooter  {...props}/>
         </div>
     );

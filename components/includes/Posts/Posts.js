@@ -22,11 +22,6 @@ const Posts = props => {
     });
     const [ posts, setPosts ] = useState([]);
 
-
-
-    useEffect(()=>{
-        console.log(props )
-    },[ props]);
     const renderPosts = props.posts.map(post => {
         return (
             <VideoElement key={ post._id } state={ post }/>

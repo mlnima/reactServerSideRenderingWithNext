@@ -8,10 +8,6 @@ import Loading from "../includes/Loading/Loading";
 
 const AppLayout = props => {
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
-
     return (
         <>
             <TopBar/>

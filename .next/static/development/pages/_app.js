@@ -79,7 +79,11 @@ var AppProvider = function AppProvider(props) {
       userData = _useState3[0],
       dispatchUserData = _useState3[1];
 
-  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])([]),
+      navigationData = _useState4[0],
+      dispatchNavigationData = _useState4[1];
+
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
     categories: [],
     actors: [],
     tags: [],
@@ -97,14 +101,14 @@ var AppProvider = function AppProvider(props) {
     sourceSite: '',
     views: 0
   }),
-      editingPostData = _useState4[0],
-      dispatchEditingPostData = _useState4[1];
+      editingPostData = _useState5[0],
+      dispatchEditingPostData = _useState5[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])([]),
-      adminPosts = _useState5[0],
-      dispatchAdminPosts = _useState5[1];
+  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])([]),
+      adminPosts = _useState6[0],
+      dispatchAdminPosts = _useState6[1];
 
-  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
     pageNo: 1,
     size: 30,
     totalPosts: 0,
@@ -115,14 +119,14 @@ var AppProvider = function AppProvider(props) {
     fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
     checkedPosts: []
   }),
-      adminPostsData = _useState6[0],
-      dispatchAdminPostsData = _useState6[1];
+      adminPostsData = _useState7[0],
+      dispatchAdminPostsData = _useState7[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])([]),
-      Posts = _useState7[0],
-      dispatchPosts = _useState7[1];
+  var _useState8 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])([]),
+      Posts = _useState8[0],
+      dispatchPosts = _useState8[1];
 
-  var _useState8 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
     pageNo: 1,
     size: 12,
     totalPosts: 0,
@@ -133,10 +137,10 @@ var AppProvider = function AppProvider(props) {
     fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
     checkedPosts: []
   }),
-      videoPostsDataForClient = _useState8[0],
-      dispatchVideoPostsDataForClient = _useState8[1];
+      videoPostsDataForClient = _useState9[0],
+      dispatchVideoPostsDataForClient = _useState9[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
+  var _useState10 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
     getAndSetUserInfo: function getAndSetUserInfo() {
       return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_7___default.a.async(function getAndSetUserInfo$(_context) {
         while (1) {
@@ -311,8 +315,8 @@ var AppProvider = function AppProvider(props) {
       return finalValue;
     }
   }),
-      functions = _useState9[0],
-      dispatchFunctions = _useState9[1];
+      functions = _useState10[0],
+      dispatchFunctions = _useState10[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_9__["useEffect"])(function () {
     functions.getAndSetUserInfo();
@@ -343,7 +347,9 @@ var AppProvider = function AppProvider(props) {
       adminPostsData: adminPostsData,
       dispatchAdminPostsData: dispatchAdminPostsData,
       videoPostsDataForClient: videoPostsDataForClient,
-      dispatchVideoPostsDataForClient: dispatchVideoPostsDataForClient
+      dispatchVideoPostsDataForClient: dispatchVideoPostsDataForClient,
+      navigationData: navigationData,
+      dispatchNavigationData: dispatchNavigationData
     }
   }, props.children));
 };

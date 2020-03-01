@@ -10,6 +10,7 @@ export const AppContext = React.createContext();
 
 const AppProvider = props => {
 
+
     const [ state, dispatchState ] = useState({
         loading: false,
         videoPreviewID:''
@@ -19,6 +20,7 @@ const AppProvider = props => {
         test: false
     });
     const [ userData, dispatchUserData ] = useState({});
+    const [ navigationData, dispatchNavigationData ] = useState([]);
     const [ editingPostData, dispatchEditingPostData ] = useState({
         categories: [],
         actors: [],
@@ -207,7 +209,9 @@ const AppProvider = props => {
                     adminPostsData,
                     dispatchAdminPostsData,
                     videoPostsDataForClient,
-                    dispatchVideoPostsDataForClient
+                    dispatchVideoPostsDataForClient,
+                    navigationData,
+                    dispatchNavigationData
                 } }>
 
                 {props.children }
@@ -215,8 +219,6 @@ const AppProvider = props => {
         </div>
     )
 };
-
-
 
 export const AppProviderWithRouter = withRouter(AppProvider);
 

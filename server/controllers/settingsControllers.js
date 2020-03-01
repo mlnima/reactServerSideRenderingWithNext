@@ -4,7 +4,8 @@ let settingsControllers = {}
 settingsControllers.update = (req, res) => {
     const type = req.body.type;
     const data = req.body.data;
-    settingSchema.findOneAndUpdate(type,{data},{new:true}).exec().then(setting=>{
+    console.log(type,data )
+    settingSchema.findOneAndUpdate({type:type},{data},{new:true}).exec().then(setting=>{
         console.log('setting:',setting )
         if (!setting){
             const dataToSave = new settingSchema({

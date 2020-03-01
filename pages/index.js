@@ -18,18 +18,11 @@ const Home = props => {
         keywords:props.identity.keywords|| []
     });
 
-    const FakeComponentForTest = () => {
-
-        return (
-            <div>
-                <p>test</p>
-            </div>
-        )
-    };
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
-
+    useEffect(()=>{
+        if(props.navigation){
+            contextData.dispatchNavigationData(props.navigation.data)
+        }
+    },[props ]);
 
     return (
         <AppLayout>
@@ -45,14 +38,17 @@ const Home = props => {
             </Head>
             <div className='HomePage'>
                 <h1>Header 1</h1>
-                {/*<Widget component={Videos} title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={true} contextData={contextData} />*/ }
-                <Posts posts={props.posts} />
+                <Widget component={Posts} posts={props.posts} title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={true} contextData={contextData} />
+                {/*<Posts posts={props.posts} />*/}
             </div>
         </AppLayout>
     );
 };
 
 Home.getInitialProps = async ({pathname,query,req,res,err}) => {
+    let posts;
+    let navigation;
+    let identity;
     let data = {
         pageNo: query.pageNo ? parseInt(query.pageNo): 1,
         size: 30,
@@ -65,26 +61,18 @@ Home.getInitialProps = async ({pathname,query,req,res,err}) => {
         checkedPosts: [],
     };
 
-     const posts = await axios.post('http://localhost:3000/api/v1/posts/', {...data});
-     const identity = await getSetting('identity')
-
-    const returnData =  {
-        identity:identity.data.setting.data,
-        posts:posts.data.posts
+    try {
+        // const postsData = await axios.post('http://localhost:3000/api/v1/posts/', {...data});
+        const postsData = await getPosts(data);
+        const identityData = await getSetting('identity');
+        const navigationData = await getSetting('navigation');
+        posts = postsData.data.posts ? postsData.data.posts : []
+        identity= identityData.data.setting ? identityData.data.setting.data : {}
+        navigation = navigationData.data.setting ? navigationData.data.setting : {}
+    }catch ( e ) {
+        console.error(e)
     }
-     // const posts = await axios.get('https://jsonplaceholder.typicode.com/posts')
-    // let testData = {
-    //     name: 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx',
-    //     pathname,
-    //     query
-    // };
-    // console.log(testData )
-    // const response = await fetch('http://localhost:3000/api/v1/posts/', {
-    //     method: 'POST', // *GET, POST, PUT, DELETE, etc.
-    //     body: JSON.stringify(data) // body data type must match "Content-Type" header
-    // })
-
-    return { posts:posts.data.posts,identity:identity.data.setting.data }
+    return { posts,identity,navigation }
 };
 export default withRouter(Home);
 
