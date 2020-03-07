@@ -103,4 +103,11 @@ userControllers.getUserInfo = (req,res)=>{
         res.end()
     })
 };
+userControllers.getUsersList = (req,res)=>{
+    userSchema.find({}).exec().then(users=>{
+        res.json({users});
+        res.end
+    })
+};
+
 module.exports = userControllers;

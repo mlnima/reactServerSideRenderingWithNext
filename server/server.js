@@ -48,6 +48,7 @@ app.prepare().then(()=>{
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/getUserInfo',adminAuthMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
+    server.post('/api/v1/users/getUsersList',adminAuthMiddleware,(req,res)=>{userController.getUsersList(req,res)});
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts',(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts/post',(req,res)=>{postsControllers.getPostInfo(req,res)});
