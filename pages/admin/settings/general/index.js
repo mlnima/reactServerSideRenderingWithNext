@@ -11,7 +11,9 @@ const settings = props => {
         title: '',
         themeColor: '',
         description: '',
-        keywords: []
+        keywords: [],
+        logoText:'',
+        headLine:''
 
     });
     useEffect(() => {
@@ -83,9 +85,6 @@ const settings = props => {
     return (
         <AdminLayout>
             <form id='site-settings-form' onSubmit={ e => onSubmitHandler(e) }>
-
-
-
                 <div className="site-settings-form-section">
                     <p>Site Address (URL)</p>
                     <input name='siteAddress' value={state.siteAddress} onChange={e=>onChangeHandler(e)}/>
@@ -97,6 +96,16 @@ const settings = props => {
                         <option>Https</option>
                     </select>
                 </div>
+
+                <div className="site-settings-form-section">
+                    <p>Logo Text</p>
+                    <input name='logoText' value={state.logoText} onChange={e=>onChangeHandler(e)}/>
+                </div>
+                <div className="site-settings-form-section">
+                    <p>Head Line</p>
+                    <input name='headLine' value={state.headLine} onChange={e=>onChangeHandler(e)}/>
+                </div>
+
                 <div className="site-settings-form-section">
                     <p>Site Title</p>
                     <input name='title' value={state.title} onChange={e=>onChangeHandler(e)}/>

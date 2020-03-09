@@ -10,6 +10,7 @@ export const updateSetting = async (type,data)=>{
         return await axios.post('http://localhost:3000/api/v1/settings/update',body)
     }
 };
+
 export const getSetting = async (type)=>{
         const body = {
             type,

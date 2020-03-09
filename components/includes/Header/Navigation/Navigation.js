@@ -47,14 +47,9 @@ const Navigation = props => {
         navigationData.isOpen ? setNavigationData({ ...navigationData, isOpen: false }) : setNavigationData({ ...navigationData, isOpen: true })
     };
 
-
-    useEffect(()=>{
-        console.log(navigationData )
-    },[navigationData ]);
-
     const renderNavigationItems = navigationData.items.map(item=>{
         return(
-            <Link href={item.url}><a>{item.title}</a></Link>
+            <Link key={item.title} href={item.url}><a>{item.title}</a></Link>
         )
     })
 

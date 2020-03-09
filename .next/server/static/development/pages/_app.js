@@ -138,6 +138,15 @@ const AppProvider = props => {
     videoPreviewID: ''
   });
   const {
+    0: siteIdentity,
+    1: dispatchSiteIdentity
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    title: 'site title',
+    themeColor: '#000',
+    description: 'site description',
+    keywords: []
+  });
+  const {
     0: settings,
     1: dispatchSettings
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
@@ -190,6 +199,12 @@ const AppProvider = props => {
     author: 'all',
     fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
     checkedPosts: []
+  });
+  const {
+    0: widgetsSettings,
+    1: dispatchWidgetsSettings
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    homeWidgets: []
   });
   const {
     0: Posts,
@@ -348,7 +363,11 @@ const AppProvider = props => {
       videoPostsDataForClient,
       dispatchVideoPostsDataForClient,
       navigationData,
-      dispatchNavigationData
+      dispatchNavigationData,
+      dispatchSiteIdentity,
+      siteIdentity,
+      widgetsSettings,
+      dispatchWidgetsSettings
     }
   }, props.children));
 };

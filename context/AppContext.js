@@ -5,15 +5,19 @@ import axios from "axios";
 
 import { withRouter } from "next/router";
 
-
 export const AppContext = React.createContext();
 
 const AppProvider = props => {
 
-
     const [ state, dispatchState ] = useState({
         loading: false,
-        videoPreviewID:''
+        videoPreviewID: ''
+    });
+    const [ siteIdentity, dispatchSiteIdentity ] = useState({
+        title: 'site title',
+        themeColor: '#000',
+        description: 'site description',
+        keywords: []
     });
     const [ settings, dispatchSettings ] = useState({
         adminPanelSideBar: false,
@@ -50,6 +54,9 @@ const AppProvider = props => {
         author: 'all',
         fields: [ 'author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories' ],
         checkedPosts: [],
+    });
+    const [ widgetsSettings, dispatchWidgetsSettings ] = useState({
+        homeWidgets: []
     });
     const [ Posts, dispatchPosts ] = useState([]);
     const [ videoPostsDataForClient, dispatchVideoPostsDataForClient ] = useState({
@@ -105,7 +112,7 @@ const AppProvider = props => {
             };
             return await axios.post('/api/v1/posts', body)
         },
-    //exported to variables file ----
+        //exported to variables file ----
         getPost: async (_id) => {
             const body = {
                 _id,
@@ -149,7 +156,7 @@ const AppProvider = props => {
             };
             return axios.post('/api/v1/posts/deletePost', body)
         },
-        likeValueCalculator:(likes, dislikes) => {
+        likeValueCalculator: (likes, dislikes) => {
             let finalValue = 0;
             if (likes > 0 && dislikes > 0) {
                 let total = likes + dislikes;
@@ -186,10 +193,7 @@ const AppProvider = props => {
                 })
             })
         }
-    }, [ props.router.pathname,adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields ]);
-
-
-
+    }, [ props.router.pathname, adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields ]);
 
     return (
         <div>
@@ -211,10 +215,14 @@ const AppProvider = props => {
                     videoPostsDataForClient,
                     dispatchVideoPostsDataForClient,
                     navigationData,
-                    dispatchNavigationData
+                    dispatchNavigationData,
+                    dispatchSiteIdentity,
+                    siteIdentity,
+                    widgetsSettings,
+                    dispatchWidgetsSettings
                 } }>
 
-                {props.children }
+                { props.children }
             </AppContext.Provider>
         </div>
     )

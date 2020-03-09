@@ -216,7 +216,6 @@ class Header extends react__WEBPACK_IMPORTED_MODULE_0__["Component"] {
   }
 
   render() {
-    console.log(this.props);
     return __jsx("div", {
       className: "Header"
     }, __jsx(_Logo_Logo__WEBPACK_IMPORTED_MODULE_1__["default"], null));
@@ -241,18 +240,43 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
 const Logo = () => {
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_2__["AppContext"]);
+  const {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    logoText: contextData.siteIdentity.logoText || 'Logo',
+    headLine: contextData.siteIdentity.headLine || 'Head Line'
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    setState(_objectSpread({}, state, {
+      logoText: contextData.siteIdentity.logoText,
+      headLine: contextData.siteIdentity.headLine
+    }));
+  }, [contextData.siteIdentity]);
   return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
     href: "/"
   }, __jsx("div", {
     className: "Logo"
-  }, __jsx("img", {
-    src: "/static/images/logo/Logo.png"
-  })));
+  }, __jsx("span", {
+    className: "logoText"
+  }, state.logoText), __jsx("p", {
+    className: "headLine"
+  }, state.headLine)));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Logo);
@@ -332,11 +356,9 @@ const Navigation = props => {
     }));
   };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(navigationData);
-  }, [navigationData]);
   const renderNavigationItems = navigationData.items.map(item => {
     return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      key: item.title,
       href: item.url
     }, __jsx("a", null, item.title));
   });
@@ -1092,6 +1114,15 @@ const AppProvider = props => {
     videoPreviewID: ''
   });
   const {
+    0: siteIdentity,
+    1: dispatchSiteIdentity
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    title: 'site title',
+    themeColor: '#000',
+    description: 'site description',
+    keywords: []
+  });
+  const {
     0: settings,
     1: dispatchSettings
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
@@ -1144,6 +1175,12 @@ const AppProvider = props => {
     author: 'all',
     fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
     checkedPosts: []
+  });
+  const {
+    0: widgetsSettings,
+    1: dispatchWidgetsSettings
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    homeWidgets: []
   });
   const {
     0: Posts,
@@ -1302,7 +1339,11 @@ const AppProvider = props => {
       videoPostsDataForClient,
       dispatchVideoPostsDataForClient,
       navigationData,
-      dispatchNavigationData
+      dispatchNavigationData,
+      dispatchSiteIdentity,
+      siteIdentity,
+      widgetsSettings,
+      dispatchWidgetsSettings
     }
   }, props.children));
 };
@@ -3007,6 +3048,13 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! ../_variables/ajaxVariables */ "./_variables/ajaxVariables.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
 
 
 
@@ -3032,7 +3080,14 @@ const Home = props => {
     if (props.navigation) {
       contextData.dispatchNavigationData(props.navigation.data);
     }
+
+    if (props.identity) {
+      contextData.dispatchSiteIdentity(siteIdentity => _objectSpread({}, siteIdentity, {}, props.identity));
+    }
   }, [props]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(contextData.siteIdentity);
+  }, [contextData.siteIdentity]);
   return __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx(next_head__WEBPACK_IMPORTED_MODULE_7___default.a, null, __jsx("title", null, state.title), __jsx("meta", {
     name: "theme-color",
     content: state.themeColor

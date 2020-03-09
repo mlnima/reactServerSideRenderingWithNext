@@ -7,4 +7,4 @@ const homePageWidgetSchema = mongoose.Schema({
     redirectLink:String
 });
 
-module.exports = mongoose.model("settings", homePageWidgetSchema);
+module.exports = mongoose.model("homePageWidget", homePageWidgetSchema);

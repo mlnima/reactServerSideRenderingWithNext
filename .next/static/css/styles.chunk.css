@@ -671,9 +671,12 @@
 
 .Logo {
   display: flex;
+  flex-direction: column;
   justify-content: flex-start;
   width: 90%;
   padding: 30px 0; }
+  .Logo .logoText {
+    font-size: xx-large; }
   .Logo img {
     border: 1px white solid;
     width: 180px; }
