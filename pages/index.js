@@ -15,7 +15,8 @@ const Home = props => {
         title: props.identity.title || '',
         themeColor: props.identity.themeColor || '',
         description: props.identity.description || '',
-        keywords: props.identity.keywords || []
+        keywords: props.identity.keywords || [],
+        homePageH1:props.identity.homePageH1 || 'H1 element'
     });
 
     useEffect(() => {
@@ -47,7 +48,7 @@ const Home = props => {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <div className='HomePage'>
-                <h1>Header 1</h1>
+                <h1>{state.homePageH1}</h1>
                 <Widget component={ Posts } posts={ props.posts } title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={ true } contextData={ contextData }/>
                 {/*<Posts posts={props.posts} />*/ }
             </div>

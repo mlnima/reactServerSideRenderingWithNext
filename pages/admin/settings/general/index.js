@@ -13,7 +13,8 @@ const settings = props => {
         description: '',
         keywords: [],
         logoText:'',
-        headLine:''
+        headLine:'',
+        homePageH1:''
 
     });
     useEffect(() => {
@@ -113,6 +114,10 @@ const settings = props => {
                 <div className="site-settings-form-section">
                     <p>Description</p>
                     <textarea name='description' value={state.description} onChange={e=>onChangeHandler(e)} />
+                </div>
+                <div className="site-settings-form-section">
+                    <p>Home Page H1</p>
+                    <textarea name='homePageH1' value={state.homePageH1} onChange={e=>onChangeHandler(e)} />
                 </div>
                 <div className="site-settings-form-section keywords">
                     <p>Keywords</p>

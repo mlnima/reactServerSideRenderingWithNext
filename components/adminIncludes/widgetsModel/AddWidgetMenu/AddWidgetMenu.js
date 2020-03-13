@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import {models} from './models'
-import { AppContext } from '../../../../context/AppContext'
+import {widgetModels} from './models'
+import { AppContext } from '../../../../context/AppContext';
+import {addNewWidget} from '../../../../_variables/ajaxVariables'
 
 const AddWidgetMenu = props => {
     const contextData = useContext(AppContext);
@@ -8,21 +9,24 @@ const AddWidgetMenu = props => {
     useEffect(() => {
     }, []);
 
-    const onAddNewWidget = (e) => {
-        const type = [e.target.name]
-        contextData.dispatchWidgetsSettings(widgetSettings => ({
-            ...widgetSettings,
-            homeWidgets: [ ...contextData.widgetsSettings.homeWidgets, models[type] ]
-        }))
-    }
+    const onAddNewWidget = (position,type) => {
+        // const type = [e.target.name]
+        // contextData.dispatchWidgetsSettings(widgetSettings => ({
+        //     ...widgetSettings,
+        //     homeWidgets: [ ...contextData.widgetsSettings.homeWidgets, models[type] ]
+        // }))
+         let dataToSave = widgetModels;
+         dataToSave.type = type
+         dataToSave.position = position
+        addNewWidget(widgetModels).then(res=>{
+            console.log( res.data)
+        })
 
-    useEffect(() => {
-        console.log(contextData.widgetsSettings)
-    }, [ contextData.widgetsSettings ]);
+    }
 
     return (
         <div className='AddWidgetMenu'>
-            <button name='video' onClick={ e => onAddNewWidget(e) }>Add Video Widget</button>
+            <button  name='video' onClick={ element => onAddNewWidget('home','videoBlocks') }>Add Video Widget to Home</button>
         </div>
     );
 };

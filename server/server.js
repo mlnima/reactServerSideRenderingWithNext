@@ -59,6 +59,10 @@ app.prepare().then(()=>{
     server.post('/api/v1/posts/likeDislikeView',(req,res)=>{postsControllers.likeDislikeView(req,res)});
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
     server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
+    server.post('/api/v1/settings/addWidget',(req,res)=>{settingsControllers.addWidget(req,res)});
+    server.post('/api/v1/settings/getWidgets',(req,res)=>{settingsControllers.getWidgets(req,res)});
+    server.post('/api/v1/settings/updateWidgets',(req,res)=>{settingsControllers.updateWidgets(req,res)});
+    server.post('/api/v1/settings/deleteWidget',(req,res)=>{settingsControllers.deleteWidget(req,res)});
 
 
 //-------------------post route bad for SEO----------------------

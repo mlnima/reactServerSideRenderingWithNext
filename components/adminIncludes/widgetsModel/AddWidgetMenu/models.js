@@ -1,8 +1,11 @@
-export let models = {}
-
-models.video={
-    category:'all',
-    tags:'all',
-    count:6,
-
+export let widgetModels = {
+    type: '',
+    title: '',
+    categories:[],
+    tags:[],
+    count:8,
+    pagination:false,
+    position:'',
+    redirectLink:''
 }
+
