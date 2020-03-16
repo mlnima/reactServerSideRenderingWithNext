@@ -16,6 +16,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 
+mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/nextDB", {
   useNewUrlParser: true,
   useUnifiedTopology: true
@@ -60,8 +61,9 @@ app.prepare().then(()=>{
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
     server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
     server.post('/api/v1/settings/addWidget',(req,res)=>{settingsControllers.addWidget(req,res)});
-    server.post('/api/v1/settings/getWidgets',(req,res)=>{settingsControllers.getWidgets(req,res)});
-    server.post('/api/v1/settings/updateWidgets',(req,res)=>{settingsControllers.updateWidgets(req,res)});
+    server.post('/api/v1/settings/getWidget',(req,res)=>{settingsControllers.getWidget(req,res)});
+    server.post('/api/v1/settings/getWidgetsWithData',(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
+    server.post('/api/v1/settings/updateWidget',(req,res)=>{settingsControllers.updateWidget(req,res)});
     server.post('/api/v1/settings/deleteWidget',(req,res)=>{settingsControllers.deleteWidget(req,res)});
 
 

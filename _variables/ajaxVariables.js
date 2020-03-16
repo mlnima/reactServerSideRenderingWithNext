@@ -33,7 +33,13 @@ export const getWidgets = async (position)=>{
     const body = {
         position,
     };
-    return await axios.post('http://localhost:3000/api/v1/settings/getWidgets',body)
+    return await axios.post('http://localhost:3000/api/v1/settings/getWidget',body)
+}
+export const getWidgetsWithData = async (position)=>{
+    const body = {
+        position,
+    };
+    return await axios.post('http://localhost:3000/api/v1/settings/getWidgetsWithData',body)
 }
 
 export const updateWidgets = async (id,data)=>{
@@ -41,7 +47,7 @@ export const updateWidgets = async (id,data)=>{
         id,
         data,
     };
-    return await axios.post('http://localhost:3000/api/v1/settings/updateWidgets',body)
+    return await axios.post('http://localhost:3000/api/v1/settings/updateWidget',body)
 }
 
 export const deleteWidgets = async (id)=>{

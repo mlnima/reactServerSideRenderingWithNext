@@ -1,5 +1,7 @@
 const settingSchema = require('../models/settings/settingSchema')
 const widgetSchema = require('../models/settings/widgetSchema')
+const postSchema = require('../models/postSchema')
+const mongoose = require('mongoose')
 let settingsControllers = {}
 
 settingsControllers.update = (req, res) => {
@@ -52,29 +54,67 @@ settingsControllers.addWidget = (req, res) => {
     })
 }
 
-settingsControllers.getWidgets = (req, res) => {
-    const position = req.body.position;
-    widgetSchema.find({ position:position }).exec().then(widgets => {
+settingsControllers.getWidget = (req, res) => {
+    const position = req.body.position = 'all' ? {} : { position: req.body.position };
+    widgetSchema.find(position).exec().then(widgets => {
         res.json({ widgets })
         res.end()
     })
 }
-settingsControllers.deleteWidget = (req, res) => {
-    const _id = req.body.id;
-    widgetSchema.findByIdAndDelete({_id }).exec().then(() => {
-        res.json({ deleted:true })
+
+settingsControllers.getWidgetsWithData = (req, res) => {
+    const position = req.body.position = 'all' ? {} : { position: req.body.position };
+    widgetSchema.find(position).exec().then(async widgets => {
+        const mapWidget = widgets.map(async widget => {
+            let finalData = {
+                title: widget.title,
+                categories: widget.categories,
+                tags: widget.tags,
+                pagination: widget.pagination,
+                redirectLink: widget.redirectLink,
+                count: widget.count,
+                type: widget.type,
+                posts: [],
+                sortBy: widget.sortBy,
+                text: widget.text,
+                textAlign: widget.textAlign,
+                customHtml: widget.customHtml
+            }
+            // finalData.posts = ['test']
+            const sortMethod = finalData.sortBy ? {[finalData.sortBy]:-1} : '-_id'
+            console.log(sortMethod )
+            if (finalData.type === 'posts') {
+                await postSchema.find({}).limit(widget.count).sort(sortMethod).exec().then(posts => {
+                    finalData.posts = posts
+                })
+                return finalData
+            } else {
+                return widget
+            }
+
+        })
+        res.json({ widgets: await Promise.all(mapWidget) })
         res.end()
     })
 }
-settingsControllers.updateWidgets = (req, res) => {
-    const data = req.body.data;
-    console.log( data)
+//____________________________________________________________________________________________
+settingsControllers.deleteWidget = (req, res) => {
     const _id = req.body.id;
-    widgetSchema.findByIdAndUpdate(_id,data,{new:true}).exec().then(updatedWidgets => {
+    widgetSchema.findByIdAndDelete({ _id }).exec().then(() => {
+        res.json({ deleted: true })
+        res.end()
+    })
+}
+
+settingsControllers.updateWidget = (req, res) => {
+    const data = req.body.data;
+    console.log(data)
+    const _id = req.body.id;
+    widgetSchema.findByIdAndUpdate(_id, data, { new: true }).exec().then(updatedWidgets => {
         res.json({ updatedWidgets })
         res.end()
-    }).catch(err=>{
-        console.log( err)
+    }).catch(err => {
+        console.log(err)
     })
 }
 

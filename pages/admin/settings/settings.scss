@@ -120,11 +120,54 @@
     button {
       @include greenActionBtn;
       //background-color: white;
-      color: black;
+      //color: white;
+      font-size: x-small;
     }
   }
 
   .saveBtn {
     @include greenActionBtn;
+  }
+
+  .widgets{
+    //grid-column-start: 2;
+    //grid-column-end: 4;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 10px;
+
+
+    .widgetAdminPanelItem{
+      .widgetAdminPanelItemHeader{
+        background-color: $AdminColor80;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  .widgets{
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 10px;
+
+    .widgetAdminPanelItem{
+      .widgetAdminPanelItemHeader{
+        background-color: $AdminColor80;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+      }
+    }
   }
 }

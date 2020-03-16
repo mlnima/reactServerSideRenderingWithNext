@@ -207,7 +207,7 @@
   box-sizing: border-box;
   margin-top: 10px;
   margin-bottom: 10px;
-  color: black; }
+  font-size: x-small; }
 
 #HomePageWidgets .saveBtn {
   background: linear-gradient(#67ae55, #578843);
@@ -229,6 +229,34 @@
   box-sizing: border-box;
   margin-top: 10px;
   margin-bottom: 10px; }
+
+#HomePageWidgets .widgets {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px; }
+  #HomePageWidgets .widgets .widgetAdminPanelItem .widgetAdminPanelItemHeader {
+    background-color: #33373c;
+    color: white;
+    padding: 10px;
+    border-radius: 5px;
+    text-align: center;
+    font-weight: bold;
+    font-size: large; }
+
+@media only screen and (min-width: 600px) {
+  .widgets {
+    grid-column-start: 2;
+    grid-column-end: 4;
+    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+    grid-gap: 10px; }
+    .widgets .widgetAdminPanelItem .widgetAdminPanelItemHeader {
+      background-color: #33373c;
+      color: white;
+      padding: 10px;
+      border-radius: 5px;
+      text-align: center;
+      font-weight: bold;
+      font-size: large; } }
 
 .DropDownWidget {
   display: flex;
@@ -710,14 +738,39 @@
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   width: 100%; }
-  #HomePageWidgets .VideoWidgetModel {
-    display: grid;
-    grid-gap: 20px;
+  #HomePageWidgets .widgetModel {
+    background-color: #33373c;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
     max-width: 300px;
     padding: 10px;
-    border: solid .5px black; }
-    #HomePageWidgets .VideoWidgetModel input, #HomePageWidgets .VideoWidgetModel select {
-      background-color: white; }
+    border: solid .5px black;
+    margin: 5px;
+    color: white; }
+    #HomePageWidgets .widgetModel button {
+      background-color: #f1f1f1;
+      color: black;
+      outline: none;
+      border: 0.4px #9fa3a8 solid;
+      padding: 8px 10px;
+      border-radius: 5px; }
+      #HomePageWidgets .widgetModel button:active {
+        background-color: white;
+        border: none; }
+    #HomePageWidgets .widgetModel .widgetInfo {
+      display: flex;
+      flex-direction: column;
+      color: white;
+      font-size: small; }
+      #HomePageWidgets .widgetModel .widgetInfo label {
+        display: flex;
+        justify-content: space-between; }
+    #HomePageWidgets .widgetModel input, #HomePageWidgets .widgetModel select, #HomePageWidgets .widgetModel button {
+      margin: 5px; }
+    #HomePageWidgets .widgetModel input, #HomePageWidgets .widgetModel select {
+      background-color: #181818;
+      color: white; }
 
 .Header {
   background-color: black;
@@ -1002,6 +1055,11 @@
   .videoPreviewMobile {
     display: none; } }
 
+.Widget {
+  padding: 10px; }
+  .Widget .widgetText {
+    padding: 0 10px; }
+
 .WidgetFooter a {
   color: white;
   background-color: #282828;
@@ -1097,6 +1155,9 @@
   .Post {
     grid-template-columns: 1fr 200px;
     grid-template-rows: none; } }
+
+.HomePage h1 {
+  padding: 0 20px; }
 
 .post {
   display: grid;

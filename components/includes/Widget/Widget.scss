@@ -1,4 +1,7 @@
 @import "../../../styles/colors";
 .Widget{
-
+  padding: 10px;
+  .widgetText{
+    padding: 0 10px;
+  }
 }

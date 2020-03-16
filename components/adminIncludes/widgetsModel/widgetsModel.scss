@@ -1,20 +1,48 @@
 @import "../../../styles/colors";
+@import "../../../styles/buttons";
 
-#HomePageWidgets{
+#HomePageWidgets {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
   width: 100%;
-  .VideoWidgetModel{
-    display: grid;
-    grid-gap: 20px;
+
+  .widgetModel {
+    background-color: $AdminColor80;
+    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
     //flex-direction: column;
     max-width: 300px;
     padding: 10px;
     border: solid .5px black;
-input,select{
-  background-color: $light100;
-}
+    margin: 5px;
+    color: $light100;
+    button {
+      @include AdminLightBtn;
+
+    }
+
+    .widgetInfo {
+      display: flex;
+      //justify-content: space-between;
+      flex-direction: column;
+      color: $light100;
+      font-size: small;
+      label{
+        //padding: 5px 0;
+        display: flex;
+        justify-content: space-between;
+      }
+    }
+
+    input, select, button {
+      margin: 5px ;
+    }
+
+    input, select {
+      background-color: $dark90;
+      color: $light100;
+    }
   }
 }
 

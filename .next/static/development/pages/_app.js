@@ -132,7 +132,7 @@ var AppProvider = function AppProvider(props) {
       dispatchAdminPostsData = _useState8[1];
 
   var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_9__["useState"])({
-    homeWidgets: []
+    widgets: []
   }),
       widgetsSettings = _useState9[0],
       dispatchWidgetsSettings = _useState9[1];

@@ -6,6 +6,10 @@ export let widgetModels = {
     count:8,
     pagination:false,
     position:'',
-    redirectLink:''
+    redirectLink:'',
+    sortBy:'',
+    text:'',
+    textAlign:'center',
+    customHtml:''
 }
 

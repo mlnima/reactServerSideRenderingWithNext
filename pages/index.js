@@ -7,7 +7,8 @@ import withRouter from "next/dist/client/with-router";
 import { getPosts } from "../_variables/ajaxPostsVariables";
 import Head from "next/head";
 import axios from "axios";
-import { getSetting } from "../_variables/ajaxVariables";
+import { getSetting, getWidgets, getWidgetsWithData } from "../_variables/ajaxVariables";
+import Text from '../components/includes/Widget/WidgetsModelsComponents/Text/Text'
 
 const Home = props => {
     const contextData = useContext(AppContext);
@@ -16,7 +17,7 @@ const Home = props => {
         themeColor: props.identity.themeColor || '',
         description: props.identity.description || '',
         keywords: props.identity.keywords || [],
-        homePageH1:props.identity.homePageH1 || 'H1 element'
+        homePageH1: props.identity.homePageH1 || 'H1 element'
     });
 
     useEffect(() => {
@@ -32,8 +33,31 @@ const Home = props => {
     }, [ props ]);
 
     useEffect(() => {
-        console.log(contextData.siteIdentity)
-    }, [ contextData.siteIdentity ]);
+        console.log(props)
+    }, [ props ]);
+
+
+
+
+    const renderWidgets =props.widgets.map(widget=>{
+        switch (widget.type ) {
+            case 'posts':
+                return(
+                    <Widget key={widget._id}  text={ widget.text } textAlign={widget.textAlign} component={ Posts } posts={ widget.posts } title={widget.title} mainLinkUrl={widget.redirectLink} redirectToTitle='More Posts' pagination={ true }/>
+                )
+                break
+            case 'text':
+                return(
+                    <Widget key={widget._id}   text={ widget.text } textAlign={widget.textAlign} title={widget.title} mainLinkUrl='/posts/' redirectToTitle='More videos' />
+                )
+                break
+            default:
+                break
+
+        }
+
+    })
+
 
     return (
         <AppLayout>
@@ -48,8 +72,9 @@ const Home = props => {
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
             <div className='HomePage'>
-                <h1>{state.homePageH1}</h1>
-                <Widget component={ Posts } posts={ props.posts } title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={ true } contextData={ contextData }/>
+                <h1>{ state.homePageH1 }</h1>
+                {renderWidgets}
+                {/*<Widget component={ Posts } posts={ props.posts } title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={ true } contextData={ contextData }/>*/}
                 {/*<Posts posts={props.posts} />*/ }
             </div>
         </AppLayout>
@@ -57,9 +82,10 @@ const Home = props => {
 };
 
 Home.getInitialProps = async ({ pathname, query, req, res, err }) => {
-    let posts;
+    // let posts;
     let navigation;
     let identity;
+    let widgets ;
     let data = {
         pageNo: query.pageNo ? parseInt(query.pageNo) : 1,
         size: 30,
@@ -73,17 +99,18 @@ Home.getInitialProps = async ({ pathname, query, req, res, err }) => {
     };
 
     try {
-        // const postsData = await axios.post('http://localhost:3000/api/v1/posts/', {...data});
-        const postsData = await getPosts(data);
+
         const identityData = await getSetting('identity');
         const navigationData = await getSetting('navigation');
-        posts = postsData.data.posts ? postsData.data.posts : []
+        const widgetsData = await getWidgetsWithData('all')
+
         identity = identityData.data.setting ? identityData.data.setting.data : {}
         navigation = navigationData.data.setting ? navigationData.data.setting : {}
+        widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     } catch ( e ) {
         console.error(e)
     }
-    return { posts, identity, navigation }
+    return {  identity, navigation,widgets }
 };
 export default withRouter(Home);
 

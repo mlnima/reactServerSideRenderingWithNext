@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import {widgetModels} from './models'
+import { widgetModels } from './models'
 import { AppContext } from '../../../../context/AppContext';
-import {addNewWidget} from '../../../../_variables/ajaxVariables'
+import { addNewWidget, getWidgets } from '../../../../_variables/ajaxVariables'
 
 const AddWidgetMenu = props => {
     const contextData = useContext(AppContext);
@@ -9,24 +9,26 @@ const AddWidgetMenu = props => {
     useEffect(() => {
     }, []);
 
-    const onAddNewWidget = (position,type) => {
-        // const type = [e.target.name]
-        // contextData.dispatchWidgetsSettings(widgetSettings => ({
-        //     ...widgetSettings,
-        //     homeWidgets: [ ...contextData.widgetsSettings.homeWidgets, models[type] ]
-        // }))
-         let dataToSave = widgetModels;
-         dataToSave.type = type
-         dataToSave.position = position
-        addNewWidget(widgetModels).then(res=>{
-            console.log( res.data)
+    const onAddNewWidget = (position, type) => {
+        let dataToSave = widgetModels;
+        dataToSave.position = position
+        dataToSave.type = type
+        addNewWidget(widgetModels).then(res => {
+            getWidgets('home').then(res => {
+                contextData.dispatchWidgetsSettings({
+                    widgets: [ ...res.data.widgets ]
+                })
+            })
         })
 
     }
 
     return (
         <div className='AddWidgetMenu'>
-            <button  name='video' onClick={ element => onAddNewWidget('home','videoBlocks') }>Add Video Widget to Home</button>
+            <button onClick={ () => onAddNewWidget('home', 'text') }>Add Widget To Home</button>
+            <button onClick={ () => onAddNewWidget('sidebar', 'text') }>Add Widget To Sidebar</button>
+            <button onClick={ () => onAddNewWidget('postPageSideBar', 'text') }>Add Widget To Post Page Sidebar</button>
+            <button onClick={ () => onAddNewWidget('footer', 'text') }>Add Widget To Footer</button>
         </div>
     );
 };

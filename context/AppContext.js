@@ -56,7 +56,8 @@ const AppProvider = props => {
         checkedPosts: [],
     });
     const [ widgetsSettings, dispatchWidgetsSettings ] = useState({
-        homeWidgets: []
+        widgets: [],
+
     });
     const [ Posts, dispatchPosts ] = useState([]);
     const [ videoPostsDataForClient, dispatchVideoPostsDataForClient ] = useState({

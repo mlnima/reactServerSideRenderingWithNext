@@ -204,7 +204,7 @@ const AppProvider = props => {
     0: widgetsSettings,
     1: dispatchWidgetsSettings
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    homeWidgets: []
+    widgets: []
   });
   const {
     0: Posts,

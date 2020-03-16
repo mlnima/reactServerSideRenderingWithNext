@@ -24,6 +24,9 @@ postsControllers.updatePost = (req, res) => {
     })
 };
 
+
+
+
 postsControllers.getPostsInfo = async (req, res) => {
     const size = req.body.size;
     const pageNo = req.body.pageNo;

@@ -8,7 +8,12 @@ const widgetSchema = mongoose.Schema({
     count:Number,
     pagination:Boolean,
     position:String,
-    redirectLink:String
+    redirectLink:String,
+    sortBy:String,
+    text:String,
+    textAlign:String,
+    customHtml:String,
+
 });
 
 module.exports = mongoose.model("widgets", widgetSchema);
