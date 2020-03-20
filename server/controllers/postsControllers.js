@@ -1,9 +1,32 @@
 let postsControllers = {};
 const postSchema = require('../models/postSchema');
+const metaSchema = require('../models/metaSchema');
 
 postsControllers.createNewPost = (req, res) => {
-    const newPostData = new postSchema(req.body.postData);
-    newPostData.save().then(savedPostData => {
+    const newPost = req.body.postData
+    if(newPost.tags){
+        newPost.tags.forEach(tag=>{
+            const tagDataToSave = new metaSchema({name:tag,
+                type:'tag'})
+            tagDataToSave.save()
+        })
+    }
+    if(newPost.categories){
+        newPost.categories.forEach(category=>{
+            const categoryDataToSave = new metaSchema({name:category,
+                type:'category'})
+            categoryDataToSave.save()
+        })
+    }
+    if(newPost.actors){
+        newPost.actors.forEach(actor=>{
+            const actorDataToSave = new metaSchema({name:actor,
+                type:'actor'})
+            actorDataToSave.save()
+        })
+    }
+    const newPostDataToSave = new postSchema(newPost);
+    newPostDataToSave.save().then(savedPostData => {
         console.log(savedPostData, ' saved ');
         res.json({ savedPostData });
         res.end()

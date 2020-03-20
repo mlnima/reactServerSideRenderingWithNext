@@ -67,6 +67,7 @@ settingsControllers.getWidgetsWithData = (req, res) => {
     widgetSchema.find(position).exec().then(async widgets => {
         const mapWidget = widgets.map(async widget => {
             let finalData = {
+                _id:widget._id,
                 title: widget.title,
                 categories: widget.categories,
                 tags: widget.tags,
@@ -80,6 +81,11 @@ settingsControllers.getWidgetsWithData = (req, res) => {
                 textAlign: widget.textAlign,
                 customHtml: widget.customHtml
             }
+            let finalDataTest = {
+                ...widgets[widgets.indexOf(widget)],
+                posts: []
+            }
+            console.log(widgets[widgets.indexOf(widget)])
             // finalData.posts = ['test']
             const sortMethod = finalData.sortBy ? {[finalData.sortBy]:-1} : '-_id'
             console.log(sortMethod )

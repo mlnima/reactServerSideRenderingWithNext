@@ -74,6 +74,17 @@ app.prepare().then(()=>{
 
     });
 //---------------------------------------------------------------
+//     server.get('/categories',(req,res)=>{
+//         const targetComponent = '/categories';
+//         // const params = {postTitle:req.params.postTitle}
+//         app.render(req,res,targetComponent)
+//
+//     });
+
+    //---------------------------------------------------------------
+
+
+
     server.get('/:postTitle',(req,res)=>{
         const targetComponent = '/post';
         const params = {postTitle:req.params.postTitle}

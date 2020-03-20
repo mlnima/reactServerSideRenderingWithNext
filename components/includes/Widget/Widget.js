@@ -4,15 +4,13 @@ import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
 
 const Widget = props => {
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
+
     const RenderComponent = () => {
         if (props.component) {
-return (
-    <props.component  { ...props }/>
-)
-        }else return null
+            return (
+                <props.component  { ...props }/>
+            )
+        } else return null
     }
 
     return (

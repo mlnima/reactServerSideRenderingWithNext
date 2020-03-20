@@ -87,6 +87,21 @@ const WidgetModel = props => {
         )
     })
 
+
+    useEffect(()=>{
+
+
+        setTimeout(()=>{
+            let items= ['count']
+            items.forEach(item=>{
+                if ([item].current){
+                    [item].current.value=state[item]
+                }
+            })
+        },2000)
+
+    },[])
+
     const RenderOptionByFormat = () => {
         switch ( state.type ) {
             case 'posts':
@@ -117,7 +132,7 @@ const WidgetModel = props => {
                             { renderTags }
                         </div>
                         <p>Count:</p>
-                        <input name='count' type='number' className='count' placeholder='count' value={ state.count } onChange={ e => onChangeHandler(e) }/>
+                        <input ref={count} name='count' type='number' className='count' placeholder='count' value={state.count}  onChange={ e => onChangeHandler(e) }/>
                         <span>Pagination:</span>
                         <select name='pagination' value={ state.pagination } onChange={ e => onChangeHandler(e) }>
                             <option value={ false }>false</option>

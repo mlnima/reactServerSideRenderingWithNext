@@ -95,7 +95,7 @@ const BodyTable = props => {
     let HoverOnTitle = (props) => {
 
         if (props.post._id === state.hoveredId) {
-            let editPostPath = `/admin/Post?id=${ props.post._id }`;
+            let editPostPath = `/admin/post?id=${ props.post._id }`;
             if (props.post.status === 'Trash') {
                 return (
                     <div className='postControlOptions'>

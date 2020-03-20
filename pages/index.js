@@ -32,23 +32,17 @@ const Home = props => {
         }
     }, [ props ]);
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
-
-
-
-
-    const renderWidgets =props.widgets.map(widget=>{
-        switch (widget.type ) {
+    const renderWidgets = props.widgets.map(widget => {
+        switch ( widget.type ) {
             case 'posts':
-                return(
-                    <Widget key={widget._id}  text={ widget.text } textAlign={widget.textAlign} component={ Posts } posts={ widget.posts } title={widget.title} mainLinkUrl={widget.redirectLink} redirectToTitle='More Posts' pagination={ true }/>
+                return (
+                    <Widget key={ widget._id } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } component={ Posts } posts={ widget.posts } title={ widget.title } mainLinkUrl={ widget.redirectLink }
+                            redirectToTitle='More Posts' pagination={ true }/>
                 )
                 break
             case 'text':
-                return(
-                    <Widget key={widget._id}   text={ widget.text } textAlign={widget.textAlign} title={widget.title} mainLinkUrl='/posts/' redirectToTitle='More videos' />
+                return (
+                    <Widget key={ widget._id } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } title={ widget.title } mainLinkUrl='/posts/' redirectToTitle='More videos'/>
                 )
                 break
             default:
@@ -57,7 +51,6 @@ const Home = props => {
         }
 
     })
-
 
     return (
         <AppLayout>
@@ -73,8 +66,8 @@ const Home = props => {
             </Head>
             <div className='HomePage'>
                 <h1>{ state.homePageH1 }</h1>
-                {renderWidgets}
-                {/*<Widget component={ Posts } posts={ props.posts } title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={ true } contextData={ contextData }/>*/}
+                { renderWidgets }
+                {/*<Widget component={ Posts } posts={ props.posts } title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={ true } contextData={ contextData }/>*/ }
                 {/*<Posts posts={props.posts} />*/ }
             </div>
         </AppLayout>
@@ -85,18 +78,18 @@ Home.getInitialProps = async ({ pathname, query, req, res, err }) => {
     // let posts;
     let navigation;
     let identity;
-    let widgets ;
-    let data = {
-        pageNo: query.pageNo ? parseInt(query.pageNo) : 1,
-        size: 30,
-        totalPosts: 0,
-        postType: 'all',
-        keyword: '',
-        status: 'published',
-        author: 'all',
-        fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
-        checkedPosts: [],
-    };
+    let widgets;
+    // let data = {
+    //     pageNo: query.pageNo ? parseInt(query.pageNo) : 1,
+    //     size: 30,
+    //     totalPosts: 0,
+    //     postType: 'all',
+    //     keyword: '',
+    //     status: 'published',
+    //     author: 'all',
+    //     fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
+    //     checkedPosts: [],
+    // };
 
     try {
 
@@ -110,7 +103,7 @@ Home.getInitialProps = async ({ pathname, query, req, res, err }) => {
     } catch ( e ) {
         console.error(e)
     }
-    return {  identity, navigation,widgets }
+    return { identity, navigation, widgets }
 };
 export default withRouter(Home);
 
