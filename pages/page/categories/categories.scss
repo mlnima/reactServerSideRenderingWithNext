@@ -1,0 +1,5 @@
+@import "../../../styles/grid";
+.categories{
+  padding: 20px ;
+  @include categoryPageElements;
+}

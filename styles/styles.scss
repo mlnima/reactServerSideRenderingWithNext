@@ -19,6 +19,9 @@
 "../components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu",
 "../components/adminIncludes/widgetsModel/widgetsModel",
 "../components/includes/Header/Header",
+"../components/includes/CategoryElement/CategoryElement",
+"../components/includes/tagElement/tagElement",
+"../components/includes/ActorElement/ActorElement",
 "../components/includes/Header/Logo/Logo",
 "../components/includes/Header/Navigation/Navigation",
 "../components/includes/Loading/Loading",
@@ -36,6 +39,9 @@
 "../pages/admin/post/post",
 "./colors",
 "../pages/index",
+"../pages/page/categories/categories",
+"../pages/page/tags/tags",
+"../pages/page/actors/actors",
 "../pages/post/Post.scss";
 
 body {

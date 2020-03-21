@@ -58,6 +58,8 @@ app.prepare().then(()=>{
     server.post('/api/v1/posts/deletePost',adminAuthMiddleware,(req,res)=>{postsControllers.deletePost(req,res)});
     server.post('/api/v1/posts/postsBulkAction',adminAuthMiddleware,(req,res)=>{postsControllers.postsBulkAction(req,res)});
     server.post('/api/v1/posts/likeDislikeView',(req,res)=>{postsControllers.likeDislikeView(req,res)});
+    server.post('/api/v1/posts/getMeta',(req,res)=>{postsControllers.getMeta(req,res)});
+
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
     server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
     server.post('/api/v1/settings/addWidget',(req,res)=>{settingsControllers.addWidget(req,res)});
@@ -67,6 +69,7 @@ app.prepare().then(()=>{
     server.post('/api/v1/settings/deleteWidget',(req,res)=>{settingsControllers.deleteWidget(req,res)});
 
 
+
 //-------------------post route bad for SEO----------------------
     server.get('/post/:id/:postTitle',(req,res)=>{
         const targetComponent = '/post';
@@ -74,12 +77,25 @@ app.prepare().then(()=>{
 
     });
 //---------------------------------------------------------------
-//     server.get('/categories',(req,res)=>{
-//         const targetComponent = '/categories';
-//         // const params = {postTitle:req.params.postTitle}
-//         app.render(req,res,targetComponent)
-//
-//     });
+
+    server.get('/page/categories',(req,res)=>{
+        const targetComponent = '/page/categories';
+        const params = {meta:'category'}
+        app.render(req,res,targetComponent,params)
+
+    });
+    server.get('/page/tags',(req,res)=>{
+        const targetComponent = '/page/tags';
+        const params = {meta:'tag'}
+        app.render(req,res,targetComponent,params)
+
+    });
+    server.get('/page/actors',(req,res)=>{
+        const targetComponent = '/page/actors';
+        const params = {meta:'actor'}
+        app.render(req,res,targetComponent,params)
+
+    });
 
     //---------------------------------------------------------------
 

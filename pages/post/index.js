@@ -34,12 +34,23 @@ const Post = props => {
 
 
 
-    useEffect(()=>{
-        console.log( props)
-            if(props.navigation){
-                contextData.dispatchNavigationData(props.navigation.data)
-            }
-    },[props ]);
+    // useEffect(()=>{
+    //     console.log( props)
+    //         if(props.navigation){
+    //             contextData.dispatchNavigationData(props.navigation.data)
+    //         }
+    // },[props ]);
+    useEffect(() => {
+        if (props.navigation) {
+            contextData.dispatchNavigationData(props.navigation.data)
+        }
+        if (props.identity) {
+            contextData.dispatchSiteIdentity(siteIdentity => ({
+                ...siteIdentity,
+                ...props.identity
+            }))
+        }
+    }, [ props ]);
 
 
     return (
@@ -80,22 +91,17 @@ const Post = props => {
 Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let post;
     let navigation;
+    let identity;
+    const identityData = await getSetting('identity');
+    const navigationData = await getSetting('navigation');
     const postBody = {
         postTitle: query.postTitle,
     };
-    const navigationBody = {
-        type:'navigation'
-    }
-    try {
-        // const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
-        const postData = await getPost(postBody);
-        post = postData.data.post
-        const navigationData = await axios.post('http://localhost:3000/api/v1/settings/get',navigationBody)
-        navigation = navigationData.data.setting
-    } catch ( e ) {
-        console.error(e)
-    }
-    return { post, query,navigation }
+    const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
+    post = postData.data.post
+    navigation = navigationData.data.setting ? navigationData.data.setting : {}
+    identity = identityData.data.setting ? identityData.data.setting.data : {}
+    return { post, query,navigation,identity }
 };
 
 export default withRouter(Post);

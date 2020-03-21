@@ -49,7 +49,7 @@ const Navigation = props => {
 
     const renderNavigationItems = navigationData.items.map(item=>{
         return(
-            <Link key={item.title} href={item.url}><a>{item.title}</a></Link>
+            <Link itemProp={item} key={item.title} href={item.url}><a>{item.title}</a></Link>
         )
     })
 
@@ -60,9 +60,6 @@ const Navigation = props => {
             <button className='navigationMobileBtn' onClick={ () => onNavigationMobileBtnClickHandler() }><FA className='fontawesomeMedium' name={ navigationData.isOpen ? 'times' : 'bars' }/></button>
 
             <div ref={ navigation } className='Navigation'>
-                {/*<Link href='/'><a>Home</a></Link>*/}
-                {/*<Link href='/categories'><a>Categories</a></Link>*/}
-                {/*<Link href='/tags'><a>Tags</a></Link>*/}
                 {renderNavigationItems}
             </div>
         </>

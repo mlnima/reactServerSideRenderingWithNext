@@ -1,0 +1,21 @@
+@import "../../../styles/colors";
+@import "../../../styles/mixIns";
+.actor-item{
+  border-radius: 5px;
+  min-width: 200px;
+  border: $dark90 1px solid  ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  @include imageForMetaElements;
+  .actor-item-data{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    p{
+      //font-size: x-large;
+      text-align: center;
+    }
+  }
+
+}

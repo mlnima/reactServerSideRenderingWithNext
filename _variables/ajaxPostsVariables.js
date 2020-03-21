@@ -14,6 +14,13 @@ export const getPost = async (data) => {
     return await axios.post('http://localhost:3000/api/v1/posts/post', body)
 };
 
+export const getMeta = async (data) => {
+    const body = {
+        ...data,
+    };
+    return await axios.post('http://localhost:3000/api/v1/posts/getMeta', body)
+};
+
 export const likeDislikeView = async (id,type) => {
     const body = {
         id,

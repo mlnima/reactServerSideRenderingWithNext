@@ -4,24 +4,30 @@ const metaSchema = require('../models/metaSchema');
 
 postsControllers.createNewPost = (req, res) => {
     const newPost = req.body.postData
-    if(newPost.tags){
-        newPost.tags.forEach(tag=>{
-            const tagDataToSave = new metaSchema({name:tag,
-                type:'tag'})
+    if (newPost.tags) {
+        newPost.tags.forEach(tag => {
+            const tagDataToSave = new metaSchema({
+                name: tag,
+                type: 'tag'
+            })
             tagDataToSave.save()
         })
     }
-    if(newPost.categories){
-        newPost.categories.forEach(category=>{
-            const categoryDataToSave = new metaSchema({name:category,
-                type:'category'})
+    if (newPost.categories) {
+        newPost.categories.forEach(category => {
+            const categoryDataToSave = new metaSchema({
+                name: category,
+                type: 'category'
+            })
             categoryDataToSave.save()
         })
     }
-    if(newPost.actors){
-        newPost.actors.forEach(actor=>{
-            const actorDataToSave = new metaSchema({name:actor,
-                type:'actor'})
+    if (newPost.actors) {
+        newPost.actors.forEach(actor => {
+            const actorDataToSave = new metaSchema({
+                name: actor,
+                type: 'actor'
+            })
             actorDataToSave.save()
         })
     }
@@ -38,29 +44,26 @@ postsControllers.createNewPost = (req, res) => {
 };
 
 postsControllers.updatePost = (req, res) => {
-    const _id = req.body.id ;
-    postSchema.findByIdAndUpdate(req.body.postData._id,req.body.postData,{new:true}).exec().then(updated=>{
+    const _id = req.body.id;
+    postSchema.findByIdAndUpdate(req.body.postData._id, req.body.postData, { new: true }).exec().then(updated => {
         console.log(_id, updated)
-    }).catch(err=>{
+    }).catch(err => {
         res.sendStatus(500);
         res.end()
     })
 };
 
-
-
-
 postsControllers.getPostsInfo = async (req, res) => {
     const size = req.body.size;
     const pageNo = req.body.pageNo;
     const regexQuery = new RegExp(req.body.keyword, 'i');
-    let postTypeQuery = req.body.postType=== 'all' ? {} : { postType: req.body.postType };
+    let postTypeQuery = req.body.postType === 'all' ? {} : { postType: req.body.postType };
     let statusQuery = req.body.status === 'all' ? { status: { $ne: 'trash' } } : { status: req.body.status };
     let authorQuery = req.body.author === 'all' ? {} : { author: req.body.author };
-    let searchQuery = req.body.keyword === '' ? {} : { $or: [ { title:regexQuery }, { description:regexQuery } ]  };
-    let selectedFields = req.body.fields[0]==='all'?{}:fieldGenerator(req.body.fields);
-    let posts = await postSchema.find({$and:[postTypeQuery,statusQuery,authorQuery,searchQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort('-_id').exec();
-    let postsCount = await postSchema.count({$and:[postTypeQuery,statusQuery,authorQuery,searchQuery]}).exec();
+    let searchQuery = req.body.keyword === '' ? {} : { $or: [ { title: regexQuery }, { description: regexQuery } ] };
+    let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
+    let posts = await postSchema.find({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery ] }).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort('-_id').exec();
+    let postsCount = await postSchema.count({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery ] }).exec();
 
     Promise.all([ posts, postsCount ]).then(data => {
         res.json({ posts: data[0], error: false, totalCount: data[1] })
@@ -73,20 +76,20 @@ postsControllers.getPostsInfo = async (req, res) => {
 
 };
 
-postsControllers.getPostInfo =  (req, res) =>{
+postsControllers.getPostInfo = (req, res) => {
     const _id = req.body._id;
     const postTitle = req.body.postTitle;
-    if (postTitle){
-        postSchema.findOne({title:postTitle}).exec().then(post=>{
+    if (postTitle) {
+        postSchema.findOne({ title: postTitle }).exec().then(post => {
             res.json({ post, error: false });
             res.end()
         })
-    }else if (_id){
-        postSchema.findById(_id).exec().then(post=>{
+    } else if (_id) {
+        postSchema.findById(_id).exec().then(post => {
             res.json({ post, error: false });
             res.end()
-        }).catch(err=>{
-            console.log( err);
+        }).catch(err => {
+            console.log(err);
             return res.status(500).json({
                 message: 'Server Error'
             })
@@ -124,8 +127,8 @@ postsControllers.postsBulkAction = async (req, res) => {
     })
 };
 
-postsControllers.likeDislikeView = (req, res)=>{
-    postSchema.findByIdAndUpdate(req.body.id,{$inc:{[req.body.type]:1}},{new:true}).exec();
+postsControllers.likeDislikeView = (req, res) => {
+    postSchema.findByIdAndUpdate(req.body.id, { $inc: { [req.body.type]: 1 } }, { new: true }).exec();
     res.end()
 };
 
@@ -138,9 +141,37 @@ function fieldGenerator(fields) {
     return exportData
 };
 
+postsControllers.getMeta = (req, res) => {
+    const type = req.body.type;
+    const size = req.body.size;
+    const pageNo = req.body.pageNo;
 
+    metaSchema.find({ type }).limit(size).skip(size * (pageNo - 1)).exec().then(async metas => {
+        const mapMetaToGetImage = metas.map(async meta => {
+            let finalData = {
+                name: meta.name,
+                type: meta.type,
+                description: meta.description,
+                imageUrl: meta.imageUrl,
+                noImageUrl: '',
+                count: 0
+            }
+            await postSchema.find({ [req.body.searchForImageIn]: meta.name }).limit(1).sort('-_id').exec().then(lastPost => {
+                if (lastPost[0]) {
+                    finalData.noImageUrl = lastPost[0].mainThumbnail
+                }
+            })
+            await postSchema.count({ [req.body.searchForImageIn]: meta.name }).exec().then(count => {
+                finalData.count = count
+            })
 
+            return finalData
 
+        })
+        res.json({ metas: await Promise.all(mapMetaToGetImage) })
+        res.end()
+    })
 
+}
 
 module.exports = postsControllers;

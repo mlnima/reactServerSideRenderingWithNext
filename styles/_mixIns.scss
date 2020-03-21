@@ -9,3 +9,13 @@
   grid-template-columns: 30px 1fr;
   grid-gap: 5px;
 }
+
+@mixin imageForMetaElements{
+  img{
+    width: 250px;
+    height: 150px;
+    border: $dark90 1px solid  ;
+    display: block;
+    object-fit: cover;
+  }
+}

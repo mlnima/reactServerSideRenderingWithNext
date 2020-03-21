@@ -81,14 +81,14 @@ settingsControllers.getWidgetsWithData = (req, res) => {
                 textAlign: widget.textAlign,
                 customHtml: widget.customHtml
             }
-            let finalDataTest = {
-                ...widgets[widgets.indexOf(widget)],
-                posts: []
-            }
-            console.log(widgets[widgets.indexOf(widget)])
+            // let finalDataTest = {
+            //     ...widgets[widgets.indexOf(widget)],
+            //     posts: []
+            // }
+
             // finalData.posts = ['test']
             const sortMethod = finalData.sortBy ? {[finalData.sortBy]:-1} : '-_id'
-            console.log(sortMethod )
+
             if (finalData.type === 'posts') {
                 await postSchema.find({}).limit(widget.count).sort(sortMethod).exec().then(posts => {
                     finalData.posts = posts
