@@ -17,6 +17,7 @@ const WidgetModel = props => {
         count: props.data.count || 6,
         pagination: props.data.pagination || false,
         redirectLink: props.data.redirectLink || '',
+        redirectToTitle:props.data.redirectToTitle ||'',
         type: props.data.type || 'posts',
         position: props.data.position || 'home',
         sortBy: props.data.position || '-id',
@@ -185,6 +186,8 @@ const WidgetModel = props => {
             <RenderOptionByFormat/>
             <p>Redirect Link:</p>
             <input className='redirectLink' name='redirectLink' placeholder='Redirect' value={ state.redirectLink } onChange={ e => onChangeHandler(e) }/>
+            <p>Title for Redirect Link</p>
+            <input className='redirectToTitle' name='redirectToTitle' placeholder='Title for Redirect Link' value={ state.redirectToTitle } onChange={ e => onChangeHandler(e) }/>
             <div className='control'>
                 <button onClick={ () => onSaveHandler() }>Save</button>
                 <button onClick={ () => onDeleteHandler() }>Delete</button>

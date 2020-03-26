@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import WidgetHeader from "./WidgetHeader/WidgetHeader";
 import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
+import WidgetPagination from './WidgetPagination/WidgetPagination'
 
 const Widget = props => {
 

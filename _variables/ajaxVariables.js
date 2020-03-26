@@ -11,15 +11,16 @@ export const updateSetting = async (type,data)=>{
     }
 };
 
-
-
-
 export const getSetting = async (type)=>{
         const body = {
             type,
         };
         return await axios.post('http://localhost:3000/api/v1/settings/get',body)
 };
+
+// export const getMultipleSettings = async (settingsType)=>{
+//
+// }
 
 
 export const addNewWidget = async (data)=>{

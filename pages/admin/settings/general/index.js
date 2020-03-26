@@ -14,7 +14,8 @@ const settings = props => {
         keywords: [],
         logoText:'',
         headLine:'',
-        homePageH1:''
+        homePageH1:'',
+        homePagePagination:false,
 
     });
     useEffect(() => {
@@ -132,6 +133,13 @@ const settings = props => {
                 <div className="site-settings-form-section">
                     <p>Theme Color</p>
                     <input name='themeColor' value={state.themeColor}  onChange={e=>onChangeHandler(e)}/>
+                </div>
+                <div className="site-settings-form-section">
+                    <p>Home Page Pagination</p>
+                   <select name='homePagePagination' value={state.homePagePagination} onChange={e=>onChangeHandler(e)}>
+                       <option value={true}>Yes</option>
+                       <option value={false}>No</option>
+                   </select>
                 </div>
                 <button className='submitBtn' type='submit'>save settings</button>
             </form>

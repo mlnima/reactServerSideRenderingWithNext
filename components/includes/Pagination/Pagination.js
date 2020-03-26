@@ -6,6 +6,7 @@ const Pagination = props => {
     const [ state, setState ] = useState({
         pages: [],
     });
+
     useEffect(() => {
         if (isNaN(props.postsData.pageNo)) {
             let pageNo = 1;
@@ -63,6 +64,7 @@ const Pagination = props => {
 
         return numArr
     };
+
     let currentPageNumberStyle = (number) => {
         let style = {};
         let normalStyle = {
@@ -93,27 +95,9 @@ const Pagination = props => {
 
     let pageNumbersGenerator = state.pages.map(num => {
         // let min = parseInt(props.maxPage) -3
-        if (num > 0 && num <= (Math.ceil(props.postsData.totalCount / props.postsData.size) - 1)) {
-
+        if (num > 0 && num <= (Math.ceil(props.totalCount / props.size) - 1)) {
             let numInBtn = num.toString();
             let path = props.mainLinkUrl + numInBtn
-            // if (props.type === 'video') {
-            //     path = `/${contextData.state.language}/posts/video/${numInBtn}`;
-            // }
-            // if (props.type === 'farsiStory') {
-            //     path = `/${contextData.state.language}/posts/farsiStory/${numInBtn}`;
-            // }
-            // if (props.type === 'searchVideo') {
-            //     path = `/${contextData.state.language}/posts/searchVideo/${props.match.params.word}/${numInBtn}`;
-            // }
-            // if (props.type === 'searchFarsiStory') {
-            //     path = `${props.mainLinkUrl}${encodeURI(props.match.params.word)}/${numInBtn}`;
-            // }
-            //
-            // if (num === (Math.ceil(props.postsData.totalCount / props.postsData.size))) {
-            //     numInBtn = `... ${num -1}`
-            // }
-
             return (<Link key={ num } href={ path }> <a style={ currentPageNumberStyle(num) }><span> { numInBtn } </span></a> </Link>)
         }
 

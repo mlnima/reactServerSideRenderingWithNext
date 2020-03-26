@@ -7,7 +7,6 @@ import { AppContext } from "../../../../context/AppContext";
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
 
-
 const BodyTable = props => {
     const contextData = useContext(AppContext);
     let selectBoxes = useRef(contextData.adminPosts.map(() => createRef()));
@@ -24,6 +23,7 @@ const BodyTable = props => {
             })
         }
     }, []);
+
     const setData = () => {
         // getPosts(
         //     contextData.postsData.type, contextData.postsData.size, contextData.postsData.pageNo,
@@ -53,7 +53,7 @@ const BodyTable = props => {
             ...contextData.state,
             loading: true
         });
-        contextData.functions.bulkActionPost([state.hoveredId], 'trash')
+        contextData.functions.bulkActionPost([ state.hoveredId ], 'trash')
     };
 
     // const onDeletePermanentlyHandler = (id)=>{
@@ -150,10 +150,6 @@ const BodyTable = props => {
         // }
     };
 
-
-
-
-
     let renderPosts = contextData.adminPosts.map(post => {
 
         const renderTags = post.tags.map(item => {
@@ -191,15 +187,14 @@ const BodyTable = props => {
                         <span>   { post.categories + ' , ' }</span>
 
 
-
                     </div>
                     <div className='tagCategoriesActorsPreview BodyTableItem noMobile'>
-                        <span>   { post.tags  + ' , ' }</span>
+                        <span>   { post.tags + ' , ' }</span>
 
                     </div>
 
                     <div className='tagCategoriesActorsPreview BodyTableItem noMobile'>
-                        <span>      { post.actors  + ' , ' }</span>
+                        <span>      { post.actors + ' , ' }</span>
 
                     </div>
 

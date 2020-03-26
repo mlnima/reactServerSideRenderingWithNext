@@ -28,7 +28,6 @@ settingsControllers.update = (req, res) => {
 };
 
 settingsControllers.get = async (req, res) => {
-    console.log(req.body)
     const setting = await settingSchema.findOne({ type: req.body.type }).exec();
     res.json({ setting })
 };
@@ -73,6 +72,7 @@ settingsControllers.getWidgetsWithData = (req, res) => {
                 tags: widget.tags,
                 pagination: widget.pagination,
                 redirectLink: widget.redirectLink,
+                redirectToTitle:widget.redirectToTitle,
                 count: widget.count,
                 type: widget.type,
                 posts: [],

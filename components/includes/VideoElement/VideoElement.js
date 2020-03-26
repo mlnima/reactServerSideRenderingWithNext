@@ -132,7 +132,7 @@ const VideoElement = props => {
                 </div>
                 </a>
             </Link>
-                <MobilePreviewBtn/>
+
 
 
         </div>

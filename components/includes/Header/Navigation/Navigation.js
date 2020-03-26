@@ -49,10 +49,10 @@ const Navigation = props => {
 
     const renderNavigationItems = navigationData.items.map(item=>{
         return(
-            <Link itemProp={item} key={item.title} href={item.url}><a>{item.title}</a></Link>
+            <Link  key={item.title} href={item.url}><a>{item.title}</a></Link>
         )
     })
-
+''
 
 
     return (

@@ -1,0 +1,11 @@
+@import "../../../styles/colors";
+@import "../../../styles/links";
+
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0;
+  a {
+  @include paginationItem;
+  }
+}

@@ -961,6 +961,17 @@
       align-items: center;
       margin: auto; } }
 
+.pagination {
+  display: flex;
+  justify-content: center;
+  margin: 50px 0; }
+  .pagination a {
+    background-color: #33373c;
+    color: white;
+    padding: 5px 10px;
+    margin: 0 5px;
+    border-radius: 5px; }
+
 .progressParent {
   position: relative;
   height: 15px;
@@ -1129,11 +1140,20 @@
 
 .WidgetHeader {
   display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 5px 10px;
   background-color: #33373c;
   border-radius: 5px;
-  border-left: 5px solid #0073aa; }
+  border-left: 5px solid #0073aa;
+  max-height: 50px; }
   .WidgetHeader .WidgetHeaderTitle {
     padding: 0 10px; }
+  .WidgetHeader a {
+    color: white;
+    background-color: #FF3565;
+    padding: 5px 10px;
+    border-radius: 5px; }
 
 .container {
   display: grid;

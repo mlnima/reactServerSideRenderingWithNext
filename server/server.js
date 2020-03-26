@@ -78,34 +78,62 @@ app.prepare().then(()=>{
     });
 //---------------------------------------------------------------
 
-    server.get('/page/categories',(req,res)=>{
-        const targetComponent = '/page/categories';
-        const params = {meta:'category'}
-        app.render(req,res,targetComponent,params)
+    // server.get('/page/tags',(req,res)=>{
+    //     const targetComponent = '/page/metaPage';
+    //     const params = {meta:'tag'}
+    //     app.render(req,res,targetComponent,params)
+    // });
+    // server.get('/page/actors',(req,res)=>{
+    //     const targetComponent = '/page/metaPage';
+    //     const params = {meta:'actor'}
+    //     app.render(req,res,targetComponent,params)
+    // });
 
-    });
-    server.get('/page/tags',(req,res)=>{
-        const targetComponent = '/page/tags';
-        const params = {meta:'tag'}
-        app.render(req,res,targetComponent,params)
-
-    });
-    server.get('/page/actors',(req,res)=>{
-        const targetComponent = '/page/actors';
-        const params = {meta:'actor'}
-        app.render(req,res,targetComponent,params)
-
-    });
+    // server.get('/page/tags',(req,res)=>{
+    //     const targetComponent = '/page/tags';
+    //     const params = {meta:'tag'}
+    //     app.render(req,res,targetComponent,params)
+    //
+    // });
+    // server.get('/page/actors',(req,res)=>{
+    //     const targetComponent = '/page/actors';
+    //     const params = {meta:'actor'}
+    //     app.render(req,res,targetComponent,params)
+    //
+    // });
 
     //---------------------------------------------------------------
 
-
+    server.get('/posts',(req,res)=>{
+        const targetComponent = '/posts';
+        const params = {
+            page:req.query.page,
+            category:req.query.category,
+            tag:req.query.tag,
+            sort:req.query.sort,
+            size:req.query.size,
+            type:req.query.type,
+            keyword:req.query.keyword,
+            author:req.query.author,
+        }
+        app.render(req,res,targetComponent,params)
+    });
 
     server.get('/:postTitle',(req,res)=>{
         const targetComponent = '/post';
         const params = {postTitle:req.params.postTitle}
         app.render(req,res,targetComponent,params)
+    });
 
+    server.get('/page/categories/:pageNo',(req,res)=>{
+        const targetComponent = '/page/categories';
+        const params = {pageNo:req.params.pageNo}
+        app.render(req,res,targetComponent,params)
+    });
+    server.get('/page/:pageNo',(req,res)=>{
+        const targetComponent = '/page/categories';
+        const params = {pageNo:req.params.pageNo}
+        app.render(req,res,targetComponent,params)
     });
 
     server.get('*',(req,res)=>{

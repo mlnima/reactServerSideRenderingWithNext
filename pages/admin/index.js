@@ -10,7 +10,7 @@ const Index = props => {
         <>
             <AdminLayout>
                 <div>
-                    welcome to admin nima
+                    welcome to admin panel
                 </div>
             </AdminLayout>
         </>

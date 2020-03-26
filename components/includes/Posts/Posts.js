@@ -2,9 +2,8 @@ import React, { Component, useEffect, useState, useContext } from 'react';
 
 import { AppContext } from "../../../context/AppContext";
 import VideoElement from "../VideoElement/VideoElement";
-import Pagination from "../Pagination/Pagination";
+
 import withRouter from "next/dist/client/with-router";
-import Home from "../../../pages";
 
 
 const Posts = props => {
@@ -22,12 +21,12 @@ const Posts = props => {
     });
     const [ posts, setPosts ] = useState([]);
 
+
     const renderPosts = props.posts.map(post => {
         return (
             <VideoElement key={ post._id } state={ post }/>
         )
     });
-
 
     return (
         <div className='Videos'>
@@ -38,6 +37,5 @@ const Posts = props => {
         </div>
     );
 };
-
 
 export default withRouter(Posts)

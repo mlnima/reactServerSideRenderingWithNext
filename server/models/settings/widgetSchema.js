@@ -9,6 +9,7 @@ const widgetSchema = mongoose.Schema({
     pagination:Boolean,
     position:String,
     redirectLink:String,
+    redirectToTitle:String,
     sortBy:String,
     text:String,
     textAlign:String,

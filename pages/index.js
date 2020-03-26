@@ -9,6 +9,8 @@ import Head from "next/head";
 import axios from "axios";
 import { getSetting, getWidgets, getWidgetsWithData } from "../_variables/ajaxVariables";
 import Text from '../components/includes/Widget/WidgetsModelsComponents/Text/Text'
+import PaginationComponent from '../components/includes/PaginationComponent/PaginationComponent'
+import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 
 const Home = props => {
     const contextData = useContext(AppContext);
@@ -20,24 +22,28 @@ const Home = props => {
         homePageH1: props.identity.homePageH1 || 'H1 element'
     });
 
+    // useEffect(() => {
+    //     if (props.navigation) {
+    //         contextData.dispatchNavigationData(props.navigation.data)
+    //     }
+    //     if (props.identity) {
+    //         contextData.dispatchSiteIdentity(siteIdentity => ({
+    //             ...siteIdentity,
+    //             ...props.identity
+    //         }))
+    //     }
+    // }, [ props ]);
+
     useEffect(() => {
-        if (props.navigation) {
-            contextData.dispatchNavigationData(props.navigation.data)
-        }
-        if (props.identity) {
-            contextData.dispatchSiteIdentity(siteIdentity => ({
-                ...siteIdentity,
-                ...props.identity
-            }))
-        }
-    }, [ props ]);
+        console.log(props )
+    }, [props]);
 
     const renderWidgets = props.widgets.map(widget => {
         switch ( widget.type ) {
             case 'posts':
                 return (
-                    <Widget key={ widget._id } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } component={ Posts } posts={ widget.posts } title={ widget.title } mainLinkUrl={ widget.redirectLink }
-                            redirectToTitle='More Posts' pagination={ true }/>
+                    <Widget key={ widget._id } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } component={ Posts } posts={ widget.posts } title={ widget.title } redirectLink={ widget.redirectLink } redirectToTitle={ widget.redirectToTitle }
+                            pagination={ widget.pagination }/>
                 )
                 break
             case 'text':
@@ -52,23 +58,13 @@ const Home = props => {
 
     })
 
+
     return (
         <AppLayout>
-            <Head>
-                <title>{ state.title }</title>
-                <meta name="theme-color" content={ state.themeColor }/>
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <meta charSet="utf-8"/>
-                <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
-                <meta name="description" content={ state.description }/>
-                <meta name="keywords" content={ state.keywords }/>
-                <link rel="icon" href="/favicon.ico"/>
-            </Head>
+            <SiteSettingSetter { ...props }/>
             <div className='HomePage'>
                 <h1>{ state.homePageH1 }</h1>
                 { renderWidgets }
-                {/*<Widget component={ Posts } posts={ props.posts } title='latest video' mainLinkUrl='/posts/' redirectToTitle='More videos' pagination={ true } contextData={ contextData }/>*/ }
-                {/*<Posts posts={props.posts} />*/ }
             </div>
         </AppLayout>
     );
