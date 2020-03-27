@@ -9,52 +9,31 @@ import Link from 'next/link'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 
 const posts = props => {
-    const [ state, setState ] = useState({
-        posts: [],
-        totalCount: 0
-    });
-
-    const [ postsData, setPostsData ] = useState({
-        size: 30,
-        pageNo: 1,
-        postType: 'all',
-        fields: [ 'all' ],
-        keyword: '',
-        author: 'all',
-        status: 'all',
-    });
-
     useEffect(() => {
-        console.log(props)
-    }, []);
-    useEffect(() => {
-        if (props.postsSource.posts) {
-            setState({
-                ...state,
-                posts: props.postsSource.posts,
-                totalCount: props.postsSource.totalCount
-            })
-        }
-        if (props.getPostsData) {
-            setPostsData(props.getPostsData)
-        }
-    }, [ props ]);
+        console.log(props )
+
+
+    }, [props]);
 
     return (
-        <AppLayout>
-            <div className='posts'>
+        <>
+            <AppLayout>
                 <SiteSettingSetter  { ...props }/>
-                <Posts posts={ props.postsSource.posts || state.posts }/>
+                <div className='posts'>
+                    <Posts posts={ props.postsSource.posts || [] }/>
+
+                </div>
                 <PaginationComponent
                     isActive={ true }
-                    currentPage={postsData.pageNo }
-                    totalCount={ state.totalCount }
-                    size={ postsData.size }
-                    maxPage={ Math.ceil(parseInt(state.totalCount) / parseInt(postsData.size))- 1 }
-                    mainLinkUrl='http://localhost:3000/posts'
+                    currentPage={ props.getPostsData.pageNo }
+                    totalCount={ props.postsSource.totalCount }
+                    size={ props.getPostsData.size }
+                    maxPage={ Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)) }
+                    queryData={props.query || props.router.query}
+                    pathnameData={props.pathname ||props.router.pathname }
                 />
-            </div>
-        </AppLayout>
+            </AppLayout>
+        </>
     );
 };
 
@@ -68,10 +47,10 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
     navigation = navigationData.data.setting ? navigationData.data.setting : {}
 
     const getPostsData = {
-        size: parseInt(query.size) || parseInt(identity.postsCountPerPage) ||30,
+        size: parseInt(query.size) || parseInt(identity.postsCountPerPage) || 30,
         pageNo: parseInt(query.page) || 1,
         postType: query.type || 'all',
-        fields:  [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
+        fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
         keyword: query.keyword || '',
         author: query.author || 'all',
         actor: query.actor || 'all',
@@ -81,12 +60,10 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
         sort: query.sort || 'latest',
     }
 
-
     const postsData = await getPosts(getPostsData)
 
-
     postsSource = postsData.data ? postsData.data : []
-    return { identity, navigation, query, postsSource, getPostsData }
+    return { identity, navigation, query, postsSource, getPostsData,pathname }
 }
 
 export default withRouter(posts);

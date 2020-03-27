@@ -864,6 +864,7 @@
   position: absolute;
   top: 50px;
   right: 20px;
+  transition: .5s;
   background-color: transparent;
   color: white;
   outline: none;
@@ -878,13 +879,20 @@
   top: 100px;
   transition: 1s;
   width: 100%;
-  z-index: 2; }
+  z-index: 2;
+  animation: navigationMobile .5s; }
   .Navigation a {
     text-decoration: none;
     color: white;
     padding: 10px;
     box-sizing: border-box;
     border-bottom: #181818 solid 1px; }
+
+@keyframes navigationMobile {
+  0% {
+    top: -500px; }
+  100% {
+    margin-top: 0; } }
 
 @media only screen and (min-width: 768px) {
   .navigationMobileBtn {

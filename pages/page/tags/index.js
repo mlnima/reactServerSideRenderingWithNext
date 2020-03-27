@@ -5,63 +5,38 @@ import { getMeta } from '../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../context/AppContext'
 import TagElement from '../../../components/includes/TagElement/TagElement'
 import CategoryElement from '../../../components/includes/CategoryElement/CategoryElement'
+import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
+import SiteSettingSetter from '../../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
+import withRouter from 'next/dist/client/with-router'
 
 const tags = props => {
-    const contextData = useContext(AppContext);
-    const [ state, setState ] = useState({
-        metaData: []
-    });
-    useEffect(() => {
-        console.log(props )
-    }, [props]);
-    useEffect(() => {
-        if (props.navigation) {
-            contextData.dispatchNavigationData(props.navigation.data)
-        }
-        if (props.identity) {
-            contextData.dispatchSiteIdentity(siteIdentity => ({
-                ...siteIdentity,
-                ...props.identity
-            }))
-        }
-        if (props.tags.length){
-            setState({
-                ...state,
-                metaData: props.tags
-            })
-        }else if (props.tags.length<1){
-            getMeta({
-                type: 'tag',
-                pageNo: 1,
-                size: 100,
-                searchForImageIn:'tags',
-                sortBy:'-_id'
-            }).then(res=>{
-                console.log(res )
-                setState({
-                    ...state,
-                    metaData: res.data.metas
-                })
-            }).catch(err=>{
-                console.log( err)
-            })
-        }
-    }, [ props ]);
 
-    const renderTags = state.metaData.map(meta => {
-        if (meta.count>0){
+
+
+    const renderTags = props.tagsSource.metas.map(meta => {
             return (
                 <TagElement key={meta._id} imageUrl={meta.imageUrl} noImageUrl={meta.noImageUrl} name={meta.name} count={meta.count}/>
             )
-        }
-
     })
+
     return (
+        <>
         <AppLayout>
+            <SiteSettingSetter  { ...props }/>
             <div className='tags'>
                 {renderTags}
             </div>
+            <PaginationComponent
+                isActive={ true }
+                currentPage={props.getTagsData.pageNo }
+                totalCount={ props.tagsSource.totalCount }
+                size={ props.getTagsData.size }
+                maxPage={ Math.ceil(parseInt(props.tagsSource.totalCount) / parseInt(props.getTagsData.size))- 1 }
+                queryData={props.query || props.router.query}
+                pathnameData={props.pathname ||props.router.pathname }
+            />
         </AppLayout>
+            </>
     );
 };
 
@@ -70,22 +45,27 @@ const tags = props => {
 tags.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let navigation;
     let identity;
-    let tags = []
+    let tagsSource;
     const identityData = await getSetting('identity');
     const navigationData = await getSetting('navigation');
-
-    if (query.meta) {
-        const tagsData = await getMeta({
-            type: query.meta,
-            searchForImageIn:'tags',
-            pageNo: 1,
-            size: 100
-        })
-        tags = tagsData.data.metas ? tagsData.data.metas : []
-    }
-
     identity = identityData.data.setting ? identityData.data.setting.data : {}
     navigation = navigationData.data.setting ? navigationData.data.setting : {}
-    return { identity, navigation, query, tags }
+
+    const getTagsData = {
+        type: 'tag',
+        searchForImageIn:'tags',
+        pageNo: parseInt(query.page) || 1,
+        size: parseInt(query.size) || parseInt(identity.tagsCountPerPage) ||30,
+        sort: query.sort || 'latest',
+
+    }
+
+
+        const tagsData = await getMeta(getTagsData)
+        tagsSource = tagsData.data ? tagsData.data : {tags:[],totalCount:0}
+
+
+
+    return { identity, navigation, query, tagsSource,getTagsData,pathname }
 }
-export default tags;
+export default withRouter(tags);

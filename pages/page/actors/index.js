@@ -6,86 +6,58 @@ import { getSetting } from '../../../_variables/ajaxVariables'
 import { getMeta } from '../../../_variables/ajaxPostsVariables'
 import CategoryElement from '../../../components/includes/CategoryElement/CategoryElement'
 import ActorElement from '../../../components/includes/ActorElement/ActorElement'
-
+import SiteSettingSetter from '../../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
+import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
+import withRouter from 'next/dist/client/with-router'
 const actors = props => {
-    const contextData = useContext(AppContext);
-    const [ state, setState ] = useState({
-        metaData: []
-    });
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
 
-    useEffect(() => {
-        if (props.navigation) {
-            contextData.dispatchNavigationData(props.navigation.data)
-        }
-        if (props.identity) {
-            contextData.dispatchSiteIdentity(siteIdentity => ({
-                ...siteIdentity,
-                ...props.identity
-            }))
-        }
-        if (props.actors.length){
-            setState({
-                ...state,
-                metaData: props.actors
-            })
-        }else if (props.actors.length<1){
-            getMeta({
-                type: 'actor',
-                pageNo: 1,
-                size: 100,
-                searchForImageIn:'actors',
-            }).then(res=>{
-                console.log(res )
-                setState({
-                    ...state,
-                    metaData: res.data.metas
-                })
-            }).catch(err=>{
-                console.log( err)
-            })
-        }
-    }, [props]);
-
-    const renderActors = state.metaData.map(meta => {
-        if (meta.count>0){
-            return (
-                <ActorElement key={ meta._id } imageUrl={meta.imageUrl} noImageUrl={meta.noImageUrl} name={ meta.name } count={meta.count}/>
-            )
-        }
-
+    const renderActors = props.actorsSource.metas.map(meta => {
+        return (
+            <ActorElement key={ meta._id } imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl } name={ meta.name } count={ meta.count }/>
+        )
     })
 
     return (
-        <AppLayout>
-            <div className='actors'>
-                { renderActors }
-            </div>
-        </AppLayout>
+        <>
+            <AppLayout>
+                <SiteSettingSetter  { ...props }/>
+                <div className='actors'>
+                    { renderActors }
+                </div>
+                <PaginationComponent
+                    isActive={ true }
+                    currentPage={props.getActorsData.pageNo }
+                    totalCount={ props.actorsSource.totalCount }
+                    size={ props.getActorsData.size }
+                    maxPage={ Math.ceil(parseInt(props.actorsSource.totalCount) / parseInt(props.getActorsData.size))- 1 }
+                    queryData={props.query || props.router.query}
+                    pathnameData={props.pathname ||props.router.pathname }
+                />
+            </AppLayout>
+        </>
     );
 };
 
 actors.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let navigation;
     let identity;
-    let actors = []
+    let actorsSource ;
     const identityData = await getSetting('identity');
     const navigationData = await getSetting('navigation');
-
-    if (query.meta) {
-        const categoriesData = await getMeta({
-            type: query.meta,
-            pageNo: 1,
-            size: 100,
-            searchForImageIn:'actors',
-        })
-        actors = categoriesData.data.metas ? categoriesData.data.metas : []
-    }
-
     identity = identityData.data.setting ? identityData.data.setting.data : {}
     navigation = navigationData.data.setting ? navigationData.data.setting : {}
-    return { identity, navigation, query, actors }
+
+    const getActorsData = {
+        type: 'actor',
+        searchForImageIn:'actors',
+        pageNo: parseInt(query.page) || 1,
+        size: parseInt(query.size) || parseInt(identity.tagsCountPerPage) ||30,
+        sort: query.sort || 'latest',
+    }
+
+    const categoriesData = await getMeta(getActorsData)
+    actorsSource = categoriesData.data ? categoriesData.data : []
+
+    return { identity, navigation, query, actorsSource,getActorsData,pathname }
 }
-export default actors;
+export default withRouter(actors);

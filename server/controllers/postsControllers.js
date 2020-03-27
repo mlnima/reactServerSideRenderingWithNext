@@ -54,21 +54,29 @@ postsControllers.updatePost = (req, res) => {
 };
 
 postsControllers.getPostsInfo = async (req, res) => {
+    console.log( req.query)
     const size = parseInt(req.body.size) > 100 ? 100 : parseInt(req.body.size)
     const pageNo = req.body.pageNo;
     const regexQuery = new RegExp(req.body.keyword, 'i');
     let postTypeQuery = req.body.postType === 'all' ? {} : { postType: req.body.postType };
     let statusQuery = req.body.status === 'all' ? { status: { $ne: 'trash' } } : { status: req.body.status };
     let authorQuery = req.body.author === 'all' ? {} : { author: req.body.author };
-    let categoryQuery = req.body.category === 'all' ? {} : { categories: req.body.category };
-    let tagQuery = req.body.tag === 'all' ? {} : { tags: req.body.tag };
-    let actorQuery = !req.body.actor ||req.body.actor === 'all' ? {} : { actors: req.body.actor };
-    let searchQuery = req.body.keyword === '' ? {} : { $or: [ { title: regexQuery }, { description: regexQuery } ] };
+    let categoryQuery = req.body.category === 'all' ? {} : { categories: new RegExp(req.body.category, 'i') };
+    let tagQuery = req.body.tag === 'all' ? {} : { tags: new RegExp(req.body.tag, 'i') };
+    let actorQuery = !req.body.actor || req.body.actor === 'all' ? {} : { actors: new RegExp(req.body.actor, 'i') };
+    let searchQuery = req.body.keyword === '' ? {} : {
+        $or: [
+            { categories: new RegExp(req.body.category, 'i') },
+            { tags: new RegExp(req.body.tag, 'i') },
+            { actors: new RegExp(req.body.actor, 'i') },
+            { title: new RegExp(req.body.keyword, 'i') },
+            { description: new RegExp(req.body.keyword, 'i') } ]
+    };
     let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
-    let sortQuery = req.body.sort === 'latest' ? '-_id' :{[req.body.sort]:-1}
+    let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
 
-    let posts = await postSchema.find({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery,categoryQuery,tagQuery,actorQuery ] }).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
-    let postsCount = await postSchema.count({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery ] }).exec();
+    let posts = await postSchema.find({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery ] }).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
+    let postsCount = await postSchema.count({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery ] }).exec()
 
     Promise.all([ posts, postsCount ]).then(data => {
         res.json({ posts: data[0], error: false, totalCount: data[1] })
@@ -147,12 +155,15 @@ function fieldGenerator(fields) {
     return exportData
 };
 
-postsControllers.getMeta = (req, res) => {
+postsControllers.getMeta = async (req, res) => {
     const type = req.body.type;
     const size = req.body.size;
     const pageNo = req.body.pageNo;
+    let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
+    console.log(req.body)
 
-    metaSchema.find({ type }).limit(size).skip(size * (pageNo - 1)).exec().then(async metas => {
+    const metaCount = await metaSchema.count({ type }).exec()
+    metaSchema.find({ type }).limit(size).skip(size * (pageNo - 1)).sort(sortQuery).exec().then(async metas => {
         const mapMetaToGetImage = metas.map(async meta => {
             let finalData = {
                 name: meta.name,
@@ -174,7 +185,7 @@ postsControllers.getMeta = (req, res) => {
             return finalData
 
         })
-        res.json({ metas: await Promise.all(mapMetaToGetImage) })
+        res.json({ metas: await Promise.all(mapMetaToGetImage), totalCount: metaCount })
         res.end()
     })
 

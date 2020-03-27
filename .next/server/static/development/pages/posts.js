@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -115,10 +115,21 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
 
 
+
+const queryGeneratorForUnCacheRequest = requestItems => {
+  let query = '?';
+
+  for (const item in requestItems) {
+    query += `${item}=${requestItems[item]}`;
+  }
+
+  return query;
+};
+
 const getPosts = async data => {
   const body = _objectSpread({}, data);
 
-  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/posts', body);
+  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(`http://localhost:3000/api/v1/posts${queryGeneratorForUnCacheRequest(data)}`, body);
 };
 const getPost = async data => {
   const body = _objectSpread({}, data);
@@ -128,7 +139,7 @@ const getPost = async data => {
 const getMeta = async data => {
   const body = _objectSpread({}, data);
 
-  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/posts/getMeta', body);
+  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(`http://localhost:3000/api/v1/posts/getMeta?pageNo=${data.pageNo}&type=${data.type}`, body);
 };
 const likeDislikeView = async (id, type) => {
   const body = {
@@ -173,7 +184,7 @@ const getSetting = async type => {
   const body = {
     type
   };
-  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post('http://localhost:3000/api/v1/settings/get', body);
+  return await axios__WEBPACK_IMPORTED_MODULE_0___default.a.post(`http://localhost:3000/api/v1/settings/get?type=${type}`, body);
 }; // export const getMultipleSettings = async (settingsType)=>{
 //
 // }
@@ -363,6 +374,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 const Navigation = props => {
   const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_3__["AppContext"]);
   const navigation = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  const navigationMobileBtn = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
   const {
     0: navigationData,
     1: setNavigationData
@@ -385,14 +397,16 @@ const Navigation = props => {
     if (navigation.current) {
       if (navigationData.isOpen) {
         navigation.current.style.display = 'flex';
+        navigationMobileBtn.current.style.transform = 'rotate(-90deg)';
       } else {
         navigation.current.style.display = 'none';
+        navigationMobileBtn.current.style.transform = 'rotate(0deg)';
       }
     }
   }, [navigationData.isOpen]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     setNavigationData(navigationData => _objectSpread({}, navigationData, {
-      items: contextData.navigationData
+      items: contextData.navigationData || []
     }));
   }, [contextData.navigationData]);
 
@@ -404,14 +418,14 @@ const Navigation = props => {
     }));
   };
 
-  const renderNavigationItems = navigationData.items.map(item => {
+  const renderNavigationItems = contextData.navigationData.map(item => {
     return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
       key: item.title,
       href: item.url
     }, __jsx("a", null, item.title));
   });
-  '';
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("button", {
+    ref: navigationMobileBtn,
     className: "navigationMobileBtn",
     onClick: () => onNavigationMobileBtnClickHandler()
   }, "   ", __jsx("img", {
@@ -491,6 +505,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! lodash */ "lodash");
+/* harmony import */ var lodash__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(lodash__WEBPACK_IMPORTED_MODULE_3__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -503,75 +519,17 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 const PaginationComponent = props => {
-  const {
-    0: state,
-    1: setState
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    pages: [],
-    elements: []
-  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(props);
+  }, [props]);
 
-  let numberGen = current => {
-    let numArr = [];
-
-    if (current === 1) {
-      for (let i = 1; i <= 7; i++) {
-        numArr.push(i);
-      }
-    }
-
-    if (current === 2) {
-      numArr.push(1);
-
-      for (let i = 2; i <= 7; i++) {
-        numArr.push(i);
-      }
-    }
-
-    if (current === 3) {
-      numArr.push(1);
-      numArr.push(2);
-
-      for (let i = 3; i <= 7; i++) {
-        numArr.push(i);
-      }
-    }
-
-    if (current > 3) {
-      let min = current - 3;
-      let max = current + 3;
-
-      for (let i = current; i <= max; i++) {
-        numArr.push(i);
-      }
-
-      for (let i = current; i >= min; i--) {
-        numArr.push(i);
-      }
-    }
-
-    if (current > 3) {
-      numArr.push(1);
-    }
-
-    if (Math.ceil(props.totalCount / props.size)) {
-      numArr.push(parseInt(props.maxPage) - 1);
-    }
-
-    numArr = [...new Set(numArr)];
-    numArr = numArr.sort((x, y) => {
-      return x - y;
-    });
-    return numArr;
+  const paginationRangeGenerator = (current, max) => {
+    return current === 1 && max <= 2 ? [2] : current === 1 ? lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(2, 8) : current === 2 && max <= 3 ? lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(2, 3) : current === 2 ? lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(current, current + 6) : current === 3 ? lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(current - 1, current + 5) : current === 4 ? lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(current - 2, current + 4) : current >= 5 && current < max - 3 ? lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(current - 3, current + 4) : current >= max - 3 ? lodash__WEBPACK_IMPORTED_MODULE_3___default.a.range(max - 6, max) : 0;
   };
 
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    setState({
-      pages: numberGen(props.currentPage)
-    });
-  }, [props]);
-  const renderPaginationItems = numberGen(props.currentPage).map(page => {
+  const renderPaginationItems = paginationRangeGenerator(props.currentPage, props.maxPage).map(page => {
     if (props.router) {
       return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
         key: page,
@@ -585,10 +543,26 @@ const PaginationComponent = props => {
     }
   });
 
-  if (props.isActive) {
+  if (props.isActive && props.totalCount > props.size) {
     return __jsx("div", {
       className: "pagination"
-    }, renderPaginationItems);
+    }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      key: "...1",
+      href: {
+        pathname: props.pathnameData,
+        query: _objectSpread({}, props.queryData, {
+          page: 1
+        })
+      }
+    }, __jsx("a", null, "1...")), renderPaginationItems, __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      key: `...${props.maxPage}`,
+      href: {
+        pathname: props.pathnameData,
+        query: _objectSpread({}, props.queryData, {
+          page: props.maxPage
+        })
+      }
+    }, __jsx("a", null, "...", props.maxPage)));
   } else return null;
 };
 
@@ -3377,13 +3351,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _components_includes_PaginationComponent_PaginationComponent__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ../../components/includes/PaginationComponent/PaginationComponent */ "./components/includes/PaginationComponent/PaginationComponent.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
 
 
 
@@ -3394,51 +3361,21 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 const posts = props => {
-  const {
-    0: state,
-    1: setState
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    posts: [],
-    totalCount: 0
-  });
-  const {
-    0: postsData,
-    1: setPostsData
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    size: 30,
-    pageNo: 1,
-    postType: 'all',
-    fields: ['all'],
-    keyword: '',
-    author: 'all',
-    status: 'all'
-  });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     console.log(props);
-  }, []);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    if (props.postsSource.posts) {
-      setState(_objectSpread({}, state, {
-        posts: props.postsSource.posts,
-        totalCount: props.postsSource.totalCount
-      }));
-    }
-
-    if (props.getPostsData) {
-      setPostsData(props.getPostsData);
-    }
   }, [props]);
-  return __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx("div", {
+  return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_1__["default"], null, __jsx(_components_includes_SiteSettingsSetter_SiteSettingsSetter__WEBPACK_IMPORTED_MODULE_4__["default"], props), __jsx("div", {
     className: "posts"
-  }, __jsx(_components_includes_SiteSettingsSetter_SiteSettingsSetter__WEBPACK_IMPORTED_MODULE_4__["default"], props), __jsx(_components_includes_Posts_Posts__WEBPACK_IMPORTED_MODULE_6__["default"], {
-    posts: props.postsSource.posts || state.posts
-  }), __jsx(_components_includes_PaginationComponent_PaginationComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
+  }, __jsx(_components_includes_Posts_Posts__WEBPACK_IMPORTED_MODULE_6__["default"], {
+    posts: props.postsSource.posts || []
+  })), __jsx(_components_includes_PaginationComponent_PaginationComponent__WEBPACK_IMPORTED_MODULE_8__["default"], {
     isActive: true,
-    currentPage: postsData.pageNo,
-    totalCount: state.totalCount,
-    size: postsData.size,
-    maxPage: Math.ceil(parseInt(state.totalCount) / parseInt(postsData.size)) - 1,
-    mainLinkUrl: "http://localhost:3000/posts"
+    currentPage: props.getPostsData.pageNo,
+    totalCount: props.postsSource.totalCount,
+    size: props.getPostsData.size,
+    maxPage: Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)),
+    queryData: props.query || props.router.query,
+    pathnameData: props.pathname || props.router.pathname
   })));
 };
 
@@ -3476,7 +3413,8 @@ posts.getInitialProps = async ({
     navigation,
     query,
     postsSource,
-    getPostsData
+    getPostsData,
+    pathname
   };
 };
 
@@ -3506,7 +3444,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9j
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!************************************!*\
   !*** multi ./pages/posts/index.js ***!
   \************************************/
@@ -3603,6 +3541,17 @@ module.exports = require("jsonwebtoken");
 /***/ (function(module, exports) {
 
 module.exports = require("jwt-decode");
+
+/***/ }),
+
+/***/ "lodash":
+/*!*************************!*\
+  !*** external "lodash" ***!
+  \*************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = require("lodash");
 
 /***/ }),
 

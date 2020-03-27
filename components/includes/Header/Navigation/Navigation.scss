@@ -6,6 +6,7 @@
   position: absolute;
   top:50px ;
   right: 20px;
+  transition: .5s;
   @include transparentLightTextBtn;
 }
 
@@ -20,6 +21,7 @@
   //right: 50px;
   width: 100%;
   z-index: 2;
+  animation: navigationMobile .5s ;
   a {
     text-decoration: none;
     color: white;
@@ -28,6 +30,15 @@
     //margin: 3px 10px;
     border-bottom: $dark90 solid 1px;
 
+  }
+}
+
+@keyframes navigationMobile {
+  0%{
+    top:-500px ;
+  }
+  100%{
+    margin-top:0
   }
 }
 

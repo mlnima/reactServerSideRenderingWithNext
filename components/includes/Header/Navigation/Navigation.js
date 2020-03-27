@@ -9,6 +9,7 @@ import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
 const Navigation = props => {
     const contextData = useContext(AppContext);
     const navigation = useRef(null)
+    const navigationMobileBtn = useRef(null)
     const [ navigationData, setNavigationData ] = useState({
         isOpen: false,
         items: []
@@ -32,8 +33,10 @@ const Navigation = props => {
         if (navigation.current) {
             if (navigationData.isOpen) {
                 navigation.current.style.display = 'flex'
+                navigationMobileBtn.current.style.transform = 'rotate(-90deg)'
             } else {
                 navigation.current.style.display = 'none'
+                navigationMobileBtn.current.style.transform = 'rotate(0deg)'
             }
         }
     }, [ navigationData.isOpen ]);
@@ -41,7 +44,7 @@ const Navigation = props => {
     useEffect(() => {
         setNavigationData(navigationData=>({
             ...navigationData,
-            items: contextData.navigationData
+            items: contextData.navigationData ||[]
         }))
     }, [ contextData.navigationData ]);
 
@@ -49,18 +52,16 @@ const Navigation = props => {
         navigationData.isOpen ? setNavigationData({ ...navigationData, isOpen: false }) : setNavigationData({ ...navigationData, isOpen: true })
     };
 
-    const renderNavigationItems = navigationData.items.map(item=>{
+    const renderNavigationItems = contextData.navigationData.map(item=>{
         return(
             <Link  key={item.title} href={item.url}><a>{item.title}</a></Link>
         )
     })
-''
 
 
     return (
         <>
-            <button className='navigationMobileBtn' onClick={ () => onNavigationMobileBtnClickHandler() }>   <img className='fontawesomeSvgMedium' src={ BarsSvg } alt=""/></button>
-
+            <button ref={navigationMobileBtn} className='navigationMobileBtn' onClick={ () => onNavigationMobileBtnClickHandler() }>   <img className='fontawesomeSvgMedium' src={ BarsSvg } alt=""/></button>
             <div ref={ navigation } className='Navigation'>
                 {renderNavigationItems}
             </div>

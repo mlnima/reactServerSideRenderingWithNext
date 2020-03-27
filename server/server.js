@@ -15,7 +15,12 @@ const xmlparser = require("express-xml-bodyparser");
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
-
+//cache
+const apicache = require('apicache')
+const cache = apicache.middleware;
+const onlyStatus200 = (req, res) => res.statusCode === 200;
+const cacheSuccesses = cache('1 day', onlyStatus200);
+//--
 mongoose.Promise = global.Promise;
 mongoose.connect("mongodb://localhost:27017/nextDB", {
   useNewUrlParser: true,
@@ -51,20 +56,20 @@ app.prepare().then(()=>{
     server.post('/api/v1/users/getUserInfo',adminAuthMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
     server.post('/api/v1/users/getUsersList',adminAuthMiddleware,(req,res)=>{userController.getUsersList(req,res)});
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts',(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts/post',(req,res)=>{postsControllers.getPostInfo(req,res)});
+    server.post('/api/v1/posts',cacheSuccesses,(req,res)=>{postsControllers.getPostsInfo(req,res)});
+    server.post('/api/v1/posts/post',cacheSuccesses,(req,res)=>{postsControllers.getPostInfo(req,res)});
     server.post('/api/v1/posts/createNewPost',(req,res)=>{postsControllers.createNewPost(req,res)});
     server.post('/api/v1/posts/updatePost',adminAuthMiddleware,(req,res)=>{postsControllers.updatePost(req,res)});
     server.post('/api/v1/posts/deletePost',adminAuthMiddleware,(req,res)=>{postsControllers.deletePost(req,res)});
     server.post('/api/v1/posts/postsBulkAction',adminAuthMiddleware,(req,res)=>{postsControllers.postsBulkAction(req,res)});
     server.post('/api/v1/posts/likeDislikeView',(req,res)=>{postsControllers.likeDislikeView(req,res)});
-    server.post('/api/v1/posts/getMeta',(req,res)=>{postsControllers.getMeta(req,res)});
+    server.post('/api/v1/posts/getMeta',cacheSuccesses,(req,res)=>{postsControllers.getMeta(req,res)});
 
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
-    server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
+    server.post('/api/v1/settings/get',cacheSuccesses,(req,res)=>{settingsControllers.get(req,res)});
     server.post('/api/v1/settings/addWidget',(req,res)=>{settingsControllers.addWidget(req,res)});
-    server.post('/api/v1/settings/getWidget',(req,res)=>{settingsControllers.getWidget(req,res)});
-    server.post('/api/v1/settings/getWidgetsWithData',(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
+    server.post('/api/v1/settings/getWidget',cacheSuccesses,(req,res)=>{settingsControllers.getWidget(req,res)});
+    server.post('/api/v1/settings/getWidgetsWithData',cacheSuccesses,(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
     server.post('/api/v1/settings/updateWidget',(req,res)=>{settingsControllers.updateWidget(req,res)});
     server.post('/api/v1/settings/deleteWidget',(req,res)=>{settingsControllers.deleteWidget(req,res)});
 
@@ -76,33 +81,7 @@ app.prepare().then(()=>{
         app.render(req,res,targetComponent)
 
     });
-//---------------------------------------------------------------
 
-    // server.get('/page/tags',(req,res)=>{
-    //     const targetComponent = '/page/metaPage';
-    //     const params = {meta:'tag'}
-    //     app.render(req,res,targetComponent,params)
-    // });
-    // server.get('/page/actors',(req,res)=>{
-    //     const targetComponent = '/page/metaPage';
-    //     const params = {meta:'actor'}
-    //     app.render(req,res,targetComponent,params)
-    // });
-
-    // server.get('/page/tags',(req,res)=>{
-    //     const targetComponent = '/page/tags';
-    //     const params = {meta:'tag'}
-    //     app.render(req,res,targetComponent,params)
-    //
-    // });
-    // server.get('/page/actors',(req,res)=>{
-    //     const targetComponent = '/page/actors';
-    //     const params = {meta:'actor'}
-    //     app.render(req,res,targetComponent,params)
-    //
-    // });
-
-    //---------------------------------------------------------------
 
     server.get('/posts',(req,res)=>{
         const targetComponent = '/posts';
@@ -118,6 +97,15 @@ app.prepare().then(()=>{
         }
         app.render(req,res,targetComponent,params)
     });
+    // server.get('/page/tags',(req,res)=>{
+    //     const targetComponent = '/page/tags';
+    //     const params = {
+    //         page:req.query.page,
+    //         sort:req.query.sort,
+    //         size:req.query.size,
+    //     }
+    //     app.render(req,res,targetComponent,params)
+    // });
 
     server.get('/:postTitle',(req,res)=>{
         const targetComponent = '/post';
@@ -130,11 +118,12 @@ app.prepare().then(()=>{
         const params = {pageNo:req.params.pageNo}
         app.render(req,res,targetComponent,params)
     });
-    server.get('/page/:pageNo',(req,res)=>{
-        const targetComponent = '/page/categories';
-        const params = {pageNo:req.params.pageNo}
-        app.render(req,res,targetComponent,params)
-    });
+
+    // server.get('/page/:pageNo',(req,res)=>{
+    //     const targetComponent = '/page/categories';
+    //     const params = {pageNo:req.params.pageNo}
+    //     app.render(req,res,targetComponent,params)
+    // });
 
     server.get('*',(req,res)=>{
         return handle(req,res)

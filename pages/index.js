@@ -71,24 +71,11 @@ const Home = props => {
 };
 
 Home.getInitialProps = async ({ pathname, query, req, res, err }) => {
-    // let posts;
     let navigation;
     let identity;
     let widgets;
-    // let data = {
-    //     pageNo: query.pageNo ? parseInt(query.pageNo) : 1,
-    //     size: 30,
-    //     totalPosts: 0,
-    //     postType: 'all',
-    //     keyword: '',
-    //     status: 'published',
-    //     author: 'all',
-    //     fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
-    //     checkedPosts: [],
-    // };
 
     try {
-
         const identityData = await getSetting('identity');
         const navigationData = await getSetting('navigation');
         const widgetsData = await getWidgetsWithData('all')

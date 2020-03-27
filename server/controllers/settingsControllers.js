@@ -29,6 +29,17 @@ settingsControllers.update = (req, res) => {
 
 settingsControllers.get = async (req, res) => {
     const setting = await settingSchema.findOne({ type: req.body.type }).exec();
+    console.log( req.query)
+    res.json({ setting })
+};
+settingsControllers.getMultiple = async (req, res) => {
+    const requestedSetting = req.body.settings
+    const settingRequestPromises = requestedSetting.map( async setting=>{
+        return await settingSchema.findOne({ type: req.body.type }).exec();
+    })
+
+    const setting = await settingSchema.findOne({ type: req.body.type }).exec();
+    console.log( setting)
     res.json({ setting })
 };
 

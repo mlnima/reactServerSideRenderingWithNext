@@ -1,71 +1,25 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState } from 'react';
 import Link from 'next/link'
-import withRouter from 'next/dist/client/with-router'
+import withRouter from 'next/dist/client/with-router';
+import _ from 'lodash'
 
 const PaginationComponent = props => {
-    const [ state, setState ] = useState({
-        pages: [],
-        elements:[]
-    });
-
-    let numberGen = (current) => {
-
-        let numArr = [];
-        if (current === 1) {
-            for (let i = 1; i <= 7; i++) {
-                numArr.push(i)
-            }
-        }
-        if (current === 2) {
-            numArr.push(1)
-            for (let i = 2; i <= 7; i++) {
-                numArr.push(i)
-            }
-        }
-        if (current === 3) {
-            numArr.push(1)
-            numArr.push(2)
-            for (let i = 3; i <= 7; i++) {
-                numArr.push(i)
-            }
-        }
-        if (current > 3) {
-            let min = current - 3
-            let max = current + 3
-            for (let i = current; i <= max; i++) {
-                numArr.push(i)
-            }
-            for (let i = current; i >= min; i--) {
-                numArr.push(i)
-            }
-        }
-        if (current > 3) {
-            numArr.push(1)
-        }
-        if (Math.ceil(props.totalCount / props.size)) {
-            numArr.push(parseInt(props.maxPage) - 1)
-        }
-
-        numArr = [ ...new Set(numArr) ];
-        numArr = numArr.sort((x, y) => {
-            return x - y
-        });
-
-        return numArr
-    };
-
-
-
     useEffect(() => {
-
-        setState({
-            pages: numberGen(props.currentPage)
-        });
-
-    }, [ props ]);
+        console.log(props )
 
 
-    const renderPaginationItems= numberGen(props.currentPage).map(page=>{
+    }, [props]);
+    const paginationRangeGenerator = (current,max)=>{
+        return  current === 1 && max <= 2 ? [2] :
+                current === 1 ? _.range(2, 8) :
+                current === 2  && max <= 3 ? _.range(2 , 3) :
+                current === 2 ? _.range(current , current + 6) :
+                current === 3 ? _.range(current - 1, current + 5) :
+                current === 4 ? _.range(current - 2, current + 4) :
+                current >= 5 && current < max - 3 ? _.range(current - 3, current + 4) : current >= max - 3 ? _.range(max - 6, max) : 0
+    }
+
+    const renderPaginationItems= paginationRangeGenerator(props.currentPage,props.maxPage).map(page=>{
         if (props.router){
             return(
                 <Link key={page} href={{
@@ -75,10 +29,16 @@ const PaginationComponent = props => {
         }
     })
 
-    if (props.isActive) {
+    if (props.isActive && props.totalCount > props.size) {
         return (
             <div className='pagination'>
+                <Link key='...1' href={{
+                    pathname:props.pathnameData,query:{...props.queryData,page:1}
+                }}><a>1...</a></Link>
                 {renderPaginationItems }
+                <Link key={`...${props.maxPage}`} href={{
+                    pathname:props.pathnameData,query:{...props.queryData,page:props.maxPage}
+                }}><a>...{props.maxPage}</a></Link>
             </div>
         );
     } else return null
