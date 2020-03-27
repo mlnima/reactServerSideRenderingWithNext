@@ -62,26 +62,29 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let navigation;
     let identity;
     let postsSource;
+    const identityData = await getSetting('identity');
+    const navigationData = await getSetting('navigation');
+    identity = identityData.data.setting ? identityData.data.setting.data : {}
+    navigation = navigationData.data.setting ? navigationData.data.setting : {}
 
     const getPostsData = {
-        size: parseInt(query.size) || 30,
+        size: parseInt(query.size) || parseInt(identity.postsCountPerPage) ||30,
         pageNo: parseInt(query.page) || 1,
         postType: query.type || 'all',
         fields:  [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
         keyword: query.keyword || '',
         author: query.author || 'all',
+        actor: query.actor || 'all',
         status: 'published',
         tag: query.tag || 'all',
         category: query.category || 'all',
         sort: query.sort || 'latest',
     }
 
-    const identityData = await getSetting('identity');
-    const navigationData = await getSetting('navigation');
+
     const postsData = await getPosts(getPostsData)
 
-    identity = identityData.data.setting ? identityData.data.setting.data : {}
-    navigation = navigationData.data.setting ? navigationData.data.setting : {}
+
     postsSource = postsData.data ? postsData.data : []
     return { identity, navigation, query, postsSource, getPostsData }
 }

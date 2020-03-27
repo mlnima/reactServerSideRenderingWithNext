@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -344,6 +344,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! react-fontawesome */ "react-fontawesome");
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_2__);
 /* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var _static_images_fontawesome_bars_solid_svg__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../../../../static/images/fontawesome/bars-solid.svg */ "./static/images/fontawesome/bars-solid.svg");
+/* harmony import */ var _static_images_fontawesome_bars_solid_svg__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(_static_images_fontawesome_bars_solid_svg__WEBPACK_IMPORTED_MODULE_4__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -351,6 +353,7 @@ function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (O
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
 
 function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
 
 
 
@@ -411,9 +414,10 @@ const Navigation = props => {
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("button", {
     className: "navigationMobileBtn",
     onClick: () => onNavigationMobileBtnClickHandler()
-  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    className: "fontawesomeMedium",
-    name: navigationData.isOpen ? 'times' : 'bars'
+  }, "   ", __jsx("img", {
+    className: "fontawesomeSvgMedium",
+    src: _static_images_fontawesome_bars_solid_svg__WEBPACK_IMPORTED_MODULE_4___default.a,
+    alt: ""
   })), __jsx("div", {
     ref: navigation,
     className: "Navigation"
@@ -509,7 +513,6 @@ const PaginationComponent = props => {
   });
 
   let numberGen = current => {
-    console.log(current);
     let numArr = [];
 
     if (current === 1) {
@@ -568,13 +571,10 @@ const PaginationComponent = props => {
       pages: numberGen(props.currentPage)
     });
   }, [props]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(props);
-    console.log(state);
-  }, [props]);
   const renderPaginationItems = numberGen(props.currentPage).map(page => {
     if (props.router) {
       return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+        key: page,
         href: {
           pathname: props.router.pathname,
           query: _objectSpread({}, props.router.query, {
@@ -3452,23 +3452,24 @@ posts.getInitialProps = async ({
   let navigation;
   let identity;
   let postsSource;
+  const identityData = await Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_2__["getSetting"])('identity');
+  const navigationData = await Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_2__["getSetting"])('navigation');
+  identity = identityData.data.setting ? identityData.data.setting.data : {};
+  navigation = navigationData.data.setting ? navigationData.data.setting : {};
   const getPostsData = {
-    size: parseInt(query.size) || 30,
+    size: parseInt(query.size) || parseInt(identity.postsCountPerPage) || 30,
     pageNo: parseInt(query.page) || 1,
     postType: query.type || 'all',
     fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
     keyword: query.keyword || '',
     author: query.author || 'all',
+    actor: query.actor || 'all',
     status: 'published',
     tag: query.tag || 'all',
     category: query.category || 'all',
     sort: query.sort || 'latest'
   };
-  const identityData = await Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_2__["getSetting"])('identity');
-  const navigationData = await Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_2__["getSetting"])('navigation');
   const postsData = await Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_3__["getPosts"])(getPostsData);
-  identity = identityData.data.setting ? identityData.data.setting.data : {};
-  navigation = navigationData.data.setting ? navigationData.data.setting : {};
   postsSource = postsData.data ? postsData.data : [];
   return {
     identity,
@@ -3483,6 +3484,17 @@ posts.getInitialProps = async ({
 
 /***/ }),
 
+/***/ "./static/images/fontawesome/bars-solid.svg":
+/*!**************************************************!*\
+  !*** ./static/images/fontawesome/bars-solid.svg ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJiYXJzIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtYmFycyBmYS13LTE0IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ0OCA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTE2IDEzMmg0MTZjOC44MzcgMCAxNi03LjE2MyAxNi0xNlY3NmMwLTguODM3LTcuMTYzLTE2LTE2LTE2SDE2QzcuMTYzIDYwIDAgNjcuMTYzIDAgNzZ2NDBjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNnptMCAxNjBoNDE2YzguODM3IDAgMTYtNy4xNjMgMTYtMTZ2LTQwYzAtOC44MzctNy4xNjMtMTYtMTYtMTZIMTZjLTguODM3IDAtMTYgNy4xNjMtMTYgMTZ2NDBjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNnptMCAxNjBoNDE2YzguODM3IDAgMTYtNy4xNjMgMTYtMTZ2LTQwYzAtOC44MzctNy4xNjMtMTYtMTYtMTZIMTZjLTguODM3IDAtMTYgNy4xNjMtMTYgMTZ2NDBjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNnoiPjwvcGF0aD48L3N2Zz4="
+
+/***/ }),
+
 /***/ "./styles/styles.scss":
 /*!****************************!*\
   !*** ./styles/styles.scss ***!
@@ -3494,7 +3506,7 @@ posts.getInitialProps = async ({
 
 /***/ }),
 
-/***/ 4:
+/***/ 3:
 /*!************************************!*\
   !*** multi ./pages/posts/index.js ***!
   \************************************/

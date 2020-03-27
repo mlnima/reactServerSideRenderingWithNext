@@ -4,7 +4,6 @@ import axios from "axios";
 import { getPost } from "../../_variables/ajaxPostsVariables";
 import Iframe from "../../components/includes/Post/Iframe/Iframe";
 import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
-
 import withRouter from "next/dist/client/with-router";
 import PostSidebar from "../../components/includes/Post/PostSidebar/PostSidebar";
 import Head from "next/head";
@@ -13,7 +12,6 @@ import { AppContext } from "../../context/AppContext";
 
 const Post = props => {
     const contextData = useContext(AppContext);
-
 
     const RenderMeta = () => {
         if (props.post.title) {
@@ -33,7 +31,6 @@ const Post = props => {
     }
 
 
-
     // useEffect(()=>{
     //     console.log( props)
     //         if(props.navigation){
@@ -51,7 +48,6 @@ const Post = props => {
             }))
         }
     }, [ props ]);
-
 
     return (
         <AppLayout>
@@ -101,7 +97,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     post = postData.data.post
     navigation = navigationData.data.setting ? navigationData.data.setting : {}
     identity = identityData.data.setting ? identityData.data.setting.data : {}
-    return { post, query,navigation,identity }
+    return { post, query, navigation, identity }
 };
 
 export default withRouter(Post);

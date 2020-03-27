@@ -29,7 +29,8 @@
       .responsive-player {
         overflow: hidden;
         position: relative;
-        padding-bottom: 56.25%;
+        padding-bottom: 56.30%;
+        margin-bottom: 20px;
         height: 0;
 
         iframe {
@@ -40,6 +41,7 @@
           //right: 0;
           height: 100%;
           width: 100%;
+          margin-bottom: 50px;
 
         }
       }
@@ -72,6 +74,7 @@
         display: grid;
         grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
         grid-gap: 10px;
+
         button {
           //margin: 10px;
           //width: 30px;
@@ -116,11 +119,16 @@
             align-items: center;
 
             .like-disLike-count {
+              display: flex;
+              align-items: center;
+
               .like-disLike-count-items {
                 margin: 0 10px;
+                display: flex;
+                align-items: center;
 
-                span {
-                  font-size: small;
+                p {
+                  margin: 0 5px;
                 }
               }
             }
@@ -137,7 +145,8 @@
 
         .meta-description {
           .tags-categories-actors {
-
+            display: flex;
+            flex-wrap: wrap;
             margin: 30px 0;
 
             span {
@@ -149,23 +158,31 @@
             }
 
             .content {
-              padding: 10px 0;
-              max-width: 100%;
+              //padding: 10px 0;
+              //max-width: 100%;
               display: flex;
               flex-wrap: wrap;
 
-              a {
-                margin: 5px;
+              .post-meta-item {
                 background-color: $red50;
-                color: white;
-                padding: 5px;
                 border-radius: 5px;
+                padding: 5px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                max-height: 30px;
+                margin: 5px;
+
+                a {
+                  color: white;
+                  display: initial;
+                }
               }
 
-              .actors {
-                background-color: transparent;
-                color: $red50;
-              }
+              //.actors {
+              //  background-color: transparent;
+              //  color: $red50;
+              //}
             }
 
           }

@@ -784,7 +784,8 @@
   border: #181818 1px solid;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; }
+  justify-content: space-between;
+  color: white; }
   .category-item img {
     width: 250px;
     height: 150px;
@@ -805,7 +806,8 @@
   border: #181818 1px solid;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; }
+  justify-content: space-between;
+  color: white; }
   .tag-item img {
     width: 250px;
     height: 150px;
@@ -825,7 +827,8 @@
   border: #181818 1px solid;
   display: flex;
   flex-direction: column;
-  justify-content: space-between; }
+  justify-content: space-between;
+  color: white; }
   .actor-item img {
     width: 250px;
     height: 150px;
@@ -984,8 +987,9 @@
     position: absolute;
     background-color: #FF3565;
     color: white;
-    font-size: small;
-    display: flex; }
+    font-size: x-small;
+    display: flex;
+    align-items: center; }
 
 .TopBar {
   display: flex;
@@ -1281,14 +1285,16 @@
       .post .main .video-player .responsive-player {
         overflow: hidden;
         position: relative;
-        padding-bottom: 56.25%;
+        padding-bottom: 56.30%;
+        margin-bottom: 20px;
         height: 0; }
         .post .main .video-player .responsive-player iframe {
           position: absolute;
           top: 0;
           left: 0;
           height: 100%;
-          width: 100%; }
+          width: 100%;
+          margin-bottom: 50px; }
     .post .main #download-url {
       width: 100%;
       margin: 20px 0; }
@@ -1329,34 +1335,42 @@
         display: flex;
         justify-content: space-between;
         align-items: center; }
-        .post .main .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items {
-          margin: 0 10px; }
-          .post .main .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items span {
-            font-size: small; }
+        .post .main .post-info .post-info-body .views .post-rate .like-disLike-count {
+          display: flex;
+          align-items: center; }
+          .post .main .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items {
+            margin: 0 10px;
+            display: flex;
+            align-items: center; }
+            .post .main .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items p {
+              margin: 0 5px; }
       .post .main .post-info .post-info-body .views .progressParent {
         max-width: 100%; }
         .post .main .post-info .post-info-body .views .progressParent div {
           transition: width 0.3s ease-in-out; }
       .post .main .post-info .post-info-body .meta-description .tags-categories-actors {
+        display: flex;
+        flex-wrap: wrap;
         margin: 30px 0; }
         .post .main .post-info .post-info-body .meta-description .tags-categories-actors span {
           display: flex; }
           .post .main .post-info .post-info-body .meta-description .tags-categories-actors span span {
             margin: 0 5px; }
         .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content {
-          padding: 10px 0;
-          max-width: 100%;
           display: flex;
           flex-wrap: wrap; }
-          .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content a {
-            margin: 5px;
+          .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content .post-meta-item {
             background-color: #FF3565;
-            color: white;
+            border-radius: 5px;
             padding: 5px;
-            border-radius: 5px; }
-          .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content .actors {
-            background-color: transparent;
-            color: #FF3565; }
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            max-height: 30px;
+            margin: 5px; }
+            .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content .post-meta-item a {
+              color: white;
+              display: initial; }
 
 @media only screen and (min-width: 768px) {
   .post {
@@ -1389,10 +1403,21 @@ body {
   color: white; }
 
 .fontawesomeMedium {
-  font-size: x-large; }
+  font-size: x-large;
+  color: white; }
 
 .fontawesomeSmall {
   font-size: medium; }
+
+.fontawesomeSvgMedium {
+  width: 30px;
+  height: 40px;
+  filter: invert(1); }
+
+.fontawesomeSvgSmall {
+  width: 20px;
+  height: 30px;
+  filter: invert(1); }
 
 input:focus, textarea:focus, select:focus {
   outline: none; }

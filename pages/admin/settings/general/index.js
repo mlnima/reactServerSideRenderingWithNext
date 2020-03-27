@@ -16,6 +16,7 @@ const settings = props => {
         headLine:'',
         homePageH1:'',
         homePagePagination:false,
+        postsCountPerPage:30
 
     });
     useEffect(() => {
@@ -133,6 +134,10 @@ const settings = props => {
                 <div className="site-settings-form-section">
                     <p>Theme Color</p>
                     <input name='themeColor' value={state.themeColor}  onChange={e=>onChangeHandler(e)}/>
+                </div>
+                <div className="site-settings-form-section">
+                    <p>Posts Per Page</p>
+                    <input type='number' name='postsCountPerPage' value={state.postsCountPerPage}  onChange={e=>onChangeHandler(e)}/>
                 </div>
                 <div className="site-settings-form-section">
                     <p>Home Page Pagination</p>

@@ -1,11 +1,16 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Link from "next/link";
 import FA from 'react-fontawesome'
+import StarSvg from '../../../../static/images/fontawesome/star-solid.svg';
+import TagSvg from '../../../../static/images/fontawesome/tag-solid.svg';
+import CategorySvg from '../../../../static/images/fontawesome/folder-solid.svg';
+import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
+
 
 const TagsAndCategoriesActors = props => {
     const [ state, setState ] = useState({
         data: props.data || [],
-        type: props.type || 'tags',
+        type: props.type,
         fontawesome: ''
     });
 
@@ -29,17 +34,33 @@ const TagsAndCategoriesActors = props => {
         })
     }, []);
 
-    const renderData = state.data.map(item => {
-        const path = '/' + state.type + '/' + item;
+    useEffect(() => {
+        console.log( props)
+        console.log( state)
+    }, []);
+
+    const renderData = props.data.map(item => {
+        let typeForUrl = state.type === 'categories' ? 'category'
+            : state.type === 'tags' ? 'tag'
+                : state.type === 'actors' ? 'actor'
+                    : 'tag'
+        const path = `/posts?${ typeForUrl }=${ item }`;
+        const icon = state.type === 'categories' ? CategorySvg
+            : state.type === 'tags' ? TagSvg
+                : state.type === 'actors' ? StarSvg
+                    : TagSvg
         return (
-            <Link href={ path } key={ item }><a className={ state.type }>{ item }</a></Link>
+            <div className='post-meta-item'>
+                <img className='fontawesomeSvgSmall' src={ icon } alt=""/>
+                <Link href={ path } key={ item }><a className={ state.type }>{ item }</a></Link>
+            </div>
         )
     });
 
-    if (props.data.length > 1) {
+    if (props.data.length >= 1) {
         return (
             <div className={ state.type + ' tags-categories-actors' }>
-                <span><FA className='fontawesomeMedium' name={ state.fontawesome }/> { state.type.charAt(0).toUpperCase() + state.type.substring(1) }:</span>
+                <span> { state.type.charAt(0).toUpperCase() + state.type.substring(1) }:</span>
                 <div className="content">
                     { renderData }
                 </div>

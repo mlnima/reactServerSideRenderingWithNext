@@ -2,6 +2,8 @@ import React, { useState, useRef, useEffect, useContext } from 'react';
 import Link from "next/link";
 import FA from 'react-fontawesome'
 import { AppContext } from "../../../../context/AppContext";
+import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
+
 // import  BarsIcon from '../../../../styles/icons/bars-solid.svg'
 
 const Navigation = props => {
@@ -57,7 +59,7 @@ const Navigation = props => {
 
     return (
         <>
-            <button className='navigationMobileBtn' onClick={ () => onNavigationMobileBtnClickHandler() }><FA className='fontawesomeMedium' name={ navigationData.isOpen ? 'times' : 'bars' }/></button>
+            <button className='navigationMobileBtn' onClick={ () => onNavigationMobileBtnClickHandler() }>   <img className='fontawesomeSvgMedium' src={ BarsSvg } alt=""/></button>
 
             <div ref={ navigation } className='Navigation'>
                 {renderNavigationItems}

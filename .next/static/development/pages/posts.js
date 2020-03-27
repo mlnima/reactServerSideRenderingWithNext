@@ -523,6 +523,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_9__ = __webpack_require__(/*! react-fontawesome */ "./node_modules/react-fontawesome/lib/index.js");
 /* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_9___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_9__);
 /* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_10__ = __webpack_require__(/*! ../../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var _static_images_fontawesome_bars_solid_svg__WEBPACK_IMPORTED_MODULE_11__ = __webpack_require__(/*! ../../../../static/images/fontawesome/bars-solid.svg */ "./static/images/fontawesome/bars-solid.svg");
+/* harmony import */ var _static_images_fontawesome_bars_solid_svg__WEBPACK_IMPORTED_MODULE_11___default = /*#__PURE__*/__webpack_require__.n(_static_images_fontawesome_bars_solid_svg__WEBPACK_IMPORTED_MODULE_11__);
 
 
 
@@ -535,6 +537,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_7___default.a.createElement;
 function ownKeys(object, enumerableOnly) { var keys = _babel_runtime_corejs2_core_js_object_keys__WEBPACK_IMPORTED_MODULE_5___default()(object); if (_babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default.a) { var symbols = _babel_runtime_corejs2_core_js_object_get_own_property_symbols__WEBPACK_IMPORTED_MODULE_4___default()(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
 
 function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { Object(_babel_runtime_corejs2_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_6__["default"])(target, key, source[key]); }); } else if (_babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default.a) { _babel_runtime_corejs2_core_js_object_define_properties__WEBPACK_IMPORTED_MODULE_1___default()(target, _babel_runtime_corejs2_core_js_object_get_own_property_descriptors__WEBPACK_IMPORTED_MODULE_2___default()(source)); } else { ownKeys(Object(source)).forEach(function (key) { _babel_runtime_corejs2_core_js_object_define_property__WEBPACK_IMPORTED_MODULE_0___default()(target, key, _babel_runtime_corejs2_core_js_object_get_own_property_descriptor__WEBPACK_IMPORTED_MODULE_3___default()(source, key)); }); } } return target; }
+
 
 
 
@@ -600,9 +603,10 @@ var Navigation = function Navigation(props) {
     onClick: function onClick() {
       return onNavigationMobileBtnClickHandler();
     }
-  }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_9___default.a, {
-    className: "fontawesomeMedium",
-    name: navigationData.isOpen ? 'times' : 'bars'
+  }, "   ", __jsx("img", {
+    className: "fontawesomeSvgMedium",
+    src: _static_images_fontawesome_bars_solid_svg__WEBPACK_IMPORTED_MODULE_11___default.a,
+    alt: ""
   })), __jsx("div", {
     ref: navigation,
     className: "Navigation"
@@ -743,7 +747,6 @@ var PaginationComponent = function PaginationComponent(props) {
       setState = _useState[1];
 
   var numberGen = function numberGen(current) {
-    console.log(current);
     var numArr = [];
 
     if (current === 1) {
@@ -802,13 +805,10 @@ var PaginationComponent = function PaginationComponent(props) {
       pages: numberGen(props.currentPage)
     });
   }, [props]);
-  Object(react__WEBPACK_IMPORTED_MODULE_10__["useEffect"])(function () {
-    console.log(props);
-    console.log(state);
-  }, [props]);
   var renderPaginationItems = numberGen(props.currentPage).map(function (page) {
     if (props.router) {
       return __jsx(next_link__WEBPACK_IMPORTED_MODULE_11___default.a, {
+        key: page,
         href: {
           pathname: props.router.pathname,
           query: _objectSpread({}, props.router.query, {
@@ -43623,41 +43623,42 @@ var posts = function posts(props) {
 };
 
 posts.getInitialProps = function _callee(_ref) {
-  var pathname, query, req, res, err, navigation, identity, postsSource, getPostsData, identityData, navigationData, postsData;
+  var pathname, query, req, res, err, navigation, identity, postsSource, identityData, navigationData, getPostsData, postsData;
   return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.async(function _callee$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
           pathname = _ref.pathname, query = _ref.query, req = _ref.req, res = _ref.res, err = _ref.err;
+          _context.next = 3;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_11__["getSetting"])('identity'));
+
+        case 3:
+          identityData = _context.sent;
+          _context.next = 6;
+          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_11__["getSetting"])('navigation'));
+
+        case 6:
+          navigationData = _context.sent;
+          identity = identityData.data.setting ? identityData.data.setting.data : {};
+          navigation = navigationData.data.setting ? navigationData.data.setting : {};
           getPostsData = {
-            size: _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_7___default()(query.size) || 30,
+            size: _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_7___default()(query.size) || _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_7___default()(identity.postsCountPerPage) || 30,
             pageNo: _babel_runtime_corejs2_core_js_parse_int__WEBPACK_IMPORTED_MODULE_7___default()(query.page) || 1,
             postType: query.type || 'all',
             fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
             keyword: query.keyword || '',
             author: query.author || 'all',
+            actor: query.actor || 'all',
             status: 'published',
             tag: query.tag || 'all',
             category: query.category || 'all',
             sort: query.sort || 'latest'
           };
-          _context.next = 4;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_11__["getSetting"])('identity'));
-
-        case 4:
-          identityData = _context.sent;
-          _context.next = 7;
-          return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(Object(_variables_ajaxVariables__WEBPACK_IMPORTED_MODULE_11__["getSetting"])('navigation'));
-
-        case 7:
-          navigationData = _context.sent;
-          _context.next = 10;
+          _context.next = 12;
           return _babel_runtime_corejs2_regenerator__WEBPACK_IMPORTED_MODULE_6___default.a.awrap(Object(_variables_ajaxPostsVariables__WEBPACK_IMPORTED_MODULE_12__["getPosts"])(getPostsData));
 
-        case 10:
+        case 12:
           postsData = _context.sent;
-          identity = identityData.data.setting ? identityData.data.setting.data : {};
-          navigation = navigationData.data.setting ? navigationData.data.setting : {};
           postsSource = postsData.data ? postsData.data : [];
           return _context.abrupt("return", {
             identity: identity,
@@ -43676,6 +43677,17 @@ posts.getInitialProps = function _callee(_ref) {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_14___default()(posts));
+
+/***/ }),
+
+/***/ "./static/images/fontawesome/bars-solid.svg":
+/*!**************************************************!*\
+  !*** ./static/images/fontawesome/bars-solid.svg ***!
+  \**************************************************/
+/*! no static exports found */
+/***/ (function(module, exports) {
+
+module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9jdXNhYmxlPSJmYWxzZSIgZGF0YS1wcmVmaXg9ImZhcyIgZGF0YS1pY29uPSJiYXJzIiBjbGFzcz0ic3ZnLWlubGluZS0tZmEgZmEtYmFycyBmYS13LTE0IiByb2xlPSJpbWciIHhtbG5zPSJodHRwOi8vd3d3LnczLm9yZy8yMDAwL3N2ZyIgdmlld0JveD0iMCAwIDQ0OCA1MTIiPjxwYXRoIGZpbGw9ImN1cnJlbnRDb2xvciIgZD0iTTE2IDEzMmg0MTZjOC44MzcgMCAxNi03LjE2MyAxNi0xNlY3NmMwLTguODM3LTcuMTYzLTE2LTE2LTE2SDE2QzcuMTYzIDYwIDAgNjcuMTYzIDAgNzZ2NDBjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNnptMCAxNjBoNDE2YzguODM3IDAgMTYtNy4xNjMgMTYtMTZ2LTQwYzAtOC44MzctNy4xNjMtMTYtMTYtMTZIMTZjLTguODM3IDAtMTYgNy4xNjMtMTYgMTZ2NDBjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNnptMCAxNjBoNDE2YzguODM3IDAgMTYtNy4xNjMgMTYtMTZ2LTQwYzAtOC44MzctNy4xNjMtMTYtMTYtMTZIMTZjLTguODM3IDAtMTYgNy4xNjMtMTYgMTZ2NDBjMCA4LjgzNyA3LjE2MyAxNiAxNiAxNnoiPjwvcGF0aD48L3N2Zz4="
 
 /***/ }),
 
@@ -43723,7 +43735,7 @@ posts.getInitialProps = function _callee(_ref) {
 
 /***/ }),
 
-/***/ 6:
+/***/ 5:
 /*!********************************************************************************************************************************************************!*\
   !*** multi next-client-pages-loader?page=%2Fposts&absolutePagePath=G%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5Cposts%5Cindex.js ***!
   \********************************************************************************************************************************************************/
@@ -43746,5 +43758,5 @@ module.exports = dll_82519ec661270f7f484f;
 
 /***/ })
 
-},[[6,"static/runtime/webpack.js","styles"]]]);
+},[[5,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=posts.js.map

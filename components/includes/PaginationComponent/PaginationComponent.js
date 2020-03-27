@@ -9,7 +9,7 @@ const PaginationComponent = props => {
     });
 
     let numberGen = (current) => {
-        console.log( current)
+
         let numArr = [];
         if (current === 1) {
             for (let i = 1; i <= 7; i++) {
@@ -65,17 +65,10 @@ const PaginationComponent = props => {
     }, [ props ]);
 
 
-    useEffect(() => {
-        console.log(props)
-        console.log(state)
-    }, [ props ]);
-
-
-
     const renderPaginationItems= numberGen(props.currentPage).map(page=>{
         if (props.router){
             return(
-                <Link href={{
+                <Link key={page} href={{
                     pathname:props.router.pathname,query:{...props.router.query,page}
                 }}><a>{page}</a></Link>
             )

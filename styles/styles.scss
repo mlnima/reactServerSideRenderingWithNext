@@ -64,10 +64,23 @@ body {
 
 .fontawesomeMedium {
   font-size: x-large;
+  color: $light100;
 }
 
 .fontawesomeSmall {
   font-size: medium;
+}
+
+.fontawesomeSvgMedium {
+  width: 30px;
+  height: 40px;
+  filter: invert(1);
+}
+.fontawesomeSvgSmall {
+  width: 20px;
+  height: 30px;
+  filter: invert(1) ;
+
 }
 
 input:focus, textarea:focus, select:focus {

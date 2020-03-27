@@ -21,6 +21,7 @@ const scssConfig = {
     }
 };
 
+
 const nextConfiguration = {
     publicRuntimeConfig: {
         base_url: BASE_URL,
@@ -34,8 +35,6 @@ const nextConfiguration = {
     }
 };
 
-
 // module.exports = withPlugins([ [ withCSS(withSass()), scssConfig ]], nextConfiguration);
-module.exports = withPlugins([ [ withSass(), scssConfig ]], nextConfiguration);
-
+module.exports = withPlugins([ [ withSass(), scssConfig ], withImages ], nextConfiguration);
 
