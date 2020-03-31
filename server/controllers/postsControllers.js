@@ -57,7 +57,6 @@ postsControllers.getPostsInfo = async (req, res) => {
     console.log( req.query)
     const size = parseInt(req.body.size) > 100 ? 100 : parseInt(req.body.size)
     const pageNo = req.body.pageNo;
-    const regexQuery = new RegExp(req.body.keyword, 'i');
     let postTypeQuery = req.body.postType === 'all' ? {} : { postType: req.body.postType };
     let statusQuery = req.body.status === 'all' ? { status: { $ne: 'trash' } } : { status: req.body.status };
     let authorQuery = req.body.author === 'all' ? {} : { author: req.body.author };
@@ -160,7 +159,6 @@ postsControllers.getMeta = async (req, res) => {
     const size = req.body.size;
     const pageNo = req.body.pageNo;
     let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
-    console.log(req.body)
 
     const metaCount = await metaSchema.count({ type }).exec()
     metaSchema.find({ type }).limit(size).skip(size * (pageNo - 1)).sort(sortQuery).exec().then(async metas => {

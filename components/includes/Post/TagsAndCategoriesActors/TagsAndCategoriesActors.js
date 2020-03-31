@@ -33,11 +33,11 @@ const TagsAndCategoriesActors = props => {
             fontawesome
         })
     }, []);
-
-    useEffect(() => {
-        console.log( props)
-        console.log( state)
-    }, []);
+    //
+    // useEffect(() => {
+    //     console.log( props)
+    //     console.log( state)
+    // }, []);
 
     const renderData = props.data.map(item => {
         let typeForUrl = state.type === 'categories' ? 'category'

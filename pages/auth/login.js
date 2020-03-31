@@ -1,6 +1,6 @@
 import React, { useState, useRef, useContext, useEffect } from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
-
+import withRouter from 'next/dist/client/with-router'
 import axios from 'axios'
 import { AppContext } from "../../context/AppContext";
 
@@ -19,6 +19,11 @@ const Login = props => {
             [e.target.name]: e.target.value
         })
     };
+
+    useEffect(() => {
+        console.log(props )
+    }, []);
+
     const onSubmitHandler = e => {
         e.preventDefault();
         axios.post('/api/v1/users/login', state).then(res => {
@@ -37,11 +42,12 @@ const Login = props => {
             })
 
         }).then(() => {
-            contextData.functions.getAndSetUserInfo();
-            contextData.functions.goToHomePage()
+            contextData.functions.getAndSetUserInfo().then(()=>{
+                props.router.back()
+            })
+            // contextData.functions.goToHomePage()
         }).catch(err => console.log(err))
     };
-
 
     return (
         <AppLayout>
@@ -62,4 +68,4 @@ const Login = props => {
         </AppLayout>
     );
 };
-export default Login;
+export default withRouter(Login);

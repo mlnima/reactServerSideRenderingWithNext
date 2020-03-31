@@ -7,11 +7,28 @@ import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
 import withRouter from "next/dist/client/with-router";
 import PostSidebar from "../../components/includes/Post/PostSidebar/PostSidebar";
 import Head from "next/head";
-import { getSetting } from "../../_variables/ajaxVariables";
+import { getSetting, getWidgetsWithData } from "../../_variables/ajaxVariables";
 import { AppContext } from "../../context/AppContext";
+import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
+import SideBar from '../../components/includes/Sidebar/Sidebar'
 
 const Post = props => {
     const contextData = useContext(AppContext);
+    const [state,setState]=useState({
+        style:{}
+    })
+
+    useEffect(() => {
+        console.log( props)
+        if (props.identity.postPageSidebar){
+            setState({
+                style: {
+                    gridArea:'content'
+                }
+            })
+        }
+
+    }, [props]);
 
     const RenderMeta = () => {
         if (props.post.title) {
@@ -30,32 +47,14 @@ const Post = props => {
         } else return null
     }
 
-
-    // useEffect(()=>{
-    //     console.log( props)
-    //         if(props.navigation){
-    //             contextData.dispatchNavigationData(props.navigation.data)
-    //         }
-    // },[props ]);
-    useEffect(() => {
-        if (props.navigation) {
-            contextData.dispatchNavigationData(props.navigation.data)
-        }
-        if (props.identity) {
-            contextData.dispatchSiteIdentity(siteIdentity => ({
-                ...siteIdentity,
-                ...props.identity
-            }))
-        }
-    }, [ props ]);
-
     return (
-        <AppLayout>
-            <>
+        <>
+            <AppLayout>
+                <SiteSettingSetter { ...props }/>
                 <RenderMeta/>
-                <div className='post'>
-                    <PostSidebar/>
-                    <div className="main">
+                <div className={ props.identity.postPageSidebar ? 'post withSidebar':'post withOutSidebar'  }>
+
+                    <div  style={state.style} className="main">
                         <Iframe iframeCode={ props.post.videoEmbedCode } meta={ {
                             description: props.post.description,
                             title: props.post.title,
@@ -78,9 +77,13 @@ const Post = props => {
                             videoEmbedCode={ props.post.videoEmbedCode }
                         />
                     </div>
+
+                    {/*<PostSidebar isActive={props.identity.postPageSidebar}/>*/}
+                    <SideBar isActive={props.identity.postPageSidebar} widgets={props.widgets} position='postPageSidebar' />
                 </div>
-            </>
-        </AppLayout>
+
+            </AppLayout>
+        </>
     );
 };
 
@@ -88,8 +91,10 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let post;
     let navigation;
     let identity;
+    let widgets;
     const identityData = await getSetting('identity');
     const navigationData = await getSetting('navigation');
+    const widgetsData = await getWidgetsWithData('postPageSidebar')
     const postBody = {
         postTitle: query.postTitle,
     };
@@ -97,7 +102,8 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     post = postData.data.post
     navigation = navigationData.data.setting ? navigationData.data.setting : {}
     identity = identityData.data.setting ? identityData.data.setting.data : {}
-    return { post, query, navigation, identity }
+    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    return { post, query, navigation, identity,widgets }
 };
 
 export default withRouter(Post);

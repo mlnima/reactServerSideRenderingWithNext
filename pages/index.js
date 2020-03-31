@@ -12,6 +12,10 @@ import Text from '../components/includes/Widget/WidgetsModelsComponents/Text/Tex
 import PaginationComponent from '../components/includes/PaginationComponent/PaginationComponent'
 import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 
+import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRenderer'
+import SideBar from '../components/includes/SideBar/SideBar'
+import H1Renderer from '../components/includes/H1Renderer/H1Renderer'
+
 const Home = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
@@ -19,54 +23,35 @@ const Home = props => {
         themeColor: props.identity.themeColor || '',
         description: props.identity.description || '',
         keywords: props.identity.keywords || [],
-        homePageH1: props.identity.homePageH1 || 'H1 element'
+        homePageH1: props.identity.homePageH1 || 'H1 element',
+        style: {}
     });
 
-    // useEffect(() => {
-    //     if (props.navigation) {
-    //         contextData.dispatchNavigationData(props.navigation.data)
-    //     }
-    //     if (props.identity) {
-    //         contextData.dispatchSiteIdentity(siteIdentity => ({
-    //             ...siteIdentity,
-    //             ...props.identity
-    //         }))
-    //     }
-    // }, [ props ]);
-
     useEffect(() => {
-        console.log(props )
-    }, [props]);
-
-    const renderWidgets = props.widgets.map(widget => {
-        switch ( widget.type ) {
-            case 'posts':
-                return (
-                    <Widget key={ widget._id } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } component={ Posts } posts={ widget.posts } title={ widget.title } redirectLink={ widget.redirectLink } redirectToTitle={ widget.redirectToTitle }
-                            pagination={ widget.pagination }/>
-                )
-                break
-            case 'text':
-                return (
-                    <Widget key={ widget._id } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } title={ widget.title } mainLinkUrl='/posts/' redirectToTitle='More videos'/>
-                )
-                break
-            default:
-                break
-
+        console.log(props)
+        if (props.identity.homePageSidebar) {
+            setState({
+                style: {
+                    gridArea: 'content'
+                }
+            })
         }
-
-    })
-
+    }, [ props ]);
 
     return (
-        <AppLayout>
-            <SiteSettingSetter { ...props }/>
-            <div className='HomePage'>
-                <h1>{ state.homePageH1 }</h1>
-                { renderWidgets }
-            </div>
-        </AppLayout>
+        <>
+            <AppLayout>
+                <SiteSettingSetter { ...props }/>
+                <div style={ state.style } className={ props.identity.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
+                    <div className='HomePage'>
+                        <H1Renderer text={ state.homePageH1 }/>
+                        <WidgetsRenderer widgets={ props.widgets } position='home'/>
+                    </div>
+                    <SideBar isActive={ props.identity.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
+                </div>
+
+            </AppLayout>
+        </>
     );
 };
 

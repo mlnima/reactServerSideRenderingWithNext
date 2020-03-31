@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import AppLayout from "../../../components/layouts/AppLayout";
-import { getSetting } from '../../../_variables/ajaxVariables'
+import { getSetting, getWidgetsWithData } from '../../../_variables/ajaxVariables'
 import { AppContext } from '../../../context/AppContext'
 import { getMeta } from '../../../_variables/ajaxPostsVariables'
 import withRouter from 'next/dist/client/with-router';
@@ -8,14 +8,27 @@ import CategoryElement from '../../../components/includes/CategoryElement/Catego
 import RenderMetaDataPages from '../../../components/includes/RenderMetaDataPages/RenderMetaDataPages'
 import SiteSettingSetter from '../../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
+import CategoriesSidebar from '../../../components/includes/pages/Categories/CategoriesSidebar/CategoriesSidebar'
+import SideBar from '../../../components/includes/SideBar/SideBar'
 
 // import './categories.scss'import './categories.scss'
 
 const categories = props => {
 
+    const [state,setState]=useState({
+        style:{}
+    })
     useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+        console.log( props)
+        if (props.identity.categoriesPagesSidebar){
+            setState({
+                style: {
+                    gridArea:'content'
+                }
+            })
+        }
+
+    }, [props]);
 
     const renderCategories = props.categoriesSource.metas.map(meta => {
         return (
@@ -27,18 +40,24 @@ const categories = props => {
         <>
             <AppLayout>
                 <SiteSettingSetter  { ...props }/>
-                <div className='categories'>
-                    { renderCategories }
+                <div style={state.style} className={ props.identity.categoriesPageSidebar ? 'content withSidebar':'content withOutSidebar'  } >
+                    <div>
+                        <div className='categories'>
+                            { renderCategories }
+                        </div>
+                        <PaginationComponent
+                            isActive={ true }
+                            currentPage={ props.getCategoriesData.pageNo }
+                            totalCount={ props.categoriesSource.totalCount }
+                            size={ props.getCategoriesData.size }
+                            maxPage={ Math.ceil(parseInt(props.categoriesSource.totalCount) / parseInt(props.getCategoriesData.size)) - 1 }
+                            queryData={ props.query || props.router.query }
+                            pathnameData={ props.pathname || props.router.pathname }
+                        />
+                    </div>
+                    <SideBar isActive={props.identity.categoriesPageSidebar} widgets={props.widgets} position='categoriesPageSidebar'/>
                 </div>
-                <PaginationComponent
-                    isActive={ true }
-                    currentPage={props.getCategoriesData.pageNo }
-                    totalCount={ props.categoriesSource.totalCount }
-                    size={ props.getCategoriesData.size }
-                    maxPage={ Math.ceil(parseInt(props.categoriesSource.totalCount) / parseInt(props.getCategoriesData.size))- 1 }
-                    queryData={props.query || props.router.query}
-                    pathnameData={props.pathname ||props.router.pathname }
-                />
+
             </AppLayout>
         </>
     );
@@ -47,22 +66,25 @@ const categories = props => {
 categories.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let navigation;
     let identity;
+    let widgets;
     let categoriesSource;
     const identityData = await getSetting('identity');
     const navigationData = await getSetting('navigation');
+    const widgetsData = await getWidgetsWithData('categoriesPageSidebar')
     identity = identityData.data.setting ? identityData.data.setting.data : {}
     navigation = navigationData.data.setting ? navigationData.data.setting : {}
+    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
     const getCategoriesData = {
         type: 'category',
-        searchForImageIn:'categories',
+        searchForImageIn: 'categories',
         pageNo: parseInt(query.page) || 1,
-        size: parseInt(query.size) || parseInt(identity.tagsCountPerPage) ||30,
+        size: parseInt(query.size) || parseInt(identity.tagsCountPerPage) || 30,
         sort: query.sort || 'latest',
 
     }
     const categoriesData = await getMeta(getCategoriesData)
     categoriesSource = categoriesData.data ? categoriesData.data : []
-    return { identity, navigation, query, categoriesSource,getCategoriesData,pathname }
+    return { identity, navigation, query, categoriesSource, getCategoriesData, pathname,widgets }
 }
 export default withRouter(categories);

@@ -53,23 +53,24 @@ app.prepare().then(()=>{
 
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
-    server.post('/api/v1/users/getUserInfo',adminAuthMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
-    server.post('/api/v1/users/getUsersList',adminAuthMiddleware,(req,res)=>{userController.getUsersList(req,res)});
+    server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
+    server.post('/api/v1/users/getUsersList',(req,res)=>{userController.getUsersList(req,res)});
+    server.post('/api/v1/users/getUsersListAsAdmin',(req,res)=>{userController.getUsersListAsAdmin(req,res)});
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts',cacheSuccesses,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts/post',cacheSuccesses,(req,res)=>{postsControllers.getPostInfo(req,res)});
+    server.post('/api/v1/posts',(req,res)=>{postsControllers.getPostsInfo(req,res)});
+    server.post('/api/v1/posts/post',(req,res)=>{postsControllers.getPostInfo(req,res)});
     server.post('/api/v1/posts/createNewPost',(req,res)=>{postsControllers.createNewPost(req,res)});
-    server.post('/api/v1/posts/updatePost',adminAuthMiddleware,(req,res)=>{postsControllers.updatePost(req,res)});
-    server.post('/api/v1/posts/deletePost',adminAuthMiddleware,(req,res)=>{postsControllers.deletePost(req,res)});
-    server.post('/api/v1/posts/postsBulkAction',adminAuthMiddleware,(req,res)=>{postsControllers.postsBulkAction(req,res)});
+    server.post('/api/v1/posts/updatePost',(req,res)=>{postsControllers.updatePost(req,res)});
+    server.post('/api/v1/posts/deletePost',(req,res)=>{postsControllers.deletePost(req,res)});
+    server.post('/api/v1/posts/postsBulkAction',(req,res)=>{postsControllers.postsBulkAction(req,res)});
     server.post('/api/v1/posts/likeDislikeView',(req,res)=>{postsControllers.likeDislikeView(req,res)});
-    server.post('/api/v1/posts/getMeta',cacheSuccesses,(req,res)=>{postsControllers.getMeta(req,res)});
+    server.post('/api/v1/posts/getMeta',(req,res)=>{postsControllers.getMeta(req,res)});
 
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
-    server.post('/api/v1/settings/get',cacheSuccesses,(req,res)=>{settingsControllers.get(req,res)});
+    server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
     server.post('/api/v1/settings/addWidget',(req,res)=>{settingsControllers.addWidget(req,res)});
-    server.post('/api/v1/settings/getWidget',cacheSuccesses,(req,res)=>{settingsControllers.getWidget(req,res)});
-    server.post('/api/v1/settings/getWidgetsWithData',cacheSuccesses,(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
+    server.post('/api/v1/settings/getWidget',(req,res)=>{settingsControllers.getWidget(req,res)});
+    server.post('/api/v1/settings/getWidgetsWithData',(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
     server.post('/api/v1/settings/updateWidget',(req,res)=>{settingsControllers.updateWidget(req,res)});
     server.post('/api/v1/settings/deleteWidget',(req,res)=>{settingsControllers.deleteWidget(req,res)});
 

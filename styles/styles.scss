@@ -27,6 +27,7 @@
 "../components/includes/Loading/Loading",
 "../components/includes/Pagination/Pagination",
 "../components/includes/Posts/Posts",
+"../components/includes/Sidebar/Sidebar",
 "../components/includes/PaginationComponent/PaginationComponent",
 "../components/includes/ProgressBar/ProgressBar",
 "../components/includes/TopBar/TopBar",
@@ -43,13 +44,15 @@
 "../pages/page/categories/categories",
 "../pages/page/tags/tags",
 "../pages/page/actors/actors",
-"../pages/post/Post.scss";
+"../pages/post/Post.scss",
+"../pages/posts/Posts.scss";
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-  'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-  sans-serif;
+  //font-family: -apple-system, BlinkMacSystemFont, 'Gochi Hand','Segoe UI', 'Roboto', 'Oxygen',
+  //'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+  //sans-serif;
+  font-family: 'Patrick Hand', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   background-color: $dark100;
@@ -76,10 +79,11 @@ body {
   height: 40px;
   filter: invert(1);
 }
+
 .fontawesomeSvgSmall {
   width: 20px;
   height: 30px;
-  filter: invert(1) ;
+  filter: invert(1);
 
 }
 
@@ -96,4 +100,22 @@ input, textarea, select {
 
 a {
   text-decoration: none;
+}
+
+.withSidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'content' 'sidebar';
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 'sidebar content';
+  }
+}
+
+.withOutSidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 1fr;
+  }
 }

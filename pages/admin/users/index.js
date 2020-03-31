@@ -1,11 +1,12 @@
 import React,{useEffect,useState,useContext} from 'react';
 import AdminLayout from "../../../components/layouts/AdminLayout";
-import {getUsersList} from "../../../_variables/ajaxAuthVariables";
+import {getUsersList,getUsersListAsAdmin} from "../../../_variables/ajaxAuthVariables";
 
 const users = props => {
     const [usersList, setUsersList] = useState([]);
+
     useEffect(()=>{
-        getUsersList().then(res=>{
+        getUsersListAsAdmin().then(res=>{
             setUsersList(res.data.users)
         })
     },[]);
@@ -15,9 +16,11 @@ const users = props => {
     const renderUsers = usersList.map(user=>{
         console.log(user )
         return(
-            <p>{user.username}</p>
+            <p key={user.username}>{user.username}</p>
         )
     })
+
+
     return (
         <AdminLayout>
         <div>

@@ -1,17 +1,17 @@
 import axios from "axios";
 
 export const updateSetting = async (type,data)=>{
-    if (localStorage.wt){
+
         const body = {
             token: localStorage.wt,
             type,
             data
         };
         return await axios.post('http://localhost:3000/api/v1/settings/update',body)
-    }
+
 };
 
-export const getSetting = async (type)=>{
+export const getSetting = async (type,unCached)=>{
         const body = {
             type,
         };
@@ -26,6 +26,7 @@ export const getSetting = async (type)=>{
 export const addNewWidget = async (data)=>{
     const body = {
         data,
+        token: localStorage.wt
     };
     return await axios.post('http://localhost:3000/api/v1/settings/addWidget',body)
 }
@@ -47,6 +48,7 @@ export const updateWidgets = async (id,data)=>{
     const body = {
         id,
         data,
+        token: localStorage.wt
     };
     return await axios.post('http://localhost:3000/api/v1/settings/updateWidget',body)
 }
@@ -54,7 +56,9 @@ export const updateWidgets = async (id,data)=>{
 export const deleteWidgets = async (id)=>{
     const body = {
         id,
+        token: localStorage.wt
     };
     return await axios.post('http://localhost:3000/api/v1/settings/deleteWidget',body)
 }
+
 

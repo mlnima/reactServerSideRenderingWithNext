@@ -15,6 +15,7 @@ const HomePageWidgets = props => {
     const contextData = useContext(AppContext);
     useEffect(() => {
         getWidgets('all').then(res => {
+            console.log( res)
             contextData.dispatchWidgetsSettings({
                 ...contextData.widgetsSettings,
                 widgets: [ ...res.data.widgets ]
@@ -29,15 +30,22 @@ const HomePageWidgets = props => {
             )
         }
     })
-    const renderSidebarWidgets = contextData.widgetsSettings.widgets.map(widget => {
-        if (widget.position==='sidebar'){
+    const renderHomePageSidebarWidgets = contextData.widgetsSettings.widgets.map(widget => {
+        if (widget.position==='homePageSidebar'){
             return (
                 <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
             )
         }
     })
     const renderPostPageSidebarWidgets = contextData.widgetsSettings.widgets.map(widget => {
-        if (widget.position==='postPageSideBar'){
+        if (widget.position==='postPageSidebar'){
+            return (
+                <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
+            )
+        }
+    })
+    const renderPostsPageSidebarWidgets = contextData.widgetsSettings.widgets.map(widget => {
+        if (widget.position==='postsPageSidebar'){
             return (
                 <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
             )
@@ -50,6 +58,30 @@ const HomePageWidgets = props => {
             )
         }
     })
+    const renderTagsPageSidebarWidgets = contextData.widgetsSettings.widgets.map(widget => {
+        if (widget.position==='tagsPageSidebar'){
+            return (
+                <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
+            )
+        }
+    })
+    const renderCategoriesPageSidebarWidgets = contextData.widgetsSettings.widgets.map(widget => {
+        if (widget.position==='categoriesPageSidebar'){
+            return (
+                <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
+            )
+        }
+    })
+    const renderActorsPageSidebarWidgets = contextData.widgetsSettings.widgets.map(widget => {
+        if (widget.position==='actorsPageSidebar'){
+            return (
+                <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
+            )
+        }
+    })
+
+
+
 
     return (
         <AdminLayout>
@@ -63,12 +95,28 @@ const HomePageWidgets = props => {
                         {renderHomeWidgets}
                     </div>
                     <div className='widgetAdminPanelItem'>
-                        <p className='widgetAdminPanelItemHeader'>Sidebar</p>
-                        {renderSidebarWidgets}
+                        <p className='widgetAdminPanelItemHeader'>Home Page Sidebar</p>
+                        {renderHomePageSidebarWidgets}
                     </div>
                     <div className='widgetAdminPanelItem'>
                         <p className='widgetAdminPanelItemHeader'>Post Page</p>
                         {renderPostPageSidebarWidgets}
+                    </div>
+                    <div className='widgetAdminPanelItem'>
+                        <p className='widgetAdminPanelItemHeader'>Posts Page</p>
+                        {renderPostsPageSidebarWidgets}
+                    </div>
+                    <div className='widgetAdminPanelItem'>
+                        <p className='widgetAdminPanelItemHeader'>Tags Page</p>
+                        {renderTagsPageSidebarWidgets}
+                    </div>
+                    <div className='widgetAdminPanelItem'>
+                        <p className='widgetAdminPanelItemHeader'>Categories Page</p>
+                        {renderCategoriesPageSidebarWidgets}
+                    </div>
+                    <div className='widgetAdminPanelItem'>
+                        <p className='widgetAdminPanelItemHeader'>Actors Page</p>
+                        {renderActorsPageSidebarWidgets}
                     </div>
                     <div className='widgetAdminPanelItem'>
                         <p className='widgetAdminPanelItemHeader'>Footer</p>

@@ -5,6 +5,7 @@
   display: flex;
   justify-content: center;
   margin: 50px 0;
+  flex-wrap: wrap;
   a {
   @include paginationItem;
   }

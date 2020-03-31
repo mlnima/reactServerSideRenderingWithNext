@@ -1,12 +1,27 @@
 const jwt = require('jsonwebtoken')
+const userSchema = require('../models/userSchema')
+const jwtDecode = require('jwt-decode')
 
-module.exports = (req,res,next)=>{
-    try{
-        req.userData = jwt.verify(req.body.token, process.env.JWT_KEY);
-        next()
-    }catch (error) {
+module.exports = async (req, res, next) => {
+
+    try {
+        const verifiedToken = jwt.verify(req.body.token, process.env.JWT_KEY)
+        await userSchema.findById(verifiedToken._id).exec().then(user => {
+
+            if (user.role === 'administrator') {
+                req.userData = jwt.verify(req.body.token, process.env.JWT_KEY);
+                next()
+            } else {
+                return res.status(401).json({
+                    message: 'Unauthorized'
+                })
+            }
+
+        })
+
+    } catch ( error ) {
         return res.status(401).json({
-            message:'Unauthorized'
+            message: 'Unauthorized'
         })
     }
 };

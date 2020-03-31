@@ -4,11 +4,7 @@ import withRouter from 'next/dist/client/with-router';
 import _ from 'lodash'
 
 const PaginationComponent = props => {
-    useEffect(() => {
-        console.log(props )
 
-
-    }, [props]);
     const paginationRangeGenerator = (current,max)=>{
         return  current === 1 && max <= 2 ? [2] :
                 current === 1 ? _.range(2, 8) :

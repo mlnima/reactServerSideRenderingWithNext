@@ -1,5 +1,6 @@
 @import "../../../styles/colors";
 @import "../../../styles/buttons";
+@import "../../../styles/grid";
 
 #settings {
   display: flex;
@@ -11,12 +12,15 @@
 }
 
 #site-settings-form {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
+  //display: flex;
+  //flex-direction: column;
+  //align-items: flex-start;
+
   background-color: $light100;
   padding: 20px;
-
+  .forms{
+    @include settings-general;
+  }
   button {
     @include AdminLightBtn;
     margin: 20px;
@@ -34,7 +38,10 @@
   }
 
   .site-settings-form-section {
-
+    background-color: $AdminColor80;
+    border-radius: 10px;
+    color: $light100;
+    padding: 10px;
     input {
       background-color: $light100;
       margin: 10px;

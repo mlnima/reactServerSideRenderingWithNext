@@ -19,9 +19,10 @@ const Logo = () => {
     return (
         <Link href='/'>
             <div className='Logo'>
+                <img src='/static/images/logo/Logo.png'/>
                 <span className='logoText'>{state.logoText}</span>
                 <p className='headLine'>{state.headLine}</p>
-                {/*<img src='/static/images/logo/Logo.png'/>*/}
+
             </div>
         </Link>
     );

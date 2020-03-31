@@ -12,7 +12,7 @@
 
 @mixin imageForMetaElements{
   img{
-    width: 250px;
+    width: 100%;
     height: 150px;
     border: $dark90 1px solid  ;
     display: block;

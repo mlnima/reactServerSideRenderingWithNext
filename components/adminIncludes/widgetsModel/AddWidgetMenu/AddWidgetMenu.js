@@ -26,8 +26,12 @@ const AddWidgetMenu = props => {
     return (
         <div className='AddWidgetMenu'>
             <button onClick={ () => onAddNewWidget('home', 'text') }>Add Widget To Home</button>
-            <button onClick={ () => onAddNewWidget('sidebar', 'text') }>Add Widget To Sidebar</button>
-            <button onClick={ () => onAddNewWidget('postPageSideBar', 'text') }>Add Widget To Post Page Sidebar</button>
+            <button onClick={ () => onAddNewWidget('homePageSidebar', 'text') }>Add Widget To Home Page Sidebar</button>
+            <button onClick={ () => onAddNewWidget('postPageSidebar', 'text') }>Add Widget To Post Page Sidebar</button>
+            <button onClick={ () => onAddNewWidget('postsPageSidebar', 'text') }>Add Widget To Posts Page Sidebar</button>
+            <button onClick={ () => onAddNewWidget('tagsPageSidebar', 'text') }>Add Widget To Tags Page Sidebar</button>
+            <button onClick={ () => onAddNewWidget('categoriesPageSidebar', 'text') }>Add Widget To Categories Page Sidebar</button>
+            <button onClick={ () => onAddNewWidget('actorsPageSidebar', 'text') }>Add Widget To Actors Page Sidebar</button>
             <button onClick={ () => onAddNewWidget('footer', 'text') }>Add Widget To Footer</button>
         </div>
     );

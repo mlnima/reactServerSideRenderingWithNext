@@ -35,6 +35,7 @@ const SiteSettingSetter = props => {
             <meta name="description" content={ state.description }/>
             <meta name="keywords" content={ state.keywords }/>
             <link rel="icon" href="/favicon.ico"/>
+            <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
         </Head>
     )
 };

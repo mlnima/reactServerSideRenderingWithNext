@@ -6,17 +6,32 @@
   grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
   width: 100%;
 
+  .widget-open-control {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 10px;
+    background-color: $AdminColor80;
+    color: $light100;
+    border-radius: 10px 10px 0 0;
+    margin-top: 5px ;
+    button{
+      @include AdminLightBtn
+    }
+  }
+
   .widgetModel {
     background-color: $AdminColor80;
-    border-radius: 10px;
+    border-radius: 0 0 10px 10px;
     display: flex;
     flex-direction: column;
     //flex-direction: column;
     max-width: 300px;
-    padding: 10px;
+    padding:  10px;
     border: solid .5px black;
-    margin: 5px;
+    margin-bottom: 5px;
     color: $light100;
+
     button {
       @include AdminLightBtn;
 
@@ -28,7 +43,8 @@
       flex-direction: column;
       color: $light100;
       font-size: small;
-      label{
+
+      label {
         //padding: 5px 0;
         display: flex;
         justify-content: space-between;
@@ -36,7 +52,7 @@
     }
 
     input, select, button {
-      margin: 5px ;
+      margin: 5px;
     }
 
     input, select {

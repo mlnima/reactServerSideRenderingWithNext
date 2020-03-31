@@ -7,7 +7,6 @@ let settingsControllers = {}
 settingsControllers.update = (req, res) => {
     const type = req.body.type;
     const data = req.body.data;
-    console.log(type, data)
     settingSchema.findOneAndUpdate({ type: type }, { data }, { new: true }).exec().then(setting => {
         console.log('setting:', setting)
         if (!setting) {
@@ -29,19 +28,19 @@ settingsControllers.update = (req, res) => {
 
 settingsControllers.get = async (req, res) => {
     const setting = await settingSchema.findOne({ type: req.body.type }).exec();
-    console.log( req.query)
     res.json({ setting })
 };
-settingsControllers.getMultiple = async (req, res) => {
-    const requestedSetting = req.body.settings
-    const settingRequestPromises = requestedSetting.map( async setting=>{
-        return await settingSchema.findOne({ type: req.body.type }).exec();
-    })
 
-    const setting = await settingSchema.findOne({ type: req.body.type }).exec();
-    console.log( setting)
-    res.json({ setting })
-};
+// settingsControllers.getMultiple = async (req, res) => {
+//     const requestedSetting = req.body.settings
+//     const settingRequestPromises = requestedSetting.map( async setting=>{
+//         return await settingSchema.findOne({ type: req.body.type }).exec();
+//     })
+//
+//     const setting = await settingSchema.findOne({ type: req.body.type }).exec();
+//     console.log( setting)
+//     res.json({ setting })
+// };
 
 settingsControllers.create = (req, res) => {
     const dataToSave = new settingSchema({
@@ -73,7 +72,7 @@ settingsControllers.getWidget = (req, res) => {
 }
 
 settingsControllers.getWidgetsWithData = (req, res) => {
-    const position = req.body.position = 'all' ? {} : { position: req.body.position };
+    const position = req.body.position === 'all' ? {} : { position : req.body.position };
     widgetSchema.find(position).exec().then(async widgets => {
         const mapWidget = widgets.map(async widget => {
             let finalData = {
@@ -86,18 +85,14 @@ settingsControllers.getWidgetsWithData = (req, res) => {
                 redirectToTitle:widget.redirectToTitle,
                 count: widget.count,
                 type: widget.type,
+                position:widget.position,
                 posts: [],
                 sortBy: widget.sortBy,
                 text: widget.text,
                 textAlign: widget.textAlign,
                 customHtml: widget.customHtml
             }
-            // let finalDataTest = {
-            //     ...widgets[widgets.indexOf(widget)],
-            //     posts: []
-            // }
 
-            // finalData.posts = ['test']
             const sortMethod = finalData.sortBy ? {[finalData.sortBy]:-1} : '-_id'
 
             if (finalData.type === 'posts') {
