@@ -46,16 +46,21 @@ app.prepare().then(()=>{
     server.get('/favicon.ico',(req,res)=>{
         return res.status(200).sendFile('/images/favicon/favicon.ico',robotsOptions)
     });
+
+    //xml siteMap handler
     server.get('/sitemap.xsl',(req,res)=>{ return res.status(200).sendFile('sitemap.xsl',robotsOptions) });
     server.get('/sitemap.xml',(req,res)=>{siteMapController.siteMap(req,res)});
     server.get('/sitemaps/:month',(req,res)=>{siteMapsController.siteMapMonths(req,res)});
     server.get('/sitemap/:month/:pageNo',(req,res)=>{subSiteMapsController.siteMap(req,res)});
 
+     //users handler
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
     server.post('/api/v1/users/getUsersList',(req,res)=>{userController.getUsersList(req,res)});
     server.post('/api/v1/users/getUsersListAsAdmin',(req,res)=>{userController.getUsersListAsAdmin(req,res)});
+
+    //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts',(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts/post',(req,res)=>{postsControllers.getPostInfo(req,res)});
@@ -64,8 +69,16 @@ app.prepare().then(()=>{
     server.post('/api/v1/posts/deletePost',(req,res)=>{postsControllers.deletePost(req,res)});
     server.post('/api/v1/posts/postsBulkAction',(req,res)=>{postsControllers.postsBulkAction(req,res)});
     server.post('/api/v1/posts/likeDislikeView',(req,res)=>{postsControllers.likeDislikeView(req,res)});
+
+    //meta data handler(tags,categories...)
     server.post('/api/v1/posts/getMeta',(req,res)=>{postsControllers.getMeta(req,res)});
 
+    //comments handler
+    server.post('/api/v1/posts/newComment',(req,res)=>{postsControllers.newComment(req,res)});
+    server.post('/api/v1/posts/getComments',(req,res)=>{postsControllers.getComments(req,res)});
+    server.post('/api/v1/posts/updateComment',(req,res)=>{postsControllers.updateComment(req,res)});
+
+    //settings handler
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
     server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
     server.post('/api/v1/settings/addWidget',(req,res)=>{settingsControllers.addWidget(req,res)});

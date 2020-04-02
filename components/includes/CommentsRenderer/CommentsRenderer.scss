@@ -1,0 +1,20 @@
+@import "../../../styles/colors";
+.comments {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+
+  padding: 5px;
+
+  .comments-item {
+    text-align: left;
+    .comment-author{
+      color:$lightBlue;
+    }
+    .comment-date{
+      color:$red50;
+    }
+  }
+}

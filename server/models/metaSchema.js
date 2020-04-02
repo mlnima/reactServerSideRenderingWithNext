@@ -11,4 +11,4 @@ const metaSchema = mongoose.Schema({
     imageUrl:String
 });
 
-module.exports = mongoose.model("meta", metaSchema);
+module.exports = mongoose.model("metas", metaSchema);

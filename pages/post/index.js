@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
 import axios from "axios";
-import { getPost } from "../../_variables/ajaxPostsVariables";
+import { getComments, getPost } from "../../_variables/ajaxPostsVariables";
 import Iframe from "../../components/includes/Post/Iframe/Iframe";
 import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
 import withRouter from "next/dist/client/with-router";
@@ -11,24 +11,26 @@ import { getSetting, getWidgetsWithData } from "../../_variables/ajaxVariables";
 import { AppContext } from "../../context/AppContext";
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import SideBar from '../../components/includes/Sidebar/Sidebar'
+import CommentFrom from '../../components/includes/Post/CommentFrom/CommentFrom'
+import CommentsRenderer from '../../components/includes/CommentsRenderer/CommentsRenderer'
 
 const Post = props => {
     const contextData = useContext(AppContext);
-    const [state,setState]=useState({
-        style:{}
+    const [ state, setState ] = useState({
+        style: {}
     })
 
     useEffect(() => {
-        console.log( props)
-        if (props.identity.postPageSidebar){
+        console.log(props)
+        if (props.identity.postPageSidebar) {
             setState({
                 style: {
-                    gridArea:'content'
+                    gridArea: 'content'
                 }
             })
         }
 
-    }, [props]);
+    }, [ props ]);
 
     const RenderMeta = () => {
         if (props.post.title) {
@@ -52,9 +54,9 @@ const Post = props => {
             <AppLayout>
                 <SiteSettingSetter { ...props }/>
                 <RenderMeta/>
-                <div className={ props.identity.postPageSidebar ? 'post withSidebar':'post withOutSidebar'  }>
+                <div className={ props.identity.postPageSidebar ? 'post withSidebar' : 'post withOutSidebar' }>
 
-                    <div  style={state.style} className="main">
+                    <div style={ state.style } className="main">
                         <Iframe iframeCode={ props.post.videoEmbedCode } meta={ {
                             description: props.post.description,
                             title: props.post.title,
@@ -76,10 +78,13 @@ const Post = props => {
                             views={ props.post.views }
                             videoEmbedCode={ props.post.videoEmbedCode }
                         />
+                        <CommentsRenderer comments={props.comments}/>
+                        <CommentFrom documentId={ props.post._id }/>
+
                     </div>
 
-                    {/*<PostSidebar isActive={props.identity.postPageSidebar}/>*/}
-                    <SideBar isActive={props.identity.postPageSidebar} widgets={props.widgets} position='postPageSidebar' />
+                    {/*<PostSidebar isActive={props.identity.postPageSidebar}/>*/ }
+                    <SideBar isActive={ props.identity.postPageSidebar } widgets={ props.widgets } position='postPageSidebar'/>
                 </div>
 
             </AppLayout>
@@ -89,9 +94,11 @@ const Post = props => {
 
 Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let post;
+    let comments;
     let navigation;
     let identity;
     let widgets;
+
     const identityData = await getSetting('identity');
     const navigationData = await getSetting('navigation');
     const widgetsData = await getWidgetsWithData('postPageSidebar')
@@ -99,11 +106,15 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
         postTitle: query.postTitle,
     };
     const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
+
     post = postData.data.post
+
+    const commentsData = await getComments({ onDocument: post._id })
     navigation = navigationData.data.setting ? navigationData.data.setting : {}
     identity = identityData.data.setting ? identityData.data.setting.data : {}
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    return { post, query, navigation, identity,widgets }
+    comments = commentsData.data.comments ? commentsData.data.comments : []
+    return { post, query, navigation, identity, widgets, comments }
 };
 
 export default withRouter(Post);

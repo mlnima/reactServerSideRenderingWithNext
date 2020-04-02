@@ -44,7 +44,7 @@ const Home = props => {
                 <SiteSettingSetter { ...props }/>
                 <div style={ state.style } className={ props.identity.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
                     <div className='HomePage'>
-                        <H1Renderer text={ state.homePageH1 }/>
+                        <H1Renderer text={ props.identity.homePageH1 }/>
                         <WidgetsRenderer widgets={ props.widgets } position='home'/>
                     </div>
                     <SideBar isActive={ props.identity.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>

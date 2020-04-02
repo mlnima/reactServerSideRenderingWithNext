@@ -997,6 +997,20 @@
       align-items: center;
       margin: auto; } }
 
+.comments {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 5px; }
+  .comments .comments-item {
+    text-align: left; }
+    .comments .comments-item .comment-author {
+      color: #0085ba; }
+    .comments .comments-item .comment-date {
+      color: #FF3565; }
+
 #site-sidebar {
   grid-area: sidebar; }
 
@@ -1305,6 +1319,43 @@
   align-items: center;
   justify-content: flex-start;
   width: 98%; }
+  .post .main .comment-form {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    justify-content: space-between;
+    padding: 10px;
+    width: 100%; }
+    .post .main .comment-form .comment-form-info {
+      display: flex;
+      flex-direction: column; }
+    .post .main .comment-form .comment-form-submit-button {
+      background: linear-gradient(#67ae55, #578843);
+      box-shadow: inset 0 1px 1px #a4e388;
+      border-color: #3b6e22 #3b6e22 #2c5115;
+      border-radius: 5px;
+      color: #fff;
+      cursor: pointer;
+      display: inline-block;
+      letter-spacing: 1px;
+      position: relative;
+      text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+      width: 200px;
+      height: 40px;
+      min-width: 194px;
+      padding: 7px 20px;
+      text-align: center;
+      line-height: 126%;
+      box-sizing: border-box;
+      margin-top: 10px;
+      margin-bottom: 10px; }
+    .post .main .comment-form input, .post .main .comment-form textarea {
+      background-color: #282828;
+      margin: 5px;
+      border: 1px solid #181818;
+      color: white;
+      width: 95%; }
+    .post .main .comment-form textarea {
+      min-height: 200px; }
   .post .main .video-player {
     margin: 10px 0;
     position: relative;
@@ -1482,6 +1533,29 @@ a {
   @media only screen and (min-width: 768px) {
     .withOutSidebar {
       grid-template-columns: 1fr; } }
+
+.AdminRenderComments {
+  padding: 20px; }
+
+.adminCommentsItem {
+  padding: 5px;
+  transition: .3s; }
+  .adminCommentsItem:nth-child(even) {
+    background-color: #9fa3a8; }
+  .adminCommentsItem .adminCommentsItemHead {
+    display: flex;
+    align-items: center; }
+    .adminCommentsItem .adminCommentsItemHead p {
+      margin: 0 20px; }
+  .adminCommentsItem .adminCommentsItemBody .commentControl button {
+    border: none;
+    color: #0073aa;
+    background: transparent; }
+
+.AdminCommentsControl {
+  display: flex; }
+  .AdminCommentsControl .status a {
+    margin: 0 10px; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

@@ -1,0 +1,10 @@
+@import "../../../../styles/links";
+
+.AdminCommentsControl{
+  display: flex;
+  .status{
+    a{
+      margin:  0 10px;
+    }
+  }
+}

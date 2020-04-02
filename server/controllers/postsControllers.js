@@ -1,6 +1,7 @@
 let postsControllers = {};
 const postSchema = require('../models/postSchema');
 const metaSchema = require('../models/metaSchema');
+const commentSchema = require('../models/commentSchema');
 
 postsControllers.createNewPost = (req, res) => {
     const newPost = req.body.postData
@@ -54,7 +55,7 @@ postsControllers.updatePost = (req, res) => {
 };
 
 postsControllers.getPostsInfo = async (req, res) => {
-    console.log( req.query)
+    console.log(req.query)
     const size = parseInt(req.body.size) > 100 ? 100 : parseInt(req.body.size)
     const pageNo = req.body.pageNo;
     let postTypeQuery = req.body.postType === 'all' ? {} : { postType: req.body.postType };
@@ -188,5 +189,52 @@ postsControllers.getMeta = async (req, res) => {
     })
 
 }
+
+postsControllers.newComment = (req, res) => {
+    console.log(req.body)
+    const commentDataToSave = new commentSchema(req.body)
+    commentDataToSave.save().then(saved => {
+        res.json({ savedComment: saved, error: false })
+        res.end()
+    }).cache((err) => {
+        console.log(err)
+        res.json({ error: true })
+        res.end()
+    })
+};
+
+postsControllers.getComments = (req, res) => {
+    const size = parseInt(req.body.size) > 50 ? 50 : parseInt(req.body.size)
+    const pageNo = req.body.pageNo ? parseInt(req.body.pageNo) : 1
+    const onDocument = req.body.onDocument ? { onDocument: req.body.onDocument } : {}
+    const status = !req.body.status || req.body.status==='all' ? {status: 'approved' } : { status: req.body.status }
+    let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
+    const searchQuery = !req.body.keyword ? {} : {
+        $or: [
+            { author: new RegExp(req.body.keyword, 'i') },
+            { body: new RegExp(req.body.keyword, 'i') },
+            { email: new RegExp(req.body.keyword, 'i') },
+        ]
+    };
+
+      const comments =  commentSchema.find({ $and: [ onDocument, status, searchQuery ] }).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec()
+      const commentsCount =  commentSchema.count({ $and: [ onDocument, status, searchQuery ] }).exec()
+
+      Promise.all([comments,commentsCount]).then(data=>{
+          res.json({ comments:data[0],count:data[1] })
+          res.end()
+      }).catch(err=>{
+          console.log( err)
+      })
+
+};
+postsControllers.updateComment = (req, res) => {
+    console.log( req.body)
+ commentSchema.findByIdAndUpdate(req.body._id,req.body.update,{new:true}).exec().then(updated=>{
+     console.log( updated)
+     res.end()
+ })
+
+};
 
 module.exports = postsControllers;
