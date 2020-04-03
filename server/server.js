@@ -12,7 +12,7 @@ const path = require('path');
 const authMiddleware = require('./middlewares/authMiddleware');
 const adminAuthMiddleware = require('./middlewares/adminAuthMiddleware');
 const xmlparser = require("express-xml-bodyparser");
-const dev = process.env.NODE_ENV !== 'production';
+const dev = process.env.REACT_APP_NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 //cache
@@ -34,7 +34,7 @@ const robotsOptions = {
     root:  './static/',
     headers: {'Content-Type':'text/plain;charset=utf-8'}
 }
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.REACT_APP_PORT || 3000;
 
 app.prepare().then(()=>{
     const server = express();
@@ -93,24 +93,34 @@ app.prepare().then(()=>{
     server.get('/post/:id/:postTitle',(req,res)=>{
         const targetComponent = '/post';
         app.render(req,res,targetComponent)
-
     });
-
-
     server.get('/posts',(req,res)=>{
         const targetComponent = '/posts';
+        app.render(req,res,targetComponent)
+    });
+    server.get('/tags',(req,res)=>{
+        const targetComponent = '/metaPage';
         const params = {
-            page:req.query.page,
-            category:req.query.category,
-            tag:req.query.tag,
-            sort:req.query.sort,
-            size:req.query.size,
-            type:req.query.type,
-            keyword:req.query.keyword,
-            author:req.query.author,
+            type:'tags'
         }
         app.render(req,res,targetComponent,params)
     });
+
+
+    // server.get('/posts',(req,res)=>{
+    //     const targetComponent = '/posts';
+    //     const params = {
+    //         page:req.query.page,
+    //         category:req.query.category,
+    //         tag:req.query.tag,
+    //         sort:req.query.sort,
+    //         size:req.query.size,
+    //         type:req.query.type,
+    //         keyword:req.query.keyword,
+    //         author:req.query.author,
+    //     }
+    //     app.render(req,res,targetComponent)
+    // });
     // server.get('/page/tags',(req,res)=>{
     //     const targetComponent = '/page/tags';
     //     const params = {

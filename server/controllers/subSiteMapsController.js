@@ -17,7 +17,7 @@ subSiteMapsController.siteMap = (req, res) => {
 
             if (post) {
                 let lastModify = new Date(post.lastModify);
-                let postUrl = process.env.DOMAIN_NAME + post._id + '/' + encodeURIComponent(post.title)
+                let postUrl = process.env.REACT_APP_DOMAIN_NAME + post._id + '/' + encodeURIComponent(post.title)
 
                 postsElements += '<url> \n ' +
                     `<loc>${ postUrl }</loc>\n` +

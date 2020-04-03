@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 9);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -845,6 +845,9 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 const TopBar = props => {
   const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_2__["AppContext"]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(contextData.userData);
+  }, []);
 
   if (contextData.userData.username) {
     if (contextData.userData.role === 'administrator') {
@@ -1312,9 +1315,6 @@ const WidgetsRenderer = props => {
     0: state,
     1: setState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(props);
-  }, [props]);
   const renderWidgets = props.widgets.filter(widget => widget.position === props.position).map(widget => {
     switch (widget.type) {
       case 'posts':
@@ -3758,8 +3758,6 @@ const Home = props => {
     style: {}
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(props);
-
     if (props.identity.homePageSidebar) {
       setState({
         style: {
@@ -3779,6 +3777,7 @@ const Home = props => {
     widgets: props.widgets,
     position: "home"
   })), __jsx(_components_includes_SideBar_SideBar__WEBPACK_IMPORTED_MODULE_14__["default"], {
+    key: "homePageSidebar",
     isActive: props.identity.homePageSidebar,
     widgets: props.widgets,
     position: "homePageSidebar"
@@ -3840,7 +3839,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9j
 
 /***/ }),
 
-/***/ 3:
+/***/ 9:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

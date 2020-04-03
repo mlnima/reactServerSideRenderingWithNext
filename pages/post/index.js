@@ -85,7 +85,7 @@ const Post = props => {
                     </div>
 
                     {/*<PostSidebar isActive={props.identity.postPageSidebar}/>*/ }
-                    <SideBar isActive={ props.identity.postPageSidebar } widgets={ props.widgets } position='postPageSidebar'/>
+                    <SideBar key='postPageSidebar' isActive={ props.identity.postPageSidebar } widgets={ props.widgets } position='postPageSidebar'/>
                 </div>
 
             </AppLayout>

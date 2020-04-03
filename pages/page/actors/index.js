@@ -16,7 +16,7 @@ const actors = props => {
     })
     const renderActors = props.actorsSource.metas.map(meta => {
         return (
-            <ActorElement key={ meta._id } imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl } name={ meta.name } count={ meta.count }/>
+            <ActorElement key={ props.actorsSource.metas.indexOf(meta) } imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl } name={ meta.name } count={ meta.count }/>
         )
     })
 
@@ -50,7 +50,7 @@ const actors = props => {
                             pathnameData={props.pathname ||props.router.pathname }
                         />
                     </div>
-                    <SideBar isActive={props.identity.actorsPageSidebar} widgets={props.widgets} position='actorsPageSidebar'/>
+                    <SideBar key='actorsPageSidebar' isActive={props.identity.actorsPageSidebar} widgets={props.widgets} position='actorsPageSidebar'/>
                 </div>
 
             </AppLayout>

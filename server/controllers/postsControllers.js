@@ -57,7 +57,7 @@ postsControllers.updatePost = (req, res) => {
 };
 
 postsControllers.getPostsInfo = async (req, res) => {
-    console.log(req.query)
+
     const size = parseInt(req.body.size) > 100 ? 100 : parseInt(req.body.size)
     const pageNo = req.body.pageNo;
     let postTypeQuery = req.body.postType === 'all' ? {} : { postType: req.body.postType };

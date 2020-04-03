@@ -36,7 +36,7 @@ siteMapController.siteMap = (req, res) => {
         data.allMonthsSinceStart.forEach(month => {
             monthsSiteMap +=
                 '<sitemap>\n' +
-                `<loc>${ process.env.DOMAIN_NAME }sitemaps/${ month }.xml</loc>\n` +
+                `<loc>${ process.env.REACT_APP_DOMAIN_NAME }sitemaps/${ month }.xml</loc>\n` +
                 `<lastmod>${ toDay.toISOString() }</lastmod>\n` +
                 ' </sitemap>\n'
         });

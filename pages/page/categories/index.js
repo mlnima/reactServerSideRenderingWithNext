@@ -19,20 +19,18 @@ const categories = props => {
         style:{}
     })
     useEffect(() => {
-        console.log( props)
-        if (props.identity.categoriesPagesSidebar){
+        if (props.identity.categoriesPageSidebar){
             setState({
                 style: {
                     gridArea:'content'
                 }
             })
         }
-
     }, [props]);
 
     const renderCategories = props.categoriesSource.metas.map(meta => {
         return (
-            <CategoryElement key={ meta._id } imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl } name={ meta.name } count={ meta.count }/>
+            <CategoryElement key={ props.categoriesSource.metas.indexOf(meta) } imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl } name={ meta.name } count={ meta.count }/>
         )
     })
 
@@ -55,7 +53,7 @@ const categories = props => {
                             pathnameData={ props.pathname || props.router.pathname }
                         />
                     </div>
-                    <SideBar isActive={props.identity.categoriesPageSidebar} widgets={props.widgets} position='categoriesPageSidebar'/>
+                    <SideBar  key='categoriesPageSidebar' isActive={props.identity.categoriesPageSidebar} widgets={props.widgets} position='categoriesPageSidebar'/>
                 </div>
 
             </AppLayout>
@@ -79,7 +77,7 @@ categories.getInitialProps = async ({ pathname, query, req, res, err }) => {
         type: 'category',
         searchForImageIn: 'categories',
         pageNo: parseInt(query.page) || 1,
-        size: parseInt(query.size) || parseInt(identity.tagsCountPerPage) || 30,
+        size: parseInt(query.size) || parseInt(identity.postsCountPerPage) || 30,
         sort: query.sort || 'latest',
 
     }

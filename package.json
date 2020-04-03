@@ -37,7 +37,9 @@
     "react-fontawesome": "^1.7.1",
     "react-share": "^4.0.1",
     "react-switch": "^5.0.1",
+    "sass": "^1.26.3",
     "strip-ansi": "^6.0.0",
+    "webpack": "^4.42.1",
     "xml": "^1.0.1",
     "xmldom": "^0.2.1"
   },

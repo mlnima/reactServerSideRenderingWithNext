@@ -2,6 +2,7 @@ import React,{useEffect,useState,useContext} from 'react';
 import Link from "next/link";
 import AdminLayout from "../../../components/layouts/AdminLayout";
 
+
 const settings = props => {
     const [state, setState] = useState({
     });

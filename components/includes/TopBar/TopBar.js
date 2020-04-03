@@ -7,6 +7,9 @@ import { withRouter } from "next/router";
 const TopBar = props => {
     const contextData = useContext(AppContext);
 
+    useEffect(() => {
+        console.log( contextData.userData)
+    }, []);
     if (contextData.userData.username) {
         if (contextData.userData.role === 'administrator') {
             return (

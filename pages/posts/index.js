@@ -15,7 +15,7 @@ const posts = props => {
     })
 
     useEffect(() => {
-        console.log(props )
+
         if (props.identity.postPageSidebar) {
             setState({
                 style: {

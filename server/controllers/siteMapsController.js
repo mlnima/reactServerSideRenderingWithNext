@@ -27,7 +27,7 @@ siteMapsController.siteMapMonths = (req, res) => {
             console.log('less than 500')
             postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
                 renderPostData = posts.map(post => {
-                    let postUrl = process.env.DOMAIN_NAME + encodeURIComponent(post.title)
+                    let postUrl = process.env.REACT_APP_DOMAIN_NAME + encodeURIComponent(post.title)
                     postsElements +=
                         '<url>\n' +
                         `<loc>${ postUrl }</loc>\n` +
@@ -57,7 +57,7 @@ siteMapsController.siteMapMonths = (req, res) => {
                 page += 1;
                 subSiteMaps +=
                     '<sitemap>\n' +
-                    `<loc>${ process.env.DOMAIN_NAME }sitemap/${ month }/${ page }.xml</loc>\n` +
+                    `<loc>${ process.env.REACT_APP_DOMAIN_NAME }sitemap/${ month }/${ page }.xml</loc>\n` +
                     `<lastmod>2019-12-21T08:00:46+00:00</lastmod>\n` +
                     ' </sitemap>\n'
             }

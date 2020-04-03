@@ -28,7 +28,6 @@ const Home = props => {
     });
 
     useEffect(() => {
-        console.log(props)
         if (props.identity.homePageSidebar) {
             setState({
                 style: {
@@ -47,7 +46,7 @@ const Home = props => {
                         <H1Renderer text={ props.identity.homePageH1 }/>
                         <WidgetsRenderer widgets={ props.widgets } position='home'/>
                     </div>
-                    <SideBar isActive={ props.identity.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
+                    <SideBar key='homePageSidebar' isActive={ props.identity.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
                 </div>
 
             </AppLayout>

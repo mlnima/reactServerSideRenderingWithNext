@@ -4,10 +4,6 @@ import Posts from '../Posts/Posts'
 
 const WidgetsRenderer = props => {
     const [ state, setState ] = useState({});
-    useEffect(() => {
-        console.log( props)
-    }, [props]);
-
 
     const renderWidgets = props.widgets.filter(widget=>widget.position===props.position).map(widget => {
         switch ( widget.type ) {

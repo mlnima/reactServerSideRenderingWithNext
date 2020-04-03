@@ -15,8 +15,8 @@ const tags = props => {
     const [state,setState]=useState({
         style:{}
     })
+
     useEffect(() => {
-        console.log( props)
         if (props.identity.tagsPageSidebar){
             setState({
                 style: {
@@ -29,7 +29,7 @@ const tags = props => {
 
     const renderTags = props.tagsSource.metas.map(meta => {
             return (
-                <TagElement key={meta._id} imageUrl={meta.imageUrl} noImageUrl={meta.noImageUrl} name={meta.name} count={meta.count}/>
+                <TagElement key={props.tagsSource.metas.indexOf(meta)} imageUrl={meta.imageUrl} noImageUrl={meta.noImageUrl} name={meta.name} count={meta.count}/>
             )
     })
 
@@ -52,7 +52,7 @@ const tags = props => {
                         pathnameData={props.pathname ||props.router.pathname }
                     />
                 </div>
-                <SideBar isActive={props.identity.tagsPageSidebar} widgets={props.widgets} position='tagsPageSidebar'/>
+                <SideBar  key='tagsPageSidebar' isActive={props.identity.tagsPageSidebar} widgets={props.widgets} position='tagsPageSidebar'/>
             </div>
         </AppLayout>
             </>

@@ -1506,39 +1506,20 @@ a {
     .withOutSidebar {
       grid-template-columns: 1fr; } }
 
-.AddWidgetWithPositionMenu {
-  width: 100%; }
-  .AddWidgetWithPositionMenu .positionsOpener {
-    background-color: #f1f1f1;
-    color: black;
-    outline: none;
-    border: 0.4px #9fa3a8 solid;
-    padding: 8px 10px;
-    border-radius: 5px;
-    width: 100%;
-    font-weight: bold; }
-    .AddWidgetWithPositionMenu .positionsOpener:active {
-      background-color: white;
-      border: none; }
-    .AddWidgetWithPositionMenu .positionsOpener:hover {
-      background-color: white; }
-  .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions {
-    max-width: 100%;
+.adminDesign .adminDesignSection {
+  background-color: #282828;
+  color: white;
+  border-radius: 10px;
+  padding: 10px; }
+  .adminDesign .adminDesignSection .adminDesignSectionItems {
     display: flex;
-    flex-direction: column; }
-    .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn {
-      background-color: #f1f1f1;
-      color: black;
-      outline: none;
-      border: 0.4px #9fa3a8 solid;
-      padding: 8px 10px;
-      border-radius: 5px;
-      font-size: small; }
-      .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn:active {
-        background-color: white;
-        border: none; }
-      .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn:hover {
-        background-color: white; }
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start; }
+    .adminDesign .adminDesignSection .adminDesignSectionItems .previewColor {
+      height: 30px;
+      width: 30px;
+      margin: 5px; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

@@ -1,0 +1,22 @@
+@import "../../../styles/colors";
+.adminDesign{
+  .adminDesignSection{
+
+    background-color: $dark80;
+    color: $light100;
+    border-radius: 10px;
+    padding:10px;
+    .adminDesignSectionItems{
+      display: flex;
+      flex-direction: column;
+      //flex-wrap: wrap;
+      justify-content: center;
+      align-items: flex-start;
+      .previewColor{
+        height: 30px;
+        width: 30px;
+        margin: 5px;
+      }
+    }
+  }
+}
