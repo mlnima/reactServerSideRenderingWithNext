@@ -7,11 +7,6 @@ import PaginationComponent from '../../../components/includes/PaginationComponen
 import AppLayout from '../../../components/layouts/AppLayout'
 
 const comments = props => {
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-        console.log(props )
-    }, [props]);
-
     return (
         <AdminLayout>
             <div>

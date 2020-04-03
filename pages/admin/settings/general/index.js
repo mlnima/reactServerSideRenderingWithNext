@@ -2,8 +2,10 @@ import React, { useEffect, useState, useContext,useRef } from 'react';
 import AdminLayout from "../../../../components/layouts/AdminLayout";
 import { updateSetting,getSetting } from "../../../../_variables/ajaxVariables";
 import FA from "react-fontawesome";
+import { AppContext } from '../../../../context/AppContext'
 
 const settings = props => {
+    const contextData = useContext(AppContext);
     const keywordsInput = useRef(null)
     const [ state, setState ] = useState({
         siteAddress:props.identity.siteAddress||'',
@@ -22,7 +24,8 @@ const settings = props => {
         categoriesPageSidebar:props.identity.categoriesPageSidebar||false,
         tagsPageSidebar:props.identity.tagsPageSidebar||false,
         actorsPageSidebar:props.identity.actorsPageSidebar||false,
-        postPageSidebar:props.identity.postPageSidebar||false
+        postPageSidebar:props.identity.postPageSidebar||false,
+        postsPageSidebar:props.identity.postsPageSidebar||false,
 
 
     });
@@ -53,7 +56,16 @@ const settings = props => {
 
     const onSubmitHandler = e => {
         e.preventDefault()
-        updateSetting('identity', state)
+        contextData.dispatchState({
+            ...contextData.state,
+            loading:true
+        })
+        updateSetting('identity', state).then(()=>{
+            contextData.dispatchState({
+                ...contextData.state,
+                loading:false
+            })
+        })
     };
     const onChangeHandler = e => {
         const finalValue = e.target.value ==='true'?true:
@@ -98,49 +110,53 @@ const settings = props => {
         <AdminLayout>
             <form id='site-settings-form' onSubmit={ e => onSubmitHandler(e) }>
                 <div className="forms">
-                    <div className="site-settings-form-section">
-                        <p>Site Address (URL):</p>
-                        <input name='siteAddress' value={state.siteAddress} onChange={e=>onChangeHandler(e)}/>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Protocol:</p>
-                        <select name='protocol' value={state.protocol} onChange={e=>onChangeHandler(e)}>
-                            <option>Http</option>
-                            <option>Https</option>
-                        </select>
-                    </div>
+                    <h2>site identity</h2>
+                    <div className="siteIdentity site-settings-form-section-parent">
+                        <div className="site-settings-form-section">
+                            <p>Site Address (URL):</p>
+                            <input name='siteAddress' value={state.siteAddress} onChange={e=>onChangeHandler(e)}/>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Protocol:</p>
+                            <select name='protocol' value={state.protocol} onChange={e=>onChangeHandler(e)}>
+                                <option>Http</option>
+                                <option>Https</option>
+                            </select>
+                        </div>
 
-                    <div className="site-settings-form-section">
-                        <p>Logo Text:</p>
-                        <input name='logoText' value={state.logoText} onChange={e=>onChangeHandler(e)}/>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Head Line:</p>
-                        <input name='headLine' value={state.headLine} onChange={e=>onChangeHandler(e)}/>
-                    </div>
+                        <div className="site-settings-form-section">
+                            <p>Logo Text:</p>
+                            <input name='logoText' value={state.logoText} onChange={e=>onChangeHandler(e)}/>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Head Line:</p>
+                            <input name='headLine' value={state.headLine} onChange={e=>onChangeHandler(e)}/>
+                        </div>
 
-                    <div className="site-settings-form-section">
-                        <p>Site Title:</p>
-                        <input name='title' value={state.title} onChange={e=>onChangeHandler(e)}/>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Description:</p>
-                        <textarea name='description' value={state.description} onChange={e=>onChangeHandler(e)} />
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Home Page H1:</p>
-                        <textarea name='homePageH1' value={state.homePageH1} onChange={e=>onChangeHandler(e)} />
-                    </div>
-                    <div className="site-settings-form-section keywords">
-                        <p>Keywords:</p>
-                        <input ref={keywordsInput} name='keywords'  />
-                        <button type='button' onClick={()=>addKeyword()}>add</button>
-                        <span>Separate tags with commas</span>
+                        <div className="site-settings-form-section">
+                            <p>Site Title:</p>
+                            <input name='title' value={state.title} onChange={e=>onChangeHandler(e)}/>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Description:</p>
+                            <textarea name='description' value={state.description} onChange={e=>onChangeHandler(e)} />
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Home Page H1:</p>
+                            <textarea name='homePageH1' value={state.homePageH1} onChange={e=>onChangeHandler(e)} />
+                        </div>
+                        <div className="site-settings-form-section keywords">
+                            <p>Keywords:</p>
+                            <input ref={keywordsInput} name='keywords'  />
+                            <button type='button' onClick={()=>addKeyword()}>add</button>
+                            <span>Separate tags with commas</span>
 
-                        <div className="items">
-                            {keywords}
+                            <div className="items">
+                                {keywords}
+                            </div>
                         </div>
                     </div>
+
                     <div className="site-settings-form-section">
                         <p>Theme Color:</p>
                         <input name='themeColor' value={state.themeColor}  onChange={e=>onChangeHandler(e)}/>
@@ -156,41 +172,52 @@ const settings = props => {
                             <option value='false'>No</option>
                         </select>
                     </div>
-                    <div className="site-settings-form-section">
-                        <p>Home Page Sidebar:</p>
-                        <select name='homePageSidebar' value={state.homePageSidebar||false} onChange={e=>onChangeHandler(e)}>
-                            <option value='true'>Yes</option>
-                            <option value='false'>No</option>
-                        </select>
+                    <h2>Sidebars Status</h2>
+                    <div className="sidebarsStatus site-settings-form-section-parent">
+                        <div className="site-settings-form-section">
+                            <p>Home Page Sidebar:</p>
+                            <select name='homePageSidebar' value={state.homePageSidebar||false} onChange={e=>onChangeHandler(e)}>
+                                <option value='true'>Yes</option>
+                                <option value='false'>No</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Categories Pages Sidebar:</p>
+                            <select name='categoriesPageSidebar' value={state.categoriesPageSidebar} onChange={e=>onChangeHandler(e)}>
+                                <option value='true'>Yes</option>
+                                <option value='false'>No</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Tags Pages Sidebar:</p>
+                            <select name='tagsPageSidebar' value={state.tagsPageSidebar} onChange={e=>onChangeHandler(e)}>
+                                <option value='true'>Yes</option>
+                                <option value='false'>No</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Actors Pages Sidebar:</p>
+                            <select name='actorsPageSidebar' value={state.actorsPageSidebar} onChange={e=>onChangeHandler(e)}>
+                                <option value='true'>Yes</option>
+                                <option value='false'>No</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Post Page Sidebar:</p>
+                            <select name='postPageSidebar' value={state.postPageSidebar} onChange={e=>onChangeHandler(e)}>
+                                <option value='true' >Yes</option>
+                                <option value='false'>No</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Posts Page Sidebar:</p>
+                            <select name='postsPageSidebar' value={state.postsPageSidebar} onChange={e=>onChangeHandler(e)}>
+                                <option value='true' >Yes</option>
+                                <option value='false'>No</option>
+                            </select>
+                        </div>
                     </div>
-                    <div className="site-settings-form-section">
-                        <p>Categories Pages Sidebar:</p>
-                        <select name='categoriesPageSidebar' value={state.categoriesPageSidebar} onChange={e=>onChangeHandler(e)}>
-                            <option value='true'>Yes</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Tags Pages Sidebar:</p>
-                        <select name='tagsPageSidebar' value={state.tagsPageSidebar} onChange={e=>onChangeHandler(e)}>
-                            <option value='true'>Yes</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Actors Pages Sidebar:</p>
-                        <select name='actorsPageSidebar' value={state.actorsPageSidebar} onChange={e=>onChangeHandler(e)}>
-                            <option value='true'>Yes</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Post Page Sidebar:</p>
-                        <select name='postPageSidebar' value={state.postPageSidebar} onChange={e=>onChangeHandler(e)}>
-                            <option value='true' >Yes</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
+
                 </div>
 
                 <button className='submitBtn' type='submit'>save settings</button>

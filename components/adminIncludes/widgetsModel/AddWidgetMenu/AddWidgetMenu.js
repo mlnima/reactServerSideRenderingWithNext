@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { widgetModels } from './models'
 import { AppContext } from '../../../../context/AppContext';
 import { addNewWidget, getWidgets } from '../../../../_variables/ajaxVariables'
+import AddWidgetWithPositionMenu from './AddWidgetWithPositionMenu'
 
 const AddWidgetMenu = props => {
     const contextData = useContext(AppContext);
@@ -25,15 +26,17 @@ const AddWidgetMenu = props => {
 
     return (
         <div className='AddWidgetMenu'>
-            <button onClick={ () => onAddNewWidget('home', 'text') }>Add Widget To Home</button>
-            <button onClick={ () => onAddNewWidget('homePageSidebar', 'text') }>Add Widget To Home Page Sidebar</button>
-            <button onClick={ () => onAddNewWidget('postPageSidebar', 'text') }>Add Widget To Post Page Sidebar</button>
-            <button onClick={ () => onAddNewWidget('postsPageSidebar', 'text') }>Add Widget To Posts Page Sidebar</button>
-            <button onClick={ () => onAddNewWidget('tagsPageSidebar', 'text') }>Add Widget To Tags Page Sidebar</button>
-            <button onClick={ () => onAddNewWidget('categoriesPageSidebar', 'text') }>Add Widget To Categories Page Sidebar</button>
-            <button onClick={ () => onAddNewWidget('actorsPageSidebar', 'text') }>Add Widget To Actors Page Sidebar</button>
-            <button onClick={ () => onAddNewWidget('footer', 'text') }>Add Widget To Footer</button>
+            <AddWidgetWithPositionMenu type='text' name='Text'/>
+            <AddWidgetWithPositionMenu type='posts' name='Posts'/>
+            <AddWidgetWithPositionMenu type='recentComments' name='Recent Comments'/>
+            <AddWidgetWithPositionMenu type='search' name='Search'/>
+            <AddWidgetWithPositionMenu type='tagsCloud' name='Tags Cloud'/>
+            <AddWidgetWithPositionMenu type='video' name='Video'/>
+            <AddWidgetWithPositionMenu type='navigationMenu' name='Navigation Menu'/>
         </div>
     );
 };
 export default AddWidgetMenu;
+
+
+// image recentComments search tagCloud categoriesCloud video navigationMenu

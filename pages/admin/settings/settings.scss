@@ -19,7 +19,7 @@
   background-color: $light100;
   padding: 20px;
   .forms{
-    @include settings-general;
+    //@include settings-general;
   }
   button {
     @include AdminLightBtn;
@@ -37,40 +37,42 @@
     align-items: flex-start;
   }
 
-  .site-settings-form-section {
-    background-color: $AdminColor80;
-    border-radius: 10px;
-    color: $light100;
-    padding: 10px;
-    input {
-      background-color: $light100;
-      margin: 10px;
-      border: 1px solid $AdminColor80;
-    }
-
-    textarea {
-      background-color: white;
-      margin: 10px;
-      width: 90%;
-      border: 1px solid $AdminColor80;
-    }
-
-    .items {
-      display: flex;
-      flex-wrap: wrap;
-
-      .item {
-        display: flex;
-        align-items: center;
+  .site-settings-form-section-parent{
+    @include settings-general;
+    .site-settings-form-section {
+      background-color: $AdminColor80;
+      border-radius: 10px;
+      color: $light100;
+      padding: 10px;
+      input {
+        background-color: $light100;
         margin: 10px;
+        border: 1px solid $AdminColor80;
+      }
 
-        button {
-          margin: 5px;
+      textarea {
+        background-color: white;
+        margin: 10px;
+        width: 90%;
+        border: 1px solid $AdminColor80;
+      }
+
+      .items {
+        display: flex;
+        flex-wrap: wrap;
+
+        .item {
+          display: flex;
+          align-items: center;
+          margin: 10px;
+
+          button {
+            margin: 5px;
+          }
         }
       }
     }
   }
-
 }
 
 #navigation-setting {
@@ -124,11 +126,14 @@
 
 #HomePageWidgets {
   .AddWidgetMenu {
+    display:grid;
+    grid-template-columns: 1fr 1fr;
+    width: 95%;
     button {
-      @include greenActionBtn;
+
       //background-color: white;
       //color: white;
-      font-size: x-small;
+
     }
   }
 

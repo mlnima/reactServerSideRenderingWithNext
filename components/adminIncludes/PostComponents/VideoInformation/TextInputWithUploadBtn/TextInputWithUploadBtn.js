@@ -13,6 +13,12 @@ const TextInputWithUploadBtn = props => {
         }
     },[ contextData.editingPostData]);
 
+    const onChangeHandler =e=>{
+        contextData.dispatchEditingPostData({
+            ...contextData.editingPostData,
+            [e.target.name]:e.target.value
+        })
+    }
 
     return (
         <div className='TextInputWithUploadBtn VideoInformationSection'>
@@ -20,7 +26,7 @@ const TextInputWithUploadBtn = props => {
                 <p>{ props.name }</p>
             </div>
             <div className="editor">
-                <input ref={element} className='textInputWithUpload' name={ props.name } onChange={e=>props.onChangeHandler(e)} />
+                <input ref={element} className='textInputWithUpload' name={ props.name } onChange={e=>onChangeHandler(e)} />
                 <button className='uploadBtn'>Upload</button>
             </div>
         </div>

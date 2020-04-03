@@ -48,10 +48,12 @@ postsControllers.updatePost = (req, res) => {
     const _id = req.body.id;
     postSchema.findByIdAndUpdate(req.body.postData._id, req.body.postData, { new: true }).exec().then(updated => {
         console.log(_id, updated)
+        res.end()
     }).catch(err => {
         res.sendStatus(500);
         res.end()
     })
+
 };
 
 postsControllers.getPostsInfo = async (req, res) => {

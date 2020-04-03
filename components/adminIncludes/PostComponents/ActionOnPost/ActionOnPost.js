@@ -13,10 +13,34 @@ const ActionOnPost = props => {
 
     const onSaveHandler = ()=>{
         console.log(props )
+        contextData.dispatchState({
+            ...contextData.state,
+            loading:true
+        })
         if (contextData.editingPostData._id){
-            contextData.functions.updatePost(contextData.editingPostData);
+            contextData.functions.updatePost(contextData.editingPostData).then(()=>{
+                contextData.dispatchState({
+                    ...contextData.state,
+                    loading:false
+                })
+            }).catch(()=>{
+                contextData.dispatchState({
+                    ...contextData.state,
+                    loading:false
+                })
+            })
         }else {
-            contextData.functions.savePosts(contextData.editingPostData);
+            contextData.functions.savePosts(contextData.editingPostData).then(()=>{
+                contextData.dispatchState({
+                    ...contextData.state,
+                    loading:false
+                })
+            }).catch(()=>{
+                contextData.dispatchState({
+                    ...contextData.state,
+                    loading:false
+                })
+            })
         }
     };
 

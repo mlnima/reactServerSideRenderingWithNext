@@ -1,5 +1,6 @@
 import React from 'react';
 import RenderImageForMetaElements from '../RenderImageForMetaElements/RenderImageForMetaElements'
+import './TagElement.scss'
 import Link from 'next/link';
 
 const MyComponent = props => {

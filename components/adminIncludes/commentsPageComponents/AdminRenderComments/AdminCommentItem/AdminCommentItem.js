@@ -14,8 +14,10 @@ const AdminCommentItem = props => {
     const [ commentData, setCommentData ] = useState({})
 
     useEffect(() => {
+        console.log( props)
         setCommentData(props.data)
     }, [ props.data ]);
+
 
 
     const onChangeHandler = e => {
@@ -30,7 +32,7 @@ const AdminCommentItem = props => {
             _id: props.data._id,
             update: commentData
         }).then(()=>{
-            props.router.push(props.router.pathname)
+            props.router.push(props.router.asPath)
         })
     }
     return (

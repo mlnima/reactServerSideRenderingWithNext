@@ -1,0 +1,29 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+.AddWidgetWithPositionMenu{
+
+  width: 100%;
+    .positionsOpener{
+    @include AdminLightBtn;
+    width: 100%;
+      font-weight: bold;
+    &:hover{
+      background-color: $light100;
+    }
+  }
+  .AddWidgetWithPositionMenuPositions{
+
+    max-width: 100%;
+    display:flex;
+    flex-direction: column;
+    .AddWidgetWithPositionMenuPositionsBtn{
+
+
+      @include AdminLightBtn;
+      font-size: small;
+      &:hover{
+        background-color: $light100;
+      }
+    }
+  }
+}

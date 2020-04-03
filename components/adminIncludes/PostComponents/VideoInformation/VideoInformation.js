@@ -18,9 +18,9 @@ const VideoInformation = props => {
         inSlideShow: false
     });
 
-    // useEffect(() => {
-    //     console.log(state)
-    // }, [ state ]);
+    useEffect(() => {
+        console.log(state)
+    }, [ state ]);
 
     const onSaveChanges = () => {
         contextData.dispatchEditingPostData({ ...contextData.editingPostData, ...state })
@@ -58,9 +58,9 @@ const VideoInformation = props => {
                 <VideoEmbedCode name='videoEmbedCode' onChangeHandler={ onchangeHandler }/>
                 <RenderIframe/>
                 <Duration onDurationChangeHandler={ onDurationChangeHandler }/>
-                <ViewsLikesDisLikes name={ 'views' } onChangeHandler={ onchangeHandler }/>
-                <ViewsLikesDisLikes name={ 'likes' } onChangeHandler={ onchangeHandler }/>
-                <ViewsLikesDisLikes name={ 'disLikes' } onChangeHandler={ onchangeHandler }/>
+                <ViewsLikesDisLikes name={ 'views' } value={state.views||0} onChangeHandler={ onchangeHandler }/>
+                <ViewsLikesDisLikes name={ 'likes' } value={state.likes||0} onChangeHandler={ onchangeHandler }/>
+                <ViewsLikesDisLikes name={ 'disLikes' } value={state.disLikes||0} onChangeHandler={ onchangeHandler }/>
                 <TextInputWithUploadBtn name='VideoTrailerUrl' title='Video Trailer Url' onChangeHandler={ onchangeHandler }/>
                 <TextInputWithUploadBtn name='mainThumbnail' title='Main thumbnail' onChangeHandler={ onchangeHandler }/>
                 <ImagePreview/>

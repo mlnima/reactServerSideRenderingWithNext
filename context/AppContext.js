@@ -13,6 +13,7 @@ const AppProvider = props => {
         loading: false,
         videoPreviewID: ''
     });
+
     const [ siteIdentity, dispatchSiteIdentity ] = useState({
         title: 'site title',
         themeColor: '#000',
@@ -220,7 +221,7 @@ const AppProvider = props => {
                     dispatchSiteIdentity,
                     siteIdentity,
                     widgetsSettings,
-                    dispatchWidgetsSettings
+                    dispatchWidgetsSettings,
                 } }>
 
                 { props.children }

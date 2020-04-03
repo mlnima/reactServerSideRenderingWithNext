@@ -64,10 +64,6 @@
 #site-settings-form {
   background-color: white;
   padding: 20px; }
-  #site-settings-form .forms {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-    grid-gap: 10px; }
   #site-settings-form button {
     background-color: #f1f1f1;
     color: black;
@@ -104,29 +100,33 @@
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start; }
-  #site-settings-form .site-settings-form-section {
-    background-color: #33373c;
-    border-radius: 10px;
-    color: white;
-    padding: 10px; }
-    #site-settings-form .site-settings-form-section input {
-      background-color: white;
-      margin: 10px;
-      border: 1px solid #33373c; }
-    #site-settings-form .site-settings-form-section textarea {
-      background-color: white;
-      margin: 10px;
-      width: 90%;
-      border: 1px solid #33373c; }
-    #site-settings-form .site-settings-form-section .items {
-      display: flex;
-      flex-wrap: wrap; }
-      #site-settings-form .site-settings-form-section .items .item {
+  #site-settings-form .site-settings-form-section-parent {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 10px; }
+    #site-settings-form .site-settings-form-section-parent .site-settings-form-section {
+      background-color: #33373c;
+      border-radius: 10px;
+      color: white;
+      padding: 10px; }
+      #site-settings-form .site-settings-form-section-parent .site-settings-form-section input {
+        background-color: white;
+        margin: 10px;
+        border: 1px solid #33373c; }
+      #site-settings-form .site-settings-form-section-parent .site-settings-form-section textarea {
+        background-color: white;
+        margin: 10px;
+        width: 90%;
+        border: 1px solid #33373c; }
+      #site-settings-form .site-settings-form-section-parent .site-settings-form-section .items {
         display: flex;
-        align-items: center;
-        margin: 10px; }
-        #site-settings-form .site-settings-form-section .items .item button {
-          margin: 5px; }
+        flex-wrap: wrap; }
+        #site-settings-form .site-settings-form-section-parent .site-settings-form-section .items .item {
+          display: flex;
+          align-items: center;
+          margin: 10px; }
+          #site-settings-form .site-settings-form-section-parent .site-settings-form-section .items .item button {
+            margin: 5px; }
 
 #navigation-setting {
   display: flex;
@@ -193,27 +193,10 @@
     margin-top: 10px;
     margin-bottom: 10px; }
 
-#HomePageWidgets .AddWidgetMenu button {
-  background: linear-gradient(#67ae55, #578843);
-  box-shadow: inset 0 1px 1px #a4e388;
-  border-color: #3b6e22 #3b6e22 #2c5115;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  letter-spacing: 1px;
-  position: relative;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  width: 200px;
-  height: 40px;
-  min-width: 194px;
-  padding: 7px 20px;
-  text-align: center;
-  line-height: 126%;
-  box-sizing: border-box;
-  margin-top: 10px;
-  margin-bottom: 10px;
-  font-size: x-small; }
+#HomePageWidgets .AddWidgetMenu {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  width: 95%; }
 
 #HomePageWidgets .saveBtn {
   background: linear-gradient(#67ae55, #578843);
@@ -296,6 +279,16 @@
     display: flex;
     justify-content: center;
     background-color: white; }
+    .DropDownWidget .DropDownWidgetComponent button {
+      background-color: #f1f1f1;
+      color: black;
+      outline: none;
+      border: 0.4px #9fa3a8 solid;
+      padding: 8px 10px;
+      border-radius: 5px; }
+      .DropDownWidget .DropDownWidgetComponent button:active {
+        background-color: white;
+        border: none; }
 
 .Format select {
   border: none;
@@ -321,7 +314,8 @@
 
 .TitleDescription {
   padding: 10px;
-  width: 100%; }
+  width: 100%;
+  margin: 30px 0; }
   .TitleDescription .TitleDescriptionTitle {
     border-radius: 5px;
     outline: none;
@@ -824,28 +818,6 @@
     .category-item .category-item-data p {
       text-align: center; }
 
-.tag-item {
-  border-radius: 5px;
-  min-height: 40px;
-  min-width: 100px;
-  border: #181818 1px solid;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: white; }
-  .tag-item img {
-    width: 100%;
-    height: 150px;
-    border: #181818 1px solid;
-    display: block;
-    object-fit: cover; }
-  .tag-item .tag-item-data {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px; }
-    .tag-item .tag-item-data p {
-      text-align: center; }
-
 .actor-item {
   border-radius: 5px;
   min-width: 200px;
@@ -1289,7 +1261,7 @@
 @media only screen and (min-width: 768px) {
   .Post {
     grid-template-columns: 1fr 200px;
-    grid-template-rows: none; } }
+    grid-template-rows: auto; } }
 
 .HomePage h1 {
   padding: 0 20px; }
@@ -1534,28 +1506,39 @@ a {
     .withOutSidebar {
       grid-template-columns: 1fr; } }
 
-.AdminRenderComments {
-  padding: 20px; }
-
-.adminCommentsItem {
-  padding: 5px;
-  transition: .3s; }
-  .adminCommentsItem:nth-child(even) {
-    background-color: #9fa3a8; }
-  .adminCommentsItem .adminCommentsItemHead {
+.AddWidgetWithPositionMenu {
+  width: 100%; }
+  .AddWidgetWithPositionMenu .positionsOpener {
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: 0.4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-weight: bold; }
+    .AddWidgetWithPositionMenu .positionsOpener:active {
+      background-color: white;
+      border: none; }
+    .AddWidgetWithPositionMenu .positionsOpener:hover {
+      background-color: white; }
+  .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions {
+    max-width: 100%;
     display: flex;
-    align-items: center; }
-    .adminCommentsItem .adminCommentsItemHead p {
-      margin: 0 20px; }
-  .adminCommentsItem .adminCommentsItemBody .commentControl button {
-    border: none;
-    color: #0073aa;
-    background: transparent; }
-
-.AdminCommentsControl {
-  display: flex; }
-  .AdminCommentsControl .status a {
-    margin: 0 10px; }
+    flex-direction: column; }
+    .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn {
+      background-color: #f1f1f1;
+      color: black;
+      outline: none;
+      border: 0.4px #9fa3a8 solid;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: small; }
+      .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn:active {
+        background-color: white;
+        border: none; }
+      .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn:hover {
+        background-color: white; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

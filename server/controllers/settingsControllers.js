@@ -16,14 +16,18 @@ settingsControllers.update = (req, res) => {
             });
             dataToSave.save().then(() => {
                 console.log(req.body.type, ' new settings saved')
+                res.statusCode(200)
+
             }).catch(err => {
                 console.log(err)
+                res.statusCode(500)
             })
         }
     }).catch(err => {
         console.log(err)
-
+        res.statusCode(500)
     })
+    res.end()
 };
 
 settingsControllers.get = async (req, res) => {

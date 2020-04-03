@@ -35,7 +35,11 @@ const Index = props => {
         <>
             <AdminLayout>
                 <div className='Post'>
-                    <TitleDescription onChangeHandler={ onChangeHandler }/>
+                    <div className="content">
+                        <TitleDescription onChangeHandler={ onChangeHandler }/>
+                        <DropDownWidget component={ VideoInformation } title='Video Information' onChangeHandler={ onChangeHandler }/>
+                    </div>
+
                     <div className="side">
                         <DropDownWidget component={ ActionOnPost } title='action' onChangeHandler={ onChangeHandler }/>
                         <DropDownWidget component={ Format } title='Format' onChangeHandler={ onChangeHandler }/>
@@ -43,7 +47,7 @@ const Index = props => {
                         <DropDownWidget isNewPost={ props.query.new === 'true' } component={ PostCategoriesTagsActors } type='tags' title='Post Tags' onChangeHandler={ onChangeHandler }/>
                         <DropDownWidget isNewPost={ props.query.new === 'true' } component={ PostCategoriesTagsActors } type='actors' title='Post Actors' onChangeHandler={ onChangeHandler }/>
                     </div>
-                    <DropDownWidget component={ VideoInformation } title='Video Information' onChangeHandler={ onChangeHandler }/>
+
                 </div>
             </AdminLayout>
         </>

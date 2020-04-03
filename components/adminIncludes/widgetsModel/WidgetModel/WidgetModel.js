@@ -186,6 +186,11 @@ const WidgetModel = props => {
                 <select name='type' value={ state.type } onChange={ e => onChangeHandler(e) }>
                     <option value='posts'>Posts</option>
                     <option value='text'>Text</option>
+                    <option value='recentComments'>Recent Comments</option>
+                    <option value='search'>Search</option>
+                    <option value='tagsCloud'>Tags Cloud</option>
+                    <option value='video'>Video</option>
+                    <option value='navigationMenu'>Navigation Menu</option>
                 </select>
                 <p>Position:</p>
                 <select name='position' value={ state.position } onChange={ e => onChangeHandler(e) }>
