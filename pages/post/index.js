@@ -9,7 +9,7 @@ import Head from "next/head";
 import { getSetting, getWidgetsWithData, getMultipleWidgetWithData, getMultipleSetting } from "../../_variables/ajaxVariables";
 import { AppContext } from "../../context/AppContext";
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
-import SideBar from '../../components/includes/Sidebar/Sidebar'
+import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import CommentFrom from '../../components/includes/Post/CommentFrom/CommentFrom'
 import CommentsRenderer from '../../components/includes/CommentsRenderer/CommentsRenderer'
 import Footer from '../../components/includes/Footer/Footer'
@@ -83,7 +83,7 @@ const Post = props => {
 
                     </div>
 
-                    <SideBar key='postPageSidebar' isActive={ props.identity.data.postPageSidebar } widgets={ props.widgets } position='postPageSidebar'/>
+                    <Sidebar key='postPageSidebar' isActive={ props.identity.data.postPageSidebar } widgets={ props.widgets } position='postPageSidebar'/>
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
             </AppLayout>

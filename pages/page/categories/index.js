@@ -9,7 +9,7 @@ import RenderMetaDataPages from '../../../components/includes/RenderMetaDataPage
 import SiteSettingSetter from '../../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
 import CategoriesSidebar from '../../../components/includes/pages/Categories/CategoriesSidebar/CategoriesSidebar'
-import SideBar from '../../../components/includes/SideBar/SideBar'
+import {Sidebar} from '../../../components/includes/Sidebar/Sidebar'
 import Footer from '../../../components/includes/Footer/Footer'
 
 // import './categories.scss'import './categories.scss'
@@ -54,7 +54,7 @@ const categories = props => {
                             pathnameData={ props.pathname || props.router.pathname }
                         />
                     </div>
-                    <SideBar key='categoriesPageSidebar' isActive={ props.identity.data.categoriesPageSidebar } widgets={ props.widgets } position='categoriesPageSidebar'/>
+                    <Sidebar key='categoriesPageSidebar' isActive={ props.identity.data.categoriesPageSidebar } widgets={ props.widgets } position='categoriesPageSidebar'/>
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
             </AppLayout>

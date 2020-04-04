@@ -1,17 +1,14 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React from 'react';
 import WidgetsRenderer from '../WidgetsRenderer/WidgetsRenderer'
 
-const Sidebar = props => {
-    useEffect(() => {
-        // console.log(props )
-    }, [props]);
+export const Sidebar = props => {
 
     if (props.isActive) {
         return (
-            <aside id='site-sidebar'>
+            <div id='site-sidebar'>
                 <WidgetsRenderer { ...props } />
-            </aside>
+            </div>
         );
     } else return null;
 };
-export default Sidebar;
+

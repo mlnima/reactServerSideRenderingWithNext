@@ -13,7 +13,8 @@ import PaginationComponent from '../components/includes/PaginationComponent/Pagi
 import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 
 import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRenderer'
-import SideBar from '../components/includes/SideBar/SideBar'
+// import {sideBar} from '../components/includes/SideBar/SideBar'
+import {Sidebar} from '../components/includes/Sidebar/Sidebar'
 import H1Renderer from '../components/includes/H1Renderer/H1Renderer'
 import Footer from '../components/includes/Footer/Footer'
 
@@ -48,7 +49,7 @@ const Home = props => {
                         <H1Renderer text={ props.identity.data.homePageH1 }/>
                         <WidgetsRenderer widgets={ props.widgets } position='home'/>
                     </div>
-                    <SideBar key='homePageSidebar' isActive={ props.identity.data.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
+                    <Sidebar key='homePageSidebar' isActive={ props.identity.data.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
 

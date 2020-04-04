@@ -8,7 +8,7 @@ import CategoryElement from '../../../components/includes/CategoryElement/Catego
 import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
 import SiteSettingSetter from '../../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import withRouter from 'next/dist/client/with-router'
-import SideBar from '../../../components/includes/Sidebar/Sidebar'
+import {Sidebar} from '../../../components/includes/Sidebar/Sidebar'
 import Footer from '../../../components/includes/Footer/Footer'
 
 const tags = props => {
@@ -54,7 +54,7 @@ const tags = props => {
                             pathnameData={ props.pathname || props.router.pathname }
                         />
                     </div>
-                    <SideBar key='tagsPageSidebar' isActive={ props.identity.data.tagsPageSidebar } widgets={ props.widgets } position='tagsPageSidebar'/>
+                    <Sidebar key='tagsPageSidebar' isActive={ props.identity.data.tagsPageSidebar } widgets={ props.widgets } position='tagsPageSidebar'/>
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
             </AppLayout>

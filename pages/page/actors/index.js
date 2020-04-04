@@ -9,7 +9,8 @@ import ActorElement from '../../../components/includes/ActorElement/ActorElement
 import SiteSettingSetter from '../../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
 import withRouter from 'next/dist/client/with-router'
-import SideBar from '../../../components/includes/Sidebar/Sidebar'
+// import {SideBar} from '../../../components/includes/Sidebar/Sidebar'
+import {Sidebar} from '../../../components/includes/Sidebar/Sidebar'
 import Footer from '../../../components/includes/Footer/Footer'
 
 const actors = props => {
@@ -52,7 +53,7 @@ const actors = props => {
                             pathnameData={ props.pathname || props.router.pathname }
                         />
                     </div>
-                    <SideBar key='actorsPageSidebar' isActive={ props.identity.data.actorsPageSidebar } widgets={ props.widgets } position='actorsPageSidebar'/>
+                    <Sidebar key='actorsPageSidebar' isActive={ props.identity.data.actorsPageSidebar } widgets={ props.widgets } position='actorsPageSidebar'/>
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
             </AppLayout>

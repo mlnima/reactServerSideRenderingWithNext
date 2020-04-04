@@ -7,7 +7,7 @@ import withRouter from 'next/dist/client/with-router'
 import Posts from '../../components/includes/Posts/Posts'
 import Link from 'next/link'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
-import SideBar from '../../components/includes/Sidebar/Sidebar'
+import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import Footer from '../../components/includes/Footer/Footer'
 
 const posts = props => {
@@ -46,7 +46,7 @@ const posts = props => {
                             pathnameData={ props.pathname || props.router.pathname }
                         />
                     </div>
-                    <SideBar isActive={ props.identity.data.postsPageSidebar } widgets={ props.widgets } position='postsPageSidebar'/>
+                    <Sidebar isActive={ props.identity.data.postsPageSidebar } widgets={ props.widgets } position='postsPageSidebar'/>
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
             </AppLayout>
