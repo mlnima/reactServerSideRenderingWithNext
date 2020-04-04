@@ -39,9 +39,28 @@ const identityData = {
     }
 }
 
+const navigationData = {
+    type: 'navigation',
+    data: [
+        {
+            "title": "Home",
+            "url": "/"
+        }
+    ]
+}
+
+const designData = {
+    type: 'design',
+    data: {}
+}
+
 const runSetup = async () => {
     const identityToSave = new settingSchema(identityData)
+    const navigationToSave = new settingSchema(navigationData)
+    const designToSave = new settingSchema(designData)
     await identityToSave.save()
+    await navigationToSave.save()
+    await designToSave.save()
 }
 
 runSetup().then(() => {

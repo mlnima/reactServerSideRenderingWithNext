@@ -44,7 +44,9 @@ settingsControllers.getMultiple = async (req, res) => {
     Promise.all(settingRequestPromises).then(async settings=>{
         let finalObject ={}
         settings.forEach( setting=>{
-            finalObject[setting.type]=setting
+            if (setting){
+                finalObject[setting.type]=setting
+            }
         })
         res.json({ settings:finalObject })
         res.end()

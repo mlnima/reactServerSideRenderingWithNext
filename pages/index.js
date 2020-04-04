@@ -17,7 +17,7 @@ const Home = props => {
     });
 
     useEffect(() => {
-        console.log(props)
+        console.log( props)
         if (props.identity.data.homePageSidebar) {
             setState({
                 style: {
@@ -27,13 +27,19 @@ const Home = props => {
         }
     }, [ props ]);
 
+    useEffect(() => {
+        if (!props.identity){
+            React.cloneElement(props,{name:'test'})
+        }
+    }, []);
+
     return (
         <>
             <AppLayout>
                 <SiteSettingSetter { ...props }/>
                 <div style={ state.style } className={ props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
                     <div className='HomePage'>
-                        <H1Renderer text={ props.identity.data.homePageH1 }/>
+                        <H1Renderer text={ props.identity.data.homePageH1 || '' }/>
                         <WidgetsRenderer widgets={ props.widgets } position='home'/>
                     </div>
                     <Sidebar key='homePageSidebar' isActive={ props.identity.data.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
