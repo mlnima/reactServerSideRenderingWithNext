@@ -1,4 +1,4 @@
-import React, { useContext, useEffect } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
 
 import { AppContext } from "../../../context/AppContext";
@@ -6,28 +6,39 @@ import { withRouter } from "next/router";
 
 const TopBar = props => {
     const contextData = useContext(AppContext);
+    const [ state, setState ] = useState({
+        style:{}
+    });
 
     useEffect(() => {
-        console.log( contextData.userData)
-    }, []);
+        setState({
+            ...state,
+            style:{
+                backgroundColor:contextData.siteDesign.topBarBackgroundColor,
+                color:contextData.siteDesign.topBarTextColor
+            }
+        })
+    }, [contextData.siteDesign]);
+
+
     if (contextData.userData.username) {
         if (contextData.userData.role === 'administrator') {
             return (
-                <div className='TopBar'>
-                    <button onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
-                    <button onClick={ () => contextData.functions.goToAdminPanel() }>Admin Panel</button>
+                <div className='TopBar' style={state.style}>
+                    <button style={state.style} onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
+                    <button  style={state.style} onClick={ () => contextData.functions.goToAdminPanel() }>Admin Panel</button>
                 </div>
             )
         } else {
             return (
-                <div className='TopBar'>
-                    <button onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
+                <div className='TopBar' style={state.style} >
+                    <button style={state.style} onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
                 </div>
             );
         }
     } else {
         return (
-            <div className='TopBar'>
+            <div className='TopBar' style={state.style}>
                 <Link href='/auth/login'><a>Login</a></Link>
                 <span>Or</span>
                 <Link href='/auth/register'><a>Register</a></Link>

@@ -94,7 +94,6 @@ userControllers.login = async (req, res) => {
         })
 };
 userControllers.getUserInfo = (req,res)=>{
-    console.log(req.userData )
     userSchema.findById(req.userData._id).exec().then(user=>{
         res.json({userData:user});
         res.end()

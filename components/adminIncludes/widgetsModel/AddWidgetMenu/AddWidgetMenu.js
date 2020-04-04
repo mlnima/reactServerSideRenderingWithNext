@@ -31,7 +31,7 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu type='recentComments' name='Recent Comments'/>
             <AddWidgetWithPositionMenu type='search' name='Search'/>
             <AddWidgetWithPositionMenu type='tagsCloud' name='Tags Cloud'/>
-            <AddWidgetWithPositionMenu type='video' name='Video'/>
+
             <AddWidgetWithPositionMenu type='navigationMenu' name='Navigation Menu'/>
         </div>
     );

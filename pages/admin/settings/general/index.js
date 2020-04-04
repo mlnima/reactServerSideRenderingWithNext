@@ -67,6 +67,8 @@ const settings = props => {
             })
         })
     };
+
+
     const onChangeHandler = e => {
         const finalValue = e.target.value ==='true'?true:
             e.target.value ==='false'?false:e.target.value

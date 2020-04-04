@@ -81,8 +81,10 @@ app.prepare().then(()=>{
     //settings handler
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
     server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
+    server.post('/api/v1/settings/getMultiple',(req,res)=>{settingsControllers.getMultiple(req,res)});
     server.post('/api/v1/settings/addWidget',(req,res)=>{settingsControllers.addWidget(req,res)});
     server.post('/api/v1/settings/getWidget',(req,res)=>{settingsControllers.getWidget(req,res)});
+    server.post('/api/v1/settings/getMultipleWidgetWithData',(req,res)=>{settingsControllers.getMultipleWidgetWithData(req,res)});
     server.post('/api/v1/settings/getWidgetsWithData',(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
     server.post('/api/v1/settings/updateWidget',(req,res)=>{settingsControllers.updateWidget(req,res)});
     server.post('/api/v1/settings/deleteWidget',(req,res)=>{settingsControllers.deleteWidget(req,res)});
@@ -90,10 +92,10 @@ app.prepare().then(()=>{
 
 
 //-------------------post route bad for SEO----------------------
-    server.get('/post/:id/:postTitle',(req,res)=>{
-        const targetComponent = '/post';
-        app.render(req,res,targetComponent)
-    });
+
+
+
+
     server.get('/posts',(req,res)=>{
         const targetComponent = '/posts';
         app.render(req,res,targetComponent)
@@ -131,11 +133,7 @@ app.prepare().then(()=>{
     //     app.render(req,res,targetComponent,params)
     // });
 
-    server.get('/:postTitle',(req,res)=>{
-        const targetComponent = '/post';
-        const params = {postTitle:req.params.postTitle}
-        app.render(req,res,targetComponent,params)
-    });
+
 
     server.get('/page/categories/:pageNo',(req,res)=>{
         const targetComponent = '/page/categories';
@@ -148,6 +146,12 @@ app.prepare().then(()=>{
     //     const params = {pageNo:req.params.pageNo}
     //     app.render(req,res,targetComponent,params)
     // });
+
+    server.get('/:postTitle',(req,res)=>{
+        const targetComponent = '/post';
+        const params = {postTitle:req.params.postTitle}
+        app.render(req,res,targetComponent,params)
+    });
 
     server.get('*',(req,res)=>{
         return handle(req,res)

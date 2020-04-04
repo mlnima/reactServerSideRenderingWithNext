@@ -93,22 +93,13 @@ postsControllers.getPostsInfo = async (req, res) => {
 };
 
 postsControllers.getPostInfo = (req, res) => {
-    const _id = req.body._id;
+
     const postTitle = req.body.postTitle;
     if (postTitle) {
         postSchema.findOne({ title: postTitle }).exec().then(post => {
+            console.log( post)
             res.json({ post, error: false });
             res.end()
-        })
-    } else if (_id) {
-        postSchema.findById(_id).exec().then(post => {
-            res.json({ post, error: false });
-            res.end()
-        }).catch(err => {
-            console.log(err);
-            return res.status(500).json({
-                message: 'Server Error'
-            })
         })
     }
 };
@@ -230,6 +221,7 @@ postsControllers.getComments = (req, res) => {
       })
 
 };
+
 postsControllers.updateComment = (req, res) => {
     console.log( req.body)
  commentSchema.findByIdAndUpdate(req.body._id,req.body.update,{new:true}).exec().then(updated=>{

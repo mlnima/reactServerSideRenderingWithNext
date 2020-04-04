@@ -6,25 +6,31 @@ import AppLayout from '../../layouts/AppLayout'
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
-        title: props.identity.title || '',
-        themeColor: props.identity.themeColor || '',
-        description: props.identity.description || '',
-        keywords: props.identity.keywords || [],
-        homePageH1: props.identity.homePageH1 || 'H1 element'
+        title: props.identity.data.title || '',
+        themeColor: props.identity.data.themeColor || '',
+        description: props.identity.data.description || '',
+        keywords: props.identity.data.keywords || [],
+        homePageH1: props.identity.data.homePageH1 || 'H1 element'
     });
 
     useEffect(() => {
+
+        if (props.design) {
+            contextData.dispatchSiteDesign(props.design.data)
+        }
         if (props.navigation) {
             contextData.dispatchNavigationData(props.navigation.data)
         }
         if (props.identity) {
-            contextData.dispatchSiteIdentity(siteIdentity => ({
-                ...siteIdentity,
-                ...props.identity
-            }))
+            contextData.dispatchSiteIdentity(props.identity.data)
         }
-    }, []);
 
+    }, [props]);
+
+    useEffect(() => {
+             document.body.style.backgroundColor= contextData.siteDesign.bodyBackgroundColor
+             document.body.style.color = contextData.siteDesign.bodyBackgroundColor
+    }, [contextData.siteDesign]);
     return (
         <Head>
             <title>{ state.title }</title>

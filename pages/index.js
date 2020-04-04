@@ -7,7 +7,7 @@ import withRouter from "next/dist/client/with-router";
 import { getPosts } from "../_variables/ajaxPostsVariables";
 import Head from "next/head";
 import axios from "axios";
-import { getSetting, getWidgets, getWidgetsWithData } from "../_variables/ajaxVariables";
+import { getSetting, getWidgets, getWidgetsWithData, getMultipleSetting, getMultipleWidgetWithData } from "../_variables/ajaxVariables";
 import Text from '../components/includes/Widget/WidgetsModelsComponents/Text/Text'
 import PaginationComponent from '../components/includes/PaginationComponent/PaginationComponent'
 import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
@@ -15,20 +15,18 @@ import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSet
 import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRenderer'
 import SideBar from '../components/includes/SideBar/SideBar'
 import H1Renderer from '../components/includes/H1Renderer/H1Renderer'
+import Footer from '../components/includes/Footer/Footer'
 
 const Home = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
-        title: props.identity.title || '',
-        themeColor: props.identity.themeColor || '',
-        description: props.identity.description || '',
-        keywords: props.identity.keywords || [],
-        homePageH1: props.identity.homePageH1 || 'H1 element',
+
         style: {}
     });
 
     useEffect(() => {
-        if (props.identity.homePageSidebar) {
+        console.log(props)
+        if (props.identity.data.homePageSidebar) {
             setState({
                 style: {
                     gridArea: 'content'
@@ -37,17 +35,22 @@ const Home = props => {
         }
     }, [ props ]);
 
+    useEffect(() => {
+
+
+    }, []);
     return (
         <>
             <AppLayout>
                 <SiteSettingSetter { ...props }/>
-                <div style={ state.style } className={ props.identity.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
+                <div style={ state.style } className={ props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
                     <div className='HomePage'>
-                        <H1Renderer text={ props.identity.homePageH1 }/>
+                        <H1Renderer text={ props.identity.data.homePageH1 }/>
                         <WidgetsRenderer widgets={ props.widgets } position='home'/>
                     </div>
-                    <SideBar key='homePageSidebar' isActive={ props.identity.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
+                    <SideBar key='homePageSidebar' isActive={ props.identity.data.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
                 </div>
+                <Footer widgets={ props.widgets } position='footer'/>
 
             </AppLayout>
         </>
@@ -55,22 +58,16 @@ const Home = props => {
 };
 
 Home.getInitialProps = async ({ pathname, query, req, res, err }) => {
-    let navigation;
-    let identity;
+
     let widgets;
+    let settings;
 
-    try {
-        const identityData = await getSetting('identity');
-        const navigationData = await getSetting('navigation');
-        const widgetsData = await getWidgetsWithData('all')
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer' ] }, true)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true)
 
-        identity = identityData.data.setting ? identityData.data.setting.data : {}
-        navigation = navigationData.data.setting ? navigationData.data.setting : {}
-        widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    } catch ( e ) {
-        console.error(e)
-    }
-    return { identity, navigation, widgets }
+    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
+    return {  widgets, ...settings }
 };
 export default withRouter(Home);
 

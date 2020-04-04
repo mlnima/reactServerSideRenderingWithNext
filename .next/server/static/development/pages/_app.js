@@ -147,6 +147,10 @@ const AppProvider = props => {
     keywords: []
   });
   const {
+    0: siteDesign,
+    1: dispatchSiteDesign
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({});
+  const {
     0: settings,
     1: dispatchSettings
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
@@ -367,7 +371,9 @@ const AppProvider = props => {
       dispatchSiteIdentity,
       siteIdentity,
       widgetsSettings,
-      dispatchWidgetsSettings
+      dispatchWidgetsSettings,
+      siteDesign,
+      dispatchSiteDesign
     }
   }, props.children));
 };

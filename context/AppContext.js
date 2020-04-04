@@ -20,6 +20,9 @@ const AppProvider = props => {
         description: 'site description',
         keywords: []
     });
+    const [ siteDesign, dispatchSiteDesign ] = useState({
+
+    });
     const [ settings, dispatchSettings ] = useState({
         adminPanelSideBar: false,
         test: false
@@ -222,6 +225,8 @@ const AppProvider = props => {
                     siteIdentity,
                     widgetsSettings,
                     dispatchWidgetsSettings,
+                    siteDesign,
+                    dispatchSiteDesign
                 } }>
 
                 { props.children }

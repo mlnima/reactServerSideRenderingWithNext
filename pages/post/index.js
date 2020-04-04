@@ -5,14 +5,14 @@ import { getComments, getPost } from "../../_variables/ajaxPostsVariables";
 import Iframe from "../../components/includes/Post/Iframe/Iframe";
 import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
 import withRouter from "next/dist/client/with-router";
-import PostSidebar from "../../components/includes/Post/PostSidebar/PostSidebar";
 import Head from "next/head";
-import { getSetting, getWidgetsWithData } from "../../_variables/ajaxVariables";
+import { getSetting, getWidgetsWithData, getMultipleWidgetWithData, getMultipleSetting } from "../../_variables/ajaxVariables";
 import { AppContext } from "../../context/AppContext";
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import SideBar from '../../components/includes/Sidebar/Sidebar'
 import CommentFrom from '../../components/includes/Post/CommentFrom/CommentFrom'
 import CommentsRenderer from '../../components/includes/CommentsRenderer/CommentsRenderer'
+import Footer from '../../components/includes/Footer/Footer'
 
 const Post = props => {
     const contextData = useContext(AppContext);
@@ -29,7 +29,6 @@ const Post = props => {
                 }
             })
         }
-
 
     }, [ props ]);
 
@@ -55,7 +54,7 @@ const Post = props => {
             <AppLayout>
                 <SiteSettingSetter { ...props }/>
                 <RenderMeta/>
-                <div className={ props.identity.postPageSidebar ? 'post withSidebar' : 'post withOutSidebar' }>
+                <div className={ props.identity.data.postPageSidebar ? 'post withSidebar' : 'post withOutSidebar' }>
 
                     <div style={ state.style } className="main">
                         <Iframe iframeCode={ props.post.videoEmbedCode } meta={ {
@@ -79,43 +78,40 @@ const Post = props => {
                             views={ props.post.views }
                             videoEmbedCode={ props.post.videoEmbedCode }
                         />
-                        <CommentsRenderer comments={props.comments}/>
+                        <CommentsRenderer comments={ props.comments }/>
                         <CommentFrom documentId={ props.post._id }/>
 
                     </div>
 
-                    {/*<PostSidebar isActive={props.identity.postPageSidebar}/>*/ }
-                    <SideBar key='postPageSidebar' isActive={ props.identity.postPageSidebar } widgets={ props.widgets } position='postPageSidebar'/>
+                    <SideBar key='postPageSidebar' isActive={ props.identity.data.postPageSidebar } widgets={ props.widgets } position='postPageSidebar'/>
                 </div>
-
+                <Footer widgets={ props.widgets } position='footer'/>
             </AppLayout>
         </>
     );
 };
 
 Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
-    let post;
-    let comments;
-    let navigation;
-    let identity;
-    let widgets;
-
-    const identityData = await getSetting('identity');
-    const navigationData = await getSetting('navigation');
-    const widgetsData = await getWidgetsWithData('postPageSidebar')
     const postBody = {
         postTitle: query.postTitle,
     };
-    const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
 
+    let post;
+    let widgets;
+    let settings;
+    let comments;
+
+    const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
     post = postData.data.post
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer' ] }, true)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true)
 
     const commentsData = await getComments({ onDocument: post._id })
-    navigation = navigationData.data.setting ? navigationData.data.setting : {}
-    identity = identityData.data.setting ? identityData.data.setting.data : {}
+    settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     comments = commentsData.data.comments ? commentsData.data.comments : []
-    return { post, query, navigation, identity, widgets, comments }
+    return { post, query, widgets, comments, ...settings }
+
 };
 
 export default withRouter(Post);

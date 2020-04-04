@@ -4,6 +4,7 @@ export let widgetModels = {
     categories:[],
     tags:[],
     count:8,
+    comments:[],
     pagination:false,
     position:'',
     redirectLink:'',

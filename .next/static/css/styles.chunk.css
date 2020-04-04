@@ -896,7 +896,6 @@
     display: none; }
   .Navigation {
     display: flex;
-    background: linear-gradient(to bottom, #222 0%, #333 50%, #222 51%, #151515 100%);
     position: initial;
     flex-direction: row; }
     .Navigation a {
@@ -1176,7 +1175,6 @@
   .WidgetHeader .WidgetHeaderTitle {
     padding: 0 10px; }
   .WidgetHeader a {
-    color: white;
     background-color: #FF3565;
     padding: 3px 5px;
     border-radius: 5px; }
@@ -1506,20 +1504,44 @@ a {
     .withOutSidebar {
       grid-template-columns: 1fr; } }
 
-.adminDesign .adminDesignSection {
-  background-color: #282828;
-  color: white;
-  border-radius: 10px;
-  padding: 10px; }
-  .adminDesign .adminDesignSection .adminDesignSectionItems {
+#footer {
+  background-color: #181818;
+  width: 100%;
+  min-height: 200px; }
+
+.AddWidgetWithPositionMenu {
+  width: 100%; }
+  .AddWidgetWithPositionMenu .positionsOpener {
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: 0.4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px;
+    width: 100%;
+    font-weight: bold; }
+    .AddWidgetWithPositionMenu .positionsOpener:active {
+      background-color: white;
+      border: none; }
+    .AddWidgetWithPositionMenu .positionsOpener:hover {
+      background-color: white; }
+  .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions {
+    max-width: 100%;
     display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: flex-start; }
-    .adminDesign .adminDesignSection .adminDesignSectionItems .previewColor {
-      height: 30px;
-      width: 30px;
-      margin: 5px; }
+    flex-direction: column; }
+    .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn {
+      background-color: #f1f1f1;
+      color: black;
+      outline: none;
+      border: 0.4px #9fa3a8 solid;
+      padding: 8px 10px;
+      border-radius: 5px;
+      font-size: small; }
+      .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn:active {
+        background-color: white;
+        border: none; }
+      .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn:hover {
+        background-color: white; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

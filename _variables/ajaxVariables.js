@@ -17,6 +17,13 @@ export const getSetting = async (type,unCached)=>{
         };
         return await axios.post(`http://localhost:3000/api/v1/settings/get?type=${type}`,body)
 };
+export const getMultipleSetting = async (settings,cache)=>{
+        const isCache = cache? '': `?cache=${Date.now()}`
+        const body = {
+            ...settings
+        };
+        return await axios.post(`http://localhost:3000/api/v1/settings/getMultiple`,body)
+};
 
 // export const getMultipleSettings = async (settingsType)=>{
 //
@@ -36,6 +43,12 @@ export const getWidgets = async (position)=>{
         position,
     };
     return await axios.post('http://localhost:3000/api/v1/settings/getWidget',body)
+}
+export const getMultipleWidgetWithData = async (widgets,cache)=>{
+    const body = {
+        ...widgets,
+    };
+    return await axios.post('http://localhost:3000/api/v1/settings/getMultipleWidgetWithData',body)
 }
 export const getWidgetsWithData = async (position)=>{
     const body = {

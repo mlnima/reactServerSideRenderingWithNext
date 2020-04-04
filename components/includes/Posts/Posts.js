@@ -5,7 +5,6 @@ import VideoElement from "../VideoElement/VideoElement";
 
 import withRouter from "next/dist/client/with-router";
 
-
 const Posts = props => {
     const contextData = useContext(AppContext);
     const [ postsData, setPostsData ] = useState({
@@ -21,6 +20,9 @@ const Posts = props => {
     });
     const [ posts, setPosts ] = useState([]);
 
+    // useEffect(() => {
+    //     console.log(props )
+    // }, [props]);
 
     const renderPosts = props.posts.map(post => {
         return (

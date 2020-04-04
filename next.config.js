@@ -26,6 +26,7 @@ const nextConfiguration = {
     publicRuntimeConfig: {
         base_url: BASE_URL,
     },
+    experimental: { scss: true },
     webpack(config) {
         config.plugins.push(new webpack.EnvironmentPlugin(localEnv))
         return config
@@ -35,7 +36,6 @@ const nextConfiguration = {
     }
 };
 
-// module.exports = withPlugins([ [ withCSS(withSass()), scssConfig ]], nextConfiguration);
+
 module.exports = withPlugins([ [ withSass(), scssConfig ], withImages ], nextConfiguration);
-//
-// module.exports = nextConfiguration
+

@@ -1,8 +1,9 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import Logo from "./Logo/Logo";
+import './Footer.scss'
 import { AppContext } from '../../../context/AppContext'
+import WidgetsRenderer from '../WidgetsRenderer/WidgetsRenderer'
 
-const Header = props => {
+const Footer = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
         style:{}
@@ -11,17 +12,16 @@ const Header = props => {
         setState({
             ...state,
             style:{
-                backgroundColor:contextData.siteDesign.headerBackgroundColor,
-                color:contextData.siteDesign.headerTextColor
+                backgroundColor:contextData.siteDesign.footerBackgroundColor,
+                color:contextData.siteDesign.footerTextColor
             }
         })
     }, [contextData.siteDesign]);
+
     return (
-        <div className='Header' style={state.style}>
-            <Logo/>
+        <div id='footer' style={state.style}>
+            <WidgetsRenderer { ...props } />
         </div>
     );
 };
-export default Header;
-
-
+export default Footer;
