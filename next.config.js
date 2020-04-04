@@ -4,7 +4,7 @@ const { parsed: localEnv } = require('dotenv').config();
 const withPlugins = require('next-compose-plugins');
 const withImages = require('next-images')
 
-let BASE_URL = process.env.REACT_APP_NODE_ENV !== 'production' ? 'http://localhost:3000' : process.env.REACT_APP_PRODUCTION_URL;
+let BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : process.env.PRODUCTION_URL;
 
 const scssConfig = {
     webpack(config, options) {
