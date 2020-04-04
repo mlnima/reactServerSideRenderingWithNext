@@ -17,7 +17,7 @@ mongoose.connect(mongoDBConnectionUrl, {
 
 //identity default setting
 const identityData = {
-    type: 'identityTest',
+    type: 'identity',
     data: {
         "siteAddress": '',
         "protocol": "http",
