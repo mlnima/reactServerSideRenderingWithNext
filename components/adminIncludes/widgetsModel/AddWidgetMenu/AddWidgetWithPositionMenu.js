@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import './AddWidgetWithPositionMenu.scss'
 import { widgetModels } from './models'
 import { addNewWidget, getWidgets } from '../../../../_variables/ajaxVariables'
@@ -26,14 +26,15 @@ const AddWidgetWithPositionMenu = props => {
         let dataToSave = widgetModels;
         dataToSave.position = position
         dataToSave.type = type
-        addNewWidget(widgetModels).then(res => {
-            getWidgets('home').then(res => {
+        addNewWidget(widgetModels).then(() => {
+            getWidgets('home',false,window.location.origin).then(res => {
                 contextData.dispatchWidgetsSettings({
                     widgets: [ ...res.data.widgets ]
                 })
             })
+        }).catch(err=>{
+            console.log( err)
         })
-
     }
 
 

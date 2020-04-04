@@ -12,6 +12,7 @@ import withRouter from 'next/dist/client/with-router'
 // import {SideBar} from '../../../components/includes/Sidebar/Sidebar'
 import {Sidebar} from '../../../components/includes/Sidebar/Sidebar'
 import Footer from '../../../components/includes/Footer/Footer'
+import { getAbsolutePath } from '../../../_variables/_variables'
 
 const actors = props => {
     const [ state, setState ] = useState({
@@ -62,6 +63,7 @@ const actors = props => {
 };
 
 actors.getInitialProps = async ({ pathname, query, req, res, err }) => {
+    const domainName = req ? await getAbsolutePath(req) : ''
     const getActorsData = {
         type: 'actor',
         searchForImageIn: 'actors',
@@ -74,14 +76,14 @@ actors.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'actorsPageSidebar', 'home', 'footer' ] }, true)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'actorsPageSidebar', 'home', 'footer' ] }, true,domainName)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
 
 
-    const categoriesData = await getMeta(getActorsData)
+    const actorsData = await getMeta(getActorsData,true,domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    actorsSource = categoriesData.data ? categoriesData.data : []
+    actorsSource = actorsData.data ? actorsData.data : []
     settings = settingsData.data.settings ? settingsData.data.settings : []
 
     return { ...settings, query, actorsSource, getActorsData, pathname, widgets }

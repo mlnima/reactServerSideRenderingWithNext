@@ -6,6 +6,7 @@ import SideBar from "../adminIncludes/SideBar/SideBar";
 import { AppContext } from "../../context/AppContext";
 import { withRouter } from "next/router";
 import Loading from "../includes/Loading/Loading";
+import { generateAbsolutePath } from '../../_variables/_variables'
 
 const Panel = props => {
     const contextData = useContext(AppContext);
@@ -14,6 +15,7 @@ const Panel = props => {
     const [ state, dispatchState ] = useState({});
 
     useEffect(() => {
+        contextData.dispatchAbsolutePath(window.location.origin)
         if (window.innerWidth > 768) {
             contextData.dispatchSettings(settings => ({
                 ...settings,

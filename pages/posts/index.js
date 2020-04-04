@@ -9,6 +9,7 @@ import Link from 'next/link'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import Footer from '../../components/includes/Footer/Footer'
+import { getAbsolutePath } from '../../_variables/_variables'
 
 const posts = props => {
     const [ state, setState ] = useState({
@@ -55,11 +56,11 @@ const posts = props => {
 };
 
 posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
-
+    const domainName = req ? await getAbsolutePath(req) : ''
     let postsSource;
     let widgets;
     let settings;
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
     settings = settingsData.data.settings ? settingsData.data.settings : []
     //|| settings.identity.data.postsCountPerPage
     const getPostsData = {
@@ -76,9 +77,9 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
         sort: query.sort || 'latest',
     }
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer' ] }, true)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer' ] }, true,domainName)
+    const postsData = await getPosts(getPostsData,true,domainName)
 
-    const postsData = await getPosts(getPostsData)
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     postsSource = postsData.data ? postsData.data : []
 

@@ -11,6 +11,7 @@ import PaginationComponent from '../../../components/includes/PaginationComponen
 import CategoriesSidebar from '../../../components/includes/pages/Categories/CategoriesSidebar/CategoriesSidebar'
 import {Sidebar} from '../../../components/includes/Sidebar/Sidebar'
 import Footer from '../../../components/includes/Footer/Footer'
+import { getAbsolutePath } from '../../../_variables/_variables'
 
 // import './categories.scss'import './categories.scss'
 
@@ -62,7 +63,8 @@ const categories = props => {
     );
 };
 
-categories.getInitialProps = async ({ pathname, query, req, res, err }) => {
+categories.getInitialProps = async ({ pathname, query, req }) => {
+    const domainName = req ? await getAbsolutePath(req) : ''
     const getCategoriesData = {
         type: 'category',
         searchForImageIn: 'categories',
@@ -75,9 +77,9 @@ categories.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let categoriesSource;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'categoriesPageSidebar', 'home', 'footer' ] }, true)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true)
-    const categoriesData = await getMeta(getCategoriesData)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'categoriesPageSidebar', 'home', 'footer' ] }, true,domainName)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
+    const categoriesData = await getMeta(getCategoriesData,true,domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? settingsData.data.settings : []

@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React, { useContext, useEffect } from 'react';
 import { AppProviderWithRouter, AppContext } from "../context/AppContext";
 
 const MyApp = ({ Component, pageProps }) => {

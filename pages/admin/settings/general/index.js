@@ -3,13 +3,12 @@ import AdminLayout from "../../../../components/layouts/AdminLayout";
 import { updateSetting,getSetting } from "../../../../_variables/ajaxVariables";
 import FA from "react-fontawesome";
 import { AppContext } from '../../../../context/AppContext'
+import { getAbsolutePath } from '../../../../_variables/_variables'
 
 const settings = props => {
     const contextData = useContext(AppContext);
     const keywordsInput = useRef(null)
     const [ state, setState ] = useState({
-        siteAddress:props.identity.siteAddress||'',
-        protocol:props.identity.protocol||'',
         title: props.identity.title||'website title',
         themeColor: props.identity.themeColor||'#000',
         description: props.identity.description||'website description',
@@ -26,33 +25,7 @@ const settings = props => {
         actorsPageSidebar:props.identity.actorsPageSidebar||false,
         postPageSidebar:props.identity.postPageSidebar||false,
         postsPageSidebar:props.identity.postsPageSidebar||false,
-
-
     });
-    useEffect(() => {
-
-        console.log(props)
-    }, [props]);
-
-    //
-    // useEffect(()=>{
-    //  getSetting('identity').then(res=>{
-    //      if (res.data.setting){
-    //          setState({
-    //              ...state,
-    //              ...res.data.setting.data
-    //          })
-    //      }else {
-    //          setState({
-    //              ...state,
-    //              title: 'website title',
-    //              themeColor: '#000',
-    //              description: 'website description',
-    //              Keywords: ['keywords']
-    //          })
-    //      }
-    //  })
-    // },[ ]);
 
     const onSubmitHandler = e => {
         e.preventDefault()
@@ -60,7 +33,7 @@ const settings = props => {
             ...contextData.state,
             loading:true
         })
-        updateSetting('identity', state).then(()=>{
+        updateSetting('identity', state,props.domainName).then(()=>{
             contextData.dispatchState({
                 ...contextData.state,
                 loading:false
@@ -114,18 +87,6 @@ const settings = props => {
                 <div className="forms">
                     <h2>site identity</h2>
                     <div className="siteIdentity site-settings-form-section-parent">
-                        <div className="site-settings-form-section">
-                            <p>Site Address (URL):</p>
-                            <input name='siteAddress' value={state.siteAddress} onChange={e=>onChangeHandler(e)}/>
-                        </div>
-                        <div className="site-settings-form-section">
-                            <p>Protocol:</p>
-                            <select name='protocol' value={state.protocol} onChange={e=>onChangeHandler(e)}>
-                                <option>Http</option>
-                                <option>Https</option>
-                            </select>
-                        </div>
-
                         <div className="site-settings-form-section">
                             <p>Logo Text:</p>
                             <input name='logoText' value={state.logoText} onChange={e=>onChangeHandler(e)}/>
@@ -229,10 +190,11 @@ const settings = props => {
 };
 
 settings.getInitialProps = async ({ pathname, query, req, res, err }) => {
+    const domainName = req ? await getAbsolutePath(req) : '';
     let identity;
-    const identityData = await getSetting('identity');
+    const identityData = await getSetting('identity',false,domainName);
     identity = identityData.data.setting ? identityData.data.setting.data : {}
 
-    return { name: 'test',identity }
+    return { domainName,identity }
 }
 export default settings;

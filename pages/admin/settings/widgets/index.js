@@ -4,23 +4,18 @@ import AddWidgetMenu from '../../../../components/adminIncludes/widgetsModel/Add
 import { AppContext } from '../../../../context/AppContext'
 import WidgetModel from '../../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel';
 import { getSetting, getWidgets, updateSetting } from '../../../../_variables/ajaxVariables'
+import { getAbsolutePath } from '../../../../_variables/_variables'
 
 const HomePageWidgets = props => {
-    // const [state,setState]=useState({
-    //     homeWidgets:[],
-    //     sidebarWidgets:[],
-    //     videoSidebarWidgets:[],
-    //     footerWidgets:[]
-    // })
+
     const contextData = useContext(AppContext);
     useEffect(() => {
-        getWidgets('all').then(res => {
-            console.log( res)
+        if(props.widgets){
             contextData.dispatchWidgetsSettings({
                 ...contextData.widgetsSettings,
-                widgets: [ ...res.data.widgets ]
+                widgets: [ ...props.widgets ]
             })
-        })
+        }
     }, []);
 
     const renderHomeWidgets = contextData.widgetsSettings.widgets.map(widget => {
@@ -127,4 +122,15 @@ const HomePageWidgets = props => {
         </AdminLayout>
     );
 };
+
+
+HomePageWidgets.getInitialProps = async ({ asPath,pathname, query, req, res, err }) => {
+    const domainName = req ? await getAbsolutePath(req) : '';
+    let widgets;
+    const widgetData = await getWidgets('all',false,domainName)
+    widgets = widgetData.data.widgets
+
+    return {  widgets,domainName }
+}
+
 export default HomePageWidgets;

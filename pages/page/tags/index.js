@@ -10,6 +10,7 @@ import SiteSettingSetter from '../../../components/includes/SiteSettingsSetter/S
 import withRouter from 'next/dist/client/with-router'
 import {Sidebar} from '../../../components/includes/Sidebar/Sidebar'
 import Footer from '../../../components/includes/Footer/Footer'
+import { getAbsolutePath } from '../../../_variables/_variables'
 
 const tags = props => {
 
@@ -62,7 +63,9 @@ const tags = props => {
     );
 };
 
-tags.getInitialProps = async ({ pathname, query, req, res, err }) => {
+tags.getInitialProps = async ({ pathname, query, req }) => {
+    const domainName = req ? await getAbsolutePath(req) : '';
+
     const getTagsData = {
         type: 'tag',
         searchForImageIn: 'tags',
@@ -75,9 +78,9 @@ tags.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let widgets;
     let settings;
 
-    const widgetsData =await getMultipleWidgetWithData({ widgets: [ 'tagsPageSidebar', 'home', 'footer' ] }, true)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true)
-    const tagsData = await getMeta(getTagsData)
+    const widgetsData =await getMultipleWidgetWithData({ widgets: [ 'tagsPageSidebar', 'home', 'footer' ] }, true,domainName)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
+    const tagsData = await getMeta(getTagsData,true,domainName)
 
     settings = settingsData.data.settings ? settingsData.data.settings : []
     tagsSource = tagsData.data ? tagsData.data : { tags: [], totalCount: 0 }

@@ -1,27 +1,18 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from "../context/AppContext";
 import AppLayout from "../components/layouts/AppLayout";
-import Widget from "../components/includes/Widget/Widget";
-import Posts from "../components/includes/Posts/Posts";
 import withRouter from "next/dist/client/with-router";
-import { getPosts } from "../_variables/ajaxPostsVariables";
-import Head from "next/head";
-import axios from "axios";
-import { getSetting, getWidgets, getWidgetsWithData, getMultipleSetting, getMultipleWidgetWithData } from "../_variables/ajaxVariables";
-import Text from '../components/includes/Widget/WidgetsModelsComponents/Text/Text'
-import PaginationComponent from '../components/includes/PaginationComponent/PaginationComponent'
+import { getMultipleSetting, getMultipleWidgetWithData } from "../_variables/ajaxVariables";
 import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
-
+import { getAbsolutePath } from '../_variables/_variables'
 import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRenderer'
-// import {sideBar} from '../components/includes/SideBar/SideBar'
-import {Sidebar} from '../components/includes/Sidebar/Sidebar'
+import { Sidebar } from '../components/includes/Sidebar/Sidebar'
 import H1Renderer from '../components/includes/H1Renderer/H1Renderer'
 import Footer from '../components/includes/Footer/Footer'
 
 const Home = props => {
-    const contextData = useContext(AppContext);
-    const [ state, setState ] = useState({
 
+    const [ state, setState ] = useState({
         style: {}
     });
 
@@ -36,10 +27,6 @@ const Home = props => {
         }
     }, [ props ]);
 
-    useEffect(() => {
-
-
-    }, []);
     return (
         <>
             <AppLayout>
@@ -58,17 +45,18 @@ const Home = props => {
     );
 };
 
-Home.getInitialProps = async ({ pathname, query, req, res, err }) => {
+Home.getInitialProps = async ({ req }) => {
+    const domainName = req ? await getAbsolutePath(req) : ''
 
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer' ] }, true)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer' ] }, true, domainName)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? settingsData.data.settings : []
-    return {  widgets, ...settings }
+    return { widgets, ...settings }
 };
 export default withRouter(Home);
 

@@ -14,6 +14,9 @@ const AppProvider = props => {
         videoPreviewID: ''
     });
 
+    const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
+
+
     const [ siteIdentity, dispatchSiteIdentity ] = useState({
         title: 'site title',
         themeColor: '#000',
@@ -226,7 +229,9 @@ const AppProvider = props => {
                     widgetsSettings,
                     dispatchWidgetsSettings,
                     siteDesign,
-                    dispatchSiteDesign
+                    dispatchSiteDesign,
+                    absolutePath,
+                    dispatchAbsolutePath
                 } }>
 
                 { props.children }

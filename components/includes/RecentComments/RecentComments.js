@@ -7,7 +7,7 @@ const RecentComments = props => {
 
     const renderComments = props.data.map(comment=>{
         return(
-            <div className='recent-comments-item'>
+            <div key={props.data.indexOf(comment)} className='recent-comments-item'>
                 <strong>{comment.author}</strong>
                 <p>{comment.body}</p>
             </div>

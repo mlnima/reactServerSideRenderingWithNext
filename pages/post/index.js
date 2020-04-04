@@ -13,6 +13,7 @@ import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import CommentFrom from '../../components/includes/Post/CommentFrom/CommentFrom'
 import CommentsRenderer from '../../components/includes/CommentsRenderer/CommentsRenderer'
 import Footer from '../../components/includes/Footer/Footer'
+import { getAbsolutePath } from '../../_variables/_variables'
 
 const Post = props => {
     const contextData = useContext(AppContext);
@@ -92,6 +93,7 @@ const Post = props => {
 };
 
 Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
+    const domainName = req ? await getAbsolutePath(req) : ''
     const postBody = {
         postTitle: query.postTitle,
     };
@@ -101,12 +103,13 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let settings;
     let comments;
 
-    const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
+    // const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
+    const postData = await getPost(postBody,true,domainName)
     post = postData.data.post
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer' ] }, true)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer' ] }, true,domainName)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
+    const commentsData = await getComments({ onDocument: post._id },true,domainName)
 
-    const commentsData = await getComments({ onDocument: post._id })
     settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     comments = commentsData.data.comments ? commentsData.data.comments : []
