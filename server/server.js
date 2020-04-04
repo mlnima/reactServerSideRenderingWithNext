@@ -12,7 +12,7 @@ const path = require('path');
 const authMiddleware = require('./middlewares/authMiddleware');
 const adminAuthMiddleware = require('./middlewares/adminAuthMiddleware');
 const xmlparser = require("express-xml-bodyparser");
-const dev = process.env.REACT_APP_NODE_ENV !== 'production';
+const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 //cache
@@ -171,6 +171,7 @@ app.prepare().then(()=>{
     server.listen(PORT,(err)=>{
         if (err) throw err;
         console.log( `server run on ${PORT}`)
+        console.log(process.env.NODE_ENV )
     })
 }).catch((ex)=>{
     console.log( 'exit error:',ex.stack)

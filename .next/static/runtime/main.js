@@ -1130,7 +1130,7 @@ function tryApplyUpdates(onHotUpdateSuccess) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          handleApplyUpdates = function _ref2(err, updatedModules) {
+          handleApplyUpdates = function _ref(err, updatedModules) {
             if (err || hadRuntimeError) {
               if (err) {
                 console.warn('Error while applying updates, reloading page', err);
@@ -2769,9 +2769,9 @@ var asPath = (0, _utils.getURL)();
 var pageLoader = new _pageLoader["default"](buildId, prefix);
 
 var register = function register(_ref) {
-  var _ref6 = _slicedToArray(_ref, 2),
-      r = _ref6[0],
-      f = _ref6[1];
+  var _ref2 = _slicedToArray(_ref, 2),
+      r = _ref2[0],
+      f = _ref2[1];
 
   return pageLoader.registerPage(r, f);
 };
@@ -2876,13 +2876,13 @@ var emitter = (0, _mitt["default"])();
 exports.emitter = emitter;
 
 var _default = function _default(_temp) {
-  var _ref7, passedWebpackHMR, _ref8, app, mod, initialErr, _ref9, _require, isValidElementType, renderCtx;
+  var _ref, passedWebpackHMR, _ref3, app, mod, initialErr, _ref4, _require, isValidElementType, renderCtx;
 
   return _regeneratorRuntime.async(function _default$(_context) {
     while (1) {
       switch (_context.prev = _context.next) {
         case 0:
-          _ref7 = _temp === void 0 ? {} : _temp, passedWebpackHMR = _ref7.webpackHMR; // This makes sure this specific lines are removed in production
+          _ref = _temp === void 0 ? {} : _temp, passedWebpackHMR = _ref.webpackHMR; // This makes sure this specific lines are removed in production
 
           if (true) {
             webpackHMR = passedWebpackHMR;
@@ -2892,9 +2892,9 @@ var _default = function _default(_temp) {
           return _regeneratorRuntime.awrap(pageLoader.loadPageScript('/_app'));
 
         case 4:
-          _ref8 = _context.sent;
-          app = _ref8.page;
-          mod = _ref8.mod;
+          _ref3 = _context.sent;
+          app = _ref3.page;
+          mod = _ref3.mod;
           App = app;
 
           if (mod && mod.unstable_onPerformanceData) {
@@ -2921,8 +2921,8 @@ var _default = function _default(_temp) {
           return _regeneratorRuntime.awrap(pageLoader.loadPage(page));
 
         case 14:
-          _ref9 = _context.sent;
-          Component = _ref9.page;
+          _ref4 = _context.sent;
+          Component = _ref4.page;
 
           if (false) {}
 
@@ -3057,7 +3057,7 @@ function render(props) {
 
 
 function renderError(props) {
-  var App, err, _ref10, AppTree, appCtx, initProps;
+  var App, err, _ref5, AppTree, appCtx, initProps;
 
   return _regeneratorRuntime.async(function renderError$(_context3) {
     while (1) {
@@ -3079,8 +3079,8 @@ function renderError(props) {
           return _regeneratorRuntime.awrap(pageLoader.loadPage('/_error'));
 
         case 7:
-          _ref10 = _context3.sent;
-          ErrorComponent = _ref10.page;
+          _ref5 = _context3.sent;
+          ErrorComponent = _ref5.page;
           // In production we do a normal render with the `ErrorComponent` as component.
           // If we've gotten here upon initial render, we can use the props from the server.
           // Otherwise, we need to call `getInitialProps` on `App` before mounting.
@@ -3530,12 +3530,12 @@ function () {
         return _this2.assetPrefix + "/_next/data/" + _this2.buildId + (path === '/' ? '/index' : path) + ".json";
       };
 
-      var _ref2 = (0, _url.parse)(href, true),
-          hrefPathname = _ref2.pathname,
-          query = _ref2.query;
+      var _ref = (0, _url.parse)(href, true),
+          hrefPathname = _ref.pathname,
+          query = _ref.query;
 
-      var _ref3 = (0, _url.parse)(asPath),
-          asPathname = _ref3.pathname;
+      var _ref2 = (0, _url.parse)(asPath),
+          asPathname = _ref2.pathname;
 
       var route = normalizeRoute(hrefPathname);
       var isDynamic = (0, _isDynamic.isDynamicRoute)(route),
@@ -3577,8 +3577,8 @@ function () {
     value: function prefetchData(href, asPath) {
       var _this3 = this;
 
-      var _ref4 = (0, _url.parse)(href, true),
-          hrefPathname = _ref4.pathname;
+      var _ref3 = (0, _url.parse)(href, true),
+          hrefPathname = _ref3.pathname;
 
       var route = normalizeRoute(hrefPathname);
       return this.promisedSsgManifest.then(function (s, _dataHref) {

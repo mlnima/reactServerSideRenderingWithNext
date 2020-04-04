@@ -26,7 +26,6 @@ const nextConfiguration = {
     publicRuntimeConfig: {
         base_url: BASE_URL,
     },
-    experimental: { scss: true },
     webpack(config) {
         config.plugins.push(new webpack.EnvironmentPlugin(localEnv))
         return config
