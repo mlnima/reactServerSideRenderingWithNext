@@ -22,7 +22,12 @@ const onlyStatus200 = (req, res) => res.statusCode === 200;
 const cacheSuccesses = cache('1 day', onlyStatus200);
 //--
 mongoose.Promise = global.Promise;
-mongoose.connect("mongodb://localhost:27017/nextDB", {
+
+const mongoDBConnectionUrl = process.env.DB_LOCAL ?
+    `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
+    `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+
+mongoose.connect(mongoDBConnectionUrl, {
   useNewUrlParser: true,
   useUnifiedTopology: true
 })
