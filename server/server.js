@@ -13,7 +13,7 @@ const authMiddleware = require('./middlewares/authMiddleware');
 const adminAuthMiddleware = require('./middlewares/adminAuthMiddleware');
 const xmlparser = require("express-xml-bodyparser");
 const dev = process.env.NODE_ENV !== 'production';
-const app = next({dir: './bin',dev});
+const app = next({dir: './next',dev});
 const handle = app.getRequestHandler();
 //cache
 const apicache = require('apicache')
