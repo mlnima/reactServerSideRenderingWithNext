@@ -1504,28 +1504,6 @@ a {
     .withOutSidebar {
       grid-template-columns: 1fr; } }
 
-.tag-item {
-  border-radius: 5px;
-  min-height: 40px;
-  min-width: 100px;
-  border: #181818 1px solid;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  color: white; }
-  .tag-item img {
-    width: 100%;
-    height: 150px;
-    border: #181818 1px solid;
-    display: block;
-    object-fit: cover; }
-  .tag-item .tag-item-data {
-    display: flex;
-    justify-content: space-between;
-    padding: 0 10px; }
-    .tag-item .tag-item-data p {
-      text-align: center; }
-
 #footer {
   background-color: #181818;
   width: 100%;
