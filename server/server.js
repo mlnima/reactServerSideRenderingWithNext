@@ -105,15 +105,21 @@ app.prepare().then(()=>{
         const targetComponent = '/posts';
         app.render(req,res,targetComponent)
     });
-    server.get('/tags',(req,res)=>{
-        const targetComponent = '/metaPage';
-        const params = {
-            type:'tags'
-        }
-        app.render(req,res,targetComponent,params)
+    server.get('/admin',(req,res)=>{
+        const targetComponent = '/admin';
+        app.render(req,res,targetComponent)
     });
 
 
+
+
+    // server.get('/tags',(req,res)=>{
+    //     const targetComponent = '/metaPage';
+    //     const params = {
+    //         type:'tags'
+    //     }
+    //     app.render(req,res,targetComponent,params)
+    // });
     // server.get('/posts',(req,res)=>{
     //     const targetComponent = '/posts';
     //     const params = {

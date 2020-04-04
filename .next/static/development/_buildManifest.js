@@ -1,1 +1,1 @@
-self.__BUILD_MANIFEST = (function(a,b){return {"/admin/comments":[a,b],"/admin/contacts":[a,b],"/admin/design":[a,b],"/admin/posts":[a,b],"/admin/settings":[a,b],"/admin/users":[a,b]}}("static\u002Fcss\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
+self.__BUILD_MANIFEST = {"/admin":["static\u002Fcss\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
