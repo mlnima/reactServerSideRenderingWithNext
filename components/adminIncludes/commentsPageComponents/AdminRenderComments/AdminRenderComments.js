@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useState } from 'react';
 import './AdminRenderComments.scss'
 import AdminCommentItem from './AdminCommentItem/AdminCommentItem'
 
@@ -6,10 +6,6 @@ const AdminRenderComments = props => {
 
     const [ hovered, setHovered ] = useState('')
     const [ checkedItems, setCheckedItems ] = useState([])
-
-    // useEffect(() => {
-    //     console.log(checkedItems)
-    // }, [ checkedItems ]);
 
     const onChangeHandler = (e, id) => {
         e.target.checked ?

@@ -1,16 +1,10 @@
-import React,{useEffect,useState,useContext} from 'react';
-
+import React,{useContext} from 'react';
 import { AppContext } from "../../../context/AppContext";
 import Link from "next/link";
 import axios from "axios";
+
 const SideBar = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-    });
-    useEffect(()=>{
-
-
-    },[]);
 
     const generateFakeData = ()=>{
         // const body = {
@@ -67,14 +61,14 @@ const SideBar = props => {
 if (contextData.settings.adminPanelSideBar){
     return (
         <div className='SideBar'>
-            <button onClick={()=>generateFakeData()}>take fake data</button>
+            {/*<button onClick={()=>generateFakeData()}>take fake data</button>*/}
             <Link href='/admin/posts'><a className='SideBarItem'>Posts</a></Link>
-            <Link href='/admin/media'><a className='SideBarItem'>Media</a></Link>
-            <Link href='/admin/psges'><a className='SideBarItem'>Pages</a></Link>
+            <Link href='/admin/gallery'><a className='SideBarItem'>Gallery</a></Link>
+            {/*<Link href='/admin/psges'><a className='SideBarItem'>Pages</a></Link>*/}
             <Link href='/admin/comments'><a className='SideBarItem'>Comments</a></Link>
-            <Link href='/admin/feedback'><a className='SideBarItem'>Feedback</a></Link>
+            <Link href='/admin/contacts'><a className='SideBarItem'>contacts</a></Link>
             <Link href='/admin/design'><a className='SideBarItem'>Design</a></Link>
-            <Link href='/admin/plugins'><a className='SideBarItem'>Plugins</a></Link>
+            {/*<Link href='/admin/plugins'><a className='SideBarItem'>Plugins</a></Link>*/}
             <Link href='/admin/users'><a className='SideBarItem'>Users</a></Link>
             <Link href='/admin/settings'><a className='SideBarItem'>Settings</a></Link>
         </div>

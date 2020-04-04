@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import _ from 'lodash'
 import './AdminCommentItem.scss'
 import withRouter from 'next/dist/client/with-router'
-import { updateComment,getComments } from '../../../../../_variables/ajaxPostsVariables'
+import { updateComment } from '../../../../../_variables/ajaxPostsVariables'
 
 const AdminCommentItem = props => {
     const [ state, setState ] = useState({
@@ -14,11 +14,8 @@ const AdminCommentItem = props => {
     const [ commentData, setCommentData ] = useState({})
 
     useEffect(() => {
-        console.log( props)
         setCommentData(props.data)
     }, [ props.data ]);
-
-
 
     const onChangeHandler = e => {
         setCommentData({

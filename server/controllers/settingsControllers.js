@@ -35,7 +35,6 @@ settingsControllers.get = async (req, res) => {
     const setting = await settingSchema.findOne({ type: req.body.type }).exec();
     res.json({ setting })
 };
-
 settingsControllers.getMultiple = async (req, res) => {
     const requestedSetting = req.body.settings
     const settingRequestPromises = requestedSetting.map( async setting=>{
@@ -54,7 +53,6 @@ settingsControllers.getMultiple = async (req, res) => {
         console.log( err)
         res.end()
     })
-
 };
 
 

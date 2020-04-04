@@ -2,17 +2,20 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/pages/admin/contacts/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/build-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/chunks/styles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/chunks/styles.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/css/styles.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/css/styles.chunk.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminCommentItem/AdminCommentItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminCommentItem/AdminCommentItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminRenderComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminRenderComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/comments/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/comments/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/settingsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/settingsControllers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/setupForFirstTime.js" beforeDir="false" afterPath="$PROJECT_DIR$/setupForFirstTime.js" afterDir="false" />
     </list>
@@ -201,7 +204,7 @@
       <workItem from="1585840125856" duration="11833000" />
       <workItem from="1585859787397" duration="16158000" />
       <workItem from="1585900503226" duration="37545000" />
-      <workItem from="1585979162035" duration="29006000" />
+      <workItem from="1585979162035" duration="31143000" />
     </task>
     <servers />
   </component>

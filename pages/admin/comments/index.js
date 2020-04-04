@@ -5,6 +5,7 @@ import AdminRenderComments from '../../../components/adminIncludes/commentsPageC
 import AdminCommentsControl from '../../../components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl'
 import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
 import AppLayout from '../../../components/layouts/AppLayout'
+import { getAbsolutePath } from '../../../_variables/_variables'
 
 const comments = props => {
     return (
@@ -30,6 +31,7 @@ const comments = props => {
 };
 
 comments.getInitialProps = async ({ pathname, query, req, res, err }) => {
+    const domainName = req ? await getAbsolutePath(req) : '';
     let comments;
     const getCommentsData = {
         size: parseInt(query.size) || 30,
@@ -38,7 +40,7 @@ comments.getInitialProps = async ({ pathname, query, req, res, err }) => {
         sort: query.sort || 'latest',
         status: query.status || 'all',
     }
-    const commentsData = await getComments(getCommentsData)
+    const commentsData = await getComments(getCommentsData,false,domainName)
     comments = commentsData.data
     return { query, pathname, comments: comments.comments, totalComments: comments.count, getCommentsData }
 }

@@ -3,9 +3,6 @@ import Link from 'next/link';
 import './AdminCommentsControl.scss';
 
 const AdminCommentsControl = props => {
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
     return (
         <div className='AdminCommentsControl'>
             <div className="status">

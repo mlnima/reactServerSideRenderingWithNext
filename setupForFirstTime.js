@@ -1,4 +1,4 @@
-const mongoose = require("mongoose");
+const mongoose = require('mongoose');
 require('dotenv').config()
 const settingSchema = require('./server/models/settings/settingSchema')
 const widgetSchema = require('./server/models/settings/widgetSchema')
@@ -19,23 +19,21 @@ mongoose.connect(mongoDBConnectionUrl, {
 const identityData = {
     type: 'identity',
     data: {
-        "siteAddress": '',
-        "protocol": "http",
-        "title": "just another React CMS website",
-        "themeColor": "#000",
-        "description": "website description",
-        "keywords": [],
-        "logoText": "Logo text",
-        "headLine": "this is the site headline",
-        "homePageH1": "H1",
-        "homePagePagination": true,
-        "postsCountPerPage": "40",
-        "homePageSidebar": true,
-        "categoriesPageSidebar": true,
-        "tagsPageSidebar": true,
-        "actorsPageSidebar": true,
-        "postPageSidebar": true,
-        "postsPageSidebar": true
+        title: 'just another React CMS website',
+        themeColor: '#000',
+        description: 'website description',
+        keywords: [],
+        logoText:' Logo text',
+        headLine: 'this is the site headline',
+        homePageH1: 'H1',
+        homePagePagination: true,
+        postsCountPerPage: 40,
+        homePageSidebar: true,
+        categoriesPageSidebar: true,
+        tagsPageSidebar: true,
+        actorsPageSidebar: true,
+        postPageSidebar: true,
+        postsPageSidebar: true
     }
 }
 
@@ -43,15 +41,33 @@ const navigationData = {
     type: 'navigation',
     data: [
         {
-            "title": "Home",
-            "url": "/"
+            title: 'Home',
+            url: '/'
         }
     ]
 }
 
 const designData = {
     type: 'design',
-    data: {}
+    data: {
+        bodyBackgroundColor : 'black',
+        bodyTextColor : 'white',
+        topBarBackgroundColor : '#222222',
+        topBarTextColor : 'white',
+        headerBackgroundColor : 'transparent',
+        headerTextColor : 'white',
+        navigationBackgroundColor : '#222222',
+        navigationTextColor : 'white',
+        footerBackgroundColor : '#222',
+        footerTextColor : 'black',
+        widgetHeaderBackgroundColor : '#222',
+        widgetHeaderTextColor : 'white',
+        widgetHeaderRedirectLinkBackgroundColor : 'red',
+        widgetHeaderRedirectLinkTextColor :'#fff',
+        widgetBodyBackgroundColor : 'transparent',
+        widgetBodyTextColor : '#fff',
+        widgetBodyBorder : 'none'
+    }
 }
 
 const runSetup = async () => {

@@ -1,13 +1,8 @@
-import React,{useEffect,useState,useContext} from 'react';
+import React from 'react';
 import Link from "next/link";
 import AdminLayout from "../../../components/layouts/AdminLayout";
 
-
 const settings = props => {
-    const [state, setState] = useState({
-    });
-    useEffect(()=>{
-    },[]);
     return (
         <AdminLayout>
         <div id='settings'>

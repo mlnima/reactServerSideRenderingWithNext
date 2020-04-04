@@ -1,9 +1,10 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from "../../../components/layouts/AdminLayout";
-import settings from '../settings/general'
+
 import { getSetting, updateSetting } from '../../../_variables/ajaxVariables'
 import './design.scss'
 import { AppContext } from '../../../context/AppContext'
+import { getAbsolutePath } from '../../../_variables/_variables'
 
 const design = props => {
     const contextData = useContext(AppContext);
@@ -61,7 +62,7 @@ const design = props => {
     };
     const renderColorsFields = Object.keys(colors).map(element => {
         return (
-            <div className="adminDesignSection">
+            <div key={element} className="adminDesignSection">
                 <div className="adminDesignSectionItems">
                     <div className="adminDesignSectionItem">
                         <p className='adminDesignSectionItemTitle'>{ element.replace(/([A-Z])/g, " $1") } :</p>
@@ -85,9 +86,10 @@ const design = props => {
     );
 };
 
-design.getInitialProps = async ({ pathname, query, req, res, err }) => {
+design.getInitialProps = async ({req}) => {
+    const domainName = req ? await getAbsolutePath(req) : '';
     let design;
-    const designData = await getSetting('design');
+    const designData = await getSetting('design',false,domainName);
     design = designData.data.setting ? designData.data.setting.data : {}
     return { design }
 }
