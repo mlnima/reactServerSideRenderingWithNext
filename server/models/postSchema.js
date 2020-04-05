@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
-    author: mongoose.ObjectId,
+    author: mongoose.Mixed,
     title: {
         type: String,
         unique: true

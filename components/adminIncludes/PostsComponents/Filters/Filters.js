@@ -11,10 +11,10 @@ const Filters = props => {
     },[]);
     return (
         <div className='Filters'>
-            <FilterStatusBtn/>
-            <FilterSearch/>
-            <FilterDropDownActions />
-            <FilterPagination/>
+            <FilterStatusBtn {...props}/>
+            <FilterSearch {...props}/>
+            <FilterDropDownActions {...props} />
+            <FilterPagination {...props}/>
         </div>
     );
 };

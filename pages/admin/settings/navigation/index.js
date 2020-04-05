@@ -14,7 +14,7 @@ const navigation = props => {
     });
 
     useEffect(() => {
-        getSetting(state.type).then(res => {
+        getSetting(state.type,false,window.location.origin).then(res => {
             if (res.data.setting) {
                 setState({
                     ...state,

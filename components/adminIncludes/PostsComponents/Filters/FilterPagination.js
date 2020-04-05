@@ -1,113 +1,61 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import { AppContext } from "../../../../context/AppContext";
+import React, { useEffect, useState, useRef } from 'react';
 import FA from 'react-fontawesome';
+import Link from 'next/link'
+import withRouter from 'next/dist/client/with-router'
 
 const FilterPagination = props => {
-    const contextData = useContext(AppContext);
+
     let currentPageInput = useRef(null);
-    let size = useRef(null);
-    // const [ state, setState ] = useState({
-    //     totalPosts: 0,
-    //     perPage: 0,
-    //     totalPage: 0,
-    //     currentPage: 1
-    // });
-    // useEffect(()=>{
-    //     currentPageInput.current.value = contextData.postsData.pageNo
-    //     size.current.value = contextData.postsData.size
-    // },[contextData.postsData.pageNo]);
 
-    let nextPage = () => {
-        const nextPage = contextData.adminPostsData.pageNo + 1;
+    const [ state, setState ] = useState({
+        targetPage: 1
+    })
 
-        contextData.dispatchAdminPostsData({
-            ...contextData.adminPostsData,
-            pageNo: nextPage
+    useEffect(() => {
+        setState({
+            ...state,
+            targetPage: props.getPostsData.pageNo
         })
-    };
+    }, [ props ]);
 
-    let previousPage = () => {
-        if ((contextData.adminPostsData.pageNo - 1) <= 0) {
-            contextData.dispatchAdminPostsData({
-                ...contextData.adminPostsData,
-                pageNo: 1
-            })
-        } else {
-            contextData.dispatchAdminPostsData({
-                ...contextData.adminPostsData,
-                pageNo: contextData.adminPostsData.pageNo - 1
-            })
-        }
 
-    };
-
-    let lastPage = () => {
-        const lastPage = Math.floor(contextData.adminPostsData.totalPosts / contextData.adminPostsData.size)
-        contextData.dispatchAdminPostsData({
-            ...contextData.adminPostsData,
-            pageNo: lastPage
-        })
-    };
-
-    let firstPage = () => {
-        contextData.dispatchAdminPostsData({
-            ...contextData.adminPostsData,
-            pageNo: 1
-        })
-    };
-
-    let changePageNoManually = () => {
-        if (currentPageInput.current.value <= 0) {
-            contextData.dispatchAdminPostsData({
-                ...contextData.adminPostsData,
-                pageNo: 1
-            });
-            currentPageInput.current.value = 1
-        } else {
-            contextData.dispatchAdminPostsData({
-                ...contextData.adminPostsData,
-                pageNo: currentPageInput.current.value
-            })
-        }
-    };
-
-    let changeSizeHandler = () => {
-        contextData.dispatchAdminPostsData({
-            ...contextData.adminPostsData,
-            size: parseInt(size.current.value)
+    const onChangeHandler = e => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
         })
     }
 
     return (
         <div className='FilterPagination'>
+
             <div className='pagesNavigation'>
-                <label className='totalPosts'>{ contextData.adminPostsData.totalPosts } items</label>
-                <button onClick={ () => firstPage() } className='actionBtn'><FA className='fontawesomeMedium' name="angle-double-left"/></button>
-                <button onClick={ () => previousPage() } className='actionBtn'><FA className='fontawesomeMedium' name="angle-left"/></button>
-                {/*<input className='pageNumberInput' placeholder={ Math.floor(contextData.adminPostsData.totalPosts / contextData.adminPostsData.size)}  ref={ currentPageInput } type='number' min={ 0 }/>*/}
-                <input className='pageNumberInput' placeholder={ contextData.adminPostsData.pageNo}  ref={ currentPageInput } type='number' min={ 0 }/>
-                <button onClick={ () => nextPage() } className='actionBtn'><FA className='fontawesomeMedium' name="angle-right"/></button>
-                <button onClick={ () => lastPage() } className='actionBtn'><FA className='fontawesomeMedium' name="angle-double-right"/></button>
+                <label className='totalPosts'>{ props.postsSource.totalCount } items</label>
+                <Link key='...1' href={ {
+                    pathname: props.pathname || props.router.pathname, query: { ...props.query, page: 1 }
+                } }><a className='adminPaginationActionLink'><FA className='fontawesomeMedium' name="angle-double-left"/></a></Link>
+
+                <Link href={ {
+                    pathname: props.pathname || props.router.pathname, query: { ...props.query, page: props.getPostsData.pageNo + -1 }
+                } }><a className='adminPaginationActionLink'><FA className='fontawesomeMedium' name="angle-left"/></a></Link>
+
+
+                <input name='targetPage' className='pageNumberInput goToPageManuallyInput' value={ state.targetPage } ref={ currentPageInput } type='number' min={ 0 } onChange={ e => onChangeHandler(e) }/>
+                <Link href={ {
+                    pathname: props.pathname || props.router.pathname, query: { ...props.query, page: state.targetPage }
+                } }><a className='goToPageManuallyLink'>GO</a></Link>
+
+                <Link href={ {
+                    pathname: props.pathname || props.router.pathname, query: { ...props.query, page: props.getPostsData.pageNo + 1 }
+                } }><a className='adminPaginationActionLink'><FA className='fontawesomeMedium' name="angle-right"/></a></Link>
+
+                <Link key={ `...${ Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)) }` } href={ {
+                    pathname: props.pathname || props.router.pathname, query: { ...props.query, page: Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)) }
+                } }><a className='adminPaginationActionLink'><FA className='fontawesomeMedium' name="angle-double-right"/></a></Link>
             </div>
-            <div className='pagesNavigationMoreAction'>
-                {/*<button onClick={ () => changePageNoManually() }>Go</button>*/}
-                {/*<label>of { Math.floor(contextData.adminPostsData.totalPosts / contextData.adminPostsData.size) }</label>*/}
-                {/*<select ref={ size } defaultValue={ contextData.adminPostsData.size } onChange={ () => changeSizeHandler() }>*/}
-                {/*    <option value={ 5 }>5</option>*/}
-                {/*    <option value={ 10 }>10</option>*/}
-                {/*    <option value={ 20 }>20</option>*/}
-                {/*    <option value={ 50 }>50</option>*/}
-                {/*    <option value={ 100 }>100</option>*/}
-                {/*    <option value={ 200 }>200</option>*/}
-                {/*    <option value={ 500 }>500</option>*/}
-                {/*</select>*/}
-            </div>
-            {/*<input ref={size} onChange={()=>changeSizeHandler()} />*/ }
+
         </div>
     );
 };
 
-FilterPagination.getInitialProps = (ctx) => {
-    return { ctx }
-};
-export default FilterPagination;
+export default withRouter(FilterPagination);

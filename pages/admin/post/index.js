@@ -1,4 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
+import {getPost} from '../../../_variables/ajaxPostsVariables';
+import {getAbsolutePath} from '../../../_variables/_variables'
+
 import AdminLayout from "../../../components/layouts/AdminLayout";
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
@@ -8,7 +11,7 @@ import Format from "../../../components/adminIncludes/PostComponents/Format/Form
 import PostCategoriesTagsActors from "../../../components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors";
 import VideoInformation from "../../../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
 import withRouter from "next/dist/client/with-router";
-// test query  http://localhost:3000/admin/post?id=123456
+
 const Index = props => {
     const contextData = useContext(AppContext);
     const onChangeHandler = e => {
@@ -18,17 +21,8 @@ const Index = props => {
         })
     };
 
-    // useEffect(() => {
-    //     console.log(contextData.editingPostData)
-    // }, [ contextData.editingPostData ]);
-
     useEffect(() => {
-        console.log(props )
-        if(props.query.id){
-              contextData.functions.getPost(props.query.id).then(post=>{
-                  contextData.dispatchEditingPostData({...contextData.editingPostData,...post.data.post})
-              })
-        }
+        contextData.dispatchEditingPostData({...contextData.editingPostData,...props.post})
     }, []);
 
     return (
@@ -55,10 +49,24 @@ const Index = props => {
 };
 
 
-Index.getInitialProps = async ({ query }) => {
+Index.getInitialProps = async ({ query,req }) => {
+    const domainName = req ? await getAbsolutePath(req) : '';
+    let post;
+    let postData
+    let requestBody;
 
-    return { query,user:{
-            name:'nima'
-        } }
+    if(query.new){
+        post={}
+    }else if (query.postTitle||query.id){
+         requestBody = {
+            postTitle: query.postTitle,
+            _id: query.id,
+        };
+        postData = await getPost(requestBody,true,domainName)
+        post = postData.data?postData.data.post:{}
+    }
+
+
+    return {post,query }
 };
 export default withRouter(Index);

@@ -150,7 +150,7 @@ const BodyTable = props => {
         // }
     };
 
-    let renderPosts = contextData.adminPosts.map(post => {
+    let renderPosts = props.postsSource.posts.map(post => {
 
         const renderTags = post.tags.map(item => {
             return (

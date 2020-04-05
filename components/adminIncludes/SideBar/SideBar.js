@@ -70,6 +70,7 @@ if (contextData.settings.adminPanelSideBar){
             <Link href='/admin/design'><a className='SideBarItem'>Design</a></Link>
             {/*<Link href='/admin/plugins'><a className='SideBarItem'>Plugins</a></Link>*/}
             <Link href='/admin/users'><a className='SideBarItem'>Users</a></Link>
+            <Link href='/admin/tools'><a className='SideBarItem'>Tools</a></Link>
             <Link href='/admin/settings'><a className='SideBarItem'>Settings</a></Link>
         </div>
     );

@@ -8,7 +8,7 @@ const PostsDataTable = props => {
     return (
         <table className='DataTable'>
             <HeaderTable/>
-            <BodyTable/>
+            <BodyTable {...props}/>
         </table>
     );
 };

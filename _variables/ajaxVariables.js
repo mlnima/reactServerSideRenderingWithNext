@@ -23,6 +23,7 @@ export const getSetting = async (type, cache, domainName) => {
     const body = {
         type,
     };
+
     return await axios.post(domainName + `/api/v1/settings/get?type=${ type }`, body)
 };
 
@@ -85,6 +86,14 @@ export const deleteWidgets = async (id) => {
         token: localStorage.wt
     };
     return await axios.post(window.location.origin + '/api/v1/settings/deleteWidget', body)
+}
+
+export const executor = async (command) => {
+    const body = {
+        command,
+        token: localStorage.wt
+    };
+    return await axios.post(window.location.origin + '/api/v1/settings/executor', body)
 }
 
 

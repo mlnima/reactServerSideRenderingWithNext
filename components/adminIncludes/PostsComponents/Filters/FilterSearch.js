@@ -1,21 +1,28 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from "../../../../context/AppContext";
+import Link from 'next/link'
 
 const FilterSearch = props => {
     let searchInput = useRef(null)
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({
+    const [ state, setState ] = useState({
         keyword: ''
     });
+
     useEffect(() => {
-    }, []);
+        if (props.query.keyword) {
+            setState({
+                keyword: props.query.keyword
+            })
+        }
+    }, [ props ]);
 
     let onSearchHandler = e => {
         e.preventDefault();
-        contextData.dispatchAdminPostsData(adminPostsData=>({
+        contextData.dispatchAdminPostsData(adminPostsData => ({
             ...adminPostsData,
             keyword: state.keyword,
-            pageNo:1
+            pageNo: 1
         }))
     };
 
@@ -26,28 +33,14 @@ const FilterSearch = props => {
         })
     };
 
-    let onClearHandler = () => {
-        // contextData.setPostsData({
-        //     ...contextData.postsData,
-        //     keyword: '',
-        //     pageNo:1
-        // })
-        // searchInput.current.value = ''
-    };
-
-    const RenderClearBtn = () => {
-        // if (state.keyword !== '') {
-        //     return (
-        //         <button type='button' onClick={() => onClearHandler()}>x</button>
-        //     )
-        // } else
-            return null
-    };
     return (
-        <form className='FilterSearch' onSubmit={(e) => onSearchHandler(e)}>
-            <input ref={searchInput} onChange={e => onChangeHandler(e)}/>
-            <RenderClearBtn/>
-            <button className='actionBtn' type='submit'>Search Posts</button>
+        <form className='FilterSearch' onSubmit={ (e) => onSearchHandler(e) }>
+            <input ref={ searchInput } value={ state.keyword } onChange={ e => onChangeHandler(e) }/>
+            {/*<RenderClearBtn/>*/ }
+            {/*<button className='actionBtn' type='submit'>Search Posts</button>*/ }
+            <Link href={ {
+                pathname: props.pathname || props.router.pathname, query: { ...props.query, keyword: state.keyword, page: 1 }
+            } }><a className='adminPaginationActionLink'>Search Posts</a></Link>
         </form>
     );
 };

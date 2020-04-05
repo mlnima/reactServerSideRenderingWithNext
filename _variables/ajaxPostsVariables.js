@@ -16,12 +16,36 @@ export const getPosts = async (data,cache,domainName) => {
     return await axios.post(domainName +`/api/v1/posts${queryGeneratorForUnCacheRequest(data)}`, body)
 };
 
+
+
+
+
+
 export const getPost = async (data,cache,domainName) => {
     const body = {
         ...data,
     };
     return await axios.post(domainName +'/api/v1/posts/post', body)
 };
+
+export const updatePost = async (data,domainName) => {
+    const body = {
+        postData: data,
+        token: localStorage.wt
+    };
+    return await axios.post(domainName +`/api/v1/posts/updatePost`, body)
+};
+
+export const savePost = async (data,domainName) => {
+    const body = {
+        postData: data,
+        token: localStorage.wt
+    };
+    return await axios.post(domainName +`/api/v1/posts/createNewPost`, body)
+};
+
+
+
 
 
 export const getMeta = async (data,cache,domainName) => {

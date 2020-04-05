@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from "../../../../context/AppContext";
+import withRouter from 'next/dist/client/with-router'
 
 const FilterDropDownActions = props => {
     const contextData = useContext(AppContext);
@@ -7,11 +8,12 @@ const FilterDropDownActions = props => {
     const typeToDisplay = useRef(null);
 
     const [ state, setState ] = useState({});
-    // useEffect(() => {
-    //     typeToDisplay.current.value = contextData.postsData.type
-    // }, []);
 
-    const onFormatChangeHandler = () => {
+    useEffect(() => {
+        console.log( props)
+    }, [props]);
+    const onFormatChangeHandler = e => {
+
         // if (bulkAction.current.value !== 'none') {
         //     contextData.setState({
         //         ...contextData.state,
@@ -29,6 +31,9 @@ const FilterDropDownActions = props => {
     };
 
     const changePostsTypeToDisplay = e => {
+        props.router.push({
+            pathname:props.router.pathname,
+            query:{...props.query,type:e.target.value}})
         // if (e.target.value !== 'none') {
         //     contextData.setPostsData({
         //         ...contextData.postsData,
@@ -85,15 +90,15 @@ const FilterDropDownActions = props => {
                 </select>
                 <button className='actionBtn' onClick={ () => onFormatChangeHandler() }>Apply</button>
             </div>
-            <div className="DateCategoryFotmat">
+            <div className="DateCategoryFormat">
                 <select ref={ typeToDisplay } onChange={ e => changePostsTypeToDisplay(e) }>
-                    {/*<option value='none'>All formats</option>*/ }
-                    <option value='Video'>Video</option>
-                    <option value='Standard'>Standard</option>
+                    <option value='all'>All</option>
+                    <option value='video'>Video</option>
+                    <option value='standard'>Standard</option>
                 </select>
             </div>
             <EmptyTrash/>
         </div>
     );
 };
-export default FilterDropDownActions;
+export default withRouter(FilterDropDownActions) ;

@@ -3,38 +3,28 @@ const postSchema = require('../models/postSchema');
 const metaSchema = require('../models/metaSchema');
 const commentSchema = require('../models/commentSchema');
 
+
+const metasSaver = (metas,type)=>{
+    metas.forEach(meta=>{
+        const metaDataToSave = new metaSchema({
+            name:meta,
+            type
+        })
+        metaDataToSave.save()
+    })
+}
+
+
 postsControllers.createNewPost = (req, res) => {
-    const newPost = req.body.postData
-    if (newPost.tags) {
-        newPost.tags.forEach(tag => {
-            const tagDataToSave = new metaSchema({
-                name: tag,
-                type: 'tag'
-            })
-            tagDataToSave.save()
-        })
-    }
-    if (newPost.categories) {
-        newPost.categories.forEach(category => {
-            const categoryDataToSave = new metaSchema({
-                name: category,
-                type: 'category'
-            })
-            categoryDataToSave.save()
-        })
-    }
-    if (newPost.actors) {
-        newPost.actors.forEach(actor => {
-            const actorDataToSave = new metaSchema({
-                name: actor,
-                type: 'actor'
-            })
-            actorDataToSave.save()
-        })
-    }
+    res.end()
+    const newPost = req.body.postData;
+    metasSaver(newPost.tags)
+    metasSaver(newPost.categories)
+    metasSaver(newPost.actors)
+
     const newPostDataToSave = new postSchema(newPost);
     newPostDataToSave.save().then(savedPostData => {
-        console.log(savedPostData, ' saved ');
+        console.log(savedPostData.title, ' saved ');
         res.json({ savedPostData });
         res.end()
     }).catch(err => {
@@ -68,8 +58,6 @@ postsControllers.getPostsInfo = async (req, res) => {
     let actorQuery = !req.body.actor || req.body.actor === 'all' ? {} : { actors: new RegExp(req.body.actor, 'i') };
     let searchQuery = req.body.keyword === '' ? {} : {
         $or: [
-            { categories: new RegExp(req.body.category, 'i') },
-            { tags: new RegExp(req.body.tag, 'i') },
             { actors: new RegExp(req.body.actor, 'i') },
             { title: new RegExp(req.body.keyword, 'i') },
             { description: new RegExp(req.body.keyword, 'i') } ]
@@ -77,7 +65,7 @@ postsControllers.getPostsInfo = async (req, res) => {
     let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
     let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
 
-    let posts = await postSchema.find({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery ] }).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
+    let posts = await postSchema.find({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery ] }).select(selectedFields).skip(size * (pageNo-1)).limit(size).sort(sortQuery).exec();
     let postsCount = await postSchema.count({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery ] }).exec()
 
     Promise.all([ posts, postsCount ]).then(data => {
@@ -87,16 +75,24 @@ postsControllers.getPostsInfo = async (req, res) => {
         return res.status(500).json({
             message: 'Server Error'
         })
-        res.end()
+
     })
 
 };
 
 postsControllers.getPostInfo = (req, res) => {
 
-    const postTitle = req.body.postTitle;
-    if (postTitle) {
-        postSchema.findOne({ title: postTitle }).exec().then(post => {
+    const title = req.body.postTitle;
+    const _id = req.body._id;
+
+    if (title) {
+        postSchema.findOne({ title }).exec().then(post => {
+            console.log( post)
+            res.json({ post, error: false });
+            res.end()
+        })
+    }else if (_id){
+        postSchema.findOne({ _id }).exec().then(post => {
             console.log( post)
             res.json({ post, error: false });
             res.end()

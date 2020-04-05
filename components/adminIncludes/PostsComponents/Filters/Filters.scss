@@ -23,7 +23,20 @@
 
   }
 
-
+  .adminPaginationActionLink {
+    @include AdminLightBtn;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: small;
+    margin: 0 5px;
+    span {
+      font-size: small;
+      &:before{
+        color: $dark100 !important;
+      }
+    }
+  }
 
 
 
