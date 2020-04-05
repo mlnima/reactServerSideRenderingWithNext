@@ -14,3 +14,11 @@ export const getAbsolutePath = async (req) => {
 export const generateAbsolutePath = () => {
     return window.location.protocol + '//' + window.location.host
 }
+
+export const clickPathGenerator = (clickedItemName,pathFromContexts)=>{
+    if (pathFromContexts === '.') {
+        return './' + clickedItemName
+    } else {
+        return pathFromContexts + '/' + clickedItemName
+    }
+};

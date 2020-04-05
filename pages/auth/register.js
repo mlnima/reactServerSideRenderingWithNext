@@ -2,6 +2,9 @@ import React, { useState,useRef } from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
 import withRouter from "next/dist/client/with-router";
 import axios from 'axios'
+import { getAbsolutePath } from '../../_variables/_variables'
+import { getMultipleSetting } from '../../_variables/ajaxVariables'
+import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 
 const Register = props => {
     const messageLabel = useRef(null);
@@ -42,6 +45,7 @@ const Register = props => {
 
     return (
         <AppLayout>
+            <SiteSettingSetter { ...props }/>
             <div className='Register authPage'>
                 <form className='authForm' onSubmit={e=>onSubmitHandler(e)}>
                     <div className="authFormItem">
@@ -66,4 +70,14 @@ const Register = props => {
         </AppLayout>
     );
 };
+
+Register.getInitialProps = async ({ req }) => {
+    const domainName = req ? await getAbsolutePath(req) : ''
+    let settings;
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName)
+
+
+    settings = settingsData.data.settings ? settingsData.data.settings : []
+    return { ...settings }
+}
 export default withRouter(Register);

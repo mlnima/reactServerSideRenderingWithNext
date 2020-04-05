@@ -10,15 +10,16 @@ const RenderIframe = props => {
         return(
             <button onClick={()=>state.open ?setState({...state,open: false}):setState({...state,open: true})}>Preview Embed Video</button>
         )
-    }else if (state.open && contextData.editingPostData.videoEmbedCode){
+    }else if (state.open && props.postData.videoEmbedCode){
         return (
             <div className='VideoEmbedCode VideoInformationSection'>
-                <button onClick={()=>state.open ?setState({...state,open: false}):setState({...state,open: true})}>Hide Embed Video</button>
+
                 <div className="title">
                     <p>Video Iframe Preview</p>
+                    <button onClick={()=>state.open ?setState({...state,open: false}):setState({...state,open: true})}>Hide Embed Video</button>
                 </div>
                 <div className="editor">
-                    <iframe ref={props.postData.videoEmbedCode} />
+                    <iframe src={props.postData.videoEmbedCode} />
                 </div>
             </div>
         )

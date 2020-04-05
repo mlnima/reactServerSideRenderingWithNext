@@ -6,7 +6,6 @@ const ImagePreview = props => {
         open:false
     })
 
-
     if (props.postData.mainThumbnail){
 
         if (state.open){

@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import Switch from "react-switch";
 import './IsInSlideShow.scss';
-import { AppContext } from "../../../../../context/AppContext";
+
 
 const IsInSlideShow = props => {
     return (

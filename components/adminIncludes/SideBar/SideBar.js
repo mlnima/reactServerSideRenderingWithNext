@@ -63,7 +63,7 @@ if (contextData.settings.adminPanelSideBar){
         <div className='SideBar'>
             {/*<button onClick={()=>generateFakeData()}>take fake data</button>*/}
             <Link href='/admin/posts'><a className='SideBarItem'>Posts</a></Link>
-            <Link href='/admin/gallery'><a className='SideBarItem'>Gallery</a></Link>
+            <Link href='/admin/fileManager'><a className='SideBarItem'>File Manager</a></Link>
             {/*<Link href='/admin/psges'><a className='SideBarItem'>Pages</a></Link>*/}
             <Link href='/admin/comments'><a className='SideBarItem'>Comments</a></Link>
             <Link href='/admin/contacts'><a className='SideBarItem'>contacts</a></Link>

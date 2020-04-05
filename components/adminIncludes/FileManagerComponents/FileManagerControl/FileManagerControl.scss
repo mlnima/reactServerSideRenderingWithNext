@@ -1,0 +1,14 @@
+.FileManagerControl{
+  display: flex;
+  justify-content: flex-start;
+  margin: 20px 0;
+  .backBtn{
+    padding: 5px 10px ;
+    margin: 0 10px;
+
+  }
+  input{
+
+    width: 90%;
+  }
+}

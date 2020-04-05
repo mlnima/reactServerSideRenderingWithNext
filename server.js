@@ -8,6 +8,7 @@ const siteMapController = require('./server/controllers/siteMapController');
 const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
 const settingsControllers = require('./server/controllers/settingsControllers');
+const fileManagerControllers = require('./server/controllers/fileManagerControllers');
 const path = require('path');
 const authMiddleware = require('./server/middlewares/authMiddleware');
 const adminAuthMiddleware = require('./server/middlewares/adminAuthMiddleware');
@@ -96,6 +97,8 @@ app.prepare().then(()=>{
     server.post('/api/v1/settings/saveCustomStyle',(req,res)=>{settingsControllers.saveCustomStyle(req,res)});
     //exe commands
     server.post('/api/v1/settings/executor',(req,res)=>{settingsControllers.executor(req,res)});
+    // file manager
+    server.post('/api/v1/settings/fileManagerControllers-readPath',(req,res)=>{fileManagerControllers.readPath(req,res)});
 
 
 

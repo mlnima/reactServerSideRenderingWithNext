@@ -26,6 +26,9 @@
       input {
         @include inputNormalWithRadius;
       }
+      p{
+        color: $light100;
+      }
 
     }
 

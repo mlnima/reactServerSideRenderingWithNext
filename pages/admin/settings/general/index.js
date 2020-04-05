@@ -13,13 +13,14 @@ const settings = props => {
         themeColor: props.identity.themeColor||'#000',
         description: props.identity.description||'website description',
         keywords: props.identity.keywords||[],
+        imageLogo:props.identity.imageLogo || false,
+        imageLogoUrl:props.identity.imageLogo || '/static/images/logo/Logo.png',
         logoText:props.identity.logoText||'',
         headLine:props.identity.headLine||'',
         homePageH1:props.identity.homePageH1||'',
         homePagePagination:props.identity.homePagePagination||false,
         postsCountPerPage:props.identity.postsCountPerPage||30,
         homePageSidebar:props.identity.homePageSidebar||false,
-
         categoriesPageSidebar:props.identity.categoriesPageSidebar||false,
         tagsPageSidebar:props.identity.tagsPageSidebar||false,
         actorsPageSidebar:props.identity.actorsPageSidebar||false,
@@ -81,6 +82,10 @@ const settings = props => {
         )
     });
 
+
+
+
+
     return (
         <AdminLayout>
             <form id='site-settings-form' onSubmit={ e => onSubmitHandler(e) }>
@@ -90,6 +95,14 @@ const settings = props => {
                         <div className="site-settings-form-section">
                             <p>Logo Text:</p>
                             <input name='logoText' value={state.logoText} onChange={e=>onChangeHandler(e)}/>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Image Logo:</p>
+                            <select defaultValue={state.imageLogo} name='imageLogo' onChange={e=>onChangeHandler(e)}>
+                                <option value='true'>Yes</option>
+                                <option value='false'>No</option>
+                            </select>
+                            <input name='imageLogoUrl' value={state.imageLogoUrl} onChange={e=>onChangeHandler(e)}/>
                         </div>
                         <div className="site-settings-form-section">
                             <p>Head Line:</p>

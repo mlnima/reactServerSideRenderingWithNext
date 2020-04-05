@@ -12,6 +12,11 @@ const design = props => {
         //body
         bodyBackgroundColor: props.design.bodyBackgroundColor || '#000',
         bodyTextColor: props.design.bodyTextColor || '#fff',
+        //Logo
+        textLogoColor:props.design.textLogoColor ||'#fff',
+        textLogoSize:props.design.textLogoSize ||'40px',
+        headLineColor:props.design.headLineColor ||'#fff',
+        headLineSize:props.design.headLineSize ||'10px',
         //homePageH1
         homePageH1: props.design.homePageH1 || '#000',
         //mobile theme

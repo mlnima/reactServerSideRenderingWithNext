@@ -10,13 +10,17 @@ const metasSaver = (metas,type)=>{
             name:meta,
             type
         })
-        metaDataToSave.save()
+        metaDataToSave.save().then(saved=>{
+            console.log( saved)
+        }).catch(err=>{
+
+        })
     })
 }
 
 
 postsControllers.createNewPost = (req, res) => {
-    res.end()
+    // res.end()
     const newPost = req.body.postData;
     metasSaver(newPost.tags)
     metasSaver(newPost.categories)
@@ -37,7 +41,10 @@ postsControllers.createNewPost = (req, res) => {
 postsControllers.updatePost = (req, res) => {
     const _id = req.body.id;
     postSchema.findByIdAndUpdate(req.body.postData._id, req.body.postData, { new: true }).exec().then(updated => {
-        console.log(_id, updated)
+        metasSaver(updated.tags)
+        metasSaver(updated.categories)
+        metasSaver(updated.actors)
+        console.log( updated)
         res.end()
     }).catch(err => {
         res.sendStatus(500);
