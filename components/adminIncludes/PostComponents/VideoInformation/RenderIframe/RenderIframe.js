@@ -1,26 +1,27 @@
-import React,{useEffect,useState,useContext,useRef} from 'react';
-import { AppContext } from "../../../../../context/AppContext";
+import React,{useEffect,useState} from 'react';
+
 const RenderIframe = props => {
-    const contextData = useContext(AppContext);
-    const iframeElement = useRef(null)
+
     const [state, setState] = useState({
+        open:false
     });
-    useEffect(()=>{
-        if (iframeElement.current){
-            iframeElement.current.src = contextData.editingPostData.videoEmbedCode
-        }
-    },[props]);
-    if (contextData.editingPostData.videoEmbedCode){
+
+    if (!state.open && props.postData.videoEmbedCode){
+        return(
+            <button onClick={()=>state.open ?setState({...state,open: false}):setState({...state,open: true})}>Preview Embed Video</button>
+        )
+    }else if (state.open && contextData.editingPostData.videoEmbedCode){
         return (
             <div className='VideoEmbedCode VideoInformationSection'>
+                <button onClick={()=>state.open ?setState({...state,open: false}):setState({...state,open: true})}>Hide Embed Video</button>
                 <div className="title">
                     <p>Video Iframe Preview</p>
                 </div>
                 <div className="editor">
-                        <iframe ref={iframeElement} />
+                    <iframe ref={props.postData.videoEmbedCode} />
                 </div>
             </div>
-        );
+        )
     }else return null
 
 };

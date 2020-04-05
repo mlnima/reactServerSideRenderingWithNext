@@ -18,53 +18,55 @@ const VideoInformation = props => {
         inSlideShow: false
     });
 
-    useEffect(() => {
-        console.log(state)
-    }, [ state ]);
-
     const onSaveChanges = () => {
         contextData.dispatchEditingPostData({ ...contextData.editingPostData, ...state })
     };
 
     const onchangeHandler = e => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        })
+        // setState({
+        //     ...state,
+        //     [e.target.name]: e.target.value
+        // })
     };
     const onDurationChangeHandler = (value) => {
+
         setState({
             ...state,
             duration: value
         })
     };
+
     const onIsInSlideShowChangeHandler = (e) => {
+
         setState({
             ...state,
             inSlideShow: e
         })
     };
 
-    if (contextData.editingPostData.postType === 'video') {
+    if (props.postData.postType === 'video') {
         return (
             <div className='VideoInformation'>
                 <div className="saveBtn">
                     <button className='SaveVideoDataBtn' onClick={ () => onSaveChanges() }>Save Video Data</button>
                 </div>
 
-                <IsInSlideShow onChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow }/>
-                <Quality onChangeHandler={ onchangeHandler }/>
-                <TextInputWithUploadBtn name='videoTrailerUrl' title='Video Url' onChangeHandler={ onchangeHandler }/>
-                <VideoEmbedCode name='videoEmbedCode' onChangeHandler={ onchangeHandler }/>
-                <RenderIframe/>
-                <Duration onDurationChangeHandler={ onDurationChangeHandler }/>
-                <ViewsLikesDisLikes name={ 'views' } value={state.views||0} onChangeHandler={ onchangeHandler }/>
-                <ViewsLikesDisLikes name={ 'likes' } value={state.likes||0} onChangeHandler={ onchangeHandler }/>
-                <ViewsLikesDisLikes name={ 'disLikes' } value={state.disLikes||0} onChangeHandler={ onchangeHandler }/>
-                <TextInputWithUploadBtn name='VideoTrailerUrl' title='Video Trailer Url' onChangeHandler={ onchangeHandler }/>
-                <TextInputWithUploadBtn name='mainThumbnail' title='Main thumbnail' onChangeHandler={ onchangeHandler }/>
-                <ImagePreview/>
-                <TextInput name='downloadLink' title='Download Link' onChangeHandler={ onchangeHandler }/>
+                <IsInSlideShow {...props} onChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow }/>
+
+
+
+                <Quality {...props} />
+                <TextInputWithUploadBtn {...props} name='videoTrailerUrl' title='Video Url' />
+                <VideoEmbedCode {...props} name='videoEmbedCode' />
+                <RenderIframe {...props}/>
+                <Duration {...props} onDurationChangeHandler={ onDurationChangeHandler }/>
+                <ViewsLikesDisLikes {...props} name={ 'views' } value={state.views||0} />
+                <ViewsLikesDisLikes {...props} name={ 'likes' } value={state.likes||0} />
+                <ViewsLikesDisLikes {...props} name={ 'disLikes' } value={state.disLikes||0} />
+                <TextInputWithUploadBtn {...props} name='VideoTrailerUrl' title='Video Trailer Url' />
+                <TextInputWithUploadBtn {...props} name='mainThumbnail' title='Main thumbnail' />
+                <ImagePreview {...props}/>
+                <TextInput {...props} name='downloadLink' title='Download Link' />
                 <div className="saveBtn">
                     <button className='SaveVideoDataBtn' onClick={ () => onSaveChanges() }>Save Video Data</button>
                 </div>

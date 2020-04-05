@@ -1,26 +1,6 @@
-import React, { useEffect, useState, useContext,useRef } from 'react';
-import { AppContext } from "../../../../../context/AppContext";
+import React from 'react';
 
 const Quality = props => {
-    const contextData = useContext(AppContext);
-
-    const qualityElement = useRef(null)
-    const [ state, setState ] = useState({
-        defaultValue: '240p'
-    });
-    useEffect(() => {
-        if (qualityElement.current){
-            qualityElement.current.value = contextData.editingPostData.quality || '720p'
-        }
-    }, [ contextData.editingPostData.quality ]);
-
-
-    const onChangeHandler =e=>{
-        contextData.dispatchEditingPostData({
-            ...contextData.editingPostData,
-            [e.target.name]:e.target.value
-        })
-    }
 
     return (
         <div className='Quality VideoInformationSection'>
@@ -29,7 +9,7 @@ const Quality = props => {
             </div>
             <div className="editor">
                 <div className="option">
-                    <select ref={qualityElement}  name='quality'  onChange={ e => onChangeHandler(e) }>
+                    <select defaultValue={props.postData.quality} name='quality' onChange={ e => props.onChangeHandler(e) }>
                         <option value='240p'>240p</option>
                         <option value='360p'>360p</option>
                         <option value='480p'>480p</option>
@@ -43,6 +23,7 @@ const Quality = props => {
             </div>
         </div>
     );
+
 };
 export default Quality;
 

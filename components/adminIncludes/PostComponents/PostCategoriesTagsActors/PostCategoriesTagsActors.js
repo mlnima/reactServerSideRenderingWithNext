@@ -9,37 +9,28 @@ const PostCategoriesTagsActors = props => {
 
 
     const deleteItem = (e) => {
-        contextData.dispatchEditingPostData({
-            ...contextData.editingPostData,
-            [props.type]: contextData.editingPostData[props.type].filter(i=> {return i!== e.currentTarget.name}),
+        const deletedItemFromType = props.postData[props.type].filter(i => {
+            return i !== e.currentTarget.name
         })
+        props.onPostMetaChangeHandler(props.type, deletedItemFromType)
     };
 
     const addNewItem = () => {
-        console.log(newItemsElement.current.value.includes(',') )
         if (newItemsElement.current.value.includes(',')) {
             let newItems = newItemsElement.current.value.split(',');
-            contextData.dispatchEditingPostData(editingPostData => ({
-                ...editingPostData,
-                [props.type]: [ ...contextData.editingPostData[props.type], ...newItems ]
-            }))
+            const addedItemFromType = [ ...props.postData[props.type], newItems ]
+            props.onPostMetaChangeHandler(props.type, addedItemFromType)
         } else {
-            // let newItems = contextData.editingPostData[props.type].push(newItemsElement.current.value);
-            //     newItems = [...contextData.editingPostData[props.type],newItemsElement.current.value];
-            // console.log( contextData.editingPostData[props.type],newItems)
-                contextData.dispatchEditingPostData({
-                    ...contextData.editingPostData,
-                    [props.type]:  [...contextData.editingPostData[props.type],newItemsElement.current.value]
-                })
+            const addedItemFromType = [ ...props.postData[props.type], newItemsElement.current.value ]
+            props.onPostMetaChangeHandler(props.type, addedItemFromType)
         }
     };
 
-    const addedItems = contextData.editingPostData[props.type].map(item => {
+    const addedItems = props.postData[props.type].map(item => {
         let icon = props.type === 'tags' ? 'tags'
             : props.type === 'actors' ? 'star'
                 : props.type === 'categories' ? 'folder'
                     : '';
-
         return (
             <div key={ item }  className='item'>
                 <p>{ item }</p>
@@ -55,9 +46,9 @@ const PostCategoriesTagsActors = props => {
                 <input ref={ newItemsElement } type='text'/>
                 <button onClick={ () => addNewItem() }> Add</button>
             </div>
-            <span>Separate tags with commas</span>
+            <span className='small-info'>Separate tags with commas</span>
             <div className="items">
-                { addedItems }
+             { addedItems }
             </div>
         </div>
     );

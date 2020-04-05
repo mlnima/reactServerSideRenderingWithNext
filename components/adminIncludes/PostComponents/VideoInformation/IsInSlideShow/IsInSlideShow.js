@@ -10,7 +10,7 @@ const IsInSlideShow = props => {
                 <p>Slide Show</p>
             </div>
             <div className="editor ">
-                <Switch onChange={ e => props.onChangeHandler(e) } checked={ props.isChecked }/>
+                <Switch name='inSlideShow' onChange={ e => props.onChangeHandler(e) } checked={ props.postData.inSlideShow }/>
             </div>
         </div>
     );

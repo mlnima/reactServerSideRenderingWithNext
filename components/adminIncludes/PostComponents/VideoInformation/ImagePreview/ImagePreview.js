@@ -1,21 +1,37 @@
-import React,{useEffect,useState,useContext} from 'react';
-import { AppContext } from "../../../../../context/AppContext";
+import React,{useState} from 'react';
+import Switch from "react-switch";
 const ImagePreview = props => {
-    const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-    });
-    useEffect(()=>{
-    },[]);
-    return (
-        <div className='ImagePreview VideoInformationSection'>
-            <div className="title">
+
+    const [state,setState]= useState({
+        open:false
+    })
+
+
+    if (props.postData.mainThumbnail){
+
+        if (state.open){
+            return (
+                <div className='ImagePreview VideoInformationSection'>
+                    <p>Image Preview</p>
+                    <Switch onChange={()=>state.open ?setState({...state,open: false}):setState({...state,open: true}) } checked={ props.isChecked }/>
+                    <div className="title">
+
+                    </div>
+                    <div className="editor">
+                        <img src={props.postData.mainThumbnail}/>
+                    </div>
+                </div>
+            );
+        }else return (
+            <>
                 <p>Image Preview</p>
-            </div>
-            <div className="editor">
-                <img src={contextData.editingPostData.mainThumbnail}/>
-                {/*<textarea ref={element} className='textareaInput' name={ props.name } onChange={e=>props.onChangeHandler(e)}/>*/}
-            </div>
-        </div>
-    );
+            <Switch onChange={ ()=>state.open ?setState({...state,open: false}):setState({...state,open: true}) } checked={ props.isChecked }/>
+            </>
+        )
+
+
+
+    }else return null
+
 };
 export default ImagePreview;

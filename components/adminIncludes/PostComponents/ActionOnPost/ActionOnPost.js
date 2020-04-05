@@ -14,56 +14,41 @@ const ActionOnPost = props => {
     }, []);
 
     const onSaveHandler = () => {
-        console.log(props)
         contextData.dispatchState({
             ...contextData.state,
             loading: true
         })
-        if (contextData.editingPostData._id) {
+        if (props.postData._id) {
             // contextData.functions.updatePost(contextData.editingPostData)
-            updatePost(contextData.editingPostData, window.location.origin).then(() => {
+            updatePost(props.postData, window.location.origin).then(() => {
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 })
-            }).catch(() => {
+            }).catch(err => {
+                console.log( err)
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 })
             })
         } else {
-            savePost(contextData.editingPostData, window.location.origin).then(() => {
+            savePost(props.postData, window.location.origin).then(() => {
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 })
-            }).catch(() => {
+            }).catch(err => {
+                console.log( err)
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 })
             })
-            // contextData.functions.savePosts(contextData.editingPostData).then(()=>{
-            //     contextData.dispatchState({
-            //         ...contextData.state,
-            //         loading:false
-            //     })
-            // }).catch(()=>{
-            //     contextData.dispatchState({
-            //         ...contextData.state,
-            //         loading:false
-            //     })
-            // })
         }
     };
 
-    const onStatusChangeHandler = e => {
-        contextData.dispatchEditingPostData(editingPostData => ({
-            ...editingPostData,
-            status: e.target.value
-        }))
-    };
+
 
     return (
         <div className='ActionOnPost'>
@@ -72,9 +57,9 @@ const ActionOnPost = props => {
                 <button className='previewBtn'>Preview</button>
             </div>
             <div className='ActionOnPostItem'>
-                <p><FA className='fontawesomeMedium' name='key'/> Status:{ contextData.editingPostData.status }</p>
-                <select defaultValue={ contextData.editingPostData.status ? contextData.editingPostData.status : 'draft' } onChange={ e => onStatusChangeHandler(e) }>
-                    <option value={ contextData.editingPostData.status }>{ contextData.editingPostData.status.charAt(0).toUpperCase() + contextData.editingPostData.status.slice(1) }</option>
+                <p><FA className='fontawesomeMedium' name='key'/> Status:{ props.postData.status }</p>
+                <select name='status' value={ props.postData.status } onChange={ e => props.onChangeHandler(e) }>
+                    {/*<option value={ contextData.editingPostData.status }>{ contextData.editingPostData.status.charAt(0).toUpperCase() + contextData.editingPostData.status.slice(1) }</option>*/}
                     <option value='published'>Published</option>
                     <option value='draft'>Draft</option>
                     <option value='trash'>Trash</option>
