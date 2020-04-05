@@ -14,6 +14,7 @@ const Home = props => {
 
     const [ state, setState ] = useState({
         style: {}
+
     });
 
     useEffect(() => {

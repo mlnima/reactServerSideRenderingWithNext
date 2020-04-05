@@ -9,6 +9,14 @@ export const updateSetting = async (type, data) => {
     return await axios.post(window.location.origin + '/api/v1/settings/update', body)
 };
 
+export const saveCustomStyle = async (data) => {
+    const body = {
+        token: localStorage.wt,
+        data
+    };
+    return await axios.post(window.location.origin + '/api/v1/settings/saveCustomStyle', body)
+};
+
 
 export const getSetting = async (type, cache, domainName) => {
 

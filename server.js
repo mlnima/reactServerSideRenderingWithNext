@@ -93,6 +93,8 @@ app.prepare().then(()=>{
     server.post('/api/v1/settings/getWidgetsWithData',(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
     server.post('/api/v1/settings/updateWidget',(req,res)=>{settingsControllers.updateWidget(req,res)});
     server.post('/api/v1/settings/deleteWidget',(req,res)=>{settingsControllers.deleteWidget(req,res)});
+    server.post('/api/v1/settings/saveCustomStyle',(req,res)=>{settingsControllers.saveCustomStyle(req,res)});
+
 
 
 

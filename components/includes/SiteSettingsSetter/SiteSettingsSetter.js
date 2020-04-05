@@ -7,7 +7,7 @@ const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
         title: props.identity.data.title || '',
-        themeColor: props.identity.data.themeColor || '',
+        themeColor: props.design.data.themeColor || '',
         description: props.identity.data.description || '',
         keywords: props.identity.data.keywords || [],
         homePageH1: props.identity.data.homePageH1 || 'H1 element'
@@ -42,6 +42,7 @@ const SiteSettingSetter = props => {
             <meta name="keywords" content={ state.keywords }/>
             <link rel="icon" href="/favicon.ico"/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
+            <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
         </Head>
     )
 };

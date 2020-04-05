@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from "../../../components/layouts/AdminLayout";
 
-import { getSetting, updateSetting } from '../../../_variables/ajaxVariables'
+import { saveCustomStyle, getSetting, updateSetting } from '../../../_variables/ajaxVariables'
 import './design.scss'
 import { AppContext } from '../../../context/AppContext'
 import { getAbsolutePath } from '../../../_variables/_variables'
@@ -12,6 +12,10 @@ const design = props => {
         //body
         bodyBackgroundColor: props.design.bodyBackgroundColor || '#000',
         bodyTextColor: props.design.bodyTextColor || '#fff',
+        //homePageH1
+        homePageH1: props.design.homePageH1 || '#000',
+        //mobile theme
+        themeColor: props.design.themeColor || '#fff',
         //top bar
         topBarBackgroundColor: props.design.topBarBackgroundColor || '#181818',
         topBarTextColor: props.design.topBarTextColor || '#fff',
@@ -33,13 +37,24 @@ const design = props => {
         widgetBodyTextColor: props.design.widgetBodyTextColor || '#fff',
         widgetBodyBorder: props.design.widgetBodyBorder || 'none',
         //comments
-        commentsAuthorTextColor:'',
-        commentsDateTextColor:'',
-        commentsBodyTextColor:'',
-        commentsBackgroundColor:'',
+        commentsAuthorTextColor: '',
+        commentsDateTextColor: '',
+        commentsBodyTextColor: '',
+        commentsBackgroundColor: '',
 
     });
+    const [ customStyle, setCustomStyle ] = useState( '')
 
+    useEffect(() => {
+        console.log( props)
+        if(props.customStyles.data){
+            setCustomStyle(props.customStyles.data)
+        }
+    }, [props]);
+
+    useEffect(() => {
+        console.log( customStyle)
+    }, [customStyle]);
 
     const onChangeHandler = e => {
         setColors({
@@ -47,22 +62,24 @@ const design = props => {
             [e.target.name]: e.target.value
         })
     }
+
     const onSubmitHandler = e => {
         e.preventDefault()
         contextData.dispatchState({
             ...contextData.state,
             loading: true
         })
-        updateSetting('design', {...colors}).then(() => {
+        updateSetting('design', { ...colors }).then(() => {
             contextData.dispatchState({
                 ...contextData.state,
                 loading: false
             })
         })
     };
+
     const renderColorsFields = Object.keys(colors).map(element => {
         return (
-            <div key={element} className="adminDesignSection">
+            <div key={ element } className="adminDesignSection">
                 <div className="adminDesignSectionItems">
                     <div className="adminDesignSectionItem">
                         <p className='adminDesignSectionItemTitle'>{ element.replace(/([A-Z])/g, " $1") } :</p>
@@ -74,23 +91,52 @@ const design = props => {
         )
     })
 
+
+    const onCustomStyleSaveHandler = e => {
+        e.preventDefault()
+        contextData.dispatchState({
+            ...contextData.state,
+            loading: true
+        })
+        saveCustomStyle( customStyle ).then(() => {
+            contextData.dispatchState({
+                ...contextData.state,
+                loading: false
+            })
+        })
+    }
+
+    const onCustomStyleChangeHandler = e => {
+        setCustomStyle(e.target.value)
+    }
+
     return (
         <AdminLayout>
             <form className='adminDesign' onSubmit={ e => onSubmitHandler(e) }>
+
                 <div className='colorsContent'>
                     { renderColorsFields }
                 </div>
-                <button className='submitBtn' type='submit'>save settings</button>
+                <button className='submitBtn' type='submit'>Save Colors</button>
+            </form>
+
+            <form className='customStyle' onSubmit={ e => onCustomStyleSaveHandler(e) }>
+                <textarea value={  customStyle } onChange={ e => onCustomStyleChangeHandler(e) }/>
+                <button className='submitBtn' type='submit'>Save Custom Style</button>
             </form>
         </AdminLayout>
     );
 };
 
-design.getInitialProps = async ({req}) => {
+design.getInitialProps = async ({ req }) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let design;
-    const designData = await getSetting('design',false,domainName);
+    let customStyles;
+    const designData = await getSetting('design', false, domainName);
+    const customStylesData = await getSetting('customStyle', false, domainName);
+
     design = designData.data.setting ? designData.data.setting.data : {}
-    return { design }
+    customStyles = customStylesData.data.setting ? customStylesData.data.setting : {}
+    return { design, customStyles }
 }
 export default design;

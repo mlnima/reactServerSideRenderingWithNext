@@ -1,7 +1,10 @@
 const settingSchema = require('../models/settings/settingSchema')
 const widgetSchema = require('../models/settings/widgetSchema')
 const postSchema = require('../models/postSchema')
-const commentSchema= require('../models/commentSchema')
+const commentSchema = require('../models/commentSchema')
+const fs = require('fs')
+const fsExtra = require('fs-extra')
+
 const mongoose = require('mongoose')
 let settingsControllers = {}
 
@@ -9,7 +12,7 @@ settingsControllers.update = (req, res) => {
     const type = req.body.type;
     const data = req.body.data;
     settingSchema.findOneAndUpdate({ type: type }, { data }, { new: true }).exec().then(setting => {
-        console.log('setting:', setting)
+        // console.log('setting:', setting)
         if (!setting) {
             const dataToSave = new settingSchema({
                 type: req.body.type,
@@ -37,26 +40,23 @@ settingsControllers.get = async (req, res) => {
 };
 settingsControllers.getMultiple = async (req, res) => {
     const requestedSetting = req.body.settings
-    const settingRequestPromises = requestedSetting.map( async setting=>{
+    const settingRequestPromises = requestedSetting.map(async setting => {
         return await settingSchema.findOne({ type: setting }).exec()
     })
-    Promise.all(settingRequestPromises).then(async settings=>{
-        let finalObject ={}
-        settings.forEach( setting=>{
-            if (setting){
-                finalObject[setting.type]=setting
+    Promise.all(settingRequestPromises).then(async settings => {
+        let finalObject = {}
+        settings.forEach(setting => {
+            if (setting) {
+                finalObject[setting.type] = setting
             }
         })
-        res.json({ settings:finalObject })
+        res.json({ settings: finalObject })
         res.end()
-    }).catch(err=>{
-        console.log( err)
+    }).catch(err => {
+        console.log(err)
         res.end()
     })
 };
-
-
-
 
 settingsControllers.create = (req, res) => {
     const dataToSave = new settingSchema({
@@ -84,28 +84,27 @@ settingsControllers.getWidget = (req, res) => {
     widgetSchema.find(position).exec().then(widgets => {
         res.json({ widgets })
         res.end()
-    }).catch(err=>{
-        console.log( err)
+    }).catch(err => {
+        console.log(err)
         res.end()
     })
 }
 
-
 settingsControllers.getWidgetsWithData = (req, res) => {
-    const position = req.body.position === 'all' ? {} : { position : req.body.position };
+    const position = req.body.position === 'all' ? {} : { position: req.body.position };
     widgetSchema.find(position).exec().then(async widgets => {
         const mapWidget = widgets.map(async widget => {
             let finalData = {
-                _id:widget._id,
+                _id: widget._id,
                 title: widget.title,
                 categories: widget.categories,
                 tags: widget.tags,
                 pagination: widget.pagination,
                 redirectLink: widget.redirectLink,
-                redirectToTitle:widget.redirectToTitle,
+                redirectToTitle: widget.redirectToTitle,
                 count: widget.count,
                 type: widget.type,
-                position:widget.position,
+                position: widget.position,
                 posts: [],
                 sortBy: widget.sortBy,
                 text: widget.text,
@@ -113,7 +112,7 @@ settingsControllers.getWidgetsWithData = (req, res) => {
                 customHtml: widget.customHtml
             }
 
-            const sortMethod = finalData.sortBy ? {[finalData.sortBy]:-1} : '-_id'
+            const sortMethod = finalData.sortBy ? { [finalData.sortBy]: -1 } : '-_id'
 
             if (finalData.type === 'posts') {
                 await postSchema.find({}).limit(widget.count).sort(sortMethod).exec().then(posts => {
@@ -134,17 +133,17 @@ settingsControllers.getWidgetsWithData = (req, res) => {
 settingsControllers.getMultipleWidgetWithData = async (req, res) => {
 
     const requestedWidgets = req.body.widgets
-    const widgetRequestPromises = requestedWidgets.map( async widgetsPosition=>{
-        return await widgetSchema.find({position:widgetsPosition}).exec()
+    const widgetRequestPromises = requestedWidgets.map(async widgetsPosition => {
+        return await widgetSchema.find({ position: widgetsPosition }).exec()
     })
-    Promise.all(widgetRequestPromises).then(async widgets=>{
+    Promise.all(widgetRequestPromises).then(async widgets => {
         let finalData = []
-       await widgets.forEach(widgetList=>{
-            finalData=[...finalData,...widgetList]
+        await widgets.forEach(widgetList => {
+            finalData = [ ...finalData, ...widgetList ]
         })
 
         const mapWidget = finalData.map(async widget => {
-            const sortMethod = widget.sortBy ? {[widget.sortBy]:-1} : '-_id'
+            const sortMethod = widget.sortBy ? { [widget.sortBy]: -1 } : '-_id'
             // if (finalData.type === 'posts') {
             //     await postSchema.find({}).limit(widget.count).sort(sortMethod).exec().then(posts => {
             //         finalData.posts = posts
@@ -199,22 +198,21 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
             }
         })
 
-        Promise.all(mapWidget).then(widgetsWithData=>{
+        Promise.all(mapWidget).then(widgetsWithData => {
             res.json({ widgets: widgetsWithData })
             res.end()
-        }).catch(err=>{
-            console.log( err)
+        }).catch(err => {
+            console.log(err)
             res.end()
         })
 
         // res.json({ widgets: await Promise.all(mapWidget) })
         // res.end()
-    }).catch(err=>{
-        console.log( err)
+    }).catch(err => {
+        console.log(err)
         res.end()
     })
 }
-
 
 //__________________________________________________________________________________________
 settingsControllers.deleteWidget = (req, res) => {
@@ -236,5 +234,45 @@ settingsControllers.updateWidget = (req, res) => {
         console.log(err)
     })
 }
+
+settingsControllers.saveCustomStyle = (req, res) => {
+    const data = req.body.data;
+    const path = './static/style-sheet/customStyle.css'
+console.log( req.body)
+    settingSchema.findOneAndUpdate({ type:'customStyle' }, { data }, { new: true }).exec().then(styles=>{
+
+
+        if (!styles){
+            const dataToSave = new settingSchema({
+                type: 'customStyle',
+                data: req.body.data
+            });
+
+            dataToSave.save().then(savedData=>{
+                fsExtra.writeFile(path, styles.data,'utf8', (error, files) => {
+                    if (error){
+                        console.log( error)
+                    }
+                    console.log( 'scss file updated')
+                })
+                console.log( 'saved')
+                res.end()
+            }).catch(err=>{
+                console.log( err)
+                res.end()
+            })
+        }else {
+            fsExtra.writeFile(path, styles.data,'utf8', (error, files) => {
+                if (error){
+                    console.log( error)
+                }
+                console.log( 'scss file updated')
+            })
+        }
+        res.end()
+    })
+
+}
+
 
 module.exports = settingsControllers
