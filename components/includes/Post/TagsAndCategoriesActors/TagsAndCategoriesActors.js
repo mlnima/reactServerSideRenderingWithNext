@@ -50,7 +50,7 @@ const TagsAndCategoriesActors = props => {
                 : state.type === 'actors' ? StarSvg
                     : TagSvg
         return (
-            <div className='post-meta-item'>
+            <div key={item} className='post-meta-item'>
                 <img className='fontawesomeSvgSmall' src={ icon } alt=""/>
                 <Link href={ path } key={ item }><a className={ state.type }>{ item }</a></Link>
             </div>

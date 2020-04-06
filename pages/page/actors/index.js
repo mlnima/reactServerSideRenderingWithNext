@@ -25,7 +25,6 @@ const actors = props => {
     })
 
     useEffect(() => {
-        console.log(props)
         if (props.identity.actorsPageSidebar) {
             setState({
                 style: {
@@ -33,8 +32,8 @@ const actors = props => {
                 }
             })
         }
-
     }, [ props ]);
+
     return (
         <>
             <AppLayout>

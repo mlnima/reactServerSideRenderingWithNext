@@ -1,4 +1,5 @@
 import React from 'react';
+import { DelayInput } from 'react-delay-input'
 
 const TextInput = props => {
     return (
@@ -7,7 +8,8 @@ const TextInput = props => {
                 <p>{ props.name }</p>
             </div>
             <div className="editor">
-                <input className='TextInput' name={ props.name } value={ props.postData[props.name] } onBlur={ e => props.onChangeHandler(e) }/>
+                {/*<input className='TextInput' name={ props.name } value={ props.postData[props.name] } onBlur={ e => props.onChangeHandler(e) }/>*/}
+                <DelayInput className='TextInput' name={ props.name } value={ props.postData[props.name] } delayTimeout={1000} onChange={e => props.onChangeHandler(e)}/>
             </div>
         </div>
     );

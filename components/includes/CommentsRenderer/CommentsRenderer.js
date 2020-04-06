@@ -30,7 +30,7 @@ const CommentsRenderer = props => {
 
     const renderComments = props.comments.map(comment => {
         return (
-            <div style={ state.style } className='comments-item'>
+            <div key={comment.postedDate } style={ state.style } className='comments-item'>
                 <p style={ state.authorStyle } className='comment-author'>{ comment.author } says:</p>
                 <p style={ state.dateStyle } className='comment-date'>{ comment.postedDate }</p>
                 <p style={ state.bodyStyle } className='comment-body'>{ comment.body }</p>

@@ -1,5 +1,6 @@
 import React from 'react';
 import './VideoEmbedCode.scss';
+import { DelayInput } from 'react-delay-input'
 
 const VideoEmbedCode = props => {
 
@@ -9,7 +10,8 @@ const VideoEmbedCode = props => {
                     <p>Video Embed Code</p>
                 </div>
                 <div className="editor">
-                    <textarea value={props.postData.videoEmbedCode}  className='textareaInput' name='videoEmbedCode' onChange={e=>props.onChangeHandler(e)}/>
+                    <DelayInput element="textarea" className='textareaInput' name='videoEmbedCode' value={props.postData.videoEmbedCode} delayTimeout={1000} onChange={e => props.onChangeHandler(e)}/>
+                    {/*<textarea value={props.postData.videoEmbedCode}  className='textareaInput' name='videoEmbedCode' onChange={e=>props.onChangeHandler(e)}/>*/}
                 </div>
             </div>
         );

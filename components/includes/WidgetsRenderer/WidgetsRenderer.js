@@ -4,11 +4,7 @@ import Posts from '../Posts/Posts'
 import RecentComments from '../RecentComments/RecentComments'
 
 const WidgetsRenderer = props => {
-    const [ state, setState ] = useState({});
 
-    useEffect(() => {
-        console.log( props)
-    }, []);
     const renderWidgets = props.widgets.filter(widget => widget.position === props.position).map(widget => {
         switch ( widget.type ) {
             case 'posts':

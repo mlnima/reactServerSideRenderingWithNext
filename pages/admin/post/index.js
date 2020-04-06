@@ -18,7 +18,8 @@ const Index = props => {
     const [ state, setState ] = useState({
         tags:[],
         categories:[],
-        actors:[]
+        actors:[],
+        inSlideShow:false
     })
 
     const onChangeHandler = e => {
@@ -36,14 +37,8 @@ const Index = props => {
     }
 
     useEffect(() => {
-        // contextData.dispatchEditingPostData({ ...contextData.editingPostData, ...props.post })
         setState(props.post)
     }, []);
-
-    useEffect(() => {
-        console.log( props)
-        console.log( state)
-    }, [props,state]);
 
     return (
         <>

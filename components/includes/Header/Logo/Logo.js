@@ -12,7 +12,6 @@ const Logo = () => {
     });
 
     useEffect(() => {
-        console.log( contextData.siteIdentity)
         setState({
             ...state,
             logoText: contextData.siteIdentity.logoText,

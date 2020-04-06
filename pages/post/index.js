@@ -22,7 +22,6 @@ const Post = props => {
     })
 
     useEffect(() => {
-        console.log(props)
         if (props.identity.postPageSidebar) {
             setState({
                 style: {
@@ -30,7 +29,6 @@ const Post = props => {
                 }
             })
         }
-
     }, [ props ]);
 
     const RenderMeta = () => {

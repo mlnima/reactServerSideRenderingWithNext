@@ -22,12 +22,6 @@ const VideoInformation = props => {
         contextData.dispatchEditingPostData({ ...contextData.editingPostData, ...state })
     };
 
-    const onchangeHandler = e => {
-        // setState({
-        //     ...state,
-        //     [e.target.name]: e.target.value
-        // })
-    };
     const onDurationChangeHandler = (value) => {
 
         setState({
@@ -51,10 +45,7 @@ const VideoInformation = props => {
                     <button className='SaveVideoDataBtn' onClick={ () => onSaveChanges() }>Save Video Data</button>
                 </div>
 
-                <IsInSlideShow {...props} onChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow }/>
-
-
-
+                <IsInSlideShow {...props} onIsInSlideShowChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow }/>
                 <Quality {...props} />
                 <TextInputWithUploadBtn {...props} name='videoTrailerUrl' title='Video Url' />
                 <VideoEmbedCode {...props} name='videoEmbedCode' />

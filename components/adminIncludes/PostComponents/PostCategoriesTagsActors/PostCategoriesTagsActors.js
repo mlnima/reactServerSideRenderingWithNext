@@ -1,12 +1,9 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useRef } from 'react';
 import { AppContext } from "../../../../context/AppContext";
 import FA from "react-fontawesome";
 
 const PostCategoriesTagsActors = props => {
-    const contextData = useContext(AppContext);
-    const [ items, setItems ] = useState([]);
     let newItemsElement = useRef(null);
-
 
     const deleteItem = (e) => {
         const deletedItemFromType = props.postData[props.type].filter(i => {
@@ -18,7 +15,7 @@ const PostCategoriesTagsActors = props => {
     const addNewItem = () => {
         if (newItemsElement.current.value.includes(',')) {
             let newItems = newItemsElement.current.value.split(',');
-            const addedItemFromType = [ ...props.postData[props.type], newItems ]
+            const addedItemFromType = [ ...props.postData[props.type], ...newItems ]
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
         } else {
             const addedItemFromType = [ ...props.postData[props.type], newItemsElement.current.value ]
@@ -32,10 +29,10 @@ const PostCategoriesTagsActors = props => {
                 : props.type === 'categories' ? 'folder'
                     : '';
         return (
-            <div key={ item }  className='item'>
+            <div key={ item } className='item'>
                 <p>{ item }</p>
 
-                <button name={ item } onClick={ (e) => deleteItem(e) } ><FA className='fontawesomeMedium' name='times'/></button>
+                <button name={ item } onClick={ (e) => deleteItem(e) }><FA className='fontawesomeMedium' name='times'/></button>
             </div>
         )
     });
@@ -48,7 +45,7 @@ const PostCategoriesTagsActors = props => {
             </div>
             <span className='small-info'>Separate tags with commas</span>
             <div className="items">
-             { addedItems }
+                { addedItems }
             </div>
         </div>
     );

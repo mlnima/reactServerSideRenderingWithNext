@@ -8,9 +8,9 @@ const CommentFrom = props => {
         email:'',
         onDocument: props.documentId
     });
-    useEffect(() => {
-        console.log( props)
-    }, [props]);
+    // useEffect(() => {
+    //     console.log( props)
+    // }, [props]);
 
     const onChangeHandler = e =>{
         setState({
@@ -23,7 +23,7 @@ const CommentFrom = props => {
         e.preventDefault()
         if (state.onDocument){
             newComment(state).then(res=>{
-                console.log( res)
+                // console.log( res)
             }).catch(err=>{
                 console.log( err)
             })

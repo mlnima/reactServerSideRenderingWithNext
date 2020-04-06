@@ -18,7 +18,6 @@ const Home = props => {
     });
 
     useEffect(() => {
-        console.log( props)
         if (props.identity.data.homePageSidebar) {
             setState({
                 style: {
@@ -28,11 +27,7 @@ const Home = props => {
         }
     }, [ props ]);
 
-    useEffect(() => {
-        if (!props.identity){
-            React.cloneElement(props,{name:'test'})
-        }
-    }, []);
+
 
     return (
         <>
