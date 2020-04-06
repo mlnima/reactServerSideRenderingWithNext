@@ -1,5 +1,6 @@
 import React,{useState} from 'react';
 import Switch from "react-switch";
+import './ImagePreview.scss'
 const ImagePreview = props => {
 
     const [state,setState]= useState({

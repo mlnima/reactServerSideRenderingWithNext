@@ -33,13 +33,21 @@ const ActionOnPost = props => {
                 })
             })
         } else {
-            savePost(props.postData, window.location.origin).then(() => {
+            savePost(props.postData, window.location.origin).then(res => {
+
+                props.router.push('/admin/post?id='+res.data.savedPostData._id)
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 })
             }).catch(err => {
-                console.log( err)
+
+                contextData.dispatchAlert({
+                    ...contextData.alert,
+                    active: true,
+                    alertMessage: err.response.data.error,
+                    type: 'error'
+                })
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
@@ -53,13 +61,10 @@ const ActionOnPost = props => {
     return (
         <div className='ActionOnPost'>
             <div className='ActionOnPostItem'>
-                <button className='saveDraftBtn'>Save Draft</button>
                 <button className='previewBtn'>Preview</button>
             </div>
             <div className='ActionOnPostItem'>
-                <p><FA className='fontawesomeMedium' name='key'/> Status:{ props.postData.status }</p>
                 <select name='status' value={ props.postData.status } onChange={ e => props.onChangeHandler(e) }>
-                    {/*<option value={ contextData.editingPostData.status }>{ contextData.editingPostData.status.charAt(0).toUpperCase() + contextData.editingPostData.status.slice(1) }</option>*/}
                     <option value='published'>Published</option>
                     <option value='draft'>Draft</option>
                     <option value='trash'>Trash</option>

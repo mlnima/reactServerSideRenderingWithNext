@@ -136,6 +136,14 @@ const AppProvider = props => {
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     loading: false,
     videoPreviewID: ''
+  });
+  const {
+    0: alert,
+    1: dispatchAlert
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    active: false,
+    alertMessage: '',
+    type: ''
   }); // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
 
   const {
@@ -357,7 +365,9 @@ const AppProvider = props => {
       widgetsSettings,
       dispatchWidgetsSettings,
       siteDesign,
-      dispatchSiteDesign
+      dispatchSiteDesign,
+      alert,
+      dispatchAlert
     }
   }, props.children));
 };

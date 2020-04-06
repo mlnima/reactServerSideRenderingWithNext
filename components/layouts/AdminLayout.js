@@ -7,6 +7,7 @@ import { AppContext } from "../../context/AppContext";
 import { withRouter } from "next/router";
 import Loading from "../includes/Loading/Loading";
 import { generateAbsolutePath } from '../../_variables/_variables'
+import AlertBox from '../includes/AlertBox/AlertBox'
 
 const Panel = props => {
     const contextData = useContext(AppContext);
@@ -39,6 +40,7 @@ const Panel = props => {
                 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>
                 <link rel="icon" href="/favicon.ico"/>
             </Head>
+            <AlertBox/>
             <div ref={ container } className="container">
                 <TopBar/>
                 <SideBar/>

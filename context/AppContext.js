@@ -11,8 +11,13 @@ const AppProvider = props => {
 
     const [ state, dispatchState ] = useState({
         loading: false,
-        videoPreviewID: ''
+        videoPreviewID: '',
     });
+    const [ alert, dispatchAlert ] = useState({
+        active: false,
+        alertMessage: '',
+        type: ''
+    })
 
     // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
     const [ siteIdentity, dispatchSiteIdentity ] = useState({
@@ -21,17 +26,15 @@ const AppProvider = props => {
         description: 'site description',
         keywords: []
     });
-    const [ siteDesign, dispatchSiteDesign ] = useState({
-
-    });
+    const [ siteDesign, dispatchSiteDesign ] = useState({});
     const [ settings, dispatchSettings ] = useState({
         adminPanelSideBar: false,
-        textEditorCurrentFile:'',
-        textEditorEditMode:false
+        textEditorCurrentFile: '',
+        textEditorEditMode: false
     });
 
-    const [galleryData,setGalleryData] = useState({
-        path:'./static'
+    const [ galleryData, setGalleryData ] = useState({
+        path: './static'
     })
 
     const [ userData, dispatchUserData ] = useState({});
@@ -213,7 +216,8 @@ const AppProvider = props => {
                     dispatchWidgetsSettings,
                     siteDesign,
                     dispatchSiteDesign,
-
+                    alert,
+                    dispatchAlert
                 } }>
 
                 { props.children }

@@ -40,10 +40,14 @@
     width: 100%;
     display: flex;justify-content: center;
     background-color: $light100;
+
     button{
       @include AdminLightBtn;
 
     }
+    //*{
+    //  margin: 5px 0;
+    //}
   }
 }
 

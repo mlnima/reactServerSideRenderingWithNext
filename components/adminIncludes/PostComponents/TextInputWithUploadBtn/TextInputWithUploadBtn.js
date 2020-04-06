@@ -1,5 +1,6 @@
 import React from 'react';
-import { DelayInput } from 'react-delay-input'
+import { DelayInput } from 'react-delay-input';
+import './TextInputWithUploadBtn.scss'
 
 const TextInputWithUploadBtn = props => {
 

@@ -20,6 +20,7 @@
     }
     select{
       @include AdminSelect;
+      margin: 10px 0;
     }
     .SaveBtn {
       @include AdminBluetBtn;
@@ -32,4 +33,6 @@
       }
     }
   }
+
+
 }

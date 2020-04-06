@@ -45,45 +45,53 @@ var AppProvider = function AppProvider(props) {
     videoPreviewID: ''
   }),
       state = _useState[0],
-      dispatchState = _useState[1]; // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
-
+      dispatchState = _useState[1];
 
   var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+    active: false,
+    alertMessage: '',
+    type: ''
+  }),
+      alert = _useState2[0],
+      dispatchAlert = _useState2[1]; // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
+
+
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     title: 'site title',
     themeColor: '#000',
     description: 'site description',
     keywords: []
   }),
-      siteIdentity = _useState2[0],
-      dispatchSiteIdentity = _useState2[1];
+      siteIdentity = _useState3[0],
+      dispatchSiteIdentity = _useState3[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
-      siteDesign = _useState3[0],
-      dispatchSiteDesign = _useState3[1];
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
+      siteDesign = _useState4[0],
+      dispatchSiteDesign = _useState4[1];
 
-  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     adminPanelSideBar: false,
     textEditorCurrentFile: '',
     textEditorEditMode: false
   }),
-      settings = _useState4[0],
-      dispatchSettings = _useState4[1];
+      settings = _useState5[0],
+      dispatchSettings = _useState5[1];
 
-  var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     path: './static'
   }),
-      galleryData = _useState5[0],
-      setGalleryData = _useState5[1];
+      galleryData = _useState6[0],
+      setGalleryData = _useState6[1];
 
-  var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
-      userData = _useState6[0],
-      dispatchUserData = _useState6[1];
+  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
+      userData = _useState7[0],
+      dispatchUserData = _useState7[1];
 
-  var _useState7 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
-      navigationData = _useState7[0],
-      dispatchNavigationData = _useState7[1];
+  var _useState8 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
+      navigationData = _useState8[0],
+      dispatchNavigationData = _useState8[1];
 
-  var _useState8 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     categories: [],
     actors: [],
     tags: [],
@@ -101,14 +109,14 @@ var AppProvider = function AppProvider(props) {
     sourceSite: '',
     views: 0
   }),
-      editingPostData = _useState8[0],
-      dispatchEditingPostData = _useState8[1];
+      editingPostData = _useState9[0],
+      dispatchEditingPostData = _useState9[1];
 
-  var _useState9 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
-      adminPosts = _useState9[0],
-      dispatchAdminPosts = _useState9[1];
+  var _useState10 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
+      adminPosts = _useState10[0],
+      dispatchAdminPosts = _useState10[1];
 
-  var _useState10 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     pageNo: 1,
     size: 30,
     totalPosts: 0,
@@ -119,20 +127,20 @@ var AppProvider = function AppProvider(props) {
     fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
     checkedPosts: []
   }),
-      adminPostsData = _useState10[0],
-      dispatchAdminPostsData = _useState10[1];
+      adminPostsData = _useState11[0],
+      dispatchAdminPostsData = _useState11[1];
 
-  var _useState11 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var _useState12 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     widgets: []
   }),
-      widgetsSettings = _useState11[0],
-      dispatchWidgetsSettings = _useState11[1];
+      widgetsSettings = _useState12[0],
+      dispatchWidgetsSettings = _useState12[1];
 
-  var _useState12 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
-      Posts = _useState12[0],
-      dispatchPosts = _useState12[1];
+  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
+      Posts = _useState13[0],
+      dispatchPosts = _useState13[1];
 
-  var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var _useState14 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     pageNo: 1,
     size: 12,
     totalPosts: 0,
@@ -143,10 +151,10 @@ var AppProvider = function AppProvider(props) {
     fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
     checkedPosts: []
   }),
-      videoPostsDataForClient = _useState13[0],
-      dispatchVideoPostsDataForClient = _useState13[1];
+      videoPostsDataForClient = _useState14[0],
+      dispatchVideoPostsDataForClient = _useState14[1];
 
-  var _useState14 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var _useState15 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     getAndSetUserInfo: function getAndSetUserInfo() {
       return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function getAndSetUserInfo$(_context) {
         while (1) {
@@ -297,8 +305,8 @@ var AppProvider = function AppProvider(props) {
       return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/v1/posts/deletePost', body);
     }
   }),
-      functions = _useState14[0],
-      dispatchFunctions = _useState14[1];
+      functions = _useState15[0],
+      dispatchFunctions = _useState15[1];
 
   Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
     functions.getAndSetUserInfo();
@@ -337,7 +345,9 @@ var AppProvider = function AppProvider(props) {
       widgetsSettings: widgetsSettings,
       dispatchWidgetsSettings: dispatchWidgetsSettings,
       siteDesign: siteDesign,
-      dispatchSiteDesign: dispatchSiteDesign
+      dispatchSiteDesign: dispatchSiteDesign,
+      alert: alert,
+      dispatchAlert: dispatchAlert
     }
   }, props.children));
 };

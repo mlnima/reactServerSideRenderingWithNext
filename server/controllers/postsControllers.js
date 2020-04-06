@@ -3,21 +3,19 @@ const postSchema = require('../models/postSchema');
 const metaSchema = require('../models/metaSchema');
 const commentSchema = require('../models/commentSchema');
 
-
-const metasSaver = (metas,type)=>{
-    metas.forEach(meta=>{
+const metasSaver = (metas, type) => {
+    metas.forEach(meta => {
         const metaDataToSave = new metaSchema({
-            name:meta,
+            name: meta,
             type
         })
-        metaDataToSave.save().then(saved=>{
-            console.log( saved)
-        }).catch(err=>{
+        metaDataToSave.save().then(saved => {
+            console.log(saved)
+        }).catch(err => {
 
         })
     })
 }
-
 
 postsControllers.createNewPost = (req, res) => {
     // res.end()
@@ -32,9 +30,14 @@ postsControllers.createNewPost = (req, res) => {
         res.json({ savedPostData });
         res.end()
     }).catch(err => {
-        console.log(err)
-        res.sendStatus(500);
-        res.end()
+        if (err.code === 11000) {
+            res.status(500).send({ error: 'Post with this Title already exist in the Database' })
+            // res.json({ savedPostData });
+            res.end()
+        } else {
+            res.sendStatus(500);
+            res.end()
+        }
     })
 };
 
@@ -44,7 +47,7 @@ postsControllers.updatePost = (req, res) => {
         metasSaver(updated.tags)
         metasSaver(updated.categories)
         metasSaver(updated.actors)
-        console.log( updated)
+        console.log(updated)
         res.end()
     }).catch(err => {
         res.sendStatus(500);
@@ -72,7 +75,7 @@ postsControllers.getPostsInfo = async (req, res) => {
     let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
     let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
 
-    let posts = await postSchema.find({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery ] }).select(selectedFields).skip(size * (pageNo-1)).limit(size).sort(sortQuery).exec();
+    let posts = await postSchema.find({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery ] }).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
     let postsCount = await postSchema.count({ $and: [ postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery ] }).exec()
 
     Promise.all([ posts, postsCount ]).then(data => {
@@ -94,13 +97,13 @@ postsControllers.getPostInfo = (req, res) => {
 
     if (title) {
         postSchema.findOne({ title }).exec().then(post => {
-            console.log( post)
+            console.log(post)
             res.json({ post, error: false });
             res.end()
         })
-    }else if (_id){
+    } else if (_id) {
         postSchema.findOne({ _id }).exec().then(post => {
-            console.log( post)
+            console.log(post)
             res.json({ post, error: false });
             res.end()
         })
@@ -119,14 +122,21 @@ postsControllers.deletePost = (req, res) => {
 };
 
 postsControllers.postsBulkAction = async (req, res) => {
-    const ids = req.body.ids;
+    const ids = req.body.ids || [];
+    console.log(ids )
     const status = req.body.status;
     // console.log(ids,status )
-    let promises = [];
-    for await (let id of ids) {
-        promises.push(postSchema.findByIdAndUpdate(id, { $set: { status } }))
-    }
-    Promise.all(promises).then(() => {
+
+    const actions = ids.map( async id => {
+        return postSchema.findByIdAndUpdate(id, { $set: { status } })
+    })
+
+    // let promises = [];
+    // for await (let id of ids) {
+    //     promises.push(postSchema.findByIdAndUpdate(id, { $set: { status } }))
+    // }
+
+    Promise.all(actions).then(() => {
         return res.status(200).json({
             message: 'all done'
         });
@@ -203,7 +213,7 @@ postsControllers.getComments = (req, res) => {
     const size = parseInt(req.body.size) > 50 ? 50 : parseInt(req.body.size)
     const pageNo = req.body.pageNo ? parseInt(req.body.pageNo) : 1
     const onDocument = req.body.onDocument ? { onDocument: req.body.onDocument } : {}
-    const status = !req.body.status || req.body.status==='all' ? {status: 'approved' } : { status: req.body.status }
+    const status = !req.body.status || req.body.status === 'all' ? { status: 'approved' } : { status: req.body.status }
     let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
     const searchQuery = !req.body.keyword ? {} : {
         $or: [
@@ -213,24 +223,24 @@ postsControllers.getComments = (req, res) => {
         ]
     };
 
-      const comments =  commentSchema.find({ $and: [ onDocument, status, searchQuery ] }).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec()
-      const commentsCount =  commentSchema.count({ $and: [ onDocument, status, searchQuery ] }).exec()
+    const comments = commentSchema.find({ $and: [ onDocument, status, searchQuery ] }).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec()
+    const commentsCount = commentSchema.count({ $and: [ onDocument, status, searchQuery ] }).exec()
 
-      Promise.all([comments,commentsCount]).then(data=>{
-          res.json({ comments:data[0],count:data[1] })
-          res.end()
-      }).catch(err=>{
-          console.log( err)
-      })
+    Promise.all([ comments, commentsCount ]).then(data => {
+        res.json({ comments: data[0], count: data[1] })
+        res.end()
+    }).catch(err => {
+        console.log(err)
+    })
 
 };
 
 postsControllers.updateComment = (req, res) => {
-    console.log( req.body)
- commentSchema.findByIdAndUpdate(req.body._id,req.body.update,{new:true}).exec().then(updated=>{
-     console.log( updated)
-     res.end()
- })
+    console.log(req.body)
+    commentSchema.findByIdAndUpdate(req.body._id, req.body.update, { new: true }).exec().then(updated => {
+        console.log(updated)
+        res.end()
+    })
 
 };
 

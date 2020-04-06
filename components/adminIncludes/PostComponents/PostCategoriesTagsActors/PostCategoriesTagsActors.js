@@ -41,7 +41,7 @@ const PostCategoriesTagsActors = props => {
         <div className='PostCategoriesTagsActors'>
             <div className="addNewTag">
                 <input ref={ newItemsElement } type='text'/>
-                <button onClick={ () => addNewItem() }> Add</button>
+                <button className='addBtn' onClick={ () => addNewItem() }> Add</button>
             </div>
             <span className='small-info'>Separate tags with commas</span>
             <div className="items">

@@ -1,11 +1,20 @@
 @import "../../../../styles/buttons";
 @import "../../../../styles/colors";
 .PostCategoriesTagsActors{
+  .addNewTag{
+    .addBtn{
+      margin: 5px 0;
+    }
+  }
+
+
   .items{
     display:flex;
     flex-wrap: wrap;
     .item{
       display:flex;
+      align-items: center;
+      margin: 1px 3px;
       font-size: x-small;
       button{
         outline: none;

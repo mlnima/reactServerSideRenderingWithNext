@@ -16,7 +16,7 @@ const Quality = props => {
                         <option value='720p'>720p</option>
                         <option value='1080p'>1080p</option>
                         <option value='1440p'>1440p</option>
-                        <option value='2060p'>2060p</option>
+                        <option value='2160p'>2160p</option>
                         <option value='4120p'>4120p</option>
                     </select>
                 </div>
