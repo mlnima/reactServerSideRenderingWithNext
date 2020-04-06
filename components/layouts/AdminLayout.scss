@@ -19,7 +19,7 @@
 @media only screen and (min-width: 768px) {
   .container {
     display: grid;
-    grid-template-columns: 200px 1fr;
+    grid-template-columns: 160px 1fr;
     grid-template-areas: 'adminTopBar adminTopBar' 'adminSideBar adminContent'
   }
 }

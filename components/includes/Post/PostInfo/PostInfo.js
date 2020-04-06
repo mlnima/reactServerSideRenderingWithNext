@@ -8,6 +8,7 @@ import DownloadLink from "../DownloadLink/DownloadLink";
 import FA from 'react-fontawesome';
 import LikeBtnSvg from '../../../../static/images/fontawesome/thumbs-up-solid.svg'
 import DisLikeBtnSvg from '../../../../static/images/fontawesome/thumbs-down-solid.svg'
+import './PostInfo.scss'
 // import * as socialShare from "react-share"
 
 const PostInfo = props => {

@@ -14,9 +14,7 @@ const AppProvider = props => {
         videoPreviewID: ''
     });
 
-    const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
-
-
+    // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
     const [ siteIdentity, dispatchSiteIdentity ] = useState({
         title: 'site title',
         themeColor: '#000',
@@ -28,8 +26,14 @@ const AppProvider = props => {
     });
     const [ settings, dispatchSettings ] = useState({
         adminPanelSideBar: false,
-        test: false
+        textEditorCurrentFile:'',
+        textEditorEditMode:false
     });
+
+    const [galleryData,setGalleryData] = useState({
+        path:'./static'
+    })
+
     const [ userData, dispatchUserData ] = useState({});
     const [ navigationData, dispatchNavigationData ] = useState([]);
     const [ editingPostData, dispatchEditingPostData ] = useState({
@@ -164,27 +168,6 @@ const AppProvider = props => {
             };
             return axios.post('/api/v1/posts/deletePost', body)
         },
-        likeValueCalculator: (likes, dislikes) => {
-            let finalValue = 0;
-            if (likes > 0 && dislikes > 0) {
-                let total = likes + dislikes;
-                let likesTo100 = likes * 100;
-                let value = Math.round(likesTo100 / total);
-                finalValue = value;
-            }
-            if (likes === 0 && dislikes === 0) {
-                finalValue = 0;
-            }
-            if (likes === 0 && dislikes > 0) {
-                finalValue = 0;
-
-            }
-            if (likes > 0 && dislikes === 0) {
-                finalValue = 100
-            }
-            return finalValue
-
-        }
     });
 
     useEffect(() => {
@@ -230,8 +213,7 @@ const AppProvider = props => {
                     dispatchWidgetsSettings,
                     siteDesign,
                     dispatchSiteDesign,
-                    absolutePath,
-                    dispatchAbsolutePath
+
                 } }>
 
                 { props.children }
@@ -242,4 +224,3 @@ const AppProvider = props => {
 
 export const AppProviderWithRouter = withRouter(AppProvider);
 
-//"dev": "nodemon -w ./server/server.js ./server/server.js",

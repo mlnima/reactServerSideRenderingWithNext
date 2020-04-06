@@ -15,7 +15,6 @@ const Panel = props => {
     const [ state, dispatchState ] = useState({});
 
     useEffect(() => {
-        contextData.dispatchAbsolutePath(window.location.origin)
         if (window.innerWidth > 768) {
             contextData.dispatchSettings(settings => ({
                 ...settings,

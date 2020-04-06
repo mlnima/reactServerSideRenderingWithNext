@@ -4,6 +4,7 @@ import FileManagerControl from '../../../components/adminIncludes/FileManagerCom
 import FileManagerArea from '../../../components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea';
 import { readPath } from '../../../_variables/_ajaxFilesVariables'
 import { AppContext } from '../../../context/AppContext'
+import withRouter from 'next/dist/client/with-router'
 
 const fileManager = props => {
     const contextData = useContext(AppContext);
@@ -31,7 +32,7 @@ const fileManager = props => {
 
     useEffect(() => {
         setData()
-    }, [state.path,state.didDataChange]);
+    }, [ state.path, state.didDataChange ]);
 
     const setData = () => {
         contextData.dispatchState({
@@ -49,23 +50,15 @@ const fileManager = props => {
                     loading: false
                 });
             } else if (res.data.type === 'file') {
-                setState({
-                    ...state,
-                    file: res.data.data
-                });
-                contextData.dispatchState({
-                    ...contextData.state,
-                    loading: false
-                });
-            } else if (res.data.type === undefined) {
-                setState({
-                    ...state,
-                    error: true
+                contextData.dispatchSettings({
+                    ...contextData.settings,
+                    textEditorCurrentFile: res.data.data
                 })
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 });
+                props.router.push('/admin/fileManager/textEditor')
             } else {
                 setState({
                     ...state,
@@ -85,7 +78,7 @@ const fileManager = props => {
     }
 
     const setStateHandler = (key, value) => {
-        console.log( key,value)
+        console.log(key, value)
         setState({
             ...state,
             [key]: value
@@ -95,10 +88,10 @@ const fileManager = props => {
     return (
         <AdminLayout>
             <div className='fileManager'>
-                <FileManagerControl setStateHandler={ setStateHandler } data={state}/>
-                <FileManagerArea setStateHandler={ setStateHandler }  data={state}/>
+                <FileManagerControl setStateHandler={ setStateHandler } data={ state }/>
+                <FileManagerArea setStateHandler={ setStateHandler } data={ state }/>
             </div>
         </AdminLayout>
     );
 };
-export default fileManager;
+export default withRouter(fileManager);

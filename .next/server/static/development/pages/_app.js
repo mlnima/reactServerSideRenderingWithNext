@@ -136,11 +136,8 @@ const AppProvider = props => {
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     loading: false,
     videoPreviewID: ''
-  });
-  const {
-    0: absolutePath,
-    1: dispatchAbsolutePath
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])('http://localhost:3000/');
+  }); // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
+
   const {
     0: siteIdentity,
     1: dispatchSiteIdentity
@@ -159,7 +156,14 @@ const AppProvider = props => {
     1: dispatchSettings
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     adminPanelSideBar: false,
-    test: false
+    textEditorCurrentFile: '',
+    textEditorEditMode: false
+  });
+  const {
+    0: galleryData,
+    1: setGalleryData
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    path: './static'
   });
   const {
     0: userData,
@@ -314,30 +318,6 @@ const AppProvider = props => {
         token: localStorage.wt
       };
       return axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/deletePost', body);
-    },
-    likeValueCalculator: (likes, dislikes) => {
-      let finalValue = 0;
-
-      if (likes > 0 && dislikes > 0) {
-        let total = likes + dislikes;
-        let likesTo100 = likes * 100;
-        let value = Math.round(likesTo100 / total);
-        finalValue = value;
-      }
-
-      if (likes === 0 && dislikes === 0) {
-        finalValue = 0;
-      }
-
-      if (likes === 0 && dislikes > 0) {
-        finalValue = 0;
-      }
-
-      if (likes > 0 && dislikes === 0) {
-        finalValue = 100;
-      }
-
-      return finalValue;
     }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
@@ -377,14 +357,12 @@ const AppProvider = props => {
       widgetsSettings,
       dispatchWidgetsSettings,
       siteDesign,
-      dispatchSiteDesign,
-      absolutePath,
-      dispatchAbsolutePath
+      dispatchSiteDesign
     }
   }, props.children));
 };
 
-const AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(AppProvider); //"dev": "nodemon -w ./server/server.js ./server/server.js",
+const AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_4__["withRouter"])(AppProvider);
 
 /***/ }),
 

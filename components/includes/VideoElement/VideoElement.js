@@ -7,6 +7,7 @@ import {AppContext} from "../../../context/AppContext";
 // import {withRouter} from "react-router-dom";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import FA  from 'react-fontawesome'
+import {likeValueCalculator} from '../../../_variables/_variables'
 // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
 
 const VideoElement = props => {
@@ -125,9 +126,8 @@ const VideoElement = props => {
                         {imageContent()}
                         <span ref={viewLabel} className='views'><FA className='fontawesomeSmall' name="eye" />{props.state.views}</span>
                         <span ref={durationLabel} className='duration'>{props.state.duration}</span>
-
                     </div>
-                    <ProgressBar value={contextData.functions.likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/>
+                    <ProgressBar value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/>
                     <h3>{props.state.title}</h3>
                 </div>
                 </a>

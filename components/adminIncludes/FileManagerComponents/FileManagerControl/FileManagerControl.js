@@ -10,16 +10,12 @@ const FileManagerControl = props => {
     }, []);
 
     const onGoBackHandler = (e)=>{
-        // clearClickedItemHandler(e)
-        // let path = contextData.filesData.path;
-        // let splitPath = path.split('/');
-        // let lastItemPlusSlash = '/' + splitPath[splitPath.length -1];
-        // let newPath = path.replace(lastItemPlusSlash,'');
-        // contextData.setFilesData({
-        //     ...contextData.filesData,
-        //     path:newPath,
-        //     file:''
-        // })
+        clearClickedItemHandler(e)
+        let path = props.data.path;
+        let splitPath = path.split('/');
+        let lastItemPlusSlash = '/' + splitPath[splitPath.length -1];
+        let newPath = path.replace(lastItemPlusSlash,'');
+        props.setStateHandler('path',newPath)
     };
 
     const clearClickedItemHandler=e=>{

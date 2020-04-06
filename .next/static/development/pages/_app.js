@@ -45,31 +45,35 @@ var AppProvider = function AppProvider(props) {
     videoPreviewID: ''
   }),
       state = _useState[0],
-      dispatchState = _useState[1];
+      dispatchState = _useState[1]; // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
 
-  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])('http://localhost:3000/'),
-      absolutePath = _useState2[0],
-      dispatchAbsolutePath = _useState2[1];
 
-  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+  var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     title: 'site title',
     themeColor: '#000',
     description: 'site description',
     keywords: []
   }),
-      siteIdentity = _useState3[0],
-      dispatchSiteIdentity = _useState3[1];
+      siteIdentity = _useState2[0],
+      dispatchSiteIdentity = _useState2[1];
 
-  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
-      siteDesign = _useState4[0],
-      dispatchSiteDesign = _useState4[1];
+  var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
+      siteDesign = _useState3[0],
+      dispatchSiteDesign = _useState3[1];
+
+  var _useState4 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
+    adminPanelSideBar: false,
+    textEditorCurrentFile: '',
+    textEditorEditMode: false
+  }),
+      settings = _useState4[0],
+      dispatchSettings = _useState4[1];
 
   var _useState5 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
-    adminPanelSideBar: false,
-    test: false
+    path: './static'
   }),
-      settings = _useState5[0],
-      dispatchSettings = _useState5[1];
+      galleryData = _useState5[0],
+      setGalleryData = _useState5[1];
 
   var _useState6 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({}),
       userData = _useState6[0],
@@ -291,30 +295,6 @@ var AppProvider = function AppProvider(props) {
         token: localStorage.wt
       };
       return axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/v1/posts/deletePost', body);
-    },
-    likeValueCalculator: function likeValueCalculator(likes, dislikes) {
-      var finalValue = 0;
-
-      if (likes > 0 && dislikes > 0) {
-        var total = likes + dislikes;
-        var likesTo100 = likes * 100;
-        var value = Math.round(likesTo100 / total);
-        finalValue = value;
-      }
-
-      if (likes === 0 && dislikes === 0) {
-        finalValue = 0;
-      }
-
-      if (likes === 0 && dislikes > 0) {
-        finalValue = 0;
-      }
-
-      if (likes > 0 && dislikes === 0) {
-        finalValue = 100;
-      }
-
-      return finalValue;
     }
   }),
       functions = _useState14[0],
@@ -357,14 +337,12 @@ var AppProvider = function AppProvider(props) {
       widgetsSettings: widgetsSettings,
       dispatchWidgetsSettings: dispatchWidgetsSettings,
       siteDesign: siteDesign,
-      dispatchSiteDesign: dispatchSiteDesign,
-      absolutePath: absolutePath,
-      dispatchAbsolutePath: dispatchAbsolutePath
+      dispatchSiteDesign: dispatchSiteDesign
     }
   }, props.children));
 };
 
-var AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_6__["withRouter"])(AppProvider); //"dev": "nodemon -w ./server/server.js ./server/server.js",
+var AppProviderWithRouter = Object(next_router__WEBPACK_IMPORTED_MODULE_6__["withRouter"])(AppProvider);
 
 /***/ }),
 

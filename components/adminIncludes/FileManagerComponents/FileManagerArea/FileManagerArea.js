@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import {clickPathGenerator} from '../../../../_variables/_variables';
 import './FileManagerArea.scss';
 import { AppContext } from '../../../../context/AppContext'
+import withRouter from 'next/dist/client/with-router'
 import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
 import JsLogoSvg from '../../../../static/images/fontawesome/js-square-brands.svg'
 import SliderSvg from '../../../../static/images/fontawesome/sliders-h-solid.svg'
@@ -86,7 +87,7 @@ const FileManagerArea = props => {
         </div>
     );
 };
-export default FileManagerArea;
+export default withRouter(FileManagerArea);
 
 // <buttonref={() => selectedItem.current[props.data.files.indexOf(item)]}
 // className={[fileLogoDetector(item)]} key={item} name={item} onClick={(e) => onClickHandler(e)}

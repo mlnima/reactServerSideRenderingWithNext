@@ -41,11 +41,13 @@ const design = props => {
         widgetBodyBackgroundColor: props.design.widgetBodyBackgroundColor || 'transparent',
         widgetBodyTextColor: props.design.widgetBodyTextColor || '#fff',
         widgetBodyBorder: props.design.widgetBodyBorder || 'none',
+        //************Post Page***************
         //comments
-        commentsAuthorTextColor: '',
-        commentsDateTextColor: '',
-        commentsBodyTextColor: '',
-        commentsBackgroundColor: '',
+        commentsAuthorTextColor: props.design.commentsAuthorTextColor || '#0085ba',
+        commentsDateTextColor: props.design.commentsDateTextColor || '#FF3565',
+        commentsBodyTextColor: props.design.commentsBodyTextColor || '#fff',
+        commentsBackgroundColor:  props.design.commentsBackgroundColor ||'transparent',
+
 
     });
     const [ customStyle, setCustomStyle ] = useState( '')
