@@ -1,1 +1,0 @@
-{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\nimport './Logo.scss';\n\nconst Logo = () => {\n  return __jsx(\"div\", {\n    className: \"Logo\"\n  }, __jsx(\"img\", {\n    src: \"/static/images/Logo.png\"\n  }));\n};\n\nexport default Logo;","map":null,"metadata":{},"sourceType":"module"}

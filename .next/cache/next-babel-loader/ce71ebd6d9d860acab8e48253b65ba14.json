@@ -1,1 +1,0 @@
-{"ast":null,"code":"import axios from 'axios';\nexport const getUsersList = async () => {\n  let body = {\n    token: localStorage.wt\n  };\n  return await axios.post('http://localhost:3000/api/v1/users/getUsersList', body);\n};","map":null,"metadata":{},"sourceType":"module"}
