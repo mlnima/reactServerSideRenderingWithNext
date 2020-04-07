@@ -1,0 +1,15 @@
+@import "../../../../styles/colors";
+@import "../../../../styles/buttons";
+.customScriptPage {
+  .customScript {
+   background-color: $light100;
+    width: 100%;
+    min-height: 400px;
+    padding: 10px;
+    font-weight: bold;
+  }
+  button{
+    @include greenActionBtn
+  }
+}
+

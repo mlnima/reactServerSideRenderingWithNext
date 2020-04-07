@@ -89,7 +89,11 @@ body {
   width: 20px;
   height: 30px;
   filter: invert(1);
-
+}
+.fontawesomeSvgVerySmall {
+  width:12.5px;
+  height: 20px;
+  filter: invert(1);
 }
 
 input:focus, textarea:focus, select:focus {

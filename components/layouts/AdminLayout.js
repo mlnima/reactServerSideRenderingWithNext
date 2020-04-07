@@ -8,6 +8,7 @@ import { withRouter } from "next/router";
 import Loading from "../includes/Loading/Loading";
 import { generateAbsolutePath } from '../../_variables/_variables'
 import AlertBox from '../includes/AlertBox/AlertBox'
+import { getSetting } from '../../_variables/ajaxVariables'
 
 const Panel = props => {
     const contextData = useContext(AppContext);
@@ -24,6 +25,20 @@ const Panel = props => {
         }
     }, []);
 
+    useEffect(() => {
+        getSetting('identity',false,window.location.origin).then(identity=>{
+            contextData.dispatchSiteIdentity({
+                ...contextData.siteIdentity,
+                ...identity.data.setting.data
+            })
+        })
+        getSetting('design', false, window.location.origin).then(design=>{
+            contextData.dispatchSiteDesign({
+                ...contextData.siteDesign,
+                ...design.data.setting.data
+            })
+        })
+    }, []);
     // useEffect(()=>{
     //     if (contextData.userData.role !=='administrator' && props.router.pathname.includes('/admin')){
     //         props.router.push('/')

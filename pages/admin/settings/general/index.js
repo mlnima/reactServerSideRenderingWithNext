@@ -34,7 +34,7 @@ const settings = props => {
             ...contextData.state,
             loading:true
         })
-        updateSetting('identity', state,props.domainName).then(()=>{
+        contextData.functions.updateSetting('identity', state,props.domainName).then(()=>{
             contextData.dispatchState({
                 ...contextData.state,
                 loading:false

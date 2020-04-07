@@ -1,7 +1,7 @@
 @import "../../../styles/buttons";
 @import "../../../styles/colors";
 
-.SideBar{
+.SideBar {
   position: fixed;
   left: 0;
   top: 40px;
@@ -9,33 +9,65 @@
   min-height: 100vh;
   width: 160px;
   background-color: $AdminColor100;
-  padding:10px;
   display: flex;
-  align-items: center;
+  align-items: flex-start;
   flex-direction: column;
-  .SideBarItem{
-    text-decoration: none;
-    color: white;
-    width: 100%;
-    padding: 5px 10px;
 
-    transition: .5s;
-    font-size: large;
-    margin: 5px ;
-    &:hover{
-      background-color: $AdminBackground50;
-      color: $AdminColor100;
-      font-weight: bold;
+  .SideBarItemElement {
+    width: 100%;
+
+    .SideBarItemTitle {
+      display: flex;
+      justify-content: space-between;
+
+      .SideBarItem {
+        text-decoration: none;
+        color: white;
+        width: 100%;
+        padding: 5px 0;
+        transition: .5s;
+        font-size: large;
+        margin: 5px;
+        display: block;
+
+        &:hover {
+          background-color: $dark90;
+          font-weight: bold;
+        }
+
+        &:active {
+          background-color: yellow;
+        }
+      }
+
+      button {
+        color: $light100;
+        background-color: transparent;
+        border: none;
+        outline: none;
+      }
     }
-    &:active{
-      background-color: yellow;
+
+    .SideBarItemElementSubItems {
+      background-color: $dark90;
+
+      .SideBarItem-SubItem {
+        color: white;
+        padding: 0 20px;
+        display: block;
+        transition: .5s;
+
+        &:hover {
+          font-weight: bold;
+        }
+      }
     }
+
   }
 }
 
-
 @media only screen and (min-width: 768px) {
-  .SideBar{
+  .SideBar {
     position: initial;
   }
 }

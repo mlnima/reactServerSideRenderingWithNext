@@ -86,3 +86,16 @@ runSetup().then(() => {
     console.log(err)
     process.exit()
 })
+
+// REACT_APP_JWT_KEY = 'secretKey'
+// PRODUCTION_URL= http://webdevs.ai
+// NODE_ENV='dev'
+// REACT_APP_PORT='3000'
+//
+//
+// DB_LOCAL= true
+// DB_NAME = nextDB
+// DB_HOST=
+//     DB_USER=
+//         DB_PASS=
+//             DB_PORT=27017

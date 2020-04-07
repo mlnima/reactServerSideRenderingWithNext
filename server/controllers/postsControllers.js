@@ -20,9 +20,9 @@ const metasSaver = (metas, type) => {
 postsControllers.createNewPost = (req, res) => {
     // res.end()
     const newPost = req.body.postData;
-    metasSaver(newPost.tags)
-    metasSaver(newPost.categories)
-    metasSaver(newPost.actors)
+    metasSaver(newPost.tags,'tag')
+    metasSaver(newPost.categories,'category')
+    metasSaver(newPost.actors,'actor')
 
     const newPostDataToSave = new postSchema(newPost);
     newPostDataToSave.save().then(savedPostData => {
@@ -44,9 +44,9 @@ postsControllers.createNewPost = (req, res) => {
 postsControllers.updatePost = (req, res) => {
     const _id = req.body.id;
     postSchema.findByIdAndUpdate(req.body.postData._id, req.body.postData, { new: true }).exec().then(updated => {
-        metasSaver(updated.tags)
-        metasSaver(updated.categories)
-        metasSaver(updated.actors)
+        metasSaver(updated.tags,'tag')
+        metasSaver(updated.categories,'category')
+        metasSaver(updated.actors,'actor')
         console.log(updated)
         res.end()
     }).catch(err => {
@@ -165,8 +165,8 @@ postsControllers.getMeta = async (req, res) => {
     const type = req.body.type;
     const size = req.body.size;
     const pageNo = req.body.pageNo;
-    let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
-
+    let sortQuery =   !req.body.sort  || req.body.sort === 'latest' ?'-id' : req.body.sort && typeof req.body.sort === String? req.body.sort : { [req.body.sort]: -1 }
+//
     const metaCount = await metaSchema.count({ type }).exec()
     metaSchema.find({ type }).limit(size).skip(size * (pageNo - 1)).sort(sortQuery).exec().then(async metas => {
         const mapMetaToGetImage = metas.map(async meta => {

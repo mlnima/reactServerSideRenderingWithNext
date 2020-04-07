@@ -2,8 +2,29 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/SearchInputComponent/SearchInputComponent.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/SearchInputComponent/SearchInputComponent.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/design/topBar/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/design/topBar/topBar.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/customScript.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/fontawesome/sort-down-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/fontawesome/sort-up-solid.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Header/Header.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Header/Header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Header/Header.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Header/Logo/Logo.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Header/Logo/Logo.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AdminLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/AppContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/navigation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/navigation/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/setup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/styles.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -28,25 +49,25 @@
   <component name="PropertiesComponent">
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/images/fontawesome" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext" />
+    </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\admin\design" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\admin\fileManager" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages" />
-    </key>
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -193,7 +214,8 @@
       <workItem from="1585979162035" duration="60834000" />
       <workItem from="1586080639489" duration="41720000" />
       <workItem from="1586159921547" duration="4905000" />
-      <workItem from="1586180636681" duration="17701000" />
+      <workItem from="1586180636681" duration="18128000" />
+      <workItem from="1586254902321" duration="20684000" />
     </task>
     <servers />
   </component>

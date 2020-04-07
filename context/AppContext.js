@@ -171,6 +171,14 @@ const AppProvider = props => {
             };
             return axios.post('/api/v1/posts/deletePost', body)
         },
+        updateSetting : async (type, data) => {
+            const body = {
+                token: localStorage.wt,
+                type,
+                data
+            };
+            return await axios.post(window.location.origin + '/api/v1/settings/update', body)
+        }
     });
 
     useEffect(() => {

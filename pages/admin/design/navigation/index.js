@@ -64,23 +64,6 @@ const navigation = props => {
         )
     });
 
-    {/*<div className='items-preview-item'>*/
-    }
-    {/*    <div className="item-title">*/
-    }
-    {/*        <p>{ item.title }</p>*/
-    }
-    {/*        <button><FA className='fontawesomeMedium' name={ 'bars' }/></button>*/
-    }
-    {/*    </div>*/
-    }
-    {/*    <button name={ item.title } onClick={ (e) => onDeleteItemHandler(e) }>Del</button>*/
-    }
-    {/*    <p>{ item.url }</p>*/
-    }
-
-    {/*</div>*/
-    }
     return (
         <AdminLayout>
             <div id='navigation-setting'>
