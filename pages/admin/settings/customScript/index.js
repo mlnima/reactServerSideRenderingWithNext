@@ -16,11 +16,9 @@ const customScript = props => {
     })
     const [ scriptsName, setScriptsName ] = useState([]);
 
-
     useEffect(() => {
-        setScriptsName(contextData.siteIdentity.customScripts.map(script => script.scriptName))
+        setScriptsName((contextData.siteIdentity.customScripts || []).map(script => script.scriptName))
     }, [ contextData.siteIdentity.customScripts ]);
-
 
     const onNewScriptChangeHandler = e => {
         setNewScript({
@@ -31,18 +29,18 @@ const customScript = props => {
 
     const onAddHandler = async e => {
         e.preventDefault()
-       if ( scriptsName.includes(newScript.scriptName) ){
-           contextData.dispatchAlert({
-               active: true,
-               alertMessage: 'already there is script with this name',
-               type: 'error'
-           })
-       }else {
-           contextData.dispatchSiteIdentity({
-               ...contextData.siteIdentity,
-               customScripts: [ ...contextData.siteIdentity.customScripts, newScript ]
-           })
-       }
+        if (scriptsName.includes(newScript.scriptName)) {
+            contextData.dispatchAlert({
+                active: true,
+                alertMessage: 'already there is script with this name',
+                type: 'error'
+            })
+        } else {
+            contextData.dispatchSiteIdentity({
+                ...contextData.siteIdentity,
+                customScripts: [ ...contextData.siteIdentity.customScripts, newScript ]
+            })
+        }
     }
 
     const onDeleteHandler = (scriptName) => {
@@ -51,7 +49,6 @@ const customScript = props => {
             customScripts: contextData.siteIdentity.customScripts.filter(script => script.scriptName !== scriptName)
         })
     }
-
 
     const onSaveHandler = () => {
         contextData.dispatchState({
@@ -63,8 +60,8 @@ const customScript = props => {
                 ...contextData.state,
                 loading: false
             })
-        }).catch(err=>{
-            console.log( err)
+        }).catch(err => {
+            console.log(err)
             contextData.dispatchState({
                 ...contextData.state,
                 loading: false
@@ -72,8 +69,14 @@ const customScript = props => {
         })
     }
 
+    const onGoogleAnalyticsSaveHandler = e => {
+        contextData.dispatchSiteIdentity({
+            ...contextData.siteIdentity,
+            googleAnalyticsID: e.target.value
+        })
+    }
 
-    const renderScripts = contextData.siteIdentity.customScripts.map(script => {
+    const renderScripts = (contextData.siteIdentity.customScripts || []).map(script => {
 
         const onChangeHandler = e => {
 
@@ -82,12 +85,12 @@ const customScript = props => {
                 loading: true
             })
 
-            const scriptIndex = contextData.siteIdentity.customScripts.findIndex(addedScript=> addedScript.scriptName === script.scriptName)
+            const scriptIndex = contextData.siteIdentity.customScripts.findIndex(addedScript => addedScript.scriptName === script.scriptName)
             const updatedScript = {
                 ...contextData.siteIdentity.customScripts[scriptIndex],
                 [e.target.name]: e.target.value
             }
-            setTimeout(()=>{
+            setTimeout(() => {
                 const updatedScripts = [
                     ...contextData.siteIdentity.customScripts.slice(0, scriptIndex),
                     updatedScript,
@@ -103,17 +106,14 @@ const customScript = props => {
                     loading: false
                 })
 
-            },500)
+            }, 500)
 
         }
 
         return (
-            <div className='customScriptPageItem'>
+            <div key={script.scriptName} className='customScriptPageItem'>
                 <div className='customScriptPageItemHead'>
-                    {/*<p>Name : { script.scriptName }</p>*/}
-                    {/*<input className='customScriptPageItemHeadName' value={ script.scriptName } name='scriptName' onChange={ e => onChangeHandler(e) } />*/}
-                    <DelayInput className='customScriptPageItemHeadName' name='scriptName' value={ script.scriptName  } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
-
+                    <DelayInput className='customScriptPageItemHeadName' name='scriptName' value={ script.scriptName } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
                     <button className='removeScript' onClick={ () => onDeleteHandler(script.scriptName) }>X</button>
                 </div>
                 <DelayInput element="textarea" className='customScript' name='scriptBody' value={ script.scriptBody } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
@@ -124,6 +124,7 @@ const customScript = props => {
 
     return (
         <AdminLayout>
+            <input placeholder='Google Analytics ID' type="text" name='googleAnalyticsID' value={contextData.siteIdentity.googleAnalyticsID} className='googleAnalyticsInput' onChange={ e => onGoogleAnalyticsSaveHandler(e) }/>
             <form className='addCustomScriptForm' onSubmit={ e => onAddHandler(e) }>
                 <input className='scriptName' name='scriptName' placeholder='Script Name' onChange={ e => onNewScriptChangeHandler(e) }/>
                 <textarea name='scriptBody' className='addScriptTextarea' placeholder='Script with out Script Tag' onChange={ e => onNewScriptChangeHandler(e) }/>

@@ -17,8 +17,6 @@ const design = props => {
         textLogoSize:props.design.textLogoSize ||'40px',
         headLineColor:props.design.headLineColor ||'#fff',
         headLineSize:props.design.headLineSize ||'10px',
-        //homePageH1
-        homePageH1: props.design.homePageH1 || '#000',
         //mobile theme
         themeColor: props.design.themeColor || '#fff',
         //top bar

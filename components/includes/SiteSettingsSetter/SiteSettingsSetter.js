@@ -38,13 +38,31 @@ const SiteSettingSetter = props => {
         document.body.style.color = contextData.siteDesign.bodyBackgroundColor
     }, [ contextData.siteDesign ]);
 
-    const renderCustomScripts = props.identity.data.customScripts.map(script=>{
-        return(
-            <script>
-                {script.scriptBody}
+    const renderCustomScripts = (props.identity.data.customScripts || []).map(script => {
+        return (
+            <script key={script.scriptName}>
+                { script.scriptBody }
             </script>
         )
     })
+
+    const RenderGoogleAnalyticsScript = () => {
+        if (props.identity.data.googleAnalyticsID) {
+            console.log( 'there is')
+            return (
+                <>
+                                    <script dangerouslySetInnerHTML={ {
+                                        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+                        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+                      })(window,document,'script','dataLayer',${ props.identity.data.googleAnalyticsID });`
+                    } }/>
+                </>
+
+            )
+        } else return null
+    }
 
     return (
         <Head>
@@ -52,18 +70,35 @@ const SiteSettingSetter = props => {
             <meta name="theme-color" content={ state.themeColor }/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charSet="utf-8"/>
-            {/*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*/}
+            {/*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*/ }
             <meta name="description" content={ state.description }/>
             <meta name="keywords" content={ state.keywords }/>
             <link rel="icon" href="/favicon.ico"/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
             <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
-            {renderCustomScripts}
-            <div ref={ customScriptElement } className='custom-script'>
-
-            </div>
+            { renderCustomScripts }
+            <RenderGoogleAnalyticsScript/>
 
         </Head>
     )
 };
 export default SiteSettingSetter;
+
+{/*<script src={ `https://www.googletagmanager.com/gtag/js?id=${ props.identity.data.googleAnalyticsID }` }/>*/
+}
+{/*< script>*/
+}
+{/*    window.dataLayer = window.dataLayer || [];*/
+}
+{/*    function gtag() {*/
+}
+{/*    dataLayer.push(arguments)*/
+}
+{/*}*/
+}
+{/*    gtag('js', new Date());*/
+}
+{/*    gtag('config', props.identity.data.googleAnalyticsID );*/
+}
+{/*</script>*/
+}

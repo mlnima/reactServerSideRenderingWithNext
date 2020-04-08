@@ -3,6 +3,13 @@
 @import "../../../../styles/inputs";
 @import "../../../../styles/grid";
 
+
+.googleAnalyticsInput{
+  @include inputNormalWithRadius;
+  background-color: $light100;
+  width: 300px;
+  margin: 10px 0;
+}
 .addCustomScriptForm {
   display: flex;
   flex-direction: column;

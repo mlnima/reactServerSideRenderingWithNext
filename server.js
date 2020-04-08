@@ -117,6 +117,11 @@ app.prepare().then(()=>{
         app.render(req,res,targetComponent)
     });
 
+    server.get('/errorPage',(req,res)=>{
+        const targetComponent = '/errorPage';
+        app.render(req,res,targetComponent)
+    });
+
 
 
 

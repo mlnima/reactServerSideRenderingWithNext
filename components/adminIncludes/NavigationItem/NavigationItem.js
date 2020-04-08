@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext } from 'react';
 import FA from "react-fontawesome";
+import BarsSvg from '../../../static/images/fontawesome/bars-solid.svg'
 
 const NavigationItem = props => {
     const [ state, setState ] = useState({
@@ -23,17 +24,17 @@ const NavigationItem = props => {
     if (!state.isOpen){
         return (
             <div className='items-preview-item'>
-                <div className="item-title">
+                <div className="item-title" onClick={ () => onOpenHandler() }>
                     <p>{ props.title }</p>
-                    <button onClick={ () => onOpenHandler() }><FA className='fontawesomeMedium' name={ 'bars' }/></button>
+                    {/*<button onClick={ () => onOpenHandler() }> <img className='fontawesomeSvgSmall' src={ BarsSvg }/></button>*/}
                 </div>
             </div>
         )
     }else return (
         <div className='items-preview-item'>
-            <div className="item-title">
+            <div className="item-title" onClick={ () => onOpenHandler() }>
                 <p>{ props.title }</p>
-                <button onClick={ () => onOpenHandler() }><FA className='fontawesomeMedium' name={ 'bars' }/></button>
+                {/*<button onClick={ () => onOpenHandler() }> <img className='fontawesomeSvgSmall' src={ BarsSvg }/></button>*/}
             </div>
             <div className="editItem">
                 <input type="text" name='title' value={props.title}/>

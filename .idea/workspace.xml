@@ -2,32 +2,30 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/.idea/watcherTasks.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/AdminDesignSettingColorType/AdminDesignSettingColorType.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/AdminDesignSettingColorType/AdminDesignSettingColorType.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/design/navigation/navigationAdmin.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/errorPage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/_variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_variables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/VideoInformation/VideoInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/VideoInformation/VideoInformation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterPagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterPagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Header/Header.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Header/Header.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Header/Header.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Header/Header.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SearchInputComponent/SearchInputComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SearchInputComponent/SearchInputComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SearchInputComponent/SearchInputComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SearchInputComponent/SearchInputComponent.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/H1Renderer/H1Renderer.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Header/Navigation/NavigationItem/NavigationItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/NavigationItem/NavigationItem.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AdminLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/context/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/AppContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/navigation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/navigation/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/customScript.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/customScript.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/tools/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/settings.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/settings.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/buttons.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/buttons.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/siteMapController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/siteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/subSiteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/subSiteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/setup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/_grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/_grid.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -55,22 +53,23 @@
     <property name="last_opened_file_path" value="$PROJECT_DIR$/static/images/fontawesome" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
+    <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\admin\design" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\admin\fileManager" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
+    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext" />
-    </key>
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\admin\design" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\admin\fileManager" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -85,8 +84,11 @@
       </list>
     </option>
   </component>
-  <component name="RunManager" selected="Node.js.generateFakeData.js">
+  <component name="RunManager" selected="Node.js.setup.js">
     <configuration name="generateFakeData.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/generateFakeData.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
+    <configuration name="setup.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/setup.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -122,6 +124,7 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.setup.js" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="Node.js.generateFakeData.js" />
@@ -218,7 +221,8 @@
       <workItem from="1586080639489" duration="41720000" />
       <workItem from="1586159921547" duration="4905000" />
       <workItem from="1586180636681" duration="18128000" />
-      <workItem from="1586254902321" duration="37109000" />
+      <workItem from="1586254902321" duration="39736000" />
+      <workItem from="1586338054237" duration="15892000" />
     </task>
     <servers />
   </component>
@@ -252,7 +256,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/controllers/postsControllers.js</url>
-          <line>146</line>
+          <line>147</line>
           <option name="timeStamp" value="4" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

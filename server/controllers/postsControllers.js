@@ -23,7 +23,7 @@ postsControllers.createNewPost = (req, res) => {
     metasSaver(newPost.tags,'tag')
     metasSaver(newPost.categories,'category')
     metasSaver(newPost.actors,'actor')
-
+    newPost.lastModify = Date.now()
     const newPostDataToSave = new postSchema(newPost);
     newPostDataToSave.save().then(savedPostData => {
         console.log(savedPostData.title, ' saved ');
@@ -43,7 +43,8 @@ postsControllers.createNewPost = (req, res) => {
 
 postsControllers.updatePost = (req, res) => {
     const _id = req.body.id;
-    postSchema.findByIdAndUpdate(req.body.postData._id, req.body.postData, { new: true }).exec().then(updated => {
+    const updated = {...req.body.postData,lastModify: Date.now()}
+    postSchema.findByIdAndUpdate(req.body.postData._id, updated, { new: true }).exec().then(updated => {
         metasSaver(updated.tags,'tag')
         metasSaver(updated.categories,'category')
         metasSaver(updated.actors,'actor')

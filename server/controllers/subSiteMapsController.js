@@ -2,6 +2,7 @@ let subSiteMapsController = {};
 const postSchema = require('../models/postSchema');
 
 subSiteMapsController.siteMap = (req, res) => {
+    const requestPath = req.protocol + '://' + req.get('host') + '/'
     let month = req.params.month;
     let pageNo = req.params.pageNo;
     pageNo = parseInt(pageNo.replace('.xml', ''));
@@ -17,7 +18,7 @@ subSiteMapsController.siteMap = (req, res) => {
 
             if (post) {
                 let lastModify = new Date(post.lastModify);
-                let postUrl = process.env.REACT_APP_DOMAIN_NAME + post._id + '/' + encodeURIComponent(post.title)
+                let postUrl = requestPath  + encodeURIComponent(post.title)
 
                 postsElements += '<url> \n ' +
                     `<loc>${ postUrl }</loc>\n` +

@@ -75,54 +75,7 @@
   }
 }
 
-#navigation-setting {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-  background-color: $light100;
-  padding: 20px;
 
-  .add-navigation-items {
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-
-    input {
-      margin: 10px 0;
-    }
-
-    button {
-      @include AdminLightBtn
-    }
-  }
-
-  .items-preview {
-    border-radius: 5px;
-    //border: solid 1px black;
-    .items-preview-item {
-      padding: 5px;
-      margin: 5px;
-      border: solid 1px black;
-      border-radius: 5px;
-      width: 250px;
-      //height: 40px;
-      .item-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        button {
-          @include AdminLightBtn
-        }
-      }
-    }
-  }
-
-  .saveBtn {
-    @include greenActionBtn;
-  }
-
-}
 
 #HomePageWidgets {
   .AddWidgetMenu {

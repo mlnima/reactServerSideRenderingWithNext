@@ -38,6 +38,21 @@ const Panel = props => {
                 ...design.data.setting.data
             })
         })
+        getSetting('navigation', false, window.location.origin).then(navigationData => {
+
+            contextData.dispatchNavigationData([
+
+                ...navigationData.data.setting.data
+            ])
+
+
+            // if (res.data.setting) {
+            //     setState({
+            //         ...state,
+            //         data: res.data.setting.data || []
+            //     })
+            // }
+        })
     }, []);
 
 

@@ -7,7 +7,6 @@ import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSet
 import { getAbsolutePath } from '../_variables/_variables'
 import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRenderer'
 import { Sidebar } from '../components/includes/Sidebar/Sidebar'
-import H1Renderer from '../components/includes/H1Renderer/H1Renderer'
 import Footer from '../components/includes/Footer/Footer'
 
 const Home = props => {
@@ -35,7 +34,6 @@ const Home = props => {
                 <SiteSettingSetter { ...props }/>
                 <div style={ state.style } className={ props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
                     <div className='HomePage'>
-                        <H1Renderer text={ props.identity.data.homePageH1 || '' }/>
                         <WidgetsRenderer widgets={ props.widgets } position='home'/>
                     </div>
                     <Sidebar key='homePageSidebar' isActive={ props.identity.data.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>

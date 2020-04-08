@@ -60,22 +60,28 @@ const designData = {
         navigationTextColor: 'white',
         footerBackgroundColor: '#222',
         footerTextColor: 'black',
+
         widgetHeaderBackgroundColor: '#222',
         widgetHeaderTextColor: 'white',
         widgetHeaderRedirectLinkBackgroundColor: 'red',
         widgetHeaderRedirectLinkTextColor: '#fff',
         widgetBodyBackgroundColor: 'transparent',
         widgetBodyTextColor: '#fff',
-        widgetBodyBorder: 'none'
+        widgetBodyBorder: 'none',
+
+        commentsAuthorTextColor: '#0085ba',
+        commentsDateTextColor:  '#FF3565',
+        commentsBodyTextColor:  '#fff',
+        commentsBackgroundColor:  'transparent',
     }
 }
 
 const runSetup = async () => {
-    const identityToSave = new settingSchema(identityData)
-    const navigationToSave = new settingSchema(navigationData)
+    // const identityToSave = new settingSchema(identityData)
+    // const navigationToSave = new settingSchema(navigationData)
     const designToSave = new settingSchema(designData)
-    await identityToSave.save()
-    await navigationToSave.save()
+    // await identityToSave.save()
+    // await navigationToSave.save()
     await designToSave.save()
 }
 
