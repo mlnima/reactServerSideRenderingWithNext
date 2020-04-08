@@ -15,10 +15,10 @@ const PostCategoriesTagsActors = props => {
     const addNewItem = () => {
         if (newItemsElement.current.value.includes(',')) {
             let newItems = newItemsElement.current.value.split(',');
-            const addedItemFromType = [ ...props.postData[props.type], ...newItems ]
+            const addedItemFromType = [ ...props.postData[props.type], ...newItems.map(item=>item.trim()) ]
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
         } else {
-            const addedItemFromType = [ ...props.postData[props.type], newItemsElement.current.value ]
+            const addedItemFromType = [ ...props.postData[props.type], newItemsElement.current.value.trim() ]
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
         }
     };

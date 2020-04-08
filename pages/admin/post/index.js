@@ -42,9 +42,7 @@ const Index = props => {
         setState(props.post)
     }, [ props ]);
 
-    useEffect(() => {
-        console.log(state)
-    }, [ state ]);
+
     return (
         <>
             <AdminLayout>

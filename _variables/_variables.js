@@ -22,3 +22,7 @@ export const clickPathGenerator = (clickedItemName,pathFromContexts)=>{
         return pathFromContexts + '/' + clickedItemName
     }
 };
+
+export const trimString=(string)=>{
+    return trimString()
+}

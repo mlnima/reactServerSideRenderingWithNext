@@ -132,3 +132,8 @@ a {
 .small-info{
   font-size: x-small;
 }
+
+.saveBtn{
+  @include greenActionBtn;
+  margin: 50px 0;
+}

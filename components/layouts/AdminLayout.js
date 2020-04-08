@@ -26,24 +26,20 @@ const Panel = props => {
     }, []);
 
     useEffect(() => {
-        getSetting('identity',false,window.location.origin).then(identity=>{
+        getSetting('identity', false, window.location.origin).then(identity => {
             contextData.dispatchSiteIdentity({
                 ...contextData.siteIdentity,
                 ...identity.data.setting.data
             })
         })
-        getSetting('design', false, window.location.origin).then(design=>{
+        getSetting('design', false, window.location.origin).then(design => {
             contextData.dispatchSiteDesign({
                 ...contextData.siteDesign,
                 ...design.data.setting.data
             })
         })
     }, []);
-    // useEffect(()=>{
-    //     if (contextData.userData.role !=='administrator' && props.router.pathname.includes('/admin')){
-    //         props.router.push('/')
-    //     }
-    // },[ props.router]);
+
 
     return (
         <>

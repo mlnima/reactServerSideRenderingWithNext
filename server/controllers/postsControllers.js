@@ -125,16 +125,17 @@ postsControllers.postsBulkAction = async (req, res) => {
     const ids = req.body.ids || [];
     console.log(ids )
     const status = req.body.status;
-    // console.log(ids,status )
+    let actions;
 
-    const actions = ids.map( async id => {
-        return postSchema.findByIdAndUpdate(id, { $set: { status } })
-    })
-
-    // let promises = [];
-    // for await (let id of ids) {
-    //     promises.push(postSchema.findByIdAndUpdate(id, { $set: { status } }))
-    // }
+    if (status==='delete'){
+        actions = ids.map( async id => {
+            return postSchema.findByIdAndDelete(id)
+        })
+    }else {
+         actions = ids.map( async id => {
+            return postSchema.findByIdAndUpdate(id, { $set: { status } })
+        })
+    }
 
     Promise.all(actions).then(() => {
         return res.status(200).json({

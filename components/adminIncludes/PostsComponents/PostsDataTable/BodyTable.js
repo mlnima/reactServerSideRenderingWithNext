@@ -1,8 +1,4 @@
 import React, { useEffect, useState, useContext, useRef, createRef } from 'react';
-// import {Link, withRouter} from "react-router-dom";
-// import {updatePostStatus, deletePost, postsBulkAction, getPosts} from "../../../../../variables/_ajaxPostsVariable";
-// import QuickEdit from "../QuickEdit/QuickEdit";
-// import {adminTokenValidator} from "../../../../../variables/_ajaxAuthVariables";
 import { AppContext } from "../../../../context/AppContext";
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
@@ -24,42 +20,6 @@ const BodyTable = props => {
         }
     }, []);
 
-    const setData = () => {
-        // getPosts(
-        //     contextData.postsData.type, contextData.postsData.size, contextData.postsData.pageNo,
-        //     ['author', 'title', 'imageUrl', 'status', 'actors', 'tags', 'categories'], contextData.postsData.status,
-        //     contextData.postsData.author, contextData.postsData.keyword).then(res => {
-        //     contextData.setPostsData({
-        //         ...contextData.postsData,
-        //         posts: res.data.posts,
-        //         error: res.data.error,
-        //         totalCount: res.data.totalCount
-        //     });
-        //     contextData.setState({
-        //         ...contextData.state,
-        //         loading: false
-        //     });
-        // }).catch(() => {
-        //     contextData.setState({
-        //         ...contextData.state,
-        //         login: false
-        //     })
-        // })
-        return null
-    };
-
-    const onTrashHandler = () => {
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        });
-        contextData.functions.bulkActionPost([ state.hoveredId ], 'trash')
-    };
-
-    // const onDeletePermanentlyHandler = (id)=>{
-    //
-    // }
-
     const onDeletePermanentlyHandler = () => {
         // deletePost(state.hoveredId).then(res => {
         //     const posts = contextData.postsData.posts.filter(post => {
@@ -77,50 +37,44 @@ const BodyTable = props => {
         // })
     };
 
-    const onRestoreHandler = () => {
-        // contextData.setState({
-        //     ...contextData.state,
-        //     loading: true
-        // });
-        // postsBulkAction([state.hoveredId], 'Draft').then(res => {
-        //     setData()
-        // }).catch(err => {
-        //     contextData.setState({
-        //         ...contextData.state,
-        //         loading: false
-        //     });
-        // })
-    };
-
     let HoverOnTitle = (props) => {
-
         if (props.post._id === state.hoveredId) {
             let editPostPath = `/admin/post?id=${ props.post._id }`;
-            if (props.post.status === 'Trash') {
+            if (props.post.status === 'trash') {
                 return (
                     <div className='postControlOptions'>
-                        <Link to={ editPostPath }>Edit</Link>
-                        <button onClick={ () => onDeletePermanentlyHandler(props.post._id) }>Delete Permanently</button>
-                        <button onClick={ () => onRestoreHandler() }>Move to Draft</button>
-                        {/*<button onClick={() => quickEditBtnHandler(props.post._id)}>QEdit</button>*/ }
+                        <Link href={ editPostPath }><a><button>Edit</button></a></Link>
+                        <button onClick={ () => contextData.functions.bulkActionPost([ state.hoveredId ], 'delete') }>Delete</button>
+                        <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'draft') }>Draft</button>
+                        <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'pending') }>Pending</button>
+                        <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'published') }>Publish</button>
+                        <button>View</button>
                     </div>
                 )
-            } else {
+            }else if (props.post.status === 'published'){
                 return (
                     <div className='postControlOptions'>
-                        <Link href={ editPostPath }><a>Edit</a></Link>
-                        <button onClick={ () => onTrashHandler() }>Trash</button>
+                        <Link href={ editPostPath }><a><button>Edit</button></a></Link>
+                        <button onClick={ () => onDeletePermanentlyHandler(props.post._id) }>Delete</button>
+                        <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'draft') }>Draft</button>
+                        <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'pending') }>Pending</button>
                         <button>View</button>
-                        {/*<button onClick={() => quickEditBtnHandler(props.post._id)}>QEdit</button>*/ }
+                    </div>
+                )
+            }else {
+                return (
+                    <div className='postControlOptions'>
+                        <Link href={ editPostPath }><a><button>Edit</button></a></Link>
+                        <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'draft') }>Draft</button>
+                        <button onClick={ () => contextData.functions.bulkActionPost([ state.hoveredId ], 'pending') }>Pending</button>
+                        <button>View</button>
+                        <button onClick={ () => contextData.functions.bulkActionPost([ state.hoveredId ], 'trash') }>Trash</button>
+                        <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'published') }>Publish</button>
                     </div>
                 )
             }
 
-        } else return (
-            <div className='postControlOptions'>
-
-            </div>
-        )
+        } else return null
     };
 
     const onCheckHandler = e => {
@@ -154,7 +108,7 @@ const BodyTable = props => {
 
         const renderTags = post.tags.map(item => {
             return (
-                <Link href='/' key={ item } className='tagPreviewItem'> <a>{ item }</a>,</Link>)
+                <Link href='/' key={ item } > <a className='tagPreviewItem'>{ item }</a>,</Link>)
         });
 
         let author = post.author;
@@ -164,6 +118,8 @@ const BodyTable = props => {
 
         let isChecked = contextData.adminPostsData.checkedPosts.includes(post._id);
         return (
+            <>
+
             <tr key={ post._id } className='BodyTableItems' onTouchStart={ () => {
                 setState({ ...state, hoveredId: post._id })
             } } onMouseEnter={ () => {
@@ -178,8 +134,9 @@ const BodyTable = props => {
                     </div>
                     <div>
                         <p className='BodyTableItem'>{ post.title }</p>
-                        <HoverOnTitle post={ post }/>
+
                     </div>
+
                     <div>
                         <p className='BodyTableItem author noMobile'>{ author }</p>
                     </div>
@@ -205,7 +162,10 @@ const BodyTable = props => {
                         < img className='BodyTableItem noMobile' src={ post.mainThumbnail }/>
                     </div>
                 </td>
-            </tr>
+                <HoverOnTitle post={ post }/>
+               </tr>
+
+                </>
         )
     });
 

@@ -13,7 +13,7 @@ const ImagePreview = props => {
             return (
                 <div className='ImagePreview VideoInformationSection'>
                     <p>Image Preview</p>
-                    <Switch onChange={()=>state.open ?setState({...state,open: false}):setState({...state,open: true}) } checked={ props.isChecked }/>
+                    <Switch onChange={()=>state.open ?setState({...state,open: false}):setState({...state,open: true}) } checked={ state.open }/>
                     <div className="title">
 
                     </div>

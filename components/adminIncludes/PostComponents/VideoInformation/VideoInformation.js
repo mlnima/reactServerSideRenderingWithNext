@@ -51,7 +51,7 @@ const VideoInformation = props => {
                 <ViewsLikesDisLikes {...props} name={ 'likes' } value={state.likes||0} />
                 <ViewsLikesDisLikes {...props} name={ 'disLikes' } value={state.disLikes||0} />
                 <TextInputWithUploadBtn {...props} name='VideoTrailerUrl' title='Video Trailer Url' />
-                <TextInputWithUploadBtn {...props} name='mainThumbnail' title='Main thumbnail' />
+                {/*<TextInputWithUploadBtn {...props} name='mainThumbnail' title='Main thumbnail' />*/}
 
                 <TextInput {...props} name='downloadLink' title='Download Link' />
             </div>

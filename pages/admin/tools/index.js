@@ -12,8 +12,9 @@ const tools = props => {
         command: 'dir',
         log:''
     });
-    useEffect(() => {
-    }, []);
+    // useEffect(() => {
+    //  console.log(contextData.state )
+    // }, [contextData.state]);
 
     const onchangeHandler = e => {
         setState({
@@ -24,7 +25,7 @@ const tools = props => {
 
     const onExecutorHandler = (e,command)=>{
         e.preventDefault()
-        contextData.setState({
+        contextData.dispatchState({
             ...state,
             loading:true
         })
@@ -33,15 +34,15 @@ const tools = props => {
                 ...state,
                 log: state.log  + res.data.response
             })
-            contextData.setState({
+            contextData.dispatchState({
                 ...state,
-                loading:true
+                loading:false
             })
         }).catch(err=>{
             console.log( err)
-            contextData.setState({
+            contextData.dispatchState({
                 ...state,
-                loading:true
+                loading:false
             })
         })
         setTimeout(()=>{

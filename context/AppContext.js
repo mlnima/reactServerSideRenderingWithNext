@@ -24,9 +24,11 @@ const AppProvider = props => {
         title: 'site title',
         themeColor: '#000',
         description: 'site description',
-        keywords: []
+        keywords: [],
+        customScripts: []
     });
     const [ siteDesign, dispatchSiteDesign ] = useState({});
+
     const [ settings, dispatchSettings ] = useState({
         adminPanelSideBar: false,
         textEditorCurrentFile: '',
@@ -71,9 +73,8 @@ const AppProvider = props => {
     });
     const [ widgetsSettings, dispatchWidgetsSettings ] = useState({
         widgets: [],
-
     });
-    const [ Posts, dispatchPosts ] = useState([]);
+
     const [ videoPostsDataForClient, dispatchVideoPostsDataForClient ] = useState({
         pageNo: 1,
         size: 12,
@@ -152,6 +153,7 @@ const AppProvider = props => {
                 token: localStorage.wt
             };
             axios.post('/api/v1/posts/postsBulkAction', body).then(() => {
+                props.router.push({pathname:props.router.pathname,query:{...props.router.query}})
                 dispatchState({
                     ...state,
                     loading: false
@@ -164,6 +166,7 @@ const AppProvider = props => {
                 });
             })
         },
+
         deletePost: (id) => {
             const body = {
                 _id: id,
@@ -171,7 +174,7 @@ const AppProvider = props => {
             };
             return axios.post('/api/v1/posts/deletePost', body)
         },
-        updateSetting : async (type, data) => {
+        updateSetting: async (type, data) => {
             const body = {
                 token: localStorage.wt,
                 type,
@@ -184,18 +187,6 @@ const AppProvider = props => {
     useEffect(() => {
         functions.getAndSetUserInfo()
     }, []);
-
-    useEffect(() => {
-        if (props.router.pathname === '/admin/posts') {
-            functions.getPosts(adminPostsData).then(res => {
-                dispatchAdminPosts(res.data.posts);
-                dispatchAdminPostsData({
-                    ...adminPostsData,
-                    totalPosts: parseInt(res.data.totalCount),
-                })
-            })
-        }
-    }, [ props.router.pathname, adminPostsData.pageNo, adminPostsData.size, adminPostsData.postType, adminPostsData.keyword, adminPostsData.status, adminPostsData.fields ]);
 
     return (
         <div>

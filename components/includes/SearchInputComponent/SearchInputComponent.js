@@ -12,13 +12,10 @@ const SearchInputComponent = props => {
     });
 
     useEffect(() => {
-        console.log( props)
-        if (props.pathURL){
             setState({
                 ...state,
                 pathURL:props.pathURL || '/posts'
             })
-        }
     }, []);
 
 
@@ -33,14 +30,14 @@ const SearchInputComponent = props => {
 
     return (
         <div className='search-bar'>
-            <input name='keyword' onChange={e=>onChangeHandler(e)}/>
+            <input className='search-input' name='keyword' onChange={e=>onChangeHandler(e)}/>
             <Link href={{
                 pathname:state.pathURL,
                 query:{
                     ...state.queries,
                     keyword:state.keyword
                 }
-            }}><a>Search</a></Link>
+            }}><a className='search-bar-btn'>Search</a></Link>
         </div>
     );
 };

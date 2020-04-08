@@ -20,7 +20,7 @@ const Header = props => {
     return (
         <div className='Header' style={state.style}>
             <Logo/>
-            <SearchInputComponent/>
+            <SearchInputComponent />
         </div>
     );
 };

@@ -2,7 +2,26 @@
 @import "../../../../styles/colors";
 @import "../../../../styles/mixIns";
 
+.postControlOptions {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  padding: 20px 0;
+  max-width: 300px;
+
+  a, button {
+    @include buttonLikeLink;
+    font-size: small;
+    border: none;
+    //padding:0;
+
+  }
+}
+
 .BodyTable {
+
+
   .BodyTableItemCheckBox {
     //transform: scale(1.5);
   }
@@ -10,12 +29,13 @@
   .BodyTableItems {
     display: grid;
 
-    .tagCategoriesActorsPreview  {
+    .tagCategoriesActorsPreview {
       max-width: 100%;
       overflow: hidden;
       white-space: pre-wrap;
       text-overflow: inherit;
-      span{
+
+      span {
         color: $linkBlueColor;
         padding: 2px;
       }
@@ -26,7 +46,7 @@
       background-color: $AdminBackground50;
       @include postsTableGridMobile;
       align-items: center;
-      margin: 5px 0;
+      margin: 10px 0;
       font-size: x-small;
       //@include contentBorder;
       .noMobile {
@@ -64,21 +84,6 @@
         font-size: x-small;
       }
 
-      .postControlOptions {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        height: 32px;
-
-        a, button {
-          //@include buttonLikeLink;
-          font-size: xx-small;
-          border: none;
-          //padding: 0;
-          //margin: auto;
-
-        }
-      }
     }
 
   }
@@ -95,8 +100,13 @@
 
 @media only screen and (min-width: 768px) {
   .BodyTable {
+    //&:nth-child(even) {
+    //  background-color: $AdminColor20;
+    //  color: white;
+    //}
     .BodyTableItems {
       .postColumn {
+
         @include postsTableGridDesktop;
 
         .noMobile {

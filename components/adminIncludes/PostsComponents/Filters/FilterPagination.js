@@ -49,7 +49,7 @@ const FilterPagination = props => {
                     pathname: props.pathname || props.router.pathname, query: { ...props.query, page: props.getPostsData.pageNo + 1 }
                 } }><a className='adminPaginationActionLink'><FA className='fontawesomeMedium' name="angle-right"/></a></Link>
 
-                <Link key={ `...${ Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)) }` } href={ {
+                <Link key={ `${ Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)) }` } href={ {
                     pathname: props.pathname || props.router.pathname, query: { ...props.query, page: Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)) }
                 } }><a className='adminPaginationActionLink'><FA className='fontawesomeMedium' name="angle-double-right"/></a></Link>
             </div>

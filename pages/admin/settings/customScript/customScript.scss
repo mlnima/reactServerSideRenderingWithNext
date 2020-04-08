@@ -1,14 +1,89 @@
 @import "../../../../styles/colors";
 @import "../../../../styles/buttons";
+@import "../../../../styles/inputs";
+@import "../../../../styles/grid";
+
+.addCustomScriptForm {
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+
+  .scriptName {
+    @include inputNormalWithRadius;
+    background-color: $light100;
+    width: 300px;
+    margin: 10px 0;
+  }
+
+  .addScriptTextarea {
+    @include inputNormalWithRadius;
+    background-color: $light100;
+    width: 50%;
+    min-width: 300px;
+    min-height: 300px;
+    margin: 10px 0;
+  }
+
+  button {
+    @include greenActionBtn
+  }
+}
+
+.customScripts {
+  @include adminDesignPageItems;
+
+  .customScriptPageItem {
+    display: flex;
+    flex-direction: column;
+    background-color: $dark90;
+    padding:10px;
+    border-radius: 5px;
+
+    .customScriptPageItemHead{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      .customScriptPageItemHeadName {
+        @include inputNormalWithRadius;
+        background-color: $dark80;
+        color:  $light100;
+        width: 85%;
+        margin: 10px 0;
+      }
+      .removeScript{
+        background-color: $dark80;
+        color:  $light100;
+      }
+
+    }
+
+
+    .customScript {
+      @include inputNormalWithRadius;
+      background-color: $dark80;
+      color:  $light100;
+      min-width: 95%;
+      min-height: 300px;
+
+
+    }
+
+    button {
+      @include AdminLightBtn;
+    }
+  }
+}
+
 .customScriptPage {
   .customScript {
-   background-color: $light100;
+    background-color: $light100;
     width: 100%;
     min-height: 400px;
     padding: 10px;
     font-weight: bold;
   }
-  button{
+
+  button {
     @include greenActionBtn
   }
 }
