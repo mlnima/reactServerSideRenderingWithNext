@@ -9,8 +9,7 @@ const AddWidgetWithPositionMenu = props => {
     const [ state, setState ] = useState({
         open:false
     });
-    useEffect(() => {
-    }, []);
+
 
     const onOpenHandler =()=>{
         state.open?setState({

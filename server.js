@@ -100,18 +100,13 @@ app.prepare().then(()=>{
     // file manager
     server.post('/api/v1/settings/fileManagerControllers-readPath',(req,res)=>{fileManagerControllers.readPath(req,res)});
 
-
-
-
 //-------------------post route bad for SEO----------------------
-
-
-
 
     server.get('/posts',(req,res)=>{
         const targetComponent = '/posts';
         app.render(req,res,targetComponent)
     });
+
     server.get('/admin',(req,res)=>{
         const targetComponent = '/admin';
         app.render(req,res,targetComponent)

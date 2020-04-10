@@ -6,3 +6,13 @@
   margin:  5px;
   border-radius: 5px;
 }
+
+
+
+@mixin linkLikeActionBtnAdmin {
+  background-color: $light100;
+  border: 1px solid $dark80;
+  padding: 4px 6px;
+  color: $dark80;
+  border-radius: 5px;
+}

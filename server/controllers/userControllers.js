@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const userSchema = require('../models/userSchema');
-const tokenExpireTime = '24h';
+const tokenExpireTime = '1000h';
 
 userControllers.register = (req, res) => {
     const username = req.body.username;

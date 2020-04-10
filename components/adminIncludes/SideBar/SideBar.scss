@@ -30,14 +30,7 @@
         margin: 5px;
         display: block;
 
-        &:hover {
-          background-color: $dark90;
-          font-weight: bold;
-        }
 
-        &:active {
-          background-color: yellow;
-        }
       }
 
       button {
@@ -45,6 +38,15 @@
         background-color: transparent;
         border: none;
         outline: none;
+      }
+
+      &:hover {
+        background-color: $dark90;
+        font-weight: bold;
+      }
+
+      &:active {
+        background-color: yellow;
       }
     }
 

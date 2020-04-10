@@ -63,7 +63,8 @@ const VideoElement = props => {
             }
         }
     };
-    const imageContent = () => {
+
+    const ImageContent = () => {
         let dataToRender = () => {
             if (state.isHover && props.state._id === contextData.state.videoPreviewID && props.state.videoTrailerUrl) {
                 return (
@@ -88,6 +89,8 @@ const VideoElement = props => {
         };
         return dataToRender()
     };
+
+
     const VideoPreviewMobileBtnLogo = () => {
         let element = <i className="fas fa-fast-forward"/>
         if (state.isHover) {
@@ -97,6 +100,8 @@ const VideoElement = props => {
         }
         return element
     };
+
+
     const MobilePreviewBtn = ()=>{
         if (props.state.videoTrailerUrl){
             return (
@@ -123,7 +128,8 @@ const VideoElement = props => {
                 <div className='VideoElement' key={props.state.title}>
                     <div className="image">
                         <span ref={qualityLabel} className='quality'>{props.state.quality}</span>
-                        {imageContent()}
+                        {/*{imageContent()}*/}
+                        <ImageContent/>
                         <span ref={viewLabel} className='views'><FA className='fontawesomeSmall' name="eye" />{props.state.views}</span>
                         <span ref={durationLabel} className='duration'>{props.state.duration}</span>
                     </div>

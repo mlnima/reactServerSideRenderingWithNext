@@ -4,6 +4,8 @@ import Filters from "../../../components/adminIncludes/PostsComponents/Filters/F
 import PostsDataTable from "../../../components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable";
 import { getAbsolutePath } from '../../../_variables/_variables'
 import { getPosts } from '../../../_variables/ajaxPostsVariables'
+import Link from 'next/link'
+import AppLayout from '../../../components/layouts/AppLayout'
 
 const adminPosts = props => {
 
@@ -14,6 +16,7 @@ const adminPosts = props => {
     return (
         <>
             <AdminLayout>
+                <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
                 <div className='Posts'>
                     <Filters {...props}/>
                     <PostsDataTable {...props}/>

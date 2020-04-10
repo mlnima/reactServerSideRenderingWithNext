@@ -118,8 +118,8 @@ const SideBar = props => {
 
         return (
             <div key={ item } className='SideBarItemElement'>
-                <div className='SideBarItemTitle'>
-                    <Link href={ state[item].pathURL }><a className='SideBarItem' onMouseOver={ () => setHovered(item) }>{ item.replace(/([A-Z])/g, " $1")  }</a></Link>
+                <div className='SideBarItemTitle' onMouseOver={ () => setHovered(item) }>
+                    <Link href={ state[item].pathURL }><a className='SideBarItem' >{ item.replace(/([A-Z])/g, " $1")  }</a></Link>
                     <button onClick={ () => hovered === item ? setHovered('') : setHovered(item) }><img className='fontawesomeSvgVerySmall' src={ hovered === item ? SortUpSvg : SortDownSvg } alt=""/></button>
                 </div>
 

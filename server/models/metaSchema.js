@@ -8,7 +8,8 @@ const metaSchema = mongoose.Schema({
     },
     type: String,
     description: String,
-    imageUrl:String
+    imageUrl:String,
+    count:Number
 });
 
 module.exports = mongoose.model("metas", metaSchema);

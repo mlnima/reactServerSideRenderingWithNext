@@ -14,6 +14,7 @@ const widgetSchema = mongoose.Schema({
     text:String,
     textAlign:String,
     customHtml:String,
+    metaType:String
 
 });
 

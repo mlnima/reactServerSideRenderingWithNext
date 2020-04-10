@@ -2,6 +2,7 @@ const settingSchema = require('../models/settings/settingSchema')
 const widgetSchema = require('../models/settings/widgetSchema')
 const postSchema = require('../models/postSchema')
 const commentSchema = require('../models/commentSchema')
+const metaSchema = require('../models/metaSchema')
 const fs = require('fs')
 const fsExtra = require('fs-extra')
 const { spawn } = require('child_process');
@@ -35,7 +36,6 @@ settingsControllers.update = (req, res) => {
     })
     res.end()
 };
-
 settingsControllers.get = async (req, res) => {
     const setting = await settingSchema.findOne({ type: req.body.type }).exec();
     res.json({ setting })
@@ -59,7 +59,6 @@ settingsControllers.getMultiple = async (req, res) => {
         res.end()
     })
 };
-
 settingsControllers.create = (req, res) => {
     const dataToSave = new settingSchema({
         type: req.body.type,
@@ -71,7 +70,6 @@ settingsControllers.create = (req, res) => {
         console.log(err)
     })
 }
-
 settingsControllers.addWidget = (req, res) => {
     const data = req.body.data;
     let dataToSave = new widgetSchema(data)
@@ -80,7 +78,6 @@ settingsControllers.addWidget = (req, res) => {
         res.end()
     })
 }
-
 settingsControllers.getWidget = (req, res) => {
     const position = req.body.position = 'all' ? {} : { position: req.body.position };
     widgetSchema.find(position).exec().then(widgets => {
@@ -91,7 +88,6 @@ settingsControllers.getWidget = (req, res) => {
         res.end()
     })
 }
-
 settingsControllers.getWidgetsWithData = (req, res) => {
     const position = req.body.position === 'all' ? {} : { position: req.body.position };
     widgetSchema.find(position).exec().then(async widgets => {
@@ -145,41 +141,10 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
         })
 
         const mapWidget = finalData.map(async widget => {
-            const sortMethod = widget.sortBy ? { [widget.sortBy]: -1 } : '-_id'
-            // if (finalData.type === 'posts') {
-            //     await postSchema.find({}).limit(widget.count).sort(sortMethod).exec().then(posts => {
-            //         finalData.posts = posts
-            //     })
-            //     return finalData
-            // }
-            //  if (finalData.type === 'recentComments'){
-            //     console.log( commentSchema.find({status:'approved'}).limit(5).exec())
-            //     await commentSchema.find({status:'approved'}).limit(widget.count).exec().then(comments=>{
-            //         finalData.comments=comments
-            //     })
-            // }
-            // else {
-            //     return widget
-            // }
-
-            // switch (finalData.type ) {
-            //     // case 'posts':
-            //     //     await postSchema.find({}).limit(widget.count).sort(sortMethod).exec().then(posts => {
-            //     //         finalData.posts = posts
-            //     //     })
-            //     //     return finalData
-            //     //     break
-            //     case 'recentComments':
-            //         // console.log( 'comments are :',await commentSchema.find({}).limit(8).exec() )
-            //         await commentSchema.find({}).limit(8).exec().then(comments=>{
-            //             finalData.comments=comments
-            //         })
-            //         console.log(finalData )
-            //         break
-            //     default:
-            //         return widget
-            // }
-
+            const sortMethod = widget.sortBy ? { [widget.sortBy]: -1 } : '-_id';
+            // const metaType = widget.metaType ? widget.metaType : 'tag'
+            let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
+            console.log(sortQuery)
             return {
                 _id: widget._id,
                 title: widget.title,
@@ -190,7 +155,9 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
                 redirectToTitle: widget.redirectToTitle,
                 count: widget.count,
                 type: widget.type,
+                metaType: widget.metaType,
                 position: widget.position,
+                metaData: widget.metaType ? await metaSchema.find({ type: widget.metaType }).limit(widget.count).sort(sortQuery).exec() : [],
                 posts: widget.type === 'posts' ? await postSchema.find({}).limit(widget.count).sort(sortMethod).exec() : [],
                 comments: widget.type === 'recentComments' ? await commentSchema.find({}).limit(widget.count).exec() : [],
                 sortBy: widget.sortBy,
@@ -204,7 +171,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
             res.json({ widgets: widgetsWithData })
             res.end()
         }).catch(err => {
-            console.log(err)
+            // console.log(err)
             res.end()
         })
 
@@ -224,16 +191,15 @@ settingsControllers.deleteWidget = (req, res) => {
         res.end()
     })
 }
-settingsControllers.executor =async (req, res) => {
+settingsControllers.executor = async (req, res) => {
     const command = req.body.command;
     const executeCommand = shell.exec(command)
-    res.json({response: await executeCommand.stdout})
+    res.json({ response: await executeCommand.stdout })
     res.end()
 }
 
 settingsControllers.updateWidget = (req, res) => {
     const data = req.body.data;
-    console.log(data)
     const _id = req.body.id;
     widgetSchema.findByIdAndUpdate(_id, data, { new: true }).exec().then(updatedWidgets => {
         res.json({ updatedWidgets })
@@ -246,41 +212,38 @@ settingsControllers.updateWidget = (req, res) => {
 settingsControllers.saveCustomStyle = (req, res) => {
     const data = req.body.data;
     const path = './static/style-sheet/customStyle.css'
-console.log( req.body)
-    settingSchema.findOneAndUpdate({ type:'customStyle' }, { data }, { new: true }).exec().then(styles=>{
+    settingSchema.findOneAndUpdate({ type: 'customStyle' }, { data }, { new: true }).exec().then(styles => {
 
-
-        if (!styles){
+        if (!styles) {
             const dataToSave = new settingSchema({
                 type: 'customStyle',
                 data: req.body.data
             });
 
-            dataToSave.save().then(savedData=>{
-                fsExtra.writeFile(path, styles.data,'utf8', (error, files) => {
-                    if (error){
-                        console.log( error)
+            dataToSave.save().then(savedData => {
+                fsExtra.writeFile(path, styles.data, 'utf8', (error, files) => {
+                    if (error) {
+                        console.log(error)
                     }
-                    console.log( 'scss file updated')
+                    console.log('scss file updated')
                 })
-                console.log( 'saved')
+                console.log('saved')
                 res.end()
-            }).catch(err=>{
-                console.log( err)
+            }).catch(err => {
+                console.log(err)
                 res.end()
             })
-        }else {
-            fsExtra.writeFile(path, styles.data,'utf8', (error, files) => {
-                if (error){
-                    console.log( error)
+        } else {
+            fsExtra.writeFile(path, styles.data, 'utf8', (error, files) => {
+                if (error) {
+                    console.log(error)
                 }
-                console.log( 'scss file updated')
+                console.log('scss file updated')
             })
         }
         res.end()
     })
 
 }
-
 
 module.exports = settingsControllers

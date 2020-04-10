@@ -11,6 +11,7 @@ export let widgetModels = {
     sortBy:'',
     text:'',
     textAlign:'center',
-    customHtml:''
+    customHtml:'',
+    metaType:'tag'
 }
 

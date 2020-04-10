@@ -3,30 +3,61 @@ const postSchema = require('../models/postSchema');
 const metaSchema = require('../models/metaSchema');
 const commentSchema = require('../models/commentSchema');
 
-const metasSaver = (metas, type) => {
+const metasSaver = async (metas, type) => {
     metas.forEach(meta => {
         const metaDataToSave = new metaSchema({
             name: meta,
             type
         })
         metaDataToSave.save().then(saved => {
-            console.log(saved)
+
         }).catch(err => {
 
         })
     })
 }
 
+const metaCountSetter = (metas,type)=>{
+    const typeSyncToPostMeta = type==='tag'?'tags':
+        type==='category'?'categories':
+        type==='actor'?'actors':''
+
+    metas.forEach(async meta=>{
+        // const metaPostCount = await postSchema.count({name:meta})
+
+
+        // console.log( await postSchema.count({[typeSyncToPostMeta]:new RegExp(meta, 'i')}).exec())
+       await metaSchema.findOneAndUpdate({name:meta},{count:await postSchema.count({[typeSyncToPostMeta]:new RegExp(meta, 'i')})})
+    })
+}
+
+
+
+function fieldGenerator(fields) {
+    // if (fields[0] === 'all')
+    let exportData = '';
+    for (let filed of fields) {
+        exportData += ` ${ filed } , `
+    }
+    return exportData
+};
+
 postsControllers.createNewPost = (req, res) => {
     // res.end()
     const newPost = req.body.postData;
-    metasSaver(newPost.tags,'tag')
-    metasSaver(newPost.categories,'category')
-    metasSaver(newPost.actors,'actor')
+    metasSaver(newPost.tags,'tag').then(()=>{
+        metaCountSetter(newPost.tags,'tag')
+    })
+    metasSaver(newPost.categories,'category').then(()=>{
+        metaCountSetter(newPost.categories,'category')
+    })
+    metasSaver(newPost.actors,'actor').then(()=>{
+        metaCountSetter(newPost.actors,'actor')
+    })
     newPost.lastModify = Date.now()
     const newPostDataToSave = new postSchema(newPost);
     newPostDataToSave.save().then(savedPostData => {
-        console.log(savedPostData.title, ' saved ');
+
         res.json({ savedPostData });
         res.end()
     }).catch(err => {
@@ -45,10 +76,16 @@ postsControllers.updatePost = (req, res) => {
     const _id = req.body.id;
     const updated = {...req.body.postData,lastModify: Date.now()}
     postSchema.findByIdAndUpdate(req.body.postData._id, updated, { new: true }).exec().then(updated => {
-        metasSaver(updated.tags,'tag')
-        metasSaver(updated.categories,'category')
-        metasSaver(updated.actors,'actor')
-        console.log(updated)
+        metasSaver(updated.tags,'tag').then(()=>{
+            metaCountSetter(updated.tags,'tag')
+        })
+        metasSaver(updated.categories,'category').then(()=>{
+            metaCountSetter(updated.categories,'category')
+        })
+        metasSaver(updated.actors,'actor').then(()=>{
+            metaCountSetter(updated.actors,'actor')
+        })
+
         res.end()
     }).catch(err => {
         res.sendStatus(500);
@@ -69,6 +106,7 @@ postsControllers.getPostsInfo = async (req, res) => {
     let actorQuery = !req.body.actor || req.body.actor === 'all' ? {} : { actors: new RegExp(req.body.actor, 'i') };
     let searchQuery = req.body.keyword === '' ? {} : {
         $or: [
+            { actors: new RegExp(req.body.actor, 'i') },
             { actors: new RegExp(req.body.actor, 'i') },
             { title: new RegExp(req.body.keyword, 'i') },
             { description: new RegExp(req.body.keyword, 'i') } ]
@@ -98,13 +136,13 @@ postsControllers.getPostInfo = (req, res) => {
 
     if (title) {
         postSchema.findOne({ title }).exec().then(post => {
-            console.log(post)
+
             res.json({ post, error: false });
             res.end()
         })
     } else if (_id) {
         postSchema.findOne({ _id }).exec().then(post => {
-            console.log(post)
+
             res.json({ post, error: false });
             res.end()
         })
@@ -154,15 +192,6 @@ postsControllers.likeDislikeView = (req, res) => {
     res.end()
 };
 
-function fieldGenerator(fields) {
-    // if (fields[0] === 'all')
-    let exportData = '';
-    for (let filed of fields) {
-        exportData += ` ${ filed } , `
-    }
-    return exportData
-};
-
 postsControllers.getMeta = async (req, res) => {
     const type = req.body.type;
     const size = req.body.size;
@@ -199,7 +228,7 @@ postsControllers.getMeta = async (req, res) => {
 }
 
 postsControllers.newComment = (req, res) => {
-    console.log(req.body)
+
     const commentDataToSave = new commentSchema(req.body)
     commentDataToSave.save().then(saved => {
         res.json({ savedComment: saved, error: false })
@@ -238,9 +267,9 @@ postsControllers.getComments = (req, res) => {
 };
 
 postsControllers.updateComment = (req, res) => {
-    console.log(req.body)
+
     commentSchema.findByIdAndUpdate(req.body._id, req.body.update, { new: true }).exec().then(updated => {
-        console.log(updated)
+
         res.end()
     })
 

@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-
+import Link from 'next/link'
 import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
 import ProgressBar from "../../ProgressBar/ProgressBar";
 import { likeValueCalculator } from "../../../../_variables/_variables";
@@ -9,9 +9,11 @@ import FA from 'react-fontawesome';
 import LikeBtnSvg from '../../../../static/images/fontawesome/thumbs-up-solid.svg'
 import DisLikeBtnSvg from '../../../../static/images/fontawesome/thumbs-down-solid.svg'
 import './PostInfo.scss'
+import { AppContext } from '../../../../context/AppContext'
 // import * as socialShare from "react-share"
 
 const PostInfo = props => {
+    const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
         likeValue: 0,
         postAbsolutePath: ''
@@ -24,22 +26,34 @@ const PostInfo = props => {
         });
         likeDislikeView(props.id, 'views')
     }, []);
+    // useEffect(() => {
+    //     console.log(contextData.userData)
+    // }, [ contextData.userData ]);
+
+    const EditLinkForAdmin = () => {
+        if (contextData.userData.role === 'administrator') {
+            return (
+                <Link href={ `/admin/post?id=${ props.id }` }><a>Edit</a></Link>
+            )
+        } else return null
+    }
 
     return (
         <div className='post-info'>
-
+            <EditLinkForAdmin/>
             <div className='post-info-head'>
+
                 <h1>{ props.title }</h1>
                 <div className="like">
                     <button onClick={ e => {
                         likeDislikeView(props.id, 'likes')
-                        e.target.style.filter ='invert(1) blur(2px)'
+                        e.target.style.filter = 'invert(1) blur(2px)'
                     } }>
                         <img className='fontawesomeSvgMedium' src={ LikeBtnSvg } alt=""/>
                     </button>
                     <button onClick={ e => {
                         likeDislikeView(props.id, 'disLikes')
-                        e.target.style.filter ='invert(1) blur(2px)'
+                        e.target.style.filter = 'invert(1) blur(2px)'
                     } }>
                         <img className='fontawesomeSvgMedium' src={ DisLikeBtnSvg } alt=""/>
                     </button>

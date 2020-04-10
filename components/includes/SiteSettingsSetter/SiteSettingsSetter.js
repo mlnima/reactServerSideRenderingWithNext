@@ -2,6 +2,7 @@ import React, { useState, useContext, useEffect, useRef } from 'react';
 import { AppContext } from '../../../context/AppContext'
 import Head from 'next/dist/next-server/lib/head'
 import AppLayout from '../../layouts/AppLayout'
+import withRouter from 'next/dist/client/with-router'
 
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
@@ -40,28 +41,41 @@ const SiteSettingSetter = props => {
 
     const renderCustomScripts = (props.identity.data.customScripts || []).map(script => {
         return (
-            <script key={script.scriptName}>
+            <script key={ script.scriptName }>
                 { script.scriptBody }
             </script>
         )
     })
 
-    const RenderGoogleAnalyticsScript = () => {
-        if (props.identity.data.googleAnalyticsID) {
-            console.log( 'there is')
-            return (
-                <>
-                                    <script dangerouslySetInnerHTML={ {
-                                        __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-                        new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-                        j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-                        'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-                      })(window,document,'script','dataLayer',${ props.identity.data.googleAnalyticsID });`
-                    } }/>
-                </>
+    // const RenderGoogleAnalyticsScript = () => {
+    //     if (props.identity.data.googleAnalyticsID) {
+    //         console.log( 'there is')
+    //         return (
+    //             <>
+    //                                 <script dangerouslySetInnerHTML={ {
+    //                                     __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+    //                     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
+    //                     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
+    //                     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
+    //                   })(window,document,'script','dataLayer',${ props.identity.data.googleAnalyticsID });`
+    //                 } }/>
+    //             </>
+    //
+    //         )
+    //     } else return null
+    // }
 
-            )
-        } else return null
+    useEffect(() => {
+        googleAnalyticsHandler()
+    }, [props.router]);
+
+    const googleAnalyticsHandler = () => {
+        window.dataLayer = window.dataLayer || [];
+        const gTag = ()=> {
+            dataLayer.push(arguments)
+        }
+        gTag('js', new Date())
+        gTag('config', contextData.siteIdentity.googleAnalyticsID)
     }
 
     return (
@@ -73,32 +87,15 @@ const SiteSettingSetter = props => {
             {/*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*/ }
             <meta name="description" content={ state.description }/>
             <meta name="keywords" content={ state.keywords }/>
+            <script async src={`https://www.googletagmanager.com/gtag/js?id=${ contextData.siteIdentity.googleAnalyticsID}`}/>
             <link rel="icon" href="/favicon.ico"/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
             <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
             { renderCustomScripts }
-            <RenderGoogleAnalyticsScript/>
+
 
         </Head>
     )
 };
-export default SiteSettingSetter;
+export default withRouter(SiteSettingSetter);
 
-{/*<script src={ `https://www.googletagmanager.com/gtag/js?id=${ props.identity.data.googleAnalyticsID }` }/>*/
-}
-{/*< script>*/
-}
-{/*    window.dataLayer = window.dataLayer || [];*/
-}
-{/*    function gtag() {*/
-}
-{/*    dataLayer.push(arguments)*/
-}
-{/*}*/
-}
-{/*    gtag('js', new Date());*/
-}
-{/*    gtag('config', props.identity.data.googleAnalyticsID );*/
-}
-{/*</script>*/
-}

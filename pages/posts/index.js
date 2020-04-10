@@ -10,6 +10,7 @@ import PaginationComponent from '../../components/includes/PaginationComponent/P
 import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import Footer from '../../components/includes/Footer/Footer'
 import { getAbsolutePath } from '../../_variables/_variables'
+import AdminLayout from '../../components/layouts/AdminLayout'
 
 const posts = props => {
     const [ state, setState ] = useState({

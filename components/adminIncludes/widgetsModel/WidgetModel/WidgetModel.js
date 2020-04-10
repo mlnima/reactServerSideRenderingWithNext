@@ -24,7 +24,8 @@ const WidgetModel = props => {
         sortBy: props.data.sortBy || '-id',
         text: props.data.text || '',
         textAlign: props.data.text || 'center',
-        customHtml: props.data.customHtml || ''
+        customHtml: props.data.customHtml || '',
+        metaType: props.data.metaType || ''
     });
 
     const [ widgetSettings, setWidgetSettings ] = useState({
@@ -120,7 +121,7 @@ const WidgetModel = props => {
                     <>
                         <p>Sort By:</p>
                         <select name='sortBy' value={ state.sortBy } onChange={ e => onChangeHandler(e) }>
-                            <option value='id'>ID</option>
+                            <option value='_id'>ID</option>
                             <option value='views'>Views</option>
                             <option value='likes'>Likes</option>
                         </select>
@@ -133,6 +134,7 @@ const WidgetModel = props => {
                         <div className='categoriesTags'>
                             { renderCategories }
                         </div>
+
                         <p>Tags:</p>
                         <div className='inputWithAddBtn'>
                             <input ref={ tags } className='tags' name='tags' placeholder='Tags'/>
@@ -152,9 +154,22 @@ const WidgetModel = props => {
                     </>
                 )
                 break
-            case 'text':
+            case 'meta':
                 return (
                     <>
+                        <p>Sort By:</p>
+                        <select name='sortBy' value={ state.sortBy } onChange={ e => onChangeHandler(e) }>
+                            <option value='_id'>ID</option>
+                            <option value='count'>Count</option>
+                        </select>
+                        <p>Meta Type:</p>
+                        <select name='metaType' value={ state.metaType } onChange={ e => onChangeHandler(e) }>
+                            <option value='tag'>Tag</option>
+                            <option value='category'>Category</option>
+                            <option value='actor'>Actor</option>
+                        </select>
+                        <p>Count:</p>
+                        <input ref={ count } name='count' type='number' className='count' placeholder='count' value={ state.count } onChange={ e => onChangeHandler(e) }/>
 
                     </>
                 )
@@ -185,7 +200,7 @@ const WidgetModel = props => {
                         <option value='text'>Text</option>
                         <option value='recentComments'>Recent Comments</option>
                         <option value='search'>Search</option>
-                        <option value='tagsCloud'>Tags Cloud</option>
+                        <option value='meta'>Meta</option>
                         <option value='video'>Video</option>
                         <option value='navigationMenu'>Navigation Menu</option>
                     </select>
@@ -209,10 +224,11 @@ const WidgetModel = props => {
                         <option value='right'>Right</option>
                     </select>
                     <RenderOptionByFormat/>
-                    <p>Redirect Link:</p>
-                    <input className='redirectLink' name='redirectLink' placeholder='Redirect' value={ state.redirectLink } onChange={ e => onChangeHandler(e) }/>
-                    <p>Title for Redirect Link</p>
+                    <p>Redirect Link Title</p>
                     <input className='redirectToTitle' name='redirectToTitle' placeholder='Title for Redirect Link' value={ state.redirectToTitle } onChange={ e => onChangeHandler(e) }/>
+                    <p>Redirect Link URL:</p>
+                    <input className='redirectLink' name='redirectLink' placeholder='Redirect' value={ state.redirectLink } onChange={ e => onChangeHandler(e) }/>
+
                     <div className='control'>
                         <button onClick={ () => onSaveHandler() }>Save</button>
                         <button onClick={ () => onDeleteHandler() }>Delete</button>
