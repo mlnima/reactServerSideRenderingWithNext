@@ -7,6 +7,7 @@ import './navigationAdmin.scss';
 import { AppContext } from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
 import AdminDesignSettingColorType from '../../../../components/adminIncludes/AdminDesignSettingColorType/AdminDesignSettingColorType'
+import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
 
 const navigation = props => {
     const contextData = useContext(AppContext);
@@ -87,9 +88,14 @@ const navigation = props => {
                 </div>
                 <button className='saveBtn' onClick={ () => onSaveChangesHandler('navigation') }>Save</button>
             </div>
-            <AdminDesignSettingColorType positionName='navigationBackgroundColor' type='background'/>
-            <AdminDesignSettingColorType positionName='navigationTextColor' type='color'/>
-            <button className='saveBtn' onClick={ () => onSaveChangesHandler('design') }>Save</button>
+            {/*<AdminDesignSettingColorType positionName='navigationBackgroundColor' type='background'/>*/}
+            {/*<AdminDesignSettingColorType positionName='navigationTextColor' type='color'/>*/}
+            {/*<button className='saveBtn' onClick={ () => onSaveChangesHandler('design') }>Save</button>*/}
+
+            <div className='colorSettingSections'>
+                <ColorSection designName='navigationBackgroundColor'/>
+                <ColorSection designName='navigationTextColor'/>
+            </div>
         </AdminLayout>
     );
 };

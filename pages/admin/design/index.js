@@ -20,31 +20,31 @@ const design = props => {
         //mobile theme
         themeColor: props.design.themeColor || '#fff',
         //top bar
-        topBarBackgroundColor: props.design.topBarBackgroundColor || '#181818',
-        topBarTextColor: props.design.topBarTextColor || '#fff',
+        // topBarBackgroundColor: props.design.topBarBackgroundColor || '#181818',
+        // topBarTextColor: props.design.topBarTextColor || '#fff',
         //header
-        headerBackgroundColor: props.design.headerBackgroundColor || '#000',
-        headerTextColor: props.design.headerTextColor || '#fff',
+        // headerBackgroundColor: props.design.headerBackgroundColor || '#000',
+        // headerTextColor: props.design.headerTextColor || '#fff',
         //navigation
-        navigationBackgroundColor: props.design.navigationBackgroundColor || '#181818',
-        navigationTextColor: props.design.navigationTextColor || '#fff',
+        // navigationBackgroundColor: props.design.navigationBackgroundColor || '#181818',
+        // navigationTextColor: props.design.navigationTextColor || '#fff',
         //footer
-        footerBackgroundColor: props.design.footerBackgroundColor || '#181818',
-        footerTextColor: props.design.footerTextColor || '#fff',
+        // footerBackgroundColor: props.design.footerBackgroundColor || '#181818',
+        // footerTextColor: props.design.footerTextColor || '#fff',
         //widgets
-        widgetHeaderBackgroundColor: props.design.widgetHeaderBackgroundColor || '#222222',
-        widgetHeaderTextColor: props.design.widgetHeaderTextColor || '#fff',
-        widgetHeaderRedirectLinkBackgroundColor: props.design.widgetHeaderRedirectLinkBackgroundColor || '#fff',
-        widgetHeaderRedirectLinkTextColor: props.design.widgetHeaderRedirectLinkTextColor || '#fff',
-        widgetBodyBackgroundColor: props.design.widgetBodyBackgroundColor || 'transparent',
-        widgetBodyTextColor: props.design.widgetBodyTextColor || '#fff',
-        widgetBodyBorder: props.design.widgetBodyBorder || 'none',
+        // widgetHeaderBackgroundColor: props.design.widgetHeaderBackgroundColor || '#222222',
+        // widgetHeaderTextColor: props.design.widgetHeaderTextColor || '#fff',
+        // widgetHeaderRedirectLinkBackgroundColor: props.design.widgetHeaderRedirectLinkBackgroundColor || '#fff',
+        // widgetHeaderRedirectLinkTextColor: props.design.widgetHeaderRedirectLinkTextColor || '#fff',
+        // widgetBodyBackgroundColor: props.design.widgetBodyBackgroundColor || 'transparent',
+        // widgetBodyTextColor: props.design.widgetBodyTextColor || '#fff',
+        // widgetBodyBorder: props.design.widgetBodyBorder || 'none',
         //************Post Page***************
         //comments
-        commentsAuthorTextColor: props.design.commentsAuthorTextColor || '#0085ba',
-        commentsDateTextColor: props.design.commentsDateTextColor || '#FF3565',
-        commentsBodyTextColor: props.design.commentsBodyTextColor || '#fff',
-        commentsBackgroundColor:  props.design.commentsBackgroundColor ||'transparent',
+        // commentsAuthorTextColor: props.design.commentsAuthorTextColor || '#0085ba',
+        // commentsDateTextColor: props.design.commentsDateTextColor || '#FF3565',
+        // commentsBodyTextColor: props.design.commentsBodyTextColor || '#fff',
+        // commentsBackgroundColor:  props.design.commentsBackgroundColor ||'transparent',
 
 
     });
@@ -57,30 +57,30 @@ const design = props => {
         }
     }, [props]);
 
-    useEffect(() => {
-        console.log( customStyle)
-    }, [customStyle]);
+    // useEffect(() => {
+    //     console.log( customStyle)
+    // }, [customStyle]);
 
-    const onChangeHandler = e => {
-        setColors({
-            ...colors,
-            [e.target.name]: e.target.value
-        })
-    }
+    // const onChangeHandler = e => {
+    //     setColors({
+    //         ...colors,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
 
-    const onSubmitHandler = e => {
-        e.preventDefault()
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        })
-        updateSetting('design', { ...colors }).then(() => {
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
-        })
-    };
+    // const onSubmitHandler = e => {
+    //     e.preventDefault()
+    //     contextData.dispatchState({
+    //         ...contextData.state,
+    //         loading: true
+    //     })
+    //     updateSetting('design', { ...colors }).then(() => {
+    //         contextData.dispatchState({
+    //             ...contextData.state,
+    //             loading: false
+    //         })
+    //     })
+    // };
 
     const renderColorsFields = Object.keys(colors).map(element => {
         return (

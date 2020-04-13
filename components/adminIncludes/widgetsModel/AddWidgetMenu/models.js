@@ -12,6 +12,11 @@ export let widgetModels = {
     text:'',
     textAlign:'center',
     customHtml:'',
-    metaType:'tag'
+    metaType:'',
+    pathURL:'',
+    LogoUrl:'',
+    LogoText:'',
+    headLine:'',
+    viewType:'standard'
 }
 

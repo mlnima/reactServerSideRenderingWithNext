@@ -2,6 +2,8 @@ const express = require('express');
 const next = require('next');
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
+const fileUpload = require('express-fileupload');
+const cookieParser = require('cookie-parser');
 const userController = require('./server/controllers/userControllers');
 const postsControllers = require('./server/controllers/postsControllers');
 const siteMapController = require('./server/controllers/siteMapController');
@@ -21,6 +23,8 @@ const apicache = require('apicache')
 const cache = apicache.middleware;
 const onlyStatus200 = (req, res) => res.statusCode === 200;
 const cacheSuccesses = cache('1 day', onlyStatus200);
+
+
 //--
 mongoose.Promise = global.Promise;
 
@@ -44,8 +48,19 @@ const PORT = process.env.REACT_APP_PORT || 3000;
 
 app.prepare().then(()=>{
     const server = express();
+    server.use(cookieParser());
+    server.use(fileUpload());
+    // server.use(fileUpload({
+    //     useTempFiles: true,
+    //     tempFileDir: './tmp/'
+    // }));
     server.use(bodyParser.json());
     server.use(xmlparser());
+
+
+
+
+
     server.get('/robots.txt',(req,res)=>{
         return res.status(200).sendFile('robots.txt',robotsOptions)
     });
@@ -99,6 +114,8 @@ app.prepare().then(()=>{
     server.post('/api/v1/settings/executor',(req,res)=>{settingsControllers.executor(req,res)});
     // file manager
     server.post('/api/v1/settings/fileManagerControllers-readPath',(req,res)=>{fileManagerControllers.readPath(req,res)});
+    server.post('/api/v1/settings/fileManagerControllers-uploadFile',(req,res)=>{ fileManagerControllers.uploadFile(req,res)});
+
 
 //-------------------post route bad for SEO----------------------
 

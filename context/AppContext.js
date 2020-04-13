@@ -75,6 +75,28 @@ const AppProvider = props => {
         widgets: [],
     });
 
+
+
+
+
+    // const [ adminWidgets, dispatchAdminWidgets ] = useState({
+    //     home:[],
+    //     homePageSidebar:[],
+    //     postPageSidebar:[],
+    //     postsPageSidebar:[],
+    //     footer:[],
+    //     tagsPageSidebar:[],
+    //     categoriesPageSidebar:[],
+    //     actorsPageSidebar:[],
+    //     header:[]
+    // });
+
+
+
+
+
+    const [siteWidgets,setSiteWidgets] = useState([])
+
     const [ videoPostsDataForClient, dispatchVideoPostsDataForClient ] = useState({
         pageNo: 1,
         size: 12,
@@ -216,7 +238,11 @@ const AppProvider = props => {
                     siteDesign,
                     dispatchSiteDesign,
                     alert,
-                    dispatchAlert
+                    dispatchAlert,
+                    siteWidgets,
+                    setSiteWidgets,
+                    // adminWidgets,
+                    // dispatchAdminWidgets
                 } }>
 
                 { props.children }

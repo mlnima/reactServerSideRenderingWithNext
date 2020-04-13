@@ -7,16 +7,15 @@
   padding: 10px ;
   .editor{
     display: flex;
+    justify-content: space-between;
     width: 100%;
     .textInputWithUpload{
       @include inputNormalWithRadius;
       background-color: $AdminBackground50;
-      width: 90%;
+      width: 100%;
     }
-    .uploadBtn {
-      @include AdminLightBtn;
-      margin: 0 3px;
-      border-radius: 5px;
+    .upload-file-btn {
+      width: 10%;
     }
   }
 }

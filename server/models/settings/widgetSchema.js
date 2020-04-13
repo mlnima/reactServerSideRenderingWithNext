@@ -14,7 +14,13 @@ const widgetSchema = mongoose.Schema({
     text:String,
     textAlign:String,
     customHtml:String,
-    metaType:String
+    metaType:String,
+    pathURL:String,
+    LogoUrl:String,
+    LogoText:String,
+    headLine:String,
+    viewType:String,
+    positionIndex:Number
 
 });
 

@@ -26,13 +26,13 @@ const SiteSettingSetter = props => {
         }
         if (props.identity) {
             contextData.dispatchSiteIdentity(props.identity.data)
+        }if (props.widgets){
+            contextData.setSiteWidgets(props.widgets)
         }
 
     }, [ props ]);
 
-    // useEffect(() => {
-    //     console.log(props.identity.data.customScripts)
-    // }, [ props ]);
+
 
     useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor
@@ -67,11 +67,11 @@ const SiteSettingSetter = props => {
 
     useEffect(() => {
         googleAnalyticsHandler()
-    }, [props.router]);
+    }, [ props.router ]);
 
     const googleAnalyticsHandler = () => {
         window.dataLayer = window.dataLayer || [];
-        const gTag = ()=> {
+        const gTag = () => {
             dataLayer.push(arguments)
         }
         gTag('js', new Date())
@@ -87,7 +87,7 @@ const SiteSettingSetter = props => {
             {/*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*/ }
             <meta name="description" content={ state.description }/>
             <meta name="keywords" content={ state.keywords }/>
-            <script async src={`https://www.googletagmanager.com/gtag/js?id=${ contextData.siteIdentity.googleAnalyticsID}`}/>
+            <script async src={ `https://www.googletagmanager.com/gtag/js?id=${ contextData.siteIdentity.googleAnalyticsID }` }/>
             <link rel="icon" href="/favicon.ico"/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
             <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>

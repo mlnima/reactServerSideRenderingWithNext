@@ -4,7 +4,7 @@ import withRouter from 'next/dist/client/with-router'
 import axios from 'axios'
 import { AppContext } from "../../context/AppContext";
 import { getAbsolutePath } from '../../_variables/_variables'
-import { getMultipleSetting } from '../../_variables/ajaxVariables'
+import { getMultipleSetting, getMultipleWidgetWithData } from '../../_variables/ajaxVariables'
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 
 const Login = props => {
@@ -76,9 +76,10 @@ Login.getInitialProps = async ({ req }) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let settings;
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName)
-
-
+    let widgets;
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header' ] }, true, domainName)
+    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? settingsData.data.settings : []
-    return { ...settings }
+    return { ...settings,widgets }
 }
 export default withRouter(Login);

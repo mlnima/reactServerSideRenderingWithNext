@@ -1,17 +1,11 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, {  useContext } from 'react';
 import DropDownWidget from "../DropDownWidget/DropDownWidget";
 import { AppContext } from "../../../../context/AppContext";
-import FA from "react-fontawesome";
 import withRouter from "next/dist/client/with-router";
 import { updatePost, savePost } from '../../../../_variables/ajaxPostsVariables'
 
 const ActionOnPost = props => {
     const contextData = useContext(AppContext);
-
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-
-    }, []);
 
     const onSaveHandler = () => {
         contextData.dispatchState({
@@ -26,7 +20,7 @@ const ActionOnPost = props => {
                     loading: false
                 })
             }).catch(err => {
-                console.log( err)
+                console.log(err)
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
@@ -35,7 +29,7 @@ const ActionOnPost = props => {
         } else {
             savePost(props.postData, window.location.origin).then(res => {
 
-                props.router.push('/admin/post?id='+res.data.savedPostData._id)
+                props.router.push('/admin/post?id=' + res.data.savedPostData._id)
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
@@ -56,12 +50,14 @@ const ActionOnPost = props => {
         }
     };
 
-
+    const onViewHandler = () => {
+        window.open('/' + props.postData.title, '_blank')
+    }
 
     return (
         <div className='ActionOnPost'>
             <div className='ActionOnPostItem'>
-                <button className='previewBtn'>Preview</button>
+                <button className='previewBtn' onClick={ () => onViewHandler() }>View</button>
             </div>
             <div className='ActionOnPostItem'>
                 <select name='status' value={ props.postData.status } onChange={ e => props.onChangeHandler(e) }>
@@ -78,7 +74,7 @@ const ActionOnPost = props => {
 };
 
 ActionOnPost.getInitialProps = async ({ query }) => {
-
     return { query }
 };
+
 export default withRouter(ActionOnPost);

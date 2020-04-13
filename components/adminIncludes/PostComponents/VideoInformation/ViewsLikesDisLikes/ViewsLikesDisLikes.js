@@ -1,5 +1,6 @@
 import React, { useRef, useState, useEffect } from 'react';
 import { DelayInput } from 'react-delay-input'
+import { convertVariableNameToName } from '../../../../../_variables/_variables'
 
 const ViewsLikesDisLikes = props => {
     const inputElement = useRef(null)
@@ -14,7 +15,7 @@ const ViewsLikesDisLikes = props => {
     return (
         <div className='ViewsLikesDisLikes VideoInformationSection'>
             <div className="title">
-                <p>{ props.name }</p>
+                <p>{convertVariableNameToName( props.name) }</p>
             </div>
             <div className="editor">
                 {/*<input type='number' name={ props.name } className='numberInput' value={ props.postData[props.name] } onChange={ e => props.onChangeHandler(e) }/>*/}

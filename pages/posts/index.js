@@ -78,7 +78,7 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
         sort: query.sort || 'latest',
     }
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer' ] }, true,domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer','header' ] }, true,domainName)
     const postsData = await getPosts(getPostsData,true,domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

@@ -1,14 +1,27 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+
 .FileManagerControl{
-  display: flex;
-  justify-content: flex-start;
-  margin: 20px 0;
-  .backBtn{
+ margin: 20px 0;
+  button{
     padding: 5px 10px ;
     margin: 0 10px;
-
+    @include AdminLightBtn
   }
-  input{
 
-    width: 90%;
+
+  .file-Manager-control-address-bar{
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 0;
+    input{
+      width: 90%;
+      background-color: $light100;
+    }
+  }
+
+
+  .file-Manager-control-quick-access{
+
   }
 }

@@ -1,6 +1,5 @@
 import axios from "axios";
 
-
 const queryGeneratorForUnCacheRequest = (requestItems)=>{
     let query = '?'
     for(const item in requestItems){
@@ -15,11 +14,6 @@ export const getPosts = async (data,cache,domainName) => {
     };
     return await axios.post(domainName +`/api/v1/posts${queryGeneratorForUnCacheRequest(data)}`, body)
 };
-
-
-
-
-
 
 export const getPost = async (data,cache,domainName) => {
     const body = {

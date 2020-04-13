@@ -77,7 +77,7 @@ categories.getInitialProps = async ({ pathname, query, req }) => {
     let categoriesSource;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'categoriesPageSidebar', 'home', 'footer' ] }, true,domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'categoriesPageSidebar', 'home', 'footer','header' ] }, true,domainName)
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
     const categoriesData = await getMeta(getCategoriesData,true,domainName)
 

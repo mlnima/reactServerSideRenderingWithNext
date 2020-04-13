@@ -1,13 +1,13 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import Logo from "./Logo/Logo";
+import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../../context/AppContext'
-import SearchInputComponent from '../SearchInputComponent/SearchInputComponent'
+import WidgetsRenderer from '../WidgetsRenderer/WidgetsRenderer'
 
 const Header = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
         style:{}
     });
+
     useEffect(() => {
         setState({
             ...state,
@@ -17,10 +17,10 @@ const Header = props => {
             }
         })
     }, [contextData.siteDesign]);
+
     return (
         <div className='Header' style={state.style}>
-            <Logo/>
-            <SearchInputComponent />
+            <WidgetsRenderer widgets={ contextData.siteWidgets } position='header'/>
         </div>
     );
 };

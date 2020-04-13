@@ -11,6 +11,7 @@ import { AppContext } from "../../../../context/AppContext";
 import TextInput from "./TextInput/TextInput";
 import RenderIframe from "./RenderIframe/RenderIframe";
 import ImagePreview from "../ImagePreview/ImagePreview";
+import TextAreaComponent from './TextAreaComponent/TextAreaComponent'
 
 const VideoInformation = props => {
     const contextData = useContext(AppContext);
@@ -43,8 +44,11 @@ const VideoInformation = props => {
             <div className='VideoInformation'>
                 <IsInSlideShow {...props} onIsInSlideShowChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow }/>
                 <Quality {...props} />
-                <TextInputWithUploadBtn {...props} name='videoTrailerUrl' title='Video Url' />
-                <VideoEmbedCode {...props} name='videoEmbedCode' />
+                <TextInputWithUploadBtn {...props} name='videoUrl' title='Video Url' />
+                {/*<VideoEmbedCode {...props} name='videoEmbedCode' />*/}
+                {/*<TextAreaComponent {...props} name='videoEmbedCode'/>*/}
+                <TextInput {...props} name='videoEmbedCode'  />
+                <TextAreaComponent {...props} name='videoScriptCode'/>
                 <RenderIframe {...props}/>
                 <Duration {...props} onDurationChangeHandler={ onDurationChangeHandler }/>
                 <ViewsLikesDisLikes {...props} name={ 'views' } value={state.views||0} />

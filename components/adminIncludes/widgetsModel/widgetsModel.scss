@@ -18,6 +18,16 @@
     button{
       @include AdminLightBtn
     }
+    .changeWidgetIndexBtn{
+      background-color: transparent;
+      border: none;
+      img{
+        color: black;
+      }
+      &:hover{
+        background-color: $dark80;
+      }
+    }
   }
 
   .widgetModel {

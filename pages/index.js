@@ -39,7 +39,6 @@ const Home = props => {
                     <Sidebar key='homePageSidebar' isActive={ props.identity.data.homePageSidebar } widgets={ props.widgets } position='homePageSidebar'/>
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
-
             </AppLayout>
         </>
     );
@@ -51,7 +50,7 @@ Home.getInitialProps = async ({ req }) => {
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer' ] }, true, domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer','header' ] }, true, domainName)
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

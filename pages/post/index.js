@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
 import axios from "axios";
 import { getComments, getPost } from "../../_variables/ajaxPostsVariables";
-import Iframe from "../../components/includes/Post/Iframe/Iframe";
+import VideoPlayer from "../../components/includes/Post/VideoPlayer/VideoPlayer";
 import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
 import withRouter from "next/dist/client/with-router";
 import Head from "next/head";
@@ -56,14 +56,8 @@ const Post = props => {
                 <div className={ props.identity.data.postPageSidebar ? 'post withSidebar' : 'post withOutSidebar' }>
 
                     <div style={ state.style } className="main">
-                        <Iframe iframeCode={ props.post.videoEmbedCode } meta={ {
-                            description: props.post.description,
-                            title: props.post.title,
-                            duration: props.post.duration,
-                            thumbnailUrl: props.post.mainThumbnail,
-                            embedURL: props.post.videoEmbedCode,
-                            uploadDate: props.post.lastModify,
-                        } }/>
+
+                        <VideoPlayer {...props.post}/>
 
                         <PostInfo
                             title={ props.post.title }
@@ -104,7 +98,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     // const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
     const postData = await getPost(postBody,true,domainName)
     post = postData.data.post
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer' ] }, true,domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer','header' ] }, true,domainName)
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
     const commentsData = await getComments({ onDocument: post._id },true,domainName)
 

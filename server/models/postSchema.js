@@ -17,6 +17,7 @@ const postSchema = mongoose.Schema({
     videoUrl: String,
     postType:String,
     videoEmbedCode: String,
+    videoScriptCode: String,
     downloadLink: String,
     currency: String,
     iframe: String,

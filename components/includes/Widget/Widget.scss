@@ -1,7 +1,78 @@
 @import "../../../styles/colors";
-.Widget{
+
+.Widget {
   padding: 10px;
-  .widgetText{
-    padding: 0 10px;
+
+  .widgetText {
+    //padding: 0 10px;
+  }
+
+  .Videos {
+
+    .smallVideoContent {
+      min-width: 300px;
+      //max-width: 100%;
+
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+
+      .small {
+        width: 140px;
+        //height: auto;
+
+        .VideoElement {
+          width: 140px;
+          //height: auto;
+          .image {
+            img, video {
+              width: 140px;
+              height: auto;
+              //display: none;
+            }
+
+          }
+        }
+
+      }
+    }
+
+    .listVideoContent {
+
+      .list {
+        height: auto;
+
+        a {
+          width: 100%;
+        }
+
+        //display: flex;
+        //justify-content: center;
+        .VideoElement {
+          width: auto;
+          display: flex;
+          //justify-content: flex-start;
+          height: auto;
+
+          .image {
+            img, video {
+              width: 100px;
+              height: auto;
+              //display: none;
+            }
+
+            .views, .duration {
+              display: none;
+            }
+          }
+
+          .progressParent {
+            display: none;
+          }
+
+        }
+      }
+
+    }
+
   }
 }

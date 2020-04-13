@@ -20,19 +20,17 @@ const Posts = props => {
     });
     const [ posts, setPosts ] = useState([]);
 
-    // useEffect(() => {
-    //     console.log(props )
-    // }, [props]);
 
-    const renderPosts = props.posts.map(post => {
+
+    const renderPosts = (props.posts||[]).map(post => {
         return (
-            <VideoElement key={ post._id } state={ post }/>
+            <VideoElement key={ post._id } state={ post } viewType={props.viewType}/>
         )
     });
 
     return (
         <div className='Videos'>
-            <div className='videoContent'>
+            <div className={'videoContent '+ (props.viewType ? props.viewType + 'VideoContent':'standard')}>
                 { renderPosts }
             </div>
             {/*<Pagination { ...props } postsData={ postsData } setPostsData={ setPostsData }/>*/ }

@@ -1,11 +1,22 @@
-.FileManagerArea{
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+@import "../../../../styles/grid";
+
+.FileManagerArea {
+  @include fileManagerItemsBig;
   background-color: white;
   padding: 20px 20px 200px 20px;
   border-radius: 20px;
-  .dirItem{
-    button{
+
+  .dirItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .file-manager-image-item {
+      width: 100px;
+      object-fit: cover;
+    }
+
+    button {
       width: 100px;
       height: 100px;
       background-color: gray;
@@ -14,19 +25,24 @@
       font-size: xxx-large;
       transition: .4s;
       border-radius: 10px;
+
       &:hover {
         transform: scale(1.2);
       }
     }
-    p{
+
+    p {
       font-size: small;
+      overflow: hidden;
     }
-    .clickedItem{
-      background-color:rgba(0,100,255,0.8) ;
+
+    .clickedItem {
+      background-color: rgba(0, 100, 255, 0.8);
       color: white;
     }
-    .unClickedItem{
-      background-color:transparent ;
+
+    .unClickedItem {
+      background-color: transparent;
     }
   }
 }

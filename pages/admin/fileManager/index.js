@@ -5,13 +5,14 @@ import FileManagerArea from '../../../components/adminIncludes/FileManagerCompon
 import { readPath } from '../../../_variables/_ajaxFilesVariables'
 import { AppContext } from '../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
+import UploadedPopView from '../../../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
 
 const fileManager = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
         path: '.',
         files: [],
-        clickedItem: '',
+        clickedItem: '/static/uploads/image/2020/4/706185_561483320532764_1215505165_o.jpg',
         file: '',
         editFile: false,
         action: '',
@@ -26,9 +27,7 @@ const fileManager = props => {
         newItemName: ''
     });
 
-    // useEffect(() => {
-    //     console.log(state)
-    // }, [ state ]);
+
 
     useEffect(() => {
         setData()
@@ -58,7 +57,7 @@ const fileManager = props => {
                     ...contextData.state,
                     loading: false
                 });
-                props.router.push('/admin/fileManager/textEditor')
+                // props.router.push('/admin/fileManager/textEditor')
             } else {
                 setState({
                     ...state,
@@ -78,7 +77,6 @@ const fileManager = props => {
     }
 
     const setStateHandler = (key, value) => {
-        console.log(key, value)
         setState({
             ...state,
             [key]: value
@@ -87,6 +85,7 @@ const fileManager = props => {
 
     return (
         <AdminLayout>
+            <UploadedPopView clickedItem={state.clickedItem} setStateHandler={ setStateHandler } />
             <div className='fileManager'>
                 <FileManagerControl setStateHandler={ setStateHandler } data={ state }/>
                 <FileManagerArea setStateHandler={ setStateHandler } data={ state }/>

@@ -7,8 +7,9 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu type='text' name='Text'/>
             <AddWidgetWithPositionMenu type='posts' name='Posts'/>
             <AddWidgetWithPositionMenu type='recentComments' name='Recent Comments'/>
-            <AddWidgetWithPositionMenu type='search' name='Search'/>
+            <AddWidgetWithPositionMenu type='searchBar' name='Search'/>
             <AddWidgetWithPositionMenu type='meta' name='Meta'/>
+            <AddWidgetWithPositionMenu type='logo' name='Logo'/>
             <AddWidgetWithPositionMenu type='navigationMenu' name='Navigation Menu'/>
         </div>
     );

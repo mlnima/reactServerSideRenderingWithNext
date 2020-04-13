@@ -5,12 +5,12 @@ import TopBar from "../includes/TopBar/TopBar";
 import Navigation from "../includes/Header/Navigation/Navigation";
 import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
-import { AppContext } from '../../context/AppContext'
-import Router from "next/router";
-import withGA from "next-ga";
+// import { AppContext } from '../../context/AppContext'
+// import Router from "next/router";
+// import withGA from "next-ga";
 
 const AppLayout = props => {
-    const contextData = useContext(AppContext);
+    // const contextData = useContext(AppContext);
 
     return (
         <>
@@ -26,4 +26,4 @@ const AppLayout = props => {
     );
 };
 
-export default withGA("UA-93008867-21", Router)(AppLayout) ;
+export default AppLayout ;

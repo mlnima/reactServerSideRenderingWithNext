@@ -1,6 +1,7 @@
 import React, { useContext, useState } from 'react';
 import { AppContext } from "../../../context/AppContext";
 import Link from "next/link";
+import {convertVariableNameToName} from '../../../_variables/_variables'
 import axios from "axios";
 import SortUpSvg from '../../../static/images/fontawesome/sort-up-solid.svg'
 import SortDownSvg from '../../../static/images/fontawesome/sort-down-solid.svg'
@@ -23,7 +24,7 @@ const SideBar = props => {
         },
         Gallery: {
             pathURL: '/admin/gallery',
-            subItems: []
+            subItems: ['Images','Videos']
         },
         Comments: {
             pathURL: '/admin/comments',
@@ -35,7 +36,7 @@ const SideBar = props => {
         },
         Design: {
             pathURL: '/admin/design',
-            subItems: [ 'topBar','widgets','navigation' ]
+            subItems: [ 'topBar','header','navigation','widgets','postPage','footer','customStyle' ]
         },
         Users: {
             pathURL: '/admin/users',
@@ -43,7 +44,7 @@ const SideBar = props => {
         },
         Tools: {
             pathURL: '/admin/tools',
-            subItems: []
+            subItems: ['terminal']
         },
         Settings: {
             pathURL: '/admin/settings',
@@ -110,19 +111,26 @@ const SideBar = props => {
         const onHoverHandler = state[item].subItems.map(subItem => {
             if (hovered === item) {
                 return (
-                    <Link href={ state[item].pathURL + '/' + subItem }><a className='SideBarItem-SubItem'>{  subItem.replace(/([A-Z])/g, " $1")  }</a></Link>
+                    <Link href={ state[item].pathURL + '/' + subItem }><a className='SideBarItem-SubItem'>{ convertVariableNameToName(subItem) }</a></Link>
                 )
             } else return null
 
         })
 
+        const RenderArrowsForSubMenus = ()=>{
+            if (state[item].subItems.length>0){
+                return(
+                    <button onClick={ () => hovered === item ? setHovered('') : setHovered(item) }><img className='fontawesomeSvgVerySmall' src={ hovered === item ? SortUpSvg : SortDownSvg  } alt=""/></button>
+                )
+            }else return null
+        }
+
         return (
             <div key={ item } className='SideBarItemElement'>
                 <div className='SideBarItemTitle' onMouseOver={ () => setHovered(item) }>
-                    <Link href={ state[item].pathURL }><a className='SideBarItem' >{ item.replace(/([A-Z])/g, " $1")  }</a></Link>
-                    <button onClick={ () => hovered === item ? setHovered('') : setHovered(item) }><img className='fontawesomeSvgVerySmall' src={ hovered === item ? SortUpSvg : SortDownSvg } alt=""/></button>
+                    <Link href={ state[item].pathURL }><a className='SideBarItem' >{ convertVariableNameToName(item)  }</a></Link>
+                     <RenderArrowsForSubMenus/>
                 </div>
-
                 <div className='SideBarItemElementSubItems'>
                     { onHoverHandler }
                 </div>
