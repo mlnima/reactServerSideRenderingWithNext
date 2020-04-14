@@ -50,10 +50,13 @@ siteMapController.siteMap = (req, res) => {
         let monthsSiteMap = ``;
 //***
         data.allMonthsSinceStart.forEach(month => {
+            let fixedMonth = month.includes('/')?month.replace('/','-'):month
+
+            console.log( month)
             monthsSiteMap +=
                 '<sitemap>\n' +
-                `<loc>${ requestPath }sitemaps/${ month }.xml</loc>\n` +
-                `<lastmod>${ toDay.toISOString() }</lastmod>\n` +
+                `<loc>${ requestPath }sitemaps/${ fixedMonth }.xml</loc>\n` +
+                `<lastmod>${ toDay.toISOString()  }</lastmod>\n` +
                 ' </sitemap>\n'
         });
 

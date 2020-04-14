@@ -56,6 +56,10 @@ body {
   font-family: 'Patrick Hand', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+
+  #__next{
+    min-height: 100vh;
+  }
 }
 
 

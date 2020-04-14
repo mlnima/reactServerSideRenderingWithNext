@@ -4,6 +4,7 @@ const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const userSchema = require('../models/userSchema');
 const tokenExpireTime = '1000h';
+const dataEncoder = require('../tools/dataEncoder')
 
 userControllers.register = (req, res) => {
     const username = req.body.username;
@@ -93,9 +94,14 @@ userControllers.login = async (req, res) => {
             res.json({ response: 'server Error !', type: 'error' })
         })
 };
+
+
 userControllers.getUserInfo = (req,res)=>{
     userSchema.findById(req.userData._id).exec().then(user=>{
-        res.json({userData:user});
+        let userDataToSend = user
+        userDataToSend.password = 'xxxxxx'
+        // res.json({userData:user});
+        res.json(dataEncoder({userData:userDataToSend}));
         res.end()
     }).catch(err=>{
         console.log( err);

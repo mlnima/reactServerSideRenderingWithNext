@@ -22,10 +22,6 @@ const SideBar = props => {
             pathURL: '/admin/fileManager',
             subItems: []
         },
-        Gallery: {
-            pathURL: '/admin/gallery',
-            subItems: ['Images','Videos']
-        },
         Comments: {
             pathURL: '/admin/comments',
             subItems: []

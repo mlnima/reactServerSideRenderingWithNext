@@ -1,32 +1,26 @@
-.Logo{
+.Logo {
   display: flex;
   flex-direction: column;
-
   justify-content: flex-start;
-  //width: 90%;
   padding: 30px 0;
-
-  .logoText{
+  color: transparent;
+  .logoText {
     font-size: xx-large;
   }
 
-  .headLine{
+  .headLine {
 
   }
 
-  img{
+  img {
     width: 180px;
   }
 }
 
-
-
-
-
 @media only screen and (min-width: 768px) {
-  .Logo{
+  .Logo {
 
-    img{
+    img {
       width: 300px;
     }
   }

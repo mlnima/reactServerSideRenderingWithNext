@@ -11,6 +11,7 @@ import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import Footer from '../../components/includes/Footer/Footer'
 import { getAbsolutePath } from '../../_variables/_variables'
 import AdminLayout from '../../components/layouts/AdminLayout'
+import dataDecoder from '../../server/tools/dataDecoder'
 
 const posts = props => {
     const [ state, setState ] = useState({
@@ -62,7 +63,7 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let widgets;
     let settings;
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
-    settings = settingsData.data.settings ? settingsData.data.settings : []
+    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     //|| settings.identity.data.postsCountPerPage
     const getPostsData = {
         size: parseInt(query.size) || parseInt(settings.identity.data.postsCountPerPage) || 30,

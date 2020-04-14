@@ -1,3 +1,5 @@
+const dataEncoder =require('../tools/dataEncoder')
+
 let postsControllers = {};
 const postSchema = require('../models/postSchema');
 const metaSchema = require('../models/metaSchema');
@@ -133,21 +135,19 @@ postsControllers.getPostInfo = (req, res) => {
 
     const title = req.body.postTitle;
     const _id = req.body._id;
-
     if (title) {
-        postSchema.findOne({ title }).exec().then(post => {
-
-            res.json({ post, error: false });
+        postSchema.findOne({ title }).exec().then(  post => {
+            res.json({ post: dataEncoder({post}), error: false });
             res.end()
         })
     } else if (_id) {
         postSchema.findOne({ _id }).exec().then(post => {
-
-            res.json({ post, error: false });
+            res.json({ post:post, error: false });
             res.end()
         })
     }
 };
+
 
 postsControllers.deletePost = (req, res) => {
     const _id = req.body._id;

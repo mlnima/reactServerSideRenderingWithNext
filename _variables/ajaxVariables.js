@@ -1,5 +1,8 @@
 import axios from "axios";
 
+
+
+
 export const updateSetting = async (type, data) => {
     const body = {
         token: localStorage.wt,

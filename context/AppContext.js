@@ -2,6 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import jwtDecode from "jwt-decode";
 import jwt from 'jsonwebtoken';
 import axios from "axios";
+import dataDecoder from '../server/tools/dataDecoder'
+import dataEncoder from '../server/tools/dataEncoder'
 
 import { withRouter } from "next/router";
 
@@ -75,10 +77,6 @@ const AppProvider = props => {
         widgets: [],
     });
 
-
-
-
-
     // const [ adminWidgets, dispatchAdminWidgets ] = useState({
     //     home:[],
     //     homePageSidebar:[],
@@ -91,11 +89,7 @@ const AppProvider = props => {
     //     header:[]
     // });
 
-
-
-
-
-    const [siteWidgets,setSiteWidgets] = useState([])
+    const [ siteWidgets, setSiteWidgets ] = useState([])
 
     const [ videoPostsDataForClient, dispatchVideoPostsDataForClient ] = useState({
         pageNo: 1,
@@ -113,7 +107,9 @@ const AppProvider = props => {
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
                 await axios.post('/api/v1/users/getUserInfo', { token: localStorage.wt }).then(res => {
-                    dispatchUserData({ ...userData, ...res.data.userData });
+                    // dispatchUserData({ ...userData, ...res.data.userData });
+                    dispatchUserData({ ...userData, ...dataDecoder(res.data).userData });
+                    // console.log(dataDecoder(res.data) )
                 }).catch(err => {
                     console.log(err);
                 })
@@ -175,7 +171,7 @@ const AppProvider = props => {
                 token: localStorage.wt
             };
             axios.post('/api/v1/posts/postsBulkAction', body).then(() => {
-                props.router.push({pathname:props.router.pathname,query:{...props.router.query}})
+                props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
                 dispatchState({
                     ...state,
                     loading: false

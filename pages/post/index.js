@@ -9,17 +9,23 @@ import Head from "next/head";
 import { getSetting, getWidgetsWithData, getMultipleWidgetWithData, getMultipleSetting } from "../../_variables/ajaxVariables";
 import { AppContext } from "../../context/AppContext";
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
-import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
+import { Sidebar } from '../../components/includes/Sidebar/Sidebar'
 import CommentFrom from '../../components/includes/Post/CommentFrom/CommentFrom'
 import CommentsRenderer from '../../components/includes/CommentsRenderer/CommentsRenderer'
 import Footer from '../../components/includes/Footer/Footer'
 import { getAbsolutePath } from '../../_variables/_variables'
+import Error from '../_error';
+import dataDecoder from '../../server/tools/dataDecoder'
 
 const Post = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
         style: {}
     })
+
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
 
     useEffect(() => {
         if (props.identity.postPageSidebar) {
@@ -48,7 +54,9 @@ const Post = props => {
         } else return null
     }
 
-    return (
+    if (props.errorCode !== 200) {
+        return <Error { ...props } />
+    } else return (
         <>
             <AppLayout>
                 <SiteSettingSetter { ...props }/>
@@ -57,7 +65,7 @@ const Post = props => {
 
                     <div style={ state.style } className="main">
 
-                        <VideoPlayer {...props.post}/>
+                        <VideoPlayer { ...props.post }/>
 
                         <PostInfo
                             title={ props.post.title }
@@ -94,19 +102,24 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let widgets;
     let settings;
     let comments;
+    let errorCode = 200
 
-    // const postData = await axios.post('http://localhost:3000/api/v1/posts/post', postBody);
-    const postData = await getPost(postBody,true,domainName)
-    post = postData.data.post
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer','header' ] }, true,domainName)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
-    const commentsData = await getComments({ onDocument: post._id },true,domainName)
+    const postData = await getPost(postBody, true, domainName)
+    post = dataDecoder(postData.data.post).post
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header' ] }, true, domainName)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName)
 
-    settings = settingsData.data.settings ? settingsData.data.settings : []
+    if (!post) {
+        errorCode = 404
+        // res.sendStatus(404)
+    }
+    const commentsData = post ? await getComments({ onDocument: post._id }, true, domainName) : {}
+
+    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject  : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    comments = commentsData.data.comments ? commentsData.data.comments : []
-    return { post, query, widgets, comments, ...settings }
+    comments = post ? commentsData.data.comments : []
 
+    return { post, query, widgets, comments, ...settings, errorCode }
 };
 
 export default withRouter(Post);

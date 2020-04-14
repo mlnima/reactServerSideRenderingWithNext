@@ -16,6 +16,10 @@ const SiteSettingSetter = props => {
         // customScript: props.identity.data.customScript || 'your Script will be here',
     });
 
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [ props ]);
+
     useEffect(() => {
 
         if (props.design) {
@@ -26,13 +30,12 @@ const SiteSettingSetter = props => {
         }
         if (props.identity) {
             contextData.dispatchSiteIdentity(props.identity.data)
-        }if (props.widgets){
+        }
+        if (props.widgets) {
             contextData.setSiteWidgets(props.widgets)
         }
 
     }, [ props ]);
-
-
 
     useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor

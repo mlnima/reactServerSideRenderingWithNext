@@ -7,7 +7,7 @@ const fs = require('fs')
 const fsExtra = require('fs-extra')
 const { spawn } = require('child_process');
 const shell = require('shelljs');
-
+const dataEncoder =require('../tools/dataEncoder')
 const mongoose = require('mongoose')
 let settingsControllers = {}
 
@@ -36,6 +36,7 @@ settingsControllers.update = (req, res) => {
     })
     res.end()
 };
+
 settingsControllers.get = async (req, res) => {
     const setting = await settingSchema.findOne({ type: req.body.type }).exec();
     res.json({ setting })
@@ -52,7 +53,8 @@ settingsControllers.getMultiple = async (req, res) => {
                 finalObject[setting.type] = setting
             }
         })
-        res.json({ settings: finalObject })
+
+        res.json({ settings:  dataEncoder({finalObject}) })
         res.end()
     }).catch(err => {
         console.log(err)
@@ -122,7 +124,9 @@ settingsControllers.getWidgetsWithData = (req, res) => {
             }
 
         })
-        res.json({ widgets: await Promise.all(mapWidget) })
+        const data = await Promise.all(mapWidget)
+
+        res.json({ widgets:data  })
         res.end()
     })
 }

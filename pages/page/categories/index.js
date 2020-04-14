@@ -12,6 +12,7 @@ import CategoriesSidebar from '../../../components/includes/pages/Categories/Cat
 import {Sidebar} from '../../../components/includes/Sidebar/Sidebar'
 import Footer from '../../../components/includes/Footer/Footer'
 import { getAbsolutePath } from '../../../_variables/_variables'
+import dataDecoder from '../../../server/tools/dataDecoder'
 
 // import './categories.scss'import './categories.scss'
 
@@ -82,7 +83,7 @@ categories.getInitialProps = async ({ pathname, query, req }) => {
     const categoriesData = await getMeta(getCategoriesData,true,domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    settings = settingsData.data.settings ? settingsData.data.settings : []
+    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     categoriesSource = categoriesData.data ? categoriesData.data : []
 
     return {  ...settings, query, categoriesSource, getCategoriesData, pathname, widgets }

@@ -13,6 +13,7 @@ import withRouter from 'next/dist/client/with-router'
 import {Sidebar} from '../../../components/includes/Sidebar/Sidebar'
 import Footer from '../../../components/includes/Footer/Footer'
 import { getAbsolutePath } from '../../../_variables/_variables'
+import dataDecoder from '../../../server/tools/dataDecoder'
 
 const actors = props => {
     const [ state, setState ] = useState({
@@ -83,7 +84,7 @@ actors.getInitialProps = async ({ pathname, query, req, res, err }) => {
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     actorsSource = actorsData.data ? actorsData.data : []
-    settings = settingsData.data.settings ? settingsData.data.settings : []
+    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
 
     return { ...settings, query, actorsSource, getActorsData, pathname, widgets }
 }

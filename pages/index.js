@@ -8,7 +8,7 @@ import { getAbsolutePath } from '../_variables/_variables'
 import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRenderer'
 import { Sidebar } from '../components/includes/Sidebar/Sidebar'
 import Footer from '../components/includes/Footer/Footer'
-
+import dataDecoder from '../server/tools/dataDecoder'
 const Home = props => {
 
     const [ state, setState ] = useState({
@@ -54,7 +54,7 @@ Home.getInitialProps = async ({ req }) => {
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    settings = settingsData.data.settings ? settingsData.data.settings : []
+    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     return { widgets, ...settings }
 };
 export default withRouter(Home);

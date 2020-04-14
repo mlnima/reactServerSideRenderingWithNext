@@ -92,3 +92,13 @@ a {
     grid-template-columns: 1fr;
   }
 }
+
+
+.error-page{
+  display: flex;
+  justify-content: center;
+  .error-page-message{
+    color: white;
+    margin: 100px 0;
+  }
+}

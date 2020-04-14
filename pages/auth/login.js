@@ -6,6 +6,7 @@ import { AppContext } from "../../context/AppContext";
 import { getAbsolutePath } from '../../_variables/_variables'
 import { getMultipleSetting, getMultipleWidgetWithData } from '../../_variables/ajaxVariables'
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
+import dataDecoder from '../../server/tools/dataDecoder'
 
 const Login = props => {
     const contextData = useContext(AppContext);
@@ -79,7 +80,7 @@ Login.getInitialProps = async ({ req }) => {
     let widgets;
     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header' ] }, true, domainName)
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    settings = settingsData.data.settings ? settingsData.data.settings : []
+    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     return { ...settings,widgets }
 }
 export default withRouter(Login);

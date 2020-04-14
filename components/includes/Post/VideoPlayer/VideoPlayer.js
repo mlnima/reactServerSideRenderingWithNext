@@ -3,10 +3,7 @@ import React, { useEffect, useState, useContext,useRef } from 'react';
 
 const VideoPlayer = props => {
     const playerElement = useRef(null)
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
-//"video/mp4"
+
     const WhatToRender = () => {
 
         if ( props.videoUrl) {
