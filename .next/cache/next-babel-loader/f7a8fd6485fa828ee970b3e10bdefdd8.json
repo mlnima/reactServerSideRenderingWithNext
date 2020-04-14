@@ -1,0 +1,1 @@
+{"ast":null,"code":"const jwt = require('jsonwebtoken');\n\nconst tokenExpireTime = '1000h';\n\nconst dataEncoder = data => {\n  return jwt.sign(data, process.env.REACT_APP_JWT_KEY, {\n    expiresIn: tokenExpireTime\n  });\n};\n\nmodule.exports = dataEncoder;","map":null,"metadata":{},"sourceType":"script"}

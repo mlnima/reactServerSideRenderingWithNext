@@ -1,0 +1,1 @@
+{"ast":null,"code":"const jwtDecoder = require('jwt-decode');\n\nconst tokenExpireTime = '1000h';\n\nconst dataDecoder = token => {\n  return jwtDecoder(token);\n};\n\nmodule.exports = dataDecoder;","map":null,"metadata":{},"sourceType":"script"}
