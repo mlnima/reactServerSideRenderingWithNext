@@ -6,13 +6,15 @@ import { readPath } from '../../../_variables/_ajaxFilesVariables'
 import { AppContext } from '../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
 import UploadedPopView from '../../../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
-
+///static/uploads/image/2020/4/706185_561483320532764_1215505165_o.jpg
 const fileManager = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
         path: '.',
+        prevPath: '.',
         files: [],
-        clickedItem: '/static/uploads/image/2020/4/706185_561483320532764_1215505165_o.jpg',
+        clickedItem: '',
+        clickedItemName: '',
         file: '',
         editFile: false,
         action: '',
@@ -20,18 +22,24 @@ const fileManager = props => {
         // AlertBox:false,
         DeleteAlertBox: false,
         confirm: Date.now(),
-        didDataChange: false,
         message: '',
         report: '',
         inputBox: false,
         newItemName: ''
     });
 
-
+    useEffect(() => {
+        // setState({
+        //     ...state,
+        //     prevPath: state.path
+        // })
+        setData()
+    }, [ state.path ]);
 
     useEffect(() => {
-        setData()
-    }, [ state.path, state.didDataChange ]);
+        console.log(state)
+
+    }, [ state ]);
 
     const setData = () => {
         contextData.dispatchState({
@@ -39,20 +47,27 @@ const fileManager = props => {
             loading: true
         });
         readPath(state.path).then(res => {
+            // console.log(res.data.type )
             if (res.data.type === 'dir') {
                 setState({
                     ...state,
-                    files: res.data.data
+                    files: res.data.data,
+                    // prevPath: path
                 })
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 });
             } else if (res.data.type === 'file') {
-                contextData.dispatchSettings({
-                    ...contextData.settings,
-                    textEditorCurrentFile: res.data.data
+                setState({
+                    ...state,
+                    clickedItem: state.path,
+                    path:state.prevPath
                 })
+                // contextData.dispatchSettings({
+                //     ...contextData.settings,
+                //     textEditorCurrentFile: res.data.data
+                // })
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
@@ -85,10 +100,10 @@ const fileManager = props => {
 
     return (
         <AdminLayout>
-            <UploadedPopView clickedItem={state.clickedItem} setStateHandler={ setStateHandler } />
+            <UploadedPopView clickedItem={ state.clickedItem } setStateHandler={ setStateHandler } state={ state } setState={ setState }/>
             <div className='fileManager'>
-                <FileManagerControl setStateHandler={ setStateHandler } data={ state }/>
-                <FileManagerArea setStateHandler={ setStateHandler } data={ state }/>
+                <FileManagerControl setStateHandler={ setStateHandler } data={ state } state={ state } setState={ setState }/>
+                <FileManagerArea setStateHandler={ setStateHandler } data={ state } state={ state } setState={ setState }/>
             </div>
         </AdminLayout>
     );

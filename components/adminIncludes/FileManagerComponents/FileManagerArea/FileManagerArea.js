@@ -20,7 +20,7 @@ const FileManagerArea = props => {
 
     const classGenerator = fileName => {
         let nextClass = '';
-        if (props.data.clickedItem === clickPathGenerator(fileName, props.data.path)) {
+        if (props.data.clickedItem === clickPathGenerator(fileName, props.state.path)) {
             nextClass = ' clickedItem'
         } else {
             nextClass = ' unClickedItem'
@@ -43,17 +43,17 @@ const FileManagerArea = props => {
         const itemType = fileTypeDetector(data.fileName)
         if (itemType === 'image') {
             return (
-                <img className='file-manager-image-item' src={ props.data.path.replace('.', '') + '/' + data.fileName }/>
+                <img className='file-manager-image-item' src={ props.state.path.replace('.', '') + '/' + data.fileName }/>
             )
         } else if (itemType === 'video'){
             return (
                 <video className='file-manager-image-item'>
-                    <source src={ props.data.path.replace('.', '') + '/' + data.fileName }/>
+                    <source src={ props.state.path.replace('.', '') + '/' + data.fileName }/>
                 </video>
             )
         } else {
             return (
-                <button className={ [ classGenerator(data.fileName) ] } key={ data.fileName } name={ data.fileName } onClick={ (e) => onClickHandler(e) }>
+                <button className={ [ classGenerator(data.fileName) ] } key={ data.fileName } name={ data.fileName }  >
                     <img className='fontawesomeSvgLarge' src={ logoDetector(data.fileName) } alt=""/>
                 </button>
             )
@@ -63,21 +63,21 @@ const FileManagerArea = props => {
 
 
 
-    const onClickHandler = e => {
-        let clickedItem = props.data.clickedItem;
-        let filePath = clickPathGenerator(e.currentTarget.name, props.data.path);
-        if (props.data.clickedItem === filePath) {
-            props.setStateHandler('clickedItem', '')
-        } else {
-            props.setStateHandler('clickedItem', filePath)
-            props.setStateHandler('path', filePath)
-        }
+    const onClickHandler = item => {
+        let itemPath = clickPathGenerator(item, props.state.path);
+        props.setState({
+            ...props.state,
+            path:itemPath,
+            clickedItemName:item
+            // prevPath:itemPath
+        })
+
     };
 
-    let renderDir = props.data.files.map(item => {
-        // fileTypeDetector(item)
+
+    let renderDir = props.state.files.map(item => {
         return (
-            <div key={ item } className='dirItem'>
+            <div key={ item } className='dirItem' onClick={()=>onClickHandler(item)}>
                 <WhatToRender key={item} fileName={ item }/>
                 <p> { item }</p>
             </div>

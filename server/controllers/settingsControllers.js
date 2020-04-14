@@ -132,7 +132,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
 
     const requestedWidgets = req.body.widgets
     const widgetRequestPromises = requestedWidgets.map(async widgetsPosition => {
-        const position = requestedWidgets.includes('all')?{}:{ position: widgetsPosition }
+        const position = requestedWidgets.includes('all') ? {} : { position: widgetsPosition }
         return await widgetSchema.find(position).exec()
     })
     Promise.all(widgetRequestPromises).then(async widgets => {
@@ -144,8 +144,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
         const mapWidget = finalData.map(async widget => {
             const sortMethod = widget.sortBy ? { [widget.sortBy]: -1 } : '-_id';
             // const metaType = widget.metaType ? widget.metaType : 'tag'
-            let sortQuery = req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
-            console.log(sortQuery)
+            let sortQuery = !req.body.sort ? {} : req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
             return {
                 _id: widget._id,
                 title: widget.title,
@@ -158,18 +157,18 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
                 type: widget.type,
                 metaType: widget.metaType,
                 position: widget.position,
-                metaData: widget.metaType === 'tag'||widget.metaType === 'category'||widget.metaType === 'actor' ? await metaSchema.find({ type: widget.metaType }).limit(widget.count).sort(sortQuery).exec() : [],
+                metaData: widget.metaType === 'tag' || widget.metaType === 'category' || widget.metaType === 'actor' ? await metaSchema.find({ type: widget.metaType }).limit(widget.count).sort(sortQuery).exec() : [],
                 posts: widget.type === 'posts' ? await postSchema.find({}).limit(widget.count).sort(sortMethod).exec() : [],
                 comments: widget.type === 'recentComments' ? await commentSchema.find({}).limit(widget.count).exec() : [],
                 sortBy: widget.sortBy,
                 text: widget.text,
                 textAlign: widget.textAlign,
                 customHtml: widget.customHtml,
-                pathURL:widget.pathURL,
-                LogoUrl:widget.LogoUrl,
-                LogoText:widget.LogoText,
-                headLine:widget.headLine,
-                viewType:widget.viewType
+                pathURL: widget.pathURL,
+                LogoUrl: widget.LogoUrl,
+                LogoText: widget.LogoText,
+                headLine: widget.headLine,
+                viewType: widget.viewType
             }
         })
 

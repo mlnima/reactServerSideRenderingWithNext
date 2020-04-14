@@ -22,6 +22,7 @@
 "../components/includes/CategoryElement/CategoryElement",
 
 "../components/includes/ActorElement/ActorElement",
+"../components/includes/AlertBox/AlertBox",
 "../components/includes/Logo/Logo",
 "../components/includes/Header/Navigation/Navigation",
 "../components/includes/Loading/Loading",
@@ -41,6 +42,8 @@
 "../pages/auth/registerLogin",
 "../pages/admin/post/post",
 "./colors",
+"./globalAdminPanel",
+"./global",
 "../pages/index",
 "../pages/page/categories/categories",
 "../pages/page/tags/tags",

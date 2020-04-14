@@ -38,10 +38,10 @@ export const fileTypeDetector =   fileName => {
     let finalFormat = ''
     const fileFormats = {
         image: [ 'jpg', 'png', 'jpeg', 'svg' ],
-        video: [ 'mp4', '.3gp' ],
-        document: [ '.js', '.css', '.env', '.scss' ],
-        application:['.exe'],
-        archive:['.zip','.rar']
+        video: [ 'mp4', '3gp' ],
+        document: [ 'js', 'css', 'env', 'scss' ],
+        application:['exe'],
+        archive:['zip','rar']
     }
     // const images = [ '.jpg', '.png', 'jpeg', 'svg' ]
     // const video = [ '.mp4', '.3gp' ]
