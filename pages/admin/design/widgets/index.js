@@ -168,7 +168,7 @@ const HomePageWidgets = props => {
 HomePageWidgets.getInitialProps = async ({ asPath, pathname, query, req, res, err }) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let widgets;
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, domainName,Date.now())
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
     return { widgets, domainName }

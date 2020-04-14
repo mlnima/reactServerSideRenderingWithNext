@@ -1,0 +1,1 @@
+{"ast":null,"code":"export let widgetModels = {\n  type: '',\n  title: '',\n  categories: [],\n  tags: [],\n  count: 8,\n  comments: [],\n  pagination: false,\n  position: '',\n  redirectLink: '',\n  sortBy: '',\n  text: '',\n  textAlign: 'center',\n  customHtml: ''\n};","map":null,"metadata":{},"sourceType":"module"}

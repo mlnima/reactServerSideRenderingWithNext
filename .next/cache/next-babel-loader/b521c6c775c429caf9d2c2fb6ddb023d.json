@@ -1,0 +1,1 @@
+{"ast":null,"code":"var __jsx = React.createElement;\nimport React from 'react';\n\nconst WidgetHeader = props => {\n  return __jsx(\"div\", {\n    className: \"WidgetHeader\"\n  }, __jsx(\"p\", {\n    className: \"WidgetHeaderTitle\"\n  }, props.title));\n};\n\nexport default WidgetHeader;","map":null,"metadata":{},"sourceType":"module"}

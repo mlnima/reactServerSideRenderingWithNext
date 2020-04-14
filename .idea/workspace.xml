@@ -3,16 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ImagePreview/ImagePreview.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/fileManager/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/fileManager/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -218,7 +209,7 @@
       <workItem from="1586690121720" duration="13793000" />
       <workItem from="1586769557186" duration="33512000" />
       <workItem from="1586860496896" duration="26497000" />
-      <workItem from="1586899898245" duration="1499000" />
+      <workItem from="1586899898245" duration="2511000" />
     </task>
     <servers />
   </component>
