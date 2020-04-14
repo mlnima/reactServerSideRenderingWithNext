@@ -42,6 +42,7 @@ settingsControllers.get = async (req, res) => {
     res.json({ setting })
 };
 settingsControllers.getMultiple = async (req, res) => {
+    console.log('getMultiple not cached' )
     const requestedSetting = req.body.settings
     const settingRequestPromises = requestedSetting.map(async setting => {
         return await settingSchema.findOne({ type: setting }).exec()
@@ -90,6 +91,7 @@ settingsControllers.getWidget = (req, res) => {
         res.end()
     })
 }
+
 settingsControllers.getWidgetsWithData = (req, res) => {
     const position = req.body.position === 'all' ? {} : { position: req.body.position };
     widgetSchema.find(position).exec().then(async widgets => {
@@ -115,7 +117,7 @@ settingsControllers.getWidgetsWithData = (req, res) => {
             const sortMethod = finalData.sortBy ? { [finalData.sortBy]: -1 } : '-_id'
 
             if (finalData.type === 'posts') {
-                await postSchema.find({}).limit(widget.count).sort(sortMethod).exec().then(posts => {
+                await postSchema.find({status:'published'}).limit(widget.count).sort(sortMethod).exec().then(posts => {
                     finalData.posts = posts
                 })
                 return finalData

@@ -8,19 +8,21 @@ const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
     const customScriptElement = useRef(null)
     const [ state, setState ] = useState({
-        title: props.identity.data.title || '',
-        themeColor: props.design.data.themeColor || '',
-        description: props.identity.data.description || '',
-        keywords: props.identity.data.keywords || [],
-        homePageH1: props.identity.data.homePageH1 || 'H1 element',
+        title:  '',
+        themeColor:  '',
+        description:  '',
+        keywords: [],
         // customScript: props.identity.data.customScript || 'your Script will be here',
     });
 
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [ props ]);
+    useEffect(() => {
+        console.log(props)
+
+
+    }, [ props ]);
 
     useEffect(() => {
+
 
         if (props.design) {
             contextData.dispatchSiteDesign(props.design.data)
@@ -30,6 +32,13 @@ const SiteSettingSetter = props => {
         }
         if (props.identity) {
             contextData.dispatchSiteIdentity(props.identity.data)
+            setState({
+                ...state,
+                title: props.identity.data.title || '',
+                themeColor: props.design.data.themeColor || '',
+                description: props.identity.data.description || '',
+                keywords: props.identity.data.keywords || [],
+            })
         }
         if (props.widgets) {
             contextData.setSiteWidgets(props.widgets)

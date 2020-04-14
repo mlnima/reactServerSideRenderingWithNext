@@ -42,7 +42,7 @@ adminPosts.getInitialProps = async ({ pathname, query, req, res, err }) => {
         category: query.category || 'all',
         sort: query.sort || 'latest',
     }
-    const postsData = await getPosts(getPostsData, true, domainName)
+    const postsData = await getPosts(getPostsData, false, domainName)
     postsSource = postsData.data ? postsData.data : []
 
     return { query, postsSource, getPostsData, pathname }

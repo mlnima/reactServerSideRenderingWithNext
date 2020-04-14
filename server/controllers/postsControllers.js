@@ -97,6 +97,7 @@ postsControllers.updatePost = (req, res) => {
 };
 
 postsControllers.getPostsInfo = async (req, res) => {
+         console.log('getPostsInfo not cached' )
 
     const size = parseInt(req.body.size) > 100 ? 100 : parseInt(req.body.size)
     const pageNo = req.body.pageNo;
@@ -132,7 +133,7 @@ postsControllers.getPostsInfo = async (req, res) => {
 };
 
 postsControllers.getPostInfo = (req, res) => {
-
+    console.log('getPostInfo not cached' )
     const title = req.body.postTitle;
     const _id = req.body._id;
     if (title) {

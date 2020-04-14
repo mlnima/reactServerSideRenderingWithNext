@@ -44,7 +44,7 @@ const BodyTable = props => {
                 return (
                     <div className='postControlOptions'>
                         <Link href={ editPostPath }><a><button>Edit</button></a></Link>
-                        <button onClick={ () => contextData.functions.bulkActionPost([ state.hoveredId ], 'delete') }>Delete</button>
+                        <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'delete') }>Delete</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'draft') }>Draft</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'pending') }>Pending</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'published') }>Publish</button>
@@ -55,7 +55,8 @@ const BodyTable = props => {
                 return (
                     <div className='postControlOptions'>
                         <Link href={ editPostPath }><a><button>Edit</button></a></Link>
-                        <button onClick={ () => onDeletePermanentlyHandler(props.post._id) }>Delete</button>
+                        {/*<button onClick={ () => onDeletePermanentlyHandler(props.post._id) }>Delete</button>*/}
+                        <button onClick={ () => contextData.functions.bulkActionPost([ state.hoveredId ], 'trash') }>Trash</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'draft') }>Draft</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'pending') }>Pending</button>
                         <button>View</button>

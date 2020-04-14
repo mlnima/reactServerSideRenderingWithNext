@@ -76,8 +76,8 @@ actors.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'actorsPageSidebar', 'home', 'footer','header' ] }, true,domainName)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'actorsPageSidebar', 'home', 'footer','header' ] }, true,domainName,'actorsPage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName,'actorsPage')
 
 
     const actorsData = await getMeta(getActorsData,true,domainName)

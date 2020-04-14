@@ -35,6 +35,15 @@ const posts = props => {
                 <SiteSettingSetter  { ...props }/>
                 <div className={ props.identity.data.postsPageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
                     <div className="main">
+                        <PaginationComponent
+                            isActive={ true }
+                            currentPage={ props.getPostsData.pageNo }
+                            totalCount={ props.postsSource.totalCount }
+                            size={ props.getPostsData.size }
+                            maxPage={ Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)) }
+                            queryData={ props.query || props.router.query }
+                            pathnameData={ props.pathname || props.router.pathname }
+                        />
                         <div className='posts'>
                             <Posts posts={ props.postsSource.posts || [] }/>
 
@@ -62,7 +71,7 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let postsSource;
     let widgets;
     let settings;
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName,'postsPage')
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     //|| settings.identity.data.postsCountPerPage
     const getPostsData = {
@@ -79,7 +88,7 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
         sort: query.sort || 'latest',
     }
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer','header' ] }, true,domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer','header' ] }, true,domainName,'postsPage')
     const postsData = await getPosts(getPostsData,true,domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

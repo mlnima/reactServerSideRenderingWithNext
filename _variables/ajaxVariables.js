@@ -21,13 +21,13 @@ export const saveCustomStyle = async (data) => {
 };
 
 
-export const getSetting = async (type, cache, domainName) => {
+export const getSetting = async (type, cache, domainName,whichPage) => {
 
     const body = {
         type,
     };
 
-    return await axios.post(domainName + `/api/v1/settings/get?type=${ type }`, body)
+    return await axios.post(domainName + `/api/v1/settings/get?type=${ type }&position=${whichPage}`, body)
 };
 
 
@@ -48,20 +48,20 @@ export const getWidgets = async (position,cache, domainName) => {
 }
 
 
-export const getMultipleWidgetWithData = async (widgets, cache, domainName) => {
+export const getMultipleWidgetWithData = async (widgets, cache, domainName,whichPage) => {
     const body = {
         ...widgets,
     };
-    return await axios.post(domainName + '/api/v1/settings/getMultipleWidgetWithData', body)
+    return await axios.post(domainName + `/api/v1/settings/getMultipleWidgetWithData?whichPage=${whichPage}`, body)
 }
 
 
-export const getMultipleSetting = async (settings, cache, domainName) => {
-    const isCache = cache ? '' : `?cache=${ Date.now() }`
+export const getMultipleSetting = async (settings, cache, domainName,whichPage) => {
+    // const isCache = cache ? '' : `?cache=${ Date.now() }`
     const body = {
         ...settings
     };
-    return await axios.post(domainName + `/api/v1/settings/getMultiple`, body)
+    return await axios.post(domainName + `/api/v1/settings/getMultiple?whichPage=${whichPage}`, body)
 };
 
 
@@ -69,7 +69,7 @@ export const getWidgetsWithData = async (position,domainName) => {
     const body = {
         position,
     };
-    return await axios.post(domainName + '/api/v1/settings/getWidgetsWithData', body)
+    return await axios.post(domainName + `/api/v1/settings/getWidgetsWithData`, body)
 }
 
 

@@ -79,8 +79,8 @@ tags.getInitialProps = async ({ pathname, query, req }) => {
     let widgets;
     let settings;
 
-    const widgetsData =await getMultipleWidgetWithData({ widgets: [ 'tagsPageSidebar', 'home', 'footer','header' ] }, true,domainName)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName)
+    const widgetsData =await getMultipleWidgetWithData({ widgets: [ 'tagsPageSidebar', 'home', 'footer','header' ] }, true,domainName,'tagsPage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName,'tagsPage')
     const tagsData = await getMeta(getTagsData,true,domainName)
 
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []

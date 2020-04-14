@@ -50,8 +50,8 @@ Home.getInitialProps = async ({ req }) => {
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer','header' ] }, true, domainName)
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer','header' ] }, true, domainName,'homePage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName,'homePage')
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []

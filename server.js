@@ -21,9 +21,17 @@ const handle = app.getRequestHandler();
 //cache
 const apicache = require('apicache')
 const cache = apicache.middleware;
-const onlyStatus200 = (req, res) => res.statusCode === 200;
+const onlyStatus200 = (req, res) => {
+    // console.log( req.query.noCache)
+    //     // if (req.query.noCache){
+    //     //     return false
+    //     // }else if ( res.statusCode === 200){
+    //     //     return true
+    //     // }
+   return  res.statusCode === 200;
+}
 const cacheSuccesses = cache('1 day', onlyStatus200);
-
+//--------
 
 //--
 mongoose.Promise = global.Promise;
@@ -83,8 +91,8 @@ app.prepare().then(()=>{
 
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts',(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts/post',(req,res)=>{postsControllers.getPostInfo(req,res)});
+    server.post('/api/v1/posts',cacheSuccesses,(req,res)=>{postsControllers.getPostsInfo(req,res)});
+    server.post('/api/v1/posts/post',cacheSuccesses,(req,res)=>{postsControllers.getPostInfo(req,res)});
     server.post('/api/v1/posts/createNewPost',(req,res)=>{postsControllers.createNewPost(req,res)});
     server.post('/api/v1/posts/updatePost',(req,res)=>{postsControllers.updatePost(req,res)});
     server.post('/api/v1/posts/deletePost',(req,res)=>{postsControllers.deletePost(req,res)});
@@ -92,21 +100,21 @@ app.prepare().then(()=>{
     server.post('/api/v1/posts/likeDislikeView',(req,res)=>{postsControllers.likeDislikeView(req,res)});
 
     //meta data handler(tags,categories...)
-    server.post('/api/v1/posts/getMeta',(req,res)=>{postsControllers.getMeta(req,res)});
+    server.post('/api/v1/posts/getMeta',cacheSuccesses,(req,res)=>{postsControllers.getMeta(req,res)});
 
     //comments handler
     server.post('/api/v1/posts/newComment',(req,res)=>{postsControllers.newComment(req,res)});
-    server.post('/api/v1/posts/getComments',(req,res)=>{postsControllers.getComments(req,res)});
+    server.post('/api/v1/posts/getComments',cacheSuccesses,(req,res)=>{postsControllers.getComments(req,res)});
     server.post('/api/v1/posts/updateComment',(req,res)=>{postsControllers.updateComment(req,res)});
 
     //settings handler
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
     server.post('/api/v1/settings/get',(req,res)=>{settingsControllers.get(req,res)});
-    server.post('/api/v1/settings/getMultiple',(req,res)=>{settingsControllers.getMultiple(req,res)});
+    server.post('/api/v1/settings/getMultiple',cacheSuccesses,(req,res)=>{settingsControllers.getMultiple(req,res)});
     server.post('/api/v1/settings/addWidget',(req,res)=>{settingsControllers.addWidget(req,res)});
     server.post('/api/v1/settings/getWidget',(req,res)=>{settingsControllers.getWidget(req,res)});
-    server.post('/api/v1/settings/getMultipleWidgetWithData',(req,res)=>{settingsControllers.getMultipleWidgetWithData(req,res)});
-    server.post('/api/v1/settings/getWidgetsWithData',(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
+    server.post('/api/v1/settings/getMultipleWidgetWithData',cacheSuccesses,(req,res)=>{settingsControllers.getMultipleWidgetWithData(req,res)});
+    server.post('/api/v1/settings/getWidgetsWithData',cacheSuccesses,(req,res)=>{settingsControllers.getWidgetsWithData(req,res)});
     server.post('/api/v1/settings/updateWidget',(req,res)=>{settingsControllers.updateWidget(req,res)});
     server.post('/api/v1/settings/deleteWidget',(req,res)=>{settingsControllers.deleteWidget(req,res)});
     server.post('/api/v1/settings/saveCustomStyle',(req,res)=>{settingsControllers.saveCustomStyle(req,res)});

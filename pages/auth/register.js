@@ -55,15 +55,15 @@ const Register = props => {
                     </div>
                     <div className="authFormItem">
                         <p>email</p>
-                        <input name='email' onChange={ e => onChangeHandler(e) }/>
+                        <input name='email' type='email' onChange={ e => onChangeHandler(e) }/>
                     </div>
                     <div className="authFormItem">
                         <p>password</p>
-                        <input name='password' onChange={ e => onChangeHandler(e) }/>
+                        <input name='password' type='password' onChange={ e => onChangeHandler(e) }/>
                     </div>
                     <div className="authFormItem">
                         <p>repeat password</p>
-                        <input name='password2' onChange={ e => onChangeHandler(e) }/>
+                        <input name='password2' type='password' onChange={ e => onChangeHandler(e) }/>
                     </div>
                     <button type='submit' className='submitBtn'>Register</button>
                 </form>
