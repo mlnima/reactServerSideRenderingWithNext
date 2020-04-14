@@ -15,11 +15,11 @@ const SiteSettingSetter = props => {
         // customScript: props.identity.data.customScript || 'your Script will be here',
     });
 
-    useEffect(() => {
-        console.log(props)
-
-
-    }, [ props ]);
+    // useEffect(() => {
+    //     console.log(props)
+    //
+    //
+    // }, [ props ]);
 
     useEffect(() => {
 

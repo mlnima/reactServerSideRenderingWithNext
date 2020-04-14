@@ -36,10 +36,7 @@ const fileManager = props => {
         setData()
     }, [ state.path ]);
 
-    useEffect(() => {
-        console.log(state)
 
-    }, [ state ]);
 
     const setData = () => {
         contextData.dispatchState({

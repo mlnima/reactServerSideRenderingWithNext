@@ -106,6 +106,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
 
     const postData = await getPost(postBody, true, domainName)
     post = dataDecoder(postData.data.post).post
+
     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header' ] }, true, domainName,'postPage')
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName,'postPage')
 

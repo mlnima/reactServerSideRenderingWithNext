@@ -17,7 +17,7 @@ export const getPosts = async (data, cache, domainName) => {
     const body = {
         ...data,
     };
-    return await axios.post(domainName + `/api/v1/posts${ queryGeneratorForUnCacheRequest(data) + cacheQueryGenerator(cache) }`, body, {
+    return await axios.post(domainName + `/api/v1/posts${ queryGeneratorForUnCacheRequest(data)  }`, body, {
         headers: {
             'cache-control': 'no-cache',
         },

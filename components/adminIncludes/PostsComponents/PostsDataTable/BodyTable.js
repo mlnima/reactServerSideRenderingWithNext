@@ -42,36 +42,36 @@ const BodyTable = props => {
             let editPostPath = `/admin/post?id=${ props.post._id }`;
             if (props.post.status === 'trash') {
                 return (
-                    <div className='postControlOptions'>
+                    <th className='postControlOptions'>
                         <Link href={ editPostPath }><a><button>Edit</button></a></Link>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'delete') }>Delete</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'draft') }>Draft</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'pending') }>Pending</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'published') }>Publish</button>
                         <button>View</button>
-                    </div>
+                    </th>
                 )
             }else if (props.post.status === 'published'){
                 return (
-                    <div className='postControlOptions'>
+                    <th className='postControlOptions'>
                         <Link href={ editPostPath }><a><button>Edit</button></a></Link>
                         {/*<button onClick={ () => onDeletePermanentlyHandler(props.post._id) }>Delete</button>*/}
                         <button onClick={ () => contextData.functions.bulkActionPost([ state.hoveredId ], 'trash') }>Trash</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'draft') }>Draft</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'pending') }>Pending</button>
                         <button>View</button>
-                    </div>
+                    </th>
                 )
             }else {
                 return (
-                    <div className='postControlOptions'>
+                    <th className='postControlOptions'>
                         <Link href={ editPostPath }><a><button>Edit</button></a></Link>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'draft') }>Draft</button>
                         <button onClick={ () => contextData.functions.bulkActionPost([ state.hoveredId ], 'pending') }>Pending</button>
                         <button>View</button>
                         <button onClick={ () => contextData.functions.bulkActionPost([ state.hoveredId ], 'trash') }>Trash</button>
                         <button onClick={ () =>  contextData.functions.bulkActionPost([ state.hoveredId ], 'published') }>Publish</button>
-                    </div>
+                    </th>
                 )
             }
 
@@ -119,7 +119,7 @@ const BodyTable = props => {
 
         let isChecked = contextData.adminPostsData.checkedPosts.includes(post._id);
         return (
-            <>
+
 
             <tr key={ post._id } className='BodyTableItems' onTouchStart={ () => {
                 setState({ ...state, hoveredId: post._id })
@@ -166,7 +166,7 @@ const BodyTable = props => {
                 <HoverOnTitle post={ post }/>
                </tr>
 
-                </>
+
         )
     });
 

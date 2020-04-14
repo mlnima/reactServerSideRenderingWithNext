@@ -14,6 +14,7 @@ import withRouter from "next/dist/client/with-router";
 import TextInputWithUploadBtn from '../../../components/adminIncludes/PostComponents/TextInputWithUploadBtn/TextInputWithUploadBtn'
 import ImagePreview from '../../../components/adminIncludes/PostComponents/ImagePreview/ImagePreview';
 import Link from 'next/link'
+import dataDecoder from '../../../server/tools/dataDecoder'
 
 const Index = props => {
     const contextData = useContext(AppContext);
@@ -115,7 +116,7 @@ Index.getInitialProps = async ({ query, req }) => {
             _id: query.id,
         };
         postData = await getPost(requestBody, true, domainName)
-        post = postData.data ? postData.data.post : newPostData
+        post = postData.data ? dataDecoder(postData.data.post).post : newPostData
     }
 
     return { post, query }

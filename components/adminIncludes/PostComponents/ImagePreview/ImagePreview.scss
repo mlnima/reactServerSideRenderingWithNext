@@ -1,7 +1,10 @@
 .ImagePreview{
   .editor{
+    display: flex;
+    justify-content: center;
     img{
       margin: auto;
+      width: 50%;
     }
   }
 }

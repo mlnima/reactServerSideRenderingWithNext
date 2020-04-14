@@ -1,37 +1,36 @@
-import React,{useState} from 'react';
+import React, { useState } from 'react';
 import Switch from "react-switch";
 import './ImagePreview.scss'
+
 const ImagePreview = props => {
 
-    const [state,setState]= useState({
-        open:false
+    const [ state, setState ] = useState({
+        open: false
     })
 
-    if (props.postData.mainThumbnail){
+    if (props.postData.mainThumbnail) {
 
-        if (state.open){
+        if (state.open) {
             return (
                 <div className='ImagePreview VideoInformationSection'>
                     <p>Image Preview</p>
-                    <Switch onChange={()=>state.open ?setState({...state,open: false}):setState({...state,open: true}) } checked={ state.open }/>
+                    <Switch onChange={ () => state.open ? setState({ ...state, open: false }) : setState({ ...state, open: true }) } checked={ state.open  }/>
                     <div className="title">
 
                     </div>
                     <div className="editor">
-                        <img src={props.postData.mainThumbnail}/>
+                        <img src={ props.postData.mainThumbnail }/>
                     </div>
                 </div>
             );
-        }else return (
+        } else return (
             <>
                 <p>Image Preview</p>
-            <Switch onChange={ ()=>state.open ?setState({...state,open: false}):setState({...state,open: true}) } checked={ props.isChecked }/>
+                <Switch onChange={ () => state.open ? setState({ ...state, open: false }) : setState({ ...state, open: true }) } checked={ state.open  }/>
             </>
         )
 
-
-
-    }else return null
+    } else return null
 
 };
 export default ImagePreview;

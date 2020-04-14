@@ -9,9 +9,7 @@ const FilterDropDownActions = props => {
 
     const [ state, setState ] = useState({});
 
-    useEffect(() => {
-        console.log( props)
-    }, [props]);
+
     const onFormatChangeHandler = e => {
 
         // if (bulkAction.current.value !== 'none') {
