@@ -5,17 +5,9 @@ import TopBar from "../includes/TopBar/TopBar";
 import Navigation from "../includes/Header/Navigation/Navigation";
 import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
-import { AppContext } from '../../context/AppContext'
-// import Router from "next/router";
-// import withGA from "next-ga";
+
 
 const AppLayout = props => {
-    const contextData = useContext(AppContext);
-
-    useEffect(() => {
-        console.log(contextData.userData)
-    }, [ contextData.userData ]);
-
 
         return (
             <>

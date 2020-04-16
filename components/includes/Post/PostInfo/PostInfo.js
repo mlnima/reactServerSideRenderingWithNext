@@ -14,10 +14,12 @@ import { AppContext } from '../../../../context/AppContext'
 
 const PostInfo = props => {
     const contextData = useContext(AppContext);
+
     const [ state, setState ] = useState({
         likeValue: 0,
         postAbsolutePath: ''
     });
+
     useEffect(() => {
         setState({
             ...state,
@@ -26,6 +28,7 @@ const PostInfo = props => {
         });
         likeDislikeView(props.id, 'views')
     }, []);
+
     // useEffect(() => {
     //     console.log(contextData.userData)
     // }, [ contextData.userData ]);
@@ -33,7 +36,7 @@ const PostInfo = props => {
     const EditLinkForAdmin = () => {
         if (contextData.userData.role === 'administrator') {
             return (
-                <Link href={ `/admin/post?id=${ props.id }` }><a>Edit</a></Link>
+                <Link href={ `/admin/post?id=${ props.id }` }><a className='edit-btn-admin'>Edit</a></Link>
             )
         } else return null
     }

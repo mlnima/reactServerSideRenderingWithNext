@@ -9,6 +9,7 @@ import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRende
 import { Sidebar } from '../components/includes/Sidebar/Sidebar'
 import Footer from '../components/includes/Footer/Footer'
 import dataDecoder from '../server/tools/dataDecoder'
+
 const Home = props => {
 
     const [ state, setState ] = useState({
@@ -26,8 +27,9 @@ const Home = props => {
         }
     }, [ props ]);
 
-
-
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
     return (
         <>
             <AppLayout>
@@ -50,8 +52,8 @@ Home.getInitialProps = async ({ req }) => {
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer','header' ] }, true, domainName,'homePage')
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName,'homePage')
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'homePageSidebar', 'home', 'footer', 'header' ] }, true, domainName, 'homePage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName, 'homePage')
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []

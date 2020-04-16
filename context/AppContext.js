@@ -199,6 +199,13 @@ const AppProvider = props => {
                 data
             };
             return await axios.post(window.location.origin + '/api/v1/settings/update', body)
+        },
+        clearCaches: async () => {
+
+            const body = {
+                token: localStorage.wt,
+            };
+            return await axios.post(window.location.origin + '/api/v1/settings/clearCaches', body)
         }
     });
 

@@ -120,6 +120,12 @@ app.prepare().then(()=>{
     server.post('/api/v1/settings/saveCustomStyle',(req,res)=>{settingsControllers.saveCustomStyle(req,res)});
     //exe commands
     server.post('/api/v1/settings/executor',(req,res)=>{settingsControllers.executor(req,res)});
+    //cache control
+    server.post('/api/v1/settings/clearCaches',(req,res)=>{
+       apicache.clear(req.params.collection)
+        console.log('caches deleted' )
+        // settingsControllers.clearCaches(req,res)
+    });
     // file manager
     server.post('/api/v1/settings/fileManagerControllers-readPath',(req,res)=>{fileManagerControllers.readPath(req,res)});
     server.post('/api/v1/settings/fileManagerControllers-uploadFile',(req,res)=>{ fileManagerControllers.uploadFile(req,res)});
@@ -137,9 +143,16 @@ app.prepare().then(()=>{
         app.render(req,res,targetComponent)
     });
 
+
     server.get('/errorPage',(req,res)=>{
         const targetComponent = '/errorPage';
         app.render(req,res,targetComponent)
+    });
+
+    server.get('/meta/:type',(req,res)=>{
+        const targetComponent = '/meta';
+        const queryParams = {metaType:req.params.type}
+        app.render(req,res,targetComponent,queryParams)
     });
 
 

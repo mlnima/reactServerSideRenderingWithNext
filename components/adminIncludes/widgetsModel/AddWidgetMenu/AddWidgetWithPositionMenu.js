@@ -47,6 +47,7 @@ const AddWidgetWithPositionMenu = props => {
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('homePageSidebar', props.type) }>Home Page Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('postPageSidebar', props.type) }>Post Page Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('postsPageSidebar', props.type) }>Posts Page Sidebar</button>
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('metaPageSidebar', props.type) }>Meta Page Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('tagsPageSidebar', props.type) }>Tags Page Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('categoriesPageSidebar', props.type) }>Categories Page Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('actorsPageSidebar', props.type) }>Actors Page Sidebar</button>

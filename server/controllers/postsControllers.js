@@ -110,7 +110,6 @@ postsControllers.getPostsInfo = async (req, res) => {
     let searchQuery = req.body.keyword === '' ? {} : {
         $or: [
             { actors: new RegExp(req.body.actor, 'i') },
-            { actors: new RegExp(req.body.actor, 'i') },
             { title: new RegExp(req.body.keyword, 'i') },
             { description: new RegExp(req.body.keyword, 'i') } ]
     };
@@ -143,7 +142,7 @@ postsControllers.getPostInfo = (req, res) => {
         })
     } else if (_id) {
         postSchema.findOne({ _id }).exec().then(post => {
-            res.json({ post:post, error: false });
+            res.json({ post:dataEncoder({post}), error: false });
             res.end()
         })
     }

@@ -12,7 +12,8 @@ const PostCategoriesTagsActors = props => {
         props.onPostMetaChangeHandler(props.type, deletedItemFromType)
     };
 
-    const addNewItem = () => {
+    const addNewItem = e => {
+        e.preventDefault()
         if (newItemsElement.current.value.includes(',')) {
             let newItems = newItemsElement.current.value.split(',');
             const addedItemFromType = [ ...props.postData[props.type], ...newItems.map(item=>item.trim()) ]
@@ -39,10 +40,10 @@ const PostCategoriesTagsActors = props => {
 
     return (
         <div className='PostCategoriesTagsActors'>
-            <div className="addNewTag">
+            <form className="addNewTag" onSubmit={e => addNewItem(e)}>
                 <input ref={ newItemsElement } type='text'/>
-                <button className='addBtn' onClick={ () => addNewItem() }> Add</button>
-            </div>
+                <button className='addBtn' type='submit'> Add</button>
+            </form>
             <span className='small-info'>Separate tags with commas</span>
             <div className="items">
                 { addedItems }

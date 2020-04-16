@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 4);
+/******/ 	return __webpack_require__(__webpack_require__.s = 8);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -535,9 +535,14 @@ const Navigation = props => {
   };
 
   const renderNavigationItems = contextData.navigationData.map(item => {
+    console.log(item);
     return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
+      as: item.as ? item.as : {},
       key: item.title,
-      href: item.url
+      href: {
+        pathname: item.url,
+        query: item.query ? [item.query] : {}
+      }
     }, __jsx("a", {
       style: navigationData.style
     }, item.title));
@@ -735,6 +740,151 @@ const MetaWidget = props => {
 
 /***/ }),
 
+/***/ "./components/includes/PostElement/PostElement.js":
+/*!********************************************************!*\
+  !*** ./components/includes/PostElement/PostElement.js ***!
+  \********************************************************/
+/*! exports provided: default */
+/***/ (function(module, __webpack_exports__, __webpack_require__) {
+
+"use strict";
+__webpack_require__.r(__webpack_exports__);
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
+/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
+/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
+/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_1__);
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
+/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../context/AppContext */ "./context/AppContext.js");
+/* harmony import */ var _ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ProgressBar/ProgressBar */ "./components/includes/ProgressBar/ProgressBar.js");
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-fontawesome */ "react-fontawesome");
+/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _variables_variables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../_variables/_variables */ "./_variables/_variables.js");
+var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
+
+function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
+
+function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
+
+function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
+
+
+
+ // import {Link} from "react-router-dom";
+
+ // import {withRouter} from "react-router-dom";
+
+
+
+ // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
+
+const PostElement = props => {
+  let qualityLabel = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  let durationLabel = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  let viewLabel = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  let element = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  let videoElement = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
+  let path = '/post/' + props.state._id + '/' + props.state.title;
+  let {
+    0: state,
+    1: setState
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    isHover: false,
+    isWatched: false,
+    extraClassName: ''
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (props.viewType) {
+      setState(_objectSpread({}, state, {
+        extraClassName: props.viewType
+      }));
+    }
+  }, [props]);
+
+  let isHoverHandler = () => {
+    if (props.state.videoTrailerUrl) {
+      state.isHover ? setState(_objectSpread({}, state, {
+        isHover: false
+      })) : setState(_objectSpread({}, state, {
+        isHover: true
+      }));
+    }
+  };
+
+  const ImageContent = () => {
+    let dataToRender = () => {
+      if (state.isHover && props.state.videoTrailerUrl) {
+        return __jsx("video", {
+          ref: videoElement,
+          src: props.state.videoTrailerUrl,
+          autoPlay: true,
+          loop: true,
+          onMouseOut: e => {
+            isHoverHandler();
+          }
+        });
+      } else if (!state.isHover) {
+        return __jsx("img", {
+          src: props.state.mainThumbnail,
+          alt: props.state.title,
+          onError: err => {
+            if (!props.state.mainThumbnail) {
+              // deletedVideoAutoRemover(props.state)
+              console.log('something wrong with image on ', props.state.title);
+            }
+          },
+          onMouseEnter: () => isHoverHandler()
+        });
+      }
+    };
+
+    return dataToRender();
+  };
+
+  const RenderDataOnImage = () => {
+    if (!state.isHover) {
+      return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("span", {
+        ref: qualityLabel,
+        className: "quality"
+      }, props.state.quality), __jsx("span", {
+        ref: viewLabel,
+        className: "views"
+      }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_5___default.a, {
+        className: "fontawesomeSmall",
+        name: "eye"
+      }), props.state.views), __jsx("span", {
+        ref: durationLabel,
+        className: "duration"
+      }, props.state.duration));
+    } else return null;
+  };
+
+  return __jsx("div", {
+    ref: element,
+    className: 'videoElementDiv ' + (props.viewType ? props.viewType : 'standard')
+  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+    as: `/${props.state.title}`,
+    href: {
+      pathname: '/post',
+      query: {
+        postTitle: props.state.title
+      }
+    }
+  }, __jsx("a", null, __jsx("div", {
+    className: "VideoElement",
+    key: props.state.title
+  }, __jsx("div", {
+    className: "image"
+  }, __jsx(ImageContent, null), __jsx(RenderDataOnImage, null)), __jsx(_ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    value: Object(_variables_variables__WEBPACK_IMPORTED_MODULE_6__["likeValueCalculator"])(props.state.likes, props.state.disLikes),
+    percent: true
+  }), __jsx("h3", null, props.state.title)))));
+};
+
+/* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_1___default()(PostElement));
+
+/***/ }),
+
 /***/ "./components/includes/Posts/Posts.js":
 /*!********************************************!*\
   !*** ./components/includes/Posts/Posts.js ***!
@@ -747,7 +897,7 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
 /* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
 /* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! ../../../context/AppContext */ "./context/AppContext.js");
-/* harmony import */ var _VideoElement_VideoElement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../VideoElement/VideoElement */ "./components/includes/VideoElement/VideoElement.js");
+/* harmony import */ var _PostElement_PostElement__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! ../PostElement/PostElement */ "./components/includes/PostElement/PostElement.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
@@ -777,7 +927,7 @@ const Posts = props => {
     1: setPosts
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])([]);
   const renderPosts = (props.posts || []).map(post => {
-    return __jsx(_VideoElement_VideoElement__WEBPACK_IMPORTED_MODULE_2__["default"], {
+    return __jsx(_PostElement_PostElement__WEBPACK_IMPORTED_MODULE_2__["default"], {
       key: post._id,
       state: post,
       viewType: props.viewType
@@ -919,22 +1069,27 @@ const SearchInputComponent = props => {
     }));
   };
 
-  return __jsx("div", {
-    className: "search-bar"
-  }, __jsx("input", {
-    className: "search-input",
-    name: "keyword",
-    onChange: e => onChangeHandler(e)
-  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: {
+  const onSubmitHandler = e => {
+    e.preventDefault();
+    props.router.push({
       pathname: state.pathURL,
       query: _objectSpread({}, state.queries, {
         keyword: state.keyword
       })
-    }
-  }, __jsx("a", {
-    className: "search-bar-btn"
-  }, "Search")));
+    });
+  };
+
+  return __jsx("form", {
+    className: "search-bar",
+    onSubmit: e => onSubmitHandler(e)
+  }, __jsx("input", {
+    className: "search-input",
+    name: "keyword",
+    onChange: e => onChangeHandler(e)
+  }), __jsx("button", {
+    className: "search-bar-btn",
+    type: "submit"
+  }, "Search"));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3___default()(SearchInputComponent));
@@ -1019,14 +1174,13 @@ const SiteSettingSetter = props => {
     title: '',
     themeColor: '',
     description: '',
-    keywords: [] // customScript: props.identity.data.customScript || 'your Script will be here',
+    keywords: [],
+    customScripts: [] // customScript: props.identity.data.customScript || 'your Script will be here',
 
-  }); // useEffect(() => {
-  //     console.log(props)
-  //
-  //
-  // }, [ props ]);
-
+  });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(props);
+  }, [props]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     if (props.design) {
       contextData.dispatchSiteDesign(props.design.data);
@@ -1042,7 +1196,8 @@ const SiteSettingSetter = props => {
         title: props.identity.data.title || '',
         themeColor: props.design.data.themeColor || '',
         description: props.identity.data.description || '',
-        keywords: props.identity.data.keywords || []
+        keywords: props.identity.data.keywords || [],
+        customScripts: props.identity.customScripts || []
       }));
     }
 
@@ -1054,17 +1209,17 @@ const SiteSettingSetter = props => {
     document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;
     document.body.style.color = contextData.siteDesign.bodyBackgroundColor;
   }, [contextData.siteDesign]);
-  const renderCustomScripts = (props.identity.data.customScripts || []).map(script => {
+  const renderCustomScripts = (state.customScripts || []).map(script => {
     return __jsx("script", {
       key: script.scriptName
     }, script.scriptBody);
   }); // const RenderGoogleAnalyticsScript = () => {
   //     if (props.identity.data.googleAnalyticsID) {
-  //         console.log( 'there is')
+  //         console.log('there is')
   //         return (
   //             <>
-  //                                 <script dangerouslySetInnerHTML={ {
-  //                                     __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
+  //                 <script dangerouslySetInnerHTML={ {
+  //                     __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
   //                     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
   //                     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
   //                     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
@@ -1107,7 +1262,7 @@ const SiteSettingSetter = props => {
     content: state.keywords
   }), __jsx("script", {
     async: true,
-    src: `https://www.googletagmanager.com/gtag/js?id=${contextData.siteIdentity.googleAnalyticsID}`
+    src: `https://www.googletagmanager.com/gtag/js?id=${contextData.siteIdentity.googleAnalyticsID || ''}`
   }), __jsx("link", {
     rel: "icon",
     href: "/favicon.ico"
@@ -1182,7 +1337,9 @@ const TopBar = props => {
       }, "Log Out"), __jsx("button", {
         style: state.style,
         onClick: () => contextData.functions.goToAdminPanel()
-      }, "Admin Panel"));
+      }, "Admin Panel"), __jsx("button", {
+        onClick: () => contextData.functions.clearCaches()
+      }, "Clear Caches"));
     } else {
       return __jsx("div", {
         className: "TopBar",
@@ -1205,151 +1362,6 @@ const TopBar = props => {
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (Object(next_router__WEBPACK_IMPORTED_MODULE_3__["withRouter"])(TopBar));
-
-/***/ }),
-
-/***/ "./components/includes/VideoElement/VideoElement.js":
-/*!**********************************************************!*\
-  !*** ./components/includes/VideoElement/VideoElement.js ***!
-  \**********************************************************/
-/*! exports provided: default */
-/***/ (function(module, __webpack_exports__, __webpack_require__) {
-
-"use strict";
-__webpack_require__.r(__webpack_exports__);
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0__ = __webpack_require__(/*! react */ "react");
-/* harmony import */ var react__WEBPACK_IMPORTED_MODULE_0___default = /*#__PURE__*/__webpack_require__.n(react__WEBPACK_IMPORTED_MODULE_0__);
-/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_1__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
-/* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_1__);
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/link */ "./node_modules/next/link.js");
-/* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_2__);
-/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../../../context/AppContext */ "./context/AppContext.js");
-/* harmony import */ var _ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../ProgressBar/ProgressBar */ "./components/includes/ProgressBar/ProgressBar.js");
-/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! react-fontawesome */ "react-fontawesome");
-/* harmony import */ var react_fontawesome__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(react_fontawesome__WEBPACK_IMPORTED_MODULE_5__);
-/* harmony import */ var _variables_variables__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../../_variables/_variables */ "./_variables/_variables.js");
-var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
-
-function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
-
-function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { var source = arguments[i] != null ? arguments[i] : {}; if (i % 2) { ownKeys(Object(source), true).forEach(function (key) { _defineProperty(target, key, source[key]); }); } else if (Object.getOwnPropertyDescriptors) { Object.defineProperties(target, Object.getOwnPropertyDescriptors(source)); } else { ownKeys(Object(source)).forEach(function (key) { Object.defineProperty(target, key, Object.getOwnPropertyDescriptor(source, key)); }); } } return target; }
-
-function _defineProperty(obj, key, value) { if (key in obj) { Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true }); } else { obj[key] = value; } return obj; }
-
-
-
- // import {Link} from "react-router-dom";
-
- // import {withRouter} from "react-router-dom";
-
-
-
- // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
-
-const VideoElement = props => {
-  let qualityLabel = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  let durationLabel = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  let viewLabel = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  let element = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  let videoElement = Object(react__WEBPACK_IMPORTED_MODULE_0__["useRef"])(null);
-  let path = '/post/' + props.state._id + '/' + props.state.title;
-  let {
-    0: state,
-    1: setState
-  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
-    isHover: false,
-    isWatched: false,
-    extraClassName: ''
-  });
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    if (props.viewType) {
-      setState(_objectSpread({}, state, {
-        extraClassName: props.viewType
-      }));
-    }
-  }, [props]);
-
-  let isHoverHandler = () => {
-    if (props.state.videoTrailerUrl) {
-      state.isHover ? setState(_objectSpread({}, state, {
-        isHover: false
-      })) : setState(_objectSpread({}, state, {
-        isHover: true
-      }));
-    }
-  };
-
-  const ImageContent = () => {
-    let dataToRender = () => {
-      if (state.isHover && props.state.videoTrailerUrl) {
-        return __jsx("video", {
-          ref: videoElement,
-          src: props.state.videoTrailerUrl,
-          autoPlay: true,
-          loop: true,
-          onMouseOut: e => {
-            isHoverHandler();
-          }
-        });
-      } else if (!state.isHover) {
-        return __jsx("img", {
-          src: props.state.mainThumbnail,
-          alt: props.state.title,
-          onError: err => {
-            if (!props.state.mainThumbnail) {
-              // deletedVideoAutoRemover(props.state)
-              console.log('something wrong with image on ', props.state.title);
-            }
-          },
-          onMouseEnter: () => isHoverHandler()
-        });
-      }
-    };
-
-    return dataToRender();
-  };
-
-  const RenderDataOnImage = () => {
-    if (!state.isHover) {
-      return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx("span", {
-        ref: qualityLabel,
-        className: "quality"
-      }, props.state.quality), __jsx("span", {
-        ref: viewLabel,
-        className: "views"
-      }, __jsx(react_fontawesome__WEBPACK_IMPORTED_MODULE_5___default.a, {
-        className: "fontawesomeSmall",
-        name: "eye"
-      }), props.state.views), __jsx("span", {
-        ref: durationLabel,
-        className: "duration"
-      }, props.state.duration));
-    } else return null;
-  };
-
-  return __jsx("div", {
-    ref: element,
-    className: 'videoElementDiv ' + (props.viewType ? props.viewType : 'standard')
-  }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    as: `/${props.state.title}`,
-    href: {
-      pathname: '/post',
-      query: {
-        postTitle: props.state.title
-      }
-    }
-  }, __jsx("a", null, __jsx("div", {
-    className: "VideoElement",
-    key: props.state.title
-  }, __jsx("div", {
-    className: "image"
-  }, __jsx(ImageContent, null), __jsx(RenderDataOnImage, null)), __jsx(_ProgressBar_ProgressBar__WEBPACK_IMPORTED_MODULE_4__["default"], {
-    value: Object(_variables_variables__WEBPACK_IMPORTED_MODULE_6__["likeValueCalculator"])(props.state.likes, props.state.disLikes),
-    percent: true
-  }), __jsx("h3", null, props.state.title)))));
-};
-
-/* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_1___default()(VideoElement));
 
 /***/ }),
 
@@ -1663,10 +1675,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 const WidgetsRenderer = props => {
-  // useEffect(() => {
-  //     console.log(props)
-  // }, [ props ]);
-  const renderWidgets = props.widgets.filter(widget => widget.position === props.position).map(widget => {
+  const renderWidgets = (props.widgets || []).filter(widget => widget.position === props.position).map(widget => {
     switch (widget.type) {
       case 'posts':
         return __jsx(_Widget_Widget__WEBPACK_IMPORTED_MODULE_1__["default"], {
@@ -1779,7 +1788,6 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var _includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! ../includes/Header/Navigation/Navigation */ "./components/includes/Header/Navigation/Navigation.js");
 /* harmony import */ var _includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! ../includes/Loading/Loading */ "./components/includes/Loading/Loading.js");
 /* harmony import */ var _includes_AlertBox_AlertBox__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ../includes/AlertBox/AlertBox */ "./components/includes/AlertBox/AlertBox.js");
-/* harmony import */ var _context_AppContext__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ../../context/AppContext */ "./context/AppContext.js");
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
@@ -1787,14 +1795,8 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
- // import Router from "next/router";
-// import withGA from "next-ga";
 
 const AppLayout = props => {
-  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_6__["AppContext"]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(contextData.userData);
-  }, [contextData.userData]);
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_2__["default"], null), __jsx(_includes_Header_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), __jsx(_includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], null), __jsx(_includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_includes_AlertBox_AlertBox__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx("div", {
     className: "App"
   }, props.children));
@@ -2068,6 +2070,12 @@ const AppProvider = props => {
         data
       };
       return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post(window.location.origin + '/api/v1/settings/update', body);
+    },
+    clearCaches: async () => {
+      const body = {
+        token: localStorage.wt
+      };
+      return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post(window.location.origin + '/api/v1/settings/clearCaches', body);
     }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
@@ -4189,6 +4197,9 @@ const Home = props => {
       });
     }
   }, [props]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(props);
+  }, [props]);
   return __jsx(react__WEBPACK_IMPORTED_MODULE_0___default.a.Fragment, null, __jsx(_components_layouts_AppLayout__WEBPACK_IMPORTED_MODULE_2__["default"], null, __jsx(_components_includes_SiteSettingsSetter_SiteSettingsSetter__WEBPACK_IMPORTED_MODULE_5__["default"], props), __jsx("div", {
     style: state.style,
     className: props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar'
@@ -4282,7 +4293,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9j
 
 /***/ }),
 
-/***/ 4:
+/***/ 8:
 /*!******************************!*\
   !*** multi ./pages/index.js ***!
   \******************************/

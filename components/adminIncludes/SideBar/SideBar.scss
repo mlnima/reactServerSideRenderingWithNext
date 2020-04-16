@@ -38,6 +38,7 @@
         background-color: transparent;
         border: none;
         outline: none;
+
       }
 
       &:hover {
@@ -46,7 +47,8 @@
       }
 
       &:active {
-        background-color: yellow;
+        background-color: $light100;
+        color: $dark90;
       }
     }
 

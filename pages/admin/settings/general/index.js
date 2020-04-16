@@ -26,6 +26,7 @@ const settings = props => {
         actorsPageSidebar:props.identity.actorsPageSidebar||false,
         postPageSidebar:props.identity.postPageSidebar||false,
         postsPageSidebar:props.identity.postsPageSidebar||false,
+        metaPageSidebar:props.identity.postsPageSidebar||false,
     });
 
     const onSubmitHandler = e => {
@@ -188,6 +189,13 @@ const settings = props => {
                         <div className="site-settings-form-section">
                             <p>Posts Page Sidebar:</p>
                             <select name='postsPageSidebar' value={state.postsPageSidebar} onChange={e=>onChangeHandler(e)}>
+                                <option value='true' >Yes</option>
+                                <option value='false'>No</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section">
+                            <p>Meta Page Sidebar:</p>
+                            <select name='metaPageSidebar' value={state.metaPageSidebar} onChange={e=>onChangeHandler(e)}>
                                 <option value='true' >Yes</option>
                                 <option value='false'>No</option>
                             </select>

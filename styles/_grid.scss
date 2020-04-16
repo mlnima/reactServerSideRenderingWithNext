@@ -17,6 +17,7 @@
   margin: auto;
 
 }
+
 @mixin videoContent {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
@@ -33,6 +34,11 @@
 
 }
 
+@mixin metaPageElements {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 10px;
+}
 @mixin categoryPageElements {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));

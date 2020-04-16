@@ -25,11 +25,12 @@ export const getPosts = async (data, cache, domainName) => {
     // return await axios.post(domainName +`/api/v1/posts`, body)
 };
 
-export const getPost = async (data, cache, domainName) => {
+export const getPost = async (data, cache, domainName,idOrTitleForUnCacheRequest) => {
+
     const body = {
         ...data,
     };
-    return await axios.post(domainName + '/api/v1/posts/post', body)
+    return await axios.post(domainName + `/api/v1/posts/post?title=${idOrTitleForUnCacheRequest}`, body)
 };
 
 export const updatePost = async (data, domainName) => {

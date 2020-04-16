@@ -18,5 +18,12 @@
 
   button{
     @include transparentLightTextBtn;
+    transition: .3s;
+    &:hover{
+      transform: scale(1.2);
+    }
+    &:active{
+      transform: scale(1);
+    }
   }
 }

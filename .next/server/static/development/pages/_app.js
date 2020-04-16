@@ -357,6 +357,12 @@ const AppProvider = props => {
         data
       };
       return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post(window.location.origin + '/api/v1/settings/update', body);
+    },
+    clearCaches: async () => {
+      const body = {
+        token: localStorage.wt
+      };
+      return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post(window.location.origin + '/api/v1/settings/clearCaches', body);
     }
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {

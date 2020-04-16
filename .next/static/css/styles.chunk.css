@@ -646,7 +646,8 @@
         background-color: #181818;
         font-weight: bold; }
       .SideBar .SideBarItemElement .SideBarItemTitle:active {
-        background-color: yellow; }
+        background-color: white;
+        color: #181818; }
     .SideBar .SideBarItemElement .SideBarItemElementSubItems {
       background-color: #181818; }
       .SideBar .SideBarItemElement .SideBarItemElementSubItems .SideBarItem-SubItem {
@@ -1046,7 +1047,12 @@
     background-color: transparent;
     color: white;
     outline: none;
-    border: none; }
+    border: none;
+    transition: .3s; }
+    .TopBar button:hover {
+      transform: scale(1.2); }
+    .TopBar button:active {
+      transform: scale(1); }
 
 .videoElementDiv {
   display: flex;
@@ -1068,14 +1074,6 @@
       .videoElementDiv .VideoElement .image img {
         width: 165.46px;
         height: 92.81px; }
-        .videoElementDiv .VideoElement .image img:hover {
-          animation: opacityAnimationEnd .5s alternate; }
-
-@keyframes opacityAnimationEnd {
-  0% {
-    opacity: 100%; }
-  100% {
-    opacity: 0; } }
       .videoElementDiv .VideoElement .image video {
         width: 165.46px;
         height: 92.81px;
@@ -1172,31 +1170,39 @@
 .Widget {
   padding: 10px; }
   .Widget .Videos .smallVideoContent {
-    min-width: 300px;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr)); }
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap; }
     .Widget .Videos .smallVideoContent .small {
-      width: 140px; }
+      width: 140px;
+      margin: 0 5px; }
       .Widget .Videos .smallVideoContent .small .VideoElement {
         width: 140px; }
         .Widget .Videos .smallVideoContent .small .VideoElement .image img, .Widget .Videos .smallVideoContent .small .VideoElement .image video {
           width: 140px;
-          height: auto; }
-  .Widget .Videos .listVideoContent .list {
-    height: auto; }
-    .Widget .Videos .listVideoContent .list a {
-      width: 100%; }
-    .Widget .Videos .listVideoContent .list .VideoElement {
-      width: auto;
-      display: flex;
-      height: auto; }
-      .Widget .Videos .listVideoContent .list .VideoElement .image img, .Widget .Videos .listVideoContent .list .VideoElement .image video {
-        width: 100px;
+          height: 80px;
+          object-fit: cover; }
+  .Widget .Videos .listVideoContent {
+    display: flex;
+    flex-wrap: wrap; }
+    .Widget .Videos .listVideoContent .list {
+      width: 90%; }
+      .Widget .Videos .listVideoContent .list a {
+        width: 95%; }
+      .Widget .Videos .listVideoContent .list .VideoElement {
+        width: auto;
+        display: flex;
         height: auto; }
-      .Widget .Videos .listVideoContent .list .VideoElement .image .views, .Widget .Videos .listVideoContent .list .VideoElement .image .duration {
-        display: none; }
-      .Widget .Videos .listVideoContent .list .VideoElement .progressParent {
-        display: none; }
+        .Widget .Videos .listVideoContent .list .VideoElement .image img, .Widget .Videos .listVideoContent .list .VideoElement .image video {
+          width: 100px;
+          height: auto; }
+        .Widget .Videos .listVideoContent .list .VideoElement .image .views, .Widget .Videos .listVideoContent .list .VideoElement .image .duration {
+          display: none; }
+        .Widget .Videos .listVideoContent .list .VideoElement .progressParent {
+          display: none; }
+  @media only screen and (max-width: 320px) {
+    .Widget {
+      padding: 0; } }
 
 .WidgetFooter a {
   color: white;
@@ -1470,7 +1476,7 @@ a {
   grid-gap: 10px; }
 
 .tags {
-  padding: 20px;
+  max-width: 95vw;
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
   grid-gap: 10px; }
@@ -1489,9 +1495,8 @@ a {
   justify-content: flex-start;
   width: 98%; }
   .post .main .comment-form {
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    justify-content: space-between;
+    display: flex;
+    flex-wrap: wrap;
     padding: 10px;
     width: 100%; }
     .post .main .comment-form .comment-form-info {
@@ -1525,28 +1530,6 @@ a {
       width: 95%; }
     .post .main .comment-form textarea {
       min-height: 200px; }
-  .post .main .video-player {
-    margin: 10px 0;
-    position: relative;
-    top: 0;
-    right: 0;
-    left: 0;
-    width: 100%; }
-    .post .main .video-player .responsive-player {
-      overflow: hidden;
-      position: relative;
-      padding-bottom: 56.30%;
-      margin-bottom: 20px;
-      height: 0; }
-      .post .main .video-player .responsive-player iframe {
-        position: absolute;
-        top: 0;
-        left: 0;
-        height: 100%;
-        width: 100%;
-        margin-bottom: 50px;
-        padding: 0 !important;
-        border-radius: 10px; }
   .post .main #download-url {
     width: 100%;
     margin: 20px 0; }
@@ -1678,49 +1661,182 @@ body {
   .search-bar .search-bar-btn {
     background-color: #282828;
     color: white;
+    border: 1px solid #282828;
     border-radius: 0 5px 5px 0; }
+
+.meta-item {
+  border-radius: 5px;
+  min-height: 40px;
+  min-width: 100px;
+  border: #181818 1px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white; }
+  .meta-item img {
+    width: 100%;
+    height: 150px;
+    border: #181818 1px solid;
+    display: block;
+    object-fit: cover; }
+  .meta-item .meta-item-data {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px; }
+    .meta-item .meta-item-data p {
+      text-align: center; }
+
+.tag-item {
+  border-radius: 5px;
+  min-height: 40px;
+  min-width: 100px;
+  border: #181818 1px solid;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: white; }
+  .tag-item img {
+    width: 100%;
+    height: 150px;
+    border: #181818 1px solid;
+    display: block;
+    object-fit: cover; }
+  .tag-item .tag-item-data {
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px; }
+    .tag-item .tag-item-data p {
+      text-align: center; }
+
+.metas {
+  margin: 30px 0;
+  max-width: 95vw;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-gap: 10px; }
 
 #footer {
   background-color: #181818;
   width: 100%;
   min-height: 200px;
   display: flex;
-  justify-content: space-between;
-  align-items: center; }
+  flex-wrap: wrap;
+  justify-content: space-evenly;
+  align-items: center;
+  margin: 50px 0 0 0; }
 
-.AddWidgetWithPositionMenu {
-  width: 100%; }
-  .AddWidgetWithPositionMenu .positionsOpener {
+#navigation-setting {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  background-color: white;
+  padding: 20px; }
+  #navigation-setting .add-navigation-items .add-navigation-item {
+    display: flex;
+    justify-content: space-between;
+    width: 300px; }
+    #navigation-setting .add-navigation-items .add-navigation-item input {
+      display: inline-block;
+      width: 80%; }
+  #navigation-setting .add-navigation-items input {
+    margin: 10px 0; }
+  #navigation-setting .add-navigation-items button {
     background-color: #f1f1f1;
     color: black;
     outline: none;
     border: 0.4px #9fa3a8 solid;
     padding: 8px 10px;
-    border-radius: 5px;
-    width: 100%;
-    font-weight: bold; }
-    .AddWidgetWithPositionMenu .positionsOpener:active {
+    border-radius: 5px; }
+    #navigation-setting .add-navigation-items button:active {
       background-color: white;
       border: none; }
-    .AddWidgetWithPositionMenu .positionsOpener:hover {
-      background-color: white; }
-  .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions {
-    max-width: 100%;
+  #navigation-setting .items-preview {
+    margin: 20px 0;
+    border-radius: 5px;
+    width: 100%;
+    border: solid 1px black;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 10px; }
+    #navigation-setting .items-preview .items-preview-item {
+      padding: 2px;
+      margin: 5px;
+      border-radius: 5px; }
+      #navigation-setting .items-preview .items-preview-item .item-title {
+        display: flex;
+        justify-content: space-between;
+        align-items: center; }
+        #navigation-setting .items-preview .items-preview-item .item-title button {
+          background-color: #f1f1f1;
+          color: black;
+          outline: none;
+          border: 0.4px #9fa3a8 solid;
+          padding: 8px 10px;
+          border-radius: 5px;
+          color: black;
+          background-color: black; }
+          #navigation-setting .items-preview .items-preview-item .item-title button:active {
+            background-color: white;
+            border: none; }
+    #navigation-setting .items-preview .editItem {
+      margin: 5px 0; }
+      #navigation-setting .items-preview .editItem input {
+        margin: 5px 0; }
+      #navigation-setting .items-preview .editItem button {
+        background-color: #f1f1f1;
+        color: black;
+        outline: none;
+        border: 0.4px #9fa3a8 solid;
+        padding: 8px 10px;
+        border-radius: 5px;
+        margin: 5px 0; }
+        #navigation-setting .items-preview .editItem button:active {
+          background-color: white;
+          border: none; }
+  #navigation-setting .saveBtn {
+    background: linear-gradient(#67ae55, #578843);
+    box-shadow: inset 0 1px 1px #a4e388;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    letter-spacing: 1px;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    width: 200px;
+    height: 40px;
+    min-width: 194px;
+    padding: 7px 20px;
+    text-align: center;
+    line-height: 126%;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px; }
+
+.AdminDesignSettingColorType {
+  max-width: 300px; }
+  .AdminDesignSettingColorType .adminDesignSectionItems .adminDesignSectionItem {
+    padding: 20px;
+    border-radius: 10px;
+    background-color: #282828;
+    color: white;
+    margin: 5px;
     display: flex;
-    flex-direction: column; }
-    .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn {
-      background-color: #f1f1f1;
-      color: black;
-      outline: none;
-      border: 0.4px #9fa3a8 solid;
-      padding: 8px 10px;
-      border-radius: 5px;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    justify-content: center;
+    height: 100%; }
+    .AdminDesignSettingColorType .adminDesignSectionItems .adminDesignSectionItem .adminDesignSectionItemTitle {
       font-size: small; }
-      .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn:active {
-        background-color: white;
-        border: none; }
-      .AddWidgetWithPositionMenu .AddWidgetWithPositionMenuPositions .AddWidgetWithPositionMenuPositionsBtn:hover {
-        background-color: white; }
+    .AdminDesignSettingColorType .adminDesignSectionItems .adminDesignSectionItem .previewColor {
+      height: 30px;
+      width: 30px;
+      margin: 5px;
+      border: .3px solid white; }
+    .AdminDesignSettingColorType .adminDesignSectionItems .adminDesignSectionItem input {
+      margin: 5px; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

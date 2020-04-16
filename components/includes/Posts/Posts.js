@@ -1,7 +1,7 @@
 import React, { Component, useEffect, useState, useContext } from 'react';
 
 import { AppContext } from "../../../context/AppContext";
-import VideoElement from "../VideoElement/VideoElement";
+import PostElement from "../PostElement/PostElement";
 
 import withRouter from "next/dist/client/with-router";
 
@@ -24,7 +24,7 @@ const Posts = props => {
 
     const renderPosts = (props.posts||[]).map(post => {
         return (
-            <VideoElement key={ post._id } state={ post } viewType={props.viewType}/>
+            <PostElement key={ post._id } state={ post } viewType={props.viewType}/>
         )
     });
 

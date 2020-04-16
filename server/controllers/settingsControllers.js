@@ -7,7 +7,7 @@ const fs = require('fs')
 const fsExtra = require('fs-extra')
 const { spawn } = require('child_process');
 const shell = require('shelljs');
-const dataEncoder =require('../tools/dataEncoder')
+const dataEncoder = require('../tools/dataEncoder')
 const mongoose = require('mongoose')
 let settingsControllers = {}
 
@@ -42,7 +42,7 @@ settingsControllers.get = async (req, res) => {
     res.json({ setting })
 };
 settingsControllers.getMultiple = async (req, res) => {
-    console.log('getMultiple not cached' )
+    console.log('getMultiple not cached')
     const requestedSetting = req.body.settings
     const settingRequestPromises = requestedSetting.map(async setting => {
         return await settingSchema.findOne({ type: setting }).exec()
@@ -55,7 +55,7 @@ settingsControllers.getMultiple = async (req, res) => {
             }
         })
 
-        res.json({ settings:  dataEncoder({finalObject}) })
+        res.json({ settings: dataEncoder({ finalObject }) })
         res.end()
     }).catch(err => {
         console.log(err)
@@ -117,7 +117,7 @@ settingsControllers.getWidgetsWithData = (req, res) => {
             const sortMethod = finalData.sortBy ? { [finalData.sortBy]: -1 } : '-_id'
 
             if (finalData.type === 'posts') {
-                await postSchema.find({status:'published'}).limit(widget.count).sort(sortMethod).exec().then(posts => {
+                await postSchema.find({ status: 'published' }).limit(widget.count).sort(sortMethod).exec().then(posts => {
                     finalData.posts = posts
                 })
                 return finalData
@@ -128,7 +128,7 @@ settingsControllers.getWidgetsWithData = (req, res) => {
         })
         const data = await Promise.all(mapWidget)
 
-        res.json({ widgets:data  })
+        res.json({ widgets: data })
         res.end()
     })
 }
@@ -150,7 +150,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
         const mapWidget = finalData.map(async widget => {
             const sortMethod = widget.sortBy ? { [widget.sortBy]: -1 } : '-_id';
             // const metaType = widget.metaType ? widget.metaType : 'tag'
-            let sortQuery = !req.body.sort ? {} : req.body.sort === 'latest' ? '-_id' : { [req.body.sort]: -1 }
+            let sortQuery = !req.body.sort ? {} : req.body.sort === '_id' || req.body.sort === '-_id' ? req.body.sort : { [req.body.sort]: -1 }
             return {
                 _id: widget._id,
                 title: widget.title,
@@ -164,7 +164,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
                 metaType: widget.metaType,
                 position: widget.position,
                 metaData: widget.metaType === 'tag' || widget.metaType === 'category' || widget.metaType === 'actor' ? await metaSchema.find({ type: widget.metaType }).limit(widget.count).sort(sortQuery).exec() : [],
-                posts: widget.type === 'posts' ? await postSchema.find({}).limit(widget.count).sort(sortMethod).exec() : [],
+                posts: widget.type === 'posts' ? await postSchema.find({status:'published'}).limit(widget.count).sort(sortMethod).exec() : [],
                 comments: widget.type === 'recentComments' ? await commentSchema.find({}).limit(widget.count).exec() : [],
                 sortBy: widget.sortBy,
                 text: widget.text,

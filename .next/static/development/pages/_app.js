@@ -350,6 +350,28 @@ var AppProvider = function AppProvider(props) {
           }
         }
       });
+    },
+    clearCaches: function clearCaches() {
+      var body;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function clearCaches$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              body = {
+                token: localStorage.wt
+              };
+              _context7.next = 3;
+              return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_5___default.a.post(window.location.origin + '/api/v1/settings/clearCaches', body));
+
+            case 3:
+              return _context7.abrupt("return", _context7.sent);
+
+            case 4:
+            case "end":
+              return _context7.stop();
+          }
+        }
+      });
     }
   }),
       functions = _useState15[0],

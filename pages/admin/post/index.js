@@ -115,7 +115,7 @@ Index.getInitialProps = async ({ query, req }) => {
             postTitle: query.postTitle,
             _id: query.id,
         };
-        postData = await getPost(requestBody, true, domainName)
+        postData = await getPost(requestBody, true, domainName,query.id)
         post = postData.data ? dataDecoder(postData.data.post).post : newPostData
     }
 

@@ -1,0 +1,23 @@
+@import "../../../styles/colors";
+@import "../../../styles/mixIns";
+.meta-item{
+  border-radius: 5px;
+  min-height: 40px;
+  min-width: 100px;
+  //max-width: 250px;
+  border: $dark90 1px solid  ;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  color: $light100;
+  @include imageForMetaElements;
+  .meta-item-data{
+    display: flex;
+    justify-content: space-between;
+    padding: 0 10px;
+    p{
+      //font-size: x-large;
+      text-align: center;
+    }
+  }
+}

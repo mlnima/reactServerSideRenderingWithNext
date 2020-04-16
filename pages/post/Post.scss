@@ -13,11 +13,12 @@
     width: 98%;
 
     .comment-form{
-      display: grid;
-      grid-template-columns: 1fr 1fr;
+      display: flex;
+      flex-wrap: wrap;
+      //grid-template-columns: 1fr 1fr;
       //flex-direction: column;
       //background-color: $dark90;
-      justify-content: space-between;
+      //justify-content: space-between;
       padding: 10px;
       width: 100%;
       .comment-form-info{
@@ -38,34 +39,7 @@
         min-height: 200px;
       }
     }
-    .video-player {
-      margin: 10px 0;
-      position: relative;
-      top: 0;
-      right: 0;
-      left: 0;
-      width: 100%;
-      //height: 100%;
-      .responsive-player {
-        overflow: hidden;
-        position: relative;
-        padding-bottom: 56.30%;
-        margin-bottom: 20px;
-        height: 0;
 
-        iframe {
-          position: absolute;
-          top: 0;
-          left: 0;
-          height: 100%;
-          width: 100%;
-          margin-bottom: 50px;
-          padding: 0 !important;
-          border-radius: 10px;
-        }
-      }
-
-    }
 
     #download-url {
       width: 100%;

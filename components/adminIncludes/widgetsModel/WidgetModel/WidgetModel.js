@@ -30,7 +30,7 @@ const WidgetModel = props => {
         posts: props.data.posts || [],
         comments: props.data.comments || [],
         position: props.data.position || 'home',
-        sortBy: props.data.sortBy || '-id',
+        sortBy: props.data.sortBy || '-_id',
         text: props.data.text || '',
         textAlign: props.data.textAlign || 'center',
         customHtml: props.data.customHtml || '',
@@ -148,7 +148,8 @@ const WidgetModel = props => {
                     <>
                         <p>Sort By:</p>
                         <select name='sortBy' value={ state.sortBy } onChange={ e => onChangeHandler(e) }>
-                            <option value='_id'>ID</option>
+                            <option value='_id'>Newest</option>
+                            <option value='-_id'>Oldest</option>
                             <option value='views'>Views</option>
                             <option value='likes'>Likes</option>
                         </select>
@@ -198,6 +199,7 @@ const WidgetModel = props => {
                         </select>
                         <p>Meta Type:</p>
                         <select name='metaType' value={ state.metaType } onChange={ e => onChangeHandler(e) }>
+                            <option value=''>Select The Meta Type</option>
                             <option value='tag'>Tag</option>
                             <option value='category'>Category</option>
                             <option value='actor'>Actor</option>

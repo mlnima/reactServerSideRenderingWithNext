@@ -10,14 +10,17 @@
   .Videos {
 
     .smallVideoContent {
-      min-width: 300px;
+      //min-width: 300px;
       //max-width: 100%;
-
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      display: flex;
+      justify-content: space-evenly;
+      flex-wrap: wrap;
+      //display: grid;
+      //grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 
       .small {
         width: 140px;
+        margin: 0 5px;
         //height: auto;
 
         .VideoElement {
@@ -26,7 +29,8 @@
           .image {
             img, video {
               width: 140px;
-              height: auto;
+              height: 80px;
+              object-fit: cover;
               //display: none;
             }
 
@@ -37,12 +41,16 @@
     }
 
     .listVideoContent {
+      //display: grid;
+      //grid-template-columns: 1fr;
+      display: flex;
 
+      flex-wrap: wrap;
       .list {
-        height: auto;
-
+        //height: auto;
+        width: 90%;
         a {
-          width: 100%;
+          width: 95%;
         }
 
         //display: flex;
@@ -73,6 +81,11 @@
       }
 
     }
+
+  }
+
+  @media only screen and (max-width: 320px) {
+    padding: 0;
 
   }
 }

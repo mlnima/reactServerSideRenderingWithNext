@@ -1,16 +1,25 @@
+@import "../../../../styles/buttons";
+
 .post-info {
+
+  .edit-btn-admin {
+    @include greenActionBtn;
+  }
+
   .post-info-body {
     .views {
-    .post-rate{
-      color: white;
-      .like-disLike-count{
-        .like-disLike-count-items{
-          color: white;
+      .post-rate {
+        color: white;
+
+        .like-disLike-count {
+          .like-disLike-count-items {
+            color: white;
+          }
         }
       }
     }
-    }
-    .meta-description{
+
+    .meta-description {
       color: white;
     }
   }

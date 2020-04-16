@@ -65,8 +65,13 @@ const Navigation = props => {
     };
 
     const renderNavigationItems = contextData.navigationData.map(item=>{
+        console.log( item)
         return(
-            <Link   key={item.title} href={item.url}><a style={navigationData.style}>{item.title}</a></Link>
+            <Link as={item.as?item.as:{}}  key={item.title}
+                  href={{
+                      pathname:item.url,
+                      query:item.query?[item.query]:{}
+                  }}><a style={navigationData.style}>{item.title}</a></Link>
         )
     })
 

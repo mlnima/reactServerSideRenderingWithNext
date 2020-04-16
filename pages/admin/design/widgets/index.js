@@ -16,6 +16,7 @@ const HomePageWidgets = props => {
         postPageSidebar: [],
         postsPageSidebar: [],
         footer: [],
+        metaPageSidebar: [],
         tagsPageSidebar: [],
         categoriesPageSidebar: [],
         actorsPageSidebar: [],
@@ -65,6 +66,13 @@ const HomePageWidgets = props => {
     })
     const renderFooterWidgets = contextData.widgetsSettings.widgets.map(widget => {
         if (widget.position === 'footer') {
+            return (
+                <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
+            )
+        }
+    })
+    const renderMetaPageSidebarPageSidebarWidgets = contextData.widgetsSettings.widgets.map(widget => {
+        if (widget.position === 'metaPageSidebar') {
             return (
                 <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
             )
@@ -131,6 +139,10 @@ const HomePageWidgets = props => {
                     <div className='widgetAdminPanelItem'>
                         <p className='widgetAdminPanelItemHeader'>Posts Page</p>
                         { renderPostsPageSidebarWidgets }
+                    </div>
+                    <div className='widgetAdminPanelItem'>
+                        <p className='widgetAdminPanelItemHeader'>Meta Page</p>
+                        { renderMetaPageSidebarPageSidebarWidgets }
                     </div>
                     <div className='widgetAdminPanelItem'>
                         <p className='widgetAdminPanelItemHeader'>Tags Page</p>

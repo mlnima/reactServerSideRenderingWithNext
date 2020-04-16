@@ -27,6 +27,8 @@ const TopBar = props => {
                 <div className='TopBar' style={state.style}>
                     <button style={state.style} onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
                     <button  style={state.style} onClick={ () => contextData.functions.goToAdminPanel() }>Admin Panel</button>
+                    <button   onClick={ () => contextData.functions.clearCaches() }>Clear Caches</button>
+
                 </div>
             )
         } else {

@@ -7,12 +7,8 @@ import SearchInputComponent from '../SearchInputComponent/SearchInputComponent';
 import Logo from '../Logo/Logo'
 
 const WidgetsRenderer = props => {
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [ props ]);
 
-
-    const renderWidgets = props.widgets.filter(widget => widget.position === props.position).map(widget => {
+    const renderWidgets = (props.widgets||[]).filter(widget => widget.position === props.position).map(widget => {
         switch ( widget.type ) {
             case 'posts':
 

@@ -13,6 +13,10 @@ const navigation = props => {
     const contextData = useContext(AppContext);
     const titleEl = useRef(null)
     const urlEl = useRef(null)
+    const asEl = useRef(null)
+    const queryEl = useRef(null)
+    const queryType = useRef(null)
+
     const [ state, setState ] = useState({
         type: 'navigation',
         data: [],
@@ -22,9 +26,12 @@ const navigation = props => {
         }
     });
 
-    useEffect(() => {
-        console.log(contextData.siteDesign)
-    }, [ contextData.siteDesign ]);
+    const [newNavigationItem,setNewNavigationItem] = useState({
+
+    })
+    // useEffect(() => {
+    //     console.log(contextData.siteDesign)
+    // }, [ contextData.siteDesign ]);
 
     useEffect(() => {
         setState({
@@ -38,9 +45,9 @@ const navigation = props => {
 
     const onSaveChangesHandler = (type) => {
         const contextValue = type === 'design' ?
-                 'siteDesign' :
-                  type === 'navigation' ?
-                 'navigationData' : null
+            'siteDesign' :
+            type === 'navigation' ?
+                'navigationData' : null
         updateSetting(type, contextData[contextValue]).then(() => {
             props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
         }).catch(err => {
@@ -53,10 +60,33 @@ const navigation = props => {
         contextData.dispatchNavigationData([ ...contextData.navigationData.filter(i => i.title !== e.target.name) ])
     };
 
+    const onSaveHandler = (newData,index) => {
+
+        // console.log(newData,index )
+     const updatedItems = [...contextData.navigationData.slice(0,index),newData,...contextData.navigationData.slice(index+1)]
+        // console.log( updatedItems)
+        contextData.dispatchNavigationData(updatedItems)
+     //
+     //
+     //    setState({
+     //        ...state,
+     //        data: updatedItems
+     //    })
+
+    }
+
+    // const onChaneHandler = (newData) => {
+    //     //     setState({
+    //     //         ...state,
+    //     //         data: newData
+    //     //     })
+    //     // }
+
     const onAddItemHandler = () => {
         const newItem = {
             title: titleEl.current.value,
-            url: urlEl.current.value
+            url: urlEl.current.value,
+            as: asEl.current.value,
         };
         contextData.dispatchNavigationData([ ...contextData.navigationData, newItem ])
         titleEl.current.value = '';
@@ -65,7 +95,8 @@ const navigation = props => {
 
     const renderItems = (contextData.navigationData || []).map(item => {
         return (
-            <NavigationItem title={ item.title } url={ item.url } onDeleteItemHandler={ onDeleteItemHandler }/>
+            <NavigationItem key={contextData.navigationData.indexOf(item)}   itemIndex={ contextData.navigationData.indexOf(item) } title={ item.title } url={ item.url } as={ item.as } data={ contextData.navigationData } onSaveHandler={ onSaveHandler }
+                            onDeleteItemHandler={ onDeleteItemHandler }/>
         )
     });
 
@@ -81,6 +112,16 @@ const navigation = props => {
                         <p>Url :</p>
                         <input ref={ urlEl } type="text" name='url'/>
                     </div>
+                    <div className='add-navigation-item'>
+                        <p>As :</p>
+                        <input ref={ asEl } type="text" name='as'/>
+                    </div>
+                    <div className='add-navigation-item'>
+                        <p>query :</p>
+                        <input ref={ queryEl } type="text" name='query'/>
+                        <input ref={ queryType } type="text" name='queryType'/>
+                        <button onClick>Add Query</button>
+                    </div>
                     <button onClick={ () => onAddItemHandler() }>Add</button>
                 </div>
                 <div className='items-preview' style={ state.style }>
@@ -88,9 +129,9 @@ const navigation = props => {
                 </div>
                 <button className='saveBtn' onClick={ () => onSaveChangesHandler('navigation') }>Save</button>
             </div>
-            {/*<AdminDesignSettingColorType positionName='navigationBackgroundColor' type='background'/>*/}
-            {/*<AdminDesignSettingColorType positionName='navigationTextColor' type='color'/>*/}
-            {/*<button className='saveBtn' onClick={ () => onSaveChangesHandler('design') }>Save</button>*/}
+            {/*<AdminDesignSettingColorType positionName='navigationBackgroundColor' type='background'/>*/ }
+            {/*<AdminDesignSettingColorType positionName='navigationTextColor' type='color'/>*/ }
+            {/*<button className='saveBtn' onClick={ () => onSaveChangesHandler('design') }>Save</button>*/ }
 
             <div className='colorSettingSections'>
                 <ColorSection designName='navigationBackgroundColor'/>

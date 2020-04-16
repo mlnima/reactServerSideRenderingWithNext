@@ -20,7 +20,7 @@ const tags = props => {
     })
 
     useEffect(() => {
-        console.log( props)
+
         if (props.identity.tagsPageSidebar) {
             setState({
                 style: {
@@ -33,12 +33,12 @@ const tags = props => {
 
     const renderTags = props.tagsSource.metas.map(meta => {
         return (
-            <TagElement key={ props.tagsSource.metas.indexOf(meta) } imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl } name={ meta.name } count={ meta.count }/>
+            <TagElement key={ props.tagsSource.metas.indexOf(meta) } imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl }  name={ meta.name } count={ meta.count }/>
         )
     })
 
     return (
-        <>
+
             <AppLayout>
                 <SiteSettingSetter  { ...props }/>
                 <div style={ state.style } className={ props.identity.data.tagsPageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
@@ -60,7 +60,7 @@ const tags = props => {
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
             </AppLayout>
-        </>
+
     );
 };
 

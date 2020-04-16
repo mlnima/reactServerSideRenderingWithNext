@@ -6,39 +6,41 @@ import withRouter from 'next/dist/client/with-router'
 const SearchInputComponent = props => {
 
     const [ state, setState ] = useState({
-        pathURL:'',
-        keyword:'',
+        pathURL: '',
+        keyword: '',
         queries: {}
     });
 
     useEffect(() => {
-            setState({
-                ...state,
-                pathURL:props.pathURL || '/posts'
-            })
-    }, []);
-
-
-
-    const onChangeHandler = e=>{
         setState({
             ...state,
-            keyword:e.target.value
+            pathURL: props.pathURL || '/posts'
+        })
+    }, []);
+
+    const onChangeHandler = e => {
+        setState({
+            ...state,
+            keyword: e.target.value
         })
     }
 
+    const onSubmitHandler = e => {
+        e.preventDefault()
+        props.router.push({
+            pathname: state.pathURL,
+            query: {
+                ...state.queries,
+                keyword: state.keyword
+            }
+        })
+    }
 
     return (
-        <div className='search-bar'>
-            <input className='search-input' name='keyword' onChange={e=>onChangeHandler(e)}/>
-            <Link href={{
-                pathname:state.pathURL,
-                query:{
-                    ...state.queries,
-                    keyword:state.keyword
-                }
-            }}><a className='search-bar-btn'>Search</a></Link>
-        </div>
+        <form className='search-bar' onSubmit={ e => onSubmitHandler(e) }>
+            <input className='search-input' name='keyword' onChange={ e => onChangeHandler(e) }/>
+            <button className='search-bar-btn' type='submit'>Search</button>
+        </form>
     );
 };
 export default withRouter(SearchInputComponent);

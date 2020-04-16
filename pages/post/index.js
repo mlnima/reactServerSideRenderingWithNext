@@ -104,7 +104,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let comments;
     let errorCode = 200
 
-    const postData = await getPost(postBody, true, domainName)
+    const postData = await getPost(postBody, true, domainName,query.postTitle)
     post = dataDecoder(postData.data.post).post
 
     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header' ] }, true, domainName,'postPage')
