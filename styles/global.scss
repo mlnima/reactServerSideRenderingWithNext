@@ -1,4 +1,3 @@
-
 @import "./styles";
 @import "./links";
 @import "./buttons";
@@ -27,12 +26,9 @@
 @import "../components/includes/widgets/RecentComments/RecentComments";
 @import "../components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget";
 @import "../components/includes/Footer/Footer";
-
 @import "../components/layouts/AdminLayout";
 @import "../components/layouts/AppLayout";
-
 @import "./globalAdminPanel";
-
 //pages
 @import "../pages/index";
 @import "../pages/meta/meta";
