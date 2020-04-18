@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
-import './AddWidgetWithPositionMenu.scss'
 import { widgetModels } from './models'
-import { addNewWidget, getWidgets } from '../../../../_variables/ajaxVariables'
+import { addNewWidget, getMultipleWidgetWithData } from '../../../../_variables/ajaxVariables'
+import {convertVariableNameToName} from '../../../../_variables/_variables'
 import { AppContext } from '../../../../context/AppContext'
 
 const AddWidgetWithPositionMenu = props => {
@@ -25,12 +25,22 @@ const AddWidgetWithPositionMenu = props => {
         let dataToSave = widgetModels;
         dataToSave.position = position
         dataToSave.type = type
-        addNewWidget(widgetModels).then(() => {
-            getWidgets('home',false,window.location.origin).then(res => {
+        addNewWidget({
+            data:widgetModels
+        }).then(() => {
+            getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, window.location.origin, Date.now()).then(res=>{
                 contextData.dispatchWidgetsSettings({
+                    ...contextData.widgetsSettings,
                     widgets: [ ...res.data.widgets ]
                 })
             })
+
+            //
+            // getWidgets('home',false,window.location.origin).then(res => {
+            //     contextData.dispatchWidgetsSettings({
+            //         widgets: [ ...res.data.widgets ]
+            //     })
+            // })
         }).catch(err=>{
             console.log( err)
         })

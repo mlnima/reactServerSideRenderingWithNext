@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import './FileManagerControl.scss';
 import { AppContext } from '../../../../context/AppContext'
 import UploadFileBtn from '../../UploadFileBtn/uploadFileBtn'
 

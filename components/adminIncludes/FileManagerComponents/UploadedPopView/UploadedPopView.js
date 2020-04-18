@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import './UploadedPopView.scss'
 import { fileTypeDetector } from '../../../../_variables/_variables'
 
 const UploadedPopView = props => {

@@ -1,27 +1,32 @@
 @import "../../../../styles/buttons";
 @import "../../../../styles/colors";
-.AddWidgetWithPositionMenu{
+
+.AddWidgetWithPositionMenu {
 
   width: 100%;
-    .positionsOpener{
+
+  .positionsOpener {
     @include AdminLightBtn;
     width: 100%;
-      font-weight: bold;
-    &:hover{
+    font-weight: bold;
+
+    &:hover {
       background-color: $light100;
     }
   }
-  .AddWidgetWithPositionMenuPositions{
+
+  .AddWidgetWithPositionMenuPositions {
 
     max-width: 100%;
-    display:flex;
+    display: flex;
     flex-direction: column;
-    .AddWidgetWithPositionMenuPositionsBtn{
 
+    .AddWidgetWithPositionMenuPositionsBtn {
 
       @include AdminLightBtn;
       font-size: small;
-      &:hover{
+
+      &:hover {
         background-color: $light100;
       }
     }

@@ -28,7 +28,9 @@ export const trimString = (string) => {
 }
 
 export const convertVariableNameToName = (name) => {
-    return name.replace(/([A-Z])/g, " $1").charAt(0).toUpperCase() + name.replace(/([A-Z])/g, " $1").slice(1)
+   return name?
+     name.replace(/([A-Z])/g, " $1").charAt(0).toUpperCase() + name.replace(/([A-Z])/g, " $1").slice(1):
+       ''
 }
 
 export const fileTypeDetector =   fileName => {

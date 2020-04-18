@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import Link from 'next/link';
-import './AdminCommentsControl.scss';
+
 
 const AdminCommentsControl = props => {
     return (

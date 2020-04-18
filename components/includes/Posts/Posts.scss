@@ -1,14 +1,14 @@
 @import "../../../styles/_grid";
 
-.Videos {
-  .videoContent {
-    @include videoContent;
+.Posts {
+  .postsContent {
+    @include postsContent;
   }
-  .smallVideoContent{
-
-    @media only screen and (min-width: 1024px) {
-      padding: 0;
-    }
-  }
+  //.smallVideoContent{
+  //
+  //  @media only screen and (min-width: 1024px) {
+  //    padding: 0;
+  //  }
+  //}
 
 }

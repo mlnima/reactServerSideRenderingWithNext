@@ -11,7 +11,7 @@ import Format from "../../../components/adminIncludes/PostComponents/Format/Form
 import PostCategoriesTagsActors from "../../../components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors";
 import VideoInformation from "../../../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
 import withRouter from "next/dist/client/with-router";
-import TextInputWithUploadBtn from '../../../components/adminIncludes/PostComponents/TextInputWithUploadBtn/TextInputWithUploadBtn'
+import TextInputWithUploadBtn from '../../../components/adminIncludes/TextInputWithUploadBtn/TextInputWithUploadBtn'
 import ImagePreview from '../../../components/adminIncludes/PostComponents/ImagePreview/ImagePreview';
 import Link from 'next/link'
 import dataDecoder from '../../../server/tools/dataDecoder'

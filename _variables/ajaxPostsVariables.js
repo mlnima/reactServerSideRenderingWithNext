@@ -53,7 +53,7 @@ export const getMeta = async (data, cache, domainName) => {
     const body = {
         ...data,
     };
-    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.pageNo }&type=${ data.type }`, body)
+    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${data.keyword}`, body)
 };
 
 export const newComment = async (data) => {

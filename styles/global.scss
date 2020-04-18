@@ -1,104 +1,62 @@
+
+@import "./styles";
 @import "./links";
 @import "./buttons";
+@import "./colors";
+@import "./mixIns";
 
+//components
+@import "../components/includes/Header/Header";
+@import "../components/includes/AlertBox/AlertBox";
+@import "../components/includes/Logo/Logo";
+@import "../components/includes/Header/Navigation/Navigation";
+@import "../components/includes/Loading/Loading";
+@import "../components/includes/Pagination/Pagination";
+@import "../components/includes/Posts/Posts";
+@import "../components/includes/CommentsRenderer/CommentsRenderer";
+@import "../components/includes/Sidebar/Sidebar";
+@import "../components/includes/PaginationComponent/PaginationComponent";
+@import "../components/includes/ProgressBar/ProgressBar";
+@import "../components/includes/TopBar/TopBar";
+@import "../components/includes/PostElement/PostElement";
+@import "../components/includes/Post/CommentFrom/CommentFrom";
+@import "../components/includes/Widget/Widget";
+@import "../components/includes/Widget/WidgetFooter/WidgetFooter";
+@import "../components/includes/Widget/WidgetHeader/WidgetHeader";
+@import "../components/includes/Widgets/MediaWidget/MediaWidget";
+@import "../components/includes/widgets/RecentComments/RecentComments";
+@import "../components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget";
+@import "../components/includes/Footer/Footer";
 
-.newPostLinkAdminPanel{
-  @include linkLikeActionBtnAdmin;
-}
+@import "../components/layouts/AdminLayout";
+@import "../components/layouts/AppLayout";
 
-.svgImage {
-  fill: white !important;
-  background-color: white;
-  color: white;
-}
+@import "./globalAdminPanel";
 
-.fontawesomeMedium {
-  font-size: x-large;
-  color: $light100;
-}
-
-.fontawesomeSmall {
-  font-size: medium;
-}
-
-.fontawesomeLarge {
-  font-size: xx-large;
-}
-
-.fontawesomeSvgMedium {
-  width: 30px;
-  height: 40px;
-  filter: invert(1);
-}
-.fontawesomeSvgLarge {
-  width: 40px;
-  height: 50px;
-  filter: invert(1);
-}
-
-.fontawesomeSvgSmall {
-  width: 20px;
-  height: 30px;
-  filter: invert(1);
-}
-.fontawesomeSvgVerySmall {
-  width:12.5px;
-  height: 20px;
-  filter: invert(1);
-}
-
-.small-info{
-  font-size: x-small;
-}
-
-.saveBtn{
-  @include greenActionBtn;
-  margin: 50px 0;
-}
-
-
-input:focus, textarea:focus, select:focus {
-  outline: none;
-}
-
-input, textarea, select {
-  border: none;
-  background-color: $AdminBackground50;
-  padding: 5px;
-  border-radius: 5px;
-}
-
-a {
-  text-decoration: none;
-}
+//pages
+@import "../pages/index";
+@import "../pages/meta/meta";
+@import "../pages/auth/registerLogin";
+@import "../pages/admin/post/post";
 
 
 
-// content with sidebar or without
-.withSidebar {
-  display: grid;
-  grid-template-columns: 1fr;
-  grid-template-areas: 'content' 'sidebar';
-  @media only screen and (min-width: 768px) {
-    grid-template-columns: 300px 1fr;
-    grid-template-areas: 'sidebar content';
-  }
-}
-
-.withOutSidebar {
-  display: grid;
-  grid-template-columns: 1fr;
-  @media only screen and (min-width: 768px) {
-    grid-template-columns: 1fr;
-  }
-}
+@import "../pages/post/Post";
+@import "../pages/posts/Posts";
 
 
-.error-page{
-  display: flex;
-  justify-content: center;
-  .error-page-message{
-    color: white;
-    margin: 100px 0;
-  }
-}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

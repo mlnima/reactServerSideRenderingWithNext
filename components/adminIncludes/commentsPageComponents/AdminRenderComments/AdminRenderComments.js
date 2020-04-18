@@ -1,5 +1,4 @@
 import React, { useState } from 'react';
-import './AdminRenderComments.scss'
 import AdminCommentItem from './AdminCommentItem/AdminCommentItem'
 
 const AdminRenderComments = props => {

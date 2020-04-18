@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import './Footer.scss'
+
 import { AppContext } from '../../../context/AppContext'
 import WidgetsRenderer from '../WidgetsRenderer/WidgetsRenderer'
 
@@ -8,6 +8,7 @@ const Footer = props => {
     const [ state, setState ] = useState({
         style:{}
     });
+
     useEffect(() => {
         setState({
             ...state,

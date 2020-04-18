@@ -22,11 +22,6 @@ const Post = props => {
     const [ state, setState ] = useState({
         style: {}
     })
-
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
-
     useEffect(() => {
         if (props.identity.postPageSidebar) {
             setState({
@@ -53,7 +48,9 @@ const Post = props => {
             )
         } else return null
     }
-
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
     if (props.errorCode !== 200) {
         return <Error { ...props } />
     } else return (
@@ -104,11 +101,11 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let comments;
     let errorCode = 200
 
-    const postData = await getPost(postBody, true, domainName,query.postTitle)
+    const postData = await getPost(postBody, true, domainName, query.postTitle)
     post = dataDecoder(postData.data.post).post
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header' ] }, true, domainName,'postPage')
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName,'postPage')
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header' ] }, true, domainName, 'postPage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName, 'postPage')
 
     if (!post) {
         errorCode = 404
@@ -116,7 +113,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     }
     const commentsData = post ? await getComments({ onDocument: post._id }, true, domainName) : {}
 
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject  : []
+    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     comments = post ? commentsData.data.comments : []
 

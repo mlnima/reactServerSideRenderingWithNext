@@ -111,7 +111,8 @@ settingsControllers.getWidgetsWithData = (req, res) => {
                 sortBy: widget.sortBy,
                 text: widget.text,
                 textAlign: widget.textAlign,
-                customHtml: widget.customHtml
+                customHtml: widget.customHtml,
+                backgroundImage:widget.backgroundImage
             }
 
             const sortMethod = finalData.sortBy ? { [finalData.sortBy]: -1 } : '-_id'
@@ -135,63 +136,44 @@ settingsControllers.getWidgetsWithData = (req, res) => {
 //____________________________________________________________________________________________
 
 settingsControllers.getMultipleWidgetWithData = async (req, res) => {
-
-    const requestedWidgets = req.body.widgets
-    const widgetRequestPromises = requestedWidgets.map(async widgetsPosition => {
-        const position = requestedWidgets.includes('all') ? {} : { position: widgetsPosition }
+     const requestedWidgets = req.body.widgets
+     const widgetRequestPromises  = (requestedWidgets||[]).map(async widgetsPosition => {
+        const position = requestedWidgets.includes('all') ? {} : { 'data.position':widgetsPosition }
         return await widgetSchema.find(position).exec()
     })
-    Promise.all(widgetRequestPromises).then(async widgets => {
+
+    Promise.all(widgetRequestPromises).then( async widgets  => {
         let finalData = []
         await widgets.forEach(widgetList => {
             finalData = [ ...finalData, ...widgetList ]
         })
 
-        const mapWidget = finalData.map(async widget => {
-            const sortMethod = widget.sortBy ? { [widget.sortBy]: -1 } : '-_id';
-            // const metaType = widget.metaType ? widget.metaType : 'tag'
+        const mapWidgetsToGetDataForThem = finalData.map(async widget=>{
+            const sortMethod = widget.data.sortBy ? { [widget.data.sortBy]: -1 } : '-_id';
             let sortQuery = !req.body.sort ? {} : req.body.sort === '_id' || req.body.sort === '-_id' ? req.body.sort : { [req.body.sort]: -1 }
-            return {
-                _id: widget._id,
-                title: widget.title,
-                categories: widget.categories,
-                tags: widget.tags,
-                pagination: widget.pagination,
-                redirectLink: widget.redirectLink,
-                redirectToTitle: widget.redirectToTitle,
-                count: widget.count,
-                type: widget.type,
-                metaType: widget.metaType,
-                position: widget.position,
-                metaData: widget.metaType === 'tag' || widget.metaType === 'category' || widget.metaType === 'actor' ? await metaSchema.find({ type: widget.metaType }).limit(widget.count).sort(sortQuery).exec() : [],
-                posts: widget.type === 'posts' ? await postSchema.find({status:'published'}).limit(widget.count).sort(sortMethod).exec() : [],
-                comments: widget.type === 'recentComments' ? await commentSchema.find({}).limit(widget.count).exec() : [],
-                sortBy: widget.sortBy,
-                text: widget.text,
-                textAlign: widget.textAlign,
-                customHtml: widget.customHtml,
-                pathURL: widget.pathURL,
-                LogoUrl: widget.LogoUrl,
-                LogoText: widget.LogoText,
-                headLine: widget.headLine,
-                viewType: widget.viewType
+            return  {
+                ...widget.toObject(),
+                data:{
+                    ...widget.data,
+                    metaData: widget.data.metaType ? await metaSchema.find({ type: widget.data.metaType }).limit(parseInt(widget.data.count)).sort(sortQuery).exec() : [],
+                    posts: widget.data.type === 'posts' ? await postSchema.find({status:'published'}).limit(parseInt(widget.data.count)).sort(sortMethod).exec() : [],
+                    comments: widget.data.type === 'recentComments' ? await commentSchema.find({}).limit(parseInt(widget.data.count)).exec() : [],
+                }
             }
         })
 
-        Promise.all(mapWidget).then(widgetsWithData => {
+        Promise.all(mapWidgetsToGetDataForThem).then(widgetsWithData => {
             res.json({ widgets: widgetsWithData })
             res.end()
         }).catch(err => {
             // console.log(err)
             res.end()
         })
-
-        // res.json({ widgets: await Promise.all(mapWidget) })
-        // res.end()
     }).catch(err => {
         console.log(err)
         res.end()
     })
+
 }
 
 //__________________________________________________________________________________________
@@ -202,6 +184,8 @@ settingsControllers.deleteWidget = (req, res) => {
         res.end()
     })
 }
+
+
 settingsControllers.executor = async (req, res) => {
     const command = req.body.command;
     const executeCommand = shell.exec(command)
@@ -210,14 +194,16 @@ settingsControllers.executor = async (req, res) => {
 }
 
 settingsControllers.updateWidget = (req, res) => {
-    const data = req.body.data;
-    const _id = req.body.id;
-    widgetSchema.findByIdAndUpdate(_id, data, { new: true }).exec().then(updatedWidgets => {
+    const data = req.body.widgetData;
+
+    // console.log( req.body)
+    widgetSchema.findByIdAndUpdate(data._id, data, { new: true }).exec().then(updatedWidgets => {
         res.json({ updatedWidgets })
         res.end()
     }).catch(err => {
         console.log(err)
     })
+    // res.end()
 }
 
 settingsControllers.saveCustomStyle = (req, res) => {

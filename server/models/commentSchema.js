@@ -3,7 +3,8 @@ const mongoose = require('mongoose');
 
 const commentSchema = mongoose.Schema({
     onDocument: mongoose.Types.ObjectId,
-    author: mongoose.Mixed,
+    author: String,
+    authorID:mongoose.ObjectId,
     email:String,
     body: String,
     postedDate:{
@@ -12,7 +13,7 @@ const commentSchema = mongoose.Schema({
     },
     status:{
         type:String,
-        default: 'pending'
+        default: 'approved'
     }
 });
 

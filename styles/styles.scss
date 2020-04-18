@@ -1,59 +1,11 @@
-@import "../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost",
-"../pages/admin/settings/settings",
-"../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget",
-"../components/adminIncludes/PostComponents/Format/Format",
-"../components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors",
-"../components/adminIncludes/PostComponents/TitleDescription/TitleDescription",
-"../components/adminIncludes/PostComponents/VideoInformation/VideoInformation",
-"../components/adminIncludes/PostsComponents/Filters/FilterDropDownActions",
-"../components/adminIncludes/PostsComponents/Filters/FilterPagination",
-"../components/adminIncludes/PostsComponents/Filters/Filters",
-"../components/adminIncludes/PostsComponents/Filters/FilterSearch",
-"../components/adminIncludes/PostsComponents/Filters/FilterStatusBtn",
-"../components/adminIncludes/PostsComponents/PostsDataTable/BodyTable",
-"../components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable",
-"../components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable",
-"../components/adminIncludes/SideBar/SideBar",
-"../components/adminIncludes/TopBar/AdminTopBar",
-"../components/adminIncludes/TopBar/NewItemMenu/NewItemMenu",
-"../components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu",
-"../components/adminIncludes/widgetsModel/widgetsModel",
-"../components/includes/Header/Header",
-"../components/includes/CategoryElement/CategoryElement",
-
-"../components/includes/ActorElement/ActorElement",
-"../components/includes/AlertBox/AlertBox",
-"../components/includes/Logo/Logo",
-"../components/includes/Header/Navigation/Navigation",
-"../components/includes/Loading/Loading",
-"../components/includes/Pagination/Pagination",
-"../components/includes/Posts/Posts",
-"../components/includes/CommentsRenderer/CommentsRenderer",
-"../components/includes/Sidebar/Sidebar",
-"../components/includes/PaginationComponent/PaginationComponent",
-"../components/includes/ProgressBar/ProgressBar",
-"../components/includes/TopBar/TopBar",
-"../components/includes/PostElement/PostElement",
-"../components/includes/Widget/Widget",
-"../components/includes/Widget/WidgetFooter/WidgetFooter",
-"../components/includes/Widget/WidgetHeader/WidgetHeader",
-"../components/layouts/AdminLayout",
-"../components/layouts/AppLayout",
-"../pages/auth/registerLogin",
-"../pages/admin/post/post",
-"./colors",
-"./globalAdminPanel",
-"./global",
-"../pages/index",
-"../pages/page/categories/categories",
-"../pages/page/tags/tags",
-"../pages/page/actors/actors",
-"../pages/post/Post.scss",
-"../pages/posts/Posts.scss";
+@import "./links";
+@import "./buttons";
+@import "./colors";
+@import "./mixIns";
 
 body {
   margin: 0;
-  font-family: 'Patrick Hand', cursive;
+  //font-family: 'Patrick Hand', cursive;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 
@@ -62,6 +14,106 @@ body {
   }
 }
 
+.newPostLinkAdminPanel{
+  @include linkLikeActionBtnAdmin;
+}
+
+.svgImage {
+  fill: white !important;
+  background-color: white;
+  color: white;
+}
+
+.fontawesomeMedium {
+  font-size: x-large;
+  color: $light100;
+}
+
+.fontawesomeSmall {
+  font-size: medium;
+}
+
+.fontawesomeLarge {
+  font-size: xx-large;
+}
+
+.fontawesomeSvgMedium {
+  width: 30px;
+  height: 40px;
+  filter: invert(1);
+}
+.fontawesomeSvgLarge {
+  width: 40px;
+  height: 50px;
+  filter: invert(1);
+}
+
+.fontawesomeSvgSmall {
+  width: 20px;
+  height: 30px;
+  filter: invert(1);
+}
+.fontawesomeSvgVerySmall {
+  width:12.5px;
+  height: 20px;
+  filter: invert(1);
+}
+
+.small-info{
+  font-size: x-small;
+}
+
+.saveBtn{
+  @include greenActionBtn;
+  margin: 50px 0;
+}
+
+
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
+
+input, textarea, select {
+  border: none;
+  background-color: $AdminBackground50;
+  padding: 5px;
+  border-radius: 5px;
+}
+
+a {
+  text-decoration: none;
+}
+
+
+
+// content with sidebar or without
+.withSidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas: 'content' 'sidebar';
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 300px 1fr;
+    grid-template-areas: 'sidebar content';
+  }
+}
+
+.withOutSidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+
+.error-page{
+  display: flex;
+  justify-content: center;
+  .error-page-message{
+    color: white;
+    margin: 100px 0;
+  }
+}
 
 
 

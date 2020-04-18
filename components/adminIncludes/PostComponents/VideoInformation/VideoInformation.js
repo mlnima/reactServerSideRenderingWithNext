@@ -6,7 +6,7 @@ import VideoUrls from "./VideoUrls/VideoUrls";
 import VideoEmbedCode from "./VideoEmbedCode/VideoEmbedCode";
 import Duration from "./Duration/Duration";
 import ViewsLikesDisLikes from "./ViewsLikesDisLikes/ViewsLikesDisLikes";
-import TextInputWithUploadBtn from "../TextInputWithUploadBtn/TextInputWithUploadBtn";
+import TextInputWithUploadBtn from "../../TextInputWithUploadBtn/TextInputWithUploadBtn";
 import { AppContext } from "../../../../context/AppContext";
 import TextInput from "./TextInput/TextInput";
 import RenderIframe from "./RenderIframe/RenderIframe";

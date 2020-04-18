@@ -104,7 +104,7 @@ app.prepare().then(()=>{
 
     //comments handler
     server.post('/api/v1/posts/newComment',(req,res)=>{postsControllers.newComment(req,res)});
-    server.post('/api/v1/posts/getComments',cacheSuccesses,(req,res)=>{postsControllers.getComments(req,res)});
+    server.post('/api/v1/posts/getComments',(req,res)=>{postsControllers.getComments(req,res)});
     server.post('/api/v1/posts/updateComment',(req,res)=>{postsControllers.updateComment(req,res)});
 
     //settings handler
@@ -135,7 +135,18 @@ app.prepare().then(()=>{
 
     server.get('/posts',(req,res)=>{
         const targetComponent = '/posts';
-        app.render(req,res,targetComponent)
+        const queryParams = {
+            size:req.query.size,
+            pageNo:req.query.pageNo,
+            postType:req.query.postType,
+            keyword:req.query.keyword,
+            author:req.query.author,
+            actor:req.query.actor,
+            tag:req.query.tag,
+            category:req.query.category,
+            sort:req.query.sort,
+        }
+        app.render(req,res,targetComponent,queryParams)
     });
 
     server.get('/admin',(req,res)=>{
@@ -149,11 +160,28 @@ app.prepare().then(()=>{
         app.render(req,res,targetComponent)
     });
 
-    server.get('/meta/:type',(req,res)=>{
+    // server.get('/meta/:type',(req,res)=>{
+    //     const targetComponent = '/meta';
+    //     const queryParams = {
+    //         metaType:req.params.type  ,
+    //         sort:req.query.sort,
+    //         page:req.params.page,
+    //     }
+    //     app.render(req,res,targetComponent,queryParams,)
+    // });
+
+    server.get('/meta',(req,res)=>{
         const targetComponent = '/meta';
-        const queryParams = {metaType:req.params.type}
-        app.render(req,res,targetComponent,queryParams)
+        const queryParams = {
+            type:req.query.type  ,
+            sort:req.query.sort,
+            page:req.query.page,
+            keyword:req.query.keyword,
+            size:req.query.size,
+        }
+        app.render(req,res,targetComponent,queryParams,)
     });
+
 
 
 

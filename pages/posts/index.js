@@ -7,7 +7,7 @@ import withRouter from 'next/dist/client/with-router'
 import Posts from '../../components/includes/Posts/Posts'
 import Link from 'next/link'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
-import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
+import { Sidebar } from '../../components/includes/Sidebar/Sidebar'
 import Footer from '../../components/includes/Footer/Footer'
 import { getAbsolutePath } from '../../_variables/_variables'
 import AdminLayout from '../../components/layouts/AdminLayout'
@@ -18,6 +18,9 @@ const posts = props => {
         style: {}
     })
 
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
     useEffect(() => {
         if (props.identity.data.postPageSidebar) {
             setState({
@@ -70,7 +73,7 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let postsSource;
     let widgets;
     let settings;
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true,domainName,'postsPage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName, 'postsPage')
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     //|| settings.identity.data.postsCountPerPage
     const getPostsData = {
@@ -87,8 +90,8 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
         sort: query.sort || 'latest',
     }
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer','header' ] }, true,domainName,'postsPage')
-    const postsData = await getPosts(getPostsData,true,domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer', 'header' ] }, true, domainName, 'postsPage')
+    const postsData = await getPosts(getPostsData, true, domainName)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     postsSource = postsData.data ? postsData.data : []

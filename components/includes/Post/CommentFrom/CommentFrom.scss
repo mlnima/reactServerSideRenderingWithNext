@@ -1,0 +1,61 @@
+@import "../../../../styles/colors";
+@import "../../../../styles/buttons";
+
+.comment-form {
+  display: flex;
+
+  flex-direction: column;
+  padding: 10px;
+  width: 100%;
+  .comment-form-info{
+    display: flex;
+    justify-content: flex-start;
+    input{
+      width: 50%;
+    }
+  }
+  .comment-form-input {
+    display: flex;
+    //justify-content: space-evenly;
+    textarea {
+      width: 100%;
+    }
+  }
+
+  .comment-form-submit-button {
+    @include greenActionBtn;
+  }
+
+  input, textarea {
+    background-color: $dark80;
+    margin: 5px;
+    border: 1px solid $dark90;
+    color: $light100;
+    //width: 95%;
+  }
+
+  textarea {
+    min-height: 200px;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .comment-form {
+
+    .comment-form-info {
+
+    }
+
+    .comment-form-submit-button {
+
+    }
+
+    input, textarea {
+
+    }
+
+    textarea {
+
+    }
+  }
+}

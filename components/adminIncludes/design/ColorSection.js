@@ -19,7 +19,7 @@ const ColorSection = props => {
 
     return (
         <div className='colorSettingSection'>
-            <p>{convertVariableNameToName(props.designName)} : </p>
+            <p>{props.designName?convertVariableNameToName(props.designName):''} : </p>
             <div>
                 <DelayInput className='colorSettingSectionInput' name={props.designName}
                             value={ contextData.siteDesign[props.designName] }

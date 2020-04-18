@@ -26,12 +26,10 @@ const navigation = props => {
         }
     });
 
-    const [newNavigationItem,setNewNavigationItem] = useState({
-
-    })
+    // const [ newNavigationItem, setNewNavigationItem ] = useState({})
     // useEffect(() => {
-    //     console.log(contextData.siteDesign)
-    // }, [ contextData.siteDesign ]);
+    //     console.log(contextData.navigationData)
+    // }, [ contextData.navigationData ]);
 
     useEffect(() => {
         setState({
@@ -60,33 +58,15 @@ const navigation = props => {
         contextData.dispatchNavigationData([ ...contextData.navigationData.filter(i => i.title !== e.target.name) ])
     };
 
-    const onSaveHandler = (newData,index) => {
-
-        // console.log(newData,index )
-     const updatedItems = [...contextData.navigationData.slice(0,index),newData,...contextData.navigationData.slice(index+1)]
-        // console.log( updatedItems)
+    const onSaveHandler = (newData, index) => {
+        const updatedItems = [ ...contextData.navigationData.slice(0, index), newData, ...contextData.navigationData.slice(index + 1) ]
         contextData.dispatchNavigationData(updatedItems)
-     //
-     //
-     //    setState({
-     //        ...state,
-     //        data: updatedItems
-     //    })
-
     }
-
-    // const onChaneHandler = (newData) => {
-    //     //     setState({
-    //     //         ...state,
-    //     //         data: newData
-    //     //     })
-    //     // }
 
     const onAddItemHandler = () => {
         const newItem = {
             title: titleEl.current.value,
             url: urlEl.current.value,
-            as: asEl.current.value,
         };
         contextData.dispatchNavigationData([ ...contextData.navigationData, newItem ])
         titleEl.current.value = '';
@@ -95,7 +75,8 @@ const navigation = props => {
 
     const renderItems = (contextData.navigationData || []).map(item => {
         return (
-            <NavigationItem key={contextData.navigationData.indexOf(item)}   itemIndex={ contextData.navigationData.indexOf(item) } title={ item.title } url={ item.url } as={ item.as } data={ contextData.navigationData } onSaveHandler={ onSaveHandler }
+            <NavigationItem key={ contextData.navigationData.indexOf(item) } itemIndex={ contextData.navigationData.indexOf(item) } {...item}  data={ contextData.navigationData }
+                            onSaveHandler={ onSaveHandler }
                             onDeleteItemHandler={ onDeleteItemHandler }/>
         )
     });
@@ -112,16 +93,16 @@ const navigation = props => {
                         <p>Url :</p>
                         <input ref={ urlEl } type="text" name='url'/>
                     </div>
-                    <div className='add-navigation-item'>
-                        <p>As :</p>
-                        <input ref={ asEl } type="text" name='as'/>
-                    </div>
-                    <div className='add-navigation-item'>
-                        <p>query :</p>
-                        <input ref={ queryEl } type="text" name='query'/>
-                        <input ref={ queryType } type="text" name='queryType'/>
-                        <button onClick>Add Query</button>
-                    </div>
+                    {/*<div className='add-navigation-item'>*/}
+                    {/*    <p>As :</p>*/}
+                    {/*    <input ref={ asEl } type="text" name='as'/>*/}
+                    {/*</div>*/}
+                    {/*<div className='add-navigation-item'>*/}
+                    {/*    <p>query :</p>*/}
+                    {/*    <input ref={ queryEl } type="text" name='query'/>*/}
+                    {/*    <input ref={ queryType } type="text" name='queryType'/>*/}
+                    {/*    <button onClick>Add Query</button>*/}
+                    {/*</div>*/}
                     <button onClick={ () => onAddItemHandler() }>Add</button>
                 </div>
                 <div className='items-preview' style={ state.style }>

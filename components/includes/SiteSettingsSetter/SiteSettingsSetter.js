@@ -11,15 +11,16 @@ const SiteSettingSetter = props => {
         title: '',
         themeColor: '',
         description: '',
+        bodyBackgroundImage: '',
         keywords: [],
-        customScripts:[]
+        customScripts: []
         // customScript: props.identity.data.customScript || 'your Script will be here',
     });
 
-    useEffect(() => {
-        console.log(props)
-
-    }, [ props ]);
+    // useEffect(() => {
+    //     console.log(props)
+    //
+    // }, [ props ]);
 
     useEffect(() => {
 
@@ -36,6 +37,7 @@ const SiteSettingSetter = props => {
                 title: props.identity.data.title || '',
                 themeColor: props.design.data.themeColor || '',
                 description: props.identity.data.description || '',
+                bodyBackgroundImage: props.identity.data.bodyBackgroundImage || '',
                 keywords: props.identity.data.keywords || [],
                 customScripts: props.identity.customScripts || []
             })
@@ -58,6 +60,12 @@ const SiteSettingSetter = props => {
             </script>
         )
     })
+
+    useEffect(() => {
+        if (state.bodyBackgroundImage){
+            document.querySelector('body').style.backgroundImage = state.bodyBackgroundImage
+        }
+    }, [state]);
 
     // const RenderGoogleAnalyticsScript = () => {
     //     if (props.identity.data.googleAnalyticsID) {
@@ -105,8 +113,6 @@ const SiteSettingSetter = props => {
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
             <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
             { renderCustomScripts }
-
-
         </Head>
     )
 };

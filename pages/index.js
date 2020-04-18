@@ -14,7 +14,6 @@ const Home = props => {
 
     const [ state, setState ] = useState({
         style: {}
-
     });
 
     useEffect(() => {
@@ -27,9 +26,10 @@ const Home = props => {
         }
     }, [ props ]);
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [ props ]);
+
     return (
         <>
             <AppLayout>
@@ -57,7 +57,7 @@ Home.getInitialProps = async ({ req }) => {
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
-    return { widgets, ...settings }
+    return { widgets, ...settings,widgetsData:widgetsData.data}
 };
 export default withRouter(Home);
 

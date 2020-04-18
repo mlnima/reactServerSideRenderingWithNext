@@ -58,18 +58,7 @@
       }
     }
 
-    .editItem{
-      margin:5px 0;
-      input{
-        margin:5px 0;
-      }
 
-
-      button{
-        @include AdminLightBtn;
-        margin:5px 0;
-      }
-    }
   }
 
   .saveBtn {

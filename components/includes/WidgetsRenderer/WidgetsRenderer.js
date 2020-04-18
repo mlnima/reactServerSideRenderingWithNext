@@ -1,54 +1,57 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import Widget from '../Widget/Widget'
 import Posts from '../Posts/Posts'
-import RecentComments from '../RecentComments/RecentComments'
-import MetaWidget from '../MetaWidget/MetaWidget'
-import SearchInputComponent from '../SearchInputComponent/SearchInputComponent';
+import RecentComments from '../widgets/RecentComments/RecentComments'
+import MetaWidget from '../widgets/MetaWidget/MetaWidget'
+import MediaWidget from '../widgets/MediaWidget/MediaWidget'
+import SearchInputComponent from '../widgets/SearchInputComponent/SearchInputComponent';
+import AlphabeticalNumericalRangeLinksWidget from '../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'
 import Logo from '../Logo/Logo'
 
 const WidgetsRenderer = props => {
 
-    const renderWidgets = (props.widgets||[]).filter(widget => widget.position === props.position).map(widget => {
-        switch ( widget.type ) {
-            case 'posts':
+    const renderWidgets = (props.widgets || []).filter(widget => widget.data.position === props.position).map(widget => {
 
+        switch ( widget.data.type ) {
+
+            case 'posts':
                 return (
-                    <Widget key={ widget._id }
-                            propsKey={ widget._id }
-                            viewType={widget.viewType}
-                            text={ widget.text } textAlign={ widget.textAlign }
-                            component={ Posts } posts={ widget.posts }
-                            title={ widget.title }
-                            redirectLink={ widget.redirectLink }
-                            redirectToTitle={ widget.redirectToTitle }
-                            pagination={ widget.pagination }/>
+                    <Widget key={ widget._id } component={ Posts } posts={ widget.posts } propsKey={ widget._id } { ...widget }/>
                 )
-                break
+            case 'media':
+                return (
+                    <Widget key={ widget._id } component={ MediaWidget } posts={ widget.posts } propsKey={ widget._id } { ...widget }/>
+                )
+
             case 'text':
                 return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } title={ widget.title } redirectLink={ widget.redirectLink } redirectToTitle={ widget.redirectToTitle }/>
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id }{ ...widget }/>
                 )
-                break
+
             case 'recentComments':
                 return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } component={ RecentComments } data={widget.comments} title={ widget.title }  redirectLink={ widget.redirectLink } redirectToTitle={ widget.redirectToTitle }/>
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ RecentComments } { ...widget }/>
                 )
-                break
+
             case 'meta':
                 return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } text={ widget.text } textAlign={ widget.textAlign } component={ MetaWidget } data={widget.metaData} title={ widget.title }  redirectLink={ widget.redirectLink } redirectToTitle={ widget.redirectToTitle }/>
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ MetaWidget } { ...widget }/>
                 )
-                break
+
             case 'searchBar':
                 return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } text={ widget.text } component={ SearchInputComponent } pathURL={widget.pathURL}  title={ widget.title } redirectLink={ widget.redirectLink } redirectToTitle={ widget.redirectToTitle }/>
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ SearchInputComponent } { ...widget }/>
                 )
-                break
+
             case 'logo':
                 return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } LogoText={ widget.LogoText } viewType={widget.viewType}  headLine={widget.headLine} LogoUrl={widget.LogoUrl}  component={ Logo } title={ widget.title } redirectLink={ widget.redirectLink } redirectToTitle={ widget.redirectToTitle }/>
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ Logo } { ...widget }/>
                 )
-                break
+            case 'alphabeticalNumericalRange':
+                return (
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ AlphabeticalNumericalRangeLinksWidget } { ...widget } />
+                )
+
             default:
                 return null
 

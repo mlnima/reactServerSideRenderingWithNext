@@ -43,7 +43,19 @@ const navigationData = {
         {
             title: 'Home',
             url: '/'
-        }
+        },
+        {
+            title: 'Categories',
+            url: '/meta',
+            as:'/meta/categories',
+            query:[{metaType:'categories'}]
+        },
+        {
+            title: 'Tags',
+            url: '/meta',
+            as:'/meta/tags',
+            query:[{metaType:'tags'}]
+        },
     ]
 }
 

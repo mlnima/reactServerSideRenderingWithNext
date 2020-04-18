@@ -32,7 +32,7 @@ const SideBar = props => {
         },
         Design: {
             pathURL: '/admin/design',
-            subItems: [ 'topBar','header','navigation','widgets','postPage','footer','customStyle' ]
+            subItems: [ 'topBar','header','navigation','widgets','postPage','footer','customStyle','body' ]
         },
         Users: {
             pathURL: '/admin/users',

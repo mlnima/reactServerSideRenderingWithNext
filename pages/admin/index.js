@@ -5,15 +5,6 @@ import Analytics from '../../components/adminIncludes/Analytics/Analytics'
 
 const Index = props => {
 
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
-
-
-
-
-
-
     return (
         <>
             <AdminLayout>

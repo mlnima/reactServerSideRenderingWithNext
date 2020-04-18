@@ -1,6 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { clickPathGenerator } from '../../../../_variables/_variables';
-import './FileManagerArea.scss';
 import { AppContext } from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
 import { fileTypeDetector } from '../../../../_variables/_variables'

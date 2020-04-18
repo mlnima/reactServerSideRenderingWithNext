@@ -65,12 +65,18 @@ const Navigation = props => {
     };
 
     const renderNavigationItems = contextData.navigationData.map(item=>{
-        console.log( item)
+        const queryArrayToObject = (arr)=>{
+            let returningData={}
+            arr.forEach(arrItem=>{
+                returningData[Object.keys(arrItem)[0]] = Object.values(arrItem)[0]
+            })
+            return returningData
+        }
         return(
             <Link as={item.as?item.as:{}}  key={item.title}
                   href={{
                       pathname:item.url,
-                      query:item.query?[item.query]:{}
+                      query:item.query?queryArrayToObject(item.query):{}
                   }}><a style={navigationData.style}>{item.title}</a></Link>
         )
     })

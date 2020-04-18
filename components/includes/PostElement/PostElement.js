@@ -53,11 +53,13 @@ const PostElement = props => {
                         // deletedVideoAutoRemover(props.state)
                         console.log('something wrong with image on ',props.state.title)
                     }
-
-
                 } } onMouseEnter={ () =>
                     isHoverHandler()
                 }/>)
+            }else {
+                return (
+                    <span>{props.state.title}</span>
+                )
             }
         };
         return dataToRender()
@@ -80,7 +82,7 @@ const PostElement = props => {
 
 
     return (
-        < div ref={ element } className={'videoElementDiv ' + (props.viewType ? props.viewType:'standard') }>
+        < div ref={ element } className={'post-element-div ' + (props.viewType ? props.viewType:'standard') }>
             <Link as={ `/${ props.state.title }` } href={ {
                 pathname: '/post',
                 query: {
@@ -88,7 +90,7 @@ const PostElement = props => {
                 }
             } }>
                 <a>
-                    <div className='VideoElement' key={ props.state.title }>
+                    <div className='post-element' key={ props.state.title }>
                         <div className="image">
                             <ImageContent/>
                             <RenderDataOnImage/>

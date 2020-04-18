@@ -12,6 +12,7 @@
   display: flex;
   align-items: flex-start;
   flex-direction: column;
+  z-index: 16;
 
   .SideBarItemElement {
     width: 100%;

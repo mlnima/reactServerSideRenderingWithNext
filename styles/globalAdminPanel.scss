@@ -2,42 +2,49 @@
 @import "../styles/buttons";
 @import "../styles/grid";
 
-.colorSettingSections {
-  @include adminDesignPageItems;
+//components
+@import "../components/adminIncludes/design/UrlSection";
+@import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu";
+@import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu";
+@import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
 
-  .colorSettingSection {
-    background-color: $dark80;
-    padding: 10px;
-    max-width: 300px;
-    border-radius: 10px;
+@import "../components/adminIncludes/AdminDesignSettingColorType/AdminDesignSettingColorType";
+@import "../components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl";
+@import "../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminRenderComments";
+@import "../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminCommentItem/AdminCommentItem";
+@import "../components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea";
+@import "../components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl";
+@import"../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
+@import"../components/adminIncludes/PostComponents/Format/Format";
+@import"../components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors";
+@import"../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
+@import"../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
+@import"../components/adminIncludes/PostsComponents/Filters/FilterDropDownActions";
+@import"../components/adminIncludes/PostsComponents/Filters/FilterPagination";
+@import"../components/adminIncludes/PostsComponents/Filters/Filters";
+@import"../components/adminIncludes/PostsComponents/Filters/FilterSearch";
+@import"../components/adminIncludes/PostsComponents/Filters/FilterStatusBtn";
+@import"../components/adminIncludes/PostsComponents/PostsDataTable/BodyTable";
+@import"../components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable";
+@import"../components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable";
+//@import "../components/adminIncludes/FileManagerComponents/TextEditor/TextEditor";
+@import "../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView";
+@import "../components/adminIncludes/NavigationItem/NavigationItem";
+@import "../components/adminIncludes/SideBar/SideBar";
+@import "../components/adminIncludes/TextInputWithUploadBtn/TextInputWithUploadBtn";
+@import "../components/adminIncludes/TopBar/AdminTopBar";
+@import "../components/adminIncludes/TopBar/NewItemMenu/NewItemMenu";
+@import "../components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu";
+@import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
 
-    p {
-      color: $light100;
+@import "../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
+@import "AdminStyle";
+//pages
+@import "../pages/admin/design/body/body.scss";
+@import "../pages/admin/settings/settings";
+@import "../pages/admin/design/widgets/widgets";
 
-    }
 
-    input {
-      background-color: $light100;
-    }
 
-    button {
-      @include greenActionBtn;
-    }
-  }
-}
 
-.upload-file-btn {
-  display: flex;
-  flex-direction: column;
-  button{
-    @include AdminLightBtn;
-  }
-}
-
-.previewColor {
-  height: 30px;
-  width: 30px;
-  margin: 5px;
-  border: .3px solid white;
-}
 

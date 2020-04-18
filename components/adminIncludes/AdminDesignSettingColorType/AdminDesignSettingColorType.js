@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from '../../../context/AppContext';
-import './AdminDesignSettingColorType.scss'
+
 
 const AdminDesignSettingColorType = props => {
     const contextData = useContext(AppContext);

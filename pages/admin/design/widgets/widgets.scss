@@ -1,0 +1,62 @@
+@import "../../../../styles/buttons";
+
+#HomePageWidgets {
+
+  display: grid;
+  grid-template-columns: 1fr;
+
+  .saveBtn {
+    @include greenActionBtn;
+  }
+
+  .widgets {
+
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(1fr));
+    grid-gap: 10px;
+
+    .widgetAdminPanelItem {
+      background-color: $dark80;
+      width: 100%;
+
+      .widgetAdminPanelItemHeader {
+        background-color: $dark100;
+        color: white;
+        padding: 10px;
+        border-radius: 5px;
+        text-align: center;
+        font-weight: bold;
+        font-size: large;
+      }
+    }
+  }
+}
+
+@media only screen and (min-width: 600px) {
+  #HomePageWidgets {
+    grid-template-columns: 100px 1fr;
+    grid-gap: 50px;
+
+    .widgets {
+      display: flex;
+      justify-content: space-between;
+      flex-wrap: wrap;
+
+      .widgetAdminPanelItem {
+        width: 550px;
+        margin: 10px;
+        border-radius: 10px;
+        .widgetAdminPanelItemHeader {
+
+          color: white;
+          padding: 10px;
+          border-radius: 5px;
+          text-align: center;
+          font-weight: bold;
+          font-size: large;
+        }
+      }
+    }
+  }
+
+}

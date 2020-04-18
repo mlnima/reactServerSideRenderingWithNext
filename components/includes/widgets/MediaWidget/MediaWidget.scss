@@ -1,0 +1,29 @@
+.media-widget {
+
+  img, video {
+    width: 100%;
+    margin: 10px;
+  }
+
+}
+
+.media-widget-video-iframe {
+  position: relative;
+  overflow: hidden;
+  padding-bottom: 56.30%;
+  margin-bottom: 20px;
+  height: 0;
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 0 !important;
+    border-radius: 10px;
+  }
+}
+
+

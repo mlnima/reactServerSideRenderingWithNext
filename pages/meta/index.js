@@ -9,8 +9,6 @@ import { getMeta } from '../../_variables/ajaxPostsVariables'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 import withRouter from 'next/dist/client/with-router'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
-import TagElement from '../../components/includes/TagElement/TagElement'
-import './meta.scss'
 import { Sidebar } from '../../components/includes/Sidebar/Sidebar'
 import Footer from '../../components/includes/Footer/Footer'
 
@@ -18,6 +16,10 @@ const meta = props => {
     const [ state, setState ] = useState({
         style: {}
     });
+
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
 
     useEffect(() => {
         if (props.identity.metaPageSidebar) {
@@ -28,13 +30,10 @@ const meta = props => {
             })
         }
     }, []);
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
 
     const renderMetas = props.metaSource.metas.map(meta => {
         return (
-            <MetaElement key={ props.metaSource.metas.indexOf(meta) } metaType={meta.type} imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl } name={ meta.name } count={ meta.count }/>
+            <MetaElement key={ props.metaSource.metas.indexOf(meta) } metaType={ meta.type } imageUrl={ meta.imageUrl } noImageUrl={ meta.noImageUrl } name={ meta.name } count={ meta.count }/>
         )
     })
 
@@ -43,12 +42,21 @@ const meta = props => {
             <SiteSettingSetter  { ...props } />
             <div style={ state.style } className={ props.identity.data.metaPageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
                 <div>
-                    <div className={ props.query.metaType + ' metas' }>
-                        {renderMetas}
+                    <PaginationComponent
+                        isActive={ true }
+                        currentPage={ props.dataForGettingMeta.page }
+                        totalCount={ props.metaSource.totalCount }
+                        size={ props.dataForGettingMeta.size }
+                        maxPage={ Math.ceil(parseInt(props.metaSource.totalCount) / parseInt(props.dataForGettingMeta.size)) - 1 }
+                        queryData={ props.query || props.router.query }
+                        pathnameData={ props.pathname || props.router.pathname }
+                    />
+                    <div className={ props.query.type + ' metas' }>
+                        { renderMetas }
                     </div>
                     <PaginationComponent
                         isActive={ true }
-                        currentPage={ props.dataForGettingMeta.pageNo }
+                        currentPage={ props.dataForGettingMeta.page }
                         totalCount={ props.metaSource.totalCount }
                         size={ props.dataForGettingMeta.size }
                         maxPage={ Math.ceil(parseInt(props.metaSource.totalCount) / parseInt(props.dataForGettingMeta.size)) - 1 }
@@ -64,15 +72,20 @@ const meta = props => {
     );
 };
 
-meta.getInitialProps = async ({ pathname, query, req }) => {
+meta.getInitialProps = async ({ pathname, query, req,asPath }) => {
     const domainName = req ? await getAbsolutePath(req) : '';
+    let errorCode = 200
+
+
+
 
     const dataForGettingMeta = {
-        type: pluralize.singular(query.metaType),
-        searchForImageIn: query.metaType,
-        pageNo: parseInt(query.page) || 1,
+        type: pluralize.singular(query.type),
+        searchForImageIn: query.type,
+        page: parseInt(query.page) || 1,
         size: parseInt(query.size) || 30,
         sort: query.sort || 'latest',
+        keyword: query.keyword || '',
     }
 
     let settings;
@@ -87,6 +100,6 @@ meta.getInitialProps = async ({ pathname, query, req }) => {
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     metaSource = metaData.data ? metaData.data : { metas: [], totalCount: 0 }
 
-    return { ...settings, query, pathname, widgets, metaSource, dataForGettingMeta }
+    return { ...settings, query, pathname,asPath, widgets, metaSource, dataForGettingMeta }
 }
 export default withRouter(meta);

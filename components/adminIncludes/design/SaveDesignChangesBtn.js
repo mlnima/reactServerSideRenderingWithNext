@@ -19,7 +19,7 @@ const SaveDesignChangesBtn = props => {
     };
 
     return (
-        <button onClick={ () => onSaveHandler() }>Save Changes</button>
+        <button className='save-design-btn' onClick={ () => onSaveHandler() }>Save Changes</button>
     );
 };
 export default SaveDesignChangesBtn;
