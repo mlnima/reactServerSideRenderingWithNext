@@ -1,4 +1,5 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
+import './MediaWidget.scss';
 
 const MediaWidget = props => {
     const [ state, setState ] = useState({
