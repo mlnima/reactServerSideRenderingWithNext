@@ -14,9 +14,10 @@ const SearchInputComponent = props => {
     useEffect(() => {
         setState({
             ...state,
-            pathURL: props.pathURL || '/posts'
+            queries:props.router ? props.router.query:{},
+            pathURL: props.router? props.router.pathname.includes('meta') ? props.router.pathname: '/posts' :'/posts'
         })
-    }, []);
+    }, [props]);
 
     const onChangeHandler = e => {
         setState({

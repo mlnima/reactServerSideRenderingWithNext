@@ -1,42 +1,31 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { newComment } from '../../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../../context/AppContext'
+import withRouter from 'next/dist/client/with-router'
 
 const CommentFrom = props => {
     const contextData = useContext(AppContext);
-
-    const [ state, setState ] = useState({
-        body: '',
-        author: '',
-        authorID:'',
-        email: '',
-        onDocument: props.documentId
-    });
-
-    useEffect(() => {
-        if (contextData.userData.username && contextData.userData.email) {
-            setState({
-                ...state,
-                author: contextData.userData.username,
-                authorID: contextData.userData._id,
-                email: contextData.userData.email,
-            })
-        }
-    }, [ contextData.userData ]);
-
-
-    const onChangeHandler = e => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        })
-    }
+    const authorInput = useRef(null)
+    const emailInput = useRef(null)
+    const bodyInput = useRef(null)
 
     const onSubmitHandler = e => {
         e.preventDefault()
-        if (state.onDocument) {
-            newComment(state).then(res => {
-                // console.log( res)
+        const commentData = {
+            body: bodyInput.current.value,
+            author: authorInput.current ? authorInput.current.value : contextData.userData.username || contextData.userData.username,
+            authorID: contextData.userData._id,
+            email: emailInput.current ? emailInput.current.value : contextData.userData.email || contextData.userData.email,
+            onDocument: props.documentId
+        }
+        if (props.documentId) {
+            newComment(commentData).then(res => {
+                bodyInput.current.value=''
+                props.router.push({
+                    pathname:props.router.pathname,
+                    query:props.router.query
+                })
+
             }).catch(err => {
                 console.log(err)
             })
@@ -47,8 +36,8 @@ const CommentFrom = props => {
         if (!contextData.userData.role && !contextData.userData._id) {
             return (
                 <div className='comment-form-info'>
-                    <input required={ true } placeholder='Name' name='author' onChange={ e => onChangeHandler(e) }/>
-                    <input type='email' required={ true } placeholder='Email' name='email' onChange={ e => onChangeHandler(e) }/>
+                    <input ref={ authorInput } required={ true } placeholder='Name' name='author'/>
+                    <input ref={ emailInput } required={ true } placeholder='Email' name='email' type='email'/>
                 </div>
             )
         } else return null
@@ -59,11 +48,11 @@ const CommentFrom = props => {
             <div>
                 <RenderLoggedInUser/>
                 <div className='comment-form-input'>
-                    <textarea required={ true } placeholder='Comment' name='body' onChange={ e => onChangeHandler(e) }/>
+                    <textarea ref={ bodyInput } required={ true } placeholder='Comment' name='body'/>
                 </div>
             </div>
             <button className='comment-form-submit-button' type='submit'>Post Comment</button>
         </form>
     );
 };
-export default CommentFrom;
+export default withRouter(CommentFrom);

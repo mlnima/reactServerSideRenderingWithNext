@@ -2,7 +2,6 @@ import React, { useEffect, useContext, useState, useRef } from 'react';
 import Head from "next/head";
 // import '../../styles/styles.scss';
 import '../../styles/globalAdminPanel.scss';
-
 import TopBar from "../adminIncludes/TopBar/AdminTopBar";
 import SideBar from "../adminIncludes/SideBar/SideBar";
 import { AppContext } from "../../context/AppContext";

@@ -1,0 +1,21 @@
+@import "../../../../styles/links";
+@import "../../../../styles/inputs";
+@import "../../../../styles/buttons";
+@import "../../../../styles/colors";
+
+.asset-page-pagination {
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  .asset-page-pagination-item {
+    margin: 5px;
+    @include linkLikeActionBtnAdmin;
+  }
+  .asset-page-pagination-item-input{
+    @include inputNormalWithRadius;
+    background-color: $light100;
+  }
+  .asset-page-pagination-item-btn{
+    @include AdminLightBtn
+  }
+}

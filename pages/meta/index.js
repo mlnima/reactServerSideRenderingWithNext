@@ -85,6 +85,7 @@ meta.getInitialProps = async ({ pathname, query, req,asPath }) => {
         page: parseInt(query.page) || 1,
         size: parseInt(query.size) || 30,
         sort: query.sort || 'latest',
+        startWith:query.startWith||'any',
         keyword: query.keyword || '',
     }
 

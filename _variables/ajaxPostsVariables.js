@@ -53,7 +53,7 @@ export const getMeta = async (data, cache, domainName) => {
     const body = {
         ...data,
     };
-    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${data.keyword}`, body)
+    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${data.keyword}&startWith=${data.startWith}`, body)
 };
 
 export const newComment = async (data) => {
@@ -76,6 +76,16 @@ export const updateComment = async (data) => {
     };
     return await axios.post(window.location.origin + `/api/v1/posts/updateComment`, body)
 };
+
+export const deleteComments = async (data, domainName) => {
+    const body = {
+        commentsIds: data,
+        token: localStorage.wt
+    };
+    return await axios.post(domainName + `/api/v1/posts/deleteComments`, body)
+};
+
+
 
 export const likeDislikeView = async (id, type) => {
     const body = {

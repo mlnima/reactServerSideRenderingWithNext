@@ -4,11 +4,11 @@ import RenderImageForMetaElements from '../RenderImageForMetaElements/RenderImag
 import './MetaElement.scss'
 
 const MetaElement = props => {
-console.log( props)
+
     if (props.count > 0) {
         return (
             <Link key={ props.name } href={ `/posts?${ props.metaType }=${ props.name }` }>
-                <a className='meta-item'>
+                <a className='meta-page-item'>
                     <RenderImageForMetaElements { ...props }/>
                     <div className='meta-item-data'>
                         <p>{ props.name }</p>

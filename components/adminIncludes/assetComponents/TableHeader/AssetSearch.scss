@@ -1,0 +1,15 @@
+@import "../../../../styles/inputs";
+@import "../../../../styles/colors";
+@import "../../../../styles/buttons";
+.asset-page-search{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  input{
+    @include inputNormalWithRadius;
+    background-color: $light100;
+  }
+  button{
+    @include AdminLightBtn;
+  }
+}

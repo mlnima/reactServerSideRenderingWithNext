@@ -36,6 +36,12 @@
 @import "../components/adminIncludes/TopBar/NewItemMenu/NewItemMenu";
 @import "../components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu";
 @import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
+@import "../components/adminIncludes/assetComponents/TableHeader/AssetStatusNavigation";
+@import "../components/adminIncludes/assetComponents/TableHeader/AssetSearch";
+@import "../components/adminIncludes/assetComponents/TableHeader/AssetBulkActionAndAssetTypeSelector";
+@import "../components/adminIncludes/assetComponents/TableHeader/AssetPagination";
+@import "../components/adminIncludes/assetComponents/TableHeader/TableHeader";
+
 
 @import "../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 @import "AdminStyle";

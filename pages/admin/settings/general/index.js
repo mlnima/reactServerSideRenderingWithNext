@@ -158,27 +158,27 @@ const settings = props => {
                                 <option value='false'>No</option>
                             </select>
                         </div>
-                        <div className="site-settings-form-section">
-                            <p>Categories Pages Sidebar:</p>
-                            <select name='categoriesPageSidebar' value={state.categoriesPageSidebar} onChange={e=>onChangeHandler(e)}>
-                                <option value='true'>Yes</option>
-                                <option value='false'>No</option>
-                            </select>
-                        </div>
-                        <div className="site-settings-form-section">
-                            <p>Tags Pages Sidebar:</p>
-                            <select name='tagsPageSidebar' value={state.tagsPageSidebar} onChange={e=>onChangeHandler(e)}>
-                                <option value='true'>Yes</option>
-                                <option value='false'>No</option>
-                            </select>
-                        </div>
-                        <div className="site-settings-form-section">
-                            <p>Actors Pages Sidebar:</p>
-                            <select name='actorsPageSidebar' value={state.actorsPageSidebar} onChange={e=>onChangeHandler(e)}>
-                                <option value='true'>Yes</option>
-                                <option value='false'>No</option>
-                            </select>
-                        </div>
+                        {/*<div className="site-settings-form-section">*/}
+                        {/*    <p>Categories Pages Sidebar:</p>*/}
+                        {/*    <select name='categoriesPageSidebar' value={state.categoriesPageSidebar} onChange={e=>onChangeHandler(e)}>*/}
+                        {/*        <option value='true'>Yes</option>*/}
+                        {/*        <option value='false'>No</option>*/}
+                        {/*    </select>*/}
+                        {/*</div>*/}
+                        {/*<div className="site-settings-form-section">*/}
+                        {/*    <p>Tags Pages Sidebar:</p>*/}
+                        {/*    <select name='tagsPageSidebar' value={state.tagsPageSidebar} onChange={e=>onChangeHandler(e)}>*/}
+                        {/*        <option value='true'>Yes</option>*/}
+                        {/*        <option value='false'>No</option>*/}
+                        {/*    </select>*/}
+                        {/*</div>*/}
+                        {/*<div className="site-settings-form-section">*/}
+                        {/*    <p>Actors Pages Sidebar:</p>*/}
+                        {/*    <select name='actorsPageSidebar' value={state.actorsPageSidebar} onChange={e=>onChangeHandler(e)}>*/}
+                        {/*        <option value='true'>Yes</option>*/}
+                        {/*        <option value='false'>No</option>*/}
+                        {/*    </select>*/}
+                        {/*</div>*/}
                         <div className="site-settings-form-section">
                             <p>Post Page Sidebar:</p>
                             <select name='postPageSidebar' value={state.postPageSidebar} onChange={e=>onChangeHandler(e)}>

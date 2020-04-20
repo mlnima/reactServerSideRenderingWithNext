@@ -137,9 +137,9 @@ postsControllers.getPostInfo = (req, res) => {
         postSchema.findOne({ title }).exec().then(async post => {
             const postData = {
                 ...post.toObject(),
-                comments: commentSchema.find({onDocument: post._id}).exec()
+                comments: commentSchema.find({ onDocument: post._id }).exec()
             }
-            res.json({ post: dataEncoder({ post }), error: false,postData });
+            res.json({ post: dataEncoder({ post }), error: false, postData });
             res.end()
         })
     } else if (_id) {
@@ -194,23 +194,19 @@ postsControllers.likeDislikeView = (req, res) => {
 };
 
 postsControllers.getMeta = async (req, res) => {
-
-    const type = req.body.type ?{type:req.body.type}:{}
+    console.log('not cached')
+    const type = req.body.type ? { type: req.body.type } : {}
     const size = req.body.size;
     const page = req.body.page;
-    const keyword = req.body.keyword ? req.body.keyword:''
-
-    console.log(req.body)
+    const startWithQuery = req.body.startWith === 'any' ? {} : { name: { $regex: '^' + req.body.startWith, $options: 'i' } }
     let searchQuery = req.body.keyword === '' ? {} : {
         $or: [
             { name: new RegExp(req.body.keyword, 'i') },
             { description: new RegExp(req.body.keyword, 'i') } ]
     };
-
     let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : { [req.body.sort]: -1 }
-//
-    const metaCount = await metaSchema.countDocuments({$and:[type,searchQuery]}).exec()
-    metaSchema.find({$and:[type,searchQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
+    const metaCount = await metaSchema.countDocuments({ $and: [ type, searchQuery, startWithQuery ] }).exec()
+    metaSchema.find({ $and: [ type, searchQuery, startWithQuery ] }).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
         const mapMetaToGetImage = metas.map(async meta => {
             return {
                 ...meta.toObject(),
@@ -221,11 +217,16 @@ postsControllers.getMeta = async (req, res) => {
                     } else {
                         return undefined
                     }
+                }).catch(err => {
+                    console.log(err)
                 })
             }
 
         })
         res.json({ metas: await Promise.all(mapMetaToGetImage), totalCount: metaCount })
+        res.end()
+    }).catch(err => {
+        // console.log( err)
         res.end()
     })
 
@@ -234,8 +235,8 @@ postsControllers.getMeta = async (req, res) => {
 postsControllers.newComment = (req, res) => {
 
     const commentDataToSave = new commentSchema(req.body)
-    commentDataToSave.save(saved=>{
-        console.log(saved )
+    commentDataToSave.save(saved => {
+        console.log(saved)
         res.end()
     })
 };
@@ -267,12 +268,30 @@ postsControllers.getComments = (req, res) => {
 };
 
 postsControllers.updateComment = (req, res) => {
-
     commentSchema.findByIdAndUpdate(req.body._id, req.body.update, { new: true }).exec().then(updated => {
-
         res.end()
     })
 
 };
+
+postsControllers.deleteComments = (req,res)=>{
+    const commentsIds = req.body.commentsIds || []
+    console.log( req.body)
+    const mapIdAndReturnDeletePromise = commentsIds.map(commentId=>{
+        return commentSchema.findByIdAndDelete(commentId,{useFindAndModify:false}).exec()
+    })
+
+    Promise.all(mapIdAndReturnDeletePromise).then(()=>{
+        console.log( res)
+        res.sendStatus(200)
+        res.end()
+    }).catch(err=>{
+        console.log( err)
+        res.sendStatus(500)
+        res.end()
+    })
+
+}
+
 
 module.exports = postsControllers;

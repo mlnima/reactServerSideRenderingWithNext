@@ -44,7 +44,7 @@ const SideBar = props => {
         },
         Settings: {
             pathURL: '/admin/settings',
-            subItems: ['customScript']
+            subItems: ['customScript','general']
         }
     })
 

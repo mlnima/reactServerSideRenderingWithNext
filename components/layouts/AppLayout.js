@@ -5,7 +5,7 @@ import Navigation from "../includes/Header/Navigation/Navigation";
 import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
 import '../../styles/global.scss'
-import '../../styles/styles.scss'
+// import '../../styles/styles.scss'
 
 
 const AppLayout = props => {

@@ -106,6 +106,7 @@ app.prepare().then(()=>{
     server.post('/api/v1/posts/newComment',(req,res)=>{postsControllers.newComment(req,res)});
     server.post('/api/v1/posts/getComments',(req,res)=>{postsControllers.getComments(req,res)});
     server.post('/api/v1/posts/updateComment',(req,res)=>{postsControllers.updateComment(req,res)});
+    server.post('/api/v1/posts/deleteComments',(req,res)=>{postsControllers.deleteComments(req,res)});
 
     //settings handler
     server.post('/api/v1/settings/update',(req,res)=>{settingsControllers.update(req,res)});
@@ -175,9 +176,24 @@ app.prepare().then(()=>{
         const queryParams = {
             type:req.query.type  ,
             sort:req.query.sort,
+            startWith:req.query.startWith,
             page:req.query.page,
             keyword:req.query.keyword,
             size:req.query.size,
+        }
+        app.render(req,res,targetComponent,queryParams,)
+    });
+
+    server.get('/admin/asset',(req,res)=>{
+        const targetComponent = '/admin/asset';
+        const queryParams = {
+            type:req.query.type,
+            assetsType:req.query.assetsType,
+            sort:req.query.sort,
+            page:req.query.page,
+            keyword:req.query.keyword,
+            size:req.query.size,
+            author:req.query.author,
         }
         app.render(req,res,targetComponent,queryParams,)
     });

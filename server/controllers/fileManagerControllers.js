@@ -47,7 +47,7 @@ fileManagerControllers.uploadFile = async (req, res) => {
          file.mv(filePath, function (err) {
              if (err) {
                  console.log(err)
-                 res.json({ response: 'something is wrong', type: 'error' })
+                 res.json({ response: 'something is wrong', type: 'error',error:err })
                  res.end()
              } else {
                  res.json({ response: 'Uploaded',path:filePath })
@@ -57,6 +57,7 @@ fileManagerControllers.uploadFile = async (req, res) => {
 
     }).catch(err=>{
          console.log( err)
+
          res.end()
      })
 

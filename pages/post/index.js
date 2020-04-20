@@ -48,9 +48,11 @@ const Post = props => {
             )
         } else return null
     }
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [ props ]);
+
     if (props.errorCode !== 200) {
         return <Error { ...props } />
     } else return (

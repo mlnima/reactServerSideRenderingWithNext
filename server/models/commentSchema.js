@@ -4,7 +4,7 @@ const mongoose = require('mongoose');
 const commentSchema = mongoose.Schema({
     onDocument: mongoose.Types.ObjectId,
     author: String,
-    authorID:mongoose.ObjectId,
+    authorID:mongoose.Types.ObjectId,
     email:String,
     body: String,
     postedDate:{

@@ -2,18 +2,11 @@ import React from 'react';
 
 const RenderImageForMetaElements = props => {
 
-    if (props.imageUrl){
-        return (
-            <img src={props.imageUrl}/>
-        )
-    }else if (!props.imageUrl&& props.noImageUrl){
-        return (
-            <img src={props.noImageUrl}/>
-        )
-    }else{
-        return (
-            <img src='/static/images/noImage/no-image-available.png'/>
-        )
-    }
+    return (
+        <div className='meta-page-item-image-parent'>
+            <img className='meta-page-item-image' src={props.imageUrl||props.noImageUrl||'/static/images/noImage/no-image-available.png'}/>
+
+        </div>
+    )
 };
 export default RenderImageForMetaElements;
