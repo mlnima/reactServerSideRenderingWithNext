@@ -86,3 +86,13 @@
   background: transparent;
 }
 
+@mixin adminMainBtn {
+   border: 1px solid rgba(0,0,0,.1);
+   padding: 3px 5px;
+}
+@mixin adminMainInput {
+   border: 1px solid rgba(0,0,0,.1);
+   padding: 3px 5px;
+  background-color: $light100;
+}
+

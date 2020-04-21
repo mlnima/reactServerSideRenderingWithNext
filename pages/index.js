@@ -34,7 +34,7 @@ const Home = props => {
         <>
             <AppLayout>
                 <SiteSettingSetter { ...props }/>
-                <div style={ state.style } className={ props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' }>
+                <div style={ state.style } className={ props.identity?props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' : 'content withOutSidebar' }>
                     <div className='HomePage'>
                         <WidgetsRenderer widgets={ props.widgets } position='home'/>
                     </div>

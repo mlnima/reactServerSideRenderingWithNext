@@ -154,13 +154,13 @@ const AppProvider = props => {
             };
             return await axios.post('/api/v1/posts/post', body)
         },
-        setEditingPostData: (name, value) => {
+        setEditingPostData: async (name, value) => {
             dispatchEditingPostData(editingPostData => ({
                 ...editingPostData,
                 [name]: value
             }))
         },
-        bulkActionPost: (ids, status) => {
+        bulkActionPost: async(ids, status) => {
             dispatchState({
                 ...state,
                 loading: true
@@ -171,7 +171,7 @@ const AppProvider = props => {
                 token: localStorage.wt
             };
             axios.post('/api/v1/posts/postsBulkAction', body).then(() => {
-                props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
+                // props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
                 dispatchState({
                     ...state,
                     loading: false

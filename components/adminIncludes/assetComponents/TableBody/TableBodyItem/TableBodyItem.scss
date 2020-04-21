@@ -1,0 +1,32 @@
+@import "../../../../../styles/grid";
+@import "../../../../../styles/buttons";
+@import "../../../../../styles/links";
+
+.asset-page-table-body-item {
+  .asset-page-table-body-item-content {
+    padding: 10px;
+    border: .2px solid rgba(0, 0, 0, .1);
+    border-bottom: none;
+    @include assetTable;
+  }
+
+  .asset-page-table-body-item-hover-item {
+    font-size: 13px !important;
+    display: flex;
+    align-items: center;
+
+    button {
+      @include buttonLikeLink;
+    }
+
+    a {
+      padding: 8px 10px;
+
+    }
+
+  }
+}
+
+.asset-page-table-body-item:nth-child(even) {
+  background-color: #fff;
+}

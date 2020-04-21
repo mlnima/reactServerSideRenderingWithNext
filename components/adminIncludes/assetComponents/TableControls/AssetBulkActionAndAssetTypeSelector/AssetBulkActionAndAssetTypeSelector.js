@@ -1,7 +1,8 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
+import AssetBulkAct from './AssetBulkAct'
 
 const AssetBulkActionAndAssetTypeSelector = props => {
-    const bulkActionSelect = useRef(null)
+
     const [ state, setState ] = useState({});
     useEffect(() => {
     }, []);
@@ -9,20 +10,15 @@ const AssetBulkActionAndAssetTypeSelector = props => {
     const onFormatChangeHandler = () => {
 
     }
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
 
     return (
         <div className='asset-page-bulk-action-asset-type-selector'>
-            <div className="asset-page-bulk-action-drop-down">
-                <select ref={ bulkActionSelect } placeholder='Bulk Actions'>
-                    <option value='none'>Bulk Actions</option>
-                    <option value='Published'>Published</option>
-                    <option value='Draft'>Draft</option>
-                    <option value='Trash'>Trash</option>
-                </select>
-                <button className='asset-page-bulk-action-drop-down-btn' onClick={ () => onFormatChangeHandler() }>Apply</button>
-            </div>
+            <AssetBulkAct {...props}/>
             <div className="asset-page-asset-type-selector">
-                <select >
+                <select>
                     <option value='all'>All</option>
                     <option value='video'>Video</option>
                     <option value='standard'>Standard</option>

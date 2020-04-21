@@ -163,7 +163,7 @@ postsControllers.deletePost = (req, res) => {
 
 postsControllers.postsBulkAction = async (req, res) => {
     const ids = req.body.ids || [];
-    console.log(ids)
+    console.log(req.body)
     const status = req.body.status;
     let actions;
 

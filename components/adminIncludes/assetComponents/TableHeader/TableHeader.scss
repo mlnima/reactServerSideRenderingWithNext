@@ -1,12 +1,16 @@
-.asset-page-table-head{
-  display: flex;
-  flex-direction: column;
-
-
-  @media only screen and (min-width: 768px) {
-    display: grid;
-    grid-gap: 10px;
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-
+@import "../../../../styles/grid";
+@import "../../../../styles/colors";
+.asset-page-table-header{
+  padding: 10px;
+  background-color: $light100;
+  margin: 5px 0 0 0;
+  border: .2px solid rgba(0,0,0,.1);
+  font-size: 13px;
+  @include assetTable;
+  .asset-page-table-header-item{
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
   }
 }

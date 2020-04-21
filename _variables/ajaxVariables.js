@@ -94,4 +94,11 @@ export const fileUpload = async (image, type) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadFile', image)
 }
 
+export const getUserData = async (_id, domainName) => {
+    const body = {
+        _id,
+        // token: localStorage ? localStorage.wt : ''
+    }
 
+    return await axios.post(domainName + '/api/v1/users/getUserData', body)
+}

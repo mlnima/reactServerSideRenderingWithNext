@@ -86,6 +86,7 @@ app.prepare().then(()=>{
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
+    server.post('/api/v1/users/getUserData',(req,res)=>{userController.getUserData(req,res)});
     server.post('/api/v1/users/getUsersList',(req,res)=>{userController.getUsersList(req,res)});
     server.post('/api/v1/users/getUsersListAsAdmin',(req,res)=>{userController.getUsersListAsAdmin(req,res)});
 
@@ -184,10 +185,11 @@ app.prepare().then(()=>{
         app.render(req,res,targetComponent,queryParams,)
     });
 
-    server.get('/admin/asset',(req,res)=>{
-        const targetComponent = '/admin/asset';
+    server.get('/admin/assets',(req,res)=>{
+        const targetComponent = '/admin/assets';
         const queryParams = {
             type:req.query.type,
+            status:req.query.status,
             assetsType:req.query.assetsType,
             sort:req.query.sort,
             page:req.query.page,

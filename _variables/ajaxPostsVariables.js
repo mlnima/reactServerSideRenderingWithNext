@@ -14,10 +14,11 @@ const cacheQueryGenerator = cache => {
 
 export const getPosts = async (data, cache, domainName) => {
 
+    const fetchUrl = cache?`/api/v1/posts${ queryGeneratorForUnCacheRequest(data)  }`:`/api/v1/posts${ queryGeneratorForUnCacheRequest(data)  }&date=${Date.now()}`
     const body = {
         ...data,
     };
-    return await axios.post(domainName + `/api/v1/posts${ queryGeneratorForUnCacheRequest(data)  }`, body, {
+    return await axios.post(domainName + fetchUrl, body, {
         headers: {
             'cache-control': 'no-cache',
         },

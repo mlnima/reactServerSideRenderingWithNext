@@ -293,31 +293,51 @@ var AppProvider = function AppProvider(props) {
       });
     },
     setEditingPostData: function setEditingPostData(name, value) {
-      dispatchEditingPostData(function (editingPostData) {
-        return _objectSpread({}, editingPostData, Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])({}, name, value));
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function setEditingPostData$(_context6) {
+        while (1) {
+          switch (_context6.prev = _context6.next) {
+            case 0:
+              dispatchEditingPostData(function (editingPostData) {
+                return _objectSpread({}, editingPostData, Object(_babel_runtime_helpers_esm_defineProperty__WEBPACK_IMPORTED_MODULE_1__["default"])({}, name, value));
+              });
+
+            case 1:
+            case "end":
+              return _context6.stop();
+          }
+        }
       });
     },
     bulkActionPost: function bulkActionPost(ids, status) {
-      dispatchState(_objectSpread({}, state, {
-        loading: true
-      }));
-      var body = {
-        ids: ids,
-        status: status,
-        token: localStorage.wt
-      };
-      axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/v1/posts/postsBulkAction', body).then(function () {
-        props.router.push({
-          pathname: props.router.pathname,
-          query: _objectSpread({}, props.router.query)
-        });
-        dispatchState(_objectSpread({}, state, {
-          loading: false
-        }));
-      })["catch"](function () {
-        dispatchState(_objectSpread({}, state, {
-          loading: false
-        }));
+      var body;
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function bulkActionPost$(_context7) {
+        while (1) {
+          switch (_context7.prev = _context7.next) {
+            case 0:
+              dispatchState(_objectSpread({}, state, {
+                loading: true
+              }));
+              body = {
+                ids: ids,
+                status: status,
+                token: localStorage.wt
+              };
+              axios__WEBPACK_IMPORTED_MODULE_5___default.a.post('/api/v1/posts/postsBulkAction', body).then(function () {
+                // props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
+                dispatchState(_objectSpread({}, state, {
+                  loading: false
+                }));
+              })["catch"](function () {
+                dispatchState(_objectSpread({}, state, {
+                  loading: false
+                }));
+              });
+
+            case 3:
+            case "end":
+              return _context7.stop();
+          }
+        }
       });
     },
     deletePost: function deletePost(id) {
@@ -329,46 +349,46 @@ var AppProvider = function AppProvider(props) {
     },
     updateSetting: function updateSetting(type, data) {
       var body;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function updateSetting$(_context6) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function updateSetting$(_context8) {
         while (1) {
-          switch (_context6.prev = _context6.next) {
+          switch (_context8.prev = _context8.next) {
             case 0:
               body = {
                 token: localStorage.wt,
                 type: type,
                 data: data
               };
-              _context6.next = 3;
+              _context8.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_5___default.a.post(window.location.origin + '/api/v1/settings/update', body));
 
             case 3:
-              return _context6.abrupt("return", _context6.sent);
+              return _context8.abrupt("return", _context8.sent);
 
             case 4:
             case "end":
-              return _context6.stop();
+              return _context8.stop();
           }
         }
       });
     },
     clearCaches: function clearCaches() {
       var body;
-      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function clearCaches$(_context7) {
+      return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.async(function clearCaches$(_context9) {
         while (1) {
-          switch (_context7.prev = _context7.next) {
+          switch (_context9.prev = _context9.next) {
             case 0:
               body = {
                 token: localStorage.wt
               };
-              _context7.next = 3;
+              _context9.next = 3;
               return _babel_runtime_regenerator__WEBPACK_IMPORTED_MODULE_0___default.a.awrap(axios__WEBPACK_IMPORTED_MODULE_5___default.a.post(window.location.origin + '/api/v1/settings/clearCaches', body));
 
             case 3:
-              return _context7.abrupt("return", _context7.sent);
+              return _context9.abrupt("return", _context9.sent);
 
             case 4:
             case "end":
-              return _context7.stop();
+              return _context9.stop();
           }
         }
       });

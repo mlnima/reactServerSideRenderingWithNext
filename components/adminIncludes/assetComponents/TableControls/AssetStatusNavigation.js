@@ -9,7 +9,7 @@ const AssetStatusNavigation = props => {
 
     const renderStatus = state.types.map(type=>{
         return(
-            <Link href={ {
+            <Link key={type} href={ {
                 pathname: props.router?props.router.pathname:'',
                 query: { ...props.router.query, status: type }
             } }><a className='asset-page-status-navigation-item'>{convertVariableNameToName(type)}</a></Link>

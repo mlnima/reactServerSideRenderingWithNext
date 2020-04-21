@@ -1,3 +1,5 @@
+@import "./colors";
+
 @mixin inputNormalWithRadius {
   border-radius: 5px;
   outline: none;
@@ -5,4 +7,10 @@
   padding: 3px 5px;
   width: 200px;
   height: 30px;
+}
+
+@mixin adminMainInput {
+  border: 1px solid rgba(0,0,0,.1);
+  padding: 3px 5px;
+  background-color: $light100;
 }

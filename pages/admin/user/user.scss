@@ -1,0 +1,29 @@
+@import "../../../styles/inputs";
+@import "../../../styles/buttons";
+.user-admin-edit-profile-page{
+  .user-admin-edit-profile-page-section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 300px;
+    input,textarea{
+      @include adminMainInput;
+    }
+    textarea{
+      min-height: 200px;
+    }
+  }
+  .user-admin-edit-profile-page-section-reset-password{
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+
+    max-width: 300px;
+    input{
+      @include adminMainInput;
+    }
+    button{
+      @include adminMainBtn;
+    }
+  }
+}

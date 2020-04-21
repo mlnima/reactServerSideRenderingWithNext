@@ -116,6 +116,13 @@ userControllers.getUsersList = (req,res)=>{
     })
 };
 
+userControllers.getUserData = (req,res)=>{
+    userSchema.findById(req.body._id).exec().then(user=>{
+        res.json({user});
+        res.end
+    })
+}
+
 userControllers.getUsersListAsAdmin = (req,res)=>{
     userSchema.find({}).exec().then(users=>{
         res.json({users});

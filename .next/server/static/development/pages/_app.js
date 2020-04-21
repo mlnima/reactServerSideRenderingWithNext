@@ -315,12 +315,12 @@ const AppProvider = props => {
       };
       return await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/post', body);
     },
-    setEditingPostData: (name, value) => {
+    setEditingPostData: async (name, value) => {
       dispatchEditingPostData(editingPostData => _objectSpread({}, editingPostData, {
         [name]: value
       }));
     },
-    bulkActionPost: (ids, status) => {
+    bulkActionPost: async (ids, status) => {
       dispatchState(_objectSpread({}, state, {
         loading: true
       }));
@@ -330,10 +330,7 @@ const AppProvider = props => {
         token: localStorage.wt
       };
       axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/posts/postsBulkAction', body).then(() => {
-        props.router.push({
-          pathname: props.router.pathname,
-          query: _objectSpread({}, props.router.query)
-        });
+        // props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
         dispatchState(_objectSpread({}, state, {
           loading: false
         }));

@@ -1,0 +1,21 @@
+@import "../../../../../styles/buttons";
+@import "../../../../../styles/colors";
+
+.asset-page-bulk-action-asset-type-selector {
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+
+  select {
+
+    //border: solid .2px rgba(0,0,0,.9) !important;
+    @include adminMainInput;
+  }
+
+  .asset-page-bulk-action-drop-down {
+    .asset-page-bulk-action-drop-down-btn {
+      @include adminMainBtn;
+    }
+
+  }
+}

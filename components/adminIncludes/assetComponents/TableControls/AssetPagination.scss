@@ -9,13 +9,13 @@
   align-items: center;
   .asset-page-pagination-item {
     margin: 5px;
-    @include linkLikeActionBtnAdmin;
+    @include adminMainBtn;
   }
   .asset-page-pagination-item-input{
-    @include inputNormalWithRadius;
-    background-color: $light100;
+    @include adminMainInput;
+    width: 50px;
   }
   .asset-page-pagination-item-btn{
-    @include AdminLightBtn
+    @include adminMainBtn;
   }
 }
