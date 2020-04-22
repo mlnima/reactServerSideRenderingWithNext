@@ -15,6 +15,9 @@ const userSchema = mongoose.Schema({
         default: Date.now
     },
     role:String,
+    firstName:String,
+    lastName:String,
+    nickName:String,
     friends:Array,
     inbox:Array,
     blockList:Array,
@@ -28,8 +31,9 @@ const userSchema = mongoose.Schema({
     status:Boolean,
     online:Boolean,
     sexualOrientation:String,
-    aboutMe:String,
-
+    about:String,
+    API_KEY:String,
+    uuid:String
 });
 
 

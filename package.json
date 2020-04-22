@@ -50,6 +50,7 @@
     "strip-ansi": "^6.0.0",
     "styled-jsx": "^3.2.5",
     "superagent": "^5.2.2",
+    "uuid-apikey": "^1.4.6",
     "webpack": "^4.42.1",
     "xml": "^1.0.1",
     "xmldom": "^0.2.1"

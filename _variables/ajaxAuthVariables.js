@@ -22,3 +22,29 @@ export const getUsersListAsAdmin = async (id, domainName) => {
 
 }
 
+
+export const getUserData = async (_id, domainName) => {
+    const body = {
+        _id,
+        // token: localStorage ? localStorage.wt : ''
+    }
+
+    return await axios.post(domainName + '/api/v1/users/getUserData', body)
+}
+
+
+export const updateUserData = async (data, domainName) => {
+    const body = {
+        data,
+        // token: localStorage ? localStorage.wt : ''
+    }
+
+    return await axios.post(domainName + '/api/v1/users/updateUserData', body)
+}
+export const newAPIKey = async ( domainName) => {
+    const body = {
+        token: localStorage ? localStorage.wt : ''
+    }
+
+    return await axios.post(domainName + '/api/v1/users/newAPIKey', body)
+}

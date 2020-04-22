@@ -11,9 +11,11 @@ const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
 const settingsControllers = require('./server/controllers/settingsControllers');
 const fileManagerControllers = require('./server/controllers/fileManagerControllers');
+const apiPostControllers = require('./server/controllers/apiControllers/apiPostsControllers');
 const path = require('path');
 const authMiddleware = require('./server/middlewares/authMiddleware');
 const adminAuthMiddleware = require('./server/middlewares/adminAuthMiddleware');
+const apiRequestMiddleware = require('./server/middlewares/apiRequestMiddleware');
 const xmlparser = require("express-xml-bodyparser");
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
@@ -87,8 +89,10 @@ app.prepare().then(()=>{
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
     server.post('/api/v1/users/getUserData',(req,res)=>{userController.getUserData(req,res)});
+    server.post('/api/v1/users/updateUserData',(req,res)=>{userController.updateUserData(req,res)});
     server.post('/api/v1/users/getUsersList',(req,res)=>{userController.getUsersList(req,res)});
     server.post('/api/v1/users/getUsersListAsAdmin',(req,res)=>{userController.getUsersListAsAdmin(req,res)});
+    server.post('/api/v1/users/newAPIKey',adminAuthMiddleware,(req,res)=>{userController.newAPIKey(req,res)});
 
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
@@ -131,6 +135,9 @@ app.prepare().then(()=>{
     // file manager
     server.post('/api/v1/settings/fileManagerControllers-readPath',(req,res)=>{fileManagerControllers.readPath(req,res)});
     server.post('/api/v1/settings/fileManagerControllers-uploadFile',(req,res)=>{ fileManagerControllers.uploadFile(req,res)});
+
+    //API
+    server.post('/api/v1/posts/createNewByApi',apiRequestMiddleware,(req,res)=>{apiPostControllers.creatPost(req,res)});
 
 
 //-------------------post route bad for SEO----------------------

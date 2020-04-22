@@ -3,6 +3,8 @@ require('dotenv').config()
 const settingSchema = require('./server/models/settings/settingSchema')
 const widgetSchema = require('./server/models/settings/widgetSchema')
 const postSchema = require('./server/models/postSchema')
+const userSchema = require('./server/models/userSchema')
+const bcrypt = require('bcryptjs');
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL ?
     `mongodb://localhost:${ process.env.DB_PORT }/${ process.env.DB_NAME }` :
@@ -15,50 +17,59 @@ mongoose.connect(mongoDBConnectionUrl, {
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
 
-//identity default setting
+
 const identityData = {
     type: 'identity',
     data: {
         title: 'just another React CMS website',
         themeColor: '#000',
+        postsCountPerPage: 40,
         description: 'website description',
         keywords: [],
         logoText: ' Logo text',
         headLine: 'this is the site headline',
-        homePageH1: 'H1',
-        homePagePagination: true,
-        postsCountPerPage: 40,
         homePageSidebar: true,
-        categoriesPageSidebar: true,
-        tagsPageSidebar: true,
-        actorsPageSidebar: true,
+        metaPageSidebar: false,
         postPageSidebar: true,
         postsPageSidebar: true
     }
 }
-
 const navigationData = {
     type: 'navigation',
     data: [
         {
-            title: 'Home',
-            url: '/'
+            "title": "Home",
+            "url": "/"
         },
         {
-            title: 'Categories',
-            url: '/meta',
-            as:'/meta/categories',
-            query:[{metaType:'categories'}]
+            "title": "Tags",
+            "url": "/meta",
+            "query": [
+                {
+                    "type": "tags"
+                }
+            ]
         },
         {
-            title: 'Tags',
-            url: '/meta',
-            as:'/meta/tags',
-            query:[{metaType:'tags'}]
+            "title": "Categories",
+            "url": "/meta",
+            "query": [
+                {
+                    "type": "categories"
+                }
+            ]
         },
+        {
+            "title": "Actors",
+            "url": "/meta",
+            "query": [
+                {
+                    "type": "actors"
+                }
+            ]
+        }
     ]
 }
-
 const designData = {
     type: 'design',
     data: {
@@ -82,19 +93,95 @@ const designData = {
         widgetBodyBorder: 'none',
 
         commentsAuthorTextColor: '#0085ba',
-        commentsDateTextColor:  '#FF3565',
-        commentsBodyTextColor:  '#fff',
-        commentsBackgroundColor:  'transparent',
+        commentsDateTextColor: '#FF3565',
+        commentsBodyTextColor: '#fff',
+        commentsBackgroundColor: 'transparent',
     }
 }
+const adminData = {
+    username: 'Admin',
+    password: 'Admin',
+    role: 'administrator'
+}
+
+const widgetData = [ {
+    "data": {
+        "type": "searchBar",
+        "title": "",
+        "categories": [],
+        "tags": [],
+        "count": 8,
+        "comments": [],
+        "pagination": false,
+        "position": "header",
+        "redirectLink": "",
+        "sortBy": "",
+        "text": "",
+        "textAlign": "center",
+        "customHtml": "",
+        "metaType": "",
+        "pathURL": "",
+        "LogoUrl": "",
+        "LogoText": "",
+        "headLine": "",
+        "viewType": "standard"
+    }
+},
+    {
+        "data": {
+            "type": "logo",
+            "title": "",
+            "categories": [],
+            "tags": [],
+            "count": 8,
+            "comments": [],
+            "pagination": false,
+            "position": "header",
+            "redirectLink": "",
+            "sortBy": "",
+            "text": "",
+            "textAlign": "center",
+            "customHtml": "",
+            "metaType": "",
+            "pathURL": "",
+            "LogoUrl": "",
+            "LogoText": "Logo",
+            "headLine": "",
+            "viewType": "standard",
+            "metaData": [],
+            "posts": []
+        }
+    }
+]
 
 const runSetup = async () => {
-    // const identityToSave = new settingSchema(identityData)
-    // const navigationToSave = new settingSchema(navigationData)
+    const identityToSave = new settingSchema(identityData)
+    const navigationToSave = new settingSchema(navigationData)
     const designToSave = new settingSchema(designData)
-    // await identityToSave.save()
-    // await navigationToSave.save()
+
+    await identityToSave.save()
+    await navigationToSave.save()
     await designToSave.save()
+
+    widgetData.forEach(widget => {
+        const dataToSave = new widgetSchema(widget)
+        dataToSave.save()
+    })
+
+    bcrypt.hash(adminData.password, 10, (err, hash) => {
+        if (err) {
+            console.log('something is wrong with Bcrypt')
+        } else if (hash) {
+            let dataToSave = {
+                ...adminData,
+                password: hash,
+            };
+
+            let newUserData = userSchema(dataToSave);
+            newUserData.save()
+        }
+    })
+
 }
 
 runSetup().then(() => {

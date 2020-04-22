@@ -5,6 +5,7 @@ const jwt = require('jsonwebtoken');
 const userSchema = require('../models/userSchema');
 const tokenExpireTime = '1000h';
 const dataEncoder = require('../tools/dataEncoder')
+const uuidAPIKey = require('uuid-apikey');
 
 userControllers.register = (req, res) => {
     const username = req.body.username;
@@ -109,6 +110,48 @@ userControllers.getUserInfo = (req,res)=>{
         res.end()
     })
 };
+
+
+
+userControllers.updateUserData = (req,res)=>{
+    const userID = req.body.data._id
+    console.log( req.body)
+    userSchema.findByIdAndUpdate(userID,req.body.data,{new:true}).exec().then(savedData=>{
+        res.json({updatedData:savedData})
+        res.end()
+    }).catch(err=>{
+        console.log( err)
+        res.end()
+    })
+
+}
+
+
+userControllers.newAPIKey = (req,res)=>{
+
+    // console.log(uuidAPIKey.create());
+    console.log(req.body);
+    console.log(req.userData);
+
+    const newAPIKey = uuidAPIKey.create()
+    const newUserData ={
+        ...req.userData,
+        API_KEY:newAPIKey.apiKey,
+        uuid:newAPIKey.uuid
+    }
+
+    userSchema.findByIdAndUpdate(req.userData._id,newUserData).exec().then(savedData=>{
+        res.json({updatedData:savedData})
+        res.end()
+    }).catch(err=>{
+        console.log( err)
+        res.end()
+    })
+    // res.json({newUserData})
+    // res.end()
+}
+
+
 userControllers.getUsersList = (req,res)=>{
     userSchema.find({}).exec().then(users=>{
         res.json({users});
