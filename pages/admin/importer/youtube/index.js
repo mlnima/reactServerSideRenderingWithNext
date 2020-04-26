@@ -24,6 +24,7 @@ const youtube = props => {
                     loading:true
                 })
                 youtubeDataScrapper(url).then(res => {
+console.log(res.data.video )
                     const durationToString = duration => {
                         const hours = duration.hours === 0 ? '' :
                             duration.hours < 10 ? '0' + duration.hours.toString() + ':' :
@@ -46,7 +47,7 @@ const youtube = props => {
                     const videoData = {
                         title: res.data.video.title,
                         quality: res.data.video.raw.contentDetails.definition === 'hd' ? '1080p' : '480p',
-                        mainThumbnail:  res.data.video.thumbnails.default.url ,
+                        mainThumbnail:  res.data.video.thumbnails.standard.url ,
                         duration: durationToString(res.data.video.duration),
                         videoEmbedCode: `https://www.youtube.com/embed/${ res.data.video.id }`,
                         description: res.data.video.description,
