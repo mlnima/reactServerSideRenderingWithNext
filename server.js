@@ -12,6 +12,7 @@ const subSiteMapsController = require('./server/controllers/subSiteMapsControlle
 const settingsControllers = require('./server/controllers/settingsControllers');
 const fileManagerControllers = require('./server/controllers/fileManagerControllers');
 const apiPostControllers = require('./server/controllers/apiControllers/apiPostsControllers');
+const youtubeDataScrapper = require('./server/dataScrappers/youtube');
 const path = require('path');
 const authMiddleware = require('./server/middlewares/authMiddleware');
 const adminAuthMiddleware = require('./server/middlewares/adminAuthMiddleware');
@@ -88,10 +89,10 @@ app.prepare().then(()=>{
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
-    server.post('/api/v1/users/getUserData',(req,res)=>{userController.getUserData(req,res)});
-    server.post('/api/v1/users/updateUserData',(req,res)=>{userController.updateUserData(req,res)});
+    server.post('/api/v1/users/getUserData',adminAuthMiddleware,(req,res)=>{userController.getUserData(req,res)});
+    server.post('/api/v1/users/updateUserData',adminAuthMiddleware,(req,res)=>{userController.updateUserData(req,res)});
     server.post('/api/v1/users/getUsersList',(req,res)=>{userController.getUsersList(req,res)});
-    server.post('/api/v1/users/getUsersListAsAdmin',(req,res)=>{userController.getUsersListAsAdmin(req,res)});
+    server.post('/api/v1/users/getUsersListAsAdmin',adminAuthMiddleware,(req,res)=>{userController.getUsersListAsAdmin(req,res)});
     server.post('/api/v1/users/newAPIKey',adminAuthMiddleware,(req,res)=>{userController.newAPIKey(req,res)});
 
     //posts handler
@@ -138,6 +139,10 @@ app.prepare().then(()=>{
 
     //API
     server.post('/api/v1/posts/createNewByApi',apiRequestMiddleware,(req,res)=>{apiPostControllers.creatPost(req,res)});
+
+    //data scrapper
+    server.post('/api/v1/scrap/youtube',adminAuthMiddleware,(req,res)=>{youtubeDataScrapper.gettingInfo(req,res)});
+
 
 
 //-------------------post route bad for SEO----------------------

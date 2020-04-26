@@ -4,10 +4,8 @@ import withRouter from 'next/dist/client/with-router'
 import AssetSearch from './AssetSearch'
 import AssetBulkActionAndAssetTypeSelector from './AssetBulkActionAndAssetTypeSelector/AssetBulkActionAndAssetTypeSelector'
 import AssetPagination from './AssetPagination'
+
 const TableControls = props => {
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
     return (
         <div className='asset-page-table-head'>
             <AssetStatusNavigation/>

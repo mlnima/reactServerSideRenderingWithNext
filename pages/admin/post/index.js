@@ -48,9 +48,7 @@ const Index = props => {
         }
     }, [ props ]);
 
-    useEffect(() => {
-        console.log(props.router )
-    }, [props]);
+
 
     return (
         <>
@@ -115,7 +113,7 @@ Index.getInitialProps = async ({ query, req }) => {
             postTitle: query.postTitle,
             _id: query.id,
         };
-        postData = await getPost(requestBody, true, domainName,query.id)
+        postData = await getPost(requestBody, false, domainName,query.id)
         post = postData.data ? dataDecoder(postData.data.post).post : newPostData
     }
 

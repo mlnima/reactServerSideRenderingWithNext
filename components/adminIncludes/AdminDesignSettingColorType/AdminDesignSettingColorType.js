@@ -5,9 +5,6 @@ import { AppContext } from '../../../context/AppContext';
 const AdminDesignSettingColorType = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
-
 
     const onChangeHandler = e=>{
         contextData.dispatchSiteDesign({

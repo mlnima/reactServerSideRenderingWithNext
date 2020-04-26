@@ -67,10 +67,10 @@ const TableBodyItemOnHover = props => {
                     <div className='asset-page-table-body-item-hover-item'>
                         <Link href={ '/admin/post?id=' + props._id }><a>Edit</a></Link>
                         <Link href={ '/' + props.title }><a>View</a></Link>
-                        <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'trash').then(()=>reGetData()) }>Trash</button>
-                        <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'pending').then(()=>reGetData()) }>Pending</button>
-                        <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'draft').then(()=>reGetData()) }>Draft</button>
-                        <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'published').then(()=>reGetData()) }>Publish</button>
+                        <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'trash').then(()=>reGetData()) }><span>Trash</span></button>
+                        <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'pending').then(()=>reGetData()) }><span>Pending</span></button>
+                        <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'draft').then(()=>reGetData()) }><span>Draft</span></button>
+                        <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'published').then(()=>reGetData()) }><span>Publish</span></button>
                     </div>
                 );
             } else return null
@@ -89,7 +89,13 @@ const TableBodyItemOnHover = props => {
             );
         }
 
-    } else return null
+    } else {
+        return(
+            <div className='asset-page-table-body-item-hover-item'>
+
+            </div>
+        )
+    }
 
 };
 export default withRouter(TableBodyItemOnHover);

@@ -89,8 +89,18 @@ export const executor = async (command) => {
     };
     return await axios.post(window.location.origin + '/api/v1/settings/executor', body)
 }
+
 export const fileUpload = async (image, type) => {
     //    token: localStorage.wt
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadFile', image)
+}
+
+
+export const youtubeDataScrapper = async (url) => {
+    const body = {
+        url,
+        token: localStorage.wt
+    };
+    return await axios.post(window.location.origin + '/api/v1/scrap/youtube', body)
 }
 

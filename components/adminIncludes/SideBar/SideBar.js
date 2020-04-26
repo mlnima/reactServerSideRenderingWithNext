@@ -73,6 +73,12 @@ const SideBar = props => {
             subItems: [
                 { name: 'customScript', url: '/admin/settings/customScript' },
                 { name: 'general', url: '/admin/settings/general' } ]
+        },
+        Importer: {
+            pathURL: '/admin/importer',
+            subItems: [
+                { name: 'youtube', url: '/admin/importer/youtube' },
+                ]
         }
     })
 

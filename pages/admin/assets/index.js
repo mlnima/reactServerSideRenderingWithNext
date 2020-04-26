@@ -7,69 +7,72 @@ import { getComments } from '../../../_variables/ajaxPostsVariables'
 import TableHeader from '../../../components/adminIncludes/assetComponents/TableHeader/TableHeader'
 import TableBody from '../../../components/adminIncludes/assetComponents/TableBody/TableBody'
 import { getUsersListAsAdmin } from '../../../_variables/ajaxAuthVariables'
+import withRouter from 'next/dist/client/with-router'
 
 const assets = props => {
-
+    const [ state, setState ] = useState({})
     const [ selectedItems, setSelectedItems ] = useState([]);
-
-    // const dispatchState = (name,value) => {
-    //    setState({
-    //        [name]:value
-    //    })
-    // }
+    const [ finalPageData, setFinalPageData ] = useState({});
+    useEffect( () => {
+        getAndSetData()
+    }, [ state,props ]);
 
     useEffect(() => {
-        console.log(selectedItems)
-    }, [ selectedItems ]);
+        if (props.router) {
+            setState({
+                ...state,
+                size: parseInt(props.router.query.size) || 30,
+                pageNo: parseInt(props.router.query.page) || 1,
+                postType: props.router.query.type || 'all',
+                fields: [ 'title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail' ],
+                keyword: props.router.query.keyword || '',
+                author: props.router.query.author || 'all',
+                actor: props.router.query.actor || 'all',
+                status: props.router.query.status || 'all',
+                tag: props.router.query.tag || 'all',
+                category: props.router.query.category || 'all',
+                sort: props.router.query.sort || 'latest',
+            })
+        }
+    }, [ props ]);
+    const getAndSetData = async ()=>{
+        let finalFetchedData;
+        let ajaxRequestData;
+        if (props.router) {
+            switch ( props.router.query.assetsType ) {
+                case 'posts':
+                    ajaxRequestData = await getPosts(state, false, window.location.origin)
+                    break
+                case 'users':
+                    ajaxRequestData = await getUsersListAsAdmin(state, localStorage.wt)
+                    break
+                case 'comments':
+                    ajaxRequestData = await getComments(state, false, window.location.origin)
+                    break
+                default:
+                    break
+            }
+            finalFetchedData = ajaxRequestData ? ajaxRequestData.data : {}
+            setFinalPageData({
+                ...finalPageData,
+                ...finalFetchedData
+            })
+        }
+    }
 
     return (
         <AdminLayout>
             <div className='admin-asset-page'>
-                <TableControls { ...props } selectedItems={ selectedItems } setSelectedItems={ setSelectedItems }/>
-                <TableHeader { ...props } selectedItems={ selectedItems } setSelectedItems={ setSelectedItems }/>
-                <TableBody { ...props } selectedItems={ selectedItems } setSelectedItems={ setSelectedItems }/>
+               <TableControls  finalPageData={finalPageData} selectedItems={ selectedItems } setSelectedItems={ setSelectedItems }/>
+               <TableHeader   finalPageData={finalPageData} selectedItems={ selectedItems } setSelectedItems={ setSelectedItems }/>
+                <TableBody finalPageData={finalPageData} selectedItems={ selectedItems } setSelectedItems={ setSelectedItems }/>
             </div>
         </AdminLayout>
     );
 };
 
-assets.getInitialProps = async ({ req, query }) => {
-    const domainName = req ? await getAbsolutePath(req) : '';
-    let finalPageData;
-    let ajaxRequestData;
-
-    const getAssetsData = {
-        size: parseInt(query.size) || 30,
-        pageNo: parseInt(query.page) || 1,
-        postType: query.type || 'all',
-        fields: [ 'title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail' ],
-        keyword: query.keyword || '',
-        author: query.author || 'all',
-        actor: query.actor || 'all',
-        status: query.status || 'all',
-        tag: query.tag || 'all',
-        category: query.category || 'all',
-        sort: query.sort || 'latest',
-    }
-
-    switch ( query.assetsType ) {
-        case 'posts':
-            ajaxRequestData = await getPosts(getAssetsData, false, domainName)
-            break
-        case 'users':
-            ajaxRequestData = await getUsersListAsAdmin(getAssetsData, domainName)
-            break
-        case 'comments':
-            ajaxRequestData = await getComments(getAssetsData, false, domainName)
-            break
-        default:
-            break
-    }
-
-    // let postsData = query.assetsType === 'posts' ? await getPosts(getAssetsData, false, domainName) : {}
-
-    finalPageData = ajaxRequestData ? ajaxRequestData.data : {}
-
-    return { query, finalPageData }
-}
-export default assets;
+// assets.getInitialProps = async ({ req, query }) => {
+//
+//     return {}
+// }
+export default withRouter(assets);

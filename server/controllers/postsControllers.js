@@ -44,15 +44,22 @@ function fieldGenerator(fields) {
 postsControllers.createNewPost = (req, res) => {
     // res.end()
     const newPost = req.body.postData;
-    metasSaver(newPost.tags, 'tag').then(() => {
-        metaCountSetter(newPost.tags, 'tag')
-    })
-    metasSaver(newPost.categories, 'category').then(() => {
-        metaCountSetter(newPost.categories, 'category')
-    })
-    metasSaver(newPost.actors, 'actor').then(() => {
-        metaCountSetter(newPost.actors, 'actor')
-    })
+    if (newPost.tags) {
+        metasSaver(newPost.tags, 'tag').then(() => {
+            metaCountSetter(newPost.tags, 'tag')
+        })
+    }
+    if (newPost.categories) {
+        metasSaver(newPost.categories, 'category').then(() => {
+            metaCountSetter(newPost.categories, 'category')
+        })
+    }
+    if (newPost.actors) {
+        metasSaver(newPost.actors, 'actor').then(() => {
+            metaCountSetter(newPost.actors, 'actor')
+        })
+    }
+
     newPost.lastModify = Date.now()
     const newPostDataToSave = new postSchema(newPost);
     newPostDataToSave.save().then(savedPostData => {
@@ -274,24 +281,23 @@ postsControllers.updateComment = (req, res) => {
 
 };
 
-postsControllers.deleteComments = (req,res)=>{
+postsControllers.deleteComments = (req, res) => {
     const commentsIds = req.body.commentsIds || []
-    console.log( req.body)
-    const mapIdAndReturnDeletePromise = commentsIds.map(commentId=>{
-        return commentSchema.findByIdAndDelete(commentId,{useFindAndModify:false}).exec()
+    console.log(req.body)
+    const mapIdAndReturnDeletePromise = commentsIds.map(commentId => {
+        return commentSchema.findByIdAndDelete(commentId, { useFindAndModify: false }).exec()
     })
 
-    Promise.all(mapIdAndReturnDeletePromise).then(()=>{
-        console.log( res)
+    Promise.all(mapIdAndReturnDeletePromise).then(() => {
+        console.log(res)
         res.sendStatus(200)
         res.end()
-    }).catch(err=>{
-        console.log( err)
+    }).catch(err => {
+        console.log(err)
         res.sendStatus(500)
         res.end()
     })
 
 }
-
 
 module.exports = postsControllers;

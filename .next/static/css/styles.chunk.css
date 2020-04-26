@@ -974,13 +974,18 @@
 .asset-page-table-body-item .asset-page-table-body-item-hover-item {
   font-size: 13px !important;
   display: flex;
-  align-items: center; }
-  .asset-page-table-body-item .asset-page-table-body-item-hover-item button {
+  align-items: center;
+  height: 35px; }
+  .asset-page-table-body-item .asset-page-table-body-item-hover-item button, .asset-page-table-body-item .asset-page-table-body-item-hover-item a {
+    text-decoration: none;
     border: none;
-    color: #0073aa;
-    background: transparent; }
-  .asset-page-table-body-item .asset-page-table-body-item-hover-item a {
-    padding: 8px 10px; }
+    color: #0085ba;
+    width: 50px;
+    height: 20px;
+    font-size: 13px;
+    background-color: white; }
+  .asset-page-table-body-item .asset-page-table-body-item-hover-item button {
+    cursor: pointer; }
 
 .asset-page-table-body-item:nth-child(even) {
   background-color: #fff; }
@@ -1299,6 +1304,27 @@
   display: flex;
   flex-direction: column;
   justify-content: center; }
+
+.admin-import-page-youtube {
+  display: flex;
+  flex-direction: column; }
+  .admin-import-page-youtube textarea {
+    background-color: white;
+    min-width: 50vw;
+    min-height: 300px; }
+
+.admin-import-page-youtube-api-key {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color: #33373c;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 5px; }
+  .admin-import-page-youtube-api-key input {
+    background-color: white;
+    width: 100%; }
 
 body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; }
@@ -2947,13 +2973,18 @@ a {
 .asset-page-table-body-item .asset-page-table-body-item-hover-item {
   font-size: 13px !important;
   display: flex;
-  align-items: center; }
-  .asset-page-table-body-item .asset-page-table-body-item-hover-item button {
+  align-items: center;
+  height: 35px; }
+  .asset-page-table-body-item .asset-page-table-body-item-hover-item button, .asset-page-table-body-item .asset-page-table-body-item-hover-item a {
+    text-decoration: none;
     border: none;
-    color: #0073aa;
-    background: transparent; }
-  .asset-page-table-body-item .asset-page-table-body-item-hover-item a {
-    padding: 8px 10px; }
+    color: #0085ba;
+    width: 50px;
+    height: 20px;
+    font-size: 13px;
+    background-color: white; }
+  .asset-page-table-body-item .asset-page-table-body-item-hover-item button {
+    cursor: pointer; }
 
 .asset-page-table-body-item:nth-child(even) {
   background-color: #fff; }
@@ -3273,6 +3304,27 @@ a {
   flex-direction: column;
   justify-content: center; }
 
+.admin-import-page-youtube {
+  display: flex;
+  flex-direction: column; }
+  .admin-import-page-youtube textarea {
+    background-color: white;
+    min-width: 50vw;
+    min-height: 300px; }
+
+.admin-import-page-youtube-api-key {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color: #33373c;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 5px; }
+  .admin-import-page-youtube-api-key input {
+    background-color: white;
+    width: 100%; }
+
 body {
   font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif; }
 
@@ -3471,67 +3523,6 @@ body {
 
 .posts {
   margin: 10px 0; }
-
-.video-player {
-  margin: 10px 0;
-  position: relative;
-  top: 0;
-  right: 0;
-  left: 0;
-  width: 100%; }
-  .video-player .responsive-player {
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 56.30%;
-    margin-bottom: 20px;
-    height: 0; }
-    .video-player .responsive-player iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      margin-bottom: 50px;
-      padding: 0 !important;
-      border-radius: 10px; }
-    .video-player .responsive-player .video-player-video-type {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      margin-bottom: 50px;
-      outline: none;
-      border-radius: 10px; }
-
-.post-info .edit-btn-admin {
-  background: linear-gradient(#67ae55, #578843);
-  box-shadow: inset 0 1px 1px #a4e388;
-  border-color: #3b6e22 #3b6e22 #2c5115;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  letter-spacing: 1px;
-  position: relative;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  width: 200px;
-  height: 40px;
-  min-width: 194px;
-  padding: 7px 20px;
-  text-align: center;
-  line-height: 126%;
-  box-sizing: border-box;
-  margin-top: 10px;
-  margin-bottom: 10px; }
-
-.post-info .post-info-body .views .post-rate {
-  color: white; }
-  .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items {
-    color: white; }
-
-.post-info .post-info-body .meta-description {
-  color: white; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

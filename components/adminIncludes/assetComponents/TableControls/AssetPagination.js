@@ -8,10 +8,6 @@ import LastSVG from '../../../../static/images/fontawesome/forward-solid.svg'
 
 const AssetPagination = props => {
     const manualPage = useRef(null)
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
-
     return (
         <div className='asset-page-pagination'>
             <label>{props.finalPageData.totalCount}</label>

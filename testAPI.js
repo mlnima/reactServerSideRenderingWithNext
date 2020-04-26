@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 const body={
-    apiKey:'VA0H72H-81A4SXC-HK4CAAC-E3AG0VF',
+    apiKey:'H9D5KTS-8RBMAMQ-QF3D71S-K4VBCKC',
     username:'Admin',
     postData:{
         "comments" : [],
@@ -23,7 +23,7 @@ const body={
         "sourceSite" : "youtube",
     }
 }
-axios.post('http://localhost:3000/api/v1/posts/createNewByApi',body).then(res=>{
+axios.post('http://webdevs.ai/api/v1/posts/createNewByApi',body).then(res=>{
     console.log( res.data)
 }).catch(err=>{
     console.log( err)

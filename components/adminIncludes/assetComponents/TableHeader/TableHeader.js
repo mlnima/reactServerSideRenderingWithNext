@@ -9,19 +9,19 @@ const TableHeader = props => {
     });
 
     useEffect(() => {
-        if (props.query.assetsType === 'posts') {
+        if (props.router.query.assetsType === 'posts') {
             let items = [ 'title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail' ]
             setState({
                 ...state,
                 items,
             })
-        } else if (props.query.assetsType === 'users') {
+        } else if (props.router.query.assetsType === 'users') {
             let items = [ 'username', 'email', 'role', 'reg_time' ]
             setState({
                 ...state,
                 items,
             })
-        } else if (props.query.assetsType === 'comments') {
+        } else if (props.router.query.assetsType === 'comments') {
             let items = [ 'author', 'body', 'onDocument', 'email' ]
             setState({
                 ...state,
@@ -29,7 +29,7 @@ const TableHeader = props => {
             })
         }
 
-    }, [ props.query.page,props.query.assetsType ]);
+    }, [ props.router.query.page,props.router.query.assetsType ]);
 
     useEffect(() => {
         if (props.selectedItems.length===0){
@@ -40,7 +40,7 @@ const TableHeader = props => {
 
     const onSelectChangeHandler = e => {
         e.target.checked ?
-            props.setSelectedItems(props.finalPageData[props.query.assetsType].map(i => i._id)) :
+            props.setSelectedItems(props.finalPageData[props.router.query.assetsType].map(i => i._id)) :
             props.setSelectedItems([])
     }
 

@@ -47,6 +47,7 @@
     "react-switch": "^5.0.1",
     "react-transition-group": "^1.2.1",
     "sass": "^1.26.3",
+    "simple-youtube-api": "^5.2.1",
     "strip-ansi": "^6.0.0",
     "styled-jsx": "^3.2.5",
     "superagent": "^5.2.2",

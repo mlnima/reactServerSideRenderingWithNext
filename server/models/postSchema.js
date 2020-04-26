@@ -9,6 +9,8 @@ const postSchema = mongoose.Schema({
     company: String,
     description: String,
     mainThumbnail: String,
+    smallThumbnail: String,
+    largeThumbnail: String,
     videoTrailerUrl: String,
     quality: String,
     format: String,

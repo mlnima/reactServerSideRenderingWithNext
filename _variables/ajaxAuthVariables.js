@@ -7,44 +7,38 @@ export const getUsersList = async () => {
     return await axios.post(window.location.origin + '/api/v1/users/getUsersList', body)
 }
 
-export const getUsersListAsAdmin = async (id, domainName) => {
-    console.log(domainName)
+export const getUsersListAsAdmin = async (id, token) => {
 
-    try {
-        const body = {
-            id,
-            token: localStorage.wt
-        };
-        return await axios.post(domainName + '/api/v1/users/getUsersListAsAdmin', body)
-    } catch ( e ) {
-        console.log(e)
-    }
+    const body = {
+        id,
+        token: localStorage.wt
+
+    };
+    return await axios.post(window.location.origin + '/api/v1/users/getUsersListAsAdmin', body)
 
 }
-
 
 export const getUserData = async (_id, domainName) => {
     const body = {
         _id,
-        // token: localStorage ? localStorage.wt : ''
+        token: localStorage.wt
     }
 
     return await axios.post(domainName + '/api/v1/users/getUserData', body)
 }
 
-
 export const updateUserData = async (data, domainName) => {
     const body = {
         data,
-        // token: localStorage ? localStorage.wt : ''
+        token: localStorage.wt
     }
 
     return await axios.post(domainName + '/api/v1/users/updateUserData', body)
 }
-export const newAPIKey = async ( domainName) => {
-    const body = {
-        token: localStorage ? localStorage.wt : ''
-    }
 
+export const newAPIKey = async (domainName) => {
+    const body = {
+        token: localStorage.wt
+    }
     return await axios.post(domainName + '/api/v1/users/newAPIKey', body)
 }

@@ -14,16 +14,20 @@
     font-size: 13px !important;
     display: flex;
     align-items: center;
+    height: 35px;
 
+    button,a{
+      text-decoration: none;
+      border: none;
+      color: $lightBlue;
+      width: 50px;
+      height: 20px;
+      font-size: 13px;
+      background-color: $light100;
+    }
     button {
-      @include buttonLikeLink;
+      cursor: pointer ;
     }
-
-    a {
-      padding: 8px 10px;
-
-    }
-
   }
 }
 
