@@ -18,30 +18,27 @@ const Logo = props => {
             headLine: contextData.siteIdentity.headLine,
 
             logoTextStyle: {
-                color: contextData.siteDesign.textLogoColor,
-                fontSize: contextData.siteDesign.textLogoSize
+                color: props.logoTextColor || 'white',
+                fontSize:  props.logoTextFontSize + 'px' || '50px'
             },
             headLineStyle: {
-                color: contextData.siteDesign.headLineColor,
-                fontSize: contextData.siteDesign.headLineSize
+                color: props.logoHeadLineColor || 'white',
+                fontSize: props.logoHeadLineFontSize + 'px' || '16px'
             },
 
         })
     }, [ contextData.siteIdentity ]);
 
-
-
-
     const RenderLogo = () => {
         if (props.LogoUrl) {
             return (
-                <img src={props.LogoUrl}/>
+                <img src={ props.LogoUrl }/>
             )
         } else return null
     }
 
     return (
-        <Link href={props.redirectLink}>
+        <Link href={ props.redirectLink }>
             <a className='Logo'>
                 <RenderLogo/>
                 <span style={ state.logoTextStyle } className='logoText'>{ props.LogoText }</span>

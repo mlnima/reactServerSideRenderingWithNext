@@ -801,7 +801,8 @@
   top: 40px;
   background-color: #33373c;
   width: 150px;
-  padding: 10px; }
+  padding: 10px;
+  z-index: 17; }
   .NewItemMenu a {
     color: white; }
 
@@ -1100,6 +1101,27 @@
   width: 95%; }
 
 .save-design-btn {
+  background: linear-gradient(#67ae55, #578843);
+  box-shadow: inset 0 1px 1px #a4e388;
+  border-color: #3b6e22 #3b6e22 #2c5115;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 1px;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  height: 40px;
+  min-width: 194px;
+  padding: 7px 20px;
+  text-align: center;
+  line-height: 126%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.actionBtn {
   background: linear-gradient(#67ae55, #578843);
   box-shadow: inset 0 1px 1px #a4e388;
   border-color: #3b6e22 #3b6e22 #2c5115;
@@ -1709,21 +1731,23 @@ a {
   align-items: center;
   background-color: #181818;
   padding: 5px 10px;
-  height: 30px; }
+  height: 30px;
+  font-size: 14px; }
   .TopBar a {
     text-decoration: none;
     color: white;
     padding: 5px 10px;
     margin: 0 10px; }
-  .TopBar button {
+  .TopBar button, .TopBar a {
     background-color: transparent;
     color: white;
     outline: none;
     border: none;
-    transition: .3s; }
-    .TopBar button:hover {
+    transition: .3s;
+    font-size: 14px; }
+    .TopBar button:hover, .TopBar a:hover {
       transform: scale(1.2); }
-    .TopBar button:active {
+    .TopBar button:active, .TopBar a:active {
       transform: scale(1); }
 
 .post-element-div {
@@ -2800,7 +2824,8 @@ a {
   top: 40px;
   background-color: #33373c;
   width: 150px;
-  padding: 10px; }
+  padding: 10px;
+  z-index: 17; }
   .NewItemMenu a {
     color: white; }
 
@@ -3099,6 +3124,27 @@ a {
   width: 95%; }
 
 .save-design-btn {
+  background: linear-gradient(#67ae55, #578843);
+  box-shadow: inset 0 1px 1px #a4e388;
+  border-color: #3b6e22 #3b6e22 #2c5115;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 1px;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  height: 40px;
+  min-width: 194px;
+  padding: 7px 20px;
+  text-align: center;
+  line-height: 126%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.actionBtn {
   background: linear-gradient(#67ae55, #578843);
   box-shadow: inset 0 1px 1px #a4e388;
   border-color: #3b6e22 #3b6e22 #2c5115;
@@ -3523,6 +3569,127 @@ body {
 
 .posts {
   margin: 10px 0; }
+
+
+.VideoInformation {
+  width: 100%; }
+  .VideoInformation .saveBtn {
+    display: flex;
+    justify-content: center; }
+    .VideoInformation .saveBtn .SaveVideoDataBtn {
+      background-color: #0085ba;
+      color: white;
+      outline: none;
+      border: none;
+      padding: 8px 10px;
+      padding: 5px 20px;
+      font-size: large;
+      border-radius: 5px; }
+  .VideoInformation .VideoInformationSection {
+    display: grid;
+    grid-template-columns: 30% 1fr;
+    align-items: center; }
+    .VideoInformation .VideoInformationSection .title {
+      padding: 2px;
+      font-size: small; }
+      @media only screen and (min-width: 768px) {
+        .VideoInformation .VideoInformationSection .title {
+          font-size: medium; } }
+    .VideoInformation .VideoInformationSection .editor iframe {
+      width: 240px;
+      height: auto; }
+      @media only screen and (min-width: 768px) {
+        .VideoInformation .VideoInformationSection .editor iframe {
+          width: 100%;
+          min-height: 400px; } }
+    .VideoInformation .VideoInformationSection .editor img {
+      width: 240px;
+      height: auto; }
+      @media only screen and (min-width: 768px) {
+        .VideoInformation .VideoInformationSection .editor img {
+          width: 100%;
+          min-height: 400px; } }
+    .VideoInformation .VideoInformationSection .editor .option {
+      display: flex;
+      align-items: center; }
+    .VideoInformation .VideoInformationSection .editor .durationItems {
+      display: flex; }
+      .VideoInformation .VideoInformationSection .editor .durationItems .durationItem {
+        margin: 0 5px;
+        display: flex;
+        background-color: #f1f1f1;
+        padding: 5px;
+        border-radius: 5px; }
+        .VideoInformation .VideoInformationSection .editor .durationItems .durationItem label {
+          margin: 0 0px;
+          padding: 0 0px; }
+        .VideoInformation .VideoInformationSection .editor .durationItems .durationItem input {
+          border: none;
+          border-radius: 5px;
+          padding: 3px; }
+    .VideoInformation .VideoInformationSection .editor select {
+      border: none;
+      background-color: #f1f1f1;
+      padding: 4px;
+      border-radius: 5px; }
+    .VideoInformation .VideoInformationSection .editor .textInput {
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      padding: 3px 5px;
+      width: 200px;
+      height: 30px;
+      background-color: #f1f1f1;
+      width: 90%; }
+    .VideoInformation .VideoInformationSection .editor .textInputWithUpload {
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      padding: 3px 5px;
+      width: 200px;
+      height: 30px;
+      background-color: #f1f1f1;
+      width: 80%; }
+    .VideoInformation .VideoInformationSection .editor .TextInput {
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      padding: 3px 5px;
+      width: 200px;
+      height: 30px;
+      background-color: #f1f1f1;
+      width: 90%; }
+    .VideoInformation .VideoInformationSection .editor .uploadBtn {
+      background-color: #f1f1f1;
+      color: black;
+      outline: none;
+      border: 0.4px #9fa3a8 solid;
+      padding: 8px 10px;
+      border-radius: 5px;
+      margin: 0 3px;
+      border-radius: 5px; }
+      .VideoInformation .VideoInformationSection .editor .uploadBtn:active {
+        background-color: white;
+        border: none; }
+    .VideoInformation .VideoInformationSection .editor .textareaInput {
+      border-radius: 5px;
+      outline: none;
+      border: none;
+      padding: 3px 5px;
+      width: 200px;
+      height: 30px;
+      background-color: #f1f1f1;
+      width: 90%;
+      min-height: 200px; }
+
+
+
+.ImagePreview .editor {
+  display: flex;
+  justify-content: center; }
+  .ImagePreview .editor img {
+    margin: auto;
+    width: 50%; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

@@ -143,6 +143,9 @@ app.prepare().then(()=>{
     //data scrapper
     server.post('/api/v1/scrap/youtube',adminAuthMiddleware,(req,res)=>{youtubeDataScrapper.gettingInfo(req,res)});
 
+    //exporter
+    server.post('/api/v1/posts/export',(req,res)=>{postsControllers.export(req,res)});
+
 
 
 //-------------------post route bad for SEO----------------------

@@ -126,6 +126,13 @@ settingsControllers.getWidgetsWithData = (req, res) => {
                 return widget
             }
 
+            // return {
+            //     ...widget.toObject(),
+            //     posts:widget.type ==='posts'? await postSchema.find({ status: 'published' }).limit(widget.count).sort(sortMethod).exec():[]
+            // }
+
+
+
         })
         const data = await Promise.all(mapWidget)
 

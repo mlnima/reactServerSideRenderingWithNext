@@ -4,6 +4,7 @@ import withRouter from "next/dist/client/with-router";
 import FA from "react-fontawesome";
 import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
 import NewItemMenu from "./NewItemMenu/NewItemMenu";
+import Link from 'next/link'
 // import { setSprCache } from "next/dist/next-server/server/spr-cache";
 
 const AdminTopBar = props => {
@@ -62,7 +63,7 @@ const AdminTopBar = props => {
             <div className='adminTopBar'>
                 <div className="adminTopBarControl">
                     <button className='adminSideBarMobileBtn adminTopBarItem' onClick={ () => AdminSideBarOpenCloseHandler() }><FA className='fontawesomeMedium' name="bars"/></button>
-                    <button className='adminGoToHomePageBtn adminTopBarItem' onClick={ () => goToHomePage() }><FA className='fontawesomeMedium' name="home"/></button>
+                    <Link href='/'><a><FA className='fontawesomeMedium' name="home"/></a></Link>
                     <button className='adminNewActionBtn adminTopBarItem' onClick={ () => newItemMenuHandler() }><FA className='fontawesomeMedium' name="plus"/></button>
                     <NewItemMenu active={ state.NewItemMenu }/>
                 </div>

@@ -35,8 +35,8 @@ const WidgetModel = props => {
 
     const onDeleteHandler = () => {
         deleteWidgets(props.data._id, window.location.origin).then(() => {
-            getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, window.location.origin,Date.now()).then(res => {
-                console.log(res.data.widgets )
+            getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, window.location.origin, Date.now()).then(res => {
+                console.log(res.data.widgets)
                 contextData.dispatchWidgetsSettings({
                     widgets: [ ...res.data.widgets ]
                 })
@@ -50,8 +50,8 @@ const WidgetModel = props => {
         dataToSave.data.metaData = []
 
         updateWidgets(dataToSave).then(() => {
-            getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, window.location.origin,Date.now()).then(res => {
-                console.log( res.data)
+            getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, window.location.origin, Date.now()).then(res => {
+                console.log(res.data)
                 contextData.dispatchWidgetsSettings({
                     widgets: [ ...res.data.widgets ]
                 })
@@ -89,6 +89,14 @@ const WidgetModel = props => {
             </>
         )
     }
+    const RenderRedirect = () => {
+        return (
+            <>
+                <p>Redirect Link URL:</p>
+                <DelayInput className='redirectLink' name='redirectLink' placeholder='Redirect' value={ widgetData.data.redirectLink } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
+            </>
+        )
+    }
 
     const RenderCount = () => {
         return (
@@ -98,14 +106,28 @@ const WidgetModel = props => {
             </>
         )
     }
+    const RenderText = () => {
+        return (
+            <>
+                <p>Text:</p>
+                <DelayInput element="textarea" name='text' value={ widgetData.data.text } delayTimeout={ 10000 } onChange={ e => onChangeHandler(e) }/>
+                <p>Text Align:</p>
+                <select name='textAlign' value={ widgetData.data.textAlign } onChange={ e => onChangeHandler(e) }>
+                    <option value='left'>Left</option>
+                    <option value='center'>Center</option>
+                    <option value='right'>Right</option>
+                </select>
+            </>
+        )
+    }
 
     const RenderWidgetCustomStyle = () => {
         return (
             <>
                 <p>Extra ClassName for Custom Style:</p>
-                <DelayInput  name='extraClassName' value={ widgetData.data.extraClassName||'' }  delayTimeout={ 4000 }   onChange={ e => onChangeHandler(e) }/>
+                <DelayInput name='extraClassName' value={ widgetData.data.extraClassName || '' } delayTimeout={ 4000 } onChange={ e => onChangeHandler(e) }/>
                 <p>Custom Styles:</p>
-                <DelayInput element="textarea" className='customStylesTextarea' name='customStyles' value={ widgetData.data.customStyles||'' }  delayTimeout={ 4000 }   onChange={ e => onChangeHandler(e) }/>
+                <DelayInput element="textarea" className='customStylesTextarea' name='customStyles' value={ widgetData.data.customStyles || '' } delayTimeout={ 4000 } onChange={ e => onChangeHandler(e) }/>
             </>
         )
     }
@@ -116,6 +138,7 @@ const WidgetModel = props => {
                 return (
                     <>
                         <RenderTitleAndRedirect/>
+                        <RenderText/>
                         <p>Sort By:</p>
                         <select name='sortBy' value={ widgetData.data.sortBy } onChange={ e => onChangeHandler(e) }>
                             <option value='_id'>Newest</option>
@@ -137,6 +160,7 @@ const WidgetModel = props => {
                 return (
                     <>
                         <RenderTitleAndRedirect/>
+                        <RenderText/>
                         <p>Media Type:</p>
                         <select name='mediaType' value={ widgetData.data.mediaType || '' } onChange={ e => onChangeHandler(e) }>
                             <option value='video'>Video</option>
@@ -153,6 +177,7 @@ const WidgetModel = props => {
                 return (
                     <>
                         <RenderTitleAndRedirect/>
+                        <RenderText/>
                         <p>Sort By:</p>
                         <select name='sortBy' value={ widgetData.data.sortBy } onChange={ e => onChangeHandler(e) }>
                             <option value='_id'>ID</option>
@@ -171,7 +196,7 @@ const WidgetModel = props => {
                 )
 
             case 'searchBar':
-                console.log( widgetData)
+                console.log(widgetData)
                 return (
                     <>
                         <p>path URL</p>
@@ -182,16 +207,29 @@ const WidgetModel = props => {
             case 'logo':
                 return (
                     <>
-                        <RenderTitleAndRedirect/>
+                        <RenderRedirect/>
                         <p>Logo image URL</p>
                         {/*<input name='LogoUrl' value={ state.LogoUrl } className='LogoUrl' onChange={ e => onChangeHandler(e) }/>*/ }
                         <DelayInput name='LogoUrl' value={ widgetData.data.LogoUrl } className='LogoUrl' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
                         <p>Logo Text</p>
                         {/*<input name='LogoText' value={ state.LogoText } className='LogoText' onChange={ e => onChangeHandler(e) }/>*/ }
                         <DelayInput name='LogoText' value={ widgetData.data.LogoText } className='LogoText' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
+                        <div className='color-section-widget'>
+                            <p>Logo Text Color</p>
+                            <DelayInput name='logoTextColor' value={ widgetData.data.logoTextColor } className='logoTextColor' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
+                            <p>Logo Text Font Size</p>
+                            <DelayInput type='number' name='logoTextFontSize' value={ widgetData.data.logoTextFontSize } className='logoTextFontSize' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
+                        </div>
+
                         <p>Under Logo Headline Text</p>
                         {/*<input name='headLine' value={ state.headLine } className='headLine' onChange={ e => onChangeHandler(e) }/>*/ }
                         <DelayInput name='headLine' value={ widgetData.data.headLine } className='headLine' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
+                        <div className='color-section-widget'>
+                            <p>Head Line Color</p>
+                            <DelayInput name='logoHeadLineColor' value={ widgetData.data.logoHeadLineColor } className='logoHeadLineColor' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
+                            <p>Head Line Font Size</p>
+                            <DelayInput type='number' name='logoHeadLineFontSize' value={ widgetData.data.logoHeadLineFontSize } className='logoHeadLineFontSize' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
+                        </div>
                     </>
                 )
 
@@ -199,6 +237,13 @@ const WidgetModel = props => {
                 return (
                     <>
                         <RenderTitleAndRedirect/>
+                    </>
+                )
+            case 'text':
+                return (
+                    <>
+                        <RenderTitleAndRedirect/>
+                        <RenderText/>
                     </>
                 )
 
@@ -212,7 +257,7 @@ const WidgetModel = props => {
         return (
             <>
                 <div className='widget-open-control'>
-                    <p>{ props.data.data.title ||convertVariableNameToName(props.data.data.type) }</p>
+                    <p>{ props.data.data.title || convertVariableNameToName(props.data.data.type) }</p>
                     <button onClick={ () => onOpenHandler() }>{ widgetSettings.open ? 'close' : 'open' }</button>
                 </div>
                 <div className='widgetModel'>
@@ -244,14 +289,6 @@ const WidgetModel = props => {
                         <option value='tagsPagesSidebar'>Tags Page SideBar</option>
                         <option value='actorsPagesSidebar'>Actors Page SideBar</option>
                         <option value='footer'>footer</option>
-                    </select>
-                    <p>Text:</p>
-                    <DelayInput element="textarea" name='text' value={ widgetData.data.text } delayTimeout={ 10000 } onChange={ e => onChangeHandler(e) }/>
-                    <p>Text Align:</p>
-                    <select name='textAlign' value={ widgetData.data.textAlign } onChange={ e => onChangeHandler(e) }>
-                        <option value='left'>Left</option>
-                        <option value='center'>Center</option>
-                        <option value='right'>Right</option>
                     </select>
 
 

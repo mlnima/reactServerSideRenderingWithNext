@@ -8,7 +8,7 @@
   background-color: $dark90;
   padding: 5px 10px;
   height: 30px;
-
+  font-size: 14px;
   a {
     text-decoration: none;
     color: white;
@@ -16,9 +16,10 @@
     margin: 0 10px;
   }
 
-  button{
+  button,a{
     @include transparentLightTextBtn;
     transition: .3s;
+    font-size: 14px;
     &:hover{
       transform: scale(1.2);
     }

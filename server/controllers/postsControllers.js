@@ -278,7 +278,6 @@ postsControllers.updateComment = (req, res) => {
     commentSchema.findByIdAndUpdate(req.body._id, req.body.update, { new: true }).exec().then(updated => {
         res.end()
     })
-
 };
 
 postsControllers.deleteComments = (req, res) => {
@@ -299,5 +298,22 @@ postsControllers.deleteComments = (req, res) => {
     })
 
 }
+
+
+postsControllers.export = (req, res) => {
+    postSchema.find({}).exec().then(exportedData=>{
+        res.json({ exportedData })
+        res.end()
+    }).catch(err=>{
+        console.log( err)
+        res.sendStatus(500)
+        res.end()
+    })
+
+};
+
+
+
+
 
 module.exports = postsControllers;

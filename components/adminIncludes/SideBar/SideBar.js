@@ -78,6 +78,13 @@ const SideBar = props => {
             pathURL: '/admin/importer',
             subItems: [
                 { name: 'youtube', url: '/admin/importer/youtube' },
+                { name: 'content', url: '/admin/importer/content' },
+                ]
+        },
+        Exporter: {
+            pathURL: '/admin/exporter',
+            subItems: [
+                { name: 'posts', url: '/admin/exporter/postsExporter' },
                 ]
         }
     })

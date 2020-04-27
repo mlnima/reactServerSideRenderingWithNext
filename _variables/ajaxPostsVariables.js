@@ -14,7 +14,7 @@ const cacheQueryGenerator = cache => {
 
 export const getPosts = async (data, cache, domainName) => {
 
-    const fetchUrl = cache?`/api/v1/posts${ queryGeneratorForUnCacheRequest(data)  }`:`/api/v1/posts${ queryGeneratorForUnCacheRequest(data)  }&date=${Date.now()}`
+    const fetchUrl = cache ? `/api/v1/posts${ queryGeneratorForUnCacheRequest(data) }` : `/api/v1/posts${ queryGeneratorForUnCacheRequest(data) }&date=${ Date.now() }`
     const body = {
         ...data,
     };
@@ -26,12 +26,13 @@ export const getPosts = async (data, cache, domainName) => {
     // return await axios.post(domainName +`/api/v1/posts`, body)
 };
 
-export const getPost = async (data, cache, domainName,idOrTitleForUnCacheRequest) => {
-
+export const getPost = async (data, cache, domainName, idOrTitleForUnCacheRequest) => {
+    console.log(idOrTitleForUnCacheRequest)
+    const cacheHandler = cache ? '' : `&time=${ Date.now() }`
     const body = {
         ...data,
     };
-    return await axios.post(domainName + `/api/v1/posts/post?title=${idOrTitleForUnCacheRequest}`, body)
+    return await axios.post(domainName + `/api/v1/posts/post?title=${ idOrTitleForUnCacheRequest }` + cacheHandler, body)
 };
 
 export const updatePost = async (data, domainName) => {
@@ -54,7 +55,7 @@ export const getMeta = async (data, cache, domainName) => {
     const body = {
         ...data,
     };
-    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${data.keyword}&startWith=${data.startWith}`, body)
+    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${ data.keyword }&startWith=${ data.startWith }`, body)
 };
 
 export const newComment = async (data) => {
@@ -86,14 +87,19 @@ export const deleteComments = async (data, domainName) => {
     return await axios.post(domainName + `/api/v1/posts/deleteComments`, body)
 };
 
-
-
 export const likeDislikeView = async (id, type) => {
     const body = {
         id,
         type
     };
     return await axios.post(window.location.origin + '/api/v1/posts/likeDislikeView', body)
+};
+
+export const exportPosts = async () => {
+    const body = {
+        token: localStorage.wt
+    };
+    return await axios.post(window.location.origin + '/api/v1/posts/export', body)
 };
 
 

@@ -1,9 +1,12 @@
-import React, { useRef } from 'react';
+import React, { useEffect, useRef } from 'react';
 import { AppContext } from "../../../../context/AppContext";
 import FA from "react-fontawesome";
 
 const PostCategoriesTagsActors = props => {
     let newItemsElement = useRef(null);
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
 
     const deleteItem = (e) => {
         const deletedItemFromType = props.postData[props.type].filter(i => {

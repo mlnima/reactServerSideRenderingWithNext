@@ -6,11 +6,11 @@
   top: 40px;
   background-color: $AdminColor80;
   width: 150px;
-  padding:10px;
+  padding: 10px;
+  z-index: 17;
 
   a {
     color: $light100;
 
-    //width: 100px;
   }
 }
