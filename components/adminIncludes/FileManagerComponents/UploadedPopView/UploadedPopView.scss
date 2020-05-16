@@ -32,6 +32,12 @@
       max-width: 600px;
       padding: 5px;
     }
+    .uploaded-pop-view-text-content{
+      textarea{
+        min-width: 300px;
+        min-height: 200px;
+      }
+    }
     .uploaded-pop-view-url{
       margin: 10px 0;
       width: 90%;

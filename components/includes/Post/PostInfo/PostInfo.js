@@ -32,6 +32,9 @@ const PostInfo = props => {
     // useEffect(() => {
     //     console.log(contextData.userData)
     // }, [ contextData.userData ]);
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
 
     const EditLinkForAdmin = () => {
         if (contextData.userData.role === 'administrator') {
@@ -41,12 +44,9 @@ const PostInfo = props => {
         } else return null
     }
 
-    return (
-        <div className='post-info'>
-            <EditLinkForAdmin/>
-            <div className='post-info-head'>
-
-                <h1>{ props.title }</h1>
+    const RenderRatingButtons = () => {
+        if (props.rating !== 'disable') {
+            return (
                 <div className="like">
                     <button onClick={ e => {
                         likeDislikeView(props.id, 'likes')
@@ -61,12 +61,14 @@ const PostInfo = props => {
                         <img className='fontawesomeSvgMedium' src={ DisLikeBtnSvg } alt=""/>
                     </button>
                 </div>
-            </div>
+            )
+        } else return null
+    }
 
-            <div className='post-info-body'>
-                <div className="views">
-                    <DownloadLink downloadLink={ props.videoEmbedCode }/>
-                    <span>{ props.views } views</span>
+    const RenderRatingData = () => {
+        if (props.rating  !== 'disable') {
+            return (
+                <>
                     <ProgressBar value={ state.likeValue } percent={ false }/>
                     <div className='post-rate'>
                         <div>
@@ -85,6 +87,26 @@ const PostInfo = props => {
                         </span>
                         </div>
                     </div>
+                </>
+            )
+
+        } else return null
+    }
+
+    return (
+        <div className='post-info'>
+            <EditLinkForAdmin/>
+            <div className='post-info-head'>
+
+                <h1>{ props.title }</h1>
+                <RenderRatingButtons/>
+            </div>
+
+            <div className='post-info-body'>
+                <div className="views">
+                    <DownloadLink downloadLink={ props.videoEmbedCode }/>
+                    <span>{ props.views } views</span>
+<RenderRatingData/>
                 </div>
                 <div className="meta-description">
                     <div className="description">{ props.description }</div>

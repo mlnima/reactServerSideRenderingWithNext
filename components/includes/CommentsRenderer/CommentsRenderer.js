@@ -41,9 +41,7 @@ const CommentsRenderer = props => {
         })
     }
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+
 
     const RenderAdminActionBtns = props => {
         if (contextData.userData.role === 'administrator') {

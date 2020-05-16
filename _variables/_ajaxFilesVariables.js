@@ -8,6 +8,14 @@ export const readPath = (path)=>{
     return axios.post(window.location.origin +'/api/v1/settings/fileManagerControllers-readPath',body)
 };
 
+export const readFile = (path)=>{
+    let body = {
+        path,
+        token: localStorage.wt
+    };
+    return axios.post(window.location.origin +'/api/v1/settings/fileManagerControllers-readFile',body)
+};
+
 
 export const deleteFile = (filePath)=>{
     let body = {
@@ -37,6 +45,7 @@ export const newFolder = (folderName,folderPath)=>{
     };
     return axios.post(window.location.origin +'/server/files/admin-newFolder',body)
 };
+
 export const newFile = (fileName,filePath)=>{
 
     let body = {

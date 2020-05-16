@@ -54,7 +54,10 @@ console.log(res.data.video )
                         postType: 'video',
                         downloadLink: url,
                         status: 'draft',
-                        lastModify: Date.now()
+                        lastModify: Date.now(),
+                        likes:0,
+                        disLikes:0,
+                        views:0
                     }
                     savePost(videoData, window.location.origin).then(()=>{
                         console.log( 'saved')

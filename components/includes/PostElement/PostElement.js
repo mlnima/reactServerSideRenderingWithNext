@@ -12,21 +12,23 @@ import { likeValueCalculator } from '../../../_variables/_variables'
 
 const PostElement = props => {
     let qualityLabel = useRef(null);
-    let durationLabel = useRef(null);
-    let viewLabel = useRef(null);
+    let bottomLeft = useRef(null);
+    let bottomRight = useRef(null);
     let element = useRef(null)
     let videoElement = useRef(null)
-
-    let path = '/post/' + props.state._id + '/' + props.state.title;
 
     let [ state, setState ] = useState({
         isHover: false,
         isWatched: false,
-        extraClassName:''
+        extraClassName: ''
     });
 
     useEffect(() => {
-        if (props.viewType){
+        console.log(props)
+    }, [ props ]);
+
+    useEffect(() => {
+        if (props.viewType) {
             setState({
                 ...state,
                 extraClassName: props.viewType
@@ -41,48 +43,105 @@ const PostElement = props => {
     };
     const ImageContent = () => {
         let dataToRender = () => {
-            if (state.isHover  && props.state.videoTrailerUrl) {
+            if (state.isHover && props.state.videoTrailerUrl) {
                 return (
                     <video ref={ videoElement } src={ props.state.videoTrailerUrl } autoPlay={ true } loop={ true }
-                           onMouseOut={ e => { isHoverHandler()} }
+                           onMouseOut={ e => {
+                               isHoverHandler()
+                           } }
                     />)
 
             } else if (!state.isHover) {
                 return (<img src={ props.state.mainThumbnail } alt={ props.state.title } onError={ err => {
-                    if (!props.state.mainThumbnail){
+                    if (!props.state.mainThumbnail) {
                         // deletedVideoAutoRemover(props.state)
-                        console.log('something wrong with image on ',props.state.title)
+                        console.log('something wrong with image on ', props.state.title)
                     }
                 } } onMouseEnter={ () =>
                     isHoverHandler()
                 }/>)
-            }else {
+            } else {
                 return (
-                    <span>{props.state.title}</span>
+                    <span>{ props.state.title }</span>
                 )
             }
         };
         return dataToRender()
     };
 
+    const BottomRight = () => {
+        switch ( props.state.postType ) {
+            case 'video':
+                return (
+                    <span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>
+                )
+            case 'product':
+                return (
+                    <span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>
+                )
+            default :
+                break
+        }
+    }
 
-    const RenderDataOnImage = ()=>{
-        if (!state.isHover){
-            return(
-                <>
-                    <span ref={ qualityLabel } className='quality'>{ props.state.quality }</span>
-                    <span ref={ viewLabel } className='views'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>
-                    <span ref={ durationLabel } className='duration'>{ props.state.duration }</span>
-                    </>
+
+    const RenderProgressBar = ()=>{
+        if (props.state.rating !== 'disable'){
+            return (
+                <ProgressBar value={ likeValueCalculator(props.state.likes, props.state.disLikes) } percent={ true }/>
             )
         }else return null
     }
 
+    const BottomLeft = ()=>{
+        switch ( props.state.postType ) {
+            case 'video':
+                return (
+                    <span ref={ bottomLeft } className='bottom-left'>{ props.state.duration }</span>
+                )
+            case 'product':
+                return (
+                    <span ref={ bottomRight } className='bottom-left'><FA className='fontawesomeSmall' name="eye"/>{ props.state.price + ' ' + (props.state.currency || 'Euro') }</span>
+                )
+            default :
+                break
+        }
+    }
 
 
+    const TopRight = ()=>{
+        switch ( props.state.postType ) {
+            case 'video':
+                return (
+                    <span ref={ qualityLabel } className='top-right'>{ props.state.quality }</span>
+                )
+            case 'product':
+                return null
+            default :
+                break
+        }
+    }
+
+
+
+    const RenderDataOnImage = () => {
+        if (state.isHover) {
+            return null
+        } else {
+            return (
+                <>
+                    <TopRight/>
+                    <BottomRight/>
+                    <BottomLeft/>
+                    {/*<span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>*/ }
+                    {/*<span ref={ bottomLeft } className='bottom-left'>{ props.state.duration }</span>*/}
+                </>
+            )
+        }
+    }
 
     return (
-        < div ref={ element } className={'post-element-div ' + (props.viewType ? props.viewType:'standard') }>
+        < div ref={ element } className={ 'post-element-div ' + (props.viewType ? props.viewType : 'standard') }>
             <Link as={ `/${ props.state.title }` } href={ {
                 pathname: '/post',
                 query: {
@@ -95,7 +154,7 @@ const PostElement = props => {
                             <ImageContent/>
                             <RenderDataOnImage/>
                         </div>
-                        <ProgressBar value={ likeValueCalculator(props.state.likes, props.state.disLikes) } percent={ true }/>
+                      <RenderProgressBar/>
                         <h3>{ props.state.title }</h3>
                     </div>
                 </a>

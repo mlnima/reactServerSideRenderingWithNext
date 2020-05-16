@@ -37,7 +37,7 @@ const SiteSettingSetter = props => {
                 title: props.identity.data.title || '',
                 themeColor: props.design.data.themeColor || '',
                 description: props.identity.data.description || '',
-                bodyBackgroundImage: props.identity.data.bodyBackgroundImage || '',
+                bodyBackgroundImage: props.design.data.bodyBackgroundImage || '',
                 keywords: props.identity.data.keywords || [],
                 customScripts: props.identity.customScripts || []
             })
@@ -49,8 +49,14 @@ const SiteSettingSetter = props => {
     }, [ props ]);
 
     useEffect(() => {
-        document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor
+        document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;
+        document.body.style.backgroundPosition = contextData.siteDesign.bodyBackgroundPosition||'center';
+        document.body.style.backgroundSize = contextData.siteDesign.bodyBackgroundSize||'cover';
+        document.body.style.backgroundRepeat = contextData.siteDesign.bodyBackgroundRepeat||'no-repeat';
+        document.body.style.backgroundAttachment = contextData.siteDesign.bodyBackgroundAttachment||'initial';
+        document.body.style.backgroundImage = `url(${ contextData.siteDesign.bodyBackgroundImage})`
         document.body.style.color = contextData.siteDesign.bodyBackgroundColor
+
     }, [ contextData.siteDesign ]);
 
     const renderCustomScripts = (state.customScripts || []).map(script => {
@@ -61,11 +67,7 @@ const SiteSettingSetter = props => {
         )
     })
 
-    useEffect(() => {
-        if (state.bodyBackgroundImage){
-            document.querySelector('body').style.backgroundImage = state.bodyBackgroundImage
-        }
-    }, [state]);
+
 
     // const RenderGoogleAnalyticsScript = () => {
     //     if (props.identity.data.googleAnalyticsID) {

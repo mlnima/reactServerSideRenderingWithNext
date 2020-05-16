@@ -4,10 +4,6 @@ import FA from "react-fontawesome";
 
 const PostCategoriesTagsActors = props => {
     let newItemsElement = useRef(null);
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
-
     const deleteItem = (e) => {
         const deletedItemFromType = props.postData[props.type].filter(i => {
             return i !== e.currentTarget.name
@@ -15,11 +11,12 @@ const PostCategoriesTagsActors = props => {
         props.onPostMetaChangeHandler(props.type, deletedItemFromType)
     };
 
+
     const addNewItem = e => {
         e.preventDefault()
         if (newItemsElement.current.value.includes(',')) {
             let newItems = newItemsElement.current.value.split(',');
-            const addedItemFromType = [ ...props.postData[props.type], ...newItems.map(item=>item.trim()) ]
+            const addedItemFromType = [ ...props.postData[props.type], ...newItems.map(item => item.trim()) ]
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
         } else {
             const addedItemFromType = [ ...props.postData[props.type], newItemsElement.current.value.trim() ]
@@ -41,17 +38,24 @@ const PostCategoriesTagsActors = props => {
         )
     });
 
-    return (
-        <div className='PostCategoriesTagsActors'>
-            <form className="addNewTag" onSubmit={e => addNewItem(e)}>
-                <input ref={ newItemsElement } type='text'/>
-                <button className='addBtn' type='submit'> Add</button>
-            </form>
-            <span className='small-info'>Separate tags with commas</span>
-            <div className="items">
-                { addedItems }
+
+    if (props.postData.postType !== 'video' && props.type==='actors'){
+        return null
+    }else{
+        return (
+            <div className='PostCategoriesTagsActors'>
+                <form className="addNewTag" onSubmit={ e => addNewItem(e) }>
+                    <input ref={ newItemsElement } type='text'/>
+                    <button className='addBtn' type='submit'> Add</button>
+                </form>
+                <span className='small-info'>Separate tags with commas</span>
+                <div className="items">
+                    { addedItems }
+                </div>
             </div>
-        </div>
-    );
+        );
+    }
+
+
 };
 export default PostCategoriesTagsActors;

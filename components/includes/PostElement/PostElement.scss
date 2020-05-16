@@ -71,7 +71,7 @@
 
       }
 
-      .views {
+      .bottom-right {
         position: absolute;
         right: 3px;
         bottom: 3px;
@@ -83,14 +83,14 @@
         }
       }
 
-      .duration {
+      .bottom-left {
         position: absolute;
         left: 3px;
         bottom: 3px;
         @include elementOnVideoElement;
       }
 
-      .quality {
+      .top-right {
         position: absolute;
         right: 3px;
         top: 3px;

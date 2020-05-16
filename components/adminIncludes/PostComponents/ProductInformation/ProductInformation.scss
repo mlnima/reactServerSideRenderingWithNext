@@ -1,0 +1,46 @@
+@import "../../../../styles/inputs";
+@import "../../../../styles/grid";
+
+.product-information {
+  width: 100%;
+
+  .product-information-add-image, .product-information-upload-image {
+    display: flex;
+    align-items: center;
+    width: 100%;
+  }
+
+  .product-information-add-image {
+    input {
+
+      @include inputNormalWithRadius;
+      width: 90%;
+    }
+  }
+
+  .product-information-images-preview {
+    @include settings-general;
+
+    .product-information-image-preview {
+      position: relative;
+      margin: 5px;
+
+      img {
+        width: 250px;
+      }
+
+      button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 17;
+        background-color: transparent;
+        color: $light100;
+        border: none;
+        outline: none;
+        font-weight: bold;
+        font-size: x-large;
+      }
+    }
+  }
+}

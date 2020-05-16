@@ -41,7 +41,7 @@ export const fileTypeDetector =   fileName => {
     const fileFormats = {
         image: [ 'jpg', 'png', 'jpeg', 'svg' ],
         video: [ 'mp4', '3gp' ],
-        document: [ 'js', 'css', 'env', 'scss' ],
+        document: [ 'js', 'css', 'env', 'scss','txt' ],
         application:['exe'],
         archive:['zip','rar']
     }

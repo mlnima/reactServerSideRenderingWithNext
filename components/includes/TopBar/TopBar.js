@@ -8,46 +8,87 @@ import FA from 'react-fontawesome'
 const TopBar = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
-        style:{}
+        style: {}
     });
 
     useEffect(() => {
         setState({
             ...state,
-            style:{
-                backgroundColor:contextData.siteDesign.topBarBackgroundColor,
-                color:contextData.siteDesign.topBarTextColor
+            style: {
+                backgroundColor: contextData.siteDesign.topBarBackgroundColor,
+                color: contextData.siteDesign.topBarTextColor
             }
         })
-    }, [contextData.siteDesign]);
+    }, [ contextData.siteDesign ]);
 
-
-    if (contextData.userData.username) {
+    const AdminItem = () => {
         if (contextData.userData.role === 'administrator') {
             return (
-                <div className='TopBar' style={state.style}>
+                <>
                     <Link href='/admin'><a>Admin Panel</a></Link>
-                    <button style={state.style} onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
-                    <button   onClick={ () => contextData.functions.clearCaches() }>Clear Caches</button>
-
-                </div>
+                    <p onClick={ () => contextData.functions.clearCaches() }>Clear Caches</p>
+                </>
             )
-        } else {
-            return (
-                <div className='TopBar' style={state.style} >
-                    <button style={state.style} onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
-                </div>
-            );
-        }
-    } else {
-        return (
-            <div className='TopBar' style={state.style}>
-                <Link href='/auth/login'><a>Login</a></Link>
-                <span>Or</span>
-                <Link href='/auth/register'><a>Register</a></Link>
-            </div>
-        );
+        } else return null
     }
+
+    const LoggedInItems = () => {
+        if (contextData.userData.username) {
+            return (
+                <>
+                    <p style={ state.style } onClick={ () => contextData.functions.logOutUser() }>Log Out</p>
+                    <Link href={ `/profile?username=${ contextData.userData.username }` }><a>My Profile</a></Link>
+                </>
+            )
+        } else return null
+    }
+
+    const LoggedOutItems = () => {
+        if (!contextData.userData.username) {
+            return (
+                <>
+                    <Link href='/auth/login'><a>Login</a></Link>
+                    <span>Or</span>
+                    <Link href='/auth/register'><a>Register</a></Link>
+                </>
+            )
+        } else return null
+    }
+
+    // if (contextData.userData.username) {
+    //     if (contextData.userData.role === 'administrator') {
+    //         return (
+    //             <div className='TopBar' style={ state.style }>
+    //                 <Link href='/admin'><a>Admin Panel</a></Link>
+    //                 <button style={ state.style } onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
+    //                 <button onClick={ () => contextData.functions.clearCaches() }>Clear Caches</button>
+    //
+    //             </div>
+    //         )
+    //     } else {
+    //         return (
+    //             <div className='TopBar' style={ state.style }>
+    //                 <button style={ state.style } onClick={ () => contextData.functions.logOutUser() }>Log Out</button>
+    //             </div>
+    //         );
+    //     }
+    // } else {
+    //     return (
+    //         <div className='TopBar' style={ state.style }>
+    //             <Link href='/auth/login'><a>Login</a></Link>
+    //             <span>Or</span>
+    //             <Link href='/auth/register'><a>Register</a></Link>
+    //         </div>
+    //     );
+    // }
+
+    return (
+        <div className='TopBar' style={ state.style }>
+            <AdminItem/>
+            <LoggedInItems/>
+            <LoggedOutItems/>
+        </div>
+    )
 };
 
 export default withRouter(TopBar);

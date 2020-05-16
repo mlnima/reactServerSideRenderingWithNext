@@ -3,7 +3,6 @@ import FA from "react-fontawesome";
 
 const DropDownWidget = props => {
 
-
     const [ state, setState ] = useState({
         open: true,
         icon: 'sort-up'
@@ -19,6 +18,7 @@ const DropDownWidget = props => {
                 icon: 'sort-down'
             })
     }, [ state.open ]);
+
     const openCloseHandler = () => {
         state.open ?
             setState({
@@ -36,16 +36,21 @@ const DropDownWidget = props => {
         } else return null
     };
 
-    return (
-        <div className='DropDownWidget'>
-            <div className="DropDownWidgetHead">
-                <p className='DropDownWidgetHeadTitle'>{ props.title }</p>
-                <button className='DropDownWidgetHeadOpenCloseBtn' onClick={ () => openCloseHandler() }><FA className='fontawesomeMedium' name={ state.icon }/></button>
+    if (props.postData.postType !== 'video' && props.type === 'actors') {
+        return null
+    } else if (props.postData.postType === props.renderFor || props.renderFor === 'all') {
+        return (
+            <div className='DropDownWidget'>
+                <div className="DropDownWidgetHead">
+                    <p className='DropDownWidgetHeadTitle'>{ props.title }</p>
+                    <button className='DropDownWidgetHeadOpenCloseBtn' onClick={ () => openCloseHandler() }><FA className='fontawesomeMedium' name={ state.icon }/></button>
+                </div>
+                <div className="DropDownWidgetComponent">
+                    <RenderTheComponent/>
+                </div>
             </div>
-            <div className="DropDownWidgetComponent">
-                <RenderTheComponent/>
-            </div>
-        </div>
-    );
+        );
+    } else return null
+
 };
 export default DropDownWidget;

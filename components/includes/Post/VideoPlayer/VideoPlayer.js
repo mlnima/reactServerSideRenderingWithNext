@@ -20,21 +20,27 @@ const VideoPlayer = props => {
         } else return null
     }
 
-    return (
-        <div className='video-player'>
-            <meta itemProp="name" content={ props.title }/>
-            <meta itemProp="description" content={ props.description }/>
-            <meta itemProp="duration" content={ props.duration }/>
-            <meta itemProp="thumbnailUrl" content={ props.mainThumbnail }/>
-            <meta itemProp="embedURL" content={ props.videoUrl || props.videoEmbedCode  }/>
-            <meta itemProp="uploadDate" content={ props.lastModify }/>
-            <div ref={ playerElement } className="responsive-player">
-                <WhatToRender/>
+
+    if (props.postType === 'video'){
+        return (
+            <div className='video-player'>
+                <meta itemProp="name" content={ props.title }/>
+                <meta itemProp="description" content={ props.description }/>
+                <meta itemProp="duration" content={ props.duration }/>
+                <meta itemProp="thumbnailUrl" content={ props.mainThumbnail }/>
+                <meta itemProp="embedURL" content={ props.videoUrl || props.videoEmbedCode  }/>
+                <meta itemProp="uploadDate" content={ props.lastModify }/>
+                <div ref={ playerElement } className="responsive-player">
+                    <WhatToRender/>
+                </div>
+
             </div>
 
-        </div>
+        );
+    }else return null
 
-    );
+
+
 
 };
 export default VideoPlayer;

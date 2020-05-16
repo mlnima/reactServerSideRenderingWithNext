@@ -59,18 +59,14 @@ const FileManagerArea = props => {
         }
     }
 
-
-
-
     const onClickHandler = item => {
         let itemPath = clickPathGenerator(item, props.state.path);
         props.setState({
             ...props.state,
+            prevPath:props.state.path,
             path:itemPath,
             clickedItemName:item
-            // prevPath:itemPath
         })
-
     };
 
 
@@ -91,6 +87,3 @@ const FileManagerArea = props => {
 };
 export default withRouter(FileManagerArea);
 
-// <buttonref={() => selectedItem.current[props.data.files.indexOf(item)]}
-// className={[fileLogoDetector(item)]} key={item} name={item} onClick={(e) => onClickHandler(e)}
-// onDoubleClick={(e) => onDoubleClickHandler(e)} onContextMenu={(e) => onContextMenuHandler(e)}/>

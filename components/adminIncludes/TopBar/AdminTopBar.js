@@ -66,6 +66,7 @@ const AdminTopBar = props => {
                     <Link href='/'><a><FA className='fontawesomeMedium' name="home"/></a></Link>
                     <button className='adminNewActionBtn adminTopBarItem' onClick={ () => newItemMenuHandler() }><FA className='fontawesomeMedium' name="plus"/></button>
                     <NewItemMenu active={ state.NewItemMenu }/>
+                    <p className='clearCache adminTopBarItem' onClick={ () => contextData.functions.clearCaches() }>Clear Caches</p>
                 </div>
                 <button className='adminActionBtn adminTopBarItem' onClick={ () => adminActionHandler() }><FA className='fontawesomeMedium' name="user"/></button>
                 <AdminActionMenu active={ state.AdminActionMenu }/>

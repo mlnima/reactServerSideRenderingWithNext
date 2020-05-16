@@ -29,14 +29,8 @@ const fileManager = props => {
     });
 
     useEffect(() => {
-        // setState({
-        //     ...state,
-        //     prevPath: state.path
-        // })
         setData()
     }, [ state.path ]);
-
-
 
     const setData = () => {
         contextData.dispatchState({
@@ -44,32 +38,27 @@ const fileManager = props => {
             loading: true
         });
         readPath(state.path).then(res => {
-            // console.log(res.data.type )
             if (res.data.type === 'dir') {
                 setState({
                     ...state,
                     files: res.data.data,
-                    // prevPath: path
                 })
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 });
             } else if (res.data.type === 'file') {
+
                 setState({
                     ...state,
                     clickedItem: state.path,
-                    path:state.prevPath
+                    path:state.prevPath,
+                    file:res.data.data
                 })
-                // contextData.dispatchSettings({
-                //     ...contextData.settings,
-                //     textEditorCurrentFile: res.data.data
-                // })
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
                 });
-                // props.router.push('/admin/fileManager/textEditor')
             } else {
                 setState({
                     ...state,

@@ -1,0 +1,11 @@
+@import "../../../../styles/buttons";
+@import "../../../../styles/inputs";
+@import "../../../../styles/colors";
+@import "../../../../styles/grid";
+
+.admin-panel-background-setting {
+@include adminDesignPageItems;
+background-attachment: fixed;
+
+
+}

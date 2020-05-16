@@ -11,8 +11,12 @@ const postSchema = mongoose.Schema({
     mainThumbnail: String,
     smallThumbnail: String,
     largeThumbnail: String,
+    images:Array,
     videoTrailerUrl: String,
-    quality: String,
+    quality: {
+        type:String,
+        default:'1080p'
+    },
     format: String,
     source: String,
     sourceSite: String,
@@ -29,14 +33,30 @@ const postSchema = mongoose.Schema({
     categories: Array,
     actors: Array,
     tags: Array,
-    likes: Number,
+    likes: {
+        type: Number,
+        default: 0
+    },
     price: Number,
-    disLikes: Number,
-    views: Number,
-    duration: String,
-    lastModify: Date,
+    disLikes:  {
+        type: Number,
+        default: 0
+    },
+    views:  {
+        type: Number,
+        default: 0
+    },
+    duration:  {
+        type: String,
+        default: '00:00'
+    },
+    lastModify: {
+        type:Date,
+        default:Date.now()
+    },
     premium: Boolean,
-    inSlideShow: Boolean
+    inSlideShow: Boolean,
+    rating:String
 });
 
 module.exports = mongoose.model("posts", postSchema);

@@ -2,9 +2,6 @@ import React, { useEffect } from 'react';
 
 const Format = props => {
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
     return (
         <div className='Format'>
             <select name='postType' value={ props.postData.postType } onChange={ e => props.onChangeHandler(e) }>

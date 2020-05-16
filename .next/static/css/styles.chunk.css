@@ -380,21 +380,21 @@ a {
   padding: 5px 10px;
   height: 30px;
   font-size: 14px; }
-  .TopBar a {
+  .TopBar a, .TopBar p {
     text-decoration: none;
     color: white;
-    padding: 5px 10px;
-    margin: 0 10px; }
-  .TopBar button, .TopBar a {
+    padding: 3px;
+    margin: 0 10px;
     background-color: transparent;
     color: white;
     outline: none;
     border: none;
     transition: .3s;
     font-size: 14px; }
-    .TopBar button:hover, .TopBar a:hover {
-      transform: scale(1.2); }
-    .TopBar button:active, .TopBar a:active {
+    .TopBar a:hover, .TopBar p:hover {
+      transform: scale(1.2);
+      cursor: pointer; }
+    .TopBar a:active, .TopBar p:active {
       transform: scale(1); }
 
 .post-element-div {
@@ -427,7 +427,7 @@ a {
     opacity: 0; }
   100% {
     opacity: 100%; } }
-      .post-element-div .post-element .image .views {
+      .post-element-div .post-element .image .bottom-right {
         position: absolute;
         right: 3px;
         bottom: 3px;
@@ -436,9 +436,9 @@ a {
         padding: 2px;
         border-radius: 5px;
         font-size: small; }
-        .post-element-div .post-element .image .views span {
+        .post-element-div .post-element .image .bottom-right span {
           margin-right: 5px; }
-      .post-element-div .post-element .image .duration {
+      .post-element-div .post-element .image .bottom-left {
         position: absolute;
         left: 3px;
         bottom: 3px;
@@ -447,7 +447,7 @@ a {
         padding: 2px;
         border-radius: 5px;
         font-size: small; }
-      .post-element-div .post-element .image .quality {
+      .post-element-div .post-element .image .top-right {
         position: absolute;
         right: 3px;
         top: 3px;
@@ -551,6 +551,44 @@ a {
     color: white; }
   .comment-form textarea {
     min-height: 200px; }
+
+.product-slide-show {
+  margin: 10px 0;
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%; }
+  .product-slide-show .product-slide-show-image-area {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.30%;
+    margin-bottom: 20px;
+    height: 0; }
+    .product-slide-show .product-slide-show-image-area img {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 50px;
+      padding: 0 !important;
+      border-radius: 10px; }
+  .product-slide-show .product-slide-show-slide-btn {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, 0.5);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: large;
+    padding: 10px;
+    color: white;
+    z-index: 17; }
+  .product-slide-show .product-slide-show-slide-btn-right {
+    right: 1%; }
+  .product-slide-show .product-slide-show-slide-btn-left {
+    left: 1%; }
 
 .Widget {
   margin: 20px 0;
@@ -875,6 +913,26 @@ a {
     .FileManagerControl .file-Manager-control-address-bar input {
       width: 90%;
       background-color: white; }
+  .FileManagerControl .file-Manager-control-quick-access button {
+    background: linear-gradient(#67ae55, #578843);
+    box-shadow: inset 0 1px 1px #a4e388;
+    border-color: #3b6e22 #3b6e22 #2c5115;
+    border-radius: 5px;
+    color: #fff;
+    cursor: pointer;
+    display: inline-block;
+    letter-spacing: 1px;
+    position: relative;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+    width: 200px;
+    height: 40px;
+    min-width: 194px;
+    padding: 7px 20px;
+    text-align: center;
+    line-height: 126%;
+    box-sizing: border-box;
+    margin-top: 10px;
+    margin-bottom: 10px; }
 
 .DropDownWidget {
   display: flex;
@@ -924,6 +982,41 @@ a {
   background-color: #f1f1f1;
   padding: 4px;
   border-radius: 5px; }
+
+.product-information {
+  width: 100%; }
+  .product-information .product-information-add-image, .product-information .product-information-upload-image {
+    display: flex;
+    align-items: center;
+    width: 100%; }
+  .product-information .product-information-add-image input {
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    padding: 3px 5px;
+    width: 200px;
+    height: 30px;
+    width: 90%; }
+  .product-information .product-information-images-preview {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 10px; }
+    .product-information .product-information-images-preview .product-information-image-preview {
+      position: relative;
+      margin: 5px; }
+      .product-information .product-information-images-preview .product-information-image-preview img {
+        width: 250px; }
+      .product-information .product-information-images-preview .product-information-image-preview button {
+        position: absolute;
+        top: 0;
+        right: 0;
+        z-index: 17;
+        background-color: transparent;
+        color: white;
+        border: none;
+        outline: none;
+        font-weight: bold;
+        font-size: x-large; }
 
 .PostCategoriesTagsActors .addNewTag .addBtn {
   margin: 5px 0; }
@@ -1336,6 +1429,9 @@ a {
       width: 90%;
       max-width: 600px;
       padding: 5px; }
+    .uploaded-pop-view .gallery-pop-view-content .uploaded-pop-view-text-content textarea {
+      min-width: 300px;
+      min-height: 200px; }
     .uploaded-pop-view .gallery-pop-view-content .uploaded-pop-view-url {
       margin: 10px 0;
       width: 90%; }
@@ -1456,11 +1552,16 @@ a {
   height: 30px;
   background-color: #24282d;
   grid-area: adminTopBar; }
+  .adminTopBar .adminTopBarControl {
+    display: flex;
+    align-items: center; }
   .adminTopBar .adminTopBarItem {
     background-color: transparent;
     color: white;
     outline: none;
     border: none; }
+  .adminTopBar .clearCache:hover {
+    cursor: pointer; }
 
 @media only screen and (min-width: 768px) {
   .adminSideBarMobileBtn {
@@ -1812,11 +1913,6 @@ a {
   margin-top: 10px;
   margin-bottom: 10px; }
 
-.body-design-setting {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-  grid-gap: 10px; }
-
 #settings {
   display: flex;
   flex-direction: column; }
@@ -1907,6 +2003,8 @@ a {
           margin: 10px; }
           #site-settings-form .site-settings-form-section-parent .site-settings-form-section .items .item button {
             margin: 5px; }
+    #site-settings-form .site-settings-form-section-parent .siteMode {
+      background-color: red; }
 
 #HomePageWidgets {
   display: grid;
@@ -1966,6 +2064,12 @@ a {
           text-align: center;
           font-weight: bold;
           font-size: large; } }
+
+.admin-panel-background-setting {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 10px;
+  background-attachment: fixed; }
 
 .user-admin-edit-profile-page .user-admin-edit-profile-page-section {
   display: flex;
@@ -2216,6 +2320,67 @@ body {
 
 .posts {
   margin: 10px 0; }
+
+.video-player {
+  margin: 10px 0;
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%; }
+  .video-player .responsive-player {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.30%;
+    margin-bottom: 20px;
+    height: 0; }
+    .video-player .responsive-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 50px;
+      padding: 0 !important;
+      border-radius: 10px; }
+    .video-player .responsive-player .video-player-video-type {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 50px;
+      outline: none;
+      border-radius: 10px; }
+
+.post-info .edit-btn-admin {
+  background: linear-gradient(#67ae55, #578843);
+  box-shadow: inset 0 1px 1px #a4e388;
+  border-color: #3b6e22 #3b6e22 #2c5115;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 1px;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  height: 40px;
+  min-width: 194px;
+  padding: 7px 20px;
+  text-align: center;
+  line-height: 126%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.post-info .post-info-body .views .post-rate {
+  color: white; }
+  .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items {
+    color: white; }
+
+.post-info .post-info-body .meta-description {
+  color: white; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

@@ -9,9 +9,17 @@
   height: 30px;
   background-color:$AdminColor100;
   grid-area: adminTopBar ;
-
+.adminTopBarControl{
+  display: flex;
+  align-items: center;
+}
   .adminTopBarItem {
     @include transparentLightTextBtn;
+  }
+  .clearCache{
+    &:hover{
+      cursor: pointer;
+    }
   }
 }
 

@@ -5,24 +5,17 @@ import { getUserData, updateUserData, newAPIKey } from '../../../_variables/ajax
 import { getAbsolutePath } from '../../../_variables/_variables'
 import { AppContext } from '../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
+import { resetPassword } from '../../../_variables/ajaxAuthVariables'
 
 const user = props => {
     const contextData = useContext(AppContext);
     const [ userData, setUserData ] = useState({});
 
     const [ resetPasswordData, setResetPasswordData ] = useState({
-        oldPassword: '',
-        newPassword1: '',
-        newPassword2: ''
+        oldPassword: '123456',
+        newPassword1: '12345678',
+        newPassword2: '12345678'
     })
-
-    useEffect(() => {
-        setUserData({ ...userData, ...props.user })
-    }, [ props ]);
-
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
 
     const onChangeHandler = e => {
         setUserData({
@@ -39,7 +32,7 @@ const user = props => {
     }
 
     const onPasswordResetHandler = () => {
-
+        resetPassword(resetPasswordData.oldPassword, resetPasswordData.newPassword1, resetPasswordData.newPassword2)
     }
 
     const onNewAPIKeyRequest = () => {
@@ -57,20 +50,27 @@ const user = props => {
             ...contextData.state,
             loading: true
         })
-        updateUserData(userData, window.location.origin).then(res => {
-            console.log(res)
+        updateUserData(userData, window.location.origin).then(() => {
             contextData.dispatchState({
                 ...contextData.state,
                 loading: false
             })
         }).catch(err => {
-            console.log(err)
+            console.log(err )
             contextData.dispatchState({
                 ...contextData.state,
                 loading: false
             })
         })
     }
+
+    useEffect(() => {
+        if (props.router){
+            getUserData(props.router.query.id, window.location.origin).then(res=>{
+                setUserData({ ...userData, ...res.data.user })
+            })
+        }
+    }, [ props ]);
 
     return (
         <AdminLayout>
@@ -132,14 +132,5 @@ const user = props => {
         </AdminLayout>
     );
 };
-
-user.getInitialProps = async ({ req, query }) => {
-    const domainName = req ? await getAbsolutePath(req) : '';
-    let user;
-
-    const userData = await getUserData(query.id, domainName)
-    user = userData.data.user
-    return { query, user }
-}
 
 export default withRouter(user);

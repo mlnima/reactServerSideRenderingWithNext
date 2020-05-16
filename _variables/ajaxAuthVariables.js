@@ -7,6 +7,17 @@ export const getUsersList = async () => {
     return await axios.post(window.location.origin + '/api/v1/users/getUsersList', body)
 }
 
+export const resetPassword = async (oldPass, newPass, newPass2) => {
+    console.log( oldPass, newPass, newPass2)
+    let body = {
+        oldPass,
+        newPass,
+        newPass2,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/resetPassword', body)
+}
+
 export const getUsersListAsAdmin = async (id, token) => {
 
     const body = {
@@ -18,8 +29,9 @@ export const getUsersListAsAdmin = async (id, token) => {
 
 }
 
-export const getUserData = async (_id, domainName) => {
+export const getUserData = async (_id, domainName,username) => {
     const body = {
+        username,
         _id,
         token: localStorage.wt
     }

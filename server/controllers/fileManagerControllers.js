@@ -30,10 +30,25 @@ fileManagerControllers.readPath = (req, res) => {
 
 };
 
+fileManagerControllers.readFile = (req,res)=>{
+    const path = req.body.path;
+    fs.readFile(path, (err, fileData) => {
+        if (err) {
+            res.json({ error: true, data: [], type: undefined });
+            res.end()
+        } else {
+            res.json({ error: true, data: fileData.toString('utf8'), type: 'file' });
+            res.end()
+        }
+    })
+}
+
+
+
 fileManagerControllers.uploadFile = async (req, res) => {
     const file = req.files.uploadingFile
     const fileType = file.mimetype.split('/')[0]
-    console.log(fileType )
+    console.log(fileType)
     const desiredMode = 0o2775
     const options = {
         mode: 0o2775
@@ -41,33 +56,28 @@ fileManagerControllers.uploadFile = async (req, res) => {
     const today = new Date(Date.now())
     const year = today.getFullYear()
     const month = today.getMonth() + 1
-    const directoryPath = './static/uploads/' + fileType + '/' + year + '/' + month +'/'
-     fsExtra.ensureDir(directoryPath).then(()=>{
-         const filePath = directoryPath + file.name
-         file.mv(filePath, function (err) {
-             if (err) {
-                 console.log(err)
-                 res.json({ response: 'something is wrong', type: 'error',error:err })
-                 res.end()
-             } else {
-                 res.json({ response: 'Uploaded',path:filePath })
-                 res.end()
-             }
-         });
+    const directoryPath = './static/uploads/' + fileType + '/' + year + '/' + month + '/'
+    fsExtra.ensureDir(directoryPath).then(() => {
+        const filePath = directoryPath + file.name
+        file.mv(filePath, function (err) {
+            if (err) {
+                console.log(err)
+                res.json({ response: 'something is wrong', type: 'error', error: err })
+                res.end()
+            } else {
+                res.json({ response: 'Uploaded', path: filePath })
+                res.end()
+            }
+        });
 
-    }).catch(err=>{
-         console.log( err)
+    }).catch(err => {
+        console.log(err)
 
-         res.end()
-     })
-
-
+        res.end()
+    })
 
     console.log(req.body)
     console.log(file)
-
-
-
 
 }
 

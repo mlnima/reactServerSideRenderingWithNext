@@ -75,9 +75,9 @@ app.prepare().then(()=>{
     server.get('/robots.txt',(req,res)=>{
         return res.status(200).sendFile('robots.txt',robotsOptions)
     });
-    server.get('/favicon.ico',(req,res)=>{
-        return res.status(200).sendFile('/images/favicon/favicon.ico',robotsOptions)
-    });
+    // server.get('/favicon.ico',(req,res)=>{
+    //     return res.status(200).sendFile('/images/favicon/favicon.ico',robotsOptions)
+    // });
 
     //xml siteMap handler
     server.get('/sitemap.xsl',(req,res)=>{ return res.status(200).sendFile('sitemap.xsl',robotsOptions) });
@@ -88,6 +88,7 @@ app.prepare().then(()=>{
      //users handler
     server.post('/api/v1/users/register',(req,res)=>{userController.register(req,res)});
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
+    server.post('/api/v1/users/resetPassword',authMiddleware,(req,res)=>{userController.resetPassword(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
     server.post('/api/v1/users/getUserData',adminAuthMiddleware,(req,res)=>{userController.getUserData(req,res)});
     server.post('/api/v1/users/updateUserData',adminAuthMiddleware,(req,res)=>{userController.updateUserData(req,res)});
@@ -135,6 +136,7 @@ app.prepare().then(()=>{
     });
     // file manager
     server.post('/api/v1/settings/fileManagerControllers-readPath',(req,res)=>{fileManagerControllers.readPath(req,res)});
+    server.post('/api/v1/settings/fileManagerControllers-readFile',(req,res)=>{fileManagerControllers.readFile(req,res)});
     server.post('/api/v1/settings/fileManagerControllers-uploadFile',(req,res)=>{ fileManagerControllers.uploadFile(req,res)});
 
     //API
@@ -149,6 +151,13 @@ app.prepare().then(()=>{
 
 
 //-------------------post route bad for SEO----------------------
+    server.get('/profile',(req,res)=>{
+        const targetComponent = '/profile';
+        const queryParams = {
+            username:req.query.username,
+        }
+        app.render(req,res,targetComponent,queryParams)
+    });
 
     server.get('/posts',(req,res)=>{
         const targetComponent = '/posts';
@@ -170,6 +179,7 @@ app.prepare().then(()=>{
         const targetComponent = '/admin';
         app.render(req,res,targetComponent)
     });
+
 
 
     server.get('/errorPage',(req,res)=>{

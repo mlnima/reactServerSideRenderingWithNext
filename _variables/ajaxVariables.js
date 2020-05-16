@@ -49,11 +49,11 @@ export const getMultipleWidgetWithData = async (widgets, cache, domainName, whic
 }
 
 export const getMultipleSetting = async (settings, cache, domainName, whichPage) => {
-    // const isCache = cache ? '' : `?cache=${ Date.now() }`
+    const isCache = cache ? '' : `?cache=${ Date.now() }`
     const body = {
         ...settings
     };
-    return await axios.post(domainName + `/api/v1/settings/getMultiple?whichPage=${ whichPage }`, body)
+    return await axios.post(domainName + `/api/v1/settings/getMultiple?whichPage=${ whichPage }&cache=${isCache}`, body)
 };
 
 export const getWidgetsWithData = async (position, domainName) => {
@@ -90,8 +90,7 @@ export const executor = async (command) => {
     return await axios.post(window.location.origin + '/api/v1/settings/executor', body)
 }
 
-export const fileUpload = async (image, type) => {
-    //    token: localStorage.wt
+export const fileUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadFile', image)
 }
 

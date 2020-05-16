@@ -16,6 +16,7 @@ import Footer from '../../components/includes/Footer/Footer'
 import { getAbsolutePath } from '../../_variables/_variables'
 import Error from '../_error';
 import dataDecoder from '../../server/tools/dataDecoder'
+import SlideShow from '../../components/includes/Post/SlideShow/SlideShow'
 
 const Post = props => {
     const contextData = useContext(AppContext);
@@ -49,6 +50,7 @@ const Post = props => {
         } else return null
     }
 
+
     // useEffect(() => {
     //     console.log(props)
     // }, [ props ]);
@@ -65,8 +67,9 @@ const Post = props => {
                     <div style={ state.style } className="main">
 
                         <VideoPlayer { ...props.post }/>
-
+                        <SlideShow { ...props.post }/>
                         <PostInfo
+                            {...props}
                             title={ props.post.title }
                             description={ props.post.description }
                             tags={ props.post.tags }
@@ -77,6 +80,7 @@ const Post = props => {
                             disLikes={ props.post.disLikes }
                             views={ props.post.views }
                             videoEmbedCode={ props.post.videoEmbedCode }
+                            rating={props.post.rating}
                         />
                         <CommentsRenderer comments={ props.comments }/>
                         <CommentFrom documentId={ props.post._id }/>
