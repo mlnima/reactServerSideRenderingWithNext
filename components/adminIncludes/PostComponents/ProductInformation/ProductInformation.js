@@ -88,6 +88,11 @@ const ProductInformation = props => {
                 <div className='product-information-section'>
                     <p>Price :</p>
                     <input name='price' type='number' placeholder='Price' value={props.postData.price || 1} onChange={e=>props.onChangeHandler(e)}/>
+                    <select name='priceType' onChange={e=>props.onChangeHandler(e)}>
+                        <option value='negotiable'>Negotiable</option>
+                        <option value='last'>Last Price</option>
+                        <option value='giveAway'>Give Away</option>
+                    </select>
                     <p>Currency :</p>
                     <input name='currency'  value={props.postData.currency || 'Euro'} onChange={e=>props.onChangeHandler(e)}/>
                 </div>

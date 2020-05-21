@@ -271,8 +271,7 @@ const AppProvider = props => {
         await axios__WEBPACK_IMPORTED_MODULE_3___default.a.post('/api/v1/users/getUserInfo', {
           token: localStorage.wt
         }).then(res => {
-          // dispatchUserData({ ...userData, ...res.data.userData });
-          dispatchUserData(_objectSpread({}, userData, {}, _server_tools_dataDecoder__WEBPACK_IMPORTED_MODULE_4___default()(res.data).userData)); // console.log(dataDecoder(res.data) )
+          dispatchUserData(_objectSpread({}, userData, {}, _server_tools_dataDecoder__WEBPACK_IMPORTED_MODULE_4___default()(res.data).userData));
         }).catch(err => {
           console.log(err);
         });

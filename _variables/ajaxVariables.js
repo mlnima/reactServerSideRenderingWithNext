@@ -94,6 +94,9 @@ export const fileUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadFile', image)
 }
 
+export const userImageUpload = async (image) => {
+    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-userImageUpload', image)
+}
 
 export const youtubeDataScrapper = async (url) => {
     const body = {

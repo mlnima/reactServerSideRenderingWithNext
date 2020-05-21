@@ -17,6 +17,7 @@ import { getAbsolutePath } from '../../_variables/_variables'
 import Error from '../_error';
 import dataDecoder from '../../server/tools/dataDecoder'
 import SlideShow from '../../components/includes/Post/SlideShow/SlideShow'
+import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
 
 const Post = props => {
     const contextData = useContext(AppContext);
@@ -84,9 +85,10 @@ const Post = props => {
                         />
                         <CommentsRenderer comments={ props.comments }/>
                         <CommentFrom documentId={ props.post._id }/>
-
+                        <div className='under-post-widget-area'>
+                            <WidgetsRenderer widgets={ props.widgets } position='underPost'/>
+                        </div>
                     </div>
-
                     <Sidebar key='postPageSidebar' isActive={ props.identity.data.postPageSidebar } widgets={ props.widgets } position='postPageSidebar'/>
                 </div>
                 <Footer widgets={ props.widgets } position='footer'/>
@@ -110,7 +112,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     const postData = await getPost(postBody, true, domainName, query.postTitle)
     post = dataDecoder(postData.data.post).post
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header' ] }, true, domainName, 'postPage')
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header','underPost' ] }, true, domainName, 'postPage')
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName, 'postPage')
 
     if (!post) {

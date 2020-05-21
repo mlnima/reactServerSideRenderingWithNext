@@ -135,6 +135,7 @@ a {
 .withSidebar {
   display: grid;
   grid-template-columns: 1fr;
+  grid-gap: 10px;
   grid-template-areas: 'content' 'sidebar'; }
   @media only screen and (min-width: 768px) {
     .withSidebar {
@@ -2006,10 +2007,10 @@ a {
     #site-settings-form .site-settings-form-section-parent .siteMode {
       background-color: red; }
 
-#HomePageWidgets {
+#widget-setting {
   display: grid;
   grid-template-columns: 1fr; }
-  #HomePageWidgets .saveBtn {
+  #widget-setting .saveBtn {
     background: linear-gradient(#67ae55, #578843);
     box-shadow: inset 0 1px 1px #a4e388;
     border-color: #3b6e22 #3b6e22 #2c5115;
@@ -2029,14 +2030,14 @@ a {
     box-sizing: border-box;
     margin-top: 10px;
     margin-bottom: 10px; }
-  #HomePageWidgets .widgets {
+  #widget-setting .widgets {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(1fr));
     grid-gap: 10px; }
-    #HomePageWidgets .widgets .widgetAdminPanelItem {
+    #widget-setting .widgets .widgetAdminPanelItem {
       background-color: #282828;
       width: 100%; }
-      #HomePageWidgets .widgets .widgetAdminPanelItem .widgetAdminPanelItemHeader {
+      #widget-setting .widgets .widgetAdminPanelItem .widgetAdminPanelItemHeader {
         background-color: black;
         color: white;
         padding: 10px;
@@ -2046,18 +2047,18 @@ a {
         font-size: large; }
 
 @media only screen and (min-width: 600px) {
-  #HomePageWidgets {
+  #widget-setting {
     grid-template-columns: 100px 1fr;
     grid-gap: 50px; }
-    #HomePageWidgets .widgets {
+    #widget-setting .widgets {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap; }
-      #HomePageWidgets .widgets .widgetAdminPanelItem {
+      #widget-setting .widgets .widgetAdminPanelItem {
         width: 550px;
         margin: 10px;
         border-radius: 10px; }
-        #HomePageWidgets .widgets .widgetAdminPanelItem .widgetAdminPanelItemHeader {
+        #widget-setting .widgets .widgetAdminPanelItem .widgetAdminPanelItemHeader {
           color: white;
           padding: 10px;
           border-radius: 5px;
@@ -2216,6 +2217,9 @@ body {
     grid-template-columns: 1fr 200px;
     grid-template-rows: auto; } }
 
+.profile-page .profile-image img {
+  width: 150px; }
+
 .post .main {
   justify-self: center;
   display: flex;
@@ -2302,6 +2306,8 @@ body {
           .post .main .post-info .post-info-body .meta-description .tags-categories-actors .content .post-meta-item a {
             color: white;
             display: initial; }
+  .post .main .under-post-widget-area {
+    width: 100%; }
 
 @media only screen and (min-width: 768px) {
   .post {
@@ -2320,67 +2326,6 @@ body {
 
 .posts {
   margin: 10px 0; }
-
-.video-player {
-  margin: 10px 0;
-  position: relative;
-  top: 0;
-  right: 0;
-  left: 0;
-  width: 100%; }
-  .video-player .responsive-player {
-    overflow: hidden;
-    position: relative;
-    padding-bottom: 56.30%;
-    margin-bottom: 20px;
-    height: 0; }
-    .video-player .responsive-player iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      margin-bottom: 50px;
-      padding: 0 !important;
-      border-radius: 10px; }
-    .video-player .responsive-player .video-player-video-type {
-      position: absolute;
-      top: 0;
-      left: 0;
-      height: 100%;
-      width: 100%;
-      margin-bottom: 50px;
-      outline: none;
-      border-radius: 10px; }
-
-.post-info .edit-btn-admin {
-  background: linear-gradient(#67ae55, #578843);
-  box-shadow: inset 0 1px 1px #a4e388;
-  border-color: #3b6e22 #3b6e22 #2c5115;
-  border-radius: 5px;
-  color: #fff;
-  cursor: pointer;
-  display: inline-block;
-  letter-spacing: 1px;
-  position: relative;
-  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-  width: 200px;
-  height: 40px;
-  min-width: 194px;
-  padding: 7px 20px;
-  text-align: center;
-  line-height: 126%;
-  box-sizing: border-box;
-  margin-top: 10px;
-  margin-bottom: 10px; }
-
-.post-info .post-info-body .views .post-rate {
-  color: white; }
-  .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items {
-    color: white; }
-
-.post-info .post-info-body .meta-description {
-  color: white; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/

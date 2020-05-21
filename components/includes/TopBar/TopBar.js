@@ -32,12 +32,24 @@ const TopBar = props => {
         } else return null
     }
 
+
+
+    const MyProfile = ()=>{
+        if (contextData.siteIdentity.membership){
+            return       <Link href={ `/profile?username=${ contextData.userData.username }` }><a>My Profile</a></Link>
+        }else return null
+    }
+
+
+
+
+
     const LoggedInItems = () => {
         if (contextData.userData.username) {
             return (
                 <>
                     <p style={ state.style } onClick={ () => contextData.functions.logOutUser() }>Log Out</p>
-                    <Link href={ `/profile?username=${ contextData.userData.username }` }><a>My Profile</a></Link>
+                   <MyProfile/>
                 </>
             )
         } else return null

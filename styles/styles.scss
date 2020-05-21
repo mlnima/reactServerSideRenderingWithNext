@@ -92,6 +92,7 @@ a {
 .withSidebar {
   display: grid;
   grid-template-columns: 1fr;
+  grid-gap: 10px;
   grid-template-areas: 'content' 'sidebar';
   @media only screen and (min-width: 768px) {
     grid-template-columns: 300px 1fr;

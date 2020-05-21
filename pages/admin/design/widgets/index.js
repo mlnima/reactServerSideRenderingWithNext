@@ -12,7 +12,6 @@ const HomePageWidgets = props => {
     const contextData = useContext(AppContext);
 
     useEffect(() => {
-console.log( props)
         if (props.widgets) {
             contextData.dispatchWidgetsSettings({
                 ...contextData.widgetsSettings,
@@ -44,7 +43,7 @@ console.log( props)
         <AdminLayout>
             <h1>Widgets Settings :</h1>
             <h2>Add Widgets:</h2>
-            <div id='HomePageWidgets'>
+            <div id='widget-setting'>
                 <div className="sidePanel">
                     <AddWidgetMenu/>
                 </div>

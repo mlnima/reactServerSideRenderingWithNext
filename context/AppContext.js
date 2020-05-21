@@ -107,9 +107,7 @@ const AppProvider = props => {
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
                 await axios.post('/api/v1/users/getUserInfo', { token: localStorage.wt }).then(res => {
-                    // dispatchUserData({ ...userData, ...res.data.userData });
                     dispatchUserData({ ...userData, ...dataDecoder(res.data).userData });
-                    // console.log(dataDecoder(res.data) )
                 }).catch(err => {
                     console.log(err);
                 })

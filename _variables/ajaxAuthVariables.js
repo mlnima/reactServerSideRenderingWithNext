@@ -35,9 +35,15 @@ export const getUserData = async (_id, domainName,username) => {
         _id,
         token: localStorage.wt
     }
-
     return await axios.post(domainName + '/api/v1/users/getUserData', body)
 }
+
+// export const getMyProfileData = async () => {
+//     const body = {
+//         token: localStorage.wt
+//     }
+//     return await axios.post(window.location.origin + '/api/v1/users/getMyProfileData', body)
+// }
 
 export const updateUserData = async (data, domainName) => {
     const body = {

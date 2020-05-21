@@ -69,60 +69,68 @@ const PostElement = props => {
         return dataToRender()
     };
 
-    const BottomRight = () => {
-        switch ( props.state.postType ) {
-            case 'video':
-                return (
-                    <span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>
-                )
-            case 'product':
-                return (
-                    <span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>
-                )
-            default :
-                break
-        }
-    }
 
-
-    const RenderProgressBar = ()=>{
-        if (props.state.rating !== 'disable'){
+    const RenderProgressBar = () => {
+        if (props.state.rating !== 'disable') {
             return (
                 <ProgressBar value={ likeValueCalculator(props.state.likes, props.state.disLikes) } percent={ true }/>
             )
+        } else return null
+    }
+
+    const BottomRight = () => {
+        if (props.state) {
+            switch ( props.state.postType ) {
+                case 'video':
+                    return (
+                        <span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>
+                    )
+                case 'product':
+                    return (
+                        <span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>
+                    )
+                default :
+                    break
+            }
         }else return null
-    }
 
-    const BottomLeft = ()=>{
-        switch ( props.state.postType ) {
-            case 'video':
-                return (
-                    <span ref={ bottomLeft } className='bottom-left'>{ props.state.duration }</span>
-                )
-            case 'product':
-                return (
-                    <span ref={ bottomRight } className='bottom-left'><FA className='fontawesomeSmall' name="eye"/>{ props.state.price + ' ' + (props.state.currency || 'Euro') }</span>
-                )
-            default :
-                break
-        }
     }
 
 
-    const TopRight = ()=>{
-        switch ( props.state.postType ) {
-            case 'video':
-                return (
-                    <span ref={ qualityLabel } className='top-right'>{ props.state.quality }</span>
-                )
-            case 'product':
-                return null
-            default :
-                break
-        }
+
+    const BottomLeft = () => {
+        if (props.state) {
+            switch ( props.state.postType ) {
+                case 'video':
+                    return (
+                        <span ref={ bottomLeft } className='bottom-left'>{ props.state.duration }</span>
+                    )
+                case 'product':
+                    return (
+                        <span ref={ bottomRight } className='bottom-left'><FA className='fontawesomeSmall' name="eye"/>{ props.state.price + ' ' + (props.state.currency || 'Euro') }</span>
+                    )
+                default :
+                    break
+            }
+        } else return null
+
     }
 
+    const TopRight = () => {
+        if (props.state) {
+            switch ( props.state.postType ) {
+                case 'video':
+                    return (
+                        <span ref={ qualityLabel } className='top-right'>{ props.state.quality }</span>
+                    )
+                case 'product':
+                    return null
+                default :
+                    break
+            }
+        } else return null
 
+    }
 
     const RenderDataOnImage = () => {
         if (state.isHover) {
@@ -134,7 +142,7 @@ const PostElement = props => {
                     <BottomRight/>
                     <BottomLeft/>
                     {/*<span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>*/ }
-                    {/*<span ref={ bottomLeft } className='bottom-left'>{ props.state.duration }</span>*/}
+                    {/*<span ref={ bottomLeft } className='bottom-left'>{ props.state.duration }</span>*/ }
                 </>
             )
         }
@@ -154,7 +162,7 @@ const PostElement = props => {
                             <ImageContent/>
                             <RenderDataOnImage/>
                         </div>
-                      <RenderProgressBar/>
+                        <RenderProgressBar/>
                         <h3>{ props.state.title }</h3>
                     </div>
                 </a>

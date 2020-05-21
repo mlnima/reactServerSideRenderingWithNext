@@ -23,6 +23,8 @@ const settings = props => {
         postPageSidebar: props.identity.postPageSidebar || false,
         postsPageSidebar: props.identity.postsPageSidebar || false,
         metaPageSidebar: props.identity.postsPageSidebar || false,
+        membership:props.identity.membership || false,
+        allowUserToPost:props.identity.allowUserToPost || false,
     });
 
     const onSubmitHandler = e => {
@@ -120,7 +122,7 @@ const settings = props => {
                             </select>
                         </div>
                         <div className="site-settings-form-section defaultPostType">
-                            <p>Default Post Type:</p>
+                            <p>Default new Post Type:</p>
                             <select name='defaultPostType' value={ state.defaultPostType } onChange={ e => onChangeHandler(e) }>
                                 <option value='video'>Video</option>
                                 <option value='product'>Product</option>
@@ -130,10 +132,24 @@ const settings = props => {
                             </select>
                         </div>
                         <div className="site-settings-form-section defaultPostRating">
-                            <p>Default Post Rating:</p>
+                            <p>Default new Post Rating:</p>
                             <select name='defaultPostRating' value={ state.defaultPostRating } onChange={ e => onChangeHandler(e) }>
                                 <option value='enable'>Enable</option>
                                 <option value='disable'>Disable</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section membership">
+                            <p>Membership:</p>
+                            <select name='membership' value={ state.membership } onChange={ e => onChangeHandler(e) }>
+                                <option value='true'>Enable</option>
+                                <option value='false'>Disable</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section allowUserToPost">
+                            <p>Allow Users To Create New Post:</p>
+                            <select name='allowUserToPost' value={ state.allowUserToPost } onChange={ e => onChangeHandler(e) }>
+                                <option value='true'>Enable</option>
+                                <option value='false'>Disable</option>
                             </select>
                         </div>
                     </div>

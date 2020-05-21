@@ -96,7 +96,6 @@ userControllers.login = async (req, res) => {
             res.json({ response: 'server Error !', type: 'error' })
         })
 };
-
 userControllers.resetPassword = (req, res) => {
     const userId = req.userData._id
     userSchema.findById(userId).exec().then(userData => {
@@ -133,9 +132,8 @@ userControllers.resetPassword = (req, res) => {
 
 userControllers.getUserInfo = (req, res) => {
     userSchema.findById(req.userData._id).exec().then(user => {
-        let userDataToSend = user
-        userDataToSend.password = 'xxxxxx'
-        // res.json({userData:user});
+        let userDataToSend = user.toObject()
+        delete userDataToSend.password
         res.json(dataEncoder({ userData: userDataToSend }));
         res.end()
     }).catch(err => {

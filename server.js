@@ -90,7 +90,8 @@ app.prepare().then(()=>{
     server.post('/api/v1/users/login',(req,res)=>{userController.login(req,res)});
     server.post('/api/v1/users/resetPassword',authMiddleware,(req,res)=>{userController.resetPassword(req,res)});
     server.post('/api/v1/users/getUserInfo',authMiddleware,(req,res)=>{userController.getUserInfo(req,res)});
-    server.post('/api/v1/users/getUserData',adminAuthMiddleware,(req,res)=>{userController.getUserData(req,res)});
+    server.post('/api/v1/users/getUserData',authMiddleware,(req,res)=>{userController.getUserData(req,res)});
+    // server.post('/api/v1/users/getMyProfileData',authMiddleware,(req,res)=>{userController.getMyProfileData(req,res)});
     server.post('/api/v1/users/updateUserData',adminAuthMiddleware,(req,res)=>{userController.updateUserData(req,res)});
     server.post('/api/v1/users/getUsersList',(req,res)=>{userController.getUsersList(req,res)});
     server.post('/api/v1/users/getUsersListAsAdmin',adminAuthMiddleware,(req,res)=>{userController.getUsersListAsAdmin(req,res)});
@@ -138,6 +139,7 @@ app.prepare().then(()=>{
     server.post('/api/v1/settings/fileManagerControllers-readPath',(req,res)=>{fileManagerControllers.readPath(req,res)});
     server.post('/api/v1/settings/fileManagerControllers-readFile',(req,res)=>{fileManagerControllers.readFile(req,res)});
     server.post('/api/v1/settings/fileManagerControllers-uploadFile',(req,res)=>{ fileManagerControllers.uploadFile(req,res)});
+    server.post('/api/v1/settings/fileManagerControllers-userImageUpload',authMiddleware,(req,res)=>{ fileManagerControllers.userImageUpload(req,res)});
 
     //API
     server.post('/api/v1/posts/createNewByApi',apiRequestMiddleware,(req,res)=>{apiPostControllers.creatPost(req,res)});
@@ -160,6 +162,7 @@ app.prepare().then(()=>{
     });
 
     server.get('/posts',(req,res)=>{
+        console.log( 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
         const targetComponent = '/posts';
         const queryParams = {
             size:req.query.size,
