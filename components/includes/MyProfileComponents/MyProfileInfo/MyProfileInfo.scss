@@ -1,0 +1,16 @@
+@import "../../../../styles/colors";
+
+.my-profile-info{
+
+  .my-profile-fields{
+    display: flex;
+    flex-direction: column;
+    .profile-edit-input{
+
+    }
+    .profile-info-label{
+      color:$light100 ;
+    }
+  }
+
+}

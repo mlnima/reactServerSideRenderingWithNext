@@ -2,44 +2,36 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileCoverImage/ProfileCoverImage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileImage/ProfileImage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/setupAdminAccount.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/MyProfileInfo/MyProfileInfo.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/MyProfileInfo/MyProfileInfo.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/MyProfilePosts/MyProfilePosts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileComponentsRenderer/ProfileComponentsRenderer.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.scss" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/static/images/fontawesome/camera-solid.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/build-manifest.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_app.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/chunks/styles.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/styles.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/chunks/styles.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/chunks/styles.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/css/styles.chunk.css" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/css/styles.chunk.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/css/styles.chunk.css.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/css/styles.chunk.css.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxAuthVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxAuthVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ProductInformation/ProductInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ProductInformation/ProductInformation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/TopBar/TopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TopBar/TopBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/context/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/AppContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodemon.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/widgets.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/widgets.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/Post.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/Post.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileCoverImage/ProfileCoverImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileCoverImage/ProfileCoverImage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileImage/ProfileImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileImage/ProfileImage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profile/Profile.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/Profile.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/fileManagerControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/fileManagerControllers.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/userControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/userControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/styles.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/userSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/userSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/global.scss" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -137,8 +129,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Node.js.setupAdminAccount.js" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.setupAdminAccount.js" />
         <item itemvalue="Node.js.testAPI.js" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
@@ -285,7 +277,12 @@
       <workItem from="1589818326022" duration="3112000" />
       <workItem from="1589905129584" duration="2536000" />
       <workItem from="1589979307759" duration="8655000" />
-      <workItem from="1590051895979" duration="4262000" />
+      <workItem from="1590051895979" duration="10449000" />
+      <workItem from="1590136867300" duration="4785000" />
+      <workItem from="1590157691017" duration="1298000" />
+      <workItem from="1590251849165" duration="1215000" />
+      <workItem from="1590417824120" duration="6374000" />
+      <workItem from="1590514277683" duration="1213000" />
     </task>
     <servers />
   </component>

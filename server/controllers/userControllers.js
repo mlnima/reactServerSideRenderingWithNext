@@ -146,7 +146,7 @@ userControllers.getUserInfo = (req, res) => {
 userControllers.updateUserData = (req, res) => {
     const userID = req.body.data._id
     console.log(req.body)
-    userSchema.findByIdAndUpdate(userID, req.body.data, { new: true }).exec().then(savedData => {
+    userSchema.findByIdAndUpdate(userID, {...req.body.data}, { new: true }).exec().then(savedData => {
         res.json({ updatedData: savedData })
         res.end()
     }).catch(err => {

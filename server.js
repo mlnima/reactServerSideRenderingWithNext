@@ -139,6 +139,7 @@ app.prepare().then(()=>{
     server.post('/api/v1/settings/fileManagerControllers-readPath',(req,res)=>{fileManagerControllers.readPath(req,res)});
     server.post('/api/v1/settings/fileManagerControllers-readFile',(req,res)=>{fileManagerControllers.readFile(req,res)});
     server.post('/api/v1/settings/fileManagerControllers-uploadFile',(req,res)=>{ fileManagerControllers.uploadFile(req,res)});
+    //need auth
     server.post('/api/v1/settings/fileManagerControllers-userImageUpload',authMiddleware,(req,res)=>{ fileManagerControllers.userImageUpload(req,res)});
 
     //API

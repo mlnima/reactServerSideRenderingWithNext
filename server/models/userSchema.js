@@ -24,6 +24,7 @@ const userSchema = mongoose.Schema({
     profileImage:String,
     mediumProfileImage:String,
     smallProfileImage:String,
+    coverImage:String,
     gender:String,
     relationshipStatus:String,
     city:String,

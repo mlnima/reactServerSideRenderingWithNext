@@ -6,23 +6,32 @@ import dataDecoder from '../../server/tools/dataDecoder'
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import { AppContext } from '../../context/AppContext'
 import ProfileImage from '../../components/includes/MyProfileComponents/ProfileImage/ProfileImage'
+import ProfileCoverImage from '../../components/includes/MyProfileComponents/ProfileCoverImage/ProfileCoverImage'
+import ProfileNavigation from '../../components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation'
+import ProfileComponentsRenderer from '../../components/includes/MyProfileComponents/ProfileComponentsRenderer/ProfileComponentsRenderer'
+import MyProfileInfo from '../../components/includes/MyProfileComponents/MyProfileInfo/MyProfileInfo'
 
 const Profile = props => {
     const contextData = useContext(AppContext);
-    const [ state, setState ] = useState({});
+    const [ state, setState ] = useState({
+        activeTab:'MyProfileInfo'
+    });
 
     useEffect(() => {
-        console.log(contextData.siteIdentity)
-    }, [ contextData.siteIdentity ]);
-    useEffect(() => {
-        console.log(contextData.userData)
-    }, [ contextData.userData ]);
+        console.log(state)
+
+    }, [ state ]);
+
 
     return (
         <AppLayout>
             <SiteSettingSetter { ...props }/>
             <div className='profile-page'>
-                <ProfileImage/>
+
+                <ProfileCoverImage/>
+                <ProfileNavigation state={state} setState={setState}/>
+                <ProfileComponentsRenderer activeComponent={state.activeTab}/>
+
             </div>
         </AppLayout>
     );

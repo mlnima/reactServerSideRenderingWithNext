@@ -81,9 +81,10 @@ fileManagerControllers.uploadFile = async (req, res) => {
 
 }
 fileManagerControllers.userImageUpload = async (req, res) => {
-    const file = req.files.uploadingFile
+    const file = req.files.profileImage
     const userId = req.userData._id
-
+   // console.log(  req.userData, req.files.profileImage)
+   //  res.end()
     const directoryPath = './static/uploads/users/'+userId +'/'
     fsExtra.ensureDir(directoryPath).then(() => {
         const filePath = directoryPath + file.name

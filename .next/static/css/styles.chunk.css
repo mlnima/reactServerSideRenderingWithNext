@@ -2217,8 +2217,53 @@ body {
     grid-template-columns: 1fr 200px;
     grid-template-rows: auto; } }
 
-.profile-page .profile-image img {
-  width: 150px; }
+.profile-page .upload-profile-image-btn {
+  position: absolute;
+  bottom: 5px;
+  right: 5px;
+  background: transparent;
+  border: none;
+  outline: none;
+  opacity: 50%; }
+  .profile-page .upload-profile-image-btn .fontawesomeSvgSmall {
+    border: solid black 1px;
+    background-color: white;
+    border-radius: 50%;
+    padding: 5px;
+    z-index: 17;
+    width: 25px;
+    height: 25px; }
+
+.profile-page .profile-cover-image {
+  position: relative;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+  height: 300px; }
+  .profile-page .profile-cover-image .profile-image {
+    position: absolute;
+    bottom: 0;
+    left: 5%;
+    border: black 1px solid; }
+    .profile-page .profile-cover-image .profile-image .profile-image-img {
+      width: 150px; }
+
+.profile-navigation {
+  padding: 5px; }
+  .profile-navigation button {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0 5x; }
+    .profile-navigation button:hover {
+      outline: none; }
+
+.my-profile-info .my-profile-fields {
+  display: flex;
+  flex-direction: column; }
+  .my-profile-info .my-profile-fields .profile-info-label {
+    color: white; }
 
 .post .main {
   justify-self: center;
