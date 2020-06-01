@@ -26,7 +26,8 @@
       input {
         @include inputNormalWithRadius;
       }
-      p{
+
+      p {
         color: $light100;
       }
 
@@ -35,5 +36,18 @@
     .submitBtn {
       @include greenActionBtn;
     }
+  }
+}
+@media only screen and (min-width: 768px) {
+  .youtube-last-video {
+    width: 50%;
+    height: 50%;
+    margin: auto;
+  }
+
+  .youtube-last-video > div > iframe {
+    border: none;
+    border-radius: 25px;
+
   }
 }

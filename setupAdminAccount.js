@@ -17,7 +17,8 @@ mongoose.connect(mongoDBConnectionUrl, {
 let adminData = {
     username: 'Admin',
     password: 'Admin',
-    role: 'administrator'
+    role: 'administrator',
+    keyMaster:true
 }
 
 bcrypt.hash(adminData.password, 10, function (err, hash) {

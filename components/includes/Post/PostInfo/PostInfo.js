@@ -22,8 +22,6 @@ const PostInfo = props => {
         mode: 'view'
     });
 
-
-
     useEffect(() => {
         setState({
             ...state,
@@ -32,7 +30,6 @@ const PostInfo = props => {
         });
         likeDislikeView(props.id, 'views')
     }, []);
-
 
     useEffect(() => {
         console.log(props)
@@ -47,20 +44,20 @@ const PostInfo = props => {
     }
 
     const EditLinksForAuthor = () => {
-            if (props.editMode) {
-                return (
-                    <>
-                        <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'view' } } : '/' }><a className='edit-btn-admin'>View Mode</a></Link>
-                        <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'view' } } : '/' }><a className='edit-btn-admin'>Delete</a></Link>
-                    </>
-                )
-            } else {
-                return (
-                    <>
-                        <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'edit' } } : '/' }><a className='edit-btn-admin'>Edit Mode</a></Link>
-                    </>
-                )
-            }
+        if (props.editMode && (contextData.userData._id === props.author || contextData.userData.username === props.author)) {
+            return (
+                <>
+                    <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'view' } } : '/' }><a className='edit-btn-admin'>View Mode</a></Link>
+                    <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'view' } } : '/' }><a className='edit-btn-admin'>Delete</a></Link>
+                </>
+            )
+        } else if(!props.editMode && (contextData.userData._id === props.author || contextData.userData.username === props.author)) {
+            return (
+                <>
+                    <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'edit' } } : '/' }><a className='edit-btn-admin'>Edit Mode</a></Link>
+                </>
+            )
+        }else return null
     }
 
     const RenderRatingButtons = () => {
@@ -113,36 +110,34 @@ const PostInfo = props => {
     }
 
     const RenderTitle = () => {
-        if (props.editMode){
-            return(
+        if (props.editMode) {
+            return (
                 <div className='edit-mode'>
                     <p className='editModeText'>Title :</p>
-                    <input type="text" value={props.title}/>
+                    <input type="text" value={ props.title }/>
                 </div>
             )
-        }else{
-            return(
+        } else {
+            return (
                 <h1 className='post-title'>{ props.title }</h1>
             )
         }
     }
 
-    const RenderDescription = ()=>{
-        if (props.editMode){
-            return(
+    const RenderDescription = () => {
+        if (props.editMode) {
+            return (
                 <div className='edit-mode'>
                     <p className='editModeText'>Description :</p>
-                    <textarea  value={props.description}/>
+                    <textarea value={ props.description }/>
                 </div>
             )
-        }else{
-            return(
+        } else {
+            return (
                 <div className="description">{ props.description }</div>
             )
         }
     }
-
-
 
     return (
         <div className='post-info'>
