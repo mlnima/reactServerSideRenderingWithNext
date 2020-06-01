@@ -154,16 +154,28 @@ app.prepare().then(()=>{
 
 
 //-------------------post route bad for SEO----------------------
+//     server.get('/profile',(req,res)=>{
+//         const targetComponent = '/profile';
+//         const queryParams = {
+//             username:req.query.username,
+//         }
+//         app.render(req,res,targetComponent,queryParams)
+//     });
     server.get('/profile',(req,res)=>{
         const targetComponent = '/profile';
         const queryParams = {
             username:req.query.username,
+            size:req.query.size,
+            pageNo:req.query.pageNo,
+            postType:req.query.postType,
+            keyword:req.query.keyword,
+            tab:req.query.author,
+            sort:req.query.sort,
         }
         app.render(req,res,targetComponent,queryParams)
     });
 
     server.get('/posts',(req,res)=>{
-        console.log( 'xxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxxx')
         const targetComponent = '/posts';
         const queryParams = {
             size:req.query.size,
@@ -178,6 +190,7 @@ app.prepare().then(()=>{
         }
         app.render(req,res,targetComponent,queryParams)
     });
+
 
     server.get('/admin',(req,res)=>{
         const targetComponent = '/admin';

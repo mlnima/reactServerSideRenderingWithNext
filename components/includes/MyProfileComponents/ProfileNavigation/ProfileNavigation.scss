@@ -1,13 +1,21 @@
 .profile-navigation{
   padding: 5px;
-  button{
+  button,a{
     background-color: transparent;
     border: none;
     outline: none;
     cursor: pointer;
-    margin: 0 5x;
+    margin: 0 5px;
     &:hover{
       outline: none;
     }
+  }
+
+  a{
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0 5px;
   }
 }

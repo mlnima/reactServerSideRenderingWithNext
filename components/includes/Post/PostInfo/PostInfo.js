@@ -10,6 +10,7 @@ import LikeBtnSvg from '../../../../static/images/fontawesome/thumbs-up-solid.sv
 import DisLikeBtnSvg from '../../../../static/images/fontawesome/thumbs-down-solid.svg'
 import './PostInfo.scss'
 import { AppContext } from '../../../../context/AppContext'
+import withRouter from 'next/dist/client/with-router'
 // import * as socialShare from "react-share"
 
 const PostInfo = props => {
@@ -17,8 +18,11 @@ const PostInfo = props => {
 
     const [ state, setState ] = useState({
         likeValue: 0,
-        postAbsolutePath: ''
+        postAbsolutePath: '',
+        mode: 'view'
     });
+
+
 
     useEffect(() => {
         setState({
@@ -29,9 +33,7 @@ const PostInfo = props => {
         likeDislikeView(props.id, 'views')
     }, []);
 
-    // useEffect(() => {
-    //     console.log(contextData.userData)
-    // }, [ contextData.userData ]);
+
     useEffect(() => {
         console.log(props)
     }, [ props ]);
@@ -39,9 +41,26 @@ const PostInfo = props => {
     const EditLinkForAdmin = () => {
         if (contextData.userData.role === 'administrator') {
             return (
-                <Link href={ `/admin/post?id=${ props.id }` }><a className='edit-btn-admin'>Edit</a></Link>
+                <Link href={ `/admin/post?id=${ props.id }` }><a className='edit-btn-admin'>Edit as Admin</a></Link>
             )
         } else return null
+    }
+
+    const EditLinksForAuthor = () => {
+            if (props.editMode) {
+                return (
+                    <>
+                        <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'view' } } : '/' }><a className='edit-btn-admin'>View Mode</a></Link>
+                        <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'view' } } : '/' }><a className='edit-btn-admin'>Delete</a></Link>
+                    </>
+                )
+            } else {
+                return (
+                    <>
+                        <Link href={ props.router ? { pathname: props.router.pathname, query: { ...props.router.query, mode: 'edit' } } : '/' }><a className='edit-btn-admin'>Edit Mode</a></Link>
+                    </>
+                )
+            }
     }
 
     const RenderRatingButtons = () => {
@@ -66,7 +85,7 @@ const PostInfo = props => {
     }
 
     const RenderRatingData = () => {
-        if (props.rating  !== 'disable') {
+        if (props.rating !== 'disable') {
             return (
                 <>
                     <ProgressBar value={ state.likeValue } percent={ false }/>
@@ -93,12 +112,46 @@ const PostInfo = props => {
         } else return null
     }
 
+    const RenderTitle = () => {
+        if (props.editMode){
+            return(
+                <div className='edit-mode'>
+                    <p className='editModeText'>Title :</p>
+                    <input type="text" value={props.title}/>
+                </div>
+            )
+        }else{
+            return(
+                <h1 className='post-title'>{ props.title }</h1>
+            )
+        }
+    }
+
+    const RenderDescription = ()=>{
+        if (props.editMode){
+            return(
+                <div className='edit-mode'>
+                    <p className='editModeText'>Description :</p>
+                    <textarea  value={props.description}/>
+                </div>
+            )
+        }else{
+            return(
+                <div className="description">{ props.description }</div>
+            )
+        }
+    }
+
+
+
     return (
         <div className='post-info'>
             <EditLinkForAdmin/>
+            <EditLinksForAuthor/>
+
             <div className='post-info-head'>
 
-                <h1>{ props.title }</h1>
+                <RenderTitle/>
                 <RenderRatingButtons/>
             </div>
 
@@ -106,10 +159,10 @@ const PostInfo = props => {
                 <div className="views">
                     <DownloadLink downloadLink={ props.videoEmbedCode }/>
                     <span>{ props.views } views</span>
-<RenderRatingData/>
+                    <RenderRatingData/>
                 </div>
                 <div className="meta-description">
-                    <div className="description">{ props.description }</div>
+                    <RenderDescription/>
                     <TagsAndCategoriesActors type='actors' data={ props.actors || [] }/>
                     <TagsAndCategoriesActors type='tags' data={ props.tags || [] }/>
                     <TagsAndCategoriesActors type='categories' data={ props.categories || [] }/>
@@ -119,7 +172,7 @@ const PostInfo = props => {
         </div>
     );
 };
-export default PostInfo;
+export default withRouter(PostInfo);
 
 // {/*<div className="share">*/}
 // {/*    <socialShare.FacebookShareButton*/}

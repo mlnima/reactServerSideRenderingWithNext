@@ -1,4 +1,4 @@
-import React, {  useContext } from 'react';
+import React, { useContext } from 'react';
 import DropDownWidget from "../DropDownWidget/DropDownWidget";
 import { AppContext } from "../../../../context/AppContext";
 import withRouter from "next/dist/client/with-router";
@@ -12,9 +12,15 @@ const ActionOnPost = props => {
             ...contextData.state,
             loading: true
         })
+        const postValue = {
+            ...props.postData,
+            author: props.postData.author ? props.postData.author : contextData.userData._id,
+            price: props.postData.postType === 'product' ? props.postData.price ? props.postData.price : 0 : 0
+        }
+
         if (props.postData._id) {
             // contextData.functions.updatePost(contextData.editingPostData)
-            updatePost(props.postData, window.location.origin).then(() => {
+            updatePost(postValue, window.location.origin).then(() => {
                 contextData.dispatchState({
                     ...contextData.state,
                     loading: false
@@ -27,7 +33,8 @@ const ActionOnPost = props => {
                 })
             })
         } else {
-            savePost(props.postData, window.location.origin).then(res => {
+
+            savePost(postValue, window.location.origin).then(res => {
 
                 props.router.push('/admin/post?id=' + res.data.savedPostData._id)
                 contextData.dispatchState({

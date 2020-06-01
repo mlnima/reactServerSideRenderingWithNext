@@ -142,9 +142,11 @@ postsControllers.getPostInfo = (req, res) => {
     const _id = req.body._id;
     if (title) {
         postSchema.findOne({ title }).exec().then(async post => {
+            const postValue = post ? post.toObject():post
+            const commentValue = post?commentSchema.find({ onDocument: post._id }).exec():null
             const postData = {
-                ...post.toObject(),
-                comments: commentSchema.find({ onDocument: post._id }).exec()
+                ...postValue,
+                comments: commentValue
             }
             res.json({ post: dataEncoder({ post }), error: false, postData });
             res.end()

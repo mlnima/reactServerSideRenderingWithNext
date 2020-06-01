@@ -111,7 +111,7 @@ const SiteSettingSetter = props => {
             <meta name="keywords" content={ state.keywords }/>
             {/*<GoogleAnalyticsScript/>*/ }
             <script async src={ `https://www.googletagmanager.com/gtag/js?id=${ contextData.siteIdentity.googleAnalyticsID || '' }` }/>
-            <link rel="icon" href="/favicon.ico"/>
+            <link rel="icon" href={ '/favicon.ico'}/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
             <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
             { renderCustomScripts }

@@ -22,7 +22,8 @@ import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRe
 const Post = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
-        style: {}
+        style: {},
+        editMode:false
     })
     useEffect(() => {
         if (props.identity.postPageSidebar) {
@@ -32,7 +33,22 @@ const Post = props => {
                 }
             })
         }
+        if (props.router){
+            if (props.router.query.mode === 'edit' ){
+                setState({
+                    ...state,
+                    editMode:true
+                })
+            }else{
+                setState({
+                    ...state,
+                    editMode:false
+                })
+            }
+        }
     }, [ props ]);
+
+
 
     const RenderMeta = () => {
         if (props.post.title) {
@@ -52,9 +68,10 @@ const Post = props => {
     }
 
 
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [ props ]);
+
+
+
+
 
     if (props.errorCode !== 200) {
         return <Error { ...props } />
@@ -72,6 +89,7 @@ const Post = props => {
                         <PostInfo
                             {...props}
                             title={ props.post.title }
+                            author={props.post.author}
                             description={ props.post.description }
                             tags={ props.post.tags }
                             actors={ props.post.actors }
@@ -82,6 +100,7 @@ const Post = props => {
                             views={ props.post.views }
                             videoEmbedCode={ props.post.videoEmbedCode }
                             rating={props.post.rating}
+                            editMode= {state.editMode}
                         />
                         <CommentsRenderer comments={ props.comments }/>
                         <CommentFrom documentId={ props.post._id }/>

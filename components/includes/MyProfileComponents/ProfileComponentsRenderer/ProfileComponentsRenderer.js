@@ -1,6 +1,7 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import MyProfileInfo from '../MyProfileInfo/MyProfileInfo'
 import MyProfilePosts from '../MyProfilePosts/MyProfilePosts'
+import withRouter from 'next/dist/client/with-router'
 
 const ProfileComponentsRenderer = props => {
     const [ state, setState ] = useState({});
@@ -8,15 +9,18 @@ const ProfileComponentsRenderer = props => {
     }, []);
 
     const WhatToRender= ()=>{
-        if (props.activeComponent==='MyProfileInfo'){
-            return(
-                <MyProfileInfo/>
-            )
-        }else if (props.activeComponent==='MyProfilePosts'){
-            return(
-                <MyProfilePosts/>
-            )
+        if (props.router){
+            if (props.router.query.tab==='MyProfileInfo'||!props.router.query.tab){
+                return(
+                    <MyProfileInfo/>
+                )
+            }else if (props.router.query.tab==='MyProfilePosts'){
+                return(
+                    <MyProfilePosts/>
+                )
+            }else return null
         }else return null
+
     }
     return (
         <div className='profile-component'>
@@ -24,4 +28,4 @@ const ProfileComponentsRenderer = props => {
         </div>
     );
 };
-export default ProfileComponentsRenderer;
+export default withRouter(ProfileComponentsRenderer);

@@ -2250,14 +2250,20 @@ body {
 
 .profile-navigation {
   padding: 5px; }
-  .profile-navigation button {
+  .profile-navigation button, .profile-navigation a {
     background-color: transparent;
     border: none;
     outline: none;
     cursor: pointer;
-    margin: 0 5x; }
-    .profile-navigation button:hover {
+    margin: 0 5px; }
+    .profile-navigation button:hover, .profile-navigation a:hover {
       outline: none; }
+  .profile-navigation a {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    cursor: pointer;
+    margin: 0 5px; }
 
 .my-profile-info .my-profile-fields {
   display: flex;
@@ -2371,6 +2377,77 @@ body {
 
 .posts {
   margin: 10px 0; }
+
+.video-player {
+  margin: 10px 0;
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%; }
+  .video-player .responsive-player {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.30%;
+    margin-bottom: 20px;
+    height: 0; }
+    .video-player .responsive-player iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 50px;
+      padding: 0 !important;
+      border-radius: 10px; }
+    .video-player .responsive-player .video-player-video-type {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 50px;
+      outline: none;
+      border-radius: 10px; }
+
+.post-info .edit-mode {
+  align-items: center; }
+  .post-info .edit-mode p {
+    color: white; }
+  .post-info .edit-mode input {
+    width: 300px; }
+  .post-info .edit-mode textarea {
+    width: 100%;
+    height: 200px; }
+
+.post-info .edit-btn-admin {
+  background: linear-gradient(#67ae55, #578843);
+  box-shadow: inset 0 1px 1px #a4e388;
+  border-color: #3b6e22 #3b6e22 #2c5115;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 1px;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
+  width: 200px;
+  height: 40px;
+  min-width: 194px;
+  padding: 7px 20px;
+  text-align: center;
+  line-height: 126%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px; }
+
+.post-info .post-info-body .views .post-rate {
+  color: white; }
+  .post-info .post-info-body .views .post-rate .like-disLike-count .like-disLike-count-items {
+    color: white; }
+
+.post-info .post-info-body .meta-description {
+  color: white; }
 
 
 /*# sourceMappingURL=styles.chunk.css.map*/
