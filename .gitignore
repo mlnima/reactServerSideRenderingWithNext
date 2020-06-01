@@ -1,6 +1,9 @@
 /node_modules
 /.next
 .next
+/static/uploads
+/static/uploads/
+/static/uploads/*
 
 /package-lock.json
 .package-lock.json

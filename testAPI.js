@@ -1,7 +1,7 @@
 const axios = require('axios')
 
 const body={
-    apiKey:'H9D5KTS-8RBMAMQ-QF3D71S-K4VBCKC',
+    apiKey:'1MRFK3J-F4F4RQV-G4VQC39-H054A3G',
     username:'Admin',
     postData:{
         "comments" : [],
@@ -23,7 +23,7 @@ const body={
         "sourceSite" : "youtube",
     }
 }
-axios.post('http://webdevs.ai/api/v1/posts/createNewByApi',body).then(res=>{
+axios.post('https://findbestporno.com/api/v1/posts/createNewByApi',body).then(res=>{
     console.log( res.data)
 }).catch(err=>{
     console.log( err)

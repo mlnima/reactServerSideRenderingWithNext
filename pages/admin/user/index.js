@@ -12,9 +12,9 @@ const user = props => {
     const [ userData, setUserData ] = useState({});
 
     const [ resetPasswordData, setResetPasswordData ] = useState({
-        oldPassword: '123456',
-        newPassword1: '12345678',
-        newPassword2: '12345678'
+        oldPassword: '',
+        newPassword1: '',
+        newPassword2: ''
     })
 
     const onChangeHandler = e => {
@@ -67,6 +67,7 @@ const user = props => {
     useEffect(() => {
         if (props.router){
             getUserData(props.router.query.id, window.location.origin).then(res=>{
+                console.log( res.data)
                 setUserData({ ...userData, ...res.data.user })
             })
         }
@@ -105,7 +106,7 @@ const user = props => {
                 </div>
                 <div className='user-admin-edit-profile-page-section'>
                     <p>Role :</p>
-                    <select value={ userData.role } onChange={ e => onChangeHandler(e) } disabled={ userData.role === 'administrator' }>
+                    <select value={ userData.role } name='role' onChange={ e => onChangeHandler(e) } disabled={ userData.keyMaster }>
                         <option value='administrator'>Administrator</option>
                         <option value='author'>Author</option>
                         <option value='editor'>Editor</option>
