@@ -38,7 +38,7 @@ axios.post('http://localhost:4200/server/posts/admin-postsForTest').then(res => 
             start= start+1
         }
 
-    },3000)
+    },1000)
 
 
 

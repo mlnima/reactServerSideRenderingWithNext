@@ -87,6 +87,13 @@ const TableBodyItemOnHover = props => {
                     comments
                 </div>
             );
+        } else if (props.assetsType === 'metas') {
+            return (
+                <div className='asset-page-table-body-item-hover-item'>
+                    <Link href={ '/admin/meta?id=' + props._id }><a>Edit</a></Link>
+                    <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'delete').then(()=>reGetData()) }>Delete</button>
+                </div>
+            );
         }
 
     } else {

@@ -8,7 +8,7 @@ import AssetPagination from './AssetPagination'
 const TableControls = props => {
     return (
         <div className='asset-page-table-head'>
-            <AssetStatusNavigation/>
+            <AssetStatusNavigation { ...props }/>
             <AssetSearch/>
             <AssetBulkActionAndAssetTypeSelector { ...props }/>
             <AssetPagination { ...props }/>

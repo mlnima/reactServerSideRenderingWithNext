@@ -8,6 +8,7 @@ const TableHeader = props => {
         items: []
     });
 
+
     useEffect(() => {
         if (props.router.query.assetsType === 'posts') {
             let items = [ 'title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail' ]
@@ -27,16 +28,22 @@ const TableHeader = props => {
                 ...state,
                 items,
             })
+        } else if (props.router.query.assetsType === 'metas') {
+            let items = [ 'name', 'description', 'type' ]
+            setState({
+                ...state,
+                items,
+            })
         }
 
-    }, [ props.router.query.page,props.router.query.assetsType ]);
+    }, [ props.router.query.page, props.router.query.assetsType ]);
 
     useEffect(() => {
-        if (props.selectedItems.length===0){
+        if (props.selectedItems.length === 0) {
             selectAllCheckBox.current.checked = false
         }
 
-    }, [ props.selectedItems]);
+    }, [ props.selectedItems ]);
 
     const onSelectChangeHandler = e => {
         e.target.checked ?

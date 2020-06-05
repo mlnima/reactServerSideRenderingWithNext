@@ -14,11 +14,13 @@ const WidgetHeader = props => {
             style:{
                 widgetHead:{
                     backgroundColor:contextData.siteDesign.widgetHeaderBackgroundColor,
-                    color:contextData.siteDesign.widgetHeaderTextColor
+                    color:contextData.siteDesign.widgetHeaderTextColor,
+                    borderLeft: contextData.siteDesign.widgetHeaderBorder? `5px solid ${contextData.siteDesign.widgetHeaderBorder}`:'5px solid gray '
                 },
                 redirectLink:{
                     backgroundColor:contextData.siteDesign.widgetHeaderRedirectLinkBackgroundColor,
-                    color:contextData.siteDesign.widgetHeaderRedirectLinkTextColor
+                    color:contextData.siteDesign.widgetHeaderRedirectLinkTextColor,
+                    fontWeight:'bold'
                 }
             }
         })

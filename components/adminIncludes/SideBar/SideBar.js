@@ -5,7 +5,7 @@ import { convertVariableNameToName } from '../../../_variables/_variables'
 import axios from "axios";
 import SortUpSvg from '../../../static/images/fontawesome/sort-up-solid.svg'
 import SortDownSvg from '../../../static/images/fontawesome/sort-down-solid.svg'
-
+import withRouter from 'next/dist/client/with-router'
 const SideBar = props => {
     const contextData = useContext(AppContext);
 
@@ -24,6 +24,17 @@ const SideBar = props => {
         },
         users: {
             pathURL: '/admin/assets?assetsType=users',
+            subItems: []
+        },
+        metas: {
+            pathURL:props.router? props.router.asPath:'/',
+            subItems: [
+                {name:'tags',url:'/admin/assets?assetsType=metas&metaType=tags'},
+                {name:'categories',url:'/admin/assets?assetsType=metas&metaType=categories'},
+                {name:'actors',url:'/admin/assets?assetsType=metas&metaType=actors'}]
+        },
+        pages: {
+            pathURL: '/admin/assets?assetsType=pages',
             subItems: []
         },
         comments: {
@@ -132,4 +143,4 @@ const SideBar = props => {
         );
     } else return null
 };
-export default SideBar;
+export default withRouter(SideBar);

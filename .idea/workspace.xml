@@ -2,21 +2,41 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/pages/admin/pages/index.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/page/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/build-manifest.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a1334260656" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1334260656" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a1466923429" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1466923429" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a2061249489" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2061249489" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a2758973938" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2758973938" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a2938240860" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2938240860" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3134989031" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3134989031" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3551469475" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3551469475" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3939314630" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3939314630" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a4285643907" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a4285643907" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a492256620" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a492256620" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a543979423" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a543979423" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a737594303" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a737594303" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/chunks/styles.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/chunks/styles.js.map" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/css/styles.chunk.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/css/styles.chunk.css.map" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBody.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBody.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemOnHover/TableBodyItemOnHover.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemOnHover/TableBodyItemOnHover.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/TableControls.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/TableControls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableHeader/TableHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableHeader/TableHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/TopBar/TopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TopBar/TopBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/TopBar/TopBar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TopBar/TopBar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetHeader/WidgetHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetHeader/WidgetHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MediaWidget/MediaWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MediaWidget/MediaWidget.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/generateFakeData.js" beforeDir="false" afterPath="$PROJECT_DIR$/generateFakeData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/registerLogin.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/registerLogin.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/apiControllers/apiPostsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/apiControllers/apiPostsControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -48,19 +68,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableControls\AssetBulkActionAndAssetTypeSelector" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableBody\TableBodyItem" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableBody\TableBodyItemSection" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\page" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableControls\AssetBulkActionAndAssetTypeSelector" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableBody\TableBodyItem" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableBody\TableBodyItemSection" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -266,7 +286,14 @@
       <workItem from="1590756852798" duration="3276000" />
       <workItem from="1590831185606" duration="4470000" />
       <workItem from="1590916288673" duration="11903000" />
-      <workItem from="1590998142741" duration="11042000" />
+      <workItem from="1590998142741" duration="14910000" />
+      <workItem from="1591083509005" duration="701000" />
+      <workItem from="1591099621631" duration="494000" />
+      <workItem from="1591101768177" duration="1314000" />
+      <workItem from="1591196209083" duration="4139000" />
+      <workItem from="1591255713118" duration="1638000" />
+      <workItem from="1591269964509" duration="8630000" />
+      <workItem from="1591341533788" duration="1447000" />
     </task>
     <servers />
   </component>

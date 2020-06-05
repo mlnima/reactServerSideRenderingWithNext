@@ -27,6 +27,12 @@ const TableBodyItem = props => {
                 ...state,
                 properties,
             })
+        } else if (props.assetsType === 'metas') {
+            let properties = [ 'name', 'description', 'type' ]
+            setState({
+                ...state,
+                properties,
+            })
         }
     }, [ props ]);
 

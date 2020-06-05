@@ -18,9 +18,7 @@ const MediaWidget = props => {
             })
     }, []);
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+
 
     const WhatToRender = () => {
         switch ( props.mediaType ) {

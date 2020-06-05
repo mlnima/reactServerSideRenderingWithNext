@@ -58,9 +58,11 @@ const HomePageWidgets = props => {
                 <ColorSection designName='widgetHeaderTextColor'/>
                 <ColorSection designName='widgetHeaderRedirectLinkBackgroundColor'/>
                 <ColorSection designName='widgetHeaderRedirectLinkTextColor'/>
+                <ColorSection designName='widgetHeaderBorder'/>
                 <ColorSection designName='widgetBodyBackgroundColor'/>
                 <ColorSection designName='widgetBodyTextColor'/>
                 <ColorSection designName='widgetBodyBorder'/>
+
             </div>
         </AdminLayout>
     );

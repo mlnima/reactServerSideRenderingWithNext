@@ -1,9 +1,8 @@
 import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
-
 import { AppContext } from "../../../context/AppContext";
 import { withRouter } from "next/router";
-import FA from 'react-fontawesome'
+
 
 const TopBar = props => {
     const contextData = useContext(AppContext);
@@ -25,8 +24,8 @@ const TopBar = props => {
         if (contextData.userData.role === 'administrator') {
             return (
                 <>
-                    <Link href='/admin'><a>Admin Panel</a></Link>
-                    <p onClick={ () => contextData.functions.clearCaches() }>Clear Caches</p>
+                    <Link href='/admin'><a style={ state.style }>Admin Panel</a></Link>
+                    <p style={ state.style } onClick={ () => contextData.functions.clearCaches() }>Clear Caches</p>
                 </>
             )
         } else return null
@@ -36,7 +35,7 @@ const TopBar = props => {
 
     const MyProfile = ()=>{
         if (contextData.siteIdentity.membership){
-            return       <Link href={ `/profile?username=${ contextData.userData.username }` }><a>My Profile</a></Link>
+            return       <Link href={ `/profile?username=${ contextData.userData.username }` }><a style={ state.style }>My Profile</a></Link>
         }else return null
     }
 

@@ -23,9 +23,7 @@ const PostElement = props => {
         extraClassName: ''
     });
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+
 
     useEffect(() => {
         if (props.viewType) {
