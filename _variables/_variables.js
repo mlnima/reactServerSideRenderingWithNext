@@ -1,3 +1,5 @@
+import ReactGA from 'react-ga'
+
 export const likeValueCalculator = (likes, dislikes) => {
     return (likes > 0 && dislikes > 0) ? (Math.round((likes * 100) / (likes + dislikes)))
         : (likes === 0 && dislikes === 0) ? 0
@@ -58,3 +60,22 @@ export const fileTypeDetector =   fileName => {
   return finalFormat
 }
 
+export const initGA = () => {
+    console.log('GA init')
+    ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
+}
+export const logPageView = () => {
+    console.log(`Logging pageview for ${window.location.pathname}`)
+    ReactGA.set({ page: window.location.pathname })
+    ReactGA.pageview(window.location.pathname)
+}
+export const logEvent = (category = '', action = '') => {
+    if (category && action) {
+        ReactGA.event({ category, action })
+    }
+}
+export const logException = (description = '', fatal = false) => {
+    if (description) {
+        ReactGA.exception({ description, fatal })
+    }
+}

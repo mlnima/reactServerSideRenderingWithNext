@@ -5,25 +5,31 @@ import Navigation from "../includes/Header/Navigation/Navigation";
 import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
 import '../../styles/global.scss'
+import { initGA, logPageView } from '../../_variables/_variables'
 // import '../../styles/styles.scss'
-
 
 const AppLayout = props => {
 
-        return (
-            <>
-                <TopBar/>
-                <Header/>
-                <Navigation/>
-                <Loading/>
-                <AlertBox/>
-                <div className="App">
-                    { props.children }
-                </div>
-            </>
-        );
+    useEffect(() => {
+        if (!window.GA_INITIALIZED) {
+            initGA()
+            window.GA_INITIALIZED = true
+        }
+        logPageView()
+    }, []);
 
-
+    return (
+        <>
+            <TopBar/>
+            <Header/>
+            <Navigation/>
+            <Loading/>
+            <AlertBox/>
+            <div className="App">
+                { props.children }
+            </div>
+        </>
+    );
 
 };
 

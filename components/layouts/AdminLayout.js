@@ -7,7 +7,7 @@ import SideBar from "../adminIncludes/SideBar/SideBar";
 import { AppContext } from "../../context/AppContext";
 import { withRouter } from "next/router";
 import Loading from "../includes/Loading/Loading";
-import { generateAbsolutePath } from '../../_variables/_variables'
+import { generateAbsolutePath, initGA, logPageView } from '../../_variables/_variables'
 import AlertBox from '../includes/AlertBox/AlertBox'
 import { getSetting } from '../../_variables/ajaxVariables'
 import Error from '../../pages/_error'
@@ -19,6 +19,11 @@ const Panel = props => {
     const [ state, dispatchState ] = useState({});
 
     useEffect(() => {
+        if (!window.GA_INITIALIZED) {
+            initGA()
+            window.GA_INITIALIZED = true
+        }
+        logPageView()
         if (window.innerWidth > 768) {
             contextData.dispatchSettings(settings => ({
                 ...settings,
@@ -28,36 +33,28 @@ const Panel = props => {
     }, []);
 
     useEffect(() => {
-        getSetting('identity', false, window.location.origin,Date.now()).then(identity => {
+        getSetting('identity', false, window.location.origin, Date.now()).then(identity => {
             contextData.dispatchSiteIdentity({
                 ...contextData.siteIdentity,
                 ...identity.data.setting.data
             })
         })
-        getSetting('design', false, window.location.origin,Date.now()).then(design => {
+        getSetting('design', false, window.location.origin, Date.now()).then(design => {
             contextData.dispatchSiteDesign({
                 ...contextData.siteDesign,
                 ...design.data.setting.data
             })
         })
-        getSetting('navigation', false, window.location.origin,Date.now()).then(navigationData => {
+        getSetting('navigation', false, window.location.origin, Date.now()).then(navigationData => {
 
             contextData.dispatchNavigationData([
 
                 ...navigationData.data.setting.data
             ])
-
-
-            // if (res.data.setting) {
-            //     setState({
-            //         ...state,
-            //         data: res.data.setting.data || []
-            //     })
-            // }
         })
     }, []);
 
-    if(contextData.userData.role=== 'administrator'){
+    if (contextData.userData.role === 'administrator') {
         return (
             <>
                 <Head>
@@ -80,11 +77,12 @@ const Panel = props => {
 
             </>
         );
-    }else  return (
+    } else return (
         <h1>Access Denied</h1>
     )
 
 };
 
 export default withRouter(Panel);
-{/*<Error { ...props } />*/}
+{/*<Error { ...props } />*/
+}

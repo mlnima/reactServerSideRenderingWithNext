@@ -58,15 +58,6 @@ const navigationData = {
                     "type": "categories"
                 }
             ]
-        },
-        {
-            "title": "Actors",
-            "url": "/meta",
-            "query": [
-                {
-                    "type": "actors"
-                }
-            ]
         }
     ]
 }
@@ -98,10 +89,12 @@ const designData = {
         commentsBackgroundColor: 'transparent',
     }
 }
+
 const adminData = {
     username: 'Admin',
     password: 'Admin',
-    role: 'administrator'
+    role: 'administrator',
+    keyMaster:true
 }
 
 const widgetData = [ {
@@ -149,7 +142,11 @@ const widgetData = [ {
             "headLine": "",
             "viewType": "standard",
             "metaData": [],
-            "posts": []
+            "posts": [],
+            "logoTextColor" : "white",
+            "logoHeadLineColor" : "white",
+            "logoHeadLineFontSize" : "26",
+            "logoTextFontSize" : "40"
         }
     }
 ]
@@ -193,7 +190,7 @@ runSetup().then(() => {
 })
 
 // REACT_APP_JWT_KEY = 'secretKey'
-// PRODUCTION_URL= http://webdevs.ai
+// PRODUCTION_URL=
 // NODE_ENV='dev'
 // REACT_APP_PORT='3000'
 //

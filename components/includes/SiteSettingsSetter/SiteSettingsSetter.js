@@ -3,6 +3,7 @@ import { AppContext } from '../../../context/AppContext'
 import Head from 'next/dist/next-server/lib/head'
 import AppLayout from '../../layouts/AppLayout'
 import withRouter from 'next/dist/client/with-router'
+import withGa from 'next-ga'
 
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
@@ -16,11 +17,6 @@ const SiteSettingSetter = props => {
         customScripts: []
         // customScript: props.identity.data.customScript || 'your Script will be here',
     });
-
-    // useEffect(() => {
-    //     console.log(props)
-    //
-    // }, [ props ]);
 
     useEffect(() => {
 
@@ -50,18 +46,19 @@ const SiteSettingSetter = props => {
 
     useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;
-        document.body.style.backgroundPosition = contextData.siteDesign.bodyBackgroundPosition||'center';
-        document.body.style.backgroundSize = contextData.siteDesign.bodyBackgroundSize||'cover';
-        document.body.style.backgroundRepeat = contextData.siteDesign.bodyBackgroundRepeat||'no-repeat';
-        document.body.style.backgroundAttachment = contextData.siteDesign.bodyBackgroundAttachment||'initial';
-        document.body.style.backgroundImage = `url(${ contextData.siteDesign.bodyBackgroundImage})`
+        document.body.style.backgroundPosition = contextData.siteDesign.bodyBackgroundPosition || 'center';
+        document.body.style.backgroundSize = contextData.siteDesign.bodyBackgroundSize || 'cover';
+        document.body.style.backgroundRepeat = contextData.siteDesign.bodyBackgroundRepeat || 'no-repeat';
+        document.body.style.backgroundAttachment = contextData.siteDesign.bodyBackgroundAttachment || 'initial';
+        document.body.style.backgroundImage = `url(${ contextData.siteDesign.bodyBackgroundImage })`
         document.body.style.color = contextData.siteDesign.bodyBackgroundColor
 
     }, [ contextData.siteDesign ]);
 
     const renderCustomScripts = (state.customScripts || []).map(script => {
+        console.log(script )
         return (
-            <script key={ script.scriptName }>
+            <script>
                 { script.scriptBody }
             </script>
         )
@@ -69,36 +66,6 @@ const SiteSettingSetter = props => {
 
 
 
-    // const RenderGoogleAnalyticsScript = () => {
-    //     if (props.identity.data.googleAnalyticsID) {
-    //         console.log('there is')
-    //         return (
-    //             <>
-    //                 <script dangerouslySetInnerHTML={ {
-    //                     __html: `(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({'gtm.start':
-    //                     new Date().getTime(),event:'gtm.js'});var f=d.getElementsByTagName(s)[0],
-    //                     j=d.createElement(s),dl=l!='dataLayer'?'&l='+l:'';j.async=true;j.src=
-    //                     'https://www.googletagmanager.com/gtm.js?id='+i+dl;f.parentNode.insertBefore(j,f);
-    //                   })(window,document,'script','dataLayer',${ props.identity.data.googleAnalyticsID });`
-    //                 } }/>
-    //             </>
-    //
-    //         )
-    //     } else return null
-    // }
-
-    useEffect(() => {
-        googleAnalyticsHandler()
-    }, [ props.router ]);
-
-    const googleAnalyticsHandler = () => {
-        window.dataLayer = window.dataLayer || [];
-        const gTag = () => {
-            dataLayer.push(arguments)
-        }
-        gTag('js', new Date())
-        gTag('config', contextData.siteIdentity.googleAnalyticsID)
-    }
 
     return (
         <Head>
@@ -109,9 +76,7 @@ const SiteSettingSetter = props => {
             {/*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*/ }
             <meta name="description" content={ state.description }/>
             <meta name="keywords" content={ state.keywords }/>
-            {/*<GoogleAnalyticsScript/>*/ }
-            <script async src={ `https://www.googletagmanager.com/gtag/js?id=${ contextData.siteIdentity.googleAnalyticsID || '' }` }/>
-            <link rel="icon" href={ '/favicon.ico'}/>
+            <link rel="icon" href={ '/favicon.ico' }/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
             <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
             { renderCustomScripts }

@@ -16,15 +16,14 @@ siteMapsController.siteMapMonths = (req, res) => {
     }
 
     let parsedDate = new Date(month);
-    console.log(month, pageNo, parsedDate)
+
     postSchema.count({ lastModify: { $gte: parsedDate } }).exec().then(count => {
-        console.log(count)
+
         let postsElements;
         let subSiteMaps;
         let xmlTemplate;
         let renderPostData;
         if (count <= size) {
-            console.log('less than 500')
             postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
                 renderPostData = posts.map(post => {
                     let postUrl =requestPath + encodeURIComponent(post.title)

@@ -15,7 +15,10 @@ const userSchema = mongoose.Schema({
         default: Date.now
     },
     role:String,
-    keyMaster:Boolean,
+    keyMaster:{
+        type:Boolean,
+        unique:true,
+    },
     firstName:String,
     lastName:String,
     nickName:String,
