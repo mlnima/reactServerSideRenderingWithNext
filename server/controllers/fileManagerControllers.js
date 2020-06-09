@@ -72,22 +72,16 @@ fileManagerControllers.uploadFile = async (req, res) => {
 
     }).catch(err => {
         console.log(err)
-
         res.end()
     })
-
-    console.log(req.body)
-    console.log(file)
-
 }
 fileManagerControllers.userImageUpload = async (req, res) => {
     const file = req.files.profileImage
     const userId = req.userData._id
-   // console.log(  req.userData, req.files.profileImage)
-   //  res.end()
     const directoryPath = './static/uploads/users/'+userId +'/'
+    const filePath = directoryPath + file.name + '.png'
     fsExtra.ensureDir(directoryPath).then(() => {
-        const filePath = directoryPath + file.name
+
         file.mv(filePath, function (err) {
             if (err) {
                 console.log(err)
@@ -106,8 +100,3 @@ fileManagerControllers.userImageUpload = async (req, res) => {
 }
 
 module.exports = fileManagerControllers
-// fileManagerController.
-// fileManagerController.
-// fileManagerController.
-// fileManagerController.
-// fileManagerController.
