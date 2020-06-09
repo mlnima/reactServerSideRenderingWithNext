@@ -31,9 +31,7 @@ const PostInfo = props => {
         likeDislikeView(props.id, 'views')
     }, []);
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+
 
     const EditLinkForAdmin = () => {
         if (contextData.userData.role === 'administrator') {

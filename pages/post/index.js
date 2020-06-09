@@ -67,12 +67,6 @@ const Post = props => {
         } else return null
     }
 
-
-
-
-
-
-
     if (props.errorCode !== 200) {
         return <Error { ...props } />
     } else return (

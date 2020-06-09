@@ -55,11 +55,8 @@ const robotsOptions = {
     root:  './static/',
     headers: {'Content-Type':'text/plain;charset=utf-8'}
 }
-const serveFilesOption = {
-    root:  './static/',
-}
-const PORT = process.env.REACT_APP_PORT || 3000;
 
+const PORT = process.env.REACT_APP_PORT || 3000;
 app.prepare().then(()=>{
     const server = express();
     server.use(cookieParser());
@@ -70,14 +67,14 @@ app.prepare().then(()=>{
     // }));
     server.use(bodyParser.json());
     server.use(xmlparser());
-
+    //-------------------
+    server.use('/static', express.static(path.join(__dirname, 'static')))
+    //--------------------
     server.get('/robots.txt',(req,res)=>{
         return res.status(200).sendFile('robots.txt',robotsOptions)
     });
 
-    server.get('/static/uploads',(req,res)=>{
-        return res.status(200).sendFile('/',serveFilesOption)
-    });
+
 
     // server.get('/favicon.ico',(req,res)=>{
     //     return res.status(200).sendFile('/images/favicon/favicon.ico',robotsOptions)

@@ -61,11 +61,10 @@ export const fileTypeDetector =   fileName => {
 }
 
 export const initGA = () => {
-    console.log('GA init')
     ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
 }
 export const logPageView = () => {
-    console.log(`Logging pageview for ${window.location.pathname}`)
+    // console.log(`Logging pageview for ${window.location.pathname}`)
     ReactGA.set({ page: window.location.pathname })
     ReactGA.pageview(window.location.pathname)
 }

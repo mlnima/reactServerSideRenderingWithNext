@@ -18,10 +18,6 @@ const meta = props => {
     });
 
     useEffect(() => {
-        console.log(props)
-    }, [ props ]);
-
-    useEffect(() => {
         if (props.identity.metaPageSidebar) {
             setState({
                 style: {
@@ -75,9 +71,6 @@ const meta = props => {
 meta.getInitialProps = async ({ pathname, query, req,asPath }) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let errorCode = 200
-
-
-
 
     const dataForGettingMeta = {
         type: pluralize.singular(query.type),

@@ -30,6 +30,7 @@ fileManagerControllers.readPath = (req, res) => {
 
 };
 
+
 fileManagerControllers.readFile = (req,res)=>{
     const path = req.body.path;
     fs.readFile(path, (err, fileData) => {
@@ -48,7 +49,6 @@ fileManagerControllers.readFile = (req,res)=>{
 fileManagerControllers.uploadFile = async (req, res) => {
     const file = req.files.uploadingFile
     const fileType = file.mimetype.split('/')[0]
-    console.log(fileType)
     const desiredMode = 0o2775
     const options = {
         mode: 0o2775
@@ -75,6 +75,7 @@ fileManagerControllers.uploadFile = async (req, res) => {
         res.end()
     })
 }
+
 fileManagerControllers.userImageUpload = async (req, res) => {
     const file = req.files.profileImage
     const userId = req.userData._id
@@ -92,6 +93,7 @@ fileManagerControllers.userImageUpload = async (req, res) => {
                 res.end()
             }
         });
+
     }).catch(err => {
         console.log(err)
         res.end()
