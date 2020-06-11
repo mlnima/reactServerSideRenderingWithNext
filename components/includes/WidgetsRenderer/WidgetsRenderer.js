@@ -9,8 +9,9 @@ import AlphabeticalNumericalRangeLinksWidget from '../widgets/AlphabeticalNumeri
 import Logo from '../Logo/Logo'
 
 const WidgetsRenderer = props => {
-
-    const renderWidgets = (props.widgets || []).filter(widget => widget.data.position === props.position).map(widget => {
+    const widgetInTypeOfPropsPosition = (props.widgets || []).filter(widget => widget.data.position === props.position)
+    const widgetsToRenderSortByIndex = (widgetInTypeOfPropsPosition.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))
+    const renderWidgets = widgetsToRenderSortByIndex.map(widget => {
 
         switch ( widget.data.type ) {
 

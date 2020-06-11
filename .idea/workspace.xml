@@ -4,19 +4,15 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/build-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/dev_instance_0_98d88bd9cdc2d05dad72b82f9ec50267/stats.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/dev_instance_0_98d88bd9cdc2d05dad72b82f9ec50267/stats.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/package.json.hash" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/package.json.hash" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/static/robots.txt" beforeDir="false" afterPath="$PROJECT_DIR$/static/robots.txt" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -283,7 +279,10 @@
       <workItem from="1591341533788" duration="3760000" />
       <workItem from="1591678945244" duration="4715000" />
       <workItem from="1591697869887" duration="19221000" />
-      <workItem from="1591779740912" duration="2461000" />
+      <workItem from="1591779740912" duration="2847000" />
+      <workItem from="1591789794671" duration="6453000" />
+      <workItem from="1591817178331" duration="605000" />
+      <workItem from="1591866015452" duration="6054000" />
     </task>
     <servers />
   </component>

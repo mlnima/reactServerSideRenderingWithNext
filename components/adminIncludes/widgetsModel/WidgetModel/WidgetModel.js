@@ -20,9 +20,30 @@ const WidgetModel = props => {
     useEffect(() => {
         setWidgetData({
             ...widgetData,
-            ...props.data
+            ...props.data,
         })
     }, [ props ]);
+
+
+    // useEffect(() => {
+    //
+    //     const testArr = [
+    //         {
+    //             myIndexs:0
+    //         },
+    //         {
+    //             myIndexs:3
+    //         },
+    //         {
+    //             myIndexs:1
+    //         },
+    //         {
+    //             myIndexs:2
+    //         }
+    //     ]
+    //
+    //     console.log(testArr.sort((a,b)=>(a.myIndex > b.myIndex) ? 1 : -1))
+    // }, [ props ]);
 
     const [ widgetSettings, setWidgetSettings ] = useState({
         open: false,
@@ -253,11 +274,35 @@ const WidgetModel = props => {
         }
     }
 
+
+    const changeWidgetIndex = (more)=>{
+        const valueToSet = more ? widgetData.data.widgetIndex +1: widgetData.data.widgetIndex -1
+        const dataToSave = {
+            ...widgetData,
+            data:{
+                ...widgetData.data,
+                widgetIndex: valueToSet
+            }
+        }
+        updateWidgets(dataToSave).then(() => {
+            getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, window.location.origin, Date.now()).then(res => {
+                console.log(res.data)
+                contextData.dispatchWidgetsSettings({
+                    widgets: [ ...res.data.widgets ]
+                })
+            })
+        })
+    }
+
+
+
+
+
     if (widgetSettings.open) {
         return (
             <>
                 <div className='widget-open-control'>
-                    <p>{ props.data.data.title || convertVariableNameToName(props.data.data.type) }</p>
+                    <p>{ props.data.data.title || convertVariableNameToName(props.data.data.type) } index: { widgetData.data.widgetIndex }</p>
                     <button onClick={ () => onOpenHandler() }>{ widgetSettings.open ? 'close' : 'open' }</button>
                 </div>
                 <div className='widgetModel'>
@@ -278,6 +323,8 @@ const WidgetModel = props => {
                         <option value='navigationMenu'>Navigation Menu</option>
                         <option value='alphabeticalNumericalRange'>Alphabetical Numerical Range</option>
                     </select>
+                    <p>Widget Index:</p>
+                    <DelayInput type='number' name='widgetIndex' className='widgetIndex' placeholder='widgetIndex' value={ widgetData.data.widgetIndex } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
                     <p>Position:</p>
                     <select name='position' value={ widgetData.data.position } onChange={ e => onChangeHandler(e) }>
                         <option value='home'>Home</option>
@@ -310,10 +357,10 @@ const WidgetModel = props => {
     } else {
         return (
             <div className='widget-open-control'>
-                <p> { props.data.data.title || convertVariableNameToName(props.data.data.type) }</p>
+                <p> { props.data.data.title || convertVariableNameToName(props.data.data.type) } index: { widgetData.data.widgetIndex }</p>
                 <div>
-                    <button className='changeWidgetIndexBtn'><img className='fontawesomeSvgVerySmall' src={ SortUpSvg } alt=""/></button>
-                    <button className='changeWidgetIndexBtn'><img className='fontawesomeSvgVerySmall' src={ SortDownSvg } alt=""/></button>
+                    <button className='changeWidgetIndexBtn' onClick={()=>changeWidgetIndex(false)}><img className='fontawesomeSvgVerySmall' src={ SortUpSvg } alt=""/></button>
+                    <button className='changeWidgetIndexBtn' onClick={()=>changeWidgetIndex(true)}><img className='fontawesomeSvgVerySmall' src={ SortDownSvg } alt=""/></button>
                     <button onClick={ () => onOpenHandler() }>{ widgetSettings.open ? 'close' : 'open' }</button>
                 </div>
             </div>

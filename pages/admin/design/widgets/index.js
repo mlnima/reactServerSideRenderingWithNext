@@ -20,14 +20,22 @@ const HomePageWidgets = props => {
         }
     }, [props]);
 
+    const renderWidgetsInPosition = [ ...new Set((contextData.widgetsSettings.widgets).map(widgets => {return widgets.data.position})) ].map(position => {
 
-    const renderWidgetsInPosition = [ ...new Set((contextData.widgetsSettings.widgets).map(widgets => {
-        return widgets.data.position
-    })) ].map(position => {
+        const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)
+        // console.log(widgetsInGroupByPosition.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1) )
+        const widgetsOnThisType = (widgetsInGroupByPosition.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)).map(widget => {
+            // console.log( widget)
+            const dataWithIndex = {
+                data: {
+                    ...widget.data,
+                    widgetIndex:  widget.data.widgetIndex? widget.data.widgetIndex:   widgetsInGroupByPosition.indexOf(widget)
+                }
+            }
+            const widgetData = {...widget,...dataWithIndex}
 
-        const widgetsOnThisType = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position).map(widget => {
             return (
-                <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widget }/>
+                <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widgetData }  />
             )
         })
         return (
