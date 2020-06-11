@@ -38,7 +38,7 @@ siteMapsController.siteMapMonths = (req, res) => {
         if (count <= size) {
             postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
                 renderPostData = posts.map(post => {
-                    let postUrl =requestPath + '/post/'+post._id+'/' + encodeURIComponent(post.title)
+                    let postUrl =requestPath + 'post/'+post._id+'/' + encodeURIComponent(post.title)
                     postsElements +=
                         '<url>\n' +
                         `<loc>${ postUrl }</loc>\n` +
