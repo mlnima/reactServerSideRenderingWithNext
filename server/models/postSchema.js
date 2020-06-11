@@ -2,10 +2,7 @@ const mongoose = require('mongoose');
 
 const postSchema = mongoose.Schema({
     author: mongoose.Mixed,
-    title: {
-        type: String,
-        unique: true
-    },
+    title: String,
     company: String,
     description: String,
     mainThumbnail: String,

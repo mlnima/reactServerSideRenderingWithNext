@@ -10,8 +10,9 @@ const settings = props => {
     const keywordsInput = useRef(null)
     const [ state, setState ] = useState({
         siteMode: props.identity.siteMode || 'tube',
+        siteProtocol: props.identity.siteProtocol || 'http',
         defaultPostType: props.identity.defaultPostType || 'video',
-        defaultPostRating:props.identity.defaultPostRating || 'enable',
+        defaultPostRating: props.identity.defaultPostRating || 'enable',
         title: props.identity.title || 'website title',
         themeColor: props.identity.themeColor || '#000',
         description: props.identity.description || 'website description',
@@ -23,10 +24,13 @@ const settings = props => {
         postPageSidebar: props.identity.postPageSidebar || false,
         postsPageSidebar: props.identity.postsPageSidebar || false,
         metaPageSidebar: props.identity.postsPageSidebar || false,
-        membership:props.identity.membership || false,
-        allowUserToPost:props.identity.allowUserToPost || false,
+        membership: props.identity.membership || false,
+        allowUserToPost: props.identity.allowUserToPost || false,
     });
 
+    useEffect(() => {
+        console.log(props)
+    }, [ props ]);
     const onSubmitHandler = e => {
         e.preventDefault()
         contextData.dispatchState({
@@ -150,6 +154,13 @@ const settings = props => {
                             <select name='allowUserToPost' value={ state.allowUserToPost } onChange={ e => onChangeHandler(e) }>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section allowUserToPost">
+                            <p>Site Protocol:</p>
+                            <select name='siteProtocol' value={ state.siteProtocol } onChange={ e => onChangeHandler(e) }>
+                                <option value='http'>HTTP</option>
+                                <option value='https'>HTTPS</option>
                             </select>
                         </div>
                     </div>

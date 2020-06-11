@@ -25,26 +25,6 @@ const WidgetModel = props => {
     }, [ props ]);
 
 
-    // useEffect(() => {
-    //
-    //     const testArr = [
-    //         {
-    //             myIndexs:0
-    //         },
-    //         {
-    //             myIndexs:3
-    //         },
-    //         {
-    //             myIndexs:1
-    //         },
-    //         {
-    //             myIndexs:2
-    //         }
-    //     ]
-    //
-    //     console.log(testArr.sort((a,b)=>(a.myIndex > b.myIndex) ? 1 : -1))
-    // }, [ props ]);
-
     const [ widgetSettings, setWidgetSettings ] = useState({
         open: false,
         preview: false
@@ -57,7 +37,6 @@ const WidgetModel = props => {
     const onDeleteHandler = () => {
         deleteWidgets(props.data._id, window.location.origin).then(() => {
             getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, window.location.origin, Date.now()).then(res => {
-                console.log(res.data.widgets)
                 contextData.dispatchWidgetsSettings({
                     widgets: [ ...res.data.widgets ]
                 })

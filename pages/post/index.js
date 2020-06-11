@@ -114,6 +114,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     const postBody = {
         postTitle: query.postTitle,
+        _id:query.id
     };
 
     let post;

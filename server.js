@@ -292,11 +292,23 @@ app.prepare().then(()=>{
     //     app.render(req,res,targetComponent,params)
     // });
 
+    server.get('/post/:id/:postTitle',(req,res)=>{
+        const targetComponent = '/post';
+        const params = {
+            postTitle:req.params.postTitle,
+            id:req.params.id
+        }
+        app.render(req,res,targetComponent,params)
+    });
+
     server.get('/:postTitle',(req,res)=>{
         const targetComponent = '/post';
         const params = {postTitle:req.params.postTitle}
         app.render(req,res,targetComponent,params)
     });
+
+
+
 
     server.get('*',(req,res)=>{
         return handle(req,res)

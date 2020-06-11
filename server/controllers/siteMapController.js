@@ -1,8 +1,20 @@
 let siteMapController = {};
+// const mongoose = require("mongoose");
 const postSchema = require('../models/postSchema');
+const settingSchema = require('../models/settings/settingSchema');
 const moment = require('moment');
-const xml = require('xml');
-const DOMParser = require('xmldom').DOMParser;
+// const xml = require('xml');
+// const DOMParser = require('xmldom').DOMParser;
+let siteProtocol ='http'
+
+ settingSchema.findOne({type:'identity'}).exec().then(setting=>{
+     siteProtocol = setting.data.siteProtocol || 'http'
+ }).catch(err=>{
+     console.log( err)
+     siteProtocol = 'http'
+ })
+
+
 
 const getDates = (startDate, stopDate) => {
     let dateArray = [];
@@ -19,10 +31,8 @@ const getDates = (startDate, stopDate) => {
 };
 
 siteMapController.siteMap = (req, res) => {
-    const requestPath = req.protocol + '://' + req.get('host') + '/'
-
-    console.log(requestPath )
-  // console.log( req.protocol + '://' + req.get('host') + '/')
+    const requestPath = siteProtocol + '://' + req.get('host') + '/'
+    // const requestPath = 'https' + '://' + req.get('host') + '/'
     const oldestPost = postSchema.find({}).limit(1).sort({_id:1}).exec();
     const lastPost = postSchema.find({}).limit(1).sort({_id:-1}).exec();
 

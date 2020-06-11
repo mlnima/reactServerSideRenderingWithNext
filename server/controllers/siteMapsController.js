@@ -1,8 +1,20 @@
 let siteMapsController = {}
 const postSchema = require('../models/postSchema');
+const settingSchema = require('../models/settings/settingSchema');
+let siteProtocol ='http'
+
+
+settingSchema.findOne({type:'identity'}).exec().then(setting=>{
+
+    siteProtocol = setting.data.siteProtocol || 'http'
+}).catch(err=>{
+    console.log( err)
+    siteProtocol = 'http'
+})
+
 
 siteMapsController.siteMapMonths = (req, res) => {
-    const requestPath = req.protocol + '://' + req.get('host') + '/'
+    const requestPath = siteProtocol + '://' + req.get('host') + '/'
     let month = req.params.month;
     let pageNo = req.params.pageNo;
     const size = 500;
@@ -26,7 +38,7 @@ siteMapsController.siteMapMonths = (req, res) => {
         if (count <= size) {
             postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
                 renderPostData = posts.map(post => {
-                    let postUrl =requestPath + encodeURIComponent(post.title)
+                    let postUrl =requestPath + '/post/'+post._id+'/' + encodeURIComponent(post.title)
                     postsElements +=
                         '<url>\n' +
                         `<loc>${ postUrl }</loc>\n` +
