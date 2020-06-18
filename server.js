@@ -110,6 +110,7 @@ app.prepare().then(()=>{
 
     //meta data handler(tags,categories...)
     server.post('/api/v1/posts/getMeta',cacheSuccesses,(req,res)=>{postsControllers.getMeta(req,res)});
+    server.post('/api/v1/posts/deleteMeta',adminAuthMiddleware,cacheSuccesses,(req,res)=>{postsControllers.deleteMeta(req,res)});
 
     //comments handler
     server.post('/api/v1/posts/newComment',(req,res)=>{postsControllers.newComment(req,res)});

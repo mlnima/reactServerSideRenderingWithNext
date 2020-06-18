@@ -190,6 +190,10 @@ const WidgetModel = props => {
                             <option value='category'>Category</option>
                             <option value='actor'>Actor</option>
                         </select>
+                        <p>Meta background Color:</p>
+                        <DelayInput name='metaBackgroundColor' value={ widgetData.data.metaBackgroundColor || 'red' } placeholder='Meta background Color' className='metaBackgroundColor' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
+                        <p>Meta Text Color:</p>
+                        <DelayInput name='metaTextColor' value={ widgetData.data.metaTextColor || 'white' } placeholder='Meta background Color' className='metaTextColor' delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
                         <p>Count:</p>
                         <RenderCount/>
                     </>

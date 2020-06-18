@@ -3,7 +3,13 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/siteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemOnHover/TableBodyItemOnHover.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemOnHover/TableBodyItemOnHover.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
     </list>
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
@@ -35,19 +41,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\page" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableControls\AssetBulkActionAndAssetTypeSelector" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableBody\TableBodyItem" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableBody\TableBodyItemSection" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\pages\page" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableControls\AssetBulkActionAndAssetTypeSelector" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableBody\TableBodyItem" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableBody\TableBodyItemSection" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -274,6 +280,12 @@
       <workItem from="1591789794671" duration="6453000" />
       <workItem from="1591817178331" duration="605000" />
       <workItem from="1591866015452" duration="11311000" />
+      <workItem from="1591963829267" duration="600000" />
+      <workItem from="1592057261225" duration="1943000" />
+      <workItem from="1592129988944" duration="618000" />
+      <workItem from="1592244040176" duration="790000" />
+      <workItem from="1592408374907" duration="3279000" />
+      <workItem from="1592484551691" duration="1797000" />
     </task>
     <servers />
   </component>

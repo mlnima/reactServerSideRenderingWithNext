@@ -241,6 +241,18 @@ postsControllers.getMeta = async (req, res) => {
 
 }
 
+postsControllers.deleteMeta = (req,res)=>{
+    const _id = req.body._id
+    console.log(_id )
+    metaSchema.findByIdAndDelete(_id).exec().then(()=>{
+        res.json({message:'deleted'})
+        res.end()
+    }).catch(err=>{
+        res.error(500)
+        res.end()
+    })
+}
+
 postsControllers.newComment = (req, res) => {
 
     const commentDataToSave = new commentSchema(req.body)

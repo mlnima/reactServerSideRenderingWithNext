@@ -57,6 +57,13 @@ export const getMeta = async (data, cache, domainName) => {
     };
     return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${ data.keyword }&startWith=${ data.startWith }`, body)
 };
+export const deleteMeta = async (id, domainName) => {
+    const body = {
+        _id:id,
+        token: localStorage.wt
+    };
+    return await axios.post(domainName + `/api/v1/posts/deleteMeta`, body)
+};
 
 export const newComment = async (data) => {
     const body = {

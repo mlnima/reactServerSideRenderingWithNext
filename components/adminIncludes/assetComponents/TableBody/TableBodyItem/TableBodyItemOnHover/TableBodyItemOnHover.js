@@ -1,13 +1,18 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import withRouter from 'next/dist/client/with-router'
 import { AppContext } from '../../../../../../context/AppContext'
-import Link from 'next/link'
+import Link from 'next/link';
+import {deleteMeta} from '../../../../../../_variables/ajaxPostsVariables'
 
 const TableBodyItemOnHover = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
+    // useEffect(() => {
+    //     if (props.router){
+    //         console.log( props.router)
+    //     }
+    //
+    // }, []);
 
     const reGetData = () => {
         props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
@@ -91,7 +96,7 @@ const TableBodyItemOnHover = props => {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={ '/admin/meta?id=' + props._id }><a>Edit</a></Link>
-                    <button onClick={ () => contextData.functions.bulkActionPost([ props._id ], 'delete').then(()=>reGetData()) }>Delete</button>
+                    <button onClick={ () => deleteMeta(props._id,window.location.origin).then(()=>reGetData()) }>Delete</button>
                 </div>
             );
         }
