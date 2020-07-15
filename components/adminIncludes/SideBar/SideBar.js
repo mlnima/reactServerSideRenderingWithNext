@@ -108,7 +108,7 @@ const SideBar = props => {
         const onHoverHandler = state[item].subItems.map(subItem => {
             if (hovered === item) {
                 return (
-                    <Link href={ subItem.url }><a className='SideBarItem-SubItem'>{ convertVariableNameToName(subItem.name) }</a></Link>
+                    <Link key={ subItem.name } href={ subItem.url }><a className='SideBarItem-SubItem'>{ convertVariableNameToName(subItem.name) }</a></Link>
                 )
             } else return null
 

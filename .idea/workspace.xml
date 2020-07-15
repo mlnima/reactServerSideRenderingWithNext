@@ -1,17 +1,76 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
+  <component name="BranchesTreeState">
+    <expand>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="LOCAL_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+      <path>
+        <item name="ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="REMOTE_ROOT" type="e8cecc67:BranchNodeDescriptor" />
+        <item name="GROUP_NODE:origin" type="e8cecc67:BranchNodeDescriptor" />
+      </path>
+    </expand>
+    <select />
+  </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/dev_instance_0_98d88bd9cdc2d05dad72b82f9ec50267/dll.manifest.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/dev_instance_0_98d88bd9cdc2d05dad72b82f9ec50267/dll_f2d11c7f2ac815f8fb23.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/dev_instance_0_98d88bd9cdc2d05dad72b82f9ec50267/dll_f2d11c7f2ac815f8fb23.js.map" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/autodll-webpack-plugin/dev_instance_0_98d88bd9cdc2d05dad72b82f9ec50267/stats.json" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a117177175" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a117177175" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a1521007997" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a1521007997" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a2080080777" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2080080777" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a2504764358" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a2504764358" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3026322885" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3026322885" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3097924809" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3097924809" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3233283734" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3233283734" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3462056905" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3462056905" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3792965141" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3792965141" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a3859162146" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a3859162146" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a708871092" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a708871092" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/cache/next-minifier/a775273859" beforeDir="false" afterPath="$PROJECT_DIR$/.next/cache/next-minifier/a775273859" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_app.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/static/runtime/main.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/main.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemOnHover/TableBodyItemOnHover.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemOnHover/TableBodyItemOnHover.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/RenderArraySection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/RenderArraySection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package-lock.json" beforeDir="false" afterPath="$PROJECT_DIR$/package-lock.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/content/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/content/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/posts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/meta/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/metaSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/metaSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/postSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/postSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globalAdminPanel.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globalAdminPanel.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/testAPI.js" beforeDir="false" afterPath="$PROJECT_DIR$/testAPI.js" afterDir="false" />
     </list>
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -31,14 +90,21 @@
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
     <ConfirmationsSetting value="2" id="Add" />
   </component>
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
+    <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/static/images/fontawesome" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/../Pornyfree.com/client" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="restartRequiresConfirmation" value="false" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
+    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
@@ -56,23 +122,11 @@
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
     </key>
   </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
-  </component>
-  <component name="RunManager" selected="Node.js.generateFakeData.js">
-    <configuration name="generateFakeData.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/generateFakeData.js" working-dir="$PROJECT_DIR$">
+  <component name="RunManager" selected="Node.js.setup.js">
+    <configuration name="setupAdminAccount.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/setupAdminAccount.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
-    <configuration name="testAPI.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/testAPI.js" working-dir="$PROJECT_DIR$">
+    <configuration name="setup.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/setup.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -110,8 +164,8 @@
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Node.js.generateFakeData.js" />
-        <item itemvalue="Node.js.testAPI.js" />
+        <item itemvalue="Node.js.setup.js" />
+        <item itemvalue="Node.js.setupAdminAccount.js" />
       </list>
     </recent_temporary>
   </component>
@@ -286,28 +340,76 @@
       <workItem from="1592244040176" duration="790000" />
       <workItem from="1592408374907" duration="3279000" />
       <workItem from="1592484551691" duration="1797000" />
+      <workItem from="1592648206585" duration="2672000" />
+      <workItem from="1593011092313" duration="5822000" />
+      <workItem from="1594298397947" duration="629000" />
+      <workItem from="1594311357399" duration="358000" />
+      <workItem from="1594394753714" duration="4736000" />
+      <workItem from="1594411872113" duration="27863000" />
+      <workItem from="1594494479061" duration="4428000" />
+      <workItem from="1594570660096" duration="4382000" />
+      <workItem from="1594662346671" duration="4933000" />
+      <workItem from="1594818290240" duration="978000" />
     </task>
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
-    <option name="version" value="1" />
+    <option name="version" value="2" />
   </component>
   <component name="Vcs.Log.Tabs.Properties">
     <option name="TAB_STATES">
       <map>
         <entry key="MAIN">
           <value>
-            <State>
-              <option name="COLUMN_ORDER" />
-            </State>
+            <State />
           </value>
         </entry>
       </map>
     </option>
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="VcsManagerConfiguration">
     <MESSAGE value="ContextAPIAdded" />
     <option name="LAST_COMMIT_MESSAGE" value="ContextAPIAdded" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="1502" y="2546" key="FileChooserDialogImpl" timestamp="1594818605774">
+      <screen x="-597" y="2160" width="4096" height="1152" />
+    </state>
+    <state x="1502" y="2546" key="FileChooserDialogImpl/0.0.2341.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594818605774" />
+    <state x="2099" y="373" key="FileChooserDialogImpl/0.0.4096.1112/675.-2160.2560.1400@0.0.4096.1112" timestamp="1593011131589" />
+    <state width="2465" height="126" key="GridCell.Tab.0.bottom" timestamp="1594818791695">
+      <screen x="-597" y="2160" width="4096" height="1152" />
+    </state>
+    <state width="2464" height="467" key="GridCell.Tab.0.bottom/-597.2160.4096.1152/0.0.2341.1234@-597.2160.4096.1152" timestamp="1594671271911" />
+    <state width="2703" height="129" key="GridCell.Tab.0.bottom/0.0.2194.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594444577036" />
+    <state width="2465" height="126" key="GridCell.Tab.0.bottom/0.0.2341.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594818791695" />
+    <state width="1364" height="400" key="GridCell.Tab.0.bottom/0.0.4096.1112/675.-2160.2560.1400@0.0.4096.1112" timestamp="1593020075093" />
+    <state width="2465" height="126" key="GridCell.Tab.0.center" timestamp="1594818791694">
+      <screen x="-597" y="2160" width="4096" height="1152" />
+    </state>
+    <state width="2464" height="467" key="GridCell.Tab.0.center/-597.2160.4096.1152/0.0.2341.1234@-597.2160.4096.1152" timestamp="1594671271911" />
+    <state width="2703" height="129" key="GridCell.Tab.0.center/0.0.2194.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594444577035" />
+    <state width="2465" height="126" key="GridCell.Tab.0.center/0.0.2341.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594818791694" />
+    <state width="1364" height="400" key="GridCell.Tab.0.center/0.0.4096.1112/675.-2160.2560.1400@0.0.4096.1112" timestamp="1593020075093" />
+    <state width="2465" height="126" key="GridCell.Tab.0.left" timestamp="1594818791694">
+      <screen x="-597" y="2160" width="4096" height="1152" />
+    </state>
+    <state width="2464" height="467" key="GridCell.Tab.0.left/-597.2160.4096.1152/0.0.2341.1234@-597.2160.4096.1152" timestamp="1594671271911" />
+    <state width="2703" height="129" key="GridCell.Tab.0.left/0.0.2194.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594444577035" />
+    <state width="2465" height="126" key="GridCell.Tab.0.left/0.0.2341.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594818791694" />
+    <state width="1364" height="400" key="GridCell.Tab.0.left/0.0.4096.1112/675.-2160.2560.1400@0.0.4096.1112" timestamp="1593020075093" />
+    <state width="2465" height="126" key="GridCell.Tab.0.right" timestamp="1594818791694">
+      <screen x="-597" y="2160" width="4096" height="1152" />
+    </state>
+    <state width="2464" height="467" key="GridCell.Tab.0.right/-597.2160.4096.1152/0.0.2341.1234@-597.2160.4096.1152" timestamp="1594671271911" />
+    <state width="2703" height="129" key="GridCell.Tab.0.right/0.0.2194.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594444577036" />
+    <state width="2465" height="126" key="GridCell.Tab.0.right/0.0.2341.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594818791694" />
+    <state width="1364" height="400" key="GridCell.Tab.0.right/0.0.4096.1112/675.-2160.2560.1400@0.0.4096.1112" timestamp="1593020075093" />
+    <state x="782" y="2323" width="1139" height="882" key="SettingsEditor" timestamp="1594419439171">
+      <screen x="-597" y="2160" width="4096" height="1152" />
+    </state>
+    <state x="782" y="2323" width="1139" height="882" key="SettingsEditor/0.0.2194.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594419439171" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
@@ -322,18 +424,13 @@
           <option name="timeStamp" value="6" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/server/controllers/postsControllers.js</url>
-          <line>80</line>
-          <option name="timeStamp" value="7" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/admin/fileManager/index.js</url>
           <line>30</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/index.js</url>
-          <line>42</line>
+          <line>38</line>
           <option name="timeStamp" value="12" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

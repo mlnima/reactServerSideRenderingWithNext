@@ -1,7 +1,8 @@
 //settingSchema
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-const metaSchema = mongoose.Schema({
+const metaSchema =  new Schema({
     name:{
         type:String,
         unique:true
@@ -12,4 +13,4 @@ const metaSchema = mongoose.Schema({
     count:Number
 });
 
-module.exports = mongoose.model("metas", metaSchema);
+module.exports = mongoose.model("meta", metaSchema);

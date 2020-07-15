@@ -1,5 +1,5 @@
-import React, { useState, useContext, useEffect, useRef } from 'react';
-import { AppContext } from '../../../context/AppContext'
+import React, {useState, useContext, useEffect, useRef} from 'react';
+import {AppContext} from '../../../context/AppContext'
 import Head from 'next/dist/next-server/lib/head'
 import AppLayout from '../../layouts/AppLayout'
 import withRouter from 'next/dist/client/with-router'
@@ -10,7 +10,7 @@ import reactHtmlParser from 'html-react-parser'
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
     const customScriptElement = useRef(null)
-    const [ state, setState ] = useState({
+    const [state, setState] = useState({
         title: '',
         themeColor: '',
         description: '',
@@ -19,6 +19,8 @@ const SiteSettingSetter = props => {
         customScripts: []
         // customScript: props.identity.data.customScript || 'your Script will be here',
     });
+
+
 
     useEffect(() => {
 
@@ -44,7 +46,7 @@ const SiteSettingSetter = props => {
             contextData.setSiteWidgets(props.widgets)
         }
 
-    }, [ props ]);
+    }, [props]);
 
     useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;
@@ -52,10 +54,10 @@ const SiteSettingSetter = props => {
         document.body.style.backgroundSize = contextData.siteDesign.bodyBackgroundSize || 'cover';
         document.body.style.backgroundRepeat = contextData.siteDesign.bodyBackgroundRepeat || 'no-repeat';
         document.body.style.backgroundAttachment = contextData.siteDesign.bodyBackgroundAttachment || 'initial';
-        document.body.style.backgroundImage = `url(${ contextData.siteDesign.bodyBackgroundImage })`
+        document.body.style.backgroundImage = `url(${contextData.siteDesign.bodyBackgroundImage})`
         document.body.style.color = contextData.siteDesign.bodyBackgroundColor
 
-    }, [ contextData.siteDesign ]);
+    }, [contextData.siteDesign]);
 
     const renderCustomScripts = (props.identity.data.customScripts || []).map(script => {
         return reactHtmlParser(script.scriptBody)
@@ -64,14 +66,14 @@ const SiteSettingSetter = props => {
     return (
         <>
             <Head>
-                <title>{ state.title }</title>
-                <meta name="theme-color" content={ state.themeColor }/>
+                <title>{state.title}</title>
+                <meta name="theme-color" content={state.themeColor}/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta charSet="utf-8"/>
-                {/*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*/ }
-                <meta name="description" content={ state.description }/>
-                <meta name="keywords" content={ state.keywords }/>
-                <link rel="icon" href={ '/favicon.ico' }/>
+                {/*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*/}
+                <meta name="description" content={state.description}/>
+                <meta name="keywords" content={state.keywords}/>
+                <link rel="icon" href={'/favicon.ico'}/>
                 <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
                 <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
                 {renderCustomScripts}

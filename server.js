@@ -101,8 +101,8 @@ app.prepare().then(()=>{
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts',cacheSuccesses,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts/post',cacheSuccesses,(req,res)=>{postsControllers.getPostInfo(req,res)});
-    server.post('/api/v1/posts/createNewPost',(req,res)=>{postsControllers.createNewPost(req,res)});
+    server.post('/api/v1/posts/post',(req,res)=>{postsControllers.getPostInfo(req,res)});
+    server.post('/api/v1/posts/createNewPost',async (req,res)=>{await postsControllers.createNewPost(req,res)});
     server.post('/api/v1/posts/updatePost',(req,res)=>{postsControllers.updatePost(req,res)});
     server.post('/api/v1/posts/deletePost',(req,res)=>{postsControllers.deletePost(req,res)});
     server.post('/api/v1/posts/postsBulkAction',(req,res)=>{postsControllers.postsBulkAction(req,res)});
@@ -163,6 +163,18 @@ app.prepare().then(()=>{
 //         }
 //         app.render(req,res,targetComponent,queryParams)
 //     });
+    server.get('/post/:id',(req,res)=>{
+        const targetComponent = '/post';
+        const params = {
+            id:req.params.id
+        }
+        app.render(req,res,targetComponent,params)
+    });
+
+
+
+
+
     server.get('/profile',(req,res)=>{
         const targetComponent = '/profile';
         const queryParams = {
@@ -281,11 +293,11 @@ app.prepare().then(()=>{
 
 
 
-    server.get('/page/categories/:pageNo',(req,res)=>{
-        const targetComponent = '/page/categories';
-        const params = {pageNo:req.params.pageNo}
-        app.render(req,res,targetComponent,params)
-    });
+    // server.get('/page/categories/:pageNo',(req,res)=>{
+    //     const targetComponent = '/page/categories';
+    //     const params = {pageNo:req.params.pageNo}
+    //     app.render(req,res,targetComponent,params)
+    // });
 
     // server.get('/page/:pageNo',(req,res)=>{
     //     const targetComponent = '/page/categories';
@@ -293,23 +305,13 @@ app.prepare().then(()=>{
     //     app.render(req,res,targetComponent,params)
     // });
 
-    server.get('/post/:id/:postTitle',(req,res)=>{
-        const targetComponent = '/post';
-        const params = {
-            postTitle:req.params.postTitle,
-            id:req.params.id
-        }
-        app.render(req,res,targetComponent,params)
-    });
-
-    server.get('/:postTitle',(req,res)=>{
-        const targetComponent = '/post';
-        const params = {postTitle:req.params.postTitle}
-        app.render(req,res,targetComponent,params)
-    });
 
 
-
+    // server.get('/:postTitle',(req,res)=>{
+    //     const targetComponent = '/post';
+    //     const params = {postTitle:req.params.postTitle}
+    //     app.render(req,res,targetComponent,params)
+    // });
 
     server.get('*',(req,res)=>{
         return handle(req,res)

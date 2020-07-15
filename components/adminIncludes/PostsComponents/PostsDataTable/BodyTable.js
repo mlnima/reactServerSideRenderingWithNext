@@ -142,17 +142,17 @@ const BodyTable = props => {
                         <p className='BodyTableItem author noMobile'>{ author }</p>
                     </div>
                     <div className='tagCategoriesActorsPreview BodyTableItem noMobile'>
-                        <span>   { post.categories + ' , ' }</span>
+                        {/*<span>   { post.categories + ' , ' }</span>*/}
 
 
                     </div>
                     <div className='tagCategoriesActorsPreview BodyTableItem noMobile'>
-                        <span>   { post.tags + ' , ' }</span>
+                        {/*<span>   { post.tags + ' , ' }</span>*/}
 
                     </div>
 
                     <div className='tagCategoriesActorsPreview BodyTableItem noMobile'>
-                        <span>      { post.actors + ' , ' }</span>
+                        {/*<span>      { post.actors + ' , ' }</span>*/}
 
                     </div>
 

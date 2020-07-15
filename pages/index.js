@@ -26,10 +26,6 @@ const Home = props => {
         }
     }, [ props ]);
 
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [ props ]);
-
     return (
         <>
             <AppLayout>

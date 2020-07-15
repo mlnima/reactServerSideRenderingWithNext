@@ -1,7 +1,8 @@
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-const postSchema = mongoose.Schema({
-    author: mongoose.Mixed,
+const postSchema =  new Schema({
+    author: Schema.Types.ObjectID,
     title: String,
     company: String,
     description: String,
@@ -27,9 +28,9 @@ const postSchema = mongoose.Schema({
     status: String,
     Production: String,
     comments: Array,
-    categories: Array,
-    actors: Array,
-    tags: Array,
+    categories: [Schema.Types.ObjectID],
+    actors: [Schema.Types.ObjectID],
+    tags: [Schema.Types.ObjectID],
     likes: {
         type: Number,
         default: 0
@@ -56,4 +57,4 @@ const postSchema = mongoose.Schema({
     rating:String
 });
 
-module.exports = mongoose.model("posts", postSchema);
+module.exports = mongoose.model("post", postSchema);

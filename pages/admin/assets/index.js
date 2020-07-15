@@ -17,9 +17,9 @@ const assets = props => {
         getAndSetData()
     }, [ state, props ]);
 
-    // useEffect(() => {
-    //     console.log(finalPageData)
-    // }, [ finalPageData ]);
+    useEffect(() => {
+        console.log(finalPageData)
+    }, [ finalPageData ]);
     useEffect(() => {
         if (props.router) {
             setState({

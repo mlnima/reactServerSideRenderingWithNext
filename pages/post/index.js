@@ -25,6 +25,9 @@ const Post = props => {
         style: {},
         editMode:false
     })
+
+
+
     useEffect(() => {
         if (props.identity.postPageSidebar) {
             setState({
@@ -112,8 +115,7 @@ const Post = props => {
 
 Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     const domainName = req ? await getAbsolutePath(req) : ''
-    const postBody = {
-        postTitle: query.postTitle,
+    const requestBody = {
         _id:query.id
     };
 
@@ -123,8 +125,8 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let comments;
     let errorCode = 200
 
-    const postData = await getPost(postBody, true, domainName, query.postTitle)
-    post = dataDecoder(postData.data.post).post
+    const postData = await getPost(requestBody, false, domainName,query.id)
+    post = postData.data.post
 
     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header','underPost' ] }, true, domainName, 'postPage')
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName, 'postPage')

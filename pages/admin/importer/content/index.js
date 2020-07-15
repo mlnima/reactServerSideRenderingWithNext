@@ -1,26 +1,34 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, {useEffect, useState, useContext, useRef} from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout';
-import { savePost } from '../../../../_variables/ajaxPostsVariables'
+import {savePost} from '../../../../_variables/ajaxPostsVariables'
+import {AppContext} from "../../../../context/AppContext";
 
 const importContent = props => {
+    const contextData = useContext(AppContext);
     const dataPreview = useRef(null)
-    const [ state, setState ] = useState({
+    const [state, setState] = useState({
         data: []
     });
     useEffect(() => {
     }, []);
 
-    const onImportPostsHandler = () => {
-        // const reader = new FileReader()
-        //   reader.readAsText(state.file)
-        //   const parsedData = JSON.parse(reader.result)
-        //   dataPreview.current.value =reader.result
+    const onImportPostsHandler = async () => {
         if (state.data[1]) {
             if (state.data[1].title) {
-                state.data.forEach(post => {
-                      post.status = 'draft'
-                     savePost(post,window.location.origin)
-                })
+                for await (let post of state.data) {
+                    post.status = 'draft'
+                    post.author = contextData.userData._id
+                    post.tags = post.tags ? post.tags.map(tag => {
+                        return {name: tag.trim(), type: 'tags'}
+                    }) : []
+                    post.categories = post.categories ? post.categories.map(category => {
+                        return {name: category.trim(), type: 'categories'}
+                    }) : []
+                    post.actors = post.actors ? post.actors.map(actor => {
+                        return {name: actor.trim(), type: 'actors'}
+                    }) : []
+                    await savePost(post, window.location.origin)
+                }
             }
         }
         console.log(state.data)
@@ -28,16 +36,16 @@ const importContent = props => {
     return (
         <AdminLayout>
             <div className='import-content'>
-                <input type='file' onChange={ async e => {
+                <input type='file' onChange={async e => {
                     const reader = new FileReader()
                     reader.readAsText(e.target.files[0])
                     reader.onload = e => {
                         // console.log( e.target.result)
-                        setState({ ...state, data: JSON.parse(e.target.result) })
+                        setState({...state, data: JSON.parse(e.target.result)})
                     }
-                } }/>
-                <button onClick={ () => onImportPostsHandler() }>Import Posts</button>
-                <textarea ref={ dataPreview }/>
+                }}/>
+                <button onClick={() => onImportPostsHandler()}>Import Posts</button>
+                <textarea ref={dataPreview}/>
             </div>
         </AdminLayout>
     );

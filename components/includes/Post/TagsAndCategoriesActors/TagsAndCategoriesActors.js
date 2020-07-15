@@ -40,19 +40,20 @@ const TagsAndCategoriesActors = props => {
     // }, []);
 
     const renderData = props.data.map(item => {
-        let typeForUrl = state.type === 'categories' ? 'category'
-            : state.type === 'tags' ? 'tag'
-                : state.type === 'actors' ? 'actor'
-                    : 'tag'
-        const path = `/posts?${ typeForUrl }=${ item }`;
+        // let typeForUrl = state.type === 'categories' ? 'category'
+        //     : state.type === 'tags' ? 'tag'
+        //         : state.type === 'actors' ? 'actor'
+        //             : 'tag'
+        //
+        const path = `/posts?${ state.type }=${ item._id }`;
         const icon = state.type === 'categories' ? CategorySvg
             : state.type === 'tags' ? TagSvg
                 : state.type === 'actors' ? StarSvg
                     : TagSvg
         return (
-            <div key={item} className='post-meta-item'>
+            <div key={item.name} className='post-meta-item'>
                 <img className='fontawesomeSvgSmall' src={ icon } alt=""/>
-                <Link href={ path } key={ item }><a className={ state.type }>{ item }</a></Link>
+                <Link href={ path } key={ item.name }><a className={ state.type }>{ item.name }</a></Link>
             </div>
         )
     });

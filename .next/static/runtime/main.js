@@ -976,7 +976,7 @@ function connect(options) {
       error.name = err.name;
       error.stack = err.stack; // __NEXT_DIST_DIR is provided by webpack
 
-      (0, _sourceMapSupport.rewriteStacktrace)(error, "G:\\Dev Project\\reactServerSideRenderingWithNext\\.next");
+      (0, _sourceMapSupport.rewriteStacktrace)(error, "I:\\Dev Project\\reactServerSideRenderingWithNext\\.next");
       return error;
     }
   };
@@ -6880,7 +6880,7 @@ try {
 /*! no static exports found */
 /***/ (function(module, exports, __webpack_require__) {
 
-__webpack_require__(/*! G:\Dev Project\reactServerSideRenderingWithNext\node_modules\next-env\src\injectVars.js */"./node_modules/next-env/src/injectVars.js");
+__webpack_require__(/*! I:\Dev Project\reactServerSideRenderingWithNext\node_modules\next-env\src\injectVars.js */"./node_modules/next-env/src/injectVars.js");
 module.exports = __webpack_require__(/*! .\node_modules\next\dist\client\next-dev.js */"./node_modules/next/dist/client/next-dev.js");
 
 

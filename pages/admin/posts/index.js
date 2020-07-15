@@ -9,10 +9,6 @@ import AppLayout from '../../../components/layouts/AppLayout'
 
 const adminPosts = props => {
 
-    // useEffect(() => {
-    //     console.log( props)
-    // }, [props]);
-
     return (
         <>
             <AdminLayout>

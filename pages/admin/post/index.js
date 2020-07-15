@@ -1,14 +1,14 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import { getPost } from '../../../_variables/ajaxPostsVariables';
-import { getAbsolutePath } from '../../../_variables/_variables'
+import React, {useEffect, useState, useContext, useRef} from 'react';
+import {getPost} from '../../../_variables/ajaxPostsVariables';
+import {getAbsolutePath} from '../../../_variables/_variables'
 
 import AdminLayout from "../../../components/layouts/AdminLayout";
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 import DropDownWidget from "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
-import { AppContext } from "../../../context/AppContext";
+import {AppContext} from "../../../context/AppContext";
 import Format from "../../../components/adminIncludes/PostComponents/Format/Format";
-import PostCategoriesTagsActors from "../../../components/adminIncludes/PostComponents/PostCategoriesTagsActors/PostCategoriesTagsActors";
+import Meta from "../../../components/adminIncludes/PostComponents/Meta/Meta";
 import VideoInformation from "../../../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
 import withRouter from "next/dist/client/with-router";
 import TextInputWithUploadBtn from '../../../components/adminIncludes/TextInputWithUploadBtn/TextInputWithUploadBtn'
@@ -16,13 +16,12 @@ import ImagePreview from '../../../components/adminIncludes/PostComponents/Image
 import Link from 'next/link'
 import dataDecoder from '../../../server/tools/dataDecoder'
 import ProductInformation from '../../../components/adminIncludes/PostComponents/ProductInformation/ProductInformation'
-import { getMultipleSetting } from '../../../_variables/ajaxVariables'
+import {getMultipleSetting} from '../../../_variables/ajaxVariables'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
 
 const Index = props => {
-    const contextData = useContext(AppContext);
 
-    const [ state, setState ] = useState({
+    const [state, setState] = useState({
         tags: [],
         categories: [],
         actors: [],
@@ -30,8 +29,8 @@ const Index = props => {
     })
 
     useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+        console.log(state)
+    }, [ state ]);
 
     const onChangeHandler = e => {
         setState({
@@ -43,17 +42,25 @@ const Index = props => {
     const onPostMetaChangeHandler = (type, data) => {
         setState({
             ...state,
-            [type]: data
+            [type]: [...state[type], ...data]
         })
     }
 
+    const onDeleteMetaFromPost = (type, name) => {
+        setState({
+            ...state,
+            [type]: state[type].filter(i => i.name != name)
+        })
+    }
+
+
     useEffect(() => {
-        if (props.router.query.new&& state._id){
+        if (props.router.query.new && state._id) {
             props.router.reload()
-        }else {
+        } else {
             setState(props.post)
         }
-    }, [ props ]);
+    }, [props]);
 
 
 
@@ -64,32 +71,43 @@ const Index = props => {
                 <div className='Post'>
 
                     <div className="content">
-                        <TitleDescription postData={ state } onChangeHandler={ onChangeHandler }/>
-                        <TextInputWithUploadBtn postData={ state } onChangeHandler={ onChangeHandler } name='mainThumbnail' title='Main thumbnail'/>
-                        <ImagePreview postData={ state }/>
-                        <DropDownWidget postData={ state } renderFor='product' component={ ProductInformation } title='Product Information' onChangeHandler={ onChangeHandler }/>
-                        <DropDownWidget postData={ state } renderFor='video' component={ VideoInformation } title='Video Information' onChangeHandler={ onChangeHandler }/>
+                        <TitleDescription postData={state} onChangeHandler={onChangeHandler}/>
+                        <TextInputWithUploadBtn postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'
+                                                title='Main thumbnail'/>
+                        <ImagePreview postData={state}/>
+                        <DropDownWidget postData={state} renderFor='product' component={ProductInformation}
+                                        title='Product Information' onChangeHandler={onChangeHandler}/>
+                        <DropDownWidget postData={state} renderFor='video' component={VideoInformation}
+                                        title='Video Information' onChangeHandler={onChangeHandler}/>
                     </div>
 
                     <div className="side">
-                        <DropDownWidget renderFor='all' postData={ state } component={ ActionOnPost } title={ state.status } onChangeHandler={ onChangeHandler }/>
-                        <DropDownWidget renderFor='all' postData={ state } component={ Format } title='Format' onChangeHandler={ onChangeHandler }/>
-                        <DropDownWidget renderFor='all' postData={ state } isNewPost={ props.query.new === 'true' }
-                                        component={ PostCategoriesTagsActors }
+                        <DropDownWidget renderFor='all' postData={state} component={ActionOnPost} title={state.status}
+                                        onChangeHandler={onChangeHandler}/>
+                        <DropDownWidget renderFor='all' postData={state} component={Format} title='Format'
+                                        onChangeHandler={onChangeHandler}/>
+                        <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
+                                        component={Meta}
                                         type='categories' title='Post Category'
-                                        onChangeHandler={ onChangeHandler } onPostMetaChangeHandler={ onPostMetaChangeHandler }/>
-                        <DropDownWidget renderFor='all' postData={ state } isNewPost={ props.query.new === 'true' }
-                                        component={ PostCategoriesTagsActors }
+                                        onChangeHandler={onChangeHandler}
+                                        onPostMetaChangeHandler={onPostMetaChangeHandler}
+                                        onDeleteHandler={onDeleteMetaFromPost}/>
+                        <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
+                                        component={Meta}
                                         type='tags' title='Post Tags'
-                                        onChangeHandler={ onChangeHandler } onPostMetaChangeHandler={ onPostMetaChangeHandler }/>
-                        <DropDownWidget renderFor='all' postData={ state } isNewPost={ props.query.new === 'true' }
-                                        component={ PostCategoriesTagsActors }
+                                        onChangeHandler={onChangeHandler}
+                                        onPostMetaChangeHandler={onPostMetaChangeHandler}
+                                        onDeleteHandler={onDeleteMetaFromPost}/>
+                        <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
+                                        component={Meta}
                                         type='actors' title='Post Actors'
-                                        onChangeHandler={ onChangeHandler } onPostMetaChangeHandler={ onPostMetaChangeHandler }/>
-                        <DropDownWidget renderFor='all' postData={ state } isNewPost={ props.query.new === 'true' }
-                                        component={ RatingOption }
+                                        onChangeHandler={onChangeHandler}
+                                        onPostMetaChangeHandler={onPostMetaChangeHandler}
+                                        onDeleteHandler={onDeleteMetaFromPost}/>
+                        <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
+                                        component={RatingOption}
                                         title='Rating'
-                                        onChangeHandler={ onChangeHandler }/>
+                                        onChangeHandler={onChangeHandler}/>
 
 
                     </div>
@@ -100,13 +118,13 @@ const Index = props => {
     );
 };
 
-Index.getInitialProps = async ({ query, req }) => {
+Index.getInitialProps = async ({query, req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let post;
     let postData
     let requestBody;
     let settings;
-    const settingsData = await getMultipleSetting({ settings: [ 'identity' ] }, false, domainName, 'adminPostPage')
+    const settingsData = await getMultipleSetting({settings: ['identity']}, false, domainName, 'adminPostPage')
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
 
     const newPostData = {
@@ -125,16 +143,15 @@ Index.getInitialProps = async ({ query, req }) => {
 
     if (query.new) {
         post = newPostData
-    } else if (query.postTitle || query.id) {
+    } else if (query.id) {
         requestBody = {
-            postTitle: query.postTitle,
             _id: query.id,
         };
 
-        postData = await getPost(requestBody, false, domainName,query.id)
-        post = postData.data ? dataDecoder(postData.data.post).post : newPostData
+        postData = await getPost(requestBody, false, domainName, query.id)
+        post = postData.data ? postData.data.post : newPostData
     }
 
-    return { post, query,...settings }
+    return {post, query, ...settings}
 };
 export default withRouter(Index);
