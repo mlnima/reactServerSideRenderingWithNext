@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {getPost} from '../../../_variables/ajaxPostsVariables';
 import {getAbsolutePath} from '../../../_variables/_variables'
-
 import AdminLayout from "../../../components/layouts/AdminLayout";
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
@@ -20,17 +19,39 @@ import {getMultipleSetting} from '../../../_variables/ajaxVariables'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
 
 const Index = props => {
+    const activeEditingLanguage = useRef(null)
+    const titleElement = useRef(null)
+    const descriptionElement = useRef(null)
 
     const [state, setState] = useState({
         tags: [],
         categories: [],
         actors: [],
+        translations: {},
         inSlideShow: false
     })
 
+    const [siteIdentity, setSiteIdentity] = useState({
+        translationLanguages: []
+    })
+
+    useEffect(() => {
+        console.log(siteIdentity.translationLanguages)
+    }, [siteIdentity]);
+
+
     useEffect(() => {
         console.log(state)
-    }, [ state ]);
+    }, [state]);
+
+    useEffect(() => {
+        if (props.identity) {
+            setSiteIdentity({
+                ...siteIdentity,
+                ...props.identity.data
+            })
+        }
+    }, [props]);
 
     const onChangeHandler = e => {
         setState({
@@ -38,6 +59,23 @@ const Index = props => {
             [e.target.name]: e.target.value
         })
     };
+
+    const onTitleDescriptionChangeHandler = e => {
+        if (activeEditingLanguage.current.value === 'default') {
+            onChangeHandler(e)
+        } else {
+            setState({
+                ...state,
+                translations: {
+                    ...state.translations,
+                    [activeEditingLanguage.current.value]: {
+                        title: titleElement.current.value,
+                        description: descriptionElement.current.value,
+                    }
+                }
+            })
+        }
+    }
 
     const onPostMetaChangeHandler = (type, data) => {
         setState({
@@ -62,7 +100,23 @@ const Index = props => {
         }
     }, [props]);
 
+    const languagesOptions = siteIdentity.translationLanguages.map(lang => {
+        return (
+            <option value={lang}>{lang}</option>
+        )
+    })
 
+    const onActiveEditingLanguageChangeHandler = e => {
+        if (e.target.value === 'default') {
+            titleElement.current.value = state.title
+            descriptionElement.current.value = state.description
+            console.log('default')
+        } else {
+            titleElement.current.value = state.translations ? state.translations[e.target.value] ? state.translations[e.target.value].title : '' || '' : ''
+            descriptionElement.current.value = state.translations ? state.translations[e.target.value] ? state.translations[e.target.value].description : '' || '' : ''
+            console.log('not default')
+        }
+    }
 
     return (
         <>
@@ -71,7 +125,15 @@ const Index = props => {
                 <div className='Post'>
 
                     <div className="content">
-                        <TitleDescription postData={state} onChangeHandler={onChangeHandler}/>
+
+                        <p>Translation(you need to activate the language in general settings)</p>
+                        <select ref={activeEditingLanguage} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
+                            <option value='default'>Default</option>
+                            {languagesOptions}
+                        </select>
+
+                        <TitleDescription titleElement={titleElement} descriptionElement={descriptionElement}
+                                          postData={state} onChangeHandler={onTitleDescriptionChangeHandler}/>
                         <TextInputWithUploadBtn postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'
                                                 title='Main thumbnail'/>
                         <ImagePreview postData={state}/>

@@ -21,9 +21,7 @@ const SiteSettingSetter = props => {
     });
 
 
-
     useEffect(() => {
-
         if (props.design) {
             contextData.dispatchSiteDesign(props.design.data)
         }
@@ -47,6 +45,19 @@ const SiteSettingSetter = props => {
         }
 
     }, [props]);
+
+    useEffect(() => {
+        if (props.router){
+            if (localStorage.lang && props.router.lang !== localStorage.lang){
+                const path = {
+                    pathname: props.router ? props.router.pathname : '',
+                    query: props.router ? { ...props.router.query, lang: localStorage.lang } : ''
+                }
+                props.router.push(path)
+            }
+        }
+    }, []);
+
 
     useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;

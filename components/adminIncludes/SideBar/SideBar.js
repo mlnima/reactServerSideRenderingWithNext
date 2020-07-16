@@ -22,6 +22,10 @@ const SideBar = props => {
             pathURL: '/admin/assets?assetsType=posts',
             subItems: [{name:'newPost',url:'/admin/post?new=1'}]
         },
+        Translation: {
+            pathURL: '/admin/assets?assetsType=translation',
+            subItems: [{name:'newTranslation ',url:'/admin/translate?new=1'}]
+        },
         users: {
             pathURL: '/admin/assets?assetsType=users',
             subItems: []

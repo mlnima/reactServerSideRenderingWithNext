@@ -305,6 +305,7 @@ const WidgetModel = props => {
                         <option value='video'>Video</option>
                         <option value='navigationMenu'>Navigation Menu</option>
                         <option value='alphabeticalNumericalRange'>Alphabetical Numerical Range</option>
+                        <option value='language'>Language</option>
                     </select>
                     <p>Widget Index:</p>
                     <DelayInput type='number' name='widgetIndex' className='widgetIndex' placeholder='widgetIndex' value={ widgetData.data.widgetIndex } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>

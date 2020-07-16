@@ -10,6 +10,7 @@ const metaSchema =  new Schema({
     type: String,
     description: String,
     imageUrl:String,
+    translations:mongoose.Mixed,
     count:Number
 });
 

@@ -46,13 +46,12 @@
 @import "../components/adminIncludes/assetComponents/TableBody/TableBody";
 @import "../components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem";
 @import "../components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection";
-
-
 @import "../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 @import "AdminStyle";
 //pages
 
 @import "../pages/admin/settings/settings";
+@import "../pages/admin/translate/translate";
 @import "../pages/admin/design/widgets/widgets";
 @import "../pages/admin/design/background/background";
 @import "../pages/admin/user/user";

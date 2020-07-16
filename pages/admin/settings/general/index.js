@@ -26,11 +26,27 @@ const settings = props => {
         metaPageSidebar: props.identity.postsPageSidebar || false,
         membership: props.identity.membership || false,
         allowUserToPost: props.identity.allowUserToPost || false,
+        translationLanguages:[]
     });
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+    // useEffect(() => {
+    //     console.log(state.translationLanguages)
+    // }, [ state ]);
+
+    const onTranslationLanguagesChangeHandler = e=>{
+        if (e.target.checked){
+            setState({
+                ...state,
+                translationLanguages: [...state.translationLanguages,e.target.value]
+            })
+        }else {
+            setState({
+                ...state,
+                translationLanguages: state.translationLanguages.filter(i=> i!== e.target.value)
+            })
+        }
+    }
+
     const onSubmitHandler = e => {
         e.preventDefault()
         contextData.dispatchState({
@@ -53,6 +69,8 @@ const settings = props => {
             [e.target.name]: finalValue
         })
     }
+
+
     const deleteItem = (e) => {
         setState({
             ...state,
@@ -162,6 +180,22 @@ const settings = props => {
                                 <option value='http'>HTTP</option>
                                 <option value='https'>HTTPS</option>
                             </select>
+                        </div>
+                        <div className="site-settings-form-section allowUserToPost">
+                            <p>Translation Languages:</p>
+                            <div className='language'>
+                                <p>German</p>
+                                <input value='de' name='de' type='checkbox' onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
+                            </div>
+                            <div className='language'>
+                                <p>Persian</p>
+                                <input value='fa' name='fa' type='checkbox' onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
+                            </div>
+                            <div className='language'>
+                                <p>Arabic</p>
+                                <input value='ar' name='ar' type='checkbox' onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
+                            </div>
+
                         </div>
                     </div>
 

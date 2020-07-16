@@ -1,0 +1,23 @@
+@import "../../../styles/colors";
+@import "../../../styles/inputs";
+@import "../../../styles/buttons";
+.translate-page{
+  .translate-page-inputFields{
+    display: flex;
+    flex-wrap: wrap;
+    .translate-page-inputFields-section{
+      margin: 10px;
+      textarea,input{
+        @include adminMainInput;
+        min-width: 300px;
+      }
+      textarea{
+        min-height: 200px;
+      }
+    }
+  }
+  button{
+    @include greenActionBtn;
+  }
+
+}

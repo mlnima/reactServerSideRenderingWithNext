@@ -123,10 +123,14 @@ const PostInfo = props => {
             )
         } else {
             return (
-                <h1 className='post-title'>{props.title}</h1>
+                <h1 className='post-title'>{props.router ? props.router.query.lang ? props.post.translations ? props.post.translations[props.router.query.lang] ? props.post.translations[props.router.query.lang].title || props.post.title : props.post.title : props.post.title : props.post.title : props.post.title}</h1>
             )
         }
     }
+
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     const RenderDescription = () => {
         if (props.editMode) {
@@ -138,7 +142,7 @@ const PostInfo = props => {
             )
         } else {
             return (
-                <div className="description">{props.description}</div>
+                <div className="description">{props.router ? props.router.query.lang ? props.post.translations ? props.post.translations[props.router.query.lang] ? props.post.translations[props.router.query.lang].description || props.post.description : props.post.description : props.post.description : props.post.description : props.post.description}</div>
             )
         }
     }

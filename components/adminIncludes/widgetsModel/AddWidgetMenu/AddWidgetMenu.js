@@ -13,6 +13,7 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu type='logo' name='Logo'/>
             <AddWidgetWithPositionMenu type='navigationMenu' name='Navigation Menu'/>
             <AddWidgetWithPositionMenu type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
+            <AddWidgetWithPositionMenu type='language' name='Language'/>
         </div>
     );
 };

@@ -6,6 +6,7 @@ import MetaWidget from '../widgets/MetaWidget/MetaWidget'
 import MediaWidget from '../widgets/MediaWidget/MediaWidget'
 import SearchInputComponent from '../widgets/SearchInputComponent/SearchInputComponent';
 import AlphabeticalNumericalRangeLinksWidget from '../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'
+import LanguagesSwitcher from '../widgets/LanguagesSwitcher/LanguagesSwitcher'
 import Logo from '../Logo/Logo'
 
 const WidgetsRenderer = props => {
@@ -51,6 +52,11 @@ const WidgetsRenderer = props => {
             case 'alphabeticalNumericalRange':
                 return (
                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ AlphabeticalNumericalRangeLinksWidget } { ...widget } />
+                )
+
+            case 'language':
+                return (
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ LanguagesSwitcher } { ...widget } />
                 )
 
             default:
