@@ -27,7 +27,7 @@
     "fs-extra": "^9.0.0",
     "html-react-parser": "^0.13.0",
     "jwt-decode": "^2.2.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "moment": "^2.24.0",
     "mongoose": "^5.8.10",
     "next": "^9.3.2",
