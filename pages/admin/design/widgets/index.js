@@ -1,47 +1,66 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, {useEffect, useState, useContext, useRef} from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout'
 import AddWidgetMenu from '../../../../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
-import { AppContext } from '../../../../context/AppContext'
+import {AppContext} from '../../../../context/AppContext'
 import WidgetModel from '../../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel';
-import { getMultipleWidgetWithData } from '../../../../_variables/ajaxVariables'
-import { getAbsolutePath } from '../../../../_variables/_variables'
+import {getMultipleSetting, getMultipleWidgetWithData} from '../../../../_variables/ajaxVariables'
+import {getAbsolutePath} from '../../../../_variables/_variables'
 import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
-import { convertVariableNameToName } from '../../../../_variables/_variables'
+import {convertVariableNameToName} from '../../../../_variables/_variables'
+import dataDecoder from "../../../../server/tools/dataDecoder";
 
 const HomePageWidgets = props => {
     const contextData = useContext(AppContext);
+
+    const [siteIdentity, setSiteIdentity] = useState({
+        translationLanguages: []
+    })
+
 
     useEffect(() => {
         if (props.widgets) {
             contextData.dispatchWidgetsSettings({
                 ...contextData.widgetsSettings,
-                widgets: [ ...props.widgets ]
+                widgets: [...props.widgets]
             })
         }
     }, [props]);
 
-    const renderWidgetsInPosition = [ ...new Set((contextData.widgetsSettings.widgets).map(widgets => {return widgets.data.position})) ].map(position => {
+
+    useEffect(() => {
+        if (props.identity) {
+            setSiteIdentity({
+                ...siteIdentity,
+                ...props.identity.data
+            })
+        }
+    }, [props]);
+
+    const renderWidgetsInPosition = [...new Set((contextData.widgetsSettings.widgets).map(widgets => {
+        return widgets.data.position
+    }))].map(position => {
 
         const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)
         // console.log(widgetsInGroupByPosition.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1) )
-        const widgetsOnThisType = (widgetsInGroupByPosition.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)).map(widget => {
+        const widgetsOnThisType = (widgetsInGroupByPosition.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)).map(widget => {
             // console.log( widget)
             const dataWithIndex = {
                 data: {
                     ...widget.data,
-                    widgetIndex:  widget.data.widgetIndex? widget.data.widgetIndex:   widgetsInGroupByPosition.indexOf(widget)
+                    widgetIndex: widget.data.widgetIndex ? widget.data.widgetIndex : widgetsInGroupByPosition.indexOf(widget)
                 }
             }
-            const widgetData = {...widget,...dataWithIndex}
+            const widgetData = {...widget, ...dataWithIndex}
 
             return (
-                <WidgetModel key={ contextData.widgetsSettings.widgets.indexOf(widget) } data={ widgetData }  />
+                <WidgetModel key={contextData.widgetsSettings.widgets.indexOf(widget)} data={widgetData}
+                             translationLanguages={siteIdentity.translationLanguages || []}/>
             )
         })
         return (
             <div className='widgetAdminPanelItem'>
-                <p className='widgetAdminPanelItemHeader'>{ convertVariableNameToName(position) }</p>
-                { widgetsOnThisType }
+                <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
+                {widgetsOnThisType}
             </div>
         )
     })
@@ -56,7 +75,7 @@ const HomePageWidgets = props => {
                     <AddWidgetMenu/>
                 </div>
                 <div className="widgets">
-                 { renderWidgetsInPosition }
+                    {renderWidgetsInPosition}
                 </div>
             </div>
 
@@ -76,13 +95,16 @@ const HomePageWidgets = props => {
     );
 };
 
-HomePageWidgets.getInitialProps = async ({  req }) => {
+HomePageWidgets.getInitialProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let widgets;
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, domainName, Date.now())
+    let settings;
+    const settingsData = await getMultipleSetting({settings: ['identity']}, false, domainName, 'adminPostPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, false, domainName, Date.now())
+    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
-    return { widgets, domainName }
+    return {widgets, domainName, ...settings}
 }
 
 export default HomePageWidgets;

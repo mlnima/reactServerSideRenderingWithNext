@@ -77,7 +77,7 @@ const TableBodyItemSection = props => {
                 <RenderArraySection data={props.dataValue}/>
             </div>
         )
-    } else if (props.dataName === 'mainThumbnail') {
+    } else if (props.dataName === 'mainThumbnail'||props.dataName === 'noImageUrl'||props.dataName === 'imageUrl') {
         return (
             <div className='asset-page-table-body-item-section'>
                 <img src={props.dataValue}/>

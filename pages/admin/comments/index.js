@@ -40,7 +40,7 @@ comments.getInitialProps = async ({ pathname, query, req, res, err }) => {
         sort: query.sort || 'latest',
         status: query.status || 'all',
     }
-    const commentsData = await getComments(getCommentsData,false,domainName)
+    const commentsData = await getComments(getCommentsData,domainName,false)
     comments = commentsData.data
     return { query, pathname, comments: comments.comments, totalComments: comments.count, getCommentsData }
 }

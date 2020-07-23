@@ -27,11 +27,11 @@ const meta = props => {
         }
     }, []);
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+    // useEffect(() => {
+    //     console.log('meta page',props)
+    // }, [props]);
 
-    const renderMetas = props.metaSource.metas.map(meta => {
+    const renderMetas = (props.metaSource.metas || []).map(meta => {
 
         return (
             <MetaElement key={props.metaSource.metas.indexOf(meta)} {...meta} />
@@ -49,7 +49,7 @@ const meta = props => {
                         currentPage={props.dataForGettingMeta.page}
                         totalCount={props.metaSource.totalCount}
                         size={props.dataForGettingMeta.size}
-                        maxPage={Math.ceil(parseInt(props.metaSource.totalCount) / parseInt(props.dataForGettingMeta.size)) - 1}
+                        maxPage={Math.ceil(parseInt(props.metaSource.totalCount) / parseInt(props.dataForGettingMeta.size))  }
                         queryData={props.query || props.router.query}
                         pathnameData={props.pathname || props.router.pathname}
                     />
@@ -61,7 +61,7 @@ const meta = props => {
                         currentPage={props.dataForGettingMeta.page}
                         totalCount={props.metaSource.totalCount}
                         size={props.dataForGettingMeta.size}
-                        maxPage={Math.ceil(parseInt(props.metaSource.totalCount) / parseInt(props.dataForGettingMeta.size)) - 1}
+                        maxPage={Math.ceil(parseInt(props.metaSource.totalCount) / parseInt(props.dataForGettingMeta.size)) }
                         queryData={props.query || props.router.query}
                         pathnameData={props.pathname || props.router.pathname}
                     />
@@ -80,26 +80,30 @@ meta.getInitialProps = async ({pathname, query, req, asPath}) => {
     let errorCode = 200
 
     const dataForGettingMeta = {
-        type: query.type,
+        type: asPath.includes('/tags')  ? 'tags' :
+              asPath.includes('/categories') ? 'categories' :
+              asPath.includes('/actors')   ? 'actors' :'',
         searchForImageIn: query.type,
         page: parseInt(query.page) || 1,
         size: parseInt(query.size) || 30,
         sort: query.sort || 'latest',
         startWith: query.startWith || 'any',
-        keyword: query.keyword || '',
+        keyword: query.keyword || '' ,
+        lang: query.lang || 'default'
     }
 
     let settings;
     let widgets;
     let metaSource;
 
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, true, domainName, 'tagsPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header']}, true, domainName, 'tagsPage')
-    const metaData = await getMeta(dataForGettingMeta, true, domainName)
+    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']},  domainName,true, 'tagsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header']},  domainName,true, 'tagsPage')
+    const metaData = await getMeta(dataForGettingMeta, domainName, true)
 
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
+
 
     return {...settings, query, pathname, asPath, widgets, metaSource, dataForGettingMeta}
 }

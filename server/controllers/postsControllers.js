@@ -1,3 +1,4 @@
+
 const dataEncoder = require('../tools/dataEncoder')
 let postsControllers = {};
 const postSchema = require('../models/postSchema');
@@ -39,31 +40,6 @@ function fieldGenerator(fields) {
     return exportData
 };
 
-
-let image = {
-    "images": [],
-    "quality": "HD",
-    "comments": [],
-    "categories": ["Straight"],
-    "actors": ["rachel steele"],
-    "tags": ["Rachel steele", "Amateur", "Blowjob", "Milf", "Grandfather", "See through", "Truth", "Truth about"],
-    "likes": 0,
-    "disLikes": 0,
-    "views": 14,
-    "duration": "03:35",
-    "lastModify": "2020-06-01T17:32:44.835Z",
-    "author": "5ea6024fc2b554601ea04ad3",
-    "title": "Rachel Steele's - The Truth About Your Grandfather - HD",
-    "description": "",
-    "mainThumbnail": "https://thumb-v-cl2.xhcdn.com/a/mcRkYb13ZOpvZMZvpRt0nw/001/820/529/2000x2000.10.jpg",
-    "videoTrailerUrl": "https://thumb-v9.xhcdn.com/a/nVhv7dWMKB6F5r3lPlSOTg/001/820/529/240x135.t.mp4",
-    "videoEmbedCode": "https://xhamster.com/embed/1820529",
-    "status": "published",
-    "postType": "video",
-    "sourceSite": "xhamster"
-}
-
-
 postsControllers.createNewPost = async (req, res) => {
     const newPost = req.body.postData;
     try {
@@ -97,6 +73,19 @@ postsControllers.createNewPost = async (req, res) => {
 };
 
 
+
+postsControllers.updateMeta = (req,res)=>{
+    metaSchema.findByIdAndUpdate(req.body.data._id, {...req.body.data}, {new: true}).exec().then(updatedMeta=>{
+        res.json({updated: updatedMeta})
+        res.end()
+    }).catch(err=>{
+        console.log(err)
+    })
+}
+
+
+
+
 postsControllers.updatePost = async (req, res) => {
     const postUpdatedData = req.body.postData
     console.log(postUpdatedData)
@@ -124,28 +113,38 @@ postsControllers.updatePost = async (req, res) => {
 };
 
 postsControllers.getPostsInfo = async (req, res) => {
-    console.log('getPostsInfo not cached')
-
+    console.log(req.body)
     const size = parseInt(req.body.size) > 100 ? 100 : parseInt(req.body.size)
     const pageNo = req.body.pageNo || 1;
     let postTypeQuery = req.body.postType === 'all' ? {} : {postType: req.body.postType};
     let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
     let authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
-    let categoryQuery = req.body.category === 'all' ? {} : {categories: new RegExp(req.body.category, 'i')};
-    let tagQuery = req.body.tag === 'all' ? {} : {tags: new RegExp(req.body.tag, 'i')};
-    let actorQuery = !req.body.actor || req.body.actor === 'all' ? {} : {actors: new RegExp(req.body.actor, 'i')};
+    let metaQuery = req.body.content === 'all' ? {} : {$or:[
+            {categories:req.body.content},
+            {tags:req.body.content},
+            {actors:req.body.content}
+        ]};
+    let searchQueryGenerator = ()=>{
+        if (req.body.keyword === ''){
+            return {}
+        }else {
+            if (!req.body.lang|| req.body.lang === 'default'){
+                return{$or: [{title: new RegExp(req.body.keyword, 'i')},{description: new RegExp(req.body.keyword, 'i')}]};
+            }else {
+                return{$or: [
+                    {title: new RegExp(req.body.keyword, 'i')},
+                    {description: new RegExp(req.body.keyword, 'i')},
+                    {[`translations.${req.body.lang}.title`]:new RegExp(req.body.keyword, 'i')},
+                    {[`translations.${req.body.lang}.description`]:new RegExp(req.body.keyword, 'i')},]}
+            }
+        }
+    }
 
-    let searchQuery = req.body.keyword === '' ? {} : {
-        $or: [
-            {actors: new RegExp(req.body.actor, 'i')},
-            {title: new RegExp(req.body.keyword, 'i')},
-            {description: new RegExp(req.body.keyword, 'i')}]
-    };
     let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
     let sortQuery = req.body.sort === 'latest' ? '-_id' : {[req.body.sort]: -1}
 
-    let posts = await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
-    let postsCount = await postSchema.countDocuments({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, categoryQuery, tagQuery, actorQuery]}).exec()
+    let posts = await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(),metaQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
+    let postsCount = await postSchema.count({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(),metaQuery]}).exec()
 
     Promise.all([posts, postsCount]).then(async data => {
         const posts = data[0]
@@ -154,10 +153,10 @@ postsControllers.getPostsInfo = async (req, res) => {
             for await (let post of posts) {
                 let dataSetPost = {
                     ...post.toObject(),
-                    author: post.author ? await userSchema.findById(post.author).exec() : {username: 'Private'},
-                    categories: post.categories ? await metaSchema.find({'_id': {$in: [...post.categories]}}) : [],
-                    tags: post.tags ? await metaSchema.find({'_id': {$in: [...post.tags]}}) : [],
-                    actors: post.actors ? await metaSchema.find({'_id': {$in: [...post.actors]}}) : []
+                    // author: post.author ? await userSchema.findById(post.author).exec() : {username: 'Private'},
+                    // categories: post.categories ? await metaSchema.find({'_id': {$in: [...post.categories]}}) : [],
+                    // tags: post.tags ? await metaSchema.find({'_id': {$in: [...post.tags]}}) : [],
+                    // actors: post.actors ? await metaSchema.find({'_id': {$in: [...post.actors]}}) : []
                 }
                 postsDataToSend = [...postsDataToSend, dataSetPost]
             }
@@ -180,6 +179,7 @@ postsControllers.getPostsInfo = async (req, res) => {
 
 postsControllers.getPostInfo = (req, res) => {
     const _id = req.body._id;
+    console.log(req.body)
     postSchema.findById(_id).exec().then(async post => {
         const postData = {
             ...post.toObject(),
@@ -237,38 +237,83 @@ postsControllers.likeDislikeView = (req, res) => {
     res.end()
 };
 
+postsControllers.getSingleMeta = async (req,res) =>{
+    metaSchema.findById(req.body.id).exec().then(meta=>{
+        res.json({meta})
+    }).catch(err=>{
+        console.log(err)
+        res.error(500)
+        res.end()
+    })
+}
+
+
+
+
+
 postsControllers.getMeta = async (req, res) => {
 
     const type = req.body.type ? {type: req.body.type} : {}
     const size = req.body.size;
     const page = req.body.page;
+    console.log(req.body)
     const startWithQuery = req.body.startWith === 'any' ? {} : {name: {$regex: '^' + req.body.startWith, $options: 'i'}}
     let searchQuery = req.body.keyword === '' ? {} : {
         $or: [
             {name: new RegExp(req.body.keyword, 'i')},
             {description: new RegExp(req.body.keyword, 'i')}]
     };
-    let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
-    const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery]}).exec()
-    metaSchema.find({$and: [type, searchQuery, startWithQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
-        const mapMetaToGetImage = metas.map(async meta => {
-            return {
-                ...meta.toObject(),
-                count: await postSchema.countDocuments({[req.body.searchForImageIn]: meta.name}).exec(),
-                noImageUrl: await postSchema.find({[req.body.searchForImageIn]: meta.name}).limit(1).sort('-_id').exec().then(lastPost => {
-                    if (lastPost[0]) {
-                        return lastPost[0].mainThumbnail
-                    } else {
-                        return undefined
-                    }
-                }).catch(err => {
-                    console.log(err)
-                })
-            }
 
+    let searchQueryGenerator = ()=>{
+        if (req.body.keyword === ''){
+            return {}
+        }else {
+            const keywordToSearch = decodeURIComponent(req.body.keyword)
+            console.log(req.body.keyword,keywordToSearch)
+            if (!req.body.lang || req.body.lang === 'default' ){
+                return{$or: [{name: new RegExp(req.body.keyword, 'i')},{description: new RegExp(req.body.keyword, 'i')}]};
+            }else {
+                return{$or: [
+                        {name: new RegExp(keywordToSearch, 'i')},
+                        {description: new RegExp(keywordToSearch, 'i')},
+                        {[`translations.${req.body.lang}.name`]:new RegExp(keywordToSearch, 'i')},
+                        {[`translations.${req.body.lang}.description`]:new RegExp(keywordToSearch, 'i')},]}
+            }
+        }
+    }
+
+
+    let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
+    const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery]}).exec()
+    metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery]}).limit(size).skip(size * (page -1)).sort(sortQuery).exec().then(async metas => {
+
+        const mapMetaToGetImage = metas.map(async meta => {
+            try {
+                const noImageUrl = await postSchema.find({[type.type]:meta._id}).limit(1).sort('-_id').exec().then(lastPost => {
+                                        if (lastPost[0]) {
+                                            return lastPost[0].mainThumbnail
+                                        } else {
+                                            return undefined
+                                        }
+                                    }).catch(err => {
+                                        console.log(err)
+                                        res.end()
+                                    })
+                return {
+                    ...meta.toObject(),
+                    count: await postSchema.countDocuments({[type.type]: meta._id}).exec(),
+                    noImageUrl
+
+                }
+            } catch (e) {
+                console.log('error 2')
+            }
         })
+
         res.json({metas: await Promise.all(mapMetaToGetImage), totalCount: metaCount})
         res.end()
+
+
     }).catch(err => {
         // console.log( err)
         res.end()

@@ -32,12 +32,12 @@ const SiteSettingSetter = props => {
             contextData.dispatchSiteIdentity(props.identity.data)
             setState({
                 ...state,
-                title: props.identity.data.title || '',
-                themeColor: props.design.data.themeColor || '',
-                description: props.identity.data.description || '',
-                bodyBackgroundImage: props.design.data.bodyBackgroundImage || '',
-                keywords: props.identity.data.keywords || [],
-                customScripts: props.identity.data.customScripts || []
+                title: props.identity ? props.identity.data.title || '' : '',
+                themeColor: props.design ? props.design.data.themeColor || '' : '',
+                description: props.identity ? props.identity.data.description || '' : '',
+                bodyBackgroundImage: props.design ? props.design.data.bodyBackgroundImage || '' : '',
+                keywords: props.identity ? props.identity.data.keywords || [] : [],
+                customScripts: props.identity ? props.identity.data.customScripts || [] : []
             })
         }
         if (props.widgets) {
@@ -47,17 +47,16 @@ const SiteSettingSetter = props => {
     }, [props]);
 
     useEffect(() => {
-        if (props.router){
-            if (localStorage.lang && props.router.lang !== localStorage.lang){
+        if (props.router) {
+            if (localStorage.lang && props.router.lang !== localStorage.lang) {
                 const path = {
                     pathname: props.router ? props.router.pathname : '',
-                    query: props.router ? { ...props.router.query, lang: localStorage.lang } : ''
+                    query: props.router ? {...props.router.query, lang: localStorage.lang} : ''
                 }
                 props.router.push(path)
             }
         }
     }, []);
-
 
     useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;
@@ -65,14 +64,15 @@ const SiteSettingSetter = props => {
         document.body.style.backgroundSize = contextData.siteDesign.bodyBackgroundSize || 'cover';
         document.body.style.backgroundRepeat = contextData.siteDesign.bodyBackgroundRepeat || 'no-repeat';
         document.body.style.backgroundAttachment = contextData.siteDesign.bodyBackgroundAttachment || 'initial';
-        document.body.style.backgroundImage = `url(${contextData.siteDesign.bodyBackgroundImage})`
+        document.body.style.backgroundImage = contextData.siteDesign.bodyBackgroundImage ? `url(${contextData.siteDesign.bodyBackgroundImage})` :'none'
         document.body.style.color = contextData.siteDesign.bodyBackgroundColor
 
     }, [contextData.siteDesign]);
 
-    const renderCustomScripts = (props.identity.data.customScripts || []).map(script => {
+    const renderCustomScripts = (props.identity ? props.identity.data.customScripts || [] : []).map(script => {
         return reactHtmlParser(script.scriptBody)
     })
+
 
     return (
         <>

@@ -1,23 +1,28 @@
-import React,{useEffect} from 'react';
+import React, {useEffect} from 'react';
 import Link from 'next/link'
 import RenderImageForMetaElements from '../RenderImageForMetaElements/RenderImageForMetaElements'
 import './MetaElement.scss'
+import withRouter from "next/dist/client/with-router";
 
 const MetaElement = props => {
 
-    // useEffect(() => {
-    //     console.log(encodeURIComponent(props.name))
-    // }, []);
+
     if (props.count > 0) {
-        const encodedUrl = encodeURIComponent(props.name)
-        console.log(props)
         return (
-            <Link key={ props.name } href={ `/posts?${ props.type }=${props._id}` }>
+            <Link key={props.name} as={`/${props.type}/${props.name}?content=${props._id}`} href={{
+                // pathname:`/${props.type}/${props.name}`,
+                pathname:`/posts`,
+                query:{
+                    content:props._id,
+                    contentName:props.name,
+                    contentType:props.type
+                }
+            }}>
                 <a className='meta-page-item'>
-                    <RenderImageForMetaElements { ...props }/>
+                    <RenderImageForMetaElements {...props}/>
                     <div className='meta-item-data'>
-                        <p>{ props.name }</p>
-                        <p>{ props.count } item</p>
+                        <p>{props.router ? props.router.query.lang ? props.translations ? props.translations[props.router.query.lang] ? props.translations[props.router.query.lang].name || props.name : props.name : props.name : props.name : props.name}</p>
+                        <p>{props.count} item</p>
                     </div>
                 </a>
             </Link>
@@ -25,4 +30,4 @@ const MetaElement = props => {
     } else return null
 
 };
-export default MetaElement;
+export default withRouter(MetaElement);

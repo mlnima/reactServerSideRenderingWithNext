@@ -17,13 +17,15 @@ export const saveCustomStyle = async (data) => {
     return await axios.post(window.location.origin + '/api/v1/settings/saveCustomStyle', body)
 };
 
-export const getSetting = async (type, cache, domainName, whichPage) => {
-
+export const getSetting = async (type, domainName, cache, whichPage) => {
+    console.log(type, domainName, cache, whichPage)
+    const pageNameForCachedRequest = whichPage ? `&position=${ whichPage }`: ''
     const body = {
         type,
+        cache
     };
 
-    return await axios.post(domainName + `/api/v1/settings/get?type=${ type }&position=${ whichPage }`, body)
+    return await axios.post(domainName + `/api/v1/settings/get?type=${ type }${ pageNameForCachedRequest }`, body)
 };
 
 export const addNewWidget = async (data) => {
@@ -41,19 +43,20 @@ export const addNewWidget = async (data) => {
 //     return await axios.post(domainName + '/api/v1/settings/getWidget', body)
 // }
 
-export const getMultipleWidgetWithData = async (widgets, cache, domainName, whichPage) => {
+export const getMultipleWidgetWithData = async (widgets, domainName,cache, whichPage) => {
     const body = {
         ...widgets,
+        cache
     };
     return await axios.post(domainName + `/api/v1/settings/getMultipleWidgetWithData?whichPage=${ whichPage }`, body)
 }
 
-export const getMultipleSetting = async (settings, cache, domainName, whichPage) => {
-    const isCache = cache ? '' : `?cache=${ Date.now() }`
+export const getMultipleSetting = async (settings, domainName, cache, whichPage) => {
     const body = {
-        ...settings
+        ...settings,
+        cache
     };
-    return await axios.post(domainName + `/api/v1/settings/getMultiple?whichPage=${ whichPage }&cache=${isCache}`, body)
+    return await axios.post(domainName + `/api/v1/settings/getMultiple?whichPage=${ whichPage }`, body)
 };
 
 export const getWidgetsWithData = async (position, domainName) => {

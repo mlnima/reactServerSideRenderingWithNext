@@ -29,7 +29,7 @@ const TableHeader = props => {
                 items,
             })
         } else if (props.router.query.assetsType === 'metas') {
-            let items = [ 'name', 'description', 'type' ]
+            let items = [ 'name', 'description', 'type','count','image' ]
             setState({
                 ...state,
                 items,

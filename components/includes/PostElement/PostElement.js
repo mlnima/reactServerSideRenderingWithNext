@@ -146,11 +146,11 @@ const PostElement = props => {
             )
         }
     }
-
+//as={`/post/${props.state.title}?id=${props.state._id}`}
     return (
         < div ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
-            <Link as={`/post/${props.state._id}`} href={{
-                pathname: '/post',
+            <Link  href={{
+                pathname: `/post/${props.state.title}?id=${props.state._id}`,
                 query: {
                     id: props.state._id
                 }

@@ -59,7 +59,7 @@ const Post = props => {
                 <Head>
                     <title>{ props.post.title }</title>
                     <meta name="description" content={ props.post.description }/>
-                    <meta name="keywords" content={ [ ...props.post.tags, ...props.post.categories, ...props.post.actors ] }/>
+                    <meta name="keywords" content={ [ ...props.post.tags.map(i=>i.name), ...props.post.categories.map(i=>i.name), ...props.post.actors.map(i=>i.name) ] }/>
                     <meta property="og:title" content={ props.post.title }/>
                     <meta property="og:type" content={ props.post.postType === 'video' ? props.post.postType + '.' + 'movies' : props.post.postType }/>
                     {/*url should define*/ }
@@ -76,7 +76,8 @@ const Post = props => {
 
 
     if (props.errorCode !== 200) {
-        return <Error { ...props } />
+        // return <Error { ...props } />
+        return null
     } else return (
         <>
             <AppLayout>
@@ -130,17 +131,17 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let comments;
     let errorCode = 200
 
-    const postData = await getPost(requestBody, false, domainName,query.id)
+    const postData = await getPost(requestBody, domainName, true)
     post = postData.data.post
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header','underPost' ] }, true, domainName, 'postPage')
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName, 'postPage')
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header','underPost' ] }, domainName, true, 'postPage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true, 'postPage')
 
     if (!post) {
         errorCode = 404
         // res.sendStatus(404)
     }
-    const commentsData = post ? await getComments({ onDocument: post._id }, true, domainName) : {}
+    const commentsData = post ? await getComments({ onDocument: post._id }, domainName, true) : {}
 
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

@@ -1,12 +1,13 @@
-import React, { useEffect, useState, useRef, useContext } from 'react';
+import React, {useEffect, useState, useRef, useContext} from 'react';
 import AdminLayout from "../../../../components/layouts/AdminLayout";
-import { getSetting, updateSetting } from "../../../../_variables/ajaxVariables";
+import {getSetting, updateSetting} from "../../../../_variables/ajaxVariables";
 import FA from 'react-fontawesome'
 import NavigationItem from "../../../../components/adminIncludes/NavigationItem/NavigationItem";
 import './navigationAdmin.scss';
-import { AppContext } from '../../../../context/AppContext'
+import {AppContext} from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
-import AdminDesignSettingColorType from '../../../../components/adminIncludes/AdminDesignSettingColorType/AdminDesignSettingColorType'
+import AdminDesignSettingColorType
+    from '../../../../components/adminIncludes/AdminDesignSettingColorType/AdminDesignSettingColorType'
 import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
 
 const navigation = props => {
@@ -17,7 +18,7 @@ const navigation = props => {
     const queryEl = useRef(null)
     const queryType = useRef(null)
 
-    const [ state, setState ] = useState({
+    const [state, setState] = useState({
         type: 'navigation',
         data: [],
         style: {
@@ -26,10 +27,9 @@ const navigation = props => {
         }
     });
 
-    // const [ newNavigationItem, setNewNavigationItem ] = useState({})
-    // useEffect(() => {
-    //     console.log(contextData.navigationData)
-    // }, [ contextData.navigationData ]);
+    useEffect(() => {
+        console.log(contextData.navigationData)
+    }, [contextData.navigationData]);
 
     useEffect(() => {
         setState({
@@ -39,7 +39,7 @@ const navigation = props => {
                 color: contextData.siteDesign.navigationTextColor || ''
             }
         })
-    }, [ contextData.siteDesign.navigationTextColor, contextData.siteDesign.navigationBackgroundColor ]);
+    }, [contextData.siteDesign.navigationTextColor, contextData.siteDesign.navigationBackgroundColor]);
 
     const onSaveChangesHandler = (type) => {
         const contextValue = type === 'design' ?
@@ -47,19 +47,19 @@ const navigation = props => {
             type === 'navigation' ?
                 'navigationData' : null
         updateSetting(type, contextData[contextValue]).then(() => {
-            props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
+            props.router.push({pathname: props.router.pathname, query: {...props.router.query}})
         }).catch(err => {
             console.log(err)
-            props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
+            props.router.push({pathname: props.router.pathname, query: {...props.router.query}})
         })
     };
 
     const onDeleteItemHandler = (e) => {
-        contextData.dispatchNavigationData([ ...contextData.navigationData.filter(i => i.title !== e.target.name) ])
+        contextData.dispatchNavigationData([...contextData.navigationData.filter(i => i.title !== e.target.name)])
     };
 
     const onSaveHandler = (newData, index) => {
-        const updatedItems = [ ...contextData.navigationData.slice(0, index), newData, ...contextData.navigationData.slice(index + 1) ]
+        const updatedItems = [...contextData.navigationData.slice(0, index), newData, ...contextData.navigationData.slice(index + 1)]
         contextData.dispatchNavigationData(updatedItems)
     }
 
@@ -68,18 +68,22 @@ const navigation = props => {
             title: titleEl.current.value,
             url: urlEl.current.value,
         };
-        contextData.dispatchNavigationData([ ...contextData.navigationData, newItem ])
+        contextData.dispatchNavigationData([...contextData.navigationData, newItem])
         titleEl.current.value = '';
         urlEl.current.value = ''
     };
 
     const renderItems = (contextData.navigationData || []).map(item => {
         return (
-            <NavigationItem key={ contextData.navigationData.indexOf(item) } itemIndex={ contextData.navigationData.indexOf(item) } {...item}  data={ contextData.navigationData }
-                            onSaveHandler={ onSaveHandler }
-                            onDeleteItemHandler={ onDeleteItemHandler }/>
+            <NavigationItem key={contextData.navigationData.indexOf(item)}
+                            itemIndex={contextData.navigationData.indexOf(item)}
+                            {...item}
+                            data={contextData.navigationData}
+                            onSaveHandler={onSaveHandler}
+                            onDeleteItemHandler={onDeleteItemHandler}/>
         )
     });
+
 
     return (
         <AdminLayout>
@@ -87,33 +91,20 @@ const navigation = props => {
                 <div className='add-navigation-items'>
                     <div className='add-navigation-item'>
                         <p>Title :</p>
-                        <input ref={ titleEl } type="text" name='title'/>
+                        <input ref={titleEl} type="text" name='title'/>
                     </div>
                     <div className='add-navigation-item'>
                         <p>Url :</p>
-                        <input ref={ urlEl } type="text" name='url'/>
+                        <input ref={urlEl} type="text" name='url'/>
                     </div>
-                    {/*<div className='add-navigation-item'>*/}
-                    {/*    <p>As :</p>*/}
-                    {/*    <input ref={ asEl } type="text" name='as'/>*/}
-                    {/*</div>*/}
-                    {/*<div className='add-navigation-item'>*/}
-                    {/*    <p>query :</p>*/}
-                    {/*    <input ref={ queryEl } type="text" name='query'/>*/}
-                    {/*    <input ref={ queryType } type="text" name='queryType'/>*/}
-                    {/*    <button onClick>Add Query</button>*/}
-                    {/*</div>*/}
-                    <button onClick={ () => onAddItemHandler() }>Add</button>
-                </div>
-                <div className='items-preview' style={ state.style }>
-                    { renderItems }
-                </div>
-                <button className='saveBtn' onClick={ () => onSaveChangesHandler('navigation') }>Save</button>
-            </div>
-            {/*<AdminDesignSettingColorType positionName='navigationBackgroundColor' type='background'/>*/ }
-            {/*<AdminDesignSettingColorType positionName='navigationTextColor' type='color'/>*/ }
-            {/*<button className='saveBtn' onClick={ () => onSaveChangesHandler('design') }>Save</button>*/ }
 
+                    <button onClick={() => onAddItemHandler()}>Add</button>
+                </div>
+                <div className='items-preview' style={state.style}>
+                    {renderItems}
+                </div>
+                <button className='saveBtn' onClick={() => onSaveChangesHandler('navigation')}>Save</button>
+            </div>
             <div className='colorSettingSections'>
                 <ColorSection designName='navigationBackgroundColor'/>
                 <ColorSection designName='navigationTextColor'/>

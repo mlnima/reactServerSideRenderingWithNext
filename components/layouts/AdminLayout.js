@@ -33,19 +33,19 @@ const Panel = props => {
     }, []);
 
     useEffect(() => {
-        getSetting('identity', false, window.location.origin, Date.now()).then(identity => {
+        getSetting('identity', window.location.origin, false, Date.now()).then(identity => {
             contextData.dispatchSiteIdentity({
                 ...contextData.siteIdentity,
                 ...identity.data.setting.data
             })
         })
-        getSetting('design', false, window.location.origin, Date.now()).then(design => {
+        getSetting('design', window.location.origin, false, Date.now()).then(design => {
             contextData.dispatchSiteDesign({
                 ...contextData.siteDesign,
                 ...design.data.setting.data
             })
         })
-        getSetting('navigation', false, window.location.origin, Date.now()).then(navigationData => {
+        getSetting('navigation', window.location.origin, false, Date.now()).then(navigationData => {
 
             contextData.dispatchNavigationData([
 

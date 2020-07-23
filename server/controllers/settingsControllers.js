@@ -42,7 +42,6 @@ settingsControllers.get = async (req, res) => {
     res.json({ setting })
 };
 settingsControllers.getMultiple = async (req, res) => {
-    console.log('getMultiple not cached')
     const requestedSetting = req.body.settings
     const settingRequestPromises = requestedSetting.map(async setting => {
         return await settingSchema.findOne({ type: setting }).exec()
@@ -62,6 +61,8 @@ settingsControllers.getMultiple = async (req, res) => {
         res.end()
     })
 };
+
+
 settingsControllers.create = (req, res) => {
     const dataToSave = new settingSchema({
         type: req.body.type,

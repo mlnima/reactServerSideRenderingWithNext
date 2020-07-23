@@ -18,9 +18,8 @@ const posts = props => {
         style: {}
     })
 
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+
+
     useEffect(() => {
         if (props.identity.data.postPageSidebar) {
             setState({
@@ -56,7 +55,8 @@ const posts = props => {
                             totalCount={ props.postsSource.totalCount }
                             size={ props.getPostsData.size }
                             maxPage={ Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size)) }
-                            queryData={ props.query || props.router.query }
+                            query ={props.query ?props.query :{}}
+                            routerQuery={  props.router ? props.router.query :{}}
                             pathnameData={ props.pathname || props.router.pathname }
                         />
                     </div>
@@ -73,7 +73,7 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let postsSource;
     let widgets;
     let settings;
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName, 'postsPage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] } , domainName,true, 'postsPage')
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     //|| settings.identity.data.postsCountPerPage
     const getPostsData = {
@@ -83,15 +83,16 @@ posts.getInitialProps = async ({ pathname, query, req, res, err }) => {
         fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration','postType','price','translations' ],
         keyword: query.keyword || '',
         author: query.author || 'all',
-        actor: query.actor || 'all',
         status: 'published',
         tag: query.tag || 'all',
-        category: query.category || 'all',
+        actor: query.actor || 'all',
+        content: query.content || 'all',
         sort: query.sort || 'latest',
+        lang: query.lang || 'default'
     }
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer', 'header' ] }, true, domainName, 'postsPage')
-    const postsData = await getPosts(getPostsData, true, domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postsPageSidebar', 'home', 'footer', 'header' ] }, domainName,true, 'postsPage')
+    const postsData = await getPosts(getPostsData, domainName,true)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     postsSource = postsData.data ? postsData.data : []

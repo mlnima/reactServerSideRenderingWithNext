@@ -1,0 +1,21 @@
+@import "../../../styles/inputs";
+@import "../../../styles/buttons";
+
+.single-meta-page{
+
+  .single-meta-page-section{
+    input,textarea{
+      min-width: 300px;
+      @include adminMainInput;
+      //background-color: white;
+    }
+    textarea{
+
+      min-height: 200px;
+    }
+  }
+
+  button{
+    @include greenActionBtn;
+  }
+}

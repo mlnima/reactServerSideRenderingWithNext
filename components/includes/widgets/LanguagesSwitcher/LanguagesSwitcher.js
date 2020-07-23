@@ -23,9 +23,9 @@ const LanguagesSwitcher = props => {
 
     const languagesOptions = (contextData.siteIdentity.translationLanguages || []).map(lang => {
         return (
-            <>
-                <option value={lang}>{lang}</option>
-            </>
+
+                <option key={lang} value={lang}>{lang}</option>
+
         )
     })
 
@@ -55,7 +55,7 @@ const LanguagesSwitcher = props => {
     return (
         <div className='language-switcher-widget'>
             <select value={state.activeLang} onChange={e=>onChangeHandler(e)}>
-                <option value='en'>en</option>
+                <option key='default' value='en'>en</option>
                 {languagesOptions}
             </select>
         </div>

@@ -76,9 +76,9 @@ const Login = props => {
 Login.getInitialProps = async ({ req }) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let settings;
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName)
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true)
     let widgets;
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header' ] }, true, domainName)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header' ] }, domainName, true)
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     return { ...settings,widgets }

@@ -26,12 +26,12 @@ const settings = props => {
         metaPageSidebar: props.identity.postsPageSidebar || false,
         membership: props.identity.membership || false,
         allowUserToPost: props.identity.allowUserToPost || false,
-        translationLanguages:[]
+        translationLanguages:props.identity.translationLanguages||[]
     });
 
-    // useEffect(() => {
-    //     console.log(state.translationLanguages)
-    // }, [ state ]);
+    useEffect(() => {
+        console.log(state)
+    }, [ state ]);
 
     const onTranslationLanguagesChangeHandler = e=>{
         if (e.target.checked){
@@ -184,18 +184,25 @@ const settings = props => {
                         <div className="site-settings-form-section allowUserToPost">
                             <p>Translation Languages:</p>
                             <div className='language'>
+                                <p>English</p>
+                                <input value='en' name='en' type='checkbox' checked={state.translationLanguages.includes('en')} onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
+                            </div>
+                            <div className='language'>
                                 <p>German</p>
-                                <input value='de' name='de' type='checkbox' onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
+                                <input value='de' name='de' type='checkbox' checked={state.translationLanguages.includes('de')} onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
                             </div>
                             <div className='language'>
                                 <p>Persian</p>
-                                <input value='fa' name='fa' type='checkbox' onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
+                                <input value='fa' name='fa' type='checkbox' checked={state.translationLanguages.includes('fa')} onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
                             </div>
                             <div className='language'>
                                 <p>Arabic</p>
-                                <input value='ar' name='ar' type='checkbox' onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
+                                <input value='ar' name='ar' type='checkbox' checked={state.translationLanguages.includes('ar')} onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
                             </div>
-
+                            <div className='language'>
+                                <p>Turkish</p>
+                                <input value='tr' name='tr' type='checkbox' checked={state.translationLanguages.includes('tr')} onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
+                            </div>
                         </div>
                     </div>
 
@@ -251,7 +258,7 @@ const settings = props => {
 settings.getInitialProps = async ({ pathname, query, req, res, err }) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let identity;
-    const identityData = await getSetting('identity', false, domainName);
+    const identityData = await getSetting('identity', domainName, false);
     identity = identityData.data.setting ? identityData.data.setting.data : {}
 
     return { domainName, identity }

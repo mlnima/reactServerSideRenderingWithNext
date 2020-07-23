@@ -31,25 +31,39 @@ const Index = props => {
         inSlideShow: false
     })
 
+    const [textInputsState, setTextInputsState] = useState({
+        translations: {}
+    })
+
     const [siteIdentity, setSiteIdentity] = useState({
         translationLanguages: []
     })
 
-    useEffect(() => {
-        console.log(siteIdentity.translationLanguages)
-    }, [siteIdentity]);
-
-
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
+    const [editingData, setEditingData] = useState({
+        activeEditingLanguage: 'default'
+    })
 
     useEffect(() => {
-        if (props.identity) {
-            setSiteIdentity({
-                ...siteIdentity,
-                ...props.identity.data
+        if (props.router.query.new && state._id) {
+            props.router.reload()
+        } else {
+            if (props.identity) {
+                setSiteIdentity({
+                    ...siteIdentity,
+                    ...props.identity.data
+                })
+            }
+
+            setState({
+                ...props.post,
+                translations: props.post.translations?props.post.translations:{}
             })
+            setTextInputsState({
+                title: props.post.title,
+                description: props.post.description,
+                translations: props.post.translations,
+            })
+
         }
     }, [props]);
 
@@ -61,14 +75,41 @@ const Index = props => {
     };
 
     const onTitleDescriptionChangeHandler = e => {
-        if (activeEditingLanguage.current.value === 'default') {
-            onChangeHandler(e)
+        if (editingData.activeEditingLanguage === 'default') {
+            setTextInputsState({
+                ...textInputsState,
+                [e.target.name]: e.target.value
+            })
+
         } else {
-            setState({
+            setTextInputsState({
+                ...textInputsState,
+                translations: {
+                    ...textInputsState.translations,
+                    [editingData.activeEditingLanguage]: {
+                        ...textInputsState.translations[editingData.activeEditingLanguage],
+                        [e.target.name]: e.target.value
+                    }
+                }
+            })
+        }
+    }
+
+    const changeState = async () => {
+        console.log('updateState')
+        if (editingData.activeEditingLanguage === 'default') {
+            await setState({
+                ...state,
+                title: titleElement.current.value,
+                description: descriptionElement.current.value,
+            })
+        } else {
+            await setState({
                 ...state,
                 translations: {
                     ...state.translations,
-                    [activeEditingLanguage.current.value]: {
+                    [editingData.activeEditingLanguage]: {
+                        ...state.translations[editingData.activeEditingLanguage],
                         title: titleElement.current.value,
                         description: descriptionElement.current.value,
                     }
@@ -76,14 +117,12 @@ const Index = props => {
             })
         }
     }
-
     const onPostMetaChangeHandler = (type, data) => {
         setState({
             ...state,
             [type]: [...state[type], ...data]
         })
     }
-
     const onDeleteMetaFromPost = (type, name) => {
         setState({
             ...state,
@@ -92,30 +131,18 @@ const Index = props => {
     }
 
 
-    useEffect(() => {
-        if (props.router.query.new && state._id) {
-            props.router.reload()
-        } else {
-            setState(props.post)
-        }
-    }, [props]);
-
     const languagesOptions = siteIdentity.translationLanguages.map(lang => {
         return (
-            <option value={lang}>{lang}</option>
+            <option key={lang} value={lang}>{lang}</option>
         )
     })
 
+
     const onActiveEditingLanguageChangeHandler = e => {
-        if (e.target.value === 'default') {
-            titleElement.current.value = state.title
-            descriptionElement.current.value = state.description
-            console.log('default')
-        } else {
-            titleElement.current.value = state.translations ? state.translations[e.target.value] ? state.translations[e.target.value].title : '' || '' : ''
-            descriptionElement.current.value = state.translations ? state.translations[e.target.value] ? state.translations[e.target.value].description : '' || '' : ''
-            console.log('not default')
-        }
+        setEditingData({
+            ...editingData,
+            activeEditingLanguage: e.target.value
+        })
     }
 
     return (
@@ -127,13 +154,14 @@ const Index = props => {
                     <div className="content">
 
                         <p>Translation(you need to activate the language in general settings)</p>
-                        <select ref={activeEditingLanguage} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
+                        <select onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                             <option value='default'>Default</option>
                             {languagesOptions}
                         </select>
-
-                        <TitleDescription titleElement={titleElement} descriptionElement={descriptionElement}
-                                          postData={state} onChangeHandler={onTitleDescriptionChangeHandler}/>
+                        <TitleDescription activeEditingLanguage={editingData.activeEditingLanguage}
+                                          titleElement={titleElement} descriptionElement={descriptionElement}
+                                          textInputsState={textInputsState}
+                                          onChangeHandler={onTitleDescriptionChangeHandler}/>
                         <TextInputWithUploadBtn postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'
                                                 title='Main thumbnail'/>
                         <ImagePreview postData={state}/>
@@ -144,7 +172,7 @@ const Index = props => {
                     </div>
 
                     <div className="side">
-                        <DropDownWidget renderFor='all' postData={state} component={ActionOnPost} title={state.status}
+                        <DropDownWidget renderFor='all' postData={state} textInputsState={textInputsState} component={ActionOnPost} title={state.status}
                                         onChangeHandler={onChangeHandler}/>
                         <DropDownWidget renderFor='all' postData={state} component={Format} title='Format'
                                         onChangeHandler={onChangeHandler}/>
@@ -186,7 +214,7 @@ Index.getInitialProps = async ({query, req}) => {
     let postData
     let requestBody;
     let settings;
-    const settingsData = await getMultipleSetting({settings: ['identity']}, false, domainName, 'adminPostPage')
+    const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
 
     const newPostData = {
@@ -200,7 +228,8 @@ Index.getInitialProps = async ({query, req}) => {
         quality: '2160p',
         views: 0,
         likes: 0,
-        disLikes: 0
+        disLikes: 0,
+        translations:{}
     }
 
     if (query.new) {
@@ -210,7 +239,7 @@ Index.getInitialProps = async ({query, req}) => {
             _id: query.id,
         };
 
-        postData = await getPost(requestBody, false, domainName, query.id)
+        postData = await getPost(requestBody, domainName, false, query.id)
         post = postData.data ? postData.data.post : newPostData
     }
 

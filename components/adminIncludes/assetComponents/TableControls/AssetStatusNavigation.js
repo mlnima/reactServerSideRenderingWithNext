@@ -7,9 +7,7 @@ const AssetStatusNavigation = props => {
     const [ state, setState ] = useState({
         types: [ 'all', 'draft', 'published', 'pending', 'trash', 'reported' ]
     });
-    useEffect(() => {
-        console.log(props)
-    }, [ props ]);
+
     const renderStatus = state.types.map(type => {
         return (
             <Link key={ type } href={ {

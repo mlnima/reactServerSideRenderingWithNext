@@ -40,12 +40,8 @@ Profile.getInitialProps = async ({ pathname, query, req, res, err }) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let settings;
     let widgets;
-    let userInformation;
-    let errorCode = 200
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'footer', 'header' ] }, true, domainName, 'profilePage')
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, true, domainName, 'profilePage')
-    // const userData = await
-
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'footer', 'header' ] }, domainName, true, 'profilePage')
+    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true, 'profilePage')
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 

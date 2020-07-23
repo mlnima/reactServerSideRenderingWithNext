@@ -1,34 +1,38 @@
-import React, { useEffect, useState } from 'react';
+import React, {useEffect, useState} from 'react';
 import Link from 'next/link'
 import withRouter from 'next/dist/client/with-router';
 import _ from 'lodash'
 
 const PaginationComponent = props => {
-    const [ state, setState ] = useState({
-        queries: {},
-        pathname: {}
-    })
+
+
+    const [range,setRange] = useState([])
+
+    const [queries,setQueries] = useState({})
+
+    // useEffect(() => {
+    //     console.log('queries:', queries)
+    //     console.log('state:', range)
+    // }, [queries,range]);
+
+
+
+
+
 
     useEffect(() => {
-        let queries = props.router ? props.router.query : {}
-        delete queries.metaType
-
-        let pathname;
-        if (props.queryData.metaType){
-            pathname= props.router ? props.router.asPath :''
-        }else{
-            pathname=props.router?props.router.pathname:''
+        if(props.router){
+            setRange([1, ...paginationRangeGenerator(props.currentPage, props.maxPage)])
+            setQueries({
+                ...queries,
+                ...props.router.query
+            })
         }
+    }, [props.router]);
 
-        setState({
-            ...state,
-            queries,
-            pathname
-        })
-    }, [props]);
 
     const paginationRangeGenerator = (current, max) => {
-        return current === 1 && max <= 2 ? [ 2 ] :
+        return current === 1 && max <= 2 ? [2] :
             current === 1 ? _.range(2, 8) :
                 current === 2 && max <= 3 ? _.range(2, 3) :
                     current === 2 ? _.range(current, current + 6) :
@@ -37,37 +41,57 @@ const PaginationComponent = props => {
                                 current >= 5 && current < max - 3 ? _.range(current - 3, current + 4) : current >= max - 3 ? _.range(max - 6, max) : 0
     }
 
-    const renderPaginationItems = paginationRangeGenerator(props.currentPage, props.maxPage).map(page => {
-        const path = props.router ? props.queryData.metaType ?  props.router.pathname +'/'+ props.queryData.metaType  : props.router.pathname : ''
+    const renderPaginationItems = range.map(page => {
+        const mainPath = props.router ?
+            props.router.asPath.includes('/tags/') || props.router.asPath.includes('/categories/') || props.router.asPath.includes('/actors/') ? '/posts' :
+                props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors') ? '/meta' : '/posts' : '/posts';
+
+
+        const asPath = !props.router ? '/posts' :
+            props.router.asPath.includes('/tags/') || props.router.asPath.includes('/categories/') || props.router.asPath.includes('/actors/') ? '/' + queries.contentType + '/' + queries.contentName  :
+                props.router.asPath.includes('/tags') ? '/tags' :
+                    props.router.asPath.includes('/categories') ? '/categories' :
+                        props.router.asPath.includes('/actors') ? '/actors' :
+                            props.router.pathname;
+
+        const mainQuery = !props.router ? {} :
+            props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors') ? {page: queries.page,content:queries.content} : {...props.queryData}
+
+
+        // const asQuery = {
+        //     content: queries.content ,
+        //     page: page == 1 ? null : page,
+        // }
+
+        const asQuery = {keyword:queries.keyword?queries.keyword:undefined,page:props.router.query.page ?props.router.query.page:undefined,content:props.router.query.content ?props.router.query.content:undefined,}
+        !asQuery.keyword ? delete asQuery.keyword  : null;
+        // asQuery.page ==1 ? delete asQuery.page  : null;
+        !asQuery.page ? delete asQuery.page  : null;
+        !asQuery.content ? delete asQuery.content  : null;
+
         if (props.router) {
+            page == 1 ? delete asQuery.page : null
+            !asQuery.content ? delete asQuery.content : null
+
             return (
-                <Link key={ page } href={ {
-                    pathname: path,
-                    query: { ...state.queries, page },
-                    params: { ...props.queryData }
-                } }><a>{ page }</a></Link>
+                <Link key={page} href={{
+                    pathname: mainPath,
+                    query: {...queries, page},
+                }} as={{
+                    pathname:asPath,
+                    query: asQuery
+                }}><a>{page}</a></Link>
             )
         }
     })
 
-    // useEffect(() => {
-    //     console.log(props)
-    //     console.log(state)
-    // }, [ props,state ]);
 
     if (props.isActive && props.totalCount > props.size) {
-        const queries = props.router ? props.router.query : {}
-        delete queries.metaType
-        const path = props.router ? props.queryData.metaType ?  props.router.pathname +'/'+ props.queryData.metaType  : props.router.pathname : ''
+        // const queries = props.router ? props.router.query : {}
+        // delete queries.metaType
         return (
             <div className='pagination'>
-                <Link key='...1' href={ {
-                    pathname: path, query: {  ...state.queries, page: 1 }
-                } }><a>1...</a></Link>
-                { renderPaginationItems }
-                <Link key={ props.maxPage } href={ {
-                    pathname: path, query: { ...state.queries, page: props.maxPage }
-                } }><a>{ props.maxPage }</a></Link>
+                {renderPaginationItems}
             </div>
         );
     } else return null

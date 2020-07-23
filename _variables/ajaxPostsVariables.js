@@ -12,24 +12,20 @@ const cacheQueryGenerator = cache => {
     return !cache ? Date.now() : ''
 }
 
-export const getPosts = async (data, cache, domainName) => {
-    const fetchUrl = cache ? `/api/v1/posts${ queryGeneratorForUnCacheRequest(data) }` : `/api/v1/posts${ queryGeneratorForUnCacheRequest(data) }&date=${ Date.now() }`
+export const getPosts = async (data, domainName,cache) => {
     const body = {
         ...data,
+        cache
     };
-    return await axios.post(domainName + fetchUrl, body, {
-        headers: {
-            'cache-control': 'no-cache',
-        },
-    })
+    return await axios.post(domainName + '/api/v1/posts', body)
 };
 
-export const getPost = async (data, cache, domainName, idOrTitleForUnCacheRequest) => {
-    const cacheHandler = cache ? '' : `&time=${ Date.now() }`
+export const getPost = async (data, domainName, cache) => {
     const body = {
         ...data,
+        cache
     };
-    return await axios.post(domainName + `/api/v1/posts/post?id=${ idOrTitleForUnCacheRequest }` + cacheHandler, body)
+    return await axios.post(domainName + `/api/v1/posts/post?id=${ data._id }` , body)
 };
 
 export const updatePost = async (data, domainName) => {
@@ -48,12 +44,33 @@ export const savePost = async (data, domainName) => {
     return await axios.post(domainName + `/api/v1/posts/createNewPost`, body)
 };
 
-export const getMeta = async (data, cache, domainName) => {
+export const getMeta = async (data,  domainName,cache) => {
     const body = {
         ...data,
+        cache
     };
-    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${ data.keyword }&startWith=${ data.startWith }`, body)
+    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${encodeURIComponent(data.keyword)  }&startWith=${ data.startWith }`, body)
 };
+
+export const getSingleMeta = async (id,  domainName,cache) => {
+    const body = {
+        id,
+        cache
+    };
+    return await axios.post(domainName + `/api/v1/posts/getSingleMeta?id=${ id }`, body)
+};
+
+export const updateMeta = async (data,  domainName) => {
+    const body = {
+        data,
+    };
+    return await axios.post(domainName + `/api/v1/posts/updateMeta`, body)
+};
+
+
+
+
+
 export const deleteMeta = async (id, domainName) => {
     const body = {
         _id:id,
@@ -69,11 +86,12 @@ export const newComment = async (data) => {
     return await axios.post(window.location.origin + `/api/v1/posts/newComment`, body)
 };
 
-export const getComments = async (data, cache, domainName) => {
+export const getComments = async (data, domainName, cache) => {
     const body = {
         ...data,
+        cache
     };
-    return await axios.post(domainName + `/api/v1/posts/getComments`, body)
+    return await axios.post(domainName + `/api/v1/posts/getComments?onDocument=${data.onDocument}`, body)
 };
 
 export const updateComment = async (data) => {
