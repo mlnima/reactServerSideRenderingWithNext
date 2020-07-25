@@ -123,7 +123,7 @@ const PostInfo = props => {
             )
         } else {
             return (
-                <h1 className='post-title'>{props.router ? props.router.query.lang ? props.post.translations ? props.post.translations[props.router.query.lang] ? props.post.translations[props.router.query.lang].title || props.post.title : props.post.title : props.post.title : props.post.title : props.post.title}</h1>
+                <h1 className='post-title'>{ props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].title || props.post.title : props.post.title : props.post.title }</h1>
             )
         }
     }
@@ -142,7 +142,7 @@ const PostInfo = props => {
             )
         } else {
             return (
-                <div className="description">{props.router ? props.router.query.lang ? props.post.translations ? props.post.translations[props.router.query.lang] ? props.post.translations[props.router.query.lang].description || props.post.description : props.post.description : props.post.description : props.post.description : props.post.description}</div>
+                <div className="description">{ props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description}</div>
             )
         }
     }

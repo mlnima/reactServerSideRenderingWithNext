@@ -14,6 +14,7 @@ const AppProvider = props => {
     const [ state, dispatchState ] = useState({
         loading: false,
         videoPreviewID: '',
+        activeLanguage:'default'
     });
     const [ alert, dispatchAlert ] = useState({
         active: false,

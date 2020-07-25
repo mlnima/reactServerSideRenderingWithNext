@@ -30,7 +30,7 @@ const WidgetHeader = props => {
     const RenderTitle = () => {
         if (props.title) {
             return (
-                <p className='WidgetHeaderTitle'>{props.router ? props.router.query.lang ? props.translations ? props.translations[props.router.query.lang] ? props.translations[props.router.query.lang].title || props.title : props.title : props.title : props.title : props.title}</p>
+                <p className='WidgetHeaderTitle'>{ props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].title || props.title : props.title : props.title }</p>
             )
         } else return null
     }

@@ -48,7 +48,8 @@ var AppContext = react__WEBPACK_IMPORTED_MODULE_2___default.a.createContext();
 var AppProvider = function AppProvider(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     loading: false,
-    videoPreviewID: ''
+    videoPreviewID: '',
+    activeLanguage: 'default'
   }),
       state = _useState[0],
       dispatchState = _useState[1];

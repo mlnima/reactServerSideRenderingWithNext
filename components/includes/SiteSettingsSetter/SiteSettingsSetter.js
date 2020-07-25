@@ -5,10 +5,12 @@ import AppLayout from '../../layouts/AppLayout'
 import withRouter from 'next/dist/client/with-router'
 import withGa from 'next-ga'
 import reactHtmlParser from 'html-react-parser'
+import {useRouter} from "next/router";
 
 
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
     const customScriptElement = useRef(null)
     const [state, setState] = useState({
         title: '',
@@ -47,14 +49,11 @@ const SiteSettingSetter = props => {
     }, [props]);
 
     useEffect(() => {
-        if (props.router) {
-            if (localStorage.lang && props.router.lang !== localStorage.lang) {
-                const path = {
-                    pathname: props.router ? props.router.pathname : '',
-                    query: props.router ? {...props.router.query, lang: localStorage.lang} : ''
-                }
-                props.router.push(path)
-            }
+        if (localStorage.lang || router.query.lang){
+            contextData.dispatchState({
+                ...contextData.state,
+                activeLanguage: localStorage.lang || router.query.lang
+            })
         }
     }, []);
 

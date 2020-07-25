@@ -29,9 +29,7 @@ const Home = props => {
         }
     }, [props]);
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
     return (
         <>
             <Provider language={contextData.siteIdentity.language || 'en'} translation={Translations}>

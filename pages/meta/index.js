@@ -27,10 +27,6 @@ const meta = props => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     console.log('meta page',props)
-    // }, [props]);
-
     const renderMetas = (props.metaSource.metas || []).map(meta => {
 
         return (

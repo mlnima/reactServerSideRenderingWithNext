@@ -141,7 +141,8 @@ const AppProvider = props => {
     1: dispatchState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     loading: false,
-    videoPreviewID: ''
+    videoPreviewID: '',
+    activeLanguage: 'default'
   });
   const {
     0: alert,

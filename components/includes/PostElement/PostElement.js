@@ -1,16 +1,19 @@
 import React, {useState, useContext, useRef, useEffect} from 'react';
-
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
-// import {Link} from "react-router-dom";
-import {AppContext} from "../../../context/AppContext";
-// import {withRouter} from "react-router-dom";
 import ProgressBar from "../ProgressBar/ProgressBar";
 import FA from 'react-fontawesome'
-import {likeValueCalculator} from '../../../_variables/_variables'
+import {
+    checkPageLoad,
+    getLanguageQuery,
+    getLanguageQueryFromAsPath, getLanguageQueryFromWindowLocationSearch,
+    likeValueCalculator
+} from '../../../_variables/_variables'
+import {AppContext} from "../../../context/AppContext";
 // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
 
 const PostElement = props => {
+    const contextData = useContext(AppContext);
     let qualityLabel = useRef(null);
     let bottomLeft = useRef(null);
     let bottomRight = useRef(null);
@@ -21,17 +24,17 @@ const PostElement = props => {
         isHover: false,
         isWatched: false,
         extraClassName: '',
-
+        queries: {}
     });
 
     useEffect(() => {
-        if (props.viewType) {
             setState({
                 ...state,
-                extraClassName: props.viewType
+                extraClassName: props.viewType ? props.viewType :'',
+                queries:{...getLanguageQueryFromWindowLocationSearch()}
             })
-        }
     }, [props]);
+
 
     let isHoverHandler = () => {
         if (props.state.videoTrailerUrl) {
@@ -95,7 +98,6 @@ const PostElement = props => {
 
     }
 
-
     const BottomLeft = () => {
         if (props.state) {
             switch (props.state.postType) {
@@ -140,21 +142,22 @@ const PostElement = props => {
                     <TopRight/>
                     <BottomRight/>
                     <BottomLeft/>
-                    {/*<span ref={ bottomRight } className='bottom-right'><FA className='fontawesomeSmall' name="eye"/>{ props.state.views }</span>*/}
-                    {/*<span ref={ bottomLeft } className='bottom-left'>{ props.state.duration }</span>*/}
                 </>
             )
         }
     }
-//as={`/post/${props.state.title}?id=${props.state._id}`}
+
     return (
         < div ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
-            <Link  href={{
-                pathname: `/post/${props.state.title}?id=${props.state._id}`,
-                query: {
-                    id: props.state._id
-                }
-            }}>
+            <Link
+                as={ contextData.state.activeLanguage !== 'default' ?`/post/${props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}?id=${props.state._id}&lang=${contextData.state.activeLanguage}` : `/post/${props.state.title}?id=${props.state._id}`}
+                href={{
+                    pathname: `/post`,
+                    query: {
+                        id: props.state._id,
+                       ...state.queries
+                    }
+                }}>
                 <a>
                     <div className='post-element' key={props.state.title}>
                         <div className="image">
@@ -162,7 +165,7 @@ const PostElement = props => {
                             <RenderDataOnImage/>
                         </div>
                         <RenderProgressBar/>
-                        <h3>{props.router ? props.router.query.lang ? props.state.translations ? props.state.translations[props.router.query.lang] ? props.state.translations[props.router.query.lang].title || props.state.title : props.state.title : props.state.title : props.state.title : props.state.title}</h3>
+                        <h3>{  props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title }</h3>
                     </div>
                 </a>
             </Link>

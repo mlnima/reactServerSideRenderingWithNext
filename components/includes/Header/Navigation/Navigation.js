@@ -4,16 +4,25 @@ import FA from 'react-fontawesome'
 import {AppContext} from "../../../../context/AppContext";
 import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
 import withRouter from "next/dist/client/with-router";
-// import  BarsIcon from '../../../../styles/icons/bars-solid.svg'
+import {
+    addOrReplaceQueryToWindowLocationSearch,
+    getLanguageQuery,
+    getLanguageQueryFromWindowLocationSearch, pathAndAsPathGenerator
+} from '../../../../_variables/_variables'
+import {useRouter} from 'next/router'
+
 
 const Navigation = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
     const navigation = useRef(null)
     const navigationMobileBtn = useRef(null)
     const [navigationData, setNavigationData] = useState({
         isOpen: false,
         items: [],
-        style: {}
+        style: {},
+        queries: {},
+        asUrlWithLang: ''
     });
 
     useEffect(() => {
@@ -25,6 +34,24 @@ const Navigation = props => {
             }
         })
     }, [contextData.siteDesign]);
+
+    useEffect(() => {
+        if (localStorage) {
+            if (localStorage.lang) {
+                if (localStorage.lang !== 'default') {
+                    setNavigationData({
+                        ...navigationData,
+                        queries: {
+                            ...navigationData.queries,
+                            lang: localStorage.lang,
+                        },
+                        // asUrlWithLang: addOrReplaceQueryToWindowLocationSearch('lang', localStorage.lang)
+                    })
+                }
+
+            }
+        }
+    }, [props]);
 
 
     useEffect(() => {
@@ -69,14 +96,8 @@ const Navigation = props => {
     };
 
 
-    // useEffect(() => {
-    //     console.log(contextData.navigationData)
-    // }, [contextData.navigationData]);
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [props]);
-
     const renderNavigationItems = contextData.navigationData.map(item => {
+
         const queryArrayToObject = (arr) => {
             let returningData = {}
             arr.forEach(arrItem => {
@@ -85,16 +106,17 @@ const Navigation = props => {
             return returningData
         }
 
+        const pathData = pathAndAsPathGenerator(item.url, item.as || item.url, item.query)
+
         return (
-            <Link as={item.as ? item.as : {}} key={item.title}
-                  href={{
-                      pathname: item.url,
-                      // query:item.query?queryArrayToObject(item.query):{},
-                      query: props.router ? props.router.query.lang ? item.translation ? item.translation[props.router.query.lang] ? item.translation[props.router.query.lang].query ? queryArrayToObject(item.translation[props.router.query.lang].query) : item.query ? queryArrayToObject(item.query) : {} : item.query ? queryArrayToObject(item.query) : {} : item.query ? queryArrayToObject(item.query) : {} : item.query ? queryArrayToObject(item.query) : {} : item.query ? queryArrayToObject(item.query) : {},
-                      // query: !props.router ? item.query ? queryArrayToObject(item.query) : props.router.query.lang ? item.translation ? item.translation[props.router.query.lang] ? item.translation[props.router.query.lang].query ? queryArrayToObject(item.translation[props.router.query.lang].query) : item.query ? queryArrayToObject(item.query) : {} : item.query ? queryArrayToObject(item.query) : {} : item.query ? queryArrayToObject(item.query) : {} : item.query ? queryArrayToObject(item.query) : {} : item.query ? queryArrayToObject(item.query) : {},
-                  }}><a style={navigationData.style}>{
-                // item.title
-                props.router ? props.router.query.lang ? item.translations ? item.translations[props.router.query.lang] ? item.translations[props.router.query.lang].title || item.title : item.title : item.title : item.title : item.title
+            <Link
+                as={item.as || item.url}
+                key={item.title}
+                href={{
+                    pathname: pathData.pathname,
+                    query: pathData.query,
+                }}><a style={navigationData.style}>{
+                item.translations ? item.translations[contextData.state.activeLanguage] ? item.translations[contextData.state.activeLanguage].title || item.title : item.title : item.title
             }</a></Link>
         )
     })

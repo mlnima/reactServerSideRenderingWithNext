@@ -9,4 +9,7 @@
   a {
   @include paginationItem;
   }
+  .active-page{
+    background-color: #2c5115;
+  }
 }

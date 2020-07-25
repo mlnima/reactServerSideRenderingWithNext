@@ -333,7 +333,7 @@ app.prepare().then(() => {
         const queryParams = {
             ...req.query,
             ...req.params,
-            pageType:'categories'
+            contentType:'categories'
         }
         app.render(req, res, targetComponent, queryParams)
     });
@@ -342,7 +342,7 @@ app.prepare().then(() => {
         const queryParams = {
             ...req.query,
             ...req.params,
-            pageType:'tags'
+            contentType:'tags'
         }
         app.render(req, res, targetComponent, queryParams)
     });
@@ -351,7 +351,7 @@ app.prepare().then(() => {
         const queryParams = {
             ...req.query,
             ...req.params,
-            pageType:'actors'
+            contentType:'actors'
         }
         app.render(req, res, targetComponent, queryParams)
     });
@@ -360,9 +360,7 @@ app.prepare().then(() => {
 
     server.get('/post/:title', (req, res) => {
         const targetComponent = '/post';
-        // const params = {
-        //     id: req.params.id
-        // }
+
         const params = {
             ...req.query,
             ...req.params,

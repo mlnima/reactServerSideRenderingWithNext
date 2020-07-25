@@ -99,8 +99,8 @@ HomePageWidgets.getInitialProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let widgets;
     let settings;
-    const settingsData = await getMultipleSetting({settings: ['identity']}, false, domainName, 'adminPostPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, false, domainName, Date.now())
+    const settingsData = await getMultipleSetting({settings: ['identity']}, domainName,false, 'adminPostPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, domainName,false, Date.now())
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
