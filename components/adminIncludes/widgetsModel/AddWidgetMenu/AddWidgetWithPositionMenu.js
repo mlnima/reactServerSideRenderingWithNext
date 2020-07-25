@@ -28,7 +28,7 @@ const AddWidgetWithPositionMenu = props => {
         addNewWidget({
             data:widgetModels
         }).then(() => {
-            getMultipleWidgetWithData({ widgets: [ 'all' ] }, false, window.location.origin, Date.now()).then(res=>{
+            getMultipleWidgetWithData({ widgets: [ 'all' ] }, window.location.origin,false,  Date.now()).then(res=>{
                 contextData.dispatchWidgetsSettings({
                     ...contextData.widgetsSettings,
                     widgets: [ ...res.data.widgets ]

@@ -73,7 +73,7 @@ const WidgetModel = props => {
             translations:props.data.data.translations || {}
 
         })
-        console.log('props updated')
+
     }, [props]);
 
     const languagesOptions = props.translationLanguages.map(lang => {
@@ -92,7 +92,7 @@ const WidgetModel = props => {
 
     const onDeleteHandler = () => {
         deleteWidgets(props.data._id, window.location.origin).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']}, false, window.location.origin, Date.now()).then(res => {
+            getMultipleWidgetWithData({widgets: ['all']},  window.location.origin,false, Date.now()).then(res => {
                 contextData.dispatchWidgetsSettings({
                     widgets: [...res.data.widgets]
                 })

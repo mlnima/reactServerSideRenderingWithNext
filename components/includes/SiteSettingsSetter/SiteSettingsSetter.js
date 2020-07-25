@@ -49,7 +49,7 @@ const SiteSettingSetter = props => {
     }, [props]);
 
     useEffect(() => {
-        if (localStorage.lang || router.query.lang){
+        if (localStorage.lang || router.query.lang) {
             contextData.dispatchState({
                 ...contextData.state,
                 activeLanguage: localStorage.lang || router.query.lang
@@ -58,12 +58,26 @@ const SiteSettingSetter = props => {
     }, []);
 
     useEffect(() => {
+        if(!window.location.search.includes('lang') && contextData.state.activeLanguage !=='default'){
+            const searchFromAsUrl =  router.asPath.includes('?') ?  router.asPath.split('?')[1] : ''
+            const asUrl = new URLSearchParams(searchFromAsUrl)
+            // asUrl.set('lang', contextData.state.activeLanguage)
+            //  // router.push({
+            //  //     pathname:router.pathname,
+            //  //     query:router.query
+            //  // },asUrl.toString())
+            console.log(router)
+        }
+
+    }, [router.pathname,contextData.state.activeLanguage]);
+
+    useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;
         document.body.style.backgroundPosition = contextData.siteDesign.bodyBackgroundPosition || 'center';
         document.body.style.backgroundSize = contextData.siteDesign.bodyBackgroundSize || 'cover';
         document.body.style.backgroundRepeat = contextData.siteDesign.bodyBackgroundRepeat || 'no-repeat';
         document.body.style.backgroundAttachment = contextData.siteDesign.bodyBackgroundAttachment || 'initial';
-        document.body.style.backgroundImage = contextData.siteDesign.bodyBackgroundImage ? `url(${contextData.siteDesign.bodyBackgroundImage})` :'none'
+        document.body.style.backgroundImage = contextData.siteDesign.bodyBackgroundImage ? `url(${contextData.siteDesign.bodyBackgroundImage})` : 'none'
         document.body.style.color = contextData.siteDesign.bodyBackgroundColor
 
     }, [contextData.siteDesign]);

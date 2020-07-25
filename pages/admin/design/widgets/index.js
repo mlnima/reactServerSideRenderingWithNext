@@ -16,7 +16,6 @@ const HomePageWidgets = props => {
         translationLanguages: []
     })
 
-
     useEffect(() => {
         if (props.widgets) {
             contextData.dispatchWidgetsSettings({
@@ -24,17 +23,20 @@ const HomePageWidgets = props => {
                 widgets: [...props.widgets]
             })
         }
-    }, [props]);
-
-
-    useEffect(() => {
         if (props.identity) {
             setSiteIdentity({
                 ...siteIdentity,
                 ...props.identity.data
             })
         }
+
+
     }, [props]);
+
+
+    // useEffect(() => {
+    //
+    // }, [props]);
 
     const renderWidgetsInPosition = [...new Set((contextData.widgetsSettings.widgets).map(widgets => {
         return widgets.data.position

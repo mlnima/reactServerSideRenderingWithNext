@@ -2,9 +2,11 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import './SearchInputComponent.scss';
 import Link from 'next/link';
 import withRouter from 'next/dist/client/with-router'
+import {useRouter} from "next/router";
+import SearchSvg from '../../../../static/images/fontawesome/search-solid.svg'
 
 const SearchInputComponent = props => {
-
+    const router = useRouter()
     const [state, setState] = useState({
         pathURL: '',
         keyword: '',
@@ -53,7 +55,7 @@ const SearchInputComponent = props => {
         props.router.asPath.includes('/actors') ? '/actors' :
         '/posts':'/posts'
 
-    const asQuery = {keyword:state.keyword?state.keyword:undefined,page:props.router.query.page ?props.router.query.page:undefined,content:props.router.query.content ?props.router.query.content:undefined,}
+    const asQuery = {keyword:state.keyword?state.keyword:undefined,page:router.query.page ?router.query.page:undefined,content:router.query.content ?router.query.content:undefined,}
           !asQuery.keyword ? delete asQuery.keyword  : null;
           asQuery.page ==1 ? delete asQuery.page  : null;
           !asQuery.page ? delete asQuery.page  : null;
@@ -71,7 +73,7 @@ const SearchInputComponent = props => {
             }} as={{
                 pathname:asPath,
                 query:asQuery
-            }}><a  className='search-bar-btn'>Search</a></Link>
+            }}><a  className='search-bar-btn'><img src={SearchSvg} alt=""/></a></Link>
         </div>
     );
 };

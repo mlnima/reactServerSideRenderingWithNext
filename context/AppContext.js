@@ -43,7 +43,9 @@ const AppProvider = props => {
     })
 
     const [ userData, dispatchUserData ] = useState({});
+
     const [ navigationData, dispatchNavigationData ] = useState([]);
+
     const [ editingPostData, dispatchEditingPostData ] = useState({
         categories: [],
         actors: [],
@@ -63,6 +65,7 @@ const AppProvider = props => {
         views: 0,
     });
     const [ adminPosts, dispatchAdminPosts ] = useState([]);
+
     const [ adminPostsData, dispatchAdminPostsData ] = useState({
         pageNo: 1,
         size: 30,

@@ -95,6 +95,10 @@ const Index = props => {
         }
     }
 
+
+
+
+
     const changeState = async () => {
         console.log('updateState')
         if (editingData.activeEditingLanguage === 'default') {
@@ -142,6 +146,13 @@ const Index = props => {
         setEditingData({
             ...editingData,
             activeEditingLanguage: e.target.value
+        })
+        setTextInputsState({
+            ...textInputsState,
+            translations: {
+                ...textInputsState.translations,
+                [e.target.value]:textInputsState.translations[e.target.value] ? textInputsState.translations[e.target.value] : {}
+            }
         })
     }
 

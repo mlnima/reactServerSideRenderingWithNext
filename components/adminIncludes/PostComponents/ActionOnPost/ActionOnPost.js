@@ -75,9 +75,9 @@ const ActionOnPost = props => {
     //     },2000)
     // }
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [props]);
     const onViewHandler = () => {
         window.open('/post/' + props.postData._id, '_blank')
     }

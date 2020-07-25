@@ -18,7 +18,6 @@ export const saveCustomStyle = async (data) => {
 };
 
 export const getSetting = async (type, domainName, cache, whichPage) => {
-    console.log(type, domainName, cache, whichPage)
     const pageNameForCachedRequest = whichPage ? `&position=${ whichPage }`: ''
     const body = {
         type,

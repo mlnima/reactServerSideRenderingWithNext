@@ -20,6 +20,10 @@
     //box-shadow: inset 0 1px 1px #a4e388;
     //border-color: #3b6e22 #3b6e22 #2c5115;
     border-radius: 0 5px 5px 0;
+    img{
+      width: 18px;
+      filter: invert(1);
+    }
     //margin:0 5px;
   }
 }

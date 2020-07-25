@@ -107,7 +107,7 @@ const rangeNumGenerator = (currentPageInput,max) =>{
             const classNameForActivePage = page === props.currentPage ? 'active-page' : ''
 
             const pathData = pathAndAsPathGenerator(mainPath,router.asPath,{...queries, page})
-console.log(pathData)
+
             return (
                 <Link key={page} href={{
                     pathname: mainPath,
