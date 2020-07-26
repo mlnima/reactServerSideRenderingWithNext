@@ -150,7 +150,7 @@ const Index = props => {
         setTextInputsState({
             ...textInputsState,
             translations: {
-                ...textInputsState.translations,
+                ...textInputsState.translations ? textInputsState.translations :{},
                 [e.target.value]:textInputsState.translations[e.target.value] ? textInputsState.translations[e.target.value] : {}
             }
         })

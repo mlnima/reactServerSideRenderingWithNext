@@ -42,6 +42,7 @@ const Home = props => {
                         </div>
                         <Sidebar key='homePageSidebar' isActive={props.identity.data.homePageSidebar}
                                  widgets={props.widgets} position='homePageSidebar'/>
+
                     </div>
                     <Footer widgets={props.widgets} position='footer'/>
                 </AppLayout>
