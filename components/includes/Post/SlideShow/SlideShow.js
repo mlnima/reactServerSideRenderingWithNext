@@ -54,7 +54,7 @@ const SlideShow = props => {
             <div className='product-slide-show'>
                 <PreviousBtn/>
                 <div className='product-slide-show-image-area'>
-                    <img src={ props.images[state.activeImageIndex] } alt=""/>
+                    <img src={ props.images.length>0 ?props.images[state.activeImageIndex]:props.mainThumbnail } alt=""/>
                 </div>
 
                 <NextBtn/>

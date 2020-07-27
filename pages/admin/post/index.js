@@ -54,10 +54,11 @@ const Index = props => {
                 })
             }
 
-            // setState({
-            //     ...props.post,
-            //     translations: props.post.translations ? props.post.translations : {}
-            // })
+            setState({
+                ...props.post,
+                translations: props.post.translations ? props.post.translations : {}
+            })
+
             setTextInputsState({
                 title: props.post.title,
                 description: props.post.description,
@@ -130,12 +131,12 @@ const Index = props => {
 
     useEffect(() => {
         console.log(textInputsState)
-    }, [textInputsState]);
+    }, [textInputsState,props]);
 
 
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [props]);
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     const onActiveEditingLanguageChangeHandler = e => {
         setEditingData({
@@ -218,6 +219,9 @@ Index.getInitialProps = async ({query, req}) => {
     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
 
+
+
+
     const newPostData = {
         status: 'published',
         postType: settings.identity.data.defaultPostType || 'video',
@@ -232,6 +236,18 @@ Index.getInitialProps = async ({query, req}) => {
         disLikes: 0,
         translations: {}
     }
+
+    if (settings.identity.data.translationLanguages){
+        settings.identity.data.translationLanguages.forEach(lang=>{
+            newPostData.translations[lang] = ''
+        })
+    }
+
+
+
+
+
+
 
     if (query.new) {
         post = newPostData

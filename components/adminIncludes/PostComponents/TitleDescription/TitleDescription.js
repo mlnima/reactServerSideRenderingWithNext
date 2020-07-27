@@ -34,7 +34,7 @@ const TitleDescription = props => {
             <input type="text" ref={props.titleElement} name='title' value={state.title}
                    className='TitleDescriptionTitle' placeholder='Enter The Title Here'
                    onChange={e => props.onChangeHandler(e)}/>
-            <textarea type="text" ref={props.descriptionElement} name='description' value={state.description}
+            <textarea  ref={props.descriptionElement} name='description' value={state.description}
                       className='TitleDescriptionDescription' onChange={e => props.onChangeHandler(e)}/>
         </div>
     );
