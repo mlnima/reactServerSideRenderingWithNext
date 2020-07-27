@@ -57,19 +57,19 @@ const SiteSettingSetter = props => {
         }
     }, []);
 
-    useEffect(() => {
-        if(!window.location.search.includes('lang') && contextData.state.activeLanguage !=='default'){
-            const searchFromAsUrl =  router.asPath.includes('?') ?  router.asPath.split('?')[1] : ''
-            const asUrl = new URLSearchParams(searchFromAsUrl)
-            // asUrl.set('lang', contextData.state.activeLanguage)
-            //  // router.push({
-            //  //     pathname:router.pathname,
-            //  //     query:router.query
-            //  // },asUrl.toString())
-            console.log(router)
-        }
-
-    }, [router.pathname,contextData.state.activeLanguage]);
+    // useEffect(() => {
+    //     if(!window.location.search.includes('lang') && contextData.state.activeLanguage !=='default'){
+    //         const searchFromAsUrl =  router.asPath.includes('?') ?  router.asPath.split('?')[1] : ''
+    //         const asUrl = new URLSearchParams(searchFromAsUrl)
+    //         // asUrl.set('lang', contextData.state.activeLanguage)
+    //         //  // router.push({
+    //         //  //     pathname:router.pathname,
+    //         //  //     query:router.query
+    //         //  // },asUrl.toString())
+    //
+    //     }
+    //
+    // }, [router.pathname,contextData.state.activeLanguage]);
 
     useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;

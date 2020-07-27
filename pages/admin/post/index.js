@@ -54,10 +54,10 @@ const Index = props => {
                 })
             }
 
-            setState({
-                ...props.post,
-                translations: props.post.translations?props.post.translations:{}
-            })
+            // setState({
+            //     ...props.post,
+            //     translations: props.post.translations ? props.post.translations : {}
+            // })
             setTextInputsState({
                 title: props.post.title,
                 description: props.post.description,
@@ -96,31 +96,6 @@ const Index = props => {
     }
 
 
-
-
-
-    const changeState = async () => {
-        console.log('updateState')
-        if (editingData.activeEditingLanguage === 'default') {
-            await setState({
-                ...state,
-                title: titleElement.current.value,
-                description: descriptionElement.current.value,
-            })
-        } else {
-            await setState({
-                ...state,
-                translations: {
-                    ...state.translations,
-                    [editingData.activeEditingLanguage]: {
-                        ...state.translations[editingData.activeEditingLanguage],
-                        title: titleElement.current.value,
-                        description: descriptionElement.current.value,
-                    }
-                }
-            })
-        }
-    }
     const onPostMetaChangeHandler = (type, data) => {
         setState({
             ...state,
@@ -142,18 +117,32 @@ const Index = props => {
     })
 
 
+    // useEffect(() => {
+    //     setTextInputsState({
+    //         ...textInputsState,
+    //         translations: {
+    //             ...textInputsState.translations ? textInputsState.translations : {},
+    //             [editingData.activeEditingLanguage]: textInputsState.translations[editingData.activeEditingLanguage] ? {...textInputsState.translations[editingData.activeEditingLanguage]} : {}
+    //         }
+    //     })
+    // }, [editingData.activeEditingLanguage]);
+
+
+    useEffect(() => {
+        console.log(textInputsState)
+    }, [textInputsState]);
+
+
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [props]);
+
     const onActiveEditingLanguageChangeHandler = e => {
         setEditingData({
             ...editingData,
             activeEditingLanguage: e.target.value
         })
-        setTextInputsState({
-            ...textInputsState,
-            translations: {
-                ...textInputsState.translations ? textInputsState.translations :{},
-                [e.target.value]:textInputsState.translations[e.target.value] ? textInputsState.translations[e.target.value] : {}
-            }
-        })
+
     }
 
     return (
@@ -183,7 +172,8 @@ const Index = props => {
                     </div>
 
                     <div className="side">
-                        <DropDownWidget renderFor='all' postData={state} textInputsState={textInputsState} component={ActionOnPost} title={state.status}
+                        <DropDownWidget renderFor='all' postData={state} textInputsState={textInputsState}
+                                        component={ActionOnPost} title={state.status}
                                         onChangeHandler={onChangeHandler}/>
                         <DropDownWidget renderFor='all' postData={state} component={Format} title='Format'
                                         onChangeHandler={onChangeHandler}/>
@@ -240,7 +230,7 @@ Index.getInitialProps = async ({query, req}) => {
         views: 0,
         likes: 0,
         disLikes: 0,
-        translations:{}
+        translations: {}
     }
 
     if (query.new) {

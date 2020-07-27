@@ -97,7 +97,7 @@ const Navigation = props => {
 
 
     const renderNavigationItems = contextData.navigationData.map(item => {
-
+console.log(item)
         const queryArrayToObject = (arr) => {
             let returningData = {}
             arr.forEach(arrItem => {
@@ -119,7 +119,7 @@ const Navigation = props => {
                 key={item.title}
                 href={{
                     pathname: pathData.pathname,
-                    query: pathData.query,
+                    query: queryArrayToObject(item.query),
                 }}><a style={navigationData.style}>{
                 item.translations ? item.translations[contextData.state.activeLanguage] ? item.translations[contextData.state.activeLanguage].title || item.title : item.title : item.title
             }</a></Link>
