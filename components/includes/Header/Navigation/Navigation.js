@@ -33,25 +33,12 @@ const Navigation = props => {
                 color: contextData.siteDesign.navigationTextColor
             }
         })
-    }, [contextData.siteDesign]);
+    }, [contextData.siteDesign, props]);
+
 
     useEffect(() => {
-        if (localStorage) {
-            if (localStorage.lang) {
-                if (localStorage.lang !== 'default') {
-                    setNavigationData({
-                        ...navigationData,
-                        queries: {
-                            ...navigationData.queries,
-                            lang: localStorage.lang,
-                        },
-                        // asUrlWithLang: addOrReplaceQueryToWindowLocationSearch('lang', localStorage.lang)
-                    })
-                }
-
-            }
-        }
-    }, [props]);
+        console.log(navigationData)
+    }, [navigationData]);
 
 
     useEffect(() => {
@@ -97,7 +84,7 @@ const Navigation = props => {
 
 
     const renderNavigationItems = contextData.navigationData.map(item => {
-console.log(item)
+        // console.log(item)
         const queryArrayToObject = (arr) => {
             let returningData = {}
             arr.forEach(arrItem => {

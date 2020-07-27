@@ -16,7 +16,11 @@ const ProductInformation = props => {
             images: props.postData.images || [],
             imageFromUrl: ''
         })
-    }, [ props ]);
+        // props.priceElement.current.value = props.postData.price || 1
+        // props.priceTypeElement.current.value = props.postData.priceType || 'negotiable'
+        // props.currencyElement.current.value = props.postData.currency
+    }, [  ]);
+
 
     const renderImagesPreview = state.images.map(image => {
         const onRemoveImageHandler = () => {
@@ -69,10 +73,17 @@ const ProductInformation = props => {
     }
 
 
+    const onChangeHandler = (e) =>{
+        props.setProductInfo({
+            ...props.productInfo,
+            [e.target.name] :e.target.value
+        })
+    }
+
 
     if (props.postData.postType === 'product') {
         return (
-            <div className='product-information'>
+            <div className='product-information admin-widget'>
                 <p>Add Image From Url Or Upload a Image :</p>
                 <div className=' product-information-section product-information-add-image'>
                     <input value={ state.imageFromUrl } onChange={ e => setState({ ...state, imageFromUrl: e.target.value }) }/>
@@ -87,23 +98,19 @@ const ProductInformation = props => {
                 <br/>
                 <div className='product-information-section'>
                     <p>Price :</p>
-                    <input name='price' type='number' placeholder='Price' value={props.postData.price || 1} onChange={e=>props.onChangeHandler(e)}/>
-                    <select name='priceType' onChange={e=>props.onChangeHandler(e)}>
+                    <input  name='price' type='number' placeholder='Price' onChange={e=>onChangeHandler(e)} value={props.productInfo.price} />
+                    <select  name='priceType' onChange={e=>onChangeHandler(e)}  value={props.productInfo.priceType} >
                         <option value='negotiable'>Negotiable</option>
                         <option value='last'>Last Price</option>
                         <option value='giveAway'>Give Away</option>
                     </select>
                     <p>Currency :</p>
-                    <input name='currency'  value={props.postData.currency || 'Euro'} onChange={e=>props.onChangeHandler(e)}/>
+                    <input  name='currency' placeholder='currency' onChange={e=>onChangeHandler(e)}  value={props.productInfo.currency} />
                 </div>
 
             </div>
         );
-    } else {
-        return (
-            <h3>This Post Type Does not Support this Feature </h3>
-        )
-    }
+    } else return null
 
 };
 export default ProductInformation;

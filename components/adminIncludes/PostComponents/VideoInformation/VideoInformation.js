@@ -41,7 +41,7 @@ const VideoInformation = props => {
 
     if (props.postData.postType === 'video') {
         return (
-            <div className='VideoInformation'>
+            <div className='VideoInformation admin-widget'>
                 <IsInSlideShow {...props} onIsInSlideShowChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow }/>
                 <Quality {...props} />
                 <TextInputWithUploadBtn {...props} name='videoUrl' title='Video Url' />
@@ -60,11 +60,7 @@ const VideoInformation = props => {
                 <TextInput {...props} name='downloadLink' title='Download Link' />
             </div>
         );
-    } else {
-        return (
-            <h3>This Post Type Does not Support this Feature </h3>
-        )
-    }
+    } else return null
 
 };
 export default VideoInformation;

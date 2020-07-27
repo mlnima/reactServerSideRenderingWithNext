@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {getPost} from '../../../_variables/ajaxPostsVariables';
+import {getPost, savePost, updatePost} from '../../../_variables/ajaxPostsVariables';
 import {getAbsolutePath} from '../../../_variables/_variables'
 import AdminLayout from "../../../components/layouts/AdminLayout";
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
@@ -17,11 +17,18 @@ import dataDecoder from '../../../server/tools/dataDecoder'
 import ProductInformation from '../../../components/adminIncludes/PostComponents/ProductInformation/ProductInformation'
 import {getMultipleSetting} from '../../../_variables/ajaxVariables'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
+import {useRouter} from "next/router";
 
 const Index = props => {
+    const contextData = useContext(AppContext);
+    const currencyElement = useRef(null)
     const activeEditingLanguage = useRef(null)
     const titleElement = useRef(null)
     const descriptionElement = useRef(null)
+    const priceElement = useRef(null)
+    const priceTypeElement = useRef(null)
+    const router = useRouter()
+
 
     const [state, setState] = useState({
         tags: [],
@@ -32,8 +39,13 @@ const Index = props => {
     })
 
     const [textInputsState, setTextInputsState] = useState({
-        translations: {}
+        translations: {},
+        title:'',
+        description:''
+
     })
+
+    const [productInfo, setProductInfo] = useState({})
 
     const [siteIdentity, setSiteIdentity] = useState({
         translationLanguages: []
@@ -44,8 +56,9 @@ const Index = props => {
     })
 
     useEffect(() => {
-        if (props.router.query.new && state._id) {
-            props.router.reload()
+        console.log('props updated on Admin Post Page')
+        if (router.query.new && state._id) {
+            router.reload()
         } else {
             if (props.identity) {
                 setSiteIdentity({
@@ -59,14 +72,21 @@ const Index = props => {
                 translations: props.post.translations ? props.post.translations : {}
             })
 
+            setProductInfo({
+                price: props.post.price,
+                priceType: props.post.priceType,
+                currency: props.post.currency,
+            })
+
             setTextInputsState({
                 title: props.post.title,
                 description: props.post.description,
                 translations: props.post.translations,
             })
-
         }
+
     }, [props]);
+
 
     const onChangeHandler = e => {
         setState({
@@ -74,7 +94,12 @@ const Index = props => {
             [e.target.name]: e.target.value
         })
     };
-
+    const onChangeHandlerForTextInputState = e => {
+        setTextInputsState({
+            ...textInputsState,
+            [e.target.name]: e.target.value
+        })
+    };
     const onTitleDescriptionChangeHandler = e => {
         if (editingData.activeEditingLanguage === 'default') {
             setTextInputsState({
@@ -95,8 +120,6 @@ const Index = props => {
             })
         }
     }
-
-
     const onPostMetaChangeHandler = (type, data) => {
         setState({
             ...state,
@@ -109,35 +132,11 @@ const Index = props => {
             [type]: state[type].filter(i => i.name != name)
         })
     }
-
-
     const languagesOptions = siteIdentity.translationLanguages.map(lang => {
         return (
             <option key={lang} value={lang}>{lang}</option>
         )
     })
-
-
-    // useEffect(() => {
-    //     setTextInputsState({
-    //         ...textInputsState,
-    //         translations: {
-    //             ...textInputsState.translations ? textInputsState.translations : {},
-    //             [editingData.activeEditingLanguage]: textInputsState.translations[editingData.activeEditingLanguage] ? {...textInputsState.translations[editingData.activeEditingLanguage]} : {}
-    //         }
-    //     })
-    // }, [editingData.activeEditingLanguage]);
-
-
-    useEffect(() => {
-        console.log(textInputsState)
-    }, [textInputsState,props]);
-
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
-
     const onActiveEditingLanguageChangeHandler = e => {
         setEditingData({
             ...editingData,
@@ -145,6 +144,73 @@ const Index = props => {
         })
 
     }
+
+    useEffect(() => {
+        console.log(productInfo)
+    }, [state]);
+
+    const onSaveHandler = async () => {
+        contextData.dispatchState({
+            ...contextData.state,
+            loading: true
+        })
+        try {
+            const postValue = {
+                ...state,
+                ...textInputsState,
+                ...productInfo,
+                author: state.author ? state.author : contextData.userData._id,
+
+            }
+
+            console.log(postValue)
+            if (state._id) {
+                // contextData.functions.updatePost(contextData.editingPostData)
+                updatePost(postValue, window.location.origin).then(() => {
+                    contextData.dispatchState({
+                        ...contextData.state,
+                        loading: false
+                    })
+                    props.router.push('/admin/post?id=' + state._id)
+                }).catch(err => {
+                    console.log(err)
+                    contextData.dispatchState({
+                        ...contextData.state,
+                        loading: false
+                    })
+                })
+            } else {
+
+                savePost(postValue, window.location.origin).then(res => {
+
+                    props.router.push('/admin/post?id=' + res.data.savedPostData._id)
+                    contextData.dispatchState({
+                        ...contextData.state,
+                        loading: false
+                    })
+                }).catch(err => {
+
+                    contextData.dispatchAlert({
+                        ...contextData.alert,
+                        active: true,
+                        alertMessage: err.response.data.error,
+                        type: 'error'
+                    })
+                    contextData.dispatchState({
+                        ...contextData.state,
+                        loading: false
+                    })
+                })
+            }
+        } catch (e) {
+            console.log(e)
+            contextData.dispatchState({
+                ...contextData.state,
+                loading: false
+            })
+        }
+    }
+
 
     return (
         <>
@@ -159,23 +225,25 @@ const Index = props => {
                             <option value='default'>Default</option>
                             {languagesOptions}
                         </select>
-                        <TitleDescription activeEditingLanguage={editingData.activeEditingLanguage}
-                                          titleElement={titleElement} descriptionElement={descriptionElement}
-                                          textInputsState={textInputsState}
-                                          onChangeHandler={onTitleDescriptionChangeHandler}/>
+                        <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState} activeEditingLanguage={editingData.activeEditingLanguage} onChangeHandler={onTitleDescriptionChangeHandler}/>
                         <TextInputWithUploadBtn postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'
                                                 title='Main thumbnail'/>
                         <ImagePreview postData={state}/>
-                        <DropDownWidget postData={state} renderFor='product' component={ProductInformation}
-                                        title='Product Information' onChangeHandler={onChangeHandler}/>
-                        <DropDownWidget postData={state} renderFor='video' component={VideoInformation}
-                                        title='Video Information' onChangeHandler={onChangeHandler}/>
+                        <ProductInformation
+                            postData={state}
+                            productInfo={productInfo} setProductInfo={setProductInfo}
+                            renderFor='product' component={ProductInformation}
+                            title='Product Information' onChangeHandler={onChangeHandler} />
+
+                        <VideoInformation
+                            postData={state} renderFor='video' component={VideoInformation}
+                            title='Video Information' onChangeHandler={onChangeHandler}/>
                     </div>
 
                     <div className="side">
                         <DropDownWidget renderFor='all' postData={state} textInputsState={textInputsState}
                                         component={ActionOnPost} title={state.status}
-                                        onChangeHandler={onChangeHandler}/>
+                                        onChangeHandler={onChangeHandler} onSaveHandler={onSaveHandler}/>
                         <DropDownWidget renderFor='all' postData={state} component={Format} title='Format'
                                         onChangeHandler={onChangeHandler}/>
                         <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
@@ -220,8 +288,6 @@ Index.getInitialProps = async ({query, req}) => {
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
 
 
-
-
     const newPostData = {
         status: 'published',
         postType: settings.identity.data.defaultPostType || 'video',
@@ -237,16 +303,11 @@ Index.getInitialProps = async ({query, req}) => {
         translations: {}
     }
 
-    if (settings.identity.data.translationLanguages){
-        settings.identity.data.translationLanguages.forEach(lang=>{
+    if (settings.identity.data.translationLanguages) {
+        settings.identity.data.translationLanguages.forEach(lang => {
             newPostData.translations[lang] = ''
         })
     }
-
-
-
-
-
 
 
     if (query.new) {
