@@ -27,6 +27,9 @@ const TitleDescription = props => {
     //
     //
     // }, [props]);
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     const onTitleDescriptionChangeHandler = e => {
         if (props.activeEditingLanguage === 'default') {
@@ -51,14 +54,14 @@ const TitleDescription = props => {
     }
 
 
-
-
     return (
         <div className='TitleDescription'>
-            <input type="text"  name='title' value={ props.activeEditingLanguage === 'default' ? props.textInputsState.title :  props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].title : ''          }
+            <input type="text" name='title'
+                   value={props.activeEditingLanguage === 'default' ? props.textInputsState.title : props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].title : ''}
                    className='TitleDescriptionTitle' placeholder='Enter The Title Here'
                    onChange={e => onTitleDescriptionChangeHandler(e)}/>
-            <textarea  name='description' value={props.activeEditingLanguage === 'default' ? props.textInputsState.description :  props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].description : ''  }
+            <textarea name='description'
+                      value={props.activeEditingLanguage === 'default' ? props.textInputsState.description : props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].description : ''}
                       className='TitleDescriptionDescription' onChange={e => onTitleDescriptionChangeHandler(e)}/>
         </div>
     );

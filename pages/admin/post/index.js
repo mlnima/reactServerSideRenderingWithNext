@@ -40,8 +40,8 @@ const Index = props => {
 
     const [textInputsState, setTextInputsState] = useState({
         translations: {},
-        title:'',
-        description:''
+        title: '',
+        description: ''
 
     })
 
@@ -225,7 +225,9 @@ const Index = props => {
                             <option value='default'>Default</option>
                             {languagesOptions}
                         </select>
-                        <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState} activeEditingLanguage={editingData.activeEditingLanguage} onChangeHandler={onTitleDescriptionChangeHandler}/>
+                        <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
+                                          activeEditingLanguage={editingData.activeEditingLanguage}
+                                          onChangeHandler={onTitleDescriptionChangeHandler}/>
                         <TextInputWithUploadBtn postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'
                                                 title='Main thumbnail'/>
                         <ImagePreview postData={state}/>
@@ -233,7 +235,7 @@ const Index = props => {
                             postData={state}
                             productInfo={productInfo} setProductInfo={setProductInfo}
                             renderFor='product' component={ProductInformation}
-                            title='Product Information' onChangeHandler={onChangeHandler} />
+                            title='Product Information' onChangeHandler={onChangeHandler}/>
 
                         <VideoInformation
                             postData={state} renderFor='video' component={VideoInformation}
@@ -319,6 +321,9 @@ Index.getInitialProps = async ({query, req}) => {
 
         postData = await getPost(requestBody, domainName, false, query.id)
         post = postData.data ? postData.data.post : newPostData
+        if (!post.translations) {
+            post.translations = {}
+        }
     }
 
     return {post, query, ...settings}
