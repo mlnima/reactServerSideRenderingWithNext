@@ -295,6 +295,27 @@ app.prepare().then(() => {
         }
         app.render(req, res, targetComponent, queryParams)
     });
+
+    server.get('/login', (req, res) => {
+        const targetComponent = '/auth/login';
+        const queryParams = {
+            ...req.query,
+            ...req.params,
+        }
+        app.render(req, res, targetComponent, queryParams)
+    });
+
+    server.get('/register', (req, res) => {
+        const targetComponent = '/auth/register';
+        const queryParams = {
+            ...req.query,
+            ...req.params,
+        }
+        app.render(req, res, targetComponent, queryParams)
+    });
+
+
+
     server.get('/categories/:category', (req, res) => {
         const targetComponent = '/posts';
         const queryParams = {

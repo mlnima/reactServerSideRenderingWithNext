@@ -36,10 +36,6 @@ const Navigation = props => {
     }, [contextData.siteDesign, props]);
 
 
-    useEffect(() => {
-        console.log(navigationData)
-    }, [navigationData]);
-
 
     useEffect(() => {
         if (window.innerWidth < 768) {

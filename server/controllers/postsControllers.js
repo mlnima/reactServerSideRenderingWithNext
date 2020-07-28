@@ -269,8 +269,8 @@ postsControllers.getMeta = async (req, res) => {
         if (req.body.keyword === ''){
             return {}
         }else {
-            const keywordToSearch = decodeURIComponent(req.body.keyword)
-            console.log(req.body.keyword,keywordToSearch)
+            const keywordToSearch = req.body.keyword
+            // console.log(req.body.keyword,keywordToSearch)
             if (!req.body.lang || req.body.lang === 'default' ){
                 return{$or: [{name: new RegExp(req.body.keyword, 'i')},{description: new RegExp(req.body.keyword, 'i')}]};
             }else {

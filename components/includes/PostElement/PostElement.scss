@@ -75,11 +75,15 @@
         position: absolute;
         right: 3px;
         bottom: 3px;
+
         @include elementOnVideoElement;
-
+        margin: auto;
+        padding: 0 5px;
         span {
-          margin-right: 5px;
+          //margin-right: 5px;
 
+
+          //text-align: center;
         }
       }
 

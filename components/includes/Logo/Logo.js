@@ -33,13 +33,6 @@ const Logo = props => {
     }, [contextData.siteIdentity]);
 
 
-    // useEffect(() => {
-    //     setState({
-    //         ...state,
-    //         queries: {...getLanguageQuery(window.location.search)}
-    //     })
-    //
-    // }, [props]);
 
     const RenderLogo = () => {
         if (props.LogoUrl) {

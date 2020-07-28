@@ -26,7 +26,10 @@ const settings = props => {
         metaPageSidebar: props.identity.postsPageSidebar || false,
         membership: props.identity.membership || false,
         allowUserToPost: props.identity.allowUserToPost || false,
-        translationLanguages:props.identity.translationLanguages||[]
+        translationLanguages:props.identity.translationLanguages||[],
+        topBarAuthBtn:props.identity.translationLanguages||true,
+        anyoneCanRegister:props.identity.anyoneCanRegister||true,
+
     });
 
     useEffect(() => {
@@ -179,6 +182,20 @@ const settings = props => {
                             <select name='siteProtocol' value={ state.siteProtocol } onChange={ e => onChangeHandler(e) }>
                                 <option value='http'>HTTP</option>
                                 <option value='https'>HTTPS</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section topBarAuthBtn">
+                            <p>Top Bar Login or Register Buttons :</p>
+                            <select name='topBarAuthBtn' value={ state.topBarAuthBtn } onChange={ e => onChangeHandler(e) }>
+                                <option value='true'>Enable</option>
+                                <option value='false'>Disable</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section anyoneCanRegister">
+                            <p>Any One Can Register :</p>
+                            <select name='anyoneCanRegister' value={ state.anyoneCanRegister } onChange={ e => onChangeHandler(e) }>
+                                <option value='true'>Enable</option>
+                                <option value='false'>Disable</option>
                             </select>
                         </div>
                         <div className="site-settings-form-section allowUserToPost">

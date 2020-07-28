@@ -4,13 +4,7 @@ const RenderMetaDataPages = props => {
     const [ state, setState ] = useState({
         pageType: ''
     });
-    useEffect(() => {
-        console.log(props)
-    }, []);
 
-    useEffect(() => {
-
-    }, [ props ]);
     return (
         <div className='RenderMetaDataPages'>
 

@@ -159,12 +159,20 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
         const mapWidgetsToGetDataForThem = finalData.map(async widget=>{
             const sortMethod = widget.data.sortBy ? { [widget.data.sortBy]: -1 } : '-_id';
             let sortQuery = !req.body.sort ? {} : req.body.sort === '_id' || req.body.sort === '-_id' ? req.body.sort : { [req.body.sort]: -1 }
+            let selectedMeta = widget.data.selectedMetaForPosts ? {$or:[
+                    {tags: widget.data.selectedMetaForPosts},
+                    {categories:widget.data.selectedMetaForPosts},
+                    {actors:widget.data.selectedMetaForPosts}
+                ]}:{}
+
+
+                //  {status:'published'}
             return  {
                 ...widget.toObject(),
                 data:{
                     ...widget.data,
                     metaData: widget.data.metaType ? await metaSchema.find({ type: widget.data.metaType }).limit(parseInt(widget.data.count)).sort(sortQuery).exec() : [],
-                    posts: widget.data.type === 'posts' ? await postSchema.find({status:'published'}).limit(parseInt(widget.data.count)).sort(sortMethod).exec() : [],
+                    posts: widget.data.type === 'posts' ? await postSchema.find({$and: [{status:'published'}, selectedMeta]}).limit(parseInt(widget.data.count)).sort(sortMethod).exec() : [],
                     comments: widget.data.type === 'recentComments' ? await commentSchema.find({}).limit(parseInt(widget.data.count)).exec() : [],
                 }
             }

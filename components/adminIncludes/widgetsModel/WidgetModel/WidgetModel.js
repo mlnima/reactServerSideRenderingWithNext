@@ -70,7 +70,7 @@ const WidgetModel = props => {
             title: props.data.data.title,
             redirectToTitle: props.data.data.redirectToTitle,
             redirectLink: props.data.data.redirectLink,
-            translations:props.data.data.translations || {}
+            translations: props.data.data.translations || {}
 
         })
 
@@ -92,7 +92,7 @@ const WidgetModel = props => {
 
     const onDeleteHandler = () => {
         deleteWidgets(props.data._id, window.location.origin).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']},  window.location.origin,false, Date.now()).then(res => {
+            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
                 contextData.dispatchWidgetsSettings({
                     widgets: [...res.data.widgets]
                 })
@@ -123,6 +123,12 @@ const WidgetModel = props => {
         })
     }
 
+
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
+
+
     const onChangeHandler = e => {
         setWidgetData({
             ...widgetData,
@@ -141,30 +147,30 @@ const WidgetModel = props => {
         } else return null
     }
 
-    const RenderTitleAndRedirect = () => {
-        return (
-            <>
-                <p>Title:</p>
-                <input name='title' className='title' placeholder='Title' value={
-                    widgetSettings.activeEditingLanguage === 'default' ?
-                        textInputsData.title :
-                        textInputsData.data.translations ?
-                            textInputsData.data.translations[widgetSettings.activeEditingLanguage] ?
-                                textInputsData.data.translations[widgetSettings.activeEditingLanguage].title || '' :
-                                '' : ''
-                }
-                       onChange={e => onTextInputsDataChangeHandler(e)}/>
-                <p>Redirect Link Title</p>
-                <DelayInput className='redirectToTitle' name='redirectToTitle' placeholder='Title for Redirect Link'
-                            delayTimeout={1000} value={widgetData.data.redirectToTitle}
-                            onChange={e => onChangeHandler(e)}/>
-                <p>Redirect Link URL:</p>
-                <DelayInput className='redirectLink' name='redirectLink' placeholder='Redirect'
-                            value={widgetData.data.redirectLink} delayTimeout={1000}
-                            onChange={e => onChangeHandler(e)}/>
-            </>
-        )
-    }
+    // const RenderTitleAndRedirect = () => {
+    //     return (
+    //         <>
+    //             <p>Title:</p>
+    //             <input name='title' className='title' placeholder='Title' value={
+    //                 widgetSettings.activeEditingLanguage === 'default' ?
+    //                     textInputsData.title :
+    //                     textInputsData.data.translations ?
+    //                         textInputsData.data.translations[widgetSettings.activeEditingLanguage] ?
+    //                             textInputsData.data.translations[widgetSettings.activeEditingLanguage].title || '' :
+    //                             '' : ''
+    //             }
+    //                    onChange={e => onTextInputsDataChangeHandler(e)}/>
+    //             <p>Redirect Link Title</p>
+    //             <DelayInput className='redirectToTitle' name='redirectToTitle' placeholder='Title for Redirect Link'
+    //                         delayTimeout={1000} value={widgetData.data.redirectToTitle}
+    //                         onChange={e => onChangeHandler(e)}/>
+    //             <p>Redirect Link URL:</p>
+    //             <DelayInput className='redirectLink' name='redirectLink' placeholder='Redirect'
+    //                         value={widgetData.data.redirectLink} delayTimeout={1000}
+    //                         onChange={e => onChangeHandler(e)}/>
+    //         </>
+    //     )
+    // }
 
 
     const RenderRedirect = () => {
@@ -173,6 +179,16 @@ const WidgetModel = props => {
                 <p>Redirect Link URL:</p>
                 <DelayInput className='redirectLink' name='redirectLink' placeholder='Redirect'
                             value={widgetData.data.redirectLink} delayTimeout={1000}
+                            onChange={e => onChangeHandler(e)}/>
+            </>
+        )
+    }
+    const RenderSelectedMetaForPosts = () => {
+        return (
+            <>
+                <p>Selected Meta For Posts:</p>
+                <DelayInput className='redirectLink' name='selectedMetaForPosts' placeholder='Enter the meta ID'
+                            value={widgetData.data.selectedMetaForPosts} delayTimeout={1000}
                             onChange={e => onChangeHandler(e)}/>
             </>
         )
@@ -217,6 +233,7 @@ const WidgetModel = props => {
         )
     }
 
+
     const RenderOptionByFormat = () => {
         switch (widgetData.data.type) {
             case 'posts':
@@ -233,6 +250,7 @@ const WidgetModel = props => {
                             <option value='views'>Views</option>
                             <option value='likes'>Likes</option>
                         </select>
+                        <RenderSelectedMetaForPosts/>
                         <p>View Type:</p>
                         <select name='viewType' value={widgetData.data.viewType} onChange={e => onChangeHandler(e)}>
                             <option value='standard'>Standard</option>

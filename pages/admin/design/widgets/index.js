@@ -29,14 +29,9 @@ const HomePageWidgets = props => {
                 ...props.identity.data
             })
         }
-
-
     }, [props]);
 
 
-    // useEffect(() => {
-    //
-    // }, [props]);
 
     const renderWidgetsInPosition = [...new Set((contextData.widgetsSettings.widgets).map(widgets => {
         return widgets.data.position
@@ -105,7 +100,6 @@ HomePageWidgets.getInitialProps = async ({req}) => {
     const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, domainName,false, Date.now())
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-
     return {widgets, domainName, ...settings}
 }
 

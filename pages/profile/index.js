@@ -17,10 +17,6 @@ const Profile = props => {
         activeTab:'MyProfileInfo'
     });
 
-    useEffect(() => {
-        console.log(state)
-
-    }, [ state ]);
 
 
     return (

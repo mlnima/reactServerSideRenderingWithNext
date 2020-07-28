@@ -31,7 +31,9 @@ const identityData = {
         homePageSidebar: true,
         metaPageSidebar: false,
         postPageSidebar: true,
-        postsPageSidebar: true
+        postsPageSidebar: true,
+        topBarAuthBtn:true,
+        anyoneCanRegister:true,
     }
 }
 const navigationData = {
@@ -44,6 +46,7 @@ const navigationData = {
         {
             "title": "Tags",
             "url": "/meta",
+            "as": "/tags",
             "query": [
                 {
                     "type": "tags"
@@ -53,6 +56,7 @@ const navigationData = {
         {
             "title": "Categories",
             "url": "/meta",
+            "as": "/tags",
             "query": [
                 {
                     "type": "categories"
@@ -189,15 +193,3 @@ runSetup().then(() => {
     process.exit()
 })
 
-// REACT_APP_JWT_KEY = 'secretKey'
-// PRODUCTION_URL=
-// NODE_ENV='dev'
-// REACT_APP_PORT='3000'
-//
-//
-// DB_LOCAL= true
-// DB_NAME = nextDB
-// DB_HOST=
-//     DB_USER=
-//         DB_PASS=
-//             DB_PORT=27017

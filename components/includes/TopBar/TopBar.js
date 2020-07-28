@@ -55,7 +55,7 @@ const TopBar = props => {
     }
 
     const LoggedOutItems = () => {
-        if (!contextData.userData.username) {
+        if (!contextData.userData.username && contextData.siteIdentity.topBarAuthBtn) {
             return (
                 <>
                     <Link href='/auth/login'><a>Login</a></Link>

@@ -24,10 +24,6 @@ const Login = props => {
         })
     };
 
-    useEffect(() => {
-        console.log(props )
-    }, []);
-
     const onSubmitHandler = e => {
         e.preventDefault();
         axios.post('/api/v1/users/login', state).then(res => {

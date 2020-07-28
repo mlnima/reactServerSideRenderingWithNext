@@ -18,9 +18,6 @@ const MyProfileInfo = props => {
             'about',
         ]
     });
-    useEffect(() => {
-        console.log(contextData.userData)
-    }, [ contextData.userData ]);
 
     const onChangeHandler = e => {
         contextData.dispatchUserData({

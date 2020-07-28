@@ -1,4 +1,4 @@
-import React, { useState,useRef } from 'react';
+import React, { useState,useRef,useContext } from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
 import withRouter from "next/dist/client/with-router";
 import axios from 'axios'
@@ -6,9 +6,13 @@ import { getAbsolutePath } from '../../_variables/_variables'
 import { getMultipleSetting, getMultipleWidgetWithData } from '../../_variables/ajaxVariables'
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import dataDecoder from '../../server/tools/dataDecoder'
+import {AppContext} from "../../context/AppContext";
+import {useRouter} from "next/router";
 
 const Register = props => {
+    const contextData = useContext(AppContext);
     const messageLabel = useRef(null);
+    const router = useRouter()
     const [ state, setState ] = useState({
         username: undefined,
         email: undefined,
@@ -44,32 +48,46 @@ const Register = props => {
         }).catch(err=>console.log( err))
     };
 
-    return (
-        <AppLayout>
-            <SiteSettingSetter { ...props }/>
-            <div className='Register authPage'>
-                <form className='authForm' onSubmit={e=>onSubmitHandler(e)}>
-                    <div className="authFormItem">
-                        <p>username</p>
-                        <input name='username' onChange={ e => onChangeHandler(e) }/>
-                    </div>
-                    <div className="authFormItem">
-                        <p>email</p>
-                        <input name='email' type='email' onChange={ e => onChangeHandler(e) }/>
-                    </div>
-                    <div className="authFormItem">
-                        <p>password</p>
-                        <input name='password' type='password' onChange={ e => onChangeHandler(e) }/>
-                    </div>
-                    <div className="authFormItem">
-                        <p>repeat password</p>
-                        <input name='password2' type='password' onChange={ e => onChangeHandler(e) }/>
-                    </div>
-                    <button type='submit' className='submitBtn'>Register</button>
-                </form>
-            </div>
-        </AppLayout>
-    );
+    if (contextData.siteIdentity.anyoneCanRegister){
+        return (
+            <AppLayout>
+                <SiteSettingSetter { ...props }/>
+                <div className='Register authPage'>
+                    <form className='authForm' onSubmit={e=>onSubmitHandler(e)}>
+                        <div className="authFormItem">
+                            <p>username</p>
+                            <input name='username' onChange={ e => onChangeHandler(e) }/>
+                        </div>
+                        <div className="authFormItem">
+                            <p>email</p>
+                            <input name='email' type='email' onChange={ e => onChangeHandler(e) }/>
+                        </div>
+                        <div className="authFormItem">
+                            <p>password</p>
+                            <input name='password' type='password' onChange={ e => onChangeHandler(e) }/>
+                        </div>
+                        <div className="authFormItem">
+                            <p>repeat password</p>
+                            <input name='password2' type='password' onChange={ e => onChangeHandler(e) }/>
+                        </div>
+                        <button type='submit' className='submitBtn'>Register</button>
+                    </form>
+                </div>
+            </AppLayout>
+        );
+
+    }else {
+
+        return (
+            <AppLayout>
+                <SiteSettingSetter { ...props }/>
+                <div className='Register authPage'>
+                </div>
+            </AppLayout>
+        )
+    }
+
+
 };
 
 Register.getInitialProps = async ({ req }) => {

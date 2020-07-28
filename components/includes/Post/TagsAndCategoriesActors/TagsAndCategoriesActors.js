@@ -45,7 +45,7 @@ const TagsAndCategoriesActors = props => {
         //         : state.type === 'actors' ? 'actor'
         //             : 'tag'
         //
-        const path = `/posts?${ state.type }=${ item._id }`;
+        const path = `/posts?content=${ item._id }`;
         const icon = state.type === 'categories' ? CategorySvg
             : state.type === 'tags' ? TagSvg
                 : state.type === 'actors' ? StarSvg

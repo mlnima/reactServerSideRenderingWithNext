@@ -2,9 +2,7 @@ import React, { useEffect, useState, useContext } from 'react';
 import Link from "next/link";
 
 const DownloadLink = props => {
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
+
 
     if (props.downloadLink) {
         return (

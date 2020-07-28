@@ -2,8 +2,8 @@
 @import "../../../../styles/grid";
 
 .product-information {
-  width: 100%;
-
+  width: 95%;
+  border-radius: 10px;
   .product-information-add-image, .product-information-upload-image {
     display: flex;
     align-items: center;
