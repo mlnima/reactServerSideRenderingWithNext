@@ -47,7 +47,7 @@ const Navigation = props => {
         if (navigation.current) {
             if (navigationData.isOpen) {
                 navigationMobileBtn.current.style.transform = 'rotate(-90deg)'
-            } else {
+            } else if (!navigationData.isOpen){
                 navigationMobileBtn.current.style.transform = 'rotate(0deg)'
             }
         }
