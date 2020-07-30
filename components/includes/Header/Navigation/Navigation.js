@@ -17,6 +17,10 @@ const Navigation = props => {
         asUrlWithLang: ''
     });
 
+    const [navigationBtnData,setNavigationBtnData] = useState({
+        style:{}
+    })
+
 
 
     useEffect(() => {
@@ -39,19 +43,21 @@ const Navigation = props => {
                     ...navigationData.style,
                     display:'flex'}
             });
+        }else {
+
         }
     }, []);
 
-
-    useEffect(() => {
-        if (navigation.current) {
-            if (navigationData.isOpen) {
-                navigationMobileBtn.current.style.transform = 'rotate(-90deg)'
-            } else if (!navigationData.isOpen){
-                navigationMobileBtn.current.style.transform = 'rotate(0deg)'
-            }
-        }
-    }, [navigationData.isOpen]);
+    //
+    // useEffect(() => {
+    //     if (navigation.current) {
+    //         if (navigationData.isOpen) {
+    //             navigationMobileBtn.current.style.transform = 'rotate(-90deg)'
+    //         } else if (!navigationData.isOpen){
+    //             navigationMobileBtn.current.style.transform = 'rotate(0deg)'
+    //         }
+    //     }
+    // }, [navigationData.isOpen]);
 
     useEffect(() => {
         setNavigationData(navigationData => ({
@@ -64,21 +70,49 @@ const Navigation = props => {
 
 
     const onNavigationMobileBtnClickHandler = () => {
-        navigationData.isOpen ? setNavigationData({
-            ...navigationData,
-            isOpen: false,
-            style:{
-                ...navigationData.style,
-                display:'none'
-            }
-        }) : setNavigationData({
-            ...navigationData,
-            isOpen: true,
-            style:{
-                ...navigationData.style,
-                display:'flex'}
-        })
+
+        if (navigationData.isOpen){
+            setNavigationData({
+                ...navigationData,
+                isOpen: false,
+                style:{
+                    ...navigationData.style,
+                    display:'none'
+                }
+            })
+
+            setNavigationBtnData({
+                ...navigationBtnData,
+                style: {
+                    ...navigationBtnData,
+                    transform:'rotate(0deg)'
+                }
+            })
+
+
+
+        }else {
+            setNavigationData({
+                ...navigationData,
+                isOpen: true,
+                style:{
+                    ...navigationData.style,
+                    display:'flex'}
+            })
+            setNavigationBtnData({
+                ...navigationBtnData,
+                style: {
+                    ...navigationBtnData,
+                    transform:'rotate(-90deg)'
+                }
+            })
+
+        }
+
     };
+
+
+
     const renderNavigationItems = (contextData.navigationData || []).map(item => {
 
         const queryArrayToObject = (arr) => {
@@ -108,9 +142,8 @@ const Navigation = props => {
 
     return (
         <>
-            <button ref={navigationMobileBtn} className='navigationMobileBtn'
-                    onClick={onNavigationMobileBtnClickHandler}><img className='fontawesomeSvgMedium' src={BarsSvg}
-                                                                     alt=""/></button>
+            <button style={navigationBtnData.style} ref={navigationMobileBtn} className='navigationMobileBtn'
+                    onClick={onNavigationMobileBtnClickHandler}><img className='fontawesomeSvgMedium' src={BarsSvg} alt=""/></button>
             <div ref={navigation} className='Navigation' style={navigationData.style}>
                 {renderNavigationItems}
             </div>
