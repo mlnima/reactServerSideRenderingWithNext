@@ -38,18 +38,19 @@ const Navigation = props => {
 
 
     useEffect(() => {
-        if (window.innerWidth < 768) {
-            setNavigationData({
-                ...navigationData,
-                isOpen: false
-            });
-
-        } else {
+        if (window.innerWidth >= 768) {
             setNavigationData({
                 ...navigationData,
                 isOpen: true
-            })
+            });
+
         }
+        // else {
+        //     setNavigationData({
+        //         ...navigationData,
+        //         isOpen: true
+        //     })
+        // }
     }, []);
 
     useEffect(() => {

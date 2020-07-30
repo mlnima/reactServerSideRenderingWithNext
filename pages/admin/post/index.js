@@ -100,6 +100,7 @@ const Index = props => {
             [e.target.name]: e.target.value
         })
     };
+
     const onTitleDescriptionChangeHandler = e => {
         if (editingData.activeEditingLanguage === 'default') {
             setTextInputsState({

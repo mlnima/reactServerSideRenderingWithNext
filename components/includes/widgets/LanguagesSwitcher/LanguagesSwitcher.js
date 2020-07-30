@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import withRouter from 'next/dist/client/with-router';
+import EULanguageSign from '../../../../static/images/fontawesome/globe-europe-solid.svg'
 
 const LanguagesSwitcher = props => {
     const contextData = useContext(AppContext);
@@ -20,6 +21,7 @@ const LanguagesSwitcher = props => {
 
     return (
         <div className='language-switcher-widget'>
+            <img src={EULanguageSign} className='fontawesomeSvgMedium' />
             <select value={contextData.state.activeLanguage}onChange={e=>onChangeHandler(e)}>
                 <option key='default' value='default'>default</option>
                 {languagesOptions}
