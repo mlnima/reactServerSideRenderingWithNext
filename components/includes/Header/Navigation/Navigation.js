@@ -1,20 +1,12 @@
 import React, {useState, useRef, useEffect, useContext} from 'react';
 import Link from "next/link";
-import FA from 'react-fontawesome'
 import {AppContext} from "../../../../context/AppContext";
 import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
 import withRouter from "next/dist/client/with-router";
-import {
-    addOrReplaceQueryToWindowLocationSearch,
-    getLanguageQuery,
-    getLanguageQueryFromWindowLocationSearch, pathAndAsPathGenerator
-} from '../../../../_variables/_variables'
-import {useRouter} from 'next/router'
-
+import { pathAndAsPathGenerator} from '../../../../_variables/_variables'
 
 const Navigation = props => {
     const contextData = useContext(AppContext);
-    const router = useRouter()
     const navigation = useRef(null)
     const navigationMobileBtn = useRef(null)
     const [navigationData, setNavigationData] = useState({
@@ -45,12 +37,6 @@ const Navigation = props => {
             });
 
         }
-        // else {
-        //     setNavigationData({
-        //         ...navigationData,
-        //         isOpen: true
-        //     })
-        // }
     }, []);
 
     useEffect(() => {
@@ -81,7 +67,7 @@ const Navigation = props => {
 
 
     const renderNavigationItems = contextData.navigationData.map(item => {
-        // console.log(item)
+
         const queryArrayToObject = (arr) => {
             let returningData = {}
             arr.forEach(arrItem => {
@@ -91,10 +77,6 @@ const Navigation = props => {
         }
 
         const pathData = pathAndAsPathGenerator(item.url, item.as || item.url, item.query)
-
-        //---
-
-        //---
 
 
         return (
@@ -114,7 +96,7 @@ const Navigation = props => {
     return (
         <>
             <button ref={navigationMobileBtn} className='navigationMobileBtn'
-                    onClick={() => onNavigationMobileBtnClickHandler()}><img className='fontawesomeSvgMedium'
+                    onClick={onNavigationMobileBtnClickHandler}><img className='fontawesomeSvgMedium'
                                                                              src={BarsSvg} alt=""/></button>
             <div ref={navigation} className='Navigation' style={navigationData.style}>
                 {renderNavigationItems}
