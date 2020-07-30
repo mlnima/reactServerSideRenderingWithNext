@@ -24,6 +24,7 @@
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/Header/Navigation/Navigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Header/Navigation/Navigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Header/Navigation/Navigation.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Header/Navigation/Navigation.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -324,7 +325,7 @@
       <workItem from="1595954212680" duration="2256000" />
       <workItem from="1596033276954" duration="2208000" />
       <workItem from="1596049375754" duration="884000" />
-      <workItem from="1596125803684" duration="3104000" />
+      <workItem from="1596125803684" duration="6589000" />
     </task>
     <servers />
   </component>
@@ -390,10 +391,10 @@
     </state>
     <state x="558" y="2324" key="SettingsEditor/0.0.2194.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1595883986539" />
     <state x="782" y="2323" width="1139" height="882" key="SettingsEditor/0.0.2194.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594419439171" />
-    <state x="1837" y="2277" width="840" height="1034" key="search.everywhere.popup" timestamp="1595878816112">
+    <state x="1837" y="2277" width="840" height="1034" key="search.everywhere.popup" timestamp="1596132207274">
       <screen x="-582" y="2160" width="4096" height="1152" />
     </state>
-    <state x="1837" y="2277" width="840" height="1034" key="search.everywhere.popup/0.0.2194.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1595878816112" />
+    <state x="1837" y="2277" width="840" height="1034" key="search.everywhere.popup/0.0.2194.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1596132207274" />
     <state x="1823" y="2277" width="840" height="1034" key="search.everywhere.popup/0.0.2341.1234/-597.2160.4096.1152@-597.2160.4096.1152" timestamp="1594822666886" />
   </component>
   <component name="XDebuggerManager">
@@ -440,7 +441,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/Header/Navigation/Navigation.js</url>
-          <line>87</line>
+          <line>100</line>
           <option name="timeStamp" value="17" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

@@ -3,7 +3,7 @@ import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
 import withRouter from "next/dist/client/with-router";
-import { pathAndAsPathGenerator} from '../../../../_variables/_variables'
+import {pathAndAsPathGenerator} from '../../../../_variables/_variables'
 
 const Navigation = props => {
     const contextData = useContext(AppContext);
@@ -17,6 +17,8 @@ const Navigation = props => {
         asUrlWithLang: ''
     });
 
+
+
     useEffect(() => {
         setNavigationData({
             ...navigationData,
@@ -28,24 +30,24 @@ const Navigation = props => {
     }, [contextData.siteDesign, props]);
 
 
-
     useEffect(() => {
         if (window.innerWidth >= 768) {
             setNavigationData({
                 ...navigationData,
-                isOpen: true
+                isOpen: true,
+                style:{
+                    ...navigationData.style,
+                    display:'flex'}
             });
-
         }
     }, []);
+
 
     useEffect(() => {
         if (navigation.current) {
             if (navigationData.isOpen) {
-                navigation.current.style.display = 'flex'
                 navigationMobileBtn.current.style.transform = 'rotate(-90deg)'
             } else {
-                navigation.current.style.display = 'none'
                 navigationMobileBtn.current.style.transform = 'rotate(0deg)'
             }
         }
@@ -58,15 +60,26 @@ const Navigation = props => {
         }))
     }, [contextData.navigationData]);
 
+
+
+
     const onNavigationMobileBtnClickHandler = () => {
         navigationData.isOpen ? setNavigationData({
             ...navigationData,
-            isOpen: false
-        }) : setNavigationData({...navigationData, isOpen: true})
+            isOpen: false,
+            style:{
+                ...navigationData.style,
+                display:'none'
+            }
+        }) : setNavigationData({
+            ...navigationData,
+            isOpen: true,
+            style:{
+                ...navigationData.style,
+                display:'flex'}
+        })
     };
-
-
-    const renderNavigationItems = contextData.navigationData.map(item => {
+    const renderNavigationItems = (contextData.navigationData || []).map(item => {
 
         const queryArrayToObject = (arr) => {
             let returningData = {}
@@ -96,8 +109,8 @@ const Navigation = props => {
     return (
         <>
             <button ref={navigationMobileBtn} className='navigationMobileBtn'
-                    onClick={onNavigationMobileBtnClickHandler}><img className='fontawesomeSvgMedium'
-                                                                             src={BarsSvg} alt=""/></button>
+                    onClick={onNavigationMobileBtnClickHandler}><img className='fontawesomeSvgMedium' src={BarsSvg}
+                                                                     alt=""/></button>
             <div ref={navigation} className='Navigation' style={navigationData.style}>
                 {renderNavigationItems}
             </div>
