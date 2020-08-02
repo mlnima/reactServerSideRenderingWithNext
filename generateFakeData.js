@@ -30,7 +30,7 @@ axios.post('http://localhost:4200/server/posts/admin-postsForTest').then(res => 
                     "sourceSite" : "xhamster",
                 }
             }
-            axios.post('https://findbestporno.com/api/v1/posts/createNewByApi',body).then(res=>{
+            axios.post('xxxxxxx/api/v1/posts/createNewByApi',body).then(res=>{
                 console.log( res.data)
             }).catch(err=>{
                 console.log( err)
