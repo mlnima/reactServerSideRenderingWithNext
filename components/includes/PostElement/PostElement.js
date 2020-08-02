@@ -107,7 +107,7 @@ const PostElement = props => {
                 case 'video':
                     return (
                         <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
-                            <FontAwesomeIcon icon='faEye' className='post-element-info-logo' />
+                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo' />
                             <span className='view-count value-next-icon'>{props.state.views}</span>
                         </span>
                     )
@@ -115,7 +115,7 @@ const PostElement = props => {
                     return (
                         <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
 
-                            <FontAwesomeIcon icon='faEye' className='post-element-info-logo' />
+                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo' />
 
                            <span className='view-count value-next-icon'> {props.state.views}</span>
 
