@@ -1,6 +1,7 @@
 .Logo {
   display: flex;
   flex-direction: column;
+  align-items: center;
   justify-content: flex-start;
   padding: 30px 0;
   color: transparent;
@@ -18,11 +19,11 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .Logo {
-
-    img {
-      width: 300px;
-    }
-  }
+  //.Logo {
+  //
+  //  img {
+  //    width: 180px;
+  //  }
+  //}
 
 }

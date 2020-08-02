@@ -49,8 +49,14 @@ const Logo = props => {
         }}>
             <a className='Logo'>
                 <RenderLogo/>
-                <span style={state.logoTextStyle} className='logoText'>{props.LogoText}</span>
-                <p style={state.headLineStyle} className='headLine'>{props.headLine}</p>
+                <span style={state.logoTextStyle} className='logoText'>{
+                    // props.LogoText
+                    props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].LogoText || props.LogoText : props.LogoText : props.LogoText
+                }</span>
+                <p style={state.headLineStyle} className='headLine'>{
+                    // props.headLine
+                    props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine
+                }</p>
             </a>
         </Link>
     );

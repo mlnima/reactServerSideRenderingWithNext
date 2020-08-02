@@ -3,9 +3,6 @@ import DelayInput from 'react-delay-input'
 
 const RenderTitleAndRedirectLink = props => {
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
     return (
         <>
             <p>Title:</p>
@@ -20,13 +17,13 @@ const RenderTitleAndRedirectLink = props => {
                         onChange={e => props.onTextInputsDataChangeHandler(e)}/>
 
             <p>Redirect Link Title</p>
-            <input className='redirectToTitle' name='redirectToTitle' placeholder='Title for Redirect Links'
-                   value={props.textInputsData.redirectToTitle}
-                   onChange={e => props.onTextInputsDataChangeHandler(e)}/>
+            <DelayInput delayTimeout={2000} className='redirectToTitle' name='redirectToTitle' placeholder='Title for Redirect Links'
+                        value={props.textInputsData.redirectToTitle}
+                        onChange={e => props.onTextInputsDataChangeHandler(e)}/>
             <p>Redirect Link URL:</p>
-            <input className='redirectLink' name='redirectLink' placeholder='Redirect'
-                   value={props.textInputsData.redirectLink}
-                   onChange={e => props.onTextInputsDataChangeHandler(e)}/>
+            <DelayInput delayTimeout={2000} className='redirectLink' name='redirectLink' placeholder='Redirect'
+                        value={props.textInputsData.redirectLink}
+                        onChange={e => props.onTextInputsDataChangeHandler(e)}/>
         </>
     );
 };

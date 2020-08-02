@@ -50,7 +50,7 @@ const customStyle = props => {
 customStyle.getInitialProps = async ({ req }) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let customStyles;
-    const customStylesData = await getSetting('customStyle', false, domainName);
+    const customStylesData = await getSetting('customStyle', domainName, false);
     customStyles = customStylesData.data.setting ? customStylesData.data.setting : {}
 
     return {  customStyles }

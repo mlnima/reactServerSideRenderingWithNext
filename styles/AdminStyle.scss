@@ -3,27 +3,30 @@
 @import "../styles/grid";
 @import "../styles/mixIns";
 
-.colorSettingSections {
+.colorSettingSections,.post-element-design {
   @include adminDesignPageItems;
 
-  .colorSettingSection {
-    background-color: $dark80;
-    padding: 10px;
-    max-width: 300px;
-    border-radius: 10px;
 
-    p {
-      color: $light100;
+}
 
-    }
 
-    input {
-      background-color: $light100;
-    }
+.colorSettingSection {
+  background-color: $dark80;
+  padding: 10px;
+  max-width: 300px;
+  border-radius: 10px;
 
-    button {
-      @include greenActionBtn;
-    }
+  p {
+    color: $light100;
+
+  }
+
+  input {
+    background-color: $light100;
+  }
+
+  button {
+    @include greenActionBtn;
   }
 }
 

@@ -11,8 +11,6 @@ import RenderTitleAndRedirectLink from "./RenderTitleAndRedirectLink/RenderTitle
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
-    // const title = useRef(null)
-    // const count = useRef(null)
 
     const [widgetData, setWidgetData] = useState({
         data: {}
@@ -27,7 +25,10 @@ const WidgetModel = props => {
         title: '',
         redirectToTitle: '',
         redirectLink: '',
-        translations: {}
+        translations: {},
+        LogoText:'',
+        headLine: '',
+        text:  '',
     })
 
     const onChangeLanguageHandler = e => {
@@ -70,8 +71,11 @@ const WidgetModel = props => {
             title: props.data.data.title,
             redirectToTitle: props.data.data.redirectToTitle,
             redirectLink: props.data.data.redirectLink,
-            translations: props.data.data.translations || {}
-
+            translations: props.data.data.translations || {},
+            LogoText: props.data.data.LogoText || '',
+            headLine: props.data.data.headLine || '',
+            text: props.data.data.text || '',
+            languageToShowBesideDropDown: props.data.data.languageToShowBesideDropDown || 'Language',
         })
 
     }, [props]);
@@ -124,9 +128,9 @@ const WidgetModel = props => {
     }
 
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [props]);
 
 
     const onChangeHandler = e => {
@@ -203,12 +207,20 @@ const WidgetModel = props => {
             </>
         )
     }
+
     const RenderText = () => {
         return (
             <>
                 <p>Text:</p>
-                <DelayInput element="textarea" name='text' value={widgetData.data.text} delayTimeout={10000}
+                <DelayInput element="textarea" name='text' value={
+                    widgetSettings.activeEditingLanguage === 'default' ? textInputsData.text :
+                        textInputsData.translations ?
+                            textInputsData.translations[widgetSettings.activeEditingLanguage] ?
+                                textInputsData.translations[widgetSettings.activeEditingLanguage].text || '' :
+                                '' : ''
+                } delayTimeout={2000}
                             onChange={e => onTextInputsDataChangeHandler(e)}/>
+
                 <p>Text Align:</p>
                 <select name='textAlign' value={widgetData.data.textAlign} onChange={e => onChangeHandler(e)}>
                     <option value='left'>Left</option>
@@ -295,9 +307,9 @@ const WidgetModel = props => {
                         <p>Meta Type:</p>
                         <select name='metaType' value={widgetData.data.metaType} onChange={e => onChangeHandler(e)}>
                             <option value=''>Select The Meta Type</option>
-                            <option value='tag'>Tag</option>
-                            <option value='category'>Category</option>
-                            <option value='actor'>Actor</option>
+                            <option value='tags'>Tags</option>
+                            <option value='categories'>Categories</option>
+                            <option value='actors'>Actors</option>
                         </select>
                         <p>Meta background Color:</p>
                         <DelayInput name='metaBackgroundColor' value={widgetData.data.metaBackgroundColor || 'red'}
@@ -319,6 +331,15 @@ const WidgetModel = props => {
                         <p>path URL</p>
                         <DelayInput name='pathURL' value={widgetData.data.pathURL} className='pathURL'
                                     delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
+                        <p>Search Button Background Color</p>
+                        <DelayInput name='searchBtnBackgroundColor' value={widgetData.data.searchBtnBackgroundColor || '#222222'}
+                                    placeholder='Search Button Background Color' className='searchBtnBackgroundColor' delayTimeout={1000}
+                                    onChange={e => onChangeHandler(e)}/>
+                        <p>Search Button  Color</p>
+                        <DelayInput name='searchBtnColor' value={widgetData.data.searchBtnColor || 'white'}
+                                    placeholder='Search Button Background Color' className='searchBtnColor' delayTimeout={1000}
+                                    onChange={e => onChangeHandler(e)}/>
+
                     </>
                 )
 
@@ -329,11 +350,19 @@ const WidgetModel = props => {
                         <p>Logo image URL</p>
                         {/*<input name='LogoUrl' value={ state.LogoUrl } className='LogoUrl' onChange={ e => onChangeHandler(e) }/>*/}
                         <DelayInput name='LogoUrl' value={widgetData.data.LogoUrl} className='LogoUrl'
-                                    delayTimeout={1000} onChange={e => onChangeHandler(e)}/>
+                                    delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
                         <p>Logo Text</p>
                         {/*<input name='LogoText' value={ state.LogoText } className='LogoText' onChange={ e => onChangeHandler(e) }/>*/}
-                        <DelayInput name='LogoText' value={widgetData.data.LogoText} className='LogoText'
-                                    delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
+
+                        <DelayInput name='LogoText' value={
+                            widgetSettings.activeEditingLanguage === 'default' ? textInputsData.LogoText :
+                                textInputsData.translations ?
+                                    textInputsData.translations[widgetSettings.activeEditingLanguage] ?
+                                        textInputsData.translations[widgetSettings.activeEditingLanguage].LogoText || '' :
+                                        '' : ''
+                        } className='LogoText'
+                                    delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
+
                         <div className='color-section-widget'>
                             <p>Logo Text Color</p>
                             <DelayInput name='logoTextColor' value={widgetData.data.logoTextColor}
@@ -345,11 +374,30 @@ const WidgetModel = props => {
                                         onChange={e => onChangeHandler(e)}/>
                         </div>
 
+
+
+
                         <p>Under Logo Headline Text</p>
                         {/*<input name='headLine' value={ state.headLine } className='headLine' onChange={ e => onChangeHandler(e) }/>*/}
-                        <DelayInput name='headLine' value={widgetData.data.headLine} className='headLine'
-                                    delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
+                        <DelayInput name='headLine' value={
+                            // widgetData.data.headLine
+                            widgetSettings.activeEditingLanguage === 'default' ? textInputsData.headLine :
+                                textInputsData.translations ?
+                                    textInputsData.translations[widgetSettings.activeEditingLanguage] ?
+                                        textInputsData.translations[widgetSettings.activeEditingLanguage].headLine || '' :
+                                        '' : ''
+
+
+
+                        } className='headLine'
+                                    delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
                         <div className='color-section-widget'>
+
+
+
+
+
+
                             <p>Head Line Color</p>
                             <DelayInput name='logoHeadLineColor' value={widgetData.data.logoHeadLineColor}
                                         className='logoHeadLineColor' delayTimeout={1000}
@@ -377,6 +425,24 @@ const WidgetModel = props => {
                         <RenderText/>
                     </>
                 )
+            case 'language':
+                return (
+                    <>
+                        <p>Language Text As Default Language</p>
+                        <DelayInput name='languageTextAsDefaultLanguage' value={widgetData.data.languageTextAsDefaultLanguage || 'default'}
+                                    placeholder='language Text As Default Language' className='languageTextAsDefaultLanguage' delayTimeout={1000}
+                                    onChange={e => onChangeHandler(e)}/>
+                        <p>Language To Show Beside Drop Down:</p>
+                        <DelayInput  name='languageToShowBesideDropDown' value={
+                            widgetSettings.activeEditingLanguage === 'default' ? textInputsData.languageToShowBesideDropDown :
+                                textInputsData.translations ?
+                                    textInputsData.translations[widgetSettings.activeEditingLanguage] ?
+                                        textInputsData.translations[widgetSettings.activeEditingLanguage].languageToShowBesideDropDown || '' :
+                                        '' : ''
+                        } delayTimeout={2000}
+                                    onChange={e => onTextInputsDataChangeHandler(e)}/>
+                    </>
+                )
 
             default:
                 return null
@@ -395,7 +461,7 @@ const WidgetModel = props => {
             }
         }
         updateWidgets(dataToSave).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']}, false, window.location.origin, Date.now()).then(res => {
+            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
                 console.log(res.data)
                 contextData.dispatchWidgetsSettings({
                     widgets: [...res.data.widgets]

@@ -29,12 +29,10 @@ const settings = props => {
         translationLanguages:props.identity.translationLanguages||[],
         topBarAuthBtn:props.identity.translationLanguages||true,
         anyoneCanRegister:props.identity.anyoneCanRegister||true,
+        defaultSiteLanguage:props.identity.defaultSiteLanguage||'en',
 
     });
 
-    useEffect(() => {
-        console.log(state)
-    }, [ state ]);
 
     const onTranslationLanguagesChangeHandler = e=>{
         if (e.target.checked){
@@ -198,7 +196,7 @@ const settings = props => {
                                 <option value='false'>Disable</option>
                             </select>
                         </div>
-                        <div className="site-settings-form-section allowUserToPost">
+                        <div className="site-settings-form-section translationLanguages">
                             <p>Translation Languages:</p>
                             <div className='language'>
                                 <p>English</p>
@@ -220,6 +218,10 @@ const settings = props => {
                                 <p>Turkish</p>
                                 <input value='tr' name='tr' type='checkbox' checked={state.translationLanguages.includes('tr')} onChange={e=>onTranslationLanguagesChangeHandler(e)}/>
                             </div>
+                        </div>
+                        <div className="site-settings-form-section defaultSiteLanguage">
+                            <p>Default Site Language:</p>
+                        <input name='defaultSiteLanguage' value={state.defaultSiteLanguage} onChange={ e => onChangeHandler(e)}/>
                         </div>
                     </div>
 

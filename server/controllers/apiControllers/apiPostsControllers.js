@@ -2,18 +2,29 @@ let apiPostsControllers = {}
 const postSchema = require('../../models/postSchema')
 const metaSchema = require('../../models/metaSchema');
 
-const metasSaver = async (metas, type) => {
-    metas.forEach(meta => {
-        const metaDataToSave = new metaSchema({
-            name: meta,
-            type
-        })
-        metaDataToSave.save().then(saved => {
+const metasSaver = async (metas) => {
+    let finalData = []
+    for await (let meta of metas) {
+        await metaSchema.findOne({name: meta.name}).exec().then(async existingMeta => {
+            if (existingMeta) {
+                finalData = [...finalData, existingMeta._id]
+            } else {
+                const metaDataToSave = new metaSchema({
+                    name: meta.name,
+                    type: meta.type,
+                    count: 1
+                })
+                await metaDataToSave.save().then(saved => {
+                    finalData = [...finalData, saved._id]
+                }).catch(err => {
+                    console.log(meta.name, ' has error on save meta')
+                })
+            }
 
-        }).catch(err => {
-
         })
-    })
+    }
+    console.log(finalData)
+    return finalData
 }
 
 const metaCountSetter = (metas, type) => {
@@ -30,36 +41,39 @@ const metaCountSetter = (metas, type) => {
 }
 
 
-apiPostsControllers.creatPost = (req,res)=>{
+apiPostsControllers.creatPost = async (req,res)=>{
     const newPost = req.body.postData
 
-    if (newPost.tags) {
-        metasSaver(newPost.tags, 'tag').then(() => {
-            metaCountSetter(newPost.tags, 'tag')
-        })
-    }
-    if (newPost.categories) {
-        metasSaver(newPost.categories, 'category').then(() => {
-            metaCountSetter(newPost.categories, 'category')
-        })
-    }
-    if (newPost.actors) {
-        metasSaver(newPost.actors, 'actor').then(() => {
-            metaCountSetter(newPost.actors, 'actor')
-        })
-    }
-    newPost.lastModify = Date.now()
-    const dataToSave = new postSchema(newPost)
-    dataToSave.save((err,newPostData)=>{
-        if (err){
-            res.json({message:'error on creating post from api'})
-            res.end()
+    try {
+        const editedNewPost = {
+            ...newPost,
+            lastModify: Date.now(),
+            tags: newPost.tags ? await metasSaver(newPost.tags) : [],
+            categories: newPost.categories ? await metasSaver(newPost.categories) : [],
+            actors: newPost.actors ? await metasSaver(newPost.actors) : []
         }
-        else if(newPostData) {
-            res.json({message:'post has been created'})
+        const newPostDataToSave = new postSchema(editedNewPost);
+        newPostDataToSave.save().then(savedPostData => {
+            res.json({message:'post ' + newPost.title + ' has been saved'})
             res.end()
-        }
-    })
+        }).catch(err => {
+            res.json({message:'****error!***** ' + 'post ' + newPost.title + ' Can not be save  in the Database'})
+            if (err.code === 11000) {
+                res.status(500).send({error: 'Post with this Title already exist in the Database'})
+                // res.json({ savedPostData });
+                res.end()
+            } else {
+                res.sendStatus(500);
+                res.end()
+            }
+        })
+
+    } catch (err) {
+        console.log(err)
+        res.end()
+    }
+
+
 }
 
 module.exports = apiPostsControllers

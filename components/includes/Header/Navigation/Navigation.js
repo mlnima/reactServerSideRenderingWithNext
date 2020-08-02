@@ -117,10 +117,12 @@ const Navigation = props => {
 
         const queryArrayToObject = (arr) => {
             let returningData = {}
-            arr.forEach(arrItem => {
-                returningData[Object.keys(arrItem)[0]] = Object.values(arrItem)[0]
-            })
-            return returningData
+            if (arr){
+                arr.forEach(arrItem => {
+                    returningData[Object.keys(arrItem)[0]] = Object.values(arrItem)[0]
+                })
+                return returningData
+            }
         }
 
         const pathData = pathAndAsPathGenerator(item.url, item.as || item.url, item.query)

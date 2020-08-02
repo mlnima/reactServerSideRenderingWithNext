@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout'
 import { AppContext } from '../../../../context/AppContext'
 import UrlSection from '../../../../components/adminIncludes/design/UrlSection'
+import ColorSection from "../../../../components/adminIncludes/design/ColorSection";
 
 const background = props => {
     const contextData = useContext(AppContext);
@@ -19,7 +20,8 @@ const background = props => {
                 <UrlSection designName='bodyBackgroundSize'/>
                 <UrlSection designName='bodyBackgroundRepeat'/>
                 <UrlSection designName='bodyBackgroundAttachment'/>
-                <UrlSection designName='bodyBackgroundColor'/>
+                {/*<UrlSection designName='bodyBackgroundColor'/>*/}
+                <ColorSection designName='bodyBackgroundColor'/>
             </div>
         </AdminLayout>
     );

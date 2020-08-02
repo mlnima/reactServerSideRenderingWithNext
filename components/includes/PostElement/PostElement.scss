@@ -78,13 +78,11 @@
 
         @include elementOnVideoElement;
         margin: auto;
-        padding: 0 5px;
+        //padding: 0 5px;
         span {
-          //margin-right: 5px;
 
-
-          //text-align: center;
         }
+
       }
 
       .bottom-left {
@@ -92,6 +90,11 @@
         left: 3px;
         bottom: 3px;
         @include elementOnVideoElement;
+        svg{
+          path{
+            //fill: yellow;
+          }
+        }
       }
 
       .top-right {
@@ -127,7 +130,14 @@
     //border-radius: 5px;
 
   }
+
+
 }
+
+.value-next-icon{
+  margin: 0 3px;
+}
+
 
 @media only screen and (max-width: 320px) {
 

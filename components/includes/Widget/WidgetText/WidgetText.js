@@ -1,13 +1,13 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import Text from '../WidgetsModelsComponents/Text/Text'
 
 const WidgetText = props => {
 
-    if (props.text){
+    if (props.text) {
         return (
-            <Text text={props.text} textAlign={props.textAlign}/>
+            <Text {...props}/>
         )
-    }else return null
+    } else return null
 
 };
 export default WidgetText;

@@ -1,6 +1,7 @@
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import {AppContext} from '../../../context/AppContext'
 import Head from 'next/dist/next-server/lib/head'
+import {Html} from "next/document"
 import AppLayout from '../../layouts/AppLayout'
 import withRouter from 'next/dist/client/with-router'
 import withGa from 'next-ga'
@@ -57,6 +58,19 @@ const SiteSettingSetter = props => {
         }
     }, []);
 
+
+    useEffect(() => {
+
+            document.documentElement.lang = contextData.state.activeLanguage === 'default' ? contextData.siteIdentity.defaultSiteLanguage ? contextData.siteIdentity.defaultSiteLanguage:'en' : contextData.state.activeLanguage
+
+        if (contextData.siteIdentity.defaultSiteLanguage==='ar'||contextData.siteIdentity.defaultSiteLanguage==='fa'){
+            document.dir = 'rtl'
+        }else {
+            document.dir = 'ltr'
+        }
+
+    }, [contextData.state.activeLanguage,contextData.siteIdentity.defaultSiteLanguage]);
+
     // useEffect(() => {
     //     if(!window.location.search.includes('lang') && contextData.state.activeLanguage !=='default'){
     //         const searchFromAsUrl =  router.asPath.includes('?') ?  router.asPath.split('?')[1] : ''
@@ -88,7 +102,7 @@ const SiteSettingSetter = props => {
 
 
     return (
-        <>
+
             <Head>
                 <title>{state.title}</title>
                 <meta name="theme-color" content={state.themeColor}/>
@@ -103,7 +117,7 @@ const SiteSettingSetter = props => {
                 {renderCustomScripts}
             </Head>
 
-        </>
+
     )
 };
 export default withRouter(SiteSettingSetter);

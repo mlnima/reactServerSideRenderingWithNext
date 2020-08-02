@@ -12,6 +12,15 @@ const postPage = props => {
                 <h1>Post Page Settings :</h1>
                 <h2>Color Comments:</h2>
                 <div className='colorSettingSections'>
+                    <ColorSection designName='postTitleTextColor'/>
+                    <ColorSection designName='postTitleBackgroundColor'/>
+
+                    <ColorSection designName='postMetaDataTextColor'/>
+                    <ColorSection designName='postMetaDataBackgroundColor'/>
+                    <ColorSection designName='postDownloadBtnTextColor'/>
+                    <ColorSection designName='postDownloadBtnBackgroundColor'/>
+                    <ColorSection designName='postDescriptionTextColorColor'/>
+
                     <ColorSection designName='commentsAuthorTextColor'/>
                     <ColorSection designName='commentsDateTextColor'/>
                     <ColorSection designName='commentsBodyTextColor'/>

@@ -1,14 +1,13 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import { DelayInput } from 'react-delay-input'
+import React, {useEffect, useState, useContext, useRef} from 'react';
+import {DelayInput} from 'react-delay-input'
 import SaveDesignChangesBtn from './SaveDesignChangesBtn'
-import { AppContext } from '../../../context/AppContext'
+import {AppContext} from '../../../context/AppContext'
 import {convertVariableNameToName} from '../../../_variables/_variables'
 
 const ColorSection = props => {
     const contextData = useContext(AppContext);
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
+    const inputColorElement = useRef(null)
+
 
     const onChangeHandler = e => {
         contextData.dispatchSiteDesign({
@@ -17,16 +16,18 @@ const ColorSection = props => {
         })
     }
 
+
     return (
         <div className='colorSettingSection'>
-            <p>{props.designName?convertVariableNameToName(props.designName):''} : </p>
-            <div>
-                <DelayInput className='colorSettingSectionInput' name={props.designName}
-                            value={ contextData.siteDesign[props.designName] }
-                            delayTimeout={ 1000 }
-                            onChange={ e => onChangeHandler(e) }/>
-                <div className="previewColor" style={ { backgroundColor: contextData.siteDesign[props.designName] } }/>
-            </div>
+            <p>{props.designName ? convertVariableNameToName(props.designName) : ''} : </p>
+
+            <DelayInput className='colorSettingSectionInput' name={props.designName}
+                        value={contextData.siteDesign[props.designName]}
+                        delayTimeout={1000}
+                        onChange={e => onChangeHandler(e)}/>
+            <input ref={inputColorElement}  className='colorSettingSectionInputColorType' type='color' name={props.designName} onChange={e => onChangeHandler(e)} value={contextData.siteDesign[props.designName]}/>
+            <div onClick={()=>inputColorElement.current.click()} className="previewColor" style={{backgroundColor: contextData.siteDesign[props.designName]}}/>
+            {/*<button onClick={()=>inputColorElement.current.click()}>Change Color</button>*/}
             <SaveDesignChangesBtn/>
         </div>
     );

@@ -1,11 +1,13 @@
-import React, { useContext, useEffect } from 'react';
+import React, {useContext, useEffect} from 'react';
 import Header from "../includes/Header/Header";
 import TopBar from "../includes/TopBar/TopBar";
 import Navigation from "../includes/Header/Navigation/Navigation";
 import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
 import '../../styles/global.scss'
-import { initGA, logPageView } from '../../_variables/_variables'
+import {initGA, logPageView} from '../../_variables/_variables'
+
+import {AppContext} from "../../context/AppContext";
 // import '../../styles/styles.scss'
 
 const AppLayout = props => {
@@ -26,7 +28,7 @@ const AppLayout = props => {
             <Loading/>
             <AlertBox/>
             <div className="App">
-                { props.children }
+                {props.children}
             </div>
         </>
     );

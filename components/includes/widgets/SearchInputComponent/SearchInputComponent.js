@@ -3,29 +3,39 @@ import './SearchInputComponent.scss';
 import Link from 'next/link';
 import withRouter from 'next/dist/client/with-router'
 import {useRouter} from "next/router";
-import SearchSvg from '../../../../static/images/fontawesome/search-solid.svg'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSearch} from "@fortawesome/free-solid-svg-icons";
 
 const SearchInputComponent = props => {
     const router = useRouter()
     const [state, setState] = useState({
         pathURL: '',
         keyword: '',
-        queries: {}
+        queries: {},
+        style: {
+            backgroundColor:'#222222'
+        }
     });
+
 
     useEffect(() => {
         setState({
             ...state,
             queries: props.router ? props.router.query : {},
             pathURL: props.router ? props.router.pathname.includes('meta') ? props.router.pathname : '/posts' : '/posts',
-            keyword: props.router ? props.router.query ? props.router.query.keyword ? props.router.query.keyword : '' : '' : ''
+            keyword: props.router ? props.router.query ? props.router.query.keyword ? props.router.query.keyword : '' : '' : '',
+            style: {
+                ...state.style,
+                backgroundColor:props.searchBtnBackgroundColor,
+                color:props.searchBtnColor,
+            }
         })
     }, [props]);
 
 
     useEffect(() => {
-        if (props.router){
-            if ((props.router.pathname.includes('posts')||props.router.pathname.includes('meta')) && props.router.query.keyword === '' ){
+        if (props.router) {
+            if ((props.router.pathname.includes('posts') || props.router.pathname.includes('meta')) && props.router.query.keyword === '') {
                 // props.router.push('/')
             }
         }
@@ -42,43 +52,42 @@ const SearchInputComponent = props => {
 
     const mainPath = props.router ?
         props.router.asPath.includes('/tags/') || props.router.asPath.includes('/categories/') || props.router.asPath.includes('/actors/') ? '/posts' :
-            props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors')  ? '/meta' : '/posts':  '/posts'
+            props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors') ? '/meta' : '/posts' : '/posts'
 
-    const contentType = props.router?  props.router.query.contentType  : ''
-    const contentName = props.router?  props.router.query.contentName  : ''
+    const contentType = props.router ? props.router.query.contentType : ''
+    const contentName = props.router ? props.router.query.contentName : ''
 
     const asPath = props.router ? props.router.asPath.includes('/tags/') ? '/' + contentType + '/' + contentName :
-        props.router.asPath.includes('/categories/')? '/' + contentType + '/' + contentName:
-        props.router.asPath.includes('/actors/')?'/' + contentType + '/' + contentName:
-        props.router.asPath.includes('/tags') ? '/tags' :
-        props.router.asPath.includes('/categories') ? '/categories' :
-        props.router.asPath.includes('/actors') ? '/actors' :
-        '/posts':'/posts'
+        props.router.asPath.includes('/categories/') ? '/' + contentType + '/' + contentName :
+            props.router.asPath.includes('/actors/') ? '/' + contentType + '/' + contentName :
+                props.router.asPath.includes('/tags') ? '/tags' :
+                    props.router.asPath.includes('/categories') ? '/categories' :
+                        props.router.asPath.includes('/actors') ? '/actors' :
+                            '/posts' : '/posts'
 
-    const asQuery = {keyword:state.keyword?state.keyword:undefined,page:router.query.page ?router.query.page:undefined,content:router.query.content ?router.query.content:undefined,}
-          !asQuery.keyword ? delete asQuery.keyword  : null;
-          asQuery.page ==1 ? delete asQuery.page  : null;
-          !asQuery.page ? delete asQuery.page  : null;
-          !asQuery.content ? delete asQuery.content  : null;
+    const asQuery = {keyword: state.keyword ? state.keyword : undefined, page: router.query.page ? router.query.page : undefined, content: router.query.content ? router.query.content : undefined,}
+    !asQuery.keyword ? delete asQuery.keyword : null;
+    asQuery.page == 1 ? delete asQuery.page : null;
+    !asQuery.page ? delete asQuery.page : null;
+    !asQuery.content ? delete asQuery.content : null;
 
     return (
-        <div className='search-bar' >
-            <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} />
-            <Link  href={{
+        <div className='search-bar'>
+            <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword}/>
+            <Link href={{
                 pathname: mainPath,
                 query: {
                     ...state.queries,
-                    keyword:state.keyword
+                    keyword: state.keyword
                 }
             }} as={{
-                pathname:asPath,
-                query:asQuery
-            }}><a  className='search-bar-btn'><img src={SearchSvg} alt=""/></a></Link>
+                pathname: asPath,
+                query: asQuery
+            }}><a className='search-bar-btn' style={state.style}><FontAwesomeIcon icon={faSearch}  /></a></Link>
         </div>
     );
 };
 export default withRouter(SearchInputComponent);
-
 
 
 // const onSubmitHandler = e => {

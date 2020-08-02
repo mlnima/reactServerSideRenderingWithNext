@@ -42,6 +42,7 @@ function fieldGenerator(fields) {
 
 postsControllers.createNewPost = async (req, res) => {
     const newPost = req.body.postData;
+
     try {
         const editedNewPost = {
             ...newPost,
@@ -53,7 +54,7 @@ postsControllers.createNewPost = async (req, res) => {
         const newPostDataToSave = new postSchema(editedNewPost);
         newPostDataToSave.save().then(savedPostData => {
             res.json({savedPostData});
-            console.log(savedPostData)
+            console.log('savedPostData : ',savedPostData)
             res.end()
         }).catch(err => {
             if (err.code === 11000) {

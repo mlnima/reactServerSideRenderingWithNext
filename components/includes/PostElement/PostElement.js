@@ -10,6 +10,10 @@ import {
     likeValueCalculator
 } from '../../../_variables/_variables'
 import {AppContext} from "../../../context/AppContext";
+import background from "../../../pages/admin/design/background";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
+import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
 
 const PostElement = props => {
@@ -24,16 +28,36 @@ const PostElement = props => {
         isHover: false,
         isWatched: false,
         extraClassName: '',
-        queries: {}
+        queries: {},
+        infoOnPostElementStyle: {},
+        titleElementStyle:{}
     });
 
     useEffect(() => {
-            setState({
-                ...state,
-                extraClassName: props.viewType ? props.viewType :'',
-                queries:{...getLanguageQueryFromWindowLocationSearch()}
-            })
+        setState({
+            ...state,
+            extraClassName: props.viewType ? props.viewType : '',
+            queries: {...getLanguageQueryFromWindowLocationSearch()}
+        })
     }, [props]);
+
+    useEffect(() => {
+        setState({
+            ...state,
+            infoOnPostElementStyle:{
+                ...state.infoOnPostElementStyle,
+                color: contextData.siteDesign.postElementOnImageTextColor || 'white',
+                backgroundColor: contextData.siteDesign.postElementOnImageTextBackgroundColor || 'rgba(0,0,0,0.5)'
+
+            },
+            titleElementStyle:{
+                ...state.titleElementStyle,
+                color: contextData.siteDesign.postElementTitleTextColor || 'white',
+                backgroundColor: contextData.siteDesign.postElementBackgroundColor || 'transparent'
+            }
+
+        })
+    }, [contextData.siteDesign]);
 
 
     let isHoverHandler = () => {
@@ -41,6 +65,7 @@ const PostElement = props => {
             state.isHover ? setState({...state, isHover: false}) : setState({...state, isHover: true})
         }
     };
+
     const ImageContent = () => {
         let dataToRender = () => {
             if (state.isHover && props.state.videoTrailerUrl) {
@@ -73,7 +98,12 @@ const PostElement = props => {
     const RenderProgressBar = () => {
         if (props.state.rating !== 'disable') {
             return (
-                <ProgressBar value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/>
+                <ProgressBar
+                    valueColor={contextData.siteDesign.postElementProgressBarValueColor}
+                    progressBarColor={contextData.siteDesign.postElementProgressBarColor}
+                    progressBarBackgroundColor={contextData.siteDesign.postElementProgressBarBackgroundColor}
+
+                    value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/>
             )
         } else return null
     }
@@ -83,13 +113,20 @@ const PostElement = props => {
             switch (props.state.postType) {
                 case 'video':
                     return (
-                        <span ref={bottomRight} className='bottom-right'><FA className='fontawesomeSmall'
-                                                                             name="eye"/>{props.state.views}</span>
+                        <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
+                            <FontAwesomeIcon icon={faEye} />
+                            <span className='view-count value-next-icon'>{props.state.views}</span>
+                        </span>
                     )
                 case 'product':
                     return (
-                        <span ref={bottomRight} className='bottom-right'><FA className='fontawesomeSmall'
-                                                                             name="eye"/>{props.state.views}</span>
+                        <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
+
+                            <FontAwesomeIcon icon={faEye} />
+
+                           <span className='view-count value-next-icon'> {props.state.views}</span>
+
+                        </span>
                     )
                 default :
                     break
@@ -103,12 +140,19 @@ const PostElement = props => {
             switch (props.state.postType) {
                 case 'video':
                     return (
-                        <span ref={bottomLeft} className='bottom-left'>{props.state.duration}</span>
+                        <span ref={bottomLeft} className='bottom-left' style={state.infoOnPostElementStyle}>
+                             <FontAwesomeIcon icon={faClock} color={contextData.siteDesign.postElementOnImageTextColor || 'white'}/>
+                             <span className='value-next-icon'>  {props.state.duration}</span>
+                        </span>
                     )
                 case 'product':
                     return (
-                        <span ref={bottomRight} className='bottom-left'><FA className='fontawesomeSmall'
-                                                                            name="eye"/>{props.state.price + ' ' + (props.state.currency || 'Euro')}</span>
+                        <span ref={bottomRight} className='bottom-left' style={state.infoOnPostElementStyle}>
+                             <FontAwesomeIcon icon={props.state.currency === 'Usd' ? faDollarSign : faEuroSign} color={contextData.siteDesign.postElementOnImageTextColor || 'white'}/>
+                                    <span className='value-next-icon'>
+                                        {props.state.price}
+                                    </span>
+                        </span>
                     )
                 default :
                     break
@@ -122,7 +166,7 @@ const PostElement = props => {
             switch (props.state.postType) {
                 case 'video':
                     return (
-                        <span ref={qualityLabel} className='top-right'>{props.state.quality}</span>
+                        <span ref={qualityLabel} className='top-right' style={state.infoOnPostElementStyle}>{props.state.quality}</span>
                     )
                 case 'product':
                     return null
@@ -150,12 +194,12 @@ const PostElement = props => {
     return (
         < div ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
             <Link
-                as={ contextData.state.activeLanguage !== 'default' ?`/post/${props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}?id=${props.state._id}&lang=${contextData.state.activeLanguage}` : `/post/${props.state.title}?id=${props.state._id}`}
+                as={contextData.state.activeLanguage !== 'default' ? `/post/${props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}?id=${props.state._id}&lang=${contextData.state.activeLanguage}` : `/post/${props.state.title}?id=${props.state._id}`}
                 href={{
                     pathname: `/post`,
                     query: {
                         id: props.state._id,
-                       ...state.queries
+                        ...state.queries
                     }
                 }}>
                 <a>
@@ -165,7 +209,7 @@ const PostElement = props => {
                             <RenderDataOnImage/>
                         </div>
                         <RenderProgressBar/>
-                        <h3>{  props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title }</h3>
+                        <h3 style={state.titleElementStyle}>{props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}</h3>
                     </div>
                 </a>
             </Link>

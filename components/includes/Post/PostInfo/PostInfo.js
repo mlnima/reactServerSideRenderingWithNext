@@ -20,6 +20,26 @@ const PostInfo = props => {
         mode: 'view'
     });
 
+    const [styles, setStyles] = useState({
+        titleArea: {
+            color: 'white',
+            backgroundColor: 'black'
+        }
+    })
+
+
+    useEffect(() => {
+        setStyles({
+            ...styles,
+            titleArea: {
+                ...styles.titleArea,
+                color: contextData.siteDesign.postTitleTextColor || 'white',
+                backgroundColor: contextData.siteDesign.postTitleBackgroundColor || 'black',
+            }
+        })
+    }, [contextData.siteDesign]);
+
+
     useEffect(() => {
         setState({
             ...state,
@@ -123,7 +143,8 @@ const PostInfo = props => {
             )
         } else {
             return (
-                <h1 className='post-title'>{ props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].title || props.post.title : props.post.title : props.post.title }</h1>
+                <h1 style={styles.titleArea}
+                    className='post-title'>{props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].title || props.post.title : props.post.title : props.post.title}</h1>
             )
         }
     }
@@ -142,7 +163,8 @@ const PostInfo = props => {
             )
         } else {
             return (
-                <div className="description">{ props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description}</div>
+                <p style={{color:contextData.siteDesign.postDescriptionTextColorColor || 'white'}}
+                    className="description">{props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description}</p>
             )
         }
     }
@@ -152,7 +174,7 @@ const PostInfo = props => {
             <EditLinkForAdmin/>
             <EditLinksForAuthor/>
 
-            <div className='post-info-head'>
+            <div className='post-info-head' style={styles.titleArea}>
 
                 <RenderTitle/>
                 <RenderRatingButtons/>
