@@ -1,13 +1,13 @@
 @import "../../../styles/colors";
 @import "../../../styles/buttons";
 
-@mixin elementOnVideoElement {
-  color: $light100;
-  background-color: rgba(0, 0, 0, 0.6);
-  padding: 2px;
-  border-radius: 5px;
-  font-size: small;
-}
+//@mixin elementOnVideoElement {
+//  color: $light100;
+//  background-color: rgba(0, 0, 0, 0.6);
+//  padding: 2px;
+//  border-radius: 5px;
+//  font-size: small;
+//}
 
 @mixin opacityAnimationEnd {
   animation: opacityAnimationEnd .5s alternate;
@@ -76,7 +76,7 @@
         right: 3px;
         bottom: 3px;
 
-        @include elementOnVideoElement;
+        //@include elementOnVideoElement;
         margin: auto;
         //padding: 0 5px;
         span {
@@ -89,19 +89,15 @@
         position: absolute;
         left: 3px;
         bottom: 3px;
-        @include elementOnVideoElement;
-        svg{
-          path{
-            //fill: yellow;
-          }
-        }
+        //@include elementOnVideoElement;
+
       }
 
       .top-right {
         position: absolute;
         right: 3px;
         top: 3px;
-        @include elementOnVideoElement;
+        //@include elementOnVideoElement;
         font-weight: bold;
       }
     }
@@ -114,7 +110,7 @@
       overflow: hidden;
       //max-width:150px;
       text-align: initial;
-      @include elementOnVideoElement;
+      //@include elementOnVideoElement;
       background-color: transparent;
       color: $light100;
       margin: 0;
