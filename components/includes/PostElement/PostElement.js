@@ -2,14 +2,8 @@ import React, {useState, useContext, useRef, useEffect} from 'react';
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import {
-    checkPageLoad,
-    getLanguageQuery,
-    getLanguageQueryFromAsPath, getLanguageQueryFromWindowLocationSearch,
-    likeValueCalculator
-} from '../../../_variables/_variables'
+import {getLanguageQueryFromWindowLocationSearch, likeValueCalculator} from '../../../_variables/_variables'
 import {AppContext} from "../../../context/AppContext";
-import background from "../../../pages/admin/design/background";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
@@ -113,7 +107,7 @@ const PostElement = props => {
                 case 'video':
                     return (
                         <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
-                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo' />
+                            <FontAwesomeIcon icon='faEye' className='post-element-info-logo' />
                             <span className='view-count value-next-icon'>{props.state.views}</span>
                         </span>
                     )
@@ -121,7 +115,7 @@ const PostElement = props => {
                     return (
                         <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
 
-                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo' />
+                            <FontAwesomeIcon icon='faEye' className='post-element-info-logo' />
 
                            <span className='view-count value-next-icon'> {props.state.views}</span>
 

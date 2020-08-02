@@ -75,30 +75,33 @@
         position: absolute;
         right: 3px;
         bottom: 3px;
-
-        //@include elementOnVideoElement;
         margin: auto;
-        //padding: 0 5px;
+        display: flex;
+        align-items: center;
+        padding: 1px 3px;
         span {
-
+          margin: 0 5px;
         }
-
       }
 
       .bottom-left {
         position: absolute;
         left: 3px;
         bottom: 3px;
-        //@include elementOnVideoElement;
-
+        display: flex;
+        align-items: center;
+        padding: 1px 3px;
+        span {
+          margin: 0 5px;
+        }
       }
 
       .top-right {
         position: absolute;
         right: 3px;
         top: 3px;
-        //@include elementOnVideoElement;
         font-weight: bold;
+        padding: 1px 3px;
       }
     }
 
@@ -130,16 +133,14 @@
 
 }
 
-.value-next-icon{
+.value-next-icon {
   margin: 0 3px;
 }
 
 
-.post-element-info-logo{
-   font-size: 15px;
+.post-element-info-logo {
+  font-size: 15px !important;
 }
-
-
 
 
 @media only screen and (max-width: 320px) {
