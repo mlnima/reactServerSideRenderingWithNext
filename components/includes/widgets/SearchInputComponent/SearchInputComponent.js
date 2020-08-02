@@ -83,7 +83,7 @@ const SearchInputComponent = props => {
             }} as={{
                 pathname: asPath,
                 query: asQuery
-            }}><a className='search-bar-btn' style={state.style}><FontAwesomeIcon icon={faSearch}  /></a></Link>
+            }}><a className='search-bar-btn' style={state.style}><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo'  /></a></Link>
         </div>
     );
 };

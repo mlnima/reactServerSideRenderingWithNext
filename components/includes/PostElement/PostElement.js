@@ -2,7 +2,6 @@ import React, {useState, useContext, useRef, useEffect} from 'react';
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import FA from 'react-fontawesome'
 import {
     checkPageLoad,
     getLanguageQuery,
@@ -114,7 +113,7 @@ const PostElement = props => {
                 case 'video':
                     return (
                         <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
-                            <FontAwesomeIcon icon={faEye} />
+                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo' />
                             <span className='view-count value-next-icon'>{props.state.views}</span>
                         </span>
                     )
@@ -122,7 +121,7 @@ const PostElement = props => {
                     return (
                         <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
 
-                            <FontAwesomeIcon icon={faEye} />
+                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo' />
 
                            <span className='view-count value-next-icon'> {props.state.views}</span>
 
@@ -141,14 +140,14 @@ const PostElement = props => {
                 case 'video':
                     return (
                         <span ref={bottomLeft} className='bottom-left' style={state.infoOnPostElementStyle}>
-                             <FontAwesomeIcon icon={faClock} color={contextData.siteDesign.postElementOnImageTextColor || 'white'}/>
+                             <FontAwesomeIcon icon={faClock} className='post-element-info-logo' color={contextData.siteDesign.postElementOnImageTextColor || 'white'}/>
                              <span className='value-next-icon'>  {props.state.duration}</span>
                         </span>
                     )
                 case 'product':
                     return (
                         <span ref={bottomRight} className='bottom-left' style={state.infoOnPostElementStyle}>
-                             <FontAwesomeIcon icon={props.state.currency === 'Usd' ? faDollarSign : faEuroSign} color={contextData.siteDesign.postElementOnImageTextColor || 'white'}/>
+                             <FontAwesomeIcon icon={props.state.currency === 'Usd' ? faDollarSign : faEuroSign} className='post-element-info-logo' color={contextData.siteDesign.postElementOnImageTextColor || 'white'}/>
                                     <span className='value-next-icon'>
                                         {props.state.price}
                                     </span>

@@ -54,6 +54,7 @@ const postSchema =  new Schema({
         type:Date,
         default:Date.now()
     },
+    publishedDate:Date,
     premium: Boolean,
     inSlideShow: Boolean,
     rating:String
