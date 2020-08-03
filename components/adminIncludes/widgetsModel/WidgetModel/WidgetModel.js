@@ -76,6 +76,8 @@ const WidgetModel = props => {
             headLine: props.data.data.headLine || '',
             text: props.data.data.text || '',
             languageToShowBesideDropDown: props.data.data.languageToShowBesideDropDown || 'Language',
+            pathURL: props.data.data.pathURL || '',
+            count: props.data.data.count || '',
         })
 
     }, [props]);
@@ -118,7 +120,7 @@ const WidgetModel = props => {
 
 
         updateWidgets(dataToSave).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']}, false, window.location.origin, Date.now()).then(res => {
+            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
                 console.log(res.data)
                 contextData.dispatchWidgetsSettings({
                     widgets: [...res.data.widgets]
@@ -151,32 +153,6 @@ const WidgetModel = props => {
         } else return null
     }
 
-    // const RenderTitleAndRedirect = () => {
-    //     return (
-    //         <>
-    //             <p>Title:</p>
-    //             <input name='title' className='title' placeholder='Title' value={
-    //                 widgetSettings.activeEditingLanguage === 'default' ?
-    //                     textInputsData.title :
-    //                     textInputsData.data.translations ?
-    //                         textInputsData.data.translations[widgetSettings.activeEditingLanguage] ?
-    //                             textInputsData.data.translations[widgetSettings.activeEditingLanguage].title || '' :
-    //                             '' : ''
-    //             }
-    //                    onChange={e => onTextInputsDataChangeHandler(e)}/>
-    //             <p>Redirect Link Title</p>
-    //             <DelayInput className='redirectToTitle' name='redirectToTitle' placeholder='Title for Redirect Link'
-    //                         delayTimeout={1000} value={widgetData.data.redirectToTitle}
-    //                         onChange={e => onChangeHandler(e)}/>
-    //             <p>Redirect Link URL:</p>
-    //             <DelayInput className='redirectLink' name='redirectLink' placeholder='Redirect'
-    //                         value={widgetData.data.redirectLink} delayTimeout={1000}
-    //                         onChange={e => onChangeHandler(e)}/>
-    //         </>
-    //     )
-    // }
-
-
     const RenderRedirect = () => {
         return (
             <>
@@ -202,7 +178,7 @@ const WidgetModel = props => {
         return (
             <>
                 <p>Count:</p>
-                <DelayInput name='count' type='number' value={widgetData.data.count} placeholder='count'
+                <DelayInput name='count' type='number' value={textInputsData.data.count} placeholder='count'
                             className='count' delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
             </>
         )
@@ -329,7 +305,7 @@ const WidgetModel = props => {
                 return (
                     <>
                         <p>path URL</p>
-                        <DelayInput name='pathURL' value={widgetData.data.pathURL} className='pathURL'
+                        <DelayInput name='pathURL' value={textInputsData.data.pathURL} className='pathURL'
                                     delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
                         <p>Search Button Background Color</p>
                         <DelayInput name='searchBtnBackgroundColor' value={widgetData.data.searchBtnBackgroundColor || '#222222'}

@@ -8,6 +8,11 @@
   right: 20px;
   transition: .5s;
   @include transparentLightTextBtn;
+  .navigation-mobile-btn-logo{
+
+    width: 30px;
+    height: 40px;
+  }
 }
 
 .Navigation {

@@ -26,7 +26,10 @@
     @include greenActionBtn;
   }
   .post-info-head{
-
+.rate-logo{
+  width: 30px ;
+  height: 35px;
+}
   }
 
   .post-info-body {
@@ -37,6 +40,10 @@
         .like-disLike-count {
           .like-disLike-count-items {
             color: white;
+            .like-disLike-count-items-logo{
+              width: 20px;
+              height: 25px;
+            }
           }
         }
       }

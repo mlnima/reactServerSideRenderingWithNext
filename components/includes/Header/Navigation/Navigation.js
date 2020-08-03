@@ -1,9 +1,10 @@
 import React, {useState, useRef, useEffect, useContext} from 'react';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
-import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
 import withRouter from "next/dist/client/with-router";
 import {pathAndAsPathGenerator} from '../../../../_variables/_variables'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
 
 const Navigation = props => {
     const contextData = useContext(AppContext);
@@ -145,7 +146,10 @@ const Navigation = props => {
     return (
         <>
             <button style={navigationBtnData.style} ref={navigationMobileBtn} className='navigationMobileBtn'
-                    onClick={onNavigationMobileBtnClickHandler}><img className='fontawesomeSvgMedium' src={BarsSvg} alt=""/></button>
+                    onClick={onNavigationMobileBtnClickHandler}>
+                <FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo'  />
+                {/*<img className='fontawesomeSvgMedium' src={BarsSvg} alt=""/>*/}
+            </button>
             <div ref={navigation} className='Navigation' style={navigationData.style}>
                 {renderNavigationItems}
             </div>

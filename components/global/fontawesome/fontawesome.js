@@ -2,7 +2,7 @@
 import { library } from '@fortawesome/fontawesome-svg-core';
 
 // import your icons
-import {faCode, faEuroSign, faHighlighter} from '@fortawesome/free-solid-svg-icons';
+import {faCode, faEuroSign, faHighlighter, faSearch} from '@fortawesome/free-solid-svg-icons';
 import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
 
 library.add(
@@ -11,6 +11,6 @@ library.add(
     faEye,
     faClock,
     faEuroSign,
-
+    faSearch
     // more icons go here
 );

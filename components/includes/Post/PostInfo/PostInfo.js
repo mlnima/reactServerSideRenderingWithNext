@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState, useContext,useRef} from 'react';
 import Link from 'next/link'
 import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
 import ProgressBar from "../../ProgressBar/ProgressBar";
@@ -10,14 +10,19 @@ import DisLikeBtnSvg from '../../../../static/images/fontawesome/thumbs-down-sol
 import './PostInfo.scss'
 import {AppContext} from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars, faSmileBeam} from "@fortawesome/free-solid-svg-icons";
+import {faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 
 const PostInfo = props => {
-
+const ratingBtnArea = useRef(null)
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
         likeValue: 0,
         postAbsolutePath: '',
-        mode: 'view'
+        mode: 'view',
+        isLiked:false,
+        isDisliked:false
     });
 
     const [styles, setStyles] = useState({
@@ -84,21 +89,38 @@ const PostInfo = props => {
         } else return null
     }
 
+
+
+
+
+    const isLikedOrDislikedHandler = () =>{
+
+    }
+
+    const onLikeOrDislikeHandler = (e,type)=>{
+        likeDislikeView(props.id, type)
+        e.target.disabled = true
+    }
+
+
+
+
+
+
+
+
     const RenderRatingButtons = () => {
         if (props.rating !== 'disable') {
             return (
-                <div className="like">
-                    <button onClick={e => {
-                        likeDislikeView(props.id, 'likes')
-                        e.target.style.filter = 'invert(1) blur(2px)'
-                    }}>
-                        <img className='fontawesomeSvgMedium' src={LikeBtnSvg} alt=""/>
+                <div ref={ratingBtnArea}  className="like" >
+                    <button onClick={e => onLikeOrDislikeHandler(e,'like')}>
+
+                        <FontAwesomeIcon icon={faThumbsUp} className='rate-logo' style={styles.titleArea} />
+
                     </button>
-                    <button onClick={e => {
-                        likeDislikeView(props.id, 'disLikes')
-                        e.target.style.filter = 'invert(1) blur(2px)'
-                    }}>
-                        <img className='fontawesomeSvgMedium' src={DisLikeBtnSvg} alt=""/>
+                    <button  onClick={e => onLikeOrDislikeHandler(e,'disLikes')}>
+                        <FontAwesomeIcon icon={faThumbsDown} className='rate-logo' style={styles.titleArea}  />
+
                     </button>
                 </div>
             )
@@ -116,12 +138,14 @@ const PostInfo = props => {
                         </div>
                         <div className='like-disLike-count'>
                         <span className='like-disLike-count-items'>
-                            <img className='fontawesomeSvgSmall' src={LikeBtnSvg} alt=""/>
+                            <FontAwesomeIcon icon={faThumbsUp} className='like-disLike-count-items-logo'  />
+                            {/*<img className='fontawesomeSvgSmall' src={LikeBtnSvg} alt=""/>*/}
                             <p>  {props.likes}</p>
 
                         </span>
                             <span className='like-disLike-count-items'>
-                         <img className='fontawesomeSvgSmall' src={DisLikeBtnSvg} alt=""/>
+                                  <FontAwesomeIcon icon={faThumbsDown} className='like-disLike-count-items-logo'  />
+                         {/*<img className='fontawesomeSvgSmall' src={DisLikeBtnSvg} alt=""/>*/}
 
                                 <p>  {props.disLikes}</p>
                         </span>
