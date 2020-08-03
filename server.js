@@ -56,7 +56,7 @@ const ssrCache = cacheableResponse({
     send: ({data, res}) => res.send(data),
 })
 
-const cacheWithTargetComponent = (req,res,path) =>{
+const cacheWithTargetComponent = (req, res, path) => {
     cacheableResponse({
         ttl: 1000 * 60 * 60, // 1hour
         get: async ({req, res}) => {
@@ -74,7 +74,6 @@ const cacheWithTargetComponent = (req,res,path) =>{
         send: ({data, res}) => res.send(data),
     })
 }
-
 
 
 //--
@@ -163,7 +162,7 @@ app.prepare().then(() => {
     server.post('/api/v1/posts', (req, res) => {
         postsControllers.getPostsInfo(req, res)
     });
-    server.post('/api/v1/posts/post',cacheSuccesses, (req, res) => {
+    server.post('/api/v1/posts/post', cacheSuccesses, (req, res) => {
         postsControllers.getPostInfo(req, res)
     });
     server.post('/api/v1/posts/createNewPost', async (req, res) => {
@@ -248,7 +247,7 @@ app.prepare().then(() => {
     //cache control
     server.post('/api/v1/settings/clearCaches', (req, res) => {
         apicache.clear(req.params.collection)
-
+        res.end()
         // console.log(ssrCache)
         // settingsControllers.clearCaches(req,res)
     });
@@ -290,8 +289,8 @@ app.prepare().then(() => {
         const queryParams = {
             ...req.query,
             ...req.params,
-            contentType:'tags',
-            contentName:req.params.tag,
+            contentType: 'tags',
+            contentName: req.params.tag,
         }
         app.render(req, res, targetComponent, queryParams)
     });
@@ -315,14 +314,13 @@ app.prepare().then(() => {
     });
 
 
-
     server.get('/categories/:category', (req, res) => {
         const targetComponent = '/posts';
         const queryParams = {
             ...req.query,
             ...req.params,
-            contentType:'categories',
-            contentName:req.params.category,
+            contentType: 'categories',
+            contentName: req.params.category,
         }
         app.render(req, res, targetComponent, queryParams)
     });
@@ -333,8 +331,8 @@ app.prepare().then(() => {
         const queryParams = {
             ...req.query,
             ...req.params,
-            contentType:'actors',
-            contentName:req.params.actor,
+            contentType: 'actors',
+            contentName: req.params.actor,
         }
         app.render(req, res, targetComponent, queryParams)
     });
@@ -354,7 +352,7 @@ app.prepare().then(() => {
         const queryParams = {
             ...req.query,
             ...req.params,
-            contentType:'categories'
+            contentType: 'categories'
         }
         app.render(req, res, targetComponent, queryParams)
     });
@@ -363,7 +361,7 @@ app.prepare().then(() => {
         const queryParams = {
             ...req.query,
             ...req.params,
-            contentType:'tags'
+            contentType: 'tags'
         }
         app.render(req, res, targetComponent, queryParams)
     });
@@ -372,11 +370,10 @@ app.prepare().then(() => {
         const queryParams = {
             ...req.query,
             ...req.params,
-            contentType:'actors'
+            contentType: 'actors'
         }
         app.render(req, res, targetComponent, queryParams)
     });
-
 
 
     server.get('/post/:title', (req, res) => {
@@ -402,17 +399,6 @@ app.prepare().then(() => {
         }
         app.render(req, res, targetComponent, queryParams)
     });
-
-
-
-
-
-
-
-
-
-
-
 
 
     server.get('/admin/assets', (req, res) => {

@@ -9,7 +9,23 @@
   padding: 5px;
 
   .comments-item {
+    padding: 5px 10px;
+    border-radius: 12px;
+    min-width: 250px;
     text-align: left;
+    margin: 5px;
+    position: relative;
+    .comment-triangle{
+      position: absolute;
+      bottom: -10px;
+      left: 0;
+      width: 0;
+      height: 0;
+      border-top: 60px solid transparent;
+      border-bottom: 60px solid transparent;
+      z-index: -1;
+      border-left: 60px solid transparent;
+    }
     .comment-author{
       color:$lightBlue;
     }

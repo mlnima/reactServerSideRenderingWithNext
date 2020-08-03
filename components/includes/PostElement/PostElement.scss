@@ -79,6 +79,7 @@
         display: flex;
         align-items: center;
         padding: 1px 3px;
+        border-radius: 3px;
         span {
           margin: 0 5px;
         }
@@ -91,6 +92,7 @@
         display: flex;
         align-items: center;
         padding: 1px 3px;
+        border-radius: 3px;
         span {
           margin: 0 5px;
         }
@@ -100,7 +102,8 @@
         position: absolute;
         right: 3px;
         top: 3px;
-        font-weight: bold;
+        border-radius: 3px;
+        //font-weight: bold;
         padding: 1px 3px;
       }
     }

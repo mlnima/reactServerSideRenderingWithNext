@@ -8,7 +8,7 @@ const NewItemMenu = props => {
     if (props.active){
         return (
             <div className='NewItemMenu'>
-                <Link href='/admin/post?new=1'><a className='SideBarItem'>New Post</a></Link>
+                <Link href='/admin/post?new=1'><a className='SideBarItem adminTopBarItem'>New Post</a></Link>
             </div>
         );
     }else return null

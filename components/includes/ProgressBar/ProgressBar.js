@@ -27,7 +27,7 @@ const ProgressBar = props => {
                 color: props.textColor,
                 backgroundColor: props.valueColor,
                 width: props.value + '%'
-            }}> {props.percent ? props.value + ' %' : ''}</div>
+            }}> <p>{props.percent ? props.value + ' %' : ''}</p></div>
         </div>
     )
 

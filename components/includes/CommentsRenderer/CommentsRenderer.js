@@ -65,6 +65,9 @@ const CommentsRenderer = props => {
                 <p style={ state.dateStyle } className='comment-date'>{ commentDate.toLocaleDateString() }</p>
                 <p style={ state.bodyStyle } className='comment-body'>{ comment.body }</p>
                 <RenderAdminActionBtns id={ comment._id }/>
+                <div className='comment-triangle' style={{
+                    borderLeft: `60px ${state.style.backgroundColor || 'transparent'} solid `
+                }}/>
             </div>
         )
     })

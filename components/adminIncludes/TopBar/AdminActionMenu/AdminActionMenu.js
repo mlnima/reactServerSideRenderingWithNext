@@ -5,9 +5,9 @@ const AdminActionMenu = props => {
     if (props.active) {
         return (
             <div className='AdminActionMenu'>
-                <button className='AdminActionMenuItem'> My Profile</button>
-                <button className='AdminActionMenuItem'> Edit My Profile</button>
-                <button className='AdminActionMenuItem'> Log Out</button>
+                <button className='AdminActionMenuItem adminTopBarItem'> My Profile</button>
+                <button className='AdminActionMenuItem adminTopBarItem'> Edit My Profile</button>
+                <button className='AdminActionMenuItem adminTopBarItem'> Log Out</button>
             </div>
         );
     } else return null

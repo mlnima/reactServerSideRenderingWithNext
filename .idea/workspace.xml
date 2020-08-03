@@ -26,12 +26,16 @@
       <change beforePath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminTopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminTopBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminTopBar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminTopBar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TopBar/NewItemMenu/NewItemMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TopBar/NewItemMenu/NewItemMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/ProgressBar/ProgressBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ProgressBar/ProgressBar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/ProgressBar/ProgressBar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ProgressBar/ProgressBar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/postElement/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postElement/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/postPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -341,7 +345,7 @@
       <workItem from="1596310980273" duration="12909000" />
       <workItem from="1596366481172" duration="54000" />
       <workItem from="1596366543901" duration="24543000" />
-      <workItem from="1596457620283" duration="8810000" />
+      <workItem from="1596457620283" duration="11898000" />
     </task>
     <servers />
   </component>
