@@ -26,9 +26,9 @@ const WidgetModel = props => {
         redirectToTitle: '',
         redirectLink: '',
         translations: {},
-        LogoText:'',
+        LogoText: '',
         headLine: '',
-        text:  '',
+        text: '',
     })
 
     const onChangeLanguageHandler = e => {
@@ -38,7 +38,9 @@ const WidgetModel = props => {
         })
     }
 
-
+    useEffect(() => {
+        console.log(widgetData)
+    }, [props]);
     const onTextInputsDataChangeHandler = (e) => {
         if (widgetSettings.activeEditingLanguage === 'default') {
             setTextInputsData({
@@ -77,7 +79,8 @@ const WidgetModel = props => {
             text: props.data.data.text || '',
             languageToShowBesideDropDown: props.data.data.languageToShowBesideDropDown || 'Language',
             pathURL: props.data.data.pathURL || '',
-            count: props.data.data.count || '',
+            count: props.data.data.count || 8,
+            textAlign: props.data.data.textAlign || 'center',
         })
 
     }, [props]);
@@ -87,7 +90,6 @@ const WidgetModel = props => {
             <option key={lang} value={lang}>{lang}</option>
         )
     })
-
 
     const onOpenHandler = () => {
         widgetSettings.open ? setWidgetSettings({
@@ -105,7 +107,6 @@ const WidgetModel = props => {
             })
         })
     }
-
 
     const onSaveHandler = () => {
         const dataToSave = {
@@ -128,12 +129,6 @@ const WidgetModel = props => {
             })
         })
     }
-
-
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [props]);
-
 
     const onChangeHandler = e => {
         setWidgetData({
@@ -163,6 +158,7 @@ const WidgetModel = props => {
             </>
         )
     }
+
     const RenderSelectedMetaForPosts = () => {
         return (
             <>
@@ -178,7 +174,7 @@ const WidgetModel = props => {
         return (
             <>
                 <p>Count:</p>
-                <DelayInput name='count' type='number' value={textInputsData.data.count} placeholder='count'
+                <DelayInput name='count' type='number' value={textInputsData.count} placeholder='count'
                             className='count' delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
             </>
         )
@@ -198,7 +194,7 @@ const WidgetModel = props => {
                             onChange={e => onTextInputsDataChangeHandler(e)}/>
 
                 <p>Text Align:</p>
-                <select name='textAlign' value={widgetData.data.textAlign} onChange={e => onChangeHandler(e)}>
+                <select name='textAlign' value={textInputsData.textAlign} onChange={e => onTextInputsDataChangeHandler(e)}>
                     <option value='left'>Left</option>
                     <option value='center'>Center</option>
                     <option value='right'>Right</option>
@@ -305,13 +301,13 @@ const WidgetModel = props => {
                 return (
                     <>
                         <p>path URL</p>
-                        <DelayInput name='pathURL' value={textInputsData.data.pathURL} className='pathURL'
-                                    delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
+                        <DelayInput name='pathURL' value={widgetData.data.pathURL} className='pathURL'
+                                    delayTimeout={1000} onChange={e => onChangeHandler(e)}/>
                         <p>Search Button Background Color</p>
                         <DelayInput name='searchBtnBackgroundColor' value={widgetData.data.searchBtnBackgroundColor || '#222222'}
                                     placeholder='Search Button Background Color' className='searchBtnBackgroundColor' delayTimeout={1000}
                                     onChange={e => onChangeHandler(e)}/>
-                        <p>Search Button  Color</p>
+                        <p>Search Button Color</p>
                         <DelayInput name='searchBtnColor' value={widgetData.data.searchBtnColor || 'white'}
                                     placeholder='Search Button Background Color' className='searchBtnColor' delayTimeout={1000}
                                     onChange={e => onChangeHandler(e)}/>
@@ -351,8 +347,6 @@ const WidgetModel = props => {
                         </div>
 
 
-
-
                         <p>Under Logo Headline Text</p>
                         {/*<input name='headLine' value={ state.headLine } className='headLine' onChange={ e => onChangeHandler(e) }/>*/}
                         <DelayInput name='headLine' value={
@@ -364,14 +358,9 @@ const WidgetModel = props => {
                                         '' : ''
 
 
-
                         } className='headLine'
                                     delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
                         <div className='color-section-widget'>
-
-
-
-
 
 
                             <p>Head Line Color</p>
@@ -409,7 +398,7 @@ const WidgetModel = props => {
                                     placeholder='language Text As Default Language' className='languageTextAsDefaultLanguage' delayTimeout={1000}
                                     onChange={e => onChangeHandler(e)}/>
                         <p>Language To Show Beside Drop Down:</p>
-                        <DelayInput  name='languageToShowBesideDropDown' value={
+                        <DelayInput name='languageToShowBesideDropDown' value={
                             widgetSettings.activeEditingLanguage === 'default' ? textInputsData.languageToShowBesideDropDown :
                                 textInputsData.translations ?
                                     textInputsData.translations[widgetSettings.activeEditingLanguage] ?
