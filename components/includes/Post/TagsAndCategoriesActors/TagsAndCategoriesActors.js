@@ -1,15 +1,10 @@
 import React, {useEffect, useState, useContext} from 'react';
 import Link from "next/link";
-import FA from 'react-fontawesome'
-import StarSvg from '../../../../static/images/fontawesome/star-solid.svg';
-import TagSvg from '../../../../static/images/fontawesome/tag-solid.svg';
-import CategorySvg from '../../../../static/images/fontawesome/folder-solid.svg';
-import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
 import {AppContext} from "../../../../context/AppContext";
 import {faBars, faFolder, faTag} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
+import './TagsAndCategoriesActors.scss'
 
 const TagsAndCategoriesActors = props => {
     const contextData = useContext(AppContext);
@@ -33,9 +28,6 @@ const TagsAndCategoriesActors = props => {
         })
     }, [contextData.siteDesign]);
 
-
-
-
     useEffect(() => {
         let fontawesome = '';
         switch (props.type) {
@@ -58,11 +50,6 @@ const TagsAndCategoriesActors = props => {
 
 
     const renderData = props.data.map(item => {
-        // let typeForUrl = state.type === 'categories' ? 'category'
-        //     : state.type === 'tags' ? 'tag'
-        //         : state.type === 'actors' ? 'actor'
-        //             : 'tag'
-        //
         const path = `/posts?content=${item._id}`;
         const icon = state.type === 'categories' ? faFolder
             : state.type === 'tags' ? faTag
@@ -71,7 +58,6 @@ const TagsAndCategoriesActors = props => {
         return (
             <div key={item.name} style={styles} className='post-meta-item'>
                 <FontAwesomeIcon icon={icon} className='meta-data-logo'  />
-                {/*<img className='fontawesomeSvgSmall' src={icon} alt=""/>*/}
                 <Link href={path}   key={item.name}><a className={state.type} style={styles}>{item.name}</a></Link>
             </div>
         )
