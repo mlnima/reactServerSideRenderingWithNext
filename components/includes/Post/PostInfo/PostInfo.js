@@ -83,7 +83,7 @@ const PostInfo = props => {
                     <Link href={props.router ? {
                         pathname: props.router.pathname,
                         query: {...props.router.query, mode: 'edit'}
-                    } : '/'}><a className='edit-btn-admin'>Edit Mode (Betaw)</a></Link>
+                    } : '/'}><a className='edit-btn-admin'>Edit Mode (Beta)</a></Link>
                 </>
             )
         } else return null
