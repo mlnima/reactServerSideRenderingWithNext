@@ -92,9 +92,10 @@ const PostElement = props => {
         if (props.state.rating !== 'disable') {
             return (
                 <ProgressBar
-                    valueColor={contextData.siteDesign.postElementProgressBarValueColor}
-                    progressBarColor={contextData.siteDesign.postElementProgressBarColor}
-                    progressBarBackgroundColor={contextData.siteDesign.postElementProgressBarBackgroundColor}
+                    backgroundColor={contextData.siteDesign.postElementProgressbarBackgroundColor || '#333'}
+                    valueColor={contextData.siteDesign.postElementProgressbarValueColor || 'red'}
+                    textColor={contextData.siteDesign.postElementProgressbarTextColor || 'white'}
+
 
                     value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/>
             )

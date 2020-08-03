@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext,useRef} from 'react';
+import React, {useEffect, useState, useContext, useRef} from 'react';
 import Link from 'next/link'
 import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
 import ProgressBar from "../../ProgressBar/ProgressBar";
@@ -15,14 +15,14 @@ import {faBars, faSmileBeam} from "@fortawesome/free-solid-svg-icons";
 import {faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 
 const PostInfo = props => {
-const ratingBtnArea = useRef(null)
+    const ratingBtnArea = useRef(null)
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
         likeValue: 0,
         postAbsolutePath: '',
         mode: 'view',
-        isLiked:false,
-        isDisliked:false
+        isLiked: false,
+        isDisliked: false
     });
 
     const [styles, setStyles] = useState({
@@ -83,43 +83,34 @@ const ratingBtnArea = useRef(null)
                     <Link href={props.router ? {
                         pathname: props.router.pathname,
                         query: {...props.router.query, mode: 'edit'}
-                    } : '/'}><a className='edit-btn-admin'>Edit Mode</a></Link>
+                    } : '/'}><a className='edit-btn-admin'>Edit Mode (Betaw)</a></Link>
                 </>
             )
         } else return null
     }
 
 
-
-
-
-    const isLikedOrDislikedHandler = () =>{
+    const isLikedOrDislikedHandler = () => {
 
     }
 
-    const onLikeOrDislikeHandler = (e,type)=>{
+    const onLikeOrDislikeHandler = (e, type) => {
         likeDislikeView(props.id, type)
         // e.target.disabled = true
     }
 
 
-
-
-
-
-
-
     const RenderRatingButtons = () => {
         if (props.rating !== 'disable') {
             return (
-                <div ref={ratingBtnArea}  className="like" >
-                    <button onClick={e => onLikeOrDislikeHandler(e,'like')}>
+                <div ref={ratingBtnArea} className="like">
+                    <button onClick={e => onLikeOrDislikeHandler(e, 'like')}>
 
-                        <FontAwesomeIcon icon={faThumbsUp} className='rate-logo' style={styles.titleArea} />
+                        <FontAwesomeIcon icon={faThumbsUp} className='rate-logo' style={styles.titleArea}/>
 
                     </button>
-                    <button  onClick={e => onLikeOrDislikeHandler(e,'disLikes')}>
-                        <FontAwesomeIcon icon={faThumbsDown} className='rate-logo' style={styles.titleArea}  />
+                    <button onClick={e => onLikeOrDislikeHandler(e, 'disLikes')}>
+                        <FontAwesomeIcon icon={faThumbsDown} className='rate-logo' style={styles.titleArea}/>
 
                     </button>
                 </div>
@@ -131,24 +122,28 @@ const ratingBtnArea = useRef(null)
         if (props.rating !== 'disable') {
             return (
                 <>
-                    <ProgressBar value={state.likeValue} percent={false}/>
-                    <div className='post-rate'>
+                    <ProgressBar value={state.likeValue} percent={false}
+                                 backgroundColor={contextData.siteDesign.postProgressbarBackgroundColor || '#333'}
+                                 valueColor={contextData.siteDesign.postProgressbarValueColor || 'red'}
+                                 textColor={contextData.siteDesign.postProgressbarTextColor || 'white'}
+                    />
+                    <div className='post-rate' style={{color:contextData.siteDesign.postProgressbarTextColor || 'white'}}>
                         <div>
                             {state.likeValue} %
                         </div>
                         <div className='like-disLike-count'>
-                        <span className='like-disLike-count-items'>
-                            <FontAwesomeIcon icon={faThumbsUp} className='like-disLike-count-items-logo'  />
-                            {/*<img className='fontawesomeSvgSmall' src={LikeBtnSvg} alt=""/>*/}
-                            <p>  {props.likes}</p>
+                            <span className='like-disLike-count-items' style={{color:contextData.siteDesign.postProgressbarTextColor || 'white'}}>
+                                <FontAwesomeIcon icon={faThumbsUp} className='like-disLike-count-items-logo'/>
+                                {/*<img className='fontawesomeSvgSmall' src={LikeBtnSvg} alt=""/>*/}
+                                <p>  {props.likes}</p>
 
-                        </span>
-                            <span className='like-disLike-count-items'>
-                                  <FontAwesomeIcon icon={faThumbsDown} className='like-disLike-count-items-logo'  />
-                         {/*<img className='fontawesomeSvgSmall' src={DisLikeBtnSvg} alt=""/>*/}
+                            </span>
+                                <span className='like-disLike-count-items' style={{color:contextData.siteDesign.postProgressbarTextColor || 'white'}}>
+                                      <FontAwesomeIcon icon={faThumbsDown} className='like-disLike-count-items-logo'/>
+                                    {/*<img className='fontawesomeSvgSmall' src={DisLikeBtnSvg} alt=""/>*/}
 
-                                <p>  {props.disLikes}</p>
-                        </span>
+                                    <p>  {props.disLikes}</p>
+                            </span>
                         </div>
                     </div>
                 </>
@@ -187,8 +182,8 @@ const ratingBtnArea = useRef(null)
             )
         } else {
             return (
-                <p style={{color:contextData.siteDesign.postDescriptionTextColorColor || 'white'}}
-                    className="description">{props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description}</p>
+                <p style={{color: contextData.siteDesign.postDescriptionTextColorColor || 'white'}}
+                   className="description">{props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description}</p>
             )
         }
     }

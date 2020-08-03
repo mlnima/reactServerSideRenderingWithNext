@@ -21,6 +21,10 @@ const postPage = props => {
                     <ColorSection designName='postDownloadBtnBackgroundColor'/>
                     <ColorSection designName='postDescriptionTextColorColor'/>
 
+                    <ColorSection designName='postProgressbarBackgroundColor'/>
+                    <ColorSection designName='postProgressbarTextColor'/>
+                    <ColorSection designName='postProgressbarValueColor'/>
+
                     <ColorSection designName='commentsAuthorTextColor'/>
                     <ColorSection designName='commentsDateTextColor'/>
                     <ColorSection designName='commentsBodyTextColor'/>

@@ -11,9 +11,13 @@ const postElement = props => {
             <div className='post-element-design'>
                 <ColorSection designName='postElementTitleTextColor'/>
                 <ColorSection designName='postElementBackgroundColor'/>
-                <ColorSection designName='postElementProgressBarValueColor'/>
-                <ColorSection designName='postElementProgressBarColor'/>
-                <ColorSection designName='postElementProgressBarBackgroundColor'/>
+
+                <ColorSection designName='postElementProgressbarBackgroundColor'/>
+                <ColorSection designName='postElementProgressbarTextColor'/>
+                <ColorSection designName='postElementProgressbarValueColor'/>
+
+
+
                 <ColorSection designName='postElementOnImageTextColor'/>
                 <ColorSection designName='postElementOnImageTextBackgroundColor'/>
             </div>
