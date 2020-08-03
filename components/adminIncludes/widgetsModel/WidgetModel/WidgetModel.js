@@ -184,7 +184,7 @@ const WidgetModel = props => {
         return (
             <>
                 <p>Text:</p>
-                <DelayInput element="textarea" name='text' value={
+                <DelayInput  element="textarea" name='text' value={
                     widgetSettings.activeEditingLanguage === 'default' ? textInputsData.text :
                         textInputsData.translations ?
                             textInputsData.translations[widgetSettings.activeEditingLanguage] ?
@@ -216,7 +216,6 @@ const WidgetModel = props => {
             </>
         )
     }
-
 
     const RenderOptionByFormat = () => {
         switch (widgetData.data.type) {
@@ -318,7 +317,7 @@ const WidgetModel = props => {
             case 'logo':
                 return (
                     <>
-                        <RenderRedirect/>
+                        {/*<RenderRedirect/>*/}
                         <p>Logo image URL</p>
                         {/*<input name='LogoUrl' value={ state.LogoUrl } className='LogoUrl' onChange={ e => onChangeHandler(e) }/>*/}
                         <DelayInput name='LogoUrl' value={widgetData.data.LogoUrl} className='LogoUrl'
@@ -414,7 +413,6 @@ const WidgetModel = props => {
 
         }
     }
-
 
     const changeWidgetIndex = (more) => {
         const valueToSet = more ? widgetData.data.widgetIndex + 1 : widgetData.data.widgetIndex - 1

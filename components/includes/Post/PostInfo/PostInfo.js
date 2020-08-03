@@ -99,7 +99,7 @@ const ratingBtnArea = useRef(null)
 
     const onLikeOrDislikeHandler = (e,type)=>{
         likeDislikeView(props.id, type)
-        e.target.disabled = true
+        // e.target.disabled = true
     }
 
 

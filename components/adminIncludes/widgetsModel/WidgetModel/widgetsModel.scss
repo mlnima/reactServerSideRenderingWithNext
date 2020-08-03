@@ -36,8 +36,8 @@
   border: solid .5px black;
   margin-bottom: 5px;
   color: $light100;
-.customStylesTextarea{
-  min-height: 300px;
+  textarea{
+  min-height: 250px;
 }
   button {
     @include AdminLightBtn;

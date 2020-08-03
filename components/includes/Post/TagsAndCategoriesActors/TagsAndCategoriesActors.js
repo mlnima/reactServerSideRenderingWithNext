@@ -6,6 +6,9 @@ import TagSvg from '../../../../static/images/fontawesome/tag-solid.svg';
 import CategorySvg from '../../../../static/images/fontawesome/folder-solid.svg';
 import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
 import {AppContext} from "../../../../context/AppContext";
+import {faBars, faFolder, faTag} from "@fortawesome/free-solid-svg-icons";
+import {faStar} from "@fortawesome/free-regular-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 
 const TagsAndCategoriesActors = props => {
@@ -61,13 +64,14 @@ const TagsAndCategoriesActors = props => {
         //             : 'tag'
         //
         const path = `/posts?content=${item._id}`;
-        const icon = state.type === 'categories' ? CategorySvg
-            : state.type === 'tags' ? TagSvg
-                : state.type === 'actors' ? StarSvg
-                    : TagSvg
+        const icon = state.type === 'categories' ? faFolder
+            : state.type === 'tags' ? faTag
+                : state.type === 'actors' ? faStar
+                    : faTag
         return (
             <div key={item.name} style={styles} className='post-meta-item'>
-                <img className='fontawesomeSvgSmall' src={icon} alt=""/>
+                <FontAwesomeIcon icon={icon} className='meta-data-logo'  />
+                {/*<img className='fontawesomeSvgSmall' src={icon} alt=""/>*/}
                 <Link href={path}   key={item.name}><a className={state.type} style={styles}>{item.name}</a></Link>
             </div>
         )
