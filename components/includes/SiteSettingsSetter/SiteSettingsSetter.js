@@ -60,15 +60,7 @@ const SiteSettingSetter = props => {
 
 
     useEffect(() => {
-
             document.documentElement.lang = contextData.state.activeLanguage === 'default' ? contextData.siteIdentity.defaultSiteLanguage ? contextData.siteIdentity.defaultSiteLanguage:'en' : contextData.state.activeLanguage
-
-        if (contextData.siteIdentity.defaultSiteLanguage==='ar'||contextData.siteIdentity.defaultSiteLanguage==='fa'){
-            document.dir = 'rtl'
-        }else {
-            document.dir = 'ltr'
-        }
-
     }, [contextData.state.activeLanguage,contextData.siteIdentity.defaultSiteLanguage]);
 
     // useEffect(() => {
