@@ -11,7 +11,7 @@ import './PostInfo.scss'
 import {AppContext} from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faSmileBeam} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faDollarSign, faEuroSign, faSmileBeam} from "@fortawesome/free-solid-svg-icons";
 import {faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 
 const PostInfo = props => {
@@ -94,27 +94,40 @@ const PostInfo = props => {
 
     }
 
-    const onLikeOrDislikeHandler = (e, type) => {
+    const onLikeOrDislikeHandler = ( type) => {
         likeDislikeView(props.id, type)
-        // e.target.disabled = true
     }
-
 
     const RenderRatingButtons = () => {
         if (props.rating !== 'disable') {
             return (
                 <div ref={ratingBtnArea} className="like">
-                    <button onClick={e => onLikeOrDislikeHandler(e, 'like')}>
+                    <button onClick={e => onLikeOrDislikeHandler( 'like')}>
 
                         <FontAwesomeIcon icon={faThumbsUp} className='rate-logo' style={styles.titleArea}/>
 
                     </button>
-                    <button onClick={e => onLikeOrDislikeHandler(e, 'disLikes')}>
+                    <button onClick={e => onLikeOrDislikeHandler( 'disLikes')}>
                         <FontAwesomeIcon icon={faThumbsDown} className='rate-logo' style={styles.titleArea}/>
 
                     </button>
                 </div>
             )
+        } else return null
+    }
+
+
+    const RenderPrice = () => {
+        if (props.postType === 'product') {
+            return (
+                <div className='price-information'>
+                    <FontAwesomeIcon icon={props.currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo' />
+
+                    <p>{props.price}</p>
+
+                </div>
+            )
+
         } else return null
     }
 
@@ -127,22 +140,22 @@ const PostInfo = props => {
                                  valueColor={contextData.siteDesign.postProgressbarValueColor || 'red'}
                                  textColor={contextData.siteDesign.postProgressbarTextColor || 'white'}
                     />
-                    <div className='post-rate' style={{color:contextData.siteDesign.postProgressbarTextColor || 'white'}}>
+                    <div className='post-rate' style={{color: contextData.siteDesign.postProgressbarTextColor || 'white'}}>
                         <div>
                             {state.likeValue} %
                         </div>
                         <div className='like-disLike-count'>
-                            <span className='like-disLike-count-items' style={{color:contextData.siteDesign.postProgressbarTextColor || 'white'}}>
+                            <span className='like-disLike-count-items' style={{color: contextData.siteDesign.postProgressbarTextColor || 'white'}}>
                                 <FontAwesomeIcon icon={faThumbsUp} className='like-disLike-count-items-logo'/>
                                 {/*<img className='fontawesomeSvgSmall' src={LikeBtnSvg} alt=""/>*/}
                                 <p>  {props.likes}</p>
 
                             </span>
-                                <span className='like-disLike-count-items' style={{color:contextData.siteDesign.postProgressbarTextColor || 'white'}}>
+                            <span className='like-disLike-count-items' style={{color: contextData.siteDesign.postProgressbarTextColor || 'white'}}>
                                       <FontAwesomeIcon icon={faThumbsDown} className='like-disLike-count-items-logo'/>
-                                    {/*<img className='fontawesomeSvgSmall' src={DisLikeBtnSvg} alt=""/>*/}
+                                {/*<img className='fontawesomeSvgSmall' src={DisLikeBtnSvg} alt=""/>*/}
 
-                                    <p>  {props.disLikes}</p>
+                                <p>  {props.disLikes}</p>
                             </span>
                         </div>
                     </div>
@@ -188,6 +201,11 @@ const PostInfo = props => {
         }
     }
 
+
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
+
     return (
         <div className='post-info'>
             <EditLinkForAdmin/>
@@ -196,12 +214,16 @@ const PostInfo = props => {
             <div className='post-info-head' style={styles.titleArea}>
 
                 <RenderTitle/>
-                <RenderRatingButtons/>
+                <div className='under-title'>
+                    <RenderRatingButtons/>
+                    <RenderPrice/>
+                </div>
+
             </div>
 
             <div className='post-info-body'>
                 <div className="views">
-                    <DownloadLink downloadLink={props.videoEmbedCode}/>
+                    <DownloadLink downloadLink={props.videoEmbedCode} postType={ props.postType}/>
                     <span>{props.views} views</span>
                     <RenderRatingData/>
                 </div>

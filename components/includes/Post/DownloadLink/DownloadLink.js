@@ -5,7 +5,7 @@ import {AppContext} from "../../../../context/AppContext";
 const DownloadLink = props => {
     const contextData = useContext(AppContext);
 
-    if (props.downloadLink) {
+    if (props.downloadLink && props.postType === 'video') {
         return (
             <div id='download-url'>
                 <a style={{

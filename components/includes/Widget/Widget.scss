@@ -32,7 +32,7 @@
           .image {
             img, video {
               width: 140px;
-              height: 80px;
+              height: 80px ;
               object-fit: cover;
               //display: none;
             }
@@ -44,31 +44,27 @@
     }
 
     .listPostsContent {
-      //display: grid;
-      //grid-template-columns: 1fr;
-      //display: flex;
-      //
-      //flex-wrap: wrap;
+
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
       .list {
-        //height: auto;
+        //margin: 300px 0;
         width: 90%;
-        height: 110px;
+        height: 140px;
 
         a {
           width: 95%;
-          height: 100px !important;
+          height: 140px !important;
         }
 
         .post-element {
           width: auto;
-          height: 100px !important;
+          height: 140px !important;
 
           .image {
             img, video {
               width: 100px;
-              height: auto;
+              height: 80px ;
               //display: none;
             }
 
@@ -79,6 +75,12 @@
 
           .progressParent {
             display: none;
+          }
+
+          h3{
+            overflow: hidden;
+            white-space: nowrap;
+            text-overflow: ellipsis;
           }
 
         }

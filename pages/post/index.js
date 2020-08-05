@@ -104,6 +104,9 @@ const Post = props => {
                             videoEmbedCode={ props.post.videoEmbedCode }
                             rating={props.post.rating}
                             editMode= {state.editMode}
+                            postType= {props.post.postType}
+                            price= {props.post.price}
+                            {...props.post}
                         />
                         <CommentsRenderer comments={ props.comments }/>
                         <CommentFrom documentId={ props.post._id }/>
