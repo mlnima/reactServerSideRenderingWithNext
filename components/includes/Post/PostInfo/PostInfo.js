@@ -12,7 +12,7 @@ import {AppContext} from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faDollarSign, faEuroSign, faSmileBeam} from "@fortawesome/free-solid-svg-icons";
-import {faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
+import {faMeh, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 
 const PostInfo = props => {
     const ratingBtnArea = useRef(null)
@@ -90,24 +90,27 @@ const PostInfo = props => {
     }
 
 
-    const isLikedOrDislikedHandler = () => {
-
-    }
-
-    const onLikeOrDislikeHandler = ( type) => {
+    const onLikeOrDislikeHandler = (type) => {
         likeDislikeView(props.id, type)
     }
 
+
+
+
+
+
+
+
     const RenderRatingButtons = () => {
         if (props.rating !== 'disable') {
-            return (
+            return(
                 <div ref={ratingBtnArea} className="like">
-                    <button onClick={e => onLikeOrDislikeHandler( 'like')}>
+                    <button onClick={() => onLikeOrDislikeHandler('likes')}>
 
                         <FontAwesomeIcon icon={faThumbsUp} className='rate-logo' style={styles.titleArea}/>
 
                     </button>
-                    <button onClick={e => onLikeOrDislikeHandler( 'disLikes')}>
+                    <button onClick={() => onLikeOrDislikeHandler('disLikes')}>
                         <FontAwesomeIcon icon={faThumbsDown} className='rate-logo' style={styles.titleArea}/>
 
                     </button>
@@ -121,7 +124,7 @@ const PostInfo = props => {
         if (props.postType === 'product') {
             return (
                 <div className='price-information'>
-                    <FontAwesomeIcon icon={props.currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo' />
+                    <FontAwesomeIcon icon={props.currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo'/>
 
                     <p>{props.price}</p>
 
@@ -223,7 +226,7 @@ const PostInfo = props => {
 
             <div className='post-info-body'>
                 <div className="views">
-                    <DownloadLink downloadLink={props.videoEmbedCode} postType={ props.postType}/>
+                    <DownloadLink downloadLink={props.videoEmbedCode} postType={props.postType}/>
                     <span>{props.views} views</span>
                     <RenderRatingData/>
                 </div>

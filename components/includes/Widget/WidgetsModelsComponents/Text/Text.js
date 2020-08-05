@@ -13,20 +13,20 @@ const Text = props => {
 
     useEffect(() => {
         if (spanElement) {
-            spanElement.current.innerHTML = props.text
+            spanElement.current.innerHTML =  props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text
         }
-    }, []);
+    }, [props]);
 
 
     return (
         <span className='widgetText' ref={spanElement} style={state.style}>
-            {
-                // props.text
+            {/*{*/}
+            {/*    // props.text*/}
 
-                props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text
+            {/*    props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text*/}
 
 
-            }
+            {/*}*/}
         </span>
     );
 };
