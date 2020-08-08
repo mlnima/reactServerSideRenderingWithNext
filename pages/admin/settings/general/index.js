@@ -27,7 +27,7 @@ const settings = props => {
         membership: props.identity.membership || false,
         allowUserToPost: props.identity.allowUserToPost || false,
         translationLanguages:props.identity.translationLanguages||[],
-        topBarAuthBtn:props.identity.translationLanguages||true,
+        topBarAuthBtn:props.identity.topBarAuthBtn||true,
         anyoneCanRegister:props.identity.anyoneCanRegister||true,
         defaultSiteLanguage:props.identity.defaultSiteLanguage||'en',
 

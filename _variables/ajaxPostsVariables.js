@@ -60,6 +60,7 @@ export const getSingleMeta = async (id,  domainName,cache) => {
     return await axios.post(domainName + `/api/v1/posts/getSingleMeta?id=${ id }`, body)
 };
 
+
 export const updateMeta = async (data,  domainName) => {
     const body = {
         data,

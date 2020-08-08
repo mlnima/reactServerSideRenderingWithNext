@@ -35,6 +35,7 @@ const PostElement = props => {
     }, [props]);
 
     useEffect(() => {
+        const titleTextAlign = props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title ?contextData.state.activeLanguage === 'fa' || contextData.state.activeLanguage === 'ar' ? 'right':'left':'left' : 'left' : 'left'
         setState({
             ...state,
             infoOnPostElementStyle:{
@@ -46,7 +47,8 @@ const PostElement = props => {
             titleElementStyle:{
                 ...state.titleElementStyle,
                 color: contextData.siteDesign.postElementTitleTextColor || 'white',
-                backgroundColor: contextData.siteDesign.postElementBackgroundColor || 'transparent'
+                backgroundColor: contextData.siteDesign.postElementBackgroundColor || 'transparent',
+                textAlign:titleTextAlign
             }
 
         })

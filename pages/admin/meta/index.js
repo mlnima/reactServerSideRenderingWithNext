@@ -98,12 +98,14 @@ const meta = props => {
             <AdminLayout>
                 <div className='single-meta-page'>
                     <div className='single-meta-page-section'>
+                        <p>Language :</p>
                         <select onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                             <option value='default'>Default</option>
                             {languagesOptions}
                         </select>
                     </div>
                     <div className='single-meta-page-section'>
+                        <p>Meta Name :</p>
                         <input name='name' onChange={e => onInputChangeHandler(e)} value={
                             editingData.activeEditingLanguage === 'default' ? metaData.name :
                                 metaData.translations ?
@@ -112,6 +114,14 @@ const meta = props => {
                         }/>
                     </div>
                     <div className='single-meta-page-section'>
+                        <p>Meta Image :</p>
+                        <input name='imageUrl' onChange={e => onInputChangeHandler(e)} value={metaData.imageUrl}/>
+                        <div className='preview-image'>
+                            <img src={metaData.imageUrl} alt=""/>
+                        </div>
+                    </div>
+                    <div className='single-meta-page-section'>
+                        <p>Meta Description :</p>
                         <textarea name='description' onChange={e => onInputChangeHandler(e)} value={
                             editingData.activeEditingLanguage === 'default' ? metaData.description :
                                 metaData.translations ?

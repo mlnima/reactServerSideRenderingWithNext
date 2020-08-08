@@ -251,8 +251,6 @@ postsControllers.getSingleMeta = async (req,res) =>{
 
 
 
-
-
 postsControllers.getMeta = async (req, res) => {
 
     const type = req.body.type ? {type: req.body.type} : {}

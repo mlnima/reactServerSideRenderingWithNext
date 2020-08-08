@@ -8,6 +8,10 @@ import SortUpSvg from '../../../../static/images/fontawesome/sort-up-solid.svg'
 import SortDownSvg from '../../../../static/images/fontawesome/sort-down-solid.svg'
 import {DelayInput} from 'react-delay-input'
 import RenderTitleAndRedirectLink from "./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink";
+import WidgetPreview from "./WidgetPreview/WidgetPreview";
+import SelectedMetaIdForPostWidget from "./SelectedMetaIdForPostWidget/SelectedMetaIdForPostWidget";
+import CountInput from "./CountInput/CountInput";
+import TextInputFieldForWidget from "./TextInputFieldForWidget/TextInputFieldForWidget";
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
@@ -40,7 +44,7 @@ const WidgetModel = props => {
 
     useEffect(() => {
         console.log(widgetData)
-    }, [props]);
+    }, [props,widgetData]);
     const onTextInputsDataChangeHandler = (e) => {
         if (widgetSettings.activeEditingLanguage === 'default') {
             setTextInputsData({
@@ -79,7 +83,6 @@ const WidgetModel = props => {
             text: props.data.data.text || '',
             languageToShowBesideDropDown: props.data.data.languageToShowBesideDropDown || 'Language',
             pathURL: props.data.data.pathURL || '',
-            count: props.data.data.count || 8,
             textAlign: props.data.data.textAlign || 'center',
         })
 
@@ -138,47 +141,41 @@ const WidgetModel = props => {
                 [e.target.name]: e.target.value
             }
         })
+
     }
 
-    const RenderPreview = () => {
-        if (widgetSettings.preview) {
-            return (
-                <WidgetsRenderer widgets={[widgetData]} position={widgetData.data.position}/>
-            )
-        } else return null
-    }
 
-    const RenderRedirect = () => {
-        return (
-            <>
-                <p>Redirect Link URL:</p>
-                <DelayInput className='redirectLink' name='redirectLink' placeholder='Redirect'
-                            value={widgetData.data.redirectLink} delayTimeout={1000}
-                            onChange={e => onChangeHandler(e)}/>
-            </>
-        )
-    }
+    // const RenderRedirect = () => {
+    //     return (
+    //         <>
+    //             <p>Redirect Link URL:</p>
+    //             <DelayInput className='redirectLink' name='redirectLink' placeholder='Redirect'
+    //                         value={widgetData.data.redirectLink} delayTimeout={1000}
+    //                         onChange={e => onChangeHandler(e)}/>
+    //         </>
+    //     )
+    // }
 
-    const RenderSelectedMetaForPosts = () => {
-        return (
-            <>
-                <p>Selected Meta For Posts:</p>
-                <DelayInput className='redirectLink' name='selectedMetaForPosts' placeholder='Enter the meta ID'
-                            value={widgetData.data.selectedMetaForPosts} delayTimeout={1000}
-                            onChange={e => onChangeHandler(e)}/>
-            </>
-        )
-    }
+    // const RenderSelectedMetaForPosts = () => {
+    //     return (
+    //         <>
+    //             <p>Selected Meta For Posts:</p>
+    //             <DelayInput className='redirectLink' name='selectedMetaForPosts' placeholder='Enter the meta ID'
+    //                         value={widgetData.data.selectedMetaForPosts} delayTimeout={1000}
+    //                         onChange={e => onChangeHandler(e)}/>
+    //         </>
+    //     )
+    // }
 
-    const RenderCount = () => {
-        return (
-            <>
-                <p>Count:</p>
-                <DelayInput name='count' type='number' value={textInputsData.count} placeholder='count'
-                            className='count' delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
-            </>
-        )
-    }
+    // const RenderCount = () => {
+    //     return (
+    //         <>
+    //             <p>Count:</p>
+    //             <DelayInput name='count' type='number' value={textInputsData.count} placeholder='count'
+    //                         className='count' delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
+    //         </>
+    //     )
+    // }
 
     const RenderText = () => {
         return (
@@ -233,14 +230,15 @@ const WidgetModel = props => {
                             <option value='views'>Views</option>
                             <option value='likes'>Likes</option>
                         </select>
-                        <RenderSelectedMetaForPosts/>
+                        {/*<RenderSelectedMetaForPosts/>*/}
+                        <SelectedMetaIdForPostWidget onChangeHandler={onChangeHandler} widgetData={widgetData} />
                         <p>View Type:</p>
                         <select name='viewType' value={widgetData.data.viewType} onChange={e => onChangeHandler(e)}>
                             <option value='standard'>Standard</option>
                             <option value='small'>Small</option>
                             <option value='list'>List</option>
                         </select>
-                        <RenderCount/>
+                        <TextInputFieldForWidget element='input' inputTitle='count :' name='count' type='number' value={widgetData.data.count} classNameValue='count' placeHolder='count' onChangeHandler={onChangeHandler} />
                     </>
                 )
 
@@ -248,7 +246,7 @@ const WidgetModel = props => {
                 return (
                     <>
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
-                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
+                                                    onChangeHandler={onChangeHandler}/>
                         <RenderText/>
                         <p>Media Type:</p>
                         <select name='mediaType' value={widgetData.data.mediaType || ''}
@@ -282,49 +280,25 @@ const WidgetModel = props => {
                             <option value='categories'>Categories</option>
                             <option value='actors'>Actors</option>
                         </select>
-                        <p>Meta background Color:</p>
-                        <DelayInput name='metaBackgroundColor' value={widgetData.data.metaBackgroundColor || 'red'}
-                                    placeholder='Meta background Color' className='metaBackgroundColor'
-                                    delayTimeout={1000} onChange={e => onChangeHandler(e)}/>
-                        <p>Meta Text Color:</p>
-                        <DelayInput name='metaTextColor' value={widgetData.data.metaTextColor || 'white'}
-                                    placeholder='Meta background Color' className='metaTextColor' delayTimeout={1000}
-                                    onChange={e => onChangeHandler(e)}/>
-                        <p>Count:</p>
-                        <RenderCount/>
+                        <TextInputFieldForWidget element='input' inputTitle='Meta background Color :' name='metaBackgroundColor' type='text' value={widgetData.data.metaBackgroundColor} classNameValue='metaBackgroundColor' placeHolder='Meta background Color' onChangeHandler={onChangeHandler} />
+                        <TextInputFieldForWidget element='input' inputTitle='Meta Text Color :' name='metaTextColor' type='text' value={widgetData.data.metaTextColor} classNameValue='metaTextColor' placeHolder='Meta Text Color' onChangeHandler={onChangeHandler} />
+                        <TextInputFieldForWidget element='input' inputTitle='Count :' name='count' type='number' value={widgetData.data.count} classNameValue='count' placeHolder='count' onChangeHandler={onChangeHandler} />
                     </>
                 )
 
             case 'searchBar':
-                console.log(widgetData)
                 return (
                     <>
-                        <p>path URL</p>
-                        <DelayInput name='pathURL' value={widgetData.data.pathURL} className='pathURL'
-                                    delayTimeout={1000} onChange={e => onChangeHandler(e)}/>
-                        <p>Search Button Background Color</p>
-                        <DelayInput name='searchBtnBackgroundColor' value={widgetData.data.searchBtnBackgroundColor || '#222222'}
-                                    placeholder='Search Button Background Color' className='searchBtnBackgroundColor' delayTimeout={1000}
-                                    onChange={e => onChangeHandler(e)}/>
-                        <p>Search Button Color</p>
-                        <DelayInput name='searchBtnColor' value={widgetData.data.searchBtnColor || 'white'}
-                                    placeholder='Search Button Background Color' className='searchBtnColor' delayTimeout={1000}
-                                    onChange={e => onChangeHandler(e)}/>
-
+                        <TextInputFieldForWidget element='input' inputTitle='Search Button Background Color :' name='searchBtnBackgroundColor' type='text' value={widgetData.data.searchBtnBackgroundColor || '#222222'} classNameValue='searchBtnBackgroundColor' placeHolder='Search Button Background Color' onChangeHandler={onChangeHandler} />
+                        <TextInputFieldForWidget element='input' inputTitle='Search Button Color :' name='searchBtnColor' type='text' value={widgetData.data.searchBtnColor || 'white'} classNameValue='searchBtnColor' placeHolder='Search Button Color' onChangeHandler={onChangeHandler} />
                     </>
                 )
 
             case 'logo':
                 return (
                     <>
-                        {/*<RenderRedirect/>*/}
-                        <p>Logo image URL</p>
-                        {/*<input name='LogoUrl' value={ state.LogoUrl } className='LogoUrl' onChange={ e => onChangeHandler(e) }/>*/}
-                        <DelayInput name='LogoUrl' value={widgetData.data.LogoUrl} className='LogoUrl'
-                                    delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
+                        <TextInputFieldForWidget element='input' inputTitle='Logo image URL :' name='LogoUrl' type='text' value={widgetData.data.LogoUrl} classNameValue='logoUrl' placeHolder='Logo image URL' onChangeHandler={onChangeHandler} />
                         <p>Logo Text</p>
-                        {/*<input name='LogoText' value={ state.LogoText } className='LogoText' onChange={ e => onChangeHandler(e) }/>*/}
-
                         <DelayInput name='LogoText' value={
                             widgetSettings.activeEditingLanguage === 'default' ? textInputsData.LogoText :
                                 textInputsData.translations ?
@@ -335,15 +309,11 @@ const WidgetModel = props => {
                                     delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
 
                         <div className='color-section-widget'>
-                            <p>Logo Text Color</p>
-                            <DelayInput name='logoTextColor' value={widgetData.data.logoTextColor}
-                                        className='logoTextColor' delayTimeout={1000}
-                                        onChange={e => onChangeHandler(e)}/>
-                            <p>Logo Text Font Size</p>
-                            <DelayInput type='number' name='logoTextFontSize' value={widgetData.data.logoTextFontSize}
-                                        className='logoTextFontSize' delayTimeout={1000}
-                                        onChange={e => onChangeHandler(e)}/>
+                            <TextInputFieldForWidget element='input' inputTitle='Logo Text Color :' name='logoTextColor' type='text' value={widgetData.data.logoTextColor} classNameValue='logoTextColor' placeHolder='Logo Text Color' onChangeHandler={onChangeHandler} />
+                            <TextInputFieldForWidget element='input' inputTitle='Logo Text Font Size :' name='logoTextFontSize' type='number' value={widgetData.data.logoTextFontSize} classNameValue='logoTextFontSize' placeHolder='Logo Text Font Size' onChangeHandler={onChangeHandler} />
                         </div>
+
+                        <TextInputFieldForWidget element='input' inputTitle='Under Logo Headline Text :' name='logoTextColor' type='text' value={widgetData.data.logoTextColor} classNameValue='logoTextColor' placeHolder='Under Logo Headline Text' onChangeHandler={onChangeHandler} />
 
 
                         <p>Under Logo Headline Text</p>
@@ -355,21 +325,11 @@ const WidgetModel = props => {
                                     textInputsData.translations[widgetSettings.activeEditingLanguage] ?
                                         textInputsData.translations[widgetSettings.activeEditingLanguage].headLine || '' :
                                         '' : ''
-
-
                         } className='headLine'
                                     delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
                         <div className='color-section-widget'>
-
-
-                            <p>Head Line Color</p>
-                            <DelayInput name='logoHeadLineColor' value={widgetData.data.logoHeadLineColor}
-                                        className='logoHeadLineColor' delayTimeout={1000}
-                                        onChange={e => onChangeHandler(e)}/>
-                            <p>Head Line Font Size</p>
-                            <DelayInput type='number' name='logoHeadLineFontSize'
-                                        value={widgetData.data.logoHeadLineFontSize} className='logoHeadLineFontSize'
-                                        delayTimeout={1000} onChange={e => onChangeHandler(e)}/>
+                            <TextInputFieldForWidget element='input' inputTitle='Head Line Color :' name='logoHeadLineColor' type='text' value={widgetData.data.logoHeadLineColor} classNameValue='logoHeadLineColor' placeHolder='Head Line Color' onChangeHandler={onChangeHandler} />
+                            <TextInputFieldForWidget element='input' inputTitle='Head Line Font Size :' name='logoHeadLineFontSize' type='number' value={widgetData.data.logoHeadLineFontSize} classNameValue='logoHeadLineFontSize' placeHolder='Head Line Font Size' onChangeHandler={onChangeHandler} />
                         </div>
                     </>
                 )
@@ -392,10 +352,8 @@ const WidgetModel = props => {
             case 'language':
                 return (
                     <>
-                        <p>Language Text As Default Language</p>
-                        <DelayInput name='languageTextAsDefaultLanguage' value={widgetData.data.languageTextAsDefaultLanguage || 'default'}
-                                    placeholder='language Text As Default Language' className='languageTextAsDefaultLanguage' delayTimeout={1000}
-                                    onChange={e => onChangeHandler(e)}/>
+                        <TextInputFieldForWidget element='input' inputTitle='Language Text As Default Language :' name='languageTextAsDefaultLanguage' type='text' value={widgetData.data.languageTextAsDefaultLanguage || 'default'} classNameValue='languageTextAsDefaultLanguage' placeHolder='Language Text As Default Language' onChangeHandler={onChangeHandler} />
+
                         <p>Language To Show Beside Drop Down:</p>
                         <DelayInput name='languageToShowBesideDropDown' value={
                             widgetSettings.activeEditingLanguage === 'default' ? textInputsData.languageToShowBesideDropDown :
@@ -464,10 +422,9 @@ const WidgetModel = props => {
                         <option value='alphabeticalNumericalRange'>Alphabetical Numerical Range</option>
                         <option value='language'>Language</option>
                     </select>
-                    <p>Widget Index:</p>
-                    <DelayInput type='number' name='widgetIndex' className='widgetIndex' placeholder='widgetIndex'
-                                value={widgetData.data.widgetIndex} delayTimeout={1000}
-                                onChange={e => onChangeHandler(e)}/>
+
+                    <TextInputFieldForWidget element='input' inputTitle='Widget Index :' name='widgetIndex' type='number' value={widgetData.data.widgetIndex} classNameValue='widgetIndex' placeHolder='Widget Index' onChangeHandler={onChangeHandler} />
+
                     <p>Position:</p>
                     <select name='position' value={widgetData.data.position} onChange={e => onChangeHandler(e)}>
                         <option value='home'>Home</option>
@@ -490,7 +447,8 @@ const WidgetModel = props => {
                         }) : setWidgetSettings({...widgetSettings, preview: true})
                     }}>Preview the Widget
                     </button>
-                    <RenderPreview/>
+
+                    <WidgetPreview widgetData={widgetData} position={widgetData.data.position} preview={widgetSettings.preview}/>
                     <RenderWidgetCustomStyle/>
                     <div className='control'>
                         <button onClick={() => onSaveHandler()}>Save</button>

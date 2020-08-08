@@ -49,6 +49,7 @@ const SiteSettingSetter = props => {
 
     }, [props]);
 
+
     useEffect(() => {
         if (localStorage.lang || router.query.lang) {
             contextData.dispatchState({
@@ -60,22 +61,9 @@ const SiteSettingSetter = props => {
 
 
     useEffect(() => {
-            document.documentElement.lang = contextData.state.activeLanguage === 'default' ? contextData.siteIdentity.defaultSiteLanguage ? contextData.siteIdentity.defaultSiteLanguage:'en' : contextData.state.activeLanguage
-    }, [contextData.state.activeLanguage,contextData.siteIdentity.defaultSiteLanguage]);
+        document.documentElement.lang = contextData.state.activeLanguage === 'default' ? contextData.siteIdentity.defaultSiteLanguage ? contextData.siteIdentity.defaultSiteLanguage : 'en' : contextData.state.activeLanguage
+    }, [contextData.state.activeLanguage, contextData.siteIdentity.defaultSiteLanguage]);
 
-    // useEffect(() => {
-    //     if(!window.location.search.includes('lang') && contextData.state.activeLanguage !=='default'){
-    //         const searchFromAsUrl =  router.asPath.includes('?') ?  router.asPath.split('?')[1] : ''
-    //         const asUrl = new URLSearchParams(searchFromAsUrl)
-    //         // asUrl.set('lang', contextData.state.activeLanguage)
-    //         //  // router.push({
-    //         //  //     pathname:router.pathname,
-    //         //  //     query:router.query
-    //         //  // },asUrl.toString())
-    //
-    //     }
-    //
-    // }, [router.pathname,contextData.state.activeLanguage]);
 
     useEffect(() => {
         document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;
@@ -93,21 +81,25 @@ const SiteSettingSetter = props => {
     })
 
 
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
+
+
     return (
 
-            <Head>
-                <title>{state.title}</title>
-                <meta name="theme-color" content={state.themeColor}/>
-                <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                <meta charSet="utf-8"/>
-                {/*<link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet"/>*/}
-                <meta name="description" content={state.description}/>
-                <meta name="keywords" content={state.keywords}/>
-                <link rel="icon" href={'/favicon.ico'}/>
-                <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
-                <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
-                {renderCustomScripts}
-            </Head>
+        <Head>
+            <title>{state.title}</title>
+            <meta name="theme-color" content={state.themeColor}/>
+            <meta name="viewport" content="width=device-width, initial-scale=1"/>
+            <meta charSet="utf-8"/>
+            <meta name="description" content={state.description}/>
+            <meta name="keywords" content={state.keywords}/>
+            <link rel="icon" href={'/favicon.ico'}/>
+            <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
+            <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
+            {renderCustomScripts}
+        </Head>
 
 
     )

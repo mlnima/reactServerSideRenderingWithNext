@@ -1,10 +1,10 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import { convertVariableNameToName } from '../../../_variables/_variables'
-import { AppContext } from '../../../context/AppContext'
-import { DelayInput } from 'react-delay-input';
-import SaveDesignChangesBtn from './SaveDesignChangesBtn'
+import React, {useEffect, useState, useContext, useRef} from 'react';
+import {AppContext} from "../../../context/AppContext";
+import SaveDesignChangesBtn from "./SaveDesignChangesBtn";
+import {convertVariableNameToName} from "../../../_variables/_variables";
+import {DelayInput} from "react-delay-input";
 
-const UrlSection = props => {
+const TextSection = props => {
     const contextData = useContext(AppContext);
 
     const onChangeHandler = e => {
@@ -14,8 +14,9 @@ const UrlSection = props => {
         })
     }
 
+
     return (
-        <div className='url-setting-Section'>
+        <div className='text-setting-section adminDesignSectionItem'>
             <div>
                 <p>{props.designName?convertVariableNameToName(props.designName):''} : </p>
                 <DelayInput className='admin-input' name={ props.designName } value={contextData.siteDesign[props.designName]} onChange={ e => onChangeHandler(e) }/>
@@ -24,4 +25,4 @@ const UrlSection = props => {
         </div>
     );
 };
-export default UrlSection;
+export default TextSection;

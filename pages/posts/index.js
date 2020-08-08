@@ -6,7 +6,7 @@ import {
     getMultipleWidgetWithData,
     getMultipleSetting
 } from '../../_variables/ajaxVariables'
-import {getMeta, getPosts} from '../../_variables/ajaxPostsVariables'
+import {getMeta, getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables'
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter';
 import withRouter from 'next/dist/client/with-router'
 import Posts from '../../components/includes/Posts/Posts'
@@ -17,6 +17,7 @@ import Footer from '../../components/includes/Footer/Footer'
 import {getAbsolutePath} from '../../_variables/_variables'
 import AdminLayout from '../../components/layouts/AdminLayout'
 import dataDecoder from '../../server/tools/dataDecoder'
+import MetaContentForPostsPage from "../../components/includes/MetaContentForPostsPage/MetaContentForPostsPage";
 
 const posts = props => {
     const [state, setState] = useState({
@@ -42,6 +43,7 @@ const posts = props => {
                 <div
                     className={props.identity.data.postsPageSidebar ? 'content withSidebar' : 'content withOutSidebar'}>
                     <div className="main">
+                        <MetaContentForPostsPage {...props}/>
                         <PaginationComponent
                             isActive={true}
                             currentPage={props.getPostsData.pageNo}
@@ -98,13 +100,15 @@ posts.getInitialProps = async ({pathname, query, req, res, err}) => {
         lang: query.lang || 'default'
     }
 
+    const contentData = query.content ? await getSingleMeta(query.content,domainName,true) : {}
+
     const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'home', 'footer', 'header']}, domainName, true, 'postsPage')
     const postsData = await getPosts(getPostsData, domainName, true)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     postsSource = postsData.data ? postsData.data : []
 
-    return {...settings, query, postsSource, getPostsData, pathname, widgets}
+    return {...settings, query, postsSource, getPostsData, pathname, widgets,contentData:contentData.data.meta}
 }
 
 export default withRouter(posts);

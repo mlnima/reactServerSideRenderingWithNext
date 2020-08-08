@@ -1,0 +1,33 @@
+.meta-content{
+  margin: 10px 0;
+  padding: 10px;
+  color:white;
+  background-color: #222;
+  border-radius: 12px;
+  display: flex;
+  //justify-content: center;
+  //flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
+
+
+  .arrow-meta-info{
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+  }
+
+
+
+  h1{
+
+  }
+  p{
+    padding: 10px;
+    text-align: center;
+  }
+  img{
+    width: 280px;
+
+  }
+}

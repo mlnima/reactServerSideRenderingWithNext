@@ -124,7 +124,6 @@ const customScript = props => {
 
     return (
         <AdminLayout>
-            <input placeholder='Google Analytics ID' type="text" name='googleAnalyticsID' value={contextData.siteIdentity.googleAnalyticsID} className='googleAnalyticsInput' onChange={ e => onGoogleAnalyticsSaveHandler(e) }/>
             <form className='addCustomScriptForm' onSubmit={ e => onAddHandler(e) }>
                 <input className='scriptName' name='scriptName' placeholder='Script Name' onChange={ e => onNewScriptChangeHandler(e) }/>
                 <textarea name='scriptBody' className='addScriptTextarea' placeholder='Script with out Script Tag' onChange={ e => onNewScriptChangeHandler(e) }/>

@@ -45,28 +45,52 @@ apiPostsControllers.creatPost = async (req,res)=>{
     const newPost = req.body.postData
 
     try {
-        const editedNewPost = {
-            ...newPost,
-            lastModify: Date.now(),
-            tags: newPost.tags ? await metasSaver(newPost.tags) : [],
-            categories: newPost.categories ? await metasSaver(newPost.categories) : [],
-            actors: newPost.actors ? await metasSaver(newPost.actors) : []
-        }
-        const newPostDataToSave = new postSchema(editedNewPost);
-        newPostDataToSave.save().then(savedPostData => {
-            res.json({message:'post ' + newPost.title + ' has been saved'})
-            res.end()
-        }).catch(err => {
-            res.json({message:'****error!***** ' + 'post ' + newPost.title + ' Can not be save  in the Database'})
-            if (err.code === 11000) {
-                res.status(500).send({error: 'Post with this Title already exist in the Database'})
-                // res.json({ savedPostData });
+
+        if (req.body.duplicateContent){
+            const editedNewPost = {
+                ...newPost,
+                lastModify: Date.now(),
+                tags: newPost.tags ? await metasSaver(newPost.tags) : [],
+                categories: newPost.categories ? await metasSaver(newPost.categories) : [],
+                actors: newPost.actors ? await metasSaver(newPost.actors) : []
+            }
+            const newPostDataToSave = new postSchema(editedNewPost);
+            newPostDataToSave.save().then(savedPostData => {
+                res.json({message:'post ' + newPost.title + ' has been saved'})
                 res.end()
-            } else {
+            }).catch(err => {
+                res.json({message:'****error!***** ' + 'post ' + newPost.title + ' Can not be save  in the Database'})
                 res.sendStatus(500);
                 res.end()
-            }
-        })
+            })
+        }else {
+            postSchema.find({title:req.body.postData.title}).exec().then( async posts=>{
+                if (posts.length>0){
+                    res.status(403).send({error:'title ** '+ newPost.title + ' ** already exist in the Database'})
+                    // res.json({ savedPostData });
+                    res.end()
+                }else {
+                    console.log('no duplicated find')
+                    const editedNewPost = {
+                        ...newPost,
+                        lastModify: Date.now(),
+                        tags: newPost.tags ? await metasSaver(newPost.tags) : [],
+                        categories: newPost.categories ? await metasSaver(newPost.categories) : [],
+                        actors: newPost.actors ? await metasSaver(newPost.actors) : []
+                    }
+                    const newPostDataToSave = new postSchema(editedNewPost);
+                    newPostDataToSave.save().then(savedPostData => {
+                        res.json({message:'post ' + newPost.title + ' has been saved'})
+                        res.end()
+                    }).catch(err => {
+                        res.json({message:'****error!***** ' + 'post ' + newPost.title + ' Can not be save  in the Database'})
+                        res.sendStatus(500);
+                        res.end()
+                    })
+                }
+
+            })
+        }
 
     } catch (err) {
         console.log(err)
