@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { fileUpload } from '../../../_variables/ajaxVariables'
+import {fileUpload, postThumbnailsUpload, uploadImage} from '../../../_variables/ajaxVariables'
 
 const UploadFileBtn = props => {
     const uploadInputElement = useRef(null)
@@ -8,19 +8,37 @@ const UploadFileBtn = props => {
     const onUploadHandler = e => {
         const filesData = new FormData()
         filesData.append('uploadingFile', e.target.files[0])
-        fileUpload(filesData, 'test').then(res=>{
-            // labelOutputElement.current.value =res.data.path
+        filesData.append('type',props.type)
+        uploadImage(filesData, 'test').then(res=>{
             props.setFunction(props.name,res.data.path.replace('./','/'))
-
-            // if (props.returnElement){
-            //     props.returnElement.current.value = res.data.path.replace('./','/')
-            //     // props.returnElement.current.next()
-            // }
             console.log( res.data)
         }).catch(err=>{
             console.log( err)
-            props.returnElemen.current.value  = 'Something went Wrong'
+            props.returnElement.current.value  = 'Something went Wrong'
         })
+
+
+        // if (props.type==='thumbnail'){
+        //
+        //
+        //
+        //
+        //     // postThumbnailsUpload(filesData, 'test').then(res=>{
+        //     //     props.setFunction(props.name,res.data.path.replace('./','/'))
+        //     //     console.log( res.data)
+        //     // }).catch(err=>{
+        //     //     console.log( err)
+        //     //     props.returnElement.current.value  = 'Something went Wrong'
+        //     // })
+        // }else{
+        //     fileUpload(filesData, 'test').then(res=>{
+        //         props.setFunction(props.name,res.data.path.replace('./','/'))
+        //         console.log( res.data)
+        //     }).catch(err=>{
+        //         console.log( err)
+        //         props.returnElement.current.value  = 'Something went Wrong'
+        //     })
+        // }
     }
 
     return (

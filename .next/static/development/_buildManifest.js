@@ -1,1 +1,1 @@
-self.__BUILD_MANIFEST = {"/admin/assets":["static\u002Fcss\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"]};self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()
+self.__BUILD_MANIFEST = (function(a,b){return {"/404":[a,b],"/_error":[a,b],"/post":[a,b],"/posts":[a,b]}}("static\u002Fcss\u002Fstyles.chunk.css","static\u002Fchunks\u002Fstyles.js"));self.__BUILD_MANIFEST_CB && self.__BUILD_MANIFEST_CB()

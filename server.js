@@ -261,6 +261,12 @@ app.prepare().then(() => {
     server.post('/api/v1/settings/fileManagerControllers-uploadFile', (req, res) => {
         fileManagerControllers.uploadFile(req, res)
     });
+    server.post('/api/v1/settings/fileManagerControllers-postThumbnailsUpload', (req, res) => {
+        fileManagerControllers.postThumbnailsUpload(req, res)
+    });
+    server.post('/api/v1/settings/fileManagerControllers-uploadImage', (req, res) => {
+        fileManagerControllers.uploadImage(req, res)
+    });
     //need auth
     server.post('/api/v1/settings/fileManagerControllers-userImageUpload', authMiddleware, (req, res) => {
         fileManagerControllers.userImageUpload(req, res)

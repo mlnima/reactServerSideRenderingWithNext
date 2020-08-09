@@ -229,7 +229,7 @@ const Index = props => {
                         <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
                                           activeEditingLanguage={editingData.activeEditingLanguage}
                                           onChangeHandler={onTitleDescriptionChangeHandler}/>
-                        <TextInputWithUploadBtn postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'
+                        <TextInputWithUploadBtn type='thumbnail' thumbnailsType={true} postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'
                                                 title='Main thumbnail'/>
                         <ImagePreview postData={state}/>
                         <ProductInformation

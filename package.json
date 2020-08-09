@@ -58,6 +58,7 @@
     "react-transition-group": "^1.2.1",
     "react-translated": "^2.5.0",
     "sass": "^1.26.3",
+    "sharp": "^0.25.4",
     "simple-youtube-api": "^5.2.1",
     "strip-ansi": "^6.0.0",
     "styled-jsx": "^3.2.5",

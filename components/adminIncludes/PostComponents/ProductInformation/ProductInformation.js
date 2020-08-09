@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import TextInputWithUploadBtn from '../../TextInputWithUploadBtn/TextInputWithUploadBtn'
-import {fileUpload} from '../../../../_variables/ajaxVariables'
+import {fileUpload, uploadImage} from '../../../../_variables/ajaxVariables'
 
 const ProductInformation = props => {
     const uploadInputElement = useRef(null)
@@ -56,7 +56,8 @@ const ProductInformation = props => {
     const onUploadHandler = e => {
         const filesData = new FormData()
         filesData.append('uploadingFile', e.target.files[0])
-        fileUpload(filesData, 'test').then(res => {
+        filesData.append('type','gallery')
+        uploadImage(filesData).then(res => {
             // labelOutputElement.current.value =res.data.path
             const e = {
                 target: {

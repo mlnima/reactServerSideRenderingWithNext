@@ -96,6 +96,19 @@ export const fileUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadFile', image)
 }
 
+export const postThumbnailsUpload = async (image) => {
+    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-postThumbnailsUpload', image)
+}
+
+export const uploadImage = async (image) => {
+    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadImage', image)
+}
+
+export const postProductTypeImages = async (image) => {
+    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-postProductTypeImages', image)
+}
+
+
 export const userImageUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-userImageUpload', image)
 }
