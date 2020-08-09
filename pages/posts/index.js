@@ -89,7 +89,7 @@ posts.getInitialProps = async ({pathname, query, req, res, err}) => {
         size: parseInt(query.size) || parseInt(settings.identity.data.postsCountPerPage) || 30,
         pageNo: parseInt(query.page) || 1,
         postType: query.type || 'all',
-        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations'],
+        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations','videoTrailerUrl'],
         keyword: query.keyword || '',
         author: query.author || 'all',
         status: 'published',
