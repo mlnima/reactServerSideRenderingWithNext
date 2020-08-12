@@ -65,11 +65,7 @@ const PostElement = props => {
         let dataToRender = () => {
             if (state.isHover && props.state.videoTrailerUrl) {
                 return (
-                    <video ref={videoElement} src={props.state.videoTrailerUrl} autoPlay={true} loop={true}
-                           onMouseOut={e => {
-                               isHoverHandler()
-                           }}
-                    />)
+                    <video ref={videoElement} src={props.state.videoTrailerUrl} autoPlay={true} loop={true} onMouseOut={isHoverHandler} onTouchCancel={isHoverHandler}/>)
 
             } else if (!state.isHover) {
                 return (<img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
@@ -77,9 +73,7 @@ const PostElement = props => {
                         // deletedVideoAutoRemover(props.state)
                         console.log('something wrong with image on ', props.state.title)
                     }
-                }} onMouseEnter={() =>
-                    isHoverHandler()
-                }/>)
+                }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>)
             } else {
                 return (
                     <span>{props.state.title}</span>

@@ -4,6 +4,7 @@ const body={
     apiKey:'49K0HZZ-YK64T61-PJDY8T5-NK9Q9TZ',
     username:'Admin',
     duplicateContent:false,
+    downloadImageContent:true,
     postData:{
         "title" : "this post is created by API call",
         "tags":[{type:'tags',name:'tag test from API Call'}],

@@ -7,8 +7,6 @@ const postSchema =  new Schema({
     company: String,
     description: String,
     mainThumbnail: String,
-    smallThumbnail: String,
-    largeThumbnail: String,
     images:Array,
     videoTrailerUrl: String,
     quality: {

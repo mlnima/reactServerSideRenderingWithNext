@@ -28,6 +28,7 @@ const ProfileCoverImage = props => {
         const filesData = new FormData()
         filesData.append('token', localStorage.wt)
         filesData.append('profileImage', e.target.files[0], 'cover')
+        filesData.append('type', 'cover')
         contextData.dispatchState({
             ...contextData.state,
             loading: true

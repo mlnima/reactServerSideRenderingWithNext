@@ -72,6 +72,7 @@
     "@svgr/webpack": "^5.1.0",
     "cookie-parser": "^1.4.5",
     "express-xml-bodyparser": "^0.3.0",
+    "image-downloader": "^4.0.1",
     "jsonwebtoken": "^8.5.1",
     "shelljs": "^0.8.3"
   }
