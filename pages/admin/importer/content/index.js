@@ -19,13 +19,37 @@ const importContent = props => {
                     post.status = 'draft'
                     post.author = contextData.userData._id
                     post.tags = post.tags ? post.tags.map(tag => {
-                        return {name: tag.trim(), type: 'tags'}
+                        if (tag.name && tag.type){
+                            return tag
+                        }else{
+                            return {name: tag.trim(), type: 'tags'}
+                        }
+
+
+
+
                     }) : []
                     post.categories = post.categories ? post.categories.map(category => {
-                        return {name: category.trim(), type: 'categories'}
+
+                        if (category.name && category.type){
+                            return category
+                        }else{
+                            return {name: category.trim(), type: 'categories'}
+                        }
+
+
                     }) : []
                     post.actors = post.actors ? post.actors.map(actor => {
-                        return {name: actor.trim(), type: 'actors'}
+                        if (actor.name && actor.type){
+                            return actor
+                        }else{
+                            return {name: actor.trim(), type: 'actors'}
+                        }
+
+
+
+
+
                     }) : []
                     await savePost(post, window.location.origin)
                 }

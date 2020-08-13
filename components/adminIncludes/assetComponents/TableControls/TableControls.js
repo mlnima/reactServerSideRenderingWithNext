@@ -4,6 +4,7 @@ import withRouter from 'next/dist/client/with-router'
 import AssetSearch from './AssetSearch'
 import AssetBulkActionAndAssetTypeSelector from './AssetBulkActionAndAssetTypeSelector/AssetBulkActionAndAssetTypeSelector'
 import AssetPagination from './AssetPagination'
+import AssetSize from "./AssetSize";
 
 const TableControls = props => {
     return (
@@ -12,6 +13,7 @@ const TableControls = props => {
             <AssetSearch/>
             <AssetBulkActionAndAssetTypeSelector { ...props }/>
             <AssetPagination { ...props }/>
+            <AssetSize/>
         </div>
     );
 };

@@ -18,7 +18,7 @@ const AssetStatusNavigation = props => {
     })
 
     if(props.router){
-        if (props.router.query.assetsType==='posts'){
+        if (props.router.query.assetsType==='posts'||props.router.query.assetsType==='metas'||props.router.query.assetsType==='comments'){
             return (
                 <div className='asset-page-status-navigation'>
                     { renderStatus }

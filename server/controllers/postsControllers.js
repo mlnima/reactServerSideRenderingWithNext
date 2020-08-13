@@ -116,7 +116,7 @@ postsControllers.updatePost = async (req, res) => {
 
 postsControllers.getPostsInfo = async (req, res) => {
     console.log(req.body)
-    const size = parseInt(req.body.size) > 100 ? 100 : parseInt(req.body.size)
+    const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
     const pageNo = req.body.pageNo || 1;
     let postTypeQuery = req.body.postType === 'all' ? {} : {postType: req.body.postType};
     let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
@@ -234,6 +234,41 @@ postsControllers.postsBulkAction = async (req, res) => {
     })
 };
 
+
+postsControllers.bulkAction = async (req,res)=>{
+    const type = req.body.type
+    const status = req.body.status
+    const ids = req.body.ids
+    let actionsPromise;
+
+    const targetSchema = type === 'posts' ? postSchema :
+        type === 'metas' ? metaSchema :
+        type === 'comments' ? commentSchema :
+        type === 'users' ? userSchema : null
+    if (status === 'delete'){
+        actionsPromise = ids.map(id=>{
+            return targetSchema.findByIdAndDelete(id)
+        })
+    }else{
+        actionsPromise = ids.map(id=>{
+            return targetSchema.findByIdAndUpdate(id, {$set: {status}})
+        })
+    }
+    Promise.all(actionsPromise).then(() => {
+        return res.status(200).json({
+            message: 'all done'
+        });
+    }).catch(err => {
+        return res.status(500).json({
+            message: 'Server Error'
+        });
+    })
+
+}
+
+
+
+
 postsControllers.likeDislikeView = (req, res) => {
     postSchema.findByIdAndUpdate(req.body.id, {$inc: {[req.body.type]: 1}}, {new: true}).exec();
     res.end()
@@ -242,6 +277,7 @@ postsControllers.likeDislikeView = (req, res) => {
 postsControllers.getSingleMeta = async (req,res) =>{
     metaSchema.findById(req.body.id).exec().then(meta=>{
         res.json({meta})
+        res.end()
     }).catch(err=>{
         console.log(err)
         res.error(500)
@@ -252,9 +288,10 @@ postsControllers.getSingleMeta = async (req,res) =>{
 
 
 postsControllers.getMeta = async (req, res) => {
-
     const type = req.body.type ? {type: req.body.type} : {}
-    const size = req.body.size;
+    const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
+    let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
+
     const page = req.body.page;
     console.log(req.body)
     const startWithQuery = req.body.startWith === 'any' ? {} : {name: {$regex: '^' + req.body.startWith, $options: 'i'}}
@@ -284,8 +321,8 @@ postsControllers.getMeta = async (req, res) => {
 
 
     let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
-    const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery]}).exec()
-    metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery]}).limit(size).skip(size * (page -1)).sort(sortQuery).exec().then(async metas => {
+    const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery,statusQuery]}).exec()
+    metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery,statusQuery ]}).limit(size).skip(size * (page -1)).sort(sortQuery).exec().then(async metas => {
 
         const mapMetaToGetImage = metas.map(async meta => {
             try {

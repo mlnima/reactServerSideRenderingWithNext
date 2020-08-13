@@ -8,6 +8,12 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
+    "/": [
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
@@ -26,7 +32,7 @@
       "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
-    "/admin/post": [
+    "/index": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",

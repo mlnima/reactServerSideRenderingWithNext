@@ -9,6 +9,7 @@ const metaSchema =  new Schema({
     },
     type: String,
     description: String,
+    status: String,
     imageUrl:String,
     translations:mongoose.Mixed,
     count:Number

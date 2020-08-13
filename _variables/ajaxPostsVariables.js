@@ -80,6 +80,22 @@ export const deleteMeta = async (id, domainName) => {
     return await axios.post(domainName + `/api/v1/posts/deleteMeta`, body)
 };
 
+
+
+export const bulkAction = async (domainName,type,status,ids) =>{
+    const body = {
+        type,
+        status,
+        ids,
+        token: localStorage.wt
+    };
+    return await axios.post(domainName + `/api/v1/posts/bulkAction`, body)
+}
+
+
+
+
+
 export const newComment = async (data) => {
     const body = {
         ...data,

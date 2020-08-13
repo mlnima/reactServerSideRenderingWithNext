@@ -181,6 +181,11 @@ app.prepare().then(() => {
         postsControllers.likeDislikeView(req, res)
     });
 
+    server.post('/api/v1/posts/bulkAction', (req, res) => {
+        postsControllers.bulkAction(req, res)
+    });
+
+
     //meta data handler(tags,categories...)
     server.post('/api/v1/posts/getMeta', cacheSuccesses, (req, res) => {
         postsControllers.getMeta(req, res)
