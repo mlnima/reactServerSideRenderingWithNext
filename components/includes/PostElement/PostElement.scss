@@ -206,6 +206,11 @@
 
       h3 {
         font-size: medium;
+        text-overflow: ellipsis;
+        overflow: hidden;
+        width: 320px;
+        height: 1.2em;
+        white-space: nowrap;
       }
     }
   }

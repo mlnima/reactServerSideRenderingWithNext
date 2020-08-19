@@ -2,10 +2,12 @@ import React, { useContext, useEffect, useState } from 'react';
 import Link from "next/link";
 import { AppContext } from "../../../context/AppContext";
 import { withRouter } from "next/router";
-
+import SearchInputComponent from "../widgets/SearchInputComponent/SearchInputComponent";
+import {useRouter} from "next/router";
 
 const TopBar = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
     const [ state, setState ] = useState({
         style: {}
     });
@@ -25,7 +27,7 @@ const TopBar = props => {
             return (
                 <>
                     <Link href='/admin'><a style={ state.style }>Admin Panel</a></Link>
-                    <p style={ state.style } onClick={ () => contextData.functions.clearCaches() }>Clear Caches</p>
+                    <p style={ state.style } onClick={ () => contextData.functions.clearCaches().then(()=>router.push('/'))}>Clear Caches</p>
                 </>
             )
         } else return null
@@ -66,6 +68,14 @@ const TopBar = props => {
         } else return null
     }
 
+
+    // const SearchBar = ()=>{
+    //     if (contextData.siteIdentity.searchBarInTopBar){
+    //         return (
+    //             <SearchInputComponent/>
+    //         )
+    //     }else return null
+    // }
     // if (contextData.userData.username) {
     //     if (contextData.userData.role === 'administrator') {
     //         return (
@@ -93,13 +103,17 @@ const TopBar = props => {
     //     );
     // }
 
-    return (
-        <div className='TopBar' style={ state.style }>
-            <AdminItem/>
-            <LoggedInItems/>
-            <LoggedOutItems/>
-        </div>
-    )
+    if (contextData.siteIdentity.topBarVisibility){
+        return (
+            <div className='TopBar' style={ state.style }>
+                <AdminItem/>
+                <LoggedInItems/>
+                <LoggedOutItems/>
+                {/*<SearchBar/>*/}
+            </div>
+        )
+    }else return null
+
 };
 
 export default withRouter(TopBar);

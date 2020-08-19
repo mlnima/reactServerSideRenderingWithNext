@@ -2,9 +2,11 @@ import React, {useContext, useState, useEffect} from 'react';
 import Link from "next/link";
 import {AppContext} from "../../../context/AppContext";
 import {getLanguageQuery} from "../../../_variables/_variables";
+import {useRouter} from "next/router";
 
 const Logo = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
     const [state, setState] = useState({
         logoText: 'Logo',
         headLine: 'Head Line',
@@ -21,11 +23,13 @@ const Logo = props => {
 
             logoTextStyle: {
                 color: props.logoTextColor || 'white',
-                fontSize: props.logoTextFontSize + 'px' || '50px'
+                fontSize: props.logoTextFontSize + 'px' || '50px',
+
             },
             headLineStyle: {
                 color: props.logoHeadLineColor || 'white',
-                fontSize: props.logoHeadLineFontSize + 'px' || '16px'
+                fontSize: props.logoHeadLineFontSize + 'px' || '16px',
+                fontWeight: props.logoHeadLineFontWeight  || 'initial'
             },
 
 
@@ -42,6 +46,19 @@ const Logo = props => {
         } else return null
     }
 
+    const RenderHeadLine = () =>{
+        const value =   props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine
+        if (router.pathname === '/'){
+            return(
+                <h1 style={state.headLineStyle}>{value}</h1>
+            )
+        }else{
+            return (
+                <p style={state.headLineStyle}>{value}</p>
+            )
+        }
+    }
+
     return (
         <Link href='/'>
             <a className='Logo'>
@@ -49,9 +66,10 @@ const Logo = props => {
                 <span style={state.logoTextStyle} className='logoText'>{
                     props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].LogoText || props.LogoText : props.LogoText : props.LogoText
                 }</span>
-                <p style={state.headLineStyle} className='headLine'>{
-                    props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine
-                }</p>
+                <RenderHeadLine/>
+                {/*<p style={state.headLineStyle} className='headLine'>{*/}
+                {/*    props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine*/}
+                {/*}</p>*/}
             </a>
         </Link>
     );

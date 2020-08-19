@@ -57,7 +57,7 @@ Home.getInitialProps = async ({req}) => {
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header']}, domainName, true, 'homePage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header','dynamicTopBar','dynamicNavigation']}, domainName, true, 'homePage')
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'homePage')
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

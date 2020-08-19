@@ -34,6 +34,8 @@ const identityData = {
         postsPageSidebar: true,
         topBarAuthBtn:true,
         anyoneCanRegister:true,
+        defaultSiteLanguage:'en',
+        topBarVisibility:true,
     }
 }
 const navigationData = {
@@ -56,7 +58,7 @@ const navigationData = {
         {
             "title": "Categories",
             "url": "/meta",
-            "as": "/tags",
+            "as": "/categories",
             "query": [
                 {
                     "type": "categories"

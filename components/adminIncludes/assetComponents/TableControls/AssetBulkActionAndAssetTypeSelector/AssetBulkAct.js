@@ -31,6 +31,7 @@ const AssetBulkAct = props => {
                         props.setSelectedItems([])
                         reGetData()
                     })
+                    break
                 default:
                     break
             }

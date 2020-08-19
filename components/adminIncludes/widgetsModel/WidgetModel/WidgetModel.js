@@ -313,7 +313,7 @@ const WidgetModel = props => {
                             <TextInputFieldForWidget element='input' inputTitle='Logo Text Font Size :' name='logoTextFontSize' type='number' value={widgetData.data.logoTextFontSize} classNameValue='logoTextFontSize' placeHolder='Logo Text Font Size' onChangeHandler={onChangeHandler} />
                         </div>
 
-                        <TextInputFieldForWidget element='input' inputTitle='Under Logo Headline Text :' name='logoTextColor' type='text' value={widgetData.data.logoTextColor} classNameValue='logoTextColor' placeHolder='Under Logo Headline Text' onChangeHandler={onChangeHandler} />
+                        {/*<TextInputFieldForWidget element='input' inputTitle='Under Logo Headline Text :' name='logoTextColor' type='text' value={widgetData.data.logoTextColor} classNameValue='logoTextColor' placeHolder='Under Logo Headline Text' onChangeHandler={onChangeHandler} />*/}
 
 
                         <p>Under Logo Headline Text</p>
@@ -330,6 +330,7 @@ const WidgetModel = props => {
                         <div className='color-section-widget'>
                             <TextInputFieldForWidget element='input' inputTitle='Head Line Color :' name='logoHeadLineColor' type='text' value={widgetData.data.logoHeadLineColor} classNameValue='logoHeadLineColor' placeHolder='Head Line Color' onChangeHandler={onChangeHandler} />
                             <TextInputFieldForWidget element='input' inputTitle='Head Line Font Size :' name='logoHeadLineFontSize' type='number' value={widgetData.data.logoHeadLineFontSize} classNameValue='logoHeadLineFontSize' placeHolder='Head Line Font Size' onChangeHandler={onChangeHandler} />
+                            <TextInputFieldForWidget element='input' inputTitle='Head Line Font Weight:' name='logoHeadLineFontWeight'  value={widgetData.data.logoHeadLineFontWeight} classNameValue='logoHeadLineFontWeight' placeHolder='Head Line Font Weight' onChangeHandler={onChangeHandler} />
                         </div>
                     </>
                 )

@@ -23,7 +23,7 @@ const PostElement = props => {
         extraClassName: '',
         queries: {},
         infoOnPostElementStyle: {},
-        titleElementStyle:{}
+        titleElementStyle: {}
     });
 
     useEffect(() => {
@@ -32,23 +32,24 @@ const PostElement = props => {
             extraClassName: props.viewType ? props.viewType : '',
             queries: {...getLanguageQueryFromWindowLocationSearch()}
         })
+
     }, [props]);
 
     useEffect(() => {
-        const titleTextAlign = props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title ?contextData.state.activeLanguage === 'fa' || contextData.state.activeLanguage === 'ar' ? 'right':'left':'left' : 'left' : 'left'
+        const titleTextAlign = props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title ? contextData.state.activeLanguage === 'fa' || contextData.state.activeLanguage === 'ar' ? 'right' : 'left' : 'left' : 'left' : 'left'
         setState({
             ...state,
-            infoOnPostElementStyle:{
+            infoOnPostElementStyle: {
                 ...state.infoOnPostElementStyle,
                 color: contextData.siteDesign.postElementOnImageTextColor || 'white',
                 backgroundColor: contextData.siteDesign.postElementOnImageTextBackgroundColor || 'rgba(0,0,0,0.5)'
 
             },
-            titleElementStyle:{
+            titleElementStyle: {
                 ...state.titleElementStyle,
                 color: contextData.siteDesign.postElementTitleTextColor || 'white',
                 backgroundColor: contextData.siteDesign.postElementBackgroundColor || 'transparent',
-                textAlign:titleTextAlign
+                textAlign: titleTextAlign
             }
 
         })
@@ -61,6 +62,7 @@ const PostElement = props => {
         }
     };
 
+
     const ImageContent = () => {
         let dataToRender = () => {
             if (state.isHover && props.state.videoTrailerUrl) {
@@ -68,7 +70,7 @@ const PostElement = props => {
                     <video ref={videoElement} src={props.state.videoTrailerUrl} autoPlay={true} loop={true} onMouseOut={isHoverHandler} onTouchCancel={isHoverHandler}/>)
 
             } else if (!state.isHover) {
-                return (<img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
+                return (<img src={props.state.mainThumbnail } alt={props.state.title} onError={err => {
                     if (!props.state.mainThumbnail) {
                         // deletedVideoAutoRemover(props.state)
                         console.log('something wrong with image on ', props.state.title)
@@ -104,7 +106,7 @@ const PostElement = props => {
                 case 'video':
                     return (
                         <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
-                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo' />
+                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
                             <span className='view-count value-next-icon'>{props.state.views}</span>
                         </span>
                     )
@@ -112,7 +114,7 @@ const PostElement = props => {
                     return (
                         <span ref={bottomRight} className='bottom-right' style={state.infoOnPostElementStyle}>
 
-                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo' />
+                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
 
                            <span className='view-count value-next-icon'> {props.state.views}</span>
 
@@ -138,7 +140,8 @@ const PostElement = props => {
                 case 'product':
                     return (
                         <span ref={bottomRight} className='bottom-left' style={state.infoOnPostElementStyle}>
-                             <FontAwesomeIcon icon={props.state.currency === 'Usd' ? faDollarSign : faEuroSign} className='post-element-info-logo' color={contextData.siteDesign.postElementOnImageTextColor || 'white'}/>
+                             <FontAwesomeIcon icon={props.state.currency === 'Usd' ? faDollarSign : faEuroSign} className='post-element-info-logo'
+                                              color={contextData.siteDesign.postElementOnImageTextColor || 'white'}/>
                                     <span className='value-next-icon'>
                                         {props.state.price}
                                     </span>

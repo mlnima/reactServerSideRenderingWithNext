@@ -293,7 +293,7 @@ postsControllers.getMeta = async (req, res) => {
     let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
 
     const page = req.body.page;
-    console.log(req.body)
+    // console.log(req.body)
     const startWithQuery = req.body.startWith === 'any' ? {} : {name: {$regex: '^' + req.body.startWith, $options: 'i'}}
     let searchQuery = req.body.keyword === '' ? {} : {
         $or: [

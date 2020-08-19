@@ -8,6 +8,8 @@ import '../../styles/global.scss'
 import {initGA, logPageView} from '../../_variables/_variables'
 
 import {AppContext} from "../../context/AppContext";
+import DynamicTopBar from "../includes/DynamicTopBar/DynamicTopBar";
+import DynamicNavigation from "../includes/DynamicNavigation/DynamicNavigation";
 // import '../../styles/styles.scss'
 
 const AppLayout = props => {
@@ -23,8 +25,11 @@ const AppLayout = props => {
     return (
         <>
             <TopBar/>
+            <DynamicTopBar/>
+
             <Header/>
             <Navigation/>
+            <DynamicNavigation/>
             <Loading/>
             <AlertBox/>
             <div className="App">
