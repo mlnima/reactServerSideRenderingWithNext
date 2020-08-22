@@ -72,7 +72,15 @@ apiPostsControllers.creatPost = async (req, res) => {
                 res.end()
             })
         } else {
-            postSchema.find({title: req.body.postData.title}).exec().then(async posts => {
+            postSchema.find(
+                {
+                    $or: [{title: req.body.postData.title},
+                        {source: req.body.postData.source},
+                        {downloadLink: req.body.postData.downloadLink},
+                        {description: req.body.postData.description},
+                        {videoEmbedCode: req.body.postData.videoEmbedCode},
+                    ]
+                }).exec().then(async posts => {
                 if (posts.length > 0) {
                     res.status(403).send({error: 'title ** ' + newPost.title + ' ** already exist in the Database'})
                     // res.json({ savedPostData });
@@ -85,7 +93,7 @@ apiPostsControllers.creatPost = async (req, res) => {
                         const month = today.getMonth() + 1;
                         const directoryPath = './static/uploads/image/' + year + '/' + month + '/';
                         const filePathOriginalSize = directoryPath + 'originalSize_' + newPost.title + Date.now() + '.jpg'
-                        const filePath = directoryPath  + newPost.title + Date.now() + '.jpg'
+                        const filePath = directoryPath + newPost.title + Date.now() + '.jpg'
                         const options = {
                             url: newPost.mainThumbnail,
                             dest: filePathOriginalSize               // will be saved to /path/to/dest/image.jpg
@@ -99,7 +107,7 @@ apiPostsControllers.creatPost = async (req, res) => {
                                 // console.log('Saved to', filename)
                                 sharp(filePathOriginalSize).resize(320, 180).toFile(filePath, async (err, info) => {
                                     if (err) {
-                                        console.log('sharp Error',err)
+                                        console.log('sharp Error', err)
                                         res.sendStatus(500);
                                     } else {
                                         fsExtra.remove(filePathOriginalSize)
@@ -109,7 +117,7 @@ apiPostsControllers.creatPost = async (req, res) => {
                                             tags: newPost.tags ? await metasSaver(newPost.tags) : [],
                                             categories: newPost.categories ? await metasSaver(newPost.categories) : [],
                                             actors: newPost.actors ? await metasSaver(newPost.actors) : [],
-                                            mainThumbnail: filePath.replace('./static/','/static/')
+                                            mainThumbnail: filePath.replace('./static/', '/static/')
                                         }
                                         const newPostDataToSave = new postSchema(editedNewPost);
                                         newPostDataToSave.save().then(savedPostData => {
