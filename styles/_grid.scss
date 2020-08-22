@@ -20,13 +20,14 @@
 
 @mixin postsContent {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(170px, 1fr));
+  //grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  grid-template-columns: 1fr;
   grid-gap: 10px;
 
-  @media only screen and (max-width: 321px) {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-
-  }
+  //@media only screen and (max-width: 321px) {
+  //  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
+  //
+  //}
 
   @media only screen and (min-width: 1024px) {
     @include videoContentGridDesktop;
@@ -38,9 +39,7 @@
   grid-gap: 10px;
   margin: auto;
   display: grid;
-  //@media only screen and (max-width: 380px) {
-  //  grid-template-columns: repeat(1,minmax(0,1fr));
-  //}
+
   @media only screen and (min-width: 768px) {
     grid-template-columns: repeat(2, minmax(0, 1fr));
   }

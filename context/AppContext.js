@@ -1,52 +1,67 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import jwtDecode from "jwt-decode";
 import jwt from 'jsonwebtoken';
 import axios from "axios";
 import dataDecoder from '../server/tools/dataDecoder'
 import dataEncoder from '../server/tools/dataEncoder'
 
-import { withRouter } from "next/router";
+import {withRouter} from "next/router";
 
 export const AppContext = React.createContext();
 
 const AppProvider = props => {
 
-    const [ state, dispatchState ] = useState({
+    const [state, dispatchState] = useState({
         loading: false,
         videoPreviewID: '',
-        activeLanguage:'default'
+        activeLanguage: 'default',
+        navigationOpenStatus: false,
+        isMobile: true,
     });
-    const [ alert, dispatchAlert ] = useState({
+
+
+    useEffect(() => {
+        window.innerWidth > 768?
+            dispatchState({
+                ...state,
+                isMobile: false
+            }):
+            dispatchState({
+                ...state,
+                isMobile: true
+            })
+    }, [props]);
+
+    const [alert, dispatchAlert] = useState({
         active: false,
         alertMessage: '',
         type: ''
     })
 
-    // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
-    const [ siteIdentity, dispatchSiteIdentity ] = useState({
+    const [siteIdentity, dispatchSiteIdentity] = useState({
         title: 'site title',
         themeColor: '#000',
         description: 'site description',
         keywords: [],
         customScripts: []
     });
-    const [ siteDesign, dispatchSiteDesign ] = useState({});
+    const [siteDesign, dispatchSiteDesign] = useState({});
 
-    const [ settings, dispatchSettings ] = useState({
+    const [settings, dispatchSettings] = useState({
         adminPanelSideBar: false,
         textEditorCurrentFile: '',
         textEditorEditMode: false
     });
 
-    const [ galleryData, setGalleryData ] = useState({
+    const [galleryData, setGalleryData] = useState({
         path: './static'
     })
 
-    const [ userData, dispatchUserData ] = useState({});
+    const [userData, dispatchUserData] = useState({});
 
-    const [ navigationData, dispatchNavigationData ] = useState([]);
+    const [navigationData, dispatchNavigationData] = useState([]);
 
-    const [ editingPostData, dispatchEditingPostData ] = useState({
+    const [editingPostData, dispatchEditingPostData] = useState({
         categories: [],
         actors: [],
         tags: [],
@@ -64,9 +79,9 @@ const AppProvider = props => {
         sourceSite: '',
         views: 0,
     });
-    const [ adminPosts, dispatchAdminPosts ] = useState([]);
+    const [adminPosts, dispatchAdminPosts] = useState([]);
 
-    const [ adminPostsData, dispatchAdminPostsData ] = useState({
+    const [adminPostsData, dispatchAdminPostsData] = useState({
         pageNo: 1,
         size: 30,
         totalPosts: 0,
@@ -74,28 +89,16 @@ const AppProvider = props => {
         keyword: '',
         status: 'all',
         author: 'all',
-        fields: [ 'author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories' ],
+        fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
         checkedPosts: [],
     });
-    const [ widgetsSettings, dispatchWidgetsSettings ] = useState({
+    const [widgetsSettings, dispatchWidgetsSettings] = useState({
         widgets: [],
     });
 
-    // const [ adminWidgets, dispatchAdminWidgets ] = useState({
-    //     home:[],
-    //     homePageSidebar:[],
-    //     postPageSidebar:[],
-    //     postsPageSidebar:[],
-    //     footer:[],
-    //     tagsPageSidebar:[],
-    //     categoriesPageSidebar:[],
-    //     actorsPageSidebar:[],
-    //     header:[]
-    // });
+    const [siteWidgets, setSiteWidgets] = useState([])
 
-    const [ siteWidgets, setSiteWidgets ] = useState([])
-
-    const [ videoPostsDataForClient, dispatchVideoPostsDataForClient ] = useState({
+    const [videoPostsDataForClient, dispatchVideoPostsDataForClient] = useState({
         pageNo: 1,
         size: 12,
         totalPosts: 0,
@@ -103,15 +106,15 @@ const AppProvider = props => {
         keyword: '',
         status: 'all',
         author: 'all',
-        fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration' ],
+        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
         checkedPosts: [],
     });
 
-    const [ functions, dispatchFunctions ] = useState({
+    const [functions, dispatchFunctions] = useState({
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
-                await axios.post('/api/v1/users/getUserInfo', { token: localStorage.wt }).then(res => {
-                    dispatchUserData({ ...userData, ...dataDecoder(res.data).userData });
+                await axios.post('/api/v1/users/getUserInfo', {token: localStorage.wt}).then(res => {
+                    dispatchUserData({...userData, ...dataDecoder(res.data).userData});
                 }).catch(err => {
                     console.log(err);
                 })
@@ -162,7 +165,7 @@ const AppProvider = props => {
                 [name]: value
             }))
         },
-        bulkActionPost: async(ids, status) => {
+        bulkActionPost: async (ids, status) => {
             dispatchState({
                 ...state,
                 loading: true
@@ -218,7 +221,7 @@ const AppProvider = props => {
     return (
         <div>
             <AppContext.Provider
-                value={ {
+                value={{
                     state,
                     dispatchState,
                     settings,
@@ -248,9 +251,9 @@ const AppProvider = props => {
                     setSiteWidgets,
                     // adminWidgets,
                     // dispatchAdminWidgets
-                } }>
+                }}>
 
-                { props.children }
+                {props.children}
             </AppContext.Provider>
         </div>
     )

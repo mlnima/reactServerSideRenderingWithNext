@@ -81,9 +81,6 @@ const SiteSettingSetter = props => {
     })
 
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
 
 
     return (

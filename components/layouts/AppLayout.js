@@ -6,11 +6,7 @@ import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
 import '../../styles/global.scss'
 import {initGA, logPageView} from '../../_variables/_variables'
-
-import {AppContext} from "../../context/AppContext";
-import DynamicTopBar from "../includes/DynamicTopBar/DynamicTopBar";
-import DynamicNavigation from "../includes/DynamicNavigation/DynamicNavigation";
-// import '../../styles/styles.scss'
+import AdminTools from "../includes/AdminTools/AdminTools";
 
 const AppLayout = props => {
 
@@ -22,19 +18,18 @@ const AppLayout = props => {
         logPageView()
     }, []);
 
+
     return (
         <>
             <TopBar/>
-            <DynamicTopBar/>
-
             <Header/>
             <Navigation/>
-            <DynamicNavigation/>
             <Loading/>
             <AlertBox/>
             <div className="App">
                 {props.children}
             </div>
+            <AdminTools/>
         </>
     );
 

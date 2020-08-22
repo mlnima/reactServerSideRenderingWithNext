@@ -12,7 +12,7 @@ const Logo = props => {
         headLine: 'Head Line',
         logoTextStyle: {},
         headLineStyle: {},
-        queries:{}
+        queries: {}
     });
 
     useEffect(() => {
@@ -29,7 +29,7 @@ const Logo = props => {
             headLineStyle: {
                 color: props.logoHeadLineColor || 'white',
                 fontSize: props.logoHeadLineFontSize + 'px' || '16px',
-                fontWeight: props.logoHeadLineFontWeight  || 'initial'
+                fontWeight: props.logoHeadLineFontWeight || 'initial'
             },
 
 
@@ -37,8 +37,7 @@ const Logo = props => {
     }, [contextData.siteIdentity]);
 
 
-
-    const RenderLogo = () => {
+    const RenderLogoImage = () => {
         if (props.LogoUrl) {
             return (
                 <img src={props.LogoUrl}/>
@@ -46,30 +45,38 @@ const Logo = props => {
         } else return null
     }
 
-    const RenderHeadLine = () =>{
-        const value =   props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine
-        if (router.pathname === '/'){
-            return(
-                <h1 style={state.headLineStyle}>{value}</h1>
-            )
-        }else{
+    const RenderLogoText = () => {
+        const value = props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].LogoText || props.LogoText : props.LogoText : props.LogoText
+        if (value) {
             return (
-                <p style={state.headLineStyle}>{value}</p>
+                <span style={state.logoTextStyle} className='logo-text'>{value}</span>
             )
-        }
+        } else return null
+    }
+
+
+    const RenderHeadLine = () => {
+        const value = props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine
+        if (value) {
+            if (router.pathname === '/') {
+                return (
+                    <h1 style={state.headLineStyle}>{value}</h1>
+                )
+            } else {
+                return (
+                    <p style={state.headLineStyle}>{value}</p>
+                )
+            }
+        } else return null
+
     }
 
     return (
         <Link href='/'>
             <a className='Logo'>
-                <RenderLogo/>
-                <span style={state.logoTextStyle} className='logoText'>{
-                    props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].LogoText || props.LogoText : props.LogoText : props.LogoText
-                }</span>
+                <RenderLogoImage/>
+                <RenderLogoText/>
                 <RenderHeadLine/>
-                {/*<p style={state.headLineStyle} className='headLine'>{*/}
-                {/*    props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine*/}
-                {/*}</p>*/}
             </a>
         </Link>
     );

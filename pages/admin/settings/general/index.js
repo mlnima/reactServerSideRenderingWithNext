@@ -11,27 +11,7 @@ const settings = props => {
     const [state, setState] = useState({
         translationLanguages: [],
         keywords:  [],
-        // siteMode: props.identity.siteMode || 'tube',
-        // siteProtocol: props.identity.siteProtocol || 'http',
-        // defaultPostType: props.identity.defaultPostType || 'video',
-        // defaultPostRating: props.identity.defaultPostRating || 'enable',
-        // title: props.identity.title || 'website title',
-        // themeColor: props.identity.themeColor || '#000',
-        // description: props.identity.description || 'website description',
-        // homePagePagination: props.identity.homePagePagination || false,
-        // postsCountPerPage: props.identity.postsCountPerPage || 30,
-        // homePageSidebar: props.identity.homePageSidebar || false,
-        // postPageSidebar: props.identity.postPageSidebar || false,
-        // postsPageSidebar: props.identity.postsPageSidebar || false,
-        // metaPageSidebar: props.identity.postsPageSidebar || false,
-        // membership: props.identity.membership || false,
-        // allowUserToPost: props.identity.allowUserToPost || false,
-        // topBarAuthBtn: props.identity.topBarAuthBtn || true,
-        // anyoneCanRegister: props.identity.anyoneCanRegister || true,
-        // defaultSiteLanguage: props.identity.defaultSiteLanguage || 'en',
-        // topBarVisibility: props.identity.topBarVisibility || true,
-        // searchBarInTopBar: props.identity.searchBarInTopBar || false,
-        // searchBarInNavigationMenu: props.identity.searchBarInNavigationMenu || false,
+
     });
 
     useEffect(() => {
@@ -40,29 +20,7 @@ const settings = props => {
         setState({
             ...state,
             ...props.identity
-            // siteMode: props.identity.siteMode || 'tube',
-            // siteProtocol: props.identity.siteProtocol || 'http',
-            // defaultPostType: props.identity.defaultPostType || 'video',
-            // defaultPostRating: props.identity.defaultPostRating || 'enable',
-            // title: props.identity.title || 'website title',
-            // themeColor: props.identity.themeColor || '#000',
-            // description: props.identity.description || 'website description',
-            // keywords: props.identity.keywords || [],
-            // homePagePagination: props.identity.homePagePagination || false,
-            // postsCountPerPage: props.identity.postsCountPerPage || 30,
-            // homePageSidebar: props.identity.homePageSidebar || false,
-            // postPageSidebar: props.identity.postPageSidebar || false,
-            // postsPageSidebar: props.identity.postsPageSidebar || false,
-            // metaPageSidebar: props.identity.postsPageSidebar || false,
-            // membership: props.identity.membership || false,
-            // allowUserToPost: props.identity.allowUserToPost || false,
-            // translationLanguages: props.identity.translationLanguages || [],
-            // topBarAuthBtn: props.identity.topBarAuthBtn || true,
-            // anyoneCanRegister: props.identity.anyoneCanRegister || true,
-            // defaultSiteLanguage: props.identity.defaultSiteLanguage || 'en',
-            // topBarVisibility: props.identity.topBarVisibility ? props.identity.topBarVisibility : true,
-            // searchBarInTopBar: props.identity.searchBarInTopBar || false,
-            // searchBarInNavigationMenu: props.identity.searchBarInNavigationMenu || false,
+
         })
 
     }, [props]);
@@ -212,21 +170,22 @@ const settings = props => {
                         </div>
 
 
-                        <div className="site-settings-form-section topBarVisibility">
+                        <div className="site-settings-form-section searchBarInTopBar">
                             <p>SearchBar In TopBar:</p>
                             <select name='searchBarInTopBar' value={state.searchBarInTopBar} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>
                         </div>
-                        <div className="site-settings-form-section topBarVisibility">
-                            <p>SearchBar In NavigationMenu:</p>
-                            <select name='searchBarInNavigationMenu' value={state.searchBarInNavigationMenu} onChange={e => onChangeHandler(e)}>
+
+                        <div className="site-settings-form-section imageLogoInTopBar">
+                            <p>Image Logo In Top Bar (max 40px height):</p>
+                            <select name='imageLogoInTopBar' value={state.imageLogoInTopBar || false} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>
+                            <input value={state.imageLogoInTopBarUrl} name='imageLogoInTopBarUrl' placeholder='imageLogoInTopBarUrl' onChange={e => onChangeHandler(e)}/>
                         </div>
-
 
                         <div className="site-settings-form-section membership">
                             <p>Membership:</p>

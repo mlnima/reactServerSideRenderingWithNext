@@ -5,6 +5,9 @@ import withRouter from "next/dist/client/with-router";
 import {pathAndAsPathGenerator} from '../../../../_variables/_variables'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
+import NavigationMobileButton from "./NavigationMobileButton/NavigationMobileButton";
+import LoggedInItemsForMenu from "../../LoggedInItemsForMenu/LoggedInItemsForMenu";
+import LoggedOutItemsMenu from "../../LoggedOutItemsMenu/LoggedOutItemsMenu";
 
 const Navigation = props => {
     const contextData = useContext(AppContext);
@@ -17,11 +20,6 @@ const Navigation = props => {
         queries: {},
         asUrlWithLang: ''
     });
-
-    const [navigationBtnData,setNavigationBtnData] = useState({
-        style:{}
-    })
-
 
 
     useEffect(() => {
@@ -39,26 +37,21 @@ const Navigation = props => {
         if (window.innerWidth >= 768) {
             setNavigationData({
                 ...navigationData,
-                isOpen: true,
-                style:{
+                style: {
                     ...navigationData.style,
-                    display:'flex'}
+                    display: 'flex'
+                }
             });
-        }else {
+            contextData.dispatchState({
+                ...contextData.state,
+                navigationOpenStatus: true
+            })
+        } else {
 
         }
     }, []);
 
-    //
-    // useEffect(() => {
-    //     if (navigation.current) {
-    //         if (navigationData.isOpen) {
-    //             navigationMobileBtn.current.style.transform = 'rotate(-90deg)'
-    //         } else if (!navigationData.isOpen){
-    //             navigationMobileBtn.current.style.transform = 'rotate(0deg)'
-    //         }
-    //     }
-    // }, [navigationData.isOpen]);
+
 
     useEffect(() => {
         setNavigationData(navigationData => ({
@@ -67,50 +60,27 @@ const Navigation = props => {
         }))
     }, [contextData.navigationData]);
 
-
-
-
-    const onNavigationMobileBtnClickHandler = () => {
-
-        if (navigationData.isOpen){
+    useEffect(() => {
+        if (contextData.state.navigationOpenStatus) {
             setNavigationData({
                 ...navigationData,
-                isOpen: false,
-                style:{
-                    ...navigationData.style,
-                    display:'none'
-                }
-            })
-
-            setNavigationBtnData({
-                ...navigationBtnData,
                 style: {
-                    ...navigationBtnData,
-                    transform:'rotate(0deg)'
+                    ...navigationData.style,
+                    display: 'flex'
                 }
             })
-
-
-
-        }else {
+        } else {
             setNavigationData({
                 ...navigationData,
-                isOpen: true,
-                style:{
-                    ...navigationData.style,
-                    display:'flex'}
-            })
-            setNavigationBtnData({
-                ...navigationBtnData,
                 style: {
-                    ...navigationBtnData,
-                    transform:'rotate(-90deg)'
+                    ...navigationData.style,
+                    display: 'none'
                 }
             })
-
         }
+    }, [contextData.state.navigationOpenStatus]);
 
-    };
+
 
 
 
@@ -118,7 +88,7 @@ const Navigation = props => {
 
         const queryArrayToObject = (arr) => {
             let returningData = {}
-            if (arr){
+            if (arr) {
                 arr.forEach(arrItem => {
                     returningData[Object.keys(arrItem)[0]] = Object.values(arrItem)[0]
                 })
@@ -136,24 +106,22 @@ const Navigation = props => {
                 href={{
                     pathname: pathData.pathname,
                     query: queryArrayToObject(item.query),
-                }}><a style={navigationData.style}>{
+                }}><a style={navigationData.style} className='navigation-link'>{
                 item.translations ? item.translations[contextData.state.activeLanguage] ? item.translations[contextData.state.activeLanguage].title || item.title : item.title : item.title
             }</a></Link>
         )
     })
 
-
     return (
-        <>
-            <button style={navigationBtnData.style} ref={navigationMobileBtn} className='navigationMobileBtn'
-                    onClick={onNavigationMobileBtnClickHandler}>
-                <FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo'  />
-                {/*<img className='fontawesomeSvgMedium' src={BarsSvg} alt=""/>*/}
-            </button>
-            <div ref={navigation} className='Navigation' style={navigationData.style}>
-                {renderNavigationItems}
+            <div ref={navigation} className='navigation' style={navigationData.style}>
+                <LoggedInItemsForMenu visible={contextData.state.isMobile}/>
+                <LoggedOutItemsMenu visible={contextData.state.isMobile}/>
+                <div className="navigation-links">
+                    {renderNavigationItems}
+                </div>
+
+
             </div>
-        </>
     );
 };
 

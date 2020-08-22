@@ -19,7 +19,7 @@ const Header = props => {
     }, [contextData.siteDesign]);
 
     return (
-        <div className='Header' style={state.style}>
+        <div className='header' style={state.style}>
             <WidgetsRenderer widgets={ contextData.siteWidgets } position='header'/>
         </div>
     );

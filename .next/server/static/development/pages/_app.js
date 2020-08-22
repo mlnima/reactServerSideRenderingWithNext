@@ -167,8 +167,17 @@ const AppProvider = props => {
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     loading: false,
     videoPreviewID: '',
-    activeLanguage: 'default'
+    activeLanguage: 'default',
+    navigationOpenStatus: false,
+    isMobile: true
   });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    window.innerWidth > 768 ? dispatchState(_objectSpread({}, state, {
+      isMobile: false
+    })) : dispatchState(_objectSpread({}, state, {
+      isMobile: true
+    }));
+  }, [props]);
   const {
     0: alert,
     1: dispatchAlert
@@ -176,8 +185,7 @@ const AppProvider = props => {
     active: false,
     alertMessage: '',
     type: ''
-  }); // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
-
+  });
   const {
     0: siteIdentity,
     1: dispatchSiteIdentity
@@ -258,18 +266,7 @@ const AppProvider = props => {
     1: dispatchWidgetsSettings
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     widgets: []
-  }); // const [ adminWidgets, dispatchAdminWidgets ] = useState({
-  //     home:[],
-  //     homePageSidebar:[],
-  //     postPageSidebar:[],
-  //     postsPageSidebar:[],
-  //     footer:[],
-  //     tagsPageSidebar:[],
-  //     categoriesPageSidebar:[],
-  //     actorsPageSidebar:[],
-  //     header:[]
-  // });
-
+  });
   const {
     0: siteWidgets,
     1: setSiteWidgets

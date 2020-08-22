@@ -71,10 +71,20 @@ var AppProvider = function AppProvider(props) {
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     loading: false,
     videoPreviewID: '',
-    activeLanguage: 'default'
+    activeLanguage: 'default',
+    navigationOpenStatus: false,
+    isMobile: true
   }),
       state = _useState[0],
       dispatchState = _useState[1];
+
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    window.innerWidth > 768 ? dispatchState(_objectSpread({}, state, {
+      isMobile: false
+    })) : dispatchState(_objectSpread({}, state, {
+      isMobile: true
+    }));
+  }, [props]);
 
   var _useState2 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     active: false,
@@ -82,8 +92,7 @@ var AppProvider = function AppProvider(props) {
     type: ''
   }),
       alert = _useState2[0],
-      dispatchAlert = _useState2[1]; // const[absolutePath,dispatchAbsolutePath]=useState('http://localhost:3000/')
-
+      dispatchAlert = _useState2[1];
 
   var _useState3 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     title: 'site title',
@@ -164,18 +173,7 @@ var AppProvider = function AppProvider(props) {
     widgets: []
   }),
       widgetsSettings = _useState12[0],
-      dispatchWidgetsSettings = _useState12[1]; // const [ adminWidgets, dispatchAdminWidgets ] = useState({
-  //     home:[],
-  //     homePageSidebar:[],
-  //     postPageSidebar:[],
-  //     postsPageSidebar:[],
-  //     footer:[],
-  //     tagsPageSidebar:[],
-  //     categoriesPageSidebar:[],
-  //     actorsPageSidebar:[],
-  //     header:[]
-  // });
-
+      dispatchWidgetsSettings = _useState12[1];
 
   var _useState13 = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])([]),
       siteWidgets = _useState13[0],

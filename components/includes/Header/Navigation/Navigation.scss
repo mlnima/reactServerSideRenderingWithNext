@@ -3,7 +3,7 @@
 
 .navigationMobileBtn {
   display: initial;
-  position: absolute;
+  //position: absolute;
   top:50px ;
   right: 20px;
   transition: .5s;
@@ -15,35 +15,58 @@
   }
 }
 
-.Navigation {
+.navigation {
   display: none;
-  justify-content: flex-start;
-  background-color: $dark80;
+  justify-self: start;
   flex-direction: column;
   position: absolute;
-  top: 100px;
+  top:48px;
+  width: 80%;
   transition: 1s;
-  //right: 50px;
-  width: 100%;
   z-index: 2;
   animation: navigationMobile .5s ;
-  a {
-    text-decoration: none;
-    color: white;
-    padding:  10px;
-    box-sizing: border-box;
-    //margin: 3px 10px;
+
+  .navigation-links{
+    a {
+      text-decoration: none;
+      color: white;
+      padding:  10px;
+      box-sizing: border-box;
+      margin: 3px 10px;
+      border-bottom: $dark90 solid 1px;
+
+    }
+  }
+
+  .logged-in-items,.logged-out-items{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20%;
     border-bottom: $dark90 solid 1px;
 
+    .logged-in-item-logo,.logged-out-item-logo{
+      width: 20px;
+      height: 20px;
+      border: none;
+
+    }
+    a,p {
+      text-decoration: none;
+      color: white;
+      box-sizing: border-box;
+      margin: 10px 0;
+    }
   }
 }
 
 @keyframes navigationMobile {
   0%{
-    top:-500px ;
+    left:-500px ;
   }
   100%{
-    margin-top:0
+    margin-top:0;
+    left:0 ;
   }
 }
 
@@ -52,13 +75,20 @@
   .navigationMobileBtn {
     display: none;
   }
-  .Navigation{
+  .navigation{
     display: flex;
     position: initial;
     flex-direction: row;
     transition: none;
-      a{
+    width: 100%;
+
+    .navigation-links{
+      display: flex;
+      align-items: center;
+      .navigation-link{
         border: none;
+      }
     }
+
   }
 }

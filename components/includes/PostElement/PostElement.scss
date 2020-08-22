@@ -38,7 +38,7 @@
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  width: 165.46px;
+  width: 100%;
   margin: auto;
   //border-bottom: .5px solid $light100;
   border-radius: 0 0 10px 10px;
@@ -46,8 +46,8 @@
   .post-element {
     display: flex;
     flex-direction: column;
-    width: 165.46px;
-    height: 170px;
+    width: 100vw;
+    height: auto;
     margin-top: 20px;
     border-radius: 3px;
 
@@ -55,8 +55,10 @@
       position: relative;
 
       img {
-        width: 165.46px;
-        height: 92.81px;
+        width: 100vw;
+        height: auto;
+        //width: 165.46px;
+        //height: 92.81px;
         //transition: all 2s  ease;
         &:hover {
           //@include opacityAnimationEnd;
@@ -65,8 +67,10 @@
       }
 
       video {
-        width: 165.46px;
-        height: 92.81px;
+        width: 100vw;
+        height: auto;
+        //width: 165.46px;
+        //height: 92.81px;
         @include opacityAnimationStart;
 
       }
@@ -112,11 +116,8 @@
       font-size: small;
       word-wrap: break-word;
       font-weight: initial;
-      //white-space: nowrap;
       overflow: hidden;
-      //max-width:150px;
       text-align: initial;
-      //@include elementOnVideoElement;
       background-color: transparent;
       color: $light100;
       margin: 0;
@@ -125,12 +126,8 @@
   }
 
   .videoPreviewMobile {
-    //@include transparentBtn;
     padding-top: 0;
     width: 50%;
-    //border: .5px gray solid;
-    //border-radius: 5px;
-
   }
 
 
@@ -148,34 +145,34 @@
 }
 
 
-@media only screen and (max-width: 320px) {
-
-  .post-element-div {
-    .post-element {
-
-      width: 130px;
-      height: 170px;
-
-      .image {
-
-        img {
-          width: 130px;
-          height: 80.81px;
-        }
-
-        video {
-          width: 130px;
-          height: 80.81px;
-        }
-      }
-    }
-  }
-
-  .videoPreviewMobile {
-    width: 130px;
-  }
-
-}
+//@media only screen and (max-width: 320px) {
+//
+//  .post-element-div {
+//    .post-element {
+//
+//      width: 130px;
+//      height: 170px;
+//
+//      .image {
+//
+//        img {
+//          width: 130px;
+//          height: 80.81px;
+//        }
+//
+//        video {
+//          width: 130px;
+//          height: 80.81px;
+//        }
+//      }
+//    }
+//  }
+//
+//  .videoPreviewMobile {
+//    width: 130px;
+//  }
+//
+//}
 
 @media only screen and (min-width: 1024px) {
   .post-element-div {
