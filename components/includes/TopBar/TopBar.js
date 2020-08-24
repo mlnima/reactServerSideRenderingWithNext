@@ -12,6 +12,7 @@ import LoggedInItemsForMenu from "../LoggedInItemsForMenu/LoggedInItemsForMenu";
 import LoggedOutItemsMenu from "../LoggedOutItemsMenu/LoggedOutItemsMenu";
 import ImageLogoInTopBar from "./ImageLogoInTopBar";
 
+
 const TopBar = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -30,9 +31,6 @@ const TopBar = props => {
         })
     }, [contextData.siteDesign]);
 
-    useEffect(() => {
-        console.log(contextData.siteIdentity)
-    }, [contextData.siteIdentity]);
 
     const onMobileSearchBarOpenHandler = () => {
         state.mobileSearchBarOpen ?

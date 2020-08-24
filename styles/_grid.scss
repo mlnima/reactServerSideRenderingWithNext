@@ -20,15 +20,8 @@
 
 @mixin postsContent {
   display: grid;
-  //grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
   grid-template-columns: 1fr;
   grid-gap: 10px;
-
-  //@media only screen and (max-width: 321px) {
-  //  grid-template-columns: repeat(auto-fill, minmax(100%, 1fr));
-  //
-  //}
-
   @media only screen and (min-width: 1024px) {
     @include videoContentGridDesktop;
   }

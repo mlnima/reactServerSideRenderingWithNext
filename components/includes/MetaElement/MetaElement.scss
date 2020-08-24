@@ -4,29 +4,64 @@
 
 .meta-page-item {
   background-color: $dark90;
-  margin: 10px auto;
+  //margin: 10px auto;
+  width: 100vw;
+  height: auto;
   .meta-page-item-image-parent {
+    width: 100vw;
+    height: auto;
+
     .meta-page-item-image {
-      position: relative;
+      //position: relative;
+      width: 100vw;
+      height: auto;
+      border: $dark90 1px solid  ;
+      //display: block;
+      //object-fit: cover;
     }
   }
 
   .meta-item-data {
-    width: 90%;
-    margin: auto;
+    width: 100vw;
+    height: auto;
+    //margin: auto;
     color: $light100;
   }
 
-  @include imageForMetaElements;
 
-  @media only screen and (max-width: 768px) {
-    .meta-page-item-image-parent {
 
-      .meta-page-item-image {
-        height: auto;
-      }
-    }
-  }
+
 
 }
 
+@media only screen and (min-width: 1024px) {
+  .meta-page-item {
+    background-color: $dark90;
+    margin: 10px auto;
+    width: 320px;
+
+
+    .meta-page-item-image-parent {
+      width: 320px;
+      .meta-page-item-image {
+        width: 320px;
+        position: relative;
+        height: 180px;
+        border: $dark90 1px solid  ;
+        display: block;
+        object-fit: cover;
+      }
+    }
+
+    .meta-item-data {
+      width: 320px;
+      margin: auto;
+      color: $light100;
+    }
+
+
+
+
+
+  }
+}

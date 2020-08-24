@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 3);
+/******/ 	return __webpack_require__(__webpack_require__.s = 5);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1660,9 +1660,6 @@ const TopBar = props => {
       }
     }));
   }, [contextData.siteDesign]);
-  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    console.log(contextData.siteIdentity);
-  }, [contextData.siteIdentity]);
 
   const onMobileSearchBarOpenHandler = () => {
     state.mobileSearchBarOpen ? setState(_objectSpread({}, state, {
@@ -2134,6 +2131,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_1___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_1__);
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_2__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3__ = __webpack_require__(/*! next/router */ "next/router");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_3__);
 var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 function ownKeys(object, enumerableOnly) { var keys = Object.keys(object); if (Object.getOwnPropertySymbols) { var symbols = Object.getOwnPropertySymbols(object); if (enumerableOnly) symbols = symbols.filter(function (sym) { return Object.getOwnPropertyDescriptor(object, sym).enumerable; }); keys.push.apply(keys, symbols); } return keys; }
@@ -2146,13 +2145,18 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 
 
 
+
 const AlphabeticalNumericalRangeLinksWidget = props => {
+  const router = Object(next_router__WEBPACK_IMPORTED_MODULE_3__["useRouter"])();
   const {
     0: state,
     1: setState
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
     range: [...'abcdefghijklmnopqrstuvwxyz0123456789']
   });
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    console.log(router);
+  }, [props]);
   const renderRange = state.range.map(i => {
     const path = {
       pathname: props.router ? props.router.pathname : '',
@@ -2162,7 +2166,8 @@ const AlphabeticalNumericalRangeLinksWidget = props => {
     };
     return __jsx(next_link__WEBPACK_IMPORTED_MODULE_1___default.a, {
       key: i,
-      href: path
+      href: path,
+      as: router.asPath
     }, __jsx("a", null, i));
   });
   return __jsx("div", {
@@ -5916,7 +5921,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9j
 
 /***/ }),
 
-/***/ 3:
+/***/ 5:
 /*!*******************************!*\
   !*** multi ./pages/_error.js ***!
   \*******************************/

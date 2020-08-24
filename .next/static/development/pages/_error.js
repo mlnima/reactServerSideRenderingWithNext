@@ -1618,9 +1618,6 @@ var TopBar = function TopBar(props) {
       }
     }));
   }, [contextData.siteDesign]);
-  Object(react__WEBPACK_IMPORTED_MODULE_1__["useEffect"])(function () {
-    console.log(contextData.siteIdentity);
-  }, [contextData.siteIdentity]);
 
   var onMobileSearchBarOpenHandler = function onMobileSearchBarOpenHandler() {
     state.mobileSearchBarOpen ? setState(_objectSpread({}, state, {
@@ -2096,6 +2093,8 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var next_link__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(next_link__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! next/dist/client/with-router */ "./node_modules/next/dist/client/with-router.js");
 /* harmony import */ var next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_4__);
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! next/router */ "./node_modules/next/dist/client/router.js");
+/* harmony import */ var next_router__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(next_router__WEBPACK_IMPORTED_MODULE_5__);
 
 
 var __jsx = react__WEBPACK_IMPORTED_MODULE_2___default.a.createElement;
@@ -2108,13 +2107,19 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 
 
 
+
 var AlphabeticalNumericalRangeLinksWidget = function AlphabeticalNumericalRangeLinksWidget(props) {
+  var router = Object(next_router__WEBPACK_IMPORTED_MODULE_5__["useRouter"])();
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     range: Object(_babel_runtime_helpers_esm_toConsumableArray__WEBPACK_IMPORTED_MODULE_1__["default"])('abcdefghijklmnopqrstuvwxyz0123456789')
   }),
       state = _useState[0],
       setState = _useState[1];
 
+  Object(react__WEBPACK_IMPORTED_MODULE_2__["useEffect"])(function () {
+    console.log(router);
+  }, [props]);
   var renderRange = state.range.map(function (i) {
     var path = {
       pathname: props.router ? props.router.pathname : '',
@@ -2124,7 +2129,8 @@ var AlphabeticalNumericalRangeLinksWidget = function AlphabeticalNumericalRangeL
     };
     return __jsx(next_link__WEBPACK_IMPORTED_MODULE_3___default.a, {
       key: i,
-      href: path
+      href: path,
+      as: router.asPath
     }, __jsx("a", null, i));
   });
   return __jsx("div", {
@@ -56326,6 +56332,18 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9j
 
 /***/ }),
 
+/***/ 14:
+/*!**************************************************************************************************************************************************!*\
+  !*** multi next-client-pages-loader?page=%2F_error&absolutePagePath=I%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5C_error.js ***!
+  \**************************************************************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F_error&absolutePagePath=I%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5C_error.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_error&absolutePagePath=I%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5C_error.js!./");
+
+
+/***/ }),
+
 /***/ 2:
 /*!**********************!*\
   !*** util (ignored) ***!
@@ -56370,18 +56388,6 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9j
 
 /***/ }),
 
-/***/ 6:
-/*!**************************************************************************************************************************************************!*\
-  !*** multi next-client-pages-loader?page=%2F_error&absolutePagePath=I%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5C_error.js ***!
-  \**************************************************************************************************************************************************/
-/*! no static exports found */
-/***/ (function(module, exports, __webpack_require__) {
-
-module.exports = __webpack_require__(/*! next-client-pages-loader?page=%2F_error&absolutePagePath=I%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5C_error.js! */"./node_modules/next/dist/build/webpack/loaders/next-client-pages-loader.js?page=%2F_error&absolutePagePath=I%3A%5CDev%20Project%5CreactServerSideRenderingWithNext%5Cpages%5C_error.js!./");
-
-
-/***/ }),
-
 /***/ "dll-reference dll_839099f27aa445711cff":
 /*!*******************************************!*\
   !*** external "dll_839099f27aa445711cff" ***!
@@ -56393,5 +56399,5 @@ module.exports = dll_839099f27aa445711cff;
 
 /***/ })
 
-},[[6,"static/runtime/webpack.js","styles"]]]);
+},[[14,"static/runtime/webpack.js","styles"]]]);
 //# sourceMappingURL=_error.js.map
