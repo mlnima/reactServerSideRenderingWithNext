@@ -8,7 +8,7 @@ import DropDownWidget from "../../../components/adminIncludes/PostComponents/Dro
 import {AppContext} from "../../../context/AppContext";
 import Format from "../../../components/adminIncludes/PostComponents/Format/Format";
 import Meta from "../../../components/adminIncludes/PostComponents/Meta/Meta";
-import VideoInformation from "../../../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
+// import VideoInformation from "../../../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
 import withRouter from "next/dist/client/with-router";
 import TextInputWithUploadBtn from '../../../components/adminIncludes/TextInputWithUploadBtn/TextInputWithUploadBtn'
 import ImagePreview from '../../../components/adminIncludes/PostComponents/ImagePreview/ImagePreview';
@@ -18,6 +18,7 @@ import ProductInformation from '../../../components/adminIncludes/PostComponents
 import {getMultipleSetting} from '../../../_variables/ajaxVariables'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
 import {useRouter} from "next/router";
+import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
 
 const Index = props => {
     const contextData = useContext(AppContext);
@@ -229,18 +230,21 @@ const Index = props => {
                         <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
                                           activeEditingLanguage={editingData.activeEditingLanguage}
                                           onChangeHandler={onTitleDescriptionChangeHandler}/>
-                        <TextInputWithUploadBtn type='thumbnail' thumbnailsType={true} postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'
-                                                title='Main thumbnail'/>
-                        <ImagePreview postData={state}/>
+                        {/*<TextInputWithUploadBtn type='thumbnail' thumbnailsType={true} postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'*/}
+                        {/*                        title='Main thumbnail'/>*/}
+                        {/*<ImagePreview postData={state}/>*/}
+
+
+
                         <ProductInformation
                             postData={state}
                             productInfo={productInfo} setProductInfo={setProductInfo}
                             renderFor='product' component={ProductInformation}
                             title='Product Information' onChangeHandler={onChangeHandler}/>
-
-                        <VideoInformation
-                            postData={state} renderFor='video' component={VideoInformation}
-                            title='Video Information' onChangeHandler={onChangeHandler}/>
+                        <PostInformation postData={state} onChangeHandler={onChangeHandler}/>
+                        {/*<VideoInformation*/}
+                        {/*    postData={state} renderFor='video' component={VideoInformation}*/}
+                        {/*    title='Video Information' onChangeHandler={onChangeHandler}/>*/}
                     </div>
 
                     <div className="side">

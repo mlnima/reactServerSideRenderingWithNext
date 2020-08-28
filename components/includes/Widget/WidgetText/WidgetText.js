@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import Text from '../WidgetsModelsComponents/Text/Text'
 
 const WidgetText = props => {

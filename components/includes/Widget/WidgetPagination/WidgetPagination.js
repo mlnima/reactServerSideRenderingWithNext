@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React from 'react';
 
 const WidgetPagination = props => {
 

@@ -121,6 +121,7 @@
       background-color: transparent;
       color: $light100;
       margin: 0;
+
     }
 
   }
@@ -206,8 +207,9 @@
         text-overflow: ellipsis;
         overflow: hidden;
         width: 320px;
-        height: 1.2em;
+        height: 30px;
         white-space: nowrap;
+
       }
     }
   }

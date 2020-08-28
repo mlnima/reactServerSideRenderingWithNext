@@ -1,4 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React from 'react';
 import Widget from '../Widget/Widget'
 import Posts from '../Posts/Posts'
 import RecentComments from '../widgets/RecentComments/RecentComments'

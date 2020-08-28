@@ -11,13 +11,13 @@ const LoggedOutItemsMenu = props => {
     if (!contextData.userData.username && contextData.siteIdentity.topBarAuthBtn && props.visible) {
         return (
             <div className='logged-out-items'>
-                <Link href='/auth/login'>
+                <Link href='/auth/login' as='/login'>
                     <a>
                         <FontAwesomeIcon icon={faUser} className='logged-out-item-logo' style={props.colorsStyle}/>
                     </a>
                 </Link>
 
-                <Link href='/auth/register'>
+                <Link href='/auth/register' as='/register'>
                     <a>
                         <FontAwesomeIcon icon={faPen} className='logged-out-item-logo' style={props.colorsStyle}/>
                     </a>

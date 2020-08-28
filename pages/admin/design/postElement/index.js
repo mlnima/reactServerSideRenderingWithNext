@@ -1,12 +1,10 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import AdminLayout from "../../../../components/layouts/AdminLayout";
 import ColorSection from "../../../../components/adminIncludes/design/ColorSection";
 import TextSection from "../../../../components/adminIncludes/design/TextSection";
 
-const postElement = props => {
-    const [state, setState] = useState({});
-    useEffect(() => {
-    }, []);
+const postElement = () => {
+
     return (
         <AdminLayout>
             <div className='post-element-design adminDesignSectionItems'>

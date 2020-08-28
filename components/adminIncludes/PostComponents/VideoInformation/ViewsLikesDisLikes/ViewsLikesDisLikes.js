@@ -2,7 +2,7 @@ import React, { useRef, useState, useEffect } from 'react';
 import { DelayInput } from 'react-delay-input'
 import { convertVariableNameToName } from '../../../../../_variables/_variables'
 
-const ViewsLikesDisLikes = props => {
+const RatingAndViews = props => {
     const inputElement = useRef(null)
 
     useEffect(() => {

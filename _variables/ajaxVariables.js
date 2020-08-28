@@ -100,8 +100,8 @@ export const postThumbnailsUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-postThumbnailsUpload', image)
 }
 
-export const uploadImage = async (image) => {
-    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadImage', image)
+export const uploadFiles = async (image) => {
+    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadFiles', image)
 }
 
 export const postProductTypeImages = async (image) => {

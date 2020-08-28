@@ -90,43 +90,4 @@ const SearchInputComponent = props => {
 export default withRouter(SearchInputComponent);
 
 
-// const onSubmitHandler = e => {
-//     e.preventDefault()
-//     const mainPath = props.router ?
-//         props.router.asPath.includes('/tags/') || props.router.asPath.includes('/categories/') || props.router.asPath.includes('/actors/') ? '/posts' :
-//             props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors')  ? '/meta' : '/posts':  '/posts'
-//     //
-//     // const asPath = !props.router ? '/posts' :
-//     //         props.router.asPath.includes('/tags/') || props.router.asPath.includes('/categories/') || props.router.asPath.includes('/actors/') ?  props.router.asPath:
-//     //         props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors') ? '/' + props.router.pageType:
-//     //         props.router.pathname
-//
-//     const asPath = props.router ? props.router.asPath.includes('/tags/') || props.router.asPath.includes('/categories/') || props.router.asPath.includes('/actors/')? props.router.asPath :
-//          props.router.asPath.includes('/tags') ? '/tags' :
-//          props.router.asPath.includes('/categories') ? '/categories' :
-//          props.router.asPath.includes('/actors') ? '/actors' :
-//         '/posts':
-//         '/posts'
-//
-//
-//     const mainQuery = !props.router ? {} :
-//         props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors') ? {keyword:state.keyword?state.keyword:null} : { ...props.queryData }
-//
-//     const maineQuery = props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors') ? {keyword:state.keyword?state.keyword:null} : {}
-//     const asQuery = props.router.asPath.includes('/tags') || props.router.asPath.includes('/categories') || props.router.asPath.includes('/actors') ? {keyword:state.keyword?state.keyword:null} : {}
-//
-//     console.log(mainPath,asPath,asQuery)
-//     props.router.push({
-//         pathname: mainPath,
-//         query: {
-//                 ...state.queries,
-//                 keyword:state.keyword
-//             },
-//         as:{
-//             pathname:asPath,
-//             query:asQuery
-//         },
-//
-//     })
-// }
 

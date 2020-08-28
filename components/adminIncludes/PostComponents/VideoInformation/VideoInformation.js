@@ -24,7 +24,6 @@ const VideoInformation = props => {
     };
 
     const onDurationChangeHandler = (value) => {
-
         setState({
             ...state,
             duration: value

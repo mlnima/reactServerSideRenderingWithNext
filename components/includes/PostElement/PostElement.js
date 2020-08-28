@@ -49,12 +49,11 @@ const PostElement = props => {
                 ...state.titleElementStyle,
                 color: contextData.siteDesign.postElementTitleTextColor || 'white',
                 backgroundColor: contextData.siteDesign.postElementBackgroundColor || 'transparent',
-                textAlign: titleTextAlign
+                textAlign: contextData.siteDesign.postElementTitleTextAlign || 'left'
             }
 
         })
     }, [contextData.siteDesign]);
-
 
     let isHoverHandler = () => {
         if (props.state.videoTrailerUrl) {
@@ -70,7 +69,7 @@ const PostElement = props => {
                     <video ref={videoElement} src={props.state.videoTrailerUrl} autoPlay={true} loop={true} onMouseOut={isHoverHandler} onTouchCancel={isHoverHandler}/>)
 
             } else if (!state.isHover) {
-                return (<img src={props.state.mainThumbnail } alt={props.state.title} onError={err => {
+                return (<img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
                     if (!props.state.mainThumbnail) {
                         // deletedVideoAutoRemover(props.state)
                         console.log('something wrong with image on ', props.state.title)
