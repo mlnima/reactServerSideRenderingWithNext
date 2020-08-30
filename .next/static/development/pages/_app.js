@@ -68,12 +68,15 @@ function _objectSpread(target) { for (var i = 1; i < arguments.length; i++) { va
 var AppContext = react__WEBPACK_IMPORTED_MODULE_2___default.a.createContext();
 
 var AppProvider = function AppProvider(props) {
+  var contextData = Object(react__WEBPACK_IMPORTED_MODULE_2__["useContext"])(AppContext);
+
   var _useState = Object(react__WEBPACK_IMPORTED_MODULE_2__["useState"])({
     loading: false,
     videoPreviewID: '',
     activeLanguage: 'default',
     navigationOpenStatus: false,
-    isMobile: true
+    isMobile: true,
+    console: false
   }),
       state = _useState[0],
       dispatchState = _useState[1];

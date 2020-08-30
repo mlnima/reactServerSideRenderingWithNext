@@ -173,3 +173,15 @@ export const pathAndAsPathGenerator = (pathname, asPath, query) => {
 
 
 
+export const adminConsoleOpenCloseHandler = (userData,state,dispatchState)=>{
+    if (userData.role === 'administrator') {
+        state.console ?
+            dispatchState({
+                ...state,
+                console: false
+            }) : dispatchState({
+                ...state,
+                console: true
+            })
+    } else return null
+}

@@ -11,6 +11,7 @@ const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
 const settingsControllers = require('./server/controllers/settingsControllers');
 const fileManagerControllers = require('./server/controllers/fileManagerControllers');
+const formController = require('./server/controllers/formController');
 const apiPostControllers = require('./server/controllers/apiControllers/apiPostsControllers');
 const youtubeDataScrapper = require('./server/dataScrappers/youtube');
 const path = require('path');
@@ -256,6 +257,12 @@ app.prepare().then(() => {
         // console.log(ssrCache)
         // settingsControllers.clearCaches(req,res)
     });
+
+    //forms
+    server.post('/api/v1/forms/contact', (req, res) =>formController.contact(req,res));
+
+
+
     // file manager
     server.post('/api/v1/settings/fileManagerControllers-readPath', (req, res) => {
         fileManagerControllers.readPath(req, res)

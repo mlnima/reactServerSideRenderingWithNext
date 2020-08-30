@@ -161,6 +161,7 @@ function _defineProperty(obj, key, value) { if (key in obj) { Object.definePrope
 const AppContext = react__WEBPACK_IMPORTED_MODULE_0___default.a.createContext();
 
 const AppProvider = props => {
+  const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(AppContext);
   const {
     0: state,
     1: dispatchState
@@ -169,7 +170,8 @@ const AppProvider = props => {
     videoPreviewID: '',
     activeLanguage: 'default',
     navigationOpenStatus: false,
-    isMobile: true
+    isMobile: true,
+    console: false
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
     window.innerWidth > 768 ? dispatchState(_objectSpread({}, state, {

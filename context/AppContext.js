@@ -1,4 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useContext, useEffect, useRef, useState} from 'react';
 import jwtDecode from "jwt-decode";
 import jwt from 'jsonwebtoken';
 import axios from "axios";
@@ -10,13 +10,14 @@ import {withRouter} from "next/router";
 export const AppContext = React.createContext();
 
 const AppProvider = props => {
-
+    const contextData = useContext(AppContext);
     const [state, dispatchState] = useState({
         loading: false,
         videoPreviewID: '',
         activeLanguage: 'default',
         navigationOpenStatus: false,
         isMobile: true,
+        console:false
     });
 
 
@@ -211,7 +212,9 @@ const AppProvider = props => {
                 token: localStorage.wt,
             };
             return await axios.post(window.location.origin + '/api/v1/settings/clearCaches', body)
-        }
+        },
+
+
     });
 
     useEffect(() => {

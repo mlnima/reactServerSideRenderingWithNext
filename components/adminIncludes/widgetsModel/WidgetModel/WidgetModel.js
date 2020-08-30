@@ -366,6 +366,12 @@ const WidgetModel = props => {
                                     onChange={e => onTextInputsDataChangeHandler(e)}/>
                     </>
                 )
+            case 'recentComments':
+                return (
+                    <>
+                        <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
+                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>                    </>
+                )
 
             default:
                 return null

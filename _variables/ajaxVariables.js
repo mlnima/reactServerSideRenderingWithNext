@@ -113,6 +113,13 @@ export const userImageUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-userImageUpload', image)
 }
 
+export const contactAjaxPost = async (data) => {
+    const body ={
+        data
+    }
+    return await axios.post(window.location.origin + '/api/v1/forms/contact', body)
+}
+
 export const youtubeDataScrapper = async (url) => {
     const body = {
         url,
