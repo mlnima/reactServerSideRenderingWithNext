@@ -40,7 +40,8 @@ const SiteSettingSetter = props => {
                 description: props.identity ? props.identity.data.description || '' : '',
                 bodyBackgroundImage: props.design ? props.design.data.bodyBackgroundImage || '' : '',
                 keywords: props.identity ? props.identity.data.keywords || [] : [],
-                customScripts: props.identity ? props.identity.data.customScripts || [] : []
+                customScripts: props.identity ? props.identity.data.customScripts || [] : [],
+                favIcon: props.identity ? props.identity.data.favIcon || '/static/images/favIcon/favicon.png' : '/static/images/favIcon/favicon.png'
             })
         }
         if (props.widgets) {
@@ -92,7 +93,7 @@ const SiteSettingSetter = props => {
             <meta charSet="utf-8"/>
             <meta name="description" content={state.description}/>
             <meta name="keywords" content={state.keywords}/>
-            <link rel="icon" href={'/favicon.ico'}/>
+            <link rel="icon" href={state.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
             <link rel="stylesheet" type="text/css" href='/static/style-sheet/customStyle.css'/>
             {renderCustomScripts}

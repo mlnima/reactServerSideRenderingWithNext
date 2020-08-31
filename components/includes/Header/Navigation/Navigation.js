@@ -106,7 +106,7 @@ const Navigation = props => {
                 href={{
                     pathname: pathData.pathname,
                     query: queryArrayToObject(item.query),
-                }}><a style={navigationData.style} className='navigation-link'>{
+                }}><a style={{...navigationData.style,backgroundColor:'transparent'}} className='navigation-link'>{
                 item.translations ? item.translations[contextData.state.activeLanguage] ? item.translations[contextData.state.activeLanguage].title || item.title : item.title : item.title
             }</a></Link>
         )

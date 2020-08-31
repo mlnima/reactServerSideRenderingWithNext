@@ -3,7 +3,7 @@ const bcrypt = require('bcryptjs');
 const mongoose = require('mongoose');
 const jwt = require('jsonwebtoken');
 const userSchema = require('../models/userSchema');
-const tokenExpireTime = '1000h';
+const tokenExpireTime = '24h';
 const dataEncoder = require('../tools/dataEncoder')
 const uuidAPIKey = require('uuid-apikey');
 

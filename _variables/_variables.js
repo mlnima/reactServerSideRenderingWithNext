@@ -131,39 +131,36 @@ export const pathAndAsPathGenerator = (pathname, asPath, query) => {
     }
     asPath.includes('/tags/') || asPath.includes('/categories/') || asPath.includes('/actors/') ? data.pathname = '/posts' :
         asPath.includes('/tags') || asPath.includes('/categories') || asPath.includes('/actors') ? data.pathname = '/meta' : data.pathname = pathname;
-
-
-
-    if (asPath.includes('?') ) {
+    if (asPath.includes('?')) {
         const asPathSplit = asPath.split('?')
         const searchParams = new URLSearchParams(asPathSplit[1]);
         if (localStorage.lang && localStorage.lang !== 'default') {
 
             searchParams.set('lang', localStorage.lang)
 
-            if( query.page ){
-                searchParams.set('page',query.page)
+            if (query.page) {
+                searchParams.set('page', query.page)
             }
             data.query = {
                 ...data.query,
-                lang:localStorage.lang
+                lang: localStorage.lang
             }
-        }else if (localStorage.lang === 'default'&& asPath.includes('lang=')){
-            const page = query.page ? `&page=${query.page}` :''
+        } else if (localStorage.lang === 'default' && asPath.includes('lang=')) {
+            const page = query ? query.page ? `&page=${query.page}` : '' : ''
             data.asPath = asPathSplit[0] + '?' + searchParams.toString() + page
             searchParams.delete('lang')
 
 
         }
-        // data.asPath = asPathSplit[0] + '?' + searchParams.toString()
-    }else {
+
+    } else {
 
         if (localStorage.lang && localStorage.lang !== 'default') {
-            const page = query.page ? `&page=${query.page}` :''
+            const page = query ? query.page ? `&page=${query.page}` : '' : ''
             data.asPath = asPath + '?lang=' + localStorage.lang + page
             data.pathname = pathname
-        }else if (localStorage.lang === 'default'){
-            const page = query.page ? `?page=${query.page}` :''
+        } else if (localStorage.lang === 'default') {
+            const page = query.page ? `?page=${query.page}` : ''
             data.asPath = asPath + page
             data.pathname = pathname
         }
@@ -172,8 +169,7 @@ export const pathAndAsPathGenerator = (pathname, asPath, query) => {
 }
 
 
-
-export const adminConsoleOpenCloseHandler = (userData,state,dispatchState)=>{
+export const adminConsoleOpenCloseHandler = (userData, state, dispatchState) => {
     if (userData.role === 'administrator') {
         state.console ?
             dispatchState({

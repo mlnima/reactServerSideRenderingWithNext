@@ -11,7 +11,8 @@ const Console = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
         command: '',
-        results: ''
+        results: '',
+        lastCommands:[]
     });
     useEffect(() => {
         console.log(contextData.siteDesign)
@@ -41,6 +42,25 @@ const Console = props => {
 
     }
 
+    const identityChange = (key, value)=>{
+        contextData.dispatchState({
+            ...contextData.state,
+            loading: true
+        })
+        const newDesignData = {
+            ...contextData.siteIdentity,
+            [key]:value
+        }
+
+        updateSetting('identity', newDesignData).then(() => {
+            contextData.dispatchState({
+                ...contextData.state,
+                loading: false
+            })
+        })
+
+    }
+
 
 
 
@@ -59,12 +79,28 @@ const Console = props => {
             case 'clear cache':
                 contextData.functions.clearCaches().then(() => router.reload());
                 break;
+            case 'design -h':
+                setState({
+                    ...state,
+                    results: state.results += JSON.stringify(contextData.siteDesign)
+                })
+                break;
+            case 'identity -h':
+                setState({
+                    ...state,
+                    results: state.results += JSON.stringify(contextData.siteIdentity)
+                })
+                break;
             default:
                const splitCommand = state.command.split(' ')
                 if (splitCommand.length>2){
                     switch (splitCommand[0]) {
                         case 'design':
                             designChange(splitCommand[1],splitCommand[2])
+                        case 'identity':
+                            identityChange(splitCommand[1],splitCommand[2])
+                        default:
+                            break;
                     }
                 }else break
 
@@ -72,7 +108,8 @@ const Console = props => {
         setState({
             ...state,
             results: state.results + '\n' + state.command,
-            command : ''
+            lastCommands:[...state.lastCommands,state.command],
+            command : '',
         })
     }
 
@@ -92,7 +129,7 @@ const Console = props => {
                     </div>
                     <textarea value={state.results}/>
                     <form onSubmit={e => onSubmitHandler(e)}>
-                        <input onChange={e => onChangeHandler(e)} value={state.command} name='command' type="text"/>
+                        <input onChange={e => onChangeHandler(e)} value={state.command} name='command' type="text" onKeyDown={e=>e.keyCode === 38 ? e.target.value = state.lastCommands[state.lastCommands.length -1]:null}/>
                     </form>
                 </div>
             </div>

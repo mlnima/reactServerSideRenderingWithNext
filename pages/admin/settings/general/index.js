@@ -11,27 +11,14 @@ const settings = props => {
     const [state, setState] = useState({
         translationLanguages: [],
         keywords:  [],
-
     });
 
     useEffect(() => {
-
-
         setState({
             ...state,
             ...props.identity
 
         })
-
-    }, [props]);
-
-
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
-
-    useEffect(() => {
-        console.log(props)
     }, [props]);
 
     const onTranslationLanguagesChangeHandler = e => {
@@ -120,10 +107,6 @@ const settings = props => {
                             <p>Description:</p>
                             <textarea name='description' value={state.description} onChange={e => onChangeHandler(e)}/>
                         </div>
-                        {/*<div className="site-settings-form-section">*/}
-                        {/*    <p>Home Page H1:</p>*/}
-                        {/*    <textarea name='homePageH1' value={ state.homePageH1 } onChange={ e => onChangeHandler(e) }/>*/}
-                        {/*</div>*/}
                         <div className="site-settings-form-section keywords">
                             <p>Keywords:</p>
                             <input ref={keywordsInput} name='keywords'/>
@@ -185,6 +168,10 @@ const settings = props => {
                                 <option value='false'>Disable</option>
                             </select>
                             <input value={state.imageLogoInTopBarUrl} name='imageLogoInTopBarUrl' placeholder='imageLogoInTopBarUrl' onChange={e => onChangeHandler(e)}/>
+                        </div>
+                        <div className="site-settings-form-section favIcon">
+                            <p>Fav Icon:</p>
+                            <input value={state.favIcon} name='favIcon' placeholder='Fav Icon Url..' onChange={e => onChangeHandler(e)}/>
                         </div>
 
                         <div className="site-settings-form-section membership">

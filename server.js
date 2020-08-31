@@ -26,9 +26,7 @@ const handle = app.getRequestHandler();
 const apicache = require('apicache')
 const cacheableResponse = require('cacheable-response')
 //cache api
-
 const cache = apicache.middleware;
-
 const cacheOn = (req, res) => {
     return res.statusCode === 200 && req.body.cache;
 }
@@ -36,6 +34,7 @@ const cacheForceOn = (req, res) => {
     return res.statusCode === 200;
 }
 const cacheSuccesses = cache('1 day', cacheOn);
+
 const cacheForce = cache('1 day', cacheForceOn);
 mongoose.Promise = global.Promise;
 //--
