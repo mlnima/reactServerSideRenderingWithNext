@@ -23,10 +23,10 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 const apicache = require('apicache')
+const LRUCache = require('lru-cache');
 const cacheSuccesses = require('./server/middlewares/apiCache')
-const pageCache = require('./server/tools/pageCache')
+// const pageCache = require('./server/tools/pageCache')
 mongoose.Promise = global.Promise;
-
 const mongoDBConnectionUrl = process.env.DB_LOCAL ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
@@ -37,8 +37,53 @@ mongoose.connect(mongoDBConnectionUrl, {
 })
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
+//------------------------------------------------------------Page Cache --------------------------
+let ssrCache = new LRUCache({
+    max: 4000 * 1024 * 1024, /* cache size will be 100 MB using `return n.length` as length() function */
+    length: function (n, key) {
+        return n
+    },
+    maxAge: 1000 * 60 * 60 * 24 * 30
+});
+
+let getCacheKey = (req)=> {
+    return `${req.path}`
+}
 
 
+let renderAndCache = async (req, res,targetComponent,queryParams)=>{
+    const key = getCacheKey(req);
+
+    // If we have a page in the cache, let's serve it
+    if (ssrCache.has(key)) {
+        //console.log(`serving from cache ${key}`);
+        res.setHeader('x-cache', 'HIT');
+        res.send(ssrCache.get(key));
+        res.end()
+        // return
+    }else{
+        try {
+            const html = await app.renderToHTML(req, res, targetComponent, queryParams);
+            if (res.statusCode !== 200) {
+                res.send(html);
+                res.end()
+                // return
+            }
+            ssrCache.set(key, html);
+            res.setHeader('x-cache', 'MISS');
+            res.send(html)
+        } catch (err) {
+            console.log(err)
+            await app.renderError(err, req, res, targetComponent, queryParams)
+        }
+    }
+
+
+}
+
+
+
+//-------------------------------------------------------------------------------------------------
 const robotsOptions = {
     root: './static/',
     headers: {'Content-Type': 'text/plain;charset=utf-8'}
@@ -67,7 +112,13 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
         // return res.status(200).sendFile('robots.txt', robotsOptions)
     });
     server.get('/', (req, res) => {
-        return pageCache.renderAndCache(req, res,app)
+        const targetComponent = '/';
+        const queryParams = {
+            ...req.query,
+            ...req.params,
+        }
+       // app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent,queryParams)
     });
 
     //xml siteMap handler
@@ -209,7 +260,7 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
     //cache control
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apicache.clear(req.params.collection)
-        pageCache.ssrCache.reset()
+        ssrCache.reset()
         res.end()
     });
 
@@ -265,7 +316,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             contentType: 'tags',
             contentName: req.params.tag,
         }
-        app.render(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
 
     server.get('/login', (req, res) => {
@@ -274,7 +326,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-        app.render(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
 
     server.get('/register', (req, res) => {
@@ -283,7 +336,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-        app.render(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
 
 
@@ -295,7 +349,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             contentType: 'categories',
             contentName: req.params.category,
         }
-        app.render(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
 
 
@@ -307,7 +362,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             contentType: 'actors',
             contentName: req.params.actor,
         }
-        app.render(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
 
     server.get('/posts', (req, res) => {
@@ -316,7 +372,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-        app.render(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
 
 
@@ -327,7 +384,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             ...req.params,
             contentType: 'categories'
         }
-        app.render(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
     server.get('/tags', (req, res) => {
         const targetComponent = '/meta';
@@ -336,7 +394,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             ...req.params,
             contentType: 'tags'
         }
-        app.render(req, res, targetComponent, queryParams)
+        // app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
     server.get('/actors', (req, res) => {
         const targetComponent = '/meta';
@@ -345,18 +404,21 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             ...req.params,
             contentType: 'actors'
         }
-        app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
+        // app.render(req, res, targetComponent, queryParams)
     });
 
 
     server.get('/post/:title', (req, res) => {
         const targetComponent = '/post';
 
-        const params = {
+        const queryParams = {
             ...req.query,
             ...req.params,
         }
-        app.render(req, res, targetComponent, params)
+      //  app.render(req, res, targetComponent, queryParams)
+
+      return renderAndCache(req, res,targetComponent, queryParams)
     });
 
     server.get('/profile', (req, res) => {
@@ -371,6 +433,9 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             sort: req.query.sort,
         }
         app.render(req, res, targetComponent, queryParams)
+
+
+
     });
 
 
@@ -387,7 +452,8 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             size: req.query.size,
             author: req.query.author,
         }
-        app.render(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res,targetComponent, queryParams)
     });
 
     server.get('/errorPage', (req, res) => {
