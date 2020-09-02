@@ -85,7 +85,7 @@ const TopBar = props => {
     }
 
 
-    if (contextData.siteIdentity.topBarVisibility) {
+    if (contextData.siteIdentity.topBarVisibility || ((contextData.navigationData || []).length >0) && contextData.state.isMobile ) {
         return (
             <div className='top-bar' style={state.colorsStyle}>
                 <NavigationMobileButton/>

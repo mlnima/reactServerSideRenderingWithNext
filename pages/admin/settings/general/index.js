@@ -139,14 +139,21 @@ const settings = props => {
                         </div>
                         <div className="site-settings-form-section defaultPostRating">
                             <p>Default new Post Rating:</p>
-                            <select name='defaultPostRating' value={state.defaultPostRating} onChange={e => onChangeHandler(e)}>
+                            <select name='defaultPostRating' value={state.defaultPostRating || false} onChange={e => onChangeHandler(e)}>
                                 <option value='enable'>Enable</option>
                                 <option value='disable'>Disable</option>
                             </select>
                         </div>
                         <div className="site-settings-form-section topBarVisibility">
                             <p>Top Bar Visibility:</p>
-                            <select name='topBarVisibility' value={state.topBarVisibility} onChange={e => onChangeHandler(e)}>
+                            <select name='topBarVisibility' value={state.topBarVisibility || false} onChange={e => onChangeHandler(e)}>
+                                <option value='true'>Enable</option>
+                                <option value='false'>Disable</option>
+                            </select>
+                        </div>
+                        <div className="site-settings-form-section headerVisibility">
+                            <p>Header Visibility:</p>
+                            <select name='headerVisibility' value={state.headerVisibility || false} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>
@@ -155,7 +162,7 @@ const settings = props => {
 
                         <div className="site-settings-form-section searchBarInTopBar">
                             <p>SearchBar In TopBar:</p>
-                            <select name='searchBarInTopBar' value={state.searchBarInTopBar} onChange={e => onChangeHandler(e)}>
+                            <select name='searchBarInTopBar' value={state.searchBarInTopBar || false} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>
@@ -176,14 +183,14 @@ const settings = props => {
 
                         <div className="site-settings-form-section membership">
                             <p>Membership:</p>
-                            <select name='membership' value={state.membership} onChange={e => onChangeHandler(e)}>
+                            <select name='membership' value={state.membership || false} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>
                         </div>
                         <div className="site-settings-form-section allowUserToPost">
                             <p>Allow Users To Create New Post:</p>
-                            <select name='allowUserToPost' value={state.allowUserToPost} onChange={e => onChangeHandler(e)}>
+                            <select name='allowUserToPost' value={state.allowUserToPost|| false} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>
@@ -197,14 +204,14 @@ const settings = props => {
                         </div>
                         <div className="site-settings-form-section topBarAuthBtn">
                             <p>Top Bar Login or Register Buttons :</p>
-                            <select name='topBarAuthBtn' value={state.topBarAuthBtn} onChange={e => onChangeHandler(e)}>
+                            <select name='topBarAuthBtn' value={state.topBarAuthBtn || false} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>
                         </div>
                         <div className="site-settings-form-section anyoneCanRegister">
                             <p>Any One Can Register :</p>
-                            <select name='anyoneCanRegister' value={state.anyoneCanRegister} onChange={e => onChangeHandler(e)}>
+                            <select name='anyoneCanRegister' value={state.anyoneCanRegister || false} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>

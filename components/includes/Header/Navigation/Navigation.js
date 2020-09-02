@@ -112,17 +112,20 @@ const Navigation = props => {
         )
     })
 
-    return (
+    if ((contextData.navigationData || []).length >0){
+        return (
             <div ref={navigation} className='navigation' style={navigationData.style}>
                 <LoggedInItemsForMenu visible={contextData.state.isMobile}/>
                 <LoggedOutItemsMenu visible={contextData.state.isMobile}/>
                 <div className="navigation-links">
                     {renderNavigationItems}
                 </div>
-
-
             </div>
-    );
+        );
+    }else return null
+
+
+
 };
 
 export default withRouter(Navigation);

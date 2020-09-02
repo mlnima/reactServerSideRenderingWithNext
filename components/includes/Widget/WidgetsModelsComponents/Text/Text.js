@@ -5,29 +5,34 @@ const Text = props => {
     const spanElement = useRef(null)
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
-        textAlign: props.textAlign || 'center',
-        style: {
-            textAlign: props.textAlign || 'center'
-        }
+        style: {},
+        textData: ''
     });
 
+
     useEffect(() => {
-        if (spanElement) {
-            spanElement.current.innerHTML =  props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text
-        }
+        setState({
+            ...state,
+            style: {
+                textAlign: props.textAlign || 'center',
+                color: props.textColor || 'white',
+            },
+            textData: props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text
+        })
     }, [props]);
 
 
+    useEffect(() => {
+        spanElement.current.innerHTML = state.textData
+    }, [state]);
+
+    useEffect(() => {
+        console.log(state)
+    }, [state]);
+
     return (
-        <span className='widgetText' ref={spanElement} style={state.style}>
-            {/*{*/}
-            {/*    // props.text*/}
-
-            {/*    props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text*/}
-
-
-            {/*}*/}
-        </span>
+        <p className='widgetText' ref={spanElement} style={state.style}>
+        </p>
     );
 };
 export default Text;

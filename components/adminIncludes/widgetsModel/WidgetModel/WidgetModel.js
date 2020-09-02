@@ -196,6 +196,9 @@ const WidgetModel = props => {
                     <option value='center'>Center</option>
                     <option value='right'>Right</option>
                 </select>
+                <p>Text Color:</p>
+                <DelayInput name='textColor' value={widgetData.data.textColor || ''} delayTimeout={4000}
+                            onChange={e => onChangeHandler(e)}/>
             </>
         )
     }

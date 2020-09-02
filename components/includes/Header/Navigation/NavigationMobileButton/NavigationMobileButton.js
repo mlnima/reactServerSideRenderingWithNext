@@ -60,7 +60,7 @@ const NavigationMobileButton = props => {
 
     if (window.innerWidth<=768){
         return (
-            <button style={state.colorsStyle}  ref={navigationMobileBtn} className='navigationMobileBtn'
+            <button style={{...state.colorsStyle,backgroundColor:'transparent'}}  ref={navigationMobileBtn} className='navigationMobileBtn'
                     onClick={onNavigationMobileBtnClickHandler}>
                 <FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo'  />
             </button>
