@@ -207,11 +207,10 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
         settingsControllers.executor(req, res)
     });
     //cache control
-    server.post('/api/v1/settings/clearCaches', (req, res) => {
+    server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apicache.clear(req.params.collection)
+        pageCache.ssrCache.reset()
         res.end()
-        // console.log(ssrCache)
-        // settingsControllers.clearCaches(req,res)
     });
 
     //forms
