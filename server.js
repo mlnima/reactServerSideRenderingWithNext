@@ -18,65 +18,14 @@ const path = require('path');
 const authMiddleware = require('./server/middlewares/authMiddleware');
 const adminAuthMiddleware = require('./server/middlewares/adminAuthMiddleware');
 const apiRequestMiddleware = require('./server/middlewares/apiRequestMiddleware');
-
 const xmlparser = require("express-xml-bodyparser");
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 const apicache = require('apicache')
-const cacheableResponse = require('cacheable-response')
-//cache api
-const cache = apicache.middleware;
-const cacheOn = (req, res) => {
-    return res.statusCode === 200 && req.body.cache;
-}
-const cacheForceOn = (req, res) => {
-    return res.statusCode === 200;
-}
-const cacheSuccesses = cache('1 day', cacheOn);
-
-const cacheForce = cache('1 day', cacheForceOn);
+const cacheSuccesses = require('./server/middlewares/apiCache')
+const pageCache = require('./server/tools/pageCache')
 mongoose.Promise = global.Promise;
-//--
-//cache app
-const ssrCache = cacheableResponse({
-    ttl: 1000 * 60 * 60, // 1hour
-    get: async ({req, res}) => {
-        const data = await app.renderToHTML(req, res, req.path, {
-            ...req.query,
-            ...req.params,
-        })
-        if (res.statusCode === 404) {
-            res.end(data)
-            return
-        }
-
-        return {data}
-    },
-    send: ({data, res}) => res.send(data),
-})
-
-const cacheWithTargetComponent = (req, res, path) => {
-    cacheableResponse({
-        ttl: 1000 * 60 * 60, // 1hour
-        get: async ({req, res}) => {
-            const data = await app.render(req, res, path, {
-                ...req.query,
-                ...req.params,
-            })
-            if (res.statusCode === 404) {
-                res.end(data)
-                return
-            }
-
-            return {data}
-        },
-        send: ({data, res}) => res.send(data),
-    })
-}
-
-
-//--
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
@@ -89,7 +38,7 @@ mongoose.connect(mongoDBConnectionUrl, {
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
 
-//Issue with __dirname
+
 const robotsOptions = {
     root: './static/',
     headers: {'Content-Type': 'text/plain;charset=utf-8'}
@@ -100,17 +49,25 @@ app.prepare().then(() => {
     const server = express();
     server.use(cookieParser());
     server.use(fileUpload());
-    // server.use(fileUpload({
-    //     useTempFiles: true,
-    //     tempFileDir: './tmp/'
-    // }));
     server.use(bodyParser.json());
     server.use(xmlparser());
+
     //-------------------
     server.use('/static', express.static(path.join(__dirname, 'static')))
     //--------------------
     server.get('/robots.txt', (req, res) => {
-        return res.status(200).sendFile('robots.txt', robotsOptions)
+        res.set('Content-Type', 'text/plain;charset=utf-8');
+
+        const robotTxtData = `User-agent: *
+Disallow: /admin
+Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
+`
+        res.send(robotTxtData);
+        res.end()
+        // return res.status(200).sendFile('robots.txt', robotsOptions)
+    });
+    server.get('/', (req, res) => {
+        return pageCache.renderAndCache(req, res,app)
     });
 
     //xml siteMap handler
@@ -439,24 +396,7 @@ app.prepare().then(() => {
         app.render(req, res, targetComponent)
     });
 
-    // server.get('/meta', (req, res) => {
-    //     const targetComponent = '/meta';
-    //     const queryParams = {
-    //         type: req.query.type,
-    //         sort: req.query.sort,
-    //         startWith: req.query.startWith,
-    //         page: req.query.page,
-    //         keyword: req.query.keyword ,
-    //         size: req.query.size,
-    //         lang: req.query.lang
-    //     }
-    //     app.render(req, res, targetComponent, queryParams,)
-    // });
-
-    // server.get('/', (req, res) => ssrCache({req, res}));
-
     server.get('*', (req, res) => {
-
         return handle(req, res)
     });
 
