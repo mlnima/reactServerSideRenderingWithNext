@@ -2,8 +2,8 @@ import React, {useEffect, useState} from 'react';
 import './MetaWidget.scss'
 import Link from 'next/link'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTag} from "@fortawesome/free-solid-svg-icons";
-import {faFolder, faStar} from "@fortawesome/free-regular-svg-icons";
+import { faFolder, faTag} from "@fortawesome/free-solid-svg-icons";
+import {faStar} from "@fortawesome/free-regular-svg-icons";
 
 const MetaWidget = props => {
     const [state, setState] = useState({

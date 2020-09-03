@@ -20,18 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/build-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/build-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/pages-manifest.json" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/pages-manifest.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/server/static/development/pages/_error.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/_buildManifest.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/development/pages/_error.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/.next/static/runtime/webpack.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/LoggedInItemsForMenu/LoggedInItemsForMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoggedInItemsForMenu/LoggedInItemsForMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/TopBar/TopBar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TopBar/TopBar.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MetaWidget/MetaWidget.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -398,7 +388,7 @@
       <workItem from="1599054052154" duration="15296000" />
       <workItem from="1599115043999" duration="3191000" />
       <workItem from="1599134966714" duration="6540000" />
-      <workItem from="1599150819301" duration="1007000" />
+      <workItem from="1599150819301" duration="1641000" />
     </task>
     <servers />
   </component>

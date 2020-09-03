@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext} from 'react';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
-import {faBars, faFolder, faTag} from "@fortawesome/free-solid-svg-icons";
+import { faFolder, faTag} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './TagsAndCategoriesActors.scss'
