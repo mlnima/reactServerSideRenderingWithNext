@@ -105,6 +105,7 @@ app.prepare().then(() => {
 
         const robotTxtData = `User-agent: *
 Disallow: /admin
+Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 `
         //Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         res.send(robotTxtData);

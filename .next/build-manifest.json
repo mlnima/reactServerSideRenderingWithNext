@@ -8,23 +8,25 @@
     "static/development/_ssgManifest.js"
   ],
   "pages": {
+    "/404": [
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
     "/_app": [
       "static/runtime/webpack.js",
       "static/runtime/main.js"
     ],
     "/_error": [
       "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
     "/_polyfills": [
       "static/runtime/polyfills.js",
       "static/runtime/polyfills.js.map"
-    ],
-    "/admin/post": [
-      "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
     ]
   }
 }

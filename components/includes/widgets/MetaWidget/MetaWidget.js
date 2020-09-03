@@ -34,16 +34,17 @@ const MetaWidget = props => {
 
         return (
             <div key={meta.name} className='meta-child-element' style={state.style}>
-                {/*<img className='fontawesomeSvgSmall' src={icon} alt=""/>*/}
-                <FontAwesomeIcon icon={icon} />
-                <Link  href={`posts?${meta.type}=${meta.name}`}>
-                    <a className='meta-widget-item' style={state.style}>{meta.name}</a></Link>
+
+                <FontAwesomeIcon icon={icon}/>
+                <Link
+                    // href={`posts?${meta.type}=${meta.name}`}
+                    href={`${meta.type}/${meta.name}?content=${meta._id}`}
+                >
+                    <a className='meta-widget-item' style={state.style}>  {' ' + meta.name}</a></Link>
             </div>
         )
     })
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [props]);
+
     return (
         <div className='meta-widget'>
             {renderMeta}
