@@ -107,9 +107,11 @@
        justify-content: flex-start;
        a, p{
          text-decoration: none;
+
          .logged-in-item-logo,.logged-out-item-logo{
-           width: 48px;
-           height: 48px;
+           width: 30px;
+           height: 30px;
+
          }
        }
      }
