@@ -105,14 +105,15 @@ app.prepare().then(() => {
 
         const robotTxtData = `User-agent: *
 Disallow: /admin
-Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 `
+
         //Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         res.send(robotTxtData);
         res.end()
         // return res.status(200).sendFile('robots.txt', robotsOptions)
     });
     server.get('/', (req, res) => {
+        console.log(process.env.PRODUCTION_URL)
         const targetComponent = '/';
         const queryParams = {
             ...req.query,
