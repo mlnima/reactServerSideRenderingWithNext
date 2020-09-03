@@ -1,5 +1,5 @@
 @import "../../../../styles/colors";
-.WidgetHeader{
+.widget-Header {
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -9,13 +9,15 @@
   border-radius: 5px;
   border-left: 5px solid $linkBlueColor;
   max-height: 30px;
-  .WidgetHeaderTitle{
+  .widget-header-title{
+    font-weight: initial;
+    font-size: 16px;
     padding: 0 10px;
   }
   a{
-    //color: $light100;
     background-color: $red50;
     padding: 3px 5px;
     border-radius: 5px;
   }
 }
+

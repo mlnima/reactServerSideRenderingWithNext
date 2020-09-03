@@ -2,7 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import WidgetHeader from "./WidgetHeader/WidgetHeader";
 import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
-import _JSXStyle from 'styled-jsx/style'
+import './Widget.scss'
+// import _JSXStyle from 'styled-jsx/style'
 
 const Widget = props => {
 
@@ -27,9 +28,7 @@ const Widget = props => {
         }
     }, [ props ]);
 
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [ props ]);
+
 
     const RenderCustomStyles = () => {
         if (props.data.customStyles) {
@@ -44,7 +43,7 @@ const Widget = props => {
     return (
         <>
             <RenderCustomStyles/>
-            <div className={ 'Widget ' + state.extraClassName }>
+            <div className={ 'widget ' + state.extraClassName }>
                 <WidgetHeader { ...props.data }/>
                 <WidgetText { ...props.data }/>
                 <RenderComponent/>

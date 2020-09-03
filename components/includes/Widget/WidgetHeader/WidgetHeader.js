@@ -2,6 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import Link from 'next/link'
 import {AppContext} from '../../../../context/AppContext'
 import withRouter from "next/dist/client/with-router";
+import './WidgetHeader.scss'
 const WidgetHeader = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
@@ -30,7 +31,7 @@ const WidgetHeader = props => {
     const RenderTitle = () => {
         if (props.title) {
             return (
-                <p className='WidgetHeaderTitle'>{ props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].title || props.title : props.title : props.title }</p>
+                <h2 className='widget-header-title'>{ props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].title || props.title : props.title : props.title }</h2>
             )
         } else return null
     }
@@ -45,7 +46,7 @@ const WidgetHeader = props => {
 
     if (props.title) {
         return (
-            <div className='WidgetHeader' style={state.style.widgetHead}>
+            <div className='widget-Header' style={state.style.widgetHead}>
                 <RenderTitle/>
                 <RenderRedirectLink/>
             </div>
