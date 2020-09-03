@@ -58,7 +58,9 @@ const TagsAndCategoriesActors = props => {
         return (
             <div key={item.name} style={styles} className='post-meta-item'>
                 <FontAwesomeIcon icon={icon} className='meta-data-logo'  />
-                <Link href={path}   key={item.name}><a className={state.type} style={styles}>{item.name}</a></Link>
+                <Link href={path}   key={item.name}>
+                    <a className={state.type} style={styles}>{item.name}</a>
+                </Link>
             </div>
         )
     });

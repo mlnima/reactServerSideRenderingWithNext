@@ -181,7 +181,6 @@ postsControllers.getPostsInfo = async (req, res) => {
 
 postsControllers.getPostInfo = (req, res) => {
     const _id = req.body._id;
-    console.log(req.body)
     postSchema.findById(_id).exec().then(async post => {
         const postData = {
             ...post.toObject(),

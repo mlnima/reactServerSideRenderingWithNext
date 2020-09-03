@@ -102,9 +102,9 @@ app.prepare().then(() => {
     //--------------------
     server.get('/robots.txt', (req, res) => {
         res.set('Content-Type', 'text/plain;charset=utf-8');
-
         const robotTxtData = `User-agent: *
 Disallow: /admin
+Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 `
 
         //Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml

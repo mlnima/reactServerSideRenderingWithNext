@@ -25,22 +25,19 @@ const MetaWidget = props => {
     }, [props]);
 
     const renderMeta = (props.metaData || []).map(meta => {
-
+        const path = `/posts?content=${meta._id}`;
         const icon = meta.type === 'categories' ? faFolder
             : meta.type === 'tags' ? faTag
                 : meta.type === 'actors' ? faStar
                     : faTag
 
-
         return (
             <div key={meta.name} className='meta-child-element' style={state.style}>
 
-                <FontAwesomeIcon icon={icon}/>
-                <Link
-                    // href={`posts?${meta.type}=${meta.name}`}
-                    href={`${meta.type}/${meta.name}?content=${meta._id}`}
-                >
-                    <a className='meta-widget-item' style={state.style}>  {' ' + meta.name}</a></Link>
+                <FontAwesomeIcon icon={icon} className='meta-data-logo'/>
+                <Link href={path} key={meta.name}>
+                    <a className='meta-widget-item' style={state.style}>  {meta.name}</a>
+                </Link>
             </div>
         )
     })
