@@ -1,6 +1,6 @@
 .media-widget {
-  img, video {
-    width: 100%;
+  .media-element {
+    width: 100vw;
     margin: 10px 0;
   }
 }
@@ -29,4 +29,11 @@
   font-size: 17px;
   width: 90%;
   margin: auto;
+}
+@media only screen and (min-width: 1024px) {
+  .media-widget {
+    .media-element {
+      width: 100%;
+    }
+  }
 }

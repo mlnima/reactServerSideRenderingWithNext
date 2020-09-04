@@ -446,6 +446,7 @@ const WidgetModel = props => {
                         <option value='tagsPagesSidebar'>Tags Page SideBar</option>
                         <option value='actorsPagesSidebar'>Actors Page SideBar</option>
                         <option value='footer'>footer</option>
+                        <option value='deactivate'>deactivate</option>
                     </select>
 
 

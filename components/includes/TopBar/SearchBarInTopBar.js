@@ -17,6 +17,7 @@ const SearchBarInTopBar = props => {
            colorsStyle: props.colorsStyle
        })
     }, [props]);
+
     const onMobileSearchBarOpenHandler = () => {
         state.mobileSearchBarOpen ?
             setState({
@@ -33,14 +34,14 @@ const SearchBarInTopBar = props => {
             if (state.mobileSearchBarOpen) {
                 return (
                     <div className='search-bar-top'>
-                        <button style={state.colorsStyle} className='top-bar-item' onClick={onMobileSearchBarOpenHandler}><FontAwesomeIcon icon={faTimes} className='top-bar-item-logo'/></button>
+                        <button style={{...state.colorsStyle,backgroundColor:'transparent'}} className='top-bar-item' onClick={onMobileSearchBarOpenHandler}><FontAwesomeIcon style={{...state.colorsStyle,backgroundColor:'transparent'}} icon={faTimes} className='top-bar-item-logo'/></button>
                         <SearchInputComponent searchBtnBackgroundColor={state.colorsStyle.backgroundColor} searchBtnColor={state.colorsStyle.color}/>
                     </div>
                 )
             } else {
                 return (
                     <div className='search-bar-top'>
-                        <button style={state.colorsStyle} className='top-bar-item' onClick={onMobileSearchBarOpenHandler}><FontAwesomeIcon icon={faSearch} className='top-bar-item-logo'/></button>
+                        <button style={{...state.colorsStyle,backgroundColor:'transparent'}} className='top-bar-item' onClick={onMobileSearchBarOpenHandler}><FontAwesomeIcon icon={faSearch} className='top-bar-item-logo'/></button>
                     </div>
                 )
             }
