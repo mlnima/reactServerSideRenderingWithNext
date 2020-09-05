@@ -8,8 +8,23 @@ import './Widget.scss'
 const Widget = props => {
 
     const [ state, setState ] = useState({
-        extraClassName: ''
+        extraClassName: '',
+        isMobile: true,
     })
+
+    useEffect(() => {
+        window.innerWidth > 1024?
+            setState({
+                ...state,
+                isMobile: false
+            }):
+            setState({
+                ...state,
+                isMobile: true
+            })
+    }, [props]);
+
+
 
     const RenderComponent = () => {
         if (props.component) {
@@ -40,18 +55,23 @@ const Widget = props => {
         } else return null
     }
 
-    return (
-        <>
-            <RenderCustomStyles/>
-            <div className={ 'widget ' + state.extraClassName }>
-                <WidgetHeader { ...props.data }/>
-                <WidgetText { ...props.data }/>
-                <RenderComponent/>
-                <WidgetFooter  { ...props.data }/>
-            </div>
 
-        </>
-    );
+    if (!props.data.deviceTypeToRender || props.data.deviceTypeToRender ==='all' || (state.isMobile && props.data.deviceTypeToRender === 'mobile') ||(!state.isMobile && props.data.deviceTypeToRender === 'desktop')  ){
+        return (
+            <>
+                <RenderCustomStyles/>
+                <div className={ 'widget ' + state.extraClassName }>
+                    <WidgetHeader { ...props.data }/>
+                    <WidgetText { ...props.data }/>
+                    <RenderComponent/>
+                    <WidgetFooter  { ...props.data }/>
+                </div>
+
+            </>
+        );
+    }else return null
+
+
 };
 export default Widget;
 

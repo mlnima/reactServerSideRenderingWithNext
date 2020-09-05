@@ -418,6 +418,12 @@ const WidgetModel = props => {
                         <option value='default'>Default</option>
                         {languagesOptions}
                     </select>
+                    <p>Device Type To Render:</p>
+                    <select name='deviceTypeToRender' value={widgetData.data.deviceTypeToRender} onChange={e => onChangeHandler(e)}>
+                        <option value='all'>All</option>
+                        <option value='mobile'>Mobile</option>
+                        <option value='desktop'>Desktop ( > 1024px)</option>
+                    </select>
                     <p>Type:</p>
                     <select name='type' value={widgetData.data.type} onChange={e => onChangeHandler(e)}>
                         <option value='posts'>Posts</option>
@@ -431,14 +437,16 @@ const WidgetModel = props => {
                         <option value='navigationMenu'>Navigation Menu</option>
                         <option value='alphabeticalNumericalRange'>Alphabetical Numerical Range</option>
                         <option value='language'>Language</option>
+                        <option value='authentication'>Authentication</option>
                     </select>
 
                     <TextInputFieldForWidget element='input' inputTitle='Widget Index :' name='widgetIndex' type='number' value={widgetData.data.widgetIndex} classNameValue='widgetIndex' placeHolder='Widget Index' onChangeHandler={onChangeHandler} />
 
                     <p>Position:</p>
                     <select name='position' value={widgetData.data.position} onChange={e => onChangeHandler(e)}>
-                        <option value='home'>Home</option>
+                        <option value='topBar'>Top Bar</option>
                         <option value='header'>Header</option>
+                        <option value='home'>Home</option>
                         <option value='homePageSidebar'>Home Page Sidebar</option>
                         <option value='postPageSidebar'>Post Page SideBar</option>
                         <option value='postsPageSidebar'>Posts Page SideBar</option>

@@ -137,7 +137,7 @@ Post.getInitialProps = async ({ pathname, query, req, res, err }) => {
     const postData = await getPost(requestBody, domainName, true)
     post = postData.data.post
 
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header','underPost' ] }, domainName, true, 'postPage')
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'postPageSidebar', 'footer', 'header','underPost','topBar' ] }, domainName, true, 'postPage')
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true, 'postPage')
 
     if (!post) {

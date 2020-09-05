@@ -1,12 +1,4 @@
 {
-  "./SearchBarInTopBar": [
-    {
-      "id": "./components/includes/TopBar/SearchBarInTopBar.js",
-      "name": "./components/includes/TopBar/SearchBarInTopBar.js",
-      "file": "static/chunks/1.js",
-      "publicPath": "static/chunks/1.js"
-    }
-  ],
   "./dev/noop": [
     {
       "id": "./node_modules/next/dist/client/dev/noop.js",

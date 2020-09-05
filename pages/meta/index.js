@@ -93,7 +93,7 @@ meta.getInitialProps = async ({pathname, query, req, asPath}) => {
     let metaSource;
 
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']},  domainName,true, 'tagsPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header']},  domainName,true, 'tagsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header','topBar']},  domainName,true, 'tagsPage')
     const metaData = await getMeta(dataForGettingMeta, domainName, true)
 
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []

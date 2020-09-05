@@ -29,8 +29,9 @@ const SearchBarInTopBar = props => {
                 mobileSearchBarOpen: true
             })
     }
+
     if (contextData.siteIdentity.searchBarInTopBar) {
-        if (window.innerWidth < 768) {
+
             if (state.mobileSearchBarOpen) {
                 return (
                     <div className='search-bar-top'>
@@ -46,12 +47,6 @@ const SearchBarInTopBar = props => {
                 )
             }
 
-
-        } else return (
-            <div className='search-bar-top'>
-                <SearchInputComponent searchBtnBackgroundColor={state.colorsStyle.backgroundColor} searchBtnColor={state.colorsStyle.color}/>
-            </div>
-        )
     } else return null
 };
 export default SearchBarInTopBar;

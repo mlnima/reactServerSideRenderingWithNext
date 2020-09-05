@@ -14,6 +14,7 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu type='navigationMenu' name='Navigation Menu'/>
             <AddWidgetWithPositionMenu type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
             <AddWidgetWithPositionMenu type='language' name='Language'/>
+            <AddWidgetWithPositionMenu type='authentication' name='Authentication'/>
         </div>
     );
 };

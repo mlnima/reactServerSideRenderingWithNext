@@ -6,8 +6,8 @@ import {pathAndAsPathGenerator} from '../../../../_variables/_variables'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import NavigationMobileButton from "./NavigationMobileButton/NavigationMobileButton";
-import LoggedInItemsForMenu from "../../LoggedInItemsForMenu/LoggedInItemsForMenu";
-import LoggedOutItemsMenu from "../../LoggedOutItemsMenu/LoggedOutItemsMenu";
+import LoggedInItemsForMenu from "../../widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu";
+import LoggedOutItemsMenu from "../../widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu";
 
 const Navigation = props => {
     const contextData = useContext(AppContext);

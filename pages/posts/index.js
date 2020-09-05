@@ -102,7 +102,7 @@ posts.getInitialProps = async ({pathname, query, req, res, err}) => {
 
     const contentData = query.content ? await getSingleMeta(query.content,domainName,true) : {}
     const contentDataInfo =   contentData.data ?  contentData.data.meta : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'home', 'footer', 'header']}, domainName, true, 'postsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'home', 'footer', 'header','topBar']}, domainName, true, 'postsPage')
     const postsData = await getPosts(getPostsData, domainName, true)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

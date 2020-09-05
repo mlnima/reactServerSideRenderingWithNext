@@ -8,6 +8,7 @@ import SearchInputComponent from '../widgets/SearchInputComponent/SearchInputCom
 import AlphabeticalNumericalRangeLinksWidget from '../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'
 import LanguagesSwitcher from '../widgets/LanguagesSwitcher/LanguagesSwitcher'
 import Logo from '../Logo/Logo'
+import Authentication from "../widgets/Authentication/Authentication";
 
 const WidgetsRenderer = props => {
     const widgetInTypeOfPropsPosition = (props.widgets || []).filter(widget => widget.data.position === props.position)
@@ -57,6 +58,11 @@ const WidgetsRenderer = props => {
             case 'language':
                 return (
                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ LanguagesSwitcher } { ...widget } />
+                )
+
+            case 'authentication':
+                return (
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ Authentication } { ...widget } />
                 )
 
             default:

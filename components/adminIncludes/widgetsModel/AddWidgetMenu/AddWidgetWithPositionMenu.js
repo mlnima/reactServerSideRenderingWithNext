@@ -52,6 +52,7 @@ const AddWidgetWithPositionMenu = props => {
             <div className='AddWidgetWithPositionMenu'>
                 <button className='positionsOpener' onClick={()=>onOpenHandler()}>{props.name}</button>
                 <div className="AddWidgetWithPositionMenuPositions">
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('topBar', props.type) }>Top Bar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('home', props.type) }>Home Page</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('header', props.type) }>Header</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('dynamicTopBar', props.type) }>Dynamic Top Bar</button>

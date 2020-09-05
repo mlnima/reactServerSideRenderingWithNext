@@ -65,7 +65,7 @@ contact.getInitialProps = async ({pathname, query, req, asPath}) => {
     let settings;
     let widgets;
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header']}, domainName, true, 'tagsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: [ 'footer', 'header','topBar']}, domainName, true, 'tagsPage')
 
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

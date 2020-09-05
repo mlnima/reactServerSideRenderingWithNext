@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import {AppContext} from "../../../../../context/AppContext";
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
@@ -8,7 +8,7 @@ import {faPen} from "@fortawesome/free-solid-svg-icons";
 const LoggedOutItemsMenu = props => {
     const contextData = useContext(AppContext);
 
-    if (!contextData.userData.username && contextData.siteIdentity.topBarAuthBtn && props.visible) {
+    if (!contextData.userData.username && props.visible) {
         return (
             <div className='logged-out-items'>
                 <Link href='/auth/login' as='/login'>
