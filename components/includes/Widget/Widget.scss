@@ -2,6 +2,8 @@
 
 .widget {
   margin: 20px 0;
+  padding: 0;
+  max-width: 100vw;
   color: $light100;
 
   .Posts {
