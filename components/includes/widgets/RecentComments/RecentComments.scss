@@ -2,9 +2,10 @@
 
 .recent-comments{
    padding: 10px;
-  max-width: 100vw;
+   max-width: 100vw;
   .recent-comments-item{
-    //display: flex;
+    display: flex;
+    flex-direction: column;
     //align-items: center;
     //max-height: 35px;
     word-wrap: break-word;

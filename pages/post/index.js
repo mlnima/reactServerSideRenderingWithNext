@@ -109,7 +109,7 @@ const Post = props => {
                             {...props.post}
                         />
                         <CommentsRenderer comments={ props.comments }/>
-                        <CommentFrom documentId={ props.post._id }/>
+                        <CommentFrom documentId={ props.post._id } documentTitle={ props.post.title }/>
                         <div className='under-post-widget-area'>
                             <WidgetsRenderer widgets={ props.widgets } position='underPost'/>
                         </div>

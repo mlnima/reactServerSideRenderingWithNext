@@ -2,7 +2,8 @@
 const mongoose = require('mongoose');
 
 const commentSchema = mongoose.Schema({
-    onDocument: mongoose.Types.ObjectId,
+    onDocumentId: mongoose.Types.ObjectId,
+    onDocumentTitle: String,
     author: String,
     authorID:mongoose.Types.ObjectId,
     email:String,

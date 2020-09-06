@@ -53,16 +53,15 @@ const CommentsRenderer = props => {
         } else return null
     }
 
-    // useEffect(() => {
-    //     console.log(contextData.userData)
-    // }, [ contextData.userData ]);
+
 
     const renderComments = props.comments.map(comment => {
+        console.log(comment)
         const commentDate = new Date(comment.postedDate)
         return (
             <div key={ comment.postedDate } style={ state.style } className='comments-item'>
-                <p style={ state.authorStyle } className='comment-author'>{ comment.author } says:</p>
                 <p style={ state.dateStyle } className='comment-date'>{ commentDate.toLocaleDateString() }</p>
+                <p style={ state.authorStyle } className='comment-author'>{ comment.author }:</p>
                 <p style={ state.bodyStyle } className='comment-body'>{ comment.body }</p>
                 <RenderAdminActionBtns id={ comment._id }/>
                 <div className='comment-triangle' style={{

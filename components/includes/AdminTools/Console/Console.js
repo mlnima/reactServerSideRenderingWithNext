@@ -14,14 +14,6 @@ const Console = props => {
         results: '',
         lastCommands:[]
     });
-    useEffect(() => {
-        console.log(contextData.siteDesign)
-    }, [contextData.siteDesign]);
-
-//design bodyBackgroundColor white
-
-
-
 
     const designChange = (key, value)=>{
         contextData.dispatchState({

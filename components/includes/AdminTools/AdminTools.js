@@ -15,12 +15,6 @@ const AdminTools = props => {
         console: false
     });
 
-
-    useEffect(() => {
-        console.log(contextData.userData)
-    }, [contextData.userData]);
-
-
     if (contextData.userData.role === 'administrator') {
         if (state.open) {
             return (

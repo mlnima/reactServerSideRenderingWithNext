@@ -381,7 +381,7 @@ postsControllers.newComment = (req, res) => {
 postsControllers.getComments = (req, res) => {
     const size = parseInt(req.body.size) > 50 ? 50 : parseInt(req.body.size)
     const pageNo = req.body.pageNo ? parseInt(req.body.pageNo) : 1
-    const onDocument = req.body.onDocument ? {onDocument: req.body.onDocument} : {}
+    const onDocument = req.body.onDocument ? {onDocumentId: req.body.onDocument} : {}
     const status = !req.body.status || req.body.status === 'all' ? {status: 'approved'} : {status: req.body.status}
     let sortQuery = req.body.sort === 'latest' ? '-_id' : {[req.body.sort]: -1}
     const searchQuery = !req.body.keyword ? {} : {

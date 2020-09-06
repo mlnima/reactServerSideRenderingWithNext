@@ -16,7 +16,8 @@ const CommentFrom = props => {
             author: authorInput.current ? authorInput.current.value : contextData.userData.username || contextData.userData.username,
             authorID: contextData.userData._id,
             email: emailInput.current ? emailInput.current.value : contextData.userData.email || contextData.userData.email,
-            onDocument: props.documentId
+            onDocumentId: props.documentId,
+            onDocumentTitle:props.documentTitle
         }
         if (props.documentId) {
             newComment(commentData).then(res => {
