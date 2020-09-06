@@ -26,10 +26,6 @@ const Text = props => {
         spanElement.current.innerHTML = state.textData
     }, [state]);
 
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
-
     return (
         <p className='widgetText' ref={spanElement} style={state.style}>
         </p>
