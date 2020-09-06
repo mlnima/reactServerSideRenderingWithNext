@@ -2,8 +2,8 @@ import React, { useEffect, useState, useContext } from 'react';
 import WidgetHeader from "./WidgetHeader/WidgetHeader";
 import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
-import './Widget.scss'
-// import _JSXStyle from 'styled-jsx/style'
+import './Widget.scss';
+// import styleConverter from 'sass-convert'
 
 const Widget = props => {
 

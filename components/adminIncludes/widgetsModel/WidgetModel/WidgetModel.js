@@ -19,6 +19,7 @@ const WidgetModel = props => {
     const [widgetData, setWidgetData] = useState({
         data: {}
     })
+
     const [widgetSettings, setWidgetSettings] = useState({
         open: false,
         preview: false,
@@ -42,9 +43,6 @@ const WidgetModel = props => {
         })
     }
 
-    useEffect(() => {
-        console.log(widgetData)
-    }, [props,widgetData]);
     const onTextInputsDataChangeHandler = (e) => {
         if (widgetSettings.activeEditingLanguage === 'default') {
             setTextInputsData({
@@ -64,7 +62,6 @@ const WidgetModel = props => {
             })
         }
     }
-
 
     useEffect(() => {
         setWidgetData({
@@ -144,39 +141,6 @@ const WidgetModel = props => {
 
     }
 
-
-    // const RenderRedirect = () => {
-    //     return (
-    //         <>
-    //             <p>Redirect Link URL:</p>
-    //             <DelayInput className='redirectLink' name='redirectLink' placeholder='Redirect'
-    //                         value={widgetData.data.redirectLink} delayTimeout={1000}
-    //                         onChange={e => onChangeHandler(e)}/>
-    //         </>
-    //     )
-    // }
-
-    // const RenderSelectedMetaForPosts = () => {
-    //     return (
-    //         <>
-    //             <p>Selected Meta For Posts:</p>
-    //             <DelayInput className='redirectLink' name='selectedMetaForPosts' placeholder='Enter the meta ID'
-    //                         value={widgetData.data.selectedMetaForPosts} delayTimeout={1000}
-    //                         onChange={e => onChangeHandler(e)}/>
-    //         </>
-    //     )
-    // }
-
-    // const RenderCount = () => {
-    //     return (
-    //         <>
-    //             <p>Count:</p>
-    //             <DelayInput name='count' type='number' value={textInputsData.count} placeholder='count'
-    //                         className='count' delayTimeout={1000} onChange={e => onTextInputsDataChangeHandler(e)}/>
-    //         </>
-    //     )
-    // }
-
     const RenderText = () => {
         return (
             <>
@@ -209,6 +173,11 @@ const WidgetModel = props => {
                 <p>Extra ClassName for Custom Style:</p>
                 <DelayInput name='extraClassName' value={widgetData.data.extraClassName || ''} delayTimeout={4000}
                             onChange={e => onChangeHandler(e)}/>
+                <p>Style Engine:</p>
+                <select name='styleEngine' value={widgetData.data.styleEngine || 'css'} onChange={e => onChangeHandler(e)}>
+                    <option value='css'>Css</option>
+                    <option value='scss'>Scss</option>
+                </select>
                 <p>Custom Styles:</p>
                 <DelayInput element="textarea" className='customStylesTextarea' name='customStyles'
                             value={widgetData.data.customStyles || ''} delayTimeout={4000}
@@ -405,9 +374,8 @@ const WidgetModel = props => {
     if (widgetSettings.open) {
         return (
             <>
-                <div className='widget-open-control'>
+                <div className='widget-open-control' onClick={() => onOpenHandler()}>
                     <p>{props.data.data.title || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
-                    <button onClick={() => onOpenHandler()}>{widgetSettings.open ? 'close' : 'open'}</button>
                 </div>
                 <div className='widgetModel'>
                     <div className='widgetInfo'>
@@ -479,14 +447,13 @@ const WidgetModel = props => {
         );
     } else {
         return (
-            <div className='widget-open-control'>
+            <div className='widget-open-control' onClick={() => onOpenHandler()}>
                 <p> {props.data.data.title || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
                 <div>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}><img
                         className='fontawesomeSvgVerySmall' src={SortUpSvg} alt=""/></button>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(true)}><img
                         className='fontawesomeSvgVerySmall' src={SortDownSvg} alt=""/></button>
-                    <button onClick={() => onOpenHandler()}>{widgetSettings.open ? 'close' : 'open'}</button>
                 </div>
             </div>
         )

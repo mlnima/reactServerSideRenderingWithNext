@@ -9,6 +9,7 @@ const { spawn } = require('child_process');
 const shell = require('shelljs');
 const dataEncoder = require('../tools/dataEncoder')
 const mongoose = require('mongoose')
+const sassConverter = require('sass-convert');
 let settingsControllers = {}
 
 settingsControllers.update = (req, res) => {
@@ -36,7 +37,6 @@ settingsControllers.update = (req, res) => {
     })
     res.end()
 };
-
 settingsControllers.get = async (req, res) => {
     const setting = await settingSchema.findOne({ type: req.body.type }).exec();
     res.json({ setting })
@@ -61,8 +61,6 @@ settingsControllers.getMultiple = async (req, res) => {
         res.end()
     })
 };
-
-
 settingsControllers.create = (req, res) => {
     const dataToSave = new settingSchema({
         type: req.body.type,
@@ -92,7 +90,6 @@ settingsControllers.getWidget = (req, res) => {
         res.end()
     })
 }
-
 settingsControllers.getWidgetsWithData = (req, res) => {
     const position = req.body.position === 'all' ? {} : { position: req.body.position };
     widgetSchema.find(position).exec().then(async widgets => {
@@ -157,6 +154,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
         })
 
         const mapWidgetsToGetDataForThem = finalData.map(async widget=>{
+            const widgetDataToObject = widget.toObject()
             const sortMethod = widget.data.sortBy ? { [widget.data.sortBy]: -1 } : '-_id';
             let sortQuery = !req.body.sort ? {} : req.body.sort === '_id' || req.body.sort === '-_id' ? req.body.sort : { [req.body.sort]: -1 }
             let selectedMeta = widget.data.selectedMetaForPosts ? {$or:[
@@ -165,10 +163,26 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
                     {actors:widget.data.selectedMetaForPosts}
                 ]}:{}
 
+                //-----
 
-                //  {status:'published'}
+
+
+
+
+
+            // if(widgetDataToObject.data.type === 'alphabeticalNumericalRange'){
+            //     console.log(widgetDataToObject)
+            //     // console.log(customStyle)
+            //     const customStyle = widgetDataToObject.data.styleEngine ?widgetDataToObject.data.styleEngine==='scss'? widgetDataToObject.data.customStyles.pipe(sassConverter({
+            //         from:'scss',
+            //         to:'css'
+            //     })).toString() : widgetDataToObject.data.customStyles  :widgetDataToObject.data.customStyles
+            //     console.log(customStyle)
+            // }
+
+            //-----
             return  {
-                ...widget.toObject(),
+                ...widgetDataToObject,
                 data:{
                     ...widget.data,
                     metaData: widget.data.metaType ? await metaSchema.find({ type: widget.data.metaType }).limit(parseInt(widget.data.count)).sort(sortQuery).exec() : [],

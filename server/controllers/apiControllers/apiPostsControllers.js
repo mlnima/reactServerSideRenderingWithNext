@@ -75,9 +75,6 @@ apiPostsControllers.creatPost = async (req, res) => {
             postSchema.find(
                 {
                     $or: [{title: req.body.postData.title},
-                        {source: req.body.postData.source},
-                        {downloadLink: req.body.postData.downloadLink},
-                        {description: req.body.postData.description},
                         {videoEmbedCode: req.body.postData.videoEmbedCode},
                     ]
                 }).exec().then(async posts => {
