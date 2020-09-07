@@ -6,7 +6,7 @@ const settingSchema = mongoose.Schema({
         type:String,
         unique:true
     },
-    data: mongoose.Mixed
+    data: mongoose.Mixed,
 });
 
 module.exports = mongoose.model("settings", settingSchema);

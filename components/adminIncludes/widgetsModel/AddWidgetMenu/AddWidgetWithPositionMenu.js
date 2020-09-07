@@ -34,13 +34,6 @@ const AddWidgetWithPositionMenu = props => {
                     widgets: [ ...res.data.widgets ]
                 })
             })
-
-            //
-            // getWidgets('home',false,window.location.origin).then(res => {
-            //     contextData.dispatchWidgetsSettings({
-            //         widgets: [ ...res.data.widgets ]
-            //     })
-            // })
         }).catch(err=>{
             console.log( err)
         })

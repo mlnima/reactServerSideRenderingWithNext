@@ -3,6 +3,7 @@ import WidgetHeader from "./WidgetHeader/WidgetHeader";
 import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
 import './Widget.scss';
+import styled, { ThemeProvider } from "styled-components";
 
 const Widget = props => {
 
@@ -50,18 +51,20 @@ const Widget = props => {
         } else return null
     }
 
+    const CustomStyleProvider = props.data.customStyles ? styled.div`
+       ${props.data.customStyles}
+        `:styled.div``;
+
     if (!props.data.deviceTypeToRender || props.data.deviceTypeToRender ==='all' || (state.isMobile && props.data.deviceTypeToRender === 'mobile') ||(!state.isMobile && props.data.deviceTypeToRender === 'desktop')  ){
         return (
-            <>
-                <RenderCustomStyles/>
+            <CustomStyleProvider>
                 <div className={ 'widget ' + state.extraClassName }>
                     <WidgetHeader { ...props.data }/>
                     <WidgetText { ...props.data }/>
                     <RenderComponent/>
                     <WidgetFooter  { ...props.data }/>
                 </div>
-
-            </>
+            </CustomStyleProvider>
         );
     }else return null
 

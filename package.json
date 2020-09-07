@@ -64,6 +64,7 @@
     "sharp": "^0.25.4",
     "simple-youtube-api": "^5.2.1",
     "strip-ansi": "^6.0.0",
+    "styled-components": "^5.2.0",
     "styled-jsx": "^3.2.5",
     "superagent": "^5.2.2",
     "uuid-apikey": "^1.4.6",

@@ -46,9 +46,7 @@ const Panel = props => {
             })
         })
         getSetting('navigation', window.location.origin, false, Date.now()).then(navigationData => {
-
             contextData.dispatchNavigationData([
-
                 ...navigationData.data.setting.data
             ])
         })

@@ -12,7 +12,8 @@ import WidgetPreview from "./WidgetPreview/WidgetPreview";
 import SelectedMetaIdForPostWidget from "./SelectedMetaIdForPostWidget/SelectedMetaIdForPostWidget";
 import CountInput from "./CountInput/CountInput";
 import TextInputFieldForWidget from "./TextInputFieldForWidget/TextInputFieldForWidget";
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
 
@@ -374,8 +375,13 @@ const WidgetModel = props => {
     if (widgetSettings.open) {
         return (
             <>
-                <div className='widget-open-control' onClick={() => onOpenHandler()}>
-                    <p>{props.data.data.title || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
+                <div className='widget-open-control' >
+                    <p onClick={() => onOpenHandler()}><FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
+                        width:'25px',
+                        height:'25px',
+                        transform:widgetSettings.open ?' rotate(90deg)':' rotate(0deg)',
+                        margin:'0 5px',
+                    }} />{props.data.data.title || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
                 </div>
                 <div className='widgetModel'>
                     <div className='widgetInfo'>
@@ -447,8 +453,13 @@ const WidgetModel = props => {
         );
     } else {
         return (
-            <div className='widget-open-control' onClick={() => onOpenHandler()}>
-                <p> {props.data.data.title || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
+            <div className='widget-open-control' >
+                <p onClick={() => onOpenHandler()}> <FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
+                    width:'25px',
+                    height:'25px',
+                    transform:widgetSettings.open ?' rotate(90deg)':' rotate(0deg)',
+                    margin:'0 5px'
+                }} /> {props.data.data.title || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
                 <div>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}><img
                         className='fontawesomeSvgVerySmall' src={SortUpSvg} alt=""/></button>

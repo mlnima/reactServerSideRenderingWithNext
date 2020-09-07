@@ -6,6 +6,7 @@ import dataDecoder from '../server/tools/dataDecoder'
 import dataEncoder from '../server/tools/dataEncoder'
 
 import {withRouter} from "next/router";
+import styled from "styled-components";
 
 export const AppContext = React.createContext();
 
@@ -221,8 +222,9 @@ const AppProvider = props => {
         functions.getAndSetUserInfo()
     }, []);
 
+
     return (
-        <div>
+        <>
             <AppContext.Provider
                 value={{
                     state,
@@ -255,10 +257,10 @@ const AppProvider = props => {
                     // adminWidgets,
                     // dispatchAdminWidgets
                 }}>
-
                 {props.children}
             </AppContext.Provider>
-        </div>
+
+        </>
     )
 };
 

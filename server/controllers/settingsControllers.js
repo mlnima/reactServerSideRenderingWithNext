@@ -144,7 +144,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
      const requestedWidgets = req.body.widgets
      const widgetRequestPromises  = (requestedWidgets||[]).map(async widgetsPosition => {
         const position = requestedWidgets.includes('all') ? {} : { 'data.position':widgetsPosition }
-        return await widgetSchema.find(position).exec()
+        return await widgetSchema.find(position).sort('-_id').exec()
     })
 
     Promise.all(widgetRequestPromises).then( async widgets  => {

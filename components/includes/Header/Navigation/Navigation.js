@@ -3,9 +3,9 @@ import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import withRouter from "next/dist/client/with-router";
 import {pathAndAsPathGenerator} from '../../../../_variables/_variables'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars} from "@fortawesome/free-solid-svg-icons";
-import NavigationMobileButton from "./NavigationMobileButton/NavigationMobileButton";
+// import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+// import {faBars} from "@fortawesome/free-solid-svg-icons";
+// import NavigationMobileButton from "./NavigationMobileButton/NavigationMobileButton";
 import LoggedInItemsForMenu from "../../widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu";
 import LoggedOutItemsMenu from "../../widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu";
 

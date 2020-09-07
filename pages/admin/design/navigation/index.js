@@ -103,12 +103,16 @@ const navigation = props => {
                 <div className='items-preview' style={state.style}>
                     {renderItems}
                 </div>
+                <div className='custom-navigation-style'>
+                    <textarea></textarea>
+                </div>
                 <button className='saveBtn' onClick={() => onSaveChangesHandler('navigation')}>Save</button>
             </div>
             <div className='colorSettingSections'>
                 <ColorSection designName='navigationBackgroundColor'/>
                 <ColorSection designName='navigationTextColor'/>
             </div>
+
         </AdminLayout>
     );
 };
