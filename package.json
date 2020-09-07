@@ -7,7 +7,8 @@
     "dev": "nodemon ./server.js",
     "setup": "node ./setup.js",
     "build": "next build",
-    "start": "NODE_ENV=production node ./server.js"
+    "start": "NODE_ENV=production node ./server.js",
+    "updateLinux": "./update.sh"
   },
   "keywords": [],
   "author": "",
