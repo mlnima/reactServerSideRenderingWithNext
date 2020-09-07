@@ -7,7 +7,7 @@ import MediaWidget from '../widgets/MediaWidget/MediaWidget'
 import SearchInputComponent from '../widgets/SearchInputComponent/SearchInputComponent';
 import AlphabeticalNumericalRangeLinksWidget from '../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'
 import LanguagesSwitcher from '../widgets/LanguagesSwitcher/LanguagesSwitcher'
-import Logo from '../Logo/Logo'
+import Logo from '../Widget/Logo/Logo'
 import Authentication from "../widgets/Authentication/Authentication";
 
 const WidgetsRenderer = props => {

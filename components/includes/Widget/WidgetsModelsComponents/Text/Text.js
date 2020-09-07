@@ -9,7 +9,6 @@ const Text = props => {
         textData: ''
     });
 
-
     useEffect(() => {
         setState({
             ...state,
@@ -20,7 +19,6 @@ const Text = props => {
             textData: props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text
         })
     }, [props]);
-
 
     useEffect(() => {
         spanElement.current.innerHTML = state.textData

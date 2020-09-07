@@ -1,7 +1,7 @@
 import React, {useContext, useState, useEffect} from 'react';
 import Link from "next/link";
-import {AppContext} from "../../../context/AppContext";
-import {getLanguageQuery} from "../../../_variables/_variables";
+import {AppContext} from "../../../../context/AppContext";
+import {getLanguageQuery} from "../../../../_variables/_variables";
 import {useRouter} from "next/router";
 
 const Logo = props => {
@@ -40,7 +40,7 @@ const Logo = props => {
     const RenderLogoImage = () => {
         if (props.LogoUrl) {
             return (
-                <img src={props.LogoUrl}/>
+                <img src={props.LogoUrl} alt='logo'/>
             )
         } else return null
     }

@@ -3,7 +3,6 @@ import WidgetHeader from "./WidgetHeader/WidgetHeader";
 import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
 import './Widget.scss';
-// import styleConverter from 'sass-convert'
 
 const Widget = props => {
 
@@ -24,8 +23,6 @@ const Widget = props => {
             })
     }, [props]);
 
-
-
     const RenderComponent = () => {
         if (props.component) {
             return (
@@ -43,8 +40,6 @@ const Widget = props => {
         }
     }, [ props ]);
 
-
-
     const RenderCustomStyles = () => {
         if (props.data.customStyles) {
             return (
@@ -54,7 +49,6 @@ const Widget = props => {
             )
         } else return null
     }
-
 
     if (!props.data.deviceTypeToRender || props.data.deviceTypeToRender ==='all' || (state.isMobile && props.data.deviceTypeToRender === 'mobile') ||(!state.isMobile && props.data.deviceTypeToRender === 'desktop')  ){
         return (
@@ -74,6 +68,4 @@ const Widget = props => {
 
 };
 export default Widget;
-
-// ${ props.data.customStyles }
 
