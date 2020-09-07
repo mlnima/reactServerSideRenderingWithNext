@@ -1,3 +1,5 @@
+#!/bin/bash
+
 git stash
 git stash drop
 pm2 stop 0
