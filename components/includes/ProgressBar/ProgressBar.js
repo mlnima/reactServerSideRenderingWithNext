@@ -13,10 +13,7 @@ const ProgressBar = props => {
             <div className='progressParent' style={{
                 backgroundColor: props.backgroundColor
             }}>
-                <div className="progressChild" style={{
-                    color: props.textColor,
-                    backgroundColor: props.valueColor
-                }}></div>
+                <div className="progressChild" ></div>
             </div>
         );
     } else return (

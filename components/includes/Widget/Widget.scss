@@ -7,7 +7,9 @@
   color: $light100;
 
   .Posts {
-
+//.postsContent{
+//  margin: auto;
+//}
     .smallPostsContent {
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
 
@@ -37,7 +39,6 @@
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
 
       .list {
-        //margin: 300px 0;
         width: 90%;
         height: 140px;
 

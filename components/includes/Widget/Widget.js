@@ -10,17 +10,18 @@ const Widget = props => {
     const [ state, setState ] = useState({
         extraClassName: '',
         isMobile: true,
+        navigationOpenStatus:true
     })
 
     useEffect(() => {
-        window.innerWidth > 1024?
+        window.innerWidth >= 768?
             setState({
                 ...state,
-                isMobile: false
+                isMobile: false,
             }):
             setState({
                 ...state,
-                isMobile: true
+                isMobile: true,
             })
     }, [props]);
 
@@ -41,30 +42,16 @@ const Widget = props => {
         }
     }, [ props ]);
 
-    const RenderCustomStyles = () => {
-        if (props.data.customStyles) {
-            return (
-                <style jsx >{ `
-                  ${props.data.customStyles}
-                ` }</style>
-            )
-        } else return null
-    }
-
-    const CustomStyleProvider = props.data.customStyles ? styled.div`
-       ${props.data.customStyles}
-        `:styled.div``;
 
     if (!props.data.deviceTypeToRender || props.data.deviceTypeToRender ==='all' || (state.isMobile && props.data.deviceTypeToRender === 'mobile') ||(!state.isMobile && props.data.deviceTypeToRender === 'desktop')  ){
         return (
-            <CustomStyleProvider>
                 <div className={ 'widget ' + state.extraClassName }>
                     <WidgetHeader { ...props.data }/>
                     <WidgetText { ...props.data }/>
                     <RenderComponent/>
                     <WidgetFooter  { ...props.data }/>
                 </div>
-            </CustomStyleProvider>
+
         );
     }else return null
 

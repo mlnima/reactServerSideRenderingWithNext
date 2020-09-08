@@ -1,13 +1,16 @@
 @import "../../../styles/colors";
 @import "../../../styles/buttons";
 
-//@mixin elementOnVideoElement {
-//  color: $light100;
-//  background-color: rgba(0, 0, 0, 0.6);
-//  padding: 2px;
-//  border-radius: 5px;
-//  font-size: small;
-//}
+.value-next-icon {
+  margin: 0 3px;
+}
+
+
+.post-element-info-logo {
+  font-size: 15px;
+  width: 15px;
+  height: 15px;
+}
 
 @mixin opacityAnimationEnd {
   animation: opacityAnimationEnd .5s alternate;
@@ -34,22 +37,16 @@
 }
 
 .post-element-div {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
   width: 100%;
-  margin: auto;
-  //border-bottom: .5px solid $light100;
-  border-radius: 0 0 10px 10px;
+  border: none;
 
   .post-element {
     display: flex;
     flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
     width: 100vw;
     height: auto;
-    margin-top: 20px;
-    border-radius: 3px;
 
     .image {
       position: relative;
@@ -57,22 +54,12 @@
       img {
         width: 100vw;
         height: auto;
-        //width: 165.46px;
-        //height: 92.81px;
-        //transition: all 2s  ease;
-        &:hover {
-          //@include opacityAnimationEnd;
-        }
-
       }
 
       video {
         width: 100vw;
         height: auto;
-        //width: 165.46px;
-        //height: 92.81px;
         @include opacityAnimationStart;
-
       }
 
       .bottom-right {
@@ -84,6 +71,7 @@
         align-items: center;
         padding: 1px 3px;
         border-radius: 3px;
+
         span {
           margin: 0 5px;
         }
@@ -97,6 +85,7 @@
         align-items: center;
         padding: 1px 3px;
         border-radius: 3px;
+
         span {
           margin: 0 5px;
         }
@@ -107,114 +96,167 @@
         right: 3px;
         top: 3px;
         border-radius: 3px;
-        //font-weight: bold;
         padding: 1px 3px;
       }
     }
 
     h3 {
-      font-size: initial;
+      font-size: medium;
+      text-overflow: ellipsis;
+      overflow: hidden;
       word-wrap: break-word;
       font-weight: initial;
-      overflow: hidden;
-      text-align: initial;
-      background-color: transparent;
-      color: $light100;
+      white-space: nowrap;
+      width: 90%;
       margin: auto;
-      width: 98%;
-
     }
 
+    .progressParent{
+      background-color: #333;
+      width: 100%;
+      .progressChild{
+        background-color: red;
+        p{
+          position: relative;
+          width: 100%;
+          color: white;
+        }
+      }
+    }
+
+
   }
-
-  .videoPreviewMobile {
-    padding-top: 0;
-    width: 50%;
-  }
-
-
 }
 
-.value-next-icon {
-  margin: 0 3px;
-}
-
-
-.post-element-info-logo {
-  font-size: 15px;
-  width: 15px;
-  height: 15px;
-}
-
-
-//@media only screen and (max-width: 320px) {
+//.post-element-div-list{
+//  width: 90%;
+//  height: 140px;
+//  position: relative;
+//  .post-element{
+//    position: absolute;
+//    width: 100%;
+//    .image{
+//      position: absolute;
+//      left: 0;
+//      top: 0;
+//      bottom: 15px;
 //
-//  .post-element-div {
-//    .post-element {
+//            img, video {
+//              width: 160px;
+//              height: 90px;
+//              //display: none;
+//            }
+//      .bottom-right {
+//        position: relative;
+//        right: 3px;
+//        bottom: 15px;
+//        margin: auto;
+//        display: flex;
+//        align-items: center;
+//        padding: 1px 3px;
+//        border-radius: 3px;
 //
-//      width: 130px;
-//      height: 170px;
-//
-//      .image {
-//
-//        img {
-//          width: 130px;
-//          height: 80.81px;
-//        }
-//
-//        video {
-//          width: 130px;
-//          height: 80.81px;
+//        span {
+//          margin: 0 5px;
 //        }
 //      }
+//
+//      .bottom-left {
+//        position: relative;
+//        left: 3px;
+//        bottom: 15px;
+//        display: flex;
+//        align-items: center;
+//        padding: 1px 3px;
+//        border-radius: 3px;
+//
+//        span {
+//          margin: 0 5px;
+//        }
+//      }
+//
+//      .top-right {
+//        position: relative;
+//        right: 3px;
+//        top: 3px;
+//        border-radius: 3px;
+//        padding: 1px 3px;
+//      }
+//    }
+//    .progressParent{
+//      display: none;
+//    }
+//    h3{
+//      position: absolute;
+//      right: 3px;
+//      width: 50%;
 //    }
 //  }
-//
-//  .videoPreviewMobile {
-//    width: 130px;
-//  }
-//
 //}
 
-@media only screen and (min-width: 1024px) {
+
+
+
+
+
+
+
+
+@media only screen and (min-width: 768px) {
   .post-element-div {
-    width: 320px;
-    height: 250px;
+    width: 209.79px;
+    height: 200px;
     margin: auto;
-    border: none;
 
     .post-element {
-      width: 320px;
-      height: 237px;
-
+      width: 209.79px;
+      height: 200px;
       .image {
-        position: relative;
-
         img {
-          width: 320px;
-          height: 180px;
+          width: 209.79px;
+          height: 110px;
         }
-
         video {
-          width: 320px;
-          height: 180px;
-
+          width: 209.79px;
+          height: 110px;
         }
-
       }
 
       h3 {
-        font-size: medium;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        width: 320px;
-        height: 30px;
-        white-space: nowrap;
 
+        width: 180px;
       }
     }
   }
-  .videoPreviewMobile {
-    display: none;
+
+}
+
+
+@media only screen and (min-width: 1200px) {
+  .post-element-div {
+    width: 300px;
+    height: 250px;
+
+    .post-element {
+      width: 300px;
+      height: 237px;
+
+      .image {
+        img {
+          width: 300px;
+          height: 157px;
+        }
+
+        video {
+          width: 300px;
+          height: 157px;
+        }
+      }
+
+      h3 {
+        width: 295px;
+      }
+    }
   }
+
 }

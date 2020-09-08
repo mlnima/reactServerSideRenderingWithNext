@@ -47,61 +47,7 @@
         width: 100px;
       }
     }
-
-    .search-bar-top {
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 30px;
-
-      .search-bar {
-
-        display: flex;
-        align-items: center;
-        position: fixed;
-        top: 50px;
-        margin: auto;
-        right: 20px;
-        left: 20px;
-        z-index: 2;
-        //width: 100%;
-        input {
-          width: 90%;
-          height: 25px;
-          padding: 2px;
-        }
-
-        .search-bar-btn {
-          height: 25px;
-          padding: 2px;
-          color: white;
-          display: flex;
-          align-items: center;
-
-          .search-bar-btn-logo {
-            width: 15px;
-            height: 15px;
-          }
-        }
-      }
-
-      .top-bar-item {
-        background-color: transparent;
-        color: white;
-        border: none;
-        outline: none;
-
-        .top-bar-item-logo {
-          width: 20px;
-          height: 20px;
-        }
-      }
-
-    }
   }
-
-
 }
 
 @media only screen and (min-width: 768px) {
@@ -111,18 +57,14 @@
         display: flex;
         align-items: center;
         justify-content: flex-start;
-
         a, p {
           text-decoration: none;
-
           .logged-in-item-logo, .logged-out-item-logo {
             width: 25px;
             height: 25px;
-
           }
         }
       }
-
     }
 
     .search-bar-top {

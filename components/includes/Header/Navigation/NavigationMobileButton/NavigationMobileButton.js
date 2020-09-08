@@ -14,15 +14,15 @@ const NavigationMobileButton = props => {
     const [state, setState] = useState({
         colorsStyle: {},
     });
-    useEffect(() => {
-        setState({
-            ...state,
-            colorsStyle: {
-                backgroundColor: contextData.siteDesign.topBarBackgroundColor,
-                color: contextData.siteDesign.topBarTextColor
-            }
-        })
-    }, [contextData.siteDesign]);
+    // useEffect(() => {
+    //     setState({
+    //         ...state,
+    //         colorsStyle: {
+    //             backgroundColor: contextData.siteDesign.topBarBackgroundColor,
+    //             color: contextData.siteDesign.topBarTextColor
+    //         }
+    //     })
+    // }, [contextData.siteDesign]);
 
 
 
@@ -60,7 +60,7 @@ const NavigationMobileButton = props => {
 
     if (window.innerWidth<=768){
         return (
-            <button style={{...state.colorsStyle,backgroundColor:'transparent'}}  ref={navigationMobileBtn} className='navigationMobileBtn'
+            <button style={{...state.colorsStyle}}  ref={navigationMobileBtn} className='navigationMobileBtn'
                     onClick={onNavigationMobileBtnClickHandler}>
                 <FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo'  />
             </button>

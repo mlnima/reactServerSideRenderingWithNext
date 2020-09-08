@@ -177,10 +177,12 @@ const AppProvider = props => {
     console: false
   });
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
-    window.innerWidth > 768 ? dispatchState(_objectSpread({}, state, {
-      isMobile: false
+    window.innerWidth >= 768 ? dispatchState(_objectSpread({}, state, {
+      isMobile: false,
+      navigationOpenStatus: true
     })) : dispatchState(_objectSpread({}, state, {
-      isMobile: true
+      isMobile: true,
+      navigationOpenStatus: false
     }));
   }, [props]);
   const {

@@ -1,18 +1,13 @@
 import React, {useState, useContext, useEffect, useRef} from 'react';
 import {AppContext} from '../../../context/AppContext'
 import Head from 'next/dist/next-server/lib/head'
-import {Html} from "next/document"
-import AppLayout from '../../layouts/AppLayout'
 import withRouter from 'next/dist/client/with-router'
-import withGa from 'next-ga'
 import reactHtmlParser from 'html-react-parser'
 import {useRouter} from "next/router";
-import styled, { ThemeProvider,createGlobalStyle } from "styled-components";
 
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-    const customScriptElement = useRef(null)
     const [state, setState] = useState({
         title: '',
         themeColor: '',
@@ -20,18 +15,8 @@ const SiteSettingSetter = props => {
         bodyBackgroundImage: '',
         keywords: [],
         customScripts: [],
-        customStyles: '',
-
+        customStyles: ''
     });
-
-    // let CustomStyleProvider = styled.div`${state.customStyles}`
-//     let CustomStyleProvider = styled.div`
-//         .navigation{
-//    transform: rotate(45deg);
-// }
-//     `;
-
-
 
     useEffect(() => {
         if (props.design) {
@@ -76,16 +61,6 @@ const SiteSettingSetter = props => {
         document.documentElement.lang = contextData.state.activeLanguage === 'default' ? contextData.siteIdentity.defaultSiteLanguage ? contextData.siteIdentity.defaultSiteLanguage : 'en' : contextData.state.activeLanguage
     }, [contextData.state.activeLanguage, contextData.siteIdentity.defaultSiteLanguage]);
 
-
-    // useEffect(() => {
-    //     // document.body.style.backgroundColor = contextData.siteDesign.bodyBackgroundColor;
-    //     // document.body.style.backgroundPosition = contextData.siteDesign.bodyBackgroundPosition || 'center';
-    //     // document.body.style.backgroundSize = contextData.siteDesign.bodyBackgroundSize || 'cover';
-    //     // document.body.style.backgroundRepeat = contextData.siteDesign.bodyBackgroundRepeat || 'no-repeat';
-    //     // document.body.style.backgroundAttachment = contextData.siteDesign.bodyBackgroundAttachment || 'initial';
-    //     // document.body.style.backgroundImage = contextData.siteDesign.bodyBackgroundImage ? `url(${contextData.siteDesign.bodyBackgroundImage})` : 'none'
-    //     // document.body.style.color = contextData.siteDesign.bodyBackgroundColor
-    // }, [contextData.siteDesign]);
 
     const renderCustomScripts = (props.identity ? props.identity.data.customScripts || [] : []).map(script => {
         return reactHtmlParser(script.scriptBody)

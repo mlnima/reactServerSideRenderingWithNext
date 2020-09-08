@@ -1,6 +1,15 @@
 @mixin videoContentGridDesktop {
 
-  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-gap: 5px;
+  justify-content: center;
+  align-items: center;
+  margin: auto;
+
+}
+@mixin tabletContentGridDesktop {
+
+  grid-template-columns: repeat(auto-fill, minmax(210px, 1fr));
   grid-gap: 5px;
   justify-content: center;
   align-items: center;
@@ -22,7 +31,10 @@
   display: grid;
   grid-template-columns: 1fr;
   grid-gap: 10px;
-  @media only screen and (min-width: 1024px) {
+  @media only screen and (min-width: 768px) {
+    @include tabletContentGridDesktop;
+  }
+  @media only screen and (min-width: 1200px) {
     @include videoContentGridDesktop;
   }
 

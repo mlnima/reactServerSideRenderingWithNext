@@ -23,14 +23,16 @@ const AppProvider = props => {
 
 
     useEffect(() => {
-        window.innerWidth > 768?
+        window.innerWidth >= 768?
             dispatchState({
                 ...state,
-                isMobile: false
+                isMobile: false,
+                navigationOpenStatus:true
             }):
             dispatchState({
                 ...state,
-                isMobile: true
+                isMobile: true,
+                navigationOpenStatus:false
             })
     }, [props]);
 
