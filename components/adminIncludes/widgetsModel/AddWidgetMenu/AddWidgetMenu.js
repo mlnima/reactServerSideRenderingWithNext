@@ -5,6 +5,7 @@ const AddWidgetMenu = props => {
     return (
         <div className='AddWidgetMenu'>
             <AddWidgetWithPositionMenu type='text' name='Text'/>
+            <AddWidgetWithPositionMenu type='linkTo' name='Link To'/>
             <AddWidgetWithPositionMenu type='posts' name='Posts'/>
             <AddWidgetWithPositionMenu type='media' name='Media'/>
             <AddWidgetWithPositionMenu type='recentComments' name='Recent Comments'/>
@@ -14,7 +15,9 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu type='navigationMenu' name='Navigation Menu'/>
             <AddWidgetWithPositionMenu type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
             <AddWidgetWithPositionMenu type='language' name='Language'/>
-            <AddWidgetWithPositionMenu type='authentication' name='Authentication'/>
+            <AddWidgetWithPositionMenu type='authentication' name='Auth Buttons'/>
+            <AddWidgetWithPositionMenu type='imageSwiper' name='Image Swiper(slide Show)'/>
+            <AddWidgetWithPositionMenu type='postsSwiper' name='Post Swiper(slide Show)'/>
         </div>
     );
 };

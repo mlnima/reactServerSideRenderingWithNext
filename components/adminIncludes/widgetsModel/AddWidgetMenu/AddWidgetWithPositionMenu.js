@@ -46,10 +46,8 @@ const AddWidgetWithPositionMenu = props => {
                 <button className='positionsOpener' onClick={()=>onOpenHandler()}>{props.name}</button>
                 <div className="AddWidgetWithPositionMenuPositions">
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('topBar', props.type) }>Top Bar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('home', props.type) }>Home Page</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('header', props.type) }>Header</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('dynamicTopBar', props.type) }>Dynamic Top Bar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('dynamicNavigation', props.type) }>Dynamic Navigation</button>
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('home', props.type) }>Home Page</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('homePageSidebar', props.type) }>Home Page Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('postPageSidebar', props.type) }>Post Page Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('underPost', props.type) }>Under the Post</button>
@@ -73,3 +71,8 @@ const AddWidgetWithPositionMenu = props => {
 
 };
 export default AddWidgetWithPositionMenu;
+
+
+
+//         <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('dynamicTopBar', props.type) }>Dynamic Top Bar</button>
+//                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={ () => onAddNewWidget('dynamicNavigation', props.type) }>Dynamic Navigation</button>

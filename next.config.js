@@ -44,7 +44,7 @@ const nextConfiguration = {
 };
 
 
-module.exports = withPlugins([ [ withSass(), scssConfig ], withImages,nextEnv({
+module.exports = withPlugins([ [withCSS(withSass()) , scssConfig ], withImages,nextEnv({
     staticPrefix: 'REACT_APP_',
     publicPrefix: 'REACT_APP_',
 }) ], nextConfiguration);

@@ -14,6 +14,10 @@ import CountInput from "./CountInput/CountInput";
 import TextInputFieldForWidget from "./TextInputFieldForWidget/TextInputFieldForWidget";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
+import LinkTypeWidgetModelFields from "./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields";
+import ImageSwiperTypeWidgetModelFields from "./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields";
+import PostSwiperTypeWidgetModelFields from "./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields";
+
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
 
@@ -146,7 +150,7 @@ const WidgetModel = props => {
         return (
             <>
                 <p>Text:</p>
-                <DelayInput  element="textarea" name='text' value={
+                <DelayInput element="textarea" name='text' value={
                     widgetSettings.activeEditingLanguage === 'default' ? textInputsData.text :
                         textInputsData.translations ?
                             textInputsData.translations[widgetSettings.activeEditingLanguage] ?
@@ -174,11 +178,6 @@ const WidgetModel = props => {
                 <p>Extra ClassName for Custom Style:</p>
                 <DelayInput name='extraClassName' value={widgetData.data.extraClassName || ''} delayTimeout={4000}
                             onChange={e => onChangeHandler(e)}/>
-                <p>Style Engine:</p>
-                <select name='styleEngine' value={widgetData.data.styleEngine || 'css'} onChange={e => onChangeHandler(e)}>
-                    <option value='css'>Css</option>
-                    <option value='scss'>Scss</option>
-                </select>
                 <p>Custom Styles:</p>
                 <DelayInput element="textarea" className='customStylesTextarea' name='customStyles'
                             value={widgetData.data.customStyles || ''} delayTimeout={4000}
@@ -186,6 +185,7 @@ const WidgetModel = props => {
             </>
         )
     }
+
 
     const RenderOptionByFormat = () => {
         switch (widgetData.data.type) {
@@ -204,17 +204,49 @@ const WidgetModel = props => {
                             <option value='likes'>Likes</option>
                         </select>
                         {/*<RenderSelectedMetaForPosts/>*/}
-                        <SelectedMetaIdForPostWidget onChangeHandler={onChangeHandler} widgetData={widgetData} />
+                        <SelectedMetaIdForPostWidget onChangeHandler={onChangeHandler} widgetData={widgetData}/>
                         <p>View Type:</p>
                         <select name='viewType' value={widgetData.data.viewType} onChange={e => onChangeHandler(e)}>
                             <option value='standard'>Standard</option>
                             <option value='small'>Small</option>
                             <option value='list'>List</option>
                         </select>
-                        <TextInputFieldForWidget element='input' inputTitle='count :' name='count' type='number' value={widgetData.data.count} classNameValue='count' placeHolder='count' onChangeHandler={onChangeHandler} />
+                        <TextInputFieldForWidget element='input' inputTitle='count :' name='count' type='number' value={widgetData.data.count} classNameValue='count' placeHolder='count'
+                                                 onChangeHandler={onChangeHandler}/>
                     </>
                 )
-
+            case 'postsSwiper':
+                return (
+                    <>
+                        <PostSwiperTypeWidgetModelFields
+                            onChangeHandler={onChangeHandler}
+                            postSwiperAmountMobile={widgetData.data.postSwiperAmountMobile}
+                            postSwiperAmountDesktop={widgetData.data.postSwiperAmountDesktop}
+                            postSwiperSpaceBetweenMobile={widgetData.data.postSwiperSpaceBetweenMobile}
+                            postSwiperSpaceBetweenDesktop={widgetData.data.postSwiperSpaceBetweenDesktop}
+                        />
+                        <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
+                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
+                        <RenderText/>
+                        <p>Sort By:</p>
+                        <select name='sortBy' value={widgetData.data.sortBy} onChange={e => onChangeHandler(e)}>
+                            <option value='_id'>Newest</option>
+                            <option value='-_id'>Oldest</option>
+                            <option value='views'>Views</option>
+                            <option value='likes'>Likes</option>
+                        </select>
+                        {/*<RenderSelectedMetaForPosts/>*/}
+                        <SelectedMetaIdForPostWidget onChangeHandler={onChangeHandler} widgetData={widgetData}/>
+                        <p>View Type:</p>
+                        <select name='viewType' value={widgetData.data.viewType} onChange={e => onChangeHandler(e)}>
+                            <option value='standard'>Standard</option>
+                            <option value='small'>Small</option>
+                            <option value='list'>List</option>
+                        </select>
+                        <TextInputFieldForWidget element='input' inputTitle='count :' name='count' type='number' value={widgetData.data.count} classNameValue='count' placeHolder='count'
+                                                 onChangeHandler={onChangeHandler}/>
+                    </>
+                )
             case 'media':
                 return (
                     <>
@@ -253,24 +285,31 @@ const WidgetModel = props => {
                             <option value='categories'>Categories</option>
                             <option value='actors'>Actors</option>
                         </select>
-                        <TextInputFieldForWidget element='input' inputTitle='Meta background Color :' name='metaBackgroundColor' type='text' value={widgetData.data.metaBackgroundColor} classNameValue='metaBackgroundColor' placeHolder='Meta background Color' onChangeHandler={onChangeHandler} />
-                        <TextInputFieldForWidget element='input' inputTitle='Meta Text Color :' name='metaTextColor' type='text' value={widgetData.data.metaTextColor} classNameValue='metaTextColor' placeHolder='Meta Text Color' onChangeHandler={onChangeHandler} />
-                        <TextInputFieldForWidget element='input' inputTitle='Count :' name='count' type='number' value={widgetData.data.count} classNameValue='count' placeHolder='count' onChangeHandler={onChangeHandler} />
+                        <TextInputFieldForWidget element='input' inputTitle='Meta background Color :' name='metaBackgroundColor' type='text' value={widgetData.data.metaBackgroundColor}
+                                                 classNameValue='metaBackgroundColor' placeHolder='Meta background Color' onChangeHandler={onChangeHandler}/>
+                        <TextInputFieldForWidget element='input' inputTitle='Meta Text Color :' name='metaTextColor' type='text' value={widgetData.data.metaTextColor} classNameValue='metaTextColor'
+                                                 placeHolder='Meta Text Color' onChangeHandler={onChangeHandler}/>
+                        <TextInputFieldForWidget element='input' inputTitle='Count :' name='count' type='number' value={widgetData.data.count} classNameValue='count' placeHolder='count'
+                                                 onChangeHandler={onChangeHandler}/>
                     </>
                 )
 
             case 'searchBar':
                 return (
                     <>
-                        <TextInputFieldForWidget element='input' inputTitle='Search Button Background Color :' name='searchBtnBackgroundColor' type='text' value={widgetData.data.searchBtnBackgroundColor || '#222222'} classNameValue='searchBtnBackgroundColor' placeHolder='Search Button Background Color' onChangeHandler={onChangeHandler} />
-                        <TextInputFieldForWidget element='input' inputTitle='Search Button Color :' name='searchBtnColor' type='text' value={widgetData.data.searchBtnColor || 'white'} classNameValue='searchBtnColor' placeHolder='Search Button Color' onChangeHandler={onChangeHandler} />
+                        <TextInputFieldForWidget element='input' inputTitle='Search Button Background Color :' name='searchBtnBackgroundColor' type='text'
+                                                 value={widgetData.data.searchBtnBackgroundColor || '#222222'} classNameValue='searchBtnBackgroundColor' placeHolder='Search Button Background Color'
+                                                 onChangeHandler={onChangeHandler}/>
+                        <TextInputFieldForWidget element='input' inputTitle='Search Button Color :' name='searchBtnColor' type='text' value={widgetData.data.searchBtnColor || 'white'}
+                                                 classNameValue='searchBtnColor' placeHolder='Search Button Color' onChangeHandler={onChangeHandler}/>
                     </>
                 )
 
             case 'logo':
                 return (
                     <>
-                        <TextInputFieldForWidget element='input' inputTitle='Logo image URL :' name='LogoUrl' type='text' value={widgetData.data.LogoUrl} classNameValue='logoUrl' placeHolder='Logo image URL' onChangeHandler={onChangeHandler} />
+                        <TextInputFieldForWidget element='input' inputTitle='Logo image URL :' name='LogoUrl' type='text' value={widgetData.data.LogoUrl} classNameValue='logoUrl'
+                                                 placeHolder='Logo image URL' onChangeHandler={onChangeHandler}/>
                         <p>Logo Text</p>
                         <DelayInput name='LogoText' value={
                             widgetSettings.activeEditingLanguage === 'default' ? textInputsData.LogoText :
@@ -282,8 +321,10 @@ const WidgetModel = props => {
                                     delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
 
                         <div className='color-section-widget'>
-                            <TextInputFieldForWidget element='input' inputTitle='Logo Text Color :' name='logoTextColor' type='text' value={widgetData.data.logoTextColor} classNameValue='logoTextColor' placeHolder='Logo Text Color' onChangeHandler={onChangeHandler} />
-                            <TextInputFieldForWidget element='input' inputTitle='Logo Text Font Size :' name='logoTextFontSize' type='number' value={widgetData.data.logoTextFontSize} classNameValue='logoTextFontSize' placeHolder='Logo Text Font Size' onChangeHandler={onChangeHandler} />
+                            <TextInputFieldForWidget element='input' inputTitle='Logo Text Color :' name='logoTextColor' type='text' value={widgetData.data.logoTextColor}
+                                                     classNameValue='logoTextColor' placeHolder='Logo Text Color' onChangeHandler={onChangeHandler}/>
+                            <TextInputFieldForWidget element='input' inputTitle='Logo Text Font Size :' name='logoTextFontSize' type='number' value={widgetData.data.logoTextFontSize}
+                                                     classNameValue='logoTextFontSize' placeHolder='Logo Text Font Size' onChangeHandler={onChangeHandler}/>
                         </div>
 
                         {/*<TextInputFieldForWidget element='input' inputTitle='Under Logo Headline Text :' name='logoTextColor' type='text' value={widgetData.data.logoTextColor} classNameValue='logoTextColor' placeHolder='Under Logo Headline Text' onChangeHandler={onChangeHandler} />*/}
@@ -301,9 +342,12 @@ const WidgetModel = props => {
                         } className='headLine'
                                     delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
                         <div className='color-section-widget'>
-                            <TextInputFieldForWidget element='input' inputTitle='Head Line Color :' name='logoHeadLineColor' type='text' value={widgetData.data.logoHeadLineColor} classNameValue='logoHeadLineColor' placeHolder='Head Line Color' onChangeHandler={onChangeHandler} />
-                            <TextInputFieldForWidget element='input' inputTitle='Head Line Font Size :' name='logoHeadLineFontSize' type='number' value={widgetData.data.logoHeadLineFontSize} classNameValue='logoHeadLineFontSize' placeHolder='Head Line Font Size' onChangeHandler={onChangeHandler} />
-                            <TextInputFieldForWidget element='input' inputTitle='Head Line Font Weight:' name='logoHeadLineFontWeight'  value={widgetData.data.logoHeadLineFontWeight} classNameValue='logoHeadLineFontWeight' placeHolder='Head Line Font Weight' onChangeHandler={onChangeHandler} />
+                            <TextInputFieldForWidget element='input' inputTitle='Head Line Color :' name='logoHeadLineColor' type='text' value={widgetData.data.logoHeadLineColor}
+                                                     classNameValue='logoHeadLineColor' placeHolder='Head Line Color' onChangeHandler={onChangeHandler}/>
+                            <TextInputFieldForWidget element='input' inputTitle='Head Line Font Size :' name='logoHeadLineFontSize' type='number' value={widgetData.data.logoHeadLineFontSize}
+                                                     classNameValue='logoHeadLineFontSize' placeHolder='Head Line Font Size' onChangeHandler={onChangeHandler}/>
+                            <TextInputFieldForWidget element='input' inputTitle='Head Line Font Weight:' name='logoHeadLineFontWeight' value={widgetData.data.logoHeadLineFontWeight}
+                                                     classNameValue='logoHeadLineFontWeight' placeHolder='Head Line Font Weight' onChangeHandler={onChangeHandler}/>
                         </div>
                     </>
                 )
@@ -323,10 +367,19 @@ const WidgetModel = props => {
                         <RenderText/>
                     </>
                 )
+            case 'linkTo':
+                return (
+                    <>
+                        <LinkTypeWidgetModelFields onChangeHandler={onChangeHandler} linkToText={widgetData.data.linkToText} linkToWindowType={widgetData.data.linkToWindowType}
+                                                   linkTo={widgetData.data.linkTo} linkToType={widgetData.data.linkToType} linkToAs={widgetData.data.linkToAs}/>
+                    </>
+                )
             case 'language':
                 return (
                     <>
-                        <TextInputFieldForWidget element='input' inputTitle='Language Text As Default Language :' name='languageTextAsDefaultLanguage' type='text' value={widgetData.data.languageTextAsDefaultLanguage || 'default'} classNameValue='languageTextAsDefaultLanguage' placeHolder='Language Text As Default Language' onChangeHandler={onChangeHandler} />
+                        <TextInputFieldForWidget element='input' inputTitle='Language Text As Default Language :' name='languageTextAsDefaultLanguage' type='text'
+                                                 value={widgetData.data.languageTextAsDefaultLanguage || 'default'} classNameValue='languageTextAsDefaultLanguage'
+                                                 placeHolder='Language Text As Default Language' onChangeHandler={onChangeHandler}/>
 
                         <p>Language To Show Beside Drop Down:</p>
                         <DelayInput name='languageToShowBesideDropDown' value={
@@ -344,6 +397,18 @@ const WidgetModel = props => {
                     <>
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
                                                     onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>                    </>
+                )
+            case 'imageSwiper':
+                return (
+                    <>
+                        <ImageSwiperTypeWidgetModelFields imageSwiperData={widgetData.data.imageSwiperData || []}
+                                                          imageSwiperAmountMobile={widgetData.data.imageSwiperAmountMobile}
+                                                          imageSwiperAmountDesktop={widgetData.data.imageSwiperAmountDesktop}
+                                                          imageSwiperSpaceBetweenMobile={widgetData.data.imageSwiperSpaceBetweenMobile}
+                                                          imageSwiperSpaceBetweenDesktop={widgetData.data.imageSwiperSpaceBetweenDesktop}
+                                                          onChangeHandler={onChangeHandler}
+                        />
+                    </>
                 )
 
             default:
@@ -375,18 +440,20 @@ const WidgetModel = props => {
     if (widgetSettings.open) {
         return (
             <>
-                <div className='widget-open-control' >
+                <div className='widget-open-control'>
                     <p onClick={() => onOpenHandler()}><FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
-                        width:'25px',
-                        height:'25px',
-                        transform:widgetSettings.open ?' rotate(90deg)':' rotate(0deg)',
-                        margin:'0 5px',
-                    }} />{props.data.data.title || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
+                        width: '25px',
+                        height: '25px',
+                        transform: widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',
+                        margin: '0 5px',
+                    }}/>{props.data.data.name || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
                 </div>
                 <div className='widgetModel'>
                     <div className='widgetInfo'>
                         <label className='widgetId'><p>ID :</p> <p>{props.data._id}</p></label>
                     </div>
+                    <TextInputFieldForWidget element='input' inputTitle='Name:' name='name' type='text' value={widgetData.data.name} classNameValue='name' placeHolder='name'
+                                             onChangeHandler={onChangeHandler}/>
                     <p>Translations:</p>
                     <select name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
                         <option value='default'>Default</option>
@@ -414,7 +481,8 @@ const WidgetModel = props => {
                         <option value='authentication'>Authentication</option>
                     </select>
 
-                    <TextInputFieldForWidget element='input' inputTitle='Widget Index :' name='widgetIndex' type='number' value={widgetData.data.widgetIndex} classNameValue='widgetIndex' placeHolder='Widget Index' onChangeHandler={onChangeHandler} />
+                    <TextInputFieldForWidget element='input' inputTitle='Widget Index :' name='widgetIndex' type='number' value={widgetData.data.widgetIndex} classNameValue='widgetIndex'
+                                             placeHolder='Widget Index' onChangeHandler={onChangeHandler}/>
 
                     <p>Position:</p>
                     <select name='position' value={widgetData.data.position} onChange={e => onChangeHandler(e)}>
@@ -453,13 +521,13 @@ const WidgetModel = props => {
         );
     } else {
         return (
-            <div className='widget-open-control' >
-                <p onClick={() => onOpenHandler()}> <FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
-                    width:'25px',
-                    height:'25px',
-                    transform:widgetSettings.open ?' rotate(90deg)':' rotate(0deg)',
-                    margin:'0 5px'
-                }} /> {props.data.data.title || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
+            <div className='widget-open-control'>
+                <p onClick={() => onOpenHandler()}><FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
+                    width: '25px',
+                    height: '25px',
+                    transform: widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',
+                    margin: '0 5px'
+                }}/> {props.data.data.name || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
                 <div>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}><img
                         className='fontawesomeSvgVerySmall' src={SortUpSvg} alt=""/></button>

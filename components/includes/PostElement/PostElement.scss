@@ -5,7 +5,6 @@
   margin: 0 3px;
 }
 
-
 .post-element-info-logo {
   font-size: 15px;
   width: 15px;
@@ -128,80 +127,6 @@
   }
 }
 
-//.post-element-div-list{
-//  width: 90%;
-//  height: 140px;
-//  position: relative;
-//  .post-element{
-//    position: absolute;
-//    width: 100%;
-//    .image{
-//      position: absolute;
-//      left: 0;
-//      top: 0;
-//      bottom: 15px;
-//
-//            img, video {
-//              width: 160px;
-//              height: 90px;
-//              //display: none;
-//            }
-//      .bottom-right {
-//        position: relative;
-//        right: 3px;
-//        bottom: 15px;
-//        margin: auto;
-//        display: flex;
-//        align-items: center;
-//        padding: 1px 3px;
-//        border-radius: 3px;
-//
-//        span {
-//          margin: 0 5px;
-//        }
-//      }
-//
-//      .bottom-left {
-//        position: relative;
-//        left: 3px;
-//        bottom: 15px;
-//        display: flex;
-//        align-items: center;
-//        padding: 1px 3px;
-//        border-radius: 3px;
-//
-//        span {
-//          margin: 0 5px;
-//        }
-//      }
-//
-//      .top-right {
-//        position: relative;
-//        right: 3px;
-//        top: 3px;
-//        border-radius: 3px;
-//        padding: 1px 3px;
-//      }
-//    }
-//    .progressParent{
-//      display: none;
-//    }
-//    h3{
-//      position: absolute;
-//      right: 3px;
-//      width: 50%;
-//    }
-//  }
-//}
-
-
-
-
-
-
-
-
-
 @media only screen and (min-width: 768px) {
   .post-element-div {
     width: 209.79px;
@@ -214,11 +139,11 @@
       .image {
         img {
           width: 209.79px;
-          height: 110px;
+          height: 118.5px;
         }
         video {
           width: 209.79px;
-          height: 110px;
+          height: 118.5px;
         }
       }
 
@@ -244,12 +169,12 @@
       .image {
         img {
           width: 300px;
-          height: 157px;
+          height: 169px;
         }
 
         video {
           width: 300px;
-          height: 157px;
+          height: 169px;
         }
       }
 

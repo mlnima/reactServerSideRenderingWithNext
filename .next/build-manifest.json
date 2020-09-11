@@ -26,6 +26,12 @@
       "static/runtime/polyfills.js",
       "static/runtime/polyfills.js.map"
     ],
+    "/admin/design/widgets": [
+      "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
+      "static/runtime/main.js"
+    ],
     "/admin/settings/customStyles": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",

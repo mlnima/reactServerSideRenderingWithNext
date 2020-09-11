@@ -12,22 +12,25 @@
 //}
     .smallPostsContent {
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+      grid-template-rows: repeat(auto-fill, minmax(140px, 1fr));
 
       .small {
-        width: auto;
-
+        width: 140px;
+        height: 140px;
+        margin: auto;
         .post-element {
-          width: 140px;
-          height: content-box;
-
+          width: 100%;
+          height: 140px;
           .image {
             img, video {
               width: 140px;
-              height: 80px;
+              height: 79px;
               object-fit: cover;
-              //display: none;
             }
 
+          }
+          h3 {
+            width: 130px;
           }
         }
 
@@ -81,8 +84,8 @@
 
   }
 
-  @media only screen and (max-width: 320px) {
-    padding: 0;
-
-  }
+  //@media only screen and (max-width: 320px) {
+  //  padding: 0;
+  //
+  //}
 }

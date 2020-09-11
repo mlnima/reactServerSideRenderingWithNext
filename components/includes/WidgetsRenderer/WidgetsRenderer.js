@@ -9,6 +9,9 @@ import AlphabeticalNumericalRangeLinksWidget from '../widgets/AlphabeticalNumeri
 import LanguagesSwitcher from '../widgets/LanguagesSwitcher/LanguagesSwitcher'
 import Logo from '../Widget/Logo/Logo'
 import Authentication from "../widgets/Authentication/Authentication";
+import LinkTo from "../widgets/LinkTo/LinkTo";
+import ImageSwiper from "../widgets/ImageSwiper/ImageSwiper";
+import PostSwiper from "../widgets/PostSwiper/PostSwiper";
 
 const WidgetsRenderer = props => {
     const widgetInTypeOfPropsPosition = (props.widgets || []).filter(widget => widget.data.position === props.position)
@@ -63,6 +66,20 @@ const WidgetsRenderer = props => {
             case 'authentication':
                 return (
                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ Authentication } { ...widget } />
+                )
+
+            case 'linkTo':
+                return (
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ LinkTo } { ...widget } />
+                )
+
+            case 'imageSwiper':
+                return (
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ ImageSwiper } { ...widget } />
+                )
+            case 'postsSwiper':
+                return (
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ PostSwiper } { ...widget } />
                 )
 
             default:

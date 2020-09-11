@@ -51,7 +51,6 @@ const Widget = props => {
                     <RenderComponent/>
                     <WidgetFooter  { ...props.data }/>
                 </div>
-
         );
     }else return null
 

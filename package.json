@@ -8,7 +8,7 @@
     "setup": "node ./setup.js",
     "build": "next build",
     "start": "NODE_ENV=production node ./server.js",
-    "updateLinux": "./update.sh"
+    "updateLinux": "sudo ./update.sh"
   },
   "keywords": [],
   "author": "",
@@ -67,6 +67,7 @@
     "styled-components": "^5.2.0",
     "styled-jsx": "^3.2.5",
     "superagent": "^5.2.2",
+    "swiper": "^6.2.0",
     "uuid-apikey": "^1.4.6",
     "webpack": "^4.42.1",
     "xml": "^1.0.1",
