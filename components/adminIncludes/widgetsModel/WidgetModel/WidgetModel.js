@@ -17,18 +17,21 @@ import {faBars} from "@fortawesome/free-solid-svg-icons";
 import LinkTypeWidgetModelFields from "./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields";
 import ImageSwiperTypeWidgetModelFields from "./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields";
 import PostSwiperTypeWidgetModelFields from "./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields";
+import MenuWidgetModelFields from "./MenuWidgetModelFields/MenuWidgetModelFields";
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
 
-    const [widgetData, setWidgetData] = useState({
-        data: {}
-    })
+
 
     const [widgetSettings, setWidgetSettings] = useState({
-        open: false,
+        open: true,
         preview: false,
         activeEditingLanguage: 'default'
+    })
+
+    const [widgetData, setWidgetData] = useState({
+        data: {}
     })
 
     const [textInputsData, setTextInputsData] = useState({
@@ -410,12 +413,19 @@ const WidgetModel = props => {
                         />
                     </>
                 )
+            case 'menu':
+                return (
+                    <>
+                       <MenuWidgetModelFields widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.data.mobileNavigation} />
+                    </>
+                )
 
             default:
                 return null
 
         }
     }
+    //mobileNavigation
 
     const changeWidgetIndex = (more) => {
         const valueToSet = more ? widgetData.data.widgetIndex + 1 : widgetData.data.widgetIndex - 1
@@ -468,6 +478,7 @@ const WidgetModel = props => {
                     <p>Type:</p>
                     <select name='type' value={widgetData.data.type} onChange={e => onChangeHandler(e)}>
                         <option value='posts'>Posts</option>
+                        <option value='menu'>Menu</option>
                         <option value='media'>Media</option>
                         <option value='text'>Text</option>
                         <option value='logo'>Logo</option>
@@ -479,6 +490,8 @@ const WidgetModel = props => {
                         <option value='alphabeticalNumericalRange'>Alphabetical Numerical Range</option>
                         <option value='language'>Language</option>
                         <option value='authentication'>Authentication</option>
+                        <option value='imageSwiper'>Image Swiper</option>
+                        <option value='postsSwiper'>Posts Swiper</option>
                     </select>
 
                     <TextInputFieldForWidget element='input' inputTitle='Widget Index :' name='widgetIndex' type='number' value={widgetData.data.widgetIndex} classNameValue='widgetIndex'

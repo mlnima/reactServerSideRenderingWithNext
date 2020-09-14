@@ -5,6 +5,7 @@ const AddWidgetMenu = props => {
     return (
         <div className='AddWidgetMenu'>
             <AddWidgetWithPositionMenu type='text' name='Text'/>
+            <AddWidgetWithPositionMenu type='menu' name='Menu'/>
             <AddWidgetWithPositionMenu type='linkTo' name='Link To'/>
             <AddWidgetWithPositionMenu type='posts' name='Posts'/>
             <AddWidgetWithPositionMenu type='media' name='Media'/>

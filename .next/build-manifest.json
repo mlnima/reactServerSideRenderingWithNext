@@ -20,6 +20,8 @@
     ],
     "/_error": [
       "static/runtime/webpack.js",
+      "static/css/styles.chunk.css",
+      "static/chunks/styles.js",
       "static/runtime/main.js"
     ],
     "/_polyfills": [
@@ -27,12 +29,6 @@
       "static/runtime/polyfills.js.map"
     ],
     "/admin/design/widgets": [
-      "static/runtime/webpack.js",
-      "static/css/styles.chunk.css",
-      "static/chunks/styles.js",
-      "static/runtime/main.js"
-    ],
-    "/admin/settings/customStyles": [
       "static/runtime/webpack.js",
       "static/css/styles.chunk.css",
       "static/chunks/styles.js",
