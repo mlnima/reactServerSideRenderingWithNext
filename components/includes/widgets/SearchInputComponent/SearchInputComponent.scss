@@ -3,31 +3,39 @@
 .search-bar {
   display: flex;
   align-items: center;
-
-  .search-input, .search-bar-btn {
-    display: inline-block;
-    padding: 5px 7.5px;
-    font-size: medium;
-  }
+  //border: solid 1px #222;
+  height: 24px;
+  //.search-input, .search-bar-btn {
+  //  display: inline-block;
+  //  height: 24px;
+  //  padding: 2px 5px;
+  //  font-size: medium;
+  //  outline: none;
+  //
+  //}
 
   .search-input {
     display: flex;
     justify-content: center;
     border-radius: 5px 0 0 5px;
     border: 1px solid lightgray;
-    height: 30px;
+    //height: 23px;
+
+    width: 80%;
   }
 
   .search-bar-btn {
-    border: 1px solid $dark80;
     border-radius: 0 5px 5px 0;
-    width: 30px;
+    width: 20%;
     display: flex;
     justify-content: center;
+    align-items: center;
+    padding: 2px 5px;
+    background-color: transparent;
     .search-bar-btn-logo {
-      font-size: 20px;
+      //font-size: 20px;
       width: 20px;
-      height: 30px;
+      height: 20px;
 
     }
   }

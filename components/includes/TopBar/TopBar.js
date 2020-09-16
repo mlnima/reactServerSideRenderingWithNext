@@ -26,7 +26,6 @@ const TopBar = props => {
         return (
             <div className='top-bar' >
                 <div className='top-bar-items'>
-                    <NavigationMobileButton/>
                     <WidgetsRenderer widgets={contextData.siteWidgets} position='topBar'/>
                 </div>
             </div>

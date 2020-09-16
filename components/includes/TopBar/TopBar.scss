@@ -9,9 +9,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
-    height: 48px;
-    width: 100%;
 
+    width: 100%;
+    padding: 0;
+    margin: 0;
     .auth-buttons {
       display: flex;
       justify-content: flex-start;
@@ -52,6 +53,9 @@
 
 @media only screen and (min-width: 768px) {
   .top-bar {
+    .top-bar-items {
+      height: 48px;
+    }
     .auth-buttons {
       .logged-in-items, .logged-out-items {
         display: flex;
@@ -67,55 +71,55 @@
       }
     }
 
-    .search-bar-top {
-
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      height: 30px;
-
-      .search-bar {
-
-        display: flex;
-        align-items: center;
-        position: initial;
-        right: 0;
-        left: 0;
-        width: 300px;
-
-        input {
-
-          height: 25px;
-          padding: 2px;
-        }
-
-        .search-bar-btn {
-
-          width: 15%;
-          //height: 25px;
-          padding: 2px;
-          color: white;
-
-          .search-bar-btn-logo {
-            width: 15px;
-            height: 15px;
-          }
-        }
-      }
-
-      .top-bar-item {
-        background-color: transparent;
-        color: white;
-        border: none;
-        outline: none;
-
-        .top-bar-item-logo {
-          width: 20px;
-          height: 20px;
-        }
-      }
-
-    }
+    //.search-bar-top {
+    //
+    //  display: flex;
+    //  align-items: center;
+    //  justify-content: center;
+    //  height: 30px;
+    //
+    //  .search-bar {
+    //
+    //    display: flex;
+    //    align-items: center;
+    //    position: initial;
+    //    right: 0;
+    //    left: 0;
+    //    width: 300px;
+    //
+    //    input {
+    //
+    //      height: 25px;
+    //      padding: 2px;
+    //    }
+    //
+    //    .search-bar-btn {
+    //
+    //      width: 15%;
+    //      //height: 25px;
+    //      padding: 2px;
+    //      color: white;
+    //
+    //      .search-bar-btn-logo {
+    //        width: 15px;
+    //        height: 15px;
+    //      }
+    //    }
+    //  }
+    //
+    //  .top-bar-item {
+    //    background-color: transparent;
+    //    color: white;
+    //    border: none;
+    //    outline: none;
+    //
+    //    .top-bar-item-logo {
+    //      width: 20px;
+    //      height: 20px;
+    //    }
+    //  }
+    //
+    //}
 
 
   }

@@ -88,7 +88,7 @@ module.exports =
 /******/
 /******/
 /******/ 	// Load entry module and return exports
-/******/ 	return __webpack_require__(__webpack_require__.s = 6);
+/******/ 	return __webpack_require__(__webpack_require__.s = 3);
 /******/ })
 /************************************************************************/
 /******/ ({
@@ -1665,7 +1665,7 @@ const TopBar = props => {
       className: "top-bar"
     }, __jsx("div", {
       className: "top-bar-items"
-    }, __jsx(_Header_Navigation_NavigationMobileButton_NavigationMobileButton__WEBPACK_IMPORTED_MODULE_3__["default"], null), __jsx(_WidgetsRenderer_WidgetsRenderer__WEBPACK_IMPORTED_MODULE_4__["default"], {
+    }, __jsx(_WidgetsRenderer_WidgetsRenderer__WEBPACK_IMPORTED_MODULE_4__["default"], {
       widgets: contextData.siteWidgets,
       position: "topBar"
     })));
@@ -1850,9 +1850,15 @@ const Widget = props => {
       }));
     }
   }, [props]);
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (props.data.customStyles) {
+      console.log(props.data.customStyles);
+    }
+  }, [props]);
+  const StyledDiv = props.data.customStyles ? styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div`${props.data.customStyles}` : styled_components__WEBPACK_IMPORTED_MODULE_5___default.a.div``;
 
   if (!props.data.deviceTypeToRender || props.data.deviceTypeToRender === 'all' || state.isMobile && props.data.deviceTypeToRender === 'mobile' || !state.isMobile && props.data.deviceTypeToRender === 'desktop') {
-    return __jsx("div", {
+    return __jsx(StyledDiv, {
       className: 'widget ' + state.extraClassName
     }, __jsx(_WidgetHeader_WidgetHeader__WEBPACK_IMPORTED_MODULE_1__["default"], props.data), __jsx(_WidgetText_WidgetText__WEBPACK_IMPORTED_MODULE_3__["default"], props.data), __jsx(RenderComponent, null), __jsx(_WidgetFooter_WidgetFooter__WEBPACK_IMPORTED_MODULE_2__["default"], props.data));
   } else return null;
@@ -2586,7 +2592,7 @@ const ImageSwiper = props => {
         href: imageData.targetUrl
       }, __jsx("img", {
         src: imageData.imageUrl,
-        alr: `Thumbnail ${imageData.imageUrl}`
+        alt: `Thumbnail ${imageData.imageUrl}`
       })));
     } else return null;
   });
@@ -2864,27 +2870,44 @@ const MenuWidget = props => {
   }, [props]);
   const renderMenuItems = Object.keys(menuItems).map(menuItem => {
     if (menuItems[menuItem].type === 'internal') {
-      return __jsx("li", null, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
+      return __jsx("li", {
+        className: "menu-widget-item",
+        key: menuItems[menuItem].name
+      }, __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
         href: menuItems[menuItem].target,
         as: menuItems[menuItem].as
       }, __jsx("a", null, menuItems[menuItem].name)));
     } else if (menuItems[menuItem].type === 'external') {
-      return __jsx("li", null, __jsx("a", {
+      return __jsx("li", {
+        className: "menu-widget-item",
+        key: menuItems[menuItem].name
+      }, __jsx("a", {
         href: menuItems[menuItem].target
       }, menuItems[menuItem].name));
     } else return null;
   });
-
-  if (contextData.state.isMobile && props.mobileNavigation) {
-    return __jsx("button", {
-      onClick: () => setOpen(true)
-    }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
-      icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faBars"],
-      className: "navigation-mobile-btn-logo"
-    }));
-  } else {
-    return __jsx("ul", null, renderMenuItems);
-  }
+  Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
+    if (!contextData.state.isMobile) {
+      setOpen(true);
+    }
+  }, [contextData.state.isMobile]);
+  return __jsx("div", {
+    className: "menu-widget"
+  }, __jsx("button", {
+    style: {
+      display: contextData.state.isMobile ? 'initial' : 'none'
+    },
+    onClick: () => open ? setOpen(false) : setOpen(true),
+    className: "navigation-mobile-button"
+  }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
+    icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_4__["faBars"],
+    className: "navigation-mobile-button-logo"
+  })), __jsx("ul", {
+    className: "menu-widget-items",
+    style: {
+      display: open ? 'flex' : 'none'
+    }
+  }, renderMenuItems));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (MenuWidget);
@@ -3246,32 +3269,36 @@ const SearchInputComponent = props => {
   asQuery.page == 1 ? delete asQuery.page : null;
   !asQuery.page ? delete asQuery.page : null;
   !asQuery.content ? delete asQuery.content : null;
-  return __jsx("div", {
-    className: "search-bar"
+
+  const onSearchHandler = e => {
+    e.preventDefault();
+    router.push({
+      pathname: mainPath,
+      query: _objectSpread({}, state.queries, {
+        keyword: state.keyword
+      })
+    }, {
+      pathname: asPath,
+      query: asQuery
+    });
+  };
+
+  return __jsx("form", {
+    className: "search-bar",
+    onSubmit: e => onSearchHandler(e)
   }, __jsx("input", {
     className: "search-input",
     name: "keyword",
     onChange: e => onChangeHandler(e),
     value: state.keyword
-  }), __jsx(next_link__WEBPACK_IMPORTED_MODULE_2___default.a, {
-    href: {
-      pathname: mainPath,
-      query: _objectSpread({}, state.queries, {
-        keyword: state.keyword
-      })
-    },
-    as: {
-      pathname: asPath,
-      query: asQuery
-    }
-  }, __jsx("a", {
+  }), __jsx("button", {
     className: "search-bar-btn",
-    style: state.style
+    type: "submit"
   }, __jsx(_fortawesome_react_fontawesome__WEBPACK_IMPORTED_MODULE_5__["FontAwesomeIcon"], {
     icon: _fortawesome_free_solid_svg_icons__WEBPACK_IMPORTED_MODULE_6__["faSearch"],
     className: "search-bar-btn-logo",
     style: state.style
-  }))));
+  })));
 };
 
 /* harmony default export */ __webpack_exports__["default"] = (next_dist_client_with_router__WEBPACK_IMPORTED_MODULE_3___default()(SearchInputComponent));
@@ -3327,6 +3354,7 @@ var __jsx = react__WEBPACK_IMPORTED_MODULE_0___default.a.createElement;
 
 
 
+
 const AppLayout = props => {
   const contextData = Object(react__WEBPACK_IMPORTED_MODULE_0__["useContext"])(_context_AppContext__WEBPACK_IMPORTED_MODULE_11__["AppContext"]);
   Object(react__WEBPACK_IMPORTED_MODULE_0__["useEffect"])(() => {
@@ -3337,7 +3365,10 @@ const AppLayout = props => {
 
     Object(_variables_variables__WEBPACK_IMPORTED_MODULE_7__["logPageView"])();
   }, []);
-  const GlobalStyle = contextData.siteDesign.customStyles ? styled_components__WEBPACK_IMPORTED_MODULE_10__["createGlobalStyle"]`${contextData.siteDesign.customStyles}` : styled_components__WEBPACK_IMPORTED_MODULE_10__["createGlobalStyle"]``;
+  const GlobalStyle = contextData.siteDesign.customStyles ? styled_components__WEBPACK_IMPORTED_MODULE_10__["createGlobalStyle"]`${contextData.siteDesign.customStyles}` : styled_components__WEBPACK_IMPORTED_MODULE_10__["createGlobalStyle"]``; // useEffect(() => {
+  //     console.log(styledComponent)
+  // }, []);
+
   return __jsx("div", {
     className: "app"
   }, __jsx(GlobalStyle, null), __jsx(_includes_TopBar_TopBar__WEBPACK_IMPORTED_MODULE_2__["default"], null), __jsx(_includes_Header_Header__WEBPACK_IMPORTED_MODULE_1__["default"], null), __jsx(_includes_Header_Navigation_Navigation__WEBPACK_IMPORTED_MODULE_3__["default"], null), __jsx(_includes_Loading_Loading__WEBPACK_IMPORTED_MODULE_4__["default"], null), __jsx(_includes_AlertBox_AlertBox__WEBPACK_IMPORTED_MODULE_5__["default"], null), __jsx("div", {
@@ -5801,7 +5832,7 @@ module.exports = "data:image/svg+xml;base64,PHN2ZyBhcmlhLWhpZGRlbj0idHJ1ZSIgZm9j
 
 /***/ }),
 
-/***/ 6:
+/***/ 3:
 /*!*******************************!*\
   !*** multi ./pages/_error.js ***!
   \*******************************/

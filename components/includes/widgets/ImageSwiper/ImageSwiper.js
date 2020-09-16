@@ -49,7 +49,7 @@ const ImageSwiper = props => {
              return (
                  <SwiperSlide tag="li" key={props.imageSwiperData.indexOf(imageData)}>
                      <a href={imageData.targetUrl}>
-                         <img src={imageData.imageUrl} alr={`Thumbnail ${imageData.imageUrl}`}/>
+                         <img src={imageData.imageUrl} alt={`Thumbnail ${imageData.imageUrl}`}/>
                      </a>
                  </SwiperSlide>
              )

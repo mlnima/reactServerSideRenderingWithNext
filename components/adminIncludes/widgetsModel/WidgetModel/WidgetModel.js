@@ -22,10 +22,8 @@ import MenuWidgetModelFields from "./MenuWidgetModelFields/MenuWidgetModelFields
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
 
-
-
     const [widgetSettings, setWidgetSettings] = useState({
-        open: true,
+        open: false,
         preview: false,
         activeEditingLanguage: 'default'
     })
@@ -305,6 +303,7 @@ const WidgetModel = props => {
                                                  onChangeHandler={onChangeHandler}/>
                         <TextInputFieldForWidget element='input' inputTitle='Search Button Color :' name='searchBtnColor' type='text' value={widgetData.data.searchBtnColor || 'white'}
                                                  classNameValue='searchBtnColor' placeHolder='Search Button Color' onChangeHandler={onChangeHandler}/>
+
                     </>
                 )
 

@@ -20,13 +20,13 @@ const MenuWidget = props => {
 
         if (menuItems[menuItem].type === 'internal') {
             return (
-                <li>
+                <li className='menu-widget-item' key={menuItems[menuItem].name}>
                     <Link href={menuItems[menuItem].target} as={menuItems[menuItem].as}><a>{menuItems[menuItem].name}</a></Link>
                 </li>
             )
         } else if (menuItems[menuItem].type === 'external') {
             return (
-                <li>
+                <li className='menu-widget-item' key={menuItems[menuItem].name}>
                     <a href={menuItems[menuItem].target}>{menuItems[menuItem].name}</a>
                 </li>
             )
@@ -34,17 +34,19 @@ const MenuWidget = props => {
 
     })
 
+    useEffect(() => {
+        if (!contextData.state.isMobile){
+            setOpen(true)
+        }
+    }, [contextData.state.isMobile]);
 
-    if (contextData.state.isMobile && props.mobileNavigation) {
-        return (
-            <button onClick={()=>setOpen(true)}><FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo'  /></button>
-        );
-    } else {
-        return (
-            <ul>
+    return (
+        <div className='menu-widget'>
+            <button style={{display:contextData.state.isMobile?'initial':'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'><FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo'/></button>
+            <ul className='menu-widget-items' style={{display:open ? 'flex':'none'}}>
                 {renderMenuItems}
             </ul>
-        );
-    }
+        </div>
+    );
 };
 export default MenuWidget;

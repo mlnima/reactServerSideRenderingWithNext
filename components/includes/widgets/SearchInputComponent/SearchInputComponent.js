@@ -13,7 +13,7 @@ const SearchInputComponent = props => {
         keyword: '',
         queries: {},
         style: {
-            backgroundColor:'#222222'
+            backgroundColor: '#222222'
         }
     });
 
@@ -26,8 +26,8 @@ const SearchInputComponent = props => {
             keyword: props.router ? props.router.query ? props.router.query.keyword ? props.router.query.keyword : '' : '' : '',
             style: {
                 ...state.style,
-                backgroundColor:props.searchBtnBackgroundColor,
-                color:props.searchBtnColor,
+                backgroundColor: props.searchBtnBackgroundColor,
+                color: props.searchBtnColor,
             }
         })
     }, [props]);
@@ -71,23 +71,28 @@ const SearchInputComponent = props => {
     !asQuery.page ? delete asQuery.page : null;
     !asQuery.content ? delete asQuery.content : null;
 
+
+    const onSearchHandler = e => {
+        e.preventDefault()
+        router.push({
+            pathname: mainPath,
+            query: {
+                ...state.queries,
+                keyword: state.keyword
+            }
+        }, {
+            pathname: asPath,
+            query: asQuery
+        })
+    }
+
+
     return (
-        <div className='search-bar'>
+        <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
             <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword}/>
-            <Link href={{
-                pathname: mainPath,
-                query: {
-                    ...state.queries,
-                    keyword: state.keyword
-                }
-            }} as={{
-                pathname: asPath,
-                query: asQuery
-            }}><a className='search-bar-btn' style={state.style} ><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo' style={state.style} /></a></Link>
-        </div>
+            <button className='search-bar-btn' type='submit'><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo' style={state.style}/></button>
+        </form>
     );
 };
 export default withRouter(SearchInputComponent);
-
-
 

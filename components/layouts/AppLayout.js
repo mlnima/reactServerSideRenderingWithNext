@@ -1,4 +1,4 @@
-import React, {useEffect,useContext} from 'react';
+import React, {useEffect, useContext} from 'react';
 import Header from "../includes/Header/Header";
 import TopBar from "../includes/TopBar/TopBar";
 import Navigation from "../includes/Header/Navigation/Navigation";
@@ -9,6 +9,7 @@ import {initGA, logPageView} from '../../_variables/_variables'
 import AdminTools from "../includes/AdminTools/AdminTools";
 import Console from "../includes/AdminTools/Console/Console";
 import {createGlobalStyle} from "styled-components";
+import * as styledComponent from 'styled-components'
 import {AppContext} from "../../context/AppContext";
 
 const AppLayout = props => {
@@ -21,16 +22,18 @@ const AppLayout = props => {
         logPageView()
     }, []);
 
-    const GlobalStyle = contextData.siteDesign.customStyles?
-        createGlobalStyle`${contextData.siteDesign.customStyles}`:
+    const GlobalStyle = contextData.siteDesign.customStyles ?
+        createGlobalStyle`${contextData.siteDesign.customStyles}` :
         createGlobalStyle``;
 
-
+    // useEffect(() => {
+    //     console.log(styledComponent)
+    // }, []);
 
     return (
 
         <div className='app'>
-            <GlobalStyle />
+            <GlobalStyle/>
             <TopBar/>
             <Header/>
             <Navigation/>
