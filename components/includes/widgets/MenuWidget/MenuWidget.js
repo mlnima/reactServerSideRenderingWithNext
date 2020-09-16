@@ -41,7 +41,7 @@ const MenuWidget = props => {
     }, [contextData.state.isMobile]);
 
     return (
-        <div className='menu-widget'>
+        <div className='menu-widget' >
             <button style={{display:contextData.state.isMobile?'initial':'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'><FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo'/></button>
             <ul className='menu-widget-items' style={{display:open ? 'flex':'none'}}>
                 {renderMenuItems}

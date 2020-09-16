@@ -39,7 +39,7 @@ const MenuWidgetModelFields = props => {
         console.log(props.widgetData.data.menuItems)
     }, [props]);
 
-    const renderCurrentItems = ( Object.keys(props.widgetData.data.menuItems) || []).map(menuItem=>{
+    const renderCurrentItems = ( props.widgetData.data.menuItems ? Object.keys(props.widgetData.data.menuItems) : []).map(menuItem=>{
         return(
           <MenuWidgetModelFieldsPreview name={menuItem} data={props.widgetData.data.menuItems[menuItem]} {...props}/>
         )
