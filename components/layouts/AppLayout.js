@@ -9,7 +9,6 @@ import {initGA, logPageView} from '../../_variables/_variables'
 import AdminTools from "../includes/AdminTools/AdminTools";
 import Console from "../includes/AdminTools/Console/Console";
 import {createGlobalStyle} from "styled-components";
-import * as styledComponent from 'styled-components'
 import {AppContext} from "../../context/AppContext";
 
 const AppLayout = props => {
@@ -26,12 +25,7 @@ const AppLayout = props => {
         createGlobalStyle`${contextData.siteDesign.customStyles}` :
         createGlobalStyle``;
 
-    // useEffect(() => {
-    //     console.log(styledComponent)
-    // }, []);
-
     return (
-
         <div className='app'>
             <GlobalStyle/>
             <TopBar/>

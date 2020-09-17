@@ -4,7 +4,7 @@ import Link from 'next/link';
 import withRouter from 'next/dist/client/with-router'
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSearch} from "@fortawesome/free-solid-svg-icons";
+import {faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 const SearchInputComponent = props => {
     const router = useRouter()
@@ -14,7 +14,8 @@ const SearchInputComponent = props => {
         queries: {},
         style: {
             backgroundColor: '#222222'
-        }
+        },
+        isOpen:false
     });
 
 
@@ -87,12 +88,36 @@ const SearchInputComponent = props => {
     }
 
 
-    return (
-        <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
-            <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword}/>
-            <button className='search-bar-btn' type='submit'><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo' style={state.style}/></button>
-        </form>
-    );
+   const onOpenCloseHandler = ()=>{
+        state.isOpen?
+       setState({
+           ...state,
+           isOpen: false
+       }):
+       setState({
+           ...state,
+           isOpen: true
+       })
+   }
+
+
+
+    if(state.isOpen){
+        return (
+            <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
+                <button className='search-bar-btn-close' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='search-bar-btn-logo' style={state.style}/></button>
+                <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword}/>
+                <button className='search-bar-btn' type='submit'><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo' style={state.style}/></button>
+            </form>
+        );
+    }else {
+        return (
+            <button className='search-bar-btn-close' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo' style={state.style}/></button>
+        )
+    }
+
+
+
 };
 export default withRouter(SearchInputComponent);
 

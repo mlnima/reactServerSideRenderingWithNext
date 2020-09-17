@@ -5,6 +5,9 @@ import WidgetText from "./WidgetText/WidgetText";
 import './Widget.scss';
 import styled, {ThemeProvider} from "styled-components";
 
+let StyledDiv = styled.div`${props => props.customStyles}`
+
+
 const Widget = props => {
 
     const [state, setState] = useState({
@@ -40,24 +43,21 @@ const Widget = props => {
                 extraClassName: props.data.extraClassName
             })
         }
+
     }, [props]);
 
 
     useEffect(() => {
-
-        if(props.data.customStyles){
-            console.log(props.data.customStyles)
-        }
-
-    }, [props]);
+        console.log(props.data.customStyles)
+    }, [props.data.customStyles]);
 
 
-    const StyledDiv = props.data.customStyles ? styled.div`${props.data.customStyles}` : styled.div``
+    //  const StyledDiv = props.data.customStyles ? styled.div`${props.data.customStyles}` : styled.div``
 
     if (!props.data.deviceTypeToRender || props.data.deviceTypeToRender === 'all' || (state.isMobile && props.data.deviceTypeToRender === 'mobile') || (!state.isMobile && props.data.deviceTypeToRender === 'desktop')) {
         return (
 
-            <StyledDiv className={'widget ' + state.extraClassName}>
+            <StyledDiv customStyles={props.data.customStyles ? props.data.customStyles : ''} className={'widget ' + state.extraClassName}>
                 <WidgetHeader {...props.data}/>
                 <WidgetText {...props.data}/>
                 <RenderComponent/>

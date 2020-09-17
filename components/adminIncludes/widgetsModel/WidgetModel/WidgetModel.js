@@ -18,6 +18,8 @@ import LinkTypeWidgetModelFields from "./LinkTypeWidgetModelFields/LinkTypeWidge
 import ImageSwiperTypeWidgetModelFields from "./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields";
 import PostSwiperTypeWidgetModelFields from "./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields";
 import MenuWidgetModelFields from "./MenuWidgetModelFields/MenuWidgetModelFields";
+import TextWidgetTypeFields from "./TextWidgetTypeFields/TextWidgetTypeFields";
+import MediaWidgetType from "./MediaWidgetType/MediaWidgetType";
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
@@ -110,6 +112,10 @@ const WidgetModel = props => {
                 contextData.dispatchWidgetsSettings({
                     widgets: [...res.data.widgets]
                 })
+                setWidgetSettings({
+                    ...widgetSettings,
+                    open: false
+                })
             })
         })
     }
@@ -132,6 +138,10 @@ const WidgetModel = props => {
                 contextData.dispatchWidgetsSettings({
                     widgets: [...res.data.widgets]
                 })
+                setWidgetSettings({
+                    ...widgetSettings,
+                    open: false
+                })
             })
         })
     }
@@ -147,31 +157,31 @@ const WidgetModel = props => {
 
     }
 
-    const RenderText = () => {
-        return (
-            <>
-                <p>Text:</p>
-                <DelayInput element="textarea" name='text' value={
-                    widgetSettings.activeEditingLanguage === 'default' ? textInputsData.text :
-                        textInputsData.translations ?
-                            textInputsData.translations[widgetSettings.activeEditingLanguage] ?
-                                textInputsData.translations[widgetSettings.activeEditingLanguage].text || '' :
-                                '' : ''
-                } delayTimeout={2000}
-                            onChange={e => onTextInputsDataChangeHandler(e)}/>
-
-                <p>Text Align:</p>
-                <select name='textAlign' value={textInputsData.textAlign} onChange={e => onTextInputsDataChangeHandler(e)}>
-                    <option value='left'>Left</option>
-                    <option value='center'>Center</option>
-                    <option value='right'>Right</option>
-                </select>
-                <p>Text Color:</p>
-                <DelayInput name='textColor' value={widgetData.data.textColor || ''} delayTimeout={4000}
-                            onChange={e => onChangeHandler(e)}/>
-            </>
-        )
-    }
+    // const RenderText = () => {
+    //     return (
+    //         <>
+    //             <p>Text:</p>
+    //             <DelayInput element="textarea" name='text' value={
+    //                 widgetSettings.activeEditingLanguage === 'default' ? textInputsData.text :
+    //                     textInputsData.translations ?
+    //                         textInputsData.translations[widgetSettings.activeEditingLanguage] ?
+    //                             textInputsData.translations[widgetSettings.activeEditingLanguage].text || '' :
+    //                             '' : ''
+    //             } delayTimeout={2000}
+    //                         onChange={e => onTextInputsDataChangeHandler(e)}/>
+    //
+    //             <p>Text Align:</p>
+    //             <select name='textAlign' value={textInputsData.textAlign} onChange={e => onTextInputsDataChangeHandler(e)}>
+    //                 <option value='left'>Left</option>
+    //                 <option value='center'>Center</option>
+    //                 <option value='right'>Right</option>
+    //             </select>
+    //             <p>Text Color:</p>
+    //             <DelayInput name='textColor' value={widgetData.data.textColor || ''} delayTimeout={4000}
+    //                         onChange={e => onChangeHandler(e)}/>
+    //         </>
+    //     )
+    // }
 
     const RenderWidgetCustomStyle = () => {
         return (
@@ -196,7 +206,13 @@ const WidgetModel = props => {
 
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
                                                     onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <RenderText/>
+                                     <TextWidgetTypeFields
+                            widgetSettings={widgetSettings}
+                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                            textInputsData={textInputsData}
+                            widgetData={widgetData}
+                            onChangeHandler={onChangeHandler}
+                        />
                         <p>Sort By:</p>
                         <select name='sortBy' value={widgetData.data.sortBy} onChange={e => onChangeHandler(e)}>
                             <option value='_id'>Newest</option>
@@ -228,7 +244,13 @@ const WidgetModel = props => {
                         />
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
                                                     onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <RenderText/>
+                                     <TextWidgetTypeFields
+                            widgetSettings={widgetSettings}
+                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                            textInputsData={textInputsData}
+                            widgetData={widgetData}
+                            onChangeHandler={onChangeHandler}
+                        />
                         <p>Sort By:</p>
                         <select name='sortBy' value={widgetData.data.sortBy} onChange={e => onChangeHandler(e)}>
                             <option value='_id'>Newest</option>
@@ -250,22 +272,15 @@ const WidgetModel = props => {
                 )
             case 'media':
                 return (
-                    <>
-                        <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
-                                                    onChangeHandler={onChangeHandler}/>
-                        <RenderText/>
-                        <p>Media Type:</p>
-                        <select name='mediaType' value={widgetData.data.mediaType || ''}
-                                onChange={e => onChangeHandler(e)}>
-                            <option value='video'>Video</option>
-                            <option value='image'>Image</option>
-                            <option value='audio'>Audio</option>
-                            <option value='iframe'>Iframe</option>
-                        </select>
-                        <p>Media Url:</p>
-                        <DelayInput name='mediaUrl' value={widgetData.data.mediaUrl || ''} placeholder='Media URL'
-                                    className='mediaUrl' delayTimeout={1000} onChange={e => onChangeHandler(e)}/>
-                    </>
+
+                                    <MediaWidgetType
+                                        textInputsData={textInputsData}
+                                        widgetSettings={widgetSettings}
+                                        onChangeHandler={onChangeHandler}
+                                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                                        widgetData={widgetData}
+                                    />
+
                 )
 
             case 'meta':
@@ -273,7 +288,13 @@ const WidgetModel = props => {
                     <>
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
                                                     onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <RenderText/>
+                                     <TextWidgetTypeFields
+                            widgetSettings={widgetSettings}
+                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                            textInputsData={textInputsData}
+                            widgetData={widgetData}
+                            onChangeHandler={onChangeHandler}
+                        />
                         <p>Sort By:</p>
                         <select name='sortBy' value={widgetData.data.sortBy} onChange={e => onChangeHandler(e)}>
                             <option value='_id'>ID</option>
@@ -366,7 +387,35 @@ const WidgetModel = props => {
                     <>
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
                                                     onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <RenderText/>
+                        <TextWidgetTypeFields
+                            widgetSettings={widgetSettings}
+                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                            textInputsData={textInputsData}
+                            widgetData={widgetData}
+                            onChangeHandler={onChangeHandler}
+                        />
+
+                    </>
+                )
+            case 'textMedia':
+                return (
+                    <>
+                        <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
+                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
+                        {/*<TextWidgetTypeFields*/}
+                        {/*    widgetSettings={widgetSettings}*/}
+                        {/*    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}*/}
+                        {/*    textInputsData={textInputsData}*/}
+                        {/*    widgetData={widgetData}*/}
+                        {/*    onChangeHandler={onChangeHandler}*/}
+                        {/*/>*/}
+                        <MediaWidgetType
+                            textInputsData={textInputsData}
+                            widgetSettings={widgetSettings}
+                            onChangeHandler={onChangeHandler}
+                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                            widgetData={widgetData}
+                        />
                     </>
                 )
             case 'linkTo':
