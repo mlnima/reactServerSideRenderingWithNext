@@ -17,6 +17,7 @@ export let widgetModels = {
     LogoUrl:'',
     LogoText:'',
     headLine:'',
-    viewType:'standard'
+    viewType:'standard',
 }
+
 

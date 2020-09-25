@@ -105,14 +105,14 @@ const SearchInputComponent = props => {
     if(state.isOpen){
         return (
             <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
-                <button className='search-bar-btn-close' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='search-bar-btn-logo' style={state.style}/></button>
+                <button className='search-bar-btn-close' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='search-bar-btn-logo svg-logo-medium' style={state.style}/></button>
                 <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword}/>
-                <button className='search-bar-btn' type='submit'><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo' style={state.style}/></button>
+                <button className='search-bar-btn' type='submit'><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo svg-logo-medium' style={state.style}/></button>
             </form>
         );
     }else {
         return (
-            <button className='search-bar-btn-close' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo' style={state.style}/></button>
+            <button className='search-bar-btn-close' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faSearch} className='search-bar-btn-logo svg-logo-medium' style={state.style}/></button>
         )
     }
 

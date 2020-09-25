@@ -1,6 +1,5 @@
 import React, { useEffect, useContext, useState, useRef } from 'react';
 import Head from "next/head";
-// import '../../styles/styles.scss';
 import '../../styles/globalAdminPanel.scss';
 import TopBar from "../adminIncludes/TopBar/AdminTopBar";
 import SideBar from "../adminIncludes/SideBar/SideBar";
@@ -16,7 +15,7 @@ const Panel = props => {
     const contextData = useContext(AppContext);
     const container = useRef(null);
     const Admin = useRef(null);
-    const [ state, dispatchState ] = useState({});
+
 
     useEffect(() => {
         if (!window.GA_INITIALIZED) {
@@ -45,11 +44,7 @@ const Panel = props => {
                 ...design.data.setting.data
             })
         })
-        getSetting('navigation', window.location.origin, false, Date.now()).then(navigationData => {
-            contextData.dispatchNavigationData([
-                ...navigationData.data.setting.data
-            ])
-        })
+
     }, []);
 
     if (contextData.userData.role === 'administrator') {
@@ -82,5 +77,3 @@ const Panel = props => {
 };
 
 export default withRouter(Panel);
-{/*<Error { ...props } />*/
-}

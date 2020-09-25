@@ -7,8 +7,8 @@ const userSchema = require('./server/models/userSchema')
 const bcrypt = require('bcryptjs');
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL ?
-    `mongodb://localhost:${ process.env.DB_PORT }/${ process.env.DB_NAME }` :
-    `mongodb://${ process.env.DB_USER }:${ process.env.DB_PASS }@${ process.env.DB_HOST }:${ process.env.DB_PORT }/${ process.env.DB_NAME }`
+    `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
+    `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
 
 mongoose.connect(mongoDBConnectionUrl, {
     useNewUrlParser: true,
@@ -17,7 +17,7 @@ mongoose.connect(mongoDBConnectionUrl, {
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
 
-
+//saving default site identity
 const identityData = {
     type: 'identity',
     data: {
@@ -26,172 +26,105 @@ const identityData = {
         postsCountPerPage: 40,
         description: 'website description',
         keywords: [],
-        logoText: ' Logo text',
-        headLine: 'this is the site headline',
         homePageSidebar: true,
         metaPageSidebar: false,
         postPageSidebar: true,
         postsPageSidebar: true,
-        topBarAuthBtn:true,
-        anyoneCanRegister:true,
-        defaultSiteLanguage:'en',
-        topBarVisibility:true,
+        topBarAuthBtn: true,
+        anyoneCanRegister: true,
+        defaultSiteLanguage: 'en',
+        topBarVisibility: true,
     }
 }
-const navigationData = {
-    type: 'navigation',
-    data: [
-        {
-            "title": "Home",
-            "url": "/"
-        },
-        {
-            "title": "Tags",
-            "url": "/meta",
-            "as": "/tags",
-            "query": [
-                {
-                    "type": "tags"
-                }
-            ]
-        },
-        {
-            "title": "Categories",
-            "url": "/meta",
-            "as": "/categories",
-            "query": [
-                {
-                    "type": "categories"
-                }
-            ]
-        }
-    ]
-}
+
+const identityToSave = new settingSchema(identityData)
+identityToSave.save().catch(() => {
+    console.log('Error on site Identity set')
+})
+
+//saving default site design
+
 const designData = {
     type: 'design',
     data: {
-        bodyBackgroundColor: 'black',
-        bodyTextColor: 'white',
-        topBarBackgroundColor: '#222222',
-        topBarTextColor: 'white',
-        headerBackgroundColor: 'transparent',
-        headerTextColor: 'white',
-        navigationBackgroundColor: '#222222',
-        navigationTextColor: 'white',
-        footerBackgroundColor: '#222',
-        footerTextColor: 'black',
-
-        widgetHeaderBackgroundColor: '#222',
-        widgetHeaderTextColor: 'white',
-        widgetHeaderRedirectLinkBackgroundColor: 'red',
-        widgetHeaderRedirectLinkTextColor: '#fff',
-        widgetBodyBackgroundColor: 'transparent',
-        widgetBodyTextColor: '#fff',
-        widgetBodyBorder: 'none',
-
-        commentsAuthorTextColor: '#0085ba',
-        commentsDateTextColor: '#FF3565',
-        commentsBodyTextColor: '#fff',
-        commentsBackgroundColor: 'transparent',
+        customStyle: ' body{\n' +
+            '    background-color: black;\n' +
+            '    color: white;\n' +
+            '}',
+        topBarStyle:'background-color:#333;',
+        headerStyle:'background-color:black;',
+        navigationStyle:'background-color:#333;',
+        footerStyle:'background-color:#333;',
     }
 }
 
-const adminData = {
+const sideDesignToSave = new settingSchema(designData)
+sideDesignToSave.save().catch(() => {
+    console.log('Error on site Identity set')
+})
+
+
+//creating admin admin account
+
+
+let adminData = {
     username: 'Admin',
     password: 'Admin',
     role: 'administrator',
-    keyMaster:true
+    keyMaster: true
 }
 
-const widgetData = [ {
+bcrypt.hash(adminData.password, 10, function (err, hash) {
+    if (err) {
+        console.log(err)
+        process.exit()
+    } else if (hash) {
+        adminData = {...adminData, password: hash}
+        const adminDataToSave = new userSchema(adminData)
+        adminDataToSave.save()
+        console.log('admin account created , username: Admin , password: Admin')
+        setTimeout(() => process.exit(), 5000)
+    }
+});
+
+
+//saving default widget for homepage
+
+
+const widgetData = [{
     "data": {
         "type": "searchBar",
         "title": "",
-        "categories": [],
-        "tags": [],
-        "count": 8,
-        "comments": [],
-        "pagination": false,
         "position": "header",
         "redirectLink": "",
-        "sortBy": "",
         "text": "",
-        "textAlign": "center",
-        "customHtml": "",
-        "metaType": "",
-        "pathURL": "",
-        "LogoUrl": "",
-        "LogoText": "",
-        "headLine": "",
-        "viewType": "standard"
     }
 },
     {
         "data": {
             "type": "logo",
-            "title": "",
-            "categories": [],
-            "tags": [],
-            "count": 8,
-            "comments": [],
-            "pagination": false,
             "position": "header",
-            "redirectLink": "",
-            "sortBy": "",
-            "text": "",
-            "textAlign": "center",
-            "customHtml": "",
-            "metaType": "",
-            "pathURL": "",
             "LogoUrl": "",
             "LogoText": "Logo",
             "headLine": "",
-            "viewType": "standard",
-            "metaData": [],
-            "posts": [],
-            "logoTextColor" : "white",
-            "logoHeadLineColor" : "white",
-            "logoHeadLineFontSize" : "26",
-            "logoTextFontSize" : "40"
         }
     }
 ]
 
-const runSetup = async () => {
-    const identityToSave = new settingSchema(identityData)
-    const navigationToSave = new settingSchema(navigationData)
-    const designToSave = new settingSchema(designData)
 
-    await identityToSave.save()
-    await navigationToSave.save()
-    await designToSave.save()
-
-    widgetData.forEach(widget => {
-        const dataToSave = new widgetSchema(widget)
-        dataToSave.save()
+widgetData.forEach(widget => {
+    const dataToSave = new widgetSchema(widget)
+    dataToSave.save().catch(() => {
+        console.log('Error on widget set')
     })
-
-    bcrypt.hash(adminData.password, 10, (err, hash) => {
-        if (err) {
-            console.log('something is wrong with Bcrypt')
-        } else if (hash) {
-            let dataToSave = {
-                ...adminData,
-                password: hash,
-            };
-
-            let newUserData = userSchema(dataToSave);
-            newUserData.save()
-        }
-    })
-
-}
-
-runSetup().then(() => {
-    console.log('all set')
-    process.exit()
-}).catch(err => {
-    console.log(err)
-    process.exit()
 })
+
+
+
+
+
+
+
+
+
 

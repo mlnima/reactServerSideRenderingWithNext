@@ -117,7 +117,7 @@ export const contactAjaxPost = async (data) => {
     const body ={
         data
     }
-    return await axios.post(window.location.origin + '/api/v1/forms/contact', body)
+    return await axios.post(window.location.origin + '/api/v1/form/contact', body)
 }
 
 export const youtubeDataScrapper = async (url) => {

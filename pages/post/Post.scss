@@ -13,14 +13,12 @@
     width: 98%;
 
 
-
-
     #download-url {
       width: 100%;
       margin: 20px 0;
 
       .download-link {
-        background-color: $red50;
+
         color: white;
         padding: 10px;
         text-align: center;
@@ -29,132 +27,8 @@
       }
     }
 
-    .post-info {
+    .under-post-widget-area {
       width: 100%;
-      box-sizing: border-box;
-      padding: 10px;
-
-      .share {
-        display: grid;
-        grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-        grid-gap: 10px;
-      }
-
-      .post-info-head {
-        background-color: $dark90;
-        padding: 5px;
-        margin: 5px 0;
-        border-radius: 10px;
-        h1 {
-          font-size: 1.25em;
-          text-align: center;
-        }
-
-        .like {
-          display: flex;
-          justify-content: center;
-          align-items: center;
-
-          button {
-            @include transparentLightTextBtn;
-            margin: 0 10px;
-
-            span {
-
-            }
-
-            &:disabled {
-              color: $AdminColor80;
-            }
-          }
-        }
-      }
-
-      .post-info-body {
-        .views {
-          .post-rate {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-
-            .like-disLike-count {
-              display: flex;
-              align-items: center;
-
-              .like-disLike-count-items {
-                margin: 0 10px;
-                display: flex;
-                align-items: center;
-
-                p {
-                  margin: 0 5px;
-                }
-              }
-            }
-          }
-
-          .progressParent {
-            max-width: 100%;
-
-            div {
-              transition: width 0.3s ease-in-out;
-            }
-          }
-        }
-
-        .meta-description {
-          .tags-categories-actors {
-            display: flex;
-            flex-wrap: wrap;
-            margin: 5px 0;
-            padding: 5px 0;
-
-            span {
-              display: flex;
-
-              span {
-                margin: 0 5px;
-              }
-            }
-
-            .content {
-            
-              //padding: 10px 0;
-              //max-width: 100%;
-              display: flex;
-              flex-wrap: wrap;
-
-              .post-meta-item {
-                background-color: $red50;
-                border-radius: 5px;
-                padding: 5px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                max-height: 30px;
-                margin: 5px;
-
-                a {
-                  color: white;
-                  display: initial;
-                  margin-left: 5px;
-                }
-              }
-
-              //.actors {
-              //  background-color: transparent;
-              //  color: $red50;
-              //}
-            }
-
-          }
-        }
-
-      }
-
-    }
-    .under-post-widget-area{
-width: 100%;
     }
   }
 
@@ -171,35 +45,6 @@ width: 100%;
             padding: 15px;
           }
         }
-      }
-
-      .post-info {
-        .post-info-head {
-          .like {
-            justify-content: start;
-          }
-        }
-
-        .post-info-body {
-          display: grid;
-          grid-template-columns: 200px 1fr;
-          grid-gap: 20px;
-
-          .views {
-            .progressParent {
-              //max-width: 150px;
-            }
-          }
-
-          .meta-description {
-            .tags-categories-actors {
-              display: flex;
-              align-items: center;
-            }
-          }
-
-        }
-
       }
     }
   }

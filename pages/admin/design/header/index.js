@@ -1,19 +1,12 @@
 import React from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout'
+import StyleSection from "../../../../components/adminIncludes/design/StyleSection/StyleSection";
 
-import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
-
-const MyComponent = props => {
+const MyComponent = () => {
 
     return (
         <AdminLayout>
-            <div className='header-setting'>
-                <h1>Header Settings :</h1>
-                <div className='colorSettingSections'>
-                    <ColorSection designName='headerBackgroundColor'/>
-                    <ColorSection designName='headerTextColor'/>
-                </div>
-            </div>
+            <StyleSection name='headerStyle' title='Header Design :' />
         </AdminLayout>
     );
 };

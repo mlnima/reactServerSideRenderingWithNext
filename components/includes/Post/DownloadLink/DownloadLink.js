@@ -1,17 +1,14 @@
-import React, { useEffect, useState, useContext } from 'react';
-import Link from "next/link";
+import React from 'react';
 import {AppContext} from "../../../../context/AppContext";
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import './DownloadLink.scss'
 const DownloadLink = props => {
-    const contextData = useContext(AppContext);
 
-    if (props.downloadLink && props.postType === 'video') {
+    if (props.render) {
         return (
-            <div id='download-url'>
-                <a style={{
-                    color:contextData.siteDesign.postDownloadBtnTextColor||'white',
-                    backgroundColor:contextData.siteDesign.postDownloadBtnBackgroundColor||'red',
-                }} href={ props.downloadLink } target='_blank' className='download-link'>Download</a>
+            <div className='download-url action-wide-button'>
+                <a  href={ props.downloadLink } target='_blank' className='download-link'><FontAwesomeIcon icon={faDownload} className='svg-logo-medium'/></a>
             </div>
 
         );

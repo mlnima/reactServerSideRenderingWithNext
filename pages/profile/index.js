@@ -23,11 +23,9 @@ const Profile = props => {
         <AppLayout>
             <SiteSettingSetter { ...props }/>
             <div className='profile-page'>
-
                 <ProfileCoverImage/>
                 <ProfileNavigation state={state} setState={setState}/>
                 <ProfileComponentsRenderer activeComponent={state.activeTab}/>
-
             </div>
         </AppLayout>
     );
@@ -36,7 +34,7 @@ Profile.getInitialProps = async ({ pathname, query, req, res, err }) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let settings;
     let widgets;
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'footer', 'header','topBar' ] }, domainName, true, 'profilePage')
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'footer', 'header','topBar','navigation' ] }, domainName, true, 'profilePage')
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true, 'profilePage')
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

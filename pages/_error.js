@@ -1,7 +1,7 @@
 import React from 'react';
 import AppLayout from '../components/layouts/AppLayout'
 import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
-import Footer from '../components/includes/Footer/Footer'
+import Footer from '../components/widgetsArea/Footer/Footer'
 
 
 const Error = props => {

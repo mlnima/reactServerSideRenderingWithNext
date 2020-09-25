@@ -1,19 +1,12 @@
 import React from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout'
-import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
+import StyleSection from "../../../../components/adminIncludes/design/StyleSection/StyleSection";
 
-const footer = props => {
+const footer = () => {
 
-// need to fix
     return (
         <AdminLayout>
-            <div className='header-setting'>
-                <h1>Footer Settings :</h1>
-                <div className='colorSettingSections'>
-                    <ColorSection designName='footerBackgroundColor'/>
-                    <ColorSection designName='footerTextColor'/>
-                </div>
-            </div>
+            <StyleSection name='footerStyle' title='Footer Design :' />
         </AdminLayout>
     );
 };

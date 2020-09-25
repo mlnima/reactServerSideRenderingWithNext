@@ -13,7 +13,7 @@ import Posts from '../../components/includes/Posts/Posts'
 import Link from 'next/link'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
-import Footer from '../../components/includes/Footer/Footer'
+import Footer from '../../components/widgetsArea/Footer/Footer'
 import {getAbsolutePath} from '../../_variables/_variables'
 import AdminLayout from '../../components/layouts/AdminLayout'
 import dataDecoder from '../../server/tools/dataDecoder'
@@ -102,7 +102,7 @@ posts.getInitialProps = async ({pathname, query, req, res, err}) => {
 
     const contentData = query.content ? await getSingleMeta(query.content,domainName,true) : {}
     const contentDataInfo =   contentData.data ?  contentData.data.meta : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'home', 'footer', 'header','topBar']}, domainName, true, 'postsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'home', 'footer', 'header','topBar','navigation']}, domainName, true, 'postsPage')
     const postsData = await getPosts(getPostsData, domainName, true)
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

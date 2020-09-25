@@ -1,37 +1,11 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout'
-import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
+import StyleSection from "../../../../components/adminIncludes/design/StyleSection/StyleSection";
 
-const postPage = props => {
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
+const postPage = () => {
     return (
         <AdminLayout>
-            <div className='postPage-setting'>
-                <h1>Post Page Settings :</h1>
-                <h2>Color Comments:</h2>
-                <div className='colorSettingSections'>
-                    <ColorSection designName='postTitleTextColor'/>
-                    <ColorSection designName='postTitleBackgroundColor'/>
-
-                    <ColorSection designName='postMetaDataTextColor'/>
-                    <ColorSection designName='postMetaDataBackgroundColor'/>
-                    <ColorSection designName='postDownloadBtnTextColor'/>
-                    <ColorSection designName='postDownloadBtnBackgroundColor'/>
-                    <ColorSection designName='postDescriptionTextColorColor'/>
-
-                    <ColorSection designName='postProgressbarBackgroundColor'/>
-                    <ColorSection designName='postProgressbarTextColor'/>
-                    <ColorSection designName='postProgressbarValueColor'/>
-
-                    <ColorSection designName='commentsAuthorTextColor'/>
-                    <ColorSection designName='commentsDateTextColor'/>
-                    <ColorSection designName='commentsBodyTextColor'/>
-                    <ColorSection designName='commentsBackgroundColor'/>
-                </div>
-
-            </div>
+            <StyleSection name='postPageStyle' title='Post Page Design :' />
         </AdminLayout>
     );
 };

@@ -13,10 +13,16 @@ import withRouter from 'next/dist/client/with-router'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faDollarSign, faEuroSign, faSmileBeam} from "@fortawesome/free-solid-svg-icons";
 import {faMeh, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
+import EditLinksForAuthor from "./EditLinksForAuthor/EditLinksForAuthor";
+import EditLinkForAdmin from "./EditLinkForAdmin/EditLinkForAdmin";
+import RatingButtons from "./RatingButtons/RatingButtons";
+import Price from "./Price/Price";
+import RatingData from "./RatingData/RatingData";
+import PostTitle from "./PostTitle/PostTitle";
+import PostDescription from "./PostDescription/PostDescription";
+import AddToBasket from "./AddToBasket/AddToBasket";
 
 const PostInfo = props => {
-    const ratingBtnArea = useRef(null)
-    const contextData = useContext(AppContext);
     const [state, setState] = useState({
         likeValue: 0,
         postAbsolutePath: '',
@@ -25,26 +31,6 @@ const PostInfo = props => {
         isDisliked: false
     });
 
-    const [styles, setStyles] = useState({
-        titleArea: {
-            color: 'white',
-            backgroundColor: 'black'
-        }
-    })
-
-
-    useEffect(() => {
-        setStyles({
-            ...styles,
-            titleArea: {
-                ...styles.titleArea,
-                color: contextData.siteDesign.postTitleTextColor || 'white',
-                backgroundColor: contextData.siteDesign.postTitleBackgroundColor || 'black',
-            }
-        })
-    }, [contextData.siteDesign]);
-
-
     useEffect(() => {
         setState({
             ...state,
@@ -52,186 +38,31 @@ const PostInfo = props => {
             postAbsolutePath: window.location.href
         });
         likeDislikeView(props.id, 'views')
-    }, []);
-
-
-    const EditLinkForAdmin = () => {
-        if (contextData.userData.role === 'administrator') {
-            return (
-                <Link href={`/admin/post?id=${props.id}`}><a className='edit-btn-admin'>Edit as Admin</a></Link>
-            )
-        } else return null
-    }
-
-    const EditLinksForAuthor = () => {
-        if (props.editMode && (contextData.userData._id === props.author || contextData.userData.username === props.author)) {
-            return (
-                <>
-                    <Link href={props.router ? {
-                        pathname: props.router.pathname,
-                        query: {...props.router.query, mode: 'view'}
-                    } : '/'}><a className='edit-btn-admin'>View Mode</a></Link>
-                    <Link href={props.router ? {
-                        pathname: props.router.pathname,
-                        query: {...props.router.query, mode: 'view'}
-                    } : '/'}><a className='edit-btn-admin'>Delete</a></Link>
-                </>
-            )
-        } else if (!props.editMode && (contextData.userData._id === props.author || contextData.userData.username === props.author)) {
-            return (
-                <>
-                    <Link href={props.router ? {
-                        pathname: props.router.pathname,
-                        query: {...props.router.query, mode: 'edit'}
-                    } : '/'}><a className='edit-btn-admin'>Edit Mode (Beta)</a></Link>
-                </>
-            )
-        } else return null
-    }
-
-
-    const onLikeOrDislikeHandler = (type) => {
-        likeDislikeView(props.id, type)
-    }
-
-
-
-
-
-
-
-
-    const RenderRatingButtons = () => {
-        if (props.rating !== 'disable') {
-            return(
-                <div ref={ratingBtnArea} className="like">
-                    <button onClick={() => onLikeOrDislikeHandler('likes')}>
-
-                        <FontAwesomeIcon icon={faThumbsUp} className='rate-logo' style={styles.titleArea}/>
-
-                    </button>
-                    <button onClick={() => onLikeOrDislikeHandler('disLikes')}>
-                        <FontAwesomeIcon icon={faThumbsDown} className='rate-logo' style={styles.titleArea}/>
-
-                    </button>
-                </div>
-            )
-        } else return null
-    }
-
-
-    const RenderPrice = () => {
-        if (props.postType === 'product') {
-            return (
-                <div className='price-information'>
-                    <FontAwesomeIcon icon={props.currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo'/>
-
-                    <p>{props.price}</p>
-
-                </div>
-            )
-
-        } else return null
-    }
-
-    const RenderRatingData = () => {
-        if (props.rating !== 'disable') {
-            return (
-                <>
-                    <ProgressBar value={state.likeValue} percent={false}
-                                 backgroundColor={contextData.siteDesign.postProgressbarBackgroundColor || '#333'}
-                                 valueColor={contextData.siteDesign.postProgressbarValueColor || 'red'}
-                                 textColor={contextData.siteDesign.postProgressbarTextColor || 'white'}
-                    />
-                    <div className='post-rate' style={{color: contextData.siteDesign.postProgressbarTextColor || 'white'}}>
-                        <div>
-                            {state.likeValue} %
-                        </div>
-                        <div className='like-disLike-count'>
-                            <span className='like-disLike-count-items' style={{color: contextData.siteDesign.postProgressbarTextColor || 'white'}}>
-                                <FontAwesomeIcon icon={faThumbsUp} className='like-disLike-count-items-logo'/>
-                                {/*<img className='fontawesomeSvgSmall' src={LikeBtnSvg} alt=""/>*/}
-                                <p>  {props.likes}</p>
-
-                            </span>
-                            <span className='like-disLike-count-items' style={{color: contextData.siteDesign.postProgressbarTextColor || 'white'}}>
-                                      <FontAwesomeIcon icon={faThumbsDown} className='like-disLike-count-items-logo'/>
-                                {/*<img className='fontawesomeSvgSmall' src={DisLikeBtnSvg} alt=""/>*/}
-
-                                <p>  {props.disLikes}</p>
-                            </span>
-                        </div>
-                    </div>
-                </>
-            )
-
-        } else return null
-    }
-
-    const RenderTitle = () => {
-        if (props.editMode) {
-            return (
-                <div className='edit-mode'>
-                    <p className='editModeText'>Title :</p>
-                    <input type="text" value={props.title}/>
-                </div>
-            )
-        } else {
-            return (
-                <h1 style={styles.titleArea}
-                    className='post-title'>{props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].title || props.post.title : props.post.title : props.post.title}</h1>
-            )
-        }
-    }
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
-
-    const RenderDescription = () => {
-        if (props.editMode) {
-            return (
-                <div className='edit-mode'>
-                    <p className='editModeText'>Description :</p>
-                    <textarea value={props.description}/>
-                </div>
-            )
-        } else {
-            return (
-                <p style={{color: contextData.siteDesign.postDescriptionTextColorColor || 'white'}}
-                   className="description">{props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description}</p>
-            )
-        }
-    }
-
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+    }, [props.likes, props.disLikes]);
 
     return (
         <div className='post-info'>
-            <EditLinkForAdmin/>
-            <EditLinksForAuthor/>
+            <EditLinkForAdmin {...props}/>
+            <EditLinksForAuthor {...props}/>
 
-            <div className='post-info-head' style={styles.titleArea}>
-
-                <RenderTitle/>
+            <div className='post-info-head' >
+                <PostTitle {...props}/>
                 <div className='under-title'>
-                    <RenderRatingButtons/>
-                    <RenderPrice/>
+                    <RatingButtons {...props}/>
+                    <Price {...props}/>
                 </div>
-
+                <AddToBasket productId={props._id} render={props.postType==='product'}/>
             </div>
 
             <div className='post-info-body'>
                 <div className="views">
-                    <DownloadLink downloadLink={props.videoEmbedCode} postType={props.postType}/>
+                    <DownloadLink downloadLink={props.downloadLink} render={props.downloadLink} />
+
                     <span>{props.views} views</span>
-                    <RenderRatingData/>
+                    <RatingData {...props}/>
                 </div>
                 <div className="meta-description">
-                    <RenderDescription/>
+                    <PostDescription  {...props}/>
                     <TagsAndCategoriesActors type='actors' data={props.actors || []}/>
                     <TagsAndCategoriesActors type='tags' data={props.tags || []}/>
                     <TagsAndCategoriesActors type='categories' data={props.categories || []}/>

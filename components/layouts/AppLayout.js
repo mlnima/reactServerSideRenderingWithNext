@@ -1,7 +1,7 @@
 import React, {useEffect, useContext} from 'react';
-import Header from "../includes/Header/Header";
-import TopBar from "../includes/TopBar/TopBar";
-import Navigation from "../includes/Header/Navigation/Navigation";
+import Header from "../widgetsArea/Header/Header";
+import TopBar from "../widgetsArea/TopBar/TopBar";
+import Navigation from "../widgetsArea/Navigation/Navigation";
 import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
 import '../../styles/global.scss'
@@ -10,6 +10,7 @@ import AdminTools from "../includes/AdminTools/AdminTools";
 import Console from "../includes/AdminTools/Console/Console";
 import {createGlobalStyle} from "styled-components";
 import {AppContext} from "../../context/AppContext";
+import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 
 const AppLayout = props => {
     const contextData = useContext(AppContext);
@@ -28,16 +29,17 @@ const AppLayout = props => {
     return (
         <div className='app'>
             <GlobalStyle/>
-            <TopBar/>
-            <Header/>
-            <Navigation/>
-            <Loading/>
-            <AlertBox/>
+            <WidgetArea className='top-bar' position='topBar' stylesData={contextData.siteDesign.topBarStyle}/>
+            <WidgetArea className='header' position='header' stylesData={contextData.siteDesign.headerStyle}/>
+            <WidgetArea className='navigation' position='navigation' stylesData={contextData.siteDesign.navigationStyle}/>
             <div className="App">
                 {props.children}
             </div>
+            <WidgetArea className='footer' position='footer' stylesData={contextData.siteDesign.footerStyle}/>
             <AdminTools/>
             <Console/>
+            <Loading/>
+            <AlertBox/>
         </div>
 
     );

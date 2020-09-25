@@ -3,7 +3,6 @@
   border: none;
   outline: none;
   margin: 0;
-  padding: 0;
   width: 30px;
   height: 30px;
   .navigation-mobile-button-logo{
@@ -12,31 +11,48 @@
   }
 }
 
+.navigation-close-button{
+  position: fixed;
+  top:2%;
+  right :2%;
+  background-color: transparent;
+  border: none;
+}
+
+
 .menu-widget{
-  display: flex;
-  flex-direction: column;
-  flex-wrap: wrap;
+
+  //display: flex;
+
+
+  //align-items: flex-start;
+  //flex-direction: column;
+  //flex-wrap: wrap;
 
   .menu-widget-items{
-    margin: 0;
-    padding: 0;
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,.8);
+    z-index: 1000;
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    width: 100vw;
-    position: fixed;
-    top: 100px;
-    left :0;
-    right: 0;
-    animation: navigationMobile .5s ;
+    padding: 0;
+    margin: 0;
     .menu-widget-item{
       list-style-type: none;
-      margin: 5px 10px;
       width: 100%;
       text-align: center;
-      border-bottom: .5px solid black;
-      padding: 5px 0;
+      padding: 10px 0;
+      border-bottom: 1px solid ;
+      &:hover{
+        filter: invert(1);
+      }
     }
   }
 }
@@ -44,6 +60,7 @@
 @media only screen and (min-width: 768px) {
   .menu-widget{
     .menu-widget-items{
+      background-color: initial;
       flex-direction: row;
       width: initial;
       position: initial;
@@ -52,18 +69,10 @@
         margin: 0 10px;
         width:initial;
         text-align: left;
+        padding: 0;
         border-bottom: none;
       }
     }
   }
 }
 
-@keyframes navigationMobile {
-  0%{
-    left:-500px ;
-  }
-  100%{
-    margin-top:0;
-    left:0 ;
-  }
-}

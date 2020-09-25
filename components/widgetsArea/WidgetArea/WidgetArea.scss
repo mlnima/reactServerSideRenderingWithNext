@@ -1,0 +1,19 @@
+.top-bar,.navigation,.header,.footer{
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  //padding: 0 2%;
+}
+
+.top-bar,.navigation{
+  min-height: 48px;
+  height: auto;
+}
+
+@media only screen and (min-width: 768px) {
+  .top-bar,.navigation{
+    height: 48px;
+  }
+
+}

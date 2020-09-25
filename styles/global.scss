@@ -5,10 +5,10 @@
 @import "./mixIns";
 
 //components
-@import "../components/includes/Header/Header";
+@import "../components/widgetsArea/Header/Header";
 @import "../components/includes/AlertBox/AlertBox";
 @import "../components/includes/Widget/Logo/Logo";
-@import "../components/includes/Header/Navigation/Navigation";
+@import "../components/widgetsArea/Navigation/Navigation";
 @import "../components/includes/Loading/Loading";
 //@import "../components/includes/Pagination/Pagination";
 @import "../components/includes/Posts/Posts";
@@ -16,7 +16,7 @@
 @import "../components/includes/Sidebar/Sidebar";
 @import "../components/includes/PaginationComponent/PaginationComponent";
 @import "../components/includes/ProgressBar/ProgressBar";
-@import "../components/includes/TopBar/TopBar";
+@import "../components/widgetsArea/TopBar/TopBar";
 @import "../components/includes/PostElement/PostElement";
 @import "../components/includes/Post/CommentFrom/CommentFrom";
 @import "../components/includes/Post/SlideShow/SlideShow";
@@ -27,7 +27,7 @@
 @import "../components/includes/widgets/RecentComments/RecentComments";
 @import "../components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher";
 @import "../components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget";
-@import "../components/includes/Footer/Footer";
+@import "../components/widgetsArea/Footer/Footer";
 @import "../components/layouts/AdminLayout";
 @import "../components/layouts/AppLayout";
 @import "./globalAdminPanel";

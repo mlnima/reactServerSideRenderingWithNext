@@ -135,6 +135,9 @@ assets.getInitialProps = async ({pathname, query, req, asPath}) => {
             case 'users':
                 ajaxRequestData = await getUsersListAsAdmin(getFirstDataOption, localStorage.wt)
                 break
+            case 'forms':
+                ajaxRequestData = await getUsersListAsAdmin(getFirstDataOption, localStorage.wt)
+                break
             case 'comments':
                 ajaxRequestData = await getComments(getFirstDataOption, domainName, false)
                 break

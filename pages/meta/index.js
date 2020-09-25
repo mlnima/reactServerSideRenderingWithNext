@@ -10,7 +10,7 @@ import PaginationComponent from '../../components/includes/PaginationComponent/P
 import withRouter from 'next/dist/client/with-router'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
-import Footer from '../../components/includes/Footer/Footer'
+import Footer from '../../components/widgetsArea/Footer/Footer'
 
 const meta = props => {
     const [state, setState] = useState({
@@ -93,7 +93,7 @@ meta.getInitialProps = async ({pathname, query, req, asPath}) => {
     let metaSource;
 
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']},  domainName,true, 'tagsPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header','topBar']},  domainName,true, 'tagsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header','topBar','navigation']},  domainName,true, 'tagsPage')
     const metaData = await getMeta(dataForGettingMeta, domainName, true)
 
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []

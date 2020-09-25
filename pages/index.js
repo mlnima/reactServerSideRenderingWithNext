@@ -7,9 +7,10 @@ import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSet
 import {getAbsolutePath} from '../_variables/_variables'
 import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRenderer'
 import {Sidebar} from '../components/includes/Sidebar/Sidebar'
-import Footer from '../components/includes/Footer/Footer'
+import Footer from '../components/widgetsArea/Footer/Footer'
 import dataDecoder from '../server/tools/dataDecoder'
 import {Provider} from 'react-translated'
+import WidgetArea from "../components/widgetsArea/WidgetArea/WidgetArea";
 
 const Translations = {}
 
@@ -37,14 +38,17 @@ const Home = props => {
                     <SiteSettingSetter {...props}/>
                     <div style={state.style}
                          className={props.identity ? props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' : 'content withOutSidebar'}>
-                        <div className='HomePage'>
-                            <WidgetsRenderer widgets={props.widgets} position='home'/>
-                        </div>
+                        {/*<div className='home-page'>*/}
+                        {/*    <WidgetsRenderer widgets={props.widgets} position='home'/>*/}
+                        {/*</div>*/}
+                        <WidgetArea className='home-page' position='home' stylesData={contextData.siteDesign.homePageStyle}/>
                         <Sidebar key='homePageSidebar' isActive={props.identity.data.homePageSidebar}
                                  widgets={props.widgets} position='homePageSidebar'/>
 
                     </div>
-                    <Footer widgets={props.widgets} position='footer'/>
+                    {/*<WidgetArea className='footer' position='footer' stylesData={contextData.siteDesign.footerStyle}/>*/}
+                    {/*<Footer widgets={props.widgets} position='footer'/>*/}
+
                 </AppLayout>
             </Provider>
         </>
@@ -57,7 +61,7 @@ Home.getInitialProps = async ({req}) => {
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header','topBar']}, domainName, true, 'homePage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header','topBar','navigation']}, domainName, true, 'homePage')
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'homePage')
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []

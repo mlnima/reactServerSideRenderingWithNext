@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import './MenuWidget.scss'
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
-import {faBars} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const MenuWidget = props => {
@@ -42,8 +42,14 @@ const MenuWidget = props => {
 
     return (
         <div className='menu-widget' >
-            <button style={{display:contextData.state.isMobile?'initial':'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'><FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo'/></button>
+            <button style={{display:contextData.state.isMobile?'initial':'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
+                <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo'/>
+            </button>
+
             <ul className='menu-widget-items' style={{display:open ? 'flex':'none'}}>
+                <button style={{display:contextData.state.isMobile?'initial':'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
+                    <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo svg-logo-medium'/>
+                </button>
                 {renderMenuItems}
             </ul>
         </div>

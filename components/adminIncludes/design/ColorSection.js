@@ -27,7 +27,7 @@ const ColorSection = props => {
                         onChange={e => onChangeHandler(e)}/>
             <input ref={inputColorElement}  className='colorSettingSectionInputColorType' type='color' name={props.designName} onChange={e => onChangeHandler(e)} value={contextData.siteDesign[props.designName]}/>
             <div onClick={()=>inputColorElement.current.click()} className="previewColor" style={{backgroundColor: contextData.siteDesign[props.designName]}}/>
-            {/*<button onClick={()=>inputColorElement.current.click()}>Change Color</button>*/}
+
             <SaveDesignChangesBtn/>
         </div>
     );

@@ -57,3 +57,17 @@
 .actionBtn{
   @include greenActionBtn;
 }
+
+//---
+.style-section{
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+    .style-section-editor{
+
+      min-height: 80vh;
+      width: 100%;
+      border: .1px solid #333;
+      background-color: white;
+    }
+}

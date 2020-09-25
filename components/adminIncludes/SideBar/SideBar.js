@@ -41,6 +41,10 @@ const SideBar = props => {
             pathURL: '/admin/assets?assetsType=pages',
             subItems: []
         },
+        forms: {
+            pathURL: '/admin/assets?assetsType=form',
+            subItems: [{name:'newForm',url:'/admin/form?new=1'}]
+        },
         comments: {
             pathURL: '/admin/assets?assetsType=comments',
             subItems: []

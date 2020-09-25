@@ -15,6 +15,7 @@ const postsExporter = props => {
             loading:true
         })
         exportPosts().then(postsData=>{
+            // console.log(postsData)
             const posts = postsData.data.exportedData.map(post=>{
                 delete post._id;
                 delete post.__v;

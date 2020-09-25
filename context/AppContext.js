@@ -42,6 +42,10 @@ const AppProvider = props => {
         type: ''
     })
 
+    const [checkOutData, setCheckOutData]= useState({
+        items:[]
+    })
+
     const [siteIdentity, dispatchSiteIdentity] = useState({
         title: 'site title',
         themeColor: '#000',
@@ -256,6 +260,8 @@ const AppProvider = props => {
                     dispatchAlert,
                     siteWidgets,
                     setSiteWidgets,
+                    checkOutData,
+                    setCheckOutData
                     // adminWidgets,
                     // dispatchAdminWidgets
                 }}>

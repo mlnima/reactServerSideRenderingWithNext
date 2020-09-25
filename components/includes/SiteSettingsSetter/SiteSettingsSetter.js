@@ -30,12 +30,9 @@ const SiteSettingSetter = props => {
             setState({
                 ...state,
                 title: props.identity ? props.identity.data.title || '' : '',
-                themeColor: props.design ? props.design.data.themeColor || '' : '',
                 description: props.identity ? props.identity.data.description || '' : '',
-                bodyBackgroundImage: props.design ? props.design.data.bodyBackgroundImage || '' : '',
                 keywords: props.identity ? props.identity.data.keywords || [] : [],
                 customScripts: props.identity ? props.identity.data.customScripts || [] : [],
-                customStyles: props.design.data.customStyles ? props.design.data.customStyles : '',
                 favIcon: props.identity ? props.identity.data.favIcon || '/static/images/favIcon/favicon.png' : '/static/images/favIcon/favicon.png'
             })
 
@@ -70,14 +67,13 @@ const SiteSettingSetter = props => {
     return (
         <Head>
             <title>{state.title}</title>
-            <meta name="theme-color" content={state.themeColor}/>
+            {/*<meta name="theme-color" content={state.themeColor}/>*/}
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charSet="utf-8"/>
             <meta name="description" content={state.description}/>
             <meta name="keywords" content={state.keywords}/>
             <link rel="icon" href={state.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
-
             {renderCustomScripts}
         </Head>
     )

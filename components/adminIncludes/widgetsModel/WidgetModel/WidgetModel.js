@@ -138,10 +138,7 @@ const WidgetModel = props => {
                 contextData.dispatchWidgetsSettings({
                     widgets: [...res.data.widgets]
                 })
-                setWidgetSettings({
-                    ...widgetSettings,
-                    open: false
-                })
+
             })
         })
     }
@@ -530,6 +527,7 @@ const WidgetModel = props => {
                         <option value='media'>Media</option>
                         <option value='text'>Text</option>
                         <option value='logo'>Logo</option>
+                        <option value='shoppingCart'>basket</option>
                         <option value='recentComments'>Recent Comments</option>
                         <option value='searchBar'>Search</option>
                         <option value='meta'>Meta</option>
@@ -548,6 +546,7 @@ const WidgetModel = props => {
                     <p>Position:</p>
                     <select name='position' value={widgetData.data.position} onChange={e => onChangeHandler(e)}>
                         <option value='topBar'>Top Bar</option>
+                        <option value='navigation'>Navigation</option>
                         <option value='header'>Header</option>
                         <option value='home'>Home</option>
                         <option value='homePageSidebar'>Home Page Sidebar</option>
@@ -556,8 +555,8 @@ const WidgetModel = props => {
                         <option value='categoriesPageSidebar'>Categories Page SideBar</option>
                         <option value='tagsPagesSidebar'>Tags Page SideBar</option>
                         <option value='actorsPagesSidebar'>Actors Page SideBar</option>
-                        <option value='footer'>footer</option>
-                        <option value='deactivate'>deactivate</option>
+                        <option value='footer'>Footer</option>
+                        <option value='deactivate'>Deactivate</option>
                     </select>
 
 

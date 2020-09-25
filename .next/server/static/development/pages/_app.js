@@ -194,6 +194,12 @@ const AppProvider = props => {
     type: ''
   });
   const {
+    0: checkOutData,
+    1: setCheckOutData
+  } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
+    items: []
+  });
+  const {
     0: siteIdentity,
     1: dispatchSiteIdentity
   } = Object(react__WEBPACK_IMPORTED_MODULE_0__["useState"])({
@@ -422,7 +428,9 @@ const AppProvider = props => {
       alert,
       dispatchAlert,
       siteWidgets,
-      setSiteWidgets // adminWidgets,
+      setSiteWidgets,
+      checkOutData,
+      setCheckOutData // adminWidgets,
       // dispatchAdminWidgets
 
     }

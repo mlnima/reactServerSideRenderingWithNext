@@ -1,20 +1,15 @@
 import React from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout';
-import { AppContext } from '../../../../context/AppContext'
-import './topBar.scss'
-import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
+import StyleSection from "../../../../components/adminIncludes/design/StyleSection/StyleSection";
 
-const topBar = props => {
+const topBar = () => {
+
     return (
         <AdminLayout>
-            <div className='topBarSettings'>
-                <h1>Top Bar Settings :</h1>
-                <div className='colorSettingSections'>
-                    <ColorSection designName='topBarBackgroundColor'/>
-                    <ColorSection designName='topBarTextColor'/>
-                </div>
-            </div>
+                <StyleSection name='topBarStyle' title='Top Bar Design :' />
         </AdminLayout>
     );
+
 };
+
 export default topBar;

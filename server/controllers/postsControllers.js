@@ -1,4 +1,3 @@
-
 const dataEncoder = require('../tools/dataEncoder')
 let postsControllers = {};
 const postSchema = require('../models/postSchema');
@@ -54,7 +53,7 @@ postsControllers.createNewPost = async (req, res) => {
         const newPostDataToSave = new postSchema(editedNewPost);
         newPostDataToSave.save().then(savedPostData => {
             res.json({savedPostData});
-            console.log('savedPostData : ',savedPostData)
+            console.log('savedPostData : ', savedPostData)
             res.end()
         }).catch(err => {
             if (err.code === 11000) {
@@ -74,17 +73,14 @@ postsControllers.createNewPost = async (req, res) => {
 };
 
 
-
-postsControllers.updateMeta = (req,res)=>{
-    metaSchema.findByIdAndUpdate(req.body.data._id, {...req.body.data}, {new: true}).exec().then(updatedMeta=>{
+postsControllers.updateMeta = (req, res) => {
+    metaSchema.findByIdAndUpdate(req.body.data._id, {...req.body.data}, {new: true}).exec().then(updatedMeta => {
         res.json({updated: updatedMeta})
         res.end()
-    }).catch(err=>{
+    }).catch(err => {
         console.log(err)
     })
 }
-
-
 
 
 postsControllers.updatePost = async (req, res) => {
@@ -121,23 +117,27 @@ postsControllers.getPostsInfo = async (req, res) => {
     let postTypeQuery = req.body.postType === 'all' ? {} : {postType: req.body.postType};
     let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
     let authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
-    let metaQuery = req.body.content === 'all' ? {} : {$or:[
-            {categories:req.body.content},
-            {tags:req.body.content},
-            {actors:req.body.content}
-        ]};
-    let searchQueryGenerator = ()=>{
-        if (req.body.keyword === ''){
+    let metaQuery = req.body.content === 'all' ? {} : {
+        $or: [
+            {categories: req.body.content},
+            {tags: req.body.content},
+            {actors: req.body.content}
+        ]
+    };
+    let searchQueryGenerator = () => {
+        if (req.body.keyword === '') {
             return {}
-        }else {
-            if (!req.body.lang|| req.body.lang === 'default'){
-                return{$or: [{title: new RegExp(req.body.keyword, 'i')},{description: new RegExp(req.body.keyword, 'i')}]};
-            }else {
-                return{$or: [
-                    {title: new RegExp(req.body.keyword, 'i')},
-                    {description: new RegExp(req.body.keyword, 'i')},
-                    {[`translations.${req.body.lang}.title`]:new RegExp(req.body.keyword, 'i')},
-                    {[`translations.${req.body.lang}.description`]:new RegExp(req.body.keyword, 'i')},]}
+        } else {
+            if (!req.body.lang || req.body.lang === 'default') {
+                return {$or: [{title: new RegExp(req.body.keyword, 'i')}, {description: new RegExp(req.body.keyword, 'i')}]};
+            } else {
+                return {
+                    $or: [
+                        {title: new RegExp(req.body.keyword, 'i')},
+                        {description: new RegExp(req.body.keyword, 'i')},
+                        {[`translations.${req.body.lang}.title`]: new RegExp(req.body.keyword, 'i')},
+                        {[`translations.${req.body.lang}.description`]: new RegExp(req.body.keyword, 'i')},]
+                }
             }
         }
     }
@@ -145,8 +145,8 @@ postsControllers.getPostsInfo = async (req, res) => {
     let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
     let sortQuery = req.body.sort === 'latest' ? '-_id' : {[req.body.sort]: -1}
 
-    let posts = await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(),metaQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
-    let postsCount = await postSchema.count({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(),metaQuery]}).exec()
+    let posts = await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
+    let postsCount = await postSchema.count({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).exec()
 
     Promise.all([posts, postsCount]).then(async data => {
         const posts = data[0]
@@ -234,7 +234,7 @@ postsControllers.postsBulkAction = async (req, res) => {
 };
 
 
-postsControllers.bulkAction = async (req,res)=>{
+postsControllers.bulkAction = async (req, res) => {
     const type = req.body.type
     const status = req.body.status
     const ids = req.body.ids
@@ -242,14 +242,14 @@ postsControllers.bulkAction = async (req,res)=>{
 
     const targetSchema = type === 'posts' ? postSchema :
         type === 'metas' ? metaSchema :
-        type === 'comments' ? commentSchema :
-        type === 'users' ? userSchema : null
-    if (status === 'delete'){
-        actionsPromise = ids.map(id=>{
+            type === 'comments' ? commentSchema :
+                type === 'users' ? userSchema : null
+    if (status === 'delete') {
+        actionsPromise = ids.map(id => {
             return targetSchema.findByIdAndDelete(id)
         })
-    }else{
-        actionsPromise = ids.map(id=>{
+    } else {
+        actionsPromise = ids.map(id => {
             return targetSchema.findByIdAndUpdate(id, {$set: {status}})
         })
     }
@@ -266,24 +266,21 @@ postsControllers.bulkAction = async (req,res)=>{
 }
 
 
-
-
 postsControllers.likeDislikeView = (req, res) => {
     postSchema.findByIdAndUpdate(req.body.id, {$inc: {[req.body.type]: 1}}, {new: true}).exec();
     res.end()
 };
 
-postsControllers.getSingleMeta = async (req,res) =>{
-    metaSchema.findById(req.body.id).exec().then(meta=>{
+postsControllers.getSingleMeta = async (req, res) => {
+    metaSchema.findById(req.body.id).exec().then(meta => {
         res.json({meta})
         res.end()
-    }).catch(err=>{
+    }).catch(err => {
         console.log(err)
         res.error(500)
         res.end()
     })
 }
-
 
 
 postsControllers.getMeta = async (req, res) => {
@@ -300,41 +297,43 @@ postsControllers.getMeta = async (req, res) => {
             {description: new RegExp(req.body.keyword, 'i')}]
     };
 
-    let searchQueryGenerator = ()=>{
-        if (req.body.keyword === ''){
+    let searchQueryGenerator = () => {
+        if (req.body.keyword === '') {
             return {}
-        }else {
+        } else {
             const keywordToSearch = req.body.keyword
             // console.log(req.body.keyword,keywordToSearch)
-            if (!req.body.lang || req.body.lang === 'default' ){
-                return{$or: [{name: new RegExp(req.body.keyword, 'i')},{description: new RegExp(req.body.keyword, 'i')}]};
-            }else {
-                return{$or: [
+            if (!req.body.lang || req.body.lang === 'default') {
+                return {$or: [{name: new RegExp(req.body.keyword, 'i')}, {description: new RegExp(req.body.keyword, 'i')}]};
+            } else {
+                return {
+                    $or: [
                         {name: new RegExp(keywordToSearch, 'i')},
                         {description: new RegExp(keywordToSearch, 'i')},
-                        {[`translations.${req.body.lang}.name`]:new RegExp(keywordToSearch, 'i')},
-                        {[`translations.${req.body.lang}.description`]:new RegExp(keywordToSearch, 'i')},]}
+                        {[`translations.${req.body.lang}.name`]: new RegExp(keywordToSearch, 'i')},
+                        {[`translations.${req.body.lang}.description`]: new RegExp(keywordToSearch, 'i')},]
+                }
             }
         }
     }
 
 
     let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
-    const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery,statusQuery]}).exec()
-    metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery,statusQuery ]}).limit(size).skip(size * (page -1)).sort(sortQuery).exec().then(async metas => {
+    const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).exec()
+    metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
 
         const mapMetaToGetImage = metas.map(async meta => {
             try {
-                const noImageUrl = await postSchema.find({[type.type]:meta._id}).limit(1).sort('-_id').exec().then(lastPost => {
-                                        if (lastPost[0]) {
-                                            return lastPost[0].mainThumbnail
-                                        } else {
-                                            return undefined
-                                        }
-                                    }).catch(err => {
-                                        console.log(err)
-                                        res.end()
-                                    })
+                const noImageUrl = await postSchema.find({[type.type]: meta._id}).limit(1).sort('-_id').exec().then(lastPost => {
+                    if (lastPost[0]) {
+                        return lastPost[0].mainThumbnail
+                    } else {
+                        return undefined
+                    }
+                }).catch(err => {
+                    console.log(err)
+                    res.end()
+                })
                 return {
                     ...meta.toObject(),
                     count: await postSchema.countDocuments({[type.type]: meta._id}).exec(),
@@ -431,14 +430,34 @@ postsControllers.deleteComments = (req, res) => {
 
 
 postsControllers.export = (req, res) => {
-    postSchema.find({}).exec().then(exportedData => {
-        res.json({exportedData})
-        res.end()
-    }).catch(err => {
-        console.log(err)
-        res.sendStatus(500)
+    postSchema.find({}).exec().then(async exportData => {
+        try {
+            let finalData= []
+            for await (let post of exportData){
+                finalData = [...finalData,{
+                    ...post.toObject(),
+                    categories: post.categories ? await metaSchema.find({'_id': {$in: [...post.categories]}}).select('name type') : [],
+                    tags: post.tags ? await metaSchema.find({'_id': {$in: [...post.tags]}}).select('name type') : [],
+                    actors: post.actors ? await metaSchema.find({'_id': {$in: [...post.actors]}}).select('name type') : []
+                }]
+            }
+            return finalData
+        } catch (e) {
+            console.log(e)
+        }
+
+    }).then(finalData => {
+        console.log(finalData)
+        res.json({exportedData: finalData})
         res.end()
     })
+
+
+        .catch(err => {
+            console.log(err)
+            res.sendStatus(500)
+            res.end()
+        })
 
 };
 

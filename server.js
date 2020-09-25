@@ -263,8 +263,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         res.end()
     });
 
-    //forms
-    server.post('/api/v1/forms/contact', (req, res) =>formController.contact(req,res));
+    //form
+    server.post('/api/v1/form/contact', (req, res) =>formController.contact(req,res));
 
 
 

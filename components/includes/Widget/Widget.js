@@ -46,14 +46,6 @@ const Widget = props => {
 
     }, [props]);
 
-
-    useEffect(() => {
-        console.log(props.data.customStyles)
-    }, [props.data.customStyles]);
-
-
-    //  const StyledDiv = props.data.customStyles ? styled.div`${props.data.customStyles}` : styled.div``
-
     if (!props.data.deviceTypeToRender || props.data.deviceTypeToRender === 'all' || (state.isMobile && props.data.deviceTypeToRender === 'mobile') || (!state.isMobile && props.data.deviceTypeToRender === 'desktop')) {
         return (
 

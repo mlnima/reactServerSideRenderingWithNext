@@ -124,4 +124,31 @@ svg{
   background-color: transparent;
 }
 
+.svg-logo-medium{
+  width: 25px;
+  height: 25px;
+}
+
+.action-wide-button{
+
+  width: 100px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  a,button{
+    border-radius: 5px;
+    padding: 3px 5px;
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    outline: none;
+    border: none;
+    margin: 2px 0;
+    .svg-logo-medium{
+      //width: 100px;
+    }
+  }
+}
 

@@ -74,7 +74,7 @@ Login.getInitialProps = async ({ req }) => {
     let settings;
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true)
     let widgets;
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar' ] }, domainName, true)
+    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar','footer','navigation' ] }, domainName, true)
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     return { ...settings,widgets }
