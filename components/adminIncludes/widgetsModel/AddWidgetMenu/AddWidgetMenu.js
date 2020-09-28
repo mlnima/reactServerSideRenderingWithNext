@@ -1,5 +1,7 @@
 import React from 'react';
 import AddWidgetWithPositionMenu from './AddWidgetWithPositionMenu'
+import WidgetImporter from "./WidgetImporter/WidgetImporter";
+import WidgetExporter from "./WidgetExporter/WidgetExporter";
 
 const AddWidgetMenu = props => {
     return (
@@ -21,6 +23,8 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu type='authentication' name='Auth Buttons'/>
             <AddWidgetWithPositionMenu type='imageSwiper' name='Image Swiper(slide Show)'/>
             <AddWidgetWithPositionMenu type='postsSwiper' name='Post Swiper(slide Show)'/>
+            <WidgetImporter/>
+            <WidgetExporter/>
         </div>
     );
 };

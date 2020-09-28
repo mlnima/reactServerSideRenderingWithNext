@@ -20,6 +20,7 @@ import PostSwiperTypeWidgetModelFields from "./PostSwiperTypeWidgetModelFields/P
 import MenuWidgetModelFields from "./MenuWidgetModelFields/MenuWidgetModelFields";
 import TextWidgetTypeFields from "./TextWidgetTypeFields/TextWidgetTypeFields";
 import MediaWidgetType from "./MediaWidgetType/MediaWidgetType";
+import ExportWidget from "./ExportWidget/ExportWidget";
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
@@ -573,6 +574,7 @@ const WidgetModel = props => {
                     <RenderWidgetCustomStyle/>
                     <div className='control'>
                         <button onClick={() => onSaveHandler()}>Save</button>
+                        <ExportWidget  data={{...widgetData.data, ...textInputsData}} />
                         <button onClick={() => onDeleteHandler()}>Delete</button>
                     </div>
 
