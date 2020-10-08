@@ -1922,7 +1922,7 @@ var ReactControlledValuePropTypes = {
     }
   };
   /**
-   * Provide a linked `value` attribute for controlled form. You should not use
+   * Provide a linked `value` attribute for controlled forms. You should not use
    * this outside of the ReactDOM controlled form components.
    */
 

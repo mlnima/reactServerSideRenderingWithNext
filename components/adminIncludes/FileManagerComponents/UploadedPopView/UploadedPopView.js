@@ -58,7 +58,12 @@ const UploadedPopView = props => {
                 )
                 break
             default:
-                return null
+                return (
+                    <>
+                        <input className='uploaded-pop-view-url' value={ '/' + props.state.clickedItem.replace('./', '') }/>
+                        <input className='uploaded-pop-view-url' value={ window.location.origin + '/' + props.state.clickedItem.replace('./', '') }/>
+                    </>
+                )
         }
     }
 

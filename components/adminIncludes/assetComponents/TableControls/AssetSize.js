@@ -4,9 +4,7 @@ import {useRouter} from "next/router";
 const AssetSize = props => {
     const [state, setState] = useState({});
     const router = useRouter()
-    useEffect(() => {
-        console.log(router)
-    }, []);
+
 
     const onChangeHandler = e=>{
          router.push({

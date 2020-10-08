@@ -19,10 +19,11 @@ const MediaWidgetType = props => {
                 onChangeHandler={props.onChangeHandler}
             />
             <p>Media Type:</p>
-            <select name='mediaType' value={props.widgetData.data.mediaType || ''}
+            <select name='mediaType' value={props.widgetData.data.mediaType || 'image'}
                     onChange={e => props.onChangeHandler(e)}>
                 <option value='video'>Video</option>
                 <option value='image'>Image</option>
+                <option value='document'>Document</option>
                 <option value='audio'>Audio</option>
                 <option value='iframe'>Iframe</option>
             </select>

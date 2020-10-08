@@ -8,6 +8,13 @@ const TableBodyItem = props => {
         isHover: false
     });
 
+    // useEffect(() => {
+    //     console.log(props.assetsType)
+    // }, []);
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
+
     useEffect(() => {
         if (props.assetsType === 'posts') {
             let properties = ['title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail']
@@ -28,7 +35,13 @@ const TableBodyItem = props => {
                 properties,
             })
         } else if (props.assetsType === 'metas') {
-            let properties = ['name', 'description', 'type', 'count', 'noImageUrl','ImageUrl']
+            let properties = ['name', 'description', 'type', 'count', 'noImageUrl', 'ImageUrl']
+            setState({
+                ...state,
+                properties,
+            })
+        } else if (props.assetsType === 'forms') {
+            let properties = ['formName', 'date','widgetId']
             setState({
                 ...state,
                 properties,

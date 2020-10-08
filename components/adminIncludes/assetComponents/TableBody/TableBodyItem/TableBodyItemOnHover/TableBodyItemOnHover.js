@@ -99,6 +99,13 @@ const TableBodyItemOnHover = props => {
                     <button onClick={ () => deleteMeta(props._id,window.location.origin).then(()=>reGetData()) }>Delete</button>
                 </div>
             );
+        } else if (props.assetsType === 'forms') {
+            return (
+                <div className='asset-page-table-body-item-hover-item'>
+                    <Link href={ '/admin/form?id=' + props._id }><a>Edit</a></Link>
+                    <button onClick={ () => deleteMeta(props._id,window.location.origin).then(()=>reGetData()) }>Delete</button>
+                </div>
+            );
         }
 
     } else {

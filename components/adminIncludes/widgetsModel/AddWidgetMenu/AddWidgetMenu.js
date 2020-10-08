@@ -16,6 +16,7 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu type='searchBar' name='Search'/>
             <AddWidgetWithPositionMenu type='meta' name='Meta'/>
             <AddWidgetWithPositionMenu type='logo' name='Logo'/>
+            <AddWidgetWithPositionMenu type='form' name='Form'/>
             <AddWidgetWithPositionMenu type='shoppingCart' name='Shopping Cart'/>
             <AddWidgetWithPositionMenu type='navigationMenu' name='Navigation Menu'/>
             <AddWidgetWithPositionMenu type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>

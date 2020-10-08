@@ -112,13 +112,37 @@ export const postProductTypeImages = async (image) => {
 export const userImageUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-userImageUpload', image)
 }
-
+// will be remove
 export const contactAjaxPost = async (data) => {
     const body ={
         data
     }
     return await axios.post(window.location.origin + '/api/v1/form/contact', body)
 }
+//--
+
+export const saveFormWidgetData = async (data) => {
+    const body ={
+        data
+    }
+    return await axios.post(window.location.origin + '/api/v1/forms/save', body)
+}
+
+export const getFormData = async (data) => {
+    const body ={
+        data
+    }
+    return await axios.post(window.location.origin + '/api/v1/forms/get', body)
+}
+export const getSingleFormData = async (data,domainName) => {
+    const body ={
+        ...data
+    }
+    return await axios.post(domainName + '/api/v1/forms/getFormData', body)
+}
+
+
+
 
 export const youtubeDataScrapper = async (url) => {
     const body = {

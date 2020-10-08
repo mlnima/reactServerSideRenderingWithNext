@@ -181,3 +181,24 @@ export const adminConsoleOpenCloseHandler = (userData, state, dispatchState) => 
             })
     } else return null
 }
+
+export const jsonExporter = (data,fileName)=>{
+    const contentType = "application/json;charset=utf-8;";
+    if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+        let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(data)))], {type: contentType});
+        navigator.msSaveOrOpenBlob(blob, fileName);
+        contextData.dispatchState({
+            ...contextData.state,
+            loading: false
+        })
+    } else {
+        let a = document.createElement('a');
+        a.download = fileName;
+        a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(data));
+        a.target = '_blank';
+        document.body.appendChild(a);
+        a.click();
+        document.body.removeChild(a);
+
+    }
+}

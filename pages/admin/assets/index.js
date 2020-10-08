@@ -6,6 +6,7 @@ import {getPosts, getMeta, getComments} from '../../../_variables/ajaxPostsVaria
 import TableHeader from '../../../components/adminIncludes/assetComponents/TableHeader/TableHeader'
 import TableBody from '../../../components/adminIncludes/assetComponents/TableBody/TableBody'
 import {getUsersListAsAdmin} from '../../../_variables/ajaxAuthVariables'
+import {getFormData} from '../../../_variables/ajaxVariables'
 import withRouter from 'next/dist/client/with-router'
 import pluralize from 'pluralize'
 
@@ -31,9 +32,9 @@ const assets = props => {
     }, [props]);
 
 
-    useEffect(() => {
-        console.log(finalPageData)
-    }, [finalPageData]);
+    // useEffect(() => {
+    //     console.log(finalPageData)
+    // }, [finalPageData]);
 
 
     // useEffect(() => {
@@ -136,7 +137,7 @@ assets.getInitialProps = async ({pathname, query, req, asPath}) => {
                 ajaxRequestData = await getUsersListAsAdmin(getFirstDataOption, localStorage.wt)
                 break
             case 'forms':
-                ajaxRequestData = await getUsersListAsAdmin(getFirstDataOption, localStorage.wt)
+                ajaxRequestData = await getFormData(getFirstDataOption, localStorage.wt)
                 break
             case 'comments':
                 ajaxRequestData = await getComments(getFirstDataOption, domainName, false)

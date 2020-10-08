@@ -21,6 +21,7 @@ import MenuWidgetModelFields from "./MenuWidgetModelFields/MenuWidgetModelFields
 import TextWidgetTypeFields from "./TextWidgetTypeFields/TextWidgetTypeFields";
 import MediaWidgetType from "./MediaWidgetType/MediaWidgetType";
 import ExportWidget from "./ExportWidget/ExportWidget";
+import FormTypeWiddgetModelFields from "./FormTypeWidgetModelFields/FormTypeWidgetModelFields";
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
@@ -31,9 +32,21 @@ const WidgetModel = props => {
         activeEditingLanguage: 'default'
     })
 
+    //---
+
+    //--
+
     const [widgetData, setWidgetData] = useState({
         data: {}
     })
+    // useEffect(() => {
+    //     if (widgetData.data.type==='form'){
+    //         setWidgetSettings({
+    //             ...widgetSettings,
+    //             open: true
+    //         })
+    //     }
+    // }, [widgetData]);
 
     const [textInputsData, setTextInputsData] = useState({
         title: '',
@@ -44,14 +57,12 @@ const WidgetModel = props => {
         headLine: '',
         text: '',
     })
-
     const onChangeLanguageHandler = e => {
         setWidgetSettings({
             ...widgetSettings,
             activeEditingLanguage: e.target.value
         })
     }
-
     const onTextInputsDataChangeHandler = (e) => {
         if (widgetSettings.activeEditingLanguage === 'default') {
             setTextInputsData({
@@ -71,7 +82,6 @@ const WidgetModel = props => {
             })
         }
     }
-
     useEffect(() => {
         setWidgetData({
             ...widgetData,
@@ -90,23 +100,21 @@ const WidgetModel = props => {
             languageToShowBesideDropDown: props.data.data.languageToShowBesideDropDown || 'Language',
             pathURL: props.data.data.pathURL || '',
             textAlign: props.data.data.textAlign || 'center',
+            formFields: props.data.data.formFields || [],
         })
 
     }, [props]);
-
     const languagesOptions = props.translationLanguages.map(lang => {
         return (
             <option key={lang} value={lang}>{lang}</option>
         )
-    })
-
+    });
     const onOpenHandler = () => {
         widgetSettings.open ? setWidgetSettings({
             ...widgetSettings,
             open: false
         }) : setWidgetSettings({...widgetSettings, open: true})
-    }
-
+    };
     const onDeleteHandler = () => {
         deleteWidgets(props.data._id, window.location.origin).then(() => {
             getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
@@ -119,8 +127,7 @@ const WidgetModel = props => {
                 })
             })
         })
-    }
-
+    };
     const onSaveHandler = () => {
         const dataToSave = {
             ...widgetData,
@@ -142,8 +149,7 @@ const WidgetModel = props => {
 
             })
         })
-    }
-
+    };
     const onChangeHandler = e => {
         setWidgetData({
             ...widgetData,
@@ -153,34 +159,7 @@ const WidgetModel = props => {
             }
         })
 
-    }
-
-    // const RenderText = () => {
-    //     return (
-    //         <>
-    //             <p>Text:</p>
-    //             <DelayInput element="textarea" name='text' value={
-    //                 widgetSettings.activeEditingLanguage === 'default' ? textInputsData.text :
-    //                     textInputsData.translations ?
-    //                         textInputsData.translations[widgetSettings.activeEditingLanguage] ?
-    //                             textInputsData.translations[widgetSettings.activeEditingLanguage].text || '' :
-    //                             '' : ''
-    //             } delayTimeout={2000}
-    //                         onChange={e => onTextInputsDataChangeHandler(e)}/>
-    //
-    //             <p>Text Align:</p>
-    //             <select name='textAlign' value={textInputsData.textAlign} onChange={e => onTextInputsDataChangeHandler(e)}>
-    //                 <option value='left'>Left</option>
-    //                 <option value='center'>Center</option>
-    //                 <option value='right'>Right</option>
-    //             </select>
-    //             <p>Text Color:</p>
-    //             <DelayInput name='textColor' value={widgetData.data.textColor || ''} delayTimeout={4000}
-    //                         onChange={e => onChangeHandler(e)}/>
-    //         </>
-    //     )
-    // }
-
+    };
     const RenderWidgetCustomStyle = () => {
         return (
             <>
@@ -193,9 +172,7 @@ const WidgetModel = props => {
                             onChange={e => onChangeHandler(e)}/>
             </>
         )
-    }
-
-
+    };
     const RenderOptionByFormat = () => {
         switch (widgetData.data.type) {
             case 'posts':
@@ -204,7 +181,7 @@ const WidgetModel = props => {
 
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
                                                     onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                                     <TextWidgetTypeFields
+                        <TextWidgetTypeFields
                             widgetSettings={widgetSettings}
                             onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
                             textInputsData={textInputsData}
@@ -242,7 +219,7 @@ const WidgetModel = props => {
                         />
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
                                                     onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                                     <TextWidgetTypeFields
+                        <TextWidgetTypeFields
                             widgetSettings={widgetSettings}
                             onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
                             textInputsData={textInputsData}
@@ -271,13 +248,13 @@ const WidgetModel = props => {
             case 'media':
                 return (
 
-                                    <MediaWidgetType
-                                        textInputsData={textInputsData}
-                                        widgetSettings={widgetSettings}
-                                        onChangeHandler={onChangeHandler}
-                                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                                        widgetData={widgetData}
-                                    />
+                    <MediaWidgetType
+                        textInputsData={textInputsData}
+                        widgetSettings={widgetSettings}
+                        onChangeHandler={onChangeHandler}
+                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                        widgetData={widgetData}
+                    />
 
                 )
 
@@ -286,7 +263,7 @@ const WidgetModel = props => {
                     <>
                         <RenderTitleAndRedirectLink textInputsData={textInputsData} widgetSettings={widgetSettings}
                                                     onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                                     <TextWidgetTypeFields
+                        <TextWidgetTypeFields
                             widgetSettings={widgetSettings}
                             onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
                             textInputsData={textInputsData}
@@ -462,7 +439,13 @@ const WidgetModel = props => {
             case 'menu':
                 return (
                     <>
-                       <MenuWidgetModelFields widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.data.mobileNavigation} />
+                        <MenuWidgetModelFields widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.data.mobileNavigation}/>
+                    </>
+                )
+            case 'form':
+                return (
+                    <>
+                        <FormTypeWiddgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.data.mobileNavigation}/>
                     </>
                 )
 
@@ -470,9 +453,7 @@ const WidgetModel = props => {
                 return null
 
         }
-    }
-    //mobileNavigation
-
+    };
     const changeWidgetIndex = (more) => {
         const valueToSet = more ? widgetData.data.widgetIndex + 1 : widgetData.data.widgetIndex - 1
         const dataToSave = {
@@ -490,8 +471,7 @@ const WidgetModel = props => {
                 })
             })
         })
-    }
-
+    };
 
     if (widgetSettings.open) {
         return (
@@ -574,7 +554,7 @@ const WidgetModel = props => {
                     <RenderWidgetCustomStyle/>
                     <div className='control'>
                         <button onClick={() => onSaveHandler()}>Save</button>
-                        <ExportWidget  data={{...widgetData.data, ...textInputsData}} />
+                        <ExportWidget data={{...widgetData.data, ...textInputsData}}/>
                         <button onClick={() => onDeleteHandler()}>Delete</button>
                     </div>
 

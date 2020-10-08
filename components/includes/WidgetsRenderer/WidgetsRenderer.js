@@ -14,6 +14,7 @@ import ImageSwiper from "../widgets/ImageSwiper/ImageSwiper";
 import PostSwiper from "../widgets/PostSwiper/PostSwiper";
 import MenuWidget from "../widgets/MenuWidget/MenuWidget";
 import ShoppingCart from "../widgets/ShoppingCart/ShoppingCart";
+import FormWidget from "../widgets/FormWidget/FormWidget";
 
 const WidgetsRenderer = props => {
     const widgetInTypeOfPropsPosition = (props.widgets || []).filter(widget => widget.data.position === props.position)
@@ -91,6 +92,11 @@ const WidgetsRenderer = props => {
 
                 return (
                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ ShoppingCart } { ...widget } />
+                )
+            case 'form':
+// console.log(widget)
+                return (
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ FormWidget } { ...widget } />
                 )
 
             default:

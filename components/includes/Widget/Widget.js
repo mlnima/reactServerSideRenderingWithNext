@@ -31,7 +31,7 @@ const Widget = props => {
     const RenderComponent = () => {
         if (props.component) {
             return (
-                <props.component  {...props.data} widget={true}/>
+                <props.component  {...props.data} id={props._id} widget={true}/>
             )
         } else return null
     }

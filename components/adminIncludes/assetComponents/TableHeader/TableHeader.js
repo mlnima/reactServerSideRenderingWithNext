@@ -32,6 +32,12 @@ const TableHeader = props => {
             let items = [ 'name', 'description', 'type','count','image' ]
             setState({
                 ...state,
+                items,w
+            })
+        } else if (props.router.query.assetsType === 'forms') {
+            let items = [ 'formName', 'createdDate','formWidgetId' ]
+            setState({
+                ...state,
                 items,
             })
         }

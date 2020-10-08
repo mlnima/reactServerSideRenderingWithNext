@@ -265,6 +265,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     //form
     server.post('/api/v1/form/contact', (req, res) =>formController.contact(req,res));
+    server.post('/api/v1/forms/save', (req, res) =>formController.widgetForm(req,res));
+    server.post('/api/v1/forms/get', (req, res) =>formController.getFormsData(req,res));
+    server.post('/api/v1/forms/getFormData', (req, res) =>formController.getFormData(req,res));
 
 
 
@@ -440,19 +443,24 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     server.get('/admin/assets', (req, res) => {
         const targetComponent = '/admin/assets';
+        // const queryParams = {
+        //     type: req.query.type,
+        //     status: req.query.status,
+        //     assetsType: req.query.assetsType,
+        //     metaType: req.query.metaType,
+        //     sort: req.query.sort,
+        //     page: req.query.page,
+        //     keyword: req.query.keyword,
+        //     size: req.query.size,
+        //     author: req.query.author,
+        // }
+
         const queryParams = {
-            type: req.query.type,
-            status: req.query.status,
-            assetsType: req.query.assetsType,
-            metaType: req.query.metaType,
-            sort: req.query.sort,
-            page: req.query.page,
-            keyword: req.query.keyword,
-            size: req.query.size,
-            author: req.query.author,
+            ...req.query,
+            ...req.params,
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res,targetComponent, queryParams)
     });
 
     server.get('/errorPage', (req, res) => {

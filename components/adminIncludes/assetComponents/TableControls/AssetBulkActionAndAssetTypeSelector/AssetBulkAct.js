@@ -14,9 +14,7 @@ const AssetBulkAct = props => {
             props.router.push({pathname: props.router.pathname, query: {...props.router.query}})
         }
 
-        useEffect(() => {
-            console.log(props)
-        }, [props]);
+
 
         const onApplyHandler = () => {
             switch (props.router.query.assetsType) {

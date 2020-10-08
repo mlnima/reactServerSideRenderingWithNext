@@ -1,0 +1,20 @@
+.add-new-filed{
+  border: solid 2px rgba(0,0,0,.1);
+  border-radius: 10px;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+  background-color: black;
+
+}
+
+.form-item-view{
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: black;
+  border: solid 2px rgba(0,0,0,.1);
+  display: flex;
+  flex-direction: column;
+}
