@@ -8,7 +8,7 @@ const moment = require('moment');
 let siteProtocol ='http'
 
  settingSchema.findOne({type:'identity'}).exec().then(setting=>{
-     siteProtocol = setting.data.siteProtocol || 'http'
+     siteProtocol = setting? setting.data ? setting.data.siteProtocol || 'http':'http':'http'
  }).catch(err=>{
      console.log( err)
      siteProtocol = 'http'
