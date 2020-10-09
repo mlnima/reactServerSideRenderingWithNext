@@ -72,14 +72,10 @@ const MediaWidget = props => {
                         </>
                     )
                 case 'document':
-
-
-                    return (
-
-
-                            <MediaDocumentWidget {...props}/>
-
-                    )
+                    // return (
+                    //         <MediaDocumentWidget {...props}/>
+                    // )
+                    return null
                 case 'iframe':
                     return (
                         <>
