@@ -13,7 +13,7 @@ import SelectedMetaIdForPostWidget from "./SelectedMetaIdForPostWidget/SelectedM
 import CountInput from "./CountInput/CountInput";
 import TextInputFieldForWidget from "./TextInputFieldForWidget/TextInputFieldForWidget";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faPen} from "@fortawesome/free-solid-svg-icons";
 import LinkTypeWidgetModelFields from "./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields";
 import ImageSwiperTypeWidgetModelFields from "./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields";
 import PostSwiperTypeWidgetModelFields from "./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields";
@@ -22,6 +22,7 @@ import TextWidgetTypeFields from "./TextWidgetTypeFields/TextWidgetTypeFields";
 import MediaWidgetType from "./MediaWidgetType/MediaWidgetType";
 import ExportWidget from "./ExportWidget/ExportWidget";
 import FormTypeWiddgetModelFields from "./FormTypeWidgetModelFields/FormTypeWidgetModelFields";
+import Link from "next/link";
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
@@ -445,7 +446,8 @@ const WidgetModel = props => {
             case 'form':
                 return (
                     <>
-                        <FormTypeWiddgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.data.mobileNavigation}/>
+                        <FormTypeWiddgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler}
+                                                    mobileNavigation={widgetData.data.mobileNavigation}/>
                     </>
                 )
 
@@ -564,12 +566,23 @@ const WidgetModel = props => {
     } else {
         return (
             <div className='widget-open-control'>
+
                 <p onClick={() => onOpenHandler()}><FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
                     width: '25px',
                     height: '25px',
                     transform: widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',
                     margin: '0 5px'
                 }}/> {props.data.data.name || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
+                <Link href={{pathname: '/admin/design/widgets/widget', query: {id: widgetData._id}}}>
+                    <a>
+                        <FontAwesomeIcon icon={faPen} className='widget-header-handler-admin' style={{
+                            width: '25px',
+                            height: '25px',
+                            margin: '0 5px',
+                            color:'white'
+                        }}/>
+                    </a>
+                </Link>
                 <div>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}><img
                         className='fontawesomeSvgVerySmall' src={SortUpSvg} alt=""/></button>

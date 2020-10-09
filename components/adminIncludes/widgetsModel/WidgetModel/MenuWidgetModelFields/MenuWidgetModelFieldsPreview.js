@@ -1,12 +1,15 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 
 const MenuWidgetModelFieldsPreview = props => {
-    const [state, setState] = useState({});
+    const [state, setState] = useState({
+        open:false
+    });
 
     const [formData, setFormData] = useState({
         name: '',
         target: '',
-        as: ''
+        as: '',
+        type:'internal'
     });
 
     const onEditHandler = e => {

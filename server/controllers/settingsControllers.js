@@ -80,6 +80,22 @@ settingsControllers.addWidget = (req, res) => {
         res.end()
     })
 }
+settingsControllers.getSingleWidgetData = (req, res) => {
+    const id = req.body.id;
+    widgetSchema.findById(id).exec().then(widgetData=>{
+        res.json({widgetData,error:false})
+        res.end()
+    }).catch(err=>{
+        console.log(err)
+        res.end()
+    })
+}
+
+
+
+
+
+
 settingsControllers.getWidget = (req, res) => {
     const position = req.body.position = 'all' ? {} : { position: req.body.position };
     widgetSchema.find(position).exec().then(widgets => {

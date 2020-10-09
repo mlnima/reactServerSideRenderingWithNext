@@ -17,7 +17,7 @@ const MenuWidget = props => {
 
 
     const renderMenuItems = Object.keys(menuItems).map(menuItem => {
-
+console.log(menuItems[menuItem])
         if (menuItems[menuItem].type === 'internal') {
             return (
                 <li className='menu-widget-item' key={menuItems[menuItem].name}>

@@ -11,6 +11,7 @@ const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
 const settingsControllers = require('./server/controllers/settingsControllers');
 const fileManagerControllers = require('./server/controllers/fileManagerControllers');
+const pageControllers = require('./server/controllers/pageControllers');
 const formController = require('./server/controllers/formController');
 const apiPostControllers = require('./server/controllers/apiControllers/apiPostsControllers');
 const youtubeDataScrapper = require('./server/dataScrappers/youtube');
@@ -46,12 +47,12 @@ let ssrCache = new LRUCache({
     maxAge: 1000 * 60 * 60 * 24 * 30
 });
 
-let getCacheKey = (req)=> {
+let getCacheKey = (req) => {
     return `${req.path}`
 }
 
 
-let renderAndCache = async (req, res,targetComponent,queryParams)=>{
+let renderAndCache = async (req, res, targetComponent, queryParams) => {
     const key = getCacheKey(req);
 
     // If we have a page in the cache, let's serve it
@@ -61,7 +62,7 @@ let renderAndCache = async (req, res,targetComponent,queryParams)=>{
         res.send(ssrCache.get(key));
         res.end()
         // return
-    }else{
+    } else {
         try {
             const html = await app.renderToHTML(req, res, targetComponent, queryParams);
             if (res.statusCode !== 200) {
@@ -80,7 +81,6 @@ let renderAndCache = async (req, res,targetComponent,queryParams)=>{
 
 
 }
-
 
 
 //-------------------------------------------------------------------------------------------------
@@ -117,7 +117,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.params,
         }
 
-        return renderAndCache(req, res,targetComponent,queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     //xml siteMap handler
@@ -234,6 +234,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/settings/addWidget', (req, res) => {
         settingsControllers.addWidget(req, res)
     });
+    server.post('/api/v1/settings/getSingleWidgetData', (req, res) => {
+        settingsControllers.getSingleWidgetData(req, res)
+    });
     server.post('/api/v1/settings/getWidget', (req, res) => {
         settingsControllers.getWidget(req, res)
     });
@@ -264,12 +267,15 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     });
 
     //form
-    server.post('/api/v1/form/contact', (req, res) =>formController.contact(req,res));
-    server.post('/api/v1/forms/save', (req, res) =>formController.widgetForm(req,res));
-    server.post('/api/v1/forms/get', (req, res) =>formController.getFormsData(req,res));
-    server.post('/api/v1/forms/getFormData', (req, res) =>formController.getFormData(req,res));
-
-
+    server.post('/api/v1/form/contact', (req, res) => formController.contact(req, res));
+    server.post('/api/v1/forms/save', (req, res) => formController.widgetForm(req, res));
+    server.post('/api/v1/forms/get', (req, res) => formController.getFormsData(req, res));
+    server.post('/api/v1/forms/getFormData', (req, res) => formController.getFormData(req, res));
+    //page
+    server.post('/api/v1/pages/new', (req, res) => pageControllers.new(req, res));
+    server.post('/api/v1/pages/update', (req, res) => pageControllers.update(req, res));
+    server.post('/api/v1/pages/getPageData', (req, res) => pageControllers.getPageData(req, res));
+    server.post('/api/v1/pages/getPagesData', (req, res) => pageControllers.getPagesData(req, res));
 
     // file manager
     server.post('/api/v1/settings/fileManagerControllers-readPath', (req, res) => {
@@ -319,7 +325,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             contentName: req.params.tag,
         }
         //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/login', (req, res) => {
@@ -329,7 +335,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.params,
         }
         //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/register', (req, res) => {
@@ -339,7 +345,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.params,
         }
         //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
 
 
@@ -352,7 +358,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             contentName: req.params.category,
         }
         //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
 
 
@@ -365,7 +371,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             contentName: req.params.actor,
         }
         //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/posts', (req, res) => {
@@ -375,7 +381,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.params,
         }
         //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
 
 
@@ -387,7 +393,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             contentType: 'categories'
         }
         //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
     server.get('/tags', (req, res) => {
         const targetComponent = '/meta';
@@ -397,7 +403,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             contentType: 'tags'
         }
         // app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
     server.get('/actors', (req, res) => {
         const targetComponent = '/meta';
@@ -406,7 +412,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.params,
             contentType: 'actors'
         }
-        return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
         // app.render(req, res, targetComponent, queryParams)
     });
 
@@ -418,9 +424,19 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-      //  app.render(req, res, targetComponent, queryParams)
+        //  app.render(req, res, targetComponent, queryParams)
 
-      return renderAndCache(req, res,targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
+    });
+
+    server.get('/page/:pageName', (req, res) => {
+        const targetComponent = '/page';
+        const queryParams = {
+            ...req.query,
+            ...req.params,
+        }
+         app.render(req, res, targetComponent, queryParams)
+       // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/profile', (req, res) => {
@@ -437,24 +453,11 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         app.render(req, res, targetComponent, queryParams)
 
 
-
     });
 
 
     server.get('/admin/assets', (req, res) => {
         const targetComponent = '/admin/assets';
-        // const queryParams = {
-        //     type: req.query.type,
-        //     status: req.query.status,
-        //     assetsType: req.query.assetsType,
-        //     metaType: req.query.metaType,
-        //     sort: req.query.sort,
-        //     page: req.query.page,
-        //     keyword: req.query.keyword,
-        //     size: req.query.size,
-        //     author: req.query.author,
-        // }
-
         const queryParams = {
             ...req.query,
             ...req.params,
@@ -462,6 +465,29 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         app.render(req, res, targetComponent, queryParams)
         // return renderAndCache(req, res,targetComponent, queryParams)
     });
+
+    // server.get('/admin/page', (req, res) => {
+    //     const targetComponent = '/admin/page';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res,targetComponent, queryParams)
+    // });
+
+
+    // server.get('/admin/page', (req, res) => {
+    //     const targetComponent = '/admin/page';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res,targetComponent, queryParams)
+    // });
+
+
 
     server.get('/errorPage', (req, res) => {
         const targetComponent = '/errorPage';

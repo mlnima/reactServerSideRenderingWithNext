@@ -34,6 +34,12 @@ export const addNewWidget = async (data) => {
     };
     return await axios.post(window.location.origin + '/api/v1/settings/addWidget', body)
 }
+export const getSingleWidgetData = async (data) => {
+    const body = {
+        ...data,
+    };
+    return await axios.post(window.location.origin + '/api/v1/settings/getSingleWidgetData', body)
+}
 
 // export const getWidgets = async (position,cache, domainName) => {
 //     const body = {
@@ -119,7 +125,7 @@ export const contactAjaxPost = async (data) => {
     }
     return await axios.post(window.location.origin + '/api/v1/form/contact', body)
 }
-//--
+//-- forms
 
 export const saveFormWidgetData = async (data) => {
     const body ={
@@ -141,9 +147,35 @@ export const getSingleFormData = async (data,domainName) => {
     return await axios.post(domainName + '/api/v1/forms/getFormData', body)
 }
 
+//pages
+export const saveNewPage = async (data) => {
+    const body ={
+        ...data
+    }
+    return await axios.post(window.location.origin + '/api/v1/pages/new', body)
+}
+export const updatePage = async (data) => {
+    const body ={
+        ...data,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/pages/update', body)
+}
+export const getPageData = async (data,domainName) => {
+    const body ={
+        ...data
+    }
+    return await axios.post(domainName + '/api/v1/pages/getPageData', body)
+}
+export const getPagesData = async (data) => {
+    const body ={
+        ...data,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/pages/getPagesData', body)
+}
 
-
-
+//others
 export const youtubeDataScrapper = async (url) => {
     const body = {
         url,

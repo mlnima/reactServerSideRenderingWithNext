@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {Document, Page, pdfjs} from "react-pdf";
 // import {pdfjs} from "react-pdf";
 // import { Text, View, StyleSheet } from '@react-pdf/renderer';
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 import * as ReactPdfRenderer from '@react-pdf/renderer';
 import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
 import './MediaWidget.scss';
