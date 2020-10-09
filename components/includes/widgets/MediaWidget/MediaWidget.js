@@ -1,10 +1,10 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {Document, Page, pdfjs} from "react-pdf";
+//import {Document, Page, pdfjs} from "react-pdf";
 // import {pdfjs} from "react-pdf";
 // import { Text, View, StyleSheet } from '@react-pdf/renderer';
 
-import * as ReactPdfRenderer from '@react-pdf/renderer';
-import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
+//import * as ReactPdfRenderer from '@react-pdf/renderer';
+//import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
 import './MediaWidget.scss';
 
 
@@ -34,12 +34,12 @@ const MediaWidget = props => {
     }, []);
 
 
-    useEffect(() => {
-        if (props.mediaType === 'document'){
-            console.log(ReactPdfRenderer)
-        }
-
-    }, []);
+    // useEffect(() => {
+    //     if (props.mediaType === 'document'){
+    //         console.log(ReactPdfRenderer)
+    //     }
+    //
+    // }, []);
 
 
 
@@ -75,6 +75,9 @@ const MediaWidget = props => {
                     // return (
                     //         <MediaDocumentWidget {...props}/>
                     // )
+                    //    "@pdftron/webviewer": "^7.1.0",
+                    //     "@react-pdf/renderer": "^1.6.11",
+                    //    "react-pdf": "^5.0.0",
                     return null
                 case 'iframe':
                     return (
