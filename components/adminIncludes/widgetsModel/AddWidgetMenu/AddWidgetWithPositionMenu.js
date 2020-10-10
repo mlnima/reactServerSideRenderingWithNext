@@ -56,7 +56,7 @@ const AddWidgetWithPositionMenu = props => {
        return(
            <>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
-               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'Sidebar', props.type)}>{customPage+'Sidebar'}</button>
+               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'Sidebar', props.type)}>{convertVariableNameToName(customPage)+'Sidebar'}</button>
            </>
        )
    })

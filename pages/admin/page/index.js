@@ -43,7 +43,7 @@ const page = props => {
                 console.log(res.data)
             })
         }else{
-            saveNewPage({pageData: state}).then(res => {
+            saveNewPage({pageData: {...state,pageName:state.pageName.replace(' ','')}}).then(res => {
                 const pageId = res.data.savedPageData._id
                 router.push(`/admin/page?id=${pageId}`)
 

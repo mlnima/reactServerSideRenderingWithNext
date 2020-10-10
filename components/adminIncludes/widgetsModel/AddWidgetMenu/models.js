@@ -6,6 +6,7 @@ export let widgetModels = {
         formName:'',
         formFields:[]
     },
+    menuItems:[],
     tags:[],
     count:8,
     comments:[],

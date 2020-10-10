@@ -40,9 +40,7 @@ const WidgetModel = props => {
     const [widgetData, setWidgetData] = useState({
         data: {}
     })
-    useEffect(() => {
-console.log(contextData.siteIdentity)
-    }, [widgetData]);
+
 
     const [textInputsData, setTextInputsData] = useState({
         title: '',
@@ -434,6 +432,7 @@ console.log(contextData.siteIdentity)
                     </>
                 )
             case 'menu':
+                console.log(widgetData)
                 return (
                     <>
                         <MenuWidgetModelFields widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.data.mobileNavigation}/>

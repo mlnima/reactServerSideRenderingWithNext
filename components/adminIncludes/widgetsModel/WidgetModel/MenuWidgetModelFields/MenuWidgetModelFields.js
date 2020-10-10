@@ -8,7 +8,9 @@ const MenuWidgetModelFields = props => {
     const [formData, setFormData] = useState({
         name: '',
         target: '',
-        as: ''
+        as: '',
+        type:'internal',
+        itemIndex:0
     });
 
     const onChangeHandler = (e) => {
@@ -18,30 +20,41 @@ const MenuWidgetModelFields = props => {
         })
     }
 
+    // const onAddHandler = e => {
+    //     e.preventDefault()
+    //     const previousMenuData = props.widgetData.data.menuItems ? {...props.widgetData.data.menuItems} : {}
+    //     props.setWidgetData({
+    //         ...props.widgetData,
+    //         data: {
+    //             ...props.widgetData.data,
+    //             menuItems: {
+    //                 ...previousMenuData,
+    //                 [formData.name]: {
+    //                     ...formData
+    //                 }
+    //             }
+    //         }
+    //     })
+    // }
     const onAddHandler = e => {
         e.preventDefault()
-        const previousMenuData = props.widgetData.data.menuItems ? {...props.widgetData.data.menuItems} : {}
+        const previousMenuData = props.widgetData.data.menuItems ? [...props.widgetData.data.menuItems] : []
         props.setWidgetData({
             ...props.widgetData,
             data: {
                 ...props.widgetData.data,
-                menuItems: {
-                    ...previousMenuData,
-                    [formData.name]: {
-                        ...formData
-                    }
-                }
+                menuItems:[...previousMenuData, {...formData,itemIndex:previousMenuData.length}]
             }
         })
     }
 
     useEffect(() => {
-        console.log(props.widgetData.data.menuItems)
+        console.log(props.widgetData.data)
     }, [props]);
 
-    const renderCurrentItems = ( props.widgetData.data.menuItems ? Object.keys(props.widgetData.data.menuItems) : []).map(menuItem=>{
+    const renderCurrentItems = (  props.widgetData.data.menuItems || []).map(menuItem=>{
         return(
-          <MenuWidgetModelFieldsPreview name={menuItem} data={props.widgetData.data.menuItems[menuItem]} {...props}/>
+          <MenuWidgetModelFieldsPreview key={(  props.widgetData.data.menuItems || []).indexOf(menuItem)} name={menuItem.name} data={menuItem} {...props}/>
         )
     })
 
@@ -87,3 +100,18 @@ const MenuWidgetModelFields = props => {
     );
 };
 export default MenuWidgetModelFields;
+
+//.menu-widget{
+//     .navigation-mobile-button{
+//         .navigation-mobile-button-logo{
+//             color: white;
+//         }
+//     }
+//     .menu-widget-items{
+//         .menu-widget-item{
+//             a{
+//                 color:white;
+//             }
+//         }
+//     }
+// }
