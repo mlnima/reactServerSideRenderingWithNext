@@ -4,6 +4,7 @@ import {addNewWidget, getMultipleWidgetWithData, getPagesData} from '../../../..
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import {AppContext} from '../../../../context/AppContext'
 
+
 const AddWidgetWithPositionMenu = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
@@ -54,9 +55,9 @@ const AddWidgetWithPositionMenu = props => {
    const renderCustomPagesPosition = customPages.map(customPage=>{
        return(
            <>
-               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{customPage}</button>
+               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'Sidebar', props.type)}>{customPage+'Sidebar'}</button>
-               </>
+           </>
        )
    })
 

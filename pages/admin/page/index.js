@@ -12,6 +12,7 @@ const page = props => {
         status: 'publish',
         imageUrl: ''
     });
+
     useEffect(() => {
        if(router.query.id){
            getPageData({id:router.query.id},window.location.origin).then(res=>{
@@ -55,7 +56,7 @@ const page = props => {
         <div>
             <AdminLayout>
                 <div className='page-container'>
-                    <p>Page Name:</p>
+                    <p>Page Name (without Space):</p>
                     <input name='pageName' placeholder='page name' value={state.pageName} onChange={e => onChangeHandler(e)}/>
                     <p>Sidebar:</p>
                     <select name='sidebar' onChange={e => onChangeHandler(e)} value={state.sidebar}>

@@ -40,14 +40,9 @@ const WidgetModel = props => {
     const [widgetData, setWidgetData] = useState({
         data: {}
     })
-    // useEffect(() => {
-    //     if (widgetData.data.type==='form'){
-    //         setWidgetSettings({
-    //             ...widgetSettings,
-    //             open: true
-    //         })
-    //     }
-    // }, [widgetData]);
+    useEffect(() => {
+console.log(contextData.siteIdentity)
+    }, [widgetData]);
 
     const [textInputsData, setTextInputsData] = useState({
         title: '',
@@ -105,6 +100,7 @@ const WidgetModel = props => {
         })
 
     }, [props]);
+
     const languagesOptions = props.translationLanguages.map(lang => {
         return (
             <option key={lang} value={lang}>{lang}</option>
@@ -502,6 +498,11 @@ const WidgetModel = props => {
                         <option value='all'>All</option>
                         <option value='mobile'>Mobile</option>
                         <option value='desktop'>Desktop ( > 1024px)</option>
+                    </select>
+                    <p>Language To Render:</p>
+                    <select name='languageToRender' value={widgetData.data.languageToRender} onChange={e => onChangeHandler(e)}>
+                        <option value='all'>All</option>
+                        {languagesOptions}
                     </select>
                     <p>Type:</p>
                     <select name='type' value={widgetData.data.type} onChange={e => onChangeHandler(e)}>
