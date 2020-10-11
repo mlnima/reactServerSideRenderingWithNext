@@ -4,7 +4,6 @@ const postSchema = require('../models/postSchema');
 const userSchema = require('../models/userSchema');
 const metaSchema = require('../models/metaSchema');
 const commentSchema = require('../models/commentSchema');
-
 const metasSaver = async (metas) => {
     let finalData = []
     for await (let meta of metas) {
@@ -111,7 +110,7 @@ postsControllers.updatePost = async (req, res) => {
 };
 
 postsControllers.getPostsInfo = async (req, res) => {
-    console.log(req.body)
+
     const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
     const pageNo = req.body.pageNo || 1;
     let postTypeQuery = req.body.postType === 'all' ? {} : {postType: req.body.postType};
