@@ -4,7 +4,6 @@ import { updateSetting, getSetting, youtubeDataScrapper } from '../../../../_var
 import withRouter from 'next/dist/client/with-router';
 import { savePost } from '../../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../../context/AppContext'
-//  https://www.youtube.com/playlist?list=PL009Sw1iPp856-NRDp41GafsnxAFVyk6S
 
 const youtube = props => {
     const contextData = useContext(AppContext);
@@ -97,14 +96,6 @@ const youtube = props => {
                 })
             }
         }
-
-
-        // data.forEach(url => {
-        //
-        //
-        //
-        // })
-
     }
 
 

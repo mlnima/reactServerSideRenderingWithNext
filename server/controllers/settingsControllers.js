@@ -129,7 +129,7 @@ settingsControllers.getWidgetsWithData = (req, res) => {
                 backgroundImage:widget.backgroundImage
             }
 
-            const sortMethod = finalData.sortBy ? { [finalData.sortBy]: -1 } : '-_id'
+            const sortMethod = finalData.sortBy ? { [finalData.sortBy]: -1 } : {lastModify: -1}
 
             if (finalData.type === 'posts') {
                 await postSchema.find({ status: 'published' }).limit(widget.count).sort(sortMethod).exec().then(posts => {
@@ -171,7 +171,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
 
         const mapWidgetsToGetDataForThem = finalData.map(async widget=>{
             const widgetDataToObject = widget.toObject()
-            const sortMethod = widget.data.sortBy ? { [widget.data.sortBy]: -1 } : '-_id';
+            const sortMethod = widget.data.sortBy ? { [widget.data.sortBy]: -1 } :{lastModify: -1};
             let sortQuery = !req.body.sort ? {} : req.body.sort === '_id' || req.body.sort === '-_id' ? req.body.sort : { [req.body.sort]: -1 }
             let selectedMeta = widget.data.selectedMetaForPosts ? {$or:[
                     {tags: widget.data.selectedMetaForPosts},
