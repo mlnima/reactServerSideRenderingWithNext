@@ -13,7 +13,6 @@ const MenuWidget = props => {
         if (props.menuItems) {
             setMenuItems(props.menuItems)
         }
-        console.log(props)
     }, [props]);
 
 

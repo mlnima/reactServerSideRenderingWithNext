@@ -432,7 +432,6 @@ const WidgetModel = props => {
                     </>
                 )
             case 'menu':
-                console.log(widgetData)
                 return (
                     <>
                         <MenuWidgetModelFields widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.data.mobileNavigation}/>
@@ -496,11 +495,12 @@ const WidgetModel = props => {
                     <select name='deviceTypeToRender' value={widgetData.data.deviceTypeToRender} onChange={e => onChangeHandler(e)}>
                         <option value='all'>All</option>
                         <option value='mobile'>Mobile</option>
-                        <option value='desktop'>Desktop ( > 1024px)</option>
+                        <option value='desktop'>Desktop ( >= 768px)</option>
                     </select>
                     <p>Language To Render:</p>
                     <select name='languageToRender' value={widgetData.data.languageToRender} onChange={e => onChangeHandler(e)}>
                         <option value='all'>All</option>
+                        <option value='default'>Default</option>
                         {languagesOptions}
                     </select>
                     <p>Type:</p>

@@ -1,24 +1,13 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-//import {Document, Page, pdfjs} from "react-pdf";
-// import {pdfjs} from "react-pdf";
-// import { Text, View, StyleSheet } from '@react-pdf/renderer';
-
-//import * as ReactPdfRenderer from '@react-pdf/renderer';
 import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
 import './MediaWidget.scss';
 
 
 const MediaWidget = props => {
-    const pdfViewer = useRef(null)
-
     const [state, setState] = useState({
         extraClassName: '',
 
     });
-
-    // const [docData,setDocData]=useState({
-    //     maxPage:null
-    // })
 
     useEffect(() => {
         props.mediaType === 'iframe' ?
@@ -32,30 +21,6 @@ const MediaWidget = props => {
                 extraClassName: ''
             })
     }, []);
-
-
-    // useEffect(() => {
-    //     if (props.mediaType === 'document'){
-    //         console.log(ReactPdfRenderer)
-    //     }
-    //
-    // }, []);
-
-
-
-
-
-    // const styles = StyleSheet.create({
-    //     page: {
-    //         flexDirection: 'row',
-    //         backgroundColor: '#E4E4E4'
-    //     },
-    //     section: {
-    //         margin: 10,
-    //         padding: 10,
-    //         flexGrow: 1
-    //     }
-    // });
 
     const WhatToRender = () => {
 
@@ -75,10 +40,6 @@ const MediaWidget = props => {
                     return (
                             <MediaDocumentWidget {...props}/>
                     )
-                    //    "@pdftron/webviewer": "^7.1.0",
-                    //     "@react-pdf/renderer": "^1.6.11",
-                    //    "react-pdf": "^5.0.0",
-                    return null
                 case 'iframe':
                     return (
                         <>
