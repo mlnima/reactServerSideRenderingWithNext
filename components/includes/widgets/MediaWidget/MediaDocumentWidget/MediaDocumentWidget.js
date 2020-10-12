@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {Document, Page, pdfjs} from "react-pdf";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faArrowRight, faArrowUp} from "@fortawesome/free-solid-svg-icons";
-pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+
 const MediaDocumentWidget = props => {
     const [state, setState] = useState({
         maxPage: 0,
@@ -16,8 +16,9 @@ const MediaDocumentWidget = props => {
         })
     }
     useEffect(() => {
+        pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
         console.log(state)
-    }, [state]);
+    }, []);
 
     const PagesController = () => {
 

@@ -4,7 +4,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 // import { Text, View, StyleSheet } from '@react-pdf/renderer';
 
 //import * as ReactPdfRenderer from '@react-pdf/renderer';
-//import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
+import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
 import './MediaWidget.scss';
 
 
@@ -72,9 +72,9 @@ const MediaWidget = props => {
                         </>
                     )
                 case 'document':
-                    // return (
-                    //         <MediaDocumentWidget {...props}/>
-                    // )
+                    return (
+                            <MediaDocumentWidget {...props}/>
+                    )
                     //    "@pdftron/webviewer": "^7.1.0",
                     //     "@react-pdf/renderer": "^1.6.11",
                     //    "react-pdf": "^5.0.0",
