@@ -62,8 +62,9 @@ const AddFormConditional = props => {
                 <option>Select</option>
                 <option value='textarea'>Text Area</option>
                 <option value='text'>Text</option>
-                <option value='button'>Number</option>
-                <option value='checkbox'>Email</option>
+                {/*<option value='button'>Number</option>*/}
+                <option value='email'>Email</option>
+                <option value='checkbox'>CheckBox</option>
                 <option value='color'>Color</option>
                 <option value='date'>date</option>
                 <option value='email'>email</option>

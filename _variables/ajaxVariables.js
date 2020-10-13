@@ -167,6 +167,13 @@ export const getPageData = async (data,domainName) => {
     }
     return await axios.post(domainName + '/api/v1/pages/getPageData', body)
 }
+export const deletePage = async (id,domainName) => {
+    const body ={
+        id,
+        token: localStorage.wt
+    }
+    return await axios.post(domainName + '/api/v1/pages/deletePage', body)
+}
 export const getPagesData = async (data) => {
     const body ={
         ...data,

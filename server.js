@@ -271,11 +271,13 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/forms/save', (req, res) => formController.widgetForm(req, res));
     server.post('/api/v1/forms/get', (req, res) => formController.getFormsData(req, res));
     server.post('/api/v1/forms/getFormData', (req, res) => formController.getFormData(req, res));
+
     //page
     server.post('/api/v1/pages/new', (req, res) => pageControllers.new(req, res));
     server.post('/api/v1/pages/update', (req, res) => pageControllers.update(req, res));
     server.post('/api/v1/pages/getPageData', (req, res) => pageControllers.getPageData(req, res));
     server.post('/api/v1/pages/getPagesData', (req, res) => pageControllers.getPagesData(req, res));
+    server.post('/api/v1/pages/deletePage', (req, res) => pageControllers.deletePage(req, res));
 
     // file manager
     server.post('/api/v1/settings/fileManagerControllers-readPath', (req, res) => {
@@ -451,8 +453,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             sort: req.query.sort,
         }
         app.render(req, res, targetComponent, queryParams)
-
-
     });
 
 
@@ -466,15 +466,15 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         // return renderAndCache(req, res,targetComponent, queryParams)
     });
 
-    // server.get('/admin/page', (req, res) => {
-    //     const targetComponent = '/admin/page';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res,targetComponent, queryParams)
-    // });
+    server.get('/admin/pages', (req, res) => {
+        const targetComponent = '/admin/pages';
+        const queryParams = {
+            ...req.query,
+            ...req.params,
+        }
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res,targetComponent, queryParams)
+    });
 
 
     // server.get('/admin/page', (req, res) => {

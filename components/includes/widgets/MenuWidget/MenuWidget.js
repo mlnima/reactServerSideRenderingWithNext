@@ -14,7 +14,9 @@ const MenuWidget = props => {
             setMenuItems(props.menuItems)
         }
     }, [props]);
-
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     const renderMenuItems = (menuItems || []).map(menuItem => {
 

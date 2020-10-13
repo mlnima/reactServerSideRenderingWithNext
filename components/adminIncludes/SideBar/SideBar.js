@@ -39,7 +39,7 @@ const SideBar = props => {
                 {name: 'actors', url: '/admin/assets?assetsType=metas&metaType=actors'}]
         },
         pages: {
-            pathURL: '/admin/assets?assetsType=page',
+            pathURL: '/admin/assets?assetsType=pages',
             subItems: [{name: 'newPage', url: '/admin/page?new=1'}]
         },
         forms: {

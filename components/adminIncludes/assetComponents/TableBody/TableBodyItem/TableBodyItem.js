@@ -12,6 +12,9 @@ const TableBodyItem = props => {
     //     console.log(props.assetsType)
     // }, []);
     useEffect(() => {
+        if (props.assetsType === 'pages'){
+
+        }
         console.log(props)
     }, [props]);
 
@@ -42,6 +45,12 @@ const TableBodyItem = props => {
             })
         } else if (props.assetsType === 'forms') {
             let properties = ['formName', 'date','widgetId']
+            setState({
+                ...state,
+                properties,
+            })
+        } else if (props.assetsType === 'pages') {
+            let properties = [ 'pageName', 'status','sidebar' ]
             setState({
                 ...state,
                 properties,

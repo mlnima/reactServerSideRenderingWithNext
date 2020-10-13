@@ -12,7 +12,6 @@ pageControllers.new = (req, res) =>{
 }
 pageControllers.update = (req, res) =>{
     const updateData = req.body.pageData
-    console.log(req.body)
     pageSchema.findByIdAndUpdate(updateData._id,updateData, {new: true}).exec().then(updated=>{
         res.json({updated,error:false})
         res.end()
@@ -21,7 +20,6 @@ pageControllers.update = (req, res) =>{
 pageControllers.getPageData = (req, res) =>{
     const pageId = req.body.id
     const pageName = req.body.pageName
-    console.log(req.body)
     if (pageId){
         pageSchema.findById(pageId).exec().then(pageData=>{
             res.json({pageData,error:false})
@@ -32,7 +30,6 @@ pageControllers.getPageData = (req, res) =>{
         })
     }else if (pageName){
         pageSchema.findOne({pageName}).exec().then(pageData=>{
-            console.log(pageData)
             res.json({pageData,error:false})
             res.end()
         }).catch(err=>{
@@ -43,10 +40,24 @@ pageControllers.getPageData = (req, res) =>{
 
 
 }
+pageControllers.deletePage = (req, res) =>{
+    const pageId = req.body.id
+    if (pageId){
+        pageSchema.findByIdAndDelete(pageId).exec().then(pageData=>{
+            res.json({error:false})
+            res.end()
+        }).catch(err=>{
+            console.log(err)
+            res.end()
+        })
+    }else {
+        res.end()
+    }
+}
 
 pageControllers.getPagesData = (req, res) =>{
-    pageSchema.find({}).exec().then(pagesData=>{
-        res.json({pagesData,error:false})
+    pageSchema.find({}).exec().then(pages=>{
+        res.json({pages,error:false})
         res.end()
     }).catch(err=>{
         console.log(err)
