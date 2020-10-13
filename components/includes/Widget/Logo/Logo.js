@@ -15,26 +15,26 @@ const Logo = props => {
         queries: {}
     });
 
-    useEffect(() => {
-        setState({
-            ...state,
-            logoText: contextData.siteIdentity.logoText,
-            headLine: contextData.siteIdentity.headLine,
-
-            logoTextStyle: {
-                color: props.logoTextColor || 'white',
-                fontSize: props.logoTextFontSize + 'px' || '50px',
-
-            },
-            headLineStyle: {
-                color: props.logoHeadLineColor || 'white',
-                fontSize: props.logoHeadLineFontSize + 'px' || '16px',
-                fontWeight: props.logoHeadLineFontWeight || 'initial'
-            },
-
-
-        })
-    }, [contextData.siteIdentity]);
+    // useEffect(() => {
+    //     setState({
+    //         ...state,
+    //         logoText: contextData.siteIdentity.logoText,
+    //         headLine: contextData.siteIdentity.headLine,
+    //
+    //         logoTextStyle: {
+    //             color: props.logoTextColor || 'white',
+    //             fontSize: props.logoTextFontSize + 'px' || '50px',
+    //
+    //         },
+    //         headLineStyle: {
+    //             color: props.logoHeadLineColor || 'white',
+    //             fontSize: props.logoHeadLineFontSize + 'px' || '16px',
+    //             fontWeight: props.logoHeadLineFontWeight || 'initial'
+    //         },
+    //
+    //
+    //     })
+    // }, [contextData.siteIdentity]);
 
 
     const RenderLogoImage = () => {
@@ -60,11 +60,11 @@ const Logo = props => {
         if (value) {
             if (router.pathname === '/') {
                 return (
-                    <h1 style={state.headLineStyle}>{value}</h1>
+                    <h1 >{value}</h1>
                 )
             } else {
                 return (
-                    <p style={state.headLineStyle}>{value}</p>
+                    <p >{value}</p>
                 )
             }
         } else return null

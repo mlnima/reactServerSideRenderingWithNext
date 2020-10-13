@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from '../../../../context/AppContext'
-import {deleteWidgets, getMultipleWidgetWithData, updateWidgets} from '../../../../_variables/ajaxVariables'
+import {addNewWidget, deleteWidgets, getMultipleWidgetWithData, updateWidgets} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName, generateAbsolutePath} from '../../../../_variables/_variables'
 import WidgetsRenderer from '../../../includes/WidgetsRenderer/WidgetsRenderer'
 import 'array.prototype.move';
@@ -23,6 +23,7 @@ import MediaWidgetType from "./MediaWidgetType/MediaWidgetType";
 import ExportWidget from "./ExportWidget/ExportWidget";
 import FormTypeWiddgetModelFields from "./FormTypeWidgetModelFields/FormTypeWidgetModelFields";
 import Link from "next/link";
+import {widgetModels} from "../AddWidgetMenu/models";
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
@@ -110,6 +111,28 @@ const WidgetModel = props => {
             open: false
         }) : setWidgetSettings({...widgetSettings, open: true})
     };
+
+
+    const onCloneHandler = ()=>{
+        addNewWidget({
+            data: {
+                ...widgetData.data,
+                ...textInputsData
+            }
+        }).then(() => {
+            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+                contextData.dispatchWidgetsSettings({
+                    ...contextData.widgetsSettings,
+                    widgets: [...res.data.widgets]
+                })
+            })
+        }).catch(err => {
+            console.log(err)
+        })
+    }
+
+
+
     const onDeleteHandler = () => {
         deleteWidgets(props.data._id, window.location.origin).then(() => {
             getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
@@ -554,9 +577,10 @@ const WidgetModel = props => {
 
                     <WidgetPreview widgetData={widgetData} position={widgetData.data.position} preview={widgetSettings.preview}/>
                     <RenderWidgetCustomStyle/>
-                    <div className='control'>
+                    <div className=' '>
                         <button onClick={() => onSaveHandler()}>Save</button>
                         <ExportWidget data={{...widgetData.data, ...textInputsData}}/>
+                        <button onClick={() => onCloneHandler()}>Clone</button>
                         <button onClick={() => onDeleteHandler()}>Delete</button>
                     </div>
 
@@ -573,21 +597,22 @@ const WidgetModel = props => {
                     transform: widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',
                     margin: '0 5px'
                 }}/> {props.data.data.name || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
-                <Link href={{pathname: '/admin/design/widgets/widget', query: {id: widgetData._id}}}>
-                    <a>
-                        <FontAwesomeIcon icon={faPen} className='widget-header-handler-admin' style={{
-                            width: '25px',
-                            height: '25px',
-                            margin: '0 5px',
-                            color:'white'
-                        }}/>
-                    </a>
-                </Link>
+
                 <div>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}><img
                         className='fontawesomeSvgVerySmall' src={SortUpSvg} alt=""/></button>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(true)}><img
                         className='fontawesomeSvgVerySmall' src={SortDownSvg} alt=""/></button>
+                    <Link href={{pathname: '/admin/design/widgets/widget', query: {id: widgetData._id}}}>
+                        <a>
+                            <FontAwesomeIcon icon={faPen} className='widget-header-handler-admin' style={{
+                                width: '25px',
+                                height: '25px',
+                                margin: '0 5px',
+                                color:'white'
+                            }}/>
+                        </a>
+                    </Link>
                 </div>
             </div>
         )

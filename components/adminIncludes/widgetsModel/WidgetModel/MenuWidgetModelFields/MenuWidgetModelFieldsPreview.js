@@ -12,9 +12,6 @@ const MenuWidgetModelFieldsPreview = props => {
         type: ''
     });
 
-
-
-
     const onEditHandler = e => {
         e.preventDefault()
         const findItemIndex = props.widgetData.data.menuItems.findIndex(i => i.itemIndex === itemData.itemIndex)
@@ -23,7 +20,6 @@ const MenuWidgetModelFieldsPreview = props => {
             itemData,
                 ...props.widgetData.data.menuItems.slice(findItemIndex + 1),
         ]
-        console.log(newData)
         props.setWidgetData({
             ...props.widgetData,
             data: {
