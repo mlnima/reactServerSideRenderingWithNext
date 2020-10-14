@@ -15,9 +15,10 @@ const AddWidgetWithPositionMenu = props => {
 
     useEffect(() => {
         getPagesData().then(res=>{
+            console.log(res.data)
             if(res.data){
-                if(res.data.pagesData){
-                    const pagesNames = res.data.pagesData.map(page=>page.pageName)
+                if(res.data.pages){
+                    const pagesNames = res.data.pages.map(page=>page.pageName)
                     setCustomPages(pagesNames)
                 }
             }
@@ -56,7 +57,7 @@ const AddWidgetWithPositionMenu = props => {
        return(
            <>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
-               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'Sidebar', props.type)}>{convertVariableNameToName(customPage)+'Sidebar'}</button>
+               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'Sidebar', props.type)}>{convertVariableNameToName(customPage)+' Sidebar'}</button>
            </>
        )
    })
