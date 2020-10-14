@@ -591,14 +591,14 @@ const WidgetModel = props => {
         return (
             <div className='widget-open-control'>
 
-                <p onClick={() => onOpenHandler()}><FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
+                <p onClick={() => onOpenHandler()} className='widget-open-control-group'><FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
                     width: '25px',
                     height: '25px',
                     transform: widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',
                     margin: '0 5px'
                 }}/> {props.data.data.name || convertVariableNameToName(props.data.data.type)} index: {widgetData.data.widgetIndex}</p>
 
-                <div>
+                <div className='widget-open-control-group'>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}><img
                         className='fontawesomeSvgVerySmall' src={SortUpSvg} alt=""/></button>
                     <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(true)}><img

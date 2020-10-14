@@ -1,6 +1,8 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
+import loadable from '@loadable/component';
+//import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
 import './MediaWidget.scss';
+const MediaDocumentWidget = loadable(() => import('./MediaDocumentWidget/MediaDocumentWidget'))
 
 
 const MediaWidget = props => {
@@ -40,6 +42,7 @@ const MediaWidget = props => {
                     return (
                             <MediaDocumentWidget {...props}/>
                     )
+                // return null
                 case 'iframe':
                     return (
                         <>

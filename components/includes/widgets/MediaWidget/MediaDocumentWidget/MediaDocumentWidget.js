@@ -1,4 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
+import loadable from '@loadable/component'
+//const {Document, Page, pdfjs} = loadable(() => import('react-pdf'))
 import {Document, Page, pdfjs} from "react-pdf";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faArrowRight, faArrowUp} from "@fortawesome/free-solid-svg-icons";
@@ -16,8 +18,8 @@ const MediaDocumentWidget = props => {
         })
     }
     useEffect(() => {
-        pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-    }, []);
+             pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+    }, [props]);
 
     const PagesController = () => {
 

@@ -12,6 +12,10 @@
   border-radius: 10px 10px 0 0;
   margin-top: 5px ;
   //font-weight:  ;
+  .widget-open-control-group{
+    display: flex;
+    align-items: center;
+  }
   button{
     @include AdminLightBtn
   }
@@ -23,7 +27,12 @@
     }
     &:hover{
       background-color: $dark80;
+
     }
+  }
+  &:hover{
+    transition: 1s;
+    transform: scale(1.03);
   }
 }
 
