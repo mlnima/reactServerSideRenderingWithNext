@@ -2,21 +2,13 @@ import React from 'react';
 import AdminLayout from "../../../../components/layouts/AdminLayout";
 import ColorSection from "../../../../components/adminIncludes/design/ColorSection";
 import TextSection from "../../../../components/adminIncludes/design/TextSection";
+import StyleSection from "../../../../components/adminIncludes/design/StyleSection/StyleSection";
 
 const postElement = () => {
 
     return (
         <AdminLayout>
-            <div className='post-element-design adminDesignSectionItems'>
-                <ColorSection designName='postElementTitleTextColor'/>
-                <ColorSection designName='postElementBackgroundColor'/>
-                <ColorSection designName='postElementProgressbarBackgroundColor'/>
-                <ColorSection designName='postElementProgressbarTextColor'/>
-                <ColorSection designName='postElementProgressbarValueColor'/>
-                <ColorSection designName='postElementOnImageTextColor'/>
-                <ColorSection designName='postElementOnImageTextBackgroundColor'/>
-                <TextSection designName='postElementTitleTextAlign'/>
-            </div>
+            <StyleSection name='postElementStyle' title='PostElement Design :' />
         </AdminLayout>
     );
 };

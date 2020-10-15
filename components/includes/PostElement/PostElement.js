@@ -7,6 +7,8 @@ import {AppContext} from "../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+let StyledDiv = styled.div`${props => props.stylesData}`
 // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
 
 const PostElement = props => {
@@ -155,7 +157,7 @@ const PostElement = props => {
     }
 
     return (
-        < div ref={element} className={'post-element-div '   + (props.viewType ? props.viewType : 'standard')}>
+        < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div '   + (props.viewType ? props.viewType : 'standard')}>
             <Link
                 as={contextData.state.activeLanguage !== 'default' ? `/post/${props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}?id=${props.state._id}&lang=${contextData.state.activeLanguage}` : `/post/${props.state.title}?id=${props.state._id}`}
                 href={{
@@ -172,13 +174,13 @@ const PostElement = props => {
                             <RenderDataOnImage/>
                         </div>
                         <RenderProgressBar/>
-                        <h3 style={state.titleElementStyle}>{props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}</h3>
+                        <h3 >{props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}</h3>
                     </div>
                 </a>
             </Link>
 
 
-        </div>
+        </StyledDiv>
     );
 };
 //  props.state.title

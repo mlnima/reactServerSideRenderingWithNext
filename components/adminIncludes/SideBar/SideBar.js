@@ -74,7 +74,7 @@ const SideBar = props => {
                 {name: 'postPage', url: '/admin/design/postPage'},
                 {name: 'postElement', url: '/admin/design/postElement'},
                 {name: 'footer', url: '/admin/design/footer'},
-                {name: 'customStyle', url: '/admin/design/customStyle'},
+                {name: 'customStyles', url: '/admin/settings/customStyles'},
 
             ]
         },
@@ -95,7 +95,6 @@ const SideBar = props => {
             pathURL: '/admin/settings',
             subItems: [
                 {name: 'customScript', url: '/admin/settings/customScript'},
-                {name: 'customStyles', url: '/admin/settings/customStyles'},
                 {name: 'general', url: '/admin/settings/general'}]
         },
         Importer: {
