@@ -10,6 +10,8 @@ const FormWidget = props => {
         formName: '',
         data: {}
     })
+    const [submit, setSubmit] = useState(false)
+
 
 
     useEffect(() => {
@@ -40,6 +42,7 @@ const FormWidget = props => {
             date:Date.now()
         }).then(res=>{
             console.log(res)
+            setSubmit(true)
         })
     }
 
@@ -60,16 +63,26 @@ const FormWidget = props => {
             )
         }
     })
+//afterSubmitMessage
 
-    return (
-        <div className='form-widget'>
-            <form onSubmit={e=>onSubmitHandler(e)}>
-                <h2>{props.formData.formTitle}</h2>
-                {renderFields}
-                <button type='submit' className='submit-button'>{props.formData.submitButtonText || 'Submit'}</button>
-            </form>
-        </div>
+    if (submit){
+        return (
+            <div className='form-widget'>
+             <h3>{props.formData.afterSubmitMessage || 'We got Your message and will get back to you soon as possible'}</h3>
+            </div>
+        )
+    }else {
+        return (
+            <div className='form-widget'>
+                <form onSubmit={e=>onSubmitHandler(e)}>
+                    <h2>{props.formData.formTitle}</h2>
+                    {renderFields}
+                    <button type='submit' className='submit-button'>{props.formData.submitButtonText || 'Submit'}</button>
+                </form>
+            </div>
 
-    );
+        );
+    }
+
 };
 export default FormWidget;

@@ -122,6 +122,8 @@ const FormTypeWidgetModelFields = props => {
             {/*<input name='formTitle' value={props.widgetData.data.formData.formTitle} onChange={e => onChangeHandler(e)}/>*/}
             <DelayInput name='formTitle' type='text' value={props.widgetData.data.formData.formTitle}
                         delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
+            <p>After Submit Message :</p>
+            <DelayInput type='text' name='afterSubmitMessage' value={props.widgetData.data.formData.afterSubmitMessage} delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
             <p>Submit button text :</p>
             {/*<input name='submitButtonText' value={props.widgetData.data.formData.submitButtonText} onChange={e => onChangeHandler(e)}/>*/}
             <DelayInput name='submitButtonText' type='text' value={props.widgetData.data.formData.submitButtonText}

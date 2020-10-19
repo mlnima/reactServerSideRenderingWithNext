@@ -52,6 +52,7 @@ const AddFormConditional = props => {
             <input required={true} name='fieldName' value={state.fieldName} onChange={e => onChangeHandler(e)}/>
             <p>Place Holder :</p>
             <input name='fieldPlaceHolder' value={state.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
+
             <p>Required :</p>
             <select name='required' value={state.required}>
                 <option value='true'>True</option>

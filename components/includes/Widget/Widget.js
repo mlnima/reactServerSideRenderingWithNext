@@ -69,6 +69,8 @@ const Widget = props => {
             return true
         } else if ((deviceType === 'desktop' && !state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all'))) {
             return true
+        } else if ((!deviceType && languageToRender && (languageToRender === activeLanguage || languageToRender === 'all'))) {
+            return true
         } else return false
     }
     // if (
