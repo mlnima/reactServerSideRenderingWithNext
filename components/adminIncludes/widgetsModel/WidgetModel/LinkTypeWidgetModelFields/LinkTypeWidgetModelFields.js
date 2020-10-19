@@ -9,8 +9,24 @@ const LinkTypeWidgetModelFields = props => {
                                      onChangeHandler={props.onChangeHandler}/>
             <TextInputFieldForWidget element='input' inputTitle='Link To As :' name='linkToAs' type='text' value={props.linkToAs} classNameValue='linkToAs' placeHolder='Link To As'
                                      onChangeHandler={props.onChangeHandler}/>
-            <TextInputFieldForWidget element='input' inputTitle='Link To Text :' name='linkToText' type='text' value={props.linkToText} classNameValue='linkToText' placeHolder='Link To Text'
-                                     onChangeHandler={props.onChangeHandler}/>
+            {/*<TextInputFieldForWidget element='input' inputTitle='Link To Text :' name='linkToText' type='text' value={props.linkToText} classNameValue='linkToText' placeHolder='Link To Text'*/}
+            {/*                         onChangeHandler={props.onTextInputsDataChangeHandler}/>*/}
+            <TextInputFieldForWidget
+                element='input'
+                inputTitle='Link To Text :'
+                name='linkToText'
+                type='text'
+                value={
+                    props.widgetSettings.activeEditingLanguage === 'default' ? props.textInputsData.linkToText :
+                        props.textInputsData.translations ?
+                            props.textInputsData.translations[props.widgetSettings.activeEditingLanguage] ?
+                                props.textInputsData.translations[props.widgetSettings.activeEditingLanguage].linkToText || '' :
+                                '' : ''
+
+                }
+                classNameValue='linkToText'
+                placeHolder='Link To Text'
+                onChangeHandler={e=>props.onTextInputsDataChangeHandler(e)}/>
             <p>Link Type :</p>
             <select name='linkToType' value={props.linkToType} onChange={e=>props.onChangeHandler(e)}>
                 <option >select</option>

@@ -94,8 +94,10 @@ const WidgetModel = props => {
             text: props.data.data.text || '',
             languageToShowBesideDropDown: props.data.data.languageToShowBesideDropDown || 'Language',
             pathURL: props.data.data.pathURL || '',
+            linkToText: props.data.data.linkToText || '',
             textAlign: props.data.data.textAlign || 'center',
             formFields: props.data.data.formFields || [],
+
         })
 
     }, [props]);
@@ -111,8 +113,6 @@ const WidgetModel = props => {
             open: false
         }) : setWidgetSettings({...widgetSettings, open: true})
     };
-
-
     const onCloneHandler = ()=>{
         addNewWidget({
             data: {
@@ -130,9 +130,6 @@ const WidgetModel = props => {
             console.log(err)
         })
     }
-
-
-
     const onDeleteHandler = () => {
         deleteWidgets(props.data._id, window.location.origin).then(() => {
             getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
@@ -275,7 +272,6 @@ const WidgetModel = props => {
                     />
 
                 )
-
             case 'meta':
                 return (
                     <>
@@ -308,7 +304,6 @@ const WidgetModel = props => {
                                                  onChangeHandler={onChangeHandler}/>
                     </>
                 )
-
             case 'searchBar':
                 return (
                     <>
@@ -320,7 +315,6 @@ const WidgetModel = props => {
 
                     </>
                 )
-
             case 'logo':
                 return (
                     <>
@@ -367,7 +361,6 @@ const WidgetModel = props => {
                         </div>
                     </>
                 )
-
             case 'alphabeticalNumericalRange':
                 return (
                     <>
@@ -414,8 +407,17 @@ const WidgetModel = props => {
             case 'linkTo':
                 return (
                     <>
-                        <LinkTypeWidgetModelFields onChangeHandler={onChangeHandler} linkToText={widgetData.data.linkToText} linkToWindowType={widgetData.data.linkToWindowType}
-                                                   linkTo={widgetData.data.linkTo} linkToType={widgetData.data.linkToType} linkToAs={widgetData.data.linkToAs}/>
+                        <LinkTypeWidgetModelFields
+                            widgetSettings={widgetSettings}
+                            textInputsData={textInputsData}
+                            widgetData={widgetData}
+                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                            onChangeHandler={onChangeHandler}
+                            linkToText={ widgetData.data.linkToText }
+                            linkToWindowType={widgetData.data.linkToWindowType}
+                            linkTo={widgetData.data.linkTo}
+                            linkToType={widgetData.data.linkToType}
+                            linkToAs={widgetData.data.linkToAs}/>
                     </>
                 )
             case 'language':
@@ -467,7 +469,6 @@ const WidgetModel = props => {
                                                     mobileNavigation={widgetData.data.mobileNavigation}/>
                     </>
                 )
-
             default:
                 return null
 

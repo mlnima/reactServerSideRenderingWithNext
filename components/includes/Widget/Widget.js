@@ -47,9 +47,7 @@ const Widget = props => {
     }, [props]);
 
 
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
+
 
     const RenderComponent = () => {
         if (props.component) {
@@ -62,7 +60,7 @@ const Widget = props => {
 
 
     const conditionalWidgetRenderer = (deviceType, languageToRender, activeLanguage) => {
-        console.log(deviceType, languageToRender, activeLanguage)
+
         if ((!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all')) {
             return true
         } else if ((deviceType === 'mobile' && state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all'))) {
