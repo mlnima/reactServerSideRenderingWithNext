@@ -32,7 +32,7 @@ const Widget = props => {
 
 
     useEffect(() => {
-        if (props.data.extraClassName && window.innerWidth >= 768) {
+        if ( window.innerWidth >= 768) {
             setState({
                 ...state,
                 extraClassName: props.data.extraClassName,
@@ -61,11 +61,18 @@ const Widget = props => {
 
     const conditionalWidgetRenderer = (deviceType, languageToRender, activeLanguage) => {
 
+        // console.log(
+        //     props.data.name,
+        //     state.isMobile,
+        //     props.data.deviceTypeToRender,
+        //     props.data.languageToRender,
+        //     contextData.state.activeLanguage)
+
         if ((!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all')) {
             return true
-        } else if ((deviceType === 'mobile' && state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all'))) {
+        } else if ((deviceType === 'mobile' && state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all'||!languageToRender))) {
             return true
-        } else if ((deviceType === 'desktop' && !state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all'))) {
+        } else if ((deviceType === 'desktop' && !state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' ||!languageToRender))) {
             return true
         } else if ((!deviceType && languageToRender && (languageToRender === activeLanguage || languageToRender === 'all'))) {
             return true

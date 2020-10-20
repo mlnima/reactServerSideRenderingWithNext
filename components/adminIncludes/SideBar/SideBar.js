@@ -23,10 +23,10 @@ const SideBar = props => {
             pathURL: '/admin/assets?assetsType=posts',
             subItems: [{name: 'newPost', url: '/admin/post?new=1'}]
         },
-        Translation: {
-            pathURL: '/admin/assets?assetsType=translation',
-            subItems: [{name: 'newTranslation ', url: '/admin/translate?new=1'}]
-        },
+        // Translation: {
+        //     pathURL: '/admin/assets?assetsType=translation',
+        //     subItems: [{name: 'newTranslation ', url: '/admin/translate?new=1'}]
+        // },
         users: {
             pathURL: '/admin/assets?assetsType=users',
             subItems: []
@@ -44,7 +44,9 @@ const SideBar = props => {
         },
         forms: {
             pathURL: '/admin/assets?assetsType=forms',
-            subItems: [{name: 'newForm', url: '/admin/form?new=1'}]
+            subItems: [
+                // {name: 'newForm', url: '/admin/form?new=1'}
+                ]
         },
         comments: {
             pathURL: '/admin/assets?assetsType=comments',
@@ -59,15 +61,14 @@ const SideBar = props => {
         //     pathURL: '/admin/comments',
         //     subItems: []
         // },
-        Contacts: {
-            pathURL: '/admin/contacts',
-            subItems: []
-        },
+        // Contacts: {
+        //     pathURL: '/admin/contacts',
+        //     subItems: []
+        // },
         Design: {
             pathURL: '/admin/design',
             subItems: [
                 {name: 'topBar', url: '/admin/design/topBar'},
-                {name: 'background', url: '/admin/design/background'},
                 {name: 'header', url: '/admin/design/header'},
                 {name: 'navigation', url: '/admin/design/navigation'},
                 {name: 'widgets', url: '/admin/design/widgets'},
@@ -78,6 +79,7 @@ const SideBar = props => {
 
             ]
         },
+        // {name: 'background', url: '/admin/design/background'},
         // Users: {
         //     pathURL: '/admin/users',
         //     subItems: []
