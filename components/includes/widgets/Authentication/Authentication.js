@@ -5,37 +5,18 @@ import LoggedInItemsForMenu from "./LoggedInItemsForMenu/LoggedInItemsForMenu";
 
 const Authentication = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-        colorsStyle: {},
-        mobileSearchBarOpen: false,
-    });
-
-    useEffect(() => {
-        setState({
-            ...state,
-            colorsStyle: {
-                backgroundColor: contextData.siteDesign.topBarBackgroundColor,
-                color: contextData.siteDesign.topBarTextColor
-            },
-            itemsColorStyle:{
-                backgroundColor: 'transparent',
-                color: contextData.siteDesign.topBarTextColor
-            }
-        })
-    }, [contextData.siteDesign]);
 
     const RenderAuthBtns = () => {
-        if (contextData.userData.username && !contextData.state.isMobile ) {
+        if (contextData.userData.username) {
             return (
                 <div className='auth-buttons'>
-                    <LoggedInItemsForMenu visible={!contextData.state.isMobile} colorsStyle={state.itemsColorStyle} position='topBar'/>
-
+                    <LoggedInItemsForMenu position='topBar'/>
                 </div>
             )
-        } else if (!contextData.userData.username && !contextData.state.isMobile ) {
+        } else if (!contextData.userData.username) {
             return (
                 <div className='auth-buttons'>
-                    <LoggedOutItemsMenu visible={!contextData.state.isMobile} colorsStyle={state.itemsColorStyle} position='topBar'/>
+                    <LoggedOutItemsMenu position='topBar'/>
                 </div>
             )
         } else return null
@@ -43,7 +24,7 @@ const Authentication = props => {
 
     return (
 
-            <RenderAuthBtns/>
+        <RenderAuthBtns/>
 
     );
 };

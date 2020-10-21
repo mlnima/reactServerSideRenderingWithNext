@@ -14,18 +14,18 @@ const LoggedInItemsForMenu = props => {
             return (
                 <Link href={`/profile?username=${contextData.userData.username}`}>
                     <a >
-                        <FontAwesomeIcon icon={faUser} className='logged-in-item-logo'/>
+                        <FontAwesomeIcon icon={faUser} className='svg-logo-small'/>
                     </a>
                 </Link>
             )
         } else return null
     }
 
-    if (contextData.userData.username && props.visible) {
+    if (contextData.userData.username ) {
         return (
             <div className='logged-in-items'>
                 <p  onClick={() => contextData.functions.logOutUser()}>
-                    <FontAwesomeIcon icon={faPowerOff} className='logged-in-item-logo' />
+                    <FontAwesomeIcon icon={faPowerOff} className=' svg-logo-small' />
                 </p>
                 <MyProfile/>
             </div>
