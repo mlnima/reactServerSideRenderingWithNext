@@ -3,7 +3,7 @@ import React from 'react';
 const Quality = props => {
 
     return (
-        <div className='Quality VideoInformationSection'>
+        <div className='quality VideoInformationSection'>
             <div className="title">
                 <p>Quality</p>
             </div>

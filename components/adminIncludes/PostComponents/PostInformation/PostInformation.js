@@ -36,7 +36,8 @@ const PostInformation = props => {
                                     title='Main thumbnail' rendering={true}/>
             <ImagePreview postData={props.postData}/>
             <IsInSlideShow {...props} onIsInSlideShowChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow } rendering={true}/>
-            <Quality {...props} rendering={props.postType==='video'} />
+
+            <Quality {...props} rendering={props.postData.postType==='video'} />
             <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={props.postData.postType==='video'} />
             <TextInput {...props} name='videoEmbedCode' rendering={props.postData.postType==='video'} />
             <TextAreaComponent {...props} name='videoScriptCode' rendering={props.postData.postType==='video'}/>

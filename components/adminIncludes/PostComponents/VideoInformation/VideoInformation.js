@@ -42,6 +42,7 @@ const VideoInformation = props => {
         return (
             <div className='VideoInformation admin-widget'>
                 <IsInSlideShow {...props} onIsInSlideShowChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow }/>
+                xx
                 <Quality {...props} />
                 <TextInputWithUploadBtn {...props} name='videoUrl' title='Video Url' />
                 {/*<VideoEmbedCode {...props} name='videoEmbedCode' />*/}
