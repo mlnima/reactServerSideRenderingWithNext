@@ -30,24 +30,27 @@ const PostInformation = props => {
         })
     };
 
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
     return (
         <div className='post-information  product-information admin-widget'>
-            <TextInputWithUploadBtn type='thumbnail' onChangeHandler={props.onChangeHandler} thumbnailsType={true} postData={props.postData}  name='mainThumbnail'
+            <TextInputWithUploadBtn type='thumbnail' onChangeHandler={props.onChangeHandler} thumbnailsType={true} postData={props.postData} name='mainThumbnail'
                                     title='Main thumbnail' rendering={true}/>
             <ImagePreview postData={props.postData}/>
-            <IsInSlideShow {...props} onIsInSlideShowChangeHandler={ onIsInSlideShowChangeHandler } isChecked={ state.inSlideShow } rendering={true}/>
+            <IsInSlideShow {...props} onIsInSlideShowChangeHandler={onIsInSlideShowChangeHandler} isChecked={state.inSlideShow} rendering={true}/>
 
-            <Quality {...props} rendering={props.postData.postType==='video'} />
-            <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={props.postData.postType==='video'} />
-            <TextInput {...props} name='videoEmbedCode' rendering={props.postData.postType==='video'} />
-            <TextAreaComponent {...props} name='videoScriptCode' rendering={props.postData.postType==='video'}/>
-            <RenderIframe {...props} rendering={props.postData.postType==='video'}/>
-            <Duration {...props} onDurationChangeHandler={ onDurationChangeHandler } rendering={props.postData.postType==='video'}/>
-            <RatingAndViews {...props} name={ 'views' } value={state.views||0} rendering={true} />
-            <RatingAndViews {...props} name={ 'likes' } value={state.likes||0} rendering={true} />
-            <RatingAndViews {...props} name={ 'disLikes' } value={state.disLikes||0} rendering={true} />
-            <TextInputWithUploadBtn {...props} name='VideoTrailerUrl' title='Video Trailer Url' rendering={props.postData.postType==='video'} />
-            <TextInput {...props} name='downloadLink' title='Download Link' rendering={props.postData.postType==='video'} />
+            <Quality {...props} rendering={props.postData.postType === 'video'}/>
+            <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={props.postData.postType === 'video'}/>
+            <TextInput {...props} name='videoEmbedCode' rendering={props.postData.postType === 'video'}/>
+            <TextAreaComponent {...props} name='videoScriptCode' rendering={props.postData.postType === 'video'}/>
+            <RenderIframe {...props} rendering={props.postData.postType === 'video'}/>
+            <Duration {...props} onDurationChangeHandler={onDurationChangeHandler} rendering={props.postData.postType === 'video'}/>
+            <RatingAndViews {...props} name={'views'} value={props.postData.views || 0} rendering={true}/>
+            <RatingAndViews {...props} name={'likes'} value={props.postData.likes || 0} rendering={true}/>
+            <RatingAndViews {...props} name={'disLikes'} value={props.postData.disLikes || 0} rendering={true}/>
+            <TextInputWithUploadBtn {...props} name='VideoTrailerUrl' title='Video Trailer Url' rendering={props.postData.postType === 'video'}/>
+            <TextInput {...props} name='downloadLink' title='Download Link' rendering={props.postData.postType === 'video'}/>
         </div>
     );
 };
