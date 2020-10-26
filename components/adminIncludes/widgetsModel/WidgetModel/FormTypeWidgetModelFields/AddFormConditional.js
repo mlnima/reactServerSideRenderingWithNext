@@ -37,7 +37,7 @@ const AddFormConditional = props => {
                     ...props.widgetData.data.formData,
                     formFields: [...props.widgetData.data.formData.formFields, {
                         ...fieldData,
-                        fieldIndex : props.state.formFields.length
+                        fieldIndex : props.widgetData.data.formData.formFields.length
                     }]
                 }
             }

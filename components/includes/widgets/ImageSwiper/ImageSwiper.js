@@ -17,20 +17,20 @@ const ImageSwiper = props => {
     });
 
     //
-    // useEffect(() => {
-    //     console.log(state)
-    // }, [state]);
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     useEffect(() => {
         if (props.imageSwiperData) {
             setState({
                 ...state,
                 imageSwiperData: props.imageSwiperData,
-                spaceBetween:contextData.state.isMobile ? props.imageSwiperSpaceBetweenMobile || 0: props.imageSwiperSpaceBetweenDeskTop || 0,
-                slidesPerView:contextData.state.isMobile ? props.imageSwiperSpaceBetweenMobile || 1: props.imageSwiperSpaceBetweenDeskTop || 3
+                spaceBetween:window.innerWidth >= 768 ? props.imageSwiperSpaceBetweenDesktop || 0 : props.imageSwiperSpaceBetweenMobile || 1,
+                slidesPerView:window.innerWidth >= 768 ? props.imageSwiperAmountDesktop || 3 : props.imageSwiperAmountMobile || 1,
             })
         }
-    }, [props.imageSwiperData,contextData.state.isMobile]);
+    }, [props.imageSwiperData]);
 
 
     const renderSlides = state.imageSwiperData.map(imageData => {

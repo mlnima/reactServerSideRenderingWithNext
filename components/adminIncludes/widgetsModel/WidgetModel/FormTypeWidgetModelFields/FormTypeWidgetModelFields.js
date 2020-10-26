@@ -29,86 +29,14 @@ const FormTypeWidgetModelFields = props => {
 
         })
     }
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [props]);
 
-    const onDeleteHandler = name => {
-        const newData = props.widgetData.data.formData.formFields.filter(i => i.fieldName !== name)
-        props.setWidgetData({
-            ...props.widgetData,
-            data: {
-                ...props.widgetData.data,
-                formData: {
-                    ...props.widgetData.data.formData,
-                    formFields: newData
-                }
-            }
-
-        })
-    }
 
     const formFieldsSorted = (props.widgetData.data.formData.formFields || []).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
 
 
-
     const renderExistingFields = formFieldsSorted.map(field => {
-        // const fieldIndexPlus = plus => {
-        //     const actionOnIndexValue = plus ? -1 : 1
-        //     const updatedFieldData = {...field, fieldIndex: field.fieldIndex + actionOnIndexValue}
-        //
-        //     const newFieldsData = (props.widgetData.data.formData.formFields || []).map(fieldToUpdate => {
-        //         if (fieldToUpdate.fieldName === updatedFieldData.fieldName ) {
-        //             return updatedFieldData
-        //         } else return fieldToUpdate
-        //     })
-        //
-        //     const newWidgetDataToSave = {
-        //         ...props.widgetData,
-        //         data: {
-        //             ...props.widgetData.data,
-        //             formData: {
-        //                 ...props.widgetData.data.formData,
-        //                 formFields: newFieldsData
-        //             }
-        //         }
-        //     }
-        //   //  console.log(newWidgetDataToSave.data.formData.formFields)
-        //     console.log(newFieldsData)
-        //     // updateWidgets(newWidgetDataToSave).then(() => {
-        //     //     getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-        //     //         // console.log(res.data)
-        //     //         contextData.dispatchWidgetsSettings({
-        //     //             widgets: [...res.data.widgets]
-        //     //         })
-        //     //
-        //     //     })
-        //     // })
-        //
-        //     // console.log(newFieldsData)
-        //     // props.setWidgetData({
-        //     //     ...props.widgetData,
-        //     //     data: {
-        //     //         ...props.widgetData.data,
-        //     //         formData: {
-        //     //             ...props.widgetData.data.formData,
-        //     //             formFields: newFieldsData
-        //     //         }
-        //     //     }
-        //     // })
-        //
-        // }
         return (
             <FieldPreview field={field} {...props}/>
-            // <div className='form-item-view'>
-            //     <div className='field-index-control'>
-            //         <button onClick={() => fieldIndexPlus(true)}><FontAwesomeIcon icon={faArrowUp} className='navigation-mobile-button-logo'/></button>
-            //         <button onClick={() => fieldIndexPlus(false)}><FontAwesomeIcon icon={faArrowDown} className='navigation-mobile-button-logo'/></button>
-            //         <p>{field.fieldName + ' ' + field.fieldType}</p>
-            //     </div>
-            //
-            //     <button onClick={() => onDeleteHandler(field.fieldName)}>Delete</button>
-            // </div>
         )
     })
 
@@ -129,6 +57,7 @@ const FormTypeWidgetModelFields = props => {
             <DelayInput name='submitButtonText' type='text' value={props.widgetData.data.formData.submitButtonText}
                         delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
             <AddFormConditional state={state} setState={setState} {...props} />
+            <h4>Edit Existing Fields</h4>
             {renderExistingFields}
         </>
     );

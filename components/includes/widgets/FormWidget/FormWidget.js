@@ -12,8 +12,6 @@ const FormWidget = props => {
     })
     const [submit, setSubmit] = useState(false)
 
-
-
     useEffect(() => {
         if (props.id) {
             setState({
@@ -22,6 +20,7 @@ const FormWidget = props => {
                 formName: props.formData.formName
             })
         }
+        console.log(props)
     }, [props]);
 
 
@@ -46,7 +45,8 @@ const FormWidget = props => {
         })
     }
 
-    const renderFields = (props.formData.formFields || []).map(field => {
+
+    const renderFields = (props.formData.formFields.sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || []).map(field => {
         if (field.fieldType === 'textarea') {
             return (
                 <div className='form-widget-field' key={(props.formData.formFields || []).indexOf(field)}>
@@ -63,7 +63,6 @@ const FormWidget = props => {
             )
         }
     })
-//afterSubmitMessage
 
     if (submit){
         return (
