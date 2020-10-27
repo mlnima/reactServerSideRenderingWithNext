@@ -1,7 +1,8 @@
-import React from 'react';
+import React,{useContext} from 'react';
+import {AppContext} from "../../../../../context/AppContext";
 
 const PostTitle = props => {
-
+    const contextData = useContext(AppContext);
     if (props.editMode) {
         return (
             <div className='edit-mode'>

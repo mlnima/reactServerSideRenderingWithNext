@@ -87,7 +87,7 @@ const Widget = props => {
     if (conditionalWidgetRenderer(props.data.deviceTypeToRender, props.data.languageToRender, contextData.state.activeLanguage)) {
         return (
 
-            <StyledDiv customStyles={props.data.customStyles ? props.data.customStyles : ''} className={'widget ' + state.extraClassName}>
+            <StyledDiv customStyles={props.data.customStyles ? props.data.customStyles : ''} className={'widget ' + (state.extraClassName ?state.extraClassName :'') }>
                 <WidgetHeader {...props.data}/>
                 <WidgetText {...props.data}/>
                 <RenderComponent/>

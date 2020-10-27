@@ -131,6 +131,7 @@ const settings = props => {
                             <p>Default new Post Type:</p>
                             <select name='defaultPostType' value={state.defaultPostType} onChange={e => onChangeHandler(e)}>
                                 <option value='video'>Video</option>
+                                <option value='standard'>Standard</option>
                                 <option value='product'>Product</option>
                                 <option value='food'>Food</option>
                                 <option value='article'>Article</option>
