@@ -7,6 +7,7 @@ import SiteSettingSetter from "../../components/includes/SiteSettingsSetter/Site
 import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import styled from "styled-components";
 import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
+
 let StyledDiv = styled.div`${props => props.stylesData}`
 const page = props => {
     const [state, setState] = useState({});
@@ -17,12 +18,12 @@ const page = props => {
     return (
         <AppLayout>
             <SiteSettingSetter {...props}/>
-            <StyledDiv stylesData={state.postPageStyle} className={props.pageInfo.sidebar ? 'post withSidebar' : 'post withOutSidebar'}>
+            <StyledDiv  className={props.pageInfo.sidebar ? 'post withSidebar' : 'post withOutSidebar'}>
 
-            <div  className="main">
-                <WidgetsRenderer widgets={props.widgets} position={props.pageInfo.pageName}/>
-            </div>
-                <Sidebar key={props.pageInfo.pageName+'Sidebar'} isActive={props.pageInfo.sidebar} widgets={props.widgets} position={props.pageInfo.pageName+'Sidebar'}/>
+                <div className="main">
+                    <WidgetsRenderer widgets={props.widgets} position={props.pageInfo.pageName}/>
+                </div>
+                <Sidebar key={props.pageInfo.pageName + 'Sidebar'} isActive={props.pageInfo.sidebar} widgets={props.widgets} position={props.pageInfo.pageName + 'Sidebar'}/>
 
             </StyledDiv>
         </AppLayout>
@@ -40,7 +41,7 @@ page.getInitialProps = async ({pathname, query, req, res, err}) => {
     let settings;
     const pageData = await getPageData({pageName: query.pageName}, domainName)
     pageInfo = pageData.data ? pageData.data.pageData : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName,query.pageName+'Sidebar', 'footer', 'header', 'underPost', 'topBar', 'navigation']}, domainName, true, query.pageName)
+    const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName, query.pageName + 'Sidebar', 'footer', 'header', 'underPost', 'topBar', 'navigation']}, domainName, true, query.pageName)
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, query.pageName)
     settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
