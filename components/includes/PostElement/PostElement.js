@@ -77,24 +77,24 @@ const PostElement = props => {
         if (props.state) {
             switch (props.state.postType) {
                 case 'video':
+                case 'product':
+                case 'standard':
+                case 'article':
                     return (
                         <span ref={bottomRight} className='bottom-right'>
                             <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
                             <span className='view-count value-next-icon'>{props.state.views}</span>
                         </span>
                     )
-                case 'product':
-                    return (
-                        <span ref={bottomRight} className='bottom-right'>
-
-                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
-
-                           <span className='view-count value-next-icon'> {props.state.views}</span>
-
-                        </span>
-                    )
+                // case 'product':
+                //     return (
+                //         <span ref={bottomRight} className='bottom-right'>
+                //             <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
+                //            <span className='view-count value-next-icon'> {props.state.views}</span>
+                //         </span>
+                //     )
                 default :
-                    break
+                    return null
             }
         } else return null
 
@@ -120,7 +120,7 @@ const PostElement = props => {
                         </span>
                     )
                 default :
-                    break
+                    return null
             }
         } else return null
 
@@ -136,7 +136,7 @@ const PostElement = props => {
                 case 'product':
                     return null
                 default :
-                    break
+                    return null
             }
         } else return null
 

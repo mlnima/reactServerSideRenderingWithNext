@@ -11,10 +11,13 @@ const PostDescription = props => {
 
 
     useEffect(() => {
-        setState({
-            ...state,
-            description: props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description
-        })
+        if (props.post.description){
+            setState({
+                ...state,
+                description: props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description
+            })
+        }
+
     }, [props]);
 
 
