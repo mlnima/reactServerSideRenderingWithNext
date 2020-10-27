@@ -3,6 +3,33 @@ import {AppContext} from "../../../../../context/AppContext";
 
 const PostDescription = props => {
     const contextData = useContext(AppContext);
+    const descriptionElement = useRef(null);
+
+    const [state, setState] = useState({
+        description: ''
+    })
+
+
+    useEffect(() => {
+        setState({
+            ...state,
+            description: props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description
+        })
+    }, [props]);
+
+
+    useEffect(() => {
+        if (descriptionElement){
+
+            if (state.description.includes('</')){
+                descriptionElement.current.innerHTML = state.description
+            }else {
+                descriptionElement.current.innerHTML = `<p>${state.description}</p>`
+            }
+
+        }
+    }, [state]);
+
 
     if (props.editMode) {
         return (
@@ -13,8 +40,7 @@ const PostDescription = props => {
         )
     } else {
         return (
-            <p style={{color: contextData.siteDesign.postDescriptionTextColorColor || 'white'}}
-               className="description">{props.post.translations ? props.post.translations[contextData.state.activeLanguage] ? props.post.translations[contextData.state.activeLanguage].description || props.post.description : props.post.description : props.post.description}</p>
+            <div ref={descriptionElement} className="description"/>
         )
     }
 };
