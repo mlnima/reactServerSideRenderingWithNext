@@ -220,12 +220,25 @@ const AppProvider = props => {
             };
             return await axios.post(window.location.origin + '/api/v1/settings/clearCaches', body)
         },
+        getCheckOutData: ()=>{
+            if (localStorage){
+                if (localStorage.checkOutItems){
+                    const items = JSON.parse(localStorage.checkOutItems)
+                    setCheckOutData({
+                        ...checkOutData,
+                        items
+                    })
+                }
+            }
+        }
 
 
     });
 
     useEffect(() => {
         functions.getAndSetUserInfo()
+        functions.getCheckOutData()
+
     }, []);
 
 

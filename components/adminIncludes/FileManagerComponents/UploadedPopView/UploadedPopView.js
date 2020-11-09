@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { fileTypeDetector } from '../../../../_variables/_variables';
-import { readFile } from '../../../../_variables/_ajaxFilesVariables'
+import { readFile,deleteFile } from '../../../../_variables/_ajaxFilesVariables'
 
 const UploadedPopView = props => {
     const [ state, setState ] = useState({
@@ -22,6 +22,16 @@ const UploadedPopView = props => {
             ...props.state,
             clickedItem: '',
             path: props.state.prevPath
+        })
+    }
+
+    const onDeleteHandler = filePath=>{
+        deleteFile(filePath)
+        props.setState({
+            ...props.state,
+            clickedItem: '',
+            path: props.state.prevPath,
+            lastUpdate:Date.now()
         })
     }
 
@@ -86,6 +96,7 @@ const UploadedPopView = props => {
                 <button className='closeBtn' onClick={ () => onCloseHandler() }>X</button>
                 <div className='gallery-pop-view-content' style={ state.lightStyle }>
                     <WhatToRender fileType={ fileType }/>
+                    <button onClick={()=>onDeleteHandler(props.state.clickedItem)}>Delete</button>
                 </div>
             </div>
         );

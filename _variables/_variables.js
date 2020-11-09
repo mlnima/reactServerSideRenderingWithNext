@@ -202,3 +202,7 @@ export const jsonExporter = (data,fileName)=>{
 
     }
 }
+
+export const ratingSetter = type =>{
+
+}

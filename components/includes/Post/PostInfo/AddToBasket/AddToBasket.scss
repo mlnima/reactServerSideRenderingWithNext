@@ -1,0 +1,16 @@
+.add-item-to-basket{
+  display: flex;
+  max-width: 300px;
+  align-items: center;
+  .add-item-to-basket-count{
+    border: none;
+    padding: 6px;
+    width: 30%;
+
+  }
+  .add-item-to-basket-action{
+   border: none;
+   height: 100%;
+   width: 50px;
+  }
+}

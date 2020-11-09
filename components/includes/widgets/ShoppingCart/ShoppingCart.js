@@ -10,7 +10,7 @@ const ShoppingCart = props => {
     return (
             <Link href='/checkout'>
                 <a className='shopping-card-link'>
-                    <FontAwesomeIcon icon={faShoppingCart} className='shopping-card-logo svg-logo-medium' style={props.colorsStyle}/>
+                    <FontAwesomeIcon icon={faShoppingCart} className='shopping-card-logo svg-logo-medium' />
                     <p className='shopping-card-number'>{contextData.checkOutData.items.length }</p>
                 </a>
             </Link>

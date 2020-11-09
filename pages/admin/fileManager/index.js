@@ -25,12 +25,13 @@ const fileManager = props => {
         message: '',
         report: '',
         inputBox: false,
-        newItemName: ''
+        newItemName: '',
+        lastUpdate:Date.now()
     });
 
     useEffect(() => {
         setData()
-    }, [ state.path ]);
+    }, [ state.path,state.lastUpdate ]);
 
     const setData = () => {
         contextData.dispatchState({

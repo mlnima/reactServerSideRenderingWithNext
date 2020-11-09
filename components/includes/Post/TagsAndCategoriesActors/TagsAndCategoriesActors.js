@@ -20,7 +20,7 @@ const TagsAndCategoriesActors = props => {
     })
 
     useEffect(() => {
-        console.log(contextData.siteDesign)
+
         setStyles({
             ...styles,
             color: contextData.siteDesign.postMetaDataTextColor || 'white',

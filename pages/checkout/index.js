@@ -5,11 +5,14 @@ import {getMultipleSetting, getMultipleWidgetWithData} from "../../_variables/aj
 import dataDecoder from "../../server/tools/dataDecoder";
 import contact from "../contact";
 import SiteSettingSetter from "../../components/includes/SiteSettingsSetter/SiteSettingsSetter";
+import {AppContext} from "../../context/AppContext";
 
 const checkout = props => {
+    const contextData = useContext(AppContext);
     const [state, setState] = useState({});
     useEffect(() => {
-    }, []);
+        console.log(contextData.checkOutData)
+    }, [contextData]);
     return (
         <AppLayout>
             <SiteSettingSetter  {...props} />

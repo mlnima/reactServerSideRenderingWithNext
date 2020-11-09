@@ -20,9 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/AddToBasket/AddToBasket.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/_ajaxFilesVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_ajaxFilesVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/_variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_variables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/AddToBasket/AddToBasket.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/AddToBasket/AddToBasket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/RatingButtons/RatingButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/AppContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/fileManager/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/fileManager/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/checkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/fileManagerControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/fileManagerControllers.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -60,19 +74,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\Post\PostInfo" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\widgetsArea" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\Widget" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents\PostInformation" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\Post\PostInfo" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\widgetsArea" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\Widget" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.setup.js">
@@ -459,7 +473,16 @@
       <workItem from="1603320193447" duration="915000" />
       <workItem from="1603368702306" duration="5823000" />
       <workItem from="1603750061165" duration="4830000" />
-      <workItem from="1603838591345" duration="1806000" />
+      <workItem from="1603838591345" duration="2150000" />
+      <workItem from="1603880775208" duration="661000" />
+      <workItem from="1603988734306" duration="1194000" />
+      <workItem from="1604069630338" duration="5606000" />
+      <workItem from="1604354786103" duration="1744000" />
+      <workItem from="1604402152197" duration="1283000" />
+      <workItem from="1604441316008" duration="5539000" />
+      <workItem from="1604514300094" duration="1189000" />
+      <workItem from="1604583439421" duration="595000" />
+      <workItem from="1604949829895" duration="2267000" />
     </task>
     <servers />
   </component>
@@ -504,8 +527,8 @@
       <screen x="-758" y="2160" width="4096" height="1152" />
     </state>
     <state x="-1498" y="2160" key="FileDocumentManager.FileCacheConflict/0.0.2560.1440/-758.2160.4096.1152@-758.2160.4096.1152" timestamp="1600424539353" />
-    <state width="2466" height="272" key="GridCell.Tab.0.bottom" timestamp="1603839161479">
-      <screen x="-642" y="2160" width="4096" height="1152" />
+    <state width="2408" height="212" key="GridCell.Tab.0.bottom" timestamp="1604069929882">
+      <screen x="-725" y="2160" width="4096" height="1152" />
     </state>
     <state width="2507" height="307" key="GridCell.Tab.0.bottom/-582.2160.4096.1152/4538.1422.2560.1440/0.0.2194.1234@-582.2160.4096.1152" timestamp="1596400765729" />
     <state width="3461" height="248" key="GridCell.Tab.0.bottom/-597.2160.5120.1440/0.0.2194.1234@-597.2160.5120.1440" timestamp="1597012495833" />
@@ -514,12 +537,13 @@
     <state width="2903" height="49" key="GridCell.Tab.0.bottom/0.0.2341.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598392213142" />
     <state width="2322" height="298" key="GridCell.Tab.0.bottom/0.0.2560.1409/-758.2160.4096.1122@-758.2160.4096.1122" timestamp="1600330994609" />
     <state width="2466" height="272" key="GridCell.Tab.0.bottom/0.0.2560.1440/-642.2160.4096.1152@-642.2160.4096.1152" timestamp="1603839161479" />
+    <state width="2408" height="212" key="GridCell.Tab.0.bottom/0.0.2560.1440/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1604069929882" />
     <state width="2883" height="170" key="GridCell.Tab.0.bottom/0.0.2560.1440/-758.2160.4096.1152@-758.2160.4096.1152" timestamp="1603275496829" />
     <state width="2682" height="199" key="GridCell.Tab.0.bottom/0.0.4096.1152/758.-2160.2560.1440@0.0.4096.1152" timestamp="1599122622330" />
     <state width="3028" height="117" key="GridCell.Tab.0.bottom/0.0.4096.1152/758.-2160.2731.1440@0.0.4096.1152" timestamp="1599343350860" />
     <state width="2812" height="32" key="GridCell.Tab.0.bottom/496.-2160.2560.1440/0.0.4096.1152@0.0.4096.1152" timestamp="1598899995380" />
-    <state width="2466" height="272" key="GridCell.Tab.0.center" timestamp="1603839161479">
-      <screen x="-642" y="2160" width="4096" height="1152" />
+    <state width="2408" height="212" key="GridCell.Tab.0.center" timestamp="1604069929882">
+      <screen x="-725" y="2160" width="4096" height="1152" />
     </state>
     <state width="2507" height="307" key="GridCell.Tab.0.center/-582.2160.4096.1152/4538.1422.2560.1440/0.0.2194.1234@-582.2160.4096.1152" timestamp="1596400765728" />
     <state width="3461" height="248" key="GridCell.Tab.0.center/-597.2160.5120.1440/0.0.2194.1234@-597.2160.5120.1440" timestamp="1597012495832" />
@@ -528,12 +552,13 @@
     <state width="2903" height="49" key="GridCell.Tab.0.center/0.0.2341.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598392213141" />
     <state width="2322" height="298" key="GridCell.Tab.0.center/0.0.2560.1409/-758.2160.4096.1122@-758.2160.4096.1122" timestamp="1600330994609" />
     <state width="2466" height="272" key="GridCell.Tab.0.center/0.0.2560.1440/-642.2160.4096.1152@-642.2160.4096.1152" timestamp="1603839161479" />
+    <state width="2408" height="212" key="GridCell.Tab.0.center/0.0.2560.1440/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1604069929882" />
     <state width="2883" height="170" key="GridCell.Tab.0.center/0.0.2560.1440/-758.2160.4096.1152@-758.2160.4096.1152" timestamp="1603275496828" />
     <state width="2682" height="199" key="GridCell.Tab.0.center/0.0.4096.1152/758.-2160.2560.1440@0.0.4096.1152" timestamp="1599122622330" />
     <state width="3028" height="117" key="GridCell.Tab.0.center/0.0.4096.1152/758.-2160.2731.1440@0.0.4096.1152" timestamp="1599343350859" />
     <state width="2812" height="32" key="GridCell.Tab.0.center/496.-2160.2560.1440/0.0.4096.1152@0.0.4096.1152" timestamp="1598899995380" />
-    <state width="2466" height="272" key="GridCell.Tab.0.left" timestamp="1603839161478">
-      <screen x="-642" y="2160" width="4096" height="1152" />
+    <state width="2408" height="212" key="GridCell.Tab.0.left" timestamp="1604069929881">
+      <screen x="-725" y="2160" width="4096" height="1152" />
     </state>
     <state width="2507" height="307" key="GridCell.Tab.0.left/-582.2160.4096.1152/4538.1422.2560.1440/0.0.2194.1234@-582.2160.4096.1152" timestamp="1596400765728" />
     <state width="3461" height="248" key="GridCell.Tab.0.left/-597.2160.5120.1440/0.0.2194.1234@-597.2160.5120.1440" timestamp="1597012495832" />
@@ -542,12 +567,13 @@
     <state width="2903" height="49" key="GridCell.Tab.0.left/0.0.2341.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598392213141" />
     <state width="2322" height="298" key="GridCell.Tab.0.left/0.0.2560.1409/-758.2160.4096.1122@-758.2160.4096.1122" timestamp="1600330994609" />
     <state width="2466" height="272" key="GridCell.Tab.0.left/0.0.2560.1440/-642.2160.4096.1152@-642.2160.4096.1152" timestamp="1603839161478" />
+    <state width="2408" height="212" key="GridCell.Tab.0.left/0.0.2560.1440/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1604069929881" />
     <state width="2883" height="170" key="GridCell.Tab.0.left/0.0.2560.1440/-758.2160.4096.1152@-758.2160.4096.1152" timestamp="1603275496828" />
     <state width="2682" height="199" key="GridCell.Tab.0.left/0.0.4096.1152/758.-2160.2560.1440@0.0.4096.1152" timestamp="1599122622330" />
     <state width="3028" height="117" key="GridCell.Tab.0.left/0.0.4096.1152/758.-2160.2731.1440@0.0.4096.1152" timestamp="1599343350859" />
     <state width="2812" height="32" key="GridCell.Tab.0.left/496.-2160.2560.1440/0.0.4096.1152@0.0.4096.1152" timestamp="1598899995379" />
-    <state width="2466" height="272" key="GridCell.Tab.0.right" timestamp="1603839161479">
-      <screen x="-642" y="2160" width="4096" height="1152" />
+    <state width="2408" height="212" key="GridCell.Tab.0.right" timestamp="1604069929882">
+      <screen x="-725" y="2160" width="4096" height="1152" />
     </state>
     <state width="2507" height="307" key="GridCell.Tab.0.right/-582.2160.4096.1152/4538.1422.2560.1440/0.0.2194.1234@-582.2160.4096.1152" timestamp="1596400765729" />
     <state width="3461" height="248" key="GridCell.Tab.0.right/-597.2160.5120.1440/0.0.2194.1234@-597.2160.5120.1440" timestamp="1597012495832" />
@@ -556,6 +582,7 @@
     <state width="2903" height="49" key="GridCell.Tab.0.right/0.0.2341.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598392213142" />
     <state width="2322" height="298" key="GridCell.Tab.0.right/0.0.2560.1409/-758.2160.4096.1122@-758.2160.4096.1122" timestamp="1600330994609" />
     <state width="2466" height="272" key="GridCell.Tab.0.right/0.0.2560.1440/-642.2160.4096.1152@-642.2160.4096.1152" timestamp="1603839161479" />
+    <state width="2408" height="212" key="GridCell.Tab.0.right/0.0.2560.1440/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1604069929882" />
     <state width="2883" height="170" key="GridCell.Tab.0.right/0.0.2560.1440/-758.2160.4096.1152@-758.2160.4096.1152" timestamp="1603275496829" />
     <state width="2682" height="199" key="GridCell.Tab.0.right/0.0.4096.1152/758.-2160.2560.1440@0.0.4096.1152" timestamp="1599122622330" />
     <state width="3028" height="117" key="GridCell.Tab.0.right/0.0.4096.1152/758.-2160.2731.1440@0.0.4096.1152" timestamp="1599343350859" />
@@ -594,7 +621,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/admin/fileManager/index.js</url>
-          <line>30</line>
+          <line>31</line>
           <option name="timeStamp" value="11" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -651,7 +678,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/controllers/fileManagerControllers.js</url>
-          <line>120</line>
+          <line>133</line>
           <option name="timeStamp" value="26" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

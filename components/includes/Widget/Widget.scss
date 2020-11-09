@@ -2,10 +2,6 @@
 
 .widget {
 
-  //max-width: 100vw;
-  //width: 100%;
-  //color: $light100;
-
   .Posts {
     .smallPostsContent {
       grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));

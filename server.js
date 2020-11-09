@@ -286,6 +286,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/settings/fileManagerControllers-readFile', (req, res) => {
         fileManagerControllers.readFile(req, res)
     });
+    server.post('/api/v1/settings/fileManagerControllers-deleteFile', (req, res) => {
+        fileManagerControllers.deleteFile(req, res)
+    });
     server.post('/api/v1/settings/fileManagerControllers-uploadFile', (req, res) => {
         fileManagerControllers.uploadFile(req, res)
     });

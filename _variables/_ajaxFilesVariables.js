@@ -22,7 +22,7 @@ export const deleteFile = (filePath)=>{
         filePath,
         token: localStorage.wt
     };
-    return axios.post(window.location.origin +'/server/files/admin-deleteFile',body)
+    return axios.post(window.location.origin +'/api/v1/settings/fileManagerControllers-deleteFile',body)
 };
 
 export const actionOnFiles = (_what,clickedItems,_do,pathTo)=>{

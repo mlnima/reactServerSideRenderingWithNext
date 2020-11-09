@@ -2,25 +2,41 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartPlus, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {AppContext} from "../../../../../context/AppContext";
+import './AddToBasket.scss'
 
 
 const AddToBasket = props => {
     const contextData = useContext(AppContext);
+    const countInput = useRef(null)
+    const [count,setCount]=useState(1)
 
-    const onAddToBasketHandler = () => {
+    const onAddToBasketHandler = e => {
+        e.preventDefault()
         if (props.productId) {
-            contextData.setCheckOutData({
-                ...contextData.checkOutData,
-                items: [...new Set([...contextData.checkOutData.items, props.productId])]
-            })
+            countInput.current.style.backgroundColor = 'white'
+            if (count>0){
+                const items= [...contextData.checkOutData.items, {
+                    productId:props.productId,
+                    count,
+                    date:Date.now()
+                }]
+                contextData.setCheckOutData({
+                    ...contextData.checkOutData,
+                    items
+                })
+                localStorage.setItem('checkOutItems',JSON.stringify(items))
+            }else{
+                countInput.current.style.backgroundColor = 'red'
+            }
         }
     }
 
     if (props.render) {
         return (
-            <div className='action-wide-button'>
-                <button onClick={onAddToBasketHandler}><FontAwesomeIcon icon={faCartPlus} className='svg-logo-medium'/></button>
-            </div>
+            <form className='add-item-to-basket' onSubmit={e=>onAddToBasketHandler(e)}>
+                <input ref={countInput}  className='add-item-to-basket-count' type='number' value={count} onChange={e=>setCount(e.target.value)}/>
+                <button onClick={onAddToBasketHandler} className='add-item-to-basket-action'><FontAwesomeIcon icon={faCartPlus} className='svg-logo-medium '/></button>
+            </form>
         );
     } else return null
 
