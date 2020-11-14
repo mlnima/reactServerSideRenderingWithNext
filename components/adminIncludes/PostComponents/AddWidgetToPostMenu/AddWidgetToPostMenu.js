@@ -1,0 +1,34 @@
+import React, {useEffect, useState, useContext, useRef} from 'react';
+import AddWidgetToPostMenuItem from "./AddWidgetToPostMenuItem";
+import AddWidgetWithPositionMenu from "../../widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu";
+
+const AddWidgetToPostMenu = props => {
+    const [state, setState] = useState({});
+    useEffect(() => {
+    }, []);
+
+
+
+    return (
+        <div className='add-widget-to-post-menu'>
+            <AddWidgetToPostMenuItem {...props} type='text' name='Text'/>
+            <AddWidgetToPostMenuItem {...props} type='textMedia' name='Text and Media'/>
+            <AddWidgetToPostMenuItem {...props} type='menu' name='Menu'/>
+            <AddWidgetToPostMenuItem {...props} type='linkTo' name='Link To'/>
+            <AddWidgetToPostMenuItem {...props} type='posts' name='Posts'/>
+            <AddWidgetToPostMenuItem {...props} type='media' name='Media'/>
+            <AddWidgetToPostMenuItem {...props} type='recentComments' name='Recent Comments'/>
+            <AddWidgetToPostMenuItem {...props} type='searchBar' name='Search'/>
+            <AddWidgetToPostMenuItem {...props} type='meta' name='Meta'/>
+            <AddWidgetToPostMenuItem {...props} type='logo' name='Logo'/>
+            <AddWidgetToPostMenuItem {...props} type='form' name='Form'/>
+            <AddWidgetToPostMenuItem {...props} type='shoppingCart' name='Shopping Cart'/>
+            <AddWidgetToPostMenuItem {...props} type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
+            <AddWidgetToPostMenuItem {...props} type='language' name='Language'/>
+            <AddWidgetToPostMenuItem {...props} type='authentication' name='Auth Buttons'/>
+            <AddWidgetToPostMenuItem {...props} type='imageSwiper' name='Image Swiper(slide Show)'/>
+            <AddWidgetToPostMenuItem {...props} type='postsSwiper' name='Post Swiper(slide Show)'/>
+        </div>
+    );
+};
+export default AddWidgetToPostMenu;

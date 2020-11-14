@@ -28,6 +28,7 @@ const postSchema =  new Schema({
     priceType: String,
     production: String,
     comments: Array,
+    widgets:Array,
     categories: [Schema.Types.ObjectID],
     actors: [Schema.Types.ObjectID],
     tags: [Schema.Types.ObjectID],
@@ -52,10 +53,12 @@ const postSchema =  new Schema({
         type:Date,
         default:Date.now()
     },
+    availableCount:Number,
     publishedDate:Date,
     premium: Boolean,
     inSlideShow: Boolean,
-    rating:String
+    rating:String,
+
 });
 
 module.exports = mongoose.model("post", postSchema);

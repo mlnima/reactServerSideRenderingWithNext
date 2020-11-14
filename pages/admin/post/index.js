@@ -19,6 +19,10 @@ import {getMultipleSetting} from '../../../_variables/ajaxVariables'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
 import {useRouter} from "next/router";
 import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
+import AddWidgetMenu from "../../../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu";
+import AddWidgetToPostMenu from "../../../components/adminIncludes/PostComponents/AddWidgetToPostMenu/AddWidgetToPostMenu";
+import {widgetModels} from '../../../components/adminIncludes/widgetsModel/AddWidgetMenu/models'
+import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
 
 const Index = props => {
     const contextData = useContext(AppContext);
@@ -148,7 +152,7 @@ const Index = props => {
     }
 
     useEffect(() => {
-        console.log(productInfo)
+        console.log(state)
     }, [state]);
 
     const onSaveHandler = async () => {
@@ -213,6 +217,23 @@ const Index = props => {
         }
     }
 
+    // const onAddWidgetToPostHandler = widgetType =>{
+    //        let newWidget = {
+    //            ...widgetModels,
+    //            type:widgetType
+    //        }
+    //     setState({
+    //         ...state,
+    //         widgets:state.widgets ? [...state.widgets,newWidget] :[newWidget]
+    //     })
+    // }
+
+
+    const renderWidgetEditors=(state.widgets || []).map(widgetEditorData=>{
+        return(
+            <WidgetModel widgetIndex={state.widgets ? state.widgets.length :0} isPost={true} key={(state.widgets || []).indexOf(widgetEditorData)} data={{data: widgetEditorData}} translationLanguages={siteIdentity.translationLanguages || []}/>
+        )
+    })
 
     return (
         <>
@@ -233,7 +254,7 @@ const Index = props => {
                         {/*<TextInputWithUploadBtn type='thumbnail' thumbnailsType={true} postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'*/}
                         {/*                        title='Main thumbnail'/>*/}
                         {/*<ImagePreview postData={state}/>*/}
-
+                        {renderWidgetEditors}
 
 
                         <ProductInformation
@@ -275,7 +296,7 @@ const Index = props => {
                                         component={RatingOption}
                                         title='Rating'
                                         onChangeHandler={onChangeHandler}/>
-
+                        <AddWidgetToPostMenu state={state} setState={setState}/>
 
                     </div>
 

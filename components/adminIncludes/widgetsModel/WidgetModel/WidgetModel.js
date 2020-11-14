@@ -33,16 +33,9 @@ const WidgetModel = props => {
         preview: false,
         activeEditingLanguage: 'default'
     })
-
-    //---
-
-    //--
-
     const [widgetData, setWidgetData] = useState({
         data: {}
     })
-
-
     const [textInputsData, setTextInputsData] = useState({
         title: '',
         redirectToTitle: '',
@@ -52,6 +45,31 @@ const WidgetModel = props => {
         headLine: '',
         text: '',
     })
+    useEffect(() => {
+        setWidgetData({
+            ...widgetData,
+            ...props.data,
+            widgetIndex:props.data.widgetIndex?props.data.widgetIndex:props.widgetIndex?props.widgetIndex:0
+        })
+
+        setTextInputsData({
+            ...textInputsData,
+            title: props.data.data.title,
+            redirectToTitle: props.data.data.redirectToTitle,
+            redirectLink: props.data.data.redirectLink,
+            translations: props.data.data.translations || {},
+            LogoText: props.data.data.LogoText || '',
+            headLine: props.data.data.headLine || '',
+            text: props.data.data.text || '',
+            languageToShowBesideDropDown: props.data.data.languageToShowBesideDropDown || 'Language',
+            pathURL: props.data.data.pathURL || '',
+            linkToText: props.data.data.linkToText || '',
+            textAlign: props.data.data.textAlign || 'center',
+            formFields: props.data.data.formFields || [],
+
+        })
+
+    }, [props]);
     const onChangeLanguageHandler = e => {
         setWidgetSettings({
             ...widgetSettings,
@@ -77,30 +95,6 @@ const WidgetModel = props => {
             })
         }
     }
-    useEffect(() => {
-        setWidgetData({
-            ...widgetData,
-            ...props.data,
-        })
-
-        setTextInputsData({
-            ...textInputsData,
-            title: props.data.data.title,
-            redirectToTitle: props.data.data.redirectToTitle,
-            redirectLink: props.data.data.redirectLink,
-            translations: props.data.data.translations || {},
-            LogoText: props.data.data.LogoText || '',
-            headLine: props.data.data.headLine || '',
-            text: props.data.data.text || '',
-            languageToShowBesideDropDown: props.data.data.languageToShowBesideDropDown || 'Language',
-            pathURL: props.data.data.pathURL || '',
-            linkToText: props.data.data.linkToText || '',
-            textAlign: props.data.data.textAlign || 'center',
-            formFields: props.data.data.formFields || [],
-
-        })
-
-    }, [props]);
 
     const languagesOptions = props.translationLanguages.map(lang => {
         return (
@@ -148,22 +142,26 @@ const WidgetModel = props => {
             ...widgetData,
             data: {
                 ...widgetData.data,
-                ...textInputsData
+                ...textInputsData,
+
             }
         }
         dataToSave.data.posts = []
         dataToSave.data.metaData = []
 
+        if (props.isPost){
 
-        updateWidgets(dataToSave).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-                console.log(res.data)
-                contextData.dispatchWidgetsSettings({
-                    widgets: [...res.data.widgets]
+        }else {
+            updateWidgets(dataToSave).then(() => {
+                getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+                    console.log(res.data)
+                    contextData.dispatchWidgetsSettings({
+                        widgets: [...res.data.widgets]
+                    })
+
                 })
-
             })
-        })
+        }
     };
     const onChangeHandler = e => {
         setWidgetData({

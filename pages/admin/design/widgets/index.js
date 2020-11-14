@@ -50,8 +50,12 @@ const HomePageWidgets = props => {
             const widgetData = {...widget, ...dataWithIndex}
 
             return (
-                <WidgetModel key={contextData.widgetsSettings.widgets.indexOf(widget)} data={widgetData}
-                             translationLanguages={siteIdentity.translationLanguages || []}/>
+                <WidgetModel
+                    key={contextData.widgetsSettings.widgets.indexOf(widget)}
+                    widgetId={widgetData._id}
+                    data={widgetData}
+                    translationLanguages={siteIdentity.translationLanguages || []}
+                />
             )
         })
         return (
