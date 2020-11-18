@@ -1,6 +1,8 @@
 import React, {useEffect, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
-import FA from "react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
+import './Meta.scss'
 
 const Meta = props => {
     let newItemsElement = useRef(null);
@@ -40,15 +42,10 @@ const Meta = props => {
     };
 
     const addedItems = props.postData[props.type].map(item => {
-        // console.log(item)
-        let icon = props.type === 'tags' ? 'tags'
-            : props.type === 'actors' ? 'star'
-                : props.type === 'categories' ? 'folder'
-                    : '';
         return (
             <div key={item.name + Date.now()} className='item'>
                 <p>{item.name}</p>
-                <button name={item.name} onClick={(e) => deleteItem(e)}><FA className='fontawesomeMedium' name='times'/>
+                <button name={item.name} onClick={(e) => deleteItem(e)}><FontAwesomeIcon icon={faTimes} className='post-element-info-logo'/>
                 </button>
             </div>
         )
@@ -62,7 +59,7 @@ const Meta = props => {
             <div className='PostCategoriesTagsActors'>
                 <form className="addNewTag" onSubmit={e => addNewItem(e)}>
                     <input ref={newItemsElement} type='text'/>
-                    <button className='addBtn' type='submit'> Add</button>
+                    <button className='addBtn' type='submit'> <FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></button>
                 </form>
                 <span className='small-info'>Separate tags with commas</span>
                 <div className="items">

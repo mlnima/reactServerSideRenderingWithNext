@@ -84,7 +84,7 @@ const ActionOnPost = props => {
 
 
     const onViewHandler = () => {
-        window.open('/post?id=' + props.postData._id, '_blank')
+        window.open('/post/' +props.postData.title +'?id='+ props.postData._id, '_blank')
     }
 
     return (

@@ -52,8 +52,9 @@ const HomePageWidgets = props => {
             return (
                 <WidgetModel
                     key={contextData.widgetsSettings.widgets.indexOf(widget)}
+                    isPost={false}
                     widgetId={widgetData._id}
-                    data={widgetData}
+                    data={widgetData.data}
                     translationLanguages={siteIdentity.translationLanguages || []}
                 />
             )

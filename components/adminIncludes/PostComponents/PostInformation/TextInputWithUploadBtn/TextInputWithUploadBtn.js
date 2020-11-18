@@ -1,7 +1,8 @@
 import React, {useRef, useEffect} from 'react';
 import {DelayInput} from 'react-delay-input';
 import UploadFileBtn from '../UploadFileBtn/uploadFileBtn'
-import {convertVariableNameToName} from '../../../../../_variables/_variables'
+import {convertVariableNameToName} from '../../../../../_variables/_variables';
+
 import './TextInputWithUploadBtn.scss'
 
 const TextInputWithUploadBtn = props => {
@@ -17,9 +18,7 @@ const TextInputWithUploadBtn = props => {
         props.onChangeHandler(e)
     }
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
     if (props.rendering) {
         return (
             <div className='text-input-with-upload-button post-information-section'>

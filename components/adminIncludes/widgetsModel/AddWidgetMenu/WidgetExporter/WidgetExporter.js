@@ -1,16 +1,10 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, { useContext} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
 
-const WidgetExporter = props => {
+const WidgetExporter = () => {
     const contextData = useContext(AppContext);
 
-    const [state, setState] = useState({});
-    useEffect(() => {
-    }, []);
-
-
     const exportAllWidgets=()=>{
-
         const data = contextData.widgetsSettings.widgets.map(widget=>{
             widget.data.posts =[]
             widget.data.metaData =[]

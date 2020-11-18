@@ -15,39 +15,25 @@ const Widget = props => {
         extraClassName: '',
         isMobile: true,
         navigationOpenStatus: true,
+        customStyles:''
     })
-    //
-    // useEffect(() => {
-    //     window.innerWidth >= 768 ?
-    //         setState({
-    //             ...state,
-    //             isMobile: false,
-    //         }) :
-    //         setState({
-    //             ...state,
-    //             isMobile: true,
-    //         })
-    // }, [props]);
-    //
-
 
     useEffect(() => {
         if ( window.innerWidth >= 768) {
             setState({
                 ...state,
                 extraClassName: props.data.extraClassName,
+                customStyles:props.data.customStyles ? props.data.customStyles : '',
                 isMobile: false,
             })
         }else if (window.innerWidth < 768){
             setState({
                 ...state,
                 isMobile: true,
+                customStyles:props.data.customStyles ? props.data.customStyles : '',
             })
         }
     }, [props]);
-
-
-
 
     const RenderComponent = () => {
         if (props.component) {
@@ -57,17 +43,7 @@ const Widget = props => {
         } else return null
     }
 
-
-
     const conditionalWidgetRenderer = (deviceType, languageToRender, activeLanguage) => {
-
-        // console.log(
-        //     props.data.name,
-        //     state.isMobile,
-        //     props.data.deviceTypeToRender,
-        //     props.data.languageToRender,
-        //     contextData.state.activeLanguage)
-
         if ((!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all')) {
             return true
         } else if ((deviceType === 'mobile' && state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all'||!languageToRender))) {
@@ -78,22 +54,15 @@ const Widget = props => {
             return true
         } else return false
     }
-    // if (
-    //     (!props.data.deviceTypeToRender && !props.data.languageToRender) || (props.data.deviceTypeToRender === 'all' || props.data.languageToRender === 'all') ||
-    //     (state.isMobile && props.data.deviceTypeToRender === 'mobile' && props.data.languageToRender === contextData.state.activeLanguage) ||
-    //     (!state.isMobile && props.data.deviceTypeToRender === 'desktop' && props.data.languageToRender === contextData.state.activeLanguage)
-    //
-    // )
+
     if (conditionalWidgetRenderer(props.data.deviceTypeToRender, props.data.languageToRender, contextData.state.activeLanguage)) {
         return (
-
-            <StyledDiv customStyles={props.data.customStyles ? props.data.customStyles : ''} className={'widget ' + (state.extraClassName ?state.extraClassName :'') }>
+            <StyledDiv customStyles={state.customStyles} className={'widget ' + (state.extraClassName ?state.extraClassName :'') }>
                 <WidgetHeader {...props.data}/>
                 <WidgetText {...props.data}/>
                 <RenderComponent/>
                 <WidgetFooter  {...props.data}/>
             </StyledDiv>
-
         );
     } else return null
 

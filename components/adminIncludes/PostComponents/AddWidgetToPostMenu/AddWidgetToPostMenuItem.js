@@ -3,8 +3,6 @@ import {widgetModels} from "../../widgetsModel/AddWidgetMenu/models";
 
 const AddWidgetToPostMenuItem = props => {
 
-
-
    const onClickHandler = () =>{
        let newWidget = {
            ...widgetModels,
@@ -16,8 +14,6 @@ const AddWidgetToPostMenuItem = props => {
            widgets:props.state.widgets ? [...props.state.widgets,newWidget] :[newWidget]
        })
    }
-
-
 
     return (
         <button onClick={onClickHandler} >{props.name}</button>

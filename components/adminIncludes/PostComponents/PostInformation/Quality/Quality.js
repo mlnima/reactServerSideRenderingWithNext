@@ -1,7 +1,7 @@
 import React from 'react';
 
 const Quality = props => {
-    console.log(props)
+
     if (props.rendering){
         return (
             <div className='post-information-section'>
@@ -25,7 +25,6 @@ const Quality = props => {
             </div>
         );
     }else return null
-
 
 };
 export default Quality;

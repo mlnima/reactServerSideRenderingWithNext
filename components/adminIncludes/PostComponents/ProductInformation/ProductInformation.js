@@ -9,9 +9,7 @@ const ProductInformation = props => {
         images: [],
         imageFromUrl: ''
     });
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
     useEffect(() => {
         setState({
             ...state,
@@ -87,33 +85,33 @@ const ProductInformation = props => {
     if (props.postData.postType === 'product') {
         return (
             <div className='product-information admin-widget'>
-                <p>Add Image From Url Or Upload a Image :</p>
-                <div className=' product-information-section product-information-add-image'>
-                    <input value={state.imageFromUrl}
-                           onChange={e => setState({...state, imageFromUrl: e.target.value})}/>
-                    <button onClick={() => onAddImageFromUrlHandler()}>Add</button>
-                    <input ref={uploadInputElement} type="file" style={{display: 'none'}}
-                           onChange={e => onUploadHandler(e)}/>
-                    <button onClick={() => uploadInputElement.current.click()}>Upload</button>
-                </div>
+                {/*<p>Add Image From Url Or Upload a Image :</p>*/}
+                {/*<div className=' product-information-section product-information-add-image'>*/}
+                {/*    <input value={state.imageFromUrl}*/}
+                {/*           onChange={e => setState({...state, imageFromUrl: e.target.value})}/>*/}
+                {/*    <button onClick={() => onAddImageFromUrlHandler()}>Add</button>*/}
+                {/*    <input ref={uploadInputElement} type="file" style={{display: 'none'}}*/}
+                {/*           onChange={e => onUploadHandler(e)}/>*/}
+                {/*    <button onClick={() => uploadInputElement.current.click()}>Upload</button>*/}
+                {/*</div>*/}
 
-                <div className='product-information-images-preview'>
-                    {renderImagesPreview}
-                </div>
-                <br/>
-                <div className='product-information-section'>
-                    <p>Price :</p>
-                    <input name='price' type='number' placeholder='Price' onChange={e => onChangeHandler(e)}
-                           value={props.productInfo.price}/>
-                    <select name='priceType' onChange={e => onChangeHandler(e)} value={props.productInfo.priceType}>
-                        <option value='negotiable'>Negotiable</option>
-                        <option value='last'>Last Price</option>
-                        <option value='giveAway'>Give Away</option>
-                    </select>
-                    <p>Currency :</p>
-                    <input name='currency' placeholder='currency' onChange={e => onChangeHandler(e)}
-                           value={props.productInfo.currency}/>
-                </div>
+                {/*<div className='product-information-images-preview'>*/}
+                {/*    {renderImagesPreview}*/}
+                {/*</div>*/}
+                {/*<br/>*/}
+                {/*<div className='product-information-section'>*/}
+                {/*    <p>Price :</p>*/}
+                {/*    <input name='price' type='number' placeholder='Price' onChange={e => onChangeHandler(e)}*/}
+                {/*           value={props.productInfo.price}/>*/}
+                {/*    <select name='priceType' onChange={e => onChangeHandler(e)} value={props.productInfo.priceType}>*/}
+                {/*        <option value='negotiable'>Negotiable</option>*/}
+                {/*        <option value='last'>Last Price</option>*/}
+                {/*        <option value='giveAway'>Give Away</option>*/}
+                {/*    </select>*/}
+                {/*    <p>Currency :</p>*/}
+                {/*    <input name='currency' placeholder='currency' onChange={e => onChangeHandler(e)}*/}
+                {/*           value={props.productInfo.currency}/>*/}
+                {/*</div>*/}
 
             </div>
         );

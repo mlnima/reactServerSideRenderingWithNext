@@ -1,14 +1,11 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import WidgetsRenderer from "../../../../includes/WidgetsRenderer/WidgetsRenderer";
 
 const WidgetPreview = props => {
-    const [state, setState] = useState({});
-    useEffect(() => {
-    }, []);
 
     if (props.preview){
         return (
-            <WidgetsRenderer widgets={[props.widgetData]} position={props.position} />
+            <WidgetsRenderer widgets={[{data:props.widgetData}]} position={props.position} />
         );
     }else return null
 

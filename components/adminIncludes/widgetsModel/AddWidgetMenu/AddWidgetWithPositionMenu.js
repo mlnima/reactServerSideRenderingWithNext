@@ -10,12 +10,9 @@ const AddWidgetWithPositionMenu = props => {
     const [state, setState] = useState({
         open: false
     });
-
     const [customPages,setCustomPages] = useState([])
-
     useEffect(() => {
         getPagesData().then(res=>{
-            console.log(res.data)
             if(res.data){
                 if(res.data.pages){
                     const pagesNames = res.data.pages.map(page=>page.pageName)
@@ -24,7 +21,6 @@ const AddWidgetWithPositionMenu = props => {
             }
         })
     }, [props]);
-
     const onOpenHandler = () => {
         state.open ? setState({
             ...state,
@@ -34,7 +30,6 @@ const AddWidgetWithPositionMenu = props => {
             open: true
         })
     }
-
     const onAddNewWidget = (position, type) => {
         let dataToSave = widgetModels;
         dataToSave.position = position
@@ -52,8 +47,7 @@ const AddWidgetWithPositionMenu = props => {
             console.log(err)
         })
     }
-
-   const renderCustomPagesPosition = customPages.map(customPage=>{
+    const renderCustomPagesPosition = customPages.map(customPage=>{
        return(
            <>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
@@ -61,7 +55,6 @@ const AddWidgetWithPositionMenu = props => {
            </>
        )
    })
-
 
     if (state.open) {
         return (

@@ -1,11 +1,7 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import {DelayInput} from 'react-delay-input';
 
 const Duration = props => {
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
 
     if (props.rendering) {
         return (

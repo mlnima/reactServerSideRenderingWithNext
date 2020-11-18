@@ -5,7 +5,7 @@ const postSchema =  new Schema({
     author: Schema.Types.ObjectID,
     title: String,
     company: String,
-    description: String,
+    description: mongoose.Mixed,
     mainThumbnail: String,
     images:Array,
     videoTrailerUrl: String,
@@ -36,7 +36,7 @@ const postSchema =  new Schema({
         type: Number,
         default: 0
     },
-    price: Number,
+    price: String,
     disLikes:  {
         type: Number,
         default: 0

@@ -1,0 +1,22 @@
+.quill {
+  width: 96%;
+
+  .ql-container{
+
+    min-height: 80vh;
+
+    border-bottom-left-radius: 0.5em;
+    border-bottom-right-radius: 0.5em;
+    background: #fefcfc;
+    .ql-tooltip{
+      margin-left: 10%;
+      z-index: 1000;
+    }
+  }
+  .ql-snow.ql-toolbar{
+    display: block;
+    background: #eaecec;
+    border-top-left-radius: 0.5em;
+    border-top-right-radius: 0.5em;
+  }
+}

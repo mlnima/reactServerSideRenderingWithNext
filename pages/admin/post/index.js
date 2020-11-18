@@ -26,12 +26,6 @@ import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetMo
 
 const Index = props => {
     const contextData = useContext(AppContext);
-    const currencyElement = useRef(null)
-    const activeEditingLanguage = useRef(null)
-    const titleElement = useRef(null)
-    const descriptionElement = useRef(null)
-    const priceElement = useRef(null)
-    const priceTypeElement = useRef(null)
     const router = useRouter()
 
 
@@ -61,7 +55,7 @@ const Index = props => {
     })
 
     useEffect(() => {
-        console.log('props updated on Admin Post Page')
+
         if (router.query.new && state._id) {
             router.reload()
         } else {
@@ -73,14 +67,9 @@ const Index = props => {
             }
 
             setState({
+                ...state,
                 ...props.post,
                 translations: props.post.translations ? props.post.translations : {}
-            })
-
-            setProductInfo({
-                price: props.post.price,
-                priceType: props.post.priceType,
-                currency: props.post.currency,
             })
 
             setTextInputsState({
@@ -92,6 +81,9 @@ const Index = props => {
 
     }, [props]);
 
+    useEffect(() => {
+        console.log(state)
+    }, [state]);
 
     const onChangeHandler = e => {
         setState({
@@ -99,12 +91,12 @@ const Index = props => {
             [e.target.name]: e.target.value
         })
     };
-    const onChangeHandlerForTextInputState = e => {
-        setTextInputsState({
-            ...textInputsState,
-            [e.target.name]: e.target.value
-        })
-    };
+    // const onChangeHandlerForTextInputState = e => {
+    //     setTextInputsState({
+    //         ...textInputsState,
+    //         [e.target.name]: e.target.value
+    //     })
+    // };
 
     const onTitleDescriptionChangeHandler = e => {
         if (editingData.activeEditingLanguage === 'default') {
@@ -151,9 +143,6 @@ const Index = props => {
 
     }
 
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
 
     const onSaveHandler = async () => {
         contextData.dispatchState({
@@ -169,7 +158,7 @@ const Index = props => {
 
             }
 
-            console.log(postValue)
+
             if (state._id) {
                 // contextData.functions.updatePost(contextData.editingPostData)
                 updatePost(postValue, window.location.origin).then(() => {
@@ -217,23 +206,15 @@ const Index = props => {
         }
     }
 
-    // const onAddWidgetToPostHandler = widgetType =>{
-    //        let newWidget = {
-    //            ...widgetModels,
-    //            type:widgetType
-    //        }
-    //     setState({
-    //         ...state,
-    //         widgets:state.widgets ? [...state.widgets,newWidget] :[newWidget]
-    //     })
-    // }
 
 
-    const renderWidgetEditors=(state.widgets || []).map(widgetEditorData=>{
-        return(
-            <WidgetModel widgetIndex={state.widgets ? state.widgets.length :0} isPost={true} key={(state.widgets || []).indexOf(widgetEditorData)} data={{data: widgetEditorData}} translationLanguages={siteIdentity.translationLanguages || []}/>
-        )
-    })
+
+    // const renderWidgetEditors = (state.widgets || []).map(widgetEditorData => {
+    //     return (
+    //         <WidgetModel widgetIndex={state.widgets ? state.widgets.length : 0} isPost={true} key={(state.widgets || []).indexOf(widgetEditorData)} data={{data: widgetEditorData}}
+    //                      translationLanguages={siteIdentity.translationLanguages || []}/>
+    //     )
+    // })
 
     return (
         <>
@@ -251,21 +232,13 @@ const Index = props => {
                         <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
                                           activeEditingLanguage={editingData.activeEditingLanguage}
                                           onChangeHandler={onTitleDescriptionChangeHandler}/>
-                        {/*<TextInputWithUploadBtn type='thumbnail' thumbnailsType={true} postData={state} onChangeHandler={onChangeHandler} name='mainThumbnail'*/}
-                        {/*                        title='Main thumbnail'/>*/}
-                        {/*<ImagePreview postData={state}/>*/}
-                        {renderWidgetEditors}
 
 
-                        <ProductInformation
-                            postData={state}
-                            productInfo={productInfo} setProductInfo={setProductInfo}
-                            renderFor='product' component={ProductInformation}
-                            title='Product Information' onChangeHandler={onChangeHandler}/>
-                        <PostInformation postData={state} onChangeHandler={onChangeHandler}/>
-                        {/*<VideoInformation*/}
-                        {/*    postData={state} renderFor='video' component={VideoInformation}*/}
-                        {/*    title='Video Information' onChangeHandler={onChangeHandler}/>*/}
+
+
+                        {/*{renderWidgetEditors}*/}
+                        <PostInformation productInfo={productInfo} setProductInfo={setProductInfo} postData={state} onChangeHandler={onChangeHandler}/>
+
                     </div>
 
                     <div className="side">
@@ -296,7 +269,7 @@ const Index = props => {
                                         component={RatingOption}
                                         title='Rating'
                                         onChangeHandler={onChangeHandler}/>
-                        <AddWidgetToPostMenu state={state} setState={setState}/>
+                        {/*<AddWidgetToPostMenu state={state} setState={setState}/>*/}
 
                     </div>
 
@@ -318,7 +291,7 @@ Index.getInitialProps = async ({query, req}) => {
 
     const newPostData = {
         status: 'published',
-        postType: settings.identity.data.defaultPostType || 'video',
+        postType: settings.identity.data.defaultPostType || 'standard',
         rating: settings.identity.data.defaultPostRating || 'enable',
         tags: [],
         categories: [],
