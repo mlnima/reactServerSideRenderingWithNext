@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
-
+import './PostDescription.scss';
 const PostDescription = props => {
     const contextData = useContext(AppContext);
     const descriptionElement = useRef(null);
@@ -23,15 +23,16 @@ const PostDescription = props => {
 
     useEffect(() => {
         if (descriptionElement){
-
             if (state.description.includes('</')){
                 descriptionElement.current.innerHTML = state.description
             }else {
                 descriptionElement.current.innerHTML = `<p>${state.description}</p>`
             }
-
         }
     }, [state]);
+
+
+
 
 
     if (props.editMode) {
