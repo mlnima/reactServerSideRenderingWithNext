@@ -64,7 +64,7 @@
     "react-translated": "^2.5.0",
     "sass": "^1.26.3",
     "sass-convert": "^0.5.2",
-    "sharp": "^0.25.4",
+    "sharp": "^0.26.3",
     "simple-youtube-api": "^5.2.1",
     "strip-ansi": "^6.0.0",
     "styled-components": "^5.2.0",
