@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import 'react-quill/dist/quill.snow.css';
 import './DescriptionEditor.scss'
 let ReactQuill = () => <></>;
+import loadable from '@loadable/component'
 //import {core} from 'react-quill'
 
 const DescriptionEditor = props => {
@@ -34,7 +35,8 @@ const DescriptionEditor = props => {
     const [editorState, setEditorState] = useState(false);
 
     useEffect(() => {
-        ReactQuill = require('react-quill');
+        //ReactQuill = require('react-quill');
+        ReactQuill = loadable(() => import('react-quill'))
         setEditorState(true)
     }, []);
 
@@ -42,7 +44,10 @@ const DescriptionEditor = props => {
     if (props.editor){
         return (
             <ReactQuill
-                value={props.activeEditingLanguage === 'default' ? props.textInputsState.description : props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].description : ''}
+                value={
+                    props.activeEditingLanguage === 'default' ? props.textInputsState.description :
+                        props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].description :
+                            ''}
                 onChange={props.onDescriptionChangeHandler}
                 theme='snow'
                 modules={state.modules}

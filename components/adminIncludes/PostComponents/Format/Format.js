@@ -9,6 +9,7 @@ const Format = props => {
                 <option value='video'>Video</option>
                 <option value='product'>Product</option>
                 <option value='article'>Article</option>
+                <option value='code'>Code</option>
             </select>
         </div>
     );

@@ -137,7 +137,7 @@ const settings = props => {
                                 <option value='product'>Product</option>
                                 <option value='food'>Food</option>
                                 <option value='article'>Article</option>
-
+                                <option value='code'>Code</option>
                             </select>
                         </div>
                         <div className="site-settings-form-section defaultPostRating">

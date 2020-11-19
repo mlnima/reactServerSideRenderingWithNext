@@ -209,12 +209,16 @@ const Index = props => {
 
 
 
-    // const renderWidgetEditors = (state.widgets || []).map(widgetEditorData => {
-    //     return (
-    //         <WidgetModel widgetIndex={state.widgets ? state.widgets.length : 0} isPost={true} key={(state.widgets || []).indexOf(widgetEditorData)} data={{data: widgetEditorData}}
-    //                      translationLanguages={siteIdentity.translationLanguages || []}/>
-    //     )
-    // })
+    const renderWidgetEditors = (state.widgets || []).map(widgetEditorData => {
+        return (
+            <div className='post-admin-widget-editor'>
+            <WidgetModel state={state} setState={setState} widgetIndex={widgetEditorData.widgetIndex ? widgetEditorData.widgetIndex : 0} isPost={true} key={(state.widgets || []).indexOf(widgetEditorData)}
+                         //data={{data: widgetEditorData}}
+                         data={ widgetEditorData}
+                         translationLanguages={siteIdentity.translationLanguages || []}/>
+            </div>
+        )
+    })
 
     return (
         <>
@@ -236,7 +240,7 @@ const Index = props => {
 
 
 
-                        {/*{renderWidgetEditors}*/}
+                        {renderWidgetEditors}
                         <PostInformation productInfo={productInfo} setProductInfo={setProductInfo} postData={state} onChangeHandler={onChangeHandler}/>
 
                     </div>
@@ -269,7 +273,7 @@ const Index = props => {
                                         component={RatingOption}
                                         title='Rating'
                                         onChangeHandler={onChangeHandler}/>
-                        {/*<AddWidgetToPostMenu state={state} setState={setState}/>*/}
+                        <AddWidgetToPostMenu state={state} setState={setState}/>
 
                     </div>
 

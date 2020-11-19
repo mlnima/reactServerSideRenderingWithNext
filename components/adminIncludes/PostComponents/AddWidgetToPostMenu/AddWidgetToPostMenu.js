@@ -3,11 +3,6 @@ import AddWidgetToPostMenuItem from "./AddWidgetToPostMenuItem";
 import AddWidgetWithPositionMenu from "../../widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu";
 
 const AddWidgetToPostMenu = props => {
-    const [state, setState] = useState({});
-    useEffect(() => {
-    }, []);
-
-
 
     return (
         <div className='add-widget-to-post-menu'>

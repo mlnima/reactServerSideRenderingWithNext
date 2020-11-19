@@ -5,6 +5,10 @@
   justify-content: center;
   grid-template-columns: 1fr;
   grid-gap: 20px;
+
+  .content{
+
+  }
 }
 
 @media only screen and (min-width: 768px) {
@@ -12,7 +16,9 @@
     grid-template-columns: 1fr 200px;
     grid-template-rows: auto;
     .content{
-
+      .post-admin-widget-editor{
+        max-width: 96%;
+      }
     }
     .side{
 

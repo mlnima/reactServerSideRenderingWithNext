@@ -33,6 +33,13 @@ const WidgetModel = props => {
     //duplicate code , getting pages for widget position
     const [customPages, setCustomPages] = useState([])
     //
+
+
+    // useEffect(() => {
+    //     console.log(widgetData)
+    // }, [widgetData]);
+
+
     useEffect(() => {
         setWidgetData({
             ...widgetData,
@@ -40,14 +47,17 @@ const WidgetModel = props => {
 
         })
         //duplicate code , getting pages for widget position
-        getPagesData().then(res => {
-            if (res.data) {
-                if (res.data.pages) {
-                    const pagesNames = res.data.pages.map(page => page.pageName)
-                    setCustomPages(pagesNames)
+        if (!props.isPost) {
+            getPagesData().then(res => {
+                if (res.data) {
+                    if (res.data.pages) {
+                        const pagesNames = res.data.pages.map(page => page.pageName)
+                        setCustomPages(pagesNames)
+                    }
                 }
-            }
-        })
+            })
+        }
+
         //
     }, [props]);
 
@@ -113,18 +123,28 @@ const WidgetModel = props => {
     }
 
     const onDeleteHandler = () => {
-        deleteWidgets(props.widgetId, window.location.origin).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-                contextData.dispatchWidgetsSettings({
-                    widgets: [...res.data.widgets]
-                })
-                setWidgetSettings({
-                    ...widgetSettings,
-                    open: false
+        if (props.isPost){
+            props.setState({
+                ...props.state,
+                widgets:props.state.widgets.filter(i=> i.widgetIndex    !== props.widgetIndex)
+            })
+        }else {
+            deleteWidgets(props.widgetId, window.location.origin).then(() => {
+                getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+                    contextData.dispatchWidgetsSettings({
+                        widgets: [...res.data.widgets]
+                    })
+                    setWidgetSettings({
+                        ...widgetSettings,
+                        open: false
+                    })
                 })
             })
-        })
+        }
     };
+
+
+
     const onSaveHandler = () => {
         const dataToSave = {
             _id: props.widgetId ? props.widgetId : '',
@@ -166,17 +186,14 @@ const WidgetModel = props => {
         )
     };
 
-    const renderCustomPagesPosition = customPages.map(customPage=>{
-        return(
+    const renderCustomPagesPosition = customPages.map(customPage => {
+        return (
             <>
-                <option value={customPage} >{convertVariableNameToName(customPage)}</option>
-                <option value={customPage+'Sidebar'}>{convertVariableNameToName(customPage)+' Sidebar'}</option>
+                <option value={customPage}>{convertVariableNameToName(customPage)}</option>
+                <option value={customPage + 'Sidebar'}>{convertVariableNameToName(customPage) + ' Sidebar'}</option>
             </>
         )
     })
-
-
-
 
 
     const RenderOptionByFormat = () => {

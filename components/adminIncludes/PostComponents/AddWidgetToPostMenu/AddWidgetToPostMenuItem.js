@@ -1,14 +1,27 @@
-import React from 'react';
+import React, {useState ,useEffect} from 'react';
 import {widgetModels} from "../../widgetsModel/AddWidgetMenu/models";
 
 const AddWidgetToPostMenuItem = props => {
+    const [widgetsLength,setWidgetsLength] = useState(0)
+
+    useEffect(() => {
+        setWidgetsLength(props.state.widgets ? props.state.widgets.length :0)
+    }, [props]);
+
+
+    let newWidget = {
+        ...widgetModels,
+        type:props.type,
+        widgetIndex: widgetsLength
+    }
+
+
+
+
 
    const onClickHandler = () =>{
-       let newWidget = {
-           ...widgetModels,
-           type:props.type,
-           widgetIndex: props.state.widgets ? props.state.widgets.length :0
-       }
+
+       console.log(widgetsLength)
        props.setState({
            ...props.state,
            widgets:props.state.widgets ? [...props.state.widgets,newWidget] :[newWidget]
