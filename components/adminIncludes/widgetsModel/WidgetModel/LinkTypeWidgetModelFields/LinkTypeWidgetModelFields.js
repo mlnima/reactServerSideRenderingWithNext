@@ -17,10 +17,10 @@ const LinkTypeWidgetModelFields = props => {
                 name='linkToText'
                 type='text'
                 value={
-                    props.widgetSettings.activeEditingLanguage === 'default' ? props.textInputsData.linkToText :
-                        props.textInputsData.translations ?
-                            props.textInputsData.translations[props.widgetSettings.activeEditingLanguage] ?
-                                props.textInputsData.translations[props.widgetSettings.activeEditingLanguage].linkToText || '' :
+                    props.widgetSettings.activeEditingLanguage === 'default' ? props.widgetData.linkToText :
+                        props.widgetData.translations ?
+                            props.widgetData.translations[props.widgetSettings.activeEditingLanguage] ?
+                                props.widgetData.translations[props.widgetSettings.activeEditingLanguage].linkToText || '' :
                                 '' : ''
 
                 }

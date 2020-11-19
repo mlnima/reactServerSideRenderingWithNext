@@ -12,7 +12,8 @@ const AddWidgetToPostMenuItem = props => {
     let newWidget = {
         ...widgetModels,
         type:props.type,
-        widgetIndex: widgetsLength
+        widgetIndex: widgetsLength,
+        widgetId:widgetsLength
     }
 
 

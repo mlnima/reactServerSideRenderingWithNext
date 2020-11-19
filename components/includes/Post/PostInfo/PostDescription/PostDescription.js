@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
 import './PostDescription.scss';
+import 'react-quill/dist/quill.snow.css';
 const PostDescription = props => {
     const contextData = useContext(AppContext);
     const descriptionElement = useRef(null);

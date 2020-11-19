@@ -143,22 +143,80 @@ const WidgetModel = props => {
         }
     };
 
+    const changeWidgetIndex = (more) => {
 
+        const valueToSet = more ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1
+
+        if (props.isPost){
+            const findIndexOfTheWidget = props.state.widgets.findIndex(w=>{
+                return((w.widgetIndex===props.data.widgetIndex)&&(w.type===props.data.type)&&(w.widgetId===props.data.widgetId))
+            })
+            // console.log({...widgetData,widgetIndex:valueToSet})
+             const updatedWidget = {...widgetData,widgetIndex:valueToSet}
+            // const updatedWidgets = [
+            //     ...props.state.widgets.slice(0, findIndexOfTheWidget),
+            //     updatedWidget,
+            //     ...props.state.widgets.slice(findIndexOfTheWidget + 1),
+            // ];
+
+            // const newWidgetsData = props.state.widgets.map(w=>{
+            //     if (w.widgetId ===props.data.widgetId ){
+            //         return {...widgetData,widgetIndex:valueToSet}
+            //     }else {
+            //         return w
+            //     }
+            // })
+            //console.log(newWidgetsData)
+            let widgets=props.state.widgets
+            widgets[findIndexOfTheWidget]=updatedWidget
+            console.log(widgets)
+            // props.setState( currentState=>({
+            //     ...props.state,
+            //     widgets:widgets
+            // }))
+        }else{
+            const dataToSave = {
+                ...widgetData,
+                _id: props.widgetId ? props.widgetId : '',
+                data: {
+                    ...widgetData,
+                    widgetIndex: valueToSet
+                }
+            }
+            updateWidgets(dataToSave).then(() => {
+                getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+                    console.log(res.data)
+                    contextData.dispatchWidgetsSettings({
+                        widgets: [...res.data.widgets]
+                    })
+                })
+            })
+        }
+    };
 
     const onSaveHandler = () => {
         const dataToSave = {
             _id: props.widgetId ? props.widgetId : '',
             data: {
                 ...widgetData,
-                // ...textInputsData,
             }
         }
 
         dataToSave.data.posts = []
         dataToSave.data.metaData = []
-
         if (props.isPost) {
-
+            const findIndexOfTheWidget = props.state.widgets.findIndex(w=>{
+                return((w.widgetIndex===props.widgetIndex)&&(w.type===props.data.type))
+            })
+            const updatedWidgets = [
+                ...props.state.widgets.slice(0, findIndexOfTheWidget),
+                widgetData,
+                ...props.state.widgets.slice(findIndexOfTheWidget + 1),
+            ];
+            props.setState({
+                ...props.state,
+                widgets:updatedWidgets
+            })
         } else {
             console.log(dataToSave)
             updateWidgets(dataToSave).then(() => {
@@ -172,6 +230,7 @@ const WidgetModel = props => {
             })
         }
     };
+
     const RenderWidgetCustomStyle = () => {
         return (
             <>
@@ -473,26 +532,7 @@ const WidgetModel = props => {
 
         }
     };
-    const changeWidgetIndex = (more) => {
 
-        const valueToSet = more ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1
-        const dataToSave = {
-            ...widgetData,
-            _id: props.widgetId ? props.widgetId : '',
-            data: {
-                ...widgetData,
-                widgetIndex: valueToSet
-            }
-        }
-        updateWidgets(dataToSave).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-                console.log(res.data)
-                contextData.dispatchWidgetsSettings({
-                    widgets: [...res.data.widgets]
-                })
-            })
-        })
-    };
 
     if (widgetSettings.open) {
         return (

@@ -23,6 +23,7 @@ import AddWidgetMenu from "../../../components/adminIncludes/widgetsModel/AddWid
 import AddWidgetToPostMenu from "../../../components/adminIncludes/PostComponents/AddWidgetToPostMenu/AddWidgetToPostMenu";
 import {widgetModels} from '../../../components/adminIncludes/widgetsModel/AddWidgetMenu/models'
 import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
+import NoSSR from 'react-no-ssr';
 
 const Index = props => {
     const contextData = useContext(AppContext);
@@ -206,13 +207,13 @@ const Index = props => {
         }
     }
 
+useEffect(() => {  console.log(state.widgets)}, [ state.widgets ]);
 
 
-
-    const renderWidgetEditors = (state.widgets || []).map(widgetEditorData => {
+    const renderWidgetEditors = (state.widgets?state.widgets.sort((a,b)=>(a.widgetIndex > b.widgetIndex) ? 1 : -1):[]).map(widgetEditorData => {
         return (
             <div className='post-admin-widget-editor'>
-            <WidgetModel state={state} setState={setState} widgetIndex={widgetEditorData.widgetIndex ? widgetEditorData.widgetIndex : 0} isPost={true} key={(state.widgets || []).indexOf(widgetEditorData)}
+            <WidgetModel state={state} setState={setState} widgetIndex={ widgetEditorData?  widgetEditorData.widgetIndex ? widgetEditorData.widgetIndex : 0:0} isPost={true} key={(state.widgets || []).indexOf(widgetEditorData)}
                          //data={{data: widgetEditorData}}
                          data={ widgetEditorData}
                          translationLanguages={siteIdentity.translationLanguages || []}/>
@@ -233,14 +234,16 @@ const Index = props => {
                             <option value='default'>Default</option>
                             {languagesOptions}
                         </select>
+                        <NoSSR>
                         <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
                                           activeEditingLanguage={editingData.activeEditingLanguage}
                                           onChangeHandler={onTitleDescriptionChangeHandler}/>
+                        </NoSSR>
 
 
 
 
-                        {renderWidgetEditors}
+                        {/*{renderWidgetEditors}*/}
                         <PostInformation productInfo={productInfo} setProductInfo={setProductInfo} postData={state} onChangeHandler={onChangeHandler}/>
 
                     </div>
@@ -273,7 +276,7 @@ const Index = props => {
                                         component={RatingOption}
                                         title='Rating'
                                         onChangeHandler={onChangeHandler}/>
-                        <AddWidgetToPostMenu state={state} setState={setState}/>
+                        {/*<AddWidgetToPostMenu state={state} setState={setState}/>*/}
 
                     </div>
 

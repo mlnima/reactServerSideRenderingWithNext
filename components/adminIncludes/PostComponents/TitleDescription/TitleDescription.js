@@ -76,9 +76,7 @@ const TitleDescription = props => {
                        >Text</button>
                        <button onClick={()=>setEditor(true)} style={{borderBottom:editor?'none':'solid .2px gray '}}>Visual</button>
                    </div>
-            <DescriptionEditor {...props} onDescriptionChangeHandler={onDescriptionChangeHandler} editor={editor}/>
-
-
+            <DescriptionEditor {...props} onDescriptionChangeHandler={onDescriptionChangeHandler} onTitleDescriptionChangeHandler={onTitleDescriptionChangeHandler} editor={editor}/>
         </div>
     );
 };

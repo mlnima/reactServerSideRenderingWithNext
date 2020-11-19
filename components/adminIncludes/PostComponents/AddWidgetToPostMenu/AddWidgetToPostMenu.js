@@ -7,7 +7,6 @@ const AddWidgetToPostMenu = props => {
     return (
         <div className='add-widget-to-post-menu'>
             <AddWidgetToPostMenuItem {...props} type='text' name='Text'/>
-            <AddWidgetToPostMenuItem {...props} type='textMedia' name='Text and Media'/>
             <AddWidgetToPostMenuItem {...props} type='menu' name='Menu'/>
             <AddWidgetToPostMenuItem {...props} type='linkTo' name='Link To'/>
             <AddWidgetToPostMenuItem {...props} type='posts' name='Posts'/>
@@ -18,7 +17,6 @@ const AddWidgetToPostMenu = props => {
             <AddWidgetToPostMenuItem {...props} type='logo' name='Logo'/>
             <AddWidgetToPostMenuItem {...props} type='form' name='Form'/>
             <AddWidgetToPostMenuItem {...props} type='shoppingCart' name='Shopping Cart'/>
-            <AddWidgetToPostMenuItem {...props} type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
             <AddWidgetToPostMenuItem {...props} type='language' name='Language'/>
             <AddWidgetToPostMenuItem {...props} type='authentication' name='Auth Buttons'/>
             <AddWidgetToPostMenuItem {...props} type='imageSwiper' name='Image Swiper(slide Show)'/>
