@@ -1,7 +1,9 @@
 .language-switcher-widget{
   display: flex;
   align-items: center;
+  justify-content: center;
+
   p{
-    margin: 0 20px;
+    margin: 0 20px 5px 0;
   }
 }

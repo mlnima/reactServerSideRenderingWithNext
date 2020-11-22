@@ -4,8 +4,11 @@
 @import "../../../../styles/selects";
 
 .post-information {
-  width: 95%;
+  width: 96% ;
+  padding:  1%;
+ // margin: auto;
   border-radius: 10px;
+  border: .1px solid rgba(0,0,0,.2);
   .saveBtn {
     display: flex;
     justify-content: center;

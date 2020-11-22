@@ -8,7 +8,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-
+  z-index: 1000;
   .console-panel{
     background-color: #222;
     padding: 5px 5px 5px 5px ;
@@ -25,9 +25,13 @@
         outline: none;
         background-color: transparent;
         color: white;
+        svg {
+          width: 25px;
+          height: 25px;
+        }
       }
     }
-    textarea{
+    textarea,.result{
       width: 90vw;
       max-width: 1024px;
       height: 80vh;

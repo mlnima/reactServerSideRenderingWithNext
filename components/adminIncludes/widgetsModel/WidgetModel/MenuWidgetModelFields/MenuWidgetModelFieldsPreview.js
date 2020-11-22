@@ -78,6 +78,7 @@ const MenuWidgetModelFieldsPreview = props => {
             <div className='menu-form-field'>
                 <p>Type:</p>
                 <select required={true} name='type' value={itemData.type} onChange={onChangeHandler}>
+                    <option >Select</option>
                     <option value='internal'>Internal</option>
                     <option value='external'>External</option>
                 </select>

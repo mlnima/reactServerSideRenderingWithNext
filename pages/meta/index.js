@@ -96,7 +96,7 @@ meta.getInitialProps = async ({pathname, query, req, asPath}) => {
     const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header','topBar','navigation']},  domainName,true, 'tagsPage')
     const metaData = await getMeta(dataForGettingMeta, domainName, true)
 
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
 

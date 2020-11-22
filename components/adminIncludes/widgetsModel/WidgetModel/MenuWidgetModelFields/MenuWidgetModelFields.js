@@ -20,41 +20,19 @@ const MenuWidgetModelFields = props => {
         })
     }
 
-    // const onAddHandler = e => {
-    //     e.preventDefault()
-    //     const previousMenuData = props.widgetData.data.menuItems ? {...props.widgetData.data.menuItems} : {}
-    //     props.setWidgetData({
-    //         ...props.widgetData,
-    //         data: {
-    //             ...props.widgetData.data,
-    //             menuItems: {
-    //                 ...previousMenuData,
-    //                 [formData.name]: {
-    //                     ...formData
-    //                 }
-    //             }
-    //         }
-    //     })
-    // }
     const onAddHandler = e => {
         e.preventDefault()
-        const previousMenuData = props.widgetData.data.menuItems ? [...props.widgetData.data.menuItems] : []
+       // const previousMenuData = props.widgetData.menuItems ? [...props.widgetData.menuItems] : []
+        const previousMenuData = props?.widgetData?.menuItems || []
         props.setWidgetData({
             ...props.widgetData,
-            data: {
-                ...props.widgetData.data,
-                menuItems:[...previousMenuData, {...formData,itemIndex:previousMenuData.length}]
-            }
+            menuItems:[...previousMenuData, {...formData,itemIndex:previousMenuData.length}]
         })
     }
 
-    useEffect(() => {
-        console.log(props.widgetData.data)
-    }, [props]);
-
-    const renderCurrentItems = (  props.widgetData.data.menuItems || []).map(menuItem=>{
+    const renderCurrentItems = (  props.widgetData.menuItems || []).map(menuItem=>{
         return(
-          <MenuWidgetModelFieldsPreview key={(  props.widgetData.data.menuItems || []).indexOf(menuItem)} name={menuItem.name} data={menuItem} {...props}/>
+          <MenuWidgetModelFieldsPreview key={(  props.widgetData.menuItems || []).indexOf(menuItem)} name={menuItem.name} data={menuItem} {...props}/>
         )
     })
 
@@ -83,7 +61,8 @@ const MenuWidgetModelFields = props => {
                 </div>
                 <div className='menu-form-field'>
                     <p>Type:</p>
-                    <select required={true} name='type' onChange={onChangeHandler}>
+                    <select required={true} name='type' onChange={onChangeHandler} value={formData.type}>
+                        <option >Select</option>
                         <option value='internal'>Internal</option>
                         <option value='external'>External</option>
                     </select>

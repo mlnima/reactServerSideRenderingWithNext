@@ -10,18 +10,18 @@ import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRe
 
 let StyledDiv = styled.div`${props => props.stylesData}`
 const page = props => {
-    const [state, setState] = useState({});
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+    const [deviceWidth,setDeviceWidth] = useState(1024)
 
+    useEffect(() => {
+        setDeviceWidth(window.innerWidth)
+    }, []);
     return (
         <AppLayout>
             <SiteSettingSetter {...props}/>
             <StyledDiv  className={props.pageInfo.sidebar ? 'post withSidebar' : 'post withOutSidebar'}>
 
                 <div className="main">
-                    <WidgetsRenderer widgets={props.widgets} position={props.pageInfo.pageName}/>
+                    <WidgetsRenderer deviceWidth={deviceWidth} widgets={props.widgets} position={props.pageInfo.pageName}/>
                 </div>
                 <Sidebar key={props.pageInfo.pageName + 'Sidebar'} isActive={props.pageInfo.sidebar} widgets={props.widgets} position={props.pageInfo.pageName + 'Sidebar'}/>
 
@@ -43,7 +43,7 @@ page.getInitialProps = async ({pathname, query, req, res, err}) => {
     pageInfo = pageData.data ? pageData.data.pageData : {}
     const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName, query.pageName + 'Sidebar', 'footer', 'header', 'underPost', 'topBar', 'navigation']}, domainName, true, query.pageName)
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, query.pageName)
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
     return {pageInfo, query, widgets, ...settings}

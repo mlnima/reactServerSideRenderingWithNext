@@ -12,7 +12,7 @@ const DescriptionEditor = props => {
         modules: {
             toolbar: [
                 [{'header': '1'}, {'header': '2'}],
-                [{'font': []}]
+                [{'font': []}],
                 [{size: []}],
                 ['bold', 'italic', 'underline', 'strike', 'blockquote'],
                 [{'list': 'ordered'}, {'list': 'bullet'}, {'indent': '-1'}, {'indent': '+1'}],
@@ -48,9 +48,6 @@ const DescriptionEditor = props => {
             'code-block', 'formula'
 
         ],
-        // propTypes : {
-        //     placeholder: PropTypes.string,
-        // }
     });
     const [editorState, setEditorState] = useState(false);
 

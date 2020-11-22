@@ -98,7 +98,7 @@ Register.getInitialProps = async ({ req }) => {
     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar' ,'footer','navigation'] }, domainName, true)
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
     return { ...settings ,widgets}
 }
 export default withRouter(Register);

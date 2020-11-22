@@ -1,82 +1,38 @@
-import React, {useEffect, useState} from 'react';
+import React,{useEffect} from 'react';
+import loadable from '@loadable/component';
+//import dynamic from 'next/dynamic'
+//const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'))
+import NoSSR from 'react-no-ssr';
 
-import DescriptionEditor from "../DescriptionEditor/DescriptionEditor";
+const TextEditor = loadable(() => import('../../TextEditor/TextEditor'))
+import './TitleDescription.scss'
 
 
 const TitleDescription = props => {
 
 
-    const onTitleDescriptionChangeHandler = e => {
-        if (props.activeEditingLanguage === 'default') {
-            props.setTextInputsState({
-                ...props.textInputsState,
-                [e.target.name]: e.target.value
-            })
-
-        } else {
-            let langObject = props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage] : {}
-            props.setTextInputsState({
-                ...props.textInputsState,
-                translations: {
-                    ...props.textInputsState.translations,
-                    [props.activeEditingLanguage]: {
-                        ...langObject,
-                        [e.target.name]: e.target.value
-                    }
-                }
-            })
-        }
-    }
-    const [editor, setEditor] = useState(true)
-
-
-
-
-
-
-    const onDescriptionChangeHandler = data =>{
-        if (props.activeEditingLanguage === 'default') {
-            props.setTextInputsState({
-                ...props.textInputsState,
-                description: data
-            })
-
-        } else {
-            let langObject = props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage] : {}
-            props.setTextInputsState({
-                ...props.textInputsState,
-                translations: {
-                    ...props.textInputsState.translations,
-                    [props.activeEditingLanguage]: {
-                        ...langObject,
-                        description: data
-                    }
-                }
-            })
-        }
-    }
-
-
-     const RenderWritingArea = ()=>{
-
-     }
-
-
-
     return (
-        <div className='TitleDescription'>
+        <div className='title-description'>
             <input type="text" name='title'
-                   value={props.activeEditingLanguage === 'default' ? props.textInputsState.title : props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].title : ''}
+                // value={props.activeEditingLanguage === 'default' ? props.textInputsState.title : props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].title : ''}
+                   value={(props.activeEditingLanguage === 'default' ? props.textInputsState.title : props.textInputsState?.translations?.[props.activeEditingLanguage]?.title) || ''}
                    className='TitleDescriptionTitle' placeholder='Enter The Title Here'
-                   onChange={e => onTitleDescriptionChangeHandler(e)}/>
-
-                   <div className='editor-switcher'>
-                       <button onClick={()=>setEditor(false)}
-                             style={{borderBottom:!editor?'none':'solid .2px gray '}}
-                       >Text</button>
-                       <button onClick={()=>setEditor(true)} style={{borderBottom:editor?'none':'solid .2px gray '}}>Visual</button>
-                   </div>
-            <DescriptionEditor {...props} onDescriptionChangeHandler={onDescriptionChangeHandler} onTitleDescriptionChangeHandler={onTitleDescriptionChangeHandler} editor={editor}/>
+                   onChange={e => props.onChangeHandler(e)}/>
+            <NoSSR>
+                <TextEditor
+                    state={props.textInputsState}
+                    activeEditingLanguage={props.activeEditingLanguage}
+                    onChangeHandler={props.onDescriptionChangeHandler}
+                    rendering={true}
+                    // value={
+                    //     props.activeEditingLanguage === 'default' ?
+                    //         props.textInputsState.description :
+                    //         props.textInputsState.translations[props.activeEditingLanguage] ?
+                    //             props.textInputsState.translations[props.activeEditingLanguage].description : ''
+                    // }
+                    valueData={ (props.activeEditingLanguage === 'default' ? props.textInputsState.description : props?.textInputsState.translations?.[props.activeEditingLanguage]?.description) || ''}
+                />
+            </NoSSR>
         </div>
     );
 };

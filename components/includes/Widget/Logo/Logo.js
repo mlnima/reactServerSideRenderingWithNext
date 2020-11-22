@@ -3,6 +3,7 @@ import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import {getLanguageQuery} from "../../../../_variables/_variables";
 import {useRouter} from "next/router";
+import Image from 'next/image'
 
 const Logo = props => {
     const contextData = useContext(AppContext);
@@ -15,33 +16,25 @@ const Logo = props => {
         queries: {}
     });
 
-    // useEffect(() => {
-    //     setState({
-    //         ...state,
-    //         logoText: contextData.siteIdentity.logoText,
-    //         headLine: contextData.siteIdentity.headLine,
-    //
-    //         logoTextStyle: {
-    //             color: props.logoTextColor || 'white',
-    //             fontSize: props.logoTextFontSize + 'px' || '50px',
-    //
-    //         },
-    //         headLineStyle: {
-    //             color: props.logoHeadLineColor || 'white',
-    //             fontSize: props.logoHeadLineFontSize + 'px' || '16px',
-    //             fontWeight: props.logoHeadLineFontWeight || 'initial'
-    //         },
-    //
-    //
-    //     })
-    // }, [contextData.siteIdentity]);
-
-
     const RenderLogoImage = () => {
         if (props.LogoUrl) {
-            return (
-                <img src={props.LogoUrl} alt='logo'/>
-            )
+
+            if (props.LogoUrl.includes('http')||props.LogoUrl.includes(window.location.hostname)){
+                return (
+                    <img src={props.LogoUrl} alt='logo'/>
+                )
+            }else{
+                return (
+                    <Image
+                        src={props.LogoUrl}
+                        alt='logo'
+                        width={300}
+                        height={100}
+                        quality={50}
+                    />
+                )
+            }
+
         } else return null
     }
 

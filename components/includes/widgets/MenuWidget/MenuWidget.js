@@ -10,7 +10,6 @@ const MenuWidget = props => {
     const [menuItems, setMenuItems] = useState([]);
     const [open, setOpen] = useState(false);
     useEffect(() => {
-        console.log(props)
         if (props.menuItems) {
             if(props.menuItems.length>0){
                 setMenuItems(props.menuItems)

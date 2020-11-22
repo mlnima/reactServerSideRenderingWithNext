@@ -23,7 +23,7 @@ settingsControllers.update = (req, res) => {
                 data: req.body.data
             });
             dataToSave.save().then(() => {
-                console.log(req.body.type, ' new settings saved')
+               // console.log(req.body.type, ' new settings saved')
                 res.statusCode(200)
 
             }).catch(err => {
@@ -53,8 +53,9 @@ settingsControllers.getMultiple = async (req, res) => {
                 finalObject[setting.type] = setting
             }
         })
-
-        res.json({ settings: dataEncoder({ finalObject }) })
+// console.log(dataEncoder({ finalObject }))
+//console.log(finalObject)
+        res.json({ settings: finalObject })
         res.end()
     }).catch(err => {
         console.log(err)
@@ -67,7 +68,7 @@ settingsControllers.create = (req, res) => {
         data: req.body.data
     });
     dataToSave.save().then(() => {
-        console.log(req.body.type, ' new settings saved')
+       // console.log(req.body.type, ' new settings saved')
     }).catch(err => {
         console.log(err)
     })
@@ -76,7 +77,7 @@ settingsControllers.addWidget = (req, res) => {
     const data = req.body.data;
     let dataToSave = new widgetSchema(data)
     dataToSave.save().then(newWidgetData => {
-        console.log(newWidgetData)
+       // console.log(newWidgetData)
         res.end()
     })
 }
@@ -270,7 +271,7 @@ settingsControllers.saveCustomStyle = (req, res) => {
                     }
                     console.log('scss file updated')
                 })
-                console.log('saved')
+               // console.log('saved')
                 res.end()
             }).catch(err => {
                 console.log(err)
@@ -281,7 +282,7 @@ settingsControllers.saveCustomStyle = (req, res) => {
                 if (error) {
                     console.log(error)
                 }
-                console.log('scss file updated')
+               // console.log('scss file updated')
             })
         }
         res.end()

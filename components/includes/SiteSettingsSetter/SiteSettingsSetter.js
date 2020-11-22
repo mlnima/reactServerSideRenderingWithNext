@@ -1,9 +1,11 @@
 import React, {useState, useContext, useEffect, useRef} from 'react';
+import loadable from '@loadable/component';
 import {AppContext} from '../../../context/AppContext'
 import Head from 'next/dist/next-server/lib/head'
 import withRouter from 'next/dist/client/with-router'
 import reactHtmlParser from 'html-react-parser'
 import {useRouter} from "next/router";
+
 
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
@@ -35,6 +37,10 @@ const SiteSettingSetter = props => {
                 customScripts: props.identity ? props.identity.data.customScripts || [] : [],
                 favIcon: props.identity ? props.identity.data.favIcon || '/static/images/favIcon/favicon.png' : '/static/images/favIcon/favicon.png'
             })
+            // contextData.dispatchState({
+            //     ...contextData.state,
+            //     currentPageSidebar: true
+            // })
 
         }
         if (props.widgets) {

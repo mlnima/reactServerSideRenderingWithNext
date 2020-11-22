@@ -1,38 +1,41 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {AppContext} from '../../../../context/AppContext'
+import {AppContext} from '../../../../context/AppContext';
+import loadable from '@loadable/component'
 import {addNewWidget, deleteWidgets, getMultipleWidgetWithData, getPagesData, updateWidgets} from '../../../../_variables/ajaxVariables'
+import {convertVariableNameToName} from "../../../../_variables/_variables";
 import 'array.prototype.move';
 import {DelayInput} from 'react-delay-input'
-import RenderTitleAndRedirectLink from "./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink";
-import WidgetPreview from "./WidgetPreview/WidgetPreview";
-import SelectedMetaIdForPostWidget from "./SelectedMetaIdForPostWidget/SelectedMetaIdForPostWidget";
-import TextInputFieldForWidget from "./TextInputFieldForWidget/TextInputFieldForWidget";
-import LinkTypeWidgetModelFields from "./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields";
-import ImageSwiperTypeWidgetModelFields from "./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields";
-import PostSwiperTypeWidgetModelFields from "./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields";
-import MenuWidgetModelFields from "./MenuWidgetModelFields/MenuWidgetModelFields";
-import TextWidgetTypeFields from "./TextWidgetTypeFields/TextWidgetTypeFields";
-import MediaWidgetType from "./MediaWidgetType/MediaWidgetType";
-import ExportWidget from "./ExportWidget/ExportWidget";
-import FormTypeWiddgetModelFields from "./FormTypeWidgetModelFields/FormTypeWidgetModelFields";
-import WidgetHeaderControl from "./WidgetHeaderControl/WidgetHeaderControl";
-import {convertVariableNameToName} from "../../../../_variables/_variables";
+import SliderWidgetTypeFields from "./SliderWidgetTypeFields/SliderWidgetTypeFields";
+
+const RenderTitleAndRedirectLink = loadable(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
+const WidgetPreview = loadable(() => import('./WidgetPreview/WidgetPreview'))
+const TextInputFieldForWidget = loadable(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'))
+const LinkTypeWidgetModelFields = loadable(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'))
+const ImageSwiperTypeWidgetModelFields = loadable(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'))
+const PostSwiperTypeWidgetModelFields = loadable(() => import('./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields'))
+const MenuWidgetModelFields = loadable(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'))
+const TextWidgetTypeFields = loadable(() => import('./TextWidgetTypeFields/TextWidgetTypeFields'))
+const MediaWidgetType = loadable(() => import('./MediaWidgetType/MediaWidgetType'))
+const ExportWidget = loadable(() => import('./ExportWidget/ExportWidget'))
+const FormTypeWidgetModelFields = loadable(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'))
+const WidgetHeaderControl = loadable(() => import('./WidgetHeaderControl/WidgetHeaderControl'))
+const TextEditor = loadable(() => import('../../TextEditor/TextEditor'))
+
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
-
+    const languageElement = useRef(null)
     const [widgetSettings, setWidgetSettings] = useState({
         open: false,
         preview: false,
         activeEditingLanguage: 'default'
     })
     const [widgetData, setWidgetData] = useState({
-        data: {}
+        translations: {},
     })
 
-    //duplicate code , getting pages for widget position
+
     const [customPages, setCustomPages] = useState([])
-    //
 
 
     // useEffect(() => {
@@ -41,25 +44,19 @@ const WidgetModel = props => {
 
 
     useEffect(() => {
-        setWidgetData({
-            ...widgetData,
-            ...props.data,
 
-        })
-        //duplicate code , getting pages for widget position
         if (!props.isPost) {
-            getPagesData().then(res => {
-                if (res.data) {
-                    if (res.data.pages) {
-                        const pagesNames = res.data.pages.map(page => page.pageName)
-                        setCustomPages(pagesNames)
-                    }
-                }
+            setWidgetData({
+                ...widgetData,
+                ...props.data,
             })
         }
 
-        //
     }, [props]);
+
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [props]);
 
     const onChangeLanguageHandler = e => {
         setWidgetSettings({
@@ -68,19 +65,65 @@ const WidgetModel = props => {
         })
     }
     const onTextInputsDataChangeHandler = (e) => {
+        //    let langObject = widgetData.translations[widgetSettings.activeEditingLanguage] ? widgetData.translations[widgetSettings.activeEditingLanguage] : {}
         if (widgetSettings.activeEditingLanguage === 'default') {
             setWidgetData({
                 ...widgetData,
                 [e.target.name]: e.target.value
             })
         } else {
+            const currentData = widgetData.translations ?
+                widgetData.translations[widgetSettings.activeEditingLanguage] ?
+                    widgetData :
+                    {
+                        ...widgetData,
+                        translations: {
+                            ...widgetData.translations,
+                            [widgetSettings.activeEditingLanguage]: {}
+                        }
+                    }
+
+
+                : {
+                    ...widgetData,
+                    translations: {
+                        [widgetSettings.activeEditingLanguage]: {}
+                    }
+                }
+            //const currentData = widgetData.translations ? widgetData ? widgetData.translations[widgetSettings.activeEditingLanguage]: {...widgetData, translation:{[widgetSettings.activeEditingLanguage]:{} } }   : {...widgetData, translation:{[widgetSettings.activeEditingLanguage]:{} } }
+
+
+            console.log(currentData)
+
+            setWidgetData({
+                ...currentData,
+                translations: {
+                    ...currentData.translations,
+                    [widgetSettings.activeEditingLanguage]: {
+                        ...currentData.translations[widgetSettings.activeEditingLanguage],
+                        [e.target.name]: e.target.value
+                    }
+                }
+            })
+        }
+    }
+
+    const onTextEditorChangeHandler = value => {
+        console.log(value)
+        if (languageElement?.current?.value === 'default') {
+            setWidgetData({
+                ...widgetData,
+                text: value
+            })
+
+        } else {
             setWidgetData({
                 ...widgetData,
                 translations: {
-                    ...widgetData.translations,
-                    [widgetSettings.activeEditingLanguage]: {
-                        ...widgetData.translations[widgetSettings.activeEditingLanguage],
-                        [e.target.name]: e.target.value
+                    ...(widgetData?.translations||{}),
+                    [languageElement?.current?.value]: {
+                        ...(widgetData?.translations?.[languageElement?.current?.value]||{}),
+                        text: value
                     }
                 }
             })
@@ -123,12 +166,12 @@ const WidgetModel = props => {
     }
 
     const onDeleteHandler = () => {
-        if (props.isPost){
+        if (props.isPost) {
             props.setState({
                 ...props.state,
-                widgets:props.state.widgets.filter(i=> i.widgetIndex    !== props.widgetIndex)
+                widgets: props.state.widgets.filter(i => i.widgetIndex !== props.widgetIndex)
             })
-        }else {
+        } else {
             deleteWidgets(props.widgetId, window.location.origin).then(() => {
                 getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
                     contextData.dispatchWidgetsSettings({
@@ -147,12 +190,12 @@ const WidgetModel = props => {
 
         const valueToSet = more ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1
 
-        if (props.isPost){
-            const findIndexOfTheWidget = props.state.widgets.findIndex(w=>{
-                return((w.widgetIndex===props.data.widgetIndex)&&(w.type===props.data.type)&&(w.widgetId===props.data.widgetId))
+        if (props.isPost) {
+            const findIndexOfTheWidget = props.state.widgets.findIndex(w => {
+                return ((w.widgetIndex === props.data.widgetIndex) && (w.type === props.data.type) && (w.widgetId === props.data.widgetId))
             })
             // console.log({...widgetData,widgetIndex:valueToSet})
-             const updatedWidget = {...widgetData,widgetIndex:valueToSet}
+            const updatedWidget = {...widgetData, widgetIndex: valueToSet}
             // const updatedWidgets = [
             //     ...props.state.widgets.slice(0, findIndexOfTheWidget),
             //     updatedWidget,
@@ -167,29 +210,30 @@ const WidgetModel = props => {
             //     }
             // })
             //console.log(newWidgetsData)
-            let widgets=props.state.widgets
-            widgets[findIndexOfTheWidget]=updatedWidget
-            console.log(widgets)
+            let widgets = props.state.widgets
+            widgets[findIndexOfTheWidget] = updatedWidget
+            // console.log(widgets)
             // props.setState( currentState=>({
             //     ...props.state,
             //     widgets:widgets
             // }))
-        }else{
+        } else {
             const dataToSave = {
-                ...widgetData,
                 _id: props.widgetId ? props.widgetId : '',
                 data: {
                     ...widgetData,
                     widgetIndex: valueToSet
                 }
             }
+            console.log(valueToSet, dataToSave)
             updateWidgets(dataToSave).then(() => {
-                getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-                    console.log(res.data)
-                    contextData.dispatchWidgetsSettings({
-                        widgets: [...res.data.widgets]
-                    })
-                })
+                props.getAndSetWidgetsData()
+                // getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+                //     // console.log(res.data)
+                //     contextData.dispatchWidgetsSettings({
+                //         widgets: [...res.data.widgets]
+                //     })
+                // })
             })
         }
     };
@@ -205,8 +249,8 @@ const WidgetModel = props => {
         dataToSave.data.posts = []
         dataToSave.data.metaData = []
         if (props.isPost) {
-            const findIndexOfTheWidget = props.state.widgets.findIndex(w=>{
-                return((w.widgetIndex===props.widgetIndex)&&(w.type===props.data.type))
+            const findIndexOfTheWidget = props.state.widgets.findIndex(w => {
+                return ((w.widgetIndex === props.widgetIndex) && (w.type === props.data.type))
             })
             const updatedWidgets = [
                 ...props.state.widgets.slice(0, findIndexOfTheWidget),
@@ -215,41 +259,29 @@ const WidgetModel = props => {
             ];
             props.setState({
                 ...props.state,
-                widgets:updatedWidgets
+                widgets: updatedWidgets
             })
         } else {
-            console.log(dataToSave)
+            // console.log(dataToSave)
             updateWidgets(dataToSave).then(() => {
-                getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-                    console.log(res.data)
-                    contextData.dispatchWidgetsSettings({
-                        widgets: [...res.data.widgets]
-                    })
-
-                })
+                props.getAndSetWidgetsData()
+                // getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+                //     // console.log(res.data)
+                //     contextData.dispatchWidgetsSettings({
+                //         widgets: [...res.data.widgets]
+                //     })
+                //
+                // })
             })
         }
     };
 
-    const RenderWidgetCustomStyle = () => {
-        return (
-            <>
-                <p>Extra ClassName for Custom Style:</p>
-                <DelayInput name='extraClassName' value={widgetData.extraClassName || ''} delayTimeout={4000}
-                            onChange={e => onChangeHandler(e)}/>
-                <p>Custom Styles:</p>
-                <DelayInput element="textarea" className='customStylesTextarea' name='customStyles'
-                            value={widgetData.customStyles || ''} delayTimeout={4000}
-                            onChange={e => onChangeHandler(e)}/>
-            </>
-        )
-    };
 
-    const renderCustomPagesPosition = customPages.map(customPage => {
+    const renderCustomPagesPosition = props.customPages.map(customPage => {
         return (
             <>
-                <option value={customPage}>{convertVariableNameToName(customPage)}</option>
-                <option value={customPage + 'Sidebar'}>{convertVariableNameToName(customPage) + ' Sidebar'}</option>
+                <option value={customPage} key={customPage + '1'}>{convertVariableNameToName(customPage)}</option>
+                <option value={customPage + 'Sidebar'} key={customPage + '2'}>{convertVariableNameToName(customPage) + ' Sidebar'}</option>
             </>
         )
     })
@@ -260,16 +292,6 @@ const WidgetModel = props => {
             case 'posts':
                 return (
                     <>
-
-                        <RenderTitleAndRedirectLink widgetData={widgetData} widgetSettings={widgetSettings}
-                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <TextWidgetTypeFields
-                            widgetSettings={widgetSettings}
-                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                            //textInputsData={textInputsData}
-                            widgetData={widgetData}
-                            onChangeHandler={onChangeHandler}
-                        />
                         <p>Sort By:</p>
                         <select name='sortBy' value={widgetData.sortBy} onChange={e => onChangeHandler(e)}>
                             <option value='_id'>Newest</option>
@@ -277,37 +299,28 @@ const WidgetModel = props => {
                             <option value='views'>Views</option>
                             <option value='likes'>Likes</option>
                         </select>
-                        {/*<RenderSelectedMetaForPosts/>*/}
-                        <SelectedMetaIdForPostWidget onChangeHandler={onChangeHandler} widgetData={widgetData}/>
                         <p>View Type:</p>
                         <select name='viewType' value={widgetData.viewType} onChange={e => onChangeHandler(e)}>
                             <option value='standard'>Standard</option>
                             <option value='small'>Small</option>
                             <option value='list'>List</option>
                         </select>
-                        <TextInputFieldForWidget element='input' inputTitle='count :' name='count' type='number' value={widgetData.count} classNameValue='count' placeHolder='count'
-                                                 onChangeHandler={onChangeHandler}/>
+
                     </>
                 )
             case 'postsSwiper':
                 return (
                     <>
-                        <PostSwiperTypeWidgetModelFields
-                            onChangeHandler={onChangeHandler}
-                            postSwiperAmountMobile={widgetData.postSwiperAmountMobile}
-                            postSwiperAmountDesktop={widgetData.postSwiperAmountDesktop}
-                            postSwiperSpaceBetweenMobile={widgetData.postSwiperSpaceBetweenMobile}
-                            postSwiperSpaceBetweenDesktop={widgetData.postSwiperSpaceBetweenDesktop}
-                        />
-                        <RenderTitleAndRedirectLink widgetData={widgetData} widgetSettings={widgetSettings}
-                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <TextWidgetTypeFields
-                            widgetSettings={widgetSettings}
-                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                            //textInputsData={textInputsData}
-                            widgetData={widgetData}
-                            onChangeHandler={onChangeHandler}
-                        />
+                        {/*<PostSwiperTypeWidgetModelFields*/}
+                        {/*    onChangeHandler={onChangeHandler}*/}
+                        {/*    postSwiperAmountMobile={widgetData.postSwiperAmountMobile}*/}
+                        {/*    postSwiperAmountDesktop={widgetData.postSwiperAmountDesktop}*/}
+                        {/*    postSwiperSpaceBetweenMobile={widgetData.postSwiperSpaceBetweenMobile}*/}
+                        {/*    postSwiperSpaceBetweenDesktop={widgetData.postSwiperSpaceBetweenDesktop}*/}
+                        {/*    rendering={true}*/}
+                        {/*/>*/}
+
+
                         <p>Sort By:</p>
                         <select name='sortBy' value={widgetData.sortBy} onChange={e => onChangeHandler(e)}>
                             <option value='_id'>Newest</option>
@@ -315,41 +328,28 @@ const WidgetModel = props => {
                             <option value='views'>Views</option>
                             <option value='likes'>Likes</option>
                         </select>
-                        {/*<RenderSelectedMetaForPosts/>*/}
-                        <SelectedMetaIdForPostWidget onChangeHandler={onChangeHandler} widgetData={widgetData}/>
                         <p>View Type:</p>
                         <select name='viewType' value={widgetData.viewType} onChange={e => onChangeHandler(e)}>
                             <option value='standard'>Standard</option>
                             <option value='small'>Small</option>
                             <option value='list'>List</option>
                         </select>
-                        <TextInputFieldForWidget element='input' inputTitle='count :' name='count' type='number' value={widgetData.count} classNameValue='count' placeHolder='count'
-                                                 onChangeHandler={onChangeHandler}/>
                     </>
                 )
-            case 'media':
-                return (
-
-                    <MediaWidgetType
-                        widgetSettings={widgetSettings}
-                        onChangeHandler={onChangeHandler}
-                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                        widgetData={widgetData}
-                    />
-
-                )
+            // case 'media':
+            //     return (
+            //
+            //         <MediaWidgetType
+            //             widgetSettings={widgetSettings}
+            //             onChangeHandler={onChangeHandler}
+            //             onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+            //             widgetData={widgetData}
+            //         />
+            //
+            //     )
             case 'meta':
                 return (
                     <>
-                        <RenderTitleAndRedirectLink widgetData={widgetData} widgetSettings={widgetSettings}
-                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <TextWidgetTypeFields
-                            widgetSettings={widgetSettings}
-                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                            //textInputsData={textInputsData}
-                            widgetData={widgetData}
-                            onChangeHandler={onChangeHandler}
-                        />
                         <p>Sort By:</p>
                         <select name='sortBy' value={widgetData.sortBy} onChange={e => onChangeHandler(e)}>
                             <option value='_id'>ID</option>
@@ -362,99 +362,50 @@ const WidgetModel = props => {
                             <option value='categories'>Categories</option>
                             <option value='actors'>Actors</option>
                         </select>
-                        <TextInputFieldForWidget element='input' inputTitle='Meta background Color :' name='metaBackgroundColor' type='text' value={widgetData.metaBackgroundColor}
-                                                 classNameValue='metaBackgroundColor' placeHolder='Meta background Color' onChangeHandler={onChangeHandler}/>
-                        <TextInputFieldForWidget element='input' inputTitle='Meta Text Color :' name='metaTextColor' type='text' value={widgetData.metaTextColor} classNameValue='metaTextColor'
-                                                 placeHolder='Meta Text Color' onChangeHandler={onChangeHandler}/>
-                        <TextInputFieldForWidget element='input' inputTitle='Count :' name='count' type='number' value={widgetData.count} classNameValue='count' placeHolder='count'
-                                                 onChangeHandler={onChangeHandler}/>
-                    </>
-                )
-            case 'searchBar':
-                return (
-                    <>
-                        <TextInputFieldForWidget element='input' inputTitle='Search Button Background Color :' name='searchBtnBackgroundColor' type='text'
-                                                 value={widgetData.searchBtnBackgroundColor || '#222222'} classNameValue='searchBtnBackgroundColor' placeHolder='Search Button Background Color'
-                                                 onChangeHandler={onChangeHandler}/>
-                        <TextInputFieldForWidget element='input' inputTitle='Search Button Color :' name='searchBtnColor' type='text' value={widgetData.searchBtnColor || 'white'}
-                                                 classNameValue='searchBtnColor' placeHolder='Search Button Color' onChangeHandler={onChangeHandler}/>
-
                     </>
                 )
             case 'logo':
                 return (
                     <>
-                        <TextInputFieldForWidget element='input' inputTitle='Logo image URL :' name='LogoUrl' type='text' value={widgetData.LogoUrl} classNameValue='logoUrl'
-                                                 placeHolder='Logo image URL' onChangeHandler={onChangeHandler}/>
                         <p>Logo Text</p>
-                        <DelayInput name='LogoText' value={
-                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.LogoText :
-                                widgetData.translations ?
-                                    widgetData.translations[widgetSettings.activeEditingLanguage] ?
-                                        widgetData.translations[widgetSettings.activeEditingLanguage].LogoText || '' :
-                                        '' : ''
-                        } className='LogoText'
+                        <DelayInput name='LogoText'
+                                    // value={
+                                    //     widgetSettings.activeEditingLanguage === 'default' ? widgetData.LogoText :
+                                    //         widgetData.translations ?
+                                    //             widgetData.translations[widgetSettings.activeEditingLanguage] ?
+                                    //                 widgetData.translations[widgetSettings.activeEditingLanguage].LogoText || '' :
+                                    //                 '' : ''
+                                    // }
+                                    value={
+                                        widgetSettings.activeEditingLanguage === 'default' ? widgetData.LogoText :
+                                            widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.LogoText || ''
+                                    }
+                                    className='LogoText'
                                     delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
 
-                        <div className='color-section-widget'>
-                            <TextInputFieldForWidget element='input' inputTitle='Logo Text Color :' name='logoTextColor' type='text' value={widgetData.logoTextColor}
-                                                     classNameValue='logoTextColor' placeHolder='Logo Text Color' onChangeHandler={onChangeHandler}/>
-                            <TextInputFieldForWidget element='input' inputTitle='Logo Text Font Size :' name='logoTextFontSize' type='number' value={widgetData.logoTextFontSize}
-                                                     classNameValue='logoTextFontSize' placeHolder='Logo Text Font Size' onChangeHandler={onChangeHandler}/>
-                        </div>
                         <p>Under Logo Headline Text</p>
-                        <DelayInput name='headLine' value={
-                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.headLine :
-                                widgetData.translations ?
-                                    widgetData.translations[widgetSettings.activeEditingLanguage] ?
-                                        widgetData.translations[widgetSettings.activeEditingLanguage].headLine || '' :
-                                        '' : ''
-                        } className='headLine'
-                                    delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
-                        <div className='color-section-widget'>
-                            <TextInputFieldForWidget element='input' inputTitle='Head Line Color :' name='logoHeadLineColor' type='text' value={widgetData.logoHeadLineColor}
-                                                     classNameValue='logoHeadLineColor' placeHolder='Head Line Color' onChangeHandler={onChangeHandler}/>
-                            <TextInputFieldForWidget element='input' inputTitle='Head Line Font Size :' name='logoHeadLineFontSize' type='number' value={widgetData.logoHeadLineFontSize}
-                                                     classNameValue='logoHeadLineFontSize' placeHolder='Head Line Font Size' onChangeHandler={onChangeHandler}/>
-                            <TextInputFieldForWidget element='input' inputTitle='Head Line Font Weight:' name='logoHeadLineFontWeight' value={widgetData.logoHeadLineFontWeight}
-                                                     classNameValue='logoHeadLineFontWeight' placeHolder='Head Line Font Weight' onChangeHandler={onChangeHandler}/>
-                        </div>
-                    </>
-                )
-            case 'alphabeticalNumericalRange':
-                return (
-                    <>
-                        <RenderTitleAndRedirectLink widgetData={widgetData} widgetSettings={widgetSettings}
-                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                    </>
-                )
-            case 'text':
-                return (
-                    <>
-                        <RenderTitleAndRedirectLink widgetData={widgetData} widgetSettings={widgetSettings}
-                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <TextWidgetTypeFields
-                            widgetSettings={widgetSettings}
-                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                            widgetData={widgetData}
-                            onChangeHandler={onChangeHandler}
-                        />
+                        <DelayInput name='headLine'
+                            // value={
+                            //     widgetSettings.activeEditingLanguage === 'default' ? widgetData.headLine :
+                            //     widgetData.translations ?
+                            //     widgetData.translations[widgetSettings.activeEditingLanguage] ?
+                            //     widgetData.translations[widgetSettings.activeEditingLanguage].headLine || '' :
+                            //     '' : ''
+                            //  }
+                                    value={
+                                        widgetSettings.activeEditingLanguage === 'default' ? widgetData.headLine :
+                                            widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.headLine || ''
 
+                                    }
+                                    className='headLine'
+                                    delayTimeout={2000} onChange={e => onTextInputsDataChangeHandler(e)}/>
                     </>
                 )
+
             case 'textMedia':
                 return (
                     <>
-                        <RenderTitleAndRedirectLink widgetData={widgetData} widgetSettings={widgetSettings}
-                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>
-                        <TextWidgetTypeFields
-                            widgetSettings={widgetSettings}
-                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                            widgetData={widgetData}
-                            onChangeHandler={onChangeHandler}
-                        />
                         <MediaWidgetType
-                            // textInputsData={textInputsData}
                             widgetSettings={widgetSettings}
                             onChangeHandler={onChangeHandler}
                             onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
@@ -462,22 +413,12 @@ const WidgetModel = props => {
                         />
                     </>
                 )
-            case 'linkTo':
-                return (
-                    <>
-                        <LinkTypeWidgetModelFields
-                            widgetSettings={widgetSettings}
-                            // textInputsData={textInputsData}
-                            widgetData={widgetData}
-                            onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-                            onChangeHandler={onChangeHandler}
-                            linkToText={widgetData.linkToText}
-                            linkToWindowType={widgetData.linkToWindowType}
-                            linkTo={widgetData.linkTo}
-                            linkToType={widgetData.linkToType}
-                            linkToAs={widgetData.linkToAs}/>
-                    </>
-                )
+            // case 'linkTo':
+            //     return (
+            //         <>
+            //
+            //         </>
+            //     )
             case 'language':
                 return (
                     <>
@@ -486,30 +427,31 @@ const WidgetModel = props => {
                                                  placeHolder='Language Text As Default Language' onChangeHandler={onChangeHandler}/>
 
                         <p>Language To Show Beside Drop Down:</p>
-                        <DelayInput name='languageToShowBesideDropDown' value={
-                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.languageToShowBesideDropDown :
-                                widgetData.translations ?
-                                    widgetData.translations[widgetSettings.activeEditingLanguage] ?
-                                        widgetData.translations[widgetSettings.activeEditingLanguage].languageToShowBesideDropDown || '' :
-                                        '' : ''
-                        } delayTimeout={2000}
+                        <DelayInput name='languageToShowBesideDropDown'
+                            // value={
+                            //     widgetSettings.activeEditingLanguage === 'default' ? widgetData.languageToShowBesideDropDown :
+                            //         widgetData.translations ?
+                            //             widgetData.translations[widgetSettings.activeEditingLanguage] ?
+                            //                 widgetData.translations[widgetSettings.activeEditingLanguage].languageToShowBesideDropDown || '' :
+                            //                 '' : ''
+                            // }
+                                    value={
+                                        widgetSettings.activeEditingLanguage === 'default' ? widgetData.languageToShowBesideDropDown :
+                                            widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.languageToShowBesideDropDown || ''
+                                    }
+                                    delayTimeout={2000}
                                     onChange={e => onTextInputsDataChangeHandler(e)}/>
                     </>
                 )
-            case 'recentComments':
-                return (
-                    <>
-                        <RenderTitleAndRedirectLink widgetData={widgetData} widgetSettings={widgetSettings}
-                                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/>                    </>
-                )
+
             case 'imageSwiper':
                 return (
                     <>
                         <ImageSwiperTypeWidgetModelFields imageSwiperData={widgetData.imageSwiperData || []}
-                                                          imageSwiperAmountMobile={widgetData.imageSwiperAmountMobile}
-                                                          imageSwiperAmountDesktop={widgetData.imageSwiperAmountDesktop}
-                                                          imageSwiperSpaceBetweenMobile={widgetData.imageSwiperSpaceBetweenMobile}
-                                                          imageSwiperSpaceBetweenDesktop={widgetData.imageSwiperSpaceBetweenDesktop}
+                            // imageSwiperAmountMobile={widgetData.imageSwiperAmountMobile}
+                            // imageSwiperAmountDesktop={widgetData.imageSwiperAmountDesktop}
+                            // imageSwiperSpaceBetweenMobile={widgetData.imageSwiperSpaceBetweenMobile}
+                            // imageSwiperSpaceBetweenDesktop={widgetData.imageSwiperSpaceBetweenDesktop}
                                                           onChangeHandler={onChangeHandler}
                         />
                     </>
@@ -523,8 +465,8 @@ const WidgetModel = props => {
             case 'form':
                 return (
                     <>
-                        <FormTypeWiddgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler}
-                                                    mobileNavigation={widgetData.mobileNavigation}/>
+                        <FormTypeWidgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler}
+                                                   mobileNavigation={widgetData.mobileNavigation}/>
                     </>
                 )
             default:
@@ -537,15 +479,18 @@ const WidgetModel = props => {
     if (widgetSettings.open) {
         return (
             <>
-                <WidgetHeaderControl widgetSettings={widgetSettings} widgetData={widgetData} changeWidgetIndex={changeWidgetIndex} onOpenHandler={onOpenHandler}/>
+                <WidgetHeaderControl widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} changeWidgetIndex={changeWidgetIndex} onOpenHandler={onOpenHandler}/>
                 <div className='widgetModel'>
                     <div className='widgetInfo'>
-                        <label className='widgetId'><p>ID :</p> <p>{props.data._id}</p></label>
+                        <label className='widgetId'><p>ID :</p> <p>{props.widgetId || props.state.widgetId || 'XXX'}</p></label>
                     </div>
-                    <TextInputFieldForWidget element='input' inputTitle='Name:' name='name' type='text' value={widgetData.name} classNameValue='name' placeHolder='name'
-                                             onChangeHandler={onChangeHandler}/>
+                    <TextInputFieldForWidget inputTitle='Name:' name='name' type='text' value={widgetData.name} classNameValue='name' placeHolder='name'
+                                             onChangeHandler={onChangeHandler}
+                                             rendering={true}
+                    />
+                    {/*<textarea value={widgetData.test} onChange={e=>setWidgetData({...widgetData,test:e.target.value})}/>*/}
                     <p>Translations:</p>
-                    <select name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
+                    <select ref={languageElement} name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
                         <option value='default'>Default</option>
                         {languagesOptions}
                     </select>
@@ -581,7 +526,7 @@ const WidgetModel = props => {
                         <option value='postsSwiper'>Posts Swiper</option>
                     </select>
 
-                    <TextInputFieldForWidget element='input' inputTitle='Widget Index :' name='widgetIndex' type='number' value={widgetData.widgetIndex} classNameValue='widgetIndex'
+                    <TextInputFieldForWidget inputTitle='Widget Index :' name='widgetIndex' type='number' value={widgetData.widgetIndex} classNameValue='widgetIndex'
                                              placeHolder='Widget Index' onChangeHandler={onChangeHandler}/>
 
                     <p>Position:</p>
@@ -598,11 +543,148 @@ const WidgetModel = props => {
                         <option value='actorsPagesSidebar'>Actors Page SideBar</option>
                         <option value='footer'>Footer</option>
                         <option value='deactivate'>Deactivate</option>
-                        {renderCustomPagesPosition}
+                        {/*{renderCustomPagesPosition}*/}
                     </select>
 
+                    <RenderTitleAndRedirectLink
+                        widgetData={widgetData}
+                        widgetSettings={widgetSettings}
+                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                        rendering={
+                            widgetData.type === 'posts' ||
+                            widgetData.type === 'postsSwiper' ||
+                            widgetData.type === 'imageSwiper' ||
+                            widgetData.type === 'meta' ||
+                            widgetData.type === 'alphabeticalNumericalRange' ||
+                            widgetData.type === 'text' ||
+                            widgetData.type === 'textEditor' ||
+                            widgetData.type === 'media' ||
+                            widgetData.type === 'recentComments'}
+                    />
+                    <TextWidgetTypeFields
+                        widgetSettings={widgetSettings}
+                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                        widgetData={widgetData}
+                        onChangeHandler={onChangeHandler}
+                        rendering={
+                            widgetData.type === 'posts' ||
+                            widgetData.type === 'postsSwiper' ||
+                            widgetData.type === 'imageSwiper' ||
+                            widgetData.type === 'meta' ||
+                            widgetData.type === 'media' ||
+                            widgetData.type === 'alphabeticalNumericalRange' ||
+                            widgetData.type === 'text' ||
+                            widgetData.type === 'recentComments'}
+                    />
+                    <TextInputFieldForWidget element='input' inputTitle='Language Text As Default Language :' name='languageTextAsDefaultLanguage' type='text'
+                                             value={widgetData.languageTextAsDefaultLanguage || 'default'} classNameValue='languageTextAsDefaultLanguage'
+                                             placeHolder='Language Text As Default Language' onChangeHandler={onChangeHandler} rendering={widgetData.type === 'language'}/>
+                    {/*<TextInputFieldForWidget inputTitle='Image Swiper Images Amount In View Mobile :' name='postSwiperAmountMobile' type='number' value={widgetData.postSwiperAmountMobile}*/}
+                    {/*                         classNameValue='postSwiperAmountMobile' placeHolder='Post Swiper Images Amount In View Mobile'*/}
+                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'postsSwiper'}/>*/}
+                    {/*<TextInputFieldForWidget inputTitle='Image Swiper Images Amount In View Desktop :' name='postSwiperAmountDesktop' type='number' value={widgetData.postSwiperAmountDesktop}*/}
+                    {/*                         classNameValue='postSwiperAmountDesktop' placeHolder='Post Swiper Images Amount In View Desktop'*/}
+                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'postsSwiper'}/>*/}
+                    {/*<TextInputFieldForWidget inputTitle='Image Swiper Space Between Mobile :' name='postSwiperSpaceBetweenMobile' type='number' value={widgetData.postSwiperSpaceBetweenMobile}*/}
+                    {/*                         classNameValue='postSwiperSpaceBetweenMobile' placeHolder='Post Swiper Space Between Mobile'*/}
+                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'postsSwiper'}/>*/}
+                    {/*<TextInputFieldForWidget inputTitle='Post Swiper Space Between Desktop :' name='postSwiperSpaceBetweenDesktop' type='number' value={widgetData.postSwiperSpaceBetweenDesktop}*/}
+                    {/*                         classNameValue='postSwiperSpaceBetweenDesktop' placeHolder='Post Swiper Space Between Desktop'*/}
+                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'postsSwiper'}/>*/}
+
+                    {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Mobile :' name='imageSwiperAmountMobile' type='number'*/}
+                    {/*                         value={widgetData.imageSwiperAmountMobile}*/}
+                    {/*                         classNameValue='imageSwiperAmountMobile' placeHolder='Image Swiper Images Amount In View Mobile'*/}
+                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'imageSwiper'}/>*/}
+                    {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Desktop :' name='imageSwiperAmountDesktop' type='number'*/}
+                    {/*                         value={widgetData.imageSwiperAmountDesktop}*/}
+                    {/*                         classNameValue='imageSwiperAmountDesktop' placeHolder='Image Swiper Images Amount In View Desktop'*/}
+                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'imageSwiper'}/>*/}
+                    {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Mobile :' name='imageSwiperSpaceBetweenMobile' type='number'*/}
+                    {/*                         value={widgetData.imageSwiperSpaceBetweenMobile}*/}
+                    {/*                         classNameValue='imageSwiperSpaceBetweenMobile' placeHolder='Image Swiper Space Between Mobile'*/}
+                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'imageSwiper'}/>*/}
+                    {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Desktop :' name='imageSwiperSpaceBetweenDesktop' type='number'*/}
+                    {/*                         value={widgetData.imageSwiperSpaceBetweenDesktop}*/}
+                    {/*                         classNameValue='imageSwiperSpaceBetweenDesktop' placeHolder='Image Swiper Space Between Desktop'*/}
+                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'imageSwiper'}/>*/}
 
                     <RenderOptionByFormat/>
+
+                    <LinkTypeWidgetModelFields
+                        widgetSettings={widgetSettings}
+                        widgetData={widgetData}
+                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                        onChangeHandler={onChangeHandler}
+                        linkToText={widgetData.linkToText}
+                        linkToWindowType={widgetData.linkToWindowType}
+                        linkTo={widgetData.linkTo}
+                        linkToType={widgetData.linkToType}
+                        linkToAs={widgetData.linkToAs} rendering={widgetData.type === 'linkTo'}/>
+
+
+                    <MediaWidgetType
+                        rendering={widgetData.type === 'media'}
+                        widgetSettings={widgetSettings}
+                        onChangeHandler={onChangeHandler}
+                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                        widgetData={widgetData}
+                    />
+                    <TextInputFieldForWidget
+                        inputTitle='Media Url:'
+                        name='mediaUrl'
+                        value={widgetData.mediaUrl}
+                        classNameValue='mediaUrl'
+                        type='text'
+                        placeHolder='mediaUrl'
+                        //widgetSettings={widgetSettings}
+                        onChangeHandler={onChangeHandler}
+                        rendering={
+                            widgetData.type === 'media'}
+                    />
+                    <TextInputFieldForWidget
+                        inputTitle='count :'
+                        name='count'
+                        type='number'
+                        value={widgetData.count}
+                        classNameValue='count'
+                        placeHolder='count'
+                        onChangeHandler={onChangeHandler}
+                        rendering={
+                            widgetData.type === 'posts' ||
+                            widgetData.type === 'postsSwiper' ||
+                            widgetData.type === 'meta'
+                        }/>
+                    <TextEditor
+                        state={widgetData}
+                        activeEditingLanguage={widgetSettings.activeEditingLanguage}
+                        onChangeHandler={onTextEditorChangeHandler}
+                        // value={
+                        //     widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
+                        //         widgetData.translations[widgetSettings.activeEditingLanguage] ?
+                        //             widgetData.translations[widgetSettings.activeEditingLanguage].text : ''
+                        // }
+                        valueData={
+                           ( languageElement?.current?.value === 'default' || !languageElement?.current?.value ) ? widgetData.text :
+                                widgetData?.translations?.[languageElement?.current?.value]?.text || ''
+                        }
+                        rendering={
+                            widgetData.type === 'textEditor'
+                        }
+                    />
+
+                    <TextInputFieldForWidget inputTitle='Selected Meta For Posts:' name='selectedMetaForPosts' type='text' value={widgetData.selectedMetaForPosts}
+                                             classNameValue='selectedMetaForPosts' placeHolder='selectedMetaForPosts'
+                                             onChangeHandler={onChangeHandler} rendering={widgetData.type === 'posts' || widgetData.type === 'postsSwiper'}/>
+
+                    <TextInputFieldForWidget inputTitle='Logo image URL :' name='LogoUrl' type='text' value={widgetData.LogoUrl} classNameValue='logoUrl'
+                                             placeHolder='Logo image URL' onChangeHandler={onChangeHandler} rendering={widgetData.type === 'logo'}/>
+                    <SliderWidgetTypeFields
+                        rendering={widgetData.type === 'imageSwiper'||widgetData.type === 'postsSwiper'}
+                        onChangeHandler={onChangeHandler}
+                        widgetData={widgetData}
+                    />
+
                     <button onClick={() => {
                         widgetSettings.preview ? setWidgetSettings({
                             ...widgetSettings,
@@ -612,7 +694,13 @@ const WidgetModel = props => {
                     </button>
 
                     <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/>
-                    <RenderWidgetCustomStyle/>
+                    <p>Extra ClassName for Custom Style:</p>
+                    <input type='text' name='extraClassName' value={widgetData.extraClassName || ''}
+                           onChange={e => onChangeHandler(e)}/>
+                    <p>Custom Styles:</p>
+                    <textarea className='customStylesTextarea' name='customStyles'
+                              value={widgetData.customStyles || ''}
+                              onChange={e => onChangeHandler(e)}/>
                     <div className=' '>
                         <button onClick={() => onSaveHandler()}>Save</button>
                         <ExportWidget data={{...widgetData}}/>

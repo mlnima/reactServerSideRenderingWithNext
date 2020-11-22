@@ -61,7 +61,7 @@ checkout.getInitialProps = async ({pathname, query, req, asPath}) => {
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
     const widgetsData = await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'tagsPage')
 
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
     return {...settings, query, pathname, asPath, widgets}

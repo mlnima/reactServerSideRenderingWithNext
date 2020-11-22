@@ -1,11 +1,11 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faPen} from "@fortawesome/free-solid-svg-icons";
-import './WidgetHeaderControl.scss'
 import {convertVariableNameToName} from "../../../../../_variables/_variables";
 import SortUpSvg from "../../../../../static/images/fontawesome/sort-up-solid.svg";
 import SortDownSvg from "../../../../../static/images/fontawesome/sort-down-solid.svg";
 import Link from "next/link";
+import './WidgetHeaderControl.scss'
 
 const WidgetHeaderControl = props => {
 

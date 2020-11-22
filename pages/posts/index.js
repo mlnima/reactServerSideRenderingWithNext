@@ -83,7 +83,7 @@ posts.getInitialProps = async ({pathname, query, req, res, err}) => {
     let widgets;
     let settings;
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'postsPage')
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
     //|| settings.identity.data.postsCountPerPage
     const getPostsData = {
         size: parseInt(query.size) || parseInt(settings.identity.data.postsCountPerPage) || 30,

@@ -25,7 +25,7 @@ const metasSaver = async (metas) => {
 
         })
     }
-    console.log(finalData)
+   // console.log(finalData)
     return finalData
 }
 
@@ -52,7 +52,7 @@ postsControllers.createNewPost = async (req, res) => {
         const newPostDataToSave = new postSchema(editedNewPost);
         newPostDataToSave.save().then(savedPostData => {
             res.json({savedPostData});
-            console.log('savedPostData : ', savedPostData)
+          //  console.log('savedPostData : ', savedPostData)
             res.end()
         }).catch(err => {
             if (err.code === 11000) {
@@ -85,7 +85,7 @@ postsControllers.updateMeta = (req, res) => {
 postsControllers.updatePost = async (req, res) => {
     const postUpdatedData = req.body.postData
 
-    console.log(postUpdatedData)
+   // console.log(postUpdatedData)
     try {
         const finalPostUpdatedData = {
             ...postUpdatedData,
@@ -207,7 +207,7 @@ postsControllers.deletePost = (req, res) => {
 
 postsControllers.postsBulkAction = async (req, res) => {
     const ids = req.body.ids || [];
-    console.log(req.body)
+   // console.log(req.body)
     const status = req.body.status;
     let actions;
 
@@ -371,7 +371,7 @@ postsControllers.newComment = (req, res) => {
 
     const commentDataToSave = new commentSchema(req.body)
     commentDataToSave.save(saved => {
-        console.log(saved)
+     //   console.log(saved)
         res.end()
     })
 };
@@ -446,7 +446,7 @@ postsControllers.export = (req, res) => {
         }
 
     }).then(finalData => {
-        console.log(finalData)
+       // console.log(finalData)
         res.json({exportedData: finalData})
         res.end()
     })

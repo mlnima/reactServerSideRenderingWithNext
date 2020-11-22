@@ -30,6 +30,15 @@ const Post = props => {
         postPageStyle:'',
         editMode: false
     })
+    const [deviceWidth,setDeviceWidth] = useState(null)
+
+    useEffect(() => {
+        setDeviceWidth(window.innerWidth)
+    }, []);
+
+
+
+
 
     useEffect(() => {
         if (props.identity.postPageSidebar) {
@@ -77,7 +86,7 @@ const Post = props => {
                     <div  className="main">
 
                         <VideoPlayer {...props.post}/>
-                        <SlideShow {...props.post}/>
+                        <SlideShow {...props.post} sidebar={props.identity.data.postPageSidebar} deviceWidth={deviceWidth}/>
                         <PostInfo
                             {...props}
                             title={props.post.title}
@@ -100,7 +109,7 @@ const Post = props => {
                         <CommentsRenderer comments={props.comments}/>
                         <CommentFrom documentId={props.post._id} documentTitle={props.post.title}/>
                         <div className='under-post-widget-area'>
-                            <WidgetsRenderer widgets={props.widgets} position='underPost'/>
+                            <WidgetsRenderer deviceWidth={deviceWidth} widgets={props.widgets} position='underPost'/>
                         </div>
                     </div>
                     <Sidebar key='postPageSidebar' isActive={props.identity.data.postPageSidebar} widgets={props.widgets} position='postPageSidebar'/>
@@ -135,7 +144,7 @@ Post.getInitialProps = async ({pathname, query, req, res, err}) => {
     }
     const commentsData = post ? await getComments({onDocument: post._id}, domainName, true) : {}
 
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     comments = post ? commentsData.data.comments : []
 

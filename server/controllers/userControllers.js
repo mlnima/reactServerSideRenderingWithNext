@@ -135,7 +135,7 @@ userControllers.getUserInfo = (req, res) => {
     userSchema.findById(req.userData._id).exec().then(user => {
         let userDataToSend = user.toObject()
         delete userDataToSend.password
-        res.json(dataEncoder({ userData: userDataToSend }));
+        res.json({ userData: userDataToSend });
         res.end()
     }).catch(err => {
         console.log(err);

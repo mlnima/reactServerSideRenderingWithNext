@@ -1,23 +1,27 @@
 @import "../../../styles/links";
 
-.Post{
+.admin-post{
   display: grid;
   justify-content: center;
   grid-template-columns: 1fr;
-  grid-gap: 20px;
+
 
   .content{
-
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .Post{
+  .admin-post{
     grid-template-columns: 1fr 200px;
-    grid-template-rows: auto;
+    grid-gap: 20px;
+    //grid-template-rows: auto;
     .content{
       .post-admin-widget-editor{
-        max-width: 96%;
+        //max-width: 96%;
       }
     }
     .side{

@@ -6,24 +6,23 @@ import WidgetExporter from "./WidgetExporter/WidgetExporter";
 const AddWidgetMenu = props => {
     return (
         <div className='AddWidgetMenu'>
-            <AddWidgetWithPositionMenu type='text' name='Text'/>
-            {/*<AddWidgetWithPositionMenu type='textMedia' name='Text and Media'/>*/}
-            <AddWidgetWithPositionMenu type='menu' name='Menu'/>
-            <AddWidgetWithPositionMenu type='linkTo' name='Link To'/>
-            <AddWidgetWithPositionMenu type='posts' name='Posts'/>
-            <AddWidgetWithPositionMenu type='media' name='Media'/>
-            <AddWidgetWithPositionMenu type='recentComments' name='Recent Comments'/>
-            <AddWidgetWithPositionMenu type='searchBar' name='Search'/>
-            <AddWidgetWithPositionMenu type='meta' name='Meta'/>
-            <AddWidgetWithPositionMenu type='logo' name='Logo'/>
-            <AddWidgetWithPositionMenu type='form' name='Form'/>
-            <AddWidgetWithPositionMenu type='shoppingCart' name='Shopping Cart'/>
-            {/*<AddWidgetWithPositionMenu type='navigationMenu' name='Navigation Menu'/>*/}
-            <AddWidgetWithPositionMenu type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
-            <AddWidgetWithPositionMenu type='language' name='Language'/>
-            <AddWidgetWithPositionMenu type='authentication' name='Auth Buttons'/>
-            <AddWidgetWithPositionMenu type='imageSwiper' name='Image Swiper(slide Show)'/>
-            <AddWidgetWithPositionMenu type='postsSwiper' name='Post Swiper(slide Show)'/>
+            <AddWidgetWithPositionMenu {...props} type='text' name='Text'/>
+            <AddWidgetWithPositionMenu {...props} type='textEditor' name='Text Editor'/>
+            <AddWidgetWithPositionMenu {...props} type='menu' name='Menu'/>
+            <AddWidgetWithPositionMenu {...props} type='linkTo' name='Link To'/>
+            <AddWidgetWithPositionMenu {...props} type='posts' name='Posts'/>
+            <AddWidgetWithPositionMenu {...props} type='media' name='Media'/>
+            <AddWidgetWithPositionMenu {...props} type='recentComments' name='Recent Comments'/>
+            <AddWidgetWithPositionMenu {...props} type='searchBar' name='Search'/>
+            <AddWidgetWithPositionMenu {...props} type='meta' name='Meta'/>
+            <AddWidgetWithPositionMenu {...props} type='logo' name='Logo'/>
+            <AddWidgetWithPositionMenu {...props} type='form' name='Form'/>
+            <AddWidgetWithPositionMenu {...props} type='shoppingCart' name='Shopping Cart'/>
+            <AddWidgetWithPositionMenu {...props} type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
+            <AddWidgetWithPositionMenu {...props} type='language' name='Language'/>
+            <AddWidgetWithPositionMenu {...props} type='authentication' name='Auth Buttons'/>
+            <AddWidgetWithPositionMenu {...props} type='imageSwiper' name='Image Swiper(slide Show)'/>
+            <AddWidgetWithPositionMenu {...props} type='postsSwiper' name='Post Swiper(slide Show)'/>
             <WidgetImporter/>
             <WidgetExporter/>
         </div>

@@ -1,18 +1,17 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, {useEffect, useState, useContext, useRef} from 'react';
+import Image from 'next/image';
 
 const SlideShow = props => {
-    const [ state, setState ] = useState({
+    const [state, setState] = useState({
         activeImageIndex: 0,
         imagesArrayLength: 0
     });
     useEffect(() => {
-
         setState({
             ...state,
             imagesArrayLength: props.images.length
         })
-    }, [ props ]);
-
+    }, [props]);
 
 
     const nextImage = () => {
@@ -34,7 +33,7 @@ const SlideShow = props => {
             return null
         } else {
             return (
-                <button className='product-slide-show-slide-btn product-slide-show-slide-btn-right' onClick={ () => nextImage() }>&#11208; </button>
+                <button className='product-slide-show-slide-btn product-slide-show-slide-btn-right' onClick={() => nextImage()}>&#11208; </button>
             )
         }
     }
@@ -42,19 +41,51 @@ const SlideShow = props => {
     const PreviousBtn = () => {
         if (state.activeImageIndex > 0 && state.imagesArrayLength > 1) {
             return (
-                <button className='product-slide-show-slide-btn product-slide-show-slide-btn-left' onClick={ () => previousImage() }> &#11207; </button>
+                <button className='product-slide-show-slide-btn product-slide-show-slide-btn-left' onClick={() => previousImage()}> &#11207; </button>
             )
         } else {
             return null
         }
     }
 
+    const RenderImageElement = () => {
+        const activeImageSrc = props.images.length > 0 ? props.images[state.activeImageIndex] : props.mainThumbnail
+
+        if (activeImageSrc.includes('http')) {
+            if (props.images.length > 0) {
+                return (
+                    <img className='active-image' src={activeImageSrc} alt="activeImageSrc"/>
+                )
+            } else {
+                return (
+                    <img className='active-image' src={activeImageSrc} alt="activeImageSrc"/>
+                )
+            }
+        } else {
+
+            let imageWidth = props.deviceWidth > 768 ? props.sidebar ? props.deviceWidth - 300 : props.deviceWidth : props.deviceWidth
+            console.log(imageWidth)
+            return (
+                // <img src={activeImageSrc} alt="activeImageSrc"/>
+                <Image src={activeImageSrc} alt="activeImageSrc"
+                       width={imageWidth || 640} height={(imageWidth || 640) / 1.777}
+                    // layout='fill'
+                       quality={50} lazy={true}/>
+            )
+        }
+
+    }
+
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
+
     if (props.postType === 'product') {
         return (
             <div className='product-slide-show'>
                 <PreviousBtn/>
                 <div className='product-slide-show-image-area'>
-                    <img src={ props.images.length>0 ?props.images[state.activeImageIndex]:props.mainThumbnail } alt=""/>
+                    <RenderImageElement/>
                 </div>
 
                 <NextBtn/>

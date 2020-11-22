@@ -1,26 +1,44 @@
 import React from 'react';
-import Widget from '../Widget/Widget'
-import Posts from '../Posts/Posts'
-import RecentComments from '../widgets/RecentComments/RecentComments'
-import MetaWidget from '../widgets/MetaWidget/MetaWidget'
-import MediaWidget from '../widgets/MediaWidget/MediaWidget'
-import SearchInputComponent from '../widgets/SearchInputComponent/SearchInputComponent';
-import AlphabeticalNumericalRangeLinksWidget from '../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'
-import LanguagesSwitcher from '../widgets/LanguagesSwitcher/LanguagesSwitcher'
-import Logo from '../Widget/Logo/Logo'
-import Authentication from "../widgets/Authentication/Authentication";
-import LinkTo from "../widgets/LinkTo/LinkTo";
-import ImageSwiper from "../widgets/ImageSwiper/ImageSwiper";
-import PostSwiper from "../widgets/PostSwiper/PostSwiper";
-import MenuWidget from "../widgets/MenuWidget/MenuWidget";
-import ShoppingCart from "../widgets/ShoppingCart/ShoppingCart";
-import FormWidget from "../widgets/FormWidget/FormWidget";
+import loadable from '@loadable/component';
+const Widget = loadable(() => import('../Widget/Widget'))
+const Posts = loadable(() => import('../Posts/Posts'))
+const RecentComments = loadable(() => import('../widgets/RecentComments/RecentComments'))
+const MetaWidget = loadable(() => import('../widgets/MetaWidget/MetaWidget'))
+const MediaWidget = loadable(() => import('../widgets/MediaWidget/MediaWidget'))
+const SearchInputComponent = loadable(() => import('../widgets/SearchInputComponent/SearchInputComponent'))
+const AlphabeticalNumericalRangeLinksWidget = loadable(() => import('../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'))
+const LanguagesSwitcher = loadable(() => import('../widgets/LanguagesSwitcher/LanguagesSwitcher'))
+const Logo = loadable(() => import('../Widget/Logo/Logo'))
+const Authentication = loadable(() => import('../widgets/Authentication/Authentication'))
+const LinkTo = loadable(() => import('../widgets/LinkTo/LinkTo'))
+const ImageSwiper = loadable(() => import('../widgets/ImageSwiper/ImageSwiper'))
+const PostSwiper = loadable(() => import('../widgets/PostSwiper/PostSwiper'))
+const MenuWidget = loadable(() => import('../widgets/MenuWidget/MenuWidget'))
+const ShoppingCart = loadable(() => import('../widgets/ShoppingCart/ShoppingCart'))
+const FormWidget = loadable(() => import('../widgets/FormWidget/FormWidget'))
+
+//import Widget from '../Widget/Widget'
+//import Posts from '../Posts/Posts'
+//import RecentComments from '../widgets/RecentComments/RecentComments'
+//import MetaWidget from '../widgets/MetaWidget/MetaWidget'
+//import MediaWidget from '../widgets/MediaWidget/MediaWidget'
+//import SearchInputComponent from '../widgets/SearchInputComponent/SearchInputComponent';
+//import AlphabeticalNumericalRangeLinksWidget from '../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'
+//import LanguagesSwitcher from '../widgets/LanguagesSwitcher/LanguagesSwitcher'
+//import Logo from '../Widget/Logo/Logo'
+//import Authentication from "../widgets/Authentication/Authentication";
+//import LinkTo from "../widgets/LinkTo/LinkTo";
+//import ImageSwiper from "../widgets/ImageSwiper/ImageSwiper";
+//import PostSwiper from "../widgets/PostSwiper/PostSwiper";
+//import MenuWidget from "../widgets/MenuWidget/MenuWidget";
+//import ShoppingCart from "../widgets/ShoppingCart/ShoppingCart";
+//import FormWidget from "../widgets/FormWidget/FormWidget";
 
 const WidgetsRenderer = props => {
     const widgetInTypeOfPropsPosition = (props.widgets || []).filter(widget => widget.data.position === props.position)
     const widgetsToRenderSortByIndex = (widgetInTypeOfPropsPosition.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))
     const renderWidgets = widgetsToRenderSortByIndex.map(widget => {
-
+        //console.log(props.position+ ':' +props.deviceWidth)
         switch ( widget.data.type ) {
 
             case 'posts':
@@ -33,6 +51,12 @@ const WidgetsRenderer = props => {
                 )
 
             case 'text':
+                return (
+                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id }{ ...widget }/>
+                )
+
+
+            case 'textEditor':
                 return (
                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id }{ ...widget }/>
                 )
@@ -78,11 +102,11 @@ const WidgetsRenderer = props => {
 
             case 'imageSwiper':
                 return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ ImageSwiper } { ...widget } />
+                    <Widget {...props} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ ImageSwiper } { ...widget } />
                 )
             case 'postsSwiper':
                 return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ PostSwiper } { ...widget } />
+                    <Widget {...props} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ PostSwiper } { ...widget } />
                 )
             case 'menu':
                 return (

@@ -440,8 +440,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-         app.render(req, res, targetComponent, queryParams)
-       // return renderAndCache(req, res, targetComponent, queryParams)
+        //app.render(req, res, targetComponent, queryParams)
+        return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/profile', (req, res) => {
@@ -489,7 +489,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //     app.render(req, res, targetComponent, queryParams)
     //     // return renderAndCache(req, res,targetComponent, queryParams)
     // });
-
 
 
     server.get('/errorPage', (req, res) => {

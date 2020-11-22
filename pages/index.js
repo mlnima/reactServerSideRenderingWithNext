@@ -1,54 +1,39 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {AppContext} from "../context/AppContext";
+import loadable from '@loadable/component';
 import AppLayout from "../components/layouts/AppLayout";
+const WidgetArea = loadable(() => import('../components/widgetsArea/WidgetArea/WidgetArea'))
 import withRouter from "next/dist/client/with-router";
 import {getMultipleSetting, getMultipleWidgetWithData} from "../_variables/ajaxVariables";
 import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import {getAbsolutePath} from '../_variables/_variables'
-import WidgetsRenderer from '../components/includes/WidgetsRenderer/WidgetsRenderer'
 import {Sidebar} from '../components/includes/Sidebar/Sidebar'
-import Footer from '../components/widgetsArea/Footer/Footer'
-import dataDecoder from '../server/tools/dataDecoder'
 import {Provider} from 'react-translated'
-import WidgetArea from "../components/widgetsArea/WidgetArea/WidgetArea";
+import Link from "next/link";
+//import WidgetArea from "../components/widgetsArea/WidgetArea/WidgetArea";
 
 const Translations = {}
 
 const Home = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-        style: {}
-    });
+    const [deviceWidth,setDeviceWidth] = useState(1024)
 
     useEffect(() => {
-        if (props.identity.data.homePageSidebar) {
-            setState({
-                style: {
-                    gridArea: 'content'
-                }
-            })
-        }
-    }, [props]);
-
+     setDeviceWidth(window.innerWidth)
+    }, []);
 
     return (
         <>
             <Provider language={contextData.siteIdentity.language || 'en'} translation={Translations}>
                 <AppLayout>
                     <SiteSettingSetter {...props}/>
-                    <div style={state.style}
-                         className={props.identity ? props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' : 'content withOutSidebar'}>
-                        {/*<div className='home-page'>*/}
-                        {/*    <WidgetsRenderer widgets={props.widgets} position='home'/>*/}
-                        {/*</div>*/}
-                        <WidgetArea className='home-page' position='home' stylesData={contextData.siteDesign.homePageStyle}/>
+                    <div
+                        className={props.identity ? props.identity.data.homePageSidebar ? 'content withSidebar' : 'content withOutSidebar' : 'content withOutSidebar'}>
+
+                        <WidgetArea deviceWidth={deviceWidth} className='home-page' position='home' stylesData={contextData.siteDesign.homePageStyle}/>
                         <Sidebar key='homePageSidebar' isActive={props.identity.data.homePageSidebar}
                                  widgets={props.widgets} position='homePageSidebar'/>
-
                     </div>
-                    {/*<WidgetArea className='footer' position='footer' stylesData={contextData.siteDesign.footerStyle}/>*/}
-                    {/*<Footer widgets={props.widgets} position='footer'/>*/}
-
                 </AppLayout>
             </Provider>
         </>
@@ -61,11 +46,12 @@ Home.getInitialProps = async ({req}) => {
     let widgets;
     let settings;
 
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header','topBar','navigation']}, domainName, true, 'homePage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'homePage')
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'homePage')
 
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
+
     return {widgets, ...settings, widgetsData: widgetsData.data}
 };
 export default withRouter(Home);

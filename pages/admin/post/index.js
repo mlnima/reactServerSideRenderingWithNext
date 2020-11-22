@@ -24,10 +24,12 @@ import AddWidgetToPostMenu from "../../../components/adminIncludes/PostComponent
 import {widgetModels} from '../../../components/adminIncludes/widgetsModel/AddWidgetMenu/models'
 import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
 import NoSSR from 'react-no-ssr';
+import './post.scss'
 
 const Index = props => {
     const contextData = useContext(AppContext);
-    const router = useRouter()
+    const router = useRouter();
+    const languageElement = useRef(null)
 
 
     const [state, setState] = useState({
@@ -56,7 +58,6 @@ const Index = props => {
     })
 
     useEffect(() => {
-
         if (router.query.new && state._id) {
             router.reload()
         } else {
@@ -70,7 +71,7 @@ const Index = props => {
             setState({
                 ...state,
                 ...props.post,
-                translations: props.post.translations ? props.post.translations : {}
+                translations: props.post?.translations || {}
             })
 
             setTextInputsState({
@@ -82,9 +83,7 @@ const Index = props => {
 
     }, [props]);
 
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
+
 
     const onChangeHandler = e => {
         setState({
@@ -99,8 +98,8 @@ const Index = props => {
     //     })
     // };
 
-    const onTitleDescriptionChangeHandler = e => {
-        if (editingData.activeEditingLanguage === 'default') {
+    const onTranslatedInputChangeHandler = e => {
+        if (languageElement?.current?.value === 'default') {
             setTextInputsState({
                 ...textInputsState,
                 [e.target.name]: e.target.value
@@ -111,14 +110,28 @@ const Index = props => {
                 ...textInputsState,
                 translations: {
                     ...textInputsState.translations,
-                    [editingData.activeEditingLanguage]: {
-                        ...textInputsState.translations[editingData.activeEditingLanguage],
+                    [languageElement?.current?.value]: {
+                        ...textInputsState.translations[languageElement?.current?.value],
                         [e.target.name]: e.target.value
                     }
                 }
             })
         }
     }
+
+
+    const onDescriptionChangeHandler = data => {
+        const e={
+            target:{
+                name:'description',
+                value:data
+            }
+        }
+        if (!data.includes('<p><br></p>') && data !== textInputsState.description){
+            onTranslatedInputChangeHandler(e)
+        }
+    }
+
     const onPostMetaChangeHandler = (type, data) => {
         setState({
             ...state,
@@ -136,12 +149,12 @@ const Index = props => {
             <option key={lang} value={lang}>{lang}</option>
         )
     })
+
     const onActiveEditingLanguageChangeHandler = e => {
         setEditingData({
             ...editingData,
             activeEditingLanguage: e.target.value
         })
-
     }
 
 
@@ -156,10 +169,7 @@ const Index = props => {
                 ...textInputsState,
                 ...productInfo,
                 author: state.author ? state.author : contextData.userData._id,
-
             }
-
-
             if (state._id) {
                 // contextData.functions.updatePost(contextData.editingPostData)
                 updatePost(postValue, window.location.origin).then(() => {
@@ -178,7 +188,6 @@ const Index = props => {
             } else {
 
                 savePost(postValue, window.location.origin).then(res => {
-
                     props.router.push('/admin/post?id=' + res.data.savedPostData._id)
                     contextData.dispatchState({
                         ...contextData.state,
@@ -207,16 +216,15 @@ const Index = props => {
         }
     }
 
-useEffect(() => {  console.log(state.widgets)}, [ state.widgets ]);
 
-
-    const renderWidgetEditors = (state.widgets?state.widgets.sort((a,b)=>(a.widgetIndex > b.widgetIndex) ? 1 : -1):[]).map(widgetEditorData => {
+    const renderWidgetEditors = (state.widgets ? state.widgets.sort((a, b) => (a.widgetIndex > b.widgetIndex) ? 1 : -1) : []).map(widgetEditorData => {
         return (
             <div className='post-admin-widget-editor'>
-            <WidgetModel state={state} setState={setState} widgetIndex={ widgetEditorData?  widgetEditorData.widgetIndex ? widgetEditorData.widgetIndex : 0:0} isPost={true} key={(state.widgets || []).indexOf(widgetEditorData)}
-                         //data={{data: widgetEditorData}}
-                         data={ widgetEditorData}
-                         translationLanguages={siteIdentity.translationLanguages || []}/>
+                <WidgetModel state={state} setState={setState} widgetIndex={widgetEditorData ? widgetEditorData.widgetIndex ? widgetEditorData.widgetIndex : 0 : 0} isPost={true}
+                             key={(state.widgets || []).indexOf(widgetEditorData)}
+                    //data={{data: widgetEditorData}}
+                             data={widgetEditorData}
+                             translationLanguages={siteIdentity.translationLanguages || []}/>
             </div>
         )
     })
@@ -225,21 +233,26 @@ useEffect(() => {  console.log(state.widgets)}, [ state.widgets ]);
         <>
             <AdminLayout>
                 <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
-                <div className='Post'>
+                <div className='admin-post'>
 
                     <div className="content">
 
                         <p>Translation(you need to activate the language in general settings)</p>
-                        <select onChange={e => onActiveEditingLanguageChangeHandler(e)}>
+                        <select ref={languageElement} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                             <option value='default'>Default</option>
-                            {languagesOptions}
+                            {(siteIdentity?.translationLanguages||[]).map(lang => {
+                                return (
+                                    <option key={lang} value={lang}>{lang}</option>
+                                )
+                            })}
                         </select>
-                        <NoSSR>
-                        <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
-                                          activeEditingLanguage={editingData.activeEditingLanguage}
-                                          onChangeHandler={onTitleDescriptionChangeHandler}/>
-                        </NoSSR>
 
+                            <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
+                                              activeEditingLanguage={editingData.activeEditingLanguage}
+                                              onChangeHandler={onTranslatedInputChangeHandler}
+                                              onDescriptionChangeHandler={onDescriptionChangeHandler}
+
+                            />
 
 
 
@@ -293,7 +306,7 @@ Index.getInitialProps = async ({query, req}) => {
     let requestBody;
     let settings;
     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
 
 
     const newPostData = {

@@ -1,6 +1,7 @@
 import React, {useState, useContext, useRef, useEffect} from 'react';
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
+import Image from 'next/image'
 import ProgressBar from "../ProgressBar/ProgressBar";
 import {getLanguageQueryFromWindowLocationSearch, likeValueCalculator} from '../../../_variables/_variables'
 import {AppContext} from "../../../context/AppContext";
@@ -8,7 +9,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+
 let StyledDiv = styled.div`${props => props.stylesData}`
+
 // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
 
 const PostElement = props => {
@@ -49,12 +52,43 @@ const PostElement = props => {
                     <video ref={videoElement} src={props.state.videoTrailerUrl} autoPlay={true} loop={true} onMouseOut={isHoverHandler} onTouchCancel={isHoverHandler}/>)
 
             } else if (!state.isHover) {
-                return (<img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
-                    if (!props.state.mainThumbnail) {
-                        // deletedVideoAutoRemover(props.state)
-                        console.log('something wrong with image on ', props.state.title)
+                // return (
+                //     <img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
+                //     if (!props.state.mainThumbnail) {
+                //         // deletedVideoAutoRemover(props.state)
+                //         console.log('something wrong with image on ', props.state.title)
+                //     }
+                // }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>
+                // )
+                const deviceWidth = window.innerWidth
+
+                const imageWidth = deviceWidth < 768 ? deviceWidth :
+                    deviceWidth > 768 && deviceWidth < 1200 ? 209.79 :
+                        deviceWidth > 768 ? 300 : 320;
+
+                if (props.state?.mainThumbnail){
+                    if (props.state?.mainThumbnail.includes('http') || props.state.mainThumbnail.includes(window.location.hostname)) {
+                        return (
+                            <img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
+                                if (!props.state.mainThumbnail) {
+                                    // deletedVideoAutoRemover(props.state)
+                                    console.log('something wrong with image on ', props.state.title)
+                                }
+                            }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>
+                        )
+                    } else {
+                        return (
+                            <Image src={props.state?.mainThumbnail} alt={props.state.title} onError={err => {
+                                if (!props.state.mainThumbnail) {
+                                    console.log('something wrong with image on ', props.state.title)
+                                }
+                            }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler} width={imageWidth > 300 ? 300 : imageWidth}
+                                   height={((imageWidth > 300) / 1.777) > 300 / 1.777 ? 300 / 1.777 : imageWidth / 1.777} quality={50} lazy={true}/>
+                        )
                     }
-                }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>)
+                }else return null
+
+
             } else {
                 return (
                     <span>{props.state.title}</span>
@@ -157,7 +191,7 @@ const PostElement = props => {
     }
 
     return (
-        < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div '   + (props.viewType ? props.viewType : 'standard')}>
+        < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
             <Link
                 as={contextData.state.activeLanguage !== 'default' ? `/post/${props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}?id=${props.state._id}&lang=${contextData.state.activeLanguage}` : `/post/${props.state.title}?id=${props.state._id}`}
                 href={{
@@ -166,7 +200,8 @@ const PostElement = props => {
                         id: props.state._id,
                         ...state.queries
                     }
-                }}>
+                }}
+            >
                 <a>
                     <div className='post-element' key={props.state.title}>
                         <div className="image">
@@ -174,7 +209,8 @@ const PostElement = props => {
                             <RenderDataOnImage/>
                         </div>
                         <RenderProgressBar/>
-                        <h3 >{props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}</h3>
+                        {/*<h3>{props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}</h3>*/}
+                        <h3>{props.state?.translations?.[contextData.state?.activeLanguage]?.title || props.state.title}</h3>
                     </div>
                 </a>
             </Link>

@@ -11,16 +11,18 @@ const AddWidgetWithPositionMenu = props => {
         open: false
     });
     const [customPages,setCustomPages] = useState([])
-    useEffect(() => {
-        getPagesData().then(res=>{
-            if(res.data){
-                if(res.data.pages){
-                    const pagesNames = res.data.pages.map(page=>page.pageName)
-                    setCustomPages(pagesNames)
-                }
-            }
-        })
-    }, [props]);
+
+    // useEffect(() => {
+    //     getPagesData().then(res=>{
+    //         if(res.data){
+    //             if(res.data.pages){
+    //                 const pagesNames = res.data.pages.map(page=>page.pageName)
+    //                 setCustomPages(pagesNames)
+    //             }
+    //         }
+    //     })
+    // }, [props]);
+
     const onOpenHandler = () => {
         state.open ? setState({
             ...state,
@@ -30,6 +32,7 @@ const AddWidgetWithPositionMenu = props => {
             open: true
         })
     }
+
     const onAddNewWidget = (position, type) => {
         let dataToSave = widgetModels;
         dataToSave.position = position
@@ -37,17 +40,19 @@ const AddWidgetWithPositionMenu = props => {
         addNewWidget({
             data: widgetModels
         }).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-                contextData.dispatchWidgetsSettings({
-                    ...contextData.widgetsSettings,
-                    widgets: [...res.data.widgets]
-                })
-            })
+        }).then(() => {
+            props.getAndSetData()
+            // getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+            //     contextData.dispatchWidgetsSettings({
+            //         ...contextData.widgetsSettings,
+            //         widgets: [...res.data.widgets]
+            //     })
+            // })
         }).catch(err => {
             console.log(err)
         })
     }
-    const renderCustomPagesPosition = customPages.map(customPage=>{
+    const renderCustomPagesPosition = props.customPages.map(customPage=>{
        return(
            <>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>

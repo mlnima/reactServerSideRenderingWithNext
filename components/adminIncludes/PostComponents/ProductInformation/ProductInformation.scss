@@ -2,7 +2,8 @@
 @import "../../../../styles/grid";
 
 .product-information {
-  width: 95%;
+  width: 100% ;
+  //padding: 0 1%;
   border-radius: 10px;
   .product-information-add-image, .product-information-upload-image {
     display: flex;
@@ -14,7 +15,7 @@
     input {
 
       @include inputNormalWithRadius;
-      width: 90%;
+      width: 100%;
     }
   }
 

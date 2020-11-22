@@ -36,8 +36,9 @@ Profile.getInitialProps = async ({ pathname, query, req, res, err }) => {
     let widgets;
     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'footer', 'header','topBar','navigation' ] }, domainName, true, 'profilePage')
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true, 'profilePage')
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
 
     return { query, ...settings, widgets }
 }

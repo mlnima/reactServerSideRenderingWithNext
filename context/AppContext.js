@@ -11,14 +11,16 @@ import styled from "styled-components";
 export const AppContext = React.createContext();
 
 const AppProvider = props => {
-    const contextData = useContext(AppContext);
+    // const contextData = useContext(AppContext);
     const [state, dispatchState] = useState({
         loading: false,
         videoPreviewID: '',
         activeLanguage: 'default',
         navigationOpenStatus: false,
         isMobile: true,
-        console:false
+        console:false,
+        currentPageSidebar:true,
+        deviceWidth:320
     });
 
 
@@ -122,7 +124,7 @@ const AppProvider = props => {
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
                 await axios.post('/api/v1/users/getUserInfo', {token: localStorage.wt}).then(res => {
-                    dispatchUserData({...userData, ...dataDecoder(res.data).userData});
+                    dispatchUserData({...userData, ...res.data.userData});
                 }).catch(err => {
                     console.log(err);
                 })

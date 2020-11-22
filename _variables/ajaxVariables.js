@@ -74,7 +74,7 @@ export const getWidgetsWithData = async (position, domainName) => {
 export const updateWidgets = async (widgetData) => {
 
     // console.log(id)
-    console.log(widgetData)
+    //console.log(widgetData)
     const body = {
         widgetData,
         token: localStorage.wt

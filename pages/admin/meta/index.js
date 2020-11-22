@@ -17,9 +17,6 @@ const meta = props => {
         activeEditingLanguage: 'default'
     })
 
-    useEffect(() => {
-        console.log(metaData)
-    }, [metaData]);
 
 
     useEffect(() => {
@@ -143,7 +140,7 @@ meta.getInitialProps = async ({query, req}) => {
     let metaInfo = {}
     let settings;
     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
-    settings = settingsData.data.settings ? dataDecoder(settingsData.data.settings).finalObject : []
+    settings = settingsData.data.settings ? settingsData.data.settings : []
     if (query.new && query.metaType) {
         metaInfo = {
             name: '',

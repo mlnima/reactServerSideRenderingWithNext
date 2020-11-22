@@ -87,18 +87,18 @@ const ImageSwiperTypeWidgetModelFields = props => {
             </form>
 
             {renderCurrentData}
-            <TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Mobile :' name='imageSwiperAmountMobile' type='number' value={props.imageSwiperAmountMobile}
-                                     classNameValue='imageSwiperAmountMobile' placeHolder='Image Swiper Images Amount In View Mobile'
-                                     onChangeHandler={props.onChangeHandler}/>
-            <TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Desktop :' name='imageSwiperAmountDesktop' type='number' value={props.imageSwiperAmountDesktop}
-                                     classNameValue='imageSwiperAmountDesktop' placeHolder='Image Swiper Images Amount In View Desktop'
-                                     onChangeHandler={props.onChangeHandler}/>
-            <TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Mobile :' name='imageSwiperSpaceBetweenMobile' type='number' value={props.imageSwiperSpaceBetweenMobile}
-                                     classNameValue='imageSwiperSpaceBetweenMobile' placeHolder='Image Swiper Space Between Mobile'
-                                     onChangeHandler={props.onChangeHandler}/>
-            <TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Desktop :' name='imageSwiperSpaceBetweenDesktop' type='number' value={props.imageSwiperSpaceBetweenDesktop}
-                                     classNameValue='imageSwiperSpaceBetweenDesktop' placeHolder='Image Swiper Space Between Desktop'
-                                     onChangeHandler={props.onChangeHandler}/>
+            {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Mobile :' name='imageSwiperAmountMobile' type='number' value={props.imageSwiperAmountMobile}*/}
+            {/*                         classNameValue='imageSwiperAmountMobile' placeHolder='Image Swiper Images Amount In View Mobile'*/}
+            {/*                         onChangeHandler={props.onChangeHandler}/>*/}
+            {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Desktop :' name='imageSwiperAmountDesktop' type='number' value={props.imageSwiperAmountDesktop}*/}
+            {/*                         classNameValue='imageSwiperAmountDesktop' placeHolder='Image Swiper Images Amount In View Desktop'*/}
+            {/*                         onChangeHandler={props.onChangeHandler}/>*/}
+            {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Mobile :' name='imageSwiperSpaceBetweenMobile' type='number' value={props.imageSwiperSpaceBetweenMobile}*/}
+            {/*                         classNameValue='imageSwiperSpaceBetweenMobile' placeHolder='Image Swiper Space Between Mobile'*/}
+            {/*                         onChangeHandler={props.onChangeHandler}/>*/}
+            {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Desktop :' name='imageSwiperSpaceBetweenDesktop' type='number' value={props.imageSwiperSpaceBetweenDesktop}*/}
+            {/*                         classNameValue='imageSwiperSpaceBetweenDesktop' placeHolder='Image Swiper Space Between Desktop'*/}
+            {/*                         onChangeHandler={props.onChangeHandler}/>*/}
         </>
     );
 };
