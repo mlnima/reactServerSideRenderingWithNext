@@ -9,8 +9,7 @@ import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSet
 import {getAbsolutePath} from '../_variables/_variables'
 import {Sidebar} from '../components/includes/Sidebar/Sidebar'
 import {Provider} from 'react-translated'
-import Link from "next/link";
-//import WidgetArea from "../components/widgetsArea/WidgetArea/WidgetArea";
+
 
 const Translations = {}
 

@@ -4,6 +4,7 @@ import {AppContext} from "../../../context/AppContext";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import './WidgetArea.scss';
 let StyledDiv = styled.div`${props => props.stylesData}`
+
 const WidgetArea = props => {
     const contextData = useContext(AppContext);
     if (contextData.siteWidgets.filter(i=>i.data.position === props.position).length > 0){

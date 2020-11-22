@@ -25,99 +25,6 @@ const ImageSwiper = props => {
     });
 
     useEffect(() => {
-        console.log(state)
-
-    }, [state]);
-    // useEffect(() => {
-    //     if (props.imageSwiperData) {
-            // setState({
-            //     ...state,
-            //     imageSwiperData: props.imageSwiperData,
-            //     // spaceBetween:props.deviceWidth >= 768 ? props.imageSwiperSpaceBetweenDesktop || 0 : props.imageSwiperSpaceBetweenMobile || 1,
-            //     slidesPerView: props.deviceWidth >= 768 ? props.imageSwiperAmountDesktop || 3 : props.imageSwiperAmountMobile || 1,
-            // })
-
-        // }
-
-        // if (props.deviceWidth > 768) {
-        //     setImageSize({
-        //         width: contextData.state.currentPageSidebar ? (props.deviceWidth - 300) / state.slidesPerView : props.deviceWidth / state.slidesPerView,
-        //         height: contextData.state.currentPageSidebar ? ((props.deviceWidth - 300) / state.slidesPerView) / 1.777 : (props.deviceWidth / state.slidesPerView) / 1.777
-        //     })
-        // }else {
-        //     setImageSize({
-        //         width: props.deviceWidth / (props.imageSwiperAmountMobile || 1),
-        //         height: (props.deviceWidth / (props.imageSwiperAmountMobile || 1)) / 1.777
-        //     })
-        // }
-
-
-    // }, [props]);
-
-
-    // const renderSlides = state.imageSwiperData.map(imageData => {
-    //
-    //     const RenderImageElement = ()=>{
-    //         console.log(imageSize)
-    //         if (imageData.imageUrl.includes('http')||imageData.imageUrl.includes(window.location.hostname)){
-    //             return(
-    //                 <img src={imageData.imageUrl} alr={`Thumbnail ${imageData.imageUrl}`}
-    //                      width={imageSize.width} height={imageSize.width/1.777}/>
-    //             )
-    //         }else{
-    //             return (
-    //                 <Image src={imageData.imageUrl} alt={`Thumbnail ${imageData.imageUrl}`}
-    //                        width={imageSize.width} height={imageSize.width/1.777} quality={50} loading='lazy'/>
-    //             )
-    //         }
-    //     }
-    //
-    //      if(imageData.targetUrlType === 'internal'){
-    //          return (
-    //              <SwiperSlide tag="li" key={props.imageSwiperData.indexOf(imageData)}>
-    //                  <Link href={imageData.targetUrl} as={imageData.targetUrlAs||imageData.targetUrl}>
-    //                      <a>
-    //                          {/*<img src={imageData.imageUrl} alr={`Thumbnail ${imageData.imageUrl}`}/>*/}
-    //                          <RenderImageElement/>
-    //                      </a>
-    //                  </Link>
-    //              </SwiperSlide>
-    //          )
-    //      }else if(imageData.targetUrlType === 'external'){
-    //          return (
-    //              <SwiperSlide tag="li" key={props.imageSwiperData.indexOf(imageData)}>
-    //                  <a href={imageData.targetUrl}>
-    //                      {/*<img src={imageData.imageUrl} alt={`Thumbnail ${imageData.imageUrl}`}/>*/}
-    //                      <RenderImageElement/>
-    //                  </a>
-    //              </SwiperSlide>
-    //          )
-    //      }else return null
-    //
-    // })
-
-    // if (state.imageSwiperData.length>0){
-    //     return (
-    //         <Swiper
-    //             thumbs={{swiper: thumbsSwiper}}
-    //             controller={{control: controlledSwiper}}
-    //             className='image-swiper'
-    //             tag="section"
-    //             keyboard
-    //             autoplay
-    //             speed={2000}
-    //             navigation
-    //             // pagination
-    //             spaceBetween={state.spaceBetween}
-    //             slidesPerView={state.slidesPerView}
-    //         >
-    //             {renderSlides}
-    //         </Swiper>
-    //     );
-    // }else return null
-
-
-    useEffect(() => {
         console.log(props.deviceWidth)
         setState({
             ...state,
@@ -148,11 +55,6 @@ const ImageSwiper = props => {
 
     const renderSlides = props.imageSwiperData.map(imageData => {
 
-        // let width = props.deviceWidth > 768 ?
-        //     contextData.state.currentPageSidebar ? (props.deviceWidth - 300) / state.slidesPerView : props.deviceWidth / state.slidesPerView :
-        //     props.deviceWidth / (props.imageSwiperAmountMobile || 1);
-        // let height = props.deviceWidth > 768 ? contextData.state.currentPageSidebar ? ((props.deviceWidth - 300) / state.slidesPerView) / 1.777 : (props.deviceWidth / state.slidesPerView) / 1.777 :
-        //     (props.deviceWidth / (props.imageSwiperAmountMobile || 1)) / 1.777
         const RenderImageElement = () => {
             if (imageData.imageUrl.includes('http') || imageData.imageUrl.includes(window.location.hostname)) {
                 return (
@@ -198,24 +100,8 @@ const ImageSwiper = props => {
 
 
     return (
-<div
-//     style={{
-//     width:props.deviceWidth <320 ? 320 :props.deviceWidth
-// }}
->
+<div>
         <Swiper
-            // thumbs={{swiper: thumbsSwiper}}
-            // controller={{control: controlledSwiper}}
-            // className='image-swiper'
-            // tag="section"
-            // keyboard
-            // autoplay
-            // speed={2000}
-            // navigation
-            // scrollbar={{draggable: true}}
-            // // pagination
-            // // spaceBetween={state.spaceBetween || 1}
-            // slidesPerView={state.slidesPerView || 3}
             thumbs={{swiper: thumbsSwiper}}
             controller={{control: controlledSwiper}}
             className='post-swiper'
@@ -229,7 +115,6 @@ const ImageSwiper = props => {
             effect={props.sliderEffect || false}
             spaceBetween={props.deviceWidth >= 768 ? parseInt(props.spaceBetweenAmountDesktop) || 1 : parseInt(props.spaceBetweenAmountMobile) || 1}
             slidesPerView={props.deviceWidth >= 768 ? parseInt(props.slideAmountInDesktop) || 3 : parseInt(props.slideAmountInMobile) || 1}
-
         >
             {renderSlides}
         </Swiper>

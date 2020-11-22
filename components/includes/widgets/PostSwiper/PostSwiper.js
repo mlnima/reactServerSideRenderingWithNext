@@ -41,7 +41,6 @@ const PostSwiper = props => {
         })
 
         if (props.deviceWidth > 768) {
-            console.log(props.slideAmountInMobile)
             setImageSize({
                 width: contextData.state.currentPageSidebar ? (props.deviceWidth - 300) / state.slidesPerView : props.deviceWidth / state.slidesPerView,
                 height: contextData.state.currentPageSidebar ? ((props.deviceWidth - 300) / state.slidesPerView) / (state.imageRatioWidth / state.imageRatioHeight) : (props.deviceWidth / state.slidesPerView) / (state.imageRatioWidth / state.imageRatioHeight)
@@ -54,7 +53,6 @@ const PostSwiper = props => {
             })
         }
 
-        console.log(props.deviceWidth)
 
     }, [props]);
 

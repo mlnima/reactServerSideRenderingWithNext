@@ -38,95 +38,118 @@ const WidgetsRenderer = props => {
     const widgetInTypeOfPropsPosition = (props.widgets || []).filter(widget => widget.data.position === props.position)
     const widgetsToRenderSortByIndex = (widgetInTypeOfPropsPosition.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))
     const renderWidgets = widgetsToRenderSortByIndex.map(widget => {
+        const targetComponent =
+            widget.data.type === 'posts' ? Posts :
+            widget.data.type === 'media' ? MediaWidget :
+            widget.data.type === 'text' ? null :
+            widget.data.type === 'textEditor' ? null :
+            widget.data.type === 'recentComments' ? RecentComments :
+            widget.data.type === 'meta' ? MetaWidget :
+            widget.data.type === 'searchBar' ? SearchInputComponent :
+            widget.data.type === 'logo' ? Logo :
+            widget.data.type === 'alphabeticalNumericalRange' ? AlphabeticalNumericalRangeLinksWidget :
+            widget.data.type === 'language' ? LanguagesSwitcher :
+            widget.data.type === 'authentication' ? Authentication :
+            widget.data.type === 'linkTo' ? LinkTo :
+            widget.data.type === 'imageSwiper' ? ImageSwiper :
+            widget.data.type === 'postsSwiper' ? PostSwiper :
+            widget.data.type === 'menu' ? MenuWidget :
+            widget.data.type === 'shoppingCart' ? ShoppingCart :
+            widget.data.type === 'form' ? FormWidget : null
+
         //console.log(props.position+ ':' +props.deviceWidth)
-        switch ( widget.data.type ) {
+//         switch ( widget.data.type ) {
+//
+//             case 'posts':
+//                 return (
+//                     <Widget key={ widget._id } component={ Posts } posts={ widget.posts } propsKey={ widget._id } { ...widget }/>
+//                 )
+//             case 'media':
+//                 return (
+//                     <Widget key={ widget._id } component={ MediaWidget } posts={ widget.posts } propsKey={ widget._id } { ...widget }/>
+//                 )
+//
+//             case 'text':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id }{ ...widget }/>
+//                 )
+//
+//
+//             case 'textEditor':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id }{ ...widget }/>
+//                 )
+//
+//             case 'recentComments':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ RecentComments } { ...widget }/>
+//                 )
+//
+//             case 'meta':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ MetaWidget } { ...widget }/>
+//                 )
+//
+//             case 'searchBar':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ SearchInputComponent } { ...widget }/>
+//                 )
+//
+//             case 'logo':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ Logo } { ...widget }/>
+//                 )
+//             case 'alphabeticalNumericalRange':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ AlphabeticalNumericalRangeLinksWidget } { ...widget } />
+//                 )
+//
+//             case 'language':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ LanguagesSwitcher } { ...widget } />
+//                 )
+//
+//             case 'authentication':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ Authentication } { ...widget } />
+//                 )
+//
+//             case 'linkTo':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ LinkTo } { ...widget } />
+//                 )
+//
+//             case 'imageSwiper':
+//                 return (
+//                     <Widget {...props} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ ImageSwiper } { ...widget } />
+//                 )
+//             case 'postsSwiper':
+//                 return (
+//                     <Widget {...props} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ PostSwiper } { ...widget } />
+//                 )
+//             case 'menu':
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ MenuWidget } { ...widget } />
+//                 )
+//             case 'shoppingCart':
+//
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ ShoppingCart } { ...widget } />
+//                 )
+//             case 'form':
+// // console.log(widget)
+//                 return (
+//                     <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ FormWidget } { ...widget } />
+//                 )
+//
+//             default:
+//                 return null
+//
+//         }
 
-            case 'posts':
-                return (
-                    <Widget key={ widget._id } component={ Posts } posts={ widget.posts } propsKey={ widget._id } { ...widget }/>
-                )
-            case 'media':
-                return (
-                    <Widget key={ widget._id } component={ MediaWidget } posts={ widget.posts } propsKey={ widget._id } { ...widget }/>
-                )
-
-            case 'text':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id }{ ...widget }/>
-                )
-
-
-            case 'textEditor':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id }{ ...widget }/>
-                )
-
-            case 'recentComments':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ RecentComments } { ...widget }/>
-                )
-
-            case 'meta':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ MetaWidget } { ...widget }/>
-                )
-
-            case 'searchBar':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ SearchInputComponent } { ...widget }/>
-                )
-
-            case 'logo':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ Logo } { ...widget }/>
-                )
-            case 'alphabeticalNumericalRange':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ AlphabeticalNumericalRangeLinksWidget } { ...widget } />
-                )
-
-            case 'language':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ LanguagesSwitcher } { ...widget } />
-                )
-
-            case 'authentication':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ Authentication } { ...widget } />
-                )
-
-            case 'linkTo':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ LinkTo } { ...widget } />
-                )
-
-            case 'imageSwiper':
-                return (
-                    <Widget {...props} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ ImageSwiper } { ...widget } />
-                )
-            case 'postsSwiper':
-                return (
-                    <Widget {...props} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ PostSwiper } { ...widget } />
-                )
-            case 'menu':
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ MenuWidget } { ...widget } />
-                )
-            case 'shoppingCart':
-
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ ShoppingCart } { ...widget } />
-                )
-            case 'form':
-// console.log(widget)
-                return (
-                    <Widget key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ FormWidget } { ...widget } />
-                )
-
-            default:
-                return null
-
-        }
+        return (
+            <Widget deviceWidth={props.deviceWidth} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } />
+        )
     })
 
     return (
