@@ -11,8 +11,10 @@ import withRouter from 'next/dist/client/with-router'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import Footer from '../../components/widgetsArea/Footer/Footer'
+import {useRouter} from "next/router";
 
 const meta = props => {
+    const router = useRouter()
     const [state, setState] = useState({
         style: {}
     });
@@ -27,7 +29,9 @@ const meta = props => {
         }
     }, []);
 
-    const renderMetas = (props.metaSource.metas || []).map(meta => {
+
+
+    const renderMetas = (props.metaSource.metas ?? []).map(meta => {
 
         return (
             <MetaElement key={props.metaSource.metas.indexOf(meta)} {...meta} />
@@ -42,24 +46,24 @@ const meta = props => {
                 <div>
                     <PaginationComponent
                         isActive={true}
-                        currentPage={props.dataForGettingMeta.page}
-                        totalCount={props.metaSource.totalCount}
-                        size={props.dataForGettingMeta.size}
-                        maxPage={Math.ceil(parseInt(props.metaSource.totalCount) / parseInt(props.dataForGettingMeta.size))  }
-                        queryData={props.query || props.router.query}
-                        pathnameData={props.pathname || props.router.pathname}
+                        currentPage={props?.dataForGettingMeta?.page}
+                        totalCount={props?.metaSource?.totalCount}
+                        size={props?.dataForGettingMeta?.size}
+                        maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
+                        queryData={router.query}
+                        pathnameData={router.pathname}
                     />
                     <div className={props.query.type + ' metas'}>
                         {renderMetas}
                     </div>
                     <PaginationComponent
                         isActive={true}
-                        currentPage={props.dataForGettingMeta.page}
-                        totalCount={props.metaSource.totalCount}
-                        size={props.dataForGettingMeta.size}
-                        maxPage={Math.ceil(parseInt(props.metaSource.totalCount) / parseInt(props.dataForGettingMeta.size)) }
-                        queryData={props.query || props.router.query}
-                        pathnameData={props.pathname || props.router.pathname}
+                        currentPage={props?.dataForGettingMeta?.page}
+                        totalCount={props?.metaSource?.totalCount}
+                        size={props?.dataForGettingMeta?.size}
+                        maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
+                        queryData={router.query}
+                        pathnameData={router.pathname}
                     />
                 </div>
 
@@ -72,21 +76,21 @@ const meta = props => {
 };
 
 
-
-export const getServerSideProps = async ({req,query}) => {
+export const getServerSideProps = async ({req, query, res}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let errorCode = 200
 
     const dataForGettingMeta = {
-        type: asPath.includes('/tags')  ? 'tags' :
-            asPath.includes('/categories') ? 'categories' :
-                asPath.includes('/actors')   ? 'actors' :'',
-        searchForImageIn: query.type,
+        type: query.contentType?.includes('tags') ? 'tags' :
+            query.contentType?.includes('categories') ? 'categories' :
+                query.contentType?.includes('actors') ? 'actors' : '',
+
+        searchForImageIn: query.contentType,
         page: parseInt(query.page) || 1,
         size: parseInt(query.size) || 30,
         sort: query.sort || 'latest',
         startWith: query.startWith || 'any',
-        keyword: query.keyword || '' ,
+        keyword: query.keyword || '',
         lang: query.lang || 'default'
     }
 
@@ -94,8 +98,8 @@ export const getServerSideProps = async ({req,query}) => {
     let widgets;
     let metaSource;
 
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']},  domainName,true, 'tagsPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header','topBar','navigation']},  domainName,true, 'tagsPage')
+    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'tagsPage')
     const metaData = await getMeta(dataForGettingMeta, domainName, true)
 
     settings = settingsData.data.settings ? settingsData.data.settings : []
@@ -103,9 +107,8 @@ export const getServerSideProps = async ({req,query}) => {
     metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
 
 
-     return {props:{...settings, query, asPath, widgets, metaSource, dataForGettingMeta}}
+    return {props: {...settings, query, widgets, metaSource, dataForGettingMeta}}
 }
-
 
 
 export default withRouter(meta);

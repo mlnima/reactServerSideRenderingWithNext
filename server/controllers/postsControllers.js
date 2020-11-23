@@ -286,9 +286,7 @@ postsControllers.getMeta = async (req, res) => {
     const type = req.body.type ? {type: req.body.type} : {}
     const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
     let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
-
     const page = req.body.page;
-    // console.log(req.body)
     const startWithQuery = req.body.startWith === 'any' ? {} : {name: {$regex: '^' + req.body.startWith, $options: 'i'}}
     let searchQuery = req.body.keyword === '' ? {} : {
         $or: [
@@ -320,7 +318,6 @@ postsControllers.getMeta = async (req, res) => {
     let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
     const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).exec()
     metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
-
         const mapMetaToGetImage = metas.map(async meta => {
             try {
                 const noImageUrl = await postSchema.find({[type.type]: meta._id}).limit(1).sort('-_id').exec().then(lastPost => {
@@ -337,7 +334,6 @@ postsControllers.getMeta = async (req, res) => {
                     ...meta.toObject(),
                     count: await postSchema.countDocuments({[type.type]: meta._id}).exec(),
                     noImageUrl
-
                 }
             } catch (e) {
                 console.log('error 2')
@@ -354,6 +350,7 @@ postsControllers.getMeta = async (req, res) => {
     })
 
 }
+
 
 postsControllers.deleteMeta = (req, res) => {
     const _id = req.body._id

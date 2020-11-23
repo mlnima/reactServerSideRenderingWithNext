@@ -11,6 +11,9 @@ const MetaElement = props => {
     const [state, setState] = useState({
         queries: {}
     })
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     if (props.count > 0) {
         return (
