@@ -103,4 +103,40 @@ meta.getInitialProps = async ({pathname, query, req, asPath}) => {
 
     return {...settings, query, pathname, asPath, widgets, metaSource, dataForGettingMeta}
 }
+
+export const getServerSideProps = async ({req,query}) => {
+    const domainName = req ? await getAbsolutePath(req) : '';
+    let errorCode = 200
+
+    const dataForGettingMeta = {
+        type: asPath.includes('/tags')  ? 'tags' :
+            asPath.includes('/categories') ? 'categories' :
+                asPath.includes('/actors')   ? 'actors' :'',
+        searchForImageIn: query.type,
+        page: parseInt(query.page) || 1,
+        size: parseInt(query.size) || 30,
+        sort: query.sort || 'latest',
+        startWith: query.startWith || 'any',
+        keyword: query.keyword || '' ,
+        lang: query.lang || 'default'
+    }
+
+    let settings;
+    let widgets;
+    let metaSource;
+
+    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']},  domainName,true, 'tagsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header','topBar','navigation']},  domainName,true, 'tagsPage')
+    const metaData = await getMeta(dataForGettingMeta, domainName, true)
+
+    settings = settingsData.data.settings ? settingsData.data.settings : []
+    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
+
+
+     return {props:{...settings, query, asPath, widgets, metaSource, dataForGettingMeta}}
+}
+
+
+
 export default withRouter(meta);

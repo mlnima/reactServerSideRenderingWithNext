@@ -76,7 +76,5 @@ const page = props => {
         </div>
     );
 };
-page.getInitialProps = async ({ query}) => {
-    return {query}
-}
+
 export default page;

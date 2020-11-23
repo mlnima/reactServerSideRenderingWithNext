@@ -31,11 +31,30 @@ const page = props => {
 };
 
 
-page.getInitialProps = async ({pathname, query, req, res, err}) => {
+// page.getInitialProps = async ({pathname, query, req, res, err}) => {
+//     const domainName = req ? await getAbsolutePath(req) : ''
+//     const requestBody = {
+//         _id: query.pageName
+//     };
+//     let pageInfo;
+//     let widgets;
+//     let settings;
+//     const pageData = await getPageData({pageName: query.pageName}, domainName)
+//     pageInfo = pageData.data ? pageData.data.pageData : {}
+//     const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName, query.pageName + 'Sidebar', 'footer', 'header', 'underPost', 'topBar', 'navigation']}, domainName, true, query.pageName)
+//     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, query.pageName)
+//     settings = settingsData.data.settings ? settingsData.data.settings : []
+//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+//
+//     return {pageInfo, query, widgets, ...settings}
+// }
+
+export const getServerSideProps = async ({req,query}) => {
+
     const domainName = req ? await getAbsolutePath(req) : ''
-    const requestBody = {
-        _id: query.pageName
-    };
+    // const requestBody = {
+    //     _id: query.pageName
+    // };
     let pageInfo;
     let widgets;
     let settings;
@@ -46,6 +65,11 @@ page.getInitialProps = async ({pathname, query, req, res, err}) => {
     settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
-    return {pageInfo, query, widgets, ...settings}
+    return {props:{pageInfo, query, widgets, ...settings}}
 }
+
+
+
+
+
 export default page;

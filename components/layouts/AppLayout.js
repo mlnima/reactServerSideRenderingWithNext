@@ -11,6 +11,7 @@ import Console from "../includes/AdminTools/Console/Console";
 import {createGlobalStyle} from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
+import CheckOutSlide from "../includes/checkOutPageComponents/CheckOutSlide/CheckoutSlide";
 
 const AppLayout = props => {
     const contextData = useContext(AppContext);
@@ -40,6 +41,7 @@ const AppLayout = props => {
             <Console/>
             <Loading/>
             <AlertBox/>
+            {/*<CheckOutSlide/>*/}
         </div>
 
     );

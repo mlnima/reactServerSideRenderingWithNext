@@ -12,17 +12,39 @@ const adminPosts = props => {
     return (
         <>
             <AdminLayout>
-                <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
-                <div className='Posts'>
-                    <Filters {...props}/>
-                    <PostsDataTable {...props}/>
-                </div>
+                {/*<Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>*/}
+                {/*<div className='Posts'>*/}
+                {/*    <Filters {...props}/>*/}
+                {/*    <PostsDataTable {...props}/>*/}
+                {/*</div>*/}
             </AdminLayout>
         </>
     );
 };
 
-adminPosts.getInitialProps = async ({ pathname, query, req, res, err }) => {
+// adminPosts.getInitialProps = async ({ pathname, query, req, res, err }) => {
+//     const domainName = req ? await getAbsolutePath(req) : ''
+//     let postsSource;
+//     const getPostsData = {
+//         size: parseInt(query.size)  || 30,
+//         pageNo: parseInt(query.page) || 1,
+//         postType: query.type || 'all',
+//         fields: [ 'author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories' ],
+//         keyword: query.keyword || '',
+//         author: query.author || 'all',
+//         actor: query.actor || 'all',
+//         status: query.status || 'all',
+//         tag: query.tag || 'all',
+//         category: query.category || 'all',
+//         sort: query.sort || 'latest',
+//     }
+//     const postsData = await getPosts(getPostsData, false, domainName)
+//     postsSource = postsData.data ? postsData.data : []
+//
+//     return { query, postsSource, getPostsData, pathname }
+// }
+
+export const getServerSideProps = async ({req,query}) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let postsSource;
     const getPostsData = {
@@ -38,10 +60,12 @@ adminPosts.getInitialProps = async ({ pathname, query, req, res, err }) => {
         category: query.category || 'all',
         sort: query.sort || 'latest',
     }
-    const postsData = await getPosts(getPostsData, false, domainName)
+    const postsData = await getPosts(getPostsData,domainName, false, )
     postsSource = postsData.data ? postsData.data : []
 
-    return { query, postsSource, getPostsData, pathname }
+    return {props:{ query, postsSource, getPostsData }}
 }
+
+
 
 export default adminPosts;

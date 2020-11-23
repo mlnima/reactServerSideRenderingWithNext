@@ -19,11 +19,11 @@ const assets = props => {
     const [finalPageData, setFinalPageData] = useState({});
 
     useEffect( () => {
-        dataSetter()
+        getAndSetAssetData()
     }, [props]);
 
 
-    const dataSetter = async ()=>{
+    const getAndSetAssetData = async ()=>{
         let ajaxRequestData;
         let getFirstDataOption = {
             size: router.query.size ? parseInt(router.query.size) : 30,

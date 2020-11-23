@@ -299,7 +299,55 @@ const Index = props => {
     );
 };
 
-Index.getInitialProps = async ({query, req}) => {
+// Index.getInitialProps = async ({query, req}) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let post;
+//     let postData
+//     let requestBody;
+//     let settings;
+//     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
+//     settings = settingsData.data.settings ? settingsData.data.settings : []
+//
+//     const newPostData = {
+//         status: 'published',
+//         postType: settings.identity.data.defaultPostType || 'standard',
+//         rating: settings.identity.data.defaultPostRating || 'enable',
+//         tags: [],
+//         categories: [],
+//         actors: [],
+//         inSlideShow: false,
+//         quality: '2160p',
+//         views: 0,
+//         likes: 0,
+//         disLikes: 0,
+//         translations: {}
+//     }
+//
+//     if (settings.identity.data.translationLanguages) {
+//         settings.identity.data.translationLanguages.forEach(lang => {
+//             newPostData.translations[lang] = ''
+//         })
+//     }
+//
+//
+//     if (query.new) {
+//         post = newPostData
+//     } else if (query.id) {
+//         requestBody = {
+//             _id: query.id,
+//         };
+//
+//         postData = await getPost(requestBody, domainName, false, query.id)
+//         post = postData.data ? postData.data.post : newPostData
+//         if (!post.translations) {
+//             post.translations = {}
+//         }
+//     }
+//
+//     return {post, query, ...settings}
+// };
+
+export const getServerSideProps = async ({req,query}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let post;
     let postData
@@ -307,7 +355,6 @@ Index.getInitialProps = async ({query, req}) => {
     let settings;
     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
     settings = settingsData.data.settings ? settingsData.data.settings : []
-
 
     const newPostData = {
         status: 'published',
@@ -345,6 +392,9 @@ Index.getInitialProps = async ({query, req}) => {
         }
     }
 
-    return {post, query, ...settings}
-};
+    return {props:{post, query, ...settings}}
+
+}
+
+
 export default withRouter(Index);

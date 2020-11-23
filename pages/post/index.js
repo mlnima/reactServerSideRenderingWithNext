@@ -120,7 +120,38 @@ const Post = props => {
     );
 };
 
-Post.getInitialProps = async ({pathname, query, req, res, err}) => {
+// Post.getInitialProps = async ({pathname, query, req, res, err}) => {
+//     const domainName = req ? await getAbsolutePath(req) : ''
+//     const requestBody = {
+//         _id: query.id
+//     };
+//
+//     let post;
+//     let widgets;
+//     let settings;
+//     let comments;
+//     let errorCode = 200
+//
+//     const postData = await getPost(requestBody, domainName, true)
+//     post = postData.data.post
+//
+//     const widgetsData = await getMultipleWidgetWithData({widgets: ['postPageSidebar', 'footer', 'header', 'underPost', 'topBar', 'navigation']}, domainName, true, 'postPage')
+//     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'postPage')
+//
+//     if (!post) {
+//         errorCode = 404
+//         // res.sendStatus(404)
+//     }
+//     const commentsData = post ? await getComments({onDocument: post._id}, domainName, true) : {}
+//
+//     settings = settingsData.data.settings ? settingsData.data.settings : []
+//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+//     comments = post ? commentsData.data.comments : []
+//
+//     return {post, query, widgets, comments, ...settings, errorCode}
+// };
+
+export const getServerSideProps = async ({req,query}) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     const requestBody = {
         _id: query.id
@@ -140,7 +171,6 @@ Post.getInitialProps = async ({pathname, query, req, res, err}) => {
 
     if (!post) {
         errorCode = 404
-        // res.sendStatus(404)
     }
     const commentsData = post ? await getComments({onDocument: post._id}, domainName, true) : {}
 
@@ -148,7 +178,11 @@ Post.getInitialProps = async ({pathname, query, req, res, err}) => {
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     comments = post ? commentsData.data.comments : []
 
-    return {post, query, widgets, comments, ...settings, errorCode}
-};
+    return {props:{post, query, widgets, comments, ...settings, errorCode}}
+
+}
+
+
+
 
 export default withRouter(Post);

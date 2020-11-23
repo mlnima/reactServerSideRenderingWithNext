@@ -60,14 +60,14 @@ const PostElement = props => {
                 //     }
                 // }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>
                 // )
-                const deviceWidth = window.innerWidth
+                const deviceWidth = 1024
 
                 const imageWidth = deviceWidth < 768 ? deviceWidth :
                     deviceWidth > 768 && deviceWidth < 1200 ? 209.79 :
                         deviceWidth > 768 ? 300 : 320;
 
                 if (props.state?.mainThumbnail){
-                    if (props.state?.mainThumbnail.includes('http') || props.state.mainThumbnail.includes(window.location.hostname)) {
+                    if (props.state?.mainThumbnail.includes('http') ) {
                         return (
                             <img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
                                 if (!props.state.mainThumbnail) {

@@ -260,12 +260,25 @@ const settings = props => {
     );
 };
 
-settings.getInitialProps = async ({pathname, query, req, res, err}) => {
+// settings.getInitialProps = async ({pathname, query, req, res, err}) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let identity;
+//     const identityData = await getSetting('identity', domainName, false);
+//     identity = identityData.data.setting ? identityData.data.setting.data : {}
+//
+//     return {domainName, identity}
+// }
+
+export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let identity;
     const identityData = await getSetting('identity', domainName, false);
     identity = identityData.data.setting ? identityData.data.setting.data : {}
 
-    return {domainName, identity}
+    return {props:{domainName, identity}}
 }
+
+
+
+
 export default settings;

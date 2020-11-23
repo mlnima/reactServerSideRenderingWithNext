@@ -110,15 +110,15 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         res.end()
 
     });
-    server.get('/', (req, res) => {
-        const targetComponent = '/';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-
-        return renderAndCache(req, res, targetComponent, queryParams)
-    });
+    // server.get('/', (req, res) => {
+    //     const targetComponent = '/';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //
+    //     return renderAndCache(req, res, targetComponent)
+    // });
 
     //xml siteMap handler
     server.get('/sitemap.xsl', (req, res) => {
@@ -329,8 +329,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             contentType: 'tags',
             contentName: req.params.tag,
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/login', (req, res) => {
@@ -339,8 +339,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/register', (req, res) => {
@@ -349,8 +349,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
 
@@ -362,8 +362,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             contentType: 'categories',
             contentName: req.params.category,
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
 
@@ -375,8 +375,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             contentType: 'actors',
             contentName: req.params.actor,
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/posts', (req, res) => {
@@ -385,8 +385,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
 
@@ -397,8 +397,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.params,
             contentType: 'categories'
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
     server.get('/tags', (req, res) => {
         const targetComponent = '/meta';
@@ -407,8 +407,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.params,
             contentType: 'tags'
         }
-        // app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
     server.get('/actors', (req, res) => {
         const targetComponent = '/meta';
@@ -417,8 +417,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.params,
             contentType: 'actors'
         }
-        return renderAndCache(req, res, targetComponent, queryParams)
-        // app.render(req, res, targetComponent, queryParams)
+
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
 
@@ -429,9 +430,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-        //  app.render(req, res, targetComponent, queryParams)
+         app.render(req, res, targetComponent, queryParams)
 
-        return renderAndCache(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/page/:pageName', (req, res) => {
@@ -440,8 +441,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             ...req.query,
             ...req.params,
         }
-        //app.render(req, res, targetComponent, queryParams)
-        return renderAndCache(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
     server.get('/profile', (req, res) => {

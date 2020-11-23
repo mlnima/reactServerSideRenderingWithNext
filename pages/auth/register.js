@@ -90,7 +90,19 @@ const Register = props => {
 
 };
 
-Register.getInitialProps = async ({ req }) => {
+// Register.getInitialProps = async ({ req }) => {
+//     const domainName = req ? await getAbsolutePath(req) : ''
+//     let settings;
+//     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true)
+//     let widgets;
+//     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar' ,'footer','navigation'] }, domainName, true)
+//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+//
+//     settings = settingsData.data.settings ? settingsData.data.settings : []
+//     return { ...settings ,widgets}
+// }
+
+export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let settings;
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true)
@@ -99,6 +111,8 @@ Register.getInitialProps = async ({ req }) => {
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 
     settings = settingsData.data.settings ? settingsData.data.settings : []
-    return { ...settings ,widgets}
+    return {props:{ ...settings ,widgets}}
 }
+
+
 export default withRouter(Register);
