@@ -47,13 +47,22 @@ const customStyle = props => {
     );
 };
 
-customStyle.getInitialProps = async ({ req }) => {
+// customStyle.getInitialProps = async ({ req }) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let customStyles;
+//     const customStylesData = await getSetting('customStyle', domainName, false);
+//     customStyles = customStylesData.data.setting ? customStylesData.data.setting : {}
+//
+//     return {  customStyles }
+// }
+export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let customStyles;
     const customStylesData = await getSetting('customStyle', domainName, false);
     customStyles = customStylesData.data.setting ? customStylesData.data.setting : {}
 
-    return {  customStyles }
+    return {props:{  customStyles }}
 }
+
 
 export default customStyle;

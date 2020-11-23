@@ -59,19 +59,19 @@ const contact = props => {
     );
 };
 
-contact.getInitialProps = async ({pathname, query, req, asPath}) => {
-    const domainName = req ? await getAbsolutePath(req) : '';
-    let errorCode = 200
-    let settings;
-    let widgets;
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: [ 'footer', 'header','topBar','navigation']}, domainName, true, 'tagsPage')
-
-    settings = settingsData.data.settings ? settingsData.data.settings : []
-    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-
-    return {...settings, query, pathname, asPath, widgets}
-}
+// contact.getInitialProps = async ({pathname, query, req, asPath}) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let errorCode = 200
+//     let settings;
+//     let widgets;
+//     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
+//     const widgetsData = await getMultipleWidgetWithData({widgets: [ 'footer', 'header','topBar','navigation']}, domainName, true, 'tagsPage')
+//
+//     settings = settingsData.data.settings ? settingsData.data.settings : []
+//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+//
+//     return {...settings, query, pathname, asPath, widgets}
+// }
 
 export const getServerSideProps = async ({req,query}) => {
     const domainName = req ? await getAbsolutePath(req) : '';

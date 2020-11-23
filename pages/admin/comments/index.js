@@ -6,14 +6,16 @@ import AdminCommentsControl from '../../../components/adminIncludes/commentsPage
 import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
 import AppLayout from '../../../components/layouts/AppLayout'
 import { getAbsolutePath } from '../../../_variables/_variables'
+import {useRouter} from "next/router";
 
 const comments = props => {
+    const router = useRouter()
     return (
         <AdminLayout>
             <div>
                 <AdminCommentsControl
-                    queryData={ props.query || props.router.query }
-                    pathnameData={ props.pathname || props.router.pathname }
+                    queryData={ router.query }
+                    pathnameData={ router.pathname }
                 />
                 <PaginationComponent
                     isActive={ true }
@@ -22,7 +24,7 @@ const comments = props => {
                     size={ props.getCommentsData.size }
                     maxPage={ Math.ceil(parseInt(props.totalComments) / parseInt(props.getCommentsData.size)) }
                     queryData={ props.query || props.router.query }
-                    pathnameData={ props.pathname || props.router.pathname }
+                    pathnameData={ router.pathname }
                 />
                 <AdminRenderComments { ...props }/>
             </div>
@@ -30,7 +32,22 @@ const comments = props => {
     );
 };
 
-comments.getInitialProps = async ({ pathname, query, req, res, err }) => {
+// comments.getInitialProps = async ({ pathname, query, req, res, err }) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let comments;
+//     const getCommentsData = {
+//         size: parseInt(query.size) || 30,
+//         pageNo: parseInt(query.page) || 1,
+//         keyword: query.keyword || '',
+//         sort: query.sort || 'latest',
+//         status: query.status || 'all',
+//     }
+//     const commentsData = await getComments(getCommentsData,domainName,false)
+//     comments = commentsData.data
+//     return { query, pathname, comments: comments.comments, totalComments: comments.count, getCommentsData }
+// }
+
+export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let comments;
     const getCommentsData = {
@@ -42,6 +59,7 @@ comments.getInitialProps = async ({ pathname, query, req, res, err }) => {
     }
     const commentsData = await getComments(getCommentsData,domainName,false)
     comments = commentsData.data
-    return { query, pathname, comments: comments.comments, totalComments: comments.count, getCommentsData }
+    return{props: { query, comments: comments.comments, totalComments: comments.count, getCommentsData }}
 }
+
 export default comments;

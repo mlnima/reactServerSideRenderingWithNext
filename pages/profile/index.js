@@ -30,7 +30,20 @@ const Profile = props => {
         </AppLayout>
     );
 };
-Profile.getInitialProps = async ({ pathname, query, req, res, err }) => {
+// Profile.getInitialProps = async ({ pathname, query, req, res, err }) => {
+//     const domainName = req ? await getAbsolutePath(req) : ''
+//     let settings;
+//     let widgets;
+//     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'footer', 'header','topBar','navigation' ] }, domainName, true, 'profilePage')
+//     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true, 'profilePage')
+//
+//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+//     settings = settingsData.data.settings ? settingsData.data.settings : []
+//
+//     return { query, ...settings, widgets }
+// }
+
+export const getServerSideProps = async ({req,query}) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let settings;
     let widgets;
@@ -40,7 +53,6 @@ Profile.getInitialProps = async ({ pathname, query, req, res, err }) => {
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? settingsData.data.settings : []
 
-    return { query, ...settings, widgets }
+    return {props:{ query, ...settings, widgets }}
 }
-
 export default Profile;

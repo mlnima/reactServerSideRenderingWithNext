@@ -49,7 +49,17 @@ const formPage = props => {
     );
 };
 
-formPage.getInitialProps = async ({query, req}) => {
+// formPage.getInitialProps = async ({query, req}) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let formData;
+//     let form;
+//     const requestBody = {
+//         _id: query.id,
+//     };
+//     formData = await getSingleFormData(requestBody,domainName)
+//     return {formData:formData.data ?formData.data:{},query}
+// };
+export const getServerSideProps = async ({req,query}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let formData;
     let form;
@@ -57,6 +67,7 @@ formPage.getInitialProps = async ({query, req}) => {
         _id: query.id,
     };
     formData = await getSingleFormData(requestBody,domainName)
-    return {formData:formData.data ?formData.data:{},query}
-};
+    return {props: {formData: formData.data ? formData.data : {}, query}}
+}
+
 export default formPage;

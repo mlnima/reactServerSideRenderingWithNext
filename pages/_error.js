@@ -21,9 +21,10 @@ const Error = props => {
     )
 }
 
-Error.getInitialProps = async ({ req, res, err }) => {
+
+export const getServerSideProps = async ({req}) => {
     const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-    return { statusCode }
+    return { props:{statusCode} }
 }
 
 export default Error

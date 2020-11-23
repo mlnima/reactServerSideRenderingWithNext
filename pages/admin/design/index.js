@@ -80,7 +80,19 @@ const design = props => {
     );
 };
 
-design.getInitialProps = async ({ req }) => {
+// design.getInitialProps = async ({ req }) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let design;
+//     let customStyles;
+//     const designData = await getSetting('design', domainName, false);
+//     const customStylesData = await getSetting('customStyle', domainName, false);
+//
+//     design = designData.data.setting ? designData.data.setting.data : {}
+//     customStyles = customStylesData.data.setting ? customStylesData.data.setting : {}
+//     return { design, customStyles }
+// }
+
+export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let design;
     let customStyles;
@@ -89,6 +101,7 @@ design.getInitialProps = async ({ req }) => {
 
     design = designData.data.setting ? designData.data.setting.data : {}
     customStyles = customStylesData.data.setting ? customStylesData.data.setting : {}
-    return { design, customStyles }
+    return {props:{ design, customStyles }}
 }
+
 export default design;

@@ -135,7 +135,30 @@ const meta = props => {
     );
 };
 
-meta.getInitialProps = async ({query, req}) => {
+// meta.getInitialProps = async ({query, req}) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let metaInfo = {}
+//     let settings;
+//     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
+//     settings = settingsData.data.settings ? settingsData.data.settings : []
+//     if (query.new && query.metaType) {
+//         metaInfo = {
+//             name: '',
+//             type: query.metaType,
+//             description: '',
+//             imageUrl: '',
+//             translations: {},
+//             count: 0,
+//             lang: query.lang || 'default'
+//         }
+//     } else if (query.id) {
+//         let metaInfoFetchedData = await getSingleMeta(query.id, domainName, false)
+//         metaInfo = metaInfoFetchedData.data ? metaInfoFetchedData.data : {}
+//     }
+//     return {metaInfo, query, ...settings}
+// }
+
+export const getServerSideProps = async ({req,query}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let metaInfo = {}
     let settings;
@@ -155,6 +178,8 @@ meta.getInitialProps = async ({query, req}) => {
         let metaInfoFetchedData = await getSingleMeta(query.id, domainName, false)
         metaInfo = metaInfoFetchedData.data ? metaInfoFetchedData.data : {}
     }
-    return {metaInfo, query, ...settings}
+    return{props: {metaInfo, query, ...settings}}
 }
+
+
 export default meta;

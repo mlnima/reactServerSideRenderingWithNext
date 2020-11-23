@@ -47,20 +47,6 @@ const Home = props => {
     );
 };
 
-// Home.getInitialProps = async ({req}) => {
-//     const domainName = req ? await getAbsolutePath(req) : ''
-//
-//     let widgets;
-//     let settings;
-//
-//     const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'homePage')
-//     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'homePage')
-//
-//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-//     settings = settingsData.data.settings ? settingsData.data.settings : []
-//
-//     return {widgets, ...settings, widgetsData: widgetsData.data}
-// };
 
 export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : ''
