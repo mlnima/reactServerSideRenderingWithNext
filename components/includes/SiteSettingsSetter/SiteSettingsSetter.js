@@ -78,6 +78,7 @@ const SiteSettingSetter = props => {
             <meta charSet="utf-8"/>
             <meta name="description" content={state.description}/>
             <meta name="keywords" content={state.keywords}/>
+            <base href="/"/>
             <link rel="icon" href={state.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
             {renderCustomScripts}

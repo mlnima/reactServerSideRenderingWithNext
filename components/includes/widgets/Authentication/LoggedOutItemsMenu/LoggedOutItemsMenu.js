@@ -12,13 +12,13 @@ const LoggedOutItemsMenu = props => {
         return (
             <div className='logged-out-items'>
                 <Link href='/auth/login' as='/login'>
-                    <a>
+                    <a aria-label='logged-out-items'>
                         <FontAwesomeIcon icon={faUser} className='svg-logo-small' />
                     </a>
                 </Link>
 
                 <Link href='/auth/register' as='/register'>
-                    <a>
+                    <a aria-label='logged-out-items'>
                         <FontAwesomeIcon icon={faPen} className='svg-logo-small'/>
                     </a>
                 </Link>

@@ -17,9 +17,9 @@ const Logo = props => {
     });
 
     const RenderLogoImage = () => {
+        let renderNormalImageElement = props.LogoUrl.includes('http')
         if (props.LogoUrl) {
-
-            if (props.LogoUrl.includes('http')||props.LogoUrl.includes(window.location.hostname)){
+            if (renderNormalImageElement){
                 return (
                     <img src={props.LogoUrl} alt='logo'/>
                 )
@@ -31,6 +31,10 @@ const Logo = props => {
                         width={300}
                         height={100}
                         quality={50}
+                        layout='intrinsic'
+                        onError={()=>{
+                            renderNormalImageElement = true
+                        }}
                     />
                 )
             }

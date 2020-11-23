@@ -74,7 +74,7 @@ const PostSwiper = props => {
                 return (
 
                         <Image className='post-slider-item-internal' src={post.mainThumbnail} alt={`Thumbnail ${post.mainThumbnail}`} width={
-                            imageSize.width} height={imageSize.width / (state.imageRatioWidth / state.imageRatioHeight)} quality={50} loading='lazy'/>
+                            imageSize.width} height={imageSize.width / (state.imageRatioWidth / state.imageRatioHeight)} quality={50} layout='intrinsic' loading='lazy'/>
 
 
                 )

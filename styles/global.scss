@@ -1,4 +1,4 @@
-@import "./styles";
+//@import "./styles";
 @import "./links";
 @import "./buttons";
 @import "./colors";
@@ -7,7 +7,7 @@
 //components
 @import "../components/widgetsArea/Header/Header";
 @import "../components/includes/AlertBox/AlertBox";
-@import "../components/includes/Widget/Logo/Logo";
+@import "../components/includes/widgets/Logo/Logo";
 @import "../components/widgetsArea/Navigation/Navigation";
 @import "../components/includes/Loading/Loading";
 //@import "../components/includes/Pagination/Pagination";
@@ -17,7 +17,7 @@
 @import "../components/includes/PaginationComponent/PaginationComponent";
 @import "../components/includes/ProgressBar/ProgressBar";
 @import "../components/widgetsArea/TopBar/TopBar";
-@import "../components/includes/PostElement/PostElement";
+//@import "../components/includes/PostElement/PostElement";
 @import "../components/includes/Post/CommentFrom/CommentFrom";
 @import "../components/includes/Post/SlideShow/SlideShow";
 //@import "../components/includes/Widget/Widget";

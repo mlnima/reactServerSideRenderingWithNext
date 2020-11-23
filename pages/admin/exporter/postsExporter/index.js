@@ -17,6 +17,7 @@ const postsExporter = props => {
         exportPosts().then(postsData=>{
             // console.log(postsData)
             const posts = postsData.data.exportedData.map(post=>{
+                post.mainThumbnail = post.mainThumbnail.includes('http') ? post.mainThumbnail : window.location.origin + post.mainThumbnail
                 delete post._id;
                 delete post.__v;
                 return post

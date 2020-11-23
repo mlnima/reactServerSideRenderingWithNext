@@ -23,7 +23,7 @@ const LanguagesSwitcher = props => {
     return (
         <div className='language-switcher-widget'>
             <p>{props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].languageToShowBesideDropDown || props.languageToShowBesideDropDown : props.languageToShowBesideDropDown : props.languageToShowBesideDropDown}</p>
-            <select value={contextData.state.activeLanguage} onChange={e => onChangeHandler(e)}>
+            <select value={contextData.state.activeLanguage} onChange={e => onChangeHandler(e)} aria-checked='true'>
                 <option key='default' value='default'>{props.languageTextAsDefaultLanguage ||'default'}</option>
                 {languagesOptions}
             </select>

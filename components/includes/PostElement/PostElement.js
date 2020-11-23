@@ -9,6 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import './PostElement.scss'
 
 let StyledDiv = styled.div`${props => props.stylesData}`
 
@@ -67,22 +68,15 @@ const PostElement = props => {
                         deviceWidth > 768 ? 300 : 320;
 
                 if (props.state?.mainThumbnail){
-                    if (props.state?.mainThumbnail.includes('http') ) {
+                    let renderNormalImageElement = props.state?.mainThumbnail.includes('http')
+                    if (renderNormalImageElement ) {
                         return (
-                            <img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
-                                if (!props.state.mainThumbnail) {
-                                    // deletedVideoAutoRemover(props.state)
-                                    console.log('something wrong with image on ', props.state.title)
-                                }
-                            }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>
+                            <img src={props.state.mainThumbnail} alt={props.state.title}  onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>
                         )
                     } else {
                         return (
-                            <Image src={props.state?.mainThumbnail} alt={props.state.title} onError={err => {
-                                if (!props.state.mainThumbnail) {
-                                    console.log('something wrong with image on ', props.state.title)
-                                }
-                            }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler} width={imageWidth > 300 ? 300 : imageWidth}
+                            <Image src={props.state?.mainThumbnail} alt={props.state.title} layout='intrinsic'
+                                   onError={() =>renderNormalImageElement=true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler} width={imageWidth > 300 ? 300 : imageWidth}
                                    height={((imageWidth > 300) / 1.777) > 300 / 1.777 ? 300 / 1.777 : imageWidth / 1.777} quality={50} lazy={true}/>
                         )
                     }
@@ -202,7 +196,7 @@ const PostElement = props => {
                     }
                 }}
             >
-                <a>
+                <a aria-label='post-element'>
                     <div className='post-element' key={props.state.title}>
                         <div className="image">
                             <ImageContent/>

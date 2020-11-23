@@ -1,7 +1,4 @@
 import React, {useEffect, useContext} from 'react';
-import Header from "../widgetsArea/Header/Header";
-import TopBar from "../widgetsArea/TopBar/TopBar";
-import Navigation from "../widgetsArea/Navigation/Navigation";
 import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
 import '../../styles/global.scss'
@@ -11,7 +8,8 @@ import Console from "../includes/AdminTools/Console/Console";
 import {createGlobalStyle} from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
-import CheckOutSlide from "../includes/checkOutPageComponents/CheckOutSlide/CheckoutSlide";
+
+//import CheckOutSlide from "../includes/checkOutPageComponents/CheckOutSlide/CheckoutSlide";
 
 const AppLayout = props => {
     const contextData = useContext(AppContext);
