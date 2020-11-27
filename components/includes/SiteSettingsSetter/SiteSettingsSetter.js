@@ -1,24 +1,15 @@
-import React, {useState, useContext, useEffect, useRef} from 'react';
-import loadable from '@loadable/component';
-import {AppContext} from '../../../context/AppContext'
+import React, {useContext, useEffect} from 'react';
+import {AppContext} from '../../../context/AppContext';
+import dynamic from 'next/dynamic'
 import Head from 'next/dist/next-server/lib/head'
-import withRouter from 'next/dist/client/with-router'
-import reactHtmlParser from 'html-react-parser'
-import {useRouter} from "next/router";
 
+const reactHtmlParser = dynamic(() => import('html-react-parser'))
+import {useRouter} from "next/router";
+import {initGA, logPageView} from "../../../_variables/_variables";
 
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-    const [state, setState] = useState({
-        title: '',
-        themeColor: '',
-        description: '',
-        bodyBackgroundImage: '',
-        keywords: [],
-        customScripts: [],
-        customStyles: ''
-    });
 
     useEffect(() => {
         if (props.design) {
@@ -29,35 +20,19 @@ const SiteSettingSetter = props => {
         }
         if (props.identity) {
             contextData.dispatchSiteIdentity(props.identity.data)
-            setState({
-                ...state,
-                title: props.identity ? props.identity.data.title || '' : '',
-                description: props.identity ? props.identity.data.description || '' : '',
-                keywords: props.identity ? props.identity.data.keywords || [] : [],
-                customScripts: props.identity ? props.identity.data.customScripts || [] : [],
-                favIcon: props.identity ? props.identity.data.favIcon || '/static/images/favIcon/favicon.png' : '/static/images/favIcon/favicon.png'
-            })
-            // contextData.dispatchState({
-            //     ...contextData.state,
-            //     currentPageSidebar: true
-            // })
-
         }
         if (props.widgets) {
             contextData.setSiteWidgets(props.widgets)
         }
 
-    }, [props]);
-
-
-    useEffect(() => {
-        if (localStorage.lang || router.query.lang) {
+        if ((localStorage.lang || router.query.lang) && (localStorage.lang || router.query.lang) !== contextData.state.activeLanguage) {
             contextData.dispatchState({
                 ...contextData.state,
                 activeLanguage: localStorage.lang || router.query.lang
             })
         }
-    }, []);
+
+    }, [props]);
 
 
     useEffect(() => {
@@ -65,25 +40,26 @@ const SiteSettingSetter = props => {
     }, [contextData.state.activeLanguage, contextData.siteIdentity.defaultSiteLanguage]);
 
 
-    const renderCustomScripts = (props.identity ? props.identity.data.customScripts || [] : []).map(script => {
+    const renderCustomScripts = (props.identity?.data.customScripts ?? []).map(script => {
         return reactHtmlParser(script.scriptBody)
     })
 
-
     return (
         <Head>
-            <title>{state.title}</title>
-            {/*<meta name="theme-color" content={state.themeColor}/>*/}
+            <title>{props.identity?.data.title ?? ''}</title>
+            <meta name="theme-color" content={props.identity?.data.themeColor ?? '#000000'}/>
+            <meta name="apple-mobile-web-app-status-bar-style" content='#000000'/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charSet="utf-8"/>
-            <meta name="description" content={state.description}/>
-            <meta name="keywords" content={state.keywords}/>
-            <base href="/"/>
-            <link rel="icon" href={state.favIcon || '/static/images/favIcon/favicon.png'}/>
-            <link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>
+            <meta name="description" content={props.identity?.data.description ?? ''}/>
+            <meta name="keywords" content={props.identity?.data.keywords ?? []}/>
+            {/*<base href="/"/>*/}
+            <link rel="icon" href={props.identity?.data.favIcon ?? '/static/images/favIcon/favicon.png'}/>
+            {/*<link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>*/}
             {renderCustomScripts}
+
         </Head>
     )
 };
-export default withRouter(SiteSettingSetter);
+export default SiteSettingSetter;
 

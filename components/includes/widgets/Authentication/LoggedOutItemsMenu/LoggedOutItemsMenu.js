@@ -7,19 +7,24 @@ import {faPen} from "@fortawesome/free-solid-svg-icons";
 
 const LoggedOutItemsMenu = props => {
     const contextData = useContext(AppContext);
-
+    const [state,setState] = useState({
+        svgDefaultStyle:{
+            maxWidth:'25px',
+            maxHeight: '25px'
+        }
+    })
     if (!contextData.userData.username) {
         return (
             <div className='logged-out-items'>
                 <Link href='/auth/login' as='/login'>
                     <a aria-label='logged-out-items'>
-                        <FontAwesomeIcon icon={faUser} className='svg-logo-small' />
+                        <FontAwesomeIcon style={state.svgDefaultStyle} icon={faUser} className='svg-logo-small' />
                     </a>
                 </Link>
 
                 <Link href='/auth/register' as='/register'>
                     <a aria-label='logged-out-items'>
-                        <FontAwesomeIcon icon={faPen} className='svg-logo-small'/>
+                        <FontAwesomeIcon style={state.svgDefaultStyle} icon={faPen} className='svg-logo-small'/>
                     </a>
                 </Link>
             </div>

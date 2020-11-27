@@ -64,21 +64,18 @@ const SlideShow = props => {
         } else {
 
             let imageWidth = props.deviceWidth > 768 ? props.sidebar ? props.deviceWidth - 300 : props.deviceWidth : props.deviceWidth
-            console.log(imageWidth)
+
             return (
-                // <img src={activeImageSrc} alt="activeImageSrc"/>
                 <Image src={activeImageSrc} alt="activeImageSrc"
                        width={imageWidth || 640} height={(imageWidth || 640) / 1.777}
-                    // layout='fill'
-                       quality={50} lazy={true}/>
+                       quality={85}
+                       loading='eager'
+                       className='active-image'
+                />
             )
         }
 
     }
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
 
     if (props.postType === 'product') {
         return (

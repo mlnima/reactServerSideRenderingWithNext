@@ -1,26 +1,16 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, { useContext, useRef} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
+
+import parse from 'html-react-parser';
 
 const Text = props => {
     const spanElement = useRef(null)
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-        textData: ''
-    });
-
-    useEffect(() => {
-        setState({
-            ...state,
-            textData: props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text
-        })
-    }, [props]);
-
-    useEffect(() => {
-        spanElement.current.innerHTML = state.textData
-    }, [state]);
-
+    const data = parse(props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text)
     return (
-        <p className='widgetText' ref={spanElement} >
+        <p className='widgetText'
+            ref={spanElement} >
+            {data}
         </p>
     );
 };

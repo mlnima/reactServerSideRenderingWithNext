@@ -1,12 +1,9 @@
 const withSass = require('@zeit/next-sass');
 const withCSS = require("@zeit/next-css");
 const {parsed: localEnv} = require('dotenv').config();
-// const nextEnv = require('next-env');
-// const dotenvLoad = require('dotenv-load');
-// const withPlugins = require('next-compose-plugins');
 const withImages = require('next-images')
 // const withNextEnv = nextEnv();
-
+const path = require('path')
 const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const dotenvLoad = require('dotenv-load');
@@ -29,27 +26,34 @@ const scssConfig = {
     }
 };
 
+const sassOptions={
+    includePaths: [path.join(__dirname, 'styles')]
+}
+
+
+
 
 const nextConfiguration = {
     publicRuntimeConfig: {
         base_url: BASE_URL,
     },
-    webpack(config) {
-        config.plugins.push(new webpack.EnvironmentPlugin(localEnv))
-        return config
-    },
+    // webpack(config) {
+    //     config.plugins.push(new webpack.EnvironmentPlugin(localEnv))
+    //     return config
+    // },
     node: {
         fs: "empty"
     },
     images: {
-        deviceSizes: [320, 480, 540, 600, 640, 720, 750, 768, 800, 900, 960, 1024, 1080, 1200, 1280, 1284, 1366, 1440, 1600, 1920, 2048, 2160],
-        domains: ['webdevs.ai'],
+        // deviceSizes: [320, 480, 540, 600, 640, 720, 750, 768, 800, 900, 960, 1024, 1080, 1200, 1280, 1284, 1366, 1440, 1600, 1920, 2048, 2160],
+        // domains: ['webdevs.ai'],
        // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
     }
 };
 
 
 module.exports = withPlugins([[withCSS(withSass()), scssConfig], withImages, nextEnv({
+// module.exports = withPlugins([ withImages, nextEnv({
     staticPrefix: 'REACT_APP_',
     publicPrefix: 'REACT_APP_',
 })], nextConfiguration);

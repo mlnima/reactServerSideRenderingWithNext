@@ -1,25 +1,25 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from '../../../../context/AppContext';
-import loadable from '@loadable/component'
+import dynamic from 'next/dynamic'
 import {addNewWidget, deleteWidgets, getMultipleWidgetWithData, getPagesData, updateWidgets} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName} from "../../../../_variables/_variables";
-import 'array.prototype.move';
+// import 'array.prototype.move';
 import {DelayInput} from 'react-delay-input'
-import SliderWidgetTypeFields from "./SliderWidgetTypeFields/SliderWidgetTypeFields";
 
-const RenderTitleAndRedirectLink = loadable(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
-const WidgetPreview = loadable(() => import('./WidgetPreview/WidgetPreview'))
-const TextInputFieldForWidget = loadable(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'))
-const LinkTypeWidgetModelFields = loadable(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'))
-const ImageSwiperTypeWidgetModelFields = loadable(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'))
-const PostSwiperTypeWidgetModelFields = loadable(() => import('./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields'))
-const MenuWidgetModelFields = loadable(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'))
-const TextWidgetTypeFields = loadable(() => import('./TextWidgetTypeFields/TextWidgetTypeFields'))
-const MediaWidgetType = loadable(() => import('./MediaWidgetType/MediaWidgetType'))
-const ExportWidget = loadable(() => import('./ExportWidget/ExportWidget'))
-const FormTypeWidgetModelFields = loadable(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'))
-const WidgetHeaderControl = loadable(() => import('./WidgetHeaderControl/WidgetHeaderControl'))
-const TextEditor = loadable(() => import('../../TextEditor/TextEditor'))
+const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
+const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
+const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'))
+const TextInputFieldForWidget = dynamic(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'), { ssr: false })
+const LinkTypeWidgetModelFields = dynamic(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'))
+const ImageSwiperTypeWidgetModelFields = dynamic(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'))
+const PostSwiperTypeWidgetModelFields = dynamic(() => import('./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields'))
+const MenuWidgetModelFields = dynamic(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'))
+const TextWidgetTypeFields = dynamic(() => import('./TextWidgetTypeFields/TextWidgetTypeFields'))
+const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'))
+const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'))
+const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'))
+const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'))
+const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), { ssr: false })
 
 
 const WidgetModel = props => {
@@ -39,8 +39,8 @@ const WidgetModel = props => {
 
 
     // useEffect(() => {
-    //     console.log(widgetData)
-    // }, [widgetData]);
+    //     console.log(props)
+    // }, [props]);
 
 
     useEffect(() => {
@@ -336,17 +336,7 @@ const WidgetModel = props => {
                         </select>
                     </>
                 )
-            // case 'media':
-            //     return (
-            //
-            //         <MediaWidgetType
-            //             widgetSettings={widgetSettings}
-            //             onChangeHandler={onChangeHandler}
-            //             onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
-            //             widgetData={widgetData}
-            //         />
-            //
-            //     )
+
             case 'meta':
                 return (
                     <>
@@ -369,13 +359,6 @@ const WidgetModel = props => {
                     <>
                         <p>Logo Text</p>
                         <DelayInput name='LogoText'
-                                    // value={
-                                    //     widgetSettings.activeEditingLanguage === 'default' ? widgetData.LogoText :
-                                    //         widgetData.translations ?
-                                    //             widgetData.translations[widgetSettings.activeEditingLanguage] ?
-                                    //                 widgetData.translations[widgetSettings.activeEditingLanguage].LogoText || '' :
-                                    //                 '' : ''
-                                    // }
                                     value={
                                         widgetSettings.activeEditingLanguage === 'default' ? widgetData.LogoText :
                                             widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.LogoText || ''
@@ -385,13 +368,6 @@ const WidgetModel = props => {
 
                         <p>Under Logo Headline Text</p>
                         <DelayInput name='headLine'
-                            // value={
-                            //     widgetSettings.activeEditingLanguage === 'default' ? widgetData.headLine :
-                            //     widgetData.translations ?
-                            //     widgetData.translations[widgetSettings.activeEditingLanguage] ?
-                            //     widgetData.translations[widgetSettings.activeEditingLanguage].headLine || '' :
-                            //     '' : ''
-                            //  }
                                     value={
                                         widgetSettings.activeEditingLanguage === 'default' ? widgetData.headLine :
                                             widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.headLine || ''
@@ -413,12 +389,6 @@ const WidgetModel = props => {
                         />
                     </>
                 )
-            // case 'linkTo':
-            //     return (
-            //         <>
-            //
-            //         </>
-            //     )
             case 'language':
                 return (
                     <>
@@ -428,13 +398,6 @@ const WidgetModel = props => {
 
                         <p>Language To Show Beside Drop Down:</p>
                         <DelayInput name='languageToShowBesideDropDown'
-                            // value={
-                            //     widgetSettings.activeEditingLanguage === 'default' ? widgetData.languageToShowBesideDropDown :
-                            //         widgetData.translations ?
-                            //             widgetData.translations[widgetSettings.activeEditingLanguage] ?
-                            //                 widgetData.translations[widgetSettings.activeEditingLanguage].languageToShowBesideDropDown || '' :
-                            //                 '' : ''
-                            // }
                                     value={
                                         widgetSettings.activeEditingLanguage === 'default' ? widgetData.languageToShowBesideDropDown :
                                             widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.languageToShowBesideDropDown || ''
@@ -448,27 +411,17 @@ const WidgetModel = props => {
                 return (
                     <>
                         <ImageSwiperTypeWidgetModelFields imageSwiperData={widgetData.imageSwiperData || []}
-                            // imageSwiperAmountMobile={widgetData.imageSwiperAmountMobile}
-                            // imageSwiperAmountDesktop={widgetData.imageSwiperAmountDesktop}
-                            // imageSwiperSpaceBetweenMobile={widgetData.imageSwiperSpaceBetweenMobile}
-                            // imageSwiperSpaceBetweenDesktop={widgetData.imageSwiperSpaceBetweenDesktop}
                                                           onChangeHandler={onChangeHandler}
                         />
                     </>
                 )
-            case 'menu':
-                return (
-                    <>
-                        <MenuWidgetModelFields widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.mobileNavigation}/>
-                    </>
-                )
-            case 'form':
-                return (
-                    <>
-                        <FormTypeWidgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler}
-                                                   mobileNavigation={widgetData.mobileNavigation}/>
-                    </>
-                )
+            // case 'form':
+            //     return (
+            //         <>
+            //             <FormTypeWidgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler}
+            //                                        mobileNavigation={widgetData.mobileNavigation}/>
+            //         </>
+            //     )
             default:
                 return null
 
@@ -488,7 +441,6 @@ const WidgetModel = props => {
                                              onChangeHandler={onChangeHandler}
                                              rendering={true}
                     />
-                    {/*<textarea value={widgetData.test} onChange={e=>setWidgetData({...widgetData,test:e.target.value})}/>*/}
                     <p>Translations:</p>
                     <select ref={languageElement} name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
                         <option value='default'>Default</option>
@@ -512,6 +464,7 @@ const WidgetModel = props => {
                         <option value='menu'>Menu</option>
                         <option value='media'>Media</option>
                         <option value='text'>Text</option>
+                        <option value='textEditor'>Text Editor</option>
                         <option value='logo'>Logo</option>
                         <option value='shoppingCart'>basket</option>
                         <option value='recentComments'>Recent Comments</option>
@@ -543,7 +496,7 @@ const WidgetModel = props => {
                         <option value='actorsPagesSidebar'>Actors Page SideBar</option>
                         <option value='footer'>Footer</option>
                         <option value='deactivate'>Deactivate</option>
-                        {/*{renderCustomPagesPosition}*/}
+                        {renderCustomPagesPosition}
                     </select>
 
                     <RenderTitleAndRedirectLink
@@ -579,38 +532,10 @@ const WidgetModel = props => {
                     <TextInputFieldForWidget element='input' inputTitle='Language Text As Default Language :' name='languageTextAsDefaultLanguage' type='text'
                                              value={widgetData.languageTextAsDefaultLanguage || 'default'} classNameValue='languageTextAsDefaultLanguage'
                                              placeHolder='Language Text As Default Language' onChangeHandler={onChangeHandler} rendering={widgetData.type === 'language'}/>
-                    {/*<TextInputFieldForWidget inputTitle='Image Swiper Images Amount In View Mobile :' name='postSwiperAmountMobile' type='number' value={widgetData.postSwiperAmountMobile}*/}
-                    {/*                         classNameValue='postSwiperAmountMobile' placeHolder='Post Swiper Images Amount In View Mobile'*/}
-                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'postsSwiper'}/>*/}
-                    {/*<TextInputFieldForWidget inputTitle='Image Swiper Images Amount In View Desktop :' name='postSwiperAmountDesktop' type='number' value={widgetData.postSwiperAmountDesktop}*/}
-                    {/*                         classNameValue='postSwiperAmountDesktop' placeHolder='Post Swiper Images Amount In View Desktop'*/}
-                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'postsSwiper'}/>*/}
-                    {/*<TextInputFieldForWidget inputTitle='Image Swiper Space Between Mobile :' name='postSwiperSpaceBetweenMobile' type='number' value={widgetData.postSwiperSpaceBetweenMobile}*/}
-                    {/*                         classNameValue='postSwiperSpaceBetweenMobile' placeHolder='Post Swiper Space Between Mobile'*/}
-                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'postsSwiper'}/>*/}
-                    {/*<TextInputFieldForWidget inputTitle='Post Swiper Space Between Desktop :' name='postSwiperSpaceBetweenDesktop' type='number' value={widgetData.postSwiperSpaceBetweenDesktop}*/}
-                    {/*                         classNameValue='postSwiperSpaceBetweenDesktop' placeHolder='Post Swiper Space Between Desktop'*/}
-                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'postsSwiper'}/>*/}
-
-                    {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Mobile :' name='imageSwiperAmountMobile' type='number'*/}
-                    {/*                         value={widgetData.imageSwiperAmountMobile}*/}
-                    {/*                         classNameValue='imageSwiperAmountMobile' placeHolder='Image Swiper Images Amount In View Mobile'*/}
-                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'imageSwiper'}/>*/}
-                    {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Desktop :' name='imageSwiperAmountDesktop' type='number'*/}
-                    {/*                         value={widgetData.imageSwiperAmountDesktop}*/}
-                    {/*                         classNameValue='imageSwiperAmountDesktop' placeHolder='Image Swiper Images Amount In View Desktop'*/}
-                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'imageSwiper'}/>*/}
-                    {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Mobile :' name='imageSwiperSpaceBetweenMobile' type='number'*/}
-                    {/*                         value={widgetData.imageSwiperSpaceBetweenMobile}*/}
-                    {/*                         classNameValue='imageSwiperSpaceBetweenMobile' placeHolder='Image Swiper Space Between Mobile'*/}
-                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'imageSwiper'}/>*/}
-                    {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Space Between Desktop :' name='imageSwiperSpaceBetweenDesktop' type='number'*/}
-                    {/*                         value={widgetData.imageSwiperSpaceBetweenDesktop}*/}
-                    {/*                         classNameValue='imageSwiperSpaceBetweenDesktop' placeHolder='Image Swiper Space Between Desktop'*/}
-                    {/*                         onChangeHandler={onChangeHandler} rendering={widgetData.type === 'imageSwiper'}/>*/}
-
                     <RenderOptionByFormat/>
-
+                    <FormTypeWidgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler}
+                                               mobileNavigation={widgetData.mobileNavigation} rendering={widgetData.type === 'form'}/>
+                    <MenuWidgetModelFields widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.mobileNavigation} rendering={widgetData.type === 'menu'}/>
                     <LinkTypeWidgetModelFields
                         widgetSettings={widgetSettings}
                         widgetData={widgetData}
@@ -659,11 +584,6 @@ const WidgetModel = props => {
                         state={widgetData}
                         activeEditingLanguage={widgetSettings.activeEditingLanguage}
                         onChangeHandler={onTextEditorChangeHandler}
-                        // value={
-                        //     widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
-                        //         widgetData.translations[widgetSettings.activeEditingLanguage] ?
-                        //             widgetData.translations[widgetSettings.activeEditingLanguage].text : ''
-                        // }
                         valueData={
                            ( languageElement?.current?.value === 'default' || !languageElement?.current?.value ) ? widgetData.text :
                                 widgetData?.translations?.[languageElement?.current?.value]?.text || ''

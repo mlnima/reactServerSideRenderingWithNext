@@ -11,22 +11,21 @@ const MenuWidgetModelFieldsPreview = props => {
         as: '',
         type: ''
     });
-
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
     const onEditHandler = e => {
         e.preventDefault()
-        const findItemIndex = props.widgetData.data.menuItems.findIndex(i => i.itemIndex === itemData.itemIndex)
+        const findItemIndex = props.widgetData.menuItems.findIndex(i => i.itemIndex === itemData.itemIndex)
         console.log(findItemIndex)
         const newData = [
-                ...props.widgetData.data.menuItems.slice(0, findItemIndex),
+            ...props.widgetData.menuItems.slice(0, findItemIndex),
             itemData,
-                ...props.widgetData.data.menuItems.slice(findItemIndex + 1),
+            ...props.widgetData.menuItems.slice(findItemIndex + 1),
         ]
         props.setWidgetData({
             ...props.widgetData,
-            data: {
-                ...props.widgetData.data,
-                menuItems: newData
-            }
+            menuItems: newData
         })
     }
 
@@ -78,7 +77,7 @@ const MenuWidgetModelFieldsPreview = props => {
             <div className='menu-form-field'>
                 <p>Type:</p>
                 <select required={true} name='type' value={itemData.type} onChange={onChangeHandler}>
-                    <option >Select</option>
+                    <option>Select</option>
                     <option value='internal'>Internal</option>
                     <option value='external'>External</option>
                 </select>

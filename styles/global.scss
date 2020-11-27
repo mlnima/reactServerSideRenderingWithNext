@@ -1,4 +1,4 @@
-//@import "./styles";
+@import "./styles";
 @import "./links";
 @import "./buttons";
 @import "./colors";
@@ -13,7 +13,7 @@
 //@import "../components/includes/Pagination/Pagination";
 @import "../components/includes/Posts/Posts";
 @import "../components/includes/CommentsRenderer/CommentsRenderer";
-@import "../components/includes/Sidebar/Sidebar";
+//@import "../components/includes/Sidebar/Sidebar";
 @import "../components/includes/PaginationComponent/PaginationComponent";
 @import "../components/includes/ProgressBar/ProgressBar";
 @import "../components/widgetsArea/TopBar/TopBar";
@@ -45,6 +45,7 @@
 
 @import "../pages/post/Post";
 @import "../pages/posts/Posts";
+
 
 
 

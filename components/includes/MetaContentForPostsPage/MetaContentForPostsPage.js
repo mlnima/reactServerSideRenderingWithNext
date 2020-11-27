@@ -13,15 +13,6 @@ const MetaContentForPostsPage = props => {
         descriptionStyle:{}
     });
 
-    useEffect(() => {
-    }, []);
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
-
-
-
 
     useEffect(() => {
         const titleTextAlign = props.contentData.translations ? props.contentData.translations[contextData.state.activeLanguage] ? props.contentData.translations[contextData.state.activeLanguage].name ?contextData.state.activeLanguage === 'fa' || contextData.state.activeLanguage === 'ar' ? 'right':'left':'left' : 'left' : 'left'

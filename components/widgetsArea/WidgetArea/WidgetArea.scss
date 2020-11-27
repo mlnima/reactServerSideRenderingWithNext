@@ -6,6 +6,24 @@
   //padding: 0 2%;
 }
 
+.top-bar{
+  grid-area: top-bar;
+}
+.navigation{
+  grid-area: navigation;
+}
+.header{
+  grid-area: header;
+}
+.footer{
+  grid-area: footer;
+}
+.main{
+  grid-area: main;
+  min-height: 100vh;
+}
+
+
 .top-bar,.navigation{
   min-height: 48px;
   height: auto;

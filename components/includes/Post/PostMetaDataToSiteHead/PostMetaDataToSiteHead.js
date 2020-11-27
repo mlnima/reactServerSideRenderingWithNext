@@ -1,10 +1,8 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import Head from "next/head";
 
 const PostMetaDataToSiteHead = props => {
-    const [state, setState] = useState({});
-    useEffect(() => {
-    }, []);
+
     if (props.post.title) {
         return (
             <Head>

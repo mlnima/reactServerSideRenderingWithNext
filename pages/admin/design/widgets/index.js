@@ -18,6 +18,10 @@ const HomePageWidgets = props => {
     const [customPages, setCustomPages] = useState([])
 
 
+    // useEffect(() => {
+    //     console.log(contextData.widgetsSettings.widgets)
+    // }, [contextData.widgetsSettings.widgets]);
+
     useEffect(() => {
         getAndSetData()
     }, []);
@@ -28,11 +32,11 @@ const HomePageWidgets = props => {
         getAndSetWidgetsData()
         getAndSetCustomPagesData()
     }
-
     const getAndSetSettings = () => {
         getMultipleSetting({settings: ['identity']}, window.location.origin, false, 'adminPostPage').then(settingsData => {
+
             if (settingsData.data.settings) {
-                const settings = settingsData.data.settings ? settingsData.data.settings : []
+                const settings = settingsData.data.settings ?? []
                 // console.log(settings.identity)
                 if (settingsData.data.settings.identity) {
                     setSiteIdentity({
@@ -44,8 +48,6 @@ const HomePageWidgets = props => {
 
         })
     }
-
-
     const getAndSetWidgetsData = () => {
         getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(widgetsData => {
             if (widgetsData.data.widgets) {
@@ -57,11 +59,6 @@ const HomePageWidgets = props => {
 
         })
     }
-
-    // useEffect(() => {
-    //     console.log(contextData.widgetsSettings.widgets)
-    // }, [contextData.widgetsSettings]);
-
     const getAndSetCustomPagesData = () => {
         getPagesData().then(res => {
             if (res.data) {
@@ -70,52 +67,25 @@ const HomePageWidgets = props => {
                     setCustomPages(pagesNames)
                 }
             }
+        }).catch(err=>{
+            console.log(err)
         })
     }
 
 
-    //   const renderWidgetsInPosition = [...new Set((contextData.widgetsSettings.widgets).map(widgets => {
     const renderWidgetsInPosition = [...new Set((contextData.widgetsSettings.widgets).map(widgets => {
+
         return widgets.data.position
     }))].map(position => {
         const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)
         const widgetsOnThisType = widgetsInGroupByPosition.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
-        //     .map(widget => {
-        //
-        //     const dataWithIndex = {
-        //         data: {
-        //             ...widget.data,
-        //             widgetIndex: widget.data.widgetIndex ? widget.data.widgetIndex : widgetsInGroupByPosition.indexOf(widget)
-        //         }
-        //     }
-        //     const widgetData = {...widget, ...dataWithIndex}
-        //
-        //     return (
-        //         <WidgetModel
-        //             key={contextData.widgetsSettings.widgets.indexOf(widget)}
-        //             isPost={false}
-        //             widgetId={widgetData._id}
-        //             data={widgetData.data}
-        //             customPages={customPages}
-        //             getAndSetWidgetsData={getAndSetWidgetsData}
-        //             translationLanguages={siteIdentity.translationLanguages || []}
-        //         />
-        //     )
-        // })
         return (
             <>
-                {/*<div className='widgetAdminPanelItem' key={position}>*/}
-                {/*    <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>*/}
-                {/*    {widgetsOnThisType}*/}
-                {/*</div>*/}
-                <WidgetGroupByPosition widgetsInGroupByPosition={widgetsInGroupByPosition}  siteIdentity={siteIdentity} position={position} widgets={widgetsOnThisType} customPages={customPages} getAndSetWidgetsData={getAndSetWidgetsData}/>
+                <WidgetGroupByPosition widgetsInGroupByPosition={widgetsInGroupByPosition} key={position} siteIdentity={siteIdentity} position={position}
+                                       widgets={widgetsOnThisType} customPages={customPages} getAndSetWidgetsData={getAndSetWidgetsData}/>
             </>
         )
     })
-
-
-
-
 
 
     return (

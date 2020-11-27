@@ -28,15 +28,12 @@ const FieldPreview = props => {
     }, [props.field]);
 
     const onDeleteHandler = name => {
-        const newData = props.widgetData.data.formData.formFields.filter(i => i.fieldName !== name)
+        const newData = props.widgetData.formData.formFields.filter(i => i.fieldName !== name)
         props.setWidgetData({
             ...props.widgetData,
-            data: {
-                ...props.widgetData.data,
-                formData: {
-                    ...props.widgetData.data.formData,
-                    formFields: newData
-                }
+            formData: {
+                ...props.widgetData.formData,
+                formFields: newData
             }
 
         })
@@ -45,20 +42,17 @@ const FieldPreview = props => {
 
 
     const onEditHandler = ()=>{
-        const findIndexOfTheField = props.widgetData.data.formData.formFields.findIndex(f=>f.fieldName===props.field.fieldName)
+        const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f=>f.fieldName===props.field.fieldName)
         const updatedFields = [
-            ...props.widgetData.data.formData.formFields.slice(0, findIndexOfTheField),
+            ...props.widgetData.formData.formFields.slice(0, findIndexOfTheField),
             fieldData,
-            ...props.widgetData.data.formData.formFields.slice(findIndexOfTheField + 1),
+            ...props.widgetData.formData.formFields.slice(findIndexOfTheField + 1),
         ];
         props.setWidgetData({
             ...props.widgetData,
-            data: {
-                ...props.widgetData.data,
-                formData: {
-                    ...props.widgetData.data.formData,
-                    formFields: updatedFields
-                }
+            formData: {
+                ...props.widgetData.formData,
+                formFields: updatedFields
             }
         })
     }
@@ -72,11 +66,11 @@ const FieldPreview = props => {
     const fieldIndexPlus = plus => {
         const actionOnIndexValue = plus ? -1 : 1
         const updatedFieldData = {...props.field, fieldIndex: props.field.fieldIndex + actionOnIndexValue}
-        const findIndexOfTheField = props.widgetData.data.formData.formFields.findIndex(f=>f.fieldName===props.field.fieldName)
+        const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f=>f.fieldName===props.field.fieldName)
         const updatedFields = [
-            ...props.widgetData.data.formData.formFields.slice(0, findIndexOfTheField),
+            ...props.widgetData.formData.formFields.slice(0, findIndexOfTheField),
             updatedFieldData,
-            ...props.widgetData.data.formData.formFields.slice(findIndexOfTheField + 1),
+            ...props.widgetData.formData.formFields.slice(findIndexOfTheField + 1),
         ];
 
         props.setWidgetData({
@@ -84,7 +78,7 @@ const FieldPreview = props => {
             data: {
                 ...props.widgetData.data,
                 formData: {
-                    ...props.widgetData.data.formData,
+                    ...props.widgetData.formData,
                     formFields: updatedFields
                 }
             }

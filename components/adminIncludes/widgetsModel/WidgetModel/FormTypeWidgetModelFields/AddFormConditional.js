@@ -31,15 +31,12 @@ const AddFormConditional = props => {
         e.preventDefault()
         props.setWidgetData({
             ...props.widgetData,
-            data: {
-                ...props.widgetData.data,
-                formData: {
-                    ...props.widgetData.data.formData,
-                    formFields: [...props.widgetData.data.formData.formFields, {
-                        ...fieldData,
-                        fieldIndex : props.widgetData.data.formData.formFields.length
-                    }]
-                }
+            formData: {
+                ...props.widgetData.formData,
+                formFields: [...props.widgetData.formData.formFields, {
+                    ...fieldData,
+                    fieldIndex : props.widgetData.formData.formFields.length
+                }]
             }
 
         })

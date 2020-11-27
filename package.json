@@ -49,6 +49,8 @@
     "nodemon": "^2.0.6",
     "path": "^0.12.7",
     "pluralize": "^8.0.0",
+    "postcss-flexbugs-fixes": "^5.0.2",
+    "postcss-nesting": "^7.0.1",
     "query-string": "^6.13.7",
     "react": "^17.0.1",
     "react-delay-input": "^4.1.0",
@@ -73,12 +75,14 @@
     "styled-jsx": "^3.3.2",
     "superagent": "^6.1.0",
     "swiper": "^6.3.5",
+    "tailwindcss": "^2.0.1",
     "uuid-apikey": "^1.5.1",
     "xml": "^1.0.1",
     "xmldom": "^0.4.0"
   },
   "devDependencies": {
     "@svgr/webpack": "^5.5.0",
+    "babel-plugin-styled-components": "^1.12.0",
     "cookie-parser": "^1.4.5",
     "express-xml-bodyparser": "^0.3.0",
     "image-downloader": "^4.0.1",

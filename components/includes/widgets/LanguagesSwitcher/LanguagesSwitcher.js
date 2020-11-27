@@ -10,6 +10,9 @@ const LanguagesSwitcher = props => {
             <option key={lang} value={lang}>{lang}</option>
         )
     })
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     const onChangeHandler = e => {
         localStorage.setItem('lang', e.target.value)
@@ -24,7 +27,7 @@ const LanguagesSwitcher = props => {
         <div className='language-switcher-widget'>
             <p>{props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].languageToShowBesideDropDown || props.languageToShowBesideDropDown : props.languageToShowBesideDropDown : props.languageToShowBesideDropDown}</p>
             <select value={contextData.state.activeLanguage} onChange={e => onChangeHandler(e)} aria-checked='true'>
-                <option key='default' value='default'>{props.languageTextAsDefaultLanguage ||'default'}</option>
+                <option key='default' value='default'>{props.languageTextAsDefaultLanguage || 'default'}</option>
                 {languagesOptions}
             </select>
         </div>

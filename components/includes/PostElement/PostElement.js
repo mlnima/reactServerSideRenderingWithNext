@@ -29,7 +29,11 @@ const PostElement = props => {
         extraClassName: '',
         queries: {},
         infoOnPostElementStyle: {},
-        titleElementStyle: {}
+        titleElementStyle: {},
+        svgDefaultStyle:{
+            maxWidth:'20px',
+            maxHeight: '20px'
+        }
     });
 
     useEffect(() => {
@@ -38,7 +42,7 @@ const PostElement = props => {
             extraClassName: props.viewType ? props.viewType : '',
             queries: {...getLanguageQueryFromWindowLocationSearch()}
         })
-    }, [props]);
+    }, []);
 
     let isHoverHandler = () => {
         if (props.state.videoTrailerUrl) {
@@ -47,37 +51,51 @@ const PostElement = props => {
     };
 
     const ImageContent = () => {
+        const imageWidth = 320
         let dataToRender = () => {
             if (state.isHover && props.state.videoTrailerUrl) {
                 return (
-                    <video ref={videoElement} src={props.state.videoTrailerUrl} autoPlay={true} loop={true} onMouseOut={isHoverHandler} onTouchCancel={isHoverHandler}/>)
+                    <video
+                        ref={videoElement}
+                        src={props.state.videoTrailerUrl}
+                        autoPlay={true}
+                        loop={true}
+                        onMouseOut={isHoverHandler}
+                        onTouchCancel={isHoverHandler}
+                        style={{
+                            width:imageWidth,
+                            height: imageWidth / 1.777
+                        }}
+                    />)
 
             } else if (!state.isHover) {
-                // return (
-                //     <img src={props.state.mainThumbnail} alt={props.state.title} onError={err => {
-                //     if (!props.state.mainThumbnail) {
-                //         // deletedVideoAutoRemover(props.state)
-                //         console.log('something wrong with image on ', props.state.title)
-                //     }
-                // }} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>
-                // )
-                const deviceWidth = 1024
-
-                const imageWidth = deviceWidth < 768 ? deviceWidth :
-                    deviceWidth > 768 && deviceWidth < 1200 ? 209.79 :
-                        deviceWidth > 768 ? 300 : 320;
 
                 if (props.state?.mainThumbnail){
                     let renderNormalImageElement = props.state?.mainThumbnail.includes('http')
                     if (renderNormalImageElement ) {
                         return (
-                            <img src={props.state.mainThumbnail} alt={props.state.title}  onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}/>
+                            <img src={props.state.mainThumbnail}
+                                 alt={props.state.title}
+                                 onMouseEnter={isHoverHandler}
+                                 onTouchStart={isHoverHandler}
+                                 className='post-element-external-image'
+                                 style={{
+                                width:imageWidth,
+                                height: imageWidth / 1.777
+                            }}/>
                         )
                     } else {
                         return (
-                            <Image src={props.state?.mainThumbnail} alt={props.state.title} layout='intrinsic'
-                                   onError={() =>renderNormalImageElement=true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler} width={imageWidth > 300 ? 300 : imageWidth}
-                                   height={((imageWidth > 300) / 1.777) > 300 / 1.777 ? 300 / 1.777 : imageWidth / 1.777} quality={50} lazy={true}/>
+                            <Image src={props.state?.mainThumbnail} alt={props.state.title}
+                                   onError={() =>renderNormalImageElement=true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}
+                                   className='post-element-internal-image'
+                                   layout='intrinsic'
+                                   width={imageWidth}
+                                   height={imageWidth / 1.777}
+                                   quality={50}
+                                   loading='eager'
+                                   // lazy='true'
+                            />
                         )
                     }
                 }else return null
@@ -110,7 +128,7 @@ const PostElement = props => {
                 case 'article':
                     return (
                         <span ref={bottomRight} className='bottom-right'>
-                            <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
+                            <FontAwesomeIcon style={state.svgDefaultStyle} icon={faEye} className='post-element-info-logo'/>
                             <span className='view-count value-next-icon'>{props.state.views}</span>
                         </span>
                     )
@@ -134,14 +152,14 @@ const PostElement = props => {
                 case 'video':
                     return (
                         <span ref={bottomLeft} className='bottom-left'>
-                             <FontAwesomeIcon icon={faClock} className='post-element-info-logo'/>
+                             <FontAwesomeIcon style={state.svgDefaultStyle} icon={faClock} className='post-element-info-logo'/>
                              <span className='value-next-icon'>  {props.state.duration}</span>
                         </span>
                     )
                 case 'product':
                     return (
                         <span ref={bottomRight} className='bottom-left'>
-                             <FontAwesomeIcon icon={props.state.currency === 'Usd' ? faDollarSign : faEuroSign} className='post-element-info-logo'/>
+                             <FontAwesomeIcon style={state.svgDefaultStyle} icon={props.state.currency === 'Usd' ? faDollarSign : faEuroSign} className='post-element-info-logo'/>
                              <span className='value-next-icon'>
                                         {props.state.price}
                              </span>
@@ -196,7 +214,7 @@ const PostElement = props => {
                     }
                 }}
             >
-                <a aria-label='post-element'>
+                <a >
                     <div className='post-element' key={props.state.title}>
                         <div className="image">
                             <ImageContent/>

@@ -190,6 +190,9 @@ postsControllers.getPostInfo = (req, res) => {
         const postMessageToSend = {post: postData, error: false}
         res.json(postMessageToSend);
         res.end()
+    }).catch(err=>{
+        res.send(err)
+        res.end()
     })
 };
 

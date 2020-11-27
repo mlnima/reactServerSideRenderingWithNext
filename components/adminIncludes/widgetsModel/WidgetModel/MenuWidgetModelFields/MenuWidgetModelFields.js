@@ -36,47 +36,50 @@ const MenuWidgetModelFields = props => {
         )
     })
 
-    return (
-        <>
-            <div className='menu-form-field'>
-                <p>Mobile Navigation:  <FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo'  /></p>
-                <select required={true} name='mobileNavigation' value={props.mobileNavigation} onChange={e=>props.onChangeHandler(e)}>
-                    <option >Select</option>
-                    <option value='true'>True</option>
-                    <option value='false'>False</option>
-                </select>
-            </div>
-            <form className='add-new-menu-item' onSubmit={e => onAddHandler(e)}>
+    if (props.rendering){
+        return (
+            <>
                 <div className='menu-form-field'>
-                    <p>Name:</p>
-                    <input required={true} type="text" name='name' onChange={onChangeHandler}/>
-                </div>
-                <div className='menu-form-field'>
-                    <p>Target:</p>
-                    <input required={true} type="text" name='target' onChange={onChangeHandler}/>
-                </div>
-                <div  className='menu-form-field'>
-                    <p>As:</p>
-                    <input required={true} type="text" name='as' onChange={onChangeHandler}/>
-                </div>
-                <div className='menu-form-field'>
-                    <p>Type:</p>
-                    <select required={true} name='type' onChange={onChangeHandler} value={formData.type}>
+                    <p>Mobile Navigation:  <FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo'  /></p>
+                    <select required={true} name='mobileNavigation' value={props.mobileNavigation} onChange={e=>props.onChangeHandler(e)}>
                         <option >Select</option>
-                        <option value='internal'>Internal</option>
-                        <option value='external'>External</option>
+                        <option value='true'>True</option>
+                        <option value='false'>False</option>
                     </select>
                 </div>
+                <form className='add-new-menu-item' onSubmit={e => onAddHandler(e)}>
+                    <div className='menu-form-field'>
+                        <p>Name:</p>
+                        <input required={true} type="text" name='name' onChange={onChangeHandler}/>
+                    </div>
+                    <div className='menu-form-field'>
+                        <p>Target:</p>
+                        <input required={true} type="text" name='target' onChange={onChangeHandler}/>
+                    </div>
+                    <div  className='menu-form-field'>
+                        <p>As:</p>
+                        <input required={true} type="text" name='as' onChange={onChangeHandler}/>
+                    </div>
+                    <div className='menu-form-field'>
+                        <p>Type:</p>
+                        <select required={true} name='type' onChange={onChangeHandler} value={formData.type}>
+                            <option >Select</option>
+                            <option value='internal'>Internal</option>
+                            <option value='external'>External</option>
+                        </select>
+                    </div>
 
-                <div className='menu-form-field'>
-                    <button type='submit'>Add</button>
+                    <div className='menu-form-field'>
+                        <button type='submit'>Add</button>
+                    </div>
+                </form>
+                <div className='menu-items'>
+                    {renderCurrentItems}
                 </div>
-            </form>
-            <div className='menu-items'>
-                {renderCurrentItems}
-            </div>
-        </>
-    );
+            </>
+        );
+    }else return  null
+
 };
 export default MenuWidgetModelFields;
 

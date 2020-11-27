@@ -1,16 +1,16 @@
 import React from 'react';
 import PostElement from "../PostElement/PostElement";
-import withRouter from "next/dist/client/with-router";
 
 const Posts = props => {
     const renderPosts = (props.posts || []).map(post => {
         return (
-            <PostElement key={ post._id } state={ post } viewType={ props.viewType }/>
+            <PostElement isMobile={props.isMobile} key={ post._id } state={ post } viewType={ props.viewType }/>
         )
     });
 
     return (
         <div className='Posts'>
+
             <div className={ 'postsContent ' + (props.viewType ? props.viewType + 'PostsContent' : 'standard') }>
                 { renderPosts }
             </div>
@@ -18,4 +18,4 @@ const Posts = props => {
     );
 };
 
-export default withRouter(Posts)
+export default Posts

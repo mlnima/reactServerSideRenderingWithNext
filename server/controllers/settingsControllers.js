@@ -16,16 +16,14 @@ settingsControllers.update = (req, res) => {
     const type = req.body.type;
     const data = req.body.data;
     settingSchema.findOneAndUpdate({ type: type }, { data }, { new: true }).exec().then(setting => {
-        // console.log('setting:', setting)
+
         if (!setting) {
             const dataToSave = new settingSchema({
                 type: req.body.type,
                 data: req.body.data
             });
             dataToSave.save().then(() => {
-               // console.log(req.body.type, ' new settings saved')
                 res.statusCode(200)
-
             }).catch(err => {
                 console.log(err)
                 res.statusCode(500)
@@ -53,8 +51,6 @@ settingsControllers.getMultiple = async (req, res) => {
                 finalObject[setting.type] = setting
             }
         })
-// console.log(dataEncoder({ finalObject }))
-//console.log(finalObject)
         res.json({ settings: finalObject })
         res.end()
     }).catch(err => {
@@ -68,16 +64,17 @@ settingsControllers.create = (req, res) => {
         data: req.body.data
     });
     dataToSave.save().then(() => {
-       // console.log(req.body.type, ' new settings saved')
+        res.end()
     }).catch(err => {
         console.log(err)
+        res.end()
     })
 }
 settingsControllers.addWidget = (req, res) => {
     const data = req.body.data;
     let dataToSave = new widgetSchema(data)
     dataToSave.save().then(newWidgetData => {
-       // console.log(newWidgetData)
+
         res.end()
     })
 }
@@ -213,7 +210,6 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
             res.json({ widgets: widgetsWithData })
             res.end()
         }).catch(err => {
-            // console.log(err)
             res.end()
         })
     }).catch(err => {
@@ -243,7 +239,7 @@ settingsControllers.executor = async (req, res) => {
 settingsControllers.updateWidget = (req, res) => {
     const data = req.body.widgetData;
 
-    // console.log( req.body)
+
     widgetSchema.findByIdAndUpdate(data._id, data, { new: true }).exec().then(updatedWidgets => {
         res.json({ updatedWidgets })
         res.end()
@@ -269,9 +265,7 @@ settingsControllers.saveCustomStyle = (req, res) => {
                     if (error) {
                         console.log(error)
                     }
-                    console.log('scss file updated')
                 })
-               // console.log('saved')
                 res.end()
             }).catch(err => {
                 console.log(err)
@@ -282,7 +276,6 @@ settingsControllers.saveCustomStyle = (req, res) => {
                 if (error) {
                     console.log(error)
                 }
-               // console.log('scss file updated')
             })
         }
         res.end()

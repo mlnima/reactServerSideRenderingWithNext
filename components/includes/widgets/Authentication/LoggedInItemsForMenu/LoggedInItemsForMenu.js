@@ -7,7 +7,12 @@ import {faUser} from "@fortawesome/free-regular-svg-icons";
 
 const LoggedInItemsForMenu = props => {
     const contextData = useContext(AppContext);
-
+      const [state,setState] = useState({
+          svgDefaultStyle:{
+              maxWidth:'25px',
+              maxHeight: '25px'
+          }
+      })
 
     const MyProfile = () => {
         if (contextData.siteIdentity.membership) {
@@ -25,7 +30,7 @@ const LoggedInItemsForMenu = props => {
         return (
             <div className='logged-in-items'>
                 <p  onClick={() => contextData.functions.logOutUser()}>
-                    <FontAwesomeIcon icon={faPowerOff} className=' svg-logo-small' />
+                    <FontAwesomeIcon style={state.svgDefaultStyle} icon={faPowerOff} className=' svg-logo-small' />
                 </p>
                 <MyProfile/>
             </div>

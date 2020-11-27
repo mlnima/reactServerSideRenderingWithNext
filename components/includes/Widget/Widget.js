@@ -11,44 +11,22 @@ let StyledDiv = styled.div`${props => props.customStyles}`
 
 const Widget = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-        extraClassName: '',
-        isMobile: true,
-        navigationOpenStatus: true,
-        customStyles:''
-    })
-
-    useEffect(() => {
-        if ( window.innerWidth >= 768) {
-            setState({
-                ...state,
-                extraClassName: props.data.extraClassName,
-                customStyles:props.data.customStyles ? props.data.customStyles : '',
-                isMobile: false,
-            })
-        }else if (window.innerWidth < 768){
-            setState({
-                ...state,
-                isMobile: true,
-                customStyles:props.data.customStyles ? props.data.customStyles : '',
-            })
-        }
-    }, [props]);
 
     const RenderComponent = () => {
         if (props.component) {
             return (
-                <props.component  deviceWidth={props.deviceWidth} {...props.data} id={props._id} widget={true}/>
+                <props.component isMobile={props.isMobile} {...props.data} id={props._id} widget={true}/>
             )
         } else return null
     }
 
+
     const conditionalWidgetRenderer = (deviceType, languageToRender, activeLanguage) => {
         if ((!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all')) {
             return true
-        } else if ((deviceType === 'mobile' && state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all'||!languageToRender))) {
+        } else if ((deviceType === 'mobile' && props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))) {
             return true
-        } else if ((deviceType === 'desktop' && !state.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' ||!languageToRender))) {
+        } else if ((deviceType === 'desktop' && !props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))) {
             return true
         } else if ((!deviceType && languageToRender && (languageToRender === activeLanguage || languageToRender === 'all'))) {
             return true
@@ -57,7 +35,7 @@ const Widget = props => {
 
     if (conditionalWidgetRenderer(props.data.deviceTypeToRender, props.data.languageToRender, contextData.state.activeLanguage)) {
         return (
-            <StyledDiv customStyles={state.customStyles} className={'widget ' + (state.extraClassName ?state.extraClassName :'') }>
+            <StyledDiv customStyles={props.data?.customStyles ?? ''} className={'widget ' + (props.data?.extraClassName ?? '')}>
                 <WidgetHeader {...props.data}/>
                 <WidgetText {...props.data}/>
                 <RenderComponent/>

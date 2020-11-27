@@ -2,7 +2,7 @@
 .progressParent{
   position: relative;
   height: 15px;
-  border: 1px solid #333;
+  //border: 1px solid #333;
   .progressChild{
     height: 100%;
     position: absolute;
@@ -14,7 +14,7 @@
 
     align-items: center;
     p{
-      margin-left: 5px;
+      margin: 0 0 0 5px ;
       font-size: 12px;
     }
   }

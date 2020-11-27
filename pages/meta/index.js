@@ -1,17 +1,13 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import AppLayout from '../../components/layouts/AppLayout'
 import {getAbsolutePath} from '../../_variables/_variables'
 import {getMultipleSetting, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
-import dataDecoder from '../../server/tools/dataDecoder'
-import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
-import pluralize from 'pluralize'
 import {getMeta} from '../../_variables/ajaxPostsVariables'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 import withRouter from 'next/dist/client/with-router'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
-import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
-import Footer from '../../components/widgetsArea/Footer/Footer'
 import {useRouter} from "next/router";
+
 
 const meta = props => {
     const router = useRouter()
@@ -39,11 +35,9 @@ const meta = props => {
     })
 
     return (
-        <AppLayout>
-            <SiteSettingSetter  {...props} />
+        <AppLayout  {...props} sidebar={props.identity?.data?.metaPageSidebar} sidebarPosition='metaPageSidebar'>
             <div style={state.style}
-                 className={props.identity.data.metaPageSidebar ? 'content withSidebar' : 'content withOutSidebar'}>
-                <div>
+                 className={props.identity.data.metaPageSidebar ? 'content main ' : 'content main '}>
                     <PaginationComponent
                         isActive={true}
                         currentPage={props?.dataForGettingMeta?.page}
@@ -66,11 +60,6 @@ const meta = props => {
                         pathnameData={router.pathname}
                     />
                 </div>
-
-                <Sidebar key='metaPageSidebar' isActive={props.identity.data.metaPageSidebar} widgets={props.widgets}
-                         position='metaPageSidebar'/>
-            </div>
-            <Footer widgets={props.widgets} position='footer'/>
         </AppLayout>
     );
 };

@@ -32,6 +32,8 @@ const Logo = props => {
                         height={100}
                         quality={50}
                         layout='intrinsic'
+                        loading='eager'
+                        lazy='true'
                         onError={()=>{
                             renderNormalImageElement = true
                         }}
@@ -46,7 +48,7 @@ const Logo = props => {
         const value = props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].LogoText || props.LogoText : props.LogoText : props.LogoText
         if (value) {
             return (
-                <span style={state.logoTextStyle} className='logo-text'>{value}</span>
+                <span className='logo-text'>{value}</span>
             )
         } else return null
     }

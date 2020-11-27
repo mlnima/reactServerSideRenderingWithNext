@@ -8,16 +8,17 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 const MenuWidget = props => {
     const contextData = useContext(AppContext);
     const [menuItems, setMenuItems] = useState([]);
-    const [open, setOpen] = useState(false);
-    useEffect(() => {
-        if (props.menuItems) {
-            if(props.menuItems.length>0){
-                setMenuItems(props.menuItems)
-            }
-        }
-    }, [props]);
+    const [open, setOpen] = useState(!props.isMobile );
+    // useEffect(() => {
+    //     // if (props.menuItems) {
+    //     //     if(props.menuItems.length>0){
+    //     //         setMenuItems(props.menuItems)
+    //     //     }
+    //     // }
+    //     console.log(props)
+    // }, [props]);
 
-    const renderMenuItems = (menuItems || []).map(menuItem => {
+    const renderMenuItems = (props.menuItems || []).map(menuItem => {
 
         if (menuItem.type === 'internal') {
             return (
@@ -36,20 +37,20 @@ const MenuWidget = props => {
     })
 
 
-    useEffect(() => {
-        if (!contextData.state.isMobile) {
-            setOpen(true)
-        }
-    }, [contextData.state.isMobile]);
+    // useEffect(() => {
+    //     if (!contextData.state.isMobile) {
+    //         setOpen(true)
+    //     }
+    // }, [contextData.state.isMobile]);
 
     return (
         <div className='menu-widget'>
-            <button style={{display: contextData.state.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
+            <button style={{display: props.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
                 <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo'/>
             </button>
 
             <ul className='menu-widget-items' style={{display: open ? 'flex' : 'none'}}>
-                <button style={{display: contextData.state.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
+                <button style={{display:  props.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
                     <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo svg-logo-medium'/>
                 </button>
                 {renderMenuItems}

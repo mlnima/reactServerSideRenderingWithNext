@@ -1,21 +1,15 @@
 import React, {useEffect, useState, useContext} from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
-import axios from "axios";
 import {getComments, getPost} from "../../_variables/ajaxPostsVariables";
 import VideoPlayer from "../../components/includes/Post/VideoPlayer/VideoPlayer";
 import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
 import withRouter from "next/dist/client/with-router";
-import Head from "next/head";
-import {getSetting, getWidgetsWithData, getMultipleWidgetWithData, getMultipleSetting} from "../../_variables/ajaxVariables";
+import { getMultipleWidgetWithData, getMultipleSetting} from "../../_variables/ajaxVariables";
 import {AppContext} from "../../context/AppContext";
-import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
-import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
 import CommentFrom from '../../components/includes/Post/CommentFrom/CommentFrom'
 import CommentsRenderer from '../../components/includes/CommentsRenderer/CommentsRenderer'
-import Footer from '../../components/widgetsArea/Footer/Footer'
 import {getAbsolutePath} from '../../_variables/_variables'
 import Error from '../_error';
-import dataDecoder from '../../server/tools/dataDecoder'
 import SlideShow from '../../components/includes/Post/SlideShow/SlideShow'
 import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
 import styled from "styled-components";
@@ -35,10 +29,6 @@ const Post = props => {
     useEffect(() => {
         setDeviceWidth(window.innerWidth)
     }, []);
-
-
-
-
 
     useEffect(() => {
         if (props.identity.postPageSidebar) {
@@ -64,27 +54,14 @@ const Post = props => {
     }, [props]);
 
 
-    useEffect(() => {
-        if (props.design.data.postPageStyle){
-            setState({
-                ...state,
-                postPageStyle:props.design.data.postPageStyle
-            })
-        }
-    }, [props.design.data]);
+
 
     if (props.errorCode !== 200) {
-        // return <Error { ...props } />
-        return null
+        return <Error { ...props } />
     } else return (
-        <>
-            <AppLayout>
-                <SiteSettingSetter {...props}/>
+            <AppLayout {...props} sidebar={props.identity?.data?.postPageSidebar} sidebarPosition='postPageSidebar' >
                 <PostMetaDataToSiteHead {...props}/>
-                <StyledDiv stylesData={state.postPageStyle} className={props.identity.data.postPageSidebar ? 'post withSidebar' : 'post withOutSidebar'}>
-
-                    <div  className="main">
-
+                <StyledDiv stylesData={props.design.data.postPageStyle} className='main' >
                         <VideoPlayer {...props.post}/>
                         <SlideShow {...props.post} sidebar={props.identity.data.postPageSidebar} deviceWidth={deviceWidth}/>
                         <PostInfo
@@ -109,14 +86,11 @@ const Post = props => {
                         <CommentsRenderer comments={props.comments}/>
                         <CommentFrom documentId={props.post._id} documentTitle={props.post.title}/>
                         <div className='under-post-widget-area'>
-                            <WidgetsRenderer deviceWidth={deviceWidth} widgets={props.widgets} position='underPost'/>
-                        </div>
+                            <WidgetsRenderer deviceWidth={deviceWidth} widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')} position='underPost'/>
                     </div>
-                    <Sidebar key='postPageSidebar' isActive={props.identity.data.postPageSidebar} widgets={props.widgets} position='postPageSidebar'/>
                 </StyledDiv>
-
             </AppLayout>
-        </>
+
     );
 };
 
@@ -124,10 +98,7 @@ const Post = props => {
 
 export const getServerSideProps = async ({req,query}) => {
     const domainName = req ? await getAbsolutePath(req) : ''
-    const requestBody = {
-        _id: query.id
-    };
-
+    const requestBody = {_id: query.id};
     let post;
     let widgets;
     let settings;
@@ -144,12 +115,19 @@ export const getServerSideProps = async ({req,query}) => {
         errorCode = 404
     }
     const commentsData = post ? await getComments({onDocument: post._id}, domainName, true) : {}
+    let isMobile = (req
+        ? req.headers['user-agent']
+        : navigator.userAgent).match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
 
-    settings = settingsData.data.settings ? settingsData.data.settings : []
-    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+
+
+    settings = settingsData.data.settings ?? []
+    widgets =  widgetsData.data.widgets ?? []
     comments = post ? commentsData.data.comments : []
 
-    return {props:{post, query, widgets, comments, ...settings, errorCode}}
+    return {props:{post:post||errorCode, query,isMobile: Boolean(isMobile), widgets, comments, ...settings, errorCode}}
 
 }
 

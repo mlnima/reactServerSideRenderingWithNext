@@ -5,18 +5,13 @@
 
 body {
   margin: 0;
-  //font-family: 'Patrick Hand', cursive;
+  font-family: SourceSansPro, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-
-  #__next{
-    min-height: 100vh;
-  }
 }
 
 
-
-.newPostLinkAdminPanel{
+.newPostLinkAdminPanel {
   @include linkLikeActionBtnAdmin;
 }
 
@@ -44,6 +39,7 @@ body {
   height: 40px;
   filter: invert(1);
 }
+
 .fontawesomeSvgLarge {
   width: 40px;
   height: 50px;
@@ -55,17 +51,18 @@ body {
   height: 30px;
   filter: invert(1);
 }
+
 .fontawesomeSvgVerySmall {
-  width:12.5px;
+  width: 12.5px;
   height: 20px;
   filter: invert(1);
 }
 
-.small-info{
+.small-info {
   font-size: x-small;
 }
 
-.saveBtn{
+.saveBtn {
   @include greenActionBtn;
   margin: 50px 0;
 }
@@ -87,65 +84,80 @@ a {
 }
 
 
-
 // content with sidebar or without
 .withSidebar {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap:1px;
-  grid-template-areas: 'content' 'sidebar';
-  @media only screen and (min-width: 1024px) {
+  grid-gap: 1px;
+  grid-template-areas:
+            'top-bar'
+            'header'
+            'navigation'
+            'main'
+            'sidebar'
+            'footer';
+  @media only screen and (min-width: 768px) {
     grid-template-columns: 300px 1fr;
-    grid-template-areas: 'sidebar content';
+    grid-template-areas:
+           'top-bar top-bar'
+           'header header'
+           'navigation navigation'
+           'sidebar main'
+           'footer footer'
   }
 }
 
 .withOutSidebar {
   display: grid;
   grid-template-columns: 1fr;
+  grid-template-areas:
+            'top-bar'
+            'header'
+            'navigation'
+            'main'
+            'footer';
   @media only screen and (min-width: 768px) {
     grid-template-columns: 1fr;
   }
 }
 
 
-.error-page{
+.error-page {
   display: flex;
   justify-content: center;
-  .error-page-message{
-    color: white;
+
+  .error-page-message {
+    //color: white;
     margin: 100px 0;
   }
 }
 
 
-
-svg{
+svg {
   background-color: transparent;
   max-width: 50px;
   max-height: 50px;
 }
 
-.svg-logo-medium{
+.svg-logo-medium {
   width: 25px;
   height: 25px;
 }
-.svg-logo-small{
+
+.svg-logo-small {
   width: 20px !important;
   height: 20px !important;
 }
 
 
-
-
-.action-wide-button{
+.action-wide-button {
 
   width: 100px;
   display: flex;
   justify-content: center;
   align-items: center;
 
-  a,button{
+  a, button {
     border-radius: 5px;
     padding: 3px 5px;
     width: 100%;
@@ -155,9 +167,12 @@ svg{
     outline: none;
     border: none;
     margin: 2px 0;
-    .svg-logo-medium{
+
+    .svg-logo-medium {
       //width: 100px;
     }
   }
 }
+
+
 

@@ -1,7 +1,7 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React from 'react';
 import AppLayout from '../components/layouts/AppLayout'
 
-const Custom404 = props => {
+const Custom404 = () => {
 
     return (
         <AppLayout>

@@ -1,51 +1,27 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import AppLayout from '../../components/layouts/AppLayout'
 import {
-    getSetting,
-    getWidgetsWithData,
     getMultipleWidgetWithData,
     getMultipleSetting
 } from '../../_variables/ajaxVariables'
-import {getMeta, getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables'
+import { getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables'
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter';
 import {useRouter} from "next/router";
 import withRouter from 'next/dist/client/with-router'
 import Posts from '../../components/includes/Posts/Posts'
-import Link from 'next/link'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
-import {Sidebar} from '../../components/includes/Sidebar/Sidebar'
-import Footer from '../../components/widgetsArea/Footer/Footer'
 import {getAbsolutePath} from '../../_variables/_variables'
-import AdminLayout from '../../components/layouts/AdminLayout'
-import dataDecoder from '../../server/tools/dataDecoder'
-import MetaContentForPostsPage from "../../components/includes/MetaContentForPostsPage/MetaContentForPostsPage";
+//import MetaContentForPostsPage from "../../components/includes/MetaContentForPostsPage/MetaContentForPostsPage";
 
 const posts = props => {
     const router= useRouter()
-    const [state, setState] = useState({
-        style: {}
-    })
-
-
-    useEffect(() => {
-        if (props.identity.data.postPageSidebar) {
-            setState({
-                style: {
-                    gridArea: 'content'
-                }
-            })
-        }
-    }, [props]);
-
 
     return (
         <>
-            <AppLayout>
+            <AppLayout  {...props} sidebar={props.identity?.data?.postsPageSidebar} sidebarPosition='postsPageSidebar'>
                 <SiteSettingSetter  {...props}/>
-                <div
-                    className={props.identity.data.postsPageSidebar ? 'content withSidebar' : 'content withOutSidebar'}>
                     <div className="main">
-                        <MetaContentForPostsPage {...props}/>
+                        {/*<MetaContentForPostsPage {...props}/>*/}
                         <PaginationComponent
                             isActive={true}
                             currentPage={props.getPostsData.pageNo}
@@ -70,10 +46,6 @@ const posts = props => {
                             pathnameData={router.pathname}
                         />
                     </div>
-                    <Sidebar isActive={props.identity.data.postsPageSidebar} widgets={props.widgets}
-                             position='postsPageSidebar'/>
-                </div>
-                <Footer widgets={props.widgets} position='footer'/>
             </AppLayout>
         </>
     );
@@ -107,11 +79,15 @@ export const getServerSideProps = async ({req,query}) => {
     const contentDataInfo =   contentData.data ?  contentData.data.meta : {}
     const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'home', 'footer', 'header','topBar','navigation']}, domainName, true, 'postsPage')
     const postsData = await getPosts(getPostsData, domainName, true)
-
+    let isMobile = (req
+        ? req.headers['user-agent']
+        : navigator.userAgent).match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     postsSource = postsData.data ? postsData.data : []
 
-    return {props:{...settings, query, postsSource, getPostsData, widgets,contentData:contentDataInfo}}
+    return {props:{...settings, query,isMobile: Boolean(isMobile), postsSource, getPostsData, widgets,contentData:contentDataInfo}}
 }
 
 

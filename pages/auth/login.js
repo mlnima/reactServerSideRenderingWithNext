@@ -5,7 +5,6 @@ import axios from 'axios'
 import { AppContext } from "../../context/AppContext";
 import { getAbsolutePath } from '../../_variables/_variables'
 import { getMultipleSetting, getMultipleWidgetWithData } from '../../_variables/ajaxVariables'
-import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 import dataDecoder from '../../server/tools/dataDecoder'
 
 const Login = props => {
@@ -50,9 +49,8 @@ const Login = props => {
     };
 
     return (
-        <AppLayout>
-            <SiteSettingSetter { ...props }/>
-            <div className='Login authPage'>
+        <AppLayout { ...props }>
+            <div className='Login authPage main'>
                 <form className='authForm' onSubmit={ e => onSubmitHandler(e) }>
                     <label className='messageLabel'>{ data.response }</label>
                     <div className="authFormItem">
@@ -69,16 +67,7 @@ const Login = props => {
         </AppLayout>
     );
 };
-// Login.getInitialProps = async ({ req }) => {
-//     const domainName = req ? await getAbsolutePath(req) : ''
-//     let settings;
-//     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true)
-//     let widgets;
-//     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar','footer','navigation' ] }, domainName, true)
-//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-//     settings = settingsData.data.settings ? settingsData.data.settings : []
-//     return { ...settings,widgets }
-// }
+
 export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let settings;

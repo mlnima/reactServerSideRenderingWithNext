@@ -16,22 +16,22 @@ const FormTypeWidgetModelFields = props => {
         formFields: []
     });
 
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
     const onChangeHandler = (e) => {
         props.setWidgetData({
             ...props.widgetData,
-            data: {
-                ...props.widgetData.data,
-                formData: {
-                    ...props.widgetData.data.formData,
-                    [e.target.name]: e.target.value
-                }
+            formData: {
+                ...props.widgetData.formData,
+                [e.target.name]: e.target.value
             }
 
         })
     }
 
 
-    const formFieldsSorted = (props.widgetData.data.formData.formFields || []).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
+    const formFieldsSorted = (props.widgetData?.formData?.formFields || []).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
 
 
     const renderExistingFields = formFieldsSorted.map(field => {
@@ -40,26 +40,31 @@ const FormTypeWidgetModelFields = props => {
         )
     })
 
-    return (
-        <>
-            <p>Form Name :</p>
-            {/*<input name='formName' value={props.widgetData.data.formData.formName} onChange={e => onChangeHandler(e)}/>*/}
-            <DelayInput name='formName' type='text' value={props.widgetData.data.formData.formName}
-                        delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
-            <p>Form Title :</p>
-            {/*<input name='formTitle' value={props.widgetData.data.formData.formTitle} onChange={e => onChangeHandler(e)}/>*/}
-            <DelayInput name='formTitle' type='text' value={props.widgetData.data.formData.formTitle}
-                        delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
-            <p>After Submit Message :</p>
-            <DelayInput type='text' name='afterSubmitMessage' value={props.widgetData.data.formData.afterSubmitMessage} delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
-            <p>Submit button text :</p>
-            {/*<input name='submitButtonText' value={props.widgetData.data.formData.submitButtonText} onChange={e => onChangeHandler(e)}/>*/}
-            <DelayInput name='submitButtonText' type='text' value={props.widgetData.data.formData.submitButtonText}
-                        delayTimeout={2000} onChange={e => onChangeHandler(e)}/>
-            <AddFormConditional state={state} setState={setState} {...props} />
-            <h4>Edit Existing Fields</h4>
-            {renderExistingFields}
-        </>
-    );
+    if (props.rendering){
+        return (
+            <>
+                <p>Form Name :</p>
+                {/*<input name='formName' value={props.widgetData.formData.formName} onChange={e => onChangeHandler(e)}/>*/}
+                <input name='formName' type='text' value={props.widgetData.formData.formName}
+                            onChange={e => onChangeHandler(e)}/>
+                <p>Form Title :</p>
+                {/*<input name='formTitle' value={props.widgetData.formData.formTitle} onChange={e => onChangeHandler(e)}/>*/}
+                <input name='formTitle' type='text' value={props.widgetData.formData.formTitle}
+                             onChange={e => onChangeHandler(e)}/>
+                <p>After Submit Message :</p>
+                <input type='text' name='afterSubmitMessage' value={props.widgetData.formData.afterSubmitMessage}  onChange={e => onChangeHandler(e)}/>
+                <p>Submit button text :</p>
+                {/*<input name='submitButtonText' value={props.widgetData.formData.submitButtonText} onChange={e => onChangeHandler(e)}/>*/}
+                <input name='submitButtonText' type='text' value={props.widgetData.formData.submitButtonText}
+                       onChange={e => onChangeHandler(e)}/>
+                <AddFormConditional state={state} setState={setState} {...props} />
+                <h4>Edit Existing Fields</h4>
+                {renderExistingFields}
+            </>
+        );
+    }else return null
+
+
+
 };
 export default FormTypeWidgetModelFields;

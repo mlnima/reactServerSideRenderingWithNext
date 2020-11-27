@@ -1,17 +1,10 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import {convertVariableNameToName} from "../../../../_variables/_variables";
 import WidgetModel from "../../widgetsModel/WidgetModel/WidgetModel";
-import {AppContext} from "../../../../context/AppContext";
 
 const WidgetGroupByPosition = props => {
-    const contextData = useContext(AppContext);
-    const [state, setState] = useState({});
-    useEffect(() => {
-    }, []);
-
 
     const renderWidgets = props.widgets.map(widget => {
-
         const dataWithIndex = {
             data: {
                 ...widget.data,
@@ -19,10 +12,9 @@ const WidgetGroupByPosition = props => {
             }
         }
         const widgetData = {...widget, ...dataWithIndex}
-
         return (
             <WidgetModel
-                key={contextData.widgetsSettings.widgets.indexOf(widget)}
+                key={props.widgets.indexOf(widget)}
                 isPost={false}
                 widgetId={widgetData._id}
                 data={widgetData.data}
@@ -32,7 +24,6 @@ const WidgetGroupByPosition = props => {
             />
         )
     })
-
 
     return (
         <div className='widgetAdminPanelItem' key={props.position}>

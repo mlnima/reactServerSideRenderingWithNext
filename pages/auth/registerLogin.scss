@@ -26,11 +26,6 @@
       input {
         @include inputNormalWithRadius;
       }
-
-      p {
-        color: $light100;
-      }
-
     }
 
     .submitBtn {
@@ -38,6 +33,7 @@
     }
   }
 }
+
 @media only screen and (min-width: 768px) {
   .youtube-last-video {
     width: 50%;

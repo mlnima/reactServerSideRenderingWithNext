@@ -14,14 +14,6 @@ const ImageSwiperTypeWidgetModelFields = props => {
       setCurrentData(props.imageSwiperData||[])
   }, [props.imageSwiperData]);
 
-
-
-
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
-
     const onChangeHandler = (e) => {
         setState({...state, [e.target.name]: e.target.value})
     }
@@ -54,7 +46,7 @@ const ImageSwiperTypeWidgetModelFields = props => {
 
     const renderCurrentData = currentData.map(item=>{
         return(
-            <div className='current-data-preview' style={{maxWidth:'300px'}}>
+            <div key={currentData.indexOf(item)} className='current-data-preview' style={{maxWidth:'300px'}}>
                 <img src={item.imageUrl} style={{width:'100px'}}/>
                 <p style={{width:'250px',wordWrap: 'break-word'}}>Image url : {item.imageUrl}</p>
                 <p>Target url : {item.targetUrl}</p>

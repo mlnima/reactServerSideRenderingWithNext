@@ -1,13 +1,13 @@
 import React from 'react';
 import AppLayout from '../components/layouts/AppLayout'
 import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
-import Footer from '../components/widgetsArea/Footer/Footer'
+//import Footer from '../components/widgetsArea/Footer/Footer'
 
 
 const Error = props => {
 
     return (
-        <AppLayout>
+        <AppLayout {...props}>
             <SiteSettingSetter { ...props }/>
             <div className='error-page'>
                 <h1 className='error-page-message'>
@@ -16,7 +16,7 @@ const Error = props => {
                         : 'An error occurred on client' }
                 </h1>
             </div>
-            <Footer widgets={ props.widgets } position='footer'/>
+
         </AppLayout>
     )
 }
