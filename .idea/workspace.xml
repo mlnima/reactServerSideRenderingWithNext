@@ -20,69 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/babelrcOldFile" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFieldsPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFieldsPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/MetaContentForPostsPage/MetaContentForPostsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MetaContentForPostsPage/MetaContentForPostsPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/SlideShow/SlideShow.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/SlideShow/SlideShow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/SlideShow/SlideShow.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/SlideShow/SlideShow.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ProgressBar/ProgressBar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ProgressBar/ProgressBar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Sidebar/Sidebar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Sidebar/Sidebar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Sidebar/Sidebar.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Sidebar/Sidebar.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/FormWidget/FormWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/FormWidget/FormWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/ShoppingCart/ShoppingCart.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/WidgetArea/WidgetArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/WidgetArea/WidgetArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/WidgetArea/WidgetArea.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/WidgetArea/WidgetArea.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_error.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/registerLogin.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/registerLogin.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/checkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/contact/Contact.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/contact/index.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/meta/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/settingsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/settingsControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/_grid.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/_grid.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/global.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/global.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globalAdminPanel.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globalAdminPanel.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/styles.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/styles.scss" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -120,19 +65,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents\PostInformation" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\Post\PostInfo" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\widgetsArea" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents\PostInformation" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.setup.js">
@@ -182,9 +127,9 @@
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.setup" />
+        <item itemvalue="npm.start" />
         <item itemvalue="Node.js.setup.js" />
       </list>
     </recent_temporary>
@@ -554,7 +499,7 @@
       <workItem from="1606307048076" duration="19461000" />
       <workItem from="1606388278081" duration="12724000" />
       <workItem from="1606474331468" duration="7101000" />
-      <workItem from="1606497430583" duration="5957000" />
+      <workItem from="1606497430583" duration="9392000" />
     </task>
     <servers />
   </component>
@@ -602,12 +547,12 @@
       <screen x="-758" y="2160" width="4096" height="1152" />
     </state>
     <state x="-1498" y="2160" key="FileDocumentManager.FileCacheConflict/0.0.2560.1440/-758.2160.4096.1152@-758.2160.4096.1152" timestamp="1600424539353" />
-    <state width="2881" height="368" key="GridCell.Tab.0.bottom" timestamp="1606481633889">
+    <state width="2605" height="373" key="GridCell.Tab.0.bottom" timestamp="1606510021899">
       <screen x="-695" y="2160" width="4096" height="1152" />
     </state>
     <state width="2786" height="3" key="GridCell.Tab.0.bottom/-758.2160.4096.1152/0.0.2731.1440@-758.2160.4096.1152" timestamp="1599487185225" />
     <state width="2866" height="177" key="GridCell.Tab.0.bottom/0.0.2194.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598614058920" />
-    <state width="2881" height="368" key="GridCell.Tab.0.bottom/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1606481633889" />
+    <state width="2605" height="373" key="GridCell.Tab.0.bottom/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1606510021899" />
     <state width="2903" height="49" key="GridCell.Tab.0.bottom/0.0.2341.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598392213142" />
     <state width="2322" height="298" key="GridCell.Tab.0.bottom/0.0.2560.1409/-758.2160.4096.1122@-758.2160.4096.1122" timestamp="1600330994609" />
     <state width="2466" height="272" key="GridCell.Tab.0.bottom/0.0.2560.1440/-642.2160.4096.1152@-642.2160.4096.1152" timestamp="1603839161479" />
@@ -617,12 +562,12 @@
     <state width="2682" height="199" key="GridCell.Tab.0.bottom/0.0.4096.1152/758.-2160.2560.1440@0.0.4096.1152" timestamp="1599122622330" />
     <state width="3028" height="117" key="GridCell.Tab.0.bottom/0.0.4096.1152/758.-2160.2731.1440@0.0.4096.1152" timestamp="1599343350860" />
     <state width="2812" height="32" key="GridCell.Tab.0.bottom/496.-2160.2560.1440/0.0.4096.1152@0.0.4096.1152" timestamp="1598899995380" />
-    <state width="2881" height="368" key="GridCell.Tab.0.center" timestamp="1606481633889">
+    <state width="2605" height="373" key="GridCell.Tab.0.center" timestamp="1606510021898">
       <screen x="-695" y="2160" width="4096" height="1152" />
     </state>
     <state width="2786" height="3" key="GridCell.Tab.0.center/-758.2160.4096.1152/0.0.2731.1440@-758.2160.4096.1152" timestamp="1599487185224" />
     <state width="2866" height="177" key="GridCell.Tab.0.center/0.0.2194.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598614058920" />
-    <state width="2881" height="368" key="GridCell.Tab.0.center/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1606481633889" />
+    <state width="2605" height="373" key="GridCell.Tab.0.center/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1606510021898" />
     <state width="2903" height="49" key="GridCell.Tab.0.center/0.0.2341.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598392213141" />
     <state width="2322" height="298" key="GridCell.Tab.0.center/0.0.2560.1409/-758.2160.4096.1122@-758.2160.4096.1122" timestamp="1600330994609" />
     <state width="2466" height="272" key="GridCell.Tab.0.center/0.0.2560.1440/-642.2160.4096.1152@-642.2160.4096.1152" timestamp="1603839161479" />
@@ -632,12 +577,12 @@
     <state width="2682" height="199" key="GridCell.Tab.0.center/0.0.4096.1152/758.-2160.2560.1440@0.0.4096.1152" timestamp="1599122622330" />
     <state width="3028" height="117" key="GridCell.Tab.0.center/0.0.4096.1152/758.-2160.2731.1440@0.0.4096.1152" timestamp="1599343350859" />
     <state width="2812" height="32" key="GridCell.Tab.0.center/496.-2160.2560.1440/0.0.4096.1152@0.0.4096.1152" timestamp="1598899995380" />
-    <state width="2881" height="368" key="GridCell.Tab.0.left" timestamp="1606481633889">
+    <state width="2605" height="373" key="GridCell.Tab.0.left" timestamp="1606510021898">
       <screen x="-695" y="2160" width="4096" height="1152" />
     </state>
     <state width="2786" height="3" key="GridCell.Tab.0.left/-758.2160.4096.1152/0.0.2731.1440@-758.2160.4096.1152" timestamp="1599487185223" />
     <state width="2866" height="177" key="GridCell.Tab.0.left/0.0.2194.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598614058920" />
-    <state width="2881" height="368" key="GridCell.Tab.0.left/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1606481633889" />
+    <state width="2605" height="373" key="GridCell.Tab.0.left/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1606510021898" />
     <state width="2903" height="49" key="GridCell.Tab.0.left/0.0.2341.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598392213141" />
     <state width="2322" height="298" key="GridCell.Tab.0.left/0.0.2560.1409/-758.2160.4096.1122@-758.2160.4096.1122" timestamp="1600330994609" />
     <state width="2466" height="272" key="GridCell.Tab.0.left/0.0.2560.1440/-642.2160.4096.1152@-642.2160.4096.1152" timestamp="1603839161478" />
@@ -647,12 +592,12 @@
     <state width="2682" height="199" key="GridCell.Tab.0.left/0.0.4096.1152/758.-2160.2560.1440@0.0.4096.1152" timestamp="1599122622330" />
     <state width="3028" height="117" key="GridCell.Tab.0.left/0.0.4096.1152/758.-2160.2731.1440@0.0.4096.1152" timestamp="1599343350859" />
     <state width="2812" height="32" key="GridCell.Tab.0.left/496.-2160.2560.1440/0.0.4096.1152@0.0.4096.1152" timestamp="1598899995379" />
-    <state width="2881" height="368" key="GridCell.Tab.0.right" timestamp="1606481633889">
+    <state width="2605" height="373" key="GridCell.Tab.0.right" timestamp="1606510021899">
       <screen x="-695" y="2160" width="4096" height="1152" />
     </state>
     <state width="2786" height="3" key="GridCell.Tab.0.right/-758.2160.4096.1152/0.0.2731.1440@-758.2160.4096.1152" timestamp="1599487185225" />
     <state width="2866" height="177" key="GridCell.Tab.0.right/0.0.2194.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598614058920" />
-    <state width="2881" height="368" key="GridCell.Tab.0.right/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1606481633889" />
+    <state width="2605" height="373" key="GridCell.Tab.0.right/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1606510021899" />
     <state width="2903" height="49" key="GridCell.Tab.0.right/0.0.2341.1234/-582.2160.4096.1152@-582.2160.4096.1152" timestamp="1598392213142" />
     <state width="2322" height="298" key="GridCell.Tab.0.right/0.0.2560.1409/-758.2160.4096.1122@-758.2160.4096.1122" timestamp="1600330994609" />
     <state width="2466" height="272" key="GridCell.Tab.0.right/0.0.2560.1440/-642.2160.4096.1152@-642.2160.4096.1152" timestamp="1603839161479" />

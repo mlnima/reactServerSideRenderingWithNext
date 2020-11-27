@@ -16,7 +16,7 @@ const Home = props => {
                                 widgets={(props.widgets || []).filter(widget => widget.data.position === 'home')}
                                 className='home-page main'
                                 position='home'
-                                stylesData={contextData.siteDesign.homePageStyle}
+                                stylesData={contextData?.siteDesign?.homePageStyle}
                     />
             </AppLayout>
     );

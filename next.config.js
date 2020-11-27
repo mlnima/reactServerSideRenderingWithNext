@@ -20,7 +20,8 @@ const scssConfig = {
                 options: {
                     limit: 100000
                 }
-            }
+            },
+
         });
         return config;
     }
@@ -30,7 +31,20 @@ const sassOptions={
     includePaths: [path.join(__dirname, 'styles')]
 }
 
-
+// const styledComponentConfig = {
+//     webpack(config, options) {
+//         config.module.rules.push({
+//             use: {
+//                 loader: 'babel-plugin-styled-components',
+//                 options: {
+//                     presets: [["styled-components", { "ssr": true }]]
+//                 }
+//             },
+//
+//         });
+//         return config;
+//     }
+// }
 
 
 const nextConfiguration = {

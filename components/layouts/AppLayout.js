@@ -26,37 +26,37 @@ const AppLayout = props => {
 
     return (
         <div className={'App ' + (props.sidebar ? 'withSidebar' : 'withOutSidebar')}>
-            <GlobalStyle globalStyleData={props.design.data.customStyles ?? ''}/>
+            <GlobalStyle globalStyleData={props.design?.data?.customStyles ?? ''}/>
             <SiteSettingSetter {...props}/>
             <WidgetArea
                 rendering={true}
                 isMobile={props.isMobile}
                 key='topBar'
-                widgets={(props.widgets || []).filter(widget => widget.data.position === 'topBar')}
+                widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'topBar')}
                 className='top-bar'
                 position='topBar'
-                stylesData={props.design.data.topBarStyle}
+                stylesData={props.design?.data?.topBarStyle}
             />
             <WidgetArea
                 rendering={true}
                 isMobile={props.isMobile}
-                key='header' widgets={(props.widgets || []).filter(widget => widget.data.position === 'header')}
+                key='header' widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'header')}
                 className='header' position='header'
-                stylesData={props.design.data.headerStyle}
+                stylesData={props.design?.data?.headerStyle}
             />
             <WidgetArea
                 rendering={true}
                 isMobile={props.isMobile}
                 key='navigation'
-                widgets={(props.widgets || []).filter(widget => widget.data.position === 'navigation')}
+                widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'navigation')}
                 className='navigation'
                 position='navigation'
-                stylesData={props.design.data.navigationStyle}
+                stylesData={props.design?.data?.navigationStyle}
             />
             <WidgetArea
                 isMobile={props.isMobile}
                 key='sidebar'
-                widgets={(props.widgets || []).filter(widget => widget.data.position === props.sidebarPosition)}
+                widgets={(props.widgets || []).filter(widget => widget?.data?.position === props.sidebarPosition)}
                 className='sidebar '
                 rendering={props.sidebar}
                 position={props.sidebarPosition}
@@ -66,9 +66,9 @@ const AppLayout = props => {
             <WidgetArea
                 rendering={true}
                 isMobile={props.isMobile}
-                widgets={(props.widgets || []).filter(widget => widget.data.position === 'footer')}
+                widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'footer')}
                 className='footer' position='footer'
-                stylesData={props.design.data.footerStyle}
+                stylesData={props.design?.data?.footerStyle}
             />
             <AdminTools/>
             <Console/>

@@ -8,7 +8,7 @@ const Error = props => {
 
     return (
         <AppLayout {...props}>
-            <SiteSettingSetter { ...props }/>
+
             <div className='error-page'>
                 <h1 className='error-page-message'>
                     { props.errorCode
