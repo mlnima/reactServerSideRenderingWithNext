@@ -3,8 +3,9 @@ import {AppContext} from '../../../context/AppContext';
 import dynamic from 'next/dynamic'
 import Head from 'next/dist/next-server/lib/head'
 
-const reactHtmlParser = dynamic(() => import('html-react-parser'))
+//const reactHtmlParser = dynamic(() => import('html-react-parser'))
 import {useRouter} from "next/router";
+import parse  from 'html-react-parser';
 import {initGA, logPageView} from "../../../_variables/_variables";
 
 const SiteSettingSetter = props => {
@@ -41,7 +42,7 @@ const SiteSettingSetter = props => {
 
 
     const renderCustomScripts = (props.identity?.data.customScripts ?? []).map(script => {
-        return reactHtmlParser(script.scriptBody)
+        return parse(script.scriptBody)
     })
 
     return (
