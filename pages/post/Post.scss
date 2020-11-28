@@ -1,7 +1,7 @@
 @import "../../styles/buttons";
 @import "../../styles/colors";
 
-.post {
+
 
   .main {
     justify-self: center;
@@ -32,10 +32,10 @@
     }
   }
 
-}
+
 
 @media only screen and (min-width: 768px) {
-  .post {
+
     grid-gap: 10px;
 
     .main {
@@ -47,5 +47,5 @@
         }
       }
     }
-  }
+
 }

@@ -75,9 +75,9 @@ const PostSwiper = props => {
                 imageWidth = ((window.innerWidth/100) * 95) / parseInt(props.slideAmountInMobile || 1)
                 imageHeight = (((window.innerWidth/100) * 95) / parseInt(props.slideAmountInMobile || 1)) / (props.imageRatioWidth / props.imageRatioHeight)
             }
-
-            console.log(imageWidth)
-            console.log(imageHeight)
+            //
+            // console.log(imageWidth)
+            // console.log(imageHeight)
             // console.log(((((window.innerWidth/100) * 95) - 300) / slidePerView)/ (state.imageRatioWidth / state.imageRatioHeight))
 
             if (post.mainThumbnail.includes('http') || post.mainThumbnail.includes(window.location.hostname)) {

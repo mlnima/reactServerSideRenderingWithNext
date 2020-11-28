@@ -7,16 +7,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const MenuWidget = props => {
     const contextData = useContext(AppContext);
-    const [menuItems, setMenuItems] = useState([]);
-    const [open, setOpen] = useState(!props.isMobile );
-    // useEffect(() => {
-    //     // if (props.menuItems) {
-    //     //     if(props.menuItems.length>0){
-    //     //         setMenuItems(props.menuItems)
-    //     //     }
-    //     // }
-    //     console.log(props)
-    // }, [props]);
+    const [open, setOpen] = useState(!props.isMobile);
 
     const renderMenuItems = (props.menuItems || []).map(menuItem => {
 
@@ -37,21 +28,21 @@ const MenuWidget = props => {
     })
 
 
-    // useEffect(() => {
-    //     if (!contextData.state.isMobile) {
-    //         setOpen(true)
-    //     }
-    // }, [contextData.state.isMobile]);
-
     return (
         <div className='menu-widget'>
             <button style={{display: props.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
-                <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo'/>
+                <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo' style={{
+                    maxWidth: '25px',
+                    maxHeight: '25px'
+                }}/>
             </button>
 
             <ul className='menu-widget-items' style={{display: open ? 'flex' : 'none'}}>
-                <button style={{display:  props.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
-                    <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo svg-logo-medium'/>
+                <button style={{display: props.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
+                    <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo svg-logo-medium' style={{
+                        maxWidth: '25px',
+                        maxHeight: '25px'
+                    }}/>
                 </button>
                 {renderMenuItems}
             </ul>

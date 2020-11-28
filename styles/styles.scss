@@ -87,6 +87,7 @@ a {
 // content with sidebar or without
 .withSidebar {
   display: grid;
+
   grid-template-columns: 1fr;
   grid-gap: 1px;
   grid-template-areas:
