@@ -56,7 +56,7 @@ const CommentsRenderer = props => {
 
 
     const renderComments = props.comments.map(comment => {
-        console.log(comment)
+
         const commentDate = new Date(comment.postedDate)
         return (
             <div key={ comment.postedDate } style={ state.style } className='comments-item'>

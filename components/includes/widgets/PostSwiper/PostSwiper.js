@@ -82,7 +82,9 @@ const PostSwiper = props => {
 
             if (post.mainThumbnail.includes('http') || post.mainThumbnail.includes(window.location.hostname)) {
                 return (
-                        <img className='post-slider-item-external-image' src={post.mainThumbnail} alt={`Thumbnail ${post.mainThumbnail}`}/>
+                        <img className='post-slider-item-external-image'
+                             src={post.mainThumbnail}
+                             alt={`Thumbnail ${post.mainThumbnail}`}/>
                 )
             } else {
                 return (
@@ -93,7 +95,7 @@ const PostSwiper = props => {
                         alt={`Thumbnail ${post.mainThumbnail}`}
                         width={imageWidth}
                         height={imageHeight}
-                        quality={50}
+                        quality={85}
                         layout='intrinsic'
                         loading='lazy'
                     />
@@ -138,7 +140,7 @@ const PostSwiper = props => {
                     maxWidth: window.innerWidth >= 768 && props.currentPageSidebar ? '70vw' :
                         window.innerWidth >= 768 && !props.currentPageSidebar ? '95vw' :
                             '95vw',
-                    // maxHeight: '500px'
+
                 }}
             >
                 {renderSlides}

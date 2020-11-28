@@ -10,9 +10,6 @@ const LanguagesSwitcher = props => {
             <option key={lang} value={lang}>{lang}</option>
         )
     })
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
 
     const onChangeHandler = e => {
         localStorage.setItem('lang', e.target.value)

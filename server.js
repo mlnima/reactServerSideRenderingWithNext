@@ -26,6 +26,7 @@ const app = next({dev});
 const handle = app.getRequestHandler();
 const apicache = require('apicache')
 const LRUCache = require('lru-cache');
+const compression = require('compression')
 const cacheSuccesses = require('./server/middlewares/apiCache')
 // const pageCache = require('./server/tools/pageCache')
 mongoose.Promise = global.Promise;
@@ -58,18 +59,19 @@ let renderAndCache = async (req, res, targetComponent, queryParams) => {
 
     // If we have a page in the cache, let's serve it
     if (ssrCache.has(key)) {
+        console.log('is cached')
         //console.log(`serving from cache ${key}`);
         res.setHeader('x-cache', 'HIT');
         res.send(ssrCache.get(key));
-        res.end()
-        // return
+        // res.end()
+        return
     } else {
         try {
             const html = await app.renderToHTML(req, res, targetComponent, queryParams);
             if (res.statusCode !== 200) {
                 res.send(html);
-                res.end()
-                // return
+                // res.end()
+                return
             }
             ssrCache.set(key, html);
             res.setHeader('x-cache', 'MISS');
@@ -334,6 +336,17 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
+    server.get('/', (req, res) => {
+        const targetComponent = '/';
+        const queryParams = {
+            ...req.query,
+            ...req.params,
+        }
+        server.use(compression());
+        app.render(req, res, targetComponent, queryParams)
+        // return renderAndCache(req, res, targetComponent, queryParams)
+    });
+
     server.get('/login', (req, res) => {
         const targetComponent = '/auth/login';
         const queryParams = {
@@ -402,6 +415,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         // return renderAndCache(req, res, targetComponent, queryParams)
     });
     server.get('/tags', (req, res) => {
+
         const targetComponent = '/meta';
         const queryParams = {
             ...req.query,
@@ -425,13 +439,14 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
     server.get('/post/:title', (req, res) => {
+
         const targetComponent = '/post';
 
         const queryParams = {
             ...req.query,
             ...req.params,
         }
-         app.render(req, res, targetComponent, queryParams)
+        app.render(req, res, targetComponent, queryParams)
 
         // return renderAndCache(req, res, targetComponent, queryParams)
     });
@@ -448,14 +463,18 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     server.get('/profile', (req, res) => {
         const targetComponent = '/profile';
+        // const queryParams = {
+        //     username: req.query.username,
+        //     size: req.query.size,
+        //     pageNo: req.query.pageNo,
+        //     postType: req.query.postType,
+        //     keyword: req.query.keyword,
+        //     tab: req.query.author,
+        //     sort: req.query.sort,
+        // }
         const queryParams = {
-            username: req.query.username,
-            size: req.query.size,
-            pageNo: req.query.pageNo,
-            postType: req.query.postType,
-            keyword: req.query.keyword,
-            tab: req.query.author,
-            sort: req.query.sort,
+            ...req.query,
+            ...req.params,
         }
         app.render(req, res, targetComponent, queryParams)
     });
