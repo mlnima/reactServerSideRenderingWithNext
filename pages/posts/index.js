@@ -31,7 +31,7 @@ const posts = props => {
                             queryData={props.query || props.router.query}
                             pathnameData={router.pathname}
                         />
-                        <div className='posts'>
+                        <div className='postsContainer'>
                             <Posts posts={props.postsSource.posts || []}/>
 
                         </div>

@@ -50,12 +50,21 @@
       text-align: center;
       padding: 10px 0;
       border-bottom: 1px solid ;
+
+    }
+    .navigation-close-button{
+
     }
   }
 }
 
 @media only screen and (min-width: 768px) {
   .menu-widget{
+
+    .navigation-mobile-button{
+      display: none;
+    }
+
     .menu-widget-items{
       background-color: initial;
       flex-direction: row;
@@ -68,6 +77,9 @@
         text-align: left;
         padding: 0;
         border-bottom: none;
+      }
+      .navigation-close-button{
+        display: none;
       }
     }
   }

@@ -30,7 +30,7 @@ const MenuWidget = props => {
 
     return (
         <div className='menu-widget'>
-            <button style={{display: props.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
+            <button  onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
                 <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo' style={{
                     maxWidth: '25px',
                     maxHeight: '25px'
@@ -38,7 +38,7 @@ const MenuWidget = props => {
             </button>
 
             <ul className='menu-widget-items' style={{display: open ? 'flex' : 'none'}}>
-                <button style={{display: props.isMobile ? 'initial' : 'none'}} onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
+                <button onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
                     <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo svg-logo-medium' style={{
                         maxWidth: '25px',
                         maxHeight: '25px'

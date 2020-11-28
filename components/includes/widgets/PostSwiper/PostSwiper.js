@@ -16,7 +16,7 @@ const PostSwiper = props => {
     const [controlledSwiper, setControlledSwiper] = useState(null);
 
     const [imageSize, setImageSize] = useState({
-        width: 300,
+        width: 320,
         height: 169
     });
 
@@ -69,8 +69,8 @@ const PostSwiper = props => {
             let imageWidth;
             let imageHeight;
             if (window.innerWidth > 768) {
-                imageWidth = props.currentPageSidebar ? (((window.innerWidth/100) * 95) - 300) / slidePerView : (((window.innerWidth/100) * 95) - 300) / slidePerView
-                imageHeight = props.currentPageSidebar ? ((((window.innerWidth/100) * 95) - 300) / slidePerView) / (state.imageRatioWidth / state.imageRatioHeight) : (((window.innerWidth/100) * 95)  / slidePerView) / (props.imageRatioWidth / props.imageRatioHeight)
+                imageWidth = props.currentPageSidebar ? (((window.innerWidth/100) * 95) - 320) / slidePerView : (((window.innerWidth/100) * 95) - 320) / slidePerView
+                imageHeight = props.currentPageSidebar ? ((((window.innerWidth/100) * 95) - 320) / slidePerView) / (state.imageRatioWidth / state.imageRatioHeight) : (((window.innerWidth/100) * 95)  / slidePerView) / (props.imageRatioWidth / props.imageRatioHeight)
             } else {
                 imageWidth = ((window.innerWidth/100) * 95) / parseInt(props.slideAmountInMobile || 1)
                 imageHeight = (((window.innerWidth/100) * 95) / parseInt(props.slideAmountInMobile || 1)) / (props.imageRatioWidth / props.imageRatioHeight)

@@ -9,7 +9,7 @@ const Posts = props => {
     });
 
     return (
-        <div className='Posts'>
+        <div className='posts-grid'>
 
             <div className={ 'postsContent ' + (props.viewType ? props.viewType + 'PostsContent' : 'standard') }>
                 { renderPosts }
