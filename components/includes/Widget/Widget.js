@@ -15,7 +15,7 @@ const Widget = props => {
     const RenderComponent = () => {
         if (props.component) {
             return (
-                <props.component isMobile={props.isMobile} {...props.data} id={props._id} widget={true}/>
+                <props.component currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} {...props.data} id={props._id} widget={true}/>
             )
         } else return null
     }

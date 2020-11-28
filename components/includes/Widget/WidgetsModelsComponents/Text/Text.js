@@ -8,10 +8,10 @@ const Text = props => {
     const contextData = useContext(AppContext);
     const data = parse(props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text)
     return (
-        <p className='widgetText'
+        <div className='widgetText'
             ref={spanElement} >
             {data}
-        </p>
+        </div>
     );
 };
 export default Text;

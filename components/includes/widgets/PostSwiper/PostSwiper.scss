@@ -1,25 +1,13 @@
 .post-swiper {
-  position: relative;
-  max-width: 100vw;
-
+  //position: relative;
   .swiper-wrapper {
 
     .swiper-slide {
       margin: auto;
       display: flex;
       justify-content: center;
-       height: 100% !important;
-      //flex-direction: column;
-      //justify-content: flex-start;
-      //align-items: center;
-
 
       a {
-        //display: flex;
-        //flex-direction: column;
-        //justify-content: space-between;
-        //align-items: center;
-
         .post-slider-item-title {
           white-space: nowrap;
           overflow: hidden !important;
@@ -27,22 +15,20 @@
           display: block;
           max-width: 95%;
           font-size: small;
-          //height: 95%;
         }
 
-        .post-slider-item-external {
-          //width: 100%;
           .post-slider-item-external-image {
-
+            object-fit: contain;
+          }
+          .post-slider-item-internal-image {
+            object-fit: contain;
 
           }
-        }
+
 
         div {
           margin: auto;
           .post-slider-item-internal {
-            // width:  100%;
-            //height: 600px;
             margin: auto;
             object-fit: scale-down;
           }
@@ -55,3 +41,10 @@
     }
   }
 }
+
+//@media only screen and (min-width: 768px) {
+//  .post-swiper {
+//    max-width: 80vw;
+//  }
+//
+//}

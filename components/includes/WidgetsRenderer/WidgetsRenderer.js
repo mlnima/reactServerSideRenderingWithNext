@@ -14,8 +14,8 @@ const LanguagesSwitcher = dynamic(() => import('../widgets/LanguagesSwitcher/Lan
 const Logo = dynamic(() => import('../widgets/Logo/Logo'))
 const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
 const LinkTo = dynamic(() => import('../widgets/LinkTo/LinkTo'))
-const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'))
-const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'))
+const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'),{ ssr: false })
+const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'),{ ssr: false })
 const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
@@ -45,7 +45,7 @@ const WidgetsRenderer =  props => {
             widget.data.type === 'form' ? FormWidget : null
 
         return (
-            <Widget isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } />
+            <Widget currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } />
         )
     })
 

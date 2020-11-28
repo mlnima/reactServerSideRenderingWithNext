@@ -17,6 +17,7 @@ const Home = props => {
                                 className='home-page main'
                                 position='home'
                                 stylesData={contextData?.siteDesign?.homePageStyle}
+                                currentPageSidebar={props.identity?.data?.homePageSidebar}
                     />
             </AppLayout>
     );

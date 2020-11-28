@@ -51,6 +51,7 @@ const Post = props => {
                 })
             }
         }
+        console.log(props.design.data.postPageStyle)
     }, [props]);
 
 
