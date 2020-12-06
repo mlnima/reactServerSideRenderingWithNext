@@ -21,9 +21,11 @@
 .main{
   grid-area: main;
   min-height: 100vh;
+  grid-gap: 2px;
 }
 .sidebar{
   grid-area: sidebar;
+  grid-gap: 2px;
 }
 
 

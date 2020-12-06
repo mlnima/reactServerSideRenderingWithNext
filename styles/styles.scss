@@ -87,7 +87,6 @@ a {
 // content with sidebar or without
 .withSidebar {
   display: grid;
-
   grid-template-columns: 1fr;
   grid-gap: 1px;
   grid-template-areas:
@@ -99,7 +98,6 @@ a {
             'footer';
   @media only screen and (min-width: 768px) {
     grid-template-columns: 320px 1fr;
-    grid-gap: 5px;
     grid-template-areas:
            'top-bar top-bar'
            'header header'
