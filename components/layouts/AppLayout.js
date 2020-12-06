@@ -8,9 +8,8 @@ import Console from "../includes/AdminTools/Console/Console";
 import styled, {createGlobalStyle} from "styled-components";
 import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
-
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
-//import CheckOutSlide from "../includes/checkOutPageComponents/CheckOutSlide/CheckoutSlide";
+import CheckOutSlide from "../includes/checkOutPageComponents/CheckOutSlide/CheckoutSlide";
 
 const AppLayout = props => {
 
@@ -74,7 +73,7 @@ const AppLayout = props => {
             <Console/>
             <Loading/>
             <AlertBox/>
-            {/*<CheckOutSlide/>*/}
+            <CheckOutSlide/>
         </div>
 
     );

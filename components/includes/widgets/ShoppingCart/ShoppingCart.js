@@ -13,13 +13,33 @@ const ShoppingCart = props => {
             maxHeight: '25px'
         }
     })
+
+
+    const onCheckoutClickHandler = ()=>{
+        contextData.state.checkoutSlideEnable ?
+        contextData.dispatchState({
+            ...contextData.state,
+            checkoutSlideEnable:false
+        }):
+            contextData.dispatchState({
+                ...contextData.state,
+                checkoutSlideEnable:true
+            })
+    }
+
+
     return (
-            <Link href='/checkout'>
-                <a className='shopping-card-link' aria-label='shopping-card-link'>
-                    <FontAwesomeIcon style={state.svgDefaultStyle} icon={faShoppingCart} className='shopping-card-logo svg-logo-medium' />
-                    <p className='shopping-card-number'>{contextData.checkOutData.items.length }</p>
-                </a>
-            </Link>
+
+    <button className='shopping-card-button' onClick={onCheckoutClickHandler}>
+        <FontAwesomeIcon style={state.svgDefaultStyle} icon={faShoppingCart} className='shopping-card-logo svg-logo-medium' />
+    </button>
     );
 };
 export default ShoppingCart;
+// <Link href='/checkout'>
+{/*<a className='shopping-card-link' aria-label='shopping-card-link'>*/}
+{/*    <FontAwesomeIcon style={state.svgDefaultStyle} icon={faShoppingCart} className='shopping-card-logo svg-logo-medium' />*/}
+{/*    <p className='shopping-card-number'>{contextData.checkOutData.items.length }</p>*/}
+{/*</a>*/}
+
+{/*</Link>*/}

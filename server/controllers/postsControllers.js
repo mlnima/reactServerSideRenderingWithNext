@@ -85,7 +85,7 @@ postsControllers.updateMeta = (req, res) => {
 postsControllers.updatePost = async (req, res) => {
     const postUpdatedData = req.body.postData
 
-   // console.log(postUpdatedData)
+   console.log(postUpdatedData)
     try {
         const finalPostUpdatedData = {
             ...postUpdatedData,

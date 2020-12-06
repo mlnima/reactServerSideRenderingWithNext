@@ -84,6 +84,9 @@ const Index = props => {
     }, [props]);
 
 
+    // useEffect(() => {
+    //     console.log(textInputsState)
+    // }, [textInputsState]);
 
     const onChangeHandler = e => {
         setState({
@@ -99,6 +102,7 @@ const Index = props => {
     // };
 
     const onTranslatedInputChangeHandler = e => {
+
         if (languageElement?.current?.value === 'default') {
             setTextInputsState({
                 ...textInputsState,
@@ -121,15 +125,17 @@ const Index = props => {
 
 
     const onDescriptionChangeHandler = data => {
-        const e={
-            target:{
-                name:'description',
-                value:data
+//console.log(data)
+        const e = {
+            target: {
+                name: 'description',
+                value: data
             }
         }
-        if (!data.includes('<p><br></p>') && data !== textInputsState.description){
-            onTranslatedInputChangeHandler(e)
-        }
+        // if (!data.includes('<p><br></p>') && data !== textInputsState.description) {
+        //
+        // }
+        onTranslatedInputChangeHandler(e)
     }
 
     const onPostMetaChangeHandler = (type, data) => {
@@ -240,20 +246,19 @@ const Index = props => {
                         <p>Translation(you need to activate the language in general settings)</p>
                         <select ref={languageElement} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                             <option value='default'>Default</option>
-                            {(siteIdentity?.translationLanguages||[]).map(lang => {
+                            {(siteIdentity?.translationLanguages || []).map(lang => {
                                 return (
                                     <option key={lang} value={lang}>{lang}</option>
                                 )
                             })}
                         </select>
 
-                            <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
-                                              activeEditingLanguage={editingData.activeEditingLanguage}
-                                              onChangeHandler={onTranslatedInputChangeHandler}
-                                              onDescriptionChangeHandler={onDescriptionChangeHandler}
+                        <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
+                                          activeEditingLanguage={editingData.activeEditingLanguage}
+                                          onChangeHandler={onTranslatedInputChangeHandler}
+                                          onDescriptionChangeHandler={onDescriptionChangeHandler}
 
-                            />
-
+                        />
 
 
                         {/*{renderWidgetEditors}*/}
@@ -347,7 +352,7 @@ const Index = props => {
 //     return {post, query, ...settings}
 // };
 
-export const getServerSideProps = async ({req,query}) => {
+export const getServerSideProps = async ({req, query}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let post;
     let postData
@@ -392,7 +397,7 @@ export const getServerSideProps = async ({req,query}) => {
         }
     }
 
-    return {props:{post, query, ...settings}}
+    return {props: {post, query, ...settings}}
 
 }
 

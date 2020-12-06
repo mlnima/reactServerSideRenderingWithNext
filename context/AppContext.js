@@ -20,7 +20,8 @@ const AppProvider = props => {
         isMobile: true,
         console:false,
         currentPageSidebar:true,
-        deviceWidth:320
+        deviceWidth:320,
+        checkoutSlideEnable:false
     });
 
 

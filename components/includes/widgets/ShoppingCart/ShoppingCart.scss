@@ -1,7 +1,10 @@
-.shopping-card-link{
+.shopping-card-button{
   position: relative;
   padding:  0 3px;
   text-decoration: none;
+  border: none;
+  background-color: transparent;
+
   .shopping-card-number{
     position: absolute;
     font-size: 10px;

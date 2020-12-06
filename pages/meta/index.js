@@ -26,7 +26,9 @@ const meta = props => {
     }, []);
 
 
-
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
     const renderMetas = (props.metaSource.metas ?? []).map(meta => {
 
         return (
@@ -38,28 +40,28 @@ const meta = props => {
         <AppLayout  {...props} sidebar={props.identity?.data?.metaPageSidebar} sidebarPosition='metaPageSidebar'>
             <div style={state.style}
                  className={props.identity.data.metaPageSidebar ? 'content main ' : 'content main '}>
-                    <PaginationComponent
-                        isActive={true}
-                        currentPage={props?.dataForGettingMeta?.page}
-                        totalCount={props?.metaSource?.totalCount}
-                        size={props?.dataForGettingMeta?.size}
-                        maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
-                        queryData={router.query}
-                        pathnameData={router.pathname}
-                    />
-                    <div className={props.query.type + ' metas'}>
-                        {renderMetas}
-                    </div>
-                    <PaginationComponent
-                        isActive={true}
-                        currentPage={props?.dataForGettingMeta?.page}
-                        totalCount={props?.metaSource?.totalCount}
-                        size={props?.dataForGettingMeta?.size}
-                        maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
-                        queryData={router.query}
-                        pathnameData={router.pathname}
-                    />
+                <PaginationComponent
+                    isActive={true}
+                    currentPage={props?.dataForGettingMeta?.page}
+                    totalCount={props?.metaSource?.totalCount}
+                    size={props?.dataForGettingMeta?.size}
+                    maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
+                    queryData={router.query}
+                    pathnameData={router.pathname}
+                />
+                <div className={router.query.contentType + ' metas'}>
+                    {renderMetas}
                 </div>
+                <PaginationComponent
+                    isActive={true}
+                    currentPage={props?.dataForGettingMeta?.page}
+                    totalCount={props?.metaSource?.totalCount}
+                    size={props?.dataForGettingMeta?.size}
+                    maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
+                    queryData={router.query}
+                    pathnameData={router.pathname}
+                />
+            </div>
         </AppLayout>
     );
 };
