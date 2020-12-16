@@ -69,6 +69,7 @@ const PostElement = props => {
                     />)
 
             } else if (!state.isHover) {
+                const imageUrl = props.state.mainThumbnail ?? '/static/images/noImage/no-image-available.png'
 
                 if (props.state?.mainThumbnail){
                     let renderNormalImageElement = props.state?.mainThumbnail.includes('http')
@@ -98,6 +99,18 @@ const PostElement = props => {
                             />
                         )
                     }
+                }else  if (!props.state?.mainThumbnail) {
+                    return (
+                    <img src={imageUrl}
+                         alt={props.state.title}
+                         onMouseEnter={isHoverHandler}
+                         onTouchStart={isHoverHandler}
+                         className='post-element-external-image'
+                         style={{
+                             width:imageWidth,
+                             height: imageWidth / 1.777
+                         }}/>
+                    )
                 }else return null
 
 

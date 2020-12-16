@@ -9,7 +9,7 @@ import styled, {createGlobalStyle} from "styled-components";
 import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
-import CheckOutSlide from "../includes/checkOutPageComponents/CheckOutSlide/CheckoutSlide";
+import CheckoutPop from "../includes/checkOutPageComponents/CheckoutPop/CheckoutPop";
 
 const AppLayout = props => {
 
@@ -73,7 +73,7 @@ const AppLayout = props => {
             <Console/>
             <Loading/>
             <AlertBox/>
-            <CheckOutSlide/>
+            <CheckoutPop/>
         </div>
 
     );

@@ -1,8 +1,11 @@
 .checkout-slide-header{
+  display: flex;
+  justify-content: flex-end;
   .close-checkout-slide-button{
-
+    border: none;
+    background-color: transparent;
     top: 20px;
-    left: 20px;
+    right: 20px;
     svg{
       width: 25px;
       height: 25px;

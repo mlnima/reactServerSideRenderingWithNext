@@ -224,15 +224,13 @@ const AppProvider = props => {
             return await axios.post(window.location.origin + '/api/v1/settings/clearCaches', body)
         },
         getCheckOutData: ()=>{
-            if (localStorage){
-                if (localStorage.checkOutItems){
+                if (localStorage?.checkOutItems){
                     const items = JSON.parse(localStorage.checkOutItems)
                     setCheckOutData({
-                        ...checkOutData,
+                      // ...checkOutData,
                         items
                     })
                 }
-            }
         }
 
 

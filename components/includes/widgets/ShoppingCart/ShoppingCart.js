@@ -32,6 +32,7 @@ const ShoppingCart = props => {
 
     <button className='shopping-card-button' onClick={onCheckoutClickHandler}>
         <FontAwesomeIcon style={state.svgDefaultStyle} icon={faShoppingCart} className='shopping-card-logo svg-logo-medium' />
+            <p className='shopping-card-number'>{contextData.checkOutData.items.length }</p>
     </button>
     );
 };
