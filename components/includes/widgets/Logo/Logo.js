@@ -71,7 +71,7 @@ const Logo = props => {
     }
 
     return (
-        <Link href='/'>
+        <Link href='/' as='/'>
             <a className='logo'>
                 <RenderLogoImage/>
                 <RenderLogoText/>

@@ -37,6 +37,7 @@ export const getServerSideProps = async ({req}) => {
         : navigator.userAgent).match(
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
+
     return {props: {widgets, ...settings, isMobile: Boolean(isMobile)}}
 }
 

@@ -8,7 +8,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 const MenuWidget = props => {
     const contextData = useContext(AppContext);
     const [open, setOpen] = useState(!props.isMobile);
-
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [props]);
     const renderMenuItems = (props.menuItems || []).map(menuItem => {
 
         if (menuItem.type === 'internal') {
@@ -30,7 +32,7 @@ const MenuWidget = props => {
 
     return (
         <div className='menu-widget'>
-            <button  onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
+            <button onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
                 <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo' style={{
                     maxWidth: '25px',
                     maxHeight: '25px'

@@ -96,9 +96,13 @@ export const getServerSideProps = async ({req, query, res}) => {
     settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
+    let isMobile = (req
+        ? req.headers['user-agent']
+        : navigator.userAgent).match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
 
-
-    return {props: {...settings, query, widgets, metaSource, dataForGettingMeta}}
+    return {props: {...settings, query,isMobile: Boolean(isMobile), widgets, metaSource, dataForGettingMeta}}
 }
 
 

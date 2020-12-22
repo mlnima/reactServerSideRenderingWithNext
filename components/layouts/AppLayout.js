@@ -20,7 +20,9 @@ const AppLayout = props => {
             window.GA_INITIALIZED = true
         }
         logPageView()
+        console.log(props.isMobile)
     }, []);
+
 
 
     return (

@@ -33,7 +33,7 @@ const checkout = props => {
 
     const renderCheckOutItems = (itemsData||[]).map(item=>{
         return(
-            <CheckOutItemPreview key={(itemsData||[]).indexOf(item)} {...item}/>
+            <CheckOutItemPreview key={(itemsData||[]).indexOf(item)} {...item} isPop={false}/>
         )
     })
 
@@ -56,8 +56,12 @@ export const getServerSideProps = async ({req,query}) => {
 
     settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-
-    return {props:{...settings, query, widgets}}
+    let isMobile = (req
+        ? req.headers['user-agent']
+        : navigator.userAgent).match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+    return {props:{...settings,isMobile: Boolean(isMobile), query, widgets}}
 }
 
 

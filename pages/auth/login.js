@@ -76,7 +76,12 @@ export const getServerSideProps = async ({req}) => {
     const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar','footer','navigation' ] }, domainName, true)
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? settingsData.data.settings : []
-    return {props:{ ...settings,widgets }}
+    let isMobile = (req
+        ? req.headers['user-agent']
+        : navigator.userAgent).match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+    return {props:{ ...settings,isMobile: Boolean(isMobile),widgets }}
 
 }
 

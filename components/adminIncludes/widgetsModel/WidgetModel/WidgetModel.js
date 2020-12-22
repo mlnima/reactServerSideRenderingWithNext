@@ -463,6 +463,7 @@ const WidgetModel = props => {
                         <option value='posts'>Posts</option>
                         <option value='menu'>Menu</option>
                         <option value='media'>Media</option>
+                        <option value='linkTo'>Media</option>
                         <option value='text'>Text</option>
                         <option value='textEditor'>Text Editor</option>
                         <option value='logo'>Logo</option>

@@ -5,7 +5,7 @@ import './CheckoutPop.scss'
 import {getPost} from "../../../../_variables/ajaxPostsVariables";
 import CheckOutItemPreview from "../CheckOutItemPreview/CheckOutItemPreview";
 import Link from "next/link";
-import {faCreditCard} from "@fortawesome/free-solid-svg-icons";
+import { faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const CheckoutPop = props => {
@@ -32,9 +32,19 @@ const CheckoutPop = props => {
 
     const renderCheckOutItems = (itemsData || []).map(item => {
         return (
-            <CheckOutItemPreview key={(itemsData || []).indexOf(item)} {...item}/>
+            <CheckOutItemPreview key={(itemsData || []).indexOf(item)} {...item} isPop={true}/>
         )
     })
+
+    const onLinkClickHandler = ()=>{
+        contextData.dispatchState({
+            ...contextData.state,
+            checkoutSlideEnable: false
+        })
+    }
+
+
+
 
     if (contextData.state.checkoutSlideEnable) {
         return (
@@ -42,7 +52,10 @@ const CheckoutPop = props => {
                 <div className='checkout-container'>
                     <CheckOutSlideHeader/>
                     {renderCheckOutItems}
-                    <Link href="/checkout"><a className='check-out-pop-next-btn'><FontAwesomeIcon  className='check-out-pop-next-btn-icon'  icon={faCreditCard} /></a></Link>
+                    <div className='check-out-pop-next'>
+                        <Link href="/checkout" ><a className='check-out-pop-next-btn' onClick={onLinkClickHandler}><FontAwesomeIcon  className='check-out-pop-next-btn-icon'  icon={faShoppingCart} /></a></Link>
+                    </div>
+
                 </div>
             </div>
         );

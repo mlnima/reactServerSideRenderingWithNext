@@ -35,7 +35,15 @@ export const getServerSideProps = async ({req,query}) => {
     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, query.pageName)
     settings = settingsData.data.settings ? settingsData.data.settings : []
     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    return {props:{pageInfo, query, widgets, ...settings}}
+    let isMobile = (req
+        ? req.headers['user-agent']
+        : navigator.userAgent).match(
+        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    )
+
+
+
+    return {props:{pageInfo, query,isMobile: Boolean(isMobile), widgets, ...settings}}
 }
 
 export default page;
