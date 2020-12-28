@@ -17,7 +17,7 @@ const userSchema = mongoose.Schema({
     role:String,
     keyMaster:{
         type:Boolean,
-        unique:true,
+        default: false
     },
     firstName:String,
     lastName:String,
