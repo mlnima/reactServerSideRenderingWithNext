@@ -8,9 +8,16 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 const MenuWidget = props => {
     const contextData = useContext(AppContext);
     const [open, setOpen] = useState(!props.isMobile);
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [props]);
+
+
+    useEffect(() => {
+        let deviceWidth = 0;
+        setTimeout(()=>{
+            deviceWidth = window.innerWidth
+            deviceWidth >=768 ? setOpen(true) : null
+        },100)
+
+    }, [props]);
 
 
     const mobileNavigationOnClickHandler= ()=>{
