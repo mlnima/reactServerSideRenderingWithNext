@@ -11,18 +11,27 @@ const MenuWidget = props => {
     // useEffect(() => {
     //     console.log(props)
     // }, [props]);
+
+
+    const mobileNavigationOnClickHandler= ()=>{
+        if (props.isMobile){
+            setOpen(false)
+
+        }
+    }
+
     const renderMenuItems = (props.menuItems || []).map(menuItem => {
 
         if (menuItem.type === 'internal') {
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
-                    <Link href={menuItem.target} as={menuItem.as}><a>{menuItem.name}</a></Link>
+                    <Link href={menuItem.target} as={menuItem.as}><a  onClick={mobileNavigationOnClickHandler} >{menuItem.name}</a></Link>
                 </li>
             )
         } else if (menuItem.type === 'external') {
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
-                    <a href={menuItem.target}>{menuItem.name}</a>
+                    <a href={menuItem.target} onClick={mobileNavigationOnClickHandler}>{menuItem.name}</a>
                 </li>
             )
         } else return null
