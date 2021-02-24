@@ -615,8 +615,11 @@ const WidgetModel = props => {
                     </button>
 
                     <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/>
-                    <p>Extra ClassName for Custom Style:</p>
+                    <p>Extra ClassName:</p>
                     <input type='text' name='extraClassName' value={widgetData.extraClassName || ''}
+                           onChange={e => onChangeHandler(e)}/>
+                    <p>Extra Id:</p>
+                    <input type='text' name='extraId' value={widgetData.extraId || ''}
                            onChange={e => onChangeHandler(e)}/>
                     <p>Custom Styles:</p>
                     <textarea className='customStylesTextarea' name='customStyles'
