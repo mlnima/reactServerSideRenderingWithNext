@@ -1,29 +1,24 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import './MenuWidget.scss'
 import Link from "next/link";
-import {AppContext} from "../../../../context/AppContext";
+//import {AppContext} from "../../../../context/AppContext";
 import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const MenuWidget = props => {
-    const contextData = useContext(AppContext);
+    //const contextData = useContext(AppContext);
     const [open, setOpen] = useState(!props.isMobile);
-
-
     useEffect(() => {
-        let deviceWidth = 0;
+        let deviceWidth = 0
         setTimeout(()=>{
             deviceWidth = window.innerWidth
-            deviceWidth >=768 ? setOpen(true) : null
-        },100)
-
+            deviceWidth >=768 ? setOpen(true):null
+        },0)
     }, [props]);
-
 
     const mobileNavigationOnClickHandler= ()=>{
         if (props.isMobile){
             setOpen(false)
-
         }
     }
 

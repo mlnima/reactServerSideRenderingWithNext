@@ -2,40 +2,43 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import './CheckOutItemPreview.scss'
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
-import {getPost} from "../../../../_variables/ajaxPostsVariables";
+import ItemCountUI from "./ItemCountUI";
+import {AppContext} from "../../../../context/AppContext";
 
 const CheckOutItemPreview = props => {
+    const contextData = useContext(AppContext);
     const [state, setState] = useState({
         postData: {}
     });
 
-    // useEffect(() => {
-    //     //const productId= props.oderData?.productId
-    //     const requestBody = {_id: props.oderData?.productId};
-    //     getPost(requestBody, window.location.origin, false).then(res=>{
-    //         console.log(res.data)
-    //     })
-    //    // console.log(props.orderData.productId)
-    // }, [props]);
+    const onRemoveItemFromBasketHandler = () =>{
+        const items = contextData.checkOutData.items.filter(i=>i.productId !== props.orderData.productId )
+        contextData.setCheckOutData({
+            ...contextData.checkOutData,
+            items
+        })
+        localStorage.setItem('checkOutItems',JSON.stringify(items))
+    }
+
     const FullDataForFinalPage = () => {
-        if (!props.isPop) {
             return (
                 <>
-                    <span>{props.price} {props.currency || 'Euro'}</span>
+                    <span>{props.price * props.orderData.count } {props.currency || 'Euro'}</span>
                     <div className='count-remove'>
-                        <button className='check-out-item-remove'><FontAwesomeIcon className='check-out-item-remove-icon' style={state.titleStyle} icon={faTrash}/></button>
-                        <input className='check-out-item-count' type='number' value={props.orderData.count}/>
+                        <button className='check-out-item-remove' onClick={()=>onRemoveItemFromBasketHandler()}><FontAwesomeIcon className='check-out-item-remove-icon' style={state.titleStyle} icon={faTrash}/></button>
+                        <ItemCountUI count={props.orderData.count} productId={props.orderData.productId}/>
                     </div>
+
                 </>
             )
-        } else return null
     }
 
     return (
         <div className='check-out-item-preview'>
             <img src={props.mainThumbnail} alt={props.title}/>
             <div className='check-out-item-preview-title'>
-                <h4>{props.title}</h4>
+
+                <h4>{props.title} </h4>
                 <FullDataForFinalPage/>
             </div>
         </div>

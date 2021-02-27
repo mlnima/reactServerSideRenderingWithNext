@@ -25,7 +25,15 @@
       .check-out-pop-next-btn {
         display: flex;
         justify-content: center;
-        width: 100px;
+        align-items: center;
+        width: 300px;
+        height: 56px;
+        background-color: rgb(219, 113, 0);
+        .proceed-to-checkout-text{
+          text-align: center;
+          color: white;
+
+        }
         .check-out-pop-next-btn-icon {
           width: 40px;
           height: 40px;

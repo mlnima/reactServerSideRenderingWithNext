@@ -14,17 +14,35 @@ const AddToBasket = props => {
         e.preventDefault()
         if (props.productId) {
             countInput.current.style.backgroundColor = 'white'
+
             if (count>0){
-                const items= [...contextData.checkOutData.items, {
-                    productId:props.productId,
-                    count,
-                    date:Date.now()
-                }]
-                contextData.setCheckOutData({
-                    ...contextData.checkOutData,
-                    items
-                })
-                localStorage.setItem('checkOutItems',JSON.stringify(items))
+                const existSimilarItems = contextData.checkOutData.items.filter(i=>i.productId === props.productId )
+                if (existSimilarItems.length>0){
+                    const items = contextData.checkOutData.items.map(item=>{
+                        if (item.productId === props.productId){
+                            let currentCount = parseInt(item.count)
+                            item.count = currentCount +  parseInt(count)
+                        }
+                        return item
+                    })
+                    contextData.setCheckOutData({
+                        ...contextData.checkOutData,
+                        items
+                    })
+                    localStorage.setItem('checkOutItems',JSON.stringify(items))
+                }else {
+                    const items= [...contextData.checkOutData.items, {
+                        productId:props.productId,
+                        count:parseInt(count),
+                        date:Date.now()
+                    }]
+                    contextData.setCheckOutData({
+                        ...contextData.checkOutData,
+                        items
+                    })
+                    localStorage.setItem('checkOutItems',JSON.stringify(items))
+                }
+            console.log(contextData.checkOutData.items)
             }else{
                 countInput.current.style.backgroundColor = 'red'
             }

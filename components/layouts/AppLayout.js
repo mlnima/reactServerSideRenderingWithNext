@@ -13,18 +13,14 @@ import CheckoutPop from "../includes/checkOutPageComponents/CheckoutPop/Checkout
 
 const AppLayout = props => {
 
-
     useEffect(() => {
         if (!window.GA_INITIALIZED) {
             initGA()
             window.GA_INITIALIZED = true
         }
         logPageView()
-        console.log(props.isMobile)
     }, []);
-
-
-
+    
     return (
         <div className={'App ' + (props.sidebar ? 'withSidebar' : 'withOutSidebar')}>
             <GlobalStyle globalStyleData={props.design?.data?.customStyles ?? ''}/>

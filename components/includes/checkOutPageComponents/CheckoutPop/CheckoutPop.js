@@ -5,7 +5,7 @@ import './CheckoutPop.scss'
 import {getPost} from "../../../../_variables/ajaxPostsVariables";
 import CheckOutItemPreview from "../CheckOutItemPreview/CheckOutItemPreview";
 import Link from "next/link";
-import { faShoppingCart} from "@fortawesome/free-solid-svg-icons";
+import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const CheckoutPop = props => {
@@ -36,7 +36,7 @@ const CheckoutPop = props => {
         )
     })
 
-    const onLinkClickHandler = ()=>{
+    const onLinkClickHandler = () => {
         contextData.dispatchState({
             ...contextData.state,
             checkoutSlideEnable: false
@@ -44,21 +44,50 @@ const CheckoutPop = props => {
     }
 
 
+    useEffect(() => {
+        if (contextData.checkOutData.items.length <1){
+            setTimeout(()=>{
+                contextData.dispatchState({
+                    ...contextData.state,
+                    checkoutSlideEnable:false
+                })
+            },5000)
+        }
+    }, [contextData.checkOutData.items]);
 
 
     if (contextData.state.checkoutSlideEnable) {
-        return (
-            <div className='checkout-pop'>
-                <div className='checkout-container'>
-                    <CheckOutSlideHeader/>
-                    {renderCheckOutItems}
-                    <div className='check-out-pop-next'>
-                        <Link href="/checkout" ><a className='check-out-pop-next-btn' onClick={onLinkClickHandler}><FontAwesomeIcon  className='check-out-pop-next-btn-icon'  icon={faShoppingCart} /></a></Link>
-                    </div>
 
+        if (contextData.checkOutData.items.length >0){
+            return (
+                <div className='checkout-pop'>
+                    <div className='checkout-container'>
+
+                        <CheckOutSlideHeader/>
+                        {renderCheckOutItems}
+                        <div className='check-out-pop-next'>
+                            <Link href="/checkout"><a className='check-out-pop-next-btn' onClick={onLinkClickHandler}>
+                                <span className='proceed-to-checkout-text'> Proceed to checkout</span>
+                                {/*<FontAwesomeIcon  className='check-out-pop-next-btn-icon'  icon={faShoppingCart} />*/}
+                            </a></Link>
+                        </div>
+
+                    </div>
                 </div>
-            </div>
-        );
+            );
+        }else {
+            return (
+                <div className='checkout-pop'>
+                    <div className='checkout-container'>
+                        <CheckOutSlideHeader/>
+                        <div className='check-out-pop-next'>
+                            <span className='proceed-to-checkout-text'> Your Shopping cart is empty </span>
+                        </div>
+                    </div>
+                </div>
+            )
+        }
+
     } else return null
 
 };

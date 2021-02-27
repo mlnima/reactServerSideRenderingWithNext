@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import LoggedOutItemsMenu from "./LoggedOutItemsMenu/LoggedOutItemsMenu";
 import LoggedInItemsForMenu from "./LoggedInItemsForMenu/LoggedInItemsForMenu";
+import './Authentication.scss'
 
 const Authentication = props => {
     const contextData = useContext(AppContext);

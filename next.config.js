@@ -48,6 +48,7 @@ const sassOptions={
 
 
 const nextConfiguration = {
+
     publicRuntimeConfig: {
         base_url: BASE_URL,
     },

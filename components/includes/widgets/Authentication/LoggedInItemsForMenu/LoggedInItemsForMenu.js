@@ -18,8 +18,8 @@ const LoggedInItemsForMenu = props => {
         if (contextData.siteIdentity.membership) {
             return (
                 <Link href={`/profile?username=${contextData.userData.username}`}>
-                    <a >
-                        <FontAwesomeIcon icon={faUser} className='svg-logo-small'/>
+                    <a className='logged-in-item' >
+                        <FontAwesomeIcon style={state.svgDefaultStyle} icon={faUser} className='svg-logo-small'/>
                     </a>
                 </Link>
             )
@@ -29,7 +29,7 @@ const LoggedInItemsForMenu = props => {
     if (contextData.userData.username ) {
         return (
             <div className='logged-in-items'>
-                <p  onClick={() => contextData.functions.logOutUser()}>
+                <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
                     <FontAwesomeIcon style={state.svgDefaultStyle} icon={faPowerOff} className=' svg-logo-small' />
                 </p>
                 <MyProfile/>
