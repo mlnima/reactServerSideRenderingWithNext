@@ -1,10 +1,10 @@
 const axios = require('axios')
 
 const body={
-    apiKey:'49K0HZZ-YK64T61-PJDY8T5-NK9Q9TZ',
+    apiKey:'N420S9H-8Y44B84-GSHBSE2-D4HEN8P',
     username:'Admin',
     duplicateContent:false,
-    downloadImageContent:true,
+    downloadImageContent:false,
     postData:{
         "title" : "this post is created by API call",
         "tags":[{type:'tags',name:'tag test from API Call'}],
@@ -21,7 +21,7 @@ const body={
     }
 }
 
-axios.post('http://localhost:3000/api/v1/posts/createNewByApi',body).then(res=>{
+axios.post('https://www.mydomain.com/api/v1/posts/createNewByApi',body).then(res=>{
     console.log( res.data)
 }).catch(err=>{
     console.log( err.response.data.error)

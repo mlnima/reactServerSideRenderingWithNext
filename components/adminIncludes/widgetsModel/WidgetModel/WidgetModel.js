@@ -298,6 +298,7 @@ const WidgetModel = props => {
                             <option value='-_id'>Oldest</option>
                             <option value='views'>Views</option>
                             <option value='likes'>Likes</option>
+                            <option value='random'>Random</option>
                         </select>
                         <p>View Type:</p>
                         <select name='viewType' value={widgetData.viewType} onChange={e => onChangeHandler(e)}>

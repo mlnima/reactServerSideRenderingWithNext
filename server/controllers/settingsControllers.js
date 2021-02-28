@@ -171,36 +171,25 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
             const widgetDataToObject = widget.toObject()
             const sortMethod = widget.data.sortBy ? { [widget.data.sortBy]: -1 } :{lastModify: -1};
             let sortQuery = !req.body.sort ? {} : req.body.sort === '_id' || req.body.sort === '-_id' ? req.body.sort : { [req.body.sort]: -1 }
+
             let selectedMeta = widget.data.selectedMetaForPosts ? {$or:[
                     {tags: widget.data.selectedMetaForPosts},
                     {categories:widget.data.selectedMetaForPosts},
                     {actors:widget.data.selectedMetaForPosts}
                 ]}:{}
-
-                //-----
-
-
-
-
-
-
-            // if(widgetDataToObject.data.type === 'alphabeticalNumericalRange'){
-            //     console.log(widgetDataToObject)
-            //     // console.log(customStyle)
-            //     const customStyle = widgetDataToObject.data.styleEngine ?widgetDataToObject.data.styleEngine==='scss'? widgetDataToObject.data.customStyles.pipe(sassConverter({
-            //         from:'scss',
-            //         to:'css'
-            //     })).toString() : widgetDataToObject.data.customStyles  :widgetDataToObject.data.customStyles
-            //     console.log(customStyle)
-            // }
-
-            //-----
+                 let countPosts = 0
+                 if (widget.data.type === 'posts' || widget.data.type === 'postsSwiper'){
+                     countPosts = await postSchema.count({$and: [{status:'published'}, selectedMeta]}).exec()
+                 }
             return  {
                 ...widgetDataToObject,
                 data:{
                     ...widget.data,
                     metaData: widget.data.metaType ? await metaSchema.find({ type: widget.data.metaType }).limit(parseInt(widget.data.count)).sort(sortQuery).exec() : [],
-                    posts: widget.data.type === 'posts' || widget.data.type === 'postsSwiper' ? await postSchema.find({$and: [{status:'published'}, selectedMeta]}).limit(parseInt(widget.data.count)).sort(sortMethod).exec() : [],
+                    posts: widget.data.type === 'posts' || widget.data.type === 'postsSwiper' ?
+                        widget.data.sortBy === 'random'?
+                         await postSchema.find({$and: [{status:'published'}, selectedMeta]}).skip(Math.floor(Math.random() * countPosts)).limit(parseInt(widget.data.count)).sort(sortMethod).exec()
+                        :await postSchema.find({$and: [{status:'published'}, selectedMeta]}).limit(parseInt(widget.data.count)).sort(sortMethod).exec(): [],
                     comments: widget.data.type === 'recentComments' ? await commentSchema.find({}).limit(parseInt(widget.data.count)).exec() : [],
                 }
             }

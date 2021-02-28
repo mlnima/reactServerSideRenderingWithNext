@@ -142,11 +142,12 @@ postsControllers.getPostsInfo = async (req, res) => {
     }
 
     let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
-    let sortQuery = req.body.sort === 'latest' ? {lastModify: -1} : {[req.body.sort]: -1}
-
-    let posts = await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
     let postsCount = await postSchema.count({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).exec()
+    let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random'? {lastModify: -1} :{[req.body.sort]: -1}
 
+    let posts = req.body.sort === 'random' ?
+        await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(Math.floor(Math.random() * postsCount)).limit(size).sort(sortQuery).exec()
+        :await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
     Promise.all([posts, postsCount]).then(async data => {
         const posts = data[0]
         let postsDataToSend = []
