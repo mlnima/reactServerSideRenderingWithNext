@@ -1,12 +1,9 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useState,useContext, useEffect} from 'react';
 import {AppContext} from '../../../context/AppContext';
-import dynamic from 'next/dynamic'
 import Head from 'next/dist/next-server/lib/head'
-
-//const reactHtmlParser = dynamic(() => import('html-react-parser'))
 import {useRouter} from "next/router";
 import parse  from 'html-react-parser';
-import {initGA, logPageView} from "../../../_variables/_variables";
+//import {initGA, logPageView} from "../../../_variables/_variables";
 
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
@@ -45,6 +42,7 @@ const SiteSettingSetter = props => {
         return parse(script.scriptBody)
     })
 
+
     return (
         <Head>
             <title>{props.identity?.data.title ?? ''}</title>
@@ -56,7 +54,7 @@ const SiteSettingSetter = props => {
             <meta name="keywords" content={props.identity?.data.keywords ?? []}/>
             {/*<base href="/"/>*/}
             <link rel="icon" href={props.identity?.data.favIcon ?? '/static/images/favIcon/favicon.png'}/>
-            <link rel="stylesheet" type="text/css" href={'/_next/static/css/styles.chunk.css?v=' + Date.now()} />
+            {/*<link rel="stylesheet" type="text/css" href={'/_next/static/css/styles.chunk.css?v=' + Date.now()} />*/}
             {/*<link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>*/}
             {renderCustomScripts}
 

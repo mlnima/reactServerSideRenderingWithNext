@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
-import './Console.scss';
 import {adminConsoleOpenCloseHandler} from "../../../../_variables/_variables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";

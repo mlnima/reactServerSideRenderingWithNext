@@ -1,6 +1,4 @@
 import React from 'react';
-import './ProgressBar.scss'
-
 
 const ProgressBar = props => {
     if (props.value < 1) {

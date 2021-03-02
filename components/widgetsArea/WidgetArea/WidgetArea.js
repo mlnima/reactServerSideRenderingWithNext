@@ -1,7 +1,6 @@
 import React, {useContext} from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import './WidgetArea.scss';
 let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
 const WidgetArea = props => {

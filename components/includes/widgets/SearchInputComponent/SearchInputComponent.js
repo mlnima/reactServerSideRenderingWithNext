@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import './SearchInputComponent.scss';
 import Link from 'next/link';
 import withRouter from 'next/dist/client/with-router'
 import {useRouter} from "next/router";

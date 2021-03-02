@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from '../../../../context/AppContext'
-import './MyProfileInfo.scss'
+
 const MyProfileInfo = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({

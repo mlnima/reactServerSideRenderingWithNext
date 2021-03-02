@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCogs, faEraser, faTerminal, faUserShield} from "@fortawesome/free-solid-svg-icons";
-import './AdminTools.scss'
 import Link from "next/link";
 import {useRouter} from "next/router";
 import {adminConsoleOpenCloseHandler} from "../../../_variables/_variables";

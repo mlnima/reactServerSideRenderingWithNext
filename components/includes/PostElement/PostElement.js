@@ -9,7 +9,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
-import './PostElement.scss'
+
 
 let StyledDiv = styled.div`${props => props.stylesData}`
 

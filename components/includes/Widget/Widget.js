@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext} from 'react';
 import WidgetHeader from "./WidgetHeader/WidgetHeader";
 import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
-import './Widget.scss';
+
 import styled, {ThemeProvider} from "styled-components";
 import {AppContext} from "../../../context/AppContext";
 

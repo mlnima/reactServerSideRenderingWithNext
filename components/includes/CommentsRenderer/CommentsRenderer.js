@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from '../../../context/AppContext';
 import { deleteComments } from '../../../_variables/ajaxPostsVariables'
 import withRouter from 'next/dist/client/with-router'
-import './CommentsRenderer.scss'
+
 
 const CommentsRenderer = props => {
     const contextData = useContext(AppContext);

@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import './CheckOutItemPreview.scss'
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import ItemCountUI from "./ItemCountUI";
 import {AppContext} from "../../../../context/AppContext";

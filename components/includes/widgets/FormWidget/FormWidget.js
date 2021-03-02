@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {saveFormWidgetData} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
-import './FormWidget.scss';
 
 const FormWidget = props => {
 

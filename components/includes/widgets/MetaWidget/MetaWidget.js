@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import './MetaWidget.scss'
+
 import Link from 'next/link'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faFolder, faTag} from "@fortawesome/free-solid-svg-icons";

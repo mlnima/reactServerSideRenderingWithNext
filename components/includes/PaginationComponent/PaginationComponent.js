@@ -1,10 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import Link from 'next/link'
 import withRouter from 'next/dist/client/with-router';
-import _ from 'lodash'
 import {useRouter} from "next/router";
 import {pathAndAsPathGenerator} from "../../../_variables/_variables";
-import './PaginationComponent.scss'
 
 const PaginationComponent = props => {
     const router = useRouter()

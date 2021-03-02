@@ -1,6 +1,6 @@
 import React,{useEffect} from 'react';
 import WidgetsRenderer from '../WidgetsRenderer/WidgetsRenderer'
-import './Sidebar.scss'
+//import './Sidebar.scss'
 
 const Sidebar = props => {
 console.log(props.position)

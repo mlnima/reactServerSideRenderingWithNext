@@ -7,12 +7,13 @@ const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 
 
+
 let BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : process.env.PRODUCTION_URL;
 
 const scssConfig = {
     webpack(config, options) {
         config.module.rules.push({
-            test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
+            test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2|scss|css)$/,
             use: {
                 loader: 'url-loader',
                 options: {
@@ -26,65 +27,44 @@ const scssConfig = {
 };
 
 
-// const scssConfig = {
-//     webpack(config, options) {
-//         config.module.rules.push({
-//             test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-//             use: {
-//                 loader: 'url-loader',
-//                 options: {
-//                     limit: 100000
-//                 }
-//             },
-//         }, {
-//             sassOptions: {
-//                 includePaths: [path.join(__dirname, 'styles')],
-//             },
-//         }, {
-//             use: {
-//                 loader: 'babel-plugin-styled-components',
-//                 options: {
-//                     presets: [["styled-components", {"ssr": true}]]
-//                 }
-//             },
-//
-//         }, {
-//
-//             publicRuntimeConfig: {
-//                 base_url: BASE_URL,
-//             },
-//             node: {
-//                 fs: "empty"
-//             },
-//             images: {
-//                 // deviceSizes: [320, 480, 540, 600, 640, 720, 750, 768, 800, 900, 960, 1024, 1080, 1200, 1280, 1284, 1366, 1440, 1600, 1920, 2048, 2160],
-//                 // domains: ['webdevs.ai'],
-//                 // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-//             }
-//         });
-//         return config;
-//     }
-// };
+const webpackSassLoaderConfig = {
+    module: {
+        rules: [
+            {
+                test: /\.s[ac]ss$/i,
+                use: [
+                    // Creates `style` nodes from JS strings
+                    "style-loader",
+                    // Translates CSS into CommonJS
+                    "css-loader",
+                    // Compiles Sass to CSS
+                    "sass-loader",
+                    // load as string for importing file to styled component
+                    "to-string-loader",
+                ],
+            },
+        ],
+    },
+};
 
 
-// const nextConfiguration = {
-//
-//     publicRuntimeConfig: {
-//         base_url: BASE_URL,
-//     },
-//     node: {
-//         fs: "empty"
-//     },
-//     images: {
-//         // deviceSizes: [320, 480, 540, 600, 640, 720, 750, 768, 800, 900, 960, 1024, 1080, 1200, 1280, 1284, 1366, 1440, 1600, 1920, 2048, 2160],
-//         // domains: ['webdevs.ai'],
-//         // imageSizes: [16, 32, 48, 64, 96, 128, 256, 384],
-//     }
-// };
+const   sassOptions= {
+    includePaths: [path.join(__dirname, 'styles')],
+}
 
+// module.exports = withPlugins([[withCSS(withSass()), scssConfig], withImages, nextEnv({
+//     staticPrefix: 'REACT_APP_',
+//     publicPrefix: 'REACT_APP_',
+// })]);
 
-module.exports = withPlugins([[withCSS(withSass()), scssConfig], withImages, nextEnv({
-    staticPrefix: 'REACT_APP_',
-    publicPrefix: 'REACT_APP_',
-})]);
+module.exports = withPlugins([
+    // scssConfig,
+    webpackSassLoaderConfig,
+    withCSS(withSass()),
+    sassOptions,
+    withImages, nextEnv({
+        staticPrefix: 'REACT_APP_',
+        publicPrefix: 'REACT_APP_',
+    })
+]);
 

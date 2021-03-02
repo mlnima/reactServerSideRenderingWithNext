@@ -1,9 +1,7 @@
 import React, {useContext} from 'react';
 import Link from 'next/link'
 import RenderImageForMetaElements from '../RenderImageForMetaElements/RenderImageForMetaElements'
-import './MetaElement.scss'
 import withRouter from "next/dist/client/with-router";
-//import {getLanguageQuery, getLanguageQueryFromWindowLocationSearch} from "../../../_variables/_variables";
 import {AppContext} from '../../../context/AppContext'
 
 const MetaElement = props => {

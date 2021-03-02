@@ -1,7 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import loadable from '@loadable/component';
-//import MediaDocumentWidget from './MediaDocumentWidget/MediaDocumentWidget'
-import './MediaWidget.scss';
 const MediaDocumentWidget = loadable(() => import('./MediaDocumentWidget/MediaDocumentWidget'))
 
 

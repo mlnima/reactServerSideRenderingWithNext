@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import './MetaContentForPostsPage.scss';
 import {AppContext} from "../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThumbsUp} from "@fortawesome/free-regular-svg-icons";

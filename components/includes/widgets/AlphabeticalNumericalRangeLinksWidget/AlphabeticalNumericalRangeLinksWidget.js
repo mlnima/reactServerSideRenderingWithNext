@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import Link from 'next/link'
 import withRouter from 'next/dist/client/with-router'
 import { useRouter } from 'next/router'
-import './AlphabeticalNumericalRangeLinksWidget.scss'
 
 const AlphabeticalNumericalRangeLinksWidget = props => {
     const router = useRouter()

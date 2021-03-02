@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
-import './CheckOutSlideHeader.scss'
 import {AppContext} from "../../../../../context/AppContext";
 
 const CheckOutSlideHeader = props => {

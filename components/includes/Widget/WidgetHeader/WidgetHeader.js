@@ -2,7 +2,7 @@ import React, {useContext, useEffect, useState} from 'react';
 import Link from 'next/link'
 import {AppContext} from '../../../../context/AppContext'
 import withRouter from "next/dist/client/with-router";
-import './WidgetHeader.scss'
+
 const WidgetHeader = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({

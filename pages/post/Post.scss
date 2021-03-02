@@ -8,44 +8,36 @@
 @import "../../components/includes/Post/PostInfo/AddToBasket/AddToBasket";
 @import "../../components/includes/Post/PostInfo/PostDescription/PostDescription";
 
-  .post-page {
-    justify-self: center;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    width: 98%;
-
-    #download-url {
-      width: 100%;
-      margin: 20px 0;
-
-      .download-link {
-
-        color: white;
-        padding: 10px;
-        text-align: center;
-        border-radius: 5px;
-        margin: 10px;
-      }
-    }
-
-    .under-post-widget-area {
-      width: 100%;
+.post-page {
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 98%;
+  #download-url {
+    width: 100%;
+    margin: 20px 0;
+    .download-link {
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      margin: 10px;
     }
   }
-
-
-
+  .under-post-widget-area {
+    width: 100%;
+  }
+}
 @media only screen and (min-width: 768px) {
-    .post-page {
-      .video-player {
-        .responsive-player {
-          iframe {
+  .post-page {
+    .video-player {
+      .responsive-player {
+        iframe {
 
-          }
         }
       }
     }
-
+  }
 }

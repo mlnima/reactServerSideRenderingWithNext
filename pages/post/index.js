@@ -13,9 +13,7 @@ import SlideShow from '../../components/includes/Post/SlideShow/SlideShow'
 import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
 import styled from "styled-components";
 import PostMetaDataToSiteHead from "../../components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead";
-import './Post.scss'
 let StyledDiv = styled.div`${props => props.stylesData}`
-
 
 const Post = props => {
     const [state, setState] = useState({

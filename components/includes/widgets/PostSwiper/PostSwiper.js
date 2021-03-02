@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Navigation, Pagination, Controller, Scrollbar, Keyboard, Autoplay, EffectCube, EffectCoverflow, EffectFlip, EffectFade, Lazy, Parallax} from 'swiper'
 import 'swiper/swiper-bundle.css';
-import './PostSwiper.scss';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import Image from 'next/image'

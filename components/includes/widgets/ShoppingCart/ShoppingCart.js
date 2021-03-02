@@ -2,7 +2,6 @@ import React,{useContext,useState} from 'react';
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
-import './ShoppingCart.scss';
 import {AppContext} from "../../../../context/AppContext";
 
 const ShoppingCart = props => {

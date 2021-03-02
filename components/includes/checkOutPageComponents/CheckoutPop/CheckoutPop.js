@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import CheckOutSlideHeader from "./CheckOutSlideHeader/CheckOutSlideHeader";
 import {AppContext} from "../../../../context/AppContext";
-import './CheckoutPop.scss'
 import {getPost} from "../../../../_variables/ajaxPostsVariables";
 import CheckOutItemPreview from "../CheckOutItemPreview/CheckOutItemPreview";
 import Link from "next/link";
