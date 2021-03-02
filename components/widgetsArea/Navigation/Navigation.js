@@ -3,6 +3,7 @@ import {AppContext} from "../../../context/AppContext";
 import withRouter from "next/dist/client/with-router";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import styled from "styled-components";
+import './Navigation.scss'
 let StyledDiv = styled.div`${props => props.customStyles}`
 
 const Navigation = () => {

@@ -76,6 +76,7 @@ const PostElement = props => {
                     if (renderNormalImageElement ) {
                         return (
                             <img src={props.state.mainThumbnail}
+                                 onError={e=>e.currentTarget.src ='/static/images/noImage/no-image-available.png'}
                                  alt={props.state.title}
                                  onMouseEnter={isHoverHandler}
                                  onTouchStart={isHoverHandler}
@@ -125,7 +126,7 @@ const PostElement = props => {
 
 
     const RenderProgressBar = () => {
-        if (props.state.rating !== 'disable') {
+        if (props.state.rating !== 'disable' ) {
             return (
                 <ProgressBar value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/>
             )
@@ -133,25 +134,19 @@ const PostElement = props => {
     }
 
     const BottomRight = () => {
-        if (props.state) {
-            switch (props.state.postType) {
+        if (props.state && props.state.views >1) {
+            switch (props.state.postType ) {
                 case 'video':
                 case 'product':
                 case 'standard':
                 case 'article':
+                case 'redirect':
                     return (
                         <span ref={bottomRight} className='bottom-right'>
                             <FontAwesomeIcon style={state.svgDefaultStyle} icon={faEye} className='post-element-info-logo'/>
                             <span className='view-count value-next-icon'>{props.state.views}</span>
                         </span>
                     )
-                // case 'product':
-                //     return (
-                //         <span ref={bottomRight} className='bottom-right'>
-                //             <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
-                //            <span className='view-count value-next-icon'> {props.state.views}</span>
-                //         </span>
-                //     )
                 default :
                     return null
             }
@@ -163,12 +158,15 @@ const PostElement = props => {
         if (props.state) {
             switch (props.state.postType) {
                 case 'video':
-                    return (
-                        <span ref={bottomLeft} className='bottom-left'>
+                case 'redirect':
+                    if (props.state.duration){
+                        return (
+                            <span ref={bottomLeft} className='bottom-left'>
                              <FontAwesomeIcon style={state.svgDefaultStyle} icon={faClock} className='post-element-info-logo'/>
                              <span className='value-next-icon'>  {props.state.duration}</span>
                         </span>
-                    )
+                        )
+                    }else return null
                 case 'product':
                     return (
                         <span ref={bottomRight} className='bottom-left'>
@@ -186,9 +184,10 @@ const PostElement = props => {
     }
 
     const TopRight = () => {
-        if (props.state) {
+        if (props.state && props.state.quality) {
             switch (props.state.postType) {
                 case 'video':
+                case 'redirect':
                     return (
                         <span ref={qualityLabel} className='top-right'>{props.state.quality}</span>
                     )
@@ -216,7 +215,7 @@ const PostElement = props => {
     }
 
     return (
-        < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
+        < StyledDiv stylesData={   contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
             <Link
                 as={contextData.state.activeLanguage !== 'default' ? `/post/${props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}?id=${props.state._id}&lang=${contextData.state.activeLanguage}` : `/post/${props.state.title}?id=${props.state._id}`}
                 href={{
@@ -234,7 +233,6 @@ const PostElement = props => {
                             <RenderDataOnImage/>
                         </div>
                         <RenderProgressBar/>
-                        {/*<h3>{props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}</h3>*/}
                         <h3>{props.state?.translations?.[contextData.state?.activeLanguage]?.title || props.state.title}</h3>
                     </div>
                 </a>

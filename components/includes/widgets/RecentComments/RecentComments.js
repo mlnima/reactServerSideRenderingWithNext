@@ -1,5 +1,6 @@
 import React,{useEffect} from 'react';
 import Link from "next/link";
+import './RecentComments.scss'
 const RecentComments = props => {
 
     const renderComments = props.comments.map(comment => {

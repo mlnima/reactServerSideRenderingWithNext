@@ -1,5 +1,6 @@
 import React from 'react';
 import PostElement from "../PostElement/PostElement";
+import './Posts.scss'
 
 const Posts = props => {
     const renderPosts = (props.posts || []).map(post => {

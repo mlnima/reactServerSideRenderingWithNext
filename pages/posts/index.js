@@ -11,6 +11,7 @@ import withRouter from 'next/dist/client/with-router'
 import Posts from '../../components/includes/Posts/Posts'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 import {getAbsolutePath} from '../../_variables/_variables'
+import './Posts.scss'
 //import MetaContentForPostsPage from "../../components/includes/MetaContentForPostsPage/MetaContentForPostsPage";
 
 const posts = props => {
@@ -20,7 +21,7 @@ const posts = props => {
         <>
             <AppLayout  {...props} sidebar={props.identity?.data?.postsPageSidebar} sidebarPosition='postsPageSidebar'>
                 <SiteSettingSetter  {...props}/>
-                    <div className="main">
+                    <div className="main posts-page">
                         {/*<MetaContentForPostsPage {...props}/>*/}
                         <PaginationComponent
                             isActive={true}

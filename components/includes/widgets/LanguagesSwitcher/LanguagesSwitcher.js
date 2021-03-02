@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import withRouter from 'next/dist/client/with-router';
 import LanguageSolidSVG from '../../../../static/images/fontawesome/language-solid.svg'
+import './LanguagesSwitcher.scss'
 
 const LanguagesSwitcher = props => {
     const contextData = useContext(AppContext);

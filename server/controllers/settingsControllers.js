@@ -179,7 +179,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
                 ]}:{}
                  let countPosts = 0
                  if (widget.data.type === 'posts' || widget.data.type === 'postsSwiper'){
-                     countPosts = await postSchema.count({$and: [{status:'published'}, selectedMeta]}).exec()
+                     countPosts = await postSchema.countDocuments({$and: [{status:'published'}, selectedMeta]}).exec()
                  }
             return  {
                 ...widgetDataToObject,

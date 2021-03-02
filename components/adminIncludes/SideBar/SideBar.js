@@ -97,7 +97,9 @@ const SideBar = props => {
             pathURL: '/admin/settings',
             subItems: [
                 {name: 'customScript', url: '/admin/settings/customScript'},
-                {name: 'general', url: '/admin/settings/general'}]
+                {name: 'general', url: '/admin/settings/general'},
+                {name: 'eCommerceSettings', url: '/admin/settings/eCommerceSettings'},
+                ]
         },
         Importer: {
             pathURL: '/admin/importer',

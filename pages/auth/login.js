@@ -6,7 +6,7 @@ import { AppContext } from "../../context/AppContext";
 import { getAbsolutePath } from '../../_variables/_variables'
 import { getMultipleSetting, getMultipleWidgetWithData } from '../../_variables/ajaxVariables'
 import dataDecoder from '../../server/tools/dataDecoder'
-
+import './registerLogin.scss'
 const Login = props => {
     const contextData = useContext(AppContext);
     const messageLabel = useRef(null);

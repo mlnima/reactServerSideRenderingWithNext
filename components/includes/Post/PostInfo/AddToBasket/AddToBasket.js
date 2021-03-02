@@ -2,7 +2,6 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartPlus, faShoppingCart} from "@fortawesome/free-solid-svg-icons";
 import {AppContext} from "../../../../../context/AppContext";
-import './AddToBasket.scss'
 
 
 const AddToBasket = props => {

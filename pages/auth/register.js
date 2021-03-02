@@ -7,7 +7,7 @@ import { getMultipleSetting, getMultipleWidgetWithData } from '../../_variables/
 import dataDecoder from '../../server/tools/dataDecoder'
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
-
+import './registerLogin.scss'
 const Register = props => {
     const contextData = useContext(AppContext);
     const messageLabel = useRef(null);

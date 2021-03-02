@@ -9,7 +9,7 @@ const LinkTo = props => {
     if (props.linkTo && props.linkToType) {
         if (props.linkToType === 'internal') {
             return (
-                <Link href={props.linkTo ? props.linkTo : '/'} as={props.linkToAs ? props.linkToAs : props.linkTo || '/'}><a>
+                <Link href={props.linkTo ? props.linkTo : '/'} as={props.linkToAs ? props.linkToAs : props.linkTo || '/'}><a target={props.linkToWindowType ? props.linkToWindowType : '_self'}>
                     {props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].linkToText || props.linkToText : props.linkToText : props.linkToText}
                 </a></Link>
             )

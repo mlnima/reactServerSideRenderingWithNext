@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import './VideoPlayer.scss';
+import React, { useRef } from 'react';
 
 const VideoPlayer = props => {
     const playerElement = useRef(null)
@@ -19,7 +18,6 @@ const VideoPlayer = props => {
             return props.videoScriptCode
         } else return null
     }
-
 
     if (props.postType === 'video'){
         return (

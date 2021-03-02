@@ -1,18 +1,17 @@
-import React, {useEffect, useContext, useState} from 'react';
+import React, {useEffect} from 'react';
 import Loading from "../includes/Loading/Loading";
 import AlertBox from '../includes/AlertBox/AlertBox'
-import '../../styles/global.scss'
 import {initGA, logPageView} from '../../_variables/_variables'
 import AdminTools from "../includes/AdminTools/AdminTools";
 import Console from "../includes/AdminTools/Console/Console";
-import styled, {createGlobalStyle} from "styled-components";
+import  {createGlobalStyle} from "styled-components";
 import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 import CheckoutPop from "../includes/checkOutPageComponents/CheckoutPop/CheckoutPop";
 
+import '../../styles/styles.scss'
 const AppLayout = props => {
-
     useEffect(() => {
         if (!window.GA_INITIALIZED) {
             initGA()

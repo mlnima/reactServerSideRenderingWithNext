@@ -1,5 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from '../../../context/AppContext'
+import './AlertBox.scss'
 
 const AlertBox = props => {
     const contextData = useContext(AppContext);

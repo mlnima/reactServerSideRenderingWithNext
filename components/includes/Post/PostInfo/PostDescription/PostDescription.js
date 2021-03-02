@@ -1,7 +1,10 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
-import './PostDescription.scss';
+
 import 'react-quill/dist/quill.snow.css';
+import styled from "styled-components";
+let StyledDiv = styled.div`${props => props.stylesData}`;
+
 const PostDescription = props => {
     const contextData = useContext(AppContext);
     const descriptionElement = useRef(null);
@@ -38,14 +41,14 @@ const PostDescription = props => {
 
     if (props.editMode) {
         return (
-            <div className='edit-mode'>
+            <StyledDiv  className='edit-mode'>
                 <p className='editModeText'>Description :</p>
                 <textarea value={props.description}/>
-            </div>
+            </StyledDiv>
         )
     } else {
         return (
-            <div ref={descriptionElement} className="description"/>
+            <StyledDiv ref={descriptionElement} className="description"/>
         )
     }
 };

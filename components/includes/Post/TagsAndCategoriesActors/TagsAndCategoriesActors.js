@@ -4,7 +4,9 @@ import {AppContext} from "../../../../context/AppContext";
 import { faFolder, faTag} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import './TagsAndCategoriesActors.scss'
+import styled from "styled-components";
+let StyledDiv = styled.div`${props => props.stylesData}`;
+
 
 const TagsAndCategoriesActors = props => {
     const contextData = useContext(AppContext);
@@ -67,12 +69,12 @@ const TagsAndCategoriesActors = props => {
 
     if (props.data.length >= 1) {
         return (
-            <div className={state.type + ' tags-categories-actors'}>
+            <StyledDiv className={state.type + ' tags-categories-actors'}>
                 <span style={{color:contextData.siteDesign.postDescriptionTextColorColor || 'white'}}> {state.type.charAt(0).toUpperCase() + state.type.substring(1)}:</span>
                 <div className="content">
                     {renderData}
                 </div>
-            </div>
+            </StyledDiv>
         );
     } else return null
 

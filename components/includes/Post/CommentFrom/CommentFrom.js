@@ -2,6 +2,10 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { newComment } from '../../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
+import styled from "styled-components";
+import  './CommentFrom.scss';
+
+let StyledDiv = styled.div`${props => props.stylesData}`
 
 const CommentFrom = props => {
     const contextData = useContext(AppContext);
@@ -46,12 +50,12 @@ const CommentFrom = props => {
 
     return (
         <form className='comment-form' onSubmit={ e => onSubmitHandler(e) }>
-            <div>
+            <StyledDiv >
                 <RenderLoggedInUser/>
                 <div className='comment-form-input'>
                     <textarea ref={ bodyInput } required={ true } placeholder='Comment' name='body'/>
                 </div>
-            </div>
+            </StyledDiv>
             <button className='comment-form-submit-button' type='submit'>Post Comment</button>
         </form>
     );

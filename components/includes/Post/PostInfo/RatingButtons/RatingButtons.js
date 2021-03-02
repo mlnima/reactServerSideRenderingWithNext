@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
-import {ratingSetter} from "../../../../../_variables/_variables";
+//import {ratingSetter} from "../../../../../_variables/_variables";
 
 const RatingButtons = props => {
     const ratingBtnArea = useRef(null)

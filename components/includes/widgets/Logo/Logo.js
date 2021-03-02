@@ -4,6 +4,7 @@ import {AppContext} from "../../../../context/AppContext";
 import {getLanguageQuery} from "../../../../_variables/_variables";
 import {useRouter} from "next/router";
 import Image from 'next/image'
+import './Logo.scss'
 
 const Logo = props => {
     const contextData = useContext(AppContext);

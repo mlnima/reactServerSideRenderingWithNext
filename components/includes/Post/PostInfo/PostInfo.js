@@ -1,18 +1,9 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import Link from 'next/link'
 import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
-import ProgressBar from "../../ProgressBar/ProgressBar";
 import {likeValueCalculator} from "../../../../_variables/_variables";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 import DownloadLink from "../DownloadLink/DownloadLink";
-import LikeBtnSvg from '../../../../static/images/fontawesome/thumbs-up-solid.svg'
-import DisLikeBtnSvg from '../../../../static/images/fontawesome/thumbs-down-solid.svg'
-import './PostInfo.scss'
-import {AppContext} from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faDollarSign, faEuroSign, faSmileBeam} from "@fortawesome/free-solid-svg-icons";
-import {faMeh, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import EditLinksForAuthor from "./EditLinksForAuthor/EditLinksForAuthor";
 import EditLinkForAdmin from "./EditLinkForAdmin/EditLinkForAdmin";
 import RatingButtons from "./RatingButtons/RatingButtons";
@@ -21,6 +12,10 @@ import RatingData from "./RatingData/RatingData";
 import PostTitle from "./PostTitle/PostTitle";
 import PostDescription from "./PostDescription/PostDescription";
 import AddToBasket from "./AddToBasket/AddToBasket";
+import styleData from  './PostInfo.scss'
+import styled from "styled-components";
+let StyledDiv = styled.div`${props => props.stylesData}`;
+
 
 const PostInfo = props => {
     const [state, setState] = useState({
@@ -41,7 +36,7 @@ const PostInfo = props => {
     }, [props.likes, props.disLikes]);
 
     return (
-        <div className='post-info'>
+        <StyledDiv stylesData={styleData} className='post-info'>
             <EditLinkForAdmin {...props}/>
             <EditLinksForAuthor {...props}/>
 
@@ -69,7 +64,7 @@ const PostInfo = props => {
                 </div>
 
             </div>
-        </div>
+        </StyledDiv>
     );
 };
 export default withRouter(PostInfo);

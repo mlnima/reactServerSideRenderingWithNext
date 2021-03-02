@@ -19,3 +19,8 @@ const PostMetaDataToSiteHead = props => {
     } else return null
 };
 export default PostMetaDataToSiteHead;
+
+
+// {process.env.NODE_ENV !== 'production' && (
+//     <link rel="stylesheet" type="text/css" href={'/_next/static/css/styles.chunk.css?v=' + Date.now()} />
+// )}

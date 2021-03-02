@@ -1,5 +1,8 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import Image from 'next/image';
+import styled from "styled-components";
+let StyledDiv = styled.div`${props => props.stylesData}`;
+
 
 const SlideShow = props => {
     const [state, setState] = useState({
@@ -79,14 +82,14 @@ const SlideShow = props => {
 
     if (props.postType === 'product') {
         return (
-            <div className='product-slide-show'>
+            <StyledDiv className='product-slide-show'>
                 <PreviousBtn/>
                 <div className='product-slide-show-image-area'>
                     <RenderImageElement/>
                 </div>
 
                 <NextBtn/>
-            </div>
+            </StyledDiv>
         );
     } else return null
 

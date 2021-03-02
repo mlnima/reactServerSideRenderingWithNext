@@ -7,6 +7,7 @@ import PaginationComponent from '../../components/includes/PaginationComponent/P
 import withRouter from 'next/dist/client/with-router'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {useRouter} from "next/router";
+import './meta.scss'
 
 
 const meta = props => {

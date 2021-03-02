@@ -1,0 +1,37 @@
+.checkout-page{
+  display: grid;
+  grid-template-columns: 1fr ;
+  .checkout-items{
+
+  }
+
+  .checkout-total-purchase{
+    background-color: white;
+    padding: 10px;
+  }
+}
+
+
+
+@media only screen and (min-width: 768px) {
+  .checkout-page{
+    display: grid;
+    grid-template-columns: 1fr 320px ;
+    max-width: 1024px;
+    .checkout-items{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        flex-wrap: wrap;
+    }
+
+    .checkout-total-purchase{
+      background-color: white;
+      display: flex;
+      justify-content: flex-start;
+      flex-direction: column;
+
+    }
+  }
+
+}

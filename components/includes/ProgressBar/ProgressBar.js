@@ -1,19 +1,14 @@
-import React, {useState, useEffect} from 'react';
-import {set} from "react-ga";
+import React from 'react';
+import './ProgressBar.scss'
+
 
 const ProgressBar = props => {
-
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [props]);
-
-
     if (props.value < 1) {
         return (
-            <div className='progressParent' style={{
-                backgroundColor: props.backgroundColor
+            <div  className='progressParent' style={{
+                backgroundColor: props.backgroundColor,
+                visibility:'hidden'
             }}>
-                <div className="progressChild" ></div>
             </div>
         );
     } else return (

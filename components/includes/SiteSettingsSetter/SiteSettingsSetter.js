@@ -56,6 +56,7 @@ const SiteSettingSetter = props => {
             <meta name="keywords" content={props.identity?.data.keywords ?? []}/>
             {/*<base href="/"/>*/}
             <link rel="icon" href={props.identity?.data.favIcon ?? '/static/images/favIcon/favicon.png'}/>
+            <link rel="stylesheet" type="text/css" href={'/_next/static/css/styles.chunk.css?v=' + Date.now()} />
             {/*<link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>*/}
             {renderCustomScripts}
 

@@ -1,17 +1,12 @@
-@import "../../../styles/colors";
 .progressParent{
   position: relative;
   height: 15px;
-  //border: 1px solid #333;
   .progressChild{
     height: 100%;
     position: absolute;
-    background-color: $red50;
-    //color: white;
     font-size: x-small;
     display: flex;
     font-weight: bold;
-
     align-items: center;
     p{
       margin: 0 0 0 5px ;

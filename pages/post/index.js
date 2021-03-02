@@ -5,7 +5,6 @@ import VideoPlayer from "../../components/includes/Post/VideoPlayer/VideoPlayer"
 import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
 import withRouter from "next/dist/client/with-router";
 import { getMultipleWidgetWithData, getMultipleSetting} from "../../_variables/ajaxVariables";
-import {AppContext} from "../../context/AppContext";
 import CommentFrom from '../../components/includes/Post/CommentFrom/CommentFrom'
 import CommentsRenderer from '../../components/includes/CommentsRenderer/CommentsRenderer'
 import {getAbsolutePath} from '../../_variables/_variables'
@@ -14,11 +13,11 @@ import SlideShow from '../../components/includes/Post/SlideShow/SlideShow'
 import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
 import styled from "styled-components";
 import PostMetaDataToSiteHead from "../../components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead";
-
+import './Post.scss'
 let StyledDiv = styled.div`${props => props.stylesData}`
 
+
 const Post = props => {
-    const contextData = useContext(AppContext);
     const [state, setState] = useState({
         style: {},
         postPageStyle:'',
@@ -61,7 +60,7 @@ const Post = props => {
     } else return (
             <AppLayout {...props} sidebar={props.identity?.data?.postPageSidebar} sidebarPosition='postPageSidebar' >
                 <PostMetaDataToSiteHead {...props}/>
-                <StyledDiv stylesData={props.design.data.postPageStyle} className='main' >
+                <StyledDiv stylesData={ props.design.data.postPageStyle} className='main post-page' >
                         <VideoPlayer {...props.post}/>
                         <SlideShow {...props.post} sidebar={props.identity.data.postPageSidebar} deviceWidth={deviceWidth}/>
                         <PostInfo

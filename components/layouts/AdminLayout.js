@@ -9,6 +9,7 @@ import Loading from "../includes/Loading/Loading";
 import { generateAbsolutePath, initGA, logPageView } from '../../_variables/_variables'
 import AlertBox from '../includes/AlertBox/AlertBox'
 import { getSetting } from '../../_variables/ajaxVariables'
+import './AdminLayout.scss'
 import Error from '../../pages/_error'
 
 const Panel = props => {

@@ -1,9 +1,12 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {AppProviderWithRouter} from "../context/AppContext";
-import '../components/global/fontawesome/fontawesome'
-
+//import './post/Post.scss'
 
 const MyApp = ({Component, pageProps}) => {
+
+
+
+
 
     return (
         <AppProviderWithRouter>
