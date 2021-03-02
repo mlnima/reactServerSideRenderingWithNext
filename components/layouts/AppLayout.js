@@ -10,7 +10,7 @@ import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 import CheckoutPop from "../includes/checkOutPageComponents/CheckoutPop/CheckoutPop";
 
-import '../../styles/styles.scss'
+
 const AppLayout = props => {
     useEffect(() => {
         if (!window.GA_INITIALIZED) {

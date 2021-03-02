@@ -19,7 +19,11 @@
     <select />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded" />
+    <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -520,6 +524,7 @@
       <workItem from="1614542728571" duration="896000" />
       <workItem from="1614611484549" duration="26592000" />
       <workItem from="1614677112025" duration="1658000" />
+      <workItem from="1614680357637" duration="143000" />
     </task>
     <servers />
   </component>
@@ -724,6 +729,11 @@
           <url>file://$PROJECT_DIR$/components/includes/Widget/Widget.js</url>
           <line>19</line>
           <option name="timeStamp" value="48" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/pages/_app.js</url>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
