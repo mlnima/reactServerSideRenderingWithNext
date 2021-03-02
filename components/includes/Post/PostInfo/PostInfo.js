@@ -38,7 +38,7 @@ const PostInfo = props => {
     return (
         <StyledDiv stylesData={styleData} className='post-info'>
             <EditLinkForAdmin {...props}/>
-            <EditLinksForAuthor {...props}/>
+            {/*<EditLinksForAuthor {...props}/>*/}
 
             <div className='post-info-head' >
                 <PostTitle {...props}/>

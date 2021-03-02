@@ -39,7 +39,7 @@ const WidgetHeader = props => {
     const RenderRedirectLink = () => {
         if (props.redirectLink && props.redirectToTitle) {
             return (
-                <Link href={props.redirectLink}><a style={state.style.redirectLink}>{props.redirectToTitle}</a></Link>
+                <Link href={props.redirectLink}><a style={state.style.redirectLink} aria-label={props.redirectToTitle}>{props.redirectToTitle}</a></Link>
             )
         } else return null
     }
