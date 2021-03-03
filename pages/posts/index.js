@@ -78,7 +78,7 @@ export const getServerSideProps = async ({req,query}) => {
 
     const contentData = query.content ? await getSingleMeta(query.content,domainName,true) : {}
     const contentDataInfo =   contentData.data ?  contentData.data.meta : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'home', 'footer', 'header','topBar','navigation']}, domainName, true, 'postsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'footer', 'header','topBar','navigation']}, domainName, true, 'postsPage')
     const postsData = await getPosts(getPostsData, domainName, true)
     let isMobile = (req
         ? req.headers['user-agent']

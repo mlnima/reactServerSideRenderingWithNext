@@ -12,7 +12,8 @@ settingSchema.findOne({type:'identity'}).exec().then(setting=>{
 
 
 subSiteMapsController.siteMap = (req, res) => {
-    const requestPath = siteProtocol + '://' + req.get('host') + '/'
+   // const requestPath = siteProtocol + '://' + req.get('host') + '/'
+    const requestPath = (process.env.REACT_APP_SSL ? 'https': siteProtocol) + '://' + req.get('host') + '/'
     let month = req.params.month;
     let pageNo = req.params.pageNo;
     pageNo = parseInt(pageNo.replace('.xml', ''));

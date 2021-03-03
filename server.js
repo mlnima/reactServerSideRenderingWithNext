@@ -324,17 +324,64 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 //-------------------post----------------------
 
-    server.get('/tags/:tag', (req, res) => {
-        const targetComponent = '/posts';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-            contentType: 'tags',
-            contentName: req.params.tag,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
+    const serverGetGenerator = ()=>{
+        const routesArr =[
+            {route:'/login',target:'/auth/login'},
+            {route:'/:local/login',target:'/auth/login'},
+            {route:'/register',target:'/auth/register'},
+            {route:'/:local/register',target:'/auth/register'},
+
+            {route:'/tags/:tag',target:'/posts',contentName:'tag'},
+            {route:'/:local/tags/:tag',target:'/posts',contentName:'tag'},
+            {route:'/categories/:category',target:'/posts',contentName:'category'},
+            {route:'/:local/categories/:category',target:'/posts',contentName:'category'},
+            {route:'/actors/:actor',target:'/posts',contentName:'actor'},
+            {route:'/:local/actors/:actor',target:'/posts',contentName:'actor'},
+
+            {route:'/posts',target:'/posts'},
+            {route:'/:local/posts',target:'/posts'},
+
+            {route:'/categories',target:'/meta',contentType: 'categories'},
+            {route:'/:local/categories',target:'/meta',contentType: 'categories'},
+            {route:'/tags',target:'/meta',contentType: 'tags'},
+            {route:'/:local/tags',target:'/meta',contentType: 'tags'},
+            {route:'/actors',target:'/meta',contentType: 'actors'},
+            {route:'/:local/actors',target:'/meta',contentType: 'actors'},
+
+            {route:'/post/:title',target:'/post'},
+            {route:'/:local/post/:title',target:'/post'},
+            {route:'/page/:pageName',target:'/page'},
+            {route:'/:local/page/:pageName',target:'/page'},
+            {route:'/profile',target:'/profile'},
+            {route:'/:local/profile',target:'/profile'},
+            {route:'/errorPage',target:'/errorPage'},
+            {route:'/:local/errorPage',target:'/errorPage'}
+            ]
+        routesArr.map(routeObj=>{
+            return  server.get(routeObj.route, (req, res) => {
+                const targetComponent = routeObj.target;
+                const specialDataForRoute = routeObj.contentName ?{contentName: req.params[routeObj.contentName]}:
+                                            routeObj.contentType ? {contentType: routeObj.contentType}:{};
+
+                const shouldCompress = (req, res)=> {
+                    if (req.headers['x-no-compression']) {
+                        return false
+                    }
+                    return compression.filter(req, res)
+                }
+                const queryParams = {
+                    ...req.query,
+                    ...req.params,
+                    ...specialDataForRoute
+                }
+                server.use(compression({ filter: shouldCompress }))
+                app.render(req, res, targetComponent, queryParams)
+            });
+        })
+
+    }
+
+    serverGetGenerator()
 
     server.get('/', (req, res) => {
         const targetComponent = '/';
@@ -347,137 +394,136 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         // return renderAndCache(req, res, targetComponent, queryParams)
     });
 
-    server.get('/login', (req, res) => {
-        const targetComponent = '/auth/login';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
-
-    server.get('/register', (req, res) => {
-        const targetComponent = '/auth/register';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
 
 
-    server.get('/categories/:category', (req, res) => {
-        const targetComponent = '/posts';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-            contentType: 'categories',
-            contentName: req.params.category,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
 
+    // server.get('/tags/:tag', (req, res) => {
+    //     const targetComponent = '/posts';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //         contentType: 'tags',
+    //         contentName: req.params.tag,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
-    server.get('/actors/:actor', (req, res) => {
-        const targetComponent = '/posts';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-            contentType: 'actors',
-            contentName: req.params.actor,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
+    // server.get('/login', (req, res) => {
+    //     const targetComponent = '/auth/login';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
-    server.get('/posts', (req, res) => {
-        const targetComponent = '/posts';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
+    // server.get('/register', (req, res) => {
+    //     const targetComponent = '/auth/register';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
+    // server.get('/categories/:category', (req, res) => {
+    //     const targetComponent = '/posts';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //         contentType: 'categories',
+    //         contentName: req.params.category,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
-    server.get('/categories', (req, res) => {
-        const targetComponent = '/meta';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-            contentType: 'categories'
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
-    server.get('/tags', (req, res) => {
+    // server.get('/actors/:actor', (req, res) => {
+    //     const targetComponent = '/posts';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //         contentType: 'actors',
+    //         contentName: req.params.actor,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
-        const targetComponent = '/meta';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-            contentType: 'tags'
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
-    server.get('/actors', (req, res) => {
-        const targetComponent = '/meta';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-            contentType: 'actors'
-        }
+    // server.get('/posts', (req, res) => {
+    //     const targetComponent = '/posts';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
+    // server.get('/categories', (req, res) => {
+    //     const targetComponent = '/meta';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //         contentType: 'categories'
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
+    // server.get('/tags', (req, res) => {
+    //
+    //     const targetComponent = '/meta';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //         contentType: 'tags'
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
+    // server.get('/actors', (req, res) => {
+    //     const targetComponent = '/meta';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //         contentType: 'actors'
+    //     }
+    //
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
+    // server.get('/post/:title', (req, res) => {
+    //     const targetComponent = '/post';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
-    server.get('/post/:title', (req, res) => {
+    // server.get('/page/:pageName', (req, res) => {
+    //     const targetComponent = '/page';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
-        const targetComponent = '/post';
-
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        app.render(req, res, targetComponent, queryParams)
-
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
-
-    server.get('/page/:pageName', (req, res) => {
-        const targetComponent = '/page';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
-
-    server.get('/profile', (req, res) => {
-        const targetComponent = '/profile';
-        // const queryParams = {
-        //     username: req.query.username,
-        //     size: req.query.size,
-        //     pageNo: req.query.pageNo,
-        //     postType: req.query.postType,
-        //     keyword: req.query.keyword,
-        //     tab: req.query.author,
-        //     sort: req.query.sort,
-        // }
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        app.render(req, res, targetComponent, queryParams)
-    });
+    // server.get('/profile', (req, res) => {
+    //     const targetComponent = '/profile';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    // });
 
 
     server.get('/admin/assets', (req, res) => {
@@ -512,10 +558,10 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     // });
 
 
-    server.get('/errorPage', (req, res) => {
-        const targetComponent = '/errorPage';
-        app.render(req, res, targetComponent)
-    });
+    // server.get('/errorPage', (req, res) => {
+    //     const targetComponent = '/errorPage';
+    //     app.render(req, res, targetComponent)
+    // });
 
     server.get('*', (req, res) => {
         return handle(req, res)

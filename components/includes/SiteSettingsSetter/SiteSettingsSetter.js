@@ -1,8 +1,8 @@
-import React, {useState,useContext, useEffect} from 'react';
+import React, {useState, useContext, useEffect} from 'react';
 import {AppContext} from '../../../context/AppContext';
 import Head from 'next/dist/next-server/lib/head'
 import {useRouter} from "next/router";
-import parse  from 'html-react-parser';
+import parse from 'html-react-parser';
 //import {initGA, logPageView} from "../../../_variables/_variables";
 
 const SiteSettingSetter = props => {
@@ -23,14 +23,24 @@ const SiteSettingSetter = props => {
             contextData.setSiteWidgets(props.widgets)
         }
 
-        if ((localStorage.lang || router.query.lang) && (localStorage.lang || router.query.lang) !== contextData.state.activeLanguage) {
+    }, [props]);
+
+
+    useEffect(() => {
+        if (localStorage.lang) {
             contextData.dispatchState({
                 ...contextData.state,
-                activeLanguage: localStorage.lang || router.query.lang
+                activeLanguage: localStorage.lang
             })
+            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:localStorage.lang})
+        } else if (!localStorage.lang && router.locale) {
+            contextData.dispatchState({
+                ...contextData.state,
+                activeLanguage: router.locale
+            })
+            localStorage.setItem('lang', router.locale);
         }
-
-    }, [props]);
+    }, []);
 
 
     useEffect(() => {

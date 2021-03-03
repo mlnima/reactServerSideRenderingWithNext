@@ -31,8 +31,10 @@ const getDates = (startDate, stopDate) => {
 };
 
 siteMapController.siteMap = (req, res) => {
-    const requestPath = siteProtocol + '://' + req.get('host') + '/'
-    // const requestPath = 'https' + '://' + req.get('host') + '/'
+   // const requestPath = siteProtocol + '://' + req.get('host') + '/'
+    const requestPath = (process.env.REACT_APP_SSL ? 'https': siteProtocol) + '://' + req.get('host') + '/'
+
+
     const oldestPost = postSchema.find({}).limit(1).sort({_id:1}).exec();
     const lastPost = postSchema.find({}).limit(1).sort({_id:-1}).exec();
 
