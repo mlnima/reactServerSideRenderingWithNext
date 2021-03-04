@@ -44,8 +44,15 @@ const SiteSettingSetter = props => {
 
 
     useEffect(() => {
-        document.documentElement.lang = contextData.state.activeLanguage === 'default' ? contextData.siteIdentity.defaultSiteLanguage ? contextData.siteIdentity.defaultSiteLanguage : 'en' : contextData.state.activeLanguage
-    }, [contextData.state.activeLanguage, contextData.siteIdentity.defaultSiteLanguage]);
+        contextData.state.activeLanguage === 'default' ?
+            document.documentElement.lang = process.env.REACT_APP_DEFAULT_LOCAL : null
+
+
+
+
+        // document.documentElement.lang = contextData.state.activeLanguage === 'default' ? process.env.REACT_APP_DEFAULT_LOCAL : contextData.state.activeLanguage;
+        console.log(contextData.state.activeLanguage)
+    }, [contextData.state.activeLanguage]);
 
 
     const renderCustomScripts = (props.identity?.data.customScripts ?? []).map(script => {

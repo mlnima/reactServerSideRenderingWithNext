@@ -25,6 +25,7 @@ import {widgetModels} from '../../../components/adminIncludes/widgetsModel/AddWi
 import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
 import NoSSR from 'react-no-ssr';
 import './post.scss'
+import {languagesOptions} from "../../../_variables/_variables";
 
 const Index = props => {
     const contextData = useContext(AppContext);
@@ -150,11 +151,7 @@ const Index = props => {
             [type]: state[type].filter(i => i.name != name)
         })
     }
-    const languagesOptions = siteIdentity.translationLanguages.map(lang => {
-        return (
-            <option key={lang} value={lang}>{lang}</option>
-        )
-    })
+
 
     const onActiveEditingLanguageChangeHandler = e => {
         setEditingData({
@@ -244,13 +241,12 @@ const Index = props => {
                     <div className="content">
 
                         <p>Translation(you need to activate the language in general settings)</p>
+
                         <select ref={languageElement} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
-                            <option value='default'>Default</option>
-                            {(siteIdentity?.translationLanguages || []).map(lang => {
-                                return (
-                                    <option key={lang} value={lang}>{lang}</option>
-                                )
-                            })}
+
+                            <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'Default'}</option>
+                            {languagesOptions}
+
                         </select>
 
                         <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}

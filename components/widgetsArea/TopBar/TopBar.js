@@ -26,4 +26,4 @@ const TopBar = () => {
 
 };
 
-export default withRouter(TopBar);
+//export default withRouter(TopBar);

@@ -12,6 +12,6 @@ const Header = () => {
         </StyledDiv>
     );
 };
-export default Header;
+//export default Header;
 
 

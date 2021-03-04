@@ -20,8 +20,8 @@ const MetaElement = props => {
                 <a className='meta-page-item'>
                     <RenderImageForMetaElements {...props}/>
                     <div className='meta-item-data'>
-                        <p>{ props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].name || props.name : props.name : props.name}</p>
-                        <p>{props.count} item</p>
+                        <p>{ props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].name || props.name : props.name : props.name} ({props.count})</p>
+
                     </div>
                 </a>
             </Link>

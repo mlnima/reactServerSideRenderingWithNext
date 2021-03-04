@@ -22,6 +22,7 @@ import '../components/includes/ProgressBar/ProgressBar.scss';
 import '../components/includes/Widget/Widget.scss';
 import '../components/includes/widgets/widgetsMainStyle.scss';
 import '../components/widgetsArea/WidgetArea/WidgetArea.scss';
+import '../components/includes/CardElement/CardElement.scss'
 
 //importing pages Styles
 import './post/Post.scss'

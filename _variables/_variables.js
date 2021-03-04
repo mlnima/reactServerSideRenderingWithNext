@@ -1,4 +1,5 @@
 import ReactGA from 'react-ga'
+import React from "react";
 
 export const likeValueCalculator = (likes, dislikes) => {
     return (likes > 0 && dislikes > 0) ? (Math.round((likes * 100) / (likes + dislikes)))
@@ -203,7 +204,11 @@ export const jsonExporter = (data,fileName)=>{
     }
 }
 
-
+export const languagesOptions = (process.env.REACT_APP_LOCALS.split(' ').filter(lang=>lang!== process.env.REACT_APP_DEFAULT_LOCAL) || []).map(lang => {
+    return (
+        <option key={lang} value={lang}>{lang}</option>
+    )
+})
 
 
 

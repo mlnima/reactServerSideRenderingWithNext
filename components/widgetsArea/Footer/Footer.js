@@ -9,4 +9,4 @@ const Footer = props => {
         </div>
     );
 };
-export default Footer;
+//export default Footer;

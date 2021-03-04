@@ -1,19 +1,19 @@
-import React, {useContext,useEffect} from 'react';
-import dynamic from 'next/dynamic'
+import React, {useContext, useEffect} from 'react';
+import dynamic from 'next/dynamic';
 import {AppContext} from "../context/AppContext";
-const AppLayout = dynamic(() => import('../components/layouts/AppLayout'))
-const WidgetArea = dynamic(() => import('../components/widgetsArea/WidgetArea/WidgetArea'))
+const AppLayout = dynamic(() => import('../components/layouts/AppLayout'));
+const WidgetArea = dynamic(() => import('../components/widgetsArea/WidgetArea/WidgetArea'));
 import {getMultipleSetting, getMultipleWidgetWithData} from "../_variables/ajaxVariables";
 import {getAbsolutePath} from '../_variables/_variables';
+import CardElement from "../components/includes/CardElement/CardElement";
 
 
 const Home = props => {
     const contextData = useContext(AppContext);
-
-
     return (
-        <AppLayout {...props} sidebar={props.identity?.data?.homePageSidebar} sidebarPosition='homePageSidebar'>
+        <>
 
+        <AppLayout {...props} sidebar={props.identity?.data?.homePageSidebar} sidebarPosition='homePageSidebar'>
             <WidgetArea isMobile={props.isMobile}
                         key='home'
                         rendering={true}
@@ -24,6 +24,7 @@ const Home = props => {
                         currentPageSidebar={props.identity?.data?.homePageSidebar}
             />
         </AppLayout>
+            </>
     );
 };
 

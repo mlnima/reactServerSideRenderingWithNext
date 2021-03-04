@@ -5,6 +5,7 @@ import {addNewWidget, deleteWidgets, getMultipleWidgetWithData, getPagesData, up
 import {convertVariableNameToName} from "../../../../_variables/_variables";
 // import 'array.prototype.move';
 import {DelayInput} from 'react-delay-input'
+import {languagesOptions} from "../../../../_variables/_variables";
 
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
@@ -135,11 +136,11 @@ const WidgetModel = props => {
             [e.target.name]: e.target.value
         })
     };
-    const languagesOptions = props.translationLanguages.map(lang => {
-        return (
-            <option key={lang} value={lang}>{lang}</option>
-        )
-    });
+    // const languagesOptions = (process.env.REACT_APP_LOCALS.split(' ').filter(lang=>lang!== process.env.REACT_APP_DEFAULT_LOCAL)||[]).map(lang => {
+    //     return (
+    //         <option key={lang} value={lang}>{lang}</option>
+    //     )
+    // });
     const onOpenHandler = () => {
         widgetSettings.open ? setWidgetSettings({
             ...widgetSettings,
@@ -444,7 +445,7 @@ const WidgetModel = props => {
                     />
                     <p>Translations:</p>
                     <select ref={languageElement} name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
-                        <option value='default'>Default</option>
+                        <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? ''}</option>
                         {languagesOptions}
                     </select>
                     <p>Device Type To Render:</p>

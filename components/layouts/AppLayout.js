@@ -9,6 +9,7 @@ import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 import CheckoutPop from "../includes/checkOutPageComponents/CheckoutPop/CheckoutPop";
+import CardElement from "../includes/CardElement/CardElement";
 
 
 const AppLayout = props => {
@@ -22,6 +23,7 @@ const AppLayout = props => {
     
     return (
         <div className={'App ' + (props.sidebar ? 'withSidebar' : 'withOutSidebar')}>
+
             <GlobalStyle globalStyleData={props.design?.data?.customStyles ?? ''}/>
             <SiteSettingSetter {...props}/>
             <WidgetArea
