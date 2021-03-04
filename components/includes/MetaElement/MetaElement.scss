@@ -4,16 +4,16 @@
 
 .meta-page-item {
   background-color: $dark90;
-  //margin: 10px auto;
-  width: 100vw;
+  width: 90vw;
   height: auto;
+  margin: auto;
   .meta-page-item-image-parent {
-    width: 100vw;
+    width: 100%;
     height: auto;
 
     .meta-page-item-image {
       //position: relative;
-      width: 100vw;
+      width: 100%;
       height: auto;
       border: $dark90 1px solid  ;
       //display: block;
@@ -22,7 +22,7 @@
   }
 
   .meta-item-data {
-    width: 100vw;
+    width: 100%;
     height: auto;
     //margin: auto;
     color: $light100;
