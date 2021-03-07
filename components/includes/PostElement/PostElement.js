@@ -73,7 +73,23 @@ const PostElement = props => {
 
                 if (props.state?.mainThumbnail){
                     let renderNormalImageElement = props.state?.mainThumbnail.includes('http')
-                    if (renderNormalImageElement ) {
+                    const imageURL= new URL(props.state?.mainThumbnail)
+                    if (process.env.REACT_APP_ALLOWED_IMAGES_SOURCES.split(' ').includes(imageURL.hostname) ) {
+
+                        return (
+                            <Image src={props.state?.mainThumbnail} alt={props.state.title}
+                                   onError={() =>renderNormalImageElement=true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}
+                                   className='post-element-internal-image'
+                                   layout='intrinsic'
+                                   width={imageWidth}
+                                   height={imageWidth / 1.777}
+                                   quality={80}
+                                   loading='lazy'
+                                // lazy='true'
+                            />
+                        )
+
+                    } else {
                         return (
                             <img src={props.state.mainThumbnail}
                                  onError={e=>e.currentTarget.src ='/static/images/noImage/no-image-available.png'}
@@ -82,22 +98,9 @@ const PostElement = props => {
                                  onTouchStart={isHoverHandler}
                                  className='post-element-external-image'
                                  style={{
-                                width:imageWidth,
-                                height: imageWidth / 1.777
-                            }}/>
-                        )
-                    } else {
-                        return (
-                            <Image src={props.state?.mainThumbnail} alt={props.state.title}
-                                   onError={() =>renderNormalImageElement=true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}
-                                   className='post-element-internal-image'
-                                   layout='intrinsic'
-                                   width={imageWidth}
-                                   height={imageWidth / 1.777}
-                                   quality={50}
-                                   loading='eager'
-                                   // lazy='true'
-                            />
+                                     width:imageWidth,
+                                     height: imageWidth / 1.777
+                                 }}/>
                         )
                     }
                 }else  if (!props.state?.mainThumbnail) {

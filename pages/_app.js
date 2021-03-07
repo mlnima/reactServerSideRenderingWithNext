@@ -27,6 +27,8 @@ import '../components/includes/CardElement/CardElement.scss'
 //importing pages Styles
 import './post/Post.scss'
 import './meta/meta.scss'
+//importing widgets style
+
 
 //importing Layout Styles
 import '../components/layouts/AppLayout.scss'

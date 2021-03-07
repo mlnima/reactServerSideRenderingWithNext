@@ -9,19 +9,20 @@ const CardElementImage = props => {
     });
     const imageURL= new URL(props.image)
 
-    if (process.env.REACT_APP_ALLOWED_IMAGES_SOURCES.split(' ').includes(imageURL.hostname)){
+    // if (process.env.REACT_APP_ALLOWED_IMAGES_SOURCES.split(' ').includes(imageURL.hostname)){
+    //     return (
+    //         <Image
+    //             src={props.image}
+    //             alt="Picture of the author"
+    //             layout="responsive"
+    //             className='card-element-image'
+    //             width={320}
+    //             height={180}
+    //             quality={100}
+    //         />
+    //     );
+    // }else
         return (
-            <Image
-                src={props.image}
-                alt="Picture of the author"
-                layout="responsive"
-                className='card-element-image'
-                width={320}
-                height={180}
-                quality={100}
-            />
-        );
-    }else return (
         <img src={props.image} className='card-element-image' alt=""/>
     )
 
