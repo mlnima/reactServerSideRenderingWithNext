@@ -28,6 +28,8 @@ const apicache = require('apicache')
 const LRUCache = require('lru-cache');
 const compression = require('compression')
 const cacheSuccesses = require('./server/middlewares/apiCache')
+require('dotenv').config()
+
 // const pageCache = require('./server/tools/pageCache')
 mongoose.Promise = global.Promise;
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
