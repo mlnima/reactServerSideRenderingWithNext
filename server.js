@@ -43,9 +43,6 @@ mongoose.connect(mongoDBConnectionUrl, {
     .catch(err => console.log('DB not connected', err));
 //------------------------------------------------------------Page Cache --------------------------
 
-console.log('env variables: ', process.env)
-
-
 let ssrCache = new LRUCache({
     max: 4000 * 1024 * 1024, /* cache size will be 100 MB using `return n.length` as length() function */
     length: function (n, key) {
