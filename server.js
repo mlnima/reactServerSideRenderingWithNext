@@ -42,8 +42,7 @@ mongoose.connect(mongoDBConnectionUrl, {
     .catch(err => console.log('DB not connected', err));
 //------------------------------------------------------------Page Cache --------------------------
 
-console.log('database is local: ', process.env.DB_LOCAL)
-console.log('database port: ',process.env.DB_PORT)
+console.log('env variables: ',process.env)
 
 
 
