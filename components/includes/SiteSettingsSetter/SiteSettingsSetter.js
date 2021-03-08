@@ -33,7 +33,7 @@ const SiteSettingSetter = props => {
                 activeLanguage: localStorage.lang
             })
             router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:localStorage.lang})
-        } else if (!localStorage.lang && router.locale) {
+        } else if (!localStorage.lang && (router.locale && router.locale !==process.env.REACT_APP_DEFAULT_LOCAL)) {
             contextData.dispatchState({
                 ...contextData.state,
                 activeLanguage: router.locale
@@ -46,12 +46,6 @@ const SiteSettingSetter = props => {
     useEffect(() => {
         contextData.state.activeLanguage === 'default' ?
             document.documentElement.lang = process.env.REACT_APP_DEFAULT_LOCAL : null
-
-
-
-
-        // document.documentElement.lang = contextData.state.activeLanguage === 'default' ? process.env.REACT_APP_DEFAULT_LOCAL : contextData.state.activeLanguage;
-        console.log(contextData.state.activeLanguage)
     }, [contextData.state.activeLanguage]);
 
 
@@ -69,12 +63,8 @@ const SiteSettingSetter = props => {
             <meta charSet="utf-8"/>
             <meta name="description" content={props.identity?.data.description ?? ''}/>
             <meta name="keywords" content={props.identity?.data.keywords ?? []}/>
-            {/*<base href="/"/>*/}
             <link rel="icon" href={props.identity?.data.favIcon ?? '/static/images/favIcon/favicon.png'}/>
-            {/*<link rel="stylesheet" type="text/css" href={'/_next/static/css/styles.chunk.css?v=' + Date.now()} />*/}
-            {/*<link href="https://fonts.googleapis.com/css?family=Patrick+Hand&display=swap" rel="stylesheet"/>*/}
             {renderCustomScripts}
-
         </Head>
     )
 };

@@ -30,7 +30,7 @@ siteMapsController.siteMapMonths = (req, res) => {
 
     let parsedDate = new Date(month);
 
-    postSchema.count({ lastModify: { $gte: parsedDate } }).exec().then(count => {
+    postSchema.countDocuments({ lastModify: { $gte: parsedDate } }).exec().then(count => {
 
         let postsElements;
         let subSiteMaps;

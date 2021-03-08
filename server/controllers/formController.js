@@ -37,7 +37,7 @@ formController.getFormsData = async (req, res) => {
     //   let formsData = formsSchema.find({$and:[searchQuery]}).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
     //  let formsCount = await postSchema.count({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).exec()
     let formsData = await formsSchema.find().limit(size).sort(sortQuery).exec();
-    let formsCount = await formsSchema.count({}).exec()
+    let formsCount = await formsSchema.countDocuments({}).exec()
     Promise.all([formsData, formsCount]).then(async foundFormsData => {
         const forms = foundFormsData[0]
         res.json({forms, error: false, totalCount: foundFormsData[1]})

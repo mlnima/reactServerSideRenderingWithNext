@@ -142,7 +142,7 @@ postsControllers.getPostsInfo = async (req, res) => {
     }
 
     let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
-    let postsCount = await postSchema.count({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).exec()
+    let postsCount = await postSchema.countDocuments({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).exec()
     let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random'? {lastModify: -1} :{[req.body.sort]: -1}
 
     let posts = req.body.sort === 'random' ?

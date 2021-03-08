@@ -37,7 +37,8 @@ const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
 
 mongoose.connect(mongoDBConnectionUrl, {
     useNewUrlParser: true,
-    useUnifiedTopology: true
+    useUnifiedTopology: true,
+    useFindAndModify: true
 })
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
@@ -357,7 +358,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             {route: '/profile', target: '/profile'},
             {route: '/:local/profile', target: '/profile'},
             {route: '/errorPage', target: '/errorPage'},
-            {route: '/:local/errorPage', target: '/errorPage'}
+            {route: '/:local/errorPage', target: '/errorPage'},
+            {route: '/:local/errorPage', target: '/errorPage'},
+            {route: '/:local', target: '/'}
         ]
         routesArr.map(routeObj => {
             return server.get(routeObj.route, (req, res) => {
@@ -385,16 +388,16 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     serverGetGenerator()
 
-    server.get('/', (req, res) => {
-        const targetComponent = '/';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        server.use(compression());
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res, targetComponent, queryParams)
-    });
+    // server.get('/', (req, res) => {
+    //     const targetComponent = '/';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     server.use(compression());
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    // });
 
 
     // server.get('/tags/:tag', (req, res) => {
@@ -556,6 +559,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //     app.render(req, res, targetComponent, queryParams)
     //     // return renderAndCache(req, res,targetComponent, queryParams)
     // });
+
+
 
 
     // server.get('/errorPage', (req, res) => {
