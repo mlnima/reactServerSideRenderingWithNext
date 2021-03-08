@@ -1,4 +1,3 @@
-
 const express = require('express');
 const next = require('next');
 const mongoose = require("mongoose");
@@ -44,8 +43,7 @@ mongoose.connect(mongoDBConnectionUrl, {
     .catch(err => console.log('DB not connected', err));
 //------------------------------------------------------------Page Cache --------------------------
 
-console.log('env variables: ',process.env)
-
+console.log('env variables: ', process.env)
 
 
 let ssrCache = new LRUCache({
@@ -331,46 +329,46 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 //-------------------post----------------------
 
-    const serverGetGenerator = ()=>{
-        const routesArr =[
-            {route:'/login',target:'/auth/login'},
-            {route:'/:local/login',target:'/auth/login'},
-            {route:'/register',target:'/auth/register'},
-            {route:'/:local/register',target:'/auth/register'},
+    const serverGetGenerator = () => {
+        const routesArr = [
+            {route: '/login', target: '/auth/login'},
+            {route: '/:local/login', target: '/auth/login'},
+            {route: '/register', target: '/auth/register'},
+            {route: '/:local/register', target: '/auth/register'},
 
-            {route:'/tags/:tag',target:'/posts',contentName:'tag'},
-            {route:'/:local/tags/:tag',target:'/posts',contentName:'tag'},
-            {route:'/categories/:category',target:'/posts',contentName:'category'},
-            {route:'/:local/categories/:category',target:'/posts',contentName:'category'},
-            {route:'/actors/:actor',target:'/posts',contentName:'actor'},
-            {route:'/:local/actors/:actor',target:'/posts',contentName:'actor'},
+            {route: '/tags/:tag', target: '/posts', contentName: 'tag'},
+            {route: '/:local/tags/:tag', target: '/posts', contentName: 'tag'},
+            {route: '/categories/:category', target: '/posts', contentName: 'category'},
+            {route: '/:local/categories/:category', target: '/posts', contentName: 'category'},
+            {route: '/actors/:actor', target: '/posts', contentName: 'actor'},
+            {route: '/:local/actors/:actor', target: '/posts', contentName: 'actor'},
 
-            {route:'/posts',target:'/posts'},
-            {route:'/:local/posts',target:'/posts'},
+            {route: '/posts', target: '/posts'},
+            {route: '/:local/posts', target: '/posts'},
 
-            {route:'/categories',target:'/meta',contentType: 'categories'},
-            {route:'/:local/categories',target:'/meta',contentType: 'categories'},
-            {route:'/tags',target:'/meta',contentType: 'tags'},
-            {route:'/:local/tags',target:'/meta',contentType: 'tags'},
-            {route:'/actors',target:'/meta',contentType: 'actors'},
-            {route:'/:local/actors',target:'/meta',contentType: 'actors'},
+            {route: '/categories', target: '/meta', contentType: 'categories'},
+            {route: '/:local/categories', target: '/meta', contentType: 'categories'},
+            {route: '/tags', target: '/meta', contentType: 'tags'},
+            {route: '/:local/tags', target: '/meta', contentType: 'tags'},
+            {route: '/actors', target: '/meta', contentType: 'actors'},
+            {route: '/:local/actors', target: '/meta', contentType: 'actors'},
 
-            {route:'/post/:title',target:'/post'},
-            {route:'/:local/post/:title',target:'/post'},
-            {route:'/page/:pageName',target:'/page'},
-            {route:'/:local/page/:pageName',target:'/page'},
-            {route:'/profile',target:'/profile'},
-            {route:'/:local/profile',target:'/profile'},
-            {route:'/errorPage',target:'/errorPage'},
-            {route:'/:local/errorPage',target:'/errorPage'}
-            ]
-        routesArr.map(routeObj=>{
-            return  server.get(routeObj.route, (req, res) => {
+            {route: '/post/:title', target: '/post'},
+            {route: '/:local/post/:title', target: '/post'},
+            {route: '/page/:pageName', target: '/page'},
+            {route: '/:local/page/:pageName', target: '/page'},
+            {route: '/profile', target: '/profile'},
+            {route: '/:local/profile', target: '/profile'},
+            {route: '/errorPage', target: '/errorPage'},
+            {route: '/:local/errorPage', target: '/errorPage'}
+        ]
+        routesArr.map(routeObj => {
+            return server.get(routeObj.route, (req, res) => {
                 const targetComponent = routeObj.target;
-                const specialDataForRoute = routeObj.contentName ?{contentName: req.params[routeObj.contentName]}:
-                                            routeObj.contentType ? {contentType: routeObj.contentType}:{};
+                const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
+                    routeObj.contentType ? {contentType: routeObj.contentType} : {};
 
-                const shouldCompress = (req, res)=> {
+                const shouldCompress = (req, res) => {
                     if (req.headers['x-no-compression']) {
                         return false
                     }
@@ -381,7 +379,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
                     ...req.params,
                     ...specialDataForRoute
                 }
-                server.use(compression({ filter: shouldCompress }))
+                server.use(compression({filter: shouldCompress}))
                 app.render(req, res, targetComponent, queryParams)
             });
         })
@@ -400,8 +398,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         app.render(req, res, targetComponent, queryParams)
         // return renderAndCache(req, res, targetComponent, queryParams)
     });
-
-
 
 
     // server.get('/tags/:tag', (req, res) => {
@@ -533,15 +529,15 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     // });
 
 
-    server.get('/admin/assets', (req, res) => {
-        const targetComponent = '/admin/assets';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res,targetComponent, queryParams)
-    });
+    // server.get('/admin/assets', (req, res) => {
+    //     const targetComponent = '/admin/assets';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res,targetComponent, queryParams)
+    // });
 
     server.get('/admin/pages', (req, res) => {
         const targetComponent = '/admin/pages';

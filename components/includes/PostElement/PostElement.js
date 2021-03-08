@@ -69,43 +69,61 @@ const PostElement = props => {
                     />)
 
             } else if (!state.isHover) {
-                const imageUrl = props.state.mainThumbnail ?? '/static/images/noImage/no-image-available.png'
+
+
+                let imageLoadedWithError = false
+                let isAbsolutePath = props.state.mainThumbnail ? props.state.mainThumbnail.includes('http') : false
+                const NextImageElement = ()=>{
+                    return(
+                        <Image src={props.state?.mainThumbnail} alt={props.state.title}
+                               onError={() =>imageLoadedWithError===true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}
+                               className='post-element-internal-image'
+                               layout='intrinsic'
+                               width={imageWidth}
+                               height={imageWidth / 1.777}
+                               quality={80}
+                               loading='lazy'
+                            // lazy='true'
+                        />
+                    )
+                }
+                const NoNextOptimizeImageElement = ()=>{
+                    return(
+                        <img src={props.state.mainThumbnail}
+                             onError={e=>e.currentTarget.src ='/static/images/noImage/no-image-available.png'}
+                             alt={props.state.title}
+                             onMouseEnter={isHoverHandler}
+                             onTouchStart={isHoverHandler}
+                             className='post-element-external-image'
+                             style={{
+                                 width:imageWidth,
+                                 height: imageWidth / 1.777
+                             }}/>
+                    )
+                }
 
                 if (props.state?.mainThumbnail){
-                    let renderNormalImageElement = props.state?.mainThumbnail.includes('http')
-                    const imageURL= new URL(props.state?.mainThumbnail)
-                    if (process.env.REACT_APP_ALLOWED_IMAGES_SOURCES.split(' ').includes(imageURL.hostname) ) {
+                    if (isAbsolutePath){
+                        const imageURL= new URL(props.state?.mainThumbnail)
+                        if (process.env.REACT_APP_ALLOWED_IMAGES_SOURCES.split(' ').includes(imageURL.hostname) && !imageLoadedWithError ) {
+                            return (
+                                <NextImageElement/>
+                            )
 
+                        } else {
+                            return (
+                                <NoNextOptimizeImageElement/>
+                            )
+                        }
+                    }else {
                         return (
-                            <Image src={props.state?.mainThumbnail} alt={props.state.title}
-                                   onError={() =>renderNormalImageElement=true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}
-                                   className='post-element-internal-image'
-                                   layout='intrinsic'
-                                   width={imageWidth}
-                                   height={imageWidth / 1.777}
-                                   quality={80}
-                                   loading='lazy'
-                                // lazy='true'
-                            />
-                        )
-
-                    } else {
-                        return (
-                            <img src={props.state.mainThumbnail}
-                                 onError={e=>e.currentTarget.src ='/static/images/noImage/no-image-available.png'}
-                                 alt={props.state.title}
-                                 onMouseEnter={isHoverHandler}
-                                 onTouchStart={isHoverHandler}
-                                 className='post-element-external-image'
-                                 style={{
-                                     width:imageWidth,
-                                     height: imageWidth / 1.777
-                                 }}/>
+                            <NextImageElement/>
                         )
                     }
+
                 }else  if (!props.state?.mainThumbnail) {
                     return (
-                    <img src={imageUrl}
+                    <img src='/static/images/noImage/no-image-available.png'
                          alt={props.state.title}
                          onMouseEnter={isHoverHandler}
                          onTouchStart={isHoverHandler}

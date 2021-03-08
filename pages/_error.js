@@ -1,10 +1,12 @@
 import React from 'react';
 import AppLayout from '../components/layouts/AppLayout'
-import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
+//import SiteSettingSetter from '../components/includes/SiteSettingsSetter/SiteSettingsSetter'
 //import Footer from '../components/widgetsArea/Footer/Footer'
 
 
 const Error = props => {
+
+    console.log(props)
 
     return (
         <AppLayout {...props}>
@@ -22,9 +24,9 @@ const Error = props => {
 }
 
 
-// export const getServerSideProps = async ({req,res}) => {
-//     const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-//     return { props:{statusCode} }
-// }
+export const getServerSideProps = async ({res,err}) => {
+    const statusCode = res ? res.statusCode : err ? err.statusCode : 404
+    return { props:{statusCode} }
+}
 
 export default Error
