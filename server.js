@@ -30,7 +30,7 @@ const compression = require('compression')
 const cacheSuccesses = require('./server/middlewares/apiCache')
 // const pageCache = require('./server/tools/pageCache')
 mongoose.Promise = global.Promise;
-const mongoDBConnectionUrl = process.env.DB_LOCAL ?
+const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
 
@@ -41,6 +41,12 @@ mongoose.connect(mongoDBConnectionUrl, {
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
 //------------------------------------------------------------Page Cache --------------------------
+
+console.log('database is local: ', process.env.DB_LOCAL)
+console.log('database port: ',process.env.DB_PORT)
+
+
+
 let ssrCache = new LRUCache({
     max: 4000 * 1024 * 1024, /* cache size will be 100 MB using `return n.length` as length() function */
     length: function (n, key) {
