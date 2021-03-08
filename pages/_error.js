@@ -22,9 +22,9 @@ const Error = props => {
 }
 
 
-export const getServerSideProps = async ({req,res}) => {
-    const statusCode = res ? res.statusCode : err ? err.statusCode : 404
-    return { props:{statusCode} }
-}
+// export const getServerSideProps = async ({req,res}) => {
+//     const statusCode = res ? res.statusCode : err ? err.statusCode : 404
+//     return { props:{statusCode} }
+// }
 
 export default Error
