@@ -1,21 +1,8 @@
 let siteMapsController = {}
 const postSchema = require('../models/postSchema');
-const settingSchema = require('../models/settings/settingSchema');
-let siteProtocol ='http'
-
-
-settingSchema.findOne({type:'identity'}).exec().then(setting=>{
-
-    siteProtocol = setting? setting.data ? setting.data.siteProtocol || 'http':'http':'http'
-}).catch(err=>{
-    console.log( err)
-    siteProtocol = 'http'
-})
-
 
 siteMapsController.siteMapMonths = (req, res) => {
-    //const requestPath = siteProtocol + '://' + req.get('host') + '/'
-    const requestPath = (process.env.REACT_APP_SSL ? 'https': siteProtocol) + '://' + req.get('host') + '/'
+
     let month = req.params.month;
     let pageNo = req.params.pageNo;
     const size = 500;
@@ -39,7 +26,7 @@ siteMapsController.siteMapMonths = (req, res) => {
         if (count <= size) {
             postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
                 renderPostData = posts.map(post => {
-                    let postUrl =requestPath + 'post/'+ encodeURIComponent(post.title)+'?id=' + post._id
+                    let postUrl =process.env.PRODUCTION_URL + '/post/'+ encodeURIComponent(post.title)+'?id=' + post._id
                     postsElements +=
                         '<url>\n' +
                         `<loc>${ postUrl }</loc>\n` +
@@ -69,7 +56,7 @@ siteMapsController.siteMapMonths = (req, res) => {
                 page += 1;
                 subSiteMaps +=
                     '<sitemap>\n' +
-                    `<loc>${requestPath }sitemap/${ month }/${ page }.xml</loc>\n` +
+                    `<loc>${process.env.PRODUCTION_URL }/sitemap/${ month }/${ page }.xml</loc>\n` +
                     `<lastmod>2019-12-21T08:00:46+00:00</lastmod>\n` +
                     ' </sitemap>\n'
             }

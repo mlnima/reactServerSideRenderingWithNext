@@ -1,20 +1,6 @@
 let siteMapController = {};
-// const mongoose = require("mongoose");
 const postSchema = require('../models/postSchema');
-const settingSchema = require('../models/settings/settingSchema');
 const moment = require('moment');
-// const xml = require('xml');
-// const DOMParser = require('xmldom').DOMParser;
-let siteProtocol ='http'
-
- settingSchema.findOne({type:'identity'}).exec().then(setting=>{
-     siteProtocol = setting? setting.data ? setting.data.siteProtocol || 'http':'http':'http'
- }).catch(err=>{
-     console.log( err)
-     siteProtocol = 'http'
- })
-
-
 
 const getDates = (startDate, stopDate) => {
     let dateArray = [];
@@ -31,18 +17,14 @@ const getDates = (startDate, stopDate) => {
 };
 
 siteMapController.siteMap = (req, res) => {
-   // const requestPath = siteProtocol + '://' + req.get('host') + '/'
-    const requestPath = (process.env.REACT_APP_SSL ? 'https': siteProtocol) + '://' + req.get('host') + '/'
 
-
-    const oldestPost = postSchema.find({}).limit(1).sort({_id:1}).exec();
-    const lastPost = postSchema.find({}).limit(1).sort({_id:-1}).exec();
+    const oldestPost = postSchema.find({status: 'published'}).limit(1).sort({_id:1}).exec();
+    const lastPost = postSchema.find({status: 'published'}).limit(1).sort({_id:-1}).exec();
 
     const toDay = new Date();
     Promise.all([ oldestPost, lastPost ]).then(firstAndLastPostData => {
-        // console.log(firstAndLastPostData )
+
         let data = {
-            // oldestPostDate: firstAndLastPostData[0][0].lastModify,
             firstMonthAndYear: firstAndLastPostData[0][0].lastModify? firstAndLastPostData[0][0].lastModify.getFullYear() + "/" + (firstAndLastPostData[0][0].lastModify.getMonth() +1 ):'',
             lastMonthAndYear: firstAndLastPostData[1][0].lastModify ? firstAndLastPostData[1][0].lastModify.getFullYear() + "/" + (firstAndLastPostData[1][0].lastModify.getMonth() +1 ):'',
             currentMonthAndYear: toDay.getFullYear() + "/" + (toDay.getMonth() + 1),
@@ -63,7 +45,7 @@ siteMapController.siteMap = (req, res) => {
 
             monthsSiteMap +=
                 '<sitemap>\n' +
-                `<loc>${ requestPath }sitemaps/${ fixedMonth }.xml</loc>\n` +
+                `<loc>${ process.env.PRODUCTION_URL }/sitemaps/${ fixedMonth }.xml</loc>\n` +
                 `<lastmod>${ toDay.toISOString()  }</lastmod>\n` +
                 ' </sitemap>\n'
         });

@@ -1,19 +1,8 @@
 let subSiteMapsController = {};
 const postSchema = require('../models/postSchema');
-const settingSchema = require('../models/settings/settingSchema');
-let siteProtocol ='http'
-
-settingSchema.findOne({type:'identity'}).exec().then(setting=>{
-    siteProtocol = setting? setting.data ? setting.data.siteProtocol || 'http':'http':'http'
-}).catch(err=>{
-    console.log( err)
-    siteProtocol = 'http'
-})
-
 
 subSiteMapsController.siteMap = (req, res) => {
-   // const requestPath = siteProtocol + '://' + req.get('host') + '/'
-    const requestPath = (process.env.REACT_APP_SSL ? 'https': siteProtocol) + '://' + req.get('host') + '/'
+
     let month = req.params.month;
     let pageNo = req.params.pageNo;
     pageNo = parseInt(pageNo.replace('.xml', ''));
@@ -29,9 +18,7 @@ subSiteMapsController.siteMap = (req, res) => {
 
             if (post) {
                 let lastModify = new Date(post.lastModify);
-                // let postUrl = requestPath  + encodeURIComponent(post.title)
-                // let postUrl = requestPath + 'post/'+post._id+'/' + encodeURIComponent(post.title)
-                let postUrl =requestPath + 'post/'+ encodeURIComponent(post.title)+'?id=' + post._id
+                let postUrl =process.env.PRODUCTION_URL + '/post/'+ encodeURIComponent(post.title)+'?id=' + post._id
                 postsElements += '<url> \n ' +
                     `<loc>${ postUrl }</loc>\n` +
                     `<lastmod>${ lastModify.toISOString() }</lastmod>\n` +
