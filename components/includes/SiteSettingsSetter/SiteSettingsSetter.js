@@ -24,9 +24,6 @@ const SiteSettingSetter = props => {
         // router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: manuallyDetectedLocal === process.env.REACT_APP_DEFAULT_LOCAL ? false : manuallyDetectedLocal})
 
     }, []);
-    useEffect(() => {
-        console.log(contextData.state)
-    }, [contextData.state]);
 
     return (
         <Head>
@@ -38,7 +35,7 @@ const SiteSettingSetter = props => {
             <meta name="description" content={props.identity?.data.description ?? ''}/>
             <meta name="keywords" content={props.identity?.data.keywords ?? []}/>
             <link rel="icon" href={props.identity?.data.favIcon ?? '/static/images/favIcon/favicon.png'}/>
-            {props.identity.data.siteMode === 'eCommerce' ?
+            {props?.identity?.data?.siteMode === 'eCommerce' ?
                 <script src={`https://www.paypal.com/sdk/js?client-id=${props?.eCommerce?.data?.payPalId}&currency=${props?.eCommerce?.data?.currency}`}/>
                 : null
             }
