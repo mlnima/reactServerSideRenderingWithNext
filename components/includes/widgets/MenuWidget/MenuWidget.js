@@ -26,7 +26,9 @@ const MenuWidget = props => {
     const renderMenuItems = (props.menuItems || []).map(menuItem => {
 
         if (menuItem.type === 'internal') {
-            const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as : `/${router.locale || router.query.locale}${menuItem.as}`
+            const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as :
+                 (!router.locale && !router.query.locale)?menuItem.as :
+                `/${router.locale || router.query.locale}${menuItem.as}`
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
                     <Link href={menuItem.target}

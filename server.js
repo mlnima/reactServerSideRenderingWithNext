@@ -426,8 +426,16 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         {route: '/admin/tools', target: '/admin/tools'},
         {route: '/admin/users', target: '/admin/users'},
         {route: '/admin/user', target: '/admin/user'},
-        {route: '/', target: '/'},
+
     ]
+
+    const shouldCompress = (req, res) => {
+        if (req.headers['x-no-compression']) {
+            return false
+        }
+        return compression.filter(req, res)
+    }
+
     const serverRouteGenerator = () => {
         routesArr.map(routeObj => {
             return server.get(routeObj.route, (req, res) => {
@@ -458,12 +466,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
                 const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
                     routeObj.contentType ? {contentType: routeObj.contentType} : {};
 
-                const shouldCompress = (req, res) => {
-                    if (req.headers['x-no-compression']) {
-                        return false
-                    }
-                    return compression.filter(req, res)
-                }
+
                 const queryParams = {
                     ...req.query,
                     ...req.params,
@@ -480,15 +483,26 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
 
-    // server.get('/:locale', (req, res) => {
-    //     const targetComponent = '/';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res,targetComponent, queryParams)
-    // });
+    server.get('/', (req, res) => {
+        const targetComponent = '/';
+        const queryParams = {
+            ...req.query,
+            ...req.params,
+        }
+        server.use(compression({filter: shouldCompress}))
+        app.render(req, res, targetComponent, queryParams)
+    });
+    server.get('/:locale', (req, res) => {
+        const targetComponent = '/';
+        const queryParams = {
+            ...req.query,
+            ...req.params,
+        }
+        server.use(compression({filter: shouldCompress}))
+        app.render(req, res, targetComponent, queryParams)
+    });
+
+
     //
     // server.get('/', (req, res) => {
     //     const targetComponent = '/';
