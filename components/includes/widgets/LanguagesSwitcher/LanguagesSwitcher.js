@@ -2,7 +2,7 @@ import React, {useContext} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
 import {languagesOptions} from "../../../../_variables/_variables";
-
+import Cookies from "js-cookie";
 
 const LanguagesSwitcher = props => {
     const contextData = useContext(AppContext);
@@ -13,7 +13,9 @@ const LanguagesSwitcher = props => {
             ...contextData.state,
             activeLanguage: e.target.value
         })
-       router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: e.target.value === 'default' ? false : e.target.value})
+        Cookies.set("NEXT_LOCALE", e.target.value === 'default' ? process.env.REACT_APP_DEFAULT_LOCAL : e.target.value );
+      //  router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: e.target.value === 'default' ? false : e.target.value})
+        router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: e.target.value === 'default' ? process.env.REACT_APP_DEFAULT_LOCAL : e.target.value})
     }
 
     return (

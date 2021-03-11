@@ -12,7 +12,6 @@ import styled from "styled-components";
 import {useRouter} from "next/router";
 
 
-
 let StyledDiv = styled.div`${props => props.stylesData}`
 
 // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
@@ -238,10 +237,10 @@ const PostElement = props => {
         }
     }
 
-    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ?false: router.locale || router.query.locale || false
-    const title =    props.state?.translations?.[locale]?.title || props.state.title
-    const linkAsForPostElement = locale ? `/${locale}/post/${encodeURI(title)}?id=${props.state._id}` : `/post/${encodeURI(title)}?id=${props.state._id}`
 
+    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
+    const title = props.state?.translations?.[locale]?.title || props.state.title
+    const linkAsForPostElement =    process.env.REACT_APP_LOCALS.split(' ').includes(locale) ? `/${locale}/post/${title}?id=${props.state._id}` : `/post/${title}?id=${props.state._id}`
 
     return (
         < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
@@ -254,7 +253,7 @@ const PostElement = props => {
                         ...state.queries
                     }
                 }}
-                locale={router.locale || router.query.locale || false}
+                local={router.locale || router.query.locale || false}
             >
                 <a>
                     <div className='post-element' key={props.state.title}>

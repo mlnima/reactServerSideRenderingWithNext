@@ -54,6 +54,22 @@ const i18nConfig = {
         locales:process.env.REACT_APP_LOCALS.split(' '),
         defaultLocale:process.env.REACT_APP_DEFAULT_LOCAL,
         localeDetection: false,
+    },
+    rewrites() {
+        return [
+            {
+                source: '/post/:title',
+                destination: '/post',
+            },
+            {
+                source: '/admin',
+                destination: '/admin',
+            },
+            {
+                source: '/search/:category',
+                destination: '/search',
+            },
+        ].filter((x) => x)
     }
 }
 

@@ -33,7 +33,7 @@ const MenuWidget = props => {
                 <li className='menu-widget-item' key={menuItem.name}>
                     <Link href={menuItem.target}
                           as={linkAsForMenuItems}
-                          locale={router.locale || router.query.locale || false}
+                         // locale={router.locale || router.query.locale || false}
                     >
                         <a  onClick={mobileNavigationOnClickHandler} >
                             {menuItem.name}

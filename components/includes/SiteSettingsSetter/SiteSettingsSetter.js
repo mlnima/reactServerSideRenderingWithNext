@@ -1,7 +1,7 @@
 import React, {useContext, useEffect} from 'react';
 import {AppContext} from '../../../context/AppContext';
 import Head from 'next/dist/next-server/lib/head'
-import {useRouter} from "next/router";
+import nextRouter,{useRouter} from "next/router";
 import parse from 'html-react-parser';
 
 const SiteSettingSetter = props => {
@@ -12,6 +12,18 @@ const SiteSettingSetter = props => {
         contextData.dispatchSiteDesign(props.design?.data ?? contextData.siteDesign)
         contextData.dispatchSiteIdentity(props.identity?.data ?? contextData.siteIdentity)
         contextData.setSiteWidgets(props.widgets)
+        const manuallyDetectedLocal = router.locale ? router.locale :
+                                      router.query.locale ?router.query.locale :process.env.REACT_APP_DEFAULT_LOCAL
+
+        router.locale = manuallyDetectedLocal
+        router.defaultLocale = process.env.REACT_APP_DEFAULT_LOCAL
+
+        contextData.dispatchState({
+            ...contextData.state,
+            activeLanguage: manuallyDetectedLocal
+        })
+       // router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: manuallyDetectedLocal === process.env.REACT_APP_DEFAULT_LOCAL ? false : manuallyDetectedLocal})
+
     }, []);
 
     return (

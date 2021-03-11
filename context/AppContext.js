@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import axios from "axios";
 import {useRouter} from "next/router";
-
+import withRouter from "next/dist/client/with-router";
 
 export const AppContext = React.createContext();
 
@@ -23,19 +23,6 @@ const AppProvider = props => {
         functions.getAndSetUserInfo()
         functions.getCheckOutData()
     }, []);
-    // useEffect(() => {
-    //     window.innerWidth >= 768?
-    //         dispatchState({
-    //             ...state,
-    //             isMobile: false,
-    //             navigationOpenStatus:true
-    //         }):
-    //         dispatchState({
-    //             ...state,
-    //             isMobile: true,
-    //             navigationOpenStatus:false
-    //         })
-    // }, [props]);
 
     const [alert, dispatchAlert] = useState({
         active: false,
@@ -66,13 +53,7 @@ const AppProvider = props => {
         textEditorEditMode: false
     });
 
-    // const [galleryData, setGalleryData] = useState({
-    //     path: './static'
-    // })
-
     const [userData, dispatchUserData] = useState({});
-
-   // const [navigationData, dispatchNavigationData] = useState([]);
 
     const [editingPostData, dispatchEditingPostData] = useState({
         categories: [],
@@ -105,6 +86,7 @@ const AppProvider = props => {
         fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
         checkedPosts: [],
     });
+
     const [widgetsSettings, dispatchWidgetsSettings] = useState({
         widgets: [],
     });
@@ -289,5 +271,5 @@ const AppProvider = props => {
 };
 
 // export const AppProviderWithRouter = withRouter(AppProvider);
- export default AppProvider;
+ export default withRouter(AppProvider) ;
 

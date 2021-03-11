@@ -27,6 +27,7 @@ const apicache = require('apicache')
 const LRUCache = require('lru-cache');
 const compression = require('compression')
 const cacheSuccesses = require('./server/middlewares/apiCache')
+const cors = require('cors')
 require('dotenv').config()
 
 // const pageCache = require('./server/tools/pageCache')
@@ -102,6 +103,7 @@ app.prepare().then(() => {
     server.use(fileUpload());
     server.use(bodyParser.json());
     server.use(xmlparser());
+    server.use(cors())
 
     //-------------------
     server.use('/static', express.static(path.join(__dirname, 'static')))
@@ -461,11 +463,12 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     }
     const serverRouteWithLocaleGenerator = () => {
         routesArr.map(routeObj => {
-            return server.get( '/:locale'+routeObj.route, (req, res) => {
+            const routeIncludesLocal = '/:locale'+routeObj.route
+            console.log(routeIncludesLocal)
+            return server.get( routeIncludesLocal, (req, res) => {
                 const targetComponent = routeObj.target;
                 const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
                     routeObj.contentType ? {contentType: routeObj.contentType} : {};
-
 
                 const queryParams = {
                     ...req.query,
@@ -483,65 +486,36 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
 
-    server.get('/', (req, res) => {
-        const targetComponent = '/';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        server.use(compression({filter: shouldCompress}))
-        app.render(req, res, targetComponent, queryParams)
-    });
-    server.get('/:locale', (req, res) => {
-        const targetComponent = '/';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        server.use(compression({filter: shouldCompress}))
-        app.render(req, res, targetComponent, queryParams)
-    });
-
-
-    //
     // server.get('/', (req, res) => {
     //     const targetComponent = '/';
     //     const queryParams = {
     //         ...req.query,
     //         ...req.params,
     //     }
+    //     server.use(compression({filter: shouldCompress}))
     //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res,targetComponent, queryParams)
     // });
-
-    // server.get('/admin/pages', (req, res) => {
-    //     const targetComponent = '/admin/pages';
+    // server.get('/post/:title', (req, res) => {
+    //     const targetComponent = '/post';
     //     const queryParams = {
     //         ...req.query,
     //         ...req.params,
     //     }
+    //     server.use(compression({filter: shouldCompress}))
     //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res,targetComponent, queryParams)
     // });
 
-
-    // server.get('/admin/page', (req, res) => {
-    //     const targetComponent = '/admin/page';
+    // server.get('/:locale', (req, res) => {
+    //     const targetComponent = '/';
     //     const queryParams = {
     //         ...req.query,
     //         ...req.params,
     //     }
+    //     server.use(compression({filter: shouldCompress}))
     //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res,targetComponent, queryParams)
     // });
 
 
-
-
-    // server.get('/errorPage', (req, res) => {
-    //     const targetComponent = '/errorPage';
-    //     app.render(req, res, targetComponent)
-    // });
 
     server.get('*', (req, res) => {
         return handle(req, res)

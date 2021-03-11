@@ -67,7 +67,7 @@ const Logo = props => {
         <Link
             href='/'
             as='/'
-            locale={router?.locale || router?.query?.locale || false}
+           // locale={router?.locale || router?.query?.locale || false}
         >
             <a className='logo'>
                 <RenderLogoImage/>
