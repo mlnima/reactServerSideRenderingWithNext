@@ -9,6 +9,8 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import {useRouter} from "next/router";
+
 
 
 let StyledDiv = styled.div`${props => props.stylesData}`
@@ -17,6 +19,7 @@ let StyledDiv = styled.div`${props => props.stylesData}`
 
 const PostElement = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
     let qualityLabel = useRef(null);
     let bottomLeft = useRef(null);
     let bottomRight = useRef(null);
@@ -30,8 +33,8 @@ const PostElement = props => {
         queries: {},
         infoOnPostElementStyle: {},
         titleElementStyle: {},
-        svgDefaultStyle:{
-            maxWidth:'20px',
+        svgDefaultStyle: {
+            maxWidth: '20px',
             maxHeight: '20px'
         }
     });
@@ -63,7 +66,7 @@ const PostElement = props => {
                         onMouseOut={isHoverHandler}
                         onTouchCancel={isHoverHandler}
                         style={{
-                            width:imageWidth,
+                            width: imageWidth,
                             height: imageWidth / 1.777
                         }}
                     />)
@@ -73,10 +76,10 @@ const PostElement = props => {
 
                 let imageLoadedWithError = false
                 let isAbsolutePath = props.state.mainThumbnail ? props.state.mainThumbnail.includes('http') : false
-                const NextImageElement = ()=>{
-                    return(
+                const NextImageElement = () => {
+                    return (
                         <Image src={props.state?.mainThumbnail} alt={props.state.title}
-                               onError={() =>imageLoadedWithError===true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}
+                               onError={() => imageLoadedWithError === true} onMouseEnter={isHoverHandler} onTouchStart={isHoverHandler}
                                className='post-element-internal-image'
                                layout='intrinsic'
                                width={imageWidth}
@@ -87,25 +90,25 @@ const PostElement = props => {
                         />
                     )
                 }
-                const NoNextOptimizeImageElement = ()=>{
-                    return(
+                const NoNextOptimizeImageElement = () => {
+                    return (
                         <img src={props.state.mainThumbnail}
-                             onError={e=>e.currentTarget.src ='/static/images/noImage/no-image-available.png'}
+                             onError={e => e.currentTarget.src = '/static/images/noImage/no-image-available.png'}
                              alt={props.state.title}
                              onMouseEnter={isHoverHandler}
                              onTouchStart={isHoverHandler}
                              className='post-element-external-image'
                              style={{
-                                 width:imageWidth,
+                                 width: imageWidth,
                                  height: imageWidth / 1.777
                              }}/>
                     )
                 }
 
-                if (props.state?.mainThumbnail){
-                    if (isAbsolutePath){
-                        const imageURL= new URL(props.state?.mainThumbnail)
-                        if (process.env.REACT_APP_ALLOWED_IMAGES_SOURCES.split(' ').includes(imageURL.hostname) && !imageLoadedWithError ) {
+                if (props.state?.mainThumbnail) {
+                    if (isAbsolutePath) {
+                        const imageURL = new URL(props.state?.mainThumbnail)
+                        if (process.env.REACT_APP_ALLOWED_IMAGES_SOURCES.split(' ').includes(imageURL.hostname) && !imageLoadedWithError) {
                             return (
                                 <NextImageElement/>
                             )
@@ -115,25 +118,25 @@ const PostElement = props => {
                                 <NoNextOptimizeImageElement/>
                             )
                         }
-                    }else {
+                    } else {
                         return (
                             <NextImageElement/>
                         )
                     }
 
-                }else  if (!props.state?.mainThumbnail) {
+                } else if (!props.state?.mainThumbnail) {
                     return (
-                    <img src='/static/images/noImage/no-image-available.png'
-                         alt={props.state.title}
-                         onMouseEnter={isHoverHandler}
-                         onTouchStart={isHoverHandler}
-                         className='post-element-external-image'
-                         style={{
-                             width:imageWidth,
-                             height: imageWidth / 1.777
-                         }}/>
+                        <img src='/static/images/noImage/no-image-available.png'
+                             alt={props.state.title}
+                             onMouseEnter={isHoverHandler}
+                             onTouchStart={isHoverHandler}
+                             className='post-element-external-image'
+                             style={{
+                                 width: imageWidth,
+                                 height: imageWidth / 1.777
+                             }}/>
                     )
-                }else return null
+                } else return null
 
 
             } else {
@@ -147,7 +150,7 @@ const PostElement = props => {
 
 
     const RenderProgressBar = () => {
-        if (props.state.rating !== 'disable' ) {
+        if (props.state.rating !== 'disable') {
             return (
                 <ProgressBar value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/>
             )
@@ -155,8 +158,8 @@ const PostElement = props => {
     }
 
     const BottomRight = () => {
-        if (props.state && props.state.views >1) {
-            switch (props.state.postType ) {
+        if (props.state && props.state.views > 1) {
+            switch (props.state.postType) {
                 case 'video':
                 case 'product':
                 case 'standard':
@@ -180,14 +183,14 @@ const PostElement = props => {
             switch (props.state.postType) {
                 case 'video':
                 case 'redirect':
-                    if (props.state.duration){
+                    if (props.state.duration) {
                         return (
                             <span ref={bottomLeft} className='bottom-left'>
                              <FontAwesomeIcon style={state.svgDefaultStyle} icon={faClock} className='post-element-info-logo'/>
                              <span className='value-next-icon'>  {props.state.duration}</span>
                         </span>
                         )
-                    }else return null
+                    } else return null
                 case 'product':
                     return (
                         <span ref={bottomRight} className='bottom-left'>
@@ -235,10 +238,15 @@ const PostElement = props => {
         }
     }
 
+    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ?false: router.locale || router.query.locale || false
+    const title =    props.state?.translations?.[locale]?.title || props.state.title
+    const linkAsForPostElement = locale ? `/${locale}/post/${encodeURI(title)}?id=${props.state._id}` : `/post/${encodeURI(title)}?id=${props.state._id}`
+
+
     return (
-        < StyledDiv stylesData={   contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
+        < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
             <Link
-                as={contextData.state.activeLanguage !== 'default' ? `/post/${props.state.translations ? props.state.translations[contextData.state.activeLanguage] ? props.state.translations[contextData.state.activeLanguage].title || props.state.title : props.state.title : props.state.title}?id=${props.state._id}&lang=${contextData.state.activeLanguage}` : `/post/${props.state.title}?id=${props.state._id}`}
+                as={linkAsForPostElement}
                 href={{
                     pathname: `/post`,
                     query: {
@@ -246,15 +254,16 @@ const PostElement = props => {
                         ...state.queries
                     }
                 }}
+                locale={router.locale || router.query.locale || false}
             >
-                <a >
+                <a>
                     <div className='post-element' key={props.state.title}>
                         <div className="image">
                             <ImageContent/>
                             <RenderDataOnImage/>
                         </div>
                         <RenderProgressBar/>
-                        <h3>{props.state?.translations?.[contextData.state?.activeLanguage]?.title || props.state.title}</h3>
+                        <h3>{title}</h3>
                     </div>
                 </a>
             </Link>

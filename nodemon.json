@@ -4,7 +4,9 @@
   "watch": [
     "server/**/*",
     "./server/*",
-    "./server.js"
+    "./server.js",
+    "./next.config.js",
+    "./.env"
   ],
   "ext": "js json"
 }

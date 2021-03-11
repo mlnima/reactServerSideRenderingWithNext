@@ -327,41 +327,108 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 //-------------------post----------------------
 
-    const serverGetGenerator = () => {
-        const routesArr = [
-            {route: '/login', target: '/auth/login'},
-            {route: '/:local/login', target: '/auth/login'},
-            {route: '/register', target: '/auth/register'},
-            {route: '/:local/register', target: '/auth/register'},
-
-            {route: '/tags/:tag', target: '/posts', contentName: 'tag'},
-            {route: '/:local/tags/:tag', target: '/posts', contentName: 'tag'},
-            {route: '/categories/:category', target: '/posts', contentName: 'category'},
-            {route: '/:local/categories/:category', target: '/posts', contentName: 'category'},
-            {route: '/actors/:actor', target: '/posts', contentName: 'actor'},
-            {route: '/:local/actors/:actor', target: '/posts', contentName: 'actor'},
-
-            {route: '/posts', target: '/posts'},
-            {route: '/:local/posts', target: '/posts'},
-
-            {route: '/categories', target: '/meta', contentType: 'categories'},
-            {route: '/:local/categories', target: '/meta', contentType: 'categories'},
-            {route: '/tags', target: '/meta', contentType: 'tags'},
-            {route: '/:local/tags', target: '/meta', contentType: 'tags'},
-            {route: '/actors', target: '/meta', contentType: 'actors'},
-            {route: '/:local/actors', target: '/meta', contentType: 'actors'},
-
-            {route: '/post/:title', target: '/post'},
-            {route: '/:local/post/:title', target: '/post'},
-            {route: '/page/:pageName', target: '/page'},
-            {route: '/:local/page/:pageName', target: '/page'},
-            {route: '/profile', target: '/profile'},
-            {route: '/:local/profile', target: '/profile'},
-            {route: '/errorPage', target: '/errorPage'},
-            {route: '/:local/errorPage', target: '/errorPage'},
-            {route: '/:local/errorPage', target: '/errorPage'},
-            {route: '/:local', target: '/'}
-        ]
+    // const serverRouteGenerator = () => {
+    //     const routesArr = [
+    //         {route: '/login', target: '/auth/login'},
+    //         {route: '/:locale/login', target: '/auth/login'},
+    //         {route: '/register', target: '/auth/register'},
+    //         {route: '/:locale/register', target: '/auth/register'},
+    //
+    //         {route: '/tags/:tag', target: '/posts', contentName: 'tag'},
+    //         {route: '/:locale/tags/:tag', target: '/posts', contentName: 'tag'},
+    //         {route: '/categories/:category', target: '/posts', contentName: 'category'},
+    //         {route: '/:locale/categories/:category', target: '/posts', contentName: 'category'},
+    //         {route: '/actors/:actor', target: '/posts', contentName: 'actor'},
+    //         {route: '/:locale/actors/:actor', target: '/posts', contentName: 'actor'},
+    //
+    //         {route: '/posts', target: '/posts'},
+    //         {route: '/:locale/posts', target: '/posts'},
+    //
+    //         {route: '/categories', target: '/meta', contentType: 'categories'},
+    //         {route: '/:locale/categories', target: '/meta', contentType: 'categories'},
+    //         {route: '/tags', target: '/meta', contentType: 'tags'},
+    //         {route: '/:locale/tags', target: '/meta', contentType: 'tags'},
+    //         {route: '/actors', target: '/meta', contentType: 'actors'},
+    //         {route: '/:locale/actors', target: '/meta', contentType: 'actors'},
+    //
+    //         {route: '/post/:title', target: '/post'},
+    //         {route: '/:locale/post/:title', target: '/post'},
+    //         {route: '/page/:pageName', target: '/page'},
+    //         {route: '/:locale/page/:pageName', target: '/page'},
+    //         {route: '/profile', target: '/profile'},
+    //         {route: '/:locale/profile', target: '/profile'},
+    //         {route: '/errorPage', target: '/errorPage'},
+    //         {route: '/:locale/errorPage', target: '/errorPage'},
+    //         {route: '/checkout', target: '/checkout'},
+    //         //admin panel routes
+    //         {route: '/admin', target: '/admin'},
+    //         {route: '/:locale', target: '/'}
+    //     ]
+    //     routesArr.map(routeObj => {
+    //         return server.get(routeObj.route, (req, res) => {
+    //             const targetComponent = routeObj.target;
+    //             const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
+    //                 routeObj.contentType ? {contentType: routeObj.contentType} : {};
+    //
+    //             const shouldCompress = (req, res) => {
+    //                 if (req.headers['x-no-compression']) {
+    //                     return false
+    //                 }
+    //                 return compression.filter(req, res)
+    //             }
+    //             const queryParams = {
+    //                 ...req.query,
+    //                 ...req.params,
+    //                 ...specialDataForRoute
+    //             }
+    //             server.use(compression({filter: shouldCompress}))
+    //             app.render(req, res, targetComponent, queryParams)
+    //         });
+    //     })
+    //
+    // }
+    //
+    // serverRouteGenerator()
+    const routesArr = [
+        {route: '/login', target: '/auth/login'},
+        {route: '/register', target: '/auth/register'},
+        {route: '/tags/:tag', target: '/posts', contentName: 'tag'},
+        {route: '/categories/:category', target: '/posts', contentName: 'category'},
+        {route: '/actors/:actor', target: '/posts', contentName: 'actor'},
+        {route: '/posts', target: '/posts'},
+        {route: '/categories', target: '/meta', contentType: 'categories'},
+        {route: '/tags', target: '/meta', contentType: 'tags'},
+        {route: '/actors', target: '/meta', contentType: 'actors'},
+        {route: '/post/:title', target: '/post'},
+        {route: '/page/:pageName', target: '/page'},
+        {route: '/profile', target: '/profile'},
+        // {route: '/errorPage', target: '/errorPage'},
+        {route: '/checkout', target: '/checkout'},
+        //admin panel routes
+        {route: '/admin', target: '/admin'},
+        {route: '/admin/assets', target: '/admin/assets'},
+        {route: '/admin/comments', target: '/admin/comments'},
+        {route: '/admin/contacts', target: '/admin/contacts'},
+        {route: '/admin/design', target: '/admin/design'},
+        {route: '/admin/exporter', target: '/admin/exporter'},
+        {route: '/admin/fileManager', target: '/admin/fileManager'},
+        {route: '/admin/form', target: '/admin/form'},
+        {route: '/admin/importer', target: '/admin/importer'},
+        {route: '/admin/meta', target: '/admin/meta'},
+        {route: '/admin/page', target: '/admin/page'},
+        {route: '/admin/post', target: '/admin/post'},
+        {route: '/admin/posts', target: '/admin/posts'},
+        {route: '/admin/settings', target: '/admin/settings'},
+        {route: '/admin/settings/customScript', target: '/admin/settings/customScript'},
+        {route: '/admin/settings/customStyle', target: '/admin/settings/customStyle'},
+        {route: '/admin/settings/eCommerceSettings', target: '/admin/settings/eCommerceSettings'},
+        {route: '/admin/settings/generals', target: '/admin/settings/generals'},
+        {route: '/admin/tools', target: '/admin/tools'},
+        {route: '/admin/users', target: '/admin/users'},
+        {route: '/admin/user', target: '/admin/user'},
+        {route: '/', target: '/'},
+    ]
+    const serverRouteGenerator = () => {
         routesArr.map(routeObj => {
             return server.get(routeObj.route, (req, res) => {
                 const targetComponent = routeObj.target;
@@ -383,154 +450,48 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
                 app.render(req, res, targetComponent, queryParams)
             });
         })
+    }
+    const serverRouteWithLocaleGenerator = () => {
+        routesArr.map(routeObj => {
+            return server.get( '/:locale'+routeObj.route, (req, res) => {
+                const targetComponent = routeObj.target;
+                const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
+                    routeObj.contentType ? {contentType: routeObj.contentType} : {};
 
+                const shouldCompress = (req, res) => {
+                    if (req.headers['x-no-compression']) {
+                        return false
+                    }
+                    return compression.filter(req, res)
+                }
+                const queryParams = {
+                    ...req.query,
+                    ...req.params,
+                    ...specialDataForRoute
+                }
+                server.use(compression({filter: shouldCompress}))
+                app.render(req, res, targetComponent, queryParams)
+            });
+        })
     }
 
-    serverGetGenerator()
+    serverRouteGenerator()
+    serverRouteWithLocaleGenerator()
 
-    // server.get('/', (req, res) => {
+
+
+    // server.get('/:locale', (req, res) => {
     //     const targetComponent = '/';
     //     const queryParams = {
     //         ...req.query,
     //         ...req.params,
     //     }
-    //     server.use(compression());
     //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res,targetComponent, queryParams)
     // });
-
-
-    // server.get('/tags/:tag', (req, res) => {
-    //     const targetComponent = '/posts';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //         contentType: 'tags',
-    //         contentName: req.params.tag,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/login', (req, res) => {
-    //     const targetComponent = '/auth/login';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/register', (req, res) => {
-    //     const targetComponent = '/auth/register';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/categories/:category', (req, res) => {
-    //     const targetComponent = '/posts';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //         contentType: 'categories',
-    //         contentName: req.params.category,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/actors/:actor', (req, res) => {
-    //     const targetComponent = '/posts';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //         contentType: 'actors',
-    //         contentName: req.params.actor,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/posts', (req, res) => {
-    //     const targetComponent = '/posts';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/categories', (req, res) => {
-    //     const targetComponent = '/meta';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //         contentType: 'categories'
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-    // server.get('/tags', (req, res) => {
     //
-    //     const targetComponent = '/meta';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //         contentType: 'tags'
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-    // server.get('/actors', (req, res) => {
-    //     const targetComponent = '/meta';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //         contentType: 'actors'
-    //     }
-    //
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/post/:title', (req, res) => {
-    //     const targetComponent = '/post';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/page/:pageName', (req, res) => {
-    //     const targetComponent = '/page';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    //     // return renderAndCache(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/profile', (req, res) => {
-    //     const targetComponent = '/profile';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     app.render(req, res, targetComponent, queryParams)
-    // });
-
-
-    // server.get('/admin/assets', (req, res) => {
-    //     const targetComponent = '/admin/assets';
+    // server.get('/', (req, res) => {
+    //     const targetComponent = '/';
     //     const queryParams = {
     //         ...req.query,
     //         ...req.params,
@@ -539,15 +500,15 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //     // return renderAndCache(req, res,targetComponent, queryParams)
     // });
 
-    server.get('/admin/pages', (req, res) => {
-        const targetComponent = '/admin/pages';
-        const queryParams = {
-            ...req.query,
-            ...req.params,
-        }
-        app.render(req, res, targetComponent, queryParams)
-        // return renderAndCache(req, res,targetComponent, queryParams)
-    });
+    // server.get('/admin/pages', (req, res) => {
+    //     const targetComponent = '/admin/pages';
+    //     const queryParams = {
+    //         ...req.query,
+    //         ...req.params,
+    //     }
+    //     app.render(req, res, targetComponent, queryParams)
+    //     // return renderAndCache(req, res,targetComponent, queryParams)
+    // });
 
 
     // server.get('/admin/page', (req, res) => {

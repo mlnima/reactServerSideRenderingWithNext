@@ -1,15 +1,23 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
+import dynamic from 'next/dynamic'
 import AppLayout from "../../components/layouts/AppLayout";
 import {getAbsolutePath} from "../../_variables/_variables";
 import {getMultipleSetting, getMultipleWidgetWithData} from "../../_variables/ajaxVariables";
 import {AppContext} from "../../context/AppContext";
 import {getPost} from "../../_variables/ajaxPostsVariables";
 import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
-import './checkout.scss'
+import Link from "next/link";
+//import CheckOutSlideHeader from "../../components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader";
+
+
+const PayWithPaypal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
+
 
 const checkout = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({});
+    const [state, setState] = useState({
+        paymentPage:false
+    });
     const [itemsData, setItemsData] = useState([])
 
     useEffect(() => {
@@ -27,25 +35,23 @@ const checkout = props => {
                 _id: item.productId
             };
             const itemData = await getPost(requestBody, window.location.origin, false)
-           checkOutItems.push({...itemData.data.post, orderData: item})
-        //    setItemsData([...itemsData, {...itemData.data.post, orderData: item}])
+            checkOutItems.push({...itemData.data.post, orderData: item})
+            //    setItemsData([...itemsData, {...itemData.data.post, orderData: item}])
 
         }
-       setItemsData([ ...checkOutItems])
+        setItemsData([...checkOutItems])
     }
-
 
     const renderCheckOutItems = (itemsData || []).map(item => {
         return (
-            <CheckOutItemPreview key={(itemsData || []).indexOf(item)} {...item} isPop={false}/>
+            <CheckOutItemPreview key={(itemsData || []).indexOf(item)} {...item} isPop={false} editable={!state.paymentPage}/>
         )
     })
 
     useEffect(() => {
         let totalPrice = 0
-        itemsData.forEach(i=>{
-            const totalItemPrice =Number(i.price) * Number(i.orderData.count)
-            console.log(Number(i.price),Number(i.orderData.count),totalItemPrice)
+        itemsData.forEach(i => {
+            const totalItemPrice = Number(i.price) * Number(i.orderData.count)
             totalPrice += totalItemPrice
         })
         setState({
@@ -55,15 +61,35 @@ const checkout = props => {
     }, [itemsData]);
 
 
+
+    const PayBtn = ()=>{
+        if (!state.paymentPage){
+            return (
+                <button onClick={()=>{setState({...state,paymentPage: true})}}>{contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.proceedToCheckOutText || 'Proceed To Checkout': props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.proceedToCheckOutText || 'Proceed To Checkout'}</button>
+            )
+        }else return null
+    }
+
+
+
     return (
         <AppLayout {...props}>
             <div className='main checkout-page'>
                 <div className='checkout-items'>
                     {renderCheckOutItems}
                 </div>
-                <div className='checkout-total-purchase'>
-                    <h3>Summary</h3>
-                    <p>Total : {state.totalPrice} Euro</p>
+                <div className='checkout-purchase'>
+                    <div className='checkout-total'>
+                        <h3>{ contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.summaryText || 'Summary': props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.summaryText || 'Summary' }</h3>
+                        <p>
+                            { contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.totalText ?? 'Subtotal': props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.totalText ?? 'Subtotal' }
+                            :
+                            { props.eCommerce?.data?.currencySymbol ? ' ' + props.eCommerce?.data?.currencySymbol + ' ' : ' € '}
+                            {state.totalPrice}
+                        </p>
+                    </div>
+                    <PayBtn/>
+                    <PayWithPaypal total={state.totalPrice} active={state.paymentPage} />
                 </div>
             </div>
         </AppLayout>
@@ -75,7 +101,7 @@ export const getServerSideProps = async ({req, query}) => {
     let errorCode = 200
     let settings;
     let widgets;
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
+    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design', 'eCommerce']}, domainName, true, 'tagsPage')
     const widgetsData = await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'tagsPage')
 
     settings = settingsData.data.settings ? settingsData.data.settings : []

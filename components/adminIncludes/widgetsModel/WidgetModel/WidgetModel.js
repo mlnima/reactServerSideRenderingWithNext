@@ -445,7 +445,7 @@ const WidgetModel = props => {
                     />
                     <p>Translations:</p>
                     <select ref={languageElement} name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
-                        <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? ''}</option>
+                        <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? 'default'}</option>
                         {languagesOptions}
                     </select>
                     <p>Device Type To Render:</p>

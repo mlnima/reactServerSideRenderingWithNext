@@ -48,6 +48,7 @@
 @import "../components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem";
 @import "../components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection";
 @import "../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
+@import "../components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection";
 @import "AdminStyle";
 //page
 
@@ -58,6 +59,7 @@
 @import "../pages/admin/design/background/background";
 @import "../pages/admin/user/user";
 @import "../pages/admin/importer/youtube/youtube";
+@import "../pages/admin/settings/eCommerceSettings/eCommerceSettings";
 
 
 body{

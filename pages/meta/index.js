@@ -4,7 +4,7 @@ import {getAbsolutePath} from '../../_variables/_variables'
 import {getMultipleSetting, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
 import {getMeta} from '../../_variables/ajaxPostsVariables'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
-import withRouter from 'next/dist/client/with-router'
+//import withRouter from 'next/dist/client/with-router'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {useRouter} from "next/router";
 import './meta.scss'
@@ -27,9 +27,7 @@ const meta = props => {
     }, []);
 
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
     const renderMetas = (props.metaSource.metas ?? []).map(meta => {
 
         return (
@@ -107,4 +105,4 @@ export const getServerSideProps = async ({req, query, res}) => {
 }
 
 
-export default withRouter(meta);
+export default meta;

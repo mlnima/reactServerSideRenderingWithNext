@@ -4,10 +4,9 @@
   justify-content: space-between;
   align-items: center;
   padding: 5px 10px ;
-  background-color: $AdminColor80;
 
   border-radius: 5px;
-  border-left: 5px solid $linkBlueColor;
+  border-left: 5px solid ;
   max-height: 30px;
   .widget-header-title{
     font-weight: initial;
@@ -15,7 +14,6 @@
     padding: 0 10px;
   }
   a{
-    background-color: $red50;
     padding: 3px 5px;
     border-radius: 5px;
   }

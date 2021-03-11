@@ -24,8 +24,14 @@ const Post = props => {
     const [deviceWidth,setDeviceWidth] = useState(null)
 
     useEffect(() => {
-        setDeviceWidth(window.innerWidth)
+        if (typeof window !== 'undefined'){
+            setDeviceWidth(window.innerWidth)
+        }
+
     }, []);
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     useEffect(() => {
         if (props.identity.postPageSidebar) {

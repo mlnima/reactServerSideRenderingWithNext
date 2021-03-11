@@ -8,17 +8,19 @@ import  {createGlobalStyle} from "styled-components";
 import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
-import CheckoutPop from "../includes/checkOutPageComponents/CheckoutPop/CheckoutPop";
-import CardElement from "../includes/CardElement/CardElement";
+//import CheckoutPop from "../includes/checkOutPageComponents/CheckoutPop/CheckoutPop";
+//import CardElement from "../includes/CardElement/CardElement";
 
 
 const AppLayout = props => {
     useEffect(() => {
-        if (!window.GA_INITIALIZED) {
-            initGA()
-            window.GA_INITIALIZED = true
+        if (typeof window !== 'undefined'){
+            if (!window.GA_INITIALIZED) {
+                initGA()
+                window.GA_INITIALIZED = true
+            }
+            logPageView()
         }
-        logPageView()
     }, []);
     
     return (
@@ -72,7 +74,7 @@ const AppLayout = props => {
             <Console/>
             <Loading/>
             <AlertBox/>
-            <CheckoutPop/>
+
         </div>
 
     );

@@ -1,58 +1,18 @@
-import React, {useState, useContext, useEffect} from 'react';
+import React, {useContext, useEffect} from 'react';
 import {AppContext} from '../../../context/AppContext';
 import Head from 'next/dist/next-server/lib/head'
 import {useRouter} from "next/router";
 import parse from 'html-react-parser';
-//import {initGA, logPageView} from "../../../_variables/_variables";
 
 const SiteSettingSetter = props => {
-    const contextData = useContext(AppContext);
     const router = useRouter()
+    const contextData = useContext(AppContext);
 
     useEffect(() => {
-        if (props.design) {
-            contextData.dispatchSiteDesign(props.design.data)
-        }
-        if (props.navigation) {
-            contextData.dispatchNavigationData(props.navigation.data)
-        }
-        if (props.identity) {
-            contextData.dispatchSiteIdentity(props.identity.data)
-        }
-        if (props.widgets) {
-            contextData.setSiteWidgets(props.widgets)
-        }
-
-    }, [props]);
-
-
-    useEffect(() => {
-        if (localStorage.lang) {
-            contextData.dispatchState({
-                ...contextData.state,
-                activeLanguage: localStorage.lang
-            })
-            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:localStorage.lang})
-        } else if (!localStorage.lang && (router.locale && router.locale !==process.env.REACT_APP_DEFAULT_LOCAL)) {
-            contextData.dispatchState({
-                ...contextData.state,
-                activeLanguage: router.locale
-            })
-            localStorage.setItem('lang', router.locale);
-        }
+        contextData.dispatchSiteDesign(props.design?.data ?? contextData.siteDesign)
+        contextData.dispatchSiteIdentity(props.identity?.data ?? contextData.siteIdentity)
+        contextData.setSiteWidgets(props.widgets)
     }, []);
-
-
-    useEffect(() => {
-        contextData.state.activeLanguage === 'default' ?
-            document.documentElement.lang = process.env.REACT_APP_DEFAULT_LOCAL : null
-    }, [contextData.state.activeLanguage]);
-
-
-    const renderCustomScripts = (props.identity?.data.customScripts ?? []).map(script => {
-        return parse(script.scriptBody)
-    })
-
 
     return (
         <Head>
@@ -64,7 +24,13 @@ const SiteSettingSetter = props => {
             <meta name="description" content={props.identity?.data.description ?? ''}/>
             <meta name="keywords" content={props.identity?.data.keywords ?? []}/>
             <link rel="icon" href={props.identity?.data.favIcon ?? '/static/images/favIcon/favicon.png'}/>
-            {renderCustomScripts}
+            {props?.eCommerce?.data?.payPalId && props?.eCommerce?.data?.currency && router.pathname === '/checkout' ?
+                <script src={`https://www.paypal.com/sdk/js?client-id=${props?.eCommerce?.data?.payPalId}&currency=${props?.eCommerce?.data?.currency}`}/>
+                : null
+            }
+            {(props.identity?.data?.customScripts ?? []).map(script => {
+                return parse(script.scriptBody)
+            })}
         </Head>
     )
 };

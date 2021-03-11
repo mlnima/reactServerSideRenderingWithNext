@@ -1,21 +1,16 @@
-import React, {useContext, useEffect, useRef, useState} from 'react';
-import jwtDecode from "jwt-decode";
-import jwt from 'jsonwebtoken';
+import React, { useEffect, useState} from 'react';
 import axios from "axios";
-import dataDecoder from '../server/tools/dataDecoder'
-import dataEncoder from '../server/tools/dataEncoder'
+import {useRouter} from "next/router";
 
-import {withRouter} from "next/router";
-import styled from "styled-components";
 
 export const AppContext = React.createContext();
 
 const AppProvider = props => {
-    // const contextData = useContext(AppContext);
+    const router = useRouter()
     const [state, dispatchState] = useState({
         loading: false,
         videoPreviewID: '',
-        activeLanguage: 'default',
+        activeLanguage: router.locale || router.query.locale || 'default',
         navigationOpenStatus: false,
         isMobile: true,
         console:false,
@@ -24,20 +19,23 @@ const AppProvider = props => {
         checkoutSlideEnable:false
     });
 
-
     useEffect(() => {
-        window.innerWidth >= 768?
-            dispatchState({
-                ...state,
-                isMobile: false,
-                navigationOpenStatus:true
-            }):
-            dispatchState({
-                ...state,
-                isMobile: true,
-                navigationOpenStatus:false
-            })
-    }, [props]);
+        functions.getAndSetUserInfo()
+        functions.getCheckOutData()
+    }, []);
+    // useEffect(() => {
+    //     window.innerWidth >= 768?
+    //         dispatchState({
+    //             ...state,
+    //             isMobile: false,
+    //             navigationOpenStatus:true
+    //         }):
+    //         dispatchState({
+    //             ...state,
+    //             isMobile: true,
+    //             navigationOpenStatus:false
+    //         })
+    // }, [props]);
 
     const [alert, dispatchAlert] = useState({
         active: false,
@@ -56,6 +54,10 @@ const AppProvider = props => {
         keywords: [],
         customScripts: []
     });
+
+    const [eCommerceSettings,dispatchECommerceSettings]= useState({
+        translations:{}
+    })
     const [siteDesign, dispatchSiteDesign] = useState({});
 
     const [settings, dispatchSettings] = useState({
@@ -64,13 +66,13 @@ const AppProvider = props => {
         textEditorEditMode: false
     });
 
-    const [galleryData, setGalleryData] = useState({
-        path: './static'
-    })
+    // const [galleryData, setGalleryData] = useState({
+    //     path: './static'
+    // })
 
     const [userData, dispatchUserData] = useState({});
 
-    const [navigationData, dispatchNavigationData] = useState([]);
+   // const [navigationData, dispatchNavigationData] = useState([]);
 
     const [editingPostData, dispatchEditingPostData] = useState({
         categories: [],
@@ -128,19 +130,20 @@ const AppProvider = props => {
                     dispatchUserData({...userData, ...res.data.userData});
                 }).catch(err => {
                     console.log(err);
+                    localStorage.removeItem('wt')
                 })
             }
         },
         logOutUser: () => {
             localStorage.removeItem('wt');
             dispatchUserData({})
-            props.router.push('/')
+            router.push('/')
         },
         goToAdminPanel: () => {
-            props.router.push('/admin')
+            router.push('/admin')
         },
         goToHomePage: () => {
-            // props.router.push('/')
+            // router.push('/')
         },
         savePosts: async (data) => {
             const body = {
@@ -187,7 +190,7 @@ const AppProvider = props => {
                 token: localStorage.wt
             };
             axios.post('/api/v1/posts/postsBulkAction', body).then(() => {
-                // props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
+                // router.push({ pathname: router.pathname, query: { ...router.query } })
                 dispatchState({
                     ...state,
                     loading: false
@@ -224,23 +227,20 @@ const AppProvider = props => {
             return await axios.post(window.location.origin + '/api/v1/settings/clearCaches', body)
         },
         getCheckOutData: ()=>{
+            if (typeof window !== 'undefined'){
                 if (localStorage?.checkOutItems){
                     const items = JSON.parse(localStorage.checkOutItems)
                     setCheckOutData({
-                      // ...checkOutData,
                         items
                     })
                 }
+            }
         }
 
 
     });
 
-    useEffect(() => {
-        functions.getAndSetUserInfo()
-        functions.getCheckOutData()
 
-    }, []);
 
 
     return (
@@ -262,8 +262,8 @@ const AppProvider = props => {
                     dispatchAdminPostsData,
                     videoPostsDataForClient,
                     dispatchVideoPostsDataForClient,
-                    navigationData,
-                    dispatchNavigationData,
+                   // navigationData,
+                   // dispatchNavigationData,
                     dispatchSiteIdentity,
                     siteIdentity,
                     widgetsSettings,
@@ -275,7 +275,9 @@ const AppProvider = props => {
                     siteWidgets,
                     setSiteWidgets,
                     checkOutData,
-                    setCheckOutData
+                    setCheckOutData,
+                    eCommerceSettings,
+                    dispatchECommerceSettings
                     // adminWidgets,
                     // dispatchAdminWidgets
                 }}>
@@ -286,5 +288,6 @@ const AppProvider = props => {
     )
 };
 
-export const AppProviderWithRouter = withRouter(AppProvider);
+// export const AppProviderWithRouter = withRouter(AppProvider);
+ export default AppProvider;
 

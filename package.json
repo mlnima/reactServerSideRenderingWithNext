@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "nodemon ./server.js",
-    "setup": "node ./setup.js",
     "build": "next build",
+    "analys": "ANALYZE=true next build",
     "start": "NODE_ENV=production node ./server.js",
     "updateLinux": "sudo ./update.sh"
   },
@@ -20,6 +20,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@loadable/component": "^5.14.1",
+    "@next/bundle-analyzer": "^10.0.8",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",
     "apicache": "^1.5.3",

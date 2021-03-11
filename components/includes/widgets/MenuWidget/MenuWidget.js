@@ -2,15 +2,19 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import Link from "next/link";
 import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {useRouter} from "next/router";
+
 
 const MenuWidget = props => {
     const [open, setOpen] = useState(!props.isMobile);
+    const router = useRouter()
     useEffect(() => {
         let deviceWidth = 0
-        setTimeout(()=>{
+        if (typeof window !== 'undefined'){
             deviceWidth = window.innerWidth
             deviceWidth >=768 ? setOpen(true):null
-        },0)
+        }
+
     }, [props]);
 
     const mobileNavigationOnClickHandler= ()=>{
@@ -22,9 +26,17 @@ const MenuWidget = props => {
     const renderMenuItems = (props.menuItems || []).map(menuItem => {
 
         if (menuItem.type === 'internal') {
+            const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as : `/${router.locale || router.query.locale}${menuItem.as}`
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
-                    <Link href={menuItem.target} as={menuItem.as}><a  onClick={mobileNavigationOnClickHandler} >{menuItem.name}</a></Link>
+                    <Link href={menuItem.target}
+                          as={linkAsForMenuItems}
+                          locale={router.locale || router.query.locale || false}
+                    >
+                        <a  onClick={mobileNavigationOnClickHandler} >
+                            {menuItem.name}
+                        </a>
+                    </Link>
                 </li>
             )
         } else if (menuItem.type === 'external') {

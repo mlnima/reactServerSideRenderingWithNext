@@ -1,5 +1,5 @@
-import React, {useEffect} from 'react';
-import {AppProviderWithRouter} from "../context/AppContext";
+import React from 'react';
+import AppProvider from "../context/AppContext";
 import '../styles/styles.scss';
 //importing components Styles
 import '../components/includes/AdminTools/Console/Console.scss';
@@ -27,6 +27,7 @@ import '../components/includes/CardElement/CardElement.scss'
 //importing pages Styles
 import './post/Post.scss'
 import './meta/meta.scss'
+import './checkout/checkout.scss'
 //importing widgets style
 
 
@@ -36,9 +37,9 @@ import '../components/layouts/AppLayout.scss'
 const MyApp = ({Component, pageProps}) => {
 
     return (
-        <AppProviderWithRouter>
+        <AppProvider>
             <Component {...pageProps} />
-        </AppProviderWithRouter>
+        </AppProvider>
     )
 
 };

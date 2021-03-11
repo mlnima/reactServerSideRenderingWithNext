@@ -12,44 +12,40 @@
     margin: auto;
   }
 
-  .checkout-total-purchase{
+  .checkout-purchase{
     display: flex;
-    //justify-content: center;
+    justify-content: space-between;
     align-items: center;
     flex-direction: column;
     width: 90%;
     max-width: 600px;
-    height: 300px;
+    //height: auto;
     background-color: white;
+    margin: auto;
+    .checkout-total{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+
+    }
+    .check-out-pay-btn{
+      border: .2px solid black;
+      padding: 5px 10px;
+    }
   }
 }
 
 
-//
-//@media only screen and (min-width: 769px) {
-//  .checkout-page{
-//    display: grid;
-//    grid-template-columns: 1fr 320px ;
-//    max-width: 1024px;
-//    margin: auto;
-//    .checkout-items{
-//        display: flex;
-//        align-items: flex-start;
-//      //  justify-content: center;
-//        flex-direction: column;
-//        flex-wrap: wrap;
-//    }
-//
-//    .checkout-total-purchase{
-//      background-color: white;
-//      height: 400px;
-//      //position: -webkit-sticky;
-//      //position: sticky;
-//      //display: flex;
-//      //justify-content: flex-start;
-//      //flex-direction: column;
-//
-//    }
-//  }
-//
-//}
+
+@media only screen and (min-width: 769px) {
+  .checkout-page{
+    .checkout-items{
+      width: 45%;
+    }
+    .checkout-purchase{
+      width: 45%;
+
+    }
+  }
+
+}

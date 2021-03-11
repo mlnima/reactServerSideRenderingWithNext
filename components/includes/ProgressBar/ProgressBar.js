@@ -13,11 +13,11 @@ const ProgressBar = props => {
         <div className='progressParent' style={{
             backgroundColor: props.backgroundColor
         }}>
-            <div className="progressChild" style={{
+            <span className="progressChild" style={{
                 color: props.textColor,
                 backgroundColor: props.valueColor,
                 width: props.value + '%'
-            }}> <p>{props.percent ? props.value + ' %' : ''}</p></div>
+            }}> <p>{props.percent ? props.value + ' %' : ''}</p></span>
         </div>
     )
 

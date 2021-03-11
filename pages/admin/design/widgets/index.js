@@ -80,10 +80,10 @@ const HomePageWidgets = props => {
         const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)
         const widgetsOnThisType = widgetsInGroupByPosition.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
         return (
-            <>
+
                 <WidgetGroupByPosition widgetsInGroupByPosition={widgetsInGroupByPosition} key={position} siteIdentity={siteIdentity} position={position}
                                        widgets={widgetsOnThisType} customPages={customPages} getAndSetWidgetsData={getAndSetWidgetsData}/>
-            </>
+
         )
     })
 

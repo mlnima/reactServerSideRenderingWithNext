@@ -7,8 +7,6 @@ const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 
 
-let BASE_URL = process.env.NODE_ENV !== 'production' ? 'http://localhost:3000' : process.env.PRODUCTION_URL;
-
 const urlLoaderConfig = {
     webpack(config, options) {
         config.module.rules.push({
@@ -54,7 +52,7 @@ const sassOptions = {
 const i18nConfig = {
     i18n: {
         locales:process.env.REACT_APP_LOCALS.split(' '),
-         defaultLocale:process.env.REACT_APP_DEFAULT_LOCAL,
+        defaultLocale:process.env.REACT_APP_DEFAULT_LOCAL,
         localeDetection: false,
     }
 }
@@ -65,11 +63,6 @@ const nextImageConfig = {
         deviceSizes: [320,640, 750, 828, 1080, 1200, 1920, 2048, 3840],
     },
 }
-
-// module.exports = withPlugins([[withCSS(withSass()), scssConfig], withImages, nextEnv({
-//     staticPrefix: 'REACT_APP_',
-//     publicPrefix: 'REACT_APP_',
-// })]);
 
 module.exports = withPlugins([
     i18nConfig,

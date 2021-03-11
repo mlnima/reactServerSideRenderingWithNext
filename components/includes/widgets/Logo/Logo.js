@@ -1,20 +1,13 @@
 import React, {useContext, useState, useEffect} from 'react';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
-import {getLanguageQuery} from "../../../../_variables/_variables";
 import {useRouter} from "next/router";
 import Image from 'next/image'
 
 const Logo = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-    const [state, setState] = useState({
-        logoText: 'Logo',
-        headLine: 'Head Line',
-        logoTextStyle: {},
-        headLineStyle: {},
-        queries: {}
-    });
+
 
     const RenderLogoImage = () => {
         let renderNormalImageElement = props.LogoUrl.includes('http')
@@ -71,7 +64,11 @@ const Logo = props => {
     }
 
     return (
-        <Link href='/' as='/'>
+        <Link
+            href='/'
+            as='/'
+            locale={router?.locale || router?.query?.locale || false}
+        >
             <a className='logo'>
                 <RenderLogoImage/>
                 <RenderLogoText/>
