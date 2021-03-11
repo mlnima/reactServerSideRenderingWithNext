@@ -40,7 +40,8 @@ settingsControllers.get = async (req, res) => {
     res.json({ setting })
 };
 settingsControllers.getMultiple = async (req, res) => {
-    const requestedSetting = req.body.settings
+    const siteType = (await settingSchema.findOne({ type: 'identity' }).exec()).data.siteMode
+    const requestedSetting = siteType === 'eCommerce' ? [...req.body.settings,'eCommerce'] : req.body.settings
     const settingRequestPromises = requestedSetting.map(async setting => {
         return await settingSchema.findOne({ type: setting }).exec()
     })

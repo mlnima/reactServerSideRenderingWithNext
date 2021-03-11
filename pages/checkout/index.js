@@ -6,7 +6,7 @@ import {getMultipleSetting, getMultipleWidgetWithData} from "../../_variables/aj
 import {AppContext} from "../../context/AppContext";
 import {getPost} from "../../_variables/ajaxPostsVariables";
 import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
-import Link from "next/link";
+//import Link from "next/link";
 //import CheckOutSlideHeader from "../../components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader";
 
 
@@ -65,7 +65,7 @@ const checkout = props => {
     const PayBtn = ()=>{
         if (!state.paymentPage){
             return (
-                <button onClick={()=>{setState({...state,paymentPage: true})}}>{contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.proceedToCheckOutText || 'Proceed To Checkout': props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.proceedToCheckOutText || 'Proceed To Checkout'}</button>
+                <button className='pay-button check-out-pay-btn' onClick={()=>{setState({...state,paymentPage: true})}}>{contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.proceedToCheckOutText || 'Proceed To Checkout': props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.proceedToCheckOutText || 'Proceed To Checkout'}</button>
             )
         }else return null
     }
@@ -101,7 +101,7 @@ export const getServerSideProps = async ({req, query}) => {
     let errorCode = 200
     let settings;
     let widgets;
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design', 'eCommerce']}, domainName, true, 'tagsPage')
+    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
     const widgetsData = await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'tagsPage')
 
     settings = settingsData.data.settings ? settingsData.data.settings : []

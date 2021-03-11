@@ -104,14 +104,14 @@ const SearchInputComponent = props => {
     if(state.isOpen){
         return (
             <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
-                <button className='search-bar-btn-close' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='svg-logo-small' /></button>
+                <button className='search-bar-btn-close' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='svg-logo-small' /></button>
                 <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword}/>
-                <button className='search-bar-btn' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small' style={state.style}/></button>
+                <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small' style={state.style}/></button>
             </form>
         );
     }else {
         return (
-            <button className='search-bar-btn-close' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faSearch} className='svg-logo-small' /></button>
+            <button className='search-bar-btn-close' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faSearch} className='svg-logo-small' /></button>
         )
     }
 

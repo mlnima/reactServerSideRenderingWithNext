@@ -13,16 +13,16 @@ const MetaWidget = props => {
         }
     });
 
-    useEffect(() => {
-        setState({
-            ...state,
-            style: {
-                color: props.metaTextColor || 'white',
-                backgroundColor: props.metaBackgroundColor || 'red'
-            }
-
-        })
-    }, [props]);
+    // useEffect(() => {
+    //     setState({
+    //         ...state,
+    //         style: {
+    //             color: props.metaTextColor || 'white',
+    //             backgroundColor: props.metaBackgroundColor || 'red'
+    //         }
+    //
+    //     })
+    // }, [props]);
 
     const renderMeta = (props.metaData || []).map(meta => {
         const path = `/posts?content=${meta._id}`;
@@ -32,11 +32,10 @@ const MetaWidget = props => {
                     : faTag
 
         return (
-            <div key={meta.name} className='meta-child-element' style={state.style}>
-
+            <div key={meta.name} className='meta-child-element' >
                 <FontAwesomeIcon icon={icon} className='meta-data-logo'/>
                 <Link href={path} key={meta.name}>
-                    <a className='meta-widget-item' style={state.style}>  {meta.name}</a>
+                    <a className='meta-widget-item' >  {meta.name}</a>
                 </Link>
             </div>
         )
