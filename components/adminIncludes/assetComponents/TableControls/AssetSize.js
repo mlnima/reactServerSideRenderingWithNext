@@ -1,19 +1,19 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import {useRouter} from "next/router";
 
 const AssetSize = props => {
-    const [state, setState] = useState({});
+
     const router = useRouter()
 
-
-    const onChangeHandler = e=>{
-         router.push({
-             pathname:router.pathname,
-             query:{...router.query,size:e.target.value}
-         })
+    const onChangeHandler = e => {
+        router.push({
+            pathname: router.pathname,
+            query: {...router.query, size: e.target.value}
+        })
     }
+
     return (
-        <select defaultValue='30' style={{maxWidth:'50px'}} onChange={e=>onChangeHandler(e)}>
+        <select defaultValue='30' style={{maxWidth: '50px'}} onChange={e => onChangeHandler(e)}>
             <option value='10'>10</option>
             <option value='20'>20</option>
             <option value='30'>30</option>

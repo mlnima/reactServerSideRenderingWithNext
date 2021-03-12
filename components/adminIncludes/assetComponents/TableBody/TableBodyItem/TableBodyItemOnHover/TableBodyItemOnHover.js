@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import withRouter from 'next/dist/client/with-router'
+import {useRouter} from "next/router";
 import {AppContext} from '../../../../../../context/AppContext'
 import Link from 'next/link';
 import {deleteMeta} from '../../../../../../_variables/ajaxPostsVariables'
@@ -7,22 +7,17 @@ import {deletePage} from "../../../../../../_variables/ajaxVariables";
 
 const TableBodyItemOnHover = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({});
-    // useEffect(() => {
-    //     if (props.router){
-    //         console.log( props.router)
-    //     }
-    //
-    // }, []);
-
+    const router = useRouter()
+ 
+    
     const reGetData = () => {
-        props.router.push({pathname: props.router.pathname, query: {...props.router.query}})
+        router.push({pathname: router.pathname, query: {...router.query}})
     }
 
     if (props.isHover) {
         // console.log(props)
         if (props.assetsType === 'posts') {
-            if (!props.router.query.status || props.router.query.status === 'published' || props.router.query.status === 'all') {
+            if (!router.query.status || router.query.status === 'published' || router.query.status === 'all') {
                 return (
                     <div className='asset-page-table-body-item-hover-item'>
                         <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
@@ -33,7 +28,7 @@ const TableBodyItemOnHover = props => {
 
                     </div>
                 );
-            } else if (props.router.query.status === 'trash') {
+            } else if (router.query.status === 'trash') {
                 return (
                     <div className='asset-page-table-body-item-hover-item'>
                         <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
@@ -45,7 +40,7 @@ const TableBodyItemOnHover = props => {
 
                     </div>
                 );
-            } else if (props.router.query.status === 'draft') {
+            } else if (router.query.status === 'draft') {
                 return (
                     <div className='asset-page-table-body-item-hover-item'>
                         <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
@@ -56,7 +51,7 @@ const TableBodyItemOnHover = props => {
 
                     </div>
                 );
-            } else if (props.router.query.status === 'pending') {
+            } else if (router.query.status === 'pending') {
                 return (
                     <div className='asset-page-table-body-item-hover-item'>
                         <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
@@ -67,7 +62,7 @@ const TableBodyItemOnHover = props => {
 
                     </div>
                 );
-            } else if (props.router.query.status === 'reported') {
+            } else if (router.query.status === 'reported') {
                 return (
                     <div className='asset-page-table-body-item-hover-item'>
                         <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
@@ -130,4 +125,4 @@ const TableBodyItemOnHover = props => {
     }
 
 };
-export default withRouter(TableBodyItemOnHover);
+export default TableBodyItemOnHover;

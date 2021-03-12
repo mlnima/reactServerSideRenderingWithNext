@@ -15,6 +15,7 @@ const pageControllers = require('./server/controllers/pageControllers');
 const formController = require('./server/controllers/formController');
 const apiPostControllers = require('./server/controllers/apiControllers/apiPostsControllers');
 const youtubeDataScrapper = require('./server/dataScrappers/youtube');
+const paymentControllers = require('./server/controllers/paymentControllers');
 const path = require('path');
 const authMiddleware = require('./server/middlewares/authMiddleware');
 const adminAuthMiddleware = require('./server/middlewares/adminAuthMiddleware');
@@ -327,6 +328,13 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     });
 
 
+    //payments
+    server.post('/api/v1/order/create/payPal', (req, res) => {
+        paymentControllers.order_payPal(req, res)
+    });
+    server.post('/api/v1/order/get',adminAuthMiddleware, (req, res) => {
+        paymentControllers.getOrders(req, res)
+    });
 //-------------------post----------------------
 
     // const serverRouteGenerator = () => {
@@ -408,9 +416,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         {route: '/checkout', target: '/checkout'},
         //admin panel routes
         {route: '/admin', target: '/admin'},
-        {route: '/admin/assets', target: '/admin/assets'},
-        {route: '/admin/comments', target: '/admin/comments'},
-        {route: '/admin/contacts', target: '/admin/contacts'},
+        // {route: '/admin/assets', target: '/admin/assets'},
+        // {route: '/admin/comments', target: '/admin/comments'},
+        // {route: '/admin/contacts', target: '/admin/contacts'},
         {route: '/admin/design', target: '/admin/design'},
         {route: '/admin/exporter', target: '/admin/exporter'},
         {route: '/admin/fileManager', target: '/admin/fileManager'},
@@ -464,7 +472,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     const serverRouteWithLocaleGenerator = () => {
         routesArr.map(routeObj => {
             const routeIncludesLocal = '/:locale'+routeObj.route
-            console.log(routeIncludesLocal)
             return server.get( routeIncludesLocal, (req, res) => {
                 const targetComponent = routeObj.target;
                 const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :

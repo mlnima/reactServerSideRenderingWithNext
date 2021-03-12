@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import axios from "axios";
 import {useRouter} from "next/router";
-import withRouter from "next/dist/client/with-router";
+
 
 export const AppContext = React.createContext();
 
@@ -19,10 +19,7 @@ const AppProvider = props => {
         checkoutSlideEnable:false
     });
 
-    useEffect(() => {
-        functions.getAndSetUserInfo()
-        functions.getCheckOutData()
-    }, []);
+
 
     const [alert, dispatchAlert] = useState({
         active: false,
@@ -115,6 +112,16 @@ const AppProvider = props => {
                     localStorage.removeItem('wt')
                 })
             }
+        },
+        createOrder: (type,data,additionalData) => {
+             if (type === 'payPal'){
+                 const body ={
+                     type,
+                     additionalData,
+                     payPalData:data
+                 }
+                 return axios.post('/api/v1/order/create/payPal',body)
+             }
         },
         logOutUser: () => {
             localStorage.removeItem('wt');
@@ -222,7 +229,10 @@ const AppProvider = props => {
 
     });
 
-
+    useEffect(() => {
+        functions.getAndSetUserInfo()
+        functions.getCheckOutData()
+    }, []);
 
 
     return (
@@ -271,5 +281,6 @@ const AppProvider = props => {
 };
 
 // export const AppProviderWithRouter = withRouter(AppProvider);
- export default withRouter(AppProvider) ;
+ //export default withRouter(AppProvider) ;
+ export default AppProvider ;
 

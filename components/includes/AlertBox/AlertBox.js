@@ -24,9 +24,6 @@ const AlertBox = props => {
         })
     }
 
-
-
-    if (contextData.alert.active){
         return (
             <div className='alert-box'>
                 <button className='close-alert' onClick={()=>onCloseHandler()}>X</button>
@@ -36,7 +33,6 @@ const AlertBox = props => {
                </div>
             </div>
         );
-    }else return null
 
 };
 export default AlertBox;

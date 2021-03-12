@@ -1,21 +1,14 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import TableBodyItemSection from './TableBodyItem/TableBodyItemSection/TableBodyItemSection'
+import React from 'react';
 import TableBodyItem from './TableBodyItem/TableBodyItem'
-import TableHeader from '../TableHeader/TableHeader'
-import withRouter from 'next/dist/client/with-router'
+import {useRouter} from "next/router";
 
 const TableBody = props => {
-    // const [ state, setState ] = useState({
-    //     items: []
-    // });
-
-
-    const renderItems = (props.finalPageData[props.router.query.assetsType] || []).map(item => {
+    const router = useRouter()
+    const renderItems = (props.finalPageData[router.query.assetsType] || []).map(item => {
         return (
-            <TableBodyItem key={ item._id } data={ item } assetsType={ props.router.query.assetsType } selectedItems={ props.selectedItems } setSelectedItems={ props.setSelectedItems }/>
+            <TableBodyItem key={ item._id } data={ item } assetsType={ router.query.assetsType } selectedItems={ props.selectedItems } setSelectedItems={ props.setSelectedItems }/>
         )
     })
-
 
     return (
         <div className='asset-page-table-body'>
@@ -23,4 +16,4 @@ const TableBody = props => {
         </div>
     );
 };
-export default withRouter(TableBody);
+export default TableBody;

@@ -1,38 +1,39 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, {useEffect, useState, useContext, useRef} from 'react';
 import Link from 'next/link';
-import { convertVariableNameToName } from '../../../../_variables/_variables'
-import withRouter from 'next/dist/client/with-router'
+import {convertVariableNameToName} from '../../../../_variables/_variables'
+import {useRouter} from "next/router";
 
 const AssetStatusNavigation = props => {
-    const [ state, setState ] = useState({
-        types: [ 'all', 'draft', 'published', 'pending', 'trash', 'reported' ]
+    const router = useRouter()
+    const [state, setState] = useState({
+        types: ['all', 'draft', 'published', 'pending', 'trash', 'reported']
     });
 
     const renderStatus = state.types.map(type => {
         return (
-            <Link key={ type } href={ {
-                pathname: props.router ? props.router.pathname : '',
-                query: { ...props.router.query, status: type }
-            } }><a className='asset-page-status-navigation-item'>{ convertVariableNameToName(type) }</a></Link>
+            <Link key={type} href={{
+                pathname: router ? router.pathname : '',
+                query: {...router.query, status: type}
+            }}><a className='asset-page-status-navigation-item'>{convertVariableNameToName(type)}</a></Link>
         )
     })
 
-    if(props.router){
-        if (props.router.query.assetsType==='posts'||props.router.query.assetsType==='metas'||props.router.query.assetsType==='comments'){
+    if (router) {
+        if (router.query.assetsType === 'posts' || router.query.assetsType === 'metas' || router.query.assetsType === 'comments' || router.query.assetsType === 'orders') {
             return (
                 <div className='asset-page-status-navigation'>
-                    { renderStatus }
+                    {renderStatus}
                 </div>
             );
-        }else{
-            return(
+        } else {
+            return (
                 <div className='asset-page-status-navigation'>
 
                 </div>
             )
         }
-    }else return null
+    } else return null
 
 
 };
-export default withRouter(AssetStatusNavigation);
+export default AssetStatusNavigation;

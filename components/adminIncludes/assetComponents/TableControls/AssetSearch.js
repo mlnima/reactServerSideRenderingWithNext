@@ -1,16 +1,14 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import withRouter from 'next/dist/client/with-router'
+import React, { useRef } from 'react';
+import {useRouter} from "next/router";
 const AssetSearch = props => {
     const searchInput = useRef(null)
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
+    const router = useRouter()
 
    const onSubmitHandler = e=>{
         e.preventDefault()
-       props.router.push({
-           pathname: props.router?props.router.pathname:'',
-           query: { ...props.router.query, keyword: searchInput.current.value}
+       router.push({
+           pathname: router?router.pathname:'',
+           query: { ...router.query, keyword: searchInput.current.value}
            })
     }
     return (
@@ -20,4 +18,4 @@ const AssetSearch = props => {
         </form>
     );
 };
-export default withRouter(AssetSearch);
+export default AssetSearch;

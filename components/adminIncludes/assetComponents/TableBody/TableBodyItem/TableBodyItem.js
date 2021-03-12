@@ -8,16 +8,6 @@ const TableBodyItem = props => {
         isHover: false
     });
 
-    // useEffect(() => {
-    //     console.log(props.assetsType)
-    // }, []);
-    useEffect(() => {
-        if (props.assetsType === 'pages'){
-
-        }
-        console.log(props)
-    }, [props]);
-
     useEffect(() => {
         if (props.assetsType === 'posts') {
             let properties = ['title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail']
@@ -51,6 +41,12 @@ const TableBodyItem = props => {
             })
         } else if (props.assetsType === 'pages') {
             let properties = [ 'pageName', 'status','sidebar' ]
+            setState({
+                ...state,
+                properties,
+            })
+        } else if (props.assetsType === 'orders') {
+            let properties = [ 'buyer', 'status','type','isPaid' ]
             setState({
                 ...state,
                 properties,

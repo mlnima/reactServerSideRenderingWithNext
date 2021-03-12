@@ -11,7 +11,6 @@ const Loading = () => {
             loading:false
         })
     }
-    if (contextData.state.loading) {
         return (
             <div className='Loading'>
 
@@ -28,7 +27,6 @@ const Loading = () => {
                 <button className='stopLoading fas fa-times' onClick={()=>onStopLoadingHandler()}/>
             </div>
         );
-    } else return null
 };
 
 export default Loading;

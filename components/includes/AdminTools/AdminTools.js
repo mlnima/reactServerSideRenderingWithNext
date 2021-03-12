@@ -14,7 +14,7 @@ const AdminTools = props => {
         console: false
     });
 
-    if (contextData.userData.role === 'administrator') {
+
         if (state.open) {
             return (
                 <div className='admin-tools' onKeyDown={e => e.keyCode === 192 ? adminConsoleOpenCloseHandler(contextData.userData,contextData.state,contextData.dispatchState) : null}>
@@ -45,7 +45,7 @@ const AdminTools = props => {
             )
         }
 
-    } else return null
+
 
 };
 export default AdminTools;

@@ -1,29 +1,10 @@
-import React, {useEffect, useState} from 'react';
-
+import React from 'react';
 import Link from 'next/link'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faFolder, faTag} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 
 const MetaWidget = props => {
-    const [state, setState] = useState({
-        style: {
-            color: 'white',
-            backgroundColor: 'red'
-        }
-    });
-
-    // useEffect(() => {
-    //     setState({
-    //         ...state,
-    //         style: {
-    //             color: props.metaTextColor || 'white',
-    //             backgroundColor: props.metaBackgroundColor || 'red'
-    //         }
-    //
-    //     })
-    // }, [props]);
-
     const renderMeta = (props.metaData || []).map(meta => {
         const path = `/posts?content=${meta._id}`;
         const icon = meta.type === 'categories' ? faFolder

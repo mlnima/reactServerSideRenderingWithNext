@@ -191,3 +191,13 @@ export const youtubeDataScrapper = async (url) => {
     return await axios.post(window.location.origin + '/api/v1/scrap/youtube', body)
 }
 
+export const getOrders = async (data, domainName) => {
+
+    const body = {
+        ...data,
+        token: localStorage.wt
+    };
+
+    return await axios.post(domainName + `/api/v1/order/get`, body)
+};
+
