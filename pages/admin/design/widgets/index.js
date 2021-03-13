@@ -18,14 +18,9 @@ const HomePageWidgets = props => {
     const [customPages, setCustomPages] = useState([])
 
 
-    // useEffect(() => {
-    //     console.log(contextData.widgetsSettings.widgets)
-    // }, [contextData.widgetsSettings.widgets]);
-
     useEffect(() => {
         getAndSetData()
     }, []);
-
 
     const getAndSetData = () => {
         getAndSetSettings()

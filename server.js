@@ -30,6 +30,17 @@ const compression = require('compression')
 const cacheSuccesses = require('./server/middlewares/apiCache')
 const cors = require('cors')
 require('dotenv').config()
+// var LRU = require("lru-cache")
+//     , options = { max: 500
+//     , length: function (n, key) { return n * 2 + key.length }
+//     , dispose: function (key, n) { n.close() }
+//     , maxAge: 1000 * 60 * 60 }
+//     , cache = new LRU(options)
+//     , otherCache = new LRU(50)
+//
+// cache.set("key", "value")
+// cache.get("key")
+
 
 // const pageCache = require('./server/tools/pageCache')
 mongoose.Promise = global.Promise;
@@ -61,26 +72,22 @@ let getCacheKey = (req) => {
 
 let renderAndCache = async (req, res, targetComponent, queryParams) => {
     const key = getCacheKey(req);
-
     // If we have a page in the cache, let's serve it
     if (ssrCache.has(key)) {
         console.log('is cached')
-        //console.log(`serving from cache ${key}`);
         res.setHeader('x-cache', 'HIT');
         res.send(ssrCache.get(key));
-        // res.end()
-        return
     } else {
         try {
             const html = await app.renderToHTML(req, res, targetComponent, queryParams);
             if (res.statusCode !== 200) {
                 res.send(html);
-                // res.end()
                 return
             }
             ssrCache.set(key, html);
             res.setHeader('x-cache', 'MISS');
             res.send(html)
+            res.end()
         } catch (err) {
             console.log(err)
             await app.renderError(err, req, res, targetComponent, queryParams)
@@ -337,68 +344,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     });
 //-------------------post----------------------
 
-    // const serverRouteGenerator = () => {
-    //     const routesArr = [
-    //         {route: '/login', target: '/auth/login'},
-    //         {route: '/:locale/login', target: '/auth/login'},
-    //         {route: '/register', target: '/auth/register'},
-    //         {route: '/:locale/register', target: '/auth/register'},
-    //
-    //         {route: '/tags/:tag', target: '/posts', contentName: 'tag'},
-    //         {route: '/:locale/tags/:tag', target: '/posts', contentName: 'tag'},
-    //         {route: '/categories/:category', target: '/posts', contentName: 'category'},
-    //         {route: '/:locale/categories/:category', target: '/posts', contentName: 'category'},
-    //         {route: '/actors/:actor', target: '/posts', contentName: 'actor'},
-    //         {route: '/:locale/actors/:actor', target: '/posts', contentName: 'actor'},
-    //
-    //         {route: '/posts', target: '/posts'},
-    //         {route: '/:locale/posts', target: '/posts'},
-    //
-    //         {route: '/categories', target: '/meta', contentType: 'categories'},
-    //         {route: '/:locale/categories', target: '/meta', contentType: 'categories'},
-    //         {route: '/tags', target: '/meta', contentType: 'tags'},
-    //         {route: '/:locale/tags', target: '/meta', contentType: 'tags'},
-    //         {route: '/actors', target: '/meta', contentType: 'actors'},
-    //         {route: '/:locale/actors', target: '/meta', contentType: 'actors'},
-    //
-    //         {route: '/post/:title', target: '/post'},
-    //         {route: '/:locale/post/:title', target: '/post'},
-    //         {route: '/page/:pageName', target: '/page'},
-    //         {route: '/:locale/page/:pageName', target: '/page'},
-    //         {route: '/profile', target: '/profile'},
-    //         {route: '/:locale/profile', target: '/profile'},
-    //         {route: '/errorPage', target: '/errorPage'},
-    //         {route: '/:locale/errorPage', target: '/errorPage'},
-    //         {route: '/checkout', target: '/checkout'},
-    //         //admin panel routes
-    //         {route: '/admin', target: '/admin'},
-    //         {route: '/:locale', target: '/'}
-    //     ]
-    //     routesArr.map(routeObj => {
-    //         return server.get(routeObj.route, (req, res) => {
-    //             const targetComponent = routeObj.target;
-    //             const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
-    //                 routeObj.contentType ? {contentType: routeObj.contentType} : {};
-    //
-    //             const shouldCompress = (req, res) => {
-    //                 if (req.headers['x-no-compression']) {
-    //                     return false
-    //                 }
-    //                 return compression.filter(req, res)
-    //             }
-    //             const queryParams = {
-    //                 ...req.query,
-    //                 ...req.params,
-    //                 ...specialDataForRoute
-    //             }
-    //             server.use(compression({filter: shouldCompress}))
-    //             app.render(req, res, targetComponent, queryParams)
-    //         });
-    //     })
-    //
-    // }
-    //
-    // serverRouteGenerator()
     const routesArr = [
         {route: '/login', target: '/auth/login'},
         {route: '/register', target: '/auth/register'},
@@ -472,7 +417,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     const serverRouteWithLocaleGenerator = () => {
         routesArr.map(routeObj => {
             const routeIncludesLocal = '/:locale'+routeObj.route
-            return server.get( routeIncludesLocal, (req, res) => {
+            return server.get( routeIncludesLocal,( routeObj.route.includes('/admin') ? (req,res,next)=>{ next()} :renderAndCache), (req, res) => {
                 const targetComponent = routeObj.target;
                 const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
                     routeObj.contentType ? {contentType: routeObj.contentType} : {};
