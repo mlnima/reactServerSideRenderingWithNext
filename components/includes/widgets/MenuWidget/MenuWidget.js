@@ -14,7 +14,6 @@ const MenuWidget = props => {
             deviceWidth = window.innerWidth
             deviceWidth >=768 ? setOpen(true):null
         }
-
     }, [props]);
 
     const mobileNavigationOnClickHandler= ()=>{
@@ -24,7 +23,6 @@ const MenuWidget = props => {
     }
 
     const renderMenuItems = (props.menuItems || []).map(menuItem => {
-
         if (menuItem.type === 'internal') {
             const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as :
                  (!router.locale && !router.query.locale)?menuItem.as :
@@ -48,13 +46,12 @@ const MenuWidget = props => {
                 </li>
             )
         } else return null
-
     })
 
 
     return (
         <div className='menu-widget'>
-            <button onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button'>
+            <button onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button' aria-label="Center Align">
                 <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo' style={{
                     maxWidth: '25px',
                     maxHeight: '25px'

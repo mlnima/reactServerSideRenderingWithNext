@@ -189,8 +189,8 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
                     metaData: widget.data.metaType ? await metaSchema.find({ type: widget.data.metaType }).limit(parseInt(widget.data.count)).sort(sortQuery).exec() : [],
                     posts: widget.data.type === 'posts' || widget.data.type === 'postsSwiper' ?
                         widget.data.sortBy === 'random'?
-                         await postSchema.find({$and: [{status:'published'}, selectedMeta]}).skip(Math.floor(Math.random() * countPosts)).limit(parseInt(widget.data.count)).sort(sortMethod).exec()
-                        :await postSchema.find({$and: [{status:'published'}, selectedMeta]}).limit(parseInt(widget.data.count)).sort(sortMethod).exec(): [],
+                         await postSchema.find({$and: [{status:'published'}, selectedMeta]}).select(' title , mainThumbnail , quality , likes , disLikes , views , duration , postType , price , translations , videoTrailerUrl ').skip(Math.floor(Math.random() * countPosts)).limit(parseInt(widget.data.count)).sort(sortMethod).exec()
+                        :await postSchema.find({$and: [{status:'published'}, selectedMeta]}).select(' title , mainThumbnail , quality , likes , disLikes , views , duration , postType , price , translations , videoTrailerUrl ').limit(parseInt(widget.data.count)).sort(sortMethod).exec(): [],
                     comments: widget.data.type === 'recentComments' ? await commentSchema.find({}).limit(parseInt(widget.data.count)).exec() : [],
                 }
             }

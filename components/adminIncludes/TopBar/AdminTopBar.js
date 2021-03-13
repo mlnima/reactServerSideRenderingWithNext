@@ -1,18 +1,20 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 import { AppContext } from "../../../context/AppContext";
-import withRouter from "next/dist/client/with-router";
-import FA from "react-fontawesome";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
 import NewItemMenu from "./NewItemMenu/NewItemMenu";
 import Link from 'next/link'
-// import { setSprCache } from "next/dist/next-server/server/spr-cache";
+import {faBars, faHome, faPlus} from "@fortawesome/free-solid-svg-icons";
+import {faUser} from "@fortawesome/free-regular-svg-icons";
 
-const AdminTopBar = props => {
+
+const AdminTopBar = () => {
     const contextData = useContext(AppContext);
     const [ state, dispatchState ] = useState({
         AdminActionMenu: false,
         NewItemMenu:false
     });
+
     const AdminSideBarOpenCloseHandler = () => {
         contextData.settings.adminPanelSideBar ?
             contextData.dispatchSettings(settings => ({
@@ -23,15 +25,6 @@ const AdminTopBar = props => {
                 ...settings,
                 adminPanelSideBar: true,
             }))
-    };
-
-    const goToHomePage = () => {
-        props.router.push('/')
-        console.log(props.router)
-    };
-
-    const newAction = () => {
-        props.router.push('/admin/post')
     };
 
     const adminActionHandler = () => {
@@ -62,17 +55,17 @@ const AdminTopBar = props => {
         <>
             <div className='adminTopBar'>
                 <div className="adminTopBarControl">
-                    <button className='adminSideBarMobileBtn adminTopBarItem' onClick={ () => AdminSideBarOpenCloseHandler() }><FA className='fontawesomeMedium' name="bars"/></button>
-                    <Link href='/'><a className='adminTopBarItem'><FA className='fontawesomeMedium' name="home"/></a></Link>
-                    <button className='adminNewActionBtn adminTopBarItem' onClick={ () => newItemMenuHandler() }><FA className='fontawesomeMedium' name="plus"/></button>
+                    <button className='adminSideBarMobileBtn adminTopBarItem' onClick={ () => AdminSideBarOpenCloseHandler() }><FontAwesomeIcon icon={faBars} className='post-element-info-logo'/></button>
+                    <Link href='/'><a className='adminTopBarItem'><FontAwesomeIcon icon={faHome} className='post-element-info-logo'/></a></Link>
+                    <button className='adminNewActionBtn adminTopBarItem' onClick={ () => newItemMenuHandler() }><FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></button>
                     <NewItemMenu active={ state.NewItemMenu }/>
                     <p className='clearCache adminTopBarItem' onClick={ () => contextData.functions.clearCaches() }>Clear Caches</p>
                 </div>
-                <button className='adminActionBtn adminTopBarItem' onClick={ () => adminActionHandler() }><FA className='fontawesomeMedium' name="user"/></button>
+                <button className='adminActionBtn adminTopBarItem' onClick={ () => adminActionHandler() }><FontAwesomeIcon icon={faUser} className='post-element-info-logo'/></button>
                 <AdminActionMenu active={ state.AdminActionMenu }/>
             </div>
 
         </>
     );
 };
-export default withRouter(AdminTopBar);
+export default AdminTopBar;

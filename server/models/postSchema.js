@@ -14,6 +14,7 @@ const postSchema =  new Schema({
         default:'1080p'
     },
     translations:mongoose.Mixed,
+    shippingCost:String,
     format: String,
     source: String,
     sourceSite: String,

@@ -30,11 +30,11 @@ const ProductPrice = props => {
 
                 </div>
 
-                <div>
-                    <p>Currency :</p>
-                    <input name='currency' placeholder='currency' onChange={e => props.onChangeHandler(e)}
-                           value={props.postData.currency}/>
-                </div>
+                {/*<div>*/}
+                {/*    <p>Currency :</p>*/}
+                {/*    <input name='currency' placeholder='currency' onChange={e => props.onChangeHandler(e)}*/}
+                {/*           value={props.postData.currency}/>*/}
+                {/*</div>*/}
             </div>
         );
     } else return null

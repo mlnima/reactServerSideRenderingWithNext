@@ -12,13 +12,13 @@ subSiteMapsController.siteMap = (req, res) => {
     let renderPostData;
     const size = 500;
 
-    postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
+    postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify , postType ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
 
         renderPostData = posts.map(post => {
 
             if (post) {
                 let lastModify = new Date(post.lastModify);
-                let postUrl =process.env.PRODUCTION_URL + '/post/'+ encodeURIComponent(post.title)+'?id=' + post._id
+                let postUrl =process.env.PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
                 postsElements += '<url> \n ' +
                     `<loc>${ postUrl }</loc>\n` +
                     `<lastmod>${ lastModify.toISOString() }</lastmod>\n` +

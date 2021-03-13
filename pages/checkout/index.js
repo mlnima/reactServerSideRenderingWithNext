@@ -6,11 +6,14 @@ import {getMultipleSetting, getMultipleWidgetWithData} from "../../_variables/aj
 import {AppContext} from "../../context/AppContext";
 import {getPost} from "../../_variables/ajaxPostsVariables";
 import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
+import {useRouter} from "next/router";
 
 const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 
 const checkout = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
+    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
     const [state, setState] = useState({
         paymentPage: false,
         isPaid: false,
@@ -21,12 +24,15 @@ const checkout = props => {
         loading: true,
         isReady: false,
         currency: props.eCommerce.data.currency,
-        total: 0
+        total: 0,
+        totalPrice: 0
     });
     const [itemsData, setItemsData] = useState([])
-    const [purchaseUnits, setPurchaseUnits] = useState([])
+    const [orderData, setOrderData] = useState({})
 
 
+
+    //check if there is items in the basket and fetch data from DB
     useEffect(() => {
         if (contextData.checkOutData.items.length > 0) {
             setItemsData([])
@@ -35,13 +41,12 @@ const checkout = props => {
     }, [contextData.checkOutData.items]);
 
 
+    //create order from orderData for final payment
     const createOrder = (data, actions) => {
-        return actions.order.create({
-            intent: "CAPTURE",
-            purchase_units: purchaseUnits
-        });
+        return actions.order.create(orderData);
     };
 
+    // create a order in DB after payment get approved
     const onApprove = async (data, actions) => {
         const order = await actions.order.capture();
         contextData.functions.createOrder('payPal', order, {}).then(createdOrderResponse => {
@@ -64,6 +69,8 @@ const checkout = props => {
         })
     };
 
+
+    // sum only the price of the items
     const calculateTotalPrice = () => {
         let totalPrice = 0
         itemsData.forEach(i => {
@@ -73,6 +80,8 @@ const checkout = props => {
         return totalPrice
     }
 
+
+    //function to get checkoutItems data from database by ID
     const getCheckOutItems = async () => {
         Promise.all(contextData.checkOutData.items.map(item => getPost({_id: item.productId}, window.location.origin, false))).then(results => {
             setItemsData(results.map(result => {
@@ -80,6 +89,7 @@ const checkout = props => {
                     title: result.data.post.title,
                     mainThumbnail: result.data.post.mainThumbnail,
                     price: result.data.post.price,
+                    shippingCost: result?.data?.post?.shippingCost ?? 0,
                     translations: result.data.post.translations,
                     ...contextData.checkOutData.items.find(item => item.productId === result.data.post._id)
                 }
@@ -87,61 +97,92 @@ const checkout = props => {
         })
     }
 
-
+    // create order data for paypal from itemsData and store it in orderData
     useEffect(() => {
         if (itemsData.length > 0) {
-            setPurchaseUnits([
-                ...purchaseUnits,
-                ...itemsData.map(itemData => {
-                    const orderPrice = Number(itemData.price) * Number(itemData.count)
-                    return {
-                        description: itemData.title,
-                        reference_id: itemData.productId,
-                        amount: {
-                            currency_code: props.eCommerce.data.currency,
-                            value: orderPrice,
-                            breakdown: {
-                                // shipping: {currency_code: props.eCommerce.data.currency, value: (orderPrice / 100) * 2},
-                                // item_total: {currency_code: props.eCommerce.data.currency, value: orderPrice},
-                                // tax_total: {currency_code: props.eCommerce.data.currency, value: (orderPrice / 100) * 19},
-                                // discount: {currency_code: props.eCommerce.data.currency, value: 0},
-                            }
-                        }
-                    }
+            const VAT = props?.eCommerce?.data?.VAT ?? 0;
+            const totalPriceValue = calculateTotalPrice();
+            const defaultShippingCost = props?.eCommerce?.data?.defaultShippingCost ?? 0;
+            let itemsShippingCosts = 0
+            const totalItemsPrice = VAT === 0 ? totalPriceValue : ((totalPriceValue / 100) * VAT) + totalPriceValue;
+            itemsData.forEach(itemData => itemData.shippingCost ? itemsShippingCosts += Number(itemData.shippingCost) : null)
+            const totalPrice = totalItemsPrice + itemsShippingCosts
 
-                })
-            ])
+            setState({
+                ...state,
+                totalPrice
+            })
+
+            setOrderData({
+                intent: "CAPTURE",
+                purchase_units: [{
+                    reference_id: '1',
+                    amount: {
+                        currency_code: props.eCommerce.data.currency,
+                        value: totalPrice,
+                        breakdown: {
+                            shipping: {currency_code: props.eCommerce.data.currency, value: defaultShippingCost},
+                            item_total: {currency_code: props.eCommerce.data.currency, value: totalPrice},
+                            // tax_total: {currency_code: props.eCommerce.data.currency, value: (orderPrice / 100) * 19},
+                            // discount: {currency_code: props.eCommerce.data.currency, value: 0},
+                        }
+                    },
+                    description: contextData.siteIdentity.title,
+                    custom_id: '64735',
+                    items: itemsData.map(itemData => {
+                        return {
+                            name: itemData.title,
+                            unit_amount: {
+                                currency_code: props.eCommerce.data.currency,
+                                value: itemData.price
+                            },
+                            quantity: itemData.count,
+                            description: `${itemData.count} x ${itemData.title} `
+                        }
+                    })
+                }]
+            })
+
         }
     }, [itemsData]);
 
 
-    useEffect(() => {
-        console.log(itemsData)
-    }, [itemsData]);
-
     return (
         <AppLayout {...props}>
             <div className='main checkout-page'>
-                <div className='checkout-items'>
-                    {itemsData.length > 0 ?
-                        (itemsData || []).map(item => {
-                            return (
-                                <CheckOutItemPreview key={(itemsData || []).indexOf(item)} {...item} {...props} editable={!state.paymentPage}/>
-                            )
-                        })
-                        : null
-                    }
-                </div>
+
+                {/*render basket items*/}
+                {!state.paymentPage?
+                    <div className='checkout-items'>
+                        {itemsData.length > 0 ?
+                            (itemsData || []).map(item => {
+                                return (
+                                    <CheckOutItemPreview key={(itemsData || []).indexOf(item)} {...item} {...props} editable={!state.paymentPage}/>
+                                )
+                            })
+                            : null
+                        }
+                    </div>:
+                    //we need to add some login input or pay as guest form to get userData
+                    <div className='checkout-items'/>
+                }
+
+
                 <div className='checkout-purchase'>
+
+                    {/*render subtotal text*/}
                     <div className='checkout-total'>
-                        <h3>{contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.summaryText || 'Summary' : props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.summaryText || 'Summary'}</h3>
+                        <h3>{props.eCommerce?.data?.translations?.[locale]?.summaryText || props.eCommerce?.data?.summaryText || 'Summary'}</h3>
                         <p>
-                            {contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.totalText ?? 'Subtotal' : props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.totalText ?? 'Subtotal'}
-                            :
-                            {props.eCommerce?.data?.currencySymbol ? ' ' + props.eCommerce?.data?.currencySymbol + ' ' : ' € '}
-                            {calculateTotalPrice()}
+                            <span>{props.eCommerce?.data?.translations?.[locale]?.totalText || props.eCommerce?.data?.totalText || 'Subtotal'} :</span>
+
+                            <span>{new Intl.NumberFormat(props.eCommerce.data.shopLocale, {style: 'currency', currency: props.eCommerce.data.currency}).format(state.totalPrice)}</span>
                         </p>
+                        <span className='vat-included'>{props?.eCommerce?.data?.translations?.[locale]?.VAT_includedText || 'VAT included.'}</span>
                     </div>
+
+
+                    {/*button to render payments buttons*/}
                     {
                         !state.paymentPage ?
                             <button
@@ -153,22 +194,22 @@ const checkout = props => {
                             </button>
                             : null
                     }
+                    {/*render payments buttons*/}
                     {
                         state.paymentPage ?
                             <PayWithPayPal
                                 createOrder={createOrder}
                                 onApprove={onApprove}
-                                total={state.totalPrice}
+                                // total={state.totalPrice}
                                 active={state.paymentPage}
                                 itemsData={itemsData}
                                 state={state}
                                 setState={setState}
-                            /> :
-
-                            null
+                            /> : null
                     }
 
                 </div>
+
             </div>
         </AppLayout>
     );

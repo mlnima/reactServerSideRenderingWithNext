@@ -1,11 +1,12 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
+import {AppContext} from "../../../context/AppContext";
 import {getPost, savePost, updatePost} from '../../../_variables/ajaxPostsVariables';
 import {getAbsolutePath} from '../../../_variables/_variables'
 import AdminLayout from "../../../components/layouts/AdminLayout";
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 import DropDownWidget from "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
-import {AppContext} from "../../../context/AppContext";
+
 import Format from "../../../components/adminIncludes/PostComponents/Format/Format";
 import Meta from "../../../components/adminIncludes/PostComponents/Meta/Meta";
 // import VideoInformation from "../../../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
@@ -14,7 +15,7 @@ import TextInputWithUploadBtn from '../../../components/adminIncludes/TextInputW
 import ImagePreview from '../../../components/adminIncludes/PostComponents/ImagePreview/ImagePreview';
 import Link from 'next/link'
 import dataDecoder from '../../../server/tools/dataDecoder'
-import ProductInformation from '../../../components/adminIncludes/PostComponents/ProductInformation/ProductInformation'
+//import ProductInformation from '../../../components/adminIncludes/PostComponents/ProductInformation/ProductInformation'
 import {getMultipleSetting} from '../../../_variables/ajaxVariables'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
 import {useRouter} from "next/router";
@@ -126,16 +127,12 @@ const Index = props => {
 
 
     const onDescriptionChangeHandler = data => {
-//console.log(data)
         const e = {
             target: {
                 name: 'description',
                 value: data
             }
         }
-        // if (!data.includes('<p><br></p>') && data !== textInputsState.description) {
-        //
-        // }
         onTranslatedInputChangeHandler(e)
     }
 

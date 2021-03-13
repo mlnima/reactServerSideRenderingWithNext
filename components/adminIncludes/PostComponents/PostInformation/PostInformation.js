@@ -27,6 +27,7 @@ const PostInformation = props => {
             <TextInput {...props} name='downloadLink' title='Download Link' rendering={props.postData.postType === 'video'}/>
             <Duration {...props}  rendering={props.postData.postType === 'video'}/>
             <ProductPrice {...props} rendering={props.postData.postType === 'product'}/>
+            <TextInput {...props} name='shippingCost' rendering={props.postData.postType === 'product'}/>
             <ImageGallery {...props} rendering={props.postData.postType === 'product'}/>
             <RatingAndViews {...props} name='views' value={props.postData.views} rendering={true}/>
             <RatingAndViews {...props} name='likes' value={props.postData.likes} rendering={true}/>
