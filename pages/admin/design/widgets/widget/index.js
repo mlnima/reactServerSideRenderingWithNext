@@ -23,4 +23,4 @@ const widget = props => {
         </AdminLayout>
     );
 };
-export default widget;
+// export default widget;

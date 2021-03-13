@@ -121,7 +121,7 @@ const checkout = props => {
                         currency_code: props.eCommerce.data.currency,
                         value: totalPrice,
                         breakdown: {
-                            shipping: {currency_code: props.eCommerce.data.currency, value: defaultShippingCost},
+                           // shipping: {currency_code: props.eCommerce.data.currency, value: defaultShippingCost},
                             item_total: {currency_code: props.eCommerce.data.currency, value: totalPrice},
                             // tax_total: {currency_code: props.eCommerce.data.currency, value: (orderPrice / 100) * 19},
                             // discount: {currency_code: props.eCommerce.data.currency, value: 0},
