@@ -26,6 +26,9 @@ const PostElement = props => {
     let element = useRef(null)
     let videoElement = useRef(null)
 
+    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
+    const title = props.state?.translations?.[locale]?.title || props.state.title
+
     let [state, setState] = useState({
         isHover: false,
         isWatched: false,
@@ -71,6 +74,7 @@ const PostElement = props => {
             } else if (!state.isHover) {
                 return (
                     <ImageRenderer imageUrl={props.state?.mainThumbnail}
+                                   altValue={title || props.state?.mainThumbnail }
                                    hoverHandler={isHoverHandler}
                                    imageWidth={imageWidth}
                                    imageHeight={imageWidth / 1.777}
@@ -90,8 +94,7 @@ const PostElement = props => {
         return dataToRender()
     };
 
-    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
-    const title = props.state?.translations?.[locale]?.title || props.state.title
+
     const linkAsForPostElement = process.env.REACT_APP_LOCALS.split(' ').includes(locale) ? `/${locale}/${props.state.postType ||'post'}/${title}?id=${props.state._id}` : `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
 
     return (
