@@ -416,13 +416,8 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         {route: '/code/:title', target: '/post'},
         {route: '/page/:pageName', target: '/page'},
         {route: '/profile', target: '/profile'},
-        // {route: '/errorPage', target: '/errorPage'},
         {route: '/checkout', target: '/checkout'},
-        //admin panel routes
         {route: '/admin', target: '/admin'},
-        // {route: '/admin/assets', target: '/admin/assets'},
-        // {route: '/admin/comments', target: '/admin/comments'},
-        // {route: '/admin/contacts', target: '/admin/contacts'},
         {route: '/admin/design', target: '/admin/design'},
         {route: '/admin/design/widgets/widget', target: '/admin/design/widgets/widget'},
         {route: '/admin/exporter', target: '/admin/exporter'},
