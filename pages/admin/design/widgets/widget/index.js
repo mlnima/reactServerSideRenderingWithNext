@@ -14,10 +14,10 @@ const widget = props => {
     // }, [props]);
 
     return (
-        <AdminLayout>
+        <Panel>
 
             widget
-        </AdminLayout>
+        </Panel>
     );
     return null
 };
