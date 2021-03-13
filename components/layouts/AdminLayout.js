@@ -16,7 +16,7 @@ import './AdminLayout.scss'
 
 
 
-const Panel = props => {
+const AdminLayout = props => {
     const contextData = useContext(AppContext);
     const container = useRef(null);
     const Admin = useRef(null);
@@ -81,4 +81,4 @@ const Panel = props => {
 
 };
 
-export default Panel;
+export default AdminLayout;

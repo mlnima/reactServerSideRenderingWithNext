@@ -1,13 +1,9 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {useRouter} from "next/router";
-//import AdminLayout from "../../../../../components/layouts/AdminLayout";
-//import {getSingleWidgetData} from "../../../../../_variables/ajaxVariables";
+import Panel from "../../../../../components/layouts/AdminLayout";
+
 
 const widget = props => {
-    const router = useRouter()
-    const [widgetData, setWidgetData] = useState({
-        widgetId:''
-    });
+
 
     // useEffect(() => {
     //         if (router.query.id){
@@ -17,11 +13,12 @@ const widget = props => {
     //         }
     // }, [props]);
 
-    // return (
-    //     <AdminLayout>
-    //         widget
-    //     </AdminLayout>
-    // );
+    return (
+        <AdminLayout>
+
+            widget
+        </AdminLayout>
+    );
     return null
 };
 export default widget;
