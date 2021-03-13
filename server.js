@@ -424,6 +424,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         // {route: '/admin/comments', target: '/admin/comments'},
         // {route: '/admin/contacts', target: '/admin/contacts'},
         {route: '/admin/design', target: '/admin/design'},
+        {route: '/admin/design/widgets/widget', target: '/admin/design/widgets/widget'},
         {route: '/admin/exporter', target: '/admin/exporter'},
         {route: '/admin/fileManager', target: '/admin/fileManager'},
         {route: '/admin/form', target: '/admin/form'},
