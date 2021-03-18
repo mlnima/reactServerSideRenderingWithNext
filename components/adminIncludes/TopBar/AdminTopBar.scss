@@ -7,30 +7,44 @@
   justify-content: space-between;
   padding: 5px 10px;
   height: 30px;
-  background-color:$AdminColor100;
-  grid-area: adminTopBar ;
-.adminTopBarControl{
-  display: flex;
-  align-items: center;
-}
+  background-color: $AdminColor100;
+  grid-area: adminTopBar;
+
+  .developmentModeSwitch {
+    display: flex;
+    color: white;
+    justify-content: center;
+    align-items: center;
+    p{
+      font-size: .7rem;
+      margin: 0 10px;
+    }
+  }
+
+  .adminTopBarControl {
+    display: flex;
+    align-items: center;
+  }
+
   .adminTopBarItem {
     @include transparentLightTextBtn;
     transition: .4s;
-    &:hover{
+
+    &:hover {
       transform: scale(1.1);
     }
   }
-  .clearCache{
-    &:hover{
+
+  .clearCache {
+    &:hover {
       cursor: pointer;
     }
   }
 }
 
 
-
 @media only screen and (min-width: 768px) {
-.adminSideBarMobileBtn{
-  display: none;
-}
+  .adminSideBarMobileBtn {
+    display: none;
+  }
 }

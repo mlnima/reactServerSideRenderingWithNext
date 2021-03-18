@@ -5,17 +5,18 @@ import {createGlobalStyle} from "styled-components";
 import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import {AppContext} from "../../context/AppContext";
-const Loading = dynamic(() => import('../includes/Loading/Loading'),{ ssr: false })
-const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'),{ ssr: false })
-const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'),{ ssr: false })
-const Console = dynamic(() => import('../includes/AdminTools/Console/Console'),{ ssr: false })
+import {useRouter} from "next/router";
+
+const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
+const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
+const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
+const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), {ssr: false})
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 //import CardElement from "../includes/CardElement/CardElement";
-
-
 const AppLayout = props => {
     const contextData = useContext(AppContext);
+    const router= useRouter()
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -27,13 +28,23 @@ const AppLayout = props => {
         }
     }, []);
 
+
+    useEffect(() => {
+
+        if (props.identity?.data?.developmentMode && contextData.userData.role !== 'administrator'){
+            router.push('/maintenance')
+        }
+
+    }, [contextData.userData]);
+
+
     return (
         <div className={'App ' + (props.sidebar ? 'withSidebar' : 'withOutSidebar')}>
             <GlobalStyle globalStyleData={props.design?.data?.customStyles ?? ''}/>
             <SiteSettingSetter {...props}/>
 
 
-            {(props.widgets || []).filter(widget => widget?.data?.position === 'topBar').length>0 ?
+            {(props.widgets || []).filter(widget => widget?.data?.position === 'topBar').length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='topBar'
@@ -41,17 +52,17 @@ const AppLayout = props => {
                     className='top-bar'
                     position='topBar'
                     stylesData={props.design?.data?.topBarStyle}
-                />:null
+                /> : null
             }
-            {(props.widgets || []).filter(widget => widget?.data?.position === 'header').length>0 ?
+            {(props.widgets || []).filter(widget => widget?.data?.position === 'header').length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='header' widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'header')}
                     className='header' position='header'
                     stylesData={props.design?.data?.headerStyle}
-                />:null
+                /> : null
             }
-            {(props.widgets || []).filter(widget => widget?.data?.position === 'navigation').length>0 ?
+            {(props.widgets || []).filter(widget => widget?.data?.position === 'navigation').length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='navigation'
@@ -59,32 +70,32 @@ const AppLayout = props => {
                     className='navigation'
                     position='navigation'
                     stylesData={props.design?.data?.navigationStyle}
-                />:null
+                /> : null
             }
-            {(props.widgets || []).filter(widget => widget?.data?.position === props.sidebarPosition).length>0 && props.sidebar ?
+            {(props.widgets || []).filter(widget => widget?.data?.position === props.sidebarPosition).length > 0 && props.sidebar ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='sidebar'
                     widgets={(props.widgets || []).filter(widget => widget?.data?.position === props.sidebarPosition)}
                     className='sidebar '
                     position={props.sidebarPosition}
-                />:null
+                /> : null
             }
 
             {props.children}
 
-            {(props.widgets || []).filter(widget => widget?.data?.position === 'footer').length>0 ?
+            {(props.widgets || []).filter(widget => widget?.data?.position === 'footer').length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'footer')}
                     className='footer' position='footer'
                     stylesData={props.design?.data?.footerStyle}
-                />:null
+                /> : null
             }
-            {contextData.userData.role === 'administrator' ?  <AdminTools/> : null }
-            {contextData.userData.role === 'administrator' && contextData.state.console  ?  <Console/> : null }
-            {contextData.state.loading  ?   <Loading/> : null }
-            {contextData.alert.active && contextData.alert.alertMessage  ?  <AlertBox/> : null }
+            {contextData.userData.role === 'administrator' ? <AdminTools/> : null}
+            {contextData.userData.role === 'administrator' && contextData.state.console ? <Console/> : null}
+            {contextData.state.loading ? <Loading/> : null}
+            {contextData.alert.active && contextData.alert.alertMessage ? <AlertBox/> : null}
         </div>
 
     );

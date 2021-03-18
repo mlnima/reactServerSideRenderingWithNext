@@ -74,7 +74,7 @@ const MenuWidgetModelFields = props => {
 
 
 
-    const renderCurrentItems = (props.widgetData.menuItems.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || []).map(menuItem => {
+    const renderCurrentItems = (props?.widgetData?.menuItems?.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || []).map(menuItem => {
         return (
             <MenuWidgetModelFieldsPreview key={menuItem?.itemId?.toString() + menuItem.name ?? menuItem.name} data={menuItem} widgetData={props.widgetData} setWidgetData={props.setWidgetData}/>
         )

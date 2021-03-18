@@ -23,6 +23,7 @@ import '../components/includes/widgets/widgetsMainStyle.scss';
 import '../components/widgetsArea/WidgetArea/WidgetArea.scss';
 import '../components/includes/CardElement/CardElement.scss'
 import './post/Post.scss'
+import './maintenance/maintenance.scss'
 import './meta/meta.scss'
 import './checkout/checkout.scss'
 import '../components/layouts/AppLayout.scss'

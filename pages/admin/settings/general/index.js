@@ -128,6 +128,13 @@ const settings = props => {
                                 <option value='restaurant'>Restaurant</option>
                             </select>
                         </div>
+                        <div className="site-settings-form-section developmentMode">
+                            <p>Development Mode</p>
+                            <select name='developmentMode' value={state.developmentMode || false} onChange={e => onChangeHandler(e)}>
+                                <option value='true'>ON</option>
+                                <option value='false'>OFF</option>
+                            </select>
+                        </div>
                         <div className="site-settings-form-section defaultPostType">
                             <p>Default new Post Type:</p>
                             <select name='defaultPostType' value={state.defaultPostType} onChange={e => onChangeHandler(e)}>
