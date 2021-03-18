@@ -135,7 +135,7 @@ const customScript = props => {
     return (
         <AdminLayout>
             <div className='customScriptsAsStringSection'>
-                <textarea name='customScriptsAsString' className='customScriptsAsString' placeholder='Custom Scripts As String' onChange={ e => onCustomScriptsAsStringChangeHandler(e) }/>
+                <textarea name='customScriptsAsString' value={contextData.siteIdentity.customScriptsAsString} className='customScriptsAsString' placeholder='Custom Scripts As String' onChange={ e => onCustomScriptsAsStringChangeHandler(e) }/>
                 <button className='saveBtn' onClick={ () => onSaveHandler() }>Save</button>
             </div>
 
