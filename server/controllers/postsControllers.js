@@ -325,15 +325,19 @@ postsControllers.getMeta = async (req, res) => {
         const mapMetaToGetImage = metas.map(async meta => {
             try {
                 const noImageUrl = await postSchema.find({[type.type]: meta._id}).limit(1).sort('-_id').exec().then(lastPost => {
+                    //.skip(Math.floor(Math.random() * metaCount))
                     if (lastPost[0]) {
                         return lastPost[0].mainThumbnail
                     } else {
                         return undefined
                     }
                 }).catch(err => {
-                    console.log(err)
+                    console.log('1x',err)
                     res.end()
                 })
+
+
+
                 return {
                     ...meta.toObject(),
                     count: await postSchema.countDocuments({[type.type]: meta._id}).exec(),

@@ -4,32 +4,14 @@ import {getAbsolutePath} from '../../_variables/_variables'
 import {getMultipleSetting, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
 import {getMeta} from '../../_variables/ajaxPostsVariables'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
-//import withRouter from 'next/dist/client/with-router'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {useRouter} from "next/router";
-import './meta.scss'
+//import './meta.scss'
 
 
 const meta = props => {
     const router = useRouter()
-    const [state, setState] = useState({
-        style: {}
-    });
-
-    useEffect(() => {
-        if (props.identity.metaPageSidebar) {
-            setState({
-                style: {
-                    gridArea: 'content'
-                }
-            })
-        }
-    }, []);
-
-
-
     const renderMetas = (props.metaSource.metas ?? []).map(meta => {
-
         return (
             <MetaElement key={props.metaSource.metas.indexOf(meta)} {...meta} />
         )
@@ -37,13 +19,12 @@ const meta = props => {
 
     return (
         <AppLayout  {...props} sidebar={props.identity?.data?.metaPageSidebar} sidebarPosition='metaPageSidebar'>
-            <div style={state.style}
-                 className={props.identity.data.metaPageSidebar ? 'content main ' : 'content main '}>
+            <div style={{gridArea:props.identity.metaPageSidebar ? 'content':''}}  className={props.identity.data.metaPageSidebar ? 'content main ' : 'content main '} >
                 <PaginationComponent
                     isActive={true}
                     currentPage={props?.dataForGettingMeta?.page}
                     totalCount={props?.metaSource?.totalCount}
-                    size={props?.dataForGettingMeta?.size}
+                    size={props?.dataForGettingMeta?.size}W
                     maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
                     queryData={router.query}
                     pathnameData={router.pathname}
@@ -72,8 +53,8 @@ export const getServerSideProps = async ({req, query, res}) => {
 
     const dataForGettingMeta = {
         type: query.contentType?.includes('tags') ? 'tags' :
-            query.contentType?.includes('categories') ? 'categories' :
-                query.contentType?.includes('actors') ? 'actors' : '',
+              query.contentType?.includes('categories') ? 'categories' :
+              query.contentType?.includes('actors') ? 'actors' : '',
 
         searchForImageIn: query.contentType,
         page: parseInt(query.page) || 1,

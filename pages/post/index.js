@@ -3,7 +3,6 @@ import AppLayout from "../../components/layouts/AppLayout";
 import {getComments, getPost} from "../../_variables/ajaxPostsVariables";
 import VideoPlayer from "../../components/includes/Post/VideoPlayer/VideoPlayer";
 import PostInfo from "../../components/includes/Post/PostInfo/PostInfo";
-import withRouter from "next/dist/client/with-router";
 import {getMultipleWidgetWithData, getMultipleSetting} from "../../_variables/ajaxVariables";
 import CommentFrom from '../../components/includes/Post/CommentFrom/CommentFrom'
 import CommentsRenderer from '../../components/includes/CommentsRenderer/CommentsRenderer'
@@ -13,13 +12,12 @@ import SlideShow from '../../components/includes/Post/SlideShow/SlideShow'
 import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
 import styled from "styled-components";
 import PostMetaDataToSiteHead from "../../components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead";
-
+import {useRouter} from "next/router";
 let StyledDiv = styled.div`${props => props.stylesData}`
 
 const Post = props => {
+    const router = useRouter()
     const [state, setState] = useState({
-        style: {},
-        postPageStyle: '',
         editMode: false
     })
     const [deviceWidth, setDeviceWidth] = useState(null)
@@ -33,15 +31,7 @@ const Post = props => {
 
 
     useEffect(() => {
-        if (props.identity.postPageSidebar) {
-            setState({
-                style: {
-                    gridArea: 'content'
-                }
-            })
-        }
-        if (props.router) {
-            if (props.router.query.mode === 'edit') {
+            if (router.query.mode === 'edit') {
                 setState({
                     ...state,
                     editMode: true
@@ -52,8 +42,7 @@ const Post = props => {
                     editMode: false
                 })
             }
-        }
-    }, [props]);
+    }, []);
 
 
     if (props.errorCode !== 200) {
@@ -61,7 +50,7 @@ const Post = props => {
     } else return (
         <AppLayout {...props} sidebar={props.identity?.data?.postPageSidebar} sidebarPosition='postPageSidebar'>
             <PostMetaDataToSiteHead {...props}/>
-            <StyledDiv stylesData={props.design.data.postPageStyle} className='main post-page'>
+            <StyledDiv stylesData={props.design?.data?.postPageStyle ?? ''} className='main post-page'>
                 <VideoPlayer {...props.post}/>
                 <SlideShow {...props.post} sidebar={props.identity.data.postPageSidebar} deviceWidth={deviceWidth}/>
                 <PostInfo
@@ -83,11 +72,13 @@ const Post = props => {
                     price={props.post.price}
                     {...props.post}
                 />
-                <CommentsRenderer comments={props.comments}/>
+                {props.comments.length>0 ? <CommentsRenderer comments={props.comments}/> : null }
                 <CommentFrom documentId={props.post._id} documentTitle={props.post.title}/>
-                <div className='under-post-widget-area'>
-                    <WidgetsRenderer deviceWidth={deviceWidth} widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')} position='underPost'/>
-                </div>
+                {(props.widgets || []).filter(widget => widget.data.position === 'underPost').length>0 ?
+                        <div className='under-post-widget-area'>
+                            <WidgetsRenderer deviceWidth={deviceWidth} widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')} position='underPost'/>
+                        </div>:null}
+
             </StyledDiv>
         </AppLayout>
 
@@ -130,4 +121,4 @@ export const getServerSideProps = async ({req, query}) => {
 }
 
 
-export default withRouter(Post);
+export default Post;

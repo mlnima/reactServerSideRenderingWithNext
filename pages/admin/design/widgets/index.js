@@ -69,7 +69,6 @@ const HomePageWidgets = props => {
 
 
     const renderWidgetsInPosition = [...new Set((contextData.widgetsSettings.widgets).map(widgets => {
-
         return widgets.data.position
     }))].map(position => {
         const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)

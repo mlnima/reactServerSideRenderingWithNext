@@ -28,6 +28,10 @@ import './checkout/checkout.scss'
 import '../components/layouts/AppLayout.scss'
 
 
+// export function reportWebVitals(metric) {
+//     console.log(metric)
+// }
+
 const MyApp = ({Component, pageProps}) => {
 
     return (

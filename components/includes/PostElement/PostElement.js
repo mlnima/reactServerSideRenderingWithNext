@@ -110,7 +110,7 @@ const PostElement = props => {
                     <div className='post-element' key={props.state.title}>
                         <div className="image">
                             <ImageContent/>
-                            {props.state && props.state.views > 1 ? <BottomRight/> : null}
+                            {props.state && props.state.views > 1 && props.state.postType === ('video') ? <BottomRight views={props.state.views}/> : null}
                             {props.state.postType === ('video' || 'redirect' || 'product') ? <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
                             {props.state.quality ? <TopRight quality={props.state.quality}/> : null}
                         </div>

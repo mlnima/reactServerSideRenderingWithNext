@@ -10,31 +10,32 @@ const MenuWidget = props => {
     const router = useRouter()
     useEffect(() => {
         let deviceWidth = 0
-        if (typeof window !== 'undefined'){
+        if (typeof window !== 'undefined') {
             deviceWidth = window.innerWidth
-            deviceWidth >=768 ? setOpen(true):null
+            deviceWidth >= 768 ? setOpen(true) : null
         }
     }, [props]);
 
-    const mobileNavigationOnClickHandler= ()=>{
-        if (props.isMobile){
+    const mobileNavigationOnClickHandler = () => {
+        if (props.isMobile) {
             setOpen(false)
         }
     }
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
-    const renderMenuItems = (props.menuItems || []).map(menuItem => {
+
+    const renderMenuItems = (props.menuItems.sort((a,b)=>a.itemIndex>b.itemIndex?1:-1) || []).map(menuItem => {
         if (menuItem.type === 'internal') {
             const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as :
-                 (!router.locale && !router.query.locale)?menuItem.as :
-                `/${router.locale || router.query.locale}${menuItem.as}`
+                (!router.locale && !router.query.locale) ? menuItem.as :
+                    `/${router.locale || router.query.locale}${menuItem.as}`
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
-                    <Link href={menuItem.target}
-                          as={linkAsForMenuItems}
-                         // locale={router.locale || router.query.locale || false}
-                    >
-                        <a  onClick={mobileNavigationOnClickHandler} >
-                            {menuItem.name}
+                    <Link href={menuItem.target} as={linkAsForMenuItems}>
+                        <a onClick={mobileNavigationOnClickHandler}>
+                            {menuItem.translations?.[router.locale]?.name || menuItem.name }
                         </a>
                     </Link>
                 </li>

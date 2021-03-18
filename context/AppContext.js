@@ -117,8 +117,9 @@ const AppProvider = props => {
              if (type === 'payPal'){
                  const body ={
                      type,
-                     additionalData,
-                     payPalData:data
+                     payPalData:data,
+                     additionalData
+
                  }
                  return axios.post('/api/v1/order/create/payPal',body)
              }

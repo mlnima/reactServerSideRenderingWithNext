@@ -6,7 +6,6 @@ import {
 } from '../../_variables/ajaxVariables'
 import { getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables'
 import SiteSettingSetter from '../../components/includes/SiteSettingsSetter/SiteSettingsSetter';
-import {useRouter} from "next/router";
 import withRouter from 'next/dist/client/with-router'
 import Posts from '../../components/includes/Posts/Posts'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
@@ -15,12 +14,12 @@ import './Posts.scss'
 //import MetaContentForPostsPage from "../../components/includes/MetaContentForPostsPage/MetaContentForPostsPage";
 
 const posts = props => {
-    const router= useRouter()
+
 
     return (
         <>
             <AppLayout  {...props} sidebar={props.identity?.data?.postsPageSidebar} sidebarPosition='postsPageSidebar'>
-                <SiteSettingSetter  {...props}/>
+                {/*<SiteSettingSetter  {...props}/>*/}
                     <div className="main posts-page">
                         {/*<MetaContentForPostsPage {...props}/>*/}
                         <PaginationComponent
@@ -29,8 +28,7 @@ const posts = props => {
                             totalCount={props.postsSource.totalCount}
                             size={props.getPostsData.size}
                             maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
-                            queryData={props.query || props.router.query}
-                            pathnameData={router.pathname}
+                            //paginationIndex='pagination1'
                         />
                         <div className='postsContainer'>
                             <Posts posts={props.postsSource.posts || []}/>
@@ -42,9 +40,7 @@ const posts = props => {
                             totalCount={props.postsSource.totalCount}
                             size={props.getPostsData.size}
                             maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
-                            query={props.query ? props.query : {}}
-                            routerQuery={props.router ? props.router.query : {}}
-                            pathnameData={router.pathname}
+                            //paginationIndex='pagination2'
                         />
                     </div>
             </AppLayout>

@@ -10,6 +10,22 @@
   width: 300px;
   margin: 10px 0;
 }
+.customScriptsAsStringSection{
+  display: flex;
+  flex-direction: column;
+  .customScriptsAsString{
+    @include inputNormalWithRadius;
+    background-color: $light100;
+    width: 50%;
+    min-width: 300px;
+    min-height: 300px;
+    margin: 10px 0;
+  }
+}
+
+
+
+
 .addCustomScriptForm {
   display: flex;
   flex-direction: column;

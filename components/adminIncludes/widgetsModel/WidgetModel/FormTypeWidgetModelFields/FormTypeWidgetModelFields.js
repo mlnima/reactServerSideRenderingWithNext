@@ -16,9 +16,6 @@ const FormTypeWidgetModelFields = props => {
         formFields: []
     });
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
     const onChangeHandler = (e) => {
         props.setWidgetData({
             ...props.widgetData,

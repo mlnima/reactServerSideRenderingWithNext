@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faFileExport} from "@fortawesome/free-solid-svg-icons";
 const ExportWidget = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({});
@@ -40,7 +41,7 @@ const ExportWidget = props => {
 
 
     return (
-        <button onClick={() => onExportHandler()}>Export</button>
+        <button title="export" onClick={() => onExportHandler()}><FontAwesomeIcon icon={faFileExport} style={{width:'15px',height:'15px'}}/></button>
     );
 };
 export default ExportWidget;

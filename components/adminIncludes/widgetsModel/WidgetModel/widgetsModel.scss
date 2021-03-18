@@ -46,6 +46,24 @@
   border: solid .5px black;
   margin-bottom: 5px;
   color: $light100;
+  .widgetSection{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    p{
+      width: 40%;
+      font-size: .8rem;
+    }
+    input,select{
+      display: block;
+      width: 50%;
+      -ms-box-sizing:content-box;
+      -moz-box-sizing:content-box;
+      -webkit-box-sizing:content-box;
+      box-sizing:content-box;
+    }
+  }
   textarea{
   min-height: 250px;
 }
@@ -87,4 +105,7 @@
 .control-buttons{
   display: flex;
   justify-content: space-evenly;
+  button{
+    padding: 5px 5%;
+  }
 }

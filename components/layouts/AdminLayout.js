@@ -7,7 +7,7 @@ import SideBar from "../adminIncludes/SideBar/SideBar";
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
 const Loading = dynamic(() => import('../includes/Loading/Loading'),{ ssr: false })
-
+import Link from "next/link";
 import {generateAbsolutePath, initGA, logPageView} from '../../_variables/_variables'
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'),{ ssr: false })
 
@@ -76,7 +76,13 @@ const AdminLayout = props => {
             </>
         );
     } else return (
-        <h1>Access Denied</h1>
+        <div id='access-denied-admin'>
+        <h1>
+            <Link href='/login'>
+                <a>403 Forbidden</a>
+            </Link>
+        </h1>
+        </div>
     )
 
 };

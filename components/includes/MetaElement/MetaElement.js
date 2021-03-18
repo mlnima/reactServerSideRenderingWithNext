@@ -10,7 +10,7 @@ const MetaElement = props => {
 
     if (props.count > 0) {
         return (
-            <Link key={props.name} as={contextData.state.activeLanguage !== 'default' ?`/${props.type}/${props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].name || props.name : props.name : props.name}?content=${props._id}&lang=${contextData.state.activeLanguage}`:`/${props.type}/${props.name}?content=${props._id}`} href={{
+            <Link key={props.name} as={contextData.state.activeLanguage !== 'default' ?`/${props.type}/${props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].name || props.name : props.name : props.name}?content=${props._id}`:`/${props.type}/${props.name}?content=${props._id}`} href={{
                 pathname: `/posts`,
                 query: {
                     content: props._id,

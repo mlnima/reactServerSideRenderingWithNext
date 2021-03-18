@@ -8,8 +8,11 @@ import Link from "next/link";
 import './WidgetHeaderControl.scss'
 
 const WidgetHeaderControl = props => {
+
+    const keyStatus = props.setKey ? {key:props.widgetId} :{}
+
     return (
-        <div className='widget-open-control'>
+        <div className='widget-open-control' {...keyStatus}>
             <p onClick={props.onOpenHandler} className='widget-open-control-group'><FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
                 transform: props.widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',
             }}/> {props.widgetData.name || convertVariableNameToName(props.widgetData.type)} index: {props.widgetData.widgetIndex || '0'}</p>

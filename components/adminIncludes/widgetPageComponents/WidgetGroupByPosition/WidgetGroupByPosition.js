@@ -15,7 +15,6 @@ const WidgetGroupByPosition = props => {
         return (
             <WidgetModel
                 key={props.widgets.indexOf(widget)}
-                isPost={false}
                 widgetId={widgetData._id}
                 data={widgetData.data}
                 customPages={props.customPages}

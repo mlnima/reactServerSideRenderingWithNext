@@ -31,12 +31,13 @@ const checkout = props => {
     const [orderData, setOrderData] = useState({})
 
 
-
     //check if there is items in the basket and fetch data from DB
     useEffect(() => {
         if (contextData.checkOutData.items.length > 0) {
             setItemsData([])
             getCheckOutItems()
+        }else if (contextData.checkOutData.items.length === 0){
+            router.push('/')
         }
     }, [contextData.checkOutData.items]);
 
@@ -49,7 +50,26 @@ const checkout = props => {
     // create a order in DB after payment get approved
     const onApprove = async (data, actions) => {
         const order = await actions.order.capture();
-        contextData.functions.createOrder('payPal', order, {}).then(createdOrderResponse => {
+        const additionalData = {
+            userID: contextData.userData._id || 'guest',
+            agreementType: orderData.intent ,
+            totalPrice: orderData.purchase_units?.amount?.value,
+            createdTime: order.create_time,
+            updatedTime:order.update_time,
+            transactionId:order.id,
+            payerEmail:order.payer?.email_address,
+            payerId:order.payer?.payer_id,
+            payerAddress:order.payer?.address,
+            payerFirstName:order.payer?.name?.given_name,
+            payerLastName:order.payer?.name?.surname,
+            shippingToName:order.purchase_units[0]?.shipping?.name?.full_name,
+            shippingToAddress:order.purchase_units[0]?.shipping?.address,
+            paymentStatus:order.purchase_units[0]?.payments?.captures[0].status,
+            paymentId:order.purchase_units[0]?.payments?.captures[0].id,
+        }
+
+
+        contextData.functions.createOrder('payPal', order, additionalData).then(createdOrderResponse => {
             console.log(createdOrderResponse)
             setState({
                 ...state,
@@ -121,7 +141,7 @@ const checkout = props => {
                         currency_code: props.eCommerce.data.currency,
                         value: totalPrice,
                         breakdown: {
-                           // shipping: {currency_code: props.eCommerce.data.currency, value: defaultShippingCost},
+                            // shipping: {currency_code: props.eCommerce.data.currency, value: defaultShippingCost},
                             item_total: {currency_code: props.eCommerce.data.currency, value: totalPrice},
                             // tax_total: {currency_code: props.eCommerce.data.currency, value: (orderPrice / 100) * 19},
                             // discount: {currency_code: props.eCommerce.data.currency, value: 0},
@@ -152,7 +172,7 @@ const checkout = props => {
             <div className='main checkout-page'>
 
                 {/*render basket items*/}
-                {!state.paymentPage?
+                {!state.paymentPage ?
                     <div className='checkout-items'>
                         {itemsData.length > 0 ?
                             (itemsData || []).map(item => {
@@ -162,7 +182,7 @@ const checkout = props => {
                             })
                             : null
                         }
-                    </div>:
+                    </div> :
                     //we need to add some login input or pay as guest form to get userData
                     <div className='checkout-items'/>
                 }

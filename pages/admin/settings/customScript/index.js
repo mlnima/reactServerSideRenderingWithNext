@@ -86,11 +86,15 @@ const customScript = props => {
             })
 
             const scriptIndex = contextData.siteIdentity.customScripts.findIndex(addedScript => addedScript.scriptName === script.scriptName)
+
             const updatedScript = {
                 ...contextData.siteIdentity.customScripts[scriptIndex],
                 [e.target.name]: e.target.value
             }
             setTimeout(() => {
+
+
+
                 const updatedScripts = [
                     ...contextData.siteIdentity.customScripts.slice(0, scriptIndex),
                     updatedScript,
@@ -122,8 +126,19 @@ const customScript = props => {
         )
     })
 
+    const onCustomScriptsAsStringChangeHandler = e=>{
+        contextData.dispatchSiteIdentity({
+            ...contextData.siteIdentity,
+            customScriptsAsString: e.target.value
+        })
+    }
     return (
         <AdminLayout>
+            <div className='customScriptsAsStringSection'>
+                <textarea name='customScriptsAsString' className='customScriptsAsString' placeholder='Custom Scripts As String' onChange={ e => onCustomScriptsAsStringChangeHandler(e) }/>
+                <button className='saveBtn' onClick={ () => onSaveHandler() }>Save</button>
+            </div>
+
             <form className='addCustomScriptForm' onSubmit={ e => onAddHandler(e) }>
                 <input className='scriptName' name='scriptName' placeholder='Script Name' onChange={ e => onNewScriptChangeHandler(e) }/>
                 <textarea name='scriptBody' className='addScriptTextarea' placeholder='Script with out Script Tag' onChange={ e => onNewScriptChangeHandler(e) }/>

@@ -64,10 +64,9 @@ let ssrCache = new LRUCache({
     },
     maxAge: 1000 * 60 * 60 * 24 * 30
 });
-
 let getCacheKey = (req) => {
     return `${req.path}`
-}
+};
 
 
 let renderAndCache = async (req, res, targetComponent, queryParams) => {
@@ -93,8 +92,6 @@ let renderAndCache = async (req, res, targetComponent, queryParams) => {
             await app.renderError(err, req, res, targetComponent, queryParams)
         }
     }
-
-
 }
 
 
@@ -111,7 +108,7 @@ app.prepare().then(() => {
     server.use(fileUpload());
     server.use(bodyParser.json());
     server.use(xmlparser());
-    server.use(cors())
+  //  server.use(cors())
 
     //-------------------
     server.use('/static', express.static(path.join(__dirname, 'static')))
@@ -183,6 +180,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts', (req, res) => {
+        //need to be chache
         postsControllers.getPostsInfo(req, res)
     });
     server.post('/api/v1/posts/post', cacheSuccesses, (req, res) => {
@@ -362,25 +360,25 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         {route: '/page/:pageName', target: '/page'},
         {route: '/profile', target: '/profile'},
         {route: '/checkout', target: '/checkout'},
-        {route: '/admin', target: '/admin'},
-        {route: '/admin/design', target: '/admin/design'},
-        {route: '/admin/design/widgets/widget', target: '/admin/design/widgets/widget'},
-        {route: '/admin/exporter', target: '/admin/exporter'},
-        {route: '/admin/fileManager', target: '/admin/fileManager'},
-        {route: '/admin/form', target: '/admin/form'},
-        {route: '/admin/importer', target: '/admin/importer'},
-        {route: '/admin/meta', target: '/admin/meta'},
-        {route: '/admin/page', target: '/admin/page'},
-        {route: '/admin/post', target: '/admin/post'},
-        {route: '/admin/posts', target: '/admin/posts'},
-        {route: '/admin/settings', target: '/admin/settings'},
-        {route: '/admin/settings/customScript', target: '/admin/settings/customScript'},
-        {route: '/admin/settings/customStyle', target: '/admin/settings/customStyle'},
-        {route: '/admin/settings/eCommerceSettings', target: '/admin/settings/eCommerceSettings'},
-        {route: '/admin/settings/generals', target: '/admin/settings/generals'},
-        {route: '/admin/tools', target: '/admin/tools'},
-        {route: '/admin/users', target: '/admin/users'},
-        {route: '/admin/user', target: '/admin/user'},
+        // {route: '/admin', target: '/admin'},
+        // {route: '/admin/design', target: '/admin/design'},
+        // {route: '/admin/design/widgets/widget', target: '/admin/design/widgets/widget'},
+        // {route: '/admin/exporter', target: '/admin/exporter'},
+        // {route: '/admin/fileManager', target: '/admin/fileManager'},
+        // {route: '/admin/form', target: '/admin/form'},
+        // {route: '/admin/importer', target: '/admin/importer'},
+        // {route: '/admin/meta', target: '/admin/meta'},
+        // {route: '/admin/page', target: '/admin/page'},
+        // {route: '/admin/post', target: '/admin/post'},
+        // {route: '/admin/posts', target: '/admin/posts'},
+        // {route: '/admin/settings', target: '/admin/settings'},
+        // {route: '/admin/settings/customScript', target: '/admin/settings/customScript'},
+        // {route: '/admin/settings/customStyle', target: '/admin/settings/customStyle'},
+        // {route: '/admin/settings/eCommerceSettings', target: '/admin/settings/eCommerceSettings'},
+        // {route: '/admin/settings/generals', target: '/admin/settings/generals'},
+        // {route: '/admin/tools', target: '/admin/tools'},
+        // {route: '/admin/users', target: '/admin/users'},
+        // {route: '/admin/user', target: '/admin/user'},
 
     ]
 
