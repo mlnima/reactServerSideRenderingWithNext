@@ -22,7 +22,7 @@ const LanguagesSwitcher = props => {
         <div className='language-switcher-widget'>
             <p>{props.translations?.[contextData.state.activeLanguage]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown}</p>
             <select value={ contextData.state.activeLanguage } aria-label='Center Align'
-                onChange={e => onChangeHandler(e)} aria-checked='true'>
+                onChange={e => onChangeHandler(e)} >
                 <option key='default' value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'default'}</option>
                 {languagesOptions}
             </select>
@@ -30,3 +30,5 @@ const LanguagesSwitcher = props => {
     );
 };
 export default LanguagesSwitcher;
+
+//aria-checked='true'

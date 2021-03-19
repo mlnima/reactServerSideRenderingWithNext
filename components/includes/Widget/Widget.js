@@ -11,7 +11,13 @@ let StyledDiv = styled.div`${props => props.customStyles}`
 
 const Widget = props => {
     const contextData = useContext(AppContext);
+    const [styles, setStyles] = useState('')
 
+    useEffect(() => {
+        if (props.data?.customStyles){
+            setStyles(props.data?.customStyles)
+        }
+    }, [props.data?.customStyles]);
     const RenderComponent = () => {
         if (props.component) {
             return (
@@ -35,7 +41,7 @@ const Widget = props => {
 
     if (conditionalWidgetRenderer(props.data.deviceTypeToRender, props.data.languageToRender, contextData.state.activeLanguage)) {
         return (
-            <StyledDiv customStyles={props.data?.customStyles ?? ''} className={'widget ' + (props.data?.extraClassName ?? '')} id={props.data?.extraId ?? ''}>
+            <StyledDiv customStyles={props.data?.customStyles ?? styles} className={'widget ' + (props.data?.extraClassName ?? '')} id={props.data?.extraId ?? ''}>
                 <WidgetHeader {...props.data}/>
                 <WidgetText {...props.data}/>
                 <RenderComponent/>
