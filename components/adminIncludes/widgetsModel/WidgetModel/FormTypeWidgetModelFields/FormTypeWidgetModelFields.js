@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import './FormTypeWidgetModelFields.scss';
 import AddFormConditional from "./AddFormConditional";
 import {DelayInput} from "react-delay-input";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";

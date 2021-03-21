@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from "../../../../context/AppContext";
 import withRouter from 'next/dist/client/with-router'
 import AdminLayout from '../../../layouts/AdminLayout'
-// import './TextEditor.scss'
+
 
 const TextEditor = props => {
     let contextData = useContext(AppContext)

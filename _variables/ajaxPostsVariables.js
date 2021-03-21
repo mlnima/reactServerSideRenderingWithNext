@@ -12,13 +12,15 @@ const cacheQueryGenerator = cache => {
     return !cache ? Date.now() : ''
 }
 
-export const getPosts = async (data, domainName,cache) => {
-  // console.log(queriesData)
+export const getPosts = async (data, domainName,cache,queriesData) => {
+  console.log(queriesData)
+  console.log('nothing')
     const body = {
         ...data,
         cache
     };
-    return await axios.post(domainName +`/api/v1/posts`, body)
+  //?requestFor=${encodeURIComponent(queriesData)}
+    return await axios.post(domainName +`/api/v1/posts?requestFor=${encodeURIComponent(queriesData)}`, body)
 };
 
 export const getPost = async (data, domainName, cache) => {

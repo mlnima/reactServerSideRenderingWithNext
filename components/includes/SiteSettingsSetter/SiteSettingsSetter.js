@@ -8,23 +8,32 @@ const SiteSettingSetter = props => {
     const router = useRouter()
     const contextData = useContext(AppContext);
 
+
     useEffect(() => {
-        contextData.dispatchSiteDesign(props.design?.data ?? contextData.siteDesign)
-        contextData.dispatchSiteIdentity(props.identity?.data ?? contextData.siteIdentity)
-        contextData.dispatchECommerceSettings(props.eCommerce?.data ?? contextData.eCommerceSettings)
-        contextData.setSiteWidgets(props.widgets)
+        props.design?.data ? contextData.dispatchSiteDesign(props.design?.data) : null
+        props.identity?.data ? contextData.dispatchSiteIdentity(props.identity?.data) : null
+        props.eCommerce?.data ? contextData.dispatchECommerceSettings(props.eCommerce?.data) : null
+
         const manuallyDetectedLocal = router.locale ? router.locale :
-            router.query.locale ? router.query.locale : process.env.REACT_APP_DEFAULT_LOCAL
+            router.query.locale ? router.query.locale : process.env.REACT_APP_DEFAULT_LOCAL;
+
         contextData.dispatchState({
             ...contextData.state,
             activeLanguage: manuallyDetectedLocal
         })
-        router.locale = manuallyDetectedLocal
-        router.defaultLocale = process.env.REACT_APP_DEFAULT_LOCAL
-        // router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: manuallyDetectedLocal === process.env.REACT_APP_DEFAULT_LOCAL ? false : manuallyDetectedLocal})
 
+        // !router.locale ? router.locale = manuallyDetectedLocal || process.env.REACT_APP_DEFAULT_LOCAL : null;
+        // !router.defaultLocale ? router.defaultLocale = process.env.REACT_APP_DEFAULT_LOCAL : null
+        if (!router.locale){
+            router.locale = manuallyDetectedLocal || process.env.REACT_APP_DEFAULT_LOCAL
+            router.defaultLocale = process.env.REACT_APP_DEFAULT_LOCAL
+            router.push({pathname: router.pathname, query: router.query}, router.asPath, {locale:manuallyDetectedLocal})
+        }
     }, []);
 
+    // useEffect(() => {
+    //     console.log(router)
+    // }, [props]);
 
     return (
         <Head>
@@ -36,7 +45,7 @@ const SiteSettingSetter = props => {
             <meta name="description" content={props.identity?.data.description ?? ''}/>
             <meta name="keywords" content={props.identity?.data.keywords ?? []}/>
             <link rel="icon" href={props.identity?.data.favIcon ?? '/static/images/favIcon/favicon.png'}/>
-            {props.identity?.data?.customScriptsAsString ? parse(props.identity?.data?.customScriptsAsString):null}
+            {props.identity?.data?.customScriptsAsString ? parse(props.identity?.data?.customScriptsAsString) : null}
             {props?.identity?.data?.siteMode === 'eCommerce' ?
                 <script src={`https://www.paypal.com/sdk/js?client-id=${props?.eCommerce?.data?.payPalId}&currency=${props?.eCommerce?.data?.currency}`}/>
                 : null

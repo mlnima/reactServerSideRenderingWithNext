@@ -7,7 +7,7 @@ import {getSingleFormData} from "../../../_variables/ajaxVariables";
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";
 import dataDecoder from "../../../server/tools/dataDecoder";
 import {getPost} from "../../../_variables/ajaxPostsVariables";
-import './form.scss'
+//import './form.scss'
 
 const formPage = props => {
     const [state, setState] = useState({

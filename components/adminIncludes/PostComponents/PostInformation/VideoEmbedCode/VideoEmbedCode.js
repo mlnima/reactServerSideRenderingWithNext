@@ -1,5 +1,4 @@
 import React from 'react';
-import './VideoEmbedCode.scss';
 import { DelayInput } from 'react-delay-input'
 
 const VideoEmbedCode = props => {

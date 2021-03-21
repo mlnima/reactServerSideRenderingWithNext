@@ -1,7 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {uploadFiles} from "../../../../../_variables/ajaxVariables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import './ImageGallery.scss';
 import {faPlus, faTimes, faUpload} from "@fortawesome/free-solid-svg-icons";
 
 const ImageGallery = props => {

@@ -1,5 +1,4 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import './MenuWidgetModelFields.scss';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import MenuWidgetModelFieldsPreview from "./MenuWidgetModelFieldsPreview";
@@ -112,7 +111,7 @@ const MenuWidgetModelFields = props => {
 
                     <div className='menu-form-field'>
                         <p>As:</p>
-                        <input required={true} type="text" name='as' onChange={e=>onChangeHandler(e)}/>
+                        <input type="text" name='as' onChange={e=>onChangeHandler(e)}/>
                     </div>
                     <div className='menu-form-field'>
                         <p>Item Index:</p>

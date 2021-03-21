@@ -1,9 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import dynamic from 'next/dynamic'
-
 let ReactQuill = () => <></>;
 import 'react-quill/dist/quill.snow.css';
-import './TextEditor.scss'
 
 const modules = {
     toolbar: [

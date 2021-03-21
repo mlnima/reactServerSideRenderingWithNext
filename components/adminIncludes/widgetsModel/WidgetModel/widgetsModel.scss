@@ -1,6 +1,8 @@
 @import "../../../../styles/colors";
 @import "../../../../styles/buttons";
-
+@import "./FormTypeWidgetModelFields/FormTypeWidgetModelFields";
+@import "./MenuWidgetModelFields/MenuWidgetModelFields";
+@import "./WidgetHeaderControl/WidgetHeaderControl";
 
 .widget-open-control {
   display: flex;

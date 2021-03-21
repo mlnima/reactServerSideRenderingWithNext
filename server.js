@@ -25,21 +25,17 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 const apicache = require('apicache')
-const LRUCache = require('lru-cache');
 const compression = require('compression')
+//cache page
+const cacheableResponse = require('cacheable-response')
+const normalizeUrl = require('normalize-url');
+const {resolve: urlResolve} = require('url');
+const Keyv = require('keyv');
+//cache api
 const cacheSuccesses = require('./server/middlewares/apiCache')
 const cors = require('cors')
 require('dotenv').config()
-// var LRU = require("lru-cache")
-//     , options = { max: 500
-//     , length: function (n, key) { return n * 2 + key.length }
-//     , dispose: function (key, n) { n.close() }
-//     , maxAge: 1000 * 60 * 60 }
-//     , cache = new LRU(options)
-//     , otherCache = new LRU(50)
-//
-// cache.set("key", "value")
-// cache.get("key")
+
 
 
 // const pageCache = require('./server/tools/pageCache')
@@ -56,43 +52,81 @@ mongoose.connect(mongoDBConnectionUrl, {
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
 //------------------------------------------------------------Page Cache --------------------------
+const cacheStore = new Keyv({namespace: 'ssr-cache'});
 
-let ssrCache = new LRUCache({
-    max: 4000 * 1024 * 1024, /* cache size will be 100 MB using `return n.length` as length() function */
-    length: function (n, key) {
-        return n
-    },
-    maxAge: 1000 * 60 * 60 * 24 * 30
-});
-let getCacheKey = (req) => {
-    return `${req.path}`
+const _getSSRCacheKey = req => {
+    return req.originalUrl
 };
+// const cacheManager=(req, res, pagePath, queryParams) =>{
+//     return cacheableResponse({
+//         ttl: 1000 * 60 * 60, // 1hour
+//         get: async () => {
+//             const rawResEnd = res.end
+//             const data = await new Promise((resolve) => {
+//                 res.end = (payload) => {
+//                     resolve(res.statusCode === 200 && payload)
+//                 }
+//                 app.render(req, res, pagePath, queryParams)
+//             })
+//             res.end = rawResEnd
+//             return { data }
+//         },
+//         send: ({ data  },res) => {
+//             res.send(data)
+//         },
+//         cache: cacheStore,
+//         getKey: _getSSRCacheKey(req),
+//         compress: true
+//     });
+// }
 
-
-let renderAndCache = async (req, res, targetComponent, queryParams) => {
-    const key = getCacheKey(req);
-    // If we have a page in the cache, let's serve it
-    if (ssrCache.has(key)) {
-        console.log('is cached')
-        res.setHeader('x-cache', 'HIT');
-        res.send(ssrCache.get(key));
-    } else {
-        try {
-            const html = await app.renderToHTML(req, res, targetComponent, queryParams);
-            if (res.statusCode !== 200) {
-                res.send(html);
-                return
-            }
-            ssrCache.set(key, html);
-            res.setHeader('x-cache', 'MISS');
-            res.send(html)
-            res.end()
-        } catch (err) {
-            console.log(err)
-            await app.renderError(err, req, res, targetComponent, queryParams)
-        }
-    }
+function clearCompleteCache(res, req) {
+    cacheStore.clear();
 }
+
+function clearCacheForRequestUrl(req, res) {
+    let key = _getSSRCacheKey(req);
+    console.log(key);
+    cacheStore.delete(key);
+    res.status(200);
+    res.send({
+        path: req.hostname + req.baseUrl + req.path,
+        key: key,
+        purged: true,
+        clearedCompleteCache: false
+    });
+    res.end();
+}
+
+
+
+
+const ssrCache = cacheableResponse({
+    ttl: 1000 * 60 * 60, // 1hour
+    get: async ({ req, res,targetComponent,queryParams }) => {
+        const rawResEnd = res.end
+        const data = await new Promise((resolve) => {
+            res.end = (payload) => {
+                resolve(res.statusCode === 200 && payload)
+            }
+            app.render(req, res, targetComponent, queryParams)
+        }).catch(err=>{
+            console.log(err)
+            app.render(req, res, targetComponent, queryParams)
+        })
+        res.end = rawResEnd
+        return { data }
+    },
+    send: ({ data, res }) => res.send(data),
+    cache: cacheStore,
+    getKey: ({req})=>_getSSRCacheKey(req),
+    // compress: true
+})
+
+
+
+
+
 
 
 //-------------------------------------------------------------------------------------------------
@@ -179,11 +213,13 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts', (req, res) => {
-        //need to be chache
+    server.post('/api/v1/posts',cacheSuccesses, (req, res) => {
+        //need to be cache id page cache doesnt work
+        //cacheSuccesses
         postsControllers.getPostsInfo(req, res)
     });
-    server.post('/api/v1/posts/post', cacheSuccesses, (req, res) => {
+    server.post('/api/v1/posts/post',cacheSuccesses, (req, res) => {
+        //need to be cache id page cache doesnt work
         postsControllers.getPostInfo(req, res)
     });
     server.post('/api/v1/posts/createNewPost', async (req, res) => {
@@ -208,16 +244,19 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
     //meta data handler(tags,categories...)
-    server.post('/api/v1/posts/getMeta', cacheSuccesses, (req, res) => {
+    server.post('/api/v1/posts/getMeta',cacheSuccesses, (req, res) => {
+        //need to be cache id page cache doesnt work
         postsControllers.getMeta(req, res)
     });
-    server.post('/api/v1/posts/getSingleMeta', cacheSuccesses, (req, res) => {
+    server.post('/api/v1/posts/getSingleMeta', (req, res) => {
+        //need to be cache id page cache doesnt work
         postsControllers.getSingleMeta(req, res)
     });
     server.post('/api/v1/posts/updateMeta', (req, res) => {
         postsControllers.updateMeta(req, res)
     });
-    server.post('/api/v1/posts/deleteMeta', adminAuthMiddleware, cacheSuccesses, (req, res) => {
+    server.post('/api/v1/posts/deleteMeta', adminAuthMiddleware, (req, res) => {
+        //need to be cache id page cache doesnt work
         postsControllers.deleteMeta(req, res)
     });
 
@@ -242,7 +281,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/settings/get', (req, res) => {
         settingsControllers.get(req, res)
     });
-    server.post('/api/v1/settings/getMultiple', cacheSuccesses, (req, res) => {
+    server.post('/api/v1/settings/getMultiple',cacheSuccesses, (req, res) => {
+        //need to be cache id page cache doesnt work
+        //cacheSuccesses
         settingsControllers.getMultiple(req, res)
     });
     server.post('/api/v1/settings/addWidget', (req, res) => {
@@ -254,10 +295,14 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/settings/getWidget', (req, res) => {
         settingsControllers.getWidget(req, res)
     });
-    server.post('/api/v1/settings/getMultipleWidgetWithData', cacheSuccesses, (req, res) => {
+    server.post('/api/v1/settings/getMultipleWidgetWithData',cacheSuccesses, (req, res) => {
+        //need to be cache id page cache doesnt work
+        //cacheSuccesses
         settingsControllers.getMultipleWidgetWithData(req, res)
     });
-    server.post('/api/v1/settings/getWidgetsWithData', cacheSuccesses, (req, res) => {
+    server.post('/api/v1/settings/getWidgetsWithData',cacheSuccesses, (req, res) => {
+        //need to be cache id page cache doesnt work
+        //cacheSuccesses
         settingsControllers.getWidgetsWithData(req, res)
     });
     server.post('/api/v1/settings/updateWidget', (req, res) => {
@@ -276,7 +321,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //cache control
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apicache.clear(req.params.collection)
-        ssrCache.reset()
+        clearCompleteCache()
         res.end()
     });
 
@@ -390,11 +435,33 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     }
 
     const serverRouteGenerator = () => {
-        routesArr.map(routeObj => {
+        routesArr.forEach(routeObj => {
             return server.get(routeObj.route, (req, res) => {
                 const targetComponent = routeObj.target;
                 const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
-                    routeObj.contentType ? {contentType: routeObj.contentType} : {};
+                    routeObj?.contentType ? {contentType: routeObj.contentType} : {};
+
+                const queryParams = {
+                    ...req.query,
+                    ...req.params,
+                    ...specialDataForRoute
+                }
+                server.use(compression({filter: shouldCompress}))
+                 //app.render(req, res, targetComponent, queryParams)
+               ssrCache({req, res, targetComponent, queryParams})
+                //cacheManager(req, res, targetComponent,queryParams);
+
+            });
+        })
+    }
+    const serverRouteWithLocaleGenerator = () => {
+        routesArr.forEach(routeObj => {
+            const routeIncludesLocal = '/:locale'+routeObj.route
+            return server.get( routeIncludesLocal, (req, res) => {
+                const targetComponent = routeObj.target;
+                const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
+                    routeObj?.contentType ? {contentType: routeObj.contentType} : {};
+
 
                 const shouldCompress = (req, res) => {
                     if (req.headers['x-no-compression']) {
@@ -408,25 +475,10 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
                     ...specialDataForRoute
                 }
                 server.use(compression({filter: shouldCompress}))
-                app.render(req, res, targetComponent, queryParams)
-            });
-        })
-    }
-    const serverRouteWithLocaleGenerator = () => {
-        routesArr.map(routeObj => {
-            const routeIncludesLocal = '/:locale'+routeObj.route
-            return server.get( routeIncludesLocal,( routeObj.route.includes('/admin') ? (req,res,next)=>{ next()} :renderAndCache), (req, res) => {
-                const targetComponent = routeObj.target;
-                const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
-                    routeObj.contentType ? {contentType: routeObj.contentType} : {};
+                ssrCache({req, res, targetComponent, queryParams})
+               // cacheManager({req, res,pagePath: targetComponent,queryParams});
 
-                const queryParams = {
-                    ...req.query,
-                    ...req.params,
-                    ...specialDataForRoute
-                }
-                server.use(compression({filter: shouldCompress}))
-                app.render(req, res, targetComponent, queryParams)
+               //  app.render(req, res, targetComponent, queryParams)
             });
         })
     }
@@ -436,37 +488,34 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
 
-    // server.get('/', (req, res) => {
-    //     const targetComponent = '/';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     server.use(compression({filter: shouldCompress}))
-    //     app.render(req, res, targetComponent, queryParams)
+
+    server.get('/', (req, res) => {
+        const queryParams = {...req.query, ...req.params}
+        console.log(queryParams)
+        const targetComponent = '/';
+       // app.render(req, res, targetComponent, queryParams)
+        ssrCache({req, res, targetComponent,queryParams })
+    });
+
+    server.get('/:locale', (req, res) => {
+        const queryParams = {...req.query, ...req.params}
+        console.log(queryParams)
+        const targetComponent = '/';
+        ssrCache({req, res, targetComponent, queryParams})
+    });
+
+    server.get('/_next/*', (req, res) => {
+        return handle(req, res);
+    });
+
+
+
+
+    // server.get('*', (req, res) => {
+    //     const queryParams = {...req.query, ...req.params}
+    //     ssrCache({req, res, targetComponent:req.path,queryParams })
+    //     // return handle(req, res)
     // });
-    // server.get('/post/:title', (req, res) => {
-    //     const targetComponent = '/post';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     server.use(compression({filter: shouldCompress}))
-    //     app.render(req, res, targetComponent, queryParams)
-    // });
-
-    // server.get('/:locale', (req, res) => {
-    //     const targetComponent = '/';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //     server.use(compression({filter: shouldCompress}))
-    //     app.render(req, res, targetComponent, queryParams)
-    // });
-
-
-
     server.get('*', (req, res) => {
         return handle(req, res)
     });

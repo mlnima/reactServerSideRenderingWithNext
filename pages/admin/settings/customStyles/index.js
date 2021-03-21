@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import AdminLayout from "../../../../components/layouts/AdminLayout";
-import './customStyles.scss'
 import {AppContext} from "../../../../context/AppContext";
 import {jsonExporter} from "../../../../_variables/_variables";
 import {addNewWidget, getMultipleWidgetWithData} from "../../../../_variables/ajaxVariables";

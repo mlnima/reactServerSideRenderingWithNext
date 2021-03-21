@@ -1,5 +1,5 @@
 import React,{useEffect,useState} from 'react';
-import './VideoUrls.scss';
+
 
 const VideoUrls = () => {
 

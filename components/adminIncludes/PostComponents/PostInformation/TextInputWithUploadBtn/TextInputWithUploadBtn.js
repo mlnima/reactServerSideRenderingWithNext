@@ -3,7 +3,7 @@ import {DelayInput} from 'react-delay-input';
 import UploadFileBtn from '../UploadFileBtn/uploadFileBtn'
 import {convertVariableNameToName} from '../../../../../_variables/_variables';
 
-import './TextInputWithUploadBtn.scss'
+
 
 const TextInputWithUploadBtn = props => {
     const inputElement = useRef(null)

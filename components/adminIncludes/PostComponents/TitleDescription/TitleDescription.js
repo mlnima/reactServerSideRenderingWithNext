@@ -3,9 +3,8 @@ import loadable from '@loadable/component';
 //import dynamic from 'next/dynamic'
 //const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'))
 import NoSSR from 'react-no-ssr';
-
 const TextEditor = loadable(() => import('../../TextEditor/TextEditor'))
-import './TitleDescription.scss'
+
 
 
 const TitleDescription = props => {

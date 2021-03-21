@@ -14,10 +14,18 @@ const Widget = props => {
     const [styles, setStyles] = useState('')
 
     useEffect(() => {
-        if (props.data?.customStyles){
+        if (props.data?.customStyles) {
             setStyles(props.data?.customStyles)
         }
-    }, [props.data?.customStyles]);
+
+
+    }, []);
+    // useEffect(() => {
+    //     if (props.data.type === 'text'){
+    //         console.log(props.data)
+    //     }
+    // }, [props]);
+
     const RenderComponent = () => {
         if (props.component) {
             return (
@@ -41,7 +49,7 @@ const Widget = props => {
 
     if (conditionalWidgetRenderer(props.data.deviceTypeToRender, props.data.languageToRender, contextData.state.activeLanguage)) {
         return (
-            <StyledDiv customStyles={props.data?.customStyles ?? styles} className={'widget ' + (props.data?.extraClassName ?? '')} id={props.data?.extraId ?? ''}>
+            <StyledDiv customStyles={styles} className={'widget ' + (props.data?.extraClassName ?? '')} id={props.data?.extraId ?? ''}>
                 <WidgetHeader {...props.data}/>
                 <WidgetText {...props.data}/>
                 <RenderComponent/>

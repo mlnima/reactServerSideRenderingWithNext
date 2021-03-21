@@ -1,12 +1,13 @@
-import React, {useContext, useEffect} from 'react';
-import {AppContext} from "../context/AppContext";
+import React, {useEffect} from 'react';
 import AppLayout from "../components/layouts/AppLayout";
 import WidgetArea from "../components/widgetsArea/WidgetArea/WidgetArea";
 import {getMultipleSetting, getMultipleWidgetWithData} from "../_variables/ajaxVariables";
 import {getAbsolutePath} from '../_variables/_variables';
 
+
+
 const Home = props => {
-    const contextData = useContext(AppContext);
+
 
     return (
         <>
@@ -17,7 +18,7 @@ const Home = props => {
                             widgets={(props.widgets || []).filter(widget => widget.data.position === 'home')}
                             className='home-page main'
                             position='home'
-                            stylesData={contextData?.siteDesign?.homePageStyle}
+                            stylesData={props?.design?.data?.homePageStyle}
                             currentPageSidebar={props.identity?.data?.homePageSidebar}
                 />
             </AppLayout>
@@ -40,7 +41,7 @@ export const getServerSideProps = async ({req}) => {
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
 
-    return {props: {widgets, ...settings, isMobile: Boolean(isMobile)}}
+    return {props: {widgets, ...settings, isMobile: Boolean(isMobile), requestProtocol: req.protocol}}
 }
 
 

@@ -3,7 +3,7 @@ import AdminLayout from '../../../../components/layouts/AdminLayout'
 import { AppContext } from '../../../../context/AppContext'
 import { executor } from '../../../../_variables/ajaxVariables'
 import { animateScroll } from 'react-scroll'
-import './terminal.scss'
+
 
 const terminal = props => {
     const contextData = useContext(AppContext);

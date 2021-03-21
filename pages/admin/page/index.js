@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import AdminLayout from '../../../components/layouts/AdminLayout';
-import './page.scss';
 import {saveNewPage,getPageData,updatePage} from "../../../_variables/ajaxVariables";
 import {useRouter} from 'next/router'
 

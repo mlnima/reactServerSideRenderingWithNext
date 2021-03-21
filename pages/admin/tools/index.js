@@ -2,7 +2,6 @@ import React from 'react';
 import AdminLayout from '../../../components/layouts/AdminLayout';
 import Link from 'next/link'
 
-import './tools.scss'
 
 
 const tools = props => {

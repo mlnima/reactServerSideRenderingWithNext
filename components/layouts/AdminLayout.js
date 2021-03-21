@@ -1,7 +1,6 @@
 import React, {useEffect, useContext, useState, useRef} from 'react';
 import dynamic from "next/dynamic";
 import Head from "next/head";
-import '../../styles/globalAdminPanel.scss';
 import TopBar from "../adminIncludes/TopBar/AdminTopBar";
 import SideBar from "../adminIncludes/SideBar/SideBar";
 import {AppContext} from "../../context/AppContext";
@@ -10,9 +9,8 @@ const Loading = dynamic(() => import('../includes/Loading/Loading'),{ ssr: false
 import Link from "next/link";
 import {generateAbsolutePath, initGA, logPageView} from '../../_variables/_variables'
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'),{ ssr: false })
-
 import {getSetting} from '../../_variables/ajaxVariables'
-import './AdminLayout.scss'
+
 
 
 

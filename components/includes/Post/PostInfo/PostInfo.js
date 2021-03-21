@@ -12,7 +12,7 @@ import RatingData from "./RatingData/RatingData";
 import PostTitle from "./PostTitle/PostTitle";
 import PostDescription from "./PostDescription/PostDescription";
 import AddToBasket from "./AddToBasket/AddToBasket";
-import styleData from  './PostInfo.scss'
+
 import styled from "styled-components";
 let StyledDiv = styled.div`${props => props.stylesData}`;
 
@@ -36,7 +36,7 @@ const PostInfo = props => {
     }, [props.likes, props.disLikes]);
 
     return (
-        <StyledDiv stylesData={styleData} className='post-info'>
+        <StyledDiv  className='post-info'>
             <EditLinkForAdmin {...props}/>
             {/*<EditLinksForAuthor {...props}/>*/}
 

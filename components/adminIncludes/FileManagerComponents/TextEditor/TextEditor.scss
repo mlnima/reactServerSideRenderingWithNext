@@ -1,4 +1,4 @@
-@import "../../../variables/variables";
+
 .TextEditor{
   height: 100vh;
   display: flex;
@@ -16,7 +16,7 @@
     align-items: center;
     button{
 
-      @include darkBtn;
+     // @include darkBtn;
       font-size:large;
       padding: 3px 5px;
     }
@@ -30,7 +30,7 @@
   label{
     margin-top: 20px;
     padding: 5px;
-    @include contentBorder;
+  // @include contentBorder;
   }
   .noEditMode{
     background-color:gray;

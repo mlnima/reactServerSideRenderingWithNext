@@ -176,37 +176,17 @@ const WidgetModel = props => {
         }
     };
 
-    const changeWidgetIndex = (more) => {
+    const changeWidgetIndex = (action) => {
 
-        const valueToSet = more ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1
-
+        const valueToSet = action ? parseInt(widgetData.widgetIndex) + 1 : parseInt(widgetData.widgetIndex) - 1
         if (props.isPost) {
             const findIndexOfTheWidget = props.state.widgets.findIndex(w => {
                 return ((w.widgetIndex === props.data.widgetIndex) && (w.type === props.data.type) && (w.widgetId === props.data.widgetId))
             })
-            // console.log({...widgetData,widgetIndex:valueToSet})
-            const updatedWidget = {...widgetData, widgetIndex: valueToSet}
-            // const updatedWidgets = [
-            //     ...props.state.widgets.slice(0, findIndexOfTheWidget),
-            //     updatedWidget,
-            //     ...props.state.widgets.slice(findIndexOfTheWidget + 1),
-            // ];
 
-            // const newWidgetsData = props.state.widgets.map(w=>{
-            //     if (w.widgetId ===props.data.widgetId ){
-            //         return {...widgetData,widgetIndex:valueToSet}
-            //     }else {
-            //         return w
-            //     }
-            // })
-            //console.log(newWidgetsData)
+            const updatedWidget = {...widgetData, widgetIndex: valueToSet}
             let widgets = props.state.widgets
             widgets[findIndexOfTheWidget] = updatedWidget
-            // console.log(widgets)
-            // props.setState( currentState=>({
-            //     ...props.state,
-            //     widgets:widgets
-            // }))
         } else {
             const dataToSave = {
                 _id: props.widgetId ? props.widgetId : '',
@@ -218,12 +198,6 @@ const WidgetModel = props => {
             console.log(valueToSet, dataToSave)
             updateWidgets(dataToSave).then(() => {
                 props.getAndSetWidgetsData()
-                // getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-                //     // console.log(res.data)
-                //     contextData.dispatchWidgetsSettings({
-                //         widgets: [...res.data.widgets]
-                //     })
-                // })
             })
         }
     };
@@ -451,11 +425,11 @@ const WidgetModel = props => {
                         </label>
                     </div>
                     <TextInputFieldForWidget inputTitle='Name:' name='name' type='text' value={widgetData.name} classNameValue='name' placeHolder='name'
-                                             onChangeHandler={onChangeHandler}
+                                             onChangeHandler={e => onChangeHandler(e)}
                                              rendering={true}
                     />
                     <TextInputFieldForWidget inputTitle='index:' name='widgetIndex' type='number' value={widgetData.widgetIndex} classNameValue='widgetIndex' placeHolder='widgetIndex'
-                                             onChangeHandler={onChangeHandler}
+                                             onChangeHandler={e => onChangeHandler(e)}
                                              rendering={true}
                     />
                     <div className='selectInputFieldForWidget widgetSection'>

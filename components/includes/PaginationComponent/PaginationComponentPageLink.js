@@ -4,18 +4,21 @@ import {useRouter} from "next/router";
 
 const PaginationComponentPageLink = props => {
     const router = useRouter()
+
     const contentType = router.asPath.includes('tags') ? 'tags':
                         router.asPath.includes('categories') ? 'categories':
                         router.asPath.includes('actors') ? 'actors': 'tags'
 
-    const mainPath = router.asPath.includes('content') ? '/posts' : '/meta'
+    //const mainPath = router.asPath.includes('content') ? '/posts' : '/meta'
+    const mainPath =  router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/posts' : '/meta'
+console.log(mainPath)
 
-
-    const asPath =   router.asPath.includes(('/tags/'||'/categories/'||'/actors/')) ? '/' + contentType + '/' + router.query.contentName :
+    const asPath =   router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/' + contentType + '/' + router.query.contentName :
                      router.asPath.includes('/tags') ? '/tags' :
                      router.asPath.includes('/categories') ? '/categories' :
                      router.asPath.includes('/actors') ? '/actors' :
                      router.pathname;
+
     const content = router.query.content ? {content:router.query.content} :{}
 
 

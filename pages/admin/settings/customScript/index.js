@@ -1,7 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout';
 import { DelayInput } from 'react-delay-input';
-import './customScript.scss';
 import { AppContext } from '../../../../context/AppContext'
 import { getAbsolutePath } from '../../../../_variables/_variables'
 import { getSetting } from '../../../../_variables/ajaxVariables'

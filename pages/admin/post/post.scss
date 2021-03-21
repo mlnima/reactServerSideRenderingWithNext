@@ -1,4 +1,16 @@
 @import "../../../styles/links";
+@import "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
+@import "../../../components/adminIncludes/PostComponents/ImagePreview/ImagePreview";
+@import "../../../components/adminIncludes/PostComponents/Meta/Meta";
+@import "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
+@import "../../../components/adminIncludes/PostComponents/Format/Format";
+@import "../../../components/adminIncludes/PostComponents/Meta/Meta";
+@import "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
+@import "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
+//@import "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
+//@import "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
+//@import "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
+//@import "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
 
 .admin-post{
   display: grid;

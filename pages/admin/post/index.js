@@ -6,7 +6,6 @@ import AdminLayout from "../../../components/layouts/AdminLayout";
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 import DropDownWidget from "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
-
 import Format from "../../../components/adminIncludes/PostComponents/Format/Format";
 import Meta from "../../../components/adminIncludes/PostComponents/Meta/Meta";
 // import VideoInformation from "../../../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
@@ -25,7 +24,6 @@ import AddWidgetToPostMenu from "../../../components/adminIncludes/PostComponent
 import {widgetModels} from '../../../components/adminIncludes/widgetsModel/AddWidgetMenu/models'
 import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
 import NoSSR from 'react-no-ssr';
-import './post.scss'
 import {languagesOptions} from "../../../_variables/_variables";
 
 const Index = props => {

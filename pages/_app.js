@@ -1,8 +1,7 @@
 import React, {useEffect} from 'react';
 import AppProvider from "../context/AppContext";
 import '../styles/styles.scss';
-import '../components/includes/AdminTools/Console/Console.scss';
-import '../components/includes/AdminTools/AdminTools.scss';
+
 import '../components/includes/AlertBox/AlertBox.scss';
 import '../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview.scss';
 import '../components/includes/checkOutPageComponents/CheckOutItemPreview/ItemCountUI.scss';
@@ -27,6 +26,13 @@ import './maintenance/maintenance.scss'
 import './meta/meta.scss'
 import './checkout/checkout.scss'
 import '../components/layouts/AppLayout.scss'
+import '../components/layouts/AdminLayout.scss'
+import '../styles/globalAdminPanel.scss';
+import '../components/includes/AdminTools/Console/Console.scss';
+import '../components/includes/AdminTools/AdminTools.scss';
+import '../pages/auth/registerLogin.scss';
+import '../pages/profile/Profile.scss';
+
 
 
 // export function reportWebVitals(metric) {

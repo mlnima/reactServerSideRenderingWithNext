@@ -2,7 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from "../../../components/layouts/AdminLayout";
 
 import { saveCustomStyle, getSetting, updateSetting } from '../../../_variables/ajaxVariables'
-import './design.scss'
+
 import { AppContext } from '../../../context/AppContext'
 import { getAbsolutePath } from '../../../_variables/_variables'
 

@@ -7,7 +7,7 @@ import ProfileCoverImage from '../../components/includes/MyProfileComponents/Pro
 import ProfileNavigation from '../../components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation'
 import ProfileComponentsRenderer from '../../components/includes/MyProfileComponents/ProfileComponentsRenderer/ProfileComponentsRenderer'
 import MyProfileInfo from '../../components/includes/MyProfileComponents/MyProfileInfo/MyProfileInfo'
-import './Profile.scss'
+
 const Profile = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({

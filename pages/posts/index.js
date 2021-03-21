@@ -10,7 +10,7 @@ import withRouter from 'next/dist/client/with-router'
 import Posts from '../../components/includes/Posts/Posts'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 import {getAbsolutePath} from '../../_variables/_variables'
-import './Posts.scss'
+
 //import MetaContentForPostsPage from "../../components/includes/MetaContentForPostsPage/MetaContentForPostsPage";
 
 const posts = props => {
@@ -75,7 +75,7 @@ export const getServerSideProps = async ({req,query}) => {
     const contentData = query.content ? await getSingleMeta(query.content,domainName,true) : {}
     const contentDataInfo =   contentData.data ?  contentData.data.meta : {}
     const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'footer', 'header','topBar','navigation']}, domainName, true, 'postsPage')
-    const postsData = await getPosts(getPostsData, domainName, true)
+    const postsData = await getPosts(getPostsData, domainName, true,req.originalUrl)
     let isMobile = (req
         ? req.headers['user-agent']
         : navigator.userAgent).match(

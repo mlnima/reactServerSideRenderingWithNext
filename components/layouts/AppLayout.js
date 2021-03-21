@@ -16,7 +16,7 @@ let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 //import CardElement from "../includes/CardElement/CardElement";
 const AppLayout = props => {
     const contextData = useContext(AppContext);
-    const router= useRouter()
+    const router = useRouter()
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -29,19 +29,27 @@ const AppLayout = props => {
     }, []);
 
 
-    useEffect(() => {
+    // useEffect(() => {
+    //     if (router.isReady){
+    //         if (props.requestProtocol === 'http' && process.env.REACT_APP_SSL){
+    //            // window.location.href = process.env.PRODUCTION_URL
+    //         }
+    //     }
+    //
+    // }, []);
 
-        if (props.identity?.data?.developmentMode && contextData.userData.role !== 'administrator'){
+
+    useEffect(() => {
+        if (props.identity?.data?.developmentMode && contextData.userData.role !== 'administrator') {
             router.push('/maintenance')
         }
-
     }, [contextData.userData]);
 
 
     return (
         <div className={'App ' + (props.sidebar ? 'withSidebar' : 'withOutSidebar')}>
             <GlobalStyle globalStyleData={props.design?.data?.customStyles ?? ''}/>
-            <SiteSettingSetter {...props}/>
+            <SiteSettingSetter identity={props.identity} design={props.design} eCommerce={props.eCommerce}/>
 
 
             {(props.widgets || []).filter(widget => widget?.data?.position === 'topBar').length > 0 ?

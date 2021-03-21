@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext } from 'react';
-import './IsInSlideShow.scss';
+import React from 'react';
 
 const IsInSlideShow = props => {
     if (props.rendering){

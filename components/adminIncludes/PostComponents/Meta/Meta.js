@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
-import './Meta.scss'
+
 
 const Meta = props => {
     let newItemsElement = useRef(null);

@@ -2,6 +2,12 @@
 @import "../../../../styles/colors";
 @import "../../../../styles/buttons";
 @import "../../../../styles/selects";
+@import "./VideoUrls/VideoUrls";
+@import "./VideoEmbedCode/VideoEmbedCode";
+@import "./TextInputWithUploadBtn/TextInputWithUploadBtn";
+@import "./IsInSlideShow/IsInSlideShow";
+@import "./ImageGallery/ImageGallery";
+
 
 .post-information {
   width: 96% ;

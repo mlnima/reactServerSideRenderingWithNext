@@ -91,7 +91,9 @@ const PostElement = props => {
     };
 
 
-    const linkAsForPostElement = process.env.REACT_APP_LOCALS.split(' ').includes(locale) ? `/${locale}/${props.state.postType ||'post'}/${title}?id=${props.state._id}` : `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
+   const linkAsForPostElement = process.env.REACT_APP_LOCALS.split(' ').includes(locale) ? `/${locale}/${props.state.postType ||'post'}/${title}?id=${props.state._id}` : `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
+   // const linkAsForPostElement =  `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
+    const localeAttr = router.locale || router.query.locale ? (router.locale || router.query.locale) !== process.env.REACT_APP_DEFAULT_LOCAL ?{locale:router.locale || router.query.locale}:{}:{}
 
     return (
         < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
@@ -104,6 +106,7 @@ const PostElement = props => {
                         ...state.queries
                     }
                 }}
+                // shallow={true}
                 local={router.locale || router.query.locale || false}
             >
                 <a>

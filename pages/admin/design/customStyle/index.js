@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout';
-import './customStyle.scss';
+
 import { getSetting, saveCustomStyle } from '../../../../_variables/ajaxVariables'
 import { getAbsolutePath } from '../../../../_variables/_variables'
 

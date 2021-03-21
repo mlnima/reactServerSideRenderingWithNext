@@ -3,7 +3,7 @@ import { newComment } from '../../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
 import styled from "styled-components";
-import  './CommentFrom.scss';
+
 
 let StyledDiv = styled.div`${props => props.stylesData}`
 

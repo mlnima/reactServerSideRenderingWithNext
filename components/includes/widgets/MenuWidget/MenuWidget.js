@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 const MenuWidget = props => {
     const [open, setOpen] = useState(!props.isMobile);
     const router = useRouter()
+
     useEffect(() => {
         let deviceWidth = 0
         if (typeof window !== 'undefined') {
@@ -21,9 +22,7 @@ const MenuWidget = props => {
             setOpen(false)
         }
     }
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
 
 
     const renderMenuItems = (props.menuItems.sort((a,b)=>a.itemIndex>b.itemIndex?1:-1) || []).map(menuItem => {
