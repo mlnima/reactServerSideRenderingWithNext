@@ -5,37 +5,37 @@ import {useRouter} from "next/router";
 const PaginationComponentPageLink = props => {
     const router = useRouter()
 
-    const contentType = router.asPath.includes('tags') ? 'tags':
-                        router.asPath.includes('categories') ? 'categories':
-                        router.asPath.includes('actors') ? 'actors': 'tags'
-
-    //const mainPath = router.asPath.includes('content') ? '/posts' : '/meta'
-    const mainPath =  router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/posts' : '/meta'
-console.log(mainPath)
-
-    const asPath =   router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/' + contentType + '/' + router.query.contentName :
-                     router.asPath.includes('/tags') ? '/tags' :
-                     router.asPath.includes('/categories') ? '/categories' :
-                     router.asPath.includes('/actors') ? '/actors' :
-                     router.pathname;
-
-    const content = router.query.content ? {content:router.query.content} :{}
-
-
-    const asQuery = {
-        ...content,
-        page: props.pageNumber || 1,
-    }
+    // const contentType = router.asPath.includes('tags') ? 'tags':
+    //                     router.asPath.includes('categories') ? 'categories':
+    //                     router.asPath.includes('actors') ? 'actors': 'tags'
+    //
+    // //const mainPath = router.asPath.includes('content') ? '/posts' : '/meta'
+    // const mainPath =  router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/posts' : '/meta'
+    //
+    //
+    // const asPath =   router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/' + props.contentType + '/' + router.query.contentName :
+    //                  router.asPath.includes('/tags') ? '/tags' :
+    //                  router.asPath.includes('/categories') ? '/categories' :
+    //                  router.asPath.includes('/actors') ? '/actors' :
+    //                  router.pathname;
+    //
+    // const content = router.query.content ? {content:router.query.content} :{}
+    //
+    //
+    // const asQuery = {
+    //     ...props.content,
+    //     page: props.pageNumber || 1,
+    // }
 
     return (
         <Link key={props.pageNumber.toString()}
               href={{
-                  pathname: mainPath,
+                  pathname: props.mainPath,
                   query: {...router.query, page: props.pageNumber}
               }}
               as={{
-                  pathname: asPath,
-                  query: asQuery
+                  pathname: props.asPath,
+                  query: props.asQuery
               }}
 
         ><a className={props.currentPage === props.pageNumber ? 'active-page' :''}>{props.pageNumber}</a></Link>

@@ -40,7 +40,7 @@ const AppLayout = props => {
 
 
     useEffect(() => {
-        if (props.identity?.data?.developmentMode && contextData.userData.role !== 'administrator') {
+        if (props.identity?.data?.developmentMode && contextData?.userData?.role !== 'administrator') {
             router.push('/maintenance')
         }
     }, [contextData.userData]);
