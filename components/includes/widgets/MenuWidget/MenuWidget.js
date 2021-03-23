@@ -3,21 +3,25 @@ import Link from "next/link";
 import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useRouter} from "next/router";
+import {AppContext} from "../../../../context/AppContext";
 
 
 const MenuWidget = props => {
-    const [open, setOpen] = useState(!props.isMobile);
+    const contextData = useContext(AppContext);
     const router = useRouter()
+    const [open, setOpen] = useState(true);
+
 
     useEffect(() => {
         let deviceWidth = 0
         if (typeof window !== 'undefined') {
             deviceWidth = window.innerWidth
-            deviceWidth >= 768 ? setOpen(true) : null
+            deviceWidth >= 768 ? setOpen(true) : setOpen(false)
         }
     }, [props]);
 
     const mobileNavigationOnClickHandler = () => {
+        contextData.dispatchState({...contextData.state,loading:true})
         if (props.isMobile) {
             setOpen(false)
         }

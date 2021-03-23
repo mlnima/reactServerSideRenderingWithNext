@@ -21,9 +21,21 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Loading/Loading.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Loading/Loading.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/meta/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -82,7 +94,7 @@
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
     </key>
   </component>
-  <component name="RunManager">
+  <component name="RunManager" selected="npm.analys">
     <configuration name="analys" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -135,8 +147,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.analys" />
         <item itemvalue="npm.setup" />
@@ -565,7 +577,9 @@
       <workItem from="1616059946024" duration="24957000" />
       <workItem from="1616141883137" duration="13546000" />
       <workItem from="1616272234833" duration="15860000" />
-      <workItem from="1616316695098" duration="34037000" />
+      <workItem from="1616316695098" duration="35612000" />
+      <workItem from="1616411460980" duration="6420000" />
+      <workItem from="1616433686172" duration="16909000" />
     </task>
     <servers />
   </component>
@@ -598,7 +612,7 @@
     </state>
     <state x="1935" y="2415" key="FileChooserDialogImpl/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615298967321" />
     <state x="1934" y="2415" key="FileChooserDialogImpl/0.0.2194.1234/-649.2160.4096.1152@-649.2160.4096.1152" timestamp="1614716948965" />
-    <state width="3149" height="224" key="GridCell.Tab.0.bottom" timestamp="1616357999318">
+    <state width="2753" height="219" key="GridCell.Tab.0.bottom" timestamp="1616456975428">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2589" height="295" key="GridCell.Tab.0.bottom/0.0.2194.1234/-627.2160.4096.1152@-627.2160.4096.1152" timestamp="1608142581481" />
@@ -608,9 +622,9 @@
     <state width="2512" height="232" key="GridCell.Tab.0.bottom/0.0.2194.1234/-670.2160.4096.1152@-670.2160.4096.1152" timestamp="1607897113725" />
     <state width="2200" height="366" key="GridCell.Tab.0.bottom/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.bottom/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="3149" height="224" key="GridCell.Tab.0.bottom/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616357999318" />
+    <state width="2753" height="219" key="GridCell.Tab.0.bottom/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616456975428" />
     <state width="2638" height="211" key="GridCell.Tab.0.bottom/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
-    <state width="3149" height="224" key="GridCell.Tab.0.center" timestamp="1616357999318">
+    <state width="2753" height="219" key="GridCell.Tab.0.center" timestamp="1616456975428">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2589" height="295" key="GridCell.Tab.0.center/0.0.2194.1234/-627.2160.4096.1152@-627.2160.4096.1152" timestamp="1608142581480" />
@@ -620,9 +634,9 @@
     <state width="2512" height="232" key="GridCell.Tab.0.center/0.0.2194.1234/-670.2160.4096.1152@-670.2160.4096.1152" timestamp="1607897113725" />
     <state width="2200" height="366" key="GridCell.Tab.0.center/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.center/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="3149" height="224" key="GridCell.Tab.0.center/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616357999318" />
+    <state width="2753" height="219" key="GridCell.Tab.0.center/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616456975428" />
     <state width="2638" height="211" key="GridCell.Tab.0.center/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
-    <state width="3149" height="224" key="GridCell.Tab.0.left" timestamp="1616357999318">
+    <state width="2753" height="219" key="GridCell.Tab.0.left" timestamp="1616456975428">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2589" height="295" key="GridCell.Tab.0.left/0.0.2194.1234/-627.2160.4096.1152@-627.2160.4096.1152" timestamp="1608142581480" />
@@ -632,9 +646,9 @@
     <state width="2512" height="232" key="GridCell.Tab.0.left/0.0.2194.1234/-670.2160.4096.1152@-670.2160.4096.1152" timestamp="1607897113724" />
     <state width="2200" height="366" key="GridCell.Tab.0.left/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.left/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070871" />
-    <state width="3149" height="224" key="GridCell.Tab.0.left/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616357999318" />
+    <state width="2753" height="219" key="GridCell.Tab.0.left/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616456975428" />
     <state width="2638" height="211" key="GridCell.Tab.0.left/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944436" />
-    <state width="3149" height="224" key="GridCell.Tab.0.right" timestamp="1616357999318">
+    <state width="2753" height="219" key="GridCell.Tab.0.right" timestamp="1616456975428">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2589" height="295" key="GridCell.Tab.0.right/0.0.2194.1234/-627.2160.4096.1152@-627.2160.4096.1152" timestamp="1608142581480" />
@@ -644,7 +658,7 @@
     <state width="2512" height="232" key="GridCell.Tab.0.right/0.0.2194.1234/-670.2160.4096.1152@-670.2160.4096.1152" timestamp="1607897113725" />
     <state width="2200" height="366" key="GridCell.Tab.0.right/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.right/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="3149" height="224" key="GridCell.Tab.0.right/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616357999318" />
+    <state width="2753" height="219" key="GridCell.Tab.0.right/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616456975428" />
     <state width="2638" height="211" key="GridCell.Tab.0.right/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
     <state x="868" y="210" width="1578" height="952" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1615417525221">
       <screen x="0" y="0" width="2194" height="1234" />

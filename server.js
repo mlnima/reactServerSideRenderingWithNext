@@ -387,46 +387,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     });
 //-------------------post----------------------
 
-    const routesArr = [
-        {route: '/login', target: '/auth/login'},
-        {route: '/register', target: '/auth/register'},
-        {route: '/tags/:tag', target: '/posts', contentName: 'tag'},
-        {route: '/categories/:category', target: '/posts', contentName: 'category'},
-        {route: '/actors/:actor', target: '/posts', contentName: 'actor'},
-        {route: '/posts', target: '/posts'},
-        {route: '/categories', target: '/meta', contentType: 'categories'},
-        {route: '/tags', target: '/meta', contentType: 'tags'},
-        {route: '/actors', target: '/meta', contentType: 'actors'},
-        {route: '/post/:title', target: '/post'},
-        {route: '/video/:title', target: '/post'},
-        {route: '/product/:title', target: '/post'},
-        {route: '/article/:title', target: '/post'},
-        {route: '/code/:title', target: '/post'},
-        {route: '/page/:pageName', target: '/page'},
-        {route: '/profile', target: '/profile'},
-        {route: '/checkout', target: '/checkout'},
-        // {route: '/admin', target: '/admin'},
-        // {route: '/admin/design', target: '/admin/design'},
-        // {route: '/admin/design/widgets/widget', target: '/admin/design/widgets/widget'},
-        // {route: '/admin/exporter', target: '/admin/exporter'},
-        // {route: '/admin/fileManager', target: '/admin/fileManager'},
-        // {route: '/admin/form', target: '/admin/form'},
-        // {route: '/admin/importer', target: '/admin/importer'},
-        // {route: '/admin/meta', target: '/admin/meta'},
-        // {route: '/admin/page', target: '/admin/page'},
-        // {route: '/admin/post', target: '/admin/post'},
-        // {route: '/admin/posts', target: '/admin/posts'},
-        // {route: '/admin/settings', target: '/admin/settings'},
-        // {route: '/admin/settings/customScript', target: '/admin/settings/customScript'},
-        // {route: '/admin/settings/customStyle', target: '/admin/settings/customStyle'},
-        // {route: '/admin/settings/eCommerceSettings', target: '/admin/settings/eCommerceSettings'},
-        // {route: '/admin/settings/generals', target: '/admin/settings/generals'},
-        // {route: '/admin/tools', target: '/admin/tools'},
-        // {route: '/admin/users', target: '/admin/users'},
-        // {route: '/admin/user', target: '/admin/user'},
-
-    ]
-
     const shouldCompress = (req, res) => {
         if (req.headers['x-no-compression']) {
             return false
@@ -434,79 +394,51 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         return compression.filter(req, res)
     }
 
-    const serverRouteGenerator = () => {
-        routesArr.forEach(routeObj => {
-            return server.get(routeObj.route, (req, res) => {
-                const targetComponent = routeObj.target;
-                const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
-                    routeObj?.contentType ? {contentType: routeObj.contentType} : {};
 
-                const queryParams = {
-                    ...req.query,
-                    ...req.params,
-                    ...specialDataForRoute
-                }
-                server.use(compression({filter: shouldCompress}))
-                 //app.render(req, res, targetComponent, queryParams)
-               ssrCache({req, res, targetComponent, queryParams})
-                //cacheManager(req, res, targetComponent,queryParams);
-
-            });
-        })
-    }
-    const serverRouteWithLocaleGenerator = () => {
-        routesArr.forEach(routeObj => {
-            const routeIncludesLocal = '/:locale'+routeObj.route
-            return server.get( routeIncludesLocal, (req, res) => {
-                const targetComponent = routeObj.target;
-                const specialDataForRoute = routeObj.contentName ? {contentName: req.params[routeObj.contentName]} :
-                    routeObj?.contentType ? {contentType: routeObj.contentType} : {};
-
-
-                const shouldCompress = (req, res) => {
-                    if (req.headers['x-no-compression']) {
-                        return false
-                    }
-                    return compression.filter(req, res)
-                }
-                const queryParams = {
-                    ...req.query,
-                    ...req.params,
-                    ...specialDataForRoute
-                }
-                server.use(compression({filter: shouldCompress}))
-                ssrCache({req, res, targetComponent, queryParams})
-               // cacheManager({req, res,pagePath: targetComponent,queryParams});
-
-               //  app.render(req, res, targetComponent, queryParams)
-            });
-        })
-    }
-
-    serverRouteGenerator()
-    serverRouteWithLocaleGenerator()
+    server.get('/admin', (req, res) => {app.render(req, res, '/admin',  {...req.query, ...req.params})});
+    // server.get('/login', (req, res) => {ssrCache({req, res, targetComponent:'/auth/login', queryParams: {...req.query, ...req.params}})});
+    // server.get('/register', (req, res) => {ssrCache({req, res, targetComponent:'/auth/register', queryParams: {...req.query, ...req.params}})});
+    // server.get('/tags/:tag', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'tag'}})});
+    // server.get('/categories/:category', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'category'}})});
+    // server.get('/actors/:actor', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'actor'}})});
+    // server.get('/categories', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'categories'}})});
+    // server.get('/tags', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'tags'}})});
+    // server.get('/actors', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'actors'}})});
+    // server.get('/video/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
+    // server.get('/product/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
+    // server.get('/article/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
+    // server.get('/page/:pageName', (req, res) => {ssrCache({req, res, targetComponent:'/page', queryParams: {...req.query, ...req.params}})});
 
 
 
 
-    server.get('/', (req, res) => {
-        const queryParams = {...req.query, ...req.params}
-        console.log(queryParams)
-        const targetComponent = '/';
-       // app.render(req, res, targetComponent, queryParams)
-        ssrCache({req, res, targetComponent,queryParams })
-    });
 
-    server.get('/:locale', (req, res) => {
-        const queryParams = {...req.query, ...req.params}
-        console.log(queryParams)
-        const targetComponent = '/';
-        ssrCache({req, res, targetComponent, queryParams})
-    });
+    //server.get('/:locale/admin', (req, res) => {ssrCache({req, res, targetComponent:'/admin', queryParams: {...req.query, ...req.params}})});
 
-    server.get('/_next/*', (req, res) => {
-        return handle(req, res);
-    });
+
+
+   // server.get('/:locale', (req, res) => {ssrCache({req, res, targetComponent:'/', queryParams: {...req.query, ...req.params}})});
+
+                     // server.get('/:locale/posts', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params}})});
+                        // server.get('/:locale/login', (req, res) => {ssrCache({req, res, targetComponent:'/auth/login', queryParams: {...req.query, ...req.params}})});
+                        // server.get('/:locale/register', (req, res) => {ssrCache({req, res, targetComponent:'/auth/register', queryParams: {...req.query, ...req.params}})});
+    // server.get('/:locale/tags/:tag', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'tag'}})});
+    // server.get('/:locale/categories/:category', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'category'}})});
+    // server.get('/:locale/actors/:actor', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'actor'}})});
+                        // server.get('/:locale/categories', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'categories'}})});
+                        // server.get('/:locale/tags', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'tags'}})});
+                        // server.get('/:locale/actors', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'actors'}})});
+                     // server.get('/:locale/post/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
+                     // server.get('/:locale/video/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
+                     // server.get('/:locale/product/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
+                     // server.get('/:locale/article/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
+                    // server.get('/:locale/page/:pageName', (req, res) => {ssrCache({req, res, targetComponent:'/page', queryParams: {...req.query, ...req.params}})});
+                    // server.get('/:locale/profile', (req, res) => {ssrCache({req, res, targetComponent:'/profile', queryParams: {...req.query, ...req.params}})});
+                    // server.get('/:locale/checkout', (req, res) => {ssrCache({req, res, targetComponent:'/checkout', queryParams: {...req.query, ...req.params}})});
+
+
+
+
 
 
 
@@ -516,6 +448,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //     ssrCache({req, res, targetComponent:req.path,queryParams })
     //     // return handle(req, res)
     // });
+    server.get('/:locale/*', (req, res) => {
+        return handle(req, res)
+    });
     server.get('*', (req, res) => {
         return handle(req, res)
     });

@@ -10,6 +10,9 @@ import {useRouter} from "next/router";
 
 
 const meta = props => {
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
     const router = useRouter()
     const renderMetas = (props.metaSource.metas ?? []).map(meta => {
         return (
@@ -19,12 +22,12 @@ const meta = props => {
 
     return (
         <AppLayout  {...props} sidebar={props.identity?.data?.metaPageSidebar} sidebarPosition='metaPageSidebar'>
-            <div style={{gridArea:props.identity.metaPageSidebar ? 'content':''}}  className={props.identity.data.metaPageSidebar ? 'content main ' : 'content main '} >
+            <div style={{gridArea: props.identity.metaPageSidebar ? 'content' : ''}} className={props.identity.data.metaPageSidebar ? 'content main ' : 'content main '}>
                 <PaginationComponent
                     isActive={true}
                     currentPage={props?.dataForGettingMeta?.page}
                     totalCount={props?.metaSource?.totalCount}
-                    size={props?.dataForGettingMeta?.size}W
+                    size={props?.dataForGettingMeta?.size} W
                     maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
                     queryData={router.query}
                     pathnameData={router.pathname}
@@ -47,16 +50,41 @@ const meta = props => {
 };
 
 
+//
+// export async function getStaticPaths() {
+//     return {
+//         // Only `/posts/1` and `/posts/2` are generated at build time
+//         paths: [{ params: { id: '1' } }, { params: { id: '2' } }],
+//         // Enable statically generating additional pages
+//         // For example: `/posts/3`
+//         fallback: true,
+//     }
+// }
+//
+
+
+
+
+
+
+
+
+
+
 export const getServerSideProps = async ({req, query, res}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let errorCode = 200
+    console.log(req.originalUrl)
+
+    const typeData= req.headers.referer?.includes('tags') || req.originalUrl?.includes('tags') ? 'tags' :
+                    req.headers.referer?.includes('categories') ||  req.originalUrl?.includes('categories')? 'categories' :
+                    req.headers.referer?.includes('actors')|| req.originalUrl?.includes('actors')? 'actors' : ''
+
 
     const dataForGettingMeta = {
-        type: query.contentType?.includes('tags') ? 'tags' :
-              query.contentType?.includes('categories') ? 'categories' :
-              query.contentType?.includes('actors') ? 'actors' : '',
+        type: typeData,
 
-        searchForImageIn: query.contentType,
+        searchForImageIn: query.contentType||typeData,
         page: parseInt(query.page) || 1,
         size: parseInt(query.size) || 30,
         sort: query.sort || 'latest',
@@ -64,6 +92,8 @@ export const getServerSideProps = async ({req, query, res}) => {
         keyword: query.keyword || '',
         lang: query.lang || 'default'
     }
+
+    console.log(req.headers.referer)
 
     let settings;
     let widgets;
@@ -82,7 +112,7 @@ export const getServerSideProps = async ({req, query, res}) => {
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
 
-    return {props: {...settings, query,isMobile: Boolean(isMobile), widgets, metaSource, dataForGettingMeta}}
+    return {props: {...settings, query, isMobile: Boolean(isMobile), widgets, metaSource, dataForGettingMeta}}
 }
 
 

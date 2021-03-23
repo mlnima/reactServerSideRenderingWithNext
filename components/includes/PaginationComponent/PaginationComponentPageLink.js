@@ -1,8 +1,9 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import Link from 'next/link'
 import {useRouter} from "next/router";
-
+import {AppContext} from "../../../context/AppContext";
 const PaginationComponentPageLink = props => {
+    const contextData = useContext(AppContext);
     const router = useRouter()
 
     // const contentType = router.asPath.includes('tags') ? 'tags':
@@ -26,6 +27,12 @@ const PaginationComponentPageLink = props => {
     //     ...props.content,
     //     page: props.pageNumber || 1,
     // }
+    const asQuery = {
+        ...props.content,
+        page: props.pageNumber || 1,
+    }
+
+
 
     return (
         <Link key={props.pageNumber.toString()}
@@ -35,10 +42,12 @@ const PaginationComponentPageLink = props => {
               }}
               as={{
                   pathname: props.asPath,
-                  query: props.asQuery
-              }}
-
-        ><a className={props.currentPage === props.pageNumber ? 'active-page' :''}>{props.pageNumber}</a></Link>
+                  query: asQuery
+              }}>
+            <a className={props.currentPage === props.pageNumber ? 'active-page' :''} onClick={()=>contextData.dispatchState({...contextData.state,loading:true})}>
+            {props.pageNumber}
+        </a>
+        </Link>
     );
 };
 export default PaginationComponentPageLink;

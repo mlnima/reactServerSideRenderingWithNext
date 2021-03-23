@@ -17,8 +17,9 @@ const MetaElement = props => {
                     contentName: props.name,
                     contentType: props.type,
                 }
+
             }}>
-                <a className='meta-page-item'>
+                <a className='meta-page-item'   onClick={()=>contextData.dispatchState({...contextData.state,loading:true})}>
                     <div className='meta-page-item-image-parent'>
                         <ImageRenderer imageWidth={320} imageHeight={320/1.777}  imageUrl={props.imageUrl||props.noImageUrl} hoverHandler={props.hoverHandler} quality={props.quality} loading='lazy'  layout='intrinsic'  />
                     </div>

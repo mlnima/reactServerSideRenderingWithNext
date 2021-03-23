@@ -21,7 +21,7 @@ const AdminTools = props => {
                     <button className='admin-tools-item' onClick={() => state.open ? setState({...state, open: false}) : setState({...state, open: true})}>
                         <FontAwesomeIcon icon={faCogs} className='admin-tools-item-logo'/>
                     </button>
-                    <Link href='/admin'>
+                    <Link href='/admin' locale={false}>
                         <a className='admin-tools-item' style={state.colorsStyle}>
                             <FontAwesomeIcon icon={faUserShield} className='admin-tools-item-logo'/>
                         </a>

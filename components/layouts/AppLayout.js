@@ -37,6 +37,13 @@ const AppLayout = props => {
     //     }
     //
     // }, []);
+    useEffect(() => {
+        contextData.state.loading ?
+            contextData.dispatchState({
+                ...contextData.state,
+                loading: false
+            }):null
+    }, [props]);
 
 
     useEffect(() => {

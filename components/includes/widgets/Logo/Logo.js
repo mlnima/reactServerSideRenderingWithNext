@@ -12,7 +12,9 @@ const Logo = props => {
     const headLineData =   props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine
     const logoText = props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].LogoText || props.LogoText : props.LogoText : props.LogoText
     return (
-        <Link href='/' local={router.locale || router.query.locale || false} >
+        <Link href='/'
+              // local={router.locale || router.query.locale || false}
+        >
             <a className='logo'>
                 {props.LogoUrl?<ImageRenderer imageUrl={props.LogoUrl}
                                               altValue='logo'

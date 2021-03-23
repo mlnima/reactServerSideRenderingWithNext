@@ -3,11 +3,14 @@ import AppLayout from "../components/layouts/AppLayout";
 import WidgetArea from "../components/widgetsArea/WidgetArea/WidgetArea";
 import {getMultipleSetting, getMultipleWidgetWithData} from "../_variables/ajaxVariables";
 import {getAbsolutePath} from '../_variables/_variables';
-
-
+import {useRouter} from "next/router";
 
 const Home = props => {
-
+    const router = useRouter()
+    useEffect(() => {
+        console.log(router)
+        console.log(props)
+    }, [props]);
 
     return (
         <>
@@ -25,6 +28,27 @@ const Home = props => {
         </>
     );
 };
+
+
+// export async function getStaticProps(context) {
+//     //console.log('contect is :', context)
+//     //const domainName = req ? await getAbsolutePath(req) : '';
+//     const domainName = process.env.PRODUCTION_URL;
+//     let widgets;
+//     let settings;
+//     const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'homePage')
+//     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'homePage')
+//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+//     settings = settingsData.data.settings ? settingsData.data.settings : [];
+//     // let isMobile = (req
+//     //     ? req.headers['user-agent']
+//     //     : navigator.userAgent).match(
+//     //     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+//     // )
+//
+//     // return {props: {widgets, ...settings, isMobile: Boolean(isMobile), requestProtocol: req.protocol}}
+//     return {props: {widgets, ...settings, isMobile: false}}
+// }
 
 
 export const getServerSideProps = async ({req}) => {

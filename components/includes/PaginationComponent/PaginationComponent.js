@@ -21,17 +21,14 @@ const PaginationComponent = props => {
                         router.pathname;
         const content = router.query.content ? {content:router.query.content} :{}
 
-        const asQuery = {
-            ...content,
-            page: props.pageNumber || 1,
-        }
+
 
         return (
             <div className='pagination' key={props.paginationIndex}>
                 {
                     rangeWithMinMax.map(pageNumber => {
                         return (
-                            <PaginationComponentPageLink mainPath={mainPath} asPath={asPath} content={content} asQuery={asQuery}   {...props} key={pageNumber}  pageNumber={pageNumber}/>
+                            <PaginationComponentPageLink mainPath={mainPath} asPath={asPath} content={content}    {...props} key={pageNumber}  pageNumber={pageNumber}/>
                         )
                     })
                 }

@@ -5,8 +5,10 @@ import {useRouter} from "next/router";
 import parse from 'html-react-parser';
 
 const SiteSettingSetter = props => {
-    const router = useRouter()
+
     const contextData = useContext(AppContext);
+    const router = useRouter()
+    const locale = useRouter().locale
 
 
     useEffect(() => {
@@ -24,16 +26,18 @@ const SiteSettingSetter = props => {
 
         // !router.locale ? router.locale = manuallyDetectedLocal || process.env.REACT_APP_DEFAULT_LOCAL : null;
         // !router.defaultLocale ? router.defaultLocale = process.env.REACT_APP_DEFAULT_LOCAL : null
-        if (!router.locale){
-            router.locale = manuallyDetectedLocal || process.env.REACT_APP_DEFAULT_LOCAL
-            router.defaultLocale = process.env.REACT_APP_DEFAULT_LOCAL
-            router.push({pathname: router.pathname, query: router.query}, router.asPath, {locale:manuallyDetectedLocal})
+
+        if (!router.locale) {
+            console.log(router)
+            //router.locale = manuallyDetectedLocal || process.env.REACT_APP_DEFAULT_LOCAL
+            //router.defaultLocale = process.env.REACT_APP_DEFAULT_LOCAL
+            //router.push({pathname: router.pathname, query: router.query}, router.asPath, {locale: manuallyDetectedLocal,defaultLocale:manuallyDetectedLocal})
         }
     }, []);
 
     // useEffect(() => {
     //     console.log(router)
-    // }, [props]);
+    // }, [router]);
 
     return (
         <Head>
