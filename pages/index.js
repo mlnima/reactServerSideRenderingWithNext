@@ -3,14 +3,8 @@ import AppLayout from "../components/layouts/AppLayout";
 import WidgetArea from "../components/widgetsArea/WidgetArea/WidgetArea";
 import {getMultipleSetting, getMultipleWidgetWithData} from "../_variables/ajaxVariables";
 import {getAbsolutePath} from '../_variables/_variables';
-import {useRouter} from "next/router";
 
 const Home = props => {
-    const router = useRouter()
-    useEffect(() => {
-        console.log(router)
-        console.log(props)
-    }, [props]);
 
     return (
         <>

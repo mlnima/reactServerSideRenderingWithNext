@@ -10,9 +10,6 @@ import {useRouter} from "next/router";
 
 
 const meta = props => {
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
     const router = useRouter()
     const renderMetas = (props.metaSource.metas ?? []).map(meta => {
         return (
@@ -74,11 +71,11 @@ const meta = props => {
 export const getServerSideProps = async ({req, query, res}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let errorCode = 200
-    console.log(req.originalUrl)
 
-    const typeData= req.headers.referer?.includes('tags') || req.originalUrl?.includes('tags') ? 'tags' :
-                    req.headers.referer?.includes('categories') ||  req.originalUrl?.includes('categories')? 'categories' :
-                    req.headers.referer?.includes('actors')|| req.originalUrl?.includes('actors')? 'actors' : ''
+    const contentTypeSource = query?.contentType || req?.headers?.referer || req?.originalUrl
+    const typeData=  contentTypeSource.includes('tags') ? 'tags' :
+                     contentTypeSource.includes('categories')? 'categories' :
+                     contentTypeSource.includes('actors')? 'actors' : ''
 
 
     const dataForGettingMeta = {
@@ -92,8 +89,6 @@ export const getServerSideProps = async ({req, query, res}) => {
         keyword: query.keyword || '',
         lang: query.lang || 'default'
     }
-
-    console.log(req.headers.referer)
 
     let settings;
     let widgets;
