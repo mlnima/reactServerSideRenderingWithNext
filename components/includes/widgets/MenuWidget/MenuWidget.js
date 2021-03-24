@@ -9,12 +9,13 @@ import {AppContext} from "../../../../context/AppContext";
 const MenuWidget = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
 
     useEffect(() => {
-        let deviceWidth = 0
+
         if (typeof window !== 'undefined') {
+            let deviceWidth = 0
             deviceWidth = window.innerWidth
             deviceWidth >= 768 ? setOpen(true) : setOpen(false)
         }

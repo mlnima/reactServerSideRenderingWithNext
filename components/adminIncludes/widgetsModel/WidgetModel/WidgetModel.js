@@ -539,6 +539,7 @@ const WidgetModel = props => {
                             widgetData.type === 'meta' ||
                             widgetData.type === 'media' ||
                             widgetData.type === 'alphabeticalNumericalRange' ||
+                            widgetData.type === 'linkTo' ||
                             widgetData.type === 'text' ||
                             widgetData.type === 'recentComments'}
                     />

@@ -103,16 +103,16 @@ function clearCacheForRequestUrl(req, res) {
 
 const ssrCache = cacheableResponse({
     ttl: 1000 * 60 * 60, // 1hour
-    get: async ({ req, res,targetComponent,queryParams }) => {
+    get: async ({ req, res }) => {
         const rawResEnd = res.end
         const data = await new Promise((resolve) => {
             res.end = (payload) => {
                 resolve(res.statusCode === 200 && payload)
             }
-            app.render(req, res, targetComponent, queryParams)
+            app.render(req, res, )
         }).catch(err=>{
             console.log(err)
-            app.render(req, res, targetComponent, queryParams)
+            app.render(req, res, )
         })
         res.end = rawResEnd
         return { data }
@@ -396,51 +396,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
     server.get('/admin', (req, res) => {app.render(req, res, '/admin',  {...req.query, ...req.params})});
-    // server.get('/login', (req, res) => {ssrCache({req, res, targetComponent:'/auth/login', queryParams: {...req.query, ...req.params}})});
-    // server.get('/register', (req, res) => {ssrCache({req, res, targetComponent:'/auth/register', queryParams: {...req.query, ...req.params}})});
-    // server.get('/tags/:tag', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'tag'}})});
-    // server.get('/categories/:category', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'category'}})});
-    // server.get('/actors/:actor', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'actor'}})});
-    // server.get('/categories', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'categories'}})});
-    // server.get('/tags', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'tags'}})});
-    // server.get('/actors', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'actors'}})});
-    // server.get('/video/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
-    // server.get('/product/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
-    // server.get('/article/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
-    // server.get('/page/:pageName', (req, res) => {ssrCache({req, res, targetComponent:'/page', queryParams: {...req.query, ...req.params}})});
-
-
-
-
-
-    //server.get('/:locale/admin', (req, res) => {ssrCache({req, res, targetComponent:'/admin', queryParams: {...req.query, ...req.params}})});
-
-
-
-   // server.get('/:locale', (req, res) => {ssrCache({req, res, targetComponent:'/', queryParams: {...req.query, ...req.params}})});
-
-                     // server.get('/:locale/posts', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params}})});
-                        // server.get('/:locale/login', (req, res) => {ssrCache({req, res, targetComponent:'/auth/login', queryParams: {...req.query, ...req.params}})});
-                        // server.get('/:locale/register', (req, res) => {ssrCache({req, res, targetComponent:'/auth/register', queryParams: {...req.query, ...req.params}})});
-    // server.get('/:locale/tags/:tag', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'tag'}})});
-    // server.get('/:locale/categories/:category', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'category'}})});
-    // server.get('/:locale/actors/:actor', (req, res) => {ssrCache({req, res, targetComponent:'/posts', queryParams: {...req.query, ...req.params,contentName: 'actor'}})});
-                        // server.get('/:locale/categories', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'categories'}})});
-                        // server.get('/:locale/tags', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'tags'}})});
-                        // server.get('/:locale/actors', (req, res) => {ssrCache({req, res, targetComponent:'/meta', queryParams: {...req.query, ...req.params,contentType:'actors'}})});
-                     // server.get('/:locale/post/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
-                     // server.get('/:locale/video/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
-                     // server.get('/:locale/product/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
-                     // server.get('/:locale/article/:title', (req, res) => {ssrCache({req, res, targetComponent:'/post', queryParams: {...req.query, ...req.params}})});
-                    // server.get('/:locale/page/:pageName', (req, res) => {ssrCache({req, res, targetComponent:'/page', queryParams: {...req.query, ...req.params}})});
-                    // server.get('/:locale/profile', (req, res) => {ssrCache({req, res, targetComponent:'/profile', queryParams: {...req.query, ...req.params}})});
-                    // server.get('/:locale/checkout', (req, res) => {ssrCache({req, res, targetComponent:'/checkout', queryParams: {...req.query, ...req.params}})});
-
-
-
-
-
-
 
 
     // server.get('*', (req, res) => {
@@ -448,12 +403,16 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //     ssrCache({req, res, targetComponent:req.path,queryParams })
     //     // return handle(req, res)
     // });
-    server.get('/:locale/*', (req, res) => {
-        return handle(req, res)
-    });
+    // server.get('/:locale/*', (req, res) => {
+    //     return handle(req, res)
+    // });
     server.get('*', (req, res) => {
         return handle(req, res)
     });
+    // server.get('*', (req, res) => {
+    //     ssrCache({req, res })
+    //     // return handle(req, res)
+    // });
 
     server.listen(PORT, (err) => {
         if (err) throw err;
