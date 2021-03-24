@@ -37,11 +37,12 @@ process.env.REACT_APP_LOCALS.split(' ').forEach(locale=>{
 })
 
 const languages = process.env.REACT_APP_LOCALS.replace(' ','|')
-console.log(languages)
+
 const reWriteRoutes = {
     rewrites: async () => {
         return[
             //post routes
+            {source:`/admin`,destination: '/admin' },
             {source:`/:locale(${languages})?/video/:title`,destination: '/post' },
             {source:`/:locale(${languages})?/post/:title`,destination: '/post' },
             {source:`/:locale(${languages})?/product/:title`,destination: '/post' },

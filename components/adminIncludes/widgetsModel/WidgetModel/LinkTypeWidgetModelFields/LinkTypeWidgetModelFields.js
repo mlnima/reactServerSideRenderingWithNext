@@ -36,19 +36,22 @@ const LinkTypeWidgetModelFields = props => {
                     classNameValue='linkToText'
                     placeHolder='Link To Text'
                     onChangeHandler={e=>props.onTextInputsDataChangeHandler(e)} rendering={props.widgetData.type ==='linkTo'}/>
+                <div className='selectInputFieldForWidget widgetSection'>
                 <p>Link Type :</p>
                 <select name='linkToType' value={props.linkToType} onChange={e=>props.onChangeHandler(e)}>
                     <option >select</option>
                     <option value='internal'>Internal</option>
                     <option value='external'>External</option>
                 </select>
+                </div>
+                <div className='selectInputFieldForWidget widgetSection'>
                 <p>Link To Window Type:</p>
                 <select name='linkToWindowType' value={props.linkToWindowType} onChange={e=>props.onChangeHandler(e)}>
                     <option >select</option>
                     <option value='_blank'>Open New Window</option>
                     <option value='_self'>Redirect To Link In The Same Window</option>
                 </select>
-
+                </div>
             </>
         );
     }else return null

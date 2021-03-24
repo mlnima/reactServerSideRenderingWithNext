@@ -26,28 +26,6 @@ const Home = props => {
     );
 };
 
-
-// export async function getStaticProps(context) {
-//     //console.log('contect is :', context)
-//     //const domainName = req ? await getAbsolutePath(req) : '';
-//     const domainName = process.env.PRODUCTION_URL;
-//     let widgets;
-//     let settings;
-//     const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'homePage')
-//     const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'homePage')
-//     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-//     settings = settingsData.data.settings ? settingsData.data.settings : [];
-//     // let isMobile = (req
-//     //     ? req.headers['user-agent']
-//     //     : navigator.userAgent).match(
-//     //     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-//     // )
-//
-//     // return {props: {widgets, ...settings, isMobile: Boolean(isMobile), requestProtocol: req.protocol}}
-//     return {props: {widgets, ...settings, isMobile: false}}
-// }
-
-
 export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let widgets;
@@ -65,6 +43,46 @@ export const getServerSideProps = async ({req}) => {
     return {props: {widgets, ...settings, isMobile: Boolean(isMobile), requestProtocol: req.protocol}}
 }
 
-
 export default Home;
+
+
+// if( process.env.REACT_APP_STATIC_PAGES ==='true'){
+//     export const getStaticProps=async(context)=> {
+//         //console.log('contect is :', context)
+//         //const domainName = req ? await getAbsolutePath(req) : '';
+//         const domainName = process.env.PRODUCTION_URL;
+//         let widgets;
+//         let settings;
+//         const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'homePage')
+//         const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'homePage')
+//         widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+//         settings = settingsData.data.settings ? settingsData.data.settings : [];
+//         // let isMobile = (req
+//         //     ? req.headers['user-agent']
+//         //     : navigator.userAgent).match(
+//         //     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+//         // )
+//
+//         // return {props: {widgets, ...settings, isMobile: Boolean(isMobile), requestProtocol: req.protocol}}
+//         return {props: {widgets, ...settings, isMobile: false}}
+//     }
+//
+// }else{
+//     export const getServerSideProps = async ({req}) => {
+//         const domainName = req ? await getAbsolutePath(req) : '';
+//         let widgets;
+//         let settings;
+//         const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'homePage')
+//         const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'homePage')
+//         widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+//         settings = settingsData.data.settings ? settingsData.data.settings : [];
+//         let isMobile = (req
+//             ? req.headers['user-agent']
+//             : navigator.userAgent).match(
+//             /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+//         )
+//
+//         return {props: {widgets, ...settings, isMobile: Boolean(isMobile), requestProtocol: req.protocol}}
+//     }
+// }
 

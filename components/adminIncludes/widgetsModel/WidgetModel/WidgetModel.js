@@ -539,7 +539,7 @@ const WidgetModel = props => {
                         widgetSettings={widgetSettings}
                         onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
                         widgetData={widgetData}
-                        onChangeHandler={onChangeHandler}
+                        onChangeHandler={onChangeHandlerByName}
                         rendering={
                             widgetData.type === 'posts' ||
                             widgetData.type === 'postsSwiper' ||
@@ -670,6 +670,8 @@ const WidgetModel = props => {
                     widgetData={widgetData}
                     classNameValue='customStylesTextarea'
                     />
+
+
                     {/*<textarea className='customStylesTextarea' name='customStyles'*/}
                     {/*          value={widgetData.customStyles || ''}*/}
                     {/*          onChange={e => onChangeHandler(e)}/>*/}
