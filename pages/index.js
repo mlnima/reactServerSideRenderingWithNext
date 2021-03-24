@@ -4,11 +4,14 @@ import WidgetArea from "../components/widgetsArea/WidgetArea/WidgetArea";
 import {getMultipleSetting, getMultipleWidgetWithData} from "../_variables/ajaxVariables";
 import {getAbsolutePath} from '../_variables/_variables';
 
+
 const Home = props => {
 
     return (
         <>
+
             <AppLayout {...props} sidebar={props.identity?.data?.homePageSidebar} sidebarPosition='homePageSidebar'>
+
                 <WidgetArea isMobile={props.isMobile}
                             key='home'
                             rendering={true}

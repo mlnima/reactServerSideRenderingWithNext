@@ -10,6 +10,8 @@ import {DelayInput} from 'react-delay-input'
 import {languagesOptions} from "../../../../_variables/_variables";
 import {faDollarSign, faEuroSign, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
+import MonacoEditorComponent from "../../MonacoEditorComponent/MonacoEditorComponent";
+import Editor from "@monaco-editor/react";
 
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
@@ -123,6 +125,12 @@ const WidgetModel = props => {
         setWidgetData({
             ...widgetData,
             [e.target.name]: e.target.value
+        })
+    };
+    const onChangeHandlerByName = (name,value) => {
+        setWidgetData({
+            ...widgetData,
+            [name]: value
         })
     };
     // const languagesOptions = (process.env.REACT_APP_LOCALS.split(' ').filter(lang=>lang!== process.env.REACT_APP_DEFAULT_LOCAL)||[]).map(lang => {
@@ -652,9 +660,19 @@ const WidgetModel = props => {
                     </button>
                     <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/>
                     <p>Custom Styles:</p>
-                    <textarea className='customStylesTextarea' name='customStyles'
-                              value={widgetData.customStyles || ''}
-                              onChange={e => onChangeHandler(e)}/>
+
+                    <MonacoEditorComponent
+                    language='scss'
+                    nameValue='customStyles'
+                    defaultValue={widgetData.customStyles || ''}
+                    value={widgetData.customStyles || ''}
+                    setWidgetData={setWidgetData}
+                    widgetData={widgetData}
+                    classNameValue='customStylesTextarea'
+                    />
+                    {/*<textarea className='customStylesTextarea' name='customStyles'*/}
+                    {/*          value={widgetData.customStyles || ''}*/}
+                    {/*          onChange={e => onChangeHandler(e)}/>*/}
 
                     <div className='control-buttons'>
                         <button title="save" onClick={() => onSaveHandler()}>    <FontAwesomeIcon icon={faSave} style={{width:'15px',height:'15px'}}/></button>

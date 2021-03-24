@@ -48,6 +48,14 @@
   border: solid .5px black;
   margin-bottom: 5px;
   color: $light100;
+
+  .customStylesTextarea{
+    width: 95%;
+    min-height: 250px;
+    margin: auto;
+  }
+
+
   .widgetSection{
     display: flex;
     align-items: center;

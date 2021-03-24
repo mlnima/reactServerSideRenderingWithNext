@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout';
-
+import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 import { getSetting, saveCustomStyle } from '../../../../_variables/ajaxVariables'
 import { getAbsolutePath } from '../../../../_variables/_variables'
 
@@ -29,7 +29,6 @@ const customStyle = props => {
 
 
     useEffect(() => {
-        console.log( props)
         if(props.customStyles.data){
             setCustomStyle(props.customStyles.data)
         }
@@ -40,6 +39,7 @@ const customStyle = props => {
             <div className='custom-style'>
                 <form className='customStyle' onSubmit={ e => onCustomStyleSaveHandler(e) }>
                     <textarea value={  customStyle } onChange={ e => onCustomStyleChangeHandler(e) }/>
+
                     <button className='submitBtn' type='submit'>Save Custom Style</button>
                 </form>
             </div>

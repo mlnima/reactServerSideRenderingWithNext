@@ -20,6 +20,7 @@
     "@fortawesome/free-solid-svg-icons": "^5.15.1",
     "@fortawesome/react-fontawesome": "^0.1.12",
     "@loadable/component": "^5.14.1",
+    "@monaco-editor/react": "^4.1.0",
     "@next/bundle-analyzer": "^10.0.8",
     "@zeit/next-css": "^1.0.1",
     "@zeit/next-sass": "^1.0.1",

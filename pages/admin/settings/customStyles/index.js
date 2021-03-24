@@ -3,6 +3,7 @@ import AdminLayout from "../../../../components/layouts/AdminLayout";
 import {AppContext} from "../../../../context/AppContext";
 import {jsonExporter} from "../../../../_variables/_variables";
 import {addNewWidget, getMultipleWidgetWithData} from "../../../../_variables/ajaxVariables";
+import Editor from "@monaco-editor/react";
 
 const customStyles = props => {
     const contextData = useContext(AppContext);
@@ -31,10 +32,17 @@ const customStyles = props => {
         }
     }, [state.data]);
 
-    const onChangeHandler = (e) => {
+    // const onChangeHandler = (e) => {
+    //     setState({
+    //         ...state,
+    //         [e.target.name]: e.target.value
+    //     })
+    // }
+
+    const onChangeHandler = value => {
         setState({
             ...state,
-            [e.target.name]: e.target.value
+            customStyles: value
         })
     }
 
@@ -79,7 +87,16 @@ const customStyles = props => {
     return (
         <AdminLayout>
             <div className='custom-style-admin-page'>
-                <textarea value={state.customStyles} name='customStyles' onChange={e => onChangeHandler(e)}/>
+                <Editor
+                    language='scss'
+                    width={props.width || '100%'}
+                    height={props.height || '80vh'}
+                    theme="vs-dark"
+                    defaultValue={state.customStyles || ''}
+                    value={state.customStyles || ''}
+                    onChange={onChangeHandler}
+                />
+                {/*<textarea value={state.customStyles} name='customStyles' onChange={e => onChangeHandler(e)}/>*/}
                 <button className='saveBtn' onClick={onSaveHandler}>Save</button>
                 <button className='saveBtn' onClick={onExportHandler}>Export Custom Style</button>
                 <input ref={inputFile} style={{display: 'none'}} type='file' onChange={async e => {
