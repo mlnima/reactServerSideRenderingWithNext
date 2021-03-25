@@ -4,9 +4,7 @@ import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 
 const BottomLeft = props => {
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
 
     if (props.type === 'video' || props.type === 'redirect') {
         return (
