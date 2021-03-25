@@ -6,7 +6,6 @@ const sharp = require('sharp');
 const fsExtra = require('fs-extra')
 const download = require('image-downloader')
 
-
 const postSchema = require('../../models/postSchema')
 const metaSchema = require('../../models/metaSchema');
 
@@ -51,7 +50,7 @@ const metaCountSetter = (metas, type) => {
 
 apiPostsControllers.creatPost = async (req, res) => {
     const newPost = req.body.postData
-
+console.log(newPost)
     try {
 
         if (req.body.duplicateContent) {
@@ -98,7 +97,7 @@ apiPostsControllers.creatPost = async (req, res) => {
 
                         download.image(options)
                             .then(({filename}) => {
-                                console.log(filename)
+                                // console.log(filename)
                                 // const filePath = directoryPath + newPost.title + '_' + filename;
                                 // const filePathOriginalSize = directoryPath + filename;
                                 // console.log('Saved to', filename)

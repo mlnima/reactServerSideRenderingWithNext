@@ -115,8 +115,8 @@ const PostElement = props => {
                         <div className="image">
                             <ImageContent/>
                             {props.state && props.state.views > 1 && props.state.postType === ('video') ? <BottomRight views={props.state.views}/> : null}
-                            {props.state.postType === ('video' || 'redirect' || 'product') ? <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
-                            {props.state.quality ? <TopRight quality={props.state.quality}/> : null}
+                            {props.state.postType === ('video') ||props.state.postType === ('redirect') || props.state.postType === ('product')? <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
+                            {props.state.quality && props.state.postType === ('video') ? <TopRight quality={props.state.quality}/> : null}
                         </div>
                         {
                             props.state.rating !== 'disable' && props.state.likes >0 ?

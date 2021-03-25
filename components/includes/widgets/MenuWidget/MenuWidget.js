@@ -34,11 +34,12 @@ const MenuWidget = props => {
         if (menuItem.type === 'internal') {
             const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as :
                 (!router.locale && !router.query.locale) ? menuItem.as :
-                    `/${router.locale || router.query.locale}${menuItem.as}`
+                    `/${router.locale || router.query.locale}${menuItem.as}`;
+            console.log(menuItem.target)
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
                     <Link href={menuItem.target} as={linkAsForMenuItems}>
-                        <a onClick={mobileNavigationOnClickHandler}>
+                        <a onClick={menuItem.target.includes('#')? null:mobileNavigationOnClickHandler}>
                             {menuItem.translations?.[router.locale]?.name || menuItem.name }
                         </a>
                     </Link>
@@ -47,7 +48,7 @@ const MenuWidget = props => {
         } else if (menuItem.type === 'external') {
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
-                    <a href={menuItem.target} onClick={mobileNavigationOnClickHandler}>{menuItem.name}</a>
+                    <a href={menuItem.target} onClick={menuItem.target.includes('#')? null:mobileNavigationOnClickHandler}>{menuItem.name}</a>
                 </li>
             )
         } else return null

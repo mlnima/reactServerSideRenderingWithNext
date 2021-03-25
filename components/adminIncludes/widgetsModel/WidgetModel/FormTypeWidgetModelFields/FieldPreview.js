@@ -1,32 +1,21 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown, faArrowUp, faTrash} from "@fortawesome/free-solid-svg-icons";
-import {updateWidgets,getMultipleWidgetWithData} from '../../../../../_variables/ajaxVariables'
-import {AppContext} from "../../../../../context/AppContext";
-import {useRouter} from "next/router";
-
-import {faBars, faPen} from "@fortawesome/free-solid-svg-icons";
+import {faBars} from "@fortawesome/free-solid-svg-icons";
 
 const FieldPreview = props => {
-    const contextData = useContext(AppContext);
-    const router = useRouter()
     const [state, setState] = useState({
         open:false
     });
-
     const [fieldData, setFieldData] = useState({
         fieldName: '',
         fieldPlaceHolder: '',
         required: true,
         fieldType: 'text',
     });
-
-
-
     useEffect(() => {
         setFieldData(props.field)
     }, [props.field]);
-
     const onDeleteHandler = name => {
         const newData = props.widgetData.formData.formFields.filter(i => i.fieldName !== name)
         props.setWidgetData({
@@ -38,10 +27,8 @@ const FieldPreview = props => {
 
         })
     }
-
-
-
-    const onEditHandler = ()=>{
+    const onEditHandler = e=>{
+        e.preventDefault()
         const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f=>f.fieldName===props.field.fieldName)
         const updatedFields = [
             ...props.widgetData.formData.formFields.slice(0, findIndexOfTheField),
@@ -56,40 +43,43 @@ const FieldPreview = props => {
             }
         })
     }
-
     const onChangeHandler = (e) => {
         setFieldData({
             ...fieldData,
             [e.target.name]: e.target.value
         })
     }
-    const fieldIndexPlus = plus => {
-        const actionOnIndexValue = plus ? -1 : 1
-        const updatedFieldData = {...props.field, fieldIndex: props.field.fieldIndex + actionOnIndexValue}
-        const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f=>f.fieldName===props.field.fieldName)
+    const fieldIndexPlus = value => {
+        const updatedFieldData = {...props.field, fieldIndex: props.field.fieldIndex + value}
+        const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f=>f.filedId===props.field.filedId)
         const updatedFields = [
             ...props.widgetData.formData.formFields.slice(0, findIndexOfTheField),
             updatedFieldData,
             ...props.widgetData.formData.formFields.slice(findIndexOfTheField + 1),
         ];
-
         props.setWidgetData({
             ...props.widgetData,
-            data: {
-                ...props.widgetData.data,
-                formData: {
-                    ...props.widgetData.formData,
-                    formFields: updatedFields
-                }
+            formData: {
+                ...props.formData,
+                formFields: updatedFields
             }
         })
-
     }
 
-
-     const RenderEditMode=()=>{
-        if(state.open){
-            return (
+    return (
+        <div className='form-item-view' key={props.field.filedId}>
+            <div className='field-index-control'>
+                <button onClick={() => state.open?setState({...state,open:false}):setState({...state,open:true})}>
+                    <FontAwesomeIcon style={{transform:state.open?'rotate(90deg)':'rotate(0deg)',transition:'.5s all'}} icon={faBars} className='navigation-mobile-button-logo'/>
+                </button>
+                <p>{ 'ID : ' + props.field.filedId}</p>
+                <p>{props.field.fieldType + ' : ' + props.field.fieldName}</p>
+                <p>index:{props.field.fieldIndex}</p>
+                <button onClick={() => fieldIndexPlus(-1)}><FontAwesomeIcon icon={faArrowUp} className='navigation-mobile-button-logo'/></button>
+                <button onClick={() => fieldIndexPlus(+1)}><FontAwesomeIcon icon={faArrowDown} className='navigation-mobile-button-logo'/></button>
+                <button onClick={() => onDeleteHandler(props.field.fieldName)}><FontAwesomeIcon icon={faTrash} className='navigation-mobile-button-logo'/></button>
+            </div>
+            {state.open?
                 <div className='edit-form-field'>
                     <form className='add-new-filed' onSubmit={e => onEditHandler(e)}>
                         <p>Filed Name :</p>
@@ -98,7 +88,7 @@ const FieldPreview = props => {
                         <input name='fieldPlaceHolder' value={fieldData.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
 
                         <p>Required :</p>
-                        <select name='required' value={fieldData.required}>
+                        <select name='required' value={fieldData.required} onChange={e => onChangeHandler(e)}>
                             <option value='true'>True</option>
                             <option value='false'>False</option>
                         </select>
@@ -123,25 +113,10 @@ const FieldPreview = props => {
                         <button type='submit'>Edit</button>
                     </form>
                 </div>
-            )
-        }else return null
-     }
+                :null
+            }
 
-
-
-
-
-    return (
-        <div className='form-item-view'>
-            <div className='field-index-control'>
-                <button onClick={() => state.open?setState({...state,open:false}):setState({...state,open:true})}><FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo'/></button>
-                <p>{props.field.fieldType + ' : ' + props.field.fieldName}</p>
-                <p>index:{props.field.fieldIndex}</p>
-                <button onClick={() => fieldIndexPlus(true)}><FontAwesomeIcon icon={faArrowUp} className='navigation-mobile-button-logo'/></button>
-                <button onClick={() => fieldIndexPlus(false)}><FontAwesomeIcon icon={faArrowDown} className='navigation-mobile-button-logo'/></button>
-                <button onClick={() => onDeleteHandler(props.field.fieldName)}><FontAwesomeIcon icon={faTrash} className='navigation-mobile-button-logo'/></button>
-            </div>
-            <RenderEditMode/>
+            {/*<RenderEditMode/>*/}
         </div>
     );
 };

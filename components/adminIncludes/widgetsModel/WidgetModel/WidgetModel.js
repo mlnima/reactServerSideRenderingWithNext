@@ -542,6 +542,7 @@ const WidgetModel = props => {
                         onChangeHandler={onChangeHandlerByName}
                         rendering={
                             widgetData.type === 'posts' ||
+                            widgetData.type === 'form' ||
                             widgetData.type === 'postsSwiper' ||
                             widgetData.type === 'imageSwiper' ||
                             widgetData.type === 'meta' ||

@@ -1,9 +1,12 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 
 const BottomLeft = props => {
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     if (props.type === 'video' || props.type === 'redirect') {
         return (
@@ -15,7 +18,7 @@ const BottomLeft = props => {
     } else if (props.type === 'product') {
         return (
             <span className='bottom-left'>
-                <FontAwesomeIcon icon={props.state.currency === 'Usd' ? faDollarSign : faEuroSign} className='post-element-info-logo'/>
+                <FontAwesomeIcon icon={props?.state?.currency === 'Usd' ? faDollarSign : faEuroSign} className='post-element-info-logo'/>
                 <span className='value-next-icon'>{props.price}</span>
             </span>
         )

@@ -2,6 +2,7 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from '../../../../components/layouts/AdminLayout';
 import { DelayInput } from 'react-delay-input';
 import { AppContext } from '../../../../context/AppContext'
+import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 import { getAbsolutePath } from '../../../../_variables/_variables'
 import { getSetting } from '../../../../_variables/ajaxVariables'
 import settings from '../general'
@@ -125,16 +126,26 @@ const customScript = props => {
         )
     })
 
-    const onCustomScriptsAsStringChangeHandler = e=>{
+    const onCustomScriptsAsStringChangeHandler = value =>{
         contextData.dispatchSiteIdentity({
             ...contextData.siteIdentity,
-            customScriptsAsString: e.target.value
+            customScriptsAsString: value
         })
     }
     return (
         <AdminLayout>
             <div className='customScriptsAsStringSection'>
-                <textarea name='customScriptsAsString' value={contextData.siteIdentity.customScriptsAsString} className='customScriptsAsString' placeholder='Custom Scripts As String' onChange={ e => onCustomScriptsAsStringChangeHandler(e) }/>
+                <Editor
+                    language='html'
+                    name='customScriptsAsString'
+                    theme="vs-dark"
+                    value={contextData.siteIdentity.customScriptsAsString || ''}
+                    onChange={onCustomScriptsAsStringChangeHandler}
+                    classname='customScriptsAsString'
+                    width={props.width || '100%'}
+                    height={props.height || '70vh'}
+                />
+                {/*<textarea name='customScriptsAsString' value={contextData.siteIdentity.customScriptsAsString} className='customScriptsAsString' placeholder='Custom Scripts As String' onChange={ e => onCustomScriptsAsStringChangeHandler(e) }/>*/}
                 <button className='saveBtn' onClick={ () => onSaveHandler() }>Save</button>
             </div>
 
