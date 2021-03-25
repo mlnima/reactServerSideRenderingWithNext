@@ -1,8 +1,8 @@
-import React, {useEffect} from 'react';
+import React, {useState,useEffect} from 'react';
 import Image from 'next/image'
 
 const ImageRenderer = props => {
-
+    const [gotError,setGotError]=useState(false)
     let imageUrl = props.imageUrl;
     const isImageAbsolutePath = imageUrl?.includes('http')
     const validImageForNextImage = ((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath
@@ -10,9 +10,9 @@ const ImageRenderer = props => {
 
     if (validImageForNextImage) {
         return <Image
-                  src={imageUrl || noImageUrl}
+                  src={ gotError? noImageUrl:imageUrl}
                   alt={props.altValue || props.classNameValue }
-                  onError={e => e.target.src = noImageUrl}
+                  onError={()=> setGotError(true)}
                   onMouseEnter={props.hoverHandler}
                   onTouchStart={props.hoverHandler}
                   className={props.classNameValue}
@@ -30,8 +30,8 @@ const ImageRenderer = props => {
              height={props.imageHeight || 300/1.777}
              onMouseEnter={props.hoverHandler}
              onTouchStart={props.hoverHandler}
-             src={imageUrl || noImageUrl}
-             onError={e => e.target.src = noImageUrl}/>
+             src={ gotError? noImageUrl:imageUrl}
+             onError={()=> setGotError(true)}/>
     );
 };
 export default ImageRenderer;
