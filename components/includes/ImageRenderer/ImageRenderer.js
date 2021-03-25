@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import Image from 'next/image'
+import {checkRemovedContent} from "../../../_variables/ajaxPostsVariables";
 
 const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)
@@ -7,14 +8,28 @@ const ImageRenderer = props => {
     const isImageAbsolutePath = imageUrl?.includes('http')
     const validImageForNextImage = ((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath
     const noImageUrl = '/static/images/noImage/no-image-available.png';
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
+
+
+
+    const onErrorHandler= ()=>{
+        setGotError(true)
+        if (props.contentId && imageUrl){
+            let data={
+                checkUrl:imageUrl,
+                contentId:props.contentId
+            }
+            setTimeout(()=>{
+                checkRemovedContent(data)
+            },0)
+        }
+    }
+
     if (validImageForNextImage) {
         return <Image
             src={gotError ? noImageUrl : imageUrl}
             alt={props.altValue || props.classNameValue}
-            onError={() => setGotError(true)}
+            onError={onErrorHandler}
             onMouseEnter={props.hoverHandler}
             onTouchStart={props.hoverHandler}
             className={props.classNameValue}
@@ -33,7 +48,7 @@ const ImageRenderer = props => {
              onMouseEnter={props.hoverHandler}
              onTouchStart={props.hoverHandler}
              src={gotError ? noImageUrl : imageUrl}
-             onError={() => setGotError(true)}/>
+             onError={onErrorHandler}/>
     );
 };
 export default ImageRenderer;

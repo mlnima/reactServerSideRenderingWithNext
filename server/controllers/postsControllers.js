@@ -4,6 +4,7 @@ const postSchema = require('../models/postSchema');
 const userSchema = require('../models/userSchema');
 const metaSchema = require('../models/metaSchema');
 const commentSchema = require('../models/commentSchema');
+const axios = require('axios')
 const metasSaver = async (metas) => {
     let finalData = []
     for await (let meta of metas) {
@@ -465,6 +466,21 @@ postsControllers.export = (req, res) => {
         })
 
 };
+
+
+postsControllers.checkRemovedContent = (req,res)=>{
+    const checkUrl=req.body.checkUrl
+    const contentId = req.body.contentId
+    if (checkUrl&&contentId){
+        axios(checkUrl).then(res=>{
+        }).catch(err=>{
+            if (err?.response?.status === 404){
+                postSchema.findOneAndUpdate({_id:contentId},{$set: { status: 'pending' }}, {new: true}).exec()
+            }
+            res.end()
+        })
+    }
+}
 
 
 module.exports = postsControllers;

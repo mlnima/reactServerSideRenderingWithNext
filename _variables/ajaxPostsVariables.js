@@ -30,6 +30,14 @@ export const getPost = async (data, domainName, cache) => {
     };
     return await axios.post(domainName + `/api/v1/posts/post?id=${ data._id }` , body)
 };
+export const checkRemovedContent = async (data) => {
+
+    const body = {
+        ...data,
+        token: localStorage.wt
+    };
+    return await axios.post(window.location.origin + `/api/v1/posts/checkRemovedContent` , body)
+};
 
 export const updatePost = async (data, domainName) => {
     const body = {

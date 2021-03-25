@@ -241,6 +241,9 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/posts/bulkAction', (req, res) => {
         postsControllers.bulkAction(req, res)
     });
+    server.post('/api/v1/posts/checkRemovedContent', (req, res) => {
+        postsControllers.checkRemovedContent(req, res)
+    });
 
 
     //meta data handler(tags,categories...)

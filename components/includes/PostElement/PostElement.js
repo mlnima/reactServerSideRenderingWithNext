@@ -2,7 +2,7 @@ import React, {useState, useContext, useRef, useEffect} from 'react';
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
 import ProgressBar from "../ProgressBar/ProgressBar";
-import { likeValueCalculator} from '../../../_variables/_variables'
+import {likeValueCalculator} from '../../../_variables/_variables'
 import {AppContext} from "../../../context/AppContext";
 import styled from "styled-components";
 import {useRouter} from "next/router";
@@ -48,6 +48,7 @@ const PostElement = props => {
         }
     };
 
+
     const ImageContent = () => {
         const imageWidth = 320
         let dataToRender = () => {
@@ -69,7 +70,7 @@ const PostElement = props => {
             } else if (!state.isHover) {
                 return (
                     <ImageRenderer imageUrl={props.state?.mainThumbnail}
-                                   altValue={title || props.state?.mainThumbnail }
+                                   altValue={title || props.state?.mainThumbnail}
                                    hoverHandler={isHoverHandler}
                                    imageWidth={imageWidth}
                                    imageHeight={imageWidth / 1.777}
@@ -77,6 +78,7 @@ const PostElement = props => {
                                    loading='lazy'
                                    layout='intrinsic'
                                    classNameValue='post-element-internal-image'
+                                   contentId={props.state._id}
 
                     />
                 )
@@ -90,16 +92,16 @@ const PostElement = props => {
     };
 
 
-   //const linkAsForPostElement = process.env.REACT_APP_LOCALS.split(' ').includes(locale) ? `/${locale}/${props.state.postType ||'post'}/${title}?id=${props.state._id}` : `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
-    const linkAsForPostElement =  `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
-    const localeAttr = router.locale || router.query.locale ? (router.locale || router.query.locale) !== process.env.REACT_APP_DEFAULT_LOCAL ?{locale:router.locale || router.query.locale}:{}:{}
+    //const linkAsForPostElement = process.env.REACT_APP_LOCALS.split(' ').includes(locale) ? `/${locale}/${props.state.postType ||'post'}/${title}?id=${props.state._id}` : `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
+    const linkAsForPostElement = `/${props.state.postType || 'post'}/${title}?id=${props.state._id}`
+    const localeAttr = router.locale || router.query.locale ? (router.locale || router.query.locale) !== process.env.REACT_APP_DEFAULT_LOCAL ? {locale: router.locale || router.query.locale} : {} : {}
 
     return (
         < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
             <Link
 
                 href={{
-                    pathname:  `/post`,
+                    pathname: `/post`,
                     query: {
                         id: props.state._id,
                         ...state.queries
@@ -107,18 +109,19 @@ const PostElement = props => {
                 }}
                 as={linkAsForPostElement}
                 // shallow={true}
-               //  local={router.locale || router.query.locale || false}
+                //  local={router.locale || router.query.locale || false}
             >
-                <a onClick={()=>contextData.dispatchState({...contextData.state,loading:true})}>
+                <a onClick={() => contextData.dispatchState({...contextData.state, loading: true})}>
                     <div className='post-element' key={props.state.title}>
                         <div className="image">
                             <ImageContent/>
                             {props.state && props.state.views > 1 && props.state.postType === ('video') ? <BottomRight views={props.state.views}/> : null}
-                            {props.state.postType === ('video') ||props.state.postType === ('redirect') || props.state.postType === ('product')? <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
+                            {props.state.postType === ('video') || props.state.postType === ('redirect') || props.state.postType === ('product') ?
+                                <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
                             {props.state.quality && props.state.postType === ('video') ? <TopRight quality={props.state.quality}/> : null}
                         </div>
                         {
-                            props.state.rating !== 'disable' && props.state.likes >0 ?
+                            props.state.rating !== 'disable' && props.state.likes > 0 ?
                                 <ProgressBar value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/> :
                                 null
                         }
