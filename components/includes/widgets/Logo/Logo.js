@@ -20,7 +20,7 @@ const Logo = props => {
                                               altValue='logo'
                                               imageWidth={300}
                                               imageHeight={100}
-                                              quality={50}
+                                              quality={100}
                                               loading='lazy'
                 />:null}
 
