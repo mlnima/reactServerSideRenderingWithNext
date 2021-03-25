@@ -43,6 +43,7 @@ const reWriteRoutes = {
         return[
             //post routes
             {source:`/admin`,destination: '/admin' },
+            {source:`/posts`,destination: '/posts' },
             {source:`/:locale(${languages})?/video/:title`,destination: '/post' },
             {source:`/:locale(${languages})?/post/:title`,destination: '/post' },
             {source:`/:locale(${languages})?/product/:title`,destination: '/post' },

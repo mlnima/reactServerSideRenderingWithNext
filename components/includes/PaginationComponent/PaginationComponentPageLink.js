@@ -32,7 +32,8 @@ const PaginationComponentPageLink = props => {
         page: props.pageNumber || 1,
     }
 
-
+console.log(props.mainPath)
+    console.log(props.asPath)
 
     return (
         <Link key={props.pageNumber.toString()}

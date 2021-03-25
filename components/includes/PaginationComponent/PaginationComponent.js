@@ -12,7 +12,7 @@ const PaginationComponent = props => {
             router.asPath.includes('categories') ? 'categories':
                 router.asPath.includes('actors') ? 'actors': 'tags'
 
-        const mainPath =  router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/posts' : '/meta'
+        const mainPath =  router.asPath.includes('/posts') ||router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/posts' : '/meta'
 
         const asPath =   router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/' + contentType + '/' + router.query.contentName :
             router.asPath.includes('/tags') ? '/tags' :

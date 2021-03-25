@@ -21,8 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/BottomLeft.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/BottomLeft.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ImageRenderer/ImageRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ImageRenderer/ImageRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -569,7 +572,8 @@
       <workItem from="1616433686172" duration="18491000" />
       <workItem from="1616515283732" duration="2657000" />
       <workItem from="1616579802155" duration="20738000" />
-      <workItem from="1616665207255" duration="8688000" />
+      <workItem from="1616665207255" duration="10368000" />
+      <workItem from="1616689951159" duration="239000" />
     </task>
     <servers />
   </component>
@@ -654,6 +658,10 @@
       <screen x="-648" y="2160" width="4096" height="1152" />
     </state>
     <state x="663" y="2271" width="2697" height="952" key="com.intellij.history.integration.ui.views.FileHistoryDialog/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615416606238" />
+    <state x="2867" y="478" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1616690184356">
+      <screen x="0" y="0" width="4096" height="1152" />
+    </state>
+    <state x="2867" y="478" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616690184356" />
     <state x="2304" y="611" key="run.anything.popup" timestamp="1615836882958">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>

@@ -32,7 +32,6 @@ const PostElement = props => {
         queries: {},
         infoOnPostElementStyle: {},
         titleElementStyle: {},
-
     });
 
     useEffect(() => {
