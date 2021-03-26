@@ -6,7 +6,7 @@ import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 const BottomLeft = props => {
 
 
-    if (props.type === 'video' || props.type === 'redirect') {
+    if ((props.type === 'video' && props.duration) || props.type === 'redirect') {
         return (
             <span className='bottom-left'>
                 <FontAwesomeIcon icon={faClock} className='post-element-info-logo'/>

@@ -2,63 +2,59 @@
 @import "./WidgetHeader/WidgetHeader";
 
 .widget {
+  .smallPostsContent {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    grid-template-rows: repeat(auto-fill, minmax(140px, 1fr));
 
-  .Posts {
-    .smallPostsContent {
-      grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-      grid-template-rows: repeat(auto-fill, minmax(140px, 1fr));
+    .small {
+      width: 140px;
+      height: 140px;
+      margin: auto;
 
-      .small {
-        width: 140px;
+      .post-element {
+        width: 100%;
         height: 140px;
-        margin: auto;
 
-        .post-element {
-          width: 100%;
-          height: 140px;
-
-          .image {
-            img, video {
-              width: 140px;
-              height: 79px;
-              object-fit: cover;
-            }
-
+        .image {
+          img, video {
+            width: 140px;
+            height: 79px;
+            object-fit: cover;
           }
 
-          h3 {
-            width: 130px;
-          }
         }
 
+        h3 {
+          width: 130px;
+        }
       }
+
     }
-
-    .listPostsContent {
-
-      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-
-      .list {
-        width: 90%;
-        height: 140px;
-
-        a {
-          width: 95%;
-          height: 140px !important;
-        }
+  }
+  .listPostsContent {
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    .post-element-div {
+      width: 95%;
+      height: 90px;
+      margin: 2px 0;
+      a {
+        width: 95%;
+        height: 90px;
 
         .post-element {
           width: auto;
-          height: 140px !important;
+          height: 90px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
 
           .image {
+            width: 50%;
             img, video {
-              width: 160px;
-              height: 90px;
-              //display: none;
+              width: 160px !important;
+              height: 90px !important;
             }
-
-            .views, .duration {
+            .top-right ,.bottom-right{
               display: none;
             }
           }
@@ -68,15 +64,20 @@
           }
 
           h3 {
-            width: 250px;
+            width: 45%;
+            overflow-wrap: break-word;
+            overflow: initial;
+            white-space: pre-wrap;
+            text-align: left;
+            font-size: 14px;
+            padding: 0 2px;
           }
 
         }
       }
 
+
     }
 
   }
-
-
 }

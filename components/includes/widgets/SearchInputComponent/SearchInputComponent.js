@@ -14,9 +14,13 @@ const SearchInputComponent = props => {
         style: {
             backgroundColor: '#222222'
         },
-        isOpen:false
+        isOpen: false
     });
 
+    useEffect(() => {
+        // !props.mobileMode? setState({...state,isOpen: true}) :null
+        //     console.log(props.mobileMode)
+    }, []);
 
     useEffect(() => {
         setState({
@@ -24,13 +28,14 @@ const SearchInputComponent = props => {
             queries: props.router ? props.router.query : {},
             pathURL: props.router ? props.router.pathname.includes('meta') ? props.router.pathname : '/posts' : '/posts',
             keyword: props.router ? props.router.query ? props.router.query.keyword ? props.router.query.keyword : '' : '' : '',
+            isOpen: !props.mobileMode,
             style: {
                 ...state.style,
                 backgroundColor: props.searchBtnBackgroundColor,
                 color: props.searchBtnColor,
             }
         })
-    }, [props]);
+    }, []);
 
 
     useEffect(() => {
@@ -87,34 +92,32 @@ const SearchInputComponent = props => {
     }
 
 
-   const onOpenCloseHandler = ()=>{
-        state.isOpen?
-       setState({
-           ...state,
-           isOpen: false
-       }):
-       setState({
-           ...state,
-           isOpen: true
-       })
-   }
+    const onOpenCloseHandler = () => {
+        state.isOpen ?
+            setState({
+                ...state,
+                isOpen: false
+            }) :
+            setState({
+                ...state,
+                isOpen: true
+            })
+    }
 
 
-
-    if(state.isOpen){
+    if (state.isOpen) {
         return (
             <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
-                <button className='search-bar-btn-close' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='svg-logo-small' /></button>
+                {props.mobileMode ?  <button className='search-bar-btn-close' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='svg-logo-small'/></button>:null }
                 <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword}/>
                 <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small' style={state.style}/></button>
             </form>
         );
-    }else {
+    } else {
         return (
-            <button className='search-bar-btn-close' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faSearch} className='svg-logo-small' /></button>
+            <button className='search-bar-btn-open' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faSearch} className='svg-logo-small'/></button>
         )
     }
-
 
 
 };

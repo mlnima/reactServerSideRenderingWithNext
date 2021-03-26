@@ -12,6 +12,7 @@ import {faDollarSign, faEuroSign, faTrash} from "@fortawesome/free-solid-svg-ico
 import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import MonacoEditorComponent from "../../MonacoEditorComponent/MonacoEditorComponent";
 import Editor from "@monaco-editor/react";
+import SearchTypeInputFields from "./SearchTypeInputFields/SearchTypeInputFields";
 
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
@@ -642,6 +643,10 @@ const WidgetModel = props => {
                         widgetData={widgetData}
                     />
 
+
+                    {widgetData.type === 'searchBar' ?<SearchTypeInputFields widgetData={widgetData} widgetSettings={widgetSettings} onTextInputsDataChangeHandler={onTextInputsDataChangeHandler} onChangeHandler={onChangeHandler}/>:null }
+
+
                     <div className='textInputFieldForWidget widgetSection'>
                         <p>Extra ClassName:</p>
                         <input type='text' name='extraClassName' value={widgetData.extraClassName || ''}
@@ -659,7 +664,8 @@ const WidgetModel = props => {
                         }) : setWidgetSettings({...widgetSettings, preview: true})
                     }}>Preview the Widget
                     </button>
-                    <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/>
+                    {widgetSettings.preview ?  <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/> :null }
+
                     <p>Custom Styles:</p>
 
                     <MonacoEditorComponent

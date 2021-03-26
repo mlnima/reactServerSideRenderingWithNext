@@ -17,14 +17,7 @@ const Widget = props => {
         if (props.data?.customStyles) {
             setStyles(props.data?.customStyles)
         }
-
-
     }, []);
-    // useEffect(() => {
-    //     if (props.data.type === 'text'){
-    //         console.log(props.data)
-    //     }
-    // }, [props]);
 
     const RenderComponent = () => {
         if (props.component) {
@@ -48,8 +41,12 @@ const Widget = props => {
     }
 
     if (conditionalWidgetRenderer(props.data.deviceTypeToRender, props.data.languageToRender, contextData.state.activeLanguage)) {
+        const idAttribute = props.data?.extraId ? {id:props.data?.extraId}:{}
         return (
-            <StyledDiv customStyles={styles} className={'widget ' + (props.data?.extraClassName ?? '')} id={props.data?.extraId ?? ''}>
+            <StyledDiv customStyles={styles} className={'widget ' + (props.data?.extraClassName ?? '')}
+                       // id={props.data?.extraId ?? ''}
+                       {...idAttribute}
+            >
                 <WidgetHeader {...props.data}/>
                 <WidgetText {...props.data}/>
                 <RenderComponent/>

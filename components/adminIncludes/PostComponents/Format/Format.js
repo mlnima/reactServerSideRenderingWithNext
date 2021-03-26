@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 
 const Format = props => {
 
@@ -16,8 +16,5 @@ const Format = props => {
     );
 };
 
-Format.getInitialProps = ({ req }) => {
-    return {}
-};
 
 export default Format;

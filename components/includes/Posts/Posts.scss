@@ -1,10 +1,11 @@
 @import "../../../styles/_grid";
 
-.posts-grid {
-  //margin: 10px 0;
+//.posts-grid {
+//  //margin: 10px 0;
+//
+//
+//}
 
-  .postsContent {
-    @include postsContent;
-  }
+.postsContent {
+  @include postsContent;
 }
-

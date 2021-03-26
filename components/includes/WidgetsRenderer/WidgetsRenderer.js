@@ -25,7 +25,7 @@ const WidgetsRenderer =  props => {
 
 
 
-    // const widgetsToRenderSortByIndex = (props.widgets?.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))
+
     const renderWidgets = (props.widgets?.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))?.map(widget => {
         const targetComponent =
             widget.data.type === 'posts' ? Posts :
@@ -51,17 +51,6 @@ const WidgetsRenderer =  props => {
             <Widget currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } />
         )
 
-        // const deviceType = widget?.data?.deviceTypeToRender;
-        // const languageToRender = widget?.data?.languageToRender;
-        // const activeLanguage = widget?.data?.languageToRender;
-        // return (
-        //     <>
-        //         {
-        //             ((!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all'))
-        //         }
-        //     <Widget currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } />
-        //     </>
-        // )
     })
 
 
