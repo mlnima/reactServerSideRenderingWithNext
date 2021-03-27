@@ -5,12 +5,7 @@ paymentControllers.order_payPal = (req, res) => {
 
     try {
         console.log(req.body)
-        const orderData = new orderSchema({
-            type:'payPal',
-            additionalData:req.body.additionalData || {},
-            status:'',
-            payPalData:req.body.payPalData
-        })
+        const orderData = new orderSchema(req.body.data)
         orderData.save().then(createdOrder=>{
             res.json({createdOrder,error:false});
             res.end()

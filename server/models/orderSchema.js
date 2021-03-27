@@ -7,12 +7,14 @@ const orderSchema =  new Schema({
         type:String,
         required:true
     },
-    buyer:String,
+    userID:{
+        type:String,
+        default:'guest'
+    },
     status:{
         type:String,
         default:'pending'
     },
-    shippingAddress:String,
     additionalData:mongoose.Mixed,
     payPalData:{
         type:mongoose.Mixed,

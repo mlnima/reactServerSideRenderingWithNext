@@ -4,8 +4,6 @@ import dynamic from 'next/dynamic'
 import {addNewWidget, deleteWidgets, getMultipleWidgetWithData, getPagesData, updateWidgets} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName} from "../../../../_variables/_variables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-// import 'array.prototype.move';
 import {DelayInput} from 'react-delay-input'
 import {languagesOptions} from "../../../../_variables/_variables";
 import {faDollarSign, faEuroSign, faTrash} from "@fortawesome/free-solid-svg-icons";
@@ -13,7 +11,6 @@ import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import MonacoEditorComponent from "../../MonacoEditorComponent/MonacoEditorComponent";
 import Editor from "@monaco-editor/react";
 import SearchTypeInputFields from "./SearchTypeInputFields/SearchTypeInputFields";
-
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
 const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'))
@@ -33,17 +30,17 @@ const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), { ssr: f
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
     const languageElement = useRef(null)
+
     const [widgetSettings, setWidgetSettings] = useState({
         open: false,
         preview: false,
         renderDeleteBtn:false,
         activeEditingLanguage: 'default'
     })
+
     const [widgetData, setWidgetData] = useState({
         translations: {},
     })
-
-
 
     useEffect(() => {
         setWidgetData({
@@ -52,16 +49,15 @@ const WidgetModel = props => {
         })
     }, [props]);
 
-
-
     const onChangeLanguageHandler = e => {
         setWidgetSettings({
             ...widgetSettings,
             activeEditingLanguage: e.target.value
         })
     }
+
     const onTextInputsDataChangeHandler = (e) => {
-        //    let langObject = widgetData.translations[widgetSettings.activeEditingLanguage] ? widgetData.translations[widgetSettings.activeEditingLanguage] : {}
+
         if (widgetSettings.activeEditingLanguage === 'default') {
             setWidgetData({
                 ...widgetData,
@@ -78,8 +74,6 @@ const WidgetModel = props => {
                             [widgetSettings.activeEditingLanguage]: {}
                         }
                     }
-
-
                 : {
                     ...widgetData,
                     translations: {
@@ -87,7 +81,6 @@ const WidgetModel = props => {
                     }
                 }
             //const currentData = widgetData.translations ? widgetData ? widgetData.translations[widgetSettings.activeEditingLanguage]: {...widgetData, translation:{[widgetSettings.activeEditingLanguage]:{} } }   : {...widgetData, translation:{[widgetSettings.activeEditingLanguage]:{} } }
-
             setWidgetData({
                 ...currentData,
                 translations: {
@@ -102,7 +95,6 @@ const WidgetModel = props => {
     }
 
     const onTextEditorChangeHandler = value => {
-        console.log(value)
         if (languageElement?.current?.value === 'default') {
             setWidgetData({
                 ...widgetData,
@@ -186,7 +178,6 @@ const WidgetModel = props => {
     };
 
     const changeWidgetIndex = (action) => {
-
         const valueToSet = action ? parseInt(widgetData.widgetIndex) + 1 : parseInt(widgetData.widgetIndex) - 1
         if (props.isPost) {
             const findIndexOfTheWidget = props.state.widgets.findIndex(w => {

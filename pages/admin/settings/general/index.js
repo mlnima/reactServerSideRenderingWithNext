@@ -3,36 +3,31 @@ import AdminLayout from "../../../../components/layouts/AdminLayout";
 import {updateSetting, getSetting} from "../../../../_variables/ajaxVariables";
 import FA from "react-fontawesome";
 import {AppContext} from '../../../../context/AppContext'
-import {getAbsolutePath} from '../../../../_variables/_variables'
+import {getAbsolutePath, languagesOptions} from '../../../../_variables/_variables'
 
 const settings = props => {
     const contextData = useContext(AppContext);
     const keywordsInput = useRef(null)
+    const [editingSettings, setEditingSettings] = useState({
+        activeEditingLanguage: 'default'
+    })
     const [state, setState] = useState({
         translationLanguages: [],
-        keywords:  [],
+        keywords: [],
+        translations:{}
     });
-
     useEffect(() => {
         setState({
             ...state,
             ...props.identity
 
         })
-    }, [props]);
-
-    const onTranslationLanguagesChangeHandler = e => {
-        if (e.target.checked) {
-            setState({
-                ...state,
-                translationLanguages: [...state.translationLanguages, e.target.value]
-            })
-        } else {
-            setState({
-                ...state,
-                translationLanguages: state.translationLanguages.filter(i => i !== e.target.value)
-            })
-        }
+    }, []);
+    const onChangeLanguageHandler = e => {
+        setEditingSettings({
+            ...editingSettings,
+            activeEditingLanguage: e.target.value
+        })
     }
 
     const onSubmitHandler = e => {
@@ -57,8 +52,6 @@ const settings = props => {
             [e.target.name]: finalValue
         })
     }
-
-
     const deleteItem = (e) => {
         setState({
             ...state,
@@ -82,7 +75,6 @@ const settings = props => {
         }
         keywordsInput.current.value = ''
     };
-
     const keywords = state.keywords.map(item => {
         return (
             <div key={item} className='item'>
@@ -92,20 +84,50 @@ const settings = props => {
         )
     });
 
+    const onChangeHandlerWithTranslate = e => {
+        if (editingSettings.activeEditingLanguage === 'default') {
+            setState({
+                ...state,
+                [e.target.name]: e.target.value
+            })
+        } else {
+            setState({
+                ...state,
+                translations: {
+                    ...state.translations,
+                    [editingSettings.activeEditingLanguage]: {
+                        ...state.translations?.[editingSettings.activeEditingLanguage] || {},
+                        [e.target.name]: e.target.value
+                    }
+                }
+            })
+        }
+    }
+
     return (
         <AdminLayout>
             <form id='site-settings-form' onSubmit={e => onSubmitHandler(e)}>
                 <div className="forms">
                     <h2>site identity:</h2>
                     <h3>Site Info:</h3>
+                    <select name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
+                        <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? 'default'}</option>
+                        {languagesOptions}
+                    </select>
                     <div className="siteIdentity site-settings-form-section-parent">
                         <div className="site-settings-form-section">
                             <p>Site Title:</p>
-                            <input name='title' value={state.title} onChange={e => onChangeHandler(e)}/>
+                            <input name='title' value={
+                                editingSettings.activeEditingLanguage === 'default' ? state.title :
+                                state.translations?.[editingSettings.activeEditingLanguage]?.title || ""
+                            } onChange={e => onChangeHandlerWithTranslate(e)}/>
                         </div>
                         <div className="site-settings-form-section">
                             <p>Description:</p>
-                            <textarea name='description' value={state.description} onChange={e => onChangeHandler(e)}/>
+                            <textarea name='description' value={
+                                editingSettings.activeEditingLanguage === 'default' ? state.description :
+                                    state.translations?.[editingSettings.activeEditingLanguage]?.description || ""
+                            }onChange={e => onChangeHandlerWithTranslate(e)}/>
                         </div>
                         <div className="site-settings-form-section keywords">
                             <p>Keywords:</p>
@@ -121,7 +143,7 @@ const settings = props => {
                             <p>site Mod:</p>
                             <h4>Careful</h4>
                             <select name='siteMode' value={state.siteMode} onChange={e => onChangeHandler(e)}>
-                                <option >Select</option>
+                                <option>Select</option>
                                 <option value='tube'>Tube</option>
                                 <option value='eCommerce'>E-Commerce</option>
                                 <option value='portFolio'>PortFolio</option>
@@ -138,7 +160,7 @@ const settings = props => {
                         <div className="site-settings-form-section defaultPostType">
                             <p>Default new Post Type:</p>
                             <select name='defaultPostType' value={state.defaultPostType} onChange={e => onChangeHandler(e)}>
-                                <option >Select</option>
+                                <option>Select</option>
                                 <option value='video'>Video</option>
                                 <option value='standard'>Standard</option>
                                 <option value='product'>Product</option>
@@ -169,7 +191,7 @@ const settings = props => {
                         </div>
                         <div className="site-settings-form-section allowUserToPost">
                             <p>Allow Users To Create New Post:</p>
-                            <select name='allowUserToPost' value={state.allowUserToPost|| false} onChange={e => onChangeHandler(e)}>
+                            <select name='allowUserToPost' value={state.allowUserToPost || false} onChange={e => onChangeHandler(e)}>
                                 <option value='true'>Enable</option>
                                 <option value='false'>Disable</option>
                             </select>
@@ -189,33 +211,33 @@ const settings = props => {
                                 <option value='false'>Disable</option>
                             </select>
                         </div>
-                        <div className="site-settings-form-section translationLanguages">
-                            <p>Translation Languages:</p>
-                            <div className='language'>
-                                <p>English</p>
-                                <input value='en' name='en' type='checkbox' checked={state.translationLanguages.includes('en')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>
-                            </div>
-                            <div className='language'>
-                                <p>German</p>
-                                <input value='de' name='de' type='checkbox' checked={state.translationLanguages.includes('de')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>
-                            </div>
-                            <div className='language'>
-                                <p>Persian</p>
-                                <input value='fa' name='fa' type='checkbox' checked={state.translationLanguages.includes('fa')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>
-                            </div>
-                            <div className='language'>
-                                <p>Arabic</p>
-                                <input value='ar' name='ar' type='checkbox' checked={state.translationLanguages.includes('ar')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>
-                            </div>
-                            <div className='language'>
-                                <p>Turkish</p>
-                                <input value='tr' name='tr' type='checkbox' checked={state.translationLanguages.includes('tr')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>
-                            </div>
-                        </div>
-                        <div className="site-settings-form-section defaultSiteLanguage">
-                            <p>Default Site Language:</p>
-                            <input name='defaultSiteLanguage' value={state.defaultSiteLanguage} onChange={e => onChangeHandler(e)}/>
-                        </div>
+                        {/*<div className="site-settings-form-section translationLanguages">*/}
+                        {/*    <p>Translation Languages:</p>*/}
+                        {/*    <div className='language'>*/}
+                        {/*        <p>English</p>*/}
+                        {/*        <input value='en' name='en' type='checkbox' checked={state.translationLanguages.includes('en')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
+                        {/*    </div>*/}
+                        {/*    <div className='language'>*/}
+                        {/*        <p>German</p>*/}
+                        {/*        <input value='de' name='de' type='checkbox' checked={state.translationLanguages.includes('de')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
+                        {/*    </div>*/}
+                        {/*    <div className='language'>*/}
+                        {/*        <p>Persian</p>*/}
+                        {/*        <input value='fa' name='fa' type='checkbox' checked={state.translationLanguages.includes('fa')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
+                        {/*    </div>*/}
+                        {/*    <div className='language'>*/}
+                        {/*        <p>Arabic</p>*/}
+                        {/*        <input value='ar' name='ar' type='checkbox' checked={state.translationLanguages.includes('ar')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
+                        {/*    </div>*/}
+                        {/*    <div className='language'>*/}
+                        {/*        <p>Turkish</p>*/}
+                        {/*        <input value='tr' name='tr' type='checkbox' checked={state.translationLanguages.includes('tr')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
+                        {/*    </div>*/}
+                        {/*</div>*/}
+                        {/*<div className="site-settings-form-section defaultSiteLanguage">*/}
+                        {/*    <p>Default Site Language:</p>*/}
+                        {/*    <input name='defaultSiteLanguage' value={state.defaultSiteLanguage} onChange={e => onChangeHandler(e)}/>*/}
+                        {/*</div>*/}
                     </div>
 
                     <div className="site-settings-form-section">
@@ -282,10 +304,8 @@ export const getServerSideProps = async ({req}) => {
     const identityData = await getSetting('identity', domainName, false);
     identity = identityData.data.setting ? identityData.data.setting.data : {}
 
-    return {props:{domainName, identity}}
+    return {props: {domainName, identity}}
 }
-
-
 
 
 export default settings;

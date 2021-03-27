@@ -7,23 +7,24 @@ import {AppContext} from "../../context/AppContext";
 import {getPost} from "../../_variables/ajaxPostsVariables";
 import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
 import {useRouter} from "next/router";
-
+import _ from 'lodash'
 const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 
 const checkout = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
+    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
     const [state, setState] = useState({
         paymentPage: false,
         isPaid: false,
+        message:'',
         gotError: false,
         error: null,
         isCheckout: false,
         isEnabled: false,
         loading: true,
         isReady: false,
-        currency: props.eCommerce.data.currency,
+        currency: props?.eCommerce?.data?.currency,
         total: 0,
         totalPrice: 0
     });
@@ -37,7 +38,7 @@ const checkout = props => {
             setItemsData([])
             getCheckOutItems()
         }else if (contextData.checkOutData.items.length === 0){
-            router.push('/')
+            // router.push('/')
         }
     }, [contextData.checkOutData.items]);
 
@@ -50,30 +51,17 @@ const checkout = props => {
     // create a order in DB after payment get approved
     const onApprove = async (data, actions) => {
         const order = await actions.order.capture();
-        const additionalData = {
-            userID: contextData.userData._id || 'guest',
-            agreementType: orderData.intent ,
-            totalPrice: orderData.purchase_units?.amount?.value,
-            createdTime: order.create_time,
-            updatedTime:order.update_time,
-            transactionId:order.id,
-            payerEmail:order.payer?.email_address,
-            payerId:order.payer?.payer_id,
-            payerAddress:order.payer?.address,
-            payerFirstName:order.payer?.name?.given_name,
-            payerLastName:order.payer?.name?.surname,
-            shippingToName:order.purchase_units[0]?.shipping?.name?.full_name,
-            shippingToAddress:order.purchase_units[0]?.shipping?.address,
-            paymentStatus:order.purchase_units[0]?.payments?.captures[0].status,
-            paymentId:order.purchase_units[0]?.payments?.captures[0].id,
+        const dataToCreateOrder = {
+            type:'payPal',
+            payPalData:order,
+            userID:contextData.userData._id,
         }
-
-
-        contextData.functions.createOrder('payPal', order, additionalData).then(createdOrderResponse => {
+        contextData.functions.createOrder(dataToCreateOrder).then(createdOrderResponse => {
             console.log(createdOrderResponse)
             setState({
                 ...state,
-                isPaid: true
+                isPaid: true,
+                message: 'Thank you you will receive the confirmation message in a few hours '
             })
             localStorage.removeItem('checkOutItems')
             contextData.setCheckOutData({
@@ -84,10 +72,20 @@ const checkout = props => {
             console.log(err)
             setState({
                 ...state,
-                serverError: err
+                serverError: err,
+                message: 'something went wrong with your order please contact our support'
             })
         })
     };
+
+    const onErrorHandler = (err)=>{
+        setState({
+            ...props.state,
+            gotError: true,
+            error:err,
+            message: 'something went wrong please ty again later'
+        })
+    }
 
 
     // sum only the price of the items
@@ -106,12 +104,12 @@ const checkout = props => {
         Promise.all(contextData.checkOutData.items.map(item => getPost({_id: item.productId}, window.location.origin, false))).then(results => {
             setItemsData(results.map(result => {
                 return {
-                    title: result.data.post.title,
-                    mainThumbnail: result.data.post.mainThumbnail,
-                    price: result.data.post.price,
+                    title: result?.data?.post?.title,
+                    mainThumbnail: result.data?.post?.mainThumbnail,
+                    price: result.data?.post?.price,
                     shippingCost: result?.data?.post?.shippingCost ?? 0,
-                    translations: result.data.post.translations,
-                    ...contextData.checkOutData.items.find(item => item.productId === result.data.post._id)
+                    translations: result.data?.post?.translations,
+                    ...contextData.checkOutData.items.find(item => item.productId === result.data?.post?._id)
                 }
             }))
         })
@@ -138,7 +136,7 @@ const checkout = props => {
                 purchase_units: [{
                     reference_id: '1',
                     amount: {
-                        currency_code: props.eCommerce.data.currency,
+                        currency_code: props.eCommerce?.data?.currency,
                         value: totalPrice,
                         breakdown: {
                             // shipping: {currency_code: props.eCommerce.data.currency, value: defaultShippingCost},
@@ -147,17 +145,17 @@ const checkout = props => {
                             // discount: {currency_code: props.eCommerce.data.currency, value: 0},
                         }
                     },
-                    description: contextData.siteIdentity.title,
+                    description:_.truncate(contextData.siteIdentity.title, { 'length': 20, 'separator': ' '})   ,
                     custom_id: '64735',
                     items: itemsData.map(itemData => {
                         return {
-                            name: itemData.title,
+                            name:_.truncate(itemData.title, { 'length': 20, 'separator': ' '}) ,
                             unit_amount: {
                                 currency_code: props.eCommerce.data.currency,
                                 value: itemData.price
                             },
                             quantity: itemData.count,
-                            description: `${itemData.count} x ${itemData.title} `
+                            description: `${itemData.count} x ${_.truncate(itemData.title, { 'length': 20, 'separator': ' '})} `
                         }
                     })
                 }]
@@ -184,19 +182,20 @@ const checkout = props => {
                         }
                     </div> :
                     //we need to add some login input or pay as guest form to get userData
-                    <div className='checkout-items'/>
+                    <div className='checkout-items'>
+                        <h2>{state.message}</h2>
+                    </div>
                 }
 
 
                 <div className='checkout-purchase'>
-
                     {/*render subtotal text*/}
                     <div className='checkout-total'>
                         <h3>{props.eCommerce?.data?.translations?.[locale]?.summaryText || props.eCommerce?.data?.summaryText || 'Summary'}</h3>
                         <p>
                             <span>{props.eCommerce?.data?.translations?.[locale]?.totalText || props.eCommerce?.data?.totalText || 'Subtotal'} :</span>
 
-                            <span>{new Intl.NumberFormat(props.eCommerce.data.shopLocale, {style: 'currency', currency: props.eCommerce.data.currency}).format(state.totalPrice)}</span>
+                            <span>{new Intl.NumberFormat(props?.eCommerce?.data?.shopLocale || 'de-DE', {style: 'currency', currency: props.eCommerce?.data?.currency||'EUR'}).format(state.totalPrice)}</span>
                         </p>
                         <span className='vat-included'>{props?.eCommerce?.data?.translations?.[locale]?.VAT_includedText || 'VAT included.'}</span>
                     </div>
@@ -208,7 +207,11 @@ const checkout = props => {
                             <button
                                 className='pay-button check-out-pay-btn'
                                 onClick={() => {
-                                    setState({...state, paymentPage: true})
+                                    setState({
+                                        ...state,
+                                        paymentPage: true,
+                                        message: 'Waiting for the Payment'
+                                    })
                                 }}>
                                 {contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.proceedToCheckOutText || 'Proceed To Checkout' : props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.proceedToCheckOutText || 'Proceed To Checkout'}
                             </button>
@@ -220,6 +223,7 @@ const checkout = props => {
                             <PayWithPayPal
                                 createOrder={createOrder}
                                 onApprove={onApprove}
+                                onErrorHandler={onErrorHandler}
                                 // total={state.totalPrice}
                                 active={state.paymentPage}
                                 itemsData={itemsData}

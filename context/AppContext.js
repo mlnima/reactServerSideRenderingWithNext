@@ -113,13 +113,10 @@ const AppProvider = props => {
                 })
             }
         },
-        createOrder: (type,data,additionalData) => {
-             if (type === 'payPal'){
+        createOrder: (data) => {
+             if (data.type === 'payPal'){
                  const body ={
-                     type,
-                     payPalData:data,
-                     additionalData
-
+                     data
                  }
                  return axios.post('/api/v1/order/create/payPal',body)
              }

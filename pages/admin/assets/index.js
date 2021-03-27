@@ -87,6 +87,7 @@ const assets = props => {
                     setFinalPageData({
                         ...finalPageData,
                         ...ajaxRequestData.data.orders.map(orderData=>{
+
                             return{
                                 status: orderData?.status ?? 'empty',
                                 type: orderData?.type ?? 'empty',

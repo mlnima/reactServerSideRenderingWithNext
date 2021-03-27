@@ -46,10 +46,11 @@
     justify-content: center;
     align-items: flex-start;
     margin: auto;
-    width: 320px;
+    width: 95vw;
     .image {
       position: relative;
       margin: auto;
+      //width: 95vw;
       .post-element-external-image {
         margin: auto;
         object-fit: contain;
@@ -62,6 +63,7 @@
       }
 
       video {
+        max-width: 95vw;
         @include opacityAnimationStart;
       }
 
@@ -135,48 +137,15 @@
   }
 }
 
-//@media only screen and (min-width: 768px) {
-//  .post-element-div {
-//    width: 209.79px;
-//    height: 200px;
-//    margin: auto;
-//
-//    .post-element {
-//      width: 209.79px;
-//      height: 200px;
-//
-//      .image {
-//        img {
-//          width: 209.79px;
-//          height: 118.5px;
-//
-//        }
-//
-//        video {
-//          width: 209.79px;
-//          height: 118.5px;
-//        }
-//      }
-//
-//      h3 {
-//
-//        width: 180px;
-//      }
-//    }
-//  }
-//
-//}
-
-
 @media only screen and (min-width: 768px) {
   .post-element-div {
     width: 320px;
 
     .post-element {
-      width: 100%;
+      width: 320px;
       //height: 237px;
       image {
-        width: 320px;
+        max-width: 320px;
 
         .post-element-external-image {
           margin: auto;
@@ -188,10 +157,13 @@
           object-fit: contain;
           width: 320px;
         }
+        video{
+          width: 320px;
+        }
       }
 
       h3 {
-        width: 100%;
+        width: 320px;
       }
 
       .progressParent {

@@ -28,19 +28,30 @@ const PostElement = props => {
     let [state, setState] = useState({
         isHover: false,
         isWatched: false,
-        extraClassName: '',
+        extraClassName: props.viewType ? props.viewType : '',
         queries: {},
         infoOnPostElementStyle: {},
         titleElementStyle: {},
+        imageWidth: 320
     });
 
     useEffect(() => {
-        setState({
-            ...state,
-            extraClassName: props.viewType ? props.viewType : '',
-            // queries: {...getLanguageQueryFromWindowLocationSearch()}
-        })
+
+        if (typeof window !== 'undefined') {
+            if (window.innerWidth < 768) {
+                //console.log(window.innerWidth)
+                setState({
+                    ...state,
+                  imageWidth: window.innerWidth,
+                    //extraClassName: props.viewType ? props.viewType : '',
+                    // queries: {...getLanguageQueryFromWindowLocationSearch()}
+                })
+            }
+        }
+
     }, []);
+
+
 
     let isHoverHandler = () => {
         if (props.state.videoTrailerUrl) {
@@ -50,7 +61,6 @@ const PostElement = props => {
 
 
     const ImageContent = () => {
-        const imageWidth = 320
         let dataToRender = () => {
             if (state.isHover && props.state.videoTrailerUrl) {
                 return (
@@ -62,8 +72,8 @@ const PostElement = props => {
                         onMouseOut={isHoverHandler}
                         onTouchCancel={isHoverHandler}
                         style={{
-                            width: imageWidth,
-                            height: imageWidth / 1.777
+                            width: state.imageWidth,
+                            height: state.imageWidth / 1.777
                         }}
                     />)
 
@@ -72,8 +82,8 @@ const PostElement = props => {
                     <ImageRenderer imageUrl={props.state?.mainThumbnail}
                                    altValue={title || props.state?.mainThumbnail}
                                    hoverHandler={isHoverHandler}
-                                   imageWidth={imageWidth}
-                                   imageHeight={imageWidth / 1.777}
+                                   imageWidth={state.imageWidth}
+                                   imageHeight={state.imageWidth / 1.777}
                                    quality={100}
                                    loading='lazy'
                                    layout='intrinsic'

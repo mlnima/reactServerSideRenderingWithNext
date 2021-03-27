@@ -7,13 +7,7 @@ const PayWithPayPal = props => {
         <PayPalButton
             createOrder={(data, actions) => props.createOrder(data, actions)}
             onApprove={(data, actions) => props.onApprove(data, actions)}
-            onError={error => {
-                props.setState({
-                    ...props.state,
-                    gotError: true,
-                    error})
-                console.log(error)
-            }}
+            onError={err => props.onErrorHandler(err)}
         />
     )
 };

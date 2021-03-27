@@ -20,20 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SearchTypeInputFields/SearchTypeInputFields.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetPreview/WidgetPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetPreview/WidgetPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/BottomLeft.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/BottomLeft.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/AppContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/checkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/paymentControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/paymentControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/orderSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/orderSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,19 +78,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\Post\PostInfo" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\widgetsArea" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents\PostInformation" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
       <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\Post\PostInfo" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\widgetsArea" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
     </key>
   </component>
   <component name="RunManager" selected="npm.analys">
@@ -582,7 +583,8 @@
       <workItem from="1616579802155" duration="20738000" />
       <workItem from="1616665207255" duration="10368000" />
       <workItem from="1616689951159" duration="9384000" />
-      <workItem from="1616746645795" duration="12381000" />
+      <workItem from="1616746645795" duration="23039000" />
+      <workItem from="1616849383652" duration="6213000" />
     </task>
     <servers />
   </component>
@@ -615,7 +617,7 @@
     </state>
     <state x="1935" y="2415" key="FileChooserDialogImpl/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615298967321" />
     <state x="1934" y="2415" key="FileChooserDialogImpl/0.0.2194.1234/-649.2160.4096.1152@-649.2160.4096.1152" timestamp="1614716948965" />
-    <state width="2661" height="394" key="GridCell.Tab.0.bottom" timestamp="1616711031498">
+    <state width="2310" height="72" key="GridCell.Tab.0.bottom" timestamp="1616787043135">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2589" height="295" key="GridCell.Tab.0.bottom/0.0.2194.1234/-627.2160.4096.1152@-627.2160.4096.1152" timestamp="1608142581481" />
@@ -624,9 +626,9 @@
     <state width="2161" height="217" key="GridCell.Tab.0.bottom/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
     <state width="2200" height="366" key="GridCell.Tab.0.bottom/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.bottom/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="2661" height="394" key="GridCell.Tab.0.bottom/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616711031498" />
+    <state width="2310" height="72" key="GridCell.Tab.0.bottom/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616787043135" />
     <state width="2638" height="211" key="GridCell.Tab.0.bottom/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
-    <state width="2661" height="394" key="GridCell.Tab.0.center" timestamp="1616711031498">
+    <state width="2310" height="72" key="GridCell.Tab.0.center" timestamp="1616787043135">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2589" height="295" key="GridCell.Tab.0.center/0.0.2194.1234/-627.2160.4096.1152@-627.2160.4096.1152" timestamp="1608142581480" />
@@ -635,9 +637,9 @@
     <state width="2161" height="217" key="GridCell.Tab.0.center/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
     <state width="2200" height="366" key="GridCell.Tab.0.center/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.center/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="2661" height="394" key="GridCell.Tab.0.center/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616711031498" />
+    <state width="2310" height="72" key="GridCell.Tab.0.center/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616787043135" />
     <state width="2638" height="211" key="GridCell.Tab.0.center/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
-    <state width="2661" height="394" key="GridCell.Tab.0.left" timestamp="1616711031498">
+    <state width="2310" height="72" key="GridCell.Tab.0.left" timestamp="1616787043135">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2589" height="295" key="GridCell.Tab.0.left/0.0.2194.1234/-627.2160.4096.1152@-627.2160.4096.1152" timestamp="1608142581480" />
@@ -646,9 +648,9 @@
     <state width="2161" height="217" key="GridCell.Tab.0.left/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
     <state width="2200" height="366" key="GridCell.Tab.0.left/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.left/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070871" />
-    <state width="2661" height="394" key="GridCell.Tab.0.left/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616711031498" />
+    <state width="2310" height="72" key="GridCell.Tab.0.left/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616787043135" />
     <state width="2638" height="211" key="GridCell.Tab.0.left/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944436" />
-    <state width="2661" height="394" key="GridCell.Tab.0.right" timestamp="1616711031498">
+    <state width="2310" height="72" key="GridCell.Tab.0.right" timestamp="1616787043135">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2589" height="295" key="GridCell.Tab.0.right/0.0.2194.1234/-627.2160.4096.1152@-627.2160.4096.1152" timestamp="1608142581480" />
@@ -657,7 +659,7 @@
     <state width="2161" height="217" key="GridCell.Tab.0.right/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
     <state width="2200" height="366" key="GridCell.Tab.0.right/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.right/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="2661" height="394" key="GridCell.Tab.0.right/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616711031498" />
+    <state width="2310" height="72" key="GridCell.Tab.0.right/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616787043135" />
     <state width="2638" height="211" key="GridCell.Tab.0.right/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
     <state x="868" y="210" width="1578" height="952" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1615417525221">
       <screen x="0" y="0" width="2194" height="1234" />
@@ -760,17 +762,17 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>56</line>
+          <line>51</line>
           <option name="timeStamp" value="36" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>213</line>
+          <line>204</line>
           <option name="timeStamp" value="38" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>166</line>
+          <line>158</line>
           <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -779,12 +781,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>523</line>
+          <line>514</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server.js</url>
-          <line>269</line>
+          <line>255</line>
           <option name="timeStamp" value="44" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -808,13 +810,8 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/checkout/index.js</url>
-          <line>45</line>
+          <line>46</line>
           <option name="timeStamp" value="51" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/includes/PostElement/PostElement.js</url>
-          <line>52</line>
-          <option name="timeStamp" value="52" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/PostElement/BottomLeft.js</url>
@@ -822,8 +819,13 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/controllers/postsControllers.js</url>
-          <line>470</line>
+          <line>468</line>
           <option name="timeStamp" value="54" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/pages/checkout/index.js</url>
+          <line>118</line>
+          <option name="timeStamp" value="55" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

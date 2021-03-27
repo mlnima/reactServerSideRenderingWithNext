@@ -51,12 +51,11 @@ mongoose.connect(mongoDBConnectionUrl, {
 })
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
-//------------------------------------------------------------Page Cache --------------------------
-const cacheStore = new Keyv({namespace: 'ssr-cache'});
-
-const _getSSRCacheKey = req => {
-    return req.originalUrl
-};
+//------------------------------------------------------------Page Cache doesnt work ok--------------------------
+// const cacheStore = new Keyv({namespace: 'ssr-cache'});
+// const _getSSRCacheKey = req => {
+//     return req.originalUrl
+// };
 // const cacheManager=(req, res, pagePath, queryParams) =>{
 //     return cacheableResponse({
 //         ttl: 1000 * 60 * 60, // 1hour
@@ -80,52 +79,48 @@ const _getSSRCacheKey = req => {
 //     });
 // }
 
-function clearCompleteCache(res, req) {
-    cacheStore.clear();
-}
+// function clearCompleteCache(res, req) {
+//     cacheStore.clear();
+// }
 
-function clearCacheForRequestUrl(req, res) {
-    let key = _getSSRCacheKey(req);
-    console.log(key);
-    cacheStore.delete(key);
-    res.status(200);
-    res.send({
-        path: req.hostname + req.baseUrl + req.path,
-        key: key,
-        purged: true,
-        clearedCompleteCache: false
-    });
-    res.end();
-}
-
-
-
-
-const ssrCache = cacheableResponse({
-    ttl: 1000 * 60 * 60, // 1hour
-    get: async ({ req, res }) => {
-        const rawResEnd = res.end
-        const data = await new Promise((resolve) => {
-            res.end = (payload) => {
-                resolve(res.statusCode === 200 && payload)
-            }
-            app.render(req, res, )
-        }).catch(err=>{
-            console.log(err)
-            app.render(req, res, )
-        })
-        res.end = rawResEnd
-        return { data }
-    },
-    send: ({ data, res }) => res.send(data),
-    cache: cacheStore,
-    getKey: ({req})=>_getSSRCacheKey(req),
-    // compress: true
-})
+// function clearCacheForRequestUrl(req, res) {
+//     let key = _getSSRCacheKey(req);
+//     console.log(key);
+//     cacheStore.delete(key);
+//     res.status(200);
+//     res.send({
+//         path: req.hostname + req.baseUrl + req.path,
+//         key: key,
+//         purged: true,
+//         clearedCompleteCache: false
+//     });
+//     res.end();
+// }
+//
 
 
 
-
+// const ssrCache = cacheableResponse({
+//     ttl: 1000 * 60 * 60, // 1hour
+//     get: async ({ req, res }) => {
+//         const rawResEnd = res.end
+//         const data = await new Promise((resolve) => {
+//             res.end = (payload) => {
+//                 resolve(res.statusCode === 200 && payload)
+//             }
+//             app.render(req, res, )
+//         }).catch(err=>{
+//             console.log(err)
+//             app.render(req, res, )
+//         })
+//         res.end = rawResEnd
+//         return { data }
+//     },
+//     send: ({ data, res }) => res.send(data),
+//     cache: cacheStore,
+//     getKey: ({req})=>_getSSRCacheKey(req),
+//     // compress: true
+// })
 
 
 
@@ -157,15 +152,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         res.end()
 
     });
-    // server.get('/', (req, res) => {
-    //     const targetComponent = '/';
-    //     const queryParams = {
-    //         ...req.query,
-    //         ...req.params,
-    //     }
-    //
-    //     return renderAndCache(req, res, targetComponent)
-    // });
 
     //xml siteMap handler
     server.get('/sitemap.xsl', (req, res) => {
@@ -324,7 +310,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //cache control
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apicache.clear(req.params.collection)
-        clearCompleteCache()
+        // clearCompleteCache()
         res.end()
     });
 
@@ -380,7 +366,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         postsControllers.export(req, res)
     });
 
-
     //payments
     server.post('/api/v1/order/create/payPal', (req, res) => {
         paymentControllers.order_payPal(req, res)
@@ -388,34 +373,16 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/order/get',adminAuthMiddleware, (req, res) => {
         paymentControllers.getOrders(req, res)
     });
-//-------------------post----------------------
-
-    const shouldCompress = (req, res) => {
-        if (req.headers['x-no-compression']) {
-            return false
-        }
-        return compression.filter(req, res)
-    }
 
 
-    server.get('/admin', (req, res) => {app.render(req, res, '/admin',  {...req.query, ...req.params})});
+//!!!!!!!caching issue : caching cause page refresh on route change
+    // const languages = process.env.REACT_APP_LOCALS.replace(' ','|')
+    // server.get('/', (req, res) => ssrCache({ req, res }))
+    // server.get(`/:locale(${languages})?`, (req, res) => ssrCache({ req, res }))
 
-
-    // server.get('*', (req, res) => {
-    //     const queryParams = {...req.query, ...req.params}
-    //     ssrCache({req, res, targetComponent:req.path,queryParams })
-    //     // return handle(req, res)
-    // });
-    // server.get('/:locale/*', (req, res) => {
-    //     return handle(req, res)
-    // });
     server.get('*', (req, res) => {
         return handle(req, res)
     });
-    // server.get('*', (req, res) => {
-    //     ssrCache({req, res })
-    //     // return handle(req, res)
-    // });
 
     server.listen(PORT, (err) => {
         if (err) throw err;
