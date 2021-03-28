@@ -8,6 +8,7 @@ const BottomRight = props => {
         <span className='bottom-right'>
                  <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
                  <span className='view-count value-next-icon'>{props.views}</span>
+
          </span>
     );
 };

@@ -10,9 +10,10 @@ import ImageRenderer from "../ImageRenderer/ImageRenderer";
 import BottomRight from "./BottomRight";
 import BottomLeft from "./BottomLeft";
 import TopRight from "./TopRight";
+import TopLeft from "./TopLeft";
 
 
-let StyledDiv = styled.div`${props => props.stylesData}`
+let StyledDiv = styled.article`${props => props.stylesData}`
 
 // import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
 
@@ -125,16 +126,13 @@ const PostElement = props => {
                     <div className={'post-element '  } key={props.state.title}>
                         <div className="image">
                             <ImageContent/>
-                            {props.state && props.state.views > 1 && props.state.postType === ('video') ? <BottomRight views={props.state.views}/> : null}
+                            {props.state && props.state.views > 1 && props.state.postType === ('video') ? <BottomRight views={props.state.views} /> : null}
                             {props.state.postType === ('video') || props.state.postType === ('redirect') || props.state.postType === ('product') ?
                                 <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
                             {props.state.quality && props.state.postType === ('video') ? <TopRight quality={props.state.quality}/> : null}
+                            {props.state.likes>0 && props.state.rating !== 'disable'?<TopLeft rating={likeValueCalculator(props.state.likes, props.state.disLikes)}/>:null}
                         </div>
-                        {
-                            props.state.rating !== 'disable' && props.state.likes > 0 ?
-                                <ProgressBar value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/> :
-                                null
-                        }
+
                         <h3>{title}</h3>
                     </div>
                 </a>
@@ -146,3 +144,8 @@ const PostElement = props => {
 export default withRouter(PostElement);
 
 
+// {
+//     props.state.rating !== 'disable' && props.state.likes > 0 ?
+//         <ProgressBar value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/> :
+//         null
+// }

@@ -76,7 +76,7 @@ const Post = props => {
                 <CommentFrom documentId={props.post._id} documentTitle={props.post.title}/>
                 {(props.widgets || []).filter(widget => widget.data.position === 'underPost').length>0 ?
                         <div className='under-post-widget-area'>
-                            <WidgetsRenderer deviceWidth={deviceWidth} widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')} position='underPost'/>
+                            <WidgetsRenderer deviceWidth={deviceWidth} widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')} position='underPost' postElementSize={props.design?.data?.postElementSize}/>
                         </div>:null}
 
             </StyledDiv>
