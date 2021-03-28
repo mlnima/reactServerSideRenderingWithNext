@@ -48,7 +48,7 @@ const WidgetsRenderer =  props => {
             widget.data.type === 'form' ? FormWidget : null
 
         return (
-            <Widget currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } />
+            <Widget currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } postElementSize={props.postElementSize} />
         )
 
     })

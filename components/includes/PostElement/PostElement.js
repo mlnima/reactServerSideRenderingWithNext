@@ -71,10 +71,10 @@ const PostElement = props => {
                         loop={true}
                         onMouseOut={isHoverHandler}
                         onTouchCancel={isHoverHandler}
-                        style={{
-                            width: state.imageWidth,
-                            height: state.imageWidth / 1.777
-                        }}
+                        // style={{
+                        //     width: state.imageWidth,
+                        //     height: state.imageWidth / 1.777
+                        // }}
                     />)
 
             } else if (!state.isHover) {
@@ -105,9 +105,9 @@ const PostElement = props => {
     //const linkAsForPostElement = process.env.REACT_APP_LOCALS.split(' ').includes(locale) ? `/${locale}/${props.state.postType ||'post'}/${title}?id=${props.state._id}` : `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
     const linkAsForPostElement = `/${props.state.postType || 'post'}/${title}?id=${props.state._id}`
     const localeAttr = router.locale || router.query.locale ? (router.locale || router.query.locale) !== process.env.REACT_APP_DEFAULT_LOCAL ? {locale: router.locale || router.query.locale} : {} : {}
-
+    const classNameForPostElement = `post-element-div ${props.viewType ? props.viewType : 'standard'} ${props.postElementSize ? `post-element-div-${props.postElementSize }`:'post-element-div-medium' }`
     return (
-        < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={'post-element-div ' + (props.viewType ? props.viewType : 'standard')}>
+        < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={classNameForPostElement}>
             <Link
 
                 href={{
@@ -122,7 +122,7 @@ const PostElement = props => {
                 //  local={router.locale || router.query.locale || false}
             >
                 <a onClick={() => contextData.dispatchState({...contextData.state, loading: true})}>
-                    <div className='post-element' key={props.state.title}>
+                    <div className={'post-element '  } key={props.state.title}>
                         <div className="image">
                             <ImageContent/>
                             {props.state && props.state.views > 1 && props.state.postType === ('video') ? <BottomRight views={props.state.views}/> : null}

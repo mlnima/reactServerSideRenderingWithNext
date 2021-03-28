@@ -17,6 +17,7 @@ const Home = props => {
                             position='home'
                             stylesData={props?.design?.data?.homePageStyle}
                             currentPageSidebar={props.identity?.data?.homePageSidebar}
+                            postElementSize={props.design?.data?.postElementSize}
                 />
             </AppLayout>
 

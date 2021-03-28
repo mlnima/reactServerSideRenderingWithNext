@@ -35,6 +35,19 @@
   }
 }
 
+
+.post-element-div-medium,.post-element-div-small,.post-element-div-smaller{
+  .post-element {
+    width: 95vw;
+    .image{
+      .video{
+        max-width: 95vw;
+      }
+    }
+  }
+}
+
+
 .post-element-div {
  // width: 100vw;
   border: none;
@@ -46,7 +59,7 @@
     justify-content: center;
     align-items: flex-start;
     margin: auto;
-    width: 95vw;
+
     .image {
       position: relative;
       margin: auto;
@@ -63,7 +76,6 @@
       }
 
       video {
-        max-width: 95vw;
         @include opacityAnimationStart;
       }
 
@@ -117,57 +129,107 @@
     }
 
     .progressParent {
-      background-color: #333;
+      //background-color: #333;
       width: 100%;
       margin: auto;
 
       .progressChild {
-        background-color: red;
+        //background-color: red;
 
         p {
-
           position: relative;
           //width: 100%;
           color: white;
         }
       }
     }
-
-
   }
 }
 
 @media only screen and (min-width: 768px) {
-  .post-element-div {
-    width: 320px;
 
+  .post-element-div-medium{
+    width: 320px;
     .post-element {
       width: 320px;
-      //height: 237px;
-      image {
+      image{
         max-width: 320px;
-
-        .post-element-external-image {
-          margin: auto;
-          object-fit: contain;
+        .post-element-external-image{
           width: 320px;
         }
-        .post-element-internal-image {
-          margin: auto;
-          object-fit: contain;
+        .post-element-internal-image{
           width: 320px;
         }
         video{
           width: 320px;
         }
       }
-
       h3 {
         width: 320px;
       }
+    }
+  }
+  .post-element-div-small{
+    width: 256.6px;
+    .post-element {
+      width: 256.6px;
+      image{
+        max-width: 256.6px;
+        .post-element-external-image{
+          width: 256.6px;
+        }
+        .post-element-internal-image{
+          width: 256.6px;
+        }
+        video{
+          width: 256.6px;
+        }
+      }
+      h3 {
+        width: 256.6px;
+      }
+    }
+  }
+  .post-element-div-smaller{
+    width: 209.8px;
+    .post-element {
+      width: 209.8px;
+      image{
+        max-width: 209.8px;
+        .post-element-external-image{
+          width: 209.8px;
+        }
+        .post-element-internal-image{
+          width: 209.8px;
+        }
+      }
+      video{
+        width: 209.8px;
+      }
+      h3 {
+        width: 209.8px;
+      }
+    }
+  }
+
+
+
+  .post-element-div {
+    .post-element {
+      image {
+        max-width: 320px;
+        .post-element-external-image {
+          margin: auto;
+          object-fit: contain;
+        }
+        .post-element-internal-image {
+          margin: auto;
+          object-fit: contain;
+        }
+      }
 
       .progressParent {
-        background-color: #333;
+        //background-color: #333;
         width: 100%;
 
       }

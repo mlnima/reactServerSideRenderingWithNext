@@ -67,6 +67,7 @@ const AppLayout = props => {
                     className='top-bar'
                     position='topBar'
                     stylesData={props.design?.data?.topBarStyle}
+                    postElementSize={props.design?.data?.postElementSize}
                 /> : null
             }
             {(props.widgets || []).filter(widget => widget?.data?.position === 'header').length > 0 ?
@@ -75,6 +76,7 @@ const AppLayout = props => {
                     key='header' widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'header')}
                     className='header' position='header'
                     stylesData={props.design?.data?.headerStyle}
+                    postElementSize={props.design?.data?.postElementSize}
                 /> : null
             }
             {(props.widgets || []).filter(widget => widget?.data?.position === 'navigation').length > 0 ?
@@ -85,6 +87,7 @@ const AppLayout = props => {
                     className='navigation'
                     position='navigation'
                     stylesData={props.design?.data?.navigationStyle}
+                    postElementSize={props.design?.data?.postElementSize}
                 /> : null
             }
             {(props.widgets || []).filter(widget => widget?.data?.position === props.sidebarPosition).length > 0 && props.sidebar ?
@@ -94,6 +97,7 @@ const AppLayout = props => {
                     widgets={(props.widgets || []).filter(widget => widget?.data?.position === props.sidebarPosition)}
                     className='sidebar '
                     position={props.sidebarPosition}
+                    postElementSize={props.design?.data?.postElementSize}
                 /> : null
             }
 
@@ -105,6 +109,7 @@ const AppLayout = props => {
                     widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'footer')}
                     className='footer' position='footer'
                     stylesData={props.design?.data?.footerStyle}
+                    postElementSize={props.design?.data?.postElementSize}
                 /> : null
             }
             {contextData.userData.role === 'administrator' ? <AdminTools/> : null}
