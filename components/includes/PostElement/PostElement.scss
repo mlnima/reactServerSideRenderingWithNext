@@ -40,8 +40,8 @@
   .post-element {
     width: 95vw;
     .image{
-      .video{
-        max-width: 95vw;
+      video{
+        width: 95vw;
       }
     }
   }
@@ -152,18 +152,14 @@
     width: 320px;
     .post-element {
       width: 320px;
-      image{
+      .image{
         max-width: 320px;
-        .post-element-external-image{
+        .post-element-external-image,.post-element-internal-image,video{
           width: 320px;
         }
-        .post-element-internal-image{
-          width: 320px;
-        }
-        video{
-          width: 320px;
-        }
+
       }
+
       h3 {
         width: 320px;
       }
@@ -173,18 +169,13 @@
     width: 256.6px;
     .post-element {
       width: 256.6px;
-      image{
+      .image{
         max-width: 256.6px;
-        .post-element-external-image{
-          width: 256.6px;
-        }
-        .post-element-internal-image{
-          width: 256.6px;
-        }
-        video{
+        .post-element-external-image,.post-element-internal-image,video{
           width: 256.6px;
         }
       }
+
       h3 {
         width: 256.6px;
       }
@@ -194,18 +185,13 @@
     width: 209.8px;
     .post-element {
       width: 209.8px;
-      image{
+      .image{
         max-width: 209.8px;
-        .post-element-external-image{
-          width: 209.8px;
-        }
-        .post-element-internal-image{
+        .post-element-external-image,.post-element-internal-image,video{
           width: 209.8px;
         }
       }
-      video{
-        width: 209.8px;
-      }
+
       h3 {
         width: 209.8px;
       }
@@ -217,7 +203,7 @@
   .post-element-div {
     .post-element {
       image {
-        max-width: 320px;
+       // max-width: 320px;
         .post-element-external-image {
           margin: auto;
           object-fit: contain;
