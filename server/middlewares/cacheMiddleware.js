@@ -6,8 +6,6 @@ module.exports = (req,res,next)=>{
         if (res.statusCode === 200){
 
         }
-
-
         cache('1 day', res.statusCode === 200);
         next()
     }catch (error) {

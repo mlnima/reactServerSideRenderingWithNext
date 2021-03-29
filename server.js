@@ -27,7 +27,7 @@ const handle = app.getRequestHandler();
 const apicache = require('apicache')
 const compression = require('compression')
 //cache page
-const cacheableResponse = require('cacheable-response')
+
 const normalizeUrl = require('normalize-url');
 const {resolve: urlResolve} = require('url');
 const Keyv = require('keyv');
@@ -35,7 +35,7 @@ const Keyv = require('keyv');
 const cacheSuccesses = require('./server/middlewares/apiCache')
 const cors = require('cors')
 require('dotenv').config()
-
+//const cacheableResponse = require('cacheable-response')
 
 
 // const pageCache = require('./server/tools/pageCache')
@@ -52,77 +52,6 @@ mongoose.connect(mongoDBConnectionUrl, {
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
 //------------------------------------------------------------Page Cache doesnt work ok--------------------------
-// const cacheStore = new Keyv({namespace: 'ssr-cache'});
-// const _getSSRCacheKey = req => {
-//     return req.originalUrl
-// };
-// const cacheManager=(req, res, pagePath, queryParams) =>{
-//     return cacheableResponse({
-//         ttl: 1000 * 60 * 60, // 1hour
-//         get: async () => {
-//             const rawResEnd = res.end
-//             const data = await new Promise((resolve) => {
-//                 res.end = (payload) => {
-//                     resolve(res.statusCode === 200 && payload)
-//                 }
-//                 app.render(req, res, pagePath, queryParams)
-//             })
-//             res.end = rawResEnd
-//             return { data }
-//         },
-//         send: ({ data  },res) => {
-//             res.send(data)
-//         },
-//         cache: cacheStore,
-//         getKey: _getSSRCacheKey(req),
-//         compress: true
-//     });
-// }
-
-// function clearCompleteCache(res, req) {
-//     cacheStore.clear();
-// }
-
-// function clearCacheForRequestUrl(req, res) {
-//     let key = _getSSRCacheKey(req);
-//     console.log(key);
-//     cacheStore.delete(key);
-//     res.status(200);
-//     res.send({
-//         path: req.hostname + req.baseUrl + req.path,
-//         key: key,
-//         purged: true,
-//         clearedCompleteCache: false
-//     });
-//     res.end();
-// }
-//
-
-
-
-// const ssrCache = cacheableResponse({
-//     ttl: 1000 * 60 * 60, // 1hour
-//     get: async ({ req, res }) => {
-//         const rawResEnd = res.end
-//         const data = await new Promise((resolve) => {
-//             res.end = (payload) => {
-//                 resolve(res.statusCode === 200 && payload)
-//             }
-//             app.render(req, res, )
-//         }).catch(err=>{
-//             console.log(err)
-//             app.render(req, res, )
-//         })
-//         res.end = rawResEnd
-//         return { data }
-//     },
-//     send: ({ data, res }) => res.send(data),
-//     cache: cacheStore,
-//     getKey: ({req})=>_getSSRCacheKey(req),
-//     // compress: true
-// })
-
-
 
 //-------------------------------------------------------------------------------------------------
 const robotsOptions = {
@@ -284,11 +213,17 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/settings/getWidget', (req, res) => {
         settingsControllers.getWidget(req, res)
     });
+
+    //cacheSuccesses
     server.post('/api/v1/settings/getMultipleWidgetWithData',cacheSuccesses, (req, res) => {
+        // console.log(req.body)
         //need to be cache id page cache doesnt work
         //cacheSuccesses
         settingsControllers.getMultipleWidgetWithData(req, res)
     });
+
+
+
     server.post('/api/v1/settings/getWidgetsWithData',cacheSuccesses, (req, res) => {
         //need to be cache id page cache doesnt work
         //cacheSuccesses
@@ -376,9 +311,13 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
 //!!!!!!!caching issue : caching cause page refresh on route change
-    // const languages = process.env.REACT_APP_LOCALS.replace(' ','|')
-    // server.get('/', (req, res) => ssrCache({ req, res }))
+    //const languages = process.env.REACT_APP_LOCALS.replace(' ','|')
+  // server.get(`/:locale(${languages})?`, (req, res) => cacheManager({ req, res,pagePath:'/',queryParams:{...req.query,...req.params} }))
     // server.get(`/:locale(${languages})?`, (req, res) => ssrCache({ req, res }))
+    // server.get('/', (req, res) => {
+    //     const parsedUrl = parse(req.url, true)
+    //     return handle(req, res, parsedUrl)
+    // })
 
     server.get('*', (req, res) => {
         return handle(req, res)

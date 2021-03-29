@@ -126,11 +126,11 @@ const PostElement = props => {
                     <div className={'post-element '  } key={props.state.title}>
                         <div className="image">
                             <ImageContent/>
-                            {props.state && props.state.views > 1 && props.state.postType === ('video') ? <BottomRight views={props.state.views} /> : null}
-                            {props.state.postType === ('video') || props.state.postType === ('redirect') || props.state.postType === ('product') ?
+                            {props.state && props.state.views > 1 && props.state.postType === ('video') && !state.isHover ? <BottomRight views={props.state.views} /> : null}
+                            {(props.state.postType === ('video') || props.state.postType === ('redirect') || props.state.postType === ('product') )&& !state.isHover ?
                                 <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
-                            {props.state.quality && props.state.postType === ('video') ? <TopRight quality={props.state.quality}/> : null}
-                            {props.state.likes>0 && props.state.rating !== 'disable'?<TopLeft rating={likeValueCalculator(props.state.likes, props.state.disLikes)}/>:null}
+                            {props.state.quality && props.state.postType === ('video') && !state.isHover? <TopRight quality={props.state.quality}/> : null}
+                            {props.state.likes>0 && props.state.rating !== 'disable' && !state.isHover?<TopLeft rating={likeValueCalculator(props.state.likes, props.state.disLikes)}/>:null}
                         </div>
 
                         <h3>{title}</h3>

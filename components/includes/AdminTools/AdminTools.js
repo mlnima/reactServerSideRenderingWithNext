@@ -26,7 +26,7 @@ const AdminTools = props => {
                             <FontAwesomeIcon icon={faUserShield} className='admin-tools-item-logo'/>
                         </a>
                     </Link>
-                    <p className='admin-tools-item' style={state.colorsStyle} onClick={() => contextData.functions.clearCaches().then(() => router.reload())}>
+                    <p className='admin-tools-item' style={state.colorsStyle} onClick={() => contextData.functions.clearCaches()}>
                         <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
                     </p>
                     <p className='admin-tools-item' style={state.colorsStyle} onClick={() => adminConsoleOpenCloseHandler(contextData.userData,contextData.state,contextData.dispatchState)}>

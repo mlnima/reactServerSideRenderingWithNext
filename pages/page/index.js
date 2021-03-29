@@ -31,10 +31,13 @@ export const getServerSideProps = async ({req,query}) => {
     let settings;
     const pageData = await getPageData({pageName: query.pageName}, domainName)
     pageInfo = pageData.data ? pageData.data.pageData : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName, query.pageName + 'Sidebar', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, query.pageName)
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, query.pageName)
+    const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName, query.pageName + 'Sidebar']}, domainName, true, query.pageName)
+    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') :[]
+    const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, query.pageName)
     settings = settingsData.data.settings ? settingsData.data.settings : []
-    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    widgets = [...(firstLoadWidgetsData?.data?.widgets ?? []),...(widgetsData?.data?.widgets ?? [])]
+   // widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    const referer = !!req.headers.referer
     let isMobile = (req
         ? req.headers['user-agent']
         : navigator.userAgent).match(
@@ -43,7 +46,7 @@ export const getServerSideProps = async ({req,query}) => {
 
 
 
-    return {props:{pageInfo, query,isMobile: Boolean(isMobile), widgets, ...settings}}
+    return {props:{pageInfo, query,isMobile: Boolean(isMobile), widgets, ...settings,referer}}
 }
 
 export default page;

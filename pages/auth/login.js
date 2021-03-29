@@ -1,17 +1,17 @@
-import React, { useState, useRef, useContext, useEffect } from 'react';
+import React, {useState, useRef, useContext, useEffect} from 'react';
 import AppLayout from "../../components/layouts/AppLayout";
 import withRouter from 'next/dist/client/with-router'
 import axios from 'axios'
-import { AppContext } from "../../context/AppContext";
-import { getAbsolutePath } from '../../_variables/_variables'
-import { getMultipleSetting, getMultipleWidgetWithData } from '../../_variables/ajaxVariables'
+import {AppContext} from "../../context/AppContext";
+import {getAbsolutePath} from '../../_variables/_variables'
+import {getMultipleSetting, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
 import dataDecoder from '../../server/tools/dataDecoder'
 
 const Login = props => {
     const contextData = useContext(AppContext);
     const messageLabel = useRef(null);
-    const [ state, setState ] = useState({});
-    const [ data, setData ] = useState({
+    const [state, setState] = useState({});
+    const [data, setData] = useState({
         response: undefined,
         type: undefined,
     });
@@ -41,25 +41,30 @@ const Login = props => {
             })
 
         }).then(() => {
-            contextData.functions.getAndSetUserInfo().then(()=>{
+            contextData.functions.getAndSetUserInfo().then(() => {
                 props.router.back()
             })
             // contextData.functions.goToHomePage()
         }).catch(err => console.log(err))
     };
 
+
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
+
     return (
-        <AppLayout { ...props }>
+        <AppLayout {...props}>
             <div className='Login authPage main'>
-                <form className='authForm' onSubmit={ e => onSubmitHandler(e) }>
-                    <label className='messageLabel'>{ data.response }</label>
+                <form className='authForm' onSubmit={e => onSubmitHandler(e)}>
+                    <label className='messageLabel'>{data.response}</label>
                     <div className="authFormItem">
                         <p>username</p>
-                        <input name='username' onChange={ e => onChangeHandler(e) }/>
+                        <input name='username' onChange={e => onChangeHandler(e)}/>
                     </div>
                     <div className="authFormItem">
                         <p>password</p>
-                        <input name='password' type='password' onChange={ e => onChangeHandler(e) }/>
+                        <input name='password' type='password' onChange={e => onChangeHandler(e)}/>
                     </div>
                     <button className='submitBtn' type='submit'>Login</button>
                 </form>
@@ -71,17 +76,21 @@ const Login = props => {
 export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : ''
     let settings;
-    const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true)
+    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true)
     let widgets;
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar','footer','navigation' ] }, domainName, true)
-    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    //const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar','footer','navigation' ] }, domainName, true)
+    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
+   // widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
     settings = settingsData.data.settings ? settingsData.data.settings : []
+
+    widgets = firstLoadWidgetsData?.data?.widgets ?? []
+    const referer = !!req.headers.referer
     let isMobile = (req
         ? req.headers['user-agent']
         : navigator.userAgent).match(
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
-    return {props:{ ...settings,isMobile: Boolean(isMobile),widgets }}
+    return {props: {...settings, isMobile: Boolean(isMobile), widgets, referer}}
 
 }
 

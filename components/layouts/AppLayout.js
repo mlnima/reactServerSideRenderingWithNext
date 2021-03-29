@@ -1,4 +1,4 @@
-import React, {useContext, useEffect} from 'react';
+import React, {useContext, useEffect, useState} from 'react';
 import dynamic from "next/dynamic";
 import {initGA, logPageView} from '../../_variables/_variables'
 import {createGlobalStyle} from "styled-components";
@@ -6,7 +6,7 @@ import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
-
+import _ from 'lodash'
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
@@ -16,7 +16,7 @@ let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 //import CardElement from "../includes/CardElement/CardElement";
 const AppLayout = props => {
     const contextData = useContext(AppContext);
-    const router = useRouter()
+    const router = useRouter();
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -26,23 +26,23 @@ const AppLayout = props => {
             }
             logPageView()
         }
+        if (!props.referer) {
+            contextData.setSiteWidgets(props.widgets)
+        } else {
+           // contextData.setSiteWidgets([...contextData.siteWidgets, ...props.widgets])
+            const newWidgetsData  = _.uniqBy([...contextData.siteWidgets, ...props.widgets], '_id');
+            //const uniqueWidgetIds = [...new Set(newWidgetsData.map(i=>i._id))]
+            contextData.setSiteWidgets(newWidgetsData)
+        }
+
     }, []);
 
-
-    // useEffect(() => {
-    //     if (router.isReady){
-    //         if (props.requestProtocol === 'http' && process.env.REACT_APP_SSL){
-    //            // window.location.href = process.env.PRODUCTION_URL
-    //         }
-    //     }
-    //
-    // }, []);
     useEffect(() => {
         contextData.state.loading ?
             contextData.dispatchState({
                 ...contextData.state,
                 loading: false
-            }):null
+            }) : null
     }, [props]);
 
 
@@ -53,48 +53,54 @@ const AppLayout = props => {
     }, [contextData.userData]);
 
 
+    const topBarWidgets = contextData.siteWidgets.filter(widget => widget?.data?.position === 'topBar') || []
+    const headerWidgets = contextData.siteWidgets.filter(widget => widget?.data?.position === 'header') || []
+    const navigationWidgets = contextData.siteWidgets.filter(widget => widget?.data?.position === 'navigation') || []
+    const footerWidgets = contextData.siteWidgets.filter(widget => widget?.data?.position === 'footer') || []
+    const sidebarWidgets = contextData.siteWidgets.filter(widget => widget?.data?.position === props.sidebarPosition) || []
+
+
     return (
         <div className={'App ' + (props.sidebar ? 'withSidebar' : 'withOutSidebar')}>
             <GlobalStyle globalStyleData={props.design?.data?.customStyles ?? ''}/>
             <SiteSettingSetter identity={props.identity} design={props.design} eCommerce={props.eCommerce}/>
 
-
-            {(props.widgets || []).filter(widget => widget?.data?.position === 'topBar').length > 0 ?
-                <WidgetArea
-                    isMobile={props.isMobile}
-                    key='topBar'
-                    widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'topBar')}
-                    className='top-bar'
-                    position='topBar'
-                    stylesData={props.design?.data?.topBarStyle}
-                    postElementSize={props.design?.data?.postElementSize}
-                /> : null
+            {topBarWidgets.length > 0 ?
+                    <WidgetArea
+                        isMobile={props.isMobile}
+                        key='topBar'
+                        widgets={topBarWidgets}
+                        className='top-bar'
+                        position='topBar'
+                        stylesData={props.design?.data?.topBarStyle}
+                        postElementSize={props.design?.data?.postElementSize}
+                    /> : null
             }
-            {(props.widgets || []).filter(widget => widget?.data?.position === 'header').length > 0 ?
+            {headerWidgets.length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
-                    key='header' widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'header')}
+                    key='header' widgets={headerWidgets}
                     className='header' position='header'
                     stylesData={props.design?.data?.headerStyle}
                     postElementSize={props.design?.data?.postElementSize}
                 /> : null
             }
-            {(props.widgets || []).filter(widget => widget?.data?.position === 'navigation').length > 0 ?
+            {navigationWidgets.length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='navigation'
-                    widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'navigation')}
+                    widgets={navigationWidgets}
                     className='navigation'
                     position='navigation'
                     stylesData={props.design?.data?.navigationStyle}
                     postElementSize={props.design?.data?.postElementSize}
                 /> : null
             }
-            {(props.widgets || []).filter(widget => widget?.data?.position === props.sidebarPosition).length > 0 && props.sidebar ?
+            {sidebarWidgets.length > 0 && props.sidebar ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='sidebar'
-                    widgets={(props.widgets || []).filter(widget => widget?.data?.position === props.sidebarPosition)}
+                    widgets={sidebarWidgets}
                     className='sidebar '
                     position={props.sidebarPosition}
                     postElementSize={props.design?.data?.postElementSize}
@@ -103,10 +109,10 @@ const AppLayout = props => {
 
             {props.children}
 
-            {(props.widgets || []).filter(widget => widget?.data?.position === 'footer').length > 0 ?
+            {footerWidgets.length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
-                    widgets={(props.widgets || []).filter(widget => widget?.data?.position === 'footer')}
+                    widgets={footerWidgets}
                     className='footer' position='footer'
                     stylesData={props.design?.data?.footerStyle}
                     postElementSize={props.design?.data?.postElementSize}

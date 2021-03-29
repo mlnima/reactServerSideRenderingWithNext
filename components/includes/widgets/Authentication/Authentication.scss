@@ -1,12 +1,16 @@
 .auth-buttons{
+  width: 100px;
   .logged-in-items , .logged-out-items{
     display: flex;
     align-items: center;
    .logged-in-item,.logged-out-item{
+     width: 100%;
 
      svg{
-       margin: 0 5px;
+      // margin: 0 5px;
        color: black;
+       max-width: 15px;
+       max-height: 15px;
      }
 
     }

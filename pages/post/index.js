@@ -13,6 +13,7 @@ import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRe
 import styled from "styled-components";
 import PostMetaDataToSiteHead from "../../components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead";
 import {useRouter} from "next/router";
+
 let StyledDiv = styled.div`${props => props.stylesData}`
 
 const Post = props => {
@@ -31,20 +32,23 @@ const Post = props => {
 
 
     useEffect(() => {
-            if (router.query.mode === 'edit') {
-                setState({
-                    ...state,
-                    editMode: true
-                })
-            } else {
-                setState({
-                    ...state,
-                    editMode: false
-                })
-            }
+        if (router.query.mode === 'edit') {
+            setState({
+                ...state,
+                editMode: true
+            })
+        } else {
+            setState({
+                ...state,
+                editMode: false
+            })
+        }
     }, []);
 
 
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [props]);
     if (props.errorCode !== 200) {
         return <Error {...props} />
     } else return (
@@ -72,12 +76,13 @@ const Post = props => {
                     price={props.post.price}
                     {...props.post}
                 />
-                {props.comments.length>0 ? <CommentsRenderer comments={props.comments}/> : null }
+                {props.comments.length > 0 ? <CommentsRenderer comments={props.comments}/> : null}
                 <CommentFrom documentId={props.post._id} documentTitle={props.post.title}/>
-                {(props.widgets || []).filter(widget => widget.data.position === 'underPost').length>0 ?
-                        <div className='under-post-widget-area'>
-                            <WidgetsRenderer deviceWidth={deviceWidth} widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')} position='underPost' postElementSize={props.design?.data?.postElementSize}/>
-                        </div>:null}
+                {(props.widgets || []).filter(widget => widget.data.position === 'underPost').length > 0 ?
+                    <div className='under-post-widget-area'>
+                        <WidgetsRenderer deviceWidth={deviceWidth} widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')} position='underPost'
+                                         postElementSize={props.design?.data?.postElementSize}/>
+                    </div> : null}
 
             </StyledDiv>
         </AppLayout>
@@ -87,20 +92,23 @@ const Post = props => {
 
 
 export const getServerSideProps = async ({req, query}) => {
+    //console.log(req)
     const domainName = req ? await getAbsolutePath(req) : ''
     const requestBody = {_id: query.id};
     let post;
     let widgets;
     let settings;
     let comments;
+    let widgetsData;
     let errorCode = 200
-
     const postData = await getPost(requestBody, domainName, true)
     post = postData.data.post
 
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['postPageSidebar', 'footer', 'header', 'underPost', 'topBar', 'navigation']}, domainName, true, 'postPage')
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'postPage')
 
+    widgetsData = await getMultipleWidgetWithData({widgets: ['postPageSidebar', 'underPost',]}, domainName, true, 'postPage')
+    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
+    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'postPage')
+    const referer = !!req.headers.referer
     if (!post) {
         errorCode = 404
     }
@@ -113,10 +121,11 @@ export const getServerSideProps = async ({req, query}) => {
 
 
     settings = settingsData.data.settings ?? []
-    widgets = widgetsData.data.widgets ?? []
-    comments = post ? commentsData.data.comments : []
+    //widgets = widgetsData.data.widgets ?? []
+    widgets = [...(firstLoadWidgetsData?.data?.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
+    comments = post ? commentsData?.data?.comments : []
 
-    return {props: {post: post || errorCode, query, isMobile: Boolean(isMobile), widgets, comments, ...settings, errorCode}}
+    return {props: {post: post || errorCode, query, isMobile: Boolean(isMobile), widgets, comments, ...settings, errorCode,referer}}
 
 }
 

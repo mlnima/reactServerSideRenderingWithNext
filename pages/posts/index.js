@@ -10,9 +10,7 @@ import {getAbsolutePath} from '../../_variables/_variables';
 //import MetaContentForPostsPage from "../../components/includes/MetaContentForPostsPage/MetaContentForPostsPage";
 
 const posts = props => {
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
 
     return (
         <>
@@ -48,7 +46,7 @@ export const getServerSideProps = async ({req, query}) => {
     let postsSource;
     let widgets;
     let settings;
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'postsPage')
+    const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postsPage')
     settings = settingsData.data.settings ? settingsData.data.settings : []
     //|| settings.identity.data.postsCountPerPage
     const getPostsData = {
@@ -68,17 +66,21 @@ export const getServerSideProps = async ({req, query}) => {
 
     const contentData = query.content ? await getSingleMeta(query.content, domainName, true) : {}
     const contentDataInfo = contentData.data ? contentData.data.meta : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'postsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageSidebar']}, domainName, true, 'postsPage')
+    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') :[]
     const postsData = await getPosts(getPostsData, domainName, true, req.originalUrl)
+
+    const referer = !!req.headers.referer
     let isMobile = (req
         ? req.headers['user-agent']
         : navigator.userAgent).match(
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
-    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    //widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    widgets = [...(firstLoadWidgetsData?.data?.widgets ?? []),...(widgetsData?.data?.widgets ?? [])]
     postsSource = postsData.data ? postsData.data : []
 
-    return {props: {...settings, query, isMobile: Boolean(isMobile), postsSource, getPostsData, widgets, contentData: contentDataInfo}}
+    return {props: {...settings, query, isMobile: Boolean(isMobile), postsSource, getPostsData, widgets, contentData: contentDataInfo,referer}}
 }
 
 

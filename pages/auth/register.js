@@ -94,17 +94,19 @@ export const getServerSideProps = async ({req}) => {
     let settings;
     const settingsData = await getMultipleSetting({ settings: [ 'identity', 'navigation', 'design' ] }, domainName, true)
     let widgets;
-    const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar' ,'footer','navigation'] }, domainName, true)
-    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    //const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar' ,'footer','navigation'] }, domainName, true)
+    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
 
+    //widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    widgets = firstLoadWidgetsData?.data?.widgets ?? []
     settings = settingsData.data.settings ? settingsData.data.settings : []
-
+    const referer = !!req.headers.referer
     let isMobile = (req
         ? req.headers['user-agent']
         : navigator.userAgent).match(
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
-    return {props:{ ...settings,isMobile: Boolean(isMobile) ,widgets}}
+    return {props:{ ...settings,isMobile: Boolean(isMobile) ,widgets,referer}}
 }
 
 

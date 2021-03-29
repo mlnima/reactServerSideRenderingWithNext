@@ -94,12 +94,14 @@ export const getServerSideProps = async ({req, query, res}) => {
     let widgets;
     let metaSource;
 
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar', 'home', 'footer', 'header', 'topBar', 'navigation']}, domainName, true, 'tagsPage')
+    const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'tagsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar']}, domainName, true, 'tagsPage')
+    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') :[]
     const metaData = await getMeta(dataForGettingMeta, domainName, true)
+    const referer = !!req.headers.referer
 
     settings = settingsData.data.settings ? settingsData.data.settings : []
-    widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
+    widgets = [...(firstLoadWidgetsData?.data?.widgets ?? []),...(widgetsData?.data?.widgets ?? [])]
     metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
     let isMobile = (req
         ? req.headers['user-agent']
@@ -107,7 +109,7 @@ export const getServerSideProps = async ({req, query, res}) => {
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
 
-    return {props: {...settings, query, isMobile: Boolean(isMobile), widgets, metaSource, dataForGettingMeta}}
+    return {props: {...settings, query, isMobile: Boolean(isMobile), widgets, metaSource, dataForGettingMeta,referer}}
 }
 
 
