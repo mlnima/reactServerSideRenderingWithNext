@@ -131,7 +131,6 @@ const assets = props => {
 
 
     return (
-        <AdminLayout>
             <div className='admin-asset-page'>
                 <TableControls finalPageData={finalPageData} selectedItems={selectedItems}
                                setSelectedItems={setSelectedItems}/>
@@ -140,7 +139,6 @@ const assets = props => {
                 <TableBody finalPageData={finalPageData} selectedItems={selectedItems}
                            setSelectedItems={setSelectedItems}/>
             </div>
-        </AdminLayout>
     );
 };
 

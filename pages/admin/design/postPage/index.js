@@ -4,9 +4,9 @@ import StyleSection from "../../../../components/adminIncludes/design/StyleSecti
 
 const postPage = () => {
     return (
-        <AdminLayout>
+
             <StyleSection name='postPageStyle' title='Post Page Design :' />
-        </AdminLayout>
+
     );
 };
 export default postPage;

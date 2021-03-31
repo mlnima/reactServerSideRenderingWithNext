@@ -135,7 +135,7 @@ const youtube = props => {
     }, []);
 
     return (
-        <AdminLayout>
+        <>
             <div className='admin-import-page-youtube-api-key'>
                 <h2>Youtube API KEY</h2>
                 <input name='apiKey' value={ state.apiKey } onChange={ e => onChaneHandler(e) }/>
@@ -147,7 +147,7 @@ const youtube = props => {
                 <button className='saveBtn' onClick={ () => onImportHandler() }>Import</button>
                 <button className='saveBtn' onClick={ () => onSetDataForTest() }>setTestData</button>
             </div>
-        </AdminLayout>
+        </>
     );
 };
 export default withRouter(youtube);

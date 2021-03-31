@@ -14,10 +14,10 @@ const widget = props => {
     // }, [props]);
 
     return (
-        <Panel>
+        <>
 
             widget
-        </Panel>
+        </>
     );
     return null
 };

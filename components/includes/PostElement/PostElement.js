@@ -122,7 +122,9 @@ const PostElement = props => {
                 // shallow={true}
                 //  local={router.locale || router.query.locale || false}
             >
-                <a onClick={() => contextData.dispatchState({...contextData.state, loading: true})}>
+                <a
+                    //onClick={() => contextData.dispatchState({...contextData.state, loading: true})}
+                >
                     <div className={'post-element '  } key={props.state.title}>
                         <div className="image">
                             <ImageContent/>

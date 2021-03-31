@@ -11,7 +11,7 @@ import {useRouter} from "next/router";
 const comments = props => {
     const router = useRouter()
     return (
-        <AdminLayout>
+
             <div>
                 <AdminCommentsControl
                     queryData={ router.query }
@@ -28,7 +28,7 @@ const comments = props => {
                 />
                 <AdminRenderComments { ...props }/>
             </div>
-        </AdminLayout>
+
     );
 };
 

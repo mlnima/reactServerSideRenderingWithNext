@@ -38,14 +38,14 @@ const formPage = props => {
     })
 
     return (
-        <AdminLayout>
+        <>
             <h1>{state.formData.formName}</h1>
             <span>{state.formData.date}</span>
             <div className='form-data-container'>
                 {renderData}
             </div>
 
-        </AdminLayout>
+        </>
     );
 };
 

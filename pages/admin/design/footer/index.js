@@ -5,9 +5,9 @@ import StyleSection from "../../../../components/adminIncludes/design/StyleSecti
 const footer = () => {
 
     return (
-        <AdminLayout>
+
             <StyleSection name='footerStyle' title='Footer Design :' />
-        </AdminLayout>
+
     );
 };
 export default footer;

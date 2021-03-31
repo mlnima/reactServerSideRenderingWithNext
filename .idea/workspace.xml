@@ -21,10 +21,48 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Loading/Loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Loading/Loading.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/comments/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/comments/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/background/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/background/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/customStyle/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/customStyle/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/footer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/footer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/header/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/header/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/navigation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/navigation/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/postElement/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postElement/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/postPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/topBar/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/topBar/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/widget/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/widget/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/exporter/postsExporter/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/exporter/postsExporter/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/fileManager/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/fileManager/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/form/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/form/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/content/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/content/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/youtube/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/youtube/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meta/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/page/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/page/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/customStyles/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customStyles/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/eCommerceSettings/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/tools/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/tools/terminal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/terminal/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/translate/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/translate/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/user/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/users/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/users/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/checkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.js" afterDir="false" />
@@ -33,8 +71,7 @@
       <change beforePath="$PROJECT_DIR$/pages/page/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middlewares/cacheMiddleware.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middlewares/cacheMiddleware.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -78,19 +115,19 @@
     <property name="settings.editor.selected.configurable" value="preferences.editor" />
   </component>
   <component name="RecentsManager">
-    <key name="CopyFile.RECENT_KEYS">
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents\PostInformation" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
-      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
-    </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\Post\PostInfo" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\widgetsArea" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\widgetsModel\WidgetModel" />
+    </key>
+    <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\PostComponents\PostInformation" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\images\fontawesome" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\FileManagerComponents" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\_variables" />
+      <recent name="G:\Dev Project\reactServerSideRenderingWithNext\static\style-sheet" />
     </key>
   </component>
   <component name="RunManager" selected="npm.analys">
@@ -146,9 +183,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.analys" />
         <item itemvalue="npm.setup" />
       </list>
@@ -587,7 +624,10 @@
       <workItem from="1616849383652" duration="7430000" />
       <workItem from="1616873372123" duration="3962000" />
       <workItem from="1616921009412" duration="16479000" />
-      <workItem from="1617005348704" duration="23502000" />
+      <workItem from="1617005348704" duration="24206000" />
+      <workItem from="1617113215941" duration="3740000" />
+      <workItem from="1617177059297" duration="12670000" />
+      <workItem from="1617212357462" duration="10359000" />
     </task>
     <servers />
   </component>
@@ -620,7 +660,7 @@
     </state>
     <state x="1935" y="2415" key="FileChooserDialogImpl/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615298967321" />
     <state x="1934" y="2415" key="FileChooserDialogImpl/0.0.2194.1234/-649.2160.4096.1152@-649.2160.4096.1152" timestamp="1614716948965" />
-    <state width="3025" height="202" key="GridCell.Tab.0.bottom" timestamp="1617033841065">
+    <state width="2862" height="232" key="GridCell.Tab.0.bottom" timestamp="1617225628402">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2606" height="104" key="GridCell.Tab.0.bottom/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615811131150" />
@@ -628,9 +668,9 @@
     <state width="2161" height="217" key="GridCell.Tab.0.bottom/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
     <state width="2200" height="366" key="GridCell.Tab.0.bottom/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.bottom/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="3025" height="202" key="GridCell.Tab.0.bottom/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617033841065" />
+    <state width="2862" height="232" key="GridCell.Tab.0.bottom/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617225628402" />
     <state width="2638" height="211" key="GridCell.Tab.0.bottom/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
-    <state width="3025" height="202" key="GridCell.Tab.0.center" timestamp="1617033841065">
+    <state width="2862" height="232" key="GridCell.Tab.0.center" timestamp="1617225628402">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2606" height="104" key="GridCell.Tab.0.center/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615811131150" />
@@ -638,9 +678,9 @@
     <state width="2161" height="217" key="GridCell.Tab.0.center/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
     <state width="2200" height="366" key="GridCell.Tab.0.center/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.center/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="3025" height="202" key="GridCell.Tab.0.center/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617033841065" />
+    <state width="2862" height="232" key="GridCell.Tab.0.center/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617225628402" />
     <state width="2638" height="211" key="GridCell.Tab.0.center/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
-    <state width="3025" height="202" key="GridCell.Tab.0.left" timestamp="1617033841064">
+    <state width="2862" height="232" key="GridCell.Tab.0.left" timestamp="1617225628401">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2606" height="104" key="GridCell.Tab.0.left/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615811131150" />
@@ -648,9 +688,9 @@
     <state width="2161" height="217" key="GridCell.Tab.0.left/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
     <state width="2200" height="366" key="GridCell.Tab.0.left/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.left/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070871" />
-    <state width="3025" height="202" key="GridCell.Tab.0.left/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617033841064" />
+    <state width="2862" height="232" key="GridCell.Tab.0.left/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617225628401" />
     <state width="2638" height="211" key="GridCell.Tab.0.left/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944436" />
-    <state width="3025" height="202" key="GridCell.Tab.0.right" timestamp="1617033841065">
+    <state width="2862" height="232" key="GridCell.Tab.0.right" timestamp="1617225628402">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2606" height="104" key="GridCell.Tab.0.right/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615811131150" />
@@ -658,7 +698,7 @@
     <state width="2161" height="217" key="GridCell.Tab.0.right/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
     <state width="2200" height="366" key="GridCell.Tab.0.right/0.0.2194.1234/-673.2160.4096.1152@-673.2160.4096.1152" timestamp="1608653153076" />
     <state width="2006" height="207" key="GridCell.Tab.0.right/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
-    <state width="3025" height="202" key="GridCell.Tab.0.right/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617033841065" />
+    <state width="2862" height="232" key="GridCell.Tab.0.right/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617225628402" />
     <state width="2638" height="211" key="GridCell.Tab.0.right/673.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1609167944437" />
     <state x="868" y="210" width="1578" height="952" key="com.intellij.history.integration.ui.views.DirectoryHistoryDialog" timestamp="1615417525221">
       <screen x="0" y="0" width="2194" height="1234" />
@@ -829,7 +869,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/index.js</url>
-          <line>34</line>
+          <line>56</line>
           <option name="timeStamp" value="56" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

@@ -13,8 +13,7 @@ const posts = props => {
 
 
     return (
-        <>
-            <AppLayout  {...props} sidebar={props.identity?.data?.postsPageSidebar} sidebarPosition='postsPageSidebar'>
+
                 <div className="main posts-page">
                     {/*<MetaContentForPostsPage {...props}/>*/}
                     <PaginationComponent
@@ -35,8 +34,7 @@ const posts = props => {
                         maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
                     />
                 </div>
-            </AppLayout>
-        </>
+
     );
 };
 

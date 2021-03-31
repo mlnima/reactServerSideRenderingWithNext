@@ -8,8 +8,27 @@ let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
 const page = props => {
 
+    // return (
+    //     <AppLayout
+    //         sidebar={props.pageInfo.sidebar}
+    //         sidebarPosition={props.pageInfo?.pageName + 'Sidebar'}
+    //         design={props.design}
+    //         widgets={props.widgets}
+    //         identity={props.identity}
+    //         eCommerce={props.eCommerce}
+    //         referer={props.referer}
+    //     >
+    //         <StyledDiv className='page main' >
+    //                 <WidgetsRenderer
+    //                     key='page'
+    //                     rendering={true}
+    //                     position={props.pageInfo.pageName}
+    //                     widgets={(props.widgets || []).filter(widget => widget.data.position === props.pageInfo.pageName)}
+    //                 />
+    //         </StyledDiv>
+    //     </AppLayout>
+    // );
     return (
-        <AppLayout {...props} sidebar={props.pageInfo.sidebar} sidebarPosition={props.pageInfo?.pageName + 'Sidebar'}>
             <StyledDiv className='page main' >
                     <WidgetsRenderer
                         key='page'
@@ -18,7 +37,7 @@ const page = props => {
                         widgets={(props.widgets || []).filter(widget => widget.data.position === props.pageInfo.pageName)}
                     />
             </StyledDiv>
-        </AppLayout>
+
     );
 };
 
@@ -43,9 +62,6 @@ export const getServerSideProps = async ({req,query}) => {
         : navigator.userAgent).match(
         /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
     )
-
-
-
     return {props:{pageInfo, query,isMobile: Boolean(isMobile), widgets, ...settings,referer}}
 }
 

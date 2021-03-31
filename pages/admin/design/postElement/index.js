@@ -15,7 +15,7 @@ const postElement = () => {
     }
 
     return (
-        <AdminLayout>
+        <>
             <div>
                 <p>Post Element Size:</p>
                 <select name='postElementSize' onChange={e => onChangeHandler(e)} value={contextData.siteDesign.postElementSize}>
@@ -29,7 +29,7 @@ const postElement = () => {
             </div>
 
             <StyleSection name='postElementStyle' title='PostElement Design :'/>
-        </AdminLayout>
+        </>
     );
 };
 export default postElement;

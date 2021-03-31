@@ -5,9 +5,9 @@ import StyleSection from "../../../../components/adminIncludes/design/StyleSecti
 const topBar = () => {
 
     return (
-        <AdminLayout>
+
                 <StyleSection name='topBarStyle' title='Top Bar Design :' />
-        </AdminLayout>
+
     );
 
 };

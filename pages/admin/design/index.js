@@ -27,7 +27,7 @@ const design = props => {
     })
 
     return (
-        <AdminLayout>
+
             <form className='adminDesign' onSubmit={ e => onSubmitHandler(e) }>
 
                 <div className='colorsContent'>
@@ -35,7 +35,7 @@ const design = props => {
                 </div>
                 <button className='submitBtn' type='submit'>Save Colors</button>
             </form>
-        </AdminLayout>
+
     );
 };
 

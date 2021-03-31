@@ -58,7 +58,7 @@ const importContent = props => {
         console.log(state.data)
     }
     return (
-        <AdminLayout>
+
             <div className='import-content'>
                 <input type='file' onChange={async e => {
                     const reader = new FileReader()
@@ -71,7 +71,7 @@ const importContent = props => {
                 <button onClick={() => onImportPostsHandler()}>Import Posts</button>
                 <textarea ref={dataPreview}/>
             </div>
-        </AdminLayout>
+
     );
 };
 export default importContent;

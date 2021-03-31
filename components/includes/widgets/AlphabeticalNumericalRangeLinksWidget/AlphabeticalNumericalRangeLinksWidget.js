@@ -9,10 +9,6 @@ const AlphabeticalNumericalRangeLinksWidget = props => {
         range: [...'abcdefghijklmnopqrstuvwxyz0123456789']
     });
 
-    useEffect(() => {
-        console.log(router)
-    }, [props]);
-
     const renderRange = state.range.map(i => {
         const path = {
             pathname: props.router ? props.router.pathname : '',

@@ -49,7 +49,7 @@ const terminal = props => {
     }
 
     return (
-        <AdminLayout>
+
             <div className='terminal-simulator'>
                 <h2> Terminal :</h2>
                 <div className='quickAccess'>
@@ -62,7 +62,7 @@ const terminal = props => {
                     <button type='submit'>EXE</button>
                 </form>
             </div>
-        </AdminLayout>
+
     );
 };
 export default terminal;

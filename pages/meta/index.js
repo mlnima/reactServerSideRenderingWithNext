@@ -18,7 +18,7 @@ const meta = props => {
     })
 
     return (
-        <AppLayout  {...props} sidebar={props.identity?.data?.metaPageSidebar} sidebarPosition='metaPageSidebar'>
+
             <div style={{gridArea: props.identity.metaPageSidebar ? 'content' : ''}} className={props.identity.data.metaPageSidebar ? 'content main ' : 'content main '}>
                 <PaginationComponent
                     isActive={true}
@@ -42,7 +42,7 @@ const meta = props => {
                     pathnameData={router.pathname}
                 />
             </div>
-        </AppLayout>
+
     );
 };
 

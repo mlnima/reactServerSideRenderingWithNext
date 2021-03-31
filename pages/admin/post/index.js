@@ -229,7 +229,7 @@ const Index = props => {
 
     return (
         <>
-            <AdminLayout>
+
                 <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
                 <div className='admin-post'>
 
@@ -290,7 +290,6 @@ const Index = props => {
                     </div>
 
                 </div>
-            </AdminLayout>
         </>
     );
 };

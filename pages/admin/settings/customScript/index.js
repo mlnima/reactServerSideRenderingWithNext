@@ -133,7 +133,7 @@ const customScript = props => {
         })
     }
     return (
-        <AdminLayout>
+        <>
             <div className='customScriptsAsStringSection'>
                 <Editor
                     language='html'
@@ -158,7 +158,7 @@ const customScript = props => {
                 { renderScripts }
             </div>
             <button className='saveBtn' onClick={ () => onSaveHandler() }>Save</button>
-        </AdminLayout>
+        </>
     );
 };
 

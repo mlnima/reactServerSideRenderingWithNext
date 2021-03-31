@@ -5,9 +5,9 @@ import StyleSection from "../../../../components/adminIncludes/design/StyleSecti
 const MyComponent = () => {
 
     return (
-        <AdminLayout>
+
             <StyleSection name='headerStyle' title='Header Design :' />
-        </AdminLayout>
+
     );
 };
 export default MyComponent;

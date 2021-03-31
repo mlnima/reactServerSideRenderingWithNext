@@ -85,7 +85,7 @@ const customStyles = props => {
 
 
     return (
-        <AdminLayout>
+
             <div className='custom-style-admin-page'>
                 <Editor
                     language='scss'
@@ -109,7 +109,7 @@ const customStyles = props => {
                 }}/>
                 <button className='saveBtn' onClick={() => inputFile.current.click()}>Import Custom Style</button>
             </div>
-        </AdminLayout>
+
     );
 };
 export default customStyles;

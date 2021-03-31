@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, {useEffect,useMemo} from 'react';
 import dynamic from 'next/dynamic'
 import Widget from '../Widget/Widget'
 
@@ -22,36 +22,61 @@ const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 
 const WidgetsRenderer =  props => {
+    // const renderWidgets = (props.widgets?.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))?.map(widget => {
+    //     const targetComponent =
+    //         widget.data.type === 'posts' ? Posts :
+    //         widget.data.type === 'media' ? MediaWidget :
+    //         widget.data.type === 'text' ? null :
+    //         widget.data.type === 'textEditor' ? null :
+    //         widget.data.type === 'recentComments' ? RecentComments :
+    //         widget.data.type === 'meta' ? MetaWidget :
+    //         widget.data.type === 'searchBar' ? SearchInputComponent :
+    //         widget.data.type === 'logo' ? Logo :
+    //         widget.data.type === 'alphabeticalNumericalRange' ? AlphabeticalNumericalRangeLinksWidget :
+    //         widget.data.type === 'language' ? LanguagesSwitcher :
+    //         widget.data.type === 'authentication' ? Authentication :
+    //         widget.data.type === 'linkTo' ? LinkTo :
+    //         widget.data.type === 'imageSwiper' ? ImageSwiper :
+    //         widget.data.type === 'postsSwiper' ? PostSwiper :
+    //         // widget.data.type === 'postsSwiper' ? null :
+    //         widget.data.type === 'menu' ? MenuWidget :
+    //         widget.data.type === 'shoppingCart' ? ShoppingCart :
+    //         widget.data.type === 'form' ? FormWidget : null
+    //
+    //     return (
+    //         <Widget currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } postElementSize={props.postElementSize} />
+    //     )
+    //
+    // })
 
+    const renderWidgets = useMemo(()=>{
+       return (props.widgets?.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))?.map(widget => {
+            const targetComponent =
+                widget.data.type === 'posts' ? Posts :
+                    widget.data.type === 'media' ? MediaWidget :
+                        widget.data.type === 'text' ? null :
+                            widget.data.type === 'textEditor' ? null :
+                                widget.data.type === 'recentComments' ? RecentComments :
+                                    widget.data.type === 'meta' ? MetaWidget :
+                                        widget.data.type === 'searchBar' ? SearchInputComponent :
+                                            widget.data.type === 'logo' ? Logo :
+                                                widget.data.type === 'alphabeticalNumericalRange' ? AlphabeticalNumericalRangeLinksWidget :
+                                                    widget.data.type === 'language' ? LanguagesSwitcher :
+                                                        widget.data.type === 'authentication' ? Authentication :
+                                                            widget.data.type === 'linkTo' ? LinkTo :
+                                                                widget.data.type === 'imageSwiper' ? ImageSwiper :
+                                                                    widget.data.type === 'postsSwiper' ? PostSwiper :
+                                                                        // widget.data.type === 'postsSwiper' ? null :
+                                                                        widget.data.type === 'menu' ? MenuWidget :
+                                                                            widget.data.type === 'shoppingCart' ? ShoppingCart :
+                                                                                widget.data.type === 'form' ? FormWidget : null
 
+            return (
+                <Widget currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } postElementSize={props.postElementSize} />
+            )
 
-
-    const renderWidgets = (props.widgets?.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))?.map(widget => {
-        const targetComponent =
-            widget.data.type === 'posts' ? Posts :
-            widget.data.type === 'media' ? MediaWidget :
-            widget.data.type === 'text' ? null :
-            widget.data.type === 'textEditor' ? null :
-            widget.data.type === 'recentComments' ? RecentComments :
-            widget.data.type === 'meta' ? MetaWidget :
-            widget.data.type === 'searchBar' ? SearchInputComponent :
-            widget.data.type === 'logo' ? Logo :
-            widget.data.type === 'alphabeticalNumericalRange' ? AlphabeticalNumericalRangeLinksWidget :
-            widget.data.type === 'language' ? LanguagesSwitcher :
-            widget.data.type === 'authentication' ? Authentication :
-            widget.data.type === 'linkTo' ? LinkTo :
-            widget.data.type === 'imageSwiper' ? ImageSwiper :
-            widget.data.type === 'postsSwiper' ? PostSwiper :
-            // widget.data.type === 'postsSwiper' ? null :
-            widget.data.type === 'menu' ? MenuWidget :
-            widget.data.type === 'shoppingCart' ? ShoppingCart :
-            widget.data.type === 'form' ? FormWidget : null
-
-        return (
-            <Widget currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} key={ props.widgets.indexOf(widget) } propsKey={ widget._id } component={ targetComponent } { ...widget } postElementSize={props.postElementSize} />
-        )
-
-    })
+        })
+    },[])
 
 
 

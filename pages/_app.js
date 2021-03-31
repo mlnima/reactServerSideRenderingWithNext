@@ -1,7 +1,8 @@
 import React, {useEffect} from 'react';
 import AppProvider from "../context/AppContext";
+import AppLayout from "../components/layouts/AppLayout";
+import {useRouter} from "next/router";
 import '../styles/styles.scss';
-
 import '../components/includes/AlertBox/AlertBox.scss';
 import '../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview.scss';
 import '../components/includes/checkOutPageComponents/CheckOutItemPreview/ItemCountUI.scss';
@@ -32,7 +33,7 @@ import '../components/includes/AdminTools/Console/Console.scss';
 import '../components/includes/AdminTools/AdminTools.scss';
 import '../pages/auth/registerLogin.scss';
 import '../pages/profile/Profile.scss';
-
+import AdminLayout from "../components/layouts/AdminLayout";
 
 
 // export function reportWebVitals(metric) {
@@ -40,10 +41,42 @@ import '../pages/profile/Profile.scss';
 // }
 
 const MyApp = ({Component, pageProps}) => {
+    const router = useRouter()
 
-    return (
+
+    const sidebarPositionName = router.pathname === '/' ? 'homePageSidebar' :
+        router.pathname === '/post' ? 'postPageSidebar' :
+            router.pathname === '/posts' ? 'postsPageSidebar' :
+                router.pathname === '/meta' ? 'metaPageSidebar' :
+                    router.pathname === '/page' ? pageProps.pageInfo?.pageName + 'Sidebar' :
+                        'homePageSidebar'
+
+    //console.log(sidebarPositionName)
+
+    useEffect(() => {
+        console.log(pageProps)
+    }, [pageProps]);
+    if (!router.pathname.includes('/admin')) {
+        return (
+            <AppProvider>
+                <AppLayout
+                    sidebar={pageProps.identity?.data?.[sidebarPositionName] || pageProps.pageInfo?.sidebar }
+                    sidebarPosition={sidebarPositionName}
+                    design={pageProps.design}
+                    widgets={pageProps.widgets}
+                    identity={pageProps.identity}
+                    eCommerce={pageProps.eCommerce}
+                    referer={pageProps.referer}
+                >
+                    <Component {...pageProps} />
+                </AppLayout>
+            </AppProvider>
+        )
+    } else return (
         <AppProvider>
-            <Component {...pageProps} />
+            <AdminLayout>
+                <Component {...pageProps} />
+            </AdminLayout>
         </AppProvider>
     )
 

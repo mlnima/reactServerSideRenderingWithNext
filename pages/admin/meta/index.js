@@ -91,8 +91,7 @@ const meta = props => {
     }
 
     return (
-        <>
-            <AdminLayout>
+
                 <div className='single-meta-page'>
                     <div className='single-meta-page-section'>
                         <p>Language :</p>
@@ -130,8 +129,7 @@ const meta = props => {
 
 
                 </div>
-            </AdminLayout>
-        </>
+
     );
 };
 

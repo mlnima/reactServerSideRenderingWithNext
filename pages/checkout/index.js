@@ -166,7 +166,7 @@ const checkout = props => {
 
 
     return (
-        <AppLayout {...props}>
+
             <div className='main checkout-page'>
 
                 {/*render basket items*/}
@@ -235,7 +235,7 @@ const checkout = props => {
                 </div>
 
             </div>
-        </AppLayout>
+
     );
 };
 

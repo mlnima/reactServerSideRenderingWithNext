@@ -35,7 +35,7 @@ const customStyle = props => {
     }, [props]);
 
     return (
-        <AdminLayout>
+
             <div className='custom-style'>
                 <form className='customStyle' onSubmit={ e => onCustomStyleSaveHandler(e) }>
                     <textarea value={  customStyle } onChange={ e => onCustomStyleChangeHandler(e) }/>
@@ -43,7 +43,7 @@ const customStyle = props => {
                     <button className='submitBtn' type='submit'>Save Custom Style</button>
                 </form>
             </div>
-        </AdminLayout>
+
     );
 };
 

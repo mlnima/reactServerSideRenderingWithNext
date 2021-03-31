@@ -83,7 +83,7 @@ const HomePageWidgets = props => {
 
 
     return (
-        <AdminLayout>
+        <>
             <h1>Widgets Settings :</h1>
             <h2>Add Widgets:</h2>
             <div id='widget-setting'>
@@ -108,7 +108,7 @@ const HomePageWidgets = props => {
                 <ColorSection designName='widgetBodyBorder'/>
 
             </div>
-        </AdminLayout>
+        </>
     );
 };
 

@@ -52,8 +52,7 @@ const page = props => {
     }
 
     return (
-        <div>
-            <AdminLayout>
+
                 <div className='page-container'>
                     <p>Page Name (without Space):</p>
                     <input name='pageName' placeholder='page name' value={state.pageName} onChange={e => onChangeHandler(e)}/>
@@ -71,8 +70,7 @@ const page = props => {
                     <button onClick={onSaveHandler}>Save</button>
                 </div>
 
-            </AdminLayout>
-        </div>
+
     );
 };
 

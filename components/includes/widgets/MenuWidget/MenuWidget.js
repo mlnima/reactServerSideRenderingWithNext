@@ -22,7 +22,7 @@ const MenuWidget = props => {
     }, [props]);
 
     const mobileNavigationOnClickHandler = () => {
-        contextData.dispatchState({...contextData.state,loading:true})
+       // contextData.dispatchState({...contextData.state,loading:true})
         if (props.isMobile) {
             setOpen(false)
         }

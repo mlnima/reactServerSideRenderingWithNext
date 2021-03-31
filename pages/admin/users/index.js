@@ -19,11 +19,11 @@ const users = props => {
     })
 
     return (
-        <AdminLayout>
+
             <div>
                 { renderUsers }
             </div>
-        </AdminLayout>
+
     );
 };
 export default users;

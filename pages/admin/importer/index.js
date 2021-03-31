@@ -15,11 +15,11 @@ const importer = props => {
 
 
     return (
-        <AdminLayout>
+
             <div >
 
             </div>
-        </AdminLayout>
+
     );
 };
 export default importer ;

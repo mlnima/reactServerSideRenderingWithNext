@@ -15,13 +15,11 @@ const Profile = props => {
     });
 
     return (
-        <AppLayout { ...props }>
             <div className='profile-page main'>
                 <ProfileCoverImage/>
                 <ProfileNavigation state={state} setState={setState}/>
                 <ProfileComponentsRenderer activeComponent={state.activeTab}/>
             </div>
-        </AppLayout>
     );
 };
 

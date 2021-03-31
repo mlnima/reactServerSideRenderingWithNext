@@ -14,7 +14,7 @@ const eCommerceSettings = props => {
 
 
     return (
-        <AdminLayout>
+
             <div className='e-commerce-Settings-page'>
                 <h3>Text and Translations : </h3>
                 <div className='e-commerce-settings-translate-settings'>
@@ -36,7 +36,7 @@ const eCommerceSettings = props => {
 
                 </div>
             </div>
-        </AdminLayout>
+
     );
 };
 

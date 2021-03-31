@@ -86,13 +86,13 @@ const fileManager = props => {
     }
 
     return (
-        <AdminLayout>
+        <>
             <UploadedPopView clickedItem={ state.clickedItem } setStateHandler={ setStateHandler } state={ state } setState={ setState }/>
             <div className='fileManager'>
                 <FileManagerControl setStateHandler={ setStateHandler } data={ state } state={ state } setState={ setState }/>
                 <FileManagerArea setStateHandler={ setStateHandler } data={ state } state={ state } setState={ setState }/>
             </div>
-        </AdminLayout>
+        </>
     );
 };
 export default withRouter(fileManager);

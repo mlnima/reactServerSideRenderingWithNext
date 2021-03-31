@@ -5,14 +5,12 @@ import Analytics from '../../components/adminIncludes/Analytics/Analytics'
 const Index = () => {
 
     return (
-        <>
-            <AdminLayout>
+
                 <div>
                     welcome to admin panel
                     <Analytics/>
                 </div>
-            </AdminLayout>
-        </>
+
     );
 };
 export default Index;

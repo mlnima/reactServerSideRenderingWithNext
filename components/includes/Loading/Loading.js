@@ -11,22 +11,23 @@ const Loading = () => {
             loading:false
         })
     }
-        return (
-            <div className='Loading'>
-
-                <div className="lds-ring">
-
-                    <div></div>
-                    <div></div>
-
-                    <div></div>
-
-                    <div></div>
-
-                </div>
-                <button className='stopLoading fas fa-times' onClick={()=>onStopLoadingHandler()}/>
-            </div>
-        );
+        // return (
+        //     <div className='Loading'>
+        //
+        //         <div className="lds-ring">
+        //
+        //             <div></div>
+        //             <div></div>
+        //
+        //             <div></div>
+        //
+        //             <div></div>
+        //
+        //         </div>
+        //         <button className='stopLoading fas fa-times' onClick={()=>onStopLoadingHandler()}/>
+        //     </div>
+        // );
+    return null
 };
 
 export default Loading;

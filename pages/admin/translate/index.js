@@ -6,7 +6,7 @@ const translate = props => {
     useEffect(() => {
     }, []);
     return (
-        <AdminLayout>
+
         <div className='translate-page'>
             <div className='translate-page-inputFields'>
                 <div className='translate-page-inputFields-section'>
@@ -28,7 +28,7 @@ const translate = props => {
 
             </div>
         </div>
-        </AdminLayout>
+
     );
 };
 export default translate;

@@ -74,7 +74,7 @@ const user = props => {
     }, [ props ]);
 
     return (
-        <AdminLayout>
+
             <div className='user-admin-edit-profile-page'>
                 <div className='user-admin-edit-profile-page-section'>
                     <p>Username :</p>
@@ -130,7 +130,7 @@ const user = props => {
                     <button className='saveBtn' onClick={ () => onNewAPIKeyRequest() }>Generate API Key</button>
                 </div>
             </div>
-        </AdminLayout>
+
     );
 };
 

@@ -105,7 +105,7 @@ const settings = props => {
     }
 
     return (
-        <AdminLayout>
+
             <form id='site-settings-form' onSubmit={e => onSubmitHandler(e)}>
                 <div className="forms">
                     <h2>site identity:</h2>
@@ -285,7 +285,7 @@ const settings = props => {
 
                 <button className='submitBtn' type='submit'>save settings</button>
             </form>
-        </AdminLayout>
+
     );
 };
 

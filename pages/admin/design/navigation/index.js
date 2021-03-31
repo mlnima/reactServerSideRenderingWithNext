@@ -7,9 +7,9 @@ import StyleSection from "../../../../components/adminIncludes/design/StyleSecti
 const navigation = () => {
 
     return (
-        <AdminLayout>
+
             <StyleSection name='navigationStyle' title='Navigation Design :' />
-        </AdminLayout>
+
     )
 
 };

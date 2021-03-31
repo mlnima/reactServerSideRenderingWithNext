@@ -51,8 +51,53 @@ const Post = props => {
     // }, [props]);
     if (props.errorCode !== 200) {
         return <Error {...props} />
-    } else return (
-        <AppLayout {...props} sidebar={props.identity?.data?.postPageSidebar} sidebarPosition='postPageSidebar'>
+    } else
+    //     return (
+    //     <AppLayout
+    //         sidebar={props.identity?.data?.postPageSidebar}
+    //         sidebarPosition='postPageSidebar'
+    //         design={props.design}
+    //         widgets={props.widgets}
+    //         identity={props.identity}
+    //         eCommerce={props.eCommerce}
+    //         referer={props.referer}
+    //     >
+    //         <PostMetaDataToSiteHead {...props}/>
+    //         <StyledDiv stylesData={props.design?.data?.postPageStyle ?? ''} className='main post-page'>
+    //             <VideoPlayer {...props.post}/>
+    //             <SlideShow {...props.post} sidebar={props.identity.data.postPageSidebar} deviceWidth={deviceWidth}/>
+    //             <PostInfo
+    //                 {...props}
+    //                 title={props.post.title}
+    //                 author={props.post.author}
+    //                 description={props.post.description}
+    //                 tags={props.post.tags}
+    //                 actors={props.post.actors}
+    //                 categories={props.post.categories}
+    //                 id={props.post._id}
+    //                 likes={props.post.likes}
+    //                 disLikes={props.post.disLikes}
+    //                 views={props.post.views}
+    //                 videoEmbedCode={props.post.videoEmbedCode}
+    //                 rating={props.post.rating}
+    //                 editMode={state.editMode}
+    //                 postType={props.post.postType}
+    //                 price={props.post.price}
+    //                 {...props.post}
+    //             />
+    //             {props.comments.length > 0 ? <CommentsRenderer comments={props.comments}/> : null}
+    //             <CommentFrom documentId={props.post._id} documentTitle={props.post.title}/>
+    //             {(props.widgets || []).filter(widget => widget.data.position === 'underPost').length > 0 ?
+    //                 <div className='under-post-widget-area'>
+    //                     <WidgetsRenderer deviceWidth={deviceWidth} widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')} position='underPost'
+    //                                      postElementSize={props.design?.data?.postElementSize}/>
+    //                 </div> : null}
+    //
+    //         </StyledDiv>
+    //     </AppLayout>
+    // );
+    return (
+<>
             <PostMetaDataToSiteHead {...props}/>
             <StyledDiv stylesData={props.design?.data?.postPageStyle ?? ''} className='main post-page'>
                 <VideoPlayer {...props.post}/>
@@ -85,8 +130,7 @@ const Post = props => {
                     </div> : null}
 
             </StyledDiv>
-        </AppLayout>
-
+    </>
     );
 };
 

@@ -54,7 +54,7 @@ const Login = props => {
     }, [props]);
 
     return (
-        <AppLayout {...props}>
+
             <div className='Login authPage main'>
                 <form className='authForm' onSubmit={e => onSubmitHandler(e)}>
                     <label className='messageLabel'>{data.response}</label>
@@ -69,7 +69,7 @@ const Login = props => {
                     <button className='submitBtn' type='submit'>Login</button>
                 </form>
             </div>
-        </AppLayout>
+
     );
 };
 

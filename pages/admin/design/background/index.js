@@ -12,7 +12,7 @@ const background = props => {
     }, [contextData.siteDesign]);
 
     return (
-        <AdminLayout>
+       <>
             <h1>Background Settings :</h1>
             <div className='admin-panel-background-setting'>
                 <UrlSection designName='bodyBackgroundImage'/>
@@ -23,7 +23,7 @@ const background = props => {
                 {/*<UrlSection designName='bodyBackgroundColor'/>*/}
                 <ColorSection designName='bodyBackgroundColor'/>
             </div>
-        </AdminLayout>
+       </>
     );
 };
 export default background;

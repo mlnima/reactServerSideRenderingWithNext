@@ -49,8 +49,6 @@ const Register = props => {
 
     if (contextData.siteIdentity.anyoneCanRegister){
         return (
-            <AppLayout { ...props }>
-
                 <div className='Register authPage main'>
                     <form className='authForm' onSubmit={e=>onSubmitHandler(e)}>
                         <div className="authFormItem">
@@ -72,16 +70,16 @@ const Register = props => {
                         <button type='submit' className='submitBtn'>Register</button>
                     </form>
                 </div>
-            </AppLayout>
+
         );
 
     }else {
 
         return (
-            <AppLayout { ...props }>
+
                 <div className='Register authPage'>
                 </div>
-            </AppLayout>
+
         )
     }
 

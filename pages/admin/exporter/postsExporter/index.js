@@ -49,12 +49,12 @@ const postsExporter = props => {
     }
 
     return (
-        <AdminLayout>
+
             <div className='export-posts-content'>
                <h1>Export Posts Content :</h1>
                 <button onClick={()=>onExportPostsHandler()}>Export All The Posts To Json</button>
             </div>
-        </AdminLayout>
+
     );
 };
 export default postsExporter;
