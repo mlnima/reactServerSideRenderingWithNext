@@ -7,7 +7,7 @@ const WidgetArea = props => {
 
         return (
             <StyledDiv  stylesData={props.stylesData ?? ''} className={props.className + ' widget-area ' + props.position} >
-                <WidgetsRenderer currentPageSidebar={props.currentPageSidebar}  isMobile={props.isMobile} {...props}  position={props.position}/>
+                <WidgetsRenderer currentPageSidebar={props.currentPageSidebar}  isMobile={props.isMobile} {...props}  position={props.position}  referer={props.referer}/>
             </StyledDiv>
         );
 

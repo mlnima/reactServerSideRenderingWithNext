@@ -35,14 +35,12 @@ import '../pages/auth/registerLogin.scss';
 import '../pages/profile/Profile.scss';
 import AdminLayout from "../components/layouts/AdminLayout";
 
-
 // export function reportWebVitals(metric) {
 //     console.log(metric)
 // }
 
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
-
 
     const sidebarPositionName = router.pathname === '/' ? 'homePageSidebar' :
         router.pathname === '/post' ? 'postPageSidebar' :
@@ -51,11 +49,6 @@ const MyApp = ({Component, pageProps}) => {
                     router.pathname === '/page' ? pageProps.pageInfo?.pageName + 'Sidebar' :
                         'homePageSidebar'
 
-    //console.log(sidebarPositionName)
-
-    useEffect(() => {
-        console.log(pageProps)
-    }, [pageProps]);
     if (!router.pathname.includes('/admin')) {
         return (
             <AppProvider>
@@ -67,6 +60,7 @@ const MyApp = ({Component, pageProps}) => {
                     identity={pageProps.identity}
                     eCommerce={pageProps.eCommerce}
                     referer={pageProps.referer}
+                    isMobile={pageProps.isMobile}
                 >
                     <Component {...pageProps} />
                 </AppLayout>

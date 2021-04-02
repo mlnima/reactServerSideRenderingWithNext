@@ -7,6 +7,7 @@ import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
 import _ from 'lodash'
+
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
@@ -42,6 +43,7 @@ const AppLayout = props => {
                 footer: props.widgets.filter(widget => widget?.data?.position === 'footer') || [],
             })
         }
+
     }, []);
 
     useEffect(() => {
@@ -76,6 +78,7 @@ const AppLayout = props => {
                     position='topBar'
                     stylesData={props.design?.data?.topBarStyle}
                     postElementSize={props.design?.data?.postElementSize}
+                    referer={props.referer}
                 /> : null
             }
             {staticWidgets.header.length > 0 ?
@@ -85,6 +88,7 @@ const AppLayout = props => {
                     className='header' position='header'
                     stylesData={props.design?.data?.headerStyle}
                     postElementSize={props.design?.data?.postElementSize}
+                    referer={props.referer}
                 /> : null
             }
             {staticWidgets.navigation.length > 0 ?
@@ -96,6 +100,7 @@ const AppLayout = props => {
                     position='navigation'
                     stylesData={props.design?.data?.navigationStyle}
                     postElementSize={props.design?.data?.postElementSize}
+                    referer={props.referer}
                 /> : null
             }
             {sidebarWidgets.length > 0 && props.sidebar ?
@@ -106,6 +111,7 @@ const AppLayout = props => {
                     className='sidebar '
                     position={props.sidebarPosition}
                     postElementSize={props.design?.data?.postElementSize}
+                    referer={props.referer}
                 /> : null
             }
 
@@ -118,6 +124,7 @@ const AppLayout = props => {
                     className='footer' position='footer'
                     stylesData={props.design?.data?.footerStyle}
                     postElementSize={props.design?.data?.postElementSize}
+                    referer={props.referer}
                 /> : null
             }
             {contextData.userData.role === 'administrator' ? <AdminTools/> : null}

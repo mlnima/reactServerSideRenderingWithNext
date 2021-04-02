@@ -52,7 +52,7 @@ export const getServerSideProps = async ({req}) => {
     const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') :[]
     const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'homePage')
     const referer = !!req.headers.referer
-
+    console.log(referer)
     widgets = [...(firstLoadWidgetsData?.data?.widgets ?? []),...(widgetsData?.data?.widgets ?? [])]
     settings = settingsData?.data?.settings ?? [];
 
