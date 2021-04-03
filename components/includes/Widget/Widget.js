@@ -13,20 +13,12 @@ let StyledDiv = styled.div`${props => props.customStyles}`
 const Widget = props => {
     const contextData = useContext(AppContext);
     const [styles, setStyles] = useState('')
-    console.log(props.data.position,props.referer)
+
     useEffect(() => {
         if (props.data?.customStyles) {
             setStyles(props.data?.customStyles)
         }
     }, []);
-
-    // const RenderComponent = () => {
-    //     if (props.component) {
-    //         return (
-    //             <props.component currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} {...props.data} id={props._id} widget={true} postElementSize={props.postElementSize}   referer={props.referer}/>
-    //         )
-    //     } else return null
-    // }
 
 
     const conditionalWidgetRenderer = (deviceType, languageToRender, activeLanguage) => {

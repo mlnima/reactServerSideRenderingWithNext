@@ -11,7 +11,7 @@ const VideoPlayer = props => {
             )
         } else if (props.videoEmbedCode && !props.videoUrl) {
             return (
-                <iframe src={ props.videoEmbedCode } frameBorder="0" width='640' height='360' scrolling="no"/>
+                <iframe title={props.title} src={ props.videoEmbedCode } frameBorder="0" width='640' height='360' scrolling="no"/>
             )
         }
         if (!props.videoUrl && !props.videoEmbedCode && props.videoScriptCode) {

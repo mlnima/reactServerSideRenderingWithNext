@@ -7,7 +7,7 @@ const PostMetaDataToSiteHead = props => {
         return (
             <Head>
                 <title>{ props.post.title }</title>
-                <meta name="description" content={ props.post.description }/>
+                <meta name="description" content={ props.post.description || props.post.title }/>
                 <meta name="keywords" content={ [ ...props.post.tags.map(i=>i.name), ...props.post.categories.map(i=>i.name), ...props.post.actors.map(i=>i.name) ] }/>
                 <meta property="og:title" content={ props.post.title }/>
                 <meta property="og:type" content={ props.post.postType === 'video' ? props.post.postType + '.' + 'movies' : props.post.postType }/>

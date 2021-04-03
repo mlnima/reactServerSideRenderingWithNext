@@ -109,7 +109,7 @@ const SearchInputComponent = props => {
         return (
             <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
                 {props.mobileMode ?  <button className='search-bar-btn-close' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='svg-logo-small'/></button>:null }
-                <input className='search-input' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword}/>
+                <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
                 <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small' style={state.style}/></button>
             </form>
         );

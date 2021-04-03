@@ -27,10 +27,10 @@ const RatingButtons = props => {
         }else {
             return(
                 <div ref={ratingBtnArea} className="like">
-                    <button onClick={() => onRateHandler('likes')  }>
+                    <button onClick={() => onRateHandler('likes')  } aria-label="Center Align">
                         <FontAwesomeIcon icon={faThumbsUp} className='rate-logo' />
                     </button>
-                    <button onClick={() =>onRateHandler('disLikes')}>
+                    <button onClick={() =>onRateHandler('disLikes')} aria-label="Center Align">
                         <FontAwesomeIcon icon={faThumbsDown} className='rate-logo'/>
                     </button>
                 </div>

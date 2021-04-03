@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React, { useEffect} from 'react';
 import AppProvider from "../context/AppContext";
 import AppLayout from "../components/layouts/AppLayout";
 import {useRouter} from "next/router";
@@ -40,6 +40,7 @@ import AdminLayout from "../components/layouts/AdminLayout";
 // }
 
 const MyApp = ({Component, pageProps}) => {
+
     const router = useRouter()
 
     const sidebarPositionName = router.pathname === '/' ? 'homePageSidebar' :
@@ -53,7 +54,7 @@ const MyApp = ({Component, pageProps}) => {
         return (
             <AppProvider>
                 <AppLayout
-                    sidebar={pageProps.identity?.data?.[sidebarPositionName] || pageProps.pageInfo?.sidebar }
+                    sidebar={pageProps.identity?.data?.[sidebarPositionName] || pageProps.pageInfo?.sidebar}
                     sidebarPosition={sidebarPositionName}
                     design={pageProps.design}
                     widgets={pageProps.widgets}

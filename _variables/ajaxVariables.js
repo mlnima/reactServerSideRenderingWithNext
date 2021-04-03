@@ -1,4 +1,5 @@
 import axios from "axios";
+import {getAbsolutePath} from "./_variables";
 
 export const updateSetting = async (type, data) => {
     const body = {
@@ -201,3 +202,24 @@ export const getOrders = async (data, domainName) => {
     return await axios.post(domainName + `/api/v1/order/get`, body)
 };
 
+export const getFirstLoadData = async  req =>{
+    const domainName = req ? await getAbsolutePath(req) : '';
+    const referer = !!req.headers.referer
+    const isSameOrigin =  req.headers['sec-fetch-site'] === 'same-origin';
+    const isNavigatedFromPostPage = /video|post|article|product/.test(req.headers.referer)
+    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
+    //const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage')
+    const settingsData =!req.headers.referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage'):{}
+    let isMobile = (req ? req.headers['user-agent']: navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i)
+
+    return {
+        domainName:req ? await getAbsolutePath(req) : '',
+        settings:settingsData?.data?.settings ?? [],
+        widgets:firstLoadWidgetsData?.data?.widgets ?? [],
+        referer,
+        isSameOrigin,
+        isNavigatedFromPostPage,
+        isMobile,
+
+    }
+}

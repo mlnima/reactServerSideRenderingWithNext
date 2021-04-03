@@ -4,7 +4,7 @@ import withRouter from 'next/dist/client/with-router'
 import axios from 'axios'
 import {AppContext} from "../../context/AppContext";
 import {getAbsolutePath} from '../../_variables/_variables'
-import {getMultipleSetting, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
+import {getFirstLoadData, getMultipleSetting, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
 import dataDecoder from '../../server/tools/dataDecoder'
 
 const Login = props => {
@@ -74,24 +74,8 @@ const Login = props => {
 };
 
 export const getServerSideProps = async ({req}) => {
-    const domainName = req ? await getAbsolutePath(req) : ''
-    let settings;
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true)
-    let widgets;
-    //const widgetsData = await getMultipleWidgetWithData({ widgets: [ 'header','topBar','footer','navigation' ] }, domainName, true)
-    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
-   // widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    settings = settingsData.data.settings ? settingsData.data.settings : []
-
-    widgets = firstLoadWidgetsData?.data?.widgets ?? []
-    const referer = !!req.headers.referer
-    let isMobile = (req
-        ? req.headers['user-agent']
-        : navigator.userAgent).match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-    )
-    return {props: {...settings, isMobile: Boolean(isMobile), widgets, referer}}
-
+    const firstLoadData = await getFirstLoadData(req)
+    return {props: {widgets:firstLoadData.widgets,...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile),  referer:firstLoadData.referer}}
 }
 
 

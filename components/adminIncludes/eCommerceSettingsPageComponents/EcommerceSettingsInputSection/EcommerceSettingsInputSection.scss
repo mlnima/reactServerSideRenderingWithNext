@@ -5,7 +5,7 @@
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-start;
-  align-items: start;
+  align-items: flex-start;
   flex-direction: column;
   border-radius: 5px;
   .e-commerce-settings-input-section-description{
@@ -23,7 +23,7 @@
   }
 
   .e-commerce-settings-input-section-input{
- width: 95%;
+    width: 95%;
   }
   .e-commerce-settings-input-section-save-button{
 

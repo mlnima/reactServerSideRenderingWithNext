@@ -16,6 +16,7 @@ let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 const AppLayout = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
 
     const [staticWidgets, setStaticWidgets] = useState({
         topBar: [],
@@ -47,7 +48,10 @@ const AppLayout = props => {
     }, []);
 
     useEffect(() => {
-        setSidebarWidgets(props.widgets.filter(widget => widget?.data?.position === props.sidebarPosition))
+        const sidebarWidgetsData = props.widgets.filter(widget => widget?.data?.position === props.sidebarPosition)
+        if (sidebarWidgetsData.length > 0) {
+            setSidebarWidgets(sidebarWidgetsData)
+        }
     }, [props.widgets]);
 
     useEffect(() => {
@@ -64,10 +68,21 @@ const AppLayout = props => {
     //     }
     // }, [contextData.userData]);
 
+
+    const sidebarPositionName = router.pathname === '/' ? 'homePageSidebar' :
+        router.pathname === '/post' ? 'postPageSidebar' :
+            router.pathname === '/posts' ? 'postsPageSidebar' :
+                router.pathname === '/meta' ? 'metaPageSidebar' :
+                    router.pathname === '/page' ? props.pageInfo?.pageName + 'Sidebar' :
+                        'homePageSidebar'
+
+    const isWithSidebar = props?.identity?.data?.[sidebarPositionName] || contextData?.siteIdentity[sidebarPositionName] || props?.sidebar
+
+    // console.log(props)
     return (
-        <div className={'App ' + (props.sidebar ? 'withSidebar' : 'withOutSidebar')}>
-            <GlobalStyle globalStyleData={props.design?.data?.customStyles ?? ''}/>
-            <SiteSettingSetter identity={props.identity} design={props.design} eCommerce={props.eCommerce}/>
+        <div className={'App ' + (isWithSidebar ? 'withSidebar' : 'withOutSidebar')}>
+            <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/>
+            <SiteSettingSetter identity={props.identity || contextData.siteIdentity} design={props.design || contextData.siteDesign} eCommerce={props.eCommerce}/>
 
             {staticWidgets.topBar.length > 0 ?
                 <WidgetArea
@@ -76,8 +91,8 @@ const AppLayout = props => {
                     widgets={staticWidgets.topBar}
                     className='top-bar'
                     position='topBar'
-                    stylesData={props.design?.data?.topBarStyle}
-                    postElementSize={props.design?.data?.postElementSize}
+                    stylesData={props.design?.data?.topBarStyle || contextData.siteDesign.topBarStyle}
+                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     referer={props.referer}
                 /> : null
             }
@@ -86,8 +101,8 @@ const AppLayout = props => {
                     isMobile={props.isMobile}
                     key='header' widgets={staticWidgets.header}
                     className='header' position='header'
-                    stylesData={props.design?.data?.headerStyle}
-                    postElementSize={props.design?.data?.postElementSize}
+                    stylesData={props.design?.data?.headerStyle || contextData.siteDesign.headerStyle}
+                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     referer={props.referer}
                 /> : null
             }
@@ -98,19 +113,19 @@ const AppLayout = props => {
                     widgets={staticWidgets.navigation}
                     className='navigation'
                     position='navigation'
-                    stylesData={props.design?.data?.navigationStyle}
-                    postElementSize={props.design?.data?.postElementSize}
+                    stylesData={props.design?.data?.navigationStyle || contextData.siteDesign.navigationStyle}
+                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     referer={props.referer}
                 /> : null
             }
-            {sidebarWidgets.length > 0 && props.sidebar ?
+            {sidebarWidgets.length > 0 && isWithSidebar ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='sidebar'
                     widgets={sidebarWidgets}
                     className='sidebar '
-                    position={props.sidebarPosition}
-                    postElementSize={props.design?.data?.postElementSize}
+                    position={sidebarPositionName}
+                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     referer={props.referer}
                 /> : null
             }
@@ -122,8 +137,8 @@ const AppLayout = props => {
                     isMobile={props.isMobile}
                     widgets={sidebarWidgets.footer}
                     className='footer' position='footer'
-                    stylesData={props.design?.data?.footerStyle}
-                    postElementSize={props.design?.data?.postElementSize}
+                    stylesData={props.design?.data?.footerStyle || contextData.siteDesign.footerStyle}
+                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     referer={props.referer}
                 /> : null
             }

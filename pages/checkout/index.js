@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import dynamic from 'next/dynamic'
 import AppLayout from "../../components/layouts/AppLayout";
 import {getAbsolutePath} from "../../_variables/_variables";
-import {getMultipleSetting, getMultipleWidgetWithData} from "../../_variables/ajaxVariables";
+import {getFirstLoadData, getMultipleSetting, getMultipleWidgetWithData} from "../../_variables/ajaxVariables";
 import {AppContext} from "../../context/AppContext";
 import {getPost} from "../../_variables/ajaxPostsVariables";
 import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
@@ -240,24 +240,8 @@ const checkout = props => {
 };
 
 export const getServerSideProps = async ({req, query}) => {
-    const domainName = req ? await getAbsolutePath(req) : '';
-    let errorCode = 200
-    let settings;
-    let widgets;
-    const settingsData = await getMultipleSetting({settings: ['identity', 'navigation', 'design']}, domainName, true, 'tagsPage')
-    //const widgetsData = await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'tagsPage')
-    const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') :[]
-    settings = settingsData.data.settings ? settingsData.data.settings : []
-    // widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
-    widgets = firstLoadWidgetsData?.data?.widgets ?? []
-    const referer = !!req.headers.referer
-    let isMobile = (req
-        ? req.headers['user-agent']
-        : navigator.userAgent).match(
-        /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-    )
-    return {props: {...settings, isMobile: Boolean(isMobile), query, widgets,referer}}
+    const firstLoadData = await getFirstLoadData(req)
+    return {props: {widgets:firstLoadData.widgets,...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), query,referer:firstLoadData.referer}}
 }
-
 
 export default checkout;
