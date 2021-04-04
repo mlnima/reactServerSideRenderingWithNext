@@ -205,14 +205,11 @@ export const getOrders = async (data, domainName) => {
 export const getFirstLoadData = async req => {
     const domainName = req ? await getAbsolutePath(req) : '';
     const refererUrl = req?.headers?.referer
-    //console.log(refererUrl)
     const referer = refererUrl ? refererUrl.includes(req?.headers?.host) : false
-    //const referer = !!req.headers.referer
     const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
-    const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl || '')
-    const firstLoadWidgetsData = referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
-    //const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage')
-    const settingsData = referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage') : {}
+    const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl)
+    const firstLoadWidgetsData = !referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
+    const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage') : {}
     let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i)
 
     return {
