@@ -205,6 +205,7 @@ export const getOrders = async (data, domainName) => {
 export const getFirstLoadData = async  req =>{
     const domainName = req ? await getAbsolutePath(req) : '';
     const refererUrl = req?.headers?.referer
+    console.log(refererUrl)
     const referer = refererUrl ? refererUrl.includes(req?.headers?.host)  :false
     //const referer = !!req.headers.referer
     const isSameOrigin =  req.headers['sec-fetch-site'] === 'same-origin';
