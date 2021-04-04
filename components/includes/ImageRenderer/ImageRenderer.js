@@ -1,33 +1,29 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useMemo, useEffect} from 'react';
 import Image from 'next/image'
 import {checkRemovedContent} from "../../../_variables/ajaxPostsVariables";
 
 const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)
-    let imageUrl = props.imageUrl;
-    const isImageAbsolutePath = imageUrl?.includes('http')
-    const validImageForNextImage = ((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath
+    const isImageAbsolutePath = props.imageUrl?.includes('http')
+    const validImageForNextImage = ((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(props.imageUrl?.includes('http') ? new URL(props.imageUrl).hostname : undefined)) || !isImageAbsolutePath
     const noImageUrl = '/static/images/noImage/no-image-available.png';
 
-
-
-
-    const onErrorHandler= ()=>{
+    const onErrorHandler = () => {
         setGotError(true)
-        if (props.contentId && imageUrl){
-            let data={
-                checkUrl:imageUrl,
-                contentId:props.contentId
+        if (props.contentId && imageUrl) {
+            let data = {
+                checkUrl: imageUrl,
+                contentId: props.contentId
             }
-            setTimeout(()=>{
+            setTimeout(() => {
                 checkRemovedContent(data)
-            },0)
+            }, 0)
         }
     }
 
     if (validImageForNextImage) {
         return <Image
-            src={gotError ? noImageUrl : imageUrl}
+            src={gotError ? noImageUrl : props.imageUrl}
             alt={props.altValue || props.classNameValue}
             onError={onErrorHandler}
             onMouseEnter={props.hoverHandler}
@@ -47,7 +43,7 @@ const ImageRenderer = props => {
              height={props.imageHeight || 300 / 1.777}
              onMouseEnter={props.hoverHandler}
              onTouchStart={props.hoverHandler}
-             src={gotError ? noImageUrl : imageUrl}
+             src={gotError ? noImageUrl : props.imageUrl}
              onError={onErrorHandler}/>
     );
 };

@@ -78,10 +78,11 @@ const AppLayout = props => {
 
     const isWithSidebar = props?.identity?.data?.[sidebarPositionName] || contextData?.siteIdentity[sidebarPositionName] || props?.sidebar
 
-    // console.log(props)
+    console.log(props)
+    //<GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/>
     return (
         <div className={'App ' + (isWithSidebar ? 'withSidebar' : 'withOutSidebar')}>
-            <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/>
+            {!props.globalStyleDetected?<GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/>:null}
             <SiteSettingSetter identity={props.identity || contextData.siteIdentity} design={props.design || contextData.siteDesign} eCommerce={props.eCommerce}/>
 
             {staticWidgets.topBar.length > 0 ?
@@ -118,6 +119,7 @@ const AppLayout = props => {
                     referer={props.referer}
                 /> : null
             }
+
             {sidebarWidgets.length > 0 && isWithSidebar ?
                 <WidgetArea
                     isMobile={props.isMobile}
@@ -135,7 +137,7 @@ const AppLayout = props => {
             {staticWidgets.footer.length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
-                    widgets={sidebarWidgets.footer}
+                    widgets={staticWidgets.footer}
                     className='footer' position='footer'
                     stylesData={props.design?.data?.footerStyle || contextData.siteDesign.footerStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
