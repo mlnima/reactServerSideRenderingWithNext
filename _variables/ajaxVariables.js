@@ -204,7 +204,9 @@ export const getOrders = async (data, domainName) => {
 
 export const getFirstLoadData = async  req =>{
     const domainName = req ? await getAbsolutePath(req) : '';
-    const referer = !!req.headers.referer
+    const refererUrl = req?.headers?.referer
+    const referer = refererUrl ? refererUrl.includes(req?.headers?.host)  :false
+    //const referer = !!req.headers.referer
     const isSameOrigin =  req.headers['sec-fetch-site'] === 'same-origin';
     const isNavigatedFromPostPage = /video|post|article|product/.test(req.headers.referer)
     const firstLoadWidgetsData = !req.headers.referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []

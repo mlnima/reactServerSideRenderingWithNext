@@ -78,7 +78,7 @@ const AppLayout = props => {
 
     const isWithSidebar = props?.identity?.data?.[sidebarPositionName] || contextData?.siteIdentity[sidebarPositionName] || props?.sidebar
 
-    console.log(props)
+
     //<GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/>
     return (
         <div className={'App ' + (isWithSidebar ? 'withSidebar' : 'withOutSidebar')}>
