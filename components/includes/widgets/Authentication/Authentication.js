@@ -6,27 +6,17 @@ import LoggedInItemsForMenu from "./LoggedInItemsForMenu/LoggedInItemsForMenu";
 
 const Authentication = props => {
     const contextData = useContext(AppContext);
+    const [loggedIn, setLoggedIn] = useState(false)
 
-    const RenderAuthBtns = () => {
-        if (contextData.userData.username) {
-            return (
-                <div className='auth-buttons'>
-                    <LoggedInItemsForMenu position='topBar'/>
-                </div>
-            )
-        } else if (!contextData.userData.username) {
-            return (
-                <div className='auth-buttons'>
-                    <LoggedOutItemsMenu position='topBar'/>
-                </div>
-            )
-        } else return null
-    }
+    useEffect(() => {
+        contextData.userData.username ? setLoggedIn(true) : setLoggedIn(false)
+    }, [contextData.userData.username]);
 
     return (
+        <div className='auth-buttons'>
+            {loggedIn ? <LoggedInItemsForMenu position='topBar'/> : <LoggedOutItemsMenu position='topBar'/>}
 
-        <RenderAuthBtns/>
-
+        </div>
     );
 };
 export default Authentication;

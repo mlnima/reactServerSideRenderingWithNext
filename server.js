@@ -26,19 +26,15 @@ const app = next({dev});
 const handle = app.getRequestHandler();
 const apicache = require('apicache')
 const compression = require('compression')
-//cache page
-
-const normalizeUrl = require('normalize-url');
-const {resolve: urlResolve} = require('url');
-const Keyv = require('keyv');
+require('dotenv').config()
+const { parse } = require('url')
+const cors = require('cors')
 //cache api
 const cacheSuccesses = require('./server/middlewares/apiCache')
-const cors = require('cors')
-require('dotenv').config()
-//const cacheableResponse = require('cacheable-response')
+//cache page libraries and variables
 
 
-// const pageCache = require('./server/tools/pageCache')
+//-----
 mongoose.Promise = global.Promise;
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
@@ -51,26 +47,37 @@ mongoose.connect(mongoDBConnectionUrl, {
 })
     .then(() => console.log('DB connected'))
     .catch(err => console.log('DB not connected', err));
-//------------------------------------------------------------Page Cache doesnt work ok--------------------------
+//------------------------------------------------------------Page Cache doesnt work well--------------------------
 
-//-------------------------------------------------------------------------------------------------
 const robotsOptions = {
     root: './static/',
     headers: {'Content-Type': 'text/plain;charset=utf-8'}
 }
 
 const PORT = process.env.REACT_APP_PORT || 3000;
+
+function shouldCompress (req, res) {
+    if (req.headers['x-no-compression']) {
+        return false
+    }
+    return compression.filter(req, res)
+}
+
+
 app.prepare().then(() => {
     const server = express();
     server.use(cookieParser());
     server.use(fileUpload());
     server.use(bodyParser.json());
     server.use(xmlparser());
-  //  server.use(cors())
-
-    //-------------------
+    server.use(compression({ filter: shouldCompress }));
     server.use('/static', express.static(path.join(__dirname, 'static')))
-    //--------------------
+
+    server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
+        apicache.clear(req.params.collection)
+        res.end()
+    });
+
     server.get('/robots.txt', (req, res) => {
         res.set('Content-Type', 'text/plain;charset=utf-8');
         const robotTxtData = `User-agent: *
@@ -225,7 +232,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
     server.post('/api/v1/settings/getWidgetsWithData',cacheSuccesses, (req, res) => {
-        //need to be cache id page cache doesnt work
         //cacheSuccesses
         settingsControllers.getWidgetsWithData(req, res)
     });
@@ -243,11 +249,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         settingsControllers.executor(req, res)
     });
     //cache control
-    server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
-        apicache.clear(req.params.collection)
-        // clearCompleteCache()
-        res.end()
-    });
+
 
     //form
     server.post('/api/v1/form/contact', (req, res) => formController.contact(req, res));
@@ -308,18 +310,13 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/order/get',adminAuthMiddleware, (req, res) => {
         paymentControllers.getOrders(req, res)
     });
+//------------------------------- custom routes ---------------------------------
+//
+//     server.get('/',(req, res) => {
+//         return app.render(req, res,  '/')
+//     });
 
-
-//!!!!!!!caching issue : caching cause page refresh on route change
-    //const languages = process.env.REACT_APP_LOCALS.replace(' ','|')
-  // server.get(`/:locale(${languages})?`, (req, res) => cacheManager({ req, res,pagePath:'/',queryParams:{...req.query,...req.params} }))
-    // server.get(`/:locale(${languages})?`, (req, res) => ssrCache({ req, res }))
-    // server.get('/', (req, res) => {
-    //     const parsedUrl = parse(req.url, true)
-    //     return handle(req, res, parsedUrl)
-    // })
-
-    server.get('*', (req, res) => {
+    server.get('*',(req, res) => {
         return handle(req, res)
     });
 

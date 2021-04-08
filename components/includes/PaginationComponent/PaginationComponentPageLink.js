@@ -20,8 +20,10 @@ const PaginationComponentPageLink = props => {
               as={{
                   pathname: props.asPath,
                   query: asQuery
-              }}>
-            <a className={props.currentPage === props.pageNumber ? 'active-page' :''} onClick={()=>contextData.dispatchState({...contextData.state,loading:true})}>
+              }}
+              scroll={false}
+        >
+            <a className={props.currentPage === props.pageNumber ? 'active-page' :''} >
             {props.pageNumber}
         </a>
         </Link>

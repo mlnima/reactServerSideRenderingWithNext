@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import Link from 'next/link';
 import withRouter from 'next/dist/client/with-router'
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -16,11 +15,9 @@ const SearchInputComponent = props => {
         },
         isOpen: false
     });
+    const openStatus = !props.mobileMode
+    const [isOpen,setIsOpen] = useState(openStatus)
 
-    useEffect(() => {
-        // !props.mobileMode? setState({...state,isOpen: true}) :null
-        //     console.log(props.mobileMode)
-    }, []);
 
     useEffect(() => {
         setState({
@@ -28,13 +25,9 @@ const SearchInputComponent = props => {
             queries: props.router ? props.router.query : {},
             pathURL: props.router ? props.router.pathname.includes('meta') ? props.router.pathname : '/posts' : '/posts',
             keyword: props.router ? props.router.query ? props.router.query.keyword ? props.router.query.keyword : '' : '' : '',
-            isOpen: !props.mobileMode,
-            style: {
-                ...state.style,
-                backgroundColor: props.searchBtnBackgroundColor,
-                color: props.searchBtnColor,
-            }
+
         })
+        props.mobileMode ? setIsOpen(false): null;
     }, []);
 
 
@@ -105,12 +98,12 @@ const SearchInputComponent = props => {
     }
 
 
-    if (state.isOpen) {
+    if (isOpen) {
         return (
             <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
                 {props.mobileMode ?  <button className='search-bar-btn-close' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='svg-logo-small'/></button>:null }
                 <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
-                <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small' style={state.style}/></button>
+                <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small' /></button>
             </form>
         );
     } else {

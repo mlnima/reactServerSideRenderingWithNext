@@ -26,6 +26,15 @@ const AppLayout = props => {
     })
     const [sidebarWidgets, setSidebarWidgets] = useState([])
 
+    const firstLoadWidgets = Object.freeze({
+        topBar: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'topBar') || [] : [],
+        header: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'header') || [] : [],
+        navigation: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'navigation') || [] : [],
+        footer: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'footer') || [] : [],
+    })
+    const sidebarWidgetsData = props?.widgets ? props.widgets.filter(widget => widget?.data?.position === props.sidebarPosition) : []
+
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             if (!window.GA_INITIALIZED) {
@@ -38,17 +47,17 @@ const AppLayout = props => {
         if (!props.referer) {
             setStaticWidgets({
                 ...staticWidgets,
-                topBar: props.widgets.filter(widget => widget?.data?.position === 'topBar') || [],
-                header: props.widgets.filter(widget => widget?.data?.position === 'header') || [],
-                navigation: props.widgets.filter(widget => widget?.data?.position === 'navigation') || [],
-                footer: props.widgets.filter(widget => widget?.data?.position === 'footer') || [],
+                topBar: firstLoadWidgets.topBar,
+                header: firstLoadWidgets.header,
+                navigation: firstLoadWidgets.navigation,
+                footer: firstLoadWidgets.footer,
             })
         }
 
     }, []);
 
     useEffect(() => {
-        const sidebarWidgetsData = props.widgets.filter(widget => widget?.data?.position === props.sidebarPosition)
+
         if (sidebarWidgetsData.length > 0) {
             setSidebarWidgets(sidebarWidgetsData)
         }
@@ -82,14 +91,14 @@ const AppLayout = props => {
     //<GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/>
     return (
         <div className={'App ' + (isWithSidebar ? 'withSidebar' : 'withOutSidebar')}>
-            {!props.globalStyleDetected?<GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/>:null}
+            {!props.globalStyleDetected ? <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/> : null}
             <SiteSettingSetter identity={props.identity || contextData.siteIdentity} design={props.design || contextData.siteDesign} eCommerce={props.eCommerce}/>
 
-            {staticWidgets.topBar.length > 0 ?
+            {(!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar).length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='topBar'
-                    widgets={staticWidgets.topBar}
+                    widgets={!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar}
                     className='top-bar'
                     position='topBar'
                     stylesData={props.design?.data?.topBarStyle || contextData.siteDesign.topBarStyle}
@@ -97,21 +106,22 @@ const AppLayout = props => {
                     referer={props.referer}
                 /> : null
             }
-            {staticWidgets.header.length > 0 ?
+            {(!props.referer ? firstLoadWidgets.header : staticWidgets.header).length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
-                    key='header' widgets={staticWidgets.header}
+                    key='header'
+                    widgets={!props.referer ? firstLoadWidgets.header : staticWidgets.header}
                     className='header' position='header'
                     stylesData={props.design?.data?.headerStyle || contextData.siteDesign.headerStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     referer={props.referer}
                 /> : null
             }
-            {staticWidgets.navigation.length > 0 ?
+            {(!props.referer ? firstLoadWidgets.navigation : staticWidgets.navigation).length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='navigation'
-                    widgets={staticWidgets.navigation}
+                    widgets={!props.referer ? firstLoadWidgets.navigation : staticWidgets.navigation}
                     className='navigation'
                     position='navigation'
                     stylesData={props.design?.data?.navigationStyle || contextData.siteDesign.navigationStyle}
@@ -120,11 +130,12 @@ const AppLayout = props => {
                 /> : null
             }
 
-            {sidebarWidgets.length > 0 && isWithSidebar ?
+            {(!props.referer ? sidebarWidgetsData : sidebarWidgets).length > 0 && isWithSidebar ?
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='sidebar'
-                    widgets={sidebarWidgets}
+                    // widgets={!props.referer ? sidebarWidgetsData : sidebarWidgets}
+                    widgets={!props.referer ? sidebarWidgetsData : sidebarWidgets}
                     className='sidebar '
                     position={sidebarPositionName}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
@@ -134,10 +145,10 @@ const AppLayout = props => {
 
             {props.children}
 
-            {staticWidgets.footer.length > 0 ?
+            {(!props.referer ? firstLoadWidgets.footer : staticWidgets.footer).length > 0 ?
                 <WidgetArea
                     isMobile={props.isMobile}
-                    widgets={staticWidgets.footer}
+                    widgets={!props.referer ? firstLoadWidgets.footer : staticWidgets.footer}
                     className='footer' position='footer'
                     stylesData={props.design?.data?.footerStyle || contextData.siteDesign.footerStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}

@@ -15,7 +15,7 @@ const AlphabeticalNumericalRangeLinksWidget = props => {
             query: props.router ? {...props.router.query, startWith: i} : ''
         }
         return (
-            <Link key={i} href={path} as={router.asPath}><a>{i}</a></Link>
+            <Link key={i} href={path} as={router.asPath} scroll={false}><a>{i}</a></Link>
         )
     })
 

@@ -11,9 +11,7 @@ const MenuWidget = props => {
     const router = useRouter()
     const [open, setOpen] = useState(false);
 
-
     useEffect(() => {
-
         if (typeof window !== 'undefined') {
             let deviceWidth = 0
             deviceWidth = window.innerWidth
@@ -28,8 +26,6 @@ const MenuWidget = props => {
         }
     }
 
-
-
     const renderMenuItems = (props.menuItems.sort((a,b)=>a.itemIndex>b.itemIndex?1:-1) || []).map(menuItem => {
         if (menuItem.type === 'internal') {
             const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as :
@@ -38,7 +34,7 @@ const MenuWidget = props => {
 
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
-                    <Link href={menuItem.target} as={linkAsForMenuItems}>
+                    <Link href={menuItem.target} as={linkAsForMenuItems} scroll={false}>
                         <a onClick={menuItem.target.includes('#')? null:mobileNavigationOnClickHandler}>
                             {menuItem.translations?.[router.locale]?.name || menuItem.name }
                         </a>

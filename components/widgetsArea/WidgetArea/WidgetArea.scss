@@ -3,7 +3,6 @@
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: center;
-  //padding: 0 2%;
 }
 
 .top-bar{
@@ -14,6 +13,7 @@
 }
 .header{
   grid-area: header;
+
 }
 .footer{
   grid-area: footer;
@@ -21,17 +21,17 @@
 .main{
   grid-area: main;
   min-height: 100vh;
-  grid-gap: 2px;
+  //grid-gap: 2px;
 }
 .sidebar{
   grid-area: sidebar;
-  grid-gap: 2px;
+  //grid-gap: 2px;
 }
 
 
 .top-bar,.navigation{
   min-height: 48px;
-  height: auto;
+  //height: auto;
 }
 
 @media only screen and (min-width: 768px) {

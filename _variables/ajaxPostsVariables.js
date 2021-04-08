@@ -13,8 +13,6 @@ const cacheQueryGenerator = cache => {
 }
 
 export const getPosts = async (data, domainName,cache,queriesData) => {
-  console.log(queriesData)
-  console.log('nothing')
     const body = {
         ...data,
         cache

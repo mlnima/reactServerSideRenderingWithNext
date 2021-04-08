@@ -88,7 +88,6 @@ a {
 .withSidebar {
   display: grid;
   grid-template-columns: 1fr;
-  grid-gap: 1px;
   grid-template-areas:
             'top-bar'
             'header'
@@ -121,13 +120,11 @@ a {
   }
 }
 
-
 .error-page {
   display: flex;
   justify-content: center;
 
   .error-page-message {
-    //color: white;
     margin: 100px 0;
   }
 }

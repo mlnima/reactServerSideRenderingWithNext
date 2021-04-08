@@ -14,7 +14,6 @@ const AdminTools = props => {
         console: false
     });
 
-
         if (state.open) {
             return (
                 <div className='admin-tools' onKeyDown={e => e.keyCode === 192 ? adminConsoleOpenCloseHandler(contextData.userData,contextData.state,contextData.dispatchState) : null}>
@@ -26,9 +25,9 @@ const AdminTools = props => {
                             <FontAwesomeIcon icon={faUserShield} className='admin-tools-item-logo'/>
                         </a>
                     </Link>
-                    <p className='admin-tools-item' style={state.colorsStyle} onClick={() => contextData.functions.clearCaches()}>
+                    <a className='admin-tools-item' href='' style={state.colorsStyle} rel="noreferrer" onClick={() => contextData.functions.clearCaches()}>
                         <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
-                    </p>
+                    </a>
                     <p className='admin-tools-item' style={state.colorsStyle} onClick={() => adminConsoleOpenCloseHandler(contextData.userData,contextData.state,contextData.dispatchState)}>
                         <FontAwesomeIcon icon={faTerminal} className='admin-tools-item-logo'/>
                     </p>

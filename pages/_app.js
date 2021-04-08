@@ -1,4 +1,4 @@
-import React, { useEffect} from 'react';
+import React, {useEffect} from 'react';
 import AppProvider from "../context/AppContext";
 import AppLayout from "../components/layouts/AppLayout";
 import {useRouter} from "next/router";
@@ -35,14 +35,22 @@ import '../pages/auth/registerLogin.scss';
 import '../pages/profile/Profile.scss';
 import AdminLayout from "../components/layouts/AdminLayout";
 import {createGlobalStyle} from "styled-components";
+import * as Scroll from 'react-scroll';
+
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 // export function reportWebVitals(metric) {
 //     console.log(metric)
 // }
 
 const MyApp = ({Component, pageProps}) => {
-
     const router = useRouter()
+    const scroll = Scroll.animateScroll;
+
+
+    useEffect(() => {
+        scroll.scrollToTop();
+    }, [pageProps]);
+
 
     const sidebarPositionName = router.pathname === '/' ? 'homePageSidebar' :
         router.pathname === '/post' ? 'postPageSidebar' :
@@ -54,7 +62,7 @@ const MyApp = ({Component, pageProps}) => {
     if (!router.pathname.includes('/admin')) {
         return (
             <AppProvider>
-                {pageProps.design?.data?.customStyles ?<GlobalStyle globalStyleData={pageProps.design?.data?.customStyles}/>:null}
+                {pageProps.design?.data?.customStyles ? <GlobalStyle globalStyleData={pageProps.design?.data?.customStyles}/> : null}
                 <AppLayout
                     sidebar={pageProps.identity?.data?.[sidebarPositionName] || pageProps.pageInfo?.sidebar}
                     sidebarPosition={sidebarPositionName}

@@ -8,8 +8,6 @@ const fsExtra = require('fs-extra')
 const { spawn } = require('child_process');
 const shell = require('shelljs');
 const dataEncoder = require('../tools/dataEncoder')
-const mongoose = require('mongoose')
-const sassConverter = require('sass-convert');
 let settingsControllers = {}
 
 settingsControllers.update = (req, res) => {

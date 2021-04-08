@@ -29,29 +29,14 @@ const Post = props => {
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)
         }
-
-    }, []);
-
-    useEffect(() => {
-        if (router.query.mode === 'edit') {
-            setState({
-                ...state,
-                editMode: true
-            })
-        } else {
-            setState({
-                ...state,
-                editMode: false
-            })
-        }
     }, []);
 
     if (props.responseCode !== 200) {
-        return <Error responseCode={props.responseCode} />
+        return <Error responseCode={props.responseCode}/>
     } else return (
         <>
             <PostMetaDataToSiteHead {...props}/>
-            <StyledDiv stylesData={props.design?.data?.postPageStyle || contextData.siteDesign.postPageStyle ||''} className='main post-page'>
+            <StyledDiv stylesData={props.design?.data?.postPageStyle || contextData.siteDesign.postPageStyle || ''} className='main post-page'>
                 <VideoPlayer {...props.post}/>
                 <SlideShow {...props.post} sidebar={props?.identity?.data?.postPageSidebar} deviceWidth={deviceWidth}/>
                 <PostInfo
@@ -80,7 +65,7 @@ const Post = props => {
                         <WidgetsRenderer deviceWidth={deviceWidth}
                                          widgets={(props.widgets || []).filter(widget => widget.data.position === 'underPost')}
                                          position='underPost'
-                                         postElementSize={props.design?.data?.postElementSize||contextData.siteDesign.postElementSize}/>
+                                         postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}/>
                     </div> : null}
 
             </StyledDiv>
@@ -94,15 +79,17 @@ export const getServerSideProps = async ({req, query}) => {
     let responseCode = 200
     const postData = await getPost({_id: query.id}, firstLoadData.domainName, true)
     const post = postData.data.post;
-    const widgetsData = (!firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) || (firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage)? await getMultipleWidgetWithData({widgets: ['postPageSidebar', 'underPost',]}, firstLoadData.domainName, true, 'postPage') :[]
-    if (!post){
-        responseCode = 404
+    const widgetsData = (!firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) || (firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) ? await getMultipleWidgetWithData({widgets: ['postPageSidebar', 'underPost',]}, firstLoadData.domainName, true, 'postPage') : []
+    if (!post) {
+        return {
+            notFound: true
+        }
     }
     const commentsData = post ? await getComments({onDocument: post._id}, firstLoadData.domainName, true) : {}
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
     const comments = post ? commentsData?.data?.comments : []
 
-    return {props: {widgets,...firstLoadData.settings,post: post || responseCode, query, isMobile: Boolean(firstLoadData.isMobile),  comments,referer: firstLoadData.referer,responseCode}}
+    return {props: {widgets, ...firstLoadData.settings, post: post || responseCode, query, isMobile: Boolean(firstLoadData.isMobile), comments, referer: firstLoadData.referer, responseCode}}
 }
 
 

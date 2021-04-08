@@ -25,6 +25,7 @@ const Logo = props => {
             setHeadLineData(props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine)
         }
     }, [contextData.state.activeLanguage]);
+
     return (
         <Link href='/'>
             <a className='logo'>

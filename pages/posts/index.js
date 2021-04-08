@@ -33,7 +33,6 @@ const posts = props => {
 
 export const getServerSideProps = async ({req, query}) => {
     const firstLoadData = await getFirstLoadData(req)
-
     const getPostsData = {
         size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
         pageNo: parseInt(query.page) || 1,

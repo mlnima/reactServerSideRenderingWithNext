@@ -1,5 +1,4 @@
 import React from 'react';
-import AppLayout from '../components/layouts/AppLayout'
 
 const Custom404 = props => {
 

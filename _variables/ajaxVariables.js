@@ -202,10 +202,10 @@ export const getOrders = async (data, domainName) => {
     return await axios.post(domainName + `/api/v1/order/get`, body)
 };
 
-export const getFirstLoadData = async req => {
+export const getFirstLoadData = async (req) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     const refererUrl = req?.headers?.referer
-    const referer = refererUrl ? refererUrl.includes(req?.headers?.host) : false
+    const referer = refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false
     const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
     const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl)
     const firstLoadWidgetsData = !referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
@@ -220,6 +220,20 @@ export const getFirstLoadData = async req => {
         isSameOrigin,
         isNavigatedFromPostPage,
         isMobile,
+    }
+}
 
+export const getStaticLoadData = async () => {
+    const domainName = process.env.PRODUCTION_URL
+    const firstLoadWidgetsData = await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData')
+    const settingsData =  await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage')
+    return {
+        domainName,
+        settings: settingsData?.data?.settings ?? [],
+        widgets: firstLoadWidgetsData?.data?.widgets ?? [],
+        referer:false,
+        isSameOrigin:false,
+        isNavigatedFromPostPage:false,
+        isMobile:false,
     }
 }

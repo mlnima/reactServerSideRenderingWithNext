@@ -4,6 +4,7 @@ import Head from 'next/dist/next-server/lib/head'
 import {useRouter} from "next/router";
 import parse from 'html-react-parser';
 
+
 const SiteSettingSetter = props => {
 
     const contextData = useContext(AppContext);
@@ -19,6 +20,12 @@ const SiteSettingSetter = props => {
             ...contextData.state,
             activeLanguage: manuallyDetectedLocale
         })
+        // if (!router.defaultLocale && !router.locale){
+        //     console.log(router)
+        //     router.defaultLocale = manuallyDetectedLocale
+        //     router.locale= manuallyDetectedLocale
+        // }
+        // console.log(router)
     }, []);
 
 

@@ -58,12 +58,12 @@ export const getServerSideProps = async ({req, query, res}) => {
     const dataForGettingMeta = {
         type: typeData,
         searchForImageIn: query.contentType||typeData,
-        page: parseInt(query.page) || 1,
-        size: parseInt(query.size) || 30,
-        sort: query.sort || 'latest',
-        startWith: query.startWith || 'any',
-        keyword: query.keyword || '',
-        lang: query.lang || 'default'
+        page: parseInt(query?.page) || 1,
+        size: parseInt(query?.size) || 30,
+        sort: query?.sort || 'latest',
+        startWith: query?.startWith || 'any',
+        keyword: query?.keyword || '',
+        lang: query?.lang || 'default'
     }
     const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar']}, firstLoadData.domainName, true, 'tagsPage')
     const metaData = await getMeta(dataForGettingMeta, firstLoadData.domainName, true)
