@@ -324,7 +324,9 @@ postsControllers.getMeta = async (req, res) => {
     metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
         const mapMetaToGetImage = metas.map(async meta => {
             try {
-                const noImageUrl = await postSchema.find({[type.type]: meta._id}).limit(1).sort('-_id').exec().then(lastPost => {
+                const countPostsHasCurrentMeta =  await postSchema.countDocuments({$and:[{[type.type]: meta._id},{status:'published'}]}).exec()
+                const skipForNoImageUrl = Math.floor(Math.random() * countPostsHasCurrentMeta)
+                const noImageUrl = await postSchema.find({$and:[{[type.type]: meta._id},{status:'published'}]}).skip(skipForNoImageUrl).limit(1).sort('-_id').exec().then(lastPost => {
                     //.skip(Math.floor(Math.random() * metaCount))
                     if (lastPost[0]) {
                         return lastPost[0].mainThumbnail
@@ -336,11 +338,9 @@ postsControllers.getMeta = async (req, res) => {
                     res.end()
                 })
 
-
-
                 return {
                     ...meta.toObject(),
-                    count: await postSchema.countDocuments({[type.type]: meta._id}).exec(),
+                    count: countPostsHasCurrentMeta,
                     noImageUrl
                 }
             } catch (e) {
@@ -469,11 +469,13 @@ postsControllers.export = (req, res) => {
 postsControllers.checkRemovedContent = (req,res)=>{
     const checkUrl=req.body.checkUrl
     const contentId = req.body.contentId
-    if (checkUrl&&contentId){
-        axios(checkUrl).then(res=>{
+    if (checkUrl){
+        axios(checkUrl).then(result=>{
+            res.end()
         }).catch(err=>{
             if (err?.response?.status === 404){
-                postSchema.findOneAndUpdate({_id:contentId},{$set: { status: 'pending' }}, {new: true}).exec()
+                console.log(contentId,' deleted')
+                postSchema.findOneAndUpdate({mainThumbnail:checkUrl},{$set: { status: 'pending' }}, {new: true}).exec()
             }
             res.end()
         })

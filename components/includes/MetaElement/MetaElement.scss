@@ -3,8 +3,8 @@
 @import "../../../styles/buttons";
 
 .meta-page-item {
-  background-color: $dark90;
-  width: 90vw;
+  //background-color: $dark90;
+  width: 48vw;
   height: auto;
   margin: auto;
   .meta-page-item-image-parent {
@@ -17,7 +17,7 @@
       //position: relative;
       width: 100%;
       height: auto;
-      border: $dark90 1px solid  ;
+      //border: $dark90 1px solid  ;
 
       //display: block;
       //object-fit: cover;
@@ -28,8 +28,13 @@
     width: 100%;
     height: auto;
     //margin: auto;
-    color: $light100;
+   // color: $light100;
+
     text-align: center;
+    p{
+      mix-blend-mode: difference;
+      color:white;
+    }
   }
 }
 

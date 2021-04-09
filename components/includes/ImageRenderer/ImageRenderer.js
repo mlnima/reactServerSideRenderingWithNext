@@ -9,15 +9,16 @@ const ImageRenderer = props => {
     const validImageForNextImage = ((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(props.imageUrl?.includes('http') ? new URL(props.imageUrl).hostname : undefined)) || !isImageAbsolutePath
     const noImageUrl = '/static/images/noImage/no-image-available.png';
 
-    const onErrorHandler = () => {
+    const onErrorHandler = e => {
 
-        if (props.contentId && props.imageUrl && !isReported) {
+        if (props.imageUrl) {
             setGotError(true)
             setIsReported(true)
             let data = {
                 checkUrl: props.imageUrl,
                 contentId: props.contentId
             }
+            console.log('error')
             setTimeout(() => {
                 checkRemovedContent(data)
             }, 0)
@@ -26,9 +27,12 @@ const ImageRenderer = props => {
 
     if (validImageForNextImage) {
         return <Image
-            src={gotError ? noImageUrl : props.imageUrl}
+            src={ !gotError?  props.imageUrl || noImageUrl : noImageUrl }
             alt={props.altValue || props.classNameValue}
-            onError={onErrorHandler}
+            onError={e=> {
+                onErrorHandler(e)
+                setGotError(true)
+            }}
             onMouseEnter={props.hoverHandler}
             onTouchStart={props.hoverHandler}
             className={props.classNameValue}
@@ -46,8 +50,11 @@ const ImageRenderer = props => {
              height={props.imageHeight || 300 / 1.777}
              onMouseEnter={props.hoverHandler}
              onTouchStart={props.hoverHandler}
-             src={gotError ? noImageUrl : props.imageUrl}
-             onError={onErrorHandler}/>
+             src={!gotError?  props.imageUrl || noImageUrl : noImageUrl  }
+             onError={e=> {
+                 onErrorHandler(e)
+                 setGotError(true)
+             }}/>
     );
 };
 export default ImageRenderer;

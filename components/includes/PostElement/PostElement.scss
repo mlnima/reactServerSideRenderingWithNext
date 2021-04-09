@@ -38,10 +38,11 @@
 
 .post-element-div-medium,.post-element-div-small,.post-element-div-smaller{
   .post-element {
-    width: 95vw;
+    width: 48vw;
     .image{
       video{
-        width: 95vw;
+        width: 48vw;
+        //aspect-ratio: 16 / 9;
       }
     }
   }
@@ -174,18 +175,18 @@
     }
   }
   .post-element-div-small{
-    width: 256.6px;
+    width: 255px;
     .post-element {
-      width: 256.6px;
+      width: 255px;
       .image{
-        max-width: 256.6px;
+        max-width: 255px;
         .post-element-external-image,.post-element-internal-image,video{
-          width: 256.6px;
+          width: 255px;
         }
       }
 
       h3 {
-        width: 256.6px;
+        width: 255px;
       }
     }
   }

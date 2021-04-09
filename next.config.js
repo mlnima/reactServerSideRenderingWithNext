@@ -4,6 +4,7 @@ const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const languages = process.env.REACT_APP_LOCALS.replace(' ', '|')
 const locales = process.env.REACT_APP_LOCALS.split(' ')
+require('webpack')
 
 const i18nConfig = locales.length === 1 ? {} : {
     i18n: {
@@ -19,8 +20,8 @@ const reDirectRoutes = {
     redirects: async () => {
         return [
             {
-                source: '/en',
-                destination: '/fa',
+                source: '/',
+                destination: '/',
                 permanent: false,
                 // locale: true
             },

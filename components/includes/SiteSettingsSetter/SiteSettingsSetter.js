@@ -38,7 +38,10 @@ const SiteSettingSetter = props => {
             <meta charSet="utf-8"/>
             <meta name="description" content={(props.identity?.data?.translations?.[router.locale]?.description||contextData?.siteIdentity?.translations?.[router.locale]?.description) || (props.identity?.data?.description||contextData?.siteIdentity?.description) || ''}/>
             {props.identity?.data?.keywords?.length>0?<meta name="keywords" content={props.identity?.data.keywords ||contextData?.siteIdentity?.keywords|| []}/>:null}
-            <link rel="icon" href={props.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
+            {/*<link rel="icon" href={props.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>*/}
+            <link rel="shortcut icon" href={props.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
+            <link rel="apple-touch-icon" href={props.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
+            <link rel="manifest" href="/manifest.json"/>
             {props.identity?.data?.customScriptsAsString ? parse(props.identity?.data?.customScriptsAsString) : null}
             {props?.identity?.data?.siteMode === 'eCommerce' || contextData?.siteIdentity?.siteMode === 'eCommerce'  ?
                 <script src={`https://www.paypal.com/sdk/js?client-id=${props?.eCommerce?.data?.payPalId}&currency=${props?.eCommerce?.data?.currency}`}/>

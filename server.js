@@ -27,10 +27,11 @@ const handle = app.getRequestHandler();
 const apicache = require('apicache')
 const compression = require('compression')
 require('dotenv').config()
-const { parse } = require('url')
+const {parse} = require('url')
 const cors = require('cors')
 //cache api
 const cacheSuccesses = require('./server/middlewares/apiCache')
+const settingSchema = require('./server/models/settings/settingSchema')
 //cache page libraries and variables
 
 
@@ -56,7 +57,7 @@ const robotsOptions = {
 
 const PORT = process.env.REACT_APP_PORT || 3000;
 
-function shouldCompress (req, res) {
+function shouldCompress(req, res) {
     if (req.headers['x-no-compression']) {
         return false
     }
@@ -70,7 +71,7 @@ app.prepare().then(() => {
     server.use(fileUpload());
     server.use(bodyParser.json());
     server.use(xmlparser());
-    server.use(compression({ filter: shouldCompress }));
+    server.use(compression({filter: shouldCompress}));
     server.use('/static', express.static(path.join(__dirname, 'static')))
 
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
@@ -87,6 +88,25 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         res.send(robotTxtData);
         res.end()
 
+    });
+
+    //manifest
+    server.get('/manifest.json', cacheSuccesses, async (req, res) => {
+        const identityData = await settingSchema.findOne({type: 'identity'})
+        const manifestJsonData = {
+            "theme_color": identityData.data.themeColor || '#000',
+            "background_color": identityData.data.themeColor || '#000',
+            "name": identityData.data.title || 'React CMS website',
+            "icons": [{
+                "src":  identityData?.data?.favIcon || '/static/images/favIcon/favicon.png',
+                "sizes": "512x512",
+                "type": "image/png",
+                "purpose": "any maskable"
+            }
+            ]
+        }
+        res.json(manifestJsonData)
+        res.end()
     });
 
     //xml siteMap handler
@@ -135,12 +155,12 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts',cacheSuccesses, (req, res) => {
+    server.post('/api/v1/posts', cacheSuccesses, (req, res) => {
         //need to be cache id page cache doesnt work
         //cacheSuccesses
         postsControllers.getPostsInfo(req, res)
     });
-    server.post('/api/v1/posts/post',cacheSuccesses, (req, res) => {
+    server.post('/api/v1/posts/post', cacheSuccesses, (req, res) => {
         //need to be cache id page cache doesnt work
         postsControllers.getPostInfo(req, res)
     });
@@ -169,7 +189,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
 
     //meta data handler(tags,categories...)
-    server.post('/api/v1/posts/getMeta',cacheSuccesses, (req, res) => {
+    server.post('/api/v1/posts/getMeta', cacheSuccesses, (req, res) => {
         //need to be cache id page cache doesnt work
         postsControllers.getMeta(req, res)
     });
@@ -206,7 +226,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/settings/get', (req, res) => {
         settingsControllers.get(req, res)
     });
-    server.post('/api/v1/settings/getMultiple',cacheSuccesses, (req, res) => {
+    server.post('/api/v1/settings/getMultiple', cacheSuccesses, (req, res) => {
         //need to be cache id page cache doesnt work
         //cacheSuccesses
         settingsControllers.getMultiple(req, res)
@@ -222,7 +242,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     });
 
     //cacheSuccesses
-    server.post('/api/v1/settings/getMultipleWidgetWithData',cacheSuccesses, (req, res) => {
+    server.post('/api/v1/settings/getMultipleWidgetWithData', cacheSuccesses, (req, res) => {
         // console.log(req.body)
         //need to be cache id page cache doesnt work
         //cacheSuccesses
@@ -230,8 +250,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     });
 
 
-
-    server.post('/api/v1/settings/getWidgetsWithData',cacheSuccesses, (req, res) => {
+    server.post('/api/v1/settings/getWidgetsWithData', cacheSuccesses, (req, res) => {
         //cacheSuccesses
         settingsControllers.getWidgetsWithData(req, res)
     });
@@ -307,7 +326,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/order/create/payPal', (req, res) => {
         paymentControllers.order_payPal(req, res)
     });
-    server.post('/api/v1/order/get',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/order/get', adminAuthMiddleware, (req, res) => {
         paymentControllers.getOrders(req, res)
     });
 //------------------------------- custom routes ---------------------------------
@@ -316,7 +335,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 //         return app.render(req, res,  '/')
 //     });
 
-    server.get('*',(req, res) => {
+    server.get('*', (req, res) => {
         return handle(req, res)
     });
 

@@ -30,7 +30,6 @@ const Home = props => {
 
 //SSR
 const getServerSideProps = async (context) => {
-
     const firstLoadData = await getFirstLoadData(context.req)
     const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home']}, firstLoadData.domainName, true, 'homePage')
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
@@ -46,7 +45,7 @@ const getStaticProps = async (context) => {
 }
 
 
-export {getServerSideProps}
+export {getServerSideProps }
 
 
 export default Home;
