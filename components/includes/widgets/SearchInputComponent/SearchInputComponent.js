@@ -16,7 +16,7 @@ const SearchInputComponent = props => {
         isOpen: false
     });
     const openStatus = !props.mobileMode
-    const [isOpen,setIsOpen] = useState(openStatus)
+    const [isOpen, setIsOpen] = useState(openStatus)
 
 
     useEffect(() => {
@@ -27,7 +27,7 @@ const SearchInputComponent = props => {
             keyword: props.router ? props.router.query ? props.router.query.keyword ? props.router.query.keyword : '' : '' : '',
 
         })
-        props.mobileMode ? setIsOpen(false): null;
+        props.mobileMode ? setIsOpen(false) : null;
     }, []);
 
 
@@ -65,7 +65,7 @@ const SearchInputComponent = props => {
 
     const asQuery = {keyword: state.keyword ? state.keyword : undefined, page: router.query.page ? router.query.page : undefined, content: router.query.content ? router.query.content : undefined,}
     !asQuery.keyword ? delete asQuery.keyword : null;
-    asQuery.page == 1 ? delete asQuery.page : null;
+    asQuery.page === 1 ? delete asQuery.page : null;
     !asQuery.page ? delete asQuery.page : null;
     !asQuery.content ? delete asQuery.content : null;
 
@@ -76,7 +76,8 @@ const SearchInputComponent = props => {
             pathname: mainPath,
             query: {
                 ...state.queries,
-                keyword: state.keyword
+                keyword: state.keyword,
+                page:1
             }
         }, {
             pathname: asPath,
@@ -85,30 +86,25 @@ const SearchInputComponent = props => {
     }
 
 
-    const onOpenCloseHandler = () => {
-        state.isOpen ?
-            setState({
-                ...state,
-                isOpen: false
-            }) :
-            setState({
-                ...state,
-                isOpen: true
-            })
+    const onOpenCloseHandler = e => {
+        e.preventDefault()
+        isOpen ?
+            setIsOpen(false) :
+            setIsOpen(true)
     }
-
 
     if (isOpen) {
         return (
             <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
-                {props.mobileMode ?  <button className='search-bar-btn-close' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faTimes} className='svg-logo-small'/></button>:null }
+                {props.mobileMode && isOpen ?
+                    <button className='search-bar-btn-close' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}><FontAwesomeIcon icon={faTimes} className='svg-logo-small'/></button> : null}
                 <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
-                <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small' /></button>
+                <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small'/></button>
             </form>
         );
     } else {
         return (
-            <button className='search-bar-btn-open' aria-label='Center Align' onClick={onOpenCloseHandler}><FontAwesomeIcon icon={faSearch} className='svg-logo-small'/></button>
+            <button className='search-bar-btn-open' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}><FontAwesomeIcon icon={faSearch} className='svg-logo-small'/></button>
         )
     }
 

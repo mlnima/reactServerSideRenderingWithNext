@@ -30,39 +30,8 @@ const PostSwiper = props => {
         imageRatioHeight: 10,
     });
 
-    useEffect(() => {
-        // setState({
-        //     ...state,
-        //     spaceBetween: window.innerWidth > 768 ? parseInt(props.spaceBetweenAmountDesktop) || 3 : parseInt(props.spaceBetweenAmountMobile) || 1,
-        //     slidesPerView: (window.innerWidth || 320) >= 768 ? parseInt(props.slideAmountInDesktop) || 3 : parseInt(props.slideAmountInMobile) || 1,
-        //     imageRatioWidth: parseInt(props.imageRatioWidth) || 16,
-        //     imageRatioHeight: parseInt(props.imageRatioHeight) || 9,
-        // })
-
-        // if (window.innerWidth > 768) {
-        //     setImageSize({
-        //         width: props.currentPageSidebar ? (window.innerWidth - 300) / state.slidesPerView : window.innerWidth / state.slidesPerView,
-        //         height: props.currentPageSidebar ? ((window.innerWidth - 300) / state.slidesPerView) / (state.imageRatioWidth / state.imageRatioHeight) : (props.deviceWidth / state.slidesPerView) / (state.imageRatioWidth / state.imageRatioHeight)
-        //     })
-        // } else {
-        //
-        //     setImageSize({
-        //         width: window.innerWidth / parseInt(props.slideAmountInMobile || 1),
-        //         height: (window.innerWidth / parseInt(props.slideAmountInMobile || 1)) / (state.imageRatioWidth / state.imageRatioHeight)
-        //     })
-        // }
-
-        //console.log(props.slideAmountInDesktop)
-    }, [props]);
-
-    // useEffect(() => {
-    //     console.log(window.innerWidth)
-    // }, []);
-
 
     const renderSlides = props.posts.map(post => {
-
-
         const RenderImageElement = () => {
             const slidePerView = ((window.innerWidth/100) * 95)  >= 768 ? parseInt(props.slideAmountInDesktop) || 3 : parseInt(props.slideAmountInMobile) || 1
             let imageWidth;
@@ -74,11 +43,6 @@ const PostSwiper = props => {
                 imageWidth = ((window.innerWidth/100) * 95) / parseInt(props.slideAmountInMobile || 1)
                 imageHeight = (((window.innerWidth/100) * 95) / parseInt(props.slideAmountInMobile || 1)) / (props.imageRatioWidth / props.imageRatioHeight)
             }
-            //
-            // console.log(imageWidth)
-            // console.log(imageHeight)
-            // console.log(((((window.innerWidth/100) * 95) - 300) / slidePerView)/ (state.imageRatioWidth / state.imageRatioHeight))
-
             if (post.mainThumbnail.includes('http') || post.mainThumbnail.includes(window.location.hostname)) {
                 return (
                         <img className='post-slider-item-external-image'
@@ -87,19 +51,16 @@ const PostSwiper = props => {
                 )
             } else {
                 return (
-
                     <Image
                         className='post-slider-item-internal-image'
                         src={post.mainThumbnail}
                         alt={`Thumbnail ${post.mainThumbnail}`}
                         width={imageWidth}
                         height={imageHeight}
-                        quality={85}
+                        quality={100}
                         layout='intrinsic'
                         loading='lazy'
                     />
-
-
                 )
             }
         }
@@ -130,11 +91,11 @@ const PostSwiper = props => {
                 // autoplay={props.sliderAutoplay === 'true'}
                 autoplay
                 speed={parseInt(props.sliderSpeed) || 1000}
-                navigation
+               // navigation
                 scrollbar={{draggable: true}}
                 effect={props.sliderEffect || false}
-                spaceBetween={window.innerWidth >= 768 ? parseInt(props.spaceBetweenAmountDesktop) || 1 : parseInt(props.spaceBetweenAmountMobile) || 1}
-                slidesPerView={window.innerWidth >= 768 ? parseInt(props.slideAmountInDesktop) || 3 : parseInt(props.slideAmountInMobile) || 1}
+                spaceBetween={window.innerWidth > 768 ? parseInt(props.spaceBetweenAmountDesktop) || 1 : parseInt(props.spaceBetweenAmountMobile) || 1}
+                slidesPerView={window.innerWidth > 768 ? parseInt(props.slideAmountInDesktop) || 3 : parseInt(props.slideAmountInMobile) || 1}
                 style={{
                     maxWidth: window.innerWidth >= 768 && props.currentPageSidebar ? '70vw' :
                         window.innerWidth >= 768 && !props.currentPageSidebar ? '95vw' :

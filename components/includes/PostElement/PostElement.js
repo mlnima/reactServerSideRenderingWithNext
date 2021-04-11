@@ -118,9 +118,7 @@ const PostElement = props => {
                 as={linkAsForPostElement}
                 scroll={false}
             >
-                <a
-                    //onClick={() => contextData.dispatchState({...contextData.state, loading: true})}
-                >
+                <a rel='noreferrer'>
                     <div className={'post-element '} key={props.state.title}>
                         <div className="image">
                             <ImageContent/>

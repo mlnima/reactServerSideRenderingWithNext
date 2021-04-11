@@ -21,9 +21,9 @@ const ColorSection = props => {
         <div className='colorSettingSection'>
             <p>{props.designName ? convertVariableNameToName(props.designName) : ''} : </p>
 
-            <DelayInput className='colorSettingSectionInput' name={props.designName}
+            <input className='colorSettingSectionInput' name={props.designName}
                         value={contextData.siteDesign[props.designName]}
-                        delayTimeout={1000}
+
                         onChange={e => onChangeHandler(e)}/>
             <input ref={inputColorElement}  className='colorSettingSectionInputColorType' type='color' name={props.designName} onChange={e => onChangeHandler(e)} value={contextData.siteDesign[props.designName]}/>
             <div onClick={()=>inputColorElement.current.click()} className="previewColor" style={{backgroundColor: contextData.siteDesign[props.designName]}}/>

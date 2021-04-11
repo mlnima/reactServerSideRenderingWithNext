@@ -46,7 +46,6 @@ const AppLayout = props => {
 
         if (!props.referer) {
             setStaticWidgets({
-                ...staticWidgets,
                 topBar: firstLoadWidgets.topBar,
                 header: firstLoadWidgets.header,
                 navigation: firstLoadWidgets.navigation,

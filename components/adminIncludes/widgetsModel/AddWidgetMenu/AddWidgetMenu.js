@@ -10,6 +10,7 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu {...props} type='textEditor' name='Text Editor'/>
             <AddWidgetWithPositionMenu {...props} type='menu' name='Menu'/>
             <AddWidgetWithPositionMenu {...props} type='linkTo' name='Link To'/>
+            <AddWidgetWithPositionMenu {...props} type='multipleLinkTo' name='Multiple Link To'/>
             <AddWidgetWithPositionMenu {...props} type='posts' name='Posts'/>
             <AddWidgetWithPositionMenu {...props} type='media' name='Media'/>
             <AddWidgetWithPositionMenu {...props} type='recentComments' name='Recent Comments'/>

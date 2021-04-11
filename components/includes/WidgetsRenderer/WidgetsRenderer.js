@@ -16,6 +16,7 @@ const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'),{ ss
 const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
+const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
 
 const WidgetsRenderer =  props => {
 
@@ -24,8 +25,10 @@ const WidgetsRenderer =  props => {
     },[props.widgets])
 
     const renderWidgets = widgets?.map(widget => {
+
         const targetComponent =
             widget.data.type === 'posts' ? Posts :
+            widget.data.type === 'multipleLinkTo' ? MultipleLinkTo :
             widget.data.type === 'media' ? MediaWidget :
             widget.data.type === 'text' ? null :
             widget.data.type === 'textEditor' ? null :

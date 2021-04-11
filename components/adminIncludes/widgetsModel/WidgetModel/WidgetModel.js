@@ -11,6 +11,8 @@ import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import MonacoEditorComponent from "../../MonacoEditorComponent/MonacoEditorComponent";
 import Editor from "@monaco-editor/react";
 import SearchTypeInputFields from "./SearchTypeInputFields/SearchTypeInputFields";
+import MultipleLinkWidgetModelFields from "./MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields";
+import _ from "lodash";
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
 const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'))
@@ -189,15 +191,17 @@ const WidgetModel = props => {
             widgets[findIndexOfTheWidget] = updatedWidget
         } else {
             const dataToSave = {
-                _id: props.widgetId ? props.widgetId : '',
+                _id:  props.widgetId || '',
                 data: {
                     ...widgetData,
                     widgetIndex: valueToSet
                 }
             }
-            console.log(valueToSet, dataToSave)
             updateWidgets(dataToSave).then(() => {
-                props.getAndSetWidgetsData()
+                setTimeout(()=>{
+                    props.getAndSetWidgetsData()
+                },0)
+
             })
         }
     };
@@ -241,14 +245,7 @@ const WidgetModel = props => {
     };
 
 
-    const renderCustomPagesPosition = props.customPages.map(customPage => {
-        return (
-            <>
-                <option value={customPage} key={customPage + '1'}>{convertVariableNameToName(customPage)}</option>
-                <option value={customPage + 'Sidebar'} key={customPage + '2'}>{convertVariableNameToName(customPage) + ' Sidebar'}</option>
-            </>
-        )
-    })
+
 
 
     const RenderOptionByFormat = () => {
@@ -416,7 +413,7 @@ const WidgetModel = props => {
 
 
 
-                <div className='widgetModel' key={props.widgetId}>
+                <div className='widgetModel' >
                     <WidgetHeaderControl setKey={false} widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} changeWidgetIndex={changeWidgetIndex} onOpenHandler={onOpenHandler}/>
                     <div className='widgetInfo'>
                         <label className='widgetId'>
@@ -497,7 +494,14 @@ const WidgetModel = props => {
                             <option value='actorsPagesSidebar'>Actors Page SideBar</option>
                             <option value='footer'>Footer</option>
                             <option value='deactivate'>Deactivate</option>
-                            {renderCustomPagesPosition}
+                            {(props.customPages||[]).map(customPage => {
+                                return (
+                                    <React.Fragment key={_.uniqueId('id_')}>
+                                        <option value={customPage} key={customPage + '1'}>{convertVariableNameToName(customPage)}</option>
+                                        <option value={customPage + 'Sidebar'} key={customPage + '2'}>{convertVariableNameToName(customPage) + ' Sidebar'}</option>
+                                    </React.Fragment>
+                                )
+                            })}
                         </select>
                     </div>
 
@@ -636,6 +640,7 @@ const WidgetModel = props => {
 
 
                     {widgetData.type === 'searchBar' ?<SearchTypeInputFields widgetData={widgetData} widgetSettings={widgetSettings} onTextInputsDataChangeHandler={onTextInputsDataChangeHandler} onChangeHandler={onChangeHandler}/>:null }
+                    {widgetData.type === 'multipleLinkTo' ?<MultipleLinkWidgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData}/>:null }
 
 
                     <div className='textInputFieldForWidget widgetSection'>
@@ -691,7 +696,7 @@ const WidgetModel = props => {
         );
     } else {
         return (
-            <WidgetHeaderControl widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} changeWidgetIndex={changeWidgetIndex} onOpenHandler={onOpenHandler}/>
+            <WidgetHeaderControl  widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} changeWidgetIndex={changeWidgetIndex} onOpenHandler={onOpenHandler}/>
         )
     }
 

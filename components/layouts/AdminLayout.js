@@ -59,7 +59,6 @@ const AdminLayout = props => {
                     <meta name="theme-color" content="#000000"/>
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     <meta charSet="utf-8"/>
-                    <link rel="icon" href={contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
                 </Head>
                 <div ref={container} className="container">
                     <TopBar/>

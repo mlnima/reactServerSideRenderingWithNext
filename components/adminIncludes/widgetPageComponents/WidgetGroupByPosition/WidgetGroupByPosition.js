@@ -12,9 +12,10 @@ const WidgetGroupByPosition = props => {
             }
         }
         const widgetData = {...widget, ...dataWithIndex}
+        // console.log(widget._id)
         return (
             <WidgetModel
-                key={props.widgets.indexOf(widget)}
+                key={widget._id}
                 widgetId={widgetData._id}
                 data={widgetData.data}
                 customPages={props.customPages}

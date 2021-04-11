@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
 import {likeValueCalculator} from "../../../../_variables/_variables";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
@@ -15,7 +15,6 @@ import AddToBasket from "./AddToBasket/AddToBasket";
 
 import styled from "styled-components";
 let StyledDiv = styled.div`${props => props.stylesData}`;
-
 
 const PostInfo = props => {
     const [state, setState] = useState({
@@ -38,21 +37,18 @@ const PostInfo = props => {
     return (
         <StyledDiv  className='post-info'>
             <EditLinkForAdmin {...props}/>
-            {/*<EditLinksForAuthor {...props}/>*/}
-
             <div className='post-info-head' >
                 <PostTitle {...props}/>
                 <div className='under-title'>
                     <RatingButtons {...props}/>
                     <Price {...props}/>
+                    <DownloadLink downloadLink={props.downloadLink} render={props.downloadLink} />
                 </div>
                 <AddToBasket productId={props._id} render={props.postType==='product'}/>
             </div>
 
             <div className='post-info-body'>
                 <div className="views">
-                    <DownloadLink downloadLink={props.downloadLink} render={props.downloadLink} />
-
                     <span>{props.views} views</span>
                     <RatingData {...props}/>
                 </div>
@@ -62,7 +58,6 @@ const PostInfo = props => {
                     <TagsAndCategoriesActors type='tags' data={props.tags || []}/>
                     <TagsAndCategoriesActors type='categories' data={props.categories || []}/>
                 </div>
-
             </div>
         </StyledDiv>
     );

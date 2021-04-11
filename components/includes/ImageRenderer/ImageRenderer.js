@@ -16,7 +16,8 @@ const ImageRenderer = props => {
             setIsReported(true)
             let data = {
                 checkUrl: props.imageUrl,
-                contentId: props.contentId
+                contentId: props.contentId,
+                type:'image'
             }
             console.log('error')
             setTimeout(() => {

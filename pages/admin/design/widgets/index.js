@@ -8,6 +8,8 @@ import {getAbsolutePath} from '../../../../_variables/_variables'
 import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import WidgetGroupByPosition from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
+import  _ from 'lodash';
+
 
 const HomePageWidgets = props => {
     const contextData = useContext(AppContext);
@@ -16,7 +18,6 @@ const HomePageWidgets = props => {
         translationLanguages: []
     })
     const [customPages, setCustomPages] = useState([])
-
 
     useEffect(() => {
         getAndSetData()
@@ -29,7 +30,6 @@ const HomePageWidgets = props => {
     }
     const getAndSetSettings = () => {
         getMultipleSetting({settings: ['identity']}, window.location.origin, false, 'adminPostPage').then(settingsData => {
-
             if (settingsData.data.settings) {
                 const settings = settingsData.data.settings ?? []
                 // console.log(settings.identity)
@@ -73,11 +73,10 @@ const HomePageWidgets = props => {
     }))].map(position => {
         const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)
         const widgetsOnThisType = widgetsInGroupByPosition.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
+       // console.log(_.uniqueId('id_'))
         return (
-
-                <WidgetGroupByPosition widgetsInGroupByPosition={widgetsInGroupByPosition} key={position} siteIdentity={siteIdentity} position={position}
+                <WidgetGroupByPosition widgetsInGroupByPosition={widgetsInGroupByPosition} key={_.uniqueId('id_')} siteIdentity={siteIdentity} position={position}
                                        widgets={widgetsOnThisType} customPages={customPages} getAndSetWidgetsData={getAndSetWidgetsData}/>
-
         )
     })
 
@@ -95,19 +94,6 @@ const HomePageWidgets = props => {
 
                 </div>
             </div>
-
-            <h2>Color Widget:</h2>
-            <div className='colorSettingSections'>
-                <ColorSection designName='widgetHeaderBackgroundColor'/>
-                <ColorSection designName='widgetHeaderTextColor'/>
-                <ColorSection designName='widgetHeaderRedirectLinkBackgroundColor'/>
-                <ColorSection designName='widgetHeaderRedirectLinkTextColor'/>
-                <ColorSection designName='widgetHeaderBorder'/>
-                <ColorSection designName='widgetBodyBackgroundColor'/>
-                <ColorSection designName='widgetBodyTextColor'/>
-                <ColorSection designName='widgetBodyBorder'/>
-
-            </div>
         </>
     );
 };
@@ -122,5 +108,19 @@ const HomePageWidgets = props => {
 //     widgets = widgetsData.data.widgets ? widgetsData.data.widgets : []
 //     return {widgets, domainName, ...settings}
 // }
+
+// <h2>Color Widget:</h2>
+// <div className='colorSettingSections'>
+//     <ColorSection designName='widgetHeaderBackgroundColor'/>
+//     <ColorSection designName='widgetHeaderTextColor'/>
+//     <ColorSection designName='widgetHeaderRedirectLinkBackgroundColor'/>
+//     <ColorSection designName='widgetHeaderRedirectLinkTextColor'/>
+//     <ColorSection designName='widgetHeaderBorder'/>
+//     <ColorSection designName='widgetBodyBackgroundColor'/>
+//     <ColorSection designName='widgetBodyTextColor'/>
+//     <ColorSection designName='widgetBodyBorder'/>
+//
+// </div>
+
 
 export default HomePageWidgets;

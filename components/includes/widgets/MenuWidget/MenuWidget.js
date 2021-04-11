@@ -17,6 +17,7 @@ const MenuWidget = props => {
             deviceWidth = window.innerWidth
             deviceWidth >= 768 ? setOpen(true) : setOpen(false)
         }
+
     }, [props]);
 
     const mobileNavigationOnClickHandler = () => {

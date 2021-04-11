@@ -469,6 +469,7 @@ postsControllers.export = (req, res) => {
 postsControllers.checkRemovedContent = (req,res)=>{
     const checkUrl=req.body.checkUrl
     const contentId = req.body.contentId
+    const type = req.body.type
     if (checkUrl){
         axios(checkUrl).then(result=>{
             res.end()
