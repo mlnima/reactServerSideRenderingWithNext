@@ -152,11 +152,11 @@ const AppLayout = props => {
                 <WidgetArea
                     isMobile={props.isMobile}
                     key='navigation'
-                    widgets={!props.referer ? firstLoadWidgets.navigation : staticWidgets.navigation}
+                    widgets={!props.referer ? firstLoadWidgets.navigation : staticWidgets?.navigation}
                     className='navigation'
                     position='navigation'
-                    stylesData={props.design?.data?.navigationStyle || contextData.siteDesign.navigationStyle}
-                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    stylesData={props.design?.data?.navigationStyle || contextData.siteDesign?.navigationStyle}
+                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign?.postElementSize}
                     referer={props.referer}
                 /> : null
             }

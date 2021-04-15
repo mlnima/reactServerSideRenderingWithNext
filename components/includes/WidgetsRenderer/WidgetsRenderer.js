@@ -50,37 +50,46 @@ const WidgetsRenderer =  props => {
             widget.data.type === 'shoppingCart' ? ShoppingCart :
             widget.data.type === 'form' ? FormWidget : null
 
-        const conditionalWidgetRenderer = useCallback( (deviceType, languageToRender, activeLanguage) => {
-            if ((!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all')) {
-                return true
-            } else if ((deviceType === 'mobile' && props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))) {
-                return true
-            } else if ((deviceType === 'desktop' && !props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))) {
-                return true
-            } else if ((!deviceType && languageToRender && (languageToRender === activeLanguage || languageToRender === 'all'))) {
-                return true
-            } else return false
-        },[])
+        // const conditionalWidgetRenderer = useCallback( (deviceType, languageToRender, activeLanguage) => {
+        //     if ((!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all')) {
+        //         return true
+        //     } else if ((deviceType === 'mobile' && props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))) {
+        //         return true
+        //     } else if ((deviceType === 'desktop' && !props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))) {
+        //         return true
+        //     } else if ((!deviceType && languageToRender && (languageToRender === activeLanguage || languageToRender === 'all'))) {
+        //         return true
+        //     } else return false
+        // },[])
 
+        const deviceType = widget.data.deviceTypeToRender;
+        const languageToRender = widget.data.languageToRender;
+        const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
 
+        const conditionalWidgetRenderer = (!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all') ? true :
+            (deviceType === 'mobile' && props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))?true:
+                (deviceType === 'desktop' && !props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))
 
-       return  conditionalWidgetRenderer(widget.data.deviceTypeToRender, widget.data.languageToRender, (contextData?.state?.activeLanguage || router.locale))?
-            <Widget currentPageSidebar={props.currentPageSidebar}
-                    isMobile={props.isMobile}
-                    key={ props.widgets.indexOf(widget) }
-                    propsKey={ widget._id }
-                    component={ targetComponent }
-                    { ...widget }
-                    postElementSize={props.postElementSize}
-                    referer={props.referer} />:
-            null
+       if (conditionalWidgetRenderer){
+           return(
+               <Widget currentPageSidebar={props.currentPageSidebar}
+                       isMobile={props.isMobile}
+                       key={ props.widgets.indexOf(widget) }
+                       propsKey={ widget._id }
+                       component={ targetComponent }
+                       { ...widget }
+                       postElementSize={props.postElementSize}
+                       referer={props.referer} />
+           )
+
+       }else return null
     })
 
 
     return (
        <>
             {renderWidgets}
-      </>
+       </>
     )
 };
 export default WidgetsRenderer;
