@@ -16,19 +16,19 @@ const TagsAndCategoriesActors = props => {
         fontawesome: ''
     });
 
-    const [styles, setStyles] = useState({
-            color: 'white',
-            backgroundColor: 'red'
-    })
+    // const [styles, setStyles] = useState({
+    //         color: 'white',
+    //         backgroundColor: 'red'
+    // })
 
-    useEffect(() => {
-
-        setStyles({
-            ...styles,
-            color: contextData.siteDesign.postMetaDataTextColor || 'white',
-            backgroundColor: contextData.siteDesign.postMetaDataBackgroundColor || 'red',
-        })
-    }, [contextData.siteDesign]);
+    // useEffect(() => {
+    //
+    //     setStyles({
+    //         ...styles,
+    //         color: contextData.siteDesign.postMetaDataTextColor || 'white',
+    //         backgroundColor: contextData.siteDesign.postMetaDataBackgroundColor || 'red',
+    //     })
+    // }, [contextData.siteDesign]);
 
     useEffect(() => {
         let fontawesome = '';
@@ -58,10 +58,10 @@ const TagsAndCategoriesActors = props => {
                 : state.type === 'actors' ? faStar
                     : faTag
         return (
-            <div key={item.name} style={styles} className='post-meta-item'>
+            <div key={item.name}  className='post-meta-item'>
                 <FontAwesomeIcon icon={icon} className='meta-data-logo'  />
                 <Link href={path}   key={item.name}>
-                    <a className={state.type} style={styles}>{item.name}</a>
+                    <a className={state.type} >{item.name}</a>
                 </Link>
             </div>
         )

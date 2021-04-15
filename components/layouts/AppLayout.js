@@ -15,6 +15,9 @@ const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), 
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 const AppLayout = props => {
+    const [leftSidebarWidgets, setLeftSidebarWidgets] = useState([])
+    const [rightSidebarWidgets, setRightSidebarWidgets] = useState([])
+
     const contextData = useContext(AppContext);
     const router = useRouter()
 
@@ -73,8 +76,7 @@ const AppLayout = props => {
         navigation: [],
         footer: [],
     })
-    const [leftSidebarWidgets, setLeftSidebarWidgets] = useState([])
-    const [rightSidebarWidgets, setRightSidebarWidgets] = useState([])
+
 
     const firstLoadWidgets = Object.freeze({
         topBar: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'topBar') || [] : [],
