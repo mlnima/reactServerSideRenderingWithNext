@@ -1,4 +1,4 @@
-import React, {useCallback, useMemo,useContext} from 'react';
+import React, {useMemo,useContext} from 'react';
 import dynamic from 'next/dynamic'
 import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
@@ -20,14 +20,12 @@ const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
 
-
 const WidgetsRenderer =  props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
     const widgets = useMemo(()=>{
        return  props.widgets?.sort((a,b)=>(a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
     },[props.widgets])
-
 
     const renderWidgets = widgets?.map(widget => {
         const targetComponent =
@@ -49,18 +47,6 @@ const WidgetsRenderer =  props => {
             widget.data.type === 'menu' ? MenuWidget :
             widget.data.type === 'shoppingCart' ? ShoppingCart :
             widget.data.type === 'form' ? FormWidget : null
-
-        // const conditionalWidgetRenderer = useCallback( (deviceType, languageToRender, activeLanguage) => {
-        //     if ((!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all')) {
-        //         return true
-        //     } else if ((deviceType === 'mobile' && props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))) {
-        //         return true
-        //     } else if ((deviceType === 'desktop' && !props.isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))) {
-        //         return true
-        //     } else if ((!deviceType && languageToRender && (languageToRender === activeLanguage || languageToRender === 'all'))) {
-        //         return true
-        //     } else return false
-        // },[])
 
         const deviceType = widget.data.deviceTypeToRender;
         const languageToRender = widget.data.languageToRender;
@@ -84,7 +70,6 @@ const WidgetsRenderer =  props => {
 
        }else return null
     })
-
 
     return (
        <>

@@ -44,6 +44,9 @@
         width: 48vw;
         //aspect-ratio: 16 / 9;
       }
+      img{
+        width: 48vw;
+      }
     }
   }
 }
@@ -74,6 +77,7 @@
       .post-element-internal-image {
         margin: auto;
         object-fit: contain;
+        height: auto;
       }
 
       video {

@@ -29,7 +29,6 @@ const AppLayout = props => {
             }
             logPageView()
         }
-
         if (!props.referer) {
             setStaticWidgets({
                 topBar: firstLoadWidgets.topBar,
@@ -38,7 +37,6 @@ const AppLayout = props => {
                 footer: firstLoadWidgets.footer,
             })
         }
-
     }, []);
 
     useEffect(() => {
@@ -50,7 +48,6 @@ const AppLayout = props => {
         if (!!differenceRightSidebarWidgets?.length) {
             setRightSidebarWidgets(rightSidebarWidgetsData)
         }
-
     }, [props.widgets]);
 
     const sidebarPositionName = useMemo(() =>
@@ -112,7 +109,6 @@ const AppLayout = props => {
     })
     const leftSidebarWidgetsData = useMemo(() => props?.widgets ? props.widgets.filter(widget => widget?.data?.position === leftSidebarPositionName) : [], [router.pathname])
     const rightSidebarWidgetsData = useMemo(() => props?.widgets ? props.widgets.filter(widget => widget?.data?.position === rightSidebarPositionName) : [], [router.pathname])
-
 
     // useEffect(() => {
     //     if (props.identity?.data?.developmentMode && contextData?.userData?.role !== 'administrator') {
