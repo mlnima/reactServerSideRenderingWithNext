@@ -1,12 +1,12 @@
-.top-bar,.navigation,.header,.footer{
+.topbar,.navigation,.header,.footer{
   display: flex;
   justify-content: space-evenly;
   flex-wrap: wrap;
   align-items: center;
 }
 
-.top-bar{
-  grid-area: top-bar;
+.topbar{
+  grid-area: topbar;
 }
 .navigation{
   grid-area: navigation;
@@ -27,15 +27,23 @@
   grid-area: sidebar;
   //grid-gap: 2px;
 }
+.left-sidebar{
+  grid-area: leftSidebar;
+  //grid-gap: 2px;
+}
+.right-sidebar{
+  grid-area: rightSidebar;
+  //grid-gap: 2px;
+}
 
 
-.top-bar,.navigation{
+.topbar,.navigation{
   min-height: 48px;
   //height: auto;
 }
 
 @media only screen and (min-width: 768px) {
-  .top-bar,.navigation{
+  .topbar,.navigation{
     height: 48px;
   }
 

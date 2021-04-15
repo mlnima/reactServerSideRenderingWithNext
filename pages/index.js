@@ -31,7 +31,7 @@ const Home = props => {
 //SSR
 const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req)
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home']}, firstLoadData.domainName, true, 'homePage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageLeftSidebar','homePageRightSidebar', 'home']}, firstLoadData.domainName, true, 'homePage')
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
     return {props: {widgets, ...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer, requestProtocol: context.req.protocol}}
 }
@@ -39,7 +39,7 @@ const getServerSideProps = async (context) => {
 //SSG
 const getStaticProps = async (context) => {
     const firstLoadData = await getStaticLoadData()
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageSidebar', 'home']}, firstLoadData.domainName, true, 'homePage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageLeftSidebar','homePageRightSidebar', 'home']}, firstLoadData.domainName, true, 'homePage')
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
     return {props: {widgets, ...firstLoadData?.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer,}}
 }

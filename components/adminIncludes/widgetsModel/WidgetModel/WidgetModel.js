@@ -486,19 +486,26 @@ const WidgetModel = props => {
                             <option value='navigation'>Navigation</option>
                             <option value='header'>Header</option>
                             <option value='home'>Home</option>
-                            <option value='homePageSidebar'>Home Page Sidebar</option>
-                            <option value='postPageSidebar'>Post Page SideBar</option>
-                            <option value='postsPageSidebar'>Posts Page SideBar</option>
-                            <option value='categoriesPageSidebar'>Categories Page SideBar</option>
-                            <option value='tagsPagesSidebar'>Tags Page SideBar</option>
-                            <option value='actorsPagesSidebar'>Actors Page SideBar</option>
+                            <option value='homePageLeftSidebar'>Home Page Left Sidebar</option>
+                            <option value='homePageRightSidebar'>Home Page Right Sidebar</option>
+
+                            <option value='postPageLeftSidebar'>Post Page Left SideBar</option>
+                            <option value='postPageRightSidebar'>Post Page Right SideBar</option>
+
+                            <option value='postsPageLeftSidebar'>Posts Page Left SideBar</option>
+                            <option value='postsPageRightSidebar'>Posts Page Right SideBar</option>
+
+                            <option value='metaPageLeftSidebar'>Meta Page Left SideBar</option>
+                            <option value='metaPageRightSidebar'>Meta Page Right SideBar</option>
+
                             <option value='footer'>Footer</option>
                             <option value='deactivate'>Deactivate</option>
                             {(props.customPages||[]).map(customPage => {
                                 return (
                                     <React.Fragment key={_.uniqueId('id_')}>
                                         <option value={customPage} key={customPage + '1'}>{convertVariableNameToName(customPage)}</option>
-                                        <option value={customPage + 'Sidebar'} key={customPage + '2'}>{convertVariableNameToName(customPage) + ' Sidebar'}</option>
+                                        <option value={customPage + 'LeftSidebar'} key={customPage + '2'}>{convertVariableNameToName(customPage) + ' Left Sidebar'}</option>
+                                        <option value={customPage + 'RightSidebar'} key={customPage + '2'}>{convertVariableNameToName(customPage) + ' Right Sidebar'}</option>
                                     </React.Fragment>
                                 )
                             })}
@@ -702,3 +709,13 @@ const WidgetModel = props => {
 
 };
 export default WidgetModel;
+
+
+// <option value='categoriesPageLeftSidebar'>Categories Page Left SideBar</option>
+// <option value='categoriesPageRightSidebar'>Categories Page Right SideBar</option>
+//
+// <option value='tagsPagesLeftSidebar'>Tags Page Left SideBar</option>
+// <option value='tagsPagesRightSidebar'>Tags Page Right SideBar</option>
+//
+// <option value='actorsPagesLeftSidebar'>Actors Page Left SideBar</option>
+// <option value='actorsPagesRightSidebar'>Actors Page Right SideBar</option>

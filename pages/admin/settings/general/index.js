@@ -211,33 +211,6 @@ const settings = props => {
                                 <option value='false'>Disable</option>
                             </select>
                         </div>
-                        {/*<div className="site-settings-form-section translationLanguages">*/}
-                        {/*    <p>Translation Languages:</p>*/}
-                        {/*    <div className='language'>*/}
-                        {/*        <p>English</p>*/}
-                        {/*        <input value='en' name='en' type='checkbox' checked={state.translationLanguages.includes('en')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
-                        {/*    </div>*/}
-                        {/*    <div className='language'>*/}
-                        {/*        <p>German</p>*/}
-                        {/*        <input value='de' name='de' type='checkbox' checked={state.translationLanguages.includes('de')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
-                        {/*    </div>*/}
-                        {/*    <div className='language'>*/}
-                        {/*        <p>Persian</p>*/}
-                        {/*        <input value='fa' name='fa' type='checkbox' checked={state.translationLanguages.includes('fa')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
-                        {/*    </div>*/}
-                        {/*    <div className='language'>*/}
-                        {/*        <p>Arabic</p>*/}
-                        {/*        <input value='ar' name='ar' type='checkbox' checked={state.translationLanguages.includes('ar')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
-                        {/*    </div>*/}
-                        {/*    <div className='language'>*/}
-                        {/*        <p>Turkish</p>*/}
-                        {/*        <input value='tr' name='tr' type='checkbox' checked={state.translationLanguages.includes('tr')} onChange={e => onTranslationLanguagesChangeHandler(e)}/>*/}
-                        {/*    </div>*/}
-                        {/*</div>*/}
-                        {/*<div className="site-settings-form-section defaultSiteLanguage">*/}
-                        {/*    <p>Default Site Language:</p>*/}
-                        {/*    <input name='defaultSiteLanguage' value={state.defaultSiteLanguage} onChange={e => onChangeHandler(e)}/>*/}
-                        {/*</div>*/}
                     </div>
 
                     <div className="site-settings-form-section">
@@ -253,29 +226,36 @@ const settings = props => {
                         <div className="site-settings-form-section">
                             <p>Home Page Sidebar:</p>
                             <select name='homePageSidebar' value={state.homePageSidebar || false} onChange={e => onChangeHandler(e)}>
-                                <option value='true'>Yes</option>
+                                <option value='left'>Left</option>
+                                <option value='right'>Right</option>
+                                <option value='both'>Both</option>
                                 <option value='false'>No</option>
                             </select>
                         </div>
-
                         <div className="site-settings-form-section">
                             <p>Post Page Sidebar:</p>
                             <select name='postPageSidebar' value={state.postPageSidebar} onChange={e => onChangeHandler(e)}>
-                                <option value='true'>Yes</option>
+                                <option value='left'>Left</option>
+                                <option value='right'>Right</option>
+                                <option value='both'>Both</option>
                                 <option value='false'>No</option>
                             </select>
                         </div>
                         <div className="site-settings-form-section">
                             <p>Posts Page Sidebar:</p>
                             <select name='postsPageSidebar' value={state.postsPageSidebar} onChange={e => onChangeHandler(e)}>
-                                <option value='true'>Yes</option>
+                                <option value='left'>Left</option>
+                                <option value='right'>Right</option>
+                                <option value='both'>Both</option>
                                 <option value='false'>No</option>
                             </select>
                         </div>
                         <div className="site-settings-form-section">
                             <p>Meta Page Sidebar:</p>
                             <select name='metaPageSidebar' value={state.metaPageSidebar} onChange={e => onChangeHandler(e)}>
-                                <option value='true'>Yes</option>
+                                <option value='left'>Left</option>
+                                <option value='right'>Right</option>
+                                <option value='both'>Both</option>
                                 <option value='false'>No</option>
                             </select>
                         </div>

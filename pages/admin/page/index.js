@@ -58,8 +58,10 @@ const page = props => {
                     <input name='pageName' placeholder='page name' value={state.pageName} onChange={e => onChangeHandler(e)}/>
                     <p>Sidebar:</p>
                     <select name='sidebar' onChange={e => onChangeHandler(e)} value={state.sidebar}>
-                        <option value='true'>True</option>
-                        <option value='false'>False</option>
+                        <option value='left'>Left</option>
+                        <option value='right'>Right</option>
+                        <option value='both'>Both</option>
+                        <option value='false'>No</option>
                     </select>
                     <p>status:</p>
                     <select name='status' onChange={e => onChangeHandler(e)} value={state.status}>

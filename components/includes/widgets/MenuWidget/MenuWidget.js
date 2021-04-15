@@ -8,6 +8,7 @@ import {AppContext} from "../../../../context/AppContext";
 
 const MenuWidget = props => {
     const contextData = useContext(AppContext);
+    const menuItemsElement = useRef(null)
     const router = useRouter()
     const [open, setOpen] = useState(false);
 
@@ -21,7 +22,7 @@ const MenuWidget = props => {
     }, [props]);
 
     const mobileNavigationOnClickHandler = () => {
-       // contextData.dispatchState({...contextData.state,loading:true})
+       contextData.dispatchState({...contextData.state,loading:true})
         if (props.isMobile) {
             setOpen(false)
         }
@@ -54,15 +55,21 @@ const MenuWidget = props => {
 
     return (
         <div className='menu-widget'>
-            <button onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button' aria-label="Center Align">
+            <button
+                onClick={() => open ? setOpen(false) : setOpen(true)}
+
+                className='navigation-mobile-button' aria-label="Center Align">
                 <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo' style={{
                     maxWidth: '25px',
-                    maxHeight: '25px'
+                    maxHeight: '25px',
+                   // transform: open ? 'rotate(90deg)' :'rotate(0deg)'
                 }}/>
             </button>
 
-            <ul className='menu-widget-items' style={{display: open ? 'flex' : 'none'}}>
-                <button onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
+            <ul className='menu-widget-items' ref={menuItemsElement} style={{display: open ? 'flex' : 'none'}} >
+                <button
+                     onClick={() => open ? setOpen(false) : setOpen(true)}
+                    className='navigation-close-button'>
                     <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo svg-logo-medium' style={{
                         maxWidth: '25px',
                         maxHeight: '25px'

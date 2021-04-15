@@ -83,27 +83,77 @@ a {
   text-decoration: none;
 }
 
+//@mixin templateRows {
+//  grid-template-rows: 1fr;
+//}
+
+
+
+
 
 // content with sidebar or without
-.withSidebar {
+.leftSidebar {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
-            'top-bar'
+            'topbar'
             'header'
             'navigation'
             'main'
-            'sidebar'
+            'leftSidebar'
             'footer';
   @media only screen and (min-width: 768px) {
     grid-template-columns: 320px 1fr;
-
     grid-template-areas:
-           'top-bar top-bar'
+           'topbar topbar'
            'header header'
            'navigation navigation'
-           'sidebar main'
+           'leftSidebar main'
            'footer footer'
+  }
+}
+
+.rightSidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+            'topbar'
+            'header'
+            'navigation'
+            'main'
+            'rightSidebar'
+            'footer';
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 1fr 320px ;
+
+    grid-template-areas:
+           'topbar topbar'
+           'header header'
+           'navigation navigation'
+           'main rightSidebar'
+           'footer footer'
+  }
+}
+
+.bothSidebar {
+  display: grid;
+  grid-template-columns: 1fr;
+  grid-template-areas:
+            'topbar'
+            'header'
+            'navigation'
+            'main'
+            'leftSidebar'
+            'rightSidebar'
+            'footer';
+  @media only screen and (min-width: 769px) {
+    grid-template-columns: 320px 1fr 320px;
+    grid-template-areas:
+           'topbar topbar topbar'
+           'header header header'
+           'navigation navigation navigation'
+           'leftSidebar main rightSidebar'
+           'footer footer footer'
   }
 }
 
@@ -111,7 +161,7 @@ a {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas:
-            'top-bar'
+            'topbar'
             'header'
             'navigation'
             'main'

@@ -38,6 +38,7 @@ import {createGlobalStyle} from "styled-components";
 import * as Scroll from 'react-scroll';
 
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
+
 // export function reportWebVitals(metric) {
 //     console.log(metric)
 // }
@@ -46,26 +47,16 @@ const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
     const scroll = Scroll.animateScroll;
 
-
     useEffect(() => {
         scroll.scrollToTop();
     }, [pageProps]);
 
-
-    const sidebarPositionName = router.pathname === '/' ? 'homePageSidebar' :
-        router.pathname === '/post' ? 'postPageSidebar' :
-            router.pathname === '/posts' ? 'postsPageSidebar' :
-                router.pathname === '/meta' ? 'metaPageSidebar' :
-                    router.pathname === '/page' ? pageProps.pageInfo?.pageName + 'Sidebar' :
-                        'homePageSidebar'
 
     if (!router.pathname.includes('/admin')) {
         return (
             <AppProvider>
                 {pageProps.design?.data?.customStyles ? <GlobalStyle globalStyleData={pageProps.design?.data?.customStyles}/> : null}
                 <AppLayout
-                    sidebar={pageProps.identity?.data?.[sidebarPositionName] || pageProps.pageInfo?.sidebar}
-                    sidebarPosition={sidebarPositionName}
                     design={pageProps.design}
                     widgets={pageProps.widgets}
                     identity={pageProps.identity}
@@ -73,6 +64,7 @@ const MyApp = ({Component, pageProps}) => {
                     referer={pageProps.referer}
                     isMobile={pageProps.isMobile}
                     globalStyleDetected={!!pageProps.design?.data?.customStyles}
+                    pageInfo={pageProps.pageInfo}
                 >
                     <Component {...pageProps} />
                 </AppLayout>

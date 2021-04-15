@@ -5,10 +5,10 @@ import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
 const WidgetArea = props => {
-
+    const styleData = (props?.stylesData ?? '')
 
     return (
-        <StyledDiv stylesData={props.stylesData ?? ''} className={props.className + ' widget-area ' + props.position}>
+        <StyledDiv stylesData={styleData} className={props.className + ' widget-area ' + props.position}>
             <WidgetsRenderer currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} {...props} position={props.position} referer={props.referer}/>
         </StyledDiv>
     );

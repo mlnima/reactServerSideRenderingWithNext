@@ -7,6 +7,7 @@ export const AppContext = React.createContext();
 
 const AppProvider = props => {
     const router = useRouter()
+
     const [state, dispatchState] = useState({
         loading: false,
         videoPreviewID: '',
@@ -42,6 +43,7 @@ const AppProvider = props => {
     const [eCommerceSettings,dispatchECommerceSettings]= useState({
         translations:{}
     })
+
     const [siteDesign, dispatchSiteDesign] = useState({});
 
     const [settings, dispatchSettings] = useState({
@@ -252,8 +254,6 @@ const AppProvider = props => {
                     dispatchAdminPostsData,
                     videoPostsDataForClient,
                     dispatchVideoPostsDataForClient,
-                   // navigationData,
-                   // dispatchNavigationData,
                     dispatchSiteIdentity,
                     siteIdentity,
                     widgetsSettings,
@@ -268,8 +268,7 @@ const AppProvider = props => {
                     setCheckOutData,
                     eCommerceSettings,
                     dispatchECommerceSettings
-                    // adminWidgets,
-                    // dispatchAdminWidgets
+
                 }}>
                 {props.children}
             </AppContext.Provider>
@@ -278,7 +277,5 @@ const AppProvider = props => {
     )
 };
 
-// export const AppProviderWithRouter = withRouter(AppProvider);
- //export default withRouter(AppProvider) ;
- export default AppProvider ;
+export default AppProvider ;
 

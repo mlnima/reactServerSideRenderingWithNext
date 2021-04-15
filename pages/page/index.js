@@ -7,7 +7,7 @@ import Error from "../_error";
 let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
 const page = props => {
-
+    console.log(props)
     if (props.responseCode !==200){
         return <Error responseCode={props.responseCode} />
     }else  return (
@@ -30,7 +30,7 @@ export const getServerSideProps = async ({req, query}) => {
         responseCode = 404
     }
     const pageInfo = pageData.data ? pageData.data.pageData : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName, query.pageName + 'Sidebar']}, firstLoadData.domainName, true, query.pageName)
+    const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName, query.pageName + 'LeftSidebar',query.pageName + 'RightSidebar']}, firstLoadData.domainName, true, query.pageName)
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
     return {props: {widgets, ...firstLoadData.settings, pageInfo, query, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer,responseCode}}
 }

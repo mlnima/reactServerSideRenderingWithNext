@@ -6,7 +6,7 @@ const pageSchema =  new Schema({
         type:String,
         unique:true
     },
-    sidebar:Boolean,
+    sidebar:String,
     status: String,
     imageUrl:String,
 });

@@ -1,4 +1,4 @@
-import React, {useState, useContext, useRef, useEffect} from 'react';
+import React, {useState, useContext, useRef, useEffect, useMemo} from 'react';
 import withRouter from "next/dist/client/with-router";
 import Link from "next/link";
 import {likeValueCalculator} from '../../../_variables/_variables'
@@ -10,22 +10,17 @@ import BottomRight from "./BottomRight";
 import BottomLeft from "./BottomLeft";
 import TopRight from "./TopRight";
 import TopLeft from "./TopLeft";
-
-
 let StyledDiv = styled.article`${props => props.stylesData}`
-
-// import {deletedVideoAutoRemover} from "../../../variables/ajaxRequestVariables";
 
 const PostElement = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
+    const freezeProps = useMemo(() => props, [])
+    const styleData = useMemo(() => contextData.siteDesign.postElementStyle, [contextData.siteDesign.postElementStyle])
     let element = useRef(null)
     let videoElement = useRef(null)
-
     const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
     const title = (props.state?.translations?.[locale]?.title || props.state.title).replace('#', '')
-
-    const [imageUrl, setImageUrl] = useState(props.state?.mainThumbnail)
 
     let [state, setState] = useState({
         isHover: false,
@@ -38,12 +33,6 @@ const PostElement = props => {
     });
 
     useEffect(() => {
-        if (props.state?.mainThumbnail !== imageUrl) {
-            setImageUrl(props.state?.mainThumbnail)
-        }
-    }, [props.state?.mainThumbnail]);
-
-    useEffect(() => {
         if (typeof window !== 'undefined') {
             if (window.innerWidth < 768) {
                 setState({
@@ -54,61 +43,18 @@ const PostElement = props => {
         }
     }, []);
 
-
     let isHoverHandler = () => {
         if (props.state.videoTrailerUrl) {
             state.isHover ? setState({...state, isHover: false}) : setState({...state, isHover: true})
         }
     };
 
-
-    const ImageContent = () => {
-        let dataToRender = () => {
-            if (state.isHover && props.state.videoTrailerUrl) {
-                return (
-                    <video
-                        ref={videoElement}
-                        src={props.state.videoTrailerUrl}
-                        autoPlay={true}
-                        loop={true}
-                        onMouseOut={isHoverHandler}
-                        onTouchCancel={isHoverHandler}
-                    />)
-
-            } else if (!state.isHover) {
-                return (
-                    <ImageRenderer imageUrl={imageUrl}
-                                   altValue={title || props.state?.mainThumbnail}
-                                   hoverHandler={isHoverHandler}
-                                   imageWidth={state.imageWidth}
-                                   imageHeight={state.imageWidth / 1.777}
-                                   quality={100}
-                                   loading='lazy'
-                                   layout='intrinsic'
-                                   classNameValue='post-element-internal-image'
-                                   contentId={props.state._id}
-
-                    />
-                )
-            } else {
-                return (
-                    <span>{props.state.title}</span>
-                )
-            }
-        };
-        return dataToRender()
-    };
-
-
-    //const linkAsForPostElement = process.env.REACT_APP_LOCALS.split(' ').includes(locale) ? `/${locale}/${props.state.postType ||'post'}/${title}?id=${props.state._id}` : `/${props.state.postType ||'post'}/${title}?id=${props.state._id}`
     const linkAsForPostElement = `/${props.state.postType || 'post'}/${title}?id=${props.state._id}`
-    const localeAttr = router.locale || router.query.locale ? (router.locale || router.query.locale) !== process.env.REACT_APP_DEFAULT_LOCAL ? {locale: router.locale || router.query.locale} : {} : {}
-    const classNameForPostElement = `post-element-div ${props.viewType ? props.viewType : 'standard'} ${props.postElementSize ? `post-element-div-${props.postElementSize}` : 'post-element-div-medium'}`
+   const classNameForPostElement =
+       `post-element-div ${props.viewType ? props.viewType : 'standard'} ${(props.postElementSize || contextData.siteDesign.postElementSize) ? `post-element-div-${props.postElementSize || contextData.siteDesign.postElementSize}` : 'post-element-div-medium'}`
     return (
-        < StyledDiv stylesData={contextData.siteDesign.postElementStyle} ref={element} className={classNameForPostElement}>
-            <Link
-
-                href={{
+        < StyledDiv stylesData={styleData} ref={element} className={classNameForPostElement}>
+            <Link href={{
                     pathname: `/post`,
                     query: {
                         id: props.state._id,
@@ -121,14 +67,34 @@ const PostElement = props => {
                 <a rel='noreferrer'>
                     <div className={'post-element '} key={props.state.title}>
                         <div className="image">
-                            <ImageContent/>
+                            {state.isHover && props.state.videoTrailerUrl?
+                                <video
+                                    ref={videoElement}
+                                    src={props.state.videoTrailerUrl}
+                                    autoPlay={true}
+                                    loop={true}
+                                    onMouseOut={isHoverHandler}
+                                    onTouchCancel={isHoverHandler}
+                                />:
+                                    <ImageRenderer imageUrl={freezeProps.state?.mainThumbnail}
+                                                   altValue={title || props.state?.mainThumbnail}
+                                                   hoverHandler={isHoverHandler}
+                                                   imageWidth={state.imageWidth}
+                                                   imageHeight={state.imageWidth / 1.777}
+                                                   quality={100}
+                                                   loading='lazy'
+                                                   layout='intrinsic'
+                                                   classNameValue='post-element-internal-image'
+                                                   contentId={props.state._id}
+
+                                    />
+                            }
                             {props.state && props.state.views > 1 && props.state.postType === ('video') && !state.isHover ? <BottomRight views={props.state.views}/> : null}
                             {(props.state.postType === ('video') || props.state.postType === ('redirect') || props.state.postType === ('product')) && !state.isHover ?
                                 <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
                             {props.state.quality && props.state.postType === ('video') && !state.isHover ? <TopRight quality={props.state.quality}/> : null}
                             {props.state.likes > 0 && props.state.rating !== 'disable' && !state.isHover ? <TopLeft rating={likeValueCalculator(props.state.likes, props.state.disLikes)}/> : null}
                         </div>
-
                         <h3>{title}</h3>
                     </div>
                 </a>
@@ -139,9 +105,3 @@ const PostElement = props => {
 
 export default withRouter(PostElement);
 
-
-// {
-//     props.state.rating !== 'disable' && props.state.likes > 0 ?
-//         <ProgressBar value={likeValueCalculator(props.state.likes, props.state.disLikes)} percent={true}/> :
-//         null
-// }

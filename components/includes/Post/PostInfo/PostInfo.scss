@@ -2,10 +2,8 @@
 @import "../../../../styles/colors";
 
 .post-info {
-  max-width:100vw;
   width: 100%;
-  box-sizing: border-box;
-  padding: 10px;
+  //padding: 10px;
   .edit-mode{
     align-items: center;
     p{
@@ -23,9 +21,8 @@
   .share {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(50px, 1fr));
-    grid-gap: 10px;
+    //grid-gap: 10px;
   }
-
 
   .edit-btn-admin {
     @include greenActionBtn;
@@ -33,23 +30,13 @@
   .post-info-head{
     background-color: $dark90;
     padding: 5px;
-    margin: 5px 0;
-    border-radius: 10px;
-
-
     .like {
       display: flex;
       justify-content: center;
       align-items: center;
-
       button {
         @include transparentLightTextBtn;
         margin: 0 10px;
-
-        span {
-
-        }
-
         &:disabled {
           color: $AdminColor80;
         }

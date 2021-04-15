@@ -65,7 +65,7 @@ export const getServerSideProps = async ({req, query, res}) => {
         keyword: query?.keyword || '',
         lang: query?.lang || 'default'
     }
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageSidebar']}, firstLoadData.domainName, true, 'tagsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageLeftSidebar','metaPageRightSidebar']}, firstLoadData.domainName, true, 'tagsPage')
     const metaData = await getMeta(dataForGettingMeta, firstLoadData.domainName, true)
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}

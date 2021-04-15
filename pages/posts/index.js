@@ -8,25 +8,25 @@ import PaginationComponent from '../../components/includes/PaginationComponent/P
 const posts = props => {
 
     return (
-                <div className="main posts-page">
-                    <PaginationComponent
-                        isActive={true}
-                        currentPage={props.getPostsData.pageNo}
-                        totalCount={props.postsSource.totalCount}
-                        size={props.getPostsData.size}
-                        maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
-                    />
-                    <div className='postsContainer'>
-                        <Posts posts={props.postsSource.posts || []} postElementSize={props.design?.data?.postElementSize}/>
-                    </div>
-                    <PaginationComponent
-                        isActive={true}
-                        currentPage={props.getPostsData.pageNo}
-                        totalCount={props.postsSource.totalCount}
-                        size={props.getPostsData.size}
-                        maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
-                    />
-                </div>
+        <div className="main posts-page">
+            <PaginationComponent
+                isActive={true}
+                currentPage={props.getPostsData.pageNo}
+                totalCount={props.postsSource.totalCount}
+                size={props.getPostsData.size}
+                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
+            />
+            <div className='postsContainer'>
+                <Posts posts={props.postsSource.posts || []} postElementSize={props.design?.data?.postElementSize}/>
+            </div>
+            <PaginationComponent
+                isActive={true}
+                currentPage={props.getPostsData.pageNo}
+                totalCount={props.postsSource.totalCount}
+                size={props.getPostsData.size}
+                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
+            />
+        </div>
     );
 };
 
@@ -37,7 +37,7 @@ export const getServerSideProps = async ({req, query}) => {
         size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
         pageNo: parseInt(query.page) || 1,
         postType: query.type || 'all',
-        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl','rating'],
+        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating'],
         keyword: query.keyword || '',
         author: query.author || 'all',
         status: 'published',
@@ -54,7 +54,7 @@ export const getServerSideProps = async ({req, query}) => {
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, req.originalUrl)
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
     const postsSource = postsData.data ? postsData.data : []
-    return {props: {widgets,...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData,  contentData: contentDataInfo,referer:firstLoadData.referer}}
+    return {props: {widgets, ...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData, contentData: contentDataInfo, referer: firstLoadData.referer}}
 }
 
 

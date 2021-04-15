@@ -56,7 +56,8 @@ const AddWidgetWithPositionMenu = props => {
        return(
            <>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
-               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'Sidebar', props.type)}>{convertVariableNameToName(customPage)+' Sidebar'}</button>
+               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'LeftSidebar', props.type)}>{convertVariableNameToName(customPage)+' Left Sidebar'}</button>
+               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'RightSidebar', props.type)}>{convertVariableNameToName(customPage)+' Right Sidebar'}</button>
            </>
        )
    })
@@ -70,14 +71,21 @@ const AddWidgetWithPositionMenu = props => {
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('header', props.type)}>Header</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('navigation', props.type)}>Navigation</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('home', props.type)}>Home Page</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('homePageSidebar', props.type)}>Home Page Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postPageSidebar', props.type)}>Post Page Sidebar</button>
+
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('homePageLeftSidebar', props.type)}>Home Page Left Sidebar</button>
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('homePageRightSidebar', props.type)}>Home Page Right Sidebar</button>
+
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postPageLeftSidebar', props.type)}>Post Page Left Sidebar</button>
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postPageRightSidebar', props.type)}>Post Page Right Sidebar</button>
+
+
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postsPageLeftSidebar', props.type)}>Posts Page Left Sidebar</button>
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postsPageRightSidebar', props.type)}>Posts Page Right Sidebar</button>
+
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('metaPageLeftSidebar', props.type)}>Meta Page Left Sidebar</button>
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('metaPageRightSidebar', props.type)}>Meta Page Right Sidebar</button>
+
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('underPost', props.type)}>Under the Post</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postsPageSidebar', props.type)}>Posts Page Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('metaPageSidebar', props.type)}>Meta Page Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('tagsPageSidebar', props.type)}>Tags Page Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('categoriesPageSidebar', props.type)}>Categories Page Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('actorsPageSidebar', props.type)}>Actors Page Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('footer', props.type)}>Footer</button>
                     <p>CUSTOM PAGES :</p>
                    {renderCustomPagesPosition}
@@ -97,4 +105,12 @@ const AddWidgetWithPositionMenu = props => {
 export default AddWidgetWithPositionMenu;
 
 
-
+//
+// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('tagsPageLeftSidebar', props.type)}>Tags Page Left Sidebar</button>
+// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('tagsPageRightSidebar', props.type)}>Tags Page Right Sidebar</button>
+//
+// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('categoriesPageLeftSidebar', props.type)}>Categories Page Left Sidebar</button>
+// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('categoriesPageRightSidebar', props.type)}>Categories Page Right Sidebar</button>
+//
+// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('actorsPageLeftSidebar', props.type)}>Actors Page Left Sidebar</button>
+// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('actorsPageRightSidebar', props.type)}>Actors Page Right Sidebar</button>
