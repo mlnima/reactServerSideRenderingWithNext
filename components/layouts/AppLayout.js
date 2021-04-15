@@ -15,11 +15,43 @@ const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), 
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 const AppLayout = props => {
+    const contextData = useContext(AppContext);
+    const router = useRouter()
+
     const [leftSidebarWidgets, setLeftSidebarWidgets] = useState([])
     const [rightSidebarWidgets, setRightSidebarWidgets] = useState([])
 
-    const contextData = useContext(AppContext);
-    const router = useRouter()
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            if (!window.GA_INITIALIZED) {
+                initGA()
+                window.GA_INITIALIZED = true
+            }
+            logPageView()
+        }
+
+        if (!props.referer) {
+            setStaticWidgets({
+                topBar: firstLoadWidgets.topBar,
+                header: firstLoadWidgets.header,
+                navigation: firstLoadWidgets.navigation,
+                footer: firstLoadWidgets.footer,
+            })
+        }
+
+    }, []);
+
+    useEffect(() => {
+        const differenceLeftSidebarWidgets = _.differenceWith(leftSidebarWidgetsData, leftSidebarWidgets, _.isEqual);
+        const differenceRightSidebarWidgets = _.differenceWith(rightSidebarWidgetsData, rightSidebarWidgets, _.isEqual);
+        if (!!differenceLeftSidebarWidgets?.length) {
+            setLeftSidebarWidgets(leftSidebarWidgetsData)
+        }
+        if (!!differenceRightSidebarWidgets?.length) {
+            setRightSidebarWidgets(rightSidebarWidgetsData)
+        }
+
+    }, [props.widgets]);
 
     const sidebarPositionName = useMemo(() =>
             router.pathname === '/' ? 'homePageSidebar' :
@@ -29,11 +61,6 @@ const AppLayout = props => {
                             router.pathname === '/page' ? props.pageInfo?.pageName + 'Sidebar' :
                                 'homePageSidebar'
         , [router.pathname])
-
-    // useEffect(() => {
-    //     console.log(sidebarPositionName)
-    // }, [sidebarPositionName]);
-
 
     const leftSidebarPositionName = useMemo(() => router.pathname === '/' ? 'homePageLeftSidebar' :
         router.pathname === '/post' ? 'postPageLeftSidebar' :
@@ -77,7 +104,6 @@ const AppLayout = props => {
         footer: [],
     })
 
-
     const firstLoadWidgets = Object.freeze({
         topBar: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'topBar') || [] : [],
         header: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'header') || [] : [],
@@ -86,42 +112,6 @@ const AppLayout = props => {
     })
     const leftSidebarWidgetsData = useMemo(() => props?.widgets ? props.widgets.filter(widget => widget?.data?.position === leftSidebarPositionName) : [], [router.pathname])
     const rightSidebarWidgetsData = useMemo(() => props?.widgets ? props.widgets.filter(widget => widget?.data?.position === rightSidebarPositionName) : [], [router.pathname])
-
-    // useEffect(() => {
-    //     console.log(props.referer)
-    // }, [props.referer]);
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            if (!window.GA_INITIALIZED) {
-                initGA()
-                window.GA_INITIALIZED = true
-            }
-            logPageView()
-        }
-
-        if (!props.referer) {
-            setStaticWidgets({
-                topBar: firstLoadWidgets.topBar,
-                header: firstLoadWidgets.header,
-                navigation: firstLoadWidgets.navigation,
-                footer: firstLoadWidgets.footer,
-            })
-        }
-
-    }, []);
-
-    useEffect(() => {
-        const differenceLeftSidebarWidgets = _.differenceWith(leftSidebarWidgetsData, leftSidebarWidgets, _.isEqual);
-        const differenceRightSidebarWidgets = _.differenceWith(rightSidebarWidgetsData, rightSidebarWidgets, _.isEqual);
-        if (!!differenceLeftSidebarWidgets?.length) {
-            setLeftSidebarWidgets(leftSidebarWidgetsData)
-        }
-        if (!!differenceRightSidebarWidgets?.length) {
-            setRightSidebarWidgets(rightSidebarWidgetsData)
-        }
-
-    }, [props.widgets]);
 
 
     // useEffect(() => {
@@ -132,8 +122,8 @@ const AppLayout = props => {
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
-            {!props.globalStyleDetected ? <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData.siteDesign.customStyles || ''}/> : null}
-            <SiteSettingSetter identity={props.identity || contextData.siteIdentity} design={props.design || contextData.siteDesign} eCommerce={props.eCommerce}/>
+            {!props.globalStyleDetected ? <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/> : null}
+            <SiteSettingSetter identity={props.identity || contextData?.siteIdentity} design={props.design || contextData?.siteDesign} eCommerce={props.eCommerce}/>
 
             {(!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar).length > 0 ?
                 <WidgetArea
