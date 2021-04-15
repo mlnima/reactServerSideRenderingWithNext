@@ -293,6 +293,7 @@ const WidgetModel = props => {
                                 <option value='-_id'>Oldest</option>
                                 <option value='views'>Views</option>
                                 <option value='likes'>Likes</option>
+                                <option value='random'>Random</option>
                             </select>
                         </div>
                         <div className='selectInputFieldForWidget widgetSection'>

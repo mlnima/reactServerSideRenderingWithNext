@@ -1,26 +1,7 @@
-import React, {useRef} from 'react';
+import React from 'react';
 import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
 
 const VideoPlayer = props => {
-    const playerElement = useRef(null)
-
-    const WhatToRender = () => {
-        if (props.videoUrl) {
-            return (
-                <video className='video-player-video-type' controls controlsList=" nodownload" poster={props.mainThumbnail} preload="none">
-                    <source src={props.videoUrl}/>
-                </video>
-            )
-        } else if (props.videoEmbedCode && !props.videoUrl) {
-            return (
-                <iframe className={props._id}  title={props.title} src={props.videoEmbedCode} frameBorder="0" width='640' height='360' scrolling="no"/>
-            )
-        }
-        if (!props.videoUrl && !props.videoEmbedCode && props.videoScriptCode) {
-            return props.videoScriptCode
-        } else return null
-    }
-
     if (props.postType === 'video') {
         return (
             <div className='video-player'>
@@ -30,15 +11,22 @@ const VideoPlayer = props => {
                 <meta itemProp="thumbnailUrl" content={props.mainThumbnail}/>
                 <meta itemProp="embedURL" content={props.videoUrl || props.videoEmbedCode}/>
                 <meta itemProp="uploadDate" content={props.lastModify}/>
-                <div ref={playerElement} className="responsive-player">
-                    <WhatToRender/>
+                <div  className="responsive-player">
+                    {props.videoUrl?
+                        <video className='video-player-video-type' controls controlsList=" nodownload" poster={props.mainThumbnail} preload="none">
+                            <source src={props.videoUrl}/>
+                        </video>
+                        :props.videoEmbedCode && !props.videoUrl?
+                            <iframe className={props._id}  title={props.title} src={props.videoEmbedCode} frameBorder="0" width='640' height='360' scrolling="no"/>
+                            :!props.videoUrl && !props.videoEmbedCode && props.videoScriptCode?
+                                props.videoScriptCode:
+                                null
+                    }
                 </div>
 
             </div>
 
         );
     } else return null
-
-
 };
 export default VideoPlayer;

@@ -26,11 +26,13 @@ const PostInfo = props => {
     });
 
     useEffect(() => {
-        setState({
-            ...state,
-            likeValue: likeValueCalculator(props.likes, props.disLikes),
-            postAbsolutePath: window.location.href
-        });
+        if (typeof window !=='undefined'){
+            setState({
+                ...state,
+                likeValue: likeValueCalculator(props.likes, props.disLikes),
+                postAbsolutePath: window.location.href
+            });
+        }
         likeDislikeView(props.id, 'views')
     }, [props.likes, props.disLikes]);
 

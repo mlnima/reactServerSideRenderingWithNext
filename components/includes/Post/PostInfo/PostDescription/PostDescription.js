@@ -13,7 +13,6 @@ const PostDescription = props => {
         description: ''
     })
 
-
     useEffect(() => {
         if (props.post.description){
             setState({
@@ -33,10 +32,7 @@ const PostDescription = props => {
                 descriptionElement.current.innerHTML = `<p>${state.description}</p>`
             }
         }
-    }, [state]);
-
-
-
+    }, [state.description]);
 
 
     if (props.editMode) {
