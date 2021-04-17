@@ -1,9 +1,9 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
-const settingSchema = require('./server/models/settings/settingSchema')
-const widgetSchema = require('./server/models/settings/widgetSchema')
-const postSchema = require('./server/models/postSchema')
-const userSchema = require('./server/models/userSchema')
+const settingSchema = require('../server/models/settings/settingSchema')
+const widgetSchema = require('../server/models/settings/widgetSchema')
+const postSchema = require('../server/models/postSchema')
+const userSchema = require('../server/models/userSchema')
 const bcrypt = require('bcryptjs');
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
@@ -58,8 +58,8 @@ const designData = {
     }
 }
 
-const sideDesignToSave = new settingSchema(designData)
-sideDesignToSave.save().catch(() => {
+const siteDesignToSave = new settingSchema(designData)
+siteDesignToSave.save().catch(() => {
     console.log('Error on site Identity set')
 })
 

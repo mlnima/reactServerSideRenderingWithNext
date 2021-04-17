@@ -37,6 +37,7 @@
 
 
 .post-element-div-medium,.post-element-div-small,.post-element-div-smaller{
+
   .post-element {
     width: 48vw;
     .image{
@@ -67,7 +68,6 @@
     .image {
       position: relative;
       margin: auto;
-      //width: 95vw;
       .post-element-external-image {
         margin: auto;
         object-fit: contain;
@@ -142,13 +142,10 @@
     }
 
     .progressParent {
-      //background-color: #333;
       width: 100%;
       margin: auto;
 
       .progressChild {
-        //background-color: red;
-
         p {
           position: relative;
           //width: 100%;

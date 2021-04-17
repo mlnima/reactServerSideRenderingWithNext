@@ -6,7 +6,7 @@ const BottomRight = props => {
 
     return (
         <span className='bottom-right'>
-                 <FontAwesomeIcon icon={faEye} className='post-element-info-logo'/>
+                 <FontAwesomeIcon style={props.svgDefaultStyle} icon={faEye} className='post-element-info-logo'/>
                  <span className='view-count value-next-icon'>{props.views}</span>
 
          </span>

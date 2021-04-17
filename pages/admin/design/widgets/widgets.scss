@@ -1,56 +1,76 @@
 @import "../../../../styles/buttons";
 
-#widget-setting {
+.admin-widgets-page{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 
-  display: grid;
-  grid-template-columns: 1fr;
+  #widget-setting {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-  .saveBtn {
-    @include greenActionBtn;
-  }
-
-  .widgets {
-
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(1fr));
-    grid-gap: 10px;
-
-    .widgetAdminPanelItem {
-      background-color: $dark80;
+    .sidePanel{
       width: 100%;
-
-      .widgetAdminPanelItemHeader {
-        background-color: $dark100;
-        color: white;
-        padding: 10px;
-        border-radius: 5px;
-        text-align: center;
-        font-weight: bold;
-        font-size: large;
+      .AddWidgetMenu{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 5px;
+        .AddWidgetWithPositionMenu{
+          //justify-self: stretch;
+          //width: 200px;
+          position: relative;
+          //margin: auto;
+          .positionsOpener{
+            justify-self: stretch;
+            width: 100%;
+            background-color: var(--admin-darkcolor70);
+            color: var(--admin-text-color);
+            border :none;
+            padding: 5px 10px;
+          }
+          .AddWidgetWithPositionMenuPositions{
+           // position: absolute;
+            z-index: 1;
+            background-color: var(--admin-darkcolor70);
+            //width: 200px;
+            display: grid;
+            grid-template-columns: 1fr;
+            .AddWidgetWithPositionMenuPositionsBtn{
+              padding: 2px ;
+            }
+          }
+        }
       }
     }
-  }
-}
 
-@media only screen and (min-width: 600px) {
-  #widget-setting {
-    grid-template-columns: 200px 1fr;
-    grid-gap: 50px;
-
+    .saveBtn {
+      @include greenActionBtn;
+    }
     .widgets {
-      display: flex;
-      justify-content: space-between;
-      flex-wrap: wrap;
-
+      margin: 20px 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-gap: 10px;
       .widgetAdminPanelItem {
-        width: 550px;
-        margin: 10px;
-        border-radius: 10px;
+        background-color: transparent;
+        width: 100%;
+        position: initial;
+        margin: 0;
         .widgetAdminPanelItemHeader {
-
+          height:50px ;
+          margin: 0;
+          background-color: $dark100;
+          display: flex;
+          justify-content: center;
+          align-items: center;
           color: white;
-          padding: 10px;
-          border-radius: 5px;
           text-align: center;
           font-weight: bold;
           font-size: large;
@@ -58,5 +78,31 @@
       }
     }
   }
+}
+
+
+@media only screen and (min-width: 768px) {
+  .admin-widgets-page{
+    #widget-setting {
+      //display: flex;
+      //flex-direction: row;
+      //justify-content: flex-start;
+      //flex-wrap: wrap;
+      h2{
+        justify-self: end;
+        width: 98%;
+      }
+      .widgets {
+        grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+        .widgetAdminPanelItem {
+          position: relative;
+          .widgetAdminPanelItemHeader {
+
+          }
+        }
+      }
+    }
+  }
+
 
 }

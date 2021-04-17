@@ -77,6 +77,7 @@ const SideBar = props => {
                 {name: 'navigation', url: '/admin/design/navigation'},
                 {name: 'widgets', url: '/admin/design/widgets'},
                 {name: 'postPage', url: '/admin/design/postPage'},
+                {name: 'postsPage', url: '/admin/design/postsPage'},
                 {name: 'postElement', url: '/admin/design/postElement'},
                 {name: 'footer', url: '/admin/design/footer'},
                 {name: 'customStyles', url: '/admin/settings/customStyles'},

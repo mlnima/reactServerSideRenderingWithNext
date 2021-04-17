@@ -16,7 +16,7 @@ body {
 }
 
 .svgImage {
-  fill: white !important;
+  fill: white ;
   background-color: white;
   color: white;
 }
@@ -67,7 +67,6 @@ body {
   margin: 50px 0;
 }
 
-
 input:focus, textarea:focus, select:focus {
   outline: none;
 }
@@ -83,15 +82,6 @@ a {
   text-decoration: none;
 }
 
-//@mixin templateRows {
-//  grid-template-rows: 1fr;
-//}
-
-
-
-
-
-// content with sidebar or without
 .leftSidebar {
   display: grid;
   grid-template-columns: 1fr;

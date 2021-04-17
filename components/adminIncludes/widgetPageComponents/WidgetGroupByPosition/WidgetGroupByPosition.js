@@ -1,9 +1,10 @@
-import React from 'react';
+import React,{useState} from 'react';
 import {convertVariableNameToName} from "../../../../_variables/_variables";
 import WidgetModel from "../../widgetsModel/WidgetModel/WidgetModel";
+import _ from "lodash";
 
 const WidgetGroupByPosition = props => {
-
+    const [open,setOpen]=useState(true)
     const renderWidgets = props.widgets.map(widget => {
         const dataWithIndex = {
             data: {
@@ -12,10 +13,9 @@ const WidgetGroupByPosition = props => {
             }
         }
         const widgetData = {...widget, ...dataWithIndex}
-        // console.log(widget._id)
         return (
             <WidgetModel
-                key={widget._id}
+                key={_.uniqueId('id_')}
                 widgetId={widgetData._id}
                 data={widgetData.data}
                 customPages={props.customPages}
@@ -24,11 +24,18 @@ const WidgetGroupByPosition = props => {
             />
         )
     })
-
+    const onOpenHandler = () => {
+        open ? setOpen(false) : setOpen(true)
+    }
     return (
-        <div className='widgetAdminPanelItem' key={props.position}>
-            <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(props.position)}</p>
-            {renderWidgets}
+        <div className='widgetAdminPanelItem'>
+            <p className='widgetAdminPanelItemHeader' onClick={onOpenHandler}>{convertVariableNameToName(props.position)}</p>
+            {open?
+                <>
+                {renderWidgets}
+                </>
+                :null}
+
         </div>
     );
 };

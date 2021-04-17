@@ -10,6 +10,7 @@ import Link from "next/link";
 import {generateAbsolutePath, initGA, logPageView} from '../../_variables/_variables'
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'),{ ssr: false })
 import {getSetting} from '../../_variables/ajaxVariables'
+import AdminFooter from "../adminIncludes/AdminFooter/AdminFooter";
 
 
 
@@ -66,8 +67,9 @@ const AdminLayout = props => {
                     <div ref={Admin} className="Admin">
                         {props.children}
                     </div>
-
+                    <AdminFooter/>
                 </div>
+
                 {contextData.alert.active && contextData.alert.alertMessage  ?  <AlertBox/> : null }
                 {contextData.state.loading  ?   <Loading/> : null }
             </>

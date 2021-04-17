@@ -14,27 +14,6 @@ const i18nConfig = locales.length === 1 ? {} : {
     },
 }
 
-
-
-const reDirectRoutes = {
-    redirects: async () => {
-        return [
-            {
-                source: '/',
-                destination: '/',
-                permanent: false,
-                // locale: true
-            },
-            // {
-            //     source: '/',
-            //     destination: '/',
-            //     permanent: false,
-            //     locale: false
-            // },
-        ]
-    }
-}
-
 const additionalConfig = {
     future: {
         webpack5: true,
@@ -51,52 +30,36 @@ const reWriteRoutes = {
     rewrites: async () => {
         return [
             {source: `/admin`, destination: '/admin', locale: false},
-            //post routes
-            {source: `/posts`, destination: '/posts'},
-            {source: `/:locale(${languages})?/video/:title`, destination: '/post'},
-            {source: `/:locale(${languages})?/post/:title`, destination: '/post'},
-            {source: `/:locale(${languages})?/product/:title`, destination: '/post'},
-            {source: `/:locale(${languages})?/article/:title`, destination: '/post'},
-            {source: `/video/:title`, destination: '/post'},
-            {source: `/post/:title`, destination: '/post'},
-            {source: `/product/:title`, destination: '/post'},
-            {source: `/article/:title`, destination: '/post'},
+            //meta route
+            {source: `/:locale(${languages})?/:contentType(categories|tags|actors)`, destination: '/meta'},
+            {source: `/:contentType(categories|tags|actors)`, destination: '/meta'},
             //posts route
             {source: `/:locale(${languages})?/posts`, destination: '/posts'},
-            //meta route
-            {source: `/:locale(${languages})?/categories`, destination: '/meta'},
-            {source: `/:locale(${languages})?/tags`, destination: '/meta'},
-            {source: `/:locale(${languages})?/actors`, destination: '/meta'},
-            {source: `/categories`, destination: '/meta'},
-            {source: `/tags`, destination: '/meta'},
-            {source: `/actors`, destination: '/meta'},
+            {source: `/posts`, destination: '/posts'},
+            //post routes
+            {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
+            {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/post'},
             //meta content
-            {source: `/:locale(${languages})?/categories/:category`, destination: '/posts'},
-            {source: `/:locale(${languages})?/tags/:tag`, destination: '/posts'},
-            {source: `/:locale(${languages})?/actors/:actor`, destination: '/posts'},
-            {source: `/categories/:category`, destination: '/posts'},
-            {source: `/tags/:tag`, destination: '/posts'},
-            {source: `/actors/:actor`, destination: '/posts'},
+            {source: `/:locale(${languages})?/:contentType(categories|tags|actors)?/:contentName`, destination: '/posts'},
+            {source: `/:contentType(categories|tags|actors)?/:contentName`, destination: '/posts'},
             //auth pages
-            //
-            {source: `/:locale(${languages})?/page/:pageName`, destination: '/page'},
-            {source: `/:locale(${languages})?/profile`, destination: '/profile'},
-            {source: `/:locale(${languages})?/checkout`, destination: '/checkout'},
             {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
             {source: `/:locale(${languages})?/register`, destination: '/auth/register'},
+            //custom pages
+            {source: `/:locale(${languages})?/page/:pageName`, destination: '/page'},
+            {source: `/:locale(${languages})?/profile`, destination: '/profile'},
+            //checkout
+            {source: `/:locale(${languages})?/checkout`, destination: '/checkout'},
         ]
     }
 }
 
-
 const nextImageConfig = {
     images: {
         domains: process.env.REACT_APP_ALLOWED_IMAGES_SOURCES.split(' '),
-        deviceSizes: [320, 640, 750, 828, 1080, 1200, 1920, 2048, 3840],
+        deviceSizes: [320,375,414,540, 640,717, 750,768, 828,1024, 1080, 1200, 1920, 2048, 3840],
     },
 }
-
-
 
 module.exports = withPlugins([
     additionalConfig,
@@ -110,3 +73,5 @@ module.exports = withPlugins([
     }),
     i18nConfig,
 ]);
+
+

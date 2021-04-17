@@ -22,7 +22,11 @@ const PostInfo = props => {
         postAbsolutePath: '',
         mode: 'view',
         isLiked: false,
-        isDisliked: false
+        isDisliked: false,
+        svgDefaultStyle:{
+            maxWidth:'25px',
+            maxHeight: '25px'
+        }
     });
 
     useEffect(() => {
@@ -42,23 +46,23 @@ const PostInfo = props => {
             <div className='post-info-head' >
                 <PostTitle {...props}/>
                 <div className='under-title'>
-                    <RatingButtons {...props}/>
-                    <Price {...props}/>
-                    <DownloadLink downloadLink={props.downloadLink} render={props.downloadLink} />
+                    <RatingButtons {...props} svgDefaultStyle={state.svgDefaultStyle}/>
+                    <Price {...props} svgDefaultStyle={state.svgDefaultStyle}/>
+                    <DownloadLink downloadLink={props.downloadLink} render={props.downloadLink} svgDefaultStyle={state.svgDefaultStyle} />
                 </div>
-                <AddToBasket productId={props._id} render={props.postType==='product'}/>
+                <AddToBasket productId={props._id} render={props.postType==='product'} svgDefaultStyle={state.svgDefaultStyle}/>
             </div>
 
             <div className='post-info-body'>
                 <div className="views">
                     <span>{props.views} views</span>
-                    <RatingData {...props}/>
+                    <RatingData {...props} svgDefaultStyle={state.svgDefaultStyle}/>
                 </div>
                 <div className="meta-description">
                     <PostDescription  {...props}/>
-                    <TagsAndCategoriesActors type='actors' data={props.actors || []}/>
-                    <TagsAndCategoriesActors type='tags' data={props.tags || []}/>
-                    <TagsAndCategoriesActors type='categories' data={props.categories || []}/>
+                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='actors' data={props.actors || []}/>
+                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='tags' data={props.tags || []}/>
+                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='categories' data={props.categories || []}/>
                 </div>
             </div>
         </StyledDiv>

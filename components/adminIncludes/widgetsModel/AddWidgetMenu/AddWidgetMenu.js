@@ -22,8 +22,8 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu {...props} type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
             <AddWidgetWithPositionMenu {...props} type='language' name='Language'/>
             <AddWidgetWithPositionMenu {...props} type='authentication' name='Auth Buttons'/>
-            <AddWidgetWithPositionMenu {...props} type='imageSwiper' name='Image Swiper(slide Show)'/>
-            <AddWidgetWithPositionMenu {...props} type='postsSwiper' name='Post Swiper(slide Show)'/>
+            <AddWidgetWithPositionMenu {...props} type='imageSwiper' name='Image slide Show'/>
+            <AddWidgetWithPositionMenu {...props} type='postsSwiper' name='Post slide Show'/>
             <WidgetImporter/>
             <WidgetExporter/>
         </div>

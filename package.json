@@ -8,7 +8,9 @@
     "build": "next build",
     "analys": "ANALYZE=true next build",
     "start": "NODE_ENV=production node ./server.js",
-    "updateLinux": "sudo ./update.sh"
+    "updateLinux": "sudo ./update.sh",
+    "fixMetaData": "node ./tools/fixMetaDataCounts.js",
+    "fixMetaImage": "node ./tools/fixMetaImage.js"
   },
   "keywords": [],
   "author": "",
@@ -72,7 +74,7 @@
     "sharp": "^0.26.3",
     "simple-youtube-api": "^5.2.1",
     "strip-ansi": "^6.0.0",
-    "styled-components": "^5.2.1",
+    "styled-components": "^5.2.3",
     "styled-jsx": "^3.3.2",
     "superagent": "^6.1.0",
     "swiper": "^6.3.5",

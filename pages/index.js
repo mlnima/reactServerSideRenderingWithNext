@@ -44,10 +44,6 @@ const getStaticProps = async (context) => {
     return {props: {widgets, ...firstLoadData?.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer,}}
 }
 
-// {
-//     process.env.REACT_APP_STATIC_PAGES ==='true'? export {getStaticProps } : export {getServerSideProps }
-//
-// }
 export {getServerSideProps }
 
 

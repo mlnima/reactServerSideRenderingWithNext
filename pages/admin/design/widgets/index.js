@@ -73,7 +73,6 @@ const HomePageWidgets = props => {
     }))].map(position => {
         const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)
         const widgetsOnThisType = widgetsInGroupByPosition.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
-       // console.log(_.uniqueId('id_'))
         return (
                 <WidgetGroupByPosition widgetsInGroupByPosition={widgetsInGroupByPosition} key={_.uniqueId('id_')} siteIdentity={siteIdentity} position={position}
                                        widgets={widgetsOnThisType} customPages={customPages} getAndSetWidgetsData={getAndSetWidgetsData}/>
@@ -82,19 +81,20 @@ const HomePageWidgets = props => {
 
 
     return (
-        <>
-            <h1>Widgets Settings :</h1>
-            <h2>Add Widgets:</h2>
+        <div className='admin-widgets-page'>
+            <h1>Widgets Settings</h1>
+
             <div id='widget-setting'>
+                <h2>Add New Widget</h2>
                 <div className="sidePanel">
                     <AddWidgetMenu getAndSetData={getAndSetData} customPages={customPages}/>
                 </div>
+                <h2>Widgets:</h2>
                 <div className="widgets">
                     {renderWidgetsInPosition}
-
                 </div>
             </div>
-        </>
+        </div>
     );
 };
 

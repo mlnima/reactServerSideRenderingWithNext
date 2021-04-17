@@ -9,11 +9,11 @@ const RatingData = props => {
                 <div className='post-rate' >
                     <div className='like-disLike-count'>
                             <span className='like-disLike-count-items' >
-                                <FontAwesomeIcon icon={faThumbsUp} className='like-disLike-count-items-logo'/>
+                                <FontAwesomeIcon style={props.svgDefaultStyle} icon={faThumbsUp} className='like-disLike-count-items-logo'/>
                                 <p>  {props.likes}</p>
                             </span>
                         <span className='like-disLike-count-items' >
-                                      <FontAwesomeIcon icon={faThumbsDown} className='like-disLike-count-items-logo'/>
+                                      <FontAwesomeIcon style={props.svgDefaultStyle} icon={faThumbsDown} className='like-disLike-count-items-logo'/>
                             <p>  {props.disLikes}</p>
                             </span>
                     </div>

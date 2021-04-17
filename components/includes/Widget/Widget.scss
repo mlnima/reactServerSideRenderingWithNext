@@ -34,12 +34,12 @@
   .listPostsContent {
     grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
     .post-element-div {
-      width: 95%;
+      width: 98%;
       max-width: 320px;
       height: 90px;
       margin: 2px 0;
       a {
-        width: 95%;
+        width: 98%;
         height: 90px;
 
         .post-element {
@@ -48,6 +48,7 @@
           display: flex;
           flex-direction: row;
           align-items: center;
+          justify-content: space-between;
 
           .image {
             width: 50%;
@@ -72,6 +73,7 @@
             text-align: left;
             font-size: 14px;
             padding: 0 2px;
+            //margin: 0 2px;
           }
 
         }

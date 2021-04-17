@@ -22,6 +22,7 @@ const PostElement = props => {
     const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
     const title = (props.state?.translations?.[locale]?.title || props.state.title).replace('#', '')
 
+
     let [state, setState] = useState({
         isHover: false,
         isWatched: false,
@@ -29,7 +30,11 @@ const PostElement = props => {
         queries: {},
         infoOnPostElementStyle: {},
         titleElementStyle: {},
-        imageWidth: 320
+        imageWidth: 320,
+        svgDefaultStyle:{
+            maxWidth:'25px',
+            maxHeight: '25px'
+        }
     });
 
     useEffect(() => {
@@ -89,11 +94,11 @@ const PostElement = props => {
 
                                     />
                             }
-                            {props.state && props.state.views > 1 && props.state.postType === ('video') && !state.isHover ? <BottomRight views={props.state.views}/> : null}
+                            {props.state && props.state.views > 1 && props.state.postType === ('video') && !state.isHover ? <BottomRight views={props.state.views} svgDefaultStyle={state.svgDefaultStyle}/> : null}
                             {(props.state.postType === ('video') || props.state.postType === ('redirect') || props.state.postType === ('product')) && !state.isHover ?
-                                <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration}/> : null}
-                            {props.state.quality && props.state.postType === ('video') && !state.isHover ? <TopRight quality={props.state.quality}/> : null}
-                            {props.state.likes > 0 && props.state.rating !== 'disable' && !state.isHover ? <TopLeft rating={likeValueCalculator(props.state.likes, props.state.disLikes)}/> : null}
+                                <BottomLeft type={props.state.postType} price={props.state.price} duration={props.state.duration} svgDefaultStyle={state.svgDefaultStyle}/> : null}
+                            {props.state.quality && props.state.postType === ('video') && !state.isHover ? <TopRight quality={props.state.quality} svgDefaultStyle={state.svgDefaultStyle}/> : null}
+                            {props.state.likes > 0 && props.state.rating !== 'disable' && !state.isHover ? <TopLeft rating={likeValueCalculator(props.state.likes, props.state.disLikes)} svgDefaultStyle={state.svgDefaultStyle}/> : null}
                         </div>
                         <h3>{title}</h3>
                     </div>

@@ -26,6 +26,9 @@ const Post = props => {
     const [deviceWidth, setDeviceWidth] = useState(null)
 
     useEffect(() => {
+        console.log(props)
+    }, [props]);
+    useEffect(() => {
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)
         }
@@ -79,7 +82,7 @@ export const getServerSideProps = async (context) => {
     let responseCode = 200
     const postData = await getPost({_id: context.query.id}, firstLoadData.domainName, true)
     const post = postData.data.post;
-    const widgetsData = (!firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) || (firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) ? await getMultipleWidgetWithData({widgets: ['postPageLeftSidebar','postPageRightSidebar', 'underPost',]}, firstLoadData.domainName, true, 'postPage') : []
+    const widgetsData = (!firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) || (firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) ? await getMultipleWidgetWithData({widgets: ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost',]}, firstLoadData.domainName, true, 'postPage') : []
     if (!post) {
         return {
             notFound: true
@@ -89,7 +92,17 @@ export const getServerSideProps = async (context) => {
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
     const comments = post ? commentsData?.data?.comments : []
 
-    return {props: {widgets, ...firstLoadData.settings, post: post || responseCode, query:context.query, isMobile: Boolean(firstLoadData.isMobile), comments, referer: firstLoadData.referer, responseCode}}
+    return {
+        props: {
+            widgets, ...firstLoadData.settings,
+            post: post || responseCode,
+            query: context.query,
+            isMobile: Boolean(firstLoadData.isMobile),
+            comments,
+            referer: firstLoadData.referer,
+            responseCode
+        }
+    }
 }
 
 

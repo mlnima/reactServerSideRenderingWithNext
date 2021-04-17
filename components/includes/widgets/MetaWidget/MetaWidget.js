@@ -7,6 +7,7 @@ import {faStar} from "@fortawesome/free-regular-svg-icons";
 const MetaWidget = props => {
     const renderMeta = (props.metaData || []).map(meta => {
         const path = `/posts?content=${meta._id}`;
+        const asPath = `/${meta.type}/${meta.name}?content=${meta._id}`
         const icon = meta.type === 'categories' ? faFolder
             : meta.type === 'tags' ? faTag
                 : meta.type === 'actors' ? faStar
@@ -15,7 +16,7 @@ const MetaWidget = props => {
         return (
             <div key={meta.name} className='meta-child-element' >
                 <FontAwesomeIcon icon={icon} className='meta-data-logo'/>
-                <Link href={path} key={meta.name}>
+                <Link href={path} key={meta.name} as={asPath}>
                     <a className='meta-widget-item' >  {meta.name}</a>
                 </Link>
             </div>

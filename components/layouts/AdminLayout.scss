@@ -3,15 +3,14 @@
 .container {
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas: 'adminTopBar adminTopBar' 'adminContent adminContent'
+  grid-template-areas: 'admin-topbar' 'admin-content' 'admin-footer'
 }
 
 .Admin {
-  grid-area: adminContent;
+  grid-area: admin-content;
   background-color: $AdminBackground50;
   color: black;
-  padding: 20px;
-  min-height: 100vh;
+  min-height: 100%;
   float: left;
   -webkit-font-smoothing: subpixel-antialiased;
 }
@@ -20,7 +19,7 @@
   .container {
     display: grid;
     grid-template-columns: 160px 1fr;
-    grid-template-areas: 'adminTopBar adminTopBar' 'adminSideBar adminContent'
+    grid-template-areas: 'admin-topbar admin-topbar' 'adminSideBar admin-content' 'admin-footer admin-footer'
   }
 }
 

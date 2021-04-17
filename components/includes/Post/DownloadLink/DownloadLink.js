@@ -8,7 +8,7 @@ const DownloadLink = props => {
     if (props.render) {
         return (
             <StyledDiv  className='download-url action-wide-button'>
-                <a  href={ props.downloadLink } target='_blank' className='download-link' rel="noreferrer"><FontAwesomeIcon icon={faDownload} className='svg-logo-medium'/></a>
+                <a  href={ props.downloadLink } target='_blank' className='download-link' rel="noreferrer"><FontAwesomeIcon style={props.svgDefaultStyle} icon={faDownload} className='svg-logo-medium'/></a>
             </StyledDiv>
 
         );

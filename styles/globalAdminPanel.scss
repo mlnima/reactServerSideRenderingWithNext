@@ -1,6 +1,12 @@
-//@import "../styles/colors";
-//@import "../styles/buttons";
-//@import "../styles/grid";
+:root {
+  --admin-text-color: #fff;
+  --admin-darkcolor:#1b1b1b;
+  --admin-darkcolor70:#33373c;
+  --admin-darkcolor80:#282828;
+  --admin-darkcolor90:#181818;
+}
+
+
 
 //components
 @import "../components/adminIncludes/design/UrlSection";
@@ -8,50 +14,20 @@
 @import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu";
 @import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu";
 @import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
-
 @import "../components/adminIncludes/AdminDesignSettingColorType/AdminDesignSettingColorType";
 @import "../components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl";
 @import "../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminRenderComments";
 @import "../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminCommentItem/AdminCommentItem";
 @import "../components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea";
 @import "../components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl";
-//***admin post page components ***
-//@import"../components/adminIncludes/PostComponents/PostInformation/PostInformation";
-//@import"../components/adminIncludes/PostComponents/PostInformation/VideoUrls/VideoUrls";
-//@import"../components/adminIncludes/PostComponents/PostInformation/VideoEmbedCode/VideoEmbedCode";
-//@import"../components/adminIncludes/PostComponents/PostInformation/TextInputWithUploadBtn/TextInputWithUploadBtn";
-//@import"../components/adminIncludes/PostComponents/PostInformation/IsInSlideShow/IsInSlideShow";
-//@import"../components/adminIncludes/PostComponents/PostInformation/ImageGallery/ImageGallery";
-//@import"../components/adminIncludes/PostComponents/ImagePreview/ImagePreview";
-//@import"../components/adminIncludes/PostComponents/Meta/Meta";
-//@import"../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
-//@import"../components/adminIncludes/PostComponents/Format/Format";
-//@import"../components/adminIncludes/PostComponents/ProductInformation/ProductInformation";
-//@import "../components/adminIncludes/PostComponents/Meta/Meta";
-//@import"../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
-//@import"../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
-
-//***** Admin posts ****
-//@import"../components/adminIncludes/PostsComponents/Filters/FilterDropDownActions";
-//@import"../components/adminIncludes/PostsComponents/Filters/FilterPagination";
-//@import"../components/adminIncludes/PostsComponents/Filters/Filters";
-//@import"../components/adminIncludes/PostsComponents/Filters/FilterSearch";
-//@import"../components/adminIncludes/PostsComponents/Filters/FilterStatusBtn";
-//@import"../components/adminIncludes/PostsComponents/PostsDataTable/BodyTable";
-//@import"../components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable";
-//@import"../components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable";
-
 @import "../components/adminIncludes/FileManagerComponents/TextEditor/TextEditor";
-
 @import "../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView";
 @import "../components/adminIncludes/NavigationItem/NavigationItem";
 @import "../components/adminIncludes/SideBar/SideBar";
-//@import "../components/adminIncludes/TextInputWithUploadBtn/TextInputWithUploadBtn";
 @import "../components/adminIncludes/TopBar/AdminTopBar";
 @import "../components/adminIncludes/TopBar/NewItemMenu/NewItemMenu";
 @import "../components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu";
 @import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
-
 @import "../components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation";
 @import "../components/adminIncludes/assetComponents/TableControls/AssetSearch";
 @import "../components/adminIncludes/assetComponents/TableControls/AssetBulkActionAndAssetTypeSelector/AssetBulkActionAndAssetTypeSelector";
@@ -64,9 +40,9 @@
 @import "../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 @import "../components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection";
 @import "../components/adminIncludes/TextEditor/TextEditor";
+@import "../components/adminIncludes/AdminFooter/AdminFooter";
 @import "AdminStyle";
 //page
-
 @import "../pages/admin/settings/settings";
 @import "../pages/admin/page/page";
 @import "../pages/admin/design/design";
@@ -75,12 +51,9 @@
 @import "../pages/admin/post/post";
 @import "../pages/admin/meta/meta";
 @import "../pages/admin/translate/translate";
-
 @import "../pages/admin/design/widgets/widgets";
 @import "../pages/admin/design/customStyle/customStyle";
 @import "../pages/admin/form/form";
-
-
 @import "../pages/admin/design/background/background";
 @import "../pages/admin/user/user";
 @import "../pages/admin/importer/youtube/youtube";
@@ -88,10 +61,5 @@
 @import "../pages/admin/tools/terminal/terminal";
 @import "../pages/admin/tools/tools";
 
-
-body{
-  //font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,Oxygen-Sans,Ubuntu,Cantarell,"Helvetica Neue",sans-serif;
-
-}
 
 

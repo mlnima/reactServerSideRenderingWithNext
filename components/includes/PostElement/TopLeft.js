@@ -9,7 +9,7 @@ const TopLeft = props => {
     return (
         <div className='top-left'>
             <span className='view-count value-next-icon'>%{props.rating}</span>
-            <FontAwesomeIcon icon={faThumbsUp} className='post-element-info-logo'/>
+            <FontAwesomeIcon  style={props.svgDefaultStyle} icon={faThumbsUp} className='post-element-info-logo'/>
         </div>
     );
 };

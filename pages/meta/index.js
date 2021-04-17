@@ -49,6 +49,7 @@ const meta = props => {
 
 
 export const getServerSideProps = async ({req, query, res}) => {
+    console.log(query)
     const firstLoadData = await getFirstLoadData(req)
     let errorCode = 200
     const contentTypeSource = query?.contentType || req?.headers?.referer || req?.originalUrl

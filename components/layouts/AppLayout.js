@@ -2,11 +2,17 @@ import React, {useContext, useEffect, useState, useCallback, useMemo} from 'reac
 import dynamic from "next/dynamic";
 import {initGA, logPageView} from '../../_variables/_variables'
 import {createGlobalStyle} from "styled-components";
-import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
-import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
 import _ from 'lodash'
+
+import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
+import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
+import TopBarWidgetArea from "../widgetsArea/TopBarWidgetArea/TopBarWidgetArea";
+import HeaderWidgetArea from "../widgetsArea/HeaderWidgetArea/HeaderWidgetArea";
+import NavigationWidgetArea from "../widgetsArea/NavigationWidgetArea/NavigationWidgetArea";
+import SideBarWidgetArea from "../widgetsArea/SideBarWidgetArea/SideBarWidgetArea";
+import FooterWidgetArea from "../widgetsArea/FooterWidgetArea/FooterWidgetArea";
 
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
@@ -122,7 +128,7 @@ const AppLayout = props => {
             <SiteSettingSetter identity={props.identity || contextData?.siteIdentity} design={props.design || contextData?.siteDesign} eCommerce={props.eCommerce}/>
 
             {(!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar).length > 0 ?
-                <WidgetArea
+                <TopBarWidgetArea
                     isMobile={props.isMobile}
                     key='topBar'
                     widgets={!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar}
@@ -134,7 +140,7 @@ const AppLayout = props => {
                 /> : null
             }
             {(!props.referer ? firstLoadWidgets.header : staticWidgets.header).length > 0 ?
-                <WidgetArea
+                <HeaderWidgetArea
                     isMobile={props.isMobile}
                     key='header'
                     widgets={!props.referer ? firstLoadWidgets.header : staticWidgets.header}
@@ -145,7 +151,7 @@ const AppLayout = props => {
                 /> : null
             }
             {(!props.referer ? firstLoadWidgets.navigation : staticWidgets.navigation).length > 0 ?
-                <WidgetArea
+                <NavigationWidgetArea
                     isMobile={props.isMobile}
                     key='navigation'
                     widgets={!props.referer ? firstLoadWidgets.navigation : staticWidgets?.navigation}
@@ -158,7 +164,7 @@ const AppLayout = props => {
             }
 
             {(!props.referer ? leftSidebarWidgetsData : leftSidebarWidgets).length > 0 && leftSidebar ?
-                <WidgetArea
+                <SideBarWidgetArea
                     isMobile={props.isMobile}
                     key='leftSidebar'
                     widgets={!props.referer ? leftSidebarWidgetsData : leftSidebarWidgets}
@@ -171,7 +177,7 @@ const AppLayout = props => {
 
             {props.children}
             {(!props.referer ? rightSidebarWidgetsData : rightSidebarWidgets).length > 0 && rightSidebar ?
-                <WidgetArea
+                <SideBarWidgetArea
                     isMobile={props.isMobile}
                     key='rightSidebar'
                     widgets={!props.referer ? rightSidebarWidgetsData : rightSidebarWidgets}
@@ -182,7 +188,7 @@ const AppLayout = props => {
                 /> : null
             }
             {(!props.referer ? firstLoadWidgets.footer : staticWidgets.footer).length > 0 ?
-                <WidgetArea
+                <FooterWidgetArea
                     isMobile={props.isMobile}
                     widgets={!props.referer ? firstLoadWidgets.footer : staticWidgets.footer}
                     className='footer' position='footer'

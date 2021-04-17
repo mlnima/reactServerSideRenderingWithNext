@@ -28,11 +28,11 @@ const postSchema =  new Schema({
     status: String,
     priceType: String,
     production: String,
-    comments: Array,
+    comments: [{type:Schema.Types.ObjectID,ref:'comment'}],
     widgets:Array,
-    categories: [Schema.Types.ObjectID],
-    actors: [Schema.Types.ObjectID],
-    tags: [Schema.Types.ObjectID],
+    categories: [{type:Schema.Types.ObjectID,ref:'meta'}],
+    actors: [{type:Schema.Types.ObjectID,ref:'meta'}],
+    tags: [{type:Schema.Types.ObjectID,ref:'meta'}],
     likes: {
         type: Number,
         default: 0

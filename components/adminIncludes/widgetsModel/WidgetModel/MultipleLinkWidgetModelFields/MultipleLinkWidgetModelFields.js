@@ -66,7 +66,9 @@ const MultipleLinkWidgetModelFields = props => {
 
     return (
         <>
-            <form className='multiple-link-widget-add-form' onSubmit={e => onAddHandler(e)}>
+            <form className='multiple-link-widget-add-form'
+                  onSubmit={e => onAddHandler(e)}
+            >
 
                 <div className='menu-form-field'>
                     <p>Link title :</p>

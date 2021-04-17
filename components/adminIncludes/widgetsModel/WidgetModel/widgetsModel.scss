@@ -5,59 +5,35 @@
 @import "./MenuWidgetModelFields/MenuWidgetModelFields";
 @import "./WidgetHeaderControl/WidgetHeaderControl";
 
-.widget-open-control {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 0 10px;
-  background-color: $AdminColor80;
-  color: $light100;
-  border-radius: 10px 10px 0 0;
-  margin-top: 5px ;
-  //font-weight:  ;
-  .widget-open-control-group{
-    display: flex;
-    align-items: center;
-  }
-  button{
-    @include AdminLightBtn
-  }
-  .changeWidgetIndexBtn{
-    background-color: transparent;
-    border: none;
-    img{
-      color: black;
-    }
-    &:hover{
-      background-color: $dark80;
-
-    }
-  }
-  &:hover{
-    transition: 1s;
-    transform: scale(1.03);
-  }
-}
 
 .widgetModel {
-  background-color: $AdminColor80;
-  border-radius: 0 0 10px 10px;
+  z-index: 3;
+  background-color: var(--admin-darkcolor70);
   display: flex;
   flex-direction: column;
-  //max-width: 300px;
-  padding:  10px;
-  border: solid .5px black;
-  margin-bottom: 5px;
-  color: $light100;
+  //border: solid .5px black;
 
+  color: var(--admin-text-color);
+  position: initial;
+  top:100px;
+  width: 100%;
+  p{
+    width: 95%;
+    margin: auto;
+    font-size: .8rem;
+  }
+  .widgetInfo{
+    margin: auto;
+    width: 95%;
+  }
   .customStylesTextarea{
     width: 95%;
     min-height: 250px;
     margin: auto;
   }
-
-
   .widgetSection{
+    margin: auto;
+    width: 95%;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -118,5 +94,11 @@
   justify-content: space-evenly;
   button{
     padding: 5px 5%;
+  }
+}
+
+@media only screen and (min-width: 768px) {
+  .widgetModel{
+   // position: absolute;
   }
 }

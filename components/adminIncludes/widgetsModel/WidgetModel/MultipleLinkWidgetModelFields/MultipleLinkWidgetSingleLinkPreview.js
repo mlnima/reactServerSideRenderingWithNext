@@ -78,7 +78,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
     return (
 
         <>
-            <div key={editingDataa.linkId} className='multiple-link-widget-single-link-preview-header'>
+            <div key={editingData.linkId} className='multiple-link-widget-single-link-preview-header'>
                 <p>{editingData.linkTitle}</p>
                 <p>index : {editingData.linkIndex}</p>
                 <button onClick={() => onIndexChangeHandler(false)}>-</button>

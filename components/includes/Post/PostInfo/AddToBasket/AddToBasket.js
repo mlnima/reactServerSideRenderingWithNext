@@ -52,7 +52,7 @@ const AddToBasket = props => {
         return (
             <form className='add-item-to-basket' onSubmit={e=>onAddToBasketHandler(e)}>
                 <input ref={countInput}  className='add-item-to-basket-count' type='number' value={count} onChange={e=>setCount(e.target.value)}/>
-                <button onClick={onAddToBasketHandler} className='add-item-to-basket-action'><FontAwesomeIcon icon={faCartPlus} className='svg-logo-medium '/></button>
+                <button onClick={onAddToBasketHandler} className='add-item-to-basket-action'><FontAwesomeIcon style={props.svgDefaultStyle} icon={faCartPlus} className='svg-logo-medium '/></button>
             </form>
         );
     } else return null

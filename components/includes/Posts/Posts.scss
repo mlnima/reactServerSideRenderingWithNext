@@ -1,16 +1,7 @@
-@import "../../../styles/_grid";
-
-//.posts-grid {
-//  //margin: 10px 0;
-//
-//
-//}
-
 .postsContent {
   display: flex;
+  flex-direction: row;
   flex-wrap: wrap;
-  align-items: center;
   justify-content: flex-start;
 
-  //@include postsContent;
 }

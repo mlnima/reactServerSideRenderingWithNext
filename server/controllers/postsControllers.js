@@ -26,7 +26,7 @@ const metasSaver = async (metas) => {
 
         })
     }
-   // console.log(finalData)
+    // console.log(finalData)
     return finalData
 }
 
@@ -53,7 +53,7 @@ postsControllers.createNewPost = async (req, res) => {
         const newPostDataToSave = new postSchema(editedNewPost);
         newPostDataToSave.save().then(savedPostData => {
             res.json({savedPostData});
-          //  console.log('savedPostData : ', savedPostData)
+            //  console.log('savedPostData : ', savedPostData)
             res.end()
         }).catch(err => {
             if (err.code === 11000) {
@@ -112,7 +112,7 @@ postsControllers.updatePost = async (req, res) => {
 postsControllers.getPostsInfo = async (req, res) => {
 
     const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
-    const pageNo = req.body.pageNo || 1;
+    const pageNo = parseInt(req.body?.pageNo) ?? 1;
     let postTypeQuery = req.body.postType === 'all' ? {} : {postType: req.body.postType};
     let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
     let authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
@@ -143,11 +143,11 @@ postsControllers.getPostsInfo = async (req, res) => {
 
     let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
     let postsCount = await postSchema.countDocuments({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).exec()
-    let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random'? {lastModify: -1} :{[req.body.sort]: -1}
+    let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random' ? {lastModify: -1} : {[req.body.sort]: -1}
 
     let posts = req.body.sort === 'random' ?
         await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(Math.floor(Math.random() * postsCount)).limit(size).sort(sortQuery).exec()
-        :await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
+        : await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
     Promise.all([posts, postsCount]).then(async data => {
         const posts = data[0]
         let postsDataToSend = []
@@ -181,17 +181,16 @@ postsControllers.getPostsInfo = async (req, res) => {
 
 postsControllers.getPostInfo = (req, res) => {
     const _id = req.body._id;
-    postSchema.findById(_id).exec().then(async post => {
-        const postData = {
-            ...post.toObject(),
-            categories: post.categories ? await metaSchema.find({'_id': {$in: [...post.categories]}}) : [],
-            tags: post.tags ? await metaSchema.find({'_id': {$in: [...post.tags]}}) : [],
-            actors: post.actors ? await metaSchema.find({'_id': {$in: [...post.actors]}}) : []
-        }
-        const postMessageToSend = {post: postData, error: false}
+    postSchema.findById(_id).populate([
+        {path: 'categories'},
+        {path: 'tags'},
+        {path: 'actors'},
+        {path: 'comment'}
+    ]).exec().then(async post => {
+        const postMessageToSend = {post, error: false}
         res.json(postMessageToSend);
         res.end()
-    }).catch(err=>{
+    }).catch(err => {
         res.send(err)
         res.end()
     })
@@ -211,7 +210,7 @@ postsControllers.deletePost = (req, res) => {
 
 postsControllers.postsBulkAction = async (req, res) => {
     const ids = req.body.ids || [];
-   // console.log(req.body)
+    // console.log(req.body)
     const status = req.body.status;
     let actions;
 
@@ -324,9 +323,9 @@ postsControllers.getMeta = async (req, res) => {
     metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
         const mapMetaToGetImage = metas.map(async meta => {
             try {
-                const countPostsHasCurrentMeta =  await postSchema.countDocuments({$and:[{[type.type]: meta._id},{status:'published'}]}).exec()
+                const countPostsHasCurrentMeta = meta.count ? meta.count : await postSchema.countDocuments({$and: [{[type.type]: meta._id}, {status: 'published'}]}).exec()
                 const skipForNoImageUrl = Math.floor(Math.random() * countPostsHasCurrentMeta)
-                const noImageUrl = await postSchema.find({$and:[{[type.type]: meta._id},{status:'published'}]}).skip(skipForNoImageUrl).limit(1).sort('-_id').exec().then(lastPost => {
+                const noImageUrl = meta.imageUrl ? '' : await postSchema.find({$and: [{[type.type]: meta._id}, {status: 'published'}]}).skip(skipForNoImageUrl).limit(1).sort('-_id').exec().then(lastPost => {
                     //.skip(Math.floor(Math.random() * metaCount))
                     if (lastPost[0]) {
                         return lastPost[0].mainThumbnail
@@ -334,7 +333,7 @@ postsControllers.getMeta = async (req, res) => {
                         return undefined
                     }
                 }).catch(err => {
-                    console.log('1x',err)
+                    console.log('1x', err)
                     res.end()
                 })
 
@@ -376,7 +375,7 @@ postsControllers.newComment = (req, res) => {
 
     const commentDataToSave = new commentSchema(req.body)
     commentDataToSave.save(saved => {
-     //   console.log(saved)
+        //   console.log(saved)
         res.end()
     })
 };
@@ -421,7 +420,7 @@ postsControllers.deleteComments = (req, res) => {
     })
 
     Promise.all(mapIdAndReturnDeletePromise).then(() => {
-       // console.log(res)
+        // console.log(res)
         res.sendStatus(200)
         res.end()
     }).catch(err => {
@@ -436,9 +435,9 @@ postsControllers.deleteComments = (req, res) => {
 postsControllers.export = (req, res) => {
     postSchema.find({}).exec().then(async exportData => {
         try {
-            let finalData= []
-            for await (let post of exportData){
-                finalData = [...finalData,{
+            let finalData = []
+            for await (let post of exportData) {
+                finalData = [...finalData, {
                     ...post.toObject(),
                     categories: post.categories ? await metaSchema.find({'_id': {$in: [...post.categories]}}).select('name type') : [],
                     tags: post.tags ? await metaSchema.find({'_id': {$in: [...post.tags]}}).select('name type') : [],
@@ -451,7 +450,7 @@ postsControllers.export = (req, res) => {
         }
 
     }).then(finalData => {
-       // console.log(finalData)
+        // console.log(finalData)
         res.json({exportedData: finalData})
         res.end()
     })
@@ -466,17 +465,17 @@ postsControllers.export = (req, res) => {
 };
 
 
-postsControllers.checkRemovedContent = (req,res)=>{
-    const checkUrl=req.body.checkUrl
+postsControllers.checkRemovedContent = (req, res) => {
+    const checkUrl = req.body.checkUrl
     const contentId = req.body.contentId
     const type = req.body.type
-    if (checkUrl){
-        axios(checkUrl).then(result=>{
+    if (checkUrl) {
+        axios(checkUrl).then(result => {
             res.end()
-        }).catch(err=>{
-            if (err?.response?.status === 404){
-                console.log(contentId,' deleted')
-                postSchema.findOneAndUpdate({mainThumbnail:checkUrl},{$set: { status: 'pending' }}, {new: true}).exec()
+        }).catch(err => {
+            if (err?.response?.status === 404) {
+                console.log(contentId, ' deleted')
+                postSchema.findOneAndUpdate({mainThumbnail: checkUrl}, {$set: {status: 'pending'}}, {new: true}).exec()
             }
             res.end()
         })

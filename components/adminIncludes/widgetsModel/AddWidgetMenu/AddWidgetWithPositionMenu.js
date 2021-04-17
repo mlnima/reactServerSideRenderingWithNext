@@ -1,8 +1,29 @@
-import React, {useEffect, useState, useContext} from 'react';
-import {widgetModels} from './models'
-import {addNewWidget, getMultipleWidgetWithData, getPagesData} from '../../../../_variables/ajaxVariables'
+import React, {useContext, useState} from 'react';
+import {
+    widgetModels,
+    postsSwiperWidgetModel,
+    textWidgetModel,
+    menuWidgetModel,
+    linkToWidgetModel,
+    multipleLinkToWidgetModel,
+    postsWidgetModel,
+    mediaWidgetModel,
+    recentCommentsWidgetModel,
+    searchBarWidgetModel,
+    metaWidgetModel,
+    shoppingCartWidgetModel,
+    logoWidgetModel,
+    authenticationWidgetModel,
+    languageWidgetModel,
+    alphabeticalNumericalRangeWidgetModel,
+    imageSwiperWidgetModel
+
+
+} from './models'
+import {addNewWidget} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
-import {AppContext} from '../../../../context/AppContext'
+import {AppContext} from "../../../../context/AppContext";
+
 
 
 const AddWidgetWithPositionMenu = props => {
@@ -10,18 +31,6 @@ const AddWidgetWithPositionMenu = props => {
     const [state, setState] = useState({
         open: false
     });
-    const [customPages,setCustomPages] = useState([])
-
-    // useEffect(() => {
-    //     getPagesData().then(res=>{
-    //         if(res.data){
-    //             if(res.data.pages){
-    //                 const pagesNames = res.data.pages.map(page=>page.pageName)
-    //                 setCustomPages(pagesNames)
-    //             }
-    //         }
-    //     })
-    // }, [props]);
 
     const onOpenHandler = () => {
         state.open ? setState({
@@ -34,20 +43,35 @@ const AddWidgetWithPositionMenu = props => {
     }
 
     const onAddNewWidget = (position, type) => {
-        let dataToSave = widgetModels;
-        dataToSave.position = position
-        dataToSave.type = type
+        const widgetModelData = type ==='text' || type ==='textEditor' ? textWidgetModel:
+                                type ==='menu'? menuWidgetModel:
+                                type ==='linkTo'? linkToWidgetModel:
+                                type ==='multipleLinkTo'? multipleLinkToWidgetModel:
+                                type ==='posts'? postsWidgetModel:
+                                type ==='media'? mediaWidgetModel:
+                                type ==='searchBar'? searchBarWidgetModel:
+                                type ==='recentComments'? recentCommentsWidgetModel:
+                                type ==='meta'? metaWidgetModel:
+                                type ==='logo'? logoWidgetModel:
+                                type ==='shoppingCart'? shoppingCartWidgetModel:
+                                type ==='alphabeticalNumericalRange'? alphabeticalNumericalRangeWidgetModel:
+                                type ==='language'? languageWidgetModel:
+                                type ==='alphabeticalNumericalRange'? authenticationWidgetModel:
+                                type ==='imageSwiper'? imageSwiperWidgetModel:
+                                type ==='postsSwiper'? postsSwiperWidgetModel:
+                                 widgetModels
+        let dataToSave = {
+            ...widgetModelData,
+            position,
+            type,
+            widgetIndex:contextData.widgetsSettings.widgets.filter(w=>w.position === position).length + 1,
+        };
+
         addNewWidget({
-            data: widgetModels
+            data: dataToSave
         }).then(() => {
         }).then(() => {
             props.getAndSetData()
-            // getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
-            //     contextData.dispatchWidgetsSettings({
-            //         ...contextData.widgetsSettings,
-            //         widgets: [...res.data.widgets]
-            //     })
-            // })
         }).catch(err => {
             console.log(err)
         })
@@ -87,7 +111,6 @@ const AddWidgetWithPositionMenu = props => {
 
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('underPost', props.type)}>Under the Post</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('footer', props.type)}>Footer</button>
-                    <p>CUSTOM PAGES :</p>
                    {renderCustomPagesPosition}
                 </div>
             </div>
@@ -105,12 +128,3 @@ const AddWidgetWithPositionMenu = props => {
 export default AddWidgetWithPositionMenu;
 
 
-//
-// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('tagsPageLeftSidebar', props.type)}>Tags Page Left Sidebar</button>
-// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('tagsPageRightSidebar', props.type)}>Tags Page Right Sidebar</button>
-//
-// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('categoriesPageLeftSidebar', props.type)}>Categories Page Left Sidebar</button>
-// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('categoriesPageRightSidebar', props.type)}>Categories Page Right Sidebar</button>
-//
-// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('actorsPageLeftSidebar', props.type)}>Actors Page Left Sidebar</button>
-// <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('actorsPageRightSidebar', props.type)}>Actors Page Right Sidebar</button>

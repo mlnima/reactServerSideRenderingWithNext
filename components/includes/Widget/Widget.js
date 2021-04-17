@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import WidgetHeader from "./WidgetHeader/WidgetHeader";
 import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
@@ -8,6 +8,12 @@ let StyledDiv = styled.div`${props => props.customStyles}`
 
 const Widget = props => {
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
+    useEffect(() => {
+        if(props.data.type === 'meta'){
+            console.log(props.data)
+        }
+
+    }, [props]);
 
     return (
         <StyledDiv customStyles={props.data?.customStyles || ''}

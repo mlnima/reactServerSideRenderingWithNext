@@ -6,7 +6,7 @@
 /static/uploads/*
 
 generateFakeData.js
-testAPI.js
+tools/testAPI.js
 /package-lock.json
 .package-lock.json
 /generateFakeData.js
