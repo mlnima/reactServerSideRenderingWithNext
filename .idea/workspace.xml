@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -596,7 +595,7 @@
       <workItem from="1618507767350" duration="8076000" />
       <workItem from="1618563742885" duration="8712000" />
       <workItem from="1618581741516" duration="21896000" />
-      <workItem from="1618639305128" duration="19214000" />
+      <workItem from="1618639305128" duration="19577000" />
     </task>
     <servers />
   </component>

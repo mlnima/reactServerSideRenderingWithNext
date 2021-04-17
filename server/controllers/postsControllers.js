@@ -286,6 +286,7 @@ postsControllers.getSingleMeta = async (req, res) => {
 
 
 postsControllers.getMeta = async (req, res) => {
+    console.log('body:',req.body)
     const type = req.body.type ? {type: req.body.type} : {}
     const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
     let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
@@ -321,7 +322,6 @@ postsControllers.getMeta = async (req, res) => {
     let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
     const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).exec()
     metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
-        console.log(metas)
         const mapMetaToGetImage = metas.map(async meta => {
             try {
                 const countPostsHasCurrentMeta = meta.count ? meta.count : await postSchema.countDocuments({$and: [{[type.type]: meta._id}, {status: 'published'}]}).exec()
