@@ -289,7 +289,7 @@ postsControllers.getMeta = async (req, res) => {
 
     const type = req.body.type ? {type: req.body.type} : {}
     const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
-    let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
+    let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status || 'published'};
     const page = req.body.page;
     const startWithQuery = req.body?.startWith === 'any' ? {} : {name: {$regex: '^' + req.body?.startWith, $options: 'i'}}
     let searchQuery = req.body.keyword === '' ? {} : {
