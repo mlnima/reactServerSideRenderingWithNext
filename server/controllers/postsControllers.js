@@ -321,6 +321,7 @@ postsControllers.getMeta = async (req, res) => {
     let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
     const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).exec()
     metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
+        console.log(metas)
         const mapMetaToGetImage = metas.map(async meta => {
             try {
                 const countPostsHasCurrentMeta = meta.count ? meta.count : await postSchema.countDocuments({$and: [{[type.type]: meta._id}, {status: 'published'}]}).exec()
