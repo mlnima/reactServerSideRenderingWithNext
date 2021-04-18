@@ -31,17 +31,17 @@ const reWriteRoutes = {
         return [
             {source: `/admin`, destination: '/admin', locale: false},
             //meta route
-            {source: `/:locale(${languages})?/:contentType(categories|tags|actors)`, destination: '/meta'},
-            {source: `/:contentType(categories|tags|actors)`, destination: '/meta'},
-            //posts route
+            {source: `/:locale(${languages})?/:metaType(categories|tags|actors)`, destination: '/meta'},
+            {source: `/:metaType(categories|tags|actors)`, destination: '/meta'},
+            //posts routes
+            {source: `/:locale(${languages})?/:metaType(categories|tags|actors)?/:metaName`, destination: '/posts'},
+            {source: `/:metaType(categories|tags|actors)?/:metaName`, destination: '/posts'},
             {source: `/:locale(${languages})?/posts`, destination: '/posts'},
-            {source: `/posts`, destination: '/posts'},
+            //{source: `/posts`, destination: '/posts'},
             //post routes
             {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
             {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/post'},
-            //meta content
-            {source: `/:locale(${languages})?/:contentType(categories|tags|actors)?/:contentName`, destination: '/posts'},
-            {source: `/:contentType(categories|tags|actors)?/:contentName`, destination: '/posts'},
+
             //auth pages
             {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
             {source: `/:locale(${languages})?/register`, destination: '/auth/register'},

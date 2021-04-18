@@ -24,8 +24,19 @@ const metaFixer =  ()=>{
                         console.log(meta.name, 'had 0 posts and was deleted')
                     })
                 }else{
-                    metaSchema.findByIdAndUpdate(meta._id,{count:metaCount,status:'published'},{new: true}).exec().then(updated=>{
-                        console.log(updated.name,' has : ',updated.count, ' posts')
+                    const setMetaCountData = meta.count ? {} : {count:metaCount}
+                    const setMetaStatus = meta.status ? {} : {status:'published'}
+                    const randomPostWithCurrentMeta = await postSchema.find({$and:[{[meta.type]: meta._id},{status:'published'}]}).skip(Math.floor(Math.random() * metaCount)).limit(1).sort('-_id').exec()
+                    const randomPostWithCurrentMetaImageUrl =randomPostWithCurrentMeta?.[0]?.mainThumbnail
+                    const setMetaRandomImage = {imageUrl:randomPostWithCurrentMetaImageUrl}
+                    const updateData = {
+                        ...setMetaCountData,
+                        ...setMetaStatus,
+                        ...setMetaRandomImage,
+                        ...setMetaRandomImage
+                    }
+                    metaSchema.findByIdAndUpdate(meta._id,{...updateData},{new: true}).exec().then(updated=>{
+                        console.log(updated.name,' has been updated ')
                     }).catch(err=>{
                         console.log(err)
                     })

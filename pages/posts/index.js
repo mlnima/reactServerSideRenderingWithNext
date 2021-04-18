@@ -15,19 +15,15 @@ const posts = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
 
-    // useEffect(() => {
-    //     console.log(props.design?.data?.postsPageStyle)
-    // }, [props]);
-
     const contentName = router.asPath.includes('tags') ? 'tag' :
         router.asPath.includes('categories') ? 'category' :
             router.asPath.includes('actors') ? 'actor' : ''
     return (
-        <StyledDiv className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''} >
-            {contentName ? <PostsPageInfo contentName={(router.query?.contentName)} contentType={(router.query?.contentType)} /> : null}
+        <StyledDiv className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
+            {contentName ? <PostsPageInfo metaName={(router.query?.metaName)} metaType={(router.query?.metaType)}/> : null}
             <PaginationComponent
                 isActive={true}
-                currentPage={props.getPostsData.pageNo}
+                currentPage={props.getPostsData.page}
                 totalCount={props.postsSource.totalCount}
                 size={props.getPostsData.size}
                 maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
@@ -37,7 +33,7 @@ const posts = props => {
             </div>
             <PaginationComponent
                 isActive={true}
-                currentPage={props.getPostsData.pageNo}
+                currentPage={props.getPostsData.page}
                 totalCount={props.postsSource.totalCount}
                 size={props.getPostsData.size}
                 maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
@@ -51,23 +47,22 @@ export const getServerSideProps = async ({req, query}) => {
 
     const firstLoadData = await getFirstLoadData(req)
     const getPostsData = {
-        size: query.size || firstLoadData.settings?.identity?.data?.postsCountPerPage || '30',
-        pageNo: query.page || 1,
-        postType: query.type || 'all',
+        size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
+        page: parseInt(query?.page) || 1,
+        postType: query.type || null,
         fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating'],
         keyword: query.keyword || '',
         author: query.author || 'all',
         status: 'published',
-        tag: query.tag || 'all',
-        actor: query.actor || 'all',
-        content: query.content || 'all',
+        metaName: query.metaName || 'all',
+        metaId: query.metaId || null,
         sort: query.sort || 'lastModify',
-        lang: query.lang || 'default'
+        lang: query.lang || null
     }
 
     const contentData = query.content ? await getSingleMeta(query.content, firstLoadData.domainName, true) : {}
     const contentDataInfo = contentData.data ? contentData.data.meta : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageLeftSidebar','postsPageRightSidebar']}, firstLoadData.domainName, true, 'postsPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageLeftSidebar', 'postsPageRightSidebar']}, firstLoadData.domainName, true, 'postsPage')
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, req.originalUrl)
     const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
     const postsSource = postsData.data ? postsData.data : []

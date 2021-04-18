@@ -155,32 +155,29 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts', cacheSuccesses, (req, res) => {
-        //need to be cache id page cache doesnt work
-        //cacheSuccesses
-        postsControllers.getPostsInfo(req, res)
+    server.post('/api/v1/posts', cacheSuccesses,async (req, res) => {
+        await postsControllers.getPostsInfo(req, res)
     });
     server.post('/api/v1/posts/post', cacheSuccesses, (req, res) => {
-        //need to be cache id page cache doesnt work
         postsControllers.getPostInfo(req, res)
     });
-    server.post('/api/v1/posts/createNewPost', async (req, res) => {
+    server.post('/api/v1/posts/createNewPost',adminAuthMiddleware, async (req, res) => {
         await postsControllers.createNewPost(req, res)
     });
-    server.post('/api/v1/posts/updatePost', (req, res) => {
-        postsControllers.updatePost(req, res)
+    server.post('/api/v1/posts/updatePost',adminAuthMiddleware, async(req, res) => {
+       await postsControllers.updatePost(req, res)
     });
-    server.post('/api/v1/posts/deletePost', (req, res) => {
+    server.post('/api/v1/posts/deletePost',adminAuthMiddleware, (req, res) => {
         postsControllers.deletePost(req, res)
     });
-    server.post('/api/v1/posts/postsBulkAction', (req, res) => {
+    server.post('/api/v1/posts/postsBulkAction',adminAuthMiddleware, (req, res) => {
         postsControllers.postsBulkAction(req, res)
     });
     server.post('/api/v1/posts/likeDislikeView', (req, res) => {
         postsControllers.likeDislikeView(req, res)
     });
 
-    server.post('/api/v1/posts/bulkAction', (req, res) => {
+    server.post('/api/v1/posts/bulkAction',adminAuthMiddleware, (req, res) => {
         postsControllers.bulkAction(req, res)
     });
     server.post('/api/v1/posts/checkRemovedContent', (req, res) => {
@@ -197,7 +194,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         //need to be cache id page cache doesnt work
         postsControllers.getSingleMeta(req, res)
     });
-    server.post('/api/v1/posts/updateMeta', (req, res) => {
+    server.post('/api/v1/posts/updateMeta',adminAuthMiddleware, (req, res) => {
         postsControllers.updateMeta(req, res)
     });
     server.post('/api/v1/posts/deleteMeta', adminAuthMiddleware, (req, res) => {
@@ -212,15 +209,15 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/posts/getComments', (req, res) => {
         postsControllers.getComments(req, res)
     });
-    server.post('/api/v1/posts/updateComment', (req, res) => {
+    server.post('/api/v1/posts/updateComment',adminAuthMiddleware, (req, res) => {
         postsControllers.updateComment(req, res)
     });
-    server.post('/api/v1/posts/deleteComments', (req, res) => {
+    server.post('/api/v1/posts/deleteComments',adminAuthMiddleware, (req, res) => {
         postsControllers.deleteComments(req, res)
     });
 
     //settings handler
-    server.post('/api/v1/settings/update', (req, res) => {
+    server.post('/api/v1/settings/update',adminAuthMiddleware, (req, res) => {
         settingsControllers.update(req, res)
     });
     server.post('/api/v1/settings/get', (req, res) => {
@@ -231,7 +228,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         //cacheSuccesses
         settingsControllers.getMultiple(req, res)
     });
-    server.post('/api/v1/settings/addWidget', (req, res) => {
+    server.post('/api/v1/settings/addWidget',adminAuthMiddleware, (req, res) => {
         settingsControllers.addWidget(req, res)
     });
     server.post('/api/v1/settings/getSingleWidgetData', (req, res) => {
@@ -254,17 +251,17 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         //cacheSuccesses
         settingsControllers.getWidgetsWithData(req, res)
     });
-    server.post('/api/v1/settings/updateWidget', (req, res) => {
+    server.post('/api/v1/settings/updateWidget', adminAuthMiddleware,(req, res) => {
         settingsControllers.updateWidget(req, res)
     });
-    server.post('/api/v1/settings/deleteWidget', (req, res) => {
+    server.post('/api/v1/settings/deleteWidget',adminAuthMiddleware, (req, res) => {
         settingsControllers.deleteWidget(req, res)
     });
-    server.post('/api/v1/settings/saveCustomStyle', (req, res) => {
+    server.post('/api/v1/settings/saveCustomStyle',adminAuthMiddleware, (req, res) => {
         settingsControllers.saveCustomStyle(req, res)
     });
     //exe commands
-    server.post('/api/v1/settings/executor', (req, res) => {
+    server.post('/api/v1/settings/executor',adminAuthMiddleware, (req, res) => {
         settingsControllers.executor(req, res)
     });
     //cache control

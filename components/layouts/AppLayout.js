@@ -1,13 +1,11 @@
-import React, {useContext, useEffect, useState, useCallback, useMemo} from 'react';
+import React, {useContext, useEffect, useState, useMemo} from 'react';
 import dynamic from "next/dynamic";
 import {initGA, logPageView} from '../../_variables/_variables'
 import {createGlobalStyle} from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
 import _ from 'lodash'
-
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
-import WidgetArea from "../widgetsArea/WidgetArea/WidgetArea";
 import TopBarWidgetArea from "../widgetsArea/TopBarWidgetArea/TopBarWidgetArea";
 import HeaderWidgetArea from "../widgetsArea/HeaderWidgetArea/HeaderWidgetArea";
 import NavigationWidgetArea from "../widgetsArea/NavigationWidgetArea/NavigationWidgetArea";
@@ -23,7 +21,6 @@ let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 const AppLayout = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-
     const [leftSidebarWidgets, setLeftSidebarWidgets] = useState([])
     const [rightSidebarWidgets, setRightSidebarWidgets] = useState([])
 
@@ -44,16 +41,19 @@ const AppLayout = props => {
             })
         }
     }, []);
-
     useEffect(() => {
-        const differenceLeftSidebarWidgets = _.differenceWith(leftSidebarWidgetsData, leftSidebarWidgets, _.isEqual);
-        const differenceRightSidebarWidgets = _.differenceWith(rightSidebarWidgetsData, rightSidebarWidgets, _.isEqual);
-        if (!!differenceLeftSidebarWidgets?.length) {
-            setLeftSidebarWidgets(leftSidebarWidgetsData)
-        }
-        if (!!differenceRightSidebarWidgets?.length) {
-            setRightSidebarWidgets(rightSidebarWidgetsData)
-        }
+        // const differenceLeftSidebarWidgets = _.differenceWith(leftSidebarWidgetsData, leftSidebarWidgets, _.isEqual);
+        // const differenceRightSidebarWidgets = _.differenceWith(rightSidebarWidgetsData, rightSidebarWidgets, _.isEqual);
+        // if (!!differenceLeftSidebarWidgets?.length) {
+        //     console.log(leftSidebarWidgetsData)
+        //     setLeftSidebarWidgets(leftSidebarWidgetsData)
+        // }
+        // if (!!differenceRightSidebarWidgets?.length) {
+        //     console.log(rightSidebarWidgetsData)
+        //     setRightSidebarWidgets(rightSidebarWidgetsData)
+        // }
+        setLeftSidebarWidgets(leftSidebarWidgetsData)
+        setRightSidebarWidgets(rightSidebarWidgetsData)
     }, [props.widgets]);
 
     const sidebarPositionName = useMemo(() =>

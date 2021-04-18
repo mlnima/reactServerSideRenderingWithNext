@@ -21,14 +21,52 @@ mongoose.connect(mongoDBConnectionUrl, {
 const designData = {
     type: 'design',
     data: {
-        customStyle: ' body{\n' +
-            '    background-color: black;\n' +
-            '    color: white;\n' +
-            '}',
+        customStyle: `:root {
+                          --main-text-color: #fff;
+                          --background-color: #000;
+                          --main-dark-color:#1b1b1b;
+                        }
+                        
+                        body{
+                          background-color: black;
+                        }
+                        
+                        .posts-grid{
+                            margin-top: 10px;
+                        }
+                        .postPageLeftSidebar,.homePageLeftSidebar{
+                          background-color: #1f1f23;
+                        }`,
         topBarStyle:'background-color:#333;',
         headerStyle:'background-color:black;',
         navigationStyle:'background-color:#333;',
         footerStyle:'background-color:#333;',
+        postElementStyle:`.post-element {
+                                  .image {
+                                    position: relative;
+                                    .bottom-right,.top-left,.bottom-left, .top-right {
+                                      color: var(--main-text-color);
+                                    }
+                                  }
+                                  
+                                  h3 {
+                                    color: var(--main-text-color);
+                                    text-align:center;
+                                  }
+                                
+                                  .progressParent{
+                                    background-color: #333;
+                                    width: 100%;
+                                    .progressChild{
+                                      background-color: var(--main-text-color);
+                                      p{
+                                        position: relative;
+                                        width: 100%;
+                                        color: var(--main-text-color);
+                                      }
+                                    }
+                                  }
+                                }`
     }
 }
 

@@ -204,14 +204,13 @@ export const getOrders = async (data, domainName) => {
 
 export const getFirstLoadData = async (req) => {
     const domainName = req ? await getAbsolutePath(req) : '';
-    const refererUrl = req?.headers?.referer
-    const referer = refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false
+    const refererUrl = req?.headers?.referer;
+    const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
     const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
-    const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl)
-    const firstLoadWidgetsData = !referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : []
-    const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage') : {}
-    let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i)
-
+    const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
+    const firstLoadWidgetsData = !referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : [];
+    const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage') : {};
+    let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
     return {
         domainName: req ? await getAbsolutePath(req) : '',
         settings: settingsData?.data?.settings ?? [],
@@ -224,9 +223,9 @@ export const getFirstLoadData = async (req) => {
 }
 
 export const getStaticLoadData = async () => {
-    const domainName = process.env.PRODUCTION_URL
-    const firstLoadWidgetsData = await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData')
-    const settingsData =  await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage')
+    const domainName = process.env.PRODUCTION_URL;
+    const firstLoadWidgetsData = await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData');
+    const settingsData =  await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage');
     return {
         domainName,
         settings: settingsData?.data?.settings ?? [],

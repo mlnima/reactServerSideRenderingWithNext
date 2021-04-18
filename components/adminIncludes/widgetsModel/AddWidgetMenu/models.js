@@ -84,7 +84,15 @@ export const formWidgetModel = {
 export const logoWidgetModel = {
     ...generalModel,
     LogoText:'LOGO',
-    headLine:'head line'
+    headLine:'head line',
+    customStyles:`.logo{
+  .logo-text,p{
+    color: white;
+  }
+  .logo-text{
+    font-weight: bold;
+  }
+}`
 }
 export const metaWidgetModel = {
     ...generalModel,

@@ -14,14 +14,14 @@ const MetaElement = props => {
                   as={contextData.state.activeLanguage !== 'default' ?
                       `/${props.type}/${props.translations ?
                           props.translations[contextData.state.activeLanguage] ? 
-                              props.translations[contextData.state.activeLanguage].name || props.name : props.name : props.name}?content=${props._id}` :
-                      `/${props.type}/${props.name}?content=${props._id}`}
+                              props.translations[contextData.state.activeLanguage].name || props.name : props.name : props.name}?metaId=${props._id}` :
+                      `/${props.type}/${props.name}?metaId=${props._id}`}
                   href={{
                       pathname: `/posts`,
                       query: {
-                          content: props._id,
-                          contentName: props.name,
-                          contentType: props.type,
+                          metaId: props._id,
+                          metaName: props.name,
+                          metaType: props.type,
                       }
                   }}
                   scroll={false}

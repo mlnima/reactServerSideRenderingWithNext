@@ -1,7 +1,4 @@
-import React, {useEffect, useState, useRef, useContext} from 'react';
-import AdminLayout from "../../../../components/layouts/AdminLayout";
-
-import withRouter from 'next/dist/client/with-router'
+import React from 'react';
 import StyleSection from "../../../../components/adminIncludes/design/StyleSection/StyleSection";
 
 const navigation = () => {
@@ -13,4 +10,4 @@ const navigation = () => {
     )
 
 };
-export default withRouter(navigation);
+export default navigation;

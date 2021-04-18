@@ -149,64 +149,41 @@ settingsControllers.getWidgetsWithData = (req, res) => {
 //____________________________________________________________________________________________
 
 settingsControllers.getMultipleWidgetWithData = async (req, res) => {
-    const requestedWidgets = req.body.widgets
-    const widgetRequestPromises = (requestedWidgets || []).map(async widgetsPosition => {
-        const position = requestedWidgets.includes('all') ? {} : {'data.position': widgetsPosition}
-        return await widgetSchema.find(position).sort('-_id').exec()
-    })
-
-    Promise.all(widgetRequestPromises).then(async widgets => {
-        let finalData = []
-        await widgets.forEach(widgetList => {
-            finalData = [...finalData, ...widgetList]
-        })
-
-        const mapWidgetsToGetDataForThem = finalData.map(async widget => {
-            const widgetDataToObject = widget.toObject()
-            //const sortMethod = widget.data.sortBy ? {[widget.data.sortBy]: -1} : {lastModify: -1};
-            const sortMethod = widget.data.sortBy? widget.data.sortBy=== 'latest' || widget.data.sortBy=== 'random' ? {lastModify: -1}  :{[widget.data.sortBy]: -1}:{lastModify: -1};
-
-
-            //let sortQuery = !req.body.sort ? {} : req.body.sort === '_id' || req.body.sort === '-_id' ? req.body.sort : { [req.body.sort]: -1 }
-
-            let sortQuery =  req.body.sort === 'latest' || req.body.sort === 'random' ? {lastModify: -1} : {[req.body.sort]: -1}
-
-            let selectedMeta = widget.data.selectedMetaForPosts ? {
-                $or: [
-                    {tags: widget.data.selectedMetaForPosts},
-                    {categories: widget.data.selectedMetaForPosts},
-                    {actors: widget.data.selectedMetaForPosts}
-                ]
-            } : {}
-            let countPosts = 0
-            if (widget.data.type === 'posts' || widget.data.type === 'postsSwiper') {
-                countPosts = await postSchema.countDocuments({$and: [{status: 'published'}, selectedMeta]}).exec()
-            }
+    try{
+        const widgetsDataQuery = (req.body.widgets || []).map(position=>position==='all' ? {} : {'data.position':position})
+        const widgets =  await widgetSchema.find({$or:widgetsDataQuery}).sort('-_id').exec()
+        const widgetsWithDynamicData = await widgets.map( async widget=>{
+            const widgetDataToObject = widget.toObject();
+            const selectedMetaId = widgetDataToObject.data?.selectedMetaForPosts;
+            const selectedMeta = selectedMetaId ? {$or: [{tags: selectedMetaId}, {categories: selectedMetaId},{actors:selectedMetaId}]} : {}
+            const countPosts = widgetDataToObject.data.sortBy=== 'random' ?  await postSchema.countDocuments({$and: [{status: 'published'}, selectedMeta]}).exec() : null
+            const sortMethod = widgetDataToObject.data.sortBy? widgetDataToObject.data.sortBy=== 'latest' ? {lastModify: -1}  :{[widgetDataToObject.data.sortBy]: -1}:{lastModify: -1};
+            const posts = widgetDataToObject.data.type === 'posts' || widgetDataToObject.data.type === 'postsSwiper' ?
+                await postSchema.find({$and: [{status: 'published'}, selectedMeta]})
+                    .select(' title , mainThumbnail , quality , likes , disLikes , views , duration , postType , price , translations , videoTrailerUrl ')
+                    .skip(widgetDataToObject.data.sortBy=== 'random'? Math.floor(Math.random() * countPosts):false)
+                    .limit(parseInt(widgetDataToObject.data.count))
+                    .sort(sortMethod).exec():[]
             return {
                 ...widgetDataToObject,
                 data: {
-                    ...widget.data,
-                    metaData: widget.data.metaType ? await metaSchema.find({type: widget.data.metaType}).limit(parseInt(widget.data.count)).sort(sortMethod).exec() : [],
-                    posts: widget.data.type === 'posts' || widget.data.type === 'postsSwiper' ?
-                        widget.data.sortBy === 'random' ?
-                            await postSchema.find({$and: [{status: 'published'}, selectedMeta]}).select(' title , mainThumbnail , quality , likes , disLikes , views , duration , postType , price , translations , videoTrailerUrl ').skip(Math.floor(Math.random() * countPosts)).limit(parseInt(widget.data.count)).sort(sortMethod).exec()
-                            : await postSchema.find({$and: [{status: 'published'}, selectedMeta]}).select(' title , mainThumbnail , quality , likes , disLikes , views , duration , postType , price , translations , videoTrailerUrl ').limit(parseInt(widget.data.count)).sort(sortMethod).exec() : [],
-                    comments: widget.data.type === 'recentComments' ? await commentSchema.find({}).limit(parseInt(widget.data.count)).exec() : [],
+                    ...widgetDataToObject.data,
+                    metaData: widgetDataToObject.data.metaType ? await metaSchema.find({type: widgetDataToObject.data.metaType}).limit(parseInt(widgetDataToObject.data.count)).sort(sortMethod).exec() : [],
+                    posts,
+                    comments: widgetDataToObject.data.type === 'recentComments' ? await commentSchema.find({}).limit(parseInt(widgetDataToObject.data.count)).exec() : [],
                 }
             }
         })
-
-        Promise.all(mapWidgetsToGetDataForThem).then(widgetsWithData => {
-            res.json({widgets: widgetsWithData})
-            res.end()
-        }).catch(err => {
-            res.end()
-        })
-    }).catch(err => {
-        console.log(err)
+            Promise.all(widgetsWithDynamicData).then(widgetsWithData => {
+                res.json({widgets: widgetsWithData})
+                res.end()
+            }).catch(err => {
+                res.end()
+            })
+    }catch (e) {
+        console.log(e)
         res.end()
-    })
-
+    }
 }
 
 //__________________________________________________________________________________________
@@ -214,6 +191,9 @@ settingsControllers.deleteWidget = (req, res) => {
     const _id = req.body.id;
     widgetSchema.findByIdAndDelete({_id}).exec().then(() => {
         res.json({deleted: true})
+        res.end()
+    }).catch(e=>{
+        console.log(e)
         res.end()
     })
 }
@@ -240,7 +220,7 @@ settingsControllers.updateWidget = (req, res) => {
 
 settingsControllers.saveCustomStyle = (req, res) => {
     const data = req.body.data;
-    const path = './static/style-sheet/customStyle.css'
+    const path = './static/style-sheet/customStyles.css'
     settingSchema.findOneAndUpdate({type: 'customStyle'}, {data}, {new: true}).exec().then(styles => {
 
         if (!styles) {

@@ -8,8 +8,8 @@ let StyledDiv = styled.div`${props => props.stylesData}`;
 
 const TagsAndCategoriesActors = props => {
     const renderData = props.data.map(item => {
-        const path = `/posts?content=${item._id}`;
-        const asPath = `/${item.type}/${item.name}?content=${item._id}`
+        const path = `/posts?metaId=${item._id}&metaName=${item.name}&metaType=${item.type}`;
+        const asPath = `/${item.type}/${item.name}?metaId=${item._id}`
         const icon = props.type === 'categories' ? faFolder
             : props.type === 'tags' ? faTag
                 : props.type === 'actors' ? faStar
@@ -17,7 +17,7 @@ const TagsAndCategoriesActors = props => {
         return (
             <div key={item.name}  className='post-meta-item'>
                 <FontAwesomeIcon style={props.svgDefaultStyle} icon={icon} className='meta-data-logo'  />
-                <Link href={path} as={asPath}   key={item.name}>
+                <Link href={path} as={asPath}   >
                     <a className={props.type} >{item.name}</a>
                 </Link>
             </div>

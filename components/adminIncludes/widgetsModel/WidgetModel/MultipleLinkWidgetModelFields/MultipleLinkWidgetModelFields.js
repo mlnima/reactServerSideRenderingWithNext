@@ -1,6 +1,7 @@
 import React, {useEffect, useState} from 'react';
 import LinkTypeWidgetModelFields from "../LinkTypeWidgetModelFields/LinkTypeWidgetModelFields";
 import MultipleLinkWidgetSingleLinkPreview from "./MultipleLinkWidgetSingleLinkPreview";
+import _ from "lodash";
 
 const MultipleLinkWidgetModelFields = props => {
     const [editingData, setEditingData] = useState({
@@ -58,7 +59,7 @@ const MultipleLinkWidgetModelFields = props => {
 
     const renderAddedItems = (props.widgetData.multipleLinks|| []).sort((a,b)=>a.linkIndex - b.linkIndex).map(eachLink=>{
         return(
-            <MultipleLinkWidgetSingleLinkPreview key={eachLink.linkId} linkData={eachLink} widgetSettings={props.widgetSettings} widgetData={props.widgetData} setWidgetData={props.setWidgetData}/>
+            <MultipleLinkWidgetSingleLinkPreview key={_.uniqueId('id_')} linkData={eachLink} widgetSettings={props.widgetSettings} widgetData={props.widgetData} setWidgetData={props.setWidgetData}/>
         )
     })
 

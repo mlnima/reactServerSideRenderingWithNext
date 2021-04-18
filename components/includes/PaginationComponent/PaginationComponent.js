@@ -7,15 +7,16 @@ const PaginationComponent = props => {
     const router = useRouter()
     if (props.isActive && props.totalCount > props.size) {
         const range  = rangeNumGenerator(props.currentPage, props.maxPage).filter(n=>(n !== (1||props.maxPage)) && (n < props.maxPage) && (n>0) )
+       // console.log(props.currentPage,props.maxPage)
         const rangeWithMinMax =  [1,...range,props.maxPage]
-        const contentType = router.query.contentType
-        const contentName = router.query.contentName
+        const metaType = router.query.metaType
+        const metaName = router.query.metaName
 
 
         const mainPath =  router.asPath.includes('/posts') || router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ? '/posts' : '/meta'
 
-        const asPath =   router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ?  `/${contentType}/${contentName}`:
-                         router.asPath.includes('/tags') ||  router.asPath.includes('/categories') || router.asPath.includes('/actors')   ?   `/${contentType}` :
+        const asPath =   router.asPath.includes('/tags/') || router.asPath.includes('/categories/') || router.asPath.includes('/actors/') ?  `/${metaType}/${metaName}`:
+                         router.asPath.includes('/tags') ||  router.asPath.includes('/categories') || router.asPath.includes('/actors')   ?   `/${metaType}` :
                          router.pathname;
 
         const content = router.query.content ? {content:router.query.content} :{}

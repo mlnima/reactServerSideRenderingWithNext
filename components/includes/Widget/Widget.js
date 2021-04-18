@@ -8,12 +8,6 @@ let StyledDiv = styled.div`${props => props.customStyles}`
 
 const Widget = props => {
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
-    useEffect(() => {
-        if(props.data.type === 'meta'){
-            console.log(props.data)
-        }
-
-    }, [props]);
 
     return (
         <StyledDiv customStyles={props.data?.customStyles || ''}

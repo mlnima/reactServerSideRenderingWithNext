@@ -9,8 +9,8 @@
     "analys": "ANALYZE=true next build",
     "start": "NODE_ENV=production node ./server.js",
     "updateLinux": "sudo ./update.sh",
-    "fixMetaData": "node ./tools/fixMetaDataCounts.js",
-    "fixMetaImage": "node ./tools/fixMetaImage.js"
+    "fixMetaData": "node tools/fixMetaData.js",
+    "setup": "node ./tools/setup.js"
   },
   "keywords": [],
   "author": "",

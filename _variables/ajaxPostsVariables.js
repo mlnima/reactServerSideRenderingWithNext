@@ -54,11 +54,12 @@ export const savePost = async (data, domainName) => {
 };
 
 export const getMeta = async (data,  domainName,cache) => {
+    const keywordQuery  = data.keyword ?  `&keyword=${encodeURIComponent(data.keyword)  }` :``
     const body = {
         ...data,
         cache
     };
-    return await axios.post(domainName + `/api/v1/posts/getMeta?pageNo=${ data.page }&type=${ data.type }&keyword=${encodeURIComponent(data.keyword)  }&startWith=${ data.startWith }`, body)
+    return await axios.post(domainName + `/api/v1/posts/getMeta?page=${ data.page }&metaType=${ data.metaType }${keywordQuery}&startWith=${ data.startWith }`, body)
 };
 
 export const getSingleMeta = async (id,  domainName,cache) => {

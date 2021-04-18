@@ -111,58 +111,39 @@ postsControllers.updatePost = async (req, res) => {
 
 postsControllers.getPostsInfo = async (req, res) => {
 
-    const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
-    const pageNo = parseInt(req.body?.pageNo) ?? 1;
-    let postTypeQuery = req.body.postType === 'all' ? {} : {postType: req.body.postType};
-    let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
-    let authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
-    let metaQuery = req.body.content === 'all' ? {} : {
+    const size = !req.body?.size ? req.body?.size > 500 ? 500 : req.body.size : 30;
+    const page = req.body?.page ?? 1;
+    const postTypeQuery = !req.body.postType ? {} : {postType: req.body.postType};
+    const statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
+    const authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
+    const requestedFields = (req.body.fields || []).reduce((a, b) => ` ${a} , ` + ` ${b} , `)
+    const metaQuery = !req.body.metaId ? {} : {
         $or: [
-            {categories: req.body.content},
-            {tags: req.body.content},
-            {actors: req.body.content}
+            {categories: req.body.metaId},
+            {tags: req.body.metaId},
+            {actors: req.body.metaId}
         ]
     };
-    let searchQueryGenerator = () => {
-        if (req.body.keyword === '') {
-            return {}
-        } else {
-            if (!req.body.lang || req.body.lang === 'default') {
-                return {$or: [{title: new RegExp(req.body.keyword, 'i')}, {description: new RegExp(req.body.keyword, 'i')}]};
-            } else {
-                return {
-                    $or: [
-                        {title: new RegExp(req.body.keyword, 'i')},
-                        {description: new RegExp(req.body.keyword, 'i')},
-                        {[`translations.${req.body.lang}.title`]: new RegExp(req.body.keyword, 'i')},
-                        {[`translations.${req.body.lang}.description`]: new RegExp(req.body.keyword, 'i')},]
-                }
+    const searchQuery = req.body.keyword === '' || !req.body.keyword ? {} :
+        !req.body.lang || req.body.lang === 'default' ? {$or: [{title: new RegExp(req.body.keyword, 'i')}, {description: new RegExp(req.body.keyword, 'i')}]} :
+            {
+                $or: [
+                    {title: new RegExp(req.body.keyword, 'i')},
+                    {description: new RegExp(req.body.keyword, 'i')},
+                    {[`translations.${req.body.lang}.title`]: new RegExp(req.body.keyword, 'i')},
+                    {[`translations.${req.body.lang}.description`]: new RegExp(req.body.keyword, 'i')},]
             }
-        }
-    }
 
-    let selectedFields = req.body.fields[0] === 'all' ? {} : fieldGenerator(req.body.fields);
-    let postsCount = await postSchema.countDocuments({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).exec()
+    let selectedFields = req.body.fields[0] === 'all' || !req.body.fields ? {} : requestedFields;
+    let postsCount = await postSchema.countDocuments({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).exec()
     let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random' ? {lastModify: -1} : {[req.body.sort]: -1}
 
     let posts = req.body.sort === 'random' ?
-        await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(Math.floor(Math.random() * postsCount)).limit(size).sort(sortQuery).exec()
-        : await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQueryGenerator(), metaQuery]}).select(selectedFields).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
+        await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).select(selectedFields).skip(Math.floor(Math.random() * postsCount)).limit(size).sort(sortQuery).exec()
+        : await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).select(selectedFields).skip(size * (page - 1)).limit(size).sort(sortQuery).exec();
     Promise.all([posts, postsCount]).then(async data => {
-        const posts = data[0]
-        let postsDataToSend = []
         try {
-            for await (let post of posts) {
-                let dataSetPost = {
-                    ...post.toObject(),
-                    // author: post.author ? await userSchema.findById(post.author).exec() : {username: 'Private'},
-                    // categories: post.categories ? await metaSchema.find({'_id': {$in: [...post.categories]}}) : [],
-                    // tags: post.tags ? await metaSchema.find({'_id': {$in: [...post.tags]}}) : [],
-                    // actors: post.actors ? await metaSchema.find({'_id': {$in: [...post.actors]}}) : []
-                }
-                postsDataToSend = [...postsDataToSend, dataSetPost]
-            }
-            res.json({posts: postsDataToSend, error: false, totalCount: data[1]})
+            res.json({posts: data[0], error: false, totalCount: data[1]})
             res.end()
         } catch (e) {
             console.log(e)
@@ -174,10 +155,9 @@ postsControllers.getPostsInfo = async (req, res) => {
         return res.status(500).json({
             message: 'Server Error'
         })
-
     })
-
 };
+
 
 postsControllers.getPostInfo = (req, res) => {
     const _id = req.body._id;
@@ -286,52 +266,30 @@ postsControllers.getSingleMeta = async (req, res) => {
 
 
 postsControllers.getMeta = async (req, res) => {
-
-    const type = req.body.type ? {type: req.body.type} : {}
+    const type = {type: req.body.metaType}
     const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
-    let statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status || 'published'};
-    const page = req.body.page;
+    const statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : !req.body.status ? 'published' : {status: req.body.status};
+    const page = parseInt(req.body.page);
     const startWithQuery = req.body?.startWith === 'any' ? {} : {name: {$regex: '^' + req.body?.startWith, $options: 'i'}}
-    let searchQuery = req.body.keyword === '' ? {} : {
-        $or: [
-            {name: new RegExp(req.body.keyword, 'i')},
-            {description: new RegExp(req.body.keyword, 'i')}]
-    };
-
-    let searchQueryGenerator = () => {
-        if (req.body.keyword === '') {
-            return {}
-        } else {
-            const keywordToSearch = req.body.keyword
-            // console.log(req.body.keyword,keywordToSearch)
-            if (!req.body.lang || req.body.lang === 'default') {
-                return {$or: [{name: new RegExp(req.body.keyword, 'i')}, {description: new RegExp(req.body.keyword, 'i')}]};
-            } else {
-                return {
-                    $or: [
-                        {name: new RegExp(keywordToSearch, 'i')},
-                        {description: new RegExp(keywordToSearch, 'i')},
-                        {[`translations.${req.body.lang}.name`]: new RegExp(keywordToSearch, 'i')},
-                        {[`translations.${req.body.lang}.description`]: new RegExp(keywordToSearch, 'i')},]
-                }
+    const searchQuery = req.body.keyword === '' || !req.body.keyword ? {} :
+        !req.body.lang || req.body.lang === 'default' ? {$or: [{name: new RegExp(req.body.keyword, 'i')}, {description: new RegExp(req.body.keyword, 'i')}]} :
+            {
+                $or: [
+                    {name: new RegExp(req.body.keyword, 'i')},
+                    {description: new RegExp(req.body.keyword, 'i')},
+                    {[`translations.${req.body.lang}.name`]: new RegExp(req.body.keyword, 'i')},
+                    {[`translations.${req.body.lang}.description`]: new RegExp(req.body.keyword, 'i')},]
             }
-        }
-    }
 
+    let sortQuery = !req.body.sort ? {count: -1} : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
+    const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery]}).exec()
 
-    let sortQuery = !req.body.sort || req.body.sort === 'latest' ? '-id' : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
-    const metaCount = await metaSchema.countDocuments({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).exec()
-    console.log(metaCount)
-    console.log(type, searchQueryGenerator(), startWithQuery, statusQuery)
-    console.log(size)
-    console.log(size * (page - 1))
-    console.log(sortQuery)
-    metaSchema.find({$and: [type, searchQueryGenerator(), startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
+    metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
         const mapMetaToGetImage = metas.map(async meta => {
             try {
                 const countPostsHasCurrentMeta = meta.count ? meta.count : await postSchema.countDocuments({$and: [{[type.type]: meta._id}, {status: 'published'}]}).exec()
                 const skipForNoImageUrl = Math.floor(Math.random() * countPostsHasCurrentMeta)
-                const noImageUrl = meta.imageUrl ? '' : await postSchema.find({$and: [{[type.type]: meta._id}, {status: 'published'}]}).skip(skipForNoImageUrl).limit(1).sort('-_id').exec().then(lastPost => {
+                const noImageUrl = meta.imageUrl ? '' : await postSchema.find({$and: [{[type.type]: meta._id}, {status: 'published'}]}).skip(skipForNoImageUrl).limit(1).sort('-lasModify').exec().then(lastPost => {
                     //.skip(Math.floor(Math.random() * metaCount))
                     if (lastPost[0]) {
                         return lastPost[0].mainThumbnail

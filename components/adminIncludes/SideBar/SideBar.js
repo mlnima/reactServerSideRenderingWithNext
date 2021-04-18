@@ -6,6 +6,8 @@ import axios from "axios";
 import SortUpSvg from '../../../static/images/fontawesome/sort-up-solid.svg'
 import SortDownSvg from '../../../static/images/fontawesome/sort-down-solid.svg'
 import withRouter from 'next/dist/client/with-router'
+import _ from "lodash";
+import WidgetModel from "../widgetsModel/WidgetModel/WidgetModel";
 
 const SideBar = props => {
     const contextData = useContext(AppContext);
@@ -15,18 +17,10 @@ const SideBar = props => {
             pathURL: '/admin',
             subItems: []
         },
-        // Posts: {
-        //     pathURL: '/admin/posts',
-        //     subItems: []
-        // },
         Posts: {
             pathURL: '/admin/assets?assetsType=posts',
             subItems: [{name: 'newPost', url: '/admin/post?new=1'}]
         },
-        // Translation: {
-        //     pathURL: '/admin/assets?assetsType=translation',
-        //     subItems: [{name: 'newTranslation ', url: '/admin/translate?new=1'}]
-        // },
         users: {
             pathURL: '/admin/assets?assetsType=users',
             subItems: []
@@ -48,9 +42,7 @@ const SideBar = props => {
         },
         forms: {
             pathURL: '/admin/assets?assetsType=forms',
-            subItems: [
-                // {name: 'newForm', url: '/admin/form?new=1'}
-                ]
+            subItems: [ ]
         },
         comments: {
             pathURL: '/admin/assets?assetsType=comments',
@@ -61,14 +53,6 @@ const SideBar = props => {
             pathURL: '/admin/fileManager',
             subItems: []
         },
-        // Comments: {
-        //     pathURL: '/admin/comments',
-        //     subItems: []
-        // },
-        // Contacts: {
-        //     pathURL: '/admin/contacts',
-        //     subItems: []
-        // },
         Design: {
             pathURL: '/admin/design',
             subItems: [
@@ -80,15 +64,10 @@ const SideBar = props => {
                 {name: 'postsPage', url: '/admin/design/postsPage'},
                 {name: 'postElement', url: '/admin/design/postElement'},
                 {name: 'footer', url: '/admin/design/footer'},
-                {name: 'customStyles', url: '/admin/settings/customStyles'},
+                {name: 'customStyles', url: '/admin/design/customStyles'},
 
             ]
         },
-        // {name: 'background', url: '/admin/design/background'},
-        // Users: {
-        //     pathURL: '/admin/users',
-        //     subItems: []
-        // },
         Tools: {
             pathURL: '/admin/tools',
             subItems: [
@@ -127,7 +106,7 @@ const SideBar = props => {
         const onHoverHandler = state[item].subItems.map(subItem => {
             if (hovered === item) {
                 return (
-                    <Link key={subItem.name} href={subItem.url}><a className='SideBarItem-SubItem'>{convertVariableNameToName(subItem.name)}</a></Link>
+                    <Link  key={_.uniqueId('id_')} href={subItem.url}><a className='SideBarItem-SubItem'>{convertVariableNameToName(subItem.name)}</a></Link>
                 )
             } else return null
 

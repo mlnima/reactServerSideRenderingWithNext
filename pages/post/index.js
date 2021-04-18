@@ -25,9 +25,7 @@ const Post = props => {
     })
     const [deviceWidth, setDeviceWidth] = useState(null)
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)
