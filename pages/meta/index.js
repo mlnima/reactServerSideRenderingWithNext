@@ -48,7 +48,7 @@ const meta = props => {
 
 
 export const getServerSideProps = async ({req, query}) => {
-    const firstLoadData = await getFirstLoadData(req)
+    const firstLoadData = await getFirstLoadData(req,['metaPageLeftSidebar', 'metaPageRightSidebar'],'metaPage')
     const dataForGettingMeta = {
         metaType: query.metaType,
         page: parseInt(query?.page) || 1,
@@ -59,9 +59,9 @@ export const getServerSideProps = async ({req, query}) => {
         lang: query?.lang || 'default',
         status: 'published'
     }
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageLeftSidebar', 'metaPageRightSidebar']}, firstLoadData.domainName, true, 'metaPage')
+    // const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageLeftSidebar', 'metaPageRightSidebar']}, firstLoadData.domainName, true, 'metaPage')
     const metaData = await getMeta(dataForGettingMeta, firstLoadData.domainName, true, query.metaType)
-    const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
+    const widgets = firstLoadData.widgets
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
     return {props: {...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), widgets, metaSource, dataForGettingMeta, referer: firstLoadData.referer}}
 }

@@ -20,40 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/pages/admin/design/customStyles/customStyles.scss" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/admin/design/customStyles/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MetaElement/MetaElement.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/PostsPageInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/PostsPageInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MultipleLinkTo/MultipleLinkTo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MultipleLinkTo/MultipleLinkTo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/customStyle/customStyle.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/customStyle/index.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/navigation/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/navigation/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/DownloadLink/DownloadLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/DownloadLink/DownloadLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/DownloadLink/DownloadLink.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/DownloadLink/DownloadLink.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.scss" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/RatingButtons/RatingButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/RatingData/RatingData.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/RatingData/RatingData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/checkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/meta/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/meta/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/page/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/settingsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/settingsControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/metaSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/metaSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/styles/globalAdminPanel.scss" beforeDir="false" afterPath="$PROJECT_DIR$/styles/globalAdminPanel.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/fixMetaDataCounts.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/fixMetaData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/fixMetaImage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/setupDarkTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setupDarkTheme.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,9 +145,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.fixMetaData" />
         <item itemvalue="Node.js.fixMetaData.js" />
       </list>
@@ -629,7 +615,9 @@
       <workItem from="1618563742885" duration="8712000" />
       <workItem from="1618581741516" duration="21896000" />
       <workItem from="1618639305128" duration="25385000" />
-      <workItem from="1618729620245" duration="15464000" />
+      <workItem from="1618729620245" duration="15901000" />
+      <workItem from="1618752085666" duration="6093000" />
+      <workItem from="1618767359949" duration="3136000" />
     </task>
     <servers />
   </component>
@@ -663,7 +651,7 @@
     </state>
     <state x="1935" y="2415" key="FileChooserDialogImpl/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615298967321" />
     <state x="1934" y="2415" key="FileChooserDialogImpl/0.0.2194.1234/-649.2160.4096.1152@-649.2160.4096.1152" timestamp="1614716948965" />
-    <state width="2696" height="172" key="GridCell.Tab.0.bottom" timestamp="1618745783133">
+    <state width="2675" height="164" key="GridCell.Tab.0.bottom" timestamp="1618771443644">
       <screen x="-725" y="2160" width="4096" height="1152" />
     </state>
     <state width="2800" height="276" key="GridCell.Tab.0.bottom/-1250.1440.4096.1152/0.0.2560.1440@-1250.1440.4096.1152" timestamp="1617477797475" />
@@ -672,14 +660,14 @@
     <state width="2606" height="104" key="GridCell.Tab.0.bottom/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615811131150" />
     <state width="2659" height="3" key="GridCell.Tab.0.bottom/0.0.2194.1234/-649.2160.4096.1152@-649.2160.4096.1152" timestamp="1614789377739" />
     <state width="2161" height="217" key="GridCell.Tab.0.bottom/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
-    <state width="2696" height="172" key="GridCell.Tab.0.bottom/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1618745783133" />
+    <state width="2675" height="164" key="GridCell.Tab.0.bottom/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1618771443644" />
     <state width="2778" height="223" key="GridCell.Tab.0.bottom/0.0.4096.1152/582.-2160.1920.1080@0.0.4096.1152" timestamp="1617916728532" />
     <state width="2680" height="166" key="GridCell.Tab.0.bottom/0.0.4096.1152/712.-1440.2560.1440@0.0.4096.1152" timestamp="1617441506333" />
     <state width="2006" height="207" key="GridCell.Tab.0.bottom/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
     <state width="2778" height="182" key="GridCell.Tab.0.bottom/582.-2160.1920.1080/0.0.4096.1152@0.0.4096.1152" timestamp="1617824037800" />
     <state width="2750" height="236" key="GridCell.Tab.0.bottom/646.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617375500573" />
     <state width="2862" height="232" key="GridCell.Tab.0.bottom/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617225628402" />
-    <state width="2696" height="172" key="GridCell.Tab.0.center" timestamp="1618745783133">
+    <state width="2675" height="164" key="GridCell.Tab.0.center" timestamp="1618771443644">
       <screen x="-725" y="2160" width="4096" height="1152" />
     </state>
     <state width="2800" height="276" key="GridCell.Tab.0.center/-1250.1440.4096.1152/0.0.2560.1440@-1250.1440.4096.1152" timestamp="1617477797475" />
@@ -688,14 +676,14 @@
     <state width="2606" height="104" key="GridCell.Tab.0.center/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615811131150" />
     <state width="2659" height="3" key="GridCell.Tab.0.center/0.0.2194.1234/-649.2160.4096.1152@-649.2160.4096.1152" timestamp="1614789377739" />
     <state width="2161" height="217" key="GridCell.Tab.0.center/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
-    <state width="2696" height="172" key="GridCell.Tab.0.center/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1618745783133" />
+    <state width="2675" height="164" key="GridCell.Tab.0.center/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1618771443644" />
     <state width="2778" height="223" key="GridCell.Tab.0.center/0.0.4096.1152/582.-2160.1920.1080@0.0.4096.1152" timestamp="1617916728532" />
     <state width="2680" height="166" key="GridCell.Tab.0.center/0.0.4096.1152/712.-1440.2560.1440@0.0.4096.1152" timestamp="1617441506333" />
     <state width="2006" height="207" key="GridCell.Tab.0.center/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
     <state width="2778" height="182" key="GridCell.Tab.0.center/582.-2160.1920.1080/0.0.4096.1152@0.0.4096.1152" timestamp="1617824037800" />
     <state width="2750" height="236" key="GridCell.Tab.0.center/646.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617375500573" />
     <state width="2862" height="232" key="GridCell.Tab.0.center/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617225628402" />
-    <state width="2696" height="172" key="GridCell.Tab.0.left" timestamp="1618745783133">
+    <state width="2675" height="164" key="GridCell.Tab.0.left" timestamp="1618771443644">
       <screen x="-725" y="2160" width="4096" height="1152" />
     </state>
     <state width="2800" height="276" key="GridCell.Tab.0.left/-1250.1440.4096.1152/0.0.2560.1440@-1250.1440.4096.1152" timestamp="1617477797475" />
@@ -704,14 +692,14 @@
     <state width="2606" height="104" key="GridCell.Tab.0.left/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615811131150" />
     <state width="2659" height="3" key="GridCell.Tab.0.left/0.0.2194.1234/-649.2160.4096.1152@-649.2160.4096.1152" timestamp="1614789377739" />
     <state width="2161" height="217" key="GridCell.Tab.0.left/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
-    <state width="2696" height="172" key="GridCell.Tab.0.left/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1618745783133" />
+    <state width="2675" height="164" key="GridCell.Tab.0.left/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1618771443644" />
     <state width="2778" height="223" key="GridCell.Tab.0.left/0.0.4096.1152/582.-2160.1920.1080@0.0.4096.1152" timestamp="1617916728531" />
     <state width="2680" height="166" key="GridCell.Tab.0.left/0.0.4096.1152/712.-1440.2560.1440@0.0.4096.1152" timestamp="1617441506333" />
     <state width="2006" height="207" key="GridCell.Tab.0.left/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070871" />
     <state width="2778" height="182" key="GridCell.Tab.0.left/582.-2160.1920.1080/0.0.4096.1152@0.0.4096.1152" timestamp="1617824037800" />
     <state width="2750" height="236" key="GridCell.Tab.0.left/646.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617375500573" />
     <state width="2862" height="232" key="GridCell.Tab.0.left/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1617225628401" />
-    <state width="2696" height="172" key="GridCell.Tab.0.right" timestamp="1618745783133">
+    <state width="2675" height="164" key="GridCell.Tab.0.right" timestamp="1618771443644">
       <screen x="-725" y="2160" width="4096" height="1152" />
     </state>
     <state width="2800" height="276" key="GridCell.Tab.0.right/-1250.1440.4096.1152/0.0.2560.1440@-1250.1440.4096.1152" timestamp="1617477797475" />
@@ -720,7 +708,7 @@
     <state width="2606" height="104" key="GridCell.Tab.0.right/0.0.2194.1234/-648.2160.4096.1152@-648.2160.4096.1152" timestamp="1615811131150" />
     <state width="2659" height="3" key="GridCell.Tab.0.right/0.0.2194.1234/-649.2160.4096.1152@-649.2160.4096.1152" timestamp="1614789377739" />
     <state width="2161" height="217" key="GridCell.Tab.0.right/0.0.2194.1234/-649.2160.4096.1152@0.0.2194.1234" timestamp="1614439567644" />
-    <state width="2696" height="172" key="GridCell.Tab.0.right/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1618745783133" />
+    <state width="2675" height="164" key="GridCell.Tab.0.right/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1618771443644" />
     <state width="2778" height="223" key="GridCell.Tab.0.right/0.0.4096.1152/582.-2160.1920.1080@0.0.4096.1152" timestamp="1617916728532" />
     <state width="2680" height="166" key="GridCell.Tab.0.right/0.0.4096.1152/712.-1440.2560.1440@0.0.4096.1152" timestamp="1617441506333" />
     <state width="2006" height="207" key="GridCell.Tab.0.right/0.0.4096.1152@0.0.4096.1152" timestamp="1614468070872" />
@@ -878,7 +866,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/server/controllers/postsControllers.js</url>
-          <line>431</line>
+          <line>444</line>
           <option name="timeStamp" value="54" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -895,6 +883,11 @@
           <url>file://$PROJECT_DIR$/node_modules/next/dist/server/next.d.ts</url>
           <line>9</line>
           <option name="timeStamp" value="58" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/pages/meta/index.js</url>
+          <line>61</line>
+          <option name="timeStamp" value="59" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

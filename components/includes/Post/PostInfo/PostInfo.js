@@ -14,6 +14,7 @@ import PostDescription from "./PostDescription/PostDescription";
 import AddToBasket from "./AddToBasket/AddToBasket";
 
 import styled from "styled-components";
+
 let StyledDiv = styled.div`${props => props.stylesData}`;
 
 const PostInfo = props => {
@@ -23,41 +24,52 @@ const PostInfo = props => {
         mode: 'view',
         isLiked: false,
         isDisliked: false,
-        svgDefaultStyle:{
-            maxWidth:'25px',
+        svgDefaultStyle: {
+            maxWidth: '25px',
             maxHeight: '25px'
         }
     });
 
+    const [ratingAndViewData, setRatingAndViewData] = useState({
+        like: 0,
+        disLike: 0,
+        view: 0
+    })
+
     useEffect(() => {
-        if (typeof window !=='undefined'){
+        if (typeof window !== 'undefined') {
             setState({
                 ...state,
                 likeValue: likeValueCalculator(props.likes, props.disLikes),
                 postAbsolutePath: window.location.href
             });
         }
-        likeDislikeView(props.id, 'views')
+        likeDislikeView(props.id, 'views').then(res => {
+            if (res.data.updatedData) {
+                setRatingAndViewData(res.data.updatedData)
+            }
+        })
     }, [props.likes, props.disLikes]);
 
+
+
+
+
     return (
-        <StyledDiv  className='post-info'>
+        <StyledDiv className='post-info'>
             <EditLinkForAdmin {...props}/>
-            <div className='post-info-head' >
+            <div className='post-info-head'>
                 <PostTitle {...props}/>
                 <div className='under-title'>
-                    <RatingButtons {...props} svgDefaultStyle={state.svgDefaultStyle}/>
+                    <RatingButtons {...props} svgDefaultStyle={state.svgDefaultStyle} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData}/>
                     <Price {...props} svgDefaultStyle={state.svgDefaultStyle}/>
-                    <DownloadLink downloadLink={props.downloadLink} render={props.downloadLink} svgDefaultStyle={state.svgDefaultStyle} />
+                    <DownloadLink downloadLink={props.downloadLink} render={props.downloadLink} svgDefaultStyle={state.svgDefaultStyle}/>
                 </div>
-                <AddToBasket productId={props._id} render={props.postType==='product'} svgDefaultStyle={state.svgDefaultStyle}/>
+                <AddToBasket productId={props._id} render={props.postType === 'product'} svgDefaultStyle={state.svgDefaultStyle}/>
             </div>
 
             <div className='post-info-body'>
-                <div className="views">
-                    <span>{props.views} views</span>
-                    <RatingData {...props} svgDefaultStyle={state.svgDefaultStyle}/>
-                </div>
+
                 <div className="meta-description">
                     <PostDescription  {...props}/>
                     <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='actors' data={props.actors || []}/>

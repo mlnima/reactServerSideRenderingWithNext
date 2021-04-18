@@ -240,7 +240,7 @@ const checkout = props => {
 };
 
 export const getServerSideProps = async ({req, query}) => {
-    const firstLoadData = await getFirstLoadData(req)
+    const firstLoadData = await getFirstLoadData(req,[])
     return {props: {widgets:firstLoadData.widgets,...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), query,referer:firstLoadData.referer}}
 }
 

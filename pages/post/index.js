@@ -12,17 +12,13 @@ import SlideShow from '../../components/includes/Post/SlideShow/SlideShow'
 import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
 import styled from "styled-components";
 import PostMetaDataToSiteHead from "../../components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead";
-import {useRouter} from "next/router";
 import {AppContext} from "../../context/AppContext";
 
 let StyledDiv = styled.div`${props => props.stylesData}`
 
 const Post = props => {
     const contextData = useContext(AppContext);
-    const router = useRouter()
-    const [state, setState] = useState({
-        editMode: false
-    })
+
     const [deviceWidth, setDeviceWidth] = useState(null)
 
 
@@ -54,7 +50,6 @@ const Post = props => {
                     views={props.post.views}
                     videoEmbedCode={props.post.videoEmbedCode}
                     rating={props.post.rating}
-                    editMode={state.editMode}
                     postType={props.post.postType}
                     price={props.post.price}
                     {...props.post}
@@ -76,18 +71,18 @@ const Post = props => {
 
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req)
+    const firstLoadData = await getFirstLoadData(context.req,['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],'postPage')
     let responseCode = 200
     const postData = await getPost({_id: context.query.id}, firstLoadData.domainName, true)
     const post = postData.data.post;
-    const widgetsData = (!firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) || (firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) ? await getMultipleWidgetWithData({widgets: ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost',]}, firstLoadData.domainName, true, 'postPage') : []
+    // const widgetsData = (!firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) || (firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) ? await getMultipleWidgetWithData({widgets: ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost',]}, firstLoadData.domainName, true, 'postPage') : []
     if (!post) {
         return {
             notFound: true
         }
     }
     const commentsData = post ? await getComments({onDocument: post._id}, firstLoadData.domainName, true) : {}
-    const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
+    const widgets = firstLoadData.widgets
     const comments = post ? commentsData?.data?.comments : []
 
     return {

@@ -31,9 +31,10 @@ const Home = props => {
 
 //SSR
 const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req)
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageLeftSidebar', 'homePageRightSidebar', 'home']}, firstLoadData.domainName, true, 'homePage')
-    const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
+    const firstLoadData = await getFirstLoadData(context.req,['homePageLeftSidebar', 'homePageRightSidebar', 'home'],'homePage')
+    // const widgetsData = await getMultipleWidgetWithData({widgets: ['homePageLeftSidebar', 'homePageRightSidebar', 'home']}, firstLoadData.domainName, true, 'homePage')
+    // const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
+    const widgets = firstLoadData.widgets
     return {props: {widgets, ...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer, requestProtocol: context.req.protocol}}
 }
 

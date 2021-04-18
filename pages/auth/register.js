@@ -79,7 +79,7 @@ const Register = props => {
 };
 
 export const getServerSideProps = async ({req}) => {
-    const firstLoadData = await getFirstLoadData(req)
+    const firstLoadData = await getFirstLoadData(req,[])
     return {props: {widgets: firstLoadData.widgets, ...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer}}
 }
 

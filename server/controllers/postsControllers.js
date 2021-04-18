@@ -249,8 +249,21 @@ postsControllers.bulkAction = async (req, res) => {
 
 
 postsControllers.likeDislikeView = (req, res) => {
-    postSchema.findByIdAndUpdate(req.body.id, {$inc: {[req.body.type]: 1}}, {new: true}).exec();
-    res.end()
+    postSchema.findByIdAndUpdate(req.body.id, {$inc: {[req.body.type]: 1}}, {new: true}).select(' likes , disLikes , views ').exec().then(updatedData=>{
+        // const updated = updatedData.toObject()
+        // const newData = {
+        //     likes: updated.likes,
+        //     disLikes: updated.disLikes,
+        //     views: updated.views
+        // }
+        // console.log(updated)
+        res.json({updatedData})
+        res.end()
+    }).catch(err=>{
+        console.log(err)
+        res.end()
+    })
+
 };
 
 postsControllers.getSingleMeta = async (req, res) => {

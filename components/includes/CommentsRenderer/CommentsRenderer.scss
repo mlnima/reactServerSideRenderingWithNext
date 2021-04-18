@@ -29,10 +29,13 @@
       border-left: 60px solid transparent;
     }
     .comment-author{
-      color:$lightBlue;
+      color:var( --main-blue-color);
     }
     .comment-date{
-      color:$red50;
+      color:var( --main-red-color);
+    }
+    .comment-body{
+      color: var(--main-text-color);
     }
   }
 }

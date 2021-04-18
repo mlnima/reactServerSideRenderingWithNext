@@ -7,7 +7,6 @@ import Error from "../_error";
 let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
 const page = props => {
-    console.log(props)
     if (props.responseCode !==200){
         return <Error responseCode={props.responseCode} />
     }else  return (
@@ -23,15 +22,16 @@ const page = props => {
 };
 
 export const getServerSideProps = async ({req, query}) => {
-    const firstLoadData = await getFirstLoadData(req)
+    const firstLoadData = await getFirstLoadData(req,[query.pageName, query.pageName + 'LeftSidebar',query.pageName + 'RightSidebar'],query.pageName)
     let responseCode = 200
     const pageData = await getPageData({pageName: query.pageName}, firstLoadData.domainName)
     if (!pageData.data.pageData){
-        responseCode = 404
+        return {
+            notFound: true
+        }
     }
     const pageInfo = pageData.data ? pageData.data.pageData : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: [query.pageName, query.pageName + 'LeftSidebar',query.pageName + 'RightSidebar']}, firstLoadData.domainName, true, query.pageName)
-    const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
+    const widgets = firstLoadData.widgets
     return {props: {widgets, ...firstLoadData.settings, pageInfo, query, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer,responseCode}}
 }
 

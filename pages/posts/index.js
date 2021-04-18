@@ -45,7 +45,7 @@ const posts = props => {
 
 export const getServerSideProps = async ({req, query}) => {
 
-    const firstLoadData = await getFirstLoadData(req)
+    const firstLoadData = await getFirstLoadData(req,['postsPageLeftSidebar', 'postsPageRightSidebar'],'postsPage')
     const getPostsData = {
         size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
         page: parseInt(query?.page) || 1,
@@ -62,9 +62,9 @@ export const getServerSideProps = async ({req, query}) => {
 
     const contentData = query.content ? await getSingleMeta(query.content, firstLoadData.domainName, true) : {}
     const contentDataInfo = contentData.data ? contentData.data.meta : {}
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageLeftSidebar', 'postsPageRightSidebar']}, firstLoadData.domainName, true, 'postsPage')
+    // const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageLeftSidebar', 'postsPageRightSidebar']}, firstLoadData.domainName, true, 'postsPage')
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, req.originalUrl)
-    const widgets = [...(firstLoadData.widgets ?? []), ...(widgetsData?.data?.widgets ?? [])]
+    const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
     return {props: {widgets, ...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData, contentData: contentDataInfo, referer: firstLoadData.referer}}
 }

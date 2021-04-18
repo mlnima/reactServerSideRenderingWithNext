@@ -202,14 +202,23 @@ export const getOrders = async (data, domainName) => {
     return await axios.post(domainName + `/api/v1/order/get`, body)
 };
 
-export const getFirstLoadData = async (req) => {
+export const getFirstLoadData = async (req,dynamicWidgets,page) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     const refererUrl = req?.headers?.referer;
-    const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
+   // const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
+    const referer =     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
+
     const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
     const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
-    const firstLoadWidgetsData = !referer ? await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData') : [];
-    const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage') : {};
+    const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets]
+
+
+    const pageNameForCacheRequest = referer ? page ? page : 'static' : 'firstLoadWidgetsData' + (page||'static')
+
+    const firstLoadWidgetsData =await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, true, pageNameForCacheRequest);
+
+    //console.log(firstLoadWidgetsData.data)
+    const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'static') : {};
     let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
     return {
         domainName: req ? await getAbsolutePath(req) : '',

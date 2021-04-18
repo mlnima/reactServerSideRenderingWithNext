@@ -3,7 +3,10 @@
 
 .post-info {
   width: 100%;
-  //padding: 10px;
+
+  .post-title{
+    color: var(--main-text-color);
+  }
   .edit-mode{
     align-items: center;
     p{
@@ -30,15 +33,30 @@
   .post-info-head{
     background-color: $dark90;
     padding: 5px;
-    .like {
+    .rating-buttons {
       display: flex;
       justify-content: center;
       align-items: center;
-      button {
+      .rated-message{
+        color: var(--main-text-color);
+      }
+      button,span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
         @include transparentLightTextBtn;
         margin: 0 10px;
+        p{
+          font-size: 1rem;
+          padding: 0 5px;
+        }
         &:disabled {
           color: $AdminColor80;
+        }
+        &:hover {
+          transition: all 1s ;
+          transform: scale(1.2);
+
         }
       }
     }
@@ -51,6 +69,7 @@
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
+
       .rate-logo{
         width: 30px ;
         height: 35px;
@@ -76,42 +95,10 @@
   }
 
   .post-info-body {
-    .views {
-      .post-rate {
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
-        color: white;
-        .like-disLike-count {
-          display: flex;
-          align-items: center;
-          .like-disLike-count-items {
-            margin: 0 10px;
-            display: flex;
-            align-items: center;
-            color: white;
-            p {
-              margin: 0 5px;
-            }
-            .like-disLike-count-items-logo{
-              width: 20px;
-              height: 25px;
-            }
-          }
-        }
-      }
-      .progressParent {
-        max-width: 100%;
 
-        div {
-          transition: width 0.3s ease-in-out;
-        }
-      }
-
-
-    }
 
     .meta-description {
+
       color: white;
       .tags-categories-actors {
         display: flex;
@@ -161,9 +148,9 @@
     }
 
     .post-info-body {
-      display: grid;
-      grid-template-columns: 200px 1fr;
-      grid-gap: 20px;
+      //display: grid;
+      //grid-template-columns: 200px 1fr;
+      //grid-gap: 20px;
 
       .views {
         .progressParent {

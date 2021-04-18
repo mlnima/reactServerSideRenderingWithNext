@@ -1,12 +1,13 @@
-//#download-url{
-//  width: 100px;
-//  a{
-//    width: 100px;
-//    display: flex;
-//    justify-content: center;
-//    align-items: center;
-//    .svg-logo-medium{
-//      width: 100px;
-//    }
-//  }
-//}
+.download-url{
+  width: 50px;
+  a{
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    .svg-logo-medium{
+      color: var(--main-text-color);
+      width: 100%;
+    }
+  }
+}
