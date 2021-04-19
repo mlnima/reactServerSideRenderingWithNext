@@ -1,12 +1,20 @@
-import React from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 let StyledNavigation = styled.nav`${props => props.stylesData ?? ''}`
 
-const NavigationWidgetArea = props => {
+const NavigationWidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering}) => {
     return (
-        <StyledNavigation stylesData={props?.stylesData ?? ''} className={props.className + ' widget-area ' + props.position}>
-            <WidgetsRenderer currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} {...props} position={props.position} referer={props.referer}/>
+        <StyledNavigation stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+            <WidgetsRenderer
+                currentPageSidebar={currentPageSidebar}
+                isMobile={isMobile}
+                widgets={widgets}
+                rendering={rendering}
+                position={position}
+                referer={referer}
+                postElementSize={postElementSize}
+                postElementStyle={postElementStyle}
+            />
         </StyledNavigation>
     );
 };

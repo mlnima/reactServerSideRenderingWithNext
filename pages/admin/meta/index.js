@@ -111,7 +111,7 @@ const meta = props => {
                     </div>
                     <div className='single-meta-page-section'>
                         <p>Meta Image :</p>
-                        <input name='imageUrl' onChange={e => onInputChangeHandler(e)} value={metaData.imageUrl}/>
+                        <input name='imageUrl' onChange={e => onInputChangeHandler(e)} value={metaData?.imageUrl ?? ''}/>
                         <div className='preview-image'>
                             <img src={metaData.imageUrl} alt=""/>
                         </div>

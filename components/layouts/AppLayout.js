@@ -122,6 +122,7 @@ const AppLayout = props => {
     //     }
     // }, [contextData.userData]);
 
+   // console.log(props.design?.data?.postElementStyle)
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
             {!props.globalStyleDetected ? <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/> : null}
@@ -136,6 +137,7 @@ const AppLayout = props => {
                     position='topBar'
                     stylesData={props.design?.data?.topBarStyle || contextData.siteDesign.topBarStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
                     referer={props.referer}
                 /> : null
             }
@@ -147,6 +149,7 @@ const AppLayout = props => {
                     className='header' position='header'
                     stylesData={props.design?.data?.headerStyle || contextData.siteDesign.headerStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
                     referer={props.referer}
                 /> : null
             }
@@ -159,6 +162,7 @@ const AppLayout = props => {
                     position='navigation'
                     stylesData={props.design?.data?.navigationStyle || contextData.siteDesign?.navigationStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign?.postElementSize}
+                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
                     referer={props.referer}
                 /> : null
             }
@@ -171,6 +175,7 @@ const AppLayout = props => {
                     className='left-sidebar'
                     position={leftSidebarPositionName}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
                     referer={props.referer}
                 /> : null
             }
@@ -184,6 +189,7 @@ const AppLayout = props => {
                     className='right-sidebar'
                     position={rightSidebarPositionName}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
                     referer={props.referer}
                 /> : null
             }
@@ -194,6 +200,7 @@ const AppLayout = props => {
                     className='footer' position='footer'
                     stylesData={props.design?.data?.footerStyle || contextData.siteDesign.footerStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
                     referer={props.referer}
                 /> : null
             }

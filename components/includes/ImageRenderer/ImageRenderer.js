@@ -10,7 +10,8 @@ const ImageRenderer = props => {
     const noImageUrl = '/static/images/noImage/no-image-available.png';
 
     const onErrorHandler = e => {
-
+        console.log('error',e)
+        console.log(props.imageUrl)
         if (props.imageUrl) {
             setGotError(true)
             setIsReported(true)
@@ -19,7 +20,6 @@ const ImageRenderer = props => {
                 contentId: props.contentId,
                 type:'image'
             }
-            console.log('error')
             setTimeout(() => {
                 checkRemovedContent(data)
             }, 0)

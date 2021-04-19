@@ -6,26 +6,26 @@ import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {useRouter} from "next/router";
 import {AppContext} from "../../context/AppContext";
 
-const meta = props => {
+const meta = ({metaSource,identity,dataForGettingMeta}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-    const renderMetas = (props.metaSource.metas ?? []).map(meta => {
+    const renderMetas = (metaSource.metas ?? []).map(meta => {
         return (
-            <MetaElement key={props.metaSource.metas.indexOf(meta)} {...meta} />
+            <MetaElement key={metaSource.metas.indexOf(meta)} {...meta} />
         )
     })
 
-    const isWithSidebar = props?.identity?.data?.metaPageSidebar || contextData?.siteIdentity?.metaPageSidebar
+    const isWithSidebar = identity?.data?.metaPageSidebar || contextData?.siteIdentity?.metaPageSidebar
 
     return (
 
         <div style={{gridArea: isWithSidebar ? 'main' : ''}} className={isWithSidebar ? 'content main ' : 'content main '}>
             <PaginationComponent
                 isActive={true}
-                currentPage={props?.dataForGettingMeta?.page}
-                totalCount={props?.metaSource?.totalCount}
-                size={props?.dataForGettingMeta?.size}
-                maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
+                currentPage={dataForGettingMeta?.page}
+                totalCount={metaSource?.totalCount}
+                size={dataForGettingMeta?.size}
+                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(dataForGettingMeta?.size))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
@@ -34,10 +34,10 @@ const meta = props => {
             </div>
             <PaginationComponent
                 isActive={true}
-                currentPage={props?.dataForGettingMeta?.page}
-                totalCount={props?.metaSource?.totalCount}
-                size={props?.dataForGettingMeta?.size}
-                maxPage={Math.ceil(parseInt(props?.metaSource?.totalCount) / parseInt(props?.dataForGettingMeta?.size))}
+                currentPage={dataForGettingMeta?.page}
+                totalCount={metaSource?.totalCount}
+                size={dataForGettingMeta?.size}
+                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(dataForGettingMeta?.size))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />

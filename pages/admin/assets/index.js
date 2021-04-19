@@ -40,17 +40,17 @@ const assets = props => {
         let ajaxRequestData;
         let getFirstDataOption = {
             size: router.query.size ? parseInt(router.query.size) : 30,
-            pageNo: router.query.page ? parseInt(router.query.page) : 1,
-            postType: router?.query?.type ?? 'all',
+            page: router.query.page ? parseInt(router.query.page) : 1,
+            postType: router?.query?.type ?? null,
             fields: ['title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail'],
             keyword: router?.query?.keyword ?? '',
             author: router?.query?.author ?? 'all',
             status: router?.query?.status ?? 'all',
-            sort: router?.query?.sort ?? 'latest',
+            sort: router?.query?.sort ?? 'lastModify',
             content: router?.query?.content ?? 'all',
-            type: router?.query?.metaType ||  '',
+            metaType: router?.query?.metaType ||  '',
             orderType: router?.query?.orderType ?? 'all',
-            page: router?.query?.page ? parseInt(router.query.page) : 1,
+            //page: router?.query?.page ? parseInt(router.query.page) : 1,
             searchForImageIn: router?.query?.type,
             startWith: '',
         }

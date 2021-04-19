@@ -6,6 +6,12 @@ export const getUsersList = async () => {
     }
     return await axios.post(window.location.origin + '/api/v1/users/getUsersList', body)
 }
+export const login = async data => {
+    let body = {
+        ...data
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/login', body)
+}
 
 export const resetPassword = async (oldPass, newPass, newPass2) => {
     console.log( oldPass, newPass, newPass2)

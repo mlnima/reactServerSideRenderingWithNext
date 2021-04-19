@@ -1,23 +1,17 @@
-import React, {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
 import {likeValueCalculator} from "../../../../_variables/_variables";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 import DownloadLink from "../DownloadLink/DownloadLink";
 import withRouter from 'next/dist/client/with-router'
-import EditLinksForAuthor from "./EditLinksForAuthor/EditLinksForAuthor";
 import EditLinkForAdmin from "./EditLinkForAdmin/EditLinkForAdmin";
 import RatingButtons from "./RatingButtons/RatingButtons";
 import Price from "./Price/Price";
-import RatingData from "./RatingData/RatingData";
 import PostTitle from "./PostTitle/PostTitle";
 import PostDescription from "./PostDescription/PostDescription";
 import AddToBasket from "./AddToBasket/AddToBasket";
 
-import styled from "styled-components";
-
-let StyledDiv = styled.div`${props => props.stylesData}`;
-
-const PostInfo = props => {
+const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,categories,description,_id,translations,currency,rating}) => {
     const [state, setState] = useState({
         likeValue: 0,
         postAbsolutePath: '',
@@ -40,44 +34,45 @@ const PostInfo = props => {
         if (typeof window !== 'undefined') {
             setState({
                 ...state,
-                likeValue: likeValueCalculator(props.likes, props.disLikes),
+                likeValue: likeValueCalculator(likes, disLikes),
                 postAbsolutePath: window.location.href
             });
         }
-        likeDislikeView(props.id, 'views').then(res => {
+        likeDislikeView(_id, 'views').then(res => {
             if (res.data.updatedData) {
                 setRatingAndViewData(res.data.updatedData)
             }
         })
-    }, [props.likes, props.disLikes]);
-
-
-
+    }, [likes, disLikes]);
 
 
     return (
-        <StyledDiv className='post-info'>
-            <EditLinkForAdmin {...props}/>
+        <div className='post-info'>
+            <EditLinkForAdmin _id={_id}/>
             <div className='post-info-head'>
-                <PostTitle {...props}/>
+                <PostTitle title={title} translations={translations}/>
                 <div className='under-title'>
-                    <RatingButtons {...props} svgDefaultStyle={state.svgDefaultStyle} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData}/>
-                    <Price {...props} svgDefaultStyle={state.svgDefaultStyle}/>
-                    <DownloadLink downloadLink={props.downloadLink} render={props.downloadLink} svgDefaultStyle={state.svgDefaultStyle}/>
+                    <RatingButtons _id={_id} svgDefaultStyle={state.svgDefaultStyle} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData}/>
+                    {
+                        postType === 'product'?
+                            <Price price={price} currency={currency}  svgDefaultStyle={state.svgDefaultStyle}/>:
+                            null
+                    }
+
+                    <DownloadLink downloadLink={downloadLink} render={downloadLink} svgDefaultStyle={state.svgDefaultStyle}/>
                 </div>
-                <AddToBasket productId={props._id} render={props.postType === 'product'} svgDefaultStyle={state.svgDefaultStyle}/>
+                <AddToBasket productId={_id} render={postType === 'product'} svgDefaultStyle={state.svgDefaultStyle}/>
             </div>
 
             <div className='post-info-body'>
-
                 <div className="meta-description">
-                    <PostDescription  {...props}/>
-                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='actors' data={props.actors || []}/>
-                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='tags' data={props.tags || []}/>
-                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='categories' data={props.categories || []}/>
+                    <PostDescription  description={description} translations={translations}/>
+                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='actors' data={actors || []}/>
+                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='tags' data={tags || []}/>
+                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='categories' data={categories || []}/>
                 </div>
             </div>
-        </StyledDiv>
+        </div>
     );
 };
 export default withRouter(PostInfo);

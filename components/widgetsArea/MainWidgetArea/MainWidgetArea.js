@@ -1,10 +1,11 @@
+import React from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-let StyledSideBar = styled.aside`${props => props.stylesData ?? ''}`
+let StyledMain = styled.main`${props => props.stylesData ?? ''}`
 
-const SideBarWidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering}) => {
+const MainWidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering}) => {
     return (
-        <StyledSideBar stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+        <StyledMain stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <WidgetsRenderer
                 currentPageSidebar={currentPageSidebar}
                 isMobile={isMobile}
@@ -15,7 +16,7 @@ const SideBarWidgetArea = ({postElementStyle,postElementSize,stylesData,classNam
                 postElementSize={postElementSize}
                 postElementStyle={postElementStyle}
             />
-        </StyledSideBar>
+        </StyledMain>
     );
 };
-export default SideBarWidgetArea;
+export default MainWidgetArea;

@@ -137,7 +137,8 @@ a {
             'rightSidebar'
             'footer';
   @media only screen and (min-width: 769px) {
-    grid-template-columns: 320px 1fr 320px;
+    grid-template-columns: 240px 1fr 240px;
+    //grid-template-columns: 1fr 6fr 1fr;
     grid-template-areas:
            'topbar topbar topbar'
            'header header header'

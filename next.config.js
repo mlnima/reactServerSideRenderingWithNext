@@ -30,6 +30,7 @@ const reWriteRoutes = {
     rewrites: async () => {
         return [
             {source: `/admin`, destination: '/admin', locale: false},
+            {source: `/login`, destination: '/auth/login'},
             //meta route
             {source: `/:locale(${languages})?/:metaType(categories|tags|actors)`, destination: '/meta'},
             {source: `/:metaType(categories|tags|actors)`, destination: '/meta'},

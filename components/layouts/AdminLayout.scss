@@ -1,6 +1,6 @@
 @import "../../styles/colors";
 
-.container {
+.admin-container {
   display: grid;
   grid-template-columns: 1fr;
   grid-template-areas: 'admin-topbar' 'admin-content' 'admin-footer'
@@ -16,10 +16,14 @@
 }
 
 @media only screen and (min-width: 768px) {
-  .container {
+  .admin-container {
+
     display: grid;
     grid-template-columns: 160px 1fr;
-    grid-template-areas: 'admin-topbar admin-topbar' 'adminSideBar admin-content' 'admin-footer admin-footer'
+    grid-template-areas: 'admin-topbar admin-topbar' 'adminSideBar admin-content' 'admin-footer admin-footer';
+    .Admin{
+      padding: 10px;
+    }
   }
 }
 

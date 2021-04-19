@@ -1,5 +1,5 @@
-import React, {useEffect, useContext} from 'react';
-import {getMultipleWidgetWithData, getFirstLoadData} from '../../_variables/ajaxVariables';
+import React, {useContext} from 'react';
+import { getFirstLoadData} from '../../_variables/ajaxVariables';
 import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
 import withRouter from 'next/dist/client/with-router';
 import Posts from '../../components/includes/Posts/Posts';
@@ -9,9 +9,10 @@ import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import styled from "styled-components";
 import {AppContext} from "../../context/AppContext";
 
-let StyledDiv = styled.div`${props => props.stylesData}`
 
-const posts = props => {
+let StyledMain = styled.main`${props => props.stylesData}`
+
+const posts = (props,{design}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
 
@@ -19,7 +20,7 @@ const posts = props => {
         router.asPath.includes('categories') ? 'category' :
             router.asPath.includes('actors') ? 'actor' : ''
     return (
-        <StyledDiv className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
+        <StyledMain className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
             {contentName ? <PostsPageInfo metaName={(router.query?.metaName)} metaType={(router.query?.metaType)}/> : null}
             <PaginationComponent
                 isActive={true}
@@ -28,8 +29,12 @@ const posts = props => {
                 size={props.getPostsData.size}
                 maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
             />
-            <div className='postsContainer'>
-                <Posts posts={props.postsSource.posts || []} postElementSize={props.design?.data?.postElementSize}/>
+            <div className='posts-container'>
+                <Posts
+                    posts={props.postsSource.posts || []}
+                    postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                />
             </div>
             <PaginationComponent
                 isActive={true}
@@ -38,7 +43,7 @@ const posts = props => {
                 size={props.getPostsData.size}
                 maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
             />
-        </StyledDiv>
+        </StyledMain>
     );
 };
 
@@ -62,7 +67,6 @@ export const getServerSideProps = async ({req, query}) => {
 
     const contentData = query.content ? await getSingleMeta(query.content, firstLoadData.domainName, true) : {}
     const contentDataInfo = contentData.data ? contentData.data.meta : {}
-    // const widgetsData = await getMultipleWidgetWithData({widgets: ['postsPageLeftSidebar', 'postsPageRightSidebar']}, firstLoadData.domainName, true, 'postsPage')
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, req.originalUrl)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []

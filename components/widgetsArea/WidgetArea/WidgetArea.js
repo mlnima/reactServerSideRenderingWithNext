@@ -1,12 +1,20 @@
-import React from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
-const WidgetArea = props => {
+const WidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering}) => {
     return (
-        <StyledDiv stylesData={props?.stylesData ?? ''} className={props.className + ' widget-area ' + props.position}>
-            <WidgetsRenderer currentPageSidebar={props.currentPageSidebar} isMobile={props.isMobile} {...props} position={props.position} referer={props.referer}/>
+        <StyledDiv stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+            <WidgetsRenderer
+                currentPageSidebar={currentPageSidebar}
+                isMobile={isMobile}
+                widgets={widgets}
+                rendering={rendering}
+                position={position}
+                referer={referer}
+                postElementSize={postElementSize}
+                postElementStyle={postElementStyle}
+            />
         </StyledDiv>
     );
 };

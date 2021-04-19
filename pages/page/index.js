@@ -1,24 +1,27 @@
-import React from 'react';
-import {getFirstLoadData, getMultipleWidgetWithData, getPageData} from "../../_variables/ajaxVariables";
+import React, {useContext} from 'react';
+import {getFirstLoadData, getPageData} from "../../_variables/ajaxVariables";
 import styled from "styled-components";
 import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
 import Error from "../_error";
-
+import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidgetArea";
+import {AppContext} from "../../context/AppContext";
 let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
-const page = props => {
-    if (props.responseCode !==200){
-        return <Error responseCode={props.responseCode} />
-    }else  return (
-        <StyledDiv className='page main'>
-            <WidgetsRenderer
-                key='page'
-                rendering={true}
-                position={props.pageInfo.pageName}
-                widgets={(props.widgets || []).filter(widget => widget.data.position === props.pageInfo.pageName)}
-            />
-        </StyledDiv>
-    );
+const page = ({responseCode,pageInfo,widgets,design,identity}) => {
+    const contextData = useContext(AppContext);
+    return (
+        responseCode !==200 ? <Error responseCode={responseCode} />:
+                < MainWidgetArea
+                    position={pageInfo.pageName}
+                    rendering={true}
+                    widgets={(widgets || []).filter(widget => widget.data?.position === pageInfo.pageName)}
+                    className='page main'
+                    stylesData={pageInfo.pageStyle || ''}
+                    currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
+                    postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                />
+    )
 };
 
 export const getServerSideProps = async ({req, query}) => {
@@ -30,9 +33,31 @@ export const getServerSideProps = async ({req, query}) => {
             notFound: true
         }
     }
-    const pageInfo = pageData.data ? pageData.data.pageData : {}
-    const widgets = firstLoadData.widgets
-    return {props: {widgets, ...firstLoadData.settings, pageInfo, query, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer,responseCode}}
+
+    return {
+        props: {
+            widgets:firstLoadData.widgets,
+            ...firstLoadData.settings,
+            pageInfo:pageData.data ? pageData.data.pageData : {},
+            query,
+            isMobile: Boolean(firstLoadData.isMobile),
+            referer: firstLoadData.referer,
+            responseCode
+        }}
 }
 
 export default page;
+
+// <StyledDiv className='page main'>
+//     <WidgetsRenderer
+//         position={pageInfo.pageName}
+//         rendering={true}
+//         widgets={(widgets || []).filter(widget => widget.data?.position === 'home')}
+//         className='home-page main'
+//         stylesData={pageInfo.pageStyle || ''}
+//         currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
+//         postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+//         postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+//     />
+//
+// </StyledDiv>

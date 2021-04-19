@@ -1,26 +1,17 @@
-import React from 'react';
 import Head from "next/head";
 
-const PostMetaDataToSiteHead = props => {
-
-    if (props.post.title) {
-        return (
-            <Head>
-                <title>{ props.post.title }</title>
-                <meta name="description" content={ props.post.description || props.post.title }/>
-                <meta name="keywords" content={ [ ...props.post.tags.map(i=>i.name), ...props.post.categories.map(i=>i.name), ...props.post.actors.map(i=>i.name) ] }/>
-                <meta property="og:title" content={ props.post.title }/>
-                <meta property="og:type" content={ props.post.postType === 'video' ? props.post.postType + '.' + 'movies' : props.post.postType }/>
-                {/*url should define*/ }
-                <meta property="og:url" content={ props.post.videoEmbedCode }/>
-                <meta property="og:image" content={ props.post.mainThumbnail }/>
-            </Head>
-        )
-    } else return null
+const PostMetaDataToSiteHead = ({title,description,tags,postType,videoEmbedCode,mainThumbnail,categories,actors}) => {
+    return (
+        <Head>
+            <title>{ title }</title>
+            <meta name="description" content={ description || title }/>
+            <meta name="keywords" content={ [ ...tags.map(i=>i.name), ...categories.map(i=>i.name), ...actors.map(i=>i.name) ] }/>
+            <meta property="og:title" content={ title }/>
+            <meta property="og:type" content={ postType === 'video' ? postType + '.' + 'movies' : postType }/>
+            <meta property="og:url" content={ videoEmbedCode }/>
+            <meta property="og:image" content={ mainThumbnail }/>
+        </Head>
+    )
 };
 export default PostMetaDataToSiteHead;
 
-
-// {process.env.NODE_ENV !== 'production' && (
-//     <link rel="stylesheet" type="text/css" href={'/_next/static/css/styles.chunk.css?v=' + Date.now()} />
-// )}

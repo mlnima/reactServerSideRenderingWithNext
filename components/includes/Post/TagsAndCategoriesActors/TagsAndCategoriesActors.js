@@ -1,10 +1,8 @@
-import React from 'react';
 import Link from "next/link";
 import { faFolder, faTag} from "@fortawesome/free-solid-svg-icons";
 import {faStar} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import styled from "styled-components";
-let StyledDiv = styled.div`${props => props.stylesData}`;
+import _ from "lodash";
 
 const TagsAndCategoriesActors = props => {
     const renderData = props.data.map(item => {
@@ -15,7 +13,7 @@ const TagsAndCategoriesActors = props => {
                 : props.type === 'actors' ? faStar
                     : faTag
         return (
-            <div key={item.name}  className='post-meta-item'>
+            <div key={_.uniqueId('id_')}  className='post-meta-item'>
                 <FontAwesomeIcon style={props.svgDefaultStyle} icon={icon} className='meta-data-logo'  />
                 <Link href={path} as={asPath}   >
                     <a className={props.type} >{item.name}</a>
@@ -26,12 +24,12 @@ const TagsAndCategoriesActors = props => {
 
     if (props.data.length >= 1) {
         return (
-            <StyledDiv className={props.type + ' tags-categories-actors'}>
+            <div className={props.type + ' tags-categories-actors'}>
                 <span > {props.type.charAt(0).toUpperCase() + props.type.substring(1)}:</span>
                 <div className="content">
                     {renderData}
                 </div>
-            </StyledDiv>
+            </div>
         );
     } else return null
 

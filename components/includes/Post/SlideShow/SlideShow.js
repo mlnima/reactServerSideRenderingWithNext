@@ -1,10 +1,10 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import {useEffect, useState} from 'react';
 import Image from 'next/image';
 import styled from "styled-components";
 let StyledDiv = styled.div`${props => props.stylesData}`;
 
 
-const SlideShow = props => {
+const SlideShow = ({images,sidebar,mainThumbnail,deviceWidth}) => {
     const [state, setState] = useState({
         activeImageIndex: 0,
         imagesArrayLength: 0
@@ -12,11 +12,9 @@ const SlideShow = props => {
     useEffect(() => {
         setState({
             ...state,
-            imagesArrayLength: props.images.length
+            imagesArrayLength: images.length
         })
-    }, [props]);
-
-
+    }, [images]);
     const nextImage = () => {
         setState({
             ...state,
@@ -29,7 +27,6 @@ const SlideShow = props => {
             activeImageIndex: state.activeImageIndex - 1
         })
     }
-
     const NextBtn = () => {
 
         if (state.activeImageIndex >= state.imagesArrayLength - 1) {
@@ -40,7 +37,6 @@ const SlideShow = props => {
             )
         }
     }
-
     const PreviousBtn = () => {
         if (state.activeImageIndex > 0 && state.imagesArrayLength > 1) {
             return (
@@ -50,12 +46,11 @@ const SlideShow = props => {
             return null
         }
     }
-
     const RenderImageElement = () => {
-        const activeImageSrc = props.images.length > 0 ? props.images[state.activeImageIndex] : props.mainThumbnail
+        const activeImageSrc = images.length > 0 ? images[state.activeImageIndex] : mainThumbnail
 
         if (activeImageSrc.includes('http')) {
-            if (props.images.length > 0) {
+            if (images.length > 0) {
                 return (
                     <img className='active-image' src={activeImageSrc} alt="activeImageSrc"/>
                 )
@@ -66,7 +61,7 @@ const SlideShow = props => {
             }
         } else {
 
-            let imageWidth = props.deviceWidth > 768 ? props.sidebar ? props.deviceWidth - 300 : props.deviceWidth : props.deviceWidth
+            let imageWidth = deviceWidth > 768 ? sidebar ? deviceWidth - 300 : deviceWidth : deviceWidth
 
             return (
                 <Image src={activeImageSrc} alt="activeImageSrc"
@@ -80,18 +75,15 @@ const SlideShow = props => {
 
     }
 
-    if (props.postType === 'product') {
-        return (
-            <StyledDiv className='product-slide-show'>
-                <PreviousBtn/>
-                <div className='product-slide-show-image-area'>
-                    <RenderImageElement/>
-                </div>
-
-                <NextBtn/>
-            </StyledDiv>
-        );
-    } else return null
+    return (
+        <StyledDiv className='product-slide-show'>
+            <PreviousBtn/>
+            <div className='product-slide-show-image-area'>
+                <RenderImageElement/>
+            </div>
+            <NextBtn/>
+        </StyledDiv>
+    );
 
 };
 export default SlideShow;

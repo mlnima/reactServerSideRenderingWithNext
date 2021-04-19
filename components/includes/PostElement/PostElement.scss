@@ -54,17 +54,14 @@
 
 
 .post-element-div {
- // width: 100vw;
+  margin: 2px;
   border: none;
-  margin: auto;
-
   .post-element {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: flex-start;
     margin: auto;
-
     .image {
       position: relative;
       margin: auto;
@@ -73,17 +70,14 @@
         object-fit: contain;
         height: auto;
       }
-
       .post-element-internal-image {
         margin: auto;
         object-fit: contain;
         height: auto;
       }
-
       video {
         @include opacityAnimationStart;
       }
-
       .bottom-right {
         position: absolute;
         right: 3px;
@@ -93,12 +87,10 @@
         align-items: center;
         padding: 1px 3px;
         border-radius: 3px;
-
         span {
           margin: 0 5px;
         }
       }
-
       .bottom-left {
         position: absolute;
         left: 3px;
@@ -107,7 +99,6 @@
         align-items: center;
         padding: 1px 3px;
         border-radius: 3px;
-
         span {
           margin: 0 5px;
         }
@@ -144,11 +135,9 @@
     .progressParent {
       width: 100%;
       margin: auto;
-
       .progressChild {
         p {
           position: relative;
-          //width: 100%;
           color: white;
         }
       }
@@ -157,6 +146,7 @@
 }
 
 @media only screen and (min-width: 768px) {
+
 
   .post-element-div-medium{
     width: 320px;
@@ -174,6 +164,7 @@
         width: 320px;
       }
     }
+
   }
   .post-element-div-small{
     width: 255px;
@@ -213,7 +204,6 @@
   .post-element-div {
     .post-element {
       image {
-       // max-width: 320px;
         .post-element-external-image {
           margin: auto;
           object-fit: contain;
@@ -223,9 +213,7 @@
           object-fit: contain;
         }
       }
-
       .progressParent {
-        //background-color: #333;
         width: 100%;
 
       }

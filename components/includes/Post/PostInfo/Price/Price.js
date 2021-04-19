@@ -2,18 +2,13 @@ import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
 
-const Price = props => {
+const Price = ({currency,price}) => {
 
-    if (props.postType === 'product') {
-        return (
-            <div className='price-information'>
-                <FontAwesomeIcon style={props.svgDefaultStyle} icon={props.currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo'/>
-
-                <p>{props.price}</p>
-
-            </div>
-        )
-
-    } else return null
+    return (
+        <div className='price-information'>
+            <FontAwesomeIcon style={props.svgDefaultStyle} icon={currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo'/>
+            <p>{price}</p>
+        </div>
+    )
 };
 export default Price;

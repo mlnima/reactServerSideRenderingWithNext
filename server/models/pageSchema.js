@@ -9,6 +9,7 @@ const pageSchema =  new Schema({
     sidebar:String,
     status: String,
     imageUrl:String,
+    pageStyle:String
 });
 
 module.exports = mongoose.model("page", pageSchema);

@@ -8,16 +8,29 @@
 
   .meta-child-element {
     display: flex;
+    justify-content:  space-between;
     align-items: center;
-    border-radius: 5px;
-    margin: 2px 5px;
-    padding: 4px 5px;
-    .meta-data-logo{
-      width: 20px;
-      height: 20px;
-    }
-    a{
-      margin: 0 5px;
+    height: 40px;
+    width: 118px;
+    .meta-widget-item{
+      height: 100%;
+      width: 100%;
+      margin: 0 2px;
+      display: flex;
+      align-items: center;
+      .meta-name{
+        max-width:95px;
+        font-size: .8rem;
+        margin-left: 2px;
+        overflow:hidden;
+        display:inline-block;
+        text-overflow: ellipsis;
+        white-space: nowrap;
+      }
+      .meta-data-logo{
+        width: 20px;
+        height: 20px;
+      }
     }
   }
 }

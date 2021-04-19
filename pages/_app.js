@@ -33,6 +33,7 @@ import '../components/includes/AdminTools/Console/Console.scss';
 import '../components/includes/AdminTools/AdminTools.scss';
 import '../pages/auth/registerLogin.scss';
 import '../pages/profile/Profile.scss';
+import '../pages/posts/Posts.scss';
 import AdminLayout from "../components/layouts/AdminLayout";
 import {createGlobalStyle} from "styled-components";
 import * as Scroll from 'react-scroll';

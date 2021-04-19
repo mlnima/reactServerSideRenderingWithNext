@@ -1,15 +1,14 @@
 import React, {useState, useRef, useContext, useEffect} from 'react';
-import AppLayout from "../../components/layouts/AppLayout";
 import withRouter from 'next/dist/client/with-router'
 import axios from 'axios'
 import {AppContext} from "../../context/AppContext";
-import {getAbsolutePath} from '../../_variables/_variables'
 import {getFirstLoadData, getMultipleSetting, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
-import dataDecoder from '../../server/tools/dataDecoder'
+import {login} from "../../_variables/ajaxAuthVariables";
+import {useRouter} from "next/router";
 
-const Login = props => {
+const Login = () => {
     const contextData = useContext(AppContext);
-    const messageLabel = useRef(null);
+    const router = useRouter()
     const [state, setState] = useState({});
     const [data, setData] = useState({
         response: undefined,
@@ -25,33 +24,19 @@ const Login = props => {
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        axios.post('/api/v1/users/login', state).then(res => {
-            let type = res.data.type;
-            if (type === 'success') {
-                if (res.data.token) {
+        login(state).then(res=>{
+            if (res.data?.type === 'success') {
+                if (res.data?.token) {
                     localStorage.setItem('wt', res.data.token)
                 }
-            } else {
-
             }
-            setData({
-                ...data,
-                response: res.data.response,
-                type: res.data.type,
-            })
-
-        }).then(() => {
+        }).then(()=>{
             contextData.functions.getAndSetUserInfo().then(() => {
-                props.router.back()
+                router.back()
             })
-            // contextData.functions.goToHomePage()
-        }).catch(err => console.log(err))
+        })
     };
 
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
 
     return (
 

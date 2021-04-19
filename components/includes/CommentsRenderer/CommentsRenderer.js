@@ -14,24 +14,6 @@ const CommentsRenderer = props => {
         style: {}
     });
 
-    // useEffect(() => {
-    //     setState({
-    //         ...state,
-    //         authorStyle: {
-    //             color: contextData.siteDesign.commentsAuthorTextColor
-    //         },
-    //         dateStyle: {
-    //             color: contextData.siteDesign.commentsDateTextColor
-    //         },
-    //         bodyStyle: {
-    //             color: contextData.siteDesign.commentsBodyTextColor
-    //         },
-    //         style: {
-    //             backgroundColor: contextData.siteDesign.commentsBackgroundColor
-    //         }
-    //     })
-    // }, [ props ]);
-
     const onDeleteHandler = (id) => {
         deleteComments([ id ], window.location.origin).then(() => {
             props.router.push({
@@ -42,8 +24,6 @@ const CommentsRenderer = props => {
             console.log(err)
         })
     }
-
-
 
     const renderComments = props.comments.map(comment => {
 

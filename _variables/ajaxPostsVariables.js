@@ -74,6 +74,7 @@ export const getSingleMeta = async (id,  domainName,cache) => {
 export const updateMeta = async (data,  domainName) => {
     const body = {
         data,
+        token: localStorage.wt
     };
     return await axios.post(domainName + `/api/v1/posts/updateMeta`, body)
 };
