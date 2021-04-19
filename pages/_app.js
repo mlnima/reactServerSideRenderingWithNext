@@ -35,10 +35,8 @@ import '../pages/auth/registerLogin.scss';
 import '../pages/profile/Profile.scss';
 import '../pages/posts/Posts.scss';
 import AdminLayout from "../components/layouts/AdminLayout";
-import {createGlobalStyle} from "styled-components";
 import * as Scroll from 'react-scroll';
 
-let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 // export function reportWebVitals(metric) {
 //     console.log(metric)
@@ -56,7 +54,7 @@ const MyApp = ({Component, pageProps}) => {
     if (!router.pathname.includes('/admin')) {
         return (
             <AppProvider>
-                {pageProps.design?.data?.customStyles ? <GlobalStyle globalStyleData={pageProps.design?.data?.customStyles}/> : null}
+
                 <AppLayout
                     design={pageProps.design}
                     widgets={pageProps.widgets}

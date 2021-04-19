@@ -18,6 +18,7 @@ const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {s
 const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), {ssr: false})
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
+
 const AppLayout = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -122,12 +123,10 @@ const AppLayout = props => {
     //     }
     // }, [contextData.userData]);
 
-   // console.log(props.design?.data?.postElementStyle)
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
-            {!props.globalStyleDetected ? <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/> : null}
+            <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/>
             <SiteSettingSetter identity={props.identity || contextData?.siteIdentity} design={props.design || contextData?.siteDesign} eCommerce={props.eCommerce}/>
-
             {(!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar).length > 0 ?
                 <TopBarWidgetArea
                     isMobile={props.isMobile}
