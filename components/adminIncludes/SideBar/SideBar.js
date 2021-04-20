@@ -8,7 +8,80 @@ import SortDownSvg from '../../../static/images/fontawesome/sort-down-solid.svg'
 import withRouter from 'next/dist/client/with-router'
 import _ from "lodash";
 import WidgetModel from "../widgetsModel/WidgetModel/WidgetModel";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  font-size: 14px;
+  position: fixed;
+  left: 0;
+  top: 40px;
+  grid-area: adminSideBar;
+  min-height: 100vh;
+  width: 160px;
+  background-color: #24282d;
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+  z-index: 16;
 
+  .SideBarItemElement {
+    width: 100%;
+
+    .SideBarItemTitle {
+      display: flex;
+      justify-content: space-between;
+
+      .SideBarItem {
+        text-decoration: none;
+        color: white;
+        width: 100%;
+        padding: 5px 0;
+        //transition: .5s;
+
+        margin: 5px;
+        display: block;
+
+
+      }
+
+      button {
+        color: :#24282d;
+        background-color: transparent;
+        border: none;
+        outline: none;
+
+      }
+
+      &:hover {
+        background-color: #181818;
+        font-weight: bold;
+      }
+
+      &:active {
+        background-color: white;
+        color: $dark90;
+      }
+    }
+
+    .SideBarItemElementSubItems {
+      background-color: #181818;
+
+      .SideBarItem-SubItem {
+        color: white;
+        padding: 0 20px;
+        display: block;
+        //transition: .5s;
+
+        &:hover {
+          font-weight: bold;
+        }
+      }
+    }
+
+  }
+@media only screen and (min-width: 768px) {
+  position: initial;
+}
+`
 const SideBar = props => {
     const contextData = useContext(AppContext);
 
@@ -135,10 +208,9 @@ const SideBar = props => {
 
     if (contextData.settings.adminPanelSideBar) {
         return (
-            <div className='SideBar'>
+            <StyledDiv className='SideBar'>
                 {renderItems}
-                {/*<button onClick={()=>generateFakeData()}>take fake data</button>*/}
-            </div>
+            </StyledDiv>
         );
     } else return null
 };

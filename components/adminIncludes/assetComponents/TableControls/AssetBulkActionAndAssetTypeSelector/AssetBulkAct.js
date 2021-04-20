@@ -35,8 +35,6 @@ const AssetBulkAct = props => {
             }
         }
 
-        // if (props.router.query.assetsType === 'posts') {
-
             if (!props.router.query.status || props.router.query.status === 'all' || props.router.query.status === 'published') {
                 return (
                     <div className='asset-page-bulk-action-drop-down'>
@@ -100,55 +98,6 @@ const AssetBulkAct = props => {
                     </div>
                 )
             } else return null
-
-            // return (
-            //     <div className='asset-page-bulk-action-drop-down'>
-            //         <select ref={ bulkActionSelect } placeholder='Bulk Actions'>
-            //             <option value='none'>Bulk Actions</option>
-            //             <option value='published'>Published</option>
-            //             <option value='draft'>Draft</option>
-            //             <option value='trash'>Trash</option>
-            //         </select>
-            //         <button className='asset-page-bulk-action-drop-down-btn' onClick={ () => onApplyHandler() }>Apply</button>
-            //     </div>
-            // );
-        // } else if (props.router.query.assetsType === 'comments') {
-        //     return (
-        //         <div className='asset-page-bulk-action-drop-down'>
-        //             <select ref={bulkActionSelect} placeholder='Bulk Actions'>
-        //                 <option value='none'>Bulk Actions</option>
-        //                 <option value='published'>Published</option>
-        //                 <option value='draft'>Draft</option>
-        //                 <option value='trash'>Trash</option>
-        //             </select>
-        //             <button className='asset-page-bulk-action-drop-down-btn' onClick={() => onApplyHandler()}>Apply</button>
-        //         </div>
-        //     );
-        // } else if (props.router.query.assetsType === 'users') {
-        //     return (
-        //         <div className='asset-page-bulk-action-drop-down'>
-        //             <select ref={bulkActionSelect} placeholder='Bulk Actions'>
-        //                 <option value='none'>Bulk Actions</option>
-        //                 <option value='active'>Published</option>
-        //                 <option value='banned'>Draft</option>
-        //                 <option value='pending'>Trash</option>
-        //             </select>
-        //             <button className='asset-page-bulk-action-drop-down-btn' onClick={() => onApplyHandler()}>Apply</button>
-        //         </div>
-        //     );
-        // } else if (props.router.query.assetsType === 'metas') {
-        //     return (
-        //         <div className='asset-page-bulk-action-drop-down'>
-        //             <select ref={bulkActionSelect} placeholder='Bulk Actions'>
-        //                 <option value='none'>Bulk Actions</option>
-        //                 <option value='published'>Published</option>
-        //                 <option value='draft'>Draft</option>
-        //                 <option value='trash'>Trash</option>
-        //             </select>
-        //             <button className='asset-page-bulk-action-drop-down-btn' onClick={() => onApplyHandler()}>Apply</button>
-        //         </div>
-        //     );
-        // } else return null
 
     }
 ;

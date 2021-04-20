@@ -9,7 +9,55 @@ import SliderSvg from '../../../../static/images/fontawesome/sliders-h-solid.svg
 import FolderSvg from '../../../../static/images/fontawesome/folder-solid.svg'
 import SassSvg from '../../../../static/images/fontawesome/sass-brands.svg'
 import FileSvg from '../../../../static/images/fontawesome/file-solid.svg'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+  grid-gap: 10px;
+  background-color: white;
+  padding: 20px 20px 200px 20px;
+  border-radius: 20px;
 
+  .dirItem {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+
+    .file-manager-image-item {
+      width: 100px;
+      object-fit: cover;
+    }
+
+    button {
+      width: 100px;
+      height: 100px;
+      background-color: gray;
+      border: none;
+      outline: none;
+      font-size: xxx-large;
+      transition: .4s;
+      border-radius: 10px;
+
+      &:hover {
+        transform: scale(1.2);
+      }
+    }
+
+    p {
+      font-size: small;
+      overflow: hidden;
+    }
+
+    .clickedItem {
+      background-color: rgba(0, 100, 255, 0.8);
+      color: white;
+    }
+
+    .unClickedItem {
+      background-color: transparent;
+    }
+  }
+`
 const FileManagerArea = props => {
     const contextData = useContext(AppContext);
 
@@ -80,9 +128,9 @@ const FileManagerArea = props => {
     });
 
     return (
-        <div className='FileManagerArea'>
+        <StyledDiv className='FileManagerArea'>
             { renderDir }
-        </div>
+        </StyledDiv>
     );
 };
 export default withRouter(FileManagerArea);

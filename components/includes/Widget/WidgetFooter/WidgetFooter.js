@@ -1,12 +1,9 @@
-import React from 'react';
-
 import Link from "next/link";
 const WidgetFooter = props => {
-
-    if (props.redirectTo && props.redirectToTitle ){
+    if (props.redirectLink && props.redirectToTitle && props.footerLink){
         return (
             <div className='WidgetFooter'>
-                <Link href={props.redirectTo} ><a>{props.redirectToTitle}</a></Link>
+                <Link href={props.redirectLink} ><a>{props.redirectToTitle}</a></Link>
             </div>
         );
     }else return null

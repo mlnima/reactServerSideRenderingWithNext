@@ -1,7 +1,22 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
 import AssetBulkAct from './AssetBulkAct';
 import withRouter from 'next/dist/client/with-router'
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  select {
+    border: 1px solid rgba(0,0,0,.1);
+    padding: 3px 5px;
+    background-color: $light100;
+  }
+  .asset-page-bulk-action-drop-down {
+    .asset-page-bulk-action-drop-down-btn {
+      border: 1px solid rgba(0,0,0,.1);
+      padding: 3px 5px;
+    }
+  }
+`;
 const AssetBulkActionAndAssetTypeSelector = props => {
 
 
@@ -37,12 +52,12 @@ const AssetBulkActionAndAssetTypeSelector = props => {
     }
 
     return (
-        <div className='asset-page-bulk-action-asset-type-selector'>
+        <StyledDiv className='asset-page-bulk-action-asset-type-selector'>
             <AssetBulkAct { ...props }/>
             <div className="asset-page-asset-type-selector">
                 <RenderTypes/>
             </div>
-        </div>
+        </StyledDiv>
     );
 };
 export default withRouter(AssetBulkActionAndAssetTypeSelector);

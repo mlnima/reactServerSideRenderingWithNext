@@ -176,4 +176,4 @@ const BodyTable = props => {
         </tbody>
     );
 };
-export default withRouter(BodyTable);
+// export default withRouter(BodyTable);

@@ -23,6 +23,7 @@ import {
 import {addNewWidget} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import {AppContext} from "../../../../context/AppContext";
+import _ from "lodash";
 
 
 
@@ -78,11 +79,11 @@ const AddWidgetWithPositionMenu = props => {
     }
     const renderCustomPagesPosition = props.customPages.map(customPage=>{
        return(
-           <>
+           <React.Fragment key={_.uniqueId('id_')}>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'LeftSidebar', props.type)}>{convertVariableNameToName(customPage)+' Left Sidebar'}</button>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'RightSidebar', props.type)}>{convertVariableNameToName(customPage)+' Right Sidebar'}</button>
-           </>
+           </React.Fragment>
        )
    })
 

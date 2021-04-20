@@ -2,7 +2,42 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from '../../../../context/AppContext'
 import UploadFileBtn from '../../UploadFileBtn/uploadFileBtn'
 import {fileUpload} from '../../../../_variables/ajaxVariables'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+ margin: 20px 0;
+  button{
+    padding: 5px 10px ;
+    margin: 0 10px;
+      background-color: $AdminBackground50;
+  color: black;
+  outline: none;
+  border: .4px $AdminColor20 solid;
+  padding: 8px 10px;
+  border-radius: 5px;
+  &:active{
+    background-color: white;
+    border:none;
+  }
+  }
 
+
+  .file-Manager-control-address-bar{
+    display: flex;
+    justify-content: flex-start;
+    margin: 20px 0;
+    input{
+      width: 90%;
+      background-color: white;
+    }
+  }
+
+
+  .file-Manager-control-quick-access{
+  button{
+    @include greenActionBtn;
+  }
+  }
+`
 const FileManagerControl = props => {
     const addressBar = useRef(null)
     const uploadInputElement = useRef(null)
@@ -52,7 +87,7 @@ const FileManagerControl = props => {
     }
 
     return (
-        <div className='FileManagerControl'>
+        <StyledDiv className='FileManagerControl'>
             <div className='file-Manager-control-address-bar'>
                 <button className="backBtn" onClick={ (e) => onGoBackHandler(e) }>Back</button>
                 <input ref={ addressBar } name='addressBar' onChange={ e => onGoBackHandler(e) } className="ControlFilesItem" onClick={ e => clearClickedItemHandler(e) } value={ props.data.path }/>
@@ -66,7 +101,7 @@ const FileManagerControl = props => {
                 <input ref={uploadInputElement} type='file' style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
                 <button onClick={ () => uploadInputElement.current.click() }>Upload</button>
             </div>
-        </div>
+        </StyledDiv>
     );
 };
 export default FileManagerControl;

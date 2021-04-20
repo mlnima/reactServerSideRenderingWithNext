@@ -11,7 +11,8 @@ import {generateAbsolutePath, initGA, logPageView} from '../../_variables/_varia
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'),{ ssr: false })
 import {getSetting} from '../../_variables/ajaxVariables'
 import AdminFooter from "../adminIncludes/AdminFooter/AdminFooter";
-
+import {createGlobalStyle} from "styled-components";
+let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 
 
@@ -61,13 +62,14 @@ const AdminLayout = props => {
                     <meta name="viewport" content="width=device-width, initial-scale=1"/>
                     <meta charSet="utf-8"/>
                 </Head>
+                <GlobalStyle globalStyleData={ contextData?.siteDesign?.customStyles || ''}/>
                 <div ref={container} className="admin-container">
                     <TopBar/>
                     <SideBar/>
                     <div ref={Admin} className="Admin">
                         {props.children}
                     </div>
-                    <AdminFooter/>
+
                 </div>
 
                 {contextData.alert.active && contextData.alert.alertMessage  ?  <AlertBox/> : null }

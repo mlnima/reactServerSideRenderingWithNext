@@ -1,6 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
 import AddWidgetToPostMenuItem from "./AddWidgetToPostMenuItem";
-import AddWidgetWithPositionMenu from "../../widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu";
 
 const AddWidgetToPostMenu = props => {
 

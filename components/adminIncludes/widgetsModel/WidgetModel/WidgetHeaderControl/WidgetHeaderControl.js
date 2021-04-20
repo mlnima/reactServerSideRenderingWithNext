@@ -1,18 +1,77 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faPen, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import {faBars, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {convertVariableNameToName} from "../../../../../_variables/_variables";
-// import SortUpSvg from "../../../../../static/images/fontawesome/sort-up-solid.svg";
-// import SortDownSvg from "../../../../../static/images/fontawesome/sort-down-solid.svg";
-import Link from "next/link";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: grid;
+  grid-template-columns:  1fr 6fr 2fr  ;
+  background-color: var(--admin-darkcolor70);
+  color: var(--admin-text-color);
+  width: 100%;
+  height:50px ;
 
+  .widget-open-close-button{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    &:hover{
+      transition: 1s;
+      transform: scale(1.2);
+    }
+    svg{
+      width: 25px;
+      height:  25px;
+      margin: 0 5px;
+      color:var(--admin-text-color);
+      place-items: center;
+      &:hover{
+        background-color: var(--admin-darkcolor80);
+      }
+    }
+  }
+  .widget-name-index{
+    p{
+
+      color:var(--admin-text-color)
+    }
+  }
+
+  .widget-open-control-group-buttons{
+    display: grid;
+    grid-template-columns:  1fr 1fr ;
+    button,a{
+      color: var(--admin-text-color);
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      border: none;
+      outline: none;
+      padding: 8px 10px;
+      &:hover{
+        background-color: var(--admin-darkcolor80);
+      }
+      svg{
+        width: 25px;
+        height:  25px;
+        margin: 0 5px;
+        &:hover{
+          transition: .5s;
+          transform: scale(1.2);
+        }
+      }
+    }
+
+  }
+`
 
 const WidgetHeaderControl = props => {
 
     const keyStatus = props.setKey ? {key:props.widgetId} :{}
 
     return (
-        <div className='widget-open-control' {...keyStatus}>
+        <StyledDiv className='widget-open-control' {...keyStatus}>
             <div className='widget-open-close-button' onClick={props.onOpenHandler}>
                 <FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
                     transform: props.widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',
@@ -29,7 +88,7 @@ const WidgetHeaderControl = props => {
                     <FontAwesomeIcon icon={faSortDown} className='widget-header-handler-admin' />
                 </button>
             </div>
-        </div>
+        </StyledDiv>
     );
 };
 export default WidgetHeaderControl;

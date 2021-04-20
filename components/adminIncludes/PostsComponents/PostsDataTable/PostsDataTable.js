@@ -12,4 +12,4 @@ const PostsDataTable = props => {
         </table>
     );
 };
-export default PostsDataTable;
+// export default PostsDataTable;

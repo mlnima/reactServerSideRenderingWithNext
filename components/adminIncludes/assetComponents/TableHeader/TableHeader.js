@@ -1,7 +1,24 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import { convertVariableNameToName } from '../../../../_variables/_variables'
 import {useRouter} from "next/router";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  padding: 10px;
+  background-color: var(--admin-color-0);
+  margin: 5px 0 0 0;
+  border: .2px solid rgba(0,0,0,.1);
+  font-size: 13px;
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  grid-gap: 10px;
+  .asset-page-table-header-item{
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 
+  }
+`;
 
 const TableHeader = props => {
     const selectAllCheckBox = useRef(null)
@@ -78,10 +95,10 @@ const TableHeader = props => {
     })
 
     return (
-        <div className='asset-page-table-header'>
+        <StyledDiv className='asset-page-table-header'>
             <input ref={ selectAllCheckBox } type='checkbox' onChange={ e => onSelectChangeHandler(e) }/>
             { renderHeaderItems }
-        </div>
+        </StyledDiv>
     );
 };
 export default TableHeader;

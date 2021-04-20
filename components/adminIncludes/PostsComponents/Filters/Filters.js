@@ -18,4 +18,4 @@ const Filters = props => {
         </div>
     );
 };
-export default Filters;
+// export default Filters;

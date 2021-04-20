@@ -1,5 +1,14 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-
+import styled from "styled-components";
+let StyledForm = styled.form`
+  border: solid 2px rgba(0,0,0,.1);
+  border-radius: 10px;
+  padding: 5px 10px;
+  display: flex;
+  flex-direction: column;
+  margin: 30px 0;
+  background-color: black;
+`
 const AddFormConditional = props => {
     const [state, setState] = useState({});
 
@@ -45,7 +54,7 @@ const AddFormConditional = props => {
 
 
     return (
-        <form className='add-new-filed' onSubmit={e => onCreateFieldHandler(e)}>
+        <StyledForm className='add-new-filed' onSubmit={e => onCreateFieldHandler(e)}>
             <p>Filed Name :</p>
             <input required={true} name='fieldName' value={state.fieldName} onChange={e => onChangeHandler(e)}/>
             <p>Place Holder :</p>
@@ -74,7 +83,7 @@ const AddFormConditional = props => {
                 <option value='url'>url</option>
             </select>
             <button type='submit'>Add</button>
-        </form>
+        </StyledForm>
     );
 };
 export default AddFormConditional;

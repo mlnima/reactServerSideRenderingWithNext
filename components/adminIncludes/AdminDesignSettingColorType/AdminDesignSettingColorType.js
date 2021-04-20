@@ -1,5 +1,37 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from '../../../context/AppContext';
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  max-width: 300px;
+  .adminDesignSectionItems {
+    .adminDesignSectionItem {
+      padding: 20px;
+      border-radius: 10px;
+      background-color: var(--admin-dark-color-8);
+      color: var(--admin-color-0);
+      margin: 5px;
+      display: flex;
+      flex-direction: column;
+      flex-wrap: wrap;
+      align-items: flex-start;
+      justify-content: center;
+      height: 100%;
+      .adminDesignSectionItemTitle {
+        font-size: small;
+      }
+      .previewColor {
+        height: 30px;
+        width: 30px;
+        margin: 5px;
+        border: .3px solid white;
+      }
+      input {
+        margin: 5px;
+      }
+    }
+  }
+`
+
 
 
 const AdminDesignSettingColorType = props => {
@@ -14,7 +46,7 @@ const AdminDesignSettingColorType = props => {
     }
 
     return (
-        <div className='AdminDesignSettingColorType'>
+        <StyledDiv className='AdminDesignSettingColorType'>
                 <div className="adminDesignSectionItems">
                     <div className="adminDesignSectionItem">
                         <p className='adminDesignSectionItemTitle'>{ props.positionName.replace(/([A-Z])/g, " $1") } :</p>
@@ -24,7 +56,7 @@ const AdminDesignSettingColorType = props => {
                         } }/>
                     </div>
                 </div>
-        </div>
+        </StyledDiv>
     );
 };
 export default AdminDesignSettingColorType;

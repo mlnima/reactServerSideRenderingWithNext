@@ -1,58 +1,21 @@
-import React, {useContext, useEffect, useState} from 'react';
+import {useContext} from 'react';
 import Link from 'next/link'
-import {AppContext} from '../../../../context/AppContext'
-import withRouter from "next/dist/client/with-router";
+import {AppContext} from '../../../../context/AppContext';
+import {useRouter} from "next/router";
 
 const WidgetHeader = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-        style: {}
-    });
-
-    useEffect(() => {
-        setState({
-            ...state,
-            style: {
-                widgetHead: {
-                    backgroundColor: contextData.siteDesign.widgetHeaderBackgroundColor,
-                    color: contextData.siteDesign.widgetHeaderTextColor,
-                    borderLeft: contextData.siteDesign.widgetHeaderBorder ? `5px solid ${contextData.siteDesign.widgetHeaderBorder}` : '5px solid gray '
-                },
-                redirectLink: {
-                    backgroundColor: contextData.siteDesign.widgetHeaderRedirectLinkBackgroundColor,
-                    color: contextData.siteDesign.widgetHeaderRedirectLinkTextColor,
-                    fontWeight: 'bold'
-                }
-            }
-        })
-    }, [contextData.siteDesign]);
-
-
-    const RenderTitle = () => {
-        if (props.title) {
-            return (
-                <h2 className='widget-header-title'>{ props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].title || props.title : props.title : props.title }</h2>
-            )
-        } else return null
-    }
-
-    const RenderRedirectLink = () => {
-        if (props.redirectLink && props.redirectToTitle) {
-            return (
-                <Link href={props.redirectLink}><a style={state.style.redirectLink} aria-label={props.redirectToTitle}>{props.redirectToTitle}</a></Link>
-            )
-        } else return null
-    }
-
+    const router = useRouter()
+    const title = props.translations ? props.translations[router.locale || contextData.state.activeLanguage] ? props.translations[router.locale ||contextData.state.activeLanguage].title || props.title : props.title : props.title
     if (props.title) {
         return (
-            <div className='widget-Header' style={state.style.widgetHead}>
-                <RenderTitle/>
-                <RenderRedirectLink/>
+            <div className='widget-Header' >
+                <h1 className='widget-header-title'>{title}</h1>
+                {props.redirectLink && props.redirectToTitle && !props.footerLink ? <Link href={props.redirectLink}><a aria-label={props.redirectToTitle}>{props.redirectToTitle}</a></Link>:null }
             </div>
         );
     } else return null
 
 };
 
-export default withRouter(WidgetHeader);
+export default WidgetHeader;

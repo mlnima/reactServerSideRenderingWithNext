@@ -1,92 +1,107 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import RenderArraySection from './RenderArraySection'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  overflow-wrap: break-word;
+  img {
+    width: 100%;
+  }
+  .asset-page-item-array-section {
+    display: flex;
+    flex-wrap: wrap;
 
+    .asset-page-item-array-section-item {
+      margin: 5px;
+      font-size: small;
+    }
+  }
+`
 const TableBodyItemSection = props => {
 
 
 
     if (props.dataName === '_id') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'postedDate') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'status') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'author') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue ?props.dataValue.username:'Private' || 'Private'}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'authorID') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'email') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'onDocument') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'body') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'title') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <p>{props.dataValue}</p>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'tags') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <RenderArraySection data={props.dataValue}/>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'categories') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <RenderArraySection data={props.dataValue}/>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'actors') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <RenderArraySection data={props.dataValue}/>
-            </div>
+            </StyledDiv>
         )
     } else if (props.dataName === 'mainThumbnail'||props.dataName === 'noImageUrl'||props.dataName === 'imageUrl') {
         return (
-            <div className='asset-page-table-body-item-section'>
+            <StyledDiv className='asset-page-table-body-item-section'>
                 <img src={props.dataValue}/>
-            </div>
+            </StyledDiv>
         )
     } else return (
-        <div className='asset-page-table-body-item-section'>
+        <StyledDiv className='asset-page-table-body-item-section'>
             <p>{props.dataValue}</p>
-        </div>
+        </StyledDiv>
     )
 
 };

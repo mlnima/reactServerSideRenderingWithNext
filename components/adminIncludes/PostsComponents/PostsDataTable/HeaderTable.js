@@ -44,4 +44,4 @@ const HeaderTable = props => {
         </thead>
     );
 };
-export default HeaderTable;
+// export default HeaderTable;

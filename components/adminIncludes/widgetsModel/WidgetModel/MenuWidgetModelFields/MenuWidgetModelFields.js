@@ -3,7 +3,10 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import MenuWidgetModelFieldsPreview from "./MenuWidgetModelFieldsPreview";
 import {languagesOptions} from "../../../../../_variables/_variables";
+import styled from "styled-components";
+let StyledDiv = styled.div`
 
+`
 const MenuWidgetModelFields = props => {
     const [formData, setFormData] = useState({
         name: '',
@@ -81,7 +84,7 @@ const MenuWidgetModelFields = props => {
 
     if (props.rendering) {
         return (
-            <div>
+            <StyledDiv>
                 <div className='menu-form-field'>
                     <p>Mobile Navigation: <FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo'/></p>
                     <select required={true} name='mobileNavigation' value={props.mobileNavigation} onChange={e => onMenuStyleChangeHandler(e)}>
@@ -133,7 +136,7 @@ const MenuWidgetModelFields = props => {
                 <div className='menu-items'>
                     {renderCurrentItems}
                 </div>
-            </div>
+            </StyledDiv>
         );
     } else return null
 

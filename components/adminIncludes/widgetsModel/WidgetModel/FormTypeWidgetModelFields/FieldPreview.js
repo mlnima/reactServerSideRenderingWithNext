@@ -2,7 +2,31 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown, faArrowUp, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  padding: 5px 10px;
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color: black;
+  border: solid 2px rgba(0,0,0,.1);
+  display: flex;
 
+  flex-direction: column;
+  .field-index-control{
+    display: flex;
+    justify-content: space-between;
+    width: 100%;
+    button{
+      background-color: transparent;
+      color: white;
+      border: none;
+      transition: .5s;
+      &:hover{
+        transform: scale(1.5);
+      }
+    }
+  }
+`
 const FieldPreview = props => {
     const [state, setState] = useState({
         open:false
@@ -67,7 +91,7 @@ const FieldPreview = props => {
     }
 
     return (
-        <div className='form-item-view' key={props.field.filedId}>
+        <StyledDiv className='form-item-view' key={props.field.filedId}>
             <div className='field-index-control'>
                 <button onClick={() => state.open?setState({...state,open:false}):setState({...state,open:true})}>
                     <FontAwesomeIcon style={{transform:state.open?'rotate(90deg)':'rotate(0deg)',transition:'.5s all'}} icon={faBars} className='navigation-mobile-button-logo'/>
@@ -117,7 +141,7 @@ const FieldPreview = props => {
             }
 
             {/*<RenderEditMode/>*/}
-        </div>
+        </StyledDiv>
     );
 };
 export default FieldPreview;

@@ -1,5 +1,18 @@
 import React, { useRef } from 'react';
 import {useRouter} from "next/router";
+import styled from "styled-components";
+let StyledForm = styled.form`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  input{
+    @include adminMainInput;
+    background-color: var(--admin-color-0);
+  }
+  button{
+    @include adminMainBtn;
+  }
+`;
 const AssetSearch = props => {
     const searchInput = useRef(null)
     const router = useRouter()
@@ -12,10 +25,10 @@ const AssetSearch = props => {
            })
     }
     return (
-        <form className='asset-page-search' onSubmit={e=>onSubmitHandler(e)}>
+        <StyledForm className='asset-page-search' onSubmit={e=>onSubmitHandler(e)}>
             <input ref={searchInput}/>
             <button>Search</button>
-        </form>
+        </StyledForm>
     );
 };
 export default AssetSearch;

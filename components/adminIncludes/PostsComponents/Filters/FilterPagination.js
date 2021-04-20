@@ -58,4 +58,4 @@ const FilterPagination = props => {
     );
 };
 
-export default withRouter(FilterPagination);
+// export default withRouter(FilterPagination);

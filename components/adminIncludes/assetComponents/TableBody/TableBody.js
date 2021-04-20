@@ -1,7 +1,12 @@
 import React from 'react';
 import TableBodyItem from './TableBodyItem/TableBodyItem'
 import {useRouter} from "next/router";
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+.asset-page-table-body {
+  font-size: 13px;
+}
+`
 const TableBody = props => {
     const router = useRouter()
     const renderItems = (props.finalPageData[router.query.assetsType] || []).map(item => {
@@ -11,9 +16,9 @@ const TableBody = props => {
     })
 
     return (
-        <div className='asset-page-table-body'>
+        <StyledDiv className='asset-page-table-body'>
             { renderItems }
-        </div>
+        </StyledDiv>
     );
 };
 export default TableBody;

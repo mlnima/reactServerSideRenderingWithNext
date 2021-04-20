@@ -38,6 +38,15 @@ const RenderTitleAndRedirectLink = props => {
                             onChange={e => props.onTextInputsDataChangeHandler(e)}/>
                 </div>
 
+                <div className='textInputFieldForWidget widgetSection'>
+                    <p>Link to Widget Footer:</p>
+                    <select name='footerLink' value={props.widgetData.footerLink} onChange={e => props.onChangeHandlerForBoolean(e)}>
+                        <option >select</option>
+                        <option value='true'>true</option>
+                        <option value='false'>false</option>
+                    </select>
+                </div>
+
 
 
 

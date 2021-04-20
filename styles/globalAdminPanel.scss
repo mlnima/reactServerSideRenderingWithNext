@@ -6,39 +6,19 @@
   --admin-darkcolor90:#181818;
 }
 
-
-
 //components
-@import "../components/adminIncludes/design/UrlSection";
-@import "../components/adminIncludes/design/ColorSection";
-@import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu";
-@import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu";
-@import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
-@import "../components/adminIncludes/AdminDesignSettingColorType/AdminDesignSettingColorType";
+
+//@import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu";
+//@import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu";
+//@import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
 @import "../components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl";
 @import "../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminRenderComments";
 @import "../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminCommentItem/AdminCommentItem";
-@import "../components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea";
-@import "../components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl";
-@import "../components/adminIncludes/FileManagerComponents/TextEditor/TextEditor";
 @import "../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView";
-@import "../components/adminIncludes/NavigationItem/NavigationItem";
-@import "../components/adminIncludes/SideBar/SideBar";
 @import "../components/adminIncludes/TopBar/AdminTopBar";
 @import "../components/adminIncludes/TopBar/NewItemMenu/NewItemMenu";
 @import "../components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu";
 @import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
-@import "../components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation";
-@import "../components/adminIncludes/assetComponents/TableControls/AssetSearch";
-@import "../components/adminIncludes/assetComponents/TableControls/AssetBulkActionAndAssetTypeSelector/AssetBulkActionAndAssetTypeSelector";
-@import "../components/adminIncludes/assetComponents/TableControls/AssetPagination";
-@import "../components/adminIncludes/assetComponents/TableControls/TableControls";
-@import "../components/adminIncludes/assetComponents/TableHeader/TableHeader";
-@import "../components/adminIncludes/assetComponents/TableBody/TableBody";
-@import "../components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem";
-@import "../components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection";
-@import "../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
-@import "../components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection";
 @import "../components/adminIncludes/TextEditor/TextEditor";
 @import "../components/adminIncludes/AdminFooter/AdminFooter";
 @import "AdminStyle";

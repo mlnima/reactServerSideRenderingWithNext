@@ -1,7 +1,38 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {convertVariableNameToName, languagesOptions} from '../../../../_variables/_variables';
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  background-color: #222;
+  width: 300px;
+  padding: 10px;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: flex-start;
+  flex-direction: column;
+  border-radius: 5px;
+  .e-commerce-settings-input-section-description{
+    color: white;
+  }
+  .e-commerce-settings-input-section-sub{
+    margin: 5px;
+  }
+  .e-commerce-settings-input-section-title{
+     color: white;
+  }
 
+  .e-commerce-settings-input-section-select{
+
+  }
+
+  .e-commerce-settings-input-section-input{
+    width: 95%;
+  }
+  .e-commerce-settings-input-section-save-button{
+
+  }
+`
 const EcommerceSettingsInputSection = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
@@ -52,7 +83,7 @@ const EcommerceSettingsInputSection = props => {
     }
 
     return (
-        <div className='e-commerce-settings-input-section'>
+        <StyledDiv className='e-commerce-settings-input-section'>
             <h3 style={{
                 color: props.fieldRequired ? contextData.eCommerceSettings[props.name] ? '#00ff59' : 'red' : 'white',
             }} className='e-commerce-settings-input-section-title e-commerce-settings-input-section-sub'>{convertVariableNameToName(props.name)}</h3>
@@ -72,7 +103,7 @@ const EcommerceSettingsInputSection = props => {
                    onChange={e => onChangeHandler(e)}
             />
             <button className='e-commerce-settings-input-section-save-button e-commerce-settings-input-section-sub' onClick={onSaveHandler}>save</button>
-        </div>
+        </StyledDiv>
 
     );
 };

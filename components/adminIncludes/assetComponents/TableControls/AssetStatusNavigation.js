@@ -2,7 +2,17 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import Link from 'next/link';
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import {useRouter} from "next/router";
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  flex-wrap: wrap;
+  .asset-page-status-navigation-item{
+       margin: 5px;
+       //@include linkLikeActionBtnAdmin;
+  }
+`;
 const AssetStatusNavigation = props => {
     const router = useRouter()
     const [state, setState] = useState({
@@ -21,15 +31,15 @@ const AssetStatusNavigation = props => {
     if (router) {
         if (router.query.assetsType === 'posts' || router.query.assetsType === 'metas' || router.query.assetsType === 'comments' || router.query.assetsType === 'orders') {
             return (
-                <div className='asset-page-status-navigation'>
+                <StyledDiv className='asset-page-status-navigation'>
                     {renderStatus}
-                </div>
+                </StyledDiv>
             );
         } else {
             return (
-                <div className='asset-page-status-navigation'>
+                <StyledDiv className='asset-page-status-navigation'>
 
-                </div>
+                </StyledDiv>
             )
         }
     } else return null

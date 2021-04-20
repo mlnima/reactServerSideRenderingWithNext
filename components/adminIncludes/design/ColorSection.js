@@ -1,13 +1,16 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {DelayInput} from 'react-delay-input'
+import { useContext, useRef} from 'react';
 import SaveDesignChangesBtn from './SaveDesignChangesBtn'
 import {AppContext} from '../../../context/AppContext'
 import {convertVariableNameToName} from '../../../_variables/_variables'
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  .colorSettingSectionInputColorType{
+    display: none;
+  }
+`
 const ColorSection = props => {
     const contextData = useContext(AppContext);
     const inputColorElement = useRef(null)
-
 
     const onChangeHandler = e => {
         contextData.dispatchSiteDesign({
@@ -16,9 +19,8 @@ const ColorSection = props => {
         })
     }
 
-
     return (
-        <div className='colorSettingSection'>
+        <StyledDiv className='colorSettingSection'>
             <p>{props.designName ? convertVariableNameToName(props.designName) : ''} : </p>
 
             <input className='colorSettingSectionInput' name={props.designName}
@@ -29,7 +31,7 @@ const ColorSection = props => {
             <div onClick={()=>inputColorElement.current.click()} className="previewColor" style={{backgroundColor: contextData.siteDesign[props.designName]}}/>
 
             <SaveDesignChangesBtn/>
-        </div>
+        </StyledDiv>
     );
 };
 export default ColorSection;

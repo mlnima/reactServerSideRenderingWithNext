@@ -1,7 +1,43 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import TableBodyItemSection from './TableBodyItemSection/TableBodyItemSection'
 import TableBodyItemOnHover from './TableBodyItemOnHover/TableBodyItemOnHover'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  .asset-page-table-body-item-content {
+    padding: 10px;
+    border: .2px solid rgba(0, 0, 0, .1);
+    border-bottom: none;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    grid-gap: 10px;
+  }
+  
+  .asset-page-table-body-item-hover-item {
+    font-size: 13px !important;
+    display: flex;
+    align-items: center;
+    height: 35px;
+    border: .2px solid rgba(0, 0, 0, .1);
+    border-top: none;
 
+    button,a{
+      text-decoration: none;
+      border: none;
+      color: var(--admin-light-blue-color);
+      width: 50px;
+      height: 20px;
+      font-size: 13px;
+      background-color: transparent;
+      margin-left: 10px;
+    }
+    button {
+      cursor: pointer ;
+    }
+  }
+    &:nth-child(even) {
+      background-color: #fff;
+    }
+`;
 const TableBodyItem = props => {
     const [state, setState] = useState({
         properties: [],
@@ -81,19 +117,22 @@ const TableBodyItem = props => {
     })
 
     return (
-        <>
-            <div className='asset-page-table-body-item' onMouseOver={() => onMouseEnterHandler()}
+<>
+            <StyledDiv className='asset-page-table-body-item' onMouseOver={() => onMouseEnterHandler()}
                  onMouseLeave={() => onMouseOutHandler()}>
                 <div className='asset-page-table-body-item-content'>
                     <input type='checkbox' checked={props.selectedItems.includes(props.data._id)}
                            onChange={e => onSelectChangeHandler(e)}/>
                     {renderProperties}
                 </div>
-                <TableBodyItemOnHover isHover={state.isHover} assetsType={props.assetsType} _id={props.data._id}
-                                      title={props.data.title}/>
-            </div>
+                <TableBodyItemOnHover isHover={state.isHover}
+                                      assetsType={props.assetsType}
+                                      _id={props.data._id}
+                                      title={props.data.title}
+                />
+            </StyledDiv>
+</>
 
-        </>
     );
 };
 export default TableBodyItem;
