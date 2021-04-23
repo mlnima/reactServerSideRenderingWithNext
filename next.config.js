@@ -4,6 +4,7 @@ const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const languages = process.env.REACT_APP_LOCALS.replace(' ', '|')
 const locales = process.env.REACT_APP_LOCALS.split(' ')
+const withPWA = require('next-pwa')
 require('webpack')
 
 const i18nConfig = locales.length === 1 ? {} : {
@@ -11,7 +12,7 @@ const i18nConfig = locales.length === 1 ? {} : {
         locales,
         defaultLocale: process.env.REACT_APP_DEFAULT_LOCAL,
         localeDetection: false,
-    },
+    }
 }
 
 const additionalConfig = {
@@ -31,6 +32,7 @@ const reWriteRoutes = {
         return [
             {source: `/admin`, destination: '/admin', locale: false},
             {source: `/login`, destination: '/auth/login'},
+            {source: `/register`, destination: '/auth/register'},
             //meta route
             {source: `/:locale(${languages})?/:metaType(categories|tags|actors)`, destination: '/meta'},
             {source: `/:metaType(categories|tags|actors)`, destination: '/meta'},
@@ -42,7 +44,6 @@ const reWriteRoutes = {
             //post routes
             {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
             {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/post'},
-
             //auth pages
             {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
             {source: `/:locale(${languages})?/register`, destination: '/auth/register'},
@@ -63,6 +64,7 @@ const nextImageConfig = {
 }
 
 module.exports = withPlugins([
+    withPWA(),
     additionalConfig,
     // reDirectRoutes,
     reWriteRoutes,

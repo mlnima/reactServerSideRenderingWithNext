@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import { getFirstLoadData} from '../../_variables/ajaxVariables';
 import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
 import withRouter from 'next/dist/client/with-router';
@@ -10,7 +10,20 @@ import styled from "styled-components";
 import {AppContext} from "../../context/AppContext";
 
 
-let StyledMain = styled.main`${props => props.stylesData}`
+let StyledMain = styled.main`
+  width: 100%;
+  .posts-page-info{
+    margin: 5px 0;
+    h1{
+      margin:  0;
+      padding: 0 10px;
+    }
+  }
+  .posts-container{
+    width: 100%;
+  }
+  ${props => props.stylesData}
+`
 
 const posts = (props,{design}) => {
     const contextData = useContext(AppContext);

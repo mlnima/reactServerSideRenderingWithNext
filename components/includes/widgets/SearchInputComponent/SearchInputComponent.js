@@ -3,7 +3,61 @@ import withRouter from 'next/dist/client/with-router'
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+let StyledFrom = styled.form`
+  display: flex;
+  height: 24px;
+  width: 100%;
+  font-size: 1em;
+  .search-input {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin-right: 0;
+    //border-radius: 0.6em 0 0 0.6em;
+    border-radius: 3px 0  0  3px;
+    &:focus{
+      outline: none;
+    }
+  }
 
+  .search-bar-btn {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    outline: none;
+    padding: 0.2em;
+    margin-left: 0;
+    border-radius: 0 3px 3px 0;
+    border: none;
+    color: var(--main-text-color);
+    &:focus{
+      outline: none;
+    }
+    &:active{
+      border: none;
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    .search-input{
+      max-width: 500px;
+    }
+    .search-bar-btn{
+      max-width: 70px;
+    }
+}
+`
+let StyledButton = styled.button`
+  border:none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  //padding: 2px 5px;
+  background-color: transparent;
+  outline: none;
+`
 const SearchInputComponent = props => {
     const router = useRouter()
     const [state, setState] = useState({
@@ -96,16 +150,16 @@ const SearchInputComponent = props => {
 
     if (isOpen) {
         return (
-            <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
+            <StyledFrom className='search-bar' onSubmit={e => onSearchHandler(e)}>
                 {props.mobileMode && isOpen ?
-                    <button className='search-bar-btn-close' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}><FontAwesomeIcon icon={faTimes} className='svg-logo-small'/></button> : null}
+                    <StyledButton className='search-bar-btn-close' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}><FontAwesomeIcon icon={faTimes} className='svg-logo-small'/></StyledButton> : null}
                 <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
                 <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small'/></button>
-            </form>
+            </StyledFrom>
         );
     } else {
         return (
-            <button className='search-bar-btn-open' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}><FontAwesomeIcon icon={faSearch} className='svg-logo-small'/></button>
+            <StyledButton className='search-bar-btn-open' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}><FontAwesomeIcon icon={faSearch} className='svg-logo-small'/></StyledButton>
         )
     }
 

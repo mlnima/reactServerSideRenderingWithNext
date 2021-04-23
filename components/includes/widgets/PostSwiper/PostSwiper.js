@@ -5,6 +5,75 @@ import 'swiper/swiper-bundle.css';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import Image from 'next/image'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  .swiper-wrapper {
+    .swiper-slide {
+      margin: 0 20px;
+      display: flex;
+      justify-content: center;
+      place-items: center;
+      background-color: var(--post-element-background-color);
+      margin: 10px 0;
+      a {
+        .post-slider-item-title {
+          white-space: nowrap;
+          overflow: hidden !important;
+          text-overflow: ellipsis;
+          display: block;
+          max-width: 95%;
+          font-size: small;
+        }
+          .post-slider-item-external-image {
+            min-width: 20vw;
+            object-fit: contain;
+          }
+          .post-slider-item-internal-image {
+            min-width: 20vw;
+            object-fit: contain;
+
+          }
+        div {
+          margin: auto;
+          .post-slider-item-internal {
+            margin: auto;
+            object-fit: scale-down;
+          }
+        }
+        h2{
+          width: 255px;
+          font-size: 1rem;
+          max-width: 95vh;
+          color: var(--post-element-text-color);
+          //text-align: center;
+          margin:  auto;
+        }
+      }
+    }
+  }
+  @media only screen and (max-width: 768px) {
+    width: 100vw;
+    place-items: center;
+    .swiper-wrapper {
+      place-items: center;
+
+      .swiper-slide {
+        margin: 0 ;
+        place-items: center;
+        width: 100vw;
+        a{
+          width: 100%;
+          display: grid;
+          place-items: center;
+          .post-slider-item-external-image,.post-slider-item-internal-image {
+            width: 100%;
+            object-fit: contain;
+          }
+        }
+      }
+    }
+}
+`
 
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controller, EffectCube, EffectCoverflow, Lazy, EffectFlip, EffectFade, Parallax]);
@@ -71,9 +140,9 @@ const PostSwiper = props => {
                       as={contextData.state.activeLanguage !== 'default' ? `/post/${post.translations ? post.translations[contextData.state.activeLanguage] ? post.translations[contextData.state.activeLanguage].title || post.title : post.title : post.title}?id=${post._id}&lang=${contextData.state.activeLanguage}` : `/post/${post.title}?id=${post._id}`}>
                     <a>
                         <RenderImageElement/>
-                        <h3 style={{textAlign: 'center'}} className='post-slider-item-title'>
+                        <h2 style={{textAlign: 'center'}} className='post-slider-item-title'>
                             {post?.translations?.[contextData.state.activeLanguage]?.title || post.title}
-                        </h3>
+                        </h2>
                     </a>
                 </Link>
             </SwiperSlide>
@@ -81,7 +150,7 @@ const PostSwiper = props => {
     })
 
     return (
-        <div>
+        <StyledDiv>
             <Swiper
                 thumbs={{swiper: thumbsSwiper}}
                 controller={{control: controlledSwiper}}
@@ -105,7 +174,7 @@ const PostSwiper = props => {
             >
                 {renderSlides}
             </Swiper>
-        </div>
+        </StyledDiv>
 
     );
 };

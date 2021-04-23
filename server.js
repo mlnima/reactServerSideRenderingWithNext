@@ -32,10 +32,8 @@ const cors = require('cors')
 //cache api
 const cacheSuccesses = require('./server/middlewares/apiCache')
 const settingSchema = require('./server/models/settings/settingSchema')
-//cache page libraries and variables
 
 
-//-----
 mongoose.Promise = global.Promise;
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
@@ -86,9 +84,20 @@ Disallow: /admin
 Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 `
         res.send(robotTxtData);
-        res.end()
-
+        res.end();
     });
+
+    server.get('/sw.js' , (req, res) => {
+        res.set('Content-Type', 'text/javascript');
+        const serviceWorkerData = `
+self.addEventListener("install", function (event) {
+
+});
+`
+        res.send(serviceWorkerData);
+        res.end()
+    });
+
 
     //manifest
     server.get('/manifest.json', cacheSuccesses, async (req, res) => {
@@ -98,12 +107,13 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             "background_color": identityData.data.themeColor || '#000',
             "name": identityData.data.title || 'React CMS website',
             "icons": [{
-                "src":  identityData?.data?.favIcon || '/static/images/favIcon/favicon.png',
+                "src":  identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
                 "sizes": "512x512",
                 "type": "image/png",
                 "purpose": "any maskable"
-            }
-            ]
+            }],
+            "display": "fullscreen",
+            "start_url": "/"
         }
         res.json(manifestJsonData)
         res.end()
@@ -240,9 +250,6 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     //cacheSuccesses
     server.post('/api/v1/settings/getMultipleWidgetWithData', cacheSuccesses, (req, res) => {
-        // console.log(req.body)
-        //need to be cache id page cache doesnt work
-        //cacheSuccesses
         settingsControllers.getMultipleWidgetWithData(req, res)
     });
 
@@ -327,7 +334,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         paymentControllers.getOrders(req, res)
     });
 //------------------------------- custom routes ---------------------------------
-//
+
 //     server.get('/',(req, res) => {
 //         return app.render(req, res,  '/')
 //     });

@@ -1,8 +1,4 @@
-import React,{useEffect,useState} from 'react';
-
-
 const VideoUrls = () => {
-
     if (props.rendering){
         return (
             <div className='post-information-section'>
@@ -15,6 +11,5 @@ const VideoUrls = () => {
             </div>
         );
     }else return null
-
 };
 export default VideoUrls;

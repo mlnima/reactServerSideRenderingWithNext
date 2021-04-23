@@ -1,8 +1,14 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import AdminLayout from '../../../components/layouts/AdminLayout';
+import {useEffect, useState} from 'react';
 import {saveNewPage, getPageData, updatePage} from "../../../_variables/ajaxVariables";
 import {useRouter} from 'next/router'
 import Editor from "@monaco-editor/react";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  input{
+    background-color: white;
+    width: 90%;
+  }
+`
 
 const page = props => {
     const router = useRouter()
@@ -67,7 +73,7 @@ const page = props => {
 
     return (
 
-        <div className='page-container'>
+        <StyledDiv className='page-container'>
             <p>Page Name (without Space):</p>
             <input name='pageName' placeholder='page name' value={state.pageName} onChange={e => onChangeHandler(e)}/>
             <p>Sidebar:</p>
@@ -94,7 +100,7 @@ const page = props => {
                 //className='style-section-editor'
             />
             <button onClick={onSaveHandler}>Save</button>
-        </div>
+        </StyledDiv>
 
 
     );

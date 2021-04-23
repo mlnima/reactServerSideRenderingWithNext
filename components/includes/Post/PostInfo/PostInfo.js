@@ -10,7 +10,40 @@ import Price from "./Price/Price";
 import PostTitle from "./PostTitle/PostTitle";
 import PostDescription from "./PostDescription/PostDescription";
 import AddToBasket from "./AddToBasket/AddToBasket";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  width: 100%;
+`
 
+let StyledPostInfoHead = styled.div`
+    background-color: var(--post-page-info-background-color);
+    padding: 5px;
+    .under-title{
+    display: flex;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    .rate-logo{
+        width: 30px ;
+        height: 35px;
+        transition: .5s;
+        &:hover{
+          width: 35px ;
+          height: 40px;
+        }
+      }
+      .price-information{
+        margin: 0 20px;
+        display: flex;
+        align-items: center;
+        font-size: 25px;
+        font-weight: bold;
+        .price-info-logo{
+          width: 23px;
+          height: 23px;
+        }
+      }
+    }
+`
 const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,categories,description,_id,translations,currency,rating}) => {
     const [state, setState] = useState({
         likeValue: 0,
@@ -47,9 +80,9 @@ const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,
 
 
     return (
-        <div className='post-info'>
+        <StyledDiv className='post-info'>
             <EditLinkForAdmin _id={_id}/>
-            <div className='post-info-head'>
+            <StyledPostInfoHead className='post-info-head'>
                 <PostTitle title={title} translations={translations}/>
                 <div className='under-title'>
                     <RatingButtons _id={_id} svgDefaultStyle={state.svgDefaultStyle} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData}/>
@@ -62,7 +95,7 @@ const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,
                     <DownloadLink downloadLink={downloadLink} render={downloadLink} svgDefaultStyle={state.svgDefaultStyle}/>
                 </div>
                 <AddToBasket productId={_id} render={postType === 'product'} svgDefaultStyle={state.svgDefaultStyle}/>
-            </div>
+            </StyledPostInfoHead>
 
             <div className='post-info-body'>
                 <div className="meta-description">
@@ -72,7 +105,7 @@ const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,
                     <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='categories' data={categories || []}/>
                 </div>
             </div>
-        </div>
+        </StyledDiv>
     );
 };
 export default withRouter(PostInfo);

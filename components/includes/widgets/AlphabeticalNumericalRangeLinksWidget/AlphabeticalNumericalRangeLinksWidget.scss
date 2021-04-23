@@ -1,9 +1,0 @@
-@import "../../../../styles/links";
-
-.alphabetical-range{
-  display:flex;
-  flex-wrap: wrap;
-a{
-  @include paginationItem;
-}
-}

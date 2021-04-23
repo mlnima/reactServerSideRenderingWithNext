@@ -60,6 +60,7 @@ const DescriptionEditor = props => {
 
     if (props.editor) {
         return (
+            <div>
             <ReactQuill
                 value={
                     props.activeEditingLanguage === 'default' ? props.textInputsState.description :
@@ -70,6 +71,7 @@ const DescriptionEditor = props => {
                 modules={state.modules}
                 formats={state.formats}
             />
+            </div>
         );
     } else {
         return (

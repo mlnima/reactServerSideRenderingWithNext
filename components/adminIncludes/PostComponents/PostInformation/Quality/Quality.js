@@ -1,7 +1,4 @@
-import React from 'react';
-
 const Quality = props => {
-
     if (props.rendering){
         return (
             <div className='post-information-section'>

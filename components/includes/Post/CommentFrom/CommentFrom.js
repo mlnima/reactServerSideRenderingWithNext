@@ -6,6 +6,58 @@ import styled from "styled-components";
 
 
 let StyledDiv = styled.div`${props => props.stylesData}`
+let StyledFrom = styled.form`
+  display: flex;
+  flex-direction: column;
+  width: 95%;
+  .comment-form-info{
+    display: flex;
+    justify-content: flex-start;
+    input{
+      width: 50%;
+    }
+  }
+  .comment-form-input {
+    display: flex;
+    textarea {
+      width: 100%;
+    }
+  }
+
+  .comment-form-submit-button {
+      background: linear-gradient(#67ae55, #578843);
+  box-shadow: inset 0 1px 1px #a4e388;
+  border-color: #3b6e22 #3b6e22 #2c5115;
+  //border: 1px solid;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 1px;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+  width: 200px;
+  height: 40px;
+  min-width: 194px;
+  padding: 7px 20px;
+  text-align: center;
+  line-height: 126%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+  }
+
+  input, textarea {
+    background-color: #282828;
+    margin: 5px;
+    border: 1px solid #181818;
+    color: white;
+  }
+
+  textarea {
+    min-height: 200px;
+  }
+`
 
 const CommentFrom = props => {
     const contextData = useContext(AppContext);
@@ -49,7 +101,7 @@ const CommentFrom = props => {
     }
 
     return (
-        <form className='comment-form' onSubmit={ e => onSubmitHandler(e) }>
+        <StyledFrom className='comment-form' onSubmit={ e => onSubmitHandler(e) }>
             <StyledDiv >
                 <RenderLoggedInUser/>
                 <div className='comment-form-input'>
@@ -57,7 +109,7 @@ const CommentFrom = props => {
                 </div>
             </StyledDiv>
             <button className='comment-form-submit-button' type='submit'>Post Comment</button>
-        </form>
+        </StyledFrom>
     );
 };
 export default withRouter(CommentFrom);

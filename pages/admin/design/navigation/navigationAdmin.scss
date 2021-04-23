@@ -1,68 +1,68 @@
-@import "../../../../styles/colors";
-@import "../../../../styles/buttons";
-@import "../../../../styles/grid";
-
-#navigation-setting {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-start;
-
-  background-color: $light100;
-  padding: 20px;
-
-  .add-navigation-items {
-    //display: flex;
-    //flex-direction: column;
-    //align-items: flex-start;
-
-    .add-navigation-item {
-      display: flex;
-      justify-content: space-between;
-      width: 300px;
-      input{
-        display: inline-block;
-        width: 80%;
-      }
-    }
-
-    input {
-      margin: 10px 0;
-    }
-
-    button {
-      @include AdminLightBtn
-    }
-  }
-
-  .items-preview {
-    margin: 20px 0;
-    border-radius: 5px;
-    width: 100%;
-    border: solid 1px black;
-    @include navigationSettingItems;
-    .items-preview-item {
-
-      padding: 2px;
-      margin: 5px;
-      border-radius: 5px;
-      .item-title {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
-
-        button {
-          @include AdminLightBtn;
-          color: black;
-          background-color: black;
-        }
-      }
-    }
-
-
-  }
-
-  .saveBtn {
-    @include greenActionBtn;
-  }
-
-}
+//@import "../../../../styles/colors";
+//@import "../../../../styles/buttons";
+//@import "../../../../styles/grid";
+//
+//#navigation-setting {
+//  display: flex;
+//  flex-direction: column;
+//  align-items: flex-start;
+//
+//  background-color: $light100;
+//  padding: 20px;
+//
+//  .add-navigation-items {
+//    //display: flex;
+//    //flex-direction: column;
+//    //align-items: flex-start;
+//
+//    .add-navigation-item {
+//      display: flex;
+//      justify-content: space-between;
+//      width: 300px;
+//      input{
+//        display: inline-block;
+//        width: 80%;
+//      }
+//    }
+//
+//    input {
+//      margin: 10px 0;
+//    }
+//
+//    button {
+//      @include AdminLightBtn
+//    }
+//  }
+//
+//  .items-preview {
+//    margin: 20px 0;
+//    border-radius: 5px;
+//    width: 100%;
+//    border: solid 1px black;
+//    @include navigationSettingItems;
+//    .items-preview-item {
+//
+//      padding: 2px;
+//      margin: 5px;
+//      border-radius: 5px;
+//      .item-title {
+//        display: flex;
+//        justify-content: space-between;
+//        align-items: center;
+//
+//        button {
+//          @include AdminLightBtn;
+//          color: black;
+//          background-color: black;
+//        }
+//      }
+//    }
+//
+//
+//  }
+//
+//  .saveBtn {
+//    @include greenActionBtn;
+//  }
+//
+//}

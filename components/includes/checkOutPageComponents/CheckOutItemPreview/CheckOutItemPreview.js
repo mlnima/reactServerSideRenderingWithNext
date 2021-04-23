@@ -4,6 +4,76 @@ import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import ItemCountUI from "./ItemCountUI";
 import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+ width: 100%;
+  display: flex;
+  align-items: center;
+  border: solid 1px white;
+  padding: 0;
+  background-color: white;
+  margin: 5px 0;
+
+  .check-out-item-preview-title {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    width: 100%;
+
+    .count-remove {
+      display: flex;
+      align-items: center;
+      //justify-content: space-between;
+      margin: 10px 0;
+      .check-out-item-remove {
+        width: 50px;
+        height: 40px;
+        background-color: transparent;
+        border: .5px solid;
+        border-radius: 0;
+        margin: 0 5px;
+        .check-out-item-remove-icon {
+          padding: 2px 5px;
+          width: 16px;
+          height: 16px;
+        }
+      }
+      .check-out-item-count{
+
+        background-color: transparent;
+        border: .5px solid;
+        border-radius: 0;
+        padding: 1px 6px;
+        height: 38px;
+        //margin: 0 30px ;
+      }
+    }
+  }
+
+  img {
+    margin: 0 10px;
+    width: 100px;
+  }
+  @media only screen and (min-width: 769px) {
+    .check-out-item-preview-title {
+      .count-remove {
+        .check-out-item-remove {
+          margin: 0 20px;
+          .check-out-item-remove-icon {
+
+          }
+        }
+        .check-out-item-count{
+
+        }
+      }
+    }
+ 
+
+}
+`
+
+
 
 const CheckOutItemPreview = props => {
     const contextData = useContext(AppContext);
@@ -41,13 +111,13 @@ const CheckOutItemPreview = props => {
     }
 
     return (
-        <div className='check-out-item-preview'>
+        <StyledDiv className='check-out-item-preview'>
             <img src={props.mainThumbnail} alt={props.title}/>
             <div className='check-out-item-preview-title'>
                 <h4>{props?.translations?.[locale]?.title || props.title} </h4>
                 <FullDataForFinalPage/>
             </div>
-        </div>
+        </StyledDiv>
     );
 };
 export default CheckOutItemPreview;

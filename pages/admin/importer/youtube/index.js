@@ -1,10 +1,37 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import AdminLayout from '../../../../components/layouts/AdminLayout';
+import { useEffect, useState, useContext, useRef } from 'react';
 import { updateSetting, getSetting, youtubeDataScrapper } from '../../../../_variables/ajaxVariables'
 import withRouter from 'next/dist/client/with-router';
 import { savePost } from '../../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../../context/AppContext'
+import styled from "styled-components";
 
+let StyledDiv = styled.div`
+.admin-import-page-youtube {
+  display: flex;
+  flex-direction: column;
+
+  textarea {
+    background-color: white;
+    min-width: 50vw;
+    min-height: 300px;
+  }
+}
+.admin-import-page-youtube-api-key {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  color: white;
+  background-color:#33373c;
+  max-width: 300px;
+  padding: 10px;
+  border-radius: 5px;
+
+  input {
+    background-color: white;
+    width: 100%;
+  }
+}
+`
 const youtube = props => {
     const contextData = useContext(AppContext);
     const urlsElement = useRef(null)
@@ -135,7 +162,7 @@ const youtube = props => {
     }, []);
 
     return (
-        <>
+        <StyledDiv>
             <div className='admin-import-page-youtube-api-key'>
                 <h2>Youtube API KEY</h2>
                 <input name='apiKey' value={ state.apiKey } onChange={ e => onChaneHandler(e) }/>
@@ -147,7 +174,7 @@ const youtube = props => {
                 <button className='saveBtn' onClick={ () => onImportHandler() }>Import</button>
                 <button className='saveBtn' onClick={ () => onSetDataForTest() }>setTestData</button>
             </div>
-        </>
+        </StyledDiv>
     );
 };
 export default withRouter(youtube);

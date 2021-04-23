@@ -2,7 +2,33 @@ import React, { useEffect, useState, useContext, useRef } from 'react';
 import _ from 'lodash'
 import withRouter from 'next/dist/client/with-router'
 import { updateComment } from '../../../../../_variables/ajaxPostsVariables'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+ padding: 5px;
+  transition: .3s;
+  &:nth-child(even) {
+    background-color: #9fa3a8;
+  }
 
+  .adminCommentsItemHead {
+    display: flex;
+    align-items: center;
+
+    p {
+      margin: 0 20px;
+    }
+  }
+  .adminCommentsItemBody{
+
+    .commentControl{
+      button{
+          border: none;
+          color: $linkBlueColor;
+          background: transparent;
+      }
+    }
+  }
+`
 const AdminCommentItem = props => {
     const [ state, setState ] = useState({
         hovered: false,
@@ -32,7 +58,7 @@ const AdminCommentItem = props => {
         })
     }
     return (
-        <div key={ props.data._id } className='adminCommentsItem' onMouseOver={ () => setState({ ...state, hovered: true }) } onMouseOut={ () => setState({ ...state, hovered: false }) }>
+        <StyledDiv key={ props.data._id } className='adminCommentsItem' onMouseOver={ () => setState({ ...state, hovered: true }) } onMouseOut={ () => setState({ ...state, hovered: false }) }>
             <div className="adminCommentsItemHead">
                 <input type='checkbox' checked={ state.checked } onChange={ () => state.checked ? setState({ ...state, checked: false }) : setState({ ...state, checked: true }) }/>
                 <p>{ props.data.author }</p>
@@ -52,7 +78,7 @@ const AdminCommentItem = props => {
 
             </div>
 
-        </div>
+        </StyledDiv>
     );
 };
 export default withRouter(AdminCommentItem);

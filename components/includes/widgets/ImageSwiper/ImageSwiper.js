@@ -1,5 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {AppContext} from "../../../../context/AppContext";
+import {useState} from 'react';
 import Image from 'next/image';
 import Link from "next/link";
 import {Swiper, SwiperSlide} from 'swiper/react';
@@ -7,47 +6,42 @@ import SwiperCore, {Navigation, Pagination, Controller, Thumbs, Scrollbar, Keybo
 import 'swiper/swiper-bundle.css';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controller, EffectCube, EffectCoverflow, Lazy]);
+import styled from "styled-components";
 
+let StyledDiv = styled.div`
+.image-swiper{
+  .swiper-wrapper{
+    .swiper-slide{
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      a{
+        .image {
+        }
+        .image-slider-item-internal-image {
+        }
+        div {
+          margin: auto;
+          width: 100%;
+          .image-slider-item-internal-image {
+            margin: auto;
+          }
+        }
+      }
+    }
+  }
+}
+
+`
 
 const ImageSwiper = props => {
-    const contextData = useContext(AppContext);
+
     const [thumbsSwiper, setThumbsSwiper] = useState(null);
     const [controlledSwiper, setControlledSwiper] = useState(null);
     const [state, setState] = useState({
         imageSwiperData: [],
         slidesPerView: 3
     });
-
-    const [imageSize, setImageSize] = useState({
-        width: '300',
-        height: '169'
-    });
-
-    useEffect(() => {
-
-        // setState({
-        //     ...state,
-        //     spaceBetween: props.deviceWidth >= 768 ? parseInt(props.spaceBetweenAmountDesktop) || 1 : parseInt(props.spaceBetweenAmountMobile) || 1,
-        //     slidesPerView: props.deviceWidth >= 768 ? parseInt(props.slideAmountInDesktop) || 3 : parseInt(props.slideAmountInMobile) || 1,
-        //     // imageSwiperData: props.imageSwiperData,
-        //     imageRatioWidth: parseInt(props.imageRatioWidth) || 16,
-        //     imageRatioHeight: parseInt(props.imageRatioHeight) || 9,
-        // })
-        //
-        // if (props.deviceWidth > 768) {
-        //     console.log(props.slideAmountInMobile)
-        //     setImageSize({
-        //         width: contextData.state.currentPageSidebar ? (props.deviceWidth - 300) / state.slidesPerView : props.deviceWidth / state.slidesPerView,
-        //         height: contextData.state.currentPageSidebar ? ((props.deviceWidth - 300) / state.slidesPerView) / (state.imageRatioWidth / state.imageRatioHeight) : (props.deviceWidth / state.slidesPerView) / (state.imageRatioWidth / state.imageRatioHeight)
-        //     })
-        // } else {
-        //
-        //     setImageSize({
-        //         width: props.deviceWidth / (props.slideAmountInMobile || 1),
-        //         height: (props.deviceWidth / (props.slideAmountInMobile || 1)) / (state.imageRatioWidth / state.imageRatioHeight)
-        //     })
-        // }
-    }, [props]);
 
 
     const renderSlides = props.imageSwiperData.map(imageData => {
@@ -115,7 +109,7 @@ const ImageSwiper = props => {
 
 
     return (
-        <div>
+        <StyledDiv>
             <Swiper
                 thumbs={{swiper: thumbsSwiper}}
                 controller={{control: controlledSwiper}}
@@ -139,7 +133,7 @@ const ImageSwiper = props => {
             >
                 {renderSlides}
             </Swiper>
-        </div>
+        </StyledDiv>
 
     );
 };

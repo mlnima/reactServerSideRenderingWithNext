@@ -126,14 +126,9 @@ export const multipleLinkToWidgetModel = {
     ...generalModel,
     multipleLinks:[],
     customStyles:'ul{\n' +
-        '    display: flex;\n' +
-        '    flex-wrap: wrap;\n' +
-        '    align-items: center;\n' +
-        '    justify-content: center;\n' +
         '    margin: 0 ;\n' +
         '    padding: 0 ;\n' +
         '    li{\n' +
-        '        list-style: none;\n' +
         '        margin: 0 5px;\n' +
         '        a,p{\n' +
         '           color: var(--main-text-color);\n' +

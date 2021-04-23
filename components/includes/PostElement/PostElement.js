@@ -10,7 +10,7 @@ import TopRight from "./TopRight";
 import TopLeft from "./TopLeft";
 let StyledDiv = styled.article`${props => props.stylesData}`
 
-const PostElement = ({title, imageWidth, svgDefaultStyle, viewType, postType, _id, postElementSize, videoTrailerUrl, views, likes, disLikes, quality, rating, price, duration, mainThumbnail, postElementStyle}) => {
+const PostElement = ({title, imageWidth, svgDefaultStyle, viewType, postType, _id, postElementSize, videoTrailerUrl, views, likes, disLikes, quality, rating, price, duration, mainThumbnail, postElementStyle,onClickLoadingHandler}) => {
 
     let element = useRef(null)
     let videoElement = useRef(null)
@@ -45,7 +45,7 @@ const PostElement = ({title, imageWidth, svgDefaultStyle, viewType, postType, _i
                   as={`/${postType || 'post'}/${title}?id=${_id}`}
                   scroll={false}
             >
-                <a rel='noreferrer'>
+                <a rel='next' onClick={onClickLoadingHandler}>
                     <div className={'post-element '} key={title}  onMouseOut={isHoverHandler} onTouchCancel={isHoverHandler}>
                         <div className="image">
                             {state.isHover && videoTrailerUrl ?
@@ -74,7 +74,7 @@ const PostElement = ({title, imageWidth, svgDefaultStyle, viewType, postType, _i
                             {quality && postType === ('video') && !state.isHover ? <TopRight quality={quality} svgDefaultStyle={svgDefaultStyle}/> : null}
                             {likes > 0 && rating !== 'disable' && !state.isHover ? <TopLeft rating={likeValueCalculator(likes, disLikes)} svgDefaultStyle={svgDefaultStyle}/> : null}
                         </div>
-                        <h3>{title}</h3>
+                        <h2>{title}</h2>
                     </div>
                 </a>
             </Link>

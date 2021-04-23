@@ -1,18 +1,9 @@
-@import "../../../styles/links";
-@import "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
-@import "../../../components/adminIncludes/PostComponents/ImagePreview/ImagePreview";
-@import "../../../components/adminIncludes/PostComponents/Meta/Meta";
 @import "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
-@import "../../../components/adminIncludes/PostComponents/Format/Format";
-@import "../../../components/adminIncludes/PostComponents/Meta/Meta";
-@import "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 
 .admin-post{
   display: grid;
   justify-content: center;
   grid-template-columns: 1fr;
-
-
   .content{
     display: flex;
     justify-content: center;
@@ -25,15 +16,9 @@
   .admin-post{
     grid-template-columns: 1fr 200px;
     grid-gap: 20px;
-    //grid-template-rows: auto;
     .content{
       .post-admin-widget-editor{
-        //max-width: 96%;
       }
     }
-    .side{
-
-    }
-
   }
 }

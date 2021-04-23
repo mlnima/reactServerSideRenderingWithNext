@@ -2,57 +2,58 @@
 @import "../../../styles/mixIns";
 @import "../../../styles/buttons";
 
-.meta-page-item {
-  width: 48vw;
-  height: auto;
-  margin: auto;
-  .meta-page-item-image-parent {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: auto;
-    .meta-page-item-image,img {
-      width: 100%;
-      height: auto;
-    }
-  }
+//.meta-page-item {
+//  width: 48vw;
+//  height: auto;
+//  margin: auto;
+//
+//  .meta-page-item-image-parent {
+//    display: flex;
+//    justify-content: center;
+//    width: 100%;
+//    height: auto;
+//
+//    .meta-page-item-image, img {
+//      width: 100%;
+//      height: auto;
+//    }
+//  }
+//
+//  .meta-item-data {
+//    width: 100%;
+//    height: auto;
+//    text-align: center;
+//
+//    p {
+//      mix-blend-mode: difference;
+//      color: white;
+//    }
+//  }
+//}
 
-  .meta-item-data {
-    width: 100%;
-    height: auto;
-    text-align: center;
-    p{
-      mix-blend-mode: difference;
-      color:white;
-    }
-  }
-}
-
-@media only screen and (min-width: 768px) {
-  .meta-page-item {
-    margin: 10px auto;
-    width: 320px;
-    .meta-page-item-image-parent {
-      width: 320px;
-      .meta-page-item-image {
-        width: 320px;
-        position: relative;
-        height: 180px;
-        border: $dark90 1px solid  ;
-        display: block;
-        object-fit: cover;
-      }
-    }
-
-    .meta-item-data {
-      width: 320px;
-      margin: auto;
-      color: $light100;
-    }
-
-
-
-
-
-  }
-}
+//@media only screen and (min-width: 768px) {
+//  .meta-page-item {
+//    margin: 10px auto;
+//    width: 320px;
+//
+//    .meta-page-item-image-parent {
+//      width: 320px;
+//
+//      .meta-page-item-image {
+//        width: 320px;
+//        position: relative;
+//        height: 180px;
+//        border: $dark90 1px solid;
+//        display: block;
+//        object-fit: cover;
+//      }
+//    }
+//
+//    .meta-item-data {
+//      width: 320px;
+//      margin: auto;
+//      color: $light100;
+//    }
+//
+//  }
+//}

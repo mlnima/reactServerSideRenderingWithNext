@@ -2,7 +2,34 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {uploadFiles} from "../../../../../_variables/ajaxVariables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes, faUpload} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+    display: flex;
+    .product-information-image-preview{
+      .image-remove-btn{
+        border-radius: 50%;
+        border: white .2px solid;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        margin: 0;
+        svg{
+          width: 20px;
+          height: 20px;
 
+        }
+        &:hover{
+          transform: scale(1.1);
+          transition: .5s;
+        }
+      }
+      &:hover{
+        transform: scale(1.3);
+        transition: .5s;
+        z-index: 10;
+      }
+    }
+`
 const ImageGallery = props => {
     const uploadInputElement = useRef(null)
     const [state, setState] = useState({
@@ -89,9 +116,9 @@ const ImageGallery = props => {
                     <button onClick={() => uploadInputElement.current.click()}><FontAwesomeIcon icon={faUpload} className='post-element-info-logo'/></button>
                 </div>
                 <div className='post-information-section'>
-                    <div className='product-information-images-preview'>
+                    <styled className='product-information-images-preview'>
                         {renderImagesPreview}
-                    </div>
+                    </styled>
                 </div>
             </>
         );

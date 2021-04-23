@@ -1,6 +1,17 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-let StyledNavigation = styled.nav`${props => props.stylesData ?? ''}`
+let StyledNavigation = styled.nav`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  grid-area: navigation;
+  min-height: 48px;
+  @media only screen and (min-width: 768px) {
+    height: 48px;
+  }
+${props => props.stylesData ?? ''}
+`
 
 const NavigationWidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering}) => {
     return (

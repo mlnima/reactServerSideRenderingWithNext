@@ -3,7 +3,30 @@ import AdminLayout from "../../../components/layouts/AdminLayout";
 import {getSingleMeta, updateMeta} from "../../../_variables/ajaxPostsVariables";
 import {getAbsolutePath} from "../../../_variables/_variables";
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";
-import dataDecoder from "../../../server/tools/dataDecoder";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  .single-meta-page-section{
+    input,textarea{
+         min-width: 300px;
+         border: 1px solid rgba(0,0,0,.1);
+         padding: 3px 5px;
+         background-color: $light100;
+      
+    }
+    textarea{
+
+      min-height: 200px;
+    }
+    .preview-image{
+      margin: 10px 0;
+      img{
+        width: 280px;
+      }
+    }
+  }
+
+
+`
 
 const meta = props => {
 
@@ -92,7 +115,7 @@ const meta = props => {
 
     return (
 
-                <div className='single-meta-page'>
+                <StyledDiv className='single-meta-page'>
                     <div className='single-meta-page-section'>
                         <p>Language :</p>
                         <select onChange={e => onActiveEditingLanguageChangeHandler(e)}>
@@ -125,10 +148,10 @@ const meta = props => {
                                         metaData.translations[editingData.activeEditingLanguage].description || '' : '' : ''
                         }/>
                     </div>
-                    <button onClick={() => updateMetaData()}>Update</button>
+                    <button className='green-action-btn-link' onClick={() => updateMetaData()}>Update</button>
 
 
-                </div>
+                </StyledDiv>
 
     );
 };

@@ -1,7 +1,7 @@
 @import "../../../../styles/colors";
 @import "../../../../styles/buttons";
 
-.DropDownWidget,.admin-widget {
+.admin-widget,.DropDownWidget {
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -18,7 +18,7 @@
     padding: 0 10px;
     margin-bottom: 1px;
     border-bottom: 1px solid #eee !important;
-    background-color: $light100;
+    background-color: white;
     .DropDownWidgetHeadTitle {
 
     }
@@ -41,23 +41,22 @@
 .DropDownWidgetComponent,.admin-widget{
   padding:10px;
   width: 100%;
-
-  //display: flex;
-  //flex-direction: column;
-  //justify-content: flex-start;
-  //align-items: flex-start;
   display: grid;
-  background-color: $light100;
+  background-color: white;
 
   button{
-    @include AdminLightBtn;
-
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: .4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px;
+    &:active{
+      background-color: white;
+      border:none;
+    }
   }
-  //*{
-  //  margin: 5px 0;
-  //}
 }
-
 
 .admin-widget{
   width: 90%;

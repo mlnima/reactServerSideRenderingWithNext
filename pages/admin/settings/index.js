@@ -1,14 +1,15 @@
-import React from 'react';
 import Link from "next/link";
-import AdminLayout from "../../../components/layouts/AdminLayout";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+`
 
-const settings = props => {
+const settings = () => {
     return (
-
-            <div id='settings'>
-                <Link href='/admin/settings/general'><a className='settings-page-item'>General Setting</a></Link>
-            </div>
-
+        <StyledDiv id='settings'>
+            <Link href='/admin/settings/general'><a className='settings-page-item green-action-btn-link'>General Setting</a></Link>
+        </StyledDiv>
     );
 };
 export default settings;

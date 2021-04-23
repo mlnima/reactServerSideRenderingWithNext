@@ -1,7 +1,58 @@
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
 import styled from "styled-components";
-let StyledDiv = styled.div`${props => props.stylesData}`;
+let StyledDiv = styled.div`
+  margin: 10px 0;
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+
+
+  .product-slide-show-image-area {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.30%;
+    margin-bottom: 20px;
+    height: 0;
+
+    .active-image {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 50px;
+      padding: 0 !important;
+      border-radius: 10px;
+      object-fit: contain;
+    }
+  }
+
+  .product-slide-show-slide-btn {
+    position: absolute;
+    top: 50%;
+    background-color: rgba(0, 0, 0, .5);
+    border: none;
+    outline: none;
+    border-radius: 10px;
+    font-size: large;
+    padding: 10px;
+    color: white;
+    z-index: 17;
+  }
+
+  .product-slide-show-slide-btn-right {
+    right: 1%;
+  }
+
+  .product-slide-show-slide-btn-left {
+    left: 1%;
+  }
+
+${props => props.stylesData}
+`;
 
 
 const SlideShow = ({images,sidebar,mainThumbnail,deviceWidth}) => {

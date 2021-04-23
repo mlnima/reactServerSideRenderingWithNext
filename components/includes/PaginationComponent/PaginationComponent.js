@@ -3,6 +3,23 @@ import PaginationComponentPageLink from "./PaginationComponentPageLink";
 import {rangeNumGenerator} from "../../../_variables/_variables";
 import {useRouter} from "next/router";
 import _ from "lodash";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+  a {
+  background-color: #282828;
+  color: var(--main-text-color);
+  padding: 5px 10px;
+  margin:  5px;
+  border-radius: 5px;
+  }
+  .active-page{
+    background-color: #2c5115;
+  }
+`
 const PaginationComponent = props => {
     const router = useRouter()
     if (props.isActive && props.totalCount > props.size) {
@@ -24,7 +41,7 @@ const PaginationComponent = props => {
 
 
         return (
-            <div className='pagination' key={props.paginationIndex}>
+            <StyledDiv className='pagination' key={props.paginationIndex}>
                 {
                     rangeWithMinMax.map(pageNumber => {
                         return (
@@ -32,7 +49,7 @@ const PaginationComponent = props => {
                         )
                     })
                 }
-            </div>
+            </StyledDiv>
         );
     } else return null
 

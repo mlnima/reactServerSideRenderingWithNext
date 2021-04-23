@@ -1,6 +1,13 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-let StyledHeader = styled.header`${props => props.stylesData ?? ''}`
+let StyledHeader = styled.header`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+  grid-area: header;
+${props => props.stylesData ?? ''}
+`
 
 const HeaderWidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering}) => {
     return (

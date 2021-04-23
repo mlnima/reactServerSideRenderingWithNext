@@ -6,40 +6,45 @@
   --admin-darkcolor90:#181818;
 }
 
-//components
-
-//@import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu";
-//@import "../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu";
-//@import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
-@import "../components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl";
-@import "../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminRenderComments";
-@import "../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminCommentItem/AdminCommentItem";
-@import "../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView";
-@import "../components/adminIncludes/TopBar/AdminTopBar";
-@import "../components/adminIncludes/TopBar/NewItemMenu/NewItemMenu";
-@import "../components/adminIncludes/TopBar/AdminActionMenu/AdminActionMenu";
 @import "../components/adminIncludes/widgetsModel/WidgetModel/widgetsModel";
 @import "../components/adminIncludes/TextEditor/TextEditor";
-@import "../components/adminIncludes/AdminFooter/AdminFooter";
 @import "AdminStyle";
 //page
-@import "../pages/admin/settings/settings";
-@import "../pages/admin/page/page";
-@import "../pages/admin/design/design";
-@import "../pages/admin/settings/customStyles/customStyles";
-@import "../pages/admin/settings/customScript/customScript";
 @import "../pages/admin/post/post";
-@import "../pages/admin/meta/meta";
-@import "../pages/admin/translate/translate";
-@import "../pages/admin/design/widgets/widgets";
-@import "../pages/admin/design/customStyles/customStyles";
-@import "../pages/admin/form/form";
-@import "../pages/admin/design/background/background";
-@import "../pages/admin/user/user";
-@import "../pages/admin/importer/youtube/youtube";
-@import "../pages/admin/settings/eCommerceSettings/eCommerceSettings";
-@import "../pages/admin/tools/terminal/terminal";
-@import "../pages/admin/tools/tools";
+
+.green-action-btn-link {
+  background: linear-gradient(#67ae55, #578843);
+  box-shadow: inset 0 1px 1px #a4e388;
+  border-color: #3b6e22 #3b6e22 #2c5115;
+  border-radius: 5px;
+  color: #fff;
+  cursor: pointer;
+  display: inline-block;
+  letter-spacing: 1px;
+  position: relative;
+  text-shadow: 0 1px 2px rgba(0, 0, 0, .5);
+  width: 200px;
+  height: 40px;
+  min-width: 194px;
+  padding: 7px 20px;
+  text-align: center;
+  line-height: 126%;
+  box-sizing: border-box;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
 
 
+.light-btn{
+  background-color: #f1f1f1;
+  color: black;
+  outline: none;
+  border: .4px #9fa3a8 solid;
+  padding: 8px 10px;
+  border-radius: 5px;
+  &:active{
+    background-color: white;
+    border:none;
+  }
+}
 

@@ -124,7 +124,37 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                             <option value='external'>External</option>
                         </select>
                     </div>
-
+                    <div className='menu-form-field'>
+                        <p>rel :</p>
+                        <select name='linkRel' value={editingData.linkRel} onChange={e => onChangeHandler(e)}>
+                            <option>select</option>
+                            <option value='alternate'>alternate</option>
+                            <option value='author'>author</option>
+                            <option value='bookmark'>bookmark</option>
+                            <option value='canonical'>canonical</option>
+                            <option value='dns-prefetch'>dns-prefetch</option>
+                            <option value='external'>external</option>
+                            <option value='help'>help</option>
+                            <option value='icon'>icon</option>
+                            <option value='license'>license</option>
+                            <option value='manifest'>manifest</option>
+                            <option value='modulepreload'>modulepreload</option>
+                            <option value='next'>next</option>
+                            <option value='nofollow'>nofollow</option>
+                            <option value='noopener'>noopener</option>
+                            <option value='noreferrer'>noreferrer</option>
+                            <option value='opener'>opener</option>
+                            <option value='pingback'>pingback</option>
+                            <option value='preconnect'>preconnect</option>
+                            <option value='prefetch'>prefetch</option>
+                            <option value='preload'>preload</option>
+                            <option value='prerender'>prerender</option>
+                            <option value='prev'>prev</option>
+                            <option value='search'>search</option>
+                            <option value='stylesheet'>stylesheet</option>
+                            <option value='tag'>tag</option>
+                        </select>
+                    </div>
                     <div className='menu-form-field'>
 
                     </div>

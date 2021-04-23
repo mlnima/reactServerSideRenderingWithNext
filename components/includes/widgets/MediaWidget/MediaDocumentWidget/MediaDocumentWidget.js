@@ -1,6 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import loadable from '@loadable/component'
-//const {Document, Page, pdfjs} = loadable(() => import('react-pdf'))
+import {useEffect, useState} from 'react';
 import {Document, Page, pdfjs} from "react-pdf";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faArrowRight, faArrowUp} from "@fortawesome/free-solid-svg-icons";

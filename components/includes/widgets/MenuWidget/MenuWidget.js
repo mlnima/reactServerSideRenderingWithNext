@@ -4,7 +4,79 @@ import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useRouter} from "next/router";
 import {AppContext} from "../../../../context/AppContext";
+import styled from "styled-components";
+let StyledDiv = styled.div`
 
+.navigation-mobile-button{
+  background-color: transparent;
+  border: none;
+  outline: none;
+  margin: 0;
+  width: 30px;
+  height: 30px;
+  transition: all .5s linear;
+  .navigation-mobile-button-logo{
+    width: 30px;
+    height: 30px;
+  }
+}
+  .menu-widget-items{
+    position:fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    width: 100%;
+    background-color: rgba(0,0,0,.8);
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 0;
+    margin: 0;
+    .menu-widget-item{
+      list-style-type: none;
+      width: 100%;
+      text-align: center;
+      padding: 10px 0;
+      border-bottom: 1px solid ;
+
+    }
+
+  }
+      .navigation-close-button{
+  position: fixed;
+  top:2%;
+  right :2%;
+  background-color: transparent;
+  border: none;
+    }
+  @media only screen and (min-width: 768px) {
+    .navigation-mobile-button{
+      display: none;
+    }
+
+    .menu-widget-items{
+
+      background-color: initial;
+      flex-direction: row;
+      width: initial;
+      position: initial;
+      animation: initial ;
+      .menu-widget-item{
+        margin: 0 10px;
+        width:initial;
+        text-align: left;
+        padding: 0;
+        border-bottom: none;
+      }
+      .navigation-close-button{
+        display: none;
+      }
+}
+  
+`
 
 const MenuWidget = props => {
     const contextData = useContext(AppContext);
@@ -37,7 +109,7 @@ const MenuWidget = props => {
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
                     <Link href={menuItem.target} as={linkAsForMenuItems} scroll={false}>
-                        <a onClick={menuItem.target.includes('#')? null:mobileNavigationOnClickHandler}>
+                        <a rel='next' onClick={menuItem.target.includes('#')? null:mobileNavigationOnClickHandler}>
                             {menuItem.translations?.[router.locale]?.name || menuItem.name }
                         </a>
                     </Link>
@@ -46,7 +118,7 @@ const MenuWidget = props => {
         } else if (menuItem.type === 'external') {
             return (
                 <li className='menu-widget-item' key={menuItem.name}>
-                    <a href={menuItem.target} onClick={menuItem.target.includes('#')? null:mobileNavigationOnClickHandler}>{menuItem.name}</a>
+                    <a href={menuItem.target} >{menuItem.name}</a>
                 </li>
             )
         } else return null
@@ -54,15 +126,13 @@ const MenuWidget = props => {
 
 
     return (
-        <div className='menu-widget'>
+        <StyledDiv className='menu-widget'>
             <button
                 onClick={() => open ? setOpen(false) : setOpen(true)}
-
                 className='navigation-mobile-button' aria-label="Center Align">
                 <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo' style={{
                     maxWidth: '25px',
                     maxHeight: '25px',
-                   // transform: open ? 'rotate(90deg)' :'rotate(0deg)'
                 }}/>
             </button>
 
@@ -77,7 +147,7 @@ const MenuWidget = props => {
                 </button>
                 {renderMenuItems}
             </ul>
-        </div>
+        </StyledDiv>
     );
 };
 export default MenuWidget;

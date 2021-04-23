@@ -3,9 +3,7 @@
 
 .comment-form {
   display: flex;
-
   flex-direction: column;
-  //padding: 5%;
   width: 95%;
   .comment-form-info{
     display: flex;
@@ -16,7 +14,6 @@
   }
   .comment-form-input {
     display: flex;
-    //justify-content: space-evenly;
     textarea {
       width: 100%;
     }
@@ -27,11 +24,10 @@
   }
 
   input, textarea {
-    background-color: $dark80;
+    background-color: #282828;
     margin: 5px;
-    border: 1px solid $dark90;
-    color: $light100;
-    //width: 95%;
+    border: 1px solid #181818;
+    color: white;
   }
 
   textarea {
@@ -39,23 +35,3 @@
   }
 }
 
-@media only screen and (min-width: 768px) {
-  .comment-form {
-
-    .comment-form-info {
-
-    }
-
-    .comment-form-submit-button {
-
-    }
-
-    input, textarea {
-
-    }
-
-    textarea {
-
-    }
-  }
-}

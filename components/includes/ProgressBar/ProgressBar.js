@@ -1,16 +1,32 @@
-import React from 'react';
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  position: relative;
+  height: 15px;
+  .progressChild{
+    height: 100%;
+    position: absolute;
+    font-size: x-small;
+    display: flex;
+    font-weight: bold;
+    align-items: center;
+    p{
+      margin: 0 0 0 5px ;
+      font-size: 12px;
+    }
+  }
+`
 
 const ProgressBar = props => {
     if (props.value < 1) {
         return (
-            <div  className='progressParent' style={{
+            <StyledDiv  className='progressParent' style={{
                 backgroundColor: props.backgroundColor,
                 visibility:'hidden'
             }}>
-            </div>
+            </StyledDiv>
         );
     } else return (
-        <div className='progressParent' style={{
+        <StyledDiv className='progressParent' style={{
             backgroundColor: props.backgroundColor
         }}>
             <span className="progressChild" style={{
@@ -18,7 +34,7 @@ const ProgressBar = props => {
                 backgroundColor: props.valueColor,
                 width: props.value + '%'
             }}> <p>{props.percent ? props.value + ' %' : ''}</p></span>
-        </div>
+        </StyledDiv>
     )
 
 };

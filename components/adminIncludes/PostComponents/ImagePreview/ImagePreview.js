@@ -1,6 +1,17 @@
-import React, { useState } from 'react';
+import  { useState } from 'react';
 import Switch from "react-switch";
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  .editor{
+    display: flex;
+    justify-content: center;
+    img{
+      margin: auto;
+      width: 320px;
+      height: 180px ;
+    }
+  }
+`
 
 const ImagePreview = props => {
 
@@ -12,7 +23,7 @@ const ImagePreview = props => {
 
         if (state.open) {
             return (
-                <div className='ImagePreview VideoInformationSection'>
+                <StyledDiv className='ImagePreview VideoInformationSection'>
 
 
                     <div className="title">
@@ -23,11 +34,11 @@ const ImagePreview = props => {
 
                         <img src={ props.postData.mainThumbnail }/>
                     </div>
-                </div>
+                </StyledDiv>
             );
         } else return (
 
-                <div className='ImagePreview VideoInformationSection'>
+                <StyledDiv className='ImagePreview VideoInformationSection'>
                     <div className="title">
                         <p>Image Preview</p>
                         <Switch onChange={ () => state.open ? setState({ ...state, open: false }) : setState({ ...state, open: true }) } checked={ state.open  }/>
@@ -35,7 +46,7 @@ const ImagePreview = props => {
                     <div className="editor">
 
                     </div>
-                </div>
+                </StyledDiv>
 
         )
 

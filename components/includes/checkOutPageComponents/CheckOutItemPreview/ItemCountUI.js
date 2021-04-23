@@ -1,9 +1,26 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-
+import  {useContext} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faMinus, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {AppContext} from "../../../../context/AppContext";
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  border: .2px solid black;
+  width: 100px;
+  padding: 0 2px;
+  height: 40px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  button{
+    border: none;
+    outline: none;
+    background-color: transparent;
+    .item-count-ui-btn{
+      width: 10px;
+      height: 10px;
+    }
+  }
+`
 const ItemCountUI = props => {
     const contextData = useContext(AppContext);
 
@@ -34,11 +51,11 @@ const ItemCountUI = props => {
     }
 
     return (
-        <div className='item-count-ui'>
+        <StyledDiv className='item-count-ui'>
             <button disabled={props.count<=1} onClick={()=>changeAmountItems(-1)}><FontAwesomeIcon className='item-count-ui-btn'  icon={faMinus}/></button>
               {props.count}
             <button onClick={()=>changeAmountItems(1)}><FontAwesomeIcon className='item-count-ui-btn'  icon={faPlus}/></button>
-        </div>
+        </StyledDiv>
     );
 };
 export default ItemCountUI;

@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
 import AdminCommentItem from './AdminCommentItem/AdminCommentItem'
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+padding: 20px;
+`
 const AdminRenderComments = props => {
 
     const [ hovered, setHovered ] = useState('')
@@ -19,9 +22,9 @@ const AdminRenderComments = props => {
     })
 
     return (
-        <div className='AdminRenderComments'>
+        <StyledDiv className='AdminRenderComments'>
             { renderComments }
-        </div>
+        </StyledDiv>
     );
 };
 export default AdminRenderComments;

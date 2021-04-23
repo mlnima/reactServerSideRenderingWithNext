@@ -56,6 +56,7 @@
 .post-element-div {
   margin: 2px;
   border: none;
+  background-color: var(--post-element-background-color);
   .post-element {
     display: flex;
     flex-direction: column;
@@ -121,8 +122,9 @@
 
     }
 
-    h3 {
-      font-size: medium;
+    h2 {
+      color: var(--post-element-text-color);
+      font-size: 1rem;
       text-overflow: ellipsis;
       overflow: hidden;
       word-wrap: break-word;

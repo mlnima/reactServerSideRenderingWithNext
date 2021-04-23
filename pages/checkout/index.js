@@ -9,7 +9,70 @@ import CheckOutItemPreview from "../../components/includes/checkOutPageComponent
 import {useRouter} from "next/router";
 import _ from 'lodash'
 const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  width: 100%;
+  .checkout-items{
+    width: 90%;
+    max-width: 600px;
+    margin: auto;
+  }
 
+  .checkout-purchase{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    width: 80%;
+    max-width: 600px;
+
+    background-color: white;
+    margin: auto;
+    padding: 15px;
+
+    .checkout-total{
+      display: flex;
+      align-items: center;
+      flex-direction: column;
+      width: 90%;
+      h3, p{
+        border-bottom: .1px solid black;
+        width: 100%;
+        padding: 5%;
+      }
+      .vat-included{
+        font-size: .7rem;
+      }
+    }
+
+
+    .check-out-pay-btn{
+      border: .2px solid black;
+      padding: 10px 20px;
+      margin: 10px 20px;
+      background-color: transparent;
+    }
+  }
+  @media only screen and (min-width: 769px) {
+ 
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+     .checkout-items{
+      // display: grid;
+        margin-top: initial;
+        width: 90%;
+    }
+    .checkout-purchase{
+      margin-top: initial;
+      width: 90%;
+
+    }
+
+
+}
+`
 const checkout = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()

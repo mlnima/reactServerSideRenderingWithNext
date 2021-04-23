@@ -1,50 +1,10 @@
-.topbar,.navigation,.header,.footer{
-  display: flex;
-  justify-content: space-evenly;
-  flex-wrap: wrap;
-  align-items: center;
-}
-
-.topbar{
-  grid-area: topbar;
-}
-.navigation{
-  grid-area: navigation;
-}
-.header{
-  grid-area: header;
-
-}
-.footer{
-  grid-area: footer;
-}
-.main{
-  grid-area: main;
-  min-height: 100vh;
-  //grid-gap: 2px;
-}
 .sidebar{
   grid-area: sidebar;
-  //grid-gap: 2px;
 }
 .left-sidebar{
   grid-area: leftSidebar;
-  //grid-gap: 2px;
 }
 .right-sidebar{
   grid-area: rightSidebar;
-  //grid-gap: 2px;
 }
 
-
-.topbar,.navigation{
-  min-height: 48px;
-  //height: auto;
-}
-
-@media only screen and (min-width: 768px) {
-  .topbar,.navigation{
-    height: 48px;
-  }
-
-}

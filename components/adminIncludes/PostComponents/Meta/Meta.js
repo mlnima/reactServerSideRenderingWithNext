@@ -2,7 +2,55 @@ import React, {useEffect, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+ .addNewTag{
+    .addBtn{
+      margin: 5px 0;
+      &:hover{
+        transform: scale(1.1);
+        transition: .5s;
+      }
+    }
+  }
 
+
+  .items{
+    display:flex;
+    flex-wrap: wrap;
+    .item{
+      display:flex;
+      align-items: center;
+      margin: 1px 3px;
+      font-size: x-small;
+      padding: 0 5px;
+      border-radius: 5px;
+      button{
+        outline: none;
+        border: none;
+        background-color: transparent;
+        padding: 3px;
+        margin: 0 3px;
+        span{
+          color: #0073aa;
+        }
+        &:hover{
+          transform: scale(1.3);
+          transition: .5s;
+          color: white;
+        }
+      }
+
+      &:hover{
+        transform: scale(1.1);
+        transition: .5s;
+        background-color: red;
+        color: black;
+      }
+
+    }
+  }
+`
 
 const Meta = props => {
     let newItemsElement = useRef(null);
@@ -56,7 +104,7 @@ const Meta = props => {
         return null
     } else {
         return (
-            <div className='PostCategoriesTagsActors'>
+            <StyledDiv className='PostCategoriesTagsActors'>
                 <form className="addNewTag" onSubmit={e => addNewItem(e)}>
                     <input ref={newItemsElement} type='text'/>
                     <button className='addBtn' type='submit'> <FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></button>
@@ -65,7 +113,7 @@ const Meta = props => {
                 <div className="items">
                     {addedItems}
                 </div>
-            </div>
+            </StyledDiv>
         );
     }
 

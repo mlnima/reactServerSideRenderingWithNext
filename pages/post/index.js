@@ -12,7 +12,28 @@ import styled from "styled-components";
 import PostMetaDataToSiteHead from "../../components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead";
 import {AppContext} from "../../context/AppContext";
 
-let StyledMain = styled.main`${props => props.stylesData}`
+let StyledMain = styled.main`
+  justify-self: center;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  #download-url {
+    width: 100%;
+    margin: 20px 0;
+    .download-link {
+      color: white;
+      padding: 10px;
+      text-align: center;
+      border-radius: 5px;
+      margin: 10px;
+    }
+  }
+  .under-post-widget-area {
+    width: 100%;
+  }
+${props => props.stylesData}
+`
 
 const Post = ({responseCode,design,post,identity,comments,widgets}) => {
     const contextData = useContext(AppContext);

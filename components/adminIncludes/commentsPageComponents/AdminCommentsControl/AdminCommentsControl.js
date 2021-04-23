@@ -1,10 +1,18 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import Link from 'next/link';
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: flex;
+  .status{
+    a{
+      margin:  0 10px;
+    }
+  }
+`
 
 const AdminCommentsControl = props => {
     return (
-        <div className='AdminCommentsControl'>
+        <StyledDiv className='AdminCommentsControl'>
             <div className="status">
                 <Link href={{
                     pathname:props.pathnameData,query:{...props.queryData,status:'all'}
@@ -20,7 +28,7 @@ const AdminCommentsControl = props => {
                 }}><a>Pending</a></Link>
             </div>
 
-        </div>
+        </StyledDiv>
     );
 };
 export default AdminCommentsControl;

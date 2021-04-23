@@ -2,7 +2,20 @@ import React, {useContext, useMemo, useEffect, useState} from 'react';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import ImageRenderer from "../../ImageRenderer/ImageRenderer";
+import styled from "styled-components";
+let StyledA = styled.a`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  cursor: pointer;
+  .logo-text {
+    font-size: xx-large;
+  }
+  .headLine {
 
+  }
+`
 
 const Logo = props => {
     const contextData = useContext(AppContext);
@@ -28,7 +41,7 @@ const Logo = props => {
 
     return (
         <Link href='/'>
-            <a className='logo'>
+            <StyledA className='logo' onClick={contextData.functions.loadingHandler}>
                 {logoImageUrl ?
                     <ImageRenderer imageUrl={logoImageUrl}
                                    altValue='logo'
@@ -39,7 +52,7 @@ const Logo = props => {
                 /> : null}
                 {logoText ? <span className='logo-text'>{logoText}</span> : null}
                 {headLineData ? <p>{headLineData}</p> : null}
-            </a>
+            </StyledA>
         </Link>
     );
 };

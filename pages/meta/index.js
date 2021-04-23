@@ -5,7 +5,16 @@ import PaginationComponent from '../../components/includes/PaginationComponent/P
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {useRouter} from "next/router";
 import {AppContext} from "../../context/AppContext";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+.metas{
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+}
 
+`
 const meta = ({metaSource,identity,dataForGettingMeta}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -19,7 +28,7 @@ const meta = ({metaSource,identity,dataForGettingMeta}) => {
 
     return (
 
-        <div style={{gridArea: isWithSidebar ? 'main' : ''}} className={isWithSidebar ? 'content main ' : 'content main '}>
+        <StyledDiv style={{gridArea: isWithSidebar ? 'main' : ''}} className={isWithSidebar ? 'content main ' : 'content main '}>
             <PaginationComponent
                 isActive={true}
                 currentPage={dataForGettingMeta?.page}
@@ -41,7 +50,7 @@ const meta = ({metaSource,identity,dataForGettingMeta}) => {
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-        </div>
+        </StyledDiv>
 
     );
 };

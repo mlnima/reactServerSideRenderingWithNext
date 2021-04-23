@@ -3,7 +3,14 @@ import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import NavigationWidgetArea from "../NavigationWidgetArea/NavigationWidgetArea";
 import Widget from "../../includes/Widget/Widget";
-let StyledFooter = styled.footer`${props => props.stylesData ?? ''}`
+let StyledFooter = styled.footer`
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: wrap;
+  align-items: center;
+   grid-area: footer;
+${props => props.stylesData ?? ''}
+`
 
 const FooterWidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering}) => {
     return (

@@ -23,7 +23,7 @@ const PaginationComponentPageLink = props => {
               }}
               scroll={false}
         >
-            <a className={props.currentPage === props.pageNumber ? 'active-page' :''} >
+            <a className={props.currentPage === props.pageNumber ? 'active-page' :''}  onClick={contextData.functions.loadingHandler}>
             {props.pageNumber}
         </a>
         </Link>

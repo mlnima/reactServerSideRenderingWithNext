@@ -224,6 +224,17 @@ const AppProvider = props => {
                     })
                 }
             }
+        },
+        loadingHandler : ()=>{
+            state.loading ?
+                dispatchState({
+                    ...state,
+                    loading: false
+                }):
+                dispatchState({
+                    ...state,
+                    loading: true
+                })
         }
 
 

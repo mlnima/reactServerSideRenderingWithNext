@@ -3,7 +3,42 @@ import AdminLayout from '../../../../components/layouts/AdminLayout'
 import { AppContext } from '../../../../context/AppContext'
 import { executor } from '../../../../_variables/ajaxVariables'
 import { animateScroll } from 'react-scroll'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  .quickAccess {
+    .quickAccessBtn {
+      @include greenActionBtn;
+    }
+  }
 
+  .terminalControl {
+    display: flex;
+    justify-content: space-between;
+
+    width: 95%;
+
+    input {
+      background-color: black;
+      color: white;
+      width: 95%;
+    }
+
+    button {
+      background-color: black;
+      color: yellow;
+      border: none;
+    }
+  }
+
+  #terminalLog {
+    width: 95%;
+    min-height: 50vh;
+    background-color: black;
+    color: #916d07;
+    margin-top: 40px;
+    overflow: scroll;
+  }
+`
 
 const terminal = props => {
     const contextData = useContext(AppContext);
@@ -50,7 +85,7 @@ const terminal = props => {
 
     return (
 
-            <div className='terminal-simulator'>
+            <StyledDiv className='terminal-simulator'>
                 <h2> Terminal :</h2>
                 <div className='quickAccess'>
                     <h3>Quick Access</h3>
@@ -61,7 +96,7 @@ const terminal = props => {
                     <input name='command' type="text" onChange={ e => onchangeHandler(e) }/>
                     <button type='submit'>EXE</button>
                 </form>
-            </div>
+            </StyledDiv>
 
     );
 };

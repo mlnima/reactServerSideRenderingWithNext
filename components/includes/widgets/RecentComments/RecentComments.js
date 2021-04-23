@@ -1,5 +1,26 @@
 import React,{useEffect} from 'react';
 import Link from "next/link";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+   padding: 10px;
+   max-width: 100vw;
+  .recent-comments-item{
+    display: flex;
+    flex-direction: column;
+    //align-items: center;
+    //max-height: 35px;
+    word-wrap: break-word;
+    .recent-comments-item-author{
+      color: #FF3565;
+      margin: 0 5px;
+    }
+    p{
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+    }
+  }
+`
 const RecentComments = props => {
 
     const renderComments = props.comments.map(comment => {
@@ -19,9 +40,9 @@ const RecentComments = props => {
         )
     })
     return (
-        <div className='recent-comments'>
+        <StyledDiv className='recent-comments'>
             {renderComments}
-        </div>
+        </StyledDiv>
     );
 };
 export default RecentComments;

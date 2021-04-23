@@ -1,6 +1,18 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import { AppContext } from '../../../../context/AppContext'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  .my-profile-fields{
+    display: flex;
+    flex-direction: column;
+    .profile-edit-input{
 
+    }
+    .profile-info-label{
+      color:white ;
+    }
+  }
+`
 const MyProfileInfo = props => {
     const contextData = useContext(AppContext);
     const [ state, setState ] = useState({
@@ -68,14 +80,14 @@ const MyProfileInfo = props => {
     }
 
     return (
-        <div className='my-profile-info'>
+        <StyledDiv className='my-profile-info'>
             <h1> My Profile Info</h1>
             <button onClick={ () => state.editMode ? setState({ ...state, editMode: false }) : setState({ ...state, editMode: true }) }>Edit</button>
             <div className='my-profile-fields'>
                 <WhatToRender/>
             </div>
 
-        </div>
+        </StyledDiv>
     );
 };
 export default MyProfileInfo;

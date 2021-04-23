@@ -20,7 +20,7 @@
     @include inputNormalWithRadius;
     width: 98% ;
     padding: 0 1%;
-    background-color: $light100;
+    background-color: white;
     border: .1px solid rgba(0,0,0,.2);
   }
 
@@ -29,7 +29,7 @@
     min-height: 600px;
     @include inputNormalWithRadius;
     width: 95%;
-    background-color: $light100;
+    background-color: white;
   }
   .editor-switcher{
     margin-top: 10px ;
@@ -52,5 +52,4 @@
   .TitleDescription {
 
   }
-
 }

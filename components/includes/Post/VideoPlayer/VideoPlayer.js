@@ -1,9 +1,48 @@
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  margin:  0;
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
 
+  //height: 100%;
+  .responsive-player {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.30%;
+    margin-bottom: 20px;
+    height: 0;
+
+    iframe {
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 50px;
+      padding: 0 !important;
+     // border-radius: 10px;
+    }
+    .video-player-video-type{
+      position: absolute;
+      top: 0;
+      left: 0;
+      height: 100%;
+      width: 100%;
+      margin-bottom: 50px;
+      //object-fit: cover;
+      outline: none;
+      border-radius: 10px;
+    }
+  }
+`
 //import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
 
 const VideoPlayer = ({title,description,duration,mainThumbnail,videoEmbedCode,lastModify,videoUrl,_id,videoScriptCode}) => {
         return (
-            <div className='video-player'>
+            <StyledDiv className='video-player'>
                 <meta itemProp="name" content={title}/>
                 <meta itemProp="description" content={description}/>
                 <meta itemProp="duration" content={duration}/>
@@ -23,7 +62,7 @@ const VideoPlayer = ({title,description,duration,mainThumbnail,videoEmbedCode,la
                     }
                 </div>
 
-            </div>
+            </StyledDiv>
 
         );
 };

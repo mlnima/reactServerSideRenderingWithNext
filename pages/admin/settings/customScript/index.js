@@ -6,7 +6,10 @@ import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 import { getAbsolutePath } from '../../../../_variables/_variables'
 import { getSetting } from '../../../../_variables/ajaxVariables'
 import settings from '../general'
+import styled from "styled-components";
+let StyledDiv = styled.div`
 
+`
 const customScript = props => {
     const contextData = useContext(AppContext);
 
@@ -118,7 +121,7 @@ const customScript = props => {
             <div key={script.scriptName} className='customScriptPageItem'>
                 <div className='customScriptPageItemHead'>
                     <DelayInput className='customScriptPageItemHeadName' name='scriptName' value={ script.scriptName } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
-                    <button className='removeScript' onClick={ () => onDeleteHandler(script.scriptName) }>X</button>
+                    <button className='removeScript green-action-btn-link' onClick={ () => onDeleteHandler(script.scriptName) }>X</button>
                 </div>
                 <DelayInput element="textarea" className='customScript' name='scriptBody' value={ script.scriptBody } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
 
@@ -133,7 +136,7 @@ const customScript = props => {
         })
     }
     return (
-        <>
+        <StyledDiv>
             <div className='customScriptsAsStringSection'>
                 <Editor
                     language='html'
@@ -145,21 +148,21 @@ const customScript = props => {
                     width={props.width || '100%'}
                     height={props.height || '70vh'}
                 />
-                {/*<textarea name='customScriptsAsString' value={contextData.siteIdentity.customScriptsAsString} className='customScriptsAsString' placeholder='Custom Scripts As String' onChange={ e => onCustomScriptsAsStringChangeHandler(e) }/>*/}
-                <button className='saveBtn' onClick={ () => onSaveHandler() }>Save</button>
+                <button className='saveBtn green-action-btn-link' onClick={ () => onSaveHandler() }>Save</button>
             </div>
-
-            <form className='addCustomScriptForm' onSubmit={ e => onAddHandler(e) }>
-                <input className='scriptName' name='scriptName' placeholder='Script Name' onChange={ e => onNewScriptChangeHandler(e) }/>
-                <textarea name='scriptBody' className='addScriptTextarea' placeholder='Script with out Script Tag' onChange={ e => onNewScriptChangeHandler(e) }/>
-                <button type='submit'>Add</button>
-            </form>
-            <div className='customScripts'>
-                { renderScripts }
-            </div>
-            <button className='saveBtn' onClick={ () => onSaveHandler() }>Save</button>
-        </>
+        </StyledDiv>
     );
 };
 
 export default customScript;
+
+
+// <form className='addCustomScriptForm' onSubmit={ e => onAddHandler(e) }>
+//     <input className='scriptName' name='scriptName' placeholder='Script Name' onChange={ e => onNewScriptChangeHandler(e) }/>
+//     <textarea name='scriptBody' className='addScriptTextarea' placeholder='Script with out Script Tag' onChange={ e => onNewScriptChangeHandler(e) }/>
+//     <button type='submit green-action-btn-link'>Add</button>
+// </form>
+// <div className='customScripts'>
+//     { renderScripts }
+// </div>
+// <button className='saveBtn green-action-btn-link' onClick={ () => onSaveHandler() }>Save</button>

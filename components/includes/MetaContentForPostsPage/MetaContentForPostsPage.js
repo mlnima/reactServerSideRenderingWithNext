@@ -3,7 +3,40 @@ import {AppContext} from "../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {faAngleLeft, faAngleRight} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  margin: 10px 0;
+  padding: 10px;
+  color:white;
+  background-color: #222;
+  border-radius: 12px;
+  display: flex;
+  //justify-content: center;
+  //flex-direction: column;
+  flex-wrap: wrap;
+  align-items: center;
 
+
+  .arrow-meta-info{
+    margin-top: 10px;
+    width: 30px;
+    height: 30px;
+  }
+
+
+
+  h1{
+
+  }
+  p{
+    padding: 10px;
+    text-align: center;
+  }
+  img{
+    width: 280px;
+
+  }
+`
 
 const MetaContentForPostsPage = props => {
     const contextData = useContext(AppContext);
@@ -60,13 +93,13 @@ const MetaContentForPostsPage = props => {
 
     if (props.getPostsData.content !== 'all') {
         return (
-            <div className='meta-content'>
+            <StyledDiv className='meta-content'>
                 {/*<h1>{props.contentData.name}</h1>*/}
                 <h1 style={state.titleStyle}>{props.contentData.translations ? props.contentData.translations[contextData.state.activeLanguage] ? props.contentData.translations[contextData.state.activeLanguage].name || props.contentData.name : props.contentData.name : props.contentData.name}</h1>
                 <span style={state.titleStyle}> <ArrowAfterTitle/></span>
                 <ImageContentForMeta/>
                 <p style={state.descriptionStyle}>{props.contentData.translations ? props.contentData.translations[contextData.state.activeLanguage] ? props.contentData.translations[contextData.state.activeLanguage].description || props.contentData.description : props.contentData.description : props.contentData.description}</p>
-            </div>
+            </StyledDiv>
         );
     } else return null
 

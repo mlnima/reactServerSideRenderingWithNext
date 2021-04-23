@@ -1,42 +1,17 @@
-import React, {useEffect} from 'react';
+import {useEffect} from 'react';
 import AppProvider from "../context/AppContext";
 import AppLayout from "../components/layouts/AppLayout";
 import {useRouter} from "next/router";
-import '../styles/styles.scss';
-import '../components/includes/AlertBox/AlertBox.scss';
-import '../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview.scss';
-import '../components/includes/checkOutPageComponents/CheckOutItemPreview/ItemCountUI.scss';
-import '../components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.scss';
-import '../components/includes/checkOutPageComponents/CheckoutPop/CheckOutSlideHeader/CheckOutSlideHeader.scss';
-import '../components/includes/CommentsRenderer/CommentsRenderer.scss';
-import '../components/includes/Loading/Loading.scss';
-import '../components/includes/MetaContentForPostsPage/MetaContentForPostsPage.scss';
-import '../components/includes/MetaElement/MetaElement.scss';
-import '../components/includes/MyProfileComponents/MyProfileInfo/MyProfileInfo.scss';
-import '../components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.scss';
-import '../components/includes/PaginationComponent/PaginationComponent.scss';
-import '../components/includes/PostElement/PostElement.scss';
-import '../components/includes/Posts/Posts.scss';
-import '../components/includes/ProgressBar/ProgressBar.scss';
-import '../components/includes/Widget/Widget.scss';
-import '../components/includes/widgets/widgetsMainStyle.scss';
-import '../components/widgetsArea/WidgetArea/WidgetArea.scss';
-import '../components/includes/CardElement/CardElement.scss'
-import './post/Post.scss'
-import './maintenance/maintenance.scss'
-import './meta/meta.scss'
-import './checkout/checkout.scss'
-import '../components/layouts/AppLayout.scss'
-import '../components/layouts/AdminLayout.scss'
-import '../styles/globalAdminPanel.scss';
-import '../components/includes/AdminTools/Console/Console.scss';
-import '../components/includes/AdminTools/AdminTools.scss';
-import '../pages/auth/registerLogin.scss';
-import '../pages/profile/Profile.scss';
-import '../pages/posts/Posts.scss';
 import AdminLayout from "../components/layouts/AdminLayout";
 import * as Scroll from 'react-scroll';
-
+import '../styles/styles.scss';
+import '../styles/globalAdminPanel.scss';
+import '../components/widgetsArea/WidgetArea/WidgetArea.scss';
+import '../components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.scss';
+import '../components/includes/PostElement/PostElement.scss';
+import '../components/includes/CardElement/CardElement.scss';
+import '../components/layouts/AppLayout.scss';
+import '../components/layouts/AdminLayout.scss';
 
 // export function reportWebVitals(metric) {
 //     console.log(metric)
@@ -50,11 +25,23 @@ const MyApp = ({Component, pageProps}) => {
         scroll.scrollToTop();
     }, [pageProps]);
 
+    useEffect(() => {
+        if("serviceWorker" in navigator) {
+            window.addEventListener("load", function () {
+                navigator.serviceWorker.register("/sw.js").then(
+                    // function (registration) {
+                    //     console.log("Service Worker registration successful with scope: ", registration.scope);
+                    // },
+                    // function (err) {
+                    //     console.log("Service Worker registration failed: ", err);
+                    // }
+                );
+            })}
+    }, []);
 
     if (!router.pathname.includes('/admin')) {
         return (
             <AppProvider>
-
                 <AppLayout
                     design={pageProps.design}
                     widgets={pageProps.widgets}
@@ -76,7 +63,6 @@ const MyApp = ({Component, pageProps}) => {
             </AdminLayout>
         </AppProvider>
     )
-
 };
 
 export default MyApp;

@@ -1,8 +1,40 @@
-import React, { useEffect, useState, useContext } from 'react';
+import React, { useEffect, useState } from 'react';
 import FA from "react-fontawesome";
 import styled from "styled-components";
 let StyledDiv = styled.div`
+   display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 95%;
+  padding: 10px;
+  .DropDownWidgetHead {
+    border-radius: 5px;
+    height: 30px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
 
+    padding: 0 10px;
+    margin-bottom: 1px;
+    border-bottom: 1px solid #eee !important;
+    background-color: $light100;
+    .DropDownWidgetHeadTitle {
+
+    }
+
+    .DropDownWidgetHeadOpenCloseBtn {
+      @include transparentLightTextBtn;
+      color: black;
+
+
+      .fontawesomeMedium {
+        font-size: large;
+        height: 10px;
+      }
+
+    }
+  }
 `
 
 const DropDownWidget = props => {
@@ -44,7 +76,7 @@ const DropDownWidget = props => {
         return null
     } else if (props.postData.postType === props.renderFor || props.renderFor === 'all') {
         return (
-            <div className='DropDownWidget'>
+            <StyledDiv className='DropDownWidget'>
                 <div className="DropDownWidgetHead">
                     <p className='DropDownWidgetHeadTitle'>{ props.title }</p>
                     <button className='DropDownWidgetHeadOpenCloseBtn' onClick={ () => openCloseHandler() }><FA className='fontawesomeMedium' name={ state.icon }/></button>
@@ -52,7 +84,7 @@ const DropDownWidget = props => {
                 <div className="DropDownWidgetComponent">
                     <RenderTheComponent/>
                 </div>
-            </div>
+            </StyledDiv>
         );
     } else return null
 

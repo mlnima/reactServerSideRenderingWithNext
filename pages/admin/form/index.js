@@ -7,7 +7,25 @@ import {getSingleFormData} from "../../../_variables/ajaxVariables";
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";
 import dataDecoder from "../../../server/tools/dataDecoder";
 import {getPost} from "../../../_variables/ajaxPostsVariables";
-//import './form.scss'
+import styled from "styled-components";
+let StyledDiv = styled.div`
+.form-data-container{
+  border-radius: 5px;
+  padding: 5px;
+  background-color: #333 ;
+  margin: 30px 0;
+  .form-field-data{
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    color: white;
+    padding: 5px;
+    h3{
+      margin-right: 20px;
+    }
+  }
+}
+`
 
 const formPage = props => {
     const [state, setState] = useState({
@@ -38,14 +56,14 @@ const formPage = props => {
     })
 
     return (
-        <>
+        <StyledDiv>
             <h1>{state.formData.formName}</h1>
             <span>{state.formData.date}</span>
             <div className='form-data-container'>
                 {renderData}
             </div>
 
-        </>
+        </StyledDiv>
     );
 };
 

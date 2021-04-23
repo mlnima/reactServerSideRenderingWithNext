@@ -207,14 +207,12 @@ svg {
     border: none;
     margin: 2px 0;
 
-    .svg-logo-medium {
-      //width: 100px;
-    }
   }
 }
 
 .main{
   width: 100%;
+  min-height: 100vh;
   .widget{
     width: 100%;
   }

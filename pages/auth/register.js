@@ -1,12 +1,46 @@
 import React, {useState, useRef, useContext} from 'react';
 import withRouter from "next/dist/client/with-router";
-import axios from 'axios'
-import {getAbsolutePath} from '../../_variables/_variables'
-import {getFirstLoadData, getMultipleSetting, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
-import dataDecoder from '../../server/tools/dataDecoder'
+import {getFirstLoadData} from '../../_variables/ajaxVariables'
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
+import styled from "styled-components";
 
+let StyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+
+  .authForm {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .messageLabel {
+      width: 250px;
+      margin-top: 20px;
+      padding: 10px 0;
+      font-size: large;
+      font-weight: bold;
+      border-radius: 5px;
+      background-color: transparent;
+      text-align: center;
+    }
+
+    .authFormItem {
+        p{
+          color: var(--main-text-color);
+        }
+      input {
+        border-radius: 5px;
+        outline: none;
+        border: none;
+        padding: 3px 5px;
+        width: 200px;
+        height: 30px;
+      }
+    }
+  }
+`
 const Register = props => {
     const contextData = useContext(AppContext);
     const messageLabel = useRef(null);
@@ -47,7 +81,7 @@ const Register = props => {
 
     if (contextData.siteIdentity.anyoneCanRegister) {
         return (
-            <div className='Register authPage main'>
+            <StyledDiv className='Register authPage main'>
                 <form className='authForm' onSubmit={e => onSubmitHandler(e)}>
                     <div className="authFormItem">
                         <p>username</p>
@@ -67,7 +101,7 @@ const Register = props => {
                     </div>
                     <button type='submit' className='submitBtn'>Register</button>
                 </form>
-            </div>
+            </StyledDiv>
 
         );
 
@@ -79,7 +113,7 @@ const Register = props => {
 };
 
 export const getServerSideProps = async ({req}) => {
-    const firstLoadData = await getFirstLoadData(req,[])
+    const firstLoadData = await getFirstLoadData(req, [])
     return {props: {widgets: firstLoadData.widgets, ...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer}}
 }
 

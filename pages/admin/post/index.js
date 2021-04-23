@@ -1,29 +1,19 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../context/AppContext";
 import {getPost, savePost, updatePost} from '../../../_variables/ajaxPostsVariables';
 import {getAbsolutePath} from '../../../_variables/_variables'
-import AdminLayout from "../../../components/layouts/AdminLayout";
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 import DropDownWidget from "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
 import Format from "../../../components/adminIncludes/PostComponents/Format/Format";
 import Meta from "../../../components/adminIncludes/PostComponents/Meta/Meta";
-// import VideoInformation from "../../../components/adminIncludes/PostComponents/VideoInformation/VideoInformation";
 import withRouter from "next/dist/client/with-router";
-import TextInputWithUploadBtn from '../../../components/adminIncludes/TextInputWithUploadBtn/TextInputWithUploadBtn'
-import ImagePreview from '../../../components/adminIncludes/PostComponents/ImagePreview/ImagePreview';
 import Link from 'next/link'
-import dataDecoder from '../../../server/tools/dataDecoder'
-//import ProductInformation from '../../../components/adminIncludes/PostComponents/ProductInformation/ProductInformation'
 import {getMultipleSetting} from '../../../_variables/ajaxVariables'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
 import {useRouter} from "next/router";
 import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
-import AddWidgetMenu from "../../../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu";
-import AddWidgetToPostMenu from "../../../components/adminIncludes/PostComponents/AddWidgetToPostMenu/AddWidgetToPostMenu";
-import {widgetModels} from '../../../components/adminIncludes/widgetsModel/AddWidgetMenu/models'
 import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
-import NoSSR from 'react-no-ssr';
 import {languagesOptions} from "../../../_variables/_variables";
 
 const Index = props => {

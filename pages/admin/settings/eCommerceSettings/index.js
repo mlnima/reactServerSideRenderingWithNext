@@ -4,7 +4,23 @@ import {AppContext} from "../../../../context/AppContext";
 import {getAbsolutePath} from "../../../../_variables/_variables";
 import {getSetting} from "../../../../_variables/ajaxVariables";
 import EcommerceSettingsInputSection from "../../../../components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection";
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  .e-commerce-settings-translate-settings , .eCommerceSettings-settings{
+    margin: 10px;
+    width: 90%;
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+    grid-gap: 5px;
+    justify-content: center;
+    align-items: center;
+    //margin: auto;
+  }
+`
 const eCommerceSettings = props => {
     const contextData = useContext(AppContext);
 
@@ -15,7 +31,7 @@ const eCommerceSettings = props => {
 
     return (
 
-            <div className='e-commerce-Settings-page'>
+            <StyledDiv className='e-commerce-Settings-page'>
                 <h3>Text and Translations : </h3>
                 <div className='e-commerce-settings-translate-settings'>
                     <EcommerceSettingsInputSection name='proceedToCheckOutText' translation={true} description='text on the button for proceeding the checkout'/>
@@ -35,7 +51,7 @@ const eCommerceSettings = props => {
                     <EcommerceSettingsInputSection name='defaultShippingCost' description='Leave empty if Prices are including the shipping cost' inputType='number'/>
 
                 </div>
-            </div>
+            </StyledDiv>
 
     );
 };

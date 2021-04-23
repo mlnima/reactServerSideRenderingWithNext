@@ -2,7 +2,37 @@ import {useState,useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      .rated-message{
+        color: var(--post-page-info-color);
+      }
+      button,span {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: transparent;
+        color: var(--post-page-info-color);
+        outline: none;
+        border: none;
+        margin: 0 10px;
+        p{
+          font-size: 1rem;
+          padding: 0 5px;
+        }
+        &:disabled {
+          color: #33373c;
+        }
+        &:hover {
+          transition: all 1s ;
+          transform: scale(1.2);
 
+        }
+      }
+`
 const RatingButtons = ({_id,svgDefaultStyle,ratingAndViewData,rating,setRatingAndViewData}) => {
     const ratingBtnArea = useRef(null)
     const [state, setState] = useState({
@@ -20,7 +50,7 @@ const RatingButtons = ({_id,svgDefaultStyle,ratingAndViewData,rating,setRatingAn
         })
     }
     return(
-        <div ref={ratingBtnArea} className="rating-buttons">
+        <StyledDiv ref={ratingBtnArea} className="rating-buttons">
                     <span className='like-disLike-count-items'>
                         <FontAwesomeIcon style={svgDefaultStyle} icon={faEye}  className='rate-logo' />
                         <p>{ratingAndViewData.views} </p>
@@ -37,7 +67,7 @@ const RatingButtons = ({_id,svgDefaultStyle,ratingAndViewData,rating,setRatingAn
                     </button>
                 </>:null}
 
-        </div>
+        </StyledDiv>
     )
 };
 export default RatingButtons;

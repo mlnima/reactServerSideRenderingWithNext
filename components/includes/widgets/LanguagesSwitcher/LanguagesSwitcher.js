@@ -2,7 +2,17 @@ import React, {useContext} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
 import {languagesOptions} from "../../../../_variables/_variables";
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-wrap: wrap;
 
+  p{
+    margin: 0 20px 5px 0;
+  }
+`
 const LanguagesSwitcher = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -20,7 +30,7 @@ const LanguagesSwitcher = props => {
     }
 
     return (
-        <div className='language-switcher-widget'>
+        <StyledDiv className='language-switcher-widget'>
             {(props.translations?.[contextData.state.activeLanguage]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown)?
              <p>{props.translations?.[contextData.state.activeLanguage]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown}</p>:
                 null
@@ -30,7 +40,7 @@ const LanguagesSwitcher = props => {
                 <option key='default' value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'default'}</option>
                 {languagesOptions}
             </select>
-        </div>
+        </StyledDiv>
     );
 };
 export default LanguagesSwitcher;

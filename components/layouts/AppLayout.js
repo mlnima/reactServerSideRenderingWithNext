@@ -42,20 +42,20 @@ const AppLayout = props => {
             })
         }
     }, []);
+
     useEffect(() => {
-        // const differenceLeftSidebarWidgets = _.differenceWith(leftSidebarWidgetsData, leftSidebarWidgets, _.isEqual);
-        // const differenceRightSidebarWidgets = _.differenceWith(rightSidebarWidgetsData, rightSidebarWidgets, _.isEqual);
-        // if (!!differenceLeftSidebarWidgets?.length) {
-        //     console.log(leftSidebarWidgetsData)
-        //     setLeftSidebarWidgets(leftSidebarWidgetsData)
-        // }
-        // if (!!differenceRightSidebarWidgets?.length) {
-        //     console.log(rightSidebarWidgetsData)
-        //     setRightSidebarWidgets(rightSidebarWidgetsData)
-        // }
         setLeftSidebarWidgets(leftSidebarWidgetsData)
         setRightSidebarWidgets(rightSidebarWidgetsData)
     }, [props.widgets]);
+
+    useEffect(() => {
+        contextData.state.loading ?
+            contextData.dispatchState({
+                ...contextData.state,
+                loading:false
+            }):
+            null
+    }, [props]);
 
     const sidebarPositionName = useMemo(() =>
             router.pathname === '/' ? 'homePageSidebar' :

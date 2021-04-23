@@ -9,7 +9,107 @@ import ColorSection from '../../../../components/adminIncludes/design/ColorSecti
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import WidgetGroupByPosition from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import _ from 'lodash';
+import styled from "styled-components";
+let StyledDiv = styled.div`
+ display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 100%;
 
+  #widget-setting {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+
+    .sidePanel{
+      width: 100%;
+      .AddWidgetMenu{
+        width: 100%;
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+        grid-gap: 5px;
+        .AddWidgetWithPositionMenu{
+          //justify-self: stretch;
+          //width: 200px;
+          position: relative;
+          //margin: auto;
+          .positionsOpener{
+            justify-self: stretch;
+            width: 100%;
+            background-color: var(--admin-darkcolor70);
+            color: var(--admin-text-color);
+            border :none;
+            padding: 5px 10px;
+          }
+          .AddWidgetWithPositionMenuPositions{
+           // position: absolute;
+            z-index: 1;
+            background-color: var(--admin-darkcolor70);
+            //width: 200px;
+            display: grid;
+            grid-template-columns: 1fr;
+            .AddWidgetWithPositionMenuPositionsBtn{
+              padding: 2px ;
+            }
+          }
+        }
+      }
+    }
+
+    .saveBtn {
+      @include greenActionBtn;
+    }
+    .widgets {
+      margin: 20px 0;
+      width: 100%;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      grid-gap: 10px;
+      .widgetAdminPanelItem {
+        background-color: transparent;
+        width: 100%;
+        position: initial;
+        margin: 0;
+        .widgetAdminPanelItemHeader {
+          height:50px ;
+          margin: 0;
+          background-color: black;
+          display: flex;
+          justify-content: center;
+          align-items: center;
+          color: white;
+          text-align: center;
+          font-weight: bold;
+          font-size: large;
+        }
+      }
+    }
+  }
+  
+  @media only screen and (min-width: 768px) {
+
+    #widget-setting {
+      h2{
+        justify-self: end;
+        width: 98%;
+      }
+      .widgets {
+  
+        grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+        .widgetAdminPanelItem {
+              max-width: 550px;
+          position: relative;
+          .widgetAdminPanelItemHeader {
+
+          }
+        }
+      }
+    }
+}
+`
 
 const HomePageWidgets = props => {
     const contextData = useContext(AppContext);
@@ -77,7 +177,7 @@ const HomePageWidgets = props => {
 
 
     return (
-        <div className='admin-widgets-page'>
+        <StyledDiv className='admin-widgets-page'>
             <h1>Widgets Settings</h1>
 
             <div id='widget-setting'>
@@ -90,7 +190,7 @@ const HomePageWidgets = props => {
                     {renderWidgetsInPosition}
                 </div>
             </div>
-        </div>
+        </StyledDiv>
     );
 };
 
