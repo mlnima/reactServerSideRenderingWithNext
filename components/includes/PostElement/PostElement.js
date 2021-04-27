@@ -8,7 +8,13 @@ import BottomRight from "./BottomRight";
 import BottomLeft from "./BottomLeft";
 import TopRight from "./TopRight";
 import TopLeft from "./TopLeft";
-let StyledDiv = styled.article`${props => props.stylesData}`
+import PostElementTitle from "./PostElementTitle";
+let StyledDiv = styled.article`
+
+//style
+
+${props => props.stylesData}
+`
 
 const PostElement = ({title, imageWidth, svgDefaultStyle, viewType, postType, _id, postElementSize, videoTrailerUrl, views, likes, disLikes, quality, rating, price, duration, mainThumbnail, postElementStyle,onClickLoadingHandler}) => {
 
@@ -34,7 +40,7 @@ const PostElement = ({title, imageWidth, svgDefaultStyle, viewType, postType, _i
                                     `post-element-div-${postElementSize}` :
                                     'post-element-div-medium'}`
     return (
-        < StyledDiv stylesData={postElementStyle} ref={element} className={classNameForPostElement}>
+        < StyledDiv stylesData={postElementStyle} ref={element} className={classNameForPostElement} >
             <Link href={{
                 pathname: `/post`,
                 query: {
@@ -45,9 +51,9 @@ const PostElement = ({title, imageWidth, svgDefaultStyle, viewType, postType, _i
                   as={`/${postType || 'post'}/${title}?id=${_id}`}
                   scroll={false}
             >
-                <a rel='next' onClick={onClickLoadingHandler}>
+                <a rel='next' onClick={onClickLoadingHandler} style={{textDecoration:'none'}}>
                     <div className={'post-element '} key={title}  onMouseOut={isHoverHandler} onTouchCancel={isHoverHandler}>
-                        <div className="image">
+                        <div className="image" style={{position:'relative'}}>
                             {state.isHover && videoTrailerUrl ?
                                 <video
                                     ref={videoElement}
@@ -74,7 +80,7 @@ const PostElement = ({title, imageWidth, svgDefaultStyle, viewType, postType, _i
                             {quality && postType === ('video') && !state.isHover ? <TopRight quality={quality} svgDefaultStyle={svgDefaultStyle}/> : null}
                             {likes > 0 && rating !== 'disable' && !state.isHover ? <TopLeft rating={likeValueCalculator(likes, disLikes)} svgDefaultStyle={svgDefaultStyle}/> : null}
                         </div>
-                        <h2>{title}</h2>
+                        <PostElementTitle title={title}/>
                     </div>
                 </a>
             </Link>

@@ -18,14 +18,17 @@ let StyledDiv = styled.div`
     padding: 0 10px;
     margin-bottom: 1px;
     border-bottom: 1px solid #eee !important;
-    background-color: $light100;
+    background-color: white;
     .DropDownWidgetHeadTitle {
 
     }
 
     .DropDownWidgetHeadOpenCloseBtn {
-      @include transparentLightTextBtn;
-      color: black;
+       background-color: transparent;
+          color: white;
+          outline: none;
+          border: none;
+      
 
 
       .fontawesomeMedium {
@@ -35,8 +38,28 @@ let StyledDiv = styled.div`
 
     }
   }
-`
+  .DropDownWidgetComponent,.admin-widget{
+  padding:10px;
+  width: 100%;
+  display: grid;
+  background-color: white;
 
+  button{
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: .4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px;
+    &:active{
+      background-color: white;
+      border:none;
+    }
+  }
+}
+  
+`
+//629
 const DropDownWidget = props => {
 
     const [ state, setState ] = useState({

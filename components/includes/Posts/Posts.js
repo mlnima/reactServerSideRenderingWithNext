@@ -2,13 +2,7 @@ import {useState, useEffect, useContext, useMemo} from 'react';
 import PostElement from "../PostElement/PostElement";
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
-import styled from "styled-components";
 
-let StyledDiv = styled.div`
-   display: flex;
-   flex-wrap: wrap;
-   justify-content: center;
-`
 const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyle}) => {
     const contextData = useContext(AppContext);
 
@@ -41,7 +35,14 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
 
 
     return (
-        <StyledDiv className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')}>
+        <div className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')}>
+            <style jsx>{`
+                    .posts-content{
+                       display: flex;
+                       flex-wrap: wrap;
+                       justify-content: center;
+                    }
+            `}</style>
             {(posts || []).map(post => {
                 const title = (post.translations?.[locale]?.title || post.title).replace('#', '')
                 return (
@@ -54,7 +55,7 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
                         postElementStyle={postElementStyle}
                         //state={post}
                         title={title}
-                        svgDefaultStyle={state.svgDefaultStyle}
+                        //svgDefaultStyle={state.svgDefaultStyle}
                         imageWidth={state.imageWidth}
                         postType={post.postType}
                         _id={post._id}
@@ -67,7 +68,7 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
                     />
                 )
             })}
-        </StyledDiv>
+        </div>
     );
 };
 

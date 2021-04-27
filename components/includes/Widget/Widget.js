@@ -41,15 +41,13 @@ let StyledSection = styled.section`
           height: 90px;
           display: flex;
           flex-direction: row;
-          //align-items: center;
           justify-content: space-between;
           .image {
-            //width: 50%;
             margin: 0;
             img, video {
               width: 130px ;
               aspect-ratio:16/9;
-              //height: 90px !important;
+          
             }
             .top-right ,.bottom-right{
               display: none;
@@ -60,14 +58,14 @@ let StyledSection = styled.section`
             display: none;
           }
 
-          h3 {
+          h2 {
             -webkit-box-orient: vertical;
             display: -webkit-box;
             -webkit-line-clamp: 4;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: normal;
-            margin: 0;
+            margin: 0 0 0 2px;
           }
         }
       }

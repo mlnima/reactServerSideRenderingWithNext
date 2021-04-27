@@ -20,12 +20,6 @@ const SiteSettingSetter = props => {
             ...contextData.state,
             activeLanguage: manuallyDetectedLocale
         })
-        // if (!router.defaultLocale && !router.locale){
-        //     console.log(router)
-        //     router.defaultLocale = manuallyDetectedLocale
-        //     router.locale= manuallyDetectedLocale
-        // }
-        // console.log(router)
     }, []);
 
 

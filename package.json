@@ -75,7 +75,7 @@
     "simple-youtube-api": "^5.2.1",
     "strip-ansi": "^6.0.0",
     "styled-components": "^5.2.3",
-    "styled-jsx": "^3.3.2",
+    "styled-jsx": "^3.4.4",
     "superagent": "^6.1.0",
     "swiper": "^6.3.5",
     "tailwindcss": "^2.0.1",
@@ -84,6 +84,7 @@
     "xmldom": "^0.6.0"
   },
   "devDependencies": {
+    "@styled-jsx/plugin-sass": "^3.0.0",
     "@svgr/webpack": "^5.5.0",
     "babel-plugin-styled-components": "^1.12.0",
     "cookie-parser": "^1.4.5",
@@ -93,6 +94,7 @@
     "jsonwebtoken": "^8.5.1",
     "keyv": "^4.0.3",
     "next-pwa": "^5.2.14",
+    "sass": "^1.32.11",
     "shelljs": "^0.8.4"
   }
 }

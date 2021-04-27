@@ -82,17 +82,7 @@ const design = props => {
         )
     })
 
-    return (
-
-            <StyledForm className='adminDesign' onSubmit={ e => onSubmitHandler(e) }>
-
-                <div className='colorsContent'>
-                    { renderColorsFields }
-                </div>
-                <button className='submitBtn' type='submit'>Save Colors</button>
-            </StyledForm>
-
-    );
+    return null;
 };
 
 export const getServerSideProps = async ({req}) => {

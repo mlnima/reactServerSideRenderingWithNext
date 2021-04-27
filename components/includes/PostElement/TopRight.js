@@ -1,6 +1,3 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
 const TopRight = props => {
 
     const quality =  props.quality === '2160p' ? '4K' :
@@ -14,7 +11,15 @@ const TopRight = props => {
 
 
     return (
-        <span  className='top-right'>{quality }</span>
+        <span  className='top-right post-element-info-data'>
+            <style jsx>{`
+                      .top-right{
+                        right: 3px;
+                        top: 3px;
+                      }
+                `}</style>
+            {quality }
+        </span>
     );
 };
 export default TopRight;

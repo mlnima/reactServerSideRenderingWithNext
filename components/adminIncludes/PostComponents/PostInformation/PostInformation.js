@@ -15,6 +15,7 @@ let StyledDiv = styled.div`
   padding:  1%;
   border-radius: 10px;
   border: .1px solid rgba(0,0,0,.2);
+  background-color: white;
   .saveBtn {
     display: flex;
     justify-content: center;
@@ -96,14 +97,7 @@ let StyledDiv = styled.div`
       }
 
       .TextInput {
-        border-radius: 5px;
-        outline: none;
-        border: none;
-        padding: 3px 5px;
-     
-        height: 30px;
-        background-color: #f1f1f1;
-        width: 90%;
+
 
       }
 
@@ -122,9 +116,9 @@ let StyledDiv = styled.div`
         outline: none;
         border: none;
         padding: 3px 5px;
-       
+      
         height: 30px;
-        background-color:#f1f1f1;
+        //background-color:#f1f1f1;
         width: 90%;
         min-height: 200px;
       }

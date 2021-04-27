@@ -43,6 +43,7 @@ const ImageRenderer = props => {
             quality={props.quality || 80}
             loading={props.loading || 'lazy'}
 
+
         />
     } else return (
         <img className={props.classNameValue}

@@ -1,46 +1,48 @@
-import Link from 'next/link'
-import withRouter from 'next/dist/client/with-router'
-import { useRouter } from 'next/router'
-import styled from "styled-components";
 import {useContext} from "react";
+import Link from 'next/link'
+import {useRouter} from 'next/router'
 import {AppContext} from "../../../../context/AppContext";
-let StyledDiv = styled.div`
-  display:flex;
-  flex-wrap: wrap;
 
-`
-let StyledA = styled.a`
-    background-color: #33373c;
-    color: white;
-    padding: 5px 10px;
-    margin: 5px;
-    border-radius: 5px;
-`
-
-
-
-const AlphabeticalNumericalRangeLinksWidget = props => {
+const AlphabeticalNumericalRangeLinksWidget = () => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-    // const [state, setState] = useState({
-    //     range: [...'abcdefghijklmnopqrstuvwxyz0123456789']
-    // });
 
     const renderRange = [...'abcdefghijklmnopqrstuvwxyz0123456789'].map(i => {
         const path = {
-            pathname: props.router ? props.router.pathname : '',
-            query: props.router ? {...props.router.query, startWith: i} : ''
+            pathname: router.pathname || '',
+            query: {...(router?.query||{}), startWith: i} || {}
         }
         return (
-            <Link key={i} href={path} as={router.asPath} scroll={false}><StyledA onClick={contextData.functions.loadingHandler}>{i}</StyledA></Link>
+            <Link key={i} href={path} as={router.asPath} scroll={false}>
+                <a className='alphabetical-range-widget-item' onClick={contextData.functions.loadingHandler}>
+                    <style jsx>{`
+                           .alphabetical-range-widget-item{
+                                background-color: var(--navigation-background-color);
+                                color: var(--navigation-text-color);
+                                padding: 5px 10px;
+                                margin: 5px;
+                                border-radius: 5px;
+                           }
+                    `}</style>
+                    {i}
+                </a>
+            </Link>
         )
     })
 
     return (
-        <StyledDiv className='alphabetical-range'>
+        <div className='alphabetical-range-widget'>
+            <style jsx>
+                {`
+                    .alphabetical-range-widget{
+                            display:flex;
+                            flex-wrap: wrap;
+                    }
+                `}
+            </style>
 
             {renderRange}
-        </StyledDiv>
+        </div>
     );
 };
-export default withRouter(AlphabeticalNumericalRangeLinksWidget);
+export default AlphabeticalNumericalRangeLinksWidget;

@@ -4,13 +4,13 @@ import {initGA, logPageView} from '../../_variables/_variables'
 import {createGlobalStyle} from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
-import _ from 'lodash'
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import TopBarWidgetArea from "../widgetsArea/TopBarWidgetArea/TopBarWidgetArea";
 import HeaderWidgetArea from "../widgetsArea/HeaderWidgetArea/HeaderWidgetArea";
 import NavigationWidgetArea from "../widgetsArea/NavigationWidgetArea/NavigationWidgetArea";
 import SideBarWidgetArea from "../widgetsArea/SideBarWidgetArea/SideBarWidgetArea";
 import FooterWidgetArea from "../widgetsArea/FooterWidgetArea/FooterWidgetArea";
+import GlobalStyles from "../global/GlobalStyles";
 
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
@@ -126,6 +126,7 @@ const AppLayout = props => {
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
             <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/>
+            <GlobalStyles colors={props.design?.data?.customColors|| contextData?.siteDesign?.customColors || ''}/>
             <SiteSettingSetter identity={props.identity || contextData?.siteIdentity} design={props.design || contextData?.siteDesign} eCommerce={props.eCommerce}/>
             {(!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar).length > 0 ?
                 <TopBarWidgetArea

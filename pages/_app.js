@@ -13,6 +13,7 @@ import '../components/includes/CardElement/CardElement.scss';
 import '../components/layouts/AppLayout.scss';
 import '../components/layouts/AdminLayout.scss';
 
+
 // export function reportWebVitals(metric) {
 //     console.log(metric)
 // }
@@ -26,7 +27,7 @@ const MyApp = ({Component, pageProps}) => {
     }, [pageProps]);
 
     useEffect(() => {
-        if("serviceWorker" in navigator) {
+        if ("serviceWorker" in navigator) {
             window.addEventListener("load", function () {
                 navigator.serviceWorker.register("/sw.js").then(
                     // function (registration) {
@@ -36,7 +37,8 @@ const MyApp = ({Component, pageProps}) => {
                     //     console.log("Service Worker registration failed: ", err);
                     // }
                 );
-            })}
+            })
+        }
     }, []);
 
     if (!router.pathname.includes('/admin')) {
@@ -54,6 +56,7 @@ const MyApp = ({Component, pageProps}) => {
                 >
                     <Component {...pageProps} />
                 </AppLayout>
+
             </AppProvider>
         )
     } else return (
@@ -61,8 +64,16 @@ const MyApp = ({Component, pageProps}) => {
             <AdminLayout>
                 <Component {...pageProps} />
             </AdminLayout>
+            <style global jsx>{`
+                    :root{
+                      --admin-color-8:#282828;
+                      --admin-color-0:#fff;
+                      --admin-light-blue-color:#0085ba;
+                    }
+                 `}</style>
         </AppProvider>
     )
 };
 
 export default MyApp;
+

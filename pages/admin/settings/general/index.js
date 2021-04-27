@@ -4,7 +4,79 @@ import {updateSetting, getSetting} from "../../../../_variables/ajaxVariables";
 import FA from "react-fontawesome";
 import {AppContext} from '../../../../context/AppContext'
 import {getAbsolutePath, languagesOptions} from '../../../../_variables/_variables'
+import styled from "styled-components";
+let StyledForm = styled.form`
+  background-color: white;
+  padding: 20px;
+    button {
+      background-color: #f1f1f1;
+      color: black;
+      outline: none;
+      border: .4px #9fa3a8 solid;
+      padding: 8px 10px;
+      border-radius: 5px;
+      &:active{
+        background-color: white;
+        border:none;
+      }
+    margin: 20px;
+  }
+    .keywords {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    align-items: flex-start;
+  }
+  .site-settings-form-section-parent{
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+      grid-gap: 10px;
+    .site-settings-form-section {
+      background-color: #33373c;
+      border-radius: 10px;
+      color: white;
+      padding: 10px;
+      input {
+        background-color: white;
+        margin: 10px;
+        border: 1px solid #33373c;
+      }
 
+      textarea {
+        background-color: white;
+        margin: 10px;
+        width: 90%;
+        border: 1px solid #33373c;
+      }
+
+      .items {
+        display: flex;
+        flex-wrap: wrap;
+
+        .item {
+          display: flex;
+          align-items: center;
+          margin: 10px;
+
+          button {
+            margin: 5px;
+          }
+        }
+      }
+    }
+
+    .siteMode{
+      background-color: red;
+    }
+    .language{
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+
+  }
+
+`
 const settings = props => {
     const contextData = useContext(AppContext);
     const keywordsInput = useRef(null)
@@ -106,7 +178,7 @@ const settings = props => {
 
     return (
 
-            <form id='site-settings-form' onSubmit={e => onSubmitHandler(e)}>
+            <StyledForm class='site-settings-form' onSubmit={e => onSubmitHandler(e)}>
                 <div className="forms">
                     <h2>site identity:</h2>
                     <h3>Site Info:</h3>
@@ -263,8 +335,8 @@ const settings = props => {
 
                 </div>
 
-                <button className='submitBtn' type='submit'>save settings</button>
-            </form>
+                <button className='submitBtn action-wide-button' type='submit'>save settings</button>
+            </StyledForm>
 
     );
 };

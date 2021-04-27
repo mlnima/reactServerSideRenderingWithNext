@@ -138,7 +138,7 @@ const SideBar = props => {
                 {name: 'postElement', url: '/admin/design/postElement'},
                 {name: 'footer', url: '/admin/design/footer'},
                 {name: 'customStyles', url: '/admin/design/customStyles'},
-
+                {name: 'customColors', url: '/admin/design/customColors'},
             ]
         },
         Tools: {

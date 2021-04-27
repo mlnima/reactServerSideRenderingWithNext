@@ -15,7 +15,26 @@ import {useRouter} from "next/router";
 import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
 import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
 import {languagesOptions} from "../../../_variables/_variables";
-
+import styled from "styled-components";
+let StyledDiv = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+  .content{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 1fr 200px;
+    grid-gap: 20px;
+    .content{
+      .post-admin-widget-editor{
+      }
+    }
+}
+`
 const Index = props => {
     const contextData = useContext(AppContext);
     const router = useRouter();
@@ -221,7 +240,7 @@ const Index = props => {
         <>
 
                 <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
-                <div className='admin-post'>
+                <StyledDiv className='admin-post'>
 
                     <div className="content">
 
@@ -279,7 +298,7 @@ const Index = props => {
 
                     </div>
 
-                </div>
+                </StyledDiv>
         </>
     );
 };

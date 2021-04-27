@@ -1,5 +1,6 @@
-import  {useRef} from 'react';
+import {useRef} from 'react';
 import styled from "styled-components";
+
 let StyledDiv = styled.div`
   width: 100%;
   background-color: white;
@@ -8,35 +9,34 @@ let StyledDiv = styled.div`
     justify-content: space-between;
     align-items: center;
     .saveDraftBtn, .previewBtn {
-        background-color: $AdminBackground50;
-    color: black;
-    outline: none;
-    border: .4px $AdminColor20 solid;
-    padding: 8px 10px;
-    border-radius: 5px;
-    &:active{
-      background-color: white;
-      border:none;
-    }
-    border-radius: 5px;
-    &:active{
-       background-color: white;
-       color: #24282d;
-    }
+        background-color: #f1f1f1;
+        color: black;
+        outline: none;
+        border: .4px #9fa3a8 solid;
+        padding: 8px 10px;
+        border-radius: 5px;
+        &:active{
+          background-color: white;
+          border:none;
+        }
+ 
+        &:active{
+           background-color: white;
+           color: #24282d;
+        }
     }
     select{
        border: none;
-       background-color: $AdminBackground50;
+       background-color: #f1f1f1;
        padding: 4px;
        border-radius: 5px;
        margin: 10px 0;
     }
     .SaveBtn {
-        background-color: $lightBlue;
-  color: white;
-  outline: none;
-  border: none;
-  padding: 8px 10px;
+      background-color: #0085ba;
+      color: white;
+      outline: none;
+      border: none;
       padding: 5px 15px;
       border-radius: 5px;
       box-shadow: 0 1px 0 #006799;
@@ -51,7 +51,7 @@ const ActionOnPost = props => {
 
     const saveBtn = useRef(null)
     const onViewHandler = () => {
-        window.open('/post/' +props.postData.title +'?id='+ props.postData._id, '_blank')
+        window.open('/post/' + props.postData.title + '?id=' + props.postData._id, '_blank')
     }
 
     return (

@@ -1,0 +1,108 @@
+const GlobalStyles = ({colors}) => {
+
+    return (
+        <div>
+                <style jsx global>{`
+                    :root{
+                     ${colors}
+                    }
+                    body{
+                     background-color: var(--background-color);
+                     margin: 0;
+                     font-family: SourceSansPro, Arial, sans-serif;
+                     -webkit-font-smoothing: antialiased;
+                     -moz-osx-font-smoothing: grayscale;
+                    } 
+                    
+                    .topbar{
+                      display: flex;
+                      justify-content: space-evenly;
+                      flex-wrap: wrap;
+                      align-items: center;
+                      grid-area: topbar;
+                      min-height: 48px;
+                      background-color: var(--topbar-background-color);
+                     }
+                     
+                     .header{
+                       display: flex;
+                      justify-content: space-evenly;
+                      flex-wrap: wrap;
+                      align-items: center;
+                      grid-area: header;
+                      background-color: var(--header-background-color);
+                     }
+                     .navigation {
+                      display: flex;
+                      justify-content: space-evenly;
+                      flex-wrap: wrap;
+                      align-items: center;
+                      grid-area: navigation;
+                      min-height: 48px;
+                      background-color: var(--navigation-background-color);
+                     }
+                     .main{
+                        grid-area: main;
+                        min-height: 100vh;
+                     }
+                     .footer{
+                      display: flex;
+                      justify-content: space-evenly;
+                      background-color: var(--footer-background-color);
+                      flex-wrap: wrap;
+                      align-items: center;
+                      grid-area: footer;
+                     }
+                      .post-element-info-logo{
+                          max-width: 25px;
+                          max-height: 25px;
+                          color:var(--post-element-text-color);
+                      }
+                       .value-next-icon{
+                        color:var(--post-element-text-color);
+                        margin: 0 5px;
+                      }
+                      
+                       .post-element-info-data{
+                           position: absolute;
+                           display: flex;
+                           align-items: center;
+                           padding: 1px 3px;
+                           color:var(--post-element-text-color);
+                      }
+                      
+                      
+                      //.leftSidebar {
+                      //display: grid;
+                      //grid-template-columns: 1fr;
+                      //grid-template-areas:
+                      //          'topbar'
+                      //          'header'
+                      //          'navigation'
+                      //          'main'
+                      //          'leftSidebar'
+                      //          'footer';
+                      //}
+                      
+                      
+                    @media only screen and (min-width:768px) {
+                        .topbar,.navigation{
+                            height: 48px;
+                        }
+                        //.leftSidebar {
+                        //grid-template-columns: 240px 1fr;
+                        //grid-template-areas:
+                        //      'topbar topbar'
+                        //      'header header' 
+                        //      'navigation navigation'
+                        //      'leftSidebar main'
+                        //      'footer footer'
+                        //}
+                    }
+                    `}
+                </style>
+        </div>
+    );
+};
+export default GlobalStyles;
+

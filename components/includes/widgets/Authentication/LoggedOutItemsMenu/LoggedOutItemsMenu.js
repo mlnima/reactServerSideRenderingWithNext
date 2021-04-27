@@ -18,12 +18,22 @@ const LoggedOutItemsMenu = props => {
             <div className='logged-out-items'>
                 <Link href='/auth/login' as='/login'>
                     <a className='logged-out-item' aria-label='logged-out-items'>
+                        <style jsx>{`
+                          .logged-out-item{
+                           color: var(--navigation-text-color);
+                          }
+                        `}</style>
                         <FontAwesomeIcon style={state.svgDefaultStyle} icon={faUser} className='svg-logo-small' />
                     </a>
                 </Link>
 
                 <Link href='/auth/register' as='/register'>
                     <a className='logged-out-item' aria-label='logged-out-items'>
+                        <style jsx>{`
+                          .logged-out-item{
+                           color: var(--navigation-text-color);
+                          }
+                        `}</style>
                         <FontAwesomeIcon style={state.svgDefaultStyle} icon={faPen} className='svg-logo-small'/>
                     </a>
                 </Link>

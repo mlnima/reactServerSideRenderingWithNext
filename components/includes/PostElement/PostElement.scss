@@ -79,71 +79,20 @@
       video {
         @include opacityAnimationStart;
       }
-      .bottom-right {
-        position: absolute;
-        right: 3px;
-        bottom: 3px;
-        margin: auto;
-        display: flex;
-        align-items: center;
-        padding: 1px 3px;
-        border-radius: 3px;
-        span {
-          margin: 0 5px;
-        }
-      }
-      .bottom-left {
-        position: absolute;
-        left: 3px;
-        bottom: 3px;
-        display: flex;
-        align-items: center;
-        padding: 1px 3px;
-        border-radius: 3px;
-        span {
-          margin: 0 5px;
-        }
-      }
-
-      .top-right {
-        position: absolute;
-        right: 3px;
-        top: 3px;
-        border-radius: 3px;
-        padding: 1px 3px;
-      }
-      .top-left {
-        position: absolute;
-        left: 3px;
-        top: 3px;
-        border-radius: 3px;
-        padding: 1px 3px;
-      }
-
     }
 
     h2 {
-      color: var(--post-element-text-color);
-      font-size: 1rem;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      word-wrap: break-word;
-      font-weight: initial;
-      white-space: nowrap;
-      width: 100%;
-      margin: auto;
+      //color: var(--post-element-text-color);
+      //font-size: 1rem;
+      //text-overflow: ellipsis;
+      //overflow: hidden;
+      //word-wrap: break-word;
+      //font-weight: initial;
+      //white-space: nowrap;
+      //width: 100%;
+      //margin: auto;
     }
 
-    .progressParent {
-      width: 100%;
-      margin: auto;
-      .progressChild {
-        p {
-          position: relative;
-          color: white;
-        }
-      }
-    }
   }
 }
 
@@ -179,7 +128,7 @@
         }
       }
 
-      h3 {
+      h2 {
         width: 255px;
       }
     }
@@ -194,14 +143,11 @@
           width: 209.8px;
         }
       }
-
-      h3 {
+      h2 {
         width: 209.8px;
       }
     }
   }
-
-
 
   .post-element-div {
     .post-element {
@@ -215,13 +161,8 @@
           object-fit: contain;
         }
       }
-      .progressParent {
-        width: 100%;
-
-      }
     }
   }
-
 }
 
 

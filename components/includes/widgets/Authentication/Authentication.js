@@ -5,7 +5,6 @@ import LoggedInItemsForMenu from "./LoggedInItemsForMenu/LoggedInItemsForMenu";
 import styled from "styled-components";
 
 let StyledDiv = styled.div`
-  width: 100px;
   .logged-in-items , .logged-out-items{
     display: flex;
     align-items: center;
@@ -13,7 +12,7 @@ let StyledDiv = styled.div`
      margin: 0;
      width: 100%;
      svg{
-       color: black;
+     
        max-width: 15px;
        max-height: 15px;
      }
@@ -30,10 +29,20 @@ const Authentication = () => {
     }, [contextData.userData.username]);
 
     return (
-        <StyledDiv className='auth-buttons'>
+        <div className='auth-buttons'>
+            <style jsx>{`
+              .auth-buttons{
+                width: 100px;
+                 }
+               svg{
+                   color: var(--navigation-text-color);
+                   max-width: 15px;
+                   max-height: 15px;
+                  }
+           `}</style>
             {loggedIn ? <LoggedInItemsForMenu position='topBar'/> : <LoggedOutItemsMenu position='topBar'/>}
 
-        </StyledDiv>
+        </div>
     );
 };
 export default Authentication;

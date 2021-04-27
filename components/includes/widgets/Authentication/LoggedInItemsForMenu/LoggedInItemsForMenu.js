@@ -19,6 +19,11 @@ const LoggedInItemsForMenu = props => {
             return (
                 <Link href={`/profile?username=${contextData.userData.username}`}>
                     <a className='logged-in-item' >
+                        <style jsx>{`
+                          .logged-in-item{
+                           color: var(--navigation-text-color);
+                          }
+                        `}</style>
                         <FontAwesomeIcon style={state.svgDefaultStyle} icon={faUser} className='svg-logo-small'/>
                     </a>
                 </Link>
@@ -29,10 +34,29 @@ const LoggedInItemsForMenu = props => {
     if (contextData.userData.username ) {
         return (
             <div className='logged-in-items'>
+                <style jsx>{`
+                             .logged-in-item{
+                               color: var(--navigation-text-color);
+
+                             }
+                             .svg-logo-small{
+                               color: var(--navigation-text-color);
+                               max-width: 15px;
+                               max-height: 15px;
+                             }
+                  `}</style>
                 <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
                     <FontAwesomeIcon style={state.svgDefaultStyle} icon={faPowerOff} className=' svg-logo-small' />
                 </p>
-                <MyProfile/>
+                {contextData.siteIdentity.membership?
+                    <Link href={`/profile?username=${contextData.userData.username}`}>
+                        <a className='logged-in-item' >
+                            <FontAwesomeIcon style={state.svgDefaultStyle} icon={faUser} className='svg-logo-small'/>
+                        </a>
+                    </Link>
+                :null
+                }
+
             </div>
         )
     } else return null
