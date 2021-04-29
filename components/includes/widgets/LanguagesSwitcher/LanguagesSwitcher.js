@@ -2,17 +2,7 @@ import React, {useContext} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
 import {languagesOptions} from "../../../../_variables/_variables";
-import styled from "styled-components";
-let StyledDiv = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-wrap: wrap;
 
-  p{
-    margin: 0 20px 5px 0;
-  }
-`
 const LanguagesSwitcher = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -30,17 +20,34 @@ const LanguagesSwitcher = props => {
     }
 
     return (
-        <StyledDiv className='language-switcher-widget'>
-            {(props.translations?.[contextData.state.activeLanguage]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown)?
-             <p>{props.translations?.[contextData.state.activeLanguage]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown}</p>:
+        <div className='language-switcher-widget'>
+            <style jsx>{`
+.language-switcher-widget{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+.language-switcher-widget-text{
+    margin: 0 20px 5px 0;
+    color: var(--navigation-text-color);
+}
+select{
+  border: none;
+  background-color: var(--navigation-background-color);
+  color: var(--navigation-text-color);
+}
+`}</style>
+            {(props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown)?
+             <p className='language-switcher-widget-text'>{props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown}</p>:
                 null
             }
-            <select value={ contextData.state.activeLanguage } aria-label='Center Align'
+            <select value={ contextData.state.activeLanguage || router.locale } aria-label='Center Align'
                 onChange={e => onChangeHandler(e)} >
                 <option key='default' value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'default'}</option>
                 {languagesOptions}
             </select>
-        </StyledDiv>
+        </div>
     );
 };
 export default LanguagesSwitcher;

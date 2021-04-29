@@ -33,6 +33,7 @@ const Authentication = () => {
             <style jsx>{`
               .auth-buttons{
                 width: 100px;
+                
                  }
                svg{
                    color: var(--navigation-text-color);

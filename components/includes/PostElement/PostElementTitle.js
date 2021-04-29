@@ -4,7 +4,7 @@ const PostElementTitle = ({title}) => {
         <h2 className='post-element-title'>
             <style jsx>{`
              .post-element-title{
-             color:var(--post-element-text-color);
+              color:var(--post-element-text-color);
               font-size: 1rem;
               text-overflow: ellipsis;
               overflow: hidden;
@@ -13,6 +13,7 @@ const PostElementTitle = ({title}) => {
               white-space: nowrap;
               width: 100%;
               margin: auto;
+              max-width: 320px;
              }
            `}</style>
             {title}

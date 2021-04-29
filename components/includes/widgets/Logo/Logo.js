@@ -1,47 +1,38 @@
-import React, {useContext, useMemo, useEffect, useState} from 'react';
+import {useContext} from 'react';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import ImageRenderer from "../../ImageRenderer/ImageRenderer";
-import styled from "styled-components";
-let StyledA = styled.a`
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  cursor: pointer;
-  .logo-text {
-    font-size: xx-large;
-  }
-  .headLine {
-
-  }
-`
+import {useRouter} from "next/router";
 
 const Logo = props => {
+    const router = useRouter()
     const contextData = useContext(AppContext);
-    const [logoText, setLogoText] = useState('')
-    const [headLineData, setHeadLineData] = useState('')
-    const [logoImageUrl, setLogoImageUrl] = useState('')
-
-    useEffect(() => {
-        if (!props.referer) {
-            setLogoText(props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].LogoText || props.LogoText : props.LogoText : props.LogoText)
-            setHeadLineData(props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine)
-            setLogoImageUrl(props.LogoUrl)
-        }
-    }, [props]);
-
-
-    useEffect(() => {
-        if (props.referer) {
-            setLogoText(props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].LogoText || props.LogoText : props.LogoText : props.LogoText)
-            setHeadLineData(props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].headLine || props.headLine : props.headLine : props.headLine)
-        }
-    }, [contextData.state.activeLanguage]);
+    const logoText = props.translations ? props.translations[contextData.state.activeLanguage || router.locale] ? props.translations[contextData.state.activeLanguage || router.locale].LogoText || props.LogoText : props.LogoText : props.LogoText;
+    const headLineData = props.translations ? props.translations[contextData.state.activeLanguage || router.locale] ? props.translations[contextData.state.activeLanguage || router.locale].headLine || props.headLine : props.headLine : props.headLine;
+    const logoImageUrl = props.LogoUrl;
 
     return (
         <Link href='/'>
-            <StyledA className='logo' onClick={contextData.functions.loadingHandler}>
+            <a className='logo' onClick={contextData.functions.loadingHandler}>
+                <style jsx>{`
+        .logo{
+            text-decoration: none;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: flex-start;
+            cursor: pointer;
+           
+        }
+        .logo-text {
+            font-size: xx-large;
+        }
+        .logo-text,.logo-headline{
+           color: var(--main-text-color);
+        }
+
+`}</style>
+
                 {logoImageUrl ?
                     <ImageRenderer imageUrl={logoImageUrl}
                                    altValue='logo'
@@ -49,10 +40,14 @@ const Logo = props => {
                                    imageHeight={100}
                                    quality={100}
                                    loading='lazy'
-                /> : null}
-                {logoText ? <span className='logo-text'>{logoText}</span> : null}
-                {headLineData ? <p>{headLineData}</p> : null}
-            </StyledA>
+                    /> : null}
+                {logoText ?
+                    <span className='logo-text'>
+                        {logoText}
+                    </span>
+                    : null}
+                {headLineData ? <p className='logo-headline'>{headLineData}</p> : null}
+            </a>
         </Link>
     );
 };

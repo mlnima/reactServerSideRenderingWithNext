@@ -1,72 +1,15 @@
-import React, {useEffect, useState} from 'react';
+import  {useEffect, useState} from 'react';
 import withRouter from 'next/dist/client/with-router'
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
-let StyledFrom = styled.form`
-  display: flex;
-  height: 24px;
-  width: 100%;
-  font-size: 1em;
-  .search-input {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    margin-right: 0;
-    //border-radius: 0.6em 0 0 0.6em;
-    border-radius: 3px 0  0  3px;
-    &:focus{
-      outline: none;
-    }
-  }
 
-  .search-bar-btn {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: transparent;
-    outline: none;
-    padding: 0.2em;
-    margin-left: 0;
-    border-radius: 0 3px 3px 0;
-    border: none;
-    color: var(--main-text-color);
-    &:focus{
-      outline: none;
-    }
-    &:active{
-      border: none;
-    }
-  }
-  @media only screen and (min-width: 768px) {
-    .search-input{
-      max-width: 500px;
-    }
-    .search-bar-btn{
-      max-width: 70px;
-    }
-}
-`
-let StyledButton = styled.button`
-  border:none;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  //padding: 2px 5px;
-  background-color: transparent;
-  outline: none;
-`
 const SearchInputComponent = props => {
     const router = useRouter()
     const [state, setState] = useState({
         pathURL: '',
         keyword: '',
         queries: {},
-        style: {
-            backgroundColor: '#222222'
-        },
         isOpen: false
     });
     const openStatus = !props.mobileMode
@@ -150,16 +93,86 @@ const SearchInputComponent = props => {
 
     if (isOpen) {
         return (
-            <StyledFrom className='search-bar' onSubmit={e => onSearchHandler(e)}>
+            <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
+                <style jsx>{`
+                  .search-bar{
+                      display: flex;
+                      height: 24px;
+                      width: 100%;
+                      font-size: 1em;
+                  }
+                    .search-input {
+                        display: flex;
+                        justify-content: center;
+                        width: 80%;
+                        margin-right: 0;
+                        //border-radius: 0.6em 0 0 0.6em;
+                        border-radius: 3px 0  0  3px;
+     
+                      }
+                      .search-input:focus{
+                          outline: none;
+                       }
+                       .search-bar-btn{
+                            width: 20%;
+                            display: flex;
+                            justify-content: center;
+                            align-items: center;
+                            background-color: transparent;
+                            outline: none;
+                            padding: 0.2em;
+                            margin-left: 0;
+                            border-radius: 0 3px 3px 0;
+                            border: none;
+                            color: var(--main-text-color);
+                       }
+                       .search-bar-btn:focus{
+                          outline: none;
+                        }
+                       .search-bar-btn:active{
+                            border: none;
+                        }
+                                                  .search-bar-btn-open{
+                              border:none;
+                              display: flex;
+                              justify-content: center;
+                              align-items: center;
+                              background-color: transparent;
+                              outline: none;
+                          }
+                          .search-bar-btn-open-svg{
+                              width: 15px;
+                              height: 15px;
+                          }
+               `}</style>
                 {props.mobileMode && isOpen ?
-                    <StyledButton className='search-bar-btn-close' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}><FontAwesomeIcon icon={faTimes} className='svg-logo-small'/></StyledButton> : null}
+                    <button className='search-bar-btn-close' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}>
+
+                        <FontAwesomeIcon icon={faTimes} className='svg-logo-small'/>
+                    </button> : null}
                 <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
                 <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small'/></button>
-            </StyledFrom>
+            </form>
         );
     } else {
         return (
-            <StyledButton className='search-bar-btn-open' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}><FontAwesomeIcon icon={faSearch} className='svg-logo-small'/></StyledButton>
+            <button className='search-bar-btn-open' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}>
+                <style jsx>{`
+                  .search-bar-btn-open{
+                        border:none;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      background-color: transparent;
+                      outline: none;
+                  }
+                  .search-bar-btn-open-svg{
+                      width: 20px;
+                      height: 20px;
+                  }
+               `}</style>
+                <FontAwesomeIcon icon={faSearch} className='search-bar-btn-open-svg'/>
+            </button>
         )
     }
 

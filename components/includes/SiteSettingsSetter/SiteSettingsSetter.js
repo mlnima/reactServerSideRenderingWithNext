@@ -4,7 +4,6 @@ import Head from 'next/dist/next-server/lib/head'
 import {useRouter} from "next/router";
 import parse from 'html-react-parser';
 
-
 const SiteSettingSetter = props => {
 
     const contextData = useContext(AppContext);
