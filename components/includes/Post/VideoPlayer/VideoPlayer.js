@@ -1,21 +1,25 @@
-import styled from "styled-components";
-let StyledDiv = styled.div`
+const VideoPlayer = ({title,description,duration,mainThumbnail,videoEmbedCode,lastModify,videoUrl,_id,videoScriptCode}) => {
+        return (
+            <div className='video-player'>
+                    <style jsx>{`
+.video-player{
   margin:  0;
   position: relative;
   top: 0;
   right: 0;
   left: 0;
   width: 100%;
+}
 
-  //height: 100%;
-  .responsive-player {
+.responsive-player{
     overflow: hidden;
     position: relative;
     padding-bottom: 56.30%;
     margin-bottom: 20px;
     height: 0;
+}
 
-    iframe {
+iframe{
       position: absolute;
       top: 0;
       left: 0;
@@ -23,9 +27,8 @@ let StyledDiv = styled.div`
       width: 100%;
       margin-bottom: 50px;
       padding: 0 !important;
-     // border-radius: 10px;
-    }
-    .video-player-video-type{
+}
+.video-player-video-type{
       position: absolute;
       top: 0;
       left: 0;
@@ -35,14 +38,9 @@ let StyledDiv = styled.div`
       //object-fit: cover;
       outline: none;
       border-radius: 10px;
-    }
-  }
-`
-//import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
+}
 
-const VideoPlayer = ({title,description,duration,mainThumbnail,videoEmbedCode,lastModify,videoUrl,_id,videoScriptCode}) => {
-        return (
-            <StyledDiv className='video-player'>
+`}</style>
                 <meta itemProp="name" content={title}/>
                 <meta itemProp="description" content={description}/>
                 <meta itemProp="duration" content={duration}/>
@@ -62,7 +60,7 @@ const VideoPlayer = ({title,description,duration,mainThumbnail,videoEmbedCode,la
                     }
                 </div>
 
-            </StyledDiv>
+            </div>
 
         );
 };

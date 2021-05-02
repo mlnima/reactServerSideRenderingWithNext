@@ -1,4 +1,4 @@
-import  {useEffect, useState} from 'react';
+import {useEffect, useState} from 'react';
 import withRouter from 'next/dist/client/with-router'
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -75,7 +75,7 @@ const SearchInputComponent = props => {
             query: {
                 ...state.queries,
                 keyword: state.keyword,
-                page:1
+                page: 1
             }
         }, {
             pathname: asPath,
@@ -91,90 +91,89 @@ const SearchInputComponent = props => {
             setIsOpen(true)
     }
 
-    if (isOpen) {
-        return (
-            <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
-                <style jsx>{`
-                  .search-bar{
-                      display: flex;
-                      height: 24px;
-                      width: 100%;
-                      font-size: 1em;
-                  }
-                    .search-input {
-                        display: flex;
-                        justify-content: center;
-                        width: 80%;
-                        margin-right: 0;
-                        //border-radius: 0.6em 0 0 0.6em;
-                        border-radius: 3px 0  0  3px;
-     
-                      }
-                      .search-input:focus{
-                          outline: none;
-                       }
-                       .search-bar-btn{
-                            width: 20%;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: transparent;
-                            outline: none;
-                            padding: 0.2em;
-                            margin-left: 0;
-                            border-radius: 0 3px 3px 0;
-                            border: none;
-                            color: var(--main-text-color);
-                       }
-                       .search-bar-btn:focus{
-                          outline: none;
-                        }
-                       .search-bar-btn:active{
-                            border: none;
-                        }
-                                                  .search-bar-btn-open{
-                              border:none;
-                              display: flex;
-                              justify-content: center;
-                              align-items: center;
-                              background-color: transparent;
-                              outline: none;
-                          }
-                          .search-bar-btn-open-svg{
-                              width: 15px;
-                              height: 15px;
-                          }
-               `}</style>
-                {props.mobileMode && isOpen ?
-                    <button className='search-bar-btn-close' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}>
 
-                        <FontAwesomeIcon icon={faTimes} className='svg-logo-small'/>
-                    </button> : null}
-                <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
-                <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small'/></button>
-            </form>
-        );
-    } else {
-        return (
-            <button className='search-bar-btn-open' aria-label='Center Align' onClick={(e)=>onOpenCloseHandler(e)}>
-                <style jsx>{`
-                  .search-bar-btn-open{
-                        border:none;
+    return (
+        <div>
+            <style jsx>{`
+                .search-bar{
+                    display: flex;
+                    height: 24px;
+                    width: 100%;
+                    font-size: 1em;
+                }
+                .search-input {
+                    display: flex;
+                    justify-content: center;
+                    width: 80%;
+                    margin-right: 0;
+                    border: none;
+                    border-radius: 3px 0  0  3px;
+                }
+                .search-input:focus{
+                    outline: none;
+                }
+                .search-bar-btn{
+                    width: 20%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: transparent;
+                    outline: none;
+                    padding: 0.2em;
+                    margin-left: 0;
+                    border-radius: 0 3px 3px 0;
+                    border: none;
+                    color: var(--main-text-color);
+                }
+                .search-bar-btn:focus{
+                    outline: none;
+                }
+                .search-bar-btn:active{
+                    border: none;
+                }
+                .search-bar-btn-open{
+                    border:none;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    background-color: transparent;
+                    outline: none;
+                }
+                .search-bar-btn-open-svg{
+                    width: 15px;
+                    height: 15px;
+                }
+                .search-bar-btn-open{
+                      border:none;
                       display: flex;
                       justify-content: center;
                       align-items: center;
                       background-color: transparent;
                       outline: none;
-                  }
-                  .search-bar-btn-open-svg{
+                }
+                .search-bar-btn-open-svg{
                       width: 20px;
                       height: 20px;
-                  }
-               `}</style>
-                <FontAwesomeIcon icon={faSearch} className='search-bar-btn-open-svg'/>
-            </button>
-        )
-    }
+                }
+            `}</style>
+            {isOpen || !props.mobileMode ?
+                <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
+                    {props.mobileMode ?
+                        <button className='search-bar-btn-close' aria-label='Center Align' onClick={(e) => onOpenCloseHandler(e)}>
+
+                            <FontAwesomeIcon icon={faTimes} className='search-bar-btn-open-svg'/>
+                        </button> : null}
+                    <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
+                    <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small'/></button>
+                </form> :
+                <button className='search-bar-btn-open' aria-label='Center Align' onClick={(e) => onOpenCloseHandler(e)}>
+
+                    <FontAwesomeIcon icon={faSearch} className='search-bar-btn-open-svg'/>
+                </button>
+            }
+
+        </div>
+    )
 
 
 };

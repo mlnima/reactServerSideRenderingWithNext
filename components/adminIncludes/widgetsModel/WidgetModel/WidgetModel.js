@@ -473,6 +473,18 @@ const WidgetModel = props => {
                                     <option value='list'>List</option>
                                 </select>
                             </div>
+                            <div className='selectInputFieldForWidget widgetSection'>
+                                <p>Post Element Size:</p>
+                                <select name='postElementSize' value={widgetData.postElementSize} onChange={e => onChangeHandler(e)}>
+                                    <option>select</option>
+                                    <option value='list'>List</option>
+                                    <option value='smaller'>smaller</option>
+                                    <option value='small'>small</option>
+                                    <option value='medium'>medium</option>
+                                    <option value='large'>large</option>
+                                    <option value='larger'>larger</option>
+                                </select>
+                            </div>
                         </>
 
                         : null

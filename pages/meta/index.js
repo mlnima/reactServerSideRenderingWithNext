@@ -1,20 +1,11 @@
-import React, {useContext} from 'react';
-import {getFirstLoadData, getMultipleWidgetWithData} from '../../_variables/ajaxVariables'
+import {useContext} from 'react';
+import {getFirstLoadData} from '../../_variables/ajaxVariables'
 import {getMeta} from '../../_variables/ajaxPostsVariables'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {useRouter} from "next/router";
 import {AppContext} from "../../context/AppContext";
-import styled from "styled-components";
-let StyledDiv = styled.div`
-.metas{
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-}
 
-`
 const meta = ({metaSource,identity,dataForGettingMeta}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -25,10 +16,20 @@ const meta = ({metaSource,identity,dataForGettingMeta}) => {
     })
 
     const isWithSidebar = identity?.data?.metaPageSidebar || contextData?.siteIdentity?.metaPageSidebar
-
+//style={{gridArea: isWithSidebar ? 'main' : ''}}
     return (
-
-        <StyledDiv style={{gridArea: isWithSidebar ? 'main' : ''}} className={isWithSidebar ? 'content main ' : 'content main '}>
+        <div  className={isWithSidebar ? 'content main ' : 'content main '}>
+            <style jsx>{`
+                .content{
+                  grid-area:main;
+                }
+                .metas{
+                    display: flex;
+                    flex-wrap: wrap;
+                    align-items: center;
+                    justify-content: flex-start;
+                }
+            `}</style>
             <PaginationComponent
                 isActive={true}
                 currentPage={dataForGettingMeta?.page}
@@ -39,6 +40,7 @@ const meta = ({metaSource,identity,dataForGettingMeta}) => {
                 pathnameData={router.pathname}
             />
             <div className={router.query.contentType + ' metas'}>
+
                 {renderMetas}
             </div>
             <PaginationComponent
@@ -50,7 +52,7 @@ const meta = ({metaSource,identity,dataForGettingMeta}) => {
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-        </StyledDiv>
+        </div>
 
     );
 };

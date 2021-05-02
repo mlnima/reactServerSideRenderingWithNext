@@ -53,6 +53,7 @@ const Post = ({responseCode,design,post,identity,comments,widgets}) => {
         <>
             <PostMetaDataToSiteHead {...post}/>
             <StyledMain stylesData={design?.data?.postPageStyle || contextData.siteDesign.postPageStyle || ''} className='main post-page'>
+
                 {
                     post.postType === 'video' ?
                         <VideoPlayer
@@ -101,7 +102,6 @@ export const getServerSideProps = async (context) => {
     let responseCode = 200
     const postData = await getPost({_id: context.query.id}, firstLoadData.domainName, true)
     const post = postData.data.post;
-    // const widgetsData = (!firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) || (firstLoadData.isSameOrigin && !firstLoadData.isNavigatedFromPostPage) ? await getMultipleWidgetWithData({widgets: ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost',]}, firstLoadData.domainName, true, 'postPage') : []
     if (!post) {
         return {
             notFound: true

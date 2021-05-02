@@ -10,7 +10,7 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
     const [state, setState] = useState({
-        imageWidth: 320,
+        imageWidth: 255,
         svgDefaultStyle: {
             maxWidth: '25px',
             maxHeight: '25px'
@@ -34,6 +34,7 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
     }
 
 
+
     return (
         <div className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')}>
             <style jsx>{`
@@ -53,9 +54,7 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
                         viewType={viewType}
                         postElementSize={postElementSize}
                         postElementStyle={postElementStyle}
-                        //state={post}
                         title={title}
-                        //svgDefaultStyle={state.svgDefaultStyle}
                         imageWidth={state.imageWidth}
                         postType={post.postType}
                         _id={post._id}

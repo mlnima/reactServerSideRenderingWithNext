@@ -5,9 +5,9 @@ background-color: var(--sidebar-background-color);
 ${props => props.stylesData ?? ''}
 `
 
-const SideBarWidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering}) => {
+const SideBarWidgetArea = ({postElementStyle,postElementSize,stylesData,className,position,isMobile,currentPageSidebar,referer,widgets,rendering,gridArea}) => {
     return (
-        <StyledSideBar stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+        <StyledSideBar stylesData={stylesData ?? ''} className={className + ' widget-area ' + position} style={{gridArea}}>
             <WidgetsRenderer
                 currentPageSidebar={currentPageSidebar}
                 isMobile={isMobile}

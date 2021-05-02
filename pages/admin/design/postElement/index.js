@@ -1,7 +1,4 @@
-import React, {useContext} from 'react';
-import AdminLayout from "../../../../components/layouts/AdminLayout";
-import ColorSection from "../../../../components/adminIncludes/design/ColorSection";
-import TextSection from "../../../../components/adminIncludes/design/TextSection";
+import {useContext} from 'react';
 import StyleSection from "../../../../components/adminIncludes/design/StyleSection/StyleSection";
 import {AppContext} from "../../../../context/AppContext";
 
@@ -20,6 +17,7 @@ const postElement = () => {
                 <p>Post Element Size:</p>
                 <select name='postElementSize' onChange={e => onChangeHandler(e)} value={contextData.siteDesign.postElementSize}>
                     <option>select</option>
+                    <option value='list'>List</option>
                     <option value='smaller'>smaller</option>
                     <option value='small'>small</option>
                     <option value='medium'>medium</option>

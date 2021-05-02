@@ -10,7 +10,7 @@ const ImageRenderer = props => {
     const noImageUrl = '/static/images/noImage/no-image-available.png';
 
     const onErrorHandler = e => {
-        console.log('error',e)
+        console.log('error', e)
         console.log(props.imageUrl)
         if (props.imageUrl) {
             setGotError(true)
@@ -18,7 +18,7 @@ const ImageRenderer = props => {
             let data = {
                 checkUrl: props.imageUrl,
                 contentId: props.contentId,
-                type:'image'
+                type: 'image'
             }
             setTimeout(() => {
                 checkRemovedContent(data)
@@ -27,36 +27,55 @@ const ImageRenderer = props => {
     }
 
     if (validImageForNextImage) {
-        return <Image
-            src={ !gotError?  props.imageUrl || noImageUrl : noImageUrl }
-            alt={props.altValue || props.classNameValue}
-            onError={e=> {
-                onErrorHandler(e)
-                setGotError(true)
-            }}
-            onMouseEnter={props.hoverHandler}
-            onTouchStart={props.hoverHandler}
-            className={props.classNameValue}
-            layout={props.layout || 'intrinsic'}
-            width={props.imageWidth || 300}
-            height={props.imageHeight || 300 / 1.777}
-            quality={props.quality || 80}
-            loading={props.loading || 'lazy'}
+        return (
+            <React.Fragment>
+                <style jsx>{`
+            .post-element-image{
+            width: 100%;
+            aspect-ratio:16/9;
+            }
+            `}</style>
 
-
-        />
+                <Image
+                    src={!gotError ? props.imageUrl || noImageUrl : noImageUrl}
+                    alt={props.altValue || props.classNameValue}
+                    onError={e => {
+                        onErrorHandler(e)
+                        setGotError(true)
+                    }}
+                    onMouseEnter={props.hoverHandler}
+                    onTouchStart={props.hoverHandler}
+                    className={props.classNameValue}
+                    layout={props.layout || 'intrinsic'}
+                    // width={props.imageWidth || 300}
+                    // height={props.imageHeight || 300 / 1.777}
+                    quality={props.quality || 80}
+                    loading={props.loading || 'lazy'}
+                />
+            </React.Fragment>
+        )
     } else return (
-        <img className={props.classNameValue}
-             alt={props.altValue || props.classNameValue}
-             width={props.imageWidth || 300}
-             height={props.imageHeight || 300 / 1.777}
-             onMouseEnter={props.hoverHandler}
-             onTouchStart={props.hoverHandler}
-             src={!gotError?  props.imageUrl || noImageUrl : noImageUrl  }
-             onError={e=> {
-                 onErrorHandler(e)
-                 setGotError(true)
-             }}/>
+        <React.Fragment>
+            <style jsx>{`
+            .post-element-image{
+         
+            width: 100%;
+            aspect-ratio:16/9;
+            }
+            `}</style>
+            <img className={props.classNameValue}
+                 alt={props.altValue || props.classNameValue}
+                // width={props.imageWidth || 300}
+                // height={props.imageHeight || 300 / 1.777}
+                 onMouseEnter={props.hoverHandler}
+                 onTouchStart={props.hoverHandler}
+                 src={!gotError ? props.imageUrl || noImageUrl : noImageUrl}
+                 onError={e => {
+                     onErrorHandler(e)
+                     setGotError(true)
+                 }}/>
+        </React.Fragment>
+
     );
 };
 export default ImageRenderer;

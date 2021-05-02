@@ -77,6 +77,8 @@ ${props => props.customStyles}
 `
 
 const Widget = props => {
+
+
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
     return (
         <StyledSection customStyles={props.data?.customStyles || ''}
@@ -91,7 +93,7 @@ const Widget = props => {
                 id={props._id}
                 widget={true}
                 viewType={props.viewType}
-                postElementSize={props.postElementSize}
+                postElementSize={props.data.postElementSize||   props.postElementSize}
                 postElementStyle={props.postElementStyle}
                 referer={props.referer}
             /> : null}

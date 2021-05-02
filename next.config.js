@@ -64,7 +64,7 @@ const nextImageConfig = {
 }
 
 module.exports = withPlugins([
-    withPWA(),
+    // withPWA(),
     additionalConfig,
     // reDirectRoutes,
     reWriteRoutes,

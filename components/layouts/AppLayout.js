@@ -171,6 +171,7 @@ const AppLayout = props => {
                 <SideBarWidgetArea
                     isMobile={props.isMobile}
                     key='leftSidebar'
+                    gridArea='leftSidebar'
                     widgets={!props.referer ? leftSidebarWidgetsData : leftSidebarWidgets}
                     className='left-sidebar'
                     position={leftSidebarPositionName}
@@ -185,6 +186,7 @@ const AppLayout = props => {
                 <SideBarWidgetArea
                     isMobile={props.isMobile}
                     key='rightSidebar'
+                    gridArea='rightSidebar'
                     widgets={!props.referer ? rightSidebarWidgetsData : rightSidebarWidgets}
                     className='right-sidebar'
                     position={rightSidebarPositionName}

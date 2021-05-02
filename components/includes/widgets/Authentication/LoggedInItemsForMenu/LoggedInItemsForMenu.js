@@ -24,7 +24,7 @@ const LoggedInItemsForMenu = props => {
                            color: var(--navigation-text-color);
                           }
                         `}</style>
-                        <FontAwesomeIcon style={state.svgDefaultStyle} icon={faUser} className='svg-logo-small'/>
+                        <FontAwesomeIcon  icon={faUser} className='svg-logo-small'/>
                     </a>
                 </Link>
             )
@@ -34,24 +34,29 @@ const LoggedInItemsForMenu = props => {
     if (contextData.userData.username ) {
         return (
             <div className='logged-in-items'>
-                <style jsx>{`
-                             .logged-in-item{
-                               color: var(--navigation-text-color);
-
-                             }
-                             .svg-logo-small{
-                               color: var(--navigation-text-color);
-                               max-width: 15px;
-                               max-height: 15px;
-                             }
-                  `}</style>
+            <style jsx>{`
+                .logged-in-item{
+                    color: var(--navigation-text-color);
+                    width: 100px;
+                    margin: 0;
+                    padding: 0;
+                    display: grid;
+                    place-items: center;
+                
+                }
+                .svg-logo-small{
+                    color: var(--navigation-text-color);
+                    max-width: 15px;
+                    max-height: 15px;
+                }
+            `}</style>
                 <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
-                    <FontAwesomeIcon style={state.svgDefaultStyle} icon={faPowerOff} className=' svg-logo-small' />
+                    <FontAwesomeIcon icon={faPowerOff} className=' svg-logo-small' />
                 </p>
                 {contextData.siteIdentity.membership?
                     <Link href={`/profile?username=${contextData.userData.username}`}>
                         <a className='logged-in-item' >
-                            <FontAwesomeIcon style={state.svgDefaultStyle} icon={faUser} className='svg-logo-small'/>
+                            <FontAwesomeIcon icon={faUser} className='svg-logo-small'/>
                         </a>
                     </Link>
                 :null

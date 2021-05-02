@@ -32,6 +32,8 @@ const Authentication = () => {
         <div className='auth-buttons'>
             <style jsx>{`
               .auth-buttons{
+                display: grid;
+                place-items: center;
                 width: 100px;
                 
                  }
