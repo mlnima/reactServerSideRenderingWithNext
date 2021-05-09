@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import {Document, Page, pdfjs} from "react-pdf";
+//import {Document, Page, pdfjs} from "react-pdf";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faArrowRight, faArrowUp} from "@fortawesome/free-solid-svg-icons";
 
@@ -15,9 +15,9 @@ const MediaDocumentWidget = props => {
             maxPage: numPages
         })
     }
-    useEffect(() => {
-             pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
-    }, [props]);
+    // useEffect(() => {
+    //          pdfjs.GlobalWorkerOptions.workerSrc = `//cdnjs.cloudflare.com/ajax/libs/pdf.js/${pdfjs.version}/pdf.worker.js`;
+    // }, [props]);
 
     const PagesController = () => {
 
@@ -46,11 +46,12 @@ const MediaDocumentWidget = props => {
     const documentWidth = window.innerWidth > 768 ? 760 : window.innerWidth
     return (
         <>
-            <Document className='widget-document-type' file={props.mediaUrl} onLoadError={console.error} onLoadSuccess={onDocumentLoad}>
-                <Page pageNumber={state.activePage || 1} width={documentWidth}/>
-            </Document>
+
             <PagesController/>
         </>
     );
 };
 export default MediaDocumentWidget;
+// <Document className='widget-document-type' file={props.mediaUrl} onLoadError={console.error} onLoadSuccess={onDocumentLoad}>
+//     <Page pageNumber={state.activePage || 1} width={documentWidth}/>
+// </Document>

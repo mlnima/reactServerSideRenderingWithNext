@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MediaWidget/MediaDocumentWidget/MediaDocumentWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MediaWidget/MediaDocumentWidget/MediaDocumentWidget.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -628,7 +627,7 @@
       <workItem from="1620055055294" duration="4393000" />
       <workItem from="1620161736499" duration="3276000" />
       <workItem from="1620213383560" duration="2695000" />
-      <workItem from="1620588986857" duration="1372000" />
+      <workItem from="1620588986857" duration="1599000" />
     </task>
     <servers />
   </component>
@@ -754,9 +753,10 @@
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state x="2867" y="478" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/648.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1616690184356" />
-    <state x="1660" y="2237" width="718" height="1002" key="find.popup" timestamp="1619539193259">
-      <screen x="-725" y="2160" width="4096" height="1152" />
+    <state x="1690" y="2237" width="721" height="1002" key="find.popup" timestamp="1620590594363">
+      <screen x="-695" y="2160" width="4096" height="1152" />
     </state>
+    <state x="1690" y="2237" width="721" height="1002" key="find.popup/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1620590594363" />
     <state x="1660" y="2237" width="718" height="1002" key="find.popup/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1619539193259" />
     <state x="2304" y="611" key="run.anything.popup" timestamp="1615836882958">
       <screen x="0" y="0" width="4096" height="1152" />
