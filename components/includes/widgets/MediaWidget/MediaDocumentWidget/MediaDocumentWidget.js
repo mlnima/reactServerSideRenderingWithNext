@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React,{useEffect, useState} from 'react';
 //import {Document, Page, pdfjs} from "react-pdf";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faArrowRight, faArrowUp} from "@fortawesome/free-solid-svg-icons";

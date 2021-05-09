@@ -1,4 +1,4 @@
-import {useEffect} from 'react';
+import React,{useEffect} from 'react';
 import AppProvider from "../context/AppContext";
 import AppLayout from "../components/layouts/AppLayout";
 import {useRouter} from "next/router";

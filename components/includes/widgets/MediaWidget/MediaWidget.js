@@ -84,11 +84,13 @@ const MediaWidget = props => {
                             <video className='media-element' src={props.mediaUrl} controls/>
                         </>
                     )
+                // case 'document':
+                //     return (
+                //             <MediaDocumentWidget {...props}/>
+                //     )
                 case 'document':
-                    return (
-                            <MediaDocumentWidget {...props}/>
-                    )
-                // return null
+                    return null
+
                 case 'iframe':
                     return (
                         <>
