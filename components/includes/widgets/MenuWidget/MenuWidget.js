@@ -89,6 +89,7 @@ const MenuWidget = props => {
                 height: 30px;
             }
             .menu-widget-items{
+            
                 position:fixed;
                 top: 0;
                 left: 0;

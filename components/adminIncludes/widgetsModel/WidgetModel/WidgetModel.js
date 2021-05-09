@@ -465,14 +465,7 @@ const WidgetModel = props => {
                                     <option value='random'>Random</option>
                                 </select>
                             </div>
-                            <div className='selectInputFieldForWidget widgetSection'>
-                                <p>View Type:</p>
-                                <select name='viewType' value={widgetData.viewType} onChange={e => onChangeHandler(e)}>
-                                    <option value='standard'>Standard</option>
-                                    <option value='small'>Small</option>
-                                    <option value='list'>List</option>
-                                </select>
-                            </div>
+
                             <div className='selectInputFieldForWidget widgetSection'>
                                 <p>Post Element Size:</p>
                                 <select name='postElementSize' value={widgetData.postElementSize} onChange={e => onChangeHandler(e)}>
@@ -721,3 +714,11 @@ export default WidgetModel;
 //
 // <option value='actorsPagesLeftSidebar'>Actors Page Left SideBar</option>
 // <option value='actorsPagesRightSidebar'>Actors Page Right SideBar</option>
+// <div className='selectInputFieldForWidget widgetSection'>
+//     <p>View Type:</p>
+//     <select name='viewType' value={widgetData.viewType} onChange={e => onChangeHandler(e)}>
+//         <option value='standard'>Standard</option>
+//         <option value='small'>Small</option>
+//         <option value='list'>List</option>
+//     </select>
+// </div>

@@ -6,31 +6,38 @@ import TopRight from "./TopRight";
 import TopLeft from "./TopLeft";
 import {likeValueCalculator} from "../../../_variables/_variables";
 
-const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,imageWidth,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title}) => {
+const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title}) => {
+    const imageWidth = postElementSize === 'list' ?
+       `
+      
+       max-width:360px;
+       width: 100%;
+       `
+        : 'width: 100%;'
 
     return (
         <div className={`post-element-image-data`} style={{position:'relative'}}>
-<style jsx>{`
-@keyframes opacityAnimationStart {
-0% {
-opacity: 0;
-}
-100% {
-opacity: 100%;
-}
-}
-.post-element-image-data{
-width: 100%;
-}
+        <style jsx>{`
+        @keyframes opacityAnimationStart {
+            0% {
+                opacity: 0;
+            }
+            100% {
+                opacity: 100%;
+            }
+        }
+        .post-element-image-data{
+           
+            ${imageWidth}
+        }
 
-video {
-width: 100%;
-animation: opacityAnimationStart 2s alternate;
-aspect-ratio:16/9;
-}
-
-
-`}</style>
+        
+        video {
+            width: 100%;
+            animation: opacityAnimationStart 2s alternate;
+            aspect-ratio:16/9;
+        }
+        `}</style>
             {isHover && videoTrailerUrl ?
                 <video
                    // ref={videoElement}

@@ -122,12 +122,23 @@ height: 15px;
 
 
 .post-element-medium,.post-element-small,.post-element-smaller,h2{
- aspect-ratio:16/9;
+aspect-ratio:16/9;
 width: 48vw;
 margin: 2px;
 border: none;
 background-color: var(--post-element-background-color);
 }
+
+.post-element-list{
+width: 100%;
+}
+.post-element-list>.post-element-link{
+//display:grid;
+//grid-template-columns: 6fr 3fr;
+display: flex;
+flex-direction: row;
+}
+
 
 .post-element-link {
 display: flex;
@@ -174,7 +185,7 @@ max-width: 100%;
                             isHover={state.isHover}
                             postElementSize={postElementSize}
                         />
-                        <PostElementTitle title={title}/>
+                        <PostElementTitle title={title} postElementSize={postElementSize}/>
                 </a>
             </Link>
         </article>

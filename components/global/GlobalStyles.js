@@ -16,11 +16,11 @@ font-family: SourceSansPro, Arial, sans-serif;
 
 .topbar{
 display: flex;
-justify-content: space-between;
+justify-content: space-evenly;
 flex-wrap: wrap;
 align-items: center;
 grid-area: topbar;
-height: 48px;
+min-height: 48px;
 background-color: var(--topbar-background-color);
 }
 

@@ -9,7 +9,7 @@ let StyledA = styled.a`
   width: 48vw;
   height: auto;
   margin: auto;
-
+ cursor: pointer;
   .meta-page-item-image-parent {
     display: flex;
     justify-content: center;

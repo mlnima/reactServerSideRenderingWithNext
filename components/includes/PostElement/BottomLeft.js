@@ -76,7 +76,7 @@ const BottomLeft = props => {
                     <span className='value-next-icon'>{props.price}</span>
                 </> : (props.type === 'video' && props.duration) || props.type === 'redirect' ?
                     <>
-                        <FontAwesomeIcon icon={faClock} className='post-element-info-logo'/>
+
                         <span className='value-next-icon'>  {props.duration}</span>
                     </>
                     : null
