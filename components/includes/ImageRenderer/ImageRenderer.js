@@ -28,9 +28,9 @@ const ImageRenderer = props => {
 
     if (validImageForNextImage) {
         return (
-            <React.Fragment>
+            <div className={props.classNameValue}>
                 <style jsx>{`
-            .post-element-image{
+            .post-element-image,.post-element-image>div>img{
             width: 100%;
             aspect-ratio:16/9;
             }
@@ -45,17 +45,17 @@ const ImageRenderer = props => {
                     }}
                     onMouseEnter={props.hoverHandler}
                     onTouchStart={props.hoverHandler}
-                    className={props.classNameValue}
+
                     layout={props.layout || 'intrinsic'}
                     // width={props.imageWidth || 300}
                     // height={props.imageHeight || 300 / 1.777}
                     quality={props.quality || 80}
                     loading={props.loading || 'lazy'}
                 />
-            </React.Fragment>
+            </div>
         )
     } else return (
-        <React.Fragment>
+        <div className={props.classNameValue}>
             <style jsx>{`
             .post-element-image{
          
@@ -74,7 +74,7 @@ const ImageRenderer = props => {
                      onErrorHandler(e)
                      setGotError(true)
                  }}/>
-        </React.Fragment>
+        </div>
 
     );
 };
