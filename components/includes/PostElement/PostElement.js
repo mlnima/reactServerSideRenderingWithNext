@@ -171,7 +171,7 @@ max-width: 100%;
                         <PostElementImage
                             mainThumbnail={mainThumbnail}
                             isHoverHandler={isHoverHandler}
-                            imageWidth={imageWidth}
+                           // imageWidth={imageWidth}
                             _id={_id}
                             postType={postType}
                             views={views}
@@ -194,43 +194,3 @@ max-width: 100%;
 
 export default PostElement;
 
-
-// <div className="image" style={{position:'relative'}}>
-//     {state.isHover && videoTrailerUrl ?
-//         <video
-//             ref={videoElement}
-//             src={videoTrailerUrl}
-//             autoPlay={true}
-//             loop={true}
-//         /> :
-//         <ImageRenderer imageUrl={mainThumbnail}
-//                        altValue={title || mainThumbnail}
-//                        hoverHandler={isHoverHandler}
-//                        imageWidth={imageWidth}
-//                        imageHeight={imageWidth / 1.777}
-//                        quality={100}
-//                        loading='lazy'
-//                        layout='intrinsic'
-//                        classNameValue='post-element-internal-image'
-//                        contentId={_id}
-//
-//         />
-//     }
-//     {views > 1 && postType === ('video') && !state.isHover ? <BottomRight views={views} svgDefaultStyle={svgDefaultStyle}/> : null}
-//     {(postType === ('video') || postType === ('redirect') || postType === ('product')) && !state.isHover ?
-//         <BottomLeft type={postType} price={price} duration={duration} svgDefaultStyle={svgDefaultStyle}/> : null}
-//     {quality && postType === ('video') && !state.isHover ? <TopRight quality={quality} svgDefaultStyle={svgDefaultStyle}/> : null}
-//     {likes > 0 && rating !== 'disable' && !state.isHover ? <TopLeft rating={likeValueCalculator(likes, disLikes)} svgDefaultStyle={svgDefaultStyle}/> : null}
-// </div>
-
-//@mixin opacityAnimationEnd {
-//  animation: opacityAnimationEnd .5s alternate;
-//  @keyframes opacityAnimationEnd {
-//    0% {
-//      opacity: 100%;
-//    }
-//    100% {
-//      opacity: 0;
-//    }
-//  }
-//}

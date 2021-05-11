@@ -1,103 +1,85 @@
-import React, {useContext} from 'react';
-import Link from 'next/link'
-import withRouter from "next/dist/client/with-router";
+import {useContext, useEffect} from 'react';
 import {AppContext} from '../../../context/AppContext'
-import ImageRenderer from "../ImageRenderer/ImageRenderer";
-import styled from "styled-components";
+import Link from 'next/link'
+import MetaElementImage from "./MetaElementImage";
 
-let StyledA = styled.a`
-  width: 48vw;
-  height: auto;
-  margin: auto;
- cursor: pointer;
-  .meta-page-item-image-parent {
-    display: flex;
-    justify-content: center;
-    width: 100%;
-    height: auto;
-
-    .meta-page-item-image, img {
-      width: 100%;
-      height: auto;
-    }
-  }
-
-  .meta-item-data {
-    width: 100%;
-    height: auto;
-    text-align: center;
-
-    p {
-      mix-blend-mode: difference;
-      color: white;
-    }
-  }
-  @media only screen and (min-width: 768px) {
-
-    margin: 10px auto;
-    width: 320px;
-
-    .meta-page-item-image-parent {
-      width: 320px;
-
-      .meta-page-item-image {
-        width: 320px;
-        position: relative;
-        height: 180px;
-        border: #181818 1px solid;
-        display: block;
-        object-fit: cover;
-      }
-    }
-
-    .meta-item-data {
-      width: 320px;
-      margin: auto;
-      color: white;
-    }
-
-}
-`
-
-const MetaElement = props => {
+const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postElementSize}) => {
     const contextData = useContext(AppContext);
+    useEffect(() => {
+        console.log(postElementSize)
+    }, [postElementSize]);
 
-    if (props.count > 0) {
+    const classNameForMetaElement = postElementSize ? `meta-page-item-link-${postElementSize}` : `meta-page-item-link-small`
+    if (count > 0) {
         return (
-            <Link key={props.name}
+            <Link key={name}
                   as={contextData.state.activeLanguage !== 'default' ?
-                      `/${props.type}/${props.translations ?
-                          props.translations[contextData.state.activeLanguage] ?
-                              props.translations[contextData.state.activeLanguage].name || props.name : props.name : props.name}?metaId=${props._id}` :
-                      `/${props.type}/${props.name}?metaId=${props._id}`}
+                      `/${type}/${translations ?
+                          translations[contextData.state.activeLanguage] ?
+                              translations[contextData.state.activeLanguage].name || name : name : name}?metaId=${_id}` :
+                      `/${type}/${name}?metaId=${_id}`}
                   href={{
                       pathname: `/posts`,
                       query: {
-                          metaId: props._id,
-                          metaName: props.name,
-                          metaType: props.type,
+                          metaId: _id,
+                          metaName: name,
+                          metaType: type,
                       }
                   }}
                   scroll={false}
             >
-                <StyledA className='meta-page-item' onClick={() => contextData.dispatchState({...contextData.state, loading: true})}>
-                    <div className='meta-page-item-image-parent'>
-                        <ImageRenderer
-                            imageUrl={props.imageUrl || props.noImageUrl}
-                            hoverHandler={props.hoverHandler}
-                            quality={props.quality}
-                            classNameValue='post-element-image'
-                            loading='lazy'
-                                       layout='intrinsic'/>
-                    </div>
+                <a className={`meta-page-item-link ${classNameForMetaElement}`} onClick={() => contextData.dispatchState({...contextData.state, loading: true})}>
+                    <style jsx>{`
+                    .meta-page-item-link,.meta-page-item-link-smaller,.meta-page-item-link-small,.meta-page-item-link-medium{
+                        width: 48vw;
+                        max-width: 320px;
+                        cursor: pointer;
+                    }
+                    .meta-item-data {
+                        width: 100%;
+                        height: auto;
+                        text-align: center;
+                    }
+                    p {
+                        color: var(--post-element-text-color);
+                    }
+                    @media only screen and (min-width: 768px) {
+                        .meta-page-item-link{
+                            margin: 10px auto;
+                           // width: 320px;
+                        }
+                        .meta-page-item-link-smaller{
+                           width: 209.8px;
+                        }
+                        .meta-page-item-link-small{
+                           width: 255px;
+                        }
+                        
+                        .meta-page-item-link-medium{
+                           width: 320px;
+                        }
+                        
+                        
+                        
+                        
+                        .meta-item-data {
+                            width: 100%;
+                            margin: auto;
+                            color: white;
+                        }
+                    }
+                `}</style>
+                    <MetaElementImage
+                        imageUrl={imageUrl || noImageUrl}
+                    />
                     <div className='meta-item-data'>
-                        <p>{props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].name || props.name : props.name : props.name} ({props.count})</p>
+                        <p>{translations ? translations[contextData.state.activeLanguage] ? translations[contextData.state.activeLanguage].name || name : name : name} ({count})</p>
 
                     </div>
-                </StyledA>
+                </a>
             </Link>
         );
     } else return null
 
 };
-export default withRouter(MetaElement);
+export default MetaElement;

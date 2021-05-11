@@ -30,7 +30,8 @@ const ImageRenderer = props => {
         return (
             <div className={props.classNameValue}>
                 <style jsx>{`
-            .post-element-image,.post-element-image>div>img{
+            .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
+            position: relative;
             width: 100%;
             aspect-ratio:16/9;
             }
@@ -45,10 +46,7 @@ const ImageRenderer = props => {
                     }}
                     onMouseEnter={props.hoverHandler}
                     onTouchStart={props.hoverHandler}
-
                     layout={props.layout || 'intrinsic'}
-                    // width={props.imageWidth || 300}
-                    // height={props.imageHeight || 300 / 1.777}
                     quality={props.quality || 80}
                     loading={props.loading || 'lazy'}
                 />
