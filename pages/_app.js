@@ -1,4 +1,4 @@
-import React,{useEffect} from 'react';
+import React, {useEffect} from 'react';
 import AppProvider from "../context/AppContext";
 import AppLayout from "../components/layouts/AppLayout";
 import {useRouter} from "next/router";
@@ -21,6 +21,13 @@ import '../components/layouts/AdminLayout.scss';
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
     const scroll = Scroll.animateScroll;
+    let deferredPrompt;
+
+    useEffect(() => {
+        if (typeof window !== 'undefined'){
+
+        }
+    }, []);
 
     useEffect(() => {
         scroll.scrollToTop();

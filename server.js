@@ -1,3 +1,5 @@
+
+
 const express = require('express');
 const next = require('next');
 const mongoose = require("mongoose");
@@ -87,17 +89,14 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         res.end();
     });
 
-    server.get('/sw.js' , (req, res) => {
-        res.set('Content-Type', 'text/javascript');
-        const serviceWorkerData = `
-self.addEventListener("install", function (event) {
-
-});
-`
-        res.send(serviceWorkerData);
-        res.end()
-    });
-
+//     server.get('/sw.js' , (req, res) => {
+//         res.set('Content-Type', 'text/javascript');
+//         const serviceWorkerData = `self.addEventListener("install", function (event) {
+// });
+// `
+//         res.send(serviceWorkerData);
+//         res.end()
+//     });
 
     //manifest
     server.get('/manifest.json', cacheSuccesses, async (req, res) => {
@@ -111,7 +110,14 @@ self.addEventListener("install", function (event) {
                 "sizes": "512x512",
                 "type": "image/png",
                 "purpose": "any maskable"
-            }],
+            },
+                {
+                    "src":  identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "sizes": "192x192",
+                    "type": "image/png",
+                    "purpose": "any maskable"
+                }
+            ],
             "display": "fullscreen",
             "start_url": "/"
         }

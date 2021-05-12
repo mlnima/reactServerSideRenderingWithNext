@@ -63,8 +63,17 @@ const nextImageConfig = {
     },
 }
 
+
+const pwaSettings = {
+    pwa:{
+        dest:'public',
+        register:true,
+        skipWaiting:true
+    }
+}
+
 module.exports = withPlugins([
-    // withPWA(),
+    withPWA(pwaSettings),
     additionalConfig,
     // reDirectRoutes,
     reWriteRoutes,

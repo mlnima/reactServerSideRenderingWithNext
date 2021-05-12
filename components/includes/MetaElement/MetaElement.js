@@ -58,10 +58,6 @@ const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postE
                         .meta-page-item-link-medium{
                            width: 320px;
                         }
-                        
-                        
-                        
-                        
                         .meta-item-data {
                             width: 100%;
                             margin: auto;

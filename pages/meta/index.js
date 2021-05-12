@@ -61,8 +61,6 @@ const meta = ({metaSource, identity, dataForGettingMeta,design}) => {
 
     );
 };
-
-
 export const getServerSideProps = async ({req, query}) => {
     const firstLoadData = await getFirstLoadData(req, ['metaPageLeftSidebar', 'metaPageRightSidebar'], 'metaPage')
     const dataForGettingMeta = {
