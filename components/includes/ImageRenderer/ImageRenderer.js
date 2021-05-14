@@ -54,9 +54,9 @@ const ImageRenderer = props => {
                     }}
                     onMouseEnter={props.hoverHandler}
                     onTouchStart={props.hoverHandler}
-                    layout={props.layout || 'intrinsic'}
+                    layout={props.layout || 'fill'}
                     quality={props.quality || 80}
-                    loading={props.loading || 'lazy'}
+                    loading={props.loading || 'eager'}
                 />
             </div>
         )

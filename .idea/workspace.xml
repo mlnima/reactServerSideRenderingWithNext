@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/Price/Price.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/Price/Price.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ImageRenderer/ImageRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ImageRenderer/ImageRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElementImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostElement/PostElementImage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -632,7 +633,7 @@
       <workItem from="1620674200236" duration="3599000" />
       <workItem from="1620735049773" duration="13326000" />
       <workItem from="1620820235471" duration="4713000" />
-      <workItem from="1621015165459" duration="2629000" />
+      <workItem from="1621015165459" duration="3936000" />
     </task>
     <servers />
   </component>
