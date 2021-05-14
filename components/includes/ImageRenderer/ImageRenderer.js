@@ -35,6 +35,14 @@ const ImageRenderer = props => {
             width: 100%;
             aspect-ratio:16/9;
             }
+            .logo-image,.logo-image>div>img{
+            width: 300px;
+            height: 100px;
+            max-width: 300px;
+            max-height: 100px;
+            position: relative;
+            //aspect-ratio:16/9;
+            }
             `}</style>
 
                 <Image
@@ -60,6 +68,7 @@ const ImageRenderer = props => {
             width: 100%;
             aspect-ratio:16/9;
             }
+  
             `}</style>
             <img className={props.classNameValue}
                  alt={props.altValue || props.classNameValue}

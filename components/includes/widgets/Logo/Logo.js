@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import React, {useContext} from 'react';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import ImageRenderer from "../../ImageRenderer/ImageRenderer";
@@ -14,32 +14,31 @@ const Logo = props => {
     return (
         <Link href='/'>
             <a className='logo' onClick={contextData.functions.loadingHandler}>
-                <style jsx>{`
-        .logo{
-            text-decoration: none;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start;
-            cursor: pointer;
-           
-        }
-        .logo-text {
-            font-size: xx-large;
-        }
-        .logo-text,.logo-headline{
-           color: var(--main-text-color);
-        }
-
+<style jsx>{`
+.logo{
+text-decoration: none;
+display: flex;
+flex-direction: column;
+align-items: center;
+justify-content: flex-start;
+cursor: pointer;
+max-width: 300px;
+}
+.logo-text {
+font-size: xx-large;
+}
+.logo-text,.logo-headline{
+color: var(--main-text-color);
+}
 `}</style>
 
                 {logoImageUrl ?
                     <ImageRenderer imageUrl={logoImageUrl}
                                    altValue='logo'
-                                   imageWidth={300}
-                                   imageHeight={100}
                                    quality={100}
-                                   loading='lazy'
+                                   loading='eager'
+                                   layout='fill'
+                                   classNameValue='logo-image'
                     /> : null}
                 {logoText ?
                     <span className='logo-text'>
