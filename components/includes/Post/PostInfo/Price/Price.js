@@ -20,7 +20,7 @@ const Price = ({currency, price}) => {
                 color:var(--post-page-info-color);
                 }
             `}</style>
-            <FontAwesomeIcon style={props.svgDefaultStyle} icon={currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo'/>
+            <FontAwesomeIcon icon={currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo'/>
             <p>{price}</p>
         </div>
     )
