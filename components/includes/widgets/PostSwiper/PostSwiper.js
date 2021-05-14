@@ -128,7 +128,7 @@ const PostSwiper = props => {
                         height={imageHeight}
                         quality={100}
                         layout='intrinsic'
-                        loading='lazy'
+                        loading='eager'
                     />
                 )
             }
