@@ -29,12 +29,25 @@ const WidgetsRenderer =  ({postElementStyle,postElementSize,widgets,isMobile,cur
     },[widgets])
 
     const renderWidgets = widgetsMemo?.map(widget => {
-        const deviceType = widget.data.deviceTypeToRender;
+
+        const deviceType = widget.data.deviceTypeToRender || 'all';
         const languageToRender = widget.data.languageToRender;
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
-        const conditionalWidgetRenderer = (!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all') ? true :
-                                          (deviceType === 'mobile' && isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))?true:
-                                          (deviceType === 'desktop' && !isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))
+
+        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender
+        const renderByDeviceTypeCondition = !!deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile)
+
+        // const conditionalWidgetRenderer = (!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all') ? true :
+        //                                   (deviceType === 'mobile' && isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))?true:
+        //                                   (deviceType === 'desktop' && !isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))
+
+
+
+        // if(widget._id === '60a02dfb24c32449c4e06741'){
+        //     //console.log(widget.data.type,widget._id,conditionalWidgetRenderer)
+        //     //console.log(deviceType,languageToRender,activeLanguage)
+        //     console.log(renderByDeviceTypeCondition&&renderByLanguageCondition)
+        // }
 
         const widgetToRender =widget.data.type === 'posts' ?Posts:
            widget.data.type === 'postsSwiper' ? PostSwiper   :
@@ -54,7 +67,7 @@ const WidgetsRenderer =  ({postElementStyle,postElementSize,widgets,isMobile,cur
                                                                    widget.data.type === 'form' ? FormWidget
                                                                         :null;
 
-       if (conditionalWidgetRenderer){
+       if (renderByDeviceTypeCondition && renderByLanguageCondition){
            return(
                <Widget currentPageSidebar={currentPageSidebar}
                        isMobile={isMobile}

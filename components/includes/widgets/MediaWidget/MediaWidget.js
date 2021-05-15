@@ -52,6 +52,7 @@ let StyledDiv = styled.div`
 
 
 const MediaWidget = props => {
+
     const [state, setState] = useState({
         extraClassName: '',
 
