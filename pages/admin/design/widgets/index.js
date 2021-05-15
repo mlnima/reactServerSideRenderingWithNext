@@ -98,9 +98,11 @@ let StyledDiv = styled.div`
       }
       .widgets {
   
-        grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+       // grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+       display:flex;
+       flex-wrap:wrap;
         .widgetAdminPanelItem {
-              max-width: 550px;
+          width: 550px;
           position: relative;
           .widgetAdminPanelItemHeader {
 
