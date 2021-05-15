@@ -36,18 +36,18 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
 
         const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all'
-        const renderByDeviceTypeCondition = !!deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all'
+        const renderByDeviceTypeCondition = !deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all'
 
         // const conditionalWidgetRenderer = (!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all') ? true :
         //                                   (deviceType === 'mobile' && isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))?true:
         //                                   (deviceType === 'desktop' && !isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))
 
 
-        // if(widget._id === '60a02dfb24c32449c4e06741'){
-        //     //console.log(widget.data.type,widget._id,conditionalWidgetRenderer)
-        //     //console.log(deviceType,languageToRender,activeLanguage)
-        //     console.log(renderByDeviceTypeCondition&&renderByLanguageCondition)
-        // }
+        if(widget._id === '60a02dfb24c32449c4e06741'){
+            //console.log(widget.data.type,widget._id,conditionalWidgetRenderer)
+            //console.log(deviceType,languageToRender,activeLanguage)
+            console.log(isMobile,renderByDeviceTypeCondition)
+        }
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
             widget.data.type === 'postsSwiper' ? PostSwiper :
