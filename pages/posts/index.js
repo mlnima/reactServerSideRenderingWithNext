@@ -1,4 +1,4 @@
-import {useContext} from 'react';
+import React, {useContext} from 'react';
 import { getFirstLoadData} from '../../_variables/ajaxVariables';
 import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
 import withRouter from 'next/dist/client/with-router';
@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import styled from "styled-components";
 import {AppContext} from "../../context/AppContext";
+import FooterWidgetArea from "../../components/widgetsArea/FooterWidgetArea/FooterWidgetArea";
 
 
 let StyledMain = styled.main`
@@ -47,6 +48,8 @@ const posts = (props,{design}) => {
                     posts={props.postsSource.posts || []}
                     postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
                 />
             </div>
             <PaginationComponent

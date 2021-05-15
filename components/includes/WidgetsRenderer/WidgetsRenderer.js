@@ -20,7 +20,8 @@ const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
 
-const WidgetsRenderer =  ({postElementStyle,postElementSize,widgets,isMobile,currentPageSidebar,referer,_id}) => {
+const WidgetsRenderer =  ({postElementStyle,postElementSize,widgets,isMobile,currentPageSidebar,referer,_id,postElementImageLoader,postElementImageLoaderType}) => {
+
     const contextData = useContext(AppContext);
     const router = useRouter()
     const widgetsMemo = useMemo(()=>{
@@ -63,6 +64,8 @@ const WidgetsRenderer =  ({postElementStyle,postElementSize,widgets,isMobile,cur
                        widgetToRender={widgetToRender}
                        postElementSize={postElementSize}
                        postElementStyle={postElementStyle}
+                       postElementImageLoader={postElementImageLoader}
+                       postElementImageLoaderType={postElementImageLoaderType}
                        viewType={widget.data?.viewType}
                        referer={referer} />
            )

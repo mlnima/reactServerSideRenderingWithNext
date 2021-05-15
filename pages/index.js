@@ -2,6 +2,7 @@ import React, {useContext} from 'react';
 import {getFirstLoadData, getStaticLoadData, getMultipleWidgetWithData} from "../_variables/ajaxVariables";
 import {AppContext} from "../context/AppContext";
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
+import SideBarWidgetArea from "../components/widgetsArea/SideBarWidgetArea/SideBarWidgetArea";
 
 const Home = ({isMobile, widgets, design, identity}) => {
     const contextData = useContext(AppContext);
@@ -15,6 +16,8 @@ const Home = ({isMobile, widgets, design, identity}) => {
                          currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
                          postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                          postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                         postElementImageLoader={design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                         postElementImageLoaderType={design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
         />
     );
 };

@@ -25,6 +25,25 @@ const postElement = () => {
                     <option value='larger'>larger</option>
                 </select>
             </div>
+            <div>
+                <p>Post Element Image Loader:</p>
+                <select name='postElementImageLoader' onChange={e => onChangeHandler(e)} value={contextData.siteDesign.postElementImageLoader}>
+                    <option>select</option>
+                    <option value='normal'>Normal</option>
+                    <option value='next'>Next</option>
+                </select>
+            </div>
+            {contextData.siteDesign.postElementImageLoader === 'next'?
+                <div>
+                    <p>Post Element Image Loader Type:</p>
+                    <select name='postElementImageLoaderType' onChange={e => onChangeHandler(e)} value={contextData.siteDesign.postElementImageLoaderType}>
+                        <option>select</option>
+                        <option value='lazy'>Lazy</option>
+                        <option value='eager'>Eager</option>
+                    </select>
+                </div>
+            :null
+            }
 
             <StyleSection name='postElementStyle' title='PostElement Design :'/>
         </>

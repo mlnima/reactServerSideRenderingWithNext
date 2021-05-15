@@ -2,6 +2,7 @@ import WidgetHeader from "./WidgetHeader/WidgetHeader";
 import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
 import styled from "styled-components";
+import React from "react";
 let StyledSection = styled.section`
   .small-posts-content {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -95,6 +96,8 @@ const Widget = props => {
                 viewType={props.viewType}
                 postElementSize={props.data.postElementSize||   props.postElementSize}
                 postElementStyle={props.postElementStyle}
+                postElementImageLoader={props.postElementImageLoader}
+                postElementImageLoaderType={props.postElementImageLoaderType}
                 referer={props.referer}
             /> : null}
             <WidgetFooter  {...props.data}/>

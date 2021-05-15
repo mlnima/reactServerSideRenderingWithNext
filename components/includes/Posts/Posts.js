@@ -1,9 +1,10 @@
-import {useState, useEffect, useContext, useMemo} from 'react';
+import React, {useState, useEffect, useContext, useMemo} from 'react';
 import PostElement from "../PostElement/PostElement";
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
+import FooterWidgetArea from "../../widgetsArea/FooterWidgetArea/FooterWidgetArea";
 
-const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyle}) => {
+const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyle,postElementImageLoaderType,postElementImageLoader}) => {
     const contextData = useContext(AppContext);
 
     const styleData = useMemo(() => postElementStyle || contextData.siteDesign.postElementStyle, [])
@@ -54,6 +55,8 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
                         viewType={viewType}
                         postElementSize={postElementSize}
                         postElementStyle={postElementStyle}
+                        postElementImageLoader={postElementImageLoader}
+                        postElementImageLoaderType={postElementImageLoaderType}
                         title={title}
                         imageWidth={state.imageWidth}
                         postType={post.postType}

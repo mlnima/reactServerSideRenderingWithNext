@@ -20,6 +20,8 @@ const page = ({responseCode,pageInfo,widgets,design,identity}) => {
                     currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
                     postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    postElementImageLoader={design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                    postElementImageLoaderType={design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
                 />
     )
 };

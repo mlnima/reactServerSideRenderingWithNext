@@ -6,12 +6,12 @@ const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
     const isImageAbsolutePath = props.imageUrl?.includes('http')
-    const validImageForNextImage = ((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(props.imageUrl?.includes('http') ? new URL(props.imageUrl).hostname : undefined)) || !isImageAbsolutePath
+    const validImageForNextImage = (((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(props.imageUrl?.includes('http') ? new URL(props.imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
     const noImageUrl = '/static/images/noImage/no-image-available.png';
 
     const onErrorHandler = e => {
         console.log('error', e)
-        console.log(props.imageUrl)
+     //   console.log(props.imageUrl)
         if (props.imageUrl) {
             setGotError(true)
             setIsReported(true)

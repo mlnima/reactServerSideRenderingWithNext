@@ -6,7 +6,8 @@ import TopRight from "./TopRight";
 import TopLeft from "./TopLeft";
 import {likeValueCalculator} from "../../../_variables/_variables";
 
-const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title}) => {
+const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title,postElementImageLoaderType,postElementImageLoader}) => {
+
     const imageWidth = postElementSize === 'list' ?
        `
       
@@ -51,7 +52,8 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
                                // imageWidth={imageWidth}
                                // imageHeight={imageWidth / 1.777}
                                quality={100}
-                               loading='eager'
+                               loading={postElementImageLoaderType || 'eager'}
+                               postElementImageLoader={postElementImageLoader}
                                layout='fill'
                                classNameValue='post-element-image'
                                contentId={_id}

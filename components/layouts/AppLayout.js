@@ -11,6 +11,7 @@ import NavigationWidgetArea from "../widgetsArea/NavigationWidgetArea/Navigation
 import SideBarWidgetArea from "../widgetsArea/SideBarWidgetArea/SideBarWidgetArea";
 import FooterWidgetArea from "../widgetsArea/FooterWidgetArea/FooterWidgetArea";
 import GlobalStyles from "../global/GlobalStyles";
+import WidgetsRenderer from "../includes/WidgetsRenderer/WidgetsRenderer";
 
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
@@ -138,6 +139,8 @@ const AppLayout = props => {
                     stylesData={props.design?.data?.topBarStyle || contextData.siteDesign.topBarStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
                     referer={props.referer}
                 /> : null
             }
@@ -150,6 +153,8 @@ const AppLayout = props => {
                     stylesData={props.design?.data?.headerStyle || contextData.siteDesign.headerStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
                     referer={props.referer}
                 /> : null
             }
@@ -163,6 +168,8 @@ const AppLayout = props => {
                     stylesData={props.design?.data?.navigationStyle || contextData.siteDesign?.navigationStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign?.postElementSize}
                     postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
                     referer={props.referer}
                 /> : null
             }
@@ -177,6 +184,8 @@ const AppLayout = props => {
                     position={leftSidebarPositionName}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
                     referer={props.referer}
                 /> : null
             }
@@ -192,6 +201,8 @@ const AppLayout = props => {
                     position={rightSidebarPositionName}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
                     referer={props.referer}
                 /> : null
             }
@@ -203,6 +214,8 @@ const AppLayout = props => {
                     stylesData={props.design?.data?.footerStyle || contextData.siteDesign.footerStyle}
                     postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
                     referer={props.referer}
                 /> : null
             }

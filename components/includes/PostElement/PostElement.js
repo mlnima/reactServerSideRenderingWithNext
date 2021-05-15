@@ -88,7 +88,7 @@ import PostElementImage from "./PostElementImage";
 //
 // `
 //${props => props.stylesData}
-const PostElement = ({title, imageWidth, viewType, postType, _id, postElementSize, videoTrailerUrl, views, likes, disLikes, quality, rating, price, duration, mainThumbnail, postElementStyle,onClickLoadingHandler}) => {
+const PostElement = ({title, imageWidth, viewType, postType, _id, postElementSize, videoTrailerUrl, views, likes, disLikes, quality, rating, price, duration, mainThumbnail, postElementStyle,onClickLoadingHandler,postElementImageLoaderType,postElementImageLoader}) => {
 
     let [state, setState] = useState({
         isHover: false,
@@ -184,6 +184,8 @@ max-width: 100%;
                             title={title}
                             isHover={state.isHover}
                             postElementSize={postElementSize}
+                            postElementImageLoader={postElementImageLoader}
+                            postElementImageLoaderType={postElementImageLoaderType}
                         />
                         <PostElementTitle title={title} postElementSize={postElementSize}/>
                 </a>
