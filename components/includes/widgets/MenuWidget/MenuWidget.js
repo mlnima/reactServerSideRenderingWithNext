@@ -9,7 +9,7 @@ const MenuWidget = props => {
     const contextData = useContext(AppContext);
     const menuItemsElement = useRef(null)
     const router = useRouter()
-    const [open, setOpen] = useState(true);
+    const [open, setOpen] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -38,10 +38,11 @@ const MenuWidget = props => {
             <style jsx>{`
                 .menu-widget-item{
                     list-style-type: none;
-                    width: 100%;
-                    text-align: center;
+                    width: 90%;
+                    //text-align: center;
                     padding: 10px 0;
-                    border-bottom: 1px solid ;
+                    font-size: 1.2rem;
+                    //border-bottom: 1px solid ;
                 }
                 .menu-widget-item-link{
                     color: var(--navigation-text-color);
@@ -55,6 +56,7 @@ const MenuWidget = props => {
                         padding: 0;
                         border-bottom: none;
                         text-decoration: none;
+                        
                     }
                 }
             `}</style>
@@ -74,60 +76,70 @@ const MenuWidget = props => {
     return (
         <div className='menu-widget'>
         <style jsx>{`
+            .menu-widget{
+             background-color: var(--navigation-background-color);
+            }
             .navigation-mobile-button{
                 background-color: transparent;
                 border: none;
                 outline: none;
                 margin: 0;
-                width: 30px;
-                height: 30px;
+                width: 40px;
+                height: 40px;
                 transition: all .5s linear;
                 color:var(--navigation-text-color);
             }
             .navigation-mobile-button-logo{
-                width: 30px;
-                height: 30px;
+                width: 40px;
+                height: 40px;
             }
             .menu-widget-items{
-            
+            background-color: var(--navigation-background-color);
                 position:fixed;
                 top: 0;
                 left: 0;
-                right: 0;
+                //right: 0;
                 bottom: 0;
                 width: 100%;
-                background-color: rgba(0,0,0,.8);
+                max-width: 50vw;
+               
                 z-index: 1000;
-                display: flex;
+                //display: flex;
+                display: none;
                 flex-direction: column;
-                justify-content: center;
+                justify-content: flex-start;
+                padding: 48px 0 0 0;
                 align-items: center;
-                padding: 0;
+                //margin: 48px 0 0 0;
                 margin: 0;
             }  
             .navigation-close-button{
-                position: fixed;
-                top:2%;
-                right :2%;
+                position:fixed;
+                top:5px;
+                left :2px;
                 background-color: transparent;
                 border: none;
-                width: 30px;
-                height: 30px;
+                width: 40px;
+                height: 40px;
                 color: var(--navigation-text-color);
+                transform: rotate(90deg);
             } 
-            @media only screen and (min-width: 768px) {
-                .navigation-mobile-button,.navigation-close-button{
-                    display: none;
-                }
-                .menu-widget-items{
-                    background-color: initial;
-                    display: flex;
-                    flex-direction: row;
-                    width: initial;
-                    position: initial;
-                    animation: initial ;
-                }
-            }
+@media only screen and (min-width: 768px) {
+.navigation-mobile-button,.navigation-close-button{
+display: none;
+}
+.menu-widget-items{
+background-color: initial;
+display: flex;
+flex-direction: row;
+width: initial;
+max-width: 100vw;
+position: initial;
+animation: initial ;
+padding: 0;
+margin:0;
+}
+}
         `}</style>
             <button
                 onClick={() => open ? setOpen(false) : setOpen(true)}

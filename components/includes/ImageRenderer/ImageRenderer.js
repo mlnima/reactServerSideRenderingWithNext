@@ -31,6 +31,7 @@ const ImageRenderer = props => {
             <div className={props.classNameValue}>
                 <style jsx>{`
             .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
+            max-width:48vw;
             position: relative;
             width: 100%;
             aspect-ratio:16/9;

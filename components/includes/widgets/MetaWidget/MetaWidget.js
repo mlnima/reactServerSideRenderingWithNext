@@ -12,13 +12,17 @@ const MetaWidget = props => {
                         <style jsx>{`
                             .meta-widget-item{
                                   text-decoration: none;
-                                  display: grid;
-                                  align-items: center;
+                                 // display: grid;
+                                 // display: flex;
+                                
+                                  //align-items: center;
                                   color: var(--meta-text-color);
                                   background-color: var(--meta-background-color);
-                                  //margin: 1px;
-                                  padding-left: 2px;
-                                  height: 50px;
+                                  margin: 2px;
+                                  padding: 5px 10px;
+                                  //width: 50%;
+                                  max-width: 90px;
+                                  //height: 50px;
                             }
                             .meta-widget-item:hover{
                                   transition: .5s;
@@ -41,9 +45,13 @@ const MetaWidget = props => {
             <style jsx>
                 {`
                 .meta-widget{
-                    display: grid;
-                    grid-template-columns: 1fr 1fr;
-                    grid-gap: 1px;
+                    //display: grid;
+                    //grid-template-columns: 1fr 1fr;
+                    //grid-gap: 1px;
+                    display: flex;
+                    flex-wrap: wrap;
+                      //justify-content: space-evenly;
+                    
                     max-width: 98%;
                     margin: auto;
                 }

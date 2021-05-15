@@ -3,7 +3,6 @@ import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
 import dynamic from "next/dynamic";
-
 const Posts = dynamic(() => import('../Posts/Posts'))
 const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
 const MetaWidget = dynamic(() => import('../widgets/MetaWidget/MetaWidget'))
@@ -43,10 +42,10 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
         //                                   (deviceType === 'desktop' && !isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))
 
 
-        if(widget._id === '60a02dfb24c32449c4e06741'){
+        if(widget._id === '607a7af17e73a932c8c35c83'){
             //console.log(widget.data.type,widget._id,conditionalWidgetRenderer)
             //console.log(deviceType,languageToRender,activeLanguage)
-            console.log(isMobile,renderByDeviceTypeCondition)
+
         }
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :

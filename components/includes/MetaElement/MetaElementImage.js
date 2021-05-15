@@ -5,8 +5,9 @@ const MetaElementImage = props => {
         <div className='meta-element-image-data'>
 <style jsx>{`
 .meta-element-image-data{
+position: relative;
 width: 100%;
-max-width:320px;
+max-width:48vw;
 aspect-ratio:16/9;
 }
 `}</style>
