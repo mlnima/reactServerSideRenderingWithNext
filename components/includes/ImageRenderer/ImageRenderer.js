@@ -76,6 +76,8 @@ position: relative;
 }
 img{
 width:48vw;
+height: 27.01vw;
+object-fit:cover;
 }
 .post-element-list,.post-element-list>div>img{
 width: 116.6px;
