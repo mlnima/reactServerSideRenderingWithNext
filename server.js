@@ -1,5 +1,3 @@
-
-
 const express = require('express');
 const next = require('next');
 const mongoose = require("mongoose");
@@ -101,25 +99,35 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //manifest
     server.get('/manifest.json', cacheSuccesses, async (req, res) => {
         const identityData = await settingSchema.findOne({type: 'identity'})
+        console.log(identityData, process.env.PRODUCTION_URL, identityData?.data?.favIcon)
         const manifestJsonData = {
             "theme_color": identityData.data.themeColor || '#000',
             "background_color": identityData.data.themeColor || '#000',
             "name": identityData.data.title || 'React CMS website',
-            "icons": [{
-                "src":  identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
-                "sizes": "512x512",
-                "type": "image/png",
-                "purpose": "any maskable"
-            },
+            "icons": [
+
                 {
-                    "src":  identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "src": identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
                     "sizes": "192x192",
+                    "type": "image/png",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "sizes": "384x384",
+                    "type": "image/png",
+                    "purpose": "any maskable"
+                },
+                {
+                    "src": identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "sizes": "512x512",
                     "type": "image/png",
                     "purpose": "any maskable"
                 }
             ],
             "display": "fullscreen",
-            "start_url": "/"
+            "start_url": "/",
+            "orientation": "portrait"
         }
         res.json(manifestJsonData)
         res.end()
@@ -171,29 +179,29 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
-    server.post('/api/v1/posts', cacheSuccesses,async (req, res) => {
+    server.post('/api/v1/posts', cacheSuccesses, async (req, res) => {
         await postsControllers.getPostsInfo(req, res)
     });
     server.post('/api/v1/posts/post', cacheSuccesses, (req, res) => {
         postsControllers.getPostInfo(req, res)
     });
-    server.post('/api/v1/posts/createNewPost',adminAuthMiddleware, async (req, res) => {
+    server.post('/api/v1/posts/createNewPost', adminAuthMiddleware, async (req, res) => {
         await postsControllers.createNewPost(req, res)
     });
-    server.post('/api/v1/posts/updatePost',adminAuthMiddleware, async(req, res) => {
-       await postsControllers.updatePost(req, res)
+    server.post('/api/v1/posts/updatePost', adminAuthMiddleware, async (req, res) => {
+        await postsControllers.updatePost(req, res)
     });
-    server.post('/api/v1/posts/deletePost',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/posts/deletePost', adminAuthMiddleware, (req, res) => {
         postsControllers.deletePost(req, res)
     });
-    server.post('/api/v1/posts/postsBulkAction',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/posts/postsBulkAction', adminAuthMiddleware, (req, res) => {
         postsControllers.postsBulkAction(req, res)
     });
     server.post('/api/v1/posts/likeDislikeView', (req, res) => {
         postsControllers.likeDislikeView(req, res)
     });
 
-    server.post('/api/v1/posts/bulkAction',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/posts/bulkAction', adminAuthMiddleware, (req, res) => {
         postsControllers.bulkAction(req, res)
     });
     server.post('/api/v1/posts/checkRemovedContent', (req, res) => {
@@ -210,7 +218,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         //need to be cache id page cache doesnt work
         postsControllers.getSingleMeta(req, res)
     });
-    server.post('/api/v1/posts/updateMeta',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/posts/updateMeta', adminAuthMiddleware, (req, res) => {
         postsControllers.updateMeta(req, res)
     });
     server.post('/api/v1/posts/deleteMeta', adminAuthMiddleware, (req, res) => {
@@ -225,15 +233,15 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     server.post('/api/v1/posts/getComments', (req, res) => {
         postsControllers.getComments(req, res)
     });
-    server.post('/api/v1/posts/updateComment',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/posts/updateComment', adminAuthMiddleware, (req, res) => {
         postsControllers.updateComment(req, res)
     });
-    server.post('/api/v1/posts/deleteComments',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/posts/deleteComments', adminAuthMiddleware, (req, res) => {
         postsControllers.deleteComments(req, res)
     });
 
     //settings handler
-    server.post('/api/v1/settings/update',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/settings/update', adminAuthMiddleware, (req, res) => {
         settingsControllers.update(req, res)
     });
     server.post('/api/v1/settings/get', (req, res) => {
@@ -244,7 +252,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         //cacheSuccesses
         settingsControllers.getMultiple(req, res)
     });
-    server.post('/api/v1/settings/addWidget',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/settings/addWidget', adminAuthMiddleware, (req, res) => {
         settingsControllers.addWidget(req, res)
     });
     server.post('/api/v1/settings/getSingleWidgetData', (req, res) => {
@@ -264,17 +272,17 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
         //cacheSuccesses
         settingsControllers.getWidgetsWithData(req, res)
     });
-    server.post('/api/v1/settings/updateWidget', adminAuthMiddleware,(req, res) => {
+    server.post('/api/v1/settings/updateWidget', adminAuthMiddleware, (req, res) => {
         settingsControllers.updateWidget(req, res)
     });
-    server.post('/api/v1/settings/deleteWidget',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/settings/deleteWidget', adminAuthMiddleware, (req, res) => {
         settingsControllers.deleteWidget(req, res)
     });
-    server.post('/api/v1/settings/saveCustomStyle',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/settings/saveCustomStyle', adminAuthMiddleware, (req, res) => {
         settingsControllers.saveCustomStyle(req, res)
     });
     //exe commands
-    server.post('/api/v1/settings/executor',adminAuthMiddleware, (req, res) => {
+    server.post('/api/v1/settings/executor', adminAuthMiddleware, (req, res) => {
         settingsControllers.executor(req, res)
     });
     //cache control
