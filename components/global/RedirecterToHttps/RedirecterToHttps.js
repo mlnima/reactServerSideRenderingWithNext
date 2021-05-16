@@ -34,7 +34,7 @@ const RedirecterToHttps = () => {
 
     if (state.render) {
         return (
-            <a ref={redirectElement} href={state.sslUrl.replace('http','https')} rel='noreferrer'/>
+            <a ref={redirectElement} href={state.sslUrl.replace('http','https')} rel='noreferrer'>Redirect to HTTPS</a>
         );
     } else return null
 

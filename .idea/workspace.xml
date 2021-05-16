@@ -20,10 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/global/RedirecterToHttps/RedirecterToHttps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sw.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js.map" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/RedirecterToHttps/RedirecterToHttps.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/RedirecterToHttps/RedirecterToHttps.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -639,7 +636,7 @@
       <workItem from="1621109840703" duration="3489000" />
       <workItem from="1621116561653" duration="6853000" />
       <workItem from="1621154641075" duration="960000" />
-      <workItem from="1621164423128" duration="11389000" />
+      <workItem from="1621164423128" duration="12023000" />
     </task>
     <servers />
   </component>
