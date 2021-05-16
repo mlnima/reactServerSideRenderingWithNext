@@ -11,7 +11,7 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
     const imageWidth = postElementSize === 'list' ?
        `
       
-       max-width:360px;
+       max-width:116.6px;
        width: 100%;
        `
         : 'width: 100%;'
@@ -28,7 +28,7 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
             }
         }
         .post-element-image-data{
-           
+       
             ${imageWidth}
         }
 
@@ -36,7 +36,7 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
         video {
             width: 100%;
             animation: opacityAnimationStart 2s alternate;
-            aspect-ratio:16/9;
+           
         }
         `}</style>
             {isHover && videoTrailerUrl ?
@@ -53,6 +53,7 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
                                // imageHeight={imageWidth / 1.777}
                                quality={100}
                                loading={postElementImageLoaderType || 'eager'}
+                               postElementSize={postElementSize}
                                postElementImageLoader={postElementImageLoader}
                                layout='fill'
                                classNameValue='post-element-image'

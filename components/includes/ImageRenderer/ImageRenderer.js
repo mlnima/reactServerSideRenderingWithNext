@@ -8,10 +8,16 @@ const ImageRenderer = props => {
     const isImageAbsolutePath = props.imageUrl?.includes('http')
     const validImageForNextImage = (((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(props.imageUrl?.includes('http') ? new URL(props.imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
     const noImageUrl = '/static/images/noImage/no-image-available.png';
+    console.log(props)
+    const imageWidth = props.postElementSize === 'list' ? 116.6 :
+        props.postElementSize === 'smaller' ? 209.8 :
+            props.postElementSize === 'small' ? 255 :
+                props.postElementSize === 'medium' ? 320 : 255
+
 
     const onErrorHandler = e => {
         console.log('error', e)
-     //   console.log(props.imageUrl)
+        //   console.log(props.imageUrl)
         if (props.imageUrl) {
             setGotError(true)
             setIsReported(true)
@@ -29,22 +35,23 @@ const ImageRenderer = props => {
     if (validImageForNextImage) {
         return (
             <div className={props.classNameValue}>
-                <style jsx>{`
-            .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
-            max-width:48vw;
-            position: relative;
-            width: 100%;
-            aspect-ratio:16/9;
-            }
-            .logo-image,.logo-image>div>img{
-            width: 300px;
-            height: 100px;
-            max-width: 300px;
-            max-height: 100px;
-            position: relative;
-            //aspect-ratio:16/9;
-            }
-            `}</style>
+<style jsx>{`
+.post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
+width:48vw;
+position: relative;
+}
+.post-element-list,.post-element-list>div>img{
+width: 116.6px;
+height: 65.1px;
+}
+.logo-image,.logo-image>div>img{
+width: 300px;
+height: 100px;
+max-width: 300px;
+max-height: 100px;
+position: relative;
+}
+`}</style>
 
                 <Image
                     src={!gotError ? props.imageUrl || noImageUrl : noImageUrl}
@@ -63,18 +70,33 @@ const ImageRenderer = props => {
         )
     } else return (
         <div className={props.classNameValue}>
-            <style jsx>{`
-            .post-element-image{
-         
-            width: 100%;
-            aspect-ratio:16/9;
-            }
-  
-            `}</style>
+<style jsx>{`
+.post-element-image{
+
+}
+img{
+width:48vw;
+}
+.post-element-list,.post-element-list>div>img{
+width: 116.6px;
+height: 65.1px;
+}
+.logo-image,.logo-image>div>img{
+width: 100%;
+height: 100%;
+max-width: 200px;
+max-height: 200px;
+position: relative;
+}
+@media only screen and (min-width: 768px) {
+.post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
+width: ${imageWidth}px;
+height: ${imageWidth / 1.777}px;
+}
+}
+`}</style>
             <img className={props.classNameValue}
                  alt={props.altValue || props.classNameValue}
-                // width={props.imageWidth || 300}
-                // height={props.imageHeight || 300 / 1.777}
                  onMouseEnter={props.hoverHandler}
                  onTouchStart={props.hoverHandler}
                  src={!gotError ? props.imageUrl || noImageUrl : noImageUrl}

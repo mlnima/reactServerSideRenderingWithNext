@@ -2,92 +2,7 @@ import {useState} from 'react';
 import Link from "next/link";
 import PostElementTitle from "./PostElementTitle";
 import PostElementImage from "./PostElementImage";
-//import styled from "styled-components";
-// let StyledArticle = styled.article`
-//width: 48vw;
-//.value-next-icon {
-//  margin: 0 3px;
-//}
-//
-//.post-element-info-logo {
-//  font-size: 15px;
-//  width: 15px;
-//  height: 15px;
-//}
-//.post-element-link{
-// width: 100%;
-//}
 
-
-
-//.post-element-medium,.post-element-small,.post-element-smaller{
-//width: 48vw;
-//}
-
-//.post-element-medium,.post-element-small,.post-element-smaller {
-//  //margin: 2px;
-//  //border: none;
-//  //background-color: var(--post-element-background-color);
-//  //.post-element-link {
-//  //  display: flex;
-//  //  flex-direction: column;
-//  //  justify-content: center;
-//  //  align-items: flex-start;
-//  //  margin: auto;
-//  //}
-//}
-//@media only screen and (min-width: 768px) {
-//max-width: 255px;
-
-
-
-  //.post-element-medium{
-  //  width: 320px;
-  //  .post-element {
-  //    width: 320px;
-  //    h2 {
-  //      width: 320px;
-  //    }
-  //  }
-  //
-  //}
-  //.post-element-small{
-  //  width: 255px;
-  //  .post-element {
-  //    width: 255px;
-  //    h2 {
-  //      width: 255px;
-  //    }
-  //  }
-  //}
-  //.post-element-smaller{
-  //  width: 209.8px;
-  //  .post-element {
-  //    width: 209.8px;
-  //    h2 {
-  //      width: 209.8px;
-  //    }
-  //  }
-  //}
-
-  //.post-element-div {
-  //  .post-element {
-  //    image {
-  //      .post-element-external-image {
-  //        margin: auto;
-  //        object-fit: contain;
-  //      }
-  //      .post-element-internal-image {
-  //        margin: auto;
-  //        object-fit: contain;
-  //      }
-  //    }
-  //  }
-  //}
-// }
-//
-// `
-//${props => props.stylesData}
 const PostElement = ({title, imageWidth, viewType, postType, _id, postElementSize, videoTrailerUrl, views, likes, disLikes, quality, rating, price, duration, mainThumbnail, postElementStyle,onClickLoadingHandler,postElementImageLoaderType,postElementImageLoader}) => {
 
     let [state, setState] = useState({
@@ -120,9 +35,7 @@ width: 15px;
 height: 15px;
 }
 
-
 .post-element-medium,.post-element-small,.post-element-smaller,h2{
-aspect-ratio:16/9;
 width: 48vw;
 margin: 2px;
 border: none;
@@ -130,13 +43,16 @@ background-color: var(--post-element-background-color);
 }
 
 .post-element-list{
+
 width: 100%;
 }
 .post-element-list>.post-element-link{
-//display:grid;
-//grid-template-columns: 6fr 3fr;
+
+width: 100%;
+
 display: flex;
 flex-direction: row;
+
 }
 
 
@@ -160,6 +76,10 @@ max-width: 100%;
 width: 320px;
 max-width: 100%;
 }
+.post-element-list,.post-element-list>h2,.post-element-list>.post-element-link{
+width: 240px;
+max-width: 100%;
+}
 }
 
 `}</style>
@@ -171,7 +91,6 @@ max-width: 100%;
                         <PostElementImage
                             mainThumbnail={mainThumbnail}
                             isHoverHandler={isHoverHandler}
-                           // imageWidth={imageWidth}
                             _id={_id}
                             postType={postType}
                             views={views}
