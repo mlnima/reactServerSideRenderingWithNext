@@ -31,7 +31,7 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
     const renderWidgets = widgetsMemo?.map(widget => {
 
         const deviceType = widget.data.deviceTypeToRender || 'all';
-        const languageToRender = widget.data.languageToRender;
+        const languageToRender = widget.data.languageToRender || 'all';
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
 
         const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all'

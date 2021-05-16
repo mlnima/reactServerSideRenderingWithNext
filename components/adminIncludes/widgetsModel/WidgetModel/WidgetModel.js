@@ -367,7 +367,7 @@ const WidgetModel = props => {
                         <p>Language To Render:</p>
                         <select name='languageToRender' value={widgetData.languageToRender} onChange={e => onChangeHandler(e)}>
                             <option value='all'>All</option>
-                            <option value='default'>Default</option>
+                            <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL}</option>
                             {languagesOptions}
                         </select>
                     </div>
