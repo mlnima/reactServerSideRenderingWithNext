@@ -34,7 +34,7 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
         const languageToRender = widget.data.languageToRender || 'all';
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
 
-        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all'
+        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.REACT_APP_DEFAULT_LOCAL )
         const renderByDeviceTypeCondition = !deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all'
 
         // const conditionalWidgetRenderer = (!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all') ? true :
