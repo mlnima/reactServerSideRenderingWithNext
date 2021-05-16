@@ -219,7 +219,6 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
 
     const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'static') : {};
     let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
-    console.log(req.headers['user-agent'])
     return {
         domainName: req ? await getAbsolutePath(req) : '',
         settings: settingsData?.data?.settings ?? [],

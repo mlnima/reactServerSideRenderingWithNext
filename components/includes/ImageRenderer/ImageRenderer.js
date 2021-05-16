@@ -5,10 +5,12 @@ import {checkRemovedContent} from "../../../_variables/ajaxPostsVariables";
 const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
-    const isImageAbsolutePath = props.imageUrl?.includes('http')
-    const validImageForNextImage = (((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(props.imageUrl?.includes('http') ? new URL(props.imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
+
+    const imageUrl = props.imageUrl?.includes('http') ? props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + props.imageUrl
+    const isImageAbsolutePath = imageUrl?.includes('http')
+    const validImageForNextImage = (((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
     const noImageUrl = '/static/images/noImage/no-image-available.png';
-    console.log(props)
+  
     const imageWidth = props.postElementSize === 'list' ? 116.6 :
         props.postElementSize === 'smaller' ? 209.8 :
             props.postElementSize === 'small' ? 255 :
@@ -17,12 +19,12 @@ const ImageRenderer = props => {
 
     const onErrorHandler = e => {
         console.log('error', e)
-        //   console.log(props.imageUrl)
-        if (props.imageUrl) {
+        //   console.log(imageUrl)
+        if (imageUrl) {
             setGotError(true)
             setIsReported(true)
             let data = {
-                checkUrl: props.imageUrl,
+                checkUrl: imageUrl,
                 contentId: props.contentId,
                 type: 'image'
             }
@@ -54,7 +56,7 @@ position: relative;
 `}</style>
 
                 <Image
-                    src={!gotError ? props.imageUrl || noImageUrl : noImageUrl}
+                    src={!gotError ? imageUrl || noImageUrl : noImageUrl}
                     alt={props.altValue || props.classNameValue}
                     onError={e => {
                         onErrorHandler(e)
@@ -101,7 +103,7 @@ height: ${imageWidth / 1.777}px;
                  alt={props.altValue || props.classNameValue}
                  onMouseEnter={props.hoverHandler}
                  onTouchStart={props.hoverHandler}
-                 src={!gotError ? props.imageUrl || noImageUrl : noImageUrl}
+                 src={!gotError ? imageUrl || noImageUrl : noImageUrl}
                  onError={e => {
                      onErrorHandler(e)
                      setGotError(true)
