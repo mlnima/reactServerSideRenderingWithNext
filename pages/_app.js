@@ -25,7 +25,11 @@ const MyApp = ({Component, pageProps}) => {
 
     useEffect(() => {
         if (typeof window !== 'undefined'){
-
+            const siteUrl = window.location.href
+            if (process.env.REACT_APP_SSL === 'true' && !siteUrl.includes('https') ){
+                window.location.replace(siteUrl.replace('http','https'));
+                console.log(window.location.href)
+            }
         }
     }, []);
 
