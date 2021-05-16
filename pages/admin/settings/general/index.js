@@ -253,6 +253,12 @@ const settings = props => {
                             <p>Fav Icon:</p>
                             <input value={state.favIcon} name='favIcon' placeholder='Fav Icon Url..' onChange={e => onChangeHandler(e)}/>
                         </div>
+                        <div className="site-settings-form-section favIcon">
+                            <p>PWA icons</p>
+                            <input value={state.pwa192} name='pwa192' placeholder='pwa192 Icon Url..' onChange={e => onChangeHandler(e)}/>
+                            <input value={state.pwa384} name='pwa384' placeholder='pwa384 Icon Url..' onChange={e => onChangeHandler(e)}/>
+                            <input value={state.pwa512} name='pwa512' placeholder='pwa512 Icon Url..' onChange={e => onChangeHandler(e)}/>
+                        </div>
 
                         <div className="site-settings-form-section membership">
                             <p>Membership:</p>

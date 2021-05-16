@@ -107,19 +107,19 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             "icons": [
 
                 {
-                    "src": identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "src": identityData?.data?.pwa192 || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
                     "sizes": "192x192",
                     "type": "image/png",
                     "purpose": "any maskable"
                 },
                 {
-                    "src": identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "src": identityData?.data?.pwa384 || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
                     "sizes": "384x384",
                     "type": "image/png",
                     "purpose": "any maskable"
                 },
                 {
-                    "src": identityData?.data?.favIcon || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "src": identityData?.data?.pwa512 || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
                     "sizes": "512x512",
                     "type": "image/png",
                     "purpose": "any maskable"
