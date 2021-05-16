@@ -16,7 +16,7 @@ const RedirecterToHttps = () => {
                     ...state,
                     protocol: 'http',
                     render: true,
-                    siteUrl:siteUrl.replace('http','https')
+                    //siteUrl:siteUrl.replace('http','https')
                 })
             }
         }
