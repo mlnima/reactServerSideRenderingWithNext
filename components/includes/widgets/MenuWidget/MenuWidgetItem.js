@@ -74,6 +74,7 @@ display: flex;
 justify-content: space-between;
 align-items: center;
 position: relative;
+margin:${!menuItem.parent?'0 10px':'0'};
 }
 .open-submenus{
 background-color: transparent;
