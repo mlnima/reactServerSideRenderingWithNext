@@ -1,7 +1,7 @@
 const GlobalStyles = ({colors}) => {
 
     return (
-        <div>
+        <div  className='global-styles'>
 <style jsx global>{`
 :root{
 ${colors}

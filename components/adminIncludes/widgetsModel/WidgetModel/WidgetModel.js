@@ -204,9 +204,9 @@ const WidgetModel = props => {
         })
     };
 
-    useEffect(() => {
-        console.log(widgetData)
-    }, [widgetData]);
+    // useEffect(() => {
+    //     console.log(widgetData)
+    // }, [widgetData]);
 
 
     const onChangeHandlerByName = (name, value) => {
@@ -559,8 +559,14 @@ const WidgetModel = props => {
 
                     <FormTypeWidgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler}
                                                mobileNavigation={widgetData.mobileNavigation} rendering={widgetData.type === 'form'}/>
-                    <MenuWidgetModelFields widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler} mobileNavigation={widgetData.mobileNavigation}
-                                           rendering={widgetData.type === 'menu'}/>
+                    <MenuWidgetModelFields widgetData={widgetData}
+                                           setWidgetData={setWidgetData}
+                                           onChangeHandler={onChangeHandler}
+                                           mobileNavigation={widgetData.mobileNavigation}
+                                           rendering={widgetData.type === 'menu'}
+                                           widgetSettings={widgetSettings}
+
+                    />
                     <LinkTypeWidgetModelFields
                         widgetSettings={widgetSettings}
                         widgetData={widgetData}

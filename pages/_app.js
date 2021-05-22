@@ -13,6 +13,7 @@ import '../components/includes/CardElement/CardElement.scss';
 import '../components/layouts/AppLayout.scss';
 import '../components/layouts/AdminLayout.scss';
 import RedirecterToHttps from "../components/global/RedirecterToHttps/RedirecterToHttps";
+import PwaInstallButton from "../components/includes/PwaInstallButton/PwaInstallButton";
 
 
 // export function reportWebVitals(metric) {
@@ -23,16 +24,6 @@ const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
     const scroll = Scroll.animateScroll;
     let deferredPrompt;
-
-    // useEffect(() => {
-    //     if (typeof window !== 'undefined'){
-    //         const siteUrl = window.location.href
-    //         if (process.env.REACT_APP_SSL === 'true' && !siteUrl.includes('https') ){
-    //             window.location.replace(siteUrl.replace('http','https'));
-    //             console.log(window.location.href)
-    //         }
-    //     }
-    // }, []);
 
     useEffect(() => {
         scroll.scrollToTop();
@@ -69,7 +60,6 @@ const MyApp = ({Component, pageProps}) => {
                     <Component {...pageProps} />
                 </AppLayout>
                 <RedirecterToHttps/>
-
             </AppProvider>
         )
     } else return (
@@ -90,3 +80,4 @@ const MyApp = ({Component, pageProps}) => {
 
 export default MyApp;
 
+// <PwaInstallButton/>

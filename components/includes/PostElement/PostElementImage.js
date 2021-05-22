@@ -7,10 +7,13 @@ import TopLeft from "./TopLeft";
 import {likeValueCalculator} from "../../../_variables/_variables";
 
 const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title,postElementImageLoaderType,postElementImageLoader}) => {
+    const imageWidthSize = postElementSize === 'list' ? 116.6 :
+        postElementSize === 'smaller' ? 209.8 :
+            postElementSize === 'small' ? 255 :
+                postElementSize === 'medium' ? 320 : 255
 
     const imageWidth = postElementSize === 'list' ?
        `
-      
        max-width:116.6px;
        width: 100%;
        `
@@ -35,6 +38,7 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
         
         video {
             width: 100%;
+           
             animation: opacityAnimationStart 2s alternate;
            
         }

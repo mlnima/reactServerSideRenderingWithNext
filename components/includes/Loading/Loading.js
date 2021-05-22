@@ -13,6 +13,8 @@ let StyledDiv = styled.div`
   align-items: center;
   z-index: 1000;
 
+
+
   .lds-ring {
     display: inline-block;
     position: relative;

@@ -9,14 +9,13 @@ const RedirecterToHttps = () => {
     });
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
+        if (typeof window !== 'undefined' ) {
             const siteUrl = window.location.href
-            if (!siteUrl.includes('https')) {
+            if (!siteUrl.includes('https')&& process.env.REACT_APP_SSL === 'true') {
                 setState({
                     ...state,
                     protocol: 'http',
                     render: true,
-                    //siteUrl:siteUrl.replace('http','https')
                 })
             }
         }
@@ -24,9 +23,15 @@ const RedirecterToHttps = () => {
 
 
     useEffect(() => {
-        if (state.render && state.protocol === 'http' && redirectElement.current){
-            //console.log(state.sslUrl.replace('http','https'))
-          redirectElement.current.click()
+        const clickOnRedirectLink= ()=>{
+            redirectElement.current.click()
+        }
+        if (state.render && state.protocol === 'http' && redirectElement.current&& process.env.REACT_APP_SSL === 'true'){
+          // console.log(state.sslUrl)
+            setTimeout(()=>{
+                clickOnRedirectLink()
+            },1000)
+
         }
 
     }, [state.render]);

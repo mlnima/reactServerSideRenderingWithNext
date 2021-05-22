@@ -5,9 +5,9 @@ import MetaElementImage from "./MetaElementImage";
 
 const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postElementSize}) => {
     const contextData = useContext(AppContext);
-    useEffect(() => {
-        console.log(postElementSize)
-    }, [postElementSize]);
+    // useEffect(() => {
+    //     console.log(postElementSize)
+    // }, [postElementSize]);
 
     const classNameForMetaElement = postElementSize ? `meta-page-item-link-${postElementSize}` : `meta-page-item-link-small`
     if (count > 0) {

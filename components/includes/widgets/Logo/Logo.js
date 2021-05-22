@@ -12,7 +12,7 @@ const Logo = props => {
     const logoImageUrl = props.LogoUrl;
 
     return (
-        <Link href='/'>
+        <Link href='/' locale={router.locale||false}>
             <a className='logo' onClick={contextData.functions.loadingHandler}>
 <style jsx>{`
 .logo{

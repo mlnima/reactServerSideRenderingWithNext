@@ -1,4 +1,5 @@
 const express = require('express');
+const { createServer } = require("https");
 const next = require('next');
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
@@ -27,6 +28,7 @@ const handle = app.getRequestHandler();
 const apicache = require('apicache')
 const compression = require('compression')
 require('dotenv').config()
+const fs = require('fs');
 const {parse} = require('url')
 const cors = require('cors')
 //cache api
@@ -62,9 +64,25 @@ function shouldCompress(req, res) {
     return compression.filter(req, res)
 }
 
+const sslOptions = process.env.REACT_APP_SSL === 'true' ? {
+    key: fs.readFileSync('./server/https/key.key'),
+    cert: fs.readFileSync('./server/https/certificate.crt')
+} : {}
 
 app.prepare().then(() => {
-    const server = express();
+   // if (process.env.REACT_APP_SSL === 'true'){
+   //     createServer(sslOptions, (req, res) => {
+   //         const parsedUrl = parse(req.url, true);
+   //         handle(req, res, parsedUrl);
+   //     }).listen(3443, (err) => {
+   //         if (err) throw err;
+   //         console.log("> Server started on https://localhost:3443");
+   //     });
+   // }
+
+    // console.log(process.env.REACT_APP_SSL)
+    console.log(sslOptions)
+    const server = express(sslOptions);
     server.use(cookieParser());
     server.use(fileUpload());
     server.use(bodyParser.json());
@@ -99,7 +117,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
     //manifest
     server.get('/manifest.json', cacheSuccesses, async (req, res) => {
         const identityData = await settingSchema.findOne({type: 'identity'})
-        console.log(identityData, process.env.PRODUCTION_URL, identityData?.data?.favIcon)
+        // console.log(identityData, process.env.PRODUCTION_URL, identityData?.data?.favIcon)
         const manifestJsonData = {
             "theme_color": identityData.data.themeColor || '#000',
             "background_color": identityData.data.themeColor || '#000',
@@ -107,25 +125,25 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
             "icons": [
 
                 {
-                    "src": identityData?.data?.pwa192 || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "src": identityData?.data?.pwa192 || process.env.PRODUCTION_URL + '/static/images/pwa/192.png',
                     "sizes": "192x192",
                     "type": "image/png",
                     "purpose": "any maskable"
                 },
                 {
-                    "src": identityData?.data?.pwa384 || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "src": identityData?.data?.pwa384 || process.env.PRODUCTION_URL + '/static/images/pwa/384.png',
                     "sizes": "384x384",
                     "type": "image/png",
                     "purpose": "any maskable"
                 },
                 {
-                    "src": identityData?.data?.pwa512 || process.env.PRODUCTION_URL + '/static/images/favIcon/favicon.png',
+                    "src": identityData?.data?.pwa512 || process.env.PRODUCTION_URL + '/static/images/pwa/512.png',
                     "sizes": "512x512",
                     "type": "image/png",
                     "purpose": "any maskable"
                 }
             ],
-            "display": "fullscreen",
+            "display": "standalone",
             "start_url": "/",
             "orientation": "portrait"
         }

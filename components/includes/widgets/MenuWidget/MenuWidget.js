@@ -4,6 +4,8 @@ import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useRouter} from "next/router";
 import {AppContext} from "../../../../context/AppContext";
+import MenuWidgetItem from "./MenuWidgetItem";
+import _ from "lodash";
 
 const MenuWidget = props => {
     const contextData = useContext(AppContext);
@@ -17,7 +19,6 @@ const MenuWidget = props => {
             deviceWidth = window.innerWidth
             deviceWidth >= 768 ? setOpen(true) : setOpen(false)
         }
-
     }, [props]);
 
     const mobileNavigationOnClickHandler = () => {
@@ -27,48 +28,25 @@ const MenuWidget = props => {
         }
     }
 
-    const renderMenuItems = (props.menuItems.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || []).map(menuItem => {
+    const renderMenuItemsData = (props.menuItems.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || [])
+    const renderMenuParentsItems = renderMenuItemsData.filter(i=>!i.parent)
+    const renderMenuItems = renderMenuParentsItems.map(menuItem => {
+   // console.log(renderMenuItemsData)
+
+
 
         const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as :
             (!router.locale && !router.query.locale) ? menuItem.as :
                 `/${router.locale || router.query.locale}${menuItem.as}`;
+        return(
+            <MenuWidgetItem
+                menuItem={menuItem}
+                linkAsForMenuItems={linkAsForMenuItems}
+                mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+                menuItems={props.menuItems}
+                key={_.uniqueId('id_')}
 
-        return (
-            <li className='menu-widget-item' key={menuItem.name}>
-            <style jsx>{`
-                .menu-widget-item{
-                    list-style-type: none;
-                    width: 90%;
-                    //text-align: center;
-                    padding: 10px 0;
-                    font-size: 1.2rem;
-                    //border-bottom: 1px solid ;
-                }
-                .menu-widget-item-link{
-                    color: var(--navigation-text-color);
-                    text-decoration: none;
-                }
-                @media only screen and (min-width: 768px) {
-                    .menu-widget-item{
-                        margin: 0 10px;
-                        width:initial;
-                        text-align: left;
-                        padding: 0;
-                        border-bottom: none;
-                        text-decoration: none;
-                        
-                    }
-                }
-            `}</style>
-                {menuItem.type === 'internal' ?
-                    <Link href={menuItem.target} as={linkAsForMenuItems} scroll={false}>
-                        <a className='menu-widget-item-link' rel='next' onClick={menuItem.target.includes('#') ? null : mobileNavigationOnClickHandler}>
-                            {menuItem.translations?.[router.locale]?.name || menuItem.name}
-                        </a>
-                    </Link> :
-                    <a className='menu-widget-item-link' href={menuItem.target}>{menuItem.name}</a>
-                }
-            </li>
+            />
         )
     })
 
