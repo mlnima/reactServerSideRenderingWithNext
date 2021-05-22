@@ -52,10 +52,15 @@ const MenuWidget = props => {
 
 
     return (
-        <div className='menu-widget'>
+        <ol className='menu-widget'>
         <style jsx>{`
             .menu-widget{
              background-color: var(--navigation-background-color);
+                    margin-block-start: 0;
+                    margin-block-end: 0;
+                    margin-inline-start: 0;
+                    margin-inline-end: 0;
+                    padding-inline-start: 0;
             }
             .navigation-mobile-button{
                 background-color: transparent;
@@ -133,7 +138,7 @@ margin:0;
                 </button>
                 {renderMenuItems}
             </ul>
-        </div>
+        </ol>
     );
 };
 export default MenuWidget;
