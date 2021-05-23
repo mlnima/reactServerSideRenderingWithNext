@@ -68,24 +68,24 @@ let StyledDiv = styled.div`
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       grid-gap: 10px;
-      .widgetAdminPanelItem {
-        background-color: transparent;
-        width: 100%;
-        position: initial;
-        margin: 0;
-        .widgetAdminPanelItemHeader {
-          height:50px ;
-          margin: 0;
-          background-color: black;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          color: white;
-          text-align: center;
-          font-weight: bold;
-          font-size: large;
-        }
-      }
+      //.widgetAdminPanelItem {
+      //  background-color: transparent;
+      //  width: 100%;
+      //  position: initial;
+      //  margin: 0;
+      //  .widgetAdminPanelItemHeader {
+      //    height:50px ;
+      //    margin: 0;
+      //    background-color: black;
+      //    display: flex;
+      //    justify-content: center;
+      //    align-items: center;
+      //    color: white;
+      //    text-align: center;
+      //    font-weight: bold;
+      //    font-size: large;
+      //  }
+      //}
     }
   }
   
@@ -101,13 +101,7 @@ let StyledDiv = styled.div`
        // grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
        display:flex;
        flex-wrap:wrap;
-        .widgetAdminPanelItem {
-          width: 550px;
-          position: relative;
-          .widgetAdminPanelItemHeader {
 
-          }
-        }
       }
     }
 }
