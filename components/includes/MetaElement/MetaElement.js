@@ -5,6 +5,7 @@ import MetaElementImage from "./MetaElementImage";
 
 const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postElementSize}) => {
     const contextData = useContext(AppContext);
+    const showCount = false
     // useEffect(() => {
     //     console.log(postElementSize)
     // }, [postElementSize]);
@@ -69,7 +70,7 @@ const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postE
                         imageUrl={imageUrl || noImageUrl}
                     />
                     <div className='meta-item-data'>
-                        <p>{translations ? translations[contextData.state.activeLanguage] ? translations[contextData.state.activeLanguage].name || name : name : name} ({count})</p>
+                        <p>{translations ? translations[contextData.state.activeLanguage] ? translations[contextData.state.activeLanguage].name || name : name : name} {showCount?`(${count})`:null}</p>
 
                     </div>
                 </a>
