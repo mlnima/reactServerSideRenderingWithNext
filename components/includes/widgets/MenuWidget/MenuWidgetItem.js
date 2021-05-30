@@ -9,7 +9,7 @@ import MenuWidgetItemLink from "./MenuWidgetItemLink";
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler, menuItems}) => {
     const [showSub, setShowSub] = useState(false)
     const router = useRouter()
-
+    // console.log(menuItem)
     const renderSubMenus = (menuItem.subItems || []).map(subItem => {
         // console.log(subItem)
         const linkAsForMenuItem = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? subItem.as :
@@ -33,7 +33,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
 display: ${showSub ? 'initial' : 'none'};
 z-index: 10;
 background-color: var(--navigation-background-color);
-width:200px ;
+width:100px ;
 list-style-type: none;
 padding: 10px 15px;
 
@@ -67,7 +67,7 @@ padding: 10px 15px;
             <style jsx>{`
 .menu-widget-item{
 list-style-type: none;
-width: 90%;
+width: 90% ;
 padding: 10px 0;
 font-size: 1.2rem;
 display: flex;
@@ -100,6 +100,8 @@ flex-direction: column;
 @media only screen and (min-width: 768px) {
 .menu-widget-item{
 font-size: 1rem;
+width: ${!menuItem.parent? (menuItem.subItems || []).length >0 ?'auto': 'auto':'50px '} ;
+
 }
 }
 `}</style>

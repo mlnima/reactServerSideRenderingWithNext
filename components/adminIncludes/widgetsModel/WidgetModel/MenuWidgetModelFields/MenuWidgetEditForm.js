@@ -7,7 +7,7 @@ const MenuWidgetEditForm = props => {
             <option value={parentOption.itemId} key={_.uniqueId('id_')} >{parentOption.name}</option>
         )
     });
-console.log(props)
+
     return (
         <form className='menu-widget-form' onSubmit={e => props.onSubmitHandler(e)}>
         <style jsx>{`

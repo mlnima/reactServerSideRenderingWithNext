@@ -34,19 +34,11 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
         const languageToRender = widget.data.languageToRender || 'all';
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
 
-        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.REACT_APP_DEFAULT_LOCAL )
-        const renderByDeviceTypeCondition = !deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all'
+        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.REACT_APP_DEFAULT_LOCAL );
+        const renderByDeviceTypeCondition = !deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all';
+       const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator'
+        //const isEditMode = widget.data.editMode
 
-        // const conditionalWidgetRenderer = (!deviceType && !languageToRender) || (deviceType === 'all' || languageToRender === 'all') ? true :
-        //                                   (deviceType === 'mobile' && isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))?true:
-        //                                   (deviceType === 'desktop' && !isMobile && (languageToRender === activeLanguage || languageToRender === 'all' || !languageToRender))
-
-
-        if(widget._id === '607a7af17e73a932c8c35c83'){
-            //console.log(widget.data.type,widget._id,conditionalWidgetRenderer)
-            //console.log(deviceType,languageToRender,activeLanguage)
-
-        }
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
             widget.data.type === 'postsSwiper' ? PostSwiper :
@@ -66,7 +58,7 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
                                                                     widget.data.type === 'form' ? FormWidget
                                                                         : null;
 
-        if (renderByDeviceTypeCondition && renderByLanguageCondition) {
+        if (renderByDeviceTypeCondition && renderByLanguageCondition && !isEditMode) {
             return (
                 <Widget currentPageSidebar={currentPageSidebar}
                         isMobile={isMobile}

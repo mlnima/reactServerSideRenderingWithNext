@@ -33,6 +33,9 @@ const reWriteRoutes = {
             {source: `/admin`, destination: '/admin', locale: false},
             {source: `/login`, destination: '/auth/login'},
             {source: `/register`, destination: '/auth/register'},
+            //custom pages
+            {source: `/:locale(${languages})?/page/:pageName`, destination: '/page'},
+            {source: `/page/:pageName`, destination: '/page'},
             //meta route
             {source: `/:locale(${languages})?/:metaType(categories|tags|actors)`, destination: '/meta'},
             {source: `/:metaType(categories|tags|actors)`, destination: '/meta'},
@@ -47,8 +50,7 @@ const reWriteRoutes = {
             //auth pages
             {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
             {source: `/:locale(${languages})?/register`, destination: '/auth/register'},
-            //custom pages
-            {source: `/:locale(${languages})?/page/:pageName`, destination: '/page'},
+
             {source: `/:locale(${languages})?/profile`, destination: '/profile'},
             //checkout
             {source: `/:locale(${languages})?/checkout`, destination: '/checkout'},

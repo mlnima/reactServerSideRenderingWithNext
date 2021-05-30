@@ -27,9 +27,11 @@ const page = ({responseCode,pageInfo,widgets,design,identity}) => {
 };
 
 export const getServerSideProps = async ({req, query}) => {
+
     const firstLoadData = await getFirstLoadData(req,[query.pageName, query.pageName + 'LeftSidebar',query.pageName + 'RightSidebar'],query.pageName)
     let responseCode = 200
     const pageData = await getPageData({pageName: query.pageName}, firstLoadData.domainName)
+
     if (!pageData.data.pageData){
         return {
             notFound: true

@@ -19,11 +19,10 @@ const MenuWidgetItemLink = ({linkTargetType,linkType,linkTargetUrl,linkAs,linkNa
 .menu-widget-item-link{
 color: var(--navigation-text-color);
 text-decoration: none;
+
 }
-.menu-widget-item-link{
-color: var(--navigation-text-color);
-text-decoration: none;
-}
+
+
 `}</style>
             {linkTargetType === 'internal' ?
                 <Link href={linkTargetUrl} as={linkAs} scroll={false}>

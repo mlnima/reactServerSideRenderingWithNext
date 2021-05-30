@@ -300,7 +300,7 @@ postsControllers.getMeta = async (req, res) => {
     metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
         const mapMetaToGetImage = metas.map(async meta => {
             try {
-                const countPostsHasCurrentMeta = meta.count ? meta.count : await postSchema.countDocuments({$and: [{[type.type]: meta._id}, {status: 'published'}]}).exec()
+                const countPostsHasCurrentMeta = meta.count && meta.count !== 1 ? meta.count : await postSchema.countDocuments({$and: [{[type.type]: meta._id}, {status: 'published'}]}).exec()
                 const skipForNoImageUrl = Math.floor(Math.random() * countPostsHasCurrentMeta)
                 const noImageUrl = meta.imageUrl ? '' : await postSchema.find({$and: [{[type.type]: meta._id}, {status: 'published'}]}).skip(skipForNoImageUrl).limit(1).sort('-lasModify').exec().then(lastPost => {
                     //.skip(Math.floor(Math.random() * metaCount))
@@ -454,7 +454,7 @@ postsControllers.checkRemovedContent = (req, res) => {
             if (err?.response?.status >= 400 && err?.response?.status < 500 || err.code === 'ENOTFOUND' ) {
                 postSchema.findOneAndUpdate({mainThumbnail: checkUrl}, {$set: {status: 'pending'}}, {new: true}).exec()
                 metaSchema.find({imageUrl:checkUrl}).exec().then(metas=>{
-                    console.log(metas)
+                   // console.log(metas)
                     metas.forEach(meta=>{
                         metaSchema.findOneAndUpdate({_id:meta._id}, {$set: {imageUrl:null}}, {new: true}).exec()
                     })

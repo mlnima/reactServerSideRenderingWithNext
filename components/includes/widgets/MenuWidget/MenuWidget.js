@@ -112,7 +112,7 @@ const MenuWidget = props => {
 display: none;
 }
 .menu-widget-items{
-background-color: initial;
+background-color: transparent;
 display: flex;
 flex-direction: row;
 width: initial;

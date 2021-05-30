@@ -197,16 +197,26 @@ const WidgetModel = props => {
         }
     }
     const onChangeHandler = e => {
+        console.log(e.target.type)
+        const isChecked = e.target.checked
         const value = e.target.value
         setWidgetData({
             ...widgetData,
-            [e.target.name]: value === 'true' ? true : value === 'false' ? false : value
+            [e.target.name]: value === 'true'? true : value === 'false'  ? false  :value
         })
     };
 
-    // useEffect(() => {
-    //     console.log(widgetData)
-    // }, [widgetData]);
+    const onCheckboxChangeHandler = e =>{
+        setWidgetData({
+            ...widgetData,
+            [e.target.name]: e.target.checked
+        })
+    }
+
+
+    useEffect(() => {
+        console.log(widgetData.editMode)
+    }, [widgetData]);
 
 
     const onChangeHandlerByName = (name, value) => {
@@ -331,7 +341,10 @@ const WidgetModel = props => {
                 <WidgetHeaderControl setKey={false} widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} changeWidgetIndex={changeWidgetIndex}
                                      onOpenHandler={onOpenHandler}/>
                 <StyledDiv className='widgetModel'>
-
+                    <div className='selectInputFieldForWidget widgetSection'>
+                        <p>Edit Mode:</p>
+                        <input type='checkbox' name='editMode' checked={widgetData.editMode} onChange={e => onCheckboxChangeHandler(e)}/>
+                    </div>
                     <div className='widgetInfo'>
                         <label className='widgetId'>
                             <p>ID :</p>
