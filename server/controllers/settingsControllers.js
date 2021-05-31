@@ -1,3 +1,4 @@
+const mongoose = require('mongoose');
 const settingSchema = require('../models/settings/settingSchema')
 const widgetSchema = require('../models/settings/widgetSchema')
 const postSchema = require('../models/postSchema')
