@@ -105,7 +105,7 @@ const HomePageWidgets = props => {
         })
         contextData.dispatchWidgetsSettings({
             ...contextData.widgetsSettings,
-            widgets: [...props.widgets]
+            widgets: [...(props.widgets || [])]
         })
     }, []);
 
@@ -113,7 +113,7 @@ const HomePageWidgets = props => {
         getAndSetCustomPagesData()
         contextData.dispatchWidgetsSettings({
             ...contextData.widgetsSettings,
-            widgets: [...props.widgets]
+            widgets: [...(props.widgets || [])]
         })
 
     }
@@ -123,7 +123,7 @@ const HomePageWidgets = props => {
             if (widgetsData.data.widgets) {
                 contextData.dispatchWidgetsSettings({
                     ...contextData.widgetsSettings,
-                    widgets: [...widgetsData.data.widgets]
+                    widgets: [...(widgetsData?.data?.widgets|| [])]
                 })
             }
         })
