@@ -153,11 +153,16 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
     try{
         const widgetsDataQuery = (req.body.widgets || []).map(position=>position==='all' ? {} : {'data.position':position})
         const widgets =  await widgetSchema.find({$or:widgetsDataQuery}).sort('-_id').exec()
-        console.log(1,widgets)
+
         const widgetsWithDynamicData = await widgets.map( async widget=>{
 
             const widgetDataToObject = widget.toObject();
-            const selectedMetaId = widgetDataToObject.data?.selectedMetaForPosts;
+            const selectedMetaIdIsValid = widgetDataToObject.data?.selectedMetaForPosts ? mongoose.Types.ObjectId.isValid(widgetDataToObject.data?.selectedMetaForPosts) : false
+            const selectedMetaId = widgetDataToObject.data?.selectedMetaForPosts && selectedMetaIdIsValid?widgetDataToObject.data?.selectedMetaForPosts:
+                                   metaSchema.findOne({name:widgetDataToObject.data?.selectedMetaForPosts}).select('_id').exec()._id
+            console.log(selectedMetaIdIsValid,selectedMetaId)
+
+
             const selectedMeta = selectedMetaId ? {$or: [{tags: selectedMetaId}, {categories: selectedMetaId},{actors:selectedMetaId}]} : {}
             const countPosts = widgetDataToObject.data.sortBy=== 'random' ?  await postSchema.countDocuments({$and: [{status: 'published'}, selectedMeta]}).exec() : null
             const sortMethod = widgetDataToObject.data.sortBy? widgetDataToObject.data.sortBy=== 'latest' ? {lastModify: -1}  :{[widgetDataToObject.data.sortBy]: -1}:{lastModify: -1};
