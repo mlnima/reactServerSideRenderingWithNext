@@ -102,7 +102,9 @@ height: ${imageWidth / 1.777}px;
             <img className={props.classNameValue}
                  alt={props.altValue || props.classNameValue}
                  onMouseEnter={props.hoverHandler}
-                 onTouchStart={props.hoverHandler}
+                 onMouseOver={props.hoverHandler}
+                 onTouchStartCapture={props.hoverHandler}
+                 onTouchEnd={props.hoverHandler}
                  src={!gotError ? imageUrl || noImageUrl : noImageUrl}
                  onError={e => {
                      onErrorHandler(e)

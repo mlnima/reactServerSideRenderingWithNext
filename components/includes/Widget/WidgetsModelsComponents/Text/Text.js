@@ -9,8 +9,19 @@ const Text = props => {
     const textData = props.translations ? props.translations[contextData.state.activeLanguage] ? props.translations[contextData.state.activeLanguage].text || props.text : props.text : props.text
     const data = parse(textData)
     return (
-        <div className='widgetText'
-             ref={spanElement} >
+        <div className='widgetText' ref={spanElement} >
+            <style jsx>{`
+            .widgetText{
+                       color:var(--main-text-color);
+                       width:clamp(45ch,90%,75ch);
+            }
+@media only screen and (min-width: 768px) {
+    .widgetText{
+               color:var(--main-text-color);
+               width:clamp(45ch,50%,75ch);
+    }
+}
+            `}</style>
             {data}
 
         </div>

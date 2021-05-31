@@ -55,11 +55,11 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
         `}</style>
 
             {isHover && videoTrailerUrl ?
-                <video
-                    src={videoTrailerUrl}
-                    autoPlay={true}
-                    loop={true}
-                /> :
+                <video autoPlay={true} loop={true}>
+                    <source src={videoTrailerUrl} />
+                    Sorry, your browser doesn't support embedded videos.
+                </video>
+                :
                 <ImageRenderer imageUrl={mainThumbnail}
                                altValue={title || mainThumbnail}
                                hoverHandler={isHoverHandler}
@@ -82,3 +82,4 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
     );
 };
 export default PostElementImage;
+//type="video/webm; codecs=&quot;vp8, vorbis&quot;"
