@@ -150,7 +150,7 @@ settingsControllers.getWidgetsWithData = (req, res) => {
 //____________________________________________________________________________________________
 
 settingsControllers.getMultipleWidgetWithData = async (req, res) => {
-    console.log(1,req.body)
+
     try{
         const widgetsDataQuery = (req.body.widgets || []).map(position=>position==='all' ? {} : {'data.position':position})
         const widgets =  await widgetSchema.find({$or:widgetsDataQuery}).sort('-_id').exec()
@@ -160,11 +160,13 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
             const widgetDataToObject = widget.toObject();
             const selectedMetaIdIsValid = widgetDataToObject.data?.selectedMetaForPosts ? mongoose.Types.ObjectId.isValid(widgetDataToObject.data?.selectedMetaForPosts) : false
             const selectedMetaId = widgetDataToObject.data?.selectedMetaForPosts && selectedMetaIdIsValid?widgetDataToObject.data?.selectedMetaForPosts:
-                                   metaSchema.findOne({name:widgetDataToObject.data?.selectedMetaForPosts}).select('_id').exec()._id
-            console.log(selectedMetaIdIsValid,selectedMetaId)
+                                   await metaSchema.findOne({name:widgetDataToObject.data?.selectedMetaForPosts}).select('_id').exec()
 
 
-            const selectedMeta = selectedMetaId ? {$or: [{tags: selectedMetaId}, {categories: selectedMetaId},{actors:selectedMetaId}]} : {}
+
+            const selectedMetaData  = selectedMetaId ? typeof selectedMetaId === 'string' ? selectedMetaId : selectedMetaId._id :null
+            //console.log(1,selectedMetaData)
+            const selectedMeta = selectedMetaData ? {$or: [{tags: selectedMetaData}, {categories: selectedMetaData},{actors:selectedMetaData}]} : {}
             const countPosts = widgetDataToObject.data.sortBy=== 'random' ?  await postSchema.countDocuments({$and: [{status: 'published'}, selectedMeta]}).exec() : null
             const sortMethod = widgetDataToObject.data.sortBy? widgetDataToObject.data.sortBy=== 'latest' ? {lastModify: -1}  :{[widgetDataToObject.data.sortBy]: -1}:{lastModify: -1};
             const posts = widgetDataToObject.data.type === 'posts' || widgetDataToObject.data.type === 'postsSwiper' ?
