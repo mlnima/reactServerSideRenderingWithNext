@@ -68,24 +68,6 @@ let StyledDiv = styled.div`
       display: grid;
       grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
       grid-gap: 10px;
-      //.widgetAdminPanelItem {
-      //  background-color: transparent;
-      //  width: 100%;
-      //  position: initial;
-      //  margin: 0;
-      //  .widgetAdminPanelItemHeader {
-      //    height:50px ;
-      //    margin: 0;
-      //    background-color: black;
-      //    display: flex;
-      //    justify-content: center;
-      //    align-items: center;
-      //    color: white;
-      //    text-align: center;
-      //    font-weight: bold;
-      //    font-size: large;
-      //  }
-      //}
     }
   }
   
@@ -160,7 +142,7 @@ const HomePageWidgets = props => {
     }
 
 
-    const renderWidgetsInPosition = [...new Set((contextData.widgetsSettings.widgets).map(widgets => {
+    const renderWidgetsInPosition = [...new Set((contextData?.widgetsSettings?.widgets || []).map(widgets => {
         return widgets.data.position
     }))].map(position => {
         const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)
@@ -191,10 +173,9 @@ const HomePageWidgets = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    const domainName = process.env.PRODUCTION_URL;
     const settingsData = await getMultipleSetting({settings: ['identity']},process.env.PRODUCTION_URL, false, 'adminPostPage')
     const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, process.env.PRODUCTION_URL, false, Date.now())
-    return {props: {widgets: widgetsData.data.widgets, identity: settingsData.data.settings.identity}}
+    return {props: {widgets: widgetsData?.data?.widgets || null, identity: settingsData?.data?.settings?.identity||null}}
 }
 
 
