@@ -154,7 +154,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
         const widgetsDataQuery = (req.body.widgets || []).map(position=>position==='all' ? {} : {'data.position':position})
         const widgets =  await widgetSchema.find({$or:widgetsDataQuery}).sort('-_id').exec()
         const widgetsWithDynamicData = await widgets.map( async widget=>{
-            console.log(2,widget)
+
             const widgetDataToObject = widget.toObject();
             const selectedMetaId = widgetDataToObject.data?.selectedMetaForPosts;
             const selectedMeta = selectedMetaId ? {$or: [{tags: selectedMetaId}, {categories: selectedMetaId},{actors:selectedMetaId}]} : {}
