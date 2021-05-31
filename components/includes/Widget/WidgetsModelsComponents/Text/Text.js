@@ -14,6 +14,7 @@ const Text = props => {
             .widgetText{
                        color:var(--main-text-color);
                        width:clamp(45ch,90%,75ch);
+                       text-align: center;
             }
 @media only screen and (min-width: 768px) {
     .widgetText{
