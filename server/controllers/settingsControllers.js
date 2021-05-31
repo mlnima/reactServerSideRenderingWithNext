@@ -153,6 +153,7 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
     try{
         const widgetsDataQuery = (req.body.widgets || []).map(position=>position==='all' ? {} : {'data.position':position})
         const widgets =  await widgetSchema.find({$or:widgetsDataQuery}).sort('-_id').exec()
+        console.log(1,widgets)
         const widgetsWithDynamicData = await widgets.map( async widget=>{
 
             const widgetDataToObject = widget.toObject();
@@ -177,10 +178,10 @@ settingsControllers.getMultipleWidgetWithData = async (req, res) => {
             }
         })
             Promise.all(widgetsWithDynamicData).then(widgetsWithData => {
-                console.log(3,widgetsWithData)
                 res.json({widgets: widgetsWithData})
                 res.end()
             }).catch(err => {
+                console.log(err)
                 res.end()
             })
     }catch (e) {
