@@ -35,12 +35,13 @@ width: 15px;
 height: 15px;
 }
 
-.post-element-medium,.post-element-small,.post-element-smaller,h2{
+.post-element-medium,.post-element-small,.post-element-smaller{
 width: 48vw;
 margin: 2px;
 border: none;
 background-color: var(--post-element-background-color);
 }
+
 
 .post-element-list{
 
@@ -105,6 +106,7 @@ max-width: 100%;
                             postElementSize={postElementSize}
                             postElementImageLoader={postElementImageLoader}
                             postElementImageLoaderType={postElementImageLoaderType}
+                            rating={true}
                         />
                         <PostElementTitle title={title} postElementSize={postElementSize}/>
                 </a>

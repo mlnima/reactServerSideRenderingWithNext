@@ -21,7 +21,7 @@ const PostElementTitle = ({title,postElementSize}) => {
               font-weight: initial;
               white-space: nowrap;
               width: 100%;
-              margin: auto;
+              margin: 5px auto auto auto;
               max-width: 320px;
               ${listType}
              }
