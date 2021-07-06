@@ -10,7 +10,7 @@ import '../components/widgetsArea/WidgetArea/WidgetArea.scss';
 import '../components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.scss';
 import '../components/includes/PostElement/PostElement.scss';
 import '../components/includes/CardElement/CardElement.scss';
-import '../components/layouts/AppLayout.scss';
+//import '../components/layouts/AppLayout.scss';
 
 import RedirecterToHttps from "../components/global/RedirecterToHttps/RedirecterToHttps";
 import PwaInstallButton from "../components/includes/PwaInstallButton/PwaInstallButton";

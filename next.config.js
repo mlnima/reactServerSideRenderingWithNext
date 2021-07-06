@@ -4,6 +4,7 @@ const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const languages = process.env.REACT_APP_LOCALS.replace(' ', '|')
 const locales = process.env.REACT_APP_LOCALS.split(' ')
+const withSass = require('@zeit/next-sass');
 const withPWA = require('next-pwa')
 require('webpack')
 
@@ -32,6 +33,20 @@ const svgLoader= {
         return config;
     }
 }
+const sassLoader= {
+    webpack(config) {
+        config.module.rules.push({
+            test: /\.scss$/,
+            use: ['style-loader','css-loader']
+        });
+
+        return config;
+    }
+}
+
+
+
+
 const i18nConfig = locales.length === 1 ? {} : {
     i18n: {
         locales,
@@ -93,6 +108,7 @@ const pwaSettings = {
 
 module.exports = withPlugins([
     svgLoader,
+
     //process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) :{},
     withPWA(pwaSettings),
     additionalConfig,
