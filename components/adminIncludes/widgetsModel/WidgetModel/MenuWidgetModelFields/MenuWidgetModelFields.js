@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import MenuWidgetModelFieldsPreview from "./MenuWidgetModelFieldsPreview";
@@ -19,14 +19,6 @@ const MenuWidgetModelFields = props => {
     const [state, setState] = useState({
         activeEditingLanguage: 'default'
     })
-
-
-
-    // const renderItemsForParent = (props.widgetData.menuItems || []).map(menuItem=>{
-    //     return(
-    //         <option value={menuItem.itemId} key={_.uniqueId('id_')} >{menuItem.name}</option>
-    //     )
-    // });
 
     const onChangeHandlerWithTranslate = (e) => {
         props.widgetSettings.activeEditingLanguage === 'default' ?
@@ -52,12 +44,6 @@ const MenuWidgetModelFields = props => {
         })
     }
 
-    // useEffect(() => {
-    //     console.log(props.widgetSettings.activeEditingLanguage)
-    // }, [props]);
-
-///page?pageName=testPage
-///page/testPage
 
 
     const onAddHandler = e => {
@@ -119,7 +105,6 @@ const MenuWidgetModelFields = props => {
                                           data={menuItem}
                                           widgetData={props.widgetData}
                                           setWidgetData={props.setWidgetData}
-
                                           activeEditingLanguage={props.widgetSettings.activeEditingLanguage}
                                           parentsOption={props.widgetData.menuItems || []}
                                           state={state}
@@ -130,8 +115,13 @@ const MenuWidgetModelFields = props => {
     if (props.rendering) {
         return (
             <div>
+            <style jsx>{`
+                .mobileNavigationLabel{
+                    padding: 0 25px;
+                }
+            `}</style>
                 <div className='menu-form-field'>
-                    <p>Mobile Navigation: <FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo' style={{width:'30px',height:'30px'}}/></p>
+                    <p className='mobileNavigationLabel '><FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo' style={{width:'15px',height:'15px'}}/> Mobile Navigation: </p>
                     <select required={true} name='mobileNavigation' value={props.mobileNavigation} onChange={e => onMenuStyleChangeHandler(e)}>
                         <option>Select</option>
                         <option value='true'>True</option>
@@ -142,12 +132,12 @@ const MenuWidgetModelFields = props => {
                     onChangeHandler={onChangeHandler}
                     onSubmitHandler={onAddHandler}
                     onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
-
                     data={formData}
                     setData={setFormData}
                     state={state}
                     parentsOption={props.widgetData.menuItems || []}
                     activeEditingLanguage={props.widgetSettings.activeEditingLanguage}
+                    onDeleteHandler={()=>null}
                     mode='Add'
                 />
 
@@ -161,50 +151,3 @@ const MenuWidgetModelFields = props => {
 };
 export default MenuWidgetModelFields;
 
-// <form className='add-new-menu-item' onSubmit={e => onAddHandler(e)}>
-//     <div className='menu-form-field'>
-//         <p>Translations:</p>
-//         <select name='activeEditingLanguage' onChange={e => setState({...state, activeEditingLanguage: e.target.value})}>
-//             <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? 'default'}</option>
-//             {languagesOptions}
-//         </select>
-//     </div>
-//     <div className='menu-form-field'>
-//         <p>Parent:</p>
-//         <select name='parent' value={formData.parent} onChange={e => onChangeHandler(e)}>
-//             <option>select</option>
-//             {renderItemsForParent}
-//         </select>
-//     </div>
-//     <div className='menu-form-field'>
-//         <p>Name:</p>
-//         <input required={true} type="text" name='name' onChange={onChangeHandlerWithTranslate}
-//                value={state.activeEditingLanguage === 'default' ? formData.name : formData.translations?.[state.activeEditingLanguage]?.name || ''}
-//         />
-//     </div>
-//     <div className='menu-form-field'>
-//         <p>Target:</p>
-//         <input required={true} type="text" name='target' onChange={e => onChangeHandler(e)}/>
-//     </div>
-//
-//     <div className='menu-form-field'>
-//         <p>As:</p>
-//         <input type="text" name='as' onChange={e => onChangeHandler(e)}/>
-//     </div>
-//     <div className='menu-form-field'>
-//         <p>Item Index:</p>
-//         <input required={true} type='number' name='itemIndex' onChange={e => onChangeHandler(e)}/>
-//     </div>
-//     <div className='menu-form-field'>
-//         <p>Type:</p>
-//         <select required={true} name='type' onChange={e => onChangeHandler(e)} value={formData.type}>
-//             <option>Select</option>
-//             <option value='internal'>Internal</option>
-//             <option value='external'>External</option>
-//         </select>
-//     </div>
-//
-//     <div className='menu-form-field'>
-//         <button type='submit'>Add</button>
-//     </div>
-// </form>

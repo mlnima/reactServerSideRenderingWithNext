@@ -1,63 +1,61 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, {  useContext } from 'react';
 import { clickPathGenerator } from '../../../../_variables/_variables';
 import { AppContext } from '../../../../context/AppContext'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import withRouter from 'next/dist/client/with-router'
 import { fileTypeDetector } from '../../../../_variables/_variables'
-import BarsSvg from '../../../../static/images/fontawesome/bars-solid.svg'
-import JsLogoSvg from '../../../../static/images/fontawesome/js-square-brands.svg'
-import SliderSvg from '../../../../static/images/fontawesome/sliders-h-solid.svg'
-import FolderSvg from '../../../../static/images/fontawesome/folder-solid.svg'
-import SassSvg from '../../../../static/images/fontawesome/sass-brands.svg'
-import FileSvg from '../../../../static/images/fontawesome/file-solid.svg'
-import styled from "styled-components";
-let StyledDiv = styled.div`
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
-  grid-gap: 10px;
-  background-color: white;
-  padding: 20px 20px 200px 20px;
-  border-radius: 20px;
+import { faSlidersH} from "@fortawesome/free-solid-svg-icons";
+import {faCss3Alt, faJs, faSass,fas} from "@fortawesome/free-brands-svg-icons";
+import {faFile, faFolder} from "@fortawesome/free-regular-svg-icons";
 
-  .dirItem {
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-
-    .file-manager-image-item {
-      width: 100px;
-      object-fit: cover;
-    }
-
-    button {
-      width: 100px;
-      height: 100px;
-      background-color: gray;
-      border: none;
-      outline: none;
-      font-size: xxx-large;
-      transition: .4s;
-      border-radius: 10px;
-
-      &:hover {
-        transform: scale(1.2);
-      }
-    }
-
-    p {
-      font-size: small;
-      overflow: hidden;
-    }
-
-    .clickedItem {
-      background-color: rgba(0, 100, 255, 0.8);
-      color: white;
-    }
-
-    .unClickedItem {
-      background-color: transparent;
-    }
-  }
-`
+// let StyledDiv = styled.div`
+//   //display: grid;
+//   //grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+//   //grid-gap: 10px;
+//   //background-color: white;
+//   //padding: 20px 20px 200px 20px;
+//   //border-radius: 20px;
+//
+//   .dirItem {
+//     //display: flex;
+//     //flex-direction: column;
+//     //justify-content: space-between;
+//
+//     //.file-manager-image-item {
+//     //  width: 100px;
+//     //  object-fit: cover;
+//     //}
+//
+//     //button {
+//     //  width: 100px;
+//     //  height: 100px;
+//     //  background-color: gray;
+//     //  border: none;
+//     //  outline: none;
+//     //  font-size: xxx-large;
+//     //  transition: .4s;
+//     //  border-radius: 10px;
+//     //
+//     //  &:hover {
+//     //    transform: scale(1.2);
+//     //  }
+//     //}
+//
+//     //p {
+//     //  font-size: small;
+//     //  overflow: hidden;
+//     //}
+//
+//     .clickedItem {
+//       background-color: rgba(0, 100, 255, 0.8);
+//       color: white;
+//     }
+//
+//     .unClickedItem {
+//       background-color: transparent;
+//     }
+//   }
+// `
 const FileManagerArea = props => {
     const contextData = useContext(AppContext);
 
@@ -74,23 +72,21 @@ const FileManagerArea = props => {
         }
     };
 
-    const logoDetector = fileName => {
-        if (fileName.includes('.js')) {
-            return JsLogoSvg
-        } else if (fileName.includes('.env')) {
-            return SliderSvg
-        } else if (!fileName.includes('.')) {
-            return FolderSvg
-        } else if (fileName.includes('.scss')) {
-            return SassSvg
-        } else return FileSvg
-    }
 
     const WhatToRender = data => {
         const itemType = fileTypeDetector(data.fileName)
         if (itemType === 'image') {
             return (
-                <img className='file-manager-image-item' src={ props.state.path.replace('.', '') + '/' + data.fileName }/>
+                <React.Fragment>
+                <style jsx>{`
+                    .file-manager-image-item {
+                        width: 80px;
+                        object-fit: cover;
+                    }
+                `}</style>
+                    <img className='file-manager-image-item' src={ props.state.path.replace('.', '') + '/' + data.fileName }/>
+                </React.Fragment>
+
             )
         } else if (itemType === 'video'){
             return (
@@ -99,10 +95,45 @@ const FileManagerArea = props => {
                 </video>
             )
         } else {
+            const logoToRender = data.fileName.includes('.js') ? faJs :
+                data.fileName.includes('.env') ? faSlidersH :
+                    !data.fileName.includes('.') ? faFolder :
+                        data.fileName.includes('.scss') ? faSass :
+                            data.fileName.includes('.css') ? faCss3Alt :
+                                faFile
+            const logoColorToRender = data.fileName.includes('.js') ? '#efd81d' :
+                data.fileName.includes('.env') ? 'red' :
+                    !data.fileName.includes('.') ? '#ffe8a0' :
+                        data.fileName.includes('.scss') ? 'red' :
+                            data.fileName.includes('.css') ? 'blue' :
+                                'white'
             return (
+                <React.Fragment>
                 <button className={ [ classGenerator(data.fileName) ] } key={ data.fileName } name={ data.fileName }  >
-                    <img className='fontawesomeSvgLarge' src={ logoDetector(data.fileName) } alt=""/>
+                <style jsx>{`
+                    button {
+                        width: 80px;
+                        height: 80px;
+                        background-color: rgba(255,255,255,.1);
+                        border: none;
+                        outline: none;
+                       // font-size: xxx-large;
+                        transition: .4s;
+                        border-radius: 10px;
+                    }
+                    button:hover {
+                        transform: scale(1.2);
+                    }
+                    .file-manager-icons{
+                      color:white;
+                    }
+                `}</style>
+                    <FontAwesomeIcon style={{width:'50px',height:'50px',color:logoColorToRender}}
+                                     icon={logoToRender}
+                                     //icon={['fas', 'coffee']}
+                                     className='file-manager-icons'/>
                 </button>
+                </React.Fragment>
             )
         }
     }
@@ -121,6 +152,19 @@ const FileManagerArea = props => {
     let renderDir = props.state.files.map(item => {
         return (
             <div key={ item } className='dirItem' onClick={()=>onClickHandler(item)}>
+            <style jsx>{`
+                .dirItem{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: space-between;
+                }
+                p {
+                    font-size: small;
+                    overflow: hidden;
+                    color:white;
+                    text-align: center;
+                }
+            `}</style>
                 <WhatToRender key={item} fileName={ item }/>
                 <p> { item }</p>
             </div>
@@ -128,9 +172,19 @@ const FileManagerArea = props => {
     });
 
     return (
-        <StyledDiv className='FileManagerArea'>
+        <div className='FileManagerArea'>
+        <style jsx>{`
+            .FileManagerArea{
+                display: grid;
+                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+                grid-gap: 10px;
+                background-color: black;
+                padding: 20px 20px 200px 20px;
+                border-radius: 20px;
+            }
+        `}</style>
             { renderDir }
-        </StyledDiv>
+        </div>
     );
 };
 export default withRouter(FileManagerArea);

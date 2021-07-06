@@ -5,7 +5,7 @@ const RenderArraySection = props => {
 
     const renderArrItem = (props.data||[]).map(item => {
         return (
-            <Link key={item.name} href="/">
+            <Link key={_.uniqueId('id_')} href="/" >
                 <a className='asset-page-item-array-section-item'>{ item.name }</a>
             </Link>
         )

@@ -51,9 +51,8 @@ const WidgetGroupByPosition = props => {
         
         @media only screen and (min-width: 768px) {
         .widgetAdminPanelItem {
-        width: 550px;
+        width: 450px;
         position: relative;
-        
         }
         }
         `}</style>

@@ -2,20 +2,24 @@ import React, {useContext, useState} from 'react';
 import {AppContext} from "../../../context/AppContext";
 import Link from "next/link";
 import {convertVariableNameToName} from '../../../_variables/_variables'
-import axios from "axios";
-import SortUpSvg from '../../../static/images/fontawesome/sort-up-solid.svg'
-import SortDownSvg from '../../../static/images/fontawesome/sort-down-solid.svg'
 import withRouter from 'next/dist/client/with-router'
 import _ from "lodash";
-import WidgetModel from "../widgetsModel/WidgetModel/WidgetModel";
 import styled from "styled-components";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+
+
+
+
 let StyledDiv = styled.div`
+  position: absolute;
+  
   font-size: 14px;
-  position: fixed;
+  //position: fixed;
   left: 0;
-  top: 40px;
+  top: 0;
   grid-area: adminSideBar;
-  min-height: 100vh;
+  min-height: 100%;
   width: 160px;
   background-color: #24282d;
   display: flex;
@@ -79,7 +83,7 @@ let StyledDiv = styled.div`
 
   }
 @media only screen and (min-width: 768px) {
-  position: initial;
+  //position: initial;
 }
 `
 const SideBar = props => {
@@ -175,11 +179,20 @@ const SideBar = props => {
 
     const [hovered, setHovered] = useState('')
 
+
+    const closeAdminSidebar = ()=>{
+        contextData.dispatchSettings(settings => ({
+            ...settings,
+            adminPanelSideBar: false,
+        }))
+    }
+
+
     const renderItems = Object.keys(state).map(item => {
         const onHoverHandler = state[item].subItems.map(subItem => {
             if (hovered === item) {
                 return (
-                    <Link  key={_.uniqueId('id_')} href={subItem.url}><a className='SideBarItem-SubItem'>{convertVariableNameToName(subItem.name)}</a></Link>
+                    <Link  key={_.uniqueId('id_')} href={subItem.url} ><a className='SideBarItem-SubItem' onClick={closeAdminSidebar}>{convertVariableNameToName(subItem.name)}</a></Link>
                 )
             } else return null
 
@@ -187,7 +200,9 @@ const SideBar = props => {
         const RenderArrowsForSubMenus = () => {
             if (state[item].subItems.length > 0) {
                 return (
-                    <button onClick={() => hovered === item ? setHovered('') : setHovered(item)}><img className='fontawesomeSvgVerySmall' src={hovered === item ? SortUpSvg : SortDownSvg} alt=""/>
+                    <button key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
+                        <FontAwesomeIcon icon={ hovered === item ? faSortUp : faSortDown} className='fontawesomeSvgVerySmall' />
+
                     </button>
                 )
             } else return null
@@ -196,7 +211,7 @@ const SideBar = props => {
         return (
             <div key={item} className='SideBarItemElement'>
                 <div className='SideBarItemTitle' onMouseOver={() => setHovered(item)}>
-                    <Link href={state[item].pathURL}><a className='SideBarItem'>{convertVariableNameToName(item)}</a></Link>
+                    <Link href={state[item].pathURL}><a className='SideBarItem' onClick={closeAdminSidebar}>{convertVariableNameToName(item)}</a></Link>
                     <RenderArrowsForSubMenus/>
                 </div>
                 <div className='SideBarItemElementSubItems'>

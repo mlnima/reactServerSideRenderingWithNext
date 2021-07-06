@@ -29,6 +29,7 @@ const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFie
 const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'))
 const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false})
 import styled from "styled-components";
+
 let StyledDiv = styled.div`
   z-index: 3;
   background-color: var(--admin-color-8);
@@ -202,11 +203,11 @@ const WidgetModel = props => {
         const value = e.target.value
         setWidgetData({
             ...widgetData,
-            [e.target.name]: value === 'true'? true : value === 'false'  ? false  :value
+            [e.target.name]: value === 'true' ? true : value === 'false' ? false : value
         })
     };
 
-    const onCheckboxChangeHandler = e =>{
+    const onCheckboxChangeHandler = e => {
         setWidgetData({
             ...widgetData,
             [e.target.name]: e.target.checked
@@ -214,9 +215,9 @@ const WidgetModel = props => {
     }
 
 
-    useEffect(() => {
-        console.log(widgetData.editMode)
-    }, [widgetData]);
+    // useEffect(() => {
+    //     console.log(widgetData.editMode)
+    // }, [widgetData]);
 
 
     const onChangeHandlerByName = (name, value) => {
@@ -235,6 +236,21 @@ const WidgetModel = props => {
             ...widgetSettings,
             open: false
         }) : setWidgetSettings({...widgetSettings, open: true})
+    };
+    const onLockHandler = () => {
+        const dataToSave = {
+            _id: props.widgetId,
+            data: {
+                ...widgetData,
+                stayOpen: !widgetData.stayOpen
+            }
+        }
+        updateWidgets(dataToSave).then(() => {
+            setTimeout(() => {
+                props.getAndSetWidgetsData()
+            }, 0)
+
+        })
     };
 
     const onCloneHandler = () => {
@@ -333,14 +349,20 @@ const WidgetModel = props => {
         }
     };
 
+    //
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [widgetSettings.stayOpen]);
 
-    if (widgetSettings.open) {
+
+    if (widgetSettings.open || widgetData.stayOpen) {
         return (
 
             <>
-                <WidgetHeaderControl setKey={false} widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} changeWidgetIndex={changeWidgetIndex}
+                <WidgetHeaderControl setKey={false} widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData}  onLockHandler={onLockHandler} changeWidgetIndex={changeWidgetIndex}
                                      onOpenHandler={onOpenHandler}/>
                 <StyledDiv className='widgetModel'>
+
                     <div className='selectInputFieldForWidget widgetSection'>
                         <p>Edit Mode:</p>
                         <input type='checkbox' name='editMode' checked={widgetData.editMode} onChange={e => onCheckboxChangeHandler(e)}/>
@@ -717,7 +739,7 @@ const WidgetModel = props => {
         );
     } else {
         return (
-            <WidgetHeaderControl widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} changeWidgetIndex={changeWidgetIndex} onOpenHandler={onOpenHandler}/>
+            <WidgetHeaderControl widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} onLockHandler={onLockHandler} changeWidgetIndex={changeWidgetIndex} onOpenHandler={onOpenHandler}/>
         )
     }
 

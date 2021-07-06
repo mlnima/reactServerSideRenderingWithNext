@@ -1,1 +1,0 @@
-{"ast":null,"code":"var jwtDecoder = require('jwt-decode');\n\nvar tokenExpireTime = '1000h';\n\nvar dataDecoder = function dataDecoder(token) {\n  return jwtDecoder(token);\n};\n\nmodule.exports = dataDecoder;","map":null,"metadata":{},"sourceType":"script"}
