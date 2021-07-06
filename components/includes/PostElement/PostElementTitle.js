@@ -2,7 +2,7 @@ const PostElementTitle = ({title,postElementSize}) => {
     const listType = postElementSize === 'list'?
         `  -webkit-box-orient: vertical;
             display: -webkit-box;
-            -webkit-line-clamp: 4;
+            -webkit-line-clamp: 3;
             overflow: hidden;
             text-overflow: ellipsis;
             white-space: normal;
@@ -20,7 +20,7 @@ const PostElementTitle = ({title,postElementSize}) => {
               word-wrap: break-word;
               font-weight: initial;
               white-space: nowrap;
-              width: 100%;
+              width: ${postElementSize === 'list'? '50%' : '100%'};
               margin: 5px auto auto auto;
               max-width: 320px;
               ${listType}

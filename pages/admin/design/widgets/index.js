@@ -1,12 +1,7 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import AdminLayout from '../../../../components/layouts/AdminLayout'
+import {useEffect, useState, useContext} from 'react';
 import AddWidgetMenu from '../../../../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
 import {AppContext} from '../../../../context/AppContext'
-import WidgetModel from '../../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel';
-import {getFirstLoadData, getMultipleSetting, getMultipleWidgetWithData, getPagesData} from '../../../../_variables/ajaxVariables'
-import {getAbsolutePath} from '../../../../_variables/_variables'
-import ColorSection from '../../../../components/adminIncludes/design/ColorSection'
-import {convertVariableNameToName} from '../../../../_variables/_variables'
+import {getMultipleSetting, getMultipleWidgetWithData, getPagesData} from '../../../../_variables/ajaxVariables'
 import WidgetGroupByPosition from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import _ from 'lodash';
 import styled from "styled-components";
@@ -72,18 +67,15 @@ let StyledDiv = styled.div`
   }
   
   @media only screen and (min-width: 768px) {
-
     #widget-setting {
       h2{
         justify-self: end;
         width: 98%;
       }
       .widgets {
-  
-       // grid-template-columns: repeat(auto-fill, minmax(550px, 1fr));
+       grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
        display:flex;
        flex-wrap:wrap;
-
       }
     }
 }

@@ -100,7 +100,8 @@ const Post = ({responseCode,design,post,identity,comments,widgets}) => {
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req,['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],'postPage')
     let responseCode = 200
-    const postData = await getPost({_id: context.query.id}, firstLoadData.domainName, true)
+    //console.log('query',context.query.title)
+    const postData = await getPost({_id: context.query.id,title:context.query.title}, firstLoadData.domainName, true)
     const post = postData.data.post;
     if (!post) {
         return {

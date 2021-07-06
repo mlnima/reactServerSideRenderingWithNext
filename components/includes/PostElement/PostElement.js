@@ -44,14 +44,15 @@ background-color: var(--post-element-background-color);
 
 
 .post-element-list{
-
 width: 100%;
+
 }
 .post-element-list>.post-element-link{
 
 width: 100%;
 
 display: flex;
+justify-content: space-between;
 flex-direction: row;
 
 }
@@ -81,6 +82,7 @@ max-width: 100%;
 width: 240px;
 max-width: 100%;
 }
+
 }
 
 `}</style>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState} from 'react';
+import React, { useEffect, useState,createContext} from 'react';
 import axios from "axios";
 import {useRouter} from "next/router";
 
 
-export const AppContext = React.createContext();
+export const AppContext = createContext();
 
 const AppProvider = props => {
     const router = useRouter()

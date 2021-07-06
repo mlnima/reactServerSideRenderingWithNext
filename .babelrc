@@ -1,7 +1,8 @@
 {
   "presets": ["next/babel"],
   "plugins": [
-    ["styled-components", { "ssr": true,"displayName": false,"preprocess": true}]
+    ["styled-components", { "ssr": true,"displayName": false,"preprocess": true}],
+    ["inline-react-svg"]
   ]
 }
 

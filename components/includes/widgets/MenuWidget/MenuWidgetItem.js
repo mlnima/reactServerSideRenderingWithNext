@@ -27,7 +27,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
         // }
 //console.log(subItem)
         return (
-            <ul className='menu-widget-sub-item' key={_.uniqueId('id_')}>
+            <li className='menu-widget-sub-item' key={_.uniqueId('id_')}>
                 <style jsx>{`
 .menu-widget-sub-item{
 display: ${showSub ? 'initial' : 'none'};
@@ -52,7 +52,7 @@ padding: 10px 15px;
                     mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
                 />
 
-            </ul>
+            </li>
         )
     })
 
@@ -117,15 +117,15 @@ width: ${!menuItem.parent? (menuItem.subItems || []).length >0 ?'auto': 'auto':'
                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
             />
             {menuItem?.subItems?.length > 0 ?
-                <button className='open-submenus' onClick={onOpenSubmenusHandler}>
+                <span className='open-submenus'  aria-label='Center Align' onClick={onOpenSubmenusHandler}>
                     <FontAwesomeIcon icon={showSub ? faSortUp : faSortDown} className='navigation-dropdown-icon' style={{color: 'white', width: '20px', height: '20px'}}/>
-                </button>
+                </span>
                 : null}
 
             {showSub ?
-                <div className='dropdown-content'>
+                <ul className='dropdown-content'>
                     {renderSubMenus}
-                </div>
+                </ul>
                 : null
             }
 

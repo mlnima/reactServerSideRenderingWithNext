@@ -1,6 +1,8 @@
 import React, {useContext} from 'react';
 import {AppContext} from "../../../context/AppContext";
 import styled from "styled-components";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -84,13 +86,15 @@ const Loading = () => {
     if (contextData.state.loading) {
         return (
             <StyledDiv className='Loading'>
+                <button className='stopLoading fas fa-times' onClick={() => onStopLoadingHandler()}>
+                    <FontAwesomeIcon style={{width:'1rem',height:'1rem'}} icon={faTimes} className='stopLoading' />
+                </button>
                 <div className="lds-ring">
                     <div/>
                     <div/>
                     <div/>
                     <div/>
                 </div>
-                <button className='stopLoading fas fa-times' onClick={() => onStopLoadingHandler()}/>
             </StyledDiv>
         );
     } else return null

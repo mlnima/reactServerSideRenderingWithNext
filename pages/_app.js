@@ -11,7 +11,7 @@ import '../components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.sc
 import '../components/includes/PostElement/PostElement.scss';
 import '../components/includes/CardElement/CardElement.scss';
 import '../components/layouts/AppLayout.scss';
-import '../components/layouts/AdminLayout.scss';
+
 import RedirecterToHttps from "../components/global/RedirecterToHttps/RedirecterToHttps";
 import PwaInstallButton from "../components/includes/PwaInstallButton/PwaInstallButton";
 
@@ -29,20 +29,20 @@ const MyApp = ({Component, pageProps}) => {
         scroll.scrollToTop();
     }, [pageProps]);
 
-    useEffect(() => {
-        if ("serviceWorker" in navigator) {
-            window.addEventListener("load", function () {
-                navigator.serviceWorker.register("/sw.js").then(
-                    // function (registration) {
-                    //     console.log("Service Worker registration successful with scope: ", registration.scope);
-                    // },
-                    // function (err) {
-                    //     console.log("Service Worker registration failed: ", err);
-                    // }
-                );
-            })
-        }
-    }, []);
+    // useEffect(() => {
+    //     if ("serviceWorker" in navigator) {
+    //         window.addEventListener("load", function () {
+    //             navigator.serviceWorker.register("/sw.js").then(
+    //                 // function (registration) {
+    //                 //     console.log("Service Worker registration successful with scope: ", registration.scope);
+    //                 // },
+    //                 // function (err) {
+    //                 //     console.log("Service Worker registration failed: ", err);
+    //                 // }
+    //             );
+    //         })
+    //     }
+    // }, []);
 
     if (!router.pathname.includes('/admin')) {
         return (

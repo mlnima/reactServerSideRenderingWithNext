@@ -160,8 +160,11 @@ postsControllers.getPostsInfo = async (req, res) => {
 
 
 postsControllers.getPostInfo = (req, res) => {
+    const title = req.body.title;
     const _id = req.body._id;
-    postSchema.findById(_id).populate([
+    const findQuery = _id ? {_id} : {title:decodeURI(title)}
+    console.log(findQuery)
+    postSchema.findOne(findQuery).populate([
         {path: 'categories'},
         {path: 'tags'},
         {path: 'actors'},

@@ -64,10 +64,12 @@ const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postE
                             margin: auto;
                             color: white;
                         }
+                        }
                     }
                 `}</style>
                     <MetaElementImage
                         imageUrl={imageUrl || noImageUrl}
+                        postElementSize={postElementSize}
                     />
                     <div className='meta-item-data'>
                         <p>{translations ? translations[contextData.state.activeLanguage] ? translations[contextData.state.activeLanguage].name || name : name : name} {showCount?`(${count})`:null}</p>

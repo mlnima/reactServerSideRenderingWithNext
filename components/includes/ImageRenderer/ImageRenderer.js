@@ -14,7 +14,7 @@ const ImageRenderer = props => {
     const imageWidth = props.postElementSize === 'list' ? 116.6 :
         props.postElementSize === 'smaller' ? 209.8 :
             props.postElementSize === 'small' ? 255 :
-                props.postElementSize === 'medium' ? 320 : 255
+                props.postElementSize === 'medium' ? 320 :255
 
 
     const onErrorHandler = e => {

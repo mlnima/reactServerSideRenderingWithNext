@@ -34,6 +34,7 @@ const PostDescription = ({description,translations}) => {
             <style jsx>{`
             .description{
             color:var(--post-page-info-color);
+             margin: 0 5px;
             }
             `}</style>
 

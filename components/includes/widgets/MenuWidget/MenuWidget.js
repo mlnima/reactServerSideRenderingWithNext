@@ -52,7 +52,7 @@ const MenuWidget = props => {
 
 
     return (
-        <ol className='menu-widget'>
+        <ul className='menu-widget'>
         <style jsx>{`
             .menu-widget{
              background-color: var(--navigation-background-color);
@@ -131,14 +131,14 @@ margin:0;
             </button>
 
             <ul className='menu-widget-items' ref={menuItemsElement} style={{display: open ? 'flex' : 'none'}}>
-                <button
+                <span
                     onClick={() => open ? setOpen(false) : setOpen(true)}
                     className='navigation-close-button'>
                     <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo svg-logo-medium' />
-                </button>
+                </span>
                 {renderMenuItems}
             </ul>
-        </ol>
+        </ul>
     );
 };
 export default MenuWidget;

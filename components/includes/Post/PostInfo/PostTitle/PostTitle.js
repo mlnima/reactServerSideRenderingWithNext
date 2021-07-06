@@ -12,6 +12,7 @@ const PostTitle = ({title, translations}) => {
                     color: var(--post-page-info-color);
                     font-size: 1.25em;
                     text-align: center;
+                   
                 }
             `}</style>
             {

@@ -1,16 +1,18 @@
-import React, { useEffect, useState, useContext } from 'react';
-import AdminLayout from "../../components/layouts/AdminLayout";
-import Analytics from '../../components/adminIncludes/Analytics/Analytics'
+//import Analytics from '../../components/adminIncludes/Analytics/Analytics'
 
-const Index = () => {
-
+const AdminHomePage = () => {
     return (
+        <div>
+            <style jsx>{`
+                h1{
+                    text-align: center;
+                }
+            `}</style>
+            <h1>Welcome To Admin Panel</h1>
 
-                <div>
-                    welcome to admin panel
-                    <Analytics/>
-                </div>
+            {/*<Analytics/>*/}
+        </div>
 
     );
 };
-export default Index;
+export default AdminHomePage;

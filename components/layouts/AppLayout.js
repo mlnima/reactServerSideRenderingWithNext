@@ -50,13 +50,19 @@ const AppLayout = props => {
     }, [props.widgets]);
 
     useEffect(() => {
+        // router.events.on('routeChangeStart',routeChangedHandler)
+        routeChangedHandler()
+    }, [props]);
+
+    const routeChangedHandler = ()=>{
         contextData.state.loading ?
             contextData.dispatchState({
                 ...contextData.state,
                 loading:false
             }):
             null
-    }, [props]);
+    }
+
 
     const sidebarPositionName = useMemo(() =>
             router.pathname === '/' ? 'homePageSidebar' :

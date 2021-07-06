@@ -18,7 +18,8 @@ const Logo = props => {
 .logo{
 text-decoration: none;
 display: flex;
-flex-direction: column;
+flex-direction: row;
+flex-wrap: wrap;
 align-items: center;
 justify-content: flex-start;
 cursor: pointer;
@@ -29,6 +30,15 @@ font-size: xx-large;
 }
 .logo-text,.logo-headline{
 color: var(--main-text-color);
+}
+.logo-headline{
+margin: 0 5px;
+}
+@media only screen and (min-width: 768px){
+.logo{
+ 
+}
+
 }
 `}</style>
 

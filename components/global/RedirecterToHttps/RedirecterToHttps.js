@@ -30,7 +30,7 @@ const RedirecterToHttps = () => {
           // console.log(state.sslUrl)
             setTimeout(()=>{
                 clickOnRedirectLink()
-            },1000)
+            },100)
 
         }
 

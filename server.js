@@ -81,7 +81,9 @@ app.prepare().then(() => {
    // }
 
     // console.log(process.env.REACT_APP_SSL)
-    console.log(sslOptions)
+    //console.log(sslOptions)
+
+
     const server = express(sslOptions);
     server.use(cookieParser());
     server.use(fileUpload());
@@ -90,7 +92,12 @@ app.prepare().then(() => {
     server.use(compression({filter: shouldCompress}));
     server.use('/static', express.static(path.join(__dirname, 'static')))
 
+    const serverLog = (req,res)=>{
+        //console.log(req.url)
+    }
+
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
+        serverLog(req, res)
         apicache.clear(req.params.collection)
         res.end()
     });
@@ -116,6 +123,7 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     //manifest
     server.get('/manifest.json', cacheSuccesses, async (req, res) => {
+        serverLog(req, res)
         const identityData = await settingSchema.findOne({type: 'identity'})
         // console.log(identityData, process.env.PRODUCTION_URL, identityData?.data?.favIcon)
         const manifestJsonData = {
@@ -153,154 +161,196 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 
     //xml siteMap handler
     server.get('/sitemap.xsl', (req, res) => {
+        serverLog(req, res)
         return res.status(200).sendFile('sitemap.xsl', robotsOptions)
     });
     server.get('/sitemap.xml', (req, res) => {
+        serverLog(req, res)
         siteMapController.siteMap(req, res)
     });
     server.get('/sitemaps/:month', (req, res) => {
+        serverLog(req, res)
         siteMapsController.siteMapMonths(req, res)
     });
     server.get('/sitemap/:month/:pageNo', (req, res) => {
+        serverLog(req, res)
         subSiteMapsController.siteMap(req, res)
     });
 
     //users handler
     server.post('/api/v1/users/register', (req, res) => {
+        serverLog(req, res)
         userController.register(req, res)
     });
     server.post('/api/v1/users/login', (req, res) => {
+        serverLog(req, res)
         userController.login(req, res)
     });
     server.post('/api/v1/users/resetPassword', authMiddleware, (req, res) => {
+        serverLog(req, res)
         userController.resetPassword(req, res)
     });
     server.post('/api/v1/users/getUserInfo', authMiddleware, (req, res) => {
+        serverLog(req, res)
         userController.getUserInfo(req, res)
     });
     server.post('/api/v1/users/getUserData', authMiddleware, (req, res) => {
+        serverLog(req, res)
         userController.getUserData(req, res)
     });
     // server.post('/api/v1/users/getMyProfileData',authMiddleware,(req,res)=>{userController.getMyProfileData(req,res)});
     server.post('/api/v1/users/updateUserData', adminAuthMiddleware, (req, res) => {
+        serverLog(req, res)
         userController.updateUserData(req, res)
     });
     server.post('/api/v1/users/getUsersList', (req, res) => {
+        serverLog(req, res)
         userController.getUsersList(req, res)
     });
     server.post('/api/v1/users/getUsersListAsAdmin', adminAuthMiddleware, (req, res) => {
+        serverLog(req, res)
         userController.getUsersListAsAdmin(req, res)
     });
     server.post('/api/v1/users/newAPIKey', adminAuthMiddleware, (req, res) => {
+        serverLog(req, res)
         userController.newAPIKey(req, res)
     });
 
     //posts handler
     // server.post('/api/v1/posts',authMiddleware,(req,res)=>{postsControllers.getPostsInfo(req,res)});
     server.post('/api/v1/posts', cacheSuccesses, async (req, res) => {
+           serverLog(req, res)
         await postsControllers.getPostsInfo(req, res)
     });
     server.post('/api/v1/posts/post', cacheSuccesses, (req, res) => {
+           serverLog(req, res)
         postsControllers.getPostInfo(req, res)
     });
     server.post('/api/v1/posts/createNewPost', adminAuthMiddleware, async (req, res) => {
+           serverLog(req, res)
         await postsControllers.createNewPost(req, res)
     });
     server.post('/api/v1/posts/updatePost', adminAuthMiddleware, async (req, res) => {
+           serverLog(req, res)
         await postsControllers.updatePost(req, res)
     });
     server.post('/api/v1/posts/deletePost', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         postsControllers.deletePost(req, res)
     });
     server.post('/api/v1/posts/postsBulkAction', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         postsControllers.postsBulkAction(req, res)
     });
     server.post('/api/v1/posts/likeDislikeView', (req, res) => {
+           serverLog(req, res)
         postsControllers.likeDislikeView(req, res)
     });
 
     server.post('/api/v1/posts/bulkAction', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         postsControllers.bulkAction(req, res)
     });
     server.post('/api/v1/posts/checkRemovedContent', (req, res) => {
+           serverLog(req, res)
         postsControllers.checkRemovedContent(req, res)
     });
 
 
     //meta data handler(tags,categories...)
     server.post('/api/v1/posts/getMeta', cacheSuccesses, (req, res) => {
+           serverLog(req, res)
         //need to be cache id page cache doesnt work
         postsControllers.getMeta(req, res)
     });
     server.post('/api/v1/posts/getSingleMeta', (req, res) => {
+           serverLog(req, res)
         //need to be cache id page cache doesnt work
         postsControllers.getSingleMeta(req, res)
     });
     server.post('/api/v1/posts/updateMeta', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         postsControllers.updateMeta(req, res)
     });
     server.post('/api/v1/posts/deleteMeta', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         //need to be cache id page cache doesnt work
         postsControllers.deleteMeta(req, res)
     });
 
     //comments handler
     server.post('/api/v1/posts/newComment', (req, res) => {
+           serverLog(req, res)
         postsControllers.newComment(req, res)
     });
     server.post('/api/v1/posts/getComments', (req, res) => {
+           serverLog(req, res)
         postsControllers.getComments(req, res)
     });
     server.post('/api/v1/posts/updateComment', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         postsControllers.updateComment(req, res)
     });
     server.post('/api/v1/posts/deleteComments', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         postsControllers.deleteComments(req, res)
     });
 
     //settings handler
     server.post('/api/v1/settings/update', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         settingsControllers.update(req, res)
     });
     server.post('/api/v1/settings/get', (req, res) => {
+           serverLog(req, res)
         settingsControllers.get(req, res)
     });
     server.post('/api/v1/settings/getMultiple', cacheSuccesses, (req, res) => {
+           serverLog(req, res)
         //need to be cache id page cache doesnt work
         //cacheSuccesses
         settingsControllers.getMultiple(req, res)
     });
     server.post('/api/v1/settings/addWidget', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         settingsControllers.addWidget(req, res)
     });
     server.post('/api/v1/settings/getSingleWidgetData', (req, res) => {
+           serverLog(req, res)
         settingsControllers.getSingleWidgetData(req, res)
     });
     server.post('/api/v1/settings/getWidget', (req, res) => {
+           serverLog(req, res)
         settingsControllers.getWidget(req, res)
     });
 
     //cacheSuccesses
     server.post('/api/v1/settings/getMultipleWidgetWithData', cacheSuccesses, (req, res) => {
+           serverLog(req, res)
         settingsControllers.getMultipleWidgetWithData(req, res)
     });
 
 
     server.post('/api/v1/settings/getWidgetsWithData', cacheSuccesses, (req, res) => {
+           serverLog(req, res)
         //cacheSuccesses
         settingsControllers.getWidgetsWithData(req, res)
     });
     server.post('/api/v1/settings/updateWidget', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         settingsControllers.updateWidget(req, res)
     });
     server.post('/api/v1/settings/deleteWidget', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         settingsControllers.deleteWidget(req, res)
     });
     server.post('/api/v1/settings/saveCustomStyle', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         settingsControllers.saveCustomStyle(req, res)
     });
     //exe commands
     server.post('/api/v1/settings/executor', adminAuthMiddleware, (req, res) => {
+           serverLog(req, res)
         settingsControllers.executor(req, res)
     });
     //cache control
@@ -370,8 +420,11 @@ Sitemap: ${process.env.PRODUCTION_URL}/sitemap.xml
 //     server.get('/',(req, res) => {
 //         return app.render(req, res,  '/')
 //     });
+//     server.get('/_next/static/development/_devPagesManifest.json', ({ req, res }) => handle(req, res));
+//     server.get('/_next/build-manifest.json', ({ req, res }) => handle(req, res));
 
     server.get('*', (req, res) => {
+        serverLog(req, res)
         return handle(req, res)
     });
 

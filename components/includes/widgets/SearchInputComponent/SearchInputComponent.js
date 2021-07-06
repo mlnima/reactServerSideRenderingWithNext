@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React,{useEffect, useState} from 'react';
 import withRouter from 'next/dist/client/with-router'
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -93,12 +93,12 @@ const SearchInputComponent = props => {
 
 
     return (
-        <div>
+        <React.Fragment>
             <style jsx>{`
                 .search-bar{
                     display: flex;
                     height: 24px;
-                    width: 100%;
+                    width: clamp(100px, 200px, 400px);
                     font-size: 1em;
                 }
                 .search-input {
@@ -107,7 +107,8 @@ const SearchInputComponent = props => {
                     width: 80%;
                     margin-right: 0;
                     border: none;
-                    border-radius: 3px 0  0  3px;
+                   // border-radius: 3px 0  0  3px;
+                    padding: 0 5px;
                 }
                 .search-input:focus{
                     outline: none;
@@ -121,7 +122,7 @@ const SearchInputComponent = props => {
                     outline: none;
                     padding: 0.2em;
                     margin-left: 0;
-                    border-radius: 0 3px 3px 0;
+                    //border-radius: 0 3px 3px 0;
                     border: none;
                     color: var(--main-text-color);
                 }
@@ -155,6 +156,14 @@ const SearchInputComponent = props => {
                       width: 20px;
                       height: 20px;
                 }
+                @media only screen and (min-width: 768px){
+                                .search-bar{
+                    display: flex;
+                    height: 24px;
+                    width: clamp(250px, 400px, 600px);
+                    font-size: 1em;
+                }
+                }
             `}</style>
             {isOpen || !props.mobileMode ?
                 <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
@@ -172,7 +181,7 @@ const SearchInputComponent = props => {
                 </button>
             }
 
-        </div>
+        </React.Fragment>
     )
 
 

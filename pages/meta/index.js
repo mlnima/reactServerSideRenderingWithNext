@@ -32,7 +32,8 @@ const meta = ({metaSource, identity, dataForGettingMeta,design}) => {
                     display: flex;
                     flex-wrap: wrap;
                     align-items: center;
-                    justify-content: flex-start;
+                    justify-content: center;
+                    max-width: 100%;
                 }
             `}</style>
             <PaginationComponent

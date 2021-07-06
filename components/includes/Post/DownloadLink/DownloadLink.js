@@ -25,6 +25,7 @@ const DownloadLink = props => {
                     }
                 `}</style>
                 <a  href={ props.downloadLink } target='_blank' className='download-link' rel="noreferrer">
+                    <span style={{display:'none'}}>download link for post</span>
                     <FontAwesomeIcon icon={faDownload} className='download-logo'/>
                 </a>
             </div>
