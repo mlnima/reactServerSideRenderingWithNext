@@ -133,9 +133,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.fixMetaData" />
         <item itemvalue="Node.js.fixMetaData.js" />
       </list>
