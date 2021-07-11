@@ -20,7 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/components/global/RedirecterToHttps/RedirecterToHttps.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/RedirecterToHttps/RedirecterToHttps.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/_variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_variables.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -673,7 +673,7 @@
       <workItem from="1625824068747" duration="785000" />
       <workItem from="1625840866855" duration="6528000" />
       <workItem from="1625911952755" duration="33405000" />
-      <workItem from="1625998980565" duration="12453000" />
+      <workItem from="1625998980565" duration="13180000" />
     </task>
     <servers />
   </component>

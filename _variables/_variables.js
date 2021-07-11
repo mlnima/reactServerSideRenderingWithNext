@@ -11,7 +11,8 @@ export const likeValueCalculator = (likes, dislikes) => {
 }
 
 export const getAbsolutePath = async (req) => {
-    return await req.protocol + '://' + await req.get('Host')
+    const protocol = process.env.REACT_APP_SSL === 'true' ? 'https' : await req.protocol
+    return protocol + '://' + await req.get('Host')
 }
 
 export const generateAbsolutePath = () => {
