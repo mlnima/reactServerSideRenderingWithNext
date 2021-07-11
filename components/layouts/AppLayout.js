@@ -21,6 +21,7 @@ let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 
 const AppLayout = props => {
+    //console.log(props)
     const contextData = useContext(AppContext);
     const router = useRouter()
     const [leftSidebarWidgets, setLeftSidebarWidgets] = useState([])
@@ -69,6 +70,8 @@ const AppLayout = props => {
                 router.pathname === '/post' ? 'postPageSidebar' :
                     router.pathname === '/posts' ? 'postsPageSidebar' :
                         router.pathname === '/meta' ? 'metaPageSidebar' :
+                          router.pathname.includes('/profile')  ? 'profilePageSidebar' :
+                          router.pathname === '/user' ? 'userPageSidebar' :
                             router.pathname === '/page' ? props.pageInfo?.pageName + 'Sidebar' :
                                 'homePageSidebar'
         , [router.pathname])
@@ -77,6 +80,8 @@ const AppLayout = props => {
         router.pathname === '/post' ? 'postPageLeftSidebar' :
             router.pathname === '/posts' ? 'postsPageLeftSidebar' :
                 router.pathname === '/meta' ? 'metaPageLeftSidebar' :
+                    router.pathname.includes('/profile')  ? 'profilePageLeftSidebar' :
+                   router.pathname === '/user' ? 'userPageLeftSidebar' :
                     router.pathname === '/page' ? props.pageInfo?.pageName + 'LeftSidebar' :
                         'homePageLeftSidebar', [router.pathname])
 
@@ -84,7 +89,9 @@ const AppLayout = props => {
         router.pathname === '/post' ? 'postPageRightSidebar' :
             router.pathname === '/posts' ? 'postsPageRightSidebar' :
                 router.pathname === '/meta' ? 'metaPageRightSidebar' :
-                    router.pathname === '/page' ? props.pageInfo?.pageName + 'RightSidebar' :
+                    router.pathname.includes('/profile')  ? 'profilePageRightSidebar' :
+                    router.pathname === '/user' ? 'userPageRightSidebar' :
+                      router.pathname === '/page' ? props.pageInfo?.pageName + 'RightSidebar' :
                         'homePageRightSidebar', [router.pathname])
 
     const sidebarType = useMemo(() => props.identity?.data?.[sidebarPositionName] || contextData?.siteIdentity[sidebarPositionName] || props.pageInfo?.sidebar, [sidebarPositionName, props.pageInfo])

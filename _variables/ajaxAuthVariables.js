@@ -14,7 +14,7 @@ export const login = async data => {
 }
 
 export const resetPassword = async (oldPass, newPass, newPass2) => {
-    console.log( oldPass, newPass, newPass2)
+    //console.log( oldPass, newPass, newPass2)
     let body = {
         oldPass,
         newPass,
@@ -31,7 +31,7 @@ export const getUsersListAsAdmin = async (id, token) => {
         token: localStorage.wt
 
     };
-    return await axios.post(window.location.origin + '/api/v1/users/getUsersListAsAdmin', body)
+    return await axios.post(window.location.origin + '/api/admin/users/getUsersList', body)
 
 }
 
@@ -64,5 +64,5 @@ export const newAPIKey = async (domainName) => {
     const body = {
         token: localStorage.wt
     }
-    return await axios.post(domainName + '/api/v1/users/newAPIKey', body)
+    return await axios.post(domainName + '/api/admin/users/newAPIKey', body)
 }

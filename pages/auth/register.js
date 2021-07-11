@@ -4,6 +4,7 @@ import {getFirstLoadData} from '../../_variables/ajaxVariables'
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import axios from 'axios'
 
 let StyledDiv = styled.div`
   display: flex;

@@ -1,6 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 
-const RedirecterToHttps = () => {
+const RedirecterToHttps = props => {
     const redirectElement = useRef(null)
     const [state, setState] = useState({
         protocol: 'https',
@@ -27,7 +27,7 @@ const RedirecterToHttps = () => {
             redirectElement.current.click()
         }
         if (state.render && state.protocol === 'http' && redirectElement.current&& process.env.REACT_APP_SSL === 'true'){
-          // console.log(state.sslUrl)
+
             setTimeout(()=>{
                 clickOnRedirectLink()
             },100)
@@ -37,7 +37,7 @@ const RedirecterToHttps = () => {
     }, [state.render]);
 
 
-    if (state.render) {
+    if (state.render && props.identity.autoRedirectToHttps ) {
         return (
             <a ref={redirectElement} href={state.sslUrl} rel='noreferrer'>Redirect to HTTPS</a>
         );

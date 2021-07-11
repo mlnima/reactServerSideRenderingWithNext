@@ -9,7 +9,7 @@ pageCache.ssrCache = new LRUCache({
 });
 
 pageCache.getCacheKey = (req)=> {
-    console.log(req.path)
+    //console.log(req.path)
     return `${req.path}`
 }
 

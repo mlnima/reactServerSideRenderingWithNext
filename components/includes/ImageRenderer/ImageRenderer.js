@@ -18,7 +18,7 @@ const ImageRenderer = props => {
 
 
     const onErrorHandler = e => {
-        console.log('error', e)
+       // console.log('error', e)
         //   console.log(imageUrl)
         if (imageUrl) {
             setGotError(true)

@@ -110,6 +110,10 @@ const AddWidgetWithPositionMenu = props => {
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('metaPageLeftSidebar', props.type)}>Meta Page Left Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('metaPageRightSidebar', props.type)}>Meta Page Right Sidebar</button>
 
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('profilePageRightSidebar', props.type)}>Meta Page Left Sidebar</button>
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('profilePageLeftSidebar', props.type)}>Meta Page Right Sidebar</button>
+                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('profilePage', props.type)}>Meta Page Right Sidebar</button>
+
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('underPost', props.type)}>Under the Post</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('footer', props.type)}>Footer</button>
                    {renderCustomPagesPosition}

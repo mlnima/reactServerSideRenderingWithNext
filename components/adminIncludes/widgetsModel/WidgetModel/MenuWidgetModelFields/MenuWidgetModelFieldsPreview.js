@@ -93,7 +93,7 @@ const MenuWidgetModelFieldsPreview = props => {
         })
     }
     const onDeleteSubItemsHandler = subId => {
-        console.log('delete subItem')
+        //console.log('delete subItem')
         const newMenuData = props.widgetData.menuItems.filter(i => i.itemId !== subId)
         // props.setWidgetData({
         //     ...props.widgetData,

@@ -4,7 +4,7 @@ const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const languages = process.env.REACT_APP_LOCALS.replace(' ', '|')
 const locales = process.env.REACT_APP_LOCALS.split(' ')
-const withSass = require('@zeit/next-sass');
+//const withSass = require('@zeit/next-sass');
 const withPWA = require('next-pwa')
 require('webpack')
 
@@ -33,16 +33,16 @@ const svgLoader= {
         return config;
     }
 }
-const sassLoader= {
-    webpack(config) {
-        config.module.rules.push({
-            test: /\.scss$/,
-            use: ['style-loader','css-loader']
-        });
-
-        return config;
-    }
-}
+// const sassLoader= {
+//     webpack(config) {
+//         config.module.rules.push({
+//             test: /\.scss$/,
+//             use: ['style-loader','css-loader']
+//         });
+//
+//         return config;
+//     }
+// }
 
 
 
@@ -70,6 +70,19 @@ const reWriteRoutes = {
             //custom pages
             {source: `/:locale(${languages})?/page/:pageName`, destination: '/page'},
             {source: `/page/:pageName`, destination: '/page'},
+            //profile pages
+            {source: `/:locale(${languages})?/profile`, destination: '/profile'},
+            {source: `/profile`, destination: '/profile'},
+
+
+
+            {source: `/:locale(${languages})?/user/:username`, destination: '/user'},
+            {source: `/user/:username`, destination: '/user'},
+
+            // {source: `/:locale(${languages})?/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
+            // {source: `/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
+
+
             //meta route
             {source: `/:locale(${languages})?/:metaType(categories|tags|actors)`, destination: '/meta'},
             {source: `/:metaType(categories|tags|actors)`, destination: '/meta'},

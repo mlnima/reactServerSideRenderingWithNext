@@ -216,6 +216,7 @@ fileManagerControllers.userImageUpload = async (req, res) => {
                         console.log(err)
                         res.sendStatus(500);
                     } else {
+                        console.log(filePath)
                         fsExtra.remove(filePathOriginalSize)
                         res.json({response: 'Uploaded', path: filePath})
                         res.end()

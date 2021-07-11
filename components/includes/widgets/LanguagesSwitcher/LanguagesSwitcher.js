@@ -12,11 +12,14 @@ const LanguagesSwitcher = props => {
             ...contextData.state,
             activeLanguage: e.target.value
         })
-        if (e.target.value === 'default'){
-            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.REACT_APP_DEFAULT_LOCAL})
-        }else {
-            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:e.target.value})
+        if (!props.cookiePage){
+            if (e.target.value === 'default'){
+                router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.REACT_APP_DEFAULT_LOCAL})
+            }else {
+                router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:e.target.value})
+            }
         }
+
     }
 
     return (

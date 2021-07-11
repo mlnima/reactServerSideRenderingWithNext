@@ -19,8 +19,8 @@ const MultipleLinkWidgetModelFields = props => {
                 ...editingData,
                 translations: {
                     ...editingData.translations,
-                    [props.widgetSettings.activeEditingLanguage]: {
-                        ...editingData.translations?.[props.widgetSettings.activeEditingLanguage] || {},
+                    [props?.widgetSettings?.activeEditingLanguage]: {
+                        ...editingData?.translations?.[props.widgetSettings.activeEditingLanguage] || {},
                         [e.target.name]: e.target.value
                     }
                 }

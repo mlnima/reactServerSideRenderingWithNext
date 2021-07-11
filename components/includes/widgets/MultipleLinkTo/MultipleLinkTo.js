@@ -9,8 +9,8 @@ const MultipleLinkTo = props => {
     const router = useRouter()
 
     const renderLinks = (props.multipleLinks ?? []).sort((a, b) => a.linkIndex - b.linkIndex).map(linkData => {
-        const linkTitle = router.locale === process.env.REACT_APP_DEFAULT_LOCAL ? linkData.linkTitle : linkData.translations?.[router.locale || contextData.state.activeLanguage]?.linkTitle ?? '';
-        const linkDescription = router.locale === process.env.REACT_APP_DEFAULT_LOCAL ? linkData.linkDescription : linkData.translations?.[router.locale || contextData.state.activeLanguage]?.linkDescription ?? '';
+        const linkTitle = router?.locale === process.env?.REACT_APP_DEFAULT_LOCAL ? linkData.linkTitle : linkData.translations?.[router.locale || contextData.state.activeLanguage]?.linkTitle ?? '';
+        const linkDescription = router.locale === process.env.REACT_APP_DEFAULT_LOCAL ? linkData?.linkDescription : linkData.translations?.[router.locale || contextData.state.activeLanguage]?.linkDescription ?? '';
         if (linkData.linkToType === 'internal') {
             return (
                 <li key={uniqueId('id_')} className='multiple-links-widget-item'>

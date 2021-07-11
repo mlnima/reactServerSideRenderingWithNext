@@ -44,7 +44,7 @@ const PwaInstallButton = props => {
     }
 
     const onClickHandler = e => {
-        console.log(installButton)
+        //console.log(installButton)
         e.preventDefault();
         if (!promptInstall) {
             return;

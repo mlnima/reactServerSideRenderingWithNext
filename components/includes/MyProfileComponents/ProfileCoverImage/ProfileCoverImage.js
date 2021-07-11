@@ -4,6 +4,8 @@ import { userImageUpload } from '../../../../_variables/ajaxVariables'
 import { updateUserData } from '../../../../_variables/ajaxAuthVariables'
 import ProfileImage from '../ProfileImage/ProfileImage'
 import CameraSvg from '../../../../static/images/fontawesome/camera-solid.svg'
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCamera} from "@fortawesome/free-solid-svg-icons";
 
 const ProfileCoverImage = props => {
     const contextData = useContext(AppContext);
@@ -19,7 +21,7 @@ const ProfileCoverImage = props => {
             ...state,
             style: {
                 ...state.style,
-                backgroundImage: `url('${contextData.userData.coverImage + '?date=' + Date.now()}`  ||  `url('/static/images/noImage/no-image-available.png')`
+                backgroundImage:contextData.userData.coverImage ? `url('${ contextData.userData.coverImage + '?date=' + Date.now()}`  :  `url('/static/images/noImage/no-image-available.png')`
             }
         })
     }, [ contextData.userData.coverImage ]);
@@ -35,6 +37,7 @@ const ProfileCoverImage = props => {
         })
         userImageUpload(filesData).then(res => {
             const newUserData = { ...contextData.userData, coverImage: res.data.path.replace('./', '/') }
+            console.log(newUserData)
             contextData.dispatchUserData(newUserData)
 
             updateUserData(newUserData, window.location.origin).then(() => {
@@ -64,8 +67,28 @@ const ProfileCoverImage = props => {
 
     return (
         <div className='profile-cover-image' style={ state.style }>
+            <style jsx>{`
+                .profile-cover-image{
+                    position: relative;
+                    background-size: cover;
+                    background-repeat: no-repeat;
+                    background-position: center;
+                    height: 300px;
+                }
+                 .upload-profile-image-btn{
+                    position: absolute;
+                    bottom: 5px;
+                    right: 5px;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    opacity: 50%;
+                }
+             `}</style>
             <input ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
-            <button className='upload-profile-image-btn' onClick={ () => uploadInputElement.current.click() }><img className='fontawesomeSvgSmall' src={ CameraSvg } alt=""/></button>
+            <button className='upload-profile-image-btn' onClick={ () => uploadInputElement.current.click() }>
+                <FontAwesomeIcon style={{width:'20px',height:'20px'}} className='upload-profile-image-btn-svg'  icon={faCamera} />
+            </button>
             <ProfileImage/>
         </div>
     );

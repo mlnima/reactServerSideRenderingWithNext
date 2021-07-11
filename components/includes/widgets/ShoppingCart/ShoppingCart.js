@@ -21,15 +21,15 @@ let StyledA = styled.a`
     border-radius: 30%;
     padding: 1px 2px;
   }
-  svg{
-    transition: .5s;
-    margin: 0 5px;
-    max-width: 25px;
-    max-height: 25px;
-    &:hover{
-      transform: scale(1.2);
-    }
-  }
+   svg{
+     transition: .5s;
+     margin: 0 5px;
+     max-width: 25px;
+     max-height: 25px;
+     &:hover{
+       transform: scale(1.2);
+     }
+   }
 `
 const ShoppingCart = props => {
     const router = useRouter()
@@ -41,7 +41,7 @@ const ShoppingCart = props => {
             locale={router.locale || router.query.locale || false}
         >
             <StyledA className='shopping-card-button'>
-                <FontAwesomeIcon  icon={faShoppingCart} className='shopping-card-logo svg-logo-medium'/>
+                <FontAwesomeIcon style={{width:'20px',height:'20px'}}  icon={faShoppingCart} className='shopping-card-logo svg-logo-medium'/>
                 <p className='shopping-card-number'>{contextData.checkOutData.items.length}</p>
             </StyledA>
         </Link>

@@ -1,9 +1,9 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useContext, useRef } from 'react';
 import { AppContext } from '../../../../context/AppContext'
 import {userImageUpload} from '../../../../_variables/ajaxVariables'
 import {updateUserData} from '../../../../_variables/ajaxAuthVariables'
-import CameraSvg from '../../../../static/images/fontawesome/camera-solid.svg'
-
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faCamera} from "@fortawesome/free-solid-svg-icons";
 
 const ProfileImage = props => {
     const contextData = useContext(AppContext);
@@ -44,9 +44,34 @@ const ProfileImage = props => {
     }
     return (
         <div className='profile-image'>
-            <img className='profile-image-img' src={ contextData.userData.profileImage + '?date=' + Date.now() || '/static/images/noImage/no-image-available.png' } />
+            <style jsx>{`
+                .profile-image {
+                    position: absolute;
+                    bottom: 0;
+                    margin: auto;
+                    left: 5%;
+                   // place-items: center;
+                    border: black 1px solid;
+                }
+                .profile-image-img {
+                    width: 150px;
+                }
+                .upload-profile-image-btn{
+                    position: absolute;
+                    bottom: 5px;
+                    right: 5px;
+                    background: transparent;
+                    border: none;
+                    outline: none;
+                    opacity: 50%;
+                }
+
+            `}</style>
+            <img className='profile-image-img' src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage + '?date=' + Date.now() : '/static/images/noImage/no-image-available.png' } />
             <input ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
-            <button className='upload-profile-image-btn' onClick={ () => uploadInputElement.current.click() }><img className='fontawesomeSvgSmall' src={ CameraSvg } alt=""/></button>
+            <button className='upload-profile-image-btn' onClick={ () => uploadInputElement.current.click() }>
+                <FontAwesomeIcon style={{width:'20px',height:'20px' }} className='upload-profile-image-btn-svg'  icon={faCamera} />
+            </button>
         </div>
     );
 

@@ -25,7 +25,7 @@ const MyProfilePosts = props => {
                     category: props.router.query.category || 'all',
                     sort: props.router.query.sort || 'latest',
                 }
-               getPosts(getPostsData, true, window.location.origin).then(res=>{
+               getPosts(getPostsData,  window.location.origin,true,window.location.href).then(res=>{
                    setState({
                        ...state,
                        posts:res.data.posts,

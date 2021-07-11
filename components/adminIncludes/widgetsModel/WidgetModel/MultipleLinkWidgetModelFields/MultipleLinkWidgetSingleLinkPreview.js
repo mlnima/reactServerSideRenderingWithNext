@@ -93,14 +93,14 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                         <input name='linkTitle'
                                type='text'
                                onChange={e => onChangeHandlerWithTranslate(e)}
-                               value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData.linkTitle ?? '' : editingData?.translations[props.widgetSettings.activeEditingLanguage]?.linkTitle ?? ''}/>
+                               value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData?.linkTitle ?? '' : editingData?.translations?.[props.widgetSettings.activeEditingLanguage]?.linkTitle ?? ''}/>
                     </div>
 
                     <div className='menu-form-texarea'>
                         <p>Link description :</p>
                         <textarea name='linkDescription'
                                   onChange={e => onChangeHandlerWithTranslate(e)}
-                                  value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData.linkDescription ?? '' : editingData?.translations[props.widgetSettings.activeEditingLanguage]?.linkDescription ?? ''}/>
+                                  value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData.linkDescription ?? '' : editingData?.translations?.[props.widgetSettings.activeEditingLanguage]?.linkDescription ?? ''}/>
                     </div>
                     <div className='menu-form-field'>
                         <p>Link To :</p>

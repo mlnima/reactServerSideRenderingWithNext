@@ -162,9 +162,9 @@ const UploadedPopView = props => {
         }
     }
 
-    useEffect(() => {
-        console.log(state.fileData)
-    }, [ state.fileData ]);
+    // useEffect(() => {
+    //     console.log(state.fileData)
+    // }, [ state.fileData ]);
 
     if (props.clickedItem) {
         const fileType = fileTypeDetector(props.state.clickedItemName)

@@ -1,46 +1,26 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import {useContext} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPowerOff} from "@fortawesome/free-solid-svg-icons";
-import Link from "next/link";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
+import Link from "next/link";
 
 const LoggedInItemsForMenu = props => {
     const contextData = useContext(AppContext);
-      const [state,setState] = useState({
-          svgDefaultStyle:{
-              maxWidth:'25px',
-              maxHeight: '25px'
-          }
-      })
 
-    const MyProfile = () => {
-        if (contextData.siteIdentity.membership) {
-            return (
-                <Link href={`/profile?username=${contextData.userData.username}`}>
-                    <a className='logged-in-item' >
-                        <style jsx>{`
-                          .logged-in-item{
-                           color: var(--navigation-text-color);
-                          }
-                        `}</style>
-                        <FontAwesomeIcon  icon={faUser} className='svg-logo-small'/>
-                    </a>
-                </Link>
-            )
-        } else return null
-    }
-
-    if (contextData.userData.username ) {
+    if (contextData.userData.username && contextData.userData.username !== 'guest' ) {
         return (
             <div className='logged-in-items'>
             <style jsx>{`
+                .logged-in-items{
+                    display: flex;
+                }
                 .logged-in-item{
                     color: var(--navigation-text-color);
-                    width: 100px;
-                    margin: 0;
+                    width: 20px;
+                    margin: 0 10px;
                     padding: 0;
-                    display: grid;
+                
                     place-items: center;
                 
                 }
@@ -50,18 +30,18 @@ const LoggedInItemsForMenu = props => {
                     max-height: 15px;
                 }
             `}</style>
-                <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
-                    <FontAwesomeIcon icon={faPowerOff} className=' svg-logo-small' />
-                </p>
+
                 {contextData.siteIdentity.membership?
-                    <Link href={`/profile?username=${contextData.userData.username}`}>
-                        <a className='logged-in-item' >
-                            <FontAwesomeIcon icon={faUser} className='svg-logo-small'/>
+                    <Link href={`/profile`}>
+                        <a rel='next' className='logged-in-item' >
+                            <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faUser} className='svg-logo-small'/>
                         </a>
                     </Link>
                 :null
                 }
-
+                <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
+                    <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faPowerOff} className=' svg-logo-small' />
+                </p>
             </div>
         )
     } else return null

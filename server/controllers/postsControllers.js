@@ -20,7 +20,7 @@ const metasSaver = async (metas) => {
                 await metaDataToSave.save().then(saved => {
                     finalData = [...finalData, saved._id]
                 }).catch(err => {
-                    console.log(meta.name, ' has error on save meta')
+                    //console.log(meta.name, ' has error on save meta')
                 })
             }
 
@@ -163,7 +163,7 @@ postsControllers.getPostInfo = (req, res) => {
     const title = req.body.title;
     const _id = req.body._id;
     const findQuery = _id ? {_id} : {title:decodeURI(title)}
-    console.log(findQuery)
+    //console.log(findQuery)
     postSchema.findOne(findQuery).populate([
         {path: 'categories'},
         {path: 'tags'},

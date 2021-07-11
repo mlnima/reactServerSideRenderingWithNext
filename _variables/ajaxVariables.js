@@ -204,10 +204,11 @@ export const getOrders = async (data, domainName) => {
 };
 
 export const getFirstLoadData = async (req,dynamicWidgets,page) => {
+
     const domainName = req ? await getAbsolutePath(req) : '';
     const refererUrl = req?.headers?.referer;
-   // const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
-    const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
+    const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
+    //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
     const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
     const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
     const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets]

@@ -58,7 +58,7 @@ const AlertBox = props => {
 
         return (
             <StyledDiv className='alert-box'>
-                <button className='close-alert' onClick={()=>onCloseHandler()}>X</button>
+               <button className='close-alert' onClick={()=>onCloseHandler()}>X</button>
                <div className='alert-message'>
                    <p>{contextData.alert.type}:</p>
                    <p className='alert'>{contextData.alert.alertMessage}</p>

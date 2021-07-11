@@ -3,7 +3,7 @@ import WidgetsRenderer from '../WidgetsRenderer/WidgetsRenderer'
 //import './Sidebar.scss'
 
 const Sidebar = props => {
-console.log(props.position)
+//console.log(props.position)
     if (props.isActive) {
         return (
             <div className='site-sidebar'  key={props.position} >

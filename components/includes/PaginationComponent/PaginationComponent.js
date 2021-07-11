@@ -31,7 +31,9 @@ const PaginationComponent = props => {
         `/${metaType}` :
         router.pathname;
 
-        const content = router.query.content ? {content:router.query.content} :{}
+        const content = router.query.metaId ? {metaId:router.query.metaId} :{};
+
+
 
         return (
             <div className='pagination' key={props.paginationIndex}>

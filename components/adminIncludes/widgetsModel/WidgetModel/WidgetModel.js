@@ -60,10 +60,11 @@ let StyledDiv = styled.div`
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    p{
-      width: 40%;
-      font-size: .8rem;
-    }
+     p{
+       width: 40%;
+       font-size: .8rem;
+       margin:0 10px;
+     }
     input,select{
       display: block;
       width: 50%;
@@ -83,16 +84,21 @@ let StyledDiv = styled.div`
   display:flex;
   justify-content: center;
 }
-  .widgetInfo {
-    display: flex;
-    flex-direction: column;
-    color: white;
-    font-size: small;
-    label {
-      display: flex;
-      justify-content: space-between;
-    }
-  }
+  //.widgetInfo {
+  //  display: flex;
+  //  flex-direction: row;
+  //  color: white;
+  //  font-size: small;
+  //  .widget-info-id{
+  //  text-align: left;
+  //  padding: 0;
+  //  margin: 0;
+  //  }
+  //  //label {
+  //  //  display: flex;
+  //  //  justify-content: space-between;
+  //  //}
+  //}
   input, select, button {
     margin: 5px;
   }
@@ -198,7 +204,7 @@ const WidgetModel = props => {
         }
     }
     const onChangeHandler = e => {
-        console.log(e.target.type)
+        //console.log(e.target.type)
         const isChecked = e.target.checked
         const value = e.target.value
         setWidgetData({
@@ -367,11 +373,9 @@ const WidgetModel = props => {
                         <p>Edit Mode:</p>
                         <input type='checkbox' name='editMode' checked={widgetData.editMode} onChange={e => onCheckboxChangeHandler(e)}/>
                     </div>
-                    <div className='widgetInfo'>
-                        <label className='widgetId'>
-                            <p>ID :</p>
-                            <p>{props.widgetId || props.state.widgetId || 'XXX'}</p>
-                        </label>
+                    <div className='widgetInfo widgetSection'>
+                        <p className='widget-info-id'>ID :</p>
+                        <p>{props.widgetId || props.state.widgetId || 'XXX'}</p>
                     </div>
                     <TextInputFieldForWidget inputTitle='Name:' name='name' type='text' value={widgetData.name} classNameValue='name' placeHolder='name'
                                              onChangeHandler={e => onChangeHandler(e)}
