@@ -61,7 +61,7 @@ const MyApp = ({Component, pageProps}) => {
                 >
                     <Component {...pageProps} />
                 </AppLayout>
-                <RedirecterToHttps identity={pageProps.identity}/>
+                {/*<RedirecterToHttps identity={pageProps.identity}/>*/}
                 <RedirectToHTTPS identity={pageProps.identity}/>
                 <CookiePopup identity={pageProps.identity}/>
             </AppProvider>
