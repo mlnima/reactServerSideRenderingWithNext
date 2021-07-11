@@ -8,7 +8,7 @@ const RedirectToHTTPS = props => {
     const contextData = useContext(AppContext);
 
     const [state, setState] = useState({
-        render: true,
+        render: false,
         protocol: 'https',
         currentUrl: ''
     });
@@ -28,6 +28,7 @@ const RedirectToHTTPS = props => {
     }, []);
 
     if (state.render && props?.identity?.data?.redirectToSSLPop) {
+        console.log(state.render , props?.identity?.data?.redirectToSSLPop)
         return (
             <span className='redirect-to-https-action-message'>
             <style jsx>{`

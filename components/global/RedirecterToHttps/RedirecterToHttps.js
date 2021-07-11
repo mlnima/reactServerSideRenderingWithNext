@@ -9,9 +9,11 @@ const RedirecterToHttps = props => {
     });
 
     useEffect(() => {
+
         if (typeof window !== 'undefined' ) {
             const siteUrl = window.location.href
-            if (!siteUrl.includes('https')&& process.env.REACT_APP_SSL === 'true') {
+
+            if (!siteUrl.includes('https') && process.env.REACT_APP_SSL === 'true') {
                 setState({
                     ...state,
                     protocol: 'http',
@@ -38,6 +40,7 @@ const RedirecterToHttps = props => {
 
 
     if (state.render && props.identity.autoRedirectToHttps ) {
+        //console.log(state.render,props.identity.autoRedirectToHttps)
         return (
             <a ref={redirectElement} href={state.sslUrl} rel='noreferrer'>Redirect to HTTPS</a>
         );

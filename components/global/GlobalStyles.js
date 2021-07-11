@@ -131,7 +131,7 @@ align-items: center;
 height: 48px;
 }
 .leftSidebar {
-grid-template-columns: 240px 1fr;
+grid-template-columns: 320px 1fr;
 grid-template-areas:
 'topbar topbar'
 'header header' 
@@ -140,7 +140,7 @@ grid-template-areas:
 'footer footer'
 }
 .rightSidebar {
-grid-template-columns: 1fr 240px ;
+grid-template-columns: 1fr 320px ;
 grid-template-areas:
 'topbar topbar'
 'header header'
@@ -149,7 +149,7 @@ grid-template-areas:
 'footer footer'
 }
 .bothSidebar{
-grid-template-columns: 240px 1fr 240px;
+grid-template-columns: 320px 1fr 320px;
 grid-template-areas:
 'topbar topbar topbar'
 'header header header'
