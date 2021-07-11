@@ -7,7 +7,7 @@ const PaginationComponentPageLink = props => {
     const router = useRouter()
 
     const asQuery = {
-        ...props.content,
+        ...props.queries,
         page: props.pageNumber || 1,
     }
 
@@ -15,7 +15,7 @@ const PaginationComponentPageLink = props => {
         <Link key={props.pageNumber.toString()}
               href={{
                   pathname: props.mainPath,
-                  query: {...router.query, page: props.pageNumber}
+                  query: {...router.query,...props.queries, page: props.pageNumber}
               }}
               as={{
                   pathname: props.asPath,

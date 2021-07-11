@@ -31,7 +31,7 @@ const PaginationComponent = props => {
         `/${metaType}` :
         router.pathname;
 
-        const content = router.query.metaId ? {metaId:router.query.metaId} :{};
+        const queries = router.query.metaId ? {metaId:router.query.metaId} :{};
 
 
 
@@ -51,7 +51,7 @@ const PaginationComponent = props => {
                             <PaginationComponentPageLink
                                 mainPath={mainPath}
                                 asPath={asPath}
-                                content={content}
+                                queries={queries}
                                 {...props}
                                 key={_.uniqueId('id_')}
                                 pageNumber={pageNumber}
