@@ -39,7 +39,7 @@ const RedirecterToHttps = props => {
     }, [state.render]);
 
 
-    if (state.render && props.identity.autoRedirectToHttps ) {
+    if (state?.render && props?.identity?.autoRedirectToHttps ) {
         //console.log(state.render,props.identity.autoRedirectToHttps)
         return (
             <a ref={redirectElement} href={state.sslUrl} rel='noreferrer'>Redirect to HTTPS</a>
