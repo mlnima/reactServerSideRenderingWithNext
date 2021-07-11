@@ -42,7 +42,7 @@ const RedirectToHTTPS = props => {
                     flex-direction: column;
                     align-items: center;
                     justify-content: center;
-                    padding:10px;
+                    padding:30px 10px;
                 }
                 .redirect-to-https-message{
                     color: var(--background-color) ;
@@ -50,6 +50,7 @@ const RedirectToHTTPS = props => {
                 }
                 .redirect-to-https-buttons{
                     display: flex;
+                    margin-bottom:20px;
                 }
                 .redirect-to-https-link,.redirect-to-https-close-message{
                     background-color: green;
@@ -65,7 +66,7 @@ const RedirectToHTTPS = props => {
                   <p className='redirect-to-https-message'>we would like to redirect you to secure version of this site. some of features may not work if you stay on this connection protocol </p>
                   <div className='redirect-to-https-buttons'>
                        <button className='redirect-to-https-close-message' onClick={() => setState({...state, render: false})}><FontAwesomeIcon style={{width: '30px', height: '20px'}} icon={faTimes}/></button>
-                       <a className='redirect-to-https-link' href={state.currentUrl.replace('http', 'https')}><FontAwesomeIcon style={{width: '30px', height: '20px'}} icon={faCheck} className=''/></a>
+                       <a className='redirect-to-https-link' href={state.currentUrl.replace('http', 'https')} rel='noreferrer'><FontAwesomeIcon style={{width: '30px', height: '20px'}} icon={faCheck} className=''/></a>
                   </div>
               </span>
         );

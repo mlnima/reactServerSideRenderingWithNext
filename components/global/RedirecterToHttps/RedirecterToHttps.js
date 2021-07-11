@@ -26,7 +26,7 @@ const RedirecterToHttps = props => {
         const clickOnRedirectLink= ()=>{
             redirectElement.current.click()
         }
-        if (state.render && state.protocol === 'http' && redirectElement.current&& process.env.REACT_APP_SSL === 'true'){
+        if (state.render && state.protocol === 'http' && redirectElement.current && process.env.REACT_APP_SSL === 'true'){
 
             setTimeout(()=>{
                 clickOnRedirectLink()

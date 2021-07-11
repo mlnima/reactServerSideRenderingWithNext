@@ -33,6 +33,7 @@ const AppProvider = props => {
     })
 
     const [siteIdentity, dispatchSiteIdentity] = useState({
+        isSet:false,
         title: 'site title',
         themeColor: '#000',
         description: 'site description',

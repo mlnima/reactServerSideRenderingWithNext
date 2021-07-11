@@ -27,6 +27,13 @@ const AppLayout = props => {
     const [leftSidebarWidgets, setLeftSidebarWidgets] = useState([])
     const [rightSidebarWidgets, setRightSidebarWidgets] = useState([])
 
+    const [staticWidgets, setStaticWidgets] = useState({
+        topBar: [],
+        header: [],
+        navigation: [],
+        footer: [],
+    })
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             if (!window.GA_INITIALIZED) {
@@ -115,12 +122,7 @@ const AppLayout = props => {
         [sidebarPositionName, props.pageInfo])
 
 //useMemo(()=> ,[router.pathname])
-    const [staticWidgets, setStaticWidgets] = useState({
-        topBar: [],
-        header: [],
-        navigation: [],
-        footer: [],
-    })
+
 
     const firstLoadWidgets = Object.freeze({
         topBar: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'topBar') || [] : [],

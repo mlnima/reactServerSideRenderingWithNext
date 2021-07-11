@@ -11,8 +11,15 @@ const SiteSettingSetter = props => {
 
     useEffect(() => {
         props.design?.data ? contextData.dispatchSiteDesign(props.design?.data) : null
-        props.identity?.data ? contextData.dispatchSiteIdentity(props.identity?.data) : null
+        props.identity?.data ? contextData.dispatchSiteIdentity({...props.identity?.data,isSet:true}) : null
         props.eCommerce?.data ? contextData.dispatchECommerceSettings(props.eCommerce?.data) : null
+
+        // if (!props.design?.data && !props.identity?.data && !props.eCommerce?.data ){
+        //
+        // }
+
+
+
         const manuallyDetectedLocale = router.locale ? router.locale :
             router.query.locale ? router.query.locale : process.env.REACT_APP_DEFAULT_LOCAL;
         contextData.dispatchState({
