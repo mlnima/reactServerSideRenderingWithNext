@@ -42,6 +42,10 @@ const Posts = props => {
             .my-profile-posts{
             
             }
+            .main{
+             max-width: 940px;
+              margin: auto;
+            }
            ` }</style>
             <ProfileCoverImage/>
             <ProfileNavigation />

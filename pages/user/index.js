@@ -4,10 +4,15 @@ import {getUserPreviewData} from "../../_variables/_userSocialAjaxVariables";
 import UserPageCoverImage from "../../components/includes/userPageComponents/UserPageCoverImage/UserPageCoverImage";
 import UserPageActionButtons from "../../components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 import {useRouter} from "next/router";
+import SendMessagePopUp from "../../components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUp";
 
 const user = props => {
     const router = useRouter()
-    const [state, setState] = useState({});
+    const [state, setState] = useState({
+        messagePop:false
+
+    });
+
     useEffect(() => {
         console.log(router)
     }, [router]);
@@ -18,14 +23,29 @@ const user = props => {
                 .user-page{
                  color:var(--main-text-color);
                 }
+              .main{
+                max-width: 940px;
+                margin: auto;
+              }
             `}</style>
             <UserPageCoverImage
                 coverImage={props?.userData?.coverImage}
                 profileImage={props?.userData?.profileImage}
             />
             <UserPageActionButtons
+                setParentState={setState}
+                parentState={state}
                 _id={props?.userData?._id}
             />
+            {
+                state.messagePop?
+                    <SendMessagePopUp
+                        receiverId={props?.userData?._id}
+                        receiverProfileImage={props?.userData?.profileImage}
+                        username={props?.userData?.username}
+                    />:null
+            }
+
         </div>
     );
 };

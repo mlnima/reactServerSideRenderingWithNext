@@ -45,7 +45,7 @@ background-color: var(--post-element-background-color);
 
 .post-element-list{
 width: 100%;
-
+margin: 5px 0;
 }
 .post-element-list>.post-element-link{
 
@@ -64,6 +64,7 @@ flex-direction: column;
 justify-content: center;
 align-items: flex-start;
 margin: auto;
+text-decoration: none;
 }
 @media only screen and (min-width: 768px){
 .post-element-smaller,.post-element-smaller>h2,.post-element-smaller>.post-element-link{
@@ -79,7 +80,7 @@ width: 320px;
 max-width: 100%;
 }
 .post-element-list,.post-element-list>h2,.post-element-list>.post-element-link{
-width: 240px;
+width: 300px;
 max-width: 100%;
 }
 
@@ -90,7 +91,7 @@ max-width: 100%;
                   as={`/${postType || 'post'}/${title}?id=${_id}`}
                   scroll={false}
             >
-                <a rel='next' onClick={onClickLoadingHandler} style={{textDecoration:'none'}} className='post-element-link'>
+                <a rel='next' onClick={onClickLoadingHandler}  className='post-element-link'>
                         <PostElementImage
                             mainThumbnail={mainThumbnail}
                             isHoverHandler={isHoverHandler}

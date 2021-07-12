@@ -25,6 +25,11 @@ const PostElementTitle = ({title,postElementSize}) => {
               max-width: 320px;
               ${listType}
              }
+             @media only screen and (min-width: 768px) {
+                .post-element-title{
+                   width: ${postElementSize === 'list'? '60%' : '100%'};
+                }
+            }
            `}</style>
             {title}
         </h2>

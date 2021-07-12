@@ -58,7 +58,7 @@ const ProfileNavigation = props => {
             <Link href='/profile' ><a style={ navigationData.style } className='profile-navigation-item'>Profile</a></Link>
             <Link href='/profile/posts' ><a style={ navigationData.style } className='profile-navigation-item'>Posts</a></Link>
             <Link href='/profile/friends' ><a style={ navigationData.style } className='profile-navigation-item'>Friends {contextData?.userData?.friends?.length || 0}</a></Link>
-            <Link href='/profile/friendRequests' ><a style={ navigationData.style } className='profile-navigation-item'>Pending Requests {contextData?.userData?.pendingFriendRequests?.length || 0}</a></Link>
+            <Link href='/profile/friendRequests' ><a style={ navigationData.style } className='profile-navigation-item'>Pending Requests {contextData?.userData?.pendingReceivedFriendRequests?.length || 0}</a></Link>
             <Link href='/profile/followers' ><a style={ navigationData.style } className='profile-navigation-item'>Followers {contextData?.userData?.followers?.length || 0}</a></Link>
             <Link href='/profile/following' ><a style={ navigationData.style } className='profile-navigation-item'>Following {contextData?.userData?.following?.length || 0}</a></Link>
             <Link href='/profile/inbox' ><a style={ navigationData.style } className='profile-navigation-item'>Inbox {contextData?.userData?.inbox?.length || 0}</a></Link>

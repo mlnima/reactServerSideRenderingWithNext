@@ -24,6 +24,34 @@ export const unFollowUser = async (_id) => {
 }
 
 
+export const sendFriendRequest = async (_id) => {
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/sendFriendRequest', body)
+}
+export const acceptFriendRequest = async (_id) => {
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/acceptFriendRequest', body)
+}
+export const unfriendRequest = async (_id) => {
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/unfriendRequest', body)
+}
+export const cancelFriendRequest = async (_id) => {
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/cancelFriendRequest', body)
+}
 
 export const getMultipleUserDataById = async (usersList) => {
     const body = {

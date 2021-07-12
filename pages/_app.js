@@ -12,9 +12,9 @@ import '../components/includes/PostElement/PostElement.scss';
 import '../components/includes/CardElement/CardElement.scss';
 
 
-import RedirecterToHttps from "../components/global/RedirecterToHttps/RedirecterToHttps";
-import PwaInstallButton from "../components/includes/PwaInstallButton/PwaInstallButton";
-import RedirectToHTTPS from "../components/includes/ClientPopActionRequest/RedirectToHTTPS";
+// import RedirecterToHttps from "../components/global/RedirecterToHttps/RedirecterToHttps";
+// import PwaInstallButton from "../components/includes/PwaInstallButton/PwaInstallButton";
+// import RedirectToHTTPS from "../components/includes/ClientPopActionRequest/RedirectToHTTPS";
 import CookiePopup from "../components/includes/ClientPopActionRequest/CookiePopup";
 
 

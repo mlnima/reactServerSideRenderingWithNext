@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {followUser,unFollowUser} from "../../../../_variables/_userSocialAjaxVariables";
+import {followUser,unFollowUser,sendFriendRequest,acceptFriendRequest,unfriendRequest,cancelFriendRequest} from "../../../../_variables/_userSocialAjaxVariables";
 import {AppContext} from "../../../../context/AppContext";
 
-const UserPageActionButtons = ({_id}) => {
+const UserPageActionButtons = ({_id,setParentState,parentState}) => {
     const contextData = useContext(AppContext);
 
     useEffect(() => {
@@ -30,8 +30,56 @@ const UserPageActionButtons = ({_id}) => {
         })
     }
 
+    const onSendFriendRequestHandler = ()=>{
+        sendFriendRequest(_id).then(res=>{
+            const newPendingFriendRequests = res?.data?.updatedRequestSenderData || {}
+            contextData.dispatchUserData({
+                ...contextData.userData,
+                ...newPendingFriendRequests
+            })
+        })
+    }
+
+    const onAcceptFriendRequestHandler = ()=>{
+        acceptFriendRequest(_id).then(res=>{
+            const newFriendList = res?.data?.updatedRequestSenderData || {}
+            contextData.dispatchUserData({
+                ...contextData.userData,
+                ...newFriendList
+            })
+        })
+    }
+
+    const onUnfriendHandler = ()=>{
+        unfriendRequest(_id).then(res=>{
+            const newFriendList = res?.data?.updatedRequestSenderData || {}
+            contextData.dispatchUserData({
+                ...contextData.userData,
+                ...newFriendList
+            })
+        })
+    }
+
+const onCancelFriendRequest = () =>{
+    cancelFriendRequest(_id).then(res=>{
+        const newSentFriendRequestList = res?.data?.updatedRequestSenderData || {}
+        contextData.dispatchUserData({
+            ...contextData.userData,
+            ...newSentFriendRequestList
+        })
+    })
+}
+
+const onMessageHandler =()=>{
+        setParentState({
+            ...parentState,
+            messagePop:true
+        })
+}
+
 
     return (
+
         <div className='user-page-action-buttons'>
         <style jsx>{`
             .user-page-action-buttons{
@@ -62,13 +110,23 @@ const UserPageActionButtons = ({_id}) => {
             }
         `}
         </style>
-            <button className='user-page-action-button'>Add Friend</button>
+            {
+                //pendingReceivedFriendRequests
+                    contextData?.userData?.pendingSentFriendRequests?.includes(_id) ?
+                    <button className='user-page-action-button' onClick={onCancelFriendRequest}>Cancel Request</button> :
+                    contextData?.userData?.friends?.includes(_id) ?
+                    <button className='user-page-action-button' onClick={onUnfriendHandler}>Unfriend</button>   :
+                    contextData?.userData?.pendingReceivedFriendRequests?.includes(_id) ?
+                    <button className='user-page-action-button' onClick={onAcceptFriendRequestHandler}>Accept Friend Request</button> :
+                    <button className='user-page-action-button' onClick={onSendFriendRequestHandler}>Add Friend</button>
+            }
+
             {
                 contextData?.userData?.following?.includes(_id) ?
                 <button className='user-page-action-button' onClick={onUnFollowHandler}>Following</button>  :
                 <button className='user-page-action-button' onClick={onFollowHandler}>Follow</button>
             }
-            <button className='user-page-action-button'>Message</button>
+            <button className='user-page-action-button' onClick={onMessageHandler}>Message</button>
         </div>
     );
 };

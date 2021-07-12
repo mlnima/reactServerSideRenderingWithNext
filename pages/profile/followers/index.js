@@ -33,6 +33,13 @@ const Followers = props => {
 
     return (
         <div className='my-profile-followers-list main'>
+            <style jsx>{`
+            .main{
+             max-width: 940px;
+              margin: auto;
+            }
+            
+            `}</style>
             <ProfileCoverImage/>
             <ProfileNavigation />
             {renderFollowers}

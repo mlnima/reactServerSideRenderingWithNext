@@ -70,7 +70,7 @@ const ProfileImage = props => {
             <img className='profile-image-img' src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage + '?date=' + Date.now() : '/static/images/noImage/no-image-available.png' } />
             <input ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
             <button className='upload-profile-image-btn' onClick={ () => uploadInputElement.current.click() }>
-                <FontAwesomeIcon style={{width:'20px',height:'20px' }} className='upload-profile-image-btn-svg'  icon={faCamera} />
+                <FontAwesomeIcon style={{...props.svgStyle,width:'20px',height:'20px' }} className='upload-profile-image-btn-svg'  icon={faCamera} />
             </button>
         </div>
     );

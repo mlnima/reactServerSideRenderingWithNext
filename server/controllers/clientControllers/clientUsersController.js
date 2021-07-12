@@ -14,6 +14,10 @@ const clientUnFollowUser = require('./clientUsersControllers/clientUnFollowUser'
 const clientGetUserData = require('./clientUsersControllers/clientGetUserData')
 const clientGetUserInfo = require('./clientUsersControllers/clientGetUserInfo')
 const clientGetUsersList = require('./clientUsersControllers/clientGetUsersList')
+const clientSendFriendRequest = require('./clientUsersControllers/clientSendFriendRequest')
+const clientAcceptFriendRequest = require('./clientUsersControllers/clientAcceptFriendRequest')
+const clientUnfriendRequest = require('./clientUsersControllers/clientUnfriendRequest')
+const clientCancelFriendRequest = require('./clientUsersControllers/clientCancelFriendRequest')
 
 router.post('/register',clientRegisterNewUser)
 router.post('/login',clientUserLogin)
@@ -26,6 +30,10 @@ router.post('/getMultipleUserDataById',clientGetMultipleUserDataById)
 router.post('/followUser',authMiddleware,clientFollowUser)
 router.post('/unFollowUser',authMiddleware,clientUnFollowUser)
 router.post('/getUsersList',clientGetUsersList)
+router.post('/sendFriendRequest',authMiddleware,clientSendFriendRequest)
+router.post('/acceptFriendRequest',authMiddleware,clientAcceptFriendRequest)
+router.post('/unfriendRequest',authMiddleware,clientUnfriendRequest)
+router.post('/cancelFriendRequest',authMiddleware,clientCancelFriendRequest)
 
 //clientUsersController.clientUpdateUserData = (req,res) => {clientUpdateUserData(req,res)}
 //clientUsersController.clientRegisterNewUser = (req,res) => {clientRegisterNewUser(req,res)}

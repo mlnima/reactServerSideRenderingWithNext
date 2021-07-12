@@ -2,32 +2,22 @@ import React, {useState, useEffect} from 'react';
 import {getFirstLoadData} from '../../_variables/ajaxVariables'
 import ProfileCoverImage from '../../components/includes/MyProfileComponents/ProfileCoverImage/ProfileCoverImage'
 import ProfileNavigation from '../../components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation'
-import ProfileComponentsRenderer from '../../components/includes/MyProfileComponents/ProfileComponentsRenderer/ProfileComponentsRenderer'
 import MyProfileInfo from '../../components/includes/MyProfileComponents/MyProfileInfo/MyProfileInfo'
-import {useRouter} from "next/router";
 
-
-import styled from "styled-components";
-
-let StyledDiv = styled.div`
-.upload-profile-image-btn-svg  {
-    border: solid black 1px;
-    background-color: white;
-    border-radius: 50%;
-    padding: 5px;
-    z-index: 17;
-    width: 25px;
-    height: 25px;
-}
-`
 const Profile = props => {
 
     return (
-        <StyledDiv className='profile-page main'>
+        <div className='profile-page main'>
+            <style jsx>{`
+                .main{
+                    max-width: 940px;
+                    margin: auto;
+                }
+            `}</style>
             <ProfileCoverImage/>
             <ProfileNavigation />
             <MyProfileInfo/>
-        </StyledDiv>
+        </div>
     );
 };
 

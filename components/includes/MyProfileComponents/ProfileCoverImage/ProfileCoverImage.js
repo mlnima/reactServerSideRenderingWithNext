@@ -3,7 +3,6 @@ import { AppContext } from '../../../../context/AppContext'
 import { userImageUpload } from '../../../../_variables/ajaxVariables'
 import { updateUserData } from '../../../../_variables/ajaxAuthVariables'
 import ProfileImage from '../ProfileImage/ProfileImage'
-import CameraSvg from '../../../../static/images/fontawesome/camera-solid.svg'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 
@@ -22,6 +21,15 @@ const ProfileCoverImage = props => {
             style: {
                 ...state.style,
                 backgroundImage:contextData.userData.coverImage ? `url('${ contextData.userData.coverImage + '?date=' + Date.now()}`  :  `url('/static/images/noImage/no-image-available.png')`
+            },
+            svgStyle:{
+                border: 'solid black 1px',
+                backgroundColor: 'white',
+                borderRadius: '50%',
+                padding: '5px',
+                zIndex: '17',
+                width: '25px',
+                height:' 25px',
             }
         })
     }, [ contextData.userData.coverImage ]);
@@ -74,6 +82,8 @@ const ProfileCoverImage = props => {
                     background-repeat: no-repeat;
                     background-position: center;
                     height: 300px;
+                    max-height: 588px;
+                  
                 }
                  .upload-profile-image-btn{
                     position: absolute;
@@ -87,9 +97,9 @@ const ProfileCoverImage = props => {
              `}</style>
             <input ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
             <button className='upload-profile-image-btn' onClick={ () => uploadInputElement.current.click() }>
-                <FontAwesomeIcon style={{width:'20px',height:'20px'}} className='upload-profile-image-btn-svg'  icon={faCamera} />
+                <FontAwesomeIcon style={{...state.svgStyle,width:'20px',height:'20px'}} className='upload-profile-image-btn-svg'  icon={faCamera} />
             </button>
-            <ProfileImage/>
+            <ProfileImage svgStyle={state.svgStyle}/>
         </div>
     );
 };

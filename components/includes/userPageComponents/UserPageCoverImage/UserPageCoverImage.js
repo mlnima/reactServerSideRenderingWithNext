@@ -9,8 +9,10 @@ const UserPageCoverImage = ({coverImage,profileImage}) => {
                 background-repeat: no-repeat;
                 background-position: center;
                 height: 300px;
-                width: 100%;
                 background-image: url("${coverImage}")  ;
+             
+                max-height: 588px;
+               
             }
             .user-page-profile-image{
                 position: absolute;

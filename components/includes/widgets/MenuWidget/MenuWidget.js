@@ -127,7 +127,7 @@ margin:0;
             <button
                 onClick={() => open ? setOpen(false) : setOpen(true)}
                 className='navigation-mobile-button' aria-label="Center Align">
-                <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo' />
+                <FontAwesomeIcon  icon={faBars} className='navigation-mobile-button-logo' />
             </button>
 
             <ul className='menu-widget-items' ref={menuItemsElement} style={{display: open ? 'flex' : 'none'}}>
