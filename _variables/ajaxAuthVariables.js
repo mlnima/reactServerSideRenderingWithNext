@@ -6,6 +6,13 @@ export const getUsersList = async () => {
     }
     return await axios.post(window.location.origin + '/api/v1/users/getUsersList', body)
 }
+
+export const getSignedInUserData = async () =>{
+    if (localStorage.wt) {
+             return await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt})
+    }
+}
+
 export const login = async data => {
     let body = {
         ...data
@@ -43,13 +50,6 @@ export const getUserData = async (_id, domainName,username) => {
     }
     return await axios.post(domainName + '/api/v1/users/getUserData', body)
 }
-
-// export const getMyProfileData = async () => {
-//     const body = {
-//         token: localStorage.wt
-//     }
-//     return await axios.post(window.location.origin + '/api/v1/users/getMyProfileData', body)
-// }
 
 export const updateUserData = async (data, domainName) => {
     const body = {

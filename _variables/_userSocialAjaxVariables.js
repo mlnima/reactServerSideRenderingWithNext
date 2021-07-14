@@ -1,8 +1,9 @@
 import axios from "axios";
 
-export const getUserPreviewData = async (domainName,username) => {
+export const getUserPreviewData = async (domainName,username,_id) => {
     const body = {
-        username
+        username,
+        _id
     }
     return await axios.post(domainName + '/api/v1/users/getUserPreviewData', body)
 }
@@ -52,6 +53,30 @@ export const cancelFriendRequest = async (_id) => {
     }
     return await axios.post(window.location.origin + '/api/v1/users/cancelFriendRequest', body)
 }
+export const sendMessage = async (_id,message) => {
+    const body = {
+        _id,
+        message,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/sendMessage', body)
+}
+
+export const conversation = async (_id,message) => {
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/conversation', body)
+}
+export const messageToConversation = async (conversationId,messageBody) => {
+    const body = {
+        conversationId,
+        messageBody,
+        token: localStorage.wt
+    }
+    return await axios.post(window.location.origin + '/api/v1/users/messageToConversation', body)
+}
 
 export const getMultipleUserDataById = async (usersList) => {
     const body = {
@@ -59,3 +84,5 @@ export const getMultipleUserDataById = async (usersList) => {
     }
     return await axios.post(window.location.origin + '/api/v1/users/getMultipleUserDataById', body)
 }
+
+

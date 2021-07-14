@@ -92,7 +92,7 @@ app.prepare().then(() => {
     server.use(bodyParser.json());
     server.use(xmlparser());
     server.use(compression({filter: shouldCompress}));
-    server.use('/static', express.static(path.join(__dirname, 'static')))
+    server.use('/static', express.static(path.join(__dirname, 'static'),{maxAge: "365d"}))
 
     const serverLog = (req,res)=>{
         //console.log(req.url)

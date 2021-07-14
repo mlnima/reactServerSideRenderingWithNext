@@ -12,7 +12,8 @@ const index = props => {
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {
-        if (contextData?.userData?.followers?.length >0){
+        if (contextData?.userData?.friends?.length >0){
+
             getMultipleUserDataById(contextData?.userData?.friends).then(res=>{
                 setFriends(res?.data?.users || [])
             })

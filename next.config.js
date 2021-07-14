@@ -73,16 +73,10 @@ const reWriteRoutes = {
             //profile pages
             {source: `/:locale(${languages})?/profile`, destination: '/profile'},
             {source: `/profile`, destination: '/profile'},
-
-
-
             {source: `/:locale(${languages})?/user/:username`, destination: '/user'},
             {source: `/user/:username`, destination: '/user'},
-
             // {source: `/:locale(${languages})?/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
             // {source: `/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
-
-
             //meta route
             {source: `/:locale(${languages})?/:metaType(categories|tags|actors)`, destination: '/meta'},
             {source: `/:metaType(categories|tags|actors)`, destination: '/meta'},
@@ -97,10 +91,9 @@ const reWriteRoutes = {
             //auth pages
             {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
             {source: `/:locale(${languages})?/register`, destination: '/auth/register'},
-
             {source: `/:locale(${languages})?/profile`, destination: '/profile'},
             //checkout
-            {source: `/:locale(${languages})?/checkout`, destination: '/checkout'},
+            {source: `/:locale(${languages})?/checkout`, destination: '/checkout'}
         ]
     }
 }

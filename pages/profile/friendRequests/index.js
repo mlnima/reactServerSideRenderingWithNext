@@ -12,7 +12,7 @@ const Followers = props => {
     const [pendingReceivedFriendRequests, setPendingReceivedFriendRequests] = useState([]);
 
     useEffect(() => {
-        if (contextData?.userData?.followers?.length >0){
+        if (contextData?.userData?.pendingReceivedFriendRequests?.length >0){
             getMultipleUserDataById(contextData?.userData?.pendingReceivedFriendRequests).then(res=>{
                 setPendingReceivedFriendRequests(res?.data?.users || [])
             })

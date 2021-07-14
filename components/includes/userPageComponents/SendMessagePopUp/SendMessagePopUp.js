@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import SendMessagePopUpHeader from "./SendMessagePopUpHeader";
+import {sendMessage} from "../../../../_variables/_userSocialAjaxVariables";
 
 const SendMessagePopUp = props => {
     const contextData = useContext(AppContext);
@@ -19,8 +20,11 @@ const SendMessagePopUp = props => {
         })
     }
 
-    const onSendMessageHandler = ()=>{
-
+    const onSendMessageHandler = () =>{
+       // console.log(props.receiverId)
+        sendMessage(state.receiver,state.message).then(res=>{
+                console.log(res.data)
+        })
     }
 
     return (
@@ -69,9 +73,10 @@ width: 380px;
                     receiverId={props?.receiverId}
                     receiverProfileImage={props?.receiverProfileImage}
                     username={props.username}
+                    onCloseMessagePop={props.onCloseMessagePop}
                 />
                 <textarea className='send-message-pop-up-content-message-area' name="message"  onChange={e=>onChangeHandler(e)}/>
-                <button>Send</button>
+                <button onClick={onSendMessageHandler}>Send</button>
             </div>
         </div>
     );

@@ -9,7 +9,10 @@ const UserSmallPreview = ({username,role,profileImage,name,lastName,_id}) => {
     return (
         <Link href={{
             pathname:`/user/${username}`,
-            query: { username }}}>
+            query: { username }
+        }}
+        as={`/user/${username}`}
+        >
             <a  className='user'>
                 <style jsx>{`
                     .user{

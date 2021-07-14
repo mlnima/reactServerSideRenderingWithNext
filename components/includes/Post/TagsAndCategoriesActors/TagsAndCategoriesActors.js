@@ -2,7 +2,10 @@ import Link from "next/link";
 import _ from "lodash";
 
 const TagsAndCategoriesActors = props => {
-    const renderData = props.data.map(item => {
+
+    const filterMeta = props.data.length>0 ?  props.data.filter(m=>m.name.length>1) : []
+
+    const renderData = filterMeta.map(item => {
         const path = `/posts?metaId=${item._id}&metaName=${item.name}&metaType=${item.type}`;
         const asPath = `/${item.type}/${item.name}?metaId=${item._id}`
 

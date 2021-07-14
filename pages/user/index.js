@@ -13,9 +13,12 @@ const user = props => {
 
     });
 
-    useEffect(() => {
-        console.log(router)
-    }, [router]);
+    const onCloseMessagePop = () =>{
+        setState({
+            ...state,
+            messagePop: false
+        })
+    }
 
     return (
         <div className='user-page main'>
@@ -43,6 +46,8 @@ const user = props => {
                         receiverId={props?.userData?._id}
                         receiverProfileImage={props?.userData?.profileImage}
                         username={props?.userData?.username}
+                        render={state.messagePop}
+                        onCloseMessagePop={onCloseMessagePop}
                     />:null
             }
 

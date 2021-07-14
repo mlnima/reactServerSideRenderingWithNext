@@ -13,6 +13,8 @@ import FooterWidgetArea from "../widgetsArea/FooterWidgetArea/FooterWidgetArea";
 import GlobalStyles from "../global/GlobalStyles";
 import WidgetsRenderer from "../includes/WidgetsRenderer/WidgetsRenderer";
 
+const ConversationsRenderer = dynamic(() => import('../includes/ConversationBox/ConversationsRenderer'), {ssr: false})
+
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
@@ -238,6 +240,8 @@ const AppLayout = props => {
             {contextData.userData.role === 'administrator' && contextData.state.console ? <Console/> : null}
             {contextData.state.loading ? <Loading/> : null}
             {contextData.alert.active && contextData.alert.alertMessage ? <AlertBox/> : null}
+            {contextData.conversations.length>0 ? <ConversationsRenderer/> : null }
+
         </div>
 
     );

@@ -1,7 +1,9 @@
 //clientGetUserInfo
 const userSchema = require('../../../models/userSchema');
 
-module.exports =(req, res) => {
+module.exports = (req, res) => {
+   // const requestedFields = (req?.body?.fields || []).reduce((a, b) => ` ${a} , ` + ` ${b} , `)
+
     userSchema.findById(req.userData._id).exec().then(user => {
         let userDataToSend = user.toObject()
         delete userDataToSend.password

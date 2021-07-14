@@ -1,4 +1,5 @@
 let mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
 const userSchema = mongoose.Schema({
     username: {
@@ -25,9 +26,9 @@ const userSchema = mongoose.Schema({
     friends:Array,
     following:Array,
     followers:Array,
+    conversation:[{type:Schema.Types.ObjectID,ref:'conversation'}],
     pendingSentFriendRequests:Array,
     pendingReceivedFriendRequests:Array,
-    inbox:Array,
     blockList:Array,
     profileImage:String,
     mediumProfileImage:String,
@@ -43,7 +44,9 @@ const userSchema = mongoose.Schema({
     about:String,
     API_KEY:String,
     uuid:String
-});
+}
+// ,{ timestamps: true }
+);
 
 
 module.exports = mongoose.model("users",userSchema)

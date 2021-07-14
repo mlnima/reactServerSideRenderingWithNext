@@ -11,7 +11,7 @@ const Following = props => {
     const [state, setState] = useState({});
     const [following, setFollowing] = useState([]);
     useEffect(() => {
-        if (contextData?.userData?.followers?.length >0){
+        if (contextData?.userData?.following?.length >0){
             getMultipleUserDataById(contextData?.userData?.following).then(res=>{
                 setFollowing(res?.data?.users || [])
             })

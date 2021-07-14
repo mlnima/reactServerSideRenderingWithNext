@@ -1,14 +1,9 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {followUser,unFollowUser,sendFriendRequest,acceptFriendRequest,unfriendRequest,cancelFriendRequest} from "../../../../_variables/_userSocialAjaxVariables";
+import {followUser, unFollowUser, sendFriendRequest, acceptFriendRequest, unfriendRequest, cancelFriendRequest, conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {AppContext} from "../../../../context/AppContext";
 
-const UserPageActionButtons = ({_id,setParentState,parentState}) => {
+const UserPageActionButtons = ({_id, setParentState, parentState}) => {
     const contextData = useContext(AppContext);
-
-    useEffect(() => {
-        console.log(contextData.userData)
-    }, [contextData.userData]);
-
 
     const onFollowHandler = () => {
         followUser(_id).then(res => {
@@ -30,8 +25,8 @@ const UserPageActionButtons = ({_id,setParentState,parentState}) => {
         })
     }
 
-    const onSendFriendRequestHandler = ()=>{
-        sendFriendRequest(_id).then(res=>{
+    const onSendFriendRequestHandler = () => {
+        sendFriendRequest(_id).then(res => {
             const newPendingFriendRequests = res?.data?.updatedRequestSenderData || {}
             contextData.dispatchUserData({
                 ...contextData.userData,
@@ -40,8 +35,8 @@ const UserPageActionButtons = ({_id,setParentState,parentState}) => {
         })
     }
 
-    const onAcceptFriendRequestHandler = ()=>{
-        acceptFriendRequest(_id).then(res=>{
+    const onAcceptFriendRequestHandler = () => {
+        acceptFriendRequest(_id).then(res => {
             const newFriendList = res?.data?.updatedRequestSenderData || {}
             contextData.dispatchUserData({
                 ...contextData.userData,
@@ -50,38 +45,55 @@ const UserPageActionButtons = ({_id,setParentState,parentState}) => {
         })
     }
 
-    const onUnfriendHandler = ()=>{
-        unfriendRequest(_id).then(res=>{
+    const onUnfriendHandler = () => {
+        unfriendRequest(_id).then(res => {
             const newFriendList = res?.data?.updatedRequestSenderData || {}
             contextData.dispatchUserData({
                 ...contextData.userData,
                 ...newFriendList
             })
+        }).catch(err => {
+            console.log(err)
         })
     }
 
-const onCancelFriendRequest = () =>{
-    cancelFriendRequest(_id).then(res=>{
-        const newSentFriendRequestList = res?.data?.updatedRequestSenderData || {}
-        contextData.dispatchUserData({
-            ...contextData.userData,
-            ...newSentFriendRequestList
+    const onCancelFriendRequest = () => {
+        cancelFriendRequest(_id).then(res => {
+            const newSentFriendRequestList = res?.data?.updatedRequestSenderData || {}
+            contextData.dispatchUserData({
+                ...contextData.userData,
+                ...newSentFriendRequestList
+            })
+        }).catch(err => {
+            console.log(err)
         })
-    })
-}
+    }
 
-const onMessageHandler =()=>{
+    const onMessageHandler = () => {
         setParentState({
             ...parentState,
-            messagePop:true
+            messagePop: true
         })
-}
+    }
+
+
+    const onConversationHandler = () => {
+        conversation(_id).then(res => {
+            const conversation = res.data.conversation
+            if (conversation) {
+                const filterForDuplicateConversation = contextData.conversations.filter(c => c._id !== conversation._id)
+                contextData.dispatchConversations([...filterForDuplicateConversation, conversation])
+            }
+        }).catch(err => {
+            console.log(err)
+        })
+    }
 
 
     return (
 
         <div className='user-page-action-buttons'>
-        <style jsx>{`
+            <style jsx>{`
             .user-page-action-buttons{
                 display: flex;
                 justify-content: center;
@@ -109,24 +121,25 @@ const onMessageHandler =()=>{
                 }
             }
         `}
-        </style>
+            </style>
             {
                 //pendingReceivedFriendRequests
-                    contextData?.userData?.pendingSentFriendRequests?.includes(_id) ?
+                contextData?.userData?.pendingSentFriendRequests?.includes(_id) ?
                     <button className='user-page-action-button' onClick={onCancelFriendRequest}>Cancel Request</button> :
                     contextData?.userData?.friends?.includes(_id) ?
-                    <button className='user-page-action-button' onClick={onUnfriendHandler}>Unfriend</button>   :
-                    contextData?.userData?.pendingReceivedFriendRequests?.includes(_id) ?
-                    <button className='user-page-action-button' onClick={onAcceptFriendRequestHandler}>Accept Friend Request</button> :
-                    <button className='user-page-action-button' onClick={onSendFriendRequestHandler}>Add Friend</button>
+                        <button className='user-page-action-button' onClick={onUnfriendHandler}>Unfriend</button> :
+                        contextData?.userData?.pendingReceivedFriendRequests?.includes(_id) ?
+                            <button className='user-page-action-button' onClick={onAcceptFriendRequestHandler}>Accept Friend Request</button> :
+                            <button className='user-page-action-button' onClick={onSendFriendRequestHandler}>Add Friend</button>
             }
 
             {
                 contextData?.userData?.following?.includes(_id) ?
-                <button className='user-page-action-button' onClick={onUnFollowHandler}>Following</button>  :
-                <button className='user-page-action-button' onClick={onFollowHandler}>Follow</button>
+                    <button className='user-page-action-button' onClick={onUnFollowHandler}>Following</button> :
+                    <button className='user-page-action-button' onClick={onFollowHandler}>Follow</button>
             }
-            <button className='user-page-action-button' onClick={onMessageHandler}>Message</button>
+            {/*<button className='user-page-action-button' onClick={onMessageHandler}>Message</button>*/}
+            <button className='user-page-action-button' onClick={onConversationHandler}>Chat</button>
         </div>
     );
 };

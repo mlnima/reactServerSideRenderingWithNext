@@ -1,7 +1,7 @@
 import React, { useEffect, useState,createContext} from 'react';
 import axios from "axios";
 import {useRouter} from "next/router";
-
+import {getSignedInUserData} from "../_variables/ajaxAuthVariables";
 
 export const AppContext = createContext();
 
@@ -19,8 +19,6 @@ const AppProvider = props => {
         deviceWidth:320,
         checkoutSlideEnable:false
     });
-
-
 
     const [alert, dispatchAlert] = useState({
         active: false,
@@ -40,6 +38,8 @@ const AppProvider = props => {
         keywords: [],
         customScripts: []
     });
+
+    const [conversations,dispatchConversations] = useState([])
 
     const [eCommerceSettings,dispatchECommerceSettings]= useState({
         translations:{}
@@ -108,7 +108,7 @@ const AppProvider = props => {
     const [functions, dispatchFunctions] = useState({
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
-                await axios.post('/api/v1/users/getUserInfo', {token: localStorage.wt}).then(res => {
+                getSignedInUserData().then(res => {
                     dispatchUserData({...userData, ...res.data.userData});
                 }).catch(err => {
                     console.log(err);
@@ -279,7 +279,9 @@ const AppProvider = props => {
                     checkOutData,
                     setCheckOutData,
                     eCommerceSettings,
-                    dispatchECommerceSettings
+                    dispatchECommerceSettings,
+                    conversations,
+                    dispatchConversations,
 
                 }}>
                 {props.children}

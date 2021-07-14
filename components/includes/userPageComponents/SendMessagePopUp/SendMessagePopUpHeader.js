@@ -1,6 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faWindowMaximize, faWindowMinimize} from "@fortawesome/free-regular-svg-icons";
 
 const SendMessagePopUpHeader = props => {
     const [state, setState] = useState({});
@@ -30,7 +31,7 @@ const SendMessagePopUpHeader = props => {
             </style>
             <img src={props.receiverProfileImage} alt=""/>
             <p>{props.username}</p>
-            <button> <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}} icon={faTimes} className='navigation-mobile-button-logo' /></button>
+            <button onClick={props.onCloseMessagePop} > <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}} icon={faTimes} className='navigation-mobile-button-logo' /></button>
         </div>
     );
 };
