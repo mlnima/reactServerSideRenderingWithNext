@@ -20,103 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/_variables/_socketVariables.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_variables/socket.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerCall/MessengerCall.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationPreview.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/layouts/MessengerLayout.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/messenger/[conversation].js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/messenger/index.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminBulkAction.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminDeleteMeta.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminDeletePost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminExportPosts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetComments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdateComment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdateMeta.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsRouter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsControllers/adminGetSettings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsRouter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMeta.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetSingleMeta.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientLikeDislikeView.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientNewComment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsRouter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientSettingsRouter.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetConversation.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetConversations.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/socketServer/socketServer.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/temp.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/_userSocialAjaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_userSocialAjaxVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxAuthVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxAuthVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/Duration/Duration.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/Duration/Duration.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInputWithUploadBtn/TextInputWithUploadBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInputWithUploadBtn/TextInputWithUploadBtn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoEmbedCode/VideoEmbedCode.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/VideoEmbedCode/VideoEmbedCode.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminTopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminTopBar.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/GlobalStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/RedirecterToHttps/RedirecterToHttps.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/RedirecterToHttps/RedirecterToHttps.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ConversationBox/ConversationBoxTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ConversationBox/ConversationBoxTools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ImageRenderer/ImageRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ImageRenderer/ImageRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/context/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/AppContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/followers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/followers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/following/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/following/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/friendRequests/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/friendRequests/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/friends/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/friends/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/public/sw.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersController/adminGetUsersList.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersController/adminNewApiKey.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminNewApiKey.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersController/adminUpdateUserData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminUpdateUserData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/apiControllers/apiPostsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/apiControllers/apiPostsControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientConversation.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientConversation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientMessageToConversation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientUserLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientUserLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/postsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/postsControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/settingsControllers.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/settingsControllers.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/siteMapController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/siteMapsController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/subSiteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/subSiteMapsController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middlewares/apiCache.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middlewares/apiCache.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/commentSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/commentSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/conversationSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/conversationSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/postSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/postSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/userSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/userSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -789,7 +695,7 @@
       <workItem from="1626523820835" duration="2093000" />
       <workItem from="1626534103849" duration="31825000" />
       <workItem from="1626595473977" duration="28908000" />
-      <workItem from="1626696976678" duration="15038000" />
+      <workItem from="1626696976678" duration="16087000" />
     </task>
     <servers />
   </component>
@@ -825,7 +731,7 @@
     </state>
     <state x="1820" y="2499" key="#com.intellij.fileTypes.FileTypeChooser/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1621253807957" />
     <state x="2515" y="339" key="#com.intellij.fileTypes.FileTypeChooser/0.0.4096.1152@0.0.4096.1152" timestamp="1624130027349" />
-    <state width="3004" height="429" key="GridCell.Tab.0.bottom" timestamp="1626733678449">
+    <state width="3004" height="291" key="GridCell.Tab.0.bottom" timestamp="1626736537098">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2730" height="67" key="GridCell.Tab.0.bottom/-725.2160.4096.1152/0.0.2194.1234@-725.2160.4096.1152" timestamp="1618170951487" />
@@ -836,9 +742,9 @@
     <state width="2718" height="82" key="GridCell.Tab.0.bottom/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1619776710905" />
     <state width="2161" height="178" key="GridCell.Tab.0.bottom/0.0.2194.1234/-725.2160.4096.1152@0.0.2194.1234" timestamp="1619521521834" />
     <state width="2860" height="232" key="GridCell.Tab.0.bottom/0.0.4096.1152@0.0.4096.1152" timestamp="1626221842559" />
-    <state width="3004" height="429" key="GridCell.Tab.0.bottom/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626733678449" />
+    <state width="3004" height="291" key="GridCell.Tab.0.bottom/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626736537098" />
     <state width="2805" height="213" key="GridCell.Tab.0.bottom/670.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1623922082876" />
-    <state width="3004" height="429" key="GridCell.Tab.0.center" timestamp="1626733678449">
+    <state width="3004" height="291" key="GridCell.Tab.0.center" timestamp="1626736537098">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2730" height="67" key="GridCell.Tab.0.center/-725.2160.4096.1152/0.0.2194.1234@-725.2160.4096.1152" timestamp="1618170951487" />
@@ -849,9 +755,9 @@
     <state width="2718" height="82" key="GridCell.Tab.0.center/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1619776710905" />
     <state width="2161" height="178" key="GridCell.Tab.0.center/0.0.2194.1234/-725.2160.4096.1152@0.0.2194.1234" timestamp="1619521521833" />
     <state width="2860" height="232" key="GridCell.Tab.0.center/0.0.4096.1152@0.0.4096.1152" timestamp="1626221842559" />
-    <state width="3004" height="429" key="GridCell.Tab.0.center/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626733678449" />
+    <state width="3004" height="291" key="GridCell.Tab.0.center/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626736537098" />
     <state width="2805" height="213" key="GridCell.Tab.0.center/670.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1623922082876" />
-    <state width="3004" height="429" key="GridCell.Tab.0.left" timestamp="1626733678449">
+    <state width="3004" height="291" key="GridCell.Tab.0.left" timestamp="1626736537098">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2730" height="67" key="GridCell.Tab.0.left/-725.2160.4096.1152/0.0.2194.1234@-725.2160.4096.1152" timestamp="1618170951486" />
@@ -862,9 +768,9 @@
     <state width="2718" height="82" key="GridCell.Tab.0.left/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1619776710904" />
     <state width="2161" height="178" key="GridCell.Tab.0.left/0.0.2194.1234/-725.2160.4096.1152@0.0.2194.1234" timestamp="1619521521833" />
     <state width="2860" height="232" key="GridCell.Tab.0.left/0.0.4096.1152@0.0.4096.1152" timestamp="1626221842559" />
-    <state width="3004" height="429" key="GridCell.Tab.0.left/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626733678449" />
+    <state width="3004" height="291" key="GridCell.Tab.0.left/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626736537098" />
     <state width="2805" height="213" key="GridCell.Tab.0.left/670.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1623922082876" />
-    <state width="3004" height="429" key="GridCell.Tab.0.right" timestamp="1626733678449">
+    <state width="3004" height="291" key="GridCell.Tab.0.right" timestamp="1626736537098">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state width="2730" height="67" key="GridCell.Tab.0.right/-725.2160.4096.1152/0.0.2194.1234@-725.2160.4096.1152" timestamp="1618170951487" />
@@ -875,7 +781,7 @@
     <state width="2718" height="82" key="GridCell.Tab.0.right/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1619776710905" />
     <state width="2161" height="178" key="GridCell.Tab.0.right/0.0.2194.1234/-725.2160.4096.1152@0.0.2194.1234" timestamp="1619521521833" />
     <state width="2860" height="232" key="GridCell.Tab.0.right/0.0.4096.1152@0.0.4096.1152" timestamp="1626221842559" />
-    <state width="3004" height="429" key="GridCell.Tab.0.right/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626733678449" />
+    <state width="3004" height="291" key="GridCell.Tab.0.right/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626736537098" />
     <state width="2805" height="213" key="GridCell.Tab.0.right/670.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1623922082876" />
     <state x="1008" y="2294" width="1988" height="898" key="SettingsEditor" timestamp="1619346436247">
       <screen x="-725" y="2160" width="4096" height="1152" />
@@ -885,7 +791,7 @@
       <screen x="-695" y="2160" width="4096" height="1152" />
     </state>
     <state x="1127" y="2322" width="1138" height="1076" key="dock-window-1/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1621279783676" />
-    <state x="1035" y="43" width="1881" height="1002" key="find.popup" timestamp="1626732404854">
+    <state x="1035" y="43" width="1881" height="1002" key="find.popup" timestamp="1626737249555">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
     <state x="1640" y="2192" width="900" height="1002" key="find.popup/0.0.2194.1234/-669.2160.4096.1152@-669.2160.4096.1152" timestamp="1624109470842" />
@@ -893,7 +799,7 @@
     <state x="1690" y="2237" width="721" height="1002" key="find.popup/0.0.2194.1234/-695.2160.4096.1152@-695.2160.4096.1152" timestamp="1620590809018" />
     <state x="1660" y="2237" width="718" height="1002" key="find.popup/0.0.2194.1234/-725.2160.4096.1152@-725.2160.4096.1152" timestamp="1619539193259" />
     <state x="2385" y="77" width="900" height="1002" key="find.popup/0.0.4096.1152@0.0.4096.1152" timestamp="1624045358139" />
-    <state x="1035" y="43" width="1881" height="1002" key="find.popup/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626732404854" />
+    <state x="1035" y="43" width="1881" height="1002" key="find.popup/669.-2160.2194.1234/0.0.4096.1152@0.0.4096.1152" timestamp="1626737249555" />
     <state x="2162" y="265" key="run.anything.popup" timestamp="1626275921389">
       <screen x="0" y="0" width="4096" height="1152" />
     </state>
@@ -1082,7 +988,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/context/AppContext.js</url>
-          <line>19</line>
+          <line>16</line>
           <option name="timeStamp" value="69" />
         </line-breakpoint>
       </breakpoints>

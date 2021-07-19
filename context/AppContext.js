@@ -1,8 +1,5 @@
 import React, { useEffect, useState,createContext} from 'react';
-import dynamic from "next/dynamic";
-const axios =  dynamic(()=>import('axios'))
-
-
+import  axios from 'axios'
 import {useRouter} from "next/router";
 import {getSignedInUserData} from "../_variables/ajaxAuthVariables";
 
@@ -211,7 +208,7 @@ const AppProvider = props => {
                 type,
                 data
             };
-            return await axios.post(window.location.origin + '/api/v1/settings/update', body)
+            return await axios.post(window.location.origin + '/api/admin/settings/update', body)
         },
         clearCaches: async () => {
 
