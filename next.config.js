@@ -114,11 +114,8 @@ const pwaSettings = {
 
 module.exports = withPlugins([
     svgLoader,
-
-    //process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) :{},
     withPWA(pwaSettings),
     additionalConfig,
-    // reDirectRoutes,
     reWriteRoutes,
     nextImageConfig,
     withImages,

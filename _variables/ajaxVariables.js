@@ -7,7 +7,7 @@ export const updateSetting = async (type, data) => {
         type,
         data
     };
-    return await axios.post(window.location.origin + '/api/v1/settings/update', body)
+    return await axios.post(window.location.origin + '/api/admin/settings/update', body)
 };
 
 export const saveCustomStyle = async (data) => {
@@ -25,7 +25,7 @@ export const getSetting = async (type, domainName, cache, whichPage) => {
         cache
     };
 
-    return await axios.post(domainName + `/api/v1/settings/get?type=${type}${pageNameForCachedRequest}`, body)
+    return await axios.post(domainName + `/api/admin/settings/getSetting?type=${type}${pageNameForCachedRequest}`, body)
 };
 
 export const addNewWidget = async (data) => {
@@ -209,10 +209,6 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
     const refererUrl = req?.headers?.referer;
     const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
     //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
-
-    //console.log(req?.headers?.referer,req)
-    // console.log(req._parsedUrl)
-    // console.log(req?.headers)
     const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
     const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
     const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets]
@@ -232,8 +228,7 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
 }
 
 export const getStaticLoadData = async () => {
-    const domainName = process.env.PRODUCTION_URL;
-    const firstLoadWidgetsData = await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, domainName, true, 'firstLoadWidgetsData');
+    const domainName = process.env.REACT_APP_PRODUCTION_URL;
     const settingsData =  await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage');
     return {
         domainName,

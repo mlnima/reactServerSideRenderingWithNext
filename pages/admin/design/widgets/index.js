@@ -165,8 +165,8 @@ const HomePageWidgets = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    const settingsData = await getMultipleSetting({settings: ['identity']},process.env.PRODUCTION_URL, false, 'adminPostPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, process.env.PRODUCTION_URL, false, Date.now())
+    const settingsData = await getMultipleSetting({settings: ['identity']},process.env.REACT_APP_PRODUCTION_URL, false, 'adminPostPage')
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, process.env.REACT_APP_PRODUCTION_URL, false, Date.now())
     return {props: {widgets: widgetsData?.data?.widgets || null, identity: settingsData?.data?.settings?.identity||null}}
 }
 

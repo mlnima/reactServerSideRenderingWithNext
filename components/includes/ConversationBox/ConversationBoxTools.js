@@ -52,7 +52,7 @@ const ConversationBoxTools = props => {
             border-radius: 50px;
             height: 27px;
             width: 95%;
-            padding: 5 10px;
+            padding: 5px 10px;
             }
             .conversation-box-tools-send-btn{
             background-color: transparent;

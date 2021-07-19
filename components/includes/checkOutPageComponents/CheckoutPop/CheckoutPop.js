@@ -50,7 +50,7 @@ const CheckoutPop = props => {
                     ...contextData.state,
                     checkoutSlideEnable:false
                 })
-            },5000)
+            },1000)
         }
     }, [contextData.checkOutData.items]);
 

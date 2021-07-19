@@ -6,10 +6,25 @@ import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariab
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import _ from "lodash";
 import {AppContext} from "../../../context/AppContext";
+import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
 const Followers = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({});
     const [pendingReceivedFriendRequests, setPendingReceivedFriendRequests] = useState([]);
+
+
+    useEffect(() => {
+        getSignedInUserData(['pendingReceivedFriendRequests']).then(res => {
+            contextData.dispatchUserData({
+                ...contextData.userData,
+                ...res.data.userData
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }, []);
+
+
 
     useEffect(() => {
         if (contextData?.userData?.pendingReceivedFriendRequests?.length >0){
@@ -18,7 +33,7 @@ const Followers = props => {
             })
         }
 
-    }, [contextData.userData]);
+    }, [contextData.userData.pendingReceivedFriendRequests]);
 
     const renderPendingReceivedFriendRequests = pendingReceivedFriendRequests.map(user=>{
         return(

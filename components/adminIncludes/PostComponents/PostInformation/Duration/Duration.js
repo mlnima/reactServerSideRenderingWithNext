@@ -10,7 +10,7 @@ const Duration = props => {
                     <p>Duration</p>
                 </div>
                 <div className="editor">
-                    <DelayInput name='duration' value={props.postData.duration} delayTimeout={1000} onChange={e => props.onChangeHandler(e)}/>
+                    <input type='text' name='duration' value={props.postData.duration}  onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );

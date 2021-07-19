@@ -60,6 +60,6 @@ const postSchema =  new Schema({
     inSlideShow: Boolean,
     rating:String,
 
-});
+},{ timestamps: true });
 
 module.exports = mongoose.model("post", postSchema);

@@ -1,7 +1,11 @@
 import React, { useEffect, useState,createContext} from 'react';
-import axios from "axios";
+import dynamic from "next/dynamic";
+const axios =  dynamic(()=>import('axios'))
+
+
 import {useRouter} from "next/router";
 import {getSignedInUserData} from "../_variables/ajaxAuthVariables";
+
 
 export const AppContext = createContext();
 
@@ -108,7 +112,7 @@ const AppProvider = props => {
     const [functions, dispatchFunctions] = useState({
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
-                getSignedInUserData().then(res => {
+                getSignedInUserData(['username','role','keyMaster','profileImage']).then(res => {
                     dispatchUserData({...userData, ...res.data.userData});
                 }).catch(err => {
                     console.log(err);
@@ -179,7 +183,7 @@ const AppProvider = props => {
                 status,
                 token: localStorage.wt
             };
-            axios.post('/api/v1/posts/postsBulkAction', body).then(() => {
+            axios.post('/api/admin/posts/postsBulkAction', body).then(() => {
                 // router.push({ pathname: router.pathname, query: { ...router.query } })
                 dispatchState({
                     ...state,
@@ -199,7 +203,7 @@ const AppProvider = props => {
                 _id: id,
                 token: localStorage.wt
             };
-            return axios.post('/api/v1/posts/deletePost', body)
+            return axios.post('/api/admin/posts/deletePost', body)
         },
         updateSetting: async (type, data) => {
             const body = {
@@ -242,7 +246,20 @@ const AppProvider = props => {
     });
 
     useEffect(() => {
-        functions.getAndSetUserInfo()
+        getSignedInUserData(['username','role','keyMaster','profileImage']).then(res => {
+            if (res.data.userData){
+                dispatchUserData({
+                    ...userData,
+                    ...res.data.userData
+                });
+            }
+        }).catch(err => {
+            console.log(err);
+            localStorage.removeItem('wt')
+        })
+
+
+        //functions.getAndSetUserInfo()
         functions.getCheckOutData()
     }, []);
 
@@ -282,7 +299,6 @@ const AppProvider = props => {
                     dispatchECommerceSettings,
                     conversations,
                     dispatchConversations,
-
                 }}>
                 {props.children}
             </AppContext.Provider>

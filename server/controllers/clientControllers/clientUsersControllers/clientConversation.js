@@ -9,8 +9,6 @@ module.exports = async (req, res) => {
             users:[senderId,receiverId]
         }
         const conversation = await conversationSchema.findOneAndUpdate({users:{ "$in" : [senderId,receiverId]}}, {...conversationData},{new:true,upsert:true}).exec()
-        // const conversationId = conversation._id
-        // console.log(conversation)
         res.json({conversation})
         res.end()
     }catch (err) {

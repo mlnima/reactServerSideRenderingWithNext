@@ -30,7 +30,7 @@ const ImageRenderer = props => {
             }
             setTimeout(() => {
                 checkRemovedContent(data)
-            }, 0)
+            }, 1000)
         }
     }
 

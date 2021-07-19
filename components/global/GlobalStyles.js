@@ -160,6 +160,13 @@ grid-template-areas:
 .withOutSidebar{
 grid-template-columns: 1fr;
 }
+
+.simple-button{
+background-color: transparent;
+   color:var(--main-text-color);
+   margin: 10px 0;
+}
+
 }
 `}
 </style>

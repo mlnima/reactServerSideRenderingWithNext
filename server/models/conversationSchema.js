@@ -7,10 +7,6 @@ const systemMessage = mongoose.Schema({
     createdAt:{
         type: Date,
         default:Date.now()
-    },
-    updatedAt:{
-        type: Date,
-        default:Date.now()
     }
 })
 
@@ -18,10 +14,6 @@ const messageSchema = mongoose.Schema({
     messageBody:String,
     author:{type:Schema.Types.ObjectID,ref:'user'},
     createdAt:{
-        type: Date,
-        default:Date.now()
-    },
-    updatedAt:{
         type: Date,
         default:Date.now()
     }

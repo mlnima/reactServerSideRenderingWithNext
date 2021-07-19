@@ -10,7 +10,8 @@ module.exports =  (req, res) =>{
     userSchema.findOne({ $or: [ { username }, { email } ] }).exec()
         .then(user => {
             if (user) {
-                res.json({ response: 'exist', type: 'error' });
+
+                res.status(409).json({message:'user with this email or username already exist'})
                 res.end()
             } else {
                 // Hashing
@@ -18,7 +19,7 @@ module.exports =  (req, res) =>{
                     bcrypt.hash(password, 10, function (err, hash) {
                         if (err) {
                             console.log(err)
-                            res.json({ response: 'bcrypt', type: 'error' });
+                            res.status(503).json({message:'something went wrong please try again later'})
                             res.end()
                         } else if (hash) {
                             let userData = {
@@ -30,25 +31,27 @@ module.exports =  (req, res) =>{
                             let newUserData = userSchema(userData);
                             newUserData.save().then(() => {
                                 console.log(userData.username, ' registered')
-                                res.json({ response: 'You are Registered', type: 'success' });
+                                res.json({message:'registration successful you can login now'})
                                 res.end()
                             }).catch(err => {
                                 console.log(err)
-                                res.json({ response: 'something went wrong', type: 'error' });
+                                res.json({ message: 'something went wrong', type: 'error' });
+                                res.status(503).json({message:'something went wrong please try again later'})
                                 res.end()
                             });
 
                         }
                     });
                 } else {
-                    res.json({ response: 'Password Mismatch', type: 'error' });
+
+                    res.status(400).json({message:'passwords are not matched'})
                     res.end()
                 }
 
             }
         }).catch(err => {
         console.log(err);
-        res.json({ response: 'server Error', type: 'error' });
+        res.status(503).json({message:'something went wrong please try again later'})
         res.end()
     })
 }

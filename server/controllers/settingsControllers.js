@@ -11,33 +11,34 @@ const shell = require('shelljs');
 const dataEncoder = require('../tools/dataEncoder')
 let settingsControllers = {}
 
-settingsControllers.update = (req, res) => {
-    const type = req.body.type;
-    const data = req.body.data;
-    settingSchema.findOneAndUpdate({type: type}, {data}, {new: true}).exec().then(setting => {
+// settingsControllers.update = (req, res) => {
+//     const type = req.body.type;
+//     const data = req.body.data;
+//     settingSchema.findOneAndUpdate({type: type}, {data}, {new: true}).exec().then(setting => {
+//
+//         if (!setting) {
+//             const dataToSave = new settingSchema({
+//                 type: req.body.type,
+//                 data: req.body.data
+//             });
+//             dataToSave.save().then(() => {
+//                 res.statusCode(200)
+//             }).catch(err => {
+//                 console.log(err)
+//                 res.statusCode(500)
+//             })
+//         }
+//     }).catch(err => {
+//         console.log(err)
+//         res.statusCode(500)
+//     })
+//     res.end()
+// };
+// settingsControllers.get = async (req, res) => {
+//     const setting = await settingSchema.findOne({type: req.body.type}).exec();
+//     res.json({setting})
+// };
 
-        if (!setting) {
-            const dataToSave = new settingSchema({
-                type: req.body.type,
-                data: req.body.data
-            });
-            dataToSave.save().then(() => {
-                res.statusCode(200)
-            }).catch(err => {
-                console.log(err)
-                res.statusCode(500)
-            })
-        }
-    }).catch(err => {
-        console.log(err)
-        res.statusCode(500)
-    })
-    res.end()
-};
-settingsControllers.get = async (req, res) => {
-    const setting = await settingSchema.findOne({type: req.body.type}).exec();
-    res.json({setting})
-};
 settingsControllers.getMultiple = async (req, res) => {
     const siteType = (await settingSchema.findOne({type: 'identity'}).exec()).data.siteMode
     const requestedSetting = siteType === 'eCommerce' ? [...req.body.settings, 'eCommerce'] : req.body.settings

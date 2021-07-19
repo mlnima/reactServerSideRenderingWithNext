@@ -45,8 +45,8 @@ const userSchema = mongoose.Schema({
     API_KEY:String,
     uuid:String
 }
-// ,{ timestamps: true }
+,{ timestamps: true }
 );
 
 
-module.exports = mongoose.model("users",userSchema)
+module.exports = mongoose.model("user",userSchema)

@@ -5,7 +5,8 @@ module.exports = async (req, res) =>{
     try {
         const messageData ={
             messageBody:req.body.messageBody,
-            author:req.userData._id
+            author:req.userData._id,
+            createdAt:Date.now()
         }
 
         const addConversationIdToSenderData = await userSchema.findByIdAndUpdate(req.userData._id,{$addToSet:{conversation:[req.body.conversationId]}}).exec()

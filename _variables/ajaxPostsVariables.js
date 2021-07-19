@@ -18,7 +18,7 @@ export const getPosts = async (data, domainName,cache,queriesData) => {
         cache
     };
   //?requestFor=${encodeURIComponent(queriesData)}
-    return await axios.post(domainName +`/api/v1/posts?requestFor=${encodeURIComponent(queriesData)}`, body)
+    return await axios.post(domainName +`/api/v1/posts/clientGetPosts?requestFor=${encodeURIComponent(queriesData)}`, body)
 };
 
 export const getPost = async (data, domainName, cache) => {
@@ -26,7 +26,7 @@ export const getPost = async (data, domainName, cache) => {
         ...data,
         cache
     };
-    return await axios.post(domainName + `/api/v1/posts/post?id=${ data._id }` , body)
+    return await axios.post(domainName + `/api/v1/posts/clientGetPost?id=${ data._id }` , body)
 };
 export const checkRemovedContent = async (data) => {
 
@@ -42,7 +42,7 @@ export const updatePost = async (data, domainName) => {
         postData: data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/v1/posts/updatePost`, body)
+    return await axios.post(domainName + `/api/admin/posts/updatePost`, body)
 };
 
 export const savePost = async (data, domainName) => {
@@ -50,7 +50,7 @@ export const savePost = async (data, domainName) => {
         postData: data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/v1/posts/createNewPost`, body)
+    return await axios.post(domainName + `/api/admin/posts/createNewPost`, body)
 };
 
 export const getMeta = async (data,  domainName,cache) => {
@@ -76,7 +76,7 @@ export const updateMeta = async (data,  domainName) => {
         data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/v1/posts/updateMeta`, body)
+    return await axios.post(domainName + `/api/admin/posts/updateMeta`, body)
 };
 
 
@@ -88,7 +88,7 @@ export const deleteMeta = async (id, domainName) => {
         _id:id,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/v1/posts/deleteMeta`, body)
+    return await axios.post(domainName + `/api/admin/posts/deleteMeta`, body)
 };
 
 
@@ -100,7 +100,7 @@ export const bulkAction = async (domainName,type,status,ids) =>{
         ids,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/v1/posts/bulkAction`, body)
+    return await axios.post(domainName + `/api/admin/posts/bulkAction`, body)
 }
 
 
@@ -114,19 +114,29 @@ export const newComment = async (data) => {
     return await axios.post(window.location.origin + `/api/v1/posts/newComment`, body)
 };
 
+export const adminGetComments = async (data, domainName, cache) => {
+    const body = {
+        ...data,
+        cache,
+        token: localStorage.wt
+    };
+    return await axios.post(domainName + `/api/admin/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
+};
+
 export const getComments = async (data, domainName, cache) => {
     const body = {
         ...data,
-        cache
+        cache,
     };
-    return await axios.post(domainName + `/api/v1/posts/getComments?onDocument=${data.onDocument}`, body)
+    return await axios.post(domainName + `/api/v1/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
 };
+
 
 export const updateComment = async (data) => {
     const body = {
         ...data,
     };
-    return await axios.post(window.location.origin + `/api/v1/posts/updateComment`, body)
+    return await axios.post(window.location.origin + `/api/admin/posts/updateComment`, body)
 };
 
 export const deleteComments = async (data, domainName) => {
@@ -134,7 +144,7 @@ export const deleteComments = async (data, domainName) => {
         commentsIds: data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/v1/posts/deleteComments`, body)
+    return await axios.post(domainName + `/api/admin/posts/deleteComments`, body)
 };
 
 export const likeDislikeView = async (id, type) => {
@@ -149,7 +159,7 @@ export const exportPosts = async () => {
     const body = {
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/v1/posts/export', body)
+    return await axios.post(window.location.origin + '/api/admin/posts/exportPosts', body)
 };
 
 

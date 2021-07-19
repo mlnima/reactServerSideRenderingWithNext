@@ -18,7 +18,7 @@ subSiteMapsController.siteMap = (req, res) => {
 
             if (post) {
                 let lastModify = new Date(post.lastModify);
-                let postUrl =process.env.PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
+                let postUrl =process.env.REACT_APP_PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
                 postsElements += '<url> \n ' +
                     `<loc>${ postUrl }</loc>\n` +
                     `<lastmod>${ lastModify.toISOString() }</lastmod>\n` +

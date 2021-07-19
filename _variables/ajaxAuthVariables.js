@@ -1,5 +1,11 @@
 import axios from 'axios'
 
+export const registerUser = async data => {
+
+    return await axios.post(window.location.origin + '/api/v1/users/register', data)
+}
+
+
 export const getUsersList = async () => {
     let body = {
         token: localStorage.wt
@@ -7,9 +13,9 @@ export const getUsersList = async () => {
     return await axios.post(window.location.origin + '/api/v1/users/getUsersList', body)
 }
 
-export const getSignedInUserData = async () =>{
+export const getSignedInUserData = async (fields) =>{
     if (localStorage.wt) {
-             return await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt})
+             return await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt,fields})
     }
 }
 

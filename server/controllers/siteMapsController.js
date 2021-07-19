@@ -26,7 +26,7 @@ siteMapsController.siteMapMonths = (req, res) => {
         if (count <= size) {
             postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify , postType ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
                 renderPostData = posts.map(post => {
-                    let postUrl =process.env.PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
+                    let postUrl =process.env.REACT_APP_PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
                     postsElements +=
                         '<url>\n' +
                         `<loc>${ postUrl }</loc>\n` +
@@ -56,7 +56,7 @@ siteMapsController.siteMapMonths = (req, res) => {
                 page += 1;
                 subSiteMaps +=
                     '<sitemap>\n' +
-                    `<loc>${process.env.PRODUCTION_URL }/sitemap/${ month }/${ page }.xml</loc>\n` +
+                    `<loc>${process.env.REACT_APP_PRODUCTION_URL }/sitemap/${ month }/${ page }.xml</loc>\n` +
                     `<lastmod>2019-12-21T08:00:46+00:00</lastmod>\n` +
                     ' </sitemap>\n'
             }
@@ -73,3 +73,4 @@ siteMapsController.siteMapMonths = (req, res) => {
     });
 };
 module.exports = siteMapsController
+

@@ -6,10 +6,24 @@ import ProfileNavigation from '../../../components/includes/MyProfileComponents/
 import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariables";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import _ from "lodash";
+import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
 const Following = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({});
     const [following, setFollowing] = useState([]);
+
+    useEffect(() => {
+        getSignedInUserData(['following']).then(res => {
+            contextData.dispatchUserData({
+                ...contextData.userData,
+                ...res.data.userData
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }, []);
+
+
     useEffect(() => {
         if (contextData?.userData?.following?.length >0){
             getMultipleUserDataById(contextData?.userData?.following).then(res=>{
@@ -17,7 +31,7 @@ const Following = props => {
             })
         }
 
-    }, [contextData.userData]);
+    }, [contextData.userData.following]);
 
     const renderFollowing = following.map(user=>{
         return(

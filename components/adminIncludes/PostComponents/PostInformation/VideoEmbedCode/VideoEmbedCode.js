@@ -9,7 +9,7 @@ const VideoEmbedCode = props => {
                     <p>Video Embed Code</p>
                 </div>
                 <div className="editor">
-                    <DelayInput element="textarea" className='textareaInput' name='videoEmbedCode' value={props.postData.videoEmbedCode} delayTimeout={1000} onChange={e => props.onChangeHandler(e)}/>
+                    <textarea  className='textareaInput' name='videoEmbedCode' value={props.postData.videoEmbedCode} onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );

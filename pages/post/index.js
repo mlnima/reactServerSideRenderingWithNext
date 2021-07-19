@@ -35,12 +35,14 @@ let StyledMain = styled.main`
 ${props => props.stylesData}
 `
 
-const Post = ({responseCode,design,post,identity,comments,widgets}) => {
+const Post = ({responseCode, design, post, identity, comments, widgets}) => {
     const contextData = useContext(AppContext);
 
     const [deviceWidth, setDeviceWidth] = useState(null)
 
-
+    useEffect(() => {
+        console.log(post)
+    }, [post]);
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)
@@ -70,18 +72,18 @@ const Post = ({responseCode,design,post,identity,comments,widgets}) => {
                         null
                 }
                 {
-                    post.postType === 'product'?
+                    post.postType === 'product' ?
                         <SlideShow
                             images={post.images}
                             mainThumbnail={post.mainThumbnail}
                             sidebar={identity?.data?.postPageSidebar}
                             deviceWidth={deviceWidth}
-                        />:
+                        /> :
                         null
                 }
 
-                <PostInfo {...post} rating='enable' />
-                {comments.length > 0 ? <CommentsRenderer comments={comments}/> : null}
+                <PostInfo {...post} rating='enable'/>
+                {comments?.length > 0 ? <CommentsRenderer comments={comments}/> : null}
                 <CommentFrom documentId={post._id} documentTitle={post.title}/>
                 {(widgets || []).filter(widget => widget.data.position === 'underPost').length > 0 ?
                     <div className='under-post-widget-area'>
@@ -98,9 +100,9 @@ const Post = ({responseCode,design,post,identity,comments,widgets}) => {
 
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req,['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],'postPage')
+    const firstLoadData = await getFirstLoadData(context.req, ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], 'postPage')
     let responseCode = 200
-    const postData = await getPost({_id: context.query.id,title:context.query.title}, firstLoadData.domainName, true)
+    const postData = await getPost({_id: context.query.id, title: context.query.title}, firstLoadData.domainName, true)
     const post = postData.data.post;
     if (!post) {
         return {

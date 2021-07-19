@@ -3,16 +3,16 @@ const router = express.Router();
 const authMiddleware = require('../../middlewares/authMiddleware')
 const adminAuthMiddleware = require('../../middlewares/adminAuthMiddleware')
 
-const adminUsersController = {}
-const adminUpdateUserData = require('./adminUsersController/adminUpdateUserData');
-const adminNewApiKey = require('./adminUsersController/adminNewApiKey');
-const adminGetUsersList = require('./adminUsersController/adminGetUsersList');
+const adminUsersRouter = {}
+const adminUpdateUserData = require('./adminUsersControllers/adminUpdateUserData');
+const adminNewApiKey = require('./adminUsersControllers/adminNewApiKey');
+const adminGetUsersList = require('./adminUsersControllers/adminGetUsersList');
 
 router.post('/newAPIKey',adminAuthMiddleware,adminNewApiKey)
 router.post('/getUsersList',adminAuthMiddleware,adminGetUsersList)
 
 
-adminUsersController.adminUpdateUserData = (req,res) => {adminUpdateUserData(req,res)}
+adminUsersRouter.adminUpdateUserData = (req, res) => {adminUpdateUserData(req,res)}
 
 
 

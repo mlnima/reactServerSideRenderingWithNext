@@ -11,16 +11,14 @@ import NavigationWidgetArea from "../widgetsArea/NavigationWidgetArea/Navigation
 import SideBarWidgetArea from "../widgetsArea/SideBarWidgetArea/SideBarWidgetArea";
 import FooterWidgetArea from "../widgetsArea/FooterWidgetArea/FooterWidgetArea";
 import GlobalStyles from "../global/GlobalStyles";
-import WidgetsRenderer from "../includes/WidgetsRenderer/WidgetsRenderer";
+
 
 const ConversationsRenderer = dynamic(() => import('../includes/ConversationBox/ConversationsRenderer'), {ssr: false})
-
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
 const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), {ssr: false})
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
-
 
 const AppLayout = props => {
     //console.log(props)
@@ -79,9 +77,11 @@ const AppLayout = props => {
                 router.pathname === '/post' ? 'postPageSidebar' :
                     router.pathname === '/posts' ? 'postsPageSidebar' :
                         router.pathname === '/meta' ? 'metaPageSidebar' :
+                        router.pathname === '/auth/register' || router.pathname === '/auth/login'? 'authPageSidebar' :
                           router.pathname.includes('/profile')  ? 'profilePageSidebar' :
-                          router.pathname === '/user' ? 'userPageSidebar' :
-                            router.pathname === '/page' ? props.pageInfo?.pageName + 'Sidebar' :
+                          router.pathname.includes('/messenger')  ? 'messengerPageSidebar' :
+                            router.pathname === '/user' ? 'userPageSidebar' :
+                              router.pathname === '/page' ? props.pageInfo?.pageName + 'Sidebar' :
                                 'homePageSidebar'
         , [router.pathname])
 
@@ -89,7 +89,9 @@ const AppLayout = props => {
         router.pathname === '/post' ? 'postPageLeftSidebar' :
             router.pathname === '/posts' ? 'postsPageLeftSidebar' :
                 router.pathname === '/meta' ? 'metaPageLeftSidebar' :
+                    router.pathname === '/auth/register' || router.pathname === '/auth/login' ? 'authPageLeftSidebar' :
                     router.pathname.includes('/profile')  ? 'profilePageLeftSidebar' :
+                    router.pathname.includes('/messenger')  ? 'messengerPageLeftSidebar' :
                    router.pathname === '/user' ? 'userPageLeftSidebar' :
                     router.pathname === '/page' ? props.pageInfo?.pageName + 'LeftSidebar' :
                         'homePageLeftSidebar', [router.pathname])
@@ -98,7 +100,9 @@ const AppLayout = props => {
         router.pathname === '/post' ? 'postPageRightSidebar' :
             router.pathname === '/posts' ? 'postsPageRightSidebar' :
                 router.pathname === '/meta' ? 'metaPageRightSidebar' :
+                    router.pathname === '/auth/register' || router.pathname === '/auth/login' ? 'authPageRightSidebar' :
                     router.pathname.includes('/profile')  ? 'profilePageRightSidebar' :
+                    router.pathname.includes('/messenger')  ? 'messengerPageRightSidebar' :
                     router.pathname === '/user' ? 'userPageRightSidebar' :
                       router.pathname === '/page' ? props.pageInfo?.pageName + 'RightSidebar' :
                         'homePageRightSidebar', [router.pathname])

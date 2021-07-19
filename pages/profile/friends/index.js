@@ -6,20 +6,31 @@ import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariab
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import _ from "lodash";
 import {AppContext} from "../../../context/AppContext";
+import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
 const index = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({});
     const [friends, setFriends] = useState([]);
 
     useEffect(() => {
-        if (contextData?.userData?.friends?.length >0){
+        getSignedInUserData(['friends']).then(res => {
+            contextData.dispatchUserData({
+                ...contextData.userData,
+                ...res.data.userData
+            });
+        }).catch(err => {
+            console.log(err);
+        })
+    }, []);
 
+
+    useEffect(() => {
+        if (contextData?.userData?.friends?.length >0){
             getMultipleUserDataById(contextData?.userData?.friends).then(res=>{
                 setFriends(res?.data?.users || [])
             })
         }
-
-    }, [contextData.userData]);
+    }, [contextData.userData.friends]);
 
     const renderFriends = friends.map(user=>{
         return(

@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
                 bcrypt.compare(password, user.password, function (err, isCorrect) {
                     if (err || isCorrect === false ) {
                         console.log( err)
-                        res.json({ response: 'wrong username or password !', type: 'error' });
+                        res.status(401).json({message:'wrong username or password'})
                         res.end()
                     } else if (isCorrect) {
                         const token = jwt.sign({
@@ -25,8 +25,7 @@ module.exports = async (req, res) => {
                             { expiresIn: tokenExpireTime });
                         res.json({
                             token: token,
-                            response: 'successfully logged in ',
-                            type: 'success'
+                            message: 'you are logged in',
                         });
 
                         res.end()
@@ -34,11 +33,13 @@ module.exports = async (req, res) => {
 
                 })
             } else if (!user) {
-                res.json({ response: 'account with this Username does not exist !', type: 'error' });
+
+                res.status(404).json({message:'account with this Username does not exist'})
                 res.end()
             }
         }).catch(err => {
             console.log(err);
+            res.status(503).json({message:'something went wrong please try again later'})
             res.json({ response: 'server Error !', type: 'error' })
         })
 };

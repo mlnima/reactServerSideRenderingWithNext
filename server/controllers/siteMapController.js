@@ -45,7 +45,7 @@ siteMapController.siteMap = (req, res) => {
 
             monthsSiteMap +=
                 '<sitemap>\n' +
-                `<loc>${ process.env.PRODUCTION_URL }/sitemaps/${ fixedMonth }.xml</loc>\n` +
+                `<loc>${ process.env.REACT_APP_PRODUCTION_URL }/sitemaps/${ fixedMonth }.xml</loc>\n` +
                 `<lastmod>${ toDay.toISOString()  }</lastmod>\n` +
                 ' </sitemap>\n'
         });

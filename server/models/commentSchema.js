@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 
 const commentSchema = mongoose.Schema({
-    onDocumentId: mongoose.Types.ObjectId,
+    onDocumentId: {type:mongoose.Schema.Types.ObjectID,ref:'post'},
     onDocumentTitle: String,
     author: String,
     authorID:mongoose.Types.ObjectId,
@@ -16,6 +16,6 @@ const commentSchema = mongoose.Schema({
         type:String,
         default: 'approved'
     }
-});
+},{ timestamps: true });
 
 module.exports = mongoose.model("comments",commentSchema);

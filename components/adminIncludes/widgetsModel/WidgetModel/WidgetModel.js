@@ -252,10 +252,10 @@ const WidgetModel = props => {
             }
         }
         updateWidgets(dataToSave).then(() => {
-            setTimeout(() => {
-                props.getAndSetWidgetsData()
-            }, 0)
-
+            // setTimeout(() => {
+            //
+            // }, 0)
+            props.getAndSetWidgetsData()
         })
     };
 
@@ -317,10 +317,10 @@ const WidgetModel = props => {
                 }
             }
             updateWidgets(dataToSave).then(() => {
-                setTimeout(() => {
-                    props.getAndSetWidgetsData()
-                }, 0)
-
+                // setTimeout(() => {
+                //
+                // }, 0)
+                props.getAndSetWidgetsData()
             })
         }
     };
