@@ -63,7 +63,7 @@ const MessengerConversationHeader = ({profileImage,username,callUser}) => {
                 <button onClick={()=>router.push('/messenger')} className='messenger-conversation-header-back-btn'>
                     <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />
                 </button>
-                <img src={profileImage} alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>
+                <img src={profileImage || '/static/images/noImage/no-image-available.png'} alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>
                 <p className='messenger-conversation-header-username'>{username}</p>
             </div>
             <div className='messenger-conversation-header-right'>
