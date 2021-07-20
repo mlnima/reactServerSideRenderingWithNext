@@ -1,6 +1,6 @@
 require('dotenv').config()
 const io = require('socket.io')(process.env.REACT_APP_SOCKET_PORT, {
-    path: '/socketServer',
+    // path: '/socketServer',
     cors: {
         origin: [process.env.REACT_APP_PRODUCTION_URL],
     }
@@ -15,6 +15,7 @@ const setCustomId = (id) =>{
 
 
 io.on('connection', socket => {
+    //console.log(socket.id)
     socket.on('setIdAndJoinConversation', async (userID , conversationId) => {
         //setCustomId(userID)
         socket.join(conversationId)
