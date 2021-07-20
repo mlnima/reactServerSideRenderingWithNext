@@ -15,7 +15,7 @@ const setCustomId = (id) =>{
 
 
 io.on('connection', socket => {
-    //console.log(socket.id)
+    console.log(socket.id)
     socket.on('setIdAndJoinConversation', async (userID , conversationId) => {
         //setCustomId(userID)
         socket.join(conversationId)
