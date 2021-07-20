@@ -107,6 +107,8 @@ const AppLayout = props => {
                       router.pathname === '/page' ? props.pageInfo?.pageName + 'RightSidebar' :
                         'homePageRightSidebar', [router.pathname])
 
+
+
     const sidebarType = useMemo(() => props.identity?.data?.[sidebarPositionName] || contextData?.siteIdentity[sidebarPositionName] || props.pageInfo?.sidebar, [sidebarPositionName, props.pageInfo])
 
     const mainLayoutClassNameForGrid = useMemo(() => sidebarType === 'left' ? 'leftSidebar' : sidebarType === 'right' ? 'rightSidebar' : sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar', [sidebarType]);

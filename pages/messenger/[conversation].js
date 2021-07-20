@@ -88,6 +88,7 @@ const conversation = props => {
     })
 
     socket.on("mySocketId", id => {
+        console.log(id)
         setMySocketId(id)
     })
 
