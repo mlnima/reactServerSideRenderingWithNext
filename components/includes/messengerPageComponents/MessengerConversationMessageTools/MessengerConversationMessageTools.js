@@ -17,12 +17,8 @@ const MessengerConversationMessageTools = props => {
                 messageBody:messageInputData,
                 createdAt:Date.now(),
                 author:contextData.userData._id
-                //conversationId:props.conversationId,
-                //connectedUserId:props.connectedUserData._id,
-                //wt:localStorage.wt
             }
             socket.emit('sendMessageToConversation',messageData,props.conversationId)
-
             messageToConversation(props.conversationId, messageInputData).then(() => {
                 messageInput.current.value = '';
                 props.getAndSetConversationData();
@@ -32,11 +28,6 @@ const MessengerConversationMessageTools = props => {
         }
     }
 
-    // useEffect(() => {
-    //     contextData.socket.on('connection',socket=>{
-    //         console.log(socket.id)
-    //     })
-    // }, []);
 
 
     return (

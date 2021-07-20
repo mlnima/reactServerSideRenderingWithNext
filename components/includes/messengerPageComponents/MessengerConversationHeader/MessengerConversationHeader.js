@@ -2,42 +2,12 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faBars, faPhoneAlt, faVideo} from "@fortawesome/free-solid-svg-icons";
-import Peer from 'simple-peer'
-import socket from '../../../../_variables/socket'
+// import Peer from 'simple-peer'
+// import socket from '../../../../_variables/socket'
 
-const MessengerConversationHeader = ({profileImage,username,callPeer}) => {
+const MessengerConversationHeader = ({profileImage,username,callUser}) => {
     const router = useRouter()
 
-    const onBackHandler = () =>{
-        router.back()
-    }
-
-    // const onVideoCallHandler = ()=>{
-    //     const Peer = new Peer({
-    //         initiator:true,
-    //         trickle:false,
-    //         stream
-    //     })
-    //
-    //     Peer.on('signal',data=>{
-    //         socket.current.emit('callUser',{userCall:connectedUserId,from:myId})
-    //     })
-    //     Peer.on('stream',streamData=>{
-    //         if (personToCallVideoRef.current){
-    //             personToCallVideoRef.current.srcObject = streamData
-    //         }
-    //
-    //     })
-    //     socket.current.on('callAccepted',signal=>{
-    //         setCallAccepted(true)
-    //         Peer.signal(signal)
-    //     })
-    //
-    //     console.log('videoCall')
-    // }
-    // const onVoiceCallHandler = ()=>{
-    //     console.log('voiceCall')
-    // }
 
     const onVideoCallHandler = () =>{
 
@@ -90,17 +60,17 @@ const MessengerConversationHeader = ({profileImage,username,callPeer}) => {
               
              `}</style>
             <div className='messenger-conversation-header-left'>
-                <button onClick={onBackHandler} className='messenger-conversation-header-back-btn'>
+                <button onClick={()=>router.push('/messenger')} className='messenger-conversation-header-back-btn'>
                     <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />
                 </button>
                 <img src={profileImage} alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>
                 <p className='messenger-conversation-header-username'>{username}</p>
             </div>
             <div className='messenger-conversation-header-right'>
-                <button onClick={callPeer} className='messenger-conversation-header-video-call-btn'>
+                <button onClick={callUser} className='messenger-conversation-header-video-call-btn'>
                     <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faVideo} className='messenger-conversation-header-video-call-btn-svg' />
                 </button>
-                <button onClick={callPeer} className='messenger-conversation-header-call-btn'>
+                <button onClick={callUser} className='messenger-conversation-header-call-btn'>
                     <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg' />
                 </button>
             </div>

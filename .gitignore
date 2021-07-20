@@ -5,7 +5,7 @@
 /static/uploads
 /static/uploads/
 /static/uploads/*
-
+/temp.js
 generateFakeData.js
 tools/testAPI.js
 /package-lock.json

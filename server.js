@@ -39,6 +39,7 @@ const handle = app.getRequestHandler();
 const apicache = require('apicache')
 const compression = require('compression')
 require('dotenv').config()
+const cors = require('cors')
 // const fs = require('fs');
 // const cors = require('cors')
 //cache api
@@ -81,6 +82,7 @@ function shouldCompress(req, res) {
 
 app.prepare().then(() => {
     const server = express();
+    server.use(cors())
     // http.createServer(server).listen(3000)
     // https.createServer(credentials, server).listen(443)
     //
