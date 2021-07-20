@@ -2,7 +2,7 @@ require('dotenv').config()
 const io = require('socket.io')(process.env.REACT_APP_SOCKET_PORT, {
     cors: {
         origin: [process.env.REACT_APP_PRODUCTION_URL],
-        path: '/socketIoServer'
+        // path: '/socketIoServer'
     }
 })
 
