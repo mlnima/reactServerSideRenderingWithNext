@@ -2,9 +2,9 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 
 const MessengerCall = ({callerData,myVideoRef,userVideoRef,state,callEnded,stream,callAccepted,receivingCall,answerCall,}) => {
 
-    useEffect(() => {
-        console.log(callerData)
-    }, [callerData]);
+    // useEffect(() => {
+    //     console.log(callerData)
+    // }, [callerData]);
 
     return (
         <div className='messenger-call'>
