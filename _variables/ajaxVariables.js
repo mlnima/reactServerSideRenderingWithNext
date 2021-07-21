@@ -208,7 +208,8 @@ export const getOrders = async (data, domainName) => {
 export const getFirstLoadData = async (req,dynamicWidgets,page) => {
 
     try {
-        const domainName = req ? await getAbsolutePath(req) : '';
+        //const domainName = req ? await getAbsolutePath(req) : '';
+        const domainName = process.env.REACT_APP_PRODUCTION_URL;
         const refererUrl = req?.headers?.referer;
         const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
         //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;

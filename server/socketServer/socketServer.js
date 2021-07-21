@@ -3,45 +3,25 @@ const express = require('express');
 const app = express();
 const http = require('http');
 const server = http.createServer(app);
-// const socketIo = require("socket.io");
+const cors = require('cors')
+app.use(cors())
 
+const io = require('socket.io')(server, {
+    cors: {
+        origin: [process.env.REACT_APP_PRODUCTION_URL],
+    }
+})
 
-// const io = socketIo(server);
-
-// app.get('/', (req, res) => {
-//     res.send('<h1>Access Denied</h1>');
-// });
-
-// app.get('/*', (req, res) => {
-//    console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
-// });
+app.get('/*', (req, res) => {
+   console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
+});
 
 server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
     console.log(`socket server is running on ${process.env.REACT_APP_SOCKET_PORT}`);
 });
 
 
-
-
-
-
-const io = require('socket.io')(server, {
-    // path: '/socketServer',
-    cors: {
-        origin: [process.env.REACT_APP_PRODUCTION_URL],
-    }
-})
-
-
-const setCustomId = (id) =>{
-    io.engine.generateId = () => {
-        return id
-    };
-}
-
-
 io.on('connection', socket => {
-    console.log(socket.id)
     socket.on('setIdAndJoinConversation', async (userID , conversationId) => {
         //setCustomId(userID)
         socket.join(conversationId)
