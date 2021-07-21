@@ -8,8 +8,12 @@ const server = http.createServer(app);
 
 // const io = socketIo(server);
 
-app.get('/', (req, res) => {
-    res.send('<h1>Access Denied</h1>');
+// app.get('/', (req, res) => {
+//     res.send('<h1>Access Denied</h1>');
+// });
+
+app.get('*', (req, res) => {
+   console.log(req.url)
 });
 
 server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
