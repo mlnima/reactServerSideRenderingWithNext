@@ -11,10 +11,12 @@ const cookieParser = require('cookie-parser');
 const adminUsersRouter = require('./server/controllers/adminControllers/adminUsersRouter');
 const adminSettingsRouter = require('./server/controllers/adminControllers/adminSettingsRouter');
 const adminPostsRouter = require('./server/controllers/adminControllers/adminPostsRouter');
+const adminWidgetsRouter = require('./server/controllers/adminControllers/adminWidgetsRouter');
 
 const clientUsersRouter = require('./server/controllers/clientControllers/clientUsersRouter');
 const clientSettingsRouter = require('./server/controllers/clientControllers/clientSettingsRouter');
 const clientPostsRouter = require('./server/controllers/clientControllers/clientPostsRouter');
+const clientWidgetsRouter = require('./server/controllers/clientControllers/clientWidgetsRouter');
 
 
 //const postsControllers = require('./server/controllers/postsControllers');
@@ -41,7 +43,7 @@ const compression = require('compression')
 require('dotenv').config()
 const cors = require('cors')
 // const fs = require('fs');
-// const cors = require('cors')
+
 //cache api
 const cacheSuccesses = require('./server/middlewares/apiCache')
 const settingSchema = require('./server/models/settings/settingSchema')
@@ -141,7 +143,6 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
             "background_color": identityData.data.themeColor || '#000',
             "name": identityData.data.title || 'React CMS website',
             "icons": [
-
                 {
                     "src": identityData?.data?.pwa192 || process.env.REACT_APP_PRODUCTION_URL + '/static/images/pwa/192.png',
                     "sizes": "192x192",
@@ -178,21 +179,20 @@ Sitemap: ${process.env.REACT_APP_PRODUCTION_URL}/sitemap.xml
     server.use('/api/admin/users',adminUsersRouter)
     server.use('/api/admin/posts',adminPostsRouter)
     server.use('/api/admin/settings',adminSettingsRouter)
+    server.use('/api/admin/widgets',adminWidgetsRouter)
 
     server.use('/api/v1/users',clientUsersRouter)
     server.use('/api/v1/posts',clientPostsRouter)
     server.use('/api/v1/settings',clientSettingsRouter)
+    server.use('/api/v1/widgets',clientWidgetsRouter)
 
 
 
     //settings handler
-   // server.post('/api/v1/settings/update', adminAuthMiddleware, (req, res) => {settingsControllers.update(req, res)});
-    //server.post('/api/v1/settings/get', (req, res) => {settingsControllers.get(req, res)});
-    server.post('/api/v1/settings/getMultiple', cacheSuccesses, (req, res) => {settingsControllers.getMultiple(req, res)});
-    server.post('/api/v1/settings/addWidget', adminAuthMiddleware, (req, res) => { settingsControllers.addWidget(req, res)});
-    server.post('/api/v1/settings/getSingleWidgetData', (req, res) => {settingsControllers.getSingleWidgetData(req, res)});
+
+
+    //server.post('/api/v1/settings/getSingleWidgetData', (req, res) => {settingsControllers.getSingleWidgetData(req, res)});
     server.post('/api/v1/settings/getWidget', (req, res) => {settingsControllers.getWidget(req, res)});
-    server.post('/api/v1/settings/getMultipleWidgetWithData', cacheSuccesses, (req, res) => {settingsControllers.getMultipleWidgetWithData(req, res)});
     server.post('/api/v1/settings/getWidgetsWithData', cacheSuccesses, (req, res) => {settingsControllers.getWidgetsWithData(req, res)});
     server.post('/api/v1/settings/updateWidget', adminAuthMiddleware, (req, res) => {settingsControllers.updateWidget(req, res)});
     server.post('/api/v1/settings/deleteWidget', adminAuthMiddleware, (req, res) => {settingsControllers.deleteWidget(req, res)});

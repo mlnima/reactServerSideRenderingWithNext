@@ -33,13 +33,15 @@ export const addNewWidget = async (data) => {
         data,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/v1/settings/addWidget', body)
+    return await axios.post(window.location.origin + '/api/admin/widgets/addNewWidget', body)
 }
+
+
 export const getSingleWidgetData = async (data) => {
     const body = {
         ...data,
     };
-    return await axios.post(window.location.origin + '/api/v1/settings/getSingleWidgetData', body)
+    return await axios.post(window.location.origin + '/api/v1/widgets/getSingleWidgetData', body)
 }
 
 // export const getWidgets = async (position,cache, domainName) => {
@@ -54,7 +56,8 @@ export const getMultipleWidgetWithData = async (widgets, domainName, cache, whic
         ...widgets,
         cache
     };
-    return await axios.post(domainName + `/api/v1/settings/getMultipleWidgetWithData?whichPage=${whichPage}`, body)
+   return await axios.post(domainName + `/api/v1/widgets/getMultipleWidgetWithData?whichPage=${whichPage}`, body)
+
 }
 
 export const getMultipleSetting = async (settings, domainName, cache, whichPage) => {
@@ -63,7 +66,8 @@ export const getMultipleSetting = async (settings, domainName, cache, whichPage)
         ...settings,
         cache
     };
-    return await axios.post(domainName + `/api/v1/settings/getMultiple?whichPage=${whichPage}`, body)
+
+    return await axios.post(domainName + `/api/v1/settings/getMultipleSettings?whichPage=${whichPage}`, body)
 };
 
 export const getWidgetsWithData = async (position, domainName) => {
@@ -75,8 +79,6 @@ export const getWidgetsWithData = async (position, domainName) => {
 
 export const updateWidgets = async (widgetData) => {
 
-    // console.log(id)
-    //console.log(widgetData)
     const body = {
         widgetData,
         token: localStorage.wt
@@ -205,26 +207,43 @@ export const getOrders = async (data, domainName) => {
 
 export const getFirstLoadData = async (req,dynamicWidgets,page) => {
 
-    const domainName = req ? await getAbsolutePath(req) : '';
-    const refererUrl = req?.headers?.referer;
-    const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
-    //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
-    const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
-    const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
-    const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets]
-    const pageNameForCacheRequest = referer ? page ? page : 'static' : 'firstLoadWidgetsData' + (page||'static')
-    const firstLoadWidgetsData =await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, true, pageNameForCacheRequest);
-    const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'static') : {};
-    let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
-    return {
-        domainName: req ? await getAbsolutePath(req) : '',
-        settings: settingsData?.data?.settings ?? [],
-        widgets: firstLoadWidgetsData?.data?.widgets ?? [],
-        referer,
-        isSameOrigin,
-        isNavigatedFromPostPage,
-        isMobile,
+    try {
+        const domainName = req ? await getAbsolutePath(req) : '';
+        const refererUrl = req?.headers?.referer;
+        const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
+        //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
+        const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
+        const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
+        const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets]
+        const pageNameForCacheRequest = referer ? page ? page : 'static' : 'firstLoadWidgetsData' + (page||'static')
+        const firstLoadWidgetsData =await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, true, pageNameForCacheRequest);
+        const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'static') : {};
+        const settingsArr = settingsData?.data?.settings
+        let finalSettings = {}
+        settingsArr.forEach(setting => {
+            if (setting) {
+                finalSettings[setting.type] = setting
+            }
+        })
+
+        let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
+        return {
+            domainName,
+            //settings:settingsData?.data?.settings ?? [],
+            settings:finalSettings ?? [],
+            widgets:firstLoadWidgetsData?.data?.widgets ?? [],
+            referer,
+            isSameOrigin,
+            isNavigatedFromPostPage,
+            isMobile,
+        }
+
+
+    }catch (e) {
+console.log(e)
     }
+
+
 }
 
 export const getStaticLoadData = async () => {

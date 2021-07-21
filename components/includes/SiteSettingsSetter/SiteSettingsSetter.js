@@ -5,13 +5,12 @@ import {useRouter} from "next/router";
 import parse from 'html-react-parser';
 
 const SiteSettingSetter = props => {
-
     const contextData = useContext(AppContext);
     const router = useRouter()
 
     useEffect(() => {
         props?.design?.data ? contextData.dispatchSiteDesign(props.design?.data) : null
-        props?.identity?.data ? contextData.dispatchSiteIdentity({...props.identity?.data,isSet:true}) : null
+        props?.identity?.data ? contextData.dispatchSiteIdentity({...props.identity?.data, isSet: true}) : null
         props?.eCommerce?.data ? contextData.dispatchECommerceSettings(props.eCommerce?.data) : null
 
 
@@ -21,23 +20,24 @@ const SiteSettingSetter = props => {
             ...contextData.state,
             activeLanguage: manuallyDetectedLocale
         })
-    }, [props?.design,props?.identity]);
+    }, [props?.design, props?.identity]);
 
 
     return (
         <Head>
-            <title>{(props?.identity?.data?.translations?.[router.locale]?.title||contextData?.siteIdentity?.translations?.[router.locale]?.title) || (props.identity?.data?.title||contextData?.siteIdentity?.title) || ''}</title>
+            <title>{(props?.identity?.data?.translations?.[router.locale]?.title || contextData?.siteIdentity?.translations?.[router.locale]?.title) || (props.identity?.data?.title || contextData?.siteIdentity?.title) || ''}</title>
             <meta name="theme-color" content={props.identity?.data?.themeColor || contextData?.siteIdentity?.themeColor || '#000000'}/>
             <meta name="apple-mobile-web-app-status-bar-style" content='#000000'/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charSet="utf-8"/>
-            <meta name="description" content={(props?.identity?.data?.translations?.[router.locale]?.description||contextData?.siteIdentity?.translations?.[router.locale]?.description) || (props?.identity?.data?.description||contextData?.siteIdentity?.description) || ''}/>
-            {props.identity?.data?.keywords?.length>0?<meta name="keywords" content={props.identity?.data.keywords ||contextData?.siteIdentity?.keywords|| []}/>:null}
+            <meta name="description"
+                  content={(props?.identity?.data?.translations?.[router.locale]?.description || contextData?.siteIdentity?.translations?.[router.locale]?.description) || (props?.identity?.data?.description || contextData?.siteIdentity?.description) || ''}/>
+            {props.identity?.data?.keywords?.length > 0 ? <meta name="keywords" content={props.identity?.data.keywords || contextData?.siteIdentity?.keywords || []}/> : null}
             <link rel="shortcut icon" href={props?.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link rel="apple-touch-icon" href={props?.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link rel="manifest" href="/manifest.json"/>
             {props.identity?.data?.customScriptsAsString ? parse(props?.identity?.data?.customScriptsAsString) : null}
-            {props?.identity?.data?.siteMode === 'eCommerce' || contextData?.siteIdentity?.siteMode === 'eCommerce'  ?
+            {props?.identity?.data?.siteMode === 'eCommerce' || contextData?.siteIdentity?.siteMode === 'eCommerce' ?
                 <script src={`https://www.paypal.com/sdk/js?client-id=${props?.eCommerce?.data?.payPalId}&currency=${props?.eCommerce?.data?.currency}`}/>
                 : null
             }

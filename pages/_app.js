@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-const AppLayout = dynamic(()=>import('../components/layouts/AppLayout'))
-const AdminLayout = dynamic(()=>import('../components/layouts/AdminLayout'))
-const MessengerLayout = dynamic(()=>import('../components/layouts/MessengerLayout'),{ssr:false})
-const AppProvider = dynamic(()=>import('../context/AppContext'))
+
+const AppLayout = dynamic(() => import('../components/layouts/AppLayout'))
+const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'))
+const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false})
+const AppProvider = dynamic(() => import('../context/AppContext'))
 import * as Scroll from 'react-scroll';
 import '../styles/styles.scss';
 import '../styles/globalAdminPanel.scss';
@@ -15,7 +16,6 @@ import '../components/includes/CardElement/CardElement.scss';
 import CookiePopup from "../components/includes/ClientPopActionRequest/CookiePopup";
 
 
-
 // export function reportWebVitals(metric) {
 //     console.log(metric)
 // }
@@ -23,6 +23,9 @@ import CookiePopup from "../components/includes/ClientPopActionRequest/CookiePop
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
 
+    useEffect(() => {
+        console.log(pageProps)
+    }, [pageProps]);
     useEffect(() => {
         Scroll.animateScroll.scrollToTop();
     }, [pageProps]);
@@ -42,7 +45,7 @@ const MyApp = ({Component, pageProps}) => {
                  `}</style>
             </AppProvider>
         )
-    } else if (router.pathname.includes('/messenger')){
+    } else if (router.pathname.includes('/messenger')) {
         return (
             <AppProvider>
                 <MessengerLayout

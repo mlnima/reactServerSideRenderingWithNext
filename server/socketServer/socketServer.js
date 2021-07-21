@@ -1,5 +1,27 @@
 require('dotenv').config()
-const io = require('socket.io')(process.env.REACT_APP_SOCKET_PORT, {
+const express = require('express');
+const app = express();
+const http = require('http');
+const server = http.createServer(app);
+// const socketIo = require("socket.io");
+
+
+// const io = socketIo(server);
+
+app.get('/', (req, res) => {
+    res.send('<h1>Access Denied</h1>');
+});
+
+server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
+    console.log(`socket server is running on ${process.env.REACT_APP_SOCKET_PORT}`);
+});
+
+
+
+
+
+
+const io = require('socket.io')(server, {
     // path: '/socketServer',
     cors: {
         origin: [process.env.REACT_APP_PRODUCTION_URL],

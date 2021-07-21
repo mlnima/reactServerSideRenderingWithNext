@@ -91,10 +91,12 @@ const HomePageWidgets = props => {
 
     useEffect(() => {
         getAndSetCustomPagesData()
+      
         setSiteIdentity({
             ...siteIdentity,
             ...props.identity.data
         })
+
         contextData.dispatchWidgetsSettings({
             ...contextData.widgetsSettings,
             widgets: [...(props.widgets || [])]
@@ -167,7 +169,17 @@ const HomePageWidgets = props => {
 export const getServerSideProps = async (context) => {
     const settingsData = await getMultipleSetting({settings: ['identity']},process.env.REACT_APP_PRODUCTION_URL, false, 'adminPostPage')
     const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, process.env.REACT_APP_PRODUCTION_URL, false, Date.now())
-    return {props: {widgets: widgetsData?.data?.widgets || null, identity: settingsData?.data?.settings?.identity||null}}
+    const settingsArr = settingsData?.data?.settings
+    let finalSettings = {}
+    settingsArr.forEach(setting => {
+        if (setting) {
+            finalSettings[setting.type] = setting
+        }
+    })
+
+
+
+    return {props: {widgets: widgetsData?.data?.widgets || null, identity: finalSettings?.identity||null}}
 }
 
 
