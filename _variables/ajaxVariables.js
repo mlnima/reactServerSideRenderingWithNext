@@ -220,11 +220,14 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
         const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'static') : {};
         const settingsArr = settingsData?.data?.settings
         let finalSettings = {}
-        settingsArr.forEach(setting => {
-            if (setting) {
-                finalSettings[setting.type] = setting
-            }
-        })
+        if (settingsArr.length>0){
+            settingsArr.forEach(setting => {
+                if (setting) {
+                    finalSettings[setting.type] = setting
+                }
+            })
+        }
+
 
         let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
         return {
