@@ -23,9 +23,7 @@ import CookiePopup from "../components/includes/ClientPopActionRequest/CookiePop
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
 
-    useEffect(() => {
-        console.log(pageProps)
-    }, [pageProps]);
+
     useEffect(() => {
         Scroll.animateScroll.scrollToTop();
     }, [pageProps]);
