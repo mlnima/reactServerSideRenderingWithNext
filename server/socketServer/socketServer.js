@@ -7,10 +7,19 @@ const cors = require('cors')
 app.use(cors())
 console.log(process.env.REACT_APP_PRODUCTION_URL)
 const io = require('socket.io')(server, {
-    cors: {
-        origin: [process.env.REACT_APP_PRODUCTION_URL,'*'],
+    origin: [process.env.REACT_APP_PRODUCTION_URL,'*'],
+    cors:true,
+    handlePreflightRequest: (req, res) => {
+        res.writeHead(200, {
+            "Access-Control-Allow-Origin": process.env.REACT_APP_PRODUCTION_URL,
+            "Access-Control-Allow-Methods": "GET,POST",
+            "Access-Control-Allow-Headers": "my-custom-header",
+            "Access-Control-Allow-Credentials": true
+        });
+        res.end();
     }
 })
+
 
 app.get('/*', (req, res) => {
    console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
