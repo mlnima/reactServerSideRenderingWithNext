@@ -12,9 +12,9 @@ const server = http.createServer(app);
 //     res.send('<h1>Access Denied</h1>');
 // });
 
-app.get('*', (req, res) => {
-   console.log(req.url)
-});
+// app.get('/*', (req, res) => {
+//    console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
+// });
 
 server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
     console.log(`socket server is running on ${process.env.REACT_APP_SOCKET_PORT}`);
