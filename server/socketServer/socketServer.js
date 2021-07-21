@@ -5,10 +5,10 @@ const http = require('http');
 const server = http.createServer(app);
 const cors = require('cors')
 app.use(cors())
-
+console.log(process.env.REACT_APP_PRODUCTION_URL)
 const io = require('socket.io')(server, {
     cors: {
-        origin: [process.env.REACT_APP_PRODUCTION_URL],
+        origin: [process.env.REACT_APP_PRODUCTION_URL,'*'],
     }
 })
 
