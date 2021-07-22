@@ -42,30 +42,36 @@ const MessengerConversationMessageTools = props => {
                     padding: 2px;
                     background-color: var(--navigation-background-color);
                     display: flex;
-                    justify-content: space-between;
+                    justify-content: center;
                     align-items: center;
                     width: 100%;
+                    
                 }
                 
                 .messenger-conversation-message-tools-text{
-                    width: 90%;
+                    width: 95%;
                 }
                 .messenger-conversation-message-tools-text-input{
                     border-radius: 50px;
                     height: 27px;
-                    width: 90%;
-                    padding: 5px 5%;
+                    width: 100%;
+                    padding: 5px 5px;
                 }
                 .messenger-conversation-message-tools-Send{
-                display: flex;
-                justify-content: center;
-               
-                    width: 15%;
+                    z-index: 10;
+                    position: absolute;
+                    display: flex;
+                    justify-content: center;
+                    right: 2.5%;
+                    //width: 10%;
                 }
                 .messenger-conversation-message-tools-btn{
-                    background-color: transparent;
+                    background-color: var(--navigation-background-color);
                     border: none;
-                    //width: 100%;
+                    width: 35px;
+                    height: 35px;
+                    border-radius: 50%;
+                    
                 }
             `}</style>
             <div className='messenger-conversation-message-tools-text'>

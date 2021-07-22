@@ -1,5 +1,5 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPhoneAlt, faPhoneSlash, faPowerOff} from "@fortawesome/free-solid-svg-icons";
+import {faPhoneAlt, faPhoneSlash, faPowerOff, faSyncAlt, faVideoSlash, faVolumeMute} from "@fortawesome/free-solid-svg-icons";
 
 const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHandler, callAccepted, attemptForAnswer,}) => {
 
@@ -84,13 +84,21 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             width :100%;
             height :100%;
             object-fit :none;
-            border: white 1px solid;
+           
         }
         
         .messenger-call-actions-buttons{
+           display: flex;
+           justify-content: center;
+           flex-direction: column;
+           align-items: center;
+           flex-wrap: wrap;
             position: absolute;
-            height: 100px;
+            width: 100%;
+            height: 300px;
             bottom: 0;
+            left:0;
+            right:0;
         }
 
         
@@ -102,12 +110,31 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             height: 50px;
             outline:none;
             border:none;
+            margin: 30px 0;
+        }
+        
+        .messenger-call-media-controls-buttons{
+            width: 100%;
+            display: flex;
+            justify-content: space-evenly;
+            max-width: 300px;
+        }
+        
+        .switch-camera-button,.disable-video-button,.disable-audio-button{
+            background-color: transparent ;
+            color:white;
+            border-radius: 50%;
+            width: 50px;
+            height: 50px;
+            outline:none;
+            border:none;
+            margin: 50px 0;
         }
         
         `}</style>
                 <div className='messenger-call-elements'>
                     {state.calling || callAccepted  ? <video className={`messenger-call-my-video-${callAccepted ? 'small' : 'big'}`} playsInline muted ref={myVideoRef}  autoPlay/> : null}
-                    {callAccepted? <video className='messenger-call-user-video' playsInline muted ref={userVideoRef} autoPlay/> : null}
+                    {callAccepted? <video className='messenger-call-user-video' playsInline ref={userVideoRef} autoPlay/> : null}
                     {state.receivingCall && !callAccepted ? <div className='messenger-call-user-calling-message'>
                         <p className='messenger-call-user-calling-message-username'>{callerData.callerName}</p>
                         <p  className='messenger-call-user-calling-message-call-type'>Incoming video call</p>
@@ -117,8 +144,14 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
                         </div>
 
                     </div> : null}
-                    {state.receivingCall && callAccepted || state.calling ? <div className='messenger-call-actions-buttons simple-btn'>
+                    {state.receivingCall && callAccepted || state.calling ? <div className='messenger-call-actions-buttons '>
                         <button onClick={endCallHandler} className='leave-call-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faPhoneSlash} className=' svg-logo-small' /></button>
+                        <div className='messenger-call-media-controls-buttons'>
+                            <button onClick={endCallHandler} className='switch-camera-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faSyncAlt} className=' svg-logo-small' /></button>
+                            <button onClick={endCallHandler} className='disable-video-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVideoSlash} className=' svg-logo-small' /></button>
+                            <button onClick={endCallHandler} className='disable-audio-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVolumeMute} className=' svg-logo-small' /></button>
+                        </div>
+
                     </div> : null}
                 </div>
             </div>

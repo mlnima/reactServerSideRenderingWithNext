@@ -38,8 +38,6 @@ const conversation = props => {
     const [mySocketId, setMySocketId] = useState("")
 
 
-    const [callEnded, setCallEnded] = useState(false)
-
     const myVideoRef = useRef(null)
     const userVideoRef = useRef(null)
     const connectionRef = useRef(null)
@@ -56,7 +54,7 @@ const conversation = props => {
     })
 
     socket.on("incomingCallFromConversation", data => {
-        navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(myStreamData => {
+        getUserMedia({video: true, audio: true}).then(myStreamData => {
             setMyStream(myStreamData)
         })
 
@@ -107,8 +105,25 @@ const conversation = props => {
     }, [userStream]);
 
 
+
+    const getUserMedia = options =>{
+        return navigator?.mediaDevices?.getUserMedia(options)
+    }
+
+
+    const switchMediaHandler = () =>{
+        const options = {
+            video: {
+                facingMode: 'user', // Or 'environment'
+            }, audio: true
+        }
+        getUserMedia(options).then(myStreamData => {
+            setMyStream(myStreamData)
+        })
+    }
+
     const attemptForCall = () => {
-        navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(myStreamData => {
+        getUserMedia({video: true, audio: true}).then(myStreamData => {
             setMyStream(myStreamData)
             setState({
                 ...state,
@@ -149,12 +164,22 @@ const conversation = props => {
             })
 
             socket.on('endCall',()=>{
+
                 setState({
                     ...state,
-                    calling:false,
-                    receivingCall:false
+                    calling: false,
+                    answering: false,
+                    callAccepted: false,
+                    receivingCall: false,
                 })
+                setUserStream(null)
+                setCallAccepted(false)
+                setCallerData(null)
+                setMyStream(null)
+                setUserStream(null)
                 peer.destroy()
+                router.reload()
+
             })
 
             socket.on("callAccepted", signal => {
@@ -165,7 +190,6 @@ const conversation = props => {
         } catch (error) {
             console.log(error)
         }
-
     }
 
 
@@ -180,10 +204,16 @@ const conversation = props => {
         socket.on('endCall',()=>{
             setState({
                 ...state,
-                calling:false,
-                receivingCall:false
+                calling: false,
+                answering: false,
+                callAccepted: false,
+                receivingCall: false,
             })
+            setUserStream(null)
+            setCallerData(null)
+            setCallAccepted(false)
             peer.destroy()
+            router.reload()
         })
 
         peer.on("signal", data => {
@@ -202,13 +232,19 @@ const conversation = props => {
     }
 
     const endCallHandler = () => {
-        setCallEnded(true)
+
         socket.emit("endCall",router.query.conversation)
         setState({
             ...state,
-            calling:false,
-            receivingCall:false
+            calling: false,
+            answering: false,
+            callAccepted: false,
+            receivingCall: false,
         })
+        setUserStream(null)
+        setCallerData(null)
+        setCallAccepted(false)
+
     }
 
 
@@ -250,7 +286,7 @@ const conversation = props => {
                 userVideoRef={userVideoRef}
                 myVideoRef={myVideoRef}
                 state={state}
-                callEnded={callEnded}
+
                 callAccepted={callAccepted}
                 endCallHandler={endCallHandler}
             />
