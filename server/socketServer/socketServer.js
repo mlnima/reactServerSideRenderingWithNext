@@ -48,7 +48,7 @@ io.on('connection', socket => {
     socket.emit("mySocketId", socket.id)
 
     socket.on("disconnect", () => {
-        socket.broadcast.emit("callEnded")
+        socket.broadcast.emit("endCall")
     })
 
     socket.on("callUser", (data) => {
@@ -60,9 +60,11 @@ io.on('connection', socket => {
         socket.to(data.conversation).emit("incomingCallFromConversation", data)
     })
 
-    socket.on("answerCall", (data) => {
-        //socket.to(data.to).emit("callAccepted", data.signal)
-        socket.to(data.to).emit("callAccepted", data.signal)
+    socket.on("answerCall", (signal , conversation) => {
+        socket.to(conversation).emit("callAccepted", signal)
+    })
+    socket.on("endCall", conversation => {
+        socket.to(conversation).emit("endCall" )
     })
 
 })

@@ -14,8 +14,16 @@ const conversation = props => {
     const contextData = useContext(AppContext);
     const router = useRouter();
     const [state, setState] = useState({
-        displayMyVideo: false
+        calling: false,
+        answering: false,
+        callAccepted: false,
+        receivingCall: false,
     });
+
+    const [myStream, setMyStream] = useState()
+    const [userStream, setUserStream] = useState()
+    const [callAccepted, setCallAccepted] = useState(false)
+
 
     const [messageState, setMessageState] = useState({messageBody: ''})
     const [connectedUserData, setConnectedUserData] = useState({});
@@ -27,11 +35,9 @@ const conversation = props => {
         callerStreamData: null
     })
 
-
     const [mySocketId, setMySocketId] = useState("")
-    const [stream, setStream] = useState()
-    const [receivingCall, setReceivingCall] = useState(false)
-    const [callAccepted, setCallAccepted] = useState(false)
+
+
     const [callEnded, setCallEnded] = useState(false)
 
     const myVideoRef = useRef(null)
@@ -41,119 +47,168 @@ const conversation = props => {
     useEffect(() => {
         if (router.query.conversation && contextData.userData._id) {
             getAndSetConversationData()
-            //socket.io.engine.id = contextData.userData._id
-            //socket.emit('setIdAndJoinConversation',contextData.userData._id ,router.query.conversation)
         }
     }, [contextData.userData]);
 
-    useEffect(() => {
-        if (typeof navigator !== 'undefined') {
-            askPermissionToAccessUserMedia()
-        }
-    }, []);
-
-
-    const askPermissionToAccessUserMedia = () => {
-        navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(stream => {
-            setStream(stream)
-            if (myVideoRef.current) {
-                myVideoRef.current.srcObject = stream
-            }
-        })
-    }
-
-
-    useEffect(() => {
-        if (stream && state.displayMyVideo){
-            if (myVideoRef.current) {
-                myVideoRef.current.srcObject = stream
-            }
-        }
-    }, [stream,state.displayMyVideo]);
-
-
     socket.emit('joinConversation', router.query.conversation)
-
     socket.on('receiveMessageFromConversation', messageData => {
         setMessages([...messages, messageData])
     })
 
-    socket.on("incomingCallFromConversation", (data) => {
+    socket.on("incomingCallFromConversation", data => {
+        navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(myStreamData => {
+            setMyStream(myStreamData)
+        })
+
         setCallerData({
             callerId: data.callerId,
             callerName: data.callerName,
             callerStreamData: data.callerStreamData
         })
-        setReceivingCall(true)
+
+        setState({
+            ...state,
+            receivingCall: true
+        })
+        //setReceivingCall(true)
     })
 
     socket.on("mySocketId", id => {
-        console.log(id)
         setMySocketId(id)
     })
 
-
-    const callUser = () => {
-
-        setState({
-            ...state,
-            displayMyVideo: true
-        })
-        const peer = new Peer({
-            initiator: true,
-            trickle: false,
-            stream: stream
-        })
-
-        peer.on("signal", (data) => {
-            socket.emit("callToConversation", {
-                conversation: router.query.conversation,
-                callerStreamData: data,
-                callerId: mySocketId,
-                callerName: contextData.userData.username
-            })
-        })
-
-        peer.on("stream", (stream) => {
-            userVideoRef.current.srcObject = stream
-        })
-
-        socket.on("callAccepted", (signal) => {
-            setCallAccepted(true)
-            peer.signal(signal)
-        })
-
-        connectionRef.current = peer
+    const peerOnErrorHandler = error => {
+        console.log(error)
     }
 
-    const answerCall = () => {
-        setState({
-            ...state,
-            displayMyVideo: true
+
+    useEffect(() => {
+        if (state.calling && myStream) {
+            callUser()
+        }
+    }, [myStream, state.calling]);
+    useEffect(() => {
+        if (callAccepted && myStream && !state.calling) {
+            myVideoRef.current.srcObject = myStream
+            answerCall()
+        }
+    }, [callAccepted]);
+    // useEffect(() => {
+    //     if (myStream && myVideoRef.current && state.receivingCall) {
+    //         myVideoRef.current.srcObject = myStream
+    //     }
+    //
+    // }, [myStream, state.receivingCall]);
+
+    useEffect(() => {
+        if (userStream) {
+            userVideoRef.current.srcObject = userStream
+        }
+    }, [userStream]);
+
+
+    const attemptForCall = () => {
+        navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(myStreamData => {
+            setMyStream(myStreamData)
+            setState({
+                ...state,
+                calling: true
+            })
         })
+    }
+
+    const attemptForAnswer = () => {
         setCallAccepted(true)
+    }
+
+
+    const callUser = async () => {
+        try {
+            myVideoRef.current.srcObject = myStream
+            const peer = new Peer({
+                initiator: true,
+                trickle: false,
+                stream: myStream
+            })
+
+            peer.on("signal", data => {
+                socket.emit("callToConversation", {
+                    conversation: router.query.conversation,
+                    callerStreamData: data,
+                    callerId: mySocketId,
+                    callerName: contextData.userData.username
+                })
+            })
+
+            peer.on("stream", userStream => {
+                setUserStream(userStream)
+            })
+
+            peer.on("error", error => {
+                peerOnErrorHandler(error)
+            })
+
+            socket.on('endCall',()=>{
+                setState({
+                    ...state,
+                    calling:false,
+                    receivingCall:false
+                })
+                peer.destroy()
+            })
+
+            socket.on("callAccepted", signal => {
+                setCallAccepted(true)
+                peer.signal(signal)
+            })
+            // connectionRef.current = peer
+        } catch (error) {
+            console.log(error)
+        }
+
+    }
+
+
+    const answerCall = async () => {
+
         const peer = new Peer({
             initiator: false,
             trickle: false,
-            stream: stream
+            stream: myStream
+        })
+
+        socket.on('endCall',()=>{
+            setState({
+                ...state,
+                calling:false,
+                receivingCall:false
+            })
+            peer.destroy()
         })
 
         peer.on("signal", data => {
-            socket.emit("answerCall", {signal: data, to: callerData.callerId})
-            //socket.emit("answerCall", { signal: data, to: router.query.conversation })
+            socket.emit("answerCall", data, router.query.conversation)
         })
 
-        peer.on("stream", (stream) => {
-            userVideoRef.current.srcObject = stream
+        peer.on("stream", userStream => {
+            setUserStream(userStream)
+        })
+
+        peer.on("error", error => {
+            peerOnErrorHandler(error)
         })
 
         peer.signal(callerData.callerStreamData)
-        connectionRef.current = peer
     }
 
-    const leaveCall = () => {
+    const endCallHandler = () => {
         setCallEnded(true)
-        connectionRef.current.destroy()
+        socket.emit("endCall",router.query.conversation)
+        setState({
+            ...state,
+            calling:false,
+            receivingCall:false
+        })
     }
 
 
@@ -173,9 +228,10 @@ const conversation = props => {
 
             `}</style>
             <MessengerConversationHeader
+                attemptForCall={attemptForCall}
                 profileImage={connectedUserData.profileImage}
                 username={connectedUserData.username}
-                callUser={callUser}
+                // callUser={callUser}
                 connectedUserId={connectedUserData._id}/>
             <MessengerConversationMessageArea
                 messages={messages}
@@ -190,14 +246,13 @@ const conversation = props => {
                 getAndSetConversationData={getAndSetConversationData}/>
             <MessengerCall
                 callerData={callerData}
-                answerCall={answerCall}
-                receivingCall={receivingCall}
+                attemptForAnswer={attemptForAnswer}
                 userVideoRef={userVideoRef}
+                myVideoRef={myVideoRef}
                 state={state}
-                // caller={caller}
                 callEnded={callEnded}
                 callAccepted={callAccepted}
-                myVideoRef={myVideoRef}
+                endCallHandler={endCallHandler}
             />
 
         </div>

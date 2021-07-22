@@ -5,7 +5,7 @@ import {faArrowLeft, faBars, faPhoneAlt, faVideo} from "@fortawesome/free-solid-
 // import Peer from 'simple-peer'
 // import socket from '../../../../_variables/socket'
 
-const MessengerConversationHeader = ({profileImage,username,callUser}) => {
+const MessengerConversationHeader = ({profileImage,username,attemptForCall}) => {
     const router = useRouter()
 
 
@@ -68,10 +68,10 @@ const MessengerConversationHeader = ({profileImage,username,callUser}) => {
                 <p className='messenger-conversation-header-username'>{username}</p>
             </div>
             <div className='messenger-conversation-header-right'>
-                <button onClick={callUser} className='messenger-conversation-header-video-call-btn'>
+                <button onClick={attemptForCall} className='messenger-conversation-header-video-call-btn'>
                     <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faVideo} className='messenger-conversation-header-video-call-btn-svg' />
                 </button>
-                <button onClick={callUser} className='messenger-conversation-header-call-btn'>
+                <button onClick={attemptForCall} className='messenger-conversation-header-call-btn'>
                     <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg' />
                 </button>
             </div>
