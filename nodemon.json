@@ -8,5 +8,6 @@
     "./next.config.js",
     "./.env"
   ],
-  "ext": "js json"
+  "ext": "js json",
+  "trace-warnings": true
 }

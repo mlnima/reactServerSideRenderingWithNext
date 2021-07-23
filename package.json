@@ -4,8 +4,8 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "nodemon ./server.js",
-    "devSocket": "nodemon ./server/socketServer/socketServer.js ",
+    "dev": "nodemon --trace-warnings ./server.js",
+    "devSocket": "nodemon --trace-warnings ./server/socketServer/socketServer.js ",
     "devAndSocket": "concurrently \"npm run dev\" \"npm run devSocket\"",
     "build": "next build",
     "analys": "ANALYZE=true next build",

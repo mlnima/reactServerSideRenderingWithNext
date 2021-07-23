@@ -18,6 +18,7 @@ const conversation = props => {
         answering: false,
         callAccepted: false,
         receivingCall: false,
+        camera:'user'
     });
 
     const [myStream, setMyStream] = useState()

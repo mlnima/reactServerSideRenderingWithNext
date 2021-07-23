@@ -9,16 +9,16 @@ import {AppContext} from "../../context/AppContext";
 const Profile = props => {
     const contextData = useContext(AppContext);
 
-    useEffect(() => {
-        getSignedInUserData(['coverImage']).then(res => {
-            contextData.dispatchUserData({
-                ...contextData.userData,
-                ...res.data.userData
-            });
-        }).catch(err => {
-            console.log(err);
-        })
-    }, []);
+    // useEffect(() => {
+    //     getSignedInUserData(['coverImage']).then(res => {
+    //         contextData.dispatchUserData({
+    //             ...contextData.userData,
+    //             ...res.data.userData
+    //         });
+    //     }).catch(err => {
+    //         console.log(err);
+    //     })
+    // }, []);
 
     return (
         <div className='profile-page main'>

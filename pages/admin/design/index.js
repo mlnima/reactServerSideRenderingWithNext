@@ -1,6 +1,6 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
 import AdminLayout from "../../../components/layouts/AdminLayout";
-import { saveCustomStyle, getSetting, updateSetting } from '../../../_variables/ajaxVariables'
+import {  getSetting, updateSetting } from '../../../_variables/ajaxVariables'
 import { AppContext } from '../../../context/AppContext'
 import { getAbsolutePath } from '../../../_variables/_variables'
 import styled from "styled-components";

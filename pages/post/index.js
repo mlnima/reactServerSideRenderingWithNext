@@ -40,9 +40,9 @@ const Post = ({responseCode, design, post, identity, comments, widgets}) => {
 
     const [deviceWidth, setDeviceWidth] = useState(null)
 
-    useEffect(() => {
-        console.log(post)
-    }, [post]);
+    // useEffect(() => {
+    //     console.log(post)
+    // }, [post]);
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)

@@ -18,7 +18,9 @@ const AppProvider = props => {
         console:false,
         currentPageSidebar:true,
         deviceWidth:320,
-        checkoutSlideEnable:false
+        checkoutSlideEnable:false,
+        designSet:false,
+        identitySet:false
     });
 
     const [alert, dispatchAlert] = useState({
@@ -109,7 +111,8 @@ const AppProvider = props => {
     const [functions, dispatchFunctions] = useState({
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
-                getSignedInUserData(['username','role','keyMaster','profileImage']).then(res => {
+                getSignedInUserData(['username','role','keyMaster','profileImage','coverImage']).then(res => {
+                    console.log(res.data.userData)
                     dispatchUserData({...userData, ...res.data.userData});
                 }).catch(err => {
                     console.log(err);
@@ -243,7 +246,7 @@ const AppProvider = props => {
     });
 
     useEffect(() => {
-        getSignedInUserData(['username','role','keyMaster','profileImage']).then(res => {
+        getSignedInUserData(['username','role','keyMaster','profileImage','coverImage']).then(res => {
             if (res.data.userData){
                 dispatchUserData({
                     ...userData,

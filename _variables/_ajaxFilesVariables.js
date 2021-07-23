@@ -1,29 +1,30 @@
 import axios from 'axios'
 
-export const readPath = (path)=>{
+export const readPath = path =>{
     let body = {
         path,
         token: localStorage.wt
     };
-    return axios.post(window.location.origin +'/api/v1/settings/fileManagerControllers-readPath',body)
+    return axios.post(window.location.origin +'/api/admin/fileManager/readPath',body)
 };
 
-export const readFile = (path)=>{
+export const readFile = path=>{
     let body = {
         path,
         token: localStorage.wt
     };
-    return axios.post(window.location.origin +'/api/v1/settings/fileManagerControllers-readFile',body)
+    return axios.post(window.location.origin +'/api/admin/fileManager/readFile',body)
 };
 
 
-export const deleteFile = (filePath)=>{
+export const deleteFile = filePath=>{
     let body = {
         filePath,
         token: localStorage.wt
     };
-    return axios.post(window.location.origin +'/api/v1/settings/fileManagerControllers-deleteFile',body)
+    return axios.post(window.location.origin +'//api/admin/fileManager/deleteFile',body)
 };
+
 
 export const actionOnFiles = (_what,clickedItems,_do,pathTo)=>{
     let body = {

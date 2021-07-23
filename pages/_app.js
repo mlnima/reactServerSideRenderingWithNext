@@ -43,7 +43,7 @@ const MyApp = ({Component, pageProps}) => {
                  `}</style>
             </AppProvider>
         )
-    } else if (router.pathname.includes('/messenger')) {
+    } else if (router.pathname.includes('/messenger') || router.pathname.includes('/chatRoom') ) {
         return (
             <AppProvider>
                 <MessengerLayout
@@ -58,6 +58,7 @@ const MyApp = ({Component, pageProps}) => {
         )
     } else return (
         <AppProvider>
+
             <AppLayout
                 design={pageProps.design}
                 widgets={pageProps.widgets}

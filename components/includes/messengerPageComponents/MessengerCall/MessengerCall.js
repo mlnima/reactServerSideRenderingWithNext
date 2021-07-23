@@ -90,7 +90,7 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
         .messenger-call-actions-buttons{
            display: flex;
            justify-content: center;
-           flex-direction: column;
+          // flex-direction: column;
            align-items: center;
            flex-wrap: wrap;
             position: absolute;
@@ -113,12 +113,12 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             margin: 30px 0;
         }
         
-        .messenger-call-media-controls-buttons{
-            width: 100%;
-            display: flex;
-            justify-content: space-evenly;
-            max-width: 300px;
-        }
+        //.messenger-call-media-controls-buttons{
+        //   // width: 100%;
+        //    display: flex;
+        //    justify-content: space-evenly;
+        //    max-width: 300px;
+        //}
         
         .switch-camera-button,.disable-video-button,.disable-audio-button{
             background-color: transparent ;
@@ -145,13 +145,10 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
 
                     </div> : null}
                     {state.receivingCall && callAccepted || state.calling ? <div className='messenger-call-actions-buttons '>
+                        <button onClick={endCallHandler} className='switch-camera-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faSyncAlt} className=' svg-logo-small' /></button>
+                        <button onClick={endCallHandler} className='disable-video-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVideoSlash} className=' svg-logo-small' /></button>
+                        <button onClick={endCallHandler} className='disable-audio-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVolumeMute} className=' svg-logo-small' /></button>
                         <button onClick={endCallHandler} className='leave-call-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faPhoneSlash} className=' svg-logo-small' /></button>
-                        <div className='messenger-call-media-controls-buttons'>
-                            <button onClick={endCallHandler} className='switch-camera-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faSyncAlt} className=' svg-logo-small' /></button>
-                            <button onClick={endCallHandler} className='disable-video-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVideoSlash} className=' svg-logo-small' /></button>
-                            <button onClick={endCallHandler} className='disable-audio-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVolumeMute} className=' svg-logo-small' /></button>
-                        </div>
-
                     </div> : null}
                 </div>
             </div>

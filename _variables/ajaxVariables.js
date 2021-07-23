@@ -10,13 +10,13 @@ export const updateSetting = async (type, data) => {
     return await axios.post(window.location.origin + '/api/admin/settings/update', body)
 };
 
-export const saveCustomStyle = async (data) => {
-    const body = {
-        token: localStorage.wt,
-        data
-    };
-    return await axios.post(window.location.origin + '/api/v1/settings/saveCustomStyle', body)
-};
+// export const saveCustomStyle = async (data) => {
+//     const body = {
+//         token: localStorage.wt,
+//         data
+//     };
+//     return await axios.post(window.location.origin + '/api/v1/settings/saveCustomStyle', body)
+// };
 
 export const getSetting = async (type, domainName, cache, whichPage) => {
     const pageNameForCachedRequest = whichPage ? `&position=${whichPage}` : ''
@@ -83,7 +83,7 @@ export const updateWidgets = async (widgetData) => {
         widgetData,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/v1/settings/updateWidget', body)
+    return await axios.post(window.location.origin + '/api/admin/widgets/updateWidget', body)
 }
 
 export const deleteWidgets = async (id) => {
@@ -91,7 +91,7 @@ export const deleteWidgets = async (id) => {
         id,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/v1/settings/deleteWidget', body)
+    return await axios.post(window.location.origin + '/api/admin/widgets/deleteWidget', body)
 }
 
 export const executor = async (command) => {
@@ -99,20 +99,22 @@ export const executor = async (command) => {
         command,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/v1/settings/executor', body)
+    return await axios.post(window.location.origin + '/api/admin/terminal/commandExecutor', body)
 }
 
 export const fileUpload = async (image) => {
-    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadFile', image)
-}
-
-export const postThumbnailsUpload = async (image) => {
-    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-postThumbnailsUpload', image)
+    return await axios.post(window.location.origin + '/api/admin/fileManager/uploadFile', image)
 }
 
 export const uploadFiles = async (image) => {
-    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-uploadFiles', image)
+    return await axios.post(window.location.origin + '/api/admin/fileManager/uploadFiles', image)
 }
+
+export const postThumbnailsUpload = async (image) => {
+    return await axios.post(window.location.origin + '/api/admin/fileManager/postThumbnailsUpload', image)
+}
+
+
 
 export const postProductTypeImages = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-postProductTypeImages', image)
@@ -120,8 +122,9 @@ export const postProductTypeImages = async (image) => {
 
 
 export const userImageUpload = async (image) => {
-    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-userImageUpload', image)
+    return await axios.post(window.location.origin + '/api/v1/fileManager/userImageUpload', image)
 }
+
 // will be remove
 export const contactAjaxPost = async (data) => {
     const body = {
@@ -208,33 +211,27 @@ export const getOrders = async (data, domainName) => {
 export const getFirstLoadData = async (req,dynamicWidgets,page) => {
 
     try {
-        //const domainName = req ? await getAbsolutePath(req) : '';
         const domainName = process.env.REACT_APP_PRODUCTION_URL;
         const refererUrl = req?.headers?.referer;
-        const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
-        //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
+        //const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
+        const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
         const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
         const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
         const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets]
         const pageNameForCacheRequest = referer ? page ? page : 'static' : 'firstLoadWidgetsData' + (page||'static')
         const firstLoadWidgetsData =await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, true, pageNameForCacheRequest);
-        const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'static') : {};
-        const settingsArr = settingsData?.data?.settings || []
-        let finalSettings = {}
 
-            settingsArr  ?
-            settingsArr.forEach(setting => {
-                if (setting) {
-                    finalSettings[setting.type] = setting
-                }
-            })
-            :{}
+        const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'static') : {};
+
+        let finalSettings = settingsData.data ? {
+            identity:settingsData?.data?.settings.find(s=>s.type === 'identity'),
+            design:settingsData?.data?.settings.find(s=>s.type === 'design')
+        } :{}
 
         let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
         return {
             domainName,
-            //settings:settingsData?.data?.settings ?? [],
-            settings:finalSettings ?? [],
+            settings:finalSettings ?? {},
             widgets:firstLoadWidgetsData?.data?.widgets ?? [],
             referer,
             isSameOrigin,
