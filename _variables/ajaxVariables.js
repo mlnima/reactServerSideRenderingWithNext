@@ -191,7 +191,7 @@ export const youtubeDataScrapper = async (url) => {
         url,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/v1/scrap/youtube', body)
+    return await axios.post(window.location.origin + '/api/admin/scrapper/scrapYoutubeInfo', body)
 }
 
 export const getOrders = async (data, domainName) => {
@@ -208,16 +208,18 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
 
     try {
         const domainName = process.env.REACT_APP_PRODUCTION_URL;
+        const cache = process.env.NODE_ENV !== 'development'
+
         const refererUrl = req?.headers?.referer;
-        //const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
-        const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
+        const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
+        // const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
         const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
         const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
         const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets]
         const pageNameForCacheRequest = referer ? page ? page : 'static' : 'firstLoadWidgetsData' + (page||'static')
-        const firstLoadWidgetsData =await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, true, pageNameForCacheRequest);
+        const firstLoadWidgetsData =await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, cache, pageNameForCacheRequest);
 
-        const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'static') : {};
+        const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, cache, 'static') : {};
 
         let finalSettings = settingsData.data ? {
             identity:settingsData?.data?.settings.find(s=>s.type === 'identity'),

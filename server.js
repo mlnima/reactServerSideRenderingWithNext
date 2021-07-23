@@ -13,6 +13,7 @@ const adminTerminalRouter = require('./server/controllers/adminControllers/admin
 const adminFileManagerRouter = require('./server/controllers/adminControllers/adminFileManagerRouter');
 const adminPagesRouter = require('./server/controllers/adminControllers/adminPagesRouter');
 const adminFormsRouter = require('./server/controllers/adminControllers/adminFormsRouter');
+const adminDataScrappersRouter = require('./server/controllers/adminControllers/adminDataScrappersRouter');
 
 const clientUsersRouter = require('./server/controllers/clientControllers/clientUsersRouter');
 const clientSettingsRouter = require('./server/controllers/clientControllers/clientSettingsRouter');
@@ -28,9 +29,6 @@ const siteMapController = require('./server/controllers/siteMapController');
 const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
 
-//const pageControllers = require('./server/controllers/pageControllers');
-
-const youtubeDataScrapper = require('./server/dataScrappers/youtube');
 const paymentControllers = require('./server/controllers/paymentControllers');
 const path = require('path');
 const authMiddleware = require('./server/middlewares/authMiddleware');
@@ -120,6 +118,7 @@ app.prepare().then(() => {
     server.use('/api/admin/fileManager',adminFileManagerRouter);
     server.use('/api/admin/pages',adminPagesRouter);
     server.use('/api/admin/forms',adminFormsRouter);
+    server.use('/api/admin/scrapper',adminDataScrappersRouter);
 
     server.use('/api/v1/users',clientUsersRouter);
     server.use('/api/v1/posts',clientPostsRouter);
@@ -128,11 +127,6 @@ app.prepare().then(() => {
     server.use('/api/v1/fileManager',clientFileManagerRouter);
     server.use('/api/v1/pages',clientPagesRouter);
     server.use('/api/v1/forms',clientFormsRouter);
-
-    //data scrapper
-    server.post('/api/v1/scrap/youtube', adminAuthMiddleware, (req, res) => {
-        youtubeDataScrapper.gettingInfo(req, res)
-    });
 
     //payments
     server.post('/api/v1/order/create/payPal', (req, res) => {
