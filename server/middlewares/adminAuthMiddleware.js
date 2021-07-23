@@ -1,6 +1,5 @@
 const jwt = require('jsonwebtoken')
 const userSchema = require('../models/userSchema')
-const jwtDecode = require('jwt-decode')
 
 module.exports = async (req, res, next) => {
 
@@ -15,7 +14,6 @@ module.exports = async (req, res, next) => {
                     message: 'Unauthorized'
                 })
             }
-
         })
 
     } catch ( error ) {
