@@ -50,12 +50,7 @@ const postSchema =  new Schema({
         type: String,
         default: '00:00'
     },
-    lastModify: {
-        type:Date,
-        default:Date.now()
-    },
     availableCount:Number,
-    publishedDate:Date,
     premium: Boolean,
     inSlideShow: Boolean,
     rating:String,

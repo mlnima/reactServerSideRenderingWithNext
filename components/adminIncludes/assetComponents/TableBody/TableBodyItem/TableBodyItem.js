@@ -29,6 +29,9 @@ let StyledDiv = styled.div`
       font-size: 13px;
       background-color: transparent;
       margin-left: 10px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
     button {
       cursor: pointer ;
@@ -36,6 +39,11 @@ let StyledDiv = styled.div`
   }
     &:nth-child(even) {
       background-color: #fff;
+    }
+    .asset-page-table-body-item-hover-item{
+    display: flex;
+    align-items: center;
+    width: 310px;
     }
 `;
 const TableBodyItem = props => {

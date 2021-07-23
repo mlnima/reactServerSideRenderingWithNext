@@ -4,7 +4,7 @@ import AdminLayout from '../../../components/layouts/AdminLayout'
 import {getPosts, getMeta, getComments} from '../../../_variables/ajaxPostsVariables'
 import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
 import {getUsersListAsAdmin} from '../../../_variables/ajaxAuthVariables'
-import {getFormData} from '../../../_variables/ajaxVariables'
+import {getFormsData} from '../../../_variables/ajaxVariables'
 import {useRouter} from "next/router";
 
 const TableHeader = dynamic(
@@ -62,7 +62,7 @@ const assets = props => {
                 ajaxRequestData = await getUsersListAsAdmin(getFirstDataOption, localStorage.wt)
                 break
             case 'forms':
-                ajaxRequestData = await getFormData(getFirstDataOption, localStorage.wt)
+                ajaxRequestData = await getFormsData(getFirstDataOption, localStorage.wt)
                 break
             case 'pages':
                 ajaxRequestData = await getPagesData(getFirstDataOption, localStorage.wt)

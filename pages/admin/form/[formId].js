@@ -1,12 +1,8 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import AdminLayout from "../../../components/layouts/AdminLayout";
-import FormToolBar from "../../../components/adminIncludes/formPageComponents/FormToolBar/FormToolBar";
-import FormEditor from "../../../components/adminIncludes/formPageComponents/FormEditor/FormEdittor";
 import {getAbsolutePath} from "../../../_variables/_variables";
-import {getSingleFormData} from "../../../_variables/ajaxVariables";
-import {getMultipleSetting} from "../../../_variables/ajaxVariables";
-import dataDecoder from "../../../server/tools/dataDecoder";
-import {getPost} from "../../../_variables/ajaxPostsVariables";
+import {getFormData} from "../../../_variables/ajaxVariables";
+import {useRouter} from "next/router";
+
 import styled from "styled-components";
 let StyledDiv = styled.div`
 .form-data-container{
@@ -28,21 +24,36 @@ let StyledDiv = styled.div`
 `
 
 const formPage = props => {
+    const router = useRouter()
     const [state, setState] = useState({
         formData:{
             data:{}
         }
     });
-    const [fields, setFields] = useState({});
-    useEffect(() => {
-        if(props.formData.form){
-            setState({
-                ...state,
-                formData:props.formData.form
-            })
-        }
 
-        console.log(props)
+
+    useEffect(() => {
+        const requestBody = {
+            _id: router.query.formId,
+        };
+        getFormData(requestBody,process.env.REACT_APP_PRODUCTION_URL).then(res=>{
+            console.log(res?.data)
+            if (res?.data?.form){
+                setState({
+                    ...state,
+                    formData:res?.data?.form
+                })
+            }
+        })
+
+        // if(props.formData.form){
+        //     setState({
+        //         ...state,
+        //         formData:props.formData.form
+        //     })
+        // }
+        //
+        // console.log(props)
     }, [props]);
 
     const renderData = (Object.keys(state.formData.data)||[]).map(fieldData=>{
@@ -77,15 +88,15 @@ const formPage = props => {
 //     formData = await getSingleFormData(requestBody,domainName)
 //     return {formData:formData.data ?formData.data:{},query}
 // };
-export const getServerSideProps = async ({req,query}) => {
-    const domainName = req ? await getAbsolutePath(req) : '';
-    let formData;
-    let form;
-    const requestBody = {
-        _id: query.id,
-    };
-    formData = await getSingleFormData(requestBody,domainName)
-    return {props: {formData: formData.data ? formData.data : {}, query}}
-}
+// export const getServerSideProps = async ({req,query}) => {
+//     // const domainName = req ? await getAbsolutePath(req) : '';
+//     // // let formData;
+//     // // let form;
+//     // // const requestBody = {
+//     // //     _id: query.id,
+//     // // };
+//     // // formData = await getSingleFormData(requestBody,domainName)
+//     return {props: {formData: formData.data ? formData.data : {}, query}}
+// }
 
 export default formPage;

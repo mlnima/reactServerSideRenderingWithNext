@@ -1,7 +1,4 @@
 const express = require('express');
-// const https = require("https");
-// const http = require("http");
-// const { parse } = require("url");
 const next = require('next');
 const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
@@ -14,6 +11,8 @@ const adminPostsRouter = require('./server/controllers/adminControllers/adminPos
 const adminWidgetsRouter = require('./server/controllers/adminControllers/adminWidgetsRouter');
 const adminTerminalRouter = require('./server/controllers/adminControllers/adminTerminalRouter');
 const adminFileManagerRouter = require('./server/controllers/adminControllers/adminFileManagerRouter');
+const adminPagesRouter = require('./server/controllers/adminControllers/adminPagesRouter');
+const adminFormsRouter = require('./server/controllers/adminControllers/adminFormsRouter');
 
 const clientUsersRouter = require('./server/controllers/clientControllers/clientUsersRouter');
 const clientSettingsRouter = require('./server/controllers/clientControllers/clientSettingsRouter');
@@ -22,16 +21,15 @@ const clientWidgetsRouter = require('./server/controllers/clientControllers/clie
 const clientMainFestController = require('./server/controllers/clientControllers/clientMainFestController');
 const clientRobotTxtController = require('./server/controllers/clientControllers/clientRobotTxtController');
 const clientFileManagerRouter = require('./server/controllers/clientControllers/clientFileManagerRouter');
+const clientPagesRouter = require('./server/controllers/clientControllers/clientPagesRouter');
+const clientFormsRouter = require('./server/controllers/clientControllers/clientFormsRouter');
 
-
-//const postsControllers = require('./server/controllers/postsControllers');
 const siteMapController = require('./server/controllers/siteMapController');
 const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
-//const settingsControllers = require('./server/controllers/settingsControllers');
-//const fileManagerControllers = require('./server/controllers/fileManagerControllers');
-const pageControllers = require('./server/controllers/pageControllers');
-const formController = require('./server/controllers/formController');
+
+//const pageControllers = require('./server/controllers/pageControllers');
+
 const youtubeDataScrapper = require('./server/dataScrappers/youtube');
 const paymentControllers = require('./server/controllers/paymentControllers');
 const path = require('path');
@@ -114,58 +112,27 @@ app.prepare().then(() => {
     server.get('/sitemaps/:month', (req, res) => {siteMapsController.siteMapMonths(req , res)});
     server.get('/sitemap/:month/:pageNo', (req, res) => {subSiteMapsController.siteMap(req , res)});
 
-    server.use('/api/admin/users',adminUsersRouter)
-    server.use('/api/admin/posts',adminPostsRouter)
-    server.use('/api/admin/settings',adminSettingsRouter)
-    server.use('/api/admin/widgets',adminWidgetsRouter)
-    server.use('/api/admin/terminal',adminTerminalRouter)
-    server.use('/api/admin/fileManager',adminFileManagerRouter)
+    server.use('/api/admin/users',adminUsersRouter);
+    server.use('/api/admin/posts',adminPostsRouter);
+    server.use('/api/admin/settings',adminSettingsRouter);
+    server.use('/api/admin/widgets',adminWidgetsRouter);
+    server.use('/api/admin/terminal',adminTerminalRouter);
+    server.use('/api/admin/fileManager',adminFileManagerRouter);
+    server.use('/api/admin/pages',adminPagesRouter);
+    server.use('/api/admin/forms',adminFormsRouter);
 
-    server.use('/api/v1/users',clientUsersRouter)
-    server.use('/api/v1/posts',clientPostsRouter)
-    server.use('/api/v1/settings',clientSettingsRouter)
-    server.use('/api/v1/widgets',clientWidgetsRouter)
-    server.use('/api/v1/fileManager',clientFileManagerRouter)
-
-
-
-
-    //form
-    server.post('/api/v1/form/contact', (req, res) => formController.contact(req, res));
-    server.post('/api/v1/forms/save', (req, res) => formController.widgetForm(req, res));
-    server.post('/api/v1/forms/get', (req, res) => formController.getFormsData(req, res));
-    server.post('/api/v1/forms/getFormData', (req, res) => formController.getFormData(req, res));
-
-
-
-    // file manager
-    //server.post('/api/v1/settings/fileManagerControllers-readPath', (req, res) => {fileManagerControllers.readPath(req, res)});
-    //server.post('/api/v1/settings/fileManagerControllers-readFile', (req, res) => {fileManagerControllers.readFile(req, res)});
-    //server.post('/api/v1/settings/fileManagerControllers-deleteFile', (req, res) => {fileManagerControllers.deleteFile(req, res)});
-    //server.post('/api/v1/settings/fileManagerControllers-uploadFile', (req, res) => {fileManagerControllers.uploadFile(req, res)});
-    //server.post('/api/v1/settings/fileManagerControllers-postThumbnailsUpload', (req, res) => {fileManagerControllers.postThumbnailsUpload(req, res)});
-    //server.post('/api/v1/settings/fileManagerControllers-uploadFiles', (req, res) => {fileManagerControllers.uploadFiles(req, res)});
-
-    //need auth
-    // server.post('/api/v1/settings/fileManagerControllers-userImageUpload', authMiddleware, (req, res) => {
-    //     fileManagerControllers.userImageUpload(req, res)
-    // });
-
-    //pages
-    server.post('/api/v1/pages/new', (req, res) => pageControllers.new(req, res));
-    server.post('/api/v1/pages/update', (req, res) => pageControllers.update(req, res));
-    server.post('/api/v1/pages/getPageData', (req, res) => pageControllers.getPageData(req, res));
-    server.post('/api/v1/pages/getPagesData', (req, res) => pageControllers.getPagesData(req, res));
-    server.post('/api/v1/pages/deletePage', (req, res) => pageControllers.deletePage(req, res));
-
-
+    server.use('/api/v1/users',clientUsersRouter);
+    server.use('/api/v1/posts',clientPostsRouter);
+    server.use('/api/v1/settings',clientSettingsRouter);
+    server.use('/api/v1/widgets',clientWidgetsRouter);
+    server.use('/api/v1/fileManager',clientFileManagerRouter);
+    server.use('/api/v1/pages',clientPagesRouter);
+    server.use('/api/v1/forms',clientFormsRouter);
 
     //data scrapper
     server.post('/api/v1/scrap/youtube', adminAuthMiddleware, (req, res) => {
         youtubeDataScrapper.gettingInfo(req, res)
     });
-
-
 
     //payments
     server.post('/api/v1/order/create/payPal', (req, res) => {

@@ -125,33 +125,29 @@ export const userImageUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/fileManager/userImageUpload', image)
 }
 
-// will be remove
-export const contactAjaxPost = async (data) => {
-    const body = {
-        data
-    }
-    return await axios.post(window.location.origin + '/api/v1/form/contact', body)
-}
-//-- forms
+
 
 export const saveFormWidgetData = async (data) => {
     const body = {
         data
     }
-    return await axios.post(window.location.origin + '/api/v1/forms/save', body)
+    return await axios.post(window.location.origin + '/api/v1/forms/saveFormData', body)
 }
 
-export const getFormData = async (data) => {
+export const getFormsData = async (data) => {
     const body = {
-        data
+        data,
+        token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/forms/get', body)
+    return await axios.post(window.location.origin + '/api/admin/forms/getFormsData', body)
 }
-export const getSingleFormData = async (data, domainName) => {
+
+export const getFormData = async (data, domainName) => {
     const body = {
-        ...data
+        ...data,
+        token: localStorage.wt
     }
-    return await axios.post(domainName + '/api/v1/forms/getFormData', body)
+    return await axios.post(domainName + '/api/admin/forms/getFormData', body)
 }
 
 //pages
@@ -159,14 +155,14 @@ export const saveNewPage = async (data) => {
     const body = {
         ...data
     }
-    return await axios.post(window.location.origin + '/api/v1/pages/new', body)
+    return await axios.post(window.location.origin + '/api/admin/pages/createNewPage', body)
 }
 export const updatePage = async (data) => {
     const body = {
         ...data,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/pages/update', body)
+    return await axios.post(window.location.origin + '/api/admin/pages/updatePage', body)
 }
 export const getPageData = async (data, domainName) => {
     const body = {
@@ -179,14 +175,14 @@ export const deletePage = async (id, domainName) => {
         id,
         token: localStorage.wt
     }
-    return await axios.post(domainName + '/api/v1/pages/deletePage', body)
+    return await axios.post(domainName + '/api/admin/pages/deletePage', body)
 }
 export const getPagesData = async (data) => {
     const body = {
         ...data,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/pages/getPagesData', body)
+    return await axios.post(window.location.origin + '/api/admin/pages/getPagesData', body)
 }
 
 //others
