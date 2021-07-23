@@ -201,7 +201,7 @@ export const getOrders = async (data, domainName) => {
         token: localStorage.wt
     };
 
-    return await axios.post(domainName + `/api/v1/order/get`, body)
+    return await axios.post(domainName + `/api/admin/orders/getOrders`, body)
 };
 
 export const getFirstLoadData = async (req,dynamicWidgets,page) => {

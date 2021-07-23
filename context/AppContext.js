@@ -125,7 +125,7 @@ const AppProvider = props => {
                  const body ={
                      data
                  }
-                 return axios.post('/api/v1/order/create/payPal',body)
+                 return axios.post('/api/v1/orders/create/payPal',body)
              }
         },
         logOutUser: () => {

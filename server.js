@@ -4,7 +4,17 @@ const mongoose = require("mongoose");
 const bodyParser = require('body-parser');
 const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
-
+const path = require('path');
+const adminAuthMiddleware = require('./server/middlewares/adminAuthMiddleware');
+const xmlparser = require("express-xml-bodyparser");
+const dev = process.env.NODE_ENV !== 'production';
+const app = next({dev});
+const handle = app.getRequestHandler();
+const apicache = require('apicache')
+const compression = require('compression')
+require('dotenv').config()
+const cors = require('cors')
+//--admin Routers
 const adminUsersRouter = require('./server/controllers/adminControllers/adminUsersRouter');
 const adminSettingsRouter = require('./server/controllers/adminControllers/adminSettingsRouter');
 const adminPostsRouter = require('./server/controllers/adminControllers/adminPostsRouter');
@@ -14,7 +24,8 @@ const adminFileManagerRouter = require('./server/controllers/adminControllers/ad
 const adminPagesRouter = require('./server/controllers/adminControllers/adminPagesRouter');
 const adminFormsRouter = require('./server/controllers/adminControllers/adminFormsRouter');
 const adminDataScrappersRouter = require('./server/controllers/adminControllers/adminDataScrappersRouter');
-
+const adminOrdersRouter = require('./server/controllers/adminControllers/adminOrdersRouter');
+//--client Routers
 const clientUsersRouter = require('./server/controllers/clientControllers/clientUsersRouter');
 const clientSettingsRouter = require('./server/controllers/clientControllers/clientSettingsRouter');
 const clientPostsRouter = require('./server/controllers/clientControllers/clientPostsRouter');
@@ -24,24 +35,11 @@ const clientRobotTxtController = require('./server/controllers/clientControllers
 const clientFileManagerRouter = require('./server/controllers/clientControllers/clientFileManagerRouter');
 const clientPagesRouter = require('./server/controllers/clientControllers/clientPagesRouter');
 const clientFormsRouter = require('./server/controllers/clientControllers/clientFormsRouter');
-
+const clientOrdersRouter = require('./server/controllers/clientControllers/clientOrdersRouter');
+//--sitemap Controllers
 const siteMapController = require('./server/controllers/siteMapController');
 const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
-
-const paymentControllers = require('./server/controllers/paymentControllers');
-const path = require('path');
-const authMiddleware = require('./server/middlewares/authMiddleware');
-const adminAuthMiddleware = require('./server/middlewares/adminAuthMiddleware');
-
-const xmlparser = require("express-xml-bodyparser");
-const dev = process.env.NODE_ENV !== 'production';
-const app = next({dev});
-const handle = app.getRequestHandler();
-const apicache = require('apicache')
-const compression = require('compression')
-require('dotenv').config()
-const cors = require('cors')
 
 //cache api
 const cacheSuccesses = require('./server/middlewares/apiCache')
@@ -62,7 +60,7 @@ mongoose.connect(mongoDBConnectionUrl, {
     .catch(err => console.log('DB not connected', err));
 //------------------------------------------------------------Page Cache doesnt work well--------------------------
 
-const robotsOptions = {
+const staticServeOptions = {
     root: './static/',
     headers: {'Content-Type': 'text/plain;charset=utf-8'}
 }
@@ -76,10 +74,7 @@ function shouldCompress(req, res) {
     return compression.filter(req, res)
 }
 
-// const credentials = process.env.REACT_APP_SSL === 'true' ? {
-//     key: fs.readFileSync('./server/https/localhost-key.pem'),
-//     cert: fs.readFileSync('./server/https/localhost.pem')
-// } : {}
+
 
 app.prepare().then(() => {
     const server = express();
@@ -105,7 +100,7 @@ app.prepare().then(() => {
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
     server.get('/manifest.json', cacheSuccesses,(req,res)=>{clientMainFestController(req,res)})
     //xml siteMap handler
-    server.get('/sitemap.xsl', (req, res) => {return res.status(200).sendFile('sitemap.xsl', robotsOptions)});
+    server.get('/sitemap.xsl', (req, res) => {return res.status(200).sendFile('sitemap.xsl', staticServeOptions)});
     server.get('/sitemap.xml', (req, res) => {siteMapController.siteMap(req , res)});
     server.get('/sitemaps/:month', (req, res) => {siteMapsController.siteMapMonths(req , res)});
     server.get('/sitemap/:month/:pageNo', (req, res) => {subSiteMapsController.siteMap(req , res)});
@@ -119,6 +114,7 @@ app.prepare().then(() => {
     server.use('/api/admin/pages',adminPagesRouter);
     server.use('/api/admin/forms',adminFormsRouter);
     server.use('/api/admin/scrapper',adminDataScrappersRouter);
+    server.use('/api/admin/orders',adminOrdersRouter);
 
     server.use('/api/v1/users',clientUsersRouter);
     server.use('/api/v1/posts',clientPostsRouter);
@@ -127,24 +123,19 @@ app.prepare().then(() => {
     server.use('/api/v1/fileManager',clientFileManagerRouter);
     server.use('/api/v1/pages',clientPagesRouter);
     server.use('/api/v1/forms',clientFormsRouter);
-
-    //payments
-    server.post('/api/v1/order/create/payPal', (req, res) => {
-        paymentControllers.order_payPal(req, res)
-    });
-    server.post('/api/v1/order/get', adminAuthMiddleware, (req, res) => {
-        paymentControllers.getOrders(req, res)
-    });
-//------------------------------- custom routes ---------------------------------
+    server.use('/api/v1/orders',clientOrdersRouter);
 
     server.get('*', (req, res) => {
         return handle(req, res)
     });
-
-
 
 }).catch((ex) => {
     console.log('exit error:', ex.stack)
 });
 
 
+
+// const credentials = process.env.REACT_APP_SSL === 'true' ? {
+//     key: fs.readFileSync('./server/https/localhost-key.pem'),
+//     cert: fs.readFileSync('./server/https/localhost.pem')
+// } : {}
