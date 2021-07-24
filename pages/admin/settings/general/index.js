@@ -95,13 +95,29 @@ const settings = props => {
         keywords: [],
         translations: {}
     });
+
+
+
     useEffect(() => {
         setState({
             ...state,
             ...props.identity
 
         })
+         getSetting('identity', process.env.REACT_APP_PRODUCTION_URL, false).then(res=>{
+
+             setState({
+                 ...state,
+                 ...res.data.setting ? res.data.setting.data : {}
+
+             })
+         })
+
+
     }, []);
+
+
+
     const onChangeLanguageHandler = e => {
         setEditingSettings({
             ...editingSettings,
@@ -416,14 +432,14 @@ const settings = props => {
 //     return {domainName, identity}
 // }
 
-export const getServerSideProps = async ({req}) => {
-    const domainName = req ? await getAbsolutePath(req) : '';
-    let identity;
-    const identityData = await getSetting('identity', domainName, false);
-    identity = identityData.data.setting ? identityData.data.setting.data : {}
-
-    return {props: {domainName, identity}}
-}
+// export const getServerSideProps = async ({req}) => {
+//     const domainName = req ? await getAbsolutePath(req) : '';
+//     let identity;
+//     const identityData = await getSetting('identity', domainName, false);
+//     identity = identityData.data.setting ? identityData.data.setting.data : {}
+//
+//     return {props: {domainName, identity}}
+// }
 
 
 export default settings;
