@@ -18,14 +18,17 @@ const conversation = props => {
         answering: false,
         callAccepted: false,
         receivingCall: false,
-        camera: 'user'
+        callOptions:{
+            video: true ,
+            audio: true
+        },
+        camera: true,
+        microphone:true
     });
 
     const [myStream, setMyStream] = useState()
     const [userStream, setUserStream] = useState()
     const [callAccepted, setCallAccepted] = useState(false)
-
-
     const [messageState, setMessageState] = useState({messageBody: ''})
     const [connectedUserData, setConnectedUserData] = useState({});
     const [messages, setMessages] = useState([]);
@@ -51,11 +54,13 @@ const conversation = props => {
 
     useEffect(() => {
         socket.emit('joinConversation', router.query.conversation)
+
         socket.on('receiveMessageFromConversation', messageData => {
             setMessages(messages=>[...messages, messageData])
         })
+
         socket.on("incomingCallFromConversation", data => {
-            getUserMedia({video: true, audio: true}).then(myStreamData => {
+            getUserMedia().then(myStreamData => {
                 setMyStream(myStreamData)
             })
 
@@ -70,6 +75,7 @@ const conversation = props => {
                 receivingCall: true
             })
         })
+
         socket.on("mySocketId", id => {
             setMySocketId(id)
         })
@@ -101,29 +107,44 @@ const conversation = props => {
     }, [userStream]);
 
 
-    const getUserMedia = options => {
-        return navigator?.mediaDevices?.getUserMedia(options)
+    const getUserMedia = () => {
+        return navigator?.mediaDevices?.getUserMedia(state.callOptions)
     }
 
+//-----
+const disableMicrophone = ()=>{
+        state.microphone?
+            (setState({...state,microphone: false}),
+                myStream.getAudioTracks?
+            setMyStream(myStream.getAudioTracks()[0].enabled = false):null) :
+            (setState({...state,microphone: true}),
+             setMyStream(getUserMedia()))
+        console.log(myStream)
+}
 
-    const switchMediaHandler = () => {
-        const options = {
-            video: {
-                facingMode: 'user', // Or 'environment'
-            }, audio: true
-        }
-        getUserMedia(options).then(myStreamData => {
-            setMyStream(myStreamData)
-        })
-    }
+const disableCamera = ()=>{
+        state.camera?(
+                setState({...state,camera: false}),
+                    myStream.getVideoTracks?
+                    setMyStream(myStream.getVideoTracks()[0].enabled = false):null
+            )
+       :(
+                setState({...state,camera: true}),
+                    setMyStream(getUserMedia())
 
+            )
+        console.log(myStream)
+}
+//------
     const attemptForCall = () => {
-        getUserMedia({video: true, audio: true}).then(myStreamData => {
+        getUserMedia().then(myStreamData => {
             setMyStream(myStreamData)
             setState({
                 ...state,
                 calling: true
             })
+        }).catch(err=>{
+            console.log(err)
         })
     }
 
@@ -196,7 +217,7 @@ const conversation = props => {
             stream: myStream
         })
 
-        socket.on('endCall', () => {
+        socket.on('endCall', () =>{
             setState({
                 ...state,
                 calling: false,
@@ -281,7 +302,8 @@ const conversation = props => {
                 userVideoRef={userVideoRef}
                 myVideoRef={myVideoRef}
                 state={state}
-
+                disableCamera={disableCamera}
+                disableMicrophone={disableMicrophone}
                 callAccepted={callAccepted}
                 endCallHandler={endCallHandler}
             />

@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPhoneAlt, faPhoneSlash, faPowerOff, faSyncAlt, faVideoSlash, faVolumeMute} from "@fortawesome/free-solid-svg-icons";
+import {faMicrophone, faMicrophoneSlash, faPhoneAlt, faPhoneSlash, faPowerOff, faSyncAlt, faVideoSlash, faVolumeMute} from "@fortawesome/free-solid-svg-icons";
 
-const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHandler, callAccepted, attemptForAnswer,}) => {
+const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHandler, callAccepted, attemptForAnswer,disableMicrophone,disableCamera}) => {
 
     if (state.calling || state.receivingCall ){
         return (
@@ -134,10 +134,15 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             border:none;
             margin:  0;
         }
+        //
+        // .disable-audio-button{
+        //   background-color: ${state.microphone ? 'transparent' : 'var(--navigation-text-color)' } ;
+        //   color: ${state.microphone ? 'var(--navigation-background-color)' : 'white' } ;
+        // }
         
         `}</style>
                 <div className='messenger-call-elements'>
-                    {state.calling || callAccepted  ? <video className={`messenger-call-my-video-${callAccepted ? 'small' : 'big'}`} playsInline muted ref={myVideoRef}  autoPlay/> : null}
+                    <video className={`messenger-call-my-video-${callAccepted ? 'small' : 'big'}`} playsInline muted ref={myVideoRef}  autoPlay/>
                     {callAccepted? <video className='messenger-call-user-video' playsInline ref={userVideoRef} autoPlay/> : null}
                     {state.receivingCall && !callAccepted ? <div className='messenger-call-user-calling-message'>
                         <p className='messenger-call-user-calling-message-username'>{callerData.callerName}</p>
@@ -149,9 +154,9 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
 
                     </div> : null}
                     {state.receivingCall && callAccepted || state.calling ? <div className='messenger-call-actions-buttons '>
-                        <button onClick={endCallHandler} className='switch-camera-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faSyncAlt} className=' svg-logo-small' /></button>
-                        <button onClick={endCallHandler} className='disable-video-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVideoSlash} className=' svg-logo-small' /></button>
-                        <button onClick={endCallHandler} className='disable-audio-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVolumeMute} className=' svg-logo-small' /></button>
+                        {/*<button onClick={switchCameraHandler} className='switch-camera-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faSyncAlt} className=' svg-logo-small' /></button>*/}
+                        {/*<button onClick={disableCamera} className='disable-video-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faVideoSlash} className=' svg-logo-small' /></button>*/}
+                        {/*<button onClick={disableMicrophone} className='disable-audio-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={state.microphone?faMicrophoneSlash:faMicrophone} className=' svg-logo-small' /></button>*/}
                         <button onClick={endCallHandler} className='leave-call-button'> <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faPhoneSlash} className=' svg-logo-small' /></button>
                     </div> : null}
                 </div>

@@ -34,19 +34,19 @@ const messengerPage = props => {
         );
     }else return (
         <div className='messenger-page main'>
-            <style jsx>{`
-.messenger-page{
-display: flex;
-justify-content: center;
-align-items: center;
-width: 100%;
-height: 100%;
-}
-.messenger-page-register-page-link{
-color: var(--main-text-color);
-}
-
-  `}</style>
+        <style jsx>{`
+            .messenger-page{
+                display: flex;
+                justify-content: center;
+                align-items: center;
+                width: 100%;
+                height: 100%;
+            }
+            .messenger-page-register-page-link{
+                color: var(--main-text-color);
+            }
+        
+        `}</style>
            <Link href={'/register'}><a className='messenger-page-register-page-link'>You need to create an account in order to access this page</a></Link>
         </div>
     )

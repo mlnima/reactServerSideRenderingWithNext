@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {followUser, unFollowUser, sendFriendRequest, acceptFriendRequest, unfriendRequest, cancelFriendRequest, conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {AppContext} from "../../../../context/AppContext";
 
-const UserPageActionButtons = ({_id, setParentState, parentState}) => {
+const UserPageActionButtons = ({_id, setParentState, parentState,username}) => {
     const contextData = useContext(AppContext);
 
     const onFollowHandler = () => {
@@ -69,14 +69,6 @@ const UserPageActionButtons = ({_id, setParentState, parentState}) => {
         })
     }
 
-    const onMessageHandler = () => {
-        setParentState({
-            ...parentState,
-            messagePop: true
-        })
-    }
-
-
     const onConversationHandler = () => {
         conversation(_id).then(res => {
             const conversation = res.data.conversation
@@ -123,7 +115,6 @@ const UserPageActionButtons = ({_id, setParentState, parentState}) => {
         `}
             </style>
             {
-                //pendingReceivedFriendRequests
                 contextData?.userData?.pendingSentFriendRequests?.includes(_id) ?
                     <button className='user-page-action-button' onClick={onCancelFriendRequest}>Cancel Request</button> :
                     contextData?.userData?.friends?.includes(_id) ?
@@ -134,12 +125,13 @@ const UserPageActionButtons = ({_id, setParentState, parentState}) => {
             }
 
             {
-                contextData?.userData?.following?.includes(_id) ?
+                contextData?.userData?.following?.includes(_id)  ?
                     <button className='user-page-action-button' onClick={onUnFollowHandler}>Following</button> :
                     <button className='user-page-action-button' onClick={onFollowHandler}>Follow</button>
             }
             {/*<button className='user-page-action-button' onClick={onMessageHandler}>Message</button>*/}
             <button className='user-page-action-button' onClick={onConversationHandler}>Chat</button>
+
         </div>
     );
 };

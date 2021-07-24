@@ -12,14 +12,13 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
     useEffect(() => {
         setState({
             ...state,
-            username: conversationData?.users ?  conversationData.users.find(u => u._id !== userId).username:'',
-            profileImage:conversationData?.users ? conversationData.users.find(u => u._id !== userId).profileImage :'/static/images/noImage/no-image-available.png',
-            messageBody:conversationData?.messages?.[0].messageBody,
+            username: conversationData?.users ?  conversationData.users.find(u => u._id !== userId)?.username:'',
+            profileImage:conversationData?.users ? conversationData.users.find(u => u._id !== userId)?.profileImage :'/static/images/noImage/no-image-available.png',
+            messageBody:conversationData?.messages?.[0]?.messageBody,
             date: conversationData?.updatedAt ?
                 moment(new Date(conversationData.updatedAt), "YYYYMMDD").fromNow(false)
                 :''
         })
-
     }, []);
     return (
         <Link href={`/messenger/${conversationData._id}`} >

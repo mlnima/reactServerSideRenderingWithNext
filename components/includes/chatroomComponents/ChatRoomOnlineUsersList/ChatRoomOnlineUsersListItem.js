@@ -4,7 +4,7 @@ import {faEye} from "@fortawesome/free-regular-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ChatRoomOnlineUsersListItemMoreInfo from "./ChatRoomOnlineUsersListItemMoreInfo";
 
-const ChatRoomOnlineUsersListItem = ({onlineUser}) => {
+const ChatRoomOnlineUsersListItem = ({onlineUser,onUserInfoShowHandler}) => {
     const [state, setState] = useState({
         moreInfo:false
     });
@@ -52,14 +52,14 @@ const ChatRoomOnlineUsersListItem = ({onlineUser}) => {
                 }
                 
             `}</style>
-            <div className='chatroom-online-users-list-item-user-section'>
+            <div className='chatroom-online-users-list-item-user-section' onClick={()=>onUserInfoShowHandler(onlineUser.username,onlineUser.userId,onlineUser.profileImage)}>
                 <div className='chatroom-online-users-list-item-user-data'>
                     <img className='chatroom-online-users-list-item-image' src={onlineUser.profileImage} alt=""/>
                     <p className='chatroom-online-users-list-item-username'>{onlineUser.username}</p>
                 </div>
-                <button className='chatroom-online-users-list-item-more-info-button' onClick={onMoreInfoHandler} onTouchMoveCapture={onMoreInfoHandler}>
-                    <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faEye} />
-                </button>
+                {/*<button className='chatroom-online-users-list-item-more-info-button' onClick={onMoreInfoHandler} onTouchMoveCapture={onMoreInfoHandler}>*/}
+                {/*    <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faEye} />*/}
+                {/*</button>*/}
             </div>
 
             <ChatRoomOnlineUsersListItemMoreInfo moreInfo={state.moreInfo} username={onlineUser.username} />

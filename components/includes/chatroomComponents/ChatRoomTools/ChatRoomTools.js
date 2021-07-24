@@ -26,11 +26,20 @@ const ChatRoomTools = ({onEmojiPickerHandler}) => {
 
     const onSubmitHandler = e =>{
         e.preventDefault()
-        socket.emit('message',state.messageData,router.query.chatRoomName,contextData.userData.username,contextData.userData._id,contextData.userData.profileImage)
-        setState({
-            ...state,
-            messageData: ''
-        })
+        if (contextData.userData._id){
+            socket.emit('message',state.messageData,router.query.chatRoomName,contextData.userData.username,contextData.userData._id,contextData.userData.profileImage)
+            setState({
+                ...state,
+                messageData: ''
+            })
+        }else{
+            contextData.dispatchState({
+                ...contextData.state,
+                loginRegisterFormPopup:true,
+                loginRegisterFormPopupType:'register'
+            })
+        }
+
     }
     return (
         <div className='chatroom-tools'>

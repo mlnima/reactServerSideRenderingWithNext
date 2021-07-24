@@ -80,7 +80,7 @@ const AppLayout = props => {
                         router.pathname === '/auth/register' || router.pathname === '/auth/login'? 'authPageSidebar' :
                           router.pathname.includes('/profile')  ? 'profilePageSidebar' :
                           router.pathname.includes('/messenger')  ? 'messengerPageSidebar' :
-                            router.pathname === '/user' ? 'userPageSidebar' :
+                              router.pathname.includes('/user/') ? 'userPageSidebar' :
                               router.pathname === '/page' ? props.pageInfo?.pageName + 'Sidebar' :
                                 'homePageSidebar'
         , [router.pathname])
@@ -92,7 +92,7 @@ const AppLayout = props => {
                     router.pathname === '/auth/register' || router.pathname === '/auth/login' ? 'authPageLeftSidebar' :
                     router.pathname.includes('/profile')  ? 'profilePageLeftSidebar' :
                     router.pathname.includes('/messenger')  ? 'messengerPageLeftSidebar' :
-                   router.pathname === '/user' ? 'userPageLeftSidebar' :
+                        router.pathname.includes('/user/') ? 'userPageLeftSidebar' :
                     router.pathname === '/page' ? props.pageInfo?.pageName + 'LeftSidebar' :
                         'homePageLeftSidebar', [router.pathname])
 
@@ -103,13 +103,14 @@ const AppLayout = props => {
                     router.pathname === '/auth/register' || router.pathname === '/auth/login' ? 'authPageRightSidebar' :
                     router.pathname.includes('/profile')  ? 'profilePageRightSidebar' :
                     router.pathname.includes('/messenger')  ? 'messengerPageRightSidebar' :
-                    router.pathname === '/user' ? 'userPageRightSidebar' :
+                        router.pathname.includes('/user/') ? 'userPageRightSidebar' :
                       router.pathname === '/page' ? props.pageInfo?.pageName + 'RightSidebar' :
                         'homePageRightSidebar', [router.pathname])
 
 
 
-    const sidebarType = useMemo(() => props.identity?.data?.[sidebarPositionName] || contextData?.siteIdentity[sidebarPositionName] || props.pageInfo?.sidebar, [sidebarPositionName, props.pageInfo])
+    const sidebarType = useMemo(() => props.identity?.data?.[sidebarPositionName] || contextData?.siteIdentity[sidebarPositionName] || props.pageInfo?.sidebar || 'withOutSidebar', [sidebarPositionName, props.pageInfo])
+
 
     const mainLayoutClassNameForGrid = useMemo(() => sidebarType === 'left' ? 'leftSidebar' : sidebarType === 'right' ? 'rightSidebar' : sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar', [sidebarType]);
 

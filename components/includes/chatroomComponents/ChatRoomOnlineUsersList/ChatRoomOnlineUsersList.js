@@ -4,7 +4,7 @@ import {faArrowRight, faUsers} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import ChatRoomOnlineUsersListItem from "./ChatRoomOnlineUsersListItem";
 
-const ChatRoomOnlineUsersList = ({onlineUsers,onlineUserListVisibility}) => {
+const ChatRoomOnlineUsersList = ({onlineUsers,onlineUserListVisibility,onUserInfoShowHandler}) => {
 
     const [state,setstate] = useState({
         visible:false
@@ -14,12 +14,12 @@ const ChatRoomOnlineUsersList = ({onlineUsers,onlineUserListVisibility}) => {
         state.visible? setstate({...state,visible:true}):setstate({...state,visible:false})
     }
 
-console.log(onlineUserListVisibility)
-   const renderOnlineUsers = onlineUsers.map(onlineUser=>{
-       return(
-<ChatRoomOnlineUsersListItem key={_.uniqueId('message_')} onlineUser={onlineUser}/>
-       )
-   })
+
+    const renderOnlineUsers = onlineUsers.map(onlineUser=>{
+        return(
+            <ChatRoomOnlineUsersListItem key={_.uniqueId('message_')} onlineUser={onlineUser} onUserInfoShowHandler={onUserInfoShowHandler}/>
+        )
+    })
 
 
 

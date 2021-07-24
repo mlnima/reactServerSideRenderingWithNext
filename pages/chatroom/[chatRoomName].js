@@ -7,36 +7,45 @@ import ChatRoomMessageArea from "../../components/includes/chatroomComponents/Ch
 import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
 import socket from '../../_variables/socket';
+import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 
 const chatRoom = props => {
     const messageAreaRef = useRef(null)
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
-        onlineUserListVisibility:false,
-        emojiPicker:false
+        onlineUserListVisibility: false,
+        userInfo: {}
     });
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [isJoined, setIsJoined] = useState(false)
     const router = useRouter()
 
-    const onOnlineUserListVisibilityChangeHandler = ()=>{
-        state.onlineUserListVisibility ?
-            setState({...state,onlineUserListVisibility:false}):
-            setState({...state,onlineUserListVisibility:true})
+
+    useEffect(() => {
+        console.log(state)
+    }, [state]);
+    const onUserInfoShowHandler = (username, userId, profileImage) => {
+        state.userInfo.username ? setState({...state, userInfo: {}}) : setState({...state, userInfo: {username, userId, profileImage}})
     }
-    const onEmojiPickerHandler = ()=>{
+
+    const onOnlineUserListVisibilityChangeHandler = () => {
+        state.onlineUserListVisibility ?
+            setState({...state, onlineUserListVisibility: false}) :
+            setState({...state, onlineUserListVisibility: true})
+    }
+    const onEmojiPickerHandler = () => {
         state.emojiPicker ?
-            setState({...state,emojiPicker:false}):
-            setState({...state,emojiPicker:true})
+            setState({...state, emojiPicker: false}) :
+            setState({...state, emojiPicker: true})
     }
 
 
     useEffect(() => {
-        if (contextData.userData._id){
-            setOnlineUsers(onlineUsers=>[
+        if (contextData.userData._id) {
+            setOnlineUsers(onlineUsers => [
                 ...onlineUsers,
-                {username:contextData.userData.username, userId:contextData.userData._id, profileImage:contextData.userData.profileImage}
+                {username: contextData.userData.username, userId: contextData.userData._id, profileImage: contextData.userData.profileImage}
             ])
         }
 
@@ -54,17 +63,17 @@ const chatRoom = props => {
         scrollToBottomOfConversationBox()
     }, [messages]);
 
-    const scrollToBottomOfConversationBox = ()=>{
-        if (messageAreaRef.current){
+    const scrollToBottomOfConversationBox = () => {
+        if (messageAreaRef.current) {
             messageAreaRef.current.scroll({
-                top:messageAreaRef.current.scrollHeight
+                top: messageAreaRef.current.scrollHeight
             })
         }
     }
 
     useEffect(() => {
         socket.on('getChatroomMemberData', async (roomName, username, userId, profileImage) => {
-            username && userId && profileImage ?  setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou=>ou.userId !== userId), {username, userId, profileImage}]) :null
+            username && userId && profileImage ? setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou => ou.userId !== userId), {username, userId, profileImage}]) : null
         })
 
         socket.on('message', (messageData, username, id, profileImage) => {
@@ -81,7 +90,7 @@ const chatRoom = props => {
 
 
         socket.on('getMyDataAndShareYourData', (receiverSocketId, username, userId, profileImage) => {
-            username && userId && profileImage ?  setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou=>ou.userId !== userId), {username, userId, profileImage}]) :null
+            username && userId && profileImage ? setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou => ou.userId !== userId), {username, userId, profileImage}]) : null
             socket.emit('myDataIs', receiverSocketId, router.query.chatRoomName, contextData.userData.username, contextData.userData._id, contextData.userData.profileImage)
 
         })
@@ -101,9 +110,18 @@ const chatRoom = props => {
     return (
         <div>
             <ChatRoomHeader onOnlineUserListVisibilityChangeHandler={onOnlineUserListVisibilityChangeHandler}/>
-            <ChatRoomMessageArea onlineUsers={onlineUsers} messages={messages} messageAreaRef={messageAreaRef} emojiPicker={state.emojiPicker}/>
+            <ChatRoomMessageArea
+                onlineUsers={onlineUsers}
+                messages={messages}
+                messageAreaRef={messageAreaRef}
+                emojiPicker={state.emojiPicker}
+                onUserInfoShowHandler={onUserInfoShowHandler}/>
             <ChatRoomTools onEmojiPickerHandler={onEmojiPickerHandler}/>
-            <ChatRoomOnlineUsersList onlineUsers={onlineUsers} onlineUserListVisibility={state.onlineUserListVisibility}/>
+            <ChatRoomOnlineUsersList
+                onlineUsers={onlineUsers}
+                onlineUserListVisibility={state.onlineUserListVisibility}
+                onUserInfoShowHandler={onUserInfoShowHandler}/>
+            <ChatRoomMessageUserInfoPopup userInfo={state.userInfo} onUserInfoShowHandler={onUserInfoShowHandler}/>
 
         </div>
     );

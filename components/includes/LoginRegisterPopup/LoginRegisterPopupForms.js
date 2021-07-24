@@ -137,7 +137,9 @@ const LoginRegisterPopupForms = props => {
                     e => onRegisterHandler(e) :
                     e => onLoginHandler(e)
             }>
-                <span onClick={onCloseHandler} className='close-form-button'><FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color)'}} icon={faTimes}/></span>
+                <span onClick={onCloseHandler} className='close-form-button'>
+                    <FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color)'}} icon={faTimes}/>
+                </span>
                 {
                     contextData.state.loginRegisterFormPopupType === 'register' ?
                         <React.Fragment>

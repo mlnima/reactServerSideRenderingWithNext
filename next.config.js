@@ -76,6 +76,9 @@ const reWriteRoutes = {
 
             {source: `/:locale(${languages})?/user/:username`, destination: '/user/:username'},
             {source: `/user/:username`, destination: '/user/:username'},
+
+            {source: `/:locale(${languages})?/chatroom/:chatRoomName`, destination: '/chatroom/:chatRoomName'},
+            {source: `/chatroom/:chatRoomName`, destination: '/chatroom/:chatRoomName'},
             // {source: `/:locale(${languages})?/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
             // {source: `/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
             //meta route

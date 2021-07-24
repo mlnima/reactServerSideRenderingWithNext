@@ -405,8 +405,17 @@ const settings = props => {
                         </select>
                     </div>
                     <div className="site-settings-form-section">
-                        <p>Meta Page Sidebar:</p>
+                        <p>Profile Page Sidebar:</p>
                         <select name='profilePageSidebar' value={state.profilePageSidebar} onChange={e => onChangeHandler(e)}>
+                            <option value='left'>Left</option>
+                            <option value='right'>Right</option>
+                            <option value='both'>Both</option>
+                            <option value='false'>No</option>
+                        </select>
+                    </div>
+                    <div className="site-settings-form-section">
+                        <p>User Page Sidebar:</p>
+                        <select name='userPageSidebar' value={state.userPageSidebar} onChange={e => onChangeHandler(e)}>
                             <option value='left'>Left</option>
                             <option value='right'>Right</option>
                             <option value='both'>Both</option>

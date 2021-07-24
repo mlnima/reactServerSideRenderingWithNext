@@ -211,7 +211,11 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
         const cache = process.env.NODE_ENV !== 'development'
 
         const refererUrl = req?.headers?.referer;
-        const referer =   process.env.NODE_ENV !== 'development'  ?     refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
+        //  const previousRoutHasData = refererUrl.includes('/sitemap') || refererUrl.includes('/messenger') || refererUrl.includes('/chatroom') ||  refererUrl.includes('/admin')
+
+        //const referer =   process.env.NODE_ENV !== 'development'  ?  refererUrl   ? refererUrl.includes(req?.headers?.host) && previousRoutHasData  : false: false;
+        // console.log(referer)
+        const referer =   process.env.NODE_ENV !== 'development'  ?  refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
         // const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
         const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
         const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
@@ -227,10 +231,12 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
         } :{}
 
         let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
+
         return {
             domainName,
             settings:finalSettings ?? {},
             widgets:firstLoadWidgetsData?.data?.widgets ?? [],
+            // widgets: [],
             referer,
             isSameOrigin,
             isNavigatedFromPostPage,

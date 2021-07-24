@@ -9,7 +9,7 @@ const UserPageCoverImage = ({coverImage,profileImage}) => {
                 background-repeat: no-repeat;
                 background-position: center;
                 height: 300px;
-                background-image: url("${coverImage}")  ;
+                background-image:  ${coverImage ?'url("' + coverImage + '")' : 'linear-gradient(to bottom right, var(--navigation-background-color), black);' }           ;
              
                 max-height: 588px;
                

@@ -1,12 +1,14 @@
-import React, {useState} from 'react';
+import React, {useContext, useState} from 'react';
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getUserPreviewData} from "../../_variables/_userSocialAjaxVariables";
 import UserPageCoverImage from "../../components/includes/userPageComponents/UserPageCoverImage/UserPageCoverImage";
 import UserPageActionButtons from "../../components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 
 import SendMessagePopUp from "../../components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUp";
+import {AppContext} from "../../context/AppContext";
 
 const user = props => {
+    const contextData = useContext(AppContext);
     const [state, setState] = useState({
         messagePop:false
 
@@ -34,11 +36,17 @@ const user = props => {
                 coverImage={props?.userData?.coverImage}
                 profileImage={props?.userData?.profileImage}
             />
-            <UserPageActionButtons
-                setParentState={setState}
-                parentState={state}
-                _id={props?.userData?._id}
-            />
+            {
+                contextData?.userData?.username !== props?.userData?.username ?
+                    <UserPageActionButtons
+                        setParentState={setState}
+                        username = {props?.userData?.username}
+                        parentState={state}
+                        _id={props?.userData?._id}
+                    />:null
+            }
+
+            <h3>{props?.userData?.username}</h3>
             {
                 state.messagePop?
                     <SendMessagePopUp
