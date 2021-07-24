@@ -1,5 +1,4 @@
 import axios from "axios";
-import {getAbsolutePath} from "./_variables";
 
 export const updateSetting = async (type, data) => {
     const body = {
@@ -22,7 +21,8 @@ export const getSetting = async (type, domainName, cache, whichPage) => {
     const pageNameForCachedRequest = whichPage ? `&position=${whichPage}` : ''
     const body = {
         type,
-        cache
+        cache,
+        token: localStorage.wt
     };
 
     return await axios.post(domainName + `/api/admin/settings/getSetting?type=${type}${pageNameForCachedRequest}`, body)

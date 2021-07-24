@@ -356,9 +356,15 @@ export const getServerSideProps = async ({req, query}) => {
     let post;
     let postData
     let requestBody;
-    let settings;
+   // let settings;
     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
-    settings = settingsData.data.settings ? settingsData.data.settings : []
+   // settings = settingsData.data.settings ? settingsData.data.settings : []
+    let settings = settingsData.data ? {
+        identity:settingsData?.data?.settings.find(s=>s.type === 'identity'),
+       // design:settingsData?.data?.settings.find(s=>s.type === 'design')
+    } :{}
+
+
 
     const newPostData = {
         status: 'published',

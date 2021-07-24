@@ -5,7 +5,12 @@ const http = require('http');
 const server = http.createServer(app);
 const cors = require('cors')
 app.use(cors())
-console.log(process.env.REACT_APP_PRODUCTION_URL)
+const {userJoin,userLeave,getUsersListOfRoom} = require('./users')
+
+let rooms = []
+let users = []
+
+
 const io = require('socket.io')(server, {
     origin: [process.env.REACT_APP_PRODUCTION_URL,'*'],
     cors:true,
@@ -44,10 +49,11 @@ io.on('connection', socket => {
         socket.to(conversation).emit('receiveMessageFromConversation', messageData)
     })
 
-// -------------------------------------------------
+// ----------------------videoCall---------------------
     socket.emit("mySocketId", socket.id)
 
     socket.on("disconnect", () => {
+        userLeave(socket.id)
         socket.broadcast.emit("endCall")
     })
 
@@ -66,6 +72,28 @@ io.on('connection', socket => {
     socket.on("endCall", conversation => {
         socket.to(conversation).emit("endCall" )
     })
+//--------------------chatroom--------------------------
+
+
+    socket.on('joinSocketToTheRoom',  (roomName,username,userId,profileImage) => {
+        socket.join(roomName)
+        socket.to(roomName).emit('getMyDataAndShareYourData', socket.id,username,userId,profileImage)
+    });
+
+    socket.on('message', (messageData,roomName,username,userId,profileImage) => {
+        io.in(roomName).emit('message',messageData, username,userId,profileImage)
+
+    });
+
+    // socket.off('message',()=>{})
+
+    socket.on('myDataIs',(receiverId,roomName,username,userId,profileImage)=>{
+        io.to(receiverId).emit('getChatroomMemberData',roomName,username,userId,profileImage)
+
+    })
+
+
+
 
 })
 

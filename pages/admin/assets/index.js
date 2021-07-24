@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect,useLayoutEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
 import AdminLayout from '../../../components/layouts/AdminLayout'
 import {getPosts, getMeta, getComments} from '../../../_variables/ajaxPostsVariables'
@@ -28,13 +28,13 @@ const assets = props => {
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
 
-    useEffect(() => {
+    useLayoutEffect(() => {
         getAndSetAssetData()
     }, [props]);
 
-    useEffect(() => {
-        console.log(finalPageData)
-    }, [finalPageData]);
+    // useEffect(() => {
+    //     console.log(finalPageData)
+    // }, [finalPageData]);
 
     const getAndSetAssetData = async () => {
         let ajaxRequestData;

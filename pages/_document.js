@@ -9,8 +9,6 @@ class MyDocument extends Document {
         return { ...initialProps ,styles}
     }
 
-
-
     render() {
         return (
             <Html>

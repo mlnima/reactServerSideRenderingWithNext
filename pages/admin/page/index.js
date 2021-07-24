@@ -30,7 +30,7 @@ const page = props => {
                         ...res.data.pageData
                     })
                 }
-                console.log(res.data.pageData)
+
             })
         }
 
@@ -44,9 +44,7 @@ const page = props => {
         })
     }
 
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
+
 
     const onStyleChangeHandler = value => {
         setState({

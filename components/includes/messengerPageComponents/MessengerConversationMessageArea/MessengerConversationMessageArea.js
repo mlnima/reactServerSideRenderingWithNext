@@ -15,7 +15,7 @@ const MessengerConversationMessageArea = ({messages,connectedUserData}) => {
     }, [messages]);
 
     const scrollToBottomOfConversationBox = ()=>{
-        if (messageArea){
+        if (messageArea.current){
             messageArea.current.scroll({
                 top:messageArea.current.scrollHeight
             })

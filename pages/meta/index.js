@@ -5,6 +5,7 @@ import PaginationComponent from '../../components/includes/PaginationComponent/P
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {useRouter} from "next/router";
 import {AppContext} from "../../context/AppContext";
+import _ from "lodash";
 // import Posts from "../../components/includes/Posts/Posts";
 // postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
 const meta = ({metaSource, identity, dataForGettingMeta,design}) => {
@@ -14,7 +15,7 @@ const meta = ({metaSource, identity, dataForGettingMeta,design}) => {
         return (
             <MetaElement
                 postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                key={metaSource.metas.indexOf(meta)}
+                key={_.uniqueId('meta_')}
                 {...meta}
             />
         )

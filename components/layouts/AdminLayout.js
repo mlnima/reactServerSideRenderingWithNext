@@ -1,13 +1,12 @@
-import React, {useEffect, useContext, useRef} from 'react';
+import React, { useContext, useRef,useLayoutEffect} from 'react';
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import TopBar from "../adminIncludes/TopBar/AdminTopBar";
 import SideBar from "../adminIncludes/SideBar/SideBar";
 import {AppContext} from "../../context/AppContext";
-import {useRouter} from "next/router";
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 import Link from "next/link";
-import {generateAbsolutePath, initGA, logPageView} from '../../_variables/_variables'
+
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 import {getSetting} from '../../_variables/ajaxVariables'
 import {createGlobalStyle} from "styled-components";
@@ -19,27 +18,8 @@ const AdminLayout = props => {
     const contextData = useContext(AppContext);
     const container = useRef(null);
     const Admin = useRef(null);
-    const router = useRouter()
 
-    // useEffect(() => {
-    //       setTimeout(()=>openSidebarIfDeviceIsDesktop(),0)
-    // }, []);
-    //
-    // const openSidebarIfDeviceIsDesktop = ()=>{
-    //     if (window.innerWidth > 768) {
-    //         contextData.dispatchSettings(settings => ({
-    //             ...settings,
-    //             adminPanelSideBar: true
-    //         }))
-    //     }
-    // }
-
-    // useEffect(() => {
-    //     console.log(router)
-    // }, [router]);
-
-
-    useEffect(() => {
+    useLayoutEffect(() => {
         getSetting('identity', window.location.origin, false, Date.now()).then(identity => {
             contextData.dispatchSiteIdentity({
                 ...contextData.siteIdentity,

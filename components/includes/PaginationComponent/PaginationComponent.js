@@ -36,7 +36,7 @@ const PaginationComponent = props => {
 
 
         return (
-            <div className='pagination' key={props.paginationIndex}>
+            <div className='pagination' key={_.uniqueId('pagination')}>
             <style jsx>{`
                 .pagination{
                     display: flex;

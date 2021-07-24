@@ -2,6 +2,7 @@ import {useContext} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {AppContext} from "../../../../context/AppContext";
+import _ from "lodash";
 
 const AlphabeticalNumericalRangeLinksWidget = () => {
     const contextData = useContext(AppContext);
@@ -13,7 +14,7 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
             query: {...(router?.query||{}), startWith: i} || {}
         }
         return (
-            <Link key={i} href={path} as={router.asPath} scroll={false}>
+            <Link key={_.uniqueId('alphabetical-range_')} href={path} as={router.asPath} scroll={false}>
                 <a className='alphabetical-range-widget-item' onClick={contextData.functions.loadingHandler}>
                     <style jsx>{`
                            .alphabetical-range-widget-item{

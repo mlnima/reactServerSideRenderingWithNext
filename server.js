@@ -8,11 +8,11 @@ const fileUpload = require('express-fileupload');
 const cookieParser = require('cookie-parser');
 const path = require('path');
 const adminAuthMiddleware = require('./server/middlewares/adminAuthMiddleware');
-const xmlparser = require("express-xml-bodyparser");
+const xmlParser = require("express-xml-bodyparser");
 const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
-const apicache = require('apicache');
+const apiCache = require('apicache');
 const cors = require('cors');
 const compression = require('compression');
 const shouldCompress = require('./server/_variables/shouldCompress');
@@ -38,11 +38,11 @@ app.prepare().then(() => {
     server.use(cookieParser());
     server.use(fileUpload());
     server.use(bodyParser.json());
-    server.use(xmlparser());
+    server.use(xmlParser());
     server.use(compression({filter: shouldCompress}));
     server.use('/static', express.static(path.join(__dirname, 'static'),{maxAge: "365d"}))
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
-        apicache.clear(req.params.collection)
+        apiCache.clear(req.params.collection)
         res.end()
     });
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
