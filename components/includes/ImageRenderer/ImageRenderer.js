@@ -7,8 +7,11 @@ const ImageRenderer = props => {
     const [isReported, setIsReported] = useState(false)
 
     const imageUrl = props.imageUrl?.includes('http') ? props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + props.imageUrl
+
     const isImageAbsolutePath = imageUrl?.includes('http')
-    const validImageForNextImage = (((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
+   // const validImageForNextImage = (((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
+    const validImageForNextImage = false
+
     const noImageUrl = '/static/images/noImage/no-image-available.png';
   
     const imageWidth = props.postElementSize === 'list' ? 116.6 :
