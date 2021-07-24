@@ -21,9 +21,7 @@ const LoggedInItemsForMenu = props => {
                     width: 20px;
                     margin: 0 10px;
                     padding: 0;
-                
                     place-items: center;
-                
                 }
                 .svg-logo-small{
                     color: var(--navigation-text-color);
@@ -61,7 +59,7 @@ const LoggedInItemsForMenu = props => {
                     </>
                 :null
                 }
-                <button className='logged-in-item-notification-button'><FontAwesomeIcon style={{width:'20px',height:'20px',color:'var(--navigation-text-color)'}} icon={faBell} className=' svg-logo-small' /></button>
+                {/*<button className='logged-in-item-notification-button'><FontAwesomeIcon style={{width:'20px',height:'20px',color:'var(--navigation-text-color)'}} icon={faBell} className=' svg-logo-small' /></button>*/}
                 <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
                     <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faPowerOff} className=' svg-logo-small' />
                 </p>

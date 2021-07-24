@@ -4,7 +4,6 @@ import {AppContext} from "../../context/AppContext";
 import {getFirstLoadData} from '../../_variables/ajaxVariables'
 import {login} from "../../_variables/ajaxAuthVariables";
 import {useRouter} from "next/router";
-import styled from "styled-components";
 
 
 const Login = () => {

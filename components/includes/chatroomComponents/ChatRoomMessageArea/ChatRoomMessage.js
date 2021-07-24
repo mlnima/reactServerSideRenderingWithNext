@@ -28,6 +28,14 @@ class ChatRoomMessage extends PureComponent {
                     width: 30px;
                     height: 30px;
                     border-radius: 50%;
+                    
+                }
+                .chatroom-message-area-message-image:hover{
+                    transition: .5s;
+                    width: 50px;
+                    height: 50px;
+                    border-radius: 50%;
+                    
                 }
                 .chatroom-message-area-message-data{
                 background-color: var(--navigation-background-color);

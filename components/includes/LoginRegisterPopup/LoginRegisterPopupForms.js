@@ -1,0 +1,193 @@
+import React, {useState, useContext} from 'react';
+import {AppContext} from "../../../context/AppContext";
+import {login, registerUser} from "../../../_variables/ajaxAuthVariables";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+
+const LoginRegisterPopupForms = props => {
+    const contextData = useContext(AppContext);
+    const [state, setState] = useState({});
+    const [response, setResponse] = useState({
+        message: undefined,
+        type: undefined,
+    });
+
+    const onChangeHandler = e => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        })
+    };
+    const onLoginHandler = e => {
+        e.preventDefault();
+        login(state).then(res => {
+            localStorage.setItem('wt', res.data.token)
+            setResponse({
+                ...response,
+                message: res.data.message,
+                type: 'success',
+            })
+        }).then(() => {
+            contextData.functions.getAndSetUserInfo()
+        }).catch(err => {
+            setResponse({
+                ...response,
+                message: err.response.data.message,
+                type: 'error',
+            })
+        })
+    };
+    const onRegisterHandler = e => {
+        e.preventDefault()
+        registerUser(state).then(res => {
+            setResponse({
+                ...response,
+                message: res.data.message,
+                type: 'success',
+            })
+            console.log(res.data)
+        }).catch(err => {
+            setResponse({
+                ...response,
+                message: err.response.data.message,
+                type: 'error',
+            })
+            console.log(err.response)
+        })
+
+    };
+
+    const onCloseHandler = () => {
+        contextData.dispatchState({
+            ...contextData.state,
+            loginRegisterFormPopup: false
+        })
+    }
+
+    return (
+        <React.Fragment>
+            <style jsx>{`
+                    .server-response {
+                       color: ${response.type === 'success' ? 'green' : response.type === 'error' ? 'red' : 'var(--main-text-color)'} ;
+                    }
+
+                    .login-register-form{
+                        flex-direction: column;
+                        display: flex;
+                        justify-content: space-between;
+                        align-items: center;
+                        background-color: var(--navigation-background-color);
+                        height: 420px;
+                        width: 280px;
+                        max-width: 300px;
+                        padding: 10px;
+                    }
+                    .login-register-form-fields{
+                        width: 90%;
+                    }
+                    .login-register-form-field{
+                    
+                    }
+                    .login-register-form-field>input{
+                        border-radius: 5px;
+                        outline: none;
+                        border: none;
+                        padding: 3px ;
+                        height: 25px;
+                        width: 100%;
+                    }
+                    .login-register-form-field>p{
+                        color: var(--main-text-color);
+                        width: 100%;
+                    }
+                    .register-form-buttons{
+                     display: flex;
+                     justify-content: space-evenly;
+                     width: 100%;
+                    }
+                    
+                    .login-register-form-button{
+                      border: var(--main-text-color) solid 1px;
+                      padding: 10px ;
+                      width: 100px;
+                      margin: 10px;
+                      text-align: center;
+                    }
+                    
+                    .login-register-switch-form-button{
+                       background-color: var(--main-text-color);
+                       color: var(--navigation-background-color);
+                      padding: 5px ;
+                      width: 100px;
+                      margin: 10px;
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      //text-align: center;
+                    }
+                    
+                    .close-form-button{
+                      align-self: flex-end;
+                    }
+                
+                `}</style>
+            <p className='server-response'> {response.message}</p>
+            <form className='login-register-form' onSubmit={
+                contextData.state.loginRegisterFormPopupType === 'register' ?
+                    e => onRegisterHandler(e) :
+                    e => onLoginHandler(e)
+            }>
+                <span onClick={onCloseHandler} className='close-form-button'><FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color)'}} icon={faTimes}/></span>
+                {
+                    contextData.state.loginRegisterFormPopupType === 'register' ?
+                        <React.Fragment>
+                            <div className="login-register-form-fields">
+                                <div className="login-register-form-field">
+                                    <p>username</p>
+                                    <input name='username' onChange={e => onChangeHandler(e)}/>
+                                </div>
+                                <div className="login-register-form-field">
+                                    <p>email</p>
+                                    <input name='email' type='email' onChange={e => onChangeHandler(e)}/>
+                                </div>
+                                <div className="login-register-form-field">
+                                    <p>password</p>
+                                    <input name='password' type='password' onChange={e => onChangeHandler(e)}/>
+                                </div>
+                                <div className="login-register-form-field">
+                                    <p>repeat password</p>
+                                    <input name='password2' type='password' onChange={e => onChangeHandler(e)}/>
+                                </div>
+                            </div>
+                            <div className='register-form-buttons'>
+                                <span value={null} onClick={props.onTypeChangeHandler} className='login-register-switch-form-button simple-button'>Login</span>
+                                <button type='submit' className='login-register-form-button simple-button'>Register</button>
+                            </div>
+                        </React.Fragment> :
+                        <React.Fragment>
+
+                            <div className="login-register-form-fields">
+                                <div className="login-register-form-field">
+                                    <p>username</p>
+                                    <input name='username' onChange={e => onChangeHandler(e)}/>
+                                </div>
+                                <div className="login-register-form-field">
+                                    <p>password</p>
+                                    <input name='password' type='password' onChange={e => onChangeHandler(e)}/>
+                                </div>
+                            </div>
+
+                            <div className='register-form-buttons'>
+                                <button type='submit' className='login-register-form-button simple-button'>Login</button>
+                                <span onClick={props.onTypeChangeHandler} className='login-register-switch-form-button simple-button'>Register</span>
+                            </div>
+
+
+                        </React.Fragment>
+                }
+            </form>
+
+        </React.Fragment>
+    );
+};
+export default LoginRegisterPopupForms;

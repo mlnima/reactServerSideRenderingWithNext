@@ -20,7 +20,9 @@ const AppProvider = props => {
         deviceWidth:320,
         checkoutSlideEnable:false,
         designSet:false,
-        identitySet:false
+        identitySet:false,
+        loginRegisterFormPopup:false,
+        loginRegisterFormPopupType:'login'
     });
 
     const [alert, dispatchAlert] = useState({

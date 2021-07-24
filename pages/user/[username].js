@@ -1,13 +1,12 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useState} from 'react';
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getUserPreviewData} from "../../_variables/_userSocialAjaxVariables";
 import UserPageCoverImage from "../../components/includes/userPageComponents/UserPageCoverImage/UserPageCoverImage";
 import UserPageActionButtons from "../../components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
-import {useRouter} from "next/router";
+
 import SendMessagePopUp from "../../components/includes/userPageComponents/SendMessagePopUp/SendMessagePopUp";
 
 const user = props => {
-    const router = useRouter()
     const [state, setState] = useState({
         messagePop:false
 

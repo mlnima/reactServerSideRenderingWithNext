@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 
 const AppLayout = dynamic(() => import('../components/layouts/AppLayout'))
+const LoginRegisterPopup = dynamic(() => import('../components/includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false})
 const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'))
 const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false})
 const AppProvider = dynamic(() => import('../context/AppContext'))
@@ -43,7 +44,7 @@ const MyApp = ({Component, pageProps}) => {
                  `}</style>
             </AppProvider>
         )
-    } else if (router.pathname.includes('/messenger') || router.pathname.includes('/chatRoom') ) {
+    } else if (router.pathname.includes('/messenger') || router.pathname.includes('/chatroom') ) {
         return (
             <AppProvider>
                 <MessengerLayout
@@ -54,6 +55,7 @@ const MyApp = ({Component, pageProps}) => {
                 >
                     <Component {...pageProps} />
                 </MessengerLayout>
+                <LoginRegisterPopup/>
             </AppProvider>
         )
     } else return (
@@ -71,7 +73,7 @@ const MyApp = ({Component, pageProps}) => {
             >
                 <Component {...pageProps} />
             </AppLayout>
-
+             <LoginRegisterPopup/>
             <CookiePopup identity={pageProps.identity}/>
         </AppProvider>
     )

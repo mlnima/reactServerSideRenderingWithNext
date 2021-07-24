@@ -1,0 +1,34 @@
+import Authentication from "../../widgets/Authentication/Authentication";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
+import {useRouter} from "next/router";
+
+const MessengerConversationListHeader = () => {
+    const router = useRouter()
+
+    return (
+        <div className='messenger-conversations-list-header'>
+            <style jsx>{`
+                .messenger-conversations-list-header{
+                    background-color: var(--navigation-background-color);
+                    height: 50px;
+                    padding:  10px;
+                    width: 100%;
+                    display:flex;
+                    justify-content : space-between;
+                    align-items:center;
+                }
+                .messenger-conversation-header-back-btn{
+                    background-color: transparent;
+                    border: none;
+                    margin: 0 10px;
+                }
+            `}</style>
+            <button onClick={()=>router.back()} className='messenger-conversation-header-back-btn'>
+                <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />
+            </button>
+            <Authentication/>
+        </div>
+    );
+};
+export default MessengerConversationListHeader;

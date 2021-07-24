@@ -1,31 +1,23 @@
+import React, {useState} from 'react';
 import _ from "lodash";
+import {faArrowRight, faUsers} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import ChatRoomOnlineUsersListItem from "./ChatRoomOnlineUsersListItem";
 
+const ChatRoomOnlineUsersList = ({onlineUsers,onlineUserListVisibility}) => {
 
-const ChatRoomOnlineUsersList = ({onlineUsers}) => {
+    const [state,setstate] = useState({
+        visible:false
+    })
 
+    const onOpenHandler = ()=>{
+        state.visible? setstate({...state,visible:true}):setstate({...state,visible:false})
+    }
 
-
+console.log(onlineUserListVisibility)
    const renderOnlineUsers = onlineUsers.map(onlineUser=>{
        return(
-           <div className='chatroom-online-users-list-item' key={_.uniqueId('message_')}>
-               <style jsx>{`
-.chatroom-online-users-list-item{
-display: flex;
-align-items: center;
-}
-.chatroom-online-users-list-item-image{
-width: 30px;
-height: 30px;
-border-radius: 50%;
-}
-.chatroom-online-users-list-item-username{
-color:var(--navigation-text-color);
-margin-left: 5px;
-}
-`}</style>
-               <img className='chatroom-online-users-list-item-image' src={onlineUser.profileImage} alt=""/>
-               <p className='chatroom-online-users-list-item-username'>{onlineUser.username}</p>
-           </div>
+<ChatRoomOnlineUsersListItem key={_.uniqueId('message_')} onlineUser={onlineUser}/>
        )
    })
 
@@ -35,15 +27,20 @@ margin-left: 5px;
         <div className='chatroom-online-users-list'>
             <style jsx>{`
                 .chatroom-online-users-list{
+                    display: ${onlineUserListVisibility ? 'initial' : 'none' };
                     background-color: var(--navigation-background-color);
                     position: fixed;
                     width: 150px;
-                    top:33px;
+                    top:50px;
                     right: 0;
-                    bottom: 0;
+                    bottom: 50px;
                     padding: 5px;
+                    overflow-y: scroll;
+                    
                 }
             `}</style>
+
+
             {renderOnlineUsers}
         </div>
     );

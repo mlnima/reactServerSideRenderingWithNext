@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import MessengerConversationPreview from "./MessengerConversationPreview";
 import {AppContext} from "../../../../context/AppContext";
 import _ from "lodash";
+import MessengerConversationListHeader from "./MessengerConversationListHeader";
 
 const MessengerConversationsList = ({conversations, setConversations}) => {
     const contextData = useContext(AppContext);
@@ -14,19 +15,22 @@ const MessengerConversationsList = ({conversations, setConversations}) => {
 
     return (
         <div className='messenger-conversations-list'>
-            <style jsx>{`
+<style jsx>{`
 .messenger-conversations-list{
 display: flex;
 flex-direction: column;
 align-items: center;
 justify-content: center;
-//width: 100%;
+
 }
-            `}</style>
+.no-message{
+color: var(--navigation-text-color);
+}
+
+`}</style>
+           <MessengerConversationListHeader/>
             {renderConversationsPreview}
-            {/*{renderConversationsPreview}*/}
-            {/*{renderConversationsPreview}*/}
-            {/*{renderConversationsPreview}*/}
+            {!conversations || conversations.length < 1 ? <p className='no-message'>there is no messages yet</p> :null}
         </div>
     );
 };

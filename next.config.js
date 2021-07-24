@@ -73,8 +73,9 @@ const reWriteRoutes = {
             //profile pages
             {source: `/:locale(${languages})?/profile`, destination: '/profile'},
             {source: `/profile`, destination: '/profile'},
-            {source: `/:locale(${languages})?/user/:username`, destination: '/user'},
-            {source: `/user/:username`, destination: '/user'},
+
+            {source: `/:locale(${languages})?/user/:username`, destination: '/user/:username'},
+            {source: `/user/:username`, destination: '/user/:username'},
             // {source: `/:locale(${languages})?/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
             // {source: `/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
             //meta route

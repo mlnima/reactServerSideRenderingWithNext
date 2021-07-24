@@ -1,4 +1,4 @@
-import React, {useEffect, useLayoutEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useContext, useRef} from 'react';
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {useRouter} from "next/router";
 import {AppContext} from "../../context/AppContext";
@@ -12,14 +12,34 @@ const chatRoom = props => {
     const messageAreaRef = useRef(null)
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
-        messages: []
+        onlineUserListVisibility:false,
+        emojiPicker:false
     });
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [isJoined, setIsJoined] = useState(false)
     const router = useRouter()
 
+    const onOnlineUserListVisibilityChangeHandler = ()=>{
+        state.onlineUserListVisibility ?
+            setState({...state,onlineUserListVisibility:false}):
+            setState({...state,onlineUserListVisibility:true})
+    }
+    const onEmojiPickerHandler = ()=>{
+        state.emojiPicker ?
+            setState({...state,emojiPicker:false}):
+            setState({...state,emojiPicker:true})
+    }
+
+
     useEffect(() => {
+        if (contextData.userData._id){
+            setOnlineUsers(onlineUsers=>[
+                ...onlineUsers,
+                {username:contextData.userData.username, userId:contextData.userData._id, profileImage:contextData.userData.profileImage}
+            ])
+        }
+
         joinSocketToTheRoom().then(() => {
             socket.emit('joinSocketToTheRoom',
                 router.query.chatRoomName,
@@ -80,10 +100,10 @@ const chatRoom = props => {
 
     return (
         <div>
-            <ChatRoomHeader/>
-            <ChatRoomMessageArea onlineUsers={onlineUsers} messages={messages} messageAreaRef={messageAreaRef}/>
-            <ChatRoomTools/>
-            <ChatRoomOnlineUsersList onlineUsers={onlineUsers}/>
+            <ChatRoomHeader onOnlineUserListVisibilityChangeHandler={onOnlineUserListVisibilityChangeHandler}/>
+            <ChatRoomMessageArea onlineUsers={onlineUsers} messages={messages} messageAreaRef={messageAreaRef} emojiPicker={state.emojiPicker}/>
+            <ChatRoomTools onEmojiPickerHandler={onEmojiPickerHandler}/>
+            <ChatRoomOnlineUsersList onlineUsers={onlineUsers} onlineUserListVisibility={state.onlineUserListVisibility}/>
 
         </div>
     );

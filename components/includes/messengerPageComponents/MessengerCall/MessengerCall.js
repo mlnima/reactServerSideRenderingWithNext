@@ -88,15 +88,19 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
         }
         
         .messenger-call-actions-buttons{
-           display: flex;
-           justify-content: center;
-          // flex-direction: column;
-           align-items: center;
-           flex-wrap: wrap;
+            background-color: var(--navigation-background-color);
+            opacity: .5;
+            margin: auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
             position: absolute;
             width: 100%;
-            height: 300px;
-            bottom: 0;
+            max-width: 300px;
+            height: 50px;
+            padding: 5px 10px ;
+             bottom: 0;
             left:0;
             right:0;
         }
@@ -110,7 +114,7 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             height: 50px;
             outline:none;
             border:none;
-            margin: 30px 0;
+            //margin: 30px 0;
         }
         
         //.messenger-call-media-controls-buttons{
@@ -128,7 +132,7 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             height: 50px;
             outline:none;
             border:none;
-            margin: 50px 0;
+            margin:  0;
         }
         
         `}</style>

@@ -18,7 +18,7 @@ const conversation = props => {
         answering: false,
         callAccepted: false,
         receivingCall: false,
-        camera:'user'
+        camera: 'user'
     });
 
     const [myStream, setMyStream] = useState()
@@ -49,32 +49,32 @@ const conversation = props => {
         }
     }, [contextData.userData]);
 
-    socket.emit('joinConversation', router.query.conversation)
-    socket.on('receiveMessageFromConversation', messageData => {
-        setMessages([...messages, messageData])
-    })
-
-    socket.on("incomingCallFromConversation", data => {
-        getUserMedia({video: true, audio: true}).then(myStreamData => {
-            setMyStream(myStreamData)
+    useEffect(() => {
+        socket.emit('joinConversation', router.query.conversation)
+        socket.on('receiveMessageFromConversation', messageData => {
+            setMessages(messages=>[...messages, messageData])
         })
+        socket.on("incomingCallFromConversation", data => {
+            getUserMedia({video: true, audio: true}).then(myStreamData => {
+                setMyStream(myStreamData)
+            })
 
-        setCallerData({
-            callerId: data.callerId,
-            callerName: data.callerName,
-            callerStreamData: data.callerStreamData
+            setCallerData({
+                callerId: data.callerId,
+                callerName: data.callerName,
+                callerStreamData: data.callerStreamData
+            })
+
+            setState({
+                ...state,
+                receivingCall: true
+            })
         })
-
-        setState({
-            ...state,
-            receivingCall: true
+        socket.on("mySocketId", id => {
+            setMySocketId(id)
         })
-        //setReceivingCall(true)
-    })
+    }, []);
 
-    socket.on("mySocketId", id => {
-        setMySocketId(id)
-    })
 
     const peerOnErrorHandler = error => {
         console.log(error)
@@ -92,12 +92,7 @@ const conversation = props => {
             answerCall()
         }
     }, [callAccepted]);
-    // useEffect(() => {
-    //     if (myStream && myVideoRef.current && state.receivingCall) {
-    //         myVideoRef.current.srcObject = myStream
-    //     }
-    //
-    // }, [myStream, state.receivingCall]);
+
 
     useEffect(() => {
         if (userStream) {
@@ -106,13 +101,12 @@ const conversation = props => {
     }, [userStream]);
 
 
-
-    const getUserMedia = options =>{
+    const getUserMedia = options => {
         return navigator?.mediaDevices?.getUserMedia(options)
     }
 
 
-    const switchMediaHandler = () =>{
+    const switchMediaHandler = () => {
         const options = {
             video: {
                 facingMode: 'user', // Or 'environment'
@@ -164,7 +158,7 @@ const conversation = props => {
                 peerOnErrorHandler(error)
             })
 
-            socket.on('endCall',()=>{
+            socket.on('endCall', () => {
 
                 setState({
                     ...state,
@@ -202,7 +196,7 @@ const conversation = props => {
             stream: myStream
         })
 
-        socket.on('endCall',()=>{
+        socket.on('endCall', () => {
             setState({
                 ...state,
                 calling: false,
@@ -234,7 +228,7 @@ const conversation = props => {
 
     const endCallHandler = () => {
 
-        socket.emit("endCall",router.query.conversation)
+        socket.emit("endCall", router.query.conversation)
         setState({
             ...state,
             calling: false,

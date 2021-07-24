@@ -44,12 +44,14 @@ const MessengerConversationMessageTools = props => {
                     display: flex;
                     justify-content: center;
                     align-items: center;
-                    width: 100%;
+                    width: calc(100% - 4px);
                     
                 }
                 
                 .messenger-conversation-message-tools-text{
-                    width: 95%;
+                    display: flex;
+                    justify-content: center;
+                    width: calc(100% - 4px);
                 }
                 .messenger-conversation-message-tools-text-input{
                     border-radius: 50px;
@@ -62,7 +64,7 @@ const MessengerConversationMessageTools = props => {
                     position: absolute;
                     display: flex;
                     justify-content: center;
-                    right: 2.5%;
+                    right: 8px;
                     //width: 10%;
                 }
                 .messenger-conversation-message-tools-btn{

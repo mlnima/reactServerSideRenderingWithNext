@@ -5,7 +5,9 @@ import socket from '../../../../_variables/socket';
 import {useRouter} from "next/router";
 import {AppContext} from "../../../../context/AppContext";
 
-const ChatRoomTools = props => {
+
+
+const ChatRoomTools = ({onEmojiPickerHandler}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
     const [state, setState] = useState({
@@ -35,7 +37,7 @@ const ChatRoomTools = props => {
             <style jsx>{`
                 .chatroom-tools{
                     position: fixed;
-                    bottom: 0;
+                    bottom: 0px;
                     left: 0;
                     right: 0;
                     height: 40px;
@@ -61,6 +63,9 @@ const ChatRoomTools = props => {
                     height: 40px;
                     padding: 5px 10px;
                 }
+                
+
+
             `}</style>
 
             <form className='chatroom-tools-content' onSubmit={e=>onSubmitHandler(e)}>

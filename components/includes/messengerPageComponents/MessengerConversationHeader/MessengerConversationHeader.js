@@ -1,20 +1,9 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowLeft, faBars, faPhoneAlt, faVideo} from "@fortawesome/free-solid-svg-icons";
-// import Peer from 'simple-peer'
-// import socket from '../../../../_variables/socket'
 
 const MessengerConversationHeader = ({profileImage,username,attemptForCall}) => {
     const router = useRouter()
-
-
-    const onVideoCallHandler = () =>{
-
-    }
-    const onVoiceCallHandler = () =>{
-
-    }
 
     return (
         <div className='messenger-conversation-header'>
@@ -61,7 +50,7 @@ const MessengerConversationHeader = ({profileImage,username,attemptForCall}) => 
               
              `}</style>
             <div className='messenger-conversation-header-left'>
-                <button onClick={()=>router.push('/messenger')} className='messenger-conversation-header-back-btn'>
+                <button onClick={()=>router.back()} className='messenger-conversation-header-back-btn'>
                     <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />
                 </button>
                 <img src={profileImage || '/static/images/noImage/no-image-available.png'} alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>
