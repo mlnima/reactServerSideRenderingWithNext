@@ -24,6 +24,7 @@ const widgetDataSchema =  mongoose.Schema({
     mediaUrl: String,
     mediaType: String,
     widgetIndex: Number,
+    selectedMetaForPosts: Schema.Types.ObjectID,
     count: Number,
     stayOpen: Boolean,
     translations: mongoose.Mixed,
