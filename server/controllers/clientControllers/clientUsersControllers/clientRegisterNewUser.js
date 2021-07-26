@@ -27,6 +27,7 @@ module.exports =  (req, res) =>{
                                 email: email,
                                 role: 'subscriber',
                                 password: hash,
+                                keyMaster:false
                             };
                             let newUserData = userSchema(userData);
                             newUserData.save().then(() => {
