@@ -21,8 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sw.js.map" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js.map" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientRegisterNewUser.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/models/userSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/userSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -707,7 +705,7 @@
       <workItem from="1627172082512" duration="4373000" />
       <workItem from="1627204588911" duration="42926000" />
       <workItem from="1627294303392" duration="16286000" />
-      <workItem from="1627332445305" duration="8310000" />
+      <workItem from="1627332445305" duration="8866000" />
     </task>
     <servers />
   </component>
