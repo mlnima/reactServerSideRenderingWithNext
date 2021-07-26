@@ -45,7 +45,6 @@ const LoginRegisterPopupForms = props => {
                 message: res.data.message,
                 type: 'success',
             })
-            console.log(res.data)
         }).catch(err => {
             setResponse({
                 ...response,

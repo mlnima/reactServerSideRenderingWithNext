@@ -35,8 +35,8 @@ module.exports =  (req, res) =>{
                                 res.end()
                             }).catch(err => {
                                 console.log(err)
-                                res.json({ message: 'something went wrong', type: 'error' });
-                                res.status(503).json({message:'something went wrong please try again later'})
+                               // res.json({ message: 'something went wrong', type: 'error' });
+                                res.status(503).json({message:'something went wrong'})
                                 res.end()
                             });
 
