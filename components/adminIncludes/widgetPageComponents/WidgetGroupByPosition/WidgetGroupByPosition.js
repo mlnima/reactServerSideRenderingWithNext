@@ -9,7 +9,7 @@ const WidgetGroupByPosition = props => {
         const dataWithIndex = {
             data: {
                 ...widget.data,
-                widgetIndex: widget.data.widgetIndex ? widget.data.widgetIndex : props.widgetsInGroupByPosition.indexOf(widget)
+                widgetIndex: widget?.data?.widgetIndex ? widget.data.widgetIndex : props.widgetsInGroupByPosition.indexOf(widget)
             }
         }
         const widgetData = {...widget, ...dataWithIndex}

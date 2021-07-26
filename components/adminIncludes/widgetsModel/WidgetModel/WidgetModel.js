@@ -338,30 +338,9 @@ const WidgetModel = props => {
                 metaData:[]
             }
         }
-
-        if (props.isPost) {
-            const findIndexOfTheWidget = props.state.widgets.findIndex(w => {
-                return ((w.widgetIndex === props.widgetIndex) && (w.type === props.data.type))
-            })
-            const updatedWidgets = [
-                ...props.state.widgets.slice(0, findIndexOfTheWidget),
-                {
-                    ...widgetData,
-                    posts:[],
-                    metaData:[]
-                },
-                ...props.state.widgets.slice(findIndexOfTheWidget + 1),
-            ];
-            props.setState({
-                ...props.state,
-                widgets: updatedWidgets,
-
-            })
-        } else {
-            updateWidgets(dataToSave).then(() => {
-                props.getAndSetWidgetsData()
-            })
-        }
+        updateWidgets(dataToSave).then(() => {
+            props.getAndSetWidgetsData()
+        })
     };
 
     //
@@ -384,7 +363,7 @@ const WidgetModel = props => {
                     </div>
                     <div className='widgetInfo widgetSection'>
                         <p className='widget-info-id'>ID :</p>
-                        <p>{props.widgetId || props.state.widgetId || 'XXX'}</p>
+                        <p>{props.widgetId || props.state?.widgetId || 'XXX'}</p>
                     </div>
                     <TextInputFieldForWidget inputTitle='Name:' name='name' type='text' value={widgetData.name} classNameValue='name' placeHolder='name'
                                              onChangeHandler={e => onChangeHandler(e)}

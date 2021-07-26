@@ -14,24 +14,25 @@ const mongoose = require('mongoose');
     try {
         const sortMethod = widgetData.sortBy ? widgetData.sortBy === 'latest' ? {lastModify: -1} : {[widgetData.sortBy]: -1} : {lastModify: -1};
 
-        const selectedMetaIdIsValid = widgetData.data?.selectedMetaForPosts ? mongoose.Types.ObjectId.isValid(widgetData.data?.widgetData) : false;
+        const selectedMetaIdIsValid = widgetData.selectedMetaForPosts ? mongoose.Types.ObjectId.isValid(widgetData.selectedMetaForPosts) : false;
 
-        const selectedMetaId = widgetData?.selectedMetaForPosts && selectedMetaIdIsValid ?
-            widgetData?.selectedMetaForPosts :
-            await metaSchema.findOne({name: widgetData?.selectedMetaForPosts}).select('_id').exec()
+        const findSelectedMetaId = widgetData?.selectedMetaForPosts && selectedMetaIdIsValid ?
+                                   widgetData?.selectedMetaForPosts :
+                                   await metaSchema.findOne({name: widgetData?.selectedMetaForPosts}).select('_id').exec().then(meta=>meta?meta.id:null)
 
-        const selectedMetaData = selectedMetaId ? typeof selectedMetaId === 'string' ? selectedMetaId : selectedMetaId._id : null
+        const selectedMetaId = findSelectedMetaId ? findSelectedMetaId : null
 
-        const selectedMeta = selectedMetaData ? {$or: [{tags: selectedMetaData}, {categories: selectedMetaData}, {actors: selectedMetaData}]} : {}
+
+        const selectedMeta =  mongoose.Types.ObjectId.isValid(selectedMetaId) ? {$or: [{tags: selectedMetaId}, {categories: selectedMetaId}, {actors: selectedMetaId}]} : {}
 
         const countPosts = widgetData.sortBy === 'random' ? await postSchema.countDocuments({$and: [{status: 'published'}, selectedMeta]}).exec() : null
 
         const posts = widgetData.type === 'posts' || widgetData.type === 'postsSwiper' ?
-            await postSchema.find({$and: [{status: 'published'}, selectedMeta]})
-                .select('_id')
-                .skip(widgetData.sortBy === 'random' ? Math.floor(Math.random() * countPosts) : false)
-                .limit(parseInt(widgetData.count))
-                .sort(sortMethod).exec() : []
+                      await postSchema.find({$and: [{status: 'published'}, selectedMeta]})
+                        .select('_id')
+                        .skip(widgetData.sortBy === 'random' ? Math.floor(Math.random() * countPosts) : false)
+                        .limit(parseInt(widgetData.count))
+                        .sort(sortMethod).exec() : []
 
         const dateForUpdateWidget = {
             ...widgetData,
@@ -53,7 +54,7 @@ const adminUpdateWidget = async (req, res) => {
     const sortMethod = widgetData.sortBy ? widgetData.sortBy === 'latest' ? {lastModify: -1} : {[widgetData.sortBy]: -1} : {lastModify: -1};
 
         if (widgetData.type === 'posts') {
-            console.log(widgetData.posts)
+
             // const selectedMetaIdIsValid = widgetData.data?.selectedMetaForPosts ? mongoose.Types.ObjectId.isValid(widgetData.data?.widgetData) : false;
             //  const selectedMetaId = widgetData?.selectedMetaForPosts && selectedMetaIdIsValid ?
             //      widgetData?.selectedMetaForPosts :
@@ -81,8 +82,11 @@ const adminUpdateWidget = async (req, res) => {
             //     console.log(err)
             // })
 
+
+
             updatePostWidget(req.body?.widgetData).then(async updatedWidgets=>{
                 await widgetSchema.findByIdAndUpdate(widgetId, {data:updatedWidgets}, {new: true}).exec().then(updatedWidgets => {
+
                     res.json({updatedWidgets})
                     res.end()
                 }).catch(error => {
@@ -91,6 +95,7 @@ const adminUpdateWidget = async (req, res) => {
                     res.end()
                 })
             })
+
         }else if (widgetData.type === 'meta'){
             const metas = widgetData.metaType ? await metaSchema.find({type: widgetData.metaType}).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
             const dateForUpdateWidget = {
