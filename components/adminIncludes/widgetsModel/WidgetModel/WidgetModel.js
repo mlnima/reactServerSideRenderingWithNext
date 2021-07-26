@@ -248,7 +248,9 @@ const WidgetModel = props => {
             _id: props.widgetId,
             data: {
                 ...widgetData,
-                stayOpen: !widgetData.stayOpen
+                stayOpen: !widgetData.stayOpen,
+                posts:[],
+                metaData:[]
             }
         }
         updateWidgets(dataToSave).then(() => {
@@ -313,7 +315,9 @@ const WidgetModel = props => {
                 _id: props.widgetId || '',
                 data: {
                     ...widgetData,
-                    widgetIndex: valueToSet
+                    widgetIndex: valueToSet,
+                    posts:[],
+                    metaData:[]
                 }
             }
             updateWidgets(dataToSave).then(() => {
@@ -330,23 +334,28 @@ const WidgetModel = props => {
             _id: props.widgetId ? props.widgetId : '',
             data: {
                 ...widgetData,
+                posts:[],
+                metaData:[]
             }
         }
 
-        dataToSave.data.posts = []
-        dataToSave.data.metaData = []
         if (props.isPost) {
             const findIndexOfTheWidget = props.state.widgets.findIndex(w => {
                 return ((w.widgetIndex === props.widgetIndex) && (w.type === props.data.type))
             })
             const updatedWidgets = [
                 ...props.state.widgets.slice(0, findIndexOfTheWidget),
-                widgetData,
+                {
+                    ...widgetData,
+                    posts:[],
+                    metaData:[]
+                },
                 ...props.state.widgets.slice(findIndexOfTheWidget + 1),
             ];
             props.setState({
                 ...props.state,
-                widgets: updatedWidgets
+                widgets: updatedWidgets,
+
             })
         } else {
             updateWidgets(dataToSave).then(() => {

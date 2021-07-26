@@ -53,6 +53,7 @@ const adminUpdateWidget = async (req, res) => {
     const sortMethod = widgetData.sortBy ? widgetData.sortBy === 'latest' ? {lastModify: -1} : {[widgetData.sortBy]: -1} : {lastModify: -1};
 
         if (widgetData.type === 'posts') {
+            console.log(widgetData.posts)
             // const selectedMetaIdIsValid = widgetData.data?.selectedMetaForPosts ? mongoose.Types.ObjectId.isValid(widgetData.data?.widgetData) : false;
             //  const selectedMetaId = widgetData?.selectedMetaForPosts && selectedMetaIdIsValid ?
             //      widgetData?.selectedMetaForPosts :
