@@ -2,9 +2,6 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import LoggedOutItemsMenu from "./LoggedOutItemsMenu/LoggedOutItemsMenu";
 import LoggedInItemsForMenu from "./LoggedInItemsForMenu/LoggedInItemsForMenu";
-import styled from "styled-components";
-
-
 
 const Authentication = () => {
     const contextData = useContext(AppContext);
@@ -16,6 +13,10 @@ const Authentication = () => {
 
     return (
         <div className='auth-buttons'>
+            <style jsx>{`
+            .auth-buttons{
+            }
+            `}</style>
             {loggedIn ? <LoggedInItemsForMenu position='topBar'/> : <LoggedOutItemsMenu position='topBar'/>}
         </div>
     );

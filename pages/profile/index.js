@@ -20,6 +20,7 @@ const Profile = props => {
     //     })
     // }, []);
 
+
     return (
         <div className='profile-page main'>
             <style jsx>{`

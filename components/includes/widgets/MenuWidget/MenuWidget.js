@@ -55,86 +55,82 @@ const MenuWidget = props => {
         <ul className='menu-widget'>
         <style jsx>{`
             .menu-widget{
-             background-color: var(--navigation-background-color);
-                    margin-block-start: 0;
-                    margin-block-end: 0;
-                    margin-inline-start: 0;
-                    margin-inline-end: 0;
-                    padding-inline-start: 0;
+                background-color: var(--navigation-background-color);
+                margin-block-start: 0;
+                margin-block-end: 0;
+                margin-inline-start: 0;
+                margin-inline-end: 0;
+                padding-inline-start: 0;
             }
             .navigation-mobile-button{
-                background-color: transparent;
-                border: none;
-                outline: none;
-                margin: 0;
-                width: 40px;
-                height: 40px;
-                transition: all .5s linear;
-                color:var(--navigation-text-color);
+            background-color: transparent;
+            border: none;
+            outline: none;
+            margin: 0;
+            //width: 40px;
+            //height: 40px;
+            transition: all .5s linear;
+            color:var(--navigation-text-color);
             }
-            .navigation-mobile-button-logo{
-                width: 40px;
-                height: 40px;
-            }
+            //.navigation-mobile-button-logo{
+            //width: 40px;
+            //height: 40px;
+            //}
             .menu-widget-items{
             background-color: var(--navigation-background-color);
-                position:fixed;
-                top: 0;
-                left: 0;
-                //right: 0;
-                bottom: 0;
-                width: 100%;
-                max-width: 50vw;
-               
-                z-index: 1000;
-                //display: flex;
-                display: none;
-                flex-direction: column;
-                justify-content: flex-start;
-                padding: 48px 0 0 0;
-                align-items: center;
-                //margin: 48px 0 0 0;
-                margin: 0;
+            position:fixed;
+            top: 0;
+            left: 0;
+            bottom: 0;
+            width: 100%;
+            max-width: 50vw;
+            z-index: 1000;
+            display: none;
+            flex-direction: column;
+            justify-content: flex-start;
+            padding: 48px 0 0 0;
+            align-items: center;
+            margin: 0;
             }  
             .navigation-close-button{
-                position:fixed;
-                top:5px;
-                left :2px;
-                background-color: transparent;
-                border: none;
-                width: 40px;
-                height: 40px;
-                color: var(--navigation-text-color);
-                transform: rotate(90deg);
+            position:fixed;
+            top:5px;
+            left :2px;
+            background-color: transparent;
+            border: none;
+            width: 40px;
+            height: 40px;
+            color: var(--navigation-text-color);
+            transform: rotate(90deg);
             } 
-@media only screen and (min-width: 768px) {
-.navigation-mobile-button,.navigation-close-button{
-display: none;
-}
-.menu-widget-items{
-background-color: transparent;
-display: flex;
-flex-direction: row;
-width: initial;
-max-width: 100vw;
-position: initial;
-animation: initial ;
-padding: 0;
-margin:0;
-}
-}
+            @media only screen and (min-width: 768px) {
+            .navigation-mobile-button,.navigation-close-button{
+            display: none;
+            }
+            .menu-widget-items{
+            background-color: transparent;
+            display: flex;
+            flex-direction: row;
+            width: initial;
+            max-width: 100vw;
+            position: initial;
+            animation: initial ;
+            padding: 0;
+            margin:0;
+            }
+            }
         `}</style>
             <button
                 onClick={() => open ? setOpen(false) : setOpen(true)}
                 className='navigation-mobile-button' aria-label="Center Align">
-                <FontAwesomeIcon  icon={faBars} className='navigation-mobile-button-logo' />
+                <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}}  icon={faBars} className='navigation-mobile-button-logo' />
             </button>
 
             <ul className='menu-widget-items' ref={menuItemsElement} style={{display: open ? 'flex' : 'none'}}>
                 <span
                     onClick={() => open ? setOpen(false) : setOpen(true)}
                     className='navigation-close-button'>
-                    <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo svg-logo-medium' />
+                    <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}}  icon={faTimes} className='navigation-mobile-button-logo' />
                 </span>
                 {renderMenuItems}
             </ul>

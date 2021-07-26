@@ -6,7 +6,7 @@ import {AppContext} from "../../../../context/AppContext";
 const ChatRoomMessageArea = ({messages,messageAreaRef,emojiPicker,onUserInfoShowHandler}) => {
     const contextData = useContext(AppContext);
     return (
-        <main ref={messageAreaRef} className='chatroom-message-area'>
+        <main ref={messageAreaRef} className='chatroom-message-area' id='chatroom-message-area'>
             <style jsx>{`
                 .chatroom-message-area{
                     position: fixed;
@@ -32,6 +32,7 @@ const ChatRoomMessageArea = ({messages,messageAreaRef,emojiPicker,onUserInfoShow
                     <ChatRoomMessage message={message} key={_.uniqueId('message_')} userId={contextData.userData._id} onUserInfoShowHandler={onUserInfoShowHandler}/>
                 )
             })}
+
 
         </main>
     );

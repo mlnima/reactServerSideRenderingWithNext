@@ -97,7 +97,7 @@ const SearchInputComponent = props => {
             <style jsx>{`
                 .search-bar{
                     display: flex;
-                    height: 24px;
+                    height: 35px;
                     width: clamp(100px, 200px, 400px);
                     font-size: 1em;
                 }
@@ -140,10 +140,10 @@ const SearchInputComponent = props => {
                     background-color: transparent;
                     outline: none;
                 }
-                .search-bar-btn-open-svg{
-                    width: 15px;
-                    height: 15px;
-                }
+                //.search-bar-btn-open-svg{
+                //    width: 15px;
+                //    height: 15px;
+                //}
                 .search-bar-btn-open{
                       border:none;
                       display: flex;
@@ -152,10 +152,10 @@ const SearchInputComponent = props => {
                       background-color: transparent;
                       outline: none;
                 }
-                .search-bar-btn-open-svg{
-                      width: 20px;
-                      height: 20px;
-                }
+                //.search-bar-btn-open-svg{
+                //      width: 20px;
+                //      height: 20px;
+                //}
                 @media only screen and (min-width: 768px){
                                 .search-bar{
                     display: flex;
@@ -170,14 +170,14 @@ const SearchInputComponent = props => {
                     {props.mobileMode ?
                         <button className='search-bar-btn-close' aria-label='Center Align' onClick={(e) => onOpenCloseHandler(e)}>
 
-                            <FontAwesomeIcon icon={faTimes} className='search-bar-btn-open-svg'/>
+                            <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}} icon={faTimes} className='search-bar-btn-open-svg'/>
                         </button> : null}
                     <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
-                    <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon icon={faSearch} className=' svg-logo-small'/></button>
+                    <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}} icon={faSearch} /></button>
                 </form> :
                 <button className='search-bar-btn-open' aria-label='Center Align' onClick={(e) => onOpenCloseHandler(e)}>
 
-                    <FontAwesomeIcon icon={faSearch} className='search-bar-btn-open-svg'/>
+                    <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}} icon={faSearch} className='search-bar-btn-open-svg'/>
                 </button>
             }
 

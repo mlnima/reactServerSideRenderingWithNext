@@ -3,6 +3,7 @@ import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
 import styled from "styled-components";
 import React from "react";
+
 let StyledSection = styled.section`
   .small-posts-content {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
@@ -77,9 +78,9 @@ let StyledSection = styled.section`
 ${props => props.customStyles}
 `
 
+
+
 const Widget = props => {
-
-
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
     return (
         <StyledSection customStyles={props.data?.customStyles || ''}
@@ -87,20 +88,21 @@ const Widget = props => {
                        {...idAttribute}>
             <WidgetHeader {...props.data}/>
             <WidgetText {...props.data} id={props._id}/>
-            {props.widgetToRender ? <props.widgetToRender
+            {props.widgetToRender ?
+                <props.widgetToRender
                 currentPageSidebar={props.currentPageSidebar}
                 isMobile={props.isMobile}
                 {...props.data}
-                id={props._id}
+                widgetId={props.widgetId}
                 widget={true}
                 viewType={props.viewType}
-                postElementSize={props.data.postElementSize||   props.postElementSize}
+                postElementSize={props.data.postElementSize || props.postElementSize}
                 postElementStyle={props.postElementStyle}
                 postElementImageLoader={props.postElementImageLoader}
                 postElementImageLoaderType={props.postElementImageLoaderType}
                 referer={props.referer}
             /> : null}
-            <WidgetFooter  {...props.data}/>
+            {/*<WidgetFooter  {...props.data}/>*/}
         </StyledSection>
     );
 };

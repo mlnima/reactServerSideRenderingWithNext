@@ -6,10 +6,6 @@ import {faUser} from "@fortawesome/free-regular-svg-icons";
 
 const ChatRoomMessageUserInfoPopup = ({userInfo,onUserInfoShowHandler}) => {
     const [state, setState] = useState({});
-    useEffect(() => {
-        console.log(userInfo,onUserInfoShowHandler)
-    }, []);
-
 
     if (userInfo.username){
         return (

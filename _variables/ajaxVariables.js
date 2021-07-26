@@ -1,10 +1,11 @@
 import axios from "axios";
 
 export const updateSetting = async (type, data) => {
+    console.log(data)
     const body = {
-        token: localStorage.wt,
         type,
-        data
+        data,
+        token: localStorage.wt,
     };
     return await axios.post(window.location.origin + '/api/admin/settings/update', body)
 };
@@ -18,14 +19,13 @@ export const updateSetting = async (type, data) => {
 // };
 
 export const getSetting = async (type, domainName, cache, whichPage) => {
-    const pageNameForCachedRequest = whichPage ? `&position=${whichPage}` : ''
+    const pageNameForCachedRequest = whichPage ? `&position=${whichPage}` : '';
     const body = {
         type,
         cache,
         token: localStorage.wt
     };
-
-    return await axios.post(domainName + `/api/admin/settings/getSetting?type=${type}${pageNameForCachedRequest}`, body)
+    return await axios.post(domainName + `/api/admin/settings/getSetting?type=${type}${pageNameForCachedRequest}`, body);
 };
 
 export const addNewWidget = async (data) => {
@@ -33,7 +33,7 @@ export const addNewWidget = async (data) => {
         data,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/admin/widgets/addNewWidget', body)
+    return await axios.post(window.location.origin + '/api/admin/widgets/addNewWidget', body);
 }
 
 
@@ -41,7 +41,7 @@ export const getSingleWidgetData = async (data) => {
     const body = {
         ...data,
     };
-    return await axios.post(window.location.origin + '/api/v1/widgets/getSingleWidgetData', body)
+    return await axios.post(window.location.origin + '/api/v1/widgets/getSingleWidgetData', body);
 }
 
 // export const getWidgets = async (position,cache, domainName) => {
@@ -57,16 +57,13 @@ export const getMultipleWidgetWithData = async (widgets, domainName, cache, whic
         cache
     };
    return await axios.post(domainName + `/api/v1/widgets/getMultipleWidgetWithData?whichPage=${whichPage}`, body)
-
 }
 
 export const getMultipleSetting = async (settings, domainName, cache, whichPage) => {
-
     const body = {
         ...settings,
         cache
     };
-
     return await axios.post(domainName + `/api/v1/settings/getMultipleSettings?whichPage=${whichPage}`, body)
 };
 
@@ -78,7 +75,6 @@ export const getWidgetsWithData = async (position, domainName) => {
 }
 
 export const updateWidgets = async (widgetData) => {
-
     const body = {
         widgetData,
         token: localStorage.wt
@@ -209,26 +205,23 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
     try {
         const domainName = process.env.REACT_APP_PRODUCTION_URL;
         const cache = process.env.NODE_ENV !== 'development'
-
-        const refererUrl = req?.headers?.referer;
-        //  const previousRoutHasData = refererUrl.includes('/sitemap') || refererUrl.includes('/messenger') || refererUrl.includes('/chatroom') ||  refererUrl.includes('/admin')
-
-        //const referer =   process.env.NODE_ENV !== 'development'  ?  refererUrl   ? refererUrl.includes(req?.headers?.host) && previousRoutHasData  : false: false;
-        // console.log(referer)
-        const referer =   process.env.NODE_ENV !== 'development'  ?  refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
-        // const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false;
+        const refererUrl = req?.headers?.referer || '';
+       //const referer =   process.env.NODE_ENV !== 'development'  ?  refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
+       //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin') && !refererUrl.includes('/messenger') && !refererUrl.includes('/chatroom')  : false;
+       //const refererFromDataLessPages = refererUrl ?  /sitemap|admin|messenger|chatroom/.test(refererUrl)  : true
+       //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererFromDataLessPages  : false;
+        const referer =   false;
         const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
         const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
-        const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets]
-        const pageNameForCacheRequest = referer ? page ? page : 'static' : 'firstLoadWidgetsData' + (page||'static')
-        const firstLoadWidgetsData =await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, cache, pageNameForCacheRequest);
-
+        const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets];
+        const pageNameForCacheRequest = !referer ? page ? page : 'static' : 'firstLoadWidgetsData' + (page||'static');
+        const firstLoadWidgetsData =   await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, cache, pageNameForCacheRequest);
         const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, cache, 'static') : {};
 
         let finalSettings = settingsData.data ? {
             identity:settingsData?.data?.settings.find(s=>s.type === 'identity'),
             design:settingsData?.data?.settings.find(s=>s.type === 'design')
-        } :{}
+        } :{};
 
         let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
 
@@ -236,16 +229,13 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
             domainName,
             settings:finalSettings ?? {},
             widgets:firstLoadWidgetsData?.data?.widgets ?? [],
-            // widgets: [],
             referer,
             isSameOrigin,
             isNavigatedFromPostPage,
             isMobile,
         }
-
-
     }catch (e) {
-console.log(e)
+        console.log(e)
     }
 
 

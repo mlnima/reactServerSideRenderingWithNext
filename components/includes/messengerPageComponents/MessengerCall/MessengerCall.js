@@ -71,9 +71,9 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             min-width :100px;
             height :calc(25vw * 1.777);
             min-height :150px;
-           
             object-fit :cover;
             z-index: 12;
+            transform:  rotateY(180deg);
         } 
                
         .messenger-call-my-video-big,.messenger-call-user-video{
@@ -84,15 +84,16 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             width :100%;
             height :100%;
             object-fit :none;
-           
+            transform:  rotateY(180deg);
+
         }
         
         .messenger-call-actions-buttons{
-            background-color: var(--navigation-background-color);
+            //background-color: var(--navigation-background-color);
             opacity: .5;
             margin: auto;
             display: flex;
-            justify-content: space-between;
+            justify-content:center;
             align-items: center;
             flex-wrap: wrap;
             position: absolute;
@@ -107,6 +108,7 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
 
         
         .leave-call-button{
+         
             background-color: red ;
             color:white;
             border-radius: 50%;

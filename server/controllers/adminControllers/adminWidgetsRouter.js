@@ -3,7 +3,7 @@ const router = express.Router();
 const adminAuthMiddleware = require('../../middlewares/adminAuthMiddleware')
 
 const adminAddNewWidget = require('./adminWidgetsControllers/adminAddNewWidget')
-const adminUpdateWidget = require('./adminWidgetsControllers/adminUpdateWidget')
+const {adminUpdateWidget} = require('./adminWidgetsControllers/adminUpdateWidget')
 const adminDeleteWidget = require('./adminWidgetsControllers/adminDeleteWidget')
 
 

@@ -3,7 +3,27 @@ import Link from "next/link";
 import PostElementTitle from "./PostElementTitle";
 import PostElementImage from "./PostElementImage";
 
-const PostElement = ({title, imageWidth, viewType, postType, _id, postElementSize, videoTrailerUrl, views, likes, disLikes, quality, rating, price, duration, mainThumbnail, postElementStyle,onClickLoadingHandler,postElementImageLoaderType,postElementImageLoader}) => {
+const PostElement = ({
+                         title,
+                         imageWidth,
+                         viewType,
+                         postType,
+                         _id,
+
+                         postElementSize,
+                         videoTrailerUrl,
+                         views,
+                         likes,
+                         disLikes,
+                         quality, rating,
+                         price,
+                         duration,
+                         mainThumbnail,
+                         postElementStyle,
+                         widgetId,
+                         onClickLoadingHandler,
+                         postElementImageLoaderType,
+                         postElementImageLoader}) => {
 
     let [state, setState] = useState({
         isHover: false,
@@ -97,6 +117,7 @@ max-width: 100%;
                             isHoverHandler={isHoverHandler}
                             _id={_id}
                             postType={postType}
+                            widgetId={widgetId}
                             views={views}
                             duration={duration}
                             quality={quality}

@@ -1,21 +1,14 @@
-import React, {useState, useEffect, useContext, useMemo} from 'react';
+import React, {useState, useEffect, useContext} from 'react';
 import PostElement from "../PostElement/PostElement";
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
-import FooterWidgetArea from "../../widgetsArea/FooterWidgetArea/FooterWidgetArea";
 
-const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyle,postElementImageLoaderType,postElementImageLoader}) => {
+const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyle,postElementImageLoaderType,postElementImageLoader,widgetId}) => {
     const contextData = useContext(AppContext);
-
-    const styleData = useMemo(() => postElementStyle || contextData.siteDesign.postElementStyle, [])
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
     const [state, setState] = useState({
         imageWidth: 255,
-        svgDefaultStyle: {
-            maxWidth: '25px',
-            maxHeight: '25px'
-        }
     })
 
     useEffect(() => {
@@ -30,10 +23,6 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
 
     }, []);
 
-    const onClickLoadingHandler = ()=>{
-        contextData.dispatchState({...contextData.state,loading:true})
-    }
-
 
 
     return (
@@ -46,12 +35,13 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
                     }
             `}</style>
             {(posts || []).map(post => {
-                const title = (post.translations?.[locale]?.title || post.title).replace('#', '')
+                const title = (post?.translations?.[locale]?.title || post?.title).replace('#', '')
                 return (
                     <PostElement
                         isMobile={isMobile}
                         onClickLoadingHandler={contextData.functions.loadingHandler}
                         key={post._id}
+                        widgetId={widgetId}
                         viewType={viewType}
                         postElementSize={postElementSize}
                         postElementStyle={postElementStyle}

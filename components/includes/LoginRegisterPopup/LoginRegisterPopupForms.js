@@ -63,74 +63,82 @@ const LoginRegisterPopupForms = props => {
             loginRegisterFormPopup: false
         })
     }
-
+//  --custom-green :#44d62c;
     return (
         <React.Fragment>
             <style jsx>{`
-                    .server-response {
-                       color: ${response.type === 'success' ? 'green' : response.type === 'error' ? 'red' : 'var(--main-text-color)'} ;
-                    }
-
-                    .login-register-form{
-                        flex-direction: column;
-                        display: flex;
-                        justify-content: space-between;
-                        align-items: center;
-                        background-color: var(--navigation-background-color);
-                        height: 420px;
-                        width: 280px;
-                        max-width: 300px;
-                        padding: 10px;
-                    }
-                    .login-register-form-fields{
-                        width: 90%;
-                    }
-                    .login-register-form-field{
-                    
-                    }
-                    .login-register-form-field>input{
-                        border-radius: 5px;
-                        outline: none;
-                        border: none;
-                        padding: 3px ;
-                        height: 25px;
-                        width: 100%;
-                    }
-                    .login-register-form-field>p{
-                        color: var(--main-text-color);
-                        width: 100%;
-                    }
-                    .register-form-buttons{
-                     display: flex;
-                     justify-content: space-evenly;
-                     width: 100%;
-                    }
-                    
-                    .login-register-form-button{
-                      border: var(--main-text-color) solid 1px;
-                      padding: 10px ;
-                      width: 100px;
-                      margin: 10px;
-                      text-align: center;
-                    }
-                    
-                    .login-register-switch-form-button{
-                       background-color: var(--main-text-color);
-                       color: var(--navigation-background-color);
-                      padding: 5px ;
-                      width: 100px;
-                      margin: 10px;
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                      //text-align: center;
-                    }
-                    
-                    .close-form-button{
-                      align-self: flex-end;
-                    }
-                
-                `}</style>
+            .server-response {
+            color: ${response.type === 'success' ? 'green' : response.type === 'error' ? 'red' : 'var(--main-text-color)'} ;
+            }
+            
+            .login-register-form{
+            flex-direction: column;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            background-color: var(--navigation-background-color);
+            height: 300px;
+            width: 280px;
+            padding: 5px;
+            border-radius: 10px;
+            }
+            .login-register-form-fields{
+            width: 90%;
+            }
+            .login-register-form-field{
+            
+            }
+            .login-register-form-field>input{
+            border-radius: 5px;
+            outline: none;
+            border: none;
+            padding: 3px ;
+            height: 25px;
+            width: 100%;
+            font-size: 1rem;
+            
+            }
+            .login-register-form-field>p{
+            margin: 4px 0;
+            color: var(--main-text-color);
+            width: 100%;
+            }
+            .register-form-buttons{
+            display: flex;
+            justify-content: space-evenly;
+            width: 100%;
+            }
+            
+            .login-register-form-button{
+            border: none;
+            background-color: var(--custom-green);
+            padding: 10px ;
+            width: 100px;
+            margin: 10px;
+            text-align: center;
+            font-size: 1rem;
+            font-weight: bold;
+            }
+            
+            .login-register-switch-form-button{
+            border: none;
+            background-color: var(--main-text-color);
+            color: var(--navigation-background-color);
+            padding: 5px ;
+            width: 100px;
+            margin: 10px;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-size: 1rem;
+            font-weight: bold; 
+            }
+            
+            .close-form-button{
+            align-self: flex-end;
+            }
+            
+            `}</style>
             <p className='server-response'> {response.message}</p>
             <form className='login-register-form' onSubmit={
                 contextData.state.loginRegisterFormPopupType === 'register' ?

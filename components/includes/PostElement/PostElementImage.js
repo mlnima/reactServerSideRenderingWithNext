@@ -5,7 +5,7 @@ import TopRight from "./TopRight";
 import TopLeft from "./TopLeft";
 import {likeValueCalculator} from "../../../_variables/_variables";
 
-const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title,postElementImageLoaderType,postElementImageLoader,rating}) => {
+const PostElementImage = ({postElementSize,widgetId,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title,postElementImageLoaderType,postElementImageLoader,rating}) => {
     const imageWidthSize = postElementSize === 'list' ? 116.6 :
                            postElementSize === 'smaller' ? 209.8 :
                            postElementSize === 'small' ? 255 :
@@ -16,43 +16,40 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
     return (
         <div className={`post-element-image-data`} style={{position:'relative'}}>
 
-        <style jsx>{`
-        @keyframes opacityAnimationStart {
-        0% {
-        opacity: 0;
-        }
-        100% {
-        opacity: 100%;
-        }
-        }
-        .post-element-image-data{
-            width: 48vw;
-            height: 27vw;
-            ${imageWidth}
-        }
-        video {
-            width: 48vw;
-            height: 27vw;
-            animation: opacityAnimationStart 2s alternate;  
-        }
-        
-@media only screen and (min-width: 768px) {
-        .post-element-image-data{
-            width: ${imageWidthSize}px;
-            height: ${imageWidthSize/1.777}px;
-            ${imageWidth}
-        }
-        video {
-            width: ${imageWidthSize}px;
-            height: ${imageWidthSize/1.777}px;
-            animation: opacityAnimationStart 2s alternate;  
-        }
-}     
-        
-        
-        
-        
-        `}</style>
+            <style jsx>{`
+            @keyframes opacityAnimationStart {
+                0% {
+                    opacity: 0;
+                }
+                100% {
+                    opacity: 100%;
+                }
+            }
+            .post-element-image-data{
+                width: 48vw;
+                height: 27vw;
+                ${imageWidth}
+            }
+            video {
+                width: 48vw;
+                height: 27vw;
+                animation: opacityAnimationStart 2s alternate;  
+            }
+            
+            @media only screen and (min-width: 768px) {
+                .post-element-image-data{
+                    width: ${imageWidthSize}px;
+                    height: ${imageWidthSize/1.777}px;
+                    ${imageWidth}
+                }
+                video {
+                    width: ${imageWidthSize}px;
+                    height: ${imageWidthSize/1.777}px;
+                    animation: opacityAnimationStart 2s alternate;  
+                }
+            }     
+            
+            `}</style>
 
             {isHover && videoTrailerUrl ?
                 <video autoPlay={true} loop={true}>
@@ -64,6 +61,7 @@ const PostElementImage = ({postElementSize,isHover,mainThumbnail,isHoverHandler,
                                altValue={title || mainThumbnail}
                                hoverHandler={isHoverHandler}
                                quality={100}
+                               widgetId={widgetId}
                                loading={postElementImageLoaderType || 'eager'}
                                postElementSize={postElementSize}
                                postElementImageLoader={postElementImageLoader}

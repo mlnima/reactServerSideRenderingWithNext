@@ -24,22 +24,23 @@ const LoggedOutItemsMenu = props => {
                 <style jsx>{`
                 .logged-out-items{
                     display: flex;
-                        justify-content: space-between;
+                    justify-content: space-between;
+                        .logged-out-item{
+                            background-color: transparent;
+                            border: none;
+                            margin: 0 10px;
+                            padding: 0;
+                            color: var(--navigation-text-color);
+                        }
                     }
-                    .logged-out-item{
-                        background-color: transparent;
-                        border: none;
-                        margin: 0 10px;
-                        padding: 0;
-                        color: var(--navigation-text-color);
-                    }
+
                 `}</style>
 
                 <button onClick={()=>onLoginRegisterHandler('login')} className='logged-out-item ' aria-label='logged-out-items' >
-                    <FontAwesomeIcon  style={{width:'20px',height:'20px'}} icon={faUser} className='svg-logo-small' />
+                    <FontAwesomeIcon  style={{width:'24px',height:'24px'}} icon={faUser} />
                 </button>
                 <button onClick={()=>onLoginRegisterHandler('register')} className='logged-out-item ' aria-label='logged-out-items' >
-                    <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faPen} className='svg-logo-small'/>
+                    <FontAwesomeIcon style={{width:'24px',height:'24px'}} icon={faPen} />
                 </button>
             </div>
         )

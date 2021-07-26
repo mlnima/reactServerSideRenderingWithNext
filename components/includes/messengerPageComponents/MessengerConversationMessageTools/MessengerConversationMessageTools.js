@@ -64,24 +64,27 @@ const MessengerConversationMessageTools = props => {
                     position: absolute;
                     display: flex;
                     justify-content: center;
+                    align-items: center;
                     right: 8px;
-                    //width: 10%;
                 }
                 .messenger-conversation-message-tools-btn{
                     background-color: var(--navigation-background-color);
                     border: none;
-                    width: 35px;
-                    height: 35px;
+                    width: 34px;
+                    height: 34px;
                     border-radius: 50%;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
                     
                 }
             `}</style>
             <div className='messenger-conversation-message-tools-text'>
-                <input maxLength='100' ref={messageInput} className='messenger-conversation-message-tools-text-input' type="text" name='message'/>
+                <input maxLength='300' ref={messageInput} className='messenger-conversation-message-tools-text-input' type="text" name='message'/>
             </div>
             <div className='messenger-conversation-message-tools-Send'>
                 <button onClick={e => onSendMessageHandler(e)} className='messenger-conversation-message-tools-btn'>
-                    <FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color)'}} icon={faArrowRight}/>
+                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faArrowRight}/>
                 </button>
 
             </div>

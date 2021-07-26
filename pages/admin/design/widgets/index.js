@@ -137,9 +137,9 @@ const HomePageWidgets = props => {
 
 
     const renderWidgetsInPosition = [...new Set((contextData?.widgetsSettings?.widgets || []).map(widgets => {
-        return widgets.data.position
+        return widgets?.data?.position
     }))].map(position => {
-        const widgetsInGroupByPosition = contextData.widgetsSettings.widgets.filter(widgets => widgets.data.position === position)
+        const widgetsInGroupByPosition = contextData.widgetsSettings?.widgets?.filter(widgets => widgets?.data?.position === position)
         const widgetsOnThisType = widgetsInGroupByPosition.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
         return (
             <WidgetGroupByPosition widgetsInGroupByPosition={widgetsInGroupByPosition} key={_.uniqueId('id_')} siteIdentity={siteIdentity} position={position}

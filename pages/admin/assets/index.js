@@ -28,7 +28,7 @@ const assets = props => {
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         getAndSetAssetData()
     }, [props]);
 

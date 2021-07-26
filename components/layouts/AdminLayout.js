@@ -1,4 +1,4 @@
-import React, { useContext, useRef,useLayoutEffect} from 'react';
+import React, { useContext, useRef,useEffect} from 'react';
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import TopBar from "../adminIncludes/TopBar/AdminTopBar";
@@ -19,7 +19,7 @@ const AdminLayout = props => {
     const container = useRef(null);
     const Admin = useRef(null);
 
-    useLayoutEffect(() => {
+    useEffect(() => {
         getSetting('identity', window.location.origin, false, Date.now()).then(identity => {
             contextData.dispatchSiteIdentity({
                 ...contextData.siteIdentity,

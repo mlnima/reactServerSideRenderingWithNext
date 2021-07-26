@@ -18,6 +18,7 @@ let StyledMain = styled.main`
   flex-direction: column;
   align-items: center;
   justify-content: flex-start;
+  width: 100%;
   #download-url {
     width: 100%;
     margin: 20px 0;
@@ -104,11 +105,11 @@ export const getServerSideProps = async (context) => {
     let responseCode = 200
     const postData = await getPost({_id: context.query.id, title: context.query.title}, firstLoadData.domainName, true)
     const post = postData.data.post;
-    if (!post) {
-        return {
-            notFound: true
-        }
-    }
+    // if (!post) {
+    //     return {
+    //         notFound: true
+    //     }
+    // }
     const commentsData = post ? await getComments({onDocument: post._id}, firstLoadData.domainName, true) : {}
     const widgets = firstLoadData.widgets
     const comments = post ? commentsData?.data?.comments : []

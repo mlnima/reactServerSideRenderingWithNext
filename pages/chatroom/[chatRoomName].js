@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
+import socket from '../../_variables/socket';
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {useRouter} from "next/router";
 import {AppContext} from "../../context/AppContext";
@@ -6,8 +7,8 @@ import ChatRoomHeader from "../../components/includes/chatroomComponents/ChatRoo
 import ChatRoomMessageArea from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
-import socket from '../../_variables/socket';
 import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
+
 
 const chatRoom = props => {
     const messageAreaRef = useRef(null)
@@ -21,10 +22,6 @@ const chatRoom = props => {
     const [isJoined, setIsJoined] = useState(false)
     const router = useRouter()
 
-
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
     const onUserInfoShowHandler = (username, userId, profileImage) => {
         state.userInfo.username ? setState({...state, userInfo: {}}) : setState({...state, userInfo: {username, userId, profileImage}})
     }
@@ -66,7 +63,8 @@ const chatRoom = props => {
     const scrollToBottomOfConversationBox = () => {
         if (messageAreaRef.current) {
             messageAreaRef.current.scroll({
-                top: messageAreaRef.current.scrollHeight
+                top: messageAreaRef.current.scrollHeight,
+                // behavior: "smooth"
             })
         }
     }
@@ -76,20 +74,46 @@ const chatRoom = props => {
             username && userId && profileImage ? setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou => ou.userId !== userId), {username, userId, profileImage}]) : null
         })
 
-        socket.on('message', (messageData, username, id, profileImage) => {
+        socket.on('message', (messageData, username, id, profileImage,color) => {
             const newMessageContent = {
                 messageData,
                 username,
                 id,
                 createdAt: Date.now(),
-                profileImage
+                profileImage,
+                type:'message',
+                color
             }
-
-            setMessages(messages => [...messages, newMessageContent])
+            if (messages.length>100){
+                setMessages(messages => [...messages.shift(), newMessageContent])
+            }else{
+                setMessages(messages => [...messages, newMessageContent])
+            }
         })
 
 
         socket.on('getMyDataAndShareYourData', (receiverSocketId, username, userId, profileImage) => {
+
+
+            if (username){
+                console.log(username)
+                const userJoined = {
+                    messageData: username +' joined to the room ',
+                    username,
+                    userId,
+                    createdAt: Date.now(),
+                    profileImage,
+                    type:'log'
+                }
+                setMessages(messages => [...messages, userJoined])
+            }
+
+            // if (messages.length>100){
+            //     setMessages(messages => [...messages.shift(), userJoined])
+            // }else{
+            //     setMessages(messages => [...messages, userJoined])
+            // }
+
             username && userId && profileImage ? setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou => ou.userId !== userId), {username, userId, profileImage}]) : null
             socket.emit('myDataIs', receiverSocketId, router.query.chatRoomName, contextData.userData.username, contextData.userData._id, contextData.userData.profileImage)
 

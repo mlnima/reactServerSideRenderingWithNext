@@ -1,6 +1,6 @@
 import React, {useContext, useEffect, useState, useMemo} from 'react';
 import dynamic from "next/dynamic";
-import {initGA, logPageView} from '../../_variables/_variables'
+//import {initGA, logPageView} from '../../_variables/_variables'
 import {createGlobalStyle} from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
@@ -35,13 +35,15 @@ const AppLayout = props => {
     })
 
     useEffect(() => {
-        if (typeof window !== 'undefined') {
-            if (!window.GA_INITIALIZED) {
-                initGA()
-                window.GA_INITIALIZED = true
-            }
-            logPageView()
-        }
+        // if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production' && process.env.REACT_APP_GOOGLE_ANALYTICS_ID !== 'false' ) {
+        //     console.log(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
+        //     if (!window.GA_INITIALIZED) {
+        //         initGA()
+        //         window.GA_INITIALIZED = true
+        //     }
+        //     logPageView()
+        // }
+
         if (!props.referer) {
             setStaticWidgets({
                 topBar: firstLoadWidgets.topBar,

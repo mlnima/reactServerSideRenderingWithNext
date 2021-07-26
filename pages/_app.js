@@ -24,7 +24,6 @@ import CookiePopup from "../components/includes/ClientPopActionRequest/CookiePop
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
 
-
     useEffect(() => {
         Scroll.animateScroll.scrollToTop();
     }, [pageProps]);
@@ -44,7 +43,7 @@ const MyApp = ({Component, pageProps}) => {
                  `}</style>
             </AppProvider>
         )
-    } else if (router.pathname.includes('/messenger') || router.pathname.includes('/chatroom') ) {
+    } else if (router.pathname.includes('/messenger') || router.pathname.includes('/chatroom')) {
         return (
             <AppProvider>
                 <MessengerLayout
@@ -73,7 +72,7 @@ const MyApp = ({Component, pageProps}) => {
             >
                 <Component {...pageProps} />
             </AppLayout>
-             <LoginRegisterPopup/>
+            <LoginRegisterPopup/>
             <CookiePopup identity={pageProps.identity}/>
         </AppProvider>
     )

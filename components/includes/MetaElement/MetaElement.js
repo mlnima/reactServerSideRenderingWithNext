@@ -31,6 +31,8 @@ const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postE
             >
                 <a className={`meta-page-item-link ${classNameForMetaElement}`} onClick={() => contextData.dispatchState({...contextData.state, loading: true})}>
                     <style jsx>{`
+
+
                     .meta-page-item-link,.meta-page-item-link-smaller,.meta-page-item-link-small,.meta-page-item-link-medium{
                         width: 48vw;
                         max-width: 320px;
@@ -65,7 +67,7 @@ const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postE
                             color: white;
                         }
                         }
-                    }
+                  
                 `}</style>
                     <MetaElementImage
                         imageUrl={imageUrl || noImageUrl}

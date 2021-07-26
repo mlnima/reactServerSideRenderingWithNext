@@ -15,7 +15,7 @@ const MessengerConversationListHeader = () => {
                     padding:  10px;
                     width: 100%;
                     display:flex;
-                    justify-content : space-between;
+                    justify-content : center;
                     align-items:center;
                 }
                 .messenger-conversation-header-back-btn{
@@ -24,9 +24,9 @@ const MessengerConversationListHeader = () => {
                     margin: 0 10px;
                 }
             `}</style>
-            <button onClick={()=>router.back()} className='messenger-conversation-header-back-btn'>
-                <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />
-            </button>
+            {/*<button onClick={()=>router.back()} className='messenger-conversation-header-back-btn'>*/}
+            {/*    <FontAwesomeIcon style={{width: '30px',height: '30px',color:'var(--navigation-text-color)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />*/}
+            {/*</button>*/}
             <Authentication/>
         </div>
     );

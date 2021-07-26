@@ -80,16 +80,17 @@ io.on('connection', socket => {
         socket.to(roomName).emit('getMyDataAndShareYourData', socket.id,username,userId,profileImage)
     });
 
-    socket.on('message', (messageData,roomName,username,userId,profileImage) => {
-        io.in(roomName).emit('message',messageData, username,userId,profileImage)
+    socket.on('message', (messageData,roomName,username,userId,profileImage,color) => {
+        io.in(roomName).emit('message',messageData, username,userId,profileImage,color)
 
     });
+    socket.on('startTyping', (roomName,username) => {
+        socket.to(roomName).emit('startTyping',username)
+    });
 
-    // socket.off('message',()=>{})
 
     socket.on('myDataIs',(receiverId,roomName,username,userId,profileImage)=>{
         io.to(receiverId).emit('getChatroomMemberData',roomName,username,userId,profileImage)
-
     })
 
 

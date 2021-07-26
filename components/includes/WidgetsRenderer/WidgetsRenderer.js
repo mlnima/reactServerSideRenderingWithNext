@@ -63,7 +63,7 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
                 <Widget currentPageSidebar={currentPageSidebar}
                         isMobile={isMobile}
                         key={widgets.indexOf(widget)}
-                        propsKey={widget._id}
+                        widgetId = {widget._id}
                         {...widget}
                         widgetToRender={widgetToRender}
                         postElementSize={postElementSize}

@@ -55,16 +55,20 @@ const CookiePopup = props => {
                     right: 0;
                     display: flex;
                     justify-content: center;
+                    width: 100%;
                     align-items: center;
+
                 }
                 .cookie-popup-content{
                     background-color: var(--main-text-color);
                     padding: 20px;
-                    width: clamp(300px , 600px, 80vw);
+                    //width: clamp(300px , 600px, 80vw);
+                    width: 280px;
                 }
                 
                 h2,p{
                     color: var(--background-color) ;
+                    font-size: .8rem;
                 }
                 .cookie-popup-content-action-buttons{
                     display: flex;
@@ -117,7 +121,7 @@ const CookiePopup = props => {
 
                     <button className='cookie-popup-content-action-button-accept' onClick={onAcceptHandler}>
                           <FontAwesomeIcon style={{width: '30px', height: '20px'}} icon={faCheck}/>
-                      </button>
+                    </button>
 
                 </div>
             </span>

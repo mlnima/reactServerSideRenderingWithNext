@@ -22,7 +22,7 @@ const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler}) => {
             `}</style>
             <Authentication/>
             <button className='chatroom-header-open-online-users-list-button' onClick={onOnlineUserListVisibilityChangeHandler}>
-                <FontAwesomeIcon style={{width: '40px', height: '40px', color: 'var(--navigation-text-color)'}} icon={faUsers}/>
+                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faUsers}/>
             </button>
         </header>
     );

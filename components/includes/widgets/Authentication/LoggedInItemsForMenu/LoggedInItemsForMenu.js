@@ -1,70 +1,71 @@
 import {useContext} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faPowerOff} from "@fortawesome/free-solid-svg-icons";
+import {faHome, faPowerOff} from "@fortawesome/free-solid-svg-icons";
 import {faBell, faEnvelope, faUser} from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
+import {useRouter} from "next/router";
 
 const LoggedInItemsForMenu = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
 
-    if (contextData.userData.username && contextData.userData.username !== 'guest' ) {
+    if (contextData.userData.username && contextData.userData.username !== 'guest') {
         return (
             <div className='logged-in-items'>
-            <style jsx>{`
-                .logged-in-items{
-                    display: flex;
-                    align-items: center;
-                }
-                .logged-in-item{
-                    color: var(--navigation-text-color);
-                    width: 20px;
-                    margin: 0 10px;
-                    padding: 0;
-                    place-items: center;
-                }
-                .svg-logo-small{
-                    color: var(--navigation-text-color);
-                    max-width: 15px;
-                    max-height: 15px;
-                }
-                .logged-in-item-profile-image{
-                  width: 25px;
-                  height: 25px;
-                  border-radius: 50%;
-                }
-                .logged-in-item-notification-button{
-                background-color: transparent;
-                border: none;
-                outline: none;
+                <style jsx>{`
+                    .logged-in-items{
+                        display: flex;
+                        align-items: center;
+                        justify-content: space-between;
+                        width: 100%;
+                         .logged-in-item{
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            color: var(--navigation-text-color);
+                            margin: 0 10px;
+                            padding: 0;
+                            place-items: center;
+                        }
+                        .logged-in-item-profile-image{
+                            width: 25px;
+                            height: 25px;
+                            border-radius: 50%;
+                        }    
                 }
             `}</style>
 
-                {contextData.siteIdentity.membership?
+                {contextData.siteIdentity.membership ?
                     <>
-                        <Link href={`/profile`}>
-                            <a rel='next' className='logged-in-item' >
-                                {contextData?.userData?.profileImage ?
-                                    <img src={contextData?.userData?.profileImage} alt='logged-in-item-profile-image' className='logged-in-item-profile-image'/>:
-                                    <FontAwesomeIcon style={{width:'20px',height:'20px',color:'var(--navigation-text-color)'}} icon={faUser} className='svg-logo-small'/>
-                                }
-
+                        <Link href={`/`}>
+                            <a rel={/sitemap|admin|messenger|chatroom/.test(router.pathname) ? 'no-referrer' : 'next'} className='logged-in-item'>
+                                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faHome}/>
                             </a>
                         </Link>
+                        <Link href={`/profile`}>
+                            <a rel='next' className='logged-in-item'>
+                                {contextData?.userData?.profileImage ?
+                                    <img src={contextData?.userData?.profileImage} alt='logged-in-item-profile-image' className='logged-in-item-profile-image'/> :
+                                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faUser}/>
+                                }
+                            </a>
+                        </Link>
+
                         <Link href={`/messenger`}>
-                            <a rel='next' className='logged-in-item' >
-                                <FontAwesomeIcon style={{width:'20px',height:'20px',color:'var(--navigation-text-color)'}} icon={faEnvelope} className='svg-logo-small'/>
+                            <a rel='next' className='logged-in-item'>
+                                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faEnvelope}/>
                             </a>
                         </Link>
                     </>
-                :null
+                    : null
                 }
-                {/*<button className='logged-in-item-notification-button'><FontAwesomeIcon style={{width:'20px',height:'20px',color:'var(--navigation-text-color)'}} icon={faBell} className=' svg-logo-small' /></button>*/}
                 <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
-                    <FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faPowerOff} className=' svg-logo-small' />
+                    <FontAwesomeIcon style={{width: '24px', height: '24px'}} icon={faPowerOff}/>
                 </p>
             </div>
         )
     } else return null
 };
 export default LoggedInItemsForMenu;
+//next'

@@ -137,12 +137,11 @@ const disableCamera = ()=>{
 }
 //------
     const attemptForCall = () => {
-        getUserMedia().then(myStreamData => {
+        getUserMedia().then( async myStreamData => {
             setMyStream(myStreamData)
-            setState({
-                ...state,
-                calling: true
-            })
+            setState({...state,calling: true})
+            
+
         }).catch(err=>{
             console.log(err)
         })

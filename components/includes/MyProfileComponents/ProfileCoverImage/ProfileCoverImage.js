@@ -11,7 +11,7 @@ const ProfileCoverImage = props => {
     const uploadInputElement = useRef(null)
     const [state, setState] = useState({
         style: {
-            backgroundImage: 'linear-gradient(to bottom right, var(--navigation-background-color), black);'
+            backgroundImage: 'linear-gradient(to bottom right, var(--navigation-background-color), black)'
         }
     });
 
@@ -20,7 +20,7 @@ const ProfileCoverImage = props => {
             ...state,
             style: {
                 ...state.style,
-                backgroundImage: contextData?.userData?.coverImage ? `url('${contextData.userData.coverImage + '?date=' + Date.now()}` : 'linear-gradient(to bottom right, var(--navigation-background-color), black);'
+                backgroundImage: contextData?.userData?.coverImage ? `url('${contextData.userData.coverImage + '?date=' + Date.now()}` : 'linear-gradient(to bottom right, var(--navigation-background-color), black)'
             },
             svgStyle: {
                 border: 'solid black 1px',
