@@ -13,6 +13,7 @@
     "startAndSocket": "concurrently \"NODE_ENV=production node ./server.js\" \"node ./server/socketServer/socketServer.js\"",
     "updateLinux": "sudo ./update.sh",
     "fixMetaData": "node tools/fixMetaData.js",
+    "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
     "setup": "node ./tools/setup.js"
   },
   "keywords": [],

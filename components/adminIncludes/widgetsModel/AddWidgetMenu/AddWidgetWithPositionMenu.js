@@ -51,6 +51,7 @@ const AddWidgetWithPositionMenu = props => {
                                 type ==='posts'? postsWidgetModel:
                                 type ==='media'? mediaWidgetModel:
                                 type ==='searchBar'? searchBarWidgetModel:
+                                type ==='searchButton'? searchBarWidgetModel:
                                 type ==='recentComments'? recentCommentsWidgetModel:
                                 type ==='meta'? metaWidgetModel:
                                 type ==='logo'? logoWidgetModel:
@@ -102,7 +103,6 @@ const AddWidgetWithPositionMenu = props => {
 
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postPageLeftSidebar', props.type)}>Post Page Left Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postPageRightSidebar', props.type)}>Post Page Right Sidebar</button>
-
 
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postsPageLeftSidebar', props.type)}>Posts Page Left Sidebar</button>
                     <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postsPageRightSidebar', props.type)}>Posts Page Right Sidebar</button>

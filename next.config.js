@@ -87,6 +87,7 @@ const reWriteRoutes = {
             //posts routes
             {source: `/:locale(${languages})?/:metaType(categories|tags|actors)?/:metaName`, destination: '/posts'},
             {source: `/:metaType(categories|tags|actors)?/:metaName`, destination: '/posts'},
+
             {source: `/:locale(${languages})?/posts`, destination: '/posts'},
             //{source: `/posts`, destination: '/posts'},
             //post routes
@@ -118,8 +119,8 @@ const pwaSettings = {
 
 module.exports = withPlugins([
     svgLoader,
-    // process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) :{},
-    withPWA(pwaSettings),
+    process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) :{},
+    // withPWA(pwaSettings),
     additionalConfig,
     reWriteRoutes,
     nextImageConfig,

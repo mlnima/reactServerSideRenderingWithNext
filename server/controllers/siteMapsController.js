@@ -1,6 +1,6 @@
 let siteMapsController = {}
 const postSchema = require('../models/postSchema');
-
+const moment = require('moment');
 siteMapsController.siteMapMonths = (req, res) => {
 
     let month = req.params.month;
@@ -16,17 +16,18 @@ siteMapsController.siteMapMonths = (req, res) => {
     }
 
     let parsedDate = new Date(month);
-
-    postSchema.countDocuments({ lastModify: { $gte: parsedDate } }).exec().then(count => {
+    const endDate = moment(parsedDate).add(1, 'M').format('YYYY-MM-DD hh:mm:ss A Z')        ;
+    postSchema.countDocuments({ createdAt: { $gte: parsedDate,$lt: endDate } }).exec().then(count => {
 
         let postsElements;
         let subSiteMaps;
         let xmlTemplate;
         let renderPostData;
         if (count <= size) {
-            postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify , postType ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
+            postSchema.find({ createdAt: { $gte: parsedDate,$lt: endDate } }).select(' title , lastModify , postType ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
                 renderPostData = posts.map(post => {
-                    let postUrl =process.env.REACT_APP_PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
+                    //let postUrl =process.env.REACT_APP_PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
+                    let postUrl =process.env.REACT_APP_PRODUCTION_URL + `/post/${post.postType}/${post._id}` ;
                     postsElements +=
                         '<url>\n' +
                         `<loc>${ postUrl }</loc>\n` +

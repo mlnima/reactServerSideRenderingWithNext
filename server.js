@@ -51,8 +51,9 @@ app.prepare().then(() => {
     //xml siteMap routes
     server.get('/sitemap.xsl', (req, res) => {return res.status(200).sendFile('sitemap.xsl', staticServeOptions)});
     server.get('/sitemap.xml', (req, res) => {siteMapController.siteMap(req , res)});
+    server.get('/sitemap', (req, res) => {siteMapController.siteMap(req , res)});
     server.get('/sitemaps/:month', (req, res) => {siteMapsController.siteMapMonths(req , res)});
-    server.get('/sitemap/:month/:pageNo', (req, res) => {subSiteMapsController.siteMap(req , res)});
+    server.get('/sitemap/:month/:pageNo', (req, res) => {subSiteMapsController.subSiteMapsController(req , res)});
     //api routes
     server.use('/api/admin',adminMainRouter);
     server.use('/api/v1',clientMainRouter);

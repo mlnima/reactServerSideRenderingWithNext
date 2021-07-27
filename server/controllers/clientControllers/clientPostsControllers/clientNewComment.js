@@ -9,7 +9,7 @@ module.exports = (req, res) => {
             res.sendStatus(500).error('comment did not saved');
             res.end()
         }
-        postSchema.findByIdAndUpdate(req.body.onDocumentId,{$push:{comments:[comment._id]}},{new:true}).exec().then(updatePost=>{
+        postSchema.findByIdAndUpdate(req.body.onDocumentId,{$push:{comments:[comment._id]}},{new:true,timestamps: false}).exec().then(updatePost=>{
             res.json({updatePost})
             res.end()
         }).catch(error=>{

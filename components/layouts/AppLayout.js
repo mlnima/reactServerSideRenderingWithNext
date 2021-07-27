@@ -73,10 +73,10 @@ const AppLayout = props => {
             null
     }
 
-
     const sidebarPositionName = useMemo(() =>
             router.pathname === '/' ? 'homePageSidebar' :
                 router.pathname === '/post' ? 'postPageSidebar' :
+                router.pathname === '/post/[postType]/[id]' ? 'postPageSidebar' :
                     router.pathname === '/posts' ? 'postsPageSidebar' :
                         router.pathname === '/meta' ? 'metaPageSidebar' :
                         router.pathname === '/auth/register' || router.pathname === '/auth/login'? 'authPageSidebar' :
@@ -89,6 +89,7 @@ const AppLayout = props => {
 
     const leftSidebarPositionName = useMemo(() => router.pathname === '/' ? 'homePageLeftSidebar' :
         router.pathname === '/post' ? 'postPageLeftSidebar' :
+        router.pathname === '/post/[postType]/[id]' ? 'postPageLeftSidebar' :
             router.pathname === '/posts' ? 'postsPageLeftSidebar' :
                 router.pathname === '/meta' ? 'metaPageLeftSidebar' :
                     router.pathname === '/auth/register' || router.pathname === '/auth/login' ? 'authPageLeftSidebar' :
@@ -100,6 +101,7 @@ const AppLayout = props => {
 
     const rightSidebarPositionName = useMemo(() => router.pathname === '/' ? 'homePageRightSidebar' :
         router.pathname === '/post' ? 'postPageRightSidebar' :
+        router.pathname === '/post/[postType]/[id]' ? 'postPageRightSidebar' :
             router.pathname === '/posts' ? 'postsPageRightSidebar' :
                 router.pathname === '/meta' ? 'metaPageRightSidebar' :
                     router.pathname === '/auth/register' || router.pathname === '/auth/login' ? 'authPageRightSidebar' :

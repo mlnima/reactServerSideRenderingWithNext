@@ -2,6 +2,7 @@ import {useState} from 'react';
 import Link from "next/link";
 import PostElementTitle from "./PostElementTitle";
 import PostElementImage from "./PostElementImage";
+import {useRouter} from "next/router";
 
 const PostElement = ({
                          title,
@@ -25,6 +26,7 @@ const PostElement = ({
                          postElementImageLoaderType,
                          postElementImageLoader}) => {
 
+    const router = useRouter()
     let [state, setState] = useState({
         isHover: false,
         isWatched: false,
@@ -110,8 +112,7 @@ max-width: 100%;
 }
 
 `}</style>
-            <Link href={{pathname: `/post`,query: {id: _id,...state.queries}}}
-                  as={`/${postType || 'post'}/${title}?id=${_id}`}
+            <Link href={`/post/${postType}/${_id}`}
                   scroll={false}
             >
                 <a rel='next' onClick={onClickLoadingHandler}  className='post-element-link'>
@@ -144,3 +145,7 @@ max-width: 100%;
 
 export default PostElement;
 
+// <Link href={{pathname: `/post`,query: {id: _id,...state.queries}}}
+//       as={`/${postType || 'post'}/${title}?id=${_id}`}
+//       scroll={false}
+// >

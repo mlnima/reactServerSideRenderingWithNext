@@ -1,24 +1,26 @@
 let subSiteMapsController = {};
 const postSchema = require('../models/postSchema');
+const moment = require('moment');
 
-subSiteMapsController.siteMap = (req, res) => {
+subSiteMapsController.subSiteMapsController = (req, res) => {
 
     let month = req.params.month;
     let pageNo = req.params.pageNo;
     pageNo = parseInt(pageNo.replace('.xml', ''));
     let parsedDate = new Date(month);
+    const endDate = moment(parsedDate).add(1, 'M').format('YYYY-MM-DD hh:mm:ss A Z')        ;
+
     let postsElements;
     let xmlTemplate;
     let renderPostData;
     const size = 500;
 
-    postSchema.find({ lastModify: { $gte: parsedDate } }).select(' title , lastModify , postType ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
-
+    postSchema.find({ createdAt: { $gte: parsedDate,$lt: endDate } }).select(' title , lastModify , postType , createdAt , updatedAt').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
         renderPostData = posts.map(post => {
-
             if (post) {
-                let lastModify = new Date(post.lastModify);
-                let postUrl =process.env.REACT_APP_PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
+                let lastModify = new Date(post.createdAt || post.lastModify || post.updatedAt|| post._id.getTimestamp());
+
+                let postUrl =process.env.REACT_APP_PRODUCTION_URL + `/post/${post.postType}/${post._id}` ;
                 postsElements += '<url> \n ' +
                     `<loc>${ postUrl }</loc>\n` +
                     `<lastmod>${ lastModify.toISOString() }</lastmod>\n` +
@@ -26,7 +28,6 @@ subSiteMapsController.siteMap = (req, res) => {
                     '<priority>0.6</priority>\n' +
                     '</url>'
             }
-
         });
     }).then(() => {
 

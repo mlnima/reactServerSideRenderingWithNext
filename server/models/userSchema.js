@@ -37,6 +37,7 @@ const userSchema = mongoose.Schema({
     country:String,
     status:Boolean,
     online:Boolean,
+    isAdult:Boolean,
     sexualOrientation:String,
     about:String,
     API_KEY:String,

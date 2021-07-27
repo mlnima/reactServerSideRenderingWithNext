@@ -29,6 +29,7 @@ const widgetDataSchema =  mongoose.Schema({
     count: Number,
     stayOpen: Boolean,
     translations: mongoose.Mixed,
+    uniqueData: mongoose.Mixed,
     formData: mongoose.Mixed,
     menuItems: mongoose.Mixed,
     posts: [{type: Schema.Types.ObjectID, ref: 'post'}],

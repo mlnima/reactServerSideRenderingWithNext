@@ -15,6 +15,7 @@ const AddWidgetMenu = props => {
             <AddWidgetWithPositionMenu {...props} type='media' name='Media'/>
             <AddWidgetWithPositionMenu {...props} type='recentComments' name='Recent Comments'/>
             <AddWidgetWithPositionMenu {...props} type='searchBar' name='Search'/>
+            <AddWidgetWithPositionMenu {...props} type='searchButton' name='Search Button'/>
             <AddWidgetWithPositionMenu {...props} type='meta' name='Meta'/>
             <AddWidgetWithPositionMenu {...props} type='logo' name='Logo'/>
             <AddWidgetWithPositionMenu {...props} type='form' name='Form'/>

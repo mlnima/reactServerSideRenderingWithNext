@@ -54,6 +54,8 @@ const postSchema =  new Schema({
     premium: Boolean,
     inSlideShow: Boolean,
     rating:String,
+    createdAt:Date,
+    updatedAt:Date
 
 },{ timestamps: true });
 
