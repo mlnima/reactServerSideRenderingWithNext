@@ -1,8 +1,10 @@
+import React from 'react';
+
 const GlobalStyles = ({colors}) => {
 
     return (
-        <div  className='global-styles'>
-<style jsx global>{`
+        <React.Fragment>
+            <style jsx global>{`
 :root{
 ${colors}
 }
@@ -168,9 +170,9 @@ background-color: transparent;
 }
 
 }
-`}
-</style>
-        </div>
+
+`}</style>
+        </React.Fragment>
     );
 };
 export default GlobalStyles;

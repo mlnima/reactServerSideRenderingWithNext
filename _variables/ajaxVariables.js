@@ -98,8 +98,9 @@ export const executor = async (command) => {
     return await axios.post(window.location.origin + '/api/admin/terminal/commandExecutor', body)
 }
 
-export const fileUpload = async (image) => {
-    return await axios.post(window.location.origin + '/api/admin/fileManager/uploadFile', image)
+export const fileUpload = async (file) => {
+
+    return await axios.post(window.location.origin + '/api/admin/fileManager/uploadFile', file)
 }
 
 export const uploadFiles = async (image) => {

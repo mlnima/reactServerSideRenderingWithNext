@@ -4,7 +4,7 @@ const fsExtra = require('fs-extra')
 module.exports = async (req, res) => {
     const file = req.files.profileImage
     const userId = req.userData._id
-    const directoryPath = './static/uploads/users/' + userId + '/'
+    const directoryPath = './public/uploads/users/' + userId + '/'
     const filePath = directoryPath + file.name + '.png'
     const filePathOriginalSize = directoryPath + 'originalSize_' + file.name;
     fsExtra.ensureDir(directoryPath).then(() => {

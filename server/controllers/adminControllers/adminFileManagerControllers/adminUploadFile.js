@@ -11,7 +11,7 @@ module.exports = async (req, res) => {
     const today = new Date(Date.now())
     const year = today.getFullYear()
     const month = today.getMonth() + 1
-    const directoryPath = './static/uploads/' + fileType + '/' + year + '/' + month + '/'
+    const directoryPath = './public/uploads/' + fileType + '/' + year + '/' + month + '/'
     fsExtra.ensureDir(directoryPath).then(() => {
         const filePath = directoryPath + file.name
         file.mv(filePath, function (err) {

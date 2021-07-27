@@ -18,7 +18,7 @@ const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
 const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), {ssr: false})
-let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
+let CustomGlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 const AppLayout = props => {
     //console.log(props)
@@ -152,8 +152,8 @@ const AppLayout = props => {
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
-            <GlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/>
-            <GlobalStyles colors={props.design?.data?.customColors|| contextData?.siteDesign?.customColors || ''}/>
+            <CustomGlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/>
+            <GlobalStyles colors={props.design?.data?.customColors|| contextData?.siteDesign?.customColors || ''} />
             <SiteSettingSetter identity={props.identity || contextData?.siteIdentity} design={props.design || contextData?.siteDesign} eCommerce={props.eCommerce}/>
             {(!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar).length > 0 ?
                 <TopBarWidgetArea

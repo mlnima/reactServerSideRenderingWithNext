@@ -5,6 +5,7 @@ import styled from "styled-components";
 import React from "react";
 
 let StyledSection = styled.section`
+
   .small-posts-content {
     grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     grid-template-rows: repeat(auto-fill, minmax(140px, 1fr));
@@ -49,7 +50,6 @@ let StyledSection = styled.section`
             img, video {
               width: 130px ;
               aspect-ratio:16/9;
-          
             }
             .top-right ,.bottom-right{
               display: none;
@@ -71,9 +71,7 @@ let StyledSection = styled.section`
           }
         }
       }
-      
     }
-
   }
 ${props => props.customStyles}
 `
@@ -83,9 +81,7 @@ ${props => props.customStyles}
 const Widget = props => {
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
     return (
-        <StyledSection customStyles={props.data?.customStyles || ''}
-                       className={'widget ' + (props.data?.extraClassName ?? '')}
-                       {...idAttribute}>
+        <StyledSection customStyles={props.data?.customStyles || ''} className={'widget ' + (props.data?.extraClassName ?? '')} {...idAttribute}>
             <WidgetHeader {...props.data}/>
             <WidgetText {...props.data} id={props._id}/>
             {props.widgetToRender ?

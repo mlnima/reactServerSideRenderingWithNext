@@ -41,6 +41,7 @@ app.prepare().then(() => {
     server.use(xmlParser());
     server.use(compression({filter: shouldCompress}));
     server.use('/static', express.static(path.join(__dirname, 'static'),{maxAge: "365d"}))
+    server.use('/public', express.static(path.join(__dirname, 'public'),{maxAge: "365d"}))
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apiCache.clear(req.params.collection)
         res.end()

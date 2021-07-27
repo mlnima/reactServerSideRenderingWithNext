@@ -52,7 +52,7 @@ const PostElementImage = ({postElementSize,widgetId,isHover,mainThumbnail,isHove
             `}</style>
 
             {isHover && videoTrailerUrl ?
-                <video autoPlay={true} loop={true}>
+                <video autoPlay={true} loop={true} webkitplaysinline="webkitplaysinline" playsInline="playsinline" >
                     <source src={videoTrailerUrl} />
                     Sorry, your browser doesn't support embedded videos.
                 </video>

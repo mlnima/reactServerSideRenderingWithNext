@@ -36,7 +36,10 @@ const PostElement = ({
 
     let isHoverHandler = () => {
         if (videoTrailerUrl) {
-            state.isHover ? setState({...state, isHover: false}) : setState({...state, isHover: true})
+            setTimeout(()=>{
+                state.isHover ? setState({...state, isHover: false}) : setState({...state, isHover: true})
+            },500)
+
         }
     };
 

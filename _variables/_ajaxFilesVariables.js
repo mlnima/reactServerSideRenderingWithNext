@@ -22,7 +22,7 @@ export const deleteFile = filePath=>{
         filePath,
         token: localStorage.wt
     };
-    return axios.post(window.location.origin +'//api/admin/fileManager/deleteFile',body)
+    return axios.post(window.location.origin +'/api/admin/fileManager/deleteFile',body)
 };
 
 
@@ -48,7 +48,7 @@ export const newFolder = (folderName,folderPath)=>{
 };
 
 export const newFile = (fileName,filePath)=>{
-
+console.log(filePath)
     let body = {
         fileName,
         filePath,
