@@ -3,6 +3,7 @@
 /.next/*
 .next
 /static/uploads
+/public/uploads
 /static/uploads/
 /static/uploads/*
 /temp.js
