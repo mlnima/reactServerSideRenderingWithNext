@@ -11,6 +11,10 @@ const mongoose = require('mongoose');
  const updatePostWidget = async (widget)=>{
      const widgetData = widget.data
 
+     if (widgetData.data.type==='logo'){
+         console.log(widget.data)
+     }
+
     try {
         const sortMethod = widgetData.sortBy ? widgetData.sortBy === 'latest' ? {lastModify: -1} : {[widgetData.sortBy]: -1} : {lastModify: -1};
 

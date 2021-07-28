@@ -28,92 +28,8 @@ const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'))
 const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'))
 const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'))
 const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false})
-import styled from "styled-components";
-
-let StyledDiv = styled.div`
-  z-index: 3;
-  background-color: var(--admin-color-8);
-  display: flex;
-  flex-direction: column;
-  color: var(--admin-text-color);
-  position: initial;
-  top:100px;
-  width: 100%;
-  p{
-    width: 95%;
-    margin: auto;
-    font-size: .8rem;
-  }
-  .widgetInfo{
-    margin: auto;
-    width: 95%;
-  }
-  .customStylesTextarea{
-    width: 95%;
-    min-height: 250px;
-    margin: auto;
-  }
-  .widgetSection{
-    margin: auto;
-    width: 95%;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex-wrap: wrap;
-     p{
-       width: 40%;
-       font-size: .8rem;
-       margin:0 10px;
-     }
-    input,select{
-      display: block;
-      width: 50%;
-      -ms-box-sizing:content-box;
-      -moz-box-sizing:content-box;
-      -webkit-box-sizing:content-box;
-      box-sizing:content-box;
-    }
-  }
-  textarea{
-  min-height: 250px;
-}
-  button {
-    @include AdminLightBtn;
-  }
-.media-widget{
-  display:flex;
-  justify-content: center;
-}
-  //.widgetInfo {
-  //  display: flex;
-  //  flex-direction: row;
-  //  color: white;
-  //  font-size: small;
-  //  .widget-info-id{
-  //  text-align: left;
-  //  padding: 0;
-  //  margin: 0;
-  //  }
-  //  //label {
-  //  //  display: flex;
-  //  //  justify-content: space-between;
-  //  //}
-  //}
-  input, select, button {
-    margin: 5px;
-  }
-  input, select {
-    background-color: #181818;
-    color: white;
-  }
-  .control-buttons{
-  display: flex;
-  justify-content: space-evenly;
-  button{
-    padding: 5px 5%;
-  }
-}
-`
+import WidgetModelStyles from "./WidgetModelStyles";
+import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields";
 
 const WidgetModel = props => {
     const contextData = useContext(AppContext);
@@ -220,23 +136,13 @@ const WidgetModel = props => {
         })
     }
 
-
-    // useEffect(() => {
-    //     console.log(widgetData.editMode)
-    // }, [widgetData]);
-
-
     const onChangeHandlerByName = (name, value) => {
         setWidgetData({
             ...widgetData,
             [name]: value
         })
     };
-    // const languagesOptions = (process.env.REACT_APP_LOCALS.split(' ').filter(lang=>lang!== process.env.REACT_APP_DEFAULT_LOCAL)||[]).map(lang => {
-    //     return (
-    //         <option key={lang} value={lang}>{lang}</option>
-    //     )
-    // });
+
     const onOpenHandler = () => {
         widgetSettings.open ? setWidgetSettings({
             ...widgetSettings,
@@ -249,8 +155,8 @@ const WidgetModel = props => {
             data: {
                 ...widgetData,
                 stayOpen: !widgetData.stayOpen,
-                posts:[],
-                metaData:[]
+                posts: [],
+                metaData: []
             }
         }
         updateWidgets(dataToSave).then(() => {
@@ -316,8 +222,8 @@ const WidgetModel = props => {
                 data: {
                     ...widgetData,
                     widgetIndex: valueToSet,
-                    posts:[],
-                    metaData:[]
+                    posts: [],
+                    metaData: []
                 }
             }
             updateWidgets(dataToSave).then(() => {
@@ -334,8 +240,8 @@ const WidgetModel = props => {
             _id: props.widgetId ? props.widgetId : '',
             data: {
                 ...widgetData,
-                posts:[],
-                metaData:[]
+                posts: [],
+                metaData: []
             }
         }
         updateWidgets(dataToSave).then(() => {
@@ -343,19 +249,16 @@ const WidgetModel = props => {
         })
     };
 
-    //
-    // useEffect(() => {
-    //     console.log(props)
-    // }, [widgetSettings.stayOpen]);
-
 
     if (widgetSettings.open || widgetData.stayOpen) {
         return (
 
-            <>
-                <WidgetHeaderControl setKey={false} widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData}  onLockHandler={onLockHandler} changeWidgetIndex={changeWidgetIndex}
+            <div className='widget-model-open'>
+                <WidgetModelStyles/>
+                <WidgetHeaderControl setKey={false} widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} onLockHandler={onLockHandler}
+                                     changeWidgetIndex={changeWidgetIndex}
                                      onOpenHandler={onOpenHandler}/>
-                <StyledDiv className='widgetModel'>
+                <div className='widgetModel'>
 
                     <div className='selectInputFieldForWidget widgetSection'>
                         <p>Edit Mode:</p>
@@ -532,30 +435,7 @@ const WidgetModel = props => {
                         : null
                     }
                     {widgetData.type === 'logo' ?
-                        <>
-                            <div className='textInputFieldForWidget widgetSection'>
-                                <p>Logo Text :</p>
-                                <input name='LogoText'
-                                       value={
-                                           widgetSettings.activeEditingLanguage === 'default' ? widgetData.LogoText :
-                                               widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.LogoText || ''
-                                       }
-                                       className='LogoText'
-                                       onChange={e => onTextInputsDataChangeHandler(e)}/>
-                            </div>
-                            <div className='textInputFieldForWidget widgetSection'>
-                                <p>Under Logo Headline Text:</p>
-                                <input name='headLine'
-                                       value={
-                                           widgetSettings.activeEditingLanguage === 'default' ? widgetData.headLine :
-                                               widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.headLine || ''
-
-                                       }
-                                       className='headLine'
-                                       onChange={e => onTextInputsDataChangeHandler(e)}/>
-                            </div>
-                        </>
-                        : null
+                        <LogoTypeWidgetModelFields widgetSettings={widgetSettings} onChangeHandler={onChangeHandler}   widgetData={widgetData} onTextInputsDataChangeHandler={onTextInputsDataChangeHandler} />: null
                     }
                     {widgetData.type === 'language' ?
                         <>
@@ -605,7 +485,6 @@ const WidgetModel = props => {
                         linkToType={widgetData.linkToType}
                         linkToAs={widgetData.linkToAs} rendering={widgetData.type === 'linkTo'}/>
 
-
                     <MediaWidgetType
                         rendering={widgetData.type === 'media'}
                         widgetSettings={widgetSettings}
@@ -613,7 +492,6 @@ const WidgetModel = props => {
                         onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
                         widgetData={widgetData}
                     />
-
 
                     <TextInputFieldForWidget
                         inputTitle='Media Url:'
@@ -660,8 +538,8 @@ const WidgetModel = props => {
                                              classNameValue='selectedMetaForPosts' placeHolder='selectedMetaForPosts'
                                              onChangeHandler={onChangeHandler} rendering={widgetData.type === 'posts' || widgetData.type === 'postsSwiper'}/>
 
-                    <TextInputFieldForWidget inputTitle='Logo image URL :' name='LogoUrl' type='text' value={widgetData.LogoUrl} classNameValue='logoUrl'
-                                             placeHolder='Logo image URL' onChangeHandler={onChangeHandler} rendering={widgetData.type === 'logo'}/>
+                    {/*<TextInputFieldForWidget inputTitle='Logo image URL :' name='LogoUrl' type='text' value={widgetData.LogoUrl} classNameValue='logoUrl'*/}
+                    {/*                         placeHolder='Logo image URL' onChangeHandler={onChangeHandler} rendering={widgetData.type === 'logo'}/>*/}
 
                     <SliderWidgetTypeFields
                         rendering={widgetData.type === 'imageSwiper' || widgetData.type === 'postsSwiper'}
@@ -725,13 +603,14 @@ const WidgetModel = props => {
 
                     </div>
 
-                </StyledDiv>
-            </>
+                </div>
+            </div>
 
         );
     } else {
         return (
-            <WidgetHeaderControl widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} onLockHandler={onLockHandler} changeWidgetIndex={changeWidgetIndex} onOpenHandler={onOpenHandler}/>
+            <WidgetHeaderControl widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} onLockHandler={onLockHandler} changeWidgetIndex={changeWidgetIndex}
+                                 onOpenHandler={onOpenHandler}/>
         )
     }
 

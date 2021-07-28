@@ -1,6 +1,13 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
+
+
+
+
+
+
+
 const widgetDataSchema =  mongoose.Schema({
     extraClassName: String,
     extraId: String,
@@ -16,6 +23,7 @@ const widgetDataSchema =  mongoose.Schema({
     metaType: String,
     sortBy: String,
     LogoText: String,
+    LogoUrl:String,
     headLine: String,
     linkToType: String,
     postElementSize:String,
