@@ -24,7 +24,13 @@ const Home = ({isMobile, widgets, design, identity}) => {
 
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'homePage')
-    return {props: {widgets : firstLoadData?.widgets || [], ...firstLoadData?.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer, requestProtocol: context.req.protocol}}
+    return {
+        props: {widgets : firstLoadData?.widgets || [],
+            ...firstLoadData?.settings,
+            isMobile: firstLoadData?.isMobile ? Boolean(firstLoadData.isMobile) :false,
+            referer: firstLoadData?.referer ? firstLoadData?.referer :false,
+            requestProtocol: context.req.protocol
+        }}
 }
 
 export default Home;
