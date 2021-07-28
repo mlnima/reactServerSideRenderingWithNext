@@ -188,7 +188,10 @@ const LoginRegisterPopupForms = props => {
 
                             <div className='register-form-buttons'>
                                 <button type='submit' className='login-register-form-button simple-button'>Login</button>
-                                <span onClick={props.onTypeChangeHandler} className='login-register-switch-form-button simple-button'>Register</span>
+                                <span onClick={()=>{
+                                    props.onTypeChangeHandler()
+                                    setState({})
+                                }} className='login-register-switch-form-button simple-button'>Register</span>
                             </div>
 
 
