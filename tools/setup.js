@@ -59,7 +59,8 @@ const designData = {
 }
 
 const siteDesignToSave = new settingSchema(designData)
-siteDesignToSave.save().catch(() => {
+siteDesignToSave.save().catch(error => {
+    console.log(error)
     console.log('Error on site Identity set')
 })
 
@@ -114,7 +115,8 @@ const widgetData = [{
 
 widgetData.forEach(widget => {
     const dataToSave = new widgetSchema(widget)
-    dataToSave.save().catch(() => {
+    dataToSave.save().catch(err => {
+        console.log(err)
         console.log('Error on widget set')
     })
 })

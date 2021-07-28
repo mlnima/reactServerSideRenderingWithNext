@@ -113,7 +113,13 @@ const Login = () => {
 
 export const getServerSideProps = async ({req}) => {
     const firstLoadData = await getFirstLoadData(req,[])
-    return {props: {widgets:firstLoadData.widgets,...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile),  referer:firstLoadData.referer}}
+    return {
+        props: {widgets : firstLoadData?.widgets || [],
+            ...firstLoadData?.settings,
+            isMobile: firstLoadData?.isMobile ? Boolean(firstLoadData.isMobile) :false,
+            referer: firstLoadData?.referer ? firstLoadData?.referer :false,
+            requestProtocol: context.req.protocol
+        }}
 }
 
 
