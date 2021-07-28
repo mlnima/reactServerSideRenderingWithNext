@@ -111,8 +111,8 @@ const Login = () => {
     );
 };
 
-export const getServerSideProps = async ({req}) => {
-    const firstLoadData = await getFirstLoadData(req,[])
+export const getServerSideProps = async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req,[])
     return {
         props: {widgets : firstLoadData?.widgets || [],
             ...firstLoadData?.settings,
