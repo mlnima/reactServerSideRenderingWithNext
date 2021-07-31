@@ -4,16 +4,47 @@ const fsExtra = require('fs-extra');
 const updateSaveMetas = require('../_variables/_updateSaveMetas')
 
 const savePostWithDuplicateContent = async newPost =>{
-    console.log()
     try {
-        const newPostDataToSave = new postSchema({
+        const newPostWithMeta = {
             ...newPost,
             tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
             categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : []
-        });
+        }
 
-        return newPostDataToSave.save()
+
+        //
+        // const newPostDataToSave = new postSchema();
+
+        return postSchema.findOneAndUpdate({title:newPost.title},newPostWithMeta,{new:true,upsert: true}).exec()
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        // {
+        // ...newPost,
+        //     tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
+        //     categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
+        //     actors: newPost.actors ? await updateSaveMetas(newPost.actors) : []
+        // }
+        //
+        //
+        // return newPostDataToSave.save()
+        //
+
+
+
+
 
     } catch (e) {
         console.log(e)
@@ -26,8 +57,8 @@ module.exports = async (req, res) => {
     console.log(newPost.title)
     try {
         if (req.body.duplicateContent) {
-            savePostWithDuplicateContent(newPost).then(() => {
-                res.json({message: 'post ' + newPost.title + ' has been saved'})
+            savePostWithDuplicateContent(newPost).then(savedPost => {
+                res.json({message: 'post ' + savedPost.title + ' has been saved'})
                 res.end()
             }).catch(err => {
                 res.json({message: '****error!***** ' + 'post ' + newPost.title + ' Can not be save  in the Database'})

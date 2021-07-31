@@ -2,7 +2,7 @@
 const postSchema = require('../../../models/postSchema');
 
 module.exports = async (req, res) => {
-    const size = !req.body?.size ? req.body?.size > 500 ? 500 : req.body.size : 30;
+    const size = req.body.size ? req.body.size > 500 ? 500 : req.body.size : 30;
     const page = req.body?.page ?? 1;
     const postTypeQuery = !req.body.postType ? {} : {postType: req.body.postType};
     const statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};

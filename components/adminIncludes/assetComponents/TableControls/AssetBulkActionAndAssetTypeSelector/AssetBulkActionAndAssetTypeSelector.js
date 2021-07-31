@@ -5,10 +5,11 @@ let StyledDiv = styled.div`
   display: flex;
   justify-content: flex-start;
   align-items: center;
+  width: 300px;
   select {
     border: 1px solid rgba(0,0,0,.1);
     padding: 3px 5px;
-    background-color: $light100;
+    background-color: white;
   }
   .asset-page-bulk-action-drop-down {
     .asset-page-bulk-action-drop-down-btn {

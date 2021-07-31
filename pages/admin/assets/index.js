@@ -29,8 +29,9 @@ const assets = props => {
     const [finalPageData, setFinalPageData] = useState({});
 
     useEffect(() => {
+       // console.log(parseInt(router.query.size))
         getAndSetAssetData()
-    }, [props]);
+    }, [props,router.query.size]);
 
     // useEffect(() => {
     //     console.log(finalPageData)
@@ -39,7 +40,7 @@ const assets = props => {
     const getAndSetAssetData = async () => {
         let ajaxRequestData;
         let getFirstDataOption = {
-            size: router.query.size ? parseInt(router.query.size) : 30,
+            size: router.query.size ? parseInt(router.query.size)    : 30,
             page: router.query.page ? parseInt(router.query.page) : 1,
             postType: router?.query?.type ?? null,
             fields: ['title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail'],
