@@ -3,7 +3,7 @@ import PostElement from "../PostElement/PostElement";
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
 
-const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyle,postElementImageLoaderType,postElementImageLoader,widgetId}) => {
+const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, postElementStyle,postElementImageLoaderType,postElementImageLoader,widgetId}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
@@ -20,7 +20,6 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
                 })
             }
         }
-
     }, []);
 
 
@@ -35,12 +34,15 @@ const Posts = ({viewType, isMobile, _id, postElementSize, posts, postElementStyl
                     }
             `}</style>
             {(posts || []).map(post => {
+
                 const title = (post?.translations?.[locale]?.title || post?.title).replace('#', '')
+
                 return (
                     <PostElement
                         isMobile={isMobile}
                         onClickLoadingHandler={contextData.functions.loadingHandler}
                         key={post._id}
+                        redirectLink={post.redirectLink}
                         widgetId={widgetId}
                         viewType={viewType}
                         postElementSize={postElementSize}

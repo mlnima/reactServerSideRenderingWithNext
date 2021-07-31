@@ -12,28 +12,12 @@ import styled from "styled-components";
 import PostMetaDataToSiteHead from "../../../components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead";
 import {AppContext} from "../../../context/AppContext";
 import Post from "../index";
+import PostPagePromotionType from "../../../components/includes/postPageComponents/PostPagePromotionType/PostPagePromotionType";
+import EditLinkForAdmin from "../../../components/includes/Post/PostInfo/EditLinkForAdmin/EditLinkForAdmin";
+import PostDescription from "../../../components/includes/Post/PostInfo/PostDescription/PostDescription";
 
 let StyledMain = styled.main`
-  justify-self: center;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  #download-url {
-    width: 100%;
-    margin: 20px 0;
-    .download-link {
-      color: white;
-      padding: 10px;
-      text-align: center;
-      border-radius: 5px;
-      margin: 10px;
-    }
-  }
-  .under-post-widget-area {
-    width: 100%;
-  }
+
 ${props => props.stylesData}
 `
 
@@ -45,14 +29,25 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
             setDeviceWidth(window.innerWidth)
         }
     }, []);
-
+// console.log(post)
     if (responseCode !== 200) {
         return <Error responseCode={responseCode}/>
-    } else return (
-        <>
-            <PostMetaDataToSiteHead {...post}/>
+    }  else return (
             <StyledMain stylesData={design?.data?.postPageStyle || contextData.siteDesign.postPageStyle || ''} className='main post-page'>
 
+            <style jsx>{`
+                .post-page{
+                    justify-self: center;
+                    display: flex;
+                    flex-direction: column;
+                    align-items: center;
+                    justify-content: flex-start;
+                    width: 100%;
+                }
+            `}</style>
+
+                <EditLinkForAdmin _id={post._id}/>
+                <PostMetaDataToSiteHead {...post}/>
                 {
                     post.postType === 'video' ?
                         <VideoPlayer
@@ -78,6 +73,10 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
                         /> :
                         null
                 }
+                {/*{post.postType === 'promotion' ?<PostDescription  description={post.description} translations={post.translations}/> :null}*/}
+
+
+
 
                 <PostInfo {...post} rating='enable'/>
                 {comments?.length > 0 ? <CommentsRenderer comments={comments}/> : null}
@@ -91,7 +90,6 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
                     </div> : null}
 
             </StyledMain>
-        </>
     );
 };
 
@@ -127,3 +125,11 @@ export const getServerSideProps = async (context) => {
 
 
 export default postPage;
+
+
+// else if(post.postType === 'promotion'){
+//
+//     return (
+//         <PostPagePromotionType post={post} />
+//     )
+// }

@@ -1,29 +1,29 @@
 //adminCreateNewPost
 const postSchema = require('../../../models/postSchema');
 const metaSchema = require('../../../models/metaSchema');
-
-const metasSaver = async (metas) => {
-    let finalData = []
-    for await (let meta of metas) {
-        await metaSchema.findOne({name: meta.name}).exec().then(async existingMeta => {
-            if (existingMeta) {
-                finalData = [...finalData, existingMeta._id]
-            } else {
-                const metaDataToSave = new metaSchema({
-                    name: meta.name,
-                    type: meta.type,
-                    count: 1
-                })
-                await metaDataToSave.save().then(saved => {
-                    finalData = [...finalData, saved._id]
-                }).catch(err => {
-
-                })
-            }
-        })
-    }
-    return finalData
-}
+const updateSaveMetas = require('../_variables/_updateSaveMetas')
+// const metasSaver = async (metas) => {
+//     let finalData = []
+//     for await (let meta of metas) {
+//         await metaSchema.findOne({name: meta.name}).exec().then(async existingMeta => {
+//             if (existingMeta) {
+//                 finalData = [...finalData, existingMeta._id]
+//             } else {
+//                 const metaDataToSave = new metaSchema({
+//                     name: meta.name,
+//                     type: meta.type,
+//                     count: 1
+//                 })
+//                 await metaDataToSave.save().then(saved => {
+//                     finalData = [...finalData, saved._id]
+//                 }).catch(err => {
+//
+//                 })
+//             }
+//         })
+//     }
+//     return finalData
+// }
 
 module.exports = async (req, res) => {
     const newPost = req.body.postData;
@@ -31,9 +31,9 @@ module.exports = async (req, res) => {
         const editedNewPost = {
             ...newPost,
             lastModify: Date.now(),
-            tags: newPost.tags ? await metasSaver(newPost.tags) : [],
-            categories: newPost.categories ? await metasSaver(newPost.categories) : [],
-            actors: newPost.actors ? await metasSaver(newPost.actors) : []
+            tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
+            categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
+            actors: newPost.actors ? await updateSaveMetas(newPost.actors) : []
         }
         const newPostDataToSave = new postSchema(editedNewPost);
         newPostDataToSave.save().then(savedPostData => {

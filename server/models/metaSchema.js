@@ -13,10 +13,6 @@ const metaSchema =  new Schema({
     imageUrl:String,
     translations:mongoose.Mixed,
     count:Number,
-    lastModify: {
-        type:Date,
-        default:Date.now()
-    }
-});
+},{ timestamps: true });
 
 module.exports = mongoose.model("meta", metaSchema);

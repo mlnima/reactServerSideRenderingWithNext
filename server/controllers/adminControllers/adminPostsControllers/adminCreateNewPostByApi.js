@@ -1,46 +1,32 @@
 const postSchema = require('../../../models/postSchema');
 const metaSchema = require('../../../models/metaSchema');
 const fsExtra = require('fs-extra');
+const updateSaveMetas = require('../_variables/_updateSaveMetas')
 
-const metasSaver = async (metas) => {
-    let finalData = []
-    for await (let meta of metas) {
-        await metaSchema.findOne({name: meta.name}).exec().then(async existingMeta => {
-            if (existingMeta) {
-                finalData = [...finalData, existingMeta._id]
-            } else {
-                const metaDataToSave = new metaSchema({
-                    name: meta.name,
-                    type: meta.type,
-                    count: 1
-                })
-                await metaDataToSave.save().then(saved => {
-                    finalData = [...finalData, saved._id]
-                }).catch(err => {
+const savePostWithDuplicateContent = async newPost =>{
+    console.log()
+    try {
+        const newPostDataToSave = new postSchema({
+            ...newPost,
+            tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
+            categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
+            actors: newPost.actors ? await updateSaveMetas(newPost.actors) : []
+        });
 
-                })
-            }
-        })
+        return newPostDataToSave.save()
+
+    } catch (e) {
+        console.log(e)
     }
-    return finalData
 }
 
 
 module.exports = async (req, res) => {
     const newPost = req.body.postData
-    console.log(newPost)
+    console.log(newPost.title)
     try {
-
         if (req.body.duplicateContent) {
-            const editedNewPost = {
-                ...newPost,
-                lastModify: Date.now(),
-                tags: newPost.tags ? await metasSaver(newPost.tags) : [],
-                categories: newPost.categories ? await metasSaver(newPost.categories) : [],
-                actors: newPost.actors ? await metasSaver(newPost.actors) : []
-            }
-            const newPostDataToSave = new postSchema(editedNewPost);
-            newPostDataToSave.save().then(savedPostData => {
+            savePostWithDuplicateContent(newPost).then(() => {
                 res.json({message: 'post ' + newPost.title + ' has been saved'})
                 res.end()
             }).catch(err => {
@@ -75,10 +61,6 @@ module.exports = async (req, res) => {
 
                         download.image(options)
                             .then(({filename}) => {
-                                // console.log(filename)
-                                // const filePath = directoryPath + newPost.title + '_' + filename;
-                                // const filePathOriginalSize = directoryPath + filename;
-                                // console.log('Saved to', filename)
                                 sharp(filePathOriginalSize).resize(320, 180).toFile(filePath, async (err, info) => {
                                     if (err) {
                                         console.log('sharp Error', err)

@@ -28,7 +28,7 @@ router.post('/updateMeta',adminAuthMiddleware,adminUpdateMeta)
 router.post('/deleteMeta',adminAuthMiddleware,adminDeleteMeta)
 router.post('/updateComment',adminAuthMiddleware,adminUpdateComment)
 router.post('/deleteComments',adminAuthMiddleware,adminDeleteComments)
-router.post('/createNewByApi',adminAuthMiddleware,adminCreateNewPostByApi)
+router.post('/createNewByApi',adminCreateNewPostByApi)
 router.post('/getComments',adminAuthMiddleware,adminGetComments)
 
 

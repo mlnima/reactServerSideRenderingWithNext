@@ -71,7 +71,7 @@ export const getServerSideProps = async ({req, query}) => {
         size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
         page: parseInt(query?.page) || 1,
         postType: query.type || null,
-        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating'],
+        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating' , 'redirectLink'],
         keyword: query.keyword || '',
         author: query.author || 'all',
         status: 'published',

@@ -23,6 +23,7 @@ const postSchema =  new Schema({
     videoEmbedCode: String,
     videoScriptCode: String,
     downloadLink: String,
+    redirectLink: String,
     currency: String,
     iframe: String,
     status: String,

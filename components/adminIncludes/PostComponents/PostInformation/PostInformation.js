@@ -144,6 +144,7 @@ const PostInformation = props => {
             <Quality {...props} rendering={props.postData.postType === 'video'}/>
             <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={props.postData.postType === 'video'}/>
             <TextInput {...props} name='videoEmbedCode' rendering={props.postData.postType === 'video'}/>
+            <TextInput {...props} name='redirectLink' rendering={props.postData.postType === 'promotion'}/>
             <TextAreaComponent {...props} name='videoScriptCode' rendering={props.postData.postType === 'video'}/>
             <RenderIframe {...props} rendering={props.postData.postType === 'video'}/>
             <TextInputWithUploadBtn {...props} name='VideoTrailerUrl' title='Video Trailer Url' rendering={props.postData.postType === 'video'}/>

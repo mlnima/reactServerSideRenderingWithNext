@@ -73,6 +73,7 @@ let StyledSection = styled.section`
       }
     }
   }
+  
 ${props => props.customStyles}
 `
 
@@ -81,7 +82,7 @@ ${props => props.customStyles}
 const Widget = props => {
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
     return (
-        <StyledSection customStyles={props.data?.customStyles || ''} className={'widget ' + (props.data?.extraClassName ?? '')} {...idAttribute}>
+        <StyledSection  className={'widget ' + (props.data?.extraClassName ?? '')}  {...idAttribute} customStyles={props.data?.customStyles || ''}>
             <WidgetHeader {...props.data}/>
             <WidgetText {...props.data} id={props._id}/>
             {props.widgetToRender ?

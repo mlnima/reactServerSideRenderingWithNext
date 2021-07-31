@@ -7,6 +7,7 @@ const UploadFileBtn = props => {
     const uploadInputElement = useRef(null)
     const onUploadHandler = e => {
         const filesData = new FormData()
+        filesData.append('token',localStorage.wt)
         filesData.append('uploadingFile', e.target.files[0])
         filesData.append('type',props.type)
         uploadFiles(filesData).then(res=>{

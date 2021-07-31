@@ -6,7 +6,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const LoginRegisterPopupForms = props => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({});
+    const [state, setState] = useState({
+        username:'',
+        email:'',
+        password:'',
+        password2:'',
+    });
     const [response, setResponse] = useState({
         message: undefined,
         type: undefined,
@@ -18,6 +23,16 @@ const LoginRegisterPopupForms = props => {
             [e.target.name]: e.target.value
         })
     };
+
+    const onresetStateHandler  = ()=>{
+        setState({
+            username:'',
+            email:'',
+            password:'',
+            password2:'',
+        })
+    }
+
     const onLoginHandler = e => {
         e.preventDefault();
         login(state).then(res => {
@@ -153,23 +168,27 @@ const LoginRegisterPopupForms = props => {
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">
                                     <p>username</p>
-                                    <input name='username' onChange={e => onChangeHandler(e)}/>
+                                    <input name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
                                 </div>
                                 <div className="login-register-form-field">
                                     <p>email</p>
-                                    <input name='email' type='email' onChange={e => onChangeHandler(e)}/>
+                                    <input name='email' value={state.email} type='email' onChange={e => onChangeHandler(e)}/>
                                 </div>
                                 <div className="login-register-form-field">
                                     <p>password</p>
-                                    <input name='password' type='password' onChange={e => onChangeHandler(e)}/>
+                                    <input name='password' value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
                                 </div>
                                 <div className="login-register-form-field">
                                     <p>repeat password</p>
-                                    <input name='password2' type='password' onChange={e => onChangeHandler(e)}/>
+                                    <input name='password2' value={state.password2} type='password' onChange={e => onChangeHandler(e)}/>
                                 </div>
                             </div>
                             <div className='register-form-buttons'>
-                                <span value={null} onClick={props.onTypeChangeHandler} className='login-register-switch-form-button simple-button'>Login</span>
+                                <span value={null} onClick={()=> {
+                                    onresetStateHandler()
+                                    props.onTypeChangeHandler()
+                                }} className='login-register-switch-form-button simple-button'>Login</span>
+
                                 <button type='submit' className='login-register-form-button simple-button'>Register</button>
                             </div>
                         </React.Fragment> :
@@ -178,19 +197,19 @@ const LoginRegisterPopupForms = props => {
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">
                                     <p>username</p>
-                                    <input name='username' onChange={e => onChangeHandler(e)}/>
+                                    <input name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
                                 </div>
                                 <div className="login-register-form-field">
                                     <p>password</p>
-                                    <input name='password' type='password' onChange={e => onChangeHandler(e)}/>
+                                    <input name='password' value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
                                 </div>
                             </div>
 
                             <div className='register-form-buttons'>
                                 <button type='submit' className='login-register-form-button simple-button'>Login</button>
                                 <span onClick={()=>{
+                                    onresetStateHandler()
                                     props.onTypeChangeHandler()
-                                    setState({})
                                 }} className='login-register-switch-form-button simple-button'>Register</span>
                             </div>
 

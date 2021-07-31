@@ -10,7 +10,7 @@ const PostElement = ({
                          viewType,
                          postType,
                          _id,
-
+                         redirectLink,
                          postElementSize,
                          videoTrailerUrl,
                          views,
@@ -27,6 +27,8 @@ const PostElement = ({
                          postElementImageLoader}) => {
 
     const router = useRouter()
+
+
     let [state, setState] = useState({
         isHover: false,
         isWatched: false,
@@ -112,10 +114,41 @@ max-width: 100%;
 }
 
 `}</style>
-            <Link href={`/post/${postType}/${_id}`}
-                  scroll={false}
-            >
-                <a rel='next' onClick={onClickLoadingHandler}  className='post-element-link'>
+
+            {postType === 'promotion' ?
+            <div className='post-element-link'>
+                <a href={redirectLink}>
+                    <PostElementImage
+                        mainThumbnail={mainThumbnail}
+                        isHoverHandler={isHoverHandler}
+                        _id={_id}
+                        postType={postType}
+                        widgetId={widgetId}
+                        views={views}
+                        duration={duration}
+                        quality={quality}
+                        likes={likes}
+                        disLikes={disLikes}
+                        price={price}
+                        videoTrailerUrl={videoTrailerUrl}
+                        title={title}
+                        isHover={state.isHover}
+                        postElementSize={postElementSize}
+                        postElementImageLoader={postElementImageLoader}
+                        postElementImageLoaderType={postElementImageLoaderType}
+                        rating={true}
+                    />
+                </a>
+                <Link href={`/post/${postType}/${_id}`}scroll={false}>
+                    <a rel='next' onClick={onClickLoadingHandler}  className='post-element-link'>
+                        <PostElementTitle title={title} postElementSize={postElementSize}/>
+                    </a>
+                </Link>
+            </div>:
+                <Link href={`/post/${postType}/${_id}`}
+                      scroll={false}
+                >
+                    <a rel='next' onClick={onClickLoadingHandler}  className='post-element-link'>
                         <PostElementImage
                             mainThumbnail={mainThumbnail}
                             isHoverHandler={isHoverHandler}
@@ -137,8 +170,17 @@ max-width: 100%;
                             rating={true}
                         />
                         <PostElementTitle title={title} postElementSize={postElementSize}/>
-                </a>
-            </Link>
+                    </a>
+                </Link>
+
+
+            }
+
+
+
+
+
+
         </article>
     );
 };

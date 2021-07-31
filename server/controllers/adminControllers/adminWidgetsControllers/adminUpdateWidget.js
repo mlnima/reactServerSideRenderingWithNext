@@ -11,7 +11,7 @@ const mongoose = require('mongoose');
  const updatePostWidget = async (widget)=>{
      const widgetData = widget.data
 
-     if (widgetData.data.type==='logo'){
+     if (widgetData.type==='logo'){
          console.log(widget.data)
      }
 

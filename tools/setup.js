@@ -5,19 +5,19 @@ const widgetSchema = require('../server/models/settings/widgetSchema')
 const postSchema = require('../server/models/postSchema')
 const userSchema = require('../server/models/userSchema')
 const bcrypt = require('bcryptjs');
+require('../server/_variables/connectToDatabase')
 
-const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
-    `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
-    `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+// const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
+//     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
+//     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
+//
+// mongoose.connect(mongoDBConnectionUrl, {
+//     useNewUrlParser: true,
+//     useUnifiedTopology: true
+// })
+//     .then(() => console.log('DB connected'))
+//     .catch(err => console.log('DB not connected', err));
 
-mongoose.connect(mongoDBConnectionUrl, {
-    useNewUrlParser: true,
-    useUnifiedTopology: true
-})
-    .then(() => console.log('DB connected'))
-    .catch(err => console.log('DB not connected', err));
-
-//saving default site identity
 const identityData = {
     type: 'identity',
     data: {
@@ -30,10 +30,15 @@ const identityData = {
         metaPageSidebar: false,
         postPageSidebar: true,
         postsPageSidebar: true,
-        topBarAuthBtn: true,
         anyoneCanRegister: true,
         defaultSiteLanguage: 'en',
-        topBarVisibility: true,
+    }
+}
+
+const adminPanelData = {
+    type: 'adminPanelSettings',
+    data: {
+        defaultPostType:'standard'
     }
 }
 

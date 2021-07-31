@@ -1,6 +1,5 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useContext} from 'react';
 import {AppContext} from "../../../context/AppContext";
-import {login, registerUser} from "../../../_variables/ajaxAuthVariables";
 import LoginRegisterPopupForms from "./LoginRegisterPopupForms";
 
 const LoginRegisterPopup = props => {
