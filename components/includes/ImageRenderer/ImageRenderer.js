@@ -7,11 +7,12 @@ const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
     const [imageUrl,setImageUrl] = useState(()=>{
-        return  props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + '/static/images/noImage/no-image-available.png'
+       // return  props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + '/static/images/noImage/no-image-available.png'
+        return  props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + props.imageUrl : ''
     })
 
 
-
+//title={title}
 
 
     // const imageUrl =
@@ -63,21 +64,30 @@ const ImageRenderer = props => {
                         max-height: 100px;
                         position: relative;
                     }
+                    
+                    
+                    .no-image-title{
+                      font-size: 2rem;
+                    }
                 `}</style>
 
-                <Image
-                    src={!gotError ? imageUrl || noImageUrl : noImageUrl}
-                    alt={props.altValue || props.classNameValue}
-                    onError={e => {
-                        onErrorHandler(e)
-                        setGotError(true)
-                    }}
-                    onMouseEnter={props.hoverHandler}
-                    onTouchStart={props.hoverHandler}
-                    layout={props.layout || 'fill'}
-                    quality={props.quality || 80}
-                    loading={props.loading || 'eager'}
-                />
+
+                { imageUrl ?
+                    <Image
+                        src={!gotError ? imageUrl || noImageUrl : noImageUrl}
+                        alt={props.altValue || props.classNameValue}
+                        onError={e => {
+                            onErrorHandler(e)
+                            setGotError(true)
+                        }}
+                        onMouseEnter={props.hoverHandler}
+                        onTouchStart={props.hoverHandler}
+                        layout={props.layout || 'fill'}
+                        quality={props.quality || 80}
+                        loading={props.loading || 'eager'}
+                    />:
+                    <p className='no-image-title'>{props.title}</p>
+                }
             </div>
         )
     } else return (
@@ -102,24 +112,40 @@ const ImageRenderer = props => {
                     max-height: 200px;
                     position: relative;
                 }
+                .no-image-title{
+                 font-size: 1.5rem;
+                 font-weight: bold;
+                 color:var(--custom-green);
+                 text-align: center;
+                    overflow: hidden;
+                    text-overflow: clip;
+                }
                 @media only screen and (min-width: 768px) {
                 .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
                     width: ${imageWidth}px;
                     height: ${imageWidth / 1.777}px;
                 }
                 }
+                
             `}</style>
-            <img className={props.classNameValue}
-                 alt={props.altValue || props.classNameValue}
-                 onMouseEnter={props.hoverHandler}
-                 onMouseOver={props.hoverHandler}
-                 onTouchStartCapture={props.hoverHandler}
-                 onTouchEnd={props.hoverHandler}
-                 src={!gotError ? imageUrl || noImageUrl : noImageUrl}
-                 onError={e => {
-                     onErrorHandler(e)
-                     setGotError(true)
-                 }}/>
+            { imageUrl ?
+                <img className={props.classNameValue}
+                     alt={props.altValue || props.classNameValue}
+                     onMouseEnter={props.hoverHandler}
+                     onMouseOver={props.hoverHandler}
+                     onTouchStartCapture={props.hoverHandler}
+                     onTouchEnd={props.hoverHandler}
+                     src={!gotError ? imageUrl || noImageUrl : noImageUrl}
+                     onError={e => {
+                         onErrorHandler(e)
+                         setGotError(true)
+                     }}/> :
+                <p className='no-image-title'>{props.title}</p>
+
+            }
+
+
+
         </div>
 
     );

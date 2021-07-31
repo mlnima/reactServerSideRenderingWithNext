@@ -61,6 +61,7 @@ const PostElementImage = ({postElementSize,widgetId,isHover,mainThumbnail,isHove
                                altValue={title || mainThumbnail}
                                hoverHandler={isHoverHandler}
                                quality={100}
+                               title={title}
                                widgetId={widgetId}
                                loading={postElementImageLoaderType || 'eager'}
                                postElementSize={postElementSize}

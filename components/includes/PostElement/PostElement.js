@@ -92,6 +92,10 @@ justify-content: center;
 align-items: flex-start;
 margin: auto;
 text-decoration: none;
+color:var(--main-text-color);
+a{
+  color:var(--main-text-color);
+}
 }
 @media only screen and (min-width: 768px){
 .post-element-smaller,.post-element-smaller>h2,.post-element-smaller>.post-element-link{
