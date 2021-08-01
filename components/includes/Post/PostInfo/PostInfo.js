@@ -129,7 +129,7 @@ const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,
 
             <div className='post-info-body'>
                 <div className="meta-description">
-                    {postType === 'video' || postType === 'product' || postType === 'promotion' ?<PostDescription  description={description} translations={translations}/>:null }
+                    {postType === 'video' || postType === 'product' || postType === 'promotion' || postType === 'article' ?<PostDescription  description={description} translations={translations}/>:null }
                     <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='actors' data={actors || []}/>
                     <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='tags' data={tags || []}/>
                     <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='categories' data={categories || []}/>

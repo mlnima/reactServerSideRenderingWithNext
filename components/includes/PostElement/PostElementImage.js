@@ -4,8 +4,9 @@ import BottomLeft from "./BottomLeft";
 import TopRight from "./TopRight";
 import TopLeft from "./TopLeft";
 import {likeValueCalculator} from "../../../_variables/_variables";
+import PromotionTypeCard from "./PromotionTypeCard";
 
-const PostElementImage = ({postElementSize,widgetId,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title,postElementImageLoaderType,postElementImageLoader,rating}) => {
+const PostElementImage = ({postElementSize,imageSize,widgetId,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title,postElementImageLoaderType,postElementImageLoader,rating}) => {
     const imageWidthSize = postElementSize === 'list' ? 116.6 :
                            postElementSize === 'smaller' ? 209.8 :
                            postElementSize === 'small' ? 255 :
@@ -58,6 +59,7 @@ const PostElementImage = ({postElementSize,widgetId,isHover,mainThumbnail,isHove
                 </video>
                 :
                 <ImageRenderer imageUrl={mainThumbnail}
+                               imageSize={imageSize}
                                altValue={title || mainThumbnail}
                                hoverHandler={isHoverHandler}
                                quality={100}

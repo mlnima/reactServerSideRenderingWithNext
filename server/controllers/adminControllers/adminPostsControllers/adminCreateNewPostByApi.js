@@ -12,39 +12,7 @@ const savePostWithDuplicateContent = async newPost =>{
             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : []
         }
 
-
-        //
-        // const newPostDataToSave = new postSchema();
-
         return postSchema.findOneAndUpdate({title:newPost.title},newPostWithMeta,{new:true,upsert: true}).exec()
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // {
-        // ...newPost,
-        //     tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
-        //     categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
-        //     actors: newPost.actors ? await updateSaveMetas(newPost.actors) : []
-        // }
-        //
-        //
-        // return newPostDataToSave.save()
-        //
-
-
-
-
 
     } catch (e) {
         console.log(e)

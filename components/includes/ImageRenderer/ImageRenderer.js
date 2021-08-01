@@ -7,27 +7,13 @@ const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
     const [imageUrl,setImageUrl] = useState(()=>{
-       // return  props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + '/static/images/noImage/no-image-available.png'
         return  props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + props.imageUrl : ''
     })
 
-
-//title={title}
-
-
-    // const imageUrl =
-
+    const noImageUrl= '/static/images/noImage/no-image-available.png'
     //const isImageAbsolutePath = imageUrl?.includes('http')
    // const validImageForNextImage = (((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
     const validImageForNextImage = false
-
-    const noImageUrl = '/static/images/noImage/no-image-available.png';
-  
-    const imageWidth = props.postElementSize === 'list' ? 116.6 :
-        props.postElementSize === 'smaller' ? 209.8 :
-            props.postElementSize === 'small' ? 255 :
-                props.postElementSize === 'medium' ? 320 :255
-
 
     const onErrorHandler = e => {
         if (imageUrl) {
@@ -64,14 +50,10 @@ const ImageRenderer = props => {
                         max-height: 100px;
                         position: relative;
                     }
-                    
-                    
                     .no-image-title{
                       font-size: 2rem;
                     }
                 `}</style>
-
-
                 { imageUrl ?
                     <Image
                         src={!gotError ? imageUrl || noImageUrl : noImageUrl}
@@ -82,8 +64,9 @@ const ImageRenderer = props => {
                         }}
                         onMouseEnter={props.hoverHandler}
                         onTouchStart={props.hoverHandler}
+                        {...props.imageSize}
                         layout={props.layout || 'fill'}
-                        quality={props.quality || 80}
+                        quality={props.quality || 100}
                         loading={props.loading || 'eager'}
                     />:
                     <p className='no-image-title'>{props.title}</p>
@@ -112,19 +95,12 @@ const ImageRenderer = props => {
                     max-height: 200px;
                     position: relative;
                 }
-                .no-image-title{
-                 font-size: 1.5rem;
-                 font-weight: bold;
-                 color:var(--custom-green);
-                 text-align: center;
-                    overflow: hidden;
-                    text-overflow: clip;
-                }
+
                 @media only screen and (min-width: 768px) {
-                .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
-                    width: ${imageWidth}px;
-                    height: ${imageWidth / 1.777}px;
-                }
+                    .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
+                        width: ${props.imageSize?.width}px;
+                        height: ${props.imageSize?.height}px;
+                    }
                 }
                 
             `}</style>
