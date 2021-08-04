@@ -1,8 +1,9 @@
 import axios from "axios";
 
-export const getUserPreviewData = async (domainName,username,_id) => {
+export const getUserPreviewData = async (domainName,username,_id,fields) => {
     const body = {
         username,
+        fields,
         _id
     }
     return await axios.post(domainName + '/api/v1/users/getUserPreviewData', body)

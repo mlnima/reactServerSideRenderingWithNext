@@ -16,7 +16,7 @@ const CookiePopup = props => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            //console.log(typeof localStorage.cookieAccepted)
+
             if (localStorage.cookieAccepted !== 'true') {
                 setState({
                     ...state,

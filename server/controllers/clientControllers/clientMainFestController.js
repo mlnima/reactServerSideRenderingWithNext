@@ -36,8 +36,8 @@ module.exports = async (req, res) =>{
         }
         res.json(manifestJsonData)
         res.end()
-    }catch (e) {
-        console.log(e)
+    }catch (err) {
+        console.log(err)
     }
 
 

@@ -1,8 +1,10 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {followUser, unFollowUser, sendFriendRequest, acceptFriendRequest, unfriendRequest, cancelFriendRequest, conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {AppContext} from "../../../../context/AppContext";
+import {useRouter} from "next/router";
 
 const UserPageActionButtons = ({_id, setParentState, parentState,username}) => {
+    const router = useRouter()
     const contextData = useContext(AppContext);
 
     const onFollowHandler = () => {
@@ -25,57 +27,12 @@ const UserPageActionButtons = ({_id, setParentState, parentState,username}) => {
         })
     }
 
-    const onSendFriendRequestHandler = () => {
-        sendFriendRequest(_id).then(res => {
-            const newPendingFriendRequests = res?.data?.updatedRequestSenderData || {}
-            contextData.dispatchUserData({
-                ...contextData.userData,
-                ...newPendingFriendRequests
-            })
-        })
-    }
 
-    const onAcceptFriendRequestHandler = () => {
-        acceptFriendRequest(_id).then(res => {
-            const newFriendList = res?.data?.updatedRequestSenderData || {}
-            contextData.dispatchUserData({
-                ...contextData.userData,
-                ...newFriendList
-            })
-        })
-    }
-
-    const onUnfriendHandler = () => {
-        unfriendRequest(_id).then(res => {
-            const newFriendList = res?.data?.updatedRequestSenderData || {}
-            contextData.dispatchUserData({
-                ...contextData.userData,
-                ...newFriendList
-            })
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-
-    const onCancelFriendRequest = () => {
-        cancelFriendRequest(_id).then(res => {
-            const newSentFriendRequestList = res?.data?.updatedRequestSenderData || {}
-            contextData.dispatchUserData({
-                ...contextData.userData,
-                ...newSentFriendRequestList
-            })
-        }).catch(err => {
-            console.log(err)
-        })
-    }
 
     const onConversationHandler = () => {
         conversation(_id).then(res => {
             const conversation = res.data.conversation
-            if (conversation) {
-                const filterForDuplicateConversation = contextData.conversations.filter(c => c._id !== conversation._id)
-                contextData.dispatchConversations([...filterForDuplicateConversation, conversation])
-            }
+            router.push(`/messenger/${conversation._id}`)
         }).catch(err => {
             console.log(err)
         })
@@ -114,25 +71,25 @@ const UserPageActionButtons = ({_id, setParentState, parentState,username}) => {
             }
         `}
             </style>
-            {
-                contextData?.userData?.pendingSentFriendRequests?.includes(_id) ?
-                    <button className='user-page-action-button' onClick={onCancelFriendRequest}>Cancel Request</button> :
-                    contextData?.userData?.friends?.includes(_id) ?
-                        <button className='user-page-action-button' onClick={onUnfriendHandler}>Unfriend</button> :
-                        contextData?.userData?.pendingReceivedFriendRequests?.includes(_id) ?
-                            <button className='user-page-action-button' onClick={onAcceptFriendRequestHandler}>Accept Friend Request</button> :
-                            <button className='user-page-action-button' onClick={onSendFriendRequestHandler}>Add Friend</button>
-            }
 
+            <button className='user-page-action-button' onClick={onConversationHandler}>Message</button>
             {
-                contextData?.userData?.following?.includes(_id)  ?
-                    <button className='user-page-action-button' onClick={onUnFollowHandler}>Following</button> :
+                    contextData?.userData?.following?.includes(_id) ?
+                    <button className='user-page-action-button' onClick={onUnFollowHandler}>Unfollow</button> :
                     <button className='user-page-action-button' onClick={onFollowHandler}>Follow</button>
             }
-            {/*<button className='user-page-action-button' onClick={onMessageHandler}>Message</button>*/}
-            <button className='user-page-action-button' onClick={onConversationHandler}>Chat</button>
-
         </div>
     );
 };
 export default UserPageActionButtons;
+
+
+// {
+//     contextData?.userData?.pendingSentFriendRequests?.includes(_id) ?
+//         <button className='user-page-action-button' onClick={onCancelFriendRequest}>Cancel Request</button> :
+//         contextData?.userData?.friends?.includes(_id) ?
+//             <button className='user-page-action-button' onClick={onUnfriendHandler}>Unfriend</button> :
+//             contextData?.userData?.pendingReceivedFriendRequests?.includes(_id) ?
+//                 <button className='user-page-action-button' onClick={onAcceptFriendRequestHandler}>Accept Friend Request</button> :
+//                 <button className='user-page-action-button' onClick={onSendFriendRequestHandler}>Add Friend</button>
+// }

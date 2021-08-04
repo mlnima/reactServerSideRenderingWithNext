@@ -46,7 +46,7 @@ const ItemCountUI = props => {
                 items
             })
             localStorage.setItem('checkOutItems',JSON.stringify(items))
-            console.log(items)
+
         }
     }
 

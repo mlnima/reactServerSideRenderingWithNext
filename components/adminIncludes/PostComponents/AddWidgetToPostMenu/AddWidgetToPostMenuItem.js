@@ -22,7 +22,7 @@ const AddWidgetToPostMenuItem = props => {
 
    const onClickHandler = () =>{
 
-       //console.log(widgetsLength)
+
        props.setState({
            ...props.state,
            widgets:props.state.widgets ? [...props.state.widgets,newWidget] :[newWidget]

@@ -5,6 +5,8 @@ import ProfileNavigation from '../../../components/includes/MyProfileComponents/
 import {AppContext} from "../../../context/AppContext";
 import {getPosts} from "../../../_variables/ajaxPostsVariables";
 import {useRouter} from "next/router";
+import Link from "next/link";
+import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
 const Posts = props => {
     const contextData = useContext(AppContext);
     const router = useRouter();
@@ -13,14 +15,14 @@ const Posts = props => {
         totalCount: 0
     });
     useEffect(() => {
-        if (contextData?.userData?.username &&contextData?.userData?._id && contextData?.userData?.username !== 'guest' ){
+        if (contextData?.userData?.username && contextData?.userData?._id && contextData?.userData?.username !== 'guest' ){
             const getPostsData = {
                 size:   parseInt(router.query.size) ||  30,
                 pageNo: parseInt(router.query.page) || 1,
                 postType: router.query.type || 'all',
                 fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration','postType','price' ],
                 keyword: router.query.keyword || '',
-                author: contextData.userData._id || 'all',
+                author: contextData.userData._id,
                 actor: router.query.actor || 'all',
                 status: router.query.status|| 'published',
                 tag: router.query.tag || 'all',
@@ -46,9 +48,15 @@ const Posts = props => {
              max-width: 940px;
               margin: auto;
             }
+            .create-new-post-link{
+               color:var(--main-text-color);
+               border: solid .4px var(--main-text-color) ;
+               padding: 5px 10px;
+            }
            ` }</style>
-            <ProfileCoverImage/>
+            <ProfileImage/>
             <ProfileNavigation />
+            <Link href={'/profile/posts/newpost'}><a className='create-new-post-link'>create new post</a></Link>
             {/*<Posts posts={ state.posts || [] }/>*/}
             {/*posts*/}
         </div>

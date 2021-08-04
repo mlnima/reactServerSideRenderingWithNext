@@ -120,7 +120,7 @@ const WidgetModel = props => {
         }
     }
     const onChangeHandler = e => {
-        //console.log(e.target.type)
+
         const isChecked = e.target.checked
         const value = e.target.value
         setWidgetData({

@@ -75,7 +75,7 @@ const user = props => {
 
     const onNewAPIKeyRequest = () => {
         newAPIKey(window.location.origin).then(res => {
-            console.log(res.data)
+
             setUserData({
                 ...userData,
                 ...res.data.updatedData
@@ -105,7 +105,7 @@ const user = props => {
     useEffect(() => {
         if (props.router){
             getUserData(props.router.query.id, window.location.origin).then(res=>{
-                console.log( res.data)
+
                 setUserData({ ...userData, ...res.data.user })
             })
         }

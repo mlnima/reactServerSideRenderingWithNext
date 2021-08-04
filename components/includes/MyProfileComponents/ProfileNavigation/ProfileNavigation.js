@@ -36,10 +36,20 @@ const ProfileNavigation = props => {
                 flex-wrap:wrap;
                 align-items: center;
             }
+            
+            .profile-navigation-items{
+             display: flex;
+             flex-direction: column;
+             justify-content: center;
+             align-items: center;
+             color: var(--navigation-text-color);
+            }
+            
             .profile-navigation-item{
                  color: var(--navigation-text-color);
-                 padding: 5px 10px;
+                 padding: 5px ;
                  margin: 5px;
+                 font-size: small;
             }
             .profile-navigation-item :hover{
              transition: .5s;
@@ -53,28 +63,29 @@ const ProfileNavigation = props => {
                 .profile-navigation{
                     justify-content: flex-start;
                 }
+                .profile-navigation-item{
+                 font-size: medium;
+               }
             }
         `}</style>
-            <Link href='/profile' ><a style={ navigationData.style } className='profile-navigation-item'>Profile</a></Link>
-            <Link href='/profile/posts' ><a style={ navigationData.style } className='profile-navigation-item'>Posts</a></Link>
-            <Link href='/profile/friends' ><a style={ navigationData.style } className='profile-navigation-item'>Friends </a></Link>
-            <Link href='/profile/friendRequests' ><a style={ navigationData.style } className='profile-navigation-item'>Pending Requests</a></Link>
-            <Link href='/profile/followers' ><a style={ navigationData.style } className='profile-navigation-item'>Followers </a></Link>
-            <Link href='/profile/following' ><a style={ navigationData.style } className='profile-navigation-item'>Following </a></Link>
-            <Link href='/profile/inbox' ><a style={ navigationData.style } className='profile-navigation-item'>Inbox </a></Link>
-            <Link href='/profile/blockList' ><a style={ navigationData.style } className='profile-navigation-item'>Block List</a></Link>
+            {/*<Link href='/profile' ><a style={ navigationData.style } className='profile-navigation-item'>Profile</a></Link>*/}
+            {/*<Link href='/profile/posts' ><a style={ navigationData.style } className='profile-navigation-item'>Posts</a></Link>*/}
+            {/*<Link href='/profile/friends' ><a style={ navigationData.style } className='profile-navigation-item'>Friends </a></Link>*/}
+            {/*<Link href='/profile/friendRequests' ><a style={ navigationData.style } className='profile-navigation-item'>Pending Requests</a></Link>*/}
+            <div className='profile-navigation-items'>
+                <span>{contextData.userData.followersCount || 0}</span>
+                <Link href='/profile/followers' ><a style={ navigationData.style } className='profile-navigation-item'>Followers </a></Link>
+            </div>
+            <div className='profile-navigation-items'>
+                <span>{contextData.userData.followingCount || 0}</span>
+                <Link href='/profile/following' ><a style={ navigationData.style } className='profile-navigation-item'>Following </a></Link>
+            </div>
+
+
+            {/*<Link href='/profile/inbox' ><a style={ navigationData.style } className='profile-navigation-item'>Inbox </a></Link>*/}
+            {/*<Link href='/profile/blockList' ><a style={ navigationData.style } className='profile-navigation-item'>Block List</a></Link>*/}
         </div>
     );
 };
 export default withRouter(ProfileNavigation);
 
-
-//
-// <Link href={props.router ? {pathname:props.router.pathname,query:{...props.router.query,tab:'MyProfileInfo'}}:'/'}><a style={ navigationData.style } className='profile-navigation-item'>Profile</a></Link> --
-// <Link href={props.router ? {pathname:props.router.pathname,query:{...props.router.query,tab:'MyProfilePosts'}}:'/'}><a style={ navigationData.style } className='profile-navigation-item'>Posts</a></Link>  --
-// <Link href={props.router ? {pathname:props.router.pathname,query:{...props.router.query,tab:'MyProfileFriendsList'}}:'/'}><a style={ navigationData.style } className='profile-navigation-item'>Friends {contextData?.userData?.friends?.length || 0}</a></Link> --
-// <Link href={props.router ? {pathname:props.router.pathname,query:{...props.router.query,tab:'MyProfilePendingFriendRequests'}}:'/'}><a style={ navigationData.style } className='profile-navigation-item'>Pending Requests {contextData?.userData?.pendingFriendRequests?.length || 0}</a></Link>--
-// <Link href={props.router ? {pathname:props.router.pathname,query:{...props.router.query,tab:'MyProfileFollowersList'}}:'/'}><a style={ navigationData.style } className='profile-navigation-item'>followers {contextData?.userData?.followers?.length || 0}</a></Link> --
-// <Link href={props.router ? {pathname:props.router.pathname,query:{...props.router.query,tab:'MyProfileFollowingList'}}:'/'}><a style={ navigationData.style } className='profile-navigation-item'>Following {contextData?.userData?.following?.length || 0}</a></Link> --
-// <Link href={props.router ? {pathname:props.router.pathname,query:{...props.router.query,tab:'MyProfileMessages'}}:'/'}><a style={ navigationData.style } className='profile-navigation-item'>Inbox {contextData?.userData?.inbox?.length || 0}</a></Link>
-// <Link href={props.router ? {pathname:props.router.pathname,query:{...props.router.query,tab:'MyProfileBlockList'}}:'/'}><a style={ navigationData.style } className='profile-navigation-item'>Block List {contextData?.userData?.blockList?.length || 0}</a></Link>

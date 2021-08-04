@@ -28,7 +28,7 @@ const RedirectToHTTPS = props => {
     }, []);
 
     if (state.render && props?.identity?.data?.redirectToSSLPop) {
-        console.log(state.render , props?.identity?.data?.redirectToSSLPop)
+
         return (
             <span className='redirect-to-https-action-message'>
             <style jsx>{`

@@ -45,7 +45,6 @@
 //     //         ...(props?.parentData?.subItems ||[]).slice(findSubItemIndex + 1),
 //     //     ]
 //     //
-//     //    console.log(newSubItemsData)
 //     //
 //     //     props.setParentData({
 //     //         ...props.parentData,

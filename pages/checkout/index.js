@@ -120,7 +120,7 @@ const checkout = props => {
             userID:contextData.userData._id,
         }
         contextData.functions.createOrder(dataToCreateOrder).then(createdOrderResponse => {
-           // console.log(createdOrderResponse)
+
             setState({
                 ...state,
                 isPaid: true,

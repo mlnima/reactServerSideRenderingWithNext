@@ -93,9 +93,7 @@ const Index = props => {
     }, [props]);
 
 
-    // useEffect(() => {
-    //     console.log(textInputsState)
-    // }, [textInputsState]);
+
 
     const onChangeHandler = e => {
         setState({
@@ -214,8 +212,8 @@ const Index = props => {
                     })
                 })
             }
-        } catch (e) {
-            console.log(e)
+        } catch (err) {
+            console.log(err)
             contextData.dispatchState({
                 ...contextData.state,
                 loading: false

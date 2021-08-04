@@ -12,7 +12,7 @@ const users = props => {
     }, []);
 
     const renderUsers = usersList.map(user => {
-        console.log(user)
+
         return (
             <p key={ user.username }>{ user.username }</p>
         )

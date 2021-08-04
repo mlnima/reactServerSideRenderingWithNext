@@ -21,9 +21,9 @@ const SendMessagePopUp = props => {
     }
 
     const onSendMessageHandler = () =>{
-       // console.log(props.receiverId)
+
         sendMessage(state.receiver,state.message).then(res=>{
-                console.log(res.data)
+
         })
     }
 

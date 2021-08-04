@@ -30,7 +30,6 @@ module.exports = (req, res) => {
 //         }
 //         return finalData
 //     } catch (e) {
-//         console.log(e)
 //     }
 //
 // })

@@ -3,7 +3,7 @@ const userSchema = require('../../../models/userSchema');
 
 module.exports = (req, res) => {
     const requestedFields = req?.body?.fields && req?.body?.fields.length > 0 ? req?.body?.fields.reduce((a, b) => ` ${a} , ` + ` ${b} , `) : '';
-    //console.log(requestedFields)
+
    // const requestedFields = (req?.body?.fields || []).reduce((a, b) => ` ${a} , ` + ` ${b} , `)
 
     userSchema.findById(req.userData._id).select(requestedFields).exec().then(user => {

@@ -13,7 +13,7 @@ module.exports = (req, res) => {
             if (err?.response?.status >= 400 && err?.response?.status < 500 || err.code === 'ENOTFOUND' ) {
                 postSchema.findOneAndUpdate({mainThumbnail: checkUrl}, {$set: {status: 'pending'}}, {new: true}).exec()
                 metaSchema.find({imageUrl:checkUrl}).exec().then(metas=>{
-                    // console.log(metas)
+
                     metas.forEach(meta=>{
                         metaSchema.findOneAndUpdate({_id:meta._id}, {$set: {imageUrl:null}}, {new: true}).exec()
                     })

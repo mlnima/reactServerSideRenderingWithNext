@@ -1,17 +1,5 @@
 import axios from "axios";
 
-const queryGeneratorForUnCacheRequest = (requestItems) => {
-    let query = '?'
-    for (const item in requestItems) {
-        query += `${ item }=${ requestItems[item] }`
-    }
-    return query
-}
-
-const cacheQueryGenerator = cache => {
-    return !cache ? Date.now() : ''
-}
-
 export const getPosts = async (data, domainName,cache,queriesData) => {
     const body = {
         ...data,
@@ -51,6 +39,14 @@ export const savePost = async (data, domainName) => {
         token: localStorage.wt
     };
     return await axios.post(domainName + `/api/admin/posts/createNewPost`, body)
+};
+
+export const userCreateNewPost = async (data, domainName) => {
+    const body = {
+        postData: data,
+        token: localStorage.wt
+    };
+    return await axios.post(domainName + `/api/v1/posts/userCreateNewPost`, body)
 };
 
 export const getMeta = async (data,  domainName,cache) => {

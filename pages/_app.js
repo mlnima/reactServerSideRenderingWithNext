@@ -17,9 +17,6 @@ import '../components/includes/CardElement/CardElement.scss';
 import CookiePopup from "../components/includes/ClientPopActionRequest/CookiePopup";
 
 
-// export function reportWebVitals(metric) {
-//     console.log(metric)
-// }
 
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()

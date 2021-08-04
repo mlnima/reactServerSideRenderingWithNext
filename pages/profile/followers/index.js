@@ -7,6 +7,7 @@ import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariab
 import _ from "lodash";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
+import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
 
 const Followers = props => {
     const contextData = useContext(AppContext);
@@ -36,10 +37,7 @@ const Followers = props => {
 
     const renderFollowers = followers.map(user => {
         return (
-            <UserSmallPreview key={_.uniqueId('user_')}
-                              {...user}
-
-            />
+            <UserSmallPreview key={_.uniqueId('user_')} {...user} />
         )
     })
 
@@ -52,8 +50,7 @@ const Followers = props => {
             }
             
             `}</style>
-            <ProfileCoverImage/>
-            <ProfileNavigation/>
+
             {renderFollowers}
         </div>
     );

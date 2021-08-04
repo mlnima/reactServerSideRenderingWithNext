@@ -47,7 +47,7 @@ const PostPagePromotionType = ({design,post}) => {
             }
         })
     }, [post.likes, post.disLikes]);
-    console.log(post)
+
     return (
         <StyledMain stylesData={design?.data?.postPageStyle || contextData.siteDesign.postPageStyle || ''} className='main post-page'>
             <PostDescription  description={post.description} translations={post.translations}/>

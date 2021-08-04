@@ -25,7 +25,7 @@ postSchema.countDocuments({}).exec().then(count => {
             page += 1
             postSchema.find({}).select('_id , createdAt , lastUpdate').skip(size * (page - 1)).limit(size).then(posts => {
                 posts.forEach(post=>{
-                    //console.log({createdAt:post._id.getTimestamp()})
+
                     if (!post.createdAt){
                         postSchema.findByIdAndUpdate(post._id,{createdAt:post._id.getTimestamp()},{
                             new:true,
@@ -34,13 +34,13 @@ postSchema.countDocuments({}).exec().then(count => {
                                 updatedAt:false
                             }
                         }).then(post=>{
-                            console.log(post.createdAt)
+
                         }).catch(err=>{
                             console.log(err)
                         })
                     }
                 })
-                console.log('page', page ,'from',totalPage)
+
             })
         } else {
             clearInterval(actionInterval);

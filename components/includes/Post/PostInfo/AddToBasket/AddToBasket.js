@@ -40,7 +40,7 @@ const AddToBasket = props => {
                     })
                     localStorage.setItem('checkOutItems',JSON.stringify(items))
                 }
-            console.log(contextData.checkOutData.items)
+
             }else{
                 countInput.current.style.backgroundColor = 'red'
             }

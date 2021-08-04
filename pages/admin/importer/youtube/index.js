@@ -70,7 +70,7 @@ const youtube = props => {
                     loading:true
                 })
                 youtubeDataScrapper(url).then(async res => {
-                    //  console.log(res.data.videos)
+
                     for await (let video of res.data.videos){
                         if (video.id){
                             const videoData = {
@@ -91,7 +91,7 @@ const youtube = props => {
                             }
 
                             await savePost(videoData, window.location.origin).then(()=>{
-                                 console.log( 'saved')
+
                              }).catch(err=>{
                                  console.log( err.response.data.error )
                                  contextData.dispatchAlert({

@@ -31,7 +31,7 @@ module.exports =  (req, res) =>{
                             };
                             let newUserData = userSchema(userData);
                             newUserData.save().then(() => {
-                                console.log(userData.username, ' registered')
+
                                 res.json({message:'registration successful you can login now'})
                                 res.end()
                             }).catch(err => {

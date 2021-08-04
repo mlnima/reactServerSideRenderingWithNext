@@ -55,7 +55,7 @@ const importContent = props => {
                 }
             }
         }
-        console.log(state.data)
+
     }
     return (
 
@@ -64,7 +64,7 @@ const importContent = props => {
                     const reader = new FileReader()
                     reader.readAsText(e.target.files[0])
                     reader.onload = e => {
-                        // console.log( e.target.result)
+
                         setState({...state, data: JSON.parse(e.target.result)})
                     }
                 }}/>

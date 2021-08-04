@@ -87,7 +87,7 @@ const ImageGallery = props => {
                 }
             }
             props.onChangeHandler(e)
-            console.log(res.data)
+
         }).catch(err => {
             console.log(err)
 

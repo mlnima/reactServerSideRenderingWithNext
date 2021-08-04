@@ -26,7 +26,7 @@ module.exports = async (req, res) => {
                         console.log(err)
                         res.sendStatus(500);
                     } else {
-                        console.log(filePath)
+
                         fsExtra.remove(filePathOriginalSize)
                         res.json({response: 'Uploaded', path: process.env.REACT_APP_PRODUCTION_URL + filePath})
                         res.end()

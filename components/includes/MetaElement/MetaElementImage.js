@@ -1,7 +1,7 @@
 import ImageRenderer from "../ImageRenderer/ImageRenderer";
 
 const MetaElementImage = props => {
-    // console.log(props)
+
     return (
         <div className='meta-element-image-data'>
 <style jsx>{`
@@ -13,6 +13,7 @@ aspect-ratio:16/9;
 }
 `}</style>
             <ImageRenderer
+                imageSize={props.imageSize}
                 imageUrl={props.imageUrl || props.noImageUrl}
                 postElementSize={props.postElementSize}
                 hoverHandler={props.hoverHandler}

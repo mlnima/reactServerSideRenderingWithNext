@@ -16,7 +16,7 @@ const SearchTypeInputFields = props => {
             }
         }
         props.onChangeHandler(e)
-        console.log(element.target.checked)
+
     }
     return (
          <>

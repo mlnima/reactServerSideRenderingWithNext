@@ -50,7 +50,6 @@ siteMapsController.siteMapMonths = (req, res) => {
                 console.log(err)
             })
         } else {
-            console.log('bigger than 500')
             let page = 0;
             const totalPages = Math.ceil(count / size);
             while ( page < totalPages ) {

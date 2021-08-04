@@ -148,7 +148,6 @@ const settings = props => {
 
 
     const onChangeHandler = e => {
-        console.log(e.target.value)
         const finalValue = e.target.value === 'true' ? true :
                  e.target.value === 'false' ? false :
                 e.target.value
@@ -210,9 +209,7 @@ const settings = props => {
     }
 
 
-    // useEffect(() => {
-    //     console.log(state)
-    // }, [props]);
+
     return (
 
         <StyledForm className='site-settings-form' onSubmit={e => onSubmitHandler(e)}>

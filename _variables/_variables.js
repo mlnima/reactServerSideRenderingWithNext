@@ -12,7 +12,6 @@ export const likeValueCalculator = (likes, dislikes) => {
 
 export const getAbsolutePath = async (req) => {
     const protocol = process.env.REACT_APP_SSL === 'true' ? 'https' : await req.protocol
-    //console.log('protocol is', protocol)
     return protocol + '://' + await req.get('Host')
 }
 
@@ -58,7 +57,7 @@ export const fileTypeDetector = fileName => {
             finalFormat = formatArr
         }
     })
-    // console.log(finalFormat )
+
 
     return finalFormat
 }
@@ -67,7 +66,6 @@ export const fileTypeDetector = fileName => {
 //     ReactGA.initialize(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
 // }
 // export const logPageView = () => {
-//     // console.log(`Logging pageview for ${window.location.pathname}`)
 //     ReactGA.set({page: window.location.pathname})
 //     ReactGA.pageview(window.location.pathname)
 // }
@@ -114,7 +112,6 @@ export const addOrReplaceQueryToWindowLocationSearch = (queryName, queryValue) =
     if (process.browser) {
         const searchParams = new URLSearchParams(window.location.search);
         searchParams.set(queryName, queryValue)
-        console.log(searchParams.toString())
         return searchParams.toString()
     } else return null
 }
@@ -226,15 +223,14 @@ export const rangeNumGenerator = (currentPageInput, max) =>{
 
     // Don't use negative values, force start at 1
     if (currentPage < (range / 2) + 1) {
-        // console.log(1)
+
         start = 1;
         // Don't go beyond the last page
     } else if (currentPage >= (maxPage - (range / 2))) {
-        // console.log(2)
+
         start = Math.floor(maxPage - range + 1);
 
     } else {
-        // console.log(3)
         start = (currentPage - Math.floor(range / 2));
     }
 

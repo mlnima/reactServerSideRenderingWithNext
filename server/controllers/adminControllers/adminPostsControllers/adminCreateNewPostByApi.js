@@ -14,15 +14,15 @@ const savePostWithDuplicateContent = async newPost =>{
 
         return postSchema.findOneAndUpdate({title:newPost.title},newPostWithMeta,{new:true,upsert: true}).exec()
 
-    } catch (e) {
-        console.log(e)
+    } catch (err) {
+        console.log(err)
     }
 }
 
 
 module.exports = async (req, res) => {
     const newPost = req.body.postData
-    console.log(newPost.title)
+
     try {
         if (req.body.duplicateContent) {
             savePostWithDuplicateContent(newPost).then(savedPost => {
@@ -91,7 +91,7 @@ module.exports = async (req, res) => {
 
 
                     } else {
-                        console.log('no duplicated find')
+
                         const editedNewPost = {
                             ...newPost,
                             lastModify: Date.now(),

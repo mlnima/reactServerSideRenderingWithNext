@@ -9,9 +9,9 @@ import MenuWidgetItemLink from "./MenuWidgetItemLink";
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler, menuItems}) => {
     const [showSub, setShowSub] = useState(false)
     const router = useRouter()
-    // console.log(menuItem)
+
     const renderSubMenus = (menuItem.subItems || []).map(subItem => {
-        // console.log(subItem)
+
         const linkAsForMenuItem = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? subItem.as :
             (!router.locale && !router.query.locale) ? subItem.as :
                 `/${router.locale || router.query.locale}${subItem.as}`;
@@ -25,7 +25,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
         //     </Link> :
         //     <a className='menu-widget-item-link' href={subItem.target}>{subItem.name}</a>
         // }
-//console.log(subItem)
+
         return (
             <li className='menu-widget-sub-item' key={_.uniqueId('id_')}>
                 <style jsx>{`

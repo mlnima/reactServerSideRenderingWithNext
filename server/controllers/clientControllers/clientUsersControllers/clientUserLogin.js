@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
             if (user) {
                 bcrypt.compare(password, user.password, function (err, isCorrect) {
                     if (err || isCorrect === false ) {
-                        console.log( err)
+                        console.log(err)
                         res.status(401).json({message:'wrong username or password'})
                         res.end()
                     } else if (isCorrect) {

@@ -43,7 +43,6 @@ const meta = props => {
 
 
     useEffect(() => {
-        console.log(props)
         if (props.identity) {
             setSiteSettings({
                 ...siteSettings,
@@ -99,9 +98,6 @@ const meta = props => {
     }
 
 
-    // const onSaveMetaHandler = () => {
-    //  console.log(metaData)
-    // }
 
 
     const updateMetaData = ()=>{

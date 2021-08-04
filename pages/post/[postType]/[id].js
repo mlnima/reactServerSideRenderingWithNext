@@ -29,7 +29,7 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
             setDeviceWidth(window.innerWidth)
         }
     }, []);
-// console.log(post)
+
     if (responseCode !== 200) {
         return <Error responseCode={responseCode}/>
     }  else return (

@@ -27,7 +27,6 @@ export const login = async data => {
 }
 
 export const resetPassword = async (oldPass, newPass, newPass2) => {
-    //console.log( oldPass, newPass, newPass2)
     let body = {
         oldPass,
         newPass,

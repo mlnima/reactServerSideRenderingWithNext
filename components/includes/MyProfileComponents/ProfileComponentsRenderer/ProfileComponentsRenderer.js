@@ -7,10 +7,6 @@ import MyProfileFollowers from "../MyProfileFollowers/MyProfileFollowers";
 const ProfileComponentsRenderer = ({activeTab}) => {
     const router = useRouter();
 
-    useEffect(() => {
-        console.log(activeTab)
-    }, [activeTab]);
-
     if (activeTab === 'myProfile') {
         return (
             <MyProfileInfo/>

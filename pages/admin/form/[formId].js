@@ -37,7 +37,6 @@ const formPage = props => {
             _id: router.query.formId,
         };
         getFormData(requestBody,process.env.REACT_APP_PRODUCTION_URL).then(res=>{
-            console.log(res?.data)
             if (res?.data?.form){
                 setState({
                     ...state,
@@ -46,14 +45,7 @@ const formPage = props => {
             }
         })
 
-        // if(props.formData.form){
-        //     setState({
-        //         ...state,
-        //         formData:props.formData.form
-        //     })
-        // }
-        //
-        // console.log(props)
+
     }, [props]);
 
     const renderData = (Object.keys(state.formData.data)||[]).map(fieldData=>{

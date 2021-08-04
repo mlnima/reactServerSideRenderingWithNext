@@ -21,7 +21,7 @@ const meta = ({metaSource, identity, dataForGettingMeta,design}) => {
         )
     })
 
-    // console.log(metaSource)
+
     const isWithSidebar = identity?.data?.metaPageSidebar || contextData?.siteIdentity?.metaPageSidebar
 //style={{gridArea: isWithSidebar ? 'main' : ''}}
     return (

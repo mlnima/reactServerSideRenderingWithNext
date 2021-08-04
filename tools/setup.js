@@ -15,7 +15,7 @@ require('../server/_variables/connectToDatabase')
 //     useNewUrlParser: true,
 //     useUnifiedTopology: true
 // })
-//     .then(() => console.log('DB connected'))
+//     .then(() => {)
 //     .catch(err => console.log('DB not connected', err));
 
 const identityData = {
@@ -44,7 +44,7 @@ const adminPanelData = {
 
 const identityToSave = new settingSchema(identityData)
 identityToSave.save().catch(() => {
-    console.log('Error on site Identity set')
+
 })
 
 //saving default site design
@@ -64,9 +64,8 @@ const designData = {
 }
 
 const siteDesignToSave = new settingSchema(designData)
-siteDesignToSave.save().catch(error => {
-    console.log(error)
-    console.log('Error on site Identity set')
+siteDesignToSave.save().catch(err => {
+    console.log(err)
 })
 
 

@@ -48,7 +48,6 @@ export const newFolder = (folderName,folderPath)=>{
 };
 
 export const newFile = (fileName,filePath)=>{
-console.log(filePath)
     let body = {
         fileName,
         filePath,

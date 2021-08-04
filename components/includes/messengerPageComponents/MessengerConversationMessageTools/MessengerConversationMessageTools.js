@@ -17,6 +17,7 @@ const MessengerConversationMessageTools = props => {
                 messageBody:messageInputData,
                 createdAt:Date.now(),
                 author:contextData.userData._id,
+                conversationId:props.conversationId
             }
             socket.emit('sendMessageToConversation',messageData,props.conversationId)
             messageToConversation(props.conversationId, messageInputData).then(() => {

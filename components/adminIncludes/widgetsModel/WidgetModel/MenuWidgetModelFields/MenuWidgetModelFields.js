@@ -72,16 +72,13 @@ const MenuWidgetModelFields = props => {
                     itemIndex:parentData?.subItems?.length +1 || 0,
                 }]
             }
-            // console.log(findParentIndex)
-            // console.log(parentData)
-            // console.log(updatedParentData)
-            // console.log(updatedParentData)
+
             const newMenuData = [
                 ...props.widgetData.menuItems.slice(0, findParentIndex),
                 updatedParentData,
                 ...props.widgetData.menuItems.slice(findParentIndex + 1),
             ]
-            // console.log(newMenuData)
+
             props.setWidgetData({
                 ...props.widgetData,
                 menuItems: newMenuData

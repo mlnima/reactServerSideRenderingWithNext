@@ -21,7 +21,7 @@ const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), 
 let CustomGlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
 const AppLayout = props => {
-    //console.log(props)
+
     const contextData = useContext(AppContext);
     const router = useRouter()
     const [leftSidebarWidgets, setLeftSidebarWidgets] = useState([])
@@ -36,7 +36,6 @@ const AppLayout = props => {
 
     useEffect(() => {
         // if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production' && process.env.REACT_APP_GOOGLE_ANALYTICS_ID !== 'false' ) {
-        //     console.log(process.env.REACT_APP_GOOGLE_ANALYTICS_ID)
         //     if (!window.GA_INITIALIZED) {
         //         initGA()
         //         window.GA_INITIALIZED = true

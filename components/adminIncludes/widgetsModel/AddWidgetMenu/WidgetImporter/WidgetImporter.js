@@ -15,7 +15,7 @@ const WidgetImporter = () => {
     const onWidgetImportHandler = async ()=>{
         if (state.data.length>0){
             for await (let widget of state.data){
-                // console.log(widget)
+
                 addNewWidget({
                     data:widget
                 }).then(() => {

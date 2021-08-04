@@ -7,6 +7,7 @@ import UserSmallPreview from "../../../components/includes/socialComponents/User
 import _ from "lodash";
 import {AppContext} from "../../../context/AppContext";
 import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
+import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
 const index = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({});
@@ -49,7 +50,7 @@ const index = props => {
             }
             
             `}</style>
-            <ProfileCoverImage/>
+            <ProfileImage/>
             <ProfileNavigation />
             {renderFriends}
         </div>

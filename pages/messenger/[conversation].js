@@ -56,7 +56,9 @@ const conversation = props => {
         socket.emit('joinConversation', router.query.conversation)
 
         socket.on('receiveMessageFromConversation', messageData => {
-            setMessages(messages=>[...messages, messageData])
+            if (messageData.conversationId === router.query.conversation){
+                setMessages(messages=>[...messages, messageData])
+            }
         })
 
         socket.on("incomingCallFromConversation", data => {
@@ -82,8 +84,8 @@ const conversation = props => {
     }, []);
 
 
-    const peerOnErrorHandler = error => {
-        console.log(error)
+    const peerOnErrorHandler = err => {
+        console.log(err)
     }
 
 
@@ -119,7 +121,7 @@ const disableMicrophone = ()=>{
             setMyStream(myStream.getAudioTracks()[0].enabled = false):null) :
             (setState({...state,microphone: true}),
              setMyStream(getUserMedia()))
-        console.log(myStream)
+
 }
 
 const disableCamera = ()=>{
@@ -133,7 +135,7 @@ const disableCamera = ()=>{
                     setMyStream(getUserMedia())
 
             )
-        console.log(myStream)
+
 }
 //------
     const attemptForCall = () => {
@@ -202,8 +204,8 @@ const disableCamera = ()=>{
                 peer.signal(signal)
             })
             // connectionRef.current = peer
-        } catch (error) {
-            console.log(error)
+        } catch (err) {
+            console.log(err)
         }
     }
 

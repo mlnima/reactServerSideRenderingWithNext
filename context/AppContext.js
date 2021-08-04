@@ -114,7 +114,6 @@ const AppProvider = props => {
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
                 getSignedInUserData(['username','role','keyMaster','profileImage','coverImage']).then(res => {
-                    console.log(res.data.userData)
                     dispatchUserData({...userData, ...res.data.userData});
                 }).catch(err => {
                     console.log(err);
@@ -248,8 +247,8 @@ const AppProvider = props => {
     });
 
     useEffect(() => {
-        getSignedInUserData(['username','role','keyMaster','profileImage','coverImage']).then(res => {
-            if (res.data.userData){
+        getSignedInUserData(['username','role','keyMaster','profileImage','followingCount','followersCount']).then(res => {
+            if (res?.data?.userData){
                 dispatchUserData({
                     ...userData,
                     ...res.data.userData
@@ -259,8 +258,6 @@ const AppProvider = props => {
             console.log(err);
             localStorage.removeItem('wt')
         })
-
-
         //functions.getAndSetUserInfo()
         functions.getCheckOutData()
     }, []);

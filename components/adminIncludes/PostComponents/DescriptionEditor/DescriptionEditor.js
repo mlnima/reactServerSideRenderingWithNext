@@ -53,9 +53,9 @@ const DescriptionEditor = props => {
     }, []);
 
 
-    useEffect(() => {
-        console.log(typeof props.textInputsState.description)
-    }, [props.textInputsState.description]);
+    // useEffect(() => {
+    //     console.log(typeof props.textInputsState.description)
+    // }, [props.textInputsState.description]);
 
 
     if (props.editor) {

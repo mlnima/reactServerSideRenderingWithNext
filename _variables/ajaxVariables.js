@@ -1,7 +1,6 @@
 import axios from "axios";
 
 export const updateSetting = async (type, data) => {
-    console.log(data)
     const body = {
         type,
         data,

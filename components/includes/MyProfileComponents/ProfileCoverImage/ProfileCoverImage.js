@@ -35,7 +35,7 @@ const ProfileCoverImage = props => {
     }, [contextData.userData.coverImage]);
 
     // useEffect(() => {
-    //     console.log(contextData.userData)
+
     // }, [contextData.userData]);
 
     const onUploadHandler = e => {
@@ -49,7 +49,7 @@ const ProfileCoverImage = props => {
         })
         userImageUpload(filesData).then(res => {
             const newUserData = {...contextData.userData, coverImage: res.data.path.replace('./', '/')}
-            console.log(newUserData)
+
             contextData.dispatchUserData(newUserData)
 
             updateUserData(newUserData, window.location.origin).then(() => {
@@ -74,7 +74,7 @@ const ProfileCoverImage = props => {
     }
 
     // useEffect(() => {
-    //     console.log(contextData.userData.coverImage)
+
     // }, [ contextData.userData.coverImage ]);
 
     return (

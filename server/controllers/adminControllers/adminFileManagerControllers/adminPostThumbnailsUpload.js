@@ -23,7 +23,6 @@ module.exports = async (req, res) => {
                         console.log(err)
                         res.sendStatus(500);
                     } else {
-                        console.log(info)
                         fsExtra.remove(filePathOriginalSize)
                         res.json({response: 'Uploaded', path: filePath})
                         res.end()

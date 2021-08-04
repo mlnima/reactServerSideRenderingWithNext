@@ -7,10 +7,6 @@ const cors = require('cors')
 app.use(cors())
 const {userJoin,userLeave,getUsersListOfRoom} = require('./users')
 
-let rooms = []
-let users = []
-
-
 const io = require('socket.io')(server, {
     origin: [process.env.REACT_APP_PRODUCTION_URL,'*'],
     cors:true,
@@ -27,7 +23,7 @@ const io = require('socket.io')(server, {
 
 
 app.get('/*', (req, res) => {
-   console.log(req.protocol + '://' + req.get('host') + req.originalUrl)
+
 });
 
 server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
@@ -36,12 +32,14 @@ server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
 
 
 io.on('connection', socket => {
+
     socket.on('setIdAndJoinConversation', async (userID , conversationId) => {
         //setCustomId(userID)
         socket.join(conversationId)
     })
 
     socket.on('joinConversation', conversation => {
+        //console.log(conversation)
         socket.join(conversation)
     })
 

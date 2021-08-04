@@ -2,7 +2,7 @@ const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
 const postSchema =  new Schema({
-    author: Schema.Types.ObjectID,
+    author: {type: Schema.Types.ObjectID, ref: 'user'},
     title: String,
     company: String,
     description: mongoose.Mixed,
@@ -11,7 +11,7 @@ const postSchema =  new Schema({
     videoTrailerUrl: String,
     quality: {
         type:String,
-        default:'1080p'
+        default:'HD'
     },
     translations:mongoose.Mixed,
     shippingCost:String,
@@ -29,6 +29,7 @@ const postSchema =  new Schema({
     status: String,
     priceType: String,
     production: String,
+    posts: [{type: Schema.Types.ObjectID, ref: 'post'}],
     comments: [{type:Schema.Types.ObjectID,ref:'comment'}],
     widgets:Array,
     categories: [{type:Schema.Types.ObjectID,ref:'meta'}],
@@ -53,7 +54,6 @@ const postSchema =  new Schema({
     },
     availableCount:Number,
     premium: Boolean,
-    inSlideShow: Boolean,
     rating:String,
     createdAt:Date,
     updatedAt:Date

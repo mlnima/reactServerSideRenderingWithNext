@@ -64,7 +64,7 @@ siteMapController.siteMap = (req, res) => {
         res.send(sitemapDataWithParser);
         res.end()
     }).catch(err => {
-// console.log(err )
+console.log(err )
         res.end()
     })
 };

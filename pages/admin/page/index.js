@@ -55,9 +55,9 @@ const page = props => {
 
     const onSaveHandler = () => {
         if (router.query.id) {
-            console.log('update')
+
             updatePage({pageData: state}).then(res => {
-                console.log(res.data)
+
             })
         } else {
             saveNewPage({pageData: {...state, pageName: state.pageName.replace(' ', '')}}).then(res => {

@@ -96,7 +96,6 @@ const chatRoom = props => {
 
 
             if (username){
-                console.log(username)
                 const userJoined = {
                     messageData: username +' joined to the room ',
                     username,

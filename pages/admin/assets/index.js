@@ -29,13 +29,11 @@ const assets = props => {
     const [finalPageData, setFinalPageData] = useState({});
 
     useEffect(() => {
-       // console.log(parseInt(router.query.size))
+
         getAndSetAssetData()
     }, [props,router.query.size]);
 
-    // useEffect(() => {
-    //     console.log(finalPageData)
-    // }, [finalPageData]);
+
 
     const getAndSetAssetData = async () => {
         let ajaxRequestData;
@@ -47,7 +45,7 @@ const assets = props => {
             keyword: router?.query?.keyword ?? '',
             author: router?.query?.author ?? 'all',
             status: router?.query?.status ?? 'all',
-            sort: router?.query?.sort ?? 'lastModify',
+            sort: router?.query?.sort ?? 'updatedAt',
             content: router?.query?.content ?? 'all',
             metaType: router?.query?.metaType ||  '',
             orderType: router?.query?.orderType ?? 'all',

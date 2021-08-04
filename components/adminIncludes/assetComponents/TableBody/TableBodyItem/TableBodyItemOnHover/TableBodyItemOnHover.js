@@ -15,7 +15,6 @@ const TableBodyItemOnHover = props => {
     }
 
     if (props.isHover) {
-        // console.log(props)
         if (props.assetsType === 'posts') {
             if (!router.query.status || router.query.status === 'published' || router.query.status === 'all') {
                 return (

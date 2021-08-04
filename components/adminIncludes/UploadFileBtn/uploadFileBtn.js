@@ -11,7 +11,6 @@ const UploadFileBtn = props => {
         filesData.append('type',props.type)
         uploadFiles(filesData, 'test').then(res=>{
             props.setFunction(props.name,res.data.path.replace('./','/'))
-            console.log( res.data)
         }).catch(err=>{
             console.log( err)
             props.returnElement.current.value  = 'Something went Wrong'

@@ -9,7 +9,7 @@ pageCache.ssrCache = new LRUCache({
 });
 
 pageCache.getCacheKey = (req)=> {
-    //console.log(req.path)
+
     return `${req.path}`
 }
 
@@ -18,11 +18,9 @@ pageCache.renderAndCache = async (req, res,targetComponent,queryParams,app)=>{
 
     // If we have a page in the cache, let's serve it
     if (pageCache.ssrCache.has(key)) {
-        //console.log(`serving from cache ${key}`);
         res.setHeader('x-cache', 'HIT');
         res.send(pageCache.ssrCache.get(key));
         res.end()
-        // return
     }else{
         try {
             const html = await app.render(req, res, targetComponent, queryParams);

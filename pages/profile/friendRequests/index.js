@@ -7,6 +7,7 @@ import UserSmallPreview from "../../../components/includes/socialComponents/User
 import _ from "lodash";
 import {AppContext} from "../../../context/AppContext";
 import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
+import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
 const Followers = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({});
@@ -35,12 +36,15 @@ const Followers = props => {
 
     }, [contextData.userData.pendingReceivedFriendRequests]);
 
+
+
+
     const renderPendingReceivedFriendRequests = pendingReceivedFriendRequests.map(user=>{
         return(
-            <UserSmallPreview key={_.uniqueId('user_')}
-                              {...user}
-
-            />
+            <>
+                <button>accept</button>
+            <UserSmallPreview key={_.uniqueId('user_')} {...user}/>
+            </>
         )
     })
 
@@ -53,7 +57,7 @@ const Followers = props => {
             }
             
             `}</style>
-            <ProfileCoverImage/>
+            <ProfileImage/>
             <ProfileNavigation />
             {renderPendingReceivedFriendRequests}
         </div>
@@ -75,6 +79,7 @@ export const getServerSideProps = async (context) => {
         }
     }
 }
+
 export default Followers;
 
 //friendRequests

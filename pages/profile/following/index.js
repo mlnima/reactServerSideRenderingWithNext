@@ -7,6 +7,7 @@ import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariab
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import _ from "lodash";
 import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
+import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
 const Following = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({});
@@ -52,8 +53,7 @@ const Following = props => {
             }
             
             `}</style>
-            <ProfileCoverImage/>
-            <ProfileNavigation />
+
             {renderFollowing}
         </div>
     );

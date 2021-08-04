@@ -13,7 +13,7 @@ const SearchInputComponent = props => {
         isOpen: false
     });
     const openStatus = !props.mobileMode
-    //console.log(props.mobileMode)
+
     const [isOpen, setIsOpen] = useState(openStatus)
 
 

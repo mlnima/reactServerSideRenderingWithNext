@@ -28,9 +28,7 @@ const Register = props => {
         type: null,
     });
 
-    useEffect(() => {
-        console.log(router.pathname)
-    }, [props]);
+
 
     const onChangeHandler = e => {
         setState({
@@ -47,7 +45,7 @@ const Register = props => {
                 message: res.data.message,
                 type: 'success',
             })
-            console.log(res.data)
+
         }).catch(err => {
             setResponse({
                 ...response,

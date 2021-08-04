@@ -76,14 +76,6 @@ const NavigationItem = props => {
         }
     }
 
-    //
-    // useEffect(() => {
-    //     console.log(data)
-    // }, [data]);
-
-    // useEffect(() => {
-    //     console.log(data)
-    // }, [data]);
 
     const onAddQueryHandler = e => {
         e.preventDefault()

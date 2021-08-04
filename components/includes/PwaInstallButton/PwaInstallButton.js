@@ -16,7 +16,6 @@ const PwaInstallButton = props => {
     //
     //         const handler = e => {
     //             e.preventDefault();
-    //             console.log("we are being triggered :D");
     //             setSupportsPWA(true);
     //             setPromptInstall(e);
     //         };
@@ -33,7 +32,6 @@ const PwaInstallButton = props => {
         //
         //     const handler = e => {
         //         e.preventDefault();
-        //         console.log("we are being triggered :D");
         //         setSupportsPWA(true);
         //         setPromptInstall(e);
         //     };
@@ -44,7 +42,7 @@ const PwaInstallButton = props => {
     }
 
     const onClickHandler = e => {
-        //console.log(installButton)
+
         e.preventDefault();
         if (!promptInstall) {
             return;

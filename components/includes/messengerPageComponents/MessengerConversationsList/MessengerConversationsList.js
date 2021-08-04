@@ -6,9 +6,7 @@ import MessengerConversationListHeader from "./MessengerConversationListHeader";
 
 const MessengerConversationsList = ({conversations, setConversations}) => {
     const contextData = useContext(AppContext);
-    // useEffect(() => {
-    //     console.log(conversations)
-    // }, [conversations]);
+
     const renderConversationsPreview = (conversations || []).map(conversationData => {
         return <MessengerConversationPreview key={_.uniqueId('user_')} conversationData={conversationData} userId={contextData.userData._id}/>
     })

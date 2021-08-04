@@ -19,7 +19,7 @@ module.exports = async (req, res) => {
 
     let sortQuery = !req.body.sort ? {count: -1} : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
     //const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery]}).exec()
-    console.log(type, searchQuery, startWithQuery, statusQuery)
+
     metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
 
         //
@@ -34,7 +34,7 @@ module.exports = async (req, res) => {
         //                 return undefined
         //             }
         //         }).catch(err => {
-        //             console.log('1x', err)
+
         //             res.end()
         //         })
         //
@@ -44,7 +44,6 @@ module.exports = async (req, res) => {
         //             noImageUrl
         //         }
         //     } catch (e) {
-        //         console.log('error 2')
         //     }
         // })
         //
@@ -57,7 +56,7 @@ module.exports = async (req, res) => {
 
 
     }).catch(err => {
-        // console.log( err)
+        console.log(err)
         res.end()
     })
 

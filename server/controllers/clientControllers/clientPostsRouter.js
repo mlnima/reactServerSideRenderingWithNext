@@ -12,6 +12,7 @@ const clientCheckRemovedContent = require('./clientPostsControllers/clientCheckR
 const clientGetMeta = require('./clientPostsControllers/clientGetMeta')
 const clientGetSingleMeta = require('./clientPostsControllers/clientGetSingleMeta')
 const clientGetComments = require('./clientPostsControllers/clientGetComments')
+const clientUserCreateNewPost = require('./clientPostsControllers/clientUserCreateNewPost')
 
 router.post('/clientGetPosts',cacheSuccesses,clientGetPosts)
 router.post('/clientGetPost',cacheSuccesses,clientGetPost)
@@ -21,5 +22,6 @@ router.post('/checkRemovedContent',clientCheckRemovedContent)
 router.post('/getMeta',cacheSuccesses,clientGetMeta)
 router.post('/getSingleMeta',cacheSuccesses,clientGetSingleMeta)
 router.post('/getComments',clientGetComments)
+router.post('/userCreateNewPost',authMiddleware,clientUserCreateNewPost)
 
 module.exports = router

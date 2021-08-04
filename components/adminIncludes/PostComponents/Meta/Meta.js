@@ -60,7 +60,7 @@ const Meta = props => {
 
     //
     // useEffect(() => {
-    //     console.log(props)
+
     // }, []);
 
     const addNewItem = e => {

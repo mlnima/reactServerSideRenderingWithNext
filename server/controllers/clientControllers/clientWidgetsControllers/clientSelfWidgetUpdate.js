@@ -7,8 +7,8 @@ module.exports = async (req,res)=>{
             widgetSchema.findByIdAndUpdate(req.body._id, {'data.posts':[...updatedWidgets.posts]}, {new: true}).exec().then(afterUpdate => {
                 res.json({updatedWidgets:afterUpdate})
                 res.end()
-            }).catch(error => {
-                console.log(error)
+            }).catch(err => {
+                console.log(err)
                 res.status(503).json({message:'something went wrong please try again later'})
                 res.end()
             })
