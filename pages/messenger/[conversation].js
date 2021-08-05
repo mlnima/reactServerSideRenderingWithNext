@@ -31,7 +31,7 @@ const conversation = props => {
     const [callAccepted, setCallAccepted] = useState(false)
     const [messageState, setMessageState] = useState({messageBody: ''})
     const [connectedUserData, setConnectedUserData] = useState({});
-    const [messages, setMessages] = useState([]);
+
 
     const [callerData, setCallerData] = useState({
         callerId: '',
@@ -46,20 +46,12 @@ const conversation = props => {
     const userVideoRef = useRef(null)
     const connectionRef = useRef(null)
 
-    useEffect(() => {
-        if (router.query.conversation && contextData.userData._id) {
-            getAndSetConversationData()
-        }
-    }, [contextData.userData]);
+
 
     useEffect(() => {
         socket.emit('joinConversation', router.query.conversation)
 
-        socket.on('receiveMessageFromConversation', messageData => {
-            if (messageData.conversationId === router.query.conversation){
-                setMessages(messages=>[...messages, messageData])
-            }
-        })
+
 
         socket.on("incomingCallFromConversation", data => {
             getUserMedia().then(myStreamData => {
@@ -265,15 +257,15 @@ const disableCamera = ()=>{
     }
 
 
-    const getAndSetConversationData = () => {
-        getConversation(router.query.conversation, -20).then(res => {
-            const connectedUser = res.data.conversation.users.find(u => u._id !== contextData.userData._id)
-            setMessages([...messages, ...res.data.conversation.messages])
-            setConnectedUserData({...connectedUserData, ...connectedUser})
-        }).catch(err => {
-            console.log(err)
-        })
-    }
+    // const getAndSetConversationData = () => {
+    //     getConversation(router.query.conversation, -20).then(res => {
+    //         const connectedUser = res.data.conversation.users.find(u => u._id !== contextData.userData._id)
+    //         setMessages([...messages, ...res.data.conversation.messages])
+    //         setConnectedUserData({...connectedUserData, ...connectedUser})
+    //     }).catch(err => {
+    //         console.log(err)
+    //     })
+    // }
 
     return (
         <div className='messenger main'>
@@ -284,19 +276,18 @@ const disableCamera = ()=>{
                 attemptForCall={attemptForCall}
                 profileImage={connectedUserData.profileImage}
                 username={connectedUserData.username}
-                // callUser={callUser}
                 connectedUserId={connectedUserData._id}/>
             <MessengerConversationMessageArea
-                messages={messages}
-                connectedUserData={connectedUserData}/>
+                connectedUserData={connectedUserData}
+                setConnectedUserData={setConnectedUserData}
+            />
             <MessengerConversationMessageTools
                 setMessageState={setMessageState}
                 messageState={messageState}
                 connectedUserData={connectedUserData}
-                setMessages={setMessages}
-                messages={messages}
                 conversationId={router.query.conversation}
-                getAndSetConversationData={getAndSetConversationData}/>
+                // getAndSetConversationData={getAndSetConversationData}
+            />
             <MessengerCall
                 callerData={callerData}
                 attemptForAnswer={attemptForAnswer}

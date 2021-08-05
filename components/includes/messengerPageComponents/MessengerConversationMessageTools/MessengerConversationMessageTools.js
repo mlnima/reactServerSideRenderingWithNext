@@ -22,7 +22,7 @@ const MessengerConversationMessageTools = props => {
             socket.emit('sendMessageToConversation',messageData,props.conversationId)
             messageToConversation(props.conversationId, messageInputData).then(() => {
                 messageInput.current.value = '';
-                props.getAndSetConversationData();
+               // props.getAndSetConversationData();
             }).catch(err => {
                 console.log(err)
             })

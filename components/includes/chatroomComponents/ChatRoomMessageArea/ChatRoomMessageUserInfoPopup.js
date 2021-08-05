@@ -2,7 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import {faUser} from "@fortawesome/free-regular-svg-icons";
+import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 
 const ChatRoomMessageUserInfoPopup = ({userInfo,onUserInfoShowHandler}) => {
     const [state, setState] = useState({});
@@ -67,9 +67,28 @@ const ChatRoomMessageUserInfoPopup = ({userInfo,onUserInfoShowHandler}) => {
                   color: var(--main-text-color);
                 }
                 
-                .chatroom-message-user-info-popup-user-data-links>a{
+               .chatroom-message-user-info-popup-user-data-links{
+                   display: flex;
+                   justify-content: space-between;
+                   align-items: center;
+                            height: 30px;
+               
+               }
+                
+                .chatroom-message-user-info-popup-user-data-links>a,.chatroom-message-user-info-popup-user-data-links>button{
+                   border: none;
+                  padding: 5px 10px ;
                   color: var(--main-text-color);
                   text-decoration: none;
+                  font-size: 1rem;
+                  background-color: transparent;
+                  width: 50px;
+                 
+                  margin: 0 10px 0 0 ;
+                }
+                
+                .chatroom-message-user-info-popup-user-data-links>a{
+                     border: var(--main-text-color) solid .5px ;
                 }
              `}</style>
                 <div className='chatroom-message-user-info-popup-content'>
@@ -83,9 +102,12 @@ const ChatRoomMessageUserInfoPopup = ({userInfo,onUserInfoShowHandler}) => {
                             <div className='chatroom-message-user-info-popup-user-data-links'>
                                 <Link href={`/user/${userInfo.username}`}>
                                     <a >
-                                        <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faUser}/>
+                                        Profile
                                     </a>
                                 </Link>
+                                <button>
+                                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faEnvelope}/>
+                                </button>
                             </div>
                         </div>
 

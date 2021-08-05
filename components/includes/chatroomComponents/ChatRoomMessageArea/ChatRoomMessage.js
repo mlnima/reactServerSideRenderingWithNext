@@ -76,7 +76,7 @@ class ChatRoomMessage extends PureComponent {
 
                 <img onClick={() => {
                     this.props.onUserInfoShowHandler(this.props.message.username, this.props.message.userId, this.props.message.profileImage)
-                }} className='chatroom-message-area-message-image' src={this.props.message.profileImage || ''} alt=""/>
+                }} className='chatroom-message-area-message-image' src={this?.props?.message?.profileImage ? this.props.message.profileImage : '/public/asset/images/user/noGenderAvatar50.jpg'} alt=""/>
 
                 <div className='chatroom-message-area-message-data'>
         <span className='chatroom-message-area-message-username-time'>

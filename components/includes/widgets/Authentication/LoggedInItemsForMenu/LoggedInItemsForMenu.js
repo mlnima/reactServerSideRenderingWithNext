@@ -45,10 +45,7 @@ const LoggedInItemsForMenu = props => {
                         </Link>
                         <Link href={`/profile`}>
                             <a rel='next' className='logged-in-item'>
-                                {contextData?.userData?.profileImage ?
-                                    <img src={contextData?.userData?.profileImage} alt='logged-in-item-profile-image' className='logged-in-item-profile-image'/> :
-                                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faUser}/>
-                                }
+                                <img src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage :'/public/asset/images/user/noGenderAvatar50.jpg'} alt='logged-in-item-profile-image' className='logged-in-item-profile-image'/>
                             </a>
                         </Link>
 

@@ -59,11 +59,7 @@ const MessengerConversationHeader = ({profileImage,username,attemptForCall}) => 
                         <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />
                     </a>
                 </Link>
-                {
-                    profileImage?
-                        <img onClick={()=>router.push(`/user/${username}`)} src={profileImage || '/static/images/noImage/no-image-available.png'} alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>:
-                        <div className="messenger-conversation-header-profile-image" style={{backgroundImage:'linear-gradient(to bottom right, var(--navigation-background-color), black)' }  }/>
-                }
+                <img onClick={()=>router.push(`/user/${username}`)} src={profileImage ? profileImage : '/public/asset/images/user/noGenderAvatar150.jpg' } alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>
 
                 <p className='messenger-conversation-header-username'>{username}</p>
             </div>

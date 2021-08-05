@@ -1,5 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
-import PostElement from "../PostElement/PostElement";
+import dynamic from "next/dynamic";
+const PostElement = dynamic(() => import('../PostElement/PostElement'))
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
 

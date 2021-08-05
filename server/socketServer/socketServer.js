@@ -44,7 +44,7 @@ io.on('connection', socket => {
     })
 
     socket.on('sendMessageToConversation', (messageData, conversation) => {
-        socket.to(conversation).emit('receiveMessageFromConversation', messageData)
+        io.in(conversation).emit('receiveMessageFromConversation', messageData)
     })
 
 // ----------------------videoCall---------------------

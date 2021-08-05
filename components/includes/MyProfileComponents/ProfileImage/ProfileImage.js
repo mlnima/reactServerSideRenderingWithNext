@@ -88,11 +88,7 @@ const ProfileImage = props => {
             `}</style>
             <img onClick={ () => uploadInputElement.current.click() }
                  className='profile-image-img'
-                 src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage + '?date=' + Date.now() :
-                      contextData?.userData?.gender === 'male' ? '/public/asset/images/user/maleAvatar150.jpg' :
-                      contextData?.userData?.gender === 'female' ?    '/public/asset/images/user/femaleAvatar150.jpg' :
-                      '/public/asset/images/user/noGenderAvatar150.jpg'
-                 } />
+                 src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg' } />
             <input ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
         </div>
     );

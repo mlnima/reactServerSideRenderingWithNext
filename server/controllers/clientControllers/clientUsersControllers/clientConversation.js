@@ -6,12 +6,12 @@ module.exports = async (req, res) => {
         const senderId = req.userData._id;
         const receiverId = req.body._id;
         const conversationData = {
-            users:[senderId,receiverId]
+            users:[senderId,receiverId].sort()
         }
 
         //const findQuery = {$and:[{users:{ "$in" : [senderId,receiverId]}},{users:{ "$in" : [receiverId]}}]}
 
-        const conversation = await conversationSchema.findOneAndUpdate({users:{ "$eq" : [senderId,receiverId]}}, {...conversationData},{new:true,upsert:true}).exec()
+        const conversation = await conversationSchema.findOneAndUpdate({users:{ "$eq" : [senderId,receiverId].sort()}}, {...conversationData},{new:true,upsert:true}).exec()
 
         res.json({conversation})
         res.end()

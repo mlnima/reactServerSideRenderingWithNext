@@ -99,7 +99,7 @@ const user = props => {
 
             <div className='profile-header'>
                 <UserPageProfileImage
-                    coverImage={userData?.coverImage}
+                    gender={userData?.gender}
                     profileImage={userData?.profileImage}
                 />
                 <div className='profile-header-info-actions'>

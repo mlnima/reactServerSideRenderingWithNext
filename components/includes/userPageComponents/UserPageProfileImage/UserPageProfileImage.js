@@ -1,4 +1,4 @@
-const UserPageProfileImage = ({coverImage,profileImage}) => {
+const UserPageProfileImage = ({gender,profileImage}) => {
 
     return (
         <div className='user-page-profile-image'>
@@ -28,8 +28,7 @@ const UserPageProfileImage = ({coverImage,profileImage}) => {
             }
         
         `}</style>
-
-            <img src={profileImage || '/static/images/noImage/no-image-available.png'} alt='user-page-profile-image-content' className='user-page-profile-image-content'/>
+            <img src={profileImage ? profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg'} alt='user-page-profile-image-content' className='user-page-profile-image-content'/>
         </div>
     );
 };
