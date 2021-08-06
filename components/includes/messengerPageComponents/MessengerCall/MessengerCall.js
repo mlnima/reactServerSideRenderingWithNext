@@ -141,9 +141,19 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
         //   background-color: ${state.microphone ? 'transparent' : 'var(--navigation-text-color)' } ;
         //   color: ${state.microphone ? 'var(--navigation-background-color)' : 'white' } ;
         // }
+        .messenger-call-user-calling-message-ringing{
+         z-index: 20;
+         margin: auto;
+         text-align: center;
         
+         position: absolute;
+         top:50px;
+         color:var(--navigation-text-color);
+        }
         `}</style>
-                <div className='messenger-call-elements'>
+                {state.calling && !callAccepted ?  <p className='messenger-call-user-calling-message-ringing'>Ringing....</p> :null }
+                <div className='messenger-call-elements' >
+
                     <video className={`messenger-call-my-video-${callAccepted ? 'small' : 'big'}`} playsInline muted ref={myVideoRef}  autoPlay/>
                     {callAccepted? <video className='messenger-call-user-video' playsInline ref={userVideoRef} autoPlay/> : null}
                     {state.receivingCall && !callAccepted ? <div className='messenger-call-user-calling-message'>

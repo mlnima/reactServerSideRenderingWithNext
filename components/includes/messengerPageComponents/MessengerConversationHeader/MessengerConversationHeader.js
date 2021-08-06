@@ -67,9 +67,9 @@ const MessengerConversationHeader = ({profileImage,username,attemptForCall}) => 
                 <button onClick={attemptForCall} className='messenger-conversation-header-video-call-btn'>
                     <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}}  icon={faVideo} className='messenger-conversation-header-video-call-btn-svg' />
                 </button>
-                <button onClick={attemptForCall} className='messenger-conversation-header-call-btn'>
-                    <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}}  icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg' />
-                </button>
+                {/*<button onClick={attemptForCall} className='messenger-conversation-header-call-btn'>*/}
+                {/*    <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}}  icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg' />*/}
+                {/*</button>*/}
             </div>
 
         </div>
