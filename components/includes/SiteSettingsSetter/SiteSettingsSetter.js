@@ -44,13 +44,13 @@ const SiteSettingSetter = props => {
     const keywords = (props.identity?.data?.keywords || contextData?.siteIdentity?.keywords || []).map(keyword=>keyword.trim())
 
     const locals = process.env.REACT_APP_LOCALS.split(' ');
-    const postUrls = locals.map(local=>{
+    const localsUrl = locals.map(local=>{
         if (local === process.env.REACT_APP_DEFAULT_LOCAL){
             return <link rel="alternate" hrefLang={local} href={`${process.env.REACT_APP_PRODUCTION_URL}/`}/>
         }else return <link rel="alternate" hrefLang={local} href={`${process.env.REACT_APP_PRODUCTION_URL}/${local}`}/>
     })
 
-
+// /post/[postType]/[id]
     return (
         <Head>
             <title>{(props?.identity?.data?.translations?.[router.locale]?.title || contextData?.siteIdentity?.translations?.[router.locale]?.title) || (props.identity?.data?.title || contextData?.siteIdentity?.title) || ''}</title>
@@ -61,7 +61,7 @@ const SiteSettingSetter = props => {
             <meta name="description"
                   content={(props?.identity?.data?.translations?.[router.locale]?.description || contextData?.siteIdentity?.translations?.[router.locale]?.description) || (props?.identity?.data?.description || contextData?.siteIdentity?.description) || ''}/>
             {props.identity?.data?.keywords?.length > 0 ? <meta name="keywords" content={keywords}/> : null}
-            {postUrls}
+            {router.pathname === '/post/[postType]/[id]' ? null : localsUrl}
             <link rel="shortcut icon" href={props?.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link rel="apple-touch-icon" href={props?.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link rel="manifest" href="/manifest.json"/>

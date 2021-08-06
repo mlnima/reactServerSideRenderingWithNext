@@ -6,7 +6,7 @@ const PostMetaDataToSiteHead = props => {
     const locals = process.env.REACT_APP_LOCALS.split(' ');
     const postUrls = locals.map(local=>{
         if (local === process.env.REACT_APP_DEFAULT_LOCAL){
-            return <link rel="alternate" hrefLang={local} href={`${process.env.REACT_APP_PRODUCTION_URL}/${props.url}`}/>
+            return <link rel="alternate" hrefLang={local} href={`${process.env.REACT_APP_PRODUCTION_URL + props.url}`}/>
         }else  return <link rel="alternate" hrefLang={local} href={`${process.env.REACT_APP_PRODUCTION_URL}/${local + props.url}`}/>
     })
 

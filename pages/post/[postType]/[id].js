@@ -32,7 +32,7 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
         }
 
     }, []);
-
+console.log(router)
     if (responseCode !== 200) {
         return <Error responseCode={responseCode}/>
     }  else return (
