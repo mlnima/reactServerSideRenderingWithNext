@@ -155,7 +155,7 @@ const HomePageWidgets = props => {
             <div id='widget-setting'>
                 <h2>Add New Widget</h2>
                 <div className="sidePanel">
-                    <AddWidgetMenu getAndSetData={getAndSetData} customPages={customPages}/>
+                    <AddWidgetMenu getAndSetData={getAndSetData} getAndSetWidgetsData={getAndSetWidgetsData} customPages={customPages}/>
                 </div>
                 <h2>Widgets:</h2>
                 <div className="widgets">

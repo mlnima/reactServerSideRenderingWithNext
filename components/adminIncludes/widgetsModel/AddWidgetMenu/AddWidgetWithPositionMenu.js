@@ -61,17 +61,21 @@ const AddWidgetWithPositionMenu = props => {
                                 type ==='alphabeticalNumericalRange'? authenticationWidgetModel:
                                 type ==='imageSwiper'? imageSwiperWidgetModel:
                                 type ==='postsSwiper'? postsSwiperWidgetModel:
-                                 widgetModels
+                                 widgetModels;
+
+        const widgetsInSamePosition = contextData.widgetsSettings.widgets.filter(w=>w?.data?.position === position)
         let dataToSave = {
             ...widgetModelData,
             position,
             type,
-            widgetIndex:contextData.widgetsSettings.widgets.filter(w=>w.position === position).length + 1,
+            widgetIndex:widgetsInSamePosition.length + 1,
         };
 
+        //console.log(widgetsInSamePosition)
         addNewWidget({
             data: dataToSave
         }).then(() => {
+            props.getAndSetWidgetsData()
         }).then(() => {
             props.getAndSetData()
         }).catch(err => {
