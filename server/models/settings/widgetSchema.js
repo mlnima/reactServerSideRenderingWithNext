@@ -14,6 +14,7 @@ const widgetDataSchema =  mongoose.Schema({
     position: String,
     text: String,
     title: String,
+    name: String,
     redirectLink: String,
     redirectToTitle: String,
     type: String,

@@ -21,8 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/settings/widgetSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/settings/widgetSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -728,7 +727,7 @@
       <workItem from="1628188085617" duration="1188000" />
       <workItem from="1628201593395" duration="9376000" />
       <workItem from="1628241564355" duration="6948000" />
-      <workItem from="1628271711750" duration="5846000" />
+      <workItem from="1628271711750" duration="7035000" />
     </task>
     <servers />
   </component>
