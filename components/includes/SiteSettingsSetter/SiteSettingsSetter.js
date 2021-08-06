@@ -41,7 +41,7 @@ const SiteSettingSetter = props => {
 
 
 
-    const keywords = (props.identity?.data.keywords || contextData?.siteIdentity?.keywords || []).map(keyword=>keyword.trim())
+    const keywords = (props.identity?.data?.keywords || contextData?.siteIdentity?.keywords || []).map(keyword=>keyword.trim())
 
     const locals = process.env.REACT_APP_LOCALS.split(' ');
     const postUrls = locals.map(local=>{
