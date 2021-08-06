@@ -98,8 +98,8 @@ const ImageRenderer = props => {
 
                 @media only screen and (min-width: 768px) {
                     .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
-                        width: ${props.imageSize?.width}px;
-                        height: ${props.imageSize?.height}px;
+                        width: ${props?.imageSize?.width || 255.8}px;
+                        height: ${props?.imageSize?.height || 143.95}px;
                     }
                 }
                 
