@@ -32,9 +32,7 @@ const userSchema = mongoose.Schema({
         relationshipStatus: String,
         city: String,
         country: String,
-        status: Boolean,
-        online: Boolean,
-        restricted: Boolean,
+        status: String,
         keyMaster: Boolean,
     }
     , {timestamps: true}

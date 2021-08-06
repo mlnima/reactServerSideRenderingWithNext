@@ -26,9 +26,9 @@ const PostElement = props => {
         if (props.videoTrailerUrl) {
             hover ? setHover(false) : setHover(true)
         }
-        setTimeout(()=>{
-            hover ? setHover(false) :null
-        },10000)
+        // setTimeout(()=>{
+        //     hover ? setHover(false) :null
+        // },10000)
     };
 
     const classNameForPostElement = props.postElementSize ? `post-element-${props.postElementSize}` : `post-element-small`

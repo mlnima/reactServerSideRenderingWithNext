@@ -86,9 +86,7 @@
     "superagent": "^6.1.0",
     "swiper": "^6.7.0",
     "tailwindcss": "^2.2.2",
-    "uuid-apikey": "^1.5.2",
-    "xml": "^1.0.1",
-    "xmldom": "^0.6.0"
+    "uuid-apikey": "^1.5.2"
   },
   "devDependencies": {
     "@styled-jsx/plugin-sass": "^3.0.0",

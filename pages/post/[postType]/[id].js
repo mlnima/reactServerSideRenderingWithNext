@@ -11,6 +11,7 @@ import WidgetsRenderer from '../../../components/includes/WidgetsRenderer/Widget
 import styled from "styled-components";
 import PostMetaDataToSiteHead from "../../../components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead";
 import {AppContext} from "../../../context/AppContext";
+import {useRouter} from "next/router";
 import Post from "../index";
 import PostPagePromotionType from "../../../components/includes/postPageComponents/PostPagePromotionType/PostPagePromotionType";
 import EditLinkForAdmin from "../../../components/includes/Post/PostInfo/EditLinkForAdmin/EditLinkForAdmin";
@@ -23,11 +24,13 @@ ${props => props.stylesData}
 
 const postPage = ({responseCode, design, post, identity, comments, widgets}) => {
     const contextData = useContext(AppContext);
+    const router= useRouter()
     const [deviceWidth, setDeviceWidth] = useState(null)
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)
         }
+
     }, []);
 
     if (responseCode !== 200) {
@@ -47,7 +50,7 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
             `}</style>
 
                 <EditLinkForAdmin _id={post._id}/>
-                <PostMetaDataToSiteHead {...post}/>
+                <PostMetaDataToSiteHead {...post} url={router.asPath}/>
                 {
                     post.postType === 'video' ?
                         <VideoPlayer

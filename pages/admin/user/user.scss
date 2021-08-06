@@ -1,39 +1,39 @@
-@import "../../../styles/inputs";
-@import "../../../styles/buttons";
-.user-admin-edit-profile-page{
-  .user-admin-edit-profile-page-section{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    max-width: 300px;
-    input,textarea{
-      border: 1px solid rgba(0,0,0,.1);
-      padding: 3px 5px;
-      background-color: white;
-    }
-    textarea{
-      min-height: 200px;
-    }
-  }
-  .user-admin-edit-profile-page-section-reset-password{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-
-    max-width: 300px;
-    input{
-      border: 1px solid rgba(0,0,0,.1);
-      padding: 3px 5px;
-      background-color: $light100;
-    }
-    button{
-      border: 1px solid rgba(0,0,0,.1);
-      padding: 3px 5px;
-    }
-  }
-  .user-admin-edit-profile-page-section-API{
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-  }
-}
+//@import "../../../styles/inputs";
+//@import "../../../styles/buttons";
+//.user-admin-edit-profile-page{
+//  .user-admin-edit-profile-page-section{
+//    display: flex;
+//    align-items: center;
+//    justify-content: space-between;
+//    max-width: 300px;
+//    input,textarea{
+//      border: 1px solid rgba(0,0,0,.1);
+//      padding: 3px 5px;
+//      background-color: white;
+//    }
+//    textarea{
+//      min-height: 200px;
+//    }
+//  }
+//  .user-admin-edit-profile-page-section-reset-password{
+//    display: flex;
+//    flex-direction: column;
+//    justify-content: center;
+//
+//    max-width: 300px;
+//    input{
+//      border: 1px solid rgba(0,0,0,.1);
+//      padding: 3px 5px;
+//      background-color: $light100;
+//    }
+//    button{
+//      border: 1px solid rgba(0,0,0,.1);
+//      padding: 3px 5px;
+//    }
+//  }
+//  .user-admin-edit-profile-page-section-API{
+//    display: flex;
+//    flex-direction: column;
+//    justify-content: center;
+//  }
+//}

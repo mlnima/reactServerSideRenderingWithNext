@@ -30,12 +30,9 @@ const posts = (props,{design}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
 
-    const contentName = router.asPath.includes('tags') ? 'tag' :
-        router.asPath.includes('categories') ? 'category' :
-            router.asPath.includes('actors') ? 'actor' : ''
     return (
         <StyledMain className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
-            {contentName ? <PostsPageInfo metaName={(router.query?.metaName)} metaType={(router.query?.metaType)}/> : null}
+            {router.query?.metaName || router.query?.keyword ? <PostsPageInfo titleToRender={router.query?.metaName || router.query?.keyword} /> : null}
             <PaginationComponent
                 isActive={true}
                 currentPage={props.getPostsData.page}
