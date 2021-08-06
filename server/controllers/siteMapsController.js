@@ -16,8 +16,10 @@ siteMapsController.siteMapMonths = (req, res) => {
     }
 
     let parsedDate = new Date(month);
-    const endDate = moment(parsedDate).add(1, 'M').format('YYYY-MM-DD hh:mm:ss A Z')        ;
-    postSchema.countDocuments({ createdAt: { $gte: parsedDate,$lt: endDate } }).exec().then(count => {
+
+    const endDate = moment(parsedDate).add(1, 'M').format('YYYY-MM-DD hh:mm:ss A Z');
+    const findPostsOptions = { $and:[{createdAt: { $gte: parsedDate,$lt: endDate }},{status:'published'}] }
+    postSchema.countDocuments(findPostsOptions).exec().then(count => {
 
         let postsElements;
         let subSiteMaps;
@@ -31,9 +33,9 @@ siteMapsController.siteMapMonths = (req, res) => {
                     postsElements +=
                         '<url>\n' +
                         `<loc>${ postUrl }</loc>\n` +
-                        `<lastmod>${ post.lastModify }</lastmod>\n` +
+                        `<lastmod>${ post.updatedAt || post.lastModify || post.createdAt }</lastmod>\n` +
                         '<changefreq>always</changefreq>\n' +
-                        '<priority>0.6</priority>\n' +
+                        '<priority>1</priority>\n' +
                         '</url>'
                 });
             }).then(() => {

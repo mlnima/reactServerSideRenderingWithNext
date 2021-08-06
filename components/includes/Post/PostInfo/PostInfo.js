@@ -44,7 +44,7 @@ let StyledPostInfoHead = styled.div`
       }
     }
 `
-const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,categories,description,_id,translations,currency,rating}) => {
+const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,categories,description,_id,translations,currency,rating,mainThumbnail}) => {
     const [state, setState] = useState({
         likeValue: 0,
         postAbsolutePath: '',
@@ -104,6 +104,10 @@ const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,
                         width: 35px;
                         height: 40px;
                     }
+                    .main-thumbnail{
+                      margin: auto;
+                      max-width: 320px;
+                    }
                     
                     @media only screen and (min-width: 768px) {
                         .like {
@@ -129,7 +133,9 @@ const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,
 
             <div className='post-info-body'>
                 <div className="meta-description">
-                    {postType === 'video' || postType === 'product' || postType === 'promotion' || postType === 'article' ?<PostDescription  description={description} translations={translations}/>:null }
+                    {mainThumbnail?<img className='main-thumbnail' src={mainThumbnail} alt="title"/>:null}
+
+                    {postType === 'video' || postType === 'product' || postType === 'promotion' || postType === 'article' ?<PostDescription mainThumbnail={mainThumbnail} postType={postType}  description={description} translations={translations}/>:null }
                     <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='actors' data={actors || []}/>
                     <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='tags' data={tags || []}/>
                     <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='categories' data={categories || []}/>

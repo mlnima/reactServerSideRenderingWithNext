@@ -1,13 +1,9 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import AdminLayout from '../../../../components/layouts/AdminLayout'
 import {exportPosts} from '../../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../../context/AppContext'
 
 const postsExporter = props => {
     const contextData = useContext(AppContext);
-    const [ state, setState ] = useState({});
-    useEffect(() => {
-    }, []);
 
     const onExportPostsHandler = ()=>{
         contextData.dispatchState({

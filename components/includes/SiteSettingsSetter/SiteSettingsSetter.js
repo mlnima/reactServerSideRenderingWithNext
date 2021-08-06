@@ -4,6 +4,7 @@ import Head from 'next/dist/next-server/lib/head'
 import {useRouter} from "next/router";
 import parse from 'html-react-parser';
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";
+import _ from "lodash";
 
 const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
@@ -46,8 +47,8 @@ const SiteSettingSetter = props => {
     const locals = process.env.REACT_APP_LOCALS.split(' ');
     const localsUrl = locals.map(local=>{
         if (local === process.env.REACT_APP_DEFAULT_LOCAL){
-            return <link rel="alternate" hrefLang={local} href={`${process.env.REACT_APP_PRODUCTION_URL}/`}/>
-        }else return <link rel="alternate" hrefLang={local} href={`${process.env.REACT_APP_PRODUCTION_URL}/${local}`}/>
+            return <link rel="alternate" hrefLang={local} key={_.uniqueId('link_')} href={`${process.env.REACT_APP_PRODUCTION_URL}/`}/>
+        }else return <link rel="alternate" hrefLang={local} key={_.uniqueId('link_')} href={`${process.env.REACT_APP_PRODUCTION_URL}/${local}`}/>
     })
 
 // /post/[postType]/[id]

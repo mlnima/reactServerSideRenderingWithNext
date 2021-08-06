@@ -2,7 +2,7 @@ import {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
 import 'react-quill/dist/quill.snow.css';
 
-const PostDescription = ({description,translations}) => {
+const PostDescription = ({description,translations,mainThumbnail,postType}) => {
     const contextData = useContext(AppContext);
     const descriptionElement = useRef(null);
 

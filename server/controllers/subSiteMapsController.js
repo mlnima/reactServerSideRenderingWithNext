@@ -14,8 +14,8 @@ subSiteMapsController.subSiteMapsController = (req, res) => {
     let xmlTemplate;
     let renderPostData;
     const size = 500;
-
-    postSchema.find({ createdAt: { $gte: parsedDate,$lt: endDate } }).select(' title , lastModify , postType , createdAt , updatedAt').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
+    const findPostsOptions = { $and:[{createdAt: { $gte: parsedDate,$lt: endDate }},{status:'published'}] }
+    postSchema.find(findPostsOptions).select(' title , lastModify , postType , createdAt , updatedAt').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
         renderPostData = posts.map(post => {
             if (post) {
                 let lastModify = new Date(post.createdAt || post.lastModify || post.updatedAt|| post._id.getTimestamp());
@@ -25,7 +25,7 @@ subSiteMapsController.subSiteMapsController = (req, res) => {
                     `<loc>${ postUrl }</loc>\n` +
                     `<lastmod>${ lastModify.toISOString() }</lastmod>\n` +
                     '<changefreq>always</changefreq>\n' +
-                    '<priority>0.6</priority>\n' +
+                    '<priority>1</priority>\n' +
                     '</url>'
             }
         });

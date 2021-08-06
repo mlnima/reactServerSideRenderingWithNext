@@ -15,7 +15,7 @@ const PromotionTypeCard = props => {
 
                 .post-element-link{
                  width:48vw;
-                 height:calc( 48vw / 1.777 + 20px);
+                 height:calc( 48vw / 1.777 + 40px);
                  display: flex;
                  flex-direction: column;
                  justify-content: space-evenly;
@@ -36,28 +36,31 @@ const PromotionTypeCard = props => {
                   justify-content: center;
                   align-items: center;
                   text-align: center;
-                  height: 20px;
+                  height: 40px;
                   margin: 0;
+               
                   .detail{
                    margin: 0 5px;
                    max-width: 80%;
-                   font-size: .7rem;
+                   font-size: 1rem;
+                    overflow: hidden;
+                    word-wrap: break-word;
+                    font-weight: initial;
+                    white-space: nowrap;
                   }
                 }
                 
-                 @media only screen and (min-width: 768px){
-                 .post-element-link{
-                 width: ${props.imageSize.width}px;
-                 height:${props.imageSize.height + 20}px;
+                @media only screen and (min-width: 768px){
+                    .post-element-link{
+                        width: ${props.imageSize.width}px;
+                        height:${props.imageSize.height + 40}px;
+                    }
+                    .post-element-link-internal{
+                        .detail{
+                            font-size: 1rem;
+                        }
+                    }
                 }
-               .post-element-link-internal{
-
-                  .detail{
-                  font-size: 1rem;
-                  }
-                }
-                 
-                 }
             `}</style>
             <a href={props.redirectLink}>
                 {props.mainThumbnail ?
@@ -78,7 +81,7 @@ const PromotionTypeCard = props => {
             </a>
             <Link href={`/post/${props.postType}/${props._id}`} scroll={false}>
                 <a rel='next' onClick={props.onClickLoadingHandler}  className='post-element-link-internal'>
-                    <p className='detail'>more info about {props.title} </p>
+                    <p className='detail'>{props.title} </p>
 
                 </a>
             </Link>
