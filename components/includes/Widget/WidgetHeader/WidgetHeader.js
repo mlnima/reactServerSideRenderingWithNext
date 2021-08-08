@@ -33,7 +33,7 @@ const WidgetHeader = props => {
                     color: var( --widget-h-f-text-color);
                 }
             `}</style>
-                <h1 className='widget-header-title'>{title}</h1>
+                <h2 className='widget-header-title'>{title}</h2>
                 {props.redirectLink && props.redirectToTitle && !props.footerLink ? <Link href={props.redirectLink}><a aria-label={props.redirectToTitle}>{props.redirectToTitle}</a></Link>:null }
             </div>
         );

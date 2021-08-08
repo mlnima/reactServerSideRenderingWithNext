@@ -120,9 +120,9 @@ const MenuWidget = props => {
             }
         `}</style>
 
-            <button onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button' aria-label="Center Align">
+            <ul onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button' aria-label="Center Align">
                 <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(--navigation-text-color)'}}  icon={faBars} className='navigation-mobile-button-logo' />
-            </button>
+            </ul>
 
             <ul className='menu-widget-items' ref={menuItemsElement} style={{display: open ? 'flex' : 'none'}}>
                 <li onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
