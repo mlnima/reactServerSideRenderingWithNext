@@ -123,12 +123,12 @@ const PromotionTypeCard = props => {
 
             `}</style>
             <a href={props.post.redirectLink} className='promotion-card-link-external' onClick={onExternalLinkClickViewHandler}>
-                <PromotionCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.post.title}/>
+                <PromotionCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
             </a>
             <div className='promotion-card-under-media'>
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                     <a rel='next' onClick={props.onClickLoadingHandler} className='promotion-card-link-internal'>
-                        <h3 className='promotion-card-title'>{props.post.title} </h3>
+                        <h3 className='promotion-card-title'>{props.title} </h3>
                         <h4 className='promotion-card-read-more'>Read More about {props.post.title} <span><FontAwesomeIcon icon={faInfoCircle} style={{width: '16px', height: '16px'}}/></span> </h4>
                         <div className='video-card-under-media-info'>
                             {props.post.postType === ('promotion') ? <p className='video-card-views'><span>{views}</span> <FontAwesomeIcon icon={faEye} style={{width: '16px', height: '16px'}}/></p> : null}

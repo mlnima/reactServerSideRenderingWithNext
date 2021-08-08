@@ -52,6 +52,7 @@ const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, po
             {(posts || []).map(post => {
 
                 const title = (post?.translations?.[locale]?.title || post?.title).replace('#', '')
+
                 if (post.postType==='video'){
                    return <VideoTypeCard key={_.uniqueId('video_')} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
                 }else if (post.postType==='promotion'){

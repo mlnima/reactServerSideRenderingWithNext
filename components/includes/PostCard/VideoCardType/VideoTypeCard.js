@@ -96,7 +96,7 @@ const VideoTypeCard = props => {
                     }
                   }
                 `}</style>
-                <VideoCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.post.title}/>
+                <VideoCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                 <div className='video-card-under-media'>
                     <h3 className='video-card-title'>{props.title}</h3>
                     <div className='video-card-under-media-info'>
