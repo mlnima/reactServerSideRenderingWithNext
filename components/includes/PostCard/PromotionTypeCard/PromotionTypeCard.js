@@ -4,6 +4,7 @@ import PromotionCardMedia from "./PromotionCardMedia";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
+import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 
 const PromotionTypeCard = props => {
 
@@ -14,6 +15,12 @@ const PromotionTypeCard = props => {
             viewsNumber > 1000000 ? (viewsNumber / 1000000).toFixed(1) + 'M' :
                 viewsNumber
     }, [])
+
+    const onExternalLinkClickViewHandler =()=>{
+        likeDislikeView(props.post._id, 'views')
+    }
+
+
     return (
         <div className='promotion-card'>
             <style jsx>{`
@@ -115,8 +122,8 @@ const PromotionTypeCard = props => {
               }
 
             `}</style>
-            <a href={props.post.redirectLink} className='promotion-card-link-external'>
-                <PromotionCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth}/>
+            <a href={props.post.redirectLink} className='promotion-card-link-external' onClick={onExternalLinkClickViewHandler}>
+                <PromotionCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.post.title}/>
             </a>
             <div className='promotion-card-under-media'>
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>

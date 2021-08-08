@@ -20,39 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableHeader/TableHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableHeader/TableHeader.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CardElement/CardElement.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CardElement/CardElement.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CardElement/CardElementBottomInfo.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CardElement/CardElementImage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/DownloadLink/DownloadLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/DownloadLink/DownloadLink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostTitle/PostTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostTitle/PostTitle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/RatingButtons/RatingButtons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/SlideShow/SlideShow.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/SlideShow/SlideShow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/TagsAndCategoriesActors/TagsAndCategoriesActors.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostMeta/PostMeta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/VideoPlayer/VideoPlayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/VideoPlayer/VideoPlayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/ArticleTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/BottomLeft.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/BottomLeft.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/BottomRight.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/BottomRight.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PostElement.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElement.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElementImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PostElementImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PostElementTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PostElementTitle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/PromotionTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/TopLeft.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/TopLeft.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostElement/TopRight.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/TopRight.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/PostsPageInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/PostsPageInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -168,11 +141,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.devAndSocket" />
         <item itemvalue="npm.devSocket" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.fixMetaData" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -762,7 +735,7 @@
       <workItem from="1628330766884" duration="12979000" />
       <workItem from="1628352435684" duration="909000" />
       <workItem from="1628364859433" duration="16972000" />
-      <workItem from="1628417807631" duration="8887000" />
+      <workItem from="1628417807631" duration="10695000" />
     </task>
     <servers />
   </component>

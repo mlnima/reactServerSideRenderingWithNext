@@ -94,7 +94,7 @@ const VideoCardMedia = props => {
                   }
                 `}</style>
                 <img className='video-card-image'
-                     alt={props.altValue || props.classNameValue}
+                     alt={props.mediaAlt || props.classNameValue}
                      src={!gotError ? imageUrl || props.noImageUrl : props.noImageUrl}
                      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
