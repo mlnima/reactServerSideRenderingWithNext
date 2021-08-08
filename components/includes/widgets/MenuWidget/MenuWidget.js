@@ -46,7 +46,7 @@ const MenuWidget = props => {
 
 
     return (
-        <ul className='menu-widget'>
+        <div className='menu-widget'>
         <style jsx>{`
             .menu-widget{
                 background-color: var(--navigation-background-color);
@@ -131,7 +131,7 @@ const MenuWidget = props => {
                 {renderMenuItems}
             </ul>
 
-        </ul>
+        </div>
     );
 };
 export default MenuWidget;
