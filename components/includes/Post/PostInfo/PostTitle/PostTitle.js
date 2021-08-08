@@ -10,8 +10,12 @@ const PostTitle = ({title, translations}) => {
             <style jsx>{`
                 .post-title{
                     color: var(--post-page-info-color);
+                    background-color: var(--post-page-info-background-color);
                     font-size: 1.25em;
                     text-align: center;
+                    width: 100%;
+                    margin: 0;
+                    padding: 20px 0;
                    
                 }
             `}</style>

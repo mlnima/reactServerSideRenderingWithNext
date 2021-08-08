@@ -1,8 +1,11 @@
-import React, {useState, useEffect, useContext} from 'react';
+import React, {useState, useEffect, useContext,useMemo} from 'react';
 import dynamic from "next/dynamic";
-const PostElement = dynamic(() => import('../PostElement/PostElement'))
+const PostElement = dynamic(() => import('../PostCard/PostElement'))
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
+import VideoTypeCard from "../PostCard/VideoCardType/VideoTypeCard";
+import _ from "lodash";
+import PromotionTypeCard from "../PostCard/PromotionTypeCard/PromotionTypeCard";
 
 const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, postElementStyle,postElementImageLoaderType,postElementImageLoader,widgetId}) => {
     const contextData = useContext(AppContext);
@@ -11,6 +14,19 @@ const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, po
     const [state, setState] = useState({
         imageWidth: 255,
     })
+    const cardWidth = useMemo(() => {
+        return postElementSize === 'list' ? 116.6 :
+               postElementSize === 'smaller' ? 209.8 :
+               postElementSize === 'small' ? 255 :
+               postElementSize === 'medium' ? 320 : 255
+    }, [])
+
+    const noImageUrl = '/static/images/noImage/no-image-available.png';
+
+
+
+
+
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -22,7 +38,6 @@ const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, po
             }
         }
     }, []);
-
 
 
     return (
@@ -37,8 +52,12 @@ const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, po
             {(posts || []).map(post => {
 
                 const title = (post?.translations?.[locale]?.title || post?.title).replace('#', '')
+                if (post.postType==='video'){
+                   return <VideoTypeCard key={_.uniqueId('video_')} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
+                }else if (post.postType==='promotion'){
+                    return <PromotionTypeCard key={_.uniqueId('promotion_') } noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
 
-                return (
+                }else return (
                     <PostElement
                         isMobile={isMobile}
                         onClickLoadingHandler={contextData.functions.loadingHandler}
@@ -57,6 +76,7 @@ const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, po
                         videoTrailerUrl={post.videoTrailerUrl}
                         price={post.price}
                         duration={post.duration}
+                        actors={post.actors}
                         quality={post.quality}
                         rating={post.rating}
                         mainThumbnail={post.mainThumbnail}

@@ -1,4 +1,4 @@
-const VideoPlayer = ({title,description,duration,mainThumbnail,videoEmbedCode,lastModify,videoUrl,_id,videoScriptCode}) => {
+const VideoPlayer = ({post}) => {
         return (
             <div className='video-player'>
                     <style jsx>{`
@@ -41,21 +41,21 @@ iframe{
 }
 
 `}</style>
-                <meta itemProp="name" content={title}/>
-                <meta itemProp="description" content={description}/>
-                <meta itemProp="duration" content={duration}/>
-                <meta itemProp="thumbnailUrl" content={mainThumbnail}/>
-                <meta itemProp="embedURL" content={videoUrl || videoEmbedCode}/>
-                <meta itemProp="uploadDate" content={lastModify}/>
+                <meta itemProp="name" content={post.title}/>
+                <meta itemProp="description" content={post.description}/>
+                <meta itemProp="duration" content={post.duration}/>
+                <meta itemProp="thumbnailUrl" content={post.mainThumbnail}/>
+                <meta itemProp="embedURL" content={post.videoUrl || post.videoEmbedCode}/>
+                <meta itemProp="uploadDate" content={post.updatedAt}/>
                 <div  className="responsive-player">
-                    {videoUrl?
-                        <video className='video-player-video-type' controls controlsList=" nodownload" poster={mainThumbnail} preload="none">
-                            <source src={videoUrl}/>
+                    {post.videoUrl?
+                        <video className='video-player-video-type' controls controlsList=" nodownload" poster={post.mainThumbnail} preload="none">
+                            <source src={post.videoUrl}/>
                         </video>
-                        :videoEmbedCode && !videoUrl?
-                            <iframe className={_id}  title={title} src={videoEmbedCode} frameBorder="0" width='640' height='360' scrolling="no"/>
-                            :!videoUrl && !videoEmbedCode && videoScriptCode?
-                                videoScriptCode:
+                        :post.videoEmbedCode && !post.videoUrl?
+                            <iframe className={post._id}  title={post.title} src={post.videoEmbedCode} frameBorder="0" width='640' height='360' scrolling="no"/>
+                            :!post.videoUrl && !post.videoEmbedCode && post.videoScriptCode?
+                                post.videoScriptCode:
                                 null
                     }
                 </div>

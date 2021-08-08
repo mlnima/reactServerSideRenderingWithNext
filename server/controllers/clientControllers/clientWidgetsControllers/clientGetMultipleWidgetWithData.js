@@ -5,7 +5,7 @@ const metaSchema = require('../../../models/metaSchema');
 const mongoose = require('mongoose');
 
 module.exports = async (req, res) => {
-
+//populate:{path:'actors',model:'meta'}
     try {
         const widgetsDataQuery = (req.body.widgets || []).map(position => position === 'all' ? {} : {'data.position': position})
         const widgets = await widgetSchema.find({$or: widgetsDataQuery}).populate([

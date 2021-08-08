@@ -36,7 +36,7 @@ const TableHeader = props => {
                 items,
             })
         } else if (router.query.assetsType === 'users') {
-            let items = [ 'username', 'email', 'role', 'reg_time' ]
+            let items = [ 'username', 'email', 'role', 'createdAt' ]
             setState({
                 ...state,
                 items,

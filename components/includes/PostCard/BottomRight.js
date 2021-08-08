@@ -7,12 +7,13 @@ const BottomRight = props => {
         <span className='bottom-right post-element-info-data'>
             <style jsx>{`
                       .bottom-right{
+                            position: absolute;
                             right: 3px;
-                            bottom: 3px;
+                            bottom: 43px;
                             margin: auto;
                       }
                 `}</style>
-                 <FontAwesomeIcon style={props.svgDefaultStyle} icon={faEye} className='post-element-info-logo'/>
+                 <FontAwesomeIcon style={{width:'24px',height:'24px'}} icon={faEye} className='post-element-info-logo'/>
                  <span className='view-count value-next-icon'>{props.views}</span>
 
          </span>

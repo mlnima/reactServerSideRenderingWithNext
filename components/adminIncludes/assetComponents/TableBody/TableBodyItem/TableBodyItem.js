@@ -60,7 +60,7 @@ const TableBodyItem = props => {
                 properties,
             })
         } else if (props.assetsType === 'users') {
-            let properties = ['username', 'email', 'role', 'reg_time']
+            let properties = ['username', 'email', 'role', 'createdAt']
             setState({
                 ...state,
                 properties,

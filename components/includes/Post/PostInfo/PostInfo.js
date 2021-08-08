@@ -1,5 +1,5 @@
 import {useEffect, useState} from 'react';
-import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
+//import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
 import {likeValueCalculator} from "../../../../_variables/_variables";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 import DownloadLink from "../DownloadLink/DownloadLink";
@@ -44,39 +44,39 @@ let StyledPostInfoHead = styled.div`
       }
     }
 `
-const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,categories,description,_id,translations,currency,rating,mainThumbnail}) => {
-    const [state, setState] = useState({
-        likeValue: 0,
-        postAbsolutePath: '',
-        mode: 'view',
-        isLiked: false,
-        isDisliked: false,
-        svgDefaultStyle: {
-            maxWidth: '25px',
-            maxHeight: '25px'
-        }
-    });
-
-    const [ratingAndViewData, setRatingAndViewData] = useState({
-        like: 0,
-        disLike: 0,
-        view: 0
-    })
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            setState({
-                ...state,
-                likeValue: likeValueCalculator(likes, disLikes),
-                postAbsolutePath: window.location.href
-            });
-        }
-        likeDislikeView(_id, 'views').then(res => {
-            if (res.data.updatedData) {
-                setRatingAndViewData(res.data.updatedData)
-            }
-        })
-    }, [likes, disLikes]);
+const PostInfo = ({title,likes,disLikes,downloadLink,redirectLink,postType,price,actors,tags,categories,description,_id,translations,currency,rating,mainThumbnail}) => {
+    // const [state, setState] = useState({
+    //     likeValue: 0,
+    //     postAbsolutePath: '',
+    //     mode: 'view',
+    //     isLiked: false,
+    //     isDisliked: false,
+    //     svgDefaultStyle: {
+    //         maxWidth: '25px',
+    //         maxHeight: '25px'
+    //     }
+    // });
+    //
+    // const [ratingAndViewData, setRatingAndViewData] = useState({
+    //     like: 0,
+    //     disLike: 0,
+    //     view: 0
+    // })
+    //
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //         setState({
+    //             ...state,
+    //             likeValue: likeValueCalculator(likes, disLikes),
+    //             postAbsolutePath: window.location.href
+    //         });
+    //     }
+    //     likeDislikeView(_id, 'views').then(res => {
+    //         if (res.data.updatedData) {
+    //             setRatingAndViewData(res.data.updatedData)
+    //         }
+    //     })
+    // }, [likes, disLikes]);
 
 
     return (
@@ -104,9 +104,21 @@ const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,
                         width: 35px;
                         height: 40px;
                     }
-                    .main-thumbnail{
-                      margin: auto;
-                      max-width: 320px;
+
+                    .promotion-thumbnail-link{
+                     display: flex;
+                     flex-direction: column;
+                     align-items: center;
+                     justify-content: center;
+                        .main-thumbnail{
+                            margin: auto;
+                            max-width: 320px;
+                        }
+                        .redirect-link{
+                            color:var(--main-text-color) ;
+                            padding: 10px 20px;
+                            border: var(--main-text-color) 1px solid;
+                        }
                     }
                     
                     @media only screen and (min-width: 768px) {
@@ -133,12 +145,16 @@ const PostInfo = ({title,likes,disLikes,downloadLink,postType,price,actors,tags,
 
             <div className='post-info-body'>
                 <div className="meta-description">
-                    {mainThumbnail?<img className='main-thumbnail' src={mainThumbnail} alt="title"/>:null}
+                    <div className='promotion-thumbnail-link'>
+                        {mainThumbnail && postType === 'promotion' ? <a href={redirectLink}><img className='main-thumbnail' src={mainThumbnail} alt="title"/></a>:null}
+                        {mainThumbnail && postType === 'promotion' ? <a href={redirectLink} className='redirect-link'>go to {title}</a>:null}
+                    </div>
+
 
                     {postType === 'video' || postType === 'product' || postType === 'promotion' || postType === 'article' ?<PostDescription mainThumbnail={mainThumbnail} postType={postType}  description={description} translations={translations}/>:null }
-                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='actors' data={actors || []}/>
-                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='tags' data={tags || []}/>
-                    <TagsAndCategoriesActors svgDefaultStyle={state.svgDefaultStyle} type='categories' data={categories || []}/>
+                    {/*<TagsAndCategoriesActors  type='actors' data={actors || []}/>*/}
+                    {/*<TagsAndCategoriesActors  type='tags' data={tags || []}/>*/}
+                    {/*<TagsAndCategoriesActors  type='categories' data={categories || []}/>*/}
                 </div>
             </div>
         </StyledDiv>

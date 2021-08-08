@@ -16,6 +16,7 @@ const TopRight = props => {
                       .top-right{
                         right: 3px;
                         top: 3px;
+                        font-weight: bold;
                       }
                 `}</style>
             {quality }

@@ -54,17 +54,17 @@ const RatingButtons = ({_id,svgDefaultStyle,ratingAndViewData,rating,setRatingAn
                         
                     `}</style>
                     <span className='like-disLike-count-items rating-item'>
-                        <FontAwesomeIcon style={svgDefaultStyle} icon={faEye}  className='rate-logo' />
+                        <FontAwesomeIcon style={{width: '24px', height: '24px'}} icon={faEye}  className='rate-logo' />
                         <p className='rating-item-value'>{ratingAndViewData.views} </p>
                     </span>
             {rating !== 'disable'?
                 <>
                     <button className='rating-item' onClick={() => onRateHandler('likes')  } aria-label="Center Align">
-                        <FontAwesomeIcon style={svgDefaultStyle} icon={faThumbsUp} className='rate-logo' />
+                        <FontAwesomeIcon  icon={faThumbsUp} style={{width: '24px', height: '24px'}} className='rate-logo' />
                         <p className='rating-item-value'>{ratingAndViewData.likes}</p>
                     </button>
                     <button className='rating-item' onClick={() =>onRateHandler('disLikes')} aria-label="Center Align">
-                        <FontAwesomeIcon style={svgDefaultStyle} icon={faThumbsDown} className='rate-logo'/>
+                        <FontAwesomeIcon style={{width: '24px', height: '24px'}} icon={faThumbsDown} className='rate-logo'/>
                         <p className='rating-item-value'>{ratingAndViewData.disLikes}</p>
                     </button>
                 </>:null}

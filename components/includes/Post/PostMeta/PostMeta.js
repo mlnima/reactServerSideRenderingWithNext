@@ -1,7 +1,7 @@
 import Link from "next/link";
 import _ from "lodash";
 
-const TagsAndCategoriesActors = props => {
+const PostMeta = props => {
 
     const filterMeta = props.data.length>0 ?  props.data.filter(m=>m.name.length>1) : []
 
@@ -20,6 +20,7 @@ const TagsAndCategoriesActors = props => {
                     justify-content: center;
                     max-height: 30px;
                     margin: 5px;
+                    
                 }
                     .post-meta-item-link{
                     color:var(--meta-text-color);
@@ -37,13 +38,14 @@ const TagsAndCategoriesActors = props => {
 
     if (props.data.length >= 1) {
         return (
-            <div className={props.type + ' tags-categories-actors'}>
+            <div className={props.type + ' post-meta'}>
             <style jsx>{`
-                .tags-categories-actors{
+                .post-meta{
                     display: flex;
                     flex-wrap: wrap;
                     margin: 5px 0;
                     padding: 5px 0;
+                    width: 100%;
                 }
                 .meta-type {
                     color:var(--post-page-info-color);
@@ -64,4 +66,4 @@ const TagsAndCategoriesActors = props => {
     } else return null
 
 };
-export default TagsAndCategoriesActors;
+export default PostMeta;

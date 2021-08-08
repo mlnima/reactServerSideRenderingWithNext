@@ -30,7 +30,6 @@ const PostElement = props => {
         //     hover ? setHover(false) :null
         // },10000)
     };
-
     const classNameForPostElement = props.postElementSize ? `post-element-${props.postElementSize}` : `post-element-small`
 
     return (

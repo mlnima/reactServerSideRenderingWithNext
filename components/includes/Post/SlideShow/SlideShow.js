@@ -55,7 +55,7 @@ ${props => props.stylesData}
 `;
 
 
-const SlideShow = ({images,sidebar,mainThumbnail,deviceWidth}) => {
+const SlideShow = ({post,sidebar,deviceWidth}) => {
     const [state, setState] = useState({
         activeImageIndex: 0,
         imagesArrayLength: 0
@@ -63,9 +63,9 @@ const SlideShow = ({images,sidebar,mainThumbnail,deviceWidth}) => {
     useEffect(() => {
         setState({
             ...state,
-            imagesArrayLength: images.length
+            imagesArrayLength: post.images.length
         })
-    }, [images]);
+    }, [post.images]);
     const nextImage = () => {
         setState({
             ...state,
@@ -98,10 +98,10 @@ const SlideShow = ({images,sidebar,mainThumbnail,deviceWidth}) => {
         }
     }
     const RenderImageElement = () => {
-        const activeImageSrc = images.length > 0 ? images[state.activeImageIndex] : mainThumbnail
+        const activeImageSrc = post.images.length > 0 ? post.images[state.activeImageIndex] : post.mainThumbnail
 
         if (activeImageSrc.includes('http')) {
-            if (images.length > 0) {
+            if (post.images.length > 0) {
                 return (
                     <img className='active-image' src={activeImageSrc} alt="activeImageSrc"/>
                 )
