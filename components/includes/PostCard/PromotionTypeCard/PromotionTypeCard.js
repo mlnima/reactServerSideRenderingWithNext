@@ -16,7 +16,7 @@ const PromotionTypeCard = props => {
                 viewsNumber
     }, [])
 
-    const onExternalLinkClickViewHandler =()=>{
+    const onExternalLinkClickViewHandler = () => {
         likeDislikeView(props.post._id, 'views')
     }
 
@@ -35,17 +35,23 @@ const PromotionTypeCard = props => {
               }
 
               .promotion-card-link-external {
-                width: 100%;
+                width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
               }
 
               .promotion-card-under-media {
                 width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                height: 85px ;
+                margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
+                height: ${props.postElementSize === 'list' ? 65 : 45}px;
+
 
                 .promotion-card-link-internal {
+                  height: ${props.postElementSize === 'list' ? 65 : 45}px;
                   width: 100%;
                   text-decoration: none;
                   color: var(--post-element-text-color);
+                  display: flex;
+                  flex-direction: column;
+                  justify-content: space-between;
 
                   .video-card-under-media-info {
                     display: flex;
@@ -67,9 +73,10 @@ const PromotionTypeCard = props => {
                   }
 
                   .promotion-card-title {
-                   font-size: 1rem;
+                    font-size: 1rem;
                     text-overflow: ellipsis;
                     overflow: hidden;
+                    font-weight: initial;
                     display: -webkit-box !important;
                     -webkit-line-clamp: ${props.postElementSize === 'list' ? 2 : 1};
                     -webkit-box-orient: vertical;
@@ -78,22 +85,26 @@ const PromotionTypeCard = props => {
                     width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                     max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
                   }
-                  .promotion-card-read-more{
-                  text-align: center;
-                  margin: 0;
-                  height: 40px;
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                  width: calc(100% - 30px);
-                                      text-overflow: ellipsis;
+
+                  .promotion-card-read-more {
+                    // text-align: center;
+                    font-size: 1rem;
+                    font-weight: initial;
+                    margin: 0;
+                    height: 40px;
+                    display: flex;
+                    justify-content: center;
+                    align-items: center;
+                    width: calc(100% - 30px);
+                    text-overflow: ellipsis;
                     overflow: hidden;
                     display: -webkit-box !important;
                     -webkit-line-clamp: 1;
                     -webkit-box-orient: vertical;
                     white-space: normal;
-                    span{
-                    margin: 0 4px;
+
+                    span {
+                      margin: 0 4px;
                     }
                   }
                 }
@@ -112,7 +123,9 @@ const PromotionTypeCard = props => {
                       width: 100%;
 
                       .promotion-card-title {
-                        width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `100%;`};
+                          // width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `100%;`};
+                        width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+                        max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
                       }
                     }
                   }
@@ -129,7 +142,7 @@ const PromotionTypeCard = props => {
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                     <a rel='next' onClick={props.onClickLoadingHandler} className='promotion-card-link-internal'>
                         <h3 className='promotion-card-title'>{props.title} </h3>
-                        <h4 className='promotion-card-read-more'>Read More about {props.post.title} <span><FontAwesomeIcon icon={faInfoCircle} style={{width: '16px', height: '16px'}}/></span> </h4>
+
                         <div className='video-card-under-media-info'>
                             {props.post.postType === ('promotion') ? <p className='video-card-views'><span>{views}</span> <FontAwesomeIcon icon={faEye} style={{width: '16px', height: '16px'}}/></p> : null}
                             {props.post.postType === ('promotion') ? <p className='video-card-views'><span>{props.post.likes || 0}</span> <FontAwesomeIcon icon={faThumbsUp} style={{width: '16px', height: '16px'}}/></p> : null}

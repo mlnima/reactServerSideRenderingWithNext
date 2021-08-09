@@ -15,8 +15,10 @@ const VideoCardMedia = props => {
     })
 
     const hoverHandler = () => {
+
         hover ? setHover(false) : setHover(true)
     }
+
 
     const onErrorHandler = e => {
         if (imageUrl) {
@@ -38,7 +40,7 @@ const VideoCardMedia = props => {
     }
 
 
-    if (props.post.videoTrailerUrl && hover) {
+    if (props.post.VideoTrailerUrl && hover) {
         return (
             <video
                 onMouseOver={event => event.target.play()}
@@ -72,7 +74,7 @@ const VideoCardMedia = props => {
                     }
                   }
                 `}</style>
-                <source src={props.post.videoTrailerUrl}/>
+                <source src={props.post.VideoTrailerUrl}/>
                 Sorry, your browser doesn't support embedded videos.
             </video>
         )

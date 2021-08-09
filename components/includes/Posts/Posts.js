@@ -6,6 +6,7 @@ import {AppContext} from "../../../context/AppContext";
 import VideoTypeCard from "../PostCard/VideoCardType/VideoTypeCard";
 import _ from "lodash";
 import PromotionTypeCard from "../PostCard/PromotionTypeCard/PromotionTypeCard";
+import ArticleTypeCard from "../PostCard/ArticleTypeCard/ArticleTypeCard";
 
 const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, postElementStyle,postElementImageLoaderType,postElementImageLoader,widgetId}) => {
     const contextData = useContext(AppContext);
@@ -57,6 +58,9 @@ const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, po
                    return <VideoTypeCard key={_.uniqueId('video_')} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
                 }else if (post.postType==='promotion'){
                     return <PromotionTypeCard key={_.uniqueId('promotion_') } noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
+
+                }else if (post.postType==='article'){
+                    return <ArticleTypeCard key={_.uniqueId('promotion_') } noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
 
                 }else return (
                     <PostElement
