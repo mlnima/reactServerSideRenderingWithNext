@@ -51,7 +51,7 @@ const Comment = props => {
             `}</style>
             <div className='comment-header'>
                 <img className='comment-author-image' src={props.comment?.author?.profileImage || '/public/asset/images/icons/profile-image.jpg'}/>
-                <Link href={`/user/${props.comment?.author?._id}`}>
+                <Link href={`/user/${props.comment?.author?.username}`}>
                     <a className='comment-author'>
                         {props.comment.author.username}
                     </a>
