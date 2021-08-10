@@ -31,7 +31,7 @@ const VideoTypeCard = props => {
 
     const metaPreview = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
 
-    const renderMetaData = (metaPreview || []).map(meta => {
+    const renderMetaData = (metaPreview || []).filter(meta=>meta.name.length > 1).map(meta => {
         const path = `/posts?metaId=${meta._id}&metaName=${meta.name}&metaType=${meta.type}`;
         const asPath = `/${meta.type}/${meta.name}?metaId=${meta._id}`
         return (

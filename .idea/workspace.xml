@@ -22,12 +22,6 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -740,7 +734,7 @@
       <workItem from="1628417807631" duration="14620000" />
       <workItem from="1628495019084" duration="6686000" />
       <workItem from="1628518066684" duration="1172000" />
-      <workItem from="1628533596416" duration="10641000" />
+      <workItem from="1628533596416" duration="11469000" />
     </task>
     <servers />
   </component>
