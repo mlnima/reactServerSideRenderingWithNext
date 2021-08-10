@@ -3,11 +3,9 @@ import Link from "next/link";
 import moment from "moment";
 import {AppContext} from "../../../../../../context/AppContext";
 import {deleteComments} from "../../../../../../_variables/ajaxPostsVariables";
-import {useRouter} from "next/router";
 
 const Comment = props => {
     const contextData = useContext(AppContext);
-    const router = useRouter()
 
     const onDeleteHandler = (id) => {
         deleteComments([id], process.env.REACT_APP_PRODUCTION_URL).then(() => {

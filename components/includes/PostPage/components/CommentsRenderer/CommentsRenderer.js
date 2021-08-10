@@ -1,4 +1,5 @@
 import Comment from "./Comment/Comment";
+import _ from "lodash";
 
 const CommentsRenderer = props => {
 
@@ -17,7 +18,7 @@ const CommentsRenderer = props => {
             `}</style>
 
             {props.comments.map(comment => {
-                return (<Comment reGetComments={props.reGetComments} comment={comment}/>)
+                return (<Comment key={_.uniqueId(`comment_`)} reGetComments={props.reGetComments} comment={comment}/>)
             })}
         </div>
     );

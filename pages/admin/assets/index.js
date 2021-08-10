@@ -79,6 +79,7 @@ const assets = props => {
             default:
                 break
         }
+
         if (ajaxRequestData) {
             if (router.query.assetsType === 'orders'){
                 let ordersDataArr = []

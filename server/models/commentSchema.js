@@ -5,6 +5,15 @@ const Schema = mongoose.Schema
 const commentSchema = Schema({
     onDocumentId: {type:Schema.Types.ObjectID,ref:'post'},
     author:{type:Schema.Types.ObjectID,ref:'user'},
+    reply:[],
+    likes:{
+        type: Number,
+        default: 0
+    },
+    disLikes:{
+        type: Number,
+        default: 0
+    },
     body: String,
     status:{
         type:String,
