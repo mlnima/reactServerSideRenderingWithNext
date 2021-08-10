@@ -1,80 +1,40 @@
 import React, {useMemo} from 'react';
 import Link from "next/link";
 import VideoCardMedia from "./VideoCardMedia";
-import {likeValueCalculator} from "../../../../_variables/_variables";
 import _ from "lodash";
+import CardMetaData from "../asset/CardMetaData/CardMetaData";
 
 const VideoTypeCard = props => {
+
+
 
     const quality = useMemo(() => {
         return props.post.quality === '2160p' ? '4K' :
             props.post.quality === '1440p' ? '2K' :
                 props.post.quality === '1080p' ? 'HD' :
-                    props.post.quality === '720p' ? 'SD' :
+                    props.post.quality === '720p' ? 'HD' :
                         props.post.quality === '480p' ? 'SD' :
                             props.post.quality === '360p' ? 'SD' :
                                 props.post.quality === '240p' ? 'SD' :
                                     props.post.quality
     }, [])
 
-    const views = useMemo(() => {
-        const viewsNumber = props.post.views || 0
-        return viewsNumber > 1000 && viewsNumber < 1000000 ? (viewsNumber / 1000).toFixed(1) + 'K' :
-            viewsNumber > 1000000 ? (viewsNumber / 1000000).toFixed(1) + 'M' :
-                viewsNumber
-    }, [])
-
-
-    const rating = useMemo(() => {
-        return likeValueCalculator(props.post.likes, props.post.disLikes)
-    }, [])
-
     const metaPreview = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
-
-    const renderMetaData = (metaPreview || []).filter(meta=>meta.name.length > 1).map(meta => {
-        const path = `/posts?metaId=${meta._id}&metaName=${meta.name}&metaType=${meta.type}`;
-        const asPath = `/${meta.type}/${meta.name}?metaId=${meta._id}`
-        return (
-            <Link href={path} as={asPath} key={_.uniqueId('meta_')}>
-
-                <a className='video-card-meta-data'>
-                    <style jsx>{`
-                      .video-card-meta-data {
-                        height: 20px;
-                        width: auto;
-                        color: var(--post-element-text-color);
-                        padding: 1px 2px;
-                        margin: 2px;
-                        border: var(--post-element-text-color) .1px solid ;
-                        text-align: center;
-                        border-radius: 5px;
-                        align-self: flex-start;
-                      }
-                    `}</style>
-                    {meta.name}</a>
-            </Link>
-        )
-    })
 
     return (
         <div className='video-card'>
             <style jsx>{`
               .video-card {
                 width: ${props.postElementSize === 'list' ? '100%' : '47vw'};
-                
                 display: flex;
                 flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                 align-items: center;
                 justify-content: center;
-
-                .post-meta {
+                .card-meta {
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                   max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
                   display: flex;
-                  //justify-content: flex-start;
-           
-                  //align-items: center;
-                         flex-wrap: wrap;
+                  flex-wrap: wrap;
                   height: 100%;
                 }
 
@@ -97,7 +57,6 @@ const VideoTypeCard = props => {
                     flex-direction: column;
                     justify-content: space-between;
                     margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
-                    //align-items: center;
 
                     .video-card-title {
                       text-overflow: ellipsis;
@@ -127,8 +86,6 @@ const VideoTypeCard = props => {
                         padding: 0 2px;
                         align-items: center;
                         margin: 0;
-                        font-weight: bold;
-
                         span {
                           margin: 0 2px;
                         }
@@ -144,6 +101,9 @@ const VideoTypeCard = props => {
 
                       .video-card-rating {
                         justify-content: flex-end;
+                        width: calc(50% - 24px);
+                        background: url('/public/asset/images/icons/ico-rating-positive.png') no-repeat right;
+                        padding: 0 20px 0 0 ;
                       }
 
                     }
@@ -156,20 +116,15 @@ const VideoTypeCard = props => {
               }
                 @media only screen and (min-width: 768px) {
                   .video-card {
-                   
                    width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
                    flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-
                     .video-card-link {
-
                       flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-
                       .video-card-title {
                         width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `${props.cardWidth}px`};
                       }
                     }
                   }
-
                 }
 
 
@@ -185,16 +140,20 @@ const VideoTypeCard = props => {
                     <span className='video-card-under-media-info'>
                         {props.post.quality && props.post.postType === ('video') ? <p className='video-card-quality video-card-info-data'>{quality} </p> : null}
                         {props.post.duration && props.post.postType === ('video') ? <p className='video-card-duration video-card-info-data'>{props.post.duration} </p> : null}
-                        {props.post.postType === ('video') ? <p className='video-card-views video-card-info-data'><span>{views}</span> views </p> : null}
-                        {props.post.postType === ('video') ? <p className='video-card-rating video-card-info-data'><span>{rating}</span> % </p> : null}
+                        {props.post.postType === ('video') ? <p className='video-card-views video-card-info-data'><span>{props.views}</span> views </p> : null}
+                        {props.post.postType === ('video') ? <p className='video-card-rating video-card-info-data'><span>{props.rating}</span> % </p> : null}
                     </span>
 
                 </span>
                 </a>
             </Link>
             {props.postElementSize !== 'list'?
-            <span className='post-meta'>
-                {renderMetaData}
+            <span className='card-meta'>
+                {(metaPreview || []).filter(meta=>meta.name.length > 1).map(meta => {
+                    return (
+                        <CardMetaData meta={meta} key={_.uniqueId('meta_')}/>
+                    )
+                })}
             </span>:null
             }
         </div>

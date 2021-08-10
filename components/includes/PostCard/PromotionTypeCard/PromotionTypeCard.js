@@ -5,21 +5,20 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
+import CardMetaData from "../asset/CardMetaData/CardMetaData";
+import _ from "lodash";
 
 const PromotionTypeCard = props => {
 
 
-    const views = useMemo(() => {
-        const viewsNumber = props.post.views || 0
-        return viewsNumber > 1000 && viewsNumber < 1000000 ? (viewsNumber / 1000).toFixed(1) + 'K' :
-            viewsNumber > 1000000 ? (viewsNumber / 1000000).toFixed(1) + 'M' :
-                viewsNumber
-    }, [])
+
 
     const onExternalLinkClickViewHandler = () => {
         likeDislikeView(props.post._id, 'views')
     }
 
+
+    const metaPreview = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
 
     return (
         <div className='promotion-card'>
@@ -142,16 +141,22 @@ const PromotionTypeCard = props => {
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                     <a rel='next' onClick={props.onClickLoadingHandler} className='promotion-card-link-internal'>
                         <h3 className='promotion-card-title'>{props.title} </h3>
-
                         <div className='video-card-under-media-info'>
-                            {props.post.postType === ('promotion') ? <p className='video-card-views'><span>{views}</span> <FontAwesomeIcon icon={faEye} style={{width: '16px', height: '16px'}}/></p> : null}
-                            {props.post.postType === ('promotion') ? <p className='video-card-views'><span>{props.post.likes || 0}</span> <FontAwesomeIcon icon={faThumbsUp} style={{width: '16px', height: '16px'}}/></p> : null}
-                            {props.post.postType === ('promotion') ? <p className='video-card-views'><span>{props.post.disLikes || 0}</span> <FontAwesomeIcon icon={faThumbsDown} style={{width: '16px', height: '16px'}}/></p> : null}
+                            <p className='video-card-views'><span>{props.views}</span> views</p>
+                            <span className='video-card-rating video-card-info-data'><span>{props.rating}</span> % </span>
                         </div>
                     </a>
                 </Link>
             </div>
-
+            {props.postElementSize !== 'list' ?
+                <span className='card-meta'>
+                {(metaPreview || []).filter(meta => meta.name.length > 1).map(meta => {
+                    return (
+                        <CardMetaData meta={meta} key={_.uniqueId('meta_')}/>
+                    )
+                })}
+            </span> : null
+            }
         </div>
     );
 };
