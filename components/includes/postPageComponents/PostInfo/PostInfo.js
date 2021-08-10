@@ -4,11 +4,11 @@ import {likeValueCalculator} from "../../../../_variables/_variables";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 import DownloadLink from "../DownloadLink/DownloadLink";
 import withRouter from 'next/dist/client/with-router'
-import EditLinkForAdmin from "./EditLinkForAdmin/EditLinkForAdmin";
-import RatingButtons from "./RatingButtons/RatingButtons";
-import Price from "./Price/Price";
-import PostTitle from "./PostTitle/PostTitle";
-import PostDescription from "./PostDescription/PostDescription";
+import EditLinkForAdmin from "../../PostPage/components/EditLinkForAdmin/EditLinkForAdmin";
+import RatingButtons from "../../PostPage/components/RatingButtons/RatingButtons";
+import Price from "../../PostPage/components/Price/Price";
+import PostTitle from "../../PostPage/components/PostTitle/PostTitle";
+import PostDescription from "../../PostPage/components/PostDescription/PostDescription";
 import AddToBasket from "./AddToBasket/AddToBasket";
 import styled from "styled-components";
 let StyledDiv = styled.div`

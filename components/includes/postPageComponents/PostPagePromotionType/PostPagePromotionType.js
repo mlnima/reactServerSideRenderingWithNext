@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import styled from "styled-components";
 import {AppContext} from "../../../../context/AppContext";
-import PostDescription from "../PostInfo/PostDescription/PostDescription";
-import RatingButtons from "../PostInfo/RatingButtons/RatingButtons";
+import PostDescription from "../../PostPage/components/PostDescription/PostDescription";
+import RatingButtons from "../../PostPage/components/RatingButtons/RatingButtons";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 
 

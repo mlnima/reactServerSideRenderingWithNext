@@ -14,7 +14,7 @@ module.exports = (req, res) => {
         ]
     };
 
-    const comments = commentSchema.find({$and: [onDocument, status, searchQuery]}).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec()
+    const comments = commentSchema.find({$and: [onDocument, status, searchQuery]},{},{sort:{createdAt:-1}}).populate([{path:'author',select:['username','profileImage']}]).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec()
     const commentsCount = commentSchema.countDocuments({$and: [onDocument, status, searchQuery]}).exec()
 
     Promise.all([comments, commentsCount]).then(data => {

@@ -1,6 +1,7 @@
 import {useEffect, useState} from 'react';
 import Image from 'next/image';
 import styled from "styled-components";
+
 let StyledDiv = styled.div`
   margin: 10px 0;
   position: relative;
@@ -51,11 +52,11 @@ let StyledDiv = styled.div`
     left: 1%;
   }
 
-${props => props.stylesData}
+  ${props => props.stylesData}
 `;
 
 
-const SlideShow = ({post,sidebar,deviceWidth}) => {
+const SlideShow = ({post, sidebar, deviceWidth}) => {
     const [state, setState] = useState({
         activeImageIndex: 0,
         imagesArrayLength: 0

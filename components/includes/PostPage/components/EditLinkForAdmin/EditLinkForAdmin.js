@@ -9,13 +9,13 @@ const EditLinkForAdmin = ({_id}) => {
             <Link href={`/admin/post?id=${_id}`}>
                 <a className='edit-btn-admin'>
                     <style jsx>{`
-.edit-btn-admin{
-color:var(--main-text-color);
-background-color: rgb(0, 115, 170);
-padding: 2px 5px;
-margin-left: 10px ;
-}
-`}</style>
+                      .edit-btn-admin {
+                        color: var(--main-text-color);
+                        background-color: rgb(0, 115, 170);
+                        padding: 2px 5px;
+                        margin-left: 10px;
+                      }
+                    `}</style>
                     Edit as Admin
                 </a>
             </Link>

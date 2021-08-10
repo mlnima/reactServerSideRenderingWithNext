@@ -1,17 +1,11 @@
 //commentSchema
 const mongoose = require('mongoose');
+const Schema = mongoose.Schema
 
-const commentSchema = mongoose.Schema({
-    onDocumentId: {type:mongoose.Schema.Types.ObjectID,ref:'post'},
-    onDocumentTitle: String,
-    author: String,
-    authorID:mongoose.Types.ObjectId,
-    email:String,
+const commentSchema = Schema({
+    onDocumentId: {type:Schema.Types.ObjectID,ref:'post'},
+    author:{type:Schema.Types.ObjectID,ref:'user'},
     body: String,
-    postedDate:{
-        type:Date,
-        default:Date.now()
-    },
     status:{
         type:String,
         default: 'approved'

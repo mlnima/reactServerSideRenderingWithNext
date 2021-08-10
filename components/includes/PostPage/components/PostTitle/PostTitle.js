@@ -8,12 +8,11 @@ const PostTitle = ({title, translations}) => {
     return (
         <h1 className='post-title'>
             <style jsx>{`
-                .post-title{
-                    color: var(--post-page-info-color);
-                    font-size: 1.25em;
-                    text-align: center;
-                   
-                }
+              .post-title {
+                color: var(--post-page-info-color);
+                font-size: 1.25em;
+                text-align: center;
+              }
             `}</style>
             {
                 translations ? translations[router.locale ?? contextData.state.activeLanguage] ?

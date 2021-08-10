@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
 
-const RatingButtons = ({_id,svgDefaultStyle,ratingAndViewData,rating,setRatingAndViewData}) => {
+const RatingButtons = ({_id,ratingAndViewData,rating,setRatingAndViewData}) => {
     const ratingBtnArea = useRef(null)
     const [state, setState] = useState({
         rated:false
@@ -54,17 +54,17 @@ const RatingButtons = ({_id,svgDefaultStyle,ratingAndViewData,rating,setRatingAn
                         
                     `}</style>
                     <span className='like-disLike-count-items rating-item'>
-                        <FontAwesomeIcon style={svgDefaultStyle} icon={faEye}  className='rate-logo' />
+                        <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={faEye}  className='rate-logo' />
                         <p className='rating-item-value'>{ratingAndViewData.views} </p>
                     </span>
             {rating !== 'disable'?
                 <>
                     <button className='rating-item' onClick={() => onRateHandler('likes')  } aria-label="Center Align">
-                        <FontAwesomeIcon style={svgDefaultStyle} icon={faThumbsUp} className='rate-logo' />
+                        <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={faThumbsUp} className='rate-logo' />
                         <p className='rating-item-value'>{ratingAndViewData.likes}</p>
                     </button>
                     <button className='rating-item' onClick={() =>onRateHandler('disLikes')} aria-label="Center Align">
-                        <FontAwesomeIcon style={svgDefaultStyle} icon={faThumbsDown} className='rate-logo'/>
+                        <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={faThumbsDown} className='rate-logo'/>
                         <p className='rating-item-value'>{ratingAndViewData.disLikes}</p>
                     </button>
                 </>:null}

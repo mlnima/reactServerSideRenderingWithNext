@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 //import TagsAndCategoriesActors from "../TagsAndCategoriesActors/TagsAndCategoriesActors";
 import {likeValueCalculator} from "../../../../_variables/_variables";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
-import DownloadLink from "../DownloadLink/DownloadLink";
+import DownloadLink from "../../PostPage/components/DownloadLink/DownloadLink";
 import withRouter from 'next/dist/client/with-router'
 import EditLinkForAdmin from "./EditLinkForAdmin/EditLinkForAdmin";
 import RatingButtons from "./RatingButtons/RatingButtons";
