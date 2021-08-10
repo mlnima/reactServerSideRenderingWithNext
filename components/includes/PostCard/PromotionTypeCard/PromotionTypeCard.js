@@ -11,8 +11,6 @@ import _ from "lodash";
 const PromotionTypeCard = props => {
 
 
-
-
     const onExternalLinkClickViewHandler = () => {
         likeDislikeView(props.post._id, 'views')
     }
@@ -58,18 +56,24 @@ const PromotionTypeCard = props => {
                     align-items: center;
                     margin: 0;
 
-                  }
+                    .video-card-views {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      margin: 0;
 
-                  .video-card-views {
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 0;
-
-                    span {
-                      margin: 0 2px;
+                      span {
+                        margin: 0 2px;
+                      }
                     }
+
+                    .video-card-rating {
+                      background: url('/public/asset/images/icons/ico-rating-positive.png') no-repeat right;
+                      padding: 0 20px 0 0;
+                    }
+
                   }
+
 
                   .promotion-card-title {
                     font-size: 1rem;
@@ -85,27 +89,7 @@ const PromotionTypeCard = props => {
                     max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
                   }
 
-                  .promotion-card-read-more {
-                    // text-align: center;
-                    font-size: 1rem;
-                    font-weight: initial;
-                    margin: 0;
-                    height: 40px;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    width: calc(100% - 30px);
-                    text-overflow: ellipsis;
-                    overflow: hidden;
-                    display: -webkit-box !important;
-                    -webkit-line-clamp: 1;
-                    -webkit-box-orient: vertical;
-                    white-space: normal;
 
-                    span {
-                      margin: 0 4px;
-                    }
-                  }
                 }
               }
 
