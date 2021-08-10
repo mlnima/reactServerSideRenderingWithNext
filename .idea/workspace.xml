@@ -20,34 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/meta/[metaType]/[metaId].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CommentsRenderer/CommentsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/CommentFrom/CommentFrom.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/CommentFrom/CommentFrom.scss" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.scss" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/DownloadLink/DownloadLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Post/PostInfo/PostInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostMeta/PostMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/PostMetaDataToSiteHead/PostMetaDataToSiteHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/SlideShow/SlideShow.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/SlideShow/SlideShow.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Post/VideoPlayer/VideoPlayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/postPageComponents/PostInfo/EditLinkForAdmin/EditLinkForAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/postPageComponents/PostInfo/PostDescription/PostDescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/postPageComponents/PostInfo/PostInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/postPageComponents/PostInfo/PostInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/postPageComponents/PostInfo/PostTitle/PostTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostTitle/PostTitle.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/postPageComponents/PostInfo/Price/Price.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/Price/Price.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/postPageComponents/PostInfo/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/postPageComponents/PostPagePromotionType/PostPagePromotionType.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/postPageComponents/PostPagePromotionType/PostPagePromotionType.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientNewComment.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientNewComment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/commentSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/commentSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -761,7 +734,7 @@
       <workItem from="1628495019084" duration="6686000" />
       <workItem from="1628518066684" duration="1172000" />
       <workItem from="1628533596416" duration="12691000" />
-      <workItem from="1628584874151" duration="16852000" />
+      <workItem from="1628584874151" duration="17703000" />
     </task>
     <servers />
   </component>
