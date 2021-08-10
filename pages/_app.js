@@ -19,9 +19,10 @@ import CookiePopup from "../components/includes/ClientPopActionRequest/CookiePop
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
 
-    useEffect(() => {
-        Scroll.animateScroll.scrollToTop();
-    }, [pageProps]);
+    // useEffect(() => {
+    //     Scroll.animateScroll.scrollToTop();
+    //     Scroll.animateScroll.scrollTo(150);
+    // }, [pageProps]);
 
     if (router.pathname.includes('/admin')) {
         return (

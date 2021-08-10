@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     const postTypeQuery = !req.body.postType ? {} : {postType: req.body.postType};
     const statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
     const authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
-    const requestedFields = (req.body.fields || []).reduce((a, b) => ` ${a} , ` + ` ${b} , `)
+    //const requestedFields = (req.body.fields || []).reduce((a, b) => ` ${a} , ` + ` ${b} , `)
     const metaQuery = !req.body.metaId ? {} : {
         $or: [
             {categories: req.body.metaId},
@@ -25,13 +25,19 @@ module.exports = async (req, res) => {
                     {[`translations.${req.body.lang}.description`]: new RegExp(req.body.keyword, 'i')},]
             }
 
-    let selectedFields = req.body.fields[0] === 'all' || !req.body.fields ? {} : requestedFields;
+    let selectedFields = req.body.fields[0] === 'all' || !req.body.fields ? {} : (req.body.fields || []);
     let postsCount = await postSchema.countDocuments({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).exec()
     let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random' ? {lastModify: -1} : {[req.body.sort]: -1}
 
+    const populateMeta = [
+        {path:'actors',select:{'name':1,'type':1},options:{limit: 3}},
+        {path:'categories',select:{'name':1,'type':1},options:{limit: 3}},
+        {path:'tags',select:{'name':1,'type':1},options:{limit: 3}}
+    ]
+
     let posts = req.body.sort === 'random' ?
-        await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).select(selectedFields).skip(Math.floor(Math.random() * postsCount)).limit(size).sort(sortQuery).exec()
-        : await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).select(selectedFields).skip(size * (page - 1)).limit(size).sort(sortQuery).exec();
+        await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).populate(populateMeta).select(selectedFields).skip(Math.floor(Math.random() * postsCount)).limit(size).sort(sortQuery).exec()
+        : await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).populate(populateMeta).select(selectedFields).skip(size * (page - 1)).limit(size).sort(sortQuery).exec();
     Promise.all([posts, postsCount]).then(async data => {
         try {
             res.json({posts: data[0], error: false, totalCount: data[1]})

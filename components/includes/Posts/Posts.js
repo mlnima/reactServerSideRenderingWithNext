@@ -1,12 +1,13 @@
 import React, {useState, useEffect, useContext,useMemo} from 'react';
 import dynamic from "next/dynamic";
-const PostElement = dynamic(() => import('../PostCard/PostElement'))
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
-import VideoTypeCard from "../PostCard/VideoCardType/VideoTypeCard";
 import _ from "lodash";
-import PromotionTypeCard from "../PostCard/PromotionTypeCard/PromotionTypeCard";
-import ArticleTypeCard from "../PostCard/ArticleTypeCard/ArticleTypeCard";
+const PostElement = dynamic(() => import('../PostCard/PostElement'))
+const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeCard'))
+const PromotionTypeCard = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionTypeCard'))
+const ArticleTypeCard = dynamic(() => import('../PostCard/ArticleTypeCard/ArticleTypeCard'))
+
 
 const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, postElementStyle,postElementImageLoaderType,postElementImageLoader,widgetId}) => {
     const contextData = useContext(AppContext);
@@ -23,11 +24,6 @@ const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, po
     }, [])
 
     const noImageUrl = '/static/images/noImage/no-image-available.png';
-
-
-
-
-
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
@@ -60,7 +56,7 @@ const Posts = ({viewType, isMobile, _id,redirectLink, postElementSize, posts, po
                     return <PromotionTypeCard key={_.uniqueId('promotion_') } noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
 
                 }else if (post.postType==='article'){
-                    return <ArticleTypeCard key={_.uniqueId('promotion_') } noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
+                    return <ArticleTypeCard key={_.uniqueId('article_') } noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
 
                 }else return (
                     <PostElement

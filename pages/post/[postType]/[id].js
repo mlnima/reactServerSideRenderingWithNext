@@ -3,7 +3,7 @@ import {getFirstLoadData} from "../../../_variables/ajaxVariables";
 import {getComments, getPost, likeDislikeView} from "../../../_variables/ajaxPostsVariables";
 import {useRouter} from "next/router";
 import {likeValueCalculator} from "../../../_variables/_variables";
-
+import * as Scroll from 'react-scroll';
 import dynamic from "next/dynamic";
 const Error = dynamic(() => import('../../_error'))
 const VideoPlayer = dynamic(() => import('../../../components/includes/Post/VideoPlayer/VideoPlayer'))
@@ -43,10 +43,10 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
         view: 0
     })
     useEffect(() => {
+        Scroll.animateScroll.scrollToTop();
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)
         }
-
     }, []);
 
     useEffect(() => {
@@ -69,7 +69,7 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
     if (responseCode !== 200) {
         return <Error responseCode={responseCode}/>
     }  else return (
-            <main  className='main post-page'>
+            <main  className='main post-page' >
 
             <style jsx>{`
                 .post-page{

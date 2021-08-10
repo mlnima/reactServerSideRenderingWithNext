@@ -1,4 +1,4 @@
-import React, {useContext} from 'react';
+import React, {useContext,useEffect} from 'react';
 import { getFirstLoadData} from '../../_variables/ajaxVariables';
 import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
 import withRouter from 'next/dist/client/with-router';
@@ -9,6 +9,7 @@ import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import styled from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import FooterWidgetArea from "../../components/widgetsArea/FooterWidgetArea/FooterWidgetArea";
+import * as Scroll from "react-scroll";
 
 
 let StyledMain = styled.main`
@@ -29,6 +30,10 @@ let StyledMain = styled.main`
 const posts = (props,{design}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
+
+    useEffect(() => {
+        Scroll.animateScroll.scrollToTop();
+    }, [router.query]);
 
     return (
         <StyledMain className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
@@ -88,3 +93,4 @@ export const getServerSideProps = async ({req, query}) => {
 
 
 export default withRouter(posts);
+//,'tags','categories','actors'
