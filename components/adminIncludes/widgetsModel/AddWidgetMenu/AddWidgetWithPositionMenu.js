@@ -1,25 +1,26 @@
 import React, {useContext, useState} from 'react';
-import {
-    widgetModels,
-    postsSwiperWidgetModel,
-    textWidgetModel,
-    menuWidgetModel,
-    linkToWidgetModel,
-    multipleLinkToWidgetModel,
-    postsWidgetModel,
-    mediaWidgetModel,
-    recentCommentsWidgetModel,
-    searchBarWidgetModel,
-    metaWidgetModel,
-    shoppingCartWidgetModel,
-    logoWidgetModel,
-    authenticationWidgetModel,
-    languageWidgetModel,
-    alphabeticalNumericalRangeWidgetModel,
-    imageSwiperWidgetModel
-
-
-} from './models'
+// import {
+//     widgetModels,
+//     postsSwiperWidgetModel,
+//     textWidgetModel,
+//     menuWidgetModel,
+//     linkToWidgetModel,
+//     multipleLinkToWidgetModel,
+//     postsWidgetModel,
+//     mediaWidgetModel,
+//     recentCommentsWidgetModel,
+//     searchBarWidgetModel,
+//     metaWidgetModel,
+//     shoppingCartWidgetModel,
+//     logoWidgetModel,
+//     authenticationWidgetModel,
+//     languageWidgetModel,
+//     alphabeticalNumericalRangeWidgetModel,
+//     imageSwiperWidgetModel
+//
+//
+// } from './models'
+import * as widgetModels from './models'
 import {addNewWidget} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import {AppContext} from "../../../../context/AppContext";
@@ -33,6 +34,66 @@ const AddWidgetWithPositionMenu = props => {
         open: false
     });
 
+    const [positions,setPositions] = useState([
+        'topBar',
+        'header',
+        'navigation',
+
+        'home',
+        'homePageLeftSidebar',
+        'homePageRightSidebar',
+
+        'postPageTop',
+        'postPageLeftSidebar',
+        'postPageBottom',
+        'postPageRightSidebar',
+
+        'underPost',
+
+        'postsPageTop',
+        'postsPageLeftSidebar',
+        'postsPageBottom',
+        'postsPageRightSidebar',
+
+        'profilePageTop',
+        'profilePageLeftSidebar',
+        'profilePageBottom',
+        'profilePageRightSidebar',
+
+        'tagsPageTop',
+        'tagsPageLeftSidebar',
+        'tagsPageBottom',
+        'tagsPageRightSidebar',
+
+        'categoriesPageTop',
+        'categoriesPageLeftSidebar',
+        'categoriesPageBottom',
+        'categoriesPageRightSidebar',
+
+        'actorsPageTop',
+        'actorsPageLeftSidebar',
+        'actorsPageBottom',
+        'actorsPageRightSidebar',
+
+        'tagPageTop',
+        'tagPageLeftSidebar',
+        'tagPageBottom',
+        'tagPageRightSidebar',
+
+        'categoryPageTop',
+        'categoryLeftSidebar',
+        'categoryBottom',
+        'categoryRightSidebar',
+
+        'actorPageTop',
+        'actorPageLeftSidebar',
+        'actorPageBottom',
+        'actorPageRightSidebar',
+
+        'footer',
+
+    ])
+
     const onOpenHandler = () => {
         state.open ? setState({
             ...state,
@@ -44,23 +105,23 @@ const AddWidgetWithPositionMenu = props => {
     }
 
     const onAddNewWidget = (position, type) => {
-        const widgetModelData = type ==='text' || type ==='textEditor' ? textWidgetModel:
-                                type ==='menu'? menuWidgetModel:
-                                type ==='linkTo'? linkToWidgetModel:
-                                type ==='multipleLinkTo'? multipleLinkToWidgetModel:
-                                type ==='posts'? postsWidgetModel:
-                                type ==='media'? mediaWidgetModel:
-                                type ==='searchBar'? searchBarWidgetModel:
-                                type ==='searchButton'? searchBarWidgetModel:
-                                type ==='recentComments'? recentCommentsWidgetModel:
-                                type ==='meta'? metaWidgetModel:
-                                type ==='logo'? logoWidgetModel:
-                                type ==='shoppingCart'? shoppingCartWidgetModel:
-                                type ==='alphabeticalNumericalRange'? alphabeticalNumericalRangeWidgetModel:
-                                type ==='language'? languageWidgetModel:
-                                type ==='alphabeticalNumericalRange'? authenticationWidgetModel:
-                                type ==='imageSwiper'? imageSwiperWidgetModel:
-                                type ==='postsSwiper'? postsSwiperWidgetModel:
+        const widgetModelData = type ==='text' || type ==='textEditor' ? widgetModels.textWidgetModel:
+                                type ==='menu'? widgetModels.menuWidgetModel:
+                                type ==='linkTo'? widgetModels.linkToWidgetModel:
+                                type ==='multipleLinkTo'? widgetModels.multipleLinkToWidgetModel:
+                                type ==='posts'? widgetModels.postsWidgetModel:
+                                type ==='media'? widgetModels.mediaWidgetModel:
+                                type ==='searchBar'? widgetModels.searchBarWidgetModel:
+                                type ==='searchButton'? widgetModels.searchBarWidgetModel:
+                                type ==='recentComments'? widgetModels.recentCommentsWidgetModel:
+                                type ==='meta'? widgetModels.metaWidgetModel:
+                                type ==='logo'? widgetModels.logoWidgetModel:
+                                type ==='shoppingCart'? widgetModels.shoppingCartWidgetModel:
+                                type ==='alphabeticalNumericalRange'? widgetModels.alphabeticalNumericalRangeWidgetModel:
+                                type ==='language'? widgetModels.languageWidgetModel:
+                                type ==='alphabeticalNumericalRange'? widgetModels.authenticationWidgetModel:
+                                type ==='imageSwiper'? widgetModels.imageSwiperWidgetModel:
+                                type ==='postsSwiper'? widgetModels.postsSwiperWidgetModel:
                                  widgetModels;
 
         const widgetsInSamePosition = contextData.widgetsSettings.widgets.filter(w=>w?.data?.position === position)
@@ -82,6 +143,14 @@ const AddWidgetWithPositionMenu = props => {
             console.log(err)
         })
     }
+
+    const renderPositions = positions.map(position=>{
+        return(
+            <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(position, props.type)}>{convertVariableNameToName(position)}</button>
+        )
+    })
+
+
     const renderCustomPagesPosition = props.customPages.map(customPage=>{
        return(
            <React.Fragment key={_.uniqueId('id_')}>
@@ -97,29 +166,8 @@ const AddWidgetWithPositionMenu = props => {
             <div className='AddWidgetWithPositionMenu'>
                 <button className='positionsOpener' onClick={() => onOpenHandler()}>{props.name}</button>
                 <div className="AddWidgetWithPositionMenuPositions">
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('topBar', props.type)}>Top Bar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('header', props.type)}>Header</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('navigation', props.type)}>Navigation</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('home', props.type)}>Home Page</button>
 
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('homePageLeftSidebar', props.type)}>Home Page Left Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('homePageRightSidebar', props.type)}>Home Page Right Sidebar</button>
-
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postPageLeftSidebar', props.type)}>Post Page Left Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postPageRightSidebar', props.type)}>Post Page Right Sidebar</button>
-
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postsPageLeftSidebar', props.type)}>Posts Page Left Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('postsPageRightSidebar', props.type)}>Posts Page Right Sidebar</button>
-
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('metaPageLeftSidebar', props.type)}>Meta Page Left Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('metaPageRightSidebar', props.type)}>Meta Page Right Sidebar</button>
-
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('profilePageRightSidebar', props.type)}>Meta Page Left Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('profilePageLeftSidebar', props.type)}>Meta Page Right Sidebar</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('profilePage', props.type)}>Meta Page Right Sidebar</button>
-
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('underPost', props.type)}>Under the Post</button>
-                    <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget('footer', props.type)}>Footer</button>
+                    {renderPositions}
                    {renderCustomPagesPosition}
                 </div>
             </div>

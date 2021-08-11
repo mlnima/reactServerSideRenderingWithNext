@@ -1,7 +1,7 @@
 import React, {useEffect,useLayoutEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
 import AdminLayout from '../../../components/layouts/AdminLayout'
-import {getPosts, getMeta, getComments} from '../../../_variables/ajaxPostsVariables'
+import {getPosts, getMultipleMeta, getComments} from '../../../_variables/ajaxPostsVariables'
 import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
 import {getUsersListAsAdmin} from '../../../_variables/ajaxAuthVariables'
 import {getFormsData} from '../../../_variables/ajaxVariables'
@@ -71,7 +71,7 @@ const assets = props => {
                 break
             case 'metas':
                 if (router.query.metaType)
-                    ajaxRequestData = await getMeta(getFirstDataOption, window.location.origin, false)
+                    ajaxRequestData = await getMultipleMeta(getFirstDataOption, window.location.origin, false)
                 break
             case 'orders':
                 ajaxRequestData = await getOrders(getFirstDataOption, window.location.origin)

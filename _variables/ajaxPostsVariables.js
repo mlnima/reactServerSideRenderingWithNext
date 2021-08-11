@@ -49,21 +49,21 @@ export const userCreateNewPost = async (data, domainName) => {
     return await axios.post(domainName + `/api/v1/posts/userCreateNewPost`, body)
 };
 
-export const getMeta = async (data,  domainName,cache) => {
+export const getMultipleMeta = async (data,  domainName,cache) => {
     const keywordQuery  = data.keyword ?  `&keyword=${encodeURIComponent(data.keyword)  }` :``
     const body = {
         ...data,
         cache
     };
-    return await axios.post(domainName + `/api/v1/posts/getMeta?page=${ data.page }&metaType=${ data.metaType }${keywordQuery}&startWith=${ data.startWith }`, body)
+    return await axios.post(domainName + `/api/v1/posts/getMultipleMeta?page=${ data.page }&metaType=${ data.metaType }${keywordQuery}&startWith=${ data.startWith }`, body)
 };
 
-export const getSingleMeta = async (id,  domainName,cache) => {
+export const getSingleMeta = async (id,cache) => {
     const body = {
         id,
         cache
     };
-    return await axios.post(domainName + `/api/v1/posts/getSingleMeta?id=${ id }`, body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ id }`, body)
 };
 
 

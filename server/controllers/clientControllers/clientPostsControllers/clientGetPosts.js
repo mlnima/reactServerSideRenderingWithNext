@@ -2,10 +2,10 @@
 const postSchema = require('../../../models/postSchema');
 
 module.exports = async (req, res) => {
-    const size = req.body.size ? req.body.size > 500 ? 500 : req.body.size : 30;
+    const size = req.body?.size ? req.body.size > 500 ? 500 : req.body.size : 30;
     const page = req.body?.page ?? 1;
     const postTypeQuery = !req.body.postType ? {} : {postType: req.body.postType};
-    const statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
+    const statusQuery = req.body?.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
     const authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
     //const requestedFields = (req.body.fields || []).reduce((a, b) => ` ${a} , ` + ` ${b} , `)
     const metaQuery = !req.body.metaId ? {} : {
@@ -40,6 +40,7 @@ module.exports = async (req, res) => {
         : await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).populate(populateMeta).select(selectedFields).skip(size * (page - 1)).limit(size).sort(sortQuery).exec();
     Promise.all([posts, postsCount]).then(async data => {
         try {
+
             res.json({posts: data[0], error: false, totalCount: data[1]})
             res.end()
         } catch (e) {

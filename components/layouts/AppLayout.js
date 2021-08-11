@@ -1,9 +1,9 @@
 import React, {useContext, useEffect, useState, useMemo} from 'react';
 import dynamic from "next/dynamic";
-//import {initGA, logPageView} from '../../_variables/_variables'
 import {createGlobalStyle} from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
+import setSidebarName from '../../_variables/clientVariables/_setSidebarName'
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import TopBarWidgetArea from "../widgetsArea/TopBarWidgetArea/TopBarWidgetArea";
 import HeaderWidgetArea from "../widgetsArea/HeaderWidgetArea/HeaderWidgetArea";
@@ -27,31 +27,18 @@ const AppLayout = props => {
     const [leftSidebarWidgets, setLeftSidebarWidgets] = useState([])
     const [rightSidebarWidgets, setRightSidebarWidgets] = useState([])
 
-    const [staticWidgets, setStaticWidgets] = useState({
-        topBar: [],
-        header: [],
-        navigation: [],
-        footer: [],
+    const [staticWidgets, setStaticWidgets] = useState(() => {
+        return {
+            topBar: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'topBar') || [] : [],
+            header: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'header') || [] : [],
+            navigation: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'navigation') || [] : [],
+            footer: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'footer') || [] : [],
+        }
     })
 
-    useEffect(() => {
-        // if (typeof window !== 'undefined' && process.env.NODE_ENV === 'production' && process.env.REACT_APP_GOOGLE_ANALYTICS_ID !== 'false' ) {
-        //     if (!window.GA_INITIALIZED) {
-        //         initGA()
-        //         window.GA_INITIALIZED = true
-        //     }
-        //     logPageView()
-        // }
-
-        if (!props.referer) {
-            setStaticWidgets({
-                topBar: firstLoadWidgets.topBar,
-                header: firstLoadWidgets.header,
-                navigation: firstLoadWidgets.navigation,
-                footer: firstLoadWidgets.footer,
-            })
-        }
-    }, []);
+    // useEffect(() => {
+    //     console.log(staticWidgets)
+    // }, [staticWidgets]);
 
     useEffect(() => {
         setLeftSidebarWidgets(leftSidebarWidgetsData)
@@ -59,57 +46,24 @@ const AppLayout = props => {
     }, [props.widgets]);
 
     useEffect(() => {
-        // router.events.on('routeChangeStart',routeChangedHandler)
         routeChangedHandler()
     }, [props]);
 
-    const routeChangedHandler = ()=>{
+    const routeChangedHandler = () => {
         contextData.state.loading ?
             contextData.dispatchState({
                 ...contextData.state,
-                loading:false
-            }):
+                loading: false
+            }) :
             null
     }
 
-    const sidebarPositionName = useMemo(() =>
-            router.pathname === '/' ? 'homePageSidebar' :
-                router.pathname === '/post' ? 'postPageSidebar' :
-                router.pathname === '/post/[postType]/[id]' ? 'postPageSidebar' :
-                    router.pathname === '/posts' ? 'postsPageSidebar' :
-                        router.pathname === '/meta' ? 'metaPageSidebar' :
-                        router.pathname === '/auth/register' || router.pathname === '/auth/login'? 'authPageSidebar' :
-                          router.pathname.includes('/profile')  ? 'profilePageSidebar' :
-                          router.pathname.includes('/messenger')  ? 'messengerPageSidebar' :
-                              router.pathname.includes('/user/') ? 'userPageSidebar' :
-                              router.pathname === '/page' ? props.pageInfo?.pageName + 'Sidebar' :
-                                'homePageSidebar'
-        , [router.pathname])
 
-    const leftSidebarPositionName = useMemo(() => router.pathname === '/' ? 'homePageLeftSidebar' :
-        router.pathname === '/post' ? 'postPageLeftSidebar' :
-        router.pathname === '/post/[postType]/[id]' ? 'postPageLeftSidebar' :
-            router.pathname === '/posts' ? 'postsPageLeftSidebar' :
-                router.pathname === '/meta' ? 'metaPageLeftSidebar' :
-                    router.pathname === '/auth/register' || router.pathname === '/auth/login' ? 'authPageLeftSidebar' :
-                    router.pathname.includes('/profile')  ? 'profilePageLeftSidebar' :
-                    router.pathname.includes('/messenger')  ? 'messengerPageLeftSidebar' :
-                        router.pathname.includes('/user/') ? 'userPageLeftSidebar' :
-                    router.pathname === '/page' ? props.pageInfo?.pageName + 'LeftSidebar' :
-                        'homePageLeftSidebar', [router.pathname])
+    const sidebarPositionName = useMemo(() => setSidebarName(router.pathname,props.pageInfo?.pageName,''), [router.pathname])
 
-    const rightSidebarPositionName = useMemo(() => router.pathname === '/' ? 'homePageRightSidebar' :
-        router.pathname === '/post' ? 'postPageRightSidebar' :
-        router.pathname === '/post/[postType]/[id]' ? 'postPageRightSidebar' :
-            router.pathname === '/posts' ? 'postsPageRightSidebar' :
-                router.pathname === '/meta' ? 'metaPageRightSidebar' :
-                    router.pathname === '/auth/register' || router.pathname === '/auth/login' ? 'authPageRightSidebar' :
-                    router.pathname.includes('/profile')  ? 'profilePageRightSidebar' :
-                    router.pathname.includes('/messenger')  ? 'messengerPageRightSidebar' :
-                        router.pathname.includes('/user/') ? 'userPageRightSidebar' :
-                      router.pathname === '/page' ? props.pageInfo?.pageName + 'RightSidebar' :
-                        'homePageRightSidebar', [router.pathname])
+    const leftSidebarPositionName = useMemo(() => setSidebarName(router.pathname,props.pageInfo?.pageName,'Left'), [router.pathname])
 
+    const rightSidebarPositionName = useMemo(() => setSidebarName(router.pathname,props.pageInfo?.pageName,'Right'), [router.pathname])
 
 
     const sidebarType = useMemo(() => props.identity?.data?.[sidebarPositionName] || contextData?.siteIdentity[sidebarPositionName] || props.pageInfo?.sidebar || 'withOutSidebar', [sidebarPositionName, props.pageInfo])
@@ -117,140 +71,112 @@ const AppLayout = props => {
 
     const mainLayoutClassNameForGrid = useMemo(() => sidebarType === 'left' ? 'leftSidebar' : sidebarType === 'right' ? 'rightSidebar' : sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar', [sidebarType]);
 
+
+    // console.log(props.identity?.data[sidebarPositionName])
+
     const leftSidebar = useMemo(() => props.identity?.data?.[sidebarPositionName] === 'both' ||
-        props.identity?.data?.[sidebarPositionName] === 'left' ||
-        contextData?.siteIdentity?.[sidebarPositionName] === 'both' ||
-        contextData?.siteIdentity?.[sidebarPositionName] === 'left' ||
-        props.pageInfo?.sidebar === 'both' ||
-        props.pageInfo?.sidebar === 'left',
+            props.identity?.data?.[sidebarPositionName] === 'left' ||
+            contextData?.siteIdentity?.[sidebarPositionName] === 'both' ||
+            contextData?.siteIdentity?.[sidebarPositionName] === 'left' ||
+            props.pageInfo?.sidebar === 'both' ||
+            props.pageInfo?.sidebar === 'left',
         [sidebarPositionName, props.pageInfo])
 
     const rightSidebar = useMemo(() => props.identity?.data?.[sidebarPositionName] === 'both' ||
-        props.identity?.data?.[sidebarPositionName] === 'right' ||
-        contextData?.siteIdentity?.[sidebarPositionName] === 'both' ||
-        contextData?.siteIdentity?.[sidebarPositionName] === 'right' ||
-        props.pageInfo?.sidebar === 'both' ||
-        props.pageInfo?.sidebar === 'right',
+            props.identity?.data?.[sidebarPositionName] === 'right' ||
+            contextData?.siteIdentity?.[sidebarPositionName] === 'both' ||
+            contextData?.siteIdentity?.[sidebarPositionName] === 'right' ||
+            props.pageInfo?.sidebar === 'both' ||
+            props.pageInfo?.sidebar === 'right',
         [sidebarPositionName, props.pageInfo])
 
-//useMemo(()=> ,[router.pathname])
 
-
-    const firstLoadWidgets = Object.freeze({
-        topBar: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'topBar') || [] : [],
-        header: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'header') || [] : [],
-        navigation: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'navigation') || [] : [],
-        footer: props?.widgets ? props.widgets.filter(widget => widget?.data?.position === 'footer') || [] : [],
-    })
     const leftSidebarWidgetsData = useMemo(() => props?.widgets ? props.widgets.filter(widget => widget?.data?.position === leftSidebarPositionName) : [], [router.pathname])
     const rightSidebarWidgetsData = useMemo(() => props?.widgets ? props.widgets.filter(widget => widget?.data?.position === rightSidebarPositionName) : [], [router.pathname])
 
-    // useEffect(() => {
-    //     if (props.identity?.data?.developmentMode && contextData?.userData?.role !== 'administrator') {
-    //         router.push('/maintenance')
-    //     }
-    // }, [contextData.userData]);
+
+
+    const defaultProps = {
+        isMobile: props.isMobile,
+        postElementSize: props.design?.data?.postElementSize || contextData.siteDesign.postElementSize ,
+        postElementStyle: props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle,
+        postElementImageLoader: props.design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader,
+        postElementImageLoaderType:props.design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader,
+        referer:props.referer
+    }
+
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
             <CustomGlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/>
-            <GlobalStyles colors={props.design?.data?.customColors|| contextData?.siteDesign?.customColors || ''} />
+            <GlobalStyles colors={props.design?.data?.customColors || contextData?.siteDesign?.customColors || ''}/>
             <SiteSettingSetter identity={props.identity || contextData?.siteIdentity} design={props.design || contextData?.siteDesign} eCommerce={props.eCommerce}/>
-            {(!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar).length > 0 ?
+            {staticWidgets.topBar.length > 0 ?
                 <TopBarWidgetArea
-                    isMobile={props.isMobile}
+                    {...defaultProps}
                     key='topBar'
-                    widgets={!props.referer ? firstLoadWidgets.topBar : staticWidgets.topBar}
+                    widgets={!props.referer ? staticWidgets.topBar : staticWidgets.topBar}
                     className='topbar'
                     position='topBar'
                     stylesData={props.design?.data?.topBarStyle || contextData.siteDesign.topBarStyle}
-                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
-                    referer={props.referer}
                 /> : null
             }
-            {(!props.referer ? firstLoadWidgets.header : staticWidgets.header).length > 0 ?
+            {staticWidgets.header.length > 0 ?
                 <HeaderWidgetArea
-                    isMobile={props.isMobile}
+                    {...defaultProps}
                     key='header'
-                    widgets={!props.referer ? firstLoadWidgets.header : staticWidgets.header}
+                    widgets={!props.referer ? staticWidgets.header : staticWidgets.header}
                     className='header' position='header'
                     stylesData={props.design?.data?.headerStyle || contextData.siteDesign.headerStyle}
-                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
-                    referer={props.referer}
                 /> : null
             }
-            {(!props.referer ? firstLoadWidgets.navigation : staticWidgets.navigation).length > 0 ?
+            {staticWidgets.navigation.length > 0 ?
                 <NavigationWidgetArea
-                    isMobile={props.isMobile}
+                    {...defaultProps}
+                    // isMobile={props.isMobile}
                     key='navigation'
-                    widgets={!props.referer ? firstLoadWidgets.navigation : staticWidgets?.navigation}
+                    widgets={!props.referer ? staticWidgets.navigation : staticWidgets?.navigation}
                     className='navigation'
                     position='navigation'
                     stylesData={props.design?.data?.navigationStyle || contextData.siteDesign?.navigationStyle}
-                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign?.postElementSize}
-                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
-                    referer={props.referer}
                 /> : null
             }
 
             {(!props.referer ? leftSidebarWidgetsData : leftSidebarWidgets).length > 0 && leftSidebar ?
                 <SideBarWidgetArea
-                    isMobile={props.isMobile}
+                    {...defaultProps}
                     key='leftSidebar'
                     gridArea='leftSidebar'
                     widgets={!props.referer ? leftSidebarWidgetsData : leftSidebarWidgets}
                     className='left-sidebar'
                     position={leftSidebarPositionName}
-                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
-                    referer={props.referer}
                 /> : null
             }
 
             {props.children}
             {(!props.referer ? rightSidebarWidgetsData : rightSidebarWidgets).length > 0 && rightSidebar ?
                 <SideBarWidgetArea
-                    isMobile={props.isMobile}
+                    {...defaultProps}
                     key='rightSidebar'
                     gridArea='rightSidebar'
                     widgets={!props.referer ? rightSidebarWidgetsData : rightSidebarWidgets}
                     className='right-sidebar'
                     position={rightSidebarPositionName}
-                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
-                    referer={props.referer}
                 /> : null
             }
-            {(!props.referer ? firstLoadWidgets.footer : staticWidgets.footer).length > 0 ?
+            {staticWidgets.footer.length > 0 ?
                 <FooterWidgetArea
-                    isMobile={props.isMobile}
-                    widgets={!props.referer ? firstLoadWidgets.footer : staticWidgets.footer}
+                    {...defaultProps}
+                    widgets={!props.referer ? staticWidgets.footer : staticWidgets.footer}
                     className='footer' position='footer'
                     stylesData={props.design?.data?.footerStyle || contextData.siteDesign.footerStyle}
-                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                    postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
-                    referer={props.referer}
                 /> : null
             }
             {contextData.userData.role === 'administrator' ? <AdminTools/> : null}
             {contextData.userData.role === 'administrator' && contextData.state.console ? <Console/> : null}
             {contextData.state.loading ? <Loading/> : null}
             {contextData.alert.active && contextData.alert.alertMessage ? <AlertBox/> : null}
-            {contextData.conversations.length>0 ? <ConversationsRenderer/> : null }
+            {contextData.conversations.length > 0 ? <ConversationsRenderer/> : null}
 
         </div>
 

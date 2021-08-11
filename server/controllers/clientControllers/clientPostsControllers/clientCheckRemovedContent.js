@@ -8,9 +8,8 @@ module.exports = (req, res) => {
     const type = req.body.type
     if (checkUrl) {
         axios(checkUrl).then(result => {
-            res.end()
         }).catch(err => {
-            if (err?.response?.status >= 400 && err?.response?.status < 500 || err.code === 'ENOTFOUND' ) {
+            if (err?.response?.status >= 400 && err?.response?.status < 499 || err.code === 'ENOTFOUND' ) {
                 postSchema.findOneAndUpdate({mainThumbnail: checkUrl}, {$set: {status: 'pending'}}, {new: true}).exec()
                 metaSchema.find({imageUrl:checkUrl}).exec().then(metas=>{
 
@@ -19,7 +18,8 @@ module.exports = (req, res) => {
                     })
                 })
             }
-            res.end()
+
         })
     }
+    res.end()
 }

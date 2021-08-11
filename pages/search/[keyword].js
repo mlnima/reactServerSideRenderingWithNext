@@ -1,9 +1,11 @@
-import {useContext} from 'react'
 import { getFirstLoadData} from '../../_variables/ajaxVariables';
-import {getPosts} from '../../_variables/ajaxPostsVariables';
+import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
+import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
+import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
+import {useRouter} from "next/router";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -16,18 +18,18 @@ let StyledMain = styled.main`
   }
   ${props => props.stylesData}
 `
-
-const posts = props => {
+const searchPage = props => {
     const contextData = useContext(AppContext);
+    const router = useRouter()
     return (
         <StyledMain className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
-        <PostsPage {...props}/>
+            {router.query.keyword  ? <PostsPageInfo titleToRender={router.query.keyword}/> : null}
+            <PostsPage {...props}/>
         </StyledMain>
     )
 };
 
 export const getServerSideProps = async ({req, query}) => {
-
     const firstLoadData = await getFirstLoadData(req,['postsPageLeftSidebar', 'postsPageRightSidebar'],'postsPage')
     const getPostsData = {
         size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
@@ -37,14 +39,14 @@ export const getServerSideProps = async ({req, query}) => {
         keyword: query.keyword || '',
         author: query.author || 'all',
         status: 'published',
-        sort: query.sort || 'lastModify',
+        sort: query.sort || 'updatedAt',
         lang: query.lang || null
     }
 
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, req.originalUrl)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
-    return {props: {widgets, ...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData, referer: firstLoadData.referer}}
+    return {props: {widgets, ...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData , referer: firstLoadData.referer}}
 }
 
-export default posts;
+export default searchPage;

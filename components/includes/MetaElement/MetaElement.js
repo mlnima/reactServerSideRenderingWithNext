@@ -13,20 +13,11 @@ const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postE
                 postElementSize === 'medium' ? {width:320,height:180}:
                 {width:255.8,height:143.95}
     })
-    const classNameForMetaElement = postElementSize ? `meta-page-item-link-${postElementSize}` : `meta-page-item-link-small`
+    const classNameForMetaElement = postElementSize ? `meta-page-item-link-${postElementSize}` : `meta-page-item-link-small`;
+
+    const typeForUrl = type === 'tags' ? 'tag' : type === 'categories' ? 'category' :type === 'actors' ? 'actor' : '' ;
     return (
-        <Link key={name} as={contextData.state.activeLanguage !== 'default' ? `/${type}/${translations ? translations[contextData.state.activeLanguage] ?
-              translations[contextData.state.activeLanguage].name || name : name : name}?metaId=${_id}` :`/${type}/${name}?metaId=${_id}`}
-              href={{
-                  pathname: `/posts`,
-                  query: {
-                      metaId: _id,
-                      metaName: name,
-                      metaType: type,
-                  }
-              }}
-              scroll={false}
-        >
+        <Link key={name} href={`/${typeForUrl}/${_id}`} scroll={false}>
             <a className={`meta-page-item-link ${classNameForMetaElement}`} onClick={() => contextData.dispatchState({...contextData.state, loading: true})}>
 
                 <style jsx>{`
@@ -46,7 +37,6 @@ const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postE
                     @media only screen and (min-width: 768px) {
                             .meta-page-item-link{
                                 margin: 10px auto;
-                               // width: 320px;
                             }
                             .meta-page-item-link-smaller{
                                width: 209.8px;
@@ -83,3 +73,17 @@ const MetaElement = ({type,translations,name,_id,noImageUrl,imageUrl,count,postE
 
 };
 export default MetaElement;
+
+
+//        <Link key={name} as={contextData.state.activeLanguage !== 'default' ? `/${type}/${translations ? translations[contextData.state.activeLanguage] ?
+//               translations[contextData.state.activeLanguage].name || name : name : name}?metaId=${_id}` :`/${type}/${name}?metaId=${_id}`}
+//               href={{
+//                   pathname: `/posts`,
+//                   query: {
+//                       metaId: _id,
+//                       metaName: name,
+//                       metaType: type,
+//                   }
+//               }}
+//               scroll={false}
+//         >

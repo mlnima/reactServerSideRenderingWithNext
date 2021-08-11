@@ -25,8 +25,11 @@ const ImageRenderer = props => {
                 type: 'image'
             }
             setTimeout(() => {
-                checkRemovedContent(data)
-                clientSelfWidgetUpdate(props.widgetId)
+                checkRemovedContent(data).then(() => {
+                    if (props.widgetId) {
+                        clientSelfWidgetUpdate(props.widgetId)
+                    }
+                })
             }, 1000)
         }
     }

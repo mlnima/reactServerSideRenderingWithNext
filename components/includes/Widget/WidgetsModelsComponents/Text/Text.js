@@ -15,6 +15,7 @@ const Text = props => {
                 color:var(--main-text-color);
                 width:clamp(45ch,90%,75ch);
                 text-align: center;
+                margin: auto;
                 max-width: 100vw;
                 }
             @media only screen and (min-width: 768px) {

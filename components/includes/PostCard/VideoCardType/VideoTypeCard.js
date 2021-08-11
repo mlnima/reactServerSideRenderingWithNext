@@ -26,6 +26,7 @@ const VideoTypeCard = props => {
             <style jsx>{`
               .video-card {
                 width: ${props.postElementSize === 'list' ? '100%' : '47vw'};
+                max-width: ${props.postElementSize === 'list' ? `100%` : `47vw`};
                 display: flex;
                 flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                 align-items: center;
@@ -41,7 +42,8 @@ const VideoTypeCard = props => {
                 .video-card-link {
                   position: relative;
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                  max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+                  max-width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+                 
                   margin: 4px;
                   display: flex;
                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
@@ -63,6 +65,7 @@ const VideoTypeCard = props => {
                       overflow: hidden;
                       display: -webkit-box !important;
                       -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
+                      direction: ${props.dir === 'rtl' ? 'rtl' : 'ltr'};
                       -webkit-box-orient: vertical;
                       white-space: normal;
                       font-size: 1rem;
@@ -117,6 +120,7 @@ const VideoTypeCard = props => {
                 @media only screen and (min-width: 768px) {
                   .video-card {
                    width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+                     max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
                    flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                     .video-card-link {
                       flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
@@ -162,3 +166,5 @@ const VideoTypeCard = props => {
 export default VideoTypeCard;
 
 //`calc(${cardWidth - 116.6}px )`
+
+//max-width: ${props.postElementSize === 'list' ? `320px` : `calc(100% - 4px)`};

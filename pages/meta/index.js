@@ -1,13 +1,13 @@
 import {useContext, useEffect} from 'react';
 import {getFirstLoadData} from '../../_variables/ajaxVariables'
-import {getMeta} from '../../_variables/ajaxPostsVariables'
+import {getMultipleMeta} from '../../_variables/ajaxPostsVariables'
 import PaginationComponent from '../../components/includes/PaginationComponent/PaginationComponent'
 import MetaElement from '../../components/includes/MetaElement/MetaElement'
 import {useRouter} from "next/router";
 import {AppContext} from "../../context/AppContext";
 import _ from "lodash";
-// import Posts from "../../components/includes/Posts/Posts";
-// postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+
+
 const meta = ({metaSource, identity, dataForGettingMeta,design}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -23,7 +23,6 @@ const meta = ({metaSource, identity, dataForGettingMeta,design}) => {
 
 
     const isWithSidebar = identity?.data?.metaPageSidebar || contextData?.siteIdentity?.metaPageSidebar
-//style={{gridArea: isWithSidebar ? 'main' : ''}}
     return (
         <div className={isWithSidebar ? 'content main ' : 'content main '}>
             <style jsx>{`
@@ -76,8 +75,7 @@ export const getServerSideProps = async ({req, query}) => {
         lang: query?.lang || 'default',
         status: 'published'
     }
-    // const widgetsData = await getMultipleWidgetWithData({widgets: ['metaPageLeftSidebar', 'metaPageRightSidebar']}, firstLoadData.domainName, true, 'metaPage')
-    const metaData = await getMeta(dataForGettingMeta, firstLoadData.domainName, true, query.metaType)
+    const metaData = await getMultipleMeta(dataForGettingMeta, firstLoadData.domainName, true, query.metaType)
     const widgets = firstLoadData.widgets
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
     return {props: {...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), widgets, metaSource, dataForGettingMeta, referer: firstLoadData.referer}}

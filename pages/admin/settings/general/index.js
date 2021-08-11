@@ -3,8 +3,9 @@ import AdminLayout from "../../../../components/layouts/AdminLayout";
 import {updateSetting, getSetting} from "../../../../_variables/ajaxVariables";
 import FA from "react-fontawesome";
 import {AppContext} from '../../../../context/AppContext'
-import {getAbsolutePath, languagesOptions} from '../../../../_variables/_variables'
+import {convertVariableNameToName, getAbsolutePath, languagesOptions} from '../../../../_variables/_variables'
 import styled from "styled-components";
+import _ from "lodash";
 
 let StyledForm = styled.form`
   background-color: white;
@@ -95,6 +96,36 @@ const settings = props => {
         keywords: [],
         translations: {}
     });
+
+    const [sidebars,setSidebars]= useState([
+        'homePageSidebar',
+        'postPageSidebar',
+        'postsPageSidebar',
+        'profilePageSidebar',
+        'userPageSidebar',
+        'tagsPageSidebar',
+        'categoriesPageSidebar',
+        'actorsPageSidebar',
+        'tagPageSidebar',
+        'categoryPageSidebar',
+        'actorPageSidebar',
+    ])
+
+
+    const renderSidebarOptions = sidebars.map(sidebar=>{
+        return(
+            <div className="site-settings-form-section" key={_.uniqueId('sidebar_')}>
+                <p>{convertVariableNameToName(sidebar)}:</p>
+                <select name={sidebar} value={state[sidebar]} onChange={e => onChangeHandler(e)}>
+                    <option>select</option>
+                    <option value='left'>Left</option>
+                    <option value='right'>Right</option>
+                    <option value='both'>Both</option>
+                    <option value='false'>No</option>
+                </select>
+            </div>
+        )
+    })
 
 
 
@@ -366,60 +397,8 @@ const settings = props => {
                 </div>
                 <h2>Sidebars Status</h2>
                 <div className="sidebarsStatus site-settings-form-section-parent">
-                    <div className="site-settings-form-section">
-                        <p>Home Page Sidebar:</p>
-                        <select name='homePageSidebar' value={state.homePageSidebar || false} onChange={e => onChangeHandler(e)}>
-                            <option value='left'>Left</option>
-                            <option value='right'>Right</option>
-                            <option value='both'>Both</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Post Page Sidebar:</p>
-                        <select name='postPageSidebar' value={state.postPageSidebar} onChange={e => onChangeHandler(e)}>
-                            <option value='left'>Left</option>
-                            <option value='right'>Right</option>
-                            <option value='both'>Both</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Posts Page Sidebar:</p>
-                        <select name='postsPageSidebar' value={state.postsPageSidebar} onChange={e => onChangeHandler(e)}>
-                            <option value='left'>Left</option>
-                            <option value='right'>Right</option>
-                            <option value='both'>Both</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Meta Page Sidebar:</p>
-                        <select name='metaPageSidebar' value={state.metaPageSidebar} onChange={e => onChangeHandler(e)}>
-                            <option value='left'>Left</option>
-                            <option value='right'>Right</option>
-                            <option value='both'>Both</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>Profile Page Sidebar:</p>
-                        <select name='profilePageSidebar' value={state.profilePageSidebar} onChange={e => onChangeHandler(e)}>
-                            <option value='left'>Left</option>
-                            <option value='right'>Right</option>
-                            <option value='both'>Both</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
-                    <div className="site-settings-form-section">
-                        <p>User Page Sidebar:</p>
-                        <select name='userPageSidebar' value={state.userPageSidebar} onChange={e => onChangeHandler(e)}>
-                            <option value='left'>Left</option>
-                            <option value='right'>Right</option>
-                            <option value='both'>Both</option>
-                            <option value='false'>No</option>
-                        </select>
-                    </div>
+
+                    {renderSidebarOptions}
                 </div>
 
             </div>
@@ -429,6 +408,8 @@ const settings = props => {
 
     );
 };
+
+export default settings;
 
 // settings.getInitialProps = async ({pathname, query, req, res, err}) => {
 //     const domainName = req ? await getAbsolutePath(req) : '';
@@ -449,4 +430,125 @@ const settings = props => {
 // }
 
 
-export default settings;
+
+
+// <div className="site-settings-form-section">
+//     <p>Home Page Sidebar:</p>
+//     <select name='homePageSidebar' value={state.homePageSidebar || false} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>Post Page Sidebar:</p>
+//     <select name='postPageSidebar' value={state.postPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>Posts Page Sidebar:</p>
+//     <select name='postsPageSidebar' value={state.postsPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// {/*<div className="site-settings-form-section">*/}
+// {/*    <p>Meta Page Sidebar:</p>*/}
+// {/*    <select name='metaPageSidebar' value={state.metaPageSidebar} onChange={e => onChangeHandler(e)}>*/}
+// {/*        <option>select</option>*/}
+// {/*        <option value='left'>Left</option>*/}
+// {/*        <option value='right'>Right</option>*/}
+// {/*        <option value='both'>Both</option>*/}
+// {/*        <option value='false'>No</option>*/}
+// {/*    </select>*/}
+// {/*</div>*/}
+// <div className="site-settings-form-section">
+//     <p>Profile Page Sidebar:</p>
+//     <select name='profilePageSidebar' value={state.profilePageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>User Page Sidebar:</p>
+//     <select name='userPageSidebar' value={state.userPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>Tags Page Sidebar:</p>
+//     <select name='tagsPageSidebar' value={state.tagsPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>Categories Page Sidebar:</p>
+//     <select name='categoriesPageSidebar' value={state.categoriesPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>Actors Page Sidebar:</p>
+//     <select name='actorsPageSidebar' value={state.actorsPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>Tag Page Sidebar:</p>
+//     <select name='tagPageSidebar' value={state.tagPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>Category Page Sidebar:</p>
+//     <select name='categoryPageSidebar' value={state.categoryPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>
+// <div className="site-settings-form-section">
+//     <p>Actor Page Sidebar:</p>
+//     <select name='actorPageSidebar' value={state.actorPageSidebar} onChange={e => onChangeHandler(e)}>
+//         <option>select</option>
+//         <option value='left'>Left</option>
+//         <option value='right'>Right</option>
+//         <option value='both'>Both</option>
+//         <option value='false'>No</option>
+//     </select>
+// </div>

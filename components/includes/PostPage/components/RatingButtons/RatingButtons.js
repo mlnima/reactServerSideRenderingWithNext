@@ -1,4 +1,4 @@
-import {useState,useRef} from 'react';
+import {useState, useRef, useMemo} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
@@ -19,6 +19,13 @@ const RatingButtons = ({_id,ratingAndViewData,rating,setRatingAndViewData}) => {
             rated: true
         })
     }
+
+    const views = useMemo(() => {
+        const viewsNumber = ratingAndViewData.views || 0
+        return viewsNumber > 1000 && viewsNumber < 1000000 ? (viewsNumber / 1000).toFixed(1) + 'K' :
+            viewsNumber > 1000000 ? (viewsNumber / 1000000).toFixed(1) + 'M' :
+                viewsNumber
+    }, [])
     return(
         <div ref={ratingBtnArea} className="rating-buttons">
                     <style jsx>{`
@@ -55,7 +62,7 @@ const RatingButtons = ({_id,ratingAndViewData,rating,setRatingAndViewData}) => {
                     `}</style>
                     <span className='like-disLike-count-items rating-item'>
                         <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={faEye}  className='rate-logo' />
-                        <p className='rating-item-value'>{ratingAndViewData.views} </p>
+                        <p className='rating-item-value'>{views} </p>
                     </span>
             {rating !== 'disable'?
                 <>
