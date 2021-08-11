@@ -4,12 +4,11 @@ import dynamic from 'next/dynamic'
 import {addNewWidget, deleteWidgets, getMultipleWidgetWithData, getPagesData, updateWidgets} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName} from "../../../../_variables/_variables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {DelayInput} from 'react-delay-input'
 import {languagesOptions} from "../../../../_variables/_variables";
 import {faDollarSign, faEuroSign, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import MonacoEditorComponent from "../../MonacoEditorComponent/MonacoEditorComponent";
-import Editor from "@monaco-editor/react";
+
 import SearchTypeInputFields from "./SearchTypeInputFields/SearchTypeInputFields";
 import MultipleLinkWidgetModelFields from "./MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields";
 import _ from "lodash";
@@ -45,7 +44,65 @@ const WidgetModel = props => {
     const [widgetData, setWidgetData] = useState({
         translations: {},
     })
+    const [positions,setPositions] = useState([
+        'topBar',
+        'header',
+        'navigation',
 
+        'home',
+        'homePageLeftSidebar',
+        'homePageRightSidebar',
+
+        'postPageTop',
+        'postPageLeftSidebar',
+        'postPageBottom',
+        'postPageRightSidebar',
+
+        'underPost',
+
+        'postsPageTop',
+        'postsPageLeftSidebar',
+        'postsPageBottom',
+        'postsPageRightSidebar',
+
+        'profilePageTop',
+        'profilePageLeftSidebar',
+        'profilePageBottom',
+        'profilePageRightSidebar',
+
+        'tagsPageTop',
+        'tagsPageLeftSidebar',
+        'tagsPageBottom',
+        'tagsPageRightSidebar',
+
+        'categoriesPageTop',
+        'categoriesPageLeftSidebar',
+        'categoriesPageBottom',
+        'categoriesPageRightSidebar',
+
+        'actorsPageTop',
+        'actorsPageLeftSidebar',
+        'actorsPageBottom',
+        'actorsPageRightSidebar',
+
+        'tagPageTop',
+        'tagPageLeftSidebar',
+        'tagPageBottom',
+        'tagPageRightSidebar',
+
+        'categoryPageTop',
+        'categoryLeftSidebar',
+        'categoryBottom',
+        'categoryRightSidebar',
+
+        'actorPageTop',
+        'actorPageLeftSidebar',
+        'actorPageBottom',
+        'actorPageRightSidebar',
+
+        'footer',
+
+    ])
     useEffect(() => {
         setWidgetData({
             ...widgetData,
@@ -250,6 +307,17 @@ const WidgetModel = props => {
     };
 
 
+
+
+    const renderWidgetPositions = positions.map(position=>{
+        return(
+            <option key={_.uniqueId('position_')} value='position'>{convertVariableNameToName(position)}</option>
+        )
+    })
+
+
+
+
     if (widgetSettings.open || widgetData.stayOpen) {
         return (
 
@@ -305,25 +373,7 @@ const WidgetModel = props => {
                     <div className='selectInputFieldForWidget widgetSection'>
                         <p>Position:</p>
                         <select name='position' value={widgetData.position} onChange={e => onChangeHandler(e)}>
-                            <option value='topBar'>Top Bar</option>
-                            <option value='navigation'>Navigation</option>
-                            <option value='header'>Header</option>
-                            <option value='home'>Home</option>
-                            <option value='homePageLeftSidebar'>Home Page Left Sidebar</option>
-                            <option value='homePageRightSidebar'>Home Page Right Sidebar</option>
-
-                            <option value='postPageLeftSidebar'>Post Page Left SideBar</option>
-                            <option value='postPageRightSidebar'>Post Page Right SideBar</option>
-
-                            <option value='postsPageLeftSidebar'>Posts Page Left SideBar</option>
-                            <option value='postsPageRightSidebar'>Posts Page Right SideBar</option>
-
-                            <option value='metaPageLeftSidebar'>Meta Page Left SideBar</option>
-                            <option value='metaPageRightSidebar'>Meta Page Right SideBar</option>
-                            <option value='underPost'>Under Post</option>
-
-                            <option value='footer'>Footer</option>
-                            <option value='deactivate'>Deactivate</option>
+                            {renderWidgetPositions}
                             {(props.customPages || []).map(customPage => {
                                 return (
                                     <React.Fragment key={_.uniqueId('id_')}>
@@ -333,6 +383,7 @@ const WidgetModel = props => {
                                     </React.Fragment>
                                 )
                             })}
+                            <option value='deactivate'>Deactivate</option>
                         </select>
                     </div>
 
@@ -634,3 +685,22 @@ export default WidgetModel;
 //         <option value='list'>List</option>
 //     </select>
 // </div>
+
+// <option value='topBar'>Top Bar</option>
+// <option value='navigation'>Navigation</option>
+// <option value='header'>Header</option>
+// <option value='home'>Home</option>
+// <option value='homePageLeftSidebar'>Home Page Left Sidebar</option>
+// <option value='homePageRightSidebar'>Home Page Right Sidebar</option>
+//
+// <option value='postPageLeftSidebar'>Post Page Left SideBar</option>
+// <option value='postPageRightSidebar'>Post Page Right SideBar</option>
+//
+// <option value='postsPageLeftSidebar'>Posts Page Left SideBar</option>
+// <option value='postsPageRightSidebar'>Posts Page Right SideBar</option>
+//
+// <option value='metaPageLeftSidebar'>Meta Page Left SideBar</option>
+// <option value='metaPageRightSidebar'>Meta Page Right SideBar</option>
+// <option value='underPost'>Under Post</option>
+//
+// <option value='footer'>Footer</option>

@@ -146,7 +146,7 @@ const AddWidgetWithPositionMenu = props => {
 
     const renderPositions = positions.map(position=>{
         return(
-            <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(position, props.type)}>{convertVariableNameToName(position)}</button>
+            <button key={_.uniqueId('position_')} className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(position, props.type)}>{convertVariableNameToName(position)}</button>
         )
     })
 
