@@ -36,10 +36,6 @@ const AppLayout = props => {
         }
     })
 
-    // useEffect(() => {
-    //     console.log(staticWidgets)
-    // }, [staticWidgets]);
-
     useEffect(() => {
         setLeftSidebarWidgets(leftSidebarWidgetsData)
         setRightSidebarWidgets(rightSidebarWidgetsData)

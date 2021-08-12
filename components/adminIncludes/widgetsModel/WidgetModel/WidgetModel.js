@@ -311,7 +311,7 @@ const WidgetModel = props => {
 
     const renderWidgetPositions = positions.map(position=>{
         return(
-            <option key={_.uniqueId('position_')} value='position'>{convertVariableNameToName(position)}</option>
+            <option key={_.uniqueId('position_')} value={position}>{convertVariableNameToName(position)}</option>
         )
     })
 

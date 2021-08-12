@@ -206,10 +206,6 @@ export const getFirstLoadData = async (req,dynamicWidgets,page) => {
         const domainName = process.env.REACT_APP_PRODUCTION_URL;
         const cache = process.env.NODE_ENV !== 'development'
         const refererUrl = req?.headers?.referer || '';
-       //const referer =   process.env.NODE_ENV !== 'development'  ?  refererUrl   ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin')  : false: false;
-       //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererUrl.includes('sitemap')&& !refererUrl.includes('/admin') && !refererUrl.includes('/messenger') && !refererUrl.includes('/chatroom')  : false;
-       //const refererFromDataLessPages = refererUrl ?  /sitemap|admin|messenger|chatroom/.test(refererUrl)  : true
-       //const referer =  refererUrl ? refererUrl.includes(req?.headers?.host) && !refererFromDataLessPages  : false;
         const referer =   false;
         const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
         const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
