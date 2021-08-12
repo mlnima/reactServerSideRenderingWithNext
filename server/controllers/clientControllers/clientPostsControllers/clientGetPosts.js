@@ -7,23 +7,12 @@ module.exports = async (req, res) => {
     const postTypeQuery = !req.body.postType ? {} : {postType: req.body.postType};
     const statusQuery = req.body?.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
     const authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
-    //const requestedFields = (req.body.fields || []).reduce((a, b) => ` ${a} , ` + ` ${b} , `)
-    const metaQuery = !req.body.metaId ? {} : {
-        $or: [
-            {categories: req.body.metaId},
-            {tags: req.body.metaId},
-            {actors: req.body.metaId}
-        ]
-    };
-    const searchQuery = req.body.keyword === '' || !req.body.keyword ? {} :
-        !req.body.lang || req.body.lang === 'default' ? {$or: [{title: new RegExp(req.body.keyword, 'i')}, {description: new RegExp(req.body.keyword, 'i')}]} :
-            {
-                $or: [
-                    {title: new RegExp(req.body.keyword, 'i')},
-                    {description: new RegExp(req.body.keyword, 'i')},
-                    {[`translations.${req.body.lang}.title`]: new RegExp(req.body.keyword, 'i')},
-                    {[`translations.${req.body.lang}.description`]: new RegExp(req.body.keyword, 'i')},]
-            }
+
+    const metaQuery = !req.body.metaId ? {} : {$or: [{categories: req.body.metaId},{tags: req.body.metaId},{actors: req.body.metaId}]};
+
+    const searchQuery =  !req.body.keyword ? {} :
+              !req.body.lang || req.body.lang === 'default' ? {$or: [{title: new RegExp(req.body.keyword, 'i')}]} :
+              {$or: [{title: new RegExp(req.body.keyword, 'i')},{[`translations.${req.body.lang}.title`]: new RegExp(req.body.keyword, 'i')},]}
 
     let selectedFields = req.body.fields[0] === 'all' || !req.body.fields ? {} : (req.body.fields || []);
     let postsCount = await postSchema.countDocuments({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).exec()

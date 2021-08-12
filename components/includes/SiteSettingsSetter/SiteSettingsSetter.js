@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {AppContext} from '../../../context/AppContext';
-import Head from 'next/dist/next-server/lib/head'
+import Head from 'next/head'
 import {useRouter} from "next/router";
 import parse from 'html-react-parser';
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";

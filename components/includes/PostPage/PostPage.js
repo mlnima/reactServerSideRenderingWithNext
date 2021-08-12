@@ -41,7 +41,12 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
         disLike: 0,
         view: 0
     })
-    const [commentsData,setCommentsData] = useState(()=>{
+
+    useEffect(() => {
+        console.log(ratingAndViewData)
+    }, [ratingAndViewData]);
+
+    const [commentsData, setCommentsData] = useState(() => {
         return comments
     })
 
@@ -50,7 +55,15 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)
         }
+        likeDislikeView(post._id, 'views').then(res => {
+            if (res.data.updatedData) {
+
+                setRatingAndViewData(res.data.updatedData)
+            }
+        })
+
     }, []);
+
     useEffect(() => {
         if (typeof window !== 'undefined') {
             setState({
@@ -59,19 +72,15 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
                 postAbsolutePath: window.location.href
             });
         }
-        likeDislikeView(post._id, 'views').then(res => {
-            if (res.data.updatedData) {
-                setRatingAndViewData(res.data.updatedData)
-            }
-        })
+
     }, [post.likes, post.disLikes]);
 
-    const reGetComments = async () =>{
+    const reGetComments = async () => {
         try {
-            const commentsReq = await getComments({onDocument: post._id}, process.env.REACT_APP_PRODUCTION_URL , true)
+            const commentsReq = await getComments({onDocument: post._id}, process.env.REACT_APP_PRODUCTION_URL, true)
             setCommentsData(post ? commentsReq?.data?.comments : [])
             //const comments = post ? commentsReq?.data?.comments : []
-        }catch (err){
+        } catch (err) {
 
         }
 
@@ -191,7 +200,6 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
                 </div> : null}
             <CommentFrom reGetComments={reGetComments} documentId={post._id} documentTitle={post.title}/>
             {comments?.length > 0 ? <CommentsRenderer reGetComments={reGetComments} comments={commentsData}/> : null}
-
 
 
         </main>

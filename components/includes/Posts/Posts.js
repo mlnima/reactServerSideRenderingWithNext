@@ -4,6 +4,7 @@ import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
 import _ from "lodash";
 import {likeValueCalculator} from "../../../_variables/_variables";
+import _shortNumber from '../../../_variables/clientVariables/_shortNumber'
 
 const PostElement = dynamic(() => import('../PostCard/PostElement'))
 const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeCard'))
@@ -36,9 +37,7 @@ const Posts = ({viewType, isMobile, _id, redirectLink, postElementSize, posts, p
                 const title = (post?.translations?.[locale]?.title || post?.title).replace('#', '');
                 const dir = router.locale === 'fa' || router.locale === 'ar' && post?.translations?.[locale]?.title ? 'rtl' : 'ltr'
                 const viewsNumber = post.views || 0
-                const views = viewsNumber > 1000 && viewsNumber < 1000000 ? (viewsNumber / 1000).toFixed(1) + 'K' :
-                      viewsNumber > 1000000 ? (viewsNumber / 1000000).toFixed(1) + 'M' :
-                      viewsNumber
+                const views = _shortNumber(viewsNumber)
                 const rating = likeValueCalculator(post.likes, post.disLikes)
 
                 if (post.postType === 'video') {
