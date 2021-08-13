@@ -33,18 +33,18 @@ export const getServerSideProps = async ({req, query}) => {
 
     const firstLoadData = await getFirstLoadData(req, ['postsPageLeftSidebar', 'postsPageRightSidebar'], 'postsPage')
     const getPostsData = {
-        size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
+        size: parseInt(query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 30,
         page: parseInt(query?.page) || 1,
         postType: query.type || null,
         fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating', 'redirectLink'],
         keyword: query.keyword || '',
         author: query.author || 'all',
         status: 'published',
-        sort: query.sort || 'lastModify',
+        sort: query.sort || 'updatedAt',
         lang: query.lang || null
     }
 
-    const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, req.originalUrl)
+    const postsData = await getPosts(getPostsData, process.env.REACT_APP_PRODUCTION_URL, true, req.originalUrl)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
     return {props: {widgets, ...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData, referer: firstLoadData.referer}}

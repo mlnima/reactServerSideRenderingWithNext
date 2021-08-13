@@ -402,6 +402,7 @@ const WidgetModel = props => {
                             widgetData.type === 'postsSwiper' ||
                             widgetData.type === 'imageSwiper' ||
                             widgetData.type === 'meta' ||
+                            widgetData.type === 'metaWithImage' ||
                             widgetData.type === 'alphabeticalNumericalRange' ||
                             widgetData.type === 'text' ||
                             widgetData.type === 'textEditor' ||
@@ -420,6 +421,7 @@ const WidgetModel = props => {
                             widgetData.type === 'postsSwiper' ||
                             widgetData.type === 'imageSwiper' ||
                             widgetData.type === 'meta' ||
+                            widgetData.type === 'metaWithImage' ||
                             widgetData.type === 'media' ||
                             widgetData.type === 'alphabeticalNumericalRange' ||
                             widgetData.type === 'linkTo' ||
@@ -464,7 +466,7 @@ const WidgetModel = props => {
                         : null
                     }
 
-                    {widgetData.type === 'meta' ?
+                    {widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ?
                         <>
                             <div className='selectInputFieldForWidget widgetSection'>
                                 <p>Sort By:</p>
@@ -568,6 +570,7 @@ const WidgetModel = props => {
                         rendering={
                             widgetData.type === 'posts' ||
                             widgetData.type === 'postsSwiper' ||
+                            widgetData.type === 'metaWithImage' ||
                             widgetData.type === 'meta'
                         }/>
 

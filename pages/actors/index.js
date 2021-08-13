@@ -7,6 +7,7 @@ import PaginationComponent from "../../components/includes/PaginationComponent/P
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
+import ActorsRenderer from "../../components/includes/ActorsPage/Components/ActorsRenderer/ActorsRenderer";
 
 const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,referer,isMobile}) => {
     const contextData = useContext(AppContext);
@@ -47,6 +48,8 @@ const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,ref
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
+            <ActorsRenderer actors={metaSource?.metas || []} postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}/>
+
             <div className={router.query?.metaType + ' actors'}>
 
                 {(metaSource?.metas ?? []).map(tag => {

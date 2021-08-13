@@ -60,7 +60,7 @@ const adminUpdateWidget = async (req, res) => {
 
         })
 
-    } else if (widgetData.type === 'meta') {
+    } else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ) {
         const metas = widgetData.metaType ? await metaSchema.find({type: widgetData.metaType}).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
         const dateForUpdateWidget = {
             ...widgetData,

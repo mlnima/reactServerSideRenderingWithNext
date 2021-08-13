@@ -120,7 +120,7 @@ const VideoTypeCard = props => {
                 @media only screen and (min-width: 768px) {
                   .video-card {
                    width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-                     max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
+                   max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
                    flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                     .video-card-link {
                       flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};

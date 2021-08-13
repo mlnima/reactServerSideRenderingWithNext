@@ -18,6 +18,7 @@ const AddWidgetMenu = props => {
             'searchBar',
             'searchButton',
             'meta',
+            'metaWithImage',
             'logo',
             'form',
             'shoppingCart',

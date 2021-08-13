@@ -7,6 +7,7 @@ import PaginationComponent from "../../components/includes/PaginationComponent/P
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
+import TagsRenderer from "../../components/includes/TagsPage/Components/TagsRenderer/TagsRenderer";
 
 const tagsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,referer,isMobile}) => {
     const contextData = useContext(AppContext);
@@ -47,18 +48,8 @@ const tagsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,refer
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <div className={router.query?.metaType + ' tags'}>
+            <TagsRenderer tags={metaSource?.metas || []} postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}/>
 
-                {(metaSource?.metas ?? []).map(tag => {
-                    return (
-                        <MetaElement
-                            postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                            key={_.uniqueId('tag_')}
-                            {...tag}
-                        />
-                    )
-                })}
-            </div>
             <PaginationComponent
                 isActive={true}
                 currentPage={dataForGettingMeta?.page}

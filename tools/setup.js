@@ -38,7 +38,7 @@ const identityData = {
 const adminPanelData = {
     type: 'adminPanelSettings',
     data: {
-        defaultPostType:'standard'
+        defaultPostType: 'standard'
     }
 }
 
@@ -52,14 +52,34 @@ identityToSave.save().catch(() => {
 const designData = {
     type: 'design',
     data: {
-        customStyle: ' body{\n' +
-            '    background-color: black;\n' +
-            '    color: white;\n' +
-            '}',
-        topBarStyle:'background-color:#333;',
-        headerStyle:'background-color:black;',
-        navigationStyle:'background-color:#333;',
-        footerStyle:'background-color:#333;',
+        customColors: `  
+    --main-text-color: #fff;
+    --main-red-color: #FF3565;
+    --main-blue-color: #0073aa;
+    --main-yellow-color: #f90;
+    --main-dark-color:#1b1b1b;
+    --background-color: #0e0e10;
+    --post-page-info-color:#fff;
+    --post-page-info-background-color:#181818;
+    --meta-text-color:#000;
+    --meta-background-color:#f90;
+    --widget-h-f-text-color:#fff;
+    --widget-h-f-background-color:transparent;
+    --post-element-text-color:#fff;
+    --post-element-background-color:transparent;
+
+    --navigation-text-color: #fff;
+    --navigation-background-color: #18181b;
+    --topbar-background-color: #18181b;
+    --sidebar-background-color : #1f1f23;
+    --footer-background-color: #18181b;
+    --header-background-color: #18181b ;
+
+    --comment-author-color: #f90 ;
+    --comment-date-color: #fff ;
+    --comment-body-color: #fff ;
+
+     --custom-green :#44d62c;`
     }
 }
 
@@ -98,11 +118,10 @@ bcrypt.hash(adminData.password, 10, function (err, hash) {
 
 const widgetData = [{
     "data": {
-        "type": "searchBar",
-        "title": "",
-        "position": "header",
-        "redirectLink": "",
-        "text": "",
+        "type": "authentication",
+        "position": "topBar",
+        "pagination": false,
+        "stayOpen": false
     }
 },
     {

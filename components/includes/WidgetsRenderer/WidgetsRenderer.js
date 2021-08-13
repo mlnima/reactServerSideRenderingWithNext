@@ -3,7 +3,11 @@ import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
 import dynamic from "next/dynamic";
+
 const Posts = dynamic(() => import('../Posts/Posts'))
+const CategoriesRenderer = dynamic(() => import('../CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer'))
+const TagsRenderer = dynamic(() => import('../TagsPage/Components/TagsRenderer/TagsRenderer'))
+const ActorsRenderer = dynamic(() => import('../ActorsPage/Components/ActorsRenderer/ActorsRenderer'))
 const RecentComments = dynamic(() => import('../widgets/RecentComments/RecentComments'))
 const MetaWidget = dynamic(() => import('../widgets/MetaWidget/MetaWidget'))
 const MediaWidget = dynamic(() => import('../widgets/MediaWidget/MediaWidget'))
@@ -35,9 +39,9 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
         const languageToRender = widget.data.languageToRender || 'all';
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
 
-        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.REACT_APP_DEFAULT_LOCAL );
+        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.REACT_APP_DEFAULT_LOCAL);
         const renderByDeviceTypeCondition = !deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all';
-       const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator'
+        const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator'
         //const isEditMode = widget.data.editMode
 
 
@@ -47,25 +51,28 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
                     widget.data.type === 'media' ? MediaWidget :
                         widget.data.type === 'recentComments' ? RecentComments :
                             widget.data.type === 'meta' ? MetaWidget :
-                                widget.data.type === 'searchBar' ? SearchInputComponent :
-                                widget.data.type === 'searchButton' ? SearchButton :
-                                    widget.data.type === 'logo' ? Logo :
-                                        widget.data.type === 'alphabeticalNumericalRange' ? AlphabeticalNumericalRangeLinksWidget :
-                                            widget.data.type === 'language' ? LanguagesSwitcher :
-                                                widget.data.type === 'authentication' ? Authentication :
-                                                    widget.data.type === 'linkTo' ? LinkTo :
-                                                        widget.data.type === 'imageSwiper' ? ImageSwiper :
-                                                            widget.data.type === 'menu' ? MenuWidget :
-                                                                widget.data.type === 'shoppingCart' ? ShoppingCart :
-                                                                    widget.data.type === 'form' ? FormWidget
-                                                                        : null;
+                                widget.data.type === 'metaWithImage' && widget.data.metaType === 'categories' ? CategoriesRenderer :
+                                    widget.data.type === 'metaWithImage' && widget.data.metaType === 'tags' ? TagsRenderer :
+                                      widget.data.type === 'metaWithImage' && widget.data.metaType === 'actors' ? ActorsRenderer :
+                                        widget.data.type === 'searchBar' ? SearchInputComponent :
+                                            widget.data.type === 'searchButton' ? SearchButton :
+                                                widget.data.type === 'logo' ? Logo :
+                                                    widget.data.type === 'alphabeticalNumericalRange' ? AlphabeticalNumericalRangeLinksWidget :
+                                                        widget.data.type === 'language' ? LanguagesSwitcher :
+                                                            widget.data.type === 'authentication' ? Authentication :
+                                                                widget.data.type === 'linkTo' ? LinkTo :
+                                                                    widget.data.type === 'imageSwiper' ? ImageSwiper :
+                                                                        widget.data.type === 'menu' ? MenuWidget :
+                                                                            widget.data.type === 'shoppingCart' ? ShoppingCart :
+                                                                                widget.data.type === 'form' ? FormWidget
+                                                                                    : null;
 
         if (renderByDeviceTypeCondition && renderByLanguageCondition && !isEditMode) {
             return (
                 <Widget currentPageSidebar={currentPageSidebar}
                         isMobile={isMobile}
                         key={widgets.indexOf(widget)}
-                        widgetId = {widget._id}
+                        widgetId={widget._id}
                         {...widget}
                         widgetToRender={widgetToRender}
                         postElementSize={postElementSize}

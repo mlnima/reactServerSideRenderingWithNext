@@ -63,7 +63,7 @@ const VideoCardMedia = props => {
 
                   .video-card-trailer {
                     width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
-                  height: calc(48vw / 1.777);
+                    height: calc(48vw / 1.777);
                     animation: opacityAnimationStart 2s alternate;
                   }
 

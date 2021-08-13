@@ -52,7 +52,7 @@ const tagPage = props => {
 export const getServerSideProps = async ({req, query}) => {
     const firstLoadData = await getFirstLoadData(req,['tagPageTop','tagPageLeftSidebar','tagPageBottom','tagPageRightSidebar',],'postsPage')
     const getPostsData = {
-        size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
+        size: parseInt(query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 30,
         page: parseInt(query?.page) || 1,
         postType: query.type || null,
         fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating' , 'redirectLink'],
@@ -69,7 +69,7 @@ export const getServerSideProps = async ({req, query}) => {
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, req.originalUrl)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
-    return {props: {widgets, ...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData, tag, referer: firstLoadData.referer}}
+    return {props: {widgets, ...firstLoadData?.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData, tag, referer: firstLoadData.referer}}
 }
 
 export default tagPage;
