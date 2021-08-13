@@ -19,20 +19,16 @@ const VideoCardMedia = props => {
         hover ? setHover(false) : setHover(true)
     }
 
-    const onErrorHandler = e => {
+    const onErrorHandler = () => {
         if (imageUrl) {
             setGotError(true)
             setIsReported(true)
             let data = {
                 checkUrl: imageUrl,
-                contentId: props.post._id,
-                type: 'image'
             }
             setTimeout(() => {
                 checkRemovedContent(data).then(() => {
-                    if (props.widgetId) {
-                        clientSelfWidgetUpdate(props.widgetId)
-                    }
+                    // clientSelfWidgetUpdate(data)
                 })
             }, 1000)
         }
@@ -99,9 +95,7 @@ const VideoCardMedia = props => {
                      src={!gotError ? imageUrl || props.noImageUrl : props.noImageUrl}
                      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
-                     onError={e => {
-                         onErrorHandler(e)
-                     }}/>
+                     onError={onErrorHandler}/>
 
                 {/*{props.post.views > 1 && props.post.postType === ('video') && !hover ? <BottomRight views={props.post.views}/> : null}*/}
                 {/*{(props.post.postType === ('video') || props.post.postType === ('redirect') || props.post.postType === ('product')) && !hover ?*/}

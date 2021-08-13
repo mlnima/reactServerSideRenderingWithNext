@@ -1,6 +1,24 @@
-import React from 'react';
+import React,{useState} from 'react';
+import {checkRemovedContent} from "../../../../../_variables/ajaxPostsVariables";
 
 const TagCardMedia = props => {
+    const [gotError, setGotError] = useState(false)
+    const [isReported, setIsReported] = useState(false)
+
+    const onErrorHandler = () => {
+        if (props.imageUrl) {
+            setGotError(true)
+            setIsReported(true)
+            let data = {
+                checkUrl: props.imageUrl,
+            }
+            setTimeout(() => {
+                checkRemovedContent(data).then(() => {
+                    // clientSelfWidgetUpdate(data)
+                })
+            }, 1000)
+        }
+    }
     return (
         <React.Fragment>
             <style jsx>{`
@@ -17,7 +35,7 @@ const TagCardMedia = props => {
               }
 
             `}</style>
-            <img className='tag-card-image' src={props.imageUrl}/>
+            <img className='tag-card-image' src={props.imageUrl}  onError={onErrorHandler}/>
         </React.Fragment>
     );
 };

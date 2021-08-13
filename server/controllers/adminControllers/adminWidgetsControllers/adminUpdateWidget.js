@@ -4,7 +4,8 @@ const postSchema = require('../../../models/postSchema');
 const mongoose = require('mongoose');
 
 
-const updatePostWidget = async (widget) => {
+
+ const updatePostWidget = async (widget) => {
     const widgetData = widget?.data
     if (widgetData) {
         try {
