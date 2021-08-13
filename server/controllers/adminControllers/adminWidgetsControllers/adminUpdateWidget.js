@@ -62,7 +62,10 @@ const adminUpdateWidget = async (req, res) => {
         })
 
     } else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ) {
-        const metas = widgetData.metaType ? await metaSchema.find({type: widgetData.metaType}).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
+        const countQuery = {count:{ $gt: 0 }}
+        const typeQuery = {type: widgetData.metaType}
+        const statusQuery = {status:'published'}
+        const metas = widgetData.metaType ? await metaSchema.find({$and:[countQuery,typeQuery,statusQuery]}).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
         const dateForUpdateWidget = {
             ...widgetData,
             metaData: metas.map(meta => meta._id),
