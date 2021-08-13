@@ -1,8 +1,6 @@
 import React, {useContext} from 'react';
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
-import MetaElement from "../../components/includes/MetaElement/MetaElement";
-import _ from "lodash";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";

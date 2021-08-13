@@ -3,11 +3,13 @@ import _ from "lodash";
 
 const MetaWidget = props => {
     const renderMeta = (props.metaData || []).map(meta => {
-
+        const typePath = meta.type === 'tags' ? 'tag' :
+                meta.type === 'categories' ? 'category' :
+                meta.type === 'actors' ? 'actor' : 'category'
         return (
 
-            <Link href={`/${meta.type}/${meta._id}`} key={meta.name}>
-                <a className='meta-widget-item' key={_.uniqueId('id_')}>
+            <Link href={`/${typePath}/${meta._id}`} key={meta.name}>
+                <a className='meta-widget-item' key={_.uniqueId('id_')} title={meta.name}>
                     <style jsx>{`
                       .meta-widget-item {
                         text-decoration: none;

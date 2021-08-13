@@ -16,16 +16,6 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
             (!router.locale && !router.query.locale) ? subItem.as :
                 `/${router.locale || router.query.locale}${subItem.as}`;
 
-
-        // {subItem.type === 'internal' ?
-        //     <Link href={subItem.target} as={linkAsForMenuItem} scroll={false}>
-        //         <a className='menu-widget-item-link' rel='next' onClick={subItem.target.includes('#') ? null : mobileNavigationOnClickHandler}>
-        //             {subItem.translations?.[router.locale]?.name || subItem.name}
-        //         </a>
-        //     </Link> :
-        //     <a className='menu-widget-item-link' href={subItem.target}>{subItem.name}</a>
-        // }
-
         return (
             <li className='menu-widget-sub-item' key={_.uniqueId('id_')}>
                 <style jsx>{`

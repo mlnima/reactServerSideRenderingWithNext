@@ -4,6 +4,9 @@ import _ from "lodash";
 const PostMeta = props => {
     const filterMeta = props.data.length > 0 ? props.data.filter(m => m.name.length > 1) : [];
     const renderData = filterMeta.map(item => {
+        const typePath = item.type === 'tags' ? 'tag' :
+                     item.type === 'categories' ? 'category' :
+                     item.type === 'actors' ? 'actor' : 'category'
         return (
             <div key={_.uniqueId(`${item.type}_`)} className='post-meta-item'>
                 <style jsx>{`
@@ -22,8 +25,8 @@ const PostMeta = props => {
                   }
                 `}</style>
 
-                <Link href={`/posts?metaId=${item._id}&metaName=${item.name}&metaType=${item.type}`} as={`/${item.type}/${item.name}?metaId=${item._id}`}>
-                    <a className={props.type + ' post-meta-item-link'}>{item.name}</a>
+                <Link href={`/${typePath}/${item._id}`} >
+                    <a className={props.type + ' post-meta-item-link'} title={item.name}>{item.name}</a>
                 </Link>
             </div>
         )

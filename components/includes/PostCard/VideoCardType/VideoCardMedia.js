@@ -19,7 +19,6 @@ const VideoCardMedia = props => {
         hover ? setHover(false) : setHover(true)
     }
 
-
     const onErrorHandler = e => {
         if (imageUrl) {
             setGotError(true)

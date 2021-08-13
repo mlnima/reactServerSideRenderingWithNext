@@ -1,8 +1,6 @@
 import React, {useContext} from 'react';
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
-import MetaElement from "../../components/includes/MetaElement/MetaElement";
-import _ from "lodash";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
@@ -50,18 +48,7 @@ const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,ref
             />
             <ActorsRenderer actors={metaSource?.metas || []} postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}/>
 
-            <div className={router.query?.metaType + ' actors'}>
 
-                {(metaSource?.metas ?? []).map(tag => {
-                    return (
-                        <MetaElement
-                            postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                            key={_.uniqueId('tag_')}
-                            {...tag}
-                        />
-                    )
-                })}
-            </div>
             <PaginationComponent
                 isActive={true}
                 currentPage={dataForGettingMeta?.page}
