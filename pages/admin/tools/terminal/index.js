@@ -6,8 +6,16 @@ import { animateScroll } from 'react-scroll'
 import styled from "styled-components";
 let StyledDiv = styled.div`
   .quickAccess {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    flex-wrap: wrap;
     .quickAccessBtn {
-      @include greenActionBtn;
+      
+      background-color: transparent;
+      padding: 10px 20px;
+      border-radius: 5px;
+      margin: 0 10px;
     }
   }
 
@@ -90,6 +98,8 @@ const terminal = props => {
                 <div className='quickAccess'>
                     <h3>Quick Access</h3>
                     <button className='quickAccessBtn' onClick={e=>onExecutorHandler(e,'npm run-script build')}>Build</button>
+                    <button className='quickAccessBtn' onClick={e=>onExecutorHandler(e,'chmod +x update.sh')}>Permission To Updater</button>
+                    <button className='quickAccessBtn' onClick={e=>onExecutorHandler(e,'./update.sh')}>Update</button>
                 </div>
                 <textarea ref={logElement} id='terminalLog' value={state.log} onChange={e=>e.scrollTop = e.offsetHeight} />
                 <form className="terminalControl" onSubmit={e=>onExecutorHandler(e,state.command)}>
