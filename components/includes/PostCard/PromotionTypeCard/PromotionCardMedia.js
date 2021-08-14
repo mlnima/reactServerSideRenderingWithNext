@@ -45,7 +45,7 @@ const PromotionCardMedia = props => {
               }
             `}</style>
             <img className='promotion-card-image'
-                 alt={props.mediaAlt || props.classNameValue}
+                 alt={props.mediaAlt}
                  src={!gotError ? imageUrl || props.noImageUrl : props.noImageUrl}
                  onError={e => {
                      onErrorHandler(e)
