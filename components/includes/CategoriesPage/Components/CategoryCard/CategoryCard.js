@@ -40,7 +40,7 @@ const CategoryCard = ({cardWidth, category}) => {
 
 
                 `}</style>
-                <CategoryCardMedia cardWidth={cardWidth} imageUrl={category?.imageUrl}/>
+                <CategoryCardMedia cardWidth={cardWidth} imageUrl={category?.imageUrl}  mediaAlt={category?.translations?.[router.locale]?.name || category?.name}/>
                 <h3 className='category-card-title'>{category?.translations?.[router.locale]?.name || category?.name}</h3>
             </a>
         </Link>

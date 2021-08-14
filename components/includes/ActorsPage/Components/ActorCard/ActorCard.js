@@ -39,7 +39,7 @@ const ActorCard = ({cardWidth, actor}) => {
 
 
                 `}</style>
-                <ActorCardMedia cardWidth={cardWidth} imageUrl={actor.imageUrl}/>
+                <ActorCardMedia cardWidth={cardWidth} imageUrl={actor.imageUrl} mediaAlt={actor?.translations?.[router.locale]?.name || actor.name}/>
                 <h3 className='actor-card-title'>{actor?.translations?.[router.locale]?.name || actor.name}</h3>
             </a>
         </Link>

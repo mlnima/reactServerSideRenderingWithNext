@@ -35,7 +35,7 @@ const TagCardMedia = props => {
               }
 
             `}</style>
-            <img className='tag-card-image' src={props.imageUrl}  onError={onErrorHandler}/>
+            <img className='tag-card-image' src={props.imageUrl}  onError={onErrorHandler} alt={props.mediaAlt}/>
         </React.Fragment>
     );
 };

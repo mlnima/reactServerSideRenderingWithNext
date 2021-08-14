@@ -36,7 +36,7 @@ const ActorCardMedia = props => {
               }
 
             `}</style>
-            <img className='actor-card-image' src={props.imageUrl} onError={onErrorHandler}/>
+            <img className='actor-card-image' src={props.imageUrl} onError={onErrorHandler} alt={props.mediaAlt}/>
         </React.Fragment>
     );
 };

@@ -39,7 +39,7 @@ const TagCard = ({cardWidth, tag}) => {
 
 
                 `}</style>
-                <TagCardMedia cardWidth={cardWidth} imageUrl={tag.imageUrl}/>
+                <TagCardMedia cardWidth={cardWidth} imageUrl={tag.imageUrl} mediaAlt={tag?.translations?.[router.locale]?.name || tag.name}/>
                 <h3 className='tag-card-title'>{tag?.translations?.[router.locale]?.name || tag.name}</h3>
             </a>
         </Link>);
