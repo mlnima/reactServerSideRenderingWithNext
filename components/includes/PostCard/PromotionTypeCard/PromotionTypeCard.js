@@ -118,7 +118,7 @@ const PromotionTypeCard = props => {
               }
 
             `}</style>
-            <a href={props.post.redirectLink} className='promotion-card-link-external' onClick={onExternalLinkClickViewHandler}>
+            <a href={props.post.redirectLink} className='promotion-card-link-external' onClick={onExternalLinkClickViewHandler} target='_blank'>
                 <PromotionCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
             </a>
             <div className='promotion-card-under-media'>
