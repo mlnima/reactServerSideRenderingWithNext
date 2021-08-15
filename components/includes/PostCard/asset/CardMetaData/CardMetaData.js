@@ -1,10 +1,11 @@
 import Link from "next/link";
 
 const CardMetaData = props => {
-
+    const typePath = props.meta.type === 'tags' ? 'tag' :
+        props.meta.type === 'categories' ? 'category' :
+            props.meta.type === 'actors' ? 'actor' : 'category'
     return (
-        <Link href={`/posts?metaId=${props.meta._id}&metaName=${props.meta.name}&metaType=${props.meta.type}`}
-              as={`/${props.meta.type}/${props.meta.name}?metaId=${props.meta._id}`}>
+        <Link href={`/${typePath}/${props.meta._id}`} >
             <a className='video-card-meta-data' title={props.meta.name}>
                 <style jsx>{`
                   .video-card-meta-data {
