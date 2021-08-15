@@ -27,6 +27,9 @@ const CategoryCard = ({cardWidth, category}) => {
                       overflow: hidden;
                       -webkit-box-orient: vertical;
                       -webkit-line-clamp: 1;
+                      font-weight: initial;
+                       font-size: 12px;
+                      
                     }
                   }
 
@@ -34,6 +37,9 @@ const CategoryCard = ({cardWidth, category}) => {
                     .category-card-link {
                       width: ${cardWidth}px;
                       margin: 5px;
+                      .category-card-title{
+                      font-size: 14px;
+                      }
                     }
 
                   }

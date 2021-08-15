@@ -26,6 +26,8 @@ const TagCard = ({cardWidth, tag}) => {
                       overflow: hidden;
                       -webkit-box-orient: vertical;
                       -webkit-line-clamp: 1;
+                      font-weight: initial;
+                      font-size: 12px;
                     }
                   }
 
@@ -33,6 +35,10 @@ const TagCard = ({cardWidth, tag}) => {
                     .tag-card-link {
                       width: ${cardWidth}px;
                       margin: 5px;
+
+                      .tag-card-title {
+                        font-size: 14px;
+                      }
                     }
 
                   }

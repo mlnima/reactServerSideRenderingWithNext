@@ -9,7 +9,7 @@ const ActorCard = ({cardWidth, actor}) => {
         <Link href={`/actor/${actor._id}`}>
             <a className='actor-card-link'>
                 <style jsx>{`
-                  .actor-card-link{
+                  .actor-card-link {
                     width: 48vw;
                     margin: 1vw;
                     display: flex;
@@ -26,6 +26,8 @@ const ActorCard = ({cardWidth, actor}) => {
                       overflow: hidden;
                       -webkit-box-orient: vertical;
                       -webkit-line-clamp: 1;
+                      font-weight: initial;
+                      font-size: 12px;
                     }
                   }
 
@@ -33,6 +35,10 @@ const ActorCard = ({cardWidth, actor}) => {
                     .actor-card-link {
                       width: ${cardWidth}px;
                       margin: 5px;
+
+                      .actor-card-title {
+                        font-size: 14px;
+                      }
                     }
 
                   }
