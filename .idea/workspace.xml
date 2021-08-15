@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientGetSignedInUserData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -743,7 +744,7 @@
       <workItem from="1628759702974" duration="17966000" />
       <workItem from="1628843845232" duration="20808000" />
       <workItem from="1628928799400" duration="4261000" />
-      <workItem from="1629012225752" duration="120000" />
+      <workItem from="1629012225752" duration="1372000" />
     </task>
     <servers />
   </component>

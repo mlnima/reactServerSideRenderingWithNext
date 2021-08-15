@@ -2,15 +2,15 @@
 const userSchema = require('../../../models/userSchema');
 
 module.exports = (req, res) => {
-    const requestedFields = req?.body?.fields && req?.body?.fields.length > 0 ? req?.body?.fields.reduce((a, b) => ` ${a} , ` + ` ${b} , `) : '';
+    userSchema.findById(req.userData._id).select(req?.body?.fields || ['username','role']).exec().then(user => {
+        if (user){
+            res.json({ userData: user });
+            res.end()
+        }else {
+            res.sendStatus(404);
+            res.end()
+        }
 
-   // const requestedFields = (req?.body?.fields || []).reduce((a, b) => ` ${a} , ` + ` ${b} , `)
-
-    userSchema.findById(req.userData._id).select(requestedFields).exec().then(user => {
-        let userDataToSend = user.toObject()
-        delete userDataToSend.password
-        res.json({ userData: userDataToSend });
-        res.end()
     }).catch(err => {
         console.log(err);
         res.sendStatus(500);
