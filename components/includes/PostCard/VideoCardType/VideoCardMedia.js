@@ -1,9 +1,5 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import Link from "next/link";
-import BottomLeft from "../BottomLeft";
-import TopRight from "../TopRight";
+import React,{ useState} from 'react';
 import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
-import {clientSelfWidgetUpdate} from "../../../../_variables/_ajaxClientWidgetVariables";
 
 const VideoCardMedia = props => {
     const [hover, setHover] = useState(false)
@@ -15,7 +11,6 @@ const VideoCardMedia = props => {
     })
 
     const hoverHandler = () => {
-
         hover ? setHover(false) : setHover(true)
     }
 
@@ -27,9 +22,7 @@ const VideoCardMedia = props => {
                 checkUrl: imageUrl,
             }
             setTimeout(() => {
-                checkRemovedContent(data).then(() => {
-                    // clientSelfWidgetUpdate(data)
-                })
+                checkRemovedContent(data)
             }, 1000)
         }
     }
@@ -64,7 +57,7 @@ const VideoCardMedia = props => {
 
                   @media only screen and (min-width: 768px) {
                     .video-card-trailer {
-                      width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
+                      width: ${props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
                       height: calc(${props.cardWidth}px / 1.777);
                     }
                   }
@@ -79,14 +72,13 @@ const VideoCardMedia = props => {
                 <style jsx>{`
                   .video-card-image {
                     width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
-                    height: calc(48vw / 1.777);
+                    height: calc(50vw / 1.777);
                   }
 
                   @media only screen and (min-width: 768px) {
                     .video-card-image {
-                      width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
+                      width: ${props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
                       height: calc(${props.cardWidth}px / 1.777);
-                      
                     }
                   }
                 `}</style>
@@ -96,12 +88,6 @@ const VideoCardMedia = props => {
                      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
                      onError={onErrorHandler}/>
-
-                {/*{props.post.views > 1 && props.post.postType === ('video') && !hover ? <BottomRight views={props.post.views}/> : null}*/}
-                {/*{(props.post.postType === ('video') || props.post.postType === ('redirect') || props.post.postType === ('product')) && !hover ?*/}
-                {/*    <BottomLeft type={props.post.postType} price={props.post.price} duration={props.post.duration}/> : null}*/}
-                {/*{props.post.quality && props.post.postType === ('video') && !hover ? <TopRight quality={props.post.quality}/> : null}*/}
-                {/*{props.post.likes > 0 && props.post.rating !== 'disable' && !hover ? <TopLeft rating={likeValueCalculator(props.post.likes, props.post.disLikes)} s/> : null}*/}
             </React.Fragment>
         )
     }

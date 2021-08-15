@@ -24,11 +24,13 @@ const PromotionTypeCard = props => {
               .promotion-card {
                 position: relative;
                 width: ${props.postElementSize === 'list' ? '100%' : '47vw'};
-                margin: 4px;
+                margin: 2.8px;
                 display: flex;
                 flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                 align-items: center;
                 justify-content: center;
+                background-color: var(--post-element-background-color);
+                font-size: 12px;
               }
 
               .promotion-card-link-external {
@@ -48,35 +50,23 @@ const PromotionTypeCard = props => {
                   color: var(--post-element-text-color);
                   display: flex;
                   flex-direction: column;
-                  justify-content: space-between;
+                  justify-content: space-evenly;
 
-                  .video-card-under-media-info {
+                  .promotion-card-under-media-info {
                     display: flex;
                     justify-content: space-between;
                     align-items: center;
-                    margin: 0;
-
-                    .video-card-views {
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
+                    margin: 0 2px;
+                    padding: 0 2px;
+                    .promotion-card-views {
+                      height: 12px;
                       margin: 0;
-
-                      span {
-                        margin: 0 2px;
-                      }
                     }
-
-                    .video-card-rating {
-                      background: url('/public/asset/images/icons/ico-rating-positive.png') no-repeat right;
-                      padding: 0 20px 0 0;
-                    }
-
                   }
 
 
                   .promotion-card-title {
-                    font-size: 1rem;
+                    font-size: 12px;
                     text-overflow: ellipsis;
                     overflow: hidden;
                     font-weight: initial;
@@ -84,7 +74,8 @@ const PromotionTypeCard = props => {
                     -webkit-line-clamp: ${props.postElementSize === 'list' ? 2 : 1};
                     -webkit-box-orient: vertical;
                     white-space: normal;
-                    margin: 2px 0;
+                    margin: 2px ;
+                    padding: 0 2px;
                     width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                     max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
                   }
@@ -92,15 +83,23 @@ const PromotionTypeCard = props => {
 
                 }
               }
+              
+              .card-meta{
+              display: flex;
+              justify-content: flex-start;
+              align-items: center;
+              flex-wrap: wrap;
+              }
 
 
               @media only screen and (min-width: 768px) {
                 .promotion-card {
                   width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-
+                   margin: 7px;
                   .promotion-card-under-media {
                     width: 100%;
+                     font-size: 14px;
 
                     .promotion-card-link-internal {
                       width: 100%;
@@ -109,6 +108,7 @@ const PromotionTypeCard = props => {
                           // width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `100%;`};
                         width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                         max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+                        font-size: 14px;
                       }
                     }
                   }
@@ -125,9 +125,9 @@ const PromotionTypeCard = props => {
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                     <a rel='next' onClick={props.onClickLoadingHandler} className='promotion-card-link-internal'>
                         <h3 className='promotion-card-title'>{props.title} </h3>
-                        <div className='video-card-under-media-info'>
-                            <p className='video-card-views'><span>{props.views}</span> views</p>
-                            <span className='video-card-rating video-card-info-data'><span>{props.rating}</span> % </span>
+                        <div className='promotion-card-under-media-info'>
+                            <p className='promotion-card-views'><span>{props.views}</span> views</p>
+                            <span className='promotion-card-rating video-card-info-data'><span>{props.rating}</span> % </span>
                         </div>
                     </a>
                 </Link>

@@ -2,16 +2,10 @@ import React, {useContext} from 'react';
 import SaveDesignChangesBtn from "../SaveDesignChangesBtn";
 import {AppContext} from "../../../../context/AppContext";
 import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
-//import MonacoEditorComponent from "../../MonacoEditorComponent/MonacoEditorComponent";
+
 
 const StyleSection = props => {
     const contextData = useContext(AppContext);
-    // const onChangeHandler = e => {
-    //     contextData.dispatchSiteDesign({
-    //         ...contextData.siteDesign,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
     const onChangeHandler = value => {
         contextData.dispatchSiteDesign({
             ...contextData.siteDesign,

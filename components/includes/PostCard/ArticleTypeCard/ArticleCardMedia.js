@@ -41,7 +41,8 @@ const ArticleCardMedia = props => {
 
               @media only screen and (min-width: 768px) {
                 .article-card-image {
-                  width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
+                  width: ${props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
+                  
                   height: calc(${props.cardWidth}px / 1.777);
 
                 }

@@ -7,7 +7,6 @@ import CardMetaData from "../asset/CardMetaData/CardMetaData";
 const VideoTypeCard = props => {
 
 
-
     const quality = useMemo(() => {
         return props.post.quality === '2160p' ? '4K' :
             props.post.quality === '1440p' ? '2K' :
@@ -25,25 +24,29 @@ const VideoTypeCard = props => {
         <div className='video-card'>
             <style jsx>{`
               .video-card {
-                width: ${props.postElementSize === 'list' ? '100%' : '47vw'};
-                max-width: ${props.postElementSize === 'list' ? `100%` : `47vw`};
+                width: ${props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
+                max-width: ${props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
                 display: flex;
                 flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                 align-items: center;
                 justify-content: center;
+                background-color: var(--post-element-background-color);
+                margin: 2.8px;
+                font-size: 12px;
+
                 .card-meta {
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                   max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
                   display: flex;
                   flex-wrap: wrap;
                   height: 100%;
+                  margin: 0 2px;
                 }
 
                 .video-card-link {
                   position: relative;
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                   max-width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                 
                   margin: 4px;
                   display: flex;
                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
@@ -58,7 +61,7 @@ const VideoTypeCard = props => {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-                    margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
+
 
                     .video-card-title {
                       text-overflow: ellipsis;
@@ -67,12 +70,13 @@ const VideoTypeCard = props => {
                       -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
                       direction: ${props.dir === 'rtl' ? 'rtl' : 'ltr'};
                       -webkit-box-orient: vertical;
+                      font-weight: initial;
                       white-space: normal;
-                      font-size: 1rem;
-                      margin: 2px 0;
-                      //white-space: nowrap;
+                      font-size: 12px;
+                      margin: 4px 2px;
                       width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                       max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+                      padding: 0 2px;
                     }
 
 
@@ -81,14 +85,16 @@ const VideoTypeCard = props => {
                       justify-content: space-between;
                       align-items: center;
                       flex-wrap: wrap;
-                      margin: 0;
+                      margin: 0 2px;
+
 
                       .video-card-info-data {
-                        width: calc(50% - 4px);
+                        width: calc(50% - 8px);
                         display: flex;
                         padding: 0 2px;
                         align-items: center;
-                        margin: 0;
+                        margin: 2px 0;
+
                         span {
                           margin: 0 2px;
                         }
@@ -105,31 +111,42 @@ const VideoTypeCard = props => {
                       .video-card-rating {
                         justify-content: flex-end;
                         width: calc(50% - 24px);
-                        background: url('/public/asset/images/icons/ico-rating-positive.png') no-repeat right;
-                        padding: 0 20px 0 0 ;
+                        //background: url('/public/asset/images/icons/ico-rating-positive.png') no-repeat right;
+                        //  padding: 0 20px 0 0;
                       }
 
                     }
 
                   }
                 }
-
 
 
               }
-                @media only screen and (min-width: 768px) {
-                  .video-card {
-                   width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-                   max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
-                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-                    .video-card-link {
-                      flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
+
+              @media only screen and (min-width: 768px) {
+                .video-card {
+                  width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+                  max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
+                  flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
+                  margin: 7px;
+                  font-size: 14px;
+
+                  .video-card-link {
+                    flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
+
+                    .video-card-under-media {
+                      margin: 8px;
+
                       .video-card-title {
                         width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `${props.cardWidth}px`};
+                        font-size: 14px;
                       }
                     }
+
+
                   }
                 }
+              }
 
 
             `}</style>
@@ -148,17 +165,17 @@ const VideoTypeCard = props => {
                         {props.post.postType === ('video') ? <p className='video-card-rating video-card-info-data'><span>{props.rating}</span> % </p> : null}
                     </span>
 
-                </span>
+                   </span>
                 </a>
             </Link>
-            {props.postElementSize !== 'list'?
-            <span className='card-meta'>
-                {(metaPreview || []).filter(meta=>meta.name.length > 1).map(meta => {
+            {props.postElementSize !== 'list' ?
+                <span className='card-meta'>
+                {(metaPreview || []).filter(meta => meta.name.length > 1).map(meta => {
                     return (
                         <CardMetaData meta={meta} key={_.uniqueId('meta_')}/>
                     )
                 })}
-            </span>:null
+            </span> : null
             }
         </div>
     );

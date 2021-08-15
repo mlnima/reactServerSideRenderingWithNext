@@ -9,17 +9,13 @@ const CardMetaData = props => {
             <a className='video-card-meta-data' title={props.meta.name}>
                 <style jsx>{`
                   .video-card-meta-data {
-                    height: 20px;
+                    height: 12px;
                     width: auto;
                     color: var(--post-element-text-color);
-                   
-                    padding: 1px 2px 1px 15px;
-                    margin: 2px;
-                    //border: var(--post-element-text-color) .1px solid;
-                    text-align: center;
+                    margin: 4px ;
+                    padding: 2px;
                     border-radius: 5px;
                     align-self: flex-start;
-                    background: url('/public/asset/images/icons/icon-tag.png') no-repeat left;
                   }
                 `}</style>
                 {props.meta.name}</a>

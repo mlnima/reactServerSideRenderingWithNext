@@ -5,19 +5,26 @@ module.exports = async (metas) => {
     let finalData = []
     try{
         for await (let meta of metas) {
-            const metaData = {
-                name: meta.name,
-                type: meta.type,
-                status:'published',
+            if (meta.name && meta.type ){
+                const metaData = {
+                    name: meta.name,
+                    type: meta.type,
+                    status:'draft',
+                }
+
+                const findQuery = {$and:[{name: meta.name},{type: meta.type}]}
+                await metaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
+                    const count = await postSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()
+                    await metaSchema.findOneAndUpdate({name: meta.name}, {$set:{count}}).exec()
+                    finalData = [...finalData, meta._id]
+                })
             }
-            await metaSchema.findOneAndUpdate({name: meta.name}, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
-                const count = await postSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()
-                await metaSchema.findOneAndUpdate({name: meta.name}, {$set:{count}}).exec()
-                finalData = [...finalData, meta._id]
-            })
         }
         return finalData
     }catch (e) {
         console.log('error on saving meta')
     }
 }
+
+
+//findOneAndUpdate({users:{ "$eq" : [senderId,receiverId].sort()}}

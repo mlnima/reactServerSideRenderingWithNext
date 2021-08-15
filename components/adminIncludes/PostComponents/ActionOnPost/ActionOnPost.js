@@ -51,7 +51,7 @@ const ActionOnPost = props => {
 
     const saveBtn = useRef(null)
     const onViewHandler = () => {
-        window.open('/post/' + props.postData.title + '?id=' + props.postData._id, '_blank')
+        window.open(`/post/${props.postData.postType}/${props.postData._id}` , '_blank')
     }
 
     return (

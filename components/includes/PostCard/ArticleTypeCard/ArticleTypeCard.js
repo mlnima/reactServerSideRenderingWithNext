@@ -22,6 +22,9 @@ const ArticleTypeCard = props => {
                 flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                 align-items: center;
                 justify-content: center;
+                background-color: var(--post-element-background-color);
+                margin: 2.8px;
+                font-size: 12px;
 
                 .card-meta {
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
@@ -59,11 +62,13 @@ const ArticleTypeCard = props => {
                       -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
                       -webkit-box-orient: vertical;
                       white-space: normal;
-                      font-size: 1rem;
+                      font-size: 12px;
+                      font-weight: initial;
                       margin: 2px 0;
                       //white-space: nowrap;
                       width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                       max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+                      //margin: 4px 2px;
                     }
 
                     .article-card-under-media-info {
@@ -73,21 +78,19 @@ const ArticleTypeCard = props => {
                       margin: 0;
                       height: 20px;
 
-                      .video-card-info-data {
+                      .article-card-info-data {
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        margin: 0;
+                        margin: 2px 0;
+                        padding: 0 2px;
+
                         span {
                           margin: 0 2px;
                         }
                       }
-                      
-                      .video-card-rating{
-                        background: url('/public/asset/images/icons/ico-rating-positive.png') no-repeat right;
-                        padding: 0 20px 0 0 ;
-                      }
-                      
+
+
                     }
 
                   }
@@ -97,15 +100,21 @@ const ArticleTypeCard = props => {
 
               @media only screen and (min-width: 768px) {
                 .article-card {
-                   width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
+                  width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+                  flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
+                  margin: 7px;
+
                   .article-card-link {
-                   // width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+                      // width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
                     flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
 
-                    .article-card-title {
-                      width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `${props.cardWidth}px`};
+                    .article-card-under-media {
+                      .article-card-title {
+                        width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `${props.cardWidth}px`};
+                        font-size: 14px;
+                      }
                     }
+
                   }
                 }
 
@@ -119,8 +128,8 @@ const ArticleTypeCard = props => {
                     <div className='article-card-under-media'>
                         <h3 className='article-card-title'>{props.title}</h3>
                         <div className='article-card-under-media-info'>
-                            {props.post.postType === ('article') ? <span className='article-card-views video-card-info-data'><span>{props.views}</span> views</span> : null}
-                            {props.post.postType === ('article') ? <span className='video-card-rating video-card-info-data'><span>{props.rating}</span> % </span> : null}
+                            {props.post.postType === ('article') ? <span className='article-card-views article-card-info-data'><span>{props.views}</span> views</span> : null}
+                            {props.post.postType === ('article') ? <span className='article-card-rating article-card-info-data'><span>{props.rating}</span> % </span> : null}
                         </div>
                     </div>
                 </a>
