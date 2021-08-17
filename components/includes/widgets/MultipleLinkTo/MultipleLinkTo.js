@@ -1,16 +1,13 @@
-import {useContext} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {AppContext} from "../../../../context/AppContext";
 import {uniqueId} from "lodash";
 
 const MultipleLinkTo = props => {
-    const contextData = useContext(AppContext);
     const router = useRouter()
 
     const renderLinks = (props.multipleLinks ?? []).sort((a, b) => a.linkIndex - b.linkIndex).map(linkData => {
-        const linkTitle = router?.locale === process?.env?.REACT_APP_DEFAULT_LOCAL ? linkData.linkTitle : linkData.translations?.[router.locale || contextData.state.activeLanguage]?.linkTitle ?? '';
-        const linkDescription = router.locale === process?.env?.REACT_APP_DEFAULT_LOCAL ? linkData?.linkDescription : linkData.translations?.[router.locale || contextData.state.activeLanguage]?.linkDescription ?? '';
+        const linkTitle = linkData.translations?.[router.locale]?.linkTitle || linkData.linkTitle ;
+        const linkDescription = linkData.translations?.[router.locale]?.linkDescription || linkData.linkDescription;
         if (linkData.linkToType === 'internal') {
             return (
                 <li key={uniqueId('id_')} className='multiple-links-widget-item'>
@@ -65,7 +62,3 @@ const MultipleLinkTo = props => {
     );
 };
 export default MultipleLinkTo;
-// display: 'flex',
-//     flexWrap: 'wrap',
-//     alignItems:'center',
-//     justifyContent:'center'
