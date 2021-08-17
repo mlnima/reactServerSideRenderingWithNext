@@ -1,13 +1,6 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-
-
-
-
-
-
-
 const widgetDataSchema =  mongoose.Schema({
     extraClassName: String,
     extraId: String,
@@ -31,6 +24,7 @@ const widgetDataSchema =  mongoose.Schema({
     linkToText: String,
     linkToAs: String,
     linkTo: String,
+    multipleLinks:Array,
     mediaUrl: String,
     mediaType: String,
     widgetIndex: Number,
