@@ -33,6 +33,10 @@ const AdminHomePage = () => {
             {
                 name: 'Custom Colors',
                 pathURL: '/admin/design/customColors',
+            },
+            {
+                name: 'Terminal',
+                pathURL: '/admin/tools/terminal',
             }
         ]
     })
