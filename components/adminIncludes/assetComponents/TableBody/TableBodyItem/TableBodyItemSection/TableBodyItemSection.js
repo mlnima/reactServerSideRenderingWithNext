@@ -1,8 +1,12 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import RenderArraySection from './RenderArraySection'
+import RenderArraySection from './RenderArraySection';
+import moment from "moment";
+
 import styled from "styled-components";
 let StyledDiv = styled.div`
   overflow-wrap: break-word;
+  width: 150px;
+  text-align: center;
   img {
     width: 100%;
   }
@@ -14,7 +18,16 @@ let StyledDiv = styled.div`
       margin: 5px;
       font-size: small;
     }
+    p{
+      overflow:hidden;
+      display:inline-block;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+     
+    }
+
   }
+
 `
 const TableBodyItemSection = props => {
 
@@ -98,6 +111,12 @@ const TableBodyItemSection = props => {
                 <img src={props.dataValue}/>
             </StyledDiv>
         )
+    } else if (props.dataName === 'createdAt'||props.dataName === 'updatedAt') {
+        return (
+            <StyledDiv className='asset-page-table-body-item-section'>
+                <p>{moment(new Date(props.dataValue), "YYYYMMDD").fromNow(false)}</p>
+            </StyledDiv>
+        )
     } else return (
         <StyledDiv className='asset-page-table-body-item-section'>
             <p>{props.dataValue}</p>
@@ -106,3 +125,6 @@ const TableBodyItemSection = props => {
 
 };
 export default TableBodyItemSection;
+
+
+//moment(new Date(this.props.message.createdAt), "YYYYMMDD").fromNow(false)

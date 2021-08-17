@@ -68,13 +68,11 @@ let StyledDiv = styled.div`
 
     .SideBarItemElementSubItems {
       background-color: #181818;
-
+      
       .SideBarItem-SubItem {
         color: white;
-        padding: 0 20px;
+        padding: 10px 0 10px 20px;
         display: block;
-        //transition: .5s;
-
         &:hover {
           font-weight: bold;
         }

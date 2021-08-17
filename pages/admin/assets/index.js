@@ -41,7 +41,7 @@ const assets = props => {
             size: router.query.size ? parseInt(router.query.size)    : 30,
             page: router.query.page ? parseInt(router.query.page) : 1,
             postType: router?.query?.type ?? null,
-            fields: ['title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail'],
+            fields: ['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt'],
             keyword: router?.query?.keyword ?? '',
             author: router?.query?.author ?? 'all',
             status: router?.query?.status ?? 'all',
@@ -56,6 +56,7 @@ const assets = props => {
         switch (router.query.assetsType) {
             case 'posts':
                 ajaxRequestData = await getPosts(getFirstDataOption, window.location.origin, false)
+                console.log(ajaxRequestData)
                 break
             case 'users':
                 ajaxRequestData = await getUsersListAsAdmin(getFirstDataOption, localStorage.wt)

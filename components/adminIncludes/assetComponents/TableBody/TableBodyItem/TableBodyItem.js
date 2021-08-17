@@ -2,16 +2,24 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import TableBodyItemSection from './TableBodyItemSection/TableBodyItemSection'
 import TableBodyItemOnHover from './TableBodyItemOnHover/TableBodyItemOnHover'
 import styled from "styled-components";
+
 let StyledDiv = styled.div`
   .asset-page-table-body-item-content {
     padding: 10px;
     border: .2px solid rgba(0, 0, 0, .1);
     border-bottom: none;
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    grid-gap: 10px;
+    //display: grid;
+    //grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    //grid-gap: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 12px;
+    .asset-page-table-body-item-content-select{
+      
+    }
   }
-  
+
   .asset-page-table-body-item-hover-item {
     font-size: 13px !important;
     display: flex;
@@ -20,7 +28,7 @@ let StyledDiv = styled.div`
     border: .2px solid rgba(0, 0, 0, .1);
     border-top: none;
 
-    button,a{
+    button, a {
       text-decoration: none;
       border: none;
       color: var(--admin-light-blue-color);
@@ -33,19 +41,24 @@ let StyledDiv = styled.div`
       align-items: center;
       justify-content: center;
     }
+
     button {
-      cursor: pointer ;
+      cursor: pointer;
     }
   }
-    &:nth-child(even) {
-      background-color: #fff;
-    }
-    .asset-page-table-body-item-hover-item{
+
+  &:nth-child(even) {
+    background-color: #fff;
+  }
+
+  .asset-page-table-body-item-hover-item {
     display: flex;
     align-items: center;
     width: 310px;
-    }
+  }
 `;
+
+
 const TableBodyItem = props => {
     const [state, setState] = useState({
         properties: [],
@@ -54,43 +67,43 @@ const TableBodyItem = props => {
 
     useEffect(() => {
         if (props.assetsType === 'posts') {
-            let properties = ['title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail']
+            let properties = ['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt']
             setState({
                 ...state,
                 properties,
             })
         } else if (props.assetsType === 'users') {
-            let properties = ['username', 'email', 'role', 'createdAt']
+            let properties = ['username', 'email', 'role', 'createdAt', 'updatedAt']
             setState({
                 ...state,
                 properties,
             })
         } else if (props.assetsType === 'comments') {
-            let properties = ['author', 'body', 'onDocument', 'email']
+            let properties = ['author', 'body', 'onDocument', 'email', 'createdAt', 'updatedAt']
             setState({
                 ...state,
                 properties,
             })
         } else if (props.assetsType === 'metas') {
-            let properties = ['name', 'description', 'type', 'count', 'noImageUrl', 'ImageUrl']
+            let properties = ['name', 'description', 'type', 'count',  'ImageUrl', 'createdAt', 'updatedAt']
             setState({
                 ...state,
                 properties,
             })
         } else if (props.assetsType === 'forms') {
-            let properties = ['formName', 'date','widgetId']
+            let properties = ['formName', 'widgetId', 'createdAt', 'updatedAt']
             setState({
                 ...state,
                 properties,
             })
         } else if (props.assetsType === 'pages') {
-            let properties = [ 'pageName', 'status','sidebar' ]
+            let properties = ['pageName', 'status', 'sidebar', 'createdAt', 'updatedAt']
             setState({
                 ...state,
                 properties,
             })
         } else if (props.assetsType === 'orders') {
-            let properties = [ 'buyer', 'status','type','isPaid' ]
+            let properties = ['buyer', 'status', 'type', 'isPaid', 'createdAt', 'updatedAt']
             setState({
                 ...state,
                 properties,
@@ -125,11 +138,11 @@ const TableBodyItem = props => {
     })
 
     return (
-<>
+        <>
             <StyledDiv className='asset-page-table-body-item' onMouseOver={() => onMouseEnterHandler()}
-                 onMouseLeave={() => onMouseOutHandler()}>
+                       onMouseLeave={() => onMouseOutHandler()}>
                 <div className='asset-page-table-body-item-content'>
-                    <input type='checkbox' checked={props.selectedItems.includes(props.data._id)}
+                    <input className='asset-page-table-body-item-content-select' type='checkbox' checked={props.selectedItems.includes(props.data._id)}
                            onChange={e => onSelectChangeHandler(e)}/>
                     {renderProperties}
                 </div>
@@ -139,7 +152,7 @@ const TableBodyItem = props => {
                                       title={props.data.title}
                 />
             </StyledDiv>
-</>
+        </>
 
     );
 };

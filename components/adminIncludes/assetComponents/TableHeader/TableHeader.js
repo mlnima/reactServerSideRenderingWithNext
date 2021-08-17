@@ -8,15 +8,19 @@ let StyledDiv = styled.div`
   margin: 5px 0 0 0;
   border: .2px solid rgba(0,0,0,.1);
   font-size: 13px;
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-  grid-gap: 10px;
+  //display: grid;
+  //grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  //grid-gap: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   .asset-page-table-header-item{
     margin: 5px 0;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
+    width: 150px;
+    text-align: center;
   }
 `;
 
@@ -30,43 +34,43 @@ const TableHeader = props => {
 
     useEffect(() => {
         if (router.query.assetsType === 'posts') {
-            let items = [ 'title', 'author', 'status', 'tags', 'categories', 'lastModify', 'mainThumbnail' ]
+            let items = [ 'title', 'author', 'status', 'tags', 'categories',  'mainThumbnail', 'createdAt', 'updatedAt' ]
             setState({
                 ...state,
                 items,
             })
         } else if (router.query.assetsType === 'users') {
-            let items = [ 'username', 'email', 'role', 'createdAt' ]
+            let items = [ 'username', 'email', 'role',  'createdAt', 'updatedAt' ]
             setState({
                 ...state,
                 items,
             })
         } else if (router.query.assetsType === 'comments') {
-            let items = [ 'author', 'body', 'onDocument', 'email' ]
+            let items = [ 'author', 'body', 'onDocument', 'email', 'createdAt', 'updatedAt' ]
             setState({
                 ...state,
                 items,
             })
         } else if (router.query.assetsType === 'metas') {
-            let items = [ 'name', 'description', 'type','count','image' ]
+            let items = [ 'name', 'description', 'type','count','image', 'createdAt', 'updatedAt' ]
             setState({
                 ...state,
                 items,
             })
         } else if (router.query.assetsType === 'forms') {
-            let items = [ 'formName', 'createdDate','formWidgetId' ]
+            let items = [ 'formName','widgetId', 'createdAt', 'updatedAt' ]
             setState({
                 ...state,
                 items,
             })
         } else if (router.query.assetsType === 'pages') {
-            let items = [ 'pageName', 'status','sidebar' ]
+            let items = [ 'pageName', 'status','sidebar', 'createdAt', 'updatedAt' ]
             setState({
                 ...state,
                 items,
             })
         } else if (router.query.assetsType === 'orders') {
-            let items = [ 'buyer', 'status','type','isPaid' ]
+            let items = [ 'buyer', 'status','type','isPaid', 'createdAt', 'updatedAt' ]
             setState({
                 ...state,
                 items,

@@ -1,9 +1,10 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import AdminLayout from "../../../components/layouts/AdminLayout";
-import {getSingleMeta, updateMeta} from "../../../_variables/ajaxPostsVariables";
+import {deleteMeta, getSingleMeta, updateMeta} from "../../../_variables/ajaxPostsVariables";
 import {getAbsolutePath} from "../../../_variables/_variables";
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";
 import styled from "styled-components";
+import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
   .single-meta-page-section {
@@ -28,12 +29,23 @@ let StyledDiv = styled.div`
       }
     }
   }
+  .action-buttons{
+    display: flex; 
+    justify-content: space-between;
+    align-items: center;
+    .red-action-btn-link{
+      background-color: red;
+      border: none;
+      padding: 10px 30px;
+    }
+  }
+
 
 
 `
 
 const meta = props => {
-
+  const router = useRouter()
     const [metaData, setMetaData] = useState({
         translations: {}
     });
@@ -155,7 +167,11 @@ const meta = props => {
                                 metaData.translations[editingData.activeEditingLanguage].description || '' : '' : ''
                 }/>
             </div>
-            <button className='green-action-btn-link' onClick={() => updateMetaData()}>Update</button>
+            <div className='action-buttons'>
+                <button className='green-action-btn-link' onClick={() => updateMetaData()}>Update</button>
+                <button className=' red-action-btn-link' onClick={() => deleteMeta(metaData._id, process.env.REACT_APP_PRODUCTION_URL).then(()=>router.back())}>delete</button>
+            </div>
+
 
 
         </StyledDiv>
@@ -163,28 +179,6 @@ const meta = props => {
     );
 };
 
-// meta.getInitialProps = async ({query, req}) => {
-//     const domainName = req ? await getAbsolutePath(req) : '';
-//     let metaInfo = {}
-//     let settings;
-//     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
-//     settings = settingsData.data.settings ? settingsData.data.settings : []
-//     if (query.new && query.metaType) {
-//         metaInfo = {
-//             name: '',
-//             type: query.metaType,
-//             description: '',
-//             imageUrl: '',
-//             translations: {},
-//             count: 0,
-//             lang: query.lang || 'default'
-//         }
-//     } else if (query.id) {
-//         let metaInfoFetchedData = await getSingleMeta(query.id, domainName, false)
-//         metaInfo = metaInfoFetchedData.data ? metaInfoFetchedData.data : {}
-//     }
-//     return {metaInfo, query, ...settings}
-// }
 
 export const getServerSideProps = async ({req, query}) => {
     const domainName = req ? await getAbsolutePath(req) : '';

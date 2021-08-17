@@ -149,7 +149,8 @@ export const getFormData = async (data, domainName) => {
 //pages
 export const saveNewPage = async (data) => {
     const body = {
-        ...data
+        ...data,
+        token: localStorage.wt
     }
     return await axios.post(window.location.origin + '/api/admin/pages/createNewPage', body)
 }
