@@ -18,6 +18,7 @@ const MediaWidgetType = props => {
                     <option value='audio'>Audio</option>
                     <option value='iframe'>Iframe</option>
                 </select>
+
             </>
         );
     }else return null
@@ -25,3 +26,18 @@ const MediaWidgetType = props => {
 
 };
 export default MediaWidgetType;
+
+
+// {props.widgetData.mediaType === 'video'?
+//     <>
+//         <select name='mediaType' value={props.widgetData.mediaType }
+//                 onChange={e => props.onChangeHandler(e)}>
+//             <option >Select Media Type</option>
+//             <option value='video'>Video</option>
+//             <option value='image'>Image</option>
+//             <option value='document'>Document</option>
+//             <option value='audio'>Audio</option>
+//             <option value='iframe'>Iframe</option>
+//         </select>
+//     </>
+//     :null}

@@ -1,6 +1,7 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState , useRef} from 'react';
 import loadable from '@loadable/component';
 const MediaDocumentWidget = loadable(() => import('./MediaDocumentWidget/MediaDocumentWidget'))
+
 import styled from "styled-components";
 let StyledDiv = styled.div`
   max-width: 100vw;
@@ -81,9 +82,9 @@ const MediaWidget = props => {
                     )
                 case 'video':
                     return (
-                        <>
-                            <video className='media-element' src={props.mediaUrl} controls/>
-                        </>
+
+                            <video className='media-element' src={props.mediaUrl} controls={false} loop={true} muted={true} autoPlay={true}/>
+
                     )
                 // case 'document':
                 //     return (
