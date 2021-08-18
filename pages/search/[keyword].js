@@ -6,6 +6,7 @@ import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {useRouter} from "next/router";
+import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -16,6 +17,10 @@ let StyledMain = styled.main`
       padding: 0 10px;
     }
   }
+  .no-result-message{
+    text-align: center;
+    color:var( --main-text-color);
+  }
   ${props => props.stylesData}
 `
 const searchPage = props => {
@@ -23,14 +28,38 @@ const searchPage = props => {
     const router = useRouter()
     return (
         <StyledMain className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
+            <WidgetsRenderer
+                isMobile={props.isMobile}
+                widgets={props.widgets.filter(w=>w.data.position === 'searchPageTop' )}
+                position={'searchPageTop'}
+                referer={props.referer}
+                currentPageSidebar={props.identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
+                postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+
+                postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
+            />
             {router.query.keyword  ? <PostsPageInfo titleToRender={router.query.keyword}/> : null}
-            <PostsPage {...props}/>
+            {props.postsSource.posts.length < 1 ? <h2 className='no-result-message'>No Result for {router.query.keyword}</h2>: null}
+            <PostsPage {...props}       postElementSize='list'/>
+            <WidgetsRenderer
+                isMobile={props.isMobile}
+                widgets={props.widgets.filter(w=>w.data.position === 'searchPageBottom' )}
+                position={'searchPageBottom'}
+                referer={props.referer}
+                currentPageSidebar={props.identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
+                postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                postElementImageLoader={props.design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
+                postElementImageLoaderType={props.design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
+            />
         </StyledMain>
     )
 };
 
 export const getServerSideProps = async ({req, query}) => {
-    const firstLoadData = await getFirstLoadData(req,['postsPageLeftSidebar', 'postsPageRightSidebar'],'postsPage')
+    const firstLoadData = await getFirstLoadData(req,['searchPageTop','searchPageLeftSidebar','searchPageBottom','searchPageRightSidebar',],'postsPage')
     const getPostsData = {
         size: parseInt(query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
         page: parseInt(query?.page) || 1,

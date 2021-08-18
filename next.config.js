@@ -44,6 +44,7 @@ const reWriteRoutes = {
             {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
             {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/post'},
             //auth pages
+
             {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
             {source: `/login`, destination: '/auth/login'},
 

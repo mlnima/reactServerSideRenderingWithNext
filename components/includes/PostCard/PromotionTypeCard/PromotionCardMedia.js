@@ -29,7 +29,7 @@ const PromotionCardMedia = props => {
     }
 
     return (
-        <React.Fragment>
+        <div className='promotion-card-media'>
             <style jsx>{`
               .promotion-card-image {
                 width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
@@ -50,7 +50,7 @@ const PromotionCardMedia = props => {
                  onError={e => {
                      onErrorHandler(e)
                  }}/>
-        </React.Fragment>
+        </div>
     );
 };
 export default PromotionCardMedia;

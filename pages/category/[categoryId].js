@@ -51,7 +51,7 @@ const categoryPage = props => {
 };
 
 export const getServerSideProps = async ({req, query}) => {
-    const firstLoadData = await getFirstLoadData(req,['categoryPageTop','categoryLeftSidebar','categoryBottom','categoryRightSidebar',],'postsPage')
+    const firstLoadData = await getFirstLoadData(req,['categoryPageTop','categoryPageLeftSidebar','categoryPageBottom','categoryPageRightSidebar'],'postsPage')
     const getPostsData = {
         size: parseInt(query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 30,
         page: parseInt(query?.page) || 1,

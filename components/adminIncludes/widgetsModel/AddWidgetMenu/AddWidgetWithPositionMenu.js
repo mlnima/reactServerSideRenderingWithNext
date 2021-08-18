@@ -81,14 +81,19 @@ const AddWidgetWithPositionMenu = props => {
         'tagPageRightSidebar',
 
         'categoryPageTop',
-        'categoryLeftSidebar',
-        'categoryBottom',
-        'categoryRightSidebar',
+        'categoryPageLeftSidebar',
+        'categoryPageBottom',
+        'categoryPageRightSidebar',
 
         'actorPageTop',
         'actorPageLeftSidebar',
         'actorPageBottom',
         'actorPageRightSidebar',
+
+        'searchPageTop',
+        'searchPageLeftSidebar',
+        'searchPageBottom',
+        'searchPageRightSidebar',
 
         'footer',
 

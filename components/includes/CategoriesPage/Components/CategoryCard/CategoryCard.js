@@ -27,7 +27,7 @@ const CategoryCard = ({cardWidth, category}) => {
                       overflow: hidden;
                       -webkit-box-orient: vertical;
                       -webkit-line-clamp: 1;
-                      font-weight: initial;
+                      font-weight: normal;
                        font-size: 12px;
                       
                     }

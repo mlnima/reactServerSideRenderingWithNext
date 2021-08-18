@@ -66,6 +66,7 @@ const SiteSettingSetter = props => {
             <link rel="shortcut icon" href={props?.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link rel="apple-touch-icon" href={props?.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link rel="manifest" href="/manifest.json"/>
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&amp;display=swap" rel="stylesheet"/>
             {props.identity?.data?.customScriptsAsString ? parse(props?.identity?.data?.customScriptsAsString) : null}
             {props?.identity?.data?.siteMode === 'eCommerce' || contextData?.siteIdentity?.siteMode === 'eCommerce' ?
                 <script src={`https://www.paypal.com/sdk/js?client-id=${props?.eCommerce?.data?.payPalId}&currency=${props?.eCommerce?.data?.currency}`}/>

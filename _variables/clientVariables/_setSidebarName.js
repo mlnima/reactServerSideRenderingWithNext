@@ -15,5 +15,6 @@ module.exports = (pathname, pageName, direction) => {
                                                     pathname.includes('/messenger') ? `messengerPage${direction}Sidebar` :
                                                         pathname.includes('/user/') ? `userPage${direction}Sidebar` :
                                                             pathname === '/page/[pageName]' ? pageName + direction + `Sidebar` :
+                                                                pathname === '/search/[keyword]' ? `searchPage${direction}Sidebar` :
                                                                 `homePage${direction}Sidebar`
 }

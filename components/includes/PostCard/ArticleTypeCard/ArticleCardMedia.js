@@ -32,7 +32,7 @@ const ArticleCardMedia = props => {
 
 
     return (
-        <React.Fragment>
+        <div className='article-card-media'>
             <style jsx>{`
               .article-card-image {
                 width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
@@ -54,7 +54,7 @@ const ArticleCardMedia = props => {
                  onError={e => {
                      onErrorHandler(e)
                  }}/>
-        </React.Fragment>
+        </div>
     );
 };
 export default ArticleCardMedia;

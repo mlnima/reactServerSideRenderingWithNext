@@ -14,6 +14,8 @@ const MenuWidgetItemLink = ({linkTargetType, linkType, linkTargetUrl, linkAs, li
               .menu-widget-item-link {
                 color: var(--navigation-text-color);
                 text-decoration: none;
+                font-weight: normal;
+                font-size: 14px;
               }
             `}</style>
             {linkTargetType === 'internal' ?

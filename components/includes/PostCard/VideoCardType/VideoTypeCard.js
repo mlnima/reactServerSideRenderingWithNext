@@ -138,8 +138,9 @@ const VideoTypeCard = props => {
                       margin: 8px;
 
                       .video-card-title {
-                        width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `${props.cardWidth}px`};
+                        width: ${props.postElementSize === 'list' ? `100%`  : `${props.cardWidth}px`};
                         font-size: 14px;
+                       
                       }
                     }
 

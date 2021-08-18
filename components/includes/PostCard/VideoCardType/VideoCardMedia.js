@@ -30,6 +30,7 @@ const VideoCardMedia = props => {
 
     if (props.post.VideoTrailerUrl && hover) {
         return (
+            <div className='video-card-media'>
             <video
                 onMouseOver={event => event.target.play()}
                 //onMouseOut={event => event.target.pause()}
@@ -51,7 +52,7 @@ const VideoCardMedia = props => {
 
                   .video-card-trailer {
                     width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
-                    height: calc(48vw / 1.777);
+                    height: ${props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
                     animation: opacityAnimationStart 2s alternate;
                   }
 
@@ -65,14 +66,16 @@ const VideoCardMedia = props => {
                 <source src={props.post.VideoTrailerUrl}/>
                 Sorry, your browser doesn't support embedded videos.
             </video>
+            </div>
         )
     } else {
         return (
-            <React.Fragment>
+            <div className='video-card-media'>
                 <style jsx>{`
                   .video-card-image {
                     width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
-                    height: calc(50vw / 1.777);
+                   // height: calc(50vw / 1.777);
+                     height: ${props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
                   }
 
                   @media only screen and (min-width: 768px) {
@@ -88,7 +91,7 @@ const VideoCardMedia = props => {
                      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
                      onError={onErrorHandler}/>
-            </React.Fragment>
+            </div>
         )
     }
 };

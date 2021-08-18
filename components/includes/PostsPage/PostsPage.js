@@ -39,7 +39,7 @@ const PostsPage = props => {
             <div className='posts-container'>
                 <Posts
                     posts={props.postsSource.posts || []}
-                    postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    postElementSize={props.postElementSize || props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
                     postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
                     postElementImageLoader={props.design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader}
                     postElementImageLoaderType={props.design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader}
