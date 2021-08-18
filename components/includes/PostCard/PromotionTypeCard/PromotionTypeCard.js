@@ -95,6 +95,7 @@ const PromotionTypeCard = props => {
               @media only screen and (min-width: 768px) {
                 .promotion-card {
                   width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+                   max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                    margin: 7px;
                   .promotion-card-under-media {

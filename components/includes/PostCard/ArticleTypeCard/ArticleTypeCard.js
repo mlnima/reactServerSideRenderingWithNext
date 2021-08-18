@@ -101,7 +101,9 @@ const ArticleTypeCard = props => {
               @media only screen and (min-width: 768px) {
                 .article-card {
                   width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+                   max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
+                  
                   margin: 7px;
 
                   .article-card-link {
@@ -110,7 +112,8 @@ const ArticleTypeCard = props => {
 
                     .article-card-under-media {
                       .article-card-title {
-                        width: ${props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `${props.cardWidth}px`};
+                      
+                         width: ${props.postElementSize === 'list' ? `100%`  : `${props.cardWidth}px`};
                         font-size: 14px;
                       }
                     }
