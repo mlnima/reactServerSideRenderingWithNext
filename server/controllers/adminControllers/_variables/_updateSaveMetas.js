@@ -9,7 +9,7 @@ module.exports = async (metas) => {
                 const metaData = {
                     name: meta.name,
                     type: meta.type,
-                    status:'draft',
+                    status:'published',
                 }
 
                 const findQuery = {$and:[{name: meta.name},{type: meta.type}]}
