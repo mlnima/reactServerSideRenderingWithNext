@@ -19,9 +19,9 @@ module.exports = async (req, res) => {
     let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random' ? {lastModify: -1} : {[req.body.sort]: -1}
 
     const populateMeta = [
-        {path:'actors',select:{'name':1,'type':1},options:{limit: 3}},
-        {path:'categories',select:{'name':1,'type':1},options:{limit: 3}},
-        {path:'tags',select:{'name':1,'type':1},options:{limit: 3}}
+        {path:'actors',select:{'name':1,'type':1},options:{limit: 2}},
+        {path:'categories',select:{'name':1,'type':1},options:{limit: 4}},
+        {path:'tags',select:{'name':1,'type':1},options:{limit: 4}}
     ]
 
     let posts = req.body.sort === 'random' ?

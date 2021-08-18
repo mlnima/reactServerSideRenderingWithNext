@@ -171,7 +171,7 @@ const VideoTypeCard = props => {
             </Link>
             {props.postElementSize !== 'list' ?
                 <span className='card-meta'>
-                {(metaPreview || []).filter(meta => meta.name.length > 1).map(meta => {
+                {(metaPreview || []).filter(meta => meta?.name?.length > 1).map(meta => {
                     return (
                         <CardMetaData meta={meta} key={_.uniqueId('meta_')}/>
                     )
