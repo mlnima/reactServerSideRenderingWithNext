@@ -42,9 +42,7 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
         view: 0
     })
 
-    useEffect(() => {
-        console.log(ratingAndViewData)
-    }, [ratingAndViewData]);
+
 
     const [commentsData, setCommentsData] = useState(() => {
         return comments

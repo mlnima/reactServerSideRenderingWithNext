@@ -18,7 +18,10 @@ const VideoTypeCard = props => {
                                     props.post.quality
     }, [])
 
-    const metaPreview = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
+    const metaPreviewData = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
+    const metaPreview = _.uniqBy(metaPreviewData, function (e) {
+        return e.name;
+    })
 
     return (
         <div className='video-card'>

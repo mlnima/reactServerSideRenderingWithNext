@@ -11,7 +11,9 @@ const ArticleTypeCard = props => {
 
 
     const metaPreviewData = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
-    const metaPreview = [...new Set((metaPreviewData || []).map(item => item.name))]
+    const metaPreview = _.uniqBy(metaPreviewData, function (e) {
+        return e.name;
+    })
 
 
     return (
@@ -139,8 +141,10 @@ const ArticleTypeCard = props => {
                 </a>
             </Link>
             {props.postElementSize !== 'list' ?
+
                 <span className='card-meta'>
                 {(metaPreview || []).filter(meta => meta?.name?.length > 1).map(meta => {
+
                     return (
                         <CardMetaData meta={meta} key={_.uniqueId('meta_')}/>
                     )
