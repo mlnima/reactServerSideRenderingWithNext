@@ -12,9 +12,9 @@ const TagsRenderer = ({postElementSize,metaData, tags}) => {
         <div className='tags-content'>
             <style jsx>{`
               .tags-content {
-                margin: 0 auto;
                 display: flex;
-                flex-flow: row wrap;
+                flex-wrap: wrap;
+                justify-content: center;
               }
             `}</style>
             {

@@ -1,7 +1,7 @@
 import CategoryCard from "../CategoryCard/CategoryCard";
 import _ from "lodash";
 
-const CategoriesRenderer = ({postElementSize,metaData, categories}) => {
+const CategoriesRenderer = ({postElementSize, metaData, categories}) => {
 
 
     const cardWidth = postElementSize === 'list' ? 116.6 :
@@ -14,9 +14,9 @@ const CategoriesRenderer = ({postElementSize,metaData, categories}) => {
         <div className='categories-content'>
             <style jsx>{`
               .categories-content {
-                margin: 0 auto;
                 display: flex;
-                flex-flow: row wrap;
+                flex-wrap: wrap;
+                justify-content: center;
               }
             `}</style>
             {

@@ -21,7 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_updateSaveMetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_updateSaveMetas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorsRenderer/ActorsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorsRenderer/ActorsRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagsRenderer/TagsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagsRenderer/TagsRenderer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -748,7 +750,7 @@
       <workItem from="1629196535136" duration="1207000" />
       <workItem from="1629218034477" duration="7313000" />
       <workItem from="1629283194777" duration="445000" />
-      <workItem from="1629292159391" duration="891000" />
+      <workItem from="1629292159391" duration="1473000" />
     </task>
     <servers />
   </component>

@@ -11,9 +11,9 @@ const ActorsRenderer = ({postElementSize, metaData, actors}) => {
         <div className='actors-content'>
             <style jsx>{`
               .actors-content {
-                margin: 0 auto;
                 display: flex;
-                flex-flow: row wrap;
+                flex-wrap: wrap;
+                justify-content: center;
               }
             `}</style>
             {
