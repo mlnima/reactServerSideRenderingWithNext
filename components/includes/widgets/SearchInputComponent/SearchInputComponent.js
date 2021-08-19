@@ -31,11 +31,6 @@ const SearchInputComponent = props => {
                 }
             })
         }
-        // else if (state.keyword.length === 0){
-        //     router.push({
-        //         pathname: `/search/`,
-        //     })
-        // }
     }
 
 

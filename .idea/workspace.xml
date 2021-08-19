@@ -21,10 +21,10 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/GlobalStyles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -752,7 +752,7 @@
       <workItem from="1629218034477" duration="7313000" />
       <workItem from="1629283194777" duration="445000" />
       <workItem from="1629292159391" duration="1473000" />
-      <workItem from="1629320645483" duration="6459000" />
+      <workItem from="1629320645483" duration="11829000" />
     </task>
     <servers />
   </component>

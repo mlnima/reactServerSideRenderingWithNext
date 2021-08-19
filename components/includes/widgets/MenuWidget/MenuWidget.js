@@ -58,20 +58,22 @@ const MenuWidget = props => {
 
                 .menu-widget-items {
                   background-color: var(--navigation-background-color);
-                  position: fixed;
                   top: 0;
                   left: 0;
                   bottom: 0;
                   width: 100%;
                   max-width: 50vw;
                   z-index: 1000;
-                  display: none;
                   flex-direction: column;
                   justify-content: flex-start;
                   padding: 0;
                   align-items: center;
                   margin: 0;
-
+                  transition: all 0.5s ease 0s;
+                  position: fixed;
+                  ${ open ?`animation: navigationMobileSlide .3s linear alternate;`: `animation: none;` }
+                  display: ${open ? 'flex' : 'none'};
+                  
                   .navigation-close-button {
                     align-self: flex-end;
                     display: flex;
@@ -95,6 +97,9 @@ const MenuWidget = props => {
                 margin: 0;
                 transition: all .5s linear;
                 color: var(--navigation-text-color);
+                width: 24px;
+                height: 24px;
+                padding: 0;
               }
 
               @media only screen and (min-width: 768px) {
@@ -129,7 +134,7 @@ const MenuWidget = props => {
                 <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faBars} className='navigation-mobile-button-logo'/>
             </ul>
 
-            <ul className='menu-widget-items' ref={menuItemsElement} style={{display: open ? 'flex' : 'none'}}>
+            <ul className='menu-widget-items' ref={menuItemsElement}>
                 <li onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
                     <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faTimes} className='navigation-mobile-button-logo'/>
                 </li>
