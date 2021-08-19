@@ -40,10 +40,13 @@ const VideoTypeCard = props => {
                 .card-meta {
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                   max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-                  display: flex;
-                  flex-wrap: wrap;
-                  height: 100%;
+                  box-sizing: border-box;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  height: 20px;
                   margin: 0 2px;
+                  padding: 5px 0;
                 }
 
                 .video-card-link {
@@ -64,7 +67,7 @@ const VideoTypeCard = props => {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-
+margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
 
                     .video-card-title {
                       text-overflow: ellipsis;
@@ -141,9 +144,9 @@ const VideoTypeCard = props => {
                       margin: 8px;
 
                       .video-card-title {
-                        width: ${props.postElementSize === 'list' ? `100%`  : `${props.cardWidth}px`};
+                        width: ${props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
                         font-size: 14px;
-                       
+
                       }
                     }
 
@@ -181,6 +184,7 @@ const VideoTypeCard = props => {
                 })}
             </span> : null
             }
+
         </div>
     );
 };

@@ -20,7 +20,8 @@ const ArticleTypeCard = props => {
         <div className='article-card'>
             <style jsx>{`
               .article-card {
-                width: ${props.postElementSize === 'list' ? '100%' : '47vw'};
+                width: ${props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
+                max-width: ${props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
                 display: flex;
                 flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
                 align-items: center;
@@ -32,15 +33,19 @@ const ArticleTypeCard = props => {
                 .card-meta {
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                   max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-                  display: flex;
-                  flex-wrap: wrap;
-                  height: 100%;
+                  box-sizing: border-box;
+                  white-space: nowrap;
+                  overflow: hidden;
+                  text-overflow: ellipsis;
+                  height: 20px;
+                  margin: 0 2px;
+                  padding: 5px 0;
                 }
 
                 .article-card-link {
                   position: relative;
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                  max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+                  max-width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                   margin: 4px;
                   display: flex;
                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
@@ -63,6 +68,7 @@ const ArticleTypeCard = props => {
                       overflow: hidden;
                       display: -webkit-box !important;
                       -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
+                      direction: ${props.dir === 'rtl' ? 'rtl' : 'ltr'};
                       -webkit-box-orient: vertical;
                       white-space: normal;
                       font-size: 12px;
@@ -78,6 +84,7 @@ const ArticleTypeCard = props => {
                       display: flex;
                       justify-content: space-between;
                       align-items: center;
+                      flex-wrap: wrap;
                       margin: 0;
                       height: 20px;
 
@@ -151,6 +158,7 @@ const ArticleTypeCard = props => {
                 })}
             </span> : null
             }
+
         </div>
 
     );

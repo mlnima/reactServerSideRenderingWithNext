@@ -6,38 +6,46 @@ import {AppContext} from '../../../../context/AppContext'
 import {convertVariableNameToName, getAbsolutePath, languagesOptions} from '../../../../_variables/_variables'
 import styled from "styled-components";
 import _ from "lodash";
+import {useRouter} from "next/router";
 
 let StyledForm = styled.form`
   background-color: white;
   padding: 20px;
-    button {
-      background-color: #f1f1f1;
-      color: black;
-      outline: none;
-      border: .4px #9fa3a8 solid;
-      padding: 8px 10px;
-      border-radius: 5px;
-      &:active{
-        background-color: white;
-        border:none;
-      }
+
+  button {
+    background-color: #f1f1f1;
+    color: black;
+    outline: none;
+    border: .4px #9fa3a8 solid;
+    padding: 8px 10px;
+    border-radius: 5px;
+
+    &:active {
+      background-color: white;
+      border: none;
+    }
+
     margin: 20px;
   }
-    .keywords {
+
+  .keywords {
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
     align-items: flex-start;
   }
-  .site-settings-form-section-parent{
-      display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
-      grid-gap: 10px;
+
+  .site-settings-form-section-parent {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+    grid-gap: 10px;
+
     .site-settings-form-section {
       background-color: #33373c;
       border-radius: 10px;
       color: white;
       padding: 10px;
+
       input {
         background-color: white;
         margin: 10px;
@@ -67,16 +75,17 @@ let StyledForm = styled.form`
         }
       }
     }
-    
-    .checkbox-section{
-    //display: flex;
-    
+
+    .checkbox-section {
+      //display: flex;
+
     }
 
-    .siteMode{
+    .siteMode {
       background-color: red;
     }
-    .language{
+
+    .language {
       display: flex;
       align-items: center;
       justify-content: space-between;
@@ -85,19 +94,21 @@ let StyledForm = styled.form`
   }
 
 `
+
+
 const settings = props => {
     const contextData = useContext(AppContext);
     const keywordsInput = useRef(null)
+
     const [editingSettings, setEditingSettings] = useState({
         activeEditingLanguage: 'default'
     })
     const [state, setState] = useState({
-        translationLanguages: [],
         keywords: [],
         translations: {}
     });
 
-    const [sidebars,setSidebars]= useState([
+    const [sidebars, setSidebars] = useState([
         'homePageSidebar',
         'postPageSidebar',
         'postsPageSidebar',
@@ -111,10 +122,8 @@ const settings = props => {
         'actorPageSidebar',
         'searchPageSidebar',
     ])
-
-
-    const renderSidebarOptions = sidebars.map(sidebar=>{
-        return(
+    const renderSidebarOptions = sidebars.map(sidebar => {
+        return (
             <div className="site-settings-form-section" key={_.uniqueId('sidebar_')}>
                 <p>{convertVariableNameToName(sidebar)}:</p>
                 <select name={sidebar} value={state[sidebar]} onChange={e => onChangeHandler(e)}>
@@ -128,27 +137,23 @@ const settings = props => {
         )
     })
 
-
-
     useEffect(() => {
         setState({
             ...state,
             ...props.identity
 
         })
-         getSetting('identity', process.env.REACT_APP_PRODUCTION_URL, false).then(res=>{
+        getSetting('identity', process.env.REACT_APP_PRODUCTION_URL, false).then(res => {
 
-             setState({
-                 ...state,
-                 ...res.data.setting ? res.data.setting.data : {}
+            setState({
+                ...state,
+                ...res.data.setting ? res.data.setting.data : {}
 
-             })
-         })
+            })
+        })
 
 
     }, []);
-
-
 
     const onChangeLanguageHandler = e => {
         setEditingSettings({
@@ -171,17 +176,16 @@ const settings = props => {
         })
     };
 
-    const checkboxChangeHandler = e=>{
+    const checkboxChangeHandler = e => {
         setState({
             ...state,
             [e.target.name]: e.target.checked
         })
     }
 
-
     const onChangeHandler = e => {
         const finalValue = e.target.value === 'true' ? true :
-                 e.target.value === 'false' ? false :
+            e.target.value === 'false' ? false :
                 e.target.value
         setState({
             ...state,
@@ -197,21 +201,56 @@ const settings = props => {
         })
     };
     const addKeyword = () => {
-        if (keywordsInput.current.value.includes(',')) {
-            let newItems = keywordsInput.current.value.split(',');
-            setState(state => ({
-                ...state,
-                keywords: [...state.keywords, ...newItems]
-            }))
+        if (editingSettings.activeEditingLanguage === 'default') {
+            if (keywordsInput.current.value.includes(',')) {
+                let newItems = keywordsInput.current.value.split(',');
+                setState(state => ({
+                    ...state,
+                    keywords: [...state.keywords, ...newItems]
+                }))
+            } else {
+                setState({
+                    ...state,
+                    keywords: [...state.keywords, keywordsInput.current.value]
+                })
+            }
         } else {
-            setState({
-                ...state,
-                keywords: [...state.keywords, keywordsInput.current.value]
-            })
+            if (keywordsInput.current.value.includes(',')) {
+                let newItems = keywordsInput.current.value.split(',');
+                setState(state => ({
+                    ...state,
+                    translations: {
+                        ...state.translations,
+                        [editingSettings.activeEditingLanguage]: {
+                            ...(state?.translations?.[editingSettings.activeEditingLanguage] || {}),
+                            keywords: [...(state.translations?.[editingSettings.activeEditingLanguage]?.keywords || []), ...newItems]
+                        }
+                    }
+                }))
+            } else {
+                setState(state => ({
+                    ...state,
+                    translations: {
+                        ...state.translations,
+                        [editingSettings.activeEditingLanguage]: {
+                            ...(state?.translations?.[editingSettings.activeEditingLanguage] || {}),
+                            keywords: [...(state.translations?.[editingSettings.activeEditingLanguage]?.keywords || []), keywordsInput.current.value]
+                        }
+                    }
+
+                }))
+            }
         }
-        keywordsInput.current.value = ''
+
     };
-    const keywords = state.keywords.map(item => {
+
+    useEffect(() => {
+        console.log(state)
+    }, [state]);
+    const keywordsData = editingSettings.activeEditingLanguage === 'default' ? state.keywords : state?.translations?.[editingSettings?.activeEditingLanguage]?.keywords || [];
+
+    const keywords = keywordsData.map(item => {
+
         return (
             <div key={item} className='item'>
                 <p>{item}</p>
@@ -239,7 +278,6 @@ const settings = props => {
             })
         }
     }
-
 
 
     return (

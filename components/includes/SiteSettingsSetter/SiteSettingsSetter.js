@@ -41,8 +41,10 @@ const SiteSettingSetter = props => {
     }, []);
 
 
+    const keywordsDataFromProps = props.identity?.data?.translations?.[router.locale]?.keywords  || props.identity?.data?.keywords;
+    const keywordsDataFromContext = contextData?.siteIdentity?.translations?.[router.locale]?.keywords  || contextData?.siteIdentity?.keywords;
 
-    const keywords = (props.identity?.data?.keywords || contextData?.siteIdentity?.keywords || []).map(keyword=>keyword.trim())
+    const keywords = (keywordsDataFromProps ||keywordsDataFromContext || []).map(keyword=>keyword.trim())
 
     const locals = process.env.REACT_APP_LOCALS.split(' ');
     const localsUrl = locals.map(local=>{

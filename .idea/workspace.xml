@@ -21,7 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -750,7 +755,7 @@
       <workItem from="1629283194777" duration="445000" />
       <workItem from="1629292159391" duration="1473000" />
       <workItem from="1629320645483" duration="12187000" />
-      <workItem from="1629360184834" duration="963000" />
+      <workItem from="1629360184834" duration="6394000" />
     </task>
     <servers />
   </component>

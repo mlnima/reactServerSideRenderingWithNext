@@ -88,10 +88,15 @@ const PromotionTypeCard = props => {
               }
               
               .card-meta{
-              display: flex;
-              justify-content: flex-start;
-              align-items: center;
-              flex-wrap: wrap;
+                width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+                max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+                box-sizing: border-box;
+                white-space: nowrap;
+                overflow: hidden;
+                text-overflow: ellipsis;
+                height: 20px;
+                margin: 0 2px;
+                padding: 5px 0;
               }
 
 
