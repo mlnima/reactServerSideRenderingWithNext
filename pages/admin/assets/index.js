@@ -28,6 +28,8 @@ const assets = props => {
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
 
+
+
     useEffect(() => {
 
         getAndSetAssetData()
@@ -47,8 +49,9 @@ const assets = props => {
             status: router?.query?.status ?? 'all',
             sort: router?.query?.sort ?? 'updatedAt',
             content: router?.query?.content ?? 'all',
-            metaType: router?.query?.metaType ||  '',
+            metaType: router?.query?.metaType ||  null,
             orderType: router?.query?.orderType ?? 'all',
+            metaId: router?.query?.metaId || null,
             //page: router?.query?.page ? parseInt(router.query.page) : 1,
             searchForImageIn: router?.query?.type,
             startWith: '',
