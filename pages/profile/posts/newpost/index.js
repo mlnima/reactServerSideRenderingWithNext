@@ -2,6 +2,7 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {getFirstLoadData} from "../../../../_variables/ajaxVariables";
 import {userCreateNewPost} from "../../../../_variables/ajaxPostsVariables";
 import {AppContext} from "../../../../context/AppContext";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const newPost = props => {
     const contextData = useContext(AppContext);
@@ -109,6 +110,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
             widgets: firstLoadData.widgets,
             ...firstLoadData.widgets,
             ...firstLoadData.settings,

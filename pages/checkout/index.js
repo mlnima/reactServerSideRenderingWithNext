@@ -10,6 +10,7 @@ import {useRouter} from "next/router";
 import _ from 'lodash'
 const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 import styled from "styled-components";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 let StyledDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
@@ -302,9 +303,15 @@ const checkout = props => {
     );
 };
 
-export const getServerSideProps = async ({req, query}) => {
-    const firstLoadData = await getFirstLoadData(req,[])
-    return {props: {widgets:firstLoadData.widgets,...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), query,referer:firstLoadData.referer}}
+export const getServerSideProps = async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req,[])
+    return {props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+            widgets:firstLoadData.widgets,
+            ...firstLoadData.settings,
+            isMobile: Boolean(firstLoadData.isMobile),
+            query:context.query,
+            referer:firstLoadData.referer}}
 }
 
 export default checkout;

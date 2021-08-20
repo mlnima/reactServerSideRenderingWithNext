@@ -3,6 +3,7 @@ import {getComments, getPost, likeDislikeView} from "../../../_variables/ajaxPos
 import dynamic from "next/dynamic";
 const Error = dynamic(() => import('../../_error'))
 import PostPage from "../../../components/includes/PostPage/PostPage";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const postPage = ({responseCode, design, post, identity, comments, widgets}) => {
     if (responseCode !== 200) {
@@ -30,6 +31,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
             widgets,
             ...firstLoadData.settings,
             post: post || responseCode,

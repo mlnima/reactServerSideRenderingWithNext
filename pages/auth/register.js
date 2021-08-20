@@ -5,6 +5,7 @@ import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
 import {registerUser} from "../../_variables/ajaxAuthVariables";
 import Link from "next/link";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Register = props => {
     const contextData = useContext(AppContext);
@@ -164,9 +165,15 @@ const Register = props => {
     }
 };
 
-export const getServerSideProps = async ({req}) => {
-    const firstLoadData = await getFirstLoadData(req, [])
-    return {props: {widgets: firstLoadData.widgets, ...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer}}
+export const getServerSideProps = async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, [])
+    return {props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+            widgets: firstLoadData.widgets,
+            ...firstLoadData.settings,
+            isMobile: Boolean(firstLoadData.isMobile),
+            referer: firstLoadData.referer
+    }}
 }
 
 

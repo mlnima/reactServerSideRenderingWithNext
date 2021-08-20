@@ -4,6 +4,7 @@ import {AppContext} from "../../context/AppContext";
 import {getFirstLoadData} from '../../_variables/ajaxVariables'
 import {login} from "../../_variables/ajaxAuthVariables";
 import {useRouter} from "next/router";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 
 const Login = () => {
@@ -114,7 +115,9 @@ const Login = () => {
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req,[])
     return {
-        props: {widgets : firstLoadData?.widgets || [],
+        props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+            widgets : firstLoadData?.widgets || [],
             ...firstLoadData?.settings,
             isMobile: firstLoadData?.isMobile ? Boolean(firstLoadData.isMobile) :false,
             referer: firstLoadData?.referer ? firstLoadData?.referer :false,

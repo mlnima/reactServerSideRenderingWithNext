@@ -9,6 +9,7 @@ import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const user = props => {
     const contextData = useContext(AppContext);
@@ -137,6 +138,7 @@ export const getServerSideProps = async (context) => {
     const widgets = firstLoadData.widgets
     return {
         props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
             widgets,
             ...firstLoadData.settings,
             isMobile: Boolean(firstLoadData.isMobile),

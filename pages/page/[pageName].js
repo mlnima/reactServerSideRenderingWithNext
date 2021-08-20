@@ -5,6 +5,7 @@ import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRe
 import Error from "../_error";
 import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {AppContext} from "../../context/AppContext";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
 const page = ({responseCode,pageInfo,widgets,design,identity}) => {
@@ -26,11 +27,11 @@ const page = ({responseCode,pageInfo,widgets,design,identity}) => {
     )
 };
 
-export const getServerSideProps = async ({req, query}) => {
+export const getServerSideProps = async (context) => {
 
-    const firstLoadData = await getFirstLoadData(req,[query.pageName, query.pageName + 'LeftSidebar',query.pageName + 'RightSidebar'],query.pageName)
+    const firstLoadData = await getFirstLoadData(context.req,[context.query.pageName, context.query.pageName + 'LeftSidebar',context.query.pageName + 'RightSidebar'],context.query.pageName)
     let responseCode = 200
-    const pageData = await getPageData({pageName: query.pageName}, firstLoadData.domainName)
+    const pageData = await getPageData({pageName: context.query.pageName}, firstLoadData.domainName)
 
     if (!pageData.data.pageData){
         return {
@@ -40,10 +41,11 @@ export const getServerSideProps = async ({req, query}) => {
 
     return {
         props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
             widgets:firstLoadData.widgets,
             ...firstLoadData.settings,
             pageInfo:pageData.data ? pageData.data.pageData : {},
-            query,
+            query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),
             referer: firstLoadData.referer,
             responseCode

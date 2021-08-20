@@ -9,6 +9,7 @@ import MessengerConversationMessageTools from "../../components/includes/messeng
 import socket from '../../_variables/socket'
 import MessengerCall from "../../components/includes/messengerPageComponents/MessengerCall/MessengerCall";
 import Peer from 'simple-peer'
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const conversation = props => {
     const contextData = useContext(AppContext);
@@ -307,7 +308,14 @@ const disableCamera = ()=>{
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'messengerPage')
     const widgets = firstLoadData.widgets
-    return {props: {widgets, ...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer, requestProtocol: context.req.protocol}}
+    return {props: {
+        widgets,
+            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...firstLoadData.settings,
+            isMobile: Boolean(firstLoadData.isMobile),
+            referer: firstLoadData.referer,
+            requestProtocol: context.req.protocol
+    }}
 }
 
 export default conversation;

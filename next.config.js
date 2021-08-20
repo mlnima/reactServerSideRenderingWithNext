@@ -1,10 +1,10 @@
 const {parsed: localEnv} = require('dotenv').config();
+const { i18n } = require('./next-i18next.config');
 const withImages = require('next-images')
 const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const languages = process.env.REACT_APP_LOCALS.replace(' ', '|')
 const locales = process.env.REACT_APP_LOCALS.split(' ')
-
 const withPWA = require('next-pwa')
 require('webpack')
 
@@ -69,9 +69,9 @@ const pwaSettings = {
 }
 
 module.exports = withPlugins([
+    i18n,
     svgLoader,
     process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) :{},
-    // withPWA(pwaSettings),
     additionalConfig,
     reWriteRoutes,
     nextImageConfig,
@@ -109,24 +109,4 @@ module.exports = withPlugins([
 //     }
 // }
 
-// {source: `/:locale(${languages})?/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
-// {source: `/profile/:activeTab`, destination: '/profile',has: [{ type: 'query', key: 'activeTab' }]},
-//meta route
-// {source: `/:locale(${languages})?/:metaType(categories|actors)`, destination: '/meta'},
-// {source: `/:metaType(categories|actors)`, destination: '/meta'},
-//posts routes
-// {source: `/:locale(${languages})?/:metaType(categories|tags|actors)?/:metaName`, destination: '/posts'},
-// {source: `/:metaType(categories|tags|actors)?/:metaName`, destination: '/posts'},
-// {source: `/:locale(${languages})?/:metaType(categories|tags|actors)?/:id/:metaName`, destination: '/posts'},
-// {source: `/:metaType(categories|tags|actors)?/:id/:metaName`, destination: '/posts'},
-// {source: `/:locale(${languages})?/profile`, destination: '/profile'},
-// {source: `/profile`, destination: '/profile'},
-// {source: `/:locale(${languages})?/user/:username`, destination: '/user/:username'},
-// {source: `/user/:username`, destination: '/user/:username'},
-// {source: `/:locale(${languages})?/chatroom/:chatRoomName`, destination: '/chatroom/:chatRoomName'},
-// {source: `/chatroom/:chatRoomName`, destination: '/chatroom/:chatRoomName'},
-// {source: `/:locale(${languages})?/posts`, destination: '/posts'},
-//{source: `/posts`, destination: '/posts'},
-// {source: `/:locale(${languages})?/profile`, destination: '/profile'},
-// //checkout
-// {source: `/:locale(${languages})?/checkout`, destination: '/checkout'}
+

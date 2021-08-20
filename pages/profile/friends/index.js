@@ -8,6 +8,7 @@ import _ from "lodash";
 import {AppContext} from "../../../context/AppContext";
 import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
 import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 const index = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({});
@@ -63,6 +64,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
             widgets,
             ...firstLoadData.widgets,
             ...firstLoadData.settings,

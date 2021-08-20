@@ -6,6 +6,7 @@ import { readPath } from '../../../_variables/_ajaxFilesVariables'
 import { AppContext } from '../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
 import UploadedPopView from '../../../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
+import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
 ///static/uploads/image/2020/4/706185_561483320532764_1215505165_o.jpg
 const fileManager = props => {
     const contextData = useContext(AppContext);
@@ -26,7 +27,9 @@ const fileManager = props => {
         report: '',
         inputBox: false,
         newItemName: '',
-        lastUpdate:Date.now()
+        lastUpdate:Date.now(),
+        createNewFileFolderPop:false,
+        createNewFileFolderPopType:'file'
     });
 
     useEffect(() => {
@@ -92,6 +95,7 @@ const fileManager = props => {
                 <FileManagerControl setStateHandler={ setStateHandler } data={ state } state={ state } setState={ setState }/>
                 <FileManagerArea setStateHandler={ setStateHandler } data={ state } state={ state } setState={ setState }/>
             </div>
+            <CreateNewFileFolderPop render={state.createNewFileFolderPop} createNewFileFolderPopType={state.createNewFileFolderPopType} state={ state } setState={ setState }/>
         </>
     );
 };

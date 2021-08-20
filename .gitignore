@@ -4,6 +4,7 @@
 .next
 /static/uploads
 /public/uploads
+/public/locales/*/customTranslation.json
 /static/uploads/
 /static/uploads/*
 /temp.js

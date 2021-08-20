@@ -2,6 +2,7 @@ import {getComments, getPost} from "../../_variables/ajaxPostsVariables";
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import Error from '../_error';
 import PostPage from "../../components/includes/PostPage/PostPage";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Post = ({responseCode, design, post, identity, comments, widgets}) => {
     if (responseCode !== 200) {
@@ -28,6 +29,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
             widgets,
             ...firstLoadData.settings,
             post: post || responseCode,

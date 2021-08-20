@@ -4,6 +4,7 @@
   "watch": [
     "server/**/*",
     "./server/*",
+    "./public/locales/*",
     "./server.js",
     "./next.config.js",
     "./.env"

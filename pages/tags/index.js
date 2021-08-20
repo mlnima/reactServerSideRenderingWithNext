@@ -6,6 +6,7 @@ import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import TagsRenderer from "../../components/includes/TagsPage/Components/TagsRenderer/TagsRenderer";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const tagsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,referer,isMobile}) => {
     const contextData = useContext(AppContext);
@@ -72,22 +73,31 @@ const tagsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,refer
     );
 };
 
-export const getServerSideProps = async ({req, query}) => {
-    const firstLoadData = await getFirstLoadData(req, ['tagsPageTop','tagsPageLeftSidebar','tagsPageBottom','tagsPageRightSidebar'], 'tagsPage')
+export const getServerSideProps = async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['tagsPageTop','tagsPageLeftSidebar','tagsPageBottom','tagsPageRightSidebar'], 'tagsPage')
     const dataForGettingMeta = {
         metaType: 'tags',
-        page: parseInt(query?.page) || 1,
-        size: parseInt(query?.size) || 30,
-        sort: query?.sort || null,
-        startWith: query?.startWith || 'any',
-        keyword: query?.keyword || null,
-        lang: query?.lang || 'default',
+        page: parseInt(context.query?.page) || 1,
+        size: parseInt(context.query?.size) || 30,
+        sort: context.query?.sort || null,
+        startWith: context.query?.startWith || 'any',
+        keyword: context.query?.keyword || null,
+        lang: context.query?.lang || 'default',
         status: 'published'
     }
-    const metaData = await getMultipleMeta(dataForGettingMeta, firstLoadData.domainName, true, query.metaType)
+    const metaData = await getMultipleMeta(dataForGettingMeta, firstLoadData.domainName, true, context.query.metaType)
     const widgets = firstLoadData.widgets
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
-    return {props: {...firstLoadData.settings, query, isMobile: Boolean(firstLoadData.isMobile), widgets, metaSource, dataForGettingMeta, referer: firstLoadData.referer}}
+    return {props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+             ...firstLoadData.settings,
+            query:context.query,
+            isMobile: Boolean(firstLoadData.isMobile),
+            widgets,
+            metaSource,
+            dataForGettingMeta,
+            referer: firstLoadData.referer
+    }}
 }
 
 export default tagsPage;

@@ -8,6 +8,7 @@ import {AppContext} from "../../context/AppContext";
 import ProfileImage from "../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Profile = props => {
     const contextData = useContext(AppContext);
@@ -90,6 +91,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
             widgets,
             ...firstLoadData.widgets,
             ...firstLoadData.settings,

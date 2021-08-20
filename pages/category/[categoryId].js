@@ -6,6 +6,7 @@ import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -50,27 +51,36 @@ const categoryPage = props => {
     )
 };
 
-export const getServerSideProps = async ({req, query}) => {
-    const firstLoadData = await getFirstLoadData(req,['categoryPageTop','categoryPageLeftSidebar','categoryPageBottom','categoryPageRightSidebar'],'postsPage')
+export const getServerSideProps = async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req,['categoryPageTop','categoryPageLeftSidebar','categoryPageBottom','categoryPageRightSidebar'],'postsPage')
     const getPostsData = {
-        size: parseInt(query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 30,
-        page: parseInt(query?.page) || 1,
-        postType: query.type || null,
+        size: parseInt(context.query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 30,
+        page: parseInt(context.query?.page) || 1,
+        postType: context.query.type || null,
         fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating' , 'redirectLink'],
-        keyword: query.keyword || '',
-        author: query.author || 'all',
+        keyword: context.query.keyword || '',
+        author: context.query.author || 'all',
         status: 'published',
-        metaId: query.categoryId || null,
-        sort: query.sort || 'updatedAt',
-        lang: query.lang || null
+        metaId: context.query.categoryId || null,
+        sort: context.query.sort || 'updatedAt',
+        lang: context.query.lang || null
     }
 
-    const categoryData = query.categoryId ? await getSingleMeta(query.categoryId, true) : {}
+    const categoryData = context.query.categoryId ? await getSingleMeta(context.query.categoryId, true) : {}
     const category = categoryData.data ? categoryData.data.meta : {}
-    const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, req.originalUrl)
+    const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, context.req.originalUrl)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
-    return {props: {widgets, ...firstLoadData?.settings, query, isMobile: Boolean(firstLoadData.isMobile), postsSource, getPostsData, category, referer: firstLoadData.referer}}
+    return {props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+            widgets,
+            ...firstLoadData?.settings,
+            query:context.query,
+            isMobile: Boolean(firstLoadData.isMobile),
+            postsSource,
+            getPostsData,
+            category,
+            referer: firstLoadData.referer}}
 }
 
 export default categoryPage;

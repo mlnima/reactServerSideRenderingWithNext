@@ -5,6 +5,7 @@ import {AppContext} from "../../context/AppContext";
 import MessengerConversationsList from "../../components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList";
 import {useRouter} from "next/router";
 import Link from "next/link";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 
 const messengerPage = props => {
@@ -56,7 +57,14 @@ const messengerPage = props => {
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'messengerPage')
     const widgets = firstLoadData.widgets
-    return {props: {widgets, ...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer, requestProtocol: context.req.protocol}}
+    return {props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+        widgets,
+            ...firstLoadData.settings,
+            isMobile: Boolean(firstLoadData.isMobile),
+            referer: firstLoadData.referer,
+            requestProtocol: context.req.protocol
+    }}
 }
 
 export default messengerPage;

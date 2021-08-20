@@ -7,6 +7,7 @@ import {getPosts} from "../../../_variables/ajaxPostsVariables";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 const Posts = props => {
     const contextData = useContext(AppContext);
     const router = useRouter();
@@ -68,6 +69,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
             widgets : firstLoadData.widgets,
             ...firstLoadData.widgets,
             ...firstLoadData.settings,

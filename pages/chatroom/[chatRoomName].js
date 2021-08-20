@@ -8,6 +8,7 @@ import ChatRoomMessageArea from "../../components/includes/chatroomComponents/Ch
 import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
 import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 
 const chatRoom = props => {
@@ -153,7 +154,14 @@ const chatRoom = props => {
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'chatRoomPage')
     const widgets = firstLoadData.widgets
-    return {props: {widgets, ...firstLoadData.settings, isMobile: Boolean(firstLoadData.isMobile), referer: firstLoadData.referer, requestProtocol: context.req.protocol}}
+    return {props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+            widgets,
+            ...firstLoadData.settings,
+            isMobile: Boolean(firstLoadData.isMobile),
+            referer: firstLoadData.referer,
+            requestProtocol: context.req.protocol
+    }}
 }
 
 export default chatRoom;

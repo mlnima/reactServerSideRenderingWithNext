@@ -160,6 +160,10 @@ const SideBar = props => {
                 {name: 'eCommerce', url: '/admin/settings/eCommerceSettings'},
                 ]
         },
+        Translations:{
+            pathURL: '/admin/translations',
+            subItems: []
+        },
         Importer: {
             pathURL: '/admin/importer',
             subItems: [

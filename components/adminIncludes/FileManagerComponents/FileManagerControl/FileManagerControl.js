@@ -48,6 +48,14 @@ const FileManagerControl = props => {
         })
     }
 
+    const onCreateNewFileClickHandler = type =>{
+       props.setState({
+           ...props.state,
+           createNewFileFolderPop:true,
+           createNewFileFolderPopType:type
+       })
+    }
+
     return (
         <div className='file-manager-control'>
             <style jsx>{`
@@ -93,6 +101,8 @@ const FileManagerControl = props => {
                 <button onClick={ () => props.setStateHandler('path', './public/uploads/application') }>Applications</button>
                 <input ref={uploadInputElement} type='file' style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
                 <button onClick={ () => uploadInputElement.current.click() }>Upload</button>
+                <button onClick={ () => onCreateNewFileClickHandler('file') }>New File</button>
+                <button onClick={ () => onCreateNewFileClickHandler('folder') }>New Folder</button>
             </div>
         </div>
     );
