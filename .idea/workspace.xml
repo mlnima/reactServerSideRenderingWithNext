@@ -23,6 +23,7 @@
       <change afterPath="$PROJECT_DIR$/_variables/adminAjaxVariables/adminFileManagerVariables/_createFileOrFolder.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/next-i18next.config.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/pages/admin/translations/index.js" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/locales/ar/common.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/locales/cs/common.json" afterDir="false" />
       <change afterPath="$PROJECT_DIR$/public/locales/de/common.json" afterDir="false" />
@@ -61,7 +62,7 @@
       <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/actors/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/fileManager/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/fileManager/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/translate/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/translations/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/translate/index.js" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/admin/translate/translate.scss" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/translations/translate.scss" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
@@ -818,7 +819,7 @@
       <workItem from="1629292159391" duration="1473000" />
       <workItem from="1629320645483" duration="12187000" />
       <workItem from="1629360184834" duration="28685000" />
-      <workItem from="1629444617893" duration="950000" />
+      <workItem from="1629444617893" duration="1473000" />
     </task>
     <servers />
   </component>
