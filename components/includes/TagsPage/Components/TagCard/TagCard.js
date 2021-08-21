@@ -1,9 +1,9 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
 import TagCardMedia from "./TagCardMedia";
+import {withTranslation} from "next-i18next";
 
-const TagCard = ({cardWidth, tag}) => {
+const TagCard = ({t,cardWidth, tag}) => {
     const router = useRouter()
     return (
         <Link href={`/tag/${tag._id}`}>
@@ -28,6 +28,10 @@ const TagCard = ({cardWidth, tag}) => {
                       -webkit-line-clamp: 1;
                       font-weight: initial;
                       font-size: 12px;
+
+                      &:hover {
+                        filter: invert(70%);
+                      }
                     }
                   }
 
@@ -46,8 +50,9 @@ const TagCard = ({cardWidth, tag}) => {
 
                 `}</style>
                 <TagCardMedia cardWidth={cardWidth} imageUrl={tag.imageUrl} mediaAlt={tag?.translations?.[router.locale]?.name || tag.name}/>
-                <h3 className='tag-card-title'>{tag?.translations?.[router.locale]?.name || tag.name}</h3>
+                <h3 className='tag-card-title'> { tag?.translations?.[router.locale]?.name || t([t(`customTranslation:${tag?.name}`)])}</h3>
             </a>
         </Link>);
 };
-export default TagCard;
+
+export default withTranslation(['customTranslation'])(TagCard);

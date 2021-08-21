@@ -3,8 +3,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
 import _shortNumber from '../../../../../_variables/clientVariables/_shortNumber'
+import {withTranslation} from 'next-i18next';
 
-const RatingButtons = ({_id,ratingAndViewData,rating,setRatingAndViewData}) => {
+const RatingButtons = ({t,_id,ratingAndViewData,rating,setRatingAndViewData}) => {
     const ratingBtnArea = useRef(null)
     const [state, setState] = useState({
         rated:false
@@ -56,17 +57,17 @@ const RatingButtons = ({_id,ratingAndViewData,rating,setRatingAndViewData}) => {
                         }
                         
                     `}</style>
-                    <span className='like-disLike-count-items rating-item'>
+                    <span className='like-disLike-count-items rating-item' title={t([`common:Views`,t(`customTranslation:Views`)])}>
                         <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={faEye}  className='rate-logo' />
                         <p className='rating-item-value'>{_shortNumber(ratingAndViewData.views)} </p>
                     </span>
             {rating !== 'disable'?
                 <>
-                    <button className='rating-item' onClick={() => onRateHandler('likes')  } aria-label="Center Align">
+                    <button className='rating-item' onClick={() => onRateHandler('likes')  } aria-label="Center Align" title={t([`common:Like`,t(`customTranslation:Like`)])} >
                         <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={faThumbsUp} className='rate-logo' />
                         <p className='rating-item-value'>{ratingAndViewData.likes}</p>
                     </button>
-                    <button className='rating-item' onClick={() =>onRateHandler('disLikes')} aria-label="Center Align">
+                    <button className='rating-item' onClick={() =>onRateHandler('disLikes')} aria-label="Center Align" title={t([`common:Dislike`,t(`customTranslation:Dislike`)])}>
                         <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={faThumbsDown} className='rate-logo'/>
                         <p className='rating-item-value'>{ratingAndViewData.disLikes}</p>
                     </button>
@@ -75,4 +76,5 @@ const RatingButtons = ({_id,ratingAndViewData,rating,setRatingAndViewData}) => {
         </div>
     )
 };
-export default RatingButtons;
+//export default RatingButtons;
+export default  withTranslation(['common'])(RatingButtons);

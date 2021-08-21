@@ -36,7 +36,7 @@ const WidgetModelStyles = props => {
                         flex-wrap: wrap;
                         p{
                             width: 40%;
-                            font-size: .8rem;
+                            font-size: 12px;
                             margin:0 10px;
                         }
                         input,select{

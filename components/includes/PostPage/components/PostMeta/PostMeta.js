@@ -1,12 +1,14 @@
 import Link from "next/link";
 import _ from "lodash";
+import {withTranslation} from "next-i18next";
 
-const PostMeta = props => {
-    const filterMeta = props.data.length > 0 ? props.data.filter(m => m.name.length > 1) : [];
+const PostMeta = ({t,data,type}) => {
+    const filterMeta = data.length > 0 ? data.filter(m => m.name.length > 1) : [];
     const renderData = filterMeta.map(item => {
         const typePath = item.type === 'tags' ? 'tag' :
                      item.type === 'categories' ? 'category' :
                      item.type === 'actors' ? 'actor' : 'category'
+
         return (
             <div key={_.uniqueId(`${item.type}_`)} className='post-meta-item'>
                 <style jsx>{`
@@ -26,15 +28,15 @@ const PostMeta = props => {
                 `}</style>
 
                 <Link href={`/${typePath}/${item._id}`} >
-                    <a className={props.type + ' post-meta-item-link'} title={item.name}>{item.name}</a>
+                    <a className={type + ' post-meta-item-link'} title={item.name}>{item.name}</a>
                 </Link>
             </div>
         )
     });
 
-    if (props.data.length >= 1) {
+    if (data.length >= 1) {
         return (
-            <div className={props.type + ' post-meta'}>
+            <div className={type + ' post-meta'}>
                 <style jsx>{`
                   .post-meta {
                     display: flex;
@@ -55,7 +57,7 @@ const PostMeta = props => {
                     flex-wrap: wrap;
                   }
                 `}</style>
-                <span className='meta-type'> {props.type.charAt(0).toUpperCase() + props.type.substring(1)}:</span>
+                <span className='meta-type'> {t([`common:${ type.charAt(0).toUpperCase() + type.substring(1)}`,t(`customTranslation:${ type.charAt(0).toUpperCase() + type.substring(1)}`)])}:</span>
                 <div className="content">
                     {renderData}
                 </div>
@@ -64,4 +66,5 @@ const PostMeta = props => {
     } else return null
 
 };
-export default PostMeta;
+
+export default  withTranslation(['common','customTranslation'])(PostMeta);

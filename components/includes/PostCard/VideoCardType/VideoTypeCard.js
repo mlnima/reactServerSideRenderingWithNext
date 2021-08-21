@@ -3,6 +3,7 @@ import Link from "next/link";
 import VideoCardMedia from "./VideoCardMedia";
 import _ from "lodash";
 import CardMetaData from "../asset/CardMetaData/CardMetaData";
+import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 
 const VideoTypeCard = props => {
 
@@ -18,7 +19,7 @@ const VideoTypeCard = props => {
                                     props.post.quality
     }, [])
 
-    const metaPreviewData = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
+    const metaPreviewData = [...(props.post.actors || []), ...(props.post.tags || []), ...(props.post.categories || [])]
     const metaPreview = _.uniqBy(metaPreviewData, function (e) {
         return e.name;
     })
@@ -36,18 +37,9 @@ const VideoTypeCard = props => {
                 background-color: var(--post-element-background-color);
                 margin: 2.8px;
                 font-size: 12px;
+                padding-bottom: 5px;
 
-                .card-meta {
-                  width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                  max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-                  box-sizing: border-box;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  height: 20px;
-                  margin: 0 2px;
-                  padding: 5px 0;
-                }
+
 
                 .video-card-link {
                   position: relative;
@@ -67,14 +59,13 @@ const VideoTypeCard = props => {
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
-margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
+                    margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
 
                     .video-card-title {
                       text-overflow: ellipsis;
                       overflow: hidden;
                       display: -webkit-box !important;
                       -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
-                      direction: ${props.dir === 'rtl' ? 'rtl' : 'ltr'};
                       -webkit-box-orient: vertical;
                       font-weight: initial;
                       white-space: normal;
@@ -83,6 +74,10 @@ margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
                       width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                       max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
                       padding: 0 2px;
+
+                      &:hover {
+                        filter: invert(70%);
+                      }
                     }
 
 
@@ -175,16 +170,7 @@ margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
                    </span>
                 </a>
             </Link>
-            {props.postElementSize !== 'list' ?
-                <span className='card-meta'>
-                {(metaPreview || []).filter(meta => meta?.name?.length > 1).map(meta => {
-                    return (
-                        <CardMetaData meta={meta} key={_.uniqueId('meta_')}/>
-                    )
-                })}
-            </span> : null
-            }
-
+            {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
         </div>
     );
 };

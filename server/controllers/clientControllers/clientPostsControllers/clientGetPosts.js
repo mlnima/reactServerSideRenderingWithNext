@@ -19,11 +19,11 @@ module.exports = async (req, res) => {
     let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random' ? {lastModify: -1} : {[req.body.sort]: -1}
 
     const populateMeta = [
-        {path:'actors',select:{'name':1,'type':1},options:{limit: 2}},
-        {path:'categories',select:{'name':1,'type':1},options:{limit: 4}},
-        {path:'tags',select:{'name':1,'type':1},options:{limit: 4}}
+        {path:'actors',select:{'name':1,'type':1}},
+        {path:'categories',select:{'name':1,'type':1}},
+        {path:'tags',select:{'name':1,'type':1}}
     ]
-
+        //     {path:'categories',select:{'name':1,'type':1},options:{limit: 1}},
     let posts = req.body.sort === 'random' ?
         await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).populate(populateMeta).select(selectedFields).skip(Math.floor(Math.random() * postsCount)).limit(size).sort(sortQuery).exec()
         : await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).populate(populateMeta).select(selectedFields).skip(size * (page - 1)).limit(size).sort(sortQuery).exec();

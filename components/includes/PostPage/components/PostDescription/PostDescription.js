@@ -17,6 +17,7 @@ const PostDescription = ({description, translations}) => {
               .description {
                 color: var(--post-page-info-color);
                 margin: 0 5px;
+                padding: 50px 0;
               }
             `}</style>
             {descriptionValue ? parse(descriptionValue) : ''}

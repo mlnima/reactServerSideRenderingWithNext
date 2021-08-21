@@ -1,16 +1,17 @@
 import React, {useState} from 'react';
-import withRouter from 'next/dist/client/with-router'
+
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {withTranslation} from "next-i18next";
 
-const SearchInputComponent = props => {
+const SearchInputComponent = ({t,mobileMode}) => {
     const router = useRouter()
     const [state, setState] = useState({
         keyword: '',
         isOpen: false
     });
-    const openStatus = !props.mobileMode
+    const openStatus = !mobileMode
 
     const [isOpen, setIsOpen] = useState(openStatus)
 
@@ -114,14 +115,14 @@ const SearchInputComponent = props => {
                 }
               }
             `}</style>
-            {isOpen || !props.mobileMode ?
+            {isOpen || !mobileMode ?
                 <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
-                    {props.mobileMode ?
+                    {mobileMode ?
                         <button className='search-bar-btn-close' aria-label='Center Align' onClick={(e) => onOpenCloseHandler(e)}>
                             <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faTimes} className='search-bar-btn-open-svg'/>
                         </button> : null}
-                    <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder='search'/>
-                    <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faSearch}/></button>
+                    <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder={t([`common:Search`])}/>
+                    <button className='search-bar-btn' aria-label='Center Align' type='submit'><FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faSearch} title={t([`common:Search`])}/></button>
                 </form> :
                 <button className='search-bar-btn-open' aria-label='Center Align' onClick={(e) => onOpenCloseHandler(e)}>
                     <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faSearch} className='search-bar-btn-open-svg'/>
@@ -133,5 +134,6 @@ const SearchInputComponent = props => {
 
 
 };
-export default withRouter(SearchInputComponent);
+
+export default  withTranslation(['common'])(SearchInputComponent);
 

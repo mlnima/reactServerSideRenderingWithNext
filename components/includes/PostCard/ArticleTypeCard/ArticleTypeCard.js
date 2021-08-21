@@ -6,11 +6,12 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {likeValueCalculator} from "../../../../_variables/_variables";
 import CardMetaData from "../asset/CardMetaData/CardMetaData";
 import _ from "lodash";
+import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 
 const ArticleTypeCard = props => {
 
 
-    const metaPreviewData = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
+    const metaPreviewData = [...(props.post.actors || []), ...(props.post.tags || []), ...(props.post.categories || [])]
     const metaPreview = _.uniqBy(metaPreviewData, function (e) {
         return e.name;
     })
@@ -29,18 +30,7 @@ const ArticleTypeCard = props => {
                 background-color: var(--post-element-background-color);
                 margin: 2.8px;
                 font-size: 12px;
-
-                .card-meta {
-                  width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                  max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-                  box-sizing: border-box;
-                  white-space: nowrap;
-                  overflow: hidden;
-                  text-overflow: ellipsis;
-                  height: 20px;
-                  margin: 0 2px;
-                  padding: 5px 0;
-                }
+                padding-bottom: 5px;
 
                 .article-card-link {
                   position: relative;
@@ -68,16 +58,18 @@ const ArticleTypeCard = props => {
                       overflow: hidden;
                       display: -webkit-box !important;
                       -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
-                      direction: ${props.dir === 'rtl' ? 'rtl' : 'ltr'};
                       -webkit-box-orient: vertical;
                       white-space: normal;
                       font-size: 12px;
                       font-weight: initial;
                       margin: 2px 0;
-                      //white-space: nowrap;
                       width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                       max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-                      //margin: 4px 2px;
+
+                      &:hover {
+                        filter: invert(70%);
+                      }
+                      
                     }
 
                     .article-card-under-media-info {
@@ -111,9 +103,9 @@ const ArticleTypeCard = props => {
               @media only screen and (min-width: 768px) {
                 .article-card {
                   width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-                   max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
+                  max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-                  
+
                   margin: 7px;
 
                   .article-card-link {
@@ -122,8 +114,8 @@ const ArticleTypeCard = props => {
 
                     .article-card-under-media {
                       .article-card-title {
-                      
-                         width: ${props.postElementSize === 'list' ? `100%`  : `${props.cardWidth}px`};
+
+                        width: ${props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
                         font-size: 14px;
                       }
                     }
@@ -147,17 +139,7 @@ const ArticleTypeCard = props => {
                     </div>
                 </a>
             </Link>
-            {props.postElementSize !== 'list' ?
-
-                <span className='card-meta'>
-                {(metaPreview || []).filter(meta => meta?.name?.length > 1).map(meta => {
-
-                    return (
-                        <CardMetaData meta={meta} key={_.uniqueId('meta_')}/>
-                    )
-                })}
-            </span> : null
-            }
+            {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
 
         </div>
 

@@ -3,8 +3,10 @@ import {AppContext} from "../../../../context/AppContext";
 import LoggedOutItemsMenu from "./LoggedOutItemsMenu/LoggedOutItemsMenu";
 import LoggedInItemsForMenu from "./LoggedInItemsForMenu/LoggedInItemsForMenu";
 
+
 const Authentication = () => {
     const contextData = useContext(AppContext);
+
     const [loggedIn, setLoggedIn] = useState(false)
 
     useEffect(() => {

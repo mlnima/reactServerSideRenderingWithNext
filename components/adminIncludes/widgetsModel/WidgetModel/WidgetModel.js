@@ -434,7 +434,7 @@ const WidgetModel = props => {
                                              value={widgetData.languageTextAsDefaultLanguage || 'default'} classNameValue='languageTextAsDefaultLanguage'
                                              placeHolder='Language Text As Default Language' onChangeHandler={onChangeHandler} rendering={widgetData.type === 'language'}/>
 
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper'|| widgetData.type === 'metaWithImage' ?
                         <>
                             <div className='selectInputFieldForWidget widgetSection'>
                                 <p>Sort By:</p>

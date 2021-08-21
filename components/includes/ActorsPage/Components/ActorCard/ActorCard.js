@@ -1,10 +1,13 @@
 import Link from "next/link";
+import {useState} from "react";
 import {useRouter} from "next/router";
 import ActorCardMedia from "./ActorCardMedia";
+import {withTranslation} from "next-i18next";
 
-const ActorCard = ({cardWidth, actor}) => {
+
+const ActorCard = ({t,cardWidth, actor}) => {
     const router = useRouter()
-
+    const [title,setTitle]= useState(()=>  actor?.translations?.[router.locale]?.name || actor.name)
     return (
         <Link href={`/actor/${actor._id}`}>
             <a className='actor-card-link'>
@@ -28,6 +31,9 @@ const ActorCard = ({cardWidth, actor}) => {
                       -webkit-line-clamp: 1;
                       font-weight: initial;
                       font-size: 12px;
+                                &:hover {
+                        filter: invert(70%);
+                      }
                     }
                   }
 
@@ -46,9 +52,10 @@ const ActorCard = ({cardWidth, actor}) => {
 
                 `}</style>
                 <ActorCardMedia cardWidth={cardWidth} imageUrl={actor.imageUrl} mediaAlt={actor?.translations?.[router.locale]?.name || actor.name}/>
-                <h3 className='actor-card-title'>{actor?.translations?.[router.locale]?.name || actor.name}</h3>
+                <h3 className='actor-card-title'> { actor?.translations?.[router.locale]?.name || t([t(`customTranslation:${actor?.name}`)])}</h3>
             </a>
         </Link>
     );
 };
-export default ActorCard;
+
+export default withTranslation(['customTranslation'])(ActorCard);

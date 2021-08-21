@@ -18,9 +18,12 @@ const PaginationComponentPageLink = props => {
                     padding: 5px 10px;
                     margin: 5px;
                     border-radius: 5px;
+                                    &:hover{
+                    filter: invert(1);
+                    }
                   }
                   .active-page {
-                    background-color: #2c5115;
+                    background-color: var(--main-active-color);
                   }
                 `}</style>
                 {props.pageNumber}

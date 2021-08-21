@@ -5,8 +5,10 @@ import styled from "styled-components";
 import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
-import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
+
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import dynamic from "next/dynamic";
+const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 let StyledMain = styled.main`
   width: 100%;
@@ -75,7 +77,7 @@ export const getServerSideProps = async (context) => {
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
     return {props: {
-            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             widgets,
             ...firstLoadData?.settings,
             query:context.query,

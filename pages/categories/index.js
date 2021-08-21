@@ -90,7 +90,7 @@ export const getServerSideProps = async (context) => {
     const widgets = firstLoadData.widgets
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
     return {props: {
-            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             ...firstLoadData.settings,
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),

@@ -99,7 +99,7 @@ const LoginRegisterPopupForms = props => {
             loginRegisterFormPopup: false
         })
     }
-//  --custom-green :#44d62c;
+
     return (
         <React.Fragment>
             <style jsx>{`
@@ -166,7 +166,7 @@ const LoginRegisterPopupForms = props => {
 
               .login-register-form-button {
                 border: none;
-                background-color: var(--custom-green);
+                background-color: var(--main-active-color);
                 padding: 10px;
                 width: 100px;
                 margin: 10px;

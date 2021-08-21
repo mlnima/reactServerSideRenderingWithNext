@@ -1,10 +1,11 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
+import {withTranslation} from "next-i18next";
 
-const DownloadLink = props => {
-    if (props.render) {
+const DownloadLink = ({t, downloadLink, render}) => {
+    if (render) {
         return (
-            <a href={props.downloadLink} target='_blank' className='download-link' rel="noreferrer">
+            <a href={downloadLink} target='_blank' className='download-link' rel="noreferrer" title={t([`common:Download`, t(`customTranslation:Download`)])}>
                 <style jsx>{`
                   .download-link {
                     display: flex;
@@ -18,6 +19,7 @@ const DownloadLink = props => {
                     height: 24px;
                     background-color: var(--meta-background-color);
                   }
+
                   .download-logo {
                     color: var(--post-page-info-color);
                   }
@@ -31,4 +33,5 @@ const DownloadLink = props => {
     } else return null
 
 };
-export default DownloadLink;
+
+export default withTranslation(['common'])(DownloadLink);

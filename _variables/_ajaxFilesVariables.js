@@ -16,6 +16,22 @@ export const readFile = path=>{
     return axios.post(window.location.origin +'/api/admin/fileManager/readFile',body)
 };
 
+export const readTranslationsFile = path=>{
+    let body = {
+        path,
+        token: localStorage.wt
+    };
+    return axios.post(window.location.origin +'/api/admin/fileManager/readTranslationsFile',body)
+};
+export const updateTranslationsFile = (path,data)=>{
+    let body = {
+        path,
+        data,
+        token: localStorage.wt
+    };
+    return axios.post(window.location.origin +'/api/admin/fileManager/updateTranslationsFile',body)
+};
+
 
 export const deleteFile = filePath=>{
     let body = {

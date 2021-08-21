@@ -41,6 +41,11 @@ const VideoPlayer = ({post}) => {
                 border-radius: 10px;
               }
 
+              @media only screen and (min-width: 768px) {
+                .video-player {
+                  max-width: 1300px;
+                }
+              }
             `}</style>
             <meta itemProp="name" content={post.title}/>
             <meta itemProp="description" content={post.description}/>

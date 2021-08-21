@@ -25,7 +25,7 @@ const PromotionTypeCard = props => {
                      margin: 0;
                     font-size: 1.5rem;
                     font-weight: bold;
-                    color:var(--custom-green);
+                    color:var(--main-active-color);
                     text-align: center;
                     overflow: hidden;
                     text-overflow: clip;

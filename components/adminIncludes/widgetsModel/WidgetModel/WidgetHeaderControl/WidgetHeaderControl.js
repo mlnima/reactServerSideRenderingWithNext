@@ -6,10 +6,12 @@ import styled from "styled-components";
 let StyledDiv = styled.div`
   display: grid;
   grid-template-columns:  1fr 1fr 5fr 2fr  ;
+  align-items: center;
   background-color: var(--admin-darkcolor70);
   color: var(--admin-text-color);
   width: 100%;
   height:50px ;
+  font-size: 12px;
 
   .widget-open-close-button{
     display: flex;

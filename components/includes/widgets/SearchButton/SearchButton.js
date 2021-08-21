@@ -2,9 +2,10 @@ import React, {useState} from 'react';
 import {faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useRouter} from "next/router";
+import {withTranslation} from "next-i18next";
 
 
-const SearchButton = props => {
+const SearchButton = ({t}) => {
     const router = useRouter()
     const [open, setOpen] = useState(false);
 
@@ -36,7 +37,7 @@ const SearchButton = props => {
 
     return (
         <>
-            <button onClick={onOpenHandler} className='search-button-widget-open-btn'>
+            <button onClick={onOpenHandler} className='search-button-widget-open-btn' aria-label='Center Align' title={t([`common:Search`])}>
                 <style jsx>{`
                   .search-button-widget-open-btn {
                     border: none;
@@ -63,11 +64,11 @@ const SearchButton = props => {
                         top: 0;
                         left: 0;
                         right: 0;
-                        width: 95%;
+                        width: 100%;
                         padding: 0 10px;
                         height: 48px;
                         margin: 0 auto;
-                        background-color: var(--topbar-background-color);
+                        background-color: rgba(0,0,0,.9);
                         display: flex;
                         justify-content: center;
                         align-items: center;
@@ -108,11 +109,11 @@ const SearchButton = props => {
                       }
                     `}</style>
                     <form className='search-button-widget-form' onSubmit={e => onSearchHandler(e)}>
-                        <input type="text" onChange={e => onChangeHandler(e)} name='keyword' value={state.keyword} className='search-button-widget-form-keyword-input'/>
-                        <button type='submit' className='search-button-widget-form-submit-btn'>
+                        <input type="text" onChange={e => onChangeHandler(e)} name='keyword' value={state.keyword} className='search-button-widget-form-keyword-input' placeholder={t([`common:Search`])}/>
+                        <button type='submit' className='search-button-widget-form-submit-btn' title={t([`common:Search`])}>
                             <FontAwesomeIcon style={{width: '24px', height: '24px',}} icon={faSearch}/>
                         </button>
-                        <span className='search-button-widget-close-btn'>
+                        <span className='search-button-widget-close-btn' title={t([`common:Close`])}>
                            <FontAwesomeIcon onClick={onOpenHandler} style={{width: '24px', height: '24px',}} icon={faTimes}/>
                         </span>
                     </form>
@@ -126,4 +127,6 @@ const SearchButton = props => {
 
 
 };
-export default SearchButton;
+
+export default  withTranslation(['common'])(SearchButton);
+

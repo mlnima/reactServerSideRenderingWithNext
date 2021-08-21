@@ -31,7 +31,7 @@ const CategoryCardMedia = props => {
 
               @media only screen and (min-width: 768px) {
                 .category-card-image {
-                  width: 100%;
+                  width: ${props.cardWidth}px;
                   height: calc(${props.cardWidth}px / 1.777);
                 }
               }

@@ -7,17 +7,6 @@ const userSchema = require('../server/models/userSchema')
 const bcrypt = require('bcryptjs');
 require('../server/_variables/connectToDatabase')
 
-// const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
-//     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
-//     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
-//
-// mongoose.connect(mongoDBConnectionUrl, {
-//     useNewUrlParser: true,
-//     useUnifiedTopology: true
-// })
-//     .then(() => {)
-//     .catch(err => console.log('DB not connected', err));
-
 const identityData = {
     type: 'identity',
     data: {
@@ -27,11 +16,10 @@ const identityData = {
         description: 'website description',
         keywords: [],
         homePageSidebar: true,
-        metaPageSidebar: false,
+        metaPageSidebar: true,
         postPageSidebar: true,
         postsPageSidebar: true,
-        anyoneCanRegister: true,
-        defaultSiteLanguage: 'en',
+        anyoneCanRegister: false,
     }
 }
 
@@ -53,11 +41,7 @@ const designData = {
     type: 'design',
     data: {
         customColors: `  
-    --main-text-color: #fff;
-    --main-red-color: #FF3565;
-    --main-blue-color: #0073aa;
-    --main-yellow-color: #f90;
-    --main-dark-color:#1b1b1b;
+    --main-text-color: #999;
     --background-color: #0e0e10;
     --post-page-info-color:#fff;
     --post-page-info-background-color:#181818;
@@ -65,7 +49,7 @@ const designData = {
     --meta-background-color:#f90;
     --widget-h-f-text-color:#fff;
     --widget-h-f-background-color:transparent;
-    --post-element-text-color:#fff;
+    --post-element-text-color:#999;
     --post-element-background-color:transparent;
 
     --navigation-text-color: #fff;
@@ -79,7 +63,7 @@ const designData = {
     --comment-date-color: #fff ;
     --comment-body-color: #fff ;
 
-     --custom-green :#44d62c;`
+ `
     }
 }
 

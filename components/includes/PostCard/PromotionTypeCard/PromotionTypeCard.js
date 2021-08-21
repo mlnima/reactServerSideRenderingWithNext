@@ -7,6 +7,7 @@ import {faInfoCircle} from "@fortawesome/free-solid-svg-icons";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 import CardMetaData from "../asset/CardMetaData/CardMetaData";
 import _ from "lodash";
+import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 
 const PromotionTypeCard = props => {
 
@@ -16,7 +17,7 @@ const PromotionTypeCard = props => {
     }
 
 
-    const metaPreviewData = [...(props.post.actors || []), ...(props.post.categories || []), ...(props.post.tags || [])]
+    const metaPreviewData = [...(props.post.actors || []), ...(props.post.tags || []), ...(props.post.categories || [])]
     const metaPreview = _.uniqBy(metaPreviewData, function (e) {
         return e.name;
     })
@@ -34,6 +35,7 @@ const PromotionTypeCard = props => {
                 justify-content: center;
                 background-color: var(--post-element-background-color);
                 font-size: 12px;
+                padding-bottom: 5px;
               }
 
               .promotion-card-link-external {
@@ -61,12 +63,12 @@ const PromotionTypeCard = props => {
                     align-items: center;
                     margin: 0 2px;
                     padding: 0 2px;
+
                     .promotion-card-views {
                       height: 12px;
                       margin: 0;
                     }
                   }
-
 
                   .promotion-card-title {
                     font-size: 12px;
@@ -74,41 +76,33 @@ const PromotionTypeCard = props => {
                     overflow: hidden;
                     font-weight: initial;
                     display: -webkit-box !important;
-                    -webkit-line-clamp: ${props.postElementSize === 'list' ? 2 : 1};
+                    -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
                     -webkit-box-orient: vertical;
                     white-space: normal;
-                    margin: 2px ;
+                    margin: 2px;
                     padding: 0 2px;
                     width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
                     max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+
+
                   }
+                }
 
-
+                &:hover {
+                  filter: invert(70%);
                 }
               }
-              
-              .card-meta{
-                width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-                box-sizing: border-box;
-                white-space: nowrap;
-                overflow: hidden;
-                text-overflow: ellipsis;
-                height: 20px;
-                margin: 0 2px;
-                padding: 5px 0;
-              }
-
 
               @media only screen and (min-width: 768px) {
                 .promotion-card {
                   width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-                   max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
+                  max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
                   flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-                   margin: 7px;
+                  margin: 7px;
+
                   .promotion-card-under-media {
                     width: 100%;
-                     font-size: 14px;
+                    font-size: 14px;
 
                     .promotion-card-link-internal {
                       width: 100%;
@@ -141,15 +135,7 @@ const PromotionTypeCard = props => {
                     </a>
                 </Link>
             </div>
-            {props.postElementSize !== 'list' ?
-                <span className='card-meta'>
-                {(metaPreview || []).filter(meta => meta?.name?.length > 1).map(meta => {
-                    return (
-                        <CardMetaData meta={meta} key={_.uniqueId('meta_')}/>
-                    )
-                })}
-            </span> : null
-            }
+            {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
         </div>
     );
 };

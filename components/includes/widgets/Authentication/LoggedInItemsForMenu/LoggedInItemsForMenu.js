@@ -38,11 +38,16 @@ const LoggedInItemsForMenu = props => {
 
                 {contextData.siteIdentity.membership ?
                     <>
-                        <Link href={`/`}>
-                            <a rel={/sitemap|admin|messenger|chatroom/.test(router.pathname) ? 'no-referrer' : 'next'} className='logged-in-item'>
-                                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faHome}/>
-                            </a>
-                        </Link>
+                        {
+                            router.pathname !== '/' ?
+                            <Link href={`/`}>
+                                <a rel={/sitemap|admin|messenger|chatroom/.test(router.pathname) ? 'no-referrer' : 'next'} className='logged-in-item'>
+                                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faHome}/>
+                                </a>
+                            </Link>
+                            :null
+                        }
+
                         <Link href={`/profile`}>
                             <a rel='next' className='logged-in-item'>
                                 <img src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage :'/public/asset/images/user/noGenderAvatar50.jpg'} alt='logged-in-item-profile-image' className='logged-in-item-profile-image'/>

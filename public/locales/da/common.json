@@ -4,24 +4,11 @@
   "Tags": "Tags",
   "Login": "Login",
   "Register": "Register",
-  "Username": "Username",
-  "Password": "Password",
-  "Repeat Password": "Repeat Password",
-  "Gender": "Gender",
   "Logout": "Logout",
   "Accept": "Accept",
   "Decline": "Decline",
-  "User": "User",
-  "Users": "Users",
-  "Follow": "Follow",
-  "Unfollow": "Unfollow",
-  "Posts": "Posts",
-  "Post": "Post",
   "Yes": "Yes",
   "No": "No",
-  "Ok": "Ok",
-  "Send": "Send",
-  "Cancel": "Cancel",
   "Close": "Close",
   "Open": "Open",
   "Language": "Language",
@@ -30,6 +17,6 @@
   "Download": "Download",
   "Like": "Like",
   "Dislike": "Dislike",
-  "Views": "Views",
-  "Details": "Details"
+  "Views": "Views"
+
 }

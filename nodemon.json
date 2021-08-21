@@ -1,6 +1,10 @@
 {
   "verbose": true,
-  "ignore": ["node_modules", ".next"],
+  "ignore": [
+    "node_modules",
+    ".next",
+    "./public/locales/*/customTranslation.json"
+  ],
   "watch": [
     "server/**/*",
     "./server/*",
