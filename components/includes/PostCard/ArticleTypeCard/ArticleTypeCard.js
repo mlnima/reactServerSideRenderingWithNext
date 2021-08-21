@@ -46,7 +46,7 @@ const ArticleTypeCard = props => {
                   .article-card-under-media {
                     width: 100%;
                     height: ${props.postElementSize === 'list' ? '65px' : 'auto'};
-                    color: var(--post-element-text-color);
+                    
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -58,6 +58,7 @@ const ArticleTypeCard = props => {
                       overflow: hidden;
                       display: -webkit-box !important;
                       -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
+                      color: var(--post-element-text-color);
                       -webkit-box-orient: vertical;
                       white-space: normal;
                       font-size: 12px;
@@ -79,6 +80,7 @@ const ArticleTypeCard = props => {
                       flex-wrap: wrap;
                       margin: 0;
                       height: 20px;
+                     
 
                       .article-card-info-data {
                         display: flex;
@@ -86,7 +88,7 @@ const ArticleTypeCard = props => {
                         align-items: center;
                         margin: 2px 0;
                         padding: 0 2px;
-
+                        color: var(--post-element-info-text-color);
                         span {
                           margin: 0 2px;
                         }

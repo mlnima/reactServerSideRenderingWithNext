@@ -14,13 +14,14 @@ const CardMetaData = props => {
                     height: 12px;
                     font-size: 12px;
                     width: auto;
-                    color: var(--post-element-text-color);
+                    color: var(--post-element-info-text-color);
                     margin: 2px;
                     padding: 2px;
                     border-radius: 5px;
                     align-self: flex-start;
-                    &:hover{
-                    filter: invert(70%);
+
+                    &:hover {
+                      filter: invert(70%);
                     }
                   }
 

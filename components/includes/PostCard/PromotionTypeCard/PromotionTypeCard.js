@@ -52,7 +52,7 @@ const PromotionTypeCard = props => {
                   height: ${props.postElementSize === 'list' ? 65 : 45}px;
                   width: 100%;
                   text-decoration: none;
-                  color: var(--post-element-text-color);
+
                   display: flex;
                   flex-direction: column;
                   justify-content: space-evenly;
@@ -63,6 +63,7 @@ const PromotionTypeCard = props => {
                     align-items: center;
                     margin: 0 2px;
                     padding: 0 2px;
+                    color: var(--post-element-info-text-color);
 
                     .promotion-card-views {
                       height: 12px;
@@ -78,6 +79,7 @@ const PromotionTypeCard = props => {
                     display: -webkit-box !important;
                     -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
                     -webkit-box-orient: vertical;
+                    color: var(--post-element-text-color);
                     white-space: normal;
                     margin: 2px;
                     padding: 0 2px;

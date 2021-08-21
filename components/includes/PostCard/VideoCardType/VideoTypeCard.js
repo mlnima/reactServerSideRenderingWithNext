@@ -40,7 +40,6 @@ const VideoTypeCard = props => {
                 padding-bottom: 5px;
 
 
-
                 .video-card-link {
                   position: relative;
                   width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
@@ -55,7 +54,7 @@ const VideoTypeCard = props => {
                   .video-card-under-media {
                     width: 100%;
                     height: ${props.postElementSize === 'list' ? '65px' : 'auto'};
-                    color: var(--post-element-text-color);
+                   
                     display: flex;
                     flex-direction: column;
                     justify-content: space-between;
@@ -65,6 +64,7 @@ const VideoTypeCard = props => {
                       text-overflow: ellipsis;
                       overflow: hidden;
                       display: -webkit-box !important;
+                       color: var(--post-element-text-color);
                       -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
                       -webkit-box-orient: vertical;
                       font-weight: initial;
@@ -95,6 +95,7 @@ const VideoTypeCard = props => {
                         padding: 0 2px;
                         align-items: center;
                         margin: 2px 0;
+                        color: var(--post-element-info-text-color);
 
                         span {
                           margin: 0 2px;
