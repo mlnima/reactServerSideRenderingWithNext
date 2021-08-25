@@ -16,6 +16,10 @@ const GlobalStyles = ({colors}) => {
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;
               }
+              
+              a{
+              text-decoration: none;
+              }
 
               .topbar {
                 display: flex;
