@@ -34,7 +34,7 @@ export const getServerSideProps = async (context) => {
 
     const firstLoadData = await getFirstLoadData(context.req, ['postsPageLeftSidebar', 'postsPageRightSidebar'], 'postsPage')
     const getPostsData = {
-        size: parseInt(context.query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 30,
+        size: parseInt(context.query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 50,
         page: parseInt(context.query?.page) || 1,
         postType: context.query.type || null,
         fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating', 'redirectLink'],
@@ -48,6 +48,7 @@ export const getServerSideProps = async (context) => {
     const postsData = await getPosts(getPostsData, process.env.REACT_APP_PRODUCTION_URL, true, context.req.originalUrl)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
+
     return {props: {
         widgets,
             ...(await serverSideTranslations(context.locale, ['common'])),

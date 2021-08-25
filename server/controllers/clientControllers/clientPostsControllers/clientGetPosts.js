@@ -1,46 +1,31 @@
 //clientGetPosts
 const postSchema = require('../../../models/postSchema');
+const _queryGeneratorForGettingPosts = require('../_variables/_queryGeneratorForGettingPosts')
 
 module.exports = async (req, res) => {
-    const size = req.body?.size ? req.body.size > 500 ? 500 : req.body.size : 30;
-    const page = req.body?.page ?? 1;
-    const postTypeQuery = !req.body.postType ? {} : {postType: req.body.postType};
-    const statusQuery = req.body?.status === 'all' ? {status: {$ne: 'trash'}} : {status: req.body.status};
-    const authorQuery = req.body.author === 'all' ? {} : {author: req.body.author};
 
-    const metaQuery = !req.body.metaId ? {} : {$or: [{categories: req.body.metaId},{tags: req.body.metaId},{actors: req.body.metaId}]};
-
-    const searchQuery =  !req.body.keyword ? {} :
-              !req.body.lang || req.body.lang === 'default' ? {$or: [{title: new RegExp(req.body.keyword, 'i')}]} :
-              {$or: [{title: new RegExp(req.body.keyword, 'i')},{[`translations.${req.body.lang}.title`]: new RegExp(req.body.keyword, 'i')},]}
-
-    let selectedFields = req.body.fields[0] === 'all' || !req.body.fields ? {} : (req.body.fields || []);
-    let postsCount = await postSchema.countDocuments({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).exec()
-    let sortQuery = req.body.sort === 'latest' || req.body.sort === 'random' ? {lastModify: -1} : {[req.body.sort]: -1}
-
-    const populateMeta = [
-        {path:'actors',select:{'name':1,'type':1}},
-        {path:'categories',select:{'name':1,'type':1}},
-        {path:'tags',select:{'name':1,'type':1}}
-    ]
-        //     {path:'categories',select:{'name':1,'type':1},options:{limit: 1}},
-    let posts = req.body.sort === 'random' ?
-        await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).populate(populateMeta).select(selectedFields).skip(Math.floor(Math.random() * postsCount)).limit(size).sort(sortQuery).exec()
-        : await postSchema.find({$and: [postTypeQuery, statusQuery, authorQuery, searchQuery, metaQuery]}).populate(populateMeta).select(selectedFields).skip(size * (page - 1)).limit(size).sort(sortQuery).exec();
-    Promise.all([posts, postsCount]).then(async data => {
-        try {
-
-            res.json({posts: data[0], error: false, totalCount: data[1]})
-            res.end()
-        } catch (e) {
-            console.log(e)
-            return res.status(500).json({
-                message: 'Server Error'
-            })
-        }
-    }).catch(err => {
+    try {
+        const findingPostsOptions = _queryGeneratorForGettingPosts(req.body)
+        const populateMeta = [
+            {path: 'actors', select: {'name': 1, 'type': 1}},
+            {path: 'categories', select: {'name': 1, 'type': 1}},
+            {path: 'tags', select: {'name': 1, 'type': 1}}
+        ]
+        const findPostsQueries =  {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}
+        let totalCount = await postSchema.countDocuments(findPostsQueries).exec()
+        let posts = await postSchema.find( findPostsQueries,findingPostsOptions.selectedFields,
+            {
+                skip: req.body.sort === 'random' ? Math.floor(Math.random() * totalCount) : findingPostsOptions.size * (findingPostsOptions.page - 1),
+                limit: findingPostsOptions.size,
+                sort: findingPostsOptions.sortQuery
+            }).populate(populateMeta).exec()
+        res.json({posts,totalCount})
+        res.end()
+    }catch (err){
+        console.log(err)
         return res.status(500).json({
             message: 'Server Error'
         })
-    })
+    }
+
 };

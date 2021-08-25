@@ -10,12 +10,9 @@ let StyledDiv = styled.div`
     display: flex;
     width: 100%;
     .textInputWithUpload,textarea,input{
-      border-radius: 5px;
       outline: none;
-      border: none;
       padding: 3px 5px;
       height: 30px;
-      background-color: #f1f1f1;
       width: 100%;
     }
     .upload-file-btn {
@@ -49,7 +46,7 @@ const TextInputWithUploadBtn = props => {
                     <p>{convertVariableNameToName(props.name)}</p>
                 </div>
                 <div className="editor">
-                    <input ref={inputElement} className='textInputWithUpload' name={props.name} value={props.postData[props.name]}
+                    <input ref={inputElement} className='textInputWithUpload' type={'text'} name={props.name} value={props.postData[props.name]}
                                 onChange={e => props.onChangeHandler(e)}/>
                     <UploadFileBtn returnElement={inputElement} type={props.type} setFunction={onSetHandler} name={props.name}/>
                 </div>

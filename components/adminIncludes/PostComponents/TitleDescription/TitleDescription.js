@@ -29,9 +29,9 @@ let StyledDiv = styled.div`
   .TitleDescriptionDescription {
     margin-top: 10px;
     min-height: 600px;
-    border-radius: 5px;
+    //border-radius: 5px;
     outline: none;
-    border: none;
+    //border: none;
     padding: 3px 5px;
     height: 30px;
     width: 95%;

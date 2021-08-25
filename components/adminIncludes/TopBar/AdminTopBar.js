@@ -7,21 +7,23 @@ import Link from 'next/link'
 import {faBars, faHome, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
+
 let StyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
   padding: 5px 10px;
   height: 30px;
-  background-color: #24282d;
+  background-color: var(--admin-topbar-background-color);
   grid-area: admin-topbar;
 
   .developmentModeSwitch {
     display: flex;
-    color: white;
+    color: var(--admin-topbar-text-color);
     justify-content: center;
     align-items: center;
-    p{
+
+    p {
       font-size: .7rem;
       margin: 0 10px;
     }
@@ -30,14 +32,16 @@ let StyledDiv = styled.div`
   .adminTopBarControl {
     display: flex;
     align-items: center;
+    cursor: pointer;
   }
 
   .adminTopBarItem {
-      background-color: transparent;
-  color: white;
-  outline: none;
-  border: none;
+    background-color: transparent;
+    color: var(--admin-topbar-text-color);
+    outline: none;
+    border: none;
     transition: .4s;
+    margin: 0 10px;
 
     &:hover {
       transform: scale(1.1);
@@ -49,11 +53,6 @@ let StyledDiv = styled.div`
       cursor: pointer;
     }
   }
-  @media only screen and (min-width: 768px) {
-  .adminSideBarMobileBtn {
-   // display: none;
-  }
-}
 `
 
 const AdminTopBar = () => {
@@ -103,14 +102,14 @@ const AdminTopBar = () => {
         <>
             <StyledDiv className='adminTopBar'>
                 <div className="adminTopBarControl">
-                    <button className='adminSideBarMobileBtn adminTopBarItem' onClick={() => AdminSideBarOpenCloseHandler()}><FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faBars} className='post-element-info-logo'/>
-                    </button>
-                    <Link href='/'><a rel='noreferrer' className='adminTopBarItem'><FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faHome} className='post-element-info-logo'/></a></Link>
-                    <button className='adminNewActionBtn adminTopBarItem' onClick={() => newItemMenuHandler()}><FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></button>
+                    <span className='adminSideBarMobileBtn adminTopBarItem' onClick={() => AdminSideBarOpenCloseHandler()}><FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faBars} className='post-element-info-logo'/>
+                    </span>
+                    <Link href='/'><a rel='noreferrer' className='adminTopBarItem'><FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faHome} className='post-element-info-logo'/></a></Link>
+                    <span className='adminNewActionBtn adminTopBarItem' onClick={() => newItemMenuHandler()}><FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></span>
                     <NewItemMenu active={state.NewItemMenu}/>
                     <p className='clearCache adminTopBarItem' onClick={() => contextData.functions.clearCaches()}>Clear Caches</p>
                 </div>
-                <button className='adminActionBtn adminTopBarItem' onClick={() => adminActionHandler()}><FontAwesomeIcon style={{width:'20px',height:'20px'}} icon={faUser} className='post-element-info-logo'/></button>
+                <button className='adminActionBtn adminTopBarItem' onClick={() => adminActionHandler()}><FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faUser} className='post-element-info-logo'/></button>
                 <AdminActionMenu active={state.AdminActionMenu}/>
             </StyledDiv>
 

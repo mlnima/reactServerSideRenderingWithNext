@@ -8,13 +8,21 @@ const UserPageActionButtons = ({_id, setParentState, parentState,username}) => {
     const contextData = useContext(AppContext);
 
     const onFollowHandler = () => {
-        followUser(_id).then(res => {
-            const newFollowingListForReqSender = res?.data?.updatedRequestSenderData || {}
-            contextData.dispatchUserData({
-                ...contextData.userData,
-                ...newFollowingListForReqSender
+        if (contextData.userData._id){
+            followUser(_id).then(res => {
+                const newFollowingListForReqSender = res?.data?.updatedRequestSenderData || {}
+                contextData.dispatchUserData({
+                    ...contextData.userData,
+                    ...newFollowingListForReqSender
+                })
             })
-        })
+        }else {
+            contextData.dispatchState({
+                ...contextData.state,
+                loginRegisterFormPopup:true
+            })
+        }
+
     }
 
     const onUnFollowHandler = () => {
@@ -30,12 +38,20 @@ const UserPageActionButtons = ({_id, setParentState, parentState,username}) => {
 
 
     const onConversationHandler = () => {
-        conversation(_id).then(res => {
-            const conversation = res.data.conversation
-            router.push(`/messenger/${conversation._id}`)
-        }).catch(err => {
-            console.log(err)
-        })
+        if (contextData.userData._id){
+            conversation(_id).then(res => {
+                const conversation = res.data.conversation
+                router.push(`/messenger/${conversation._id}`)
+            }).catch(err => {
+                console.log(err)
+            })
+        }else {
+            contextData.dispatchState({
+                ...contextData.state,
+                loginRegisterFormPopup:true
+            })
+        }
+
     }
 
 

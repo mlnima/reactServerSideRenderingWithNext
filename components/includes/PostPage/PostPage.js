@@ -168,7 +168,7 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
 
             <div className='promotion-thumbnail-link'>
                 {post.mainThumbnail && post.postType === 'promotion' ? <a href={post.redirectLink}><img className='main-thumbnail' src={post.mainThumbnail} alt="title"/></a> : null}
-                {post.mainThumbnail && post.postType === 'promotion' ? <a href={post.redirectLink} className='redirect-link'>go to {post.title}</a> : null}
+                {post.mainThumbnail && post.postType === 'promotion' ? <a href={post.redirectLink} className='redirect-link' target='_blank'>go to {post.title}</a> : null}
             </div>
 
             {post.postType === 'promotion' ? <PostDescription description={post.description} translations={post.translations}/> : null}

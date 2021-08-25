@@ -100,7 +100,7 @@ const TableHeader = props => {
 
     return (
         <StyledDiv className='asset-page-table-header'>
-            <input ref={ selectAllCheckBox } type='checkbox' onChange={ e => onSelectChangeHandler(e) }/>
+            <input ref={ selectAllCheckBox } type='checkbox' className={'asset-table-check-box'} onChange={ e => onSelectChangeHandler(e) }/>
             { renderHeaderItems }
         </StyledDiv>
     );

@@ -6,7 +6,7 @@ export const getPosts = async (data, domainName,cache,queriesData) => {
         cache
     };
   //?requestFor=${encodeURIComponent(queriesData)}
-    return await axios.post(domainName +`/api/v1/posts/clientGetPosts?requestFor=${encodeURIComponent(queriesData)}`, body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL +`/api/v1/posts/clientGetPosts?requestFor=${encodeURIComponent(queriesData)}`, body)
 };
 
 export const getPost = async (data, domainName, cache) => {
@@ -55,7 +55,7 @@ export const getMultipleMeta = async (data,  domainName,cache) => {
         ...data,
         cache
     };
-    return await axios.post(domainName + `/api/v1/posts/getMultipleMeta?page=${ data.page }&metaType=${ data.metaType }${keywordQuery}&startWith=${ data.startWith }`, body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getMultipleMeta?page=${ data.page }&metaType=${ data.metaType }${keywordQuery}&startWith=${ data.startWith }`, body)
 };
 
 export const getSingleMeta = async (id,cache) => {
@@ -124,7 +124,7 @@ export const getComments = async (data, domainName, cache) => {
         ...data,
         cache,
     };
-    return await axios.post(domainName + `/api/v1/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
 };
 
 

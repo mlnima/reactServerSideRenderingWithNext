@@ -13,15 +13,13 @@ import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 
 let StyledDiv = styled.div`
   position: absolute;
-  
   font-size: 14px;
-  //position: fixed;
   left: 0;
   top: 0;
   grid-area: adminSideBar;
   min-height: 100%;
   width: 160px;
-  background-color: #24282d;
+  background-color: var(--admin-sidebar-background-color);
   display: flex;
   align-items: flex-start;
   flex-direction: column;
@@ -36,22 +34,21 @@ let StyledDiv = styled.div`
 
       .SideBarItem {
         text-decoration: none;
-        color: white;
+        color: var(--admin-sidebar-text-color);
         width: 100%;
         padding: 5px 0;
-        //transition: .5s;
-
         margin: 5px;
         display: block;
 
 
       }
 
-      button {
-        color: :#24282d;
+      span {
         background-color: transparent;
         border: none;
         outline: none;
+        padding: 5px 10px;
+        color: var(--admin-sidebar-text-color);
 
       }
 
@@ -202,10 +199,10 @@ const SideBar = props => {
         const RenderArrowsForSubMenus = () => {
             if (state[item].subItems.length > 0) {
                 return (
-                    <button key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
+                    <span key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
                         <FontAwesomeIcon icon={ hovered === item ? faSortUp : faSortDown} className='fontawesomeSvgVerySmall' />
 
-                    </button>
+                    </span>
                 )
             } else return null
         }

@@ -26,7 +26,7 @@ const AssetSearch = props => {
     }
     return (
         <StyledForm className='asset-page-search' onSubmit={e=>onSubmitHandler(e)}>
-            <input ref={searchInput}/>
+            <input ref={searchInput} type={'text'}/>
             <button>Search</button>
         </StyledForm>
     );

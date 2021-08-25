@@ -4,76 +4,30 @@ import {AppContext} from '../../../../../../context/AppContext'
 import Link from 'next/link';
 import {deleteMeta} from '../../../../../../_variables/ajaxPostsVariables'
 import {deletePage} from "../../../../../../_variables/ajaxVariables";
+import {post} from "superagent/lib/client";
 
 const TableBodyItemOnHover = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
- 
-    
+
     const reGetData = () => {
         router.push({pathname: router.pathname, query: {...router.query}})
     }
 
     if (props.isHover) {
         if (props.assetsType === 'posts') {
-            if (!router.query.status || router.query.status === 'published' || router.query.status === 'all') {
-                return (
-                    <div className='asset-page-table-body-item-hover-item'>
-                        <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
-                        <Link href={'/' + props.title}><a>View</a></Link>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'trash').then(() => reGetData())}>Trash</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'draft').then(() => reGetData())}>Draft</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'pending').then(() => reGetData())}>Pending</button>
-
-                    </div>
-                );
-            } else if (router.query.status === 'trash') {
-                return (
-                    <div className='asset-page-table-body-item-hover-item'>
-                        <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
-                        <Link href={'/' + props.title}><a>View</a></Link>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'delete').then(() => reGetData())}>Delete</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'draft').then(() => reGetData())}>Draft</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'pending').then(() => reGetData())}>Pending</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'published').then(() => reGetData())}>Publish</button>
-
-                    </div>
-                );
-            } else if (router.query.status === 'draft') {
-                return (
-                    <div className='asset-page-table-body-item-hover-item'>
-                        <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
-                        <Link href={'/' + props.title}><a>View</a></Link>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'trash').then(() => reGetData())}>Trash</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'pending').then(() => reGetData())}>Pending</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'published').then(() => reGetData())}>Publish</button>
-
-                    </div>
-                );
-            } else if (router.query.status === 'pending') {
-                return (
-                    <div className='asset-page-table-body-item-hover-item'>
-                        <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
-                        <Link href={'/' + props.title}><a>View</a></Link>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'trash').then(() => reGetData())}>Trash</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'draft').then(() => reGetData())}>Draft</button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'published').then(() => reGetData())}>Publish</button>
-
-                    </div>
-                );
-            } else if (router.query.status === 'reported') {
-                return (
-                    <div className='asset-page-table-body-item-hover-item'>
-                        <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
-                        <Link href={'/' + props.title}><a>View</a></Link>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'trash').then(() => reGetData())}><span>Trash</span></button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'pending').then(() => reGetData())}><span>Pending</span></button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'draft').then(() => reGetData())}><span>Draft</span></button>
-                        <button onClick={() => contextData.functions.bulkActionPost([props._id], 'published').then(() => reGetData())}><span>Publish</span></button>
-                    </div>
-                );
-            } else return null
-
+            const status = router.query.status
+            return (
+                <div className='asset-page-table-body-item-hover-item'>
+                    <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
+                    <Link href={'/' + props.title}><a>View</a></Link>
+                    {status !== 'trash' ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'trash').then(() => reGetData())}>Trash</span> : null}
+                    {status !== 'draft' ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'draft').then(() => reGetData())}>Draft</span> : null}
+                    {status !== 'pending' ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'pending').then(() => reGetData())}>Pending</span> : null}
+                    {status === 'trash' ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'delete').then(() => reGetData())}>Delete</span> : null}
+                    {status !== 'published' || status !== 'all' || !status ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'published').then(() => reGetData())}>Publish</span> : null}
+                </div>
+            )
         } else if (props.assetsType === 'users') {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
@@ -97,17 +51,17 @@ const TableBodyItemOnHover = props => {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={'/admin/form/' + props._id}><a>Edit</a></Link>
-                    <button onClick={() => deleteMeta(props._id, window.location.origin).then(() => reGetData())}>Delete</button>
+                    <span onClick={() => deleteMeta(props._id, window.location.origin).then(() => reGetData())}>Delete</span>
                 </div>
             );
         } else if (props.assetsType === 'pages') {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={'/admin/page?id=' + props._id}><a>Edit</a></Link>
-                    <button onClick={() => deletePage(props._id, window.location.origin).then(() => reGetData())}>Delete</button>
+                    <span onClick={() => deletePage(props._id, window.location.origin).then(() => reGetData())}>Delete</span>
                 </div>
             );
-        }else {
+        } else {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
 

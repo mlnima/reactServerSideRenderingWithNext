@@ -15,26 +15,7 @@ import {useRouter} from "next/router";
 import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
 import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
 import {languagesOptions} from "../../../_variables/_variables";
-import styled from "styled-components";
-let StyledDiv = styled.div`
-  display: grid;
-  justify-content: center;
-  grid-template-columns: 1fr;
-  .content{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-  }
-  @media only screen and (min-width: 768px) {
-    grid-template-columns: 1fr 200px;
-    grid-gap: 20px;
-    .content{
-      .post-admin-widget-editor{
-      }
-    }
-}
-`
+
 const Index = props => {
     const contextData = useContext(AppContext);
     const router = useRouter();
@@ -91,8 +72,6 @@ const Index = props => {
         }
 
     }, [props]);
-
-
 
 
     const onChangeHandler = e => {
@@ -222,146 +201,115 @@ const Index = props => {
     }
 
 
-    const renderWidgetEditors = (state.widgets ? state.widgets.sort((a, b) => (a.widgetIndex > b.widgetIndex) ? 1 : -1) : []).map(widgetEditorData => {
-        return (
-            <div className='post-admin-widget-editor'>
-                <WidgetModel state={state} setState={setState} widgetIndex={widgetEditorData ? widgetEditorData.widgetIndex ? widgetEditorData.widgetIndex : 0 : 0} isPost={true}
-                             key={(state.widgets || []).indexOf(widgetEditorData)}
-                    //data={{data: widgetEditorData}}
-                             data={widgetEditorData}
-                             translationLanguages={siteIdentity.translationLanguages || []}/>
-            </div>
-        )
-    })
+    // const renderWidgetEditors = (state.widgets ? state.widgets.sort((a, b) => (a.widgetIndex > b.widgetIndex) ? 1 : -1) : []).map(widgetEditorData => {
+    //     return (
+    //         <div className='post-admin-widget-editor'>
+    //             <WidgetModel state={state} setState={setState} widgetIndex={widgetEditorData ? widgetEditorData.widgetIndex ? widgetEditorData.widgetIndex : 0 : 0} isPost={true}
+    //                          key={(state.widgets || []).indexOf(widgetEditorData)}
+    //                 //data={{data: widgetEditorData}}
+    //                          data={widgetEditorData}
+    //                          translationLanguages={siteIdentity.translationLanguages || []}/>
+    //         </div>
+    //     )
+    // })
 
     return (
         <>
 
-                <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
-                <StyledDiv className='admin-post'>
+            <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
+            <div  className='admin-post'>
+                <style jsx>{`
+                  .admin-post {
+                    display: grid;
+                    justify-content: center;
+                    grid-template-columns: 1fr;
 
-                    <div className="content">
+                    .content {
+                      display: flex;
+                      justify-content: center;
+                      align-items: center;
+                      flex-direction: column;
+                    }
+                  }
 
-                        <p>Translation(you need to activate the language in general settings)</p>
+                  @media only screen and (min-width: 768px) {
+                    .admin-post {
+                      grid-template-columns: 1fr 200px;
+                      grid-gap: 20px;
+                    }
+                  }
 
-                        <select ref={languageElement} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
+                `}</style>
 
-                            <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'Default'}</option>
-                            {languagesOptions}
+                <div className="content">
 
-                        </select>
+                    <p>Translation(you need to activate the language in general settings)</p>
 
-                        <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
-                                          activeEditingLanguage={editingData.activeEditingLanguage}
-                                          onChangeHandler={onTranslatedInputChangeHandler}
-                                          onDescriptionChangeHandler={onDescriptionChangeHandler}
+                    <select ref={languageElement} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
 
-                        />
+                        <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'Default'}</option>
+                        {languagesOptions}
+
+                    </select>
+
+                    <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}
+                                      activeEditingLanguage={editingData.activeEditingLanguage}
+                                      onChangeHandler={onTranslatedInputChangeHandler}
+                                      onDescriptionChangeHandler={onDescriptionChangeHandler}
+
+                    />
 
 
-                        {/*{renderWidgetEditors}*/}
-                        <PostInformation productInfo={productInfo} setProductInfo={setProductInfo} postData={state} onChangeHandler={onChangeHandler}/>
+                    {/*{renderWidgetEditors}*/}
+                    <PostInformation productInfo={productInfo} setProductInfo={setProductInfo} postData={state} onChangeHandler={onChangeHandler}/>
 
-                    </div>
+                </div>
 
-                    <div className="side">
-                        <DropDownWidget renderFor='all' postData={state} textInputsState={textInputsState}
-                                        component={ActionOnPost} title={state.status}
-                                        onChangeHandler={onChangeHandler} onSaveHandler={onSaveHandler}/>
-                        <DropDownWidget renderFor='all' postData={state} component={Format} title='Format'
-                                        onChangeHandler={onChangeHandler}/>
-                        <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
-                                        component={Meta}
-                                        type='categories' title='Post Category'
-                                        onChangeHandler={onChangeHandler}
-                                        onPostMetaChangeHandler={onPostMetaChangeHandler}
-                                        onDeleteHandler={onDeleteMetaFromPost}/>
-                        <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
-                                        component={Meta}
-                                        type='tags' title='Post Tags'
-                                        onChangeHandler={onChangeHandler}
-                                        onPostMetaChangeHandler={onPostMetaChangeHandler}
-                                        onDeleteHandler={onDeleteMetaFromPost}/>
-                        <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
-                                        component={Meta}
-                                        type='actors' title='Post Actors'
-                                        onChangeHandler={onChangeHandler}
-                                        onPostMetaChangeHandler={onPostMetaChangeHandler}
-                                        onDeleteHandler={onDeleteMetaFromPost}/>
-                        <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
-                                        component={RatingOption}
-                                        title='Rating'
-                                        onChangeHandler={onChangeHandler}/>
-                        {/*<AddWidgetToPostMenu state={state} setState={setState}/>*/}
+                <div className="side">
+                    <DropDownWidget renderFor='all' postData={state} textInputsState={textInputsState}
+                                    component={ActionOnPost} title={state.status}
+                                    onChangeHandler={onChangeHandler} onSaveHandler={onSaveHandler}/>
+                    <DropDownWidget renderFor='all' postData={state} component={Format} title='Format'
+                                    onChangeHandler={onChangeHandler}/>
+                    <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
+                                    component={Meta}
+                                    type='categories' title='Post Category'
+                                    onChangeHandler={onChangeHandler}
+                                    onPostMetaChangeHandler={onPostMetaChangeHandler}
+                                    onDeleteHandler={onDeleteMetaFromPost}/>
+                    <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
+                                    component={Meta}
+                                    type='tags' title='Post Tags'
+                                    onChangeHandler={onChangeHandler}
+                                    onPostMetaChangeHandler={onPostMetaChangeHandler}
+                                    onDeleteHandler={onDeleteMetaFromPost}/>
+                    <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
+                                    component={Meta}
+                                    type='actors' title='Post Actors'
+                                    onChangeHandler={onChangeHandler}
+                                    onPostMetaChangeHandler={onPostMetaChangeHandler}
+                                    onDeleteHandler={onDeleteMetaFromPost}/>
+                    <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
+                                    component={RatingOption}
+                                    title='Rating'
+                                    onChangeHandler={onChangeHandler}/>
 
-                    </div>
+                </div>
 
-                </StyledDiv>
+            </div>
         </>
     );
 };
-
-// Index.getInitialProps = async ({query, req}) => {
-//     const domainName = req ? await getAbsolutePath(req) : '';
-//     let post;
-//     let postData
-//     let requestBody;
-//     let settings;
-//     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
-//     settings = settingsData.data.settings ? settingsData.data.settings : []
-//
-//     const newPostData = {
-//         status: 'published',
-//         postType: settings.identity.data.defaultPostType || 'standard',
-//         rating: settings.identity.data.defaultPostRating || 'enable',
-//         tags: [],
-//         categories: [],
-//         actors: [],
-//         inSlideShow: false,
-//         quality: '2160p',
-//         views: 0,
-//         likes: 0,
-//         disLikes: 0,
-//         translations: {}
-//     }
-//
-//     if (settings.identity.data.translationLanguages) {
-//         settings.identity.data.translationLanguages.forEach(lang => {
-//             newPostData.translations[lang] = ''
-//         })
-//     }
-//
-//
-//     if (query.new) {
-//         post = newPostData
-//     } else if (query.id) {
-//         requestBody = {
-//             _id: query.id,
-//         };
-//
-//         postData = await getPost(requestBody, domainName, false, query.id)
-//         post = postData.data ? postData.data.post : newPostData
-//         if (!post.translations) {
-//             post.translations = {}
-//         }
-//     }
-//
-//     return {post, query, ...settings}
-// };
 
 export const getServerSideProps = async ({req, query}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let post;
     let postData
     let requestBody;
-   // let settings;
     const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
-   // settings = settingsData.data.settings ? settingsData.data.settings : []
     let settings = settingsData.data ? {
-        identity:settingsData?.data?.settings.find(s=>s.type === 'identity'),
-       // design:settingsData?.data?.settings.find(s=>s.type === 'design')
-    } :{}
-
+        identity: settingsData?.data?.settings.find(s => s.type === 'identity'),
+    } : {}
 
 
     const newPostData = {

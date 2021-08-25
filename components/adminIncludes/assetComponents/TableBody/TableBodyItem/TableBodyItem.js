@@ -25,10 +25,12 @@ let StyledDiv = styled.div`
     display: flex;
     align-items: center;
     height: 35px;
+    width: 300px;
     border: .2px solid rgba(0, 0, 0, .1);
     border-top: none;
+    cursor: pointer;
 
-    button, a {
+    span, a {
       text-decoration: none;
       border: none;
       color: var(--admin-light-blue-color);
@@ -40,6 +42,7 @@ let StyledDiv = styled.div`
       display: flex;
       align-items: center;
       justify-content: center;
+      font-size: 12px;
     }
 
     button {
@@ -51,11 +54,7 @@ let StyledDiv = styled.div`
     background-color: #fff;
   }
 
-  .asset-page-table-body-item-hover-item {
-    display: flex;
-    align-items: center;
-    width: 310px;
-  }
+
 `;
 
 
@@ -142,7 +141,7 @@ const TableBodyItem = props => {
             <StyledDiv className='asset-page-table-body-item' onMouseOver={() => onMouseEnterHandler()}
                        onMouseLeave={() => onMouseOutHandler()}>
                 <div className='asset-page-table-body-item-content'>
-                    <input className='asset-page-table-body-item-content-select' type='checkbox' checked={props.selectedItems.includes(props.data._id)}
+                    <input className='asset-page-table-body-item-content-select' type='checkbox' className={'asset-table-check-box'} checked={props.selectedItems.includes(props.data._id)}
                            onChange={e => onSelectChangeHandler(e)}/>
                     {renderProperties}
                 </div>

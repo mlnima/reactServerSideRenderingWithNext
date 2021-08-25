@@ -166,13 +166,13 @@ const youtube = props => {
             <div className='admin-import-page-youtube-api-key'>
                 <h2>Youtube API KEY</h2>
                 <input name='apiKey' value={ state.apiKey } onChange={ e => onChaneHandler(e) }/>
-                <button onClick={ () => onSaveApiKeyHandler() } className='saveBtn'>Save API Key</button>
+                <button onClick={ () => onSaveApiKeyHandler() } className='saveBtn greenActionBtn'>Save API Key</button>
             </div>
             <div className='admin-import-page-youtube'>
                 <h1>Youtube Importer</h1>
                 <textarea ref={ urlsElement } />
-                <button className='saveBtn' onClick={ () => onImportHandler() }>Import</button>
-                <button className='saveBtn' onClick={ () => onSetDataForTest() }>setTestData</button>
+                <button className='saveBtn greenActionBtn' onClick={ () => onImportHandler() }>Import</button>
+                <button className='saveBtn greenActionBtn' onClick={ () => onSetDataForTest() }>setTestData</button>
             </div>
         </StyledDiv>
     );

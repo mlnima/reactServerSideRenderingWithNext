@@ -2,66 +2,13 @@ import React, {useEffect, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
-let StyledDiv = styled.div`
- .addNewTag{
-    .addBtn{
-      margin: 5px 0;
-      &:hover{
-        transform: scale(1.1);
-        transition: .5s;
-      }
-    }
-  }
 
-
-  .items{
-    display:flex;
-    flex-wrap: wrap;
-    .item{
-      display:flex;
-      align-items: center;
-      margin: 1px 3px;
-      font-size: x-small;
-      padding: 0 5px;
-      border-radius: 5px;
-      button{
-        outline: none;
-        border: none;
-        background-color: transparent;
-        padding: 3px;
-        margin: 0 3px;
-        span{
-          color: #0073aa;
-        }
-        &:hover{
-          transform: scale(1.3);
-          transition: .5s;
-          color: white;
-        }
-      }
-
-      &:hover{
-        transform: scale(1.1);
-        transition: .5s;
-        background-color: red;
-        color: black;
-      }
-
-    }
-  }
-`
 
 const Meta = props => {
     let newItemsElement = useRef(null);
     const deleteItem = (e) => {
-        props.onDeleteHandler(props.type,e.currentTarget.name)
+        props.onDeleteHandler(props.type, e.currentTarget.name)
     };
-
-    //
-    // useEffect(() => {
-
-    // }, []);
 
     const addNewItem = e => {
         e.preventDefault()
@@ -92,8 +39,35 @@ const Meta = props => {
     const addedItems = props.postData[props.type].map(item => {
         return (
             <div key={item.name + Date.now()} className='item'>
+                <style jsx>{`
+                  .item {
+                    display: flex;
+                    align-items: center;
+                    margin: 1px 3px;
+                    font-size: x-small;
+                    padding: 0 5px;
+                    border-radius: 5px;
+
+                    button {
+                      outline: none;
+                      border: none;
+                      margin: 0 3px;
+                      width: 16px;
+                      height: 16px;
+                      span {
+                        color: #0073aa;
+                      }
+                      &:hover {
+                        color: white;
+                        background-color: red;
+                        margin: 0 2px;
+                      }
+                    }
+                    
+                  }
+                `}</style>
                 <p>{item.name}</p>
-                <button name={item.name} onClick={(e) => deleteItem(e)}><FontAwesomeIcon icon={faTimes} className='post-element-info-logo'/>
+                <button name={item.name} onClick={(e) => deleteItem(e)}><FontAwesomeIcon style={{width:'16px',height:'16px'}} icon={faTimes} className='post-element-info-logo'/>
                 </button>
             </div>
         )
@@ -104,16 +78,31 @@ const Meta = props => {
         return null
     } else {
         return (
-            <StyledDiv className='PostCategoriesTagsActors'>
-                <form className="addNewTag" onSubmit={e => addNewItem(e)}>
+            <div className='post-meta-editor'>
+                <style jsx>{`
+                  .post-meta-editor {
+                    .add-new-meta {
+                      display: flex;
+                      justify-content: flex-start;
+                      align-items: center;
+
+                    }
+
+                    .items {
+                      display: flex;
+                      flex-wrap: wrap;
+                    }
+                  }
+                `}</style>
+                <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
                     <input ref={newItemsElement} type='text'/>
-                    <button className='addBtn' type='submit'> <FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></button>
+                    <button className='add-meta-button' type='submit'><FontAwesomeIcon style={{width:'16px',height:'16px'}} icon={faPlus} className='post-element-info-logo'/></button>
                 </form>
                 <span className='small-info'>Separate tags with commas</span>
                 <div className="items">
                     {addedItems}
                 </div>
-            </StyledDiv>
+            </div>
         );
     }
 

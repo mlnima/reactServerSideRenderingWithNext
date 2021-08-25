@@ -6,19 +6,44 @@ const EditLinkForAdmin = ({_id}) => {
     const contextData = useContext(AppContext);
     if (contextData.userData.role === 'administrator') {
         return (
-            <Link href={`/admin/post?id=${_id}`}>
-                <a className='edit-btn-admin'>
-                    <style jsx>{`
-                      .edit-btn-admin {
-                        color: var(--main-text-color);
-                        background-color: rgb(0, 115, 170);
-                        padding: 2px 5px;
-                        margin-left: 10px;
+            <div className='edit-as-admin'>
+                <style jsx>{`
+                  .edit-as-admin {
+                    width: 100%;
+                    height: 20px;
+                    display: flex;
+                    margin: 10px;
+                    justify-content: space-evenly;
+                    align-items: center;
+                
+                 
+                    .edit-as-admin-link {
+                      background-color: #f90;
+                      text-align: center;
+                      font-size: 12px;
+                      border-radius: 5px;
+                      padding: 5px;
+                      color: black;
+                      font-weight: bold;
+
+                      &:hover {
+                        transition: .4s;
+                        transform: scale(1.2);
                       }
-                    `}</style>
-                    Edit as Admin
+                    }
+                  }
+
+                `}</style>
+                <Link href={`/admin/post?id=${_id}`}>
+                    <a className='edit-as-admin-link'>
+                        Edit as Admin
+                    </a>
+                </Link>
+                <a className='edit-as-admin-link' href={`/admin/post?id=${_id}`} target='_blank'>
+                    Edit As Admin On New Tab
                 </a>
-            </Link>
+            </div>
+
         )
     } else return null
 };

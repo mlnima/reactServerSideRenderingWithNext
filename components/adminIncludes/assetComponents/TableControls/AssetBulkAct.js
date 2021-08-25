@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {AppContext} from '../../../../../context/AppContext'
+import {AppContext} from '../../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
-import {bulkAction} from "../../../../../_variables/ajaxPostsVariables";
+import {bulkAction} from "../../../../_variables/ajaxPostsVariables";
 
 const AssetBulkAct = props => {
         const contextData = useContext(AppContext);

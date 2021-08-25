@@ -1,31 +1,25 @@
 const widgetSchema = require('../../../models/settings/widgetSchema');
 const metaSchema = require('../../../models/metaSchema');
 const postSchema = require('../../../models/postSchema');
-const mongoose = require('mongoose');
+const _queryGeneratorForGettingPosts = require('../../clientControllers/_variables/_queryGeneratorForGettingPosts')
 
 
-
- const updatePostWidget = async (widget) => {
+const updatePostWidget = async (widget) => {
     const widgetData = widget?.data
     if (widgetData) {
         try {
-            const sortMethod = widgetData.sortBy ? widgetData.sortBy === 'latest' ? {lastModify: -1} : {[widgetData.sortBy]: -1} : {lastModify: -1};
-            const selectedMetaIdIsValid = widgetData.selectedMetaForPosts ? mongoose.Types.ObjectId.isValid(widgetData.selectedMetaForPosts) : false;
-            const findSelectedMetaId = widgetData?.selectedMetaForPosts && selectedMetaIdIsValid ?
-                widgetData?.selectedMetaForPosts :
-                await metaSchema.findOne({name: widgetData?.selectedMetaForPosts}).select('_id').exec().then(meta => meta ? meta.id : null)
-            const selectedMetaId = findSelectedMetaId ? findSelectedMetaId : null
-            const selectedMeta = mongoose.Types.ObjectId.isValid(selectedMetaId) ? {$or: [{tags: selectedMetaId}, {categories: selectedMetaId}, {actors: selectedMetaId}]} : {}
-            const countPosts = widgetData.sortBy === 'random' ? await postSchema.countDocuments({$and: [{status: 'published'}, selectedMeta]}).exec() : null
-            const posts = widgetData.type === 'posts' || widgetData.type === 'postsSwiper' ?
-                await postSchema.find({$and: [{status: 'published'}, selectedMeta]})
-                    .select('_id')
-                    .skip(widgetData.sortBy === 'random' ? Math.floor(Math.random() * countPosts) : false)
-                    .limit(parseInt(widgetData.count))
-                    .sort(sortMethod).exec() : []
+            const findingPostsOptions = _queryGeneratorForGettingPosts(widget?.data)
+            const findPostsQueries = {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}
+            let totalCount = await postSchema.countDocuments(findPostsQueries).exec()
+            let posts = await postSchema.find(findPostsQueries, ['_id'],
+                {
+                    skip: widgetData.sortBy === 'random' ? Math.floor(Math.random() * totalCount) : findingPostsOptions.size * (findingPostsOptions.page - 1),
+                    limit: findingPostsOptions.size,
+                    sort: findingPostsOptions.sortQuery
+                }).exec()
             const dateForUpdateWidget = {
                 ...widgetData,
-                posts: posts.map(post => post._id)
+                posts
             }
             return dateForUpdateWidget
         } catch (error) {
@@ -61,11 +55,11 @@ const adminUpdateWidget = async (req, res) => {
 
         })
 
-    } else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ) {
-        const countQuery = {count:{ $gt: 0 }}
+    } else if (widgetData.type === 'meta' || widgetData.type === 'metaWithImage') {
+        const countQuery = {count: {$gt: 0}}
         const typeQuery = {type: widgetData.metaType}
-        const statusQuery = {status:'published'}
-        const metas = widgetData.metaType ? await metaSchema.find({$and:[countQuery,typeQuery,statusQuery]}).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
+        const statusQuery = {status: 'published'}
+        const metas = widgetData.metaType ? await metaSchema.find({$and: [countQuery, typeQuery, statusQuery]}).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
         const dateForUpdateWidget = {
             ...widgetData,
             metaData: metas.map(meta => meta._id),

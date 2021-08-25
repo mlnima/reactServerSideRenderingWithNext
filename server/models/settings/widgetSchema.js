@@ -15,6 +15,7 @@ const widgetDataSchema =  mongoose.Schema({
     deviceTypeToRender: String,
     languageToRender: String,
     metaType: String,
+    postType: String,
     sortBy: String,
     LogoText: String,
     LogoUrl:String,

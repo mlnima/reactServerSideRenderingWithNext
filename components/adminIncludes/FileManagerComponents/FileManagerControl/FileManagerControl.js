@@ -75,10 +75,8 @@ const FileManagerControl = props => {
                 }
                 button{
                     margin: 0 10px;
-                    background-color: transparent;
-                    color: black;
                     outline: none;
-                    border: .4px black solid;
+                    border: none;
                     padding: 8px 10px;
                     border-radius: 5px;
                     &:active{

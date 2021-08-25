@@ -135,7 +135,7 @@ export const getFormsData = async (data) => {
         data,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/admin/forms/getFormsData', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/forms/getFormsData', body)
 }
 
 export const getFormData = async (data, domainName) => {
@@ -179,7 +179,7 @@ export const getPagesData = async (data) => {
         ...data,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/admin/pages/getPagesData', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/pages/getPagesData', body)
 }
 
 //others
@@ -198,7 +198,7 @@ export const getOrders = async (data, domainName) => {
         token: localStorage.wt
     };
 
-    return await axios.post(domainName + `/api/admin/orders/getOrders`, body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/orders/getOrders`, body)
 };
 
 export const getFirstLoadData = async (req,dynamicWidgets,page) => {

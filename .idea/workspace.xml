@@ -20,8 +20,66 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsByMeta.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/global/AdminPanelGlobalStyles.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_queryGeneratorForGettingPosts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_error.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/ajaxAuthVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxAuthVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/Duration/Duration.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/Duration/Duration.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextAreaComponent/TextAreaComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextAreaComponent/TextAreaComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInput/TextInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInput/TextInput.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInputWithUploadBtn/TextInputWithUploadBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/TextInputWithUploadBtn/TextInputWithUploadBtn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/RatingOption/RatingOption.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/RatingOption/RatingOption.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminTopBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TopBar/AdminTopBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemOnHover/TableBodyItemOnHover.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemOnHover/TableBodyItemOnHover.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkActionAndAssetTypeSelector/AssetBulkAct.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkActionAndAssetTypeSelector/AssetBulkActionAndAssetTypeSelector.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetPagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetPagination.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSearch.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/TableControls.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/TableControls.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableHeader/TableHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableHeader/TableHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/GlobalStyles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AdminLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/youtube/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/youtube/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/tools/terminal/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/tools/terminal/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/user/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/user/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en/common.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/settings/widgetSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/settings/widgetSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/AdminStyle.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/_grid.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/_mixIns.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/buttons.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/colors.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/global.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/globalAdminPanel.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/inputs.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/links.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/selects.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/styles/styles.scss" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,14 +145,20 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\sk" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableControls" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\PostPage\components" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\PostCard\VideoCardType" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\admin\settings" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\adminControllers" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\socketServer" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.devAndSocket">
+  <component name="RunManager" selected="Node.js.PostsTypes.js">
+    <configuration name="PostsTypes.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.js" working-dir="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls">
+      <method v="2" />
+    </configuration>
+    <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/temp.js" working-dir="$PROJECT_DIR$">
+      <method v="2" />
+    </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -125,33 +189,13 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="setup" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="setup" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="startAndSocket" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="startAndSocket" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="npm.devAndSocket" />
+        <item itemvalue="Node.js.PostsTypes.js" />
+        <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.fixMetaData" />
-        <item itemvalue="npm.setup" />
-        <item itemvalue="npm.startAndSocket" />
       </list>
     </recent_temporary>
   </component>
@@ -761,7 +805,11 @@
       <workItem from="1629360184834" duration="28685000" />
       <workItem from="1629444617893" duration="11226000" />
       <workItem from="1629481566064" duration="14869000" />
-      <workItem from="1629554620628" duration="4399000" />
+      <workItem from="1629554620628" duration="8964000" />
+      <workItem from="1629619874860" duration="4839000" />
+      <workItem from="1629747854488" duration="1205000" />
+      <workItem from="1629802193820" duration="28449000" />
+      <workItem from="1629892341544" duration="4300000" />
     </task>
     <servers />
   </component>
@@ -811,7 +859,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/admin/post/index.js</url>
-          <line>149</line>
+          <line>128</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -820,7 +868,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/admin/post/index.js</url>
-          <line>97</line>
+          <line>76</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -875,7 +923,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>659</line>
+          <line>671</line>
           <option name="timeStamp" value="42" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -968,7 +1016,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/layouts/AdminLayout.js</url>
-          <line>10</line>
+          <line>11</line>
           <option name="timeStamp" value="73" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

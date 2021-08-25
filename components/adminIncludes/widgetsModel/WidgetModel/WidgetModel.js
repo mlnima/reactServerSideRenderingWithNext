@@ -439,13 +439,25 @@ const WidgetModel = props => {
                             <div className='selectInputFieldForWidget widgetSection'>
                                 <p>Sort By:</p>
                                 <select name='sortBy' value={widgetData.sortBy} onChange={e => onChangeHandler(e)}>
-                                    <option value='lastModify'>Last Modified</option>
-                                    <option value='-lastModify'>Oldest Modified</option>
-                                    <option value='_id'>Newest</option>
-                                    <option value='-_id'>Oldest</option>
+                                    <option >select</option>
+                                    <option value='updatedAt'>Updated At</option>
+                                    <option value='createdAt'>Created At</option>
                                     <option value='views'>Views</option>
                                     <option value='likes'>Likes</option>
                                     <option value='random'>Random</option>
+                                </select>
+                            </div>
+
+                            <div className='selectInputFieldForWidget widgetSection'>
+                                <p>Post Type:</p>
+                                <select name='postType' value={widgetData.postType} onChange={e => onChangeHandler(e)}>
+                                    <option >select</option>
+                                    <option value='standard'>Standard</option>
+                                    <option value='video'>Video</option>
+                                    <option value='product'>Product</option>
+                                    <option value='food'>Food</option>
+                                    <option value='article'>Article</option>
+                                    <option value='promotion'>Promotion</option>
                                 </select>
                             </div>
 

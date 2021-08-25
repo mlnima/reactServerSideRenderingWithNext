@@ -62,9 +62,9 @@ const FileManagerArea = props => {
                         width: 80px;
                         height: 80px;
                         background-color: rgba(255,255,255,.1);
-                        border: none;
+                      
                         outline: none;
-                       // font-size: xxx-large;
+                
                         transition: .4s;
                         border-radius: 10px;
                     }
@@ -105,6 +105,7 @@ const FileManagerArea = props => {
                     flex-direction: column;
                     justify-content: space-between;
                 }
+                
                 p {
                     font-size: small;
                     overflow: hidden;

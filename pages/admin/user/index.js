@@ -177,7 +177,7 @@ const user = props => {
                     <option value='suspended'>suspended</option>
                 </select>
             </div>
-            <button className='saveBtn' onClick={() => onSaveHandler()}>Save Changes</button>
+            <button className='saveBtn greenActionBtn' onClick={() => onSaveHandler()}>Save Changes</button>
             <div className='user-admin-edit-profile-page-section-reset-password'>
                 <h2>Reset Password:</h2>
                 <p>Old Password:</p>
@@ -186,12 +186,12 @@ const user = props => {
                 <input name='newPassword1' value={resetPasswordData.newPassword1} onChange={e => onPasswordDataChangeHandler(e)}/>
                 <p>Repeat New Password:</p>
                 <input name='newPassword2' value={resetPasswordData.newPassword2} onChange={e => onPasswordDataChangeHandler(e)}/>
-                <button className='saveBtn' onClick={onPasswordResetHandler}>Reset The Password</button>
+                <button className='saveBtn greenActionBtn' onClick={onPasswordResetHandler}>Reset The Password</button>
             </div>
             <div className='user-admin-edit-profile-page-section-API'>
                 <h2>API KEY</h2>
                 <label>{userData.API_KEY}</label>
-                <button className='saveBtn' onClick={onNewAPIKeyRequest}>Generate API Key</button>
+                <button className='saveBtn greenActionBtn' onClick={onNewAPIKeyRequest}>Generate API Key</button>
             </div>
             {
                 !userData.keyMaster?

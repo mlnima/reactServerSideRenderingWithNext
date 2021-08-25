@@ -12,7 +12,6 @@ const GlobalStyles = ({colors}) => {
               body {
                 background-color: var(--background-color);
                 margin: 0;
-                //font-family: SourceSansPro, Arial, sans-serif;
                 font-family: Montserrat, Verdana, sans-serif;
                 -webkit-font-smoothing: antialiased;
                 -moz-osx-font-smoothing: grayscale;

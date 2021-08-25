@@ -11,9 +11,8 @@ import ImageGallery from "./ImageGallery/ImageGallery";
 import ProductPrice from "./ProductPrice/ProductPrice";
 import styled from "styled-components";
 let StyledDiv = styled.div`
- width: 96% ;
+  width: 96% ;
   padding:  1%;
-  border-radius: 10px;
   border: .1px solid rgba(0,0,0,.2);
   background-color: white;
   .saveBtn {
@@ -23,10 +22,10 @@ let StyledDiv = styled.div`
       background-color: #0085ba;
       color: white;
       outline: none;
-      border: none;
+     
       padding: 5px 20px;
       font-size: large;
-      border-radius: 5px;
+   
     }
   }
 
@@ -67,31 +66,20 @@ let StyledDiv = styled.div`
       }
 
       select {
-        border: none;
-        background-color: #f1f1f1;
         padding: 4px;
-        border-radius: 5px;
       }
 
       .textInput {
-        border-radius: 5px;
         outline: none;
-        border: none;
         padding: 3px 5px;
-      
         height: 30px;
-        background-color: #f1f1f1;
         width: 90%;
       }
 
       .textInputWithUpload {
-        border-radius: 5px;
         outline: none;
-        border: none;
         padding: 3px 5px;
-  
         height: 30px;
-        background-color: #f1f1f1;
         width: 80%;
 
       }
@@ -103,22 +91,16 @@ let StyledDiv = styled.div`
 
       .uploadBtn {
         outline: none;
-        border: none;
         padding: 3px 5px;
         width: 200px;
         height: 30px;
         margin: 0 3px;
-        border-radius: 5px;
       }
 
       .textareaInput {
-        border-radius: 5px;
         outline: none;
-        border: none;
         padding: 3px 5px;
-      
         height: 30px;
-        //background-color:#f1f1f1;
         width: 90%;
         min-height: 200px;
       }

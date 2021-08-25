@@ -12,7 +12,7 @@ let StyledDiv = styled.div`
     flex-wrap: wrap;
     .quickAccessBtn {
       
-      background-color: transparent;
+   
       padding: 10px 20px;
       border-radius: 5px;
       margin: 0 10px;

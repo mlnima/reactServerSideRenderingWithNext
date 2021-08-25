@@ -1,23 +1,14 @@
-import React, {useEffect} from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import { appWithTranslation } from 'next-i18next';
-import '../styles/styles.scss';
-import '../styles/globalAdminPanel.scss';
-import '../components/widgetsArea/WidgetArea/WidgetArea.scss';
-import '../components/includes/checkOutPageComponents/CheckoutPop/CheckoutPop.scss';
-
 import nextI18NextConfig from '../next-i18next.config.js';
 
-const CookiePopup = dynamic(() => import('../components/includes/ClientPopActionRequest/CookiePopup'))
+const CookiePopup = dynamic(() => import('../components/includes/ClientPopActionRequest/CookiePopup'), {ssr: false})
 const AppLayout = dynamic(() => import('../components/layouts/AppLayout'))
 const LoginRegisterPopup = dynamic(() => import('../components/includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false})
 const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'))
 const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false})
 const AppProvider = dynamic(() => import('../context/AppContext'))
-
-
-
 
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
@@ -28,13 +19,6 @@ const MyApp = ({Component, pageProps}) => {
                 <AdminLayout>
                     <Component {...pageProps} />
                 </AdminLayout>
-                <style global jsx>{`
-                    :root{
-                      --admin-color-8:#282828;
-                      --admin-color-0:#fff;
-                      --admin-light-blue-color:#0085ba;
-                    }
-                 `}</style>
             </AppProvider>
         )
     } else if (router.pathname.includes('/messenger') || router.pathname.includes('/chatroom')) {
