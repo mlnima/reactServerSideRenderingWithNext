@@ -24,7 +24,9 @@ const Meta = props => {
 
             const addedItemFromType = [...newItemsToSchemaForm]
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
-        } else if (newItemsElement.current.value) {
+
+
+        }else if (newItemsElement.current.value) {
             const newItemData = {
                 name: newItemsElement.current.value.trim(),
                 type: props.type
@@ -32,7 +34,11 @@ const Meta = props => {
 
             const addedItemFromType = [newItemData]
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
+
         }
+        setTimeout(()=>{
+            newItemsElement.current.value = ''
+        },500)
 
     };
 
@@ -86,6 +92,9 @@ const Meta = props => {
                       justify-content: flex-start;
                       align-items: center;
 
+                    }
+                    .small-info{
+                    font-size: 12px;
                     }
 
                     .items {

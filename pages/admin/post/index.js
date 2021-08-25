@@ -15,6 +15,7 @@ import {useRouter} from "next/router";
 import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
 import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
 import {languagesOptions} from "../../../_variables/_variables";
+import _ from "lodash";
 
 const Index = props => {
     const contextData = useContext(AppContext);
@@ -121,10 +122,14 @@ const Index = props => {
     }
 
     const onPostMetaChangeHandler = (type, data) => {
-        setState({
-            ...state,
-            [type]: [...state[type], ...data]
+        const uniqItems = _.uniqBy([...state[type], ...data],  (e) =>{
+            return e.name;
         })
+
+        setState(prevState=>({
+            ...prevState,
+            [type]: uniqItems
+        }))
     }
     const onDeleteMetaFromPost = (type, name) => {
         setState({
