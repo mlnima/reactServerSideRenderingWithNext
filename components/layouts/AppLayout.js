@@ -42,17 +42,12 @@ const AppLayout = props => {
     }, [props.widgets]);
 
     useEffect(() => {
-        routeChangedHandler()
-    }, [props]);
+        contextData.dispatchState(prevState => ({
+            ...prevState,
+            loading:false
+        }))
 
-    const routeChangedHandler = () => {
-        contextData.state.loading ?
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            }) :
-            null
-    }
+    }, [props]);
 
 
     const sidebarPositionName = useMemo(() => setSidebarName(router.pathname,props.pageInfo?.pageName,''), [router.pathname])

@@ -26,16 +26,11 @@ const TagCardMedia = props => {
             let data = {
                 checkUrl: props.imageUrl,
             }
-            // setTimeout(() => {
                 checkRemovedContent(data).then(res => {
-                    // clientSelfWidgetUpdate(data)
-                    console.log(res?.data)
                     if (imageRef.current && res?.data?.newImageUrl ){
-
                         imageRef.current.src = res?.data?.newImageUrl
                     }
                 })
-            // }, 1000)
         }
     }
     return (

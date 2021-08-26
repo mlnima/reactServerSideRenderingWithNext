@@ -3,11 +3,11 @@ import {useRouter} from "next/router";
 import TagCardMedia from "./TagCardMedia";
 import {withTranslation} from "next-i18next";
 
-const TagCard = ({t,cardWidth, tag}) => {
+const TagCard = ({t,cardWidth, tag,onActivateLoadingHandler}) => {
     const router = useRouter()
     return (
         <Link href={`/tag/${tag._id}`}>
-            <a className='tag-card-link'>
+            <a className='tag-card-link' onClick={onActivateLoadingHandler}>
                 <style jsx>{`
                   .tag-card-link {
                     width: 48vw;

@@ -1,8 +1,19 @@
 import PaginationComponentPageLink from "./PaginationComponentPageLink";
 import {rangeNumGenerator} from "../../../_variables/_variables";
 import _ from "lodash";
+import {useContext} from "react";
+import {AppContext} from "../../../context/AppContext";
 
 const PaginationComponent = props => {
+    const contextData = useContext(AppContext);
+
+    const onActivateLoadingHandler = ()=>{
+        contextData.dispatchState(prevState => ({
+            ...prevState,
+            loading:true
+        }))
+    }
+
     if (props.isActive && props.totalCount > props.size) {
         const range = rangeNumGenerator(props.currentPage, props.maxPage)
             .filter(n => (n !== (1 || props.maxPage)) && (n < props.maxPage) && (n > 0))
@@ -22,6 +33,7 @@ const PaginationComponent = props => {
                         return (
                             <PaginationComponentPageLink
                                 {...props}
+                                onActivateLoadingHandler={onActivateLoadingHandler}
                                 key={_.uniqueId('page_')}
                                 pageNumber={pageNumber}
                             />

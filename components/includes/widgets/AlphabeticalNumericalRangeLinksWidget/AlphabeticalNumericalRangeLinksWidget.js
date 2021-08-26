@@ -11,16 +11,12 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
         return router.pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] : [...'abcdefghijklmnopqrstuvwxyz0123456789']
     })
 
-
-
-
     const renderRange = range.map(i => {
-        const path = {
-            pathname: router.pathname || '',
-            query: {...(router?.query||{}), startWith: i} || {}
-        }
         return (
-            <Link key={_.uniqueId('alphabetical-range_')} href={path} as={router.asPath} scroll={false}>
+            <Link key={_.uniqueId('alphabetical-range_')} href={{
+                pathname: router.pathname,
+                query: {...router?.query, startWith: i,page:1}
+            }}  scroll={false}>
                 <a className='alphabetical-range-widget-item' onClick={contextData.functions.loadingHandler}>
                     <style jsx>{`
                            .alphabetical-range-widget-item{

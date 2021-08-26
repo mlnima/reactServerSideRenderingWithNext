@@ -13,6 +13,8 @@ const metaSchema =  new Schema({
     imageUrl:String,
     translations:mongoose.Mixed,
     count:Number,
+    additionalInfo:mongoose.Mixed
+
 },{ timestamps: true });
 
 module.exports = mongoose.model("meta", metaSchema);

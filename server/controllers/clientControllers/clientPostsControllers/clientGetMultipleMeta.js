@@ -2,25 +2,25 @@ const metaSchema = require('../../../models/metaSchema');
 
 module.exports = async (req, res) => {
     try {
-        const type = {type: req.body.metaType}
-        const size = parseInt(req.body.size) > 500 ? 500 : parseInt(req.body.size)
-        const statusQuery = req.body.status === 'all' ? {status: {$ne: 'trash'}} : !req.body.status ? 'published' : {status: req.body.status};
-        const page = parseInt(req.body.page);
-        const startWithQuery = req.body?.startWith === 'any' ? {} : {name: {$regex: '^' + req.body?.startWith, $options: 'i'}}
+
+        const type = {type: req.query.metaType}
+        const size = parseInt(req.query.size) > 500 ? 500 : parseInt(req.query.size)
+        const statusQuery = req.query.status === 'all' ? {status: {$ne: 'trash'}} : !req.query.status ? {status: 'published'}  : {status: req.query.status};
+        const page = parseInt(req.query.page);
+        const startWithQuery = req.query?.startWith === 'any' ? {} : {name: {$regex: '^' + req.query?.startWith, $options: 'i'}}
         const countQuery = {count:{ $gt: 0 }}
-        const searchQuery = req.body.keyword === '' || !req.body.keyword ? {} :
-            !req.body.lang || req.body.lang === 'default' ? {$or: [{name: new RegExp(req.body.keyword, 'i')}, {description: new RegExp(req.body.keyword, 'i')}]} :
+        const searchQuery = req.query.keyword === '' || !req.query.keyword ? {} :
+            !req.query.lang || req.query.lang === 'default' ? {$or: [{name: new RegExp(req.query.keyword, 'i')}, {description: new RegExp(req.query.keyword, 'i')}]} :
                 {
                     $or: [
-                        {name: new RegExp(req.body.keyword, 'i')},
-                        {description: new RegExp(req.body.keyword, 'i')},
-                        {[`translations.${req.body.lang}.name`]: new RegExp(req.body.keyword, 'i')},
-                        {[`translations.${req.body.lang}.description`]: new RegExp(req.body.keyword, 'i')},]
+                        {name: new RegExp(req.query.keyword, 'i')},
+                        {description: new RegExp(req.query.keyword, 'i')},
+                        {[`translations.${req.query.lang}.name`]: new RegExp(req.query.keyword, 'i')},
+                        {[`translations.${req.query.lang}.description`]: new RegExp(req.query.keyword, 'i')},]
                 }
 
-        let sortQuery = !req.body.sort ? {count: -1} : req.body.sort && typeof req.body.sort === 'string' ? req.body.sort : {[req.body.sort]: -1}
+        let sortQuery = !req.query.sort ? {count: -1} : req.query.sort && typeof req.query.sort === 'string' ? req.query.sort : {[req.query.sort]: -1}
         const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]}).exec()
-
         metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
             res.json({metas,totalCount:metaCount})
             res.end()

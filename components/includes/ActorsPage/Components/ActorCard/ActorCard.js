@@ -1,16 +1,15 @@
 import Link from "next/link";
-import {useState} from "react";
 import {useRouter} from "next/router";
 import ActorCardMedia from "./ActorCardMedia";
 import {withTranslation} from "next-i18next";
 
+const ActorCard = ({t,cardWidth, actor,onActivateLoadingHandler}) => {
 
-const ActorCard = ({t,cardWidth, actor}) => {
     const router = useRouter()
-    const [title,setTitle]= useState(()=>  actor?.translations?.[router.locale]?.name || actor.name)
+
     return (
         <Link href={`/actor/${actor._id}`}>
-            <a className='actor-card-link'>
+            <a className='actor-card-link' onClick={onActivateLoadingHandler}>
                 <style jsx>{`
                   .actor-card-link {
                     width: 48vw;

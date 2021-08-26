@@ -3,12 +3,12 @@ import {useRouter} from "next/router";
 import CategoryCardMedia from "./CategoryCardMedia";
 import {withTranslation} from "next-i18next";
 
-const CategoryCard = ({t,cardWidth, category, postElementSize}) => {
+const CategoryCard = ({t,cardWidth, category, postElementSize,onActivateLoadingHandler}) => {
     const router = useRouter()
 
     return (
         <Link href={`/category/${category?._id}`}>
-            <a className='category-card-link'>
+            <a className='category-card-link' onClick={onActivateLoadingHandler}>
                 <style jsx>{`
                   .category-card-link {
 

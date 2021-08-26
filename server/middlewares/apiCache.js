@@ -1,8 +1,9 @@
-const apicache = require('apicache')
-const cache = apicache.middleware;
+const apiCache = require('apicache')
+const cache = apiCache.middleware;
 
 const cacheOn = (req, res) => {
     if(req.url === '/manifest.json') return true
+    if(req.url === '/robots.txt') return true
     return res.statusCode === 200 && (req.body.cache || req.query.cache);
 }
 

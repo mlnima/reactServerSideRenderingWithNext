@@ -27,11 +27,11 @@ const CategoryCardMedia = props => {
             let data = {
                 checkUrl: props.imageUrl,
             }
-            setTimeout(() => {
-                checkRemovedContent(data).then(() => {
-                    // clientSelfWidgetUpdate(data)
-                })
-            }, 1000)
+            checkRemovedContent(data).then(res => {
+                if (imageRef.current && res?.data?.newImageUrl ){
+                    imageRef.current.src = res?.data?.newImageUrl
+                }
+            })
         }
     }
 

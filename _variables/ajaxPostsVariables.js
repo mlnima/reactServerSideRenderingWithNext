@@ -1,4 +1,6 @@
 import axios from "axios";
+import _objectToQuery from "./clientVariables/_objectToQuery";
+import _metaPageQueryGenerator from "./clientVariables/_metaPageQueryGenerator";
 
 export const getPosts = async (data, domainName,cache,queriesData) => {
     const body = {
@@ -49,13 +51,9 @@ export const userCreateNewPost = async (data, domainName) => {
     return await axios.post(domainName + `/api/v1/posts/userCreateNewPost`, body)
 };
 
-export const getMultipleMeta = async (data,  domainName,cache) => {
-    const keywordQuery  = data.keyword ?  `&keyword=${encodeURIComponent(data.keyword)  }` :``
-    const body = {
-        ...data,
-        cache
-    };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getMultipleMeta?page=${ data.page }&metaType=${ data.metaType }${keywordQuery}&startWith=${ data.startWith }`, body)
+export const getMultipleMeta = async (data,metaType,cache) => {
+    const queries = _metaPageQueryGenerator(data,metaType,cache)
+    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getMultipleMeta${queries}`)
 };
 
 export const getSingleMeta = async (id,cache) => {

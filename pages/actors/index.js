@@ -40,10 +40,10 @@ const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,ref
             />
             <PaginationComponent
                 isActive={true}
-                currentPage={dataForGettingMeta?.page}
+                currentPage={router.query?.page || 1}
                 totalCount={metaSource?.totalCount}
-                size={dataForGettingMeta?.size}
-                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(dataForGettingMeta?.size))}
+                size={parseInt(router.query?.size) || 60}
+                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60) )}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
@@ -52,10 +52,10 @@ const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,ref
 
             <PaginationComponent
                 isActive={true}
-                currentPage={dataForGettingMeta?.page}
+                currentPage={router.query?.page || 1}
                 totalCount={metaSource?.totalCount}
-                size={dataForGettingMeta?.size}
-                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(dataForGettingMeta?.size))}
+                size={parseInt(router.query?.size) || 60}
+                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60) )}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
@@ -76,17 +76,18 @@ const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,ref
 
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['actorsPageTop','actorsPageLeftSidebar','actorsPageBottom', 'actorsPageRightSidebar'], 'actorsPage')
+    // const sort = context.query?.sort ? {sort: context.query?.sort}: {}
+    // const keyword = context.query?.keyword ? { keyword: encodeURIComponent(context.query?.keyword)}: {}
     const dataForGettingMeta = {
         metaType: 'actors',
         page: context.query?.page ?  parseInt(context.query?.page) : 1,
         size: context.query?.size ? parseInt(context.query?.size) : 60,
-        sort: context.query?.sort || null,
         startWith: context.query?.startWith || 'any',
-        keyword: context.query?.keyword || null,
         lang: context.query?.lang || 'default',
-        status: 'published'
+        status: 'published',
+
     }
-    const metaData = await getMultipleMeta(dataForGettingMeta, firstLoadData.domainName, true, context.query.metaType)
+    const metaData = await getMultipleMeta(context.query,'actors', true)
     const widgets = firstLoadData.widgets
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
     return {props: {
@@ -96,7 +97,7 @@ export const getServerSideProps = async (context) => {
             isMobile: Boolean(firstLoadData.isMobile),
             widgets,
             metaSource,
-            dataForGettingMeta,
+            // dataForGettingMeta,
             referer: firstLoadData.referer
     }}
 }

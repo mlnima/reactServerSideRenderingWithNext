@@ -7,9 +7,6 @@ const ActorCardMedia = props => {
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
 
-
-
-
     useEffect(() => {
         if (!props.imageUrl){
             _fixMetaImage(props.actorId).then(res=>{
@@ -30,12 +27,11 @@ const ActorCardMedia = props => {
             let data = {
                 checkUrl: props.imageUrl,
             }
-
-            setTimeout(() => {
-                checkRemovedContent(data).then(() => {
-                    // clientSelfWidgetUpdate(data)
-                })
-            }, 1000)
+            checkRemovedContent(data).then(res => {
+                if (imageRef.current && res?.data?.newImageUrl ){
+                    imageRef.current.src = res?.data?.newImageUrl
+                }
+            })
         }
     }
 
