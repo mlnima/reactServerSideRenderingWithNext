@@ -78,8 +78,8 @@ export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['actorsPageTop','actorsPageLeftSidebar','actorsPageBottom', 'actorsPageRightSidebar'], 'actorsPage')
     const dataForGettingMeta = {
         metaType: 'actors',
-        page: parseInt(context.query?.page) || 1,
-        size: parseInt(context.query?.size) || 30,
+        page: context.query?.page ?  parseInt(context.query?.page) : 1,
+        size: context.query?.size ? parseInt(context.query?.size) : 60,
         sort: context.query?.sort || null,
         startWith: context.query?.startWith || 'any',
         keyword: context.query?.keyword || null,

@@ -1,4 +1,4 @@
-import {useContext} from "react";
+import {useContext,useState} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {AppContext} from "../../../../context/AppContext";
@@ -7,8 +7,14 @@ import _ from "lodash";
 const AlphabeticalNumericalRangeLinksWidget = () => {
     const contextData = useContext(AppContext);
     const router = useRouter()
+    const [range,setRange] = useState(()=>{
+        return router.pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] : [...'abcdefghijklmnopqrstuvwxyz0123456789']
+    })
 
-    const renderRange = [...'abcdefghijklmnopqrstuvwxyz0123456789'].map(i => {
+
+
+
+    const renderRange = range.map(i => {
         const path = {
             pathname: router.pathname || '',
             query: {...(router?.query||{}), startWith: i} || {}
@@ -37,6 +43,7 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
                 {`
                     .alphabetical-range-widget{
                             display:flex;
+                            justify-content: center;
                             flex-wrap: wrap;
                     }
                 `}

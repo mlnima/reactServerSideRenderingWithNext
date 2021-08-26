@@ -1,9 +1,24 @@
-import React,{useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {checkRemovedContent} from "../../../../../_variables/ajaxPostsVariables";
+import _fixMetaImage from "../../../../../_variables/clientAjaxVariables/_fixMetaImage";
 
 const CategoryCardMedia = props => {
+    const imageRef = useRef(null)
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
+
+
+    useEffect(() => {
+        if (!props.imageUrl){
+            _fixMetaImage(props.categoryId).then(res=>{
+                if (imageRef.current && res?.data?.newImageUrl ){
+                    imageRef.current.src = res?.data?.newImageUrl
+                }
+            })
+
+        }
+
+    }, [props]);
 
     const onErrorHandler = () => {
         if (props.imageUrl) {
@@ -37,7 +52,7 @@ const CategoryCardMedia = props => {
               }
 
             `}</style>
-            <img className='category-card-image' src={props.imageUrl}   onError={onErrorHandler}  alt={props.mediaAlt}/>
+            <img ref={imageRef} className='category-card-image' src={props.imageUrl}   onError={onErrorHandler}  alt={props.mediaAlt}/>
         </React.Fragment>
     );
 };

@@ -71,7 +71,7 @@ export const getServerSideProps = async (context) => {
         lang: context.query.lang || null
     }
 
-    const tagData = context.query.tagId ? await getSingleMeta(context.query.tagId, true) : {}
+    const tagData = context.query?.tagId ? await getSingleMeta(context.query.tagId, true) : {}
     const tag = tagData.data ? tagData.data.meta : {}
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, context.req.originalUrl)
     const widgets = firstLoadData.widgets

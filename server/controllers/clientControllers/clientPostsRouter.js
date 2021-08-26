@@ -13,14 +13,16 @@ const clientGetMultipleMeta = require('./clientPostsControllers/clientGetMultipl
 const clientGetSingleMeta = require('./clientPostsControllers/clientGetSingleMeta')
 const clientGetComments = require('./clientPostsControllers/clientGetComments')
 const clientUserCreateNewPost = require('./clientPostsControllers/clientUserCreateNewPost')
+const clientFixMetaImage = require('./clientPostsControllers/clientFixMetaImage')
 
 router.post('/clientGetPosts',cacheSuccesses,clientGetPosts)
 router.post('/clientGetPost',cacheSuccesses,clientGetPost)
 router.post('/likeDislikeView',clientLikeDislikeView)
 router.post('/newComment',clientNewComment)
 router.post('/checkRemovedContent',clientCheckRemovedContent)
+router.post('/fixMetaImage',clientFixMetaImage)
 router.post('/getMultipleMeta',cacheSuccesses,clientGetMultipleMeta)
-router.post('/getSingleMeta',cacheSuccesses,clientGetSingleMeta)
+router.get('/getSingleMeta',cacheSuccesses,clientGetSingleMeta)
 router.post('/getComments',clientGetComments)
 router.post('/userCreateNewPost',authMiddleware,clientUserCreateNewPost)
 

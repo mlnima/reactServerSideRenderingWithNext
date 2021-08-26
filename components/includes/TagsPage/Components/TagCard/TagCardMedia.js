@@ -1,9 +1,23 @@
-import React,{useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {checkRemovedContent} from "../../../../../_variables/ajaxPostsVariables";
+import _fixMetaImage from "../../../../../_variables/clientAjaxVariables/_fixMetaImage";
 
 const TagCardMedia = props => {
+    const imageRef = useRef(null)
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
+
+    useEffect(() => {
+        if (!props.imageUrl){
+            _fixMetaImage(props.tagId).then(res=>{
+                if (imageRef.current && res?.data?.newImageUrl ){
+                    imageRef.current.src = res?.data?.newImageUrl
+                }
+            })
+
+        }
+
+    }, [props]);
 
     const onErrorHandler = () => {
         if (props.imageUrl) {
@@ -12,11 +26,16 @@ const TagCardMedia = props => {
             let data = {
                 checkUrl: props.imageUrl,
             }
-            setTimeout(() => {
-                checkRemovedContent(data).then(() => {
+            // setTimeout(() => {
+                checkRemovedContent(data).then(res => {
                     // clientSelfWidgetUpdate(data)
+                    console.log(res?.data)
+                    if (imageRef.current && res?.data?.newImageUrl ){
+
+                        imageRef.current.src = res?.data?.newImageUrl
+                    }
                 })
-            }, 1000)
+            // }, 1000)
         }
     }
     return (

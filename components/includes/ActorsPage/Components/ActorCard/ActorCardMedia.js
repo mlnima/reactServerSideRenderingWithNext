@@ -1,9 +1,27 @@
-import React,{useState} from 'react';
+import React, {useState, useEffect,useRef} from 'react';
 import {checkRemovedContent} from "../../../../../_variables/ajaxPostsVariables";
+import _fixMetaImage from "../../../../../_variables/clientAjaxVariables/_fixMetaImage";
 
 const ActorCardMedia = props => {
+    const imageRef = useRef(null)
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
+
+
+
+
+    useEffect(() => {
+        if (!props.imageUrl){
+            _fixMetaImage(props.actorId).then(res=>{
+                if (imageRef.current && res?.data?.newImageUrl ){
+                    imageRef.current.src = res?.data?.newImageUrl
+                }
+            })
+
+        }
+
+    }, [props]);
+
 
     const onErrorHandler = () => {
         if (props.imageUrl) {
@@ -12,6 +30,7 @@ const ActorCardMedia = props => {
             let data = {
                 checkUrl: props.imageUrl,
             }
+
             setTimeout(() => {
                 checkRemovedContent(data).then(() => {
                     // clientSelfWidgetUpdate(data)
@@ -36,7 +55,7 @@ const ActorCardMedia = props => {
               }
 
             `}</style>
-            <img className='actor-card-image' src={props.imageUrl} onError={onErrorHandler} alt={props.mediaAlt}/>
+            <img ref={imageRef} className='actor-card-image' src={props.imageUrl } onError={onErrorHandler} alt={props.mediaAlt}/>
         </React.Fragment>
     );
 };

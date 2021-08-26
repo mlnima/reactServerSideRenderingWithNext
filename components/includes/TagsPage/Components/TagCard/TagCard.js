@@ -49,7 +49,7 @@ const TagCard = ({t,cardWidth, tag}) => {
 
 
                 `}</style>
-                <TagCardMedia cardWidth={cardWidth} imageUrl={tag.imageUrl} mediaAlt={tag?.translations?.[router.locale]?.name || tag.name}/>
+                <TagCardMedia cardWidth={cardWidth} imageUrl={tag.imageUrl} mediaAlt={tag?.translations?.[router.locale]?.name || tag.name} tagId={tag._id}/>
                 <h3 className='tag-card-title'> { tag?.translations?.[router.locale]?.name || t([t(`customTranslation:${tag?.name}`)])}</h3>
             </a>
         </Link>);

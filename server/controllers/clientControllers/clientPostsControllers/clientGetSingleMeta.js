@@ -3,14 +3,22 @@ const mongoose = require('mongoose')
 
 
 module.exports = async (req, res) => {
-    const isValid = mongoose.isValidObjectId(req.body.id)
-    const query = isValid ? {_id:req.body.id} : {name:req.body.id}
-    metaSchema.findOne(query).exec().then(meta => {
-        res.json({meta})
-        res.end()
-    }).catch(err => {
+    try {
+        const _id = decodeURIComponent(req.query.id)
+        const validateId = _id ? mongoose.isValidObjectId(req.body.id) : false
+        if (validateId){
+            metaSchema.findById(_id).exec().then(meta => {
+                res.json({meta})
+                res.end()
+            }).catch(err => {
+                console.log(err)
+                res.error(500)
+                res.end()
+            })
+        }else {
+            res.end()
+        }
+    }catch (err){
         console.log(err)
-        res.error(500)
-        res.end()
-    })
+    }
 }

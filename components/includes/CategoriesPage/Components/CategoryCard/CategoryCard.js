@@ -58,7 +58,7 @@ const CategoryCard = ({t,cardWidth, category, postElementSize}) => {
 
 
                 `}</style>
-                <CategoryCardMedia cardWidth={cardWidth} imageUrl={category?.imageUrl} mediaAlt={category?.translations?.[router.locale]?.name || category?.name}/>
+                <CategoryCardMedia cardWidth={cardWidth} imageUrl={category?.imageUrl} mediaAlt={category?.translations?.[router.locale]?.name || category?.name} categotyId={category._id}/>
                 <h3 className='category-card-title'>{ category?.translations?.[router.locale]?.name || t([t(`customTranslation:${category?.name}`)])}</h3>
             </a>
         </Link>

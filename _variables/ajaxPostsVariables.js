@@ -59,11 +59,7 @@ export const getMultipleMeta = async (data,  domainName,cache) => {
 };
 
 export const getSingleMeta = async (id,cache) => {
-    const body = {
-        id,
-        cache
-    };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ id }`, body)
+    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ encodeURIComponent(id) }&cache=${cache}`)
 };
 
 
