@@ -11,12 +11,12 @@ export const getPosts = async (data, domainName,cache,queriesData) => {
     return await axios.post(process.env.REACT_APP_PRODUCTION_URL +`/api/v1/posts/clientGetPosts?requestFor=${encodeURIComponent(queriesData)}`, body)
 };
 
-export const getPost = async (data, domainName, cache) => {
+export const getPost = async (data, cache) => {
     const body = {
         ...data,
         cache
     };
-    return await axios.post(domainName + `/api/v1/posts/clientGetPost?id=${ data._id }` , body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/clientGetPost?id=${ data._id }` , body)
 };
 export const checkRemovedContent = async (data) => {
 
@@ -113,7 +113,7 @@ export const adminGetComments = async (data, domainName, cache) => {
     return await axios.post(domainName + `/api/admin/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
 };
 
-export const getComments = async (data, domainName, cache) => {
+export const getComments = async (data,  cache) => {
     const body = {
         ...data,
         cache,
