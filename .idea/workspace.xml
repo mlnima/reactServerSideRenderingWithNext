@@ -20,30 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/_variables/clientVariables/_objectToQuery.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorsRenderer/ActorsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorsRenderer/ActorsRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagsRenderer/TagsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagsRenderer/TagsRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actors/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMultipleMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMultipleMeta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middlewares/apiCache.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middlewares/apiCache.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/metaSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/metaSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetSingleMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetSingleMeta.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -774,7 +752,7 @@
       <workItem from="1629747854488" duration="1205000" />
       <workItem from="1629802193820" duration="28449000" />
       <workItem from="1629892341544" duration="8036000" />
-      <workItem from="1629964388340" duration="24956000" />
+      <workItem from="1629964388340" duration="25689000" />
     </task>
     <servers />
   </component>

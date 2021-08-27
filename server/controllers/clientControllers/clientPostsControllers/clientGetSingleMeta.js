@@ -16,7 +16,14 @@ module.exports = async (req, res) => {
                 res.end()
             })
         }else {
-            res.end()
+            metaSchema.findOne({name:_id}).exec().then(meta => {
+                res.json({meta})
+                res.end()
+            }).catch(err => {
+                console.log(err)
+                res.error(500)
+                res.end()
+            })
         }
     }catch (err){
         console.log(err)
