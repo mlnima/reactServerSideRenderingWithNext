@@ -3,7 +3,67 @@ import {faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useRouter} from "next/router";
 import {withTranslation} from "next-i18next";
+import styled from "styled-components";
 
+const SearchButtonStyledButton = styled.button`
+  border: none;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: transparent;
+  outline: none;
+  color: var(--navigation-text-color);
+`
+
+const SearchButtonStyledDiv = styled.div`
+  z-index: 10;
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  width: 100%;
+  padding: 0 10px;
+  height: 48px;
+  margin: 0 auto;
+  background-color: rgba(0, 0, 0, .9);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  ${props => props.open ? `animation: searchbarFall .3s linear alternate;` : `animation: none;`}
+  .search-button-widget-form {
+    max-width: 400px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+
+    .search-button-widget-form-keyword-input {
+      width: calc(100% - 58px);
+    }
+
+    .search-button-widget-form-submit-btn {
+      right: 0;
+      //padding: 3px;
+      top: 0;
+      border: none;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      background-color: transparent;
+      outline: none;
+      color: var(--navigation-text-color);
+      font-size: 1rem;
+      margin: 0 5px;
+
+    }
+
+    .search-button-widget-close-btn {
+      color: var(--navigation-text-color);
+      margin: 0 5px;
+    }
+  }
+`
 
 const SearchButton = ({t}) => {
     const router = useRouter()
@@ -37,77 +97,13 @@ const SearchButton = ({t}) => {
 
     return (
         <>
-            <button onClick={onOpenHandler} className='search-button-widget-open-btn' aria-label='Center Align' title={t([`common:Search`])}>
-                <style jsx>{`
-                  .search-button-widget-open-btn {
-                    border: none;
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    background-color: transparent;
-                    outline: none;
-                    color: var(--navigation-text-color);
-                  }
-                `}</style>
+            <SearchButtonStyledButton onClick={onOpenHandler} className='search-button-widget-open-btn' aria-label='Center Align' title={t([`common:Search`])}>
                 <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faSearch} className='search-bar-btn-open-svg'/>
-            </button>
+            </SearchButtonStyledButton>
 
             {open ?
-                <div className='search-button-widget-form-actions'>
-                    <style jsx>{`
+                <SearchButtonStyledDiv open={open} className='search-button-widget-form-actions'>
 
-
-
-                      .search-button-widget-form-actions {
-                        z-index: 10;
-                        position: fixed;
-                        top: 0;
-                        left: 0;
-                        right: 0;
-                        width: 100%;
-                        padding: 0 10px;
-                        height: 48px;
-                        margin: 0 auto;
-                        background-color: rgba(0,0,0,.9);
-                        display: flex;
-                        justify-content: center;
-                        align-items: center;
-                        //transition: all 0.5s ease 0s;
-                        ${open ? `animation: searchbarFall .3s linear alternate;` : `animation: none;`}
-                        .search-button-widget-form {
-                          max-width: 400px;
-                          display: flex;
-                          justify-content: flex-start;
-                          align-items: center;
-                          width: 100%;
-
-                          .search-button-widget-form-keyword-input {
-                            width: calc(100% - 58px);
-                          }
-
-                          .search-button-widget-form-submit-btn {
-                            right: 0;
-                            //padding: 3px;
-                            top: 0;
-                            border: none;
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: transparent;
-                            outline: none;
-                            color: var(--navigation-text-color);
-                            font-size: 1rem;
-                            margin: 0 5px;
-
-                          }
-
-                          .search-button-widget-close-btn {
-                            color: var(--navigation-text-color);
-                            margin: 0 5px;
-                          }
-                        }
-                      }
-                    `}</style>
                     <form className='search-button-widget-form' onSubmit={e => onSearchHandler(e)}>
                         <input type="text" onChange={e => onChangeHandler(e)} name='keyword' value={state.keyword} className='search-button-widget-form-keyword-input' placeholder={t([`common:Search`])}/>
                         <button type='submit' className='search-button-widget-form-submit-btn' title={t([`common:Search`])}>
@@ -118,7 +114,7 @@ const SearchButton = ({t}) => {
                         </span>
                     </form>
 
-                </div> : null
+                </SearchButtonStyledDiv> : null
 
             }
 
@@ -128,5 +124,5 @@ const SearchButton = ({t}) => {
 
 };
 
-export default  withTranslation(['common'])(SearchButton);
+export default withTranslation(['common'])(SearchButton);
 

@@ -7,26 +7,24 @@ import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import ActorsRenderer from "../../components/includes/ActorsPage/Components/ActorsRenderer/ActorsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-
+import styled from "styled-components";
+const ActorsPageStyledDiv = styled.div`
+  grid-area:main;
+  .actors{
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: center;
+    max-width: 100%;
+  }
+`
 const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,referer,isMobile}) => {
     const contextData = useContext(AppContext);
     const router = useRouter();
     const isWithSidebar = identity?.data?.metaPageSidebar || contextData?.siteIdentity?.metaPageSidebar;
 
     return (
-        <div className={isWithSidebar ? 'content main ' : 'content main '}>
-            <style jsx>{`
-                .content{
-                  grid-area:main;
-                }
-                .actors{
-                    display: flex;
-                    flex-wrap: wrap;
-                    align-items: center;
-                    justify-content: center;
-                    max-width: 100%;
-                }
-            `}</style>
+        <ActorsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
                 isMobile={isMobile}
                 widgets={widgets.filter(w=>w.data.position === 'actorsPageTop' )}
@@ -70,7 +68,7 @@ const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,ref
                 postElementImageLoader={design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
                 postElementImageLoaderType={design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
             />
-        </div>
+        </ActorsPageStyledDiv>
     );
 };
 

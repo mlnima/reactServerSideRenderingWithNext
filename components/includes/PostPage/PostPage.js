@@ -6,6 +6,7 @@ import {likeValueCalculator} from "../../../_variables/_variables";
 import {getComments, likeDislikeView} from "../../../_variables/ajaxPostsVariables";
 import dynamic from "next/dynamic";
 
+
 const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
 const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'))
 const PostMetaDataToSiteHead = dynamic(() => import('./components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
@@ -19,7 +20,74 @@ const Price = dynamic(() => import('./components/Price/Price'))
 const PostMeta = dynamic(() => import('./components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('./components/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('./components/CommentFrom/CommentFrom'))
+import styled from "styled-components";
 
+const PostPageStyledMain = styled.main`
+  display: flex;
+  justify-self: center;
+  flex-direction: column;
+  align-items: center;
+  justify-content: flex-start;
+  width: 100%;
+
+  .rating-price-download {
+    width: 100%;
+    background-color: var(--post-page-info-background-color);
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+
+    .rate-logo {
+      width: 30px;
+      height: 35px;
+      transition: .5s;
+
+      &:hover {
+        width: 35px;
+        height: 40px;
+      }
+    }
+
+    .price-information {
+      margin: 0 20px;
+      display: flex;
+      align-items: center;
+      font-size: 25px;
+      font-weight: bold;
+
+      .price-info-logo {
+        width: 23px;
+        height: 23px;
+      }
+    }
+  }
+
+  .promotion-thumbnail-link {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+
+    .main-thumbnail {
+      margin: auto;
+      max-width: 320px;
+    }
+
+    .redirect-link {
+      color: var(--main-text-color);
+      padding: 10px 20px;
+      border: var(--main-text-color) 1px solid;
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+    .rating-price-download {
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+  }
+`
 
 const PostPage = ({responseCode, design, post, identity, comments, widgets}) => {
     const contextData = useContext(AppContext);
@@ -41,7 +109,6 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
         disLike: 0,
         view: 0
     })
-
 
 
     const [commentsData, setCommentsData] = useState(() => {
@@ -85,76 +152,7 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
 
 
     return (
-        <main className='main post-page'>
-
-            <style jsx>{`
-              .post-page {
-                justify-self: center;
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: flex-start;
-                width: 100%;
-              }
-
-              .rating-price-download {
-                width: 100%;
-                background-color: var(--post-page-info-background-color);
-                display: flex;
-                justify-content: center;
-                flex-wrap: wrap;
-
-                .rate-logo {
-                  width: 30px;
-                  height: 35px;
-                  transition: .5s;
-
-                  &:hover {
-                    width: 35px;
-                    height: 40px;
-                  }
-                }
-
-                .price-information {
-                  margin: 0 20px;
-                  display: flex;
-                  align-items: center;
-                  font-size: 25px;
-                  font-weight: bold;
-
-                  .price-info-logo {
-                    width: 23px;
-                    height: 23px;
-                  }
-                }
-              }
-
-              .promotion-thumbnail-link {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-
-                .main-thumbnail {
-                  margin: auto;
-                  max-width: 320px;
-                }
-
-                .redirect-link {
-                  color: var(--main-text-color);
-                  padding: 10px 20px;
-                  border: var(--main-text-color) 1px solid;
-                }
-              }
-
-              @media only screen and (min-width: 768px) {
-                .rating-price-download {
-                  justify-content: space-between;
-                  align-items: center;
-                  flex-wrap: wrap;
-                }
-              }
-            `}</style>
+        <PostPageStyledMain className='main post-page'>
 
             <EditLinkForAdmin _id={post._id}/>
 
@@ -166,10 +164,21 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
 
             {post.postType === 'promotion' ? <PostTitle description={post.description} translations={post.translations}/> : null}
 
-            <div className='promotion-thumbnail-link'>
-                {post.mainThumbnail && post.postType === 'promotion' ? <a href={post.redirectLink}><img className='main-thumbnail' src={post.mainThumbnail} alt="title"/></a> : null}
-                {post.mainThumbnail && post.postType === 'promotion' ? <a href={post.redirectLink} className='redirect-link' target='_blank'>go to {post.title}</a> : null}
-            </div>
+            {
+                post.mainThumbnail && post.postType === 'promotion' ?
+                    <>
+                        <div className='promotion-thumbnail-link'>
+                            <a href={post.redirectLink}><img className='main-thumbnail' src={post.mainThumbnail} alt="title"/></a>
+                            <a href={post.redirectLink} className='redirect-link' target='_blank'>go to {post.title}</a>
+                        </div>
+                        <div className='promotion-thumbnail-link'>
+                            <a href={post.redirectLink}><img className='main-thumbnail' src={post.mainThumbnail} alt="title"/></a>
+                            <a href={post.redirectLink} className='redirect-link' target='_blank'>go to {post.title}</a>
+                        </div>
+                    </>
+                    : null
+            }
+
 
             {post.postType === 'promotion' ? <PostDescription description={post.description} translations={post.translations}/> : null}
 
@@ -199,7 +208,7 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
             {comments?.length > 0 ? <CommentsRenderer reGetComments={reGetComments} comments={commentsData}/> : null}
 
 
-        </main>
+        </PostPageStyledMain>
     );
 };
 export default PostPage;

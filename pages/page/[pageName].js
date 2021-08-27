@@ -1,12 +1,12 @@
-import React, {useContext} from 'react';
+import {useContext} from 'react';
 import {getFirstLoadData, getPageData} from "../../_variables/ajaxVariables";
-import styled from "styled-components";
-import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
+// import styled from "styled-components";
+// import WidgetsRenderer from '../../components/includes/WidgetsRenderer/WidgetsRenderer'
 import Error from "../_error";
 import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {AppContext} from "../../context/AppContext";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
+// let StyledDiv = styled.div`${props => props.stylesData ?? ''}`
 
 const page = ({responseCode,pageInfo,widgets,design,identity}) => {
     const contextData = useContext(AppContext);
@@ -54,16 +54,3 @@ export const getServerSideProps = async (context) => {
 
 export default page;
 
-// <StyledDiv className='page main'>
-//     <WidgetsRenderer
-//         position={pageInfo.pageName}
-//         rendering={true}
-//         widgets={(widgets || []).filter(widget => widget.data?.position === 'home')}
-//         className='home-page main'
-//         stylesData={pageInfo.pageStyle || ''}
-//         currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
-//         postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-//         postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-//     />
-//
-// </StyledDiv>

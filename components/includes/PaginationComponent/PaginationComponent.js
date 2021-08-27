@@ -3,6 +3,15 @@ import {rangeNumGenerator} from "../../../_variables/_variables";
 import _ from "lodash";
 import {useContext} from "react";
 import {AppContext} from "../../../context/AppContext";
+import styled from "styled-components";
+
+
+const PaginationComponentStyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  margin: 10px 0;
+  flex-wrap: wrap;
+`
 
 const PaginationComponent = props => {
     const contextData = useContext(AppContext);
@@ -19,15 +28,8 @@ const PaginationComponent = props => {
             .filter(n => (n !== (1 || props.maxPage)) && (n < props.maxPage) && (n > 0))
         const rangeWithMinMax = [1, ...range, props.maxPage]
         return (
-            <div className='pagination' key={_.uniqueId('pagination')}>
-                <style jsx>{`
-                  .pagination {
-                    display: flex;
-                    justify-content: center;
-                    margin: 10px 0;
-                    flex-wrap: wrap;
-                  }
-                `}</style>
+            <PaginationComponentStyledDiv className='pagination' key={_.uniqueId('pagination')}>
+
                 {
                     rangeWithMinMax.map(pageNumber => {
                         return (
@@ -40,7 +42,7 @@ const PaginationComponent = props => {
                         )
                     })
                 }
-            </div>
+            </PaginationComponentStyledDiv>
         );
     } else return null
 };

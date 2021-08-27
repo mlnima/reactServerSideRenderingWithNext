@@ -3,7 +3,20 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {AppContext} from "../../../../context/AppContext";
 import _ from "lodash";
-
+import styled from "styled-components";
+const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
+  display:flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  .alphabetical-range-widget-item{
+    background-color: var(--navigation-background-color);
+    color: var(--navigation-text-color);
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+  }
+  
+`
 const AlphabeticalNumericalRangeLinksWidget = () => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -18,15 +31,6 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
                 query: {...router?.query, startWith: i,page:1}
             }}  scroll={false}>
                 <a className='alphabetical-range-widget-item' onClick={contextData.functions.loadingHandler}>
-                    <style jsx>{`
-                           .alphabetical-range-widget-item{
-                                background-color: var(--navigation-background-color);
-                                color: var(--navigation-text-color);
-                                padding: 5px 10px;
-                                margin: 5px;
-                                border-radius: 5px;
-                           }
-                    `}</style>
                     {i}
                 </a>
             </Link>
@@ -34,19 +38,9 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
     })
 
     return (
-        <div className='alphabetical-range-widget'>
-            <style jsx>
-                {`
-                    .alphabetical-range-widget{
-                            display:flex;
-                            justify-content: center;
-                            flex-wrap: wrap;
-                    }
-                `}
-            </style>
-
+        <AlphabeticalNumericalRangeLinksWidgetStyledDiv className='alphabetical-range-widget'>
             {renderRange}
-        </div>
+        </AlphabeticalNumericalRangeLinksWidgetStyledDiv>
     );
 };
 export default AlphabeticalNumericalRangeLinksWidget;

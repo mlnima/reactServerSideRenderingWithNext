@@ -2,7 +2,40 @@ import { useContext, useRef } from 'react';
 import { newComment } from '../../../../../_variables/ajaxPostsVariables';
 import { AppContext } from '../../../../../context/AppContext';
 import withRouter from 'next/dist/client/with-router';
+import styled from "styled-components";
 
+
+const CommentFromStyledForm = styled.form`
+ 
+    display: flex;
+    flex-direction: column;
+    width: 95%;
+ 
+  .comment-form-input {
+    display: flex;
+  }
+  textarea {
+    width: 100%;
+    min-height: 200px;
+  }
+  textarea {
+    background-color: var(--post-page-info-background-color);
+    margin: 3px;
+    padding:5px;
+    border: none;
+    color: var(--post-page-info-color);
+  }
+  .comment-form-submit-button{
+    padding: 7px 20px;
+    text-align: center;
+    box-sizing: border-box;
+    color: var(--post-page-info-color);
+    background-color: var(--post-page-info-background-color);
+    border:none;
+    margin: 5px;
+    max-width: 150px;
+  }
+`
 const CommentFrom = props => {
     const contextData = useContext(AppContext);
     const bodyInput = useRef(null);
@@ -38,38 +71,8 @@ const CommentFrom = props => {
     }
 
     return (
-        <form className='comment-form' onSubmit={ e => onSubmitHandler(e) }>
-        <style jsx>{`
-            .comment-form{
-                display: flex;
-                flex-direction: column;
-                width: 95%;
-            }
-            .comment-form-input {
-                display: flex;
-            }
-            textarea {
-                width: 100%;
-                min-height: 200px;
-            }
-            textarea {
-                background-color: var(--post-page-info-background-color);
-                margin: 3px;
-                padding:5px;
-                border: none;
-                color: var(--post-page-info-color);
-            }
-            .comment-form-submit-button{
-                padding: 7px 20px;
-                text-align: center;
-                box-sizing: border-box;
-                color: var(--post-page-info-color);
-                background-color: var(--post-page-info-background-color);
-                border:none;
-                margin: 5px;
-                max-width: 150px;
-            }
-        `}</style>
+        <CommentFromStyledForm className='comment-form' onSubmit={ e => onSubmitHandler(e) }>
+
             <div >
 
                 <div className='comment-form-input'>
@@ -77,7 +80,7 @@ const CommentFrom = props => {
                 </div>
             </div>
             <button className='comment-form-submit-button' type='submit'>Post Comment</button>
-        </form>
+        </CommentFromStyledForm>
     );
 };
 export default withRouter(CommentFrom);

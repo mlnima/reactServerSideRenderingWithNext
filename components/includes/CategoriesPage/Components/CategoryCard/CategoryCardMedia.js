@@ -1,6 +1,17 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {checkRemovedContent} from "../../../../../_variables/ajaxPostsVariables";
 import _fixMetaImage from "../../../../../_variables/clientAjaxVariables/_fixMetaImage";
+import styled from "styled-components";
+
+const CategoryCardMediaStyledImage = styled.img`
+  width: 100%;
+  height: calc(48vw / 1.777);
+  @media only screen and (min-width: 768px) {
+    width: ${props => props.cardWidth}px;
+    height: calc(${props => props.cardWidth}px / 1.777);
+  }
+`
+
 
 const CategoryCardMedia = props => {
     const imageRef = useRef(null)
@@ -9,9 +20,9 @@ const CategoryCardMedia = props => {
 
 
     useEffect(() => {
-        if (!props.imageUrl){
-            _fixMetaImage(props.categoryId).then(res=>{
-                if (imageRef.current && res?.data?.newImageUrl ){
+        if (!props.imageUrl) {
+            _fixMetaImage(props.categoryId).then(res => {
+                if (imageRef.current && res?.data?.newImageUrl) {
                     imageRef.current.src = res?.data?.newImageUrl
                 }
             })
@@ -28,7 +39,7 @@ const CategoryCardMedia = props => {
                 checkUrl: props.imageUrl,
             }
             checkRemovedContent(data).then(res => {
-                if (imageRef.current && res?.data?.newImageUrl ){
+                if (imageRef.current && res?.data?.newImageUrl) {
                     imageRef.current.src = res?.data?.newImageUrl
                 }
             })
@@ -37,23 +48,7 @@ const CategoryCardMedia = props => {
 
 
     return (
-        <React.Fragment>
-            <style jsx>{`
-              .category-card-image {
-                width: 100%;
-                height: calc(48vw / 1.777);
-              }
-
-              @media only screen and (min-width: 768px) {
-                .category-card-image {
-                  width: ${props.cardWidth}px;
-                  height: calc(${props.cardWidth}px / 1.777);
-                }
-              }
-
-            `}</style>
-            <img ref={imageRef} className='category-card-image' src={props.imageUrl}   onError={onErrorHandler}  alt={props.mediaAlt}/>
-        </React.Fragment>
+        <CategoryCardMediaStyledImage cardWidth={props.cardWidth} ref={imageRef} className='category-card-image' src={props.imageUrl} onError={onErrorHandler} alt={props.mediaAlt}/>
     );
 };
 export default CategoryCardMedia;

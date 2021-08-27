@@ -5,9 +5,9 @@ import styled from "styled-components";
 import React, {useContext} from "react";
 import {AppContext} from "../../context/AppContext";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
-
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
+
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 let StyledMain = styled.main`
@@ -76,17 +76,19 @@ export const getServerSideProps = async (context) => {
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, context.req.originalUrl)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
-    return {props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
             widgets,
             ...firstLoadData?.settings,
-            query:context.query,
+            query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),
             postsSource,
             getPostsData,
             tag,
             referer: firstLoadData.referer
-    }}
+        }
+    }
 }
 
 export default tagPage;

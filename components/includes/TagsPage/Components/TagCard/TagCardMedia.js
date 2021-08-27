@@ -1,6 +1,17 @@
 import React, {useEffect, useRef, useState} from 'react';
 import {checkRemovedContent} from "../../../../../_variables/ajaxPostsVariables";
 import _fixMetaImage from "../../../../../_variables/clientAjaxVariables/_fixMetaImage";
+import styled from "styled-components";
+
+
+const TagCardMediaStyledImage = styled.img`
+  width: 100%;
+  height: calc(48vw / 1.777);
+  @media only screen and (min-width: 768px) {
+    width: ${props => props.cardWidth}px;
+    height: calc(${props => props.cardWidth}px / 1.777);
+  }
+`
 
 const TagCardMedia = props => {
     const imageRef = useRef(null)
@@ -8,15 +19,13 @@ const TagCardMedia = props => {
     const [isReported, setIsReported] = useState(false)
 
     useEffect(() => {
-        if (!props.imageUrl){
-            _fixMetaImage(props.tagId).then(res=>{
-                if (imageRef.current && res?.data?.newImageUrl ){
+        if (!props.imageUrl) {
+            _fixMetaImage(props.tagId).then(res => {
+                if (imageRef.current && res?.data?.newImageUrl) {
                     imageRef.current.src = res?.data?.newImageUrl
                 }
             })
-
         }
-
     }, [props]);
 
     const onErrorHandler = () => {
@@ -26,31 +35,15 @@ const TagCardMedia = props => {
             let data = {
                 checkUrl: props.imageUrl,
             }
-                checkRemovedContent(data).then(res => {
-                    if (imageRef.current && res?.data?.newImageUrl ){
-                        imageRef.current.src = res?.data?.newImageUrl
-                    }
-                })
+            checkRemovedContent(data).then(res => {
+                if (imageRef.current && res?.data?.newImageUrl) {
+                    imageRef.current.src = res?.data?.newImageUrl
+                }
+            })
         }
     }
     return (
-        <React.Fragment>
-            <style jsx>{`
-              .tag-card-image {
-                width: 100%;
-                height: calc(48vw / 1.777);
-              }
-
-              @media only screen and (min-width: 768px) {
-                .tag-card-image {
-                  width: 100%;
-                  height: calc(${props.cardWidth}px / 1.777);
-                }
-              }
-
-            `}</style>
-            <img className='tag-card-image' src={props.imageUrl}  onError={onErrorHandler} alt={props.mediaAlt}/>
-        </React.Fragment>
+        <TagCardMediaStyledImage ref={imageRef} cardWidth={props.cardWidth} className='tag-card-image' src={props.imageUrl} onError={onErrorHandler} alt={props.mediaAlt}/>
     );
 };
 export default TagCardMedia;

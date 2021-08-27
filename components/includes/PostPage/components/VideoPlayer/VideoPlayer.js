@@ -1,52 +1,52 @@
+import styled from "styled-components";
+
+const VideoPlayerStyledDiv = styled.div`
+  margin: 0;
+  position: relative;
+  top: 0;
+  right: 0;
+  left: 0;
+  width: 100%;
+
+  .responsive-player {
+    overflow: hidden;
+    position: relative;
+    padding-bottom: 56.30%;
+    margin-bottom: 20px;
+    height: 0;
+  }
+
+  iframe {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 50px;
+    padding: 0 !important;
+  }
+
+  .video-player-video-type {
+    position: absolute;
+    top: 0;
+    left: 0;
+    height: 100%;
+    width: 100%;
+    margin-bottom: 50px;
+    outline: none;
+    border-radius: 10px;
+  }
+
+  @media only screen and (min-width: 768px) {
+    max-width: 1300px;
+  }
+`
+
+
 const VideoPlayer = ({post}) => {
     return (
-        <div className='video-player'>
-            <style jsx>{`
-              .video-player {
-                margin: 0;
-                position: relative;
-                top: 0;
-                right: 0;
-                left: 0;
-                width: 100%;
-              }
+        <VideoPlayerStyledDiv className='video-player'>
 
-              .responsive-player {
-                overflow: hidden;
-                position: relative;
-                padding-bottom: 56.30%;
-                margin-bottom: 20px;
-                height: 0;
-              }
-
-              iframe {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                margin-bottom: 50px;
-                padding: 0 !important;
-              }
-
-              .video-player-video-type {
-                position: absolute;
-                top: 0;
-                left: 0;
-                height: 100%;
-                width: 100%;
-                margin-bottom: 50px;
-                //object-fit: cover;
-                outline: none;
-                border-radius: 10px;
-              }
-
-              @media only screen and (min-width: 768px) {
-                .video-player {
-                  max-width: 1300px;
-                }
-              }
-            `}</style>
             <meta itemProp="name" content={post.title}/>
             <meta itemProp="description" content={post.description}/>
             <meta itemProp="duration" content={post.duration}/>
@@ -66,7 +66,7 @@ const VideoPlayer = ({post}) => {
                 }
             </div>
 
-        </div>
+        </VideoPlayerStyledDiv>
 
     );
 };

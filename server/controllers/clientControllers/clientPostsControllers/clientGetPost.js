@@ -1,9 +1,9 @@
 const postSchema = require('../../../models/postSchema');
 
 module.exports = (req, res) => {
-    const title = req.body.title;
-    const _id = req.body._id;
-    const findQuery = _id ? {_id} : {title:decodeURI(title)}
+    const title = req.query.title;
+    const _id = req.query._id;
+    const findQuery = _id ? {_id} : {title:decodeURIComponent(title)}
     postSchema.findOne(findQuery).populate([
         {path: 'categories',select:{'name':1,'type':1}},
         {path: 'tags',select:{'name':1,'type':1}},

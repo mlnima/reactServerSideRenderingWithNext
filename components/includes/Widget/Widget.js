@@ -1,79 +1,10 @@
 import WidgetHeader from "./WidgetHeader/WidgetHeader";
-import WidgetFooter from "./WidgetFooter/WidgetFooter";
+//import WidgetFooter from "./WidgetFooter/WidgetFooter";
 import WidgetText from "./WidgetText/WidgetText";
 import styled from "styled-components";
 import React from "react";
 
 let StyledSection = styled.section`
-
-  .small-posts-content {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
-    grid-template-rows: repeat(auto-fill, minmax(140px, 1fr));
-    .small {
-      width: 140px;
-      height: 140px;
-      margin: auto;
-      .post-element {
-        width: 100%;
-        height: 140px;
-        .image {
-          img, video {
-            width: 140px;
-            height: 79px;
-            object-fit: cover;
-          }
-        }
-        h3 {
-          width: 130px;
-        }
-      }
-    }
-  }
-  .list-posts-content {
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    .post-element-div {
-      width: 98%;
-      max-width: 240px;
-      height: 90px;
-      margin: 2px 0;
-      a {
-        width: 98%;
-        height: 90px;
-        .post-element {
-          width: 100%;
-          height: 90px;
-          display: flex;
-          flex-direction: row;
-          justify-content: space-between;
-          .image {
-            margin: 0;
-            img, video {
-              width: 130px ;
-              aspect-ratio:16/9;
-            }
-            .top-right ,.bottom-right{
-              display: none;
-            }
-          }
-
-          .progressParent {
-            display: none;
-          }
-
-          h2 {
-            -webkit-box-orient: vertical;
-            display: -webkit-box;
-            -webkit-line-clamp: 4;
-            overflow: hidden;
-            text-overflow: ellipsis;
-            white-space: normal;
-            margin: 0 0 0 2px;
-          }
-        }
-      }
-    }
-  }
-  
 ${props => props.customStyles}
 `
 
@@ -81,6 +12,7 @@ ${props => props.customStyles}
 
 const Widget = props => {
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
+    //console.log(props.data?.customStyles?props.data?.customStyles:null)
     return (
         <StyledSection  className={'widget ' + (props.data?.extraClassName ?? '')}  {...idAttribute} customStyles={props.data?.customStyles || ''}>
             <WidgetHeader {...props.data}/>

@@ -1,20 +1,21 @@
-import React,{useEffect} from 'react';
 import Link from "next/link";
 import styled from "styled-components";
-let StyledDiv = styled.div`
-   padding: 10px;
-   max-width: 100vw;
-  .recent-comments-item{
+
+let RecentCommentsStyledDiv = styled.div`
+  padding: 10px;
+  max-width: 100vw;
+
+  .recent-comments-item {
     display: flex;
     flex-direction: column;
-    //align-items: center;
-    //max-height: 35px;
     word-wrap: break-word;
-    .recent-comments-item-author{
+
+    .recent-comments-item-author {
       color: #FF3565;
       margin: 0 5px;
     }
-    p{
+
+    p {
       white-space: nowrap;
       overflow: hidden;
       text-overflow: ellipsis;
@@ -40,9 +41,9 @@ const RecentComments = props => {
         )
     })
     return (
-        <StyledDiv className='recent-comments'>
+        <RecentCommentsStyledDiv className='recent-comments'>
             {renderComments}
-        </StyledDiv>
+        </RecentCommentsStyledDiv>
     );
 };
 export default RecentComments;

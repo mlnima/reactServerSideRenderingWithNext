@@ -1,6 +1,25 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
 import {clientSelfWidgetUpdate} from "../../../../_variables/_ajaxClientWidgetVariables";
+import styled from "styled-components";
+
+let ArticleCardMediaStyled = styled.div`
+  .article-card-image {
+    width: ${props =>props.postElementSize === 'list' ? '116.6px' : '100%'};
+    height: calc(48vw / 1.777);
+  }
+
+  @media only screen and (min-width: 768px) {
+    .article-card-image {
+      width: ${props =>props.postElementSize === 'list' ? '116.6px' : `${props =>props.cardWidth}px`};
+
+      height: calc(${props =>props.cardWidth}px / 1.777);
+
+    }
+  }
+`
+
+
 
 const ArticleCardMedia = props => {
     const [gotError, setGotError] = useState(false)
@@ -32,7 +51,7 @@ const ArticleCardMedia = props => {
 
 
     return (
-        <div className='article-card-media'>
+        <ArticleCardMediaStyled className='article-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <style jsx>{`
               .article-card-image {
                 width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
@@ -42,9 +61,7 @@ const ArticleCardMedia = props => {
               @media only screen and (min-width: 768px) {
                 .article-card-image {
                   width: ${props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
-                  
                   height: calc(${props.cardWidth}px / 1.777);
-
                 }
               }
             `}</style>
@@ -54,7 +71,7 @@ const ArticleCardMedia = props => {
                  onError={e => {
                      onErrorHandler(e)
                  }}/>
-        </div>
+        </ArticleCardMediaStyled>
     );
 };
 export default ArticleCardMedia;

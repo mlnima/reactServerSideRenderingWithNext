@@ -3,7 +3,29 @@ import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import ImageRenderer from "../../ImageRenderer/ImageRenderer";
 import {useRouter} from "next/router";
+import styled from "styled-components";
 
+const LogoStyledLink = styled.a`
+  text-decoration: none;
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: flex-start;
+  max-width: 300px;
+  cursor: pointer;
+  .logo-text {
+    font-size: xx-large;
+  }
+
+  .logo-text, .logo-headline {
+    color: var(--main-text-color);
+  }
+
+  .logo-headline {
+    margin: 0 5px;
+  }
+`
 const Logo = props => {
     const router = useRouter()
     const contextData = useContext(AppContext);
@@ -12,36 +34,8 @@ const Logo = props => {
     const logoImageUrl = props.LogoUrl;
 
     return (
-        <Link href='/' locale={router.locale||false}>
-            <a className='logo' onClick={contextData.functions.loadingHandler}>
-<style jsx>{`
-.logo{
-text-decoration: none;
-display: flex;
-flex-direction: row;
-flex-wrap: wrap;
-align-items: center;
-justify-content: flex-start;
-cursor: pointer;
-max-width: 300px;
-}
-.logo-text {
-font-size: xx-large;
-}
-.logo-text,.logo-headline{
-color: var(--main-text-color);
-}
-.logo-headline{
-margin: 0 5px;
-}
-@media only screen and (min-width: 768px){
-.logo{
- 
-}
-
-}
-`}</style>
-
+        <Link href='/' locale={router.locale || false}>
+            <LogoStyledLink className='logo' onClick={contextData.functions.loadingHandler}>
                 {logoImageUrl ?
                     <ImageRenderer imageUrl={logoImageUrl}
                                    altValue='logo'
@@ -56,7 +50,7 @@ margin: 0 5px;
                     </span>
                     : null}
                 {headLineData ? <p className='logo-headline'>{headLineData}</p> : null}
-            </a>
+            </LogoStyledLink>
         </Link>
     );
 };

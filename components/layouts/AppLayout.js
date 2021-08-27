@@ -1,6 +1,5 @@
 import React, {useContext, useEffect, useState, useMemo} from 'react';
 import dynamic from "next/dynamic";
-import {createGlobalStyle} from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import {useRouter} from "next/router";
 import setSidebarName from '../../_variables/clientVariables/_setSidebarName'
@@ -12,13 +11,12 @@ import SideBarWidgetArea from "../widgetsArea/SideBarWidgetArea/SideBarWidgetAre
 import FooterWidgetArea from "../widgetsArea/FooterWidgetArea/FooterWidgetArea";
 import GlobalStyles from "../global/GlobalStyles";
 
-
 const ConversationsRenderer = dynamic(() => import('../includes/ConversationBox/ConversationsRenderer'), {ssr: false})
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
 const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), {ssr: false})
-let CustomGlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
+
 
 const AppLayout = props => {
 
@@ -99,8 +97,8 @@ const AppLayout = props => {
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
-            <CustomGlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/>
-            <GlobalStyles colors={props.design?.data?.customColors || contextData?.siteDesign?.customColors || ''}/>
+            {/*<CustomGlobalStyle globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/>*/}
+            <GlobalStyles colors={props.design?.data?.customColors || contextData?.siteDesign?.customColors || ''} globalStyleData={props.design?.data?.customStyles || contextData?.siteDesign?.customStyles || ''}/>
             <SiteSettingSetter identity={props.identity || contextData?.siteIdentity} design={props.design || contextData?.siteDesign} eCommerce={props.eCommerce}/>
             {staticWidgets.topBar.length > 0 ?
                 <TopBarWidgetArea

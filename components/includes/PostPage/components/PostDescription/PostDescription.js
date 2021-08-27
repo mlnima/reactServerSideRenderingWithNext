@@ -2,6 +2,15 @@ import 'react-quill/dist/quill.snow.css';
 import {useRouter} from "next/router";
 import parse from "html-react-parser";
 import {useState} from "react";
+import styled from "styled-components";
+
+const PostDescriptionStyledDiv = styled.div`
+  color: var(--post-page-info-color);
+  margin: 0 5px;
+  padding: 50px 0;
+  
+`
+
 
 const PostDescription = ({description, translations}) => {
 
@@ -12,19 +21,10 @@ const PostDescription = ({description, translations}) => {
     });
 
     return (
-        <div className="description" >
-            <style jsx>{`
-              .description {
-                color: var(--post-page-info-color);
-                margin: 0 5px;
-                padding: 50px 0;
-              }
-            `}</style>
+        <PostDescriptionStyledDiv className="description" >
             {descriptionValue ? parse(descriptionValue) : ''}
-        </div>
+        </PostDescriptionStyledDiv>
     )
 };
 export default PostDescription;
 
-
-{/*{translations ? translations[router.locale] ? translations[router.locale].description || description : description : description}*/}

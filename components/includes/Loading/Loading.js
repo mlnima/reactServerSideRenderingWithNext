@@ -14,7 +14,7 @@ let StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
-
+  cursor: wait;
 
 
   .lds-ring {

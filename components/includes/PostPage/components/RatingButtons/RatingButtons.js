@@ -4,6 +4,41 @@ import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-ico
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
 import _shortNumber from '../../../../../_variables/clientVariables/_shortNumber'
 import {withTranslation} from 'next-i18next';
+import styled from "styled-components";
+
+
+const RatingButtonsStyledDiv = styled.div`
+  
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+  .rated-message{
+    color: var(--post-page-info-color);
+  }
+  .rating-item{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    color: var(--post-page-info-color);
+    outline: none;
+    border: none;
+    margin: 0 10px;
+  }
+  .rating-item-value{
+    font-size: 1rem;
+    padding: 0 5px;
+  }
+  .rating-item-value:disabled {
+    color: #33373c;
+  }
+  .rating-item-value:hover {
+    transition: all 1s ;
+    transform: scale(1.2);
+  }
+
+`
 
 const RatingButtons = ({t,_id,ratingAndViewData,rating,setRatingAndViewData}) => {
     const ratingBtnArea = useRef(null)
@@ -24,39 +59,7 @@ const RatingButtons = ({t,_id,ratingAndViewData,rating,setRatingAndViewData}) =>
     }
 
     return(
-        <div ref={ratingBtnArea} className="rating-buttons">
-                    <style jsx>{`
-                        .rating-buttons{
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                        }
-                        .rated-message{
-                            color: var(--post-page-info-color);
-                        }
-                        .rating-item{
-                            display: flex;
-                            justify-content: center;
-                            align-items: center;
-                            background-color: transparent;
-                            color: var(--post-page-info-color);
-                            outline: none;
-                            border: none;
-                            margin: 0 10px;
-                        }
-                        .rating-item-value{
-                            font-size: 1rem;
-                            padding: 0 5px;
-                        }
-                        .rating-item-value:disabled {
-                            color: #33373c;
-                        }
-                        .rating-item-value:hover {
-                            transition: all 1s ;
-                            transform: scale(1.2);
-                        }
-                        
-                    `}</style>
+        <RatingButtonsStyledDiv ref={ratingBtnArea} className="rating-buttons">
                     <span className='like-disLike-count-items rating-item' title={t([`common:Views`,t(`customTranslation:Views`)])}>
                         <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={faEye}  className='rate-logo' />
                         <p className='rating-item-value'>{_shortNumber(ratingAndViewData.views)} </p>
@@ -73,7 +76,7 @@ const RatingButtons = ({t,_id,ratingAndViewData,rating,setRatingAndViewData}) =>
                     </button>
                 </>:null}
 
-        </div>
+        </RatingButtonsStyledDiv>
     )
 };
 //export default RatingButtons;

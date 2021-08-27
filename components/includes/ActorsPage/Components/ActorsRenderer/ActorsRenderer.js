@@ -2,6 +2,14 @@ import _ from "lodash";
 import ActorCard from "../ActorCard/ActorCard";
 import {useContext} from "react";
 import {AppContext} from "../../../../../context/AppContext";
+import styled from "styled-components";
+
+let ActorsRendererStyledDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
 
 const ActorsRenderer = ({postElementSize, metaData, actors}) => {
     const contextData = useContext(AppContext);
@@ -18,20 +26,13 @@ const ActorsRenderer = ({postElementSize, metaData, actors}) => {
     }
 
     return (
-        <div className='actors-content'>
-            <style jsx>{`
-              .actors-content {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-              }
-            `}</style>
+        <ActorsRendererStyledDiv className='actors-content'>
             {
                 (actors || metaData || []).map(actor => {
                     return <ActorCard onActivateLoadingHandler={onActivateLoadingHandler} key={_.uniqueId('actors_')} cardWidth={cardWidth} actor={actor} postElementSize={postElementSize}/>
                 })
             }
-        </div>
+        </ActorsRendererStyledDiv>
     );
 };
 export default ActorsRenderer;

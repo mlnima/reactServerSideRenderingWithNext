@@ -5,37 +5,34 @@ import {faHome, faPowerOff} from "@fortawesome/free-solid-svg-icons";
 import {faBell, faEnvelope, faUser} from "@fortawesome/free-regular-svg-icons";
 import Link from "next/link";
 import {useRouter} from "next/router";
-
+import styled from "styled-components";
+const LoggedInItemsForMenuStyledDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  width: 100%;
+  .logged-in-item{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--navigation-text-color);
+    margin: 0 10px;
+    padding: 0;
+    place-items: center;
+  }
+  .logged-in-item-profile-image{
+    width: 25px;
+    height: 25px;
+    border-radius: 50%;
+  }
+`
 const LoggedInItemsForMenu = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
 
     if (contextData.userData.username && contextData.userData.username !== 'guest') {
         return (
-            <div className='logged-in-items'>
-                <style jsx>{`
-                    .logged-in-items{
-                        display: flex;
-                        align-items: center;
-                        justify-content: space-between;
-                        width: 100%;
-                         .logged-in-item{
-                            display: flex;
-                            align-items: center;
-                            justify-content: center;
-                            color: var(--navigation-text-color);
-                            margin: 0 10px;
-                            padding: 0;
-                            place-items: center;
-                        }
-                        .logged-in-item-profile-image{
-                            width: 25px;
-                            height: 25px;
-                            border-radius: 50%;
-                        }    
-                }
-            `}</style>
-
+            <LoggedInItemsForMenuStyledDiv className='logged-in-items'>
                 {contextData.siteIdentity.membership ?
                     <>
                         {
@@ -65,7 +62,7 @@ const LoggedInItemsForMenu = props => {
                 <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
                     <FontAwesomeIcon style={{width: '24px', height: '24px'}} icon={faPowerOff}/>
                 </p>
-            </div>
+            </LoggedInItemsForMenuStyledDiv>
         )
     } else return null
 };

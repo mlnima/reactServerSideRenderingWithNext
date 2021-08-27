@@ -2,6 +2,14 @@ import CategoryCard from "../CategoryCard/CategoryCard";
 import _ from "lodash";
 import {useContext} from "react";
 import {AppContext} from "../../../../../context/AppContext";
+import styled from "styled-components";
+
+let CategoriesRendererStyledDiv  = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
+
 
 const CategoriesRenderer = ({postElementSize, metaData, categories}) => {
     const contextData = useContext(AppContext);
@@ -18,20 +26,13 @@ const CategoriesRenderer = ({postElementSize, metaData, categories}) => {
         }))
     }
     return (
-        <div className='categories-content'>
-            <style jsx>{`
-              .categories-content {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-              }
-            `}</style>
+        <CategoriesRendererStyledDiv className='categories-content'>
             {
                 (categories || metaData || []).map(category => {
                     return <CategoryCard onActivateLoadingHandler={onActivateLoadingHandler} key={_.uniqueId('category_')} cardWidth={cardWidth} category={category} postElementSize={postElementSize}/>
                 })
             }
-        </div>
+        </CategoriesRendererStyledDiv>
     );
 };
 export default CategoriesRenderer;

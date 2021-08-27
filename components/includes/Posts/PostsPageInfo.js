@@ -1,22 +1,23 @@
+import styled from "styled-components";
+
+let PostsPageInfoStyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  h1{
+    color:var(--main-text-color);
+    text-align: center;
+  }
+
+`
+
 const PostsPageInfo = ({titleToRender}) => {
 
     const title = decodeURIComponent(titleToRender|| '')
     return (
-        <div className='posts-page-info'>
-            <style jsx>{`
-                .posts-page-info{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    h1{
-                        color:var(--main-text-color);
-                        text-align: center;
-                    }
-                }
-            
-            `}</style>
+        <PostsPageInfoStyledDiv className='posts-page-info'>
             <h1> {title.trim()}</h1>
-        </div>
+        </PostsPageInfoStyledDiv>
     );
 };
 export default PostsPageInfo;

@@ -3,6 +3,7 @@
 const _metaPageQueryGenerator = (queryData,metaType,cache) =>{
     const sort = queryData?.sort ? {sort: queryData?.sort}: {}
     const keyword = queryData?.keyword ? { keyword: encodeURIComponent(queryData?.keyword)}: {}
+    const cacheStatus = cache ? {cache} : {}
     const dataForGettingMeta = {
         metaType,
         page: queryData?.page || 1,
@@ -11,11 +12,12 @@ const _metaPageQueryGenerator = (queryData,metaType,cache) =>{
         lang: queryData?.lang || 'default',
         status: 'published',
         ...sort,
-        ...keyword
+        ...keyword,
+        ...cacheStatus
     }
     const queries= new URLSearchParams(dataForGettingMeta).toString()
 
-    return `?${queries}&cache=${cache}`
+    return `?${queries}`
 
 }
 

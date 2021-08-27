@@ -26,8 +26,8 @@ let StyledMain = styled.main`
 const actorPage = props => {
     const contextData = useContext(AppContext);
     return (
-        <StyledMain className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
-            {props.tag ? <PostsPageInfo titleToRender={props.tag.name}/> : null}
+        <StyledMain className="main posts-page" stylesData={props.design?.data?.actorPageStyle || contextData.siteDesign?.actorPageStyle || ''}>
+            {props.actor ? <PostsPageInfo titleToRender={props.actor?.name}/> : null}
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 widgets={props.widgets.filter(w => w.data.position === 'actorPageTop')}

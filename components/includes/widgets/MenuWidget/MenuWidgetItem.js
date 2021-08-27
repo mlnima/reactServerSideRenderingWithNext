@@ -5,6 +5,69 @@ import _ from "lodash";
 import {faBars, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import MenuWidgetItemLink from "./MenuWidgetItemLink";
+import styled from "styled-components";
+
+const MenuWidgetSubItemStyledLi = styled.li`
+  .menu-widget-sub-item {
+    display: ${props=>props.showSub ? 'initial' : 'none'};
+    z-index: 10;
+    background-color: var(--navigation-background-color);
+    width: 100px;
+    list-style-type: none;
+    padding: 10px 15px;
+
+  }
+
+  @media only screen and (min-width: 768px) {
+    .menu-widget-sub-item {
+      background-color: transparent;
+    }
+  }
+`
+
+const MenuWidgetStyledLi = styled.li`
+  list-style-type: none;
+  width: 90%;
+  padding: 10px 0;
+  font-size: 1.2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  position: relative;
+  margin: ${props=> !props.menuItem.parent ? '0 10px' : '0'};
+
+  .open-submenus {
+    background-color: transparent;
+    border: none;
+    outline: none;
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+  }
+
+  .navigation-dropdown-icon {
+    width: 10px;
+    height: 10px;
+    color: var(--navigation-text-color);
+  }
+
+  .dropdown-content {
+    width: 100%;
+    max-width: 200px;
+    position: absolute;
+    top: 40px;
+    display: flex;
+    flex-direction: column;
+  }
+
+  @media only screen and (min-width: 768px) {
+      font-size: 1rem;
+      width: ${props=> !props.menuItem.parent ? (props.menuItem.subItems || []).length > 0 ? 'auto' : 'auto' : '50px '};
+      background-color: transparent;
+  }
+`
+
+
 
 
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler, menuItems}) => {
@@ -19,26 +82,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                 `/${router.locale || router.query.locale}${subItem.as}`;
 
         return (
-            <li className='menu-widget-sub-item' key={_.uniqueId('id_')}>
-                <style jsx>{`
-                  .menu-widget-sub-item {
-                    display: ${showSub ? 'initial' : 'none'};
-                    z-index: 10;
-                    background-color: var(--navigation-background-color);
-                    width: 100px;
-                    list-style-type: none;
-                    padding: 10px 15px;
-
-                  }
-
-                  @media only screen and (min-width: 768px) {
-                    .menu-widget-sub-item {
-                      background-color: transparent;
-                    }
-                  }
-                  
-                `}</style>
-
+            <MenuWidgetSubItemStyledLi showSub={showSub} className='menu-widget-sub-item' key={_.uniqueId('id_')}>
                 <MenuWidgetItemLink
                     linkTargetType={subItem?.type}
                     linkType='sub'
@@ -49,8 +93,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                     showSub={showSub}
                     mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
                 />
-
-            </li>
+            </MenuWidgetSubItemStyledLi>
         )
     })
 
@@ -61,52 +104,8 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
 
     return (
 
-        <li key={_.uniqueId('id_')} className='menu-widget-item' onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null} onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}>
-            <style jsx>{`
-              .menu-widget-item {
-                list-style-type: none;
-                width: 90%;
-                padding: 10px 0;
-                font-size: 1.2rem;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                position: relative;
-                margin: ${!menuItem.parent ? '0 10px' : '0'};
-              }
+        <MenuWidgetStyledLi menuItem={menuItem} key={_.uniqueId('id_')} className='menu-widget-item' onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null} onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}>
 
-              .open-submenus {
-                background-color: transparent;
-                border: none;
-                outline: none;
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-              }
-
-              .navigation-dropdown-icon {
-                width: 10px;
-                height: 10px;
-                color: var(--navigation-text-color);
-              }
-
-              .dropdown-content {
-                width: 100%;
-                max-width: 200px;
-                position: absolute;
-                top: 40px;
-                display: flex;
-                flex-direction: column;
-              }
-
-              @media only screen and (min-width: 768px) {
-                .menu-widget-item {
-                  font-size: 1rem;
-                  width: ${!menuItem.parent ? (menuItem.subItems || []).length > 0 ? 'auto' : 'auto' : '50px '};
-                  background-color: transparent;
-                }
-              }
-            `}</style>
 
             <MenuWidgetItemLink
                 linkTargetType={menuItem?.type}
@@ -131,8 +130,9 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                 : null
             }
 
-        </li>
+        </MenuWidgetStyledLi>
     );
 };
 export default MenuWidgetItem;
+
 

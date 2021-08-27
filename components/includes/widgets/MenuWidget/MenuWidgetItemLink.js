@@ -4,6 +4,21 @@ import {useRouter} from "next/router";
 import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {withTranslation} from 'next-i18next';
+import styled from "styled-components";
+
+const MenuWidgetItemLinkStyledLink = styled.a`
+  color: var(--navigation-text-color);
+  text-decoration: none;
+  font-weight: normal;
+  font-size: 14px;
+
+  &:hover {
+    filter: invert(70%);
+    cursor: pointer;
+  }
+`
+
+
 
 const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl, linkAs, linkName, linkTranslations, showSub, mobileNavigationOnClickHandler, subItems}) => {
 
@@ -11,28 +26,17 @@ const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl, linkAs,
 
     return (
         <React.Fragment>
-            <style jsx>{`
-              .menu-widget-item-link {
-                color: var(--navigation-text-color);
-                text-decoration: none;
-                font-weight: normal;
-                font-size: 14px;
 
-                &:hover {
-                  filter: invert(70%);
-                }
-              }
-            `}</style>
             {linkTargetType === 'internal' ?
                 <Link href={linkTargetUrl} as={linkAs} scroll={false}>
-                    <a className={'menu-widget-item-link'}
+                    <MenuWidgetItemLinkStyledLink className={'menu-widget-item-link'}
                        rel='next'
                        onClick={linkTargetUrl.includes('#') ? null : mobileNavigationOnClickHandler}
                        title={linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}>
                         {linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}
-                    </a>
+                    </MenuWidgetItemLinkStyledLink>
                 </Link> :
-                <a className='menu-widget-item-link' href={linkTargetUrl}>{linkName}</a>
+                <MenuWidgetItemLinkStyledLink className='menu-widget-item-link' href={linkTargetUrl}>{linkName}</MenuWidgetItemLinkStyledLink>
             }
             {linkType === 'parent' && subItems?.length > 0 ?
                 <button className='open-submenus' onClick={onOpenSubmenusHandler}>
@@ -43,5 +47,3 @@ const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl, linkAs,
     );
 };
 export default withTranslation(['customTranslation', 'common'])(MenuWidgetItemLink);
-//export default  MenuWidgetItemLink;
-//

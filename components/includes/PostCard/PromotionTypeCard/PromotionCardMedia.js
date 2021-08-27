@@ -1,6 +1,27 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
 import {clientSelfWidgetUpdate} from "../../../../_variables/_ajaxClientWidgetVariables";
+import styled from "styled-components";
+
+const PromotionCardMediaStyled = styled.div`
+ 
+    width: ${props =>props.postElementSize === 'list' ? '116.6px' : '48vw'};
+    height: calc(48vw / 1.777);
+
+  .promotion-card-image{
+    width: 100%;
+    height: calc(48vw / 1.777);
+  }
+
+  @media only screen and (min-width: 768px) {
+      width: ${props =>props.postElementSize === 'list' ? '116.6px' : '100%'};
+      height: calc(${props =>props.cardWidth}px / 1.777);
+    .promotion-card-image{
+      width: ${props =>props.postElementSize === 'list' ? '116.6px' : '100%'};
+      height: calc(${props =>props.cardWidth}px / 1.777);
+    }
+  }
+`
 
 const PromotionCardMedia = props => {
     const [gotError, setGotError] = useState(false)
@@ -29,28 +50,31 @@ const PromotionCardMedia = props => {
     }
 
     return (
-        <div className='promotion-card-media'>
-            <style jsx>{`
-              .promotion-card-image {
-                width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
-                height: calc(48vw / 1.777);
-              }
+        <PromotionCardMediaStyled className='promotion-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
 
-              @media only screen and (min-width: 768px) {
-                .promotion-card-image {
-                  width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
-                  height: calc(${props.cardWidth}px / 1.777);
-
-                }
-              }
-            `}</style>
             <img className='promotion-card-image'
                  alt={props.mediaAlt}
                  src={!gotError ? imageUrl || props.noImageUrl : props.noImageUrl}
                  onError={e => {
                      onErrorHandler(e)
                  }}/>
-        </div>
+        </PromotionCardMediaStyled>
     );
 };
 export default PromotionCardMedia;
+
+//
+// <style jsx>{`
+//               .promotion-card-image {
+//                 width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
+//                 height: calc(48vw / 1.777);
+//               }
+//
+//               @media only screen and (min-width: 768px) {
+//                 .promotion-card-image {
+//                   width: ${props.postElementSize === 'list' ? '116.6px' : '100%'};
+//                   height: calc(${props.cardWidth}px / 1.777);
+//
+//                 }
+//               }
+//             `}</style>

@@ -5,11 +5,19 @@ import {AppContext} from "../../../context/AppContext";
 import _ from "lodash";
 import {likeValueCalculator} from "../../../_variables/_variables";
 import _shortNumber from '../../../_variables/clientVariables/_shortNumber'
+import styled from "styled-components";
 
 const PostElement = dynamic(() => import('../PostCard/PostElement'))
 const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeCard'))
 const PromotionTypeCard = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionTypeCard'))
 const ArticleTypeCard = dynamic(() => import('../PostCard/ArticleTypeCard/ArticleTypeCard'))
+
+
+const PostsContentStyledDiv = styled.div`
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+`
 
 const Posts = ({viewType, isMobile, _id, redirectLink, postElementSize, posts, postElementStyle, postElementImageLoaderType, postElementImageLoader, widgetId}) => {
     const contextData = useContext(AppContext);
@@ -24,14 +32,8 @@ const Posts = ({viewType, isMobile, _id, redirectLink, postElementSize, posts, p
     const noImageUrl = '/static/images/noImage/no-image-available.png';
 
     return (
-        <div className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')}>
-            <style jsx>{`
-              .posts-content {
-                display: flex;
-                flex-wrap: wrap;
-                justify-content: center;
-              }
-            `}</style>
+        <PostsContentStyledDiv className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')}>
+
             {(posts || []).map(post => {
 
                 const title = (post?.translations?.[locale]?.title || post?.title).replace('#', '');
@@ -71,7 +73,7 @@ const Posts = ({viewType, isMobile, _id, redirectLink, postElementSize, posts, p
                     />
                 )
             })}
-        </div>
+        </PostsContentStyledDiv>
     );
 };
 

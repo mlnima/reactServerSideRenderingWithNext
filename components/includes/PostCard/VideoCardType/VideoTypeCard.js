@@ -2,8 +2,131 @@ import React, {useMemo} from 'react';
 import Link from "next/link";
 import VideoCardMedia from "./VideoCardMedia";
 import _ from "lodash";
-import CardMetaData from "../asset/CardMetaData/CardMetaData";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
+import styled from "styled-components";
+
+let VideoCard = styled.div`
+  width: ${ props=>  props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
+  max-width: ${props=> props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
+  display: flex;
+  flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+  align-items: center;
+  justify-content: center;
+  background-color: var(--post-element-background-color);
+  margin: 2.8px;
+  font-size: 12px;
+  padding-bottom: 5px;
+
+
+  .video-card-link {
+    position: relative;
+    width: ${props=> props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+    max-width: ${props=> props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+    margin: 4px;
+    display: flex;
+    flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+
+    .video-card-under-media {
+      width: 100%;
+      height: ${props=> props.postElementSize === 'list' ? '65px' : 'auto'};
+
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      margin-left: ${props=> props.postElementSize === 'list' ? 4 : 0}px;
+
+      .video-card-title {
+        text-overflow: ellipsis;
+        overflow: hidden;
+        display: -webkit-box !important;
+        color: var(--post-element-text-color);
+        -webkit-line-clamp: ${props=> props.postElementSize === 'list' ? 1 : 1};
+        -webkit-box-orient: vertical;
+        font-weight: initial;
+        white-space: normal;
+        font-size: 12px;
+        margin: 4px 2px;
+        width: ${props=> props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+        max-width: ${props=> props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+        padding: 0 2px;
+
+        &:hover {
+          filter: invert(70%);
+        }
+      }
+
+
+      .video-card-under-media-info {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        flex-wrap: wrap;
+        margin: 0 2px;
+
+
+        .video-card-info-data {
+          width: calc(50% - 8px);
+          display: flex;
+          padding: 0 2px;
+          align-items: center;
+          margin: 2px 0;
+          color: var(--post-element-info-text-color);
+
+          span {
+            margin: 0 2px;
+          }
+        }
+
+        .video-card-duration {
+          justify-content: flex-end;
+        }
+
+        .video-card-views, .video-card-quality {
+          justify-content: flex-start;
+        }
+
+        .video-card-rating {
+          justify-content: flex-end;
+          width: calc(50% - 24px);
+          //background: url('/public/asset/images/icons/ico-rating-positive.png') no-repeat right;
+          //  padding: 0 20px 0 0;
+        }
+
+      }
+
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+
+    width: ${props=> props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+    max-width: ${props=> props.postElementSize === 'list' ? `320px` : `100%`};
+    flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+    margin: 7px;
+    font-size: 14px;
+
+    .video-card-link {
+      flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+
+      .video-card-under-media {
+        margin: 8px;
+
+        .video-card-title {
+          width: ${props=> props.postElementSize === 'list' ? `100%` : `${ props.cardWidth}px`};
+          font-size: 14px;
+
+        }
+      }
+
+
+    }
+
+  }
+`
+
 
 const VideoTypeCard = props => {
 
@@ -25,134 +148,8 @@ const VideoTypeCard = props => {
     })
 
     return (
-        <div className='video-card'>
-            <style jsx>{`
-              .video-card {
-                width: ${props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
-                max-width: ${props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
-                display: flex;
-                flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-                align-items: center;
-                justify-content: center;
-                background-color: var(--post-element-background-color);
-                margin: 2.8px;
-                font-size: 12px;
-                padding-bottom: 5px;
+        <VideoCard className='video-card' cardWidth={props.cardWidth} postElementSize={props.postElementSize} >
 
-
-                .video-card-link {
-                  position: relative;
-                  width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                  max-width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                  margin: 4px;
-                  display: flex;
-                  flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-                  align-items: center;
-                  justify-content: space-between;
-                  text-decoration: none;
-
-                  .video-card-under-media {
-                    width: 100%;
-                    height: ${props.postElementSize === 'list' ? '65px' : 'auto'};
-                   
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                    margin-left: ${props.postElementSize === 'list' ? 4 : 0}px;
-
-                    .video-card-title {
-                      text-overflow: ellipsis;
-                      overflow: hidden;
-                      display: -webkit-box !important;
-                       color: var(--post-element-text-color);
-                      -webkit-line-clamp: ${props.postElementSize === 'list' ? 1 : 1};
-                      -webkit-box-orient: vertical;
-                      font-weight: initial;
-                      white-space: normal;
-                      font-size: 12px;
-                      margin: 4px 2px;
-                      width: ${props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-                      max-width: ${props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-                      padding: 0 2px;
-
-                      &:hover {
-                        filter: invert(70%);
-                      }
-                    }
-
-
-                    .video-card-under-media-info {
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: center;
-                      flex-wrap: wrap;
-                      margin: 0 2px;
-
-
-                      .video-card-info-data {
-                        width: calc(50% - 8px);
-                        display: flex;
-                        padding: 0 2px;
-                        align-items: center;
-                        margin: 2px 0;
-                        color: var(--post-element-info-text-color);
-
-                        span {
-                          margin: 0 2px;
-                        }
-                      }
-
-                      .video-card-duration {
-                        justify-content: flex-end;
-                      }
-
-                      .video-card-views, .video-card-quality {
-                        justify-content: flex-start;
-                      }
-
-                      .video-card-rating {
-                        justify-content: flex-end;
-                        width: calc(50% - 24px);
-                        //background: url('/public/asset/images/icons/ico-rating-positive.png') no-repeat right;
-                        //  padding: 0 20px 0 0;
-                      }
-
-                    }
-
-                  }
-                }
-
-
-              }
-
-              @media only screen and (min-width: 768px) {
-                .video-card {
-                  width: ${props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-                  max-width: ${props.postElementSize === 'list' ? `320px` : `100%`};
-                  flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-                  margin: 7px;
-                  font-size: 14px;
-
-                  .video-card-link {
-                    flex-direction: ${props.postElementSize === 'list' ? 'row' : 'column'};
-
-                    .video-card-under-media {
-                      margin: 8px;
-
-                      .video-card-title {
-                        width: ${props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
-                        font-size: 14px;
-
-                      }
-                    }
-
-
-                  }
-                }
-              }
-
-
-            `}</style>
 
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                 <a rel='next' onClick={props.onClickLoadingHandler} className='video-card-link' title={props.title}>
@@ -172,7 +169,7 @@ const VideoTypeCard = props => {
                 </a>
             </Link>
             {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
-        </div>
+        </VideoCard>
     );
 };
 export default VideoTypeCard;

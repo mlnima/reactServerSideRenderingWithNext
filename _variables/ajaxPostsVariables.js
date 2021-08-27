@@ -1,25 +1,20 @@
 import axios from "axios";
-import _objectToQuery from "./clientVariables/_objectToQuery";
 import _metaPageQueryGenerator from "./clientVariables/_metaPageQueryGenerator";
+import _postPageQueryGenerator from "./clientVariables/_postPageQueryGenerator";
 
 export const getPosts = async (data, domainName,cache,queriesData) => {
     const body = {
         ...data,
         cache
     };
-  //?requestFor=${encodeURIComponent(queriesData)}
     return await axios.post(process.env.REACT_APP_PRODUCTION_URL +`/api/v1/posts/clientGetPosts?requestFor=${encodeURIComponent(queriesData)}`, body)
 };
 
 export const getPost = async (data, cache) => {
-    const body = {
-        ...data,
-        cache
-    };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/clientGetPost?id=${ data._id }` , body)
+    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/clientGetPost${ _postPageQueryGenerator(data)}` )
 };
-export const checkRemovedContent = async (data) => {
 
+export const checkRemovedContent = async (data) => {
     const body = {
         ...data,
         token: localStorage.wt

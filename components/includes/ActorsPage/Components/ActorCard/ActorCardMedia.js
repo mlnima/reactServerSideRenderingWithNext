@@ -1,6 +1,16 @@
-import React, {useState, useEffect,useRef} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import {checkRemovedContent} from "../../../../../_variables/ajaxPostsVariables";
 import _fixMetaImage from "../../../../../_variables/clientAjaxVariables/_fixMetaImage";
+import styled from "styled-components";
+
+const ActorCardMediaStyledImage = styled.img`
+  width: 100%;
+  height: calc(48vw / 1.777);
+  @media only screen and (min-width: 768px) {
+    width: ${props => props.cardWidth}px;
+    height: calc(${props => props.cardWidth}px / 1.777);
+  }
+`
 
 const ActorCardMedia = props => {
     const imageRef = useRef(null)
@@ -8,9 +18,9 @@ const ActorCardMedia = props => {
     const [isReported, setIsReported] = useState(false)
 
     useEffect(() => {
-        if (!props.imageUrl){
-            _fixMetaImage(props.actorId).then(res=>{
-                if (imageRef.current && res?.data?.newImageUrl ){
+        if (!props.imageUrl) {
+            _fixMetaImage(props.actorId).then(res => {
+                if (imageRef.current && res?.data?.newImageUrl) {
                     imageRef.current.src = res?.data?.newImageUrl
                 }
             })
@@ -28,7 +38,7 @@ const ActorCardMedia = props => {
                 checkUrl: props.imageUrl,
             }
             checkRemovedContent(data).then(res => {
-                if (imageRef.current && res?.data?.newImageUrl ){
+                if (imageRef.current && res?.data?.newImageUrl) {
                     imageRef.current.src = res?.data?.newImageUrl
                 }
             })
@@ -36,23 +46,7 @@ const ActorCardMedia = props => {
     }
 
     return (
-        <React.Fragment>
-            <style jsx>{`
-              .actor-card-image {
-                width: 100%;
-                height: calc(48vw / 1.777);
-              }
-
-              @media only screen and (min-width: 768px) {
-                .actor-card-image {
-                  width: 100%;
-                  height: calc(${props.cardWidth}px / 1.777);
-                }
-              }
-
-            `}</style>
-            <img ref={imageRef} className='actor-card-image' src={props.imageUrl } onError={onErrorHandler} alt={props.mediaAlt}/>
-        </React.Fragment>
+        <ActorCardMediaStyledImage cardWidth={props.cardWidth} ref={imageRef} className='actor-card-image' src={props.imageUrl} onError={onErrorHandler} alt={props.mediaAlt}/>
     );
 };
 export default ActorCardMedia;
