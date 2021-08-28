@@ -70,6 +70,11 @@ export const getServerSideProps = async (context) => {
         lang: context.query.lang || null
     }
 
+    if (!context.query.actorId.match(/^[0-9a-fA-F]{24}$/)){
+        return {
+            notFound: true
+        }
+    }
     const actorData = context.query.actorId ? await getSingleMeta(context.query.actorId, true) : {}
     const actor = actorData.data ? actorData.data.meta : {}
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, context.req.originalUrl)

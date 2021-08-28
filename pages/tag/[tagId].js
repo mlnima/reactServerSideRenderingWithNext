@@ -70,7 +70,11 @@ export const getServerSideProps = async (context) => {
         sort: context.query.sort || 'updatedAt',
         lang: context.query.lang || null
     }
-
+    if (!context.query.tagId.match(/^[0-9a-fA-F]{24}$/)){
+        return {
+            notFound: true
+        }
+    }
     const tagData = context.query?.tagId ? await getSingleMeta(context.query.tagId, true) : {}
     const tag = tagData.data ? tagData.data.meta : {}
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, context.req.originalUrl)

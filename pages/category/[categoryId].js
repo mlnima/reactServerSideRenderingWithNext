@@ -68,7 +68,18 @@ export const getServerSideProps = async (context) => {
         lang: context.query.lang || null
     }
 
+    if (!context.query.categoryId.match(/^[0-9a-fA-F]{24}$/)){
+        return {
+            notFound: true
+        }
+    }
     const categoryData = context.query.categoryId ? await getSingleMeta(context.query.categoryId, true) : {}
+
+    if (!categoryData) {
+        return {
+            notFound: true
+        }
+    }
     const category = categoryData.data ? categoryData.data.meta : {}
     const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, context.req.originalUrl)
     const widgets = firstLoadData.widgets

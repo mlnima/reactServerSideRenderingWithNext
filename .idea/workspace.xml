@@ -21,7 +21,11 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetSingleMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetSingleMeta.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -140,9 +144,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.devAndSocket" />
         <item itemvalue="npm.startAndSocket" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.devAndSocket" />
         <item itemvalue="npm.fixMetaData" />
         <item itemvalue="Node.js.PostsTypes.js" />
       </list>
@@ -761,7 +765,8 @@
       <workItem from="1629892341544" duration="8036000" />
       <workItem from="1629964388340" duration="26646000" />
       <workItem from="1630052482210" duration="18944000" />
-      <workItem from="1630082403659" duration="8060000" />
+      <workItem from="1630082403659" duration="11094000" />
+      <workItem from="1630129234109" duration="2525000" />
     </task>
     <servers />
   </component>
