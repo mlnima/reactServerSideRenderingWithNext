@@ -64,7 +64,7 @@ let PromotionCardStyledDiv = styled.div`
         color: var(--post-element-text-color);
         white-space: normal;
         margin: 2px;
-        padding: 0 2px;
+        padding: ${props => props.postElementSize === 'list' ? 0 : '5px'} 2px;
         width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
         max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
 
@@ -79,9 +79,9 @@ let PromotionCardStyledDiv = styled.div`
 
   @media only screen and (min-width: 768px) {
 
-    width: ${props=> props.postElementSize === 'list' ? '100%' : `${ props.cardWidth}px`};
-    max-width: ${props=> props.postElementSize === 'list' ? `320px` : `100%`};
-    flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+    width: ${props => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+    max-width: ${props => props.postElementSize === 'list' ? `320px` : `100%`};
+    flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
     margin: 7px;
 
     .promotion-card-under-media {
@@ -92,9 +92,9 @@ let PromotionCardStyledDiv = styled.div`
         width: 100%;
 
         .promotion-card-title {
-            // width: ${props=> props.postElementSize === 'list' ? `${ props.cardWidth - 116.6}px` : `100%;`};
-          width: ${props=> props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-          max-width: ${props=> props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+            // width: ${props => props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `100%;`};
+          width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+          max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
           font-size: 14px;
         }
       }

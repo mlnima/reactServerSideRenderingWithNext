@@ -55,6 +55,7 @@ const ArticleCard = styled.div`
         margin: 2px 0;
         width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
         max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+        padding: ${props => props.postElementSize === 'list' ? 0 : '5px'} 2px;
 
         &:hover {
           filter: invert(70%);
@@ -92,7 +93,7 @@ const ArticleCard = styled.div`
 
   @media only screen and (min-width: 768px) {
 
-    width: ${props => props.postElementSize === 'list' ? '100%' : `${ props.cardWidth}px`};
+    width: ${props => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
     max-width: ${props => props.postElementSize === 'list' ? `320px` : `100%`};
     flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
 
@@ -105,7 +106,7 @@ const ArticleCard = styled.div`
       .article-card-under-media {
         .article-card-title {
 
-          width: ${props => props.postElementSize === 'list' ? `100%` : `${ props.cardWidth}px`};
+          width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
           font-size: 14px;
         }
       }

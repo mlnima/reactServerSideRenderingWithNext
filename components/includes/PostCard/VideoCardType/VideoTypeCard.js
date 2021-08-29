@@ -6,10 +6,10 @@ import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
 
 let VideoCard = styled.div`
-  width: ${ props=>  props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
-  max-width: ${props=> props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
+  width: ${props => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
+  max-width: ${props => props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
   display: flex;
-  flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+  flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
   justify-content: center;
   background-color: var(--post-element-background-color);
@@ -20,38 +20,38 @@ let VideoCard = styled.div`
 
   .video-card-link {
     position: relative;
-    width: ${props=> props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-    max-width: ${props=> props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+    width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+    max-width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
     margin: 4px;
     display: flex;
-    flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+    flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
 
     .video-card-under-media {
       width: 100%;
-      height: ${props=> props.postElementSize === 'list' ? '65px' : 'auto'};
+      height: ${props => props.postElementSize === 'list' ? '65px' : 'auto'};
 
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      margin-left: ${props=> props.postElementSize === 'list' ? 4 : 0}px;
+      margin-left: ${props => props.postElementSize === 'list' ? 4 : 0}px;
 
       .video-card-title {
         text-overflow: ellipsis;
         overflow: hidden;
         display: -webkit-box !important;
         color: var(--post-element-text-color);
-        -webkit-line-clamp: ${props=> props.postElementSize === 'list' ? 1 : 1};
+        -webkit-line-clamp: ${props => props.postElementSize === 'list' ? 1 : 1};
         -webkit-box-orient: vertical;
         font-weight: initial;
         white-space: normal;
         font-size: 12px;
         margin: 4px 2px;
-        width: ${props=> props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-        max-width: ${props=> props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-        padding: 0 2px;
+        width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+        max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
+        padding: ${props => props.postElementSize === 'list' ? 0 : '5px'} 2px;
 
         &:hover {
           filter: invert(70%);
@@ -102,20 +102,20 @@ let VideoCard = styled.div`
 
   @media only screen and (min-width: 768px) {
 
-    width: ${props=> props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-    max-width: ${props=> props.postElementSize === 'list' ? `320px` : `100%`};
-    flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+    width: ${props => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+    max-width: ${props => props.postElementSize === 'list' ? `320px` : `100%`};
+    flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
     margin: 7px;
     font-size: 14px;
 
     .video-card-link {
-      flex-direction: ${props=> props.postElementSize === 'list' ? 'row' : 'column'};
+      flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
 
       .video-card-under-media {
         margin: 8px;
 
         .video-card-title {
-          width: ${props=> props.postElementSize === 'list' ? `100%` : `${ props.cardWidth}px`};
+          width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
           font-size: 14px;
 
         }
@@ -148,7 +148,7 @@ const VideoTypeCard = props => {
     })
 
     return (
-        <VideoCard className='video-card' cardWidth={props.cardWidth} postElementSize={props.postElementSize} >
+        <VideoCard className='video-card' cardWidth={props.cardWidth} postElementSize={props.postElementSize}>
 
 
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>

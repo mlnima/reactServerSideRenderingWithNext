@@ -5,6 +5,76 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSearch, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {withTranslation} from "next-i18next";
 
+import styled from "styled-components";
+const SearchInputComponentStyledDiv = styled.div`
+  .search-bar {
+    display: flex;
+    height: 35px;
+    width: clamp(100px, 200px, 400px);
+    font-size: 1em;
+  }
+
+  .search-input {
+    display: flex;
+    justify-content: center;
+    width: 80%;
+    margin-right: 0;
+    border: none;
+    padding: 0 5px;
+  }
+
+  .search-input:focus {
+    outline: none;
+  }
+
+  .search-bar-btn {
+    width: 20%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    outline: none;
+    padding: 0.2em;
+    margin-left: 0;
+    border: none;
+    color: var(--main-text-color);
+  }
+
+  .search-bar-btn:focus {
+    outline: none;
+  }
+
+  .search-bar-btn:active {
+    border: none;
+  }
+
+  .search-bar-btn-open {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    outline: none;
+  }
+
+  .search-bar-btn-open {
+    border: none;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: transparent;
+    outline: none;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .search-bar {
+      display: flex;
+      height: 24px;
+      width: clamp(250px, 400px, 600px);
+      font-size: 1em;
+    }
+  }
+`
 const SearchInputComponent = ({t,mobileMode}) => {
     const router = useRouter()
     const [state, setState] = useState({
@@ -44,77 +114,8 @@ const SearchInputComponent = ({t,mobileMode}) => {
 
 
     return (
-        <React.Fragment>
-            <style jsx>{`
-              .search-bar {
-                display: flex;
-                height: 35px;
-                width: clamp(100px, 200px, 400px);
-                font-size: 1em;
-              }
+        <SearchInputComponentStyledDiv>
 
-              .search-input {
-                display: flex;
-                justify-content: center;
-                width: 80%;
-                margin-right: 0;
-                border: none;
-                padding: 0 5px;
-              }
-
-              .search-input:focus {
-                outline: none;
-              }
-
-              .search-bar-btn {
-                width: 20%;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: transparent;
-                outline: none;
-                padding: 0.2em;
-                margin-left: 0;
-                //border-radius: 0 3px 3px 0;
-                border: none;
-                color: var(--main-text-color);
-              }
-
-              .search-bar-btn:focus {
-                outline: none;
-              }
-
-              .search-bar-btn:active {
-                border: none;
-              }
-
-              .search-bar-btn-open {
-                border: none;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: transparent;
-                outline: none;
-              }
-
-              .search-bar-btn-open {
-                border: none;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                background-color: transparent;
-                outline: none;
-              }
-
-              @media only screen and (min-width: 768px) {
-                .search-bar {
-                  display: flex;
-                  height: 24px;
-                  width: clamp(250px, 400px, 600px);
-                  font-size: 1em;
-                }
-              }
-            `}</style>
             {isOpen || !mobileMode ?
                 <form className='search-bar' onSubmit={e => onSearchHandler(e)}>
                     {mobileMode ?
@@ -129,7 +130,7 @@ const SearchInputComponent = ({t,mobileMode}) => {
                 </button>
             }
 
-        </React.Fragment>
+        </SearchInputComponentStyledDiv>
     )
 
 

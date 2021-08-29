@@ -23,6 +23,7 @@ const ActorCardStyledLink = styled.a`
     -webkit-line-clamp: 1;
     font-weight: initial;
     font-size: 12px;
+    padding: 5px 0;
 
     &:hover {
       filter: invert(70%);

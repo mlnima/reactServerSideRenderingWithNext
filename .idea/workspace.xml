@@ -20,12 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/pages/500.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetSingleMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetSingleMeta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCardMedia.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCardMedia.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCardMedia.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_error.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -766,7 +775,9 @@
       <workItem from="1629964388340" duration="26646000" />
       <workItem from="1630052482210" duration="18944000" />
       <workItem from="1630082403659" duration="11094000" />
-      <workItem from="1630129234109" duration="2525000" />
+      <workItem from="1630129234109" duration="4020000" />
+      <workItem from="1630170018321" duration="492000" />
+      <workItem from="1630184110244" duration="5762000" />
     </task>
     <servers />
   </component>

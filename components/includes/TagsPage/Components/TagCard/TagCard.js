@@ -13,6 +13,7 @@ const TagCardStyledLink = styled.a`
   justify-content: center;
   text-decoration: none;
   cursor: pointer;
+  background-color: var(--post-element-background-color);
   .tag-card-title {
     width: 100%;
     color: var(--main-text-color);
@@ -23,7 +24,7 @@ const TagCardStyledLink = styled.a`
     -webkit-line-clamp: 1;
     font-weight: initial;
     font-size: 12px;
-
+    padding: 5px 0;
     &:hover {
       filter: invert(70%);
     }
