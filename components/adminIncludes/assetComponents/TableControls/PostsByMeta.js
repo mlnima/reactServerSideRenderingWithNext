@@ -1,6 +1,16 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import {useRef} from 'react';
 import {useRouter} from "next/router";
+import styled from "styled-components";
 
+const PostsByMetaStyledForm = styled.form`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
+  input {
+    margin: 0 4px;
+  }
+`;
 
 const PostsByMeta = props => {
     const metaInput = useRef(null)
@@ -16,23 +26,11 @@ const PostsByMeta = props => {
 
 
     return (
-        <form className='posts-by-meta' onSubmit={e => onSearchByMetaHandler(e)}>
-            <style jsx>{`
-              .posts-by-meta {
-                display: flex;
-                justify-content: center;
-                align-items: center;
-
-                input {
-
-                  margin: 0 4px;
-                }
-              }
-            `}</style>
-            <p>Meta ID :</p>
+        <PostsByMetaStyledForm className='posts-by-meta' onSubmit={e => onSearchByMetaHandler(e)}>
+            <p>Meta:</p>
             <input ref={metaInput} type={'text'}/>
             <button>Search</button>
-        </form>
+        </PostsByMetaStyledForm>
     );
 };
 export default PostsByMeta;

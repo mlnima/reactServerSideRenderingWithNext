@@ -1,8 +1,9 @@
 const settingSchema = require('../../../models/settings/settingSchema')
 
 module.exports = async (req, res) => {
-    try{
-        const settingRequestPromises = req.body.settings.map(async setting => {
+    try {
+        const requestedSettings =  Array.isArray(req.query.setting) ? req.query.setting : [req.query.setting]
+        const settingRequestPromises = requestedSettings.map(async setting => {
             return await settingSchema.findOne({type: setting}).exec()
         })
         Promise.all(settingRequestPromises).then(settings => {
@@ -12,7 +13,7 @@ module.exports = async (req, res) => {
             console.log(err)
             res.end()
         })
-    }catch(err){
+    } catch (err) {
         console.log(err)
         res.end()
     }

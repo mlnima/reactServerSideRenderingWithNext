@@ -6,7 +6,7 @@ const {updatePostWidget} = require('../../adminControllers/adminWidgetsControlle
 module.exports = async (req,res)=>{
 
     const checkUrl = req.body.checkUrl
-    console.log(checkUrl)
+    //console.log(checkUrl)
     await widgetSchema.findById(req.body._id).exec().then(widget=>{
         updatePostWidget(widget).then(updatedWidgets=>{
             widgetSchema.findByIdAndUpdate(req.body._id, {'data.posts':[...updatedWidgets.posts]}, {new: true}).exec().then(afterUpdate => {

@@ -5,6 +5,7 @@ import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {AppContext} from "../../context/AppContext";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -33,30 +34,19 @@ const posts = props => {
 export const getServerSideProps = async (context) => {
 
     const firstLoadData = await getFirstLoadData(context.req, ['postsPageLeftSidebar', 'postsPageRightSidebar'], 'postsPage')
-    const getPostsData = {
-        size: parseInt(context.query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 50,
-        page: parseInt(context.query?.page) || 1,
-        postType: context.query.type || null,
-        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating', 'redirectLink'],
-        keyword: context.query.keyword || '',
-        author: context.query.author || 'all',
-        status: 'published',
-        sort: context.query.sort || 'updatedAt',
-        lang: context.query.lang || null
-    }
-
-    const postsData = await getPosts(getPostsData, process.env.REACT_APP_PRODUCTION_URL, true, context.req.originalUrl)
     const widgets = firstLoadData.widgets
-    const postsSource = postsData.data ? postsData.data : []
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,null,true)
 
+    const postsData = await getPosts(gettingPostsQueries)
+    const postsSource = postsData.data ? postsData.data : []
     return {props: {
         widgets,
             ...(await serverSideTranslations(context.locale, ['common'])),
             ...firstLoadData.settings,
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),
+            countPerPage:firstLoadData?.settings?.identity?.data?.postsCountPerPage,
             postsSource,
-            getPostsData,
             referer: firstLoadData.referer
     }}
 }

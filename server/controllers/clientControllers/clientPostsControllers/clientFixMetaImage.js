@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     try {
         const metaId = req.body._id
         const metaDocument = await metaSchema.findById(metaId).exec()
-        console.log(metaDocument)
+
 
         if (metaDocument && !metaDocument?.imageUrl){
             const findPostWithSameMeta = await postSchema.findOne({[metaDocument.type]:[metaDocument._id]}).exec()

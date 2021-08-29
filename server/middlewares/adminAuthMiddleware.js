@@ -4,7 +4,7 @@ const userSchema = require('../models/userSchema')
 module.exports = async (req, res, next) => {
 
     try {
-        const token = req.body.token
+        const token = req.body.token || req.query.token
         const verifiedToken = jwt.verify(token, process.env.REACT_APP_JWT_KEY)
         await userSchema.findById(verifiedToken._id).exec().then(user => {
             if (user.role === 'administrator') {

@@ -1,11 +1,11 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import AdminLayout from '../../../../components/layouts/AdminLayout';
+// import AdminLayout from '../../../../components/layouts/AdminLayout';
 import { DelayInput } from 'react-delay-input';
 import { AppContext } from '../../../../context/AppContext'
 import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
-import { getAbsolutePath } from '../../../../_variables/_variables'
-import { getSetting } from '../../../../_variables/ajaxVariables'
-import settings from '../general'
+// import { getAbsolutePath } from '../../../../_variables/_variables'
+// import { getSetting } from '../../../../_variables/ajaxVariables'
+// import settings from '../general'
 import styled from "styled-components";
 let StyledDiv = styled.div`
 

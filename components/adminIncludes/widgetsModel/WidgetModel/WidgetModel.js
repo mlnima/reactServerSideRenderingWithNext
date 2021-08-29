@@ -231,7 +231,7 @@ const WidgetModel = props => {
                 //  ...textInputsData
             }
         }).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+            getMultipleWidgetWithData({widgets: ['all']},  false).then(res => {
                 contextData.dispatchWidgetsSettings({
                     ...contextData.widgetsSettings,
                     widgets: [...res.data.widgets]
@@ -250,7 +250,7 @@ const WidgetModel = props => {
             })
         } else {
             deleteWidgets(props.widgetId, window.location.origin).then(() => {
-                getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(res => {
+                getMultipleWidgetWithData({widgets: ['all']}, false).then(res => {
                     contextData.dispatchWidgetsSettings({
                         widgets: [...res.data.widgets]
                     })

@@ -5,14 +5,17 @@ let StyledForm = styled.form`
   display: flex;
   justify-content: flex-end;
   align-items: center;
+ 
   input{
     @include adminMainInput;
     background-color: var(--admin-color-0);
+
   }
   button{
     @include adminMainBtn;
   }
 `;
+
 const AssetSearch = props => {
     const searchInput = useRef(null)
     const router = useRouter()

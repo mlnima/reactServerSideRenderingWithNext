@@ -23,6 +23,7 @@ const PostsPage = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
 
+
     useEffect(() => {
         Scroll.animateScroll.scrollToTop();
     }, [router.query]);
@@ -32,10 +33,10 @@ const PostsPage = props => {
 
             <PaginationComponent
                 isActive={true}
-                currentPage={props.getPostsData.page}
+                currentPage={router.query.page || 1}
                 totalCount={props.postsSource.totalCount}
-                size={props.getPostsData.size}
-                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
+                size={props.countPerPage || contextData.identity.postsCountPerPage || 30}
+                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.countPerPage || contextData.identity.postsCountPerPage || 30))}
             />
             <PostsContainer className='posts-container'>
                 <Posts
@@ -48,10 +49,10 @@ const PostsPage = props => {
             </PostsContainer>
             <PaginationComponent
                 isActive={true}
-                currentPage={props.getPostsData.page}
+                currentPage={router.query.page || 1}
                 totalCount={props.postsSource.totalCount}
-                size={props.getPostsData.size}
-                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.getPostsData.size))}
+                size={props.countPerPage || contextData.identity.postsCountPerPage || 30}
+                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.countPerPage || contextData.identity.postsCountPerPage || 30))}
             />
         </React.Fragment>
     );

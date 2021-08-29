@@ -30,7 +30,7 @@ const SiteSettingSetter = props => {
 
     useEffect(() => {
             !props?.design?.data && !props?.identity?.data && !contextData.state.identitySet && !contextData.state.designSet ? (
-                getMultipleSetting({settings: ['identity', 'design']}, process.env.REACT_APP_PRODUCTION_URL, true, 'static').then(res => {
+                getMultipleSetting({settings: ['identity', 'design']}, true).then(res => {
                     const identitySetting = res.data.settings.find(s=>s.type === 'identity')
                     const designSetting = res.data.settings.find(s=>s.type === 'design')
                     contextData.dispatchSiteIdentity({...identitySetting?.data})

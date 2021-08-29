@@ -69,7 +69,7 @@ const designData = {
 
 const siteDesignToSave = new settingSchema(designData)
 siteDesignToSave.save().catch(err => {
-    console.log(err)
+    req.queryerr)
 })
 
 

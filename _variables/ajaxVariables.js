@@ -1,4 +1,6 @@
 import axios from "axios";
+import _getMultipleSettingsQueryGenerator from "./clientVariables/_getMultipleSettingsQueryGenerator";
+import _getMultipleWidgetWithDataQueryGenerator from "./clientVariables/_getMultipleWidgetWithDataQueryGenerator";
 
 export const updateSetting = async (type, data) => {
     const body = {
@@ -8,14 +10,6 @@ export const updateSetting = async (type, data) => {
     };
     return await axios.post(window.location.origin + '/api/admin/settings/update', body)
 };
-
-// export const saveCustomStyle = async (data) => {
-//     const body = {
-//         token: localStorage.wt,
-//         data
-//     };
-//     return await axios.post(window.location.origin + '/api/v1/settings/saveCustomStyle', body)
-// };
 
 export const getSetting = async (type, domainName, cache, whichPage) => {
     const pageNameForCachedRequest = whichPage ? `&position=${whichPage}` : '';
@@ -35,43 +29,16 @@ export const addNewWidget = async (data) => {
     return await axios.post(window.location.origin + '/api/admin/widgets/addNewWidget', body);
 }
 
-
-export const getSingleWidgetData = async (data) => {
-    const body = {
-        ...data,
-    };
-    return await axios.post(window.location.origin + '/api/v1/widgets/getSingleWidgetData', body);
+export const getMultipleWidgetWithData = async (widgets, cache) => {
+    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(widgets.widgets, cache)}`)
 }
 
-// export const getWidgets = async (position,cache, domainName) => {
-//     const body = {
-//         position,
-//     };
-//     return await axios.post(domainName + '/api/v1/settings/getWidget', body)
-// }
+export const getMultipleSetting = async (settings, cache) => {
 
-export const getMultipleWidgetWithData = async (widgets, domainName, cache, whichPage) => {
-    const body = {
-        ...widgets,
-        cache
-    };
-   return await axios.post(domainName + `/api/v1/widgets/getMultipleWidgetWithData?whichPage=${whichPage}`, body)
-}
-
-export const getMultipleSetting = async (settings, domainName, cache, whichPage) => {
-    const body = {
-        ...settings,
-        cache
-    };
-    return await axios.post(domainName + `/api/v1/settings/getMultipleSettings?whichPage=${whichPage}`, body)
+    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/settings/getMultipleSettings${_getMultipleSettingsQueryGenerator(settings.settings, cache)}`)
 };
 
-export const getWidgetsWithData = async (position, domainName) => {
-    const body = {
-        position,
-    };
-    return await axios.post(domainName + `/api/v1/settings/getWidgetsWithData`, body)
-}
+
 
 export const updateWidgets = async (widgetData) => {
     const body = {
@@ -111,7 +78,6 @@ export const postThumbnailsUpload = async (image) => {
 }
 
 
-
 export const postProductTypeImages = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-postProductTypeImages', image)
 }
@@ -120,7 +86,6 @@ export const postProductTypeImages = async (image) => {
 export const userImageUpload = async (image) => {
     return await axios.post(window.location.origin + '/api/v1/fileManager/userImageUpload', image)
 }
-
 
 
 export const saveFormWidgetData = async (data) => {
@@ -201,53 +166,90 @@ export const getOrders = async (data, domainName) => {
     return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/orders/getOrders`, body)
 };
 
-export const getFirstLoadData = async (req,dynamicWidgets,page) => {
+export const getFirstLoadData = async (req, dynamicWidgets) => {
 
     try {
         const domainName = process.env.REACT_APP_PRODUCTION_URL;
         const cache = process.env.NODE_ENV !== 'development'
         const refererUrl = req?.headers?.referer || '';
-        const referer =   false;
+        const referer = false;
         const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
         const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
-        const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets];
-        const pageNameForCacheRequest = !referer ? page ? page : 'static' : 'firstLoadWidgetsData' + (page||'static');
-        const firstLoadWidgetsData =   await getMultipleWidgetWithData({widgets: widgetsToRequest}, domainName, cache, pageNameForCacheRequest);
-        const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, domainName, cache, 'static') : {};
+        // const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets];
+        //
+        //
+        // const firstLoadWidgetsData =   await getMultipleWidgetWithData({widgets: widgetsToRequest}, cache);
 
+        const dynamicWidgetsData = dynamicWidgets && dynamicWidgets.length > 0 ? await getMultipleWidgetWithData({widgets: dynamicWidgets}, cache) : []
+        const staticWidgetsData = referer ? [] : await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, cache)
+
+        const widgets = [...dynamicWidgetsData.data?.widgets, ...staticWidgetsData.data?.widgets]
+
+        const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, cache) : {};
         let finalSettings = settingsData.data ? {
-            identity:settingsData?.data?.settings.find(s=>s.type === 'identity'),
-            design:settingsData?.data?.settings.find(s=>s.type === 'design')
-        } :{};
+            identity: settingsData?.data?.settings.find(s => s.type === 'identity'),
+            design: settingsData?.data?.settings.find(s => s.type === 'design')
+        } : {};
 
         let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
 
         return {
             domainName,
-            settings:finalSettings ?? {},
-            widgets:firstLoadWidgetsData?.data?.widgets ?? [],
+            settings: finalSettings ?? {},
+            widgets,
             referer,
             isSameOrigin,
             isNavigatedFromPostPage,
             isMobile,
         }
-    }catch (e) {
+    } catch (e) {
         console.log(e)
     }
 
 
 }
 
-export const getStaticLoadData = async () => {
-    const domainName = process.env.REACT_APP_PRODUCTION_URL;
-    const settingsData =  await getMultipleSetting({settings: ['identity', 'design']}, domainName, true, 'postPage');
-    return {
-        domainName,
-        settings: settingsData?.data?.settings ?? [],
-        widgets: firstLoadWidgetsData?.data?.widgets ?? [],
-        referer:false,
-        isSameOrigin:false,
-        isNavigatedFromPostPage:false,
-        isMobile:false,
-    }
-}
+// export const getStaticLoadData = async () => {
+//     const domainName = process.env.REACT_APP_PRODUCTION_URL;
+//     const settingsData =  await getMultipleSetting({settings: ['identity', 'design']}, true);
+//     return {
+//         domainName,
+//         settings: settingsData?.data?.settings ?? [],
+//         widgets: firstLoadWidgetsData?.data?.widgets ?? [],
+//         referer:false,
+//         isSameOrigin:false,
+//         isNavigatedFromPostPage:false,
+//         isMobile:false,
+//     }
+// }
+
+
+// export const getWidgetsWithData = async (position, domainName) => {
+//     const body = {
+//         position,
+//     };
+//     return await axios.post(domainName + `/api/v1/settings/getWidgetsWithData`, body)
+// }
+
+// export const saveCustomStyle = async (data) => {
+//     const body = {
+//         token: localStorage.wt,
+//         data
+//     };
+//     return await axios.post(window.location.origin + '/api/v1/settings/saveCustomStyle', body)
+// };
+
+
+// export const getSingleWidgetData = async (data) => {
+//     const body = {
+//         ...data,
+//     };
+//     return await axios.post(window.location.origin + '/api/v1/widgets/getSingleWidgetData', body);
+// }
+
+// export const getWidgets = async (position,cache, domainName) => {
+//     const body = {
+//         position,
+//     };
+//     return await axios.post(domainName + '/api/v1/settings/getWidget', body)
+// }

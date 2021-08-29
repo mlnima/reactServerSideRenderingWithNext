@@ -2,7 +2,8 @@ const jwt = require('jsonwebtoken')
 
 module.exports = (req,res,next)=>{
     try{
-        req.userData = jwt.verify(req.body.token, process.env.REACT_APP_JWT_KEY);
+        const token = req.body.token || req.query.token
+        req.userData = jwt.verify(token , process.env.REACT_APP_JWT_KEY);
         next()
     }catch (error) {
         return res.status(401).json({

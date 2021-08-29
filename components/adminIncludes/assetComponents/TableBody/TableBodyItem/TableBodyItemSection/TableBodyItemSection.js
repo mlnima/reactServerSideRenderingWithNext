@@ -23,6 +23,7 @@ let StyledDiv = styled.div`
       display:inline-block;
       text-overflow: ellipsis;
       white-space: nowrap;
+      width: 150px;
      
     }
 

@@ -5,7 +5,8 @@ const _queryGeneratorForGettingPosts = require('../_variables/_queryGeneratorFor
 module.exports = async (req, res) => {
 
     try {
-        const findingPostsOptions = _queryGeneratorForGettingPosts(req.body)
+        // console.log(req.query)
+        const findingPostsOptions = _queryGeneratorForGettingPosts(req.query)
         const populateMeta = [
             {path: 'actors', select: {'name': 1, 'type': 1}},
             {path: 'categories', select: {'name': 1, 'type': 1}},

@@ -1,11 +1,9 @@
+//adminGetMultipleWidgets
 const widgetSchema = require('../../../models/settings/widgetSchema');
 
 module.exports = async (req, res) => {
-
     try {
-        const requestedWidgets = Array.isArray( req.query.widget.isArray) ? req.query.widget : [req.query.widget]
-        const widgetsDataQuery = requestedWidgets.map(position => position === 'all' ? {} : {'data.position': position})
-        const widgets = await widgetSchema.find({$or: widgetsDataQuery}).populate([
+        const widgets = await widgetSchema.find({}).populate([
             {path: 'data.metaData'},
             {
                 path: 'data.posts',
@@ -24,5 +22,4 @@ module.exports = async (req, res) => {
         console.log(err)
         res.end()
     }
-
 }

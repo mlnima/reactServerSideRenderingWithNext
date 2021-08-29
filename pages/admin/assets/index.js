@@ -5,6 +5,7 @@ import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
 import {getUsersListAsAdmin} from '../../../_variables/ajaxAuthVariables'
 import {getFormsData} from '../../../_variables/ajaxVariables'
 import {useRouter} from "next/router";
+import _getPostsQueryGenerator from "../../../_variables/clientVariables/_getPostsQueryGenerator";
 
 const TableHeader = dynamic(
     () => import('../../../components/adminIncludes/assetComponents/TableHeader/TableHeader'),
@@ -57,7 +58,8 @@ const assets = props => {
 
     const getAndSetAssetData = async () => {
         const assetType = router.query.assetsType
-        const ajaxRequestData = assetType === 'posts' ? await getPosts(dataConfig, process.env.REACT_APP_PRODUCTION_URL, false) :
+        const gettingPostsQueries = _getPostsQueryGenerator(router?.query,router?.query.size,router?.query.metaId,false)
+        const ajaxRequestData = assetType === 'posts' ? await getPosts(gettingPostsQueries) :
             assetType === 'users' ? await getUsersListAsAdmin(dataConfig, localStorage.wt) :
                 assetType === 'forms' ? await getFormsData(dataConfig, localStorage.wt) :
                     assetType === 'pages' ? await getPagesData(dataConfig, localStorage.wt) :

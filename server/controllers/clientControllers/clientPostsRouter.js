@@ -15,7 +15,7 @@ const clientGetComments = require('./clientPostsControllers/clientGetComments')
 const clientUserCreateNewPost = require('./clientPostsControllers/clientUserCreateNewPost')
 const clientFixMetaImage = require('./clientPostsControllers/clientFixMetaImage')
 
-router.post('/clientGetPosts',cacheSuccesses,clientGetPosts)
+router.get('/clientGetPosts',cacheSuccesses,clientGetPosts)
 router.get('/clientGetPost',cacheSuccesses,clientGetPost)
 router.post('/likeDislikeView',clientLikeDislikeView)
 router.post('/newComment',clientNewComment)

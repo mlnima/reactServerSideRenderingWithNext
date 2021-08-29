@@ -311,7 +311,7 @@ export const getServerSideProps = async ({req, query}) => {
     let post;
     let postData
     let requestBody;
-    const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
+    const settingsData = await getMultipleSetting({settings: ['identity']},  false)
     let settings = settingsData.data ? {
         identity: settingsData?.data?.settings.find(s => s.type === 'identity'),
     } : {}

@@ -14,6 +14,7 @@ let StyledDiv = styled.div`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    flex-wrap: wrap;
     font-size: 12px;
     .asset-page-table-body-item-content-select{
       

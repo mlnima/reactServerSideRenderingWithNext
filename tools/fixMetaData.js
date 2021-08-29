@@ -23,10 +23,10 @@ const metaFixer = async () => {
                     }
 
                     metaSchema.findByIdAndUpdate(meta._id, {...updateData},{new: true}).exec().then(updated=>{
-                        console.log(updated.name)
+                        //req.queryupdated.name)
                     }).catch(err=>{
 
-                        console.log(err)
+                        req.queryerr)
 
                     })
                 }else {
@@ -39,7 +39,7 @@ const metaFixer = async () => {
         })
 
     } catch (e) {
-        console.log(e)
+        req.querye)
     }
 }
 

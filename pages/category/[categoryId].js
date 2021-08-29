@@ -8,6 +8,7 @@ import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
+import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 let StyledMain = styled.main`
@@ -54,25 +55,12 @@ const categoryPage = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req,['categoryPageTop','categoryPageLeftSidebar','categoryPageBottom','categoryPageRightSidebar'],'postsPage')
-    const getPostsData = {
-        size: parseInt(context.query.size) || parseInt(firstLoadData?.settings?.identity?.data?.postsCountPerPage) || 30,
-        page: parseInt(context.query?.page) || 1,
-        postType: context.query.type || null,
-        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating' , 'redirectLink'],
-        keyword: context.query.keyword || '',
-        author: context.query.author || 'all',
-        status: 'published',
-        metaId: context.query.categoryId || null,
-        sort: context.query.sort || 'updatedAt',
-        lang: context.query.lang || null
-    }
-
     if (!context.query.categoryId.match(/^[0-9a-fA-F]{24}$/)){
         return {
             notFound: true
         }
     }
+    const firstLoadData = await getFirstLoadData(context.req,['categoryPageTop','categoryPageLeftSidebar','categoryPageBottom','categoryPageRightSidebar'],'postsPage')
     const categoryData = context.query.categoryId ? await getSingleMeta(context.query.categoryId, true) : {}
 
     if (!categoryData) {
@@ -80,8 +68,11 @@ export const getServerSideProps = async (context) => {
             notFound: true
         }
     }
+
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,context.query.categoryId,true)
+
     const category = categoryData.data ? categoryData.data.meta : {}
-    const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, context.req.originalUrl)
+    const postsData = await getPosts(gettingPostsQueries)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
     return {props: {
@@ -90,8 +81,8 @@ export const getServerSideProps = async (context) => {
             ...firstLoadData?.settings,
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),
+            countPerPage:firstLoadData?.settings?.identity?.data?.postsCountPerPage,
             postsSource,
-            getPostsData,
             category,
             referer: firstLoadData.referer}}
 }

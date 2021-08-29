@@ -101,6 +101,7 @@ const TableHeader = props => {
                 font-size: 13px;
                 display: flex;
                 align-items: center;
+                flex-wrap: wrap;
                 justify-content: space-between;
 
               }

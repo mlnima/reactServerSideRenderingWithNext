@@ -24,7 +24,7 @@ const Home = ({isMobile, widgets, design, identity}) => {
 };
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'homePage')
+    const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'])
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),

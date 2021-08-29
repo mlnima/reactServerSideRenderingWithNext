@@ -17,17 +17,6 @@ const LinkTypeWidgetModelFields = props => {
                     inputTitle='Link To Text :'
                     name='linkToText'
                     type='text'
-                    // value={
-                    //     props.widgetSettings.activeEditingLanguage === 'default' ? props.widgetData.linkToText :
-                    //         props.widgetData.translations ?
-                    //             props.widgetData.translations[props.widgetSettings.activeEditingLanguage] ?
-                    //                 props.widgetData.translations[props.widgetSettings.activeEditingLanguage].linkToText || '' :
-                    //                 '' : ''
-                    //
-                    // }
-
-
-                    // switch to chaining operator
                     value={
                         props.widgetSettings.activeEditingLanguage === 'default' ? props.widgetData.linkToText :
                             props.widgetData?.translations[props.widgetSettings.activeEditingLanguage]?.linkToText || ''

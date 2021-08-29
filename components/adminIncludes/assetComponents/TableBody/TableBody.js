@@ -3,9 +3,10 @@ import TableBodyItem from './TableBodyItem/TableBodyItem'
 import {useRouter} from "next/router";
 import styled from "styled-components";
 let StyledDiv = styled.div`
-.asset-page-table-body {
   font-size: 13px;
-}
+  //display: flex;
+  //align-items: center;
+  //flex-wrap: wrap;
 `
 const TableBody = props => {
     const router = useRouter()

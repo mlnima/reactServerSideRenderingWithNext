@@ -19,7 +19,7 @@ const WidgetImporter = () => {
                 addNewWidget({
                     data:widget
                 }).then(() => {
-                    getMultipleWidgetWithData({ widgets: [ 'all' ] }, window.location.origin,false,  Date.now()).then(res=>{
+                    getMultipleWidgetWithData({ widgets: [ 'all' ] }, false).then(res=>{
                         contextData.dispatchWidgetsSettings({
                             ...contextData.widgetsSettings,
                             widgets: [ ...res.data.widgets ]

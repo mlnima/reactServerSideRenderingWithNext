@@ -5,6 +5,7 @@ import {getMultipleSetting, getMultipleWidgetWithData, getPagesData} from '../..
 import WidgetGroupByPosition from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import _ from 'lodash';
 import styled from "styled-components";
+import _getMultipleWidgets from "../../../../_variables/adminAjaxVariables/adminAjaxWidgetsVariables/_getMultipleWidgets";
 let StyledDiv = styled.div`
  display: flex;
   justify-content: center;
@@ -113,7 +114,8 @@ const HomePageWidgets = props => {
     }
 
     const getAndSetWidgetsData = () => {
-        getMultipleWidgetWithData({widgets: ['all']}, window.location.origin, false, Date.now()).then(widgetsData => {
+        //_getMultipleWidgets(localStorage.wt)
+        _getMultipleWidgets(localStorage.wt).then(widgetsData => {
             if (widgetsData.data.widgets) {
                 contextData.dispatchWidgetsSettings({
                     ...contextData.widgetsSettings,
@@ -167,8 +169,8 @@ const HomePageWidgets = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    const settingsData = await getMultipleSetting({settings: ['identity']},process.env.REACT_APP_PRODUCTION_URL, false, 'adminPostPage')
-    const widgetsData = await getMultipleWidgetWithData({widgets: ['all']}, process.env.REACT_APP_PRODUCTION_URL, false, Date.now())
+    const settingsData = await getMultipleSetting({settings: ['identity']}, false)
+    const widgetsData = await getMultipleWidgetWithData({widgets: ['all']},  false)
     const settingsArr = settingsData?.data?.settings
     let finalSettings = {}
     settingsArr.forEach(setting => {

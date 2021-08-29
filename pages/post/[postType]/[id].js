@@ -16,14 +16,14 @@ const postPage = ({responseCode, design, post, identity, comments, widgets}) => 
 
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], 'postPage')
-    let responseCode = 200
+    const firstLoadData = await getFirstLoadData(context.req, ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], 'postPage');
+    let responseCode = 200;
+    
     if (!context.query.id.match(/^[0-9a-fA-F]{24}$/)){
         return {
             notFound: true
         }
     }
-
 
     const postData = await getPost({_id: context.query.id, title: context.query.title},  true)
     const post = postData?.data?.post;
@@ -33,8 +33,9 @@ export const getServerSideProps = async (context) => {
             notFound: true
         }
     }
+
     const commentsData = post ? await getComments({onDocument: post._id},  true) : {}
-    const widgets = firstLoadData.widgets
+    const widgets = firstLoadData.widgets || []
     const comments = post ? commentsData?.data?.comments : []
 
     return {

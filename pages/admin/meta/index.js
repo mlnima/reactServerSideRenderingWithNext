@@ -12,7 +12,7 @@ let StyledDiv = styled.div`
       min-width: 300px;
       border: 1px solid rgba(0, 0, 0, .1);
       padding: 3px 5px;
-      background-color: $light100;
+      background-color: white;
 
     }
 
@@ -184,7 +184,7 @@ export const getServerSideProps = async ({req, query}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let metaInfo = {}
     let settings;
-    const settingsData = await getMultipleSetting({settings: ['identity']}, domainName, false, 'adminPostPage')
+    const settingsData = await getMultipleSetting({settings: ['identity']},  false)
     settings = settingsData.data.settings ? settingsData.data.settings : []
     if (query.new && query.metaType) {
         metaInfo = {
