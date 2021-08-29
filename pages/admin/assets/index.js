@@ -64,7 +64,7 @@ const assets = props => {
                 assetType === 'forms' ? await getFormsData(dataConfig, localStorage.wt) :
                     assetType === 'pages' ? await getPagesData(dataConfig, localStorage.wt) :
                         assetType === 'comments' ? await getComments(dataConfig, process.env.REACT_APP_PRODUCTION_URL, false) :
-                            assetType === 'metas' && router.query.metaType ? await getMultipleMeta(dataConfig, process.env.REACT_APP_PRODUCTION_URL, false) :
+                            assetType === 'metas' && router.query.metaType ? await getMultipleMeta(router?.query, router?.query.metaType, false) :
                                 assetType === 'orders' ? await getOrders(dataConfig, process.env.REACT_APP_PRODUCTION_URL) : null
 
         if (ajaxRequestData) {
