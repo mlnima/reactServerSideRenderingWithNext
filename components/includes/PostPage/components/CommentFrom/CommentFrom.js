@@ -3,6 +3,7 @@ import { newComment } from '../../../../../_variables/ajaxPostsVariables';
 import { AppContext } from '../../../../../context/AppContext';
 import withRouter from 'next/dist/client/with-router';
 import styled from "styled-components";
+import {withTranslation} from "next-i18next";
 
 
 const CommentFromStyledForm = styled.form`
@@ -76,11 +77,11 @@ const CommentFrom = props => {
             <div >
 
                 <div className='comment-form-input'>
-                    <textarea ref={ bodyInput } required={ true } placeholder='Comment' name='body'/>
+                    <textarea ref={ bodyInput } required={ true } placeholder={props.t(`common:Write a Comment`)} name='body'/>
                 </div>
             </div>
-            <button className='comment-form-submit-button' type='submit'>Post Comment</button>
+            <button className='comment-form-submit-button' type='submit'>{props.t(`common:ارسال نظر`)}</button>
         </CommentFromStyledForm>
     );
 };
-export default withRouter(CommentFrom);
+export default withTranslation(['common'])(CommentFrom);

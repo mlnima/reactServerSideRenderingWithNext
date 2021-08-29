@@ -3,6 +3,7 @@ import {AppContext} from "../../../context/AppContext";
 import {login, registerUser} from "../../../_variables/ajaxAuthVariables";
 import {faFemale, faMale, faTimes, faTransgender} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {withTranslation} from "next-i18next";
 
 const LoginRegisterPopupForms = props => {
     const contextData = useContext(AppContext);
@@ -57,22 +58,19 @@ const LoginRegisterPopupForms = props => {
         const checkUsername = state.username.length < 15 && state.username.length > 8;
         const checkPasswords = state.password === state.password2;
 
-        if (!checkUsername){
+        if (!checkUsername) {
             setResponse({
                 message: 'you can not use this username',
                 type: 'error',
             })
         }
 
-        if (!checkPasswords){
+        if (!checkPasswords) {
             setResponse({
                 message: 'password is to short or is not match',
                 type: 'error',
             })
         }
-
-
-
 
 
         if (checkUsername && checkPasswords)
@@ -113,7 +111,7 @@ const LoginRegisterPopupForms = props => {
                 justify-content: space-between;
                 align-items: center;
                 background-color: var(--navigation-background-color);
-                height: 300px;
+                //height: 300px;
                 width: 280px;
                 padding: 5px;
                 border-radius: 10px;
@@ -155,6 +153,14 @@ const LoginRegisterPopupForms = props => {
               .login-register-form-field > p {
                 margin: 4px 0;
                 color: var(--main-text-color);
+                width: 100%;
+
+              }
+
+              .password-info {
+                color: var(--main-text-color);
+                text-align: center;
+                font-size: 8px;
                 width: 100%;
               }
 
@@ -200,7 +206,7 @@ const LoginRegisterPopupForms = props => {
                     e => onRegisterHandler(e) :
                     e => onLoginHandler(e)
             }>
-                <span onClick={onCloseHandler} className='close-form-button'>
+                <span onClick={onCloseHandler} className='close-form-button' title={props.t(`common:Close`)}>
                     <FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color)'}} icon={faTimes}/>
                 </span>
                 {
@@ -208,30 +214,35 @@ const LoginRegisterPopupForms = props => {
                         <React.Fragment>
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">
-                                    <p>username</p>
+                                    <p>{props.t(`common:Username`)}</p>
                                     <input minLength="8" maxLength="15" required={true} name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
                                 </div>
                                 <div className="login-register-form-field">
-                                    <p>email</p>
+                                    <p>{props.t(`common:Email`)}</p>
                                     <input minLength="8" required={true} name='email' value={state.email} type='email' onChange={e => onChangeHandler(e)}/>
                                 </div>
                                 <div className="login-register-form-field gender">
-                                    <p>gender</p>
+                                    <p>{props.t(`common:Gender`)}</p>
                                     <div className='gender-options' onChange={e => onChangeHandler(e)}>
-                                        <input type='radio' name='gender' value='male' checked={state.gender === 'male'} onChange={e => {}}/>
-                                        <p className='gender-icon'><FontAwesomeIcon style={{...props.svgStyle, width: '20px', height: '20px'}} icon={faMale}/></p>
-                                        <input type='radio' name='gender' value='female' checked={state.gender === 'female'} onChange={e => {}}/>
-                                        <p className='gender-icon'><FontAwesomeIcon style={{...props.svgStyle, width: '20px', height: '20px'}} icon={faFemale}/></p>
-                                        <input type='radio' name='gender' value='other' checked={state.gender === 'other'} onChange={e => {}}/>
-                                        <p className='gender-icon'><FontAwesomeIcon style={{...props.svgStyle, width: '20px', height: '20px'}} icon={faTransgender}/></p>
+                                        <input type='radio' name='gender' value='male' checked={state.gender === 'male'} onChange={e => {
+                                        }}/>
+
+                                        <p className='gender-icon'>{props.t(`common:Male`)}</p>
+                                        <input type='radio' name='gender' value='female' checked={state.gender === 'female'} onChange={e => {
+                                        }}/>
+                                        <p className='gender-icon'>{props.t(`common:Female`)}</p>
+                                        <input type='radio' name='gender' value='other' checked={state.gender === 'other'} onChange={e => {
+                                        }}/>
+                                        <p className='gender-icon'>{props.t(`common:Other`)}</p>
                                     </div>
                                 </div>
                                 <div className="login-register-form-field">
-                                    <p>password</p>
+                                    <p>{props.t(`common:Password`)} </p>
+                                    <span className='password-info'>{props.t(`common:Use 8 or more characters with a mix of letters, numbers & symbols`)}</span>
                                     <input name='password' required={true} value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
                                 </div>
                                 <div className="login-register-form-field">
-                                    <p>repeat password</p>
+                                    <p>{props.t(`common:Repeat Password`)}</p>
                                     <input name='password2' required={true} value={state.password2} type='password' onChange={e => onChangeHandler(e)}/>
                                 </div>
                             </div>
@@ -239,30 +250,30 @@ const LoginRegisterPopupForms = props => {
                                 <span value={null} onClick={() => {
                                     onresetStateHandler()
                                     props.onTypeChangeHandler()
-                                }} className='login-register-switch-form-button simple-button'>Login</span>
+                                }} className='login-register-switch-form-button simple-button'>{props.t(`common:Login`)}</span>
 
-                                <button type='submit' className='login-register-form-button simple-button'>Register</button>
+                                <button type='submit' className='login-register-form-button simple-button'>{props.t(`common:Register`)}</button>
                             </div>
                         </React.Fragment> :
                         <React.Fragment>
 
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">
-                                    <p>username</p>
+                                    <p>{props.t(`common:Username`)}</p>
                                     <input name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
                                 </div>
                                 <div className="login-register-form-field">
-                                    <p>password</p>
+                                    <p>{props.t(`common:Password`)}</p>
                                     <input name='password' value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
                                 </div>
                             </div>
 
                             <div className='register-form-buttons'>
-                                <button type='submit' className='login-register-form-button simple-button'>Login</button>
+                                <button type='submit' className='login-register-form-button simple-button'>{props.t(`common:Login`)}</button>
                                 <span onClick={() => {
                                     onresetStateHandler()
                                     props.onTypeChangeHandler()
-                                }} className='login-register-switch-form-button simple-button'>Register</span>
+                                }} className='login-register-switch-form-button simple-button'>{props.t(`common:Register`)}</span>
                             </div>
                         </React.Fragment>
                 }
@@ -271,4 +282,4 @@ const LoginRegisterPopupForms = props => {
         </React.Fragment>
     );
 };
-export default LoginRegisterPopupForms;
+export default withTranslation(['common'])(LoginRegisterPopupForms);

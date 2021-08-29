@@ -27,12 +27,12 @@ const SearchInputComponentStyledForm = styled.form`
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: transparent;
     outline: none;
     padding: 0.2em;
     margin-left: 0;
     border: none;
     color: var(--main-text-color);
+    background-color: var(--main-active-color);
     &:focus {
       outline: none;
     }
@@ -75,7 +75,7 @@ const SearchInputComponent = ({t}) => {
 
     return (
             <SearchInputComponentStyledForm className='search-bar' onSubmit={e => onSearchHandler(e)}>
-                <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder={t([`common:Search`])}/>
+                <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder={t([`common:Search...`])}/>
                 <button className='search-button' aria-label='Center Align' type='submit'>
                     {t([`common:Search`])}
                 </button>

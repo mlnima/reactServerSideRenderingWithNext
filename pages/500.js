@@ -26,7 +26,7 @@ const Custom500 = () => {
             <h1>500 - Server Error</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
-                    <h2>back to homepage</h2>
+                    <h2>Go To Homepage</h2>
                 </a>
             </Link>
         </Custom500StyledDiv>

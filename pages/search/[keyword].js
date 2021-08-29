@@ -8,6 +8,7 @@ import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -72,8 +73,9 @@ export const getServerSideProps = async (context) => {
         sort: context.query.sort || 'updatedAt',
         lang: context.query.lang || null
     }
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,null,true)
 
-    const postsData = await getPosts(getPostsData, firstLoadData.domainName, true, context.req.originalUrl)
+    const postsData = await getPosts(gettingPostsQueries)
     const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
     return {props: {
@@ -83,7 +85,7 @@ export const getServerSideProps = async (context) => {
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),
             postsSource,
-            getPostsData ,
+            countPerPage:firstLoadData?.settings?.identity?.data?.postsCountPerPage,
             referer: firstLoadData.referer}}
 }
 

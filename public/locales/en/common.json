@@ -2,6 +2,7 @@
   "Home": "Home",
   "Categories": "Categories",
   "Tags": "Tags",
+  "Email": "Email",
   "Login": "Login",
   "Register": "Register",
   "Username": "Username",
@@ -36,6 +37,7 @@
   "Language": "Language",
   "Chatroom": "Chatroom",
   "Search": "Search",
+  "Search...": "Search...",
   "Download": "Download",
   "Like": "Like",
   "Dislike": "Dislike",
@@ -47,5 +49,15 @@
   "Report": "Report",
   "Feedback": "Feedback",
   "Bug Report": "Bug Report",
-  "Advertise": "Advertise"
+  "Advertise": "Advertise",
+  "Not Found": "Not Found",
+  "Go To Homepage": "Go To Homepage",
+  "Error": "Error",
+  "Server Error": "Server Error",
+  "An Error Occurred" : "An Error Occurred",
+  "Occurred On Server": "Occurred On Server",
+  "Comments": "Comments",
+  "Write a Comment": "Write a Comment",
+  "Post Comment": "Post Comment",
+  "Use 8 or more characters with a mix of letters, numbers & symbols": "Use 8 or more characters with a mix of letters, numbers & symbols"
 }

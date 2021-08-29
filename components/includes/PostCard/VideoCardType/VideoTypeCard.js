@@ -4,6 +4,7 @@ import VideoCardMedia from "./VideoCardMedia";
 import _ from "lodash";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
+import {withTranslation} from "next-i18next";
 
 let VideoCard = styled.div`
   width: ${props => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
@@ -128,7 +129,7 @@ let VideoCard = styled.div`
 `
 
 
-const VideoTypeCard = props => {
+const VideoTypeCard = (props) => {
 
 
     const quality = useMemo(() => {
@@ -161,7 +162,7 @@ const VideoTypeCard = props => {
                     <span className='video-card-under-media-info'>
                         {props.post.quality && props.post.postType === ('video') ? <p className='video-card-quality video-card-info-data'>{quality} </p> : null}
                         {props.post.duration && props.post.postType === ('video') ? <p className='video-card-duration video-card-info-data'>{props.post.duration} </p> : null}
-                        {props.post.postType === ('video') ? <p className='video-card-views video-card-info-data'><span>{props.views}</span> views </p> : null}
+                        {props.post.postType === ('video') ? <p className='video-card-views video-card-info-data'><span>{props.views}</span>{props.t(`common:Views`)} </p> : null}
                         {props.post.postType === ('video') ? <p className='video-card-rating video-card-info-data'><span>{props.rating}</span> % </p> : null}
                     </span>
 
@@ -172,7 +173,7 @@ const VideoTypeCard = props => {
         </VideoCard>
     );
 };
-export default VideoTypeCard;
+export default withTranslation(['common'])(VideoTypeCard);
 
 //`calc(${cardWidth - 116.6}px )`
 

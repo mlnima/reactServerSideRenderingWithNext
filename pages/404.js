@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
+import {withTranslation} from "next-i18next";
 
 const Custom404StyledDiv = styled.div`
   display: flex;
@@ -19,18 +20,18 @@ const Custom404StyledDiv = styled.div`
     text-decoration: none;
   }
 `
-const Custom404 = () => {
+const Custom404 = props => {
 
     return (
         <Custom404StyledDiv id='not-found-page'>
-            <h1>404 - Page Not Found</h1>
+            <h1>404 - {props.t(`Not Found`)}</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
-                    <h2>back to homepage</h2>
+                    <h2>{props.t(`Go To Homepage`)}</h2>
                 </a>
             </Link>
         </Custom404StyledDiv>
     );
 };
 
-export default Custom404;
+export default withTranslation(['common'])(Custom404);

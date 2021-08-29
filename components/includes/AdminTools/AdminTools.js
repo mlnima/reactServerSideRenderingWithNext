@@ -9,7 +9,7 @@ import styled from "styled-components";
 let StyledDiv = styled.div`
   position: fixed;
   bottom: 3%;
-  left: 3%;
+  left: 40px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
@@ -25,8 +25,6 @@ let StyledDiv = styled.div`
     align-items: center;
     transition: .5s;
     z-index: 2;
-    //width: 50px;
-    //height: 50px;
     text-decoration: none;
     margin: 0 5px;
 
