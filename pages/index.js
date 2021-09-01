@@ -6,6 +6,7 @@ import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Home = ({isMobile, widgets, design, identity}) => {
     const contextData = useContext(AppContext);
+
     return (
         < MainWidgetArea isMobile={isMobile}
                          rendering={true}

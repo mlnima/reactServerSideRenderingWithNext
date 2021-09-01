@@ -7,7 +7,7 @@ const adminGetSettings = require('./adminSettingsControllers/adminGetSettings')
 const adminClearCaches = require('./adminSettingsControllers/adminClearCaches')
 
 router.post('/update',adminAuthMiddleware,adminUpdateSettings)
-router.post('/getSetting',adminAuthMiddleware,adminGetSettings)
+router.get('/getSetting',adminAuthMiddleware,adminGetSettings)
 //router.post('/clearCaches',adminAuthMiddleware,adminClearCaches)
 
 module.exports = router

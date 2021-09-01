@@ -8,17 +8,12 @@ export const updateSetting = async (type, data) => {
         data,
         token: localStorage.wt,
     };
-    return await axios.post(window.location.origin + '/api/admin/settings/update', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/settings/update', body)
 };
 
-export const getSetting = async (type, domainName, cache, whichPage) => {
-    const pageNameForCachedRequest = whichPage ? `&position=${whichPage}` : '';
-    const body = {
-        type,
-        cache,
-        token: localStorage.wt
-    };
-    return await axios.post(domainName + `/api/admin/settings/getSetting?type=${type}${pageNameForCachedRequest}`, body);
+export const getSetting = async (type, cache) => {
+    console.log(type)
+    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/settings/getSetting?type=${type}&cache=${cache}&token=${localStorage.wt}`);
 };
 
 export const addNewWidget = async (data) => {
@@ -26,7 +21,7 @@ export const addNewWidget = async (data) => {
         data,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/admin/widgets/addNewWidget', body);
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/widgets/addNewWidget', body);
 }
 
 export const getMultipleWidgetWithData = async (widgets, cache) => {
@@ -39,13 +34,12 @@ export const getMultipleSetting = async (settings, cache) => {
 };
 
 
-
 export const updateWidgets = async (widgetData) => {
     const body = {
         widgetData,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/admin/widgets/updateWidget', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/widgets/updateWidget', body)
 }
 
 export const deleteWidgets = async (id) => {
@@ -53,7 +47,7 @@ export const deleteWidgets = async (id) => {
         id,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/admin/widgets/deleteWidget', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/widgets/deleteWidget', body)
 }
 
 export const executor = async (command) => {
@@ -61,30 +55,30 @@ export const executor = async (command) => {
         command,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/admin/terminal/commandExecutor', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/terminal/commandExecutor', body)
 }
 
 export const fileUpload = async (file) => {
 
-    return await axios.post(window.location.origin + '/api/admin/fileManager/uploadFile', file)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/uploadFile', file)
 }
 
 export const uploadFiles = async (image) => {
-    return await axios.post(window.location.origin + '/api/admin/fileManager/uploadFiles', image)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/uploadFiles', image)
 }
 
 export const postThumbnailsUpload = async (image) => {
-    return await axios.post(window.location.origin + '/api/admin/fileManager/postThumbnailsUpload', image)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/postThumbnailsUpload', image)
 }
 
 
 export const postProductTypeImages = async (image) => {
-    return await axios.post(window.location.origin + '/api/v1/settings/fileManagerControllers-postProductTypeImages', image)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/settings/fileManagerControllers-postProductTypeImages', image)
 }
 
 
 export const userImageUpload = async (image) => {
-    return await axios.post(window.location.origin + '/api/v1/fileManager/userImageUpload', image)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/fileManager/userImageUpload', image)
 }
 
 
@@ -92,7 +86,7 @@ export const saveFormWidgetData = async (data) => {
     const body = {
         data
     }
-    return await axios.post(window.location.origin + '/api/v1/forms/saveFormData', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/forms/saveFormData', body)
 }
 
 export const getFormsData = async (data) => {
@@ -103,12 +97,12 @@ export const getFormsData = async (data) => {
     return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/forms/getFormsData', body)
 }
 
-export const getFormData = async (data, domainName) => {
+export const getFormData = async (data) => {
     const body = {
         ...data,
         token: localStorage.wt
     }
-    return await axios.post(domainName + '/api/admin/forms/getFormData', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/forms/getFormData', body)
 }
 
 //pages
@@ -117,27 +111,27 @@ export const saveNewPage = async (data) => {
         ...data,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/admin/pages/createNewPage', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/pages/createNewPage', body)
 }
 export const updatePage = async (data) => {
     const body = {
         ...data,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/admin/pages/updatePage', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/pages/updatePage', body)
 }
-export const getPageData = async (data, domainName) => {
+export const getPageData = async (data) => {
     const body = {
         ...data
     }
-    return await axios.post(domainName + '/api/v1/pages/getPageData', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/pages/getPageData', body)
 }
-export const deletePage = async (id, domainName) => {
+export const deletePage = async (id) => {
     const body = {
         id,
         token: localStorage.wt
     }
-    return await axios.post(domainName + '/api/admin/pages/deletePage', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/pages/deletePage', body)
 }
 export const getPagesData = async (data) => {
     const body = {
@@ -153,7 +147,7 @@ export const youtubeDataScrapper = async (url) => {
         url,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/admin/scrapper/scrapYoutubeInfo', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/scrapper/scrapYoutubeInfo', body)
 }
 
 export const getOrders = async (data, domainName) => {
@@ -170,20 +164,17 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
 
     try {
         const domainName = process.env.REACT_APP_PRODUCTION_URL;
-        const cache = process.env.NODE_ENV !== 'development'
+        //const cache = process.env.NODE_ENV !== 'development'
+        const cache = true
         const refererUrl = req?.headers?.referer || '';
         const referer = false;
         const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
-        const isNavigatedFromPostPage = /video|post|article|product/.test(refererUrl);
-        // const widgetsToRequest = referer ? dynamicWidgets : ['footer', 'header', 'topBar', 'navigation',...dynamicWidgets];
-        //
-        //
-        // const firstLoadWidgetsData =   await getMultipleWidgetWithData({widgets: widgetsToRequest}, cache);
 
-        const dynamicWidgetsData = dynamicWidgets && dynamicWidgets.length > 0 ? await getMultipleWidgetWithData({widgets: dynamicWidgets}, cache) : []
-        const staticWidgetsData = referer ? [] : await getMultipleWidgetWithData({widgets: ['footer', 'header', 'topBar', 'navigation']}, cache)
+        const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length > 0 ? [...dynamicWidgets] : [];
+        const staticWidgetsToGet = referer ? [] : ['footer', 'header', 'topBar', 'navigation'];
 
-        const widgets = [...dynamicWidgetsData.data?.widgets, ...staticWidgetsData.data?.widgets]
+        const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
+        const widgets = widgetData.data?.widgets || []
 
         const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, cache) : {};
         let finalSettings = settingsData.data ? {
@@ -199,7 +190,6 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
             widgets,
             referer,
             isSameOrigin,
-            isNavigatedFromPostPage,
             isMobile,
         }
     } catch (e) {
@@ -209,47 +199,3 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
 
 }
 
-// export const getStaticLoadData = async () => {
-//     const domainName = process.env.REACT_APP_PRODUCTION_URL;
-//     const settingsData =  await getMultipleSetting({settings: ['identity', 'design']}, true);
-//     return {
-//         domainName,
-//         settings: settingsData?.data?.settings ?? [],
-//         widgets: firstLoadWidgetsData?.data?.widgets ?? [],
-//         referer:false,
-//         isSameOrigin:false,
-//         isNavigatedFromPostPage:false,
-//         isMobile:false,
-//     }
-// }
-
-
-// export const getWidgetsWithData = async (position, domainName) => {
-//     const body = {
-//         position,
-//     };
-//     return await axios.post(domainName + `/api/v1/settings/getWidgetsWithData`, body)
-// }
-
-// export const saveCustomStyle = async (data) => {
-//     const body = {
-//         token: localStorage.wt,
-//         data
-//     };
-//     return await axios.post(window.location.origin + '/api/v1/settings/saveCustomStyle', body)
-// };
-
-
-// export const getSingleWidgetData = async (data) => {
-//     const body = {
-//         ...data,
-//     };
-//     return await axios.post(window.location.origin + '/api/v1/widgets/getSingleWidgetData', body);
-// }
-
-// export const getWidgets = async (position,cache, domainName) => {
-//     const body = {
-//         position,
-//     };
-//     return await axios.post(domainName + '/api/v1/settings/getWidget', body)
-// }

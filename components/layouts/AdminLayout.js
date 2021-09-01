@@ -22,13 +22,13 @@ const AdminLayout = props => {
     const Admin = useRef(null);
 
     useEffect(() => {
-        getSetting('identity', window.location.origin, false, Date.now()).then(identity => {
+        getSetting('identity', false).then(identity => {
             contextData.dispatchSiteIdentity({
                 ...contextData.siteIdentity,
                 ...identity.data.setting.data
             })
         })
-        getSetting('design', window.location.origin, false, Date.now()).then(design => {
+        getSetting('design', false).then(design => {
             contextData.dispatchSiteDesign({
                 ...contextData.siteDesign,
                 ...design.data.setting.data

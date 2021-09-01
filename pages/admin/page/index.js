@@ -23,7 +23,7 @@ const page = props => {
 
     useEffect(() => {
         if (router.query.id) {
-            getPageData({id: router.query.id}, window.location.origin).then(res => {
+            getPageData({id: router.query.id}).then(res => {
                 if (res.data.pageData) {
                     setState({
                         ...state,

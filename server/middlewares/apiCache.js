@@ -9,8 +9,6 @@ const cacheOn = (req, res) => {
     else return res.statusCode === 200;
 }
 
-
-
 const cacheSuccesses = cache('1440 minutes', cacheOn);
 
 module.exports = cacheSuccesses

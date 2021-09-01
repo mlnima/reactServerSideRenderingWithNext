@@ -25,7 +25,7 @@ const AssetBulkAct = props => {
                     })
                     break
                 case 'metas':
-                    bulkAction(window.location.origin,'metas',bulkActionSelect.current.value,props.selectedItems).then(()=>{
+                    bulkAction('metas',bulkActionSelect.current.value,props.selectedItems).then(()=>{
                         props.setSelectedItems([])
                         reGetData()
                     })

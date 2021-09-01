@@ -52,7 +52,7 @@ const ProfileCoverImage = props => {
 
             contextData.dispatchUserData(newUserData)
 
-            updateUserData(newUserData, window.location.origin).then(() => {
+            updateUserData(newUserData).then(() => {
                 contextData.functions.getAndSetUserInfo()
                 contextData.dispatchState({
                     ...contextData.state,

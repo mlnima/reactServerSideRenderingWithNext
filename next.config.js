@@ -1,3 +1,4 @@
+
 const {parsed: localEnv} = require('dotenv').config();
 const { i18n } = require('./next-i18next.config');
 const withImages = require('next-images')
@@ -7,6 +8,12 @@ const languages = process.env.REACT_APP_LOCALS.replace(' ', '|')
 const locales = process.env.REACT_APP_LOCALS.split(' ')
 const withPWA = require('next-pwa')
 require('webpack')
+
+// const settingSchema = require('./server/models/settings/settingSchema')
+//
+// const identity = settingSchema.findOne({type: 'identity'}).exec()
+// const design = settingSchema.findOne({type: 'design'}).exec()
+
 
 const svgLoader= {
     webpack(config) {
@@ -31,11 +38,26 @@ const additionalConfig = {
         maxInactiveAge: 1000 * 60 * 60 * 24,
         pagesBufferLength: 200,
     },
-    api: {
-        bodyParser: false,
-    }
-    // cleanDistDir: false
+    // api: {
+    //     bodyParser: false,
+    // },
+    poweredByHeader: false,
+    reactStrictMode: true,
+
 }
+
+// const environmentVariables = async ()=> {
+//     try {
+//         return {
+//             env: {
+//                 REACT_APP_IDENTITY: await identity.data,
+//                 REACT_APP_DESIGN: await design.data
+//             }
+//         }
+//     }catch (err){
+//         console.log(err)
+//     }
+// }
 const reWriteRoutes = {
     rewrites: async () => {
         return [
@@ -69,10 +91,10 @@ const pwaSettings = {
 }
 
 module.exports = withPlugins([
+    additionalConfig,
     i18n,
     svgLoader,
     process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) :{},
-    additionalConfig,
     reWriteRoutes,
     nextImageConfig,
     withImages,
@@ -80,33 +102,8 @@ module.exports = withPlugins([
         staticPrefix: 'REACT_APP_',
         publicPrefix: 'REACT_APP_',
     }),
+    // environmentVariables,
     i18nConfig,
 ]);
-
-// const webpackConfig = {
-//     webpack (config, options) {
-//         config.module.rules.push({
-//             test: /\.(png|jpg|gif|svg|eot|ttf|woff|woff2)$/,
-//             use: {
-//                 loader: 'url-loader',
-//                 options: {
-//                     limit: 100000
-//                 }
-//             }
-//         });
-//         return config;
-//     }
-// }
-
-// const sassLoader= {
-//     webpack(config) {
-//         config.module.rules.push({
-//             test: /\.scss$/,
-//             use: ['style-loader','css-loader']
-//         });
-//
-//         return config;
-//     }
-// }
 
 

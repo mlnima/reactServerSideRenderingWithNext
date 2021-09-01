@@ -52,36 +52,36 @@ export const getSingleMeta = async (id,cache) => {
 };
 
 
-export const updateMeta = async (data,  domainName) => {
+export const updateMeta = async (data) => {
     const body = {
         data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/admin/posts/updateMeta`, body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/posts/updateMeta`, body)
 };
 
 
 
 
 
-export const deleteMeta = async (id, domainName) => {
+export const deleteMeta = async (id) => {
     const body = {
         _id:id,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/admin/posts/deleteMeta`, body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/posts/deleteMeta`, body)
 };
 
 
 
-export const bulkAction = async (domainName,type,status,ids) =>{
+export const bulkAction = async (type,status,ids) =>{
     const body = {
         type,
         status,
         ids,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/admin/posts/bulkAction`, body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/posts/bulkAction`, body)
 }
 
 

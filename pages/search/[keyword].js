@@ -1,5 +1,5 @@
-import { getFirstLoadData} from '../../_variables/ajaxVariables';
-import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
+import {getFirstLoadData} from '../../_variables/ajaxVariables';
+import {getPosts} from '../../_variables/ajaxPostsVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import React, {useContext} from "react";
@@ -62,17 +62,7 @@ const searchPage = props => {
 
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req,['searchPageTop','searchPageLeftSidebar','searchPageBottom','searchPageRightSidebar',],'postsPage')
-    const getPostsData = {
-        size: parseInt(context.query.size) || parseInt(firstLoadData.settings?.identity?.data?.postsCountPerPage) || 30,
-        page: parseInt(context.query?.page) || 1,
-        postType: context.query.type || null,
-        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration', 'postType', 'price', 'translations', 'videoTrailerUrl', 'rating' , 'redirectLink'],
-        keyword: context.query.keyword || '',
-        author: context.query.author || 'all',
-        status: 'published',
-        sort: context.query.sort || 'updatedAt',
-        lang: context.query.lang || null
-    }
+
     const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,null,true)
 
     const postsData = await getPosts(gettingPostsQueries)

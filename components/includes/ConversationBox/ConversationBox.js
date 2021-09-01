@@ -13,7 +13,7 @@ const ConversationBox = props => {
 
     useEffect(() => {
         const IdToGetData = props.conversationData.users.find(u=>u !== contextData.userData._id)
-       getUserPreviewData(window.location.origin,undefined,IdToGetData).then(res=>{
+       getUserPreviewData(undefined,IdToGetData).then(res=>{
            setUserToConversationData({
                ...userToConversationData,
                ...res.data.userData

@@ -51,14 +51,14 @@ const TableBodyItemOnHover = props => {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={'/admin/form/' + props._id}><a>Edit</a></Link>
-                    <span onClick={() => deleteMeta(props._id, window.location.origin).then(() => reGetData())}>Delete</span>
+                    <span onClick={() => deleteMeta(props._id).then(() => reGetData())}>Delete</span>
                 </div>
             );
         } else if (props.assetsType === 'pages') {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={'/admin/page?id=' + props._id}><a>Edit</a></Link>
-                    <span onClick={() => deletePage(props._id, window.location.origin).then(() => reGetData())}>Delete</span>
+                    <span onClick={() => deletePage(props._id).then(() => reGetData())}>Delete</span>
                 </div>
             );
         } else {

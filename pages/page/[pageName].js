@@ -31,7 +31,7 @@ export const getServerSideProps = async (context) => {
 
     const firstLoadData = await getFirstLoadData(context.req,[context.query.pageName, context.query.pageName + 'LeftSidebar',context.query.pageName + 'RightSidebar'],context.query.pageName)
     let responseCode = 200
-    const pageData = await getPageData({pageName: context.query.pageName}, firstLoadData.domainName)
+    const pageData = await getPageData({pageName: context.query.pageName})
 
     if (!pageData.data.pageData){
         return {

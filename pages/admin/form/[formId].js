@@ -36,7 +36,7 @@ const formPage = props => {
         const requestBody = {
             _id: router.query.formId,
         };
-        getFormData(requestBody,process.env.REACT_APP_PRODUCTION_URL).then(res=>{
+        getFormData(requestBody).then(res=>{
             if (res?.data?.form){
                 setState({
                     ...state,

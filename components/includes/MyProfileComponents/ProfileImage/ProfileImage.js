@@ -23,7 +23,7 @@ const ProfileImage = props => {
             const newUserData= {...contextData.userData, profileImage:res.data.path.replace('./','/')}
             contextData.dispatchUserData(newUserData)
 
-            updateUserData(newUserData, window.location.origin).then(() => {
+            updateUserData(newUserData).then(() => {
                 contextData.functions.getAndSetUserInfo()
                 contextData.dispatchState({
                     ...contextData.state,

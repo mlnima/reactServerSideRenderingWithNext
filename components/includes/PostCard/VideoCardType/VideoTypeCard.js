@@ -49,6 +49,7 @@ let VideoCard = styled.div`
         font-weight: initial;
         white-space: normal;
         font-size: 12px;
+        height:${props => props.postElementSize === 'list' ? 'initial' : '12px'} ;
         margin: 4px 2px;
         width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
         max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};

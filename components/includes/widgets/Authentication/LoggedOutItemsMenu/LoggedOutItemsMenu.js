@@ -1,21 +1,8 @@
 import {useContext} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faUser} from "@fortawesome/free-regular-svg-icons";
-import {faPen} from "@fortawesome/free-solid-svg-icons";
-import styled from "styled-components";
+import {withTranslation} from "next-i18next";
 
-const LoggedOutItemsMenuStyledDiv = styled.div`
-  display: flex;
-  justify-content: space-between;
-  .logged-out-item{
-    background-color: transparent;
-    border: none;
-    margin: 0 10px;
-    padding: 0;
-    color: var(--navigation-text-color);
-  }
-`
+
 const LoggedOutItemsMenu = props => {
     const contextData = useContext(AppContext);
 
@@ -31,17 +18,17 @@ const LoggedOutItemsMenu = props => {
 
     if (!contextData.userData.username || contextData.userData.username === 'guest' ) {
         return (
-            <LoggedOutItemsMenuStyledDiv className='logged-out-items'>
+            <div className='logged-out-items'>
 
                 <button onClick={()=>onLoginRegisterHandler('login')} className='logged-out-item ' aria-label='logged-out-items' >
-                    <FontAwesomeIcon  style={{width:'24px',height:'24px'}} icon={faUser} />
+                    {props.t(`common:Login`)}
                 </button>
                 <button onClick={()=>onLoginRegisterHandler('register')} className='logged-out-item ' aria-label='logged-out-items' >
-                    <FontAwesomeIcon style={{width:'24px',height:'24px'}} icon={faPen} />
+                    {props.t(`common:Sign Up`)}
                 </button>
-            </LoggedOutItemsMenuStyledDiv>
+            </div>
         )
     } else return null
 
 };
-export default LoggedOutItemsMenu;
+export default withTranslation(['common'])(LoggedOutItemsMenu);

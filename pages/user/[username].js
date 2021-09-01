@@ -37,8 +37,8 @@ const user = props => {
 
     const getUserData = async () => {
         try {
-            const userPreviewData = await getUserPreviewData(process.env.REACT_APP_PRODUCTION_URL, router.query.username,undefined,['following','followers','blockList']);
-            const myFriendRequestData = await getUserPreviewData(process.env.REACT_APP_PRODUCTION_URL, undefined,contextData.userData._id,['following','followers','blockList']);
+            const userPreviewData = await getUserPreviewData( router.query.username,undefined,['following','followers','blockList']);
+            const myFriendRequestData = await getUserPreviewData( undefined,contextData.userData._id,['following','followers','blockList']);
             contextData.dispatchUserData(userData=>({...userData,...myFriendRequestData.data.userData}))
             setUserData(userPreviewData.data.userData);
 

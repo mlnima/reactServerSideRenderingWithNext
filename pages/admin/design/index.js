@@ -89,8 +89,8 @@ export const getServerSideProps = async ({req}) => {
     const domainName = req ? await getAbsolutePath(req) : '';
     let design;
     let customStyles;
-    const designData = await getSetting('design', domainName, false);
-    const customStylesData = await getSetting('customStyle', domainName, false);
+    const designData = await getSetting('design',false);
+    const customStylesData = await getSetting('customStyle',false, false);
 
     design = designData.data.setting ? designData.data.setting.data : {}
     customStyles = customStylesData.data.setting ? customStylesData.data.setting : {}

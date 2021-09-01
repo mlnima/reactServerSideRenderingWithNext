@@ -1,12 +1,12 @@
 import axios from "axios";
 
-export const getUserPreviewData = async (domainName,username,_id,fields) => {
+export const getUserPreviewData = async (username,_id,fields) => {
     const body = {
         username,
         fields,
         _id
     }
-    return await axios.post(domainName + '/api/v1/users/getUserPreviewData', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/getUserPreviewData', body)
 }
 
 export const followUser = async (_id) => {
@@ -14,7 +14,7 @@ export const followUser = async (_id) => {
         _id,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/followUser', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/followUser', body)
 }
 
 export const unFollowUser = async (_id) => {
@@ -22,7 +22,7 @@ export const unFollowUser = async (_id) => {
         _id,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/unFollowUser', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/unFollowUser', body)
 }
 
 
@@ -31,28 +31,28 @@ export const sendFriendRequest = async (_id) => {
         _id,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/sendFriendRequest', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/sendFriendRequest', body)
 }
 export const acceptFriendRequest = async (_id) => {
     const body = {
         _id,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/acceptFriendRequest', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/acceptFriendRequest', body)
 }
 export const unfriendRequest = async (_id) => {
     const body = {
         _id,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/unfriendRequest', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/unfriendRequest', body)
 }
 export const cancelFriendRequest = async (_id) => {
     const body = {
         _id,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/cancelFriendRequest', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/cancelFriendRequest', body)
 }
 export const sendMessage = async (_id,message) => {
     const body = {
@@ -60,7 +60,7 @@ export const sendMessage = async (_id,message) => {
         message,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/sendMessage', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/sendMessage', body)
 }
 
 export const conversation = async (_id,message) => {
@@ -68,7 +68,7 @@ export const conversation = async (_id,message) => {
         _id,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/conversation', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/conversation', body)
 }
 
 export const getConversations = async (_id,message) => {
@@ -76,7 +76,7 @@ export const getConversations = async (_id,message) => {
         _id,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/getConversations', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/getConversations', body)
 }
 
 export const getConversation = async (_id,loadAmount) => {
@@ -85,7 +85,7 @@ export const getConversation = async (_id,loadAmount) => {
         loadAmount,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/getConversation', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/getConversation', body)
 }
 
 export const messageToConversation = async (conversationId,messageBody) => {
@@ -94,14 +94,14 @@ export const messageToConversation = async (conversationId,messageBody) => {
         messageBody,
         token: localStorage.wt
     }
-    return await axios.post(window.location.origin + '/api/v1/users/messageToConversation', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/messageToConversation', body)
 }
 
 export const getMultipleUserDataById = async (usersList) => {
     const body = {
         usersList
     }
-    return await axios.post(window.location.origin + '/api/v1/users/getMultipleUserDataById', body)
+    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/users/getMultipleUserDataById', body)
 }
 
 

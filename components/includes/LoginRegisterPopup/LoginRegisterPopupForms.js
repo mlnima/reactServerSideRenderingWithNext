@@ -5,6 +5,125 @@ import {faFemale, faMale, faTimes, faTransgender} from "@fortawesome/free-solid-
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {withTranslation} from "next-i18next";
 
+import styled from "styled-components";
+const LoginRegisterPopupFormsStyledDiv = styled.div`
+  background-color: var(--navigation-background-color);
+  width: 100%;
+  max-width:   320px;
+  padding: 10px 5px;
+  color: var(--navigation-text-color);
+  position: relative;
+
+  .login-register-switch-form-button {
+   
+    border: none;
+    color: var(--main-text-color);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1rem;
+    font-weight: bold;
+    cursor: pointer;
+  }
+  .close-form-button {
+    position: absolute;
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    align-items: center;
+    cursor: pointer;
+    svg{
+      margin: 5px 3px 0 3px;
+      width: 16px;
+      height: 16px;
+    }
+  }
+  
+  .login-register-title{
+    text-align: center;
+    margin: 0;
+    
+  }
+  
+  .server-response {
+    color: ${
+    props=> props.response.type === 'success' ?'green' : props.response.type === 'error' ? 'red' :'var(--main-text-color)'};
+  }
+  
+  
+  
+
+  .login-register-form {
+    flex-direction: column;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    .login-register-form-fields {
+      width: 95%;
+      
+      input{
+        outline: none;
+        border: none;
+        padding: 0 7px;
+        height: 25px;
+        width: 95%;
+        font-size: 14px;
+      }
+      
+      p{
+        margin: 4px 0;
+        color: var(--main-text-color);
+        width: 100%;
+      }
+
+      .password-info {
+        color: var(--main-text-color);
+        text-align: center;
+        font-size: 8px;
+        width: 100%;
+      }
+      
+      .gender {
+        .gender-options {
+          display: flex;
+          justify-content: center;
+          align-items: center;
+
+          .gender-icon {
+            color: var(--main-text-color);
+            padding: 0;
+            margin: 0 20px 0 0;
+          }
+        }
+      }
+    }
+
+    .login-register-form-button {
+      border: none;
+      background-color: var(--main-active-color);
+      color: var(--navigation-background-color);
+      font-weight: bold;
+      font-size: 18px;
+      padding: 10px 0 ;
+      width: 95%;
+      margin: 10px;
+      text-align: center;
+     
+      
+    }
+  }
+
+  @media only screen and (min-width: 768px) {
+
+   
+  }
+  
+`
+
+
 const LoginRegisterPopupForms = props => {
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
@@ -99,187 +218,78 @@ const LoginRegisterPopupForms = props => {
     }
 
     return (
-        <React.Fragment>
-            <style jsx>{`
-              .server-response {
-                color: ${response.type === 'success' ? 'green' : response.type === 'error' ? 'red' : 'var(--main-text-color)'};
-              }
-
-              .login-register-form {
-                flex-direction: column;
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                background-color: var(--navigation-background-color);
-                //height: 300px;
-                width: 280px;
-                padding: 5px;
-                border-radius: 10px;
-              }
-
-              .login-register-form-fields {
-                width: 90%;
-              }
-
-              .login-register-form-field {
-
-              }
-
-              .gender {
-                .gender-options {
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-
-                  .gender-icon {
-                    color: var(--main-text-color);
-                    padding: 0;
-                    margin: 0 20px 0 0;
-                  }
-                }
-              }
-
-              .login-register-form-field > input {
-                border-radius: 5px;
-                outline: none;
-                border: none;
-                padding: 3px;
-                height: 25px;
-                width: 100%;
-                font-size: 1rem;
-
-              }
-
-              .login-register-form-field > p {
-                margin: 4px 0;
-                color: var(--main-text-color);
-                width: 100%;
-
-              }
-
-              .password-info {
-                color: var(--main-text-color);
-                text-align: center;
-                font-size: 8px;
-                width: 100%;
-              }
-
-              .register-form-buttons {
-                display: flex;
-                justify-content: space-evenly;
-                width: 100%;
-              }
-
-              .login-register-form-button {
-                border: none;
-                background-color: var(--main-active-color);
-                padding: 10px;
-                width: 100px;
-                margin: 10px;
-                text-align: center;
-                font-size: 1rem;
-                font-weight: bold;
-              }
-
-              .login-register-switch-form-button {
-                border: none;
-                background-color: var(--main-text-color);
-                color: var(--navigation-background-color);
-                padding: 5px;
-                width: 100px;
-                margin: 10px;
-                display: flex;
-                justify-content: center;
-                align-items: center;
-                font-size: 1rem;
-                font-weight: bold;
-              }
-
-              .close-form-button {
-                align-self: flex-end;
-              }
-
-            `}</style>
-            <p className='server-response'> {response.message}</p>
-            <form className='login-register-form' onSubmit={
-                contextData.state.loginRegisterFormPopupType === 'register' ?
-                    e => onRegisterHandler(e) :
-                    e => onLoginHandler(e)
-            }>
+        <LoginRegisterPopupFormsStyledDiv response={response} className='login-register-content'>
                 <span onClick={onCloseHandler} className='close-form-button' title={props.t(`common:Close`)}>
-                    <FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color)'}} icon={faTimes}/>
+                    {props.t(`common:Close`)}
+                    <FontAwesomeIcon icon={faTimes}/>
                 </span>
-                {
-                    contextData.state.loginRegisterFormPopupType === 'register' ?
-                        <React.Fragment>
-                            <div className="login-register-form-fields">
-                                <div className="login-register-form-field">
-                                    <p>{props.t(`common:Username`)}</p>
-                                    <input minLength="8" maxLength="15" required={true} name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
-                                </div>
-                                <div className="login-register-form-field">
-                                    <p>{props.t(`common:Email`)}</p>
-                                    <input minLength="8" required={true} name='email' value={state.email} type='email' onChange={e => onChangeHandler(e)}/>
-                                </div>
-                                <div className="login-register-form-field gender">
-                                    <p>{props.t(`common:Gender`)}</p>
-                                    <div className='gender-options' onChange={e => onChangeHandler(e)}>
-                                        <input type='radio' name='gender' value='male' checked={state.gender === 'male'} onChange={e => {
-                                        }}/>
+            <h3 className='login-register-title' >{contextData.state.loginRegisterFormPopupType === 'register' ? props.t(`common:Register`) : props.t(`common:Member login`) }</h3>
+            <p className='server-response'> {response.message}</p>
 
-                                        <p className='gender-icon'>{props.t(`common:Male`)}</p>
-                                        <input type='radio' name='gender' value='female' checked={state.gender === 'female'} onChange={e => {
-                                        }}/>
-                                        <p className='gender-icon'>{props.t(`common:Female`)}</p>
-                                        <input type='radio' name='gender' value='other' checked={state.gender === 'other'} onChange={e => {
-                                        }}/>
-                                        <p className='gender-icon'>{props.t(`common:Other`)}</p>
-                                    </div>
-                                </div>
-                                <div className="login-register-form-field">
-                                    <p>{props.t(`common:Password`)} </p>
-                                    <span className='password-info'>{props.t(`common:Use 8 or more characters with a mix of letters, numbers & symbols`)}</span>
-                                    <input name='password' required={true} value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
-                                </div>
-                                <div className="login-register-form-field">
-                                    <p>{props.t(`common:Repeat Password`)}</p>
-                                    <input name='password2' required={true} value={state.password2} type='password' onChange={e => onChangeHandler(e)}/>
+            {
+                contextData.state.loginRegisterFormPopupType === 'register' ?
+                    <form className='login-register-form' onSubmit={contextData.state.loginRegisterFormPopupType === 'register' ?e => onRegisterHandler(e) : e => onLoginHandler(e) }>
+
+                        <div className="login-register-form-fields">
+                            <div className="login-register-form-field">
+                                <p>{props.t(`common:Username`)}</p>
+                                <input minLength="8" maxLength="15" required={true} name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
+                            </div>
+                            <div className="login-register-form-field">
+                                <p>{props.t(`common:Email`)}</p>
+                                <input minLength="8" required={true} name='email' value={state.email} type='email' onChange={e => onChangeHandler(e)}/>
+                            </div>
+                            <div className="login-register-form-field gender">
+                                <p>{props.t(`common:Gender`)}</p>
+                                <div className='gender-options' onChange={e => onChangeHandler(e)}>
+                                    <input type='radio' name='gender' value='male' checked={state.gender === 'male'} onChange={e => {
+                                    }}/>
+
+                                    <p className='gender-icon'>{props.t(`common:Male`)}</p>
+                                    <input type='radio' name='gender' value='female' checked={state.gender === 'female'} onChange={e => {
+                                    }}/>
+                                    <p className='gender-icon'>{props.t(`common:Female`)}</p>
+                                    <input type='radio' name='gender' value='other' checked={state.gender === 'other'} onChange={e => {
+                                    }}/>
+                                    <p className='gender-icon'>{props.t(`common:Other`)}</p>
                                 </div>
                             </div>
-                            <div className='register-form-buttons'>
-                                <span value={null} onClick={() => {
-                                    onresetStateHandler()
-                                    props.onTypeChangeHandler()
-                                }} className='login-register-switch-form-button simple-button'>{props.t(`common:Login`)}</span>
-
-                                <button type='submit' className='login-register-form-button simple-button'>{props.t(`common:Register`)}</button>
+                            <div className="login-register-form-field">
+                                <p>{props.t(`common:Password`)} </p>
+                                <span className='password-info'>{props.t(`common:Use 8 or more characters with a mix of letters, numbers & symbols`)}</span>
+                                <input name='password' required={true} value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
                             </div>
-                        </React.Fragment> :
-                        <React.Fragment>
-
-                            <div className="login-register-form-fields">
-                                <div className="login-register-form-field">
-                                    <p>{props.t(`common:Username`)}</p>
-                                    <input name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
-                                </div>
-                                <div className="login-register-form-field">
-                                    <p>{props.t(`common:Password`)}</p>
-                                    <input name='password' value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
-                                </div>
+                            <div className="login-register-form-field">
+                                <p>{props.t(`common:Repeat Password`)}</p>
+                                <input name='password2' required={true} value={state.password2} type='password' onChange={e => onChangeHandler(e)}/>
                             </div>
+                        </div>
+                        <button type='submit' className='login-register-form-button simple-button'>{props.t(`common:Register`)}</button>
 
-                            <div className='register-form-buttons'>
-                                <button type='submit' className='login-register-form-button simple-button'>{props.t(`common:Login`)}</button>
-                                <span onClick={() => {
-                                    onresetStateHandler()
-                                    props.onTypeChangeHandler()
-                                }} className='login-register-switch-form-button simple-button'>{props.t(`common:Register`)}</span>
+
+                    </form>:
+                    <form className='login-register-form' onSubmit={contextData.state.loginRegisterFormPopupType === 'register' ?e => onRegisterHandler(e) : e => onLoginHandler(e) }>
+
+                        <div className="login-register-form-fields">
+                            <div className="login-register-form-field">
+                                <p>{props.t(`common:Username`)}</p>
+                                <input name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
                             </div>
-                        </React.Fragment>
-                }
-            </form>
+                            <div className="login-register-form-field">
+                                <p>{props.t(`common:Password`)}</p>
+                                <input name='password' value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
+                            </div>
+                        </div>
+                        <button type='submit' className='login-register-form-button simple-button'>{props.t(`common:Login`)}</button>
+                    </form>
+            }
 
-        </React.Fragment>
+            <span  onClick={() => {
+                onresetStateHandler()
+                props.onTypeChangeHandler()
+            }} className='login-register-switch-form-button simple-button'>{ contextData.state.loginRegisterFormPopupType === 'register' ?  props.t(`common:Do You Have An Account? Login Here`) :  props.t(`common:Not A Member Yet? Register Here`)}</span>
+
+        </LoginRegisterPopupFormsStyledDiv>
     );
 };
 export default withTranslation(['common'])(LoginRegisterPopupForms);

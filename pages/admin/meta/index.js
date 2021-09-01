@@ -1,5 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import AdminLayout from "../../../components/layouts/AdminLayout";
+import React, {useEffect, useState} from 'react';
 import {deleteMeta, getSingleMeta, updateMeta} from "../../../_variables/ajaxPostsVariables";
 import {getAbsolutePath} from "../../../_variables/_variables";
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";
@@ -114,7 +113,7 @@ const meta = props => {
 
 
     const updateMetaData = () => {
-        updateMeta(metaData, window.location.origin).then(res => {
+        updateMeta(metaData).then(res => {
             setMetaData({
                 ...metaData,
                 ...res.data.updated
@@ -169,7 +168,7 @@ const meta = props => {
             </div>
             <div className='action-buttons'>
                 <button className='green-action-btn-link' onClick={() => updateMetaData()}>Update</button>
-                <button className=' red-action-btn-link' onClick={() => deleteMeta(metaData._id, process.env.REACT_APP_PRODUCTION_URL).then(()=>router.back())}>delete</button>
+                <button className=' red-action-btn-link' onClick={() => deleteMeta(metaData._id).then(()=>router.back())}>delete</button>
             </div>
 
 

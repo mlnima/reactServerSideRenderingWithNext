@@ -52,7 +52,7 @@ const user = props => {
             ...contextData.state,
             loading: true
         })
-        updateUserData(userData, window.location.origin).then(() => {
+        updateUserData(userData).then(() => {
             contextData.dispatchState({
                 ...contextData.state,
                 loading: false
@@ -72,7 +72,7 @@ const user = props => {
 
     useEffect(() => {
         if (router.query.id) {
-            getUserData(router.query.id, window.location.origin).then(res => {
+            getUserData(router.query.id).then(res => {
                 setUserData({...userData, ...res.data.user})
             })
         }
