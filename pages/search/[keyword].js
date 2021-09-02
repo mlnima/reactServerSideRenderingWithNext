@@ -8,6 +8,7 @@ import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
+import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -27,8 +28,11 @@ let StyledMain = styled.main`
 const searchPage = props => {
 
     const router = useRouter()
+
     return (
         <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle ||  ''}>
+            {router.query.keyword ? <MetaDataToSiteHead title={router.query.keyword} url={`${router.asPath}`}/> : null}
+
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 widgets={props.widgets.filter(w=>w.data.position === 'searchPageTop' )}
@@ -41,6 +45,8 @@ const searchPage = props => {
                 postElementImageLoaderType={props.design?.postElementImageLoaderType}
             />
             {router.query.keyword  ? <PostsPageInfo titleToRender={router.query.keyword}/> : null}
+
+
             {props.postsSource.posts.length < 1 ? <h2 className='no-result-message'>No Result for {router.query.keyword}</h2>: null}
             <PostsPage {...props} />
             <WidgetsRenderer

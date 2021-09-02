@@ -20,8 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/includes/PostsDataToSiteHead/MetaDataToSiteHead.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -87,11 +91,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\sl" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\models" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\clientAjaxVariables" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableControls" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\PostPage\components" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\PostCard\VideoCardType" />
     </key>
   </component>
   <component name="RunManager" selected="npm.build">
@@ -781,7 +785,7 @@
       <workItem from="1630440890881" duration="10221000" />
       <workItem from="1630480840306" duration="8318000" />
       <workItem from="1630511278560" duration="14654000" />
-      <workItem from="1630573701330" duration="19921000" />
+      <workItem from="1630573701330" duration="22599000" />
     </task>
     <servers />
   </component>
@@ -996,7 +1000,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/actor/[actorId].js</url>
-          <line>69</line>
+          <line>74</line>
           <option name="timeStamp" value="79" />
         </line-breakpoint>
       </breakpoints>

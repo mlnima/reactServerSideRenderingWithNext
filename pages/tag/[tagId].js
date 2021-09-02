@@ -8,6 +8,8 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
+import {useRouter} from "next/router";
+import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -24,10 +26,12 @@ let StyledMain = styled.main`
   ${props => props.stylesData}
 `
 const tagPage = props => {
-
+    const router = useRouter()
     return (
         <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle  || ''}>
             {props.tag ? <PostsPageInfo titleToRender={props.tag.name}/> : null}
+            {props.tag ? <MetaDataToSiteHead title={props.tag?.name} description={props.tag?.description} url={`${router.asPath}`} image={props.tag?.imageUrl}/> : null}
+
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 widgets={props.widgets.filter(w => w.data.position === 'tagPageTop')}

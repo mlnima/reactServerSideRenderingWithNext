@@ -2,12 +2,13 @@ import { getFirstLoadData} from '../../_variables/ajaxVariables';
 import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import React, {useContext} from "react";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
+import {useRouter} from "next/router";
+import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -21,10 +22,12 @@ let StyledMain = styled.main`
   ${props => props.stylesData}
 `
 const categoryPage = props => {
+    const router = useRouter()
 
     return (
         <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle  || ''}>
             {props.category  ? <PostsPageInfo titleToRender={props.category?.name}/> : null}
+            {props.category ? <MetaDataToSiteHead title={props.category?.name} description={props.category?.description} url={`${router.asPath}`} image={props.category?.imageUrl}/> : null}
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 widgets={props.widgets.filter(w=>w.data.position === 'categoryPageTop' )}
