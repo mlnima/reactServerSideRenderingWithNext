@@ -3,12 +3,10 @@ import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import React, {useContext} from "react";
-import {AppContext} from "../../context/AppContext";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
-
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 let StyledMain = styled.main`
@@ -26,20 +24,20 @@ let StyledMain = styled.main`
   ${props => props.stylesData}
 `
 const tagPage = props => {
-    const contextData = useContext(AppContext);
+
     return (
-        <StyledMain className="main posts-page" stylesData={props.design?.data?.postsPageStyle || contextData.siteDesign?.postsPageStyle || ''}>
+        <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle  || ''}>
             {props.tag ? <PostsPageInfo titleToRender={props.tag.name}/> : null}
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 widgets={props.widgets.filter(w => w.data.position === 'tagPageTop')}
                 position={'tagPageTop'}
                 referer={props.referer}
-                currentPageSidebar={props.identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
-                postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                postElementImageLoader={props.design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader}
-                postElementImageLoaderType={props.design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader}
+                currentPageSidebar={props.identity?.data?.tagPageSidebar }
+                postElementSize={props.design?.postElementSize}
+                postElementStyle={props.design?.postElementStyle}
+                postElementImageLoader={props.design?.postElementImageLoader}
+                postElementImageLoaderType={props.design?.postElementImageLoaderType}
             />
             <PostsPage {...props}/>
             <WidgetsRenderer
@@ -47,11 +45,11 @@ const tagPage = props => {
                 widgets={props.widgets.filter(w => w.data.position === 'tagPageBottom')}
                 position={'tagPageBottom'}
                 referer={props.referer}
-                currentPageSidebar={props.identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
-                postElementSize={props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                postElementImageLoader={props.design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader}
-                postElementImageLoaderType={props.design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader}
+                currentPageSidebar={props.identity?.data?.tagPageSidebar }
+                postElementSize={props.design?.postElementSize}
+                postElementStyle={props.design?.postElementStyle}
+                postElementImageLoader={props.design?.postElementImageLoader}
+                postElementImageLoaderType={props.design?.postElementImageLoaderType}
             />
         </StyledMain>
     )
@@ -68,7 +66,7 @@ export const getServerSideProps = async (context) => {
     }
     const firstLoadData = await getFirstLoadData(context.req, ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar',], 'postsPage');
     const tagData = context.query?.tagId ? await getSingleMeta(context.query.tagId, true) : {};
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,context.query.tagId,true);
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.postsCountPerPage,context.query.tagId,true);
     const tag = tagData.data ? tagData.data.meta : {};
     const postsData = await getPosts(gettingPostsQueries);
     const postsSource = postsData.data ? postsData.data : [];
@@ -80,7 +78,7 @@ export const getServerSideProps = async (context) => {
             ...firstLoadData?.settings,
             query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),
-            countPerPage:firstLoadData?.settings?.identity?.data?.postsCountPerPage,
+            countPerPage:firstLoadData?.settings?.identity?.postsCountPerPage,
             postsSource,
             tag,
             referer: firstLoadData.referer

@@ -129,12 +129,12 @@ const youtube = props => {
 
 
 
-
-    const videoSaver = (videoInfo)=>{
-
-        console.log(videoInfo)
-
-    }
+    //
+    // const videoSaver = (videoInfo)=>{
+    //
+    //     console.log(videoInfo)
+    //
+    // }
 
 
 

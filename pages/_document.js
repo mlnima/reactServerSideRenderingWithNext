@@ -1,7 +1,6 @@
 import React from 'react';
-import Document, { Html, Head, Main, NextScript } from 'next/document'
-import flush from "styled-jsx/server";
-import { ServerStyleSheet } from 'styled-components';
+import Document, {Html, Head, Main, NextScript} from 'next/document'
+import {ServerStyleSheet} from 'styled-components';
 
 class MyDocument extends Document {
     static async getInitialProps(ctx) {
@@ -31,8 +30,6 @@ class MyDocument extends Document {
         }
 
 
-
-
         // const initialProps = await Document.getInitialProps(ctx)
         // const styles = flush();
         // return { ...initialProps ,styles}
@@ -41,10 +38,10 @@ class MyDocument extends Document {
     render() {
         return (
             <Html>
-                <Head />
+                <Head/>
                 <body>
-                <Main />
-                <NextScript />
+                <Main/>
+                <NextScript/>
                 </body>
             </Html>
         )

@@ -1,6 +1,7 @@
 require('dotenv').config()
 require('./server/_variables/connectToDatabase')
 
+
 const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
@@ -25,6 +26,8 @@ const clientRobotTxtController = require('./server/controllers/clientControllers
 const siteMapController = require('./server/controllers/siteMapController');
 const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
+const _setSettingToEnvironmentVariables = require('./server/_variables/_setSettingToEnvironmentVariables')
+const settingsFromDatabase = _setSettingToEnvironmentVariables()
 
 const staticServeOptions = {
     root: './static/',
@@ -33,6 +36,7 @@ const staticServeOptions = {
 
 app.prepare().then(() => {
     const server = express();
+
     server.use(cors())
     server.listen(process.env.REACT_APP_PORT || 3000, err => err ?  err : console.log(`server run on ${process.env.REACT_APP_PORT || 3000}`) )
     server.use(cookieParser());
@@ -44,6 +48,8 @@ app.prepare().then(() => {
     server.use('/public', express.static(path.join(__dirname, 'public'),{maxAge: "604800000"}))
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apiCache.clear(req.params.collection)
+
+        // _setSettingToEnvironmentVariables()
         res.end()
     });
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));

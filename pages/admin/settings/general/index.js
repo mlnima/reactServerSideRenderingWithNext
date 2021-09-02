@@ -244,9 +244,7 @@ const settings = props => {
 
     };
 
-    useEffect(() => {
-        console.log(state)
-    }, [state]);
+
     const keywordsData = editingSettings.activeEditingLanguage === 'default' ? state.keywords : state?.translations?.[editingSettings?.activeEditingLanguage]?.keywords || [];
 
     const keywords = keywordsData.map(item => {

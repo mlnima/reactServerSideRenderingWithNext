@@ -1,24 +1,22 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import {getFirstLoadData} from "../_variables/ajaxVariables";
-import {AppContext} from "../context/AppContext";
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import { serverSideTranslations } from 'next-i18next/serverSideTranslations';
 
 const Home = ({isMobile, widgets, design, identity}) => {
-    const contextData = useContext(AppContext);
-
+//console.log(process.env)
     return (
         < MainWidgetArea isMobile={isMobile}
                          rendering={true}
                          widgets={(widgets || []).filter(widget => widget.data?.position === 'home')}
                          className='home-page main'
                          position='home'
-                         stylesData={design?.data?.homePageStyle || contextData.siteDesign.homePageStyle}
-                         currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
-                         postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                         postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                         postElementImageLoader={design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                         postElementImageLoaderType={design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
+                         stylesData={design?.homePageStyle}
+                         currentPageSidebar={identity?.homePageSidebar }
+                         postElementSize={design?.postElementSize}
+                         postElementStyle={design?.postElementStyle}
+                         postElementImageLoader={design?.postElementImageLoader}
+                         postElementImageLoaderType={design?.postElementImageLoaderType}
         />
     );
 

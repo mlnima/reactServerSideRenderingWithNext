@@ -74,17 +74,7 @@ const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,ref
 
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['actorsPageTop','actorsPageLeftSidebar','actorsPageBottom', 'actorsPageRightSidebar'], 'actorsPage')
-    // const sort = context.query?.sort ? {sort: context.query?.sort}: {}
-    // const keyword = context.query?.keyword ? { keyword: encodeURIComponent(context.query?.keyword)}: {}
-    const dataForGettingMeta = {
-        metaType: 'actors',
-        page: context.query?.page ?  parseInt(context.query?.page) : 1,
-        size: context.query?.size ? parseInt(context.query?.size) : 60,
-        startWith: context.query?.startWith || 'any',
-        lang: context.query?.lang || 'default',
-        status: 'published',
 
-    }
     const metaData = await getMultipleMeta(context.query,'actors', true)
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
 
@@ -95,7 +85,6 @@ export const getServerSideProps = async (context) => {
             isMobile: Boolean(firstLoadData.isMobile),
             widgets:firstLoadData?.widgets || [],
             metaSource,
-            // dataForGettingMeta,
             referer: firstLoadData.referer
     }}
 }

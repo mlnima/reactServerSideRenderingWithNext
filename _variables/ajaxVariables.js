@@ -163,9 +163,8 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
 
     try {
         const domainName = process.env.REACT_APP_PRODUCTION_URL;
-        //const cache = process.env.NODE_ENV !== 'development'
-        const cache = true
-        const refererUrl = req?.headers?.referer || '';
+        const cache = process.env.NODE_ENV !== 'development'
+        // const refererUrl = req?.headers?.referer || '';
         const referer = false;
         const isSameOrigin = req.headers['sec-fetch-site'] === 'same-origin';
 
@@ -175,17 +174,17 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
         const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
         const widgets = widgetData.data?.widgets || []
 
-        const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, cache) : {};
-        let finalSettings = settingsData.data ? {
-            identity: settingsData?.data?.settings.find(s => s.type === 'identity'),
-            design: settingsData?.data?.settings.find(s => s.type === 'design')
-        } : {};
+       // const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, cache) : {};
+        let settings = {
+            identity: process.env.REACT_APP_SETTING_IDENTITY ? JSON.parse(process.env.REACT_APP_SETTING_IDENTITY) : {},
+            design:  process.env.REACT_APP_SETTING_DESIGN ? JSON.parse(process.env.REACT_APP_SETTING_DESIGN) : {}
+        }
 
         let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
 
         return {
-            domainName,
-            settings: finalSettings ?? {},
+            // domainName,
+            settings,
             widgets,
             referer,
             isSameOrigin,

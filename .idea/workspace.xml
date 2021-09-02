@@ -20,52 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/public/locales/tr/common.json" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/metaSchemas/actorSchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/metaSchemas/categorySchema.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/models/metaSchemas/tagSchema.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/_variables/_setSettingToEnvironmentVariables.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/_variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_variables.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/subMenuComponenets/EditSubMenuForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/subMenuComponenets/EditSubMenuForm.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/GlobalStyles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/context/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/AppContext.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_document.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/actors/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/translations/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/translations/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/importer/youtube/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/youtube/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/checkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/page/[pageName].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/[username].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_updateSaveMetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_updateSaveMetas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminFileManagerControllers/adminCreateNewFileOrFolder.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminGetMultipleWidgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminGetMultipleWidgets.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientCheckRemovedContent.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/postSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/postSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/settings/widgetSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/widgetSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/setupDarkTheme.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setupDarkTheme.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -191,10 +165,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.devAndSocket" />
-        <item itemvalue="npm.splitMetaData" />
         <item itemvalue="npm.startAndSocket" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.splitMetaData" />
         <item itemvalue="npm.start" />
       </list>
     </recent_temporary>
@@ -825,6 +799,7 @@
       <workItem from="1630440890881" duration="10221000" />
       <workItem from="1630480840306" duration="8318000" />
       <workItem from="1630511278560" duration="14654000" />
+      <workItem from="1630573701330" duration="18357000" />
     </task>
     <servers />
   </component>
@@ -968,11 +943,6 @@
           <url>file://$PROJECT_DIR$/pages/checkout/index.js</url>
           <line>182</line>
           <option name="timeStamp" value="55" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/pages/index.js</url>
-          <line>6</line>
-          <option name="timeStamp" value="57" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/node_modules/next/dist/server/next.d.ts</url>

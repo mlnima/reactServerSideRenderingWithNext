@@ -8,8 +8,9 @@ const languages = process.env.REACT_APP_LOCALS.replace(' ', '|')
 const locales = process.env.REACT_APP_LOCALS.split(' ')
 const withPWA = require('next-pwa')
 require('webpack')
+// const settingSchema = require("./server/models/settings/settingSchema");
 
-// const settingSchema = require('./server/models/settings/settingSchema')
+
 //
 // const identity = settingSchema.findOne({type: 'identity'}).exec()
 // const design = settingSchema.findOne({type: 'design'}).exec()
@@ -46,12 +47,18 @@ const additionalConfig = {
 
 }
 
-// const environmentVariables = async ()=> {
+// const environmentVariables = ()=> {
+//
+//
 //     try {
+//         // const identity = await settingSchema.findOne({type: 'identity'}).exec()
+//         // const design = await settingSchema.findOne({type: 'design'}).exec()
+//         //console.log('identity : ',identity)
 //         return {
 //             env: {
-//                 REACT_APP_IDENTITY: await identity.data,
-//                 REACT_APP_DESIGN: await design.data
+//                 // REACT_APP_SETTING_IDENTITY : JSON.stringify(identity.data),
+//                 // REACT_APP_SETTING_DESIGN:  JSON.stringify(design.data),
+//                 // REACT_APP_SETTING_TEST:'test'
 //             }
 //         }
 //     }catch (err){
@@ -91,6 +98,7 @@ const pwaSettings = {
 }
 
 module.exports = withPlugins([
+    // environmentVariables,
     additionalConfig,
     i18n,
     svgLoader,
@@ -102,7 +110,6 @@ module.exports = withPlugins([
         staticPrefix: 'REACT_APP_',
         publicPrefix: 'REACT_APP_',
     }),
-    // environmentVariables,
     i18nConfig,
 ]);
 

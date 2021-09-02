@@ -247,19 +247,22 @@ const AppProvider = props => {
     });
 
     useEffect(() => {
-        getSignedInUserData(['username','role','keyMaster','profileImage','followingCount','followersCount']).then(res => {
-            if (res?.data?.userData){
-                dispatchUserData({
-                    ...userData,
-                    ...res.data.userData
-                });
-            }
-        }).catch(err => {
-            console.log(err);
-            localStorage.removeItem('wt')
-        })
-        //functions.getAndSetUserInfo()
-        functions.getCheckOutData()
+        if (localStorage.wt) {
+            getSignedInUserData(['username','role','keyMaster','profileImage','followingCount','followersCount']).then(res => {
+                if (res?.data?.userData){
+                    dispatchUserData({
+                        ...userData,
+                        ...res.data.userData
+                    });
+                }
+            }).catch(err => {
+                console.log(err);
+                localStorage.removeItem('wt')
+            })
+            //functions.getAndSetUserInfo()
+            functions.getCheckOutData()
+        }
+
     }, []);
 
 
