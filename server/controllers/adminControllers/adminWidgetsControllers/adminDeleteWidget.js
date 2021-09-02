@@ -1,4 +1,4 @@
-const widgetSchema = require('../../../models/settings/widgetSchema');
+const widgetSchema = require('../../../models/widgetSchema');
 
 module.exports = (req, res) => {
     const _id = req.body.id;

@@ -1,4 +1,4 @@
-const widgetSchema = require('../../../models/settings/widgetSchema');
+const widgetSchema = require('../../../models/widgetSchema');
 const metaSchema = require('../../../models/metaSchema');
 const postSchema = require('../../../models/postSchema');
 const _queryGeneratorForGettingPosts = require('../../clientControllers/_variables/_queryGeneratorForGettingPosts')

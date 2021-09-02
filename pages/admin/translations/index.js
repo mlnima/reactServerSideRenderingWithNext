@@ -35,7 +35,7 @@ const translations = props => {
 
     const onSaveHandler = ()=>{
         updateTranslationsFile(translationsFilePath,translationsData).then(res=>{
-            console.log(res.data.message)
+
         })
     }
 

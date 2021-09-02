@@ -13,8 +13,6 @@ const AppProvider = dynamic(() => import('../context/AppContext'))
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
 
-
-
     if (router.pathname.includes('/admin')) {
         return (
             <AppProvider>

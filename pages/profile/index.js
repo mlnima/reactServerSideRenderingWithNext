@@ -86,13 +86,12 @@ const Profile = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], 'profilePage')
-    const widgets = firstLoadData.widgets
+    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], 'profilePage');
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common'])),
-            widgets,
+            widgets:firstLoadData?.widgets || [],
             ...firstLoadData.widgets,
             ...firstLoadData.settings,
             isMobile: Boolean(firstLoadData.isMobile),

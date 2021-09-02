@@ -15,7 +15,7 @@ const AuthenticationStyledDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 1rem;
+    font-size: 14px;
     background-color: transparent;
     border: none;
     margin: 0 5px;

@@ -86,7 +86,6 @@ export const getServerSideProps = async (context) => {
     //     ...keyword
     // }
     const metaData = await getMultipleMeta(context.query, 'categories', true)
-    const widgets = firstLoadData.widgets
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
     return {
         props: {
@@ -94,7 +93,7 @@ export const getServerSideProps = async (context) => {
             ...firstLoadData.settings,
             query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),
-            widgets,
+            widgets:firstLoadData?.widgets || [],
             metaSource,
             // dataForGettingMeta,
             referer: firstLoadData.referer

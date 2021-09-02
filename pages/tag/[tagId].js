@@ -58,23 +58,25 @@ const tagPage = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    if (!context.query.tagId.match(/^[0-9a-fA-F]{24}$/)){
+    if (!context.query.tagId){
+        return { notFound: true}
+    }
+    if (!context.query?.tagId?.match(/^[0-9a-fA-F]{24}$/)){
         return {
             notFound: true
         }
     }
-    const firstLoadData = await getFirstLoadData(context.req, ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar',], 'postsPage')
-    const tagData = context.query?.tagId ? await getSingleMeta(context.query.tagId, true) : {}
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,context.query.tagId,true)
+    const firstLoadData = await getFirstLoadData(context.req, ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar',], 'postsPage');
+    const tagData = context.query?.tagId ? await getSingleMeta(context.query.tagId, true) : {};
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,context.query.tagId,true);
+    const tag = tagData.data ? tagData.data.meta : {};
+    const postsData = await getPosts(gettingPostsQueries);
+    const postsSource = postsData.data ? postsData.data : [];
 
-    const tag = tagData.data ? tagData.data.meta : {}
-    const postsData = await getPosts(gettingPostsQueries)
-    const widgets = firstLoadData.widgets
-    const postsSource = postsData.data ? postsData.data : []
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
-            widgets,
+            widgets:firstLoadData?.widgets || [],
             ...firstLoadData?.settings,
             query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),

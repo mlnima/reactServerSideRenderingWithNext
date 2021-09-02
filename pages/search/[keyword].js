@@ -61,16 +61,15 @@ const searchPage = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req,['searchPageTop','searchPageLeftSidebar','searchPageBottom','searchPageRightSidebar',],'postsPage')
 
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,null,true)
+    const firstLoadData = await getFirstLoadData(context.req,['searchPageTop','searchPageLeftSidebar','searchPageBottom','searchPageRightSidebar',],'postsPage');
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.data?.postsCountPerPage,null,true);
+    const postsData = await getPosts(gettingPostsQueries);
+    const postsSource = postsData.data ? postsData.data : [];
 
-    const postsData = await getPosts(gettingPostsQueries)
-    const widgets = firstLoadData.widgets
-    const postsSource = postsData.data ? postsData.data : []
     return {props: {
             ...(await serverSideTranslations(context.locale, ['common'])),
-            widgets,
+            widgets:firstLoadData?.widgets || [],
             ...firstLoadData.settings,
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),

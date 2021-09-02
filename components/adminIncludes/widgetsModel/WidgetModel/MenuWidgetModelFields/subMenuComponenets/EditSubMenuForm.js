@@ -98,8 +98,6 @@ const EditSubMenuForm = props => {
             menuItems: newData
         })
 
-        console.log(parentData)
-        console.log(newParentData)
     }
 
     return (

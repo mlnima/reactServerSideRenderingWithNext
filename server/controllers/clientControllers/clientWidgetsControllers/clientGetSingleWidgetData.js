@@ -1,6 +1,6 @@
 //clientGetSingleWidgetData
 
-const widgetSchema = require('../../../models/settings/widgetSchema');
+const widgetSchema = require('../../../models/widgetSchema');
 
 module.exports = (req, res) => {
     const id = req.body.id;

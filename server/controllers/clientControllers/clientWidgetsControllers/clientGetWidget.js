@@ -1,5 +1,5 @@
 
-const widgetSchema = require('../../../models/settings/widgetSchema');
+const widgetSchema = require('../../../models/widgetSchema');
 
 module.exports = (req, res) => {
     const position = req.body.position = 'all' ? {} : {position: req.body.position};

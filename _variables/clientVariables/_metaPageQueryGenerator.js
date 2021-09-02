@@ -1,7 +1,6 @@
 
 
 const _metaPageQueryGenerator = (queryData,metaType,cache) =>{
-    console.log(queryData)
     const sort = queryData?.sort ? {sort: queryData?.sort}: {}
     const keyword = queryData?.keyword ? { keyword: encodeURIComponent(queryData?.keyword)}: {}
     const cacheStatus = cache ? {cache} : {}

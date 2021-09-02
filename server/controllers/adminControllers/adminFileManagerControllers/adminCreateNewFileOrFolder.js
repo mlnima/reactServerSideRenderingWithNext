@@ -7,7 +7,7 @@ module.exports = (req, res) => {
     const fileFolderName = req.body.fileFolderName;
     const type = req.body.type;
 
-    console.log(Path,fileFolderName,type)
+
     if (type==='file'){
         fs.writeFile(Path + '/' +fileFolderName, '',  (err) => {
             if (err){

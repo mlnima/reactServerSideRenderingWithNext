@@ -2,9 +2,11 @@ const metaSchema = require('../../../models/metaSchema');
 const postSchema = require('../../../models/postSchema');
 
 module.exports = async (metas) => {
+    const metasData = metas ?? []
     let finalData = []
+
     try{
-        for await (let meta of metas) {
+        for await (let meta of metasData) {
             if (meta.name && meta.type ){
                 const metaData = {
                     name: meta.name,
@@ -22,6 +24,7 @@ module.exports = async (metas) => {
         }
         return finalData
     }catch (e) {
+        console.log(e.stack)
         console.log('error on saving meta')
     }
 }

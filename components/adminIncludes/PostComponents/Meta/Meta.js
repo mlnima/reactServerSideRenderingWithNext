@@ -1,4 +1,4 @@
-import React, {useEffect, useRef} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
@@ -6,12 +6,22 @@ import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
 
 const Meta = props => {
     let newItemsElement = useRef(null);
+    const [metas, setMetas] = useState([])
+
+
+    useEffect(() => {
+        if (props?.postData?.[props.type]){
+            setMetas(props?.postData?.[props.type])
+        }
+    }, [props]);
+
     const deleteItem = (e) => {
         props.onDeleteHandler(props.type, e.currentTarget.name)
     };
 
     const addNewItem = e => {
         e.preventDefault()
+
         if (newItemsElement.current.value.includes(',')) {
             let newItems = newItemsElement.current.value.split(',');
             const newItemsToSchemaForm = newItems.map(newItem => {
@@ -26,7 +36,7 @@ const Meta = props => {
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
 
 
-        }else if (newItemsElement.current.value) {
+        } else if (newItemsElement.current.value) {
             const newItemData = {
                 name: newItemsElement.current.value.trim(),
                 type: props.type
@@ -36,15 +46,15 @@ const Meta = props => {
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
 
         }
-        setTimeout(()=>{
+        setTimeout(() => {
             newItemsElement.current.value = ''
-        },500)
+        }, 500)
 
     };
 
-    const addedItems = props.postData[props.type].map(item => {
+    const addedItems = metas.map(item => {
         return (
-            <div key={item.name + Date.now()} className='item'>
+            <div key={item?.name + Date.now()} className='item'>
                 <style jsx>{`
                   .item {
                     display: flex;
@@ -60,20 +70,22 @@ const Meta = props => {
                       margin: 0 3px;
                       width: 16px;
                       height: 16px;
+
                       span {
                         color: #0073aa;
                       }
+
                       &:hover {
                         color: white;
                         background-color: red;
                         margin: 0 2px;
                       }
                     }
-                    
+
                   }
                 `}</style>
-                <p>{item.name}</p>
-                <button name={item.name} onClick={(e) => deleteItem(e)}><FontAwesomeIcon style={{width:'16px',height:'16px'}} icon={faTimes} className='post-element-info-logo'/>
+                <p>{item?.name}</p>
+                <button name={item?.name} onClick={(e) => deleteItem(e)}><FontAwesomeIcon style={{width: '16px', height: '16px'}} icon={faTimes} className='post-element-info-logo'/>
                 </button>
             </div>
         )
@@ -93,8 +105,9 @@ const Meta = props => {
                       align-items: center;
 
                     }
-                    .small-info{
-                    font-size: 12px;
+
+                    .small-info {
+                      font-size: 12px;
                     }
 
                     .items {
@@ -105,7 +118,7 @@ const Meta = props => {
                 `}</style>
                 <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
                     <input ref={newItemsElement} type='text'/>
-                    <button className='add-meta-button' type='submit'><FontAwesomeIcon style={{width:'16px',height:'16px'}} icon={faPlus} className='post-element-info-logo'/></button>
+                    <button className='add-meta-button' type='submit'><FontAwesomeIcon style={{width: '16px', height: '16px'}} icon={faPlus} className='post-element-info-logo'/></button>
                 </form>
                 <span className='small-info'>Separate tags with commas</span>
                 <div className="items">

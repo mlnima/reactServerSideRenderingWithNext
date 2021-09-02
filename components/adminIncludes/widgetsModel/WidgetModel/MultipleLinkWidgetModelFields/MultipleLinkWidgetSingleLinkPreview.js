@@ -10,9 +10,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
         setEditingData(props.linkData)
     }, [props.linkData.linkId]);
 
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
+
 
     const onChangeHandlerWithTranslate = e => {
         if (props.widgetSettings.activeEditingLanguage === 'default') {

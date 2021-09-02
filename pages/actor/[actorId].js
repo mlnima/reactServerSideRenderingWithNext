@@ -57,10 +57,12 @@ const actorPage = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    if (!context.query.actorId.match(/^[0-9a-fA-F]{24}$/)){
-        return {
-            notFound: true
-        }
+    if (!context.query.actorId){
+        return { notFound: true}
+    }
+
+    if (!context.query?.actorId?.match(/^[0-9a-fA-F]{24}$/)){
+        return { notFound: true}
     }
 
     const firstLoadData = await getFirstLoadData(context.req, ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar',], 'postsPage')
@@ -72,12 +74,12 @@ export const getServerSideProps = async (context) => {
     const actor = actorData.data ? actorData.data.meta : {}
 
     const postsData = await getPosts(gettingPostsQueries)
-    const widgets = firstLoadData.widgets
+
     const postsSource = postsData.data ? postsData.data : []
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets,
+            widgets:firstLoadData?.widgets || [],
             ...firstLoadData?.settings,
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),

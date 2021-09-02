@@ -62,3 +62,9 @@ const postSchema =  new Schema({
 },{ timestamps: true });
 
 module.exports = mongoose.model("post", postSchema);
+
+
+
+// categories: [{type:Schema.Types.ObjectID,ref:'meta'}],
+//     actors: [{type:Schema.Types.ObjectID,ref:'meta'}],
+//     tags: [{type:Schema.Types.ObjectID,ref:'meta'}],

@@ -76,21 +76,7 @@ const tagsPage = ({metaSource, identity, dataForGettingMeta, design, widgets, re
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['tagsPageTop', 'tagsPageLeftSidebar', 'tagsPageBottom', 'tagsPageRightSidebar'], 'tagsPage')
 
-    // const sort = context.query?.sort ? {sort: context.query?.sort}: {}
-    // const keyword = context.query?.keyword ? { keyword: encodeURIComponent(context.query?.keyword)}: {}
-    // const dataForGettingMeta = {
-    //     metaType: 'tags',
-    //     page: context.query?.page ?  parseInt(context.query?.page) : 1,
-    //     size: context.query?.size ? parseInt(context.query?.size) : 60,
-    //     startWith: context.query?.startWith || 'any',
-    //     lang: context.query?.lang || 'default',
-    //     status: 'published',
-    //     ...sort,
-    //     ...keyword,
-    // }
-
     const metaData = await getMultipleMeta(context.query, 'tags', true)
-    const widgets = firstLoadData.widgets
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
     return {
         props: {
@@ -98,7 +84,7 @@ export const getServerSideProps = async (context) => {
             ...firstLoadData.settings,
             query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),
-            widgets,
+            widgets:firstLoadData?.widgets || [],
             metaSource,
             // dataForGettingMeta,
             referer: firstLoadData.referer

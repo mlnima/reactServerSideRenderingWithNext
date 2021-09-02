@@ -1,7 +1,7 @@
 //checkRemovedContent
 const postSchema = require('../../../models/postSchema');
 const metaSchema = require('../../../models/metaSchema');
-const widgetSchema = require('../../../models/settings/widgetSchema');
+const widgetSchema = require('../../../models/widgetSchema');
 const axios = require('axios')
 const {updatePostWidget} = require("../../adminControllers/adminWidgetsControllers/adminUpdateWidget");
 module.exports = (req, res) => {

@@ -48,6 +48,12 @@ const Index = props => {
         activeEditingLanguage: 'default'
     })
 
+    // useEffect(() => {
+    //     if (!state.tags){
+    //         setState({...state,tags:[]})
+    //     }
+    //     console.log(state)
+    // }, [state.tags]);
     useEffect(() => {
         if (router.query.new && state._id) {
             router.reload()
@@ -122,11 +128,12 @@ const Index = props => {
     }
 
     const onPostMetaChangeHandler = (type, data) => {
-        const uniqItems = _.uniqBy([...state[type], ...data],  (e) =>{
+        const previousMetaData = state?.[type] || [] ;
+        const uniqItems = _.uniqBy([...previousMetaData, ...data], (e) => {
             return e.name;
         })
 
-        setState(prevState=>({
+        setState(prevState => ({
             ...prevState,
             [type]: uniqItems
         }))
@@ -222,7 +229,7 @@ const Index = props => {
         <>
 
             <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
-            <div  className='admin-post'>
+            <div className='admin-post'>
                 <style jsx>{`
                   .admin-post {
                     display: grid;
@@ -311,7 +318,7 @@ export const getServerSideProps = async ({req, query}) => {
     let post;
     let postData
     let requestBody;
-    const settingsData = await getMultipleSetting({settings: ['identity']},  false)
+    const settingsData = await getMultipleSetting({settings: ['identity']}, false)
     let settings = settingsData.data ? {
         identity: settingsData?.data?.settings.find(s => s.type === 'identity'),
     } : {}

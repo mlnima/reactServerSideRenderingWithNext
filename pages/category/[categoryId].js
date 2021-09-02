@@ -55,7 +55,10 @@ const categoryPage = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    if (!context.query.categoryId.match(/^[0-9a-fA-F]{24}$/)){
+    if (!context.query.categoryId){
+        return { notFound: true}
+    }
+    if (!context.query?.categoryId?.match(/^[0-9a-fA-F]{24}$/)){
         return {
             notFound: true
         }
@@ -73,11 +76,10 @@ export const getServerSideProps = async (context) => {
 
     const category = categoryData.data ? categoryData.data.meta : {}
     const postsData = await getPosts(gettingPostsQueries)
-    const widgets = firstLoadData.widgets
     const postsSource = postsData.data ? postsData.data : []
     return {props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets,
+            widgets:firstLoadData?.widgets || [],
             ...firstLoadData?.settings,
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),

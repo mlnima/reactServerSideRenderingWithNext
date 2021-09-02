@@ -42,7 +42,7 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common'])),
-            widgets:firstLoadData.widgets,
+            widgets:firstLoadData?.widgets || [],
             ...firstLoadData.settings,
             pageInfo:pageData.data ? pageData.data.pageData : {},
             query:context.query,

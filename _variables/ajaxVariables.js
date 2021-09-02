@@ -12,7 +12,6 @@ export const updateSetting = async (type, data) => {
 };
 
 export const getSetting = async (type, cache) => {
-    console.log(type)
     return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/settings/getSetting?type=${type}&cache=${cache}&token=${localStorage.wt}`);
 };
 

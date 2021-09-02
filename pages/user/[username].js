@@ -135,11 +135,11 @@ const user = props => {
 
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['userPageRightSidebar,userPageLeftSidebar', 'userPage'], 'userPage')
-    const widgets = firstLoadData.widgets
+
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common'])),
-            widgets,
+            widgets:firstLoadData?.widgets || [],
             ...firstLoadData.settings,
             isMobile: Boolean(firstLoadData.isMobile),
             referer: firstLoadData.referer,

@@ -1,5 +1,5 @@
 //adminGetMultipleWidgets
-const widgetSchema = require('../../../models/settings/widgetSchema');
+const widgetSchema = require('../../../models/widgetSchema');
 
 module.exports = async (req, res) => {
     try {

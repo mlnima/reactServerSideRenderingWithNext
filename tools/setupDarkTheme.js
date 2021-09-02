@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 require('dotenv').config()
 const settingSchema = require('../server/models/settings/settingSchema')
-const widgetSchema = require('../server/models/settings/widgetSchema')
+const widgetSchema = require('../server/models/widgetSchema')
 const postSchema = require('../server/models/postSchema')
 const userSchema = require('../server/models/userSchema')
 const bcrypt = require('bcryptjs');
