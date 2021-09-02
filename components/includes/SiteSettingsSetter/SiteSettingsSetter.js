@@ -10,26 +10,26 @@ const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
 
-    useEffect(() => {
-        props?.design?.data ? (
-            contextData.dispatchSiteDesign(props.design?.data),
-                contextData.dispatchState({...contextData.state, designSet: true})
-        ) : null
-        props?.identity?.data ? (
-            contextData.dispatchSiteIdentity({...props.identity?.data, isSet: true}),
-                contextData.dispatchState({...contextData.state, identitySet: true})
-        ) : null
-        props?.eCommerce?.data ? contextData.dispatchECommerceSettings(props.eCommerce?.data) : null
-        const manuallyDetectedLocale = router.locale ? router.locale :
-            router?.query?.locale ? router.query.locale : process.env.REACT_APP_DEFAULT_LOCAL;
-        contextData.dispatchState({
-            ...contextData.state,
-            activeLanguage: manuallyDetectedLocale
-        })
-    }, [props?.design, props?.identity]);
+    // useEffect(() => {
+    //     props?.design?.data ? (
+    //         contextData.dispatchSiteDesign(props.design?.data),
+    //             contextData.dispatchState({...contextData.state, designSet: true})
+    //     ) : null
+    //     props?.identity?.data ? (
+    //         contextData.dispatchSiteIdentity({...props.identity?.data, isSet: true}),
+    //             contextData.dispatchState({...contextData.state, identitySet: true})
+    //     ) : null
+    //     props?.eCommerce?.data ? contextData.dispatchECommerceSettings(props.eCommerce?.data) : null
+    //     const manuallyDetectedLocale = router.locale ? router.locale :
+    //         router?.query?.locale ? router.query.locale : process.env.REACT_APP_DEFAULT_LOCAL;
+    //     contextData.dispatchState({
+    //         ...contextData.state,
+    //         activeLanguage: manuallyDetectedLocale
+    //     })
+    // }, [props?.design, props?.identity]);
 
     useEffect(() => {
-            !props?.design?.data && !props?.identity?.data && !contextData.state.identitySet && !contextData.state.designSet ? (
+            !props?.design && !props?.identity ? (
                 getMultipleSetting({settings: ['identity', 'design']}, true).then(res => {
                     const identitySetting = res.data.settings.find(s=>s.type === 'identity')
                     const designSetting = res.data.settings.find(s=>s.type === 'design')
@@ -41,10 +41,10 @@ const SiteSettingSetter = props => {
     }, []);
 
 
-    const keywordsDataFromProps = props.identity?.data?.translations?.[router.locale]?.keywords  || props.identity?.data?.keywords;
-    const keywordsDataFromContext = contextData?.siteIdentity?.translations?.[router.locale]?.keywords  || contextData?.siteIdentity?.keywords;
+    const keywordsDataFromProps = props.identity?.translations?.[router.locale]?.keywords  || props.identity?.data?.keywords || [];
 
-    const keywords = (keywordsDataFromProps ||keywordsDataFromContext || []).map(keyword=>keyword.trim())
+
+    const keywords = keywordsDataFromProps.map(keyword=>keyword.trim())
 
     const locals = process.env.REACT_APP_LOCALS.split(' ');
     const localsUrl = locals.map(local=>{
@@ -56,22 +56,21 @@ const SiteSettingSetter = props => {
 // /post/[postType]/[id]
     return (
         <Head>
-            <title>{(props?.identity?.data?.translations?.[router.locale]?.title || contextData?.siteIdentity?.translations?.[router.locale]?.title) || (props.identity?.data?.title || contextData?.siteIdentity?.title) || ''}</title>
-            <meta name="theme-color" content={props.identity?.data?.themeColor || contextData?.siteIdentity?.themeColor || '#000000'}/>
+            <title>{props?.identity?.translations?.[router.locale]?.title || props.identity?.title || ''}</title>
+            <meta name="theme-color" content={props.identity?.themeColor || '#000000'}/>
             <meta name="apple-mobile-web-app-status-bar-style" content='#000000'/>
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charSet="utf-8"/>
-            <meta name="description"
-                  content={(props?.identity?.data?.translations?.[router.locale]?.description || contextData?.siteIdentity?.translations?.[router.locale]?.description) || (props?.identity?.data?.description || contextData?.siteIdentity?.description) || ''}/>
-            {props.identity?.data?.keywords?.length > 0 ? <meta name="keywords" content={keywords}/> : null}
+            <meta name="description" content={props?.identity?.translations?.[router.locale]?.description || props?.identity?.description || ''}/>
+            {props.identity?.keywords?.length > 0 ? <meta name="keywords" content={keywords}/> : null}
             {router.pathname === '/post/[postType]/[id]' ? null : localsUrl}
-            <link rel="shortcut icon" href={props?.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
-            <link rel="apple-touch-icon" href={props?.identity?.data?.favIcon || contextData.siteIdentity.favIcon || '/static/images/favIcon/favicon.png'}/>
+            <link rel="shortcut icon" href={props?.identity?.favIcon  || '/static/images/favIcon/favicon.png'}/>
+            <link rel="apple-touch-icon" href={props?.identity?.favIcon  || '/static/images/favIcon/favicon.png'}/>
             <link rel="manifest" href="/manifest.json"/>
             <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&amp;display=swap" rel="stylesheet"/>
-            {props.identity?.data?.customScriptsAsString ? parse(props?.identity?.data?.customScriptsAsString) : null}
-            {props?.identity?.data?.siteMode === 'eCommerce' || contextData?.siteIdentity?.siteMode === 'eCommerce' ?
-                <script src={`https://www.paypal.com/sdk/js?client-id=${props?.eCommerce?.data?.payPalId}&currency=${props?.eCommerce?.data?.currency}`}/>
+            {props.identity?.customScriptsAsString ? parse(props?.identity?.customScriptsAsString) : null}
+            {props?.identity?.siteMode === 'eCommerce'  ?
+                <script src={`https://www.paypal.com/sdk/js?client-id=${props?.eCommerce?.payPalId}&currency=${props?.eCommerce?.currency}`}/>
                 : null
             }
         </Head>
