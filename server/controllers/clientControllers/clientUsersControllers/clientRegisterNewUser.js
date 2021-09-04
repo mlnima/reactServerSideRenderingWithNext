@@ -11,7 +11,7 @@ module.exports =  (req, res) =>{
         .then(user => {
             if (user) {
 
-                res.status(409).json({message:'user with this email or username already exist'})
+                res.status(409).json({message:'This username already exists'})
                 res.end()
             } else {
                 // Hashing
@@ -19,7 +19,7 @@ module.exports =  (req, res) =>{
                     bcrypt.hash(password, 10, function (err, hash) {
                         if (err) {
                             console.log(err)
-                            res.status(503).json({message:'something went wrong please try again later'})
+                            res.status(503).json({message:'Something went wrong please try again later'})
                             res.end()
                         } else if (hash) {
                             let userData = {
@@ -32,12 +32,12 @@ module.exports =  (req, res) =>{
                             let newUserData = userSchema(userData);
                             newUserData.save().then(() => {
 
-                                res.json({message:'registration successful you can login now'})
+                                res.json({message:'Your account has been successfully created you can login now'})
                                 res.end()
                             }).catch(err => {
                                 console.log(err)
                                // res.json({ message: 'something went wrong', type: 'error' });
-                                res.status(503).json({message:'something went wrong'})
+                                res.status(503).json({message:'Something went wrong please try again later'})
                                 res.end()
                             });
 
@@ -45,14 +45,14 @@ module.exports =  (req, res) =>{
                     });
                 } else {
 
-                    res.status(400).json({message:'passwords are not matched'})
+                    res.status(400).json({message:'Passwords are not matched'})
                     res.end()
                 }
 
             }
         }).catch(err => {
         console.log(err);
-        res.status(503).json({message:'something went wrong please try again later'})
+        res.status(503).json({message:'Something went wrong please try again later'})
         res.end()
     })
 }

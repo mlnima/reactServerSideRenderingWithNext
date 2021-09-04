@@ -13,9 +13,28 @@ import {getMultipleSetting} from '../../../_variables/ajaxVariables'
 import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
 import {useRouter} from "next/router";
 import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
-import WidgetModel from "../../../components/adminIncludes/widgetsModel/WidgetModel/WidgetModel";
+
 import {languagesOptions} from "../../../_variables/_variables";
 import _ from "lodash";
+
+import styled from "styled-components";
+const AdminPostPageStyledDiv = styled.div`
+  display: grid;
+  justify-content: center;
+  grid-template-columns: 1fr;
+
+  .content {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+  }
+  @media only screen and (min-width: 768px) {
+    grid-template-columns: 1fr 200px;
+    grid-gap: 20px;
+
+`
+
 
 const Index = props => {
     const contextData = useContext(AppContext);
@@ -229,29 +248,8 @@ const Index = props => {
         <>
 
             <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
-            <div className='admin-post'>
-                <style jsx>{`
-                  .admin-post {
-                    display: grid;
-                    justify-content: center;
-                    grid-template-columns: 1fr;
+            <AdminPostPageStyledDiv className='admin-post'>
 
-                    .content {
-                      display: flex;
-                      justify-content: center;
-                      align-items: center;
-                      flex-direction: column;
-                    }
-                  }
-
-                  @media only screen and (min-width: 768px) {
-                    .admin-post {
-                      grid-template-columns: 1fr 200px;
-                      grid-gap: 20px;
-                    }
-                  }
-
-                `}</style>
 
                 <div className="content">
 
@@ -295,12 +293,20 @@ const Index = props => {
                                     onChangeHandler={onChangeHandler}
                                     onPostMetaChangeHandler={onPostMetaChangeHandler}
                                     onDeleteHandler={onDeleteMetaFromPost}/>
-                    <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
-                                    component={Meta}
-                                    type='actors' title='Post Actors'
-                                    onChangeHandler={onChangeHandler}
-                                    onPostMetaChangeHandler={onPostMetaChangeHandler}
-                                    onDeleteHandler={onDeleteMetaFromPost}/>
+
+                    {
+                        state.postType === 'video' ?
+                            <DropDownWidget renderFor='all'
+                                            postData={state}
+                                            isNewPost={props.query.new === 'true'}
+                                            component={Meta}
+                                            type='actors' title='Post Actors'
+                                            onChangeHandler={onChangeHandler}
+                                            onPostMetaChangeHandler={onPostMetaChangeHandler}
+                                            onDeleteHandler={onDeleteMetaFromPost}/>
+                            :null
+                    }
+
                     <DropDownWidget renderFor='all' postData={state} isNewPost={props.query.new === 'true'}
                                     component={RatingOption}
                                     title='Rating'
@@ -308,7 +314,7 @@ const Index = props => {
 
                 </div>
 
-            </div>
+            </AdminPostPageStyledDiv>
         </>
     );
 };

@@ -65,5 +65,11 @@
   "Comments": "Comments",
   "Write a Comment": "Write a Comment",
   "Post Comment": "Post Comment",
+  "You have entered an invalid username or password": "You have entered an invalid username or password",
+  "Something went wrong please try again later": "Something went wrong please try again later",
+  "This username already exists": "This Username Already Exists",
+  "Your account has been successfully created you can login now": "Your account has been successfully created you can login now",
+  "Passwords are not matched": "Passwords are not matched",
+  "Login successful": "Login successful",
   "Use 8 or more characters with a mix of letters, numbers & symbols": "Use 8 or more characters with a mix of letters, numbers & symbols"
 }

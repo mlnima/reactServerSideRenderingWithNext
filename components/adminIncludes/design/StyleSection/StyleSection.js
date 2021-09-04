@@ -3,7 +3,14 @@ import SaveDesignChangesBtn from "../SaveDesignChangesBtn";
 import {AppContext} from "../../../../context/AppContext";
 import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 
-
+import styled from "styled-components";
+const StyleSectionStyledDiv = styled.div`
+section{
+  width: 100%;
+  //height: 800px;
+  //max-height: 800px;
+}
+`
 const StyleSection = props => {
     const contextData = useContext(AppContext);
     const onChangeHandler = value => {
@@ -13,12 +20,12 @@ const StyleSection = props => {
         })
     }
     return (
-        <div className='style-section'>
+        <StyleSectionStyledDiv className='style-section'>
             <h1>{props.title}</h1>
             <Editor
               language='scss'
               width={props.width || '100%'}
-              height={props.height || '80vh'}
+              height={ '800px'}
               theme="vs-dark"
               defaultValue={contextData.siteDesign[props.name] || ''}
               value={contextData.siteDesign[props.name] || ''}
@@ -27,7 +34,7 @@ const StyleSection = props => {
             />
             {/*<textarea name={props.name} value={contextData.siteDesign[props.name] || ''} className='style-section-editor' onChange={e=>onChangeHandler(e)}/>*/}
             <SaveDesignChangesBtn/>
-        </div>
+        </StyleSectionStyledDiv>
     );
 };
 export default StyleSection;

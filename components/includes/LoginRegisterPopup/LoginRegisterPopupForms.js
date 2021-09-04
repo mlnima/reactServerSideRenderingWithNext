@@ -224,7 +224,7 @@ const LoginRegisterPopupForms = props => {
                     <FontAwesomeIcon icon={faTimes}/>
                 </span>
             <h3 className='login-register-title' >{contextData.state.loginRegisterFormPopupType === 'register' ? props.t(`common:Register`) : props.t(`common:Member login`) }</h3>
-            <p className='server-response'> {response.message}</p>
+            {response.message ?  <p className='server-response'> {props.t(`common:${response.message}`)} </p> :null}
 
             {
                 contextData.state.loginRegisterFormPopupType === 'register' ?

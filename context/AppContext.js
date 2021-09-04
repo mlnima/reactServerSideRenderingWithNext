@@ -247,7 +247,7 @@ const AppProvider = props => {
     });
 
     useEffect(() => {
-        if (localStorage.wt) {
+        if (localStorage.wt ) {
             getSignedInUserData(['username','role','keyMaster','profileImage','followingCount','followersCount']).then(res => {
                 if (res?.data?.userData){
                     dispatchUserData({

@@ -1,10 +1,11 @@
-import {useContext} from 'react';
+import {useContext,useEffect} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
 import Link from "next/link";
 import {withTranslation} from "next-i18next";
 
 const LoggedInItemsForMenu = props => {
     const contextData = useContext(AppContext);
+
 
     if (contextData.userData.username && contextData.userData.username !== 'guest') {
         return (

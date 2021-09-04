@@ -80,7 +80,7 @@ const CommentFrom = props => {
                     <textarea ref={ bodyInput } required={ true } placeholder={props.t(`common:Write a Comment`)} name='body'/>
                 </div>
             </div>
-            <button className='comment-form-submit-button' type='submit'>{props.t(`common:ارسال نظر`)}</button>
+            <button className='comment-form-submit-button' type='submit'>{props.t(`common:Post Comment`)}</button>
         </CommentFromStyledForm>
     );
 };

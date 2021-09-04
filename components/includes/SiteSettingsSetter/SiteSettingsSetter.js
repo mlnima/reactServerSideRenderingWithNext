@@ -10,23 +10,24 @@ const SiteSettingSetter = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
 
-    // useEffect(() => {
-    //     props?.design?.data ? (
-    //         contextData.dispatchSiteDesign(props.design?.data),
-    //             contextData.dispatchState({...contextData.state, designSet: true})
-    //     ) : null
-    //     props?.identity?.data ? (
-    //         contextData.dispatchSiteIdentity({...props.identity?.data, isSet: true}),
-    //             contextData.dispatchState({...contextData.state, identitySet: true})
-    //     ) : null
-    //     props?.eCommerce?.data ? contextData.dispatchECommerceSettings(props.eCommerce?.data) : null
-    //     const manuallyDetectedLocale = router.locale ? router.locale :
-    //         router?.query?.locale ? router.query.locale : process.env.REACT_APP_DEFAULT_LOCAL;
-    //     contextData.dispatchState({
-    //         ...contextData.state,
-    //         activeLanguage: manuallyDetectedLocale
-    //     })
-    // }, [props?.design, props?.identity]);
+    useEffect(() => {
+        // console.log(props)
+        // props?.design ? (
+        //     contextData.dispatchSiteDesign(props.design),
+        //         contextData.dispatchState({...contextData.state, designSet: true})
+        // ) : null
+        props?.identity ? (
+            contextData.dispatchSiteIdentity({...props.identity, isSet: true}),
+                contextData.dispatchState({...contextData.state, identitySet: true})
+        ) : null
+        props?.eCommerce ? contextData.dispatchECommerceSettings(props.eCommerce) : null
+        const manuallyDetectedLocale = router.locale ? router.locale :
+            router?.query?.locale ? router.query.locale : process.env.REACT_APP_DEFAULT_LOCAL;
+        contextData.dispatchState({
+            ...contextData.state,
+            activeLanguage: manuallyDetectedLocale
+        })
+    }, [props?.design, props?.identity]);
 
     useEffect(() => {
             !props?.design && !props?.identity ? (

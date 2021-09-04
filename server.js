@@ -27,7 +27,7 @@ const siteMapController = require('./server/controllers/siteMapController');
 const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
 const _setSettingToEnvironmentVariables = require('./server/_variables/_setSettingToEnvironmentVariables')
-const settingsFromDatabase = _setSettingToEnvironmentVariables()
+_setSettingToEnvironmentVariables()
 
 const staticServeOptions = {
     root: './static/',
@@ -49,7 +49,7 @@ app.prepare().then(() => {
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apiCache.clear(req.params.collection)
 
-        // _setSettingToEnvironmentVariables()
+        _setSettingToEnvironmentVariables()
         res.end()
     });
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));

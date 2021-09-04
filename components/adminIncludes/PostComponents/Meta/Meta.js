@@ -11,7 +11,7 @@ const Meta = props => {
 
     useEffect(() => {
         if (props?.postData?.[props.type]){
-            setMetas(props?.postData?.[props.type])
+            setMetas(()=>props?.postData?.[props.type])
         }
     }, [props]);
 
@@ -92,12 +92,9 @@ const Meta = props => {
     });
 
 
-    if (props.postData.postType !== 'video' && props.type === 'actors') {
-        return null
-    } else {
-        return (
-            <div className='post-meta-editor'>
-                <style jsx>{`
+    return (
+        <div className='post-meta-editor'>
+            <style jsx>{`
                   .post-meta-editor {
                     .add-new-meta {
                       display: flex;
@@ -116,17 +113,16 @@ const Meta = props => {
                     }
                   }
                 `}</style>
-                <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
-                    <input ref={newItemsElement} type='text'/>
-                    <button className='add-meta-button' type='submit'><FontAwesomeIcon style={{width: '16px', height: '16px'}} icon={faPlus} className='post-element-info-logo'/></button>
-                </form>
-                <span className='small-info'>Separate tags with commas</span>
-                <div className="items">
-                    {addedItems}
-                </div>
+            <form className="add-new-meta" onSubmit={e => addNewItem(e)}>
+                <input ref={newItemsElement} type='text'/>
+                <button className='add-meta-button' type='submit'><FontAwesomeIcon style={{width: '16px', height: '16px'}} icon={faPlus} className='post-element-info-logo'/></button>
+            </form>
+            <span className='small-info'>Separate tags with commas</span>
+            <div className="items">
+                {addedItems}
             </div>
-        );
-    }
+        </div>
+    );
 
 
 };

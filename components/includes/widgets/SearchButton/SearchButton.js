@@ -100,12 +100,11 @@ const SearchButton = ({t}) => {
             <SearchButtonStyledButton onClick={onOpenHandler} className='search-button-widget-open-btn' aria-label='Center Align' title={t([`common:Search`])}>
                 <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faSearch} className='search-bar-btn-open-svg'/>
             </SearchButtonStyledButton>
-
             {open ?
                 <SearchButtonStyledDiv open={open} className='search-button-widget-form-actions'>
 
                     <form className='search-button-widget-form' onSubmit={e => onSearchHandler(e)}>
-                        <input type="text" onChange={e => onChangeHandler(e)} name='keyword' value={state.keyword} className='search-button-widget-form-keyword-input' placeholder={t([`common:Search`])}/>
+                        <input type="text" onChange={e => onChangeHandler(e)} name='keyword' value={state.keyword} className='search-button-widget-form-keyword-input' placeholder={t([`common:Search...`])}/>
                         <button type='submit' className='search-button-widget-form-submit-btn' title={t([`common:Search`])}>
                             <FontAwesomeIcon style={{width: '24px', height: '24px',}} icon={faSearch}/>
                         </button>
@@ -113,9 +112,7 @@ const SearchButton = ({t}) => {
                            <FontAwesomeIcon onClick={onOpenHandler} style={{width: '24px', height: '24px',}} icon={faTimes}/>
                         </span>
                     </form>
-
                 </SearchButtonStyledDiv> : null
-
             }
 
         </>
