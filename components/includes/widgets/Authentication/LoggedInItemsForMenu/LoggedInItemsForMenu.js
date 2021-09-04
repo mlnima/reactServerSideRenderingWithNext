@@ -1,15 +1,25 @@
-import {useContext,useEffect} from 'react';
+import {useContext} from 'react';
 import {AppContext} from "../../../../../context/AppContext";
 import Link from "next/link";
 import {withTranslation} from "next-i18next";
+import {useRouter} from "next/router";
 
 const LoggedInItemsForMenu = props => {
     const contextData = useContext(AppContext);
-
+    const router = useRouter()
 
     if (contextData.userData.username && contextData.userData.username !== 'guest') {
         return (
             <div className='logged-in-items'>
+                {
+                    router.asPath.includes('/chatroom/') || router.asPath.includes('/messenger') ?
+                        <Link href={`/`}>
+                            <a rel='next' className='logged-in-item'>
+                                {props.t(`common:Home`)}
+                            </a>
+                        </Link>
+                        : null
+                }
                 {contextData.siteIdentity.membership ?
                     <>
                         <Link href={`/profile`}>
@@ -27,6 +37,7 @@ const LoggedInItemsForMenu = props => {
                     </>
                     : null
                 }
+
                 <p className='logged-in-item' onClick={() => contextData.functions.logOutUser()}>
 
                     {props.t(`common:Logout`)}
@@ -36,10 +47,3 @@ const LoggedInItemsForMenu = props => {
     } else return null
 };
 export default withTranslation(['common'])(LoggedInItemsForMenu);
-//next'
-
-
-// <img
-//     src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage :'/public/asset/images/user/noGenderAvatar50.jpg'}
-//     alt='logged-in-item-profile-image'
-//     className='logged-in-item-profile-image'/>
