@@ -1,4 +1,3 @@
-
 const {parsed: localEnv} = require('dotenv').config();
 const { i18n } = require('./next-i18next.config');
 const withImages = require('next-images')
@@ -8,13 +7,6 @@ const languages = process.env.REACT_APP_LOCALS.replace(' ', '|')
 const locales = process.env.REACT_APP_LOCALS.split(' ')
 const withPWA = require('next-pwa')
 require('webpack')
-// const settingSchema = require("./server/models/settings/settingSchema");
-
-
-//
-// const identity = settingSchema.findOne({type: 'identity'}).exec()
-// const design = settingSchema.findOne({type: 'design'}).exec()
-
 
 const svgLoader= {
     webpack(config) {
@@ -34,37 +26,20 @@ const i18nConfig = locales.length === 1 ? {} : {
         localeDetection: false,
     }
 }
-const additionalConfig = {
-    onDemandEntries: {
-        maxInactiveAge: 1000 * 60 * 60 * 24,
-        pagesBufferLength: 200,
-    },
-    // api: {
-    //     bodyParser: false,
-    // },
-    poweredByHeader: false,
-    reactStrictMode: true,
-
-}
-
-// const environmentVariables = ()=> {
+// const additionalConfig = {
+//     onDemandEntries: {
+//         maxInactiveAge: 1000 * 60 * 60 * 24,
+//         pagesBufferLength: 200,
+//     },
+//     api: {
+//         bodyParser: false,
+//     },
+//     poweredByHeader: false,
+//     reactStrictMode: true,
 //
-//
-//     try {
-//         // const identity = await settingSchema.findOne({type: 'identity'}).exec()
-//         // const design = await settingSchema.findOne({type: 'design'}).exec()
-//         //console.log('identity : ',identity)
-//         return {
-//             env: {
-//                 // REACT_APP_SETTING_IDENTITY : JSON.stringify(identity.data),
-//                 // REACT_APP_SETTING_DESIGN:  JSON.stringify(design.data),
-//                 // REACT_APP_SETTING_TEST:'test'
-//             }
-//         }
-//     }catch (err){
-//         console.log(err)
-//     }
 // }
+
+
 const reWriteRoutes = {
     rewrites: async () => {
         return [
@@ -97,8 +72,7 @@ const pwaSettings = {
 }
 
 module.exports = withPlugins([
-    // environmentVariables,
-    additionalConfig,
+    // additionalConfig,
     i18n,
     svgLoader,
     process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) :{},

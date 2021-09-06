@@ -1,8 +1,9 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUsers} from "@fortawesome/free-solid-svg-icons";
 import Authentication from "../../widgets/Authentication/Authentication";
+import {withTranslation} from "next-i18next";
 
-const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler}) => {
+const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler,t}) => {
     return (
         <header className='chatroom-header'>
             <style jsx>{`
@@ -22,9 +23,9 @@ const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler}) => {
             `}</style>
             <Authentication/>
             <button className='chatroom-header-open-online-users-list-button' onClick={onOnlineUserListVisibilityChangeHandler}>
-                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faUsers}/>
+                {t(`common:Online Users`)}
             </button>
         </header>
     );
 };
-export default ChatRoomHeader;
+export default withTranslation(['common'])(ChatRoomHeader);

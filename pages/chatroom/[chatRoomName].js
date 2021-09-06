@@ -9,6 +9,7 @@ import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoom
 import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
 import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import _ from 'lodash'
 
 
 const chatRoom = props => {
@@ -75,23 +76,13 @@ const chatRoom = props => {
             username && userId && profileImage ? setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou => ou.userId !== userId), {username, userId, profileImage}]) : null
         })
 
-        socket.on('message', (messageData, username, id, profileImage,color) => {
-            const newMessageContent = {
-                messageData,
-                username,
-                id,
-                createdAt: Date.now(),
-                profileImage,
-                type:'message',
-                color
-            }
-            if (messages.length>100){
-                setMessages(messages => [...messages.shift(), newMessageContent])
-            }else{
-                setMessages(messages => [...messages, newMessageContent])
-            }
+        socket.on('message', newMessageData => {
+            setMessages(messages => messages.length>100 ? [...messages.shift(), newMessageData] : [...messages, newMessageData])
         })
 
+        socket.on('recentMessageOnTheRoom',chatroomMessages=>{
+            setMessages(messages => [...chatroomMessages])
+        })
 
         socket.on('getMyDataAndShareYourData', (receiverSocketId, username, userId, profileImage) => {
 

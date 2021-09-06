@@ -18,49 +18,6 @@ let GlobalStyles = createGlobalStyle`
     text-decoration: none;
   }
 
-  .topbar {
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
-    align-items: center;
-    grid-area: topbar;
-    min-height: 48px;
-    background-color: var(--topbar-background-color);
-  }
-
-  .header {
-    display: flex;
-    justify-content: center;
-    flex-direction: column;
-    flex-wrap: wrap;
-    align-items: center;
-    grid-area: header;
-    background-color: var(--header-background-color);
-  }
-
-  .navigation {
-    display: flex;
-    justify-content: space-between;
-    flex-wrap: wrap;
-    align-items: center;
-    grid-area: navigation;
-    min-height: 48px;
-    background-color: var(--navigation-background-color);
-  }
-
-  .main {
-    grid-area: main;
-    min-height: 100vh;
-  }
-
-  .footer {
-    display: flex;
-    justify-content: space-evenly;
-    background-color: var(--footer-background-color);
-    flex-wrap: wrap;
-    align-items: center;
-    grid-area: footer;
-  }
 
   .post-element-info-logo {
     max-width: 25px;
@@ -131,18 +88,7 @@ let GlobalStyles = createGlobalStyle`
   }
 
   @media only screen and (min-width: 768px) {
-    .header {
-      display: flex;
-      flex-direction: row;
 
-      justify-content: space-evenly;
-      align-items: center;
-
-    }
-
-    .topbar, .navigation {
-      height: 48px;
-    }
 
     .leftSidebar {
       grid-template-columns: 320px 1fr;
@@ -185,7 +131,7 @@ let GlobalStyles = createGlobalStyle`
 
   @keyframes navigationMobileSlide {
     from {
-      left: -200px;
+      left: -100%;
     }
     to {
       left: 0;
@@ -200,6 +146,7 @@ let GlobalStyles = createGlobalStyle`
       top: 0;
     }
   }
+
   ${props => props.globalStyleData}
 `
 

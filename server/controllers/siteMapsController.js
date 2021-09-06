@@ -30,11 +30,13 @@ siteMapsController.siteMapMonths = (req, res) => {
                 renderPostData = posts.map(post => {
                     //let postUrl =process.env.REACT_APP_PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
                     let postUrl =process.env.REACT_APP_PRODUCTION_URL + `/post/${post.postType}/${post._id}` ;
+                    let lastModify = new Date(post.updatedAt || post.lastModify || post.createdAt || post._id.getTimestamp());
+
                     postsElements +=
                         '<url>\n' +
                         `<loc>${ postUrl }</loc>\n` +
-                        `<lastmod>${ post.updatedAt || post.lastModify || post.createdAt }</lastmod>\n` +
-                        '<changefreq>always</changefreq>\n' +
+                        `<lastmod>${ lastModify.toISOString()}</lastmod>\n` +
+                        '<changefreq>never</changefreq>\n' +
                         '<priority>1</priority>\n' +
                         '</url>'
                 });
@@ -54,12 +56,13 @@ siteMapsController.siteMapMonths = (req, res) => {
         } else {
             let page = 0;
             const totalPages = Math.ceil(count / size);
+            console.log('xxxx')
             while ( page < totalPages ) {
                 page += 1;
                 subSiteMaps +=
                     '<sitemap>\n' +
                     `<loc>${process.env.REACT_APP_PRODUCTION_URL }/sitemap/${ month }/${ page }.xml</loc>\n` +
-                    `<lastmod>2019-12-21T08:00:46+00:00</lastmod>\n` +
+                    `<lastmod>${endDate}</lastmod>\n` +
                     ' </sitemap>\n'
             }
             xmlTemplate = '<?xml version="1.0" encoding="UTF-8"?>\n' +

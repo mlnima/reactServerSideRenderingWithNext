@@ -22,7 +22,6 @@ const MenuWidgetStyledDiv = styled.div`
     left: 0;
     bottom: 0;
     width: 100%;
-    max-width: 50vw;
     z-index: 1000;
     flex-direction: column;
     justify-content: flex-start;
