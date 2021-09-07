@@ -2,7 +2,8 @@ import _ from "lodash";
 import ChatRoomOnlineUsersListItem from "./ChatRoomOnlineUsersListItem";
 
 const ChatRoomOnlineUsersList = ({onlineUsers,onlineUserListVisibility,onUserInfoShowHandler}) => {
-    const renderOnlineUsers = onlineUsers.map(onlineUser=>{
+
+    const renderOnlineUsers = _.uniqBy(onlineUsers,  e => e.username).sort((a,b)=>a.username > b.username ? 1 :-1).map(onlineUser=>{
         return(
             <ChatRoomOnlineUsersListItem key={_.uniqueId('message_')} onlineUser={onlineUser} onUserInfoShowHandler={onUserInfoShowHandler}/>
         )

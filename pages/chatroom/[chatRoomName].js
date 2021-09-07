@@ -16,25 +16,29 @@ const chatRoom = props => {
     const messageAreaRef = useRef(null)
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
-        onlineUserListVisibility: false,
+        onlineUserListVisibility: true,
         userInfo: {}
     });
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [isJoined, setIsJoined] = useState(false)
+    const [socketId, setSocketId] = useState(null)
     const router = useRouter()
 
     const onUserInfoShowHandler = (username, userId, profileImage) => {
-        state.userInfo.username ? setState({...state, userInfo: {}}) : setState({...state, userInfo: {username, userId, profileImage}})
+            state.userInfo.username ?
+            setState({...state, userInfo: {}}) :
+            setState({...state, userInfo: {username, userId, profileImage}})
     }
 
     const onOnlineUserListVisibilityChangeHandler = () => {
-        state.onlineUserListVisibility ?
+            state.onlineUserListVisibility ?
             setState({...state, onlineUserListVisibility: false}) :
             setState({...state, onlineUserListVisibility: true})
     }
+
     const onEmojiPickerHandler = () => {
-        state.emojiPicker ?
+            state.emojiPicker ?
             setState({...state, emojiPicker: false}) :
             setState({...state, emojiPicker: true})
     }
@@ -44,19 +48,23 @@ const chatRoom = props => {
         if (contextData.userData._id) {
             setOnlineUsers(onlineUsers => [
                 ...onlineUsers,
-                {username: contextData.userData.username, userId: contextData.userData._id, profileImage: contextData.userData.profileImage}
+                {username: contextData.userData.username, userId: contextData.userData._id, profileImage: contextData.userData.profileImage,socketId}
             ])
         }
 
-        joinSocketToTheRoom().then(() => {
-            socket.emit('joinSocketToTheRoom',
-                router.query.chatRoomName,
-                contextData.userData.username,
-                contextData.userData._id,
-                contextData.userData.profileImage
-            )
-        })
-    }, [contextData.userData._id]);
+        if (router.query.chatRoomName && contextData.userData.username && contextData.userData._id && !isJoined && socketId) {
+            setIsJoined(true)
+            const userData = {
+                chatRoomName:router.query.chatRoomName,
+                username:contextData.userData.username,
+                id:contextData.userData._id,
+                profileImage:contextData.userData.profileImage,
+                socketId
+            }
+            socket.emit('joinSocketToTheRoom',userData)
+        }
+
+    }, [contextData.userData._id,socketId]);
 
     useEffect(() => {
         scrollToBottomOfConversationBox()
@@ -72,8 +80,21 @@ const chatRoom = props => {
     }
 
     useEffect(() => {
-        socket.on('getChatroomMemberData', async (roomName, username, userId, profileImage) => {
-            username && userId && profileImage ? setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou => ou.userId !== userId), {username, userId, profileImage}]) : null
+
+        socket.emit('onlineUsersList')
+        socket.emit('mySocketId')
+
+        socket.on('onlineUsersList', chatroomOnlineUsers => {
+
+            setOnlineUsers(() =>  _.uniqBy(chatroomOnlineUsers,  e => e.username) )
+        })
+
+        socket.on('mySocketId', socketId => {
+            setSocketId(()=>socketId)
+        })
+
+        socket.on('userListUpdated', chatroomOnlineUsers => {
+            setOnlineUsers(() => _.uniqBy(chatroomOnlineUsers,  e => e.username))
         })
 
         socket.on('message', newMessageData => {
@@ -81,46 +102,13 @@ const chatRoom = props => {
         })
 
         socket.on('recentMessageOnTheRoom',chatroomMessages=>{
-            setMessages(messages => [...chatroomMessages])
-        })
 
-        socket.on('getMyDataAndShareYourData', (receiverSocketId, username, userId, profileImage) => {
-
-
-            if (username){
-                const userJoined = {
-                    messageData: username +' joined to the room ',
-                    username,
-                    userId,
-                    createdAt: Date.now(),
-                    profileImage,
-                    type:'log'
-                }
-                setMessages(messages => [...messages, userJoined])
-            }
-
-            // if (messages.length>100){
-            //     setMessages(messages => [...messages.shift(), userJoined])
-            // }else{
-            //     setMessages(messages => [...messages, userJoined])
-            // }
-
-            username && userId && profileImage ? setOnlineUsers(onlineUsers => [...onlineUsers.filter(ou => ou.userId !== userId), {username, userId, profileImage}]) : null
-            socket.emit('myDataIs', receiverSocketId, router.query.chatRoomName, contextData.userData.username, contextData.userData._id, contextData.userData.profileImage)
-
+            setMessages(() => chatroomMessages)
         })
     }, []);
 
 
-    const joinSocketToTheRoom = async () => {
-        setTimeout(() => {
-            if (router.query.chatRoomName && contextData.userData.username && contextData.userData._id && !isJoined) {
-                setIsJoined(true)
-                return Promise.resolve(isJoined === true)
-            }
-        }, 1000)
 
-    }
 
     return (
         <div>

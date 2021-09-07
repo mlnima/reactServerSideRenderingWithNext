@@ -4,9 +4,11 @@ const app = express();
 const http = require('http');
 const server = http.createServer(app);
 const cors = require('cors')
+const _ = require('lodash')
 app.use(cors())
 const {userJoin, userLeave, getUsersListOfRoom} = require('./users')
 let chatroomMessages = []
+let chatroomOnlineUsers = []
 
 
 const io = require('socket.io')(server, {
@@ -49,12 +51,26 @@ io.on('connection', socket => {
         io.in(conversation).emit('receiveMessageFromConversation', messageData)
     })
 
-// ----------------------videoCall---------------------
-    socket.emit("mySocketId", socket.id)
+    socket.on('mySocketId', () => {
+        socket.emit("mySocketId", socket.id)
+    })
 
-    socket.on("disconnect", () => {
-        userLeave(socket.id)
-        socket.broadcast.emit("endCall")
+    socket.emit("mySocketId", socket.id)
+// ----------------------videoCall---------------------
+
+
+    socket.on("disconnect", async () => {
+        try{
+            const disconnectedUserData =  chatroomOnlineUsers.filter(u=>u.socketId === socket.id)
+            const newChatroomOnlineUsersList = chatroomOnlineUsers.filter(u=>u.socketId !== socket.id)
+            await socket.to(disconnectedUserData.chatRoomName).emit('userListUpdated', newChatroomOnlineUsersList)
+            chatroomOnlineUsers = newChatroomOnlineUsersList
+            socket.broadcast.emit("endCall")
+        }catch (err) {
+            console.log(err)
+        }
+
+
     })
 
     socket.on("callUser", (data) => {
@@ -75,10 +91,15 @@ io.on('connection', socket => {
 //--------------------chatroom--------------------------
 
 
-    socket.on('joinSocketToTheRoom', (roomName, username, userId, profileImage) => {
-        socket.join(roomName)
+    socket.on('joinSocketToTheRoom', userData => {
+        socket.join(userData.chatRoomName)
         io.to(socket.id).emit('recentMessageOnTheRoom',chatroomMessages)
-        socket.to(roomName).emit('getMyDataAndShareYourData', socket.id, username, userId, profileImage)
+        chatroomOnlineUsers =  _.uniqBy([...chatroomOnlineUsers,userData],  e => e.username);
+        socket.to(userData.chatRoomName).emit('userListUpdated', _.uniqBy([...chatroomOnlineUsers,userData],  e => e.username))
+    });
+
+    socket.on('onlineUsersList', () => {
+        io.to(socket.id).emit('onlineUsersList',_.uniqBy(chatroomOnlineUsers,  e => e.username))
     });
 
     socket.on('message', newMessageData => {
@@ -94,9 +115,9 @@ io.on('connection', socket => {
     });
 
 
-    socket.on('myDataIs', (receiverId, roomName, username, userId, profileImage) => {
-        io.to(receiverId).emit('getChatroomMemberData', roomName, username, userId, profileImage)
-    })
+    // socket.on('myDataIs', (receiverId, roomName, username, userId, profileImage) => {
+    //     io.to(receiverId).emit('getChatroomMemberData', roomName, username, userId, profileImage)
+    // })
 
 
 })
