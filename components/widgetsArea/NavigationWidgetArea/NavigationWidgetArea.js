@@ -15,6 +15,9 @@ let StyledNavigation = styled.nav`
   }
   @media only screen and (min-width: 768px){
     height: 48px;
+    .navigation-content{
+      height: 48px;
+    }
   }
   ${props => props.stylesData ?? ''}
 `;

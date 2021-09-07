@@ -14,6 +14,9 @@ let StyledDiv = styled.div`
   }
   @media only screen and (min-width: 768px){
     height: 48px;
+    .top-bar-content{
+      height: 48px;
+    }
   }
   ${props => props.stylesData ?? ''}
 `
