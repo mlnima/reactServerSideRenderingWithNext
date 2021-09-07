@@ -9,8 +9,8 @@ const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler,t}) => {
             <style jsx>{`
                 .chatroom-header{
                   background-color: var(--navigation-background-color);
-                  height: 50px;
-                  padding:  10px;
+                  height: 48px;
+                  //padding:  10px;
                   display:flex;
                   justify-content : space-between;
                   align-items:center;
@@ -18,12 +18,13 @@ const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler,t}) => {
                 .chatroom-header-open-online-users-list-button{
                   background-color: transparent;
                   color: var(--navigation-text-color);
-                  border:none
+                  border:none;
+                   padding: 5px ;
                 }
             `}</style>
             <Authentication/>
             <button className='chatroom-header-open-online-users-list-button' onClick={onOnlineUserListVisibilityChangeHandler}>
-                {t(`common:Online Users`)}
+                {t(`common:Users`)}
             </button>
         </header>
     );

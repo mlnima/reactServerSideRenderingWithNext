@@ -37,6 +37,10 @@ server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
 
 io.on('connection', socket => {
 
+    socket.on('socketId', () => {
+        socket.emit("socketId", socket.id)
+    })
+
     socket.on('setIdAndJoinConversation', async (userID, conversationId) => {
         //setCustomId(userID)
         socket.join(conversationId)
@@ -51,21 +55,25 @@ io.on('connection', socket => {
         io.in(conversation).emit('receiveMessageFromConversation', messageData)
     })
 
-    socket.on('mySocketId', () => {
-        socket.emit("mySocketId", socket.id)
-    })
 
-    socket.emit("mySocketId", socket.id)
+
+
 // ----------------------videoCall---------------------
 
 
-    socket.on("disconnect", async () => {
+    socket.on("disconnect", () => {
         try{
-            const disconnectedUserData =  chatroomOnlineUsers.filter(u=>u.socketId === socket.id)
-            const newChatroomOnlineUsersList = chatroomOnlineUsers.filter(u=>u.socketId !== socket.id)
-            await socket.to(disconnectedUserData.chatRoomName).emit('userListUpdated', newChatroomOnlineUsersList)
-            chatroomOnlineUsers = newChatroomOnlineUsersList
-            socket.broadcast.emit("endCall")
+            const disconnectedUserData =  chatroomOnlineUsers.find(u=>u.socketId === socket.id)
+            if (disconnectedUserData ){
+                const newChatroomOnlineUsersList = chatroomOnlineUsers.filter(u=>u.socketId !== socket.id)
+                chatroomOnlineUsers = newChatroomOnlineUsersList
+                socket.to(disconnectedUserData.chatRoomName).emit('userListUpdated', chatroomOnlineUsers)
+            }
+
+            // if (socket){
+            //     socket.broadcast.emit("endCall")
+            // }
+
         }catch (err) {
             console.log(err)
         }
@@ -90,35 +98,33 @@ io.on('connection', socket => {
     })
 //--------------------chatroom--------------------------
 
+    socket.on('joinUserToTheRoom', async userData => {
+        const updatedUserList = [...chatroomOnlineUsers,userData]
+        chatroomOnlineUsers =  _.uniqBy(updatedUserList,  e => e.username);
+        io.in(userData.chatRoomName).emit('userListUpdated', chatroomOnlineUsers)
+    });
 
-    socket.on('joinSocketToTheRoom', userData => {
-        socket.join(userData.chatRoomName)
-        io.to(socket.id).emit('recentMessageOnTheRoom',chatroomMessages)
-        chatroomOnlineUsers =  _.uniqBy([...chatroomOnlineUsers,userData],  e => e.username);
-        socket.to(userData.chatRoomName).emit('userListUpdated', _.uniqBy([...chatroomOnlineUsers,userData],  e => e.username))
+    socket.on('joinSocketToTheChatroom', chatRoomName => {
+        socket.join(chatRoomName)
     });
 
     socket.on('onlineUsersList', () => {
         io.to(socket.id).emit('onlineUsersList',_.uniqBy(chatroomOnlineUsers,  e => e.username))
     });
 
-    socket.on('message', newMessageData => {
+    socket.on('messageToChatroom', newMessageData => {
             chatroomMessages.length > 100 ?
             chatroomMessages = [...chatroomMessages.shift(), newMessageData] :
             chatroomMessages = [...chatroomMessages, newMessageData]
-        io.in(newMessageData.roomName).emit('message', newMessageData)
+            io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
     });
 
+    socket.on('recentChatRoomMessages', () => {
+        io.to(socket.id).emit('recentChatRoomMessages',chatroomMessages)
+    });
 
     socket.on('startTyping', (roomName, username) => {
         socket.to(roomName).emit('startTyping', username)
     });
-
-
-    // socket.on('myDataIs', (receiverId, roomName, username, userId, profileImage) => {
-    //     io.to(receiverId).emit('getChatroomMemberData', roomName, username, userId, profileImage)
-    // })
-
-
 })
 

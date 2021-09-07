@@ -15,7 +15,7 @@ const AuthenticationStyledDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    font-size: 14px;
+    font-size: 12px;
     background-color: transparent;
     border: none;
     margin: 0 5px;
@@ -29,6 +29,14 @@ const AuthenticationStyledDiv = styled.div`
     }
   }
 }
+
+  @media only screen and (min-width: 768px){
+    .logged-out-items,.logged-in-items{
+      .logged-in-item,.logged-out-item{
+        font-size: 14px;
+      }
+    }
+  }
 `
 const Authentication = () => {
     const contextData = useContext(AppContext);

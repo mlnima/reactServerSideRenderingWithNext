@@ -83,11 +83,6 @@ const ChatRoomTools = ({onEmojiPickerHandler}) => {
         active: false
     });
 
-
-    useEffect(() => {
-    }, []);
-
-
     const onChangeHandler = e => {
         setState({
             ...state,
@@ -110,7 +105,8 @@ const ChatRoomTools = ({onEmojiPickerHandler}) => {
             }
 
 
-            socket.emit('message', newMessageData)
+            socket.emit('messageToChatroom', newMessageData)
+
             setState({
                 ...state,
                 messageData: ''

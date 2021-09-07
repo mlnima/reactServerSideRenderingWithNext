@@ -16,7 +16,7 @@ const chatRoom = props => {
     const messageAreaRef = useRef(null)
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
-        onlineUserListVisibility: true,
+        onlineUserListVisibility: false,
         userInfo: {}
     });
     const [onlineUsers, setOnlineUsers] = useState([]);
@@ -26,49 +26,90 @@ const chatRoom = props => {
     const router = useRouter()
 
     const onUserInfoShowHandler = (username, userId, profileImage) => {
-            state.userInfo.username ?
+        state.userInfo.username ?
             setState({...state, userInfo: {}}) :
             setState({...state, userInfo: {username, userId, profileImage}})
     }
 
     const onOnlineUserListVisibilityChangeHandler = () => {
-            state.onlineUserListVisibility ?
+        state.onlineUserListVisibility ?
             setState({...state, onlineUserListVisibility: false}) :
             setState({...state, onlineUserListVisibility: true})
     }
 
     const onEmojiPickerHandler = () => {
-            state.emojiPicker ?
+        state.emojiPicker ?
             setState({...state, emojiPicker: false}) :
             setState({...state, emojiPicker: true})
     }
 
 
-    useEffect(() => {
-        if (contextData.userData._id) {
-            setOnlineUsers(onlineUsers => [
-                ...onlineUsers,
-                {username: contextData.userData.username, userId: contextData.userData._id, profileImage: contextData.userData.profileImage,socketId}
-            ])
-        }
 
-        if (router.query.chatRoomName && contextData.userData.username && contextData.userData._id && !isJoined && socketId) {
-            setIsJoined(true)
-            const userData = {
-                chatRoomName:router.query.chatRoomName,
-                username:contextData.userData.username,
-                id:contextData.userData._id,
-                profileImage:contextData.userData.profileImage,
-                socketId
-            }
-            socket.emit('joinSocketToTheRoom',userData)
-        }
-
-    }, [contextData.userData._id,socketId]);
 
     useEffect(() => {
         scrollToBottomOfConversationBox()
     }, [messages]);
+
+
+
+
+
+    useEffect(() => {
+        // if (contextData.userData._id) {
+        //     setOnlineUsers(onlineUsers => [
+        //         ...onlineUsers,
+        //         {username: contextData.userData.username, userId: contextData.userData._id, profileImage: contextData.userData.profileImage, socketId}
+        //     ])
+        // }
+
+        if (router.query.chatRoomName && contextData.userData.username && contextData.userData._id && !isJoined && contextData.userData.socketId) {
+            setIsJoined(true)
+            const userData = {
+                chatRoomName: router.query.chatRoomName,
+                username: contextData.userData.username,
+                id: contextData.userData._id,
+                profileImage: contextData.userData.profileImage,
+                socketId : contextData.userData.socketId
+            }
+
+            socket.emit('joinUserToTheRoom', userData)
+        }
+
+    }, [contextData.userData._id, contextData.userData.socketId]);
+
+
+    useEffect(() => {
+        socket.emit('socketId')
+        socket.emit('onlineUsersList')
+        socket.emit('recentChatRoomMessages')
+        socket.emit('joinSocketToTheChatroom',router.query.chatRoomName)
+
+
+        socket.on('socketId', socketId => {
+            contextData.dispatchUserData(prevUserData=>({
+                ...prevUserData,
+                socketId
+            }))
+        })
+
+        socket.on('onlineUsersList', chatroomOnlineUsers => {
+            setOnlineUsers(() => _.uniqBy(chatroomOnlineUsers, e => e.username))
+        })
+
+        socket.on('recentChatRoomMessages', chatroomMessages => {
+            setMessages(() => chatroomMessages)
+        })
+
+
+        socket.on('userListUpdated', chatroomOnlineUsers => {
+            setOnlineUsers(() => _.uniqBy(chatroomOnlineUsers, e => e.username))
+        })
+
+        socket.on('messageFromChatroom', newMessageData => {
+            setMessages(messages => messages.length > 100 ? [...messages.shift(), newMessageData] : [...messages, newMessageData])
+        })
+
+    }, []);
 
     const scrollToBottomOfConversationBox = () => {
         if (messageAreaRef.current) {
@@ -78,35 +119,6 @@ const chatRoom = props => {
             })
         }
     }
-
-    useEffect(() => {
-
-        socket.emit('onlineUsersList')
-        socket.emit('mySocketId')
-
-        socket.on('onlineUsersList', chatroomOnlineUsers => {
-
-            setOnlineUsers(() =>  _.uniqBy(chatroomOnlineUsers,  e => e.username) )
-        })
-
-        socket.on('mySocketId', socketId => {
-            setSocketId(()=>socketId)
-        })
-
-        socket.on('userListUpdated', chatroomOnlineUsers => {
-            setOnlineUsers(() => _.uniqBy(chatroomOnlineUsers,  e => e.username))
-        })
-
-        socket.on('message', newMessageData => {
-            setMessages(messages => messages.length>100 ? [...messages.shift(), newMessageData] : [...messages, newMessageData])
-        })
-
-        socket.on('recentMessageOnTheRoom',chatroomMessages=>{
-
-            setMessages(() => chatroomMessages)
-        })
-    }, []);
-
 
 
 
@@ -133,14 +145,16 @@ const chatRoom = props => {
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'chatRoomPage')
 
-    return {props: {
+    return {
+        props: {
             ...(await serverSideTranslations(context.locale, ['common'])),
-            widgets:firstLoadData?.widgets || [],
+            widgets: firstLoadData?.widgets || [],
             ...firstLoadData.settings,
             isMobile: Boolean(firstLoadData.isMobile),
             referer: firstLoadData.referer,
             requestProtocol: context.req.protocol
-    }}
+        }
+    }
 }
 
 export default chatRoom;
