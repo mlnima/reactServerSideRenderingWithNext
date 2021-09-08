@@ -29,6 +29,7 @@ const PostPageStyledMain = styled.main`
   align-items: center;
   justify-content: flex-start;
   width: 100%;
+  grid-area: main;
 
   .rating-price-download {
     width: 100%;

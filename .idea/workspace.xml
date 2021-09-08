@@ -21,22 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientSettingsControllers/clientGetMultipleSettings.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetSingleWidgetData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetWidgetsWithData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -802,7 +787,7 @@
       <workItem from="1630832817154" duration="2386000" />
       <workItem from="1630917073869" duration="18401000" />
       <workItem from="1631002977089" duration="23919000" />
-      <workItem from="1631089678098" duration="5365000" />
+      <workItem from="1631089678098" duration="8354000" />
     </task>
     <servers />
   </component>
