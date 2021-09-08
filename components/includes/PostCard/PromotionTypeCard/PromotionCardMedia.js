@@ -55,9 +55,8 @@ const PromotionCardMedia = props => {
             <img className='promotion-card-image'
                  alt={props.mediaAlt}
                  src={!gotError ? imageUrl || props.noImageUrl : props.noImageUrl}
-                 onError={e => {
-                     onErrorHandler(e)
-                 }}/>
+                 // onError={e => onErrorHandler(e)}
+            />
         </PromotionCardMediaStyled>
     );
 };

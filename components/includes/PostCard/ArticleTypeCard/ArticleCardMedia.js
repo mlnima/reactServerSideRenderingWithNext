@@ -68,9 +68,8 @@ const ArticleCardMedia = props => {
             <img className='article-card-image'
                  alt={props.mediaAlt}
                  src={!gotError ? imageUrl || props.noImageUrl : props.noImageUrl}
-                 onError={e => {
-                     onErrorHandler(e)
-                 }}/>
+                 // onError={e =>  onErrorHandler(e)}
+            />
         </ArticleCardMediaStyled>
     );
 };

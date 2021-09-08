@@ -67,7 +67,12 @@ const CategoryCardMedia = props => {
         );
     }else {
         return (
-            <CategoryCardMediaStyledImage cardWidth={props.cardWidth} ref={imageRef} className='category-card-image' src={props.imageUrl} onError={onErrorHandler} alt={props.mediaAlt}/>
+            <CategoryCardMediaStyledImage cardWidth={props.cardWidth}
+                                          ref={imageRef}
+                                          className='category-card-image'
+                                          src={props.imageUrl}
+                                          // onError={onErrorHandler}
+                                          alt={props.mediaAlt}/>
         );
     }
 

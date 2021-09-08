@@ -42,8 +42,6 @@ module.exports = (req, res) => {
 
         })
         const data = await Promise.all(mapWidget)
-
-        res.json({widgets: data})
-        res.end()
+        res.json({widgets: data || []})
     })
 }

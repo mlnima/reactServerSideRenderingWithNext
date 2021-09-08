@@ -8,13 +8,12 @@ module.exports = async (req, res) => {
         })
         Promise.all(settingRequestPromises).then(settings => {
             res.json({settings})
-            res.end()
         }).catch(err => {
             console.log(err)
-            res.end()
+            res.status(404).json('Not Found')
         })
     } catch (err) {
         console.log(err)
-        res.end()
+        res.status(404).json('Not Found')
     }
 };

@@ -88,7 +88,8 @@ const VideoCardMedia = props => {
                      src={!gotError ? imageUrl || props.noImageUrl : props.noImageUrl}
                      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
-                     onError={onErrorHandler}/>
+                     // onError={onErrorHandler}
+                />
             </VideoCardMediaStyled>
         )
     }

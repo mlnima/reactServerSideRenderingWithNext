@@ -24,7 +24,7 @@ export const getServerSideProps = async (context) => {
     }
     const firstLoadData = await getFirstLoadData(context.req, ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'], 'postPage')
     let responseCode = 200
-    const postData = await getPost({_id: context.query.id, title: context.query.title},  true)
+    const postData = await getPost({_id: context.query.id},  true)
     const post = postData?.data?.post;
     if (!post) {
         return {

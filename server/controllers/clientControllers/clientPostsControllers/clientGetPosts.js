@@ -20,7 +20,6 @@ module.exports = async (req, res) => {
                 sort: findingPostsOptions.sortQuery
             }).populate(populateMeta).exec()
         res.json({posts,totalCount})
-        res.end()
     }catch (err){
         console.log(err)
         return res.status(500).json({

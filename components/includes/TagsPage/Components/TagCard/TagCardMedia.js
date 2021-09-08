@@ -65,7 +65,13 @@ const TagCardMedia = props => {
         );
     }else {
         return (
-            <TagCardMediaStyledImage ref={imageRef} cardWidth={props.cardWidth} className='tag-card-image' src={props.imageUrl} onError={onErrorHandler} alt={props.mediaAlt}/>
+            <TagCardMediaStyledImage ref={imageRef}
+                                     cardWidth={props.cardWidth}
+                                     className='tag-card-image'
+                                     src={props.imageUrl}
+                                     // onError={onErrorHandler}
+                                     alt={props.mediaAlt}
+            />
         );
     }
 

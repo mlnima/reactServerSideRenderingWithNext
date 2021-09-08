@@ -65,7 +65,12 @@ const ActorCardMedia = props => {
         );
     }else {
         return (
-            <ActorCardMediaStyledImage cardWidth={props.cardWidth} ref={imageRef} className='actor-card-image' src={props.imageUrl} onError={onErrorHandler} alt={props.mediaAlt}/>
+            <ActorCardMediaStyledImage cardWidth={props.cardWidth}
+                                       ref={imageRef} className='actor-card-image'
+                                       src={props.imageUrl}
+                                       // onError={onErrorHandler}
+                                       alt={props.mediaAlt}
+            />
         );
     }
 

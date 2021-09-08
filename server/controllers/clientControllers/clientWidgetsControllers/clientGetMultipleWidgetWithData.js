@@ -15,14 +15,13 @@ module.exports = async (req, res) => {
         ]).sort({updatedAt: -1}).exec()
         Promise.all(widgets).then(widgetsWithData => {
             res.json({widgets: widgetsWithData})
-            res.end()
         }).catch(err => {
             console.log(err)
-            res.end()
+            res.status(400).send('Bad Request')
         })
     } catch (err) {
         console.log(err)
-        res.end()
+        res.status(400).send('Bad Request')
     }
 
 }
