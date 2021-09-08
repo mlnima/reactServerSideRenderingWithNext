@@ -10,6 +10,7 @@ const Custom404StyledDiv = styled.div`
   align-items: center;
   height: 50vh;
   background-color: var(--background-color);
+  grid-area: main;
 
   h1 {
     color: var(--main-text-color);

@@ -20,8 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/500.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_error.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -787,7 +788,7 @@
       <workItem from="1630832817154" duration="2386000" />
       <workItem from="1630917073869" duration="18401000" />
       <workItem from="1631002977089" duration="23919000" />
-      <workItem from="1631089678098" duration="8354000" />
+      <workItem from="1631089678098" duration="8522000" />
     </task>
     <servers />
   </component>
