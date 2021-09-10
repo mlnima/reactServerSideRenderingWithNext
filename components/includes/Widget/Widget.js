@@ -12,7 +12,6 @@ ${props => props.customStyles}
 
 const Widget = props => {
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
-    //console.log(props.data?.customStyles?props.data?.customStyles:null)
     return (
         <StyledSection  className={'widget ' + (props.data?.extraClassName ?? '')}  {...idAttribute} customStyles={props.data?.customStyles || ''}>
             <WidgetHeader {...props.data}/>

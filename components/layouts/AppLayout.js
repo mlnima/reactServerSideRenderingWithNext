@@ -63,8 +63,9 @@ const AppLayout = props => {
 
     const sidebarType = useMemo(() => identity?.[sidebarPositionName] || props.pageInfo?.sidebar || 'withOutSidebar', [sidebarPositionName, props.pageInfo])
 
+    const isErrorPage = router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error'
 
-    const mainLayoutClassNameForGrid = useMemo(() => sidebarType === 'left' ? 'leftSidebar' : sidebarType === 'right' ? 'rightSidebar' : sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar', [sidebarType]);
+    const mainLayoutClassNameForGrid = useMemo(() => isErrorPage ? 'withOutSidebar' : sidebarType === 'left' ? 'leftSidebar' : sidebarType === 'right' ? 'rightSidebar' : sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar', [sidebarType]);
 
     const leftSidebar = useMemo(() => identity?.[sidebarPositionName] === 'both' ||
             identity?.[sidebarPositionName] === 'left' ||

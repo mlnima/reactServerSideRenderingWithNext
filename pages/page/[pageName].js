@@ -23,11 +23,7 @@ const page = ({responseCode,pageInfo,widgets,design,identity}) => {
 };
 
 export const getServerSideProps = async (context) => {
-    if (!context.query.pageName){
-        return {
-            notFound: true
-        }
-    }
+    if (!context.query.pageName)   return {notFound: true}
     const firstLoadData = await getFirstLoadData(context.req,[context.query.pageName, context.query.pageName + 'LeftSidebar',context.query.pageName + 'RightSidebar'],context.query.pageName)
     let responseCode = 200
     const pageData = await getPageData({pageName: context.query.pageName})
@@ -42,7 +38,6 @@ export const getServerSideProps = async (context) => {
         props: {
             ...(await serverSideTranslations(context.locale, ['common'])),
             widgets:firstLoadData?.widgets || [],
-            ...firstLoadData.settings,
             pageInfo:pageData.data ? pageData.data.pageData : {},
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),

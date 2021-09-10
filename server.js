@@ -1,6 +1,6 @@
 require('dotenv').config()
 require('./server/_variables/connectToDatabase')
-
+require('./server/_variables/_setSettingToEnvironmentVariables')
 
 const express = require('express');
 const next = require('next');
@@ -26,8 +26,8 @@ const clientRobotTxtController = require('./server/controllers/clientControllers
 const siteMapController = require('./server/controllers/siteMapController');
 const siteMapsController = require('./server/controllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/subSiteMapsController');
-const _setSettingToEnvironmentVariables = require('./server/_variables/_setSettingToEnvironmentVariables')
-_setSettingToEnvironmentVariables()
+// const _setSettingToEnvironmentVariables = require('./server/_variables/_setSettingToEnvironmentVariables')
+// _setSettingToEnvironmentVariables()
 
 const staticServeOptions = {
     root: './static/',
@@ -48,9 +48,7 @@ app.prepare().then(() => {
     server.use('/public', express.static(path.join(__dirname, 'public'),{maxAge: "604800000"}))
     server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apiCache.clear(req.params.collection)
-
-        _setSettingToEnvironmentVariables()
-        res.end()
+        res.status(200).json({message:'Cache has been deleted'})
     });
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
     server.get('/manifest.json', cacheSuccesses,(req,res)=>{clientMainFestController(req,res)})

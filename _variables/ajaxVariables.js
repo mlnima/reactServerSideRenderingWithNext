@@ -162,7 +162,7 @@ export const getOrders = async (data, domainName) => {
 export const getFirstLoadData = async (req, dynamicWidgets) => {
 
     try {
-        const domainName = process.env.REACT_APP_PRODUCTION_URL;
+
         const cache = process.env.NODE_ENV !== 'development'
         // const refererUrl = req?.headers?.referer || '';
         const referer = false;
@@ -177,7 +177,7 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
        // const settingsData = !referer ? await getMultipleSetting({settings: ['identity', 'design']}, cache) : {};
         let settings = {
             identity: process.env.REACT_APP_SETTING_IDENTITY ? JSON.parse(process.env.REACT_APP_SETTING_IDENTITY) : {},
-            design:  process.env.REACT_APP_SETTING_DESIGN ? JSON.parse(process.env.REACT_APP_SETTING_DESIGN) : {}
+            // design:  process.env.REACT_APP_SETTING_DESIGN ? JSON.parse(process.env.REACT_APP_SETTING_DESIGN) : {}
         }
 
         let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);

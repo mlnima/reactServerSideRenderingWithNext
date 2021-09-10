@@ -1,4 +1,4 @@
-const _getPostsQueryGenerator = (queryData, size, metaIdData, cache) => {
+const _getPostsQueryGenerator = (queryData, metaIdData, cache) => {
     const sort = queryData?.sort ? {sort: queryData?.sort} : {sort: 'updatedAt'}
     const postType = queryData?.postType ? {postType: queryData?.postType} : {}
     const metaId = metaIdData ? {metaId: metaIdData} : {}
@@ -7,6 +7,7 @@ const _getPostsQueryGenerator = (queryData, size, metaIdData, cache) => {
     const status = queryData?.status ? {status: queryData?.status} : {status: 'published'}
     const keyword = queryData?.keyword ? {keyword: encodeURIComponent(queryData?.keyword)} : {}
     const cacheStatus = cache ? {cache} : {}
+
     const fields = [
         'title',
         'mainThumbnail',
@@ -24,7 +25,7 @@ const _getPostsQueryGenerator = (queryData, size, metaIdData, cache) => {
         .map(f => 'field=' + f).join('&')
 
     const getPostsData = {
-        size: queryData.size || size || '30',
+        size:  process.env.REACT_APP_SETTING_POSTS_COUNT_PER_PAGE,
         page: queryData?.page || '1',
         ...status,
         ...author,

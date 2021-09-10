@@ -60,17 +60,12 @@ const tagPage = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    if (!context.query.tagId){
-        return { notFound: true}
-    }
-    if (!context.query?.tagId?.match(/^[0-9a-fA-F]{24}$/)){
-        return {
-            notFound: true
-        }
-    }
+    if (!context.query.tagId)return { notFound: true};
+    if (!context.query?.tagId?.match(/^[0-9a-fA-F]{24}$/))return { notFound: true};
+
     const firstLoadData = await getFirstLoadData(context.req, ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar',], 'postsPage');
     const tagData = context.query?.tagId ? await getSingleMeta(context.query.tagId, true) : {};
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.postsCountPerPage,context.query.tagId,true);
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query,context.query.tagId,true);
     const tag = tagData.data ? tagData.data.meta : {};
     const postsData = await getPosts(gettingPostsQueries);
     const postsSource = postsData.data ? postsData.data : [];
@@ -79,10 +74,8 @@ export const getServerSideProps = async (context) => {
         props: {
             ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
             widgets:firstLoadData?.widgets || [],
-            ...firstLoadData?.settings,
             query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),
-            countPerPage:firstLoadData?.settings?.identity?.postsCountPerPage,
             postsSource,
             tag,
             referer: firstLoadData.referer

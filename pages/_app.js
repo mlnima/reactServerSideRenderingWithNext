@@ -1,3 +1,4 @@
+import {useState} from "react";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import { appWithTranslation } from 'next-i18next';
@@ -12,6 +13,12 @@ const AppProvider = dynamic(() => import('../context/AppContext'))
 
 const MyApp = ({Component, pageProps}) => {
     const router = useRouter()
+    const [state,setState] = useState(()=>{
+       return {
+           identity: process.env.REACT_APP_SETTING_IDENTITY ? JSON.parse(process.env.REACT_APP_SETTING_IDENTITY) : {},
+           design:  process.env.REACT_APP_SETTING_DESIGN ? JSON.parse(process.env.REACT_APP_SETTING_DESIGN) : {}
+       }
+    })
 
     if (router.pathname.includes('/admin')) {
         return (
@@ -25,8 +32,8 @@ const MyApp = ({Component, pageProps}) => {
         return (
             <AppProvider>
                 <MessengerLayout
-                    identity={pageProps.identity}
-                    design={pageProps.design}
+                    identity={state.identity}
+                    design={state.design}
                     isMobile={pageProps.isMobile}
                     globalStyleDetected={!!pageProps.design?.data?.customStyles}
                 >
@@ -39,9 +46,9 @@ const MyApp = ({Component, pageProps}) => {
         <AppProvider>
 
             <AppLayout
-                design={pageProps.design}
+                design={state.design}
                 widgets={pageProps.widgets}
-                identity={pageProps.identity}
+                identity={state.identity}
                 eCommerce={pageProps.eCommerce}
                 referer={pageProps.referer}
                 isMobile={pageProps.isMobile}

@@ -72,30 +72,17 @@ const categoriesPage = ({metaSource, identity, dataForGettingMeta, design, widge
 };
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'], 'categoriesPage')
-    // const sort = context.query?.sort ? {sort: context.query?.sort}: {}
-    // const keyword = context.query?.keyword ? { keyword: encodeURIComponent(context.query?.keyword)}: {}
-    // const dataForGettingMeta = {
-    //     metaType: 'categories',
-    //     page: context.query?.page ?  parseInt(context.query?.page) : 1,
-    //     size: context.query?.size ? parseInt(context.query?.size) : 60,
-    //     startWith: context.query?.startWith || 'any',
-    //     lang: context.query?.lang || 'default',
-    //     status: 'published',
-    //     ...sort,
-    //     ...keyword
-    // }
-    const metaData = await getMultipleMeta(context.query, 'categories', true)
-    const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
+    const firstLoadData = await getFirstLoadData(context.req, ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'], 'categoriesPage');
+    const metaData = await getMultipleMeta(context.query, 'categories', true);
+    const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0};
+
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
-            ...firstLoadData.settings,
             query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),
             widgets:firstLoadData?.widgets || [],
             metaSource,
-            // dataForGettingMeta,
             referer: firstLoadData.referer
         }
     }

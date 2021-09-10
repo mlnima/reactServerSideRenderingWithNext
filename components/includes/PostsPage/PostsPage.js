@@ -35,8 +35,8 @@ const PostsPage = props => {
                 isActive={true}
                 currentPage={router.query.page || 1}
                 totalCount={props.postsSource.totalCount}
-                size={props.countPerPage || contextData.identity.postsCountPerPage || 30}
-                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.countPerPage || contextData.identity.postsCountPerPage || 30))}
+                size={props.countPerPage || process.env.REACT_APP_SETTING_POSTS_COUNT_PER_PAGE || 30}
+                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.countPerPage || process.env.REACT_APP_SETTING_POSTS_COUNT_PER_PAGE || 30))}
             />
             <PostsContainer className='posts-container'>
                 <Posts
@@ -51,8 +51,8 @@ const PostsPage = props => {
                 isActive={true}
                 currentPage={router.query.page || 1}
                 totalCount={props.postsSource.totalCount}
-                size={props.countPerPage || contextData.identity.postsCountPerPage || 30}
-                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.countPerPage || contextData.identity.postsCountPerPage || 30))}
+                size={props.countPerPage ||process.env.REACT_APP_SETTING_POSTS_COUNT_PER_PAGE || 30}
+                maxPage={Math.ceil(parseInt(props.postsSource.totalCount) / parseInt(props.countPerPage ||process.env.REACT_APP_SETTING_POSTS_COUNT_PER_PAGE || 30))}
             />
         </React.Fragment>
     );

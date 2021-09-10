@@ -56,14 +56,9 @@ const categoryPage = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    if (!context.query.categoryId){
-        return { notFound: true}
-    }
-    if (!context.query?.categoryId?.match(/^[0-9a-fA-F]{24}$/)){
-        return {
-            notFound: true
-        }
-    }
+    if (!context.query.categoryId)return { notFound: true};
+    if (!context.query?.categoryId?.match(/^[0-9a-fA-F]{24}$/))return { notFound: true};
+
     const firstLoadData = await getFirstLoadData(context.req,['categoryPageTop','categoryPageLeftSidebar','categoryPageBottom','categoryPageRightSidebar'],'postsPage')
     const categoryData = context.query.categoryId ? await getSingleMeta(context.query.categoryId, true) : {}
 
@@ -73,7 +68,7 @@ export const getServerSideProps = async (context) => {
         }
     }
 
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query,firstLoadData?.settings?.identity?.postsCountPerPage,context.query.categoryId,true)
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query,context.query.categoryId,true)
 
     const category = categoryData.data ? categoryData.data.meta : {}
     const postsData = await getPosts(gettingPostsQueries)
@@ -81,12 +76,10 @@ export const getServerSideProps = async (context) => {
     return {props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             widgets:firstLoadData?.widgets || [],
-            ...firstLoadData?.settings,
-            query:context.query,
-            isMobile: Boolean(firstLoadData.isMobile),
-            countPerPage:firstLoadData?.settings?.identity?.postsCountPerPage,
+            query:context.query || {},
+            isMobile: Boolean(firstLoadData.isMobile) || false,
             postsSource,
-            category,
+            category:category || null,
             referer: firstLoadData.referer}}
 }
 

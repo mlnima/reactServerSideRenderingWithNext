@@ -75,18 +75,16 @@ const tagsPage = ({metaSource, identity, dataForGettingMeta, design, widgets, re
 
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['tagsPageTop', 'tagsPageLeftSidebar', 'tagsPageBottom', 'tagsPageRightSidebar'], 'tagsPage')
-
     const metaData = await getMultipleMeta(context.query, 'tags', true)
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
+
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
-            ...firstLoadData.settings,
             query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),
             widgets:firstLoadData?.widgets || [],
             metaSource,
-            // dataForGettingMeta,
             referer: firstLoadData.referer
         }
     }

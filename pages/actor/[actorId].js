@@ -61,18 +61,13 @@ const actorPage = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    if (!context.query.actorId) {
-        return {notFound: true}
-    }
 
-    if (!context.query?.actorId?.match(/^[0-9a-fA-F]{24}$/)) {
-        return {notFound: true}
-    }
-
+    if (!context.query.actorId)return { notFound: true};
+    if (!context.query?.actorId?.match(/^[0-9a-fA-F]{24}$/))return { notFound: true};
 
     const firstLoadData = await getFirstLoadData(context.req, ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar',], 'postsPage')
 
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query, firstLoadData?.settings?.identity?.postsCountPerPage, context.query.actorId, true)
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true)
 
     const actorData = context.query.actorId ? await getSingleMeta(context.query.actorId, true) : {}
 
@@ -85,10 +80,8 @@ export const getServerSideProps = async (context) => {
         props: {
             ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
             widgets: firstLoadData?.widgets || [],
-            ...firstLoadData?.settings,
             query: context.query,
             isMobile: Boolean(firstLoadData.isMobile),
-            countPerPage: firstLoadData?.settings?.identity?.postsCountPerPage,
             postsSource,
             actor,
             referer: firstLoadData.referer
