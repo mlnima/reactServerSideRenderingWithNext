@@ -26,8 +26,7 @@ const Error = ({responseCode,statusCode }) => {
     return (
         <ErrorStyledDiv className='error-page'>
             <h1 className='error-page-message'>
-                {responseCode ? `Error ${responseCode} Occurred On Server`: 'An Error Occurred'}
-                {statusCode ? `Error ${statusCode} Occurred On Server`: 'An Error Occurred'}
+                {responseCode || statusCode ? `Error ${responseCode || statusCode} Occurred On Server`: 'An Error Occurred'}
             </h1>
             <Link href="/">
                 <a className='back-to-homepage'>

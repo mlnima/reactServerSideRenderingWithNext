@@ -21,27 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_app.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actors/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_error.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/page/[pageName].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/de/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/de/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/fa/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/fa/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/_variables/_setSettingToEnvironmentVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/_variables/_setSettingToEnvironmentVariables.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -809,6 +790,7 @@
       <workItem from="1631002977089" duration="23919000" />
       <workItem from="1631089678098" duration="15653000" />
       <workItem from="1631184898884" duration="11448000" />
+      <workItem from="1631263932221" duration="1087000" />
     </task>
     <servers />
   </component>

@@ -28,11 +28,8 @@ export const getServerSideProps = async (context) => {
     let responseCode = 200
     const pageData = await getPageData({pageName: context.query.pageName})
 
-    if (!pageData.data.pageData){
-        return {
-            notFound: true
-        }
-    }
+    if (!pageData.data.pageData)return { notFound: true}
+
 
     return {
         props: {
@@ -40,7 +37,7 @@ export const getServerSideProps = async (context) => {
             widgets:firstLoadData?.widgets || [],
             pageInfo:pageData.data ? pageData.data.pageData : {},
             query:context.query,
-            isMobile: Boolean(firstLoadData.isMobile),
+            isMobile: firstLoadData.isMobile ? Boolean(firstLoadData.isMobile) : false,
             referer: firstLoadData.referer,
             responseCode
         }}
