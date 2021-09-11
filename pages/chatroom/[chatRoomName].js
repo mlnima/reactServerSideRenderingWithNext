@@ -81,7 +81,7 @@ const chatRoom = props => {
     useEffect(() => {
         socket.emit('socketId')
         socket.emit('onlineUsersList')
-        socket.emit('recentChatRoomMessages')
+        socket.emit('recentChatRoomMessages',router.query.chatRoomName)
         socket.emit('joinSocketToTheChatroom',router.query.chatRoomName)
 
 

@@ -1,4 +1,3 @@
-import React from 'react';
 import Link from "next/link";
 import PromotionCardMedia from "./PromotionCardMedia";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
@@ -6,6 +5,7 @@ import _ from "lodash";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
+import CardTitle from "../asset/CardTitle/CardTitle";
 
 
 let PromotionCardStyledDiv = styled.div`
@@ -53,24 +53,7 @@ let PromotionCardStyledDiv = styled.div`
           margin: 0;
         }
       }
-
-      .promotion-card-title {
-        font-size: 12px;
-        text-overflow: ellipsis;
-        overflow: hidden;
-        font-weight: initial;
-        display: -webkit-box !important;
-        -webkit-line-clamp: ${props => props.postElementSize === 'list' ? 1 : 1};
-        -webkit-box-orient: vertical;
-        color: var(--post-element-text-color);
-        white-space: normal;
-        margin: 2px;
-        padding: ${props => props.postElementSize === 'list' ? 0 : '5px'} 2px;
-        width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-        max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-
-
-      }
+      
     }
 
     &:hover {
@@ -92,12 +75,7 @@ let PromotionCardStyledDiv = styled.div`
       .promotion-card-link-internal {
         width: 100%;
 
-        .promotion-card-title {
-            // width: ${props => props.postElementSize === 'list' ? `${props.cardWidth - 116.6}px` : `100%;`};
-          width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-          max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-          font-size: 14px;
-        }
+
       }
     }
 
@@ -126,7 +104,7 @@ const PromotionTypeCard = props => {
             <div className='promotion-card-under-media'>
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                     <a rel='next' onClick={props.onClickLoadingHandler} className='promotion-card-link-internal'>
-                        <h3 className='promotion-card-title'>{props.title} </h3>
+                        <CardTitle title={props.title}/>
                         <div className='promotion-card-under-media-info'>
                             <p className='promotion-card-views'><span>{props.views}</span> {props.t(`common:Views`)}</p>
                             <span className='promotion-card-rating video-card-info-data'><span>{props.rating}</span> % </span>

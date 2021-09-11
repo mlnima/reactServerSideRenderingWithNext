@@ -1,10 +1,11 @@
-import React, {useMemo} from 'react';
+import {useMemo} from 'react';
 import Link from "next/link";
 import VideoCardMedia from "./VideoCardMedia";
 import _ from "lodash";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
+import CardTitle from "../asset/CardTitle/CardTitle";
 
 let VideoCard = styled.div`
   width: ${props => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
@@ -38,28 +39,7 @@ let VideoCard = styled.div`
       flex-direction: column;
       justify-content: space-between;
       margin-left: ${props => props.postElementSize === 'list' ? 4 : 0}px;
-
-      .video-card-title {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        display: -webkit-box !important;
-        color: var(--post-element-text-color);
-        -webkit-line-clamp: ${props => props.postElementSize === 'list' ? 1 : 1};
-        -webkit-box-orient: vertical;
-        font-weight: initial;
-        white-space: normal;
-        font-size: 12px;
-        height:${props => props.postElementSize === 'list' ? 'initial' : '12px'} ;
-        margin: 4px 2px;
-        width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-        max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-        padding: ${props => props.postElementSize === 'list' ? 0 : '5px'} 2px;
-
-        &:hover {
-          filter: invert(70%);
-        }
-      }
-
+      
 
       .video-card-under-media-info {
         display: flex;
@@ -116,11 +96,11 @@ let VideoCard = styled.div`
       .video-card-under-media {
         margin: 8px;
 
-        .video-card-title {
-          width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
-          font-size: 14px;
-
-        }
+        // .video-card-title {
+        //   width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
+        //   font-size: 14px;
+        //
+        // }
       }
 
 
@@ -158,7 +138,8 @@ const VideoTypeCard = (props) => {
 
                     <VideoCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                     <span className='video-card-under-media'>
-                    <h3 className='video-card-title'>{props.title}</h3>
+                        <CardTitle title={props.title}/>
+
 
                     <span className='video-card-under-media-info'>
                         {props.post.quality && props.post.postType === ('video') ? <p className='video-card-quality video-card-info-data'>{quality} </p> : null}

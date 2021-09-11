@@ -3,6 +3,7 @@ import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
 import {languagesOptions} from "../../../../_variables/_variables";
 import styled from "styled-components";
+import {withTranslation} from "next-i18next";
 
 const LanguagesSwitcherStyledDiv = styled.div`
   display: flex;
@@ -12,6 +13,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
 
   .language-switcher-widget-text{
     margin: 0 20px 5px 0;
+    font-size: 12px;
     color: var(--navigation-text-color);
   }
   select{
@@ -47,6 +49,7 @@ const LanguagesSwitcher = props => {
              <p className='language-switcher-widget-text'>{props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown}</p>:
                 null
             }
+            <p className='language-switcher-widget-text'>{props.t(`common:Language`)}</p>
             <select value={ contextData.state.activeLanguage || router.locale } aria-label='Center Align'
                 onChange={e => onChangeHandler(e)} >
                 <option key='default' value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'default'}</option>
@@ -55,4 +58,4 @@ const LanguagesSwitcher = props => {
         </LanguagesSwitcherStyledDiv>
     );
 };
-export default LanguagesSwitcher;
+export default withTranslation(['common'])(LanguagesSwitcher);

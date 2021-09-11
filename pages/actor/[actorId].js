@@ -12,6 +12,7 @@ import {useRouter} from "next/router";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 let StyledMain = styled.main`
+  grid-area:main;
   width: 100%;
 
   .posts-page-info {

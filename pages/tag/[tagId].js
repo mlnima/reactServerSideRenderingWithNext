@@ -12,6 +12,7 @@ import {useRouter} from "next/router";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 
 let StyledMain = styled.main`
+  grid-area:main;
   width: 100%;
 
   .posts-page-info {

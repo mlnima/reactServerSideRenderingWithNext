@@ -2,7 +2,7 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-const commentSchema = Schema({
+const commentSchema = new Schema({
     onDocumentId: {type:Schema.Types.ObjectID,ref:'post'},
     author:{type:Schema.Types.ObjectID,ref:'user'},
     reply:[],

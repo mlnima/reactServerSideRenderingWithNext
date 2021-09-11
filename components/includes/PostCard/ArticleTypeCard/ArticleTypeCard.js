@@ -1,14 +1,10 @@
-import React, {useEffect, useState, useContext, useRef, useMemo} from 'react';
 import Link from "next/link";
-// import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import ArticleCardMedia from "./ArticleCardMedia";
-// import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-// import {likeValueCalculator} from "../../../../_variables/_variables";
-// import CardMetaData from "../asset/CardMetaData/CardMetaData";
 import _ from "lodash";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
+import CardTitle from "../asset/CardTitle/CardTitle";
 
 const ArticleCard = styled.div`
   width: ${props => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
@@ -41,29 +37,7 @@ const ArticleCard = styled.div`
       flex-direction: column;
       justify-content: space-between;
       margin-left: ${props => props.postElementSize === 'list' ? 4 : 0}px;
-      //align-items: center;
-
-      .article-card-title {
-        text-overflow: ellipsis;
-        overflow: hidden;
-        display: -webkit-box !important;
-        -webkit-line-clamp: ${props => props.postElementSize === 'list' ? 1 : 1};
-        color: var(--post-element-text-color);
-        -webkit-box-orient: vertical;
-        white-space: normal;
-        font-size: 12px;
-        font-weight: initial;
-        margin: 2px 0;
-        width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-        max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-        padding: ${props => props.postElementSize === 'list' ? 0 : '5px'} 2px;
-
-        &:hover {
-          filter: invert(70%);
-        }
-
-      }
-
+      
       .article-card-under-media-info {
         display: flex;
         justify-content: space-between;
@@ -105,11 +79,11 @@ const ArticleCard = styled.div`
       flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
 
       .article-card-under-media {
-        .article-card-title {
-
-          width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
-          font-size: 14px;
-        }
+        // .article-card-title {
+        //
+        //   width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
+        //   font-size: 14px;
+        // }
       }
     }
   }
@@ -125,14 +99,12 @@ const ArticleTypeCard = props => {
     })
     return (
         <ArticleCard className='article-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-
-
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                 <a rel='next' onClick={props.onClickLoadingHandler} className='article-card-link' title={props.title}>
 
                     <ArticleCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                     <div className='article-card-under-media'>
-                        <h3 className='article-card-title'>{props.title}</h3>
+                        <CardTitle title={props.title}/>
                         <div className='article-card-under-media-info'>
                             {props.post.postType === ('article') ? <span className='article-card-views article-card-info-data'><span>{props.views}</span> {props.t(`common:Views`)}</span> : null}
                             {props.post.postType === ('article') ? <span className='article-card-rating article-card-info-data'><span>{props.rating}</span> % </span> : null}
@@ -141,7 +113,6 @@ const ArticleTypeCard = props => {
                 </a>
             </Link>
             {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
-
         </ArticleCard>
 
     );
