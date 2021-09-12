@@ -43,7 +43,7 @@ const CookiePopup = props => {
         }
     }
 
-    if (props?.identity?.data?.cookiePopupMessage && !state.accepted && state.render) {
+    if (props?.identity?.cookiePopupMessage && !state.accepted && state.render) {
         return (
             <span className='cookie-popup-parent'>
             <style jsx>{`

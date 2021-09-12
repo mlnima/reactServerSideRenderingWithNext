@@ -143,12 +143,6 @@ io.on('connection', socket => {
     socket.on('recentChatRoomMessages', chatRoomName => {
         chatroomSchema.findOne({name:chatRoomName}).then(chatroomData=>{
             io.to(socket.id).emit('recentChatRoomMessages',chatroomData?.messages || [])
-            // if (chatroomData){
-            //
-            // }else {
-            //     io.to(socket.id).emit('recentChatRoomMessages', [])
-            // }
-
         })
 
 
