@@ -115,7 +115,7 @@ const CookiePopup = props => {
                           <FontAwesomeIcon style={{width: '30px', height: '20px'}} icon={faTimes}/>
                       </button>
                     {props?.identity?.cookieReadMoreLink ?
-                        <Link href=""><a className='cookie-popup-content-action-read-more'> Read More</a></Link>
+                        <Link href={props?.identity?.cookieReadMoreLink}><a className='cookie-popup-content-action-read-more'> Read More</a></Link>
                         : null
                     }
 
