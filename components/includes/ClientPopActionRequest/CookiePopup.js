@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -106,15 +106,15 @@ const CookiePopup = props => {
                     <LanguagesSwitcher cookiePage={true}/>
                 </span>
 
-              <h2>{props?.identity?.data?.translations[contextData.state.activeLanguage]?.cookieTitleText || props?.identity?.data?.cookieTitleText}</h2>
+              <h2>{props?.identity?.translations[contextData.state.activeLanguage]?.cookieTitleText || props?.identity?.cookieTitleText}</h2>
                 <p>
-                    {props?.identity?.data?.translations[contextData.state.activeLanguage]?.cookieMessageText || props?.identity?.data?.cookieMessageText}
+                    {props?.identity?.translations[contextData.state.activeLanguage]?.cookieMessageText || props?.identity?.cookieMessageText}
                 </p>
                 <div className='cookie-popup-content-action-buttons'>
                       <button className='cookie-popup-content-action-button-reject' onClick={onRejectHandler}>
                           <FontAwesomeIcon style={{width: '30px', height: '20px'}} icon={faTimes}/>
                       </button>
-                    {props?.identity?.data?.cookieReadMoreLink ?
+                    {props?.identity?.cookieReadMoreLink ?
                         <Link href=""><a className='cookie-popup-content-action-read-more'> Read More</a></Link>
                         : null
                     }
