@@ -5,6 +5,7 @@ import Link from "next/link";
 import {AppContext} from "../../../context/AppContext";
 import LanguagesSwitcher from "../widgets/LanguagesSwitcher/LanguagesSwitcher";
 import {useRouter} from "next/router";
+import {withTranslation} from "next-i18next";
 
 const CookiePopup = props => {
     const contextData = useContext(AppContext);
@@ -62,7 +63,10 @@ const CookiePopup = props => {
                 .cookie-popup-content{
                     background-color: var(--main-text-color);
                     padding: 20px;
-                    //width: clamp(300px , 600px, 80vw);
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
                     width: 280px;
                 }
                 
@@ -71,8 +75,10 @@ const CookiePopup = props => {
                     font-size: .8rem;
                 }
                 .cookie-popup-content-action-buttons{
+                    width: 100%;
                     display: flex;
                     justify-content: space-evenly;
+                    margin: 20px 0;
                 }
                 .cookie-popup-content-action-button-accept{
                     background-color: green;
@@ -112,22 +118,23 @@ const CookiePopup = props => {
                 </p>
                 <div className='cookie-popup-content-action-buttons'>
                       <button className='cookie-popup-content-action-button-reject' onClick={onRejectHandler}>
-                          <FontAwesomeIcon style={{width: '30px', height: '20px'}} icon={faTimes}/>
+                          {props.t(`common:Decline`)}
                       </button>
-                    {props?.identity?.cookieReadMoreLink ?
-                        <Link href={props?.identity?.cookieReadMoreLink}><a className='cookie-popup-content-action-read-more'> Read More</a></Link>
-                        : null
-                    }
+
 
                     <button className='cookie-popup-content-action-button-accept' onClick={onAcceptHandler}>
-                          <FontAwesomeIcon style={{width: '30px', height: '20px'}} icon={faCheck}/>
+                          {props.t(`common:Accept`)}
                     </button>
 
                 </div>
+                {props?.identity?.cookieReadMoreLink ?
+                    <Link href={props?.identity?.cookieReadMoreLink}><a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>Accept and Read More</a></Link>
+                    : null
+                }
             </span>
         </span>
         );
     } else return null
 
 };
-export default CookiePopup;
+export default withTranslation(['common'])(CookiePopup);

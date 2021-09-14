@@ -33,22 +33,27 @@ const LanguagesSwitcher = props => {
             ...contextData.state,
             activeLanguage: e.target.value
         })
-        if (!props.cookiePage){
-            if (e.target.value === 'default'){
-                router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.REACT_APP_DEFAULT_LOCAL})
-            }else {
-                router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:e.target.value})
-            }
+        // if (!props.cookiePage){
+        //     if (e.target.value === 'default'){
+        //         router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.REACT_APP_DEFAULT_LOCAL})
+        //     }else {
+        //         router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:e.target.value})
+        //     }
+        // }
+        if (e.target.value === 'default'){
+            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.REACT_APP_DEFAULT_LOCAL})
+        }else {
+            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:e.target.value})
         }
     }
 
     return (
         <LanguagesSwitcherStyledDiv className='language-switcher-widget'>
 
-            {(props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown)?
-             <p className='language-switcher-widget-text'>{props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown}</p>:
-                null
-            }
+            {/*{(props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown)?*/}
+            {/* <p className='language-switcher-widget-text'>{props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown}</p>:*/}
+            {/*    null*/}
+            {/*}*/}
             <p className='language-switcher-widget-text'>{props.t(`common:Language`)}</p>
             <select value={ contextData.state.activeLanguage || router.locale } aria-label='Center Align'
                 onChange={e => onChangeHandler(e)} >
