@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
+import {withTranslation} from "next-i18next";
 
 const Custom500StyledDiv = styled.div`
   display: flex;
@@ -33,4 +34,4 @@ const Custom500 = () => {
     );
 };
 
-export default Custom500;
+export default withTranslation(['common','customTranslation'])(Custom500);

@@ -119,7 +119,7 @@ export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, [])
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             widgets: firstLoadData?.widgets || [],
             ...firstLoadData?.settings,
             isMobile: firstLoadData?.isMobile ? Boolean(firstLoadData.isMobile) : false,

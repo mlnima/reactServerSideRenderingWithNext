@@ -13,6 +13,10 @@ let GlobalStyles = createGlobalStyle`
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
   }
+  
+  .main{
+    min-height: 100vh;
+  }
 
   a {
     text-decoration: none;

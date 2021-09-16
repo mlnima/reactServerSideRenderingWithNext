@@ -33,7 +33,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             widgets:firstLoadData?.widgets || [],
             pageInfo:pageData.data ? pageData.data.pageData : {},
             query:context.query,

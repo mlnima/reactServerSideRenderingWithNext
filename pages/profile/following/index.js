@@ -67,7 +67,7 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             widgets,
             ...firstLoadData.widgets,
             ...firstLoadData.settings,

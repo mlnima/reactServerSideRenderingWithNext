@@ -310,7 +310,7 @@ export const getServerSideProps = async (context) => {
     const widgets = firstLoadData.widgets
     return {props: {
         widgets,
-            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             ...firstLoadData.settings,
             isMobile: Boolean(firstLoadData.isMobile),
             referer: firstLoadData.referer,

@@ -72,7 +72,7 @@ export const getServerSideProps = async (context) => {
     const postsSource = postsData.data ? postsData.data : [];
 
     return {props: {
-            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             widgets:firstLoadData?.widgets || [],
             query:context.query,
             isMobile: Boolean(firstLoadData.isMobile),

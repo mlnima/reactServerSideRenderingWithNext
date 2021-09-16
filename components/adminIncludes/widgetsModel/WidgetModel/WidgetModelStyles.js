@@ -13,7 +13,10 @@ const WidgetModelStyles = props => {
                     position: initial;
                     top:100px;
                     width: 100%;
+                    
+                     
                     p{
+                       
                         width: 95%;
                         margin: auto;
                         font-size: .8rem;
@@ -21,12 +24,15 @@ const WidgetModelStyles = props => {
                     .widgetInfo{
                         margin: auto;
                         width: 95%;
+                        
                     }
                     .customStylesTextarea{
                         width: 95%;
                         min-height: 250px;
                         margin: auto;
+                          
                     }
+    
                     .widgetSection{
                         margin: auto;
                         width: 95%;
@@ -72,6 +78,7 @@ const WidgetModelStyles = props => {
                             padding: 5px 5%;
                         }
                     }
+          
                 }
             
             `}</style>

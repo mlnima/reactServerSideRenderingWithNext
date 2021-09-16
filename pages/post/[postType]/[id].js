@@ -61,13 +61,3 @@ export const getServerSideProps = async (context) => {
 
 export default postPage;
 
-//stylesData={design?.data?.postPageStyle || contextData.siteDesign.postPageStyle || ''}
-
-
-
-// else if(post.postType === 'promotion'){
-//
-//     return (
-//         <PostPagePromotionType post={post} />
-//     )
-// }

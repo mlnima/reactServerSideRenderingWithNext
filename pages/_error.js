@@ -1,6 +1,7 @@
 import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
+import {withTranslation} from "next-i18next";
 
 const ErrorStyledDiv = styled.div`
   display: flex;
@@ -42,6 +43,6 @@ Error.getInitialProps = ({ res, err }) => {
     return { statusCode }
 }
 
-export default Error
+export default withTranslation(['common','customTranslation'])(Error)
 
 

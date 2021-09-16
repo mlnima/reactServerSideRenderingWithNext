@@ -180,7 +180,7 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
             // design:  process.env.REACT_APP_SETTING_DESIGN ? JSON.parse(process.env.REACT_APP_SETTING_DESIGN) : {}
         }
 
-        let isMobile = (req ? req.headers['user-agent'] : navigator.userAgent).match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
+        let isMobile = (req.headers['user-agent'] || navigator?.userAgent || '').match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i);
 
         return {
             // domainName,

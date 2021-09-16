@@ -35,4 +35,4 @@ const Custom404 = props => {
     );
 };
 
-export default withTranslation(['common'])(Custom404);
+export default withTranslation(['common','customTranslation'])(Custom404);
