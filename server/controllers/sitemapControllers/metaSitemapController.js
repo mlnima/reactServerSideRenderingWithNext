@@ -4,10 +4,10 @@ const metaSitemapController = {}
 const template = (metaData,type) => {
     let metaXmlData = ''
     metaData.map(meta => {
-        const categoryUrl = `${process.env.REACT_APP_PRODUCTION_URL}/${type}/${meta._id}`
+        const metaUrl = `${process.env.REACT_APP_PRODUCTION_URL}/${type}/${meta._id}`
         const date = (meta.updatedAt || meta.createdAt || meta._id.getTimestamp() || Date.now()).toISOString()
         metaXmlData +=`<url> 
-                         <loc>${categoryUrl}</loc>
+                         <loc>${metaUrl}</loc>
                          <lastmod>${date}</lastmod>
                          <changefreq>weekly</changefreq>
                          <priority>1</priority>
@@ -25,7 +25,7 @@ const template = (metaData,type) => {
 metaSitemapController.categories = async (req, res) => {
     try {
         const categories = await metaSchema.find({status: 'published',type:'categories'}).exec() || []
-        if ( categories.length === 0 ) res.status(404).json({message:'not found'})
+        //if ( categories.length === 0 ) res.status(404).json({message:'not found'})
         res.set('Content-Type', 'text/xml');
         res.send(template(categories,'category'))
     } catch (err) {

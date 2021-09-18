@@ -20,26 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/server/_variables/ApiError.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/metaSitemapController.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/middlewares/apiErrorHandler.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/pageSitemapController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/[username].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/de/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/de/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/fa/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/fa/common.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/subSiteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/subSiteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/metaSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/metaSitemapController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -817,7 +803,7 @@
       <workItem from="1631777557813" duration="3269000" />
       <workItem from="1631802301228" duration="10938000" />
       <workItem from="1631871363193" duration="7963000" />
-      <workItem from="1631947573211" duration="4282000" />
+      <workItem from="1631947573211" duration="5723000" />
     </task>
     <servers />
   </component>

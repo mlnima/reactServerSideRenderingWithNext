@@ -2,7 +2,26 @@ import {useState} from 'react'
 //import Analytics from '../../components/adminIncludes/Analytics/Analytics'
 import Link from "next/link";
 import _ from "lodash";
-
+import styled from "styled-components";
+const AdminHomePageStyledDiv = styled.div`
+  h1{
+    text-align: center;
+  }
+  .quick-access{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+   .quick-access-link{
+     width: 150px;
+     text-align: center;
+     padding: 30px 10px;
+     margin: 20px;
+     color: white;
+     background-color: black;
+   }
+  }
+`
 const AdminHomePage = () => {
     const [state, setState] = useState({
         quickAccessLinks: [
@@ -49,14 +68,6 @@ const AdminHomePage = () => {
 
             <Link key={_.uniqueId('id_')} href={linkData.pathURL}>
                 <a className='quick-access-link'>
-                <style jsx>{`
-                .quick-access-link{
-                padding: 5px 10px;
-                margin: 0 5px;
-                color: white;
-                background-color: black;
-                }
-                `}</style>
                     {linkData.name}
                 </a>
             </Link>
@@ -64,25 +75,18 @@ const AdminHomePage = () => {
         // return null
     })
     return (
-        <div>
-            <style jsx>{`
-                h1{
-                    text-align: center;
-                }
-                .quick-access{
-                
-                }
+        <AdminHomePageStyledDiv>
 
-            `}</style>
             <h1>Dashboard</h1>
+            <h2>Quick Access</h2>
             <div className='quick-access'>
-                <h2>Quick Access</h2>
+
                 {renderQuickAccessLinks}
             </div>
 
 
             {/*<Analytics/>*/}
-        </div>
+        </AdminHomePageStyledDiv>
 
     );
 };

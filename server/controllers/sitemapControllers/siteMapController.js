@@ -21,6 +21,10 @@ siteMapController.siteMap = (req, res) => {
     const toDay = new Date();
     const metaSiteMaps = `
                 <sitemap>
+                    <loc>${process.env.REACT_APP_PRODUCTION_URL}/sitemaps/pages.xml</loc>
+                    <lastmod>${toDay.toISOString()}</lastmod>
+                </sitemap>
+                <sitemap>
                     <loc>${process.env.REACT_APP_PRODUCTION_URL}/sitemaps/categories.xml</loc>
                     <lastmod>${toDay.toISOString()}</lastmod>
                 </sitemap>

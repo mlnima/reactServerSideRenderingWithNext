@@ -27,6 +27,7 @@ const siteMapController = require('./server/controllers/sitemapControllers/siteM
 const siteMapsController = require('./server/controllers/sitemapControllers/siteMapsController');
 const subSiteMapsController = require('./server/controllers/sitemapControllers/subSiteMapsController');
 const metaSitemapController = require('./server/controllers/sitemapControllers/metaSitemapController');
+const pageSitemapController = require('./server/controllers/sitemapControllers/pageSitemapController');
 // const _setSettingToEnvironmentVariables = require('./server/_variables/_setSettingToEnvironmentVariables')
 // _setSettingToEnvironmentVariables()
 
@@ -56,10 +57,11 @@ app.prepare().then(() => {
     //xml siteMap routes
     server.get('/sitemap.xsl', (req, res) => {return res.status(200).sendFile('sitemap.xsl', staticServeOptions)});
     server.get('/sitemap.xml', (req, res) => {siteMapController.siteMap(req , res)});
+    server.get('/sitemap', (req, res) => {siteMapController.siteMap(req , res)});
     server.get('/sitemaps/actors.xml', (req, res) => {metaSitemapController.actors(req , res)});
     server.get('/sitemaps/categories.xml', (req, res) => {metaSitemapController.categories(req , res)});
     server.get('/sitemaps/tags.xml', (req, res) => {metaSitemapController.tags(req , res)});
-    server.get('/sitemap', (req, res) => {siteMapController.siteMap(req , res)});
+    server.get('/sitemaps/pages.xml', (req, res) => {pageSitemapController(req , res)});
     server.get('/sitemaps/:month', (req, res) => {siteMapsController.siteMapMonths(req , res)});
     server.get('/sitemap/:month/:pageNo', (req, res) => {subSiteMapsController.subSiteMapsController(req , res)});
 
