@@ -36,7 +36,7 @@ metaSitemapController.categories = async (req, res) => {
 metaSitemapController.tags = async (req, res) => {
     try {
         const tags = await metaSchema.find({status: 'published',type:'tags'}).exec() || []
-        if ( tags.length === 0 ) res.status(404).json({message:'not found'})
+        // if ( tags.length === 0 ) res.status(404).json({message:'not found'})
         res.set('Content-Type', 'text/xml');
         res.send(template(tags,'tag'))
     } catch (err) {
@@ -47,7 +47,7 @@ metaSitemapController.tags = async (req, res) => {
 metaSitemapController.actors = async (req, res) => {
     try {
         const actors = await metaSchema.find({status: 'published',type:'actors'}).exec() || []
-        if ( actors.length === 0 ) res.status(404).json({message:'not found'})
+        // if ( actors.length === 0 ) res.status(404).json({message:'not found'})
         res.set('Content-Type', 'text/xml');
         res.send(template(actors,'actor'))
     } catch (err) {

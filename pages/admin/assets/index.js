@@ -58,7 +58,7 @@ const assets = props => {
 
     const getAndSetAssetData = async () => {
         const assetType = router.query.assetsType
-        const gettingPostsQueries = _getPostsQueryGenerator(router?.query,router?.query.size,router?.query.metaId,false)
+        const gettingPostsQueries = _getPostsQueryGenerator(router?.query,router?.query.metaId,false)
         const ajaxRequestData = assetType === 'posts' ? await getPosts(gettingPostsQueries) :
             assetType === 'users' ? await getUsersListAsAdmin(dataConfig, localStorage.wt) :
                 assetType === 'forms' ? await getFormsData(dataConfig, localStorage.wt) :
