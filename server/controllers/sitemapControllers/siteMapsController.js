@@ -1,5 +1,5 @@
 let siteMapsController = {}
-const postSchema = require('../models/postSchema');
+const postSchema = require('../../models/postSchema');
 const moment = require('moment');
 siteMapsController.siteMapMonths = (req, res) => {
 

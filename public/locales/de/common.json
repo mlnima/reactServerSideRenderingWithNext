@@ -73,5 +73,12 @@
   "Your account has been successfully created you can login now": "Ihr Konto wurde erfolgreich erstellt Sie können sich jetzt anmelden",
   "Passwords are not matched": "Passwörter stimmen nicht überein",
   "Login successful": "Anmeldung erfolgreich",
-  "Use 8 or more characters with a mix of letters, numbers & symbols": "Verwenden Sie 8 oder mehr Zeichen mit einer Mischung aus Buchstaben, Zahlen und Symbolen"
+  "Use 8 or more characters with a mix of letters, numbers & symbols": "Verwenden Sie 8 oder mehr Zeichen mit einer Mischung aus Buchstaben, Zahlen und Symbolen",
+
+  "View Profile": "Profil anzeigen",
+  "Send Message": "Nachricht senden",
+  "Followers": "Anhänger",
+  "Following": "Folge",
+  "About Us": "Über uns",
+  "Contact Us": "Kontakt"
 }

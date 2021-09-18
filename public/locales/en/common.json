@@ -73,6 +73,14 @@
   "Your account has been successfully created you can login now": "Your account has been successfully created you can login now",
   "Passwords are not matched": "Passwords are not matched",
   "Login successful": "Login successful",
-  "Use 8 or more characters with a mix of letters, numbers & symbols": "Use 8 or more characters with a mix of letters, numbers & symbols"
+  "Use 8 or more characters with a mix of letters, numbers & symbols": "Use 8 or more characters with a mix of letters, numbers & symbols",
+
+  "View Profile": "View Profile",
+  "Send Message": "Send Message",
+  "Followers": "Followers",
+  "Following": "Following",
+  "About Us": "About Us",
+  "Contact Us": "Contact Us"
+
 
 }

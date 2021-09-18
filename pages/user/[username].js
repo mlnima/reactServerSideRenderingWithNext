@@ -10,6 +10,49 @@ import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import styled from "styled-components";
+const UserPageStyledDiv = styled.div`
+  color:var(--main-text-color);
+  max-width: 940px;
+  margin: auto;
+  .profile-header{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 10px 0;
+    padding: 10px 0;
+    border-bottom:.5px solid var(--main-text-color) ;
+    .profile-header-info-actions{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-direction: column;
+    }
+  }
+  .profile-posts{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 20px 0;
+    .profile-no-posts{
+      border: .5px solid var(--main-text-color);
+      border-radius: 50%;
+      width: 150px;
+      height:150px ;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      svg{
+        width:75px;
+        height:75px;
+      }
+    }
+    .profile-no-posts-title{
+      color: var(--main-text-color);
+    }
+  }
+`
 
 const user = props => {
     const contextData = useContext(AppContext);
@@ -49,54 +92,9 @@ const user = props => {
 
 
     return (
-        <div className='user-page main'>
+        <UserPageStyledDiv className='user-page main'>
 
-            <style jsx>{`
-                .user-page{
-                    color:var(--main-text-color);
-                }
-                .main{
-                    max-width: 940px;
-                    margin: auto;
-                }
-                .profile-header{
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-                    margin: 10px 0;
-                    padding: 10px 0;
-                    border-bottom:.5px solid var(--main-text-color) ;
-                        .profile-header-info-actions{
-                         display: flex;
-                         justify-content: center;
-                         align-items: center;
-                         flex-direction: column;
-                        }
-                }
-                .profile-posts{
-                   display: flex;
-                   justify-content: center;
-                   align-items: center;
-                   flex-direction: column;
-                   margin: 20px 0;
-                    .profile-no-posts{
-                       border: .5px solid var(--main-text-color);
-                       border-radius: 50%;
-                       width: 150px;
-                       height:150px ;
-                       display: flex;
-                       justify-content: center;
-                       align-items: center;
-                       svg{
-                           width:300px;
-                           height:300px;
-                       }
-                    }
-                    .profile-no-posts-title{
-                     color: var(--main-text-color);
-                    }
-                }
-            `}</style>
+
 
             <div className='profile-header'>
                 <UserPageProfileImage
@@ -129,7 +127,7 @@ const user = props => {
 
 
 
-        </div>
+        </UserPageStyledDiv>
     );
 };
 
@@ -151,6 +149,9 @@ export const getServerSideProps = async (context) => {
 
 
 export default user;
+
+
+
 
 // {
 //     state.messagePop ?

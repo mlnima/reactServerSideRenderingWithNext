@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../../../context/AppContext'
-import withRouter from 'next/dist/client/with-router'
 import Link from 'next/link'
+import {withTranslation} from "next-i18next";
 
 const ProfileNavigation = props => {
     const contextData = useContext(AppContext);
@@ -68,17 +68,18 @@ const ProfileNavigation = props => {
                }
             }
         `}</style>
-            {/*<Link href='/profile' ><a style={ navigationData.style } className='profile-navigation-item'>Profile</a></Link>*/}
-            {/*<Link href='/profile/posts' ><a style={ navigationData.style } className='profile-navigation-item'>Posts</a></Link>*/}
-            {/*<Link href='/profile/friends' ><a style={ navigationData.style } className='profile-navigation-item'>Friends </a></Link>*/}
-            {/*<Link href='/profile/friendRequests' ><a style={ navigationData.style } className='profile-navigation-item'>Pending Requests</a></Link>*/}
+
             <div className='profile-navigation-items'>
                 <span>{contextData.userData.followersCount || 0}</span>
-                <Link href='/profile/followers' ><a style={ navigationData.style } className='profile-navigation-item'>Followers </a></Link>
+                <Link href='/profile/followers' >
+                    <a style={ navigationData.style } className='profile-navigation-item'>
+                    {props.t([`common:Followers`])}
+                    </a>
+                </Link>
             </div>
             <div className='profile-navigation-items'>
                 <span>{contextData.userData.followingCount || 0}</span>
-                <Link href='/profile/following' ><a style={ navigationData.style } className='profile-navigation-item'>Following </a></Link>
+                <Link href='/profile/following' ><a style={ navigationData.style } className='profile-navigation-item'>{props.t([`common:Following`])} </a></Link>
             </div>
 
 
@@ -87,5 +88,5 @@ const ProfileNavigation = props => {
         </div>
     );
 };
-export default withRouter(ProfileNavigation);
+export default withTranslation(['common'])(ProfileNavigation);
 

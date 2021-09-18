@@ -20,54 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/server/_variables/ApiError.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/metaSitemapController.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/middlewares/apiErrorHandler.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/GlobalStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/500.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/_error.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_error.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/checkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/[conversation].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/[conversation].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/followers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/followers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/following/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/following/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/friendRequests/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/friendRequests/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/friends/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/friends/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/posts/newpost/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/posts/newpost/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/user/[username].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/ar/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/ar/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/cs/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/cs/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/da/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/da/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/el/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/el/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/es/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/es/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/fi/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/fi/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/fr/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/fr/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/hi/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/hi/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/hu/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/hu/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/it/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/it/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/ja/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/ja/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/ko/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/ko/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/nl/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/nl/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/no/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/no/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/pl/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/pl/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/pt/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/pt/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/ru/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/ru/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/sk/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/sk/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/sl/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/sl/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/sv/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/sv/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/tr/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/tr/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/zh/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/zh/common.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/de/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/de/common.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en/common.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/fa/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/fa/common.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/subSiteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/subSiteMapsController.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -133,11 +105,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\sl" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\sitemapControllers" />
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\models" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\clientAjaxVariables" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents\TableControls" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\PostPage\components" />
     </key>
   </component>
   <component name="RunManager" selected="npm.devAndSocket">
@@ -842,7 +814,10 @@
       <workItem from="1631532711080" duration="3769000" />
       <workItem from="1631606104990" duration="7745000" />
       <workItem from="1631711282715" duration="8245000" />
-      <workItem from="1631777557813" duration="1999000" />
+      <workItem from="1631777557813" duration="3269000" />
+      <workItem from="1631802301228" duration="10938000" />
+      <workItem from="1631871363193" duration="7963000" />
+      <workItem from="1631947573211" duration="4282000" />
     </task>
     <servers />
   </component>

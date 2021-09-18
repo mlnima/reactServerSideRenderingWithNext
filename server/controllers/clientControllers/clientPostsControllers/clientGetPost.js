@@ -13,13 +13,12 @@ module.exports = async (req, res) => {
                 res.json(postMessageToSend);
             }).catch(err => {
                 res.status(404).json({message:'not found'})
-                // res.end()
             })
         }else {
             res.status(404).json({message:'not found'})
         }
     }catch (err){
-        console.log(err)
-        res.status(404).json({message:'not found'})
+        console.error(err)
+        res.status(500).json({message:'Something went wrong please try again later'})
     }
 };

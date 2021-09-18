@@ -2,8 +2,34 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {followUser, unFollowUser, sendFriendRequest, acceptFriendRequest, unfriendRequest, cancelFriendRequest, conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
+import {withTranslation} from "next-i18next";
+import styled from "styled-components";
+const UserPageActionButtonsStyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  flex-wrap:wrap;
+  align-items: center;
+  .user-page-action-button{
+    background-color: transparent;
+    color: var(--navigation-text-color);
+    border: none;
+    padding: 5px 10px;
+    margin: 5px;
+  }
+  .user-page-action-button:hover{
+    transition: .5s;
+    transform: scale(1.1);
+  }
+  .user-page-action-button:active{
+    color: var(--navigation-background-color);
+    background-color: var(--navigation-text-color);
+  }
+  @media only screen and (min-width: 768px) {
+      justify-content: flex-start;
+  }
+`
 
-const UserPageActionButtons = ({_id, setParentState, parentState,username}) => {
+const UserPageActionButtons = ({t,_id, setParentState, parentState,username}) => {
     const router = useRouter()
     const contextData = useContext(AppContext);
 
@@ -58,46 +84,18 @@ const UserPageActionButtons = ({_id, setParentState, parentState,username}) => {
     return (
 
         <div className='user-page-action-buttons'>
-            <style jsx>{`
-            .user-page-action-buttons{
-                display: flex;
-                justify-content: center;
-                flex-wrap:wrap;
-                align-items: center;
-            }
-            .user-page-action-button{
-                background-color: transparent;
-                color: var(--navigation-text-color);
-                border: none;
-                padding: 5px 10px;
-                margin: 5px;  
-            }
-                .user-page-action-button:hover{
-                transition: .5s;
-                transform: scale(1.1);
-            }
-            .user-page-action-button:active{
-                color: var(--navigation-background-color);
-                background-color: var(--navigation-text-color);
-            }
-            @media only screen and (min-width: 768px) {
-                .user-page-action-buttons{
-                    justify-content: flex-start;
-                }
-            }
-        `}
-            </style>
+
 
             <button className='user-page-action-button' onClick={onConversationHandler}>Message</button>
             {
                     contextData?.userData?.following?.includes(_id) ?
-                    <button className='user-page-action-button' onClick={onUnFollowHandler}>Unfollow</button> :
-                    <button className='user-page-action-button' onClick={onFollowHandler}>Follow</button>
+                    <button className='user-page-action-button' onClick={onUnFollowHandler}>{t([`common:Unfollow`])}</button> :
+                    <button className='user-page-action-button' onClick={onFollowHandler}>{t([`common:Follow`])}</button>
             }
         </div>
     );
 };
-export default UserPageActionButtons;
+export default withTranslation(['common'])(UserPageActionButtons);
 
 
 // {

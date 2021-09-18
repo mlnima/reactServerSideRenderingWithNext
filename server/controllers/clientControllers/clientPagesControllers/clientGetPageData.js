@@ -7,7 +7,6 @@ module.exports = (req, res) =>{
     if (pageId){
         pageSchema.findById(pageId).exec().then(pageData=>{
             res.json({pageData,error:false})
-            res.end()
         }).catch(err=>{
             console.log(err)
             res.end()
@@ -15,7 +14,6 @@ module.exports = (req, res) =>{
     }else if (pageName){
         pageSchema.findOne({pageName}).exec().then(pageData=>{
             res.json({pageData,error:false})
-            res.end()
         }).catch(err=>{
             console.log(err)
             res.end()

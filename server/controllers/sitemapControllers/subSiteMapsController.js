@@ -1,5 +1,5 @@
 let subSiteMapsController = {};
-const postSchema = require('../models/postSchema');
+const postSchema = require('../../models/postSchema');
 const moment = require('moment');
 
 subSiteMapsController.subSiteMapsController = (req, res) => {

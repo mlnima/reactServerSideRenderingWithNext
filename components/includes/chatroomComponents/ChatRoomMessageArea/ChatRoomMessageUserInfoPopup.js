@@ -4,8 +4,9 @@ import Link from "next/link";
 import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 import {conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {useRouter} from "next/router";
+import {withTranslation} from "next-i18next";
 
-const ChatRoomMessageUserInfoPopup = ({userInfo, onUserInfoShowHandler}) => {
+const ChatRoomMessageUserInfoPopup = ({t,userInfo, onUserInfoShowHandler}) => {
     const router = useRouter()
 
     const onConversationHandler = () => {
@@ -95,7 +96,7 @@ const ChatRoomMessageUserInfoPopup = ({userInfo, onUserInfoShowHandler}) => {
                   }
 
                   .chatroom-message-user-info-popup-user-data-links > a {
-                    border: var(--main-text-color) solid .5px;
+                    //border: var(--main-text-color) solid .5px;
                     padding: 5px 10px;
                     color: var(--main-text-color);
                     font-size: 1rem;
@@ -114,11 +115,12 @@ const ChatRoomMessageUserInfoPopup = ({userInfo, onUserInfoShowHandler}) => {
                             <div className='chatroom-message-user-info-popup-user-data-links'>
                                 <Link href={`/user/${userInfo.username}`}>
                                     <a>
-                                        View Profile
+                                        {t([`common:View Profile`])}
+
                                     </a>
                                 </Link>
                                 <button onClick={onConversationHandler}>
-                                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faEnvelope}/>
+                                    {t([`common:Send Message`])}
                                 </button>
                             </div>
                         </div>
@@ -132,4 +134,4 @@ const ChatRoomMessageUserInfoPopup = ({userInfo, onUserInfoShowHandler}) => {
     } else return null
 
 };
-export default ChatRoomMessageUserInfoPopup;
+export default withTranslation(['common'])(ChatRoomMessageUserInfoPopup);
