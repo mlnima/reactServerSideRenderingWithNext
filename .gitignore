@@ -3,6 +3,8 @@
 /.next/*
 .next
 /static/uploads
+/trash
+/trash/*
 /public/uploads
 /public/locales/*/customTranslation.json
 /static/uploads/
