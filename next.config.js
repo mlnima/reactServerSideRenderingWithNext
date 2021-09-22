@@ -7,7 +7,7 @@ const nextEnv = require('next-env');
 const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
 const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
 const withPWA = require('next-pwa')
-const isStatic = process.env.NEXT_PUBLIC_STATIC_PAGES=== 'true'
+const isStatic = process.env.NEXT_PUBLIC_STATIC_PAGES === 'true'
 
 const svgLoader = {
     webpack(config) {
@@ -32,7 +32,7 @@ const staticAppRewrites = isStatic ?[{source: `/`, destination: '/staticIndex'}]
 
 const rewrites = () => {
     return {
-        beforeFiles: staticAppRewrites,
+        beforeFiles: [],
         afterFiles: [
             {source: `/admin`, destination: '/admin', locale: false},
             {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
