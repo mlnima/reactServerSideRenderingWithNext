@@ -34,4 +34,4 @@ export const getStaticProps = async (context) => {
         }}
 }
 
-export default Home;
+// export default Home;
