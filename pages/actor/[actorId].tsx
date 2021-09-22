@@ -1,3 +1,4 @@
+import React from 'react';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
@@ -8,26 +9,27 @@ import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {useRouter} from "next/router";
-
+import {GetServerSideProps} from "next";
+import {ClientPagesTypes,_FirstLoadData} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {GetServerSidePropsContext} from "../../_variables/TypeScriptTypes/GlobalTypes";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
-let StyledMain = styled.main`
-  grid-area:main;
+const StyledMain = styled.main`
+  grid-area: main;
   width: 100%;
 
   .posts-page-info {
     margin: 5px 0;
-
     h1 {
       margin: 0;
       padding: 0 10px;
     }
   }
 
-  ${props => props.stylesData}
+  ${(props:{stylesData:string}) => props.stylesData || ''}
 `
 
-const actorPage = props => {
+const actorPage = (props: ClientPagesTypes) => {
     const router = useRouter()
 
     return (
@@ -37,14 +39,13 @@ const actorPage = props => {
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 widgets={props.widgets.filter(w => w.data.position === 'actorPageTop')}
-                position={'actorPageTop'}
+                position='actorPageTop'
                 referer={props.referer}
                 currentPageSidebar={props.identity?.actorPageSidebar}
                 postElementSize={props.design?.postElementSize}
                 postElementStyle={props.design?.postElementStyle}
                 postElementImageLoader={props.design?.postElementImageLoader}
-                postElementImageLoaderType={props.design?.postElementImageLoaderType}
-            />
+                postElementImageLoaderType={props.design?.postElementImageLoaderType} homePageSidebar={false} _id={''}            />
             <PostsPage {...props}/>
             <WidgetsRenderer
                 isMobile={props.isMobile}
@@ -55,37 +56,33 @@ const actorPage = props => {
                 postElementSize={props.design?.postElementSize}
                 postElementStyle={props.design?.postElementStyle}
                 postElementImageLoader={props.design?.postElementImageLoader}
-                postElementImageLoaderType={props.design?.postElementImageLoaderType}
-            />
+                postElementImageLoaderType={props.design?.postElementImageLoaderType} homePageSidebar={false} _id={''}            />
         </StyledMain>
     )
 };
 
-export const getServerSideProps = async (context) => {
+// @ts-ignore
+export const getServerSideProps: GetServerSideProps = async (context:GetServerSidePropsContext) => {
 
-    if (!context.query.actorId)return { notFound: true};
-    if (!context.query?.actorId?.match(/^[0-9a-fA-F]{24}$/))return { notFound: true};
+    if (!context.query.actorId) return {notFound: true};
+    if (!context.query?.actorId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
-    const firstLoadData = await getFirstLoadData(context.req, ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar',], 'postsPage')
-
+    const firstLoadData  = await getFirstLoadData(context.req, ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar',])
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true)
-
-    const actorData = context.query.actorId ? await getSingleMeta(context.query.actorId, true) : {}
-
+    const actorData : any = context.query.actorId ? await getSingleMeta(context.query.actorId, true) : {}
     const actor = actorData.data ? actorData.data.meta : {}
-
     const postsData = await getPosts(gettingPostsQueries)
-
     const postsSource = postsData.data ? postsData.data : []
+
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
             widgets: firstLoadData?.widgets || [],
             query: context.query,
-            isMobile: Boolean(firstLoadData.isMobile),
+            isMobile: firstLoadData?.isMobile ? Boolean(firstLoadData.isMobile) :false,
             postsSource,
             actor,
-            referer: firstLoadData.referer
+            referer: firstLoadData?.referer ? firstLoadData?.referer :false
         }
     }
 }

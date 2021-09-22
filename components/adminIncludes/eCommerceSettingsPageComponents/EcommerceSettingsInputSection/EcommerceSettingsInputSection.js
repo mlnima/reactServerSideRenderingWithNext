@@ -90,7 +90,7 @@ const EcommerceSettingsInputSection = props => {
             <p className='e-commerce-settings-input-section-description e-commerce-settings-input-section-sub'>{props.description}</p>
             {props.translation ?
                 <select className='e-commerce-settings-input-section-select e-commerce-settings-input-section-sub' name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
-                    <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? 'default'}</option>
+                    <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
                     {languagesOptions}
                 </select>
                 : null

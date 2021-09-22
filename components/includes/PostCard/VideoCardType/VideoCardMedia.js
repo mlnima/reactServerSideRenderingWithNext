@@ -43,7 +43,7 @@ const VideoCardMedia = props => {
     const [isReported, setIsReported] = useState(false)
 
     const [imageUrl, setImageUrl] = useState(() => {
-        return props?.post?.mainThumbnail ? props.post.mainThumbnail?.includes('http') ? props.post.mainThumbnail : process.env.REACT_APP_PRODUCTION_URL + props.post.mainThumbnail : ''
+        return props?.post?.mainThumbnail ? props.post.mainThumbnail?.includes('http') ? props.post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.post.mainThumbnail : ''
     })
 
     const hoverHandler = () => {

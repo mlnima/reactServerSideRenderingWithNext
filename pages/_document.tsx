@@ -1,9 +1,9 @@
 import React from 'react';
-import Document, {Html, Head, Main, NextScript} from 'next/document'
+import Document, {Html, Head, Main, NextScript,DocumentInitialProps, DocumentContext} from 'next/document'
 import {ServerStyleSheet} from 'styled-components';
 
 class MyDocument extends Document {
-    static async getInitialProps(ctx) {
+    static async getInitialProps(ctx:DocumentContext) :Promise<DocumentInitialProps> {
         const sheet = new ServerStyleSheet();
         const originalRenderPage = ctx.renderPage;
 
@@ -24,15 +24,9 @@ class MyDocument extends Document {
                     </>
                 ),
             };
-
         } finally {
             sheet.seal();
         }
-
-
-        // const initialProps = await Document.getInitialProps(ctx)
-        // const styles = flush();
-        // return { ...initialProps ,styles}
     }
 
     render() {

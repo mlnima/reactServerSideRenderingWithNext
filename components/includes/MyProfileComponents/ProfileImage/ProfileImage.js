@@ -90,6 +90,7 @@ const ProfileImage = props => {
                  className='profile-image-img'
                  src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg' } />
             <input ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
+
         </div>
     );
 

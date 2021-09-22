@@ -3,11 +3,11 @@ import _metaPageQueryGenerator from "./clientVariables/_metaPageQueryGenerator";
 import _postPageQueryGenerator from "./clientVariables/_postPageQueryGenerator";
 
 export const getPosts = async (queriesData) => {
-    return await axios.get(process.env.REACT_APP_PRODUCTION_URL +`/api/v1/posts/clientGetPosts${queriesData}`)
+    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL +`/api/v1/posts/clientGetPosts${queriesData}`)
 };
 
 export const getPost = async (data, cache) => {
-    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/clientGetPost${ _postPageQueryGenerator(data)}` )
+    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/clientGetPost${ _postPageQueryGenerator(data)}` )
 };
 
 export const checkRemovedContent = async (data) => {
@@ -15,7 +15,7 @@ export const checkRemovedContent = async (data) => {
         ...data,
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + `/api/v1/posts/checkRemovedContent` , body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL  + `/api/v1/posts/checkRemovedContent` , body)
 };
 
 export const updatePost = async (data, domainName) => {
@@ -23,7 +23,7 @@ export const updatePost = async (data, domainName) => {
         postData: data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/admin/posts/updatePost`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL  + `/api/admin/posts/updatePost`, body)
 };
 
 export const savePost = async (data, domainName) => {
@@ -31,7 +31,7 @@ export const savePost = async (data, domainName) => {
         postData: data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/admin/posts/createNewPost`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL  + `/api/admin/posts/createNewPost`, body)
 };
 
 export const userCreateNewPost = async (data, domainName) => {
@@ -39,16 +39,16 @@ export const userCreateNewPost = async (data, domainName) => {
         postData: data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/v1/posts/userCreateNewPost`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL  + `/api/v1/posts/userCreateNewPost`, body)
 };
 
 export const getMultipleMeta = async (data,metaType,cache) => {
     const queries = _metaPageQueryGenerator(data,metaType,cache)
-    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getMultipleMeta${queries}`)
+    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL+ `/api/v1/posts/getMultipleMeta${queries}`)
 };
 
 export const getSingleMeta = async (id,cache) => {
-    return await axios.get(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ encodeURIComponent(id) }&cache=${cache}`)
+    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ encodeURIComponent(id) }&cache=${cache}`)
 };
 
 
@@ -57,7 +57,7 @@ export const updateMeta = async (data) => {
         data,
         token: localStorage.wt
     };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/posts/updateMeta`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/updateMeta`, body)
 };
 
 
@@ -69,7 +69,7 @@ export const deleteMeta = async (id) => {
         _id:id,
         token: localStorage.wt
     };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/posts/deleteMeta`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteMeta`, body)
 };
 
 
@@ -81,7 +81,7 @@ export const bulkAction = async (type,status,ids) =>{
         ids,
         token: localStorage.wt
     };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/admin/posts/bulkAction`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/bulkAction`, body)
 }
 
 
@@ -92,7 +92,7 @@ export const newComment = async (data) => {
     const body = {
         ...data,
     };
-    return await axios.post(window.location.origin + `/api/v1/posts/newComment`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/newComment`, body)
 };
 
 export const adminGetComments = async (data, domainName, cache) => {
@@ -101,7 +101,7 @@ export const adminGetComments = async (data, domainName, cache) => {
         cache,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/admin/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
 };
 
 export const getComments = async (data,  cache) => {
@@ -109,7 +109,7 @@ export const getComments = async (data,  cache) => {
         ...data,
         cache,
     };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
 };
 
 
@@ -117,7 +117,7 @@ export const updateComment = async (data) => {
     const body = {
         ...data,
     };
-    return await axios.post(window.location.origin + `/api/admin/posts/updateComment`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/updateComment`, body)
 };
 
 export const deleteComments = async (data, domainName) => {
@@ -125,7 +125,7 @@ export const deleteComments = async (data, domainName) => {
         commentsIds: data,
         token: localStorage.wt
     };
-    return await axios.post(domainName + `/api/admin/posts/deleteComments`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteComments`, body)
 };
 
 export const likeDislikeView = async (id, type) => {
@@ -133,14 +133,14 @@ export const likeDislikeView = async (id, type) => {
         id,
         type
     };
-    return await axios.post(window.location.origin + '/api/v1/posts/likeDislikeView', body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/posts/likeDislikeView', body)
 };
 
 export const exportPosts = async () => {
     const body = {
         token: localStorage.wt
     };
-    return await axios.post(window.location.origin + '/api/admin/posts/exportPosts', body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/posts/exportPosts', body)
 };
 
 

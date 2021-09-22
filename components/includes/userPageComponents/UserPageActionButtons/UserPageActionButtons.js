@@ -9,27 +9,31 @@ const UserPageActionButtonsStyledDiv = styled.div`
   justify-content: center;
   flex-wrap:wrap;
   align-items: center;
+
   .user-page-action-button{
     background-color: transparent;
     color: var(--navigation-text-color);
     border: none;
     padding: 5px 10px;
     margin: 5px;
+    cursor: pointer;
+    &:hover{
+      transition: .5s;
+      transform: scale(1.1);
+    }
+    &:active{
+      color: var(--navigation-background-color);
+      background-color: var(--navigation-text-color);
+    }
   }
-  .user-page-action-button:hover{
-    transition: .5s;
-    transform: scale(1.1);
-  }
-  .user-page-action-button:active{
-    color: var(--navigation-background-color);
-    background-color: var(--navigation-text-color);
-  }
+
+
   @media only screen and (min-width: 768px) {
       justify-content: flex-start;
   }
 `
 
-const UserPageActionButtons = ({t,_id, setParentState, parentState,username}) => {
+const UserPageActionButtons = ({t,_id, setParentState, parentState,userData}) => {
     const router = useRouter()
     const contextData = useContext(AppContext);
 
@@ -64,8 +68,9 @@ const UserPageActionButtons = ({t,_id, setParentState, parentState,username}) =>
 
 
     const onConversationHandler = () => {
-        if (contextData.userData._id){
-            conversation(_id).then(res => {
+
+        if (contextData.userData._id && userData._id){
+            conversation(userData._id).then(res => {
                 const conversation = res.data.conversation
                 router.push(`/messenger/${conversation._id}`)
             }).catch(err => {
@@ -83,16 +88,24 @@ const UserPageActionButtons = ({t,_id, setParentState, parentState,username}) =>
 
     return (
 
-        <div className='user-page-action-buttons'>
+        <UserPageActionButtonsStyledDiv className='user-page-action-buttons'>
 
 
-            <button className='user-page-action-button' onClick={onConversationHandler}>Message</button>
-            {
+            <button className='user-page-action-button action-client-button-link' onClick={onConversationHandler}>{t([`common:Send Message`])}</button>
+            <div>
+                {
                     contextData?.userData?.following?.includes(_id) ?
-                    <button className='user-page-action-button' onClick={onUnFollowHandler}>{t([`common:Unfollow`])}</button> :
-                    <button className='user-page-action-button' onClick={onFollowHandler}>{t([`common:Follow`])}</button>
-            }
-        </div>
+                        <button className='user-page-action-button action-client-button-link' onClick={onUnFollowHandler}>{t([`common:Unfollow`])}  </button> :
+                        <button className='user-page-action-button action-client-button-link' onClick={onFollowHandler}>{t([`common:Follow`])} </button>
+                }
+            </div>
+
+            {/*<div className='follow-count'>*/}
+            {/*    <p>{t([`common:Followers`])} :  <span>{userData?.followers ? userData.followers?.length : 0}</span></p>*/}
+            {/*    <p>{t([`common:Following`])} :  <span>{userData?.following ? userData.following?.length : 0}</span></p>*/}
+            {/*</div>*/}
+
+        </UserPageActionButtonsStyledDiv>
     );
 };
 export default withTranslation(['common'])(UserPageActionButtons);

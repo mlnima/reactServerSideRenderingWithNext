@@ -38,7 +38,7 @@ const newPost = props => {
     const onSubmitHandler = e=>{
         e.preventDefault()
         if (contextData.userData._id){
-            userCreateNewPost(formData,process.env.REACT_APP_PRODUCTION_URL).then(res=>{
+            userCreateNewPost(formData,process.env.NEXT_PUBLIC_PRODUCTION_URL).then(res=>{
                 setState({
                     ...state,
                     serverResponse:res?.data?.message

@@ -3,7 +3,6 @@ import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
 import dynamic from "next/dynamic";
-
 const Posts = dynamic(() => import('../Posts/Posts'))
 const CategoriesRenderer = dynamic(() => import('../CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer'))
 const TagsRenderer = dynamic(() => import('../TagsPage/Components/TagsRenderer/TagsRenderer'))
@@ -24,13 +23,32 @@ const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
+import {WidgetPropTypes} from '../../../_variables/TypeScriptTypes/GlobalTypes'
 
-const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, currentPageSidebar, referer, _id, postElementImageLoader, postElementImageLoaderType}) => {
+interface WidgetsRendererProps{
+    postElementStyle: string;
+    postElementSize: string;
+    postElementImageLoader: string;
+    postElementImageLoaderType: string;
+    widgets: WidgetPropTypes[];
+    position: string;
+    _id?: string;
+    homePageSidebar?: boolean|string;
+    isMobile: boolean;
+
+    referer: boolean;
+    currentPageSidebar: boolean|string;
+}
+
+
+const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, currentPageSidebar, referer, _id, postElementImageLoader, postElementImageLoaderType}:WidgetsRendererProps) => {
 
     const contextData = useContext(AppContext);
     const router = useRouter()
     const widgetsMemo = useMemo(() => {
-        return widgets?.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
+        return widgets?.sort((a, b) => {
+           return  a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
+        })
     }, [widgets])
 
     const renderWidgets = widgetsMemo?.map(widget => {
@@ -39,7 +57,7 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
         const languageToRender = widget.data.languageToRender || 'all';
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
 
-        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.REACT_APP_DEFAULT_LOCAL);
+        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
         const renderByDeviceTypeCondition = !deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all';
         const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator'
         //const isEditMode = widget.data.editMode

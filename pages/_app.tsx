@@ -1,4 +1,5 @@
-import {useState} from "react";
+import React from "react";
+import type { AppProps /*, AppContext */ } from 'next/app'
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import { appWithTranslation } from 'next-i18next';
@@ -11,15 +12,34 @@ const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'))
 const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false})
 const AppProvider = dynamic(() => import('../context/AppContext'))
 
-const MyApp = ({Component, pageProps}) => {
-    const router = useRouter()
-    const [state,setState] = useState(()=>{
-       return {
-           identity: process.env.REACT_APP_SETTING_IDENTITY ? JSON.parse(process.env.REACT_APP_SETTING_IDENTITY) : {},
-           design:  process.env.REACT_APP_SETTING_DESIGN ? JSON.parse(process.env.REACT_APP_SETTING_DESIGN) : {}
-       }
-    })
+interface MyAppProps {
+    MyApp:React.ComponentType;
+    Component:AppProps;
+    pageProps:{
+        pageInfo:{
+            pageName:string
+        };
+        identity:object,
+        eCommerce:object,
+        design: {
+            customStyles:string
+        },
+        widgets:object[],
+        isMobile:boolean,
+        referer:boolean,
 
+    };
+
+    nextI18NextConfig:{
+        i18n:{
+            defaultLocale:string;
+            locales:string[]
+        }
+    }
+}
+
+const MyApp  = ({ Component, pageProps }:AppProps) => {
+    const router = useRouter()
     if (router.pathname.includes('/admin')) {
         return (
             <AppProvider>
@@ -32,10 +52,10 @@ const MyApp = ({Component, pageProps}) => {
         return (
             <AppProvider>
                 <MessengerLayout
-                    identity={state.identity}
-                    design={state.design}
+                    identity={pageProps.identity}
+                    design={pageProps.design}
                     isMobile={pageProps.isMobile}
-                    globalStyleDetected={!!pageProps.design?.data?.customStyles}
+                    globalStyleDetected={!!pageProps.design?.customStyles}
                 >
                     <Component {...pageProps} />
                 </MessengerLayout>
@@ -46,13 +66,13 @@ const MyApp = ({Component, pageProps}) => {
         <AppProvider>
 
             <AppLayout
-                design={state.design}
+                design={pageProps.design}
                 widgets={pageProps.widgets}
-                identity={state.identity}
+                identity={pageProps.identity}
                 eCommerce={pageProps.eCommerce}
                 referer={pageProps.referer}
                 isMobile={pageProps.isMobile}
-                globalStyleDetected={!!pageProps.design?.data?.customStyles}
+                globalStyleDetected={!!pageProps.design?.customStyles}
                 pageInfo={pageProps.pageInfo}
             >
                 <Component {...pageProps} />
@@ -63,10 +83,7 @@ const MyApp = ({Component, pageProps}) => {
     )
 };
 
+// @ts-ignore
 export default appWithTranslation(MyApp, nextI18NextConfig);
 
 
-// <PwaInstallButton/>
-
-// <RedirecterToHttps identity={pageProps.identity}/>
-// <RedirectToHTTPS identity={pageProps.identity}/>

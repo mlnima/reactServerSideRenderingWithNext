@@ -21,7 +21,7 @@ module.exports = async (req, res) => {
                                 username: user.username,
                                 _id: user._id,
                             },
-                            process.env.REACT_APP_JWT_KEY,
+                            process.env.JWT_KEY,
                             { expiresIn: tokenExpireTime });
                         res.json({
                             token: token,

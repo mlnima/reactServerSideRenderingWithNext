@@ -7,12 +7,12 @@ const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
     const [imageUrl,setImageUrl] = useState(()=>{
-        return  props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.REACT_APP_PRODUCTION_URL + props.imageUrl : ''
+        return  props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.imageUrl : ''
     })
 
     const noImageUrl= '/static/images/noImage/no-image-available.png'
     //const isImageAbsolutePath = imageUrl?.includes('http')
-   // const validImageForNextImage = (((process.env.REACT_APP_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
+   // const validImageForNextImage = (((process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
     const validImageForNextImage = false
 
     const onErrorHandler = e => {

@@ -347,7 +347,7 @@ const WidgetModel = props => {
                     <div className='selectInputFieldForWidget widgetSection'>
                         <p>Translations:</p>
                         <select ref={languageElement} name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
-                            <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? 'default'}</option>
+                            <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
                             {languagesOptions}
                         </select>
                     </div>
@@ -365,7 +365,7 @@ const WidgetModel = props => {
                         <p>Language To Render:</p>
                         <select name='languageToRender' value={widgetData.languageToRender} onChange={e => onChangeHandler(e)}>
                             <option value='all'>All</option>
-                            <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL}</option>
+                            <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL}</option>
                             {languagesOptions}
                         </select>
                     </div>

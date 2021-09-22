@@ -15,12 +15,16 @@ import {withTranslation} from "next-i18next";
 const ProfileStyledMain = styled.main`
   max-width: 940px;
   margin: auto;
+  color:var(--main-text-color);
   .profile-header {
     display: flex;
     align-items: center;
     margin: 10px 0;
     padding: 10px 0;
     border-bottom: .5px solid var(--main-text-color);
+  }
+  .profile-username{
+    
   }
 
   .profile-posts {
@@ -74,6 +78,7 @@ const Profile = props => {
                 <ProfileImage/>
                 <ProfileNavigation/>
             </div>
+            <p className='profile-username'>{contextData.userData.username}</p>
             <div className='profile-posts'>
                 <div className='profile-no-posts'>
                     <FontAwesomeIcon  className='upload-profile-image-btn-svg' icon={faCamera}/>

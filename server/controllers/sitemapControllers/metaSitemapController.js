@@ -4,7 +4,7 @@ const metaSitemapController = {}
 const template = (metaData,type) => {
     let metaXmlData = ''
     metaData.map(meta => {
-        const metaUrl = `${process.env.REACT_APP_PRODUCTION_URL}/${type}/${meta._id}`
+        const metaUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${type}/${meta._id}`
         const date = (meta.updatedAt || meta.createdAt || meta._id.getTimestamp() || Date.now()).toISOString()
         metaXmlData +=`<url> 
                          <loc>${metaUrl}</loc>

@@ -5,7 +5,7 @@ export const readPath = path => {
         path,
         token: localStorage.wt
     };
-    return axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/readPath', body)
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/readPath', body)
 };
 
 export const readFile = path => {
@@ -13,7 +13,7 @@ export const readFile = path => {
         path,
         token: localStorage.wt
     };
-    return axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/readFile', body)
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/readFile', body)
 };
 
 export const readTranslationsFile = path => {
@@ -21,7 +21,7 @@ export const readTranslationsFile = path => {
         path,
         token: localStorage.wt
     };
-    return axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/readTranslationsFile', body)
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/readTranslationsFile', body)
 };
 export const updateTranslationsFile = (path, data) => {
     let body = {
@@ -29,7 +29,7 @@ export const updateTranslationsFile = (path, data) => {
         data,
         token: localStorage.wt
     };
-    return axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/updateTranslationsFile', body)
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/updateTranslationsFile', body)
 };
 
 
@@ -38,7 +38,7 @@ export const deleteFile = filePath => {
         filePath,
         token: localStorage.wt
     };
-    return axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/deleteFile', body)
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/deleteFile', body)
 };
 
 
@@ -50,7 +50,7 @@ export const actionOnFiles = (_what, clickedItems, _do, pathTo) => {
         pathTo,
         token: localStorage.wt
     };
-    return axios.post(process.env.REACT_APP_PRODUCTION_URL + '/server/files/admin-actionOnFiles', body)
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/server/files/admin-actionOnFiles', body)
 };
 
 export const newFolder = (folderName, folderPath) => {
@@ -60,7 +60,7 @@ export const newFolder = (folderName, folderPath) => {
         folderPath,
         token: localStorage.wt
     };
-    return axios.post(process.env.REACT_APP_PRODUCTION_URL + '/server/files/admin-newFolder', body)
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/server/files/admin-newFolder', body)
 };
 
 export const newFile = (fileName, filePath) => {
@@ -69,5 +69,5 @@ export const newFile = (fileName, filePath) => {
         filePath,
         token: localStorage.wt
     };
-    return axios.post(process.env.REACT_APP_PRODUCTION_URL + '/server/files/admin-newFile', body)
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/server/files/admin-newFile', body)
 };

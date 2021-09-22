@@ -132,6 +132,14 @@ let GlobalStyles = createGlobalStyle`
     }
 
   }
+  
+  .action-client-button-link{
+    background-color: transparent;
+    border-radius: 5px;
+    cursor: pointer;
+    text-align: center;
+    box-shadow: 0 0 5px 2.5px rgba(255, 255, 255, .2);
+  }
 
   @keyframes navigationMobileSlide {
     from {

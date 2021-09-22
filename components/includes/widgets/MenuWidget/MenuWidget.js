@@ -109,7 +109,7 @@ const MenuWidget = props => {
     const renderMenuParentsItems = renderMenuItemsData.filter(i => !i.parent)
     const renderMenuItems = renderMenuParentsItems.map(menuItem => {
 
-        const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? menuItem.as :
+        const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL? menuItem.as :
             (!router.locale && !router.query.locale) ? menuItem.as :
                 `/${router.locale || router.query.locale}${menuItem.as}`;
         return (

@@ -13,15 +13,15 @@ const LoggedInItemsForMenu = props => {
     if (contextData.userData.username && contextData.userData.username !== 'guest') {
         return (
             <div className='logged-in-items'>
-                {
-                    router.asPath.includes('/chatroom/') || router.asPath.includes('/messenger') ?
-                        <Link href={`/`}>
-                            <a rel='next' className='logged-in-item'>
-                                <FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color)'}} icon={faHome}/>
-                            </a>
-                        </Link>
-                        : null
-                }
+                {/*{*/}
+                {/*    router.asPath.includes('/chatroom/') || router.asPath.includes('/messenger') ?*/}
+                {/*        <Link href={`/`}>*/}
+                {/*            <a rel='next' className='logged-in-item'>*/}
+                {/*                <FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color)'}} icon={faHome}/>*/}
+                {/*            </a>*/}
+                {/*        </Link>*/}
+                {/*        : null*/}
+                {/*}*/}
 
                 {contextData.siteIdentity.membership ?
                     <>

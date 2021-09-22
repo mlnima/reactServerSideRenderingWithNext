@@ -134,19 +134,6 @@ const AppProvider = props => {
             dispatchUserData({})
             router.push('/')
         },
-        goToAdminPanel: () => {
-            router.push('/admin')
-        },
-        goToHomePage: () => {
-            // router.push('/')
-        },
-        savePosts: async (data) => {
-            const body = {
-                postData: data,
-                token: localStorage.wt
-            };
-            return axios.post('/api/v1/posts/createNewPost', body)
-        },
         updatePost: async (data) => {
             const body = {
                 postData: data,

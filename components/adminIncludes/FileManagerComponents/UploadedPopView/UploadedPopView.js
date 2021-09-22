@@ -101,7 +101,7 @@ const UploadedPopView = props => {
                     {fileType === 'video' ? <UploadedFilePreviewVideo filePath={props.state.clickedItem}/>:null}
                     {fileType === 'document' ? <UploadedFilePreviewText file={props.state.file}/>:null}
                     <lable className='uploaded-pop-view-url' > { '/' + props.state.clickedItem.replace('./', '') }</lable>
-                    <lable className='uploaded-pop-view-url' > { process.env.REACT_APP_PRODUCTION_URL + '/' + props.state.clickedItem.replace('./', '') }</lable>
+                    <lable className='uploaded-pop-view-url' > { process.env.NEXT_PUBLIC_PRODUCTION_URL + '/' + props.state.clickedItem.replace('./', '') }</lable>
                     {fileType === 'image' || fileType === 'video' ? <button className='uploaded-pop-delete-button' onClick={()=>onDeleteHandler(props.state.clickedItem)}>Delete</button> : null}
                 </div>
             </div>

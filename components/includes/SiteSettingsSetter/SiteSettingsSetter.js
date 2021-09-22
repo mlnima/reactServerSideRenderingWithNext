@@ -22,7 +22,7 @@ const SiteSettingSetter = props => {
         ) : null
         props?.eCommerce ? contextData.dispatchECommerceSettings(props.eCommerce) : null
         const manuallyDetectedLocale = router.locale ? router.locale :
-            router?.query?.locale ? router.query.locale : process.env.REACT_APP_DEFAULT_LOCAL;
+            router?.query?.locale ? router.query.locale : process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
         contextData.dispatchState({
             ...contextData.state,
             activeLanguage: manuallyDetectedLocale
@@ -47,11 +47,11 @@ const SiteSettingSetter = props => {
 
     const keywords = keywordsDataFromProps.map(keyword=>keyword.trim())
 
-    const locals = process.env.REACT_APP_LOCALS.split(' ');
+    const locals = process.env.NEXT_PUBLIC_LOCALS.split(' ');
     const localsUrl = locals.map(local=>{
-        if (local === process.env.REACT_APP_DEFAULT_LOCAL){
-            return <link rel="alternate" hrefLang={local} key={_.uniqueId('link_')} href={`${process.env.REACT_APP_PRODUCTION_URL}/`}/>
-        }else return <link rel="alternate" hrefLang={local} key={_.uniqueId('link_')} href={`${process.env.REACT_APP_PRODUCTION_URL}/${local}`}/>
+        if (local === process.env.NEXT_PUBLIC_DEFAULT_LOCAL){
+            return <link rel="alternate" hrefLang={local} key={_.uniqueId('link_')} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/`}/>
+        }else return <link rel="alternate" hrefLang={local} key={_.uniqueId('link_')} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${local}`}/>
     })
 
 // /post/[postType]/[id]

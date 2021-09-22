@@ -15,11 +15,11 @@ let chatroomOnlineUsers = []
 
 
 const io = require('socket.io')(server, {
-    origin: [process.env.REACT_APP_PRODUCTION_URL, '*'],
+    origin: [process.env.NEXT_PUBLIC_PRODUCTION_URL, '*'],
     cors: true,
     handlePreflightRequest: (req, res) => {
         res.writeHead(200, {
-            "Access-Control-Allow-Origin": process.env.REACT_APP_PRODUCTION_URL,
+            "Access-Control-Allow-Origin": process.env.NEXT_PUBLIC_PRODUCTION_URL,
             "Access-Control-Allow-Methods": "GET,POST",
             "Access-Control-Allow-Headers": "my-custom-header",
             "Access-Control-Allow-Credentials": true
@@ -34,7 +34,7 @@ app.get('/*', (req, res) => {
 });
 
 server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
-    console.log(`socket server is running on ${process.env.REACT_APP_SOCKET_PORT}`);
+    console.log(`socket server is running on ${process.env.SOCKET_PORT}`);
 });
 
 

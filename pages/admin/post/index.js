@@ -257,7 +257,7 @@ const Index = props => {
 
                     <select ref={languageElement} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
 
-                        <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'Default'}</option>
+                        <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
                         {languagesOptions}
 
                     </select>

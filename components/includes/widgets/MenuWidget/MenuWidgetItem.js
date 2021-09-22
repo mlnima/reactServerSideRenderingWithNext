@@ -77,7 +77,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
 
     const renderSubMenus = (menuItem.subItems || []).map(subItem => {
 
-        const linkAsForMenuItem = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? subItem.as :
+        const linkAsForMenuItem = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? subItem.as :
             (!router.locale && !router.query.locale) ? subItem.as :
                 `/${router.locale || router.query.locale}${subItem.as}`;
 

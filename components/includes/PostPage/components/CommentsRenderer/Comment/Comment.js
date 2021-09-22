@@ -38,7 +38,7 @@ const Comment = props => {
     const contextData = useContext(AppContext);
 
     const onDeleteHandler = (id) => {
-        deleteComments([id], process.env.REACT_APP_PRODUCTION_URL).then(() => {
+        deleteComments([id], process.env.NEXT_PUBLIC_PRODUCTION_URL).then(() => {
             props.reGetComments()
         }).catch(err => {
             console.log(err)

@@ -26,10 +26,10 @@ const AppLayout = props => {
     const [rightSidebarWidgets, setRightSidebarWidgets] = useState([])
 
     const [design, setDesign] = useState(() => {
-        return process.env.REACT_APP_SETTING_DESIGN ? JSON.parse(process.env.REACT_APP_SETTING_DESIGN) : {}
+        return process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {}
     })
     const [identity, setIdentity] = useState(() => {
-        return process.env.REACT_APP_SETTING_IDENTITY ? JSON.parse(process.env.REACT_APP_SETTING_IDENTITY) : {}
+        return process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {}
     })
 
     const [staticWidgets, setStaticWidgets] = useState(() => {

@@ -7,7 +7,7 @@ const MetaDataToSiteHead = props => {
             {props.title?   <meta name="keywords" content={`${props.title}`}/>:null}
             {props.description || props.title? <meta name="description" content={props.description|| props.title}/>:null}
             {props.title?  <meta property="og:title" content={props.title}/>:null}
-            {props.url? <meta property="og:url" content={process.env.REACT_APP_PRODUCTION_URL + props.url}/>:null}
+            {props.url? <meta property="og:url" content={process.env.NEXT_PUBLIC_PRODUCTION_URL + props.url}/>:null}
             {props.image? <meta property="og:image" content={props.image}/>:null}
         </Head>
     );

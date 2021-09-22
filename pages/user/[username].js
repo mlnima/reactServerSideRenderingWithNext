@@ -11,44 +11,60 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
+import {withTranslation} from "next-i18next";
+
 const UserPageStyledDiv = styled.div`
-  color:var(--main-text-color);
+  color: var(--main-text-color);
   max-width: 940px;
   margin: auto;
-  .profile-header{
+  font-size: 12px;
+  .profile-header {
     display: flex;
     justify-content: center;
     align-items: center;
     margin: 10px 0;
     padding: 10px 0;
-    border-bottom:.5px solid var(--main-text-color) ;
-    .profile-header-info-actions{
+    border-bottom: .5px solid var(--main-text-color);
+
+    .profile-header-info-actions {
       display: flex;
       justify-content: center;
       align-items: center;
       flex-direction: column;
+      .follow-count{
+        width: 100%;
+        display: flex;
+        p{
+          margin: 5px 10px;
+        }
+
+      }
     }
   }
-  .profile-posts{
+
+  .profile-posts {
     display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
     margin: 20px 0;
-    .profile-no-posts{
+
+    .profile-no-posts {
       border: .5px solid var(--main-text-color);
       border-radius: 50%;
       width: 150px;
-      height:150px ;
+      height: 150px;
       display: flex;
       justify-content: center;
       align-items: center;
-      svg{
-        width:75px;
-        height:75px;
+
+      svg {
+        width: 75px;
+        height: 75px;
       }
     }
-    .profile-no-posts-title{
+
+    .profile-no-posts-title {
       color: var(--main-text-color);
     }
   }
@@ -61,9 +77,7 @@ const user = props => {
         messagePop: false
     });
 
-    const [userData, setUserData] = useState(()=>{ })
-
-
+    const [userData, setUserData] = useState(() => {})
 
 
     const onCloseMessagePop = () => {
@@ -74,15 +88,19 @@ const user = props => {
     }
 
     useEffect(() => {
+        console.log(userData)
+    }, [userData]);
+
+    useEffect(() => {
         getUserData()
     }, [contextData.userData._id]);
 
 
     const getUserData = async () => {
         try {
-            const userPreviewData = await getUserPreviewData( router.query.username,undefined,['following','followers','blockList']);
-            const myFriendRequestData = await getUserPreviewData( undefined,contextData.userData._id,['following','followers','blockList']);
-            contextData.dispatchUserData(userData=>({...userData,...myFriendRequestData.data.userData}))
+            const userPreviewData = await getUserPreviewData(router.query.username, undefined, ['following', 'followers', 'blockList']);
+            const myFriendRequestData = await getUserPreviewData(undefined, contextData.userData._id, ['following', 'followers', 'blockList']);
+            contextData.dispatchUserData(userData => ({...userData, ...myFriendRequestData.data.userData}))
             setUserData(userPreviewData.data.userData);
 
         } catch (err) {
@@ -95,7 +113,6 @@ const user = props => {
         <UserPageStyledDiv className='user-page main'>
 
 
-
             <div className='profile-header'>
                 <UserPageProfileImage
                     gender={userData?.gender}
@@ -106,26 +123,25 @@ const user = props => {
                     {contextData?.userData?.username !== userData?.username ?
                         <UserPageActionButtons
                             setParentState={setState}
-                            username={userData?.username}
+                            userData={userData}
+
                             parentState={state}
                             _id={userData?._id}
                         /> : null
                     }
+                    <div className='follow-count'>
+                        <p>{props.t([`common:Followers`])} :  <span>{userData?.followers ? userData.followers?.length : 0}</span></p>
+                        <p>{props.t([`common:Following`])} :  <span>{userData?.following ? userData.following?.length : 0}</span></p>
+                    </div>
                 </div>
             </div>
             <div className='profile-posts'>
                 <div className='profile-no-posts'>
-                    <FontAwesomeIcon style={{color:'var(--main-text-color)' }} className='upload-profile-image-btn-svg'  icon={faCamera} />
+                    <FontAwesomeIcon style={{color: 'var(--main-text-color)'}} className='upload-profile-image-btn-svg' icon={faCamera}/>
                 </div>
                 <h2 className='profile-no-posts-title'>No Post Yet </h2>
                 <p className='profile-no-posts-title'> Coming Soon</p>
             </div>
-
-
-
-
-
-
 
         </UserPageStyledDiv>
     );
@@ -136,8 +152,8 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets:firstLoadData?.widgets || [],
+            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
+            widgets: firstLoadData?.widgets || [],
             ...firstLoadData.settings,
             isMobile: Boolean(firstLoadData.isMobile),
             referer: firstLoadData.referer,
@@ -148,9 +164,7 @@ export const getServerSideProps = async (context) => {
 }
 
 
-export default user;
-
-
+export default withTranslation(['common'])(user);
 
 
 // {

@@ -1,11 +1,14 @@
-
 import styled from "styled-components";
+
 const UserPageProfileImageStyledDiv = styled.div`
   width: 77px;
   height: 77px;
-  margin-right: 30px;
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  
   .user-page-profile-image-content{
-    margin: auto;
     width: 77px;
     height: 77px;
     border-radius: 50%;
@@ -23,12 +26,14 @@ const UserPageProfileImageStyledDiv = styled.div`
 `
 const UserPageProfileImage = ({gender,profileImage}) => {
 
+
     return (
         <UserPageProfileImageStyledDiv className='user-page-profile-image'>
             <img src={profileImage ? profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg'}
                  alt='user-page-profile-image-content'
                  className='user-page-profile-image-content'
             />
+
         </UserPageProfileImageStyledDiv>
     );
 };

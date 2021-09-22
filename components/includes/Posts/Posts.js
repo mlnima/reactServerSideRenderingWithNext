@@ -22,7 +22,7 @@ const PostsContentStyledDiv = styled.div`
 const Posts = ({viewType, isMobile, _id, redirectLink, postElementSize, posts, postElementStyle, postElementImageLoaderType, postElementImageLoader, widgetId}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
-    const locale = (router.locale || router.query.locale) === process.env.REACT_APP_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
+    const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
 
     const cardWidth = postElementSize === 'list' ? 116.6 :
                       postElementSize === 'smaller' ? 209.8 :

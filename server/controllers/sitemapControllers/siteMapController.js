@@ -21,19 +21,19 @@ siteMapController.siteMap = (req, res) => {
     const toDay = new Date();
     const metaSiteMaps = `
                 <sitemap>
-                    <loc>${process.env.REACT_APP_PRODUCTION_URL}/sitemaps/pages.xml</loc>
+                    <loc>${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/pages.xml</loc>
                     <lastmod>${toDay.toISOString()}</lastmod>
                 </sitemap>
                 <sitemap>
-                    <loc>${process.env.REACT_APP_PRODUCTION_URL}/sitemaps/categories.xml</loc>
+                    <loc>${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/categories.xml</loc>
                     <lastmod>${toDay.toISOString()}</lastmod>
                 </sitemap>
                 <sitemap>
-                    <loc>${process.env.REACT_APP_PRODUCTION_URL}/sitemaps/tags.xml</loc>
+                    <loc>${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/tags.xml</loc>
                     <lastmod>${toDay.toISOString()}</lastmod>
                 </sitemap>
                 <sitemap>
-                    <loc>${process.env.REACT_APP_PRODUCTION_URL}/sitemaps/actors.xml</loc>
+                    <loc>${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/actors.xml</loc>
                     <lastmod>${toDay.toISOString()}</lastmod>
                 </sitemap>
     `
@@ -68,7 +68,7 @@ siteMapController.siteMap = (req, res) => {
             let fixedMonth = month.includes('/') ? month.replace('/', '-') : month
             monthsSiteMap +=
                 '<sitemap>\n' +
-                `<loc>${process.env.REACT_APP_PRODUCTION_URL}/sitemaps/${fixedMonth}.xml</loc>\n` +
+                `<loc>${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${fixedMonth}.xml</loc>\n` +
                 `<lastmod>${toDay.toISOString()}</lastmod>\n` +
                 ' </sitemap>\n'
         });

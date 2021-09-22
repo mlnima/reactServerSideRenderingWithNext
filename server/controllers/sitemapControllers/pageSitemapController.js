@@ -3,7 +3,7 @@ const pageSchema = require('../../models/pageSchema');
 const template = (pagesData) => {
     let pagesXmlData = ''
     pagesData.map(page => {
-        const pagesUrl = `${process.env.REACT_APP_PRODUCTION_URL}/page/${page.pageName}`
+        const pagesUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${page.pageName}`
         const date = (page.updatedAt || page.createdAt || page._id.getTimestamp() || Date.now()).toISOString()
         pagesXmlData +=`<url> 
                          <loc>${pagesUrl}</loc>

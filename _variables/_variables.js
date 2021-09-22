@@ -196,7 +196,7 @@ export const jsonExporter = (data,fileName)=>{
     }
 }
 
-export const languagesOptions = (process.env.REACT_APP_LOCALS.split(' ').filter(lang=>lang!== process.env.REACT_APP_DEFAULT_LOCAL) || []).map(lang => {
+export const languagesOptions = (process.env.NEXT_PUBLIC_LOCALS.split(' ').filter(lang=>lang!== process.env.NEXT_PUBLIC_DEFAULT_LOCAL) || []).map(lang => {
     return (
         <option key={lang} value={lang}>{lang}</option>
     )

@@ -5,7 +5,7 @@ const _createFileOrFolder = async (data) =>{
         ...data,
         token: localStorage.wt
     }
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/admin/fileManager/create', body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/create', body)
 }
 
 export default _createFileOrFolder

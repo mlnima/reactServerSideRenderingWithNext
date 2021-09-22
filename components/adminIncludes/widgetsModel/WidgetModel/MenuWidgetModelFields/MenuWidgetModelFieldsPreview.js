@@ -240,7 +240,7 @@ export default MenuWidgetModelFieldsPreview;
 //         <div className='menu-form-field'>
 //             <p>Translations:</p>
 //             <select name='activeEditingLanguage' onChange={e => setState({...state, activeEditingLanguage: e.target.value})}>
-//                 <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? 'default'}</option>
+//                 <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
 //                 {languagesOptions}
 //             </select>
 //         </div>

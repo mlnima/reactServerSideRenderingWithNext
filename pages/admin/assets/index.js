@@ -22,7 +22,6 @@ const TableControls = dynamic(
 
 
 const assets = props => {
-    const [state, setState] = useState({})
     const router = useRouter()
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
@@ -63,9 +62,9 @@ const assets = props => {
             assetType === 'users' ? await getUsersListAsAdmin(dataConfig, localStorage.wt) :
                 assetType === 'forms' ? await getFormsData(dataConfig, localStorage.wt) :
                     assetType === 'pages' ? await getPagesData(dataConfig, localStorage.wt) :
-                        assetType === 'comments' ? await getComments(dataConfig, process.env.REACT_APP_PRODUCTION_URL, false) :
+                        assetType === 'comments' ? await getComments(dataConfig, process.env.NEXT_PUBLIC_PRODUCTION_URL, false) :
                             assetType === 'metas' && router.query.metaType ? await getMultipleMeta(router?.query, router?.query.metaType, false) :
-                                assetType === 'orders' ? await getOrders(dataConfig, process.env.REACT_APP_PRODUCTION_URL) : null
+                                assetType === 'orders' ? await getOrders(dataConfig, process.env.NEXT_PUBLIC_PRODUCTION_URL) : null
 
         if (ajaxRequestData) {
             if (router.query.assetsType === 'orders') {

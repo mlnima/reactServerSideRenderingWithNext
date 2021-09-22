@@ -143,7 +143,7 @@ const settings = props => {
             ...props.identity
 
         })
-        getSetting('identity', process.env.REACT_APP_PRODUCTION_URL, false).then(res => {
+        getSetting('identity', process.env.NEXT_PUBLIC_PRODUCTION_URL, false).then(res => {
 
             setState({
                 ...state,
@@ -285,7 +285,7 @@ const settings = props => {
                 <h2>site identity:</h2>
                 <h3>Site Info:</h3>
                 <select name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
-                    <option value='default'>{process.env.REACT_APP_DEFAULT_LOCAL ?? 'default'}</option>
+                    <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
                     {languagesOptions}
                 </select>
                 <div className="siteIdentity site-settings-form-section-parent">

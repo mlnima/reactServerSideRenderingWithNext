@@ -38,7 +38,7 @@ const LoggedOutItemsMenu = props => {
                     {props.t(`common:Login`)}
                 </button>
                 <button onClick={()=>onLoginRegisterHandler('register')} className='logged-out-item ' aria-label='logged-out-items' >
-                    {props.t(`common:Sign Up`)}
+                    {props.t(`common:Register`)}
                 </button>
             </div>
         )

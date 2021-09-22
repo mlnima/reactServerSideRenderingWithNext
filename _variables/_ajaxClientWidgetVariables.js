@@ -7,5 +7,5 @@ export const clientSelfWidgetUpdate = async (data) => {
     const body = {
         ...data
     };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + '/api/v1/widgets/clientSelfWidgetUpdate', body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/widgets/clientSelfWidgetUpdate', body)
 };

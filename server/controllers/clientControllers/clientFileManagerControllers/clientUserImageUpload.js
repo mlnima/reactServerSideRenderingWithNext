@@ -28,7 +28,7 @@ module.exports = async (req, res) => {
                     } else {
 
                         fsExtra.remove(filePathOriginalSize)
-                        res.json({response: 'Uploaded', path: process.env.REACT_APP_PRODUCTION_URL + filePath})
+                        res.json({response: 'Uploaded', path: process.env.NEXT_PUBLIC_PRODUCTION_URL + filePath})
                         res.end()
                     }
                 })

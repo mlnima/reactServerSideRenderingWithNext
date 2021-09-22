@@ -13,7 +13,30 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
   padding: 10px 5px;
   color: var(--navigation-text-color);
   position: relative;
+  overflow-y: auto;
 
+  .close-form-button {
+    position: absolute;
+    align-self: flex-end;
+    display: flex;
+    justify-content: flex-start;
+    padding: 5px;
+    align-items: center;
+    cursor: pointer;
+    
+    svg{
+      margin: 5px 3px 0 3px;
+      width: 20px;
+      height: 20px;
+    }
+  }
+
+  .login-register-title{
+    text-align: center;
+    margin: 30px 0 20px 0;
+  }
+  
+  
   .login-register-switch-form-button {
    
     border: none;
@@ -25,27 +48,11 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
     font-size: 1rem;
     font-weight: bold;
     cursor: pointer;
+    margin: 20px 0;
   }
-  .close-form-button {
-    position: absolute;
-    align-self: flex-end;
-    display: flex;
-    justify-content: flex-start;
-    padding: 5px;
-    align-items: center;
-    cursor: pointer;
-    svg{
-      margin: 5px 3px 0 3px;
-      width: 16px;
-      height: 16px;
-    }
-  }
+
   
-  .login-register-title{
-    text-align: center;
-    margin: 0;
-    
-  }
+
   
   .server-response {
     color: ${
@@ -68,7 +75,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
         outline: none;
         border: none;
         padding: 0 7px;
-        height: 25px;
+        height: 30px;
         width: 95%;
         font-size: 14px;
       }
@@ -82,7 +89,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
       .password-info {
         color: var(--main-text-color);
         text-align: center;
-        font-size: 8px;
+        font-size: 12px;
         width: 100%;
       }
       
@@ -91,7 +98,9 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
           display: flex;
           justify-content: center;
           align-items: center;
-
+          input{
+            width: 100%;
+          }
           .gender-icon {
             color: var(--main-text-color);
             padding: 0;
@@ -111,8 +120,6 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
       width: 95%;
       margin: 10px;
       text-align: center;
-     
-      
     }
   }
 
@@ -220,7 +227,6 @@ const LoginRegisterPopupForms = props => {
     return (
         <LoginRegisterPopupFormsStyledDiv response={response} className='login-register-content'>
                 <span onClick={onCloseHandler} className='close-form-button' title={props.t(`common:Close`)}>
-                    {props.t(`common:Close`)}
                     <FontAwesomeIcon icon={faTimes}/>
                 </span>
             <h3 className='login-register-title' >{contextData.state.loginRegisterFormPopupType === 'register' ? props.t(`common:Register`) : props.t(`common:Member login`) }</h3>

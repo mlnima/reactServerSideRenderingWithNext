@@ -35,13 +35,13 @@ const LanguagesSwitcher = props => {
         })
         // if (!props.cookiePage){
         //     if (e.target.value === 'default'){
-        //         router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.REACT_APP_DEFAULT_LOCAL})
+        //         router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.NEXT_PUBLIC_DEFAULT_LOCAL})
         //     }else {
         //         router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:e.target.value})
         //     }
         // }
         if (e.target.value === 'default'){
-            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.REACT_APP_DEFAULT_LOCAL})
+            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.NEXT_PUBLIC_DEFAULT_LOCAL})
         }else {
             router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:e.target.value})
         }
@@ -57,7 +57,7 @@ const LanguagesSwitcher = props => {
             <p className='language-switcher-widget-text'>{props.t(`common:Language`)}</p>
             <select value={ contextData.state.activeLanguage || router.locale } aria-label='Center Align'
                 onChange={e => onChangeHandler(e)} >
-                <option key='default' value='default'>{process.env.REACT_APP_DEFAULT_LOCAL || 'default'}</option>
+                <option key='default' value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'default'}</option>
                 {languagesOptions}
             </select>
         </LanguagesSwitcherStyledDiv>

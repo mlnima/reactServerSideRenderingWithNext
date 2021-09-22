@@ -13,7 +13,7 @@ const UploadedFilePreviewImage = ({filePath}) => {
                     } 
                 }
             `}</style>
-            <img className='uploaded-pop-view-image-element' src={ process.env.REACT_APP_PRODUCTION_URL + '/' + filePath.replace('./', '') }/>
+            <img className='uploaded-pop-view-image-element' src={ process.env.NEXT_PUBLIC_PRODUCTION_URL + '/' + filePath.replace('./', '') }/>
 
         </div>
     );

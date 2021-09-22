@@ -5,7 +5,7 @@ const _fixMetaImage = async (_id) => {
         _id,
         token: localStorage.wt
     };
-    return await axios.post(process.env.REACT_APP_PRODUCTION_URL + `/api/v1/posts/fixMetaImage`, body)
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/fixMetaImage`, body)
 };
 
 export default _fixMetaImage

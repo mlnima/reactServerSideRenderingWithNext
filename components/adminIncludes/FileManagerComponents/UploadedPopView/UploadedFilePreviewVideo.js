@@ -15,7 +15,7 @@ const UploadedFilePreviewVideo = ({filePath}) => {
                 }
             `}</style>
             <video className='uploaded-pop-view-video-element' controls >
-                <source src={ process.env.REACT_APP_PRODUCTION_URL + '/' + filePath.replace('./', '') }  />
+                <source src={ process.env.NEXT_PUBLIC_PRODUCTION_URL + '/' + filePath.replace('./', '') }  />
             </video>
 
         </div>

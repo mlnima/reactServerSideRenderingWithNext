@@ -143,7 +143,7 @@ const PostPage = ({responseCode, design, post, identity, comments, widgets}) => 
 
     const reGetComments = async () => {
         try {
-            const commentsReq = await getComments({onDocument: post._id}, process.env.REACT_APP_PRODUCTION_URL, true)
+            const commentsReq = await getComments({onDocument: post._id}, process.env.NEXT_PUBLIC_PRODUCTION_URL, true)
             setCommentsData(post ? commentsReq?.data?.comments : [])
         } catch (err) {
 

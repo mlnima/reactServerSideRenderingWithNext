@@ -5,7 +5,7 @@ const RedirecterToHttps = props => {
     const [state, setState] = useState({
         protocol: 'https',
         render: false,
-        sslUrl: process.env.REACT_APP_PRODUCTION_URL
+        sslUrl: process.env.NEXT_PUBLIC_PRODUCTION_URL
     });
 
     useEffect(() => {
