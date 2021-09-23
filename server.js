@@ -77,7 +77,7 @@ app.prepare().then(() => {
     console.log('exit error:', ex.stack)
 });
 
-// const credentials = process.env.REACT_APP_SSL === 'true' ? {
+// const credentials = process.env.NEXT_PUBLIC_SSL === 'true' ? {
 //     key: fs.readFileSync('./server/https/localhost-key.pem'),
 //     cert: fs.readFileSync('./server/https/localhost.pem')
 // } : {}

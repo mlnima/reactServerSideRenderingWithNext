@@ -7,7 +7,7 @@ const _metaPageQueryGenerator = (queryData,metaType,cache) =>{
     const dataForGettingMeta = {
         metaType,
         page: queryData?.page || 1,
-        size: process.env.REACT_APP_SETTING_POSTS_COUNT_PER_PAGE || 60,
+        size: process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 60,
         startWith: queryData?.startWith || 'any',
         lang: queryData?.lang || 'default',
         status: 'published',

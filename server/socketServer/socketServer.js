@@ -33,7 +33,7 @@ app.get('/*', (req, res) => {
 
 });
 
-server.listen(process.env.REACT_APP_SOCKET_PORT, () => {
+server.listen(process.env.SOCKET_PORT, () => {
     console.log(`socket server is running on ${process.env.SOCKET_PORT}`);
 });
 

@@ -11,13 +11,10 @@ export const likeValueCalculator = (likes, dislikes) => {
 }
 
 export const getAbsolutePath = async (req) => {
-    const protocol = process.env.REACT_APP_SSL === 'true' ? 'https' : await req.protocol
-    return protocol + '://' + await req.get('Host')
+    return process.env.NEXT_PUBLIC_PRODUCTION_URL
 }
 
-export const generateAbsolutePath = () => {
-    return window.location.protocol + '//' + window.location.host
-}
+
 
 export const clickPathGenerator = (clickedItemName, pathFromContexts) => {
     if (pathFromContexts === '.') {

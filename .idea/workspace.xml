@@ -20,7 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/pages/staticIndex.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/staticIndex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/_variables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_variables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/socket.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/RedirecterToHttps/RedirecterToHttps.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/socketServer/socketServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/socketServer/socketServer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -88,11 +98,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\sl" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\sitemapControllers" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\models" />
     </key>
   </component>
   <component name="RunManager" selected="npm.devAndSocket">
@@ -148,8 +158,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.devAndSocket" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.startAndSocket" />
         <item itemvalue="npm.splitMetaData" />
         <item itemvalue="npm.start" />
@@ -804,7 +814,8 @@
       <workItem from="1632042595987" duration="4712000" />
       <workItem from="1632150129342" duration="5083000" />
       <workItem from="1632244151506" duration="20513000" />
-      <workItem from="1632299288125" duration="35584000" />
+      <workItem from="1632299288125" duration="36391000" />
+      <workItem from="1632390862546" duration="2207000" />
     </task>
     <servers />
   </component>
@@ -1020,12 +1031,10 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/index.tsx</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="80" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="81" />
         </line-breakpoint>
       </breakpoints>

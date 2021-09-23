@@ -320,7 +320,7 @@ const Index = props => {
 };
 
 export const getServerSideProps = async ({req, query}) => {
-    const domainName = req ? await getAbsolutePath(req) : '';
+
     let post;
     let postData
     let requestBody;
@@ -359,7 +359,7 @@ export const getServerSideProps = async ({req, query}) => {
             _id: query.id,
         };
 
-        postData = await getPost(requestBody, domainName, false, query.id)
+        postData = await getPost(requestBody, false)
         post = postData.data ? postData.data.post : newPostData
         if (!post.translations) {
             post.translations = {}
