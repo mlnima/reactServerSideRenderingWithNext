@@ -78,14 +78,13 @@ export const getServerSideProps = async (context) => {
     const metaData = await getMultipleMeta(context.query,'actors', true)
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
 
-    return {props: {
+    return {
+        props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
+            ...firstLoadData,
             query:context.query,
-            isMobile: Boolean(firstLoadData.isMobile),
-            widgets:firstLoadData?.widgets || [],
             metaSource,
-            referer: firstLoadData.referer
-    }}
+       }}
 }
 
 export default actorsPage;

@@ -103,7 +103,7 @@ const PromotionTypeCard = props => {
             </a>
             <div className='promotion-card-under-media'>
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                    <a rel='next' onClick={props.onClickLoadingHandler} className='promotion-card-link-internal'>
+                    <a rel='next'  className='promotion-card-link-internal' onClick={props.onActivateLoadingHandler}>
                         <CardTitle title={props.title}/>
                         <div className='promotion-card-under-media-info'>
                             <p className='promotion-card-views'><span>{props.views}</span> {props.t(`common:Views`)}</p>

@@ -18,18 +18,13 @@ const ActorsRenderer = ({postElementSize, metaData, actors}) => {
             postElementSize === 'small' ? 255 :
                 postElementSize === 'medium' ? 320 : 255
 
-    const onActivateLoadingHandler = ()=>{
-        contextData.dispatchState(prevState => ({
-            ...prevState,
-            loading:true
-        }))
-    }
+
 
     return (
         <ActorsRendererStyledDiv className='actors-content'>
             {
                 (actors || metaData || []).map(actor => {
-                    return <ActorCard onActivateLoadingHandler={onActivateLoadingHandler} key={_.uniqueId('actors_')} cardWidth={cardWidth} actor={actor} postElementSize={postElementSize}/>
+                    return <ActorCard onActivateLoadingHandler={contextData?.functions?.loadingHandler} key={_.uniqueId('actors_')} cardWidth={cardWidth} actor={actor} postElementSize={postElementSize}/>
                 })
             }
         </ActorsRendererStyledDiv>

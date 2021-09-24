@@ -32,18 +32,15 @@ const posts = props => {
 export const getServerSideProps = async (context) => {
 
     const firstLoadData = await getFirstLoadData(context.req, ['postsPageLeftSidebar', 'postsPageRightSidebar'], 'postsPage')
-
     const gettingPostsQueries = _getPostsQueryGenerator(context.query,null,true)
-
     const postsData = await getPosts(gettingPostsQueries)
     const postsSource = postsData.data ? postsData.data : []
+
     return {props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets:firstLoadData?.widgets || [],
+            ...firstLoadData,
             query:context.query,
-            isMobile: Boolean(firstLoadData.isMobile),
             postsSource,
-            referer: firstLoadData.referer
     }}
 }
 

@@ -17,17 +17,12 @@ const TagsRenderer = ({postElementSize,metaData, tags}) => {
             postElementSize === 'small' ? 255 :
                 postElementSize === 'medium' ? 320 : 255
 
-    const onActivateLoadingHandler = ()=>{
-        contextData.dispatchState(prevState => ({
-            ...prevState,
-            loading:true
-        }))
-    }
+
     return (
         <TagsRendererStyledDiv className='tags-content'>
             {
                 (tags || metaData || []).map(tag => {
-                    return <TagCard onActivateLoadingHandler={onActivateLoadingHandler} key={_.uniqueId('tag_')} cardWidth={cardWidth} tag={tag} postElementSize={postElementSize}/>
+                    return <TagCard onActivateLoadingHandler={contextData?.functions?.loadingHandler} key={_.uniqueId('tag_')} cardWidth={cardWidth} tag={tag} postElementSize={postElementSize}/>
                 })
             }
         </TagsRendererStyledDiv>

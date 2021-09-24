@@ -64,6 +64,7 @@ const actorPage = (props: ClientPagesTypes) => {
 // @ts-ignore
 export const getServerSideProps: GetServerSideProps = async (context:GetServerSidePropsContext) => {
 
+    // @ts-ignore
     if (!context.query.actorId) return {notFound: true};
     if (!context.query?.actorId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
@@ -76,13 +77,11 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
-            widgets: firstLoadData?.widgets || [],
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
+            ...firstLoadData,
             query: context.query,
-            isMobile: firstLoadData?.isMobile ? Boolean(firstLoadData.isMobile) :false,
             postsSource,
             actor,
-            referer: firstLoadData?.referer ? firstLoadData?.referer :false
         }
     }
 }

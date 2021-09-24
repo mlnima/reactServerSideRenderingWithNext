@@ -2,6 +2,8 @@ import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
+import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Custom500StyledDiv = styled.div`
   display: flex;
@@ -21,9 +23,8 @@ const Custom500StyledDiv = styled.div`
   }
 `
 const Custom500 = () => {
-
     return (
-        <Custom500StyledDiv id='not-found-page'>
+        <Custom500StyledDiv id='not-found-page' className='main'>
             <h1>500 - Server Error</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
@@ -33,5 +34,14 @@ const Custom500 = () => {
         </Custom500StyledDiv>
     );
 };
+export const getStaticProps  = async (context) => {
+    const firstLoadData = await getFirstLoadDataStatic([])
 
-export default withTranslation(['common','customTranslation'])(Custom500);
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...firstLoadData
+        }
+    }
+}
+export default withTranslation(['common'])(Custom500);

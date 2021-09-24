@@ -30,7 +30,7 @@ const io = require('socket.io')(server, {
 
 
 app.get('/*', (req, res) => {
-
+      res.end()
 });
 
 server.listen(process.env.SOCKET_PORT, () => {
@@ -39,7 +39,6 @@ server.listen(process.env.SOCKET_PORT, () => {
 
 
 io.on('connection', socket => {
-
     socket.on('socketId', () => {
         socket.emit("socketId", socket.id)
     })

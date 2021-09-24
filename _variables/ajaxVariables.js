@@ -164,16 +164,17 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
         const cache = process.env.NODE_ENV !== 'development'
         const referer = false;
         const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length > 0 ? [...dynamicWidgets] : [];
-        const staticWidgetsToGet = referer ? [] : ['footer', 'header', 'topBar', 'navigation'];
-        const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
+        //const staticWidgetsToGet = referer ? [] : ['footer', 'header', 'topBar', 'navigation'];
+        const staticWidgetsToGet = [];
+        //const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
+        const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet]}, cache)
         const widgets = widgetData.data?.widgets ?? []
-        let settings = {
-            identity: process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {},
-            design:  process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {}
-        }
+        const identity = process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {}
+        const design =  process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {}
         let isMobile =Boolean((req.headers['user-agent'] || navigator?.userAgent || '').match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i))  || false;
         return {
-            settings,
+            identity,
+            design,
             widgets,
             referer,
             isMobile,
@@ -182,7 +183,8 @@ export const getFirstLoadData = async (req, dynamicWidgets) => {
         console.log(e)
     }
 }
-export const getFirstLoadDataStatic = async (req, dynamicWidgets) => {
+
+export const getFirstLoadDataStatic = async ( dynamicWidgets) => {
     try {
         const cache = process.env.NODE_ENV !== 'development'
         const referer = false;
@@ -190,13 +192,17 @@ export const getFirstLoadDataStatic = async (req, dynamicWidgets) => {
         const staticWidgetsToGet = referer ? [] : ['footer', 'header', 'topBar', 'navigation'];
         const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
         const widgets = widgetData.data?.widgets || []
-        let settings = {
-            identity: process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {},
-            design:  process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {}
-        }
+        const settings = await getMultipleSetting({settings: ['identity', 'design']},false)
+
+        const identityData = settings.data.settings ? settings.data.settings.find(s=>s.type==='identity') :{}
+        const designData = settings.data.settings ? settings.data.settings.find(s=>s.type==='design') : {}
+        // console.log(settings.data.settings.find(s=>s.type==='identity'))
+        const identity = identityData.data
+        const design =  designData.data
         let isMobile = false
         return {
-            settings,
+            identity,
+            design,
             widgets,
             referer,
             isMobile,

@@ -1,9 +1,32 @@
 {
+  "presets": [
+    [
+      "next/babel",
+      {
+        "styled-jsx": {
+          "plugins": [
+            "@styled-jsx/plugin-sass"
+          ]
+        }
 
-  "presets": [ ["next/babel",{ "styled-jsx": {"plugins": ["@styled-jsx/plugin-sass"] }}]],
+      }
+    ]
+  ],
   "plugins": [
-    ["styled-components", { "ssr": true,"displayName": true, "preprocess": false}],
-    ["inline-react-svg"]
+    [
+      "styled-components",
+      {
+        "ssr": true,
+        "displayName": true,
+        "preprocess": false
+      }
+    ],
+    [
+      "inline-react-svg"
+    ],
+    [
+      "@emotion"
+    ]
   ]
 }
 

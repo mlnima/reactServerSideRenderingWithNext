@@ -43,11 +43,11 @@ const Posts = ({viewType, isMobile, _id, redirectLink, postElementSize, posts, p
                 const rating = likeValueCalculator(post.likes, post.disLikes)
 
                 if (post.postType === 'video') {
-                    return <VideoTypeCard dir={dir} key={_.uniqueId('video_')} views={views} rating={rating} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
+                    return <VideoTypeCard onActivateLoadingHandler={contextData?.functions?.loadingHandler} dir={dir} key={_.uniqueId('video_')} views={views} rating={rating} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
                 } else if (post.postType === 'promotion') {
-                    return <PromotionTypeCard dir={dir} key={_.uniqueId('promotion_')} views={views} rating={rating} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
+                    return <PromotionTypeCard onActivateLoadingHandler={contextData?.functions?.loadingHandler} dir={dir} key={_.uniqueId('promotion_')} views={views} rating={rating} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
                 } else if (post.postType === 'article') {
-                    return <ArticleTypeCard dir={dir} key={_.uniqueId('article_')} views={views} rating={rating} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
+                    return <ArticleTypeCard onActivateLoadingHandler={contextData?.functions?.loadingHandler} dir={dir} key={_.uniqueId('article_')} views={views} rating={rating} noImageUrl={noImageUrl} post={post} postElementSize={postElementSize} widgetId={widgetId} title={title} cardWidth={cardWidth}/>
                 } else return (
                     <PostElement
                         isMobile={isMobile}

@@ -100,7 +100,7 @@ const ArticleTypeCard = props => {
     return (
         <ArticleCard className='article-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                <a rel='next' onClick={props.onClickLoadingHandler} className='article-card-link' title={props.title}>
+                <a rel='next' onClick={props.onClickLoadingHandler} className='article-card-link' title={props.title}  onClick={props.onActivateLoadingHandler}>
 
                     <ArticleCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                     <div className='article-card-under-media'>

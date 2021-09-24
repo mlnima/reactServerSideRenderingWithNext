@@ -2,6 +2,8 @@ import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
+import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Custom404StyledDiv = styled.div`
   display: flex;
@@ -24,7 +26,7 @@ const Custom404StyledDiv = styled.div`
 const Custom404 = props => {
 
     return (
-        <Custom404StyledDiv id='not-found-page'>
+        <Custom404StyledDiv id='not-found-page main' className='main'>
             <h1>404 - {props.t(`Not Found`)}</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
@@ -34,5 +36,17 @@ const Custom404 = props => {
         </Custom404StyledDiv>
     );
 };
+
+// @ts-ignore
+export const getStaticProps  = async (context) => {
+    const firstLoadData = await getFirstLoadDataStatic([])
+
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...firstLoadData
+        }
+    }
+}
 
 export default withTranslation(['common','customTranslation'])(Custom404);

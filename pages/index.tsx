@@ -28,27 +28,11 @@ export const getServerSideProps:GetServerSideProps = async (context:GetServerSid
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets : firstLoadData?.widgets || [],
-            ...firstLoadData?.settings,
-            isMobile: firstLoadData?.isMobile ? Boolean(firstLoadData.isMobile) :false,
-            referer: firstLoadData?.referer ? firstLoadData?.referer :false,
-
-        }}
+            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
+            ...firstLoadData
+        }
+    }
 }
 
 export default Home;
 
-// export const getServerSideProps:(context: GetServerSidePropsContext) => Promise<{ props: { referer: boolean; _nextI18Next: { initialI18nStore: any; initialLocale: string; userConfig: UserConfig | null }; identity: any; design: any; isMobile: boolean; widgets: * } }> = async (context:GetServerSidePropsContext) => {
-//     const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'])
-//
-//     return {
-//         props: {
-//             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-//             widgets : firstLoadData?.widgets || [],
-//             ...firstLoadData?.settings,
-//             isMobile: firstLoadData?.isMobile ? Boolean(firstLoadData.isMobile) :false,
-//             referer: firstLoadData?.referer ? firstLoadData?.referer :false,
-//
-//         }}
-// }

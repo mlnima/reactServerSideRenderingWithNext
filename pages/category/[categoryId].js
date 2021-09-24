@@ -74,14 +74,15 @@ export const getServerSideProps = async (context) => {
     const category = categoryData.data ? categoryData.data.meta : {}
     const postsData = await getPosts(gettingPostsQueries)
     const postsSource = postsData.data ? postsData.data : []
-    return {props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets:firstLoadData?.widgets || [],
-            query:context.query || {},
-            isMobile: Boolean(firstLoadData.isMobile) || false,
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
+            ...firstLoadData,
+            query: context.query || {},
             postsSource,
-            category:category || null,
-            referer: firstLoadData.referer}}
+            category: category || null,
+        }
+    }
 }
 
 export default categoryPage;

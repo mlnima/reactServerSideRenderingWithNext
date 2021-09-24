@@ -56,14 +56,10 @@ const messengerPage = props => {
 
 export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'messengerPage')
-    const widgets = firstLoadData.widgets
     return {props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-        widgets,
-            ...firstLoadData.settings,
-            isMobile: Boolean(firstLoadData.isMobile),
-            referer: firstLoadData.referer,
-            requestProtocol: context.req.protocol
+            ...firstLoadData,
+
     }}
 }
 

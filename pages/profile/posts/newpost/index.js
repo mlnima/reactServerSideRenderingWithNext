@@ -111,11 +111,7 @@ export const getServerSideProps = async (context) => {
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets: firstLoadData.widgets,
-            ...firstLoadData.widgets,
-            ...firstLoadData.settings,
-            isMobile: Boolean(firstLoadData.isMobile),
-            referer: firstLoadData.referer,
+            ...firstLoadData,
             query: context.query
         }
     }

@@ -134,7 +134,7 @@ const VideoTypeCard = (props) => {
 
 
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                <a rel='next' onClick={props.onClickLoadingHandler} className='video-card-link' title={props.title}>
+                <a rel='next'  className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
 
                     <VideoCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                     <span className='video-card-under-media'>

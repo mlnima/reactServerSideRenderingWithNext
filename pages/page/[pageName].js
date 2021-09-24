@@ -27,18 +27,14 @@ export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req,[context.query.pageName, context.query.pageName + 'LeftSidebar',context.query.pageName + 'RightSidebar'],context.query.pageName)
     let responseCode = 200
     const pageData = await getPageData({pageName: context.query.pageName})
-
     if (!pageData.data.pageData)return { notFound: true}
-
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets:firstLoadData?.widgets || [],
+            ...firstLoadData,
             pageInfo:pageData.data ? pageData.data.pageData : {},
             query:context.query,
-            isMobile: firstLoadData.isMobile ? Boolean(firstLoadData.isMobile) : false,
-            referer: firstLoadData.referer,
             responseCode
         }}
 }

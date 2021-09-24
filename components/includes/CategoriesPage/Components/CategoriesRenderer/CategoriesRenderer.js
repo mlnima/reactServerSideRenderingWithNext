@@ -19,17 +19,11 @@ const CategoriesRenderer = ({postElementSize, metaData, categories}) => {
             postElementSize === 'small' ? 255 :
                 postElementSize === 'medium' ? 320 : 255
 
-    const onActivateLoadingHandler = ()=>{
-        contextData.dispatchState(prevState => ({
-            ...prevState,
-            loading:true
-        }))
-    }
     return (
         <CategoriesRendererStyledDiv className='categories-content'>
             {
                 (categories || metaData || []).map(category => {
-                    return <CategoryCard onActivateLoadingHandler={onActivateLoadingHandler} key={_.uniqueId('category_')} cardWidth={cardWidth} category={category} postElementSize={postElementSize}/>
+                    return <CategoryCard onActivateLoadingHandler={contextData?.functions?.loadingHandler} key={_.uniqueId('category_')} cardWidth={cardWidth} category={category} postElementSize={postElementSize}/>
                 })
             }
         </CategoriesRendererStyledDiv>

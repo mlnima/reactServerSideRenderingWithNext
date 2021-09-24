@@ -79,6 +79,7 @@ const chatRoom = props => {
 
 
     useEffect(() => {
+        console.log(socket)
         socket.emit('socketId')
         socket.emit('onlineUsersList')
         socket.emit('recentChatRoomMessages',router.query.chatRoomName)
@@ -149,7 +150,8 @@ export const getServerSideProps = async (context) => {
         props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
             widgets: firstLoadData?.widgets || [],
-            ...firstLoadData.settings,
+            identity:firstLoadData.identity,
+            design:firstLoadData.design,
             isMobile: Boolean(firstLoadData.isMobile),
             referer: firstLoadData.referer,
             requestProtocol: context.req.protocol

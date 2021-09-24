@@ -12,7 +12,10 @@ const LanguagesSwitcherStyledDiv = styled.div`
   flex-wrap: wrap;
 
   .language-switcher-widget-text{
-    margin: 0 20px 5px 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 0 10px;
     font-size: 12px;
     color: var(--navigation-text-color);
   }
@@ -21,9 +24,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
     background-color: var(--navigation-background-color);
     color: var(--navigation-text-color);
   }
-  
 `
-
 const LanguagesSwitcher = props => {
     const contextData = useContext(AppContext);
     const router = useRouter()
@@ -33,13 +34,6 @@ const LanguagesSwitcher = props => {
             ...contextData.state,
             activeLanguage: e.target.value
         })
-        // if (!props.cookiePage){
-        //     if (e.target.value === 'default'){
-        //         router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.NEXT_PUBLIC_DEFAULT_LOCAL})
-        //     }else {
-        //         router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:e.target.value})
-        //     }
-        // }
         if (e.target.value === 'default'){
             router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale:process.env.NEXT_PUBLIC_DEFAULT_LOCAL})
         }else {
@@ -49,11 +43,6 @@ const LanguagesSwitcher = props => {
 
     return (
         <LanguagesSwitcherStyledDiv className='language-switcher-widget'>
-
-            {/*{(props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown)?*/}
-            {/* <p className='language-switcher-widget-text'>{props.translations?.[contextData.state.activeLanguage || router.locale ]?.languageToShowBesideDropDown ?? props.languageToShowBesideDropDown}</p>:*/}
-            {/*    null*/}
-            {/*}*/}
             <p className='language-switcher-widget-text'>{props.t(`common:Language`)}</p>
             <select value={ contextData.state.activeLanguage || router.locale } aria-label='Center Align'
                 onChange={e => onChangeHandler(e)} >

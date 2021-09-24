@@ -44,7 +44,7 @@ const AppProvider = props => {
         customScripts: []
     });
 
-    const [conversations,dispatchConversations] = useState([])
+    // const [conversations,dispatchConversations] = useState([])
 
     const [eCommerceSettings,dispatchECommerceSettings]= useState({
         translations:{}
@@ -60,37 +60,37 @@ const AppProvider = props => {
 
     const [userData, dispatchUserData] = useState({});
 
-    const [editingPostData, dispatchEditingPostData] = useState({
-        categories: [],
-        actors: [],
-        tags: [],
-        title: '',
-        author: '',
-        description: '',
-        disLikes: 0,
-        mainThumbnail: '',
-        videoTrailerUrl: '',
-        videoEmbedCode: '',
-        likes: 0,
-        quality: '',
-        status: '',
-        postType: '',
-        sourceSite: '',
-        views: 0,
-    });
+    // const [editingPostData, dispatchEditingPostData] = useState({
+    //     categories: [],
+    //     actors: [],
+    //     tags: [],
+    //     title: '',
+    //     author: '',
+    //     description: '',
+    //     disLikes: 0,
+    //     mainThumbnail: '',
+    //     videoTrailerUrl: '',
+    //     videoEmbedCode: '',
+    //     likes: 0,
+    //     quality: '',
+    //     status: '',
+    //     postType: '',
+    //     sourceSite: '',
+    //     views: 0,
+    // });
     const [adminPosts, dispatchAdminPosts] = useState([]);
 
-    const [adminPostsData, dispatchAdminPostsData] = useState({
-        pageNo: 1,
-        size: 30,
-        totalPosts: 0,
-        postType: 'all',
-        keyword: '',
-        status: 'all',
-        author: 'all',
-        fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
-        checkedPosts: [],
-    });
+    // const [adminPostsData, dispatchAdminPostsData] = useState({
+    //     pageNo: 1,
+    //     size: 30,
+    //     totalPosts: 0,
+    //     postType: 'all',
+    //     keyword: '',
+    //     status: 'all',
+    //     author: 'all',
+    //     fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
+    //     checkedPosts: [],
+    // });
 
     const [widgetsSettings, dispatchWidgetsSettings] = useState({
         widgets: [],
@@ -98,17 +98,22 @@ const AppProvider = props => {
 
     const [siteWidgets, setSiteWidgets] = useState([])
 
-    const [videoPostsDataForClient, dispatchVideoPostsDataForClient] = useState({
-        pageNo: 1,
-        size: 12,
-        totalPosts: 0,
-        postType: 'all',
-        keyword: '',
-        status: 'all',
-        author: 'all',
-        fields: ['title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration'],
-        checkedPosts: [],
-    });
+
+
+    const [callData,setCallData] = useState({
+        calling: false,
+        answering: false,
+        callAccepted: false,
+        receivingCall: false,
+        callOptions:{
+            video: true ,
+            audio: true
+        },
+        camera: true,
+        microphone:true
+    })
+
+
 
     const [functions, dispatchFunctions] = useState({
         getAndSetUserInfo: async () => {
@@ -264,14 +269,12 @@ const AppProvider = props => {
                     userData,
                     dispatchUserData,
                     functions,
-                    editingPostData,
-                    dispatchEditingPostData,
+                    // editingPostData,
+                    // dispatchEditingPostData,
                     adminPosts,
                     dispatchAdminPosts,
-                    adminPostsData,
-                    dispatchAdminPostsData,
-                    videoPostsDataForClient,
-                    dispatchVideoPostsDataForClient,
+                    // adminPostsData,
+                    // dispatchAdminPostsData,
                     dispatchSiteIdentity,
                     siteIdentity,
                     widgetsSettings,
@@ -286,8 +289,8 @@ const AppProvider = props => {
                     setCheckOutData,
                     eCommerceSettings,
                     dispatchECommerceSettings,
-                    conversations,
-                    dispatchConversations,
+                    // conversations,
+                    // dispatchConversations,
                 }}>
                 {props.children}
             </AppContext.Provider>

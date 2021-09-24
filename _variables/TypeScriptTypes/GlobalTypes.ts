@@ -26,13 +26,17 @@ export interface WidgetPropTypes {
 }
 
 export interface GetServerSidePropsContext {
-    req:object;
-    isMobile:boolean;
-    notFound:boolean;
-    query:{
-        actorId:string
+    req?:object;
+    isMobile?:boolean;
+    notFound?:boolean;
+    query?:{
+        actorId?:string|undefined
+        tagId?:string|undefined
+        categoryId?:string|undefined
     },
-    locale:string;
+    locale?:string|undefined;
+    locales?:string[];
+    defaultLocale?:string;
 }
 
 export interface Meta {
