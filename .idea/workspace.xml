@@ -20,59 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.babelrc" beforeDir="false" afterPath="$PROJECT_DIR$/.babelrc" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/socket.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/socket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorsRenderer/ActorsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorsRenderer/ActorsRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ConversationBox/ConversationBox.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ConversationBox/ConversationBox.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Loading/Loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Loading/Loading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagsRenderer/TagsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagsRenderer/TagsRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/context/AppContext.js" beforeDir="false" afterPath="$PROJECT_DIR$/context/AppContext.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/404.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/500.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actors/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/login.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/login.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/auth/register.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/auth/register.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/checkout/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/checkout/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/maintenance/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/maintenance/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/[conversation].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/[conversation].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/followers/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/followers/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/following/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/following/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/friendRequests/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/friendRequests/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/friends/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/friends/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/posts/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/posts/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/posts/newpost/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/posts/newpost/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/search/[keyword].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/search/[keyword].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/[username].js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/_variables/_setSettingToEnvironmentVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/_variables/_setSettingToEnvironmentVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/socketServer/socketServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/socketServer/socketServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/trash/staticIndex.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/staticIndex.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ActorsPage/Components/ActorCard/ActorCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/CategoriesPage/Components/CategoryCard/CategoryCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/TagsPage/Components/TagCard/TagCard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -859,7 +810,7 @@
       <workItem from="1632299288125" duration="36391000" />
       <workItem from="1632390862546" duration="10650000" />
       <workItem from="1632419576544" duration="16434000" />
-      <workItem from="1632477837784" duration="5973000" />
+      <workItem from="1632477837784" duration="8313000" />
     </task>
     <servers />
   </component>

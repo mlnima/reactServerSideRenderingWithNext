@@ -45,7 +45,7 @@ const ActorCard = ({t, cardWidth, actor, onActivateLoadingHandler}) => {
 
     return (
         <Link href={`/actor/${actor._id}`}>
-            <ActorCardStyledLink className='actor-card-link' onClick={onActivateLoadingHandler} cardWidth={cardWidth}>
+            <ActorCardStyledLink className='actor-card-link' onClick={onActivateLoadingHandler} cardWidth={cardWidth} rel="noopener">
 
                 <ActorCardMedia cardWidth={cardWidth} imageUrl={actor.imageUrl} mediaAlt={actor?.translations?.[router.locale]?.name || actor.name} actorId={actor?._id}/>
                 <h3 className='actor-card-title'> {actor?.translations?.[router.locale]?.name || t([t(`customTranslation:${actor?.name}`)])}</h3>

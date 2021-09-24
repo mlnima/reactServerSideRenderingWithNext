@@ -44,7 +44,7 @@ const TagCard = ({t,cardWidth, tag,onActivateLoadingHandler}) => {
     const router = useRouter()
     return (
         <Link href={`/tag/${tag._id}`}>
-            <TagCardStyledLink className='tag-card-link' onClick={onActivateLoadingHandler} cardWidth={cardWidth}>
+            <TagCardStyledLink className='tag-card-link' onClick={onActivateLoadingHandler} cardWidth={cardWidth} rel="noopener">
 
                 <TagCardMedia cardWidth={cardWidth} imageUrl={tag.imageUrl} mediaAlt={tag?.translations?.[router.locale]?.name || tag.name} tagId={tag._id}/>
                 <h3 className='tag-card-title'> { tag?.translations?.[router.locale]?.name || t([t(`customTranslation:${tag?.name}`)])}</h3>
