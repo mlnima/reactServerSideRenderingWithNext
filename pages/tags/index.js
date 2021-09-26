@@ -5,7 +5,7 @@ import PaginationComponent from "../../components/includes/PaginationComponent/P
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
-import TagsRenderer from "../../components/includes/TagsPage/Components/TagsRenderer/TagsRenderer";
+import TagsRenderer from "../../components/includes/pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 import styled from "styled-components";

@@ -41,7 +41,7 @@ const MessengerConversationMessageTools = props => {
                     bottom: 0;
                     height: 50px;
                     padding: 2px;
-                    background-color: var(--navigation-background-color);
+                    background-color: var(--navigation-background-color,#18181b);
                     display: flex;
                     justify-content: center;
                     align-items: center;
@@ -69,7 +69,7 @@ const MessengerConversationMessageTools = props => {
                     right: 8px;
                 }
                 .messenger-conversation-message-tools-btn{
-                    background-color: var(--navigation-background-color);
+                    background-color: var(--navigation-background-color,#18181b);
                     border: none;
                     width: 34px;
                     height: 34px;
@@ -85,7 +85,7 @@ const MessengerConversationMessageTools = props => {
             </div>
             <div className='messenger-conversation-message-tools-Send'>
                 <button onClick={e => onSendMessageHandler(e)} className='messenger-conversation-message-tools-btn'>
-                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faArrowRight}/>
+                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faArrowRight}/>
                 </button>
 
             </div>

@@ -1,13 +1,13 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import ProfileCoverImage from '../../../components/includes/MyProfileComponents/ProfileCoverImage/ProfileCoverImage'
-import ProfileNavigation from '../../../components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation'
+import ProfileCoverImage from '../../../components/includes/profilePageComponents/ProfileCoverImage/ProfileCoverImage'
+import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import {AppContext} from "../../../context/AppContext";
 import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariables";
 import _ from "lodash";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
-import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
+import ProfileImage from "../../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const Followers = props => {

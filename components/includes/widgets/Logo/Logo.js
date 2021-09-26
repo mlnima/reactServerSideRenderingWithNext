@@ -5,26 +5,29 @@ import ImageRenderer from "../../ImageRenderer/ImageRenderer";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 
-const LogoStyledLink = styled.a`
-  text-decoration: none;
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 300px;
-  cursor: pointer;
-  .logo-text {
-    font-size: xx-large;
+const LogoStyledSpan = styled.span`
+  .logo{
+    text-decoration: none;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: flex-start;
+    max-width: 300px;
+    cursor: pointer;
+    .logo-text {
+      font-size: xx-large;
+    }
+
+    .logo-text, .logo-headline {
+      color: var(--main-text-color);
+    }
+
+    .logo-headline {
+      margin: 0 5px;
+    }
   }
 
-  .logo-text, .logo-headline {
-    color: var(--main-text-color);
-  }
-
-  .logo-headline {
-    margin: 0 5px;
-  }
 `
 const Logo = props => {
     const router = useRouter()
@@ -34,8 +37,9 @@ const Logo = props => {
     const logoImageUrl = props.LogoUrl;
 
     return (
+        <LogoStyledSpan>
         <Link href='/' locale={router.locale || false}>
-            <LogoStyledLink className='logo' onClick={contextData.functions.loadingHandler}>
+            <a className='logo' onClick={contextData.functions.loadingHandler}>
                 {logoImageUrl ?
                     <ImageRenderer imageUrl={logoImageUrl}
                                    altValue='logo'
@@ -50,8 +54,9 @@ const Logo = props => {
                     </span>
                     : null}
                 {headLineData ? <p className='logo-headline'>{headLineData}</p> : null}
-            </LogoStyledLink>
+            </a>
         </Link>
+            </LogoStyledSpan>
     );
 };
 

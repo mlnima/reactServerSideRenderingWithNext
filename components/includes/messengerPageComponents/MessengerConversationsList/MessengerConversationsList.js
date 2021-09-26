@@ -22,7 +22,7 @@ justify-content: center;
 
 }
 .no-message{
-color: var(--navigation-text-color);
+color: var(--navigation-text-color, #ccc);
 }
 
 `}</style>

@@ -31,7 +31,7 @@ const ConversationBox = props => {
                 <style jsx>{`
                     .conversation-box{
                       position: relative;
-                      background-color: var(--navigation-background-color);
+                      background-color: var(--navigation-background-color,#18181b);
                       width: 310px;
                       height:  ${minimized ? '48px' : '400px'};
                       max-height:  ${minimized ? '48px' : '400px'};

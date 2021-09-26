@@ -1,7 +1,7 @@
-import React, {useContext} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import React from 'react';
 import LoginRegisterPopupForms from "./LoginRegisterPopupForms";
 import styled from "styled-components";
+import {useSelector} from "react-redux";
 
 const LoginRegisterPopupStyledDiv = styled.div`
   background-color: rgba(0,0,0,.8);
@@ -17,27 +17,20 @@ const LoginRegisterPopupStyledDiv = styled.div`
   width: 100%;
   margin: 0;
   padding: 0;
-`
+`;
 
-const LoginRegisterPopup = props => {
-    const contextData = useContext(AppContext);
+const LoginRegisterPopup = () => {
 
-    const onTypeChangeHandler = ()=>{
-        contextData.state.loginRegisterFormPopupType === 'register' ?
-            contextData.dispatchState({...contextData.state,loginRegisterFormPopupType: 'login'}):
-            contextData.dispatchState({...contextData.state,loginRegisterFormPopupType: 'register'})
-    }
+    const globalState = useSelector(state => state.globalState)
+    const loggedIn = useSelector(state => state.user.loggedIn)
 
-    if (contextData.state.loginRegisterFormPopup && !contextData.userData._id){
+    if (globalState.loginRegisterFormPopup && !loggedIn){
         return (
             <LoginRegisterPopupStyledDiv className='login-register-popup'>
-                <LoginRegisterPopupForms  onTypeChangeHandler={onTypeChangeHandler}/>
+                <LoginRegisterPopupForms />
             </LoginRegisterPopupStyledDiv>
         );
     }else return null
-
-
-
 
 };
 

@@ -14,7 +14,7 @@ const ConversationBoxMessage = props => {
                     max-width: 100%;
             }
             .conversation-box-body-message-text{
-                color: var(--navigation-text-color) ;
+                color: var(--navigation-text-color, #ccc) ;
                 padding:2px 5px;
                 max-width: 90%;
                 word-break: break-word;

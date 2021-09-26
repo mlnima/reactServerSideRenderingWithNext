@@ -1,9 +1,9 @@
-import {useContext} from 'react';
 import Link from "next/link";
 import moment from "moment";
-import {AppContext} from "../../../../../../context/AppContext";
 import {deleteComments} from "../../../../../../_variables/ajaxPostsVariables";
 import styled from "styled-components";
+import {useSelector} from "react-redux";
+
 const CommentStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -20,22 +20,24 @@ const CommentStyledDiv = styled.div`
 
     }
     .comment-author{
-      color:var(--comment-author-color);
+      color:var(--comment-author-color,#f90);
       margin: 4px 10px;
       font-weight: bold;
     }
     .comment-date{
-      color:var(--comment-date-color);
+      color:var(--comment-date-color, #fff);
       font-size: 14px;
       margin: 4px 5px;
     }
   }
   .comment-body{
-    color:var(--comment-body-color);
+    color:var(--comment-body-color,#fff);
   }
 `
+
 const Comment = props => {
-    const contextData = useContext(AppContext);
+
+    const userData = useSelector(state => state.user.userData)
 
     const onDeleteHandler = (id) => {
         deleteComments([id], process.env.NEXT_PUBLIC_PRODUCTION_URL).then(() => {
@@ -57,7 +59,7 @@ const Comment = props => {
                 </Link>
                 <span className='comment-date'>{moment(new Date(props.comment?.createdAt), "YYYYMMDD").fromNow(false)}</span>
                         {
-                             contextData.userData.role === 'administrator' ?
+                            userData.role === 'administrator' ?
                                 <div className='comments-admin-action-btns'>
                                     <button onClick={() => onDeleteHandler(props.comment?._id)}>Delete</button>
                               </div> : null

@@ -67,8 +67,8 @@ export const getServerSideProps = async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar',], 'postsPage');
     const tagData = context.query?.tagId ? await getSingleMeta(context.query.tagId, true) : {};
     const gettingPostsQueries = _getPostsQueryGenerator(context.query,context.query.tagId,true);
-    const tag = tagData.data ? tagData.data.meta : {};
-    const postsData = await getPosts(gettingPostsQueries);
+    const tag = tagData?.data ? tagData.data.meta : {};
+    const postsData = await getPosts(gettingPostsQueries)
     const postsSource = postsData.data ? postsData.data : [];
 
     return {

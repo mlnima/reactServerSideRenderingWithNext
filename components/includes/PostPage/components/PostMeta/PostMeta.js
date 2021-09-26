@@ -11,7 +11,7 @@ const PostMetaStyledDiv = styled.div`
   width: 100%;
 
   .meta-type {
-    color: var(--post-page-info-color);
+    color: var(--post-page-info-color,#ccc);
     display: flex;
     margin: 0 5px;
   }
@@ -22,7 +22,7 @@ const PostMetaStyledDiv = styled.div`
   }
 
   .post-meta-item {
-    background-color: var(--meta-background-color);
+    background-color: var(--meta-background-color,#f90);
     padding: 5px;
     display: flex;
     align-items: center;
@@ -32,7 +32,7 @@ const PostMetaStyledDiv = styled.div`
   }
 
   .post-meta-item-link {
-    color: var(--meta-text-color);
+    color: var(--meta-text-color,#000);
     text-decoration: none;
   }
 `

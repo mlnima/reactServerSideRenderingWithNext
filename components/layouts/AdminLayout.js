@@ -3,20 +3,35 @@ import dynamic from "next/dynamic";
 import Head from "next/head";
 import TopBar from "../adminIncludes/TopBar/AdminTopBar";
 import SideBar from "../adminIncludes/SideBar/SideBar";
+import {useDispatch, useSelector} from 'react-redux';
+import {autoUserLogin} from "../../store/actions/userActions";
 import {AppContext} from "../../context/AppContext";
-
-const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
-import Link from "next/link";
-
-const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 import {getSetting} from '../../_variables/ajaxVariables'
 import {createGlobalStyle} from "styled-components";
 import AdminPanelGlobalStyles from "../global/AdminPanelGlobalStyles";
+import Link from "next/link";
 
+const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
+const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 let GlobalStyle = createGlobalStyle`${props => props.globalStyleData}`
 
-
 const AdminLayout = props => {
+
+    const dispatch = useDispatch()
+    const loggedIn = useSelector(state => state.user.loggedIn)
+    const userData = useSelector(state => state.user.userData)
+
+    useEffect(() => {
+        if (localStorage.wt && !loggedIn) {
+            dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'coverImage']))
+        }
+    }, []);
+
+
+    useEffect(() => {
+        console.log('userData',userData)
+    }, [userData]);
+
     const contextData = useContext(AppContext);
     const container = useRef(null);
     const Admin = useRef(null);
@@ -37,7 +52,7 @@ const AdminLayout = props => {
 
     }, []);
 
-    if (contextData.userData.role === 'administrator') {
+    if (userData.role === 'administrator') {
         return (
             <>
                 <Head>

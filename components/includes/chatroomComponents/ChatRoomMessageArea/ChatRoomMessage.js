@@ -10,11 +10,11 @@ class ChatRoomMessage extends PureComponent {
                 <div className='chatroom-message-area-message'>
                     <style jsx>{`
                       .chatroom-message-area-message {
-                        background-color: var(--navigation-background-color);
+                        background-color: var(--navigation-background-color,#18181b);
                       }
 
                       .chatroom-message-area-message-log {
-                        color: var(--navigation-text-color);
+                        color: var(--navigation-text-color, #ccc);
                         padding: 5px;
                         margin: 5px;
                         text-align: center;
@@ -41,12 +41,12 @@ class ChatRoomMessage extends PureComponent {
                   .chatroom-message-area-message-username-time {
                     display: flex;
                     justify-content: space-between;
-                    color: var(--navigation-text-color);
+                    color: var(--navigation-text-color, #ccc);
                     font-size: small;
                   }
 
                   .chatroom-message-area-message-text {
-                    color: ${this.props.message.color || 'var(--navigation-text-color)'};
+                    color: ${this.props.message.color || 'var(--navigation-text-color, #ccc)'};
                     margin: 10px 20px;
                     overflow-wrap: break-word;
                   }
@@ -67,14 +67,14 @@ class ChatRoomMessage extends PureComponent {
                   }
 
                   .chatroom-message-area-message-data {
-                    background-color: var(--navigation-background-color);
+                    background-color: var(--navigation-background-color,#18181b);
                     padding: 10px;
                     margin: 5px;
                     border-radius: 10px;
                   }
 
                   .chatroom-message-area-message-time {
-                    color: var(--navigation-text-color);
+                    color: var(--navigation-text-color, #ccc);
                     font-size: xx-small;
                     margin-left: 30px;
                   }

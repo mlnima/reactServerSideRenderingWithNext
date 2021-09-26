@@ -23,7 +23,7 @@ const UserSmallPreview = ({username,role,profileImage,name,lastName,_id,gender})
                         display: flex;
                         align-items: center;
                         justify-content: flex-start;
-                        background-color: var(--navigation-background-color);
+                        background-color: var(--navigation-background-color,#18181b);
                         margin: 10px auto;
                     }
                     .user-profile-image{
@@ -35,7 +35,7 @@ const UserSmallPreview = ({username,role,profileImage,name,lastName,_id,gender})
                         margin: 0 5px;
                     }
                     p{
-                        color: var(--navigation-text-color); 
+                        color: var(--navigation-text-color, #ccc); 
                     }
                 `}</style>
 

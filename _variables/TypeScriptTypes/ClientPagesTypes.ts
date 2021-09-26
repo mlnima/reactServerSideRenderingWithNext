@@ -12,7 +12,6 @@ export interface ClientPagesTypes {
     referer: boolean;
     currentPageSidebar:boolean|string;
     widgets: WidgetPropTypes[];
-
 }
 // position: string,
 //     deviceTypeToRender: string,

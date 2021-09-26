@@ -1,7 +1,10 @@
-import React, { useEffect, useState,createContext} from 'react';
-import  axios from 'axios'
+import React, {useEffect, useState, createContext} from 'react';
+import axios from 'axios'
 import {useRouter} from "next/router";
 import {getSignedInUserData} from "../_variables/ajaxAuthVariables";
+import _getMultipleWidgets from "../_variables/adminAjaxVariables/adminAjaxWidgetsVariables/_getMultipleWidgets";
+import {getSetting} from "../_variables/ajaxVariables";
+import {getMultipleSetting} from "../_variables/adminAjaxVariables/adminAjaxSettingsVariables/getMultipleSetting";
 
 
 export const AppContext = createContext();
@@ -15,28 +18,29 @@ const AppProvider = props => {
         activeLanguage: router.locale || router.query.locale || 'default',
         navigationOpenStatus: false,
         isMobile: true,
-        console:false,
-        currentPageSidebar:true,
-        deviceWidth:320,
-        checkoutSlideEnable:false,
-        designSet:false,
-        identitySet:false,
-        loginRegisterFormPopup:false,
-        loginRegisterFormPopupType:'login'
+        console: false,
+        currentPageSidebar: true,
+        deviceWidth: 320,
+        checkoutSlideEnable: false,
+        designSet: false,
+        identitySet: false,
+        loginRegisterFormPopup: false,
+        loginRegisterFormPopupType: 'login'
     });
 
+    const [widgets, setWidgets] = useState([])
     const [alert, dispatchAlert] = useState({
         active: false,
         alertMessage: '',
         type: ''
     })
 
-    const [checkOutData, setCheckOutData]= useState({
-        items:[]
+    const [checkOutData, setCheckOutData] = useState({
+        items: []
     })
 
     const [siteIdentity, dispatchSiteIdentity] = useState({
-        isSet:false,
+        isSet: false,
         title: 'site title',
         themeColor: '#000',
         description: 'site description',
@@ -44,10 +48,8 @@ const AppProvider = props => {
         customScripts: []
     });
 
-    // const [conversations,dispatchConversations] = useState([])
-
-    const [eCommerceSettings,dispatchECommerceSettings]= useState({
-        translations:{}
+    const [eCommerceSettings, dispatchECommerceSettings] = useState({
+        translations: {}
     })
 
     const [siteDesign, dispatchSiteDesign] = useState({});
@@ -60,37 +62,8 @@ const AppProvider = props => {
 
     const [userData, dispatchUserData] = useState({});
 
-    // const [editingPostData, dispatchEditingPostData] = useState({
-    //     categories: [],
-    //     actors: [],
-    //     tags: [],
-    //     title: '',
-    //     author: '',
-    //     description: '',
-    //     disLikes: 0,
-    //     mainThumbnail: '',
-    //     videoTrailerUrl: '',
-    //     videoEmbedCode: '',
-    //     likes: 0,
-    //     quality: '',
-    //     status: '',
-    //     postType: '',
-    //     sourceSite: '',
-    //     views: 0,
-    // });
-    const [adminPosts, dispatchAdminPosts] = useState([]);
 
-    // const [adminPostsData, dispatchAdminPostsData] = useState({
-    //     pageNo: 1,
-    //     size: 30,
-    //     totalPosts: 0,
-    //     postType: 'all',
-    //     keyword: '',
-    //     status: 'all',
-    //     author: 'all',
-    //     fields: ['author', 'title', 'mainThumbnail', 'status', 'actors', 'tags', 'categories'],
-    //     checkedPosts: [],
-    // });
+    const [adminPosts, dispatchAdminPosts] = useState([]);
 
     const [widgetsSettings, dispatchWidgetsSettings] = useState({
         widgets: [],
@@ -98,27 +71,24 @@ const AppProvider = props => {
 
     const [siteWidgets, setSiteWidgets] = useState([])
 
-
-
-    const [callData,setCallData] = useState({
+    const [callData, setCallData] = useState({
         calling: false,
         answering: false,
         callAccepted: false,
         receivingCall: false,
-        callOptions:{
-            video: true ,
+        callOptions: {
+            video: true,
             audio: true
         },
         camera: true,
-        microphone:true
+        microphone: true
     })
-
 
 
     const [functions, dispatchFunctions] = useState({
         getAndSetUserInfo: async () => {
             if (localStorage.wt) {
-                getSignedInUserData(['username','role','keyMaster','profileImage','coverImage']).then(res => {
+                getSignedInUserData(['username', 'role', 'keyMaster', 'profileImage', 'coverImage']).then(res => {
                     dispatchUserData({...userData, ...res.data.userData});
                 }).catch(err => {
                     console.log(err);
@@ -127,12 +97,12 @@ const AppProvider = props => {
             }
         },
         createOrder: (data) => {
-             if (data.type === 'payPal'){
-                 const body ={
-                     data
-                 }
-                 return axios.post('/api/v1/orders/create/payPal',body)
-             }
+            if (data.type === 'payPal') {
+                const body = {
+                    data
+                }
+                return axios.post('/api/v1/orders/create/payPal', body)
+            }
         },
         logOutUser: () => {
             localStorage.removeItem('wt');
@@ -213,9 +183,9 @@ const AppProvider = props => {
             };
             return await axios.post(window.location.origin + '/api/v1/settings/clearCaches', body)
         },
-        getCheckOutData: ()=>{
-            if (typeof window !== 'undefined'){
-                if (localStorage?.checkOutItems){
+        getCheckOutData: () => {
+            if (typeof window !== 'undefined') {
+                if (localStorage?.checkOutItems) {
                     const items = JSON.parse(localStorage.checkOutItems)
                     setCheckOutData({
                         items
@@ -223,12 +193,12 @@ const AppProvider = props => {
                 }
             }
         },
-        loadingHandler : ()=>{
+        loadingHandler: () => {
             state.loading ?
                 dispatchState({
                     ...state,
                     loading: false
-                }):
+                }) :
                 dispatchState({
                     ...state,
                     loading: true
@@ -238,24 +208,41 @@ const AppProvider = props => {
 
     });
 
-    useEffect(() => {
-        if (localStorage.wt ) {
-            getSignedInUserData(['username','role','keyMaster','profileImage','followingCount','followersCount']).then(res => {
-                if (res?.data?.userData){
-                    dispatchUserData({
-                        ...userData,
-                        ...res.data.userData
-                    });
-                }
-            }).catch(err => {
-                console.log(err);
-                localStorage.removeItem('wt')
-            })
-            //functions.getAndSetUserInfo()
-            functions.getCheckOutData()
-        }
+    // useEffect(() => {
+    //     if (localStorage.wt) {
+    //         getSignedInUserData(['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']).then(res => {
+    //             if (res?.data?.userData) {
+    //                 dispatchUserData({
+    //                     ...userData,
+    //                     ...res.data.userData
+    //                 });
+    //             }
+    //         }).catch(err => {
+    //             console.log(err);
+    //             localStorage.removeItem('wt')
+    //         })
+    //         //functions.getAndSetUserInfo()
+    //         functions.getCheckOutData()
+    //     }
+    //
+    // }, []);
 
-    }, []);
+
+    useEffect(() => {
+        if (userData.role === 'administrator') {
+            _getMultipleWidgets(localStorage.wt).then(res => {
+                setWidgets(res.data.widgets || [])
+            })
+            // getMultipleSetting({settings:['design','identity']},localStorage.wt).then(settingsResponse=>{
+            //     if (settingsResponse?.data?.settings){
+            //         const identity = settingsResponse?.data?.settings.find(s=>s.type=== 'identity')?.data
+            //         const design = settingsResponse?.data?.settings.find(s=>s.type=== 'design').data
+            //         identity ? dispatchSiteIdentity(identity) : null
+            //         design ? dispatchSiteDesign(design) : null
+            //     }
+            // })
+        }
+    }, [userData]);
 
 
     return (
@@ -269,12 +256,8 @@ const AppProvider = props => {
                     userData,
                     dispatchUserData,
                     functions,
-                    // editingPostData,
-                    // dispatchEditingPostData,
                     adminPosts,
                     dispatchAdminPosts,
-                    // adminPostsData,
-                    // dispatchAdminPostsData,
                     dispatchSiteIdentity,
                     siteIdentity,
                     widgetsSettings,
@@ -289,8 +272,7 @@ const AppProvider = props => {
                     setCheckOutData,
                     eCommerceSettings,
                     dispatchECommerceSettings,
-                    // conversations,
-                    // dispatchConversations,
+                    widgets
                 }}>
                 {props.children}
             </AppContext.Provider>
@@ -299,5 +281,5 @@ const AppProvider = props => {
     )
 };
 
-export default AppProvider ;
+export default AppProvider;
 

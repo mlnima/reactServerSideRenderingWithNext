@@ -11,8 +11,8 @@ const MetaWidgetStyledDiv = styled.div`
 
   .meta-widget-item {
     text-decoration: none;
-    color: var(--meta-text-color);
-    background-color: var(--meta-background-color);
+    color: var(--meta-text-color,#000);
+    background-color: var(--meta-background-color,#f90);
     padding: 5px 10px;
   }
 

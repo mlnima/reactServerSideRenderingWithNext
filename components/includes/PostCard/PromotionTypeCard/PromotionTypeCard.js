@@ -17,7 +17,7 @@ let PromotionCardStyledDiv = styled.div`
   flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
   justify-content: center;
-  background-color: var(--post-element-background-color);
+  background-color: var(--post-element-background-color,#131314);
   font-size: 12px;
   padding-bottom: 5px;
 
@@ -46,7 +46,7 @@ let PromotionCardStyledDiv = styled.div`
         align-items: center;
         margin: 0 2px;
         padding: 0 2px;
-        color: var(--post-element-info-text-color);
+        color: var(--post-element-info-text-color,#ccc);
 
         .promotion-card-views {
           height: 12px;

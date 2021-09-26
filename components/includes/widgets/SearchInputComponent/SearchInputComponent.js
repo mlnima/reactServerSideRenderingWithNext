@@ -32,7 +32,7 @@ const SearchInputComponentStyledForm = styled.form`
     margin-left: 0;
     border: none;
     color: var(--main-text-color);
-    background-color: var(--main-active-color);
+    background-color: var(--main-active-color,#f90);
     &:focus {
       outline: none;
     }

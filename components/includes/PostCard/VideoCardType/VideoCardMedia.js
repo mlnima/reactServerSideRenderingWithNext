@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useRef, useState} from 'react';
 import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
 import styled from "styled-components";
 
@@ -40,33 +40,36 @@ let VideoCardMediaStyled = styled.div`
 const VideoCardMedia = props => {
     const [hover, setHover] = useState(false)
     const [gotError, setGotError] = useState(false)
-    const [isReported, setIsReported] = useState(false)
+    // const [isReported, setIsReported] = useState(false)
 
-    const [imageUrl, setImageUrl] = useState(() => {
-        return props?.post?.mainThumbnail ? props.post.mainThumbnail?.includes('http') ? props.post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.post.mainThumbnail : ''
-    })
+    // const [imageUrl, setImageUrl] = useState(() => {
+    //     return props?.post?.mainThumbnail ? props.post.mainThumbnail?.includes('http') ? props.post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.post.mainThumbnail : ''
+    // })
 
     const hoverHandler = () => {
         hover ? setHover(false) : setHover(true)
     }
 
-    const onErrorHandler = () => {
-        if (imageUrl) {
-            setGotError(true)
-            setIsReported(true)
-            let data = {
-                checkUrl: imageUrl,
-            }
-            setTimeout(() => {
-                checkRemovedContent(data)
-            }, 1000)
-        }
-    }
+
+
+    // const onErrorHandler = () => {
+    //     if (imageUrl) {
+    //         setGotError(true)
+    //         setIsReported(true)
+    //         let data = {
+    //             checkUrl: imageUrl,
+    //         }
+    //         setTimeout(() => {
+    //             checkRemovedContent(data)
+    //         }, 1000)
+    //     }
+    // }
+
 
 
     if (props.post?.VideoTrailerUrl && hover) {
         return (
-            <VideoCardMediaStyled className='video-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
+            <VideoCardMediaStyled className={'video-card-media'} postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
                 <video
                     onMouseOver={event => event.target.play()}
                     loop={false}
@@ -81,6 +84,7 @@ const VideoCardMedia = props => {
             </VideoCardMediaStyled>
         )
     } else {
+       const imageUrl = props?.post?.mainThumbnail ? props.post.mainThumbnail?.includes('http') ? props.post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.post.mainThumbnail : ''
         return (
             <VideoCardMediaStyled className='video-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
                 <img className='video-card-image'

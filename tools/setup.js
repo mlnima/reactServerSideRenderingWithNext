@@ -41,27 +41,31 @@ const designData = {
     type: 'design',
     data: {
         customColors: `  
-    --main-text-color: #999;
-    --background-color: #0e0e10;
-    --post-page-info-color:#fff;
+     --main-text-color: #ccc;
+    --background-color: #000;
+    --post-page-info-color:#ccc;
     --post-page-info-background-color:#181818;
     --meta-text-color:#000;
     --meta-background-color:#f90;
-    --widget-h-f-text-color:#fff;
-    --widget-h-f-background-color:transparent;
-    --post-element-text-color:#999;
-    --post-element-background-color:transparent;
+    --widget-header-footer-text-color:#fff;
+    --widget-header-footer-background-color:transparent;
+    --post-element-text-color:#ccc;
+    --post-element-info-text-color:#ccc;
+    
+    --post-element-background-color:#131314;
 
-    --navigation-text-color: #fff;
+    --navigation-text-color: #ccc;
     --navigation-background-color: #18181b;
     --topbar-background-color: #18181b;
-    --sidebar-background-color : #1f1f23;
+    --sidebar-background-color : #18181b;
     --footer-background-color: #18181b;
-    --header-background-color: #18181b ;
+    --header-background-color: #000 ;
 
     --comment-author-color: #f90 ;
     --comment-date-color: #fff ;
     --comment-body-color: #fff ;
+
+     --main-active-color :#f90;
 
  `
     }
@@ -69,7 +73,7 @@ const designData = {
 
 const siteDesignToSave = new settingSchema(designData)
 siteDesignToSave.save().catch(err => {
-    req.queryerr)
+    console.log(err)
 })
 
 

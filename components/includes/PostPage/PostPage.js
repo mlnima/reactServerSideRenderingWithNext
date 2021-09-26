@@ -33,7 +33,7 @@ const PostPageStyledMain = styled.main`
 
   .rating-price-download {
     width: 100%;
-    background-color: var(--post-page-info-background-color);
+    background-color: var(--post-page-info-background-color,#181818);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;

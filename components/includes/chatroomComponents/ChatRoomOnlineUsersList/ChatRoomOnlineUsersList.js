@@ -13,7 +13,7 @@ const ChatRoomOnlineUsersList = ({onlineUsers,onlineUserListVisibility,onUserInf
             <style jsx>{`
                 .chatroom-online-users-list{
                     display: ${onlineUserListVisibility ? 'initial' : 'none' };
-                    background-color: var(--navigation-background-color);
+                    background-color: var(--navigation-background-color,#18181b);
                     position: fixed;
                     width: 150px;
                     top:50px;

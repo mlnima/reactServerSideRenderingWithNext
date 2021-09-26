@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import styled from "styled-components";
 
 const PostTitleStyledH1 = styled.h1`
-  color: var(--post-page-info-color);
+  color: var(--post-page-info-color,#ccc);
   font-size: 1.25em;
   text-align: center;
 `

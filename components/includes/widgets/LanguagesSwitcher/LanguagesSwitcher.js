@@ -17,12 +17,12 @@ const LanguagesSwitcherStyledDiv = styled.div`
     align-items: center;
     margin: 0 10px;
     font-size: 12px;
-    color: var(--navigation-text-color);
+    color: var(--navigation-text-color, #ccc);
   }
   select{
     border: none;
-    background-color: var(--navigation-background-color);
-    color: var(--navigation-text-color);
+    background-color: var(--navigation-background-color,#18181b);
+    color: var(--navigation-text-color, #ccc);
   }
 `
 const LanguagesSwitcher = props => {

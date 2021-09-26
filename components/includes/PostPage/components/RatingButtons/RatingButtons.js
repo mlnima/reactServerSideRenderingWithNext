@@ -14,14 +14,14 @@ const RatingButtonsStyledDiv = styled.div`
     align-items: center;
 
   .rated-message{
-    color: var(--post-page-info-color);
+    color: var(--post-page-info-color,#ccc);
   }
   .rating-item{
     display: flex;
     justify-content: center;
     align-items: center;
     background-color: transparent;
-    color: var(--post-page-info-color);
+    color: var(--post-page-info-color,#ccc);
     outline: none;
     border: none;
     margin: 0 10px;

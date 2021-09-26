@@ -46,7 +46,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
                       display: flex;
                       justify-content: space-between;
                       align-items: center;
-                      color:var(--navigation-text-color);
+                      color:var(--navigation-text-color, #ccc);
                      
                    }
                    
@@ -63,7 +63,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
                    
                    .messenger-conversation-preview-last-message{
                      margin: 0;
-                     color:var(--navigation-text-color);
+                     color:var(--navigation-text-color, #ccc);
                    }
                    
                    @media only screen and (min-width: 768px){

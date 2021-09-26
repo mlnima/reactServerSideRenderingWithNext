@@ -1,7 +1,6 @@
-import {useContext} from 'react';
-import {AppContext} from "../../../../../context/AppContext";
 import Link from "next/link";
 import styled from "styled-components";
+import {useSelector} from "react-redux";
 
 const EditLinkForAdminStyledDiv = styled.div`
   width: 100%;
@@ -10,8 +9,7 @@ const EditLinkForAdminStyledDiv = styled.div`
   margin: 10px;
   justify-content: space-evenly;
   align-items: center;
-
-
+  
   .edit-as-admin-link {
     background-color: #f90;
     text-align: center;
@@ -32,8 +30,10 @@ const EditLinkForAdminStyledDiv = styled.div`
 
 
 const EditLinkForAdmin = ({_id}) => {
-    const contextData = useContext(AppContext);
-    if (contextData.userData.role === 'administrator') {
+
+    const userData = useSelector(state => state.user.userData)
+
+    if (userData.role === 'administrator') {
         return (
             <EditLinkForAdminStyledDiv className='edit-as-admin'>
 

@@ -12,7 +12,7 @@ module.exports = async (req, res) => {
                     res.json({meta})
                     res.end()
                 }else {
-                    res.status(404)
+                    res.status(404).json({message:'Not Found'})
                     res.end()
                 }
 
@@ -23,13 +23,14 @@ module.exports = async (req, res) => {
                 res.end()
             })
         }else {
-            res.status(404)
+            //res.status(404)
+            res.status(404).json({message:'Not Found'})
             res.end()
 
         }
     }catch (err){
         console.log(err.stack)
-        res.status(404)
+        res.status(404).json({message:'Not Found'})
         res.end()
     }
 }

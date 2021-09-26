@@ -11,7 +11,7 @@ module.exports = (pathname, pageName, direction) => {
                                     pathname === '/category/[categoryId]' ? `categoryPage${direction}Sidebar` :
                                         pathname === '/actor/[actorId]' ? `actorPage${direction}Sidebar` :
                                             pathname === '/auth/register' || pathname === '/auth/login' ? `authPage${direction}Sidebar` :
-                                                pathname.includes('/profile') ? `profilePage${direction}Sidebar` :
+                                                pathname.includes('/profile.json') ? `profilePage${direction}Sidebar` :
                                                     pathname.includes('/messenger') ? `messengerPage${direction}Sidebar` :
                                                         pathname.includes('/user/') ? `userPage${direction}Sidebar` :
                                                             pathname === '/page/[pageName]' ? pageName + direction + `Sidebar` :

@@ -2,7 +2,7 @@ import React, { useContext } from 'react';
 import { updateSetting } from '../../../_variables/ajaxVariables'
 import { AppContext } from '../../../context/AppContext'
 
-const SaveDesignChangesBtn = props => {
+const SaveDesignChangesBtn = ({name,value}) => {
     const contextData = useContext(AppContext);
 
     const onSaveHandler = e => {
@@ -10,7 +10,15 @@ const SaveDesignChangesBtn = props => {
             ...contextData.state,
             loading: true
         })
-        updateSetting('design', contextData.siteDesign).then(() => {
+
+        const designToSave={
+            ...contextData.siteDesign,
+            [name]:value
+        }
+
+        console.log(designToSave)
+
+        updateSetting('design', designToSave).then(() => {
             contextData.dispatchState({
                 ...contextData.state,
                 loading: false

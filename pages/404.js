@@ -11,7 +11,7 @@ const Custom404StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   height: 50vh;
-  background-color: var(--background-color);
+  background-color: var(--background-color,#000);
   grid-area: main;
 
   h1 {
@@ -39,7 +39,7 @@ const Custom404 = props => {
 
 // @ts-ignore
 export const getStaticProps  = async (context) => {
-    const firstLoadData = await getFirstLoadDataStatic([])
+    const firstLoadData = await getFirstLoadDataStatic(['404'])
 
     return {
         props: {

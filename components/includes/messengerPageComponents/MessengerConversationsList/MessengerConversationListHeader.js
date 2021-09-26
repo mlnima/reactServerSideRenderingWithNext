@@ -10,7 +10,7 @@ const MessengerConversationListHeader = () => {
         <div className='messenger-conversations-list-header'>
             <style jsx>{`
                 .messenger-conversations-list-header{
-                    background-color: var(--navigation-background-color);
+                    background-color: var(--navigation-background-color,#18181b);
                     height: 50px;
                     padding:  10px;
                     width: 100%;
@@ -25,7 +25,7 @@ const MessengerConversationListHeader = () => {
                 }
             `}</style>
             {/*<button onClick={()=>router.back()} className='messenger-conversation-header-back-btn'>*/}
-            {/*    <FontAwesomeIcon style={{width: '30px',height: '30px',color:'var(--navigation-text-color)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />*/}
+            {/*    <FontAwesomeIcon style={{width: '30px',height: '30px',color:'var(--navigation-text-color, #ccc)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />*/}
             {/*</button>*/}
             <Authentication/>
         </div>

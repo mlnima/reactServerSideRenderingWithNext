@@ -4,7 +4,7 @@ import React from "react";
 
 let StyledNavigation = styled.nav`
   grid-area: navigation;
-  background-color: var(--navigation-background-color);
+  background-color: var(--navigation-background-color,#18181b);
   .navigation-content{
     display: flex;
     justify-content: space-between;

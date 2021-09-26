@@ -71,7 +71,7 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
     const firstLoadData  = await getFirstLoadData(context.req, ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar',])
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true)
     const actorData : any = context.query.actorId ? await getSingleMeta(context.query.actorId, true) : {}
-    const actor = actorData.data ? actorData.data.meta : {}
+    const actor = actorData?.data ? actorData.data.meta : {}
     const postsData = await getPosts(gettingPostsQueries)
     const postsSource = postsData.data ? postsData.data : []
 

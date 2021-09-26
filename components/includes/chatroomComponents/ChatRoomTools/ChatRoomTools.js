@@ -13,7 +13,7 @@ const ChatRoomToolsStyledFrom = styled.form`
   bottom: 0;
   height: 50px;
   padding: 2px;
-  background-color: var(--navigation-background-color);
+  background-color: var(--navigation-background-color,#18181b);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -23,8 +23,8 @@ const ChatRoomToolsStyledFrom = styled.form`
     position: absolute;
     top:-14px;
     left: 10px;
-    background-color: var(--navigation-background-color);
-    color: var(--navigation-text-color);
+    background-color: var(--navigation-background-color,#18181b);
+    color: var(--navigation-text-color, #ccc);
   }
   
   .chatroom-tools-text{
@@ -46,7 +46,7 @@ const ChatRoomToolsStyledFrom = styled.form`
     align-items: center;
     right: 8px;
     .chatroom-tools-content-submit-button{
-      background-color: var(--navigation-background-color);
+      background-color: var(--navigation-background-color,#18181b);
       border: none;
       width: 34px;
       height: 34px;
@@ -75,7 +75,7 @@ const ChatRoomTools = ({onEmojiPickerHandler}) => {
     const router = useRouter()
     const [state, setState] = useState({
         messageData: '',
-        color:'var(--navigation-text-color)'
+        color:'var(--navigation-text-color, #ccc)'
     });
 
     const [someoneTypes, setSomeoneTypes] = useState({
@@ -161,7 +161,7 @@ const ChatRoomTools = ({onEmojiPickerHandler}) => {
                 <input ref={colorPicker} className='chatroom-tools-Send-color-picker-input' name='color' type='color' value={state.color} onChange={e => onChangeHandler(e)} />
                 <div className='chatroom-tools-Send'>
                     <button className='chatroom-tools-content-submit-button' type='submit'>
-                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faArrowRight}/>
+                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faArrowRight}/>
                     </button>
                 </div>
 

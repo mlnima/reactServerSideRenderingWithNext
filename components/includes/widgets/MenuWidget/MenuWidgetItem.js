@@ -11,7 +11,7 @@ const MenuWidgetSubItemStyledLi = styled.li`
   .menu-widget-sub-item {
     display: ${props=>props.showSub ? 'initial' : 'none'};
     z-index: 10;
-    background-color: var(--navigation-background-color);
+    background-color: var(--navigation-background-color,#18181b);
     width: 100px;
     list-style-type: none;
     padding: 10px 15px;
@@ -35,6 +35,20 @@ const MenuWidgetStyledLi = styled.li`
   align-items: center;
   position: relative;
   margin: ${props=> !props.menuItem.parent ? '0 10px' : '0'};
+  
+  
+  .menu-widget-item-link{
+    color: var(--navigation-text-color, #ccc);
+    text-decoration: none;
+    font-weight: normal;
+    font-size: 14px;
+
+    &:hover {
+      filter: invert(70%);
+      cursor: pointer;
+    }
+  }
+  
 
   .open-submenus {
     background-color: transparent;
@@ -48,7 +62,7 @@ const MenuWidgetStyledLi = styled.li`
   .navigation-dropdown-icon {
     width: 10px;
     height: 10px;
-    color: var(--navigation-text-color);
+    color: var(--navigation-text-color, #ccc);
   }
 
   .dropdown-content {
@@ -75,14 +89,14 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
     const [showSub, setShowSub] = useState(false)
     const router = useRouter()
 
-    const renderSubMenus = (menuItem.subItems || []).map(subItem => {
+    const renderSubMenus = (menuItem.subItems || []).map((subItem,index) => {
 
         const linkAsForMenuItem = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? subItem.as :
             (!router.locale && !router.query.locale) ? subItem.as :
                 `/${router.locale || router.query.locale}${subItem.as}`;
 
         return (
-            <MenuWidgetSubItemStyledLi showSub={showSub} className='menu-widget-sub-item' key={_.uniqueId('id_')}>
+            <MenuWidgetSubItemStyledLi showSub={showSub} className='menu-widget-sub-item' key={index}>
                 <MenuWidgetItemLink
                     linkTargetType={subItem?.type}
                     linkType='sub'
@@ -104,7 +118,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
 
     return (
 
-        <MenuWidgetStyledLi menuItem={menuItem} key={_.uniqueId('id_')} className='menu-widget-item' onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null} onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}>
+        <MenuWidgetStyledLi menuItem={menuItem}  className='menu-widget-item' onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null} onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}>
 
 
             <MenuWidgetItemLink

@@ -71,7 +71,7 @@ const CookiePopup = props => {
                 }
                 
                 h2,p{
-                    color: var(--background-color) ;
+                    color: var(--background-color,#000) ;
                     font-size: .8rem;
                 }
                 .cookie-popup-content-action-buttons{

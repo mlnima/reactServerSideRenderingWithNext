@@ -2,7 +2,7 @@ import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 
 const StyledFooter = styled.footer`
-  background-color: var(--footer-background-color);
+  background-color: var(--footer-background-color,#18181b);
   grid-area: footer;
   .footer-content{
     display: flex;

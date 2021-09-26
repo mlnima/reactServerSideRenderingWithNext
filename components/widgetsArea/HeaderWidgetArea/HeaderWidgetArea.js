@@ -4,7 +4,7 @@ import React from "react";
 
 let StyledHeader = styled.header`
   grid-area: header;
-  background-color: var(--header-background-color);
+  background-color: var(--header-background-color,#000);
   .header-content{
     display: flex;
     justify-content: space-evenly;

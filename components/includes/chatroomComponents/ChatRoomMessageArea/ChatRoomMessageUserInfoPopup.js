@@ -19,7 +19,7 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   bottom: 0;
 
   .chatroom-message-user-info-popup-content {
-    background-color: var(--navigation-background-color);
+    background-color: var(--navigation-background-color,#18181b);
     width: 310px;
     //height: 200px;
     padding: 10px;

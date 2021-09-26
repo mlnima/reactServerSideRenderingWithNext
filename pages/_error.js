@@ -9,7 +9,7 @@ const ErrorStyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   height: 50vh;
-  background-color: var(--background-color);
+  background-color: var(--background-color,#000);
   grid-area: main;
   h1 {
     color: var(--main-text-color);

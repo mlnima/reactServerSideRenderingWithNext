@@ -62,16 +62,8 @@ export const getServerSideProps = async (context) => {
 
     const firstLoadData = await getFirstLoadData(context.req,['categoryPageTop','categoryPageLeftSidebar','categoryPageBottom','categoryPageRightSidebar'],'postsPage')
     const categoryData = context.query.categoryId ? await getSingleMeta(context.query.categoryId, true) : {}
-
-    if (!categoryData) {
-        return {
-            notFound: true
-        }
-    }
-
     const gettingPostsQueries = _getPostsQueryGenerator(context.query,context.query.categoryId,true)
-
-    const category = categoryData.data ? categoryData.data.meta : {}
+    const category = categoryData?.data ? categoryData.data.meta : {}
     const postsData = await getPosts(gettingPostsQueries)
     const postsSource = postsData.data ? postsData.data : []
     return {

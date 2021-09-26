@@ -8,6 +8,7 @@ const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
 const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
 const withPWA = require('next-pwa')
 
+
 const svgLoader = {
     webpack(config) {
         config.module.rules.push({
@@ -65,13 +66,10 @@ const pwaSettings = {
     }
 }
 
-
-
 const nextConfigs = {
     env: {},
     rewrites
 }
-
 
 module.exports = withPlugins([
     i18n,
@@ -87,15 +85,3 @@ module.exports = withPlugins([
     i18nConfig,
 ], nextConfigs);
 
-// const additionalConfig = {
-//     onDemandEntries: {
-//         maxInactiveAge: 1000 * 60 * 60 * 24,
-//         pagesBufferLength: 200,
-//     },
-//     api: {
-//         bodyParser: false,
-//     },
-//     poweredByHeader: false,
-//     reactStrictMode: true,
-//
-// }

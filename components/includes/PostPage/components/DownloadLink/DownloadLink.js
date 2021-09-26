@@ -9,13 +9,13 @@ const DownloadLinkStyledLink = styled.a`
   align-items: center;
   padding: 5px 20px;
   margin: 0 5px;
-  color: var(--meta-text-color);
+  color: var(--meta-text-color,#000);
   text-decoration: none;
   width: 100px;
   height: 24px;
-  background-color: var(--meta-background-color);
+  background-color: var(--meta-background-color,#f90);
   .download-logo {
-    color: var(--post-page-info-color);
+    color: var(--post-page-info-color,#ccc);
   }
 `
 

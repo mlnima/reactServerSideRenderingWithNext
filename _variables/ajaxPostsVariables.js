@@ -48,7 +48,18 @@ export const getMultipleMeta = async (data,metaType,cache) => {
 };
 
 export const getSingleMeta = async (id,cache) => {
-    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ encodeURIComponent(id) }&cache=${cache}`)
+    try {
+        await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ encodeURIComponent(id) }&cache=${cache}`).then(res=>{
+            return res
+        }).catch(err=>{
+            return err
+        })
+    }catch (err){
+        console.log('here')
+        console.log(err)
+    }
+
+    // return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ encodeURIComponent(id) }&cache=${cache}`)
 };
 
 

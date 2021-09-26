@@ -9,8 +9,8 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   .alphabetical-range-widget-item{
-    background-color: var(--navigation-background-color);
-    color: var(--navigation-text-color);
+    background-color: var(--navigation-background-color,#18181b);
+    color: var(--navigation-text-color, #ccc);
     padding: 5px 10px;
     margin: 5px;
     border-radius: 5px;

@@ -102,9 +102,14 @@ const AdminTopBar = () => {
         <>
             <StyledDiv className='adminTopBar'>
                 <div className="adminTopBarControl">
-                    <span className='adminSideBarMobileBtn adminTopBarItem' onClick={() => AdminSideBarOpenCloseHandler()}><FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faBars} className='post-element-info-logo'/>
+                    <span className='adminSideBarMobileBtn adminTopBarItem' onClick={() => AdminSideBarOpenCloseHandler()}>
+                        <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faBars} className='post-element-info-logo'/>
                     </span>
-                    <Link href='/'><a rel='noreferrer' className='adminTopBarItem'><FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faHome} className='post-element-info-logo'/></a></Link>
+                    <Link href='/'>
+                        <a  className='adminTopBarItem'>
+                        <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faHome} className='post-element-info-logo'/>
+                    </a>
+                    </Link>
                     <span className='adminNewActionBtn adminTopBarItem' onClick={() => newItemMenuHandler()}><FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></span>
                     <NewItemMenu active={state.NewItemMenu}/>
                     <p className='clearCache adminTopBarItem' onClick={() => contextData.functions.clearCaches()}>Clear Caches</p>

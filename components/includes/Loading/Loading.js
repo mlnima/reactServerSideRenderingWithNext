@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import React from 'react';
 import styled from "styled-components";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-
-import {BeatLoader, PulseLoader, RingLoader, RotateLoader, SyncLoader} from "react-spinners";
+import {SyncLoader} from "react-spinners";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../../../store/actions/globalStateActions";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -16,10 +16,8 @@ let StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  cursor: wait;
-
+  
   .stopLoading {
-
     position: fixed;
     top: 50px;
     right: 50px;
@@ -33,7 +31,6 @@ let StyledDiv = styled.div`
       color:#916d07 ;
     }
   }
-  
   span{
     span{
     }
@@ -42,26 +39,15 @@ let StyledDiv = styled.div`
 
 
 const Loading = () => {
-    const contextData = useContext(AppContext);
-    const onStopLoadingHandler = () => {
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: false
-        })
-    }
-    if (contextData.state.loading) {
+        const dispatch = useDispatch()
         return (
             <StyledDiv className='Loading'>
-                <button className='stopLoading fas fa-times' onClick={() => onStopLoadingHandler()}>
+                <button className='stopLoading fas fa-times' onClick={() => dispatch(setLoading(false))}>
                     <FontAwesomeIcon style={{width:'1rem',height:'1rem'}} icon={faTimes} className='stopLoading' />
                 </button>
-                <SyncLoader
-
-
-                    color='var(--main-active-color,blue)' loading={contextData.state.loading} size={20}   />
+                <SyncLoader color='var(--main-active-color,blue)' loading={true} size={20}   />
             </StyledDiv>
         );
-    } else return null
 };
 
 export default Loading;

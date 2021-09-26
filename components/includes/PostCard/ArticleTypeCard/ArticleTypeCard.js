@@ -13,7 +13,7 @@ const ArticleCard = styled.div`
   flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
   justify-content: center;
-  background-color: var(--post-element-background-color);
+  background-color: var(--post-element-background-color,#131314);
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
@@ -53,7 +53,7 @@ const ArticleCard = styled.div`
           align-items: center;
           margin: 2px 0;
           padding: 0 2px;
-          color: var(--post-element-info-text-color);
+          color: var(--post-element-info-text-color,#ccc);
 
           span {
             margin: 0 2px;

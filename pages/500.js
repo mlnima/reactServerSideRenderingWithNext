@@ -11,7 +11,7 @@ const Custom500StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   height: 50vh;
-  background-color: var(--background-color);
+  background-color: var(--background-color,#000);
   grid-area: main;
   h1 {
     color: var(--main-text-color);
@@ -35,11 +35,11 @@ const Custom500 = () => {
     );
 };
 export const getStaticProps  = async (context) => {
-    const firstLoadData = await getFirstLoadDataStatic([])
+    const firstLoadData = await getFirstLoadDataStatic(['500'])
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common'])),
+            ...(await serverSideTranslations(context.locale || 'en', ['common'])),
             ...firstLoadData
         }
     }

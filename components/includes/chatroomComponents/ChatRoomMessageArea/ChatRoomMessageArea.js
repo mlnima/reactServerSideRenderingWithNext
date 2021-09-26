@@ -10,7 +10,7 @@ const ChatRoomMessageArea = ({messages,messageAreaRef,emojiPicker,onUserInfoShow
             <style jsx>{`
                 .chatroom-message-area{
                     position: fixed;
-                    margin: 70px 0;
+                    margin: 5px 0 55px 0 ;
                     left: 0;
                     right: 0;
                     bottom: 0;

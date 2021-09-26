@@ -1,12 +1,12 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import ProfileCoverImage from '../../../components/includes/MyProfileComponents/ProfileCoverImage/ProfileCoverImage'
-import ProfileNavigation from '../../../components/includes/MyProfileComponents/ProfileNavigation/ProfileNavigation'
+import ProfileCoverImage from '../../../components/includes/profilePageComponents/ProfileCoverImage/ProfileCoverImage'
+import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import {AppContext} from "../../../context/AppContext";
 import {getPosts} from "../../../_variables/ajaxPostsVariables";
 import {useRouter} from "next/router";
 import Link from "next/link";
-import ProfileImage from "../../../components/includes/MyProfileComponents/ProfileImage/ProfileImage";
+import ProfileImage from "../../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 const Posts = props => {
     const contextData = useContext(AppContext);
@@ -57,7 +57,7 @@ const Posts = props => {
            ` }</style>
             <ProfileImage/>
             <ProfileNavigation />
-            <Link href={'/profile/posts/newpost'}><a className='create-new-post-link'>create new post</a></Link>
+            <Link href={'/profile.json/posts/newpost'}><a className='create-new-post-link'>create new post</a></Link>
             {/*<Posts posts={ state.posts || [] }/>*/}
             {/*posts*/}
         </div>

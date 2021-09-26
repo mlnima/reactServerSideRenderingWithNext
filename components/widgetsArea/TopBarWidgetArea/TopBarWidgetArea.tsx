@@ -6,7 +6,7 @@ import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 let StyledDiv = styled.div`
   grid-area: topbar;
-  background-color: var(--topbar-background-color);
+  background-color: var(--topbar-background-color,#18181b);
 
   .top-bar-content {
     display: flex;

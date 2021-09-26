@@ -32,8 +32,8 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
             flex-direction: column;
             padding: 5px 10px;
             align-items: flex-start;
-            background-color: var(--navigation-background-color);
-            color: var(--navigation-text-color);
+            background-color: var(--navigation-background-color,#18181b);
+            color: var(--navigation-text-color, #ccc);
             position: absolute;
             top: 5px;
             left:0;
@@ -55,7 +55,7 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
         }
         .messenger-call-user-calling-message-answer-button,.messenger-call-user-calling-message-reject-button{
          background-color: transparent;
-         color:var(--navigation-text-color) ;
+         color:var(--navigation-text-color, #ccc) ;
          padding: 10px 20px ;
          border: none;
         }
@@ -89,7 +89,7 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
         }
         
         .messenger-call-actions-buttons{
-            //background-color: var(--navigation-background-color);
+            //background-color: var(--navigation-background-color,#18181b);
             opacity: .5;
             margin: auto;
             display: flex;
@@ -138,8 +138,8 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
         }
         //
         // .disable-audio-button{
-        //   background-color: ${state.microphone ? 'transparent' : 'var(--navigation-text-color)' } ;
-        //   color: ${state.microphone ? 'var(--navigation-background-color)' : 'white' } ;
+        //   background-color: ${state.microphone ? 'transparent' : 'var(--navigation-text-color, #ccc)' } ;
+        //   color: ${state.microphone ? 'var(--navigation-background-color,#18181b)' : 'white' } ;
         // }
         .messenger-call-user-calling-message-ringing{
          z-index: 20;
@@ -148,7 +148,7 @@ const MessengerCall = ({callerData, myVideoRef, userVideoRef, state, endCallHand
         
          position: absolute;
          top:50px;
-         color:var(--navigation-text-color);
+         color:var(--navigation-text-color, #ccc);
         }
         `}</style>
                 {state.calling && !callAccepted ?  <p className='messenger-call-user-calling-message-ringing'>Ringing....</p> :null }

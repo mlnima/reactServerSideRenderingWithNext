@@ -7,8 +7,9 @@ let GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: var(--background-color);
+    background-color: var(--background-color,#000);
     margin: 0;
+    color:var(--main-text-color,'#ccc');
     font-family: Montserrat, Verdana, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
@@ -26,11 +27,11 @@ let GlobalStyles = createGlobalStyle`
   .post-element-info-logo {
     max-width: 25px;
     max-height: 25px;
-    color: var(--post-element-text-color);
+    color: var(--post-element-text-color,#ccc);
   }
 
   .value-next-icon {
-    color: var(--post-element-text-color);
+    color: var(--post-element-text-color,#ccc);
     margin: 0 5px;
   }
 
@@ -39,7 +40,7 @@ let GlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     padding: 1px 3px;
-    color: var(--post-element-text-color);
+    color: var(--post-element-text-color,#ccc);
   }
 
 

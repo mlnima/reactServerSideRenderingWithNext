@@ -13,7 +13,7 @@ let StyledDiv = styled.div`
       display: flex;
       justify-content: center;
       place-items: center;
-      background-color: var(--post-element-background-color);
+      background-color: var(--post-element-background-color,#131314);
       margin: 10px 0;
       a {
         .post-slider-item-title {

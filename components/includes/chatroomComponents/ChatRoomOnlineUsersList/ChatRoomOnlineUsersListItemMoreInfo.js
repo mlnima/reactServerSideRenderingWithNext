@@ -12,7 +12,7 @@ const ChatRoomOnlineUsersListItemMoreInfo = ({username,moreInfo}) => {
                     
                     }
                     .chatroom-online-users-list-item-more-info-link{
-                        color:  ${ moreInfo ?  'var(--navigation-background-color)' : 'var(--navigation-text-color)' } ;
+                        color:  ${ moreInfo ?  'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color, #ccc)' } ;
                     }
                 `}</style>
                 <Link href={`/user/${username}`} as={`/user/${username}`} >

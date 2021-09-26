@@ -33,7 +33,7 @@ const ConversationBoxHeader = props => {
                 display: flex;
                 align-items: center;
                 justify-content: space-between;
-                color: var(--navigation-text-color);
+                color: var(--navigation-text-color, #ccc);
                 padding: 0 5px;
             }
             .conversation-box-header-userInfo-image{
@@ -52,10 +52,10 @@ const ConversationBoxHeader = props => {
             </div>
             <div className='send-message-pop-up-header-close-btns'>
                 <button onClick={onMinimizeHandler} onTouchStartCapture={onMinimizeHandler} className='send-message-pop-up-header-close-btn'>
-                    <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}} icon={props.minimized ? faWindowMaximize : faWindowMinimize} className='navigation-mobile-button-logo' />
+                    <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color, #ccc)'}} icon={props.minimized ? faWindowMaximize : faWindowMinimize} className='navigation-mobile-button-logo' />
                 </button>
                 <button onClick={onCloseConversationHandler} onTouchStartCapture={onCloseConversationHandler} className='send-message-pop-up-header-close-btn'>
-                    <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}} icon={faTimes} className='navigation-mobile-button-logo' />
+                    <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color, #ccc)'}} icon={faTimes} className='navigation-mobile-button-logo' />
                 </button>
             </div >
 

@@ -39,7 +39,7 @@ const PostElement = props => {
                 width: 48vw;
                 margin: 2px;
                 border: none;
-                background-color: var(--post-element-background-color);
+                background-color: var(--post-element-background-color,#131314);
             }
 
             .value-next-icon {
@@ -56,7 +56,7 @@ const PostElement = props => {
             //   width: 48vw;
             //   margin: 2px;
             //   border: none;
-            //   background-color: var(--post-element-background-color);
+            //   background-color: var(--post-element-background-color,#131314);
             //}
 
             .post-element-list{

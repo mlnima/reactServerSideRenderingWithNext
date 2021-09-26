@@ -43,7 +43,7 @@ height: 100%;
 }
 .send-message-pop-up-content{
 position: absolute;
-background-color: var(--navigation-background-color);
+background-color: var(--navigation-background-color,#18181b);
 color:var(-navigation-text-color);
 width: 320px;
 }
@@ -61,8 +61,8 @@ flex-direction: column;
 width: 400px;
 }
 .send-message-pop-up-content-message-area{
-background-color: var(--navigation-background-color);
-color:var(--navigation-text-color);
+background-color: var(--navigation-background-color,#18181b);
+color:var(--navigation-text-color, #ccc);
 width: 380px;
 
 }

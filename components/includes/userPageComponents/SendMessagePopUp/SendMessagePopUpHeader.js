@@ -31,7 +31,7 @@ const SendMessagePopUpHeader = props => {
             </style>
             <img src={props.receiverProfileImage} alt=""/>
             <p>{props.username}</p>
-            <button onClick={props.onCloseMessagePop} > <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}} icon={faTimes} className='navigation-mobile-button-logo' /></button>
+            <button onClick={props.onCloseMessagePop} > <FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color, #ccc)'}} icon={faTimes} className='navigation-mobile-button-logo' /></button>
         </div>
     );
 };

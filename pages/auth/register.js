@@ -20,7 +20,7 @@ const RegisterStyledDiv = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--navigation-background-color);
+    background-color: var(--navigation-background-color,#18181b);
     height: 400px;
     width: 300px;
     padding: 10px;
@@ -163,7 +163,7 @@ const Register = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, [])
+    const firstLoadData = await getFirstLoadData(context.req, ['register'])
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),

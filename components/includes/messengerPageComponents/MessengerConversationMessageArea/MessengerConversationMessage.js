@@ -25,7 +25,7 @@ class MessengerConversationMessage extends PureComponent {
                         max-width: 90%;
                     }
                     .messenger-conversation-message-text{
-                        color: var(--navigation-text-color) ;
+                        color: var(--navigation-text-color, #ccc) ;
                         padding: 4px 8px;
                         width: calc(90% );
                         word-break: break-word;
@@ -34,7 +34,7 @@ class MessengerConversationMessage extends PureComponent {
                     .messenger-conversation-message-date{
                         display: flex;
                         justify-content: flex-end;
-                        color: var(--navigation-text-color) ;
+                        color: var(--navigation-text-color, #ccc) ;
                         font-size: x-small;
                         width: 100%;
                     }

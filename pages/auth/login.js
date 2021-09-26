@@ -18,7 +18,7 @@ const LoginStyledDiv = styled.div`
     justify-content: center;
     align-items: center;
     flex-direction: column;
-    background-color: var(--navigation-background-color);
+    background-color: var(--navigation-background-color,#18181b);
     padding: 10px;
     width: 300px;
     height: 300px;
@@ -116,7 +116,7 @@ const Login = () => {
 };
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, [])
+    const firstLoadData = await getFirstLoadData(context.req, ['login'])
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),

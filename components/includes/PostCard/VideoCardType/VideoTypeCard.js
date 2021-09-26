@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useMemo, useEffect} from 'react';
 import Link from "next/link";
 import VideoCardMedia from "./VideoCardMedia";
 import _ from "lodash";
@@ -14,7 +14,7 @@ let VideoCard = styled.div`
   flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
   justify-content: center;
-  background-color: var(--post-element-background-color);
+  background-color: var(--post-element-background-color, #131314);
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
@@ -39,7 +39,7 @@ let VideoCard = styled.div`
       flex-direction: column;
       justify-content: space-between;
       margin-left: ${props => props.postElementSize === 'list' ? 4 : 0}px;
-      
+
 
       .video-card-under-media-info {
         display: flex;
@@ -55,7 +55,7 @@ let VideoCard = styled.div`
           padding: 0 2px;
           align-items: center;
           margin: 2px 0;
-          color: var(--post-element-info-text-color);
+          color: var(--post-element-info-text-color, #ccc);
 
           span {
             margin: 0 2px;
@@ -97,7 +97,7 @@ let VideoCard = styled.div`
         margin: 8px;
 
         // .video-card-title {
-        //   width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
+          //   width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
         //   font-size: 14px;
         //
         // }
@@ -114,14 +114,14 @@ const VideoTypeCard = (props) => {
 
 
     const quality = useMemo(() => {
-        return props.post.quality === '2160p' ? '4K' :
-            props.post.quality === '1440p' ? '2K' :
-                props.post.quality === '1080p' ? 'HD' :
-                    props.post.quality === '720p' ? 'HD' :
-                        props.post.quality === '480p' ? 'SD' :
-                            props.post.quality === '360p' ? 'SD' :
-                                props.post.quality === '240p' ? 'SD' :
-                                    props.post.quality
+                   return props.post.quality === '2160p' ? '4K' :
+                   props.post.quality === '1440p' ? '2K' :
+                   props.post.quality === '1080p' ? 'HD' :
+                   props.post.quality === '720p' ? 'HD' :
+                   props.post.quality === '480p' ? 'SD' :
+                   props.post.quality === '360p' ? 'SD' :
+                   props.post.quality === '240p' ? 'SD' :
+                   props.post.quality
     }, [])
 
     const metaPreviewData = [...(props.post.actors || []), ...(props.post.tags || []), ...(props.post.categories || [])]
@@ -129,12 +129,13 @@ const VideoTypeCard = (props) => {
         return e.name;
     })
 
+
     return (
         <VideoCard className='video-card' cardWidth={props.cardWidth} postElementSize={props.postElementSize}>
 
 
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                <a rel='next'  className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
+                <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
 
                     <VideoCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                     <span className='video-card-under-media'>

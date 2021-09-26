@@ -14,7 +14,7 @@ const ChatRoomOnlineUsersListItem = ({onlineUser,onUserInfoShowHandler}) => {
                     align-items: center;
                     flex-direction: column;
                     justify-content: center;
-                    background-color: ${state.moreInfo ?  'var(--navigation-text-color)' : 'transparent' } ;
+                    background-color: ${state.moreInfo ?  'var(--navigation-text-color, #ccc)' : 'transparent' } ;
                     border-radius: 10px;
                     padding: 2px 5px ;
                 }
@@ -24,12 +24,12 @@ const ChatRoomOnlineUsersListItem = ({onlineUser,onUserInfoShowHandler}) => {
                     border-radius: 50%;
                 }
                 .chatroom-online-users-list-item-username{
-                    color:${state.moreInfo ?  'var(--navigation-background-color)' : 'var(--navigation-text-color)' } ;;
+                    color:${state.moreInfo ?  'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color, #ccc)' } ;;
                     margin-left: 5px;
                 }
                 .chatroom-online-users-list-item-more-info-button{
                     background-color: transparent;
-                    color:  ${ state.moreInfo ?  'var(--navigation-background-color)' : 'var(--navigation-text-color)' } ;
+                    color:  ${ state.moreInfo ?  'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color, #ccc)' } ;
                     border:none;
                 
                 }

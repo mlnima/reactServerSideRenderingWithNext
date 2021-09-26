@@ -39,7 +39,7 @@ const ConversationBoxTools = props => {
             bottom: 0;
             height: 50px;
             padding: 2px;
-            background-color: var(--navigation-background-color);
+            background-color: var(--navigation-background-color,#18181b);
             display: flex;
             justify-content: space-between;
             align-items: center;
@@ -63,7 +63,7 @@ const ConversationBoxTools = props => {
                   <input onChange={e=>onChangeHandler(e)} className='conversation-box-tools-text-input' type="text" name='message'/>
               </div>
               <div className='conversation-box-tools-Send'>
-                  <button onClick={onSendMessageHandler} className='conversation-box-tools-send-btn'><FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color)'}} icon={faArrowRight}  /></button>
+                  <button onClick={onSendMessageHandler} className='conversation-box-tools-send-btn'><FontAwesomeIcon style={{width: '20px',height: '20px',color:'var(--navigation-text-color, #ccc)'}} icon={faArrowRight}  /></button>
               </div>
         </div>
     );

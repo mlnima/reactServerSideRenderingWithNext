@@ -20,18 +20,18 @@ const CommentFromStyledForm = styled.form`
     min-height: 200px;
   }
   textarea {
-    background-color: var(--post-page-info-background-color);
+    background-color: var(--post-page-info-background-color,#181818);
     margin: 3px;
     padding:5px;
     border: none;
-    color: var(--post-page-info-color);
+    color: var(--post-page-info-color,#ccc);
   }
   .comment-form-submit-button{
     padding: 7px 20px;
     text-align: center;
     box-sizing: border-box;
-    color: var(--post-page-info-color);
-    background-color: var(--post-page-info-background-color);
+    color: var(--post-page-info-color,#ccc);
+    background-color: var(--post-page-info-background-color,#181818);
     border:none;
     margin: 5px;
     max-width: 150px;

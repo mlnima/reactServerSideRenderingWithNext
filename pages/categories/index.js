@@ -5,7 +5,7 @@ import PaginationComponent from "../../components/includes/PaginationComponent/P
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
-import CategoriesRenderer from "../../components/includes/CategoriesPage/Components/CategoriesRenderer/CategoriesRenderer";
+import CategoriesRenderer from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 const CategoriesPageStyledDiv = styled.div`

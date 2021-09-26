@@ -12,7 +12,7 @@ const SearchButtonStyledButton = styled.button`
   align-items: center;
   background-color: transparent;
   outline: none;
-  color: var(--navigation-text-color);
+  color: var(--navigation-text-color, #ccc);
 `
 
 const SearchButtonStyledDiv = styled.div`
@@ -52,14 +52,14 @@ const SearchButtonStyledDiv = styled.div`
       align-items: center;
       background-color: transparent;
       outline: none;
-      color: var(--navigation-text-color);
+      color: var(--navigation-text-color, #ccc);
       font-size: 1rem;
       margin: 0 5px;
 
     }
 
     .search-button-widget-close-btn {
-      color: var(--navigation-text-color);
+      color: var(--navigation-text-color, #ccc);
       margin: 0 5px;
     }
   }
@@ -98,7 +98,7 @@ const SearchButton = ({t}) => {
     return (
         <>
             <SearchButtonStyledButton onClick={onOpenHandler} className='search-button-widget-open-btn' aria-label='Center Align' title={t([`common:Search`])}>
-                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faSearch} className='search-bar-btn-open-svg'/>
+                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faSearch} className='search-bar-btn-open-svg'/>
             </SearchButtonStyledButton>
             {open ?
                 <SearchButtonStyledDiv open={open} className='search-button-widget-form-actions'>

@@ -1,0 +1,15 @@
+export const GET_POSTS = 'GET_POSTS'
+export const INITIAL_POSTS = 'INITIAL_POSTS'
+
+//USER TYPES
+export const AUTO_LOGIN ='AUTO_LOGIN'
+export const LOGIN ='LOGIN'
+export const LOGOUT ='LOGOUT'
+
+//WIDGETS TYPES
+export const SET_WIDGETS ='SET_WIDGETS'
+
+//STATE TYPES
+export const LOGIN_REGISTER_FORM ='LOGIN_REGISTER_FORM'
+export const LOADING ='LOADING'
+

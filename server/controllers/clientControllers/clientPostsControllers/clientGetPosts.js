@@ -21,8 +21,8 @@ module.exports = async (req, res) => {
             }).populate(populateMeta).exec()
         res.json({posts,totalCount})
     }catch (err){
-        console.log(err)
-        return res.status(500).json({
+        console.log(err.stack)
+        return res.status(404).json({
             message: 'Server Error'
         })
     }

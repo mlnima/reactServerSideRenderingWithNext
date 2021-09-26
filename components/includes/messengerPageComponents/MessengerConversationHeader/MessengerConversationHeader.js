@@ -13,7 +13,7 @@ const MessengerConversationHeaderStyledDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   padding: 10px;
-  background-color: var(--navigation-background-color);
+  background-color: var(--navigation-background-color,#18181b);
   height: 50px;
 
   .messenger-conversation-header {
@@ -40,7 +40,7 @@ const MessengerConversationHeaderStyledDiv = styled.div`
       }
 
       .messenger-conversation-header-username {
-        color: var(--navigation-text-color);
+        color: var(--navigation-text-color, #ccc);
         margin-left: 10px;
         white-space: nowrap;
         overflow: hidden;
@@ -78,7 +78,7 @@ const MessengerConversationHeader = ({profileImage, username, attemptForCall}) =
                 <div className='back-btn-image-username'>
                     <Link href={`/messenger`}>
                         <a className='messenger-conversation-header-back-btn' rel='no-referrer'>
-                            <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg'/>
+                            <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg'/>
                         </a>
                     </Link>
                     <img onClick={() => router.push(`/user/${username}`)} src={profileImage ? profileImage : '/public/asset/images/user/noGenderAvatar150.jpg'} alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>
@@ -87,10 +87,10 @@ const MessengerConversationHeader = ({profileImage, username, attemptForCall}) =
                 </div>
                 <div className='call-buttons'>
                     <button onClick={attemptForCall} className='messenger-conversation-header-video-call-btn'>
-                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faVideo} className='messenger-conversation-header-video-call-btn-svg'/>
+                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faVideo} className='messenger-conversation-header-video-call-btn-svg'/>
                     </button>
                     <button onClick={attemptForCall} className='messenger-conversation-header-call-btn'>
-                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg'/>
+                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg'/>
                     </button>
                 </div>
             </div>

@@ -2,7 +2,7 @@ import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import React from "react";
 let StyledSideBar = styled.aside`
-background-color: var(--sidebar-background-color);
+background-color: var(--sidebar-background-color,#18181b);
 ${props => props.stylesData ?? ''}
 `
 

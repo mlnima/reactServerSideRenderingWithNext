@@ -11,12 +11,12 @@ const Price = ({currency, price}) => {
                 align-items: center;
                 font-size: 25px;
                 font-weight: bold;
-                color: var(--post-page-info-color);
+                color: var(--post-page-info-color,#ccc);
               }
               .price-info-logo {
                 width: 23px;
                 height: 23px;
-                color: var(--post-page-info-color);
+                color: var(--post-page-info-color,#ccc);
               }
             `}</style>
             <FontAwesomeIcon style={{width: '24px',height: '24px',color:'var(-main-text-color)'}} icon={currency === 'Usd' ? faDollarSign : faEuroSign} className='price-info-logo'/>

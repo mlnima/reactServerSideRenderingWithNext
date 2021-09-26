@@ -4,12 +4,13 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useRouter} from "next/router";
 import {AppContext} from "../../../../context/AppContext";
 import MenuWidgetItem from "./MenuWidgetItem";
-import _ from "lodash";
 import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../../../../store/actions/globalStateActions";
 
 
 const MenuWidgetStyledDiv = styled.div`
-  background-color: var(--navigation-background-color);
+  background-color: var(--navigation-background-color,#18181b);
   margin-block-start: 0;
   margin-block-end: 0;
   margin-inline-start: 0;
@@ -17,7 +18,7 @@ const MenuWidgetStyledDiv = styled.div`
   padding-inline-start: 0;
 
   .menu-widget-items {
-    background-color: var(--navigation-background-color);
+    background-color: var(--navigation-background-color,#18181b);
     top: 0;
     left: 0;
     bottom: 0;
@@ -42,7 +43,7 @@ const MenuWidgetStyledDiv = styled.div`
       border: none;
       width: 40px;
       height: 40px;
-      color: var(--navigation-text-color);
+      color: var(--navigation-text-color, #ccc);
     }
   }
   .navigation-mobile-button {
@@ -51,7 +52,7 @@ const MenuWidgetStyledDiv = styled.div`
     outline: none;
     margin: 0;
     transition: all .5s linear;
-    color: var(--navigation-text-color);
+    color: var(--navigation-text-color, #ccc);
     width: 24px;
     height: 24px;
     padding: 0;
@@ -87,8 +88,8 @@ const MenuWidgetStyledDiv = styled.div`
 
 
 const MenuWidget = props => {
-    const contextData = useContext(AppContext);
     const menuItemsElement = useRef(null)
+    const dispatch = useDispatch()
     const router = useRouter()
     const [open, setOpen] = useState(false);
 
@@ -99,7 +100,7 @@ const MenuWidget = props => {
     }, [props]);
 
     const mobileNavigationOnClickHandler = () => {
-        contextData.dispatchState({...contextData.state, loading: true})
+        dispatch(setLoading(true))
         if (props.isMobile) {
             setOpen(false)
         }
@@ -107,7 +108,7 @@ const MenuWidget = props => {
 
     const renderMenuItemsData = (props.menuItems.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || [])
     const renderMenuParentsItems = renderMenuItemsData.filter(i => !i.parent)
-    const renderMenuItems = renderMenuParentsItems.map(menuItem => {
+    const renderMenuItems = renderMenuParentsItems.map((menuItem,index) => {
 
         const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL? menuItem.as :
             (!router.locale && !router.query.locale) ? menuItem.as :
@@ -118,7 +119,7 @@ const MenuWidget = props => {
                 linkAsForMenuItems={linkAsForMenuItems}
                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
                 menuItems={props.menuItems}
-                key={_.uniqueId('id_')}
+                key={index}
 
             />
         )
@@ -128,11 +129,11 @@ const MenuWidget = props => {
     return (
         <MenuWidgetStyledDiv className='menu-widget' open={open}>
             <ul onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button' aria-label="Center Align">
-                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faBars} className='navigation-mobile-button-logo'/>
+                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faBars} className='navigation-mobile-button-logo'/>
             </ul>
             <ul className='menu-widget-items' ref={menuItemsElement}>
                 <li onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
-                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color)'}} icon={faTimes} className='navigation-mobile-button-logo'/>
+                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faTimes} className='navigation-mobile-button-logo'/>
                 </li>
                 {renderMenuItems}
             </ul>

@@ -1,9 +1,8 @@
 import PaginationComponentPageLink from "./PaginationComponentPageLink";
 import {rangeNumGenerator} from "../../../_variables/_variables";
-import _ from "lodash";
-import {useContext} from "react";
-import {AppContext} from "../../../context/AppContext";
 import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../../../store/actions/globalStateActions";
 
 
 const PaginationComponentStyledDiv = styled.div`
@@ -14,29 +13,21 @@ const PaginationComponentStyledDiv = styled.div`
 `
 
 const PaginationComponent = props => {
-    const contextData = useContext(AppContext);
-
-    const onActivateLoadingHandler = ()=>{
-        contextData.dispatchState(prevState => ({
-            ...prevState,
-            loading:true
-        }))
-    }
+    const dispatch = useDispatch()
 
     if (props.isActive && props.totalCount > props.size) {
         const range = rangeNumGenerator(props.currentPage, props.maxPage)
             .filter(n => (n !== (1 || props.maxPage)) && (n < props.maxPage) && (n > 0))
         const rangeWithMinMax = [1, ...range, props.maxPage]
         return (
-            <PaginationComponentStyledDiv className='pagination' key={_.uniqueId('pagination')}>
-
+            <PaginationComponentStyledDiv className='pagination'>
                 {
-                    rangeWithMinMax.map(pageNumber => {
+                    rangeWithMinMax.map((pageNumber,index) => {
                         return (
                             <PaginationComponentPageLink
                                 {...props}
-                                onActivateLoadingHandler={onActivateLoadingHandler}
-                                key={_.uniqueId('page_')}
+                                onActivateLoadingHandler={()=> dispatch(setLoading(true))}
+                                key={index}
                                 pageNumber={pageNumber}
                             />
                         )
