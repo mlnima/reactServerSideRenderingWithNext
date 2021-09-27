@@ -53,15 +53,6 @@ interface MyAppProps {
 
 
 const MyApp = ({Component, pageProps}: AppProps) => {
-    // const widgets = useSelector(state => state.widgets)
-    // const dispatch = useDispatch()
-    //
-    // useEffect(() => {
-    //     dispatch(setWidgets(pageProps.widgets))
-    // }, []);
-
-
-
 
     const router = useRouter()
 

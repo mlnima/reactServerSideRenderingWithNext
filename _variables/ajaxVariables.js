@@ -76,8 +76,8 @@ export const postProductTypeImages = async (image) => {
 }
 
 
-export const userImageUpload = async (image) => {
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/fileManager/userImageUpload', image)
+export const userImageUpload = (image) => {
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/fileManager/userImageUpload', image)
 }
 
 

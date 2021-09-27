@@ -12,14 +12,17 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import Link from "next/link";
+import {useDispatch, useSelector} from "react-redux";
+import {autoUserLogin, getSpecificUserData} from "../../store/actions/userActions";
 
 const ProfileStyledMain = styled.main`
   display: flex;
   align-items: center;
   flex-direction: column;
   justify-content: flex-start;
-  color:var(--main-text-color);
+  color: var(--main-text-color);
   grid-area: main;
+
   .profile-header {
     display: flex;
     align-items: center;
@@ -27,21 +30,23 @@ const ProfileStyledMain = styled.main`
     padding: 10px 0;
     border-bottom: .5px solid var(--main-text-color);
   }
-  .profile-page-info{
+
+  .profile-page-info {
     width: 300px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    .profile-page-info-edit-link{
+
+    .profile-page-info-edit-link {
       color: var(--main-text-color);
     }
   }
-  
+
   //.profile-posts{
   //  width: 300px;
   //}
-  .profile-username{
-    
+  .profile-username {
+
   }
 
   .profile-posts {
@@ -74,21 +79,12 @@ const ProfileStyledMain = styled.main`
 `
 
 const Profile = props => {
-    const contextData = useContext(AppContext);
 
-    useEffect(() => {
-        getSignedInUserData(['username','role','keyMaster','profileImage','followingCount','followersCount']).then(res => {
-            if (res?.data?.userData){
-                contextData.dispatchUserData({
-                    ...contextData.userData,
-                    ...res.data.userData
-                });
-            }
-        }).catch(err => {
-            console.log(err);
-            localStorage.removeItem('wt')
-        })
-    }, []);
+    const dispatch = useDispatch()
+    const userData = useSelector(state => state.user.userData)
+
+
+
 
     return (
         <ProfileStyledMain className='profile-page main'>
@@ -97,7 +93,7 @@ const Profile = props => {
                 <ProfileNavigation/>
             </div>
             <div className='profile-page-info'>
-                <p className='profile-username'>{contextData.userData.username}</p>
+                <p className='profile-username'>{userData.username}</p>
                 {/*<Link href={'/profile/edit'}>*/}
                 {/*    <a className='profile-page-info-edit-link'>*/}
                 {/*        {props.t(`profile:Edit Profile`)}*/}
@@ -107,7 +103,7 @@ const Profile = props => {
 
             <div className='profile-posts'>
                 <div className='profile-no-posts'>
-                    <FontAwesomeIcon  className='upload-profile-image-btn-svg' icon={faCamera}/>
+                    <FontAwesomeIcon className='upload-profile-image-btn-svg' icon={faCamera}/>
                 </div>
                 <h2 className='profile-no-posts-title'>No Post Yet </h2>
                 <p className='profile-no-posts-title'> Coming Soon</p>
@@ -121,13 +117,14 @@ export const getServerSideProps = async (context) => {
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation', 'profile'])),
+            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation', 'profile'])),
             ...firstLoadData,
             query: context.query
         }
     }
 }
-export default withTranslation(['common','customTranslation', 'profile'])(Profile);
+//export default withTranslation(['common','customTranslation', 'profile'])(Profile);
+export default Profile;
 
 //     <MyProfileInfo/>
 //<ProfileCoverImage/>

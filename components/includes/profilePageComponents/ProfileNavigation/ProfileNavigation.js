@@ -2,9 +2,12 @@ import React, { useEffect, useState, useContext } from 'react';
 import { AppContext } from '../../../../context/AppContext'
 import Link from 'next/link'
 import {withTranslation} from "next-i18next";
+import {useSelector} from "react-redux";
 
 const ProfileNavigation = props => {
     const contextData = useContext(AppContext);
+    const userData = useSelector(state => state.user.userData)
+
     const [ navigationData, setNavigationData ] = useState({
         isOpen: false,
         style: {}
@@ -70,7 +73,7 @@ const ProfileNavigation = props => {
         `}</style>
 
             <div className='profile-navigation-items'>
-                <span>{contextData.userData.followersCount || 0}</span>
+                <span>{userData.followersCount || 0}</span>
                 <Link href='/profile/followers' >
                     <a style={ navigationData.style } className='profile-navigation-item'>
                     {props.t([`common:Followers`])}
@@ -78,7 +81,7 @@ const ProfileNavigation = props => {
                 </Link>
             </div>
             <div className='profile-navigation-items'>
-                <span>{contextData.userData.followingCount || 0}</span>
+                <span>{userData.followingCount || 0}</span>
                 <Link href='/profile/following' ><a style={ navigationData.style } className='profile-navigation-item'>{props.t([`common:Following`])} </a></Link>
             </div>
 

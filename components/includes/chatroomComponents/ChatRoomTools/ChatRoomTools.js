@@ -1,11 +1,12 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import socket from '../../../../_variables/socket';
 import {useRouter} from "next/router";
-import {AppContext} from "../../../../context/AppContext";
-
 import styled from "styled-components";
+import {useDispatch, useSelector} from "react-redux";
+import {setLoginRegisterFormStatus} from "../../../../store/actions/globalStateActions";
+
 const ChatRoomToolsStyledFrom = styled.form`
   position: fixed;
   left: 0;
@@ -69,8 +70,10 @@ const ChatRoomToolsStyledFrom = styled.form`
     margin: 0;
   }
 `
-const ChatRoomTools = ({onEmojiPickerHandler}) => {
-    const contextData = useContext(AppContext);
+
+const ChatRoomTools = () => {
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.user)
     const colorPicker= useRef(null)
     const router = useRouter()
     const [state, setState] = useState({
@@ -92,13 +95,13 @@ const ChatRoomTools = ({onEmojiPickerHandler}) => {
 
     const onSubmitHandler = e => {
         e.preventDefault()
-        if (contextData.userData._id && state.messageData.length >0) {
+        if (user.userData._id && state.messageData.length >0) {
             const newMessageData = {
                 messageData:state.messageData,
                 roomName:router.query.chatRoomName,
-                username:contextData.userData.username,
-                id:contextData.userData._id,
-                profileImage:contextData.userData.profileImage,
+                username:user.userData.username,
+                id:user.userData._id,
+                profileImage:user.userData.profileImage,
                 color:state.color,
                 createdAt: Date.now(),
                 type:'message',
@@ -112,17 +115,13 @@ const ChatRoomTools = ({onEmojiPickerHandler}) => {
                 messageData: ''
             })
         } else {
-            contextData.dispatchState({
-                ...contextData.state,
-                loginRegisterFormPopup: true,
-                loginRegisterFormPopupType: 'register'
-            })
+            dispatch(setLoginRegisterFormStatus('register'))
         }
 
     }
 
     const onStartTypingHandler = () => {
-        socket.emit('startTyping', router.query.chatRoomName, contextData.userData.username)
+        socket.emit('startTyping', router.query.chatRoomName, user.userData.username)
     }
 
 

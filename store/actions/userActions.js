@@ -1,5 +1,6 @@
 import * as types from "../types";
 import axios from 'axios';
+import {DISPATCH_SOCKET_ID, GET_SPECIFIC_USER_DATA} from "../types";
 
 export const userLogin = (username,password) => async dispatch=>{
    try {
@@ -20,9 +21,23 @@ export const autoUserLogin = (fields) => async dispatch=>{
     try{
         if (localStorage.wt){
             await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt,fields}).then(res=>{
-
                 dispatch({
                     type:types.AUTO_LOGIN,
+                    payload:{userData:res.data.userData,loggedIn: true}
+                })
+            })
+        }
+    }catch (err){
+        console.log(err)
+    }
+}
+
+export const getSpecificUserData = (fields) => async dispatch=>{
+    try{
+        if (localStorage.wt){
+            await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt,fields}).then(res=>{
+                dispatch({
+                    type:types.GET_SPECIFIC_USER_DATA,
                     payload:{userData:res.data.userData,loggedIn: true}
                 })
             })
@@ -38,5 +53,12 @@ export const userLogOut = () => dispatch=>{
     dispatch({
         type:types.LOGIN,
         payload:{userData:{},loggedIn: false}
+    })
+}
+
+export const dispatchSocketId = socketId => dispatch=>{
+    dispatch({
+        type:types.DISPATCH_SOCKET_ID,
+        payload:socketId
     })
 }

@@ -1,5 +1,6 @@
 const sharp = require('sharp');
 const fsExtra = require('fs-extra')
+const userSchema = require('../../../models/userSchema');
 
 module.exports = async (req, res) => {
     const file = req.files.profileImage
@@ -26,10 +27,16 @@ module.exports = async (req, res) => {
                         console.log(err)
                         res.sendStatus(500);
                     } else {
+                        const imageUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL + filePath.replace('.','')
 
-                        fsExtra.remove(filePathOriginalSize)
-                        res.json({response: 'Uploaded', path: process.env.NEXT_PUBLIC_PRODUCTION_URL + filePath})
-                        res.end()
+                        userSchema.findByIdAndUpdate(req.userData._id,{profileImage:imageUrl}).exec().then(()=>{
+                            fsExtra.remove(filePathOriginalSize)
+                            res.json({response: 'Uploaded', path: imageUrl})
+                            res.end()
+                        }).catch(()=>{
+                            res.sendStatus(500);
+                        })
+
                     }
                 })
             }

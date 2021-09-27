@@ -1,8 +1,7 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import socket from '../../_variables/socket';
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {useRouter} from "next/router";
-import {AppContext} from "../../context/AppContext";
 import ChatRoomHeader from "../../components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader";
 import ChatRoomMessageArea from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
@@ -10,11 +9,13 @@ import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponent
 import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import _ from 'lodash'
-
+import {useDispatch, useSelector} from "react-redux";
+import {dispatchSocketId} from "../../store/actions/userActions";
 
 const chatRoom = props => {
     const messageAreaRef = useRef(null)
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
+    const user = useSelector(state => state.user)
     const [state, setState] = useState({
         onlineUserListVisibility: false,
         userInfo: {}
@@ -22,7 +23,6 @@ const chatRoom = props => {
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [isJoined, setIsJoined] = useState(false)
-    const [socketId, setSocketId] = useState(null)
     const router = useRouter()
 
     const onUserInfoShowHandler = (username, userId, profileImage) => {
@@ -43,16 +43,9 @@ const chatRoom = props => {
             setState({...state, emojiPicker: true})
     }
 
-
-
-
     useEffect(() => {
         scrollToBottomOfConversationBox()
     }, [messages]);
-
-
-
-
 
     useEffect(() => {
         // if (contextData.userData._id) {
@@ -62,24 +55,24 @@ const chatRoom = props => {
         //     ])
         // }
 
-        if (router.query.chatRoomName && contextData.userData.username && contextData.userData._id && !isJoined && contextData.userData.socketId) {
+        if (router.query.chatRoomName && user.userData.username && user.userData._id && !isJoined && user.socketId) {
             setIsJoined(true)
-            const userData = {
+            const userDataForJoiningRoom = {
                 chatRoomName: router.query.chatRoomName,
-                username: contextData.userData.username,
-                id: contextData.userData._id,
-                profileImage: contextData.userData.profileImage,
-                socketId : contextData.userData.socketId
+                username: user.userData.username,
+                id: user.userData._id,
+                profileImage:user.userData.profileImage,
+                socketId : user.socketId
             }
 
-            socket.emit('joinUserToTheRoom', userData)
+            socket.emit('joinUserToTheRoom', userDataForJoiningRoom)
         }
 
-    }, [contextData.userData._id, contextData.userData.socketId]);
+    }, [user.userData._id, user.socketId]);
 
 
     useEffect(() => {
-        console.log(socket)
+
         socket.emit('socketId')
         socket.emit('onlineUsersList')
         socket.emit('recentChatRoomMessages',router.query.chatRoomName)
@@ -87,10 +80,7 @@ const chatRoom = props => {
 
 
         socket.on('socketId', socketId => {
-            contextData.dispatchUserData(prevUserData=>({
-                ...prevUserData,
-                socketId
-            }))
+            dispatch(dispatchSocketId(socketId))
         })
 
         socket.on('onlineUsersList', chatroomOnlineUsers => {

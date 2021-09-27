@@ -5,6 +5,8 @@ export const INITIAL_POSTS = 'INITIAL_POSTS'
 export const AUTO_LOGIN ='AUTO_LOGIN'
 export const LOGIN ='LOGIN'
 export const LOGOUT ='LOGOUT'
+export const GET_SPECIFIC_USER_DATA ='GET_SPECIFIC_USER_DATA'
+export const DISPATCH_SOCKET_ID ='SET_SOCKET_ID'
 
 //WIDGETS TYPES
 export const SET_WIDGETS ='SET_WIDGETS'

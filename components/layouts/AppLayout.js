@@ -83,7 +83,7 @@ const AppLayout = props => {
 
     useEffect(() => {
         if (localStorage.wt) {
-            dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'coverImage']))
+            dispatch(autoUserLogin(['username','role','keyMaster','profileImage','followingCount','followersCount']))
         }
     }, []);
 

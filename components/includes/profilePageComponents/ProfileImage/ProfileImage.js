@@ -1,103 +1,79 @@
-import React, { useContext, useRef } from 'react';
-import { AppContext } from '../../../../context/AppContext'
+import React, {useRef} from 'react';
 import {userImageUpload} from '../../../../_variables/ajaxVariables'
-import {updateUserData} from '../../../../_variables/ajaxAuthVariables'
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCamera} from "@fortawesome/free-solid-svg-icons";
-import {faUser} from "@fortawesome/free-regular-svg-icons";
+import {useDispatch, useSelector} from "react-redux";
+import {setLoading} from "../../../../store/actions/globalStateActions";
+
 
 const ProfileImage = props => {
-    const contextData = useContext(AppContext);
+    const imageElement = useRef(null)
     const uploadInputElement = useRef(null)
-
+    const userData = useSelector(state => state.user.userData)
+    const dispatch = useDispatch()
     const onUploadHandler = e => {
         const filesData = new FormData()
-        filesData.append('token',localStorage.wt)
-        filesData.append('profileImage', e.target.files[0],'profile')
+        filesData.append('token', localStorage.wt)
+        filesData.append('profileImage', e.target.files[0], 'profile')
         filesData.append('type', 'profile')
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        })
-        userImageUpload(filesData).then(res=>{
-            const newUserData= {...contextData.userData, profileImage:res.data.path.replace('./','/')}
-            contextData.dispatchUserData(newUserData)
-
-            updateUserData(newUserData).then(() => {
-                contextData.functions.getAndSetUserInfo()
-                contextData.dispatchState({
-                    ...contextData.state,
-                    loading: false
-                })
-
-            }).catch(err => {
-                console.log(err )
-                contextData.dispatchState({
-                    ...contextData.state,
-                    loading: false
-                })
-            })
-
-        }).catch(err=>{
-            console.log( err)
-
+        dispatch(setLoading(true))
+        userImageUpload(filesData).then(res => {
+            res.data?.path ? imageElement.current.src = res.data.path + '?date=' + Date.now() : null
+            dispatch(setLoading(false))
         })
     }
     return (
         <div className='profile-image'>
             <style jsx>{`
-                .profile-image {
-                    position: relative;
-                    bottom: 0;
-                    margin: auto;
-                    width: 77px;
-                   // place-items: center;
-                    border: black 1px solid;
-                }
-                .profile-image-img {
-                    width: 77px;
-                    border-radius: 50%;
-                }
-                .upload-profile-image-btn{
-                    position: absolute;
-                    bottom: 5px;
-                    right: 5px;
-                    background: transparent;
-                    border: none;
-                    outline: none;
-                    opacity: 50%;
-                }
-                
-                .upload-profile-no-imag{
-                  border: 1px solid var(--main-text-color) ;
-                  padding: 5px;
-                  svg{
+              .profile-image {
+                position: relative;
+                bottom: 0;
+                margin: auto;
+                width: 77px;
+                // place-items: center;
+                border: black 1px solid;
+              }
 
-                  }
+              .profile-image-img {
+                width: 77px;
+                border-radius: 50%;
+              }
+
+              .upload-profile-image-btn {
+                position: absolute;
+                bottom: 5px;
+                right: 5px;
+                background: transparent;
+                border: none;
+                outline: none;
+                opacity: 50%;
+              }
+
+              .upload-profile-no-imag {
+                border: 1px solid var(--main-text-color);
+                padding: 5px;
+
+                svg {
+
                 }
-                
-                @media only screen and (min-width: 768px){
-                .profile-image{
-                 width: 150px;
+              }
+
+              @media only screen and (min-width: 768px) {
+                .profile-image {
+                  width: 150px;
                 }
+
                 .profile-image-img {
-                    width: 150px;
+                  width: 150px;
                 }
-                }
+              }
 
             `}</style>
-            <img onClick={ () => uploadInputElement.current.click() }
+            <img ref={imageElement} onClick={() => uploadInputElement.current.click()}
                  className='profile-image-img'
-                 src={contextData?.userData?.profileImage ? contextData?.userData?.profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg' } />
-            <input ref={ uploadInputElement } type="file" style={ { display: 'none' } } onChange={ e => onUploadHandler(e) }/>
+                 src={userData?.profileImage ? userData?.profileImage + '?date=' + Date.now() : '/public/asset/images/user/noGenderAvatar150.jpg'}/>
+            <input ref={uploadInputElement} type="file" style={{display: 'none'}} onChange={e => onUploadHandler(e)}/>
 
         </div>
     );
 
 };
 export default ProfileImage;
-
-
-// <button className='upload-profile.json-image-btn' onClick={ () => uploadInputElement.current.click() }>
-//     <FontAwesomeIcon style={{...props.svgStyle,width:'20px',height:'20px' }} className='upload-profile.json-image-btn-svg'  icon={faCamera} />
-// </button>
