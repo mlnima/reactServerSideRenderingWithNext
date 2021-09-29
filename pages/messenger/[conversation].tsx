@@ -8,10 +8,18 @@ import MessengerConversationMessageArea from "../../components/includes/messenge
 import MessengerConversationMessageTools from "../../components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools";
 import socket from '../../_variables/socket'
 import MessengerCall from "../../components/includes/messengerPageComponents/MessengerCall/MessengerCall";
+// @ts-ignore
 import Peer from 'simple-peer'
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {useSelector} from "react-redux";
+import {settingsPropTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {wrapper} from "../../store/store";
 
-const conversation = props => {
+const conversation = (props: ClientPagesTypes) => {
+
+    const settings = useSelector((state : settingsPropTypes) => state.settings);
+
     const contextData = useContext(AppContext);
     const router = useRouter();
     const [state, setState] = useState({
@@ -31,7 +39,9 @@ const conversation = props => {
     const [userStream, setUserStream] = useState()
     const [callAccepted, setCallAccepted] = useState(false)
     const [messageState, setMessageState] = useState({messageBody: ''})
-    const [connectedUserData, setConnectedUserData] = useState({});
+    const [connectedUserData, setConnectedUserData] = useState({
+        profileImage: undefined
+    });
 
 
     const [callerData, setCallerData] = useState({
@@ -52,9 +62,10 @@ const conversation = props => {
         socket.emit('joinConversation', router.query.conversation)
 
 
-        socket.on("incomingCallFromConversation", data => {
+        socket.on("incomingCallFromConversation", (data: { callerId: any; callerName: any; callerStreamData: any; }) => {
             getUserMedia().then(myStreamData => {
-                setMyStream(myStreamData)
+                // @ts-ignore
+                return setMyStream(myStreamData);
             })
 
             setCallerData({
@@ -69,13 +80,13 @@ const conversation = props => {
             })
         })
 
-        socket.on("mySocketId", id => {
+        socket.on("mySocketId", (id:string) => {
             setMySocketId(id)
         })
     }, []);
 
 
-    const peerOnErrorHandler = err => {
+    const peerOnErrorHandler = (err: any) => {
         console.log(err)
     }
 
@@ -87,7 +98,9 @@ const conversation = props => {
     }, [myStream, state.calling]);
     useEffect(() => {
         if (callAccepted && myStream && !state.calling) {
+            // @ts-ignore
             myVideoRef.current.srcObject = myStream
+            // @ts-ignore
             answerCall()
         }
     }, [callAccepted]);
@@ -95,6 +108,7 @@ const conversation = props => {
 
     useEffect(() => {
         if (userStream) {
+            // @ts-ignore
             userVideoRef.current.srcObject = userStream
         }
     }, [userStream]);
@@ -108,21 +122,28 @@ const conversation = props => {
     const disableMicrophone = () => {
         state.microphone ?
             (setState({...state, microphone: false}),
+                // @ts-ignore
                 myStream.getAudioTracks ?
+                    // @ts-ignore
                     setMyStream(myStream.getAudioTracks()[0].enabled = false) : null) :
             (setState({...state, microphone: true}),
+                // @ts-ignore
                 setMyStream(getUserMedia()))
 
     }
 
     const disableCamera = () => {
+        // @ts-ignore
         state.camera ? (
                 setState({...state, camera: false}),
+                    // @ts-ignore
                     myStream.getVideoTracks ?
+                        // @ts-ignore
                         setMyStream(myStream.getVideoTracks()[0].enabled = false) : null
             )
             : (
                 setState({...state, camera: true}),
+                    // @ts-ignore
                     setMyStream(getUserMedia())
 
             )
@@ -131,6 +152,7 @@ const conversation = props => {
 //------
     const attemptForCall = () => {
         getUserMedia().then(async myStreamData => {
+            // @ts-ignore
             setMyStream(myStreamData)
             setState({...state, calling: true})
 
@@ -147,6 +169,7 @@ const conversation = props => {
 
     const callUser = async () => {
         try {
+            // @ts-ignore
             myVideoRef.current.srcObject = myStream
             const peer = new Peer({
                 initiator: true,
@@ -154,7 +177,7 @@ const conversation = props => {
                 stream: myStream
             })
 
-            peer.on("signal", data => {
+            peer.on("signal", (data: any) => {
                 socket.emit("callToConversation", {
                     conversation: router.query.conversation,
                     callerStreamData: data,
@@ -163,11 +186,11 @@ const conversation = props => {
                 })
             })
 
-            peer.on("stream", userStream => {
+            peer.on("stream", (userStream: React.SetStateAction<undefined>) => {
                 setUserStream(userStream)
             })
 
-            peer.on("error", error => {
+            peer.on("error", (error: any) => {
                 peerOnErrorHandler(error)
             })
 
@@ -180,17 +203,21 @@ const conversation = props => {
                     callAccepted: false,
                     receivingCall: false,
                 })
+                // @ts-ignore
                 setUserStream(null)
                 setCallAccepted(false)
+                // @ts-ignore
                 setCallerData(null)
+                // @ts-ignore
                 setMyStream(null)
+                // @ts-ignore
                 setUserStream(null)
                 peer.destroy()
                 router.reload()
 
             })
 
-            socket.on("callAccepted", signal => {
+            socket.on("callAccepted", (signal: any) => {
                 setCallAccepted(true)
                 peer.signal(signal)
             })
@@ -217,22 +244,24 @@ const conversation = props => {
                 callAccepted: false,
                 receivingCall: false,
             })
+            // @ts-ignore
             setUserStream(null)
+            // @ts-ignore
             setCallerData(null)
             setCallAccepted(false)
             peer.destroy()
             router.reload()
         })
 
-        peer.on("signal", data => {
+        peer.on("signal", (data: any) => {
             socket.emit("answerCall", data, router.query.conversation)
         })
 
-        peer.on("stream", userStream => {
+        peer.on("stream", (userStream: React.SetStateAction<undefined>) => {
             setUserStream(userStream)
         })
 
-        peer.on("error", error => {
+        peer.on("error", (error: any) => {
             peerOnErrorHandler(error)
         })
 
@@ -249,7 +278,9 @@ const conversation = props => {
             callAccepted: false,
             receivingCall: false,
         })
+        // @ts-ignore
         setUserStream(null)
+        // @ts-ignore
         setCallerData(null)
         setCallAccepted(false)
 
@@ -266,15 +297,15 @@ const conversation = props => {
     //     })
     // }
 
+    // @ts-ignore
     return (
         <div className='messenger main'>
-            <style jsx>{`
-
-            `}</style>
             <MessengerConversationHeader
                 attemptForCall={attemptForCall}
                 profileImage={connectedUserData.profileImage}
+                // @ts-ignore
                 username={connectedUserData.username}
+                // @ts-ignore
                 connectedUserId={connectedUserData._id}/>
             <MessengerConversationMessageArea
                 connectedUserData={connectedUserData}
@@ -303,15 +334,15 @@ const conversation = props => {
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'messengerPage')
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], store)
     return {
         props: {
 
-            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
         }
     }
-}
+})
 
 export default conversation;

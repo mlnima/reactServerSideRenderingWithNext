@@ -1,4 +1,4 @@
-import {DesignSettings,IdentitySettings,Meta,WidgetPropTypes} from './GlobalTypes'
+import {DesignSettings,IdentitySettings,Meta,WidgetPropTypes,MetasPropTypes} from './GlobalTypes'
 
 export interface ClientPagesTypes {
     actor: Meta;
@@ -9,25 +9,20 @@ export interface ClientPagesTypes {
     position: string;
     stylesData: string;
     isMobile: boolean;
-    referer: boolean;
+    referer: boolean ;
     currentPageSidebar:boolean|string;
-    widgets: WidgetPropTypes[];
+    widgets: WidgetPropTypes[] | undefined;
+    metaSource:MetasPropTypes;
+    comments:object[],
+    post:object,
+    t:any;
+    pageInfo:{
+        pageStyle:string,
+        pageName:string
+    },
+    responseCode:any
 }
-// position: string,
-//     deviceTypeToRender: string,
-//     languageToRender: string,
-//     metaType: string,
-//     viewType: string,
-//     type: string,
-//     editMode: boolean,
-// widgetIndex: Boolean;
-// position: string,
-//     deviceTypeToRender: string,
-//     languageToRender: string,
-//     metaType: string,
-//     viewType: string,
-//     type: string,
-//     editMode: boolean,
+
 export interface _FirstLoadData {
     position: string;
     isMobile: boolean;

@@ -1,5 +1,5 @@
-import React, {useContext} from 'react';
-import {AppContext} from "../../context/AppContext";
+import React from 'react';
+
 import {useRouter} from "next/router";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
@@ -8,6 +8,11 @@ import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRe
 import ActorsRenderer from "../../components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer/ActorsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
+import {useSelector} from "react-redux";
+import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {wrapper} from "../../store/store";
+
 const ActorsPageStyledDiv = styled.div`
   grid-area:main;
   .actors{
@@ -18,73 +23,69 @@ const ActorsPageStyledDiv = styled.div`
     max-width: 100%;
   }
 `
-const actorsPage = ({metaSource, identity, dataForGettingMeta,design,widgets,referer,isMobile}) => {
-    const contextData = useContext(AppContext);
+const actorsPage = ({metaSource ,referer,isMobile} : ClientPagesTypes) => {
+    const settings = useSelector((state : settingsPropTypes) => state.settings);
     const router = useRouter();
-    const isWithSidebar = identity?.data?.metaPageSidebar || contextData?.siteIdentity?.metaPageSidebar;
+    const isWithSidebar = settings.identity?.metaPageSidebar;
 
     return (
         <ActorsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
                 isMobile={isMobile}
-                widgets={widgets.filter(w=>w.data.position === 'actorsPageTop' )}
                 position={'actorsPageTop'}
                 referer={referer}
-                currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
-                postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                postElementImageLoader={design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                postElementImageLoaderType={design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
+                currentPageSidebar={settings.identity?.homePageSidebar }
             />
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={metaSource?.totalCount}
+                // @ts-ignore
                 size={parseInt(router.query?.size) || 60}
+                // @ts-ignore
                 maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60) )}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <ActorsRenderer actors={metaSource?.metas || []} postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}/>
+
+            <ActorsRenderer actors={metaSource?.metas || []} postElementSize={settings.design?.postElementSize} metaData={undefined}/>
 
 
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={metaSource?.totalCount}
+                // @ts-ignore
                 size={parseInt(router.query?.size) || 60}
+                // @ts-ignore
                 maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60) )}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
             <WidgetsRenderer
                 isMobile={isMobile}
-                widgets={widgets.filter(w=>w.data.position === 'actorsPageBottom' )}
                 position={'actorsPageBottom'}
                 referer={referer}
-                currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
-                postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                postElementImageLoader={design?.data?.postElementImageLoader|| contextData.siteDesign.postElementImageLoader}
-                postElementImageLoaderType={design?.data?.postElementImageLoaderType|| contextData.siteDesign.postElementImageLoader}
+                currentPageSidebar={settings.identity?.homePageSidebar }
             />
         </ActorsPageStyledDiv>
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['actorsPageTop','actorsPageLeftSidebar','actorsPageBottom', 'actorsPageRightSidebar'], 'actorsPage')
-
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['actorsPageTop','actorsPageLeftSidebar','actorsPageBottom', 'actorsPageRightSidebar'],store);
     const metaData = await getMultipleMeta(context.query,'actors', true)
     const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
-
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
             ...firstLoadData,
             query:context.query,
             metaSource,
-       }}
-}
+        }
+    }
+
+});
+
 
 export default actorsPage;

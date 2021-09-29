@@ -9,10 +9,11 @@ import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {useRouter} from "next/router";
-import {GetServerSideProps} from "next";
 import {ClientPagesTypes,_FirstLoadData} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {GetServerSidePropsContext} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {wrapper} from "../../store/store";
+import {useSelector} from "react-redux";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
+import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
 const StyledMain = styled.main`
   grid-area: main;
@@ -30,50 +31,50 @@ const StyledMain = styled.main`
 `
 
 const actorPage = (props: ClientPagesTypes) => {
+
+    const settings = useSelector((state : settingsPropTypes) => state.settings);
+
     const router = useRouter()
 
     return (
-        <StyledMain className="main posts-page" stylesData={props.design?.actorPageStyle || ''}>
+        <StyledMain className="main posts-page" stylesData={settings.design?.actorPageStyle || ''}>
             {props.actor ? <PostsPageInfo titleToRender={props.actor?.name}/> : null}
             {props.actor ? <MetaDataToSiteHead title={props.actor?.name} description={props.actor?.description} url={`${router.asPath}`} image={props.actor?.imageUrl}/> : null}
             <WidgetsRenderer
                 isMobile={props.isMobile}
-                widgets={props.widgets.filter(w => w.data.position === 'actorPageTop')}
                 position='actorPageTop'
                 referer={props.referer}
-                currentPageSidebar={props.identity?.actorPageSidebar}
-                postElementSize={props.design?.postElementSize}
-                postElementStyle={props.design?.postElementStyle}
-                postElementImageLoader={props.design?.postElementImageLoader}
-                postElementImageLoaderType={props.design?.postElementImageLoaderType} homePageSidebar={false} _id={''}            />
+                currentPageSidebar={settings.identity?.actorPageSidebar}
+                homePageSidebar={false}
+                />
             <PostsPage {...props}/>
             <WidgetsRenderer
                 isMobile={props.isMobile}
-                widgets={props.widgets.filter(w => w.data.position === 'actorPageBottom')}
-                position={'actorPageBottom'}
+                position='actorPageBottom'
                 referer={props.referer}
-                currentPageSidebar={props.identity?.actorPageSidebar}
-                postElementSize={props.design?.postElementSize}
-                postElementStyle={props.design?.postElementStyle}
-                postElementImageLoader={props.design?.postElementImageLoader}
-                postElementImageLoaderType={props.design?.postElementImageLoaderType} homePageSidebar={false} _id={''}            />
+                currentPageSidebar={settings.identity?.actorPageSidebar}
+                homePageSidebar={false}
+            />
         </StyledMain>
     )
 };
 
-// @ts-ignore
-export const getServerSideProps: GetServerSideProps = async (context:GetServerSidePropsContext) => {
 
-    // @ts-ignore
-    if (!context.query.actorId) return {notFound: true};
-    if (!context.query?.actorId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const actorId = context.query.actorId as string
+    if (!actorId) return {notFound: true};
+    if (!actorId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
-    const firstLoadData  = await getFirstLoadData(context.req, ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar',])
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true)
-    const actorData : any = context.query.actorId ? await getSingleMeta(context.query.actorId, true) : {}
-    const actor = actorData?.data ? actorData.data.meta : {}
-    const postsData = await getPosts(gettingPostsQueries)
-    const postsSource = postsData.data ? postsData.data : []
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar'],
+        store
+    );
+    const actorData : any = context.query.actorId ? await getSingleMeta(context.query.actorId, true) : {};
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true);
+    const actor = actorData?.data ? actorData.data.meta : {};
+    const postsData = await getPosts(gettingPostsQueries);
+    const postsSource = postsData.data ? postsData.data : [];
 
     return {
         props: {
@@ -81,8 +82,11 @@ export const getServerSideProps: GetServerSideProps = async (context:GetServerSi
             ...firstLoadData,
             query: context.query,
             postsSource,
-            actor,
+            actor : actor || null
         }
     }
-}
+
+});
+
+
 export default actorPage;

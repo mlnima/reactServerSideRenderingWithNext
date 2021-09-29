@@ -132,13 +132,9 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
 `
 
 const LoginRegisterPopupForms = props => {
-    const contextData = useContext(AppContext);
+
     const dispatch = useDispatch()
     const globalState = useSelector(state => state.globalState)
-
-    useEffect(() => {
-        console.log(globalState)
-    }, [globalState]);
 
     const [state, setState] = useState({
         username: '',
@@ -215,12 +211,12 @@ const LoginRegisterPopupForms = props => {
                 <span onClick={()=>dispatch(setLoginRegisterFormStatus(false))} className='close-form-button' title={props.t(`common:Close`)}>
                     <FontAwesomeIcon icon={faTimes}/>
                 </span>
-            <h3 className='login-register-title'>{contextData.state.loginRegisterFormPopupType === 'register' ? props.t(`common:Register`) : props.t(`common:Member login`)}</h3>
+            <h3 className='login-register-title'>{globalState.loginRegisterFormPopup === 'register' ? props.t(`common:Register`) : props.t(`common:Member login`)}</h3>
             {response.message ? <p className='server-response'> {props.t(`common:${response.message}`)} </p> : null}
 
             {
                 globalState.loginRegisterFormPopup === 'register' ?
-                    <form className='login-register-form' onSubmit={contextData.state.loginRegisterFormPopupType === 'register' ? e => onRegisterHandler(e) : e => onLoginHandler(e)}>
+                    <form className='login-register-form' onSubmit={globalState.loginRegisterFormPopup === 'register' ? e => onRegisterHandler(e) : e => onLoginHandler(e)}>
 
                         <div className="login-register-form-fields">
                             <div className="login-register-form-field">
@@ -260,7 +256,7 @@ const LoginRegisterPopupForms = props => {
 
 
                     </form> : globalState.loginRegisterFormPopup === 'login' ?
-                        <form className='login-register-form' onSubmit={contextData.state.loginRegisterFormPopupType === 'register' ? e => onRegisterHandler(e) : e => onLoginHandler(e)}>
+                        <form className='login-register-form' onSubmit={globalState.loginRegisterFormPopup === 'register' ? e => onRegisterHandler(e) : e => onLoginHandler(e)}>
 
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">

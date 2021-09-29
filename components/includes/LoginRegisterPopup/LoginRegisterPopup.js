@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import LoginRegisterPopupForms from "./LoginRegisterPopupForms";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
@@ -24,7 +24,7 @@ const LoginRegisterPopup = () => {
     const globalState = useSelector(state => state.globalState)
     const loggedIn = useSelector(state => state.user.loggedIn)
 
-    if (globalState.loginRegisterFormPopup && !loggedIn){
+    if (globalState?.loginRegisterFormPopup && !loggedIn){
         return (
             <LoginRegisterPopupStyledDiv className='login-register-popup'>
                 <LoginRegisterPopupForms />

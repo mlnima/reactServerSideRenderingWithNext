@@ -1,5 +1,4 @@
-import React, {useContext} from 'react';
-import {AppContext} from "../../context/AppContext";
+import React from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
@@ -8,6 +7,10 @@ import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRe
 import CategoriesRenderer from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {useSelector} from "react-redux";
+import {settingsPropTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {wrapper} from "../../store/store";
 const CategoriesPageStyledDiv = styled.div`
   grid-area: main;
   .categories {
@@ -18,72 +21,67 @@ const CategoriesPageStyledDiv = styled.div`
     max-width: 100%;
   }
 `
-const categoriesPage = ({metaSource, identity, dataForGettingMeta, design, widgets, referer, isMobile}) => {
-    const contextData = useContext(AppContext);
+const categoriesPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
+
+    const settings = useSelector((state : settingsPropTypes) => state.settings);
     const router = useRouter()
 
-    const isWithSidebar = identity?.data?.metaPageSidebar || contextData?.siteIdentity?.metaPageSidebar
+    const isWithSidebar = settings.identity?.metaPageSidebar
     return (
         <CategoriesPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
                 isMobile={isMobile}
-                widgets={widgets.filter(w => w.data.position === 'categoriesPageTop')}
                 position={'categoriesPageTop'}
                 referer={referer}
-                currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
-                postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                postElementImageLoader={design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader}
-                postElementImageLoaderType={design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader}
+                currentPageSidebar={settings.identity?.homePageSidebar}
             />
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={metaSource?.totalCount}
+                // @ts-ignore
                 size={parseInt(router.query?.size) || 60}
+                // @ts-ignore
                 maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <CategoriesRenderer categories={metaSource?.metas || []} postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}/>
+            <CategoriesRenderer categories={metaSource?.metas || []} postElementSize={settings.design?.postElementSize} metaData={undefined}/>
 
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={metaSource?.totalCount}
+                // @ts-ignore
                 size={parseInt(router.query?.size) || 60}
+                // @ts-ignore
                 maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
             <WidgetsRenderer
                 isMobile={isMobile}
-                widgets={widgets.filter(w => w.data.position === 'categoriesPageBottom')}
                 position={'categoriesPageBottom'}
                 referer={referer}
-                currentPageSidebar={identity?.data?.homePageSidebar || contextData.siteIdentity.homePageSidebar}
-                postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                postElementStyle={design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                postElementImageLoader={design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader}
-                postElementImageLoaderType={design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader}
+                currentPageSidebar={settings.identity?.homePageSidebar}
             />
         </CategoriesPageStyledDiv>
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'], 'categoriesPage');
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'],store);
     const metaData = await getMultipleMeta(context.query, 'categories', true);
-    const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0};
-
+    const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
             ...firstLoadData,
-            query: context.query,
+            query:context.query,
             metaSource,
         }
     }
-}
+
+});
 
 export default categoriesPage;

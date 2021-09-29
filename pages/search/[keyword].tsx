@@ -1,14 +1,18 @@
+import React from "react";
 import {getFirstLoadData} from '../../_variables/ajaxVariables';
 import {getPosts} from '../../_variables/ajaxPostsVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import React, {useContext} from "react";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+import {wrapper} from "../../store/store";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {useSelector} from "react-redux";
+import {WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -27,62 +31,59 @@ let StyledMain = styled.main`
     color: var(--main-text-color);
   }
 
-  ${props => props.stylesData}
+  ${(props:{stylesData:string}) => props.stylesData || ''}
 `
-const searchPage = props => {
-
+const searchPage = (props: ClientPagesTypes) => {
     const router = useRouter()
-
     return (
         <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle || ''}>
             {router.query.keyword ? <MetaDataToSiteHead title={router.query.keyword} url={`${router.asPath}`}/> : null}
 
             <WidgetsRenderer
                 isMobile={props.isMobile}
-                widgets={props.widgets.filter(w => w.data.position === 'searchPageTop')}
                 position={'searchPageTop'}
                 referer={props.referer}
                 currentPageSidebar={props.identity?.homePageSidebar}
-                postElementSize={props.design?.postElementSize}
-                postElementStyle={props.design?.postElementStyle}
-                postElementImageLoader={props.design?.postElementImageLoader}
-                postElementImageLoaderType={props.design?.postElementImageLoaderType}
             />
             {router.query.keyword ? <PostsPageInfo titleToRender={router.query.keyword}/> : null}
 
 
-            {props.postsSource.posts.length < 1 ? <h2 className='no-result-message'>No Result for {router.query.keyword}</h2> : null}
+            {
+                // @ts-ignore
+                props.postsSource.posts.length < 1 ?
+                    <h2 className='no-result-message'>No Result for {router.query.keyword}</h2> :
+                    null
+            }
             <PostsPage {...props} />
             <WidgetsRenderer
                 isMobile={props.isMobile}
-                widgets={props.widgets.filter(w => w.data.position === 'searchPageBottom')}
                 position={'searchPageBottom'}
                 referer={props.referer}
                 currentPageSidebar={props.identity?.homePageSidebar}
-                postElementSize={props.design?.postElementSize}
-                postElementStyle={props.design?.postElementStyle}
-                postElementImageLoader={props.design?.postElementImageLoader}
-                postElementImageLoaderType={props.design?.postElementImageLoaderType}
             />
         </StyledMain>
     )
 };
 
-export const getServerSideProps = async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    const firstLoadData = await getFirstLoadData(context.req, ['searchPageTop', 'searchPageLeftSidebar', 'searchPageBottom', 'searchPageRightSidebar',], 'postsPage');
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['searchPageTop', 'searchPageLeftSidebar', 'searchPageBottom', 'searchPageRightSidebar'],
+        store
+    );
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, null, true);
     const postsData = await getPosts(gettingPostsQueries);
     const postsSource = postsData.data ? postsData.data : [];
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
             query: context.query,
             postsSource,
         }
     }
-}
+})
 
 export default searchPage;

@@ -5,19 +5,32 @@ import {useRouter} from "next/router";
 import parse from 'html-react-parser';
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";
 import _ from "lodash";
+import {useDispatch} from "react-redux";
+import {setSettings} from "../../../store/actions/settingsActions";
 
 const SiteSettingSetter = props => {
+    const dispatch = useDispatch()
     const contextData = useContext(AppContext);
     const router = useRouter()
 
     useEffect(() => {
+
+        if (props.identity){
+                //dispatch(setSettings(props.identity,'identity'))
+                contextData.dispatchSiteIdentity({...props.identity, isSet: true})
+                contextData.dispatchState({...contextData.state, identitySet: true})
+        }
+        if (props.design){
+           // dispatch(setSettings(props.design,'design'))
+        }
+
         // console.log(props)
         // props?.design ? (
         //     contextData.dispatchSiteDesign(props.design),
         //         contextData.dispatchState({...contextData.state, designSet: true})
         // ) : null
         props?.identity ? (
-            contextData.dispatchSiteIdentity({...props.identity, isSet: true}),
+                contextData.dispatchSiteIdentity({...props.identity, isSet: true}),
                 contextData.dispatchState({...contextData.state, identitySet: true})
         ) : null
         props?.eCommerce ? contextData.dispatchECommerceSettings(props.eCommerce) : null

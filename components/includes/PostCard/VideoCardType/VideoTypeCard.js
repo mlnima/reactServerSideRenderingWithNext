@@ -1,4 +1,3 @@
-import {useMemo, useEffect} from 'react';
 import Link from "next/link";
 import VideoCardMedia from "./VideoCardMedia";
 import _ from "lodash";
@@ -113,16 +112,14 @@ let VideoCard = styled.div`
 const VideoTypeCard = (props) => {
 
 
-    const quality = useMemo(() => {
-                   return props.post.quality === '2160p' ? '4K' :
-                   props.post.quality === '1440p' ? '2K' :
-                   props.post.quality === '1080p' ? 'HD' :
-                   props.post.quality === '720p' ? 'HD' :
-                   props.post.quality === '480p' ? 'SD' :
-                   props.post.quality === '360p' ? 'SD' :
-                   props.post.quality === '240p' ? 'SD' :
-                   props.post.quality
-    }, [])
+    const quality = props.post.quality === '2160p' ? '4K' :
+        props.post.quality === '1440p' ? '2K' :
+            props.post.quality === '1080p' ? 'HD' :
+                props.post.quality === '720p' ? 'HD' :
+                    props.post.quality === '480p' ? 'SD' :
+                        props.post.quality === '360p' ? 'SD' :
+                            props.post.quality === '240p' ? 'SD' :
+                                props.post.quality
 
     const metaPreviewData = [...(props.post.actors || []), ...(props.post.tags || []), ...(props.post.categories || [])]
     const metaPreview = _.uniqBy(metaPreviewData, function (e) {

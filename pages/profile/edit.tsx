@@ -3,6 +3,8 @@ import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {withTranslation} from "next-i18next";
 import styled from "styled-components";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {wrapper} from "../../store/store";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -28,7 +30,7 @@ const EditProfileStyledMain = styled.main`
     }
 `
 
-const edit = ({t}) => {
+const edit = ({t}:ClientPagesTypes) => {
     const [changePasswordData, setChangePasswordData] = useState({
         username: '',
         password: '',
@@ -36,15 +38,12 @@ const edit = ({t}) => {
         repeatNewPassword: '',
     })
 
-    const onChangePasswordInputsHandler = (e) => {
+    const onChangePasswordInputsHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
         setChangePasswordData({
             ...changePasswordData,
             [e.target.name]: e.target.value
         })
     }
-
-
-
 
     return (
         <EditProfileStyledMain className='main'>
@@ -65,15 +64,15 @@ const edit = ({t}) => {
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], 'profilePage');
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], store);
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common', 'profile'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'profile'])),
             ...firstLoadData,
             query: context.query
         }
     }
-}
+})
 export default withTranslation(['common','customTranslation', 'profile'])(edit);

@@ -12,6 +12,9 @@ import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {wrapper} from "../../store/store";
+import {UserInterface} from "../../_variables/TypeScriptTypes/UserInterfaces";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -37,7 +40,6 @@ const UserPageStyledDiv = styled.div`
         p{
           margin: 5px 10px;
         }
-
       }
     }
   }
@@ -70,7 +72,7 @@ const UserPageStyledDiv = styled.div`
   }
 `
 
-const user = props => {
+const user =  (props:ClientPagesTypes) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
     const [state, setState] = useState({
@@ -87,9 +89,9 @@ const user = props => {
         })
     }
 
-    useEffect(() => {
-        console.log(userData)
-    }, [userData]);
+    // useEffect(() => {
+    //     console.log(userData)
+    // }, [userData]);
 
     useEffect(() => {
         getUserData()
@@ -100,7 +102,7 @@ const user = props => {
         try {
             const userPreviewData = await getUserPreviewData(router.query.username, undefined, ['following', 'followers', 'blockList']);
             const myFriendRequestData = await getUserPreviewData(undefined, contextData.userData._id, ['following', 'followers', 'blockList']);
-            contextData.dispatchUserData(userData => ({...userData, ...myFriendRequestData.data.userData}))
+            contextData.dispatchUserData((userData: any) => ({...userData, ...myFriendRequestData.data.userData}))
             setUserData(userPreviewData.data.userData);
 
         } catch (err) {
@@ -115,23 +117,38 @@ const user = props => {
 
             <div className='profile-header'>
                 <UserPageProfileImage
+                    // @ts-ignore
                     gender={userData?.gender}
+                    // @ts-ignore
                     profileImage={userData?.profileImage}
                 />
                 <div className='profile-header-info-actions'>
-                    <h3>{userData?.username}</h3>
-                    {contextData?.userData?.username !== userData?.username ?
+
+                    <h3>{
+                        // @ts-ignore
+                        userData?.username
+                    }</h3>
+                    {
+                        // @ts-ignore
+                        contextData?.userData?.username !== userData?.username ?
                         <UserPageActionButtons
                             setParentState={setState}
                             userData={userData}
 
                             parentState={state}
+                            // @ts-ignore
                             _id={userData?._id}
                         /> : null
                     }
                     <div className='follow-count'>
-                        <p>{props.t([`common:Followers`])} :  <span>{userData?.followers ? userData.followers?.length : 0}</span></p>
-                        <p>{props.t([`common:Following`])} :  <span>{userData?.following ? userData.following?.length : 0}</span></p>
+                        <p>{props.t([`common:Followers`])} :  <span>{
+                            // @ts-ignore
+                            userData?.followers ? userData.followers?.length : 0
+                        }</span></p>
+                        <p>{props.t([`common:Following`])} :  <span>{
+                            // @ts-ignore
+                            userData?.following ? userData.following?.length : 0
+                        }</span></p>
                     </div>
                 </div>
             </div>
@@ -147,30 +164,19 @@ const user = props => {
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['userPageRightSidebar,userPageLeftSidebar', 'userPage'], 'userPage')
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['userPageRightSidebar,userPageLeftSidebar'], store)
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
             query: context.query,
             // userData: userData || null
         }
     }
-}
+})
 
 
 export default withTranslation(['common'])(user);
 
-
-// {
-//     state.messagePop ?
-//         <SendMessagePopUp
-//             receiverId={userData?._id}
-//             receiverProfileImage={userData?.profileImage}
-//             username={userData?.username}
-//             render={state.messagePop}
-//             onCloseMessagePop={onCloseMessagePop}
-//         /> : null
-// }

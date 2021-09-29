@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {AppContext} from "../../../context/AppContext";
 import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
@@ -90,7 +90,7 @@ const PostPageStyledMain = styled.main`
   }
 `
 
-const PostPage = ({responseCode, design, post, identity, comments, widgets}) => {
+const PostPage = ({ design, post, identity, comments, widgets}) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
     const [state, setState] = useState({

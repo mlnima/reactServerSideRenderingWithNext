@@ -1,4 +1,4 @@
-import React, {useState, useMemo, useEffect} from 'react';
+import React, {useState} from 'react';
 import Image from 'next/image'
 import {checkRemovedContent} from "../../../_variables/ajaxPostsVariables";
 import {clientSelfWidgetUpdate} from "../../../_variables/_ajaxClientWidgetVariables";

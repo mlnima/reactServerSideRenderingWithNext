@@ -8,24 +8,32 @@ import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoom
 import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
 import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+// @ts-ignore
 import _ from 'lodash'
 import {useDispatch, useSelector} from "react-redux";
 import {dispatchSocketId} from "../../store/actions/userActions";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {wrapper} from "../../store/store";
 
-const chatRoom = props => {
+const chatRoom = (props:ClientPagesTypes) => {
     const messageAreaRef = useRef(null)
     const dispatch = useDispatch()
+
+    // @ts-ignore
     const user = useSelector(state => state.user)
+
     const [state, setState] = useState({
         onlineUserListVisibility: false,
         userInfo: {}
     });
+
     const [onlineUsers, setOnlineUsers] = useState([]);
     const [messages, setMessages] = useState([]);
     const [isJoined, setIsJoined] = useState(false)
     const router = useRouter()
-
+// @ts-ignore
     const onUserInfoShowHandler = (username, userId, profileImage) => {
+        // @ts-ignore
         state.userInfo.username ?
             setState({...state, userInfo: {}}) :
             setState({...state, userInfo: {username, userId, profileImage}})
@@ -38,8 +46,11 @@ const chatRoom = props => {
     }
 
     const onEmojiPickerHandler = () => {
+        // @ts-ignore
         state.emojiPicker ?
+            // @ts-ignore
             setState({...state, emojiPicker: false}) :
+            // @ts-ignore
             setState({...state, emojiPicker: true})
     }
 
@@ -79,24 +90,27 @@ const chatRoom = props => {
         socket.emit('joinSocketToTheChatroom',router.query.chatRoomName)
 
 
-        socket.on('socketId', socketId => {
+        socket.on('socketId', (socketId:string) => {
             dispatch(dispatchSocketId(socketId))
         })
 
-        socket.on('onlineUsersList', chatroomOnlineUsers => {
-            setOnlineUsers(() => _.uniqBy(chatroomOnlineUsers, e => e.username))
+        socket.on('onlineUsersList', (chatroomOnlineUsers:object[]) => {
+            setOnlineUsers(() => _.uniqBy(chatroomOnlineUsers, (e:{username:string}) => e.username))
         })
 
-        socket.on('recentChatRoomMessages', chatroomMessages => {
+        socket.on('recentChatRoomMessages', (chatroomMessages:object[]) => {
+            // @ts-ignore
             setMessages(() => chatroomMessages)
         })
 
 
-        socket.on('userListUpdated', chatroomOnlineUsers => {
-            setOnlineUsers(() => _.uniqBy(chatroomOnlineUsers, e => e.username))
+        socket.on('userListUpdated', (chatroomOnlineUsers:object[]) => {
+            setOnlineUsers(() => _.uniqBy(chatroomOnlineUsers,  (e:{username:string}) => e.username))
         })
 
-        socket.on('messageFromChatroom', newMessageData => {
+
+        socket.on('messageFromChatroom', (newMessageData:object) => {
+            // @ts-ignore
             setMessages(messages => messages.length > 100 ? [...messages.shift(), newMessageData] : [...messages, newMessageData])
         })
 
@@ -104,7 +118,9 @@ const chatRoom = props => {
 
     const scrollToBottomOfConversationBox = () => {
         if (messageAreaRef.current) {
+            // @ts-ignore
             messageAreaRef.current.scroll({
+                // @ts-ignore
                 top: messageAreaRef.current.scrollHeight,
                 // behavior: "smooth"
             })
@@ -113,16 +129,21 @@ const chatRoom = props => {
 
 
 
+    // @ts-ignore
+    // @ts-ignore
     return (
         <div>
             <ChatRoomHeader onOnlineUserListVisibilityChangeHandler={onOnlineUserListVisibilityChangeHandler}/>
             <ChatRoomMessageArea
+                // @ts-ignore
                 onlineUsers={onlineUsers}
                 messages={messages}
                 messageAreaRef={messageAreaRef}
+                // @ts-ignore
                 emojiPicker={state.emojiPicker}
                 onUserInfoShowHandler={onUserInfoShowHandler}/>
-            <ChatRoomTools onEmojiPickerHandler={onEmojiPickerHandler}/>
+
+            <ChatRoomTools />
             <ChatRoomOnlineUsersList
                 onlineUsers={onlineUsers}
                 onlineUserListVisibility={state.onlineUserListVisibility}
@@ -133,20 +154,15 @@ const chatRoom = props => {
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], 'chatRoomPage')
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], store)
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
-            widgets: firstLoadData?.widgets || [],
-            identity:firstLoadData.identity,
-            design:firstLoadData.design,
-            isMobile: Boolean(firstLoadData.isMobile),
-            referer: firstLoadData.referer,
-            requestProtocol: context.req.protocol
+            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
+            ...firstLoadData
         }
     }
-}
+})
 
 export default chatRoom;

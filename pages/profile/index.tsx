@@ -14,6 +14,8 @@ import {withTranslation} from "next-i18next";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
 import {autoUserLogin, getSpecificUserData} from "../../store/actions/userActions";
+import {wrapper} from "../../store/store";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 
 const ProfileStyledMain = styled.main`
   display: flex;
@@ -78,9 +80,10 @@ const ProfileStyledMain = styled.main`
   }
 `
 
-const Profile = props => {
+const Profile = (props:ClientPagesTypes) => {
 
     const dispatch = useDispatch()
+    // @ts-ignore
     const userData = useSelector(state => state.user.userData)
 
 
@@ -112,17 +115,17 @@ const Profile = props => {
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], 'profilePage');
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], store);
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common', 'customTranslation', 'profile'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation', 'profile'])),
             ...firstLoadData,
             query: context.query
         }
     }
-}
+})
 //export default withTranslation(['common','customTranslation', 'profile'])(Profile);
 export default Profile;
 

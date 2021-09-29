@@ -12,33 +12,19 @@ let StyledHeader = styled.header`
     align-items: center;
     margin: 0 5px;
   }
-  @media only screen and (min-width: 768px){
-    .header-content{
-      //justify-content: space-between;
-    }
-  }
-  
-  
-  
-  
   ${props => props.stylesData ?? ''}
 `;
 
-const HeaderWidgetArea = ({postElementStyle, postElementSize, stylesData, className, position, isMobile, currentPageSidebar, referer, widgets, rendering, postElementImageLoaderType, postElementImageLoader}) => {
+const HeaderWidgetArea = ({ stylesData, className, position, isMobile, currentPageSidebar, referer, rendering}) => {
     return (
         <StyledHeader stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='header-content'>
                 <WidgetsRenderer
                     currentPageSidebar={currentPageSidebar}
                     isMobile={isMobile}
-                    widgets={widgets}
                     rendering={rendering}
                     position={position}
                     referer={referer}
-                    postElementSize={postElementSize}
-                    postElementStyle={postElementStyle}
-                    postElementImageLoaderType={postElementImageLoaderType}
-                    postElementImageLoader={postElementImageLoader}
                 />
             </div>
 

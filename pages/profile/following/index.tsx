@@ -1,23 +1,23 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useContext} from 'react';
 import {AppContext} from "../../../context/AppContext";
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import ProfileCoverImage from '../../../components/includes/profilePageComponents/ProfileCoverImage/ProfileCoverImage'
-import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariables";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
+// @ts-ignore
 import _ from "lodash";
 import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
-import ProfileImage from "../../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-const Following = props => {
+import {ClientPagesTypes} from "../../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {wrapper} from "../../../store/store";
+const Following = (props:ClientPagesTypes) => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({});
     const [following, setFollowing] = useState([]);
 
     useEffect(() => {
         getSignedInUserData(['following']).then(res => {
             contextData.dispatchUserData({
                 ...contextData.userData,
+                // @ts-ignore
                 ...res.data.userData
             });
         }).catch(err => {
@@ -35,9 +35,9 @@ const Following = props => {
 
     }, [contextData.userData.following]);
 
-    const renderFollowing = following.map(user=>{
+    const renderFollowing = following.map((user,index)=>{
         return(
-            <UserSmallPreview key={_.uniqueId('user_')}
+            <UserSmallPreview key={index}
                               {...user}
 
             />
@@ -61,16 +61,16 @@ const Following = props => {
 };
 
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar','profilePage'], 'profilePage')
-    const widgets = firstLoadData.widgets
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar','profilePage'], store)
+
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
             ...firstLoadData,
             query: context.query
         }
     }
-}
+})
 export default Following;

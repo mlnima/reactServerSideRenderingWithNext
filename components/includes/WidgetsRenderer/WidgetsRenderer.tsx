@@ -1,4 +1,4 @@
-import React, {useMemo, useContext, useState, useEffect} from 'react';
+import React, { useContext, useState, useEffect} from 'react';
 import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
@@ -24,48 +24,46 @@ const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
-import {WidgetPropTypes} from '../../../_variables/TypeScriptTypes/GlobalTypes'
+import {settingsPropTypes, WidgetPropTypes, WidgetsStateInterface} from '../../../_variables/TypeScriptTypes/GlobalTypes'
+import {useSelector} from "react-redux";
 
 interface WidgetsRendererProps {
-    postElementStyle: string;
-    postElementSize: string;
-    postElementImageLoader: string;
-    postElementImageLoaderType: string;
-    widgets: WidgetPropTypes[];
     position: string;
-    _id?: string;
-    homePageSidebar?: boolean | string;
+    _id?: any;
+    homePageSidebar?: any;
     isMobile: boolean;
-
-    referer: boolean;
-    currentPageSidebar: boolean | string;
+    referer?: any;
+    currentPageSidebar: any;
+    rendering?:any
 }
 
 
-const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, currentPageSidebar, referer, _id, postElementImageLoader, postElementImageLoaderType,position}: WidgetsRendererProps) => {
+const WidgetsRenderer = ({ isMobile, currentPageSidebar,  _id, position}: WidgetsRendererProps) => {
+    const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
+    const settings = useSelector((state : settingsPropTypes) => state.settings);
 
     const contextData = useContext(AppContext);
     const router = useRouter()
+
     const [widgetsData, setWidgetsData] = useState(() => {
-        return widgets || []
+        return widgets.filter((widget) => widget.data?.position === position)
     })
 
-    useEffect(() => {
-        if (contextData.userData?.role === 'administrator') {
+    // useEffect(() => {
+    //     if (contextData.userData?.role === 'administrator') {
+    //
+    //             setWidgetsData(contextData.widgets.filter((widget : any) => widget.data?.position === position))
+    //     }
+    // }, [contextData.widgets]);
 
-                setWidgetsData(contextData.widgets.filter((widget : any) => widget.data?.position === position))
-        }
-    }, [contextData.widgets]);
-
-    const widgetsMemo = useMemo(() => {
-        return widgetsData?.sort((a, b) => {
-            return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
-        })
-    }, [widgetsData])
-
+    const widgetsMemo = widgetsData?.sort((a, b) => {
+        // @ts-ignore
+        return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
+    })
 
 
-    const renderWidgets = widgetsMemo?.map((widget, index) => {
+
+    const renderWidgets = widgetsMemo?.map((widget :any, index:number) => {
 
         const deviceType = widget.data.deviceTypeToRender || 'all';
         const languageToRender = widget.data.languageToRender || 'all';
@@ -107,12 +105,12 @@ const WidgetsRenderer = ({postElementStyle, postElementSize, widgets, isMobile, 
                         widgetId={widget._id}
                         {...widget}
                         widgetToRender={widgetToRender}
-                        postElementSize={postElementSize}
-                        postElementStyle={postElementStyle}
-                        postElementImageLoader={postElementImageLoader}
-                        postElementImageLoaderType={postElementImageLoaderType}
+                        postElementSize={settings.design?.postElementSize}
+                        postElementStyle={settings.design?.postElementStyle}
+                        postElementImageLoader={settings.design?.postElementImageLoader}
+                        postElementImageLoaderType={settings.design?.postElementImageLoaderType}
                         viewType={widget.data?.viewType}
-                        referer={referer}/>
+                />
             )
 
         } else return null

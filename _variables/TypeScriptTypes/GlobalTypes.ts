@@ -20,9 +20,33 @@ export interface DesignSettings{
 export interface Translations {
 
 }
+export interface settingsPropTypes {
+    settings: {
+        design: DesignSettings,
+        identity: IdentitySettings
+    };
+    posts:{
+        post:object,
+        comments:object[]
+    };
+
+
+}
 export interface WidgetPropTypes {
     _id:string,
-    data:any
+    data: {
+        position: string,
+        type: string,
+        metaType: string,
+        viewType: string,
+        deviceTypeToRender:string,
+        languageToRender:string,
+        editMode:boolean
+    }
+}
+export interface MetasPropTypes {
+    metas:object[],
+    totalCount:number
 }
 
 export interface GetServerSidePropsContext {
@@ -81,4 +105,15 @@ export interface IdentitySettings {
     postsCountPerPage:number;
 }
 
+export interface WidgetInterface {
+    data: {
+        position: string
+    }
+}
+
+export interface WidgetsStateInterface {
+    widgets: {
+        widgets: WidgetInterface[]
+    }
+}
 

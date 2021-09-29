@@ -1,6 +1,7 @@
 import axios from "axios";
 import _getMultipleSettingsQueryGenerator from "./clientVariables/_getMultipleSettingsQueryGenerator";
 import _getMultipleWidgetWithDataQueryGenerator from "./clientVariables/_getMultipleWidgetWithDataQueryGenerator";
+import {SET_SETTINGS,SET_WIDGETS} from "../store/types";
 
 export const updateSetting = async (type, data) => {
     const body = {
@@ -159,23 +160,36 @@ export const getOrders = async (data, domainName) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/orders/getOrders`, body)
 };
 
-export const getFirstLoadData = async (req, dynamicWidgets) => {
+export const getFirstLoadData = async (req, dynamicWidgets,store) => {
     try {
         const cache = process.env.NODE_ENV !== 'development'
         const referer = false;
         const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length > 0 ? [...dynamicWidgets] : [];
-        //const staticWidgetsToGet = referer ? [] : ['footer', 'header', 'topBar', 'navigation'];
-        const staticWidgetsToGet = [];
-        //const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
+        const staticWidgets = process.env.NEXT_PUBLIC_STATIC_WIDGETS ? JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS) : []
         const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet]}, cache)
-        const widgets = widgetData.data?.widgets ?? []
+        const dynamicWidgetsData = widgetData.data?.widgets ?? []
+        const allWidgets = [...staticWidgets,...dynamicWidgetsData]
         const identity = process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {}
         const design =  process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {}
         let isMobile =Boolean((req.headers['user-agent'] || navigator?.userAgent || '').match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i))  || false;
+
+        // console.log(allWidgets)
+        store.dispatch({type:SET_WIDGETS,payload:allWidgets})
+        store.dispatch({
+            type:SET_SETTINGS,
+            payload: {
+                design:design,
+                identity:identity,
+                eCommerce:{},
+            }
+        })
+
+
+
         return {
             identity,
             design,
-            widgets,
+            widgets:allWidgets,
             referer,
             isMobile,
         }
@@ -196,7 +210,6 @@ export const getFirstLoadDataStatic = async ( dynamicWidgets) => {
 
         const identityData = settings.data.settings ? settings.data.settings.find(s=>s.type==='identity') :{}
         const designData = settings.data.settings ? settings.data.settings.find(s=>s.type==='design') : {}
-        // console.log(settings.data.settings.find(s=>s.type==='identity'))
         const identity = identityData.data
         const design =  designData.data
         let isMobile = false

@@ -1,25 +1,26 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import ProfileCoverImage from '../../../components/includes/profilePageComponents/ProfileCoverImage/ProfileCoverImage'
-import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import {AppContext} from "../../../context/AppContext";
 import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariables";
+// @ts-ignore
 import _ from "lodash";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
-import ProfileImage from "../../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {ClientPagesTypes} from "../../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {wrapper} from "../../../store/store";
 
-const Followers = props => {
+const Followers = (props:ClientPagesTypes) => {
     const contextData = useContext(AppContext);
-    const [state, setState] = useState({});
     const [followers, setFollowers] = useState([]);
 
 
     useEffect(() => {
         getSignedInUserData(['followers']).then(res => {
+
             contextData.dispatchUserData({
                 ...contextData.userData,
+                // @ts-ignore
                 ...res.data.userData
             });
         }).catch(err => {
@@ -36,9 +37,9 @@ const Followers = props => {
         }
     }, [contextData.userData.followers]);
 
-    const renderFollowers = followers.map(user => {
+    const renderFollowers = followers.map((user,index) => {
         return (
-            <UserSmallPreview key={_.uniqueId('user_')} {...user} />
+            <UserSmallPreview key={index} {...user} />
         )
     })
 
@@ -57,16 +58,14 @@ const Followers = props => {
     );
 };
 
-export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], 'profilePage')
-    const widgets = firstLoadData.widgets
-
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], store)
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
             ...firstLoadData,
             query: context.query
         }
     }
-}
+})
 export default Followers;

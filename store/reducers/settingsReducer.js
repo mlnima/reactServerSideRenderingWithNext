@@ -2,21 +2,23 @@ import * as types from '../types'
 import {HYDRATE} from 'next-redux-wrapper';
 
 const initialState = {
-    widgets:[]
+    design:{},
+    identity:{},
+    eCommerce:{},
 }
 
-export const widgetsReducer = (state=initialState,action)=>{
 
+export const settingsReducer = (state=initialState,action)=>{
     switch (action.type){
         case HYDRATE:
             return {
                 ...state,
-                ...action?.payload?.widgets || []
+                ...action.payload?.settings || {}
             };
-        case  types.SET_WIDGETS:
-            return{
+        case  types.SET_SETTINGS:
+            return {
                 ...state,
-                widgets : action?.payload
+                ...action?.payload || {},
             }
         default:
             return state

@@ -1,4 +1,4 @@
-import {useState, useRef, useMemo} from 'react';
+import {useState, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";

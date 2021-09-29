@@ -14,6 +14,7 @@ const MessengerLayout = props => {
             dispatch(autoUserLogin(['username','role','keyMaster','profileImage','followingCount','followersCount']))
         }
     }, []);
+
     return (
         <div className='MessengerLayout'>
             <GlobalStyles colors={props.design?.customColors || ''}/>

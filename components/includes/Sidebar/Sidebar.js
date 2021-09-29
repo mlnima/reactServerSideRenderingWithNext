@@ -1,9 +1,6 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import WidgetsRenderer from '../WidgetsRenderer/WidgetsRenderer'
-//import './Sidebar.scss'
-
 const Sidebar = props => {
-
     if (props.isActive) {
         return (
             <div className='site-sidebar'  key={props.position} >

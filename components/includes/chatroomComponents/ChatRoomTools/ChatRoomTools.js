@@ -106,8 +106,6 @@ const ChatRoomTools = () => {
                 createdAt: Date.now(),
                 type:'message',
             }
-
-
             socket.emit('messageToChatroom', newMessageData)
 
             setState({
