@@ -1,10 +1,9 @@
 import React, {useState} from 'react';
 import loadable from '@loadable/component';
 import NoSSR from 'react-no-ssr';
-
-const TextEditor = loadable(() => import('../../TextEditor/TextEditor'))
 import styled from "styled-components";
-import Editor, {DiffEditor, useMonaco, loader} from "@monaco-editor/react";
+import Editor from "@monaco-editor/react";
+const TextEditor = loadable(() => import('../../TextEditor/TextEditor'))
 
 let StyledDiv = styled.div`
   width: 98%;

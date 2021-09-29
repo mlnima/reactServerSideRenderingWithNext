@@ -1,12 +1,31 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import 'react-quill/dist/quill.snow.css';
-import './DescriptionEditor.scss'
 import loadable from '@loadable/component'
 let ReactQuill = () => <></>;
 ReactQuill = loadable(() => import('react-quill'))
+import styled from "styled-components";
 
-//import ReactQuill from 'react-quill'
-
+const DescriptionEditorStyledDiv = styled.div`
+  .quill {
+    width: 96%;
+    .ql-container {
+      min-height: 80vh;
+      border-bottom-left-radius: 0.5em;
+      border-bottom-right-radius: 0.5em;
+      background: #fefcfc;
+      .ql-tooltip {
+        margin-left: 10%;
+        z-index: 1000;
+      }
+    }
+    .ql-snow.ql-toolbar {
+      display: block;
+      background: #eaecec;
+      border-top-left-radius: 0.5em;
+      border-top-right-radius: 0.5em;
+    }
+  }
+`
 const DescriptionEditor = props => {
     const [state, setState] = useState({
         modules: {
@@ -19,24 +38,24 @@ const DescriptionEditor = props => {
                 ['link', 'image', 'video'],
                 ['clean'],
                 ['code-block'],
-                [{ 'script': 'sub'}, { 'script': 'super' }],
-                [{ 'indent': '-1'}, { 'indent': '+1' }],
-                [{ 'direction': 'rtl' }],
-                [{ 'size': ['small', false, 'large', 'huge'] }],
-                [{ 'header': [1, 2, 3, 4, 5, 6, false] }],
-                [{ 'color': [] }, { 'background': [] }],
-                [{ 'font': [] }],
-                [{ 'align': [] }],
+                [{'script': 'sub'}, {'script': 'super'}],
+                [{'indent': '-1'}, {'indent': '+1'}],
+                [{'direction': 'rtl'}],
+                [{'size': ['small', false, 'large', 'huge']}],
+                [{'header': [1, 2, 3, 4, 5, 6, false]}],
+                [{'color': []}, {'background': []}],
+                [{'font': []}],
+                [{'align': []}],
             ],
             clipboard: {
                 matchVisual: false,
             }
         },
         formats: [
-            'header', 'font', 'size','code','background',
+            'header', 'font', 'size', 'code', 'background',
             'bold', 'italic', 'underline', 'strike', 'blockquote',
             'list', 'bullet', 'indent',
-            'link', 'image', 'video','indent','script', 'align','direction',
+            'link', 'image', 'video', 'indent', 'script', 'align', 'direction',
             'code-block',
             'color', 'code',
             'script',
@@ -60,18 +79,18 @@ const DescriptionEditor = props => {
 
     if (props.editor) {
         return (
-            <div>
-            <ReactQuill
-                value={
-                    props.activeEditingLanguage === 'default' ? props.textInputsState.description :
-                        props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].description :
-                            ''}
-                onChange={props.onDescriptionChangeHandler}
-                theme='snow'
-                modules={state.modules}
-                formats={state.formats}
-            />
-            </div>
+            <DescriptionEditorStyledDiv>
+                <ReactQuill
+                    value={
+                        props.activeEditingLanguage === 'default' ? props.textInputsState.description :
+                            props.textInputsState.translations[props.activeEditingLanguage] ? props.textInputsState.translations[props.activeEditingLanguage].description :
+                                ''}
+                    onChange={props.onDescriptionChangeHandler}
+                    theme='snow'
+                    modules={state.modules}
+                    formats={state.formats}
+                />
+            </DescriptionEditorStyledDiv>
         );
     } else {
         return (

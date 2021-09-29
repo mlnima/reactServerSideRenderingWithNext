@@ -1,10 +1,8 @@
 import React, {useEffect, useState, useContext} from 'react';
 import {getUserData, updateUserData, newAPIKey} from '../../../_variables/ajaxAuthVariables'
 import {AppContext} from '../../../context/AppContext'
-import withRouter from 'next/dist/client/with-router'
 import {resetPassword} from '../../../_variables/ajaxAuthVariables'
 import {useRouter} from "next/router";
-import styled from "styled-components";
 import deleteUser from "../../../_variables/adminAjaxVariables/adminAjaxUsersVariables/deleteUser";
 
 const user = props => {

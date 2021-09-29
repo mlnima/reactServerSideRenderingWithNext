@@ -46,6 +46,7 @@ let GlobalStyles = createGlobalStyle`
 
   .leftSidebar {
     display: grid;
+    grid-area: leftSidebar;
     grid-template-columns: 1fr;
     grid-template-areas:
           'topbar'
@@ -55,9 +56,13 @@ let GlobalStyles = createGlobalStyle`
           'leftSidebar'
           'footer';
   }
+  .sidebar{
+    grid-area: sidebar;
+  }
 
   .rightSidebar {
     display: grid;
+    grid-area: rightSidebar;
     grid-template-columns: 1fr;
     grid-template-areas:
             'topbar'

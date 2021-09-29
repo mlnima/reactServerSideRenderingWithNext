@@ -5,6 +5,12 @@ import MenuWidgetModelFieldsPreview from "./MenuWidgetModelFieldsPreview";
 import _ from "lodash";
 import MenuWidgetEditForm from "./MenuWidgetEditForm";
 
+import styled from "styled-components";
+const MenuWidgetModelFieldsStyledDiv = styled.div`
+  .mobileNavigationLabel{
+    padding: 0 25px;
+  }
+`
 const MenuWidgetModelFields = props => {
     const [formData, setFormData] = useState({
         name: '',
@@ -111,12 +117,8 @@ const MenuWidgetModelFields = props => {
 
     if (props.rendering) {
         return (
-            <div>
-            <style jsx>{`
-                .mobileNavigationLabel{
-                    padding: 0 25px;
-                }
-            `}</style>
+            <MenuWidgetModelFieldsStyledDiv>
+
                 <div className='menu-form-field'>
                     <p className='mobileNavigationLabel '><FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo' style={{width:'15px',height:'15px'}}/> Mobile Navigation: </p>
                     <select required={true} name='mobileNavigation' value={props.mobileNavigation} onChange={e => onMenuStyleChangeHandler(e)}>
@@ -141,7 +143,7 @@ const MenuWidgetModelFields = props => {
                 <div className='menu-items'>
                     {renderCurrentItems}
                 </div>
-            </div>
+            </MenuWidgetModelFieldsStyledDiv>
         );
     } else return null
 

@@ -119,16 +119,19 @@ io.on('connection', socket => {
         try {
             const chatroomData = await chatroomSchema.findOne({name:newMessageData.roomName}).exec()
             if (chatroomData){
-                if (chatroomData.messages.length > 100){
-                    const updatedMessages = [...chatroomData.messages.shift(), newMessageData]
-                    chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{messages:updatedMessages},{upsert: true,new:true}).then(updatedChatroomData=>{
-                        io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
-                    })
-                }else{
-                    chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{$push:{messages:newMessageData}},{upsert: true,new:true}).then(updatedChatroomData=>{
-                        io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
-                    })
-                }
+                // if (chatroomData.messages.length > 100){
+                //     const updatedMessages = [...chatroomData.messages.shift(), newMessageData]
+                //     chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{messages:updatedMessages},{upsert: true,new:true}).then(updatedChatroomData=>{
+                //         io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
+                //     })
+                // }else{
+                //     chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{$push:{messages:newMessageData}},{upsert: true,new:true}).then(updatedChatroomData=>{
+                //         io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
+                //     })
+                // }
+                chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{$push:{messages:newMessageData}},{upsert: true,new:true}).then(updatedChatroomData=>{
+                    io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
+                })
             }else {
                 chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{$push:{messages:newMessageData}},{upsert: true,new:true}).then(updatedChatroomData=>{
                     io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)

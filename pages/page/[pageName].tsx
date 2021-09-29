@@ -9,17 +9,13 @@ import {wrapper} from "../../store/store";
 
 const page = ({pageInfo}:ClientPagesTypes) => {
     const settings = useSelector((state: settingsPropTypes) => state.settings);
-   // const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
     return (
         < MainWidgetArea
             position={pageInfo.pageName}
             rendering={true}
-            //widgets={(widgets || []).filter(widget => widget.data?.position === pageInfo.pageName)}
             className='page main'
             stylesData={pageInfo.pageStyle || ''}
             currentPageSidebar={settings.identity?.homePageSidebar}
-            isMobile={undefined}
-            referer={undefined}
         />
     )
 };

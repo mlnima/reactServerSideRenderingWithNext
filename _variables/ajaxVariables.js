@@ -198,7 +198,7 @@ export const getFirstLoadData = async (req, dynamicWidgets,store) => {
     }
 }
 
-export const getFirstLoadDataStatic = async ( dynamicWidgets) => {
+export const getFirstLoadDataStatic = async ( dynamicWidgets,store) => {
     try {
         const cache = process.env.NODE_ENV !== 'development'
         const referer = false;
@@ -210,9 +210,22 @@ export const getFirstLoadDataStatic = async ( dynamicWidgets) => {
 
         const identityData = settings.data.settings ? settings.data.settings.find(s=>s.type==='identity') :{}
         const designData = settings.data.settings ? settings.data.settings.find(s=>s.type==='design') : {}
+
         const identity = identityData.data
         const design =  designData.data
+
         let isMobile = false
+
+        store.dispatch({type:SET_WIDGETS,payload:widgets})
+        store.dispatch({
+            type:SET_SETTINGS,
+            payload: {
+                design:design,
+                identity:identity,
+                eCommerce:{},
+            }
+        })
+
         return {
             identity,
             design,

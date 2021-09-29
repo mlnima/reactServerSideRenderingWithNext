@@ -1,13 +1,15 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
+import styled from "styled-components";
 
-const AdminFooter = props => {
-    const [state, setState] = useState({});
-    useEffect(() => {
-    }, []);
+const AdminFooterStyledFooter = styled.footer`
+  grid-area: admin-footer;
+`
+
+const AdminFooter = () => {
     return (
-        <footer className='admin-footer'>
+        <AdminFooterStyledFooter className='admin-footer'>
             Admin Footer
-        </footer>
+        </AdminFooterStyledFooter>
     );
 };
 export default AdminFooter;

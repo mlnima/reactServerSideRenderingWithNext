@@ -110,8 +110,9 @@ const chatRoom = (props:ClientPagesTypes) => {
 
 
         socket.on('messageFromChatroom', (newMessageData:object) => {
+            console.log(newMessageData)
             // @ts-ignore
-            setMessages(messages => messages.length > 100 ? [...messages.shift(), newMessageData] : [...messages, newMessageData])
+            setMessages(messages => messages.length > 100 ? [...messages, newMessageData] : [...messages, newMessageData])
         })
 
     }, []);

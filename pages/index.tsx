@@ -22,8 +22,7 @@ const Home = ({isMobile}: ClientPagesTypes) => {
 };
 
 
-export const getServerSideProps = wrapper.getServerSideProps(
-    store =>
+export const getServerSideProps = wrapper.getServerSideProps(store =>
         async (context) => {
     const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], store)
     return {

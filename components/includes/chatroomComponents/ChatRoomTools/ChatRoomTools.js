@@ -74,6 +74,7 @@ const ChatRoomToolsStyledFrom = styled.form`
 const ChatRoomTools = () => {
     const dispatch = useDispatch()
     const user = useSelector(state => state.user)
+    console.log(user)
     const colorPicker= useRef(null)
     const router = useRouter()
     const [state, setState] = useState({
