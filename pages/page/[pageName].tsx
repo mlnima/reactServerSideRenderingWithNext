@@ -9,21 +9,18 @@ import {wrapper} from "../../store/store";
 
 const page = ({pageInfo}:ClientPagesTypes) => {
     const settings = useSelector((state: settingsPropTypes) => state.settings);
-    const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
+   // const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
     return (
         < MainWidgetArea
             position={pageInfo.pageName}
             rendering={true}
-            widgets={(widgets || []).filter(widget => widget.data?.position === pageInfo.pageName)}
+            //widgets={(widgets || []).filter(widget => widget.data?.position === pageInfo.pageName)}
             className='page main'
             stylesData={pageInfo.pageStyle || ''}
             currentPageSidebar={settings.identity?.homePageSidebar}
-            postElementSize={settings.design?.postElementSize}
-            postElementStyle={settings.design?.postElementStyle}
-            postElementImageLoader={settings.design?.postElementImageLoader}
-            postElementImageLoaderType={settings.design?.postElementImageLoaderType}
             isMobile={undefined}
-            referer={undefined}/>
+            referer={undefined}
+        />
     )
 };
 

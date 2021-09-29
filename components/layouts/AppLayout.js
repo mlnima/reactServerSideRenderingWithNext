@@ -35,6 +35,7 @@ const AppLayout = props => {
 
     const isSidebarLess = router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
     const mainLayoutClassNameForGrid = isSidebarLess ? 'withOutSidebar' : sidebarsData.sidebarType === 'left' ? 'leftSidebar' : sidebarsData.sidebarType === 'right' ? 'rightSidebar' : sidebarsData.sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar';
+
     const defaultProps = {
         isMobile: props.isMobile,
         postElementSize: settings.design?.postElementSize,
