@@ -217,6 +217,7 @@ export const getFirstLoadDataStatic = async ( dynamicWidgets,store) => {
         let isMobile = false
 
         store.dispatch({type:SET_WIDGETS,payload:widgets})
+
         store.dispatch({
             type:SET_SETTINGS,
             payload: {

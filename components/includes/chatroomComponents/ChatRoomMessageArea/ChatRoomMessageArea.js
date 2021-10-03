@@ -1,40 +1,63 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useRef} from 'react';
 import ChatRoomMessage from "./ChatRoomMessage";
-import _ from "lodash";
-import {AppContext} from "../../../../context/AppContext";
+import {useDispatch, useSelector} from "react-redux";
+import styled from "styled-components";
+import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
 
-const ChatRoomMessageArea = ({messages,messageAreaRef,emojiPicker,onUserInfoShowHandler}) => {
-    const contextData = useContext(AppContext);
+const ChatRoomMessageAreaStyledMain = styled.main`
+  position: fixed;
+  margin: 0 0 55px 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 48px;
+  overflow-y: scroll;
+  display: flex;
+  flex-direction: column;
+`
+
+const ChatRoomMessageArea = () => {
+    const dispatch = useDispatch()
+    const messageAreaRef = useRef(null)
+    const chatroomMessages = useSelector(state => state.chatroom.messages)
+
+    useEffect(() => {
+        messageAreaRef.current.scroll({
+            top: messageAreaRef.current.scrollHeight,
+            behavior: "smooth"
+        })
+    }, [chatroomMessages]);
+
+    const onShowProfileHandler = (username,userId,profileImage)=>{
+         dispatch(setActiveVisibleProfile({
+            username,
+            userId,
+            profileImage,
+        }))
+    }
+
     return (
-        <main ref={messageAreaRef} className='chatroom-message-area' id='chatroom-message-area'>
-            <style jsx>{`
-                .chatroom-message-area{
-                    position: fixed;
-                    margin: 5px 0 55px 0 ;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    top:33px;
-                    overflow-y: scroll;
-                    display: flex;
-                    flex-direction: column;
-                    //justify-content: flex-end;
+        <ChatRoomMessageAreaStyledMain
+            ref={messageAreaRef}
+            className='chatroom-message-area'
+            id='chatroom-message-area'
+        >
+            {chatroomMessages.map((message, index) => {
+                    return (
+                        <>
+                            {index}
+                        <ChatRoomMessage
+                            message={message}
+                            key={index}
+                            onShowProfileHandler={onShowProfileHandler}
+                        />
+                        </>
+                    )
                 }
-                .emoji-mart{
-                   position:fixed !important;
-                   left:0;
-                   bottom: 50px;
-                }
-                
-            `}</style>
-            {messages.map(message=>{
-                return(
-                    <ChatRoomMessage message={message} key={_.uniqueId('message_')} userId={contextData.userData._id} onUserInfoShowHandler={onUserInfoShowHandler}/>
-                )
-            })}
+              )
+            }
 
-
-        </main>
+        </ChatRoomMessageAreaStyledMain>
     );
 };
 export default ChatRoomMessageArea;

@@ -5,7 +5,7 @@ import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 let StyledDiv = styled.div`
   grid-area: topbar;
-  background-color: var(--topbar-background-color,#18181b);
+  background-color: var(--topbar-background-color,#000);
 
   .top-bar-content {
     display: flex;
@@ -34,7 +34,6 @@ interface TopBarWidgetAreaProps {
     postElementImageLoaderType: string;
     postElementImageLoader: string;
     isMobile: boolean;
-    currentPageSidebar: boolean;
     referer: boolean;
     rendering: boolean;
     widgets: WidgetPropTypes[]
@@ -42,13 +41,12 @@ interface TopBarWidgetAreaProps {
 
 
 const TopBarWidgetArea = (
-    {stylesData,className,position,isMobile,currentPageSidebar,referer}:TopBarWidgetAreaProps
+    {stylesData,className,position,isMobile,referer}:TopBarWidgetAreaProps
 ) => {
     return (
         <StyledDiv stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='top-bar-content'>
                 <WidgetsRenderer
-                    currentPageSidebar={currentPageSidebar}
                     isMobile={isMobile}
                     position={position}
                     referer={referer}

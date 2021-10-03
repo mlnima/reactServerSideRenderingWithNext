@@ -9,13 +9,12 @@ const WidgetHeaderStyledDiv = styled.div`
   align-items: center;
   padding: 5px 10px ;
   border-radius: 5px;
-  border-left: 5px solid ;
   max-height: 30px;
   background-color: var(--widget-header-footer-background-color,transparent) ;
   .widget-header-title{
     font-weight: initial;
-    font-size: 18px;
-    padding: 0 10px;
+    font-size: 14px;
+    padding: 0 2px;
     color: var( --widget-header-footer-text-color,#fff);
   }
   a{

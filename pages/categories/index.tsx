@@ -33,7 +33,6 @@ const categoriesPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
                 isMobile={isMobile}
                 position={'categoriesPageTop'}
                 referer={referer}
-                currentPageSidebar={settings.identity?.homePageSidebar}
             />
             <PaginationComponent
                 isActive={true}
@@ -63,7 +62,6 @@ const categoriesPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
                 isMobile={isMobile}
                 position={'categoriesPageBottom'}
                 referer={referer}
-                currentPageSidebar={settings.identity?.homePageSidebar}
             />
         </CategoriesPageStyledDiv>
     );

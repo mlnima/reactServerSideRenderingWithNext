@@ -1,6 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
-import {getConversation} from "../../_variables/_userSocialAjaxVariables";
 import {useRouter} from "next/router";
 import MessengerConversationHeader from "../../components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader";
 import {AppContext} from "../../context/AppContext";
@@ -12,16 +11,42 @@ import MessengerCall from "../../components/includes/messengerPageComponents/Mes
 import Peer from 'simple-peer'
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {useSelector} from "react-redux";
-import {settingsPropTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../../store/store";
+// @ts-ignore
+import {getConversation, newMessageInConversation} from "../../store/actions/userActions";
+import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
 const conversation = (props: ClientPagesTypes) => {
+    const dispatch = useDispatch()
+    const router = useRouter();
 
-    const settings = useSelector((state : settingsPropTypes) => state.settings);
+    const userData = useSelector((state:StoreTypes) => state.user.userData);
+    const settings = useSelector((state: StoreTypes) => state.settings);
+    const activeConversation = useSelector((state: StoreTypes) => state.user.activeConversation);
+    // @ts-ignore
+    const users = useSelector((state:StoreTypes) => state.user.activeConversation.users);
+
+    const [connectedUserData, setConnectedUserData] = useState({
+        profileImage: undefined
+    });
+
+    useEffect(() => {
+        // @ts-ignore
+        const connectedUser = users.find(user => user._id !== userData._id)
+        if (connectedUser){
+            // @ts-ignore
+            setConnectedUserData(connectedUser)
+        }
+    }, [users]);
+
+    useEffect(() => {
+        console.log(connectedUserData)
+    }, [connectedUserData]);
+
 
     const contextData = useContext(AppContext);
-    const router = useRouter();
+
     const [state, setState] = useState({
         calling: false,
         answering: false,
@@ -34,14 +59,10 @@ const conversation = (props: ClientPagesTypes) => {
         camera: true,
         microphone: true
     });
-
     const [myStream, setMyStream] = useState()
     const [userStream, setUserStream] = useState()
     const [callAccepted, setCallAccepted] = useState(false)
     const [messageState, setMessageState] = useState({messageBody: ''})
-    const [connectedUserData, setConnectedUserData] = useState({
-        profileImage: undefined
-    });
 
 
     const [callerData, setCallerData] = useState({
@@ -59,6 +80,14 @@ const conversation = (props: ClientPagesTypes) => {
 
 
     useEffect(() => {
+
+        socket.on('receiveMessageFromConversation', (messageData:{conversationId:string}) => {
+            if (messageData.conversationId === router.query.conversation){
+
+                dispatch(newMessageInConversation(messageData))
+            }
+        })
+
         socket.emit('joinConversation', router.query.conversation)
 
 
@@ -80,7 +109,7 @@ const conversation = (props: ClientPagesTypes) => {
             })
         })
 
-        socket.on("mySocketId", (id:string) => {
+        socket.on("mySocketId", (id: string) => {
             setMySocketId(id)
         })
     }, []);
@@ -96,6 +125,7 @@ const conversation = (props: ClientPagesTypes) => {
             callUser()
         }
     }, [myStream, state.calling]);
+
     useEffect(() => {
         if (callAccepted && myStream && !state.calling) {
             // @ts-ignore
@@ -227,7 +257,6 @@ const conversation = (props: ClientPagesTypes) => {
         }
     }
 
-
     const answerCall = async () => {
 
         const peer = new Peer({
@@ -287,17 +316,17 @@ const conversation = (props: ClientPagesTypes) => {
     }
 
 
-    // const getAndSetConversationData = () => {
-    //     getConversation(router.query.conversation, -20).then(res => {
-    //         const connectedUser = res.data.conversation.users.find(u => u._id !== contextData.userData._id)
-    //         setMessages([...messages, ...res.data.conversation.messages])
-    //         setConnectedUserData({...connectedUserData, ...connectedUser})
-    //     }).catch(err => {
-    //         console.log(err)
-    //     })
-    // }
+    useEffect(() => {
+        if (localStorage.wt) {
+            dispatch(getConversation(router.query.conversation, -20))
+        }
+    }, [props]);
 
-    // @ts-ignore
+    // useEffect(() => {
+    //     console.log(activeConversation)
+    // }, [activeConversation]);
+
+
     return (
         <div className='messenger main'>
             <MessengerConversationHeader
@@ -308,6 +337,8 @@ const conversation = (props: ClientPagesTypes) => {
                 // @ts-ignore
                 connectedUserId={connectedUserData._id}/>
             <MessengerConversationMessageArea
+                // @ts-ignore
+                userData={userData}
                 connectedUserData={connectedUserData}
                 setConnectedUserData={setConnectedUserData}
             />
@@ -316,7 +347,6 @@ const conversation = (props: ClientPagesTypes) => {
                 messageState={messageState}
                 connectedUserData={connectedUserData}
                 conversationId={router.query.conversation}
-                // getAndSetConversationData={getAndSetConversationData}
             />
             <MessengerCall
                 callerData={callerData}

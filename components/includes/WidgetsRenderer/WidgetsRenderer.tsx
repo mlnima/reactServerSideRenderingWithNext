@@ -23,7 +23,7 @@ const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
-import {settingsPropTypes, WidgetPropTypes, WidgetsStateInterface} from '../../../_variables/TypeScriptTypes/GlobalTypes'
+import {settingsPropTypes, WidgetInterface, WidgetPropTypes, WidgetsStateInterface} from '../../../_variables/TypeScriptTypes/GlobalTypes'
 import {useSelector} from "react-redux";
 
 interface WidgetsRendererProps {
@@ -32,12 +32,11 @@ interface WidgetsRendererProps {
     homePageSidebar?: any;
     isMobile: boolean;
     referer?: any;
-    currentPageSidebar: any;
     rendering?: any
 }
 
 
-const WidgetsRenderer = ({isMobile, currentPageSidebar, _id, position}: WidgetsRendererProps) => {
+const WidgetsRenderer = ({isMobile, _id, position}: WidgetsRendererProps) => {
 
     const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
     const settings = useSelector((state: settingsPropTypes) => state.settings);
@@ -45,32 +44,15 @@ const WidgetsRenderer = ({isMobile, currentPageSidebar, _id, position}: WidgetsR
     const contextData = useContext(AppContext);
     const router = useRouter()
 
-    const [widgetsMemo, setWidgetsMemo] = useState(() => {
-        return widgets.filter((widget) => widget.data?.position === position).sort((a, b) => {
-            // @ts-ignore
-            return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
-        })
+    const widgetsData = widgets.filter((widget :WidgetInterface) => widget.data?.position === position).sort((a, b) => {
+        return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
     })
 
+    const [widgetsMemo, setWidgetsMemo] = useState(widgetsData)
+
     useEffect(() => {
-        const updatedWidgets = widgets.filter((widget) => widget.data?.position === position).sort((a, b) => {
-            // @ts-ignore
-            return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
-        })
-        setWidgetsMemo(()=>updatedWidgets)
-    }, [position]);
-
-    // useEffect(() => {
-    //     if (contextData.userData?.role === 'administrator') {
-    //
-    //             setWidgetsData(contextData.widgets.filter((widget : any) => widget.data?.position === position))
-    //     }
-    // }, [contextData.widgets]);
-
-    // const widgetsMemo = widgetsData?.sort((a, b) => {
-    //     // @ts-ignore
-    //     return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
-    // })
+        setWidgetsMemo(widgetsData)
+    }, [widgets]);
 
 
     const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
@@ -83,7 +65,6 @@ const WidgetsRenderer = ({isMobile, currentPageSidebar, _id, position}: WidgetsR
         const renderByDeviceTypeCondition = !deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all';
         const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator'
         //const isEditMode = widget.data.editMode
-
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
             widget.data.type === 'postsSwiper' ? PostSwiper :
@@ -109,7 +90,8 @@ const WidgetsRenderer = ({isMobile, currentPageSidebar, _id, position}: WidgetsR
 
         if (renderByDeviceTypeCondition && renderByLanguageCondition && !isEditMode) {
             return (
-                <Widget currentPageSidebar={currentPageSidebar}
+                <Widget
+
                         isMobile={isMobile}
                         key={index}
                         widgetId={widget._id}

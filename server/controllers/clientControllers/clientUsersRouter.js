@@ -2,8 +2,6 @@
 const express = require('express');
 const router = express.Router();
 const authMiddleware = require('../../middlewares/authMiddleware')
-
-const clientUsersRouter ={}
 const clientUpdateUserData = require('./clientUsersControllers/clientUpdateUserData')
 const clientRegisterNewUser = require('./clientUsersControllers/clientRegisterNewUser')
 const clientUserLogin = require('./clientUsersControllers/clientUserLogin')
@@ -25,7 +23,6 @@ const clientMessageToConversation = require('./clientUsersControllers/clientMess
 const clientGetConversations = require('./clientUsersControllers/clientGetConversations')
 const clientGetConversation = require('./clientUsersControllers/clientGetConversation')
 
-
 router.post('/register',clientRegisterNewUser)
 router.post('/login',clientUserLogin)
 router.post('/resetPassword',authMiddleware,clientResetUserPassword)
@@ -46,7 +43,5 @@ router.post('/conversation',authMiddleware,clientConversation)
 router.post('/getConversations',authMiddleware,clientGetConversations)
 router.post('/getConversation',authMiddleware,clientGetConversation)
 router.post('/messageToConversation',authMiddleware,clientMessageToConversation)
-
-
 
 module.exports = router

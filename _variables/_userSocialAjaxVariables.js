@@ -71,22 +71,6 @@ export const conversation = async (_id,message) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/conversation', body)
 }
 
-export const getConversations = async (_id,message) => {
-    const body = {
-        _id,
-        token: localStorage.wt
-    }
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/getConversations', body)
-}
-
-export const getConversation = async (_id,loadAmount) => {
-    const body = {
-        _id,
-        loadAmount,
-        token: localStorage.wt
-    }
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/getConversation', body)
-}
 
 export const messageToConversation = async (conversationId,messageBody) => {
     const body = {

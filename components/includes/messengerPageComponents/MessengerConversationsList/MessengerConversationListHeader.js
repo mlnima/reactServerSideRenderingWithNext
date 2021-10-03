@@ -1,34 +1,44 @@
-import Authentication from "../../widgets/Authentication/Authentication";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowLeft} from "@fortawesome/free-solid-svg-icons";
-import {useRouter} from "next/router";
+import React from 'react'
+import styled from "styled-components";
+import Link from "next/link";
+import {withTranslation} from "next-i18next";
 
-const MessengerConversationListHeader = () => {
-    const router = useRouter()
+const MessengerConversationListHeaderStyledDiv = styled.div`
+  background-color: var(--navigation-background-color, #18181b);
+  height: 48px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .messenger-conversations-list-header-items{
+    display: flex;
+    justify-content: center;
+    align-items: center;
 
+    a{
+      color: var(--navigation-text-color,#ccc) ;
+      margin: 0 10px;
+    }
+  }
+`
+
+
+const MessengerConversationListHeader = props => {
     return (
-        <div className='messenger-conversations-list-header'>
-            <style jsx>{`
-                .messenger-conversations-list-header{
-                    background-color: var(--navigation-background-color,#18181b);
-                    height: 50px;
-                    padding:  10px;
-                    width: 100%;
-                    display:flex;
-                    justify-content : center;
-                    align-items:center;
-                }
-                .messenger-conversation-header-back-btn{
-                    background-color: transparent;
-                    border: none;
-                    margin: 0 10px;
-                }
-            `}</style>
-            {/*<button onClick={()=>router.back()} className='messenger-conversation-header-back-btn'>*/}
-            {/*    <FontAwesomeIcon style={{width: '30px',height: '30px',color:'var(--navigation-text-color, #ccc)'}}  icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg' />*/}
-            {/*</button>*/}
-            <Authentication/>
-        </div>
+        <MessengerConversationListHeaderStyledDiv className='messenger-conversations-list-header'>
+            <div className='messenger-conversations-list-header-items'>
+                <Link href={'/'}>
+                    <a>
+                        {props.t(`common:Home`)}
+                    </a>
+                </Link>
+                <Link href={'/profile'}>
+                    <a>
+                        {props.t(`common:Profile`)}
+                    </a>
+                </Link>
+            </div>
+        </MessengerConversationListHeaderStyledDiv>
     );
 };
-export default MessengerConversationListHeader;
+export default withTranslation(['common'])(MessengerConversationListHeader);

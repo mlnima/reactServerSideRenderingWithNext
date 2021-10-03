@@ -3,7 +3,18 @@ import axios from "axios";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import {getPosts,getPost} from "../../_variables/ajaxPostsVariables";
 import _postPageQueryGenerator from "../../_variables/clientVariables/_postPageQueryGenerator";
-import {GET_POST} from "../types";
+import {GET_POST, SET_POSTS, SET_POSTS_DATA} from "../types";
+
+
+export const setPostsData = postsData => async dispatch=>{
+    dispatch({
+        type:types.SET_POSTS_DATA,
+        payload:postsData
+    })
+}
+
+
+
 
 
 export const fetchPosts = () => async dispatch=>{

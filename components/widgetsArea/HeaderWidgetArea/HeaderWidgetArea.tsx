@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import React from "react";
+import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 let StyledHeader = styled.header`
   grid-area: header;
@@ -12,15 +13,28 @@ let StyledHeader = styled.header`
     align-items: center;
     margin: 0 5px;
   }
-  ${props => props.stylesData ?? ''}
+  ${(props:{stylesData:string}) => props.stylesData ?? ''}
 `;
 
-const HeaderWidgetArea = ({ stylesData, className, position, isMobile, currentPageSidebar, referer, rendering}) => {
+interface HeaderWidgetAreaProps {
+    postElementStyle: string;
+    postElementSize: string;
+    stylesData: string;
+    className: string;
+    position: string;
+    postElementImageLoaderType: string;
+    postElementImageLoader: string;
+    isMobile: boolean;
+    referer: boolean;
+    rendering: boolean;
+    widgets: WidgetPropTypes[]
+}
+
+const HeaderWidgetArea = ({ stylesData, className, position, isMobile, referer, rendering}:HeaderWidgetAreaProps) => {
     return (
         <StyledHeader stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='header-content'>
                 <WidgetsRenderer
-                    currentPageSidebar={currentPageSidebar}
                     isMobile={isMobile}
                     rendering={rendering}
                     position={position}

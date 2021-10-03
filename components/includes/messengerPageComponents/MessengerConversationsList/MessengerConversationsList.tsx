@@ -1,14 +1,27 @@
-import React, { useContext} from 'react';
+import React,{useEffect} from 'react';
 import MessengerConversationPreview from "./MessengerConversationPreview";
-import {AppContext} from "../../../../context/AppContext";
-
+import {useDispatch, useSelector} from "react-redux";
 import MessengerConversationListHeader from "./MessengerConversationListHeader";
+import {getConversations} from "../../../../store/actions/userActions";
 
-const MessengerConversationsList = ({conversations, setConversations}) => {
-    const contextData = useContext(AppContext);
+const MessengerConversationsList = ( ) => {
+    const dispatch = useDispatch()
+    // @ts-ignore
+    const conversations = useSelector(state => state.user.conversations)
+    // @ts-ignore
+    const userData = useSelector(state => state.user.userData)
+
+    useEffect(() => {
+        if (userData?._id) {
+            dispatch(getConversations(userData?._id))
+        }
+    }, [userData]);
+
+    // @ts-ignore
     const renderConversationsPreview = (conversations || []).map((conversationData, index) => {
-        return <MessengerConversationPreview key={index} conversationData={conversationData} userId={contextData.userData._id}/>
+        return <MessengerConversationPreview key={index} conversationData={conversationData} userId={userData._id}/>
     })
+
     return (
         <div className='messenger-conversations-list'>
             <style jsx>{`
@@ -17,7 +30,6 @@ const MessengerConversationsList = ({conversations, setConversations}) => {
                 flex-direction: column;
                 align-items: center;
                 justify-content: center;
-
               }
 
               .no-message {

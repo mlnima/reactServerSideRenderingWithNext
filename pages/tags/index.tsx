@@ -34,7 +34,6 @@ const tagsPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
                 isMobile={isMobile}
                 position={'tagsPageTop'}
                 referer={referer}
-                currentPageSidebar={settings.identity?.homePageSidebar }
             />
             <PaginationComponent
                 isActive={true}
@@ -64,7 +63,6 @@ const tagsPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
                 isMobile={isMobile}
                 position={'tagsPageBottom'}
                 referer={referer}
-                currentPageSidebar={settings.identity?.homePageSidebar }
             />
         </TagsPageStyledDiv>
     );

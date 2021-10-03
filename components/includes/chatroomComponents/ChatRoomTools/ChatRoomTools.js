@@ -61,7 +61,6 @@ const ChatRoomToolsStyledFrom = styled.form`
     position: absolute;
     width: 34px;
     height: 34px;
-    // border-radius: 50%;
     right: 48px;
     background-color: ${props=>props.color};
     border: none;
@@ -73,8 +72,7 @@ const ChatRoomToolsStyledFrom = styled.form`
 
 const ChatRoomTools = () => {
     const dispatch = useDispatch()
-    const user = useSelector(state => state.user)
-    console.log(user)
+    const userData = useSelector(state => state.user.userData)
     const colorPicker= useRef(null)
     const router = useRouter()
     const [state, setState] = useState({
@@ -96,13 +94,13 @@ const ChatRoomTools = () => {
 
     const onSubmitHandler = e => {
         e.preventDefault()
-        if (user.userData._id && state.messageData.length >0) {
+        if (userData._id && state.messageData.length >0) {
             const newMessageData = {
                 messageData:state.messageData,
                 roomName:router.query.chatRoomName,
-                username:user.userData.username,
-                id:user.userData._id,
-                profileImage:user.userData.profileImage,
+                username:userData.username,
+                id:userData._id,
+                profileImage:userData.profileImage,
                 color:state.color,
                 createdAt: Date.now(),
                 type:'message',

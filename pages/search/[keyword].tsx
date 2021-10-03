@@ -11,9 +11,11 @@ import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQ
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {wrapper} from "../../store/store";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {useSelector} from "react-redux";
-import {WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
+import {useSelector} from "react-redux";
+import {settingsPropTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {SET_POSTS_DATA} from "../../store/types";
+import {StoreTypes} from '../../_variables/TypeScriptTypes/GlobalTypes'
 let StyledMain = styled.main`
   width: 100%;
 
@@ -34,23 +36,24 @@ let StyledMain = styled.main`
   ${(props:{stylesData:string}) => props.stylesData || ''}
 `
 const searchPage = (props: ClientPagesTypes) => {
+    const settings = useSelector((state: settingsPropTypes) => state.settings);
+    const posts = useSelector((state:StoreTypes) => state.posts.posts)
     const router = useRouter()
     return (
-        <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle || ''}>
+        <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
             {router.query.keyword ? <MetaDataToSiteHead title={router.query.keyword} url={`${router.asPath}`}/> : null}
 
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 position={'searchPageTop'}
                 referer={props.referer}
-                currentPageSidebar={props.identity?.homePageSidebar}
             />
             {router.query.keyword ? <PostsPageInfo titleToRender={router.query.keyword}/> : null}
 
 
             {
                 // @ts-ignore
-                props.postsSource.posts.length < 1 ?
+               posts.length < 1 ?
                     <h2 className='no-result-message'>No Result for {router.query.keyword}</h2> :
                     null
             }
@@ -59,14 +62,14 @@ const searchPage = (props: ClientPagesTypes) => {
                 isMobile={props.isMobile}
                 position={'searchPageBottom'}
                 referer={props.referer}
-                currentPageSidebar={props.identity?.homePageSidebar}
             />
         </StyledMain>
     )
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-
+    const keyword = context.query.keyword
+    if (!keyword) return {notFound: true};
     const firstLoadData = await getFirstLoadData(
         context.req,
         ['searchPageTop', 'searchPageLeftSidebar', 'searchPageBottom', 'searchPageRightSidebar'],
@@ -74,14 +77,22 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     );
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, null, true);
     const postsData = await getPosts(gettingPostsQueries);
-    const postsSource = postsData.data ? postsData.data : [];
+
+    store.dispatch({
+        type: SET_POSTS_DATA,
+        payload: {
+            posts: postsData.data?.posts || [],
+            totalCount: postsData?.data?.totalCount || 0,
+            // @ts-ignore
+
+        }
+    })
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
             query: context.query,
-            postsSource,
         }
     }
 })

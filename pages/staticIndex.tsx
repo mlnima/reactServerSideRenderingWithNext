@@ -1,10 +1,10 @@
 import React from 'react';
-import {getFirstLoadData} from "../_variables/ajaxVariables";
+import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
+import {ClientPagesTypes} from '../_variables/TypeScriptTypes/ClientPagesTypes'
 import {wrapper} from "../store/store";
 import {useSelector} from "react-redux";
-import {ClientPagesTypes} from '../_variables/TypeScriptTypes/ClientPagesTypes'
 import {StoreTypes} from "../_variables/TypeScriptTypes/GlobalTypes";
 
 const Home = ({isMobile}: ClientPagesTypes) => {
@@ -20,23 +20,22 @@ const Home = ({isMobile}: ClientPagesTypes) => {
             stylesData={settings.design?.homePageStyle}
         />
     );
+
 };
 
+export const getStaticProps = wrapper.getServerSideProps(store =>
 
-export const getServerSideProps = wrapper.getServerSideProps(store =>
-    // @ts-ignore
-    async (context ) => {
-        const firstLoadData = await getFirstLoadData(context.req,
+    async (context) => {
+        const firstLoadData = await getFirstLoadDataStatic(
             ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
             store
         )
         return {
             props: {
-                ...(await serverSideTranslations(context.locale as string , ['common', 'customTranslation'])),
-                ...firstLoadData,
+                ...(await serverSideTranslations(context.locale as string, ['common'])),
+                ...firstLoadData
             }
         }
-    });
+    })
 
 export default Home;
-

@@ -18,6 +18,11 @@ export const widgetsReducer = (state=initialState,action)=>{
                 ...state,
                 widgets : action?.payload
             }
+        case  types.SET_WIDGETS_FOR_ADMIN:
+            return{
+               // ...state,
+                widgets : action?.payload
+            }
         default:
             return state
     }

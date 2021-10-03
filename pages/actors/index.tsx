@@ -34,7 +34,6 @@ const actorsPage = ({metaSource ,referer,isMobile} : ClientPagesTypes) => {
                 isMobile={isMobile}
                 position={'actorsPageTop'}
                 referer={referer}
-                currentPageSidebar={settings.identity?.homePageSidebar }
             />
             <PaginationComponent
                 isActive={true}
@@ -66,7 +65,6 @@ const actorsPage = ({metaSource ,referer,isMobile} : ClientPagesTypes) => {
                 isMobile={isMobile}
                 position={'actorsPageBottom'}
                 referer={referer}
-                currentPageSidebar={settings.identity?.homePageSidebar }
             />
         </ActorsPageStyledDiv>
     );

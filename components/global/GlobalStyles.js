@@ -13,6 +13,7 @@ let GlobalStyles = createGlobalStyle`
     font-family: Montserrat, Verdana, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    font-size: 12px;
   }
   
   .main{
@@ -98,6 +99,10 @@ let GlobalStyles = createGlobalStyle`
   }
 
   @media only screen and (min-width: 768px) {
+    
+    body{
+      font-size: 14px;
+    }
 
 
     .leftSidebar {

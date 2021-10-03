@@ -1,12 +1,13 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import {faEnvelope} from "@fortawesome/free-regular-svg-icons";
 import {conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {useRouter} from "next/router";
 import {withTranslation} from "next-i18next";
-
 import styled from "styled-components";
+import {useDispatch, useSelector} from "react-redux";
+import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
+
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;
   justify-content: center;
@@ -21,7 +22,6 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   .chatroom-message-user-info-popup-content {
     background-color: var(--navigation-background-color,#18181b);
     width: 310px;
-    //height: 200px;
     padding: 10px;
     border-radius: 10px;
     display: flex;
@@ -59,7 +59,6 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
         .chatroom-message-user-info-popup-user-data-links {
           display: flex;
           justify-content: space-between;
-          //align-items: center;
           flex-direction: column;
           width: 100%;
           button {
@@ -74,7 +73,6 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
               box-shadow: none;
             }
           }
-
           a {
             padding: 5px 10px;
             color: var(--main-text-color);
@@ -90,11 +88,14 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   }
 `
 
-const ChatRoomMessageUserInfoPopup = ({t, userInfo, onUserInfoShowHandler}) => {
+const ChatRoomMessageUserInfoPopup = ({t}) => {
+    const dispatch = useDispatch()
+    const activeVisibleProfile = useSelector(state => state.chatroom.activeVisibleProfile)
+
     const router = useRouter()
 
     const onConversationHandler = () => {
-        conversation(userInfo.userId).then(res => {
+        conversation(activeVisibleProfile.userId).then(res => {
             const conversation = res.data.conversation
             router.push(`/messenger/${conversation._id}`)
         }).catch(err => {
@@ -102,20 +103,28 @@ const ChatRoomMessageUserInfoPopup = ({t, userInfo, onUserInfoShowHandler}) => {
         })
     }
 
-    if (userInfo.username) {
+    if (activeVisibleProfile.username) {
         return (
             <ChatRoomMessageUserInfoPopupStyledDiv className='chatroom-message-user-info-popup'>
 
                 <div className='chatroom-message-user-info-popup-content'>
-                 <span onClick={onUserInfoShowHandler} className='chatroom-message-user-info-popup-content-close-button'>
+                 <span onClick={()=>{dispatch(setActiveVisibleProfile({})) }}
+                    className='chatroom-message-user-info-popup-content-close-button'>
                     <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faTimes}/>
                  </span>
                     <div className='chatroom-message-user-info-popup-content-user-info'>
-                        <img className='chatroom-message-user-info-popup-content-userImage' src={userInfo.profileImage ? userInfo.profileImage : '/public/asset/images/user/noGenderAvatar150.jpg'} alt=""/>
+                        <img className='chatroom-message-user-info-popup-content-userImage'
+                             src={
+                                 activeVisibleProfile.profileImage ?
+                                     activeVisibleProfile.profileImage :
+                                 '/public/asset/images/user/noGenderAvatar150.jpg'
+                             }
+                             alt="chatroom-message-user"
+                        />
                         <div className='chatroom-message-user-info-popup-user-data'>
-                            <p className='chatroom-message-user-info-popup-username'>{userInfo.username}</p>
+                            <p className='chatroom-message-user-info-popup-username'>{activeVisibleProfile.username}</p>
                             <div className='chatroom-message-user-info-popup-user-data-links'>
-                                <Link href={`/user/${userInfo.username}`}>
+                                <Link href={`/user/${activeVisibleProfile.username}`}>
                                     <a className={'action-client-button-link'}>
                                         {t([`common:View Profile`])}
 

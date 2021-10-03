@@ -10,7 +10,6 @@ export interface ClientPagesTypes {
     stylesData: string;
     isMobile: boolean;
     referer: boolean ;
-    currentPageSidebar:boolean|string;
     widgets: WidgetPropTypes[] | undefined;
     metaSource:MetasPropTypes;
     comments:object[],

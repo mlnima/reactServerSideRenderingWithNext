@@ -15,7 +15,6 @@ const page = ({pageInfo}:ClientPagesTypes) => {
             rendering={true}
             className='page main'
             stylesData={pageInfo.pageStyle || ''}
-            currentPageSidebar={settings.identity?.homePageSidebar}
         />
     )
 };

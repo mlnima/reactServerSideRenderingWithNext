@@ -3,32 +3,44 @@ import {rangeNumGenerator} from "../../../_variables/_variables";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
-
+import {useRouter} from "next/router";
 
 const PaginationComponentStyledDiv = styled.div`
   display: flex;
   justify-content: center;
   margin: 10px 0;
   flex-wrap: wrap;
-`
+  .pagination-item{
 
+    color: var(--main-text-color);
+    padding: 5px 10px;
+    margin: 5px;
+    border-radius: 5px;
+    cursor: pointer;
+    
+  }
+`
+// background-color: ${props=>(parseInt(props.page) === props.pageNumber) || (!props.page && props.pageNumber ===1) ? 'var(--main-active-color,#f90)' : '#282828'};
 const PaginationComponent = props => {
     const dispatch = useDispatch()
-
+    const router = useRouter()
     if (props.isActive && props.totalCount > props.size) {
         const range = rangeNumGenerator(props.currentPage, props.maxPage)
             .filter(n => (n !== (1 || props.maxPage)) && (n < props.maxPage) && (n > 0))
         const rangeWithMinMax = [1, ...range, props.maxPage]
         return (
-            <PaginationComponentStyledDiv className='pagination'>
+            <PaginationComponentStyledDiv className='pagination' page={router.query?.page} pageNumber={props.pageNumber}>
                 {
                     rangeWithMinMax.map((pageNumber,index) => {
+                        const currentPage = router.query?.page ? parseInt(router.query?.page): 0;
+
                         return (
                             <PaginationComponentPageLink
                                 {...props}
                                 onActivateLoadingHandler={()=> dispatch(setLoading(true))}
                                 key={index}
                                 pageNumber={pageNumber}
+                                isActivePage={ pageNumber === currentPage }
                             />
                         )
                     })

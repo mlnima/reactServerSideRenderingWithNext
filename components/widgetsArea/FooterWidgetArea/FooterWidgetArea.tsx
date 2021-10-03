@@ -1,8 +1,9 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
+import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const StyledFooter = styled.footer`
-  background-color: var(--footer-background-color,#18181b);
+  background-color: var(--footer-background-color,#000);
   grid-area: footer;
   .footer-content{
     display: flex;
@@ -11,15 +12,28 @@ const StyledFooter = styled.footer`
     align-items: center;
   
   }
-  ${props => props.stylesData ?? ''}
+  ${(props:{stylesData:string}) => props.stylesData ?? ''}
 `;
 
-const FooterWidgetArea = ({stylesData, className, position, isMobile, currentPageSidebar, referer, rendering}) => {
+interface FooterWidgetAreaProps {
+    postElementStyle: string;
+    postElementSize: string;
+    stylesData: string;
+    className: string;
+    position: string;
+    postElementImageLoaderType: string;
+    postElementImageLoader: string;
+    isMobile: boolean;
+    referer: boolean;
+    rendering: boolean;
+    widgets: WidgetPropTypes[]
+}
+
+const FooterWidgetArea = ({stylesData, className, position, isMobile, referer, rendering}:FooterWidgetAreaProps) => {
     return (
         <StyledFooter stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='footer-content'>
                 <WidgetsRenderer
-                    currentPageSidebar={currentPageSidebar}
                     isMobile={isMobile}
                     rendering={rendering}
                     position={position}

@@ -1,14 +1,15 @@
 import * as types from '../types'
-import {GET_COMMENTS, GET_POST} from "../types";
+import {GET_COMMENTS, GET_POST, SET_POSTS_DATA} from "../types";
 import {HYDRATE} from "next-redux-wrapper";
 
 const initialState = {
     posts:[],
+    actorData:{},
+    categoryData:{},
+    tagData:{},
     totalCount:0,
     post:{},
     comments:[],
-    loading:false,
-    error:null
 }
 
 export const postReducer = (state=initialState,action)=>{
@@ -18,6 +19,11 @@ export const postReducer = (state=initialState,action)=>{
                 ...state,
                 ...action.payload.posts
             };
+        case  types.SET_POSTS_DATA:
+            return {
+                ...state,
+                ...action.payload
+            }
         case  types.GET_POSTS:
             return {
                 ...state,

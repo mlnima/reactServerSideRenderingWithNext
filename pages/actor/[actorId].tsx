@@ -1,4 +1,4 @@
-import React from 'react';
+import React,{useEffect} from 'react';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
@@ -9,11 +9,12 @@ import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {useRouter} from "next/router";
-import {ClientPagesTypes,_FirstLoadData} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {ClientPagesTypes, _FirstLoadData} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
 import {useSelector} from "react-redux";
-const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {SET_POSTS_DATA} from "../../store/types";
+const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 const StyledMain = styled.main`
   grid-area: main;
@@ -21,39 +22,37 @@ const StyledMain = styled.main`
 
   .posts-page-info {
     margin: 5px 0;
+
     h1 {
       margin: 0;
       padding: 0 10px;
     }
   }
 
-  ${(props:{stylesData:string}) => props.stylesData || ''}
+  ${(props: { stylesData: string }) => props.stylesData || ''}
 `
 
 const actorPage = (props: ClientPagesTypes) => {
 
-    const settings = useSelector((state : settingsPropTypes) => state.settings);
-
+    // @ts-ignore
+    const actor = useSelector(state => state.posts.actorData)
+    const settings = useSelector((state: settingsPropTypes) => state.settings);
     const router = useRouter()
 
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.actorPageStyle || ''}>
-            {props.actor ? <PostsPageInfo titleToRender={props.actor?.name}/> : null}
-            {props.actor ? <MetaDataToSiteHead title={props.actor?.name} description={props.actor?.description} url={`${router.asPath}`} image={props.actor?.imageUrl}/> : null}
+            {actor ? <PostsPageInfo titleToRender={actor.name}/> : null}
+            {actor ? <MetaDataToSiteHead title={actor.name} description={actor.description} url={`${router.asPath}`} image={actor.imageUrl}/> : null}
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 position='actorPageTop'
                 referer={props.referer}
-                currentPageSidebar={settings.identity?.actorPageSidebar}
-                homePageSidebar={false}
-                />
+            />
             <PostsPage {...props}/>
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 position='actorPageBottom'
                 referer={props.referer}
-                currentPageSidebar={settings.identity?.actorPageSidebar}
-                homePageSidebar={false}
             />
         </StyledMain>
     )
@@ -70,19 +69,27 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar'],
         store
     );
-    const actorData : any = context.query.actorId ? await getSingleMeta(context.query.actorId, true) : {};
+
+    const actorData = actorId ? await getSingleMeta(actorId, true) : {};
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true);
-    const actor = actorData?.data ? actorData.data.meta : {};
+
     const postsData = await getPosts(gettingPostsQueries);
-    const postsSource = postsData.data ? postsData.data : [];
+
+    store.dispatch({
+        type: SET_POSTS_DATA,
+        payload: {
+            posts: postsData.data?.posts || [],
+            totalCount: postsData?.data?.totalCount || 0,
+            // @ts-ignore
+            actorData: actorData?.data?.meta || {},
+        }
+    })
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
             query: context.query,
-            postsSource,
-            actor : actor || null
         }
     }
 

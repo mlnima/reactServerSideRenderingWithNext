@@ -1,15 +1,16 @@
 import React from 'react';
 import styled from "styled-components";
-import {GetServerSideProps,GetStaticProps} from "next";
-import {GetServerSidePropsContext} from "../../_variables/TypeScriptTypes/GlobalTypes";
-import {getFirstLoadData,getFirstLoadDataStatic} from "../../_variables/ajaxVariables";
+import {getFirstLoadDataStatic} from "../../_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {wrapper} from "../../store/store";
+
 let StyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
 `
+
 const maintenance = () => {
 
     return (
@@ -20,14 +21,15 @@ const maintenance = () => {
         </StyledDiv>
     );
 };
-// @ts-ignore
-export const getStaticProps  = async (context) => {
-    const firstLoadData = await getFirstLoadDataStatic([])
+
+export const getStaticProps = wrapper.getServerSideProps(store=>
+    async (context) => {
+    const firstLoadData = await getFirstLoadDataStatic(['maintenance'],store)
     return {
         props: {
-            ...(await serverSideTranslations(context.locale, ['common','customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
             ...firstLoadData
         }
     }
-}
+})
 export default maintenance;

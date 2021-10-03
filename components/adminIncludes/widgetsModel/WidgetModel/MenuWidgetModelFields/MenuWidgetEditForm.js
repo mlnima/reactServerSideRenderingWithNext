@@ -60,10 +60,10 @@ const MenuWidgetEditForm = props => {
                 <input required={props.mode !== 'Edit'} type="text" name='target' value={props.data.target ||''} onChange={e => props.onChangeHandler(e)}/>
             </div>
 
-            <div className='menu-widget-form-form-field'>
-                <p>As:</p>
-                <input type="text" name='as' value={props.data.as ||''} onChange={e => props.onChangeHandler(e)}/>
-            </div>
+            {/*<div className='menu-widget-form-form-field'>*/}
+            {/*    <p>As:</p>*/}
+            {/*    <input type="text" name='as' value={props.data.as ||''} onChange={e => props.onChangeHandler(e)}/>*/}
+            {/*</div>*/}
             <div className='menu-widget-form-form-field'>
                 <p>Item Index:</p>
                 <input required={props.mode !== 'Edit'} type='number'  name='itemIndex' value={props.data.itemIndex ||''} onChange={e => props.onChangeHandler(e)}/>

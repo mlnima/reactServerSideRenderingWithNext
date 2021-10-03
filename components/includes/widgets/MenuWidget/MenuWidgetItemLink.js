@@ -5,15 +5,14 @@ import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {withTranslation} from 'next-i18next';
 
-const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl, linkAs, linkName, linkTranslations, showSub, mobileNavigationOnClickHandler, subItems}) => {
+const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl, linkName, linkTranslations, showSub, mobileNavigationOnClickHandler, subItems}) => {
 
     const router = useRouter()
 
     return (
         <React.Fragment>
-
             {linkTargetType === 'internal' ?
-                <Link href={linkTargetUrl} as={linkAs} scroll={false}>
+                <Link href={linkTargetUrl}  scroll={false}>
                     <a className={'menu-widget-item-link'}
                        rel='next'
                        onClick={linkTargetUrl.includes('#') ? null : mobileNavigationOnClickHandler}

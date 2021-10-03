@@ -13,9 +13,9 @@ import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
-import {autoUserLogin, getSpecificUserData} from "../../store/actions/userActions";
 import {wrapper} from "../../store/store";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
 const ProfileStyledMain = styled.main`
   display: flex;
@@ -82,12 +82,8 @@ const ProfileStyledMain = styled.main`
 
 const Profile = (props:ClientPagesTypes) => {
 
-    const dispatch = useDispatch()
     // @ts-ignore
-    const userData = useSelector(state => state.user.userData)
-
-
-
+    const userData = useSelector((state : StoreTypes) => state.user.userData)
 
     return (
         <ProfileStyledMain className='profile-page main'>
@@ -96,12 +92,7 @@ const Profile = (props:ClientPagesTypes) => {
                 <ProfileNavigation/>
             </div>
             <div className='profile-page-info'>
-                <p className='profile-username'>{userData.username}</p>
-                {/*<Link href={'/profile/edit'}>*/}
-                {/*    <a className='profile-page-info-edit-link'>*/}
-                {/*        {props.t(`profile:Edit Profile`)}*/}
-                {/*    </a>*/}
-                {/*</Link>*/}
+                <p className='profile-username'>{ userData?.username ? userData.username :''}</p>
             </div>
 
             <div className='profile-posts'>
@@ -126,9 +117,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
-//export default withTranslation(['common','customTranslation', 'profile'])(Profile);
-export default Profile;
 
-//     <MyProfileInfo/>
-//<ProfileCoverImage/>
-//width:'300px',height:'300px',
+export default Profile;

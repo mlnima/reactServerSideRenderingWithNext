@@ -6,6 +6,7 @@ import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import {wrapper} from "../../store/store";
+import {SET_POSTS_DATA} from "../../store/types";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -53,14 +54,22 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const firstLoadData = await getFirstLoadData(context.req, ['postsPageLeftSidebar', 'postsPageRightSidebar'],store)
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, null, true)
     const postsData = await getPosts(gettingPostsQueries)
-    const postsSource = postsData.data ? postsData.data : []
+
+    store.dispatch({
+        type: SET_POSTS_DATA,
+        payload: {
+            posts: postsData.data?.posts || [],
+            totalCount: postsData?.data?.totalCount || 0,
+            // @ts-ignore
+
+        }
+    })
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
             query: context.query,
-            postsSource,
         }
     }
 

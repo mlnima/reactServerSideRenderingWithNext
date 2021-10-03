@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {getSignedInUserData} from "../_variables/ajaxAuthVariables";
 import _getMultipleWidgets from "../_variables/adminAjaxVariables/adminAjaxWidgetsVariables/_getMultipleWidgets";
 import {getSetting} from "../_variables/ajaxVariables";
-import {getMultipleSetting} from "../_variables/adminAjaxVariables/adminAjaxSettingsVariables/getMultipleSetting";
+import getMultipleSetting from "../_variables/adminAjaxVariables/adminAjaxSettingsVariables/getMultipleSetting";
 
 
 export const AppContext = createContext();
@@ -19,7 +19,6 @@ const AppProvider = props => {
         navigationOpenStatus: false,
         isMobile: true,
         console: false,
-        currentPageSidebar: true,
         deviceWidth: 320,
         checkoutSlideEnable: false,
         designSet: false,

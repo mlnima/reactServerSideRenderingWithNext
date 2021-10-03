@@ -4,6 +4,8 @@ import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {wrapper} from "../store/store";
+import {ClientPagesTypes} from "../_variables/TypeScriptTypes/ClientPagesTypes";
 
 const Custom500StyledDiv = styled.div`
   display: flex;
@@ -13,6 +15,7 @@ const Custom500StyledDiv = styled.div`
   height: 50vh;
   background-color: var(--background-color,#000);
   grid-area: main;
+  
   h1 {
     color: var(--main-text-color);
   }
@@ -22,20 +25,23 @@ const Custom500StyledDiv = styled.div`
     text-decoration: none;
   }
 `
-const Custom500 = () => {
+
+const Custom500 = (props: ClientPagesTypes) => {
     return (
         <Custom500StyledDiv id='not-found-page' className='main'>
-            <h1>500 - Server Error</h1>
+            <h1>500 - {props.t(`Server Error`)}</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
-                    <h2>Go To Homepage</h2>
+                    <h2>{props.t(`Go To Homepage`)}</h2>
                 </a>
             </Link>
         </Custom500StyledDiv>
     );
 };
-export const getStaticProps  = async (context) => {
-    const firstLoadData = await getFirstLoadDataStatic(['500'])
+
+export const getStaticProps = wrapper.getServerSideProps(store=>
+    async (context) => {
+    const firstLoadData = await getFirstLoadDataStatic(['500'],store)
 
     return {
         props: {
@@ -43,5 +49,6 @@ export const getStaticProps  = async (context) => {
             ...firstLoadData
         }
     }
-}
+})
+
 export default withTranslation(['common'])(Custom500);

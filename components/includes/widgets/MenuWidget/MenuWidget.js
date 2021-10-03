@@ -1,8 +1,7 @@
-import {useEffect, useState, useContext, useRef} from 'react';
+import {useEffect, useState, useRef} from 'react';
 import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useRouter} from "next/router";
-import {AppContext} from "../../../../context/AppContext";
 import MenuWidgetItem from "./MenuWidgetItem";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
@@ -111,8 +110,8 @@ const MenuWidget = props => {
     const renderMenuItems = renderMenuParentsItems.map((menuItem,index) => {
 
         const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL? menuItem.as :
-            (!router.locale && !router.query.locale) ? menuItem.as :
-                `/${router.locale || router.query.locale}${menuItem.as}`;
+                   (!router.locale && !router.query.locale) ? menuItem.as :
+                  `/${router.locale || router.query.locale}${menuItem.as}`;
         return (
             <MenuWidgetItem
                 menuItem={menuItem}

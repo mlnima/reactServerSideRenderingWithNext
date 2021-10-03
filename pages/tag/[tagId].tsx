@@ -12,6 +12,9 @@ import {useRouter} from "next/router";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
+import {useSelector} from "react-redux";
+import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {SET_POSTS_DATA} from "../../store/types";
 
 let StyledMain = styled.main`
   grid-area:main;
@@ -29,26 +32,26 @@ let StyledMain = styled.main`
   ${(props:{stylesData:string}) => props.stylesData || ''}
 `
 const tagPage = (props: ClientPagesTypes) => {
+    // @ts-ignore
+    const tag = useSelector(state => state.posts.tagData)
+    const settings = useSelector((state: settingsPropTypes) => state.settings);
+    
     const router = useRouter()
     return (
-        <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle  || ''}>
-            {props.tag ? <PostsPageInfo titleToRender={props.tag.name}/> : null}
-            {props.tag ? <MetaDataToSiteHead title={props.tag?.name} description={props.tag?.description} url={`${router.asPath}`} image={props.tag?.imageUrl}/> : null}
+        <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle  || ''}>
+            {tag ? <PostsPageInfo titleToRender={tag.name}/> : null}
+            {tag ? <MetaDataToSiteHead title={tag?.name} description={tag?.description} url={`${router.asPath}`} image={tag?.imageUrl}/> : null}
 
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 position={'tagPageTop'}
                 referer={props.referer}
-                // @ts-ignore
-                currentPageSidebar={props.identity?.data?.tagPageSidebar }
             />
             <PostsPage {...props}/>
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 position={'tagPageBottom'}
                 referer={props.referer}
-                // @ts-ignore
-                currentPageSidebar={props.identity?.data?.tagPageSidebar }
             />
         </StyledMain>
     )
@@ -67,20 +70,25 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     );
 
-    const tagData = context.query?.tagId ? await getSingleMeta(context.query.tagId, true) : {};
+    const tagData = tagId ? await getSingleMeta(tagId, true) : {};
     const gettingPostsQueries = _getPostsQueryGenerator(context.query,context.query.tagId,true);
-    // @ts-ignore
-    const tag = tagData?.data ? tagData.data.meta : {};
-    const postsData = await getPosts(gettingPostsQueries)
-    const postsSource = postsData.data ? postsData.data : [];
 
+    const postsData = await getPosts(gettingPostsQueries)
+
+    store.dispatch({
+        type: SET_POSTS_DATA,
+        payload: {
+            posts: postsData.data?.posts || [],
+            totalCount: postsData?.data?.totalCount || 0,
+            // @ts-ignore
+            tagData: tagData?.data?.meta || {},
+        }
+    })
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
             query: context.query,
-            postsSource,
-            tag : tag || null
         }
     }
 

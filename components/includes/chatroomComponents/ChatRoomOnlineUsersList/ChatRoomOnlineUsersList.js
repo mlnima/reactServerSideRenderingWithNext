@@ -1,30 +1,34 @@
 import _ from "lodash";
 import ChatRoomOnlineUsersListItem from "./ChatRoomOnlineUsersListItem";
+import {useSelector} from "react-redux";
+import styled from "styled-components";
 
-const ChatRoomOnlineUsersList = ({onlineUsers,onlineUserListVisibility,onUserInfoShowHandler}) => {
+const ChatRoomOnlineUsersListStyledDiv = styled.div`
+  display: initial;
+  background-color: var(--navigation-background-color, #18181b);
+  position: fixed;
+  width: 150px;
+  top: 48px;
+  right: 0;
+  bottom: 50px;
+  padding: 5px;
+  overflow-y: scroll;
+`
+const ChatRoomOnlineUsersList = () => {
 
-    const renderOnlineUsers = _.uniqBy(onlineUsers,  e => e.username).sort((a,b)=>a.username > b.username ? 1 :-1).map(onlineUser=>{
-        return(
-            <ChatRoomOnlineUsersListItem key={_.uniqueId('message_')} onlineUser={onlineUser} onUserInfoShowHandler={onUserInfoShowHandler}/>
-        )
-    })
+    const chatroomUsers = useSelector(state => state.chatroom.onlineUsers)
+
+    const renderOnlineUsers = _.uniqBy(chatroomUsers, e => e.username).sort((a, b) => a.username > b.username ? 1 : -1).map(onlineUser => {
+            return (
+                <ChatRoomOnlineUsersListItem key={_.uniqueId('message_')} onlineUser={onlineUser}/>
+            )
+        }
+    )
+
     return (
-        <div className='chatroom-online-users-list'>
-            <style jsx>{`
-                .chatroom-online-users-list{
-                    display: ${onlineUserListVisibility ? 'initial' : 'none' };
-                    background-color: var(--navigation-background-color,#18181b);
-                    position: fixed;
-                    width: 150px;
-                    top:50px;
-                    right: 0;
-                    bottom: 50px;
-                    padding: 5px;
-                    overflow-y: scroll;
-                }
-            `}</style>
+        <ChatRoomOnlineUsersListStyledDiv className='chatroom-online-users-list'>
             {renderOnlineUsers}
-        </div>
+        </ChatRoomOnlineUsersListStyledDiv>
     );
 };
 export default ChatRoomOnlineUsersList;

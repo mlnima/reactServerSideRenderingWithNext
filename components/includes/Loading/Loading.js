@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState,useEffect} from 'react';
 import styled from "styled-components";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -16,7 +16,7 @@ let StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   z-index: 1000;
-  
+
   .stopLoading {
     position: fixed;
     top: 50px;
@@ -27,27 +27,40 @@ let StyledDiv = styled.div`
     outline: none;
     color: white;
     z-index: 10;
-    &:hover{
-      color:#916d07 ;
+
+    &:hover {
+      color: #916d07;
     }
   }
-  span{
-    span{
+
+  span {
+    span {
     }
   }
 `
 
 
 const Loading = () => {
-        const dispatch = useDispatch()
+    const dispatch = useDispatch()
+    const [render, setRender] = useState(false)
+
+    useEffect(() => {
+        let isMounted = true;
+        setTimeout(()=>{
+            if (isMounted) setRender(true)
+        },700)
+    }, []);
+
+    if (render){
         return (
             <StyledDiv className='Loading'>
                 <button className='stopLoading fas fa-times' onClick={() => dispatch(setLoading(false))}>
-                    <FontAwesomeIcon style={{width:'1rem',height:'1rem'}} icon={faTimes} className='stopLoading' />
+                    <FontAwesomeIcon style={{width: '1rem', height: '1rem'}} icon={faTimes} className='stopLoading'/>
                 </button>
-                <SyncLoader color='var(--main-active-color,blue)' loading={true} size={20}   />
+                <SyncLoader color='var(--main-active-color,blue)' loading={true} size={20}/>
             </StyledDiv>
         );
+    }else return null
 };
 
 export default Loading;

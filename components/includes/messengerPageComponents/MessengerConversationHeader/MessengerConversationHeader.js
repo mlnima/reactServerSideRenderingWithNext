@@ -1,6 +1,6 @@
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faArrowLeft, faBars, faHome, faPhoneAlt, faVideo} from "@fortawesome/free-solid-svg-icons";
+import {faArrowLeft, faPhoneAlt, faVideo} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import styled from "styled-components";
 
@@ -12,9 +12,9 @@ const MessengerConversationHeaderStyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: space-between;
-  padding: 10px;
+  //padding: 10px;
   background-color: var(--navigation-background-color,#18181b);
-  height: 50px;
+  height: 48px;
 
   .messenger-conversation-header {
     display: flex;
@@ -25,6 +25,8 @@ const MessengerConversationHeaderStyledDiv = styled.div`
     .back-btn-image-username {
       display: flex;
       align-items: center;
+      justify-content: center;
+      
 
       .messenger-conversation-header-back-btn {
         background-color: transparent;
@@ -33,15 +35,15 @@ const MessengerConversationHeaderStyledDiv = styled.div`
       }
 
       .messenger-conversation-header-profile-image {
-        width: 50px;
-        height: 50px;
+        width: 30px;
+        height: 30px;
         border-radius: 50%;
         margin-left: 10px;
       }
 
       .messenger-conversation-header-username {
         color: var(--navigation-text-color, #ccc);
-        margin-left: 10px;
+        margin : 0 0 0  10px;
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -59,7 +61,7 @@ const MessengerConversationHeaderStyledDiv = styled.div`
   .messenger-conversation-header-back-btn, .messenger-conversation-header-call-btn, .messenger-conversation-header-video-call-btn {
     background-color: transparent;
     border: none;
-    margin: 0 10px;
+    //margin: 0 10px;
   }
 `
 const MessengerConversationHeader = ({profileImage, username, attemptForCall}) => {
@@ -67,32 +69,25 @@ const MessengerConversationHeader = ({profileImage, username, attemptForCall}) =
 
     return (
         <MessengerConversationHeaderStyledDiv className='messenger-conversation-header'>
-            <style jsx>{`
-              .messenger-conversation-header-right {
-                display: flex;
-                align-items: center;
-              }
-
-            `}</style>
             <div className='messenger-conversation-header'>
                 <div className='back-btn-image-username'>
+
                     <Link href={`/messenger`}>
                         <a className='messenger-conversation-header-back-btn' rel='no-referrer'>
                             <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faArrowLeft} className='messenger-conversation-header-back-btn-svg'/>
                         </a>
                     </Link>
                     <img onClick={() => router.push(`/user/${username}`)} src={profileImage ? profileImage : '/public/asset/images/user/noGenderAvatar150.jpg'} alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>
-
                     <p className='messenger-conversation-header-username'>{username}</p>
                 </div>
-                <div className='call-buttons'>
-                    <button onClick={attemptForCall} className='messenger-conversation-header-video-call-btn'>
-                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faVideo} className='messenger-conversation-header-video-call-btn-svg'/>
-                    </button>
-                    <button onClick={attemptForCall} className='messenger-conversation-header-call-btn'>
-                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg'/>
-                    </button>
-                </div>
+                {/*<div className='call-buttons'>*/}
+                {/*    <button onClick={attemptForCall} className='messenger-conversation-header-video-call-btn'>*/}
+                {/*        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faVideo} className='messenger-conversation-header-video-call-btn-svg'/>*/}
+                {/*    </button>*/}
+                {/*    <button onClick={attemptForCall} className='messenger-conversation-header-call-btn'>*/}
+                {/*        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faPhoneAlt} className='messenger-conversation-header-video-call-btn-svg'/>*/}
+                {/*    </button>*/}
+                {/*</div>*/}
             </div>
         </MessengerConversationHeaderStyledDiv>
     );

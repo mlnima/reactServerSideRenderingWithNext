@@ -2,6 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
+import { NextPageContext } from "next";
 
 const ErrorStyledDiv = styled.div`
   display: flex;
@@ -21,13 +22,16 @@ const ErrorStyledDiv = styled.div`
   }
 `
 
-const Error = ({responseCode,statusCode }) => {
+interface ErrorComponentProps {
+    statusCode?: number;
+}
 
-
+const Error = ({ statusCode }:ErrorComponentProps) => {
+    
     return (
         <ErrorStyledDiv className='error-page'>
             <h1 className='error-page-message'>
-                {responseCode || statusCode ? `Error ${responseCode || statusCode} Occurred On Server`: 'An Error Occurred'}
+                { statusCode ? `Error ${statusCode} Occurred On Server` : 'An Error Occurred'}
             </h1>
             <Link href="/">
                 <a className='back-to-homepage'>
@@ -38,7 +42,7 @@ const Error = ({responseCode,statusCode }) => {
     )
 }
 
-Error.getInitialProps = ({ res, err }) => {
+Error.getInitialProps = ({ res  , err }:NextPageContext) => {
     const statusCode = res ? res.statusCode : err ? err.statusCode : 404
     return { statusCode }
 }

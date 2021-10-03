@@ -13,6 +13,7 @@ import {wrapper} from "../../store/store";
 import {useSelector} from "react-redux";
 import {settingsPropTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {SET_POSTS_DATA} from "../../store/types";
 
 let StyledMain = styled.main`
   grid-area: main;
@@ -30,28 +31,26 @@ let StyledMain = styled.main`
   ${(props:{stylesData:string}) => props.stylesData}
 `
 const categoryPage = (props: ClientPagesTypes) => {
-
+    // @ts-ignore
+    const category = useSelector(state => state.posts.categoryData)
     const settings = useSelector((state : settingsPropTypes) => state.settings);
+
     const router = useRouter()
 
     return (
-        <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle || ''}>
-            {props.category ? <PostsPageInfo titleToRender={props.category?.name}/> : null}
-            {props.category ? <MetaDataToSiteHead title={props.category?.name} description={props.category?.description} url={`${router.asPath}`} image={props.category?.imageUrl}/> : null}
+        <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
+            {category ? <PostsPageInfo titleToRender={category?.name}/> : null}
+            {category ? <MetaDataToSiteHead title={category?.name} description={category?.description} url={`${router.asPath}`} image={category?.imageUrl}/> : null}
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 position={'categoryPageTop'}
                 referer={props.referer}
-                // @ts-ignore
-                currentPageSidebar={settings.identity?.data?.categoryPageSidebar}
             />
             <PostsPage {...props}/>
             <WidgetsRenderer
                 isMobile={props.isMobile}
                 position={'categoryBottom'}
                 referer={props.referer}
-                // @ts-ignore
-                currentPageSidebar={settings.identity?.data?.categoryPageSidebar}
             />
         </StyledMain>
     )
@@ -68,20 +67,26 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store
     );
 
-    const categoryData = context.query.categoryId ? await getSingleMeta(context.query.categoryId, true) : {}
+    const categoryData = categoryId ? await getSingleMeta(categoryId, true) : {}
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.categoryId, true)
-    // @ts-ignore
-    const category = categoryData?.data ? categoryData.data.meta : {}
-    const postsData = await getPosts(gettingPostsQueries)
-    const postsSource = postsData.data ? postsData.data : []
 
+    const postsData = await getPosts(gettingPostsQueries)
+
+
+    store.dispatch({
+        type: SET_POSTS_DATA,
+        payload: {
+            posts: postsData.data?.posts || [],
+            totalCount: postsData?.data?.totalCount || 0,
+            // @ts-ignore
+            categoryData: categoryData?.data?.meta || {},
+        }
+    })
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
             query: context.query,
-            postsSource,
-            category: category || null,
         }
     }
 

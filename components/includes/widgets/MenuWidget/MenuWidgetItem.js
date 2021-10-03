@@ -1,8 +1,5 @@
 import React, {useState} from 'react';
-import Link from "next/link";
-import {useRouter} from "next/router";
-import _ from "lodash";
-import {faBars, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import { faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import MenuWidgetItemLink from "./MenuWidgetItemLink";
 import styled from "styled-components";
@@ -84,16 +81,10 @@ const MenuWidgetStyledLi = styled.li`
 
 
 
-const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler, menuItems}) => {
+const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler}) => {
 
     const [showSub, setShowSub] = useState(false)
-    const router = useRouter()
-
     const renderSubMenus = (menuItem.subItems || []).map((subItem,index) => {
-
-        const linkAsForMenuItem = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? subItem.as :
-            (!router.locale && !router.query.locale) ? subItem.as :
-                `/${router.locale || router.query.locale}${subItem.as}`;
 
         return (
             <MenuWidgetSubItemStyledLi showSub={showSub} className='menu-widget-sub-item' key={index}>
@@ -101,7 +92,6 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                     linkTargetType={subItem?.type}
                     linkType='sub'
                     linkTargetUrl={subItem?.target}
-                    linkAs={linkAsForMenuItem}
                     linkName={subItem?.name}
                     linkTranslations={subItem?.translations}
                     showSub={showSub}
