@@ -9,14 +9,14 @@ module.exports = (req, res) =>{
             res.json({pageData,error:false})
         }).catch(err=>{
             console.log(err)
-            res.end()
+            res.status(404).json({message:'not found'})
         })
     }else if (pageName){
         pageSchema.findOne({pageName}).exec().then(pageData=>{
             res.json({pageData,error:false})
         }).catch(err=>{
             console.log(err)
-            res.end()
+            res.status(404).json({message:'not found'})
         })
     }
 }

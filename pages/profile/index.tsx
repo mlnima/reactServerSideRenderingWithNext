@@ -23,7 +23,7 @@ const ProfileStyledMain = styled.main`
   flex-direction: column;
   justify-content: flex-start;
   color: var(--main-text-color);
-  grid-area: main;
+  grid-area: main !important;
 
   .profile-header {
     display: flex;

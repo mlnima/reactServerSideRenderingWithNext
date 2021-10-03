@@ -126,6 +126,9 @@ export const getPageData = async (data) => {
     }
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/pages/getPageData', body)
 }
+export const getPagesDataForStaticGeneration = async () => {
+    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/pages/getPagesData')
+}
 export const deletePage = async (id) => {
     const body = {
         id,
@@ -183,8 +186,6 @@ export const getFirstLoadData = async (req, dynamicWidgets,store) => {
                 eCommerce:{},
             }
         })
-
-
 
         return {
             identity,

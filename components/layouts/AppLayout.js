@@ -1,4 +1,4 @@
-import React, {useEffect, useMemo} from 'react';
+import React, {useEffect, useMemo, useState} from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
@@ -30,15 +30,28 @@ const AppLayout = props => {
     const widgets = useSelector(state => state.widgets.widgets)
     const router = useRouter()
     const dispatch = useDispatch()
-    const sidebarsData = useMemo(() => setAppLayoutDataFromProp(props, router, settings), [router.pathname])
+    const [sidebarsData, setSidebarsData] = useState(() => setAppLayoutDataFromProp(props, router, settings))
+
+    //const sidebarsData = useMemo(() => setAppLayoutDataFromProp(props, router, settings), [router.pathname])
+    const [isSidebarLess, setIsSidebarLess] = useState(() => {
+        return router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
+    })
 
     useEffect(() => {
+
+
         globalState.loading ?
-        dispatch(setLoading(false)) :
-        null
+            dispatch(setLoading(false)) :
+            null
+
     }, [router.pathname]);
 
-    const isSidebarLess = router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
+    useEffect(() => {
+        setSidebarsData(()=>{
+            return setAppLayoutDataFromProp(props, router, settings)
+        })
+    }, [router.asPath,router.pathname]);
+
     const mainLayoutClassNameForGrid = isSidebarLess ? 'withOutSidebar' : sidebarsData.sidebarType === 'left' ? 'leftSidebar' : sidebarsData.sidebarType === 'right' ? 'rightSidebar' : sidebarsData.sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar';
 
     const defaultProps = {
@@ -69,24 +82,24 @@ const AppLayout = props => {
     //*** get and set all none cached data for the Admin
     useEffect(() => {
         if (userData.role === 'administrator') {
-            getAndSetDataForAdmin().then(() => console.log('welcome Admin, latest uncached data are sent for you') )
+            getAndSetDataForAdmin().then(() => console.log('welcome Admin, latest uncached data are sent for you'))
         }
     }, [userData]);
 
     const getAndSetDataForAdmin = async () => {
         try {
-            const settingsData = await getMultipleSetting({settings:['identity','design']},localStorage.wt)
+            const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, localStorage.wt)
             const widgetData = await _getMultipleWidgets(localStorage.wt)
 
-            if (widgetData?.data?.widgets){
+            if (widgetData?.data?.widgets) {
                 dispatch(setWidgetsForAdmin(widgetData.data.widgets))
             }
-            if (settingsData?.data){
-                const identityData = settingsData.data.settings ? settingsData.data.settings.find(s=>s.type==='identity') :{}
-                const designData = settingsData.data.settings ? settingsData.data.settings.find(s=>s.type==='design') : {}
+            if (settingsData?.data) {
+                const identityData = settingsData.data.settings ? settingsData.data.settings.find(s => s.type === 'identity') : {}
+                const designData = settingsData.data.settings ? settingsData.data.settings.find(s => s.type === 'design') : {}
                 dispatch(setSettings({
-                    design:designData.data,
-                    identity:identityData.data,
+                    design: designData.data,
+                    identity: identityData.data,
                 }))
             }
 
@@ -119,34 +132,34 @@ const AppLayout = props => {
                 />
                 : null}
             {widgetsInGroups.navigation.length > 0 ?
-                    <NavigationWidgetArea
-                        {...defaultProps}
-                        className='navigation'
-                        position='navigation'
-                        stylesData={settings.design?.navigationStyle || ''}
-                    />
-                : null }
+                <NavigationWidgetArea
+                    {...defaultProps}
+                    className='navigation'
+                    position='navigation'
+                    stylesData={settings.design?.navigationStyle || ''}
+                />
+                : null}
 
             {widgetsInGroups?.[sidebarsData.leftSidebar.name]?.length > 0 && sidebarsData?.leftSidebar?.enable ?
-                    <SideBarWidgetArea
-                        {...defaultProps}
-                        gridArea='leftSidebar'
-                        widgets={widgetsInGroups[sidebarsData.leftSidebar.name]}
-                        className='left-sidebar'
-                        position={sidebarsData.leftSidebar.name}
-                    />
+                <SideBarWidgetArea
+                    {...defaultProps}
+                    gridArea='leftSidebar'
+                    widgets={widgetsInGroups[sidebarsData.leftSidebar.name]}
+                    className='left-sidebar'
+                    position={sidebarsData.leftSidebar.name}
+                />
                 : null}
 
             {props.children}
 
             {widgetsInGroups?.[sidebarsData.rightSidebar.name]?.length > 0 && sidebarsData?.rightSidebar?.enable ?
-                    <SideBarWidgetArea
-                        {...defaultProps}
-                        gridArea='rightSidebar'
-                        widgets={widgetsInGroups[sidebarsData.rightSidebar.name]}
-                        className='right-sidebar'
-                        position={sidebarsData.rightSidebar.name}
-                    />
+                <SideBarWidgetArea
+                    {...defaultProps}
+                    gridArea='rightSidebar'
+                    widgets={widgetsInGroups[sidebarsData.rightSidebar.name]}
+                    className='right-sidebar'
+                    position={sidebarsData.rightSidebar.name}
+                />
                 : null}
             {widgetsInGroups.footer.length > 0 ?
                 <FooterWidgetArea
@@ -155,7 +168,7 @@ const AppLayout = props => {
                     className='footer' position='footer'
                     stylesData={settings.design?.footerStyle || ''}
                 />
-                : null }
+                : null}
             {userData?.role === 'administrator' ? <AdminTools/> : null}
             {userData?.role === 'administrator' && globalState?.console ? <Console/> : null}
             {globalState?.loading ? <Loading/> : null}
