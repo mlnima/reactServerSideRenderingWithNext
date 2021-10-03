@@ -28,11 +28,6 @@ const i18nConfig = locales.length === 1 ? {} : {
     }
 }
 
-
-//http://localhost:3000/video/Stepdad%20fucks%20and%20cums%20in%20stepson's%20girlfriend?id=603adf6dfb13c0091074c9e1
-//http://localhost:3000/post/video/603adf6dfb13c0091074c9e1
-//,has: [{ type: 'query', key: 'id' }]
-
 const staticPageGeneration = process.env.NEXT_PUBLIC_STATIC_PAGES === 'true' ? {
     beforeFiles:[
         {source: `/`, destination: '/staticIndex'},
