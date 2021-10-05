@@ -45,7 +45,7 @@ export const getStaticProps = wrapper.getServerSideProps(store=>
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale || 'en', ['common'])),
+            ...(await serverSideTranslations(context.locale as string, ['common'])),
             ...firstLoadData
         }
     }
