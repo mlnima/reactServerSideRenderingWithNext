@@ -91,8 +91,8 @@ const MyApp = ({Component, pageProps}: AppProps) => {
 
 
 // @ts-ignore
-//export default appWithTranslation(wrapper.withRedux(MyApp), nextI18NextConfig);
-export default  wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig) );
+export default appWithTranslation(wrapper.withRedux(MyApp), nextI18NextConfig);
+//export default  wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig) );
 
 
 
