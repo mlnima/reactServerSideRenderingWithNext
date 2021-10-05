@@ -37,11 +37,11 @@ const adminUpdateWidget = async (req, res) => {
     const widgetId = req.body?.widgetData?._id
     const sortMethod = widgetData.sortBy ? widgetData.sortBy === 'latest' ? {lastModify: -1} : {[widgetData.sortBy]: -1} : {lastModify: -1};
     if (widgetData.type === 'posts') {
-        updatePostWidget(req.body?.widgetData).then(async updatedWidgets => {
-            if (updatedWidgets) {
-                await widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidgets}, {new: true}).exec().then(updatedWidgets => {
+        updatePostWidget(req.body?.widgetData).then(async updatedWidget => {
+            if (updatedWidget) {
+                await widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
 
-                    res.json({updatedWidgets})
+                    res.json({updatedWidget})
                     res.end()
                 }).catch(error => {
                     console.log(error)
@@ -65,16 +65,14 @@ const adminUpdateWidget = async (req, res) => {
             metaData: metas.map(meta => meta._id),
 
         }
-        widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: dateForUpdateWidget}, {new: true}).exec().then(updatedWidgets => {
-            res.json({updatedWidgets})
-            res.end()
+        widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: dateForUpdateWidget}, {new: true}).exec().then(updatedWidget => {
+            res.json({updatedWidget})
         }).catch(err => {
             console.log(err)
         })
     } else {
-        widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: req.body?.widgetData.data}, {new: true}).exec().then(updatedWidgets => {
-            res.json({updatedWidgets})
-            res.end()
+        widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: req.body?.widgetData.data}, {new: true}).exec().then(updatedWidget => {
+            res.json({updatedWidget})
         }).catch(err => {
             console.log(err)
         })

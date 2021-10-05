@@ -1,113 +1,49 @@
-import React, {useContext, useState} from 'react';
-// import {
-//     widgetModels,
-//     postsSwiperWidgetModel,
-//     textWidgetModel,
-//     menuWidgetModel,
-//     linkToWidgetModel,
-//     multipleLinkToWidgetModel,
-//     postsWidgetModel,
-//     mediaWidgetModel,
-//     recentCommentsWidgetModel,
-//     searchBarWidgetModel,
-//     metaWidgetModel,
-//     shoppingCartWidgetModel,
-//     logoWidgetModel,
-//     authenticationWidgetModel,
-//     languageWidgetModel,
-//     alphabeticalNumericalRangeWidgetModel,
-//     imageSwiperWidgetModel
-//
-//
-// } from './models'
+import React, { useState} from 'react';
 import * as widgetModels from './models'
-import {addNewWidget} from '../../../../_variables/ajaxVariables'
+import {addNewWidget} from '../../../../store/actions/widgetsActions'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
-import {AppContext} from "../../../../context/AppContext";
 import _ from "lodash";
+import {useDispatch, useSelector} from 'react-redux';
+import styled from "styled-components";
+import staticPosition from '../staticPosition';
 
-
+const AddWidgetWithPositionMenuStyledDiv = styled.div`
+  position: relative;
+  width: 200px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 5px;
+  
+  .positionsOpener {
+    justify-self: stretch;
+    width: 80%;
+    background-color: var(--admin-darkcolor70);
+    color: var(--admin-text-color);
+    border: none;
+  }
+  .AddWidgetWithPositionMenuPositions {
+    position: absolute;
+    z-index: 1;
+    background-color: var(--admin-darkcolor70);
+    display: grid;
+    grid-template-columns: 1fr;
+    .AddWidgetWithPositionMenuPositionsBtn {
+      padding: 2px;
+    }
+  }
+  
+`
 
 const AddWidgetWithPositionMenu = props => {
-    const contextData = useContext(AppContext);
-    const [state, setState] = useState({
-        open: false
-    });
+    const widgets = useSelector(state => state.widgets.widgets)
+    const customPages = useSelector(state => state.adminPanelGlobalState?.customPages)
+    const dispatch = useDispatch()
+    const [open,setOpen] = useState(false)
 
-    const [positions,setPositions] = useState([
-        'topBar',
-        'header',
-        'navigation',
+    const [positions,setPositions] = useState(()=>staticPosition)
 
-        'home',
-        'homePageLeftSidebar',
-        'homePageRightSidebar',
 
-        'postPageTop',
-        'postPageLeftSidebar',
-        'postPageBottom',
-        'postPageRightSidebar',
-
-        'underPost',
-
-        'postsPageTop',
-        'postsPageLeftSidebar',
-        'postsPageBottom',
-        'postsPageRightSidebar',
-
-        'profilePageTop',
-        'profilePageLeftSidebar',
-        'profilePageBottom',
-        'profilePageRightSidebar',
-
-        'tagsPageTop',
-        'tagsPageLeftSidebar',
-        'tagsPageBottom',
-        'tagsPageRightSidebar',
-
-        'categoriesPageTop',
-        'categoriesPageLeftSidebar',
-        'categoriesPageBottom',
-        'categoriesPageRightSidebar',
-
-        'actorsPageTop',
-        'actorsPageLeftSidebar',
-        'actorsPageBottom',
-        'actorsPageRightSidebar',
-
-        'tagPageTop',
-        'tagPageLeftSidebar',
-        'tagPageBottom',
-        'tagPageRightSidebar',
-
-        'categoryPageTop',
-        'categoryPageLeftSidebar',
-        'categoryPageBottom',
-        'categoryPageRightSidebar',
-
-        'actorPageTop',
-        'actorPageLeftSidebar',
-        'actorPageBottom',
-        'actorPageRightSidebar',
-
-        'searchPageTop',
-        'searchPageLeftSidebar',
-        'searchPageBottom',
-        'searchPageRightSidebar',
-
-        'footer',
-
-    ])
-
-    const onOpenHandler = () => {
-        state.open ? setState({
-            ...state,
-            open: false
-        }) : setState({
-            ...state,
-            open: true
-        })
-    }
 
     const onAddNewWidget = (position, type) => {
         const widgetModelData = type ==='text' || type ==='textEditor' ? widgetModels.textWidgetModel:
@@ -129,34 +65,33 @@ const AddWidgetWithPositionMenu = props => {
                                 type ==='postsSwiper'? widgetModels.postsSwiperWidgetModel:
                                  widgetModels;
 
-        const widgetsInSamePosition = contextData.widgetsSettings.widgets.filter(w=>w?.data?.position === position)
+        const widgetsInTheSamePosition = widgets.filter(widget=>widget?.data?.position === position)
+        const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(widget => widget?.data?.widgetIndex), 0)
+
         let dataToSave = {
             ...widgetModelData,
             position,
             type,
-            widgetIndex:widgetsInSamePosition.length + 1,
+            widgetIndex:highestIndexInTheSamePosition + 1,
         };
+        dispatch(addNewWidget(dataToSave))
+        setOpen(false)
 
-        //console.log(widgetsInSamePosition)
-        addNewWidget({
-            data: dataToSave
-        }).then(() => {
-            props.getAndSetWidgetsData()
-        }).then(() => {
-            props.getAndSetData()
-        }).catch(err => {
-            console.log(err)
-        })
     }
 
-    const renderPositions = positions.map(position=>{
+    const renderPositions = staticPosition.map(position=>{
         return(
-            <button key={_.uniqueId('position_')} className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(position, props.type)}>{convertVariableNameToName(position)}</button>
+            <button key={_.uniqueId('position_')}
+                    className='AddWidgetWithPositionMenuPositionsBtn'
+                    onClick={() => onAddNewWidget(position, props.type)}
+            >
+                {convertVariableNameToName(position)}
+            </button>
         )
     })
 
 
-    const renderCustomPagesPosition = props.customPages.map(customPage=>{
+    const renderCustomPagesPosition = customPages.map(customPage=>{
        return(
            <React.Fragment key={_.uniqueId('id_')}>
                <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
@@ -166,25 +101,18 @@ const AddWidgetWithPositionMenu = props => {
        )
    })
 
-    if (state.open) {
-        return (
-            <div className='AddWidgetWithPositionMenu'>
-                <button className='positionsOpener' onClick={() => onOpenHandler()}>{props.name}</button>
+    return (
+        <AddWidgetWithPositionMenuStyledDiv className='AddWidgetWithPositionMenu'>
+            <button className='positionsOpener' onClick={() => open ? setOpen(false) : setOpen(true)}>{props.name}</button>
+            {open ?
                 <div className="AddWidgetWithPositionMenuPositions">
-
                     {renderPositions}
-                   {renderCustomPagesPosition}
+                    {renderCustomPagesPosition}
                 </div>
-            </div>
-        );
-    } else {
-        return (
-            <div className='AddWidgetWithPositionMenu'>
-                <button className='positionsOpener' onClick={() => onOpenHandler()}>{props.name}</button>
-            </div>
-        );
-    }
-
+                :null
+            }
+        </AddWidgetWithPositionMenuStyledDiv>
+    );
 
 };
 export default AddWidgetWithPositionMenu;

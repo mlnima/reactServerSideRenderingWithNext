@@ -1,37 +1,42 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from '../../../../context/AppContext';
 import dynamic from 'next/dynamic'
-import {addNewWidget, deleteWidgets, getMultipleWidgetWithData, getPagesData, updateWidgets} from '../../../../_variables/ajaxVariables'
 import {convertVariableNameToName} from "../../../../_variables/_variables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {languagesOptions} from "../../../../_variables/_variables";
-import {faDollarSign, faEuroSign, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import MonacoEditorComponent from "../../MonacoEditorComponent/MonacoEditorComponent";
-
 import SearchTypeInputFields from "./SearchTypeInputFields/SearchTypeInputFields";
 import MultipleLinkWidgetModelFields from "./MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields";
 import _ from "lodash";
+import WidgetModelStyles from "./WidgetModelStyles";
+import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteWidget, updateWidget, addNewWidget} from "../../../../store/actions/widgetsActions";
+import staticPosition from '../staticPosition';
 
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
-const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'))
-const TextInputFieldForWidget = dynamic(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'), {ssr: false})
-const LinkTypeWidgetModelFields = dynamic(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'))
-const ImageSwiperTypeWidgetModelFields = dynamic(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'))
-const PostSwiperTypeWidgetModelFields = dynamic(() => import('./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields'))
-const MenuWidgetModelFields = dynamic(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'))
-const TextWidgetTypeFields = dynamic(() => import('./TextWidgetTypeFields/TextWidgetTypeFields'))
-const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'))
-const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'))
-const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'))
-const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'))
-const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false})
-import WidgetModelStyles from "./WidgetModelStyles";
-import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields";
+const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'));
+const TextInputFieldForWidget = dynamic(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'), {ssr: false});
+const LinkTypeWidgetModelFields = dynamic(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'));
+const ImageSwiperTypeWidgetModelFields = dynamic(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'));
+const PostSwiperTypeWidgetModelFields = dynamic(() => import('./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields'));
+const MenuWidgetModelFields = dynamic(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'));
+const TextWidgetTypeFields = dynamic(() => import('./TextWidgetTypeFields/TextWidgetTypeFields'));
+const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'));
+const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'));
+const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'));
+const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'));
+const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false});
+
 
 const WidgetModel = props => {
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
+    const widgets = useSelector(state => state.widgets.widgets)
+    const customPages = useSelector(state => state.adminPanelGlobalState?.customPages)
+
     const languageElement = useRef(null)
 
     const [widgetSettings, setWidgetSettings] = useState({
@@ -44,79 +49,25 @@ const WidgetModel = props => {
     const [widgetData, setWidgetData] = useState({
         translations: {},
     })
-    const [positions,setPositions] = useState([
-        'topBar',
-        'header',
-        'navigation',
+    const [positions, setPositions] = useState(()=>staticPosition)
 
-        'home',
-        'homePageLeftSidebar',
-        'homePageRightSidebar',
-
-        'postPageTop',
-        'postPageLeftSidebar',
-        'postPageBottom',
-        'postPageRightSidebar',
-
-        'underPost',
-
-        'postsPageTop',
-        'postsPageLeftSidebar',
-        'postsPageBottom',
-        'postsPageRightSidebar',
-
-        'profilePageTop',
-        'profilePageLeftSidebar',
-        'profilePageBottom',
-        'profilePageRightSidebar',
-
-        'tagsPageTop',
-        'tagsPageLeftSidebar',
-        'tagsPageBottom',
-        'tagsPageRightSidebar',
-
-        'categoriesPageTop',
-        'categoriesPageLeftSidebar',
-        'categoriesPageBottom',
-        'categoriesPageRightSidebar',
-
-        'actorsPageTop',
-        'actorsPageLeftSidebar',
-        'actorsPageBottom',
-        'actorsPageRightSidebar',
-
-        'tagPageTop',
-        'tagPageLeftSidebar',
-        'tagPageBottom',
-        'tagPageRightSidebar',
-
-        'categoryPageTop',
-        'categoryLeftSidebar',
-        'categoryBottom',
-        'categoryRightSidebar',
-
-        'actorPageTop',
-        'actorPageLeftSidebar',
-        'actorPageBottom',
-        'actorPageRightSidebar',
-
-        'footer',
-
-    ])
     useEffect(() => {
-        setWidgetData({
-            ...widgetData,
-            ...props.data,
-        })
-    }, [props]);
+        const currentWidgetData = widgets.find(widget => widget._id === props.widgetId)
+        if (currentWidgetData){
+            setWidgetData({
+                ...widgetData,
+                ...currentWidgetData?.data,
+            })
+        }
+    }, [widgets]);
 
+    // change handlers
     const onChangeLanguageHandler = e => {
         setWidgetSettings({
             ...widgetSettings,
             activeEditingLanguage: e.target.value
         })
     }
-
     const onTextInputsDataChangeHandler = (e) => {
 
         if (widgetSettings.activeEditingLanguage === 'default') {
@@ -154,8 +105,6 @@ const WidgetModel = props => {
             })
         }
     }
-
-
     const onTextEditorChangeHandler = value => {
         if (languageElement?.current?.value === 'default') {
             setWidgetData({
@@ -177,155 +126,104 @@ const WidgetModel = props => {
         }
     }
     const onChangeHandler = e => {
-
-        const isChecked = e.target.checked
         const value = e.target.value
         setWidgetData({
             ...widgetData,
             [e.target.name]: value === 'true' ? true : value === 'false' ? false : value
         })
     };
-
     const onCheckboxChangeHandler = e => {
         setWidgetData({
             ...widgetData,
             [e.target.name]: e.target.checked
         })
     }
-
     const onChangeHandlerByName = (name, value) => {
         setWidgetData({
             ...widgetData,
             [name]: value
         })
     };
+    // actions on widget
+    const onCloneHandler = () => {
+        const widgetsInTheSamePosition = widgets.filter(widget => widget?.data?.position === widgetData.position)
+        const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(widget => widgetData.widgetIndex), 0)
 
-    const onOpenHandler = () => {
-        widgetSettings.open ? setWidgetSettings({
-            ...widgetSettings,
-            open: false
-        }) : setWidgetSettings({...widgetSettings, open: true})
+        dispatch(addNewWidget({
+            ...widgetData,
+            widgetIndex: highestIndexInTheSamePosition + 1,
+            posts: [],
+            metaData: []
+        }))
+    }
+    const onDeleteHandler = () => {
+        if (props.widgetId) {
+            dispatch(deleteWidget(props.widgetId))
+        }
+    };
+    const changeWidgetIndex = (action) => {
+        const valueToSet = action ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1;
+        dispatch(updateWidget({
+            _id: props?.widgetId,
+            data: {
+                ...widgetData,
+                widgetIndex: valueToSet,
+                posts: [],
+                metaData: []
+            }
+        }))
+        setWidgetData({
+            ...widgetData,
+            widgetIndex: valueToSet,
+        })
+
+    };
+    const onSaveHandler = () => {
+        dispatch(updateWidget({
+            _id: props?.widgetId,
+            data: {
+                ...widgetData,
+                posts: [],
+                metaData: []
+            }
+        }))
     };
     const onLockHandler = () => {
-        const dataToSave = {
-            _id: props.widgetId,
+        dispatch(updateWidget({
+            _id: props?.widgetId,
             data: {
                 ...widgetData,
                 stayOpen: !widgetData.stayOpen,
                 posts: [],
                 metaData: []
             }
-        }
-        updateWidgets(dataToSave).then(() => {
-            // setTimeout(() => {
-            //
-            // }, 0)
-            props.getAndSetWidgetsData()
-        })
-    };
-
-    const onCloneHandler = () => {
-        addNewWidget({
-            data: {
-                ...widgetData,
-                //  ...textInputsData
-            }
-        }).then(() => {
-            getMultipleWidgetWithData({widgets: ['all']},  false).then(res => {
-                contextData.dispatchWidgetsSettings({
-                    ...contextData.widgetsSettings,
-                    widgets: [...res.data.widgets]
-                })
-            })
-        }).catch(err => {
-            console.log(err)
-        })
-    }
-
-    const onDeleteHandler = () => {
-        if (props.isPost) {
-            props.setState({
-                ...props.state,
-                widgets: props.state.widgets.filter(i => i.widgetIndex !== props.widgetIndex)
-            })
-        } else {
-            deleteWidgets(props.widgetId, window.location.origin).then(() => {
-                getMultipleWidgetWithData({widgets: ['all']}, false).then(res => {
-                    contextData.dispatchWidgetsSettings({
-                        widgets: [...res.data.widgets]
-                    })
-                    setWidgetSettings({
-                        ...widgetSettings,
-                        open: false
-                    })
-                })
-            })
-        }
-    };
-
-    const changeWidgetIndex = (action) => {
-        const valueToSet = action ? parseInt(widgetData.widgetIndex) + 1 : parseInt(widgetData.widgetIndex) - 1
-        if (props.isPost) {
-            const findIndexOfTheWidget = props.state.widgets.findIndex(w => {
-                return ((w.widgetIndex === props.data.widgetIndex) && (w.type === props.data.type) && (w.widgetId === props.data.widgetId))
-            })
-
-            const updatedWidget = {...widgetData, widgetIndex: valueToSet}
-            let widgets = props.state.widgets
-            widgets[findIndexOfTheWidget] = updatedWidget
-        } else {
-            const dataToSave = {
-                _id: props.widgetId || '',
-                data: {
-                    ...widgetData,
-                    widgetIndex: valueToSet,
-                    posts: [],
-                    metaData: []
-                }
-            }
-            updateWidgets(dataToSave).then(() => {
-                // setTimeout(() => {
-                //
-                // }, 0)
-                props.getAndSetWidgetsData()
-            })
-        }
-    };
-
-    const onSaveHandler = () => {
-        const dataToSave = {
-            _id: props.widgetId ? props.widgetId : '',
-            data: {
-                ...widgetData,
-                posts: [],
-                metaData: []
-            }
-        }
-        updateWidgets(dataToSave).then(() => {
-            props.getAndSetWidgetsData()
+        }))
+        setWidgetData({
+            ...widgetData,
+            stayOpen: !widgetData.stayOpen,
         })
     };
 
 
-
-
-    const renderWidgetPositions = positions.map(position=>{
-        return(
+    const renderWidgetPositions = positions.map(position => {
+        return (
             <option key={_.uniqueId('position_')} value={position}>{convertVariableNameToName(position)}</option>
         )
     })
 
 
+    return (
+        <div className='widget-model-open'>
+            <WidgetModelStyles/>
+            <WidgetHeaderControl setKey={false}
+                                 widgetSettings={widgetSettings}
+                                 widgetId={props.widgetId}
+                                 widgetData={widgetData}
+                                 onLockHandler={onLockHandler}
+                                 changeWidgetIndex={changeWidgetIndex}
+            />
+            {widgetData.stayOpen ?
 
-
-    if (widgetSettings.open || widgetData.stayOpen) {
-        return (
-
-            <div className='widget-model-open'>
-                <WidgetModelStyles/>
-                <WidgetHeaderControl setKey={false} widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} onLockHandler={onLockHandler}
-                                     changeWidgetIndex={changeWidgetIndex}
-                                     onOpenHandler={onOpenHandler}/>
                 <div className='widgetModel'>
 
                     <div className='selectInputFieldForWidget widgetSection'>
@@ -374,12 +272,12 @@ const WidgetModel = props => {
                         <p>Position:</p>
                         <select name='position' value={widgetData.position} onChange={e => onChangeHandler(e)}>
                             {renderWidgetPositions}
-                            {(props.customPages || []).map(customPage => {
+                            {(customPages || []).map(customPage => {
                                 return (
                                     <React.Fragment key={_.uniqueId('id_')}>
-                                        <option value={customPage} key={_.uniqueId('id_')}>{convertVariableNameToName(customPage)}</option>
-                                        <option value={customPage + 'LeftSidebar'} key={_.uniqueId('id_')}>{convertVariableNameToName(customPage) + ' Left Sidebar'}</option>
-                                        <option value={customPage + 'RightSidebar'} key={_.uniqueId('id_')}>{convertVariableNameToName(customPage) + ' Right Sidebar'}</option>
+                                        <option value={customPage} >{convertVariableNameToName(customPage)}</option>
+                                        <option value={customPage + 'LeftSidebar'} >{convertVariableNameToName(customPage) + ' Left Sidebar'}</option>
+                                        <option value={customPage + 'RightSidebar'} >{convertVariableNameToName(customPage) + ' Right Sidebar'}</option>
                                     </React.Fragment>
                                 )
                             })}
@@ -434,12 +332,12 @@ const WidgetModel = props => {
                                              value={widgetData.languageTextAsDefaultLanguage || 'default'} classNameValue='languageTextAsDefaultLanguage'
                                              placeHolder='Language Text As Default Language' onChangeHandler={onChangeHandler} rendering={widgetData.type === 'language'}/>
 
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper'|| widgetData.type === 'metaWithImage' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' ?
                         <>
                             <div className='selectInputFieldForWidget widgetSection'>
                                 <p>Sort By:</p>
                                 <select name='sortBy' value={widgetData.sortBy} onChange={e => onChangeHandler(e)}>
-                                    <option >select</option>
+                                    <option>select</option>
                                     <option value='updatedAt'>Updated At</option>
                                     <option value='createdAt'>Created At</option>
                                     <option value='views'>Views</option>
@@ -451,7 +349,7 @@ const WidgetModel = props => {
                             <div className='selectInputFieldForWidget widgetSection'>
                                 <p>Post Type:</p>
                                 <select name='postType' value={widgetData.postType} onChange={e => onChangeHandler(e)}>
-                                    <option >select</option>
+                                    <option>select</option>
                                     <option value='standard'>Standard</option>
                                     <option value='video'>Video</option>
                                     <option value='product'>Product</option>
@@ -465,6 +363,7 @@ const WidgetModel = props => {
                                 <p>Post Element Size:</p>
                                 <select name='postElementSize' value={widgetData.postElementSize} onChange={e => onChangeHandler(e)}>
                                     <option>select</option>
+                                    <option value='listSmall'>listSmall</option>
                                     <option value='list'>List</option>
                                     <option value='smaller'>smaller</option>
                                     <option value='small'>small</option>
@@ -500,7 +399,7 @@ const WidgetModel = props => {
                         : null
                     }
                     {widgetData.type === 'logo' ?
-                        <LogoTypeWidgetModelFields widgetSettings={widgetSettings} onChangeHandler={onChangeHandler}   widgetData={widgetData} onTextInputsDataChangeHandler={onTextInputsDataChangeHandler} />: null
+                        <LogoTypeWidgetModelFields widgetSettings={widgetSettings} onChangeHandler={onChangeHandler} widgetData={widgetData} onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}/> : null
                     }
                     {widgetData.type === 'language' ?
                         <>
@@ -650,11 +549,6 @@ const WidgetModel = props => {
                         classNameValue='customStylesTextarea'
                     />
 
-
-                    {/*<textarea className='customStylesTextarea' name='customStyles'*/}
-                    {/*          value={widgetData.customStyles || ''}*/}
-                    {/*          onChange={e => onChangeHandler(e)}/>*/}
-
                     <div className='control-buttons'>
                         <button title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{width: '15px', height: '15px'}}/></button>
                         <ExportWidget data={{...widgetData}}/>
@@ -666,56 +560,15 @@ const WidgetModel = props => {
                             <FontAwesomeIcon icon={faTrash} style={{width: '15px', height: '15px'}}/>
                         </button>
                         {widgetSettings.renderDeleteBtn ? <button onClick={() => onDeleteHandler()}>Delete</button> : null}
-
                     </div>
-
                 </div>
-            </div>
+                : null
+            }
+        </div>
 
-        );
-    } else {
-        return (
-            <WidgetHeaderControl widgetSettings={widgetSettings} widgetId={props.widgetId} widgetData={widgetData} onLockHandler={onLockHandler} changeWidgetIndex={changeWidgetIndex}
-                                 onOpenHandler={onOpenHandler}/>
-        )
-    }
+    );
+
 
 };
 export default WidgetModel;
 
-
-// <option value='categoriesPageLeftSidebar'>Categories Page Left SideBar</option>
-// <option value='categoriesPageRightSidebar'>Categories Page Right SideBar</option>
-//
-// <option value='tagsPagesLeftSidebar'>Tags Page Left SideBar</option>
-// <option value='tagsPagesRightSidebar'>Tags Page Right SideBar</option>
-//
-// <option value='actorsPagesLeftSidebar'>Actors Page Left SideBar</option>
-// <option value='actorsPagesRightSidebar'>Actors Page Right SideBar</option>
-// <div className='selectInputFieldForWidget widgetSection'>
-//     <p>View Type:</p>
-//     <select name='viewType' value={widgetData.viewType} onChange={e => onChangeHandler(e)}>
-//         <option value='standard'>Standard</option>
-//         <option value='small'>Small</option>
-//         <option value='list'>List</option>
-//     </select>
-// </div>
-
-// <option value='topBar'>Top Bar</option>
-// <option value='navigation'>Navigation</option>
-// <option value='header'>Header</option>
-// <option value='home'>Home</option>
-// <option value='homePageLeftSidebar'>Home Page Left Sidebar</option>
-// <option value='homePageRightSidebar'>Home Page Right Sidebar</option>
-//
-// <option value='postPageLeftSidebar'>Post Page Left SideBar</option>
-// <option value='postPageRightSidebar'>Post Page Right SideBar</option>
-//
-// <option value='postsPageLeftSidebar'>Posts Page Left SideBar</option>
-// <option value='postsPageRightSidebar'>Posts Page Right SideBar</option>
-//
-// <option value='metaPageLeftSidebar'>Meta Page Left SideBar</option>
-// <option value='metaPageRightSidebar'>Meta Page Right SideBar</option>
-// <option value='underPost'>Under Post</option>
-//
-// <option value='footer'>Footer</option>

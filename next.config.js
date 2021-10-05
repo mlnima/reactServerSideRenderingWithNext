@@ -49,6 +49,7 @@ const rewrites = () => {
         fallback: []
     }
 }
+
 const redirects = () => {
     return [
 

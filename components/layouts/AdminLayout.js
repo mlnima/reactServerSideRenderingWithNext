@@ -10,6 +10,7 @@ import {getSetting} from '../../_variables/ajaxVariables'
 import {createGlobalStyle} from "styled-components";
 import AdminPanelGlobalStyles from "../global/AdminPanelGlobalStyles";
 import Link from "next/link";
+import AdminDataSetter from "../global/AdminDataSetter";
 
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
@@ -26,11 +27,6 @@ const AdminLayout = props => {
             dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'coverImage']))
         }
     }, []);
-
-
-    useEffect(() => {
-        console.log('userData',userData)
-    }, [userData]);
 
     const contextData = useContext(AppContext);
     const container = useRef(null);
@@ -62,6 +58,7 @@ const AdminLayout = props => {
                     <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&amp;display=swap" rel="stylesheet"/>
                     <meta charSet="utf-8"/>
                 </Head>
+                <AdminDataSetter/>
                 <AdminPanelGlobalStyles/>
                 <GlobalStyle globalStyleData={contextData?.siteDesign?.customStyles || ''}/>
 

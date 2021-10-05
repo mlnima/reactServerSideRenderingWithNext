@@ -1,5 +1,7 @@
 import * as types from '../types'
 import {HYDRATE} from 'next-redux-wrapper';
+import _ from 'lodash'
+import {DELETE_WIDGET} from "../types";
 
 const initialState = {
     widgets:[]
@@ -20,9 +22,28 @@ export const widgetsReducer = (state=initialState,action)=>{
             }
         case  types.SET_WIDGETS_FOR_ADMIN:
             return{
-               // ...state,
+               ...state,
                 widgets : action?.payload
             }
+        case types.SAVE_NEW_WIDGET:
+
+            return {
+                ...state,
+                widgets:[...state.widgets,action.payload]
+            };
+        case types.UPDATE_WIDGET:
+            const index = _.findIndex(state.widgets, {_id: action.payload._id});
+            const currentWidgets = state.widgets;
+            currentWidgets.splice(index,1,action.payload);
+            return {
+                ...state,
+                widgets:currentWidgets
+            };
+        case types.DELETE_WIDGET:
+            return {
+                ...state,
+                 widgets:state.widgets.filter(widget=>widget._id !== action.payload)
+            };
         default:
             return state
     }

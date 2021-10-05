@@ -1,12 +1,13 @@
 const widgetSchema = require('../../../models/widgetSchema');
 
 module.exports = (req, res) => {
-    const _id = req.body.id;
-    widgetSchema.findByIdAndDelete({_id}).exec().then(() => {
-        res.json({deleted: true})
-        res.end()
-    }).catch(e=>{
-        console.log(e)
-        res.end()
-    })
+    if (req.body._id){
+        const _id = req.body._id;
+        widgetSchema.findByIdAndDelete({_id}).exec().then(() => {
+            res.json({deleted: true})
+        }).catch(error=>{
+            console.log(error)
+            res.end()
+        })
+    }
 }

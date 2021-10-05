@@ -1,12 +1,41 @@
-import React, {useState} from 'react';
+import React from 'react';
 import AddWidgetWithPositionMenu from './AddWidgetWithPositionMenu'
 import WidgetImporter from "./WidgetImporter/WidgetImporter";
 import WidgetExporter from "./WidgetExporter/WidgetExporter";
 import {convertVariableNameToName} from "../../../../_variables/_variables";
-import _ from "lodash";
 
-const AddWidgetMenu = props => {
-        const [widgetTypes,setWidgetTypes] = useState([
+import styled from "styled-components";
+
+const AddWidgetMenuStyledDiv = styled.div`
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: flex-start;
+  align-items: center;
+  .add-widget-buttons{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+  }
+  .import-export{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: flex-start;
+    align-items: center;
+    width: 100%;
+    .export-widgets{
+      margin: 5px 20px;
+    }
+    .import-widgets{
+      margin: 5px 20px;
+    }
+  }
+`
+
+const AddWidgetMenu = () => {
+        const widgetTypes=[
             'text',
             'textEditor',
             'menu',
@@ -27,41 +56,26 @@ const AddWidgetMenu = props => {
             'authentication',
             'imageSwiper',
             'postsSwiper',
-        ])
+        ]
 
-        const renderWidgetsTypes = widgetTypes.map(type=>{
-                return ( <AddWidgetWithPositionMenu key={_.uniqueId('widgetType_')} {...props} type={type} name={convertVariableNameToName(type)}/>)
+        const renderWidgetsTypes = widgetTypes.map((type,index)=>{
+                return <AddWidgetWithPositionMenu key={index}
+                                                  type={type}
+                                                  name={convertVariableNameToName(type)}
+                />
         })
 
     return (
-        <div className='AddWidgetMenu'>
+        <AddWidgetMenuStyledDiv className='add-export-widgets'>
+            <div className='import-export'>
+                <WidgetImporter/>
+                <WidgetExporter/>
+            </div>
+            <div className='add-widget-buttons'>
                 {renderWidgetsTypes}
-            <WidgetImporter/>
-            <WidgetExporter/>
-        </div>
+            </div>
+        </AddWidgetMenuStyledDiv>
     );
 };
 export default AddWidgetMenu;
 
-
-// image recentComments search tagCloud categoriesCloud video navigationMenu
-
-// <AddWidgetWithPositionMenu {...props} type='text' name='Text'/>
-// <AddWidgetWithPositionMenu {...props} type='textEditor' name='Text Editor'/>
-// <AddWidgetWithPositionMenu {...props} type='menu' name='Menu'/>
-// <AddWidgetWithPositionMenu {...props} type='linkTo' name='Link To'/>
-// <AddWidgetWithPositionMenu {...props} type='multipleLinkTo' name='Multiple Link To'/>
-// <AddWidgetWithPositionMenu {...props} type='posts' name='Posts'/>
-// <AddWidgetWithPositionMenu {...props} type='media' name='Media'/>
-// <AddWidgetWithPositionMenu {...props} type='recentComments' name='Recent Comments'/>
-// <AddWidgetWithPositionMenu {...props} type='searchBar' name='Search'/>
-// <AddWidgetWithPositionMenu {...props} type='searchButton' name='Search Button'/>
-// <AddWidgetWithPositionMenu {...props} type='meta' name='Meta'/>
-// <AddWidgetWithPositionMenu {...props} type='logo' name='Logo'/>
-// <AddWidgetWithPositionMenu {...props} type='form' name='Form'/>
-// <AddWidgetWithPositionMenu {...props} type='shoppingCart' name='Shopping Cart'/>
-// <AddWidgetWithPositionMenu {...props} type='alphabeticalNumericalRange' name='Alphabetical Numerical Range'/>
-// <AddWidgetWithPositionMenu {...props} type='language' name='Language'/>
-// <AddWidgetWithPositionMenu {...props} type='authentication' name='Auth Buttons'/>
-// <AddWidgetWithPositionMenu {...props} type='imageSwiper' name='Image slide Show'/>
-// <AddWidgetWithPositionMenu {...props} type='postsSwiper' name='Post slide Show'/>

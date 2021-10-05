@@ -33,7 +33,7 @@ const WidgetImporter = () => {
 
     }
     return (
-        <div className='AddWidgetWithPositionMenu'>
+        <div className='import-widgets'>
             <input ref={inputFile} style={{display:'none'}} type='file' onChange={async e => {
                 const reader = new FileReader()
                 reader.readAsText(e.target.files[0])
@@ -41,7 +41,7 @@ const WidgetImporter = () => {
                     setState({...state, data: JSON.parse(e.target.result)})
                 }
             }}/>
-            <button className='positionsOpener' onClick={()=>inputFile.current.click()}>Import Widget</button>
+            <button className='import-widgets-button' onClick={()=>inputFile.current.click()}>Import Widget</button>
         </div>
     );
 };

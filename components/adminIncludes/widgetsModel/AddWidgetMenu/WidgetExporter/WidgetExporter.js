@@ -38,8 +38,8 @@ const WidgetExporter = () => {
 
 
     return (
-        <div className='AddWidgetWithPositionMenu'>
-            <button className='positionsOpener' onClick={()=>exportAllWidgets()}>Export All Widgets</button>
+        <div className='export-widgets'>
+            <button className='export-widgets-button' onClick={()=>exportAllWidgets()}>Export All Widgets</button>
         </div>
     );
 };

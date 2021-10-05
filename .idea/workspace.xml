@@ -20,7 +20,35 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/staticPosition.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardListSmall.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/actions/adminPanelGlobalStateActions.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/reducers/adminPanelGlobalStateReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/adminAjaxVariables/adminAjaxWidgetsVariables/_getMultipleWidgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/adminAjaxVariables/adminAjaxWidgetsVariables/_getMultipleWidgets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/WidgetExporter/WidgetExporter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/WidgetExporter/WidgetExporter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/WidgetImporter/WidgetImporter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/WidgetImporter/WidgetImporter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModelStyles.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AdminLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AdminLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminAddNewWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminDeleteWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/actions/widgetsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/widgetsActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/reducers/index.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/index.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/reducers/widgetsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/widgetsReducer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/types.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -77,7 +105,7 @@
     <property name="node.js.selected.package.tslint" value="(autodetect)" />
     <property name="nodejs_package_manager_path" value="npm" />
     <property name="run.code.analysis.last.selected.profile" value="pProject Default" />
-    <property name="settings.editor.selected.configurable" value="preferences.keymap" />
+    <property name="settings.editor.selected.configurable" value="preferences.lookFeel" />
     <property name="ts.external.directory.path" value="I:\Dev Project\reactServerSideRenderingWithNext\node_modules\typescript\lib" />
     <property name="vue.rearranger.settings.migration" value="true" />
   </component>
@@ -143,9 +171,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.AppLayout.js" />
         <item itemvalue="npm.analys" />
       </list>
@@ -816,7 +844,11 @@
       <workItem from="1633083826311" duration="21858000" />
       <workItem from="1633129506264" duration="11953000" />
       <workItem from="1633165454666" duration="22534000" />
-      <workItem from="1633260736369" duration="12055000" />
+      <workItem from="1633260736369" duration="24327000" />
+      <workItem from="1633338795618" duration="2579000" />
+      <workItem from="1633350910207" duration="8617000" />
+      <workItem from="1633374054910" duration="2503000" />
+      <workItem from="1633418480241" duration="17948000" />
     </task>
     <servers />
   </component>
@@ -911,32 +943,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>111</line>
+          <line>62</line>
           <option name="timeStamp" value="36" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>293</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>243</line>
-          <option name="timeStamp" value="39" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetHeaderControl/WidgetHeaderControl.js</url>
           <option name="timeStamp" value="40" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>671</line>
-          <option name="timeStamp" value="42" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/pages/admin/design/widgets/index.js</url>
-          <line>146</line>
-          <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/_app.tsx</url>

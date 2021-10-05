@@ -5,7 +5,7 @@ import {convertVariableNameToName} from "../../../../../_variables/_variables";
 import styled from "styled-components";
 let StyledDiv = styled.div`
   display: grid;
-  grid-template-columns:  1fr 1fr 5fr 2fr  ;
+  grid-template-columns:  1fr 5fr 2fr  ;
   align-items: center;
   background-color: var(--admin-darkcolor70);
   color: var(--admin-text-color);
@@ -74,11 +74,11 @@ const WidgetHeaderControl = props => {
 
     return (
         <StyledDiv className='widget-open-control' {...keyStatus}>
-            <div className='widget-open-close-button' onClick={props.onOpenHandler}>
-                <FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{
-                    transform: props.widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',
-                }}/>
-            </div>
+            {/*<div className='widget-open-close-button' onClick={props.onOpenHandler}>*/}
+            {/*    <FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{*/}
+            {/*        transform: props.widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',*/}
+            {/*    }}/>*/}
+            {/*</div>*/}
             <div className='widget-open-close-button' onClick={props.onLockHandler} >
                 <FontAwesomeIcon icon={props.widgetData.stayOpen ? faLockOpen : faLock} className='widget-header-handler-admin' />
             </div>
