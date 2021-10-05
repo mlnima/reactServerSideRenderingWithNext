@@ -14,10 +14,11 @@ module.exports = async (req, res) => {
             },
         ]).sort({updatedAt: -1}).exec()
         Promise.all(widgets).then(widgetsWithData => {
-            res.json({widgets: widgetsWithData})
+            console.log('*********************', widgetsWithData)
+            res.json({widgets: widgetsWithData || []})
         }).catch(err => {
             console.log(err)
-            res.status(400).send('Bad Request')
+            res.json({widgets: []})
         })
     } catch (err) {
         console.log(err)
