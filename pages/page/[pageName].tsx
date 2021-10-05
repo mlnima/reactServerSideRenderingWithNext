@@ -16,20 +16,29 @@ const page = (props: ClientPagesTypes) => {
     )
 };
 
-export const getStaticPaths = async () => {
-    // Call an external API endpoint to get posts
-    const pagesDataFromApi = await getPagesDataForStaticGeneration()
-    const pagesData = pagesDataFromApi.data?.pagesData || []
+export const getStaticPaths = async ({locales}:any) => {
+    try {
+        // Call an external API endpoint to get posts
+        const pagesDataFromApi = await getPagesDataForStaticGeneration()
+        const pagesData = pagesDataFromApi.data?.pagesData || []
+        let allParams : {params:{pageName:string,locale:string}}[] = []
 
+        locales.forEach((locale:string)=>{
 
-    // Get the paths we want to pre-render based on posts
-    const paths = pagesData.map((pageData: { pageName: string }) => ({
-        params: {pageName: pageData.pageName},
-    }))
+            allParams.push(...pagesData.map((pageData:{pageName:string})=> {
+                return {params: {pageName: pageData.pageName, locale}}
+            }))
+        })
 
-    // We'll pre-render only these paths at build time.
-    // { fallback: false } means other routes should 404.
-    return {paths, fallback: false}
+        return {
+            paths: allParams,
+            fallback: true
+        }
+
+    }catch (error){
+        console.log(error)
+    }
+
 }
 
 

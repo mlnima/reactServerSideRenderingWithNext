@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
             },
         ]).sort({updatedAt: -1}).exec()
         Promise.all(widgets).then(widgetsWithData => {
-            console.log('*********************', widgetsWithData)
             res.json({widgets: widgetsWithData || []})
         }).catch(err => {
             console.log(err)
