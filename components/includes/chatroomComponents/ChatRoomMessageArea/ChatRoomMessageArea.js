@@ -44,14 +44,11 @@ const ChatRoomMessageArea = () => {
         >
             {chatroomMessages.map((message, index) => {
                     return (
-                        <>
-                            {index}
                         <ChatRoomMessage
                             message={message}
                             key={index}
                             onShowProfileHandler={onShowProfileHandler}
                         />
-                        </>
                     )
                 }
               )
