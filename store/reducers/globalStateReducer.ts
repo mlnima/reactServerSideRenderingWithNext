@@ -1,5 +1,6 @@
 import * as types from '../types'
 import { HYDRATE} from 'next-redux-wrapper';
+import {CHECK_ROUTE_AND_SET_LOADING} from "../types";
 const initialState = {
     loginRegisterFormPopup:false,
     loading:false,
@@ -38,6 +39,11 @@ export const globalStateReducer = (state= initialState , action : {type:string,p
                 loginRegisterFormPopup:action.payload
             };
         case  types.LOADING:
+            return {
+                ...state,
+                loading:action.payload
+            };
+        case  types.CHECK_ROUTE_AND_SET_LOADING:
             return {
                 ...state,
                 loading:action.payload

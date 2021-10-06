@@ -5,7 +5,7 @@ import {useRouter} from "next/router";
 import MenuWidgetItem from "./MenuWidgetItem";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../../store/actions/globalStateActions";
+import {checkRouteAndSetLoading, setLoading} from "../../../../store/actions/globalStateActions";
 
 
 const MenuWidgetStyledDiv = styled.div`
@@ -98,8 +98,8 @@ const MenuWidget = props => {
         }
     }, [props]);
 
-    const mobileNavigationOnClickHandler = () => {
-        dispatch(setLoading(true))
+    const mobileNavigationOnClickHandler = (nextPath) => {
+        dispatch(checkRouteAndSetLoading(router.asPath,nextPath))
         if (props.isMobile) {
             setOpen(false)
         }

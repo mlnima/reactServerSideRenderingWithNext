@@ -15,7 +15,7 @@ const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl, linkNam
                 <Link href={linkTargetUrl}  scroll={false}>
                     <a className={'menu-widget-item-link'}
                        rel='next'
-                       onClick={linkTargetUrl.includes('#') ? null : mobileNavigationOnClickHandler}
+                       onClick={()=>linkTargetUrl.includes('#') ? null : mobileNavigationOnClickHandler(linkTargetUrl)}
                        title={linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}>
                         {linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}
                     </a>

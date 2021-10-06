@@ -15,6 +15,15 @@ export const setLoading = (statusType) => dispatch => {
     })
 }
 
+export const checkRouteAndSetLoading = (path,nextPath) => dispatch => {
+    if (path !== nextPath){
+        dispatch({
+            type:types.CHECK_ROUTE_AND_SET_LOADING,
+            payload:true
+        })
+    }
+}
+
 export const hydrateGlobalState = (data) => dispatch => {
     dispatch({
         type:HYDRATE,
