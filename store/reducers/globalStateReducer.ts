@@ -1,6 +1,7 @@
 import * as types from '../types'
-import { HYDRATE} from 'next-redux-wrapper';
-import {CHECK_ROUTE_AND_SET_LOADING} from "../types";
+import {HYDRATE} from 'next-redux-wrapper';
+
+
 const initialState = {
     loginRegisterFormPopup:false,
     loading:false,
@@ -9,24 +10,14 @@ const initialState = {
     console:false,
     alert:{
         active:false,
-        alertMessage:''
+        type:null,
+        message:''
     }
 }
 
-export interface State {
-    loginRegisterFormPopup:boolean,
-    loading:boolean,
-    isSiteIdentitySet:boolean,
-    isSiteDesignSet:boolean,
-    console:boolean,
-    alert:{
-        active:boolean,
-        alertMessage:string
-    }
-}
+
 
 export const globalStateReducer = (state= initialState , action : {type:string,payload:any}) =>{
-
     switch (action.type){
         case HYDRATE:
             return {
@@ -42,6 +33,23 @@ export const globalStateReducer = (state= initialState , action : {type:string,p
             return {
                 ...state,
                 loading:action.payload
+            };
+        case  types.SET_ALERT:
+            return {
+                ...state,
+                alert:{
+                    active:true,
+                    ...action.payload
+                }
+            };
+        case  types.CLOSE_ALERT:
+            return {
+                ...state,
+                alert:{
+                    active:false,
+                    type:null,
+                    message:''
+                }
             };
         case  types.CHECK_ROUTE_AND_SET_LOADING:
             return {

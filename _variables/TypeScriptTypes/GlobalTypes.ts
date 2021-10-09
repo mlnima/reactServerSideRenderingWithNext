@@ -1,4 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
+import {PostTypes} from "./PostTypes";
 
 
 // SETTINGS
@@ -51,8 +52,8 @@ export interface IdentitySettings {
 // user
 export interface User {
     _id?: string;
-    username?:string;
-    role?:string
+    username?: string;
+    role?: string
 }
 
 export interface UserState {
@@ -77,7 +78,7 @@ export interface settingsPropTypes {
         identity: IdentitySettings
     };
     posts: {
-        post: object,
+        post: PostTypes,
         comments: object[]
     };
 }
@@ -178,14 +179,15 @@ export interface WidgetsStateTypes {
 }
 
 export interface GlobalStateTypes {
-    loginRegisterFormPopup: boolean,
+    loginRegisterFormPopup: boolean |string,
     loading: boolean,
     isSiteIdentitySet: boolean,
     isSiteDesignSet: boolean,
     console: boolean,
     alert: {
         active: boolean,
-        alertMessage: string
+        message: string,
+        type: string,
     }
 }
 
@@ -209,3 +211,15 @@ export interface ServerPropTypes {
     resolvedUrl?: string | undefined;
 }
 
+
+export interface InputOnChangeHandlerTypes {
+    target: {
+        name?: any
+        value?: any
+
+    }
+    currentTarget: {
+        name?: string
+        value?: any
+    }
+}

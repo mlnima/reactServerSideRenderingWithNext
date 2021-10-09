@@ -12,12 +12,14 @@ const AddWidgetMenuStyledDiv = styled.div`
   flex-wrap: wrap;
   justify-content: flex-start;
   align-items: center;
+
   .add-widget-buttons{
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     width: 100%;
+
   }
   .import-export{
     display: flex;

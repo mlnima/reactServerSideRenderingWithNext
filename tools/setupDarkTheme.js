@@ -23,7 +23,7 @@ const designData = {
     data: {
         customStyle: `:root {
                           --main-text-color: #fff;
-                          --background-color: #000;
+                          --main-background-color: #000;
                           --main-dark-color:#1b1b1b;
                         }
                         

@@ -6,29 +6,39 @@ import _ from "lodash";
 import {useDispatch, useSelector} from 'react-redux';
 import styled from "styled-components";
 import staticPosition from '../staticPosition';
+import Draggable from 'react-draggable';
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
   position: relative;
   width: 200px;
+  height: 35px;
   display: flex;
   justify-content: center;
   align-items: center;
   margin: 5px;
-  
+
   .positionsOpener {
     justify-self: stretch;
-    width: 80%;
+    width: 200px;
+    height: 35px;
     background-color: var(--admin-darkcolor70);
     color: var(--admin-text-color);
     border: none;
+    font-size: 12px;
+
   }
   .AddWidgetWithPositionMenuPositions {
     position: absolute;
+    width: 200px;
+    top:35px;
     z-index: 1;
     background-color: var(--admin-darkcolor70);
     display: grid;
     grid-template-columns: 1fr;
+    
     .AddWidgetWithPositionMenuPositionsBtn {
+      font-size: 12px;
+      z-index: auto;
       padding: 2px;
     }
   }
@@ -81,12 +91,14 @@ const AddWidgetWithPositionMenu = props => {
 
     const renderPositions = staticPosition.map(position=>{
         return(
+
             <button key={_.uniqueId('position_')}
                     className='AddWidgetWithPositionMenuPositionsBtn'
                     onClick={() => onAddNewWidget(position, props.type)}
             >
                 {convertVariableNameToName(position)}
             </button>
+
         )
     })
 
@@ -102,6 +114,9 @@ const AddWidgetWithPositionMenu = props => {
    })
 
     return (
+        <Draggable
+            handle=".AddWidgetWithPositionMenu"
+        >
         <AddWidgetWithPositionMenuStyledDiv className='AddWidgetWithPositionMenu'>
             <button className='positionsOpener' onClick={() => open ? setOpen(false) : setOpen(true)}>{props.name}</button>
             {open ?
@@ -112,6 +127,7 @@ const AddWidgetWithPositionMenu = props => {
                 :null
             }
         </AddWidgetWithPositionMenuStyledDiv>
+        </Draggable>
     );
 
 };

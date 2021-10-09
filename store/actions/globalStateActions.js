@@ -15,6 +15,19 @@ export const setLoading = (statusType) => dispatch => {
     })
 }
 
+export const setAlert = (payload) => dispatch => {
+    dispatch({
+        type:types.CLOSE_ALERT,
+        payload
+    })
+}
+export const closeAlert = ( ) => dispatch => {
+    dispatch({
+        type:types.CLOSE_ALERT,
+        payload:null
+    })
+}
+
 export const checkRouteAndSetLoading = (path,nextPath) => dispatch => {
     if (path !== nextPath){
         dispatch({

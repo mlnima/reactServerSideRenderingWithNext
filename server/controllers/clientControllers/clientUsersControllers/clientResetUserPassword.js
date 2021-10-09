@@ -4,30 +4,26 @@ const userSchema = require('../../../models/userSchema');
 
 module.exports = (req, res) => {
     const userId = req.userData._id
+    if (!userId) return res.status(403).json({message:'You Need To Login'})
     userSchema.findById(userId).exec().then(userData => {
-
-        bcrypt.compare(req.body.oldPass, userData.password, async function (err, isCorrect) {
+        bcrypt.compare(req.body.data.password, userData.password, async function (err, isCorrect) {
             if (err || isCorrect === false) {
-                res.json({ response: 'Old Password is wrong !', type: 'error' });
-                res.end()
+                res.status(403).json({message:'Wrong Password'})
             } else if (isCorrect) {
-                if (req.body.newPass === req.body.newPass2) {
-                    await bcrypt.hash(req.body.newPass, 10, function (err, hash) {
+                if (req.body.data.newPassword === req.body.data.repeatNewPassword) {
+                    await bcrypt.hash(req.body.data.newPassword, 10, function (err, hash) {
                         if (err) {
                             console.log(err)
-                            res.json({ response: 'Something Went Wrong', type: 'error' });
-                            res.end()
+                            res.status(400).json({message:'Something Went Wrong'})
                         } else if (hash) {
                             userSchema.findByIdAndUpdate(userId, { $set: { password: hash } },{new:true}).exec().then(()=>{
-                                res.json({ response: 'Password Is Changed', type: 'success' });
-                                res.end()
+                                res.json({ message: 'Password Is Changed' });
                             })
                         }
                     });
 
                 } else {
-                    res.json({ response: 'new Passwords are not match !', type: 'error' });
-                    res.end()
+                    res.status(400).json({message:'Mismatch  Passwords'})
                 }
 
             }

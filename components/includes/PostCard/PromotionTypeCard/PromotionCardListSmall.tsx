@@ -1,6 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import Link from "next/link";
+import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
 interface PromotionCardListSmallPropTypes {
     dir: string;
@@ -11,11 +12,7 @@ interface PromotionCardListSmallPropTypes {
     widgetId: string;
     title: string;
     cardWidth: string;
-    post: {
-        postType:string,
-        _id:string,
-        redirectLink:string,
-    };
+    post: PostTypes;
     onActivateLoadingHandler:any;
 
 }
@@ -67,7 +64,7 @@ const PromotionCardListSmall = (props: PromotionCardListSmallPropTypes) => {
             </a>
             <Link href={`/post/${props.post.postType}/${props.post._id}`} >
                 <a className='promotion-card-link-internal' onClick={props.onActivateLoadingHandler}>
-                    <img src='/public/asset/images/icons/search.svg' alt=""/>
+                    <img src='/public/asset/images/icons/search.svg' alt={props.title}/>
                 </a>
             </Link>
         </PromotionCardListSmallStyledDiv>

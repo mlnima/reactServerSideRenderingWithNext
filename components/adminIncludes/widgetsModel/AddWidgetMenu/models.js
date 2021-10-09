@@ -67,7 +67,7 @@ export const languageWidgetModel = {
     languageToShowBesideDropDown:'',
     customStyles:'select{\n' +
         '  border: none;\n' +
-        '  background-color: var(--background-color,#000);\n' +
+        '  background-color: var(--main-background-color,#000);\n' +
         '  color: var(--main-text-color);\n' +
         '}'
 }

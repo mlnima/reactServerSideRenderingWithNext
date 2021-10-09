@@ -33,7 +33,7 @@ const AdminPanelGlobalStyles = () => {
               }
 
               body {
-                background-color: var(--background-color,#000);
+                background-color: var(--main-background-color,#000);
                 margin: 0;
                 font-family: Montserrat, Verdana, sans-serif;
                 -webkit-font-smoothing: antialiased;

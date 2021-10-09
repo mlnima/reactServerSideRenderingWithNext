@@ -44,9 +44,11 @@ const AuthenticationStyledDiv = styled.div`
 const Authentication = () => {
     const loggedIn = useSelector(state => state.user.loggedIn)
     return (
+
         <AuthenticationStyledDiv className='auth-buttons'>
             {loggedIn ? <LoggedInItemsForMenu position='topBar'/> : <LoggedOutItemsMenu position='topBar'/>}
         </AuthenticationStyledDiv>
+
     );
 };
 

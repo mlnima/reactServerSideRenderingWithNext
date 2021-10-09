@@ -1,6 +1,6 @@
 import React, {useContext, useEffect} from 'react';
 import {AppContext} from "../../context/AppContext";
-import GlobalStyles from "../global/GlobalStyles";
+import GlobalStyles from "../global/Styles/GlobalStyles";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import {autoUserLogin} from "../../store/actions/userActions";
 import {useDispatch} from 'react-redux';

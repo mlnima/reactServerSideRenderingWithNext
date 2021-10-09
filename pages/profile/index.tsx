@@ -1,10 +1,6 @@
 import React, {useState, useEffect, useContext} from 'react';
 import {getFirstLoadData} from '../../_variables/ajaxVariables';
-import ProfileCoverImage from '../../components/includes/profilePageComponents/ProfileCoverImage/ProfileCoverImage';
 import ProfileNavigation from '../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
-import MyProfileInfo from '../../components/includes/profilePageComponents/MyProfileInfo/MyProfileInfo';
-import {getSignedInUserData} from "../../_variables/ajaxAuthVariables";
-import {AppContext} from "../../context/AppContext";
 import ProfileImage from "../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -93,6 +89,11 @@ const Profile = (props:ClientPagesTypes) => {
             </div>
             <div className='profile-page-info'>
                 <p className='profile-username'>{ userData?.username ? userData.username :''}</p>
+                <Link href={'/profile/edit'}>
+                    <a className='profile-page-info-edit-link'>
+                        Edit
+                    </a>
+                </Link>
             </div>
 
             <div className='profile-posts'>

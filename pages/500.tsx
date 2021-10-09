@@ -13,7 +13,7 @@ const Custom500StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   height: 50vh;
-  background-color: var(--background-color,#000);
+  background-color: var(--main-background-color,#000);
   grid-area: main;
   
   h1 {
@@ -45,10 +45,10 @@ export const getStaticProps = wrapper.getServerSideProps(store=>
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
+            ...(await serverSideTranslations(context.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL as string, ['common','customTranslation'])),
             ...firstLoadData
         }
     }
 })
 
-export default withTranslation(['common'])(Custom500);
+export default withTranslation(['common','customTranslation'])(Custom500);

@@ -7,9 +7,7 @@ import _ from "lodash";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-
-
-
+import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
   position: absolute;
@@ -82,6 +80,7 @@ let StyledDiv = styled.div`
 }
 `
 const SideBar = props => {
+    const router = useRouter()
     const contextData = useContext(AppContext);
 
     const [state, setState] = useState({
@@ -98,7 +97,7 @@ const SideBar = props => {
             subItems: []
         },
         metas: {
-            pathURL: props.router ? props.router.asPath : '/',
+            pathURL: '/categories',
             subItems: [
                 {name: 'tags', url: '/admin/assets?assetsType=metas&metaType=tags'},
                 {name: 'categories', url: '/admin/assets?assetsType=metas&metaType=categories'},

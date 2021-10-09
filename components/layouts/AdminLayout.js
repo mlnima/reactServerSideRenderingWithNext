@@ -8,7 +8,7 @@ import {autoUserLogin} from "../../store/actions/userActions";
 import {AppContext} from "../../context/AppContext";
 import {getSetting} from '../../_variables/ajaxVariables'
 import {createGlobalStyle} from "styled-components";
-import AdminPanelGlobalStyles from "../global/AdminPanelGlobalStyles";
+import AdminPanelGlobalStyles from "../global/Styles/AdminPanelGlobalStyles";
 import Link from "next/link";
 import AdminDataSetter from "../global/AdminDataSetter";
 

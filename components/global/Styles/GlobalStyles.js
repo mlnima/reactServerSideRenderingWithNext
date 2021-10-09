@@ -7,7 +7,7 @@ let GlobalStyles = createGlobalStyle`
   }
 
   body {
-    background-color: var(--background-color,#000);
+    background-color: var(--main-background-color,#000);
     margin: 0;
     color:var(--main-text-color,'#ccc');
     font-family: Montserrat, Verdana, sans-serif;

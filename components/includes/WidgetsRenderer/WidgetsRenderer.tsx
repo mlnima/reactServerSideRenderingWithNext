@@ -56,15 +56,10 @@ const WidgetsRenderer = ({isMobile, _id, position}: WidgetsRendererProps) => {
 
 
     const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
-
-        const deviceType = widget.data.deviceTypeToRender || 'all';
         const languageToRender = widget.data.languageToRender || 'all';
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
-
         const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
-        const renderByDeviceTypeCondition = !deviceType || (deviceType === 'mobile' && isMobile) || (deviceType === 'desktop' && !isMobile) || deviceType === 'all';
-        const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator'
-        //const isEditMode = widget.data.editMode
+        const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator';
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
             widget.data.type === 'postsSwiper' ? PostSwiper :
@@ -88,7 +83,7 @@ const WidgetsRenderer = ({isMobile, _id, position}: WidgetsRendererProps) => {
                                                                                     widget.data.type === 'form' ? FormWidget
                                                                                         : null;
 
-        if (renderByDeviceTypeCondition && renderByLanguageCondition && !isEditMode) {
+        if (renderByLanguageCondition && !isEditMode) {
             return (
                 <Widget
 

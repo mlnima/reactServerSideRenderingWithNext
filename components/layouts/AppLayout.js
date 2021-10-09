@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
-import GlobalStyles from "../global/GlobalStyles";
+import GlobalStyles from "../global/Styles/GlobalStyles";
 import {useDispatch, useSelector} from 'react-redux';
 import {autoUserLogin} from "../../store/actions/userActions";
 import {setLoading} from "../../store/actions/globalStateActions";
@@ -139,7 +139,7 @@ const AppLayout = props => {
             {userData?.role === 'administrator' ? <AdminTools/> : null}
             {userData?.role === 'administrator' && globalState?.console ? <Console/> : null}
             {globalState?.loading ? <Loading/> : null}
-            {globalState?.alert?.active && globalState?.alert?.alertMessage ? <AlertBox/> : null}
+            {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
         </div>
 
     );

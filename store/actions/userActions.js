@@ -1,6 +1,6 @@
 import * as types from "../types";
 import axios from 'axios';
-import {DISPATCH_SOCKET_ID, GET_CONVERSATION, GET_CONVERSATIONS, GET_SPECIFIC_USER_DATA, GET_USER_PAGE_DATA} from "../types";
+import {DISPATCH_SOCKET_ID, GET_CONVERSATION, GET_CONVERSATIONS, GET_SPECIFIC_USER_DATA, GET_USER_PAGE_DATA, RESET_PASSWORD} from "../types";
 import {getUserPreviewData} from "../../_variables/_userSocialAjaxVariables";
 
 export const userLogin = (username, password) => async dispatch => {
@@ -25,6 +25,27 @@ export const autoUserLogin = (fields) => async dispatch => {
                 dispatch({
                     type: types.AUTO_LOGIN,
                     payload: {userData: res.data.userData, loggedIn: true}
+                })
+            })
+        }
+    } catch (err) {
+        console.log(err)
+    }
+}
+
+export const userResetPassword = (data) => async dispatch => {
+
+    try {
+        if (localStorage.wt) {
+            await axios.post('/api/v1/users/resetPassword', {token: localStorage.wt, data}).then(res => {
+                dispatch({
+                    type: types.SET_ALERT,
+                    payload: {message:res.data.message,type:'Success'}
+                })
+            }).catch(error=>{
+                dispatch({
+                    type: types.SET_ALERT,
+                    payload: {message:error.data.message,type:'Error'}
                 })
             })
         }

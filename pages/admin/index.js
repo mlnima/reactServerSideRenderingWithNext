@@ -12,13 +12,20 @@ const AdminHomePageStyledDiv = styled.div`
     justify-content: center;
     align-items: center;
     flex-wrap: wrap;
+
    .quick-access-link{
+     font-size: 12px;
      width: 150px;
      text-align: center;
      padding: 30px 10px;
      margin: 20px;
      color: white;
      background-color: black;
+     border-radius: 10px;
+     &:hover{
+       transition: .4s;
+       transform: scale(1.1);
+     }
    }
   }
 `

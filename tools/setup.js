@@ -41,8 +41,8 @@ const designData = {
     type: 'design',
     data: {
         customColors: `  
-     --main-text-color: #ccc;
-    --background-color: #000;
+    --main-text-color: #ccc;
+    --main-background-color: #000;
     --post-page-info-color:#ccc;
     --post-page-info-background-color:#181818;
     --meta-text-color:#000;
