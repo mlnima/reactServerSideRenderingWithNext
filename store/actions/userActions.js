@@ -1,12 +1,12 @@
 import * as types from "../types";
 import axios from 'axios';
-import {DISPATCH_SOCKET_ID, GET_CONVERSATION, GET_CONVERSATIONS, GET_SPECIFIC_USER_DATA, GET_USER_PAGE_DATA, RESET_PASSWORD} from "../types";
-import {getUserPreviewData} from "../../_variables/_userSocialAjaxVariables";
 
 export const userLogin = (username, password) => async dispatch => {
     try {
         await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/login', {username, password}).then(res => {
             res.data.token ? localStorage.setItem('wt', res.data.token) : null
+
+            console.log(res.data)
             dispatch({
                 type: types.LOGIN,
                 payload: {userData: res.data, loggedIn: true}
@@ -22,6 +22,7 @@ export const autoUserLogin = (fields) => async dispatch => {
     try {
         if (localStorage.wt) {
             await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
+
                 dispatch({
                     type: types.AUTO_LOGIN,
                     payload: {userData: res.data.userData, loggedIn: true}
@@ -45,7 +46,7 @@ export const userResetPassword = (data) => async dispatch => {
             }).catch(error=>{
                 dispatch({
                     type: types.SET_ALERT,
-                    payload: {message:error.data.message,type:'Error'}
+                    payload: {message:error.response.data.message,type:'Error'}
                 })
             })
         }
@@ -101,12 +102,6 @@ export const dispatchSocketId = socketId => dispatch => {
 }
 
 
-export const setUserPageData = userPageData => async dispatch => {
-    dispatch({
-        type: types.SET_USER_PAGE_DATA,
-        payload: userPageData
-    })
-}
 
 export const getConversations = _id => async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/getConversations',
@@ -142,5 +137,21 @@ export const newMessageInConversation = newMessage =>  dispatch => {
     dispatch({
         type: types.NEW_MESSAGE_IN_CONVERSATION,
         payload: newMessage
+    })
+}
+
+export const getUserPageData =  (username,_id,fields) => async dispatch => {
+    const body = {
+        username,
+        fields,
+        _id
+    }
+    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/getUserPreviewData', body).then(res=>{
+        dispatch({
+            type: types.GET_USER_PAGE_DATA,
+            payload: res.data.userData
+        })
+    }).catch(error=>{
+        console.log(error)
     })
 }

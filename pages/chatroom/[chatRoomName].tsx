@@ -8,18 +8,18 @@ import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoom
 import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
 import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-// @ts-ignore
-import _ from 'lodash';
 import {useDispatch, useSelector} from "react-redux";
 import {dispatchSocketId} from "../../store/actions/userActions";
 import {setChatroomUsers, setChatroomMessages, newMessage} from '../../store/actions/chatroomActions';
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
+import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {uniqBy} from 'lodash';
 
 const chatRoom = (props: ClientPagesTypes) => {
     const dispatch = useDispatch()
-    // @ts-ignore
-    const user = useSelector(state => state.user)
+
+    const user = useSelector((state: StoreTypes) => state.user)
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(true)
     const [isJoined, setIsJoined] = useState(false)
     const router = useRouter()
@@ -34,7 +34,7 @@ const chatRoom = (props: ClientPagesTypes) => {
 
         if (
             router.query.chatRoomName &&
-            user.userData.username &&
+            user.userData?.username &&
             user.userData._id &&
             !isJoined &&
             user.socketId
@@ -50,7 +50,7 @@ const chatRoom = (props: ClientPagesTypes) => {
             socket.emit('joinUserToTheRoom', userDataForJoiningRoom)
         }
 
-    }, [user.userData._id, user.socketId]);
+    }, [user.userData?._id, user.socketId]);
 
 
     useEffect(() => {
@@ -64,16 +64,16 @@ const chatRoom = (props: ClientPagesTypes) => {
             dispatch(dispatchSocketId(socketId))
         })
 
-        socket.on('onlineUsersList', (chatroomOnlineUsers: object[]) => {
-            dispatch(setChatroomUsers(_.uniqBy(chatroomOnlineUsers, (e: { username: string }) => e.username)))
+        socket.on('onlineUsersList', (chatroomOnlineUsers: { username: string }[]) => {
+            dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
         })
 
         socket.on('recentChatRoomMessages', (chatroomMessages: object[]) => {
             dispatch(setChatroomMessages(chatroomMessages))
         })
 
-        socket.on('userListUpdated', (chatroomOnlineUsers: object[]) => {
-            dispatch(setChatroomUsers(_.uniqBy(chatroomOnlineUsers, (e: { username: string }) => e.username)))
+        socket.on('userListUpdated', (chatroomOnlineUsers: { username: string }[]) => {
+            dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
         })
 
         socket.on('messageFromChatroom', (newMessageData: object) => {
@@ -89,8 +89,8 @@ const chatRoom = (props: ClientPagesTypes) => {
             <ChatRoomTools/>
             {
                 onlineUserListVisibility ?
-                <ChatRoomOnlineUsersList/> :
-                null
+                    <ChatRoomOnlineUsersList/> :
+                    null
             }
             <ChatRoomMessageUserInfoPopup/>
         </div>

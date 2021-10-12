@@ -53,11 +53,13 @@ export interface IdentitySettings {
 export interface User {
     _id?: string;
     username?: string;
-    role?: string
+    role?: string,
+    profileImage?:string
 }
 
 export interface UserState {
     userData?: User,
+    socketId?:string,
     loggedIn: boolean,
     userPageData?: object,
     conversations?: object[],

@@ -1,5 +1,5 @@
 import * as types from '../types'
-import {GET_COMMENTS, GET_POST, SET_POSTS_DATA} from "../types";
+import {DELETE_COMMENT, GET_COMMENTS, GET_POST, NEW_COMMENT, SET_POSTS_DATA} from "../types";
 import {HYDRATE} from "next-redux-wrapper";
 
 const initialState = {
@@ -51,6 +51,18 @@ export const postReducer = (state=initialState,action)=>{
                 ...state,
                 ...action.payload,
 
+            }
+        case  types.NEW_COMMENT:
+            const commentsPlusNewComment =  [...state.comments,action.payload]
+            return {
+                ...state,
+                comments: commentsPlusNewComment.sort((a,b)=>a.createdAt>b.createdAt ? -1 : 1)
+            }
+        case  types.DELETE_COMMENT:
+            const updatedComments = state.comments.filter(comment=> !action.payload.includes(comment._id))
+            return {
+                ...state,
+                comments:updatedComments
             }
         case  types.SET_POST:
 

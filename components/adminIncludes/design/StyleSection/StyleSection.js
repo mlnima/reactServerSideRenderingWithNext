@@ -43,7 +43,8 @@ const StyleSection = props => {
             <h1>{props.title}</h1>
             <div className='style-section-editor'>
                 <Editor
-                    language='scss'
+                    language={props.language || 'scss'}
+
                     theme="vs-dark"
                     height={'80vh'}
                     defaultValue={value}

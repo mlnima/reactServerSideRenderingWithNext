@@ -3,7 +3,7 @@ import axios from "axios";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import {getPosts,getPost} from "../../_variables/ajaxPostsVariables";
 import _postPageQueryGenerator from "../../_variables/clientVariables/_postPageQueryGenerator";
-import {GET_POST, SET_POSTS, SET_POSTS_DATA} from "../types";
+import {DELETE_COMMENT, GET_POST, NEW_COMMENT, SET_POSTS, SET_POSTS_DATA} from "../types";
 
 
 export const setPostsData = postsData => async dispatch=>{
@@ -12,10 +12,6 @@ export const setPostsData = postsData => async dispatch=>{
         payload:postsData
     })
 }
-
-
-
-
 
 export const fetchPosts = () => async dispatch=>{
     //test
@@ -47,4 +43,23 @@ export const fetchPost  = (_id,cache) => async dispatch=>{
     }).catch(error=>{
         console.log(error)
     })
+}
+
+export const addNewComment = (newComment)=>async dispatch=>{
+    dispatch({
+        type:types.NEW_COMMENT,
+        payload:newComment
+    })
+}
+
+export const deleteComments = (commentsListToDelete)=>async dispatch=>{
+   await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteComments`, {
+       commentsIds: commentsListToDelete,
+       token: localStorage.wt
+   }).then(()=>{
+       dispatch({
+           type:types.DELETE_COMMENT,
+           payload:commentsListToDelete
+       })
+   })
 }

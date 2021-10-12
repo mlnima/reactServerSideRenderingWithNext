@@ -11,6 +11,7 @@
 /static/uploads/*
 /temp.js
 /temp.html
+/temp.css
 generateFakeData.js
 tools/testAPI.js
 /package-lock.json

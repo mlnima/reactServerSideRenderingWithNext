@@ -2,5 +2,8 @@
   "New Password": "New Password",
   "Repeat New Password": "Repeat New Password",
   "Edit Profile": "Edit Profile",
-  "Change Password": "Change Password"
+  "Change Password": "Change Password",
+  "Your Password Has Been Changed": "Your Password Has Been Changed",
+  "Mismatch Passwords": "Mismatch Passwords",
+  "Wrong Password": "Wrong Password",
 }

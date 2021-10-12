@@ -12,7 +12,7 @@ import {withTranslation} from "next-i18next";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
 import {useDispatch, useSelector} from "react-redux";
-import {getSpecificUserData, setUserPageData} from "../../store/actions/userActions";
+import {getSpecificUserData, getUserPageData} from "../../store/actions/userActions";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -87,11 +87,14 @@ const user = (props: ClientPagesTypes) => {
 
     const getUserData = async () => {
         try {
-            const userPreviewData = await getUserPreviewData(
-                router.query.username,
+            // const userPreviewData = await getUserPreviewData(
+            //     router.query.username,
+            //     undefined,
+            //     ['following', 'followers', 'blockList']);
+          //  dispatch(setUserPageData(userPreviewData.data.userData))
+            dispatch(getUserPageData(  router.query.username,
                 undefined,
-                ['following', 'followers', 'blockList']);
-            dispatch(setUserPageData(userPreviewData.data.userData))
+                ['following', 'followers', 'blockList']))
             dispatch(getSpecificUserData(['following', 'followers', 'blockList']))
         } catch (err) {
             console.log(err)

@@ -1,10 +1,10 @@
-import { useContext, useRef } from 'react';
-import { newComment } from '../../../../../_variables/ajaxPostsVariables';
-import { AppContext } from '../../../../../context/AppContext';
-import withRouter from 'next/dist/client/with-router';
+import {useRef } from 'react';
+import {newComment } from '../../../../../_variables/ajaxPostsVariables';
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
-
+import {useDispatch, useSelector} from "react-redux";
+import {setLoginRegisterFormStatus} from "../../../../../store/actions/globalStateActions";
+import {addNewComment} from "../../../../../store/actions/postAction";
 
 const CommentFromStyledForm = styled.form`
  
@@ -35,47 +35,54 @@ const CommentFromStyledForm = styled.form`
     border:none;
     margin: 5px;
     max-width: 150px;
+    cursor: pointer;
   }
 `
+
 const CommentFrom = props => {
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
+    const userData = useSelector(state => state.user.userData)
     const bodyInput = useRef(null);
 
     const onSubmitHandler = e => {
         e.preventDefault();
-        if (contextData.userData._id){
+
+        if (userData._id){
             const commentData = {
                 body: bodyInput.current.value,
-                author: contextData.userData._id,
+                author: userData._id,
                 onDocumentId: props.documentId,
             };
             if (props.documentId) {
                 newComment(commentData).then(res => {
                     bodyInput.current.value=''
-                    // props.router.push({
-                    //     pathname:props.router.pathname,
-                    //     query:props.router.query
-                    // });
-                    props.reGetComments()
-
+                    const now =  new Date(Date.now())
+                    dispatch(addNewComment({
+                        ...commentData,
+                        createdAt:now.toISOString(),
+                        updatedAt:now.toISOString() ,
+                        reply: [],
+                        likes: 0,
+                        disLikes: 0,
+                        status: 'approved',
+                        author: {
+                            _id:  userData._id,
+                            username:  userData.username,
+                            profileImage: userData.profileImage
+                        },
+                    }))
                 }).catch(err => {
                     console.log(err)
                 });
-            };
+            }
         }else {
-            contextData.dispatchState({
-                ...contextData.state,
-                loginRegisterFormPopup:true
-            })
+            dispatch(setLoginRegisterFormStatus('login'))
         }
-
     }
 
     return (
         <CommentFromStyledForm className='comment-form' onSubmit={ e => onSubmitHandler(e) }>
-
-            <div >
-
+            <div>
                 <div className='comment-form-input'>
                     <textarea ref={ bodyInput } required={ true } placeholder={props.t(`common:Write a Comment`)} name='body'/>
                 </div>

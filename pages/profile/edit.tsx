@@ -27,9 +27,7 @@ const EditProfileStyledMain = styled.main`
     width: 300px;
     border: var(--default-border);
     box-sizing: border-box;
-
-
-
+    
     .reset-password-form-field:last-of-type {
       margin-bottom: 20px;
     }
@@ -41,6 +39,10 @@ const EditProfileStyledMain = styled.main`
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
+      .password-info{
+        margin: 5px 0;
+        font-size: x-small;
+      }
       p {
         width: 100%;
       }
@@ -117,7 +119,9 @@ const edit = (props: ClientPagesTypes) => {
                     <ValidInput valid={changePasswordDataValidator.repeatNewPassword}/>
                 </div>
 
-                <PrimaryButton type='submit'>Change Password</PrimaryButton>
+                <PrimaryButton type='submit'>
+                    {props.t(`profile:Change Password`)}
+                </PrimaryButton>
             </form>
 
         </EditProfileStyledMain>

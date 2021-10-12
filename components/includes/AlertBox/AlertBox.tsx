@@ -8,6 +8,7 @@ import {CloseButton} from "../../global/Styles/Buttons";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {faCheckCircle, faExclamationCircle, faExclamationTriangle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {withTranslation} from "next-i18next";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -28,22 +29,29 @@ let StyledDiv = styled.div`
     .alert-message-header{
       background-color: var(--popup-header-color,#202020);
       display: flex;
+      align-items: center;
       justify-content: space-between;
       border-radius: 5px  5px 0 0;
+      padding: 5px 0;
       .close-alert{
         color: var(--navigation-text-color,#ccc);;
         background-color: transparent;
         border: none;
+        margin: 0;
+        padding: 0 10px;
         svg{
-          width: 20px;
-          height: 20px;
+          width: 25px;
+          height: 25px;
+          
         }
       }
       .alert-type{
-        padding: 0 5px;
+        padding: 0 10px;
+        margin: 0;
+     
         svg{
-          width: 20px;
-          height: 20px;
+          width: 25px;
+          height: 25px;
         }
       }
     }
@@ -53,7 +61,9 @@ let StyledDiv = styled.div`
     }
   }
 `
-const AlertBox = () => {
+
+// @ts-ignore
+const AlertBox = ({t}) => {
     const dispatch = useDispatch()
     const alert = useSelector((state : StoreTypes) => state.globalState.alert)
 
@@ -72,7 +82,9 @@ const AlertBox = () => {
                            <FontAwesomeIcon icon={faTimes} />
                        </CloseButton>
                    </div>
-                   <p className='alert'>{alert.message}</p>
+                   <p className='alert'>
+                       {t([`common:${alert.message}`, t(`profile:${alert.message}`)])}
+                   </p>
                </div>
                 </Draggable>
             </StyledDiv>
@@ -80,4 +92,4 @@ const AlertBox = () => {
         );
 
 };
-export default AlertBox;
+export default withTranslation(['common', 'customTranslation', 'profile'])(AlertBox);

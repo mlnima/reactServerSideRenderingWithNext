@@ -19,6 +19,11 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                 ...state,
                 userPageData:action.payload
             }
+        case  types.GET_USER_PAGE_DATA:
+            return {
+                ...state,
+                userPageData:action.payload
+            }
         case  types.AUTO_LOGIN:
             return {
                 ...state,

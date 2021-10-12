@@ -30,6 +30,7 @@ module.exports = async (req, res) => {
                             keyMaster: user.keyMaster,
                             profileImage: user.profileImage,
                             coverImage: user.coverImage,
+                            _id:user._id,
                             message: 'Login successful',
                         });
                         res.end()

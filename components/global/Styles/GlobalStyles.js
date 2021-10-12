@@ -2,21 +2,18 @@
 import {createGlobalStyle} from "styled-components";
 
 let GlobalStyles = createGlobalStyle`
-  :root {
-    ${props => props.colors}
-  }
-
+  ${props => props.colors.includes(':root') ? props.colors :`:root {${props.colors}}`}
   body {
-    background-color: var(--main-background-color,#000);
+    background-color: var(--main-background-color, #000);
     margin: 0;
-    color:var(--main-text-color,'#ccc');
+    color: var(--main-text-color, '#ccc');
     font-family: Montserrat, Verdana, sans-serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 12px;
   }
-  
-  .main{
+
+  .main {
     min-height: 100vh;
   }
 
@@ -28,11 +25,11 @@ let GlobalStyles = createGlobalStyle`
   .post-element-info-logo {
     max-width: 25px;
     max-height: 25px;
-    color: var(--post-element-text-color,#ccc);
+    color: var(--post-element-text-color, #ccc);
   }
 
   .value-next-icon {
-    color: var(--post-element-text-color,#ccc);
+    color: var(--post-element-text-color, #ccc);
     margin: 0 5px;
   }
 
@@ -41,7 +38,7 @@ let GlobalStyles = createGlobalStyle`
     display: flex;
     align-items: center;
     padding: 1px 3px;
-    color: var(--post-element-text-color,#ccc);
+    color: var(--post-element-text-color, #ccc);
   }
 
 
@@ -57,7 +54,8 @@ let GlobalStyles = createGlobalStyle`
           'leftSidebar'
           'footer';
   }
-  .sidebar{
+
+  .sidebar {
     grid-area: sidebar;
   }
 
@@ -99,8 +97,8 @@ let GlobalStyles = createGlobalStyle`
   }
 
   @media only screen and (min-width: 768px) {
-    
-    body{
+
+    body {
       font-size: 14px;
     }
 
@@ -135,6 +133,7 @@ let GlobalStyles = createGlobalStyle`
     .withOutSidebar {
       grid-template-columns: 1fr;
     }
+    
 
     .simple-button {
       background-color: transparent;
@@ -143,8 +142,8 @@ let GlobalStyles = createGlobalStyle`
     }
 
   }
-  
-  .action-client-button-link{
+
+  .action-client-button-link {
     background-color: transparent;
     border-radius: 5px;
     cursor: pointer;

@@ -1,8 +1,9 @@
 import Link from "next/link";
 import moment from "moment";
-import {deleteComments} from "../../../../../../_variables/ajaxPostsVariables";
+
 import styled from "styled-components";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
+import {deleteComments} from "../../../../../../store/actions/postAction";
 
 const CommentStyledDiv = styled.div`
   display: flex;
@@ -38,13 +39,10 @@ const CommentStyledDiv = styled.div`
 const Comment = props => {
 
     const userData = useSelector(state => state.user.userData)
+    const dispatch = useDispatch()
 
     const onDeleteHandler = (id) => {
-        deleteComments([id], process.env.NEXT_PUBLIC_PRODUCTION_URL).then(() => {
-            props.reGetComments()
-        }).catch(err => {
-            console.log(err)
-        })
+        dispatch(deleteComments([id]))
     }
 
     return (

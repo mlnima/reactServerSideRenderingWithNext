@@ -1,6 +1,6 @@
 import Comment from "./Comment/Comment";
-import _ from "lodash";
 import styled from "styled-components";
+import {useSelector} from "react-redux";
 
 const CommentsRendererStyledDiv = styled.div`
   display: flex;
@@ -11,12 +11,13 @@ const CommentsRendererStyledDiv = styled.div`
   max-width: 90%;
   padding: 5px;
 `
-const CommentsRenderer = props => {
+const CommentsRenderer = () => {
+    const comments = useSelector(state => state.posts.comments)
 
     return (
         <CommentsRendererStyledDiv className='comments'>
-            {props.comments.map(comment => {
-                return (<Comment key={_.uniqueId(`comment_`)} reGetComments={props.reGetComments} comment={comment}/>)
+            {comments.map((comment, index) => {
+                return (<Comment key={index} comment={comment}/>)
             })}
         </CommentsRendererStyledDiv>
     );
