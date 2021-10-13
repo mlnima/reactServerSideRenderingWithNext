@@ -16,8 +16,11 @@ const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl, linkNam
                     <a className={'menu-widget-item-link'}
                        rel='next'
                        onClick={()=>linkTargetUrl.includes('#') ? null : mobileNavigationOnClickHandler(linkTargetUrl)}
-                       title={linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}>
+                       title={linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}
+                       // style={{backgroundColor: router.asPath === linkTargetUrl ? 'var(--main-active-color,#f90)': 'initial'}}
+                    >
                         {linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}
+
                     </a>
                 </Link> :
                 <a className='menu-widget-item-link' href={linkTargetUrl}>{linkName}</a>

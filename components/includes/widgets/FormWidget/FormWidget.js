@@ -88,7 +88,7 @@ const FormWidget = props => {
     }
 
 
-    const renderFields = (props.formData.formFields.sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || []).map(field => {
+    const renderFields = ((props.formData.formFields||[]).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || []).map(field => {
         if (field.fieldType === 'textarea') {
             return (
                 <div className='form-widget-field' key={(props.formData.formFields || []).indexOf(field)}>

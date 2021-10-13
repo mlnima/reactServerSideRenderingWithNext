@@ -49,6 +49,11 @@ export const userResetPassword = (data) => async dispatch => {
                     payload: {message:error.response.data.message,type:'Error'}
                 })
             })
+        }else {
+            dispatch({
+                type: types.SET_ALERT,
+                payload: {message:'You Need To Login',type:'Error'}
+            })
         }
     } catch (err) {
         console.log(err)

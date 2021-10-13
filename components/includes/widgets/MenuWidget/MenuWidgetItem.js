@@ -3,8 +3,10 @@ import { faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import MenuWidgetItemLink from "./MenuWidgetItemLink";
 import styled from "styled-components";
+import {useRouter} from "next/router";
 
 const MenuWidgetSubItemStyledLi = styled.li`
+  
   .menu-widget-sub-item {
     display: ${props=>props.showSub ? 'initial' : 'none'};
     z-index: 10;
@@ -23,6 +25,7 @@ const MenuWidgetSubItemStyledLi = styled.li`
 `
 
 const MenuWidgetStyledLi = styled.li`
+
   list-style-type: none;
   width: 90%;
   padding: 10px 0;
@@ -74,15 +77,11 @@ const MenuWidgetStyledLi = styled.li`
   @media only screen and (min-width: 768px) {
       font-size: 1rem;
       width: ${props=> !props.menuItem.parent ? (props.menuItem.subItems || []).length > 0 ? 'auto' : 'auto' : '50px '};
-      background-color: transparent;
   }
 `
 
-
-
-
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler}) => {
-
+    const router = useRouter()
     const [showSub, setShowSub] = useState(false)
     const renderSubMenus = (menuItem.subItems || []).map((subItem,index) => {
 
@@ -108,7 +107,12 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
 
     return (
 
-        <MenuWidgetStyledLi menuItem={menuItem}  className='menu-widget-item' onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null} onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}>
+        <MenuWidgetStyledLi menuItem={menuItem}
+                            className={`menu-widget-item ${router.asPath === menuItem?.target ? 'btn btn-primary':''}`}
+                            onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
+                            onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
+                            isActive={ router.asPath === menuItem?.target}
+        >
 
 
             <MenuWidgetItemLink
@@ -120,6 +124,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                 linkTranslations={menuItem?.translations}
                 showSub={showSub}
                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+
             />
             {menuItem?.subItems?.length > 0 ?
                 <span className='open-submenus' aria-label='Center Align' onClick={onOpenSubmenusHandler}>

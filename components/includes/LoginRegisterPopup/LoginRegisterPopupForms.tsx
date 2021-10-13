@@ -11,8 +11,6 @@ import Draggable from 'react-draggable';
 import {StoreTypes, InputOnChangeHandlerTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import _passwordValidator from "../../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
-import {FormInput, FormInputWithValidator} from "../../global/Styles/Inputs";
-
 
 const LoginRegisterPopupFormsStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -282,12 +280,12 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                         <div className="login-register-form-fields">
                             <div className="login-register-form-field">
                                 <p>{props.t(`common:Username`)}</p>
-                                <FormInputWithValidator required={true} name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
+                                <input className={'form-control-input form-control-input-validator'} required={true} name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
                                 <ValidInput valid={stateValidator.username}/>
                             </div>
                             <div className="login-register-form-field">
                                 <p>{props.t(`common:Email`)}</p>
-                                <FormInputWithValidator autoComplete="off" required={true} name='email' value={state.email} type='email' onChange={e => onChangeHandler(e)}/>
+                                <input className={'form-control-input form-control-input-validator'} autoComplete="off" required={true} name='email' value={state.email} type='email' onChange={e => onChangeHandler(e)}/>
 
                                 <ValidInput valid={stateValidator.email}/>
                             </div>
@@ -309,15 +307,15 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                                 <p>{props.t(`common:Password`)} </p>
                                 {
                                     !stateValidator.password ?
-                                        <span className='password-info'>{props.t(`common:Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $`)}</span> :
+                                        <span className='password-info'>{props.t(`common:Minimum eight characters, at least one letter and one number`)}</span> :
                                         null
                                 }
-                                <FormInputWithValidator type='password' autoComplete="off" name='password' required={true} value={state.password}  onChange={e => onChangeHandler(e)}/>
+                                <input className={'form-control-input form-control-input-validator'} type='password' autoComplete="off" name='password' required={true} value={state.password}  onChange={e => onChangeHandler(e)}/>
                                 <ValidInput valid={stateValidator.password}/>
                             </div>
                             <div className="login-register-form-field">
                                 <p>{props.t(`common:Repeat Password`)}</p>
-                                <FormInputWithValidator type='password' autoComplete="off" name='password2'  required={true} value={state.password2}  onChange={e => onChangeHandler(e)}/>
+                                <input className={'form-control-input form-control-input-validator'} type='password' autoComplete="off" name='password2'  required={true} value={state.password2}  onChange={e => onChangeHandler(e)}/>
                                 <ValidInput valid={stateValidator.password2}/>
                             </div>
                         </div>
@@ -336,12 +334,12 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">
                                     <p>{props.t(`common:Username`)}</p>
-                                    <FormInputWithValidator name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
+                                    <input className={'form-control-input form-control-input-validator'} name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
                                     <ValidInput valid={stateValidator.username}/>
                                 </div>
                                 <div className="login-register-form-field">
                                     <p>{props.t(`common:Password`)}</p>
-                                    <FormInput name='password' value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
+                                    <input className={'form-control-input'} name='password' value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
                                 </div>
                             </div>
                             <button disabled={!stateValidator.username && !state.password} type='submit' className='login-register-form-button simple-button'>{props.t(`common:Login`)}</button>

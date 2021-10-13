@@ -22,6 +22,7 @@ const conversation = (props: ClientPagesTypes) => {
     const router = useRouter();
 
     const userData = useSelector((state:StoreTypes) => state.user.userData);
+    const messages = useSelector((state :StoreTypes) => state.user.activeConversation?.messages);
     const settings = useSelector((state: StoreTypes) => state.settings);
     const activeConversation = useSelector((state: StoreTypes) => state.user.activeConversation);
     // @ts-ignore
@@ -83,7 +84,6 @@ const conversation = (props: ClientPagesTypes) => {
 
         socket.on('receiveMessageFromConversation', (messageData:{conversationId:string}) => {
             if (messageData.conversationId === router.query.conversation){
-
                 dispatch(newMessageInConversation(messageData))
             }
         })

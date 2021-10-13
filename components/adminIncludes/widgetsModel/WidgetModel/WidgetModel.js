@@ -228,7 +228,7 @@ const WidgetModel = props => {
 
                     <div className='selectInputFieldForWidget widgetSection'>
                         <p>Edit Mode:</p>
-                        <input type='checkbox' name='editMode' checked={widgetData.editMode} onChange={e => onCheckboxChangeHandler(e)}/>
+                        <input className='form-control-input' type='checkbox' name='editMode' checked={widgetData.editMode} onChange={e => onCheckboxChangeHandler(e)}/>
                     </div>
                     <div className='widgetInfo widgetSection'>
                         <p className='widget-info-id'>ID :</p>

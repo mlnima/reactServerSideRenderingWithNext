@@ -90,7 +90,7 @@ const Profile = (props:ClientPagesTypes) => {
             <div className='profile-page-info'>
                 <p className='profile-username'>{ userData?.username ? userData.username :''}</p>
                 <Link href={'/profile/edit'}>
-                    <a className='profile-page-info-edit-link'>
+                    <a className='btn-secondary btn profile-page-info-edit-link'>
                         Edit
                     </a>
                 </Link>

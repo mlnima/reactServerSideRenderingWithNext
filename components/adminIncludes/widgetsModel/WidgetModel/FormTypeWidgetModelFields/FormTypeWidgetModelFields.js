@@ -35,15 +35,15 @@ const FormTypeWidgetModelFields = props => {
         return (
             <>
                 <p>Form Name :</p>
-                <input name='formName' type='text' value={props.widgetData.formData.formName}
+                <input name='formName' type='text' value={props.widgetData.formData?.formName}
                             onChange={e => onChangeHandler(e)}/>
                 <p>Form Title :</p>
-                <input name='formTitle' type='text' value={props.widgetData.formData.formTitle}
+                <input name='formTitle' type='text' value={props.widgetData.formData?.formTitle}
                              onChange={e => onChangeHandler(e)}/>
                 <p>After Submit Message :</p>
-                <input type='text' name='afterSubmitMessage' value={props.widgetData.formData.afterSubmitMessage}  onChange={e => onChangeHandler(e)}/>
+                <input type='text' name='afterSubmitMessage' value={props.widgetData.formData?.afterSubmitMessage}  onChange={e => onChangeHandler(e)}/>
                 <p>Submit button text :</p>
-                <input name='submitButtonText' type='text' value={props.widgetData.formData.submitButtonText}
+                <input name='submitButtonText' type='text' value={props.widgetData.formData?.submitButtonText}
                        onChange={e => onChangeHandler(e)}/>
                 <AddFormConditional state={state} setState={setState} {...props} />
                 <h4>Edit Existing Fields</h4>

@@ -74,6 +74,7 @@
   "Passwords are not matched": "Passwörter stimmen nicht überein",
   "Login successful": "Anmeldung erfolgreich",
   "Use 8 or more characters with a mix of letters, numbers & symbols": "Verwenden Sie 8 oder mehr Zeichen mit einer Mischung aus Buchstaben, Zahlen und Symbolen",
+  "Minimum eight characters, at least one letter and one number": "Mindestens acht Zeichen, mindestens ein Buchstabe und eine Zahl",
   "Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $": "Mindestens 8 Zeichen, mindestens 1 Großbuchstabe, 1 Kleinbuchstabe, 1 Zahl und 1 Sonderzeichen wie $",
 
   "View Profile": "Profil anzeigen",

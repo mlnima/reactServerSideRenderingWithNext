@@ -4,7 +4,7 @@ import styled from "styled-components";
 import {useDispatch, useSelector} from 'react-redux';
 import {closeAlert} from "../../../store/actions/globalStateActions";
 import Draggable from 'react-draggable';
-import {CloseButton} from "../../global/Styles/Buttons";
+
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {faCheckCircle, faExclamationCircle, faExclamationTriangle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -78,9 +78,9 @@ const AlertBox = ({t}) => {
                                     <FontAwesomeIcon icon={faExclamationCircle}  style={{color:'red'}}/>
                            }
                        </p>
-                       <CloseButton className='close-alert' onClick={()=>dispatch(closeAlert())}>
+                       <button className='close-alert' onClick={()=>dispatch(closeAlert())}>
                            <FontAwesomeIcon icon={faTimes} />
-                       </CloseButton>
+                       </button>
                    </div>
                    <p className='alert'>
                        {t([`common:${alert.message}`, t(`profile:${alert.message}`)])}

@@ -53,14 +53,14 @@ const WidgetModelStyles = props => {
                     margin: 0 10px;
                   }
 
-                  input, select {
-                    display: block;
-                    width: 50%;
-                    -ms-box-sizing: content-box;
-                    -moz-box-sizing: content-box;
-                    -webkit-box-sizing: content-box;
-                    box-sizing: content-box;
-                  }
+                  //input, select {
+                  //  display: block;
+                  //  width: 50%;
+                  //  -ms-box-sizing: content-box;
+                  //  -moz-box-sizing: content-box;
+                  //  -webkit-box-sizing: content-box;
+                  //  box-sizing: content-box;
+                  //}
                 }
 
                 textarea {
@@ -80,10 +80,10 @@ const WidgetModelStyles = props => {
                   margin: 5px;
                 }
 
-                input, select {
-                  background-color: #181818;
-                  color: white;
-                }
+                //input, select {
+                //  background-color: #181818;
+                //  color: white;
+                //}
 
                 .control-buttons {
                   display: flex;

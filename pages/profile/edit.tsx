@@ -5,12 +5,11 @@ import {withTranslation} from "next-i18next";
 import styled from "styled-components";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
-import {PrimaryButton} from '../../components/global/Styles/Buttons'
 import {useSelector, useDispatch} from "react-redux";
 import {userResetPassword} from "../../store/actions/userActions";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
-import {FormInput,FormInputWithValidator} from '../../components/global/Styles/Inputs'
+
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -25,7 +24,6 @@ const EditProfileStyledMain = styled.main`
     flex-direction: column;
     justify-content: flex-start;
     width: 300px;
-    border: var(--default-border);
     box-sizing: border-box;
     
     .reset-password-form-field:last-of-type {
@@ -96,7 +94,7 @@ const edit = (props: ClientPagesTypes) => {
 
                 <div className='reset-password-form-field'>
                     <p>{props.t([`common:Password`])}</p>
-                    <FormInput type="password" autoComplete="off" name={'password'} value={changePasswordData.password} onChange={e => onChangePasswordInputsHandler(e)}/>
+                    <input className={'form-control-input'} type="password" autoComplete="off" name={'password'} value={changePasswordData.password} onChange={e => onChangePasswordInputsHandler(e)}/>
 
                 </div>
 
@@ -108,20 +106,20 @@ const edit = (props: ClientPagesTypes) => {
                             <span className='password-info'>{props.t(`common:Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $`)}</span> :
                             null
                     }
-                    <FormInputWithValidator type="password" autoComplete="off" name={'newPassword'} value={changePasswordData.newPassword} onChange={e => onChangePasswordInputsHandler(e)}/>
+                    <input className={'form-control-input form-control-input-validator'} type="password" autoComplete="off" name={'newPassword'} value={changePasswordData.newPassword} onChange={e => onChangePasswordInputsHandler(e)}/>
                     <ValidInput valid={changePasswordDataValidator.newPassword}/>
                 </div>
 
 
-                <div className='reset-password-form-field'>
+                <div className={'reset-password-form-field'}>
                     <p>{props.t(`profile:Repeat New Password`)}</p>
-                    <FormInputWithValidator type="password" autoComplete="off" name={'repeatNewPassword'} value={changePasswordData.repeatNewPassword} onChange={e => onChangePasswordInputsHandler(e)}/>
+                    <input className={'form-control-input form-control-input-validator'} type={'password'} autoComplete="off" name={'repeatNewPassword'} value={changePasswordData.repeatNewPassword} onChange={e => onChangePasswordInputsHandler(e)}/>
                     <ValidInput valid={changePasswordDataValidator.repeatNewPassword}/>
                 </div>
 
-                <PrimaryButton type='submit'>
+                <button type='submit' className={'btn btn-warning'}>
                     {props.t(`profile:Change Password`)}
-                </PrimaryButton>
+                </button>
             </form>
 
         </EditProfileStyledMain>

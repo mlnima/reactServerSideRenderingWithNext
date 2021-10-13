@@ -40,13 +40,13 @@ const AdminPanelGlobalStyles = () => {
                 -moz-osx-font-smoothing: grayscale;
               }
 
-              select, input {
-                background-color: var(--admin-input-background-color);
-                color: var(--admin-input-text-color);
-                border: 1px solid #ccc;
-                padding: 7px 3px;
-                line-height: 100%;
-              }
+              //select, input {
+              //  background-color: var(--admin-input-background-color);
+              //  color: var(--admin-input-text-color);
+              //  border: 1px solid #ccc;
+              //  padding: 7px 3px;
+              //  line-height: 100%;
+              //}
 
               button,.link-as-button {
                 background: var(--admin-button-background-color);

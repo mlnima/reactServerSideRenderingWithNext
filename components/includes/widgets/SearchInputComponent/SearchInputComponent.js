@@ -5,45 +5,17 @@ import styled from "styled-components";
 
 const SearchInputComponentStyledForm = styled.form`
   display: flex;
-  height: 35px;
   width: clamp(100px, 200px, 400px);
   font-size: 1em;
 
-  .search-input {
-    display: flex;
-    justify-content: center;
-    width: 80%;
-    margin-right: 0;
-    border: none;
-    padding: 0 5px;
-
-    &:focus {
-      outline: none;
-    }
+  .btn-primary{
+    border-radius: 0 .25rem .25rem 0;
   }
-
-  .search-button {
-    width: 20%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    outline: none;
-    padding: 0.2em;
-    margin-left: 0;
-    border: none;
-    color: var(--main-text-color);
-    background-color: var(--main-active-color,#f90);
-    &:focus {
-      outline: none;
-    }
-    &:active {
-      border: none;
-    }
+  .form-control-input{
+    border-radius:  .25rem 0 0 .25rem ;
   }
-  
   @media only screen and (min-width: 768px) {
     display: flex;
-    height: 24px;
     width: clamp(250px, 400px, 600px);
     font-size: 1em;
   }
@@ -75,8 +47,8 @@ const SearchInputComponent = ({t}) => {
 
     return (
             <SearchInputComponentStyledForm className='search-bar' onSubmit={e => onSearchHandler(e)}>
-                <input className='search-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder={t([`common:Search...`])}/>
-                <button className='search-button' aria-label='Center Align' type='submit'>
+                <input className='form-control-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder={t([`common:Search...`])}/>
+                <button className='btn btn-primary' aria-label='Center Align' type='submit'>
                     {t([`common:Search`])}
                 </button>
             </SearchInputComponentStyledForm>
