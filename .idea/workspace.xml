@@ -21,13 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponentPageLink.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -836,7 +831,7 @@
       <workItem from="1633770286470" duration="8829000" />
       <workItem from="1633856183521" duration="8853000" />
       <workItem from="1633944953843" duration="7170000" />
-      <workItem from="1634033465351" duration="21348000" />
+      <workItem from="1634033465351" duration="22489000" />
     </task>
     <servers />
   </component>

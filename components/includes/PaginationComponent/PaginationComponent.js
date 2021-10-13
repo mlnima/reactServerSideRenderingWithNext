@@ -17,6 +17,7 @@ const PaginationComponentStyledDiv = styled.div`
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
+
     
   }
 `
@@ -32,7 +33,7 @@ const PaginationComponent = props => {
             <PaginationComponentStyledDiv className='pagination' page={router.query?.page} pageNumber={props.pageNumber}>
                 {
                     rangeWithMinMax.map((pageNumber,index) => {
-                        const currentPage = router.query?.page ? parseInt(router.query?.page): 0;
+                        const currentPage = router?.query?.page ? parseInt(router.query?.page): 1;
 
                         return (
                             <PaginationComponentPageLink
