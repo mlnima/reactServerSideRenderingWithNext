@@ -14,40 +14,43 @@ const ChatRoomToolsStyledFrom = styled.form`
   bottom: 0;
   height: 50px;
   padding: 2px;
-  background-color: var(--navigation-background-color,#18181b);
+  background-color: var(--navigation-background-color, #18181b);
   display: flex;
   justify-content: center;
   align-items: center;
   width: 100%;
 
-  .chatroom-someone-typing{
+  .chatroom-someone-typing {
     position: absolute;
-    top:-14px;
+    top: -14px;
     left: 10px;
-    background-color: var(--navigation-background-color,#18181b);
+    background-color: var(--navigation-background-color, #18181b);
     color: var(--navigation-text-color, #ccc);
   }
-  
-  .chatroom-tools-text{
+
+  .chatroom-tools-text {
     display: flex;
     justify-content: center;
     width: 100%;
-    .chatroom-tools-content-input{
+
+    .chatroom-tools-content-input {
       border-radius: 50px;
       height: 27px;
       width: 100%;
       padding: 5px 5px;
     }
   }
-  .chatroom-tools-Send{
+
+  .chatroom-tools-Send {
     z-index: 10;
     position: absolute;
     display: flex;
     justify-content: center;
     align-items: center;
     right: 8px;
-    .chatroom-tools-content-submit-button{
-      background-color: var(--navigation-background-color,#18181b);
+
+    .chatroom-tools-content-submit-button {
+      background-color: var(--navigation-background-color, #18181b);
       border: none;
       width: 34px;
       height: 34px;
@@ -57,15 +60,16 @@ const ChatRoomToolsStyledFrom = styled.form`
       align-items: center;
     }
   }
-  .chatroom-tools-Send-color-picker-input{
+
+  .chatroom-tools-Send-color-picker-input {
     position: absolute;
     width: 34px;
     height: 34px;
     right: 48px;
-    background-color: ${props=>props.color};
+    background-color: ${props => props.color};
     border: none;
     outline: none;
-    padding:0;
+    padding: 0;
     margin: 0;
   }
 `
@@ -73,11 +77,16 @@ const ChatRoomToolsStyledFrom = styled.form`
 const ChatRoomTools = () => {
     const dispatch = useDispatch()
     const userData = useSelector(state => state.user.userData)
-    const colorPicker= useRef(null)
+    const colorPicker = useRef(null)
     const router = useRouter()
+
+    // useEffect(() => {
+    //     console.log(userData)
+    // }, [userData]);
+
     const [state, setState] = useState({
         messageData: '',
-        color:'var(--navigation-text-color, #ccc)'
+        color: 'var(--navigation-text-color, #ccc)'
     });
 
     const [someoneTypes, setSomeoneTypes] = useState({
@@ -93,17 +102,19 @@ const ChatRoomTools = () => {
     }
 
     const onSubmitHandler = e => {
+
         e.preventDefault()
-        if (userData._id && state.messageData.length >0) {
+        console.log(userData)
+        if (userData._id && state.messageData.length > 0) {
             const newMessageData = {
-                messageData:state.messageData,
-                roomName:router.query.chatRoomName,
-                username:userData.username,
-                id:userData._id,
-                profileImage:userData.profileImage,
-                color:state.color,
+                messageData: state.messageData,
+                roomName: router.query.chatRoomName,
+                username: userData.username,
+                id: userData._id,
+                profileImage: userData.profileImage,
+                color: state.color,
                 createdAt: Date.now(),
-                type:'message',
+                type: 'message',
             }
             socket.emit('messageToChatroom', newMessageData)
 
@@ -134,34 +145,34 @@ const ChatRoomTools = () => {
 
 
     useEffect(() => {
-        if (someoneTypes.active){
-            setTimeout(()=>{
+        if (someoneTypes.active) {
+            setTimeout(() => {
                 setSomeoneTypes({
                     ...someoneTypes,
-                    username:'',
+                    username: '',
                     active: false
                 })
-            },3000)
+            }, 3000)
         }
     }, [someoneTypes]);
 
 
     return (
-            <ChatRoomToolsStyledFrom className='chatroom-tools' onSubmit={e => onSubmitHandler(e)} color={state.color}>
+        <ChatRoomToolsStyledFrom className='chatroom-tools' onSubmit={e => onSubmitHandler(e)} color={state.color}>
 
-                {someoneTypes.active ? <span className='chatroom-someone-typing'> {someoneTypes.username} is typing </span> : null}
-                <div className='chatroom-tools-text'>
-                    <input maxLength='300' className='chatroom-tools-content-input' type='text' name='messageData' onChange={e => onChangeHandler(e)} onClick={onStartTypingHandler} value={state.messageData}/>
-                </div>
+            {someoneTypes.active ? <span className='chatroom-someone-typing'> {someoneTypes.username} is typing </span> : null}
+            <div className='chatroom-tools-text'>
+                <input maxLength='300' className='chatroom-tools-content-input' type='text' name='messageData' onChange={e => onChangeHandler(e)} onClick={onStartTypingHandler} value={state.messageData}/>
+            </div>
 
-                <input ref={colorPicker} className='chatroom-tools-Send-color-picker-input' name='color' type='color' value={state.color} onChange={e => onChangeHandler(e)} />
-                <div className='chatroom-tools-Send'>
-                    <button className='chatroom-tools-content-submit-button' type='submit'>
-                        <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faArrowRight}/>
-                    </button>
-                </div>
+            <input ref={colorPicker} className='chatroom-tools-Send-color-picker-input' name='color' type='color' value={state.color} onChange={e => onChangeHandler(e)}/>
+            <div className='chatroom-tools-Send'>
+                <button className='chatroom-tools-content-submit-button' type='submit'>
+                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faArrowRight}/>
+                </button>
+            </div>
 
-            </ChatRoomToolsStyledFrom>
+        </ChatRoomToolsStyledFrom>
 
     );
 };

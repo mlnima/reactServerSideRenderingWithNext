@@ -3,6 +3,7 @@ import moment from "moment";
 
 class ChatRoomMessage extends PureComponent {
 
+
     render() {
         if (this.props.message.type === 'log') {
             return (
@@ -80,7 +81,8 @@ class ChatRoomMessage extends PureComponent {
                 `}</style>
 
                 <img onClick={() => {
-                    this.props.onShowProfileHandler(this.props.message.username, this.props.message.userId, this.props.message.profileImage)
+
+                    this.props.onShowProfileHandler(this.props.message.username, this.props.message.id, this.props.message.profileImage)
                 }} className='chatroom-message-area-message-image' src={this?.props?.message?.profileImage ? this.props.message.profileImage : '/public/asset/images/user/noGenderAvatar50.jpg'} alt=""/>
 
                 <div className='chatroom-message-area-message-data'>

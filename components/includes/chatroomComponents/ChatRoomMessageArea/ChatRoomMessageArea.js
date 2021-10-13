@@ -28,10 +28,11 @@ const ChatRoomMessageArea = () => {
         })
     }, [chatroomMessages]);
 
-    const onShowProfileHandler = (username,userId,profileImage)=>{
+
+    const onShowProfileHandler = (username,_id,profileImage)=>{
          dispatch(setActiveVisibleProfile({
             username,
-            userId,
+             _id,
             profileImage,
         }))
     }
@@ -47,7 +48,7 @@ const ChatRoomMessageArea = () => {
                         <ChatRoomMessage
                             message={message}
                             key={index}
-                            onShowProfileHandler={onShowProfileHandler}
+                           onShowProfileHandler={onShowProfileHandler}
                         />
                     )
                 }

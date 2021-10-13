@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import {useDispatch} from "react-redux";
 import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
 
@@ -10,7 +10,7 @@ const ChatRoomOnlineUsersListItem = ({onlineUser}) => {
         <div className='chatroom-online-users-list-item'
              onClick={() => dispatch(setActiveVisibleProfile({
                  username: onlineUser.username,
-                 userId: onlineUser.userId,
+                 _id: onlineUser.id,
                  profileImage: onlineUser.profileImage
              }))}
         >
@@ -57,9 +57,7 @@ const ChatRoomOnlineUsersListItem = ({onlineUser}) => {
               }
 
             `}</style>
-            <div className='chatroom-online-users-list-item-user-section'
-                //onClick={()=>onUserInfoShowHandler(onlineUser.username,onlineUser.userId,onlineUser.profileImage)}
-            >
+            <div className='chatroom-online-users-list-item-user-section' >
                 <div className='chatroom-online-users-list-item-user-data'>
                     <img className='chatroom-online-users-list-item-image'
                          src={
@@ -77,5 +75,5 @@ const ChatRoomOnlineUsersListItem = ({onlineUser}) => {
         </div>
     );
 };
+
 export default ChatRoomOnlineUsersListItem;
-// <ChatRoomOnlineUsersListItemMoreInfo moreInfo={state.moreInfo} username={onlineUser.username} />

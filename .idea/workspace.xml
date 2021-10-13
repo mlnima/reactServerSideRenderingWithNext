@@ -20,36 +20,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/public/locales/de/profile.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.gitignore" beforeDir="false" afterPath="$PROJECT_DIR$/.gitignore" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/customColors/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/customColors/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersListItemMoreInfo.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/edit.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/de/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/de/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/en/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/en/profile.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en/profile.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/fa/common.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/fa/common.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/locales/fa/profile.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/fa/profile.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/public/sw.js" beforeDir="false" afterPath="$PROJECT_DIR$/public/sw.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientResetUserPassword.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientUserLogin.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientUsersControllers/clientUserLogin.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/socketServer/socketServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/socketServer/socketServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/postAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/postAction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/userActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/reducers/postReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/postReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/reducers/userReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/userReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/types.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/types.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -858,7 +836,7 @@
       <workItem from="1633770286470" duration="8829000" />
       <workItem from="1633856183521" duration="8853000" />
       <workItem from="1633944953843" duration="7170000" />
-      <workItem from="1634033465351" duration="15839000" />
+      <workItem from="1634033465351" duration="21348000" />
     </task>
     <servers />
   </component>
@@ -1065,11 +1043,6 @@
           <url>file://$PROJECT_DIR$/pages/tag/[tagId].tsx</url>
           <line>10</line>
           <option name="timeStamp" value="86" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js</url>
-          <line>10</line>
-          <option name="timeStamp" value="87" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/store/actions/userActions.js</url>

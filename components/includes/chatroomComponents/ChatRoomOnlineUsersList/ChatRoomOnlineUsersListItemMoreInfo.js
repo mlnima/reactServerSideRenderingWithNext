@@ -9,8 +9,6 @@ const StyledChatRoomOnlineUsersListItemMoreInfoDiv = styled.div`
   }
 `
 
-// color:   ${ moreInfo ?  'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color, #ccc)' } ;
-
 const ChatRoomOnlineUsersListItemMoreInfo = ({username,moreInfo}) => {
 
     if (moreInfo){

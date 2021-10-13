@@ -52,7 +52,6 @@ const chatRoom = (props: ClientPagesTypes) => {
 
     }, [user.userData?._id, user.socketId]);
 
-
     useEffect(() => {
 
         socket.emit('socketId')
