@@ -24,6 +24,7 @@ export const getStaticPaths = async ({locales}:any) => {
         let allParams : {params:{pageName:string,locale:string}}[] = []
 
         if (pagesData.length > 0){
+            console.log(pagesData)
             locales.forEach((locale:string)=>{
                 allParams.push(...pagesData.map((pageData:{pageName:string})=> {
                     return {params: {pageName: pageData.pageName, locale}}

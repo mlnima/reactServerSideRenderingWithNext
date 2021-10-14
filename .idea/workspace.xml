@@ -21,20 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/DescriptionEditor/DescriptionEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/DescriptionEditor/DescriptionEditor.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessage.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientSelfWidgetUpdate.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/pageSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/pageSitemapController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/postAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/postAction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/userActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/userActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/widgetsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/widgetsActions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -846,7 +833,7 @@
       <workItem from="1634033465351" duration="24586000" />
       <workItem from="1634114283504" duration="3450000" />
       <workItem from="1634119429004" duration="16002000" />
-      <workItem from="1634171295827" duration="178000" />
+      <workItem from="1634171295827" duration="580000" />
     </task>
     <servers />
   </component>
