@@ -38,7 +38,7 @@ const MessengerConversationMessageStyledDiv = styled.div`
 class MessengerConversationMessage extends PureComponent {
 
     render() {
-       // console.log(this.props.message.author,this.props.currentUserId,this.props.message.messageBody,this.props)
+
         return (
             <MessengerConversationMessageStyledDiv className='messenger-conversation-message' author={this.props.message.author} currentUserId={this.props.currentUserId}>
                 <div className='messenger-conversation-message-data'>

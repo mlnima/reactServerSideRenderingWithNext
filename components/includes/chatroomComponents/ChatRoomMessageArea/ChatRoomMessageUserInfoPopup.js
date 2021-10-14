@@ -113,9 +113,6 @@ const ChatRoomMessageUserInfoPopup = ({t}) => {
         })
     }
 
-    useEffect(() => {
-        console.log(activeVisibleProfile)
-    }, [activeVisibleProfile]);
 
     if (activeVisibleProfile.username && activeVisibleProfile._id) {
         return (

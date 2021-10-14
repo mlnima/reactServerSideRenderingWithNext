@@ -60,7 +60,6 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
             ...editingData,
             linkIndex: action ? parseInt(editingData.linkIndex) + 1 : parseInt(editingData.linkIndex) - 1,
         }
-        //console.log(newLinkData)
         const findItemIndex = props.widgetData.multipleLinks.findIndex(i => i.linkId === editingData.linkId)
         const newData = [
             ...props.widgetData.multipleLinks.slice(0, findItemIndex),

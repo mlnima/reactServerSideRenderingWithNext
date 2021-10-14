@@ -80,9 +80,6 @@ const ChatRoomTools = () => {
     const colorPicker = useRef(null)
     const router = useRouter()
 
-    // useEffect(() => {
-    //     console.log(userData)
-    // }, [userData]);
 
     const [state, setState] = useState({
         messageData: '',

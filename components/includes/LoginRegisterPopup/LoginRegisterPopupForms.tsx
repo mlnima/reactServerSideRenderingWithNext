@@ -258,11 +258,6 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
         })
     }, [state]);
 
-    // useEffect(() => {
-    //     console.log(stateValidator)
-    // }, [stateValidator]);
-
-
     return (
         <Draggable handle=".form-header">
             <LoginRegisterPopupFormsStyledDiv response={response} className='login-register-content'>

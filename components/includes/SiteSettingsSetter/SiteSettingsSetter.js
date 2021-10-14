@@ -20,15 +20,10 @@ const SiteSettingSetter = props => {
                 contextData.dispatchSiteIdentity({...props.identity, isSet: true})
                 contextData.dispatchState({...contextData.state, identitySet: true})
         }
-        if (props.design){
-           // dispatch(setSettings(props.design,'design'))
-        }
+        // if (props.design){
+        //    // dispatch(setSettings(props.design,'design'))
+        // }
 
-        // console.log(props)
-        // props?.design ? (
-        //     contextData.dispatchSiteDesign(props.design),
-        //         contextData.dispatchState({...contextData.state, designSet: true})
-        // ) : null
         props?.identity ? (
                 contextData.dispatchSiteIdentity({...props.identity, isSet: true}),
                 contextData.dispatchState({...contextData.state, identitySet: true})

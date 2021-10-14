@@ -27,7 +27,6 @@ const pageSitemapController = async (req,res)=>{
     try {
         const pages = await pageSchema.find({status:'publish'}).exec() || []
         res.set('Content-Type', 'text/xml');
-        console.log(template(pages))
         res.send(template(pages))
     }catch (err){
         console.error(err)

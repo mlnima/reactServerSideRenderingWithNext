@@ -24,7 +24,7 @@ export const setWidgetsForAdmin = widgets => async dispatch => {
 export const addNewWidget = newWidgetData => async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/addNewWidget', {data:newWidgetData,token: localStorage.wt}).then(res=>{
         if (res.data?.newWidgetData){
-            console.log(res.data?.newWidgetData)
+
             dispatch({
                 type: types.SAVE_NEW_WIDGET,
                 payload: res.data?.newWidgetData

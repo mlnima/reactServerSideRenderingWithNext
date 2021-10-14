@@ -5,8 +5,6 @@ export const userLogin = (username, password) => async dispatch => {
     try {
         await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/login', {username, password}).then(res => {
             res.data.token ? localStorage.setItem('wt', res.data.token) : null
-
-            console.log(res.data)
             dispatch({
                 type: types.LOGIN,
                 payload: {userData: res.data, loggedIn: true}

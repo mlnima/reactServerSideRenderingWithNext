@@ -1,4 +1,3 @@
-//import React from 'react';
 import {createGlobalStyle} from "styled-components";
 
 let GlobalStyles = createGlobalStyle`
@@ -144,6 +143,11 @@ let GlobalStyles = createGlobalStyle`
     background-color: var(--info-button-link-background-color, #117a8b);
     color: var(--info-button-text-color, #fff);
   }
+  .btn-dark{
+    background-color: var( --dark-button-link-background-color, #343a40);
+    border-color:  var(--dark-button-link-border-color, #343a40);
+    color: var(--info-button-text-color, #fff);
+  }
   
   .form-control-input{
     width: 100%;
@@ -164,12 +168,9 @@ let GlobalStyles = createGlobalStyle`
   
 
   @media only screen and (min-width: 768px) {
-
     body {
       font-size: 14px;
     }
-
-
     .leftSidebar {
       grid-template-columns: 320px 1fr;
       grid-template-areas:  'topbar topbar'

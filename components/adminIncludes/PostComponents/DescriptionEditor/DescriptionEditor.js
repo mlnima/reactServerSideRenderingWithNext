@@ -66,15 +66,9 @@ const DescriptionEditor = props => {
     const [editorState, setEditorState] = useState(false);
 
     useEffect(() => {
-        //ReactQuill = require('react-quill');
         ReactQuill = loadable(() => import('react-quill'))
         setEditorState(true)
     }, []);
-
-
-    // useEffect(() => {
-    //     console.log(typeof props.textInputsState.description)
-    // }, [props.textInputsState.description]);
 
 
     if (props.editor) {

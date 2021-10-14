@@ -23,12 +23,14 @@ export const getStaticPaths = async ({locales}:any) => {
         const pagesData = pagesDataFromApi.data?.pagesData || []
         let allParams : {params:{pageName:string,locale:string}}[] = []
 
-        locales.forEach((locale:string)=>{
+        if (pagesData.length > 0){
+            locales.forEach((locale:string)=>{
+                allParams.push(...pagesData.map((pageData:{pageName:string})=> {
+                    return {params: {pageName: pageData.pageName, locale}}
+                }))
+            })
+        }
 
-            allParams.push(...pagesData.map((pageData:{pageName:string})=> {
-                return {params: {pageName: pageData.pageName, locale}}
-            }))
-        })
 
         return {
             paths: allParams,

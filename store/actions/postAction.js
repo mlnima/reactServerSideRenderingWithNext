@@ -35,7 +35,6 @@ export const fetchPost  = (_id,cache) => async dispatch=>{
     const cacheStatus = cache ? {cache} : {}
     const requestQueries = new URLSearchParams({...id,...cacheStatus}).toString()
     await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/clientGetPost?${ requestQueries}` ).then(res=>{
-        console.log(res.data)
         dispatch({
             type:types.GET_POST,
             payload:res.data?.post
