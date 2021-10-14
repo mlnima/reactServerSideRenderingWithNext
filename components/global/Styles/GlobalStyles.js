@@ -121,7 +121,7 @@ let GlobalStyles = createGlobalStyle`
   }  
   .btn-primary{
     background-color: var(--primary-button-link-background-color, #007bff);
-    color: var(--primary-button-text-color, #fff);
+    color: var(--primary-button-link-text-color, #000);
   }  
   .btn-secondary{
     background-color: var(--secondary-button-link-background-color, #6c757d);
