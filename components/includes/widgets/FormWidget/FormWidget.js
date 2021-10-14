@@ -88,17 +88,17 @@ const FormWidget = props => {
     }
 
 
-    const renderFields = ((props.formData.formFields||[]).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || []).map(field => {
+    const renderFields = ((props.formData?.formFields||[]).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || []).map(field => {
         if (field.fieldType === 'textarea') {
             return (
-                <div className='form-widget-field' key={(props.formData.formFields || []).indexOf(field)}>
+                <div className='form-widget-field' key={(props.formData?.formFields || []).indexOf(field)}>
                     <p>{convertVariableNameToName(field.fieldName)}</p>
                     <textarea name={field.fieldName} placeholder={field.fieldPlaceHolder} required={field.required} onChange={e => onFormFieldsChangeHandler(e)}/>
                 </div>
             )
         } else {
             return (
-                <div className='form-widget-field' key={(props.formData.formFields || []).indexOf(field)}>
+                <div className='form-widget-field' key={(props.formData?.formFields || []).indexOf(field)}>
                     <p className='form-widget-field-title'>{convertVariableNameToName(field.fieldName)}</p>
                     <input name={field.fieldName} type={field.fieldType} placeholder={field.fieldPlaceHolder} required={field.required} onChange={e => onFormFieldsChangeHandler(e)}/>
                 </div>
@@ -117,9 +117,9 @@ const FormWidget = props => {
             <FormWidgetStyledDiv className='form-widget'>
 
                 <form onSubmit={e => onSubmitHandler(e)} className='form-widget-the-form'>
-                    <h2>{props.formData.formTitle}</h2>
+                    <h2>{props.formData?.formTitle}</h2>
                     {renderFields}
-                    <button type='submit' className='submit-button'>{props.formData.submitButtonText || 'Submit'}</button>
+                    <button type='submit' className='submit-button'>{props.formData?.submitButtonText || 'Submit'}</button>
                 </form>
             </FormWidgetStyledDiv>
 

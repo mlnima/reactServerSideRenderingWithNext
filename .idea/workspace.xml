@@ -20,8 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/FormWidget/FormWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/FormWidget/FormWidget.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -833,7 +832,7 @@
       <workItem from="1634033465351" duration="24586000" />
       <workItem from="1634114283504" duration="3450000" />
       <workItem from="1634119429004" duration="16002000" />
-      <workItem from="1634171295827" duration="580000" />
+      <workItem from="1634171295827" duration="882000" />
     </task>
     <servers />
   </component>
