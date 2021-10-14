@@ -28,8 +28,8 @@ const MenuWidgetStyledLi = styled.li`
 
   list-style-type: none;
   width: 90%;
-  padding: 10px 0;
-  font-size: 1.2rem;
+  //padding: 10px 0;
+  font-size: 1rem;
   display: flex;
   justify-content: space-between;
   align-items: center;
