@@ -39,8 +39,8 @@ export const fetchPost  = (_id,cache) => async dispatch=>{
             type:types.GET_POST,
             payload:res.data?.post
         })
-    }).catch(error=>{
-        console.log(error)
+    }).catch(err=>{
+        console.log(err)
     })
 }
 

@@ -5,8 +5,8 @@ const dataDecoder = async (token) => {
 
     try{
         return jwtDecoder(token.split(".")[1])
-    }catch(e){
-        console.log(e)
+    }catch(err){
+        console.log(err)
     }
 
 }

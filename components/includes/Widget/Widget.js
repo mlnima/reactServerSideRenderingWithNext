@@ -18,7 +18,6 @@ const Widget = props => {
             <WidgetText {...props.data} id={props._id}/>
             {props.widgetToRender ?
                 <props.widgetToRender
-                isMobile={props.isMobile}
                 {...props.data}
                 widgetId={props.widgetId}
                 widget={true}

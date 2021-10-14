@@ -36,8 +36,6 @@ const FileManagerControl = props => {
         filesData.append('token',localStorage.wt)
         filesData.append('uploadingFile', e.target.files[0])
         fileUpload(filesData).then(res=>{
-            // props.setFunction(props.name,res.data.path.replace('./','/'))
-           // console.log( res.data)
             props.setState({
                 ...props.state,
                 clickedItem:res.data.path.replace('./',''),

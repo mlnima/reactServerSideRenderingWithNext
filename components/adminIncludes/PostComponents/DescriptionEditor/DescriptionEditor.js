@@ -1,8 +1,8 @@
 import React, {useEffect, useState} from 'react';
 import 'react-quill/dist/quill.snow.css';
-import loadable from '@loadable/component'
+import dynamic from 'next/dynamic'
 let ReactQuill = () => <></>;
-ReactQuill = loadable(() => import('react-quill'))
+ReactQuill = dynamic(() => import('react-quill'))
 import styled from "styled-components";
 
 const DescriptionEditorStyledDiv = styled.div`

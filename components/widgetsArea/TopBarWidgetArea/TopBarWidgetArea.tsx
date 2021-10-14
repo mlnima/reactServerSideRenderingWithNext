@@ -12,14 +12,14 @@ let StyledDiv = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    min-height: 48px;
+    //min-height: 48px;
     margin: 0 5px;
   }
 
   @media only screen and (min-width: 768px) {
-    height: 48px;
+
     .top-bar-content {
-      height: 48px;
+   
     }
   }
   ${(props:{stylesData:string}) => props.stylesData ?? ''}
@@ -33,7 +33,6 @@ interface TopBarWidgetAreaProps {
     position: string;
     postElementImageLoaderType: string;
     postElementImageLoader: string;
-    isMobile: boolean;
     referer: boolean;
     rendering: boolean;
     widgets: WidgetPropTypes[]
@@ -41,13 +40,12 @@ interface TopBarWidgetAreaProps {
 
 
 const TopBarWidgetArea = (
-    {stylesData,className,position,isMobile,referer}:TopBarWidgetAreaProps
+    {stylesData,className,position,referer}:TopBarWidgetAreaProps
 ) => {
     return (
         <StyledDiv stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='top-bar-content'>
                 <WidgetsRenderer
-                    isMobile={isMobile}
                     position={position}
                     referer={referer}
                 />

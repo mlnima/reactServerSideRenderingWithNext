@@ -226,6 +226,7 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
             registerUser(state).then(res => {
                 setResponse({
                     ...response,
+                    // @ts-ignore
                     message: res.data.message,
                     type: 'success',
                 })

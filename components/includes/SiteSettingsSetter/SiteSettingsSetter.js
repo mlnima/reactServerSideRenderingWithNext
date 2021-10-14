@@ -6,7 +6,7 @@ import parse from 'html-react-parser';
 import {getMultipleSetting} from "../../../_variables/ajaxVariables";
 import _ from "lodash";
 import {useDispatch} from "react-redux";
-import {setSettings} from "../../../store/actions/settingsActions";
+
 
 const SiteSettingSetter = props => {
     const dispatch = useDispatch()
@@ -20,9 +20,6 @@ const SiteSettingSetter = props => {
                 contextData.dispatchSiteIdentity({...props.identity, isSet: true})
                 contextData.dispatchState({...contextData.state, identitySet: true})
         }
-        // if (props.design){
-        //    // dispatch(setSettings(props.design,'design'))
-        // }
 
         props?.identity ? (
                 contextData.dispatchSiteIdentity({...props.identity, isSet: true}),

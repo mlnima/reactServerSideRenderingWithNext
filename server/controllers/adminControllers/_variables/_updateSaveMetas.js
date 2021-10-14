@@ -23,8 +23,8 @@ module.exports = async (metas) => {
             }
         }
         return finalData
-    }catch (e) {
-        console.log(e.stack)
+    }catch (err) {
+        console.log(err.stack)
         console.log('error on saving meta')
     }
 }

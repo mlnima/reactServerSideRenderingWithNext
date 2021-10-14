@@ -44,13 +44,11 @@ const actorPage = (props: ClientPagesTypes) => {
             {actor ? <PostsPageInfo titleToRender={actor.name}/> : null}
             {actor ? <MetaDataToSiteHead title={actor.name} description={actor.description} url={`${router.asPath}`} image={actor.imageUrl}/> : null}
             <WidgetsRenderer
-                isMobile={props.isMobile}
                 position='actorPageTop'
                 referer={props.referer}
             />
             <PostsPage {...props}/>
             <WidgetsRenderer
-                isMobile={props.isMobile}
                 position='actorPageBottom'
                 referer={props.referer}
             />
@@ -78,7 +76,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     store.dispatch({
         type: SET_POSTS_DATA,
         payload: {
+            // @ts-ignore
             posts: postsData.data?.posts || [],
+            // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
             // @ts-ignore
             actorData: actorData?.data?.meta || {},

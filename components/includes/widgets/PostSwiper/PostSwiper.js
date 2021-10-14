@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Navigation, Pagination, Controller, Scrollbar, Keyboard, Autoplay, EffectCube, EffectCoverflow, EffectFlip, EffectFade, Lazy, Parallax} from 'swiper'
-import 'swiper/swiper-bundle.css';
+import 'swiper/css';
 import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import Image from 'next/image'
@@ -9,7 +9,6 @@ import styled from "styled-components";
 let StyledDiv = styled.div`
   .swiper-wrapper {
     .swiper-slide {
-      margin: 0 20px;
       display: flex;
       justify-content: center;
       place-items: center;
@@ -179,6 +178,3 @@ const PostSwiper = props => {
     );
 };
 export default PostSwiper;
-//{/*{renderSlides}*/}
-//
-// pagination={{clickable: true}}

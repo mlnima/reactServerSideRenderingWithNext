@@ -7,13 +7,12 @@ import {wrapper} from "../store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../_variables/TypeScriptTypes/GlobalTypes";
 
-const Home = ({isMobile}: ClientPagesTypes) => {
+const Home = ({}: ClientPagesTypes) => {
 
     const settings = useSelector((state: StoreTypes) => state.settings);
 
     return (
         < MainWidgetArea
-            isMobile={isMobile}
             rendering={true}
             className='home-page main'
             position='home'

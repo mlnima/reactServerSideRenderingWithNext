@@ -12,18 +12,16 @@ interface SectionWidgetAreaProps {
     position: string;
     postElementImageLoaderType: string;
     postElementImageLoader: string;
-    isMobile: boolean;
     referer: boolean;
     rendering: boolean;
     gridArea:string;
     widgets: WidgetPropTypes[]
 }
 
-const SectionWidgetArea = ({stylesData,className,position,isMobile,referer,rendering}:SectionWidgetAreaProps) => {
+const SectionWidgetArea = ({stylesData,className,position,referer,rendering}:SectionWidgetAreaProps) => {
     return (
         <StyledSection stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <WidgetsRenderer
-                isMobile={isMobile}
                 rendering={rendering}
                 position={position}
                 referer={referer}

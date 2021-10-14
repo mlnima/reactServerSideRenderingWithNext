@@ -120,33 +120,33 @@ let GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }  
   .btn-primary{
-    background-color: var(--primary-button-link-background-color, #007bff);
-    color: var(--primary-button-link-text-color, #000);
+    background-color: var(--primary-button-link-background-color, #007bff)!important;
+    color: var(--primary-button-link-text-color, #000)!important;
   }  
   .btn-secondary{
-    background-color: var(--secondary-button-link-background-color, #6c757d);
-    color: var(--secondary-button-text-color, #fff);
+    background-color: var(--secondary-button-link-background-color, #6c757d)!important;
+    color: var(--secondary-button-text-color, #fff)!important;
   } 
   .btn-success{
-    background-color: var(--success-button-link-background-color,#28a745);
-    color: var(--success-button-text-color, #fff);
+    background-color: var(--success-button-link-background-color,#28a745)!important;
+    color: var(--success-button-text-color, #fff)!important;
   }
   .btn-danger{
-    background-color: var(--danger-button-link-background-color, #dc3545);
-    color: var(--danger-button-text-color, #fff);
+    background-color: var(--danger-button-link-background-color, #dc3545)!important;
+    color: var(--danger-button-text-color, #fff)!important;
   }
   .btn-warning{
-    background-color: var(--warning-button-link-background-color, #f90);
-    color: var(--warning-button-text-color, #212529);
+    background-color: var(--warning-button-link-background-color, #f90)!important;
+    color: var(--warning-button-text-color, #212529)!important;
   }
   .btn-info{
-    background-color: var(--info-button-link-background-color, #117a8b);
-    color: var(--info-button-text-color, #fff);
+    background-color: var(--info-button-link-background-color, #117a8b)!important;
+    color: var(--info-button-text-color, #fff)!important;
   }
   .btn-dark{
-    background-color: var( --dark-button-link-background-color, #343a40);
-    border-color:  var(--dark-button-link-border-color, #343a40);
-    color: var(--info-button-text-color, #fff);
+    background-color: var( --dark-button-link-background-color, #343a40)!important;
+    border-color:  var(--dark-button-link-border-color, #343a40)!important;
+    color: var(--info-button-text-color, #fff)!important;
   }
   
   .form-control-input{

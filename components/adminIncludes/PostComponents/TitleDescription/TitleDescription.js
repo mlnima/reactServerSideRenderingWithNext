@@ -1,9 +1,9 @@
 import React, {useState} from 'react';
-import loadable from '@loadable/component';
-import NoSSR from 'react-no-ssr';
+import dynamic from 'next/dynamic'
+
 import styled from "styled-components";
 import Editor from "@monaco-editor/react";
-const TextEditor = loadable(() => import('../../TextEditor/TextEditor'))
+const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'))
 
 let StyledDiv = styled.div`
   width: 98%;
@@ -73,7 +73,6 @@ const TitleDescription = props => {
 
             {
                 editorMode === 'textEditor'?
-                    <NoSSR>
                         <TextEditor
                             state={props.textInputsState}
                             activeEditingLanguage={props.activeEditingLanguage}
@@ -81,7 +80,7 @@ const TitleDescription = props => {
                             rendering={true}
                             valueData={(props.activeEditingLanguage === 'default' ? props.textInputsState.description : props?.textInputsState.translations?.[props.activeEditingLanguage]?.description).toString() || ''}
                         />
-                    </NoSSR>:
+                    :
                     editorMode === 'monaco' ?
                         <Editor
                             language='html'

@@ -1,7 +1,7 @@
 import {useEffect, useState} from 'react';
 import styled from "styled-components";
 
-// import loadable from '@loadable/component';
+
 // const MediaDocumentWidget = loadable(() => import('./MediaDocumentWidget/MediaDocumentWidget'))
 
 const MediaWidgetStyledDiv = styled.div`

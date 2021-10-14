@@ -4,7 +4,7 @@ import {AppContext} from '../../../../../../context/AppContext'
 import Link from 'next/link';
 import {deleteMeta} from '../../../../../../_variables/ajaxPostsVariables'
 import {deletePage} from "../../../../../../_variables/ajaxVariables";
-import {post} from "superagent/lib/client";
+// import {post} from "superagent/lib/client";
 
 const TableBodyItemOnHover = props => {
     const contextData = useContext(AppContext);

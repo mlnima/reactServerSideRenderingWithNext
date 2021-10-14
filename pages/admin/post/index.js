@@ -67,12 +67,6 @@ const Index = props => {
         activeEditingLanguage: 'default'
     })
 
-    // useEffect(() => {
-    //     if (!state.tags){
-    //         setState({...state,tags:[]})
-    //     }
-    //     console.log(state)
-    // }, [state.tags]);
     useEffect(() => {
         if (router.query.new && state._id) {
             router.reload()

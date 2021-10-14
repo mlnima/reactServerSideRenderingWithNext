@@ -8,17 +8,10 @@ const BodyTable = props => {
     let selectBoxes = useRef(contextData.adminPosts.map(() => createRef()));
     const [ state, setState ] = useState({
         hoveredId: '',
-        isMobile: false
+
     });
 
-    useEffect(() => {
-        if (window.innerWidth < 768) {
-            setState({
-                ...state,
-                isMobile: true
-            })
-        }
-    }, []);
+
 
     const onDeletePermanentlyHandler = () => {
         // deletePost(state.hoveredId).then(res => {

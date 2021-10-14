@@ -5,8 +5,8 @@ module.exports = (req, res) => {
         const _id = req.body._id;
         widgetSchema.findByIdAndDelete({_id}).exec().then(() => {
             res.json({deleted: true})
-        }).catch(error=>{
-            console.log(error)
+        }).catch(err=>{
+            console.log(err)
             res.end()
         })
     }

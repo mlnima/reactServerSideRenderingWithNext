@@ -23,7 +23,7 @@ const ActorsPageStyledDiv = styled.div`
     max-width: 100%;
   }
 `
-const actorsPage = ({metaSource ,referer,isMobile} : ClientPagesTypes) => {
+const actorsPage = ({metaSource ,referer} : ClientPagesTypes) => {
     const settings = useSelector((state : settingsPropTypes) => state.settings);
     const router = useRouter();
     const isWithSidebar = settings.identity?.metaPageSidebar;
@@ -31,7 +31,6 @@ const actorsPage = ({metaSource ,referer,isMobile} : ClientPagesTypes) => {
     return (
         <ActorsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
-                isMobile={isMobile}
                 position={'actorsPageTop'}
                 referer={referer}
             />
@@ -62,7 +61,6 @@ const actorsPage = ({metaSource ,referer,isMobile} : ClientPagesTypes) => {
                 pathnameData={router.pathname}
             />
             <WidgetsRenderer
-                isMobile={isMobile}
                 position={'actorsPageBottom'}
                 referer={referer}
             />

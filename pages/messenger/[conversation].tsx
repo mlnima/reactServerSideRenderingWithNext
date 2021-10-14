@@ -41,11 +41,6 @@ const conversation = (props: ClientPagesTypes) => {
         }
     }, [users]);
 
-    useEffect(() => {
-        console.log(connectedUserData)
-    }, [connectedUserData]);
-
-
     const contextData = useContext(AppContext);
 
     const [state, setState] = useState({
@@ -321,11 +316,6 @@ const conversation = (props: ClientPagesTypes) => {
             dispatch(getConversation(router.query.conversation, -20))
         }
     }, [props]);
-
-    // useEffect(() => {
-    //     console.log(activeConversation)
-    // }, [activeConversation]);
-
 
     return (
         <div className='messenger main'>

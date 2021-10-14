@@ -174,9 +174,7 @@ export const getFirstLoadData = async (req, dynamicWidgets,store) => {
         const allWidgets = [...staticWidgets,...dynamicWidgetsData]
         const identity = process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {}
         const design =  process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {}
-        let isMobile =Boolean((req.headers['user-agent'] || navigator?.userAgent || '').match(/Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i))  || false;
 
-        // console.log(allWidgets)
         store.dispatch({type:SET_WIDGETS,payload:allWidgets})
         store.dispatch({
             type:SET_SETTINGS,
@@ -192,7 +190,7 @@ export const getFirstLoadData = async (req, dynamicWidgets,store) => {
             design,
             widgets:allWidgets,
             referer,
-            isMobile,
+
         }
     } catch (e) {
         console.log(e)
@@ -215,7 +213,6 @@ export const getFirstLoadDataStatic = async ( dynamicWidgets,store) => {
         const identity = identityData.data
         const design =  designData.data
 
-        let isMobile = false
 
         store.dispatch({type:SET_WIDGETS,payload:widgets})
 
@@ -233,7 +230,7 @@ export const getFirstLoadDataStatic = async ( dynamicWidgets,store) => {
             design,
             widgets,
             referer,
-            isMobile,
+
         }
     } catch (e) {
         console.log(e)

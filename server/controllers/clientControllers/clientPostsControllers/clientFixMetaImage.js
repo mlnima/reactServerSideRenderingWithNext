@@ -24,7 +24,6 @@ module.exports = async (req, res) => {
                 //     res.json({message:'meta went pending',error:true})
                 //     res.end()
                 // }).catch(err=>{
-                //     console.log(err)
                 //     res.end()
                 // })
                 res.end()

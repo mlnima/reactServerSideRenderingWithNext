@@ -16,18 +16,16 @@ interface SideBarWidgetAreaProps {
     position: string;
     postElementImageLoaderType: string;
     postElementImageLoader: string;
-    isMobile: boolean;
     referer: boolean;
     rendering: boolean;
     gridArea:string;
     widgets: WidgetPropTypes[]
 }
 
-const SideBarWidgetArea = ({stylesData,className,position,isMobile,referer,rendering,gridArea}:SideBarWidgetAreaProps) => {
+const SideBarWidgetArea = ({className,position,referer,rendering,gridArea}:SideBarWidgetAreaProps) => {
     return (
         <StyledSideBar className={className + ' widget-area ' + position}  gridArea={gridArea}>
             <WidgetsRenderer
-                isMobile={isMobile}
                 rendering={rendering}
                 position={position}
                 referer={referer}

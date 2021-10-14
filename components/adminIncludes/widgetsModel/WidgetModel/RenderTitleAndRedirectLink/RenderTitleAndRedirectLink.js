@@ -1,5 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-//import DelayInput from 'react-delay-input'
+import React from 'react';
 
 const RenderTitleAndRedirectLink = props => {
 

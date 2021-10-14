@@ -30,11 +30,15 @@ const AdminDataSetter = () => {
 
             dispatch(getCustomPages())
 
+            // @ts-ignore
             if (widgetData?.data?.widgets) {
+                // @ts-ignore
                 dispatch(setWidgetsForAdmin(widgetData.data.widgets))
             }
             if (settingsData?.data) {
+                // @ts-ignore
                 const identityData = settingsData.data.settings ? settingsData.data.settings.find((setting:any) => setting.type === 'identity') : {}
+                // @ts-ignore
                 const designData = settingsData.data.settings ? settingsData.data.settings.find((setting:any) => setting.type === 'design') : {}
                 dispatch(setSettings({
                     design: designData.data,

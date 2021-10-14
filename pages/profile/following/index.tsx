@@ -29,6 +29,7 @@ const Following = (props:ClientPagesTypes) => {
     useEffect(() => {
         if (contextData?.userData?.following?.length >0){
             getMultipleUserDataById(contextData?.userData?.following).then(res=>{
+                // @ts-ignore
                 setFollowing(res?.data?.users || [])
             })
         }

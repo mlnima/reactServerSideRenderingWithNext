@@ -43,13 +43,11 @@ const tagPage = (props: ClientPagesTypes) => {
             {tag ? <MetaDataToSiteHead title={tag?.name} description={tag?.description} url={`${router.asPath}`} image={tag?.imageUrl}/> : null}
 
             <WidgetsRenderer
-                isMobile={props.isMobile}
                 position={'tagPageTop'}
                 referer={props.referer}
             />
             <PostsPage {...props}/>
             <WidgetsRenderer
-                isMobile={props.isMobile}
                 position={'tagPageBottom'}
                 referer={props.referer}
             />
@@ -78,7 +76,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     store.dispatch({
         type: SET_POSTS_DATA,
         payload: {
+            // @ts-ignore
             posts: postsData.data?.posts || [],
+            // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
             // @ts-ignore
             tagData: tagData?.data?.meta || {},

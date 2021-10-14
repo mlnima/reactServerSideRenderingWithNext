@@ -38,8 +38,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 
     const postData = await getPost({_id: context.query.id}, true)
+    // @ts-ignore
     const post = postData?.data?.post;
-    // console.log(post)
     // @ts-ignore
     const commentsData = post ? await getComments({onDocument: post._id}, true) : {}
     // @ts-ignore

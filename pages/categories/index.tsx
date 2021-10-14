@@ -21,7 +21,7 @@ const CategoriesPageStyledDiv = styled.div`
     max-width: 100%;
   }
 `
-const categoriesPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
+const categoriesPage = ({metaSource, referer}: ClientPagesTypes) => {
 
     const settings = useSelector((state : settingsPropTypes) => state.settings);
     const router = useRouter()
@@ -30,7 +30,6 @@ const categoriesPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
     return (
         <CategoriesPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
-                isMobile={isMobile}
                 position={'categoriesPageTop'}
                 referer={referer}
             />
@@ -59,7 +58,6 @@ const categoriesPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
                 pathnameData={router.pathname}
             />
             <WidgetsRenderer
-                isMobile={isMobile}
                 position={'categoriesPageBottom'}
                 referer={referer}
             />

@@ -16,7 +16,7 @@ const SaveDesignChangesBtn = ({name,value}) => {
             [name]:value
         }
 
-        console.log(designToSave)
+
 
         updateSetting('design', designToSave).then(() => {
             contextData.dispatchState({

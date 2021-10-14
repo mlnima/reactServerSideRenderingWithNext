@@ -10,7 +10,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
   align-items: center;
   justify-content: center;
   flex-wrap: wrap;
-
+  
   .language-switcher-widget-text{
     display: flex;
     justify-content: center;

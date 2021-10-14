@@ -32,6 +32,7 @@ const Followers = (props:ClientPagesTypes) => {
     useEffect(() => {
         if (contextData?.userData?.followers?.length > 0) {
             getMultipleUserDataById(contextData?.userData?.followers).then(res => {
+                // @ts-ignore
                 setFollowers(res?.data?.users || [])
             })
         }

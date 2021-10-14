@@ -52,7 +52,6 @@ const AppLayout = props => {
     const mainLayoutClassNameForGrid = isSidebarLess ? 'withOutSidebar' : sidebarsData.sidebarType === 'left' ? 'leftSidebar' : sidebarsData.sidebarType === 'right' ? 'rightSidebar' : sidebarsData.sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar';
 
     const defaultProps = {
-        isMobile: props.isMobile,
         postElementSize: settings.design?.postElementSize,
         postElementStyle: settings.design?.postElementStyle,
         postElementImageLoader: settings.design?.postElementImageLoader,

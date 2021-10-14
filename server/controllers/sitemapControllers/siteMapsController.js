@@ -56,7 +56,6 @@ siteMapsController.siteMapMonths = (req, res) => {
         } else {
             let page = 0;
             const totalPages = Math.ceil(count / size);
-            console.log('xxxx')
             while ( page < totalPages ) {
                 page += 1;
                 subSiteMaps +=

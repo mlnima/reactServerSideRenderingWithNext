@@ -1,4 +1,4 @@
-//import ReactGA from 'react-ga'
+
 import React from "react";
 
 export const likeValueCalculator = (likes, dislikes) => {

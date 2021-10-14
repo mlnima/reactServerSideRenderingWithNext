@@ -1,5 +1,4 @@
 import React from 'react';
-import { DelayInput } from 'react-delay-input'
 import {convertVariableNameToName} from '../../../../../_variables/_variables'
 import styled from "styled-components";
 let StyledTextarea = styled.textarea`

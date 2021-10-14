@@ -5,8 +5,6 @@ require('dotenv').config()
 const connectionOptions = {
     useNewUrlParser: true,
     useUnifiedTopology: true,
-    useFindAndModify: false,
-    useCreateIndex: true
 }
 
 const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?

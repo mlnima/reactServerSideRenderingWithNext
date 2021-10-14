@@ -30,13 +30,12 @@ interface WidgetsRendererProps {
     position: string;
     _id?: any;
     homePageSidebar?: any;
-    isMobile: boolean;
     referer?: any;
     rendering?: any
 }
 
 
-const WidgetsRenderer = ({isMobile, _id, position}: WidgetsRendererProps) => {
+const WidgetsRenderer = ({ _id, position}: WidgetsRendererProps) => {
 
     const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
     const settings = useSelector((state: settingsPropTypes) => state.settings);
@@ -86,8 +85,6 @@ const WidgetsRenderer = ({isMobile, _id, position}: WidgetsRendererProps) => {
         if (renderByLanguageCondition && !isEditMode) {
             return (
                 <Widget
-
-                        isMobile={isMobile}
                         key={index}
                         widgetId={widget._id}
                         {...widget}

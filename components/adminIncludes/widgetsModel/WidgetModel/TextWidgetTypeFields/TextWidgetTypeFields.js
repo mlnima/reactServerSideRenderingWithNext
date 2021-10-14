@@ -1,5 +1,4 @@
 import React from 'react';
-import {DelayInput} from "react-delay-input";
 import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 
 const TextWidgetTypeFields = props => {

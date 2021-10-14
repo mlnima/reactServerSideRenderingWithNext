@@ -22,7 +22,7 @@ const TagsPageStyledDiv = styled.div`
     max-width: 100%;
   }
 `
-const tagsPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
+const tagsPage = ({metaSource, referer}: ClientPagesTypes) => {
 
     const settings = useSelector((state : settingsPropTypes) => state.settings);
     const router = useRouter()
@@ -31,7 +31,6 @@ const tagsPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
     return (
         <TagsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
-                isMobile={isMobile}
                 position={'tagsPageTop'}
                 referer={referer}
             />
@@ -60,7 +59,6 @@ const tagsPage = ({metaSource, referer, isMobile}: ClientPagesTypes) => {
                 pathnameData={router.pathname}
             />
             <WidgetsRenderer
-                isMobile={isMobile}
                 position={'tagsPageBottom'}
                 referer={referer}
             />

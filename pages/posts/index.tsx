@@ -58,7 +58,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     store.dispatch({
         type: SET_POSTS_DATA,
         payload: {
+            // @ts-ignore
             posts: postsData.data?.posts || [],
+            // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
             // @ts-ignore
 

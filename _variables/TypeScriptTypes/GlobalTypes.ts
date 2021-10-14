@@ -112,7 +112,6 @@ export interface MetasPropTypes {
 
 export interface GetServerSidePropsContext {
     req?: object;
-    isMobile?: boolean;
     notFound?: boolean;
     query?: {
         actorId?: string | undefined

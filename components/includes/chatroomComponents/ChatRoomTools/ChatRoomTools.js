@@ -101,7 +101,7 @@ const ChatRoomTools = () => {
     const onSubmitHandler = e => {
 
         e.preventDefault()
-        console.log(userData)
+
         if (userData._id && state.messageData.length > 0) {
             const newMessageData = {
                 messageData: state.messageData,

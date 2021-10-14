@@ -3,7 +3,7 @@ import Image from 'next/image';
 import Link from "next/link";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import SwiperCore, {Navigation, Pagination, Controller, Thumbs, Scrollbar, Keyboard, Autoplay, EffectCube, EffectCoverflow, Lazy} from 'swiper'
-import 'swiper/swiper-bundle.css';
+import 'swiper/css';
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controller, EffectCube, EffectCoverflow, Lazy]);
 import styled from "styled-components";

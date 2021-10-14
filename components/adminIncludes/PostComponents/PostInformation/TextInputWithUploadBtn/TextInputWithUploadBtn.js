@@ -1,5 +1,5 @@
 import React, {useRef, useEffect} from 'react';
-import {DelayInput} from 'react-delay-input';
+
 import UploadFileBtn from '../UploadFileBtn/uploadFileBtn'
 import {convertVariableNameToName} from '../../../../../_variables/_variables';
 import styled from "styled-components";

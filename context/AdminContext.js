@@ -11,7 +11,6 @@ const AppProvider = props =>{
     const [state, dispatchState] = useState({
         loading: false,
         activeLanguage: router.locale || router.query.locale || 'default',
-        isMobile: true,
         designSet:false,
         identitySet:false,
         adminPanelSettingsSet:false,

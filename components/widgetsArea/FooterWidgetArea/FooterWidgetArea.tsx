@@ -23,18 +23,16 @@ interface FooterWidgetAreaProps {
     position: string;
     postElementImageLoaderType: string;
     postElementImageLoader: string;
-    isMobile: boolean;
     referer: boolean;
     rendering: boolean;
     widgets: WidgetPropTypes[]
 }
 
-const FooterWidgetArea = ({stylesData, className, position, isMobile, referer, rendering}:FooterWidgetAreaProps) => {
+const FooterWidgetArea = ({stylesData, className, position, referer, rendering}:FooterWidgetAreaProps) => {
     return (
         <StyledFooter stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='footer-content'>
                 <WidgetsRenderer
-                    isMobile={isMobile}
                     rendering={rendering}
                     position={position}
                     referer={referer}

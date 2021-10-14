@@ -36,7 +36,6 @@ const MenuWidgetStyledLi = styled.li`
   position: relative;
   margin: ${props=> !props.menuItem.parent ? '0 10px' : '0'};
   
-  
   .menu-widget-item-link{
     color: var(--navigation-text-color, #ccc);
     text-decoration: none;

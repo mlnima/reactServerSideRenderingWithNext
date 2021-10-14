@@ -24,18 +24,16 @@ interface HeaderWidgetAreaProps {
     position: string;
     postElementImageLoaderType: string;
     postElementImageLoader: string;
-    isMobile: boolean;
     referer: boolean;
     rendering: boolean;
     widgets: WidgetPropTypes[]
 }
 
-const HeaderWidgetArea = ({ stylesData, className, position, isMobile, referer, rendering}:HeaderWidgetAreaProps) => {
+const HeaderWidgetArea = ({ stylesData, className, position, referer, rendering}:HeaderWidgetAreaProps) => {
     return (
         <StyledHeader stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='header-content'>
                 <WidgetsRenderer
-                    isMobile={isMobile}
                     rendering={rendering}
                     position={position}
                     referer={referer}

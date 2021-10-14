@@ -42,13 +42,11 @@ const categoryPage = (props: ClientPagesTypes) => {
             {category ? <PostsPageInfo titleToRender={category?.name}/> : null}
             {category ? <MetaDataToSiteHead title={category?.name} description={category?.description} url={`${router.asPath}`} image={category?.imageUrl}/> : null}
             <WidgetsRenderer
-                isMobile={props.isMobile}
                 position={'categoryPageTop'}
                 referer={props.referer}
             />
             <PostsPage {...props}/>
             <WidgetsRenderer
-                isMobile={props.isMobile}
                 position={'categoryBottom'}
                 referer={props.referer}
             />
@@ -76,7 +74,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     store.dispatch({
         type: SET_POSTS_DATA,
         payload: {
+            // @ts-ignore
             posts: postsData.data?.posts || [],
+            // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
             // @ts-ignore
             categoryData: categoryData?.data?.meta || {},

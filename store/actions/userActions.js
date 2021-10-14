@@ -84,7 +84,6 @@ export const getSpecificUserData = (fields) => async dispatch => {
 //             })
 //         }
 //     }catch (err){
-//         console.log(err)
 //     }
 // }
 

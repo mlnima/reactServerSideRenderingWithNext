@@ -17,7 +17,6 @@ const AppProvider = props => {
         videoPreviewID: '',
         activeLanguage: router.locale || router.query.locale || 'default',
         navigationOpenStatus: false,
-        isMobile: true,
         console: false,
         deviceWidth: 320,
         checkoutSlideEnable: false,
@@ -217,7 +216,6 @@ const AppProvider = props => {
     //                 });
     //             }
     //         }).catch(err => {
-    //             console.log(err);
     //             localStorage.removeItem('wt')
     //         })
     //         //functions.getAndSetUserInfo()

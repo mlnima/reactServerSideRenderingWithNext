@@ -5,8 +5,7 @@ import {useRouter} from "next/router";
 import MenuWidgetItem from "./MenuWidgetItem";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {checkRouteAndSetLoading, setLoading} from "../../../../store/actions/globalStateActions";
-
+import {checkRouteAndSetLoading} from "../../../../store/actions/globalStateActions";
 
 const MenuWidgetStyledDiv = styled.div`
   background-color: var(--navigation-background-color,#18181b);
@@ -59,9 +58,11 @@ const MenuWidgetStyledDiv = styled.div`
 
   @media only screen and (min-width: 768px) {
       background-color: transparent;
+      height: 38px;
       .menu-widget-items {
         background-color: transparent;
         display: flex;
+        align-items: center;
         flex-direction: row;
         width: initial;
         max-width: 100vw;
@@ -69,6 +70,7 @@ const MenuWidgetStyledDiv = styled.div`
         animation: initial;
         padding: 0;
         margin: 0;
+        height: 38px;
         .navigation-close-button {
           display: none;
         }
@@ -80,11 +82,6 @@ const MenuWidgetStyledDiv = styled.div`
 
   }
 `
-
-
-
-
-
 
 const MenuWidget = props => {
     const menuItemsElement = useRef(null)
@@ -100,11 +97,7 @@ const MenuWidget = props => {
 
     const mobileNavigationOnClickHandler = (nextPath) => {
         dispatch(checkRouteAndSetLoading(router.asPath,nextPath))
-        if (props.isMobile) {
-            setOpen(false)
-        }
     }
-
     const renderMenuItemsData = (props.menuItems.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || [])
     const renderMenuParentsItems = renderMenuItemsData.filter(i => !i.parent)
     const renderMenuItems = renderMenuParentsItems.map((menuItem,index) => {

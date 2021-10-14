@@ -20,11 +20,11 @@ export const getStaticPaths = async ({locales}:any) => {
     try {
         // Call an external API endpoint to get posts
         const pagesDataFromApi = await getPagesDataForStaticGeneration()
+        // @ts-ignore
         const pagesData = pagesDataFromApi.data?.pagesData || []
         let allParams : {params:{pageName:string,locale:string}}[] = []
 
         if (pagesData.length > 0){
-            console.log(pagesData)
             locales.forEach((locale:string)=>{
                 allParams.push(...pagesData.map((pageData:{pageName:string})=> {
                     return {params: {pageName: pageData.pageName, locale}}
@@ -38,8 +38,8 @@ export const getStaticPaths = async ({locales}:any) => {
             fallback: true
         }
 
-    }catch (error){
-        console.log(error)
+    }catch (err){
+        console.log(err)
     }
 
 }
@@ -55,6 +55,7 @@ export const getStaticProps = wrapper.getServerSideProps(store =>
         )
         // @ts-ignore
         const pageData = await getPageData({pageName: context.params.pageName})
+        // @ts-ignore
         if (!pageData.data.pageData) return {notFound: true}
 
 
@@ -62,6 +63,7 @@ export const getStaticProps = wrapper.getServerSideProps(store =>
             props: {
                 ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
                 ...firstLoadData,
+                // @ts-ignore
                 pageInfo: pageData.data ? pageData.data.pageData : {},
             }
         }

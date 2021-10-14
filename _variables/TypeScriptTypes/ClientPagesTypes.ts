@@ -8,7 +8,7 @@ export interface ClientPagesTypes {
     identity:IdentitySettings;
     position: string;
     stylesData: string;
-    isMobile: boolean;
+
     referer: boolean ;
     widgets: WidgetPropTypes[] | undefined;
     metaSource:MetasPropTypes;
@@ -24,7 +24,6 @@ export interface ClientPagesTypes {
 
 export interface _FirstLoadData {
     position: string;
-    isMobile: boolean;
     referer: boolean;
     settings?:{
         design: DesignSettings;

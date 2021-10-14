@@ -1,7 +1,4 @@
 import React from 'react';
-import RenderTitleAndRedirectLink from "../RenderTitleAndRedirectLink/RenderTitleAndRedirectLink";
-import TextWidgetTypeFields from "../TextWidgetTypeFields/TextWidgetTypeFields";
-import {DelayInput} from "react-delay-input";
 
 const MediaWidgetType = props => {
 

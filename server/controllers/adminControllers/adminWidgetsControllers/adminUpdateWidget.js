@@ -22,8 +22,8 @@ const updatePostWidget = async (widget) => {
                 posts
             }
             return dateForUpdateWidget
-        } catch (error) {
-            console.log(error)
+        } catch (err) {
+            console.log(err)
             return null
         }
     } else {
@@ -43,8 +43,8 @@ const adminUpdateWidget = async (req, res) => {
 
                     res.json({updatedWidget})
                     res.end()
-                }).catch(error => {
-                    console.log(error)
+                }).catch(err => {
+                    console.log(err)
                     res.status(503).json({message: 'something went wrong please try again later'})
                     res.end()
                 })

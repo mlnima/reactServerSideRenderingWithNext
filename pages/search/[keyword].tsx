@@ -44,7 +44,6 @@ const searchPage = (props: ClientPagesTypes) => {
             {router.query.keyword ? <MetaDataToSiteHead title={router.query.keyword} url={`${router.asPath}`}/> : null}
 
             <WidgetsRenderer
-                isMobile={props.isMobile}
                 position={'searchPageTop'}
                 referer={props.referer}
             />
@@ -59,7 +58,6 @@ const searchPage = (props: ClientPagesTypes) => {
             }
             <PostsPage {...props} />
             <WidgetsRenderer
-                isMobile={props.isMobile}
                 position={'searchPageBottom'}
                 referer={props.referer}
             />
@@ -81,7 +79,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     store.dispatch({
         type: SET_POSTS_DATA,
         payload: {
+            // @ts-ignore
             posts: postsData.data?.posts || [],
+            // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
             // @ts-ignore
 

@@ -1,5 +1,4 @@
 import React from 'react';
-import { DelayInput } from 'react-delay-input'
 
 const VideoEmbedCode = props => {
     if (props.rendering){

@@ -34,7 +34,6 @@ const PostsContentStyledDiv = styled.div`
 
 interface PostsComponentTypes {
     viewType: string;
-    isMobile: boolean;
     _id: string;
     posts: PostTypes[];
     widgetId: string
@@ -42,7 +41,7 @@ interface PostsComponentTypes {
 }
 
 
-const Posts = ({viewType, isMobile, _id, posts, widgetId}: PostsComponentTypes) => {
+const Posts = ({viewType, _id, posts, widgetId}: PostsComponentTypes) => {
     const settings = useSelector((state: settingsPropTypes) => state.settings);
     const contextData = useContext(AppContext);
     const dispatch = useDispatch()
@@ -95,7 +94,6 @@ const Posts = ({viewType, isMobile, _id, posts, widgetId}: PostsComponentTypes) 
                 } else return (
                     <PostElement
                         {...postProps}
-                        isMobile={isMobile}
                         onClickLoadingHandler={contextData.functions.loadingHandler}
                         key={index}
                         redirectLink={post.redirectLink}

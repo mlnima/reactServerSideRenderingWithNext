@@ -11,7 +11,7 @@ mongoose.connect(mongoDBConnectionUrl, {
     useUnifiedTopology: true
 })
     .then(() => console.log('DB connected'))
-    .catch(err => console.log('DB not connected', err));
+    .catch(err => console.log('DB not connected', err.stack));
 
 
 postSchema.countDocuments({}).exec().then(count => {

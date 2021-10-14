@@ -24,7 +24,6 @@ interface MyAppProps {
             customStyles: string
         },
         widgets: object[],
-        isMobile: boolean,
         referer: boolean,
 
     };
@@ -59,7 +58,6 @@ const MyApp = ({Component, pageProps}: AppProps) => {
                 <MessengerLayout
                     identity={pageProps.identity}
                     design={pageProps.design}
-                    isMobile={pageProps.isMobile}
                     globalStyleDetected={!!pageProps.design?.customStyles}
                 >
                     <Component {...pageProps} />
@@ -75,7 +73,6 @@ const MyApp = ({Component, pageProps}: AppProps) => {
                 identity={pageProps.identity}
                 eCommerce={pageProps.eCommerce}
                 referer={pageProps.referer}
-                isMobile={pageProps.isMobile}
                 globalStyleDetected={!!pageProps.design?.customStyles}
                 pageInfo={pageProps.pageInfo}
             >
