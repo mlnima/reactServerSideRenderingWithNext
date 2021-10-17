@@ -16,7 +16,6 @@ const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeC
 const PromotionTypeCard = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionTypeCard'))
 const ArticleTypeCard = dynamic(() => import('../PostCard/ArticleTypeCard/ArticleTypeCard'))
 
-
 const PostsContentStyledDiv = styled.div`
   display: flex;
   flex-wrap: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? 'nowrap' : 'wrap'};
@@ -36,28 +35,29 @@ interface PostsComponentTypes {
     viewType: string;
     _id: string;
     posts: PostTypes[];
-    widgetId: string
-
+    widgetId: string,
+    postElementSize:string
 }
 
 
-const Posts = ({viewType, _id, posts, widgetId}: PostsComponentTypes) => {
+const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentTypes) => {
     const settings = useSelector((state: settingsPropTypes) => state.settings);
+    const elementSize = postElementSize ? postElementSize : useSelector((state: settingsPropTypes) => state.settings?.design?.postElementSize);
+
     const contextData = useContext(AppContext);
     const dispatch = useDispatch()
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
 
-    const cardWidth = settings.design?.postElementSize === 'listSmall' ? 320 :
-        settings.design?.postElementSize === 'list' ? 116.6 :
-            settings.design?.postElementSize === 'smaller' ? 209.8 :
-                settings.design?.postElementSize === 'small' ? 255 :
-                    settings.design?.postElementSize === 'medium' ? 320 : 255
-
+    const cardWidth = elementSize === 'listSmall' ? 320 :
+        elementSize === 'list' ? 116.6 :
+            elementSize === 'smaller' ? 209.8 :
+                elementSize === 'small' ? 255 :
+                    elementSize === 'medium' ? 320 : 255
     const noImageUrl = '/static/images/noImage/no-image-available.png';
 
     return (
-        <PostsContentStyledDiv className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')} postElementSize={settings.design?.postElementSize}>
+        <PostsContentStyledDiv className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')} postElementSize={elementSize}>
 
             {(posts || []).map((post: PostTypes, index: number) => {
                 const title = (post?.translations?.[locale as string]?.title || post?.title as string).replace('#', '');
@@ -72,7 +72,7 @@ const Posts = ({viewType, _id, posts, widgetId}: PostsComponentTypes) => {
                     rating,
                     noImageUrl,
                     post,
-                    postElementSize: settings.design?.postElementSize,
+                    postElementSize: elementSize,
                     widgetId,
                     cardWidth,
                     title
@@ -82,7 +82,7 @@ const Posts = ({viewType, _id, posts, widgetId}: PostsComponentTypes) => {
                 if (post.postType === 'video') {
                     return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                 } else if (post.postType === 'promotion') {
-                    if (settings.design?.postElementSize === 'listSmall') {
+                    if (elementSize === 'listSmall') {
                         // @ts-ignore
                         return <PromotionCardListSmall onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     } else {
@@ -97,13 +97,10 @@ const Posts = ({viewType, _id, posts, widgetId}: PostsComponentTypes) => {
                         onClickLoadingHandler={contextData.functions.loadingHandler}
                         key={index}
                         redirectLink={post.redirectLink}
-
                         viewType={viewType}
-
                         postElementStyle={settings.design?.postElementStyle}
                         postElementImageLoader={settings.design?.postElementImageLoader}
                         postElementImageLoaderType={settings.design?.postElementImageLoaderType}
-
                         postType={post.postType}
                         _id={post._id}
                         videoTrailerUrl={post.videoTrailerUrl}

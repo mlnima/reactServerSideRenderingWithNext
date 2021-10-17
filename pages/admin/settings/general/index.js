@@ -1,12 +1,11 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import AdminLayout from "../../../../components/layouts/AdminLayout";
-import {updateSetting, getSetting} from "../../../../_variables/ajaxVariables";
-import FA from "react-fontawesome";
-import {AppContext} from '../../../../context/AppContext'
-import {convertVariableNameToName, getAbsolutePath, languagesOptions} from '../../../../_variables/_variables'
+import React, {useState, useRef,useEffect} from 'react';
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {convertVariableNameToName, languagesOptions} from '../../../../_variables/_variables'
 import styled from "styled-components";
-import _ from "lodash";
-import {useRouter} from "next/router";
+import {useDispatch, useSelector} from "react-redux";
+import {setLoading} from "../../../../store/actions/globalStateActions";
+import {updateSetting} from "../../../../store/actions/settingsActions";
 
 let StyledForm = styled.form`
   background-color: white;
@@ -95,18 +94,26 @@ let StyledForm = styled.form`
 
 `
 
-
-const settings = props => {
-    const contextData = useContext(AppContext);
+const settings = () => {
+    const dispatch = useDispatch()
+    const identity = useSelector(state => state.settings.identity)
     const keywordsInput = useRef(null)
 
     const [editingSettings, setEditingSettings] = useState({
         activeEditingLanguage: 'default'
     })
+
     const [state, setState] = useState({
         keywords: [],
-        translations: {}
+        translations: {},
     });
+
+    useEffect(() => {
+        setState({
+            ...state,
+            ...identity
+        })
+    }, [identity]);
 
     const [sidebars, setSidebars] = useState([
         'homePageSidebar',
@@ -122,38 +129,7 @@ const settings = props => {
         'actorPageSidebar',
         'searchPageSidebar',
     ])
-    const renderSidebarOptions = sidebars.map(sidebar => {
-        return (
-            <div className="site-settings-form-section" key={_.uniqueId('sidebar_')}>
-                <p>{convertVariableNameToName(sidebar)}:</p>
-                <select name={sidebar} value={state[sidebar]} onChange={e => onChangeHandler(e)}>
-                    <option>select</option>
-                    <option value='left'>Left</option>
-                    <option value='right'>Right</option>
-                    <option value='both'>Both</option>
-                    <option value='false'>No</option>
-                </select>
-            </div>
-        )
-    })
 
-    useEffect(() => {
-        setState({
-            ...state,
-            ...props.identity
-
-        })
-        getSetting('identity', process.env.NEXT_PUBLIC_PRODUCTION_URL, false).then(res => {
-
-            setState({
-                ...state,
-                ...res.data.setting ? res.data.setting.data : {}
-
-            })
-        })
-
-
-    }, []);
 
     const onChangeLanguageHandler = e => {
         setEditingSettings({
@@ -164,16 +140,8 @@ const settings = props => {
 
     const onSubmitHandler = e => {
         e.preventDefault()
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        })
-        contextData.functions.updateSetting('identity', state, props.domainName).then(() => {
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
-        })
+        dispatch(setLoading(true))
+        dispatch(updateSetting('identity', state))
     };
 
     const checkboxChangeHandler = e => {
@@ -182,7 +150,6 @@ const settings = props => {
             [e.target.name]: e.target.checked
         })
     }
-
     const onChangeHandler = e => {
         const finalValue = e.target.value === 'true' ? true :
             e.target.value === 'false' ? false :
@@ -244,7 +211,6 @@ const settings = props => {
 
     };
 
-
     const keywordsData = editingSettings.activeEditingLanguage === 'default' ? state.keywords : state?.translations?.[editingSettings?.activeEditingLanguage]?.keywords || [];
 
     const keywords = keywordsData.map(item => {
@@ -252,7 +218,7 @@ const settings = props => {
         return (
             <div key={item} className='item'>
                 <p>{item}</p>
-                <button name={item} onClick={(e) => deleteItem(e)}><FA className='fontawesomeMedium' name='times'/></button>
+                <button name={item} onClick={(e) => deleteItem(e)}> <FontAwesomeIcon icon={faTimes}/></button>
             </div>
         )
     });
@@ -276,7 +242,6 @@ const settings = props => {
             })
         }
     }
-
 
     return (
 
@@ -435,7 +400,20 @@ const settings = props => {
                 <h2>Sidebars Status</h2>
                 <div className="sidebarsStatus site-settings-form-section-parent">
 
-                    {renderSidebarOptions}
+                    {sidebars.map((sidebar,index) => {
+                        return (
+                            <div className="site-settings-form-section" key={index}>
+                                <p>{convertVariableNameToName(sidebar)}:</p>
+                                <select name={sidebar} value={state[sidebar]} onChange={e => onChangeHandler(e)}>
+                                    <option>select</option>
+                                    <option value='left'>Left</option>
+                                    <option value='right'>Right</option>
+                                    <option value='both'>Both</option>
+                                    <option value='false'>No</option>
+                                </select>
+                            </div>
+                        )
+                    })}
                 </div>
 
             </div>

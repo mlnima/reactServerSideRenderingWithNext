@@ -9,10 +9,6 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   width: 100%;
   position: initial;
   margin: 5px;
-  //resize: both;
-  //overflow: hidden;
-  //padding: 10px;
- // border: 1px black solid;
   .widgetAdminPanelItemHeader {
     height: 50px;
     margin: 0;

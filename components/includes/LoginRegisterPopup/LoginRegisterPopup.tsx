@@ -1,9 +1,8 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import LoginRegisterPopupForms from "./LoginRegisterPopupForms";
 import styled from "styled-components";
-import {useSelector,useDispatch} from "react-redux";
-//import {setLoginRegisterFormStatus} from "../../../store/actions/globalStateActions";
-
+import {useSelector} from "react-redux";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const LoginRegisterPopupStyledDiv = styled.div`
   background-color: rgba(0,0,0,.8);
@@ -22,17 +21,13 @@ const LoginRegisterPopupStyledDiv = styled.div`
 `;
 
 const LoginRegisterPopup = () => {
-    const dispatch = useDispatch()
-    const globalState = useSelector(state => state.globalState)
-    const loggedIn = useSelector(state => state.user.loggedIn)
 
-    const onClickOnEmptyAreaHandler = ()=>{
-      //  dispatch(setLoginRegisterFormStatus(false))
-    }
+    const globalState = useSelector((state:StoreTypes) => state.globalState)
+    const loggedIn = useSelector((state:StoreTypes) => state.user.loggedIn)
 
     if (globalState?.loginRegisterFormPopup && !loggedIn){
         return (
-            <LoginRegisterPopupStyledDiv className='login-register-popup' onClick={onClickOnEmptyAreaHandler}>
+            <LoginRegisterPopupStyledDiv className='login-register-popup' >
                 <LoginRegisterPopupForms />
             </LoginRegisterPopupStyledDiv>
         );

@@ -4,78 +4,33 @@ import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import {appWithTranslation} from 'next-i18next';
 import nextI18NextConfig from '../next-i18next.config.js';
-const CookiePopup = dynamic(() => import('../components/includes/ClientPopActionRequest/CookiePopup'), {ssr: false})
-const AppLayout = dynamic(() => import('../components/layouts/AppLayout'))
-const LoginRegisterPopup = dynamic(() => import('../components/includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false})
-const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'))
-const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false})
-const AppProvider = dynamic(() => import('../context/AppContext'))
+const CookiePopup = dynamic(() => import('../components/includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
+const AppLayout = dynamic(() => import('../components/layouts/AppLayout'));
+const LoginRegisterPopup = dynamic(() => import('../components/includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
+const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'));
+const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false});
+const AppProvider = dynamic(() => import('../context/AppContext'));
 import {wrapper} from '../store/store';
-interface MyAppProps {
-    MyApp: React.ComponentType;
-    Component: AppProps;
-    pageProps: {
-        pageInfo: {
-            pageName: string
-        };
-        identity: object,
-        eCommerce: object,
-        design: {
-            customStyles: string
-        },
-        widgets: object[],
-        referer: boolean,
-
-    };
-
-    nextI18NextConfig: {
-        i18n: {
-            defaultLocale: string;
-            locales: string[]
-        }
-    }
-}
-
 
 const MyApp = ({Component, pageProps}: AppProps) => {
     const router = useRouter()
-
     if (router.pathname.includes('/admin')) {
-        return (
-
-            <AppProvider>
+        return (<AppProvider>
                 <AdminLayout>
                     <Component {...pageProps} />
                 </AdminLayout>
             </AppProvider>
-
         )
     } else if (router.pathname.includes('/messenger') || router.pathname.includes('/chatroom')) {
-
-
-        return (
-            <AppProvider>
-                <MessengerLayout
-                    identity={pageProps.identity}
-                    design={pageProps.design}
-                    globalStyleDetected={!!pageProps.design?.customStyles}
-                >
+        return (<AppProvider>
+                <MessengerLayout>
                     <Component {...pageProps} />
                 </MessengerLayout>
                 <LoginRegisterPopup/>
             </AppProvider>
         )
-    } else return (
-        <AppProvider>
-            <AppLayout
-                design={pageProps.design}
-                widgets={pageProps.widgets}
-                identity={pageProps.identity}
-                eCommerce={pageProps.eCommerce}
-                referer={pageProps.referer}
-                globalStyleDetected={!!pageProps.design?.customStyles}
-                pageInfo={pageProps.pageInfo}
-            >
+    } else return (<AppProvider>
+            <AppLayout>
                 <Component {...pageProps} />
             </AppLayout>
             <LoginRegisterPopup/>
@@ -87,7 +42,7 @@ const MyApp = ({Component, pageProps}: AppProps) => {
 
 // @ts-ignore
 //export default appWithTranslation(wrapper.withRedux(MyApp), nextI18NextConfig);
-export default  wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig) );
+export default wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig));
 
 
 

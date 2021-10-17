@@ -31,6 +31,7 @@ const MenuWidgetStyledDiv = styled.div`
     position: fixed;
     ${props=> props.open ?`animation: navigationMobileSlide .3s linear alternate;`: `animation: none;` }
     display: ${props=> props.open ? 'flex' : 'none'};
+  
 
     .navigation-close-button {
       align-self: flex-end;
@@ -55,10 +56,18 @@ const MenuWidgetStyledDiv = styled.div`
     height: 24px;
     padding: 0;
   }
+  .navigation-mobile-button-open{
+    padding: 0;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    svg{
+      width: 24px;
+      height: 24px;
+    }
+  }
 
   @media only screen and (min-width: 768px) {
       background-color: transparent;
-      height: 38px;
       .menu-widget-items {
         background-color: transparent;
         display: flex;
@@ -75,8 +84,8 @@ const MenuWidgetStyledDiv = styled.div`
           display: none;
         }
       }
-    
-    .navigation-mobile-button {
+
+    .navigation-mobile-button-open {
       display: none;
     }
 
@@ -120,11 +129,11 @@ const MenuWidget = props => {
 
     return (
         <MenuWidgetStyledDiv className='menu-widget' open={open}>
-            <ul onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button' aria-label="Center Align">
+            <ul onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button-open btn btn-transparent-light' aria-label="Center Align">
                 <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faBars} className='navigation-mobile-button-logo'/>
             </ul>
             <ul className='menu-widget-items' ref={menuItemsElement}>
-                <li onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button'>
+                <li onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button btn btn-transparent-light'>
                     <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faTimes} className='navigation-mobile-button-logo'/>
                 </li>
                 {renderMenuItems}

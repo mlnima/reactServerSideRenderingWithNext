@@ -2,7 +2,7 @@ import React from 'react';
 import TagCard from "../TagCard/TagCard";
 import styled from "styled-components";
 import {setLoading} from "../../../../../../store/actions/globalStateActions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 let TagsRendererStyledDiv = styled.div`
   display: flex;
@@ -45,20 +45,24 @@ let TagsRendererStyledDiv = styled.div`
   }
 `
 
-const TagsRenderer = ({postElementSize,metaData, tags}) => {
+const TagsRenderer = ({metaData,postElementSize}) => {
+
+    const tagsMetas = metaData?metaData: useSelector(state => state.posts.tagsMetas)
+    const elementSize = postElementSize ? postElementSize : useSelector(state => state.settings?.design?.postElementSize);
+
 
     const dispatch = useDispatch()
-    const cardWidth = postElementSize === 'list' ? 116.6 :
-        postElementSize === 'smaller' ? 209.8 :
-            postElementSize === 'small' ? 255 :
-                postElementSize === 'medium' ? 320 : 255
+    const cardWidth = elementSize === 'list' ? 116.6 :
+        elementSize === 'smaller' ? 209.8 :
+            elementSize === 'small' ? 255 :
+                elementSize === 'medium' ? 320 : 255
 
 
     return (
         <TagsRendererStyledDiv className='tags-content' cardWidth={cardWidth}>
             {
-                (tags || metaData || []).map((tag,index) => {
-                    return <TagCard onActivateLoadingHandler={()=> dispatch(setLoading(true))} key={index} cardWidth={cardWidth} tag={tag} postElementSize={postElementSize}/>
+                tagsMetas.map((tag,index) => {
+                    return <TagCard onActivateLoadingHandler={()=> dispatch(setLoading(true))} key={index} cardWidth={cardWidth} tag={tag} postElementSize={elementSize}/>
                 })
             }
         </TagsRendererStyledDiv>

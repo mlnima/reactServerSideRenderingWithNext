@@ -23,6 +23,7 @@ const Home = ({}: ClientPagesTypes) => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store =>
+
     // @ts-ignore
     async (context ) => {
         const firstLoadData = await getFirstLoadData(context.req,

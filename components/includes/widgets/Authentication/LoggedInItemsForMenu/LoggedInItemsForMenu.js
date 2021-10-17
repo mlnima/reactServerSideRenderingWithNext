@@ -15,20 +15,20 @@ const LoggedInItemsForMenu = props => {
                 {contextData.siteIdentity.membership ?
                     <>
                         <Link href={`/profile`}>
-                            <a rel='next' className='logged-in-item'>
+                            <a rel='next' className='logged-in-item btn btn-transparent-light'>
                                 {props.t(`common:Profile`)}
                             </a>
                         </Link>
 
                         <Link href={`/messenger`}>
-                            <a rel='next' className='logged-in-item'>
+                            <a rel='next' className='logged-in-item btn btn-transparent-light'>
                                 {props.t(`common:Messages`)}
                             </a>
                         </Link>
                     </>
                     : null
                 }
-                <p className='logged-in-item' onClick={() => {
+                <p className='logged-in-item btn btn-transparent-light' onClick={() => {
                     dispatch(userLogOut())
                     dispatch(setLoginRegisterFormStatus(false))
                 }}>

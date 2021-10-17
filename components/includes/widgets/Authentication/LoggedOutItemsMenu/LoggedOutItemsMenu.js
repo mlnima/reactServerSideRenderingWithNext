@@ -13,21 +13,21 @@ const LoggedOutItemsMenu = props => {
     const dispatch = useDispatch()
 
         return (
-            <div className='logged-out-items'>
+            <div className='logged-out-items '>
                 {
                     router.asPath.includes('/chatroom/') || router.asPath.includes('/messenger') ?
                         <Link href={`/`}>
-                            <a rel='next' className='logged-out-item'>
+                            <a rel='next' className='logged-out-item btn btn-transparent-light'>
                                 <FontAwesomeIcon style={{width: '20px', height: '20px', color: 'var(--navigation-text-color, #ccc)'}} icon={faHome}/>
                             </a>
                         </Link>
                         : null
                 }
 
-                <button onClick={()=> dispatch(setLoginRegisterFormStatus('login'))} className='logged-out-item ' aria-label='logged-out-items' >
+                <button onClick={()=> dispatch(setLoginRegisterFormStatus('login'))} className='logged-out-item btn btn-transparent-light' aria-label='logged-out-items' >
                     {props.t(`common:Login`)}
                 </button>
-                <button onClick={()=> dispatch(setLoginRegisterFormStatus('register'))} className='logged-out-item ' aria-label='logged-out-items' >
+                <button onClick={()=> dispatch(setLoginRegisterFormStatus('register'))} className='logged-out-item btn btn-transparent-light' aria-label='logged-out-items' >
                     {props.t(`common:Register`)}
                 </button>
             </div>

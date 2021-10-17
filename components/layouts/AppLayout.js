@@ -1,4 +1,4 @@
-import React, {useEffect,useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
@@ -6,7 +6,7 @@ import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter
 import GlobalStyles from "../global/Styles/GlobalStyles";
 import {useDispatch, useSelector} from 'react-redux';
 import {autoUserLogin} from "../../store/actions/userActions";
-import {setLoading} from "../../store/actions/globalStateActions";
+import {setLoading, setLoginRegisterFormStatus} from "../../store/actions/globalStateActions";
 import AdminDataSetter from "../global/AdminDataSetter";
 
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SideBarWidgetArea/SideBarWidgetArea'))
@@ -17,10 +17,10 @@ const FooterWidgetArea = dynamic(() => import('../widgetsArea/FooterWidgetArea/F
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
-const Console = dynamic(() => import('../includes/AdminTools/Console/Console'), {ssr: false})
 
+//onKeyDown={e => e.keyCode === 192 ? adminConsoleOpenCloseHandler(contextData.userData,contextData.state,contextData.dispatchState) : null}
 const AppLayout = props => {
-
+    const loggedIn = useSelector(state => state.user.loggedIn)
     const userData = useSelector(state => state.user.userData)
     const globalState = useSelector(state => state.globalState)
     const settings = useSelector(state => state.settings)
@@ -29,25 +29,21 @@ const AppLayout = props => {
     const dispatch = useDispatch()
     const [sidebarsData, setSidebarsData] = useState(() => setAppLayoutDataFromProp(props, router, settings))
 
-    //const sidebarsData = useMemo(() => setAppLayoutDataFromProp(props, router, settings), [router.pathname])
     const [isSidebarLess, setIsSidebarLess] = useState(() => {
         return router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
     })
 
     useEffect(() => {
-
-
         globalState.loading ?
             dispatch(setLoading(false)) :
             null
-
     }, [router.pathname]);
 
     useEffect(() => {
-        setSidebarsData(()=>{
+        setSidebarsData(() => {
             return setAppLayoutDataFromProp(props, router, settings)
         })
-    }, [router.asPath,router.pathname]);
+    }, [router.asPath, router.pathname]);
 
     const mainLayoutClassNameForGrid = isSidebarLess ? 'withOutSidebar' : sidebarsData.sidebarType === 'left' ? 'leftSidebar' : sidebarsData.sidebarType === 'right' ? 'rightSidebar' : sidebarsData.sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar';
 
@@ -56,7 +52,6 @@ const AppLayout = props => {
         postElementStyle: settings.design?.postElementStyle,
         postElementImageLoader: settings.design?.postElementImageLoader,
         postElementImageLoaderType: settings.design?.postElementImageLoaderType,
-        referer: props.referer
     }
 
     useEffect(() => {
@@ -64,6 +59,29 @@ const AppLayout = props => {
             dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']))
         }
     }, []);
+
+    useEffect(() => {
+        if (!loggedIn && typeof document !== 'undefined') {
+            document.addEventListener('keydown', e => {
+                e.metaKey || e.ctrlKey && e.keyCode === 76 ?
+                    dispatch(setLoginRegisterFormStatus('login')) :
+                    null
+            })
+        }
+
+        if (loggedIn && typeof document !== 'undefined' && userData.role === 'administrator') {
+            document.addEventListener('keydown', e => {
+                e.metaKey || e.ctrlKey && e.keyCode === 76 ?
+                    router.push('/admin') :
+                    null
+            })
+            document.addEventListener('keydown', e => {
+                e.altKey && e.keyCode === 87 ?
+                    router.push('/admin/design/widgets') :
+                    null
+            })
+        }
+    }, [loggedIn]);
 
     const widgetsInGroups = {
         topBar: widgets ? widgets?.filter(widget => widget?.data?.position === 'topBar') || [] : [],
@@ -108,9 +126,7 @@ const AppLayout = props => {
 
             {widgetsInGroups?.[sidebarsData.leftSidebar.name]?.length > 0 && sidebarsData?.leftSidebar?.enable ?
                 <SideBarWidgetArea
-                    {...defaultProps}
                     gridArea='leftSidebar'
-                    widgets={widgetsInGroups[sidebarsData.leftSidebar.name]}
                     className='left-sidebar'
                     position={sidebarsData.leftSidebar.name}
                 />
@@ -120,9 +136,7 @@ const AppLayout = props => {
 
             {widgetsInGroups?.[sidebarsData.rightSidebar.name]?.length > 0 && sidebarsData?.rightSidebar?.enable ?
                 <SideBarWidgetArea
-                    {...defaultProps}
                     gridArea='rightSidebar'
-                    widgets={widgetsInGroups[sidebarsData.rightSidebar.name]}
                     className='right-sidebar'
                     position={sidebarsData.rightSidebar.name}
                 />
@@ -136,7 +150,6 @@ const AppLayout = props => {
                 />
                 : null}
             {userData?.role === 'administrator' ? <AdminTools/> : null}
-            {userData?.role === 'administrator' && globalState?.console ? <Console/> : null}
             {globalState?.loading ? <Loading/> : null}
             {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
         </div>

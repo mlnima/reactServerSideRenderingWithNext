@@ -36,12 +36,7 @@ const SearchButtonStyledDiv = styled.div`
     display: flex;
     justify-content: flex-start;
     align-items: center;
-    width: 100%;
-
-    .search-button-widget-form-keyword-input {
-      width: calc(100% - 58px);
-    }
-
+    width: 95%;
     .search-button-widget-form-submit-btn {
       right: 0;
       //padding: 3px;
@@ -97,14 +92,14 @@ const SearchButton = ({t}) => {
 
     return (
         <>
-            <SearchButtonStyledButton onClick={onOpenHandler} className='search-button-widget-open-btn' aria-label='Center Align' title={t([`common:Search`])}>
+            <SearchButtonStyledButton onClick={onOpenHandler} className='search-button-widget-open-btn ' aria-label='Center Align' title={t([`common:Search`])}>
                 <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faSearch} className='search-bar-btn-open-svg'/>
             </SearchButtonStyledButton>
             {open ?
                 <SearchButtonStyledDiv open={open} className='search-button-widget-form-actions'>
 
                     <form className='search-button-widget-form' onSubmit={e => onSearchHandler(e)}>
-                        <input type="text" onChange={e => onChangeHandler(e)} name='keyword' value={state.keyword} className='search-button-widget-form-keyword-input' placeholder={t([`common:Search...`])}/>
+                        <input type="text" onChange={e => onChangeHandler(e)} name='keyword' value={state.keyword} className='search-button-widget-form-keyword-input form-control-input' placeholder={t([`common:Search...`])}/>
                         <button type='submit' className='search-button-widget-form-submit-btn' title={t([`common:Search`])}>
                             <FontAwesomeIcon style={{width: '24px', height: '24px',}} icon={faSearch}/>
                         </button>

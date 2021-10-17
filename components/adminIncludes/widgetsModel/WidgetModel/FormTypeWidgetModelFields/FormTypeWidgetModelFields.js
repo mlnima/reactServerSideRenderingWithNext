@@ -1,6 +1,7 @@
-import { useState} from 'react';
+import React, { useState} from 'react';
 import AddFormConditional from "./AddFormConditional";
 import FieldPreview from "./FieldPreview";
+import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
 
 const FormTypeWidgetModelFields = props => {
 
@@ -34,18 +35,14 @@ const FormTypeWidgetModelFields = props => {
     if (props.rendering){
         return (
             <>
-                <p>Form Name :</p>
-                <input name='formName' type='text' value={props.widgetData.formData?.formName}
-                            onChange={e => onChangeHandler(e)}/>
-                <p>Form Title :</p>
-                <input name='formTitle' type='text' value={props.widgetData.formData?.formTitle}
-                             onChange={e => onChangeHandler(e)}/>
-                <p>After Submit Message :</p>
-                <input type='text' name='afterSubmitMessage' value={props.widgetData.formData?.afterSubmitMessage}  onChange={e => onChangeHandler(e)}/>
-                <p>Submit button text :</p>
-                <input name='submitButtonText' type='text' value={props.widgetData.formData?.submitButtonText}
-                       onChange={e => onChangeHandler(e)}/>
-                <AddFormConditional state={state} setState={setState} {...props} />
+                <TextInputFieldForWidget inputTitle='Form Name :' name='formName' type='text' value={props.widgetData.formData?.formName} placeHolder='Form Name' onChangeHandler={e => onChangeHandler(e)}/>
+                <TextInputFieldForWidget inputTitle='Form Title :' name='formTitle' type='text' value={props.widgetData.formData?.formTitle} placeHolder='Form Title' onChangeHandler={e => onChangeHandler(e)}/>
+                <TextInputFieldForWidget inputTitle='After Submit Message :' name='afterSubmitMessage' type='text' value={props.widgetData.formData?.afterSubmitMessage} placeHolder='After Submit Message' onChangeHandler={e => onChangeHandler(e)}/>
+                <TextInputFieldForWidget inputTitle='Submit button text :' name='submitButtonText' type='text' value={props.widgetData.formData?.submitButtonText} placeHolder='Submit button text' onChangeHandler={e => onChangeHandler(e)}/>
+                <AddFormConditional state={state}
+                                    setState={setState}
+                                    {...props}
+                />
                 <h4>Edit Existing Fields</h4>
                 {renderExistingFields}
             </>

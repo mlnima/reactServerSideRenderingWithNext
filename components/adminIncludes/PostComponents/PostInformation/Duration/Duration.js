@@ -9,7 +9,7 @@ const Duration = props => {
                     <p>Duration</p>
                 </div>
                 <div className="editor">
-                    <input type='text' name='duration' value={props.postData.duration}  onChange={e => props.onChangeHandler(e)}/>
+                    <input className={'form-control-input'} type='text' name='duration' value={props.postData.duration}  onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );

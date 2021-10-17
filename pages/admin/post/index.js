@@ -31,7 +31,7 @@ const AdminPostPageStyledDiv = styled.div`
   }
   @media only screen and (min-width: 768px) {
     grid-template-columns: 1fr 200px;
-    grid-gap: 20px;
+    grid-gap: 10px;
 
 `
 
@@ -241,19 +241,12 @@ const Index = props => {
     return (
         <>
 
-            <Link href='/admin/post?new=1'><a className='newPostLinkAdminPanel'>New Post</a></Link>
+            <Link href='/admin/post?new=1'><a className={'btn btn-info'}>New Post</a></Link>
             <AdminPostPageStyledDiv className='admin-post'>
-
-
                 <div className="content">
-
-                    <p>Translation(you need to activate the language in general settings)</p>
-
-                    <select ref={languageElement} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
-
+                    <select className={'custom-select'} ref={languageElement} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                         <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
                         {languagesOptions}
-
                     </select>
 
                     <TitleDescription textInputsState={textInputsState} setTextInputsState={setTextInputsState}

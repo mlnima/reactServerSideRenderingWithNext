@@ -16,7 +16,7 @@ const TextInput = props => {
                     <p>{convertVariableNameToName( props.name) }</p>
                 </div>
                 <div className="editor">
-                    <StyledTextarea className='TextInput' name={ props.name } value={ props.postData[props.name] }  onChange={e => props.onChangeHandler(e)}/>
+                    <StyledTextarea className={'form-control-input'} name={ props.name } value={ props.postData[props.name] }  onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );

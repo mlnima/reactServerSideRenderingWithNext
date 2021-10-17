@@ -11,24 +11,24 @@ const AuthenticationStyledDiv = styled.div`
     justify-content: space-between;
     width: 100%;
 
-    .logged-in-item, .logged-out-item {
-      display: flex;
-      flex-direction: column;
-      justify-content: center;
-      align-items: center;
-      font-size: 12px;
-      background-color: transparent;
-      border: none;
+    .btn-transparent-light {
+      //display: flex;
+      //flex-direction: column;
+      //justify-content: center;
+      //align-items: center;
+      //font-size: 12px;
+      //background-color: transparent;
+      //border: none;
       margin: 0 5px;
-      padding: 5px 10px;
-      color: var(--navigation-text-color, #ccc);
-      cursor: pointer;
+      //padding: 5px 10px;
+     // color: var(--navigation-text-color, #ccc);
+      
 
-      .logged-in-item-profile-image {
-        width: 25px;
-        height: 25px;
-        border-radius: 50%;
-      }
+      //.logged-in-item-profile-image {
+      //  width: 25px;
+      //  height: 25px;
+      //  border-radius: 50%;
+      //}
     }
   }
 

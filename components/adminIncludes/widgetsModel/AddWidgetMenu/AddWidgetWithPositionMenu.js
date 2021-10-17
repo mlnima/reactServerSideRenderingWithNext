@@ -1,11 +1,11 @@
-import React, { useState} from 'react';
+import React, {useRef, useState} from 'react';
 import * as widgetModels from './models'
 import {addNewWidget} from '../../../../store/actions/widgetsActions'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import _ from "lodash";
 import {useDispatch, useSelector} from 'react-redux';
 import styled from "styled-components";
-import staticPosition from '../staticPosition';
+import staticPositions from '../staticPositions';
 import Draggable from 'react-draggable';
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
@@ -46,12 +46,14 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
 `
 
 const AddWidgetWithPositionMenu = props => {
+    const refToElement = useRef(null)
     const widgets = useSelector(state => state.widgets.widgets)
     const customPages = useSelector(state => state.adminPanelGlobalState?.customPages)
     const dispatch = useDispatch()
     const [open,setOpen] = useState(false)
 
-    const [positions,setPositions] = useState(()=>staticPosition)
+
+    // const [positions,setPositions] = useState(()=>staticPosition)
 
 
 
@@ -89,7 +91,7 @@ const AddWidgetWithPositionMenu = props => {
 
     }
 
-    const renderPositions = staticPosition.map(position=>{
+    const renderPositions = staticPositions.map(position=>{
         return(
 
             <button key={_.uniqueId('position_')}
@@ -113,11 +115,20 @@ const AddWidgetWithPositionMenu = props => {
        )
    })
 
+    const onIncreaseZIndexHandler = ()=>{
+        if (refToElement.current){
+            refToElement.current.style.zIndex = 1000
+        }
+    }
+    const onReduceZIndexHandler = ()=>{
+        if (refToElement.current){
+            refToElement.current.style.zIndex = 'initial'
+        }
+    }
+
     return (
-        <Draggable
-            handle=".AddWidgetWithPositionMenu"
-        >
-        <AddWidgetWithPositionMenuStyledDiv className='AddWidgetWithPositionMenu'>
+        <Draggable handle=".AddWidgetWithPositionMenu">
+        <AddWidgetWithPositionMenuStyledDiv ref={refToElement} className='AddWidgetWithPositionMenu' onClickCapture={onIncreaseZIndexHandler} onMouseOut={onReduceZIndexHandler}>
             <button className='positionsOpener' onClick={() => open ? setOpen(false) : setOpen(true)}>{props.name}</button>
             {open ?
                 <div className="AddWidgetWithPositionMenuPositions">

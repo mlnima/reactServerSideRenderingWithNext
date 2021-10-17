@@ -22,11 +22,6 @@ const Widget = props => {
                 widgetId={props.widgetId}
                 widget={true}
                 viewType={props.viewType}
-                postElementSize={props.data.postElementSize || props.postElementSize}
-                postElementStyle={props.postElementStyle}
-                postElementImageLoader={props.postElementImageLoader}
-                postElementImageLoaderType={props.postElementImageLoaderType}
-                referer={props.referer}
             /> : null}
             {/*<WidgetFooter  {...props.data}/>*/}
         </StyledSection>

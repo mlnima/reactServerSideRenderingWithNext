@@ -1,9 +1,12 @@
 import { useEffect, useState, useContext, useRef } from 'react';
-import { updateSetting, getSetting, youtubeDataScrapper } from '../../../../_variables/ajaxVariables'
+import {  getSetting, youtubeDataScrapper } from '../../../../_variables/ajaxVariables'
 import withRouter from 'next/dist/client/with-router';
 import { savePost } from '../../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../../context/AppContext'
 import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../../../../store/actions/globalStateActions";
+import {updateSetting} from "../../../../store/actions/settingsActions";
 
 let StyledDiv = styled.div`
 .admin-import-page-youtube {
@@ -33,6 +36,9 @@ let StyledDiv = styled.div`
 }
 `
 const youtube = props => {
+
+    const dispatch = useDispatch()
+
     const contextData = useContext(AppContext);
     const urlsElement = useRef(null)
     const [ state, setState ] = useState({
@@ -139,12 +145,14 @@ const youtube = props => {
 
 
     const onSaveApiKeyHandler = () => {
+        dispatch(setLoading(true))
         const data = {
             apiKey: state.apiKey
         }
-        updateSetting('youtubeApiKey', data).then(() => {
-            props.router.push({ pathname: props.router.pathname, query: { ...props.router.query } })
-        })
+
+        dispatch(updateSetting('youtubeApiKey', {
+            apiKey: state.apiKey
+        }))
     }
 
     const onChaneHandler = e => {

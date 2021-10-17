@@ -56,7 +56,7 @@ const AdminTools = props => {
 
     return (
         <Draggable  handle=".open-button"  >
-            <StyledDiv className='admin-tools' onKeyDown={e => e.keyCode === 192 ? adminConsoleOpenCloseHandler(contextData.userData,contextData.state,contextData.dispatchState) : null}>
+            <StyledDiv className='admin-tools' >
                 <button className='admin-tools-item open-button' onClick={onOpenCloseHandler } onTouchStartCapture={onOpenCloseHandler}>
                     <FontAwesomeIcon icon={faCogs} className='admin-tools-item-logo'/>
                 </button>
@@ -70,9 +70,7 @@ const AdminTools = props => {
                         <a className='admin-tools-item' href=''  rel="noreferrer" onClick={() => contextData.functions.clearCaches()}>
                             <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
                         </a>
-                        <p className='admin-tools-item'  onClick={() => adminConsoleOpenCloseHandler(contextData.userData,contextData.state,contextData.dispatchState)}>
-                            <FontAwesomeIcon icon={faTerminal} className='admin-tools-item-logo'/>
-                        </p>
+
                     </>
                     :null
                 }

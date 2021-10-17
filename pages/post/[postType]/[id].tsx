@@ -43,7 +43,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const post = postData?.data?.post;
     const commentsData = post ? await getComments({onDocument: post._id}, true) : {}
     // @ts-ignore
-    const comments = post ? commentsData?.data?.comments : []
+    const comments = commentsData?.data?.comments ? commentsData.data?.comments : []
 
     store.dispatch({
         type: types.GET_POST,

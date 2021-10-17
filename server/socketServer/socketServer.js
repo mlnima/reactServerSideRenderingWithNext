@@ -68,8 +68,7 @@ io.on('connection', socket => {
         try{
             const disconnectedUserData =  chatroomOnlineUsers.find(u=>u.socketId === socket.id)
             if (disconnectedUserData ){
-                const newChatroomOnlineUsersList = chatroomOnlineUsers.filter(u=>u.socketId !== socket.id)
-                chatroomOnlineUsers = newChatroomOnlineUsersList
+                chatroomOnlineUsers = chatroomOnlineUsers.filter(u => u.socketId !== socket.id)
                 socket.to(disconnectedUserData.chatRoomName).emit('userListUpdated', chatroomOnlineUsers)
             }
 

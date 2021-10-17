@@ -7,12 +7,14 @@ import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRe
 import CategoriesRenderer from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {useSelector} from "react-redux";
-import {settingsPropTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {settingsPropTypes, StoreTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {wrapper} from "../../store/store";
+import {SET_CATEGORIES_METAS} from "../../store/types";
+
 const CategoriesPageStyledDiv = styled.div`
   grid-area: main;
+
   .categories {
     display: flex;
     flex-wrap: wrap;
@@ -21,60 +23,65 @@ const CategoriesPageStyledDiv = styled.div`
     max-width: 100%;
   }
 `
-const categoriesPage = ({metaSource, referer}: ClientPagesTypes) => {
+const categoriesPage = () => {
 
-    const settings = useSelector((state : settingsPropTypes) => state.settings);
+    const isWithSidebar = useSelector((state: settingsPropTypes) => state.settings?.identity?.metaPageSidebar);
+    const totalCount = useSelector((state: StoreTypes) => state.posts.totalCount)
     const router = useRouter()
 
-    const isWithSidebar = settings.identity?.metaPageSidebar
     return (
         <CategoriesPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
                 position={'categoriesPageTop'}
-                referer={referer}
             />
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
-                totalCount={metaSource?.totalCount}
+                totalCount={totalCount}
                 // @ts-ignore
                 size={parseInt(router.query?.size) || 60}
                 // @ts-ignore
-                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60))}
+                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 60))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <CategoriesRenderer categories={metaSource?.metas || []} postElementSize={settings.design?.postElementSize} metaData={undefined}/>
+            <CategoriesRenderer metaData={undefined} postElementSize={undefined}/>
 
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
-                totalCount={metaSource?.totalCount}
+                totalCount={totalCount}
                 // @ts-ignore
                 size={parseInt(router.query?.size) || 60}
                 // @ts-ignore
-                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60))}
+                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 60))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
             <WidgetsRenderer
                 position={'categoriesPageBottom'}
-                referer={referer}
             />
         </CategoriesPageStyledDiv>
     );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'],store);
+    const firstLoadData = await getFirstLoadData(context.req, ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'], store);
     const metaData = await getMultipleMeta(context.query, 'categories', true);
-    const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
+
+    store.dispatch({
+        type: SET_CATEGORIES_METAS,
+        payload: {
+            // @ts-ignore
+            categoriesMetas: metaData.data?.metas || [],
+            // @ts-ignore
+            totalCount: metaData.data?.totalCount || 0,
+        }
+    })
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
-            query:context.query,
-            metaSource,
         }
     }
 

@@ -2,6 +2,9 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {AppContext} from "../../../../context/AppContext";
 import {convertVariableNameToName, languagesOptions} from '../../../../_variables/_variables';
 import styled from "styled-components";
+import {useDispatch, useSelector} from "react-redux";
+import {updateSetting} from "../../../../store/actions/settingsActions";
+import {setLoading} from "../../../../store/actions/globalStateActions";
 let StyledDiv = styled.div`
   background-color: #222;
   width: 300px;
@@ -34,6 +37,9 @@ let StyledDiv = styled.div`
   }
 `
 const EcommerceSettingsInputSection = props => {
+    const dispatch = useDispatch()
+    const eCommerce = useSelector(state => state.settings.eCommerce)
+    //eCommerce
     const contextData = useContext(AppContext);
     const [state, setState] = useState({
         activeEditingLanguage: 'default',
@@ -46,18 +52,9 @@ const EcommerceSettingsInputSection = props => {
         })
     }
     const onSaveHandler = () => {
-        contextData.functions.updateSetting('eCommerce', contextData.eCommerceSettings).then(() => {
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
-        }).catch(err => {
-            console.log(err)
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
-        })
+        dispatch(setLoading(true))
+        dispatch(updateSetting('eCommerce', eCommerce))
+
     }
 
 

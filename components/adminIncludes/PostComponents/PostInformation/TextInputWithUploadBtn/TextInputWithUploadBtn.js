@@ -13,14 +13,14 @@ let StyledDiv = styled.div`
       outline: none;
       padding: 3px 5px;
       height: 30px;
-      width: 100%;
+      width: 80%;
     }
-    .upload-file-btn {
-      button{
-        width: 100%;
-      }
-
-    }
+    //.upload-file-btn {
+    //  button{
+    //    width: 100%;
+    //  }
+    //
+    //}
   }
 `
 
@@ -46,7 +46,7 @@ const TextInputWithUploadBtn = props => {
                     <p>{convertVariableNameToName(props.name)}</p>
                 </div>
                 <div className="editor">
-                    <input ref={inputElement} className='textInputWithUpload' type={'text'} name={props.name} value={props.postData[props.name]}
+                    <input ref={inputElement} className={'form-control-input'} type={'text'} name={props.name} value={props.postData[props.name]}
                                 onChange={e => props.onChangeHandler(e)}/>
                     <UploadFileBtn returnElement={inputElement} type={props.type} setFunction={onSetHandler} name={props.name}/>
                 </div>

@@ -1,5 +1,4 @@
 import React from 'react';
-
 import {useRouter} from "next/router";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
@@ -10,12 +9,14 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
+import {SET_ACTORS_METAS} from "../../store/types";
+import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
 const ActorsPageStyledDiv = styled.div`
-  grid-area:main;
-  .actors{
+  grid-area: main;
+
+  .actors {
     display: flex;
     flex-wrap: wrap;
     align-items: center;
@@ -23,61 +24,68 @@ const ActorsPageStyledDiv = styled.div`
     max-width: 100%;
   }
 `
-const actorsPage = ({metaSource ,referer} : ClientPagesTypes) => {
-    const settings = useSelector((state : settingsPropTypes) => state.settings);
+const actorsPage = () => {
+    const isWithSidebar = useSelector((state: settingsPropTypes) => state.settings?.identity?.metaPageSidebar);
+    const totalCount = useSelector((state: StoreTypes) => state.posts.totalCount)
     const router = useRouter();
-    const isWithSidebar = settings.identity?.metaPageSidebar;
 
     return (
         <ActorsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
                 position={'actorsPageTop'}
-                referer={referer}
             />
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
-                totalCount={metaSource?.totalCount}
+                totalCount={totalCount}
                 // @ts-ignore
                 size={parseInt(router.query?.size) || 60}
                 // @ts-ignore
-                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60) )}
+                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 60))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
 
-            <ActorsRenderer actors={metaSource?.metas || []} postElementSize={settings.design?.postElementSize} metaData={undefined}/>
+            <ActorsRenderer metaData={undefined} postElementSize={undefined}/>
 
 
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
-                totalCount={metaSource?.totalCount}
+                totalCount={totalCount}
                 // @ts-ignore
                 size={parseInt(router.query?.size) || 60}
                 // @ts-ignore
-                maxPage={Math.ceil(parseInt(metaSource?.totalCount) / parseInt(router.query?.size || 60) )}
+                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 60))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
             <WidgetsRenderer
                 position={'actorsPageBottom'}
-                referer={referer}
+
             />
         </ActorsPageStyledDiv>
     );
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['actorsPageTop','actorsPageLeftSidebar','actorsPageBottom', 'actorsPageRightSidebar'],store);
-    const metaData = await getMultipleMeta(context.query,'actors', true)
-    const metaSource = metaData.data ? metaData.data : {metas: [], totalCount: 0}
+    const firstLoadData = await getFirstLoadData(context.req, ['actorsPageTop', 'actorsPageLeftSidebar', 'actorsPageBottom', 'actorsPageRightSidebar'], store);
+    const metaData = await getMultipleMeta(context.query, 'actors', true)
+
+    store.dispatch({
+        type: SET_ACTORS_METAS,
+        payload: {
+            // @ts-ignore
+            actorsMetas: metaData.data?.metas || [],
+            // @ts-ignore
+            totalCount: metaData.data?.totalCount || 0,
+        }
+    })
+
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
-            query:context.query,
-            metaSource,
         }
     }
 

@@ -166,14 +166,14 @@ const AppProvider = props => {
             };
             return axios.post('/api/admin/posts/deletePost', body)
         },
-        updateSetting: async (type, data) => {
-            const body = {
-                token: localStorage.wt,
-                type,
-                data
-            };
-            return await axios.post(window.location.origin + '/api/admin/settings/update', body)
-        },
+        // updateSetting: async (type, data) => {
+        //     const body = {
+        //         token: localStorage.wt,
+        //         type,
+        //         data
+        //     };
+        //     return await axios.post(window.location.origin + '/api/admin/settings/update', body)
+        // },
         clearCaches: async () => {
 
             const body = {

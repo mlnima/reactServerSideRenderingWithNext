@@ -7,7 +7,7 @@ const Quality = props => {
                 </div>
                 <div className="editor">
                     <div className="option">
-                        <select defaultValue={props.postData.quality} name='quality' onChange={ e => props.onChangeHandler(e) }>
+                        <select className={'custom-select'} defaultValue={props.postData.quality} name='quality' onChange={ e => props.onChangeHandler(e) }>
                             <option value='SD'>SD</option>
                             <option value='HD'>HD</option>
                             <option value='4K'>4K</option>

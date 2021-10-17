@@ -3,14 +3,6 @@ import _getMultipleSettingsQueryGenerator from "./clientVariables/_getMultipleSe
 import _getMultipleWidgetWithDataQueryGenerator from "./clientVariables/_getMultipleWidgetWithDataQueryGenerator";
 import {SET_SETTINGS,SET_WIDGETS} from "../store/types";
 
-export const updateSetting = async (type, data) => {
-    const body = {
-        type,
-        data,
-        token: localStorage.wt,
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/settings/update', body)
-};
 
 export const getSetting = async (type, cache) => {
     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/settings/getSetting?type=${type}&cache=${cache}&token=${localStorage.wt}`);
@@ -165,8 +157,8 @@ export const getOrders = async (data, domainName) => {
 
 export const getFirstLoadData = async (req, dynamicWidgets,store) => {
     try {
+
         const cache = process.env.NODE_ENV !== 'development'
-        const referer = false;
         const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length > 0 ? [...dynamicWidgets] : [];
         const staticWidgets = process.env.NEXT_PUBLIC_STATIC_WIDGETS ? JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS) : []
         const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet]}, cache)
@@ -185,13 +177,7 @@ export const getFirstLoadData = async (req, dynamicWidgets,store) => {
             }
         })
 
-        return {
-            identity,
-            design,
-            widgets:allWidgets,
-            referer,
-
-        }
+        return { }
     } catch (e) {
         console.log(e)
     }
@@ -226,10 +212,10 @@ export const getFirstLoadDataStatic = async ( dynamicWidgets,store) => {
         })
 
         return {
-            identity,
-            design,
-            widgets,
-            referer,
+            // identity,
+            // design,
+            // widgets,
+            // referer,
 
         }
     } catch (e) {

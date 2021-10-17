@@ -14,6 +14,7 @@ const MenuWidgetSubItemStyledLi = styled.li`
     width: 100px;
     list-style-type: none;
     padding: 10px 15px;
+    
 
   }
 
@@ -25,10 +26,10 @@ const MenuWidgetSubItemStyledLi = styled.li`
 `
 
 const MenuWidgetStyledLi = styled.li`
-
+  padding-left:0.2rem !important;
+  padding-right:0.2rem !important;
   list-style-type: none;
-  width: 90%;
-  //padding: 10px 0;
+  width: 100%;
   font-size: 1rem;
   display: flex;
   justify-content: space-between;
@@ -48,7 +49,6 @@ const MenuWidgetStyledLi = styled.li`
     }
   }
   
-
   .open-submenus {
     background-color: transparent;
     border: none;
@@ -74,8 +74,12 @@ const MenuWidgetStyledLi = styled.li`
   }
 
   @media only screen and (min-width: 768px) {
+      height: initial;
       font-size: 1rem;
       width: ${props=> !props.menuItem.parent ? (props.menuItem.subItems || []).length > 0 ? 'auto' : 'auto' : '50px '};
+    .menu-widget-item-link{
+      height: initial;
+    }
   }
 `
 
@@ -107,7 +111,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
     return (
 
         <MenuWidgetStyledLi menuItem={menuItem}
-                            className={`menu-widget-item ${router.asPath === menuItem?.target ? 'btn btn-primary':''}`}
+                            className={`menu-widget-item ${router.asPath === menuItem?.target ? 'btn btn-primary':'btn btn-transparent-light'}`}
                             onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
                             onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
                             isActive={ router.asPath === menuItem?.target}

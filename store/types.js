@@ -37,9 +37,14 @@ export const SET_SETTINGS ='SET_SETTINGS'
 export const GET_POSTS = 'GET_POSTS'
 export const GET_POST = 'GET_POST'
 export const SET_POST = 'SET_POST'
+//comments
 export const GET_COMMENTS = 'GET_COMMENTS'
 export const NEW_COMMENT = 'NEW_COMMENT'
 export const DELETE_COMMENT = 'DELETE_COMMENT'
+//metas
+export const SET_CATEGORIES_METAS = 'SET_CATEGORIES_METAS'
+export const SET_TAGS_METAS = 'SET_TAGS_METAS'
+export const SET_ACTORS_METAS = 'SET_ACTORS_METAS'
 
 //CHATROOM ACTIONS TYPES
 export const SET_ONLINE_USERS = 'SET_ONLINE_USERS'

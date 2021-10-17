@@ -1,8 +1,9 @@
-import React, {useContext, useState,useEffect} from 'react';
+import React, {useContext, useState, useEffect} from 'react';
 import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
 import {AppContext} from "../../../context/AppContext";
 import dynamic from "next/dynamic";
+
 const Posts = dynamic(() => import('../Posts/Posts'))
 const CategoriesRenderer = dynamic(() => import('../pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer'))
 const TagsRenderer = dynamic(() => import('../pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer'))
@@ -35,7 +36,7 @@ interface WidgetsRendererProps {
 }
 
 
-const WidgetsRenderer = ({ _id, position}: WidgetsRendererProps) => {
+const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
     const settings = useSelector((state: settingsPropTypes) => state.settings);
@@ -43,7 +44,7 @@ const WidgetsRenderer = ({ _id, position}: WidgetsRendererProps) => {
     const contextData = useContext(AppContext);
     const router = useRouter()
 
-    const widgetsData = widgets.filter((widget :WidgetInterface) => widget.data?.position === position).sort((a, b) => {
+    const widgetsData = widgets.filter((widget: WidgetInterface) => widget.data?.position === position).sort((a, b) => {
         return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
     })
 
@@ -54,10 +55,15 @@ const WidgetsRenderer = ({ _id, position}: WidgetsRendererProps) => {
     }, [widgets]);
 
 
-    const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
+
+
+         const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
+
         const languageToRender = widget.data.languageToRender || 'all';
         const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
+
         const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
+
         const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator';
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
@@ -83,17 +89,15 @@ const WidgetsRenderer = ({ _id, position}: WidgetsRendererProps) => {
                                                                                         : null;
 
         if (renderByLanguageCondition && !isEditMode) {
+
             return (
                 <Widget
-                        key={index}
-                        widgetId={widget._id}
-                        {...widget}
-                        widgetToRender={widgetToRender}
-                        postElementSize={settings.design?.postElementSize}
-                        postElementStyle={settings.design?.postElementStyle}
-                        postElementImageLoader={settings.design?.postElementImageLoader}
-                        postElementImageLoaderType={settings.design?.postElementImageLoaderType}
-                        viewType={widget.data?.viewType}
+                    key={index}
+                    widgetId={widget._id}
+                    {...widget}
+                    widgetToRender={widgetToRender}
+                    postElementSize={settings.design?.postElementSize}
+                    viewType={widget.data?.viewType}
                 />
             )
 

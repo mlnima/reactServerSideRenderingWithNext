@@ -9,7 +9,7 @@ const TextAreaComponent = props => {
                     <p>{convertVariableNameToName( props.name)}</p>
                 </div>
                 <div className="editor">
-                    <textarea  className='textareaInput' name={ props.name } value={props.postData[props.name]}  onChange={e => props.onChangeHandler(e)}/>
+                    <textarea  className='form-control-input' name={ props.name } value={props.postData[props.name]}  onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );

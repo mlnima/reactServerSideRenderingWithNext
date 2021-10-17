@@ -82,29 +82,17 @@ let VideoCard = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
-
     width: ${props => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
     max-width: ${props => props.postElementSize === 'list' ? `320px` : `100%`};
     flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
     margin: 7px;
     font-size: 14px;
-
     .video-card-link {
       flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
-
       .video-card-under-media {
         margin: 8px;
-
-        // .video-card-title {
-          //   width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
-        //   font-size: 14px;
-        //
-        // }
       }
-
-
     }
-
   }
 `
 

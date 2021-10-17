@@ -1,148 +1,36 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-// import AdminLayout from '../../../../components/layouts/AdminLayout';
-import { DelayInput } from 'react-delay-input';
-import { AppContext } from '../../../../context/AppContext'
-import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
-// import { getAbsolutePath } from '../../../../_variables/_variables'
-// import { getSetting } from '../../../../_variables/ajaxVariables'
-// import settings from '../general'
-import styled from "styled-components";
-let StyledDiv = styled.div`
+import React, {useState } from 'react';
+import dynamic from "next/dynamic";
+const Editor = dynamic(()=>import('@monaco-editor/react'),{ssr:false})
+import {useDispatch, useSelector} from "react-redux";
+import {setLoading} from "../../../../store/actions/globalStateActions";
+import {updateSetting} from "../../../../store/actions/settingsActions";
 
-`
 const customScript = props => {
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
+    const identity = useSelector(state => state.settings.identity)
 
-    const [ newScript, setNewScript ] = useState({
-        scriptName: '',
-        scriptBody: ''
-    })
-    const [ scriptsName, setScriptsName ] = useState([]);
-
-    useEffect(() => {
-        setScriptsName((contextData.siteIdentity.customScripts || []).map(script => script.scriptName))
-    }, [ contextData.siteIdentity.customScripts ]);
-
-    const onNewScriptChangeHandler = e => {
-        setNewScript({
-            ...newScript,
-            [e.target.name]: e.target.value
-        })
-    }
-
-    const onAddHandler = async e => {
-        e.preventDefault()
-        if (scriptsName.includes(newScript.scriptName)) {
-            contextData.dispatchAlert({
-                active: true,
-                alertMessage: 'already there is script with this name',
-                type: 'error'
-            })
-        } else {
-            contextData.dispatchSiteIdentity({
-                ...contextData.siteIdentity,
-                customScripts: [ ...contextData.siteIdentity.customScripts, newScript ]
-            })
-        }
-    }
-
-    const onDeleteHandler = (scriptName) => {
-        contextData.dispatchSiteIdentity({
-            ...contextData.siteIdentity,
-            customScripts: contextData.siteIdentity.customScripts.filter(script => script.scriptName !== scriptName)
-        })
-    }
+    const [customScriptsAsString,setCustomScriptsAsString] = useState(()=>identity.customScriptsAsString)
 
     const onSaveHandler = () => {
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        })
-        contextData.functions.updateSetting('identity', contextData.siteIdentity).then(() => {
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
-        }).catch(err => {
-            console.log(err)
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
-        })
+        dispatch(setLoading(true))
+        dispatch(updateSetting('identity', {
+            ...identity,
+            customScriptsAsString
+        }))
     }
-
-    const onGoogleAnalyticsSaveHandler = e => {
-        contextData.dispatchSiteIdentity({
-            ...contextData.siteIdentity,
-            googleAnalyticsID: e.target.value
-        })
-    }
-
-    const renderScripts = (contextData.siteIdentity.customScripts || []).map(script => {
-
-        const onChangeHandler = e => {
-
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: true
-            })
-
-            const scriptIndex = contextData.siteIdentity.customScripts.findIndex(addedScript => addedScript.scriptName === script.scriptName)
-
-            const updatedScript = {
-                ...contextData.siteIdentity.customScripts[scriptIndex],
-                [e.target.name]: e.target.value
-            }
-            setTimeout(() => {
-
-
-
-                const updatedScripts = [
-                    ...contextData.siteIdentity.customScripts.slice(0, scriptIndex),
-                    updatedScript,
-                    ...contextData.siteIdentity.customScripts.slice(scriptIndex + 1),
-                ];
-
-                contextData.dispatchSiteIdentity({
-                    ...contextData.siteIdentity,
-                    customScripts: updatedScripts
-                })
-                contextData.dispatchState({
-                    ...contextData.state,
-                    loading: false
-                })
-
-            }, 500)
-
-        }
-
-        return (
-            <div key={script.scriptName} className='customScriptPageItem'>
-                <div className='customScriptPageItemHead'>
-                    <DelayInput className='customScriptPageItemHeadName' name='scriptName' value={ script.scriptName } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
-                    <button className='removeScript green-action-btn-link' onClick={ () => onDeleteHandler(script.scriptName) }>X</button>
-                </div>
-                <DelayInput element="textarea" className='customScript' name='scriptBody' value={ script.scriptBody } delayTimeout={ 1000 } onChange={ e => onChangeHandler(e) }/>
-
-            </div>
-        )
-    })
 
     const onCustomScriptsAsStringChangeHandler = value =>{
-        contextData.dispatchSiteIdentity({
-            ...contextData.siteIdentity,
-            customScriptsAsString: value
-        })
+        setCustomScriptsAsString(value)
     }
+
     return (
-        <StyledDiv>
+        <div>
             <div className='customScriptsAsStringSection'>
                 <Editor
                     language='html'
                     name='customScriptsAsString'
                     theme="vs-dark"
-                    value={contextData.siteIdentity.customScriptsAsString || ''}
+                    value={customScriptsAsString || ''}
                     onChange={onCustomScriptsAsStringChangeHandler}
                     classname='customScriptsAsString'
                     width={props.width || '100%'}
@@ -150,19 +38,8 @@ const customScript = props => {
                 />
                 <button className='saveBtn green-action-btn-link' onClick={ () => onSaveHandler() }>Save</button>
             </div>
-        </StyledDiv>
+        </div>
     );
 };
 
 export default customScript;
-
-
-// <form className='addCustomScriptForm' onSubmit={ e => onAddHandler(e) }>
-//     <input className='scriptName' name='scriptName' placeholder='Script Name' onChange={ e => onNewScriptChangeHandler(e) }/>
-//     <textarea name='scriptBody' className='addScriptTextarea' placeholder='Script with out Script Tag' onChange={ e => onNewScriptChangeHandler(e) }/>
-//     <button type='submit green-action-btn-link'>Add</button>
-// </form>
-// <div className='customScripts'>
-//     { renderScripts }
-// </div>
-// <button className='saveBtn green-action-btn-link' onClick={ () => onSaveHandler() }>Save</button>

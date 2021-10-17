@@ -1,16 +1,14 @@
+import styled from "styled-components";
+const FormatStyledDiv = styled.div`
+.custom-select{
+  width: 100%;
+}
+`
 const Format = props => {
 
     return (
-        <div className='format-section'>
-            <style jsx>{`
-              .format-section {
-                select {
-                  padding: 4px;
-                  border: 1px solid #ccc;
-                }
-              }
-            `}</style>
-            <select name='postType' value={props.postData.postType} onChange={e => props.onChangeHandler(e)}>
+        <FormatStyledDiv className='format-section'>
+            <select className={'custom-select'} name='postType' value={props.postData.postType} onChange={e => props.onChangeHandler(e)}>
                 <option value='standard'>Standard</option>
                 <option value='video'>Video</option>
                 <option value='product'>Product</option>
@@ -19,7 +17,7 @@ const Format = props => {
                 <option value='article'>Article</option>
                 <option value='code'>Code</option>
             </select>
-        </div>
+        </FormatStyledDiv>
     );
 };
 

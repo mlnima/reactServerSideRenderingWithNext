@@ -27,9 +27,7 @@ const AdminDataSetter = () => {
         try {
             const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, localStorage.wt)
             const widgetData = await _getMultipleWidgets(localStorage.wt)
-
             dispatch(getCustomPages())
-
             // @ts-ignore
             if (widgetData?.data?.widgets) {
                 // @ts-ignore

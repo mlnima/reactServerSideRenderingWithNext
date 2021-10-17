@@ -1,8 +1,12 @@
 const commentSchema = require('../../../models/commentSchema');
 
 module.exports = (req, res) => {
-    const size = parseInt(req.body.size) > 50 ? 50 : parseInt(req.body.size)
-    const pageNo = req.body.pageNo ? parseInt(req.body.pageNo) : 1
+    const requestedSize = parseInt(req.body.size)
+    const requestedPage = parseInt(req.body.pageNo)
+
+    const size = requestedSize ? requestedSize > 50 ? 50 : requestedSize : 50
+    const pageNo = requestedPage ? requestedPage : 1
+
     const onDocument = req.body.onDocument ? {onDocumentId: req.body.onDocument} : {}
     const status = !req.body.status || req.body.status === 'all' ? {status: 'approved'} : {status: req.body.status}
     let sortQuery = req.body.sort === 'latest' ? '-_id' : {[req.body.sort]: -1}
@@ -20,7 +24,7 @@ module.exports = (req, res) => {
     Promise.all([comments, commentsCount]).then(data => {
         res.json({comments: data[0], count: data[1]})
     }).catch(err => {
-        console.error(err)
+        console.error('comments :',err)
         res.end()
     })
 

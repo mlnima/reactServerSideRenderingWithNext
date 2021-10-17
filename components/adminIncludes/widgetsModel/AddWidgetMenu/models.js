@@ -63,8 +63,6 @@ export const authenticationWidgetModel = {
 }
 export const languageWidgetModel = {
     ...generalModel,
-    languageTextAsDefaultLanguage:'',
-    languageToShowBesideDropDown:'',
     customStyles:'select{\n' +
         '  border: none;\n' +
         '  background-color: var(--main-background-color,#000);\n' +

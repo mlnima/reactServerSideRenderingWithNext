@@ -1,33 +1,24 @@
-import React, { useContext } from 'react';
-import { updateSetting } from '../../../_variables/ajaxVariables'
-import { AppContext } from '../../../context/AppContext'
+import React from 'react';
+import {updateSetting} from '../../../store/actions/settingsActions'
+import {useDispatch, useSelector} from "react-redux";
+import {setLoading} from "../../../store/actions/globalStateActions";
 
-const SaveDesignChangesBtn = ({name,value}) => {
-    const contextData = useContext(AppContext);
+const SaveDesignChangesBtn = ({name, value}) => {
+    const dispatch = useDispatch()
+    const design = useSelector(state => state.settings.design)
 
-    const onSaveHandler = e => {
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        })
-
-        const designToSave={
-            ...contextData.siteDesign,
-            [name]:value
-        }
-
-
-
-        updateSetting('design', designToSave).then(() => {
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
-        })
+    const onSaveHandler = () => {
+        dispatch(setLoading(true))
+        dispatch(updateSetting('design', {
+            ...design,
+            [name]: value
+        }))
     };
 
     return (
-        <button className='save-design-btn' onClick={ () => onSaveHandler() }>Save Changes</button>
+        <button className='save-design-btn' onClick={() => onSaveHandler()}>
+            Save Changes
+        </button>
     );
 };
 export default SaveDesignChangesBtn;

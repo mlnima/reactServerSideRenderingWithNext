@@ -15,6 +15,12 @@ let StyledDiv = styled.div`
   padding:  1%;
   border: .1px solid rgba(0,0,0,.2);
   background-color: white;
+        
+   .form-control-input{
+           width: 95%;
+   }     
+        
+        
   .saveBtn {
     display: flex;
     justify-content: center;

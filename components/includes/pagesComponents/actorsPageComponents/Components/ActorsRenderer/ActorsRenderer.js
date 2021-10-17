@@ -2,14 +2,14 @@ import React from 'react';
 import ActorCard from "../ActorCard/ActorCard";
 import styled from "styled-components";
 import {setLoading} from "../../../../../../store/actions/globalStateActions";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 let ActorsRendererStyledDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
 
-  .actor-card-link{
+  .actor-card-link {
     width: 48vw;
     margin: 1vw;
     display: flex;
@@ -17,6 +17,7 @@ let ActorsRendererStyledDiv = styled.div`
     align-items: center;
     justify-content: center;
     text-decoration: none;
+
     .actor-card-title {
       width: 100%;
       color: var(--main-text-color);
@@ -45,18 +46,23 @@ let ActorsRendererStyledDiv = styled.div`
   }
 `
 
-const ActorsRenderer = ({postElementSize, metaData, actors}) => {
+const ActorsRenderer = ({metaData, postElementSize}) => {
+
+    const actorsMetas = metaData ? metaData : useSelector(state => state.posts.actorsMetas)
+    const elementSize = postElementSize ? postElementSize : useSelector(state => state.settings?.design?.postElementSize);
+
     const dispatch = useDispatch()
-    const cardWidth = postElementSize === 'list' ? 116.6 :
-        postElementSize === 'smaller' ? 209.8 :
-            postElementSize === 'small' ? 255 :
-                postElementSize === 'medium' ? 320 : 255
+
+    const cardWidth = elementSize === 'list' ? 116.6 :
+        elementSize === 'smaller' ? 209.8 :
+            elementSize === 'small' ? 255 :
+                elementSize === 'medium' ? 320 : 255
 
     return (
         <ActorsRendererStyledDiv className='actors-content' cardWidth={cardWidth}>
             {
-                (actors || metaData || []).map((actor,index) => {
-                    return <ActorCard onActivateLoadingHandler={()=> dispatch(setLoading(true))} key={index} cardWidth={cardWidth} actor={actor} postElementSize={postElementSize}/>
+                actorsMetas.map((actor, index) => {
+                    return <ActorCard onActivateLoadingHandler={() => dispatch(setLoading(true))} key={index} cardWidth={cardWidth} actor={actor} postElementSize={elementSize}/>
                 })
             }
         </ActorsRendererStyledDiv>

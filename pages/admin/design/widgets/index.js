@@ -11,7 +11,7 @@ let StyledDiv = styled.div`
   flex-direction: column;
   width: 100%;
 
-  #widget-setting {
+  .widget-setting {
     width: 100%;
     display: flex;
     justify-content: center;
@@ -29,23 +29,14 @@ let StyledDiv = styled.div`
       justify-content: flex-start;
       align-items: flex-start;
       flex-wrap: wrap;
-      //display: grid;
-      //grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-      //grid-gap: 10px;
     }
   }
 
   @media only screen and (min-width: 768px) {
-    #widget-setting {
+    .widget-setting {
       h2 {
         justify-self: end;
         width: 98%;
-      }
-
-      .widgets {
-        //grid-template-columns: repeat(auto-fill, minmax(450px, 1fr));
-        //display: flex;
-        //flex-wrap: wrap;
       }
     }
   }
@@ -64,7 +55,7 @@ const AdminWidgets = () => {
     return (
         <StyledDiv className='admin-widgets-page'>
             <h1>Widgets Settings</h1>
-            <div id='widget-setting'>
+            <div class='widget-setting'>
                 <h2>Add New Widget</h2>
                 <div className="top-panel">
                     <AddWidgetMenu/>

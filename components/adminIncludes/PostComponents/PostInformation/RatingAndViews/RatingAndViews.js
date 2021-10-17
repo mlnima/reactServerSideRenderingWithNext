@@ -11,7 +11,7 @@ const RatingAndViews = props => {
                     <p>{convertVariableNameToName(props.name)}</p>
                 </div>
                 <div className="editor">
-                    <input type='number' className='numberInput' name={props.name} value={props.value} onChange={e => props.onChangeHandler(e)}/>
+                    <input type='number' className='form-control-input' name={props.name} value={props.value} onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );
