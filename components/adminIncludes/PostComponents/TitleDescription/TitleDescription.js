@@ -1,108 +1,77 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect, useRef} from 'react';
 import dynamic from 'next/dynamic'
-
 import styled from "styled-components";
-import Editor from "@monaco-editor/react";
-const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'))
+import {useSelector} from "react-redux";
+const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
+const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false})
 
 let StyledDiv = styled.div`
   width: 98%;
   padding: 1%;
   margin: auto;
-
   .quill {
     width: 100%;
+    height:80vh;
     margin-left: -1%;
   }
-
-  .TitleDescriptionTitle {
-    border-radius: 5px;
-    outline: none;
-    height: 30px;
+  .form-control-input {
     width: 98%;
-    padding: 0 1%;
-    background-color: white;
-    border: .1px solid rgba(0, 0, 0, .2);
   }
-
-  .TitleDescriptionDescription {
-    margin-top: 10px;
-    min-height: 600px;
-    //border-radius: 5px;
-    outline: none;
-    //border: none;
-    padding: 3px 5px;
-    height: 30px;
-    width: 95%;
-    background-color: white;
-  }
-
   .editor-switcher {
     margin: 10px;
-    
     button {
-      outline: none;
       margin: 0 5px;
-      padding: 5px 10px;
-
     }
   }
 `
 
 
 const TitleDescription = props => {
-    //ReactQuill
+    const editorElement = useRef(null)
+    const post = useSelector((state) => state.adminPanelPosts.post);
+    const activeEditingLanguage = useSelector((state) => state.adminPanelPosts.activeEditingLanguage);
     const [editorMode, setEditorMode] = useState('monaco')
-
-    const onChangeModeHandler = (e) => {
-        setEditorMode(e.target.name)
-    }
-
 
     return (
         <StyledDiv className='title-description'>
             <input type="text" name='title'
-                   value={(props.activeEditingLanguage === 'default' ? props.textInputsState.title : props.textInputsState?.translations?.[props.activeEditingLanguage]?.title) || ''}
-                   className='TitleDescriptionTitle' placeholder='Enter The Title Here'
+                   value={(activeEditingLanguage === 'default' ? post.title : post?.translations?.[activeEditingLanguage]?.title) || ''}
+                   className='form-control-input' placeholder='Enter The Title Here'
                    onChange={e => props.onChangeHandler(e)}/>
             <div className='editor-switcher'>
-                <button onClick={e=>onChangeModeHandler(e)} name='monaco'>Html</button>
-                <button onClick={e=>onChangeModeHandler(e)} name='textEditor'>TextEditor</button>
-                <button onClick={e=>onChangeModeHandler(e)} name='textarea'>TextArea</button>
+                <button className={'btn btn-info'} onClick={() => setEditorMode('monaco')} >Html</button>
+                <button className={'btn btn-info'}  onClick={() => setEditorMode('textEditor')} >TextEditor</button>
+                <button className={'btn btn-info'}  onClick={() => setEditorMode('textarea')} >TextArea</button>
             </div>
 
             {
-                editorMode === 'textEditor'?
-                        <TextEditor
-                            state={props.textInputsState}
-                            activeEditingLanguage={props.activeEditingLanguage}
-                            onChangeHandler={props.onDescriptionChangeHandler}
-                            rendering={true}
-                            valueData={(props.activeEditingLanguage === 'default' ? props.textInputsState.description : props?.textInputsState.translations?.[props.activeEditingLanguage]?.description).toString() || ''}
-                        />
+                editorMode === 'textEditor' ?
+                    <TextEditor
+                        state={props.state}
+                        activeEditingLanguage={activeEditingLanguage}
+                        onChangeHandler={props.onDescriptionChangeHandler}
+                        rendering={true}
+                        valueData={(activeEditingLanguage === 'default' ? post.description : post?.translations?.[activeEditingLanguage]?.description) || ''}
+                    />
                     :
                     editorMode === 'monaco' ?
                         <Editor
+                            ref={editorElement}
                             language='html'
-                            width={props.width || '100%'}
                             height={props.height || '80vh'}
-                            theme="vs"
-                            defaultValue={(props.activeEditingLanguage === 'default' ? props.textInputsState.description : props?.textInputsState.translations?.[props.activeEditingLanguage]?.description) || ''}
-                            value={(props.activeEditingLanguage === 'default' ? props.textInputsState.description : props?.textInputsState.translations?.[props.activeEditingLanguage]?.description) || ''}
+                            theme="vs-dark"
+                            value={(activeEditingLanguage === 'default' ? post.description : post?.translations?.[activeEditingLanguage]?.description) || ''}
                             onChange={props.onDescriptionChangeHandler}
-                            //className='style-section-editor'
-                        />  :
+                        /> :
                         <textarea
                             onChange={props.onDescriptionChangeHandler}
                             style={{
-                                width:props.width || '100%',
-                                height:props.height || '80vh'
+                                width: props.width || '100%',
+                                height: props.height || '80vh'
                             }}
-
-                            value={(props.activeEditingLanguage === 'default' ? props.textInputsState.description : props?.textInputsState.translations?.[props.activeEditingLanguage]?.description) || ''}
+                            value={(activeEditingLanguage === 'default' ? post.description : post?.translations?.[activeEditingLanguage]?.description) || ''}
                         />
             }
-
 
 
         </StyledDiv>

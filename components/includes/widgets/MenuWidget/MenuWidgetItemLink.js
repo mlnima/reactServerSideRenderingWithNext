@@ -13,7 +13,7 @@ const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl,activeLi
         <React.Fragment>
             {linkTargetType === 'internal' ?
                 <Link href={linkTargetUrl}  scroll={false}>
-                    <a className={activeLink ? 'btn btn-primary' : 'menu-widget-item-link'}
+                    <a className={'menu-widget-item-link'}
                        rel='next'
                        onClick={()=>linkTargetUrl.includes('#') ? null : mobileNavigationOnClickHandler(linkTargetUrl)}
                        title={linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}

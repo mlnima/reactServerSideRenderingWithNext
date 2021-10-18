@@ -1,7 +1,8 @@
 import { convertVariableNameToName } from '../../../../../_variables/_variables'
+import {useSelector} from "react-redux";
 
 const TextAreaComponent = props => {
-
+    const post = useSelector((state) => state.adminPanelPosts.post);
     if (props.rendering){
         return (
             <div className='post-information-section'>
@@ -9,7 +10,7 @@ const TextAreaComponent = props => {
                     <p>{convertVariableNameToName( props.name)}</p>
                 </div>
                 <div className="editor">
-                    <textarea  className='form-control-input' name={ props.name } value={props.postData[props.name]}  onChange={e => props.onChangeHandler(e)}/>
+                    <textarea  className='form-control-input' name={ props.name } value={post[props.name]||''}  onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );

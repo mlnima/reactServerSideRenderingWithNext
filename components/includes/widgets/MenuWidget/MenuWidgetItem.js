@@ -38,10 +38,15 @@ const MenuWidgetStyledLi = styled.li`
   .menu-widget-item-link {
     color: var(--navigation-text-color, #ccc);
     text-decoration: none;
-    font-weight: normal;
     font-size: 14px;
+    font-weight: ${props=>props.activeLink ? 'bold' : 'initial'};
+
 
     &:hover {
+      filter: invert(70%);
+      cursor: pointer;
+    }
+    &:active{
       filter: invert(70%);
       cursor: pointer;
     }
@@ -112,11 +117,9 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                             className={'menu-widget-item'}
                             onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
                             onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
-                            isActive={router.asPath === menuItem?.target}
+                            activeLink={menuItem?.target ? router.asPath.includes(menuItem?.target) :false}
         >
-
-
-            <MenuWidgetItemLink activeLink={router.asPath === menuItem?.target}
+            <MenuWidgetItemLink
                                 linkTargetType={menuItem?.type}
                                 linkType={'parent'}
                                 linkTargetUrl={menuItem?.target}
@@ -131,7 +134,8 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                 <span className='open-submenus' aria-label='Center Align' onClick={onOpenSubmenusHandler}>
                     <FontAwesomeIcon icon={showSub ? faSortUp : faSortDown} className='navigation-dropdown-icon' style={{color: 'white', width: '20px', height: '20px'}}/>
                 </span>
-                : null}
+                : null
+            }
 
             {showSub ?
                 <ul className='dropdown-content'>

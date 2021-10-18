@@ -230,7 +230,7 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                 //     message: error.response.data.message,
                 //     type: 'error',
                 // })
-                console.log(error.response.data.message)
+
             })
 
     };

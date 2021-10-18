@@ -7,6 +7,8 @@ const nextEnv = require('next-env');
 const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
 const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
 const withPWA = require('next-pwa')
+const withCSS = require('@zeit/next-css');
+const MonacoWebpackPlugin = require('monaco-editor-webpack-plugin');
 
 
 const svgLoader = {
@@ -79,6 +81,13 @@ const nextConfigs = {
 }
 
 module.exports = withPlugins([
+    withCSS({
+        webpack(config, options) {
+            config.plugins.push(new MonacoWebpackPlugin());
+            return config;
+        },
+        cssLoaderOptions: { url: false }
+    }),
     i18n,
     svgLoader,
     process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) : {},

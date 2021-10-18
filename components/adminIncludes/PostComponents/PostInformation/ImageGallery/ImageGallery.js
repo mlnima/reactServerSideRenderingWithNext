@@ -3,6 +3,7 @@ import {uploadFiles} from "../../../../../_variables/ajaxVariables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes, faUpload} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import {useSelector} from "react-redux";
 let StyledDiv = styled.div`
     display: flex;
     .product-information-image-preview{
@@ -32,6 +33,9 @@ let StyledDiv = styled.div`
 `
 const ImageGallery = props => {
     const uploadInputElement = useRef(null)
+
+    const post = useSelector((state) => state.adminPanelPosts.post);
+    
     const [state, setState] = useState({
         images: [],
         imageFromUrl: ''
@@ -39,17 +43,17 @@ const ImageGallery = props => {
     useEffect(() => {
         setState({
             ...state,
-            images: props.postData.images || [],
+            images: post.images || [],
             imageFromUrl: ''
         })
     }, []);
 
-    const renderImagesPreview = (props.postData.images || []).map(image => {
+    const renderImagesPreview = (post.images || []).map(image => {
         const onRemoveImageHandler = () => {
             const e = {
                 target: {
                     name: 'images',
-                    value: props.postData.images.filter(i => i !== image)
+                    value: post.images.filter(i => i !== image)
                 }
             }
             props.onChangeHandler(e)
@@ -67,7 +71,7 @@ const ImageGallery = props => {
         const e = {
             target: {
                 name: 'images',
-                value: [...props.postData.images, state.imageFromUrl]
+                value: [...post.images, state.imageFromUrl]
             }
         }
         props.onChangeHandler(e)
@@ -83,7 +87,7 @@ const ImageGallery = props => {
             const e = {
                 target: {
                     name: 'images',
-                    value: [...props.postData.images, res.data.path.replace('./', '/')]
+                    value: [...post.images, res.data.path.replace('./', '/')]
                 }
             }
             props.onChangeHandler(e)
@@ -93,15 +97,6 @@ const ImageGallery = props => {
 
         })
     }
-
-
-    // const onChangeHandler = (e) => {
-    //     props.setProductInfo({
-    //         ...props.productInfo,
-    //         [e.target.name]: e.target.value
-    //     })
-    // }
-
 
     if (props.rendering) {
         return (

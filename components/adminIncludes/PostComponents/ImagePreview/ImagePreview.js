@@ -1,7 +1,7 @@
-import  { useState } from 'react';
-import Switch from "react-switch";
 import styled from "styled-components";
-let StyledDiv = styled.div`
+import {useSelector} from "react-redux";
+
+let ImagePreviewStyledDiv = styled.div`
   .editor{
     display: flex;
     justify-content: center;
@@ -13,44 +13,19 @@ let StyledDiv = styled.div`
   }
 `
 
-const ImagePreview = props => {
-
-    const [ state, setState ] = useState({
-        open: false
-    })
-
-    if (props.postData.mainThumbnail) {
-
-        if (state.open) {
-            return (
-                <StyledDiv className='ImagePreview VideoInformationSection'>
-
-
-                    <div className="title">
-                        <p>Image Preview</p>
-                        <Switch onChange={ () => state.open ? setState({ ...state, open: false }) : setState({ ...state, open: true }) } checked={ state.open  }/>
-                    </div>
-                    <div className="editor">
-
-                        <img src={ props.postData.mainThumbnail }/>
-                    </div>
-                </StyledDiv>
-            );
-        } else return (
-
-                <StyledDiv className='ImagePreview VideoInformationSection'>
-                    <div className="title">
-                        <p>Image Preview</p>
-                        <Switch onChange={ () => state.open ? setState({ ...state, open: false }) : setState({ ...state, open: true }) } checked={ state.open  }/>
-                    </div>
-                    <div className="editor">
-
-                    </div>
-                </StyledDiv>
-
-        )
-
+const ImagePreview = () => {
+    const mainThumbnail = useSelector((state) => state.adminPanelPosts.post?.mainThumbnail);
+    if (mainThumbnail) {
+        return (
+            <ImagePreviewStyledDiv className=''>
+                <div className="title">
+                    <p>Image Preview</p>
+                </div>
+                <div className="editor">
+                    <img src={ mainThumbnail }/>
+                </div>
+            </ImagePreviewStyledDiv>
+        );
     } else return null
-
 };
 export default ImagePreview;

@@ -1,21 +1,20 @@
 import React, {useState} from 'react';
+import {useSelector} from "react-redux";
 
 const RenderIframe = props => {
-    const [state, setState] = useState({
-        open: false
-    });
+
+    const videoEmbedCode = useSelector((state) => state.adminPanelPosts.post?.videoEmbedCode);
+
     if (props.rendering){
-        if (!state.open && props.postData.videoEmbedCode) {
-            return (
-                <div className='post-information-section'>
-                    <div className="title">
-                    </div>
-                    <div className="editor">
-                        <iframe src={props.postData.videoEmbedCode}/>
-                    </div>
+        return (
+            <div className='post-information-section'>
+                <div className="title">
                 </div>
-            )
-        } else return null
+                <div className="editor">
+                    {videoEmbedCode?<iframe src={videoEmbedCode}/>:null}
+                </div>
+            </div>
+        )
     }else return null
 
 

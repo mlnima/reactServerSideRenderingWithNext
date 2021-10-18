@@ -1,15 +1,14 @@
 import * as types from '../types'
-import {HYDRATE} from "next-redux-wrapper";
 
 const initialState = {
     customPages:[]
 }
 
 export interface AdminPanelGlobalState {
-    customPages:string[]
+    customPages:string[],
 }
 
-export const adminPanelGlobalStateReducer = (state= initialState , action : {type:string,payload:any}) =>{
+export const adminPanelGlobalStateReducer = (state : AdminPanelGlobalState = initialState , action : {type:string,payload:any}) =>{
 
     switch (action.type){
         case types.GET_CUSTOM_PAGES:

@@ -3,6 +3,7 @@ import {AppContext} from "../../../../context/AppContext";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+import {useSelector} from "react-redux";
 const MetaStyledDiv = styled.div`
   .add-new-meta {
     display: flex;
@@ -33,14 +34,7 @@ const MetaStyledDiv = styled.div`
 
 const Meta = props => {
     let newItemsElement = useRef(null);
-    const [metas, setMetas] = useState([])
-
-
-    useEffect(() => {
-        if (props?.postData?.[props.type]){
-            setMetas(()=>props?.postData?.[props.type])
-        }
-    }, [props]);
+    const post = useSelector((state) => state.adminPanelPosts.post);
 
     const deleteItem = (e) => {
         props.onDeleteHandler(props.type, e.currentTarget.name)
@@ -48,7 +42,6 @@ const Meta = props => {
 
     const addNewItem = e => {
         e.preventDefault()
-
         if (newItemsElement.current.value.includes(',')) {
             let newItems = newItemsElement.current.value.split(',');
             const newItemsToSchemaForm = newItems.map(newItem => {
@@ -58,28 +51,22 @@ const Meta = props => {
                 }
                 return newItemData
             })
-
             const addedItemFromType = [...newItemsToSchemaForm]
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
-
-
         } else if (newItemsElement.current.value) {
             const newItemData = {
                 name: newItemsElement.current.value.trim(),
                 type: props.type
             }
-
             const addedItemFromType = [newItemData]
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
-
         }
         setTimeout(() => {
             newItemsElement.current.value = ''
-        }, 500)
-
+        }, 100)
     };
 
-    const addedItems = metas.map((item,index )=> {
+    const addedItems = (post?.[props.type] || []).map((item,index )=> {
         return (
             <button key={index} name={item?.name} onClick={(e) => deleteItem(e)} className='btn btn-danger'>
                 {item?.name}

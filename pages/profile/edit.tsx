@@ -10,7 +10,6 @@ import {userResetPassword} from "../../store/actions/userActions";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
 
-
 const EditProfileStyledMain = styled.main`
   grid-area: main;
   display: flex;
@@ -53,6 +52,7 @@ interface ChangePasswordDataValidator {
     newPassword?: boolean,
     repeatNewPassword?: boolean,
 }
+
 interface ChangePasswordData {
     password?: string,
     newPassword?: string,
@@ -98,18 +98,16 @@ const edit = (props: ClientPagesTypes) => {
 
                 </div>
 
-
                 <div className='reset-password-form-field'>
                     <p>{props.t(`profile:New Password`)}</p>
                     {
                         !changePasswordDataValidator.newPassword ?
-                            <span className='password-info'>{props.t(`common:Minimum 8 characters, at least 1 uppercase letter, 1 lowercase letter, 1 number and 1 special character like $`)}</span> :
+                            <span className='password-info'>{props.t(`common:Minimum eight characters, at least one letter and one number`)}</span> :
                             null
                     }
                     <input className={'form-control-input form-control-input-validator'} type="password" autoComplete="off" name={'newPassword'} value={changePasswordData.newPassword} onChange={e => onChangePasswordInputsHandler(e)}/>
                     <ValidInput valid={changePasswordDataValidator.newPassword}/>
                 </div>
-
 
                 <div className={'reset-password-form-field'}>
                     <p>{props.t(`profile:Repeat New Password`)}</p>

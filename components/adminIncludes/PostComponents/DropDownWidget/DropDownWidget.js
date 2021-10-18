@@ -1,8 +1,10 @@
-const DropDownWidget = props => {
+import {useSelector} from "react-redux";
 
-    if (props.postData.postType !== 'video' && props.type === 'actors') {
+const DropDownWidget = props => {
+    const post = useSelector((state) => state.adminPanelPosts.post);
+    if (post.postType !== 'video' && post.type === 'actors') {
         return null
-    } else if (props.postData.postType === props.renderFor || props.renderFor === 'all') {
+    } else if (post.postType === props.renderFor || props.renderFor === 'all') {
         return (
             <div className='post-drop-down-section'>
                 <style jsx>{`

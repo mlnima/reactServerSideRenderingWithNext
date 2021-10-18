@@ -3,6 +3,7 @@ import React, {useRef, useEffect} from 'react';
 import UploadFileBtn from '../UploadFileBtn/uploadFileBtn'
 import {convertVariableNameToName} from '../../../../../_variables/_variables';
 import styled from "styled-components";
+import {useSelector} from "react-redux";
 let StyledDiv = styled.div`
   width: 100%;
   background-color: white;
@@ -27,6 +28,7 @@ let StyledDiv = styled.div`
 
 const TextInputWithUploadBtn = props => {
     const inputElement = useRef(null)
+    const post = useSelector((state) => state.adminPanelPosts.post);
 
     const onSetHandler = (key, value) => {
         const e = {
@@ -46,7 +48,7 @@ const TextInputWithUploadBtn = props => {
                     <p>{convertVariableNameToName(props.name)}</p>
                 </div>
                 <div className="editor">
-                    <input ref={inputElement} className={'form-control-input'} type={'text'} name={props.name} value={props.postData[props.name]}
+                    <input ref={inputElement} className={'form-control-input'} type={'text'} name={props.name} value={post[props.name] || ''}
                                 onChange={e => props.onChangeHandler(e)}/>
                     <UploadFileBtn returnElement={inputElement} type={props.type} setFunction={onSetHandler} name={props.name}/>
                 </div>

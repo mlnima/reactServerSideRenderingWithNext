@@ -67,12 +67,6 @@ const AdminLayout = props => {
         }
     }, []);
 
-
-
-    useEffect(() => {
-        console.log(settings)
-    }, [settings]);
-
     if (userData.role === 'administrator') {
         return (
             <>

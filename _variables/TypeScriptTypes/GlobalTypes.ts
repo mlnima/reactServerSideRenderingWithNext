@@ -70,9 +70,7 @@ export interface UserState {
 }
 
 
-export interface Translations {
 
-}
 
 export interface settingsPropTypes {
     settings: {
@@ -189,9 +187,31 @@ export interface GlobalStateTypes {
         active: boolean,
         message: string,
         type: string,
+        err:{
+            stack:any
+        }
     }
 }
 
+export interface Translations {
+  [key:string]:{
+
+  }
+}
+
+
+export interface AdminPanelPostsTypes {
+    post?:{
+        title?:string,
+        description?:string,
+        translations?:Translations,
+        author?:string,
+        _id?:string,
+        status?:string,
+        postType?:string,
+    },
+    activeEditingLanguage:string
+}
 
 export interface StoreTypes {
     chatroom: ChatroomStateTypes,
@@ -199,7 +219,8 @@ export interface StoreTypes {
     posts: PostStateTypes,
     user: UserState,
     widgets: WidgetsStateTypes,
-    globalState: GlobalStateTypes
+    globalState: GlobalStateTypes;
+    adminPanelPosts:AdminPanelPostsTypes
 }
 
 

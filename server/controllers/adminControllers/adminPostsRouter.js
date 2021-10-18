@@ -16,6 +16,7 @@ const adminUpdateComment = require('./adminPostsControllers/adminUpdateComment')
 const adminDeleteComments = require('./adminPostsControllers/adminDeleteComments')
 const adminCreateNewPostByApi = require('./adminPostsControllers/adminCreateNewPostByApi')
 const adminGetComments = require('./adminPostsControllers/adminGetComments')
+const adminGetPost = require('./adminPostsControllers/adminGetPost')
 
 
 router.post('/createNewPost',adminAuthMiddleware,adminCreateNewPost)
@@ -30,6 +31,7 @@ router.post('/updateComment',adminAuthMiddleware,adminUpdateComment)
 router.post('/deleteComments',adminAuthMiddleware,adminDeleteComments)
 router.post('/createNewByApi',adminCreateNewPostByApi)
 router.post('/getComments',adminAuthMiddleware,adminGetComments)
+router.get('/getPost',adminAuthMiddleware,adminGetPost)
 
 
 

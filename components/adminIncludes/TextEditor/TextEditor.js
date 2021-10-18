@@ -1,7 +1,9 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import dynamic from 'next/dynamic'
-let ReactQuill = () => <></>;
+const ReactQuill = dynamic(() => import('react-quill'))
 import 'react-quill/dist/quill.snow.css';
+
+
 
 const modules = {
     toolbar: [
@@ -41,17 +43,15 @@ const formats = [
 ]
 
 const TextEditor = props => {
-    const [editorState, setEditorState] = useState(false);
-
-    useEffect(() => {
-        ReactQuill = dynamic(() => import('react-quill'))
-        setEditorState(true)
-    }, []);
+    // const [editorState, setEditorState] = useState(false);
+    //
+    // useEffect(() => {
+    //     setEditorState(true)
+    // }, []);
 
 
     if (props.rendering) {
         return (
-
             <ReactQuill
                 className='text-editor'
                 value={props.valueData || ''}
@@ -62,7 +62,8 @@ const TextEditor = props => {
             />
 
         );
-    } else return null
+    } else
+        return null
 
 
 };

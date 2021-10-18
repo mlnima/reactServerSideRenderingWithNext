@@ -11,6 +11,7 @@ const initialState = {
     alert:{
         active:false,
         type:null,
+        err:null,
         message:''
     }
 }

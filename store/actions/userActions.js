@@ -44,10 +44,10 @@ export const userResetPassword = (data) => async dispatch => {
                     type: types.SET_ALERT,
                     payload: {message:res.data.message,type:'Success'}
                 })
-            }).catch(error=>{
+            }).catch(err=>{
                 dispatch({
                     type: types.SET_ALERT,
-                    payload: {message:error.response.data.message,type:'Error'}
+                    payload: {message:err.response.data.message,type:'Error'}
                 })
             })
         }else {

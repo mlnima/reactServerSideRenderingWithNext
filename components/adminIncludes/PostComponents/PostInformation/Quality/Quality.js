@@ -1,4 +1,7 @@
+import {useSelector} from "react-redux";
+
 const Quality = props => {
+    const post = useSelector((state) => state.adminPanelPosts.post);
     if (props.rendering){
         return (
             <div className='post-information-section'>
@@ -7,7 +10,7 @@ const Quality = props => {
                 </div>
                 <div className="editor">
                     <div className="option">
-                        <select className={'custom-select'} defaultValue={props.postData.quality} name='quality' onChange={ e => props.onChangeHandler(e) }>
+                        <select className={'custom-select'} defaultValue={post.quality || 'HD'} name='quality' onChange={ e => props.onChangeHandler(e) }>
                             <option value='SD'>SD</option>
                             <option value='HD'>HD</option>
                             <option value='4K'>4K</option>

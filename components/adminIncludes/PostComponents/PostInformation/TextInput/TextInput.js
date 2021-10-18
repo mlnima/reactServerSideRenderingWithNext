@@ -1,6 +1,7 @@
 import React from 'react';
 import {convertVariableNameToName} from '../../../../../_variables/_variables'
 import styled from "styled-components";
+import {useSelector} from "react-redux";
 let StyledTextarea = styled.textarea`
         outline: none;
         padding: 3px 5px;
@@ -8,7 +9,7 @@ let StyledTextarea = styled.textarea`
         width: 90%;
 `
 const TextInput = props => {
-
+    const post = useSelector((state) => state.adminPanelPosts.post);
     if (props.rendering){
         return (
             <div className='post-information-section'>
@@ -16,7 +17,7 @@ const TextInput = props => {
                     <p>{convertVariableNameToName( props.name) }</p>
                 </div>
                 <div className="editor">
-                    <StyledTextarea className={'form-control-input'} name={ props.name } value={ props.postData[props.name] }  onChange={e => props.onChangeHandler(e)}/>
+                    <StyledTextarea className={'form-control-input'} name={ props.name } value={ post[props.name] || '' }  onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );

@@ -1,7 +1,8 @@
 import React from 'react';
+import {useSelector} from "react-redux";
 
 const Duration = props => {
-
+    const duration = useSelector((state) => state.adminPanelPosts.post?.duration);
     if (props.rendering) {
         return (
             <div className='post-information-section'>
@@ -9,12 +10,10 @@ const Duration = props => {
                     <p>Duration</p>
                 </div>
                 <div className="editor">
-                    <input className={'form-control-input'} type='text' name='duration' value={props.postData.duration}  onChange={e => props.onChangeHandler(e)}/>
+                    <input className={'form-control-input'} type='text' name='duration' value={duration || ''}  onChange={e => props.onChangeHandler(e)}/>
                 </div>
             </div>
         );
     } else return null
-
-
 };
 export default Duration;
