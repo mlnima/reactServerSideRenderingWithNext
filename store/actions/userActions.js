@@ -10,9 +10,12 @@ export const userLogin = (username, password) => async dispatch => {
                 payload: {userData: res.data, loggedIn: true}
             })
         })
-    } catch (err) {
+    } catch (error) {
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message:error.response.data.message,type:'Error'}
+        })
         localStorage.wt ? localStorage.removeItem('wt') : null
-        console.log(err)
     }
 }
 

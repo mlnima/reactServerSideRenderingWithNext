@@ -21,6 +21,7 @@ let StyledDiv = styled.div`
   align-items: center;
   color: var(--popup-text-color,#fff);
   background-color: var(--popup-outer-background-color,rgba(0,0,0,.6));
+ z-index: 1000;
   .alert-message{
     width: 300px;
     background-color: var(--popup-background-color,#191919);

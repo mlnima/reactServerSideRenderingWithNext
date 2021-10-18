@@ -9,7 +9,7 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   justify-content: center;
   flex-wrap: wrap;
   .alphabetical-range-widget-item{
-    background-color: var(--navigation-background-color,#18181b);
+    //background-color: var(--navigation-background-color,#18181b);
     color: var(--navigation-text-color, #ccc);
     padding: 5px 10px;
     margin: 5px;
@@ -19,12 +19,13 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
 const AlphabeticalNumericalRangeLinksWidget = () => {
     const contextData = useContext(AppContext);
     const router = useRouter()
+    const activePage = router.query.startWith
     const [range,setRange] = useState(()=>{
         return router.pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] : [...'abcdefghijklmnopqrstuvwxyz0123456789']
     })
 
     const renderRange = range.map((Letter,index) => {
-        const activePage = router.query.startWith
+
         return (
             <Link key={index} href={{
                 pathname: router.pathname,
@@ -32,7 +33,10 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
             }}  scroll={false}>
                 <a className='alphabetical-range-widget-item'
                    onClick={contextData.functions.loadingHandler}
-                   style={{backgroundColor: Letter === activePage ? 'var(--main-active-color,#f90)': 'initial'}}
+                   style={{
+                       backgroundColor:  Letter === activePage ? 'var(--main-active-color,#f90)': 'var(--navigation-background-color,#18181b)',
+                       color:  Letter === activePage ? 'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color,#ccc)'
+                   }}
                 >
                     {Letter}
                 </a>
@@ -49,7 +53,10 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
                 }}  scroll={false}>
                     <a className='alphabetical-range-widget-item'
                        onClick={contextData.functions.loadingHandler}
-                       style={{backgroundColor: !router?.query.startWith ? 'var(--main-active-color,#f90)': 'initial'}}
+                       style={{
+                           backgroundColor:  !activePage ? 'var(--main-active-color,#f90)': 'var(--navigation-background-color,#18181b)',
+                           color:   !activePage ? 'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color,#ccc)'
+                       }}
                     >
                         All
                     </a>

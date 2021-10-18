@@ -6,7 +6,7 @@ import {withTranslation} from "next-i18next";
 import {useDispatch, useSelector} from 'react-redux';
 import {userLogin} from "../../../store/actions/userActions";
 import styled from "styled-components";
-import {setLoginRegisterFormStatus} from "../../../store/actions/globalStateActions";
+import {setAlert, setLoginRegisterFormStatus} from "../../../store/actions/globalStateActions";
 import Draggable from 'react-draggable';
 import {StoreTypes, InputOnChangeHandlerTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import _passwordValidator from "../../../_variables/clientVariables/_passwordValidator";
@@ -207,18 +207,11 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
         const checkPasswords = state.password === state.password2;
 
         if (!checkUsername) {
-
-            setResponse({
-                message: 'you can not use this username',
-                type: 'error',
-            })
+            dispatch(setAlert({message: 'you can not use this username',type: 'error',active:true}))
         }
 
         if (!checkPasswords) {
-            setResponse({
-                message: 'password is to short or is not match',
-                type: 'error',
-            })
+            dispatch(setAlert({message: 'password is to short or is not match',type: 'error',active:true}))
         }
 
 
@@ -230,13 +223,14 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                     message: res.data.message,
                     type: 'success',
                 })
-            }).catch(err => {
-                setResponse({
-                    ...response,
-                    message: err.response.data.message,
-                    type: 'error',
-                })
-                console.log(err.response)
+            }).catch(error => {
+                dispatch(setAlert({message:error.response.data.message,type: 'error',active:true}))
+                // setResponse({
+                //     ...response,
+                //     message: error.response.data.message,
+                //     type: 'error',
+                // })
+                console.log(error.response.data.message)
             })
 
     };

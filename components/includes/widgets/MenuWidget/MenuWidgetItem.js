@@ -1,21 +1,19 @@
 import React, {useState} from 'react';
-import { faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import MenuWidgetItemLink from "./MenuWidgetItemLink";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 
 const MenuWidgetSubItemStyledLi = styled.li`
-  
+
   .menu-widget-sub-item {
-    display: ${props=>props.showSub ? 'initial' : 'none'};
+    display: ${props => props.showSub ? 'initial' : 'none'};
     z-index: 10;
-    background-color: var(--navigation-background-color,#18181b);
+    background-color: var(--navigation-background-color, #18181b);
     width: 100px;
     list-style-type: none;
     padding: 10px 15px;
-    
-
   }
 
   @media only screen and (min-width: 768px) {
@@ -26,8 +24,8 @@ const MenuWidgetSubItemStyledLi = styled.li`
 `
 
 const MenuWidgetStyledLi = styled.li`
-  padding-left:0.2rem !important;
-  padding-right:0.2rem !important;
+  padding-left: 0.2rem !important;
+  padding-right: 0.2rem !important;
   list-style-type: none;
   width: 100%;
   font-size: 1rem;
@@ -35,9 +33,9 @@ const MenuWidgetStyledLi = styled.li`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin: ${props=> !props.menuItem.parent ? '0 10px' : '0'};
-  
-  .menu-widget-item-link{
+  margin: ${props => !props.menuItem.parent ? '0 10px' : '0'};
+
+  .menu-widget-item-link {
     color: var(--navigation-text-color, #ccc);
     text-decoration: none;
     font-weight: normal;
@@ -48,7 +46,7 @@ const MenuWidgetStyledLi = styled.li`
       cursor: pointer;
     }
   }
-  
+
   .open-submenus {
     background-color: transparent;
     border: none;
@@ -74,10 +72,10 @@ const MenuWidgetStyledLi = styled.li`
   }
 
   @media only screen and (min-width: 768px) {
-      height: initial;
-      font-size: 1rem;
-      width: ${props=> !props.menuItem.parent ? (props.menuItem.subItems || []).length > 0 ? 'auto' : 'auto' : '50px '};
-    .menu-widget-item-link{
+    height: initial;
+    font-size: 1rem;
+    width: ${props => !props.menuItem.parent ? (props.menuItem.subItems || []).length > 0 ? 'auto' : 'auto' : '50px '};
+    .menu-widget-item-link {
       height: initial;
     }
   }
@@ -86,7 +84,7 @@ const MenuWidgetStyledLi = styled.li`
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler}) => {
     const router = useRouter()
     const [showSub, setShowSub] = useState(false)
-    const renderSubMenus = (menuItem.subItems || []).map((subItem,index) => {
+    const renderSubMenus = (menuItem.subItems || []).map((subItem, index) => {
 
         return (
             <MenuWidgetSubItemStyledLi showSub={showSub} className='menu-widget-sub-item' key={index}>
@@ -111,22 +109,22 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
     return (
 
         <MenuWidgetStyledLi menuItem={menuItem}
-                            className={`menu-widget-item ${router.asPath === menuItem?.target ? 'btn btn-primary':'btn btn-transparent-light'}`}
+                            className={'menu-widget-item'}
                             onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
                             onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
-                            isActive={ router.asPath === menuItem?.target}
+                            isActive={router.asPath === menuItem?.target}
         >
 
 
-            <MenuWidgetItemLink
-                linkTargetType={menuItem?.type}
-                linkType='parent'
-                linkTargetUrl={menuItem?.target}
-                linkAs={linkAsForMenuItems}
-                linkName={menuItem?.name}
-                linkTranslations={menuItem?.translations}
-                showSub={showSub}
-                mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+            <MenuWidgetItemLink activeLink={router.asPath === menuItem?.target}
+                                linkTargetType={menuItem?.type}
+                                linkType={'parent'}
+                                linkTargetUrl={menuItem?.target}
+                                linkAs={linkAsForMenuItems}
+                                linkName={menuItem?.name}
+                                linkTranslations={menuItem?.translations}
+                                showSub={showSub}
+                                mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
 
             />
             {menuItem?.subItems?.length > 0 ?

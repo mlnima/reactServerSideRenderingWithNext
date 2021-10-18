@@ -17,9 +17,20 @@ export const setLoading = (statusType) => dispatch => {
 
 export const setAlert = (payload) => dispatch => {
     dispatch({
-        type:types.CLOSE_ALERT,
+        type:types.SET_ALERT,
         payload
     })
+
+    setTimeout(()=>{
+        dispatch({
+            type:types.SET_ALERT,
+            payload:{
+                active:false,
+                type:null,
+                message:''
+            }
+        })
+    },8000)
 }
 export const closeAlert = ( ) => dispatch => {
     dispatch({

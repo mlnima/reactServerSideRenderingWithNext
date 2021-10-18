@@ -1,18 +1,16 @@
-import React, {useContext} from 'react';
-import {AppContext} from "../../../../../context/AppContext";
+import React from 'react';
 import Link from "next/link";
 import {withTranslation} from "next-i18next";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {userLogOut} from "../../../../../store/actions/userActions";
 import {setLoginRegisterFormStatus} from "../../../../../store/actions/globalStateActions";
 
 const LoggedInItemsForMenu = props => {
-
-    const contextData = useContext(AppContext);
+    const identity = useSelector(state => state.settings.identity)
     const dispatch = useDispatch()
         return (
             <div className='logged-in-items'>
-                {contextData.siteIdentity.membership ?
+                {identity.membership ?
                     <>
                         <Link href={`/profile`}>
                             <a rel='next' className='logged-in-item btn btn-transparent-light'>

@@ -9,7 +9,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
-  flex-wrap: wrap;
+  //flex-wrap: wrap;
   
   .language-switcher-widget-text{
     display: flex;
@@ -19,7 +19,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
     font-size: 12px;
     color: var(--navigation-text-color, #ccc);
   }
-  select{
+  .custom-select{
     border: none;
     background-color: var(--navigation-background-color,#18181b);
     color: var(--navigation-text-color, #ccc);
@@ -44,7 +44,7 @@ const LanguagesSwitcher = props => {
     return (
         <LanguagesSwitcherStyledDiv className='language-switcher-widget'>
             <p className='language-switcher-widget-text'>{props.t(`common:Language`)}</p>
-            <select value={ contextData.state.activeLanguage || router.locale } aria-label='Center Align'
+            <select className={'custom-select'} value={ contextData.state.activeLanguage || router.locale } aria-label='Center Align'
                 onChange={e => onChangeHandler(e)} >
                 <option key='default' value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'default'}</option>
                 {languagesOptions}

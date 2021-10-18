@@ -9,7 +9,10 @@ const PaginationComponentPageLink = props => {
         <Link key={props.pageNumber.toString()} href={{pathname:router.pathname,query: {...router.query,page:props.pageNumber}}} scroll={false}>
             <a onClick={props.onActivateLoadingHandler}
                className='pagination-item'
-               style={{backgroundColor: props.isActivePage ? 'var(--main-active-color,#f90)': 'initial'}}
+               style={{
+                   backgroundColor: props.isActivePage ? 'var(--main-active-color,#f90)': 'var(--navigation-background-color,#18181b)',
+                   color: props.isActivePage ? 'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color,#ccc)'
+               }}
             >
                 {props.pageNumber}
             </a>
