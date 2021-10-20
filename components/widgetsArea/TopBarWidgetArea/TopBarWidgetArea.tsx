@@ -14,8 +14,8 @@ let StyledDiv = styled.div`
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
-    //min-height: 48px;
     margin: 0 5px;
+    width: 100%;
   }
 
   @media only screen and (min-width: 768px) {
