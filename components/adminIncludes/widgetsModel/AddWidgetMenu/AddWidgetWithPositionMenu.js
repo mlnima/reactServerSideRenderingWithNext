@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from "styled-components";
 import staticPositions from '../staticPositions';
 import Draggable from 'react-draggable';
+import {postsWidgetModel} from "./models";
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
   position: relative;
@@ -16,17 +17,10 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   margin: 5px;
-
-  .positionsOpener {
-    justify-self: stretch;
-    width: 200px;
-    height: 35px;
-    background-color: var(--admin-darkcolor70);
-    color: var(--admin-text-color);
-    border: none;
-    font-size: 12px;
-
+  .btn{
+    width: 100%;
   }
+  
   .AddWidgetWithPositionMenuPositions {
     position: absolute;
     width: 200px;
@@ -35,12 +29,15 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
     background-color: var(--admin-darkcolor70);
     display: grid;
     grid-template-columns: 1fr;
-    
-    .AddWidgetWithPositionMenuPositionsBtn {
-      font-size: 12px;
-      z-index: auto;
-      padding: 2px;
+    .btn{
+      width: 200px;
     }
+
+    //button {
+    //  font-size: 12px;
+    //  z-index: auto;
+    //  padding: 2px;
+    //}
   }
   
 `
@@ -73,9 +70,10 @@ const AddWidgetWithPositionMenu = props => {
                                 type ==='alphabeticalNumericalRange'? widgetModels.alphabeticalNumericalRangeWidgetModel:
                                 type ==='language'? widgetModels.languageWidgetModel:
                                 type ==='alphabeticalNumericalRange'? widgetModels.authenticationWidgetModel:
-                                type ==='imageSwiper'? widgetModels.imageSwiperWidgetModel:
-                                type ==='postsSwiper'? widgetModels.postsSwiperWidgetModel:
-                                 widgetModels;
+                                // type ==='imageSwiper'? widgetModels.imageSwiperWidgetModel:
+                                // type ==='postsSwiper'? widgetModels.postsSwiperWidgetModel:
+                                type ==='postsSlider'? widgetModels.postsWidgetModel:
+                                widgetModels;
 
         const widgetsInTheSamePosition = widgets.filter(widget=>widget?.data?.position === position)
         const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(widget => widget?.data?.widgetIndex), 0)
@@ -95,8 +93,9 @@ const AddWidgetWithPositionMenu = props => {
         return(
 
             <button key={_.uniqueId('position_')}
-                    className='AddWidgetWithPositionMenuPositionsBtn'
+                    className='btn btn-info'
                     onClick={() => onAddNewWidget(position, props.type)}
+                    onMouseEnter={onIncreaseZIndexHandler}
             >
                 {convertVariableNameToName(position)}
             </button>
@@ -105,31 +104,31 @@ const AddWidgetWithPositionMenu = props => {
     })
 
 
-    const renderCustomPagesPosition = customPages.map(customPage=>{
+    const renderCustomPagesPosition = customPages.map((customPage,index)=>{
        return(
-           <React.Fragment key={_.uniqueId('id_')}>
-               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
-               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'LeftSidebar', props.type)}>{convertVariableNameToName(customPage)+' Left Sidebar'}</button>
-               <button className='AddWidgetWithPositionMenuPositionsBtn' onClick={() => onAddNewWidget(customPage+'RightSidebar', props.type)}>{convertVariableNameToName(customPage)+' Right Sidebar'}</button>
+           <React.Fragment key={index}>
+               <button className='btn btn-info' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
+               <button className='btn btn-info' onClick={() => onAddNewWidget(customPage+'LeftSidebar', props.type)}>{convertVariableNameToName(customPage)+' Left Sidebar'}</button>
+               <button className='btn btn-info' onClick={() => onAddNewWidget(customPage+'RightSidebar', props.type)}>{convertVariableNameToName(customPage)+' Right Sidebar'}</button>
            </React.Fragment>
        )
    })
 
     const onIncreaseZIndexHandler = ()=>{
         if (refToElement.current){
-            refToElement.current.style.zIndex = 1000
+            refToElement.current.style.zIndex = 10
         }
     }
     const onReduceZIndexHandler = ()=>{
-        if (refToElement.current){
-            refToElement.current.style.zIndex = 'initial'
-        }
+        // if (refToElement.current){
+        //     refToElement.current.style.zIndex = 'initial'
+        // }
     }
 
     return (
         <Draggable handle=".AddWidgetWithPositionMenu">
         <AddWidgetWithPositionMenuStyledDiv ref={refToElement} className='AddWidgetWithPositionMenu' onClickCapture={onIncreaseZIndexHandler} onMouseOut={onReduceZIndexHandler}>
-            <button className='positionsOpener' onClick={() => open ? setOpen(false) : setOpen(true)}>{props.name}</button>
+            <button className='btn btn-info' onClick={() => open ? setOpen(false) : setOpen(true)}>{props.name}</button>
             {open ?
                 <div className="AddWidgetWithPositionMenuPositions">
                     {renderPositions}

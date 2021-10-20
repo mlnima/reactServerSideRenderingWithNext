@@ -44,7 +44,6 @@ const WidgetModelStyledDiv = styled.div`
   overflow: hidden;
 
 
-
   .widgetInfo {
     margin: auto;
     width: 95%;
@@ -57,12 +56,13 @@ const WidgetModelStyledDiv = styled.div`
     margin: auto;
   }
 
-  .widgetSection,.selectFieldForWidget,.TextInputFieldForWidget {
+  .widgetSection, .selectFieldForWidget, .TextInputFieldForWidget {
     margin: 10px auto;
     width: 95%;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     p {
       width: 40%;
       margin: 0;
@@ -107,9 +107,9 @@ const WidgetModel = props => {
 
 
     useEffect(() => {
-        setPositions((prevPositions )=>[
+        setPositions((prevPositions) => [
             ...prevPositions,
-            ..._.flatMap(customPages,(customPage=>[customPage, customPage + 'LeftSidebar', customPage+ 'RightSidebar']))
+            ..._.flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
         ])
     }, [customPages]);
 
@@ -189,6 +189,7 @@ const WidgetModel = props => {
             })
         }
     }
+
     const onChangeHandler = e => {
         const value = e.target.value
         setWidgetData({
@@ -196,6 +197,18 @@ const WidgetModel = props => {
             [e.target.name]: value === 'true' ? true : value === 'false' ? false : value
         })
     };
+
+    const onUniqueDataChangeHandler = (e) => {
+        setWidgetData({
+            ...widgetData,
+            uniqueData: {
+                ...(widgetData.uniqueData || {}),
+                [e.target.name]: e.target.value
+            }
+        })
+    }
+
+
     const onCheckboxChangeHandler = e => {
         setWidgetData({
             ...widgetData,
@@ -303,7 +316,7 @@ const WidgetModel = props => {
                                           name={'activeEditingLanguage'}
                                           ref={languageElement}
                                           value={widgetSettings.activeEditingLanguage}
-                                          options={['default', ...process.env.NEXT_PUBLIC_LOCALS.split(' ').filter(lang=>lang!== process.env.NEXT_PUBLIC_DEFAULT_LOCAL)]}
+                                          options={['default', ...process.env.NEXT_PUBLIC_LOCALS.split(' ').filter(lang => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCAL)]}
                                           onChangeHandler={onChangeLanguageHandler}
                     />
 
@@ -370,33 +383,33 @@ const WidgetModel = props => {
                     />
 
 
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider' ?
                         <SelectFieldForWidget title={'Sort By:'}
                                               name={'sortBy'}
                                               ref={null}
                                               value={widgetData.sortBy}
-                                              options={['updatedAt','createdAt','views','likes','random']}
+                                              options={['updatedAt', 'createdAt', 'views', 'likes', 'random']}
                                               onChangeHandler={onChangeHandler}
-                        />:null
+                        /> : null
                     }
 
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider' ?
                         <SelectFieldForWidget title={'Post Type:'}
                                               name={'postType'}
                                               ref={null}
                                               value={widgetData.postType}
-                                              options={['standard','video','product','food','article','promotion']}
+                                              options={['standard', 'video', 'product', 'food', 'article', 'promotion']}
                                               onChangeHandler={onChangeHandler}
-                        />:null
+                        /> : null
                     }
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider' ?
                         <SelectFieldForWidget title={'Post Element Size:'}
                                               name={'postElementSize'}
                                               ref={null}
                                               value={widgetData.postElementSize}
-                                              options={['listSmall','list','smaller','small','medium','large','larger']}
+                                              options={['listSmall', 'list', 'smaller', 'small', 'medium', 'large', 'larger']}
                                               onChangeHandler={onChangeHandler}
-                        />:null
+                        /> : null
                     }
 
                     {widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ?
@@ -404,18 +417,18 @@ const WidgetModel = props => {
                                               name={'sortBy'}
                                               ref={null}
                                               value={widgetData.sortBy}
-                                              options={['_id','count']}
+                                              options={['_id', 'count']}
                                               onChangeHandler={onChangeHandler}
-                        />:null
+                        /> : null
                     }
                     {widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ?
                         <SelectFieldForWidget title={'Meta Type:'}
                                               name={'metaType'}
                                               ref={null}
                                               value={widgetData.metaType}
-                                              options={['tags','categories','actors']}
+                                              options={['tags', 'categories', 'actors']}
                                               onChangeHandler={onChangeHandler}
-                        />:null
+                        /> : null
                     }
 
                     {widgetData.type === 'logo' ?
@@ -476,7 +489,7 @@ const WidgetModel = props => {
                     }
 
 
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'meta' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'meta' || widgetData.type === 'postsSlider' ?
                         <TextInputFieldForWidget
                             inputTitle='count :'
                             name='count'
@@ -500,17 +513,19 @@ const WidgetModel = props => {
                             widgetData.type === 'textEditor'
                         }
                     />
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'postsSlider' ?
                         <TextInputFieldForWidget inputTitle='Selected Meta For Posts:' name='selectedMetaForPosts' type='text' value={widgetData.selectedMetaForPosts}
                                                  classNameValue='selectedMetaForPosts' placeHolder='selectedMetaForPosts'
                                                  onChangeHandler={onChangeHandler}/> : null
                     }
 
-                    <SliderWidgetTypeFields
-                        rendering={widgetData.type === 'imageSwiper' || widgetData.type === 'postsSwiper'}
-                        onChangeHandler={onChangeHandler}
-                        widgetData={widgetData}
-                    />
+                    {widgetData.type === 'postsSwiper' || widgetData.type === 'imageSwiper' ?
+                        <SliderWidgetTypeFields
+                            onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                            widgetData={widgetData}
+                        /> : null
+                    }
+
 
                     {widgetData.type === 'searchBar' ?
                         <SearchTypeInputFields widgetData={widgetData}

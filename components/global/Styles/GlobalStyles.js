@@ -120,7 +120,7 @@ let GlobalStyles = createGlobalStyle`
     cursor: pointer;
   }  
   .btn-primary{
-    background-color: var(--primary-button-link-background-color, #007bff);
+    background-color: var(--primary-button-link-background-color, #f90);
     color: var(--primary-button-link-text-color, #000);
   }  
   .btn-secondary{
@@ -157,6 +157,11 @@ let GlobalStyles = createGlobalStyle`
     background-color: var( --dark-button-link-background-color, #343a40);
     border-color:  var(--dark-button-link-border-color, #343a40);
     color: var(--info-button-text-color, #fff);
+  }
+  .btn-navigation{
+    background-color:var(--navigation-background-color, #18181b);
+    color: var(--navigation-text-color, #ccc);
+    border: none;
   }
   
   .form-control-input{

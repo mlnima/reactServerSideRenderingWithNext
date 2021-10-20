@@ -8,13 +8,15 @@ import {withTranslation} from "next-i18next";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
+import Draggable from 'react-draggable';
 
 
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  background-color: rgba(0, 0, 0, .8);
+  background-color: var(--popup-outer-background-color,rgba(0,0,0,.6));
+  color:var(--popup-text-color,#fff);
   position: fixed;
   left: 0;
   top: 0;
@@ -30,13 +32,21 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
     flex-direction: column;
     align-items: center;
 
-    .chatroom-message-user-info-popup-content-close-button {
-      align-self: flex-end;
-      background-color: transparent;
-      color: var(--main-text-color);
-      height: 20px;
-      padding: 10px;
+    .chatroom-message-user-info-popup-header{
+      display: flex;
+      align-items: center;
+      justify-content: flex-end;
+      width: 100%;
+      
+      .chatroom-message-user-info-popup-content-close-button {
+       // align-self: flex-end;
+        background-color: transparent;
+        color: var(--main-text-color);
+        height: 20px;
+        padding: 10px;
+      }
     }
+
 
     .chatroom-message-user-info-popup-content-user-info {
       display: flex;
@@ -66,33 +76,12 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
         .chatroom-message-user-info-popup-user-data-links {
           display: flex;
           justify-content: space-between;
-          flex-direction: column;
+          flex-direction: row;
           width: 100%;
-
-          button {
-            border: none;
-            color: var(--main-text-color);
-            font-size: 1rem;
-
-            width: 100%;
-            margin: 10px 0;
-            padding: 5px 10px;
-
-            &:active {
-              box-shadow: none;
-            }
+          .btn-primary{
+            margin: 0 5px;
           }
-
-          a {
-            padding: 5px 10px;
-            color: var(--main-text-color);
-            font-size: 1rem;
-            margin: 10px 0;
-
-            &:active {
-              box-shadow: none;
-            }
-          }
+          
         }
       }
     }
@@ -118,13 +107,18 @@ const ChatRoomMessageUserInfoPopup = ({t}) => {
         return (
             <ChatRoomMessageUserInfoPopupStyledDiv className='chatroom-message-user-info-popup'>
 
+
+                <Draggable handle=".chatroom-message-user-info-popup-header">
                 <div className='chatroom-message-user-info-popup-content'>
-                 <span onClick={() => {
-                     dispatch(setActiveVisibleProfile({}))
-                 }}
-                       className='chatroom-message-user-info-popup-content-close-button'>
+                    <div className={'chatroom-message-user-info-popup-header'}>
+                                         <span onClick={() => {
+                                             dispatch(setActiveVisibleProfile({}))
+                                         }}
+                                               className='chatroom-message-user-info-popup-content-close-button'>
                     <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faTimes}/>
                  </span>
+                    </div>
+
                     <div className='chatroom-message-user-info-popup-content-user-info'>
                         <img className='chatroom-message-user-info-popup-content-userImage'
                              src={
@@ -138,12 +132,12 @@ const ChatRoomMessageUserInfoPopup = ({t}) => {
                             <p className='chatroom-message-user-info-popup-username'>{activeVisibleProfile.username}</p>
                             <div className='chatroom-message-user-info-popup-user-data-links'>
                                 <Link href={`/user/${activeVisibleProfile.username}`}>
-                                    <a className={'action-client-button-link'}>
+                                    <a className={'btn btn-primary'}>
                                         {t([`common:View Profile`])}
 
                                     </a>
                                 </Link>
-                                <button onClick={onConversationHandler} className={'action-client-button-link'}>
+                                <button onClick={onConversationHandler} className={'btn btn-primary'}>
                                     {t([`common:Send Message`])}
                                 </button>
                             </div>
@@ -153,6 +147,7 @@ const ChatRoomMessageUserInfoPopup = ({t}) => {
 
 
                 </div>
+                </Draggable>
             </ChatRoomMessageUserInfoPopupStyledDiv>
         );
     } else return null

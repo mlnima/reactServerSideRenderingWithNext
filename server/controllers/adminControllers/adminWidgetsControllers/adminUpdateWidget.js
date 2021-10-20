@@ -36,11 +36,10 @@ const adminUpdateWidget = async (req, res) => {
     const widgetData = req.body?.widgetData?.data
     const widgetId = req.body?.widgetData?._id
     const sortMethod = widgetData.sortBy ? widgetData.sortBy === 'latest' ? {lastModify: -1} : {[widgetData.sortBy]: -1} : {lastModify: -1};
-    if (widgetData.type === 'posts') {
+    if (widgetData.type === 'posts' || widgetData.type === 'postsSlider' ||  widgetData.type ===  'postsSwiper' ) {
         updatePostWidget(req.body?.widgetData).then(async updatedWidget => {
             if (updatedWidget) {
                 await widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
-
                     res.json({updatedWidget})
                     res.end()
                 }).catch(err => {

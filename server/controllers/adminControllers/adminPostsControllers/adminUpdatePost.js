@@ -1,32 +1,5 @@
-
 const postSchema = require('../../../models/postSchema');
-const metaSchema = require('../../../models/metaSchema');
 const updateSaveMetas = require('../_variables/_updateSaveMetas')
-
-// const metasSaver = async (metas) => {
-//     let finalData = []
-//     for await (let meta of metas) {
-//         await metaSchema.findOne({name: meta.name}).exec().then(async existingMeta => {
-//             if (existingMeta) {
-//                 finalData = [...finalData, existingMeta._id]
-//             } else {
-//                 const metaDataToSave = new metaSchema({
-//                     name: meta.name,
-//                     type: meta.type,
-//                     count: 1
-//                 })
-//                 await metaDataToSave.save().then(saved => {
-//                     finalData = [...finalData, saved._id]
-//                 }).catch(err => {
-//
-//                 })
-//             }
-//         })
-//     }
-//     return finalData
-// }
-
-
 
 module.exports =  async (req, res) => {
     const postUpdatedData = req.body.postData
@@ -46,12 +19,10 @@ module.exports =  async (req, res) => {
         }).catch(err => {
             console.log(err)
             res.sendStatus(400).json({message:'Error On Updating The document',err})
-            res.end()
         })
         res.end()
     } catch (err) {
         console.log(err)
         res.sendStatus(500).json({message:'I Tried But Something Went Wrong',err})
-        // res.end()
     }
 };

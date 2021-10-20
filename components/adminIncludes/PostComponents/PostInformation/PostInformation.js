@@ -127,7 +127,7 @@ const PostInformation = props => {
             <TextInputWithUploadBtn type='thumbnail' onChangeHandler={props.onChangeHandler} thumbnailsType={true} name='mainThumbnail'
                                     title='Main thumbnail' rendering={true}/>
             <ImagePreview/>
-            <Quality {...props} rendering={post.postType === 'video'}/>
+            <Quality rendering={post.postType === 'video'}/>
             <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={post.postType === 'video'}/>
             <TextInput name='videoEmbedCode' rendering={post.postType === 'video'}/>
             <TextInput name='redirectLink' rendering={post.postType === 'promotion'}/>

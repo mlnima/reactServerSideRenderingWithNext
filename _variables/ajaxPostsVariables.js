@@ -18,13 +18,6 @@ export const checkRemovedContent = async (data) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL  + `/api/v1/posts/checkRemovedContent` , body)
 };
 
-export const updatePost = async (data, domainName) => {
-    const body = {
-        postData: data,
-        token: localStorage.wt
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL  + `/api/admin/posts/updatePost`, body)
-};
 
 export const savePost = async (data, domainName) => {
     const body = {

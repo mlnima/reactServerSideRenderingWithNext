@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import {useMemo} from 'react';
 import AddWidgetMenu from '../../../../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
 import WidgetGroupByPosition from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
@@ -45,12 +45,10 @@ let StyledDiv = styled.div`
 const AdminWidgets = () => {
 
     const widgets = useSelector(state => state.widgets.widgets)
-    const [availablePositions, setAvailablePositions] = useState([])
-
-    useEffect(() => {
-        const positions = widgets.map(widgets => widgets?.data?.position)
-        setAvailablePositions([...new Set(positions)])
-    }, [widgets]);
+    const availablePositions = useMemo(()=>{
+        const positions = widgets.map(widgets => widgets?.data?.position).sort()
+        return [...new Set(positions)]
+    },[widgets])
 
     return (
         <StyledDiv className='admin-widgets-page'>

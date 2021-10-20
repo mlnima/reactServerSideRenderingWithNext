@@ -25,7 +25,7 @@ const AdminDataSetter = () => {
 
     const getAndSetDataForAdmin = async () => {
         try {
-            const settingsData = await getMultipleSetting({settings: ['identity', 'design']}, localStorage.wt)
+            const settingsData = await getMultipleSetting({settings: ['identity', 'design','adminSettings']}, localStorage.wt)
             const widgetData = await _getMultipleWidgets(localStorage.wt)
             dispatch(getCustomPages())
             // @ts-ignore

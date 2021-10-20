@@ -5,7 +5,7 @@ import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
 interface PromotionCardListSmallPropTypes {
     dir: string;
-    views: string;
+    views: number;
     rating: string;
     noImageUrl: string;
     postElementSize: string;

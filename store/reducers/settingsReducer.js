@@ -5,7 +5,9 @@ const initialState = {
     design:{},
     identity:{},
     eCommerce:{},
+    adminSettings:{}
 }
+
 
 
 export const settingsReducer = (state=initialState,action)=>{

@@ -56,6 +56,7 @@ const AddWidgetMenu = () => {
             'alphabeticalNumericalRange',
             'language',
             'authentication',
+            'postsSlider',
             'imageSwiper',
             'postsSwiper',
         ]

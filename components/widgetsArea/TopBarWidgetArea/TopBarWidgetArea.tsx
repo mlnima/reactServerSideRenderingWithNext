@@ -6,7 +6,9 @@ import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 let StyledDiv = styled.div`
   grid-area: topbar;
   background-color: var(--topbar-background-color,#000);
-
+  height: 56px;
+  display: flex;
+  align-items: center;
   .top-bar-content {
     display: flex;
     justify-content: space-between;

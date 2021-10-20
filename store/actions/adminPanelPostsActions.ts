@@ -41,7 +41,39 @@ export const adminUpdatePost = (data?: object) =>async (dispatch: any) =>{
     }).catch(err=>{
         dispatch({
             type: types.SET_ALERT,
-            payload: {message:err.response.data.message,type:'Error'}
+            payload: {message:err.response.data.message,type:'error',err}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    })
+}
+
+export const adminSaveNewPost = (data?: object,router?:any) =>async (dispatch: any) =>{
+    const body = {
+        postData: data,
+        token: localStorage.wt
+    };
+    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL  + `/api/admin/posts/createNewPost`, body).then(res=>{
+        dispatch({
+            type: types.SET_ALERT,
+            // @ts-ignore
+            payload: {message: res.data.message || 'Post Updated' ,type:'success'}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+        setTimeout(()=>{
+            // @ts-ignore
+            res.data?.savedPostData?._id ? router.push('/admin/post?id=' + res.data.savedPostData._id) : null
+        },1500)
+
+    }).catch(err=>{
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message:err.response.data.message,type:'error',err}
         })
         dispatch({
             type: types.LOADING,

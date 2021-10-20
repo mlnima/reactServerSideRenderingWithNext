@@ -92,6 +92,7 @@ export const logoWidgetModel = {
   }
 }`
 }
+
 export const metaWidgetModel = {
     ...generalModel,
     metaType:'',
@@ -139,10 +140,11 @@ export const menuWidgetModel = {
     ...generalModel,
     menuItems:[]
 }
+
 export const postsWidgetModel = {
     ...generalModel,
     count:8,
-    viewType:'standard',
+    postElementSize:'small',
     sortBy:'-lastModify'
 }
 

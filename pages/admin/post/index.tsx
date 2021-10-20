@@ -1,5 +1,5 @@
 import {useEffect, useState, useRef} from 'react';
-import {savePost} from '../../../_variables/ajaxPostsVariables';
+
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
 import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
 import DropDownWidget from "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
@@ -14,7 +14,7 @@ import _ from "lodash";
 import styled from "styled-components";
 import {setAlert, setLoading} from "../../../store/actions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
-import {adminChangeActiveEditingLanguage, adminEditPost, adminGetPost, adminNewPost, adminUpdatePost} from "../../../store/actions/adminPanelPostsActions";
+import {adminChangeActiveEditingLanguage, adminEditPost, adminGetPost, adminNewPost, adminSaveNewPost, adminUpdatePost} from "../../../store/actions/adminPanelPostsActions";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
@@ -120,33 +120,11 @@ const Index = () => {
     const onSaveHandler = async () => {
         dispatch(setLoading(true))
         try {
-            const postValue = {
-                ...post,
-                ...productInfo,
-                author: post?.author ? post.author : userData?._id,
-            }
             // @ts-ignore
             if (post?._id) {
-
-                dispatch(adminUpdatePost(post))
-
-
-                // updatePost(postValue, window.location.origin).then(() => {
-                //     router.push('/admin/post?id=' + state._id)
-                //     dispatch(setLoading(false))
-                // }).catch(error => {
-                //     dispatch(setAlert({message: error.response.data.message, type: 'error', active: true}))
-                //     dispatch(setLoading(false))
-                // })
-
+                dispatch(adminUpdatePost({...post,author: post?.author ? post.author : userData?._id}))
             } else {
-                savePost(postValue, window.location.origin).then(res => {
-                    // @ts-ignore
-                    router.push('/admin/post?id=' + res.data.savedPostData._id)
-                    dispatch(setLoading(false))
-                }).catch(error => {
-                    dispatch(setAlert({message: error.response.data.message, type: 'error', active: true}))
-                })
+                dispatch(adminSaveNewPost({...post,author: userData?._id},router))
             }
         } catch (error) {
             // @ts-ignore

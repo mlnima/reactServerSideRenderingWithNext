@@ -34,21 +34,18 @@ const MenuWidgetStyledLi = styled.li`
   align-items: center;
   position: relative;
   margin: ${props => !props.menuItem.parent ? '0 10px' : '0'};
-
+  &:hover {
+    filter: invert(70%);
+  }
   .menu-widget-item-link {
     color: var(--navigation-text-color, #ccc);
     text-decoration: none;
     font-size: 14px;
     font-weight: ${props=>props.activeLink ? 'bold' : 'initial'};
+    
 
-
-    &:hover {
-      filter: invert(70%);
-      cursor: pointer;
-    }
     &:active{
       filter: invert(70%);
-      cursor: pointer;
     }
   }
 
@@ -114,7 +111,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
     return (
 
         <MenuWidgetStyledLi menuItem={menuItem}
-                            className={'menu-widget-item'}
+                            className={'menu-widget-item  btn btn-navigation'}
                             onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
                             onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
                             activeLink={menuItem?.target ? router.asPath.includes(menuItem?.target) :false}

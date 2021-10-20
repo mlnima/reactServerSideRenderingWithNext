@@ -6,12 +6,17 @@ import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 let StyledNavigation = styled.nav`
   grid-area: navigation;
   background-color: var(--navigation-background-color,#000);
+  height: 56px;
+  display: flex;
+  align-items: center;
+  
   .navigation-content{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     margin: 0 5px;
+ 
   }
   @media only screen and (min-width: 768px){
     .navigation-content{

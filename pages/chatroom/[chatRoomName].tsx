@@ -20,7 +20,7 @@ const chatRoom = (props: ClientPagesTypes) => {
     const dispatch = useDispatch()
 
     const user = useSelector((state: StoreTypes) => state.user)
-    const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(true)
+    const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
     const [isJoined, setIsJoined] = useState(false)
     const router = useRouter()
 

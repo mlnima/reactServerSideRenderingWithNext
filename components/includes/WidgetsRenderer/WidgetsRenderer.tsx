@@ -20,6 +20,8 @@ const Authentication = dynamic(() => import('../widgets/Authentication/Authentic
 const LinkTo = dynamic(() => import('../widgets/LinkTo/LinkTo'))
 const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'), {ssr: false})
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'), {ssr: false})
+// @ts-ignore
+const PostsSlider = dynamic(() => import('../widgets/PostsSlider/PostsSlider'))
 const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
@@ -68,6 +70,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
             widget.data.type === 'postsSwiper' ? PostSwiper :
+            widget.data.type === 'postsSlider' ? PostsSlider :
                 widget.data.type === 'multipleLinkTo' ? MultipleLinkTo :
                     widget.data.type === 'media' ? MediaWidget :
                         widget.data.type === 'recentComments' ? RecentComments :
