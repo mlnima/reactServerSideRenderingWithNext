@@ -20,35 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiperPostCardImage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetWithPositionMenu.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/AddWidgetMenu/models.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/RenderTitleAndRedirectLink/RenderTitleAndRedirectLink.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetTypeFields/SliderWidgetTypeFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetTypeFields/SliderWidgetTypeFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardListSmall.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardListSmall.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminUpdatePost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/adminPanelPostsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/adminPanelPostsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/reducers/settingsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/settingsReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -172,8 +145,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="Node.js.AppLayout.js" />
         <item itemvalue="npm.analys" />
@@ -868,7 +841,7 @@
       <workItem from="1634586180276" duration="5784000" />
       <workItem from="1634639702980" duration="10481000" />
       <workItem from="1634726442435" duration="11392000" />
-      <workItem from="1634754660482" duration="12865000" />
+      <workItem from="1634754660482" duration="13389000" />
     </task>
     <servers />
   </component>
