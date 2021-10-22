@@ -8,16 +8,16 @@ import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 // @ts-ignore
 import {newMessageInConversation} from "../../../../store/actions/userActions";
 
-interface MessengerConversationMessageAreaTypes{
-    connectedUserData:object,
-    userData:object
+interface MessengerConversationMessageAreaTypes {
+    connectedUserData: object,
+    userData: object
 }
 
-const MessengerConversationMessageArea = ({connectedUserData,userData}:MessengerConversationMessageAreaTypes) => {
+const MessengerConversationMessageArea = ({connectedUserData, userData}: MessengerConversationMessageAreaTypes) => {
 
     const dispatch = useDispatch()
     // @ts-ignore
-    const messages = useSelector((state :StoreTypes) => state.user.activeConversation.messages);
+    const messages = useSelector((state: StoreTypes) => state.user.activeConversation.messages);
 
     const router = useRouter();
     const messageArea = useRef(null)
@@ -25,8 +25,6 @@ const MessengerConversationMessageArea = ({connectedUserData,userData}:Messenger
     useEffect(() => {
         scrollToBottomOfConversationBox()
     }, [messages]);
-
-
 
     // const getAndSetConversationData = () => {
     //     getConversation(router.query.conversation, -20).then(res => {
@@ -65,17 +63,17 @@ const MessengerConversationMessageArea = ({connectedUserData,userData}:Messenger
             `}</style>
             {
                 // @ts-ignore
-                messages.map((message:{_id:string}) => {
+                messages.map((message: { _id: string }) => {
                     return (
-                    <MessengerConversationMessage
-                        key={_.uniqueId('message_')}
-                        message={message}
-                        connectedUserData={connectedUserData}
-                        // @ts-ignore
-                        currentUserId={userData._id}
-                    />
-                )
-            })}
+                        <MessengerConversationMessage
+                            key={_.uniqueId('message_')}
+                            message={message}
+                            connectedUserData={connectedUserData}
+                            // @ts-ignore
+                            currentUserId={userData._id}
+                        />
+                    )
+                })}
         </div>
     );
 };

@@ -126,7 +126,7 @@ const ChatRoomTools = () => {
     }
 
     const onStartTypingHandler = () => {
-        socket.emit('startTyping', router.query.chatRoomName, user.userData.username)
+        socket.emit('startTyping', router.query.chatRoomName, userData.username)
     }
 
 
@@ -159,7 +159,7 @@ const ChatRoomTools = () => {
 
             {someoneTypes.active ? <span className='chatroom-someone-typing'> {someoneTypes.username} is typing </span> : null}
             <div className='chatroom-tools-text'>
-                <input maxLength='300' className='chatroom-tools-content-input' type='text' name='messageData' onChange={e => onChangeHandler(e)} onClick={onStartTypingHandler} value={state.messageData}/>
+                <input maxLength='300' className='chatroom-tools-content-input' type='text' name='messageData' onChange={e => onChangeHandler(e)} onKeyDown={onStartTypingHandler} value={state.messageData}/>
             </div>
 
             <input ref={colorPicker} className='chatroom-tools-Send-color-picker-input' name='color' type='color' value={state.color} onChange={e => onChangeHandler(e)}/>

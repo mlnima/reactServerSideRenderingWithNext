@@ -1,14 +1,91 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import moment from "moment";
 import Link from "next/link";
+import {faEllipsisV, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {deleteConversation} from "../../../../store/actions/userActions";
 
+const MessengerConversationPreviewStyledDiv = styled.div`
+  width: calc(100% - 20px);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+ 
+  .messenger-conversation-preview{
+    width: calc(100% - 20px);
+    padding: 5px 10px;
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: flex-start;
+    margin: 4px auto 4px auto;
+    text-decoration: none;
+    
+    .messenger-conversation-preview-image{
+      width: 50px;
+      border-radius: 50%;
+    }
+    
+    .messenger-conversation-content-preview{
+      display: flex;
+      padding: 0 5px;
+      flex-direction: column;
+      width: calc(100% - 10px);
+      .messenger-conversation-preview-username-date{
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        color:var(--navigation-text-color, #ccc);
+
+        .messenger-conversation-preview-username{
+          margin: 4px 0;
+        }
+        .messenger-conversation-preview-date{
+          margin: 4px 0;
+        }
+      }
+      .messenger-conversation-preview-last-message{
+        margin: 0;
+        color:var(--navigation-text-color, #ccc);
+      }
+    }
+    
+    
+  }
+  .conversation-actions{
+    color:var(--navigation-text-color, #ccc);
+    padding: 2px 5px;
+    position: relative;
+    svg{
+      width: 24px;
+      height: 24px;
+    }
+    .action-menu{
+      position: absolute;
+    }
+  }
+
+  @media only screen and (min-width: 768px){
+    width: 450px;
+    .messenger-conversation-preview{
+    
+    }
+  }
+`
 const MessengerConversationPreview = ({conversationData, userId}) => {
+    const dispatch = useDispatch()
     const [state, setState] = useState({
         username:'',
         profileImage:'',
         messageBody:'',
         date:''
     });
+    const [actionMenu, setActionMenu] = useState(false);
+
+
+
     useEffect(() => {
         setState({
             ...state,
@@ -20,60 +97,19 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
                 :''
         })
     }, []);
+
+
+    const onDeleteConversationHandler = () =>{
+        conversationData._id?
+        dispatch(deleteConversation(conversationData._id)):
+          null
+    }
+
+
     return (
+        <MessengerConversationPreviewStyledDiv>
         <Link href={`/messenger/${conversationData._id}`} >
         <a className='messenger-conversation-preview'>
-            <style jsx>{`
-                   .messenger-conversation-preview{
-                     width: calc(100% - 20px);
-                     padding: 5px 10px;
-                     height: 50px;
-                     display: flex;
-                     align-items: center;
-                     justify-content: flex-start;
-                     margin: 4px auto 4px auto;
-                     text-decoration: none;
-                   }
-                   
-                   .messenger-conversation-content-preview{
-                      display: flex;
-                      padding: 0 5px;
-                      flex-direction: column;
-                       width: calc(100% - 10px);
-                   }
-                   
-                   .messenger-conversation-preview-username-date{
-                      display: flex;
-                      justify-content: space-between;
-                      align-items: center;
-                      color:var(--navigation-text-color, #ccc);
-                     
-                   }
-                   
-                   .messenger-conversation-preview-image{
-                    width: 50px;
-                    border-radius: 50%;
-                   }
-                   .messenger-conversation-preview-username{
-                     margin: 4px 0;
-                   }                
-                   .messenger-conversation-preview-date{
-                      margin: 4px 0;
-                   }
-                   
-                   .messenger-conversation-preview-last-message{
-                     margin: 0;
-                     color:var(--navigation-text-color, #ccc);
-                   }
-                   
-                   @media only screen and (min-width: 768px){
-
-                     .messenger-conversation-preview{
-                     width: 450px;
-                   }
-                   }
-                   
-               `}</style>
             <img className='messenger-conversation-preview-image' src={state.profileImage} alt=""/>
             <div className='messenger-conversation-content-preview'>
                 <div className='messenger-conversation-preview-username-date' >
@@ -82,11 +118,19 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
                 </div>
                 <p className='messenger-conversation-preview-last-message'>{state.messageBody}</p>
             </div>
-            {/*<button className='action-client-button-link'>...</button>*/}
-
 
         </a>
         </Link>
+    <span className={'conversation-actions'}>
+                <FontAwesomeIcon icon={faEllipsisV} onClick={()=>actionMenu ? setActionMenu(false):setActionMenu(true)}/>
+        {actionMenu?
+            <div className={'action-menu'}>
+                <button onClick={onDeleteConversationHandler} className={'btn btn-danger'}><FontAwesomeIcon icon={faTrash}/></button>
+            </div>:null
+        }
+
+            </span>
+    </MessengerConversationPreviewStyledDiv>
     );
 };
 export default MessengerConversationPreview;

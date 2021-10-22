@@ -87,11 +87,6 @@ const user = (props: ClientPagesTypes) => {
 
     const getUserData = async () => {
         try {
-            // const userPreviewData = await getUserPreviewData(
-            //     router.query.username,
-            //     undefined,
-            //     ['following', 'followers', 'blockList']);
-          //  dispatch(setUserPageData(userPreviewData.data.userData))
             dispatch(getUserPageData(  router.query.username,
                 undefined,
                 ['following', 'followers', 'blockList']))
@@ -107,36 +102,45 @@ const user = (props: ClientPagesTypes) => {
 
 
             <div className='profile-header'>
-                <UserPageProfileImage
-                    // @ts-ignore
-                    gender={userPageData?.gender}
-                    // @ts-ignore
-                    profileImage={userPageData?.profileImage}
-                />
+                {userPageData?._id ?
+                    <UserPageProfileImage
+                        // @ts-ignore
+                        gender={userPageData?.gender}
+                        // @ts-ignore
+                        profileImage={userPageData?.profileImage}
+                    />:null
+                }
+
                 <div className='profile-header-info-actions'>
 
-                    <h3>{
-                        // @ts-ignore
-                        userPageData?.username
+                    {userPageData?.username ?
+                        <h3>{
+                            // @ts-ignore
+                            userPageData?.username
+                        }
+                        </h3>:null
                     }
-                    </h3>
+
                     {
                         // @ts-ignore
-                        userData.username !== userPageData?.username ?
+                        userData?.username !== userPageData?.username && userPageData?._id ?
                             <UserPageActionButtons
                                 _id={userData?._id}
                             /> : null
                     }
-                    <div className='follow-count'>
-                        <p>{props.t([`common:Followers`])} : <span>{
-                            // @ts-ignore
-                            userPageData?.followers ? userPageData.followers?.length : 0
-                        }</span></p>
-                        <p>{props.t([`common:Following`])} : <span>{
-                            // @ts-ignore
-                            userPageData?.following ? userPageData.following?.length : 0
-                        }</span></p>
-                    </div>
+                    {userPageData?._id ?
+                        <div className='follow-count'>
+                            <p>{props.t([`common:Followers`])} : <span>{
+                                // @ts-ignore
+                                userPageData?.followers ? userPageData.followers?.length : 0
+                            }</span></p>
+                            <p>{props.t([`common:Following`])} : <span>{
+                                // @ts-ignore
+                                userPageData?.following ? userPageData.following?.length : 0
+                            }</span></p>
+                        </div>:null
+                    }
+
                 </div>
             </div>
             <div className='profile-posts'>

@@ -19,17 +19,20 @@ const AddFormConditional = props => {
 
     const onCreateFieldHandler = (e) => {
         e.preventDefault()
-        props.setWidgetData({
-            ...props.widgetData,
-            formData: {
-                ...props.widgetData.formData,
-                formFields: [...props.widgetData.formData.formFields, {
-                    ...fieldData,
-                    fieldIndex: props.widgetData.formData.formFields.length,
-                    filedId: props.widgetData.formData.formFields.length
-                }]
+        props.setWidgetData(prevWidgetData=>({
+            ...prevWidgetData,
+            uniqueData:{
+                ...(prevWidgetData?.uniqueData || {}),
+                formData: {
+                    ...(prevWidgetData?.uniqueData?.formData || {}),
+                    formFields: [...(prevWidgetData?.uniqueData?.formData?.formFields|| []), {
+                        ...fieldData,
+                        fieldIndex: prevWidgetData?.uniqueData?.formData?.formFields?.length || 0,
+                        filedId: prevWidgetData?.uniqueData?.formData?.formFields?.length || 0
+                    }]
+                }
             }
-        })
+        }))
     }
 
 

@@ -7,6 +7,7 @@ import {setSettings} from "../../store/actions/settingsActions";
 import {getCustomPages} from "../../store/actions/adminPanelGlobalStateActions";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
+import {useRouter} from "next/router";
 
 const AdminDataSetterStyledSpan = styled.span`
   display: none;
@@ -14,13 +15,14 @@ const AdminDataSetterStyledSpan = styled.span`
 
 const AdminDataSetter = () => {
     const dispatch = useDispatch()
+    const router = useRouter()
     const userData = useSelector((state :StoreTypes) => state.user.userData)
 
     useEffect(() => {
         if (userData?.role === 'administrator') {
             getAndSetDataForAdmin().then(() => console.log('welcome Admin, latest uncached data are sent for you'))
         }
-    }, [userData]);
+    }, [userData,router.pathname]);
 
 
     const getAndSetDataForAdmin = async () => {

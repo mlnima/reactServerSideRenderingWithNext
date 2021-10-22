@@ -1,25 +1,27 @@
-import React, {useContext, useEffect} from 'react';
-import {AppContext} from "../../context/AppContext";
+import React, {useEffect} from 'react';
 import GlobalStyles from "../global/Styles/GlobalStyles";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import {autoUserLogin} from "../../store/actions/userActions";
-import {useDispatch} from 'react-redux';
+import {useDispatch, useSelector} from 'react-redux';
+import AlertBox from "../includes/AlertBox/AlertBox";
 
 const MessengerLayout = props => {
-    const contextData = useContext(AppContext);
+    const globalState = useSelector(state => state.globalState)
+    const settings = useSelector(state => state.settings)
     const dispatch = useDispatch()
 
     useEffect(() => {
         if (localStorage.wt) {
-            dispatch(autoUserLogin(['username','role','keyMaster','profileImage','followingCount','followersCount']))
+            dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']))
         }
     }, []);
 
     return (
         <div className='MessengerLayout'>
             <GlobalStyles colors={props.design?.customColors || ''}/>
-            <SiteSettingSetter identity={props.identity || contextData?.siteIdentity} design={props.design || contextData?.siteDesign} eCommerce={props.eCommerce}/>
+            <SiteSettingSetter identity={settings?.identity} design={settings?.design} eCommerce={settings.eCommerce}/>
             {props.children}
+            {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
         </div>
     );
 };

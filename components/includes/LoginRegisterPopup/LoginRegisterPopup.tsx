@@ -18,6 +18,7 @@ const LoginRegisterPopupStyledDiv = styled.div`
   width: 100%;
   margin: 0;
   padding: 0;
+  z-index: 1001;
 `;
 
 const LoginRegisterPopup = () => {

@@ -34,7 +34,6 @@ const widgetDataSchema =  mongoose.Schema({
     stayOpen: Boolean,
     translations: mongoose.Mixed,
     uniqueData: mongoose.Mixed,
-    formData: mongoose.Mixed,
     menuItems: mongoose.Mixed,
     posts: [{type: Schema.Types.ObjectID, ref: 'post'}],
     metaData: [{type: Schema.Types.ObjectID, ref: 'meta'}],

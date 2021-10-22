@@ -15,7 +15,7 @@ import 'swiper/css/scrollbar';
 SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controller, EffectCube, EffectCoverflow, Lazy, EffectFlip, EffectFade, Parallax]);
 
 let PostSwiperStyledDiv = styled.div`
-  margin: 10px 0;
+  margin: 10px auto;
   width: 100vw;
   
   .swiper{
@@ -110,7 +110,7 @@ const PostSwiper = props => {
                 speed={props?.uniqueData?.speed || 1000}
                 scrollbar={{draggable: true}}
                 effect={props?.uniqueData?.sliderEffect || false}
-                slidesPerView={window.innerWidth > 768 ? Math.floor(((window.innerWidth - 320) / cardWidth) - 1) : Math.floor(window.innerWidth / cardWidth)}
+                slidesPerView={window.innerWidth > 768 ? Math.floor(((window.innerWidth - 320) / cardWidth)) : Math.floor(window.innerWidth / cardWidth)}
                 spaceBetween={props?.uniqueData?.spaceBetween || 10}
 
             >

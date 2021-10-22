@@ -54,22 +54,31 @@ export interface User {
     _id?: string;
     username?: string;
     role?: string,
-    profileImage?:string
+    profileImage?: string
 }
 
 export interface UserState {
-    userData?: User,
-    socketId?:string,
-    loggedIn: boolean,
-    userPageData?: object,
-    conversations?: object[],
+    userData?: User;
+    socketId?: string;
+    loggedIn: boolean;
+    userPageData?: object;
+    conversations?: { _id: string }[];
     activeConversation?: {
         messages?: object[],
         users?: User[]
+    };
+    callData: {
+        myVideo?: any;
+        partnerVideo?:any,
+        callerSignal?: any,
+        calling?:boolean,
+        receivingCall?:boolean,
+        callAccepted?:boolean,
+        callerName?:string,
+        callerId?:string,
+        userStreamData:any
     }
 }
-
-
 
 
 export interface settingsPropTypes {
@@ -178,7 +187,7 @@ export interface WidgetsStateTypes {
 }
 
 export interface GlobalStateTypes {
-    loginRegisterFormPopup: boolean |string,
+    loginRegisterFormPopup: boolean | string,
     loading: boolean,
     isSiteIdentitySet: boolean,
     isSiteDesignSet: boolean,
@@ -187,30 +196,28 @@ export interface GlobalStateTypes {
         active: boolean,
         message: string,
         type: string,
-        err:{
-            stack:any
+        err: {
+            stack: any
         }
     }
 }
 
 export interface Translations {
-  [key:string]:{
-
-  }
+    [key: string]: {}
 }
 
 
 export interface AdminPanelPostsTypes {
-    post?:{
-        title?:string,
-        description?:string,
-        translations?:Translations,
-        author?:string,
-        _id?:string,
-        status?:string,
-        postType?:string,
+    post?: {
+        title?: string,
+        description?: string,
+        translations?: Translations,
+        author?: string,
+        _id?: string,
+        status?: string,
+        postType?: string,
     },
-    activeEditingLanguage:string
+    activeEditingLanguage: string
 }
 
 export interface StoreTypes {
@@ -220,7 +227,7 @@ export interface StoreTypes {
     user: UserState,
     widgets: WidgetsStateTypes,
     globalState: GlobalStateTypes;
-    adminPanelPosts:AdminPanelPostsTypes
+    adminPanelPosts: AdminPanelPostsTypes
 }
 
 

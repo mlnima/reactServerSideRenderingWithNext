@@ -24,8 +24,6 @@ const MenuWidgetSubItemStyledLi = styled.li`
 `
 
 const MenuWidgetStyledLi = styled.li`
-  padding-left: 0.2rem !important;
-  padding-right: 0.2rem !important;
   list-style-type: none;
   width: 100%;
   font-size: 1rem;
@@ -33,17 +31,15 @@ const MenuWidgetStyledLi = styled.li`
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin: ${props => !props.menuItem.parent ? '0 10px' : '0'};
-  &:hover {
-    filter: invert(70%);
-  }
+  margin: ${props => !props.menuItem.parent ? '0 3px' : '0'};
+  //&:hover {
+  //  filter: invert(70%);
+  //}
   .menu-widget-item-link {
     color: var(--navigation-text-color, #ccc);
     text-decoration: none;
     font-size: 14px;
-    font-weight: ${props=>props.activeLink ? 'bold' : 'initial'};
     
-
     &:active{
       filter: invert(70%);
     }

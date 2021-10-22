@@ -447,8 +447,14 @@ const WidgetModel = props => {
                     }
 
 
-                    <FormTypeWidgetModelFields widgetSettings={widgetSettings} widgetData={widgetData} setWidgetData={setWidgetData} onChangeHandler={onChangeHandler}
-                                               mobileNavigation={widgetData.mobileNavigation} rendering={widgetData.type === 'form'}/>
+                    <FormTypeWidgetModelFields widgetSettings={widgetSettings}
+                                               widgetData={widgetData}
+                                               setWidgetData={setWidgetData}
+                                               onChangeHandler={onChangeHandler}
+                                               onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                                               mobileNavigation={widgetData.mobileNavigation}
+                                               rendering={widgetData.type === 'form'}
+                    />
                     <MenuWidgetModelFields widgetData={widgetData}
                                            setWidgetData={setWidgetData}
                                            onChangeHandler={onChangeHandler}

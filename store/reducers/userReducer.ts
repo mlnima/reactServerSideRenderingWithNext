@@ -9,6 +9,17 @@ const initialState = {
     activeConversation:{
         messages:[],
         users:[]
+    },
+    callData:{
+        myVideo:null,
+        partnerVideo:null,
+        callerSignal:null,
+        calling:false,
+        receivingCall:false,
+        callAccepted:false,
+        callerName:'',
+        callerId:'',
+        userStreamData:null
     }
 }
 
@@ -64,6 +75,12 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                 ...state,
                 activeConversation:action.payload,
             }
+
+        case  types.DELETE_CONVERSATION:
+            return {
+                ...state,
+                conversations: state.conversations?.filter(conversation=> conversation._id !== action.payload),
+            }
         case  types.NEW_MESSAGE_IN_CONVERSATION:
             return {
                 ...state,
@@ -73,6 +90,88 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                         ...(state.activeConversation?.messages || []),
                         action.payload
                     ]
+                }
+            }
+        case  types.SET_MY_VIDEO:
+            return {
+                ...state,
+                callData: {
+                    ...state.callData,
+                    myVideo:action.payload,
+                }
+            }
+        case  types.SET_PARTNER_VIDEO:
+            return {
+                ...state,
+                callData: {
+                    ...state.callData,
+                    partnerVideo:action.payload,
+                }
+            }
+        case  types.SET_CALLING_STATUS:
+            return {
+                ...state,
+                callData: {
+                    ...state.callData,
+                    calling:action.payload,
+                }
+            }
+        // case  types.SET_RECEIVING_CALL_STATUS:
+        //     return {
+        //         ...state,
+        //         callData: {
+        //             ...state.callData,
+        //             receivingCall:action.payload,
+        //         }
+        //     }
+        // case types.SET_CALLER_DATA:
+        //     return {
+        //         ...state,
+        //         callData: {
+        //             ...state.callData,
+        //             ...action.payload
+        //         }
+        //     }
+
+
+        case  types.INCOMING_CALL:
+            return {
+                ...state,
+                callData: {
+                    ...state.callData,
+                    ...action.payload,
+                }
+            }
+        case  types.OUTGOING_CALL:
+            return {
+                ...state,
+                callData: {
+                    ...state.callData,
+                    ...action.payload,
+                }
+            }
+        case  types.SET_CALL_ACCEPTED:
+            return {
+                ...state,
+                callData: {
+                    ...state.callData,
+                    ...action.payload
+                }
+            }
+
+        case  types.END_CALL:
+            return {
+                ...state,
+                callData:{
+                    myVideo:null,
+                    partnerVideo:null,
+                    callerSignal:null,
+                    calling:false,
+                    receivingCall:false,
+                    callAccepted:false,
+                    callerName:null,
+                    callerId:null,
+                    userStreamData:null
                 }
             }
         default:

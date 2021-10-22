@@ -92,11 +92,12 @@ io.on('connection', socket => {
         socket.to(data.conversation).emit("incomingCallFromConversation", data)
     })
 
-    socket.on("answerCall", (signal, conversation) => {
-        socket.to(conversation).emit("callAccepted", signal)
+    socket.on("answerCall", (data) => {
+        socket.to(data.conversation).emit('callAccepted', data.signal)
     })
-    socket.on("endCall", conversation => {
-        socket.to(conversation).emit("endCall")
+
+    socket.on('endCall', conversation => {
+        socket.to(conversation).emit('endCall')
     })
 //--------------------chatroom--------------------------
 

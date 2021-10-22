@@ -47,13 +47,13 @@ const messengerPage = (props: ClientPagesTypes) => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     const firstLoadData = await getFirstLoadData(context.req,
-        ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
+        ['messengerPagePageLeftSidebar', 'messengerPageRightSidebar', 'messengerPage'],
         store
     )
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation','profile'])),
             ...firstLoadData,
         }
     }

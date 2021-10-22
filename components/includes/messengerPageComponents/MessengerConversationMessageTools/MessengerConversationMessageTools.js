@@ -11,62 +11,24 @@ const MessengerConversationMessageToolsStyledForm = styled.form`
   position: fixed;
   left: 0;
   right: 0;
-  bottom: 0;
-  height: 48px;
+  bottom: 5px;
   display: flex;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
-  width: 100%;
-  
-
-  
-  .messenger-conversation-message-tools-text {
-    
-    display: flex;
-    justify-content: center;
-    width:100%;
-    
-    height: 48px;
-
-    .messenger-conversation-message-tools-text-input {
-      border-radius: 25px;
-      border: 0;
-      height: 38px;
-      width: 100%;
-      padding: 4px 10px;
-      outline: none;
-      background-color: var(--navigation-background-color, #18181b);
-      color: var(--navigation-text-color, #18181b);
-    }
+  height: 38px;
+  .form-control-input{
+    height: 28px;
   }
-
-  .messenger-conversation-message-tools-Send {
-   // background-color: var(--navigation-text-color, #18181b);
-    border-radius: 50px;
-    z-index: 10;
-    position: absolute;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+  .btn-primary{
     right: 8px;
-
-    .messenger-conversation-message-tools-btn {
-      color: var(--navigation-background-color, #18181b);
-      border: none;
+    height: 42px;
+    display: flex;
+    svg{
       width: 24px;
       height: 24px;
-      border-radius: 50%;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      background-color: transparent;
-      svg{
-        color: var(--navigation-text-color, #18181b);
-      }
-
+      
     }
   }
-
 `
 
 const MessengerConversationMessageTools = props => {
@@ -95,19 +57,12 @@ const MessengerConversationMessageTools = props => {
 
 
     return (
-        <div>
             <MessengerConversationMessageToolsStyledForm onSubmit={onSendMessageHandler} className='messenger-conversation-message-tools'>
-                <div className='messenger-conversation-message-tools-text'>
-                    <input maxLength='300' ref={messageInput} className='messenger-conversation-message-tools-text-input' type="text" name='message'/>
-                </div>
-                <div className='messenger-conversation-message-tools-Send'>
-                    <button onClick={e => onSendMessageHandler(e)} className='messenger-conversation-message-tools-btn'>
-                        <FontAwesomeIcon style={{width: '24px', height: '24px'}} icon={faArrowRight}/>
-                    </button>
-                </div>
+                <input maxLength='300' ref={messageInput} className='form-control-input' type="text" name='message'/>
+                <button onClick={e => onSendMessageHandler(e)} className='btn btn-primary'>
+                    <FontAwesomeIcon  icon={faArrowRight}/>
+                </button>
             </MessengerConversationMessageToolsStyledForm>
-        </div>
-
     );
 };
 export default MessengerConversationMessageTools;

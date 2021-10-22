@@ -22,6 +22,7 @@ const clientConversation = require('./clientUsersControllers/clientConversation'
 const clientMessageToConversation = require('./clientUsersControllers/clientMessageToConversation')
 const clientGetConversations = require('./clientUsersControllers/clientGetConversations')
 const clientGetConversation = require('./clientUsersControllers/clientGetConversation')
+const clientDeleteConversation = require('./clientUsersControllers/clientDeleteConversation')
 
 router.post('/register',clientRegisterNewUser)
 router.post('/login',clientUserLogin)
@@ -42,6 +43,7 @@ router.post('/sendMessage',authMiddleware,clientSendMessage)
 router.post('/conversation',authMiddleware,clientConversation)
 router.post('/getConversations',authMiddleware,clientGetConversations)
 router.post('/getConversation',authMiddleware,clientGetConversation)
+router.get('/deleteConversation',authMiddleware,clientDeleteConversation)
 router.post('/messageToConversation',authMiddleware,clientMessageToConversation)
 
 module.exports = router
