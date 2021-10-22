@@ -86,10 +86,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                 ...state,
                 activeConversation:{
                     ...state.activeConversation,
-                    messages: [
-                        ...(state.activeConversation?.messages || []),
-                        action.payload
-                    ]
+                    messages: [...(state.activeConversation?.messages || []), action.payload]
                 }
             }
         case  types.SET_MY_VIDEO:

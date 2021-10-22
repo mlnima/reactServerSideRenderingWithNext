@@ -1,6 +1,7 @@
 import React, {PureComponent} from 'react';
 import moment from "moment";
 import styled from "styled-components";
+
 const MessengerConversationMessageStyledDiv = styled.div`
   display: flex;
   justify-content: ${props=>    props?.author === props?.currentUserId ? 'flex-end' : 'flex-start'} ;
@@ -20,7 +21,6 @@ const MessengerConversationMessageStyledDiv = styled.div`
     .messenger-conversation-message-text{
       color: var(--navigation-text-color, #ccc) ;
       padding: 4px 8px;
-    //  width: calc(90% );
       word-break: break-word;
       margin: 0;
     }
@@ -32,13 +32,10 @@ const MessengerConversationMessageStyledDiv = styled.div`
       width: 100%;
     }
   }
-
-
 `
+
 class MessengerConversationMessage extends PureComponent {
-
     render() {
-
         return (
             <MessengerConversationMessageStyledDiv className='messenger-conversation-message' author={this.props.message.author} currentUserId={this.props.currentUserId}>
                 <div className='messenger-conversation-message-data'>
