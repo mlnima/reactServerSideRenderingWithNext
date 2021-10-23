@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {useMemo, useRef, useState} from 'react';
 import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
 import styled from "styled-components";
 
@@ -40,6 +40,11 @@ let VideoCardMediaStyled = styled.div`
 const VideoCardMedia = props => {
     const [hover, setHover] = useState(false)
     const [gotError, setGotError] = useState(false)
+
+    const imageUrl = useMemo(() => {
+        return props?.post.mainThumbnail ? props.post.mainThumbnail?.includes('http') ? props.post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.post.mainThumbnail : ''
+    },[props])
+
     // const [isReported, setIsReported] = useState(false)
 
     // const [imageUrl, setImageUrl] = useState(() => {
@@ -84,7 +89,7 @@ const VideoCardMedia = props => {
             </VideoCardMediaStyled>
         )
     } else {
-       const imageUrl = props?.post?.mainThumbnail ? props.post.mainThumbnail?.includes('http') ? props.post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.post.mainThumbnail : ''
+
         return (
             <VideoCardMediaStyled className='video-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
                 <img className='video-card-image'

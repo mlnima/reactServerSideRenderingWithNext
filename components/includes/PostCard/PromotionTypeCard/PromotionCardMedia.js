@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useContext, useRef, useMemo} from 'react';
 import {checkRemovedContent} from "../../../../_variables/ajaxPostsVariables";
 import {clientSelfWidgetUpdate} from "../../../../_variables/_ajaxClientWidgetVariables";
 import styled from "styled-components";
@@ -25,29 +25,29 @@ const PromotionCardMediaStyled = styled.div`
 
 const PromotionCardMedia = props => {
     const [gotError, setGotError] = useState(false)
-    const [isReported, setIsReported] = useState(false)
-    const [imageUrl, setImageUrl] = useState(() => {
+    // const [isReported, setIsReported] = useState(false)
+    const imageUrl = useMemo(() => {
         return props?.post.mainThumbnail ? props.post.mainThumbnail?.includes('http') ? props.post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.post.mainThumbnail : ''
-    })
+    },[props])
 
-    const onErrorHandler = e => {
-        if (imageUrl) {
-            setGotError(true)
-            setIsReported(true)
-            let data = {
-                checkUrl: imageUrl,
-                contentId: props.post._id,
-                type: 'image'
-            }
-            setTimeout(() => {
-                checkRemovedContent(data).then(() => {
-                    if (props.widgetId) {
-                        clientSelfWidgetUpdate(props.widgetId)
-                    }
-                })
-            }, 1000)
-        }
-    }
+    // const onErrorHandler = e => {
+    //     if (imageUrl) {
+    //         setGotError(true)
+    //         setIsReported(true)
+    //         let data = {
+    //             checkUrl: imageUrl,
+    //             contentId: props.post._id,
+    //             type: 'image'
+    //         }
+    //         setTimeout(() => {
+    //             checkRemovedContent(data).then(() => {
+    //                 if (props.widgetId) {
+    //                     clientSelfWidgetUpdate(props.widgetId)
+    //                 }
+    //             })
+    //         }, 1000)
+    //     }
+    // }
 
     return (
         <PromotionCardMediaStyled className='promotion-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
