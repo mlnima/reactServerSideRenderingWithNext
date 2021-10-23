@@ -49,11 +49,9 @@ let CategoriesRendererStyledDiv = styled.div`
 
 
 const CategoriesRenderer = ({metaData, postElementSize}) => {
-
+    const dispatch = useDispatch()
     const categoriesMetas = metaData ? metaData : useSelector(state => state.posts.categoriesMetas)
     const elementSize = postElementSize ? postElementSize : useSelector(state => state.settings?.design?.postElementSize);
-
-    const dispatch = useDispatch()
 
     const cardWidth = elementSize === 'list' ? 116.6 :
         elementSize === 'smaller' ? 209.8 :
@@ -64,8 +62,8 @@ const CategoriesRenderer = ({metaData, postElementSize}) => {
         <CategoriesRendererStyledDiv className='categories-content' postElementSize={postElementSize} cardWidth={cardWidth}>
 
             {
-                categoriesMetas.map((category, index) => {
-                    return <CategoryCard onActivateLoadingHandler={() => dispatch(setLoading(true))} key={index} cardWidth={cardWidth} category={category} postElementSize={elementSize}/>
+                categoriesMetas.map((category) => {
+                    return <CategoryCard onActivateLoadingHandler={() => dispatch(setLoading(true))} key={category._id} cardWidth={cardWidth} category={category} postElementSize={elementSize}/>
                 })
             }
         </CategoriesRendererStyledDiv>

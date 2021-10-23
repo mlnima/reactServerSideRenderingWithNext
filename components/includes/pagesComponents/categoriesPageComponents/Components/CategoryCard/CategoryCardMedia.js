@@ -1,6 +1,4 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {checkRemovedContent} from "../../../../../../_variables/ajaxPostsVariables";
-import _fixMetaImage from "../../../../../../_variables/clientAjaxVariables/_fixMetaImage";
+import React, {useRef} from 'react';
 import styled from "styled-components";
 
 const CategoryCardMediaStyledImage = styled.img`
@@ -28,38 +26,8 @@ const NoImageStyleDiv = styled.div`
 
 const CategoryCardMedia = props => {
     const imageRef = useRef(null)
-    const [gotError, setGotError] = useState(false)
-    // const [isReported, setIsReported] = useState(false)
 
-
-    // useEffect(() => {
-    //     if (!props.imageUrl) {
-    //         _fixMetaImage(props.categoryId).then(res => {
-    //             if (imageRef.current && res?.data?.newImageUrl) {
-    //                 imageRef.current.src = res?.data?.newImageUrl
-    //             }
-    //         })
-    //
-    //     }
-    //
-    // }, [props]);
-
-    // const onErrorHandler = () => {
-    //     if (props.imageUrl) {
-    //         setGotError(true)
-    //         setIsReported(true)
-    //         let data = {
-    //             checkUrl: props.imageUrl,
-    //         }
-    //         checkRemovedContent(data).then(res => {
-    //             if (imageRef.current && res?.data?.newImageUrl) {
-    //                 imageRef.current.src = res?.data?.newImageUrl
-    //             }
-    //         })
-    //     }
-    // }
-
-    if (gotError || !props.imageUrl){
+    if (!props.imageUrl){
         return (
             <NoImageStyleDiv   cardWidth={props.cardWidth} className='no-image'>
                 <span>NO IMAGE</span>
@@ -71,7 +39,6 @@ const CategoryCardMedia = props => {
                                           ref={imageRef}
                                           className='category-card-image'
                                           src={props.imageUrl}
-                                          // onError={onErrorHandler}
                                           alt={props.mediaAlt}/>
         );
     }

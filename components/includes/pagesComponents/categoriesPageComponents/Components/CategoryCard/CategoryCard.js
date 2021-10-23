@@ -7,7 +7,7 @@ const CategoryCard = ({t, cardWidth, category, onActivateLoadingHandler}) => {
     const router = useRouter()
     return (
         <Link href={`/category/${category?._id}`}>
-            <a className='category-card-link' onClick={onActivateLoadingHandler}  >
+            <a className='category-card-link' onClick={onActivateLoadingHandler}>
                 <CategoryCardMedia cardWidth={cardWidth} imageUrl={category?.imageUrl} mediaAlt={category?.translations?.[router.locale]?.name || category?.name} categotyId={category._id}/>
                 <h3 className='category-card-title'>{category?.translations?.[router.locale]?.name || t([t(`customTranslation:${category?.name}`)])}</h3>
             </a>
