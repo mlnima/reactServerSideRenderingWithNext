@@ -11,21 +11,21 @@ module.exports = async (req, res) => {
                 if (meta){
                     res.json({meta})
                 }else {
-                    res.sendStatus(404).json({message:'Not Found'})
+                    res.status(404).json({message:'Not Found'})
                 }
 
             }).catch(err => {
                 console.log(err.stack)
-                res.sendStatus(400).json({message:'Bad Request'})
+                res.status(400).json({message:'Bad Request'})
             })
         }else {
             //res.status(404)
-            res.sendStatus(404).json({message:'Not Found'})
+            res.status(404).json({message:'Not Found'})
 
 
         }
     }catch (err){
         console.log(err.stack)
-        res.sendStatus(500).json({message:'Server Error'})
+        res.status(500).json({message:'Server Error'})
     }
 }

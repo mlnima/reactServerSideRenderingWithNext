@@ -5,5 +5,5 @@ Disallow: /admin
 Sitemap: ${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemap.xml
 `
     res.send(robotTxtData);
-    res.end();
+
 }

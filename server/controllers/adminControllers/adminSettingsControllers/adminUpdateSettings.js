@@ -12,15 +12,15 @@ module.exports = (req, res) => {
                 data: req.body.data
             });
             dataToSave.save().then(() => {
-                res.statusCode(200)
+                res.status(200)
             }).catch(err => {
                 console.log(err)
-                res.statusCode(500)
+                res.status(500)
             })
         }
     }).catch(err => {
         console.log(err)
-        res.statusCode(500)
+        res.status(500)
     })
-    res.end()
+
 };

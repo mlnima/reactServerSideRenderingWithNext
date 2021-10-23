@@ -94,7 +94,7 @@ const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentT
                 } else return (
                     <PostElement
                         {...postProps}
-                        onClickLoadingHandler={contextData.functions.loadingHandler}
+                        onClickLoadingHandler={() => dispatch(setLoading(true))}
                         key={index}
                         redirectLink={post.redirectLink}
                         viewType={viewType}

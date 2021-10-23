@@ -5,6 +5,5 @@ module.exports = async (req, res) => {
 
     formSchema.findById(_id).exec().then(formData=>{
         res.json({form:formData,error:false})
-        res.end()
     })
 }

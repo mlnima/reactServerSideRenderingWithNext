@@ -1,33 +1,88 @@
 import React, {useEffect, useState, useContext} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import {AppContext} from "../../../context/AppContext";
 import LanguagesSwitcher from "../widgets/LanguagesSwitcher/LanguagesSwitcher";
-import {useRouter} from "next/router";
 import {withTranslation} from "next-i18next";
+import {useSelector} from "react-redux";
 
+import styled from "styled-components";
+
+const CookiePopupStyledDiv = styled.div`
+
+  position: fixed;
+  top: 0;
+  left: 0;
+  bottom: 0;
+  right: 0;
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  align-items: center;
+  z-index: 1005;
+
+  .cookie-popup-content {
+    background-color: var(--main-text-color);
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 280px;
+
+    .cookie-popup-header {
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    h2, p {
+      color: var(--main-background-color, #000);
+      font-size: .8rem;
+    }
+
+    .cookie-popup-content-action-buttons {
+      width: 100%;
+      display: flex;
+      justify-content: space-evenly;
+      margin: 20px 0;
+
+      .cookie-popup-content-action-button-accept {
+        background-color: green;
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+        color: white;
+      }
+
+      .cookie-popup-content-action-button-reject {
+        background-color: red;
+        border: none;
+        outline: none;
+        padding: 10px 20px;
+        color: white;
+      }
+
+
+    }
+
+    .cookie-popup-content-action-read-more {
+      background-color: #61dafb;
+      border: none;
+      outline: none;
+      padding: 10px 20px;
+      color: white;
+    }
+  }
+
+`
 const CookiePopup = props => {
+    const settings = useSelector(state => state.settings)
+    const globalState = useSelector(state => state.globalState)
     const contextData = useContext(AppContext);
-    const router = useRouter()
+    // const router = useRouter()
     const [state, setState] = useState({
-        accepted: true,
-        render: false
+        accepted: false,
+        render: true
     });
-
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-
-            if (localStorage.cookieAccepted !== 'true') {
-                setState({
-                    ...state,
-                    accepted: false,
-                    render: true
-                })
-            }
-        }
-    }, [props,router.locale,router.pathname]);
-
 
     const onAcceptHandler = () => {
         localStorage.cookieAccepted = true
@@ -44,77 +99,23 @@ const CookiePopup = props => {
         }
     }
 
-    if (props?.identity?.cookiePopupMessage && !state.accepted && state.render) {
-        return (
-            <span className='cookie-popup-parent'>
-            <style jsx>{`
-                .cookie-popup-parent{
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    bottom: 0;
-                    right: 0;
-                    display: flex;
-                    justify-content: center;
-                    width: 100%;
-                    align-items: center;
+    // useEffect(() => {
+    //     console.log(contextData.state.activeLanguage)
+    //     console.log(settings?.identity?.cookiePopupMessage)
+    //     console.log(globalState)
+    // }, [props]);
 
-                }
-                .cookie-popup-content{
-                    background-color: var(--main-text-color);
-                    padding: 20px;
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: center;
-                    align-items: center;
-                    width: 280px;
-                }
-                
-                h2,p{
-                    color: var(--main-background-color,#000) ;
-                    font-size: .8rem;
-                }
-                .cookie-popup-content-action-buttons{
-                    width: 100%;
-                    display: flex;
-                    justify-content: space-evenly;
-                    margin: 20px 0;
-                }
-                .cookie-popup-content-action-button-accept{
-                    background-color: green;
-                    border: none;
-                    outline:none;
-                    padding: 10px 20px;
-                    color: white;
-                }
-                .cookie-popup-content-action-button-reject{
-                    background-color: red;
-                    border: none;
-                    outline:none;
-                    padding: 10px 20px;
-                    color: white;
-                }
-                .cookie-popup-content-action-read-more{
-                    background-color: #61dafb;
-                    border: none;
-                    outline:none;
-                    padding: 10px 20px;
-                    color: white;
-                }
-                .cookie-popup-header{
-                    display: flex;
-                    justify-content: flex-end;
-                }
-            
-            `}</style>
+    if (settings?.identity?.cookiePopupMessage && !state.accepted) {
+        return (
+            <CookiePopupStyledDiv className='cookie-popup-parent'>
             <span className='cookie-popup-content'>
                 <span className='cookie-popup-header'>
                     <LanguagesSwitcher cookiePage={true}/>
                 </span>
 
-              <h2>{props?.identity?.translations[contextData.state.activeLanguage]?.cookieTitleText || props?.identity?.cookieTitleText}</h2>
+              <h2>{settings?.identity?.translations[contextData.state.activeLanguage]?.cookieTitleText || settings?.identity?.cookieTitleText}</h2>
                 <p>
-                    {props?.identity?.translations[contextData.state.activeLanguage]?.cookieMessageText || props?.identity?.cookieMessageText}
+                    {settings?.identity?.translations[contextData.state.activeLanguage]?.cookieMessageText || settings?.identity?.cookieMessageText}
                 </p>
                 <div className='cookie-popup-content-action-buttons'>
                       <button className='cookie-popup-content-action-button-reject' onClick={onRejectHandler}>
@@ -127,12 +128,12 @@ const CookiePopup = props => {
                     </button>
 
                 </div>
-                {props?.identity?.cookieReadMoreLink ?
-                    <Link href={props?.identity?.cookieReadMoreLink}><a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>Accept and Read More</a></Link>
+                {settings?.identity?.cookieReadMoreLink ?
+                    <Link href={settings?.identity?.cookieReadMoreLink}><a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>Accept and Read More</a></Link>
                     : null
                 }
             </span>
-        </span>
+            </CookiePopupStyledDiv>
         );
     } else return null
 

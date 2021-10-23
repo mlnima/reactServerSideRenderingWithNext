@@ -14,6 +14,7 @@ import {wrapper} from '../store/store';
 
 const MyApp = ({Component, pageProps}: AppProps) => {
     const router = useRouter()
+
     if (router.pathname.includes('/admin')) {
         return (<AppProvider>
                 <AdminLayout>
@@ -34,7 +35,7 @@ const MyApp = ({Component, pageProps}: AppProps) => {
                 <Component {...pageProps} />
             </AppLayout>
             <LoginRegisterPopup/>
-            <CookiePopup identity={pageProps.identity}/>
+
         </AppProvider>
     )
 };

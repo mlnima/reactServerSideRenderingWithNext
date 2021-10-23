@@ -6,10 +6,10 @@ module.exports = (req, res) => {
 
     userSchema.find({'_id': { $in: usersList}}).select('username role profileImage name lastName gender').exec().then(users=>{
         res.json({  users });
-        res.end()
+
     }).catch(err => {
         console.log(err);
-        res.sendStatus(500);
-        res.end()
+        res.status(500);
+
     })
 }

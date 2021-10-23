@@ -12,11 +12,11 @@ module.exports = async (req, res) => {
         const conversation = await conversationSchema.findOneAndUpdate({users:{ "$eq" : [senderId,receiverId].sort()}}, {...conversationData},{new:true,upsert:true}).exec()
 
         res.json({conversation})
-        res.end()
+
     }catch (err) {
         console.log(err)
-        res.sendStatus(500);
-        res.end()
+        res.status(500);
+
     }
 
 }

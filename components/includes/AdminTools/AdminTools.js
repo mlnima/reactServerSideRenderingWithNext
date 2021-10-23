@@ -1,11 +1,11 @@
-import React, {useState, useContext} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCogs, faEraser, faTerminal, faUserShield} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import {adminConsoleOpenCloseHandler} from "../../../_variables/_variables";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
+import {useDispatch} from "react-redux";
+import {clearCaches} from "../../../store/actions/adminPanelGlobalStateActions";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -28,8 +28,6 @@ let StyledDiv = styled.div`
     z-index: 2;
     text-decoration: none;
     margin: 0 5px;
-
-
     .admin-tools-item-logo {
       transition: .5s;
       color: white;
@@ -43,8 +41,8 @@ let StyledDiv = styled.div`
     }
   }
 `
-const AdminTools = props => {
-    const contextData = useContext(AppContext);
+const AdminTools = () => {
+    const dispatch = useDispatch()
     const [state, setState] = useState({
         open: false,
         console: false
@@ -62,19 +60,20 @@ const AdminTools = props => {
                 </button>
                 {state.open?
                     <>
-                        <Link href='/admin' locale={false}>
+                        <Link href={'/admin'} locale={false}>
                             <a className='admin-tools-item' >
                                 <FontAwesomeIcon icon={faUserShield} className='admin-tools-item-logo'/>
                             </a>
                         </Link>
-                        <a className='admin-tools-item' href=''  rel="noreferrer" onClick={() => contextData.functions.clearCaches()}>
+                        <button className='admin-tools-item'
+                                rel="noreferrer" onClick={() => dispatch(clearCaches())}
+                        >
                             <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
-                        </a>
+                        </button>
 
                     </>
                     :null
                 }
-
             </StyledDiv>
         </Draggable>
     );

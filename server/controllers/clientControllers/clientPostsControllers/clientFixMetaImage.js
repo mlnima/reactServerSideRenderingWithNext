@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
             if (findPostWithSameMeta){
                 await metaSchema.findByIdAndUpdate(metaId,{imageUrl:findPostWithSameMeta.mainThumbnail},{new : true}).exec().then(updatedMeta=>{
                     res.json({newImageUrl:updatedMeta.imageUrl})
-                    res.end()
+
                 }).catch(err=>{
                     console.log(err)
                     res.end()
@@ -22,7 +22,6 @@ module.exports = async (req, res) => {
             }else {
                 // await metaSchema.findByIdAndUpdate(metaId,{status:'pending'}).exec().then(()=>{
                 //     res.json({message:'meta went pending',error:true})
-                //     res.end()
                 // }).catch(err=>{
                 //     res.end()
                 // })
@@ -30,7 +29,6 @@ module.exports = async (req, res) => {
             }
         }else {
             res.json({newImageUrl:metaDocument?.imageUrl})
-            res.end()
         }
     }catch (err){
         console.log(err)

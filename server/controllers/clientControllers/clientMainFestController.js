@@ -35,7 +35,7 @@ module.exports = async (req, res) =>{
             "orientation": "portrait"
         }
         res.json(manifestJsonData)
-        res.end()
+
     }catch (err) {
         console.log(err)
     }

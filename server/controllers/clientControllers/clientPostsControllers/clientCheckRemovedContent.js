@@ -28,10 +28,10 @@ module.exports = (req, res) => {
                             if (post) {
                                 metaSchema.findByIdAndUpdate(meta._id, {$set: {imageUrl: post.mainThumbnail}}, {new: true}).exec().then(updatedMeta => {
                                     res.json({newImageUrl: updatedMeta.imageUrl})
-                                    res.end()
+
                                 }).catch(err => {
                                     console.log(err)
-                                    res.end()
+
                                 })
                             } else {
                                 res.end()

@@ -49,7 +49,7 @@ siteMapsController.siteMapMonths = (req, res) => {
                     '</urlset>';
                 res.set('Content-Type', 'text/xml');
                 res.send(xmlTemplate)
-                res.end()
+
             }).catch(err => {
                 console.log(err)
             })
@@ -72,7 +72,7 @@ siteMapsController.siteMapMonths = (req, res) => {
                 '</sitemapindex>';
             res.set('Content-Type', 'text/xml');
             res.send(xmlTemplate);
-            res.end()
+
         }
     });
 };

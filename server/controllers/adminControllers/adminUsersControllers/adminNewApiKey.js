@@ -11,7 +11,7 @@ module.exports = (req, res) => {
     }
     userSchema.findByIdAndUpdate(req.userData._id, newUserData).exec().then(savedData => {
         res.json({ updatedData: savedData })
-        res.end()
+
     }).catch(err => {
         console.log(err)
         res.end()

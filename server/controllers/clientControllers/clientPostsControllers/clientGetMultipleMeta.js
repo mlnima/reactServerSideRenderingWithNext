@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
         const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]}).exec()
         metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
             res.json({metas,totalCount:metaCount})
-            res.end()
+
         }).catch(err => {
             console.log(err)
             res.end()

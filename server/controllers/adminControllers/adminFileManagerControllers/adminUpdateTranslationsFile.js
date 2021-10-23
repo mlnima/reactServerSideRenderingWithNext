@@ -20,7 +20,7 @@ module.exports = (req, res) => {
             // })
         }else {
             res.json({ message: 'file updated'});
-            res.end()
+
         }
 
     })

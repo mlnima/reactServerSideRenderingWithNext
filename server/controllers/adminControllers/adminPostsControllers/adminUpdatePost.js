@@ -15,14 +15,12 @@ module.exports =  async (req, res) => {
 
         await postSchema.findByIdAndUpdate(postUpdatedData._id, {...finalPostUpdatedData}, {new: true}).exec().then(updated => {
             res.json({message:'Post Has Been Successfully Updated'})
-            res.end()
         }).catch(err => {
             console.log(err)
-            res.sendStatus(400).json({message:'Error On Updating The document',err})
+            res.status(400).json({message:'Error On Updating The document',err})
         })
-        res.end()
     } catch (err) {
         console.log(err)
-        res.sendStatus(500).json({message:'I Tried But Something Went Wrong',err})
+        res.status(500).json({message:'I Tried But Something Went Wrong',err})
     }
 };

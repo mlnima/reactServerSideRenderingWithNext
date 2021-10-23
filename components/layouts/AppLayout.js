@@ -9,6 +9,7 @@ import {autoUserLogin} from "../../store/actions/userActions";
 import {setLoading, setLoginRegisterFormStatus} from "../../store/actions/globalStateActions";
 import AdminDataSetter from "../global/AdminDataSetter";
 
+const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SideBarWidgetArea/SideBarWidgetArea'))
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'))
 const TopBarWidgetArea = dynamic(() => import('../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'))
@@ -152,6 +153,10 @@ const AppLayout = props => {
             {userData?.role === 'administrator' ? <AdminTools/> : null}
             {globalState?.loading ? <Loading/> : null}
             {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
+            { typeof window !== 'undefined'? localStorage.cookieAccepted !== 'true'?
+                <CookiePopup/>
+                :null :null
+            }
         </div>
 
     );

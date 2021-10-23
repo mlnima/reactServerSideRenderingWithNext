@@ -14,7 +14,5 @@ module.exports =  async (req, res) => {
     Promise.all([formsData, formsCount]).then(async foundFormsData => {
         const forms = foundFormsData[0]
         res.json({forms, error: false, totalCount: foundFormsData[1]})
-        res.end()
-
     })
 }

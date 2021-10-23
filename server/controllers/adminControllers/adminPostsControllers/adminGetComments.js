@@ -19,7 +19,6 @@ module.exports = (req, res) => {
 
     Promise.all([comments, commentsCount]).then(data => {
         res.json({comments: data[0], count: data[1]})
-        res.end()
     }).catch(err => {
         console.log(err)
     })

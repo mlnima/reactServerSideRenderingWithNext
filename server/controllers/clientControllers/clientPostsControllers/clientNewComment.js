@@ -6,15 +6,15 @@ module.exports = (req, res) => {
     const commentDataToSave = new commentSchema(req.body);
     commentDataToSave.save((err,comment) => {
         if (err){
-            res.sendStatus(500).error('comment did not saved');
-            res.end()
+            res.status(500).json({message:'comment did not saved',type:'error'});
+
         }
         postSchema.findByIdAndUpdate(req.body.onDocumentId,{$push:{comments:[comment._id]}},{new:true}).exec().then(updatePost=>{
             res.json({updatePost})
-            res.end()
+
         }).catch(error=>{
-            res.sendStatus(500).error('comment was saved but document did not updated');
-            res.end()
+            res.status(500).json({message:'comment was saved but document did not updated',type:'error'})
+
         })
 
     })

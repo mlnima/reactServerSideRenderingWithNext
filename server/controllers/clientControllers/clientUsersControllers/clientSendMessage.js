@@ -21,16 +21,15 @@ module.exports = async (req, res) => {
         const updateSenderOfTheMessageData = await userSchema.findByIdAndUpdate(senderTheMessageData._id,{$push:{outBox:[theMessageDataForSender]}}).exec();
         Promise.all([updateReceiverOfTheMessageData,updateSenderOfTheMessageData]).then(actionsResults=>{
             res.json({ serverResponse : 'message has been sent' });
-            res.end();
+
         }).catch(err=>{
             console.log(err)
-            res.sendStatus(500);
-            res.end()
+            res.status(500);
         })
     }catch (err) {
         console.log(err)
-        res.sendStatus(500);
-        res.end()
+        res.status(500);
+
     }
 
 }

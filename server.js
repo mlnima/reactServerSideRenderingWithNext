@@ -48,9 +48,9 @@ app.prepare().then(() => {
     server.use(compression({filter: shouldCompress}));
     server.use('/static', express.static(path.join(__dirname, 'static'),{maxAge: "604800000"}))
     server.use('/public', express.static(path.join(__dirname, 'public'),{maxAge: "604800000"}))
-    server.post('/api/v1/settings/clearCaches', adminAuthMiddleware, (req, res) => {
+    server.get('/api/admin/settings/clearCaches', adminAuthMiddleware, (req, res) => {
         apiCache.clear(req.params.collection)
-        res.status(200).json({message:'Cache has been deleted'})
+        res.json({message:'Cache Deleted'})
     });
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
     server.get('/manifest.json', cacheSuccesses,(req,res)=>{clientMainFestController(req,res)})

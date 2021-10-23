@@ -9,10 +9,10 @@ module.exports = (req, res) => {
 
     userSchema.findOne({$or:[{username},{_id}]}).select(fields).exec().then(user=>{
         res.json({ userData: user });
-        res.end()
+
     }).catch(err => {
         console.log(err);
-        res.sendStatus(500);
-        res.end()
+        res.status(500);
+
     })
 }

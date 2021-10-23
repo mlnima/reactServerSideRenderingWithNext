@@ -18,7 +18,6 @@ module.exports = (req,res)=>{
     const orders =   orderSchema.find({$and: [orderTypeQuery, statusQuery,searchQuery]}).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec();
     Promise.all([orders, ordersCount]).then(async data => {
         res.json({orders: data[0], error: false, totalCount: data[1]})
-        res.end()
     }).catch(err=>{
         console.log(err)
         return res.status(500).json({

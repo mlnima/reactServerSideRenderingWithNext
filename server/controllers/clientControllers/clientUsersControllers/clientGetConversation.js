@@ -10,11 +10,11 @@ module.exports = async (req, res) => {
             .exec()
 
         res.json({conversation})
-        res.end()
+
     }catch (err) {
         console.log(err)
-        res.sendStatus(500);
-        res.end()
+        res.status(500);
+
     }
 
 }

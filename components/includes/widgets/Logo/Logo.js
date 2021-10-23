@@ -4,6 +4,8 @@ import {AppContext} from "../../../../context/AppContext";
 import ImageRenderer from "../../ImageRenderer/ImageRenderer";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../../../../store/actions/globalStateActions";
 
 const LogoStyledSpan = styled.span`
   .logo{
@@ -30,6 +32,7 @@ const LogoStyledSpan = styled.span`
 
 `
 const Logo = props => {
+    const dispatch = useDispatch()
     const router = useRouter()
     const contextData = useContext(AppContext);
     const logoText = props.translations ? props.translations[contextData.state.activeLanguage || router.locale] ? props.translations[contextData.state.activeLanguage || router.locale].LogoText || props.LogoText : props.LogoText : props.LogoText;
@@ -39,7 +42,7 @@ const Logo = props => {
     return (
         <LogoStyledSpan>
         <Link href='/' locale={router.locale || false}>
-            <a className='logo' onClick={contextData.functions.loadingHandler}>
+            <a className='logo' onClick={()=>dispatch(setLoading(true))}>
                 {logoImageUrl ?
                     <ImageRenderer imageUrl={logoImageUrl}
                                    altValue='logo'

@@ -5,7 +5,7 @@ import { savePost } from '../../../../_variables/ajaxPostsVariables'
 import { AppContext } from '../../../../context/AppContext'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../../store/actions/globalStateActions";
+import {setAlert, setLoading} from "../../../../store/actions/globalStateActions";
 import {updateSetting} from "../../../../store/actions/settingsActions";
 
 let StyledDiv = styled.div`
@@ -97,43 +97,21 @@ const youtube = props => {
 
                              }).catch(err=>{
                                  console.log( err.response.data.error )
-                                 contextData.dispatchAlert({
-                                     ...contextData.alert,
-                                     active:true,
-                                     alertMessage:err.response.data.error + ' => ' + videoData.title,
-                                     type:'error'
-                                 })
-
+                                dispatch(setAlert({message: err.response.data.error + ' => ' + videoData.title ,type: 'error',active:true}))
                              })
                         }
                     }
 
-                    dispatch(setLoading(falsde))
-                    contextData.dispatchAlert({
-                        ...contextData.alert,
-                        active:true,
-                        alertMessage:'done',
-                        type:'info'
-                    })
+                    dispatch(setLoading(false))
+                    dispatch(setAlert({message: 'Done',type: 'success',active:true}))
+
+
                 }).catch(err=>{
                     dispatch(setLoading(false))
                 })
             }
         }
     }
-
-
-
-
-
-    //
-    // const videoSaver = (videoInfo)=>{
-    //
-    //     console.log(videoInfo)
-    //
-    // }
-
-
 
     const onSaveApiKeyHandler = () => {
         dispatch(setLoading(true))

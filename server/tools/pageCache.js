@@ -20,15 +20,13 @@ pageCache.renderAndCache = async (req, res,targetComponent,queryParams,app)=>{
     if (pageCache.ssrCache.has(key)) {
         res.setHeader('x-cache', 'HIT');
         res.send(pageCache.ssrCache.get(key));
-        res.end()
+
     }else{
         try {
             const html = await app.render(req, res, targetComponent, queryParams);
 
             if (res.statusCode !== 200) {
                 res.send(html);
-                res.end()
-                // return
             }
             pageCache.ssrCache.set(key, html);
 

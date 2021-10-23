@@ -41,15 +41,12 @@ const adminUpdateWidget = async (req, res) => {
             if (updatedWidget) {
                 await widgetSchema.findByIdAndUpdate(widgetId, {data: updatedWidget}, {new: true}).exec().then(updatedWidget => {
                     res.json({updatedWidget})
-                    res.end()
                 }).catch(err => {
                     console.log(err)
                     res.status(503).json({message: 'something went wrong please try again later'})
-                    res.end()
                 })
             } else {
                 res.status(503).json({message: 'something went wrong please try again later'})
-                res.end()
             }
 
         })

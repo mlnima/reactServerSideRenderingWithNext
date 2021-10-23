@@ -10,9 +10,7 @@ module.exports =  (req, res) =>{
     userSchema.findOne({ $or: [ { username }, { email } ] }).exec()
         .then(user => {
             if (user) {
-
                 res.status(409).json({message:'This username already exists'})
-                res.end()
             } else {
                 // Hashing
                 if (password === password2) {
@@ -20,7 +18,6 @@ module.exports =  (req, res) =>{
                         if (err) {
                             console.log(err)
                             res.status(503).json({message:'Something went wrong please try again later'})
-                            res.end()
                         } else if (hash) {
                             let userData = {
                                 username: username,
@@ -31,14 +28,11 @@ module.exports =  (req, res) =>{
                             };
                             let newUserData = userSchema(userData);
                             newUserData.save().then(() => {
-
                                 res.json({message:'Your account has been successfully created you can login now'})
-                                res.end()
                             }).catch(err => {
                                 console.log(err)
                                // res.json({ message: 'something went wrong', type: 'error' });
                                 res.status(503).json({message:'Something went wrong please try again later'})
-                                res.end()
                             });
 
                         }
@@ -46,13 +40,13 @@ module.exports =  (req, res) =>{
                 } else {
 
                     res.status(400).json({message:'Passwords are not matched'})
-                    res.end()
+
                 }
 
             }
         }).catch(err => {
         console.log(err);
         res.status(503).json({message:'Something went wrong please try again later'})
-        res.end()
+
     })
 }

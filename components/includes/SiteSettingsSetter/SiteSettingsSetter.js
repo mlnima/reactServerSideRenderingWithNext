@@ -45,35 +45,3 @@ export default SiteSettingSetter;
 
 
 
-// useEffect(() => {
-//
-//     if (props.identity) {
-//         //dispatch(setSettings(props.identity,'identity'))
-//         contextData.dispatchSiteIdentity({...props.identity, isSet: true})
-//         contextData.dispatchState({...contextData.state, identitySet: true})
-//     }
-//
-//     props?.identity ? (
-//         contextData.dispatchSiteIdentity({...props.identity, isSet: true}),
-//             contextData.dispatchState({...contextData.state, identitySet: true})
-//     ) : null
-//     props?.eCommerce ? contextData.dispatchECommerceSettings(props.eCommerce) : null
-//     const manuallyDetectedLocale = router.locale ? router.locale :
-//         router?.query?.locale ? router.query.locale : process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
-//     contextData.dispatchState({
-//         ...contextData.state,
-//         activeLanguage: manuallyDetectedLocale
-//     })
-// }, [props?.design, props?.identity]);
-
-// useEffect(() => {
-//     !props?.design && !props?.identity ? (
-//         getMultipleSetting({settings: ['identity', 'design']}, true).then(res => {
-//             const identitySetting = res.data.settings.find(s => s.type === 'identity')
-//             const designSetting = res.data.settings.find(s => s.type === 'design')
-//             contextData.dispatchSiteIdentity({...identitySetting?.data})
-//             contextData.dispatchSiteDesign({...designSetting?.data})
-//             contextData.dispatchState({...contextData.state, designSet: true, identitySet: true})
-//         })
-//     ) : null
-// }, []);

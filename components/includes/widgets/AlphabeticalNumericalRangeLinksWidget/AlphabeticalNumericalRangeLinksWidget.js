@@ -3,6 +3,8 @@ import Link from 'next/link'
 import {useRouter} from 'next/router'
 import {AppContext} from "../../../../context/AppContext";
 import styled from "styled-components";
+import {setLoading} from "../../../../store/actions/globalStateActions";
+import {useDispatch} from "react-redux";
 
 const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   display:flex;
@@ -17,6 +19,7 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   }
 `
 const AlphabeticalNumericalRangeLinksWidget = () => {
+    const dispatch = useDispatch()
     const contextData = useContext(AppContext);
     const router = useRouter()
     const activePage = router.query.startWith
@@ -32,7 +35,7 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
                 query: {...router?.query, startWith: Letter,page:1}
             }}  scroll={false}>
                 <a className='alphabetical-range-widget-item'
-                   onClick={contextData.functions.loadingHandler}
+                   onClick={() => dispatch(setLoading(true))}
                    style={{
                        backgroundColor:  Letter === activePage ? 'var(--main-active-color,#f90)': 'var(--navigation-background-color,#18181b)',
                        color:  Letter === activePage ? 'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color,#ccc)'
@@ -52,7 +55,7 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
                     query: {...router?.query,startWith:''}
                 }}  scroll={false}>
                     <a className='alphabetical-range-widget-item'
-                       onClick={contextData.functions.loadingHandler}
+                       onClick={() => dispatch(setLoading(true))}
                        style={{
                            backgroundColor:  !activePage ? 'var(--main-active-color,#f90)': 'var(--navigation-background-color,#18181b)',
                            color:   !activePage ? 'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color,#ccc)'

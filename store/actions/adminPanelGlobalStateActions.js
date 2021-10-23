@@ -15,3 +15,30 @@ export const getCustomPages = ( ) => async dispatch => {
     })
 }
 
+export const clearCaches = ( ) => async dispatch => {
+    dispatch({
+        type:types.LOADING,
+        payload:true
+    })
+    await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/settings/clearCaches?token=${localStorage.wt}`).then(res=>{
+        dispatch({
+            type:types.LOADING,
+            payload:false
+        })
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: res.data.message, type: 'success'}
+        })
+    }).catch(err=>{
+        dispatch({
+            type:types.LOADING,
+            payload:false
+        })
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: 'Error While Deleting Cache', type: 'success',err}
+        })
+
+    })
+}
+

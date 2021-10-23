@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
             // })
             // channelData.getVideos().then(videos=>{
             //     res.json({videos:[...videos]})
-            //     res.end()
             // })
         })
 
@@ -24,15 +23,12 @@ module.exports = async (req, res) => {
         youtube.getPlaylist(url).then(playListData=>{
             playListData.getVideos().then(videos=>{
                 res.json({videos:[...videos]})
-                res.end()
             })
         })
     }else{
         youtube.getVideo(url)
             .then(video => {
                 res.json({videos:[video]})
-                res.end()
-
             })
             .catch(err=>{
                 console.log(err)

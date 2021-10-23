@@ -14,7 +14,6 @@ module.exports = async (req, res) => {
             if (err) {
                 console.log(err)
                 res.json({response: 'something is wrong', type: 'error', error: err})
-                res.end()
             } else {
                 let imageHeight = req.body.type === 'profile' ? 180 :
                     req.body.type === 'cover' ? 312 : 720;
@@ -25,16 +24,15 @@ module.exports = async (req, res) => {
                 sharp(filePathOriginalSize).resize(imageWidth, imageHeight).toFile(filePath, (err, info) => {
                     if (err) {
                         console.log(err)
-                        res.sendStatus(500);
+                        res.status(500);
                     } else {
                         const imageUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL + filePath.replace('.','')
 
                         userSchema.findByIdAndUpdate(req.userData._id,{profileImage:imageUrl}).exec().then(()=>{
                             fsExtra.remove(filePathOriginalSize)
                             res.json({response: 'Uploaded', path: imageUrl})
-                            res.end()
                         }).catch(()=>{
-                            res.sendStatus(500);
+                            res.status(500);
                         })
 
                     }

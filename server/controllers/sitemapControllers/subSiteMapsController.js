@@ -50,7 +50,7 @@ subSiteMapsController.subSiteMapsController = (req, res) => {
 
         res.set('Content-Type', 'text/xml');
         res.send(xmlTemplate);
-        res.end()
+
     }).catch(err => {
         console.log(err)
     })

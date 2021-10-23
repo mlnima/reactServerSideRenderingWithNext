@@ -11,14 +11,14 @@ module.exports = async (req, res, next) => {
                 req.userData = verifiedToken
                 next()
             } else {
-                return res.sendStatus(401).json({
+                return res.status(401).json({
                     message: 'Unauthorized'
                 })
             }
         })
 
     } catch ( error ) {
-        return res.sendStatus(401).json({
+        return res.status(401).json({
             message: 'Unauthorized'
         })
     }

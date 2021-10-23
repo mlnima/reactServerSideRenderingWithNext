@@ -15,7 +15,7 @@ module.exports = async (req, res) => {
                     if (err || isCorrect === false) {
                         console.log(err)
                         res.status(401).json({message: 'You have entered an invalid username or password'})
-                        res.end()
+
                     } else if (isCorrect) {
                         const token = jwt.sign({
                                 username: user.username,
@@ -33,14 +33,14 @@ module.exports = async (req, res) => {
                             _id:user._id,
                             message: 'Login successful',
                         });
-                        res.end()
+
                     }
 
                 })
             } else if (!user) {
 
                 res.status(404).json({message: 'You have entered an invalid username or password'})
-                res.end()
+
             }
         }).catch(err => {
             console.log(err);

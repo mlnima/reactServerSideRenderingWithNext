@@ -6,10 +6,8 @@ module.exports = (req, res) => {
         if (err) {
            console.log(err)
             res.json({error: true, data: '', type: undefined});
-            res.end()
         } else {
             res.json({error: false, data: fileData.toString('utf8'), type: 'file'});
-            res.end()
         }
     })
 }

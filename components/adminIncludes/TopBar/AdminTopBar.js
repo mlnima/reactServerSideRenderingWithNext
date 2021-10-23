@@ -7,6 +7,8 @@ import Link from 'next/link'
 import {faBars, faHome, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
+import {useDispatch} from "react-redux";
+import {clearCaches} from "../../../store/actions/adminPanelGlobalStateActions";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -56,6 +58,7 @@ let StyledDiv = styled.div`
 `
 
 const AdminTopBar = () => {
+    const dispatch = useDispatch()
     const contextData = useContext(AppContext);
     const [state, dispatchState] = useState({
         AdminActionMenu: false,
@@ -112,9 +115,11 @@ const AdminTopBar = () => {
                     </Link>
                     <span className='adminNewActionBtn adminTopBarItem' onClick={() => newItemMenuHandler()}><FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></span>
                     <NewItemMenu active={state.NewItemMenu}/>
-                    <p className='clearCache adminTopBarItem' onClick={() => contextData.functions.clearCaches()}>Clear Caches</p>
+                    <p className='clearCache adminTopBarItem' onClick={() => dispatch(clearCaches())}>Clear Caches</p>
                 </div>
-                <button className='adminActionBtn adminTopBarItem' onClick={() => adminActionHandler()}><FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faUser} className='post-element-info-logo'/></button>
+                <button className='adminActionBtn adminTopBarItem' onClick={() => adminActionHandler()}>
+                    <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faUser} className='post-element-info-logo'/>
+                </button>
                 <AdminActionMenu active={state.AdminActionMenu}/>
             </StyledDiv>
 

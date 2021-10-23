@@ -18,7 +18,6 @@ module.exports =async (req, res) => {
                 if (err) {
                     console.log(err)
                     res.json({response: 'something is wrong', type: 'error', error: err})
-                    res.end()
                 } else {
                     let imageHeight = req.body.type === 'thumbnail' ? 180 :
                         req.body.type === 'gallery' ? 720 : 720;
@@ -29,11 +28,10 @@ module.exports =async (req, res) => {
                     sharp(filePathOriginalSize).resize(imageWidth, imageHeight).toFile(filePath, (err, info) => {
                         if (err) {
                             console.log(err)
-                            res.sendStatus(500);
+                            res.status(500);
                         } else {
                             fsExtra.remove(filePathOriginalSize)
                             res.json({response: 'Uploaded', path: filePath})
-                            res.end()
                         }
                     })
                 }
@@ -43,11 +41,9 @@ module.exports =async (req, res) => {
                 if (err) {
                     console.log(err)
                     res.json({response: 'something is wrong', type: 'error', error: err})
-                    res.end()
                 } else {
 
                     res.json({response: 'Uploaded', path: filePath})
-                    res.end()
                 }
             });
         }

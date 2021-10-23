@@ -7,12 +7,12 @@ module.exports = (req, res) => {
     })
 
     Promise.all(mapIdAndReturnDeletePromise).then(() => {
-        res.sendStatus(200)
-        res.end()
+        res.status(200)
+
     }).catch(err => {
         console.log(err)
-        res.sendStatus(500)
-        res.end()
+        res.status(500)
+
     })
 
 }

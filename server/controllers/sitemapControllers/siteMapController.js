@@ -83,7 +83,7 @@ siteMapController.siteMap = (req, res) => {
 
         res.set('Content-Type', 'text/xml');
         res.send(sitemapDataWithParser);
-        res.end()
+
     }).catch(err => {
         console.log(err)
         res.end()
