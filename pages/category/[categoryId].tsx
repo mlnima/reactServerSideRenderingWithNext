@@ -6,6 +6,7 @@ import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
+
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 import {useRouter} from "next/router";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
@@ -28,12 +29,12 @@ let StyledMain = styled.main`
     }
   }
 
-  ${(props:{stylesData:string}) => props.stylesData}
+  ${(props: { stylesData: string }) => props.stylesData}
 `
 const categoryPage = (props: ClientPagesTypes) => {
     // @ts-ignore
     const category = useSelector(state => state.posts.categoryData)
-    const settings = useSelector((state : settingsPropTypes) => state.settings);
+    const settings = useSelector((state: settingsPropTypes) => state.settings);
 
     const router = useRouter()
 
@@ -45,7 +46,7 @@ const categoryPage = (props: ClientPagesTypes) => {
                 position={'categoryPageTop'}
                 referer={props.referer}
             />
-            <PostsPage {...props}/>
+            <PostsPage/>
             <WidgetsRenderer
                 position={'categoryBottom'}
                 referer={props.referer}
@@ -67,7 +68,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.categoryId, true)
     const postsData = await getPosts(gettingPostsQueries)
     // @ts-ignore
-    if (categoryId && !postsData?.data?.meta || !postsData?.data.posts ) return {notFound: true};
+    if (categoryId && !postsData?.data?.meta || !postsData?.data.posts) return {notFound: true};
 
     store.dispatch({
         type: SET_POSTS_DATA,

@@ -22,7 +22,7 @@ let PostsContainer = styled.div`
 `
 
 
-const PostsPage = props => {
+const PostsPage = () => {
     // @ts-ignore
     const posts = useSelector(state => state.posts.posts)
     const totalCount = useSelector(state => state.posts.totalCount)
@@ -33,14 +33,9 @@ const PostsPage = props => {
     // const contextData = useContext(AppContext);
     const router = useRouter()
 
-
     useEffect(() => {
         Scroll.animateScroll.scrollToTop();
     }, [router.query]);
-
-    useEffect(() => {
-        console.log(props)
-    }, [props]);
 
     return (
         <React.Fragment>
@@ -49,8 +44,8 @@ const PostsPage = props => {
                 isActive={true}
                 currentPage={router.query.page || 1}
                 totalCount={totalCount}
-                size={props.countPerPage || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30}
-                maxPage={Math.ceil(parseInt(totalCount) / parseInt(props.countPerPage || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30))}
+                size={ process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30}
+                maxPage={Math.ceil(totalCount / parseInt( process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30))}
             />
             <PostsContainer className='posts-container'>
                 <Posts
@@ -65,8 +60,8 @@ const PostsPage = props => {
                 isActive={true}
                 currentPage={router.query.page || 1}
                 totalCount={totalCount}
-                size={props.countPerPage || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30}
-                maxPage={Math.ceil(parseInt(totalCount) / parseInt(props.countPerPage || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30))}
+                size={process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30}
+                maxPage={Math.ceil(totalCount / parseInt( process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30))}
             />
         </React.Fragment>
     );

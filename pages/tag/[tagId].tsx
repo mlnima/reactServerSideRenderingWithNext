@@ -7,6 +7,7 @@ import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
+
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 import {useRouter} from "next/router";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
@@ -17,7 +18,7 @@ import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {SET_POSTS_DATA} from "../../store/types";
 
 let StyledMain = styled.main`
-  grid-area:main;
+  grid-area: main;
   width: 100%;
 
   .posts-page-info {
@@ -29,16 +30,16 @@ let StyledMain = styled.main`
     }
   }
 
-  ${(props:{stylesData:string}) => props.stylesData || ''}
+  ${(props: { stylesData: string }) => props.stylesData || ''}
 `
 const tagPage = (props: ClientPagesTypes) => {
     // @ts-ignore
     const tag = useSelector(state => state.posts.tagData)
     const settings = useSelector((state: settingsPropTypes) => state.settings);
-    
+
     const router = useRouter()
     return (
-        <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle  || ''}>
+        <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
             {tag ? <PostsPageInfo titleToRender={tag.name}/> : null}
             {tag ? <MetaDataToSiteHead title={tag?.name} description={tag?.description} url={`${router.asPath}`} image={tag?.imageUrl}/> : null}
 
@@ -46,7 +47,7 @@ const tagPage = (props: ClientPagesTypes) => {
                 position={'tagPageTop'}
                 referer={props.referer}
             />
-            <PostsPage {...props}/>
+            <PostsPage/>
             <WidgetsRenderer
                 position={'tagPageBottom'}
                 referer={props.referer}
@@ -54,7 +55,6 @@ const tagPage = (props: ClientPagesTypes) => {
         </StyledMain>
     )
 };
-
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
@@ -66,12 +66,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar'],
         store
     );
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query,context.query.tagId,true);
+    const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.tagId, true);
     const postsData = await getPosts(gettingPostsQueries)
 
     // @ts-ignore
 
-    if (tagId && !postsData?.data?.meta || !postsData?.data.posts ) return {notFound: true};
+    if (tagId && !postsData?.data?.meta || !postsData?.data.posts) return {notFound: true};
 
     store.dispatch({
         type: SET_POSTS_DATA,

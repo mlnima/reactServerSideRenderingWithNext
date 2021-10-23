@@ -14,6 +14,7 @@ import {wrapper} from "../../store/store";
 import {useSelector} from "react-redux";
 import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {SET_POSTS_DATA} from "../../store/types";
+
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 const StyledMain = styled.main`
@@ -47,7 +48,7 @@ const actorPage = (props: ClientPagesTypes) => {
                 position='actorPageTop'
                 referer={props.referer}
             />
-            <PostsPage {...props}/>
+            <PostsPage/>
             <WidgetsRenderer
                 position='actorPageBottom'
                 referer={props.referer}
@@ -70,7 +71,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const postsData = await getPosts(gettingPostsQueries);
 
     // @ts-ignore
-    if (actorId && !postsData?.data?.meta || !postsData?.data.posts ) return {notFound: true};
+    if (actorId && !postsData?.data?.meta || !postsData?.data.posts) return {notFound: true};
 
     store.dispatch({
         type: SET_POSTS_DATA,

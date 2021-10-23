@@ -56,7 +56,7 @@ const searchPage = (props: ClientPagesTypes) => {
                     <h2 className='no-result-message'>No Result for {router.query.keyword}</h2> :
                     null
             }
-            <PostsPage {...props} />
+            <PostsPage  />
             <WidgetsRenderer
                 position={'searchPageBottom'}
                 referer={props.referer}
