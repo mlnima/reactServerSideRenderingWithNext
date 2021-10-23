@@ -90,7 +90,7 @@ module.exports = withPlugins([
     }),
     i18n,
     svgLoader,
-    process.env.NODE_ENV === 'production' ? withPWA(pwaSettings) : {},
+    process.env.NODE_ENV === 'production'  && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
     nextImageConfig,
     withImages,
     // reWriteRoutes,

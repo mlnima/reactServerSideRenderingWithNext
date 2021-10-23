@@ -20,6 +20,7 @@ const WidgetGroupByPositionStyledDiv = styled.div`
     text-align: center;
     font-weight: bold;
     font-size: large;
+    border-radius: .5rem .5rem 0 0;
   }
 
   @media only screen and (min-width: 768px) {

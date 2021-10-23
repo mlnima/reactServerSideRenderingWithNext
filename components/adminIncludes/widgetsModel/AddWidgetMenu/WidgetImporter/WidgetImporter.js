@@ -41,7 +41,7 @@ const WidgetImporter = () => {
                     setState({...state, data: JSON.parse(e.target.result)})
                 }
             }}/>
-            <button className='import-widgets-button' onClick={()=>inputFile.current.click()}>Import Widget</button>
+            <button className='btn btn-primary' onClick={()=>inputFile.current.click()}>Import Widget</button>
         </div>
     );
 };

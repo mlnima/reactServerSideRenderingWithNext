@@ -14,6 +14,7 @@ const WidgetExporter = () => {
 
         let filename = `${Date.now().toLocaleString()}-all-widgets.json`;
         let contentType = "application/json;charset=utf-8;";
+
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(data)))], {type: contentType});
             navigator.msSaveOrOpenBlob(blob, filename);
@@ -39,7 +40,7 @@ const WidgetExporter = () => {
 
     return (
         <div className='export-widgets'>
-            <button className='export-widgets-button' onClick={()=>exportAllWidgets()}>Export All Widgets</button>
+            <button className='btn btn-primary' onClick={()=>exportAllWidgets()}>Export All Widgets</button>
         </div>
     );
 };
