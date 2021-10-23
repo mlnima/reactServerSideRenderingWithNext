@@ -28,8 +28,7 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   }
 `
 const WidgetGroupByPosition = props => {
-    const widgets = useSelector(state => state.widgets.widgets)
-
+    const widgets = useSelector(state => state?.widgets.widgets)
     const [widgetInThisPosition, setWidgetInThisPosition] = useState([])
 
     useEffect(() => {
@@ -41,9 +40,9 @@ const WidgetGroupByPosition = props => {
     return (
         <WidgetGroupByPositionStyledDiv className='widgetAdminPanelItem'>
             <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(props.position)}</p>
-            {widgetInThisPosition.map((widget,index) => {
+            {widgetInThisPosition.map((widget) => {
                 return (
-                    <WidgetModel key={index}widgetId={widget._id} />
+                    <WidgetModel key={widget._id} widgetId={widget._id} />
                 )
             })}
         </WidgetGroupByPositionStyledDiv>

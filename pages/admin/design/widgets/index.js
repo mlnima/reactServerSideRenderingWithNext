@@ -1,4 +1,4 @@
-import {useMemo} from 'react';
+import {useState,useEffect} from 'react';
 import AddWidgetMenu from '../../../../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
 import WidgetGroupByPosition from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
@@ -21,7 +21,7 @@ let StyledDiv = styled.div`
     .top-panel {
       width: 100%;
     }
-    
+
     .widgets {
       margin: auto;
       width: 100%;
@@ -44,11 +44,15 @@ let StyledDiv = styled.div`
 
 const AdminWidgets = () => {
 
-    const widgets = useSelector(state => state.widgets.widgets)
-    const availablePositions = useMemo(()=>{
-        const positions = widgets.map(widgets => widgets?.data?.position).sort()
-        return [...new Set(positions)]
-    },[widgets])
+    const widgets = useSelector(state => state?.widgets.widgets)
+    const [availablePositions,setAvailablePositions] = useState( [])
+
+    useEffect(() => {
+        setAvailablePositions(()=>{
+            return [...new Set(widgets.map(widgets => widgets?.data?.position).sort())]
+        })
+    }, [widgets]);
+
 
     return (
         <StyledDiv className='admin-widgets-page'>
@@ -60,9 +64,9 @@ const AdminWidgets = () => {
                 </div>
                 <h2>Widgets:</h2>
                 <div className="widgets">
-                    {availablePositions.map((position, index) => {
+                    {availablePositions.map((position) => {
                         return (
-                            <WidgetGroupByPosition key={index} position={position} />
+                            <WidgetGroupByPosition key={position} position={position}/>
                         )
                     })}
                 </div>

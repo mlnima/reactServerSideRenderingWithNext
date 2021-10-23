@@ -16,15 +16,16 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controlle
 
 let PostSwiperStyledDiv = styled.div`
   margin: 10px auto;
-  width: 100vw;
-  
-  .swiper{
-    height: ${props => (props.cardWidth /1.777) + 65}px ;
-    .swiper-scrollbar{
+  width: calc(100vw) ;
+  .swiper {
+    height: ${props => (props?.cardWidth / 1.777) + 65}px;
+    width: 100%;
+    .swiper-scrollbar {
       //margin-top: 50px ;
       height: 10px;
       background-color: var(--post-element-text-color, #131314);
     }
+
     .swiper-wrapper {
       position: relative;
       margin: 0;
@@ -58,17 +59,16 @@ let PostSwiperStyledDiv = styled.div`
   }
 
 
-
-
   @media only screen and (min-width: 768px) {
     width: calc(100vw - 340px);
   }
 `
 
 const PostSwiper = props => {
+    const swiperContainer = useRef(null)
     const contextData = useContext(AppContext);
     const [postsToRender, setPostsToRender] = useState(() => props.posts ? props.posts : [])
-    const [controlledSwiper,setControlledSwiper] = useState(null)
+    const [controlledSwiper, setControlledSwiper] = useState(null)
 
     const cardWidth = props.postElementSize === 'listSmall' ? 320 :
         props.postElementSize === 'list' ? 116.6 :
@@ -81,7 +81,7 @@ const PostSwiper = props => {
         setPostsToRender(prevPosts => prevPosts.filter(post => post._id !== id))
     }
 
-    const renderSlides = postsToRender.map((post,index) => {
+    const renderSlides = postsToRender.map((post, index) => {
         return (
             <SwiperSlide tag="div" key={index} virtualIndex={index}>
                 <Link href={{pathname: '/post', query: {id: post._id}}}
@@ -97,8 +97,9 @@ const PostSwiper = props => {
         )
     })
 
+
     return (
-        <PostSwiperStyledDiv cardWidth={cardWidth}>
+        <PostSwiperStyledDiv ref={swiperContainer} cardWidth={cardWidth}>
             <Swiper
                 //  thumbs={{swiper: thumbsSwiper}}
                 controller={{control: controlledSwiper}}

@@ -5,7 +5,7 @@ const CategoryCardMediaStyledImage = styled.img`
   width: 100%;
   height: calc(48vw / 1.777);
   @media only screen and (min-width: 768px) {
-    width: ${props => props.cardWidth}px;
+    width: ${props => props?.cardWidth}px;
     height: calc(${props => props.cardWidth}px / 1.777);
   }
 `
@@ -19,7 +19,7 @@ const NoImageStyleDiv = styled.div`
     color: var(--post-element-info-text-color,#ccc);
   }
   @media only screen and (min-width: 768px) {
-    width: ${props => props.cardWidth}px;
+    width: ${props => props?.cardWidth}px;
     height: calc(${props => props.cardWidth}px / 1.777);
   }
 `
