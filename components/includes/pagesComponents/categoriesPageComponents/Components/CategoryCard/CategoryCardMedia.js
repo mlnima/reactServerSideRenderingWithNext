@@ -29,35 +29,35 @@ const NoImageStyleDiv = styled.div`
 const CategoryCardMedia = props => {
     const imageRef = useRef(null)
     const [gotError, setGotError] = useState(false)
-    const [isReported, setIsReported] = useState(false)
+    // const [isReported, setIsReported] = useState(false)
 
 
-    useEffect(() => {
-        if (!props.imageUrl) {
-            _fixMetaImage(props.categoryId).then(res => {
-                if (imageRef.current && res?.data?.newImageUrl) {
-                    imageRef.current.src = res?.data?.newImageUrl
-                }
-            })
+    // useEffect(() => {
+    //     if (!props.imageUrl) {
+    //         _fixMetaImage(props.categoryId).then(res => {
+    //             if (imageRef.current && res?.data?.newImageUrl) {
+    //                 imageRef.current.src = res?.data?.newImageUrl
+    //             }
+    //         })
+    //
+    //     }
+    //
+    // }, [props]);
 
-        }
-
-    }, [props]);
-
-    const onErrorHandler = () => {
-        if (props.imageUrl) {
-            setGotError(true)
-            setIsReported(true)
-            let data = {
-                checkUrl: props.imageUrl,
-            }
-            checkRemovedContent(data).then(res => {
-                if (imageRef.current && res?.data?.newImageUrl) {
-                    imageRef.current.src = res?.data?.newImageUrl
-                }
-            })
-        }
-    }
+    // const onErrorHandler = () => {
+    //     if (props.imageUrl) {
+    //         setGotError(true)
+    //         setIsReported(true)
+    //         let data = {
+    //             checkUrl: props.imageUrl,
+    //         }
+    //         checkRemovedContent(data).then(res => {
+    //             if (imageRef.current && res?.data?.newImageUrl) {
+    //                 imageRef.current.src = res?.data?.newImageUrl
+    //             }
+    //         })
+    //     }
+    // }
 
     if (gotError || !props.imageUrl){
         return (
