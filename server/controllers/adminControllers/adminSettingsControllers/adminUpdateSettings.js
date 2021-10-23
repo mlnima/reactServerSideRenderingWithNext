@@ -5,7 +5,6 @@ module.exports = (req, res) => {
     const type = req.body.type;
     const data = req.body.data;
     settingSchema.findOneAndUpdate({type: type}, {data}, {new: true}).exec().then(setting => {
-
         if (!setting) {
             const dataToSave = new settingSchema({
                 type: req.body.type,
@@ -17,6 +16,8 @@ module.exports = (req, res) => {
                 console.log(err)
                 res.status(500)
             })
+        }else {
+            res.json({message:'Updated'})
         }
     }).catch(err => {
         console.log(err)

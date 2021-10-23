@@ -21,8 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/navigation/navigationAdmin.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/topBar/topBar.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminSettingsControllers/adminUpdateSettings.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -847,7 +848,7 @@
       <workItem from="1634891400661" duration="14682000" />
       <workItem from="1634912928065" duration="4309000" />
       <workItem from="1634986092753" duration="1292000" />
-      <workItem from="1634987602263" duration="12645000" />
+      <workItem from="1634987602263" duration="13313000" />
     </task>
     <servers />
   </component>
