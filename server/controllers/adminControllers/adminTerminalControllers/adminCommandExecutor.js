@@ -8,17 +8,13 @@ module.exports = async (req, res) => {
         const commandPromises = splitCommands.map(async singleCommand => {
             return await shell.exec(singleCommand)
         })
-
         Promise.all([...commandPromises]).then(results => {
             const resultsCombine = results.reduce((a, b) => a + '/n' + b)
             res.json({response: resultsCombine})
-            res.end()
         })
-
     } else {
         const executeCommand = shell.exec(command)
         res.json({response: await executeCommand.stdout})
-        res.end()
     }
 
 }

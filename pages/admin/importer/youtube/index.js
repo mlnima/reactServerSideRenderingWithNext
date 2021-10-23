@@ -71,10 +71,7 @@ const youtube = props => {
 
         for await (let url of data){
             if (url.includes('http')) {
-                contextData.dispatchState({
-                    ...contextData.state,
-                    loading:true
-                })
+                dispatch(setLoading(true))
                 youtubeDataScrapper(url).then(async res => {
 
                     for await (let video of res.data.videos){
@@ -111,10 +108,7 @@ const youtube = props => {
                         }
                     }
 
-                    contextData.dispatchState({
-                        ...contextData.state,
-                        loading:false
-                    })
+                    dispatch(setLoading(falsde))
                     contextData.dispatchAlert({
                         ...contextData.alert,
                         active:true,
@@ -122,10 +116,7 @@ const youtube = props => {
                         type:'info'
                     })
                 }).catch(err=>{
-                    contextData.dispatchState({
-                        ...contextData.state,
-                        loading:false
-                    })
+                    dispatch(setLoading(false))
                 })
             }
         }

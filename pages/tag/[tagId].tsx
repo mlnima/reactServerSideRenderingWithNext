@@ -1,6 +1,6 @@
 import React from "react";
 import {getFirstLoadData} from '../../_variables/ajaxVariables';
-import {getPosts, getSingleMeta} from '../../_variables/ajaxPostsVariables';
+import {getPosts} from '../../_variables/ajaxPostsVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
@@ -61,17 +61,17 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const tagId = context.query.tagId as string;
     if (!tagId) return {notFound: true};
     if (!tagId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
-
     const firstLoadData = await getFirstLoadData(
         context.req,
         ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar'],
         store
     );
-
-    const tagData = tagId ? await getSingleMeta(tagId, true) : {};
     const gettingPostsQueries = _getPostsQueryGenerator(context.query,context.query.tagId,true);
-
     const postsData = await getPosts(gettingPostsQueries)
+
+    // @ts-ignore
+
+    if (tagId && !postsData?.data?.meta || !postsData?.data.posts ) return {notFound: true};
 
     store.dispatch({
         type: SET_POSTS_DATA,
@@ -81,7 +81,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
             // @ts-ignore
-            tagData: tagData?.data?.meta || {},
+            tagData: postsData?.data?.meta || {},
         }
     })
     return {

@@ -1,4 +1,4 @@
-import React, {useEffect, useContext} from 'react';
+import React, {useEffect, useContext, useMemo} from 'react';
 import {AppContext} from "../../../context/AppContext";
 import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
@@ -10,6 +10,7 @@ import {StoreTypes} from '../../../_variables/TypeScriptTypes/GlobalTypes'
 
 let PostsContainer = styled.div`
   width: 100%;
+
   .posts-page-info {
     margin: 5px 0;
 
@@ -25,14 +26,21 @@ const PostsPage = props => {
     // @ts-ignore
     const posts = useSelector(state => state.posts.posts)
     const totalCount = useSelector(state => state.posts.totalCount)
+    const postsToRender = useMemo(()=>{
+        return posts
+    },posts)
 
-    const contextData = useContext(AppContext);
+    // const contextData = useContext(AppContext);
     const router = useRouter()
 
 
     useEffect(() => {
         Scroll.animateScroll.scrollToTop();
     }, [router.query]);
+
+    useEffect(() => {
+        console.log(props)
+    }, [props]);
 
     return (
         <React.Fragment>
@@ -46,19 +54,19 @@ const PostsPage = props => {
             />
             <PostsContainer className='posts-container'>
                 <Posts
-                    posts={posts}
-                    postElementSize={props.postElementSize || props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                    postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                    postElementImageLoader={props.design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader}
-                    postElementImageLoaderType={props.design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader}
+                    posts={postsToRender}
+                    // postElementSize={props.postElementSize || props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
+                    // postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
+                    // postElementImageLoader={props.design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader}
+                    // postElementImageLoaderType={props.design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader}
                 />
             </PostsContainer>
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query.page || 1}
                 totalCount={totalCount}
-                size={props.countPerPage ||process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30}
-                maxPage={Math.ceil(parseInt(totalCount) / parseInt(props.countPerPage ||process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30))}
+                size={props.countPerPage || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30}
+                maxPage={Math.ceil(parseInt(totalCount) / parseInt(props.countPerPage || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30))}
             />
         </React.Fragment>
     );

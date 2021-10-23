@@ -41,7 +41,7 @@ export const getMultipleMeta = async (data,metaType,cache) => {
 };
 
 export const getSingleMeta = async (id,cache) => {
-    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${ encodeURIComponent(id) }&cache=${cache}`)
+    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${id}&cache=${cache}`)
 };
 
 export const updateMeta = async (data) => {

@@ -1,9 +1,10 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import AdminLayout from '../../../../components/layouts/AdminLayout'
-import { AppContext } from '../../../../context/AppContext'
+import React, { useState, useRef } from 'react';
 import { executor } from '../../../../_variables/ajaxVariables'
 import { animateScroll } from 'react-scroll'
 import styled from "styled-components";
+import {setLoading} from "../../../../store/actions/globalStateActions";
+import {useDispatch} from "react-redux";
+
 let StyledDiv = styled.div`
   .quickAccess {
     display: flex;
@@ -11,8 +12,6 @@ let StyledDiv = styled.div`
     align-items: center;
     flex-wrap: wrap;
     .quickAccessBtn {
-      
-   
       padding: 10px 20px;
       border-radius: 5px;
       margin: 0 10px;
@@ -22,9 +21,7 @@ let StyledDiv = styled.div`
   .terminalControl {
     display: flex;
     justify-content: space-between;
-
     width: 95%;
-
     input {
       background-color: black;
       color: white;
@@ -49,7 +46,7 @@ let StyledDiv = styled.div`
 `
 
 const terminal = props => {
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
     const logElement = useRef(null)
     const [ state, setState ] = useState({
         command: 'dir',
@@ -65,25 +62,16 @@ const terminal = props => {
 
     const onExecutorHandler = (e,command)=>{
         e.preventDefault()
-        contextData.dispatchState({
-            ...state,
-            loading:true
-        })
+        dispatch(setLoading(true))
         executor(command).then(res=>{
             setState({
                 ...state,
                 log: state.log  + res.data.response
             })
-            contextData.dispatchState({
-                ...state,
-                loading:false
-            })
+            dispatch(setLoading(false))
         }).catch(err=>{
             console.log( err)
-            contextData.dispatchState({
-                ...state,
-                loading:false
-            })
+            dispatch(setLoading(false))
         })
         setTimeout(()=>{
             animateScroll.scrollToBottom({containerId: 'terminalLog'})

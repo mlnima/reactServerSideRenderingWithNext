@@ -1,9 +1,9 @@
-import React,{useEffect} from 'react';
+import React from 'react';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
-import {getPosts, getSingleMeta} from "../../_variables/ajaxPostsVariables";
+import {getPosts} from "../../_variables/ajaxPostsVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
@@ -61,17 +61,16 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const actorId = context.query.actorId as string
     if (!actorId) return {notFound: true};
     if (!actorId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
-
     const firstLoadData = await getFirstLoadData(
         context.req,
         ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar'],
         store
     );
-
-    const actorData = actorId ? await getSingleMeta(actorId, true) : {};
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true);
-
     const postsData = await getPosts(gettingPostsQueries);
+
+    // @ts-ignore
+    if (actorId && !postsData?.data?.meta || !postsData?.data.posts ) return {notFound: true};
 
     store.dispatch({
         type: SET_POSTS_DATA,
@@ -81,7 +80,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
             // @ts-ignore
-            actorData: actorData?.data?.meta || {},
+            actorData: postsData?.data?.meta || {},
         }
     })
 
