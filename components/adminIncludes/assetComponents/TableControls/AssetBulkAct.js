@@ -1,5 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {AppContext} from '../../../../trash/context/AppContext'
+import React, {useRef} from 'react';
 import withRouter from 'next/dist/client/with-router'
 import {bulkAction} from "../../../../_variables/ajaxPostsVariables";
 import {adminBulkActionPost} from "../../../../store/actions/adminPanelPostsActions";

@@ -1,12 +1,11 @@
-import React, {useEffect, useContext, useMemo} from 'react';
-import {AppContext} from "../../../trash/context/AppContext";
+import React, {useEffect, useMemo} from 'react';
 import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
 import Posts from "../Posts/Posts";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {StoreTypes} from '../../../_variables/TypeScriptTypes/GlobalTypes'
+
 
 let PostsContainer = styled.div`
   width: 100%;
@@ -29,8 +28,6 @@ const PostsPage = () => {
     const postsToRender = useMemo(()=>{
         return posts
     },posts)
-
-    // const contextData = useContext(AppContext);
     const router = useRouter()
 
     useEffect(() => {
@@ -50,10 +47,6 @@ const PostsPage = () => {
             <PostsContainer className='posts-container'>
                 <Posts
                     posts={postsToRender}
-                    // postElementSize={props.postElementSize || props.design?.data?.postElementSize || contextData.siteDesign.postElementSize}
-                    // postElementStyle={props.design?.data?.postElementStyle || contextData.siteDesign.postElementStyle}
-                    // postElementImageLoader={props.design?.data?.postElementImageLoader || contextData.siteDesign.postElementImageLoader}
-                    // postElementImageLoaderType={props.design?.data?.postElementImageLoaderType || contextData.siteDesign.postElementImageLoader}
                 />
             </PostsContainer>
             <PaginationComponent
