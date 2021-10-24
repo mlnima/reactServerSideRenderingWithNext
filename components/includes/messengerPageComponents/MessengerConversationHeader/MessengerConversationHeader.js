@@ -13,7 +13,7 @@ const MessengerConversationHeaderStyledDiv = styled.div`
   align-items: center;
   justify-content: space-between;
   background-color: var(--navigation-background-color,#18181b);
-  height: 48px;
+  height: 56px;
 
   .messenger-conversation-header {
     display: flex;

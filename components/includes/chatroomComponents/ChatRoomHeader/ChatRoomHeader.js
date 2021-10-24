@@ -22,7 +22,6 @@ const ChatRoomHeaderStyledHeader = styled.header`
       padding: 5px ;
     }
   }
-
 `
 
 const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler,t}) => {
@@ -30,15 +29,10 @@ const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler,t}) => {
         <ChatRoomHeaderStyledHeader className='chatroom-header'>
             <div className='chatroom-header-content'>
                 <Authentication/>
-                <button
-                    className='chatroom-header-open-online-users-list-button'
-                    onClick={onOnlineUserListVisibilityChangeHandler}
-                >
+                <button className='chatroom-header-open-online-users-list-button' onClick={onOnlineUserListVisibilityChangeHandler}>
                     {t(`common:Users`)}
                 </button>
             </div>
-
-
         </ChatRoomHeaderStyledHeader>
     );
 };

@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import moment from "moment";
 import Link from "next/link";
-import {faEllipsisV, faSearch, faTrash} from "@fortawesome/free-solid-svg-icons";
+import {faEllipsisV, faSearch, faTrash, faUserCircle} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
@@ -24,8 +24,11 @@ const MessengerConversationPreviewStyledDiv = styled.div`
     text-decoration: none;
     
     .messenger-conversation-preview-image{
-      width: 50px;
+      width: 30px;
+      height: 30px;
+      margin: 0 5px;
       border-radius: 50%;
+      color: var(--navigation-text-color,#ccc);
     }
     
     .messenger-conversation-content-preview{
@@ -110,7 +113,11 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
         <MessengerConversationPreviewStyledDiv>
         <Link href={`/messenger/${conversationData._id}`} >
         <a className='messenger-conversation-preview'>
-            <img className='messenger-conversation-preview-image' src={state.profileImage} alt=""/>
+            {state.profileImage?
+                <img className='messenger-conversation-preview-image' src={state.profileImage} alt=""/>:
+                <FontAwesomeIcon className='messenger-conversation-preview-image' icon={faUserCircle}/>
+            }
+
             <div className='messenger-conversation-content-preview'>
                 <div className='messenger-conversation-preview-username-date' >
                     <p className='messenger-conversation-preview-username'>{state.username}</p>

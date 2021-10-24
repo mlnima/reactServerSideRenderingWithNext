@@ -10,7 +10,6 @@ const StyledChatRoomOnlineUsersListItemMoreInfoDiv = styled.div`
 `
 
 const ChatRoomOnlineUsersListItemMoreInfo = ({username,moreInfo}) => {
-
     if (moreInfo){
         return (
             <StyledChatRoomOnlineUsersListItemMoreInfoDiv className='chatroom-online-users-list-item-more-info'>
@@ -22,7 +21,6 @@ const ChatRoomOnlineUsersListItemMoreInfo = ({username,moreInfo}) => {
             </StyledChatRoomOnlineUsersListItemMoreInfoDiv>
         );
     }else return null
-
 };
 
 export default ChatRoomOnlineUsersListItemMoreInfo;

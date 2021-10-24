@@ -5,15 +5,24 @@ import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 let StyledHeader = styled.header`
   grid-area: header;
-  background-color: var(--header-background-color,#000);
-  .header-content{
+  background-color: var(--header-background-color, #000);
+
+  .header-content {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
     margin: 0 5px;
   }
-  ${(props:{stylesData:string}) => props.stylesData ?? ''}
+
+  @media only screen and(min-width: 768px) {
+    .header-content {
+      margin: 0 5px;
+      padding: 0 5px;
+    }
+  }
+  
+  ${(props: { stylesData: string }) => props.stylesData ?? ''}
 `;
 
 interface HeaderWidgetAreaProps {
@@ -29,7 +38,7 @@ interface HeaderWidgetAreaProps {
     widgets: WidgetPropTypes[]
 }
 
-const HeaderWidgetArea = ({ stylesData, className, position, referer, rendering}:HeaderWidgetAreaProps) => {
+const HeaderWidgetArea = ({stylesData, className, position, referer, rendering}: HeaderWidgetAreaProps) => {
     return (
         <StyledHeader stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='header-content'>

@@ -19,7 +19,7 @@ const ChatRoomMessageAreaStyledMain = styled.main`
 const ChatRoomMessageArea = () => {
     const dispatch = useDispatch()
     const messageAreaRef = useRef(null)
-    const chatroomMessages = useSelector(state => state.chatroom.messages)
+    const chatroomMessages = useSelector(state => state?.chatroom?.messages)
 
     useEffect(() => {
         messageAreaRef.current.scroll({
@@ -29,10 +29,10 @@ const ChatRoomMessageArea = () => {
     }, [chatroomMessages]);
 
 
-    const onShowProfileHandler = (username,_id,profileImage)=>{
-         dispatch(setActiveVisibleProfile({
+    const onShowProfileHandler = (username, _id, profileImage) => {
+        dispatch(setActiveVisibleProfile({
             username,
-             _id,
+            _id,
             profileImage,
         }))
     }
@@ -43,16 +43,16 @@ const ChatRoomMessageArea = () => {
             className='chatroom-message-area'
             id='chatroom-message-area'
         >
-            {chatroomMessages.map((message, index) => {
+            {
+                chatroomMessages.map((message, index) => {
                     return (
                         <ChatRoomMessage
                             message={message}
                             key={index}
-                           onShowProfileHandler={onShowProfileHandler}
+                            onShowProfileHandler={onShowProfileHandler}
                         />
                     )
-                }
-              )
+                })
             }
 
         </ChatRoomMessageAreaStyledMain>

@@ -2,8 +2,6 @@ import React, {PureComponent} from "react";
 import moment from "moment";
 
 class ChatRoomMessage extends PureComponent {
-
-
     render() {
         if (this.props.message.type === 'log') {
             return (
@@ -90,13 +88,10 @@ class ChatRoomMessage extends PureComponent {
                     {this.props.message.username}
                         <span className='chatroom-message-area-message-time'>{moment(new Date(this.props.message.createdAt), "YYYYMMDD").fromNow(false)}</span>
                     </span>
-
                     <p className='chatroom-message-area-message-text'>
                         {this.props.message.messageData}
                     </p>
-
                 </div>
-
             </div>
         );
     }

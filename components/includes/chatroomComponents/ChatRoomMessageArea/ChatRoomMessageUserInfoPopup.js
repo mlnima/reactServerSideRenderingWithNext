@@ -1,4 +1,3 @@
-import {useEffect} from "react";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -10,7 +9,6 @@ import {useDispatch, useSelector} from "react-redux";
 import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
 import Draggable from 'react-draggable';
 import {setLoginRegisterFormStatus} from "../../../../store/actions/globalStateActions";
-
 
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;

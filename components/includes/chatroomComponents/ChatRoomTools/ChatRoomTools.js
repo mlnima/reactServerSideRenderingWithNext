@@ -80,7 +80,6 @@ const ChatRoomTools = () => {
     const colorPicker = useRef(null)
     const router = useRouter()
 
-
     const [state, setState] = useState({
         messageData: '',
         color: 'var(--navigation-text-color, #ccc)'
@@ -156,7 +155,6 @@ const ChatRoomTools = () => {
 
     return (
         <ChatRoomToolsStyledFrom className='chatroom-tools' onSubmit={e => onSubmitHandler(e)} color={state.color}>
-
             {someoneTypes.active ? <span className='chatroom-someone-typing'> {someoneTypes.username} is typing </span> : null}
             <div className='chatroom-tools-text'>
                 <input maxLength='300' className='chatroom-tools-content-input' type='text' name='messageData' onChange={e => onChangeHandler(e)} onKeyDown={onStartTypingHandler} value={state.messageData}/>
@@ -168,7 +166,6 @@ const ChatRoomTools = () => {
                     <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faArrowRight}/>
                 </button>
             </div>
-
         </ChatRoomToolsStyledFrom>
 
     );

@@ -1,4 +1,4 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import {useDispatch} from "react-redux";
 import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
 
@@ -68,10 +68,7 @@ const ChatRoomOnlineUsersListItem = ({onlineUser}) => {
                     />
                     <p className='chatroom-online-users-list-item-username'>{onlineUser.username}</p>
                 </div>
-
             </div>
-
-
         </div>
     );
 };

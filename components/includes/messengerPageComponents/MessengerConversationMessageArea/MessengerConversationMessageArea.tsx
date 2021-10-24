@@ -3,11 +3,23 @@ import _ from "lodash";
 import MessengerConversationMessage from "./MessengerConversationMessage";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import styled from "styled-components";
 
 interface MessengerConversationMessageAreaTypes {
     connectedUserData: object,
     userData: object
 }
+
+
+const MessengerConversationMessageAreaStyledDiv = styled.div`
+  position: fixed;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  top: 0;
+  margin: 58px 0;
+  overflow-y: scroll;
+`
 
 const MessengerConversationMessageArea = ({connectedUserData, userData}: MessengerConversationMessageAreaTypes) => {
 
@@ -28,19 +40,7 @@ const MessengerConversationMessageArea = ({connectedUserData, userData}: Messeng
     }
 
     return (
-        <div className='messenger-conversation-message-area' ref={messageArea}>
-            <style jsx>{`
-              .messenger-conversation-message-area {
-                position: fixed;
-                left: 0;
-                right: 0;
-                bottom: 0;
-                top: 0;
-                margin: 48px 0;
-                overflow-y: scroll;
-              }
-            `}</style>
-
+        <MessengerConversationMessageAreaStyledDiv className='messenger-conversation-message-area' ref={messageArea}>
             {messages?
                 _.uniqBy((messages || []),(message: any)=> {
                     return message.createdAt
@@ -57,7 +57,7 @@ const MessengerConversationMessageArea = ({connectedUserData, userData}: Messeng
                 })
                 :null
             }
-        </div>
+        </MessengerConversationMessageAreaStyledDiv>
     );
 };
 export default MessengerConversationMessageArea;

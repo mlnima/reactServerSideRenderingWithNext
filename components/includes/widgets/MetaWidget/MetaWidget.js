@@ -1,5 +1,5 @@
-import Link from 'next/link'
 import styled from "styled-components";
+import MetaWidgetElement from './MetaWidgetElement'
 
 const MetaWidgetStyledDiv = styled.div`
   display: flex;
@@ -20,11 +20,7 @@ const MetaWidget = props => {
                 meta.type === 'categories' ? 'category' :
                 meta.type === 'actors' ? 'actor' : 'category'
         return (
-            <Link href={`/${typePath}/${meta._id}`} key={meta.name}>
-                <a className='btn meta-widget-item' key={index} title={meta.name}>
-                    {meta.name}
-                </a>
-            </Link>
+            <MetaWidgetElement typePath={typePath} id={meta._id} key={meta._id} name={meta.name}/>
         )
     })
     return (
