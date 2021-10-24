@@ -12,6 +12,8 @@ const widgetDataSchema =  mongoose.Schema({
     redirectToTitle: String,
     type: String,
     customStyles: String,
+    customScript: String,
+    customScriptStrategy: String,
     deviceTypeToRender: String,
     languageToRender: String,
     metaType: String,

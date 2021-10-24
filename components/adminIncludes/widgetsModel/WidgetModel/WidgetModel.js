@@ -575,6 +575,24 @@ const WidgetModel = props => {
                         classNameValue='customStylesTextarea'
                     />
 
+                    <SelectFieldForWidget title={'Custom Script Strategy:'}
+                                          name={'customScriptStrategy'}
+                                          ref={null}
+                                          value={widgetData.customScriptStrategy}
+                                          options={['lazyOnload', 'afterInteractive', 'beforeInteractive']}
+                                          onChangeHandler={onChangeHandler}
+                    />
+                    <p>Custom Script:</p>
+                    <MonacoEditorComponent
+                        language='javascript'
+                        nameValue='customScript'
+                        defaultValue={widgetData.customScript || ''}
+                        value={widgetData.customScript || ''}
+                        setWidgetData={setWidgetData}
+                        widgetData={widgetData}
+                        classNameValue='customStylesTextarea'
+                    />
+
                     <div className='control-buttons'>
                         <button title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{width: '15px', height: '15px'}}/></button>
                         <ExportWidget data={{...widgetData}}/>

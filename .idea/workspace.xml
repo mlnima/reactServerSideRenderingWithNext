@@ -20,11 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetCustomScript/WidgetCustomScript.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/widgetSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/widgetSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -851,7 +852,7 @@
       <workItem from="1634986092753" duration="1292000" />
       <workItem from="1634987602263" duration="24741000" />
       <workItem from="1635020583182" duration="9353000" />
-      <workItem from="1635060145528" duration="23620000" />
+      <workItem from="1635060145528" duration="26691000" />
     </task>
     <servers />
   </component>

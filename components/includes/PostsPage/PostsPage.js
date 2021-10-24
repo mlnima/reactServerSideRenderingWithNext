@@ -36,7 +36,6 @@ const PostsPage = () => {
 
     return (
         <React.Fragment>
-
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query.page || 1}

@@ -3,6 +3,7 @@ import dynamic from "next/dynamic";
 const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 import styled from "styled-components";
+import WidgetCustomScript from "./WidgetCustomScript/WidgetCustomScript";
 
 //import WidgetFooter from "./WidgetFooter/WidgetFooter";
 
@@ -23,6 +24,7 @@ const Widget = props => {
                     widget={true}
                     viewType={props.viewType}
                 /> : null}
+            {props.data.customScript ? <WidgetCustomScript customScript={props.data.customScript} customScriptStrategy={props.data.customScriptStrategy}/>:null}
         </WidgetStyledSection>
     );
 };
