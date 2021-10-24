@@ -19,13 +19,12 @@ const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
 
-//onKeyDown={e => e.keyCode === 192 ? adminConsoleOpenCloseHandler(contextData.userData,contextData.state,contextData.dispatchState) : null}
 const AppLayout = props => {
-    const loggedIn = useSelector(state => state.user.loggedIn)
-    const userData = useSelector(state => state.user.userData)
-    const globalState = useSelector(state => state.globalState)
-    const settings = useSelector(state => state.settings)
-    const widgets = useSelector(state => state.widgets.widgets)
+    const loggedIn = useSelector(state => state?.user.loggedIn)
+    const userData = useSelector(state => state?.user.userData)
+    const globalState = useSelector(state => state?.globalState)
+    const settings = useSelector(state => state?.settings)
+    const widgets = useSelector(state => state?.widgets?.widgets)
     const router = useRouter()
     const dispatch = useDispatch()
     const [sidebarsData, setSidebarsData] = useState(() => setAppLayoutDataFromProp(props, router, settings))

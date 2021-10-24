@@ -1,8 +1,7 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import ItemCountUI from "./ItemCountUI";
-import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 let StyledDiv = styled.div`
@@ -76,16 +75,16 @@ let StyledDiv = styled.div`
 
 
 const CheckOutItemPreview = props => {
-    const contextData = useContext(AppContext);
+
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || ''
     const onRemoveItemFromBasketHandler = () => {
-        const items = contextData.checkOutData.items.filter(i => i.productId !== props.productId)
-        contextData.setCheckOutData({
-            ...contextData.checkOutData,
-            items
-        })
-        localStorage.setItem('checkOutItems', JSON.stringify(items))
+        // const items = contextData.checkOutData.items.filter(i => i.productId !== props.productId)
+        // contextData.setCheckOutData({
+        //     ...contextData.checkOutData,
+        //     items
+        // })
+        // localStorage.setItem('checkOutItems', JSON.stringify(items))
     }
 
     const FullDataForFinalPage = () => {

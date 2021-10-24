@@ -1,6 +1,5 @@
 import * as types from "../types";
-import axios from "axios";
-
+import axios, {AxiosResponse} from "axios";
 
 export const adminGetPost = (_id?: string | string[]) =>async (dispatch: any) =>{
     if (_id){
@@ -23,6 +22,7 @@ export const adminGetPost = (_id?: string | string[]) =>async (dispatch: any) =>
         })
     }
 }
+
 export const adminUpdatePost = (data?: object) =>async (dispatch: any) =>{
     const body = {
         postData: data,
@@ -98,8 +98,43 @@ export const adminChangeActiveEditingLanguage = (language:string) => (dispatch: 
 }
 
 export const adminNewPost = ( ) => (dispatch: any)=>{
+
     dispatch({
         type:types.NEW_POST,
         payload: ''
     })
+}
+
+export const adminBulkActionPost = (ids :string[], status:string ) => (dispatch: any)=>{
+    console.log('adminBulkActionPost from redux')
+    dispatch({
+        type: types.LOADING,
+        payload: true
+    })
+    const body = {
+        ids,
+        status,
+        token: localStorage.wt
+    };
+    axios.post('/api/admin/posts/postsBulkAction', body).then((res :AxiosResponse<any>) => {
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: res.data?.message,type:'success'}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+
+    }).catch((err) => {
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message:err.response.data.message,type:'error',err}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    })
+
 }

@@ -1,5 +1,4 @@
-import React, {useContext, useState} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import React, { useState} from 'react';
 import Link from "next/link";
 import {convertVariableNameToName} from '../../../_variables/_variables'
 import withRouter from 'next/dist/client/with-router'
@@ -7,7 +6,8 @@ import _ from "lodash";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-import {useRouter} from "next/router";
+import {useDispatch, useSelector} from "react-redux";
+import {setSidebarStatus} from "../../../store/actions/adminPanelGlobalStateActions";
 
 let StyledDiv = styled.div`
   position: absolute;
@@ -79,9 +79,10 @@ let StyledDiv = styled.div`
   //position: initial;
 }
 `
-const SideBar = props => {
-    const router = useRouter()
-    const contextData = useContext(AppContext);
+
+const SideBar = () => {
+    const dispatch = useDispatch()
+    const sidebar = useSelector(state => state?.adminPanelGlobalState?.sidebar)
 
     const [state, setState] = useState({
         Dashboard: {
@@ -97,7 +98,7 @@ const SideBar = props => {
             subItems: []
         },
         metas: {
-            pathURL: '/categories',
+            pathURL: '/admin/assets?assetsType=metas&metaType=categories',
             subItems: [
                 {name: 'tags', url: '/admin/assets?assetsType=metas&metaType=tags'},
                 {name: 'categories', url: '/admin/assets?assetsType=metas&metaType=categories'},
@@ -125,7 +126,7 @@ const SideBar = props => {
             subItems: []
         },
         Design: {
-            pathURL: '/admin/design',
+            pathURL: '/admin/design/widgets',
             subItems: [
                 {name: 'topBar', url: '/admin/design/topBar'},
                 {name: 'header', url: '/admin/design/header'},
@@ -177,20 +178,15 @@ const SideBar = props => {
 
     const [hovered, setHovered] = useState('')
 
-
-    const closeAdminSidebar = ()=>{
-        contextData.dispatchSettings(settings => ({
-            ...settings,
-            adminPanelSideBar: false,
-        }))
-    }
-
-
     const renderItems = Object.keys(state).map(item => {
         const onHoverHandler = state[item].subItems.map(subItem => {
             if (hovered === item) {
                 return (
-                    <Link  key={_.uniqueId('id_')} href={subItem.url} ><a className='SideBarItem-SubItem' onClick={closeAdminSidebar}>{convertVariableNameToName(subItem.name)}</a></Link>
+                    <Link  key={_.uniqueId('id_')} href={subItem.url} >
+                        <a className='SideBarItem-SubItem' onClick={()=>dispatch(setSidebarStatus(false))}>
+                            {convertVariableNameToName(subItem.name)}
+                        </a>
+                    </Link>
                 )
             } else return null
 
@@ -209,7 +205,7 @@ const SideBar = props => {
         return (
             <div key={item} className='SideBarItemElement'>
                 <div className='SideBarItemTitle' onMouseOver={() => setHovered(item)}>
-                    <Link href={state[item].pathURL}><a className='SideBarItem' onClick={closeAdminSidebar}>{convertVariableNameToName(item)}</a></Link>
+                    <Link href={state[item].pathURL}><a className='SideBarItem' onClick={()=>dispatch(setSidebarStatus(false))}>{convertVariableNameToName(item)}</a></Link>
                     <RenderArrowsForSubMenus/>
                 </div>
                 <div className='SideBarItemElementSubItems'>
@@ -219,7 +215,7 @@ const SideBar = props => {
         )
     })
 
-    if (contextData.settings.adminPanelSideBar) {
+    if (sidebar) {
         return (
             <StyledDiv className='SideBar'>
                 {renderItems}

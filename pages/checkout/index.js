@@ -1,17 +1,13 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
-import AppLayout from "../../components/layouts/AppLayout";
-import {getAbsolutePath} from "../../_variables/_variables";
-import {getFirstLoadData, getMultipleSetting, getMultipleWidgetWithData} from "../../_variables/ajaxVariables";
-import {AppContext} from "../../context/AppContext";
-import {getPost} from "../../_variables/ajaxPostsVariables";
+import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
 import {useRouter} from "next/router";
 import _ from 'lodash'
-
 const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useDispatch, useSelector} from "react-redux";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -82,7 +78,9 @@ let StyledDiv = styled.div`
   }
 `
 const checkout = props => {
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
+    const identity = useSelector(state => state.settings.identity)
+    const userData = useSelector(state => state?.user.userData)
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
     const [state, setState] = useState({
@@ -104,14 +102,14 @@ const checkout = props => {
 
 
     //check if there is items in the basket and fetch data from DB
-    useEffect(() => {
-        if (contextData.checkOutData.items.length > 0) {
-            setItemsData([])
-            getCheckOutItems()
-        } else if (contextData.checkOutData.items.length === 0) {
-            // router.push('/')
-        }
-    }, [contextData.checkOutData.items]);
+    // useEffect(() => {
+    //     if (contextData.checkOutData.items.length > 0) {
+    //         setItemsData([])
+    //         getCheckOutItems()
+    //     } else if (contextData.checkOutData.items.length === 0) {
+    //         // router.push('/')
+    //     }
+    // }, [contextData.checkOutData.items]);
 
 
     //create order from orderData for final payment
@@ -125,20 +123,19 @@ const checkout = props => {
         const dataToCreateOrder = {
             type: 'payPal',
             payPalData: order,
-            userID: contextData.userData._id,
+            userID: userData._id,
         }
-        contextData.functions.createOrder(dataToCreateOrder).then(createdOrderResponse => {
-
-            setState({
-                ...state,
-                isPaid: true,
-                message: 'Thank you you will receive the confirmation message in a few hours '
-            })
-            localStorage.removeItem('checkOutItems')
-            contextData.setCheckOutData({
-                ...contextData.checkOutData,
-                items: []
-            })
+        dispatch(userCreateOrder(data, actions)).then(createdOrderResponse => {
+            // setState({
+            //     ...state,
+            //     isPaid: true,
+            //     message: 'Thank you you will receive the confirmation message in a few hours '
+            // })
+            // localStorage.removeItem('checkOutItems')
+            // contextData.setCheckOutData({
+            //     ...contextData.checkOutData,
+            //     items: []
+            // })
         }).catch(err => {
             console.log(err)
             setState({
@@ -172,18 +169,18 @@ const checkout = props => {
 
     //function to get checkoutItems data from database by ID
     const getCheckOutItems = async () => {
-        Promise.all(contextData.checkOutData.items.map(item => getPost({_id: item.productId}, window.location.origin, false))).then(results => {
-            setItemsData(results.map(result => {
-                return {
-                    title: result?.data?.post?.title,
-                    mainThumbnail: result.data?.post?.mainThumbnail,
-                    price: result.data?.post?.price,
-                    shippingCost: result?.data?.post?.shippingCost ?? 0,
-                    translations: result.data?.post?.translations,
-                    ...contextData.checkOutData.items.find(item => item.productId === result.data?.post?._id)
-                }
-            }))
-        })
+        // Promise.all(contextData.checkOutData.items.map(item => getPost({_id: item.productId}, window.location.origin, false))).then(results => {
+        //     setItemsData(results.map(result => {
+        //         return {
+        //             title: result?.data?.post?.title,
+        //             mainThumbnail: result.data?.post?.mainThumbnail,
+        //             price: result.data?.post?.price,
+        //             shippingCost: result?.data?.post?.shippingCost ?? 0,
+        //             translations: result.data?.post?.translations,
+        //             ...contextData.checkOutData.items.find(item => item.productId === result.data?.post?._id)
+        //         }
+        //     }))
+        // })
     }
 
     // create order data for paypal from itemsData and store it in orderData
@@ -216,7 +213,7 @@ const checkout = props => {
                             // discount: {currency_code: props.eCommerce.data.currency, value: 0},
                         }
                     },
-                    description: _.truncate(contextData.siteIdentity.title, {'length': 20, 'separator': ' '}),
+                    description: _.truncate(identity.title, {'length': 20, 'separator': ' '}),
                     custom_id: '64735',
                     items: itemsData.map(itemData => {
                         return {
@@ -284,7 +281,7 @@ const checkout = props => {
                                     message: 'Waiting for the Payment'
                                 })
                             }}>
-                            {contextData.state.activeLanguage === 'default' ? props.eCommerce?.data?.proceedToCheckOutText || 'Proceed To Checkout' : props.eCommerce?.data?.translations?.[contextData.state.activeLanguage]?.proceedToCheckOutText || 'Proceed To Checkout'}
+                            {router.locale === 'default' ? props.eCommerce?.data?.proceedToCheckOutText || 'Proceed To Checkout' : props.eCommerce?.data?.translations?.[router.locale]?.proceedToCheckOutText || 'Proceed To Checkout'}
                         </button>
                         : null
                 }

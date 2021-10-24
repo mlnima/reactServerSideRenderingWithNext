@@ -1,11 +1,9 @@
-import React, {useEffect, useState, useContext} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
 import {likeValueCalculator} from "../../../_variables/_variables";
 import {getComments, likeDislikeView} from "../../../_variables/ajaxPostsVariables";
 import dynamic from "next/dynamic";
-
 
 const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
 const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'))
@@ -91,7 +89,6 @@ const PostPageStyledMain = styled.main`
 `
 
 const PostPage = ({ design, post, identity, comments, widgets}) => {
-    const contextData = useContext(AppContext);
     const router = useRouter()
     const [state, setState] = useState({
         likeValue: 0,
@@ -197,7 +194,7 @@ const PostPage = ({ design, post, identity, comments, widgets}) => {
                     <WidgetsRenderer deviceWidth={deviceWidth}
                                      widgets={(widgets || []).filter(widget => widget.data.position === 'underPost')}
                                      position='underPost'
-                                     postElementSize={design?.data?.postElementSize || contextData.siteDesign.postElementSize}/>
+                                     postElementSize={design?.data?.postElementSize }/>
                 </div> : null}
             <CommentFrom reGetComments={reGetComments} documentId={post._id} documentTitle={post.title}/>
             {comments?.length > 0 ? <CommentsRenderer reGetComments={reGetComments} comments={commentsData}/> : null}

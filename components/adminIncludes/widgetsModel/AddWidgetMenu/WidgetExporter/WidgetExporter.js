@@ -1,11 +1,13 @@
-import React, { useContext} from 'react';
-import {AppContext} from "../../../../../context/AppContext";
+import React from 'react';
+import {useDispatch, useSelector} from "react-redux";
+import {setLoading} from "../../../../../store/actions/globalStateActions";
 
 const WidgetExporter = () => {
-    const contextData = useContext(AppContext);
+    const widgets = useSelector(state => state?.widgets.widgets)
+    const dispatch = useDispatch()
 
     const exportAllWidgets=()=>{
-        const data = contextData.widgetsSettings.widgets.map(widget=>{
+        const data = widgets.map(widget=>{
             widget.data.posts =[]
             widget.data.metaData =[]
             widget.data.comments =[]
@@ -18,10 +20,7 @@ const WidgetExporter = () => {
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(data)))], {type: contentType});
             navigator.msSaveOrOpenBlob(blob, filename);
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
+            dispatch(setLoading(false))
         } else {
             let a = document.createElement('a');
             a.download = filename;
@@ -30,13 +29,9 @@ const WidgetExporter = () => {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
+            dispatch(setLoading(false))
         }
     }
-
 
     return (
         <div className='export-widgets'>

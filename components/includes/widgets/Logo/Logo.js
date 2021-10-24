@@ -1,6 +1,5 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Link from "next/link";
-import {AppContext} from "../../../../context/AppContext";
 import ImageRenderer from "../../ImageRenderer/ImageRenderer";
 import {useRouter} from "next/router";
 import styled from "styled-components";
@@ -34,9 +33,8 @@ const LogoStyledSpan = styled.span`
 const Logo = props => {
     const dispatch = useDispatch()
     const router = useRouter()
-    const contextData = useContext(AppContext);
-    const logoText = props.translations ? props.translations[contextData.state.activeLanguage || router.locale] ? props.translations[contextData.state.activeLanguage || router.locale].LogoText || props.LogoText : props.LogoText : props.LogoText;
-    const headLineData = props.translations ? props.translations[contextData.state.activeLanguage || router.locale] ? props.translations[contextData.state.activeLanguage || router.locale].headLine || props.headLine : props.headLine : props.headLine;
+    const logoText = props.translations ? props.translations[router.locale] ? props.translations[router.locale].LogoText || props.LogoText : props.LogoText : props.LogoText;
+    const headLineData = props.translations ? props.translations[router.locale] ? props.translations[router.locale].headLine || props.headLine : props.headLine : props.headLine;
     const logoImageUrl = props.LogoUrl;
 
     return (

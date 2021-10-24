@@ -1,5 +1,4 @@
-import React, {useState, useContext} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
 import NewItemMenu from "./NewItemMenu/NewItemMenu";
@@ -7,8 +6,8 @@ import Link from 'next/link'
 import {faBars, faHome, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
-import {useDispatch} from "react-redux";
-import {clearCaches} from "../../../store/actions/adminPanelGlobalStateActions";
+import {useDispatch, useSelector} from "react-redux";
+import {clearCaches, setSidebarStatus} from "../../../store/actions/adminPanelGlobalStateActions";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -59,22 +58,14 @@ let StyledDiv = styled.div`
 
 const AdminTopBar = () => {
     const dispatch = useDispatch()
-    const contextData = useContext(AppContext);
+    const sidebar = useSelector(state => state?.adminPanelGlobalState?.sidebar)
     const [state, dispatchState] = useState({
         AdminActionMenu: false,
         NewItemMenu: false
     });
 
     const AdminSideBarOpenCloseHandler = () => {
-        contextData.settings.adminPanelSideBar ?
-            contextData.dispatchSettings(settings => ({
-                ...settings,
-                adminPanelSideBar: false,
-            })) :
-            contextData.dispatchSettings(settings => ({
-                ...settings,
-                adminPanelSideBar: true,
-            }))
+        sidebar ? dispatch(setSidebarStatus(false)) : dispatch(setSidebarStatus(true))
     };
 
     const adminActionHandler = () => {
@@ -105,13 +96,13 @@ const AdminTopBar = () => {
         <>
             <StyledDiv className='adminTopBar'>
                 <div className="adminTopBarControl">
-                    <span className='adminSideBarMobileBtn adminTopBarItem' onClick={() => AdminSideBarOpenCloseHandler()}>
+                    <span className='adminSideBarMobileBtn adminTopBarItem' onClick={AdminSideBarOpenCloseHandler}>
                         <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faBars} className='post-element-info-logo'/>
                     </span>
                     <Link href='/'>
-                        <a  className='adminTopBarItem'>
-                        <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faHome} className='post-element-info-logo'/>
-                    </a>
+                        <a className='adminTopBarItem'>
+                            <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faHome} className='post-element-info-logo'/>
+                        </a>
                     </Link>
                     <span className='adminNewActionBtn adminTopBarItem' onClick={() => newItemMenuHandler()}><FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></span>
                     <NewItemMenu active={state.NewItemMenu}/>

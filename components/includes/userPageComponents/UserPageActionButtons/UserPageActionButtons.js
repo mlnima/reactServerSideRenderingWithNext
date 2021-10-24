@@ -1,6 +1,5 @@
-import React, { useContext} from 'react';
+import React from 'react';
 import {followUser, unFollowUser, conversation} from "../../../../_variables/_userSocialAjaxVariables";
-import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
 import {withTranslation} from "next-i18next";
 import styled from "styled-components";
@@ -40,10 +39,7 @@ const UserPageActionButtonsStyledDiv = styled.div`
 `
 
 const UserPageActionButtons = ({t, _id}) => {
-
     const router = useRouter()
-    const contextData = useContext(AppContext);
-
     const dispatch = useDispatch()
     const userData = useSelector(state => state.user.userData)
     const userPageData = useSelector(state => state.user.userPageData)
@@ -75,10 +71,8 @@ const UserPageActionButtons = ({t, _id}) => {
                 console.log(err)
             })
         } else {
-            contextData.dispatchState({
-                ...contextData.state,
-                loginRegisterFormPopup: true
-            })
+            dispatch(setLoginRegisterFormStatus('login'))
+
         }
 
     }

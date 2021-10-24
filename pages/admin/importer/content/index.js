@@ -1,33 +1,26 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import AdminLayout from '../../../../components/layouts/AdminLayout';
+import React, { useState, useRef} from 'react';
 import {savePost} from '../../../../_variables/ajaxPostsVariables'
-import {AppContext} from "../../../../context/AppContext";
+import {useSelector} from "react-redux";
 
-const importContent = props => {
-    const contextData = useContext(AppContext);
+const importContent = () => {
+    const userData = useSelector(state => state?.user.userData)
     const dataPreview = useRef(null)
     const [state, setState] = useState({
         data: []
     });
-    useEffect(() => {
-    }, []);
 
     const onImportPostsHandler = async () => {
         if (state.data[1]) {
             if (state.data[1].title) {
                 for await (let post of state.data) {
                     post.status = 'draft'
-                    post.author = contextData.userData._id
+                    post.author = userData._id
                     post.tags = post.tags ? post.tags.map(tag => {
                         if (tag.name && tag.type){
                             return tag
                         }else{
                             return {name: tag.trim(), type: 'tags'}
                         }
-
-
-
-
                     }) : []
                     post.categories = post.categories ? post.categories.map(category => {
 

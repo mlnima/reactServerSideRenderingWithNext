@@ -1,5 +1,3 @@
-import {useContext} from 'react';
-import {AppContext} from "../../../../../context/AppContext";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 
@@ -10,13 +8,13 @@ const PostTitleStyledH1 = styled.h1`
 `
 
 const PostTitle = ({title, translations}) => {
-    const contextData = useContext(AppContext);
     const router = useRouter()
+
     return (
         <PostTitleStyledH1 className='post-title'>
             {
-                translations ? translations[router.locale ?? contextData.state.activeLanguage] ?
-                    translations[router.locale ?? contextData.state.activeLanguage]?.title || title :
+                    translations ? translations[router.locale] ?
+                    translations[router.locale]?.title || title :
                     title : title
             }
         </PostTitleStyledH1>

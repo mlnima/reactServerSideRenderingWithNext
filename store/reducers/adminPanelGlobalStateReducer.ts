@@ -1,11 +1,14 @@
 import * as types from '../types'
 
+
 const initialState = {
-    customPages:[]
+    customPages:[],
+    sidebar:false
 }
 
 export interface AdminPanelGlobalState {
     customPages:string[],
+    sidebar:boolean
 }
 
 export const adminPanelGlobalStateReducer = (state : AdminPanelGlobalState = initialState , action : {type:string,payload:any}) =>{
@@ -15,6 +18,11 @@ export const adminPanelGlobalStateReducer = (state : AdminPanelGlobalState = ini
             return {
                 ...state,
                 customPages:action.payload
+            };
+        case types.SET_SIDEBAR_STATUS:
+            return {
+                ...state,
+                sidebar:action.payload
             };
 
         default:

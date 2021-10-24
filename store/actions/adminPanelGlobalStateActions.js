@@ -1,7 +1,6 @@
 import * as types from "../types";
 import axios from "axios";
 
-
 export const getCustomPages = ( ) => async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/pages/getPagesData', {token: localStorage.wt}).then(res => {
         if (res.data?.pages) {
@@ -43,3 +42,18 @@ export const clearCaches = ( router ) => async dispatch => {
     })
 }
 
+export const setSidebarStatus = ( status ) => async dispatch => {
+    dispatch({
+        type:types.SET_SIDEBAR_STATUS,
+        payload:status
+    })
+}
+
+export const editDesign = ( e ) => async dispatch => {
+    dispatch({
+        type:types.EDIT_DESIGN,
+        payload:{
+            [e.target.name]: e.target.value
+        }
+    })
+}

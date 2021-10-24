@@ -1,13 +1,13 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {addNewWidget, getMultipleWidgetWithData} from "../../../../../_variables/ajaxVariables";
-import {AppContext} from "../../../../../context/AppContext";
+import React, {useEffect, useState, useRef} from 'react';
+import {addNewWidget} from "../../../../../_variables/ajaxVariables";
+
 
 const WidgetImporter = () => {
     const inputFile = useRef(null)
-    const contextData = useContext(AppContext);
     const [state, setState] = useState({
         data:[]
     });
+
     useEffect( () => {
         onWidgetImportHandler()
     }, [state.data]);
@@ -15,18 +15,8 @@ const WidgetImporter = () => {
     const onWidgetImportHandler = async ()=>{
         if (state.data.length>0){
             for await (let widget of state.data){
-
                 addNewWidget({
                     data:widget
-                }).then(() => {
-                    getMultipleWidgetWithData({ widgets: [ 'all' ] }, false).then(res=>{
-                        contextData.dispatchWidgetsSettings({
-                            ...contextData.widgetsSettings,
-                            widgets: [ ...res.data.widgets ]
-                        })
-                    })
-                }).catch(err=>{
-                    console.log( err)
                 })
             }
         }

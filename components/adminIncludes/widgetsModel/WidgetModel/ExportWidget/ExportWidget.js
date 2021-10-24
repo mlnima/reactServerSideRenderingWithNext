@@ -1,17 +1,12 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {AppContext} from "../../../../../context/AppContext";
+import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFileExport} from "@fortawesome/free-solid-svg-icons";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../../../../../store/actions/globalStateActions";
+
 const ExportWidget = props => {
-    const contextData = useContext(AppContext);
-    const [state, setState] = useState({});
-    useEffect(() => {
-
-    }, [props]);
-
-
+    const dispatch = useDispatch()
     const onExportHandler = () => {
-
         const data = [{
             ...props.data,
         }]
@@ -20,10 +15,7 @@ const ExportWidget = props => {
         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
             let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(data)))], {type: contentType});
             navigator.msSaveOrOpenBlob(blob, filename);
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
+            dispatch(setLoading(false))
         } else {
             let a = document.createElement('a');
             a.download = filename;
@@ -32,10 +24,7 @@ const ExportWidget = props => {
             document.body.appendChild(a);
             a.click();
             document.body.removeChild(a);
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
+            dispatch(setLoading(false))
         }
     }
 

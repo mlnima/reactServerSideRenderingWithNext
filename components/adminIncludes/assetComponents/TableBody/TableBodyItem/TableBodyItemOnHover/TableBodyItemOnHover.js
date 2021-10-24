@@ -1,13 +1,13 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import {useRouter} from "next/router";
-import {AppContext} from '../../../../../../context/AppContext'
 import Link from 'next/link';
 import {deleteMeta} from '../../../../../../_variables/ajaxPostsVariables'
 import {deletePage} from "../../../../../../_variables/ajaxVariables";
-// import {post} from "superagent/lib/client";
+import {useDispatch} from "react-redux";
+import {adminBulkActionPost} from "../../../../../../store/actions/adminPanelPostsActions";
 
 const TableBodyItemOnHover = props => {
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
     const router = useRouter()
 
     const reGetData = () => {
@@ -21,11 +21,11 @@ const TableBodyItemOnHover = props => {
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
                     <Link href={'/' + props.title}><a>View</a></Link>
-                    {status !== 'trash' ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'trash').then(() => reGetData())}>Trash</span> : null}
-                    {status !== 'draft' ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'draft').then(() => reGetData())}>Draft</span> : null}
-                    {status !== 'pending' ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'pending').then(() => reGetData())}>Pending</span> : null}
-                    {status === 'trash' ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'delete').then(() => reGetData())}>Delete</span> : null}
-                    {status !== 'published' || status !== 'all' || !status ? <span onClick={() => contextData.functions.bulkActionPost([props._id], 'published').then(() => reGetData())}>Publish</span> : null}
+                    {status !== 'trash' ? <span onClick={() => dispatch(adminBulkActionPost([props._id], 'trash'))}>Trash</span> : null}
+                    {status !== 'draft' ? <span onClick={() => dispatch(adminBulkActionPost([props._id], 'draft'))}>Draft</span> : null}
+                    {status !== 'pending' ? <span onClick={() => dispatch(adminBulkActionPost([props._id], 'pending'))}>Pending</span> : null}
+                    {status === 'trash' ? <span onClick={() => dispatch(adminBulkActionPost([props._id], 'delete'))}>Delete</span> : null}
+                    {status !== 'published' || status !== 'all' || !status ? <span onClick={() => dispatch(adminBulkActionPost([props._id], 'published'))}>Publish</span> : null}
                 </div>
             )
         } else if (props.assetsType === 'users') {
@@ -71,9 +71,7 @@ const TableBodyItemOnHover = props => {
 
     } else {
         return (
-            <div className='asset-page-table-body-item-hover-item'>
-
-            </div>
+            <div className='asset-page-table-body-item-hover-item'/>
         )
     }
 

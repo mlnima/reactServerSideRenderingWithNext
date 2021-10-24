@@ -1,10 +1,9 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useState} from 'react';
 import Link from "next/link";
-import {AppContext} from "../../../context/AppContext";
 import LanguagesSwitcher from "../widgets/LanguagesSwitcher/LanguagesSwitcher";
 import {withTranslation} from "next-i18next";
 import {useSelector} from "react-redux";
-
+import {useRouter} from "next/router";
 import styled from "styled-components";
 
 const CookiePopupStyledDiv = styled.div`
@@ -76,9 +75,7 @@ const CookiePopupStyledDiv = styled.div`
 `
 const CookiePopup = props => {
     const settings = useSelector(state => state.settings)
-    const globalState = useSelector(state => state.globalState)
-    const contextData = useContext(AppContext);
-    // const router = useRouter()
+    const router = useRouter()
     const [state, setState] = useState({
         accepted: false,
         render: true
@@ -99,12 +96,6 @@ const CookiePopup = props => {
         }
     }
 
-    // useEffect(() => {
-    //     console.log(contextData.state.activeLanguage)
-    //     console.log(settings?.identity?.cookiePopupMessage)
-    //     console.log(globalState)
-    // }, [props]);
-
     if (settings?.identity?.cookiePopupMessage && !state.accepted) {
         return (
             <CookiePopupStyledDiv className='cookie-popup-parent'>
@@ -113,9 +104,9 @@ const CookiePopup = props => {
                     <LanguagesSwitcher cookiePage={true}/>
                 </span>
 
-              <h2>{settings?.identity?.translations[contextData.state.activeLanguage]?.cookieTitleText || settings?.identity?.cookieTitleText}</h2>
+              <h2>{settings?.identity?.translations[router.locale]?.cookieTitleText || settings?.identity?.cookieTitleText}</h2>
                 <p>
-                    {settings?.identity?.translations[contextData.state.activeLanguage]?.cookieMessageText || settings?.identity?.cookieMessageText}
+                    {settings?.identity?.translations[router.locale]?.cookieMessageText || settings?.identity?.cookieMessageText}
                 </p>
                 <div className='cookie-popup-content-action-buttons'>
                       <button className='cookie-popup-content-action-button-reject' onClick={onRejectHandler}>

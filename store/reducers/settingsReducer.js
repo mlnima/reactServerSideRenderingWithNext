@@ -22,6 +22,14 @@ export const settingsReducer = (state=initialState,action)=>{
                 ...state,
                 ...action?.payload || {},
             }
+        case  types.EDIT_DESIGN:
+            return {
+                ...state,
+                design:{
+                    ...state.design,
+                    ...action?.payload || {}
+                }
+            }
         default:
             return state
     }

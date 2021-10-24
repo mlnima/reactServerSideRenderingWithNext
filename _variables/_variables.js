@@ -1,5 +1,7 @@
 
 import React from "react";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../store/actions/globalStateActions";
 
 export const likeValueCalculator = (likes, dislikes) => {
     return (likes > 0 && dislikes > 0) ? (Math.round((likes * 100) / (likes + dislikes)))
@@ -177,10 +179,7 @@ export const jsonExporter = (data,fileName)=>{
     if (window.navigator && window.navigator.msSaveOrOpenBlob) {
         let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(data)))], {type: contentType});
         navigator.msSaveOrOpenBlob(blob, fileName);
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: false
-        })
+
     } else {
         let a = document.createElement('a');
         a.download = fileName;

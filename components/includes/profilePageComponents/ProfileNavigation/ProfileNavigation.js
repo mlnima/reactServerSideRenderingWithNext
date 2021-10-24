@@ -1,11 +1,10 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { AppContext } from '../../../../context/AppContext'
+import React, {useState} from 'react';
 import Link from 'next/link'
 import {withTranslation} from "next-i18next";
 import {useSelector} from "react-redux";
 
 const ProfileNavigation = props => {
-    const contextData = useContext(AppContext);
+
     const userData = useSelector(state => state.user.userData)
 
     const [ navigationData, setNavigationData ] = useState({
@@ -13,15 +12,6 @@ const ProfileNavigation = props => {
         style: {}
     });
 
-    useEffect(() => {
-        setNavigationData({
-            ...navigationData,
-            style: {
-                backgroundColor: contextData.siteDesign.navigationBackgroundColor,
-                color: contextData.siteDesign.navigationTextColor
-            }
-        })
-    }, [ contextData.siteDesign ]);
 
     const onTabChangeHandler = e => {
         props.setState({

@@ -1,11 +1,14 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getFirstLoadData} from "../../../../_variables/ajaxVariables";
 import {userCreateNewPost} from "../../../../_variables/ajaxPostsVariables";
-import {AppContext} from "../../../../context/AppContext";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useDispatch, useSelector} from "react-redux";
+import {setLoginRegisterFormStatus} from "../../../../store/actions/globalStateActions";
 
-const newPost = props => {
-    const contextData = useContext(AppContext);
+const newPost = () => {
+    const userData = useSelector(state => state?.user.userData)
+    const dispatch = useDispatch()
+
     const [state, setState] = useState({
         serverResponse : ''
     });
@@ -19,13 +22,13 @@ const newPost = props => {
     });
 
     useEffect(() => {
-        if (contextData.userData._id){
+        if (userData._id){
             setFormData({
                 ...formData,
-                author: contextData.userData._id
+                author: userData._id
             })
         }
-    }, [contextData.userData]);
+    }, [userData]);
 
 
     const onChangeHandler = (e) => {
@@ -37,7 +40,7 @@ const newPost = props => {
 
     const onSubmitHandler = e=>{
         e.preventDefault()
-        if (contextData.userData._id){
+        if (userData._id){
             userCreateNewPost(formData,process.env.NEXT_PUBLIC_PRODUCTION_URL).then(res=>{
                 setState({
                     ...state,
@@ -50,10 +53,8 @@ const newPost = props => {
                 })
             })
         }else {
-            contextData.dispatchState({
-                ...contextData.state,
-                loginRegisterFormPopup:true
-            })
+            dispatch(setLoginRegisterFormStatus('login'))
+
         }
     }
 

@@ -1,8 +1,7 @@
-import { useEffect, useState, useContext, useRef } from 'react';
+import { useEffect, useState, useRef } from 'react';
 import {  getSetting, youtubeDataScrapper } from '../../../../_variables/ajaxVariables'
 import withRouter from 'next/dist/client/with-router';
 import { savePost } from '../../../../_variables/ajaxPostsVariables'
-import { AppContext } from '../../../../context/AppContext'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {setAlert, setLoading} from "../../../../store/actions/globalStateActions";
@@ -35,11 +34,9 @@ let StyledDiv = styled.div`
   }
 }
 `
-const youtube = props => {
+const youtube = () => {
 
     const dispatch = useDispatch()
-
-    const contextData = useContext(AppContext);
     const urlsElement = useRef(null)
     const [ state, setState ] = useState({
         apiKey: '',

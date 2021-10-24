@@ -1,9 +1,7 @@
-import React, {useContext, useState, useEffect} from 'react';
+import React, { useState, useEffect} from 'react';
 import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
-import {AppContext} from "../../../context/AppContext";
 import dynamic from "next/dynamic";
-
 const Posts = dynamic(() => import('../Posts/Posts'))
 const CategoriesRenderer = dynamic(() => import('../pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer'))
 const TagsRenderer = dynamic(() => import('../pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer'))
@@ -42,8 +40,9 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
     const settings = useSelector((state: settingsPropTypes) => state.settings);
+    const userData = useSelector((state: settingsPropTypes)  => state?.user.userData)
 
-    const contextData = useContext(AppContext);
+
     const router = useRouter()
 
     const widgetsData = widgets.filter((widget: WidgetInterface) => widget.data?.position === position).sort((a, b) => {
@@ -62,11 +61,11 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
          const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
 
         const languageToRender = widget.data.languageToRender || 'all';
-        const activeLanguage = router.locale ?? contextData?.state?.activeLanguage;
+        const activeLanguage = router.locale ;
 
         const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
 
-        const isEditMode = widget.data.editMode && contextData?.userData?.role !== 'administrator';
+        const isEditMode = widget.data.editMode && userData?.role !== 'administrator';
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
             widget.data.type === 'postsSwiper' ? PostSwiper :

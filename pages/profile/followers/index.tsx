@@ -1,42 +1,33 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import {AppContext} from "../../../context/AppContext";
 import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariables";
 // @ts-ignore
 import _ from "lodash";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
-import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {ClientPagesTypes} from "../../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../../store/store";
+import {useDispatch, useSelector} from "react-redux";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {getSpecificUserData} from "../../../store/actions/userActions";
 
-const Followers = (props:ClientPagesTypes) => {
-    const contextData = useContext(AppContext);
+const Followers = ( ) => {
+    const userData = useSelector((state : StoreTypes) => state?.user?.userData)
+    const dispatch = useDispatch()
     const [followers, setFollowers] = useState([]);
 
-
     useEffect(() => {
-        getSignedInUserData(['followers']).then(res => {
-
-            contextData.dispatchUserData({
-                ...contextData.userData,
-                // @ts-ignore
-                ...res.data.userData
-            });
-        }).catch(err => {
-            console.log(err);
-        })
+        dispatch(getSpecificUserData(['followers']))
     }, []);
 
-
     useEffect(() => {
-        if (contextData?.userData?.followers?.length > 0) {
-            getMultipleUserDataById(contextData?.userData?.followers).then(res => {
+        // @ts-ignore
+        if (userData.followers?.length > 0) {
+            getMultipleUserDataById(userData?.followers).then(res => {
                 // @ts-ignore
                 setFollowers(res?.data?.users || [])
             })
         }
-    }, [contextData.userData.followers]);
+    }, [userData?.followers]);
 
     const renderFollowers = followers.map((user,index) => {
         return (

@@ -1,29 +1,31 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import ProfileCoverImage from '../../../components/includes/profilePageComponents/ProfileCoverImage/ProfileCoverImage'
 import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
-import {AppContext} from "../../../context/AppContext";
 import {getPosts} from "../../../_variables/ajaxPostsVariables";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import ProfileImage from "../../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-const Posts = props => {
-    const contextData = useContext(AppContext);
+import {useSelector} from "react-redux";
+
+const Posts = () => {
+    const userData = useSelector(state => state?.user.userData)
     const router = useRouter();
+
     const [state, setState] = useState({
         posts:[],
         totalCount: 0
     });
+
     useEffect(() => {
-        if (contextData?.userData?.username && contextData?.userData?._id && contextData?.userData?.username !== 'guest' ){
+        if (userData?.username && userData?._id && userData?.username !== 'guest' ){
             const getPostsData = {
                 size:   parseInt(router.query.size) ||  30,
                 pageNo: parseInt(router.query.page) || 1,
                 postType: router.query.type || 'all',
                 fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration','postType','price' ],
                 keyword: router.query.keyword || '',
-                author: contextData.userData._id,
+                author: userData._id,
                 actor: router.query.actor || 'all',
                 status: router.query.status|| 'published',
                 tag: router.query.tag || 'all',

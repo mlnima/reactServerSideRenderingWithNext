@@ -23,6 +23,7 @@ const initialState = {
     }
 }
 
+// @ts-ignore
 export const userReducer = (state: UserState  = initialState,action: {type:string,payload:any})=>{
     switch (action.type){
         case  types.SET_USER_PAGE_DATA:
@@ -113,24 +114,6 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     calling:action.payload,
                 }
             }
-        // case  types.SET_RECEIVING_CALL_STATUS:
-        //     return {
-        //         ...state,
-        //         callData: {
-        //             ...state.callData,
-        //             receivingCall:action.payload,
-        //         }
-        //     }
-        // case types.SET_CALLER_DATA:
-        //     return {
-        //         ...state,
-        //         callData: {
-        //             ...state.callData,
-        //             ...action.payload
-        //         }
-        //     }
-
-
         case  types.INCOMING_CALL:
             return {
                 ...state,

@@ -3,7 +3,7 @@ import SaveDesignChangesBtn from "../SaveDesignChangesBtn";
 import dynamic from "next/dynamic";
 const Editor = dynamic(()=>import('@monaco-editor/react'),{ssr:false})
 import styled from "styled-components";
-import {useSelector} from "react-redux";
+import { useSelector} from "react-redux";
 
 const StyleSectionStyledDiv = styled.div`
   width: 100%;
@@ -19,6 +19,7 @@ const StyleSectionStyledDiv = styled.div`
 `
 const StyleSection = props => {
     const design = useSelector(state => state.settings.design)
+
     const [value, setValue] = useState('')
 
     useEffect(() => {

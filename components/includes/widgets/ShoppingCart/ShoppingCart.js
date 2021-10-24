@@ -1,10 +1,10 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import Link from "next/link";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faShoppingCart} from "@fortawesome/free-solid-svg-icons";
-import {AppContext} from "../../../../context/AppContext";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+
 let StyledA = styled.a`
   position: relative;
   padding:  0 3px;
@@ -33,7 +33,6 @@ let StyledA = styled.a`
 `
 const ShoppingCart = props => {
     const router = useRouter()
-    const contextData = useContext(AppContext);
 
     return (
         <Link
@@ -42,7 +41,7 @@ const ShoppingCart = props => {
         >
             <StyledA className='shopping-card-button'>
                 <FontAwesomeIcon style={{width:'20px',height:'20px'}}  icon={faShoppingCart} className='shopping-card-logo svg-logo-medium'/>
-                <p className='shopping-card-number'>{contextData.checkOutData.items.length}</p>
+                {/*<p className='shopping-card-number'>{contextData.checkOutData.items.length}</p>*/}
             </StyledA>
         </Link>
     );

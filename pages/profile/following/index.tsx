@@ -1,40 +1,34 @@
-import React, {useEffect, useState, useContext} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import React, {useEffect, useState} from 'react';
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
 import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariables";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 // @ts-ignore
 import _ from "lodash";
-import {getSignedInUserData} from "../../../_variables/ajaxAuthVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {ClientPagesTypes} from "../../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../../store/store";
+import {useDispatch, useSelector} from "react-redux";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {getSpecificUserData} from "../../../store/actions/userActions";
 const Following = (props:ClientPagesTypes) => {
-    const contextData = useContext(AppContext);
+    const userData = useSelector((state : StoreTypes) => state?.user?.userData)
+    const dispatch = useDispatch()
     const [following, setFollowing] = useState([]);
 
     useEffect(() => {
-        getSignedInUserData(['following']).then(res => {
-            contextData.dispatchUserData({
-                ...contextData.userData,
-                // @ts-ignore
-                ...res.data.userData
-            });
-        }).catch(err => {
-            console.log(err);
-        })
+        dispatch(getSpecificUserData(['following']))
     }, []);
 
 
     useEffect(() => {
-        if (contextData?.userData?.following?.length >0){
-            getMultipleUserDataById(contextData?.userData?.following).then(res=>{
+        // @ts-ignore
+        if (userData?.following?.length >0){
+            getMultipleUserDataById(userData?.following).then(res=>{
                 // @ts-ignore
                 setFollowing(res?.data?.users || [])
             })
         }
-
-    }, [contextData.userData.following]);
+    }, [userData?.following]);
 
     const renderFollowing = following.map((user,index)=>{
         return(

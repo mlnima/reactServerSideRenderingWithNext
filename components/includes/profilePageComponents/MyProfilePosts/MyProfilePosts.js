@@ -1,10 +1,11 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React, { useEffect, useState} from 'react';
 import withRouter from 'next/dist/client/with-router'
-import { AppContext } from '../../../../context/AppContext'
 import { getPosts } from '../../../../_variables/ajaxPostsVariables'
 import Posts from '../../Posts/Posts'
+import {useSelector} from "react-redux";
 const MyProfilePosts = props => {
-    const contextData = useContext(AppContext);
+    const userData = useSelector(state => state?.user.userData)
+
     const [ state, setState ] = useState({
         posts:[],
         totalCount:0
@@ -18,7 +19,7 @@ const MyProfilePosts = props => {
                     postType: props.router.query.type || 'all',
                     fields: [ 'title', 'mainThumbnail', 'quality', 'likes', 'disLikes', 'views', 'duration','postType','price' ],
                     keyword: props.router.query.keyword || '',
-                    author: contextData.userData._id || 'all',
+                    author: userData._id || 'all',
                     actor: props.router.query.actor || 'all',
                     status: props.router.query.status|| 'published',
                     tag: props.router.query.tag || 'all',

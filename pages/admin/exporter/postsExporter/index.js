@@ -1,13 +1,10 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
+import React from 'react';
 import {exportPosts} from '../../../../_variables/ajaxPostsVariables'
-import { AppContext } from '../../../../context/AppContext'
 import {useDispatch} from "react-redux";
 import {setLoading} from "../../../../store/actions/globalStateActions";
 
 const postsExporter = props => {
     const dispatch = useDispatch()
-    const contextData = useContext(AppContext);
-
 
     const onExportPostsHandler = ()=>{
         dispatch(setLoading(true))

@@ -1,120 +1,120 @@
-@import "../../../../styles/buttons";
-@import "../../../../styles/colors";
-@import "../../../../styles/mixIns";
-
-.postControlOptions {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-
-  padding: 20px 0;
-  max-width: 300px;
-
-  a, button {
-    @include buttonLikeLink;
-    font-size: small;
-    border: none;
-    //padding:0;
-
-  }
-}
-
-.BodyTable {
-
-
-  .BodyTableItemCheckBox {
-    //transform: scale(1.5);
-  }
-
-  .BodyTableItems {
-    display: grid;
-
-    .tagCategoriesActorsPreview {
-      max-width: 100%;
-      overflow: hidden;
-      white-space: pre-wrap;
-      text-overflow: inherit;
-
-      span {
-        color: $linkBlueColor;
-        padding: 2px;
-      }
-    }
-
-    .postColumn {
-      padding: 5px;
-      background-color: $AdminBackground50;
-      @include postsTableGridMobile;
-      align-items: center;
-      margin: 10px 0;
-      font-size: x-small;
-      //@include contentBorder;
-      .noMobile {
-        display: none;
-      }
-
-      img {
-        width: 170px;
-      }
-
-      .tagPreview {
-
-        grid-gap: 1px;
-
-        .tagPreviewItem {
-          //@include tagActor;
-        }
-      }
-
-      .actorsPreview {
-        .actorsPreviewItem {
-          //@include tagActor;
-        }
-      }
-
-      p {
-        text-align: left;
-      }
-
-      &:hover {
-        background-color: $AdminBackground50;
-      }
-
-      .author {
-        font-size: x-small;
-      }
-
-    }
-
-  }
-
-  .author {
-    margin: 0 0 0 5px;
-    //margin: auto;
-    //display: flex;
-    //justify-content: center;
-    //border: 1px black solid;
-  }
-
-}
-
-@media only screen and (min-width: 768px) {
-  .BodyTable {
-    //&:nth-child(even) {
-    //  background-color: $AdminColor20;
-    //  color: white;
-    //}
-    .BodyTableItems {
-      .postColumn {
-
-        @include postsTableGridDesktop;
-
-        .noMobile {
-          display: initial;
-        }
-      }
-
-    }
-  }
-
-}
+//@import "../../../../styles/buttons";
+//@import "../../../../styles/colors";
+//@import "../../../../styles/mixIns";
+//
+//.postControlOptions {
+//  display: flex;
+//  justify-content: flex-start;
+//  align-items: center;
+//
+//  padding: 20px 0;
+//  max-width: 300px;
+//
+//  a, button {
+//    @include buttonLikeLink;
+//    font-size: small;
+//    border: none;
+//    //padding:0;
+//
+//  }
+//}
+//
+//.BodyTable {
+//
+//
+//  .BodyTableItemCheckBox {
+//    //transform: scale(1.5);
+//  }
+//
+//  .BodyTableItems {
+//    display: grid;
+//
+//    .tagCategoriesActorsPreview {
+//      max-width: 100%;
+//      overflow: hidden;
+//      white-space: pre-wrap;
+//      text-overflow: inherit;
+//
+//      span {
+//        color: $linkBlueColor;
+//        padding: 2px;
+//      }
+//    }
+//
+//    .postColumn {
+//      padding: 5px;
+//      background-color: $AdminBackground50;
+//      @include postsTableGridMobile;
+//      align-items: center;
+//      margin: 10px 0;
+//      font-size: x-small;
+//      //@include contentBorder;
+//      .noMobile {
+//        display: none;
+//      }
+//
+//      img {
+//        width: 170px;
+//      }
+//
+//      .tagPreview {
+//
+//        grid-gap: 1px;
+//
+//        .tagPreviewItem {
+//          //@include tagActor;
+//        }
+//      }
+//
+//      .actorsPreview {
+//        .actorsPreviewItem {
+//          //@include tagActor;
+//        }
+//      }
+//
+//      p {
+//        text-align: left;
+//      }
+//
+//      &:hover {
+//        background-color: $AdminBackground50;
+//      }
+//
+//      .author {
+//        font-size: x-small;
+//      }
+//
+//    }
+//
+//  }
+//
+//  .author {
+//    margin: 0 0 0 5px;
+//    //margin: auto;
+//    //display: flex;
+//    //justify-content: center;
+//    //border: 1px black solid;
+//  }
+//
+//}
+//
+//@media only screen and (min-width: 768px) {
+//  .BodyTable {
+//    //&:nth-child(even) {
+//    //  background-color: $AdminColor20;
+//    //  color: white;
+//    //}
+//    .BodyTableItems {
+//      .postColumn {
+//
+//        @include postsTableGridDesktop;
+//
+//        .noMobile {
+//          display: initial;
+//        }
+//      }
+//
+//    }
+//  }
+//
+//}

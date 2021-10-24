@@ -1,6 +1,6 @@
 import React, {  useContext } from 'react';
 import { clickPathGenerator } from '../../../../_variables/_variables';
-import { AppContext } from '../../../../context/AppContext'
+import { AppContext } from '../../../../trash/context/AppContext'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import withRouter from 'next/dist/client/with-router'
 import { fileTypeDetector } from '../../../../_variables/_variables'

@@ -1,7 +1,6 @@
-import {useContext,useState} from "react";
+import {useState} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
-import {AppContext} from "../../../../context/AppContext";
 import styled from "styled-components";
 import {setLoading} from "../../../../store/actions/globalStateActions";
 import {useDispatch} from "react-redux";
@@ -20,7 +19,7 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
 `
 const AlphabeticalNumericalRangeLinksWidget = () => {
     const dispatch = useDispatch()
-    const contextData = useContext(AppContext);
+
     const router = useRouter()
     const activePage = router.query.startWith
     const [range,setRange] = useState(()=>{

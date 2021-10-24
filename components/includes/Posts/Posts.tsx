@@ -1,7 +1,6 @@
-import React, {useContext} from 'react';
+import React from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-import {AppContext} from "../../../context/AppContext";
 import {likeValueCalculator} from "../../../_variables/_variables";
 import _shortNumber from '../../../_variables/clientVariables/_shortNumber'
 import styled from "styled-components";
@@ -10,7 +9,6 @@ import {setLoading} from "../../../store/actions/globalStateActions";
 import PromotionCardListSmall from "../PostCard/PromotionTypeCard/PromotionCardListSmall";
 import {settingsPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
-
 const PostElement = dynamic(() => import('../PostCard/PostElement'))
 const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeCard'))
 const PromotionTypeCard = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionTypeCard'))
@@ -43,8 +41,6 @@ interface PostsComponentTypes {
 const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentTypes) => {
     const settings = useSelector((state: settingsPropTypes) => state.settings);
     const elementSize = postElementSize ? postElementSize : useSelector((state: settingsPropTypes) => state.settings?.design?.postElementSize);
-
-    const contextData = useContext(AppContext);
     const dispatch = useDispatch()
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';

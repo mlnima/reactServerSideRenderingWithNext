@@ -1,6 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import AdminLayout from "../../../../components/layouts/AdminLayout";
-import {AppContext} from "../../../../context/AppContext";
+import React from 'react';
 import {getAbsolutePath} from "../../../../_variables/_variables";
 import {getSetting} from "../../../../_variables/ajaxVariables";
 import EcommerceSettingsInputSection from "../../../../components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection";
@@ -22,11 +20,11 @@ let StyledDiv = styled.div`
   }
 `
 const eCommerceSettings = props => {
-    const contextData = useContext(AppContext);
 
-    useEffect(() => {
-        props.eCommerce ? contextData.dispatchECommerceSettings(props.eCommerce) : null
-    }, []);
+
+    // useEffect(() => {
+    //     props.eCommerce ? contextData.dispatchECommerceSettings(props.eCommerce) : null
+    // }, []);
 
 
     return (

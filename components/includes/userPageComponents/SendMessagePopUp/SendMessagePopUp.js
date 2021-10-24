@@ -1,12 +1,12 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {AppContext} from "../../../../context/AppContext";
+import React, {useEffect, useState} from 'react';
 import SendMessagePopUpHeader from "./SendMessagePopUpHeader";
 import {sendMessage} from "../../../../_variables/_userSocialAjaxVariables";
+import {useSelector} from "react-redux";
 
 const SendMessagePopUp = props => {
-    const contextData = useContext(AppContext);
+    const userData = useSelector(state => state?.user.userData)
     const [state, setState] = useState({
-        sender: contextData.userData._id,
+        sender: userData._id,
         receiver: props.receiverId,
         message: ''
     });

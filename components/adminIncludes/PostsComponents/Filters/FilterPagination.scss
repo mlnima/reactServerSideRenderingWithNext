@@ -1,79 +1,79 @@
-@import "../../../../styles/buttons";
-@import "../../../../styles/colors";
-
-.FilterPagination {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  max-width: 280px;
-  margin: auto;
-
-  .pagesNavigation {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-
-    .totalPosts {
-      font-size: x-small;
-    }
-
-    .pageNumberInput {
-      text-align: center;
-      font-size: x-small;
-    }
-
-
-  }
-
-  .pagesNavigationMoreAction {
-    button {
-      @include AdminLightBtn;
-
-      span {
-        font-size: small;
-      }
-    }
-
-  }
-
-  input {
-    background-color: $light100 !important;
-    max-width: 50px;
-  }
-
-  * {
-    margin: 0 3px;
-  }
-
-  .totalCount {
-    //width: 50px;
-  }
-
-  font-size: 13px;
-  //@include AdminLightBtn;
-  //@include AdminLightBtn;
-
-  .actionBtn {
-    i {
-      font-size: 8px;
-    }
-  }
-
-  input[type=number]::-webkit-inner-spin-button,
-  input[type=number]::-webkit-outer-spin-button {
-    -webkit-appearance: none;
-    margin: 0;
-  }
-
-}
-
-@media only screen and (min-width: 768px) {
-  .FilterPagination {
-    //display: grid;
-    //grid-template-columns: 1fr 1fr;
-    //align-items: center;
-    //justify-content: center;
-    //max-width: 100%;
-  }
-}
+//@import "../../../../styles/buttons";
+//@import "../../../../styles/colors";
+//
+//.FilterPagination {
+//  display: flex;
+//  flex-direction: column;
+//  align-items: center;
+//  justify-content: center;
+//  max-width: 280px;
+//  margin: auto;
+//
+//  .pagesNavigation {
+//    display: flex;
+//    justify-content: center;
+//    align-items: center;
+//
+//    .totalPosts {
+//      font-size: x-small;
+//    }
+//
+//    .pageNumberInput {
+//      text-align: center;
+//      font-size: x-small;
+//    }
+//
+//
+//  }
+//
+//  .pagesNavigationMoreAction {
+//    button {
+//      @include AdminLightBtn;
+//
+//      span {
+//        font-size: small;
+//      }
+//    }
+//
+//  }
+//
+//  input {
+//    background-color: $light100 !important;
+//    max-width: 50px;
+//  }
+//
+//  * {
+//    margin: 0 3px;
+//  }
+//
+//  .totalCount {
+//    //width: 50px;
+//  }
+//
+//  font-size: 13px;
+//  //@include AdminLightBtn;
+//  //@include AdminLightBtn;
+//
+//  .actionBtn {
+//    i {
+//      font-size: 8px;
+//    }
+//  }
+//
+//  input[type=number]::-webkit-inner-spin-button,
+//  input[type=number]::-webkit-outer-spin-button {
+//    -webkit-appearance: none;
+//    margin: 0;
+//  }
+//
+//}
+//
+//@media only screen and (min-width: 768px) {
+//  .FilterPagination {
+//    //display: grid;
+//    //grid-template-columns: 1fr 1fr;
+//    //align-items: center;
+//    //justify-content: center;
+//    //max-width: 100%;
+//  }
+//}

@@ -1,30 +1,29 @@
-import WidgetHeader from "./WidgetHeader/WidgetHeader";
-//import WidgetFooter from "./WidgetFooter/WidgetFooter";
-import WidgetText from "./WidgetText/WidgetText";
-import styled from "styled-components";
 import React from "react";
+import dynamic from "next/dynamic";
+const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
+const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
+import styled from "styled-components";
 
-let StyledSection = styled.section`
-${props => props.customStyles}
+//import WidgetFooter from "./WidgetFooter/WidgetFooter";
+
+let WidgetStyledSection = styled.section`
+  ${props => props?.customStyles}
 `
-
-
 
 const Widget = props => {
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
     return (
-        <StyledSection  className={'widget ' + (props.data?.extraClassName ?? '')}  {...idAttribute} customStyles={props.data?.customStyles || ''}>
-            <WidgetHeader {...props.data}/>
-            <WidgetText {...props.data} id={props._id}/>
+        <WidgetStyledSection className={'widget ' + (props.data?.extraClassName ?? '')}  {...idAttribute} customStyles={props.data?.customStyles || ''}>
+            {props.data.title ? <WidgetHeader {...props.data}/> : null}
+            {props.data.text ? <WidgetText {...props.data} id={props._id}/> : null}
             {props.widgetToRender ?
                 <props.widgetToRender
-                {...props.data}
-                widgetId={props.widgetId}
-                widget={true}
-                viewType={props.viewType}
-            /> : null}
-            {/*<WidgetFooter  {...props.data}/>*/}
-        </StyledSection>
+                    {...props.data}
+                    widgetId={props.widgetId}
+                    widget={true}
+                    viewType={props.viewType}
+                /> : null}
+        </WidgetStyledSection>
     );
 };
 export default Widget;

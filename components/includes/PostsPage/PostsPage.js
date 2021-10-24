@@ -1,5 +1,5 @@
 import React, {useEffect, useContext, useMemo} from 'react';
-import {AppContext} from "../../../context/AppContext";
+import {AppContext} from "../../../trash/context/AppContext";
 import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";

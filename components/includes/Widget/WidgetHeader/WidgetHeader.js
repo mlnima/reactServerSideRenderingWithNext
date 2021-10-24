@@ -1,8 +1,7 @@
-import {useContext} from 'react';
 import Link from 'next/link'
-import {AppContext} from '../../../../context/AppContext';
 import {useRouter} from "next/router";
 import styled from "styled-components";
+
 const WidgetHeaderStyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
@@ -23,18 +22,17 @@ const WidgetHeaderStyledDiv = styled.div`
     color: var( --widget-header-footer-text-color,#fff);
   }
 `
+
 const WidgetHeader = props => {
-    const contextData = useContext(AppContext);
     const router = useRouter()
-    const title = props.translations ? props.translations[router.locale || contextData.state.activeLanguage] ? props.translations[router.locale ||contextData.state.activeLanguage].title || props.title : props.title : props.title
-    if (props.title) {
+    const title = props.translations ? props.translations[router.locale] ? props.translations[router.locale].title || props.title : props.title : props.title
         return (
             <WidgetHeaderStyledDiv className='widget-Header' >
                 <h2 className='widget-header-title'>{title}</h2>
                 {props.redirectLink && props.redirectToTitle && !props.footerLink ? <Link href={props.redirectLink}><a aria-label={props.redirectToTitle}>{props.redirectToTitle}</a></Link>:null }
             </WidgetHeaderStyledDiv>
         );
-    } else return null
+
 
 };
 

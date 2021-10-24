@@ -179,22 +179,6 @@ export const getUserPageData = (username, _id, fields) => async dispatch => {
     })
 }
 
-// export const setMyVideo = () => async dispatch => {
-//     try {
-//         await navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(async myStreamData => {
-//             dispatch({
-//                 type: types.SET_MY_STREAM,
-//                 payload: myStreamData
-//             })
-//         })
-//     } catch (err) {
-//         dispatch({
-//             type: types.SET_ALERT,
-//             payload: {message: 'Can Not Access The Camera', type: 'error', err}
-//         })
-//     }
-// }
-
 export const setPartnerVideo = (partnerVideo) => async dispatch => {
     try {
         dispatch({
@@ -206,21 +190,6 @@ export const setPartnerVideo = (partnerVideo) => async dispatch => {
 
     }
 }
-// export const setCallingStatus = (status) => async dispatch => {
-//     dispatch({
-//         type: types.SET_CALLING_STATUS,
-//         payload: status
-//     })
-// }
-// export const setCallAccepted = (status) => async dispatch => {
-//     dispatch({
-//         type: types.SET_CALL_ACCEPTED,
-//         payload: {
-//             callAccepted: true,
-//             calling: false,
-//         }
-//     })
-// }
 
 export const endCall = () => async dispatch => {
     dispatch({
@@ -228,20 +197,6 @@ export const endCall = () => async dispatch => {
         payload: true
     })
 }
-//
-// export const setCallerData = (callerData) => dispatch => {
-//     dispatch({
-//         type: types.SET_CALLER_DATA,
-//         payload: callerData
-//     })
-// }
-
-// export const setReceivingCall = (status) => dispatch => {
-//     dispatch({
-//         type: types.SET_RECEIVING_CALL_STATUS,
-//         payload: status
-//     })
-// }
 
 export const incomingCall = (data) => async dispatch => {
     try {
@@ -367,3 +322,32 @@ export const outgoingCall = (conversation,mySocketId,callerName,router ) => asyn
         })
     }
 }
+
+
+export const userCreateOrder = (data)=> async dispatch =>{
+    if (data.type === 'payPal') {
+        const body = {
+            data
+        }
+        axios.post('/api/v1/orders/create/payPal', body).then(res=>{
+            dispatch({
+                type: types.SET_ALERT,
+                payload: {message: res.data.message, type: 'success'}
+            })
+        }).catch(()=>{
+            dispatch({
+                type: types.SET_ALERT,
+                payload: {message: 'Something Went Wrong', type: 'error'}
+            })
+        })
+    }
+}
+
+
+//ecommerce
+
+export const addItemToBasket = (data)=> async dispatch =>{
+
+}
+
+

@@ -1,12 +1,13 @@
-import React, {useEffect, useState, useContext} from 'react';
+import React, {useEffect, useState} from 'react';
 import {getUserData, updateUserData, newAPIKey} from '../../../_variables/ajaxAuthVariables'
-import {AppContext} from '../../../context/AppContext'
 import {resetPassword} from '../../../_variables/ajaxAuthVariables'
 import {useRouter} from "next/router";
 import deleteUser from "../../../_variables/adminAjaxVariables/adminAjaxUsersVariables/deleteUser";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../../../store/actions/globalStateActions";
 
 const user = props => {
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
     const router = useRouter()
 
     const [userData, setUserData] = useState({});
@@ -46,21 +47,12 @@ const user = props => {
     }
 
     const onSaveHandler = () => {
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        })
+        dispatch(setLoading(true))
         updateUserData(userData).then(() => {
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
+            dispatch(setLoading(false))
         }).catch(err => {
             console.log(err)
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            })
+            dispatch(setLoading(false))
         })
     }
 

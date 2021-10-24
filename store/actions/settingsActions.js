@@ -1,14 +1,12 @@
 import * as types from "../types";
 import axios from "axios";
 
-
 export const setSettings = (setting) => dispatch=>{
     dispatch({
         type:types.SET_SETTINGS,
         payload: setting
     })
 }
-
 
 export const updateSetting = (type, data) => async dispatch=>{
     const body = {

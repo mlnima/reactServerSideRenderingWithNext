@@ -1,21 +1,16 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {AppContext} from '../../../../context/AppContext'
+import React, {useEffect, useState,useRef} from 'react';
 import {userImageUpload} from '../../../../_variables/ajaxVariables'
-import {updateUserData} from '../../../../_variables/ajaxAuthVariables'
 import ProfileImage from '../ProfileImage/ProfileImage'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {autoUserLogin} from "../../../../store/actions/userActions";
 import {useDispatch, useSelector} from "react-redux";
+import {setLoading} from "../../../../store/actions/globalStateActions";
 
 const ProfileCoverImage = props => {
-    const contextData = useContext(AppContext);
-    const uploadInputElement = useRef(null)
     const dispatch = useDispatch()
+    const uploadInputElement = useRef(null)
     const userData = useSelector(state => state.user.userData)
-
-
-
 
     const [state, setState] = useState({
         style: {
@@ -42,50 +37,19 @@ const ProfileCoverImage = props => {
         })
     }, [userData.coverImage]);
 
-    // useEffect(() => {
-
-    // }, [contextData.userData]);
 
     const onUploadHandler = e => {
         const filesData = new FormData()
         filesData.append('token', localStorage.wt)
         filesData.append('profileImage', e.target.files[0], 'cover')
         filesData.append('type', 'cover')
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        })
+        dispatch(setLoading(true))
         userImageUpload(filesData).then(res => {
-
             dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'coverImage']))
-            // const newUserData = {...contextData.userData, coverImage: res.data.path.replace('./', '/')}
-            //
-            // contextData.dispatchUserData(newUserData)
-            //
-            // updateUserData(newUserData).then(() => {
-            //     contextData.functions.getAndSetUserInfo()
-            //     contextData.dispatchState({
-            //         ...contextData.state,
-            //         loading: false
-            //     })
-            //
-            // }).catch(err => {
-            //     console.log(err)
-            //     contextData.dispatchState({
-            //         ...contextData.state,
-            //         loading: false
-            //     })
-            // })
-
         }).catch(err => {
             console.log(err)
-
         })
     }
-
-    // useEffect(() => {
-
-    // }, [ contextData.userData.coverImage ]);
 
     return (
         <div className='profile-cover-image' style={state.style}>

@@ -1,16 +1,16 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useRef} from 'react';
 import {Swiper, SwiperSlide} from 'swiper/react';
-import SwiperCore, {Navigation, Pagination, Controller, Scrollbar, Keyboard, Autoplay, EffectCube, EffectCoverflow, EffectFlip, EffectFade, Lazy, Parallax} from 'swiper'
+import {useRouter} from "next/router";
 import Link from "next/link";
-import {AppContext} from "../../../../context/AppContext";
 import styled from "styled-components";
+import SwiperCore, {Navigation, Pagination, Controller, Scrollbar, Keyboard, Autoplay, EffectCube, EffectCoverflow, EffectFlip, EffectFade, Lazy, Parallax} from 'swiper'
 import PostSwiperPostCardImage from "./PostSwiperPostCardImage";
-
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/controller';
 import 'swiper/css/effect-cards';
 import 'swiper/css/scrollbar';
+
 
 
 SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controller, EffectCube, EffectCoverflow, Lazy, EffectFlip, EffectFade, Parallax]);
@@ -60,9 +60,9 @@ let PostSwiperStyledDiv = styled.div`
 `
 
 const PostSwiper = props => {
+    const router = useRouter()
     const swiperContainer = useRef(null)
     const swiperParent = useRef(null)
-    const contextData = useContext(AppContext);
     const [postsToRender, setPostsToRender] = useState(() => props.posts ? props.posts : [])
     const [controlledSwiper, setControlledSwiper] = useState(null)
 
@@ -81,11 +81,11 @@ const PostSwiper = props => {
         return (
             <SwiperSlide tag="div" key={index} virtualIndex={index}>
                 <Link href={{pathname: '/post', query: {id: post._id}}}
-                      as={contextData.state.activeLanguage !== 'default' ? `/post/${post.translations ? post.translations[contextData.state.activeLanguage] ? post.translations[contextData.state.activeLanguage].title || post.title : post.title : post.title}?id=${post._id}&lang=${contextData.state.activeLanguage}` : `/post/${post.title}?id=${post._id}`}>
+                      as={router.locale !== 'default' ? `/post/${post.translations ? post.translations[router.locale] ? post.translations[router.locale].title || post.title : post.title : post.title}?id=${post._id}&lang=${router.locale}` : `/post/${post.title}?id=${post._id}`}>
                     <a>
                         <PostSwiperPostCardImage post={post} removePostOnImageError={removePostOnImageError}/>
                         <h2 style={{textAlign: 'center'}} className='post-slider-item-title'>
-                            {post?.translations?.[contextData.state.activeLanguage]?.title || post.title}
+                            {post?.translations?.[router.locale]?.title || post.title}
                         </h2>
                     </a>
                 </Link>

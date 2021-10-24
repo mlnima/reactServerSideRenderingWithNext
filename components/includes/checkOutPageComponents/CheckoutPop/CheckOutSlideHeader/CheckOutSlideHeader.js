@@ -1,7 +1,6 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {AppContext} from "../../../../../context/AppContext";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
 let StyledDiv = styled.div`
   display: flex;
@@ -19,12 +18,12 @@ let StyledDiv = styled.div`
 `
 
 const CheckOutSlideHeader = props => {
-    const contextData = useContext(AppContext);
+
     const onCloseCheckoutSlideHandler = ()=>{
-        contextData.dispatchState({
-            ...contextData.state,
-            checkoutSlideEnable:false
-        })
+        // contextData.dispatchState({
+        //     ...contextData.state,
+        //     checkoutSlideEnable:false
+        // })
     }
     return (
         <StyledDiv className='checkout-slide-header'>

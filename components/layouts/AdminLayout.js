@@ -1,12 +1,10 @@
-import React, {useContext, useRef, useEffect} from 'react';
+import React, {useRef, useEffect} from 'react';
 import dynamic from "next/dynamic";
 import Head from "next/head";
 import TopBar from "../adminIncludes/TopBar/AdminTopBar";
 import SideBar from "../adminIncludes/SideBar/SideBar";
 import {useDispatch, useSelector} from 'react-redux';
 import {autoUserLogin} from "../../store/actions/userActions";
-import {AppContext} from "../../context/AppContext";
-import {getSetting} from '../../_variables/ajaxVariables'
 import AdminPanelGlobalStyles from "../global/Styles/AdminPanelGlobalStyles";
 import Link from "next/link";
 import AdminDataSetter from "../global/AdminDataSetter";

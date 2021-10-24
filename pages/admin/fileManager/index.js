@@ -1,15 +1,16 @@
 import React, { useEffect, useState, useContext, useRef } from 'react';
-import AdminLayout from '../../../components/layouts/AdminLayout'
 import FileManagerControl from '../../../components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl'
 import FileManagerArea from '../../../components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea';
 import { readPath } from '../../../_variables/_ajaxFilesVariables'
-import { AppContext } from '../../../context/AppContext'
 import withRouter from 'next/dist/client/with-router'
 import UploadedPopView from '../../../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
 import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
+import {useDispatch} from "react-redux";
+import {setLoading} from "../../../store/actions/globalStateActions";
 ///static/uploads/image/2020/4/706185_561483320532764_1215505165_o.jpg
 const fileManager = props => {
-    const contextData = useContext(AppContext);
+    const dispatch = useDispatch()
+
     const [ state, setState ] = useState({
         path: '.',
         prevPath: '.',
@@ -37,20 +38,14 @@ const fileManager = props => {
     }, [ state.path,state.lastUpdate ]);
 
     const setData = () => {
-        contextData.dispatchState({
-            ...contextData.state,
-            loading: true
-        });
+        dispatch(setLoading(true))
         readPath(state.path).then(res => {
             if (res.data.type === 'dir') {
                 setState({
                     ...state,
                     files: res.data.data,
                 })
-                contextData.dispatchState({
-                    ...contextData.state,
-                    loading: false
-                });
+                dispatch(setLoading(false))
             } else if (res.data.type === 'file') {
 
                 setState({
@@ -59,25 +54,16 @@ const fileManager = props => {
                     path:state.prevPath,
                     file:res.data.data
                 })
-                contextData.dispatchState({
-                    ...contextData.state,
-                    loading: false
-                });
+                dispatch(setLoading(false))
             } else {
                 setState({
                     ...state,
                     error: true
                 })
-                contextData.dispatchState({
-                    ...contextData.state,
-                    loading: false
-                });
+                dispatch(setLoading(false))
             }
         }).catch(err => {
-            contextData.dispatchState({
-                ...contextData.state,
-                loading: false
-            });
+            dispatch(setLoading(false))
         })
     }
 

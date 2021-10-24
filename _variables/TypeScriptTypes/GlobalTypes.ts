@@ -53,8 +53,10 @@ export interface IdentitySettings {
 export interface User {
     _id?: string;
     username?: string;
-    role?: string,
-    profileImage?: string
+    role?: string;
+    profileImage?: string;
+    followers:object[];
+    following:object[];
 }
 
 export interface UserState {
@@ -82,6 +84,7 @@ export interface UserState {
 
 
 export interface settingsPropTypes {
+    user: UserState;
     settings: {
         design: DesignSettings,
         identity: IdentitySettings
