@@ -9,13 +9,13 @@ let StyledNavigation = styled.nav`
   height: 56px;
   display: flex;
   align-items: center;
-  
   .navigation-content{
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
     align-items: center;
     margin: 0 5px;
+    padding: 0 5px;
     width: 100%;
   }
   @media only screen and (min-width: 768px){

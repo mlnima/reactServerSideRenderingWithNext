@@ -247,6 +247,15 @@ let GlobalStyles = createGlobalStyle`
     to {
       left: 0;
     }
+  }  
+  
+  @keyframes userMenuSlide {
+    from {
+      right: -100%;
+    }
+    to {
+      right: 0;
+    }
   }
 
   @keyframes searchbarFall {

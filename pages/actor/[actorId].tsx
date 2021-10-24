@@ -1,7 +1,6 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getPosts} from "../../_variables/ajaxPostsVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -14,6 +13,7 @@ import {wrapper} from "../../store/store";
 import {useSelector} from "react-redux";
 import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {SET_POSTS_DATA} from "../../store/types";
+import ActorBio from '../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
@@ -42,7 +42,7 @@ const actorPage = (props: ClientPagesTypes) => {
 
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.actorPageStyle || ''}>
-            {actor ? <PostsPageInfo titleToRender={actor.name}/> : null}
+            <ActorBio/>
             {actor ? <MetaDataToSiteHead title={actor.name} description={actor.description} url={`${router.asPath}`} image={actor.imageUrl}/> : null}
             <WidgetsRenderer
                 position='actorPageTop'

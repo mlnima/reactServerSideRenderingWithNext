@@ -15,7 +15,7 @@ export const getCustomPages = ( ) => async dispatch => {
     })
 }
 
-export const clearCaches = ( ) => async dispatch => {
+export const clearCaches = ( router ) => async dispatch => {
     dispatch({
         type:types.LOADING,
         payload:true
@@ -29,6 +29,7 @@ export const clearCaches = ( ) => async dispatch => {
             type: types.SET_ALERT,
             payload: {message: res.data.message, type: 'success'}
         })
+        setTimeout(()=>router.reload(),1000)
     }).catch(err=>{
         dispatch({
             type:types.LOADING,

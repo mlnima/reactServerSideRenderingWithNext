@@ -25,21 +25,23 @@ const MenuWidgetSubItemStyledLi = styled.li`
 
 const MenuWidgetStyledLi = styled.li`
   list-style-type: none;
-  width: 100%;
-  font-size: 1rem;
+  width: 85%;
+  font-size: 12px;
   display: flex;
   justify-content: space-between;
   align-items: center;
   position: relative;
-  margin: ${props => !props.menuItem.parent ? '0 3px' : '0'};
-  //&:hover {
-  //  filter: invert(70%);
-  //}
+  background: linear-gradient( 180deg,rgba(41,41,41,.5) .12%,rgba(30,30,30,.5) 100%);
+  margin:  5px;
+  
   .menu-widget-item-link {
     color: var(--navigation-text-color, #ccc);
     text-decoration: none;
+    text-align: center;
     font-size: 14px;
-    
+    margin-right:  5px;
+    padding: 13px 5px ;
+    border-radius: 10px;
     &:active{
       filter: invert(70%);
     }
@@ -73,8 +75,13 @@ const MenuWidgetStyledLi = styled.li`
     height: initial;
     font-size: 1rem;
     width: ${props => !props.menuItem.parent ? (props.menuItem.subItems || []).length > 0 ? 'auto' : 'auto' : '50px '};
+    background: initial;
+    padding: 6px;
+    margin: 0;
     .menu-widget-item-link {
       height: initial;
+      padding: 0 ;
+      margin-left:  0;
     }
   }
 `

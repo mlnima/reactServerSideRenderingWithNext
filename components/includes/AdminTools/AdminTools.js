@@ -1,11 +1,12 @@
 import React, {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faCogs, faEraser, faTerminal, faUserShield} from "@fortawesome/free-solid-svg-icons";
+import {faCogs, faEraser, faUserShield} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
 import {useDispatch} from "react-redux";
 import {clearCaches} from "../../../store/actions/adminPanelGlobalStateActions";
+import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -43,6 +44,7 @@ let StyledDiv = styled.div`
 `
 const AdminTools = () => {
     const dispatch = useDispatch()
+    const router = useRouter()
     const [state, setState] = useState({
         open: false,
         console: false
@@ -66,7 +68,7 @@ const AdminTools = () => {
                             </a>
                         </Link>
                         <button className='admin-tools-item'
-                                rel="noreferrer" onClick={() => dispatch(clearCaches())}
+                                rel="noreferrer" onClick={() => dispatch(clearCaches(router))}
                         >
                             <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
                         </button>

@@ -20,7 +20,7 @@ const MenuWidgetStyledDiv = styled.div`
     top: 0;
     left: 0;
     bottom: 0;
-    width: 100%;
+    width: 90%;
     z-index: 1000;
     flex-direction: column;
     justify-content: flex-start;
@@ -31,8 +31,7 @@ const MenuWidgetStyledDiv = styled.div`
     position: fixed;
     ${props=> props.open ?`animation: navigationMobileSlide .3s linear alternate;`: `animation: none;` }
     display: ${props=> props.open ? 'flex' : 'none'};
-  
-
+    overflow-y: auto;
     .navigation-close-button {
       align-self: flex-end;
       display: flex;
@@ -43,23 +42,22 @@ const MenuWidgetStyledDiv = styled.div`
       width: 40px;
       height: 40px;
       color: var(--navigation-text-color, #ccc);
+      padding: 12px;
     }
   }
   .navigation-mobile-button {
     background-color: transparent;
     border: none;
     outline: none;
-    margin: 0;
+    margin: 8px;
     transition: all .5s linear;
     color: var(--navigation-text-color, #ccc);
     width: 24px;
     height: 24px;
-    padding: 0;
   }
   .navigation-mobile-button-open{
     padding: 0;
-    margin-top: 8px;
-    margin-bottom: 8px;
+    margin: 8px;
     svg{
       width: 24px;
       height: 24px;
@@ -80,6 +78,7 @@ const MenuWidgetStyledDiv = styled.div`
         padding: 0;
         margin: 0;
         height: 38px;
+        overflow-y: initial;
         .navigation-close-button {
           display: none;
         }

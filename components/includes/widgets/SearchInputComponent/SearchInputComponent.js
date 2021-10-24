@@ -9,12 +9,6 @@ const SearchInputComponentStyledForm = styled.form`
   width: clamp(100px, 200px, 400px);
   font-size: 1em;
   position: relative;
-  
-  .btn-primary {
-    position: absolute;
-    right: 0;
-  }
-
   .form-control-input {
     border: none;
   }

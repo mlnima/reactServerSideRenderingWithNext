@@ -15,6 +15,7 @@ let StyledDiv = styled.div`
     flex-wrap: wrap;
     align-items: center;
     margin: 0 5px;
+    padding: 0 5px;
     width: 100%;
   }
 

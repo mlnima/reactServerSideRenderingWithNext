@@ -5,6 +5,7 @@ import Link from "next/link";
 import {AppContext} from "../../../../context/AppContext";
 import styled from "styled-components";
 import PostSwiperPostCardImage from "./PostSwiperPostCardImage";
+
 import 'swiper/css';
 import 'swiper/css/autoplay';
 import 'swiper/css/controller';
@@ -16,10 +17,12 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controlle
 
 let PostSwiperStyledDiv = styled.div`
   margin: 10px auto;
-  width: calc(100vw) ;
+  width: calc(100vw);
+
   .swiper {
     height: ${props => (props?.cardWidth / 1.777) + 65}px;
-    width: 100%;
+    //width: 100%;
+
     .swiper-scrollbar {
       //margin-top: 50px ;
       height: 10px;
@@ -66,6 +69,7 @@ let PostSwiperStyledDiv = styled.div`
 
 const PostSwiper = props => {
     const swiperContainer = useRef(null)
+    const swiperParent = useRef(null)
     const contextData = useContext(AppContext);
     const [postsToRender, setPostsToRender] = useState(() => props.posts ? props.posts : [])
     const [controlledSwiper, setControlledSwiper] = useState(null)
@@ -97,10 +101,18 @@ const PostSwiper = props => {
         )
     })
 
+    useEffect(() => {
+        if (typeof window !== 'undefined'){
+            swiperContainer.current.style.maxWidth  = `${swiperParent.current.style.width - 50}px`
+        }
+
+    }, [props]);
+
 
     return (
-        <PostSwiperStyledDiv ref={swiperContainer} cardWidth={cardWidth}>
+        <PostSwiperStyledDiv ref={swiperParent} className='post-swiper-parent'  cardWidth={cardWidth} modules={[Controller]} controller={{ control: controlledSwiper }}>
             <Swiper
+                ref={swiperContainer}
                 //  thumbs={{swiper: thumbsSwiper}}
                 controller={{control: controlledSwiper}}
                 className='post-swiper'

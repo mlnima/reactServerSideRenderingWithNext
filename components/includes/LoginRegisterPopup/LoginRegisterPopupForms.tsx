@@ -20,6 +20,8 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
   color: var(--navigation-text-color, #ccc);
   position: relative;
   overflow-y: auto;
+  display: flex;
+  flex-direction: column;
 
   .form-header {
     width: 100%;
@@ -145,11 +147,11 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
     }
   }
 
-  @media only screen and (min-width: 768px) {
-
-
+  .btn-secondary{
+    justify-self: center;
+    align-self: center;
+    font-size: 12px;
   }
-
 `
 
 interface ResponseTypes {
@@ -257,7 +259,7 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
         <Draggable handle=".form-header">
             <LoginRegisterPopupFormsStyledDiv response={response} className='login-register-content'>
                 <div className='form-header'>
-                    <button onClick={() => dispatch(setLoginRegisterFormStatus(false))} className='close-form-button' title={props.t(`common:Close`)}>
+                    <button onClick={() => dispatch(setLoginRegisterFormStatus(false))} onTouchStart={() => dispatch(setLoginRegisterFormStatus(false))} className='close-form-button' title={props.t(`common:Close`)}>
                         <FontAwesomeIcon icon={faTimes}/>
                     </button>
                 </div>
@@ -317,8 +319,6 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                         !stateValidator.gender
                         }
                                 type='submit' className='login-register-form-button simple-button'>{props.t(`common:Register`)}</button>
-
-
                     </form> : globalState.loginRegisterFormPopup === 'login' ?
                         <form className='login-register-form' onSubmit={e => onLoginHandler(e)}>
                             <div className="login-register-form-fields">
@@ -342,7 +342,7 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                         dispatch(setLoginRegisterFormStatus('register'))
                     onrResetStateHandler()
                 }}
-                      className='login-register-switch-form-button simple-button'>
+                      className='btn btn-secondary'>
                       {globalState.loginRegisterFormPopup === 'register' ? props.t(`common:Do You Have An Account? Login Here`) : props.t(`common:Not A Member Yet? Register Here`)}
                 </span>
 
