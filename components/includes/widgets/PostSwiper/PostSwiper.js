@@ -18,32 +18,24 @@ SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controlle
 let PostSwiperStyledDiv = styled.div`
   margin: 10px auto;
   width: calc(100vw);
-
   .swiper {
     height: ${props => (props?.cardWidth / 1.777) + 65}px;
-    //width: 100%;
-
     .swiper-scrollbar {
-      //margin-top: 50px ;
       height: 10px;
       background-color: var(--post-element-text-color, #131314);
     }
-
     .swiper-wrapper {
       position: relative;
       margin: 0;
-
       .swiper-slide {
         background-color: var(--post-element-background-color, #131314);
         margin: 0 5px !important;
         width: ${props => props.cardWidth}px !important;
-
         a {
           img {
             width: ${props => props.cardWidth}px;
             object-fit: contain;
           }
-
           .post-slider-item-title {
             white-space: nowrap;
             overflow: hidden !important;

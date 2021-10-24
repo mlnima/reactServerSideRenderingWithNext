@@ -4,17 +4,24 @@ import LoggedInItemsForMenu from "./LoggedInItemsForMenu/LoggedInItemsForMenu";
 import {useSelector} from 'react-redux';
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faTimes, faUserCircle} from "@fortawesome/free-solid-svg-icons";
+import Link from "next/link";
+import {faHome, faTimes, faUser, faUserCircle} from "@fortawesome/free-solid-svg-icons";
+import {useRouter} from "next/router";
+import {withTranslation} from "next-i18next";
 
 const AuthenticationStyledDiv = styled.div`
 
   .logged-in-items-profile-image {
-    width: 24px;
-    height: 24px;
-    border-radius: 50%;
-    svg {
-      width: 24px;
-      height: 24px;
+    width: 30px;
+    height: 30px;
+ 
+    svg,img {
+      width: 30px;
+      height: 30px;
+      color: var(--navigation-text-color,#ccc);
+    }
+    img{
+      border-radius: 50%;
     }
   }
 
@@ -82,8 +89,9 @@ const AuthenticationStyledDiv = styled.div`
   }
 `
 
-const Authentication = () => {
+const Authentication = props => {
     const user = useSelector(state => state?.user)
+    const router = useRouter()
     const [open, setOpen] = useState(false)
 
     const onOpenCloseHandler = ()=>{
@@ -93,20 +101,34 @@ const Authentication = () => {
 
         <AuthenticationStyledDiv className='auth-buttons' open={open}>
             {user?.userData?.profileImage ?
-                <img className='logged-in-items-profile-image' src={user?.userData.profileImage} alt={'profile image'} onClick={onOpenCloseHandler}/> :
-                <FontAwesomeIcon icon={faUserCircle} className='logged-in-items-profile-image'  onClick={onOpenCloseHandler}/>
+                <div className='logged-in-items-profile-image'>
+                    <img  src={user?.userData.profileImage} alt={'profile image'} onClick={onOpenCloseHandler}/>
+                </div>
+                :
+                <div className='logged-in-items-profile-image'>
+                    <FontAwesomeIcon icon={faUserCircle}   onClick={onOpenCloseHandler}/>
+                </div>
+
             }
             <div className='auth-buttons-content'>
                 <button className={'btn btn-transparent-light close-btn'} onClick={onOpenCloseHandler}>
                     <FontAwesomeIcon  icon={faTimes} />
                 </button>
+                {router.pathname.includes('/messenger') || router.pathname.includes('/chatroom')?
+                    <div className='auth-buttons-content-items'>
+                        <Link href={`/`}>
+                            <a rel='next' className='logged-in-item btn btn-transparent-light'>
+                                <FontAwesomeIcon  icon={faHome} />
+                                {props.t(`common:Home`)}
+                            </a>
+                        </Link>
+                    </div>
+                  :null
+                }
                 {user.loggedIn ? <LoggedInItemsForMenu open={open} position='topBar'/> : <LoggedOutItemsMenu open={open}  position='topBar'/>}
             </div>
-
-
         </AuthenticationStyledDiv>
-
     );
 };
 
-export default Authentication;
+export default withTranslation(['common'])(Authentication);

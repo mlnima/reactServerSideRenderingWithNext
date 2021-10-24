@@ -10,7 +10,7 @@ const ChatRoomMessageAreaStyledMain = styled.main`
   left: 0;
   right: 0;
   bottom: 0;
-  top: 48px;
+  top: 56px;
   overflow-y: scroll;
   display: flex;
   flex-direction: column;
