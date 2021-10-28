@@ -3,25 +3,29 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowDown, faArrowUp, faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";
+
 let StyledDiv = styled.div`
   padding: 5px 10px;
   margin-top: 10px;
   border-radius: 10px;
   background-color: black;
-  border: solid 2px rgba(0,0,0,.1);
+  border: solid 2px rgba(0, 0, 0, .1);
   display: flex;
 
   flex-direction: column;
-  .field-index-control{
+
+  .field-index-control {
     display: flex;
     justify-content: space-between;
     width: 100%;
-    button{
+
+    button {
       background-color: transparent;
       color: white;
       border: none;
       transition: .5s;
-      &:hover{
+
+      &:hover {
         transform: scale(1.5);
       }
     }
@@ -29,7 +33,7 @@ let StyledDiv = styled.div`
 `
 const FieldPreview = props => {
     const [state, setState] = useState({
-        open:false
+        open: false
     });
     const [fieldData, setFieldData] = useState({
         fieldName: '',
@@ -51,9 +55,9 @@ const FieldPreview = props => {
 
         })
     }
-    const onEditHandler = e=>{
+    const onEditHandler = e => {
         e.preventDefault()
-        const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f=>f.fieldName===props.field.fieldName)
+        const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f => f.fieldName === props.field.fieldName)
         const updatedFields = [
             ...props.widgetData.formData.formFields.slice(0, findIndexOfTheField),
             fieldData,
@@ -75,7 +79,7 @@ const FieldPreview = props => {
     }
     const fieldIndexPlus = value => {
         const updatedFieldData = {...props.field, fieldIndex: props.field.fieldIndex + value}
-        const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f=>f.filedId===props.field.filedId)
+        const findIndexOfTheField = props.widgetData.formData.formFields.findIndex(f => f.filedId === props.field.filedId)
         const updatedFields = [
             ...props.widgetData.formData.formFields.slice(0, findIndexOfTheField),
             updatedFieldData,
@@ -93,17 +97,17 @@ const FieldPreview = props => {
     return (
         <StyledDiv className='form-item-view' key={props.field.filedId}>
             <div className='field-index-control'>
-                <button onClick={() => state.open?setState({...state,open:false}):setState({...state,open:true})}>
-                    <FontAwesomeIcon style={{transform:state.open?'rotate(90deg)':'rotate(0deg)',transition:'.5s all'}} icon={faBars} className='navigation-mobile-button-logo'/>
+                <button onClick={() => state.open ? setState({...state, open: false}) : setState({...state, open: true})}>
+                    <FontAwesomeIcon style={{transform: state.open ? 'rotate(90deg)' : 'rotate(0deg)', transition: '.5s all'}} icon={faBars} className='navigation-mobile-button-logo'/>
                 </button>
-                <p>{ 'ID : ' + props.field.filedId}</p>
+                <p>{'ID : ' + props.field.filedId}</p>
                 <p>{props.field.fieldType + ' : ' + props.field.fieldName}</p>
                 <p>index:{props.field.fieldIndex}</p>
                 <button onClick={() => fieldIndexPlus(-1)}><FontAwesomeIcon icon={faArrowUp} className='navigation-mobile-button-logo'/></button>
                 <button onClick={() => fieldIndexPlus(+1)}><FontAwesomeIcon icon={faArrowDown} className='navigation-mobile-button-logo'/></button>
                 <button onClick={() => onDeleteHandler(props.field.fieldName)}><FontAwesomeIcon icon={faTrash} className='navigation-mobile-button-logo'/></button>
             </div>
-            {state.open?
+            {state.open ?
                 <div className='edit-form-field'>
                     <form className='add-new-filed' onSubmit={e => onEditHandler(e)}>
                         <p>Filed Name :</p>
@@ -137,7 +141,7 @@ const FieldPreview = props => {
                         <button type='submit'>Edit</button>
                     </form>
                 </div>
-                :null
+                : null
             }
 
             {/*<RenderEditMode/>*/}

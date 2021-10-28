@@ -1,9 +1,27 @@
-import {useState,useEffect} from "react";
+import {useState, useEffect} from "react";
 import _ from "lodash";
+import styled from "styled-components";
 
+const EditSubMenuFormStyledForm = styled.form`
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  margin: auto;
+  width: 90%;
+  background-color: black;
+  padding: 5px;
+  .formId {
+    font-size: small;
+  }
+  .menu-widget-form-form-field {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+`
 const EditSubMenuForm = props => {
 
-    const [state, setState] = useState({});
     const [subItemData, setSubItemData] = useState({
         name: '',
         target: '',
@@ -19,7 +37,6 @@ const EditSubMenuForm = props => {
             ...props.data
         })
     }, []);
-
 
 
     const onChangeHandler = e => {
@@ -46,18 +63,18 @@ const EditSubMenuForm = props => {
             })
     }
 
-    const onEditHandler = e =>{
+    const onEditHandler = e => {
         e.preventDefault()
-        const parentData = props.widgetData.menuItems.find(i=>i.itemId===props.parentId)
-        const findParentIndex =  (props.widgetData.menuItems || []).findIndex(i=>i.itemId === parentData.itemId)
-        const findSubItemIndex = parentData?.subItems.findIndex(i=>i.itemId===subItemData.itemId)
+        const parentData = props.widgetData.menuItems.find(i => i.itemId === props.parentId)
+        const findParentIndex = (props.widgetData.menuItems || []).findIndex(i => i.itemId === parentData.itemId)
+        const findSubItemIndex = parentData?.subItems.findIndex(i => i.itemId === subItemData.itemId)
 
         const newParentData = {
             ...parentData,
-            subItems : [
-                ...(parentData.subItems ||[]).slice(0, findSubItemIndex),
+            subItems: [
+                ...(parentData.subItems || []).slice(0, findSubItemIndex),
                 subItemData,
-                ...(parentData.subItems ||[]).slice(findSubItemIndex + 1),
+                ...(parentData.subItems || []).slice(findSubItemIndex + 1),
             ]
         }
 
@@ -75,16 +92,16 @@ const EditSubMenuForm = props => {
     }
 
 
-    const onDeleteHandler = e=>{
+    const onDeleteHandler = e => {
 
         e.preventDefault()
-        const parentData = props.widgetData.menuItems.find(i=>i.itemId===props.parentId)
-        const findParentIndex =  (props.widgetData.menuItems || []).findIndex(i=>i.itemId === parentData.itemId)
-        const findSubItemIndex = parentData?.subItems.findIndex(i=>i.itemId===subItemData.itemId)
+        const parentData = props.widgetData.menuItems.find(i => i.itemId === props.parentId)
+        const findParentIndex = (props.widgetData.menuItems || []).findIndex(i => i.itemId === parentData.itemId)
+        const findSubItemIndex = parentData?.subItems.findIndex(i => i.itemId === subItemData.itemId)
 
         const newParentData = {
             ...parentData,
-            subItems : (parentData.subItems ||[]).filter(i=>i.itemId!==subItemData.itemId)
+            subItems: (parentData.subItems || []).filter(i => i.itemId !== subItemData.itemId)
         }
 
         const newData = [
@@ -101,28 +118,7 @@ const EditSubMenuForm = props => {
     }
 
     return (
-        <form className='menu-widget-form' onSubmit={e => onEditHandler(e)}>
-
-            <style jsx>{`
-            .formId{
-                font-size: small;
-            }
-            .menu-widget-form{
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                margin: auto;
-                width: 90%;
-                background-color: black;
-                padding: 5px;
-            }
-            .menu-widget-form-form-field{
-                width: 100%;
-                display: flex;
-                align-items: center;
-                justify-content: space-between ;
-            }
-        `}</style>
+        <EditSubMenuFormStyledForm className='menu-widget-form' onSubmit={e => onEditHandler(e)}>
             <label className='formId'> ID : {props.data.itemId}</label>
             {/*<div className='menu-widget-form-form-field'>*/}
             {/*    <p>Parent:</p>*/}
@@ -163,10 +159,10 @@ const EditSubMenuForm = props => {
 
             <div className='menu-widget-form-form-field'>
                 <button type='submit'>Edit</button>
-                <button onClick={e=>onDeleteHandler(e)}>Delete</button>
+                <button onClick={e => onDeleteHandler(e)}>Delete</button>
             </div>
 
-        </form>
+        </EditSubMenuFormStyledForm>
     );
 };
 export default EditSubMenuForm;

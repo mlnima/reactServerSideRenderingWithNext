@@ -22,16 +22,16 @@ export const getStaticPaths = async ({locales}:any) => {
         const pagesDataFromApi = await getPagesDataForStaticGeneration()
         // @ts-ignore
         const pagesData = pagesDataFromApi.data?.pagesData || []
-        let allParams : {params:{pageName:string,locale:string}}[] = []
+
+        let allParams : {params:{pageName:string},locale:string}[] = []
 
         if (pagesData.length > 0){
             locales.forEach((locale:string)=>{
                 allParams.push(...pagesData.map((pageData:{pageName:string})=> {
-                    return {params: {pageName: pageData.pageName, locale}}
+                    return {params: {pageName: pageData.pageName },locale}
                 }))
             })
         }
-
 
         return {
             paths: allParams,
@@ -76,13 +76,16 @@ export const getStaticProps = wrapper.getServerSideProps(store =>
 //     const firstLoadData = await getFirstLoadData(context.req,[context.query.pageName, context.query.pageName + 'LeftSidebar',context.query.pageName + 'RightSidebar'],store)
 //     let responseCode = 200
 //     const pageData = await getPageData({pageName: context.query.pageName})
-//     if (!pageData.data.pageData)return { notFound: true}
+//     // @ts-ignore
+//     if (!pageData?.data?.pageData)return { notFound: true}
+//
 //
 //     return {
 //         props: {
 //             ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
 //             ...firstLoadData,
-//             pageInfo:pageData.data ? pageData.data.pageData : {},
+//             // @ts-ignore
+//             pageInfo:pageData.data ? pageData?.data?.pageData : {},
 //             query:context.query,
 //             responseCode
 //         }

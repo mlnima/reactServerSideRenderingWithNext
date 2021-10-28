@@ -1,17 +1,17 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClock} from "@fortawesome/free-regular-svg-icons";
 import {faDollarSign, faEuroSign} from "@fortawesome/free-solid-svg-icons";
+
+import styled from "styled-components";
+
+const BottomLeftStyledSpan = styled.span`
+  left: 3px;
+  bottom: 43px;
+`
 
 const BottomLeft = props => {
 
     return (
-        <span className='bottom-left post-element-info-data'>
-            <style jsx>{`
-                      .bottom-left{
-                            left: 3px;
-                            bottom: 43px;
-                      }
-                `}</style>
+        <BottomLeftStyledSpan className='bottom-left post-element-info-data'>
                {props.type === 'product' ?
                 <>
                     <FontAwesomeIcon style={{width:'24px',height:'24px'}} icon={props?.state?.currency === 'Usd' ? faDollarSign : faEuroSign} className='post-element-info-logo' style={props.svgDefaultStyle}/>
@@ -23,7 +23,7 @@ const BottomLeft = props => {
                     : null
             }
 
-        </span>
+        </BottomLeftStyledSpan>
     )
 
 

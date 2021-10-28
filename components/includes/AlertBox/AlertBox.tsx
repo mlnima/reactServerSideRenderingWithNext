@@ -73,7 +73,7 @@ let StyledDiv = styled.div`
 // @ts-ignore
 const AlertBox = ({t}) => {
     const dispatch = useDispatch()
-    const alert = useSelector((state: StoreTypes) => state.globalState.alert)
+    const alert = useSelector((state: StoreTypes) => state?.globalState?.alert)
 
     useEffect(() => {
         if (alert.active){

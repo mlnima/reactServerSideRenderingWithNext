@@ -74,7 +74,7 @@ const CookiePopupStyledDiv = styled.div`
 
 `
 const CookiePopup = props => {
-    const settings = useSelector(state => state.settings)
+    const settings = useSelector(state => state?.settings)
     const router = useRouter()
     const [state, setState] = useState({
         accepted: false,

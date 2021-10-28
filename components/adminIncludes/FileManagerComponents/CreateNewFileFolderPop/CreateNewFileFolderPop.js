@@ -1,6 +1,54 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import _createFileOrFolder from '../../../../_variables/adminAjaxVariables/adminFileManagerVariables/_createFileOrFolder'
+import styled from "styled-components";
+const CreateNewFileFolderPopStyledDiv = styled.div`
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  background-color: rgba(0, 0, 0, .5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
 
+  .create-new-file-folder-pop-content {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: center;
+    background-color: black;
+    width: 300px;
+    height: 200px;
+    padding: 10px;
+    border-radius: 10px;
+    border: .5px solid white;
+
+    .create-new-file-folder-pop-content-title {
+      color: white;
+      align-self: flex-start;
+    }
+
+    .create-new-file-folder-pop-content-input {
+      width: 95%;
+    }
+
+    .create-new-file-folder-pop-content-action-button {
+      display: flex;
+      justify-content: space-evenly;
+      align-items: center;
+      width: 100%;
+
+      button {
+        background-color: transparent;
+        color: white;
+        padding: 10px 20px;
+        border: .5px solid white;
+        border-radius: 5px;
+      }
+    }
+  }
+`
 const CreateNewFileFolderPop = props => {
     const [state, setState] = useState({
         type: 'file',
@@ -41,57 +89,7 @@ const CreateNewFileFolderPop = props => {
 
     if (render) {
         return (
-            <div className='create-new-file-folder-pop'>
-                <style jsx>{`
-                  .create-new-file-folder-pop {
-                    position: fixed;
-                    top: 0;
-                    right: 0;
-                    bottom: 0;
-                    left: 0;
-                    background-color: rgba(0, 0, 0, .5);
-                    display: flex;
-                    justify-content: center;
-                    align-items: center;
-
-                    .create-new-file-folder-pop-content {
-                      display: flex;
-                      flex-direction: column;
-                      justify-content: space-between;
-                      align-items: center;
-                      background-color: black;
-                      width: 300px;
-                      height: 200px;
-                      padding: 10px;
-                      border-radius: 10px;
-                      border: .5px solid white;
-
-                      .create-new-file-folder-pop-content-title {
-                        color: white;
-                        align-self: flex-start;
-                      }
-
-                      .create-new-file-folder-pop-content-input {
-                        width: 95%;
-                      }
-
-                      .create-new-file-folder-pop-content-action-button {
-                        display: flex;
-                        justify-content: space-evenly;
-                        align-items: center;
-                        width: 100%;
-
-                        button {
-                          background-color: transparent;
-                          color: white;
-                          padding: 10px 20px;
-                          border: .5px solid white;
-                          border-radius: 5px;
-                        }
-                      }
-                    }
-                  }
-                `}</style>
+            <CreateNewFileFolderPopStyledDiv className='create-new-file-folder-pop'>
                 <div className='create-new-file-folder-pop-content'>
                     <p className='create-new-file-folder-pop-content-title'>Create New {props.state.createNewFileFolderPopType}</p>
                     <p className='create-new-file-folder-pop-content-title'>{props.state.createNewFileFolderPopType} Name :</p>
@@ -101,7 +99,7 @@ const CreateNewFileFolderPop = props => {
                         <button onClick={onCancelHandler}>Cancel</button>
                     </div>
                 </div>
-            </div>
+            </CreateNewFileFolderPopStyledDiv>
         );
     } else return null
 

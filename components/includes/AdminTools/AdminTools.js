@@ -60,7 +60,7 @@ const AdminTools = () => {
                 <button className='admin-tools-item open-button' onClick={onOpenCloseHandler } onTouchStartCapture={onOpenCloseHandler}>
                     <FontAwesomeIcon icon={faCogs} className='admin-tools-item-logo'/>
                 </button>
-                {state.open?
+                {state.open ?
                     <>
                         <Link href={'/admin'} locale={false}>
                             <a className='admin-tools-item' >

@@ -1,5 +1,19 @@
 import {useRouter} from "next/router";
+import styled from "styled-components";
 
+const PostsTypesStyledDiv = styled.div`
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  p {
+    margin: 0 10px;
+  }
+
+  select {
+    background-color: var(--admin-input-background-color);
+  }
+`
 const PostsTypes = () => {
     const router = useRouter()
     const onFormatChangeHandler = e => {
@@ -10,20 +24,7 @@ const PostsTypes = () => {
     }
 
     return (
-        <div className='post-type asset-page-asset-type-selector'>
-            <style jsx>{`
-              .post-type {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                p {
-                  margin: 0 10px;
-                }
-                select{
-                background-color: var(--admin-input-background-color);
-                }
-              }
-            `}</style>
+        <PostsTypesStyledDiv className='post-type asset-page-asset-type-selector'>
             <p>Post Type :</p>
             <select onChange={e => onFormatChangeHandler(e)} value={router.query.postType}>
                 <option value='all'>All</option>
@@ -34,7 +35,7 @@ const PostsTypes = () => {
                 <option value='article'>Article</option>
                 <option value='promotion'>Promotion</option>
             </select>
-        </div>
+        </PostsTypesStyledDiv>
     );
 };
 export default PostsTypes;

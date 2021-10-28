@@ -16,7 +16,7 @@ const AdminDataSetterStyledSpan = styled.span`
 const AdminDataSetter = () => {
     const dispatch = useDispatch()
     const router = useRouter()
-    const userData = useSelector((state :StoreTypes) => state.user.userData)
+    const userData = useSelector((state :StoreTypes) => state?.user?.userData)
 
     useEffect(() => {
         if (userData?.role === 'administrator') {

@@ -4,57 +4,49 @@ import BottomLeft from "./BottomLeft";
 import TopRight from "./TopRight";
 import TopLeft from "./TopLeft";
 import {likeValueCalculator} from "../../../_variables/_variables";
-import PromotionTypeCard from "./PromotionTypeCard";
+import styled from "styled-components";
 
-const PostElementImage = ({postElementSize,imageSize,widgetId,isHover,mainThumbnail,isHoverHandler,_id,postType,views,duration,quality,likes,disLikes,price,videoTrailerUrl,title,postElementImageLoaderType,postElementImageLoader,rating}) => {
+const PostElementImageStyledDiv = styled.div`
+  width: 48vw;
+  height: 27vw;
+  ${props => props?.imageWidth} @keyframes opacityAnimationStart {
+    0% {
+      opacity: 0;
+    }
+    100% {
+      opacity: 100%;
+    }
+  } video {
+    width: 48vw;
+    height: 27vw;
+    animation: opacityAnimationStart 2s alternate;
+  } @media only screen and(min-width: 768 px) {
+  width: ${props => props?.imageWidthSize}px;
+  height: ${props => props?.imageWidthSize / 1.777}px;
+
+  ${props => props?.imageWidth}
+  video {
+    width: ${props => props?.imageWidthSize}px;
+    height: ${props => props?.imageWidthSize / 1.777}px;
+    animation: opacityAnimationStart 2s alternate;
+  }
+}
+`
+
+const PostElementImage = ({postElementSize, imageSize, widgetId, isHover, mainThumbnail, isHoverHandler, _id, postType, views, duration, quality, likes, disLikes, price, videoTrailerUrl, title, postElementImageLoaderType, postElementImageLoader, rating}) => {
     const imageWidthSize = postElementSize === 'list' ? 116.6 :
-                           postElementSize === 'smaller' ? 209.8 :
-                           postElementSize === 'small' ? 255 :
-                           postElementSize === 'medium' ? 320 : 255
+        postElementSize === 'smaller' ? 209.8 :
+            postElementSize === 'small' ? 255 :
+                postElementSize === 'medium' ? 320 : 255
 
-    const imageWidth = postElementSize === 'list' ?`max-width:116.6px;`:`width: 100%;`
+    const imageWidth = postElementSize === 'list' ? `max-width:116.6px;` : `width: 100%;`
 
     return (
-        <div className={`post-element-image-data`} style={{position:'relative'}}>
-
-            <style jsx>{`
-            @keyframes opacityAnimationStart {
-                0% {
-                    opacity: 0;
-                }
-                100% {
-                    opacity: 100%;
-                }
-            }
-            .post-element-image-data{
-                width: 48vw;
-                height: 27vw;
-                ${imageWidth}
-            }
-            video {
-                width: 48vw;
-                height: 27vw;
-                animation: opacityAnimationStart 2s alternate;  
-            }
-            
-            @media only screen and (min-width: 768px) {
-                .post-element-image-data{
-                    width: ${imageWidthSize}px;
-                    height: ${imageWidthSize/1.777}px;
-                    ${imageWidth}
-                }
-                video {
-                    width: ${imageWidthSize}px;
-                    height: ${imageWidthSize/1.777}px;
-                    animation: opacityAnimationStart 2s alternate;  
-                }
-            }     
-            
-            `}</style>
+        <PostElementImageStyledDiv imageWidth={imageWidth} imageWidthSize={imageWidthSize} className={`post-element-image-data`} style={{position: 'relative'}}>
 
             {isHover && videoTrailerUrl ?
-                <video autoPlay={true} loop={true} webkitplaysinline="webkitplaysinline" playsInline="playsinline" >
-                    <source src={videoTrailerUrl} />
+                <video autoPlay={true} loop={true} webkitplaysinline="webkitplaysinline" playsInline="playsinline">
+                    <source src={videoTrailerUrl}/>
                     Sorry, your browser doesn't support embedded videos.
                 </video>
                 :
@@ -75,10 +67,10 @@ const PostElementImage = ({postElementSize,imageSize,widgetId,isHover,mainThumbn
             }
             {views > 1 && postType === ('video') && !isHover ? <BottomRight views={views}/> : null}
             {(postType === ('video') || postType === ('redirect') || postType === ('product')) && !isHover ?
-                <BottomLeft type={postType} price={price} duration={duration} /> : null}
+                <BottomLeft type={postType} price={price} duration={duration}/> : null}
             {quality && postType === ('video') && !isHover ? <TopRight quality={quality}/> : null}
             {likes > 0 && rating !== 'disable' && !isHover ? <TopLeft rating={likeValueCalculator(likes, disLikes)} s/> : null}
-        </div>
+        </PostElementImageStyledDiv>
 
     );
 };

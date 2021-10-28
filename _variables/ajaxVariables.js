@@ -81,7 +81,7 @@ export const saveFormWidgetData = async (data) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/forms/saveFormData', body)
 }
 
-export const getFormsData = async (data) => {
+export const getFormsData = async (data, wt) => {
     const body = {
         data,
         token: localStorage.wt

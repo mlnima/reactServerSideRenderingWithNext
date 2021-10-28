@@ -27,7 +27,6 @@ interface ErrorComponentProps {
 }
 
 const Error = ({ statusCode }:ErrorComponentProps) => {
-    
     return (
         <ErrorStyledDiv className='error-page'>
             <h1 className='error-page-message'>

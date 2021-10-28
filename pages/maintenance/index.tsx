@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
-import {getFirstLoadDataStatic} from "../../_variables/ajaxVariables";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "../../store/store";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+// import {getFirstLoadDataStatic} from "../../_variables/ajaxVariables";
+// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+// import {wrapper} from "../../store/store";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -22,14 +24,23 @@ const maintenance = () => {
     );
 };
 
-export const getStaticProps = wrapper.getServerSideProps(store=>
-    async (context) => {
-    const firstLoadData = await getFirstLoadDataStatic(['maintenance'],store)
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
-            ...firstLoadData
+            ...(await serverSideTranslations(context.locale as string, ['common'])),
         }
     }
 })
+
+// export const getStaticProps = wrapper.getServerSideProps(store=>
+//     async (context) => {
+//     const firstLoadData = await getFirstLoadDataStatic(['maintenance'],store)
+//     return {
+//         props: {
+//             ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
+//             ...firstLoadData
+//         }
+//     }
+// })
 export default maintenance;

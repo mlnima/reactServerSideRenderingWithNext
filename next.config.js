@@ -18,6 +18,11 @@ const svgLoader = {
     }
 }
 
+const swcConfig = {
+
+}
+
+
 const i18nConfig = locales.length === 1 ? {} : {
     i18n: {
         locales,
@@ -25,6 +30,10 @@ const i18nConfig = locales.length === 1 ? {} : {
         localeDetection: false,
     }
 }
+
+
+//*************************************SSG is disable Temporary because of NextJS 12 file permission error at build time DO NOT DELETE THIS CONFIG************************************************
+
 
 const staticPageGeneration = process.env.NEXT_PUBLIC_STATIC_PAGES === 'true' ? {
     beforeFiles:[
@@ -73,6 +82,10 @@ const pwaSettings = {
 const nextConfigs = {
     env: {},
     rewrites,
+    swcMinify: true,
+    eslint: {
+        ignoreDuringBuilds: true,
+    },
     // redirects
 }
 

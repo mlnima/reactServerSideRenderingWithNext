@@ -1,3 +1,10 @@
+import styled from "styled-components";
+const TopRightStyledSpan = styled.span`
+  right: 3px;
+  top: 3px;
+  font-weight: bold;
+`
+
 const TopRight = props => {
 
     const quality =  props.quality === '2160p' ? '4K' :
@@ -11,16 +18,9 @@ const TopRight = props => {
 
 
     return (
-        <span  className='top-right post-element-info-data'>
-            <style jsx>{`
-                      .top-right{
-                        right: 3px;
-                        top: 3px;
-                        font-weight: bold;
-                      }
-                `}</style>
+        <TopRightStyledSpan  className='top-right post-element-info-data'>
             {quality }
-        </span>
+        </TopRightStyledSpan>
     );
 };
 export default TopRight;

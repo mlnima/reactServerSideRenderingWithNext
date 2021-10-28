@@ -1,7 +1,24 @@
 import React, {useState, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCartPlus} from "@fortawesome/free-solid-svg-icons";
+import styled from "styled-components";
+const AddToBasketStyledFrom = styled.form`
+  display: flex;
+  max-width: 300px;
+  align-items: center;
+  .add-item-to-basket-count {
+    border: none;
+    padding: 6px;
+    width: 30%;
 
+  }
+
+  .add-item-to-basket-action {
+    border: none;
+    height: 100%;
+    width: 50px;
+  }
+`
 
 
 const AddToBasket = props => {
@@ -49,30 +66,12 @@ const AddToBasket = props => {
 
     if (props.render) {
         return (
-            <form className='add-item-to-basket' onSubmit={e => onAddToBasketHandler(e)}>
-                <style jsx>{`
-                  .add-item-to-basket {
-                    display: flex;
-                    max-width: 300px;
-                    align-items: center;
-                  }
-
-                  .add-item-to-basket-count {
-                    border: none;
-                    padding: 6px;
-                    width: 30%;
-
-                  }
-
-                  .add-item-to-basket-action {
-                    border: none;
-                    height: 100%;
-                    width: 50px;
-                  }
-                `}</style>
-                <input ref={countInput} className='add-item-to-basket-count' type='number' value={count} onChange={e => setCount(e.target.value)}/>
-                <button onClick={onAddToBasketHandler} className='add-item-to-basket-action'><FontAwesomeIcon style={props.svgDefaultStyle} icon={faCartPlus} className='svg-logo-medium '/></button>
-            </form>
+            <AddToBasketStyledFrom className='add-item-to-basket' onSubmit={e => onAddToBasketHandler(e)}>
+                <input ref={countInput} className='add-item-to-basket-count' type='number' value={count} onChange={e => setCount(parseInt(e.target.value))}/>
+                <button onClick={onAddToBasketHandler} className='add-item-to-basket-action'>
+                    <FontAwesomeIcon style={props.svgDefaultStyle} icon={faCartPlus} className='svg-logo-medium '/>
+                </button>
+            </AddToBasketStyledFrom>
         );
     } else return null
 

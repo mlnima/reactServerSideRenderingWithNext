@@ -5,6 +5,34 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import {setLoginRegisterFormStatus} from "../../../../store/actions/globalStateActions";
 
+import styled from "styled-components";
+const NewPostStyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .create-new-post-form{
+    padding: 5px;
+    width: 300px;
+    .server-response{
+      color:var(--main-text-color);
+    }
+    .create-new-post-form-section{
+      width: 100%;
+      .create-new-post-form-section-name{
+        width: 100%;
+        color:var(--main-text-color);
+      }
+      .create-new-post-form-section-input,.create-new-post-form-section-textarea{
+        width: 100%;
+      }
+      .create-new-post-form-section-input{
+      }
+      .create-new-post-form-section-textarea{
+        min-height: 300px;
+      }
+    }
+  }
+`
 const newPost = () => {
     const userData = useSelector(state => state?.user.userData)
     const dispatch = useDispatch()
@@ -59,36 +87,7 @@ const newPost = () => {
     }
 
     return (
-        <div className='create-new-post main'>
-            <style jsx>{`
-                .create-new-post{
-                   display: flex;
-                   justify-content: center;
-                   align-items: center;
-                    .create-new-post-form{
-                       padding: 5px;
-                       width: 300px;
-                       .server-response{
-                       color:var(--main-text-color);
-                       }
-                      .create-new-post-form-section{
-                         width: 100%;
-                        .create-new-post-form-section-name{
-                          width: 100%;
-                          color:var(--main-text-color);
-                        }
-                        .create-new-post-form-section-input,.create-new-post-form-section-textarea{
-                           width: 100%;
-                        }
-                        .create-new-post-form-section-input{
-                        }
-                        .create-new-post-form-section-textarea{
-                          min-height: 300px;
-                        }
-                      }
-                    }
-                }
-            `}</style>
+        <NewPostStyledDiv className='create-new-post main'>
             <form className='create-new-post-form' onSubmit={e=>onSubmitHandler(e)}>
                 <p className='server-response'>{state.serverResponse}</p>
                 <div className='create-new-post-form-section'>
@@ -102,7 +101,7 @@ const newPost = () => {
                 <button type='submit'>Send</button>
             </form>
 
-        </div>
+        </NewPostStyledDiv>
     );
 };
 

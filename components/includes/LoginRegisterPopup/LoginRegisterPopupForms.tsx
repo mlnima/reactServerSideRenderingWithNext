@@ -178,7 +178,7 @@ interface StateValidatorTypes {
 const LoginRegisterPopupForms = (props: { t: any }) => {
 
     const dispatch = useDispatch()
-    const globalState = useSelector((state: StoreTypes) => state.globalState)
+    const globalState = useSelector((state: StoreTypes) => state?.globalState)
     const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
     const [state, setState] = useState<StateTypes>({});
     const [stateValidator, setStateValidator] = useState<StateValidatorTypes>({});

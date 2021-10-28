@@ -4,7 +4,6 @@ import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {ClientPagesTypes} from "../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../store/store";
 
 const Custom404StyledDiv = styled.div`
@@ -13,7 +12,7 @@ const Custom404StyledDiv = styled.div`
   justify-content: center;
   align-items: center;
   height: 50vh;
-  background-color: var(--main-background-color,#000);
+  background-color: var(--main-background-color, #000);
   grid-area: main;
 
   h1 {
@@ -25,23 +24,26 @@ const Custom404StyledDiv = styled.div`
     text-decoration: none;
   }
 `
-const Custom404 = (props: ClientPagesTypes) => {
+// @ts-ignore
+const Custom404 = (props) => {
 
     return (
         <Custom404StyledDiv id='not-found-page main' className='main'>
             <h1>404 - {props.t(`Not Found`)}</h1>
+            {/*<h1>404 - Not Found</h1>*/}
             <Link href="/">
                 <a className='back-to-homepage'>
                     <h2>{props.t(`Go To Homepage`)}</h2>
+                    {/*<h2>Go To Homepage</h2>*/}
                 </a>
             </Link>
         </Custom404StyledDiv>
     );
 };
 
-export const getStaticProps = wrapper.getServerSideProps(store=>
+export const getStaticProps = wrapper.getServerSideProps(store =>
     async (context) => {
-        const firstLoadData = await getFirstLoadDataStatic(['404'],store)
+        const firstLoadData = await getFirstLoadDataStatic(['404'], store)
 
         return {
             props: {
@@ -52,5 +54,5 @@ export const getStaticProps = wrapper.getServerSideProps(store=>
     }
 )
 
-
-export default withTranslation(['common','customTranslation'])(Custom404);
+export default withTranslation(['common', 'customTranslation'])(Custom404);
+// export default Custom404;

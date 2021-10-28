@@ -4,7 +4,45 @@ import MenuWidgetEditForm from "./MenuWidgetEditForm";
 //import MenuWidgetSubMenuModelFieldsPreview from "./MenuWidgetSubMenuModelFieldsPreview";
 import _ from "lodash";
 import EditSubMenuForm from "./subMenuComponenets/EditSubMenuForm";
+import styled from "styled-components";
 
+const MenuWidgetModelFieldsPreviewStyledDiv = styled.div`
+  background-color: rgba(0, 0, 0, .2);
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  padding: 5px;
+  margin: 2px 0;
+  .menu-item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    .menu-item-header-index-controller {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      button {
+        background-color: transparent;
+        color: white;
+        border: none;
+        font-size: large;
+        width: 30px;
+        height: 30px;
+        padding: 0;
+        &:hover{
+          border: 1px solid black;
+          box-shadow: 2px 5px black;
+        }
+        &:active{
+          box-shadow: 1px 2px black;
+          border-top: none;
+          border-left: none;
+        }
+      }
+    }
+  }
+`
 const MenuWidgetModelFieldsPreview = props => {
 
     const [state, setState] = useState({
@@ -115,8 +153,8 @@ const MenuWidgetModelFieldsPreview = props => {
     //         />
     //     )
     // })
-    const renderSubMenus = (itemData?.subItems || []).map(subItem=>{
-        return(
+    const renderSubMenus = (itemData?.subItems || []).map(subItem => {
+        return (
             <EditSubMenuForm
                 key={_.uniqueId('id_')}
                 parentId={itemData.itemId}
@@ -136,57 +174,13 @@ const MenuWidgetModelFieldsPreview = props => {
     })
 
 
-    const onOpenHandler = () =>{
-            state.open ?
+    const onOpenHandler = () => {
+        state.open ?
             setState({...state, open: false}) :
             setState({...state, open: true})
     }
     return (
-        <div className='menu-item' key={props?.data?.itemId?.toString() + props.data.name ?? props.data.name}>
-        <style jsx>{`
-            .menu-item{
-                background-color: rgba(0,0,0,.2);
-                display: flex;
-                flex-direction: column;
-                align-items: flex-start;
-                //box-shadow: 1px 5px 5px 1px rgba(0, 0, 0, 1);
-                padding:5px;
-                //border-radius: 10px;
-                margin:  2px 0;
-                border: ${state.open? 'green 2px solid' : 'none'};
-            }
-            .menu-item-header{
-                display: flex;
-                justify-content: space-between;
-                align-items: center;
-                width: 100%;
-            }
-            
-            .menu-item-header-index-controller{
-                display: flex;
-                justify-content: center;
-                align-items: center;
-            }
-            .menu-item-header-index-controller > button{
-                background-color: transparent;
-                color: white;
-                border:none;
-                font-size: large;
-                width: 30px;
-                height: 30px;
-                padding: 0;
-            }
-            .menu-item-header-index-controller > button:hover{
-                border: 1px solid black;
-                box-shadow: 2px 5px black;
-            }
-            .menu-item-header-index-controller > button:active{
-                box-shadow: 1px 2px black;
-                border-top: none;
-                border-left: none;
-            }
-        
-        `}</style>
+        <MenuWidgetModelFieldsPreviewStyledDiv className='menu-item' key={props?.data?.itemId?.toString() + props.data.name ?? props.data.name}>
             <div className='menu-item-header'>
                 <div className='menu-item-header-index-controller'>
                     <p>index: {itemData.itemIndex}</p>
@@ -195,7 +189,7 @@ const MenuWidgetModelFieldsPreview = props => {
                 </div>
 
                 {/*<p>name: {itemData.parent ? props.widgetData.menuItems.find(i => i.name === itemData.parent).name + ' > ' + itemData.name : itemData.name} </p>*/}
-                <p>name: { itemData?.translations[props.activeEditingLanguage]?.name ||  itemData.name} </p>
+                <p>name: {itemData?.translations[props.activeEditingLanguage]?.name || itemData.name} </p>
                 <p>ID: {itemData.itemId}</p>
 
                 <button onClick={onOpenHandler}>
@@ -206,32 +200,27 @@ const MenuWidgetModelFieldsPreview = props => {
 
             {state.open ?
                 <>
-                <MenuWidgetEditForm
-                    onChangeHandler={onChangeHandler}
-                    onSubmitHandler={onEditHandler}
-                    onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
-                    data={itemData}
-                    setData={setItemData}
-                    state={state}
-                    parentsOption={props.parentsOption}
-                    activeEditingLanguage={props.activeEditingLanguage}
-                    onDeleteHandler={onDeleteHandler}
-                    mode='Edit'
-                />
+                    <MenuWidgetEditForm
+                        onChangeHandler={onChangeHandler}
+                        onSubmitHandler={onEditHandler}
+                        onChangeHandlerWithTranslate={onChangeHandlerWithTranslate}
+                        data={itemData}
+                        setData={setItemData}
+                        state={state}
+                        parentsOption={props.parentsOption}
+                        activeEditingLanguage={props.activeEditingLanguage}
+                        onDeleteHandler={onDeleteHandler}
+                        mode='Edit'
+                    />
                     {renderSubMenus}
-</>
+                </>
                 : null}
 
 
-        </div>
+        </MenuWidgetModelFieldsPreviewStyledDiv>
     );
 };
 export default MenuWidgetModelFieldsPreview;
-
-
-
-
-
 
 
 // {state.open ?

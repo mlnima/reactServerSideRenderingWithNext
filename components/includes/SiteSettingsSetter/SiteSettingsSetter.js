@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 
 
 const SiteSettingSetter = () => {
-    const settings = useSelector(state => state.settings)
+    const settings = useSelector(state => state?.settings)
     const router = useRouter()
 
     const keywordsData = settings.identity?.translations?.[router.locale]?.keywords || settings.identity?.data?.keywords || [];

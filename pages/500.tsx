@@ -5,7 +5,6 @@ import {withTranslation} from "next-i18next";
 import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "../store/store";
-import {ClientPagesTypes} from "../_variables/TypeScriptTypes/ClientPagesTypes";
 
 const Custom500StyledDiv = styled.div`
   display: flex;
@@ -26,7 +25,7 @@ const Custom500StyledDiv = styled.div`
   }
 `
 
-const Custom500 = (props: ClientPagesTypes) => {
+const Custom500 = (props:any) => {
     return (
         <Custom500StyledDiv id='not-found-page' className='main'>
             <h1>500 - {props.t(`Server Error`)}</h1>
@@ -38,7 +37,7 @@ const Custom500 = (props: ClientPagesTypes) => {
         </Custom500StyledDiv>
     );
 };
-
+//
 export const getStaticProps = wrapper.getServerSideProps(store=>
     async (context) => {
     const firstLoadData = await getFirstLoadDataStatic(['500'],store)
@@ -52,3 +51,4 @@ export const getStaticProps = wrapper.getServerSideProps(store=>
 })
 
 export default withTranslation(['common','customTranslation'])(Custom500);
+// export default Custom500;

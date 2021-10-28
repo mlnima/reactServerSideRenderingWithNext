@@ -1,10 +1,20 @@
-import React,{useEffect} from 'react';
+import React, {useEffect} from 'react';
 import MessengerConversationPreview from "./MessengerConversationPreview";
 import {useDispatch, useSelector} from "react-redux";
 import MessengerConversationListHeader from "./MessengerConversationListHeader";
 import {getConversations} from "../../../../store/actions/userActions";
+import styled from "styled-components";
 
-const MessengerConversationsList = ( ) => {
+const MessengerConversationsListStyledDiv = styled.div`
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  .no-message {
+    color: var(--navigation-text-color, #ccc);
+  }
+`
+const MessengerConversationsList = () => {
     const dispatch = useDispatch()
     // @ts-ignore
     const conversations = useSelector(state => state.user.conversations)
@@ -23,24 +33,11 @@ const MessengerConversationsList = ( ) => {
     })
 
     return (
-        <div className='messenger-conversations-list'>
-            <style jsx>{`
-              .messenger-conversations-list {
-                display: flex;
-                flex-direction: column;
-                align-items: center;
-                justify-content: center;
-              }
-
-              .no-message {
-                color: var(--navigation-text-color, #ccc);
-              }
-
-            `}</style>
+        <MessengerConversationsListStyledDiv className='messenger-conversations-list'>
             <MessengerConversationListHeader/>
             {renderConversationsPreview}
             {!conversations || conversations.length < 1 ? <p className='no-message'>there is no messages yet</p> : null}
-        </div>
+        </MessengerConversationsListStyledDiv>
     );
 };
 export default MessengerConversationsList;

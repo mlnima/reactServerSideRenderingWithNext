@@ -1,40 +1,37 @@
 import React, {useRef} from 'react';
 import Link from 'next/link'
 import {useRouter} from "next/router";
+import styled from "styled-components";
 
+const AssetPaginationStyledDiv = styled.div`
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
 
+  .asset-page-pagination-item {
+    margin: 5px;
+    border: 1px solid rgba(0, 0, 0, .1);
+    padding: 3px 5px;
+  }
+
+  .asset-page-pagination-item-input {
+    border: 1px solid rgba(0, 0, 0, .1);
+    padding: 3px 5px;
+    width: 50px;
+  }
+
+  .link-as-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+`
 
 const AssetPagination = props => {
     const manualPage = useRef(null)
     const router = useRouter()
     return (
-        <div className='asset-page-pagination'>
-            <style jsx>{`
-              .asset-page-pagination {
-                display: flex;
-                justify-content: flex-end;
-                align-items: center;
-
-                .asset-page-pagination-item {
-                  margin: 5px;
-                  border: 1px solid rgba(0, 0, 0, .1);
-                  padding: 3px 5px;
-                }
-
-                .asset-page-pagination-item-input {
-                  border: 1px solid rgba(0, 0, 0, .1);
-                  padding: 3px 5px;
-                  width: 50px;
-                }
-
-                .link-as-button {
-                  display: flex;
-                  justify-content: center;
-                  align-items: center;
-                }
-              }
-
-            `}</style>
+        <AssetPaginationStyledDiv className='asset-page-pagination'>
             <label>{props.finalPageData.totalCount}</label>
             <Link href={{
                 pathname: props.pathname || router.pathname, query: {...router.query, page: 1}
@@ -58,7 +55,7 @@ const AssetPagination = props => {
 
                 }
             }}><a className='asset-page-pagination-item link-as-button'>{'>>'}  </a></Link>
-        </div>
+        </AssetPaginationStyledDiv>
     );
 };
 export default AssetPagination;

@@ -9,7 +9,11 @@ import {wrapper} from "../../../store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {getSpecificUserData} from "../../../store/actions/userActions";
-
+import styled from "styled-components";
+const FollowersStyledDiv = styled.div`
+  max-width: 940px;
+  margin: auto;
+`
 const Followers = ( ) => {
     const userData = useSelector((state : StoreTypes) => state?.user?.userData)
     const dispatch = useDispatch()
@@ -36,17 +40,9 @@ const Followers = ( ) => {
     })
 
     return (
-        <div className='my-profile-followers-list main'>
-            <style jsx>{`
-            .main{
-             max-width: 940px;
-              margin: auto;
-            }
-            
-            `}</style>
-
+        <FollowersStyledDiv className='my-profile-followers-list main'>
             {renderFollowers}
-        </div>
+        </FollowersStyledDiv>
     );
 };
 

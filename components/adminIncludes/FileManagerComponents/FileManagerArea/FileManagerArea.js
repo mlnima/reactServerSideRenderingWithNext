@@ -1,11 +1,55 @@
 import React from 'react';
-import { clickPathGenerator } from '../../../../_variables/_variables';
+import {clickPathGenerator} from '../../../../_variables/_variables';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import withRouter from 'next/dist/client/with-router'
-import { fileTypeDetector } from '../../../../_variables/_variables'
-import { faSlidersH} from "@fortawesome/free-solid-svg-icons";
-import {faCss3Alt, faJs, faSass,fas} from "@fortawesome/free-brands-svg-icons";
+import {fileTypeDetector} from '../../../../_variables/_variables'
+import {faSlidersH} from "@fortawesome/free-solid-svg-icons";
+import {faCss3Alt, faJs, faSass, fas} from "@fortawesome/free-brands-svg-icons";
 import {faFile, faFolder} from "@fortawesome/free-regular-svg-icons";
+import styled from "styled-components";
+
+const FileManagerAreaStyledDiv = styled.div`
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+  grid-gap: 10px;
+  background-color: black;
+  padding: 20px 20px 200px 20px;
+  border-radius: 20px;
+  
+  .dirItem{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    .file-manager-image-item{
+      width: 80px;
+      object-fit: cover;
+    }
+    button{
+      width: 80px;
+      height: 80px;
+      background-color: rgba(255, 255, 255, .1);
+      outline: none;
+      transition: .4s;
+      border-radius: 10px;
+      &:hover{
+        transform: scale(1.2);
+      }
+      .file-manager-icons {
+        color: white;
+        width: 50px;
+        height: 50px;
+      }
+    }
+    p {
+      font-size: small;
+      overflow: hidden;
+      color: white;
+      text-align: center;
+    }
+  }
+  
+`
+
 
 const FileManagerArea = props => {
 
@@ -24,20 +68,14 @@ const FileManagerArea = props => {
         if (itemType === 'image') {
             return (
                 <React.Fragment>
-                <style jsx>{`
-                    .file-manager-image-item {
-                        width: 80px;
-                        object-fit: cover;
-                    }
-                `}</style>
-                    <img className='file-manager-image-item' src={ props.state.path.replace('.', '') + '/' + data.fileName }/>
+                    <img className='file-manager-image-item' src={props.state.path.replace('.', '') + '/' + data.fileName}/>
                 </React.Fragment>
 
             )
-        } else if (itemType === 'video'){
+        } else if (itemType === 'video') {
             return (
                 <video className='file-manager-image-item'>
-                    <source src={ props.state.path.replace('.', '') + '/' + data.fileName }/>
+                    <source src={props.state.path.replace('.', '') + '/' + data.fileName}/>
                 </video>
             )
         } else {
@@ -55,30 +93,11 @@ const FileManagerArea = props => {
                                 'white'
             return (
                 <React.Fragment>
-                <button className={ [ classGenerator(data.fileName) ] } key={ data.fileName } name={ data.fileName }  >
-                <style jsx>{`
-                    button {
-                        width: 80px;
-                        height: 80px;
-                        background-color: rgba(255,255,255,.1);
-                      
-                        outline: none;
-                
-                        transition: .4s;
-                        border-radius: 10px;
-                    }
-                    button:hover {
-                        transform: scale(1.2);
-                    }
-                    .file-manager-icons{
-                      color:white;
-                    }
-                `}</style>
-                    <FontAwesomeIcon style={{width:'50px',height:'50px',color:logoColorToRender}}
-                                     icon={logoToRender}
-                                     //icon={['fas', 'coffee']}
-                                     className='file-manager-icons'/>
-                </button>
+                    <button className={[classGenerator(data.fileName)]} key={data.fileName} name={data.fileName}>
+                        <FontAwesomeIcon style={{ color: logoColorToRender}}
+                                         icon={logoToRender}
+                                         className='file-manager-icons'/>
+                    </button>
                 </React.Fragment>
             )
         }
@@ -88,51 +107,27 @@ const FileManagerArea = props => {
         let itemPath = clickPathGenerator(item, props.state.path);
         props.setState({
             ...props.state,
-            prevPath:props.state.path,
-            path:itemPath,
-            clickedItemName:item
+            prevPath: props.state.path,
+            path: itemPath,
+            clickedItemName: item
         })
     };
 
 
     let renderDir = props.state.files.map(item => {
         return (
-            <div key={ item } className='dirItem' onClick={()=>onClickHandler(item)}>
-            <style jsx>{`
-                .dirItem{
-                    display: flex;
-                    flex-direction: column;
-                    justify-content: space-between;
-                }
-                
-                p {
-                    font-size: small;
-                    overflow: hidden;
-                    color:white;
-                    text-align: center;
-                }
-            `}</style>
-                <WhatToRender key={item} fileName={ item }/>
-                <p> { item }</p>
+            <div key={item} className='dirItem' onClick={() => onClickHandler(item)}>
+                <WhatToRender key={item} fileName={item}/>
+                <p> {item}</p>
             </div>
         )
     });
 
     return (
-        <div className='FileManagerArea'>
-        <style jsx>{`
-            .FileManagerArea{
-                display: grid;
-                grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
-                grid-gap: 10px;
-                background-color: black;
-                padding: 20px 20px 200px 20px;
-                border-radius: 20px;
-               // min-height: 400px;
-            }
-        `}</style>
-            { renderDir }
-        </div>
+        <FileManagerAreaStyledDiv className='FileManagerArea'>
+
+            {renderDir}
+        </FileManagerAreaStyledDiv>
     );
 };
 export default withRouter(FileManagerArea);

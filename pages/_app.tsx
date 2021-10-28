@@ -43,6 +43,12 @@ const MyApp = ({Component, pageProps}: AppProps) => {
 export default wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig));
 
 
+// else if (router.pathname.includes('/404') || router.pathname.includes('/500')) {
+//     return (
+//         <Component {...pageProps} />
+//     )
+// }
+
 
 
 

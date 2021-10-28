@@ -2,17 +2,77 @@ import React, {useState} from 'react';
 import Image from 'next/image'
 import {checkRemovedContent} from "../../../_variables/ajaxPostsVariables";
 import {clientSelfWidgetUpdate} from "../../../_variables/_ajaxClientWidgetVariables";
+import styled from "styled-components";
+
+const NextImageRendererStyledDiv = styled.div`
+  .post-element-image, .meta-element-image, .post-element-image > div > img, .meta-element-image > div > img {
+    width: 48vw;
+    position: relative;
+  }
+
+  .post-element-list, .post-element-list > div > img {
+    width: 116.6px;
+    height: 65.1px;
+  }
+
+  .logo-image, .logo-image > div > img {
+    width: 300px;
+    height: 100px;
+    max-width: 300px;
+    max-height: 100px;
+    position: relative;
+  }
+
+  .no-image-title {
+    font-size: 2rem;
+  }
+`
+
+
+
+const ImageRendererStyledDiv = styled.div`
+  .post-element-image {
+
+  }
+
+  img {
+    width: 48vw;
+    height: 27.01vw;
+    object-fit: cover;
+  }
+
+  .post-element-list, .post-element-list > div > img {
+    width: 116.6px;
+    height: 65.1px;
+  }
+
+  .logo-image, .logo-image > div > img {
+    width: 100%;
+    height: 100%;
+    max-width: 200px;
+    max-height: 200px;
+    position: relative;
+  }
+
+  @media only screen and (min-width: 768px) {
+    .post-element-image, .meta-element-image, .post-element-image > div > img, .meta-element-image > div > img {
+      width: ${props=>props?.imageSize?.width || 255.8}px;
+      height: ${props=>props?.imageSize?.height || 143.95}px;
+    }
+  }
+`
+
 
 const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)
     const [isReported, setIsReported] = useState(false)
-    const [imageUrl,setImageUrl] = useState(()=>{
-        return  props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.imageUrl : ''
+    const [imageUrl, setImageUrl] = useState(() => {
+        return props?.imageUrl ? props.imageUrl?.includes('http') ? props.imageUrl : process.env.NEXT_PUBLIC_PRODUCTION_URL + props.imageUrl : ''
     })
 
-    const noImageUrl= '/static/images/noImage/no-image-available.png'
+    const noImageUrl = '/static/images/noImage/no-image-available.png'
     //const isImageAbsolutePath = imageUrl?.includes('http')
-   // const validImageForNextImage = (((process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
+    // const validImageForNextImage = (((process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES ?? ' ').split(' ').includes(imageUrl?.includes('http') ? new URL(imageUrl).hostname : undefined)) || !isImageAbsolutePath) && props.postElementImageLoader === 'next'
     const validImageForNextImage = false
 
     const onErrorHandler = e => {
@@ -36,28 +96,8 @@ const ImageRenderer = props => {
 
     if (validImageForNextImage) {
         return (
-            <div className={props.classNameValue}>
-                <style jsx>{`
-                    .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
-                        width:48vw;
-                        position: relative;
-                    }
-                    .post-element-list,.post-element-list>div>img{
-                        width: 116.6px;
-                        height: 65.1px;
-                    }
-                    .logo-image,.logo-image>div>img{
-                        width: 300px;
-                        height: 100px;
-                        max-width: 300px;
-                        max-height: 100px;
-                        position: relative;
-                    }
-                    .no-image-title{
-                      font-size: 2rem;
-                    }
-                `}</style>
-                { imageUrl ?
+            <NextImageRendererStyledDiv className={props.classNameValue} imageSize={props.imageSize}>
+                {imageUrl ?
                     <Image
                         src={!gotError ? imageUrl || noImageUrl : noImageUrl}
                         alt={props.altValue || props.classNameValue}
@@ -71,43 +111,15 @@ const ImageRenderer = props => {
                         layout={props.layout || 'fill'}
                         quality={props.quality || 100}
                         loading={props.loading || 'eager'}
-                    />:
+                    /> :
                     <p className='no-image-title'>{props.title}</p>
                 }
-            </div>
+            </NextImageRendererStyledDiv>
         )
     } else return (
-        <div className={props.classNameValue}>
-            <style jsx>{`
-                .post-element-image{
-                
-                }
-                img{
-                    width:48vw;
-                    height: 27.01vw;
-                    object-fit:cover;
-                }
-                .post-element-list,.post-element-list>div>img{
-                    width: 116.6px;
-                    height: 65.1px;
-                }
-                .logo-image,.logo-image>div>img{
-                    width: 100%;
-                    height: 100%;
-                    max-width: 200px;
-                    max-height: 200px;
-                    position: relative;
-                }
+        <ImageRendererStyledDiv className={props.classNameValue} imageSize={props.imageSize}>
 
-                @media only screen and (min-width: 768px) {
-                    .post-element-image,.meta-element-image,.post-element-image>div>img,.meta-element-image>div>img{
-                        width: ${props?.imageSize?.width || 255.8}px;
-                        height: ${props?.imageSize?.height || 143.95}px;
-                    }
-                }
-                
-            `}</style>
-            { imageUrl ?
+            {imageUrl ?
                 <img className={props.classNameValue}
                      alt={props.altValue || props.classNameValue}
                      onMouseEnter={props.hoverHandler}
@@ -120,12 +132,10 @@ const ImageRenderer = props => {
                          setGotError(true)
                      }}/> :
                 <p className='no-image-title'>{props.title}</p>
-
             }
 
 
-
-        </div>
+        </ImageRendererStyledDiv>
 
     );
 };

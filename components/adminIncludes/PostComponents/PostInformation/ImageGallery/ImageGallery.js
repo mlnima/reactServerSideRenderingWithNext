@@ -31,6 +31,11 @@ let StyledDiv = styled.div`
       }
     }
 `
+
+
+// const PostInformationSectionStyledDiv = styled.div`
+//
+// `
 const ImageGallery = props => {
     const uploadInputElement = useRef(null)
 
@@ -111,9 +116,9 @@ const ImageGallery = props => {
                     <button onClick={() => uploadInputElement.current.click()}><FontAwesomeIcon icon={faUpload} className='post-element-info-logo'/></button>
                 </div>
                 <div className='post-information-section'>
-                    <styled className='product-information-images-preview'>
+                    <StyledDiv className='product-information-images-preview'>
                         {renderImagesPreview}
-                    </styled>
+                    </StyledDiv>
                 </div>
             </>
         );

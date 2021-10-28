@@ -24,7 +24,7 @@ let StyledDiv = styled.div`
    
     }
   }
-  ${(props:{stylesData:string}) => props.stylesData ?? ''}
+  ${(props:{stylesData:string}) => props.stylesData || ''}
 `
 
 interface TopBarWidgetAreaProps {

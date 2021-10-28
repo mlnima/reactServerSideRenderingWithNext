@@ -10,8 +10,15 @@ import {wrapper} from "../../../store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {getSpecificUserData} from "../../../store/actions/userActions";
-const Following = (props:ClientPagesTypes) => {
-    const userData = useSelector((state : StoreTypes) => state?.user?.userData)
+
+import styled from "styled-components";
+
+const FollowingStyledDiv = styled.div`
+  max-width: 940px;
+  margin: auto;
+`
+const Following = (props: ClientPagesTypes) => {
+    const userData = useSelector((state: StoreTypes) => state?.user?.userData)
     const dispatch = useDispatch()
     const [following, setFollowing] = useState([]);
 
@@ -22,16 +29,16 @@ const Following = (props:ClientPagesTypes) => {
 
     useEffect(() => {
         // @ts-ignore
-        if (userData?.following?.length >0){
-            getMultipleUserDataById(userData?.following).then(res=>{
+        if (userData?.following?.length > 0) {
+            getMultipleUserDataById(userData?.following).then(res => {
                 // @ts-ignore
                 setFollowing(res?.data?.users || [])
             })
         }
     }, [userData?.following]);
 
-    const renderFollowing = following.map((user,index)=>{
-        return(
+    const renderFollowing = following.map((user, index) => {
+        return (
             <UserSmallPreview key={index}
                               {...user}
 
@@ -41,28 +48,20 @@ const Following = (props:ClientPagesTypes) => {
 
 
     return (
-        <div className='my-profile-following-list main'>
-            <style jsx>{`
-            .main{
-             max-width: 940px;
-              margin: auto;
-            }
-            
-            `}</style>
-
+        <FollowingStyledDiv className='my-profile-following-list main'>
             {renderFollowing}
-        </div>
+        </FollowingStyledDiv>
     );
 };
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar','profilePage'], store)
+    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], store)
 
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             ...firstLoadData,
             query: context.query
         }

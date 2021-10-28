@@ -1,7 +1,27 @@
 import {useEffect, useState, useRef} from 'react';
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import {useRouter} from "next/router";
+import styled from "styled-components";
 
+const TableHeaderStyledDiv = styled.div`
+  padding: 10px;
+  background-color: var(--admin-color-0);
+  margin: 5px 0 0 0;
+  border: .2px solid rgba(0, 0, 0, .1);
+  font-size: 13px;
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  .asset-page-table-header-item {
+    margin: 5px 0;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    width: 150px;
+    text-align: center;
+  }
+`
 
 const TableHeader = props => {
     const selectAllCheckBox = useRef(null)
@@ -74,42 +94,17 @@ const TableHeader = props => {
     const renderHeaderItems = state.items.map(item => {
         return (
             <p key={item} className='asset-page-table-header-item'>
-                <style jsx>{`
-                  .asset-page-table-header-item {
-                    margin: 5px 0;
-                    white-space: nowrap;
-                    overflow: hidden;
-                    text-overflow: ellipsis;
-                    width: 150px;
-                    text-align: center;
-                  }
-
-                `}</style>
                 {convertVariableNameToName(item)}
             </p>
         )
     })
 
     return (
-        <div className='asset-page-table-header'>
-            <style jsx>{`
-              .asset-page-table-header {
-                padding: 10px;
-                background-color: var(--admin-color-0);
-                margin: 5px 0 0 0;
-                border: .2px solid rgba(0, 0, 0, .1);
-                font-size: 13px;
-                display: flex;
-                align-items: center;
-                flex-wrap: wrap;
-                justify-content: space-between;
+        <TableHeaderStyledDiv className='asset-page-table-header'>
 
-              }
-
-            `}</style>
             <input ref={selectAllCheckBox} type='checkbox' className={'asset-table-check-box'} onChange={e => onSelectChangeHandler(e)}/>
             {renderHeaderItems}
-        </div>
+        </TableHeaderStyledDiv>
     );
 };
 export default TableHeader;
