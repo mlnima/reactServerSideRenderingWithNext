@@ -16,7 +16,7 @@ const MonacoEditorComponent = props => {
         theme="vs-dark"
         defaultValue={props.defaultValue}
         value={props.value}
-        onChange={onChangeHandler}
+        onChange={(value)=>onChangeHandler(value)}
         classname={props.classNameValue}
          width={props.width || '100%'}
         height={props.height || '300px'}

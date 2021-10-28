@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import Link from "next/link";
 import {withTranslation} from "next-i18next";
 import {useDispatch, useSelector} from "react-redux";
@@ -12,7 +12,7 @@ const LoggedInItemsForMenu = props => {
     const dispatch = useDispatch()
 
     return (
-        <div className='auth-buttons-content-items' open={props.open}>
+    <>
             {identity.membership ?
                 <>
                     <Link href={`/profile`}>
@@ -38,7 +38,7 @@ const LoggedInItemsForMenu = props => {
                 <FontAwesomeIcon  icon={faSignOutAlt} />
                 {props.t(`common:Logout`)}
             </p>
-        </div>
+    </>
     )
 
 };

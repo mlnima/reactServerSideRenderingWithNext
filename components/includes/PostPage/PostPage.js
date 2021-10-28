@@ -19,6 +19,7 @@ const PostMeta = dynamic(() => import('./components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('./components/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('./components/CommentFrom/CommentFrom'))
 import styled from "styled-components";
+import {useSelector} from "react-redux";
 
 const PostPageStyledMain = styled.main`
   display: flex;
@@ -31,7 +32,7 @@ const PostPageStyledMain = styled.main`
 
   .rating-price-download {
     width: 100%;
-    background-color: var(--post-page-info-background-color,#181818);
+    background-color: var(--post-page-info-background-color, #181818);
     display: flex;
     justify-content: center;
     flex-wrap: wrap;
@@ -86,10 +87,14 @@ const PostPageStyledMain = styled.main`
       flex-wrap: wrap;
     }
   }
+
+  ${(props) => props?.postPageStyle || ''}
 `
 
-const PostPage = ({ design, post, identity, comments, widgets}) => {
+const PostPage = ({design, post, identity, comments, widgets}) => {
+    const postPageStyle = useSelector(state => state?.settings.design.postPageStyle)
     const router = useRouter()
+
     const [state, setState] = useState({
         likeValue: 0,
         postAbsolutePath: '',
@@ -150,7 +155,7 @@ const PostPage = ({ design, post, identity, comments, widgets}) => {
 
 
     return (
-        <PostPageStyledMain className='main post-page'>
+        <PostPageStyledMain className='main post-page' postPageStyle={postPageStyle}>
 
             <EditLinkForAdmin _id={post._id}/>
 
@@ -164,17 +169,17 @@ const PostPage = ({ design, post, identity, comments, widgets}) => {
 
             {
                 post.mainThumbnail && post.postType === 'promotion' ?
-                        <div className='promotion-thumbnail-link'>
-                            <a href={post.redirectLink}><img className='main-thumbnail' src={post.mainThumbnail} alt="title"/></a>
-                            <a href={post.redirectLink} className='redirect-link' target='_blank'>go to {post.title}</a>
-                        </div>
+                    <div className='promotion-thumbnail-link'>
+                        <a href={post.redirectLink}><img className='main-thumbnail' src={post.mainThumbnail} alt="title"/></a>
+                        <a href={post.redirectLink} className='redirect-link' target='_blank'>go to {post.title}</a>
+                    </div>
                     : null
             }
 
 
-            {post.postType === 'promotion' || post.postType === 'article'  ? <PostDescription description={post.description} translations={post.translations}/> : null}
+            {post.postType === 'promotion' || post.postType === 'article' ? <PostDescription description={post.description} translations={post.translations}/> : null}
 
-            {post.postType !== 'promotion'  && post.postType !== 'article' ? <PostTitle title={post.title} translations={post.translations}/> : null}
+            {post.postType !== 'promotion' && post.postType !== 'article' ? <PostTitle title={post.title} translations={post.translations}/> : null}
 
             <div className='rating-price-download'>
                 <RatingButtons _id={post._id} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData}/>
@@ -194,7 +199,7 @@ const PostPage = ({ design, post, identity, comments, widgets}) => {
                     <WidgetsRenderer deviceWidth={deviceWidth}
                                      widgets={(widgets || []).filter(widget => widget.data.position === 'underPost')}
                                      position='underPost'
-                                     postElementSize={design?.data?.postElementSize }/>
+                                     postElementSize={design?.data?.postElementSize}/>
                 </div> : null}
             <CommentFrom reGetComments={reGetComments} documentId={post._id} documentTitle={post.title}/>
             {comments?.length > 0 ? <CommentsRenderer reGetComments={reGetComments} comments={commentsData}/> : null}

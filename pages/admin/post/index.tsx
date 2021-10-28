@@ -44,8 +44,6 @@ const Index = () => {
     const dispatch = useDispatch()
     const router = useRouter();
     const languageElement = useRef(null)
-
-    // const [state, setState] = useState({})
     const [productInfo, setProductInfo] = useState({})
 
     useEffect(() => {
@@ -55,14 +53,6 @@ const Index = () => {
             dispatch(adminNewPost())
         }
     }, [router.query.id]);
-
-    // useEffect(() => {
-    //     setState({
-    //         ...state,
-    //         ...post,
-    //     })
-    // }, [post]);
-
 
     const onChangeHandler = (e: { target: { name: any; value: any; }; }) => {
         dispatch(adminEditPost({
@@ -89,6 +79,7 @@ const Index = () => {
     }
 
     const onDescriptionChangeHandler = (data:string) => {
+        console.log(data)
         const e = {
             target: {
                 name: 'description',
@@ -148,7 +139,7 @@ const Index = () => {
                         {languagesOptions}
                     </select>
 
-                    <TitleDescription onChangeHandler={onTranslatedInputChangeHandler} onDescriptionChangeHandler={onDescriptionChangeHandler}/>
+                    <TitleDescription onChangeHandler={onTranslatedInputChangeHandler} onDescriptionChangeHandler={onDescriptionChangeHandler} onSaveHandler={onSaveHandler}/>
 
                     <PostInformation productInfo={productInfo} setProductInfo={setProductInfo}  onChangeHandler={onChangeHandler}/>
 

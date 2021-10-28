@@ -1,6 +1,6 @@
 import StyleSection from "../../../../components/adminIncludes/design/StyleSection/StyleSection";
 import {useDispatch, useSelector} from "react-redux";
-import {editDesign} from "../../../../store/actions/adminPanelGlobalStateActions";
+import {editDesign} from "../../../../store/actions/settingsActions";
 
 const postElement = () => {
     const design = useSelector(state => state.settings.design)

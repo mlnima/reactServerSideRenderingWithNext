@@ -20,12 +20,41 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetCustomScript/WidgetCustomScript.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorMonacoEditor/TextEditorMonacoEditor.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorSunEditor/TextEditorSunEditor.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/widgetSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/widgetSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/MonacoEditorComponent/MonacoEditorComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/MonacoEditorComponent/MonacoEditorComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterDropDownActions.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterPagination.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterPagination.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterSearch.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterSearch.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/FilterStatusBtn.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/Filters.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/Filters/Filters.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/BodyTable.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/HeaderTable.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostsComponents/PostsDataTable/PostsDataTable.scss" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditor/TextEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditor/TextEditor.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/SaveDesignChangesBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/SaveDesignChangesBtn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/postElement/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postElement/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/design/postPage/index.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postPage/index.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/actions/adminPanelGlobalStateActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/adminPanelGlobalStateActions.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/actions/settingsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/settingsActions.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -852,7 +881,16 @@
       <workItem from="1634986092753" duration="1292000" />
       <workItem from="1634987602263" duration="24741000" />
       <workItem from="1635020583182" duration="9353000" />
-      <workItem from="1635060145528" duration="26691000" />
+      <workItem from="1635060145528" duration="30655000" />
+      <workItem from="1635149321549" duration="5182000" />
+      <workItem from="1635161473613" duration="1640000" />
+      <workItem from="1635164400752" duration="580000" />
+      <workItem from="1635165094739" duration="4693000" />
+      <workItem from="1635179669426" duration="2063000" />
+      <workItem from="1635197651618" duration="5316000" />
+      <workItem from="1635235001075" duration="15846000" />
+      <workItem from="1635327337714" duration="1613000" />
+      <workItem from="1635418846476" duration="585000" />
     </task>
     <servers />
   </component>
@@ -902,7 +940,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/admin/post/index.tsx</url>
-          <line>113</line>
+          <line>104</line>
           <option name="timeStamp" value="15" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -911,7 +949,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/admin/post/index.tsx</url>
-          <line>69</line>
+          <line>59</line>
           <option name="timeStamp" value="19" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1082,13 +1120,15 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/pages/checkout/index.js</url>
           <line>11</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="98" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="100" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js</url>
+          <option name="timeStamp" value="101" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

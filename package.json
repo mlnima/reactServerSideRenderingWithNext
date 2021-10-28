@@ -86,6 +86,7 @@
     "strip-ansi": "^7.0.0",
     "styled-components": "^5.3.1",
     "styled-jsx": "^4.0.1",
+    "suneditor": "^2.41.3",
     "swiper": "^7.0.8",
     "tailwindcss": "^2.2.17",
     "typescript": "^4.4.4",
@@ -115,6 +116,7 @@
     "next-fonts": "^1.5.1",
     "next-pwa": "^5.3.1",
     "sass": "^1.43.2",
-    "shelljs": "^0.8.4"
+    "shelljs": "^0.8.4",
+    "suneditor-react": "^3.3.0"
   }
 }

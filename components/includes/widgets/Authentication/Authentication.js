@@ -114,18 +114,21 @@ const Authentication = props => {
                 <button className={'btn btn-transparent-light close-btn'} onClick={onOpenCloseHandler}>
                     <FontAwesomeIcon  icon={faTimes} />
                 </button>
+                <div className='auth-buttons-content-items'>
                 {router.pathname.includes('/messenger') || router.pathname.includes('/chatroom')?
-                    <div className='auth-buttons-content-items'>
+
                         <Link href={`/`}>
                             <a rel='next' className='logged-in-item btn btn-transparent-light'>
                                 <FontAwesomeIcon  icon={faHome} />
                                 {props.t(`common:Home`)}
                             </a>
                         </Link>
-                    </div>
+
                   :null
                 }
-                {user.loggedIn ? <LoggedInItemsForMenu open={open} position='topBar'/> : <LoggedOutItemsMenu open={open}  position='topBar'/>}
+                    {user.loggedIn ? <LoggedInItemsForMenu open={open} position='topBar'/> : <LoggedOutItemsMenu open={open}  position='topBar'/>}
+                </div>
+
             </div>
         </AuthenticationStyledDiv>
     );

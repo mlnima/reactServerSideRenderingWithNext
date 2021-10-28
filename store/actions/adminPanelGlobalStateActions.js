@@ -49,11 +49,4 @@ export const setSidebarStatus = ( status ) => async dispatch => {
     })
 }
 
-export const editDesign = ( e ) => async dispatch => {
-    dispatch({
-        type:types.EDIT_DESIGN,
-        payload:{
-            [e.target.name]: e.target.value
-        }
-    })
-}
+
