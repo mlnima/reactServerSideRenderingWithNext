@@ -41,7 +41,7 @@ const CommentFromStyledForm = styled.form`
 
 const CommentFrom = props => {
     const dispatch = useDispatch()
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(store => store?.user?.userData)
     const bodyInput = useRef(null);
 
     const onSubmitHandler = e => {

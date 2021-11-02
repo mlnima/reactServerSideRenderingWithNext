@@ -79,8 +79,8 @@ let StyledDiv = styled.div`
 `
 const checkout = props => {
     const dispatch = useDispatch()
-    const identity = useSelector(state => state.settings.identity)
-    const userData = useSelector(state => state?.user.userData)
+    const identity = useSelector(store => store?.settings.identity)
+    const userData = useSelector(store => store?.user.userData)
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
     const [state, setState] = useState({
@@ -103,7 +103,7 @@ const checkout = props => {
 
     //check if there is items in the basket and fetch data from DB
     // useEffect(() => {
-    //     if (contextData.checkOutData.items.length > 0) {
+    //     if (contextData.checkOutData.items.length ) {
     //         setItemsData([])
     //         getCheckOutItems()
     //     } else if (contextData.checkOutData.items.length === 0) {
@@ -185,7 +185,7 @@ const checkout = props => {
 
     // create order data for paypal from itemsData and store it in orderData
     useEffect(() => {
-        if (itemsData.length > 0) {
+        if (itemsData.length ) {
             const VAT = props?.eCommerce?.data?.VAT ?? 0;
             const totalPriceValue = calculateTotalPrice();
             const defaultShippingCost = props?.eCommerce?.data?.defaultShippingCost ?? 0;
@@ -240,7 +240,7 @@ const checkout = props => {
             {/*render basket items*/}
             {!state.paymentPage ?
                 <div className='checkout-items'>
-                    {itemsData.length > 0 ?
+                    {itemsData.length  ?
                         (itemsData || []).map(item => {
                             return (
                                 <CheckOutItemPreview key={(itemsData || []).indexOf(item)} {...item} {...props} editable={!state.paymentPage}/>

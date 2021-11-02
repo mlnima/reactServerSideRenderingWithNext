@@ -37,7 +37,7 @@ let StyledDiv = styled.div`
 `
 const EcommerceSettingsInputSection = props => {
     const dispatch = useDispatch()
-    const eCommerce = useSelector(state => state?.settings?.eCommerce)
+    const eCommerce = useSelector(store => store?.settings?.eCommerce)
     //eCommerce
     // const contextData = useContext(AppContext);
     // const [state, setState] = useState({

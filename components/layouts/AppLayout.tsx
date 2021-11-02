@@ -21,11 +21,11 @@ const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: fa
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
 
 const AppLayout = (props: any) => {
-    const loggedIn = useSelector((state: StoreTypes) => state?.user.loggedIn)
-    const userData = useSelector((state: StoreTypes) => state?.user.userData)
-    const globalState = useSelector((state: StoreTypes) => state?.globalState)
-    const settings = useSelector((state: StoreTypes) => state?.settings)
-    const widgets = useSelector((state: StoreTypes) => state?.widgets?.widgets)
+    const loggedIn = useSelector((store: StoreTypes) => store?.user.loggedIn)
+    const userData = useSelector((store: StoreTypes) => store?.user.userData)
+    const globalState = useSelector((store: StoreTypes) => store?.globalState)
+    const settings = useSelector((store: StoreTypes) => store?.settings)
+    const widgets = useSelector((store: StoreTypes) => store?.widgets?.widgets)
     const router = useRouter()
     const dispatch = useDispatch()
 
@@ -105,7 +105,7 @@ const AppLayout = (props: any) => {
             <GlobalStyles colors={settings.design?.customColors || ''} globalStyleData={settings.design?.customStyles || ''}/>
             {/*// @ts-ignore*/}
             <SiteSettingSetter identity={settings.identity} design={settings.design} eCommerce={settings.eCommerce}/>
-            {widgetsInGroups.topBar.length > 0 ?
+            {widgetsInGroups.topBar.length ?
                 // @ts-ignore
                 <TopBarWidgetArea
                     {...defaultProps}
@@ -115,7 +115,7 @@ const AppLayout = (props: any) => {
                     stylesData={settings.design?.topBarStyle || ''}
                 />
                 : null}
-            {widgetsInGroups.header.length > 0 ?
+            {widgetsInGroups.header.length ?
                 // @ts-ignore
                 <HeaderWidgetArea
                     {...defaultProps}
@@ -124,7 +124,7 @@ const AppLayout = (props: any) => {
                     stylesData={settings.design?.headerStyle || ''}
                 />
                 : null}
-            {widgetsInGroups.navigation.length > 0 ?
+            {widgetsInGroups.navigation.length ?
                 // @ts-ignore
                 <NavigationWidgetArea
                     {...defaultProps}
@@ -134,7 +134,7 @@ const AppLayout = (props: any) => {
                 />
                 : null}
 
-            {widgetsInGroups?.[sidebarsData?.leftSidebar?.name]?.length > 0 && sidebarsData?.leftSidebar?.enable ?
+            {widgetsInGroups?.[sidebarsData?.leftSidebar?.name]?.length  && sidebarsData?.leftSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'
@@ -144,14 +144,14 @@ const AppLayout = (props: any) => {
 
             {props.children}
 
-            {widgetsInGroups?.[sidebarsData?.rightSidebar?.name]?.length > 0 && sidebarsData?.rightSidebar?.enable ?
+            {widgetsInGroups?.[sidebarsData?.rightSidebar?.name]?.length && sidebarsData?.rightSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='rightSidebar'
                     className='right-sidebar'
                     position={sidebarsData?.rightSidebar?.name}
                 />
                 : null}
-            {widgetsInGroups.footer.length > 0 ?
+            {widgetsInGroups.footer.length ?
                 // @ts-ignore
                 <FooterWidgetArea
                     {...defaultProps}

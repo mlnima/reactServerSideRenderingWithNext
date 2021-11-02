@@ -11,7 +11,7 @@ const ActionOnPostStyledDiv = styled.div`
 `
 
 const ActionOnPost = props => {
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts.post);
 
     const onViewHandler = () => {
         window.open(`/post/${post.postType}/${post._id}`, '_blank')

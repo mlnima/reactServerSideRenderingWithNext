@@ -34,7 +34,7 @@ const NewPostStyledDiv = styled.div`
   }
 `
 const newPost = () => {
-    const userData = useSelector(state => state?.user.userData)
+    const userData = useSelector(store => store?.user.userData)
     const dispatch = useDispatch()
 
     const [state, setState] = useState({

@@ -2,8 +2,8 @@ import React, {useEffect, useState, useContext, useRef} from 'react';
 import {useSelector} from "react-redux";
 
 const ProductPrice = props => {
-    const price = useSelector((state) => state.adminPanelPosts.post?.price);
-    const priceType = useSelector((state) => state.adminPanelPosts.post?.priceType);
+    const price = useSelector((store) => store.adminPanelPosts.post?.price);
+    const priceType = useSelector((store) => store.adminPanelPosts.post?.priceType);
     const priceInputAcceptCharacterLimiter = e =>{
         const supportedChar = ['0','1','2','3','4','5','6','7','8','9','.']
         const lastTypedChar = e.target.value.split('')[e.target.value.split('').length -1]

@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 
 const RatingOption = props => {
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts.post);
     return (
         <select className={'custom-select'} name='rating' value={post.rating || 'enable'} onChange={e=>{props.onChangeHandler(e)}}>
             <option value='enable'>Enable</option>

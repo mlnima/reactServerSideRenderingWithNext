@@ -144,7 +144,7 @@ const MessengerCallStyledDiv = styled.div`
 `
 
 const MessengerCall = ({endCallHandler, callAccepted, attemptForAnswer, disableMicrophone, disableCamera, answerCall}) => {
-    const callData = useSelector((state) => state.user.callData);
+    const callData = useSelector((store) => store.user.callData);
     const myVideoRef = useRef(null)
     const userVideoRef = useRef(null)
 

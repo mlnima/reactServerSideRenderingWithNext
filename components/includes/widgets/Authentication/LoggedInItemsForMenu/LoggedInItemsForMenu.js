@@ -8,7 +8,7 @@ import {faEnvelope, faSignOutAlt, faUser} from "@fortawesome/free-solid-svg-icon
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const LoggedInItemsForMenu = props => {
-    const identity = useSelector(state => state?.settings?.identity)
+    const identity = useSelector(store => store?.settings?.identity)
     const dispatch = useDispatch()
 
     return (

@@ -34,8 +34,8 @@ let StyledMain = styled.main`
 `
 const tagPage = (props: ClientPagesTypes) => {
     // @ts-ignore
-    const tag = useSelector(state => state.posts.tagData)
-    const settings = useSelector((state: settingsPropTypes) => state.settings);
+    const tag = useSelector((store: settingsPropTypes) => store.posts.tagData)
+    const settings = useSelector((store: settingsPropTypes) => store.settings);
 
     const router = useRouter()
     return (

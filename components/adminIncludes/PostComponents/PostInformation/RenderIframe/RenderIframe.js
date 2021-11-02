@@ -3,7 +3,7 @@ import {useSelector} from "react-redux";
 
 const RenderIframe = props => {
 
-    const videoEmbedCode = useSelector((state) => state.adminPanelPosts.post?.videoEmbedCode);
+    const videoEmbedCode = useSelector((store) => store.adminPanelPosts.post?.videoEmbedCode);
 
     if (props.rendering){
         return (

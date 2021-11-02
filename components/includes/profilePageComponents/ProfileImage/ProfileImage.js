@@ -46,7 +46,7 @@ const ProfileImageStyledDiv = styled.div`
 const ProfileImage = props => {
     const imageElement = useRef(null)
     const uploadInputElement = useRef(null)
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(store => store?.user?.userData)
     const dispatch = useDispatch()
     const onUploadHandler = e => {
         const filesData = new FormData()

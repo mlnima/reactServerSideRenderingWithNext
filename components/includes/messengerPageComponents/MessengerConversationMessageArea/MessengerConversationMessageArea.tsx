@@ -23,7 +23,7 @@ const MessengerConversationMessageAreaStyledDiv = styled.div`
 
 const MessengerConversationMessageArea = ({connectedUserData, userData}: MessengerConversationMessageAreaTypes) => {
 
-    const messages = useSelector((state: StoreTypes) => state.user.activeConversation?.messages);
+    const messages = useSelector((store: StoreTypes) => store.user.activeConversation?.messages);
     const messageArea = useRef<null | HTMLDivElement>(null)
 
     useEffect(() => {

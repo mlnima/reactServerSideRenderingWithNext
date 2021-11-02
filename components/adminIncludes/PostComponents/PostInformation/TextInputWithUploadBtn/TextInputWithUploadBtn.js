@@ -28,7 +28,7 @@ let StyledDiv = styled.div`
 
 const TextInputWithUploadBtn = props => {
     const inputElement = useRef(null)
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts.post);
 
     const onSetHandler = (key, value) => {
         const e = {

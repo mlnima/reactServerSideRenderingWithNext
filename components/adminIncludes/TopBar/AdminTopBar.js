@@ -58,7 +58,7 @@ let StyledDiv = styled.div`
 
 const AdminTopBar = () => {
     const dispatch = useDispatch()
-    const sidebar = useSelector(state => state?.adminPanelGlobalState?.sidebar)
+    const sidebar = useSelector(store => store?.adminPanelGlobalState?.sidebar)
     const [state, dispatchState] = useState({
         AdminActionMenu: false,
         NewItemMenu: false

@@ -2,7 +2,7 @@ import React from 'react';
 import {useSelector} from "react-redux";
 
 const Duration = props => {
-    const duration = useSelector((state) => state.adminPanelPosts.post?.duration);
+    const duration = useSelector((store) => store.adminPanelPosts.post?.duration);
     if (props.rendering) {
         return (
             <div className='post-information-section'>

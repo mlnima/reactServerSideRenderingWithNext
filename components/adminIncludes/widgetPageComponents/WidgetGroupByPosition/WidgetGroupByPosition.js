@@ -29,7 +29,7 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   }
 `
 const WidgetGroupByPosition = props => {
-    const widgets = useSelector(state => state?.widgets.widgets)
+    const widgets = useSelector(store => store?.widgets.widgets)
     const [widgetInThisPosition, setWidgetInThisPosition] = useState([])
 
     useEffect(() => {

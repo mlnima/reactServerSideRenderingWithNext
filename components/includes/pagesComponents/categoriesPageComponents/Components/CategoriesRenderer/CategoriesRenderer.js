@@ -50,8 +50,8 @@ let CategoriesRendererStyledDiv = styled.div`
 
 const CategoriesRenderer = ({metaData, postElementSize}) => {
     const dispatch = useDispatch()
-    const categoriesMetas = metaData ? metaData : useSelector(state => state.posts.categoriesMetas)
-    const elementSize = postElementSize ? postElementSize : useSelector(state => state.settings?.design?.postElementSize);
+    const categoriesMetas = metaData ? metaData : useSelector(store => store?.posts?.categoriesMetas)
+    const elementSize = postElementSize ? postElementSize : useSelector(store => store?.settings?.design?.postElementSize);
 
     const cardWidth = elementSize === 'list' ? 116.6 :
         elementSize === 'smaller' ? 209.8 :

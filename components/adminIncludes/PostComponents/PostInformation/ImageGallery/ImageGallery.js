@@ -39,7 +39,7 @@ let StyledDiv = styled.div`
 const ImageGallery = props => {
     const uploadInputElement = useRef(null)
 
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store.adminPanelPosts.post);
     
     const [state, setState] = useState({
         images: [],

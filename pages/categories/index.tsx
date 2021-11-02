@@ -25,8 +25,8 @@ const CategoriesPageStyledDiv = styled.div`
 `
 const categoriesPage = () => {
 
-    const isWithSidebar = useSelector((state: settingsPropTypes) => state.settings?.identity?.metaPageSidebar);
-    const totalCount = useSelector((state: StoreTypes) => state.posts.totalCount)
+    const isWithSidebar = useSelector((store: settingsPropTypes) => store.settings?.identity?.metaPageSidebar);
+    const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
     const router = useRouter()
 
     return (

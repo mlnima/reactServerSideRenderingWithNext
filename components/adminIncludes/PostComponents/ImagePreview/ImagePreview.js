@@ -14,7 +14,7 @@ let ImagePreviewStyledDiv = styled.div`
 `
 
 const ImagePreview = () => {
-    const mainThumbnail = useSelector((state) => state.adminPanelPosts.post?.mainThumbnail);
+    const mainThumbnail = useSelector((store) => store?.adminPanelPosts.post?.mainThumbnail);
     if (mainThumbnail) {
         return (
             <ImagePreviewStyledDiv className=''>

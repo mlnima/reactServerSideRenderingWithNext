@@ -24,8 +24,8 @@ const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
-import {settingsPropTypes, WidgetInterface, WidgetPropTypes, WidgetsStateInterface} from '../../../_variables/TypeScriptTypes/GlobalTypes'
 import {useSelector} from "react-redux";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 interface WidgetsRendererProps {
     position: string;
@@ -38,14 +38,15 @@ interface WidgetsRendererProps {
 
 const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
-    const widgets = useSelector((state: WidgetsStateInterface) => state.widgets.widgets)
-    const settings = useSelector((state: settingsPropTypes) => state.settings);
-    const userData = useSelector((state: settingsPropTypes)  => state?.user.userData)
+    const widgets = useSelector((store: StoreTypes) => store.widgets.widgets)
+    const settings = useSelector((store: StoreTypes) => store.settings);
+    const userData = useSelector((store: StoreTypes)  => store?.user.userData)
 
 
     const router = useRouter()
 
-    const widgetsData = widgets.filter((widget: WidgetInterface) => widget.data?.position === position).sort((a, b) => {
+    const widgetsData = widgets.filter((widget) => widget.data?.position === position).sort((a, b) => {
+        // @ts-ignore
         return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
     })
 

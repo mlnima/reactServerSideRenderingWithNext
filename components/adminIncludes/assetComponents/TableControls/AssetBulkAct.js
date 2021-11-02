@@ -23,7 +23,7 @@ const AssetBulkAct = props => {
 
 
     const onApplyHandler = () => {
-        if (props.selectedItems.length > 0 && bulkActionSelect?.current?.value){
+        if (props.selectedItems.length && bulkActionSelect?.current?.value){
             switch (props.router.query.assetsType) {
                 case 'posts':
                     dispatch(adminBulkActionPost(props.selectedItems || [], bulkActionSelect.current.value))

@@ -47,7 +47,7 @@ let StyledDiv = styled.div`
 
 const AdminWidgets = () => {
 
-    const widgets = useSelector((state:StoreTypes) => state?.widgets.widgets)
+    const widgets = useSelector((store:StoreTypes) => store?.widgets.widgets)
     const [availablePositions,setAvailablePositions] = useState( [])
 
     useEffect(() => {

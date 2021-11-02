@@ -44,8 +44,8 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
 
 const AddWidgetWithPositionMenu = props => {
     const refToElement = useRef(null)
-    const widgets = useSelector(state => state.widgets.widgets)
-    const customPages = useSelector(state => state.adminPanelGlobalState?.customPages)
+    const widgets = useSelector(store => store.widgets.widgets)
+    const customPages = useSelector(store => store.adminPanelGlobalState?.customPages)
     const dispatch = useDispatch()
     const [open,setOpen] = useState(false)
 

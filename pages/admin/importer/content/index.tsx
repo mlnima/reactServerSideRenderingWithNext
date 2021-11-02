@@ -6,7 +6,7 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const importContent = () => {
-    const userData = useSelector((state:StoreTypes) => state?.user.userData)
+    const userData = useSelector((store:StoreTypes) => store?.user.userData)
     const dataPreview = useRef(null)
     const [state, setState] = useState({
         data: []

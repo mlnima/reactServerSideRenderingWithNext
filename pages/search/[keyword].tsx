@@ -36,8 +36,8 @@ let StyledMain = styled.main`
   ${(props:{stylesData:string}) => props.stylesData || ''}
 `
 const searchPage = (props: ClientPagesTypes) => {
-    const settings = useSelector((state: settingsPropTypes) => state.settings);
-    const posts = useSelector((state:StoreTypes) => state.posts.posts)
+    const settings = useSelector((store: settingsPropTypes) => store.settings);
+    const posts = useSelector((store:StoreTypes) => store.posts.posts)
     const router = useRouter()
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>

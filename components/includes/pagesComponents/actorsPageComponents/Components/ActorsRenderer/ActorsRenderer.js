@@ -48,8 +48,8 @@ let ActorsRendererStyledDiv = styled.div`
 
 const ActorsRenderer = ({metaData, postElementSize}) => {
 
-    const actorsMetas = metaData ? metaData : useSelector(state => state.posts.actorsMetas)
-    const elementSize = postElementSize ? postElementSize : useSelector(state => state.settings?.design?.postElementSize);
+    const actorsMetas = metaData ? metaData : useSelector(store => store?.posts.actorsMetas)
+    const elementSize = postElementSize ? postElementSize : useSelector(store => store?.settings?.design?.postElementSize);
 
     const dispatch = useDispatch()
 

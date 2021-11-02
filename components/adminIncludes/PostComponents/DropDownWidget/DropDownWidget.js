@@ -26,7 +26,7 @@ const DropDownWidgetStyledDiv = styled.div`
   }
 `
 const DropDownWidget = props => {
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts.post);
     if (post.postType !== 'video' && post.type === 'actors') {
         return null
     } else if (post.postType === props.renderFor || props.renderFor === 'all') {

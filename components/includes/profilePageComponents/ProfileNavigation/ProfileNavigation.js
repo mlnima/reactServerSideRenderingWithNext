@@ -45,7 +45,7 @@ const ProfileNavigationStyledDiv = styled.div`
 `
 const ProfileNavigation = props => {
 
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(store => store?.user?.userData)
 
     const [navigationData, setNavigationData] = useState({
         isOpen: false,

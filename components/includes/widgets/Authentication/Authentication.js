@@ -90,7 +90,7 @@ const AuthenticationStyledDiv = styled.div`
 `
 
 const Authentication = props => {
-    const user = useSelector(state => state?.user)
+    const user = useSelector(store => store?.user)
     const router = useRouter()
     const [open, setOpen] = useState(false)
 

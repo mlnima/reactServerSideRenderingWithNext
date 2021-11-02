@@ -16,7 +16,7 @@ const ChatRoomOnlineUsersListStyledDiv = styled.div`
 `
 const ChatRoomOnlineUsersList = () => {
 
-    const chatroomUsers = useSelector(state => state.chatroom.onlineUsers)
+    const chatroomUsers = useSelector(store => store?.chatroom?.onlineUsers)
 
     const renderOnlineUsers = _.uniqBy(chatroomUsers, e => e.username).sort((a, b) => a.username > b.username ? 1 : -1).map(onlineUser => {
             return (

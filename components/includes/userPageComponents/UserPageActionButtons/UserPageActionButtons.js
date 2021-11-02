@@ -41,8 +41,8 @@ const UserPageActionButtonsStyledDiv = styled.div`
 const UserPageActionButtons = ({t, _id}) => {
     const router = useRouter()
     const dispatch = useDispatch()
-    const userData = useSelector(state => state.user.userData)
-    const userPageData = useSelector(state => state.user.userPageData)
+    const userData = useSelector(store => store.user.userData)
+    const userPageData = useSelector(store => store.user.userPageData)
 
     const onFollowHandler = () => {
         if (userPageData._id) {

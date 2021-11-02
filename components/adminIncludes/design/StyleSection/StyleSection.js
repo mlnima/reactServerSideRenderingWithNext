@@ -29,7 +29,7 @@ const StyleSectionStyledDiv = styled.div`
 const StyleSection = props => {
     const editorRef = useRef(null);
     const dispatch = useDispatch()
-    const design = useSelector(state => state?.settings.design)
+    const design = useSelector(store => store?.settings.design)
 
     const onChangeHandler = (event) => {
 

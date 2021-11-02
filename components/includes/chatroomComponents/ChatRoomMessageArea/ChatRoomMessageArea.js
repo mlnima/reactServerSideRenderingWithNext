@@ -19,7 +19,7 @@ const ChatRoomMessageAreaStyledMain = styled.main`
 const ChatRoomMessageArea = () => {
     const dispatch = useDispatch()
     const messageAreaRef = useRef(null)
-    const chatroomMessages = useSelector(state => state?.chatroom?.messages)
+    const chatroomMessages = useSelector(store => store?.chatroom?.messages)
 
     useEffect(() => {
         messageAreaRef.current.scroll({

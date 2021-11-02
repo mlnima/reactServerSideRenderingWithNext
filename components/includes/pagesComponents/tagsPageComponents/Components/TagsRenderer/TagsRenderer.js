@@ -47,8 +47,8 @@ let TagsRendererStyledDiv = styled.div`
 
 const TagsRenderer = ({metaData,postElementSize}) => {
 
-    const tagsMetas = metaData?metaData: useSelector(state => state.posts.tagsMetas)
-    const elementSize = postElementSize ? postElementSize : useSelector(state => state.settings?.design?.postElementSize);
+    const tagsMetas = metaData?metaData: useSelector(store => store?.posts.tagsMetas)
+    const elementSize = postElementSize ? postElementSize : useSelector(store => store?.settings?.design?.postElementSize);
 
 
     const dispatch = useDispatch()

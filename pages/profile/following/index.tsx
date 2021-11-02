@@ -18,7 +18,7 @@ const FollowingStyledDiv = styled.div`
   margin: auto;
 `
 const Following = (props: ClientPagesTypes) => {
-    const userData = useSelector((state: StoreTypes) => state?.user?.userData)
+    const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const dispatch = useDispatch()
     const [following, setFollowing] = useState([]);
 
@@ -29,7 +29,7 @@ const Following = (props: ClientPagesTypes) => {
 
     useEffect(() => {
         // @ts-ignore
-        if (userData?.following?.length > 0) {
+        if (userData?.following?.length) {
             getMultipleUserDataById(userData?.following).then(res => {
                 // @ts-ignore
                 setFollowing(res?.data?.users || [])

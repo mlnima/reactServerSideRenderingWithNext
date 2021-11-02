@@ -6,8 +6,8 @@ import {useDispatch, useSelector} from 'react-redux';
 import AlertBox from "../includes/AlertBox/AlertBox";
 
 const MessengerLayout = props => {
-    const globalState = useSelector(state => state.globalState)
-    const settings = useSelector(state => state.settings)
+    const globalState = useSelector(store => store?.globalState)
+    const settings = useSelector(store => store?.settings)
     const dispatch = useDispatch()
 
     useEffect(() => {

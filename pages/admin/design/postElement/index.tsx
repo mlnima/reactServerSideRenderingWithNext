@@ -7,7 +7,7 @@ import dynamic from "next/dynamic";
 const StyleSection = dynamic(() => import('../../../../components/adminIncludes/design/StyleSection/StyleSection'),{ssr:false});
 
 const postElement = () => {
-    const design = useSelector((state:StoreTypes) => state.settings.design)
+    const design = useSelector((store:StoreTypes) => store.settings.design)
     const dispatch = useDispatch()
 
     return (

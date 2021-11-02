@@ -39,7 +39,7 @@ const PostMetaStyledDiv = styled.div`
 
 
 const PostMeta = ({t, data, type}) => {
-    const filterMeta = data.length > 0 ? data.filter(m => m.name.length > 1) : [];
+    const filterMeta = data.length ? data.filter(m => m.name.length > 1) : [];
     const renderData = filterMeta.map(item => {
         const typePath = item.type === 'tags' ? 'tag' :
             item.type === 'categories' ? 'category' :

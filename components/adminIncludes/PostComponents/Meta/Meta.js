@@ -33,7 +33,7 @@ const MetaStyledDiv = styled.div`
 
 const Meta = props => {
     let newItemsElement = useRef(null);
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts.post);
 
     const deleteItem = (e) => {
         props.onDeleteHandler(props.type, e.currentTarget.name)

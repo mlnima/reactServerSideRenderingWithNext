@@ -9,7 +9,7 @@ import {StoreTypes} from "../_variables/TypeScriptTypes/GlobalTypes";
 
 const Home = ({}: ClientPagesTypes) => {
 
-    const settings = useSelector((state: StoreTypes) => state.settings);
+    const settings = useSelector((store: StoreTypes) => store.settings);
 
     return (
         < MainWidgetArea

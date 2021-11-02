@@ -1,6 +1,5 @@
 import Link from "next/link";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
 
 const EditLinkForAdminStyledDiv = styled.div`
   width: 100%;
@@ -26,14 +25,7 @@ const EditLinkForAdminStyledDiv = styled.div`
   }
 `
 
-
-
-
 const EditLinkForAdmin = ({_id}) => {
-
-    const userData = useSelector(state => state.user.userData)
-
-    if (userData.role === 'administrator') {
         return (
             <EditLinkForAdminStyledDiv className='edit-as-admin'>
 
@@ -48,6 +40,5 @@ const EditLinkForAdmin = ({_id}) => {
             </EditLinkForAdminStyledDiv>
 
         )
-    } else return null
 };
 export default EditLinkForAdmin;

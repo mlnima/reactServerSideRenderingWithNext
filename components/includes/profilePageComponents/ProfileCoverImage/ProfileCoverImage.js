@@ -28,7 +28,7 @@ const ProfileCoverImageStyledDiv = styled.div`
 const ProfileCoverImage = props => {
     const dispatch = useDispatch()
     const uploadInputElement = useRef(null)
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(store => store?.user?.userData)
 
     const [state, setState] = useState({
         style: {

@@ -159,7 +159,7 @@ export const getFirstLoadData = async (req, dynamicWidgets,store) => {
     try {
 
         const cache = process.env.NODE_ENV !== 'development'
-        const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length > 0 ? [...dynamicWidgets] : [];
+        const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length ? [...dynamicWidgets] : [];
         const staticWidgets = process.env.NEXT_PUBLIC_STATIC_WIDGETS ? JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS) : []
         const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet]}, cache)
         const dynamicWidgetsData = widgetData.data?.widgets ?? []
@@ -187,7 +187,7 @@ export const getFirstLoadDataStatic = async ( dynamicWidgets,store) => {
     try {
         const cache = process.env.NODE_ENV !== 'development'
         const referer = false;
-        const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length > 0 ? [...dynamicWidgets] : [];
+        const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length  ? [...dynamicWidgets] : [];
         const staticWidgetsToGet = referer ? [] : ['footer', 'header', 'topBar', 'navigation'];
         const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
         const widgets = widgetData.data?.widgets || []

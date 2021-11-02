@@ -51,11 +51,11 @@ const AdminLayoutStyledDiv = styled.div`
   }
 `
 const AdminLayout = props => {
-    const settings = useSelector(state => state.settings)
-    const globalState = useSelector(state => state.globalState)
+    const settings = useSelector(store => store?.settings)
+    const globalState = useSelector(store => store?.globalState)
     const dispatch = useDispatch()
-    const loggedIn = useSelector(state => state.user.loggedIn)
-    const userData = useSelector(state => state.user.userData)
+    const loggedIn = useSelector(store => store?.user?.loggedIn)
+    const userData = useSelector(store => store?.user?.userData)
     const container = useRef(null);
     const Admin = useRef(null);
 

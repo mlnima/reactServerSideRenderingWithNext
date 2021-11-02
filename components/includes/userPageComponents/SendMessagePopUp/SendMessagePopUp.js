@@ -41,7 +41,7 @@ const SendMessagePopUpStyledDiv = styled.div`
     }
 `
 const SendMessagePopUp = props => {
-    const userData = useSelector(state => state?.user.userData)
+    const userData = useSelector(store => store?.user.userData)
     const [state, setState] = useState({
         sender: userData._id,
         receiver: props.receiverId,

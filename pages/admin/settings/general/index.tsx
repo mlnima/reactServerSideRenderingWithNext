@@ -99,7 +99,7 @@ let StyledForm = styled.form`
 
 const settings = () => {
     const dispatch = useDispatch()
-    const identity = useSelector((state:StoreTypes) => state.settings.identity)
+    const identity = useSelector((store:StoreTypes) => store.settings.identity)
     const keywordsInput = useRef(null)
 
     const [editingSettings, setEditingSettings] = useState({

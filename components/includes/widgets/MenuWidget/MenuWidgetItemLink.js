@@ -24,7 +24,7 @@ const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl,activeLi
                 </Link> :
                 <a className='menu-widget-item-link' href={linkTargetUrl}>{linkName}</a>
             }
-            {linkType === 'parent' && subItems?.length > 0 ?
+            {linkType === 'parent' && subItems?.length ?
                 <button className='open-submenus' onClick={onOpenSubmenusHandler}>
                     <FontAwesomeIcon icon={showSub ? faSortUp : faSortDown} className='navigation-dropdown-icon' style={{color: 'white', width: '20px', height: '20px'}}/>
                 </button>

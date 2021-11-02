@@ -12,7 +12,7 @@ module.exports = data =>{
          metaQuery : meta ? {$or: [{categories: meta}, {tags: meta}, {actors: meta}]}:{},
          searchQuery : data.keyword ? !data.lang || data.lang === 'default' ? {$or: [{title: new RegExp(data.keyword, 'i')}]} :
                       {$or: [{title: new RegExp(data.keyword, 'i')}, {[`translations.${data.lang}.title`]: new RegExp(data.keyword, 'i')},]} : {},
-         selectedFields : data.fields && data.fields?.length > 0 || !data.fields ? [] : data.fields,
+         selectedFields : data.fields && data.fields?.length || !data.fields ? [] : data.fields,
          sortQuery : sort === 'createdAt' || sort === 'random' || !sort ? {} : {[sort]: -1}
     }
 }

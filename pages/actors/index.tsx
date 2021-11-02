@@ -8,10 +8,10 @@ import ActorsRenderer from "../../components/includes/pagesComponents/actorsPage
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {wrapper} from "../../store/store";
 import {SET_ACTORS_METAS} from "../../store/types";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+
 
 const ActorsPageStyledDiv = styled.div`
   grid-area: main;
@@ -25,8 +25,8 @@ const ActorsPageStyledDiv = styled.div`
   }
 `
 const actorsPage = () => {
-    const isWithSidebar = useSelector((state: settingsPropTypes) => state.settings?.identity?.metaPageSidebar);
-    const totalCount = useSelector((state: StoreTypes) => state.posts.totalCount)
+    const isWithSidebar = useSelector((store: StoreTypes) => store.settings?.identity?.metaPageSidebar);
+    const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
     const router = useRouter();
 
     return (

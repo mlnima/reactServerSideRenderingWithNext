@@ -82,7 +82,7 @@ let StyledDiv = styled.div`
 
 const SideBar = () => {
     const dispatch = useDispatch()
-    const sidebar = useSelector(state => state?.adminPanelGlobalState?.sidebar)
+    const sidebar = useSelector(store => store?.adminPanelGlobalState?.sidebar)
 
     const [state, setState] = useState({
         Dashboard: {
@@ -192,7 +192,7 @@ const SideBar = () => {
 
         })
         const RenderArrowsForSubMenus = () => {
-            if (state[item].subItems.length > 0) {
+            if (state[item].subItems.length ) {
                 return (
                     <span key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
                         <FontAwesomeIcon icon={ hovered === item ? faSortUp : faSortDown} className='fontawesomeSvgVerySmall' />

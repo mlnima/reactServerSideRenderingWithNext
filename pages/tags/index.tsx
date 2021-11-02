@@ -8,7 +8,7 @@ import TagsRenderer from "../../components/includes/pagesComponents/tagsPageComp
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {settingsPropTypes, StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import { StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {wrapper} from "../../store/store";
 import {SET_TAGS_METAS} from "../../store/types";
 
@@ -24,8 +24,8 @@ const TagsPageStyledDiv = styled.div`
   }
 `
 const tagsPage = () => {
-    const isWithSidebar = useSelector((state: settingsPropTypes) => state.settings?.identity?.metaPageSidebar);
-    const totalCount = useSelector((state: StoreTypes) => state.posts.totalCount)
+    const isWithSidebar = useSelector((store: StoreTypes) => store.settings?.identity?.metaPageSidebar);
+    const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
     const router = useRouter()
 
     return (

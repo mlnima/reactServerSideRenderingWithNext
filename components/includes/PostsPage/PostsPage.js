@@ -23,8 +23,8 @@ let PostsContainer = styled.div`
 
 const PostsPage = () => {
     // @ts-ignore
-    const posts = useSelector(state => state.posts.posts)
-    const totalCount = useSelector(state => state.posts.totalCount)
+    const posts = useSelector(store => store?.posts?.posts)
+    const totalCount = useSelector(store => store?.posts?.totalCount)
     const postsToRender = useMemo(()=>{
         return posts
     },posts)

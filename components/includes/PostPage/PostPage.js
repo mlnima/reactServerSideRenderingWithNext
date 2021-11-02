@@ -4,9 +4,11 @@ import * as Scroll from "react-scroll";
 import {likeValueCalculator} from "../../../_variables/_variables";
 import {getComments, likeDislikeView} from "../../../_variables/ajaxPostsVariables";
 import dynamic from "next/dynamic";
-
+import PostPageStyledMain from './PostPageStyle'
+import {useSelector} from "react-redux";
+import {settingsPropTypes, StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
-const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'))
+const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'),{ssr:false})
 const PostMetaDataToSiteHead = dynamic(() => import('./components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
 const VideoPlayer = dynamic(() => import('./components/VideoPlayer/VideoPlayer'))
 const SlideShow = dynamic(() => import('./components/SlideShow/SlideShow'))
@@ -19,82 +21,14 @@ const PostMeta = dynamic(() => import('./components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('./components/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('./components/CommentFrom/CommentFrom'))
 
-import styled from "styled-components";
-import {useSelector} from "react-redux";
 
-const PostPageStyledMain = styled.main`
-  display: flex;
-  justify-self: center;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  width: 100%;
-  grid-area: main;
-
-  .rating-price-download {
-    width: 100%;
-    background-color: var(--post-page-info-background-color, #181818);
-    display: flex;
-    justify-content: center;
-    flex-wrap: wrap;
-
-    .rate-logo {
-      width: 30px;
-      height: 35px;
-      transition: .5s;
-
-      &:hover {
-        width: 35px;
-        height: 40px;
-      }
-    }
-
-    .price-information {
-      margin: 0 20px;
-      display: flex;
-      align-items: center;
-      font-size: 25px;
-      font-weight: bold;
-
-      .price-info-logo {
-        width: 23px;
-        height: 23px;
-      }
-    }
-  }
-
-  .promotion-thumbnail-link {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-
-    .main-thumbnail {
-      margin: auto;
-      max-width: 320px;
-    }
-
-    .redirect-link {
-      color: var(--main-text-color);
-      padding: 10px 20px;
-      border: var(--main-text-color) 1px solid;
-    }
-  }
-
-  @media only screen and (min-width: 768px) {
-
-    .rating-price-download {
-      justify-content: space-between;
-      align-items: center;
-      flex-wrap: wrap;
-    }
-  }
-
-  ${(props) => props?.postPageStyle || ''}
-`
-
-const PostPage = ({design, post, identity, comments, widgets}) => {
-    const postPageStyle = useSelector(state => state?.settings.design.postPageStyle)
+const PostPage = ( ) => {
+    const postPageStyle = useSelector(store => store?.settings.design.postPageStyle)
+    const userData = useSelector((store) => store?.user?.userData)
+    const identity = useSelector((store) => store?.settings.identity);
+    const comments = useSelector(store => store?.posts?.comments)
+    const post = useSelector((store ) => store?.posts.post);
+    const settings = useSelector((store) => store?.settings);
     const router = useRouter()
 
     const [state, setState] = useState({
@@ -108,13 +42,13 @@ const PostPage = ({design, post, identity, comments, widgets}) => {
             maxHeight: '25px'
         }
     });
-    const [deviceWidth, setDeviceWidth] = useState(null)
+    const [deviceWidth, setDeviceWidth] = useState(null);
+
     const [ratingAndViewData, setRatingAndViewData] = useState({
         like: 0,
         disLike: 0,
         view: 0
     })
-
 
     const [commentsData, setCommentsData] = useState(() => {
         return comments
@@ -127,11 +61,9 @@ const PostPage = ({design, post, identity, comments, widgets}) => {
         }
         likeDislikeView(post._id, 'views').then(res => {
             if (res.data.updatedData) {
-
                 setRatingAndViewData(res.data.updatedData)
             }
         })
-
     }, []);
 
     useEffect(() => {
@@ -142,24 +74,12 @@ const PostPage = ({design, post, identity, comments, widgets}) => {
                 postAbsolutePath: window.location.href
             });
         }
-
     }, [post.likes, post.disLikes]);
-
-    const reGetComments = async () => {
-        try {
-            const commentsReq = await getComments({onDocument: post._id}, process.env.NEXT_PUBLIC_PRODUCTION_URL, true)
-            setCommentsData(post ? commentsReq?.data?.comments : [])
-        } catch (err) {
-
-        }
-
-    }
-
 
     return (
         <PostPageStyledMain className='main post-page' postPageStyle={postPageStyle}>
 
-            <EditLinkForAdmin _id={post._id}/>
+            {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id}/> :null}
 
             <PostMetaDataToSiteHead {...post} url={router.asPath}/>
 
@@ -196,15 +116,11 @@ const PostPage = ({design, post, identity, comments, widgets}) => {
             <PostMeta type='actors' data={post.actors || []}/>
             <PostMeta type='tags' data={post.tags || []}/>
             <PostMeta type='categories' data={post.categories || []}/>
-            {(widgets || []).filter(widget => widget.data.position === 'underPost').length > 0 ?
-                <div className='under-post-widget-area'>
-                    <WidgetsRenderer deviceWidth={deviceWidth}
-                                     widgets={(widgets || []).filter(widget => widget.data.position === 'underPost')}
-                                     position='underPost'
-                                     postElementSize={design?.data?.postElementSize}/>
-                </div> : null}
-            <CommentFrom reGetComments={reGetComments} documentId={post._id} documentTitle={post.title}/>
-            {comments?.length > 0 ? <CommentsRenderer reGetComments={reGetComments} comments={commentsData}/> : null}
+            <div className='under-post-widget-area'>
+                <WidgetsRenderer position='underPost' />
+            </div>
+            <CommentFrom documentId={post._id} documentTitle={post.title}/>
+            {comments?.length ? <CommentsRenderer comments={commentsData}/> : null}
 
 
         </PostPageStyledMain>

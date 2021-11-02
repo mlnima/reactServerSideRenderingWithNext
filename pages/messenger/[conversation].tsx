@@ -25,9 +25,9 @@ import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 const conversation = (props: ClientPagesTypes) => {
     const dispatch = useDispatch()
     const router = useRouter();
-    const userData = useSelector((state: StoreTypes) => state.user.userData);
-    const callData = useSelector((state: StoreTypes) => state.user.callData);
-    const users = useSelector((state: StoreTypes) => state.user.activeConversation?.users);
+    const userData = useSelector((store: StoreTypes) => store.user.userData);
+    const callData = useSelector((store: StoreTypes) => store.user.callData);
+    const users = useSelector((store: StoreTypes) => store.user.activeConversation?.users);
     const [connectedUserData, setConnectedUserData] = useState({
         profileImage: undefined
     });

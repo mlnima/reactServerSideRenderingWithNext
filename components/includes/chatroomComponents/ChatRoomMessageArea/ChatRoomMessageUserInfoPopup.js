@@ -91,8 +91,8 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
 const ChatRoomMessageUserInfoPopup = ({t}) => {
     const router = useRouter();
     const dispatch = useDispatch();
-    const activeVisibleProfile = useSelector(state => state.chatroom.activeVisibleProfile);
-    const loggedIn = useSelector(state => state?.user?.loggedIn)
+    const activeVisibleProfile = useSelector(store => store?.chatroom?.activeVisibleProfile);
+    const loggedIn = useSelector(store => store?.user?.loggedIn)
 
     const onConversationHandler = () => {
         if (loggedIn){

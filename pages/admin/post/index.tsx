@@ -38,9 +38,9 @@ const AdminPostPageStyledDiv = styled.div`
 `
 
 const Index = () => {
-    const userData = useSelector((state:StoreTypes) => state.user.userData);
-    const post = useSelector((state:StoreTypes) => state.adminPanelPosts.post);
-    const activeEditingLanguage = useSelector((state:StoreTypes) => state.adminPanelPosts.activeEditingLanguage);
+    const userData = useSelector((store:StoreTypes) => store.user.userData);
+    const post = useSelector((store:StoreTypes) => store.adminPanelPosts.post);
+    const activeEditingLanguage = useSelector((store:StoreTypes) => store.adminPanelPosts.activeEditingLanguage);
     const dispatch = useDispatch()
     const router = useRouter();
     const languageElement = useRef(null)

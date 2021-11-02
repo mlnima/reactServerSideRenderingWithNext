@@ -99,10 +99,10 @@ const SlideShow = ({post, sidebar, deviceWidth}) => {
         }
     }
     const RenderImageElement = () => {
-        const activeImageSrc = post.images.length > 0 ? post.images[state.activeImageIndex] : post.mainThumbnail
+        const activeImageSrc = post.images.length ? post.images[state.activeImageIndex] : post.mainThumbnail
 
         if (activeImageSrc.includes('http')) {
-            if (post.images.length > 0) {
+            if (post.images.length) {
                 return (
                     <img className='active-image' src={activeImageSrc} alt="activeImageSrc"/>
                 )

@@ -1,8 +1,10 @@
 import React from 'react';
 import styled from "styled-components";
+import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
-import TextEditors from "../../TextEditors/TextEditors";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+const TextEditors = dynamic(()=>import('../../TextEditors/TextEditors'))
+//import TextEditors from '../../TextEditors/TextEditors';
 
 let TitleDescriptionStyledDiv = styled.div`
   width: 98%;
@@ -42,6 +44,12 @@ let TitleDescriptionStyledDiv = styled.div`
 const TitleDescription = (props:any) => {
     const post = useSelector((state : StoreTypes)=> state?.adminPanelPosts.post);
     const activeEditingLanguage = useSelector((state : StoreTypes) => state?.adminPanelPosts.activeEditingLanguage);
+    const allowsEditorToUse = post?.postType === 'learn' ? ['ReactPage'] :
+                              post?.postType === 'video' ? ['Monaco','SunEditor','ReactQuillEditor'] :
+                              ['Monaco','SunEditor','ReactQuillEditor','ReactPage']
+    const openEditorOnLoad =  post?.postType === 'learn' ? 'ReactPage' :
+                              post?.postType === 'video' ? 'Monaco' :
+                             'SunEditor'
 
     return (
         <TitleDescriptionStyledDiv className='title-description'>
@@ -52,7 +60,8 @@ const TitleDescription = (props:any) => {
                    onChange={e => props.onChangeHandler(e)}/>
             {/*// @ts-ignore*/}
             <TextEditors value={(activeEditingLanguage === 'default' ? post.description : post?.translations?.[activeEditingLanguage]?.description) || ''}
-                         use={['Monaco','SunEditor','ReactQuillEditor','ReactPage']}
+                         use={allowsEditorToUse}
+                         openWith={openEditorOnLoad}
                          language={'html'}
                          onChangeHandler={props.onDescriptionChangeHandler}
                          width={'100%'}

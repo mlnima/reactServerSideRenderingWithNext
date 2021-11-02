@@ -10,7 +10,7 @@ export interface ClientPagesTypes {
     stylesData: string;
 
     referer: boolean ;
-    widgets: WidgetPropTypes[] | undefined;
+    widgets?: WidgetPropTypes[] ;
     metaSource:MetasPropTypes;
     comments:object[],
     post:object,

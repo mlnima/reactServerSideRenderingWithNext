@@ -90,8 +90,8 @@ const WidgetModelStyledDiv = styled.div`
 
 const WidgetModel = props => {
     const dispatch = useDispatch()
-    const widgets = useSelector(state => state.widgets.widgets)
-    const customPages = useSelector(state => state.adminPanelGlobalState?.customPages)
+    const widgets = useSelector(store => store?.widgets?.widgets)
+    const customPages = useSelector(store => store?.adminPanelGlobalState?.customPages)
 
     const [widgetSettings, setWidgetSettings] = useState({
         open: false,

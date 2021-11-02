@@ -33,8 +33,8 @@ let StyledMain = styled.main`
 `
 const categoryPage = (props: ClientPagesTypes) => {
     // @ts-ignore
-    const category = useSelector(state => state.posts.categoryData)
-    const settings = useSelector((state: settingsPropTypes) => state.settings);
+    const category = useSelector((store: settingsPropTypes) => store.posts.categoryData)
+    const settings = useSelector((store: settingsPropTypes) => store.settings);
 
     const router = useRouter()
 

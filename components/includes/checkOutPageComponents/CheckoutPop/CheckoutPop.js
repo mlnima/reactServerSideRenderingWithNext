@@ -5,7 +5,7 @@ import CheckOutItemPreview from "../CheckOutItemPreview/CheckOutItemPreview";
 const CheckoutPop = props => {
     const [itemsData, setItemsData] = useState([])
     // useEffect(() => {
-    //     if (contextData.checkOutData.items.length > 0) {
+    //     if (contextData.checkOutData.items.length ) {
     //         getCheckOutItems()
     //     }
     // }, [contextData.checkOutData]);
@@ -51,7 +51,7 @@ const CheckoutPop = props => {
 
     // if (contextData.state.checkoutSlideEnable) {
     //
-    //     if (contextData.checkOutData.items.length >0){
+    //     if (contextData.checkOutData.items.length){
     //         return (
     //             <div className='checkout-pop'>
     //                 <div className='checkout-container'>

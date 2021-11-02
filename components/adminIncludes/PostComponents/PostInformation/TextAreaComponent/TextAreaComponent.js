@@ -2,7 +2,7 @@ import { convertVariableNameToName } from '../../../../../_variables/_variables'
 import {useSelector} from "react-redux";
 
 const TextAreaComponent = props => {
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts.post);
     if (props.rendering){
         return (
             <div className='post-information-section'>

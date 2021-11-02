@@ -8,7 +8,7 @@ const MyProfileInfoStyledDiv = styled.div`
   }
 `
 const MyProfileInfo = () => {
-    const userData = useSelector(state => state?.user?.userData)
+    const userData = useSelector(store => store?.user?.userData)
 
     return (
         <MyProfileInfoStyledDiv className='my-profile-info'>

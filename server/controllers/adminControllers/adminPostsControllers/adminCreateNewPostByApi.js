@@ -38,7 +38,7 @@ module.exports = async (req, res) => {
                         {videoEmbedCode: req.body.postData.videoEmbedCode},
                     ]
                 }).exec().then(async posts => {
-                if (posts.length > 0) {
+                if (posts.length) {
                     res.status(403).send({error: 'title ** ' + newPost.title + ' ** already exist in the Database'})
                     // res.json({ savedPostData });
                 } else {

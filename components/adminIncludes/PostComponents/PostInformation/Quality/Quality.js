@@ -1,7 +1,7 @@
 import {useSelector} from "react-redux";
 
 const Quality = props => {
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts.post);
     if (props.rendering){
         return (
             <div className='post-information-section'>

@@ -121,7 +121,7 @@ let StyledDiv = styled.div`
 `
 
 const PostInformation = props => {
-    const post = useSelector((state) => state?.adminPanelPosts?.post);
+    const post = useSelector((store) => store?.adminPanelPosts?.post);
     useEffect(() => {
         console.log(post)
     }, [post]);

@@ -1,24 +1,27 @@
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
 import {getComments, getPost} from "../../../_variables/ajaxPostsVariables";
-import PostPage from "../../../components/includes/PostPage/PostPage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {ClientPagesTypes} from "../../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../../store/store";
 import * as types from "../../../store/types";
 import {useSelector} from "react-redux";
-import {settingsPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import dynamic from "next/dynamic";
+const LearnTypePostPage = dynamic(() => import('../../../components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
+const PostPage = dynamic(() => import('../../../components/includes/PostPage/PostPage'))
 
-const postPage = ({widgets}: ClientPagesTypes) => {
-    const settings = useSelector((state: settingsPropTypes) => state.settings);
-    const post = useSelector((state: settingsPropTypes) => state.posts.post);
-    const comments = useSelector((state: settingsPropTypes) => state.posts.comments);
-    return (
-        // @ts-ignore
-        <PostPage design={settings.design} post={post} identity={settings.identity} comments={comments} widgets={widgets}/>
-    );
+const postPage = () => {
+    const postType = useSelector((store: StoreTypes) => store?.posts?.post?.postType);
+
+    if (postType === 'learn') {
+        return (
+            <LearnTypePostPage/>
+        )
+    } else {
+        return (
+            <PostPage/>
+        );
+    }
 };
-
-
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {

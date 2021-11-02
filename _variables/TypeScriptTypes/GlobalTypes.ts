@@ -170,12 +170,12 @@ export interface ChatroomStateTypes {
 }
 
 export interface PostStateTypes {
-    posts: object[],
+    posts: PostTypes[],
     actorData: object,
     categoryData: object,
     tagData: object,
     totalCount: number,
-    post: object,
+    post: PostTypes,
     comments: object[],
 }
 

@@ -19,7 +19,7 @@ const PostsStyledDiv = styled.div`
   }
 `
 const Posts = () => {
-    const userData = useSelector(state => state?.user.userData)
+    const userData = useSelector(store => store?.user.userData)
     const router = useRouter();
 
     const [state, setState] = useState({

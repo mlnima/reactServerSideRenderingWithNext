@@ -6,7 +6,7 @@ import {useRouter} from "next/router";
 
 const SaveDesignChangesBtn = ({reload}) => {
     const dispatch = useDispatch()
-    const design = useSelector(state => state?.settings.design)
+    const design = useSelector(store => store?.settings.design)
     const router = useRouter()
 
     const onSaveHandler = () => {

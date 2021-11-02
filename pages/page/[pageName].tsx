@@ -57,7 +57,7 @@ export default page;
 //
 //         let allParams: { params: { pageName: string }, locale: string }[] = []
 //
-//         if (pagesData.length > 0) {
+//         if (pagesData.length ) {
 //             locales.forEach((locale: string) => {
 //                 allParams.push(...pagesData.map((pageData: { pageName: string }) => {
 //                     return {params: {pageName: pageData.pageName}, locale}

@@ -32,13 +32,13 @@ const MessengerConversationMessageToolsStyledForm = styled.form`
 `
 
 const MessengerConversationMessageTools = props => {
-    const userData = useSelector((state) => state.user.userData);
+    const userData = useSelector((store) => store?.user.userData);
     const messageInput = useRef(null)
 
     const onSendMessageHandler = e => {
         e.preventDefault()
         const messageInputData = messageInput ? messageInput.current.value : ''
-        if (messageInputData.length > 0 && messageInputData.length < 500) {
+        if (messageInputData.length && messageInputData.length < 500) {
             const messageData = {
                 messageBody: messageInputData,
                 createdAt: Date.now(),

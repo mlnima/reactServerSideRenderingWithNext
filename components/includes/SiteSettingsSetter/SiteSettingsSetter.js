@@ -6,7 +6,7 @@ import {useSelector} from "react-redux";
 
 
 const SiteSettingSetter = () => {
-    const settings = useSelector(state => state?.settings)
+    const settings = useSelector(store => store?.settings)
     const router = useRouter()
 
     const keywordsData = settings.identity?.translations?.[router.locale]?.keywords || settings.identity?.data?.keywords || [];
@@ -27,7 +27,7 @@ const SiteSettingSetter = () => {
             <meta name="viewport" content="width=device-width, initial-scale=1"/>
             <meta charSet="utf-8"/>
             <meta name="description" content={settings.identity?.translations?.[router.locale]?.description || settings.identity?.description || ''}/>
-            {settings.identity?.keywords?.length > 0 ? <meta name="keywords" content={keywords}/> : null}
+            {settings.identity?.keywords?.length ? <meta name="keywords" content={keywords}/> : null}
             {router.pathname === '/post/[postType]/[id]' ? null : localsUrl}
             <link rel="shortcut icon" href={settings.identity?.favIcon || '/static/images/favIcon/favicon.png'}/>
             <link rel="apple-touch-icon" href={settings.identity?.favIcon || '/static/images/favIcon/favicon.png'}/>

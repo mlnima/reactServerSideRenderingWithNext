@@ -38,7 +38,7 @@ const CommentStyledDiv = styled.div`
 
 const Comment = props => {
 
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(store => store?.user?.userData)
     const dispatch = useDispatch()
 
     const onDeleteHandler = (id) => {

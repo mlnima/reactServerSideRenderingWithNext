@@ -4,7 +4,7 @@ import { getPosts } from '../../../../_variables/ajaxPostsVariables'
 import Posts from '../../Posts/Posts'
 import {useSelector} from "react-redux";
 const MyProfilePosts = props => {
-    const userData = useSelector(state => state?.user.userData)
+    const userData = useSelector(store => store?.user.userData)
 
     const [ state, setState ] = useState({
         posts:[],

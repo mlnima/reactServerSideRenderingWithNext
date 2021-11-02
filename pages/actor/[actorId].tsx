@@ -36,8 +36,8 @@ const StyledMain = styled.main`
 const actorPage = (props: ClientPagesTypes) => {
 
     // @ts-ignore
-    const actor = useSelector(state => state.posts.actorData)
-    const settings = useSelector((state: settingsPropTypes) => state.settings);
+    const actor = useSelector(store => store.posts.actorData)
+    const settings = useSelector((store: settingsPropTypes) => store.settings);
     const router = useRouter()
 
     return (

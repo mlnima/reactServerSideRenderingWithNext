@@ -1,25 +1,28 @@
 
 
 export interface PostTypes {
+    description: string | object,
     translations?:{
         [key:string] :{
             title?:string
-            description?:string
+            description?:string | object
         }
     },
     postType?:string,
-    views?:number
+    views?:number,
     title?:string,
     likes?:number,
     disLikes?:number,
-    redirectLink?:string
+    redirectLink?:string,
     videoTrailerUrl?:string,
     price?:string,
     duration?:string,
     actors?:object[],
     quality?:string,
     _id?:string,
-    mainThumbnail?:string
-    VideoTrailerUrl?:string
+    mainThumbnail?:string,
+    VideoTrailerUrl?:string,
+    categories:object[],
+    tags:object[]
 }
 

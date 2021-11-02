@@ -42,8 +42,8 @@ interface PostsComponentTypes {
 
 
 const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentTypes) => {
-    const settings = useSelector((state: settingsPropTypes) => state.settings);
-    const elementSize = postElementSize ? postElementSize : useSelector((state: settingsPropTypes) => state.settings?.design?.postElementSize);
+    const settings = useSelector((store: settingsPropTypes) => store.settings);
+    const elementSize = postElementSize ? postElementSize : useSelector((store: settingsPropTypes) => store.settings?.design?.postElementSize);
     const dispatch = useDispatch()
     const router = useRouter()
     const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';

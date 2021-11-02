@@ -74,7 +74,7 @@ const MenuWidgetStyledLi = styled.li`
   @media only screen and (min-width: 768px) {
     height: initial;
     font-size: 1rem;
-    width: ${props => !props.menuItem.parent ? (props.menuItem.subItems || []).length > 0 ? 'auto' : 'auto' : '50px '};
+    width: ${props => !props?.menuItem.parent ? (props?.menuItem.subItems || []).length  ? 'auto' : 'auto' : '50px '};
     background: initial;
     padding: 6px;
     margin: 0;
@@ -115,8 +115,8 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
 
         <MenuWidgetStyledLi menuItem={menuItem}
                             className={'menu-widget-item  btn btn-navigation'}
-                            onMouseEnter={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
-                            onMouseLeave={menuItem.subItems?.length > 0 ? onOpenSubmenusHandler : null}
+                            onMouseEnter={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
+                            onMouseLeave={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
                             activeLink={menuItem?.target ? router.asPath.includes(menuItem?.target) :false}
         >
             <MenuWidgetItemLink
@@ -130,7 +130,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
 
             />
-            {menuItem?.subItems?.length > 0 ?
+            {menuItem?.subItems?.length ?
                 <span className='open-submenus' aria-label='Center Align' onClick={onOpenSubmenusHandler}>
                     <FontAwesomeIcon icon={showSub ? faSortUp : faSortDown} className='navigation-dropdown-icon' style={{color: 'white', width: '20px', height: '20px'}}/>
                 </span>

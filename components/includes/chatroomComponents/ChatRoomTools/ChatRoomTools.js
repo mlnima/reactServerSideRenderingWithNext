@@ -76,7 +76,7 @@ const ChatRoomToolsStyledFrom = styled.form`
 
 const ChatRoomTools = () => {
     const dispatch = useDispatch()
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(store => store?.user?.userData)
     const colorPicker = useRef(null)
     const router = useRouter()
 
@@ -101,7 +101,7 @@ const ChatRoomTools = () => {
 
         e.preventDefault()
 
-        if (userData._id && state.messageData.length > 0) {
+        if (userData._id && state.messageData.length) {
             const newMessageData = {
                 messageData: state.messageData,
                 roomName: router.query.chatRoomName,

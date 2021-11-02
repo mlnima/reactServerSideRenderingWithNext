@@ -3,7 +3,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../../../store/actions/globalStateActions";
 
 const WidgetExporter = () => {
-    const widgets = useSelector(state => state?.widgets.widgets)
+    const widgets = useSelector(store => store?.widgets.widgets)
     const dispatch = useDispatch()
 
     const exportAllWidgets=()=>{

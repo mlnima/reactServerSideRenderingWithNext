@@ -17,9 +17,9 @@ const MessengerConversationsListStyledDiv = styled.div`
 const MessengerConversationsList = () => {
     const dispatch = useDispatch()
     // @ts-ignore
-    const conversations = useSelector(state => state.user.conversations)
+    const conversations = useSelector(store => store.user.conversations)
     // @ts-ignore
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(store => store.user.userData)
 
     useEffect(() => {
         if (userData?._id) {

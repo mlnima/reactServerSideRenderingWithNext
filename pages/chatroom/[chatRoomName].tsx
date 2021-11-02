@@ -19,7 +19,7 @@ import {uniqBy} from 'lodash';
 const chatRoom = (props: ClientPagesTypes) => {
     const dispatch = useDispatch()
 
-    const user = useSelector((state: StoreTypes) => state.user)
+    const user = useSelector((store: StoreTypes) => store.user)
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
     const [isJoined, setIsJoined] = useState(false)
     const router = useRouter()

@@ -77,9 +77,9 @@ const user = (props: ClientPagesTypes) => {
     const dispatch = useDispatch()
     const router = useRouter()
     // @ts-ignore
-    const userPageData = useSelector(state => state.user.userPageData)
+    const userPageData = useSelector(store => store.user.userPageData)
     // @ts-ignore
-    const userData = useSelector(state => state.user.userData)
+    const userData = useSelector(store => store.user.userData)
 
     useEffect(() => {
         getUserData()

@@ -27,7 +27,7 @@ const ActorBioStyledDiv = styled.div`
 `
 
 const ActorBio = props => {
-    const actor = useSelector(state => state.posts.actorData)
+    const actor = useSelector(store => store?.posts?.actorData)
 
     return (
         <ActorBioStyledDiv className={'actor-bio'}>

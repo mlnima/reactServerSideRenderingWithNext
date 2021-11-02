@@ -23,8 +23,8 @@ const LoginRegisterPopupStyledDiv = styled.div`
 
 const LoginRegisterPopup = () => {
 
-    const globalState = useSelector((state:StoreTypes) => state.globalState)
-    const loggedIn = useSelector((state:StoreTypes) => state.user.loggedIn)
+    const globalState = useSelector((store:StoreTypes) => store.globalState)
+    const loggedIn = useSelector((store:StoreTypes) => store.user.loggedIn)
 
     if (globalState?.loginRegisterFormPopup && !loggedIn){
         return (

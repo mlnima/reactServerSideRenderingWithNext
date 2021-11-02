@@ -11,7 +11,7 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const customScript = (props: { width: any; height: any; }) => {
     const dispatch = useDispatch()
-    const identity = useSelector((state: StoreTypes) => state.settings.identity)
+    const identity = useSelector((store: StoreTypes) => store.settings.identity)
 
     const [customScriptsAsString, setCustomScriptsAsString] = useState(() => identity.customScriptsAsString)
 

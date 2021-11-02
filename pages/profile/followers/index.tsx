@@ -25,7 +25,7 @@ const Followers = ( ) => {
 
     useEffect(() => {
         // @ts-ignore
-        if (userData.followers?.length > 0) {
+        if (userData.followers?.length) {
             getMultipleUserDataById(userData?.followers).then(res => {
                 // @ts-ignore
                 setFollowers(res?.data?.users || [])

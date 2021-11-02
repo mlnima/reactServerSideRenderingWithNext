@@ -9,7 +9,7 @@ let StyledTextarea = styled.textarea`
         width: 90%;
 `
 const TextInput = props => {
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts.post);
     if (props.rendering){
         return (
             <div className='post-information-section'>
