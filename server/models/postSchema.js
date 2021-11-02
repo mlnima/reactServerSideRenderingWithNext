@@ -56,7 +56,7 @@ const postSchema =  new Schema({
     },
     availableCount:Number,
     premium: Boolean,
-    rating:String,
+    rating:Boolean,
     createdAt:Date,
     updatedAt:Date
 

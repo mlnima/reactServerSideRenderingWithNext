@@ -4,7 +4,6 @@ import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 const TextEditors = dynamic(()=>import('../../TextEditors/TextEditors'))
-//import TextEditors from '../../TextEditors/TextEditors';
 
 let TitleDescriptionStyledDiv = styled.div`
   width: 98%;
@@ -14,6 +13,8 @@ let TitleDescriptionStyledDiv = styled.div`
     width: 98%;
   }
   .text-editors{
+    background-color: var(--main-background-color, #000);
+    color: var(--post-page-info-color, #ccc);
     .text-editors-content{
       .quill{
         //margin-left: -1%;
@@ -44,9 +45,11 @@ let TitleDescriptionStyledDiv = styled.div`
 const TitleDescription = (props:any) => {
     const post = useSelector((state : StoreTypes)=> state?.adminPanelPosts.post);
     const activeEditingLanguage = useSelector((state : StoreTypes) => state?.adminPanelPosts.activeEditingLanguage);
+
     const allowsEditorToUse = post?.postType === 'learn' ? ['ReactPage'] :
                               post?.postType === 'video' ? ['Monaco','SunEditor','ReactQuillEditor'] :
                               ['Monaco','SunEditor','ReactQuillEditor','ReactPage']
+
     const openEditorOnLoad =  post?.postType === 'learn' ? 'ReactPage' :
                               post?.postType === 'video' ? 'Monaco' :
                              'SunEditor'
@@ -59,7 +62,7 @@ const TitleDescription = (props:any) => {
                    className='form-control-input' placeholder='Enter The Title Here'
                    onChange={e => props.onChangeHandler(e)}/>
             {/*// @ts-ignore*/}
-            <TextEditors value={(activeEditingLanguage === 'default' ? post.description : post?.translations?.[activeEditingLanguage]?.description) || ''}
+            <TextEditors value={activeEditingLanguage === 'default' ? post.description : post?.translations?.[activeEditingLanguage]?.description || {}}
                          use={allowsEditorToUse}
                          openWith={openEditorOnLoad}
                          language={'html'}

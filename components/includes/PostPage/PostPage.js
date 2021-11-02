@@ -33,14 +33,9 @@ const PostPage = ( ) => {
 
     const [state, setState] = useState({
         likeValue: 0,
-        postAbsolutePath: '',
         mode: 'view',
         isLiked: false,
         isDisliked: false,
-        svgDefaultStyle: {
-            maxWidth: '25px',
-            maxHeight: '25px'
-        }
     });
     const [deviceWidth, setDeviceWidth] = useState(null);
 
@@ -48,10 +43,6 @@ const PostPage = ( ) => {
         like: 0,
         disLike: 0,
         view: 0
-    })
-
-    const [commentsData, setCommentsData] = useState(() => {
-        return comments
     })
 
     useEffect(() => {
@@ -71,7 +62,6 @@ const PostPage = ( ) => {
             setState({
                 ...state,
                 likeValue: likeValueCalculator(post.likes, post.disLikes),
-                postAbsolutePath: window.location.href
             });
         }
     }, [post.likes, post.disLikes]);
@@ -81,7 +71,7 @@ const PostPage = ( ) => {
 
             {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id}/> :null}
 
-            <PostMetaDataToSiteHead {...post} url={router.asPath}/>
+            <PostMetaDataToSiteHead/>
 
             {post.postType === 'video' ? <VideoPlayer post={post}/> : null}
 
@@ -105,8 +95,8 @@ const PostPage = ( ) => {
 
             <div className='rating-price-download'>
                 <RatingButtons _id={post._id} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData}/>
-                {post.postType === 'product' ? <Price price={post.price} currency={post.currency} svgDefaultStyle={state.svgDefaultStyle}/> : null}
-                <DownloadLink downloadLink={post.downloadLink} render={post.downloadLink} svgDefaultStyle={state.svgDefaultStyle}/>
+                {post.postType === 'product' ? <Price price={post.price} currency={post.currency} /> : null}
+                <DownloadLink downloadLink={post.downloadLink} render={post.downloadLink}/>
             </div>
 
             {post.postType !== 'promotion' && post.postType !== 'article' ? <PostDescription description={post.description} translations={post.translations}/> : null}
@@ -120,7 +110,7 @@ const PostPage = ( ) => {
                 <WidgetsRenderer position='underPost' />
             </div>
             <CommentFrom documentId={post._id} documentTitle={post.title}/>
-            {comments?.length ? <CommentsRenderer comments={commentsData}/> : null}
+            {comments?.length ? <CommentsRenderer comments={comments}/> : null}
 
 
         </PostPageStyledMain>

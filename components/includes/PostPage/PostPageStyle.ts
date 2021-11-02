@@ -17,28 +17,15 @@ const PostPageStyledMain = styled.main`
     justify-content: center;
     flex-wrap: wrap;
 
-    .rate-logo {
-      width: 30px;
-      height: 35px;
-      transition: .5s;
-
-      &:hover {
-        width: 35px;
-        height: 40px;
+    
+    .rating-buttons{
+      .rating-item{
+        svg{
+          width: 24px;
+          height: 24px;
+        }
       }
-    }
 
-    .price-information {
-      margin: 0 20px;
-      display: flex;
-      align-items: center;
-      font-size: 25px;
-      font-weight: bold;
-
-      .price-info-logo {
-        width: 23px;
-        height: 23px;
-      }
     }
   }
 

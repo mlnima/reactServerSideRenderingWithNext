@@ -1,6 +1,9 @@
 
 
 export interface PostTypes {
+    url?: string | undefined;
+    currency: string;
+    downloadLink: string;
     description: string | object,
     translations?:{
         [key:string] :{

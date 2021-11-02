@@ -137,7 +137,7 @@ const TextEditors = ({value, onChangeHandler, language, height, width, name, use
                     : null
                 }
                 {editor === 'ReactQuillEditor' && use?.includes('ReactQuillEditor') || !use ?
-                    <TextEditorReactQuill value={value}
+                    <TextEditorReactQuill value={value }
                                           onChangeHandler={onChangeHandler}
                                           language={language}
                                           width={width}
@@ -146,7 +146,7 @@ const TextEditors = ({value, onChangeHandler, language, height, width, name, use
                     : null
                 }
                 {editor === 'ReactPage' && use?.includes('ReactPage') || !use ?
-                    <TextEditorReactPage value={value}
+                    <TextEditorReactPage value={value || {}}
                                          onChangeHandler={onChangeHandler}
                                          language={language}
                                          width={width}

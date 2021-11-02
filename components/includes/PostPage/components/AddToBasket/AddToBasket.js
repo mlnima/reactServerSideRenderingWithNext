@@ -69,7 +69,7 @@ const AddToBasket = props => {
             <AddToBasketStyledFrom className='add-item-to-basket' onSubmit={e => onAddToBasketHandler(e)}>
                 <input ref={countInput} className='add-item-to-basket-count' type='number' value={count} onChange={e => setCount(parseInt(e.target.value))}/>
                 <button onClick={onAddToBasketHandler} className='add-item-to-basket-action'>
-                    <FontAwesomeIcon style={props.svgDefaultStyle} icon={faCartPlus} className='svg-logo-medium '/>
+                    <FontAwesomeIcon icon={faCartPlus} className='svg-logo-medium '/>
                 </button>
             </AddToBasketStyledFrom>
         );

@@ -13,10 +13,8 @@ const TextEditorSunEditor = (props :{name?:string,value:string,onChangeHandler:a
                        height={props.height || "80vh"}
                        onChange={props.onChangeHandler}
                        defaultValue={props.value}
-
                        setOptions={{
                            buttonList:buttonList.complex
-
                        }}
             />
     );

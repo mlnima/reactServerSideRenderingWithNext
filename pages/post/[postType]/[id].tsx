@@ -6,6 +6,7 @@ import * as types from "../../../store/types";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
+import VideoTypePostPage from "../../../components/includes/PostPage/VideoTypePostPage/VideoTypePostPage";
 const LearnTypePostPage = dynamic(() => import('../../../components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
 const PostPage = dynamic(() => import('../../../components/includes/PostPage/PostPage'))
 
@@ -16,7 +17,12 @@ const postPage = () => {
         return (
             <LearnTypePostPage/>
         )
-    } else {
+    }else if(postType === 'video'){
+        return (
+            <VideoTypePostPage/>
+        );
+
+    }else {
         return (
             <PostPage/>
         );

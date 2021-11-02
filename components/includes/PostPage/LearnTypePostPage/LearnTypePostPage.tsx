@@ -15,14 +15,6 @@ const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/Co
 const CommentFrom = dynamic(() => import('../components/CommentFrom/CommentFrom'))
 const WidgetsRenderer = dynamic(() => import('../../WidgetsRenderer/WidgetsRenderer'))
 
-// interface LearnTypePostPageTypes {
-//     design: string,
-//     post: object,
-//     identity: object,
-//     comments: object[],
-//     widgets: object[]
-// }
-
 
 const LearnTypePostPageStyledMain = styled(PostPageStyledMain)`
   max-width: 1300px;
@@ -38,18 +30,18 @@ const LearnTypePostPageStyledMain = styled(PostPageStyledMain)`
 `
 
 
-const LearnTypePostPage = ( ) => {
+const LearnTypePostPage = () => {
     const postPageStyle = useSelector((store: StoreTypes) => store?.settings?.design.postPageStyle)
     const comments = useSelector((store: StoreTypes) => store?.posts?.comments)
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const post = useSelector((store: settingsPropTypes) => store.posts.post);
-    const router = useRouter()
+
 
     // @ts-ignore
     return (
         <LearnTypePostPageStyledMain className='main post-page' postPageStyle={postPageStyle}>
             {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id}/> : null}
-            <PostMetaDataToSiteHead {...post} url={router.asPath}/>
+            <PostMetaDataToSiteHead/>
             <PostTitle title={post.title} translations={post.translations}/>
             {/*// @ts-ignore*/}
             <LearnTypePostPageDescription description={post.description} translations={post.translations}/>
