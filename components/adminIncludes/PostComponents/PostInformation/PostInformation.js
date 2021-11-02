@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect} from 'react';
 import Quality from "./Quality/Quality";
 import TextInputWithUploadBtn from "./TextInputWithUploadBtn/TextInputWithUploadBtn";
 import TextInput from "./TextInput/TextInput";
@@ -121,7 +121,10 @@ let StyledDiv = styled.div`
 `
 
 const PostInformation = props => {
-    const post = useSelector((state) => state.adminPanelPosts.post);
+    const post = useSelector((state) => state?.adminPanelPosts?.post);
+    useEffect(() => {
+        console.log(post)
+    }, [post]);
     return (
         <StyledDiv className='post-information  product-information admin-widget'>
             <TextInputWithUploadBtn type='thumbnail' onChangeHandler={props.onChangeHandler} thumbnailsType={true} name='mainThumbnail'
@@ -138,7 +141,7 @@ const PostInformation = props => {
             <Duration rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <ProductPrice rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='shippingCost' rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
-            <ImageGallery  rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
+            <ImageGallery rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
             <RatingAndViews name='views' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <RatingAndViews name='likes' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <RatingAndViews name='disLikes' rendering={true} onChangeHandler={props.onChangeHandler}/>

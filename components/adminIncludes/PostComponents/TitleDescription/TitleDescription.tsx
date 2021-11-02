@@ -39,15 +39,12 @@ let TitleDescriptionStyledDiv = styled.div`
   }
 `
 
-
 const TitleDescription = (props:any) => {
     const post = useSelector((state : StoreTypes)=> state?.adminPanelPosts.post);
     const activeEditingLanguage = useSelector((state : StoreTypes) => state?.adminPanelPosts.activeEditingLanguage);
 
-
     return (
         <TitleDescriptionStyledDiv className='title-description'>
-
             <input type="text" name='title'
                 // @ts-ignore
                    value={(activeEditingLanguage === 'default' ? post?.title : post?.translations?.[activeEditingLanguage]?.title) || ''}
@@ -61,7 +58,6 @@ const TitleDescription = (props:any) => {
                          width={'100%'}
                          height={'80vh'}
             />
-
         </TitleDescriptionStyledDiv>
     );
 };

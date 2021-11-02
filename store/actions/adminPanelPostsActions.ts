@@ -99,9 +99,13 @@ export const adminChangeActiveEditingLanguage = (language:string) => (dispatch: 
 
 export const adminNewPost = ( ) => (dispatch: any)=>{
 
+    const postType = typeof window !=='undefined' && localStorage?.preferAdminPostType ? localStorage?.preferAdminPostType : 'standard';
+
     dispatch({
         type:types.NEW_POST,
-        payload: ''
+        payload: {
+            postType
+        }
     })
 }
 

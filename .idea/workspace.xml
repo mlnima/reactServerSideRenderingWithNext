@@ -20,75 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactPage/TextEditorReactPage.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactPage/components/CodeSnippet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactPage/plugins/codeSnippet.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactQuill/TextEditorReactQuill.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditors.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/DefaultTypeCard/DefaultTypeCard.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/DefaultTypeCard/DefaultTypeCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.babelrc.old" beforeDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.swcrc" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Format/Format.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditor/TextEditor.scss" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorMonacoEditor/TextEditorMonacoEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorMonacoEditor/TextEditorMonacoEditor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorSunEditor/TextEditorSunEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorSunEditor/TextEditorSunEditor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/RenderArraySection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/RenderArraySection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetPagination.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetPagination.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSearch.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSearch.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetStatusNavigation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsByMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsByMeta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/TableControls.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/TableControls.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/SaveDesignChangesBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/SaveDesignChangesBtn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/BottomLeft.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/BottomRight.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PostElement.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PostElementImage.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PostElementTitle.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/TopLeft.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/TopRight.js" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardTitle/CardTitle.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardTitle/CardTitle.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostDescription/PostDescription.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorCard/ActorCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorCard/ActorCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoryCard/CategoryCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoryCard/CategoryCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/tagsPageComponents/Components/TagCard/TagCardMedia.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/tagsPageComponents/Components/TagCard/TagCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodemon.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/postPage/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/postPage/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/post/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/post/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/staticIndex.tsx" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/postSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/postSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/widgetSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/widgetSchema.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/settingsActions.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/settingsActions.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/fixMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/fixMetaData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/index.tsx" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/actions/adminPanelPostsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/adminPanelPostsActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/reducers/adminPanelPostsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/adminPanelPostsReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -159,11 +101,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\sv" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash\old post page" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\global\Styles" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\post" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\pagesComponents" />
     </key>
   </component>
   <component name="RunManager" selected="npm.build">
@@ -219,9 +161,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.buildDev" />
         <item itemvalue="npm.fixMetaData" />
       </list>
@@ -942,7 +884,7 @@
       <workItem from="1635712970351" duration="3306000" />
       <workItem from="1635771417755" duration="2680000" />
       <workItem from="1635803326773" duration="5120000" />
-      <workItem from="1635835403321" duration="3684000" />
+      <workItem from="1635835403321" duration="11130000" />
     </task>
     <servers />
   </component>
@@ -1196,6 +1138,12 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditors.tsx</url>
           <option name="timeStamp" value="107" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx</url>
+          <line>2</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="108" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

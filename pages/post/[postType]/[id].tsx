@@ -22,7 +22,6 @@ const postPage = ({widgets}: ClientPagesTypes) => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-
     if (!context.query?.id) {
         return {notFound: true}
     }

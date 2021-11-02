@@ -378,10 +378,11 @@ const settings = () => {
                             <option value='video'>Video</option>
                             <option value='standard'>Standard</option>
                             <option value='product'>Product</option>
-                            <option value='redirect'>Redirect</option>
                             <option value='promotion'>promotion</option>
                             <option value='article'>Article</option>
-                            <option value='code'>Code</option>
+                            <option value='learn'>Learn</option>
+                            <option value='food'>Food</option>
+                            <option value='book'>Book</option>
                         </select>
                     </div>
                     <div className="site-settings-form-section defaultPostRating">

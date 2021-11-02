@@ -40,7 +40,7 @@ export const adminPanelPostsReducer = (state : AdminPanelPostsTypes = initialSta
             return {
                 ...state,
                 activeEditingLanguage:'default',
-                post:{}
+                post: action.payload
             };
 
         default:

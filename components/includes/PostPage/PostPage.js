@@ -18,6 +18,7 @@ const Price = dynamic(() => import('./components/Price/Price'))
 const PostMeta = dynamic(() => import('./components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('./components/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('./components/CommentFrom/CommentFrom'))
+
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 
