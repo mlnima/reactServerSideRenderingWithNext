@@ -35,6 +35,10 @@ const AdminHomePage = () => {
     const [state, setState] = useState({
         quickAccessLinks: [
             {
+                name: 'General Settings',
+                pathURL: '/admin/settings/general'
+            },
+            {
                 name: 'Posts',
                 pathURL: '/admin/assets?assetsType=posts'
             },
@@ -71,21 +75,16 @@ const AdminHomePage = () => {
 
 
     const renderQuickAccessLinks = state.quickAccessLinks.map(linkData => {
-       // const url = state?.quickAccessLinks?.[link].pathURL
-
         return(
-
             <Link key={_.uniqueId('id_')} href={linkData.pathURL}>
                 <a className='quick-access-link'>
                     {linkData.name}
                 </a>
             </Link>
         )
-        // return null
     })
     return (
         <AdminHomePageStyledDiv>
-
             <h1>Dashboard</h1>
             <h2>Quick Access</h2>
             <div className='quick-access'>

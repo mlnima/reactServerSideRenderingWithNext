@@ -2,25 +2,25 @@ import React from 'react';
 import {updateSetting} from '../../../store/actions/settingsActions'
 import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
-// import {useRouter} from "next/router";
+import {useRouter} from "next/router";
 
-const SaveDesignChangesBtn = ({reload,editorRef,name}) => {
+const SaveDesignChangesBtn = ({reload}) => {
     const dispatch = useDispatch()
     const design = useSelector(state => state?.settings.design)
-    // const router = useRouter()
+    const router = useRouter()
 
     const onSaveHandler = () => {
-        console.log(editorRef?.current?.getValue())
         dispatch(setLoading(true))
-        dispatch(updateSetting('design', {
-            ...design,
-            [name]:editorRef?.current?.getValue()
-        }))
-
+        dispatch(updateSetting('design', design))
+        if (reload){
+            setTimeout(()=>{
+                router.reload()
+            },1000)
+        }
     };
 
     return (
-        <button className='save-design-btn' onClick={() => onSaveHandler()}>
+        <button className='btn btn-primary' onClick={() => onSaveHandler()}>
             Save Changes
         </button>
     );

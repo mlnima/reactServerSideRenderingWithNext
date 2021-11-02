@@ -82,7 +82,7 @@ const AlertBox = ({t}) => {
                 if (component){
                     dispatch(setAlert({message: null, type: null, active: false}))
                 }
-            },5000)
+            },3000)
         }
     }, [alert]);
 

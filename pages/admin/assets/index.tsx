@@ -22,8 +22,11 @@ const TableControls = dynamic(
     {ssr: false}
 )
 
+import styled from "styled-components";
+const AdminAssetPageStyledDiv = styled.div`
 
-const assets = () => {
+`
+const assets = (props:any) => {
     const router = useRouter()
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
@@ -53,25 +56,31 @@ const assets = () => {
 
 
     useEffect(() => {
-
         getAndSetAssetData()
-    }, [dataConfig]);
+    }, [props]);
 
+    // useEffect(() => {
+    //     console.log(finalPageData)
+    // }, [finalPageData]);
 
     const getAndSetAssetData = async () => {
+
         const assetType = router.query.assetsType
-        const gettingPostsQueries = _getPostsQueryGenerator(router?.query,router?.query.metaId,false)
+
+        const gettingPostsQueries = _getPostsQueryGenerator(router?.query, router?.query.metaId, false)
+
         const ajaxRequestData = assetType === 'posts' ? await getPosts(gettingPostsQueries) :
             assetType === 'users' ? await getUsersListAsAdmin(dataConfig, localStorage.wt) :
                 // @ts-ignore
                 assetType === 'forms' ? await getFormsData(dataConfig, localStorage.wt) :
                     // @ts-ignore
                     assetType === 'pages' ? await getPagesData(dataConfig, localStorage.wt) :
-                        assetType === 'comments' ? await getComments(dataConfig,  false) :
+                        assetType === 'comments' ? await getComments(dataConfig, false) :
                             assetType === 'metas' && router.query.metaType ? await getMultipleMeta(router?.query, router?.query.metaType, false) :
                                 assetType === 'orders' ? await getOrders(dataConfig, process.env.NEXT_PUBLIC_PRODUCTION_URL) : null
 
         if (ajaxRequestData) {
+
             if (router.query.assetsType === 'orders') {
                 let ordersDataArr = []
                 // @ts-ignore
@@ -102,7 +111,6 @@ const assets = () => {
 
 
             } else {
-
                 setFinalPageData({
                     ...finalPageData,
                     // @ts-ignore
@@ -118,7 +126,7 @@ const assets = () => {
 
 
     return (
-        <div className='admin-asset-page'>
+        <AdminAssetPageStyledDiv className='admin-asset-page'>
             <TableControls finalPageData={finalPageData}
                            dataConfig={dataConfig}
                            setDataConfig={setDataConfig}
@@ -128,7 +136,7 @@ const assets = () => {
                          setSelectedItems={setSelectedItems}/>
             <TableBody finalPageData={finalPageData} selectedItems={selectedItems}
                        setSelectedItems={setSelectedItems}/>
-        </div>
+        </AdminAssetPageStyledDiv>
     );
 };
 

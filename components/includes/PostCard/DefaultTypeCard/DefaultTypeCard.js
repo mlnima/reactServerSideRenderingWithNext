@@ -1,12 +1,12 @@
 import Link from "next/link";
-import ArticleCardMedia from "./ArticleCardMedia";
 import _ from "lodash";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import CardTitle from "../asset/CardTitle/CardTitle";
+import DefaultTypeCardMedia from "./DefaultTypeCardMedia";
 
-const ArticleCard = styled.div`
+const DefaultTypeCardStyledDiv = styled.div`
   width: ${props => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
   max-width: ${props => props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
   display: flex;
@@ -18,7 +18,7 @@ const ArticleCard = styled.div`
   font-size: 12px;
   padding-bottom: 5px;
 
-  .article-card-link {
+  .post-card-link {
     position: relative;
     width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
     max-width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
@@ -29,7 +29,7 @@ const ArticleCard = styled.div`
     justify-content: space-between;
     text-decoration: none;
 
-    .article-card-under-media {
+    .post-card-under-media {
       width: 100%;
       height: ${props => props.postElementSize === 'list' ? '65px' : 'auto'};
 
@@ -38,7 +38,7 @@ const ArticleCard = styled.div`
       justify-content: space-between;
       margin-left: ${props => props.postElementSize === 'list' ? 4 : 0}px;
       
-      .article-card-under-media-info {
+      .post-card-under-media-info {
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -47,7 +47,7 @@ const ArticleCard = styled.div`
         height: 20px;
 
 
-        .article-card-info-data {
+        .post-card-info-data {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -59,10 +59,7 @@ const ArticleCard = styled.div`
             margin: 0 2px;
           }
         }
-
-
       }
-
     }
   }
 
@@ -74,7 +71,7 @@ const ArticleCard = styled.div`
 
     margin: 7px;
 
-    .article-card-link {
+    .post-card-link {
       flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
     }
   }
@@ -82,31 +79,30 @@ const ArticleCard = styled.div`
 `
 
 
-const ArticleTypeCard = props => {
+const DefaultTypeCard = props => {
 
-    const metaPreviewData = [...(props.post.actors || []), ...(props.post.tags || []), ...(props.post.categories || [])]
+    const metaPreviewData = [...(props.post?.actors || []), ...(props.post?.tags || []), ...(props.post?.categories || [])]
     const metaPreview = _.uniqBy(metaPreviewData, function (e) {
         return e.name;
     })
     return (
-        <ArticleCard className='article-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                <a rel='next' onClick={ props.onActivateLoadingHandler} className='article-card-link' title={props.title} >
-
-                    <ArticleCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
-                    <div className='article-card-under-media'>
+        <DefaultTypeCardStyledDiv className='post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
+            <Link href={`/post/${props.post?.postType}/${props.post?._id}`} scroll={false}>
+                <a rel='next' onClick={ props.onActivateLoadingHandler} className='post-card-link' title={props.title}  >
+                    <DefaultTypeCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
+                    <div className='post-card-under-media'>
                         <CardTitle title={props.title}/>
-                        <div className='article-card-under-media-info'>
-                            {props.post.postType === ('article') ? <span className='article-card-views article-card-info-data'><span>{props.views}</span> {props.t(`common:Views`)}</span> : null}
-                            {props.post.postType === ('article') ? <span className='article-card-rating article-card-info-data'><span>{props.rating}</span> % </span> : null}
+                        <div className='post-card-under-media-info'>
+                            <span className='post-card-views post-card-info-data'><span>{props.views}</span> {props.t(`common:Views`)}</span>
+                            <span className='post-card-rating post-card-info-data'><span>{props.rating}</span> % </span>
                         </div>
                     </div>
                 </a>
             </Link>
             {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
-        </ArticleCard>
+        </DefaultTypeCardStyledDiv>
 
     );
 };
-export default withTranslation(['common'])(ArticleTypeCard);
+export default withTranslation(['common'])(DefaultTypeCard);
 

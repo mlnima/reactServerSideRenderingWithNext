@@ -3,7 +3,7 @@ const CardTitleStyledH3 = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box !important;
-  color: var(--post-element-text-color);
+  color: var(--post-element-text-color, #ccc);
   -webkit-line-clamp: ${props => props.postElementSize === 'list' ? 1 : 1};
   -webkit-box-orient: vertical;
   font-weight: initial;

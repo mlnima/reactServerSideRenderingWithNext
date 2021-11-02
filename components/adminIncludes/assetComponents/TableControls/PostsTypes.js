@@ -10,9 +10,7 @@ const PostsTypesStyledDiv = styled.div`
     margin: 0 10px;
   }
 
-  select {
-    background-color: var(--admin-input-background-color);
-  }
+
 `
 const PostsTypes = () => {
     const router = useRouter()
@@ -26,7 +24,7 @@ const PostsTypes = () => {
     return (
         <PostsTypesStyledDiv className='post-type asset-page-asset-type-selector'>
             <p>Post Type :</p>
-            <select onChange={e => onFormatChangeHandler(e)} value={router.query.postType}>
+            <select className={'custom-select'} onChange={e => onFormatChangeHandler(e)} value={router.query.postType}>
                 <option value='all'>All</option>
                 <option value='standard'>Standard</option>
                 <option value='video'>Video</option>

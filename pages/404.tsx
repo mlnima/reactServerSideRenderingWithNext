@@ -2,7 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
-import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
+// import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "../store/store";
 
@@ -43,12 +43,12 @@ const Custom404 = (props) => {
 
 export const getStaticProps = wrapper.getServerSideProps(store =>
     async (context) => {
-        const firstLoadData = await getFirstLoadDataStatic(['404'], store)
+        // const firstLoadData = await getFirstLoadDataStatic(['404'], store)
 
         return {
             props: {
                 ...(await serverSideTranslations(context.locale as string, ['common'])),
-                ...firstLoadData
+                // ...firstLoadData
             }
         }
     }

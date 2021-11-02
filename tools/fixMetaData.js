@@ -1,36 +1,32 @@
-const mongoose = require('mongoose');
 require('dotenv').config()
+require('../server/_variables/connectToDatabase')
+const mongoose = require('mongoose');
 const postSchema = require('../server/models/postSchema')
 const metaSchema = require('../server/models/metaSchema')
-require('../server/_variables/connectToDatabase')
+
 
 const metaFixer = async () => {
     try {
         await metaSchema.find({}).exec().then(async metas => {
 
             for await (let meta of metas) {
-                const metaCount = await postSchema.countDocuments({$and: [{[meta.type]: meta._id}, {status: 'published'}]}).exec()
+                const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).exec()
 
                 if (metaCount > 0){
                     const random = Math.floor(Math.random() * (metaCount || 10))
-
-                    const randomPostWithCurrentMeta = await postSchema.findOne({$and: [{[meta.type]: meta._id}, {status: 'published'}]}).skip(random).exec()
-
+                    const randomPostWithCurrentMeta = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).skip(random).exec()
                     const updateData = {
                         count: metaCount,
-                        status: meta.status ? meta.status : 'published',
+                        status: meta?.status ? meta.status : 'published',
                         imageUrl: randomPostWithCurrentMeta?.mainThumbnail || ''
                     }
-
-                    metaSchema.findByIdAndUpdate(meta._id, {...updateData},{new: true}).exec().then(updated=>{
-                        //req.queryupdated.name)
+                    metaSchema.findByIdAndUpdate(meta?._id, {...updateData},{new: true}).exec().then(updated=>{
+                        console.log('UPDATED',updated.name)
                     }).catch(err=>{
-
-                        req.queryerr)
-
+                        console.log('ERROR',meta?.name)
                     })
                 }else {
-                   await  metaSchema.findByIdAndUpdate(meta.Id,{$set:{status:'draft'}}).exec()
+                   await  metaSchema.findByIdAndUpdate(meta?._id,{$set:{status:'draft'}}).exec()
                 }
 
 
@@ -39,7 +35,7 @@ const metaFixer = async () => {
         })
 
     } catch (e) {
-        req.querye)
+        console.log('ERROR',e.stack)
     }
 }
 

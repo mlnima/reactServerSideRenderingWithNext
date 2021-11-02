@@ -6,6 +6,7 @@ const postSchema =  new Schema({
     title: String,
     company: String,
     description: mongoose.Mixed,
+    descriptionType: String,
     mainThumbnail: String,
     images:Array,
     videoTrailerUrl: String,

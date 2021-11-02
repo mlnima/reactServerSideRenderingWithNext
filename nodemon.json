@@ -11,6 +11,7 @@
     "./public/locales/*",
     "./server.js",
     "./next.config.js",
+    "./.swcrc",
     "./.env"
   ],
   "ext": "js json",

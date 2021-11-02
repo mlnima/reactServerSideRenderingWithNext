@@ -20,5 +20,6 @@ export interface PostTypes {
     quality?:string,
     _id?:string,
     mainThumbnail?:string
+    VideoTrailerUrl?:string
 }
 

@@ -1,20 +1,45 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import Link from 'next/link'
+import React from 'react';
+import _ from "lodash";
+import {useRouter} from "next/router";
+import styled from "styled-components";
+import Link from "next/link";
+
+const ArraySectionStyledDiv = styled.div`
+  button{
+    border: none;
+    margin: 2px;
+    font-size: 12px;
+  }
+
+`
 
 const RenderArraySection = props => {
+    const router = useRouter()
 
-    const renderArrItem = (props.data||[]).map(item => {
+    const onClickHandler = (_id,) => {
+        console.log('onClickHandler')
+        const query = {...router.query, metaId:_id}
+        delete query.keyword
+        delete query.page
+        router.push({
+            pathname: router.pathname,
+            query
+        })
+    }
+
+
+    const renderArrItem = (props.data || []).map((item,index) => {
         return (
-            <Link key={_.uniqueId('id_')} href="/" >
-                <a className='asset-page-item-array-section-item'>{ item.name }</a>
-            </Link>
+                <button key={index} className={'btn btn-primary'} onClick={()=>onClickHandler(item._id)}>
+                    {item.name}
+                </button>
         )
     })
 
     return (
-        <div className='asset-page-item-array-section'>
+        <ArraySectionStyledDiv className='asset-page-item-array-section'>
             {renderArrItem}
-        </div>
+        </ArraySectionStyledDiv>
     );
 };
 export default RenderArraySection;

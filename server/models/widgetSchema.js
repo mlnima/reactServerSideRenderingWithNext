@@ -26,6 +26,7 @@ const widgetDataSchema =  mongoose.Schema({
     postElementSize:String,
     linkToText: String,
     linkToAs: String,
+    editMode: Boolean,
     linkTo: String,
     multipleLinks:Array,
     mediaUrl: String,

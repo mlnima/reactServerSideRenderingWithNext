@@ -16,8 +16,17 @@ export const updateSetting = (type, data) => async dispatch=>{
     };
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/settings/update', body).then(res=>{
         dispatch({
+            type: types.SET_ALERT,
+            payload: {message:'updated',type:'success'}
+        })
+        dispatch({
             type:types.LOADING,
             payload:false
+        })
+    }).catch(err=>{
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message:'Something Went Wrong',type:'error',err}
         })
     })
 }

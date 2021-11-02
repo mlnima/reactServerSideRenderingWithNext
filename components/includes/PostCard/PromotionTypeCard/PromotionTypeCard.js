@@ -16,7 +16,7 @@ let PromotionCardStyledDiv = styled.div`
   display: flex;
   flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: var(--post-element-background-color,#131314);
   font-size: 12px;
   padding-bottom: 5px;
@@ -103,7 +103,7 @@ const PromotionTypeCard = props => {
             </a>
             <div className='promotion-card-under-media'>
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                    <a rel='next'  className='promotion-card-link-internal' onClick={props.onActivateLoadingHandler}>
+                    <a rel='next'  className='promotion-card-link-internal' onClick={ props.onActivateLoadingHandler}>
                         <CardTitle title={props.title}/>
                         <div className='promotion-card-under-media-info'>
                             <p className='promotion-card-views'><span>{props.views}</span> {props.t(`common:Views`)}</p>

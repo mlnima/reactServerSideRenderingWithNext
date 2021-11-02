@@ -12,7 +12,7 @@ let VideoCard = styled.div`
   display: flex;
   flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
-  justify-content: center;
+  justify-content: space-between;
   background-color: var(--post-element-background-color, #131314);
   margin: 2.8px;
   font-size: 12px;
@@ -120,7 +120,7 @@ const VideoTypeCard = (props) => {
 
 
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
+                <a rel='next' className='video-card-link' title={props.title} onClick={ props.onActivateLoadingHandler}>
 
                     <VideoCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                     <span className='video-card-under-media'>

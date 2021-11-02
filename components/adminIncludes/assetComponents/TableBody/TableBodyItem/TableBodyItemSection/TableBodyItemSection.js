@@ -31,7 +31,7 @@ let StyledDiv = styled.div`
 
 `
 const TableBodyItemSection = props => {
-
+const [gotError,setGotError] = useState(false)
 
 
     if (props.dataName === '_id') {
@@ -109,7 +109,15 @@ const TableBodyItemSection = props => {
     } else if (props.dataName === 'mainThumbnail'||props.dataName === 'noImageUrl'||props.dataName === 'imageUrl') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <img src={props.dataValue}/>
+                {gotError ?
+                   <p>Error</p>
+                :  <img src={props.dataValue} onError={(err)=>{
+                        console.log(err)
+                        setGotError(true)
+
+                  }}/>
+                }
+
             </StyledDiv>
         )
     } else if (props.dataName === 'createdAt'||props.dataName === 'updatedAt') {

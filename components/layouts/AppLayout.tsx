@@ -7,9 +7,9 @@ import GlobalStyles from "../global/Styles/GlobalStyles";
 import {useDispatch, useSelector} from 'react-redux';
 import {autoUserLogin} from "../../store/actions/userActions";
 import {setLoading, setLoginRegisterFormStatus} from "../../store/actions/globalStateActions";
-import AdminDataSetter from "../global/AdminDataSetter";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
+const AdminDataSetter = dynamic(() => import('../global/AdminDataSetter'), {ssr: false});
 const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SideBarWidgetArea/SideBarWidgetArea'))
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'))
@@ -20,19 +20,21 @@ const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
 
-const AppLayout = (props:any) => {
-    const loggedIn = useSelector((state : StoreTypes) => state?.user.loggedIn)
-    const userData = useSelector((state : StoreTypes) => state?.user.userData)
-    const globalState = useSelector((state : StoreTypes) => state?.globalState)
-    const settings = useSelector((state : StoreTypes) => state?.settings)
-    const widgets = useSelector((state : StoreTypes) => state?.widgets?.widgets)
+const AppLayout = (props: any) => {
+    const loggedIn = useSelector((state: StoreTypes) => state?.user.loggedIn)
+    const userData = useSelector((state: StoreTypes) => state?.user.userData)
+    const globalState = useSelector((state: StoreTypes) => state?.globalState)
+    const settings = useSelector((state: StoreTypes) => state?.settings)
+    const widgets = useSelector((state: StoreTypes) => state?.widgets?.widgets)
     const router = useRouter()
     const dispatch = useDispatch()
+
     const [sidebarsData, setSidebarsData] = useState(() => setAppLayoutDataFromProp(props, router, settings))
 
     const [isSidebarLess, setIsSidebarLess] = useState(() => {
         return router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
     })
+
 
     useEffect(() => {
         globalState.loading ?
@@ -46,7 +48,7 @@ const AppLayout = (props:any) => {
         })
     }, [router.asPath, router.pathname]);
 
-    const mainLayoutClassNameForGrid = isSidebarLess ? 'withOutSidebar' : sidebarsData.sidebarType === 'left' ? 'leftSidebar' : sidebarsData.sidebarType === 'right' ? 'rightSidebar' : sidebarsData.sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar';
+    const mainLayoutClassNameForGrid = isSidebarLess ? 'withOutSidebar' : sidebarsData?.sidebarType === 'left' ? 'leftSidebar' : sidebarsData?.sidebarType === 'right' ? 'rightSidebar' : sidebarsData?.sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar';
 
     const defaultProps = {
         postElementSize: settings.design?.postElementSize,
@@ -90,15 +92,15 @@ const AppLayout = (props:any) => {
         header: widgets ? widgets?.filter(widget => widget?.data?.position === 'header') || [] : [],
         navigation: widgets ? widgets?.filter(widget => widget?.data?.position === 'navigation') || [] : [],
         footer: widgets ? widgets?.filter(widget => widget?.data?.position === 'footer') || [] : [],
-        [sidebarsData.leftSidebar.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData.leftSidebar.name) || [] : [],
-        [sidebarsData.rightSidebar.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData.rightSidebar.name) || [] : [],
+        [sidebarsData?.leftSidebar?.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData?.leftSidebar?.name) || [] : [],
+        [sidebarsData?.rightSidebar?.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData?.rightSidebar?.name) || [] : [],
     }
-
 
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
-            <AdminDataSetter/>
+            {/*// @ts-ignore*/}
+            {userData?.role === 'administrator' ? <AdminDataSetter setSidebarsData={setSidebarsData} LayoutProps={props}/> : null}
             {/*// @ts-ignore*/}
             <GlobalStyles colors={settings.design?.customColors || ''} globalStyleData={settings.design?.customStyles || ''}/>
             {/*// @ts-ignore*/}
@@ -132,21 +134,21 @@ const AppLayout = (props:any) => {
                 />
                 : null}
 
-            {widgetsInGroups?.[sidebarsData.leftSidebar.name]?.length > 0 && sidebarsData?.leftSidebar?.enable ?
+            {widgetsInGroups?.[sidebarsData?.leftSidebar?.name]?.length > 0 && sidebarsData?.leftSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'
-                    position={sidebarsData.leftSidebar.name}
+                    position={sidebarsData?.leftSidebar?.name}
                 />
                 : null}
 
             {props.children}
 
-            {widgetsInGroups?.[sidebarsData.rightSidebar.name]?.length > 0 && sidebarsData?.rightSidebar?.enable ?
+            {widgetsInGroups?.[sidebarsData?.rightSidebar?.name]?.length > 0 && sidebarsData?.rightSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='rightSidebar'
                     className='right-sidebar'
-                    position={sidebarsData.rightSidebar.name}
+                    position={sidebarsData?.rightSidebar?.name}
                 />
                 : null}
             {widgetsInGroups.footer.length > 0 ?
@@ -161,9 +163,9 @@ const AppLayout = (props:any) => {
             {userData?.role === 'administrator' ? <AdminTools/> : null}
             {globalState?.loading ? <Loading/> : null}
             {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
-            { typeof window !== 'undefined'? localStorage.cookieAccepted !== 'true'?
+            {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
                 <CookiePopup/>
-                :null :null
+                : null : null
             }
         </div>
 

@@ -6,13 +6,16 @@ import _shortNumber from '../../../_variables/clientVariables/_shortNumber'
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
-import PromotionCardListSmall from "../PostCard/PromotionTypeCard/PromotionCardListSmall";
 import {settingsPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
-const PostElement = dynamic(() => import('../PostCard/PostElement'))
+
+const PromotionCardListSmall = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionCardListSmall'))
 const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeCard'))
 const PromotionTypeCard = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionTypeCard'))
 const ArticleTypeCard = dynamic(() => import('../PostCard/ArticleTypeCard/ArticleTypeCard'))
+const DefaultTypeCard = dynamic(() => import('../PostCard/DefaultTypeCard/DefaultTypeCard'))
+
+
 
 const PostsContentStyledDiv = styled.div`
   display: flex;
@@ -83,30 +86,11 @@ const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentT
                         return <PromotionCardListSmall onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     } else {
                         return <PromotionTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
-
                     }
                 } else if (post.postType === 'article') {
                     return <ArticleTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
-                } else return (
-                    <PostElement
-                        {...postProps}
-                        onClickLoadingHandler={() => dispatch(setLoading(true))}
-                        key={index}
-                        redirectLink={post.redirectLink}
-                        viewType={viewType}
-                        postElementStyle={settings.design?.postElementStyle}
-                        postElementImageLoader={settings.design?.postElementImageLoader}
-                        postElementImageLoaderType={settings.design?.postElementImageLoaderType}
-                        postType={post.postType}
-                        _id={post._id}
-                        videoTrailerUrl={post.videoTrailerUrl}
-                        price={post.price}
-                        duration={post.duration}
-                        actors={post.actors}
-                        quality={post.quality}
-
-                        mainThumbnail={post.mainThumbnail}
-                    />
+                }else return (
+                    <DefaultTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                 )
             })}
         </PostsContentStyledDiv>

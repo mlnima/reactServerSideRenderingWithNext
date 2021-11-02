@@ -79,7 +79,7 @@ const Index = () => {
     }
 
     const onDescriptionChangeHandler = (data:string) => {
-        console.log(data)
+
         const e = {
             target: {
                 name: 'description',

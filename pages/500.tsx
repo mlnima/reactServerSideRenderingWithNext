@@ -2,7 +2,7 @@ import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
-import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
+// import {getFirstLoadDataStatic} from "../_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "../store/store";
 
@@ -40,12 +40,12 @@ const Custom500 = (props:any) => {
 //
 export const getStaticProps = wrapper.getServerSideProps(store=>
     async (context) => {
-    const firstLoadData = await getFirstLoadDataStatic(['500'],store)
+    // const firstLoadData = await getFirstLoadDataStatic(['500'],store)
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL as string, ['common','customTranslation'])),
-            ...firstLoadData
+            // ...firstLoadData
         }
     }
 })

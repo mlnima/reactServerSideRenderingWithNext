@@ -7,6 +7,8 @@ const nextEnv = require('next-env');
 const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
 const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
 const withPWA = require('next-pwa')
+const withCSS = require('@zeit/next-css')
+const withSass = require('@zeit/next-sass')
 
 const svgLoader = {
     webpack(config) {
@@ -18,11 +20,6 @@ const svgLoader = {
     }
 }
 
-const swcConfig = {
-
-}
-
-
 const i18nConfig = locales.length === 1 ? {} : {
     i18n: {
         locales,
@@ -31,19 +28,16 @@ const i18nConfig = locales.length === 1 ? {} : {
     }
 }
 
-
-//*************************************SSG is disable Temporary because of NextJS 12 file permission error at build time DO NOT DELETE THIS CONFIG************************************************
-
-
-const staticPageGeneration = process.env.NEXT_PUBLIC_STATIC_PAGES === 'true' ? {
-    beforeFiles:[
-        {source: `/`, destination: '/staticIndex'},
-    ]
-} :{}
+//*******************************Temporary SSG is disable************************************
+// const staticPageGeneration = process.env.NEXT_PUBLIC_STATIC_PAGES === 'true' ? {
+//     beforeFiles:[
+//         {source: `/`, destination: '/staticIndex'},
+//     ]
+// } :{}
 
 const rewrites = () => {
     return {
-        ...staticPageGeneration,
+        // ...staticPageGeneration,
         afterFiles: [
             {source: `/admin`, destination: '/admin', locale: false},
             {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
@@ -82,14 +76,15 @@ const pwaSettings = {
 const nextConfigs = {
     env: {},
     rewrites,
-    swcMinify: true,
+    // swcMinify: true,
     eslint: {
         ignoreDuringBuilds: true,
-    },
+    }
     // redirects
 }
 
 module.exports = withPlugins([
+    withCSS(withSass()),
     i18n,
     svgLoader,
     process.env.NODE_ENV === 'production'  && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},

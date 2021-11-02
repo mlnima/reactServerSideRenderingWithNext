@@ -81,6 +81,7 @@ const PostPageStyledMain = styled.main`
   }
 
   @media only screen and (min-width: 768px) {
+
     .rating-price-download {
       justify-content: space-between;
       align-items: center;

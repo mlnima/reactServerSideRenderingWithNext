@@ -9,8 +9,8 @@ const AssetStatusNavigationStyledDiv = styled.div`
   align-items: center;
   flex-wrap: wrap;
 
-  .asset-page-status-navigation-item {
-    margin: 3px;
+  .btn-navigation {
+    margin: 0 2px;
   }
 
 `
@@ -24,7 +24,7 @@ const AssetStatusNavigation = props => {
                 pathname: router ? router.pathname : '',
                 query: {...router.query, status: type}
             }}>
-                <a className='asset-page-status-navigation-item'>
+                <a className={'btn btn-navigation'}>
                     {convertVariableNameToName(type)}
                 </a>
             </Link>

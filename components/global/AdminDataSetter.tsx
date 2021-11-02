@@ -8,26 +8,34 @@ import {getCustomPages} from "../../store/actions/adminPanelGlobalStateActions";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {useRouter} from "next/router";
+import setAppLayoutDataFromProp from "../../_variables/clientVariables/_setAppLayoutDataFromProp";
 
 const AdminDataSetterStyledSpan = styled.span`
   display: none;
 `
 
-const AdminDataSetter = () => {
+const AdminDataSetter = (props: any) => {
     const dispatch = useDispatch()
     const router = useRouter()
-    const userData = useSelector((state :StoreTypes) => state?.user?.userData)
+    const settings = useSelector((state: StoreTypes) => state?.settings)
+    const userData = useSelector((state: StoreTypes) => state?.user?.userData)
 
     useEffect(() => {
         if (userData?.role === 'administrator') {
-            getAndSetDataForAdmin().then(() => console.log('welcome Admin, latest uncached data are sent for you'))
+            getAndSetDataForAdmin().then(() => {
+                if (props.setSidebarsData){
+                    props.setSidebarsData(
+                        setAppLayoutDataFromProp(props.LayoutProps, router, settings)
+                    )
+                }
+                console.log('welcome Admin, latest uncached data are sent for you')
+            })
         }
-    }, [userData,router.pathname]);
-
+    }, [userData, router.pathname]);
 
     const getAndSetDataForAdmin = async () => {
         try {
-            const settingsData = await getMultipleSetting({settings: ['identity', 'design','adminSettings']}, localStorage.wt)
+            const settingsData = await getMultipleSetting({settings: ['identity', 'design', 'adminSettings']}, localStorage.wt)
             const widgetData = await _getMultipleWidgets(localStorage.wt)
             dispatch(getCustomPages())
             // @ts-ignore
@@ -37,14 +45,16 @@ const AdminDataSetter = () => {
             }
             if (settingsData?.data) {
                 // @ts-ignore
-                const identityData = settingsData.data.settings ? settingsData.data.settings.find((setting:any) => setting.type === 'identity') : {}
+                const identityData = settingsData.data.settings ? settingsData.data.settings.find((setting: any) => setting.type === 'identity') : {}
                 // @ts-ignore
-                const designData = settingsData.data.settings ? settingsData.data.settings.find((setting:any) => setting.type === 'design') : {}
+                const designData = settingsData.data.settings ? settingsData.data.settings.find((setting: any) => setting.type === 'design') : {}
                 dispatch(setSettings({
                     design: designData.data,
                     identity: identityData.data,
                 }))
             }
+
+
 
         } catch (err) {
             console.log(err)
