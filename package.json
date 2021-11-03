@@ -8,6 +8,7 @@
     "build": "next build",
     "buildDev": "concurrently \"NODE_ENV=build node ./server.js\" \"next build\"",
     "start": "concurrently \"NODE_ENV=production node ./server.js\" \"node ./server/socketServer/socketServer.js\"",
+    "startNext": "next start",
     "fixMetaData": "node tools/fixMetaData.js",
     "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
     "setup": "node ./tools/setup.js"

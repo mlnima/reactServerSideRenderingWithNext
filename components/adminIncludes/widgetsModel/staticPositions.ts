@@ -1,4 +1,5 @@
 const staticPositions : string[] = [
+    'deactivated',
     'topBar',
     'header',
     'navigation',

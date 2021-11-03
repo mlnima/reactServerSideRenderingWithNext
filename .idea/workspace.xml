@@ -20,21 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorSunEditor/TextEditorSunEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorSunEditor/TextEditorSunEditor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditors.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPageStyle.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPageStyle.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/AddToBasket/AddToBasket.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/AddToBasket/AddToBasket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/staticPositions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/staticPositions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/postSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/postSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -143,16 +131,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="fixMetaData" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="fixMetaData" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -163,13 +141,23 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="startNext" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="startNext" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <recent_temporary>
       <list>
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.startNext" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.buildDev" />
-        <item itemvalue="npm.fixMetaData" />
       </list>
     </recent_temporary>
   </component>
@@ -888,7 +876,9 @@
       <workItem from="1635712970351" duration="3306000" />
       <workItem from="1635771417755" duration="2680000" />
       <workItem from="1635803326773" duration="5120000" />
-      <workItem from="1635835403321" duration="31918000" />
+      <workItem from="1635835403321" duration="32542000" />
+      <workItem from="1635932580956" duration="1121000" />
+      <workItem from="1635975784375" duration="160000" />
     </task>
     <servers />
   </component>
@@ -1146,13 +1136,11 @@
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx</url>
           <line>3</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="108" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/PostPage/PostPageStyle.ts</url>
           <line>2</line>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="109" />
         </line-breakpoint>
       </breakpoints>
