@@ -54,6 +54,8 @@ const StyleSection = props => {
                              value={design?.[props.name]}
                              onChangeHandler={onChangeHandler}
                              height={'70vh'}
+                             use={['Monaco']}
+                             openWith={'Monaco'}
                              width={'100%'}
                              language={'scss'}
                              name={props.name}
