@@ -20,7 +20,7 @@ const TableBodyItemOnHover = props => {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={'/admin/post?id=' + props._id}><a>Edit</a></Link>
-                    <Link href={'/' + props.title}><a>View</a></Link>
+                    <Link href={`/post/${props.postType}/${props._id}` }><a target={'_blank'}>View</a></Link>
                     {status !== 'trash' ? <span onClick={() => dispatch(adminBulkActionPost([props._id], 'trash'))}>Trash</span> : null}
                     {status !== 'draft' ? <span onClick={() => dispatch(adminBulkActionPost([props._id], 'draft'))}>Draft</span> : null}
                     {status !== 'pending' ? <span onClick={() => dispatch(adminBulkActionPost([props._id], 'pending'))}>Pending</span> : null}

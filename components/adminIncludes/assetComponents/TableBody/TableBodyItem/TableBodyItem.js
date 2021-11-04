@@ -149,6 +149,7 @@ const TableBodyItem = props => {
                 <TableBodyItemOnHover isHover={state.isHover}
                                       assetsType={props.assetsType}
                                       _id={props.data._id}
+                                      postType={props.data.postType}
                                       title={props.data.title}
                 />
             </StyledDiv>

@@ -89,20 +89,20 @@ const FileManagerControl = props => {
     return (
         <FileManagerControlStyledDiv className='file-manager-control'>
             <div className='file-Manager-control-address-bar'>
-                <button className="backBtn" onClick={(e) => onGoBackHandler(e)}>Back</button>
+                <button  onClick={(e) => onGoBackHandler(e)} className={'backBtn btn btn-navigation '}>Back</button>
                 <input ref={addressBar} name='addressBar' onChange={e => onChaneHandler(e)} className="ControlFilesItem" onClick={e => clearClickedItemHandler(e)} value={props.data.path}/>
-                <button onClick={() => props.setStateHandler('path', addressBar.current.value)}>Go</button>
+                <button onClick={() => props.setStateHandler('path', addressBar.current.value)}  className={'btn btn-navigation'}>Go</button>
             </div>
             <div className="file-Manager-control-quick-access">
-                <button onClick={() => props.setStateHandler('path', '.')}>Root</button>
-                <button onClick={() => props.setStateHandler('path', './public/uploads/image')}>Images</button>
-                <button onClick={() => props.setStateHandler('path', './public')}>Public</button>
-                <button onClick={() => props.setStateHandler('path', './public/uploads/video')}>Videos</button>
-                <button onClick={() => props.setStateHandler('path', './public/uploads/application')}>Applications</button>
+                <button onClick={() => props.setStateHandler('path', '.')} className={'btn btn-navigation'}>Root</button>
+                <button onClick={() => props.setStateHandler('path', './public/uploads/image')} className={'btn btn-navigation'}>Images</button>
+                <button onClick={() => props.setStateHandler('path', './public')} className={'btn btn-navigation'}>Public</button>
+                <button onClick={() => props.setStateHandler('path', './public/uploads/video')} className={'btn btn-navigation'}>Videos</button>
+                <button onClick={() => props.setStateHandler('path', './public/uploads/application')} className={'btn btn-navigation'}>Applications</button>
                 <input ref={uploadInputElement} type='file' style={{display: 'none'}} onChange={e => onUploadHandler(e)}/>
-                <button onClick={() => uploadInputElement.current.click()}>Upload</button>
-                <button onClick={() => onCreateNewFileClickHandler('file')}>New File</button>
-                <button onClick={() => onCreateNewFileClickHandler('folder')}>New Folder</button>
+                <button onClick={() => uploadInputElement.current.click()} className={'btn btn-navigation'}>Upload</button>
+                <button onClick={() => onCreateNewFileClickHandler('file')} className={'btn btn-navigation'}>New File</button>
+                <button onClick={() => onCreateNewFileClickHandler('folder')} className={'btn btn-navigation'}>New Folder</button>
             </div>
         </FileManagerControlStyledDiv>
     );
