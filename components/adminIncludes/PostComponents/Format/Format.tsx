@@ -3,6 +3,7 @@ import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import {adminEditPost} from "../../../../store/actions/adminPanelPostsActions";
+import postTypes from "../../../global/postTypes";
 
 const FormatStyledDiv = styled.div`
 .custom-select{
@@ -33,14 +34,12 @@ const Format = ({onChangeHandler,postType}:PostFormatPropTypes) => {
                     value={post?.postType || postType || 'standard'}
                     onChange={e => onChangeHandlerAndSetPreferPostTypeToLocalStorage(e)}
             >
-                <option value='video'>Video</option>
-                <option value='standard'>Standard</option>
-                <option value='product'>Product</option>
-                <option value='promotion'>promotion</option>
-                <option value='article'>Article</option>
-                <option value='learn'>Learn</option>
-                <option value='food'>Food</option>
-                <option value='book'>Book</option>
+                {postTypes.map(postType=>{
+                    return(
+                        <option value={postType}>{postType}</option>
+                    )
+                })}
+
             </select>
         </FormatStyledDiv>
     );

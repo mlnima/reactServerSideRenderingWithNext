@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useEffect, useState} from 'react';
 import PostPageStyledMain from '../PostPageStyle'
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
@@ -7,6 +7,9 @@ import dynamic from "next/dynamic";
 import styled from "styled-components";
 import PostTitle from '../components/PostTitle/PostTitle'
 import LearnTypePostPageDescription from "./components/LearnTypePostPageDescription";
+import * as Scroll from "react-scroll";
+import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
+import {likeValueCalculator} from "../../../../_variables/_variables";
 
 const EditLinkForAdmin = dynamic(() => import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
 const PostMetaDataToSiteHead = dynamic(() => import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
@@ -35,6 +38,34 @@ const LearnTypePostPage = () => {
     const comments = useSelector((store: StoreTypes) => store?.posts?.comments)
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const post = useSelector((store: settingsPropTypes) => store.posts.post);
+
+    const [state, setState] = useState({
+        likeValue: 0,
+        mode: 'view',
+        isLiked: false,
+        isDisliked: false,
+    });
+
+    useEffect(() => {
+        Scroll.animateScroll.scrollToTop();
+        likeDislikeView(post._id, 'views').then(res => {
+            // @ts-ignore
+            if (res.data.updatedData) {
+                // @ts-ignore
+                setRatingAndViewData(res.data.updatedData)
+            }
+        })
+    }, []);
+
+
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            setState({
+                ...state,
+                likeValue: likeValueCalculator(post.likes, post.disLikes),
+            });
+        }
+    }, [post.likes, post.disLikes]);
 
 
     // @ts-ignore

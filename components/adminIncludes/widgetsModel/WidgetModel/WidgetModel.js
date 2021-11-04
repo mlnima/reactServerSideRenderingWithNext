@@ -13,6 +13,7 @@ import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidge
 import {useDispatch, useSelector} from "react-redux";
 import {deleteWidget, updateWidget, addNewWidget} from "../../../../store/actions/widgetsActions";
 import staticPositions from '../staticPositions';
+import postTypes from "../../../global/postTypes";
 
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
@@ -398,7 +399,7 @@ const WidgetModel = props => {
                                               name={'postType'}
                                               ref={null}
                                               value={widgetData.postType}
-                                              options={['standard', 'video', 'product', 'food', 'article', 'promotion']}
+                                              options={postTypes}
                                               onChangeHandler={onChangeHandler}
                         /> : null
                     }
