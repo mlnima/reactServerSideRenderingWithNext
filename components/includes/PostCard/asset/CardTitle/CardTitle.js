@@ -24,7 +24,7 @@ const CardTitleStyledH3 = styled.div`
 `
 const CardTitle = ({title}) => {
     return (
-        <CardTitleStyledH3 className='promotion-card-title'>{title} </CardTitleStyledH3>
+        <CardTitleStyledH3 className='card-title'>{title} </CardTitleStyledH3>
     );
 };
 export default CardTitle;

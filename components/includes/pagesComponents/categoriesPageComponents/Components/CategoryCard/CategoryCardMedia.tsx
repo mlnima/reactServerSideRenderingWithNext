@@ -4,6 +4,7 @@ import styled from "styled-components";
 const CategoryCardMediaStyledImage = styled.img`
   width: 100%;
   height: calc(48vw / 1.777);
+  object-fit: contain;
   @media only screen and (min-width: 768px) {
     width: ${(props : {cardWidth:number}) => props?.cardWidth}px;
     height: calc(${(props : {cardWidth:number}) => props.cardWidth}px / 1.777);

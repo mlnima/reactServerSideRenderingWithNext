@@ -14,6 +14,7 @@ const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeC
 const PromotionTypeCard = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionTypeCard'))
 const ArticleTypeCard = dynamic(() => import('../PostCard/ArticleTypeCard/ArticleTypeCard'))
 const DefaultTypeCard = dynamic(() => import('../PostCard/DefaultTypeCard/DefaultTypeCard'))
+const LearnTypeCard = dynamic(() => import('../PostCard/LearnTypeCard/LearnTypeCard'))
 
 
 
@@ -89,6 +90,8 @@ const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentT
                     }
                 } else if (post.postType === 'article') {
                     return <ArticleTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                } else if (post.postType === 'learn') {
+                    return <LearnTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                 }else return (
                     <DefaultTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                 )

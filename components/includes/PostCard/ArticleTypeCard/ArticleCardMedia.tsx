@@ -6,6 +6,7 @@ let ArticleCardMediaStyled = styled.div`
   .article-card-image {
     width: ${(props : {cardWidth:number,postElementSize:string}) =>props.postElementSize === 'list' ? '116.6px' : '100%'};
     height: calc(48vw / 1.777);
+    object-fit: contain;
   }
   @media only screen and (min-width: 768px) { 
     .article-card-image {

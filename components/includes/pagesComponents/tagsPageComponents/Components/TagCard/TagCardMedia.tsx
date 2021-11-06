@@ -4,6 +4,7 @@ import styled from "styled-components";
 const TagCardMediaStyledImage = styled.img`
   width: 100%;
   height: calc(48vw / 1.777);
+  object-fit: contain;
   @media only screen and (min-width: 768px) {
     width: ${(props : {cardWidth:number}) => props.cardWidth}px;
     height: calc(${(props : {cardWidth:number}) => props.cardWidth}px / 1.777);
@@ -11,11 +12,12 @@ const TagCardMediaStyledImage = styled.img`
 `
 
 const NoImageStyleDiv = styled.div`
-  width: 100%;
-  height: calc(48vw / 1.777);
   display: flex;
   justify-content: center;
   align-items: center;
+  width: 100%;
+  height: calc(48vw / 1.777);
+
   span{
     color: var(--post-element-info-text-color,#ccc);
   }
@@ -34,6 +36,9 @@ interface TagCardMediaPropTypes{
 const TagCardMedia = (props:TagCardMediaPropTypes) => {
     const imageRef = useRef(null)
     const [gotError, setGotError] = useState(false)
+
+
+
 
     if (!props.imageUrl || gotError){
         return (

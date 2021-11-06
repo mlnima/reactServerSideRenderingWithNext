@@ -10,6 +10,7 @@ const PromotionCardMediaStyled = styled.div`
   .promotion-card-image {
     width: 100%;
     height: calc(48vw / 1.777);
+    object-fit: contain;
   }
 
   @media only screen and (min-width: 768px) {

@@ -4,7 +4,7 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const CardMetaDataStyledSpan = styled.span`
-  width: ${props=>props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+  width: ${props=>props?.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
   max-width: ${props=>props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
   box-sizing: border-box;
   white-space: nowrap;
@@ -12,6 +12,7 @@ const CardMetaDataStyledSpan = styled.span`
   text-overflow: ellipsis;
   margin: 0 2px;
   padding: 5px 0;
+
   .card-meta-data{
     height: 12px;
     font-size: 12px;
@@ -43,7 +44,7 @@ const CardMetaRenderer = ({metaPreview,postElementSize}) => {
                     return (
                         <Link href={`/${typePath}/${meta._id}`} key={index}>
                             <a className='card-meta-data' title={meta.name}>
-                                #{meta.name}
+                               {meta.name}
                             </a>
                         </Link>
                     )

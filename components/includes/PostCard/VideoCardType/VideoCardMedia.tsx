@@ -21,6 +21,7 @@ let VideoCardMediaStyled = styled.div`
   .video-card-image {
     width: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? '116.6px' : '100%'};
     height: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
+    object-fit: contain;
   }
 
   @media only screen and (min-width: 768px) {

@@ -39,6 +39,12 @@ const LearnTypePostPage = () => {
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const post = useSelector((store: settingsPropTypes) => store.posts.post);
 
+    const [ratingAndViewData, setRatingAndViewData] = useState({
+        like: 0,
+        disLike: 0,
+        view: 0
+    })
+
     const [state, setState] = useState({
         likeValue: 0,
         mode: 'view',

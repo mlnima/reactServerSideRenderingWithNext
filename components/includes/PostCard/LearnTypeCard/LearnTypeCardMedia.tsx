@@ -2,14 +2,14 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
-let DefaultTypeCardMediaStyledDiv = styled.div`
-  .post-card-image {
+let LearnTypeCardMediaStyledDiv = styled.div`
+  .learn-post-card-image {
     width: ${(props : {cardWidth:number,postElementSize:string}) =>props.postElementSize === 'list' ? '116.6px' : '100%'};
     height: calc(48vw / 1.777);
     object-fit: contain;
   }
   @media only screen and (min-width: 768px) { 
-    .post-card-image {
+    .learn-post-card-image {
       width: ${(props : {cardWidth:number,postElementSize:string}) =>props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
       height: calc(${(props : {cardWidth:number,postElementSize:string}) => props.cardWidth}px / 1.777);
     }
@@ -31,7 +31,7 @@ const NoImageStyleDiv = styled.div`
   }
 `
 
-interface DefaultTypeCardMediaPropTypes {
+interface LearnTypeCardMediaPropTypes {
     post:PostTypes,
     postElementSize:string,
     cardWidth:string,
@@ -39,7 +39,7 @@ interface DefaultTypeCardMediaPropTypes {
     noImageUrl:string,
 }
 
-const DefaultTypeCardMedia = (props:DefaultTypeCardMediaPropTypes) => {
+const LearnTypeCardMedia = (props:LearnTypeCardMediaPropTypes) => {
     const [gotError, setGotError] = useState(false)
 
     if (!props?.post?.mainThumbnail || gotError){
@@ -51,13 +51,13 @@ const DefaultTypeCardMedia = (props:DefaultTypeCardMediaPropTypes) => {
         )
     }else return (
         // @ts-ignore
-        <DefaultTypeCardMediaStyledDiv className='post-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <img className='post-card-image'
+        <LearnTypeCardMediaStyledDiv className='learn-post-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
+            <img className='learn-post-card-image'
                  alt={props.mediaAlt}
                  src={props?.post?.mainThumbnail}
                  onError={()=>setGotError(true)}
             />
-        </DefaultTypeCardMediaStyledDiv>
+        </LearnTypeCardMediaStyledDiv>
     );
 };
-export default DefaultTypeCardMedia;
+export default LearnTypeCardMedia;
