@@ -115,7 +115,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
     return (
 
         <MenuWidgetStyledLi menuItem={menuItem}
-                            className={'menu-widget-item  btn btn-navigation'}
+                            className={'menu-widget-item  '}
                             onMouseEnter={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
                             onMouseLeave={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
                             activeLink={menuItem?.target ? router.asPath.includes(menuItem?.target) :false}
