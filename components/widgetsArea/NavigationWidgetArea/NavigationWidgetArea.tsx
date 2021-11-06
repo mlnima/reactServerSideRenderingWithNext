@@ -17,6 +17,7 @@ let StyledNavigation = styled.nav`
     margin: 0 5px;
     padding: 0 5px;
     width: 100%;
+    height: 100%;
   }
   @media only screen and (min-width: 768px){
     .navigation-content{

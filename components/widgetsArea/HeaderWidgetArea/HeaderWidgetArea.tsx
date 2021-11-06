@@ -13,12 +13,15 @@ let StyledHeader = styled.header`
     flex-wrap: wrap;
     align-items: center;
     margin: 0 5px;
+    height: 100%;
+    width: 100%;
   }
 
   @media only screen and(min-width: 768px) {
     .header-content {
       margin: 0 5px;
       padding: 0 5px;
+      
     }
   }
   

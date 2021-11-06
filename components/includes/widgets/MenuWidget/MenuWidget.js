@@ -29,7 +29,7 @@ const MenuWidgetStyledDiv = styled.div`
     margin: 0;
     transition: all 0.5s ease 0s;
     position: fixed;
-    ${props=> props.open ?`animation: navigationMobileSlide .3s linear alternate;`: `animation: none;` }
+    ${props=> props?.open ?`animation: navigationMobileSlide .3s linear alternate;`: `animation: none;` }
     display: ${props=> props.open ? 'flex' : 'none'};
     overflow-y: auto;
     .navigation-close-button {
@@ -43,6 +43,10 @@ const MenuWidgetStyledDiv = styled.div`
       height: 40px;
       color: var(--navigation-text-color, #ccc);
       padding: 12px;
+      svg{
+        width: 24px;
+        height: 24px;
+      }
     }
   }
   .navigation-mobile-button {
@@ -58,6 +62,7 @@ const MenuWidgetStyledDiv = styled.div`
   .navigation-mobile-button-open{
     padding: 0;
     margin: 8px;
+    color: var(--navigation-text-color, #ccc);
     svg{
       width: 24px;
       height: 24px;
@@ -77,7 +82,7 @@ const MenuWidgetStyledDiv = styled.div`
         animation: initial;
         padding: 0;
         margin: 0;
-        height: 38px;
+        height: 56px;
         overflow-y: initial;
         .navigation-close-button {
           display: none;
@@ -129,11 +134,11 @@ const MenuWidget = props => {
     return (
         <MenuWidgetStyledDiv className='menu-widget' open={open}>
             <ul onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-mobile-button-open btn btn-transparent-light' aria-label="Center Align">
-                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faBars} className='navigation-mobile-button-logo'/>
+                <FontAwesomeIcon icon={faBars} className='navigation-mobile-button-logo'/>
             </ul>
             <ul className='menu-widget-items' ref={menuItemsElement}>
                 <li onClick={() => open ? setOpen(false) : setOpen(true)} className='navigation-close-button btn btn-transparent-light'>
-                    <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faTimes} className='navigation-mobile-button-logo'/>
+                    <FontAwesomeIcon icon={faTimes} className='navigation-mobile-button-logo'/>
                 </li>
                 {renderMenuItems}
             </ul>

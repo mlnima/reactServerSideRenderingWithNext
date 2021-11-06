@@ -79,11 +79,11 @@ const AppLayout = (props: any) => {
                     router.push('/admin') :
                     null
             })
-            document.addEventListener('keydown', e => {
-                e.altKey && e.keyCode === 87 ?
-                    router.push('/admin/design/widgets') :
-                    null
-            })
+            // document.addEventListener('keydown', e => {
+            //     e.altKey && e.keyCode === 87 ?
+            //         router.push('/admin/design/widgets') :
+            //         null
+            // })
         }
     }, [loggedIn]);
 

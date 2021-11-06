@@ -34,9 +34,9 @@ const Format = ({onChangeHandler,postType}:PostFormatPropTypes) => {
                     value={post?.postType || postType || 'standard'}
                     onChange={e => onChangeHandlerAndSetPreferPostTypeToLocalStorage(e)}
             >
-                {postTypes.map(postType=>{
+                {postTypes.map((postType,index)=>{
                     return(
-                        <option value={postType}>{postType}</option>
+                        <option value={postType} key={index}>{postType}</option>
                     )
                 })}
 
