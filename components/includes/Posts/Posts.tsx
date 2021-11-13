@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
 import {settingsPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
+import VideoCardTypeList from "../PostCard/VideoCardTypeList/VideoCardTypeList";
 
 const PromotionCardListSmall = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionCardListSmall'))
 const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeCard'))
@@ -80,7 +81,12 @@ const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentT
                 }
 
                 if (post.postType === 'video') {
-                    return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                    if (elementSize === 'list') {
+                        // @ts-ignore
+                        return <VideoCardTypeList onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                    } else {
+                         return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                    }
                 } else if (post.postType === 'promotion') {
                     if (elementSize === 'listSmall') {
                         // @ts-ignore

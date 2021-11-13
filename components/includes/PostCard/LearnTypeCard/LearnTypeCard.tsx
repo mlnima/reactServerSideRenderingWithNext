@@ -94,7 +94,7 @@ const LearnTypeCard = (props:any) => {
                 <a rel='next' onClick={ props.onActivateLoadingHandler} className='learn-post-card-link' title={props.title}  >
                     <LearnTypeCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                     <div className='learn-post-card-under-media'>
-                        <CardTitle title={props.title}/>
+                        <CardTitle title={props.title} metas={undefined}/>
                         {/*<div className='learn-post-card-under-media-info'>*/}
                         {/*    <span className='learn-post-card-views learn-post-card-info-data'><span>{props.views}</span> {props.t(`common:Views`)}</span>*/}
                         {/*    <span className='learn-post-card-rating learn-post-card-info-data'><span>{props.rating}</span> % </span>*/}

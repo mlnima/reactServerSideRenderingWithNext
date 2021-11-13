@@ -1,7 +1,5 @@
-
 const express = require('express');
 const router = express.Router();
-const authMiddleware = require('../../middlewares/authMiddleware')
 const adminAuthMiddleware = require('../../middlewares/adminAuthMiddleware')
 
 const adminCreateNewPost = require('./adminPostsControllers/adminCreateNewPost')
@@ -17,6 +15,7 @@ const adminDeleteComments = require('./adminPostsControllers/adminDeleteComments
 const adminCreateNewPostByApi = require('./adminPostsControllers/adminCreateNewPostByApi')
 const adminGetComments = require('./adminPostsControllers/adminGetComments')
 const adminGetPost = require('./adminPostsControllers/adminGetPost')
+const adminGetMeta = require('./adminPostsControllers/adminGetMeta')
 
 
 router.post('/createNewPost',adminAuthMiddleware,adminCreateNewPost)
@@ -32,6 +31,7 @@ router.post('/deleteComments',adminAuthMiddleware,adminDeleteComments)
 router.post('/createNewByApi',adminCreateNewPostByApi)
 router.post('/getComments',adminAuthMiddleware,adminGetComments)
 router.get('/getPost',adminAuthMiddleware,adminGetPost)
+router.get('/getMeta',adminAuthMiddleware,adminGetMeta)
 
 
 

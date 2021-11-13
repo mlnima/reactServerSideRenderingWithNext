@@ -1,10 +1,9 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import Link from 'next/link';
-import {deleteMeta} from '../../../../../../_variables/ajaxPostsVariables'
 import {deletePage} from "../../../../../../_variables/ajaxVariables";
 import {useDispatch} from "react-redux";
-import {adminBulkActionPost} from "../../../../../../store/actions/adminPanelPostsActions";
+import {adminBulkActionPost, adminDeleteMeta} from "../../../../../../store/actions/adminPanelPostsActions";
 
 const TableBodyItemOnHover = props => {
     const dispatch = useDispatch()
@@ -51,7 +50,7 @@ const TableBodyItemOnHover = props => {
             return (
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={'/admin/form/' + props._id}><a>Edit</a></Link>
-                    <span onClick={() => deleteMeta(props._id).then(() => reGetData())}>Delete</span>
+                    <span onClick={() => dispatch(adminDeleteMeta(props._id)) }>Delete</span>
                 </div>
             );
         } else if (props.assetsType === 'pages') {

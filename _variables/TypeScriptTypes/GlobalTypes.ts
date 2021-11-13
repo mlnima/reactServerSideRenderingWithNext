@@ -116,7 +116,7 @@ export interface WidgetPropTypes {
 }
 
 export interface MetasPropTypes {
-    metas: object[],
+    metas: Meta[],
     totalCount: number
 }
 
@@ -220,6 +220,7 @@ export interface AdminPanelPostsTypes {
         status?: string,
         postType?: string,
     },
+    meta?:Meta,
     activeEditingLanguage: string
 }
 

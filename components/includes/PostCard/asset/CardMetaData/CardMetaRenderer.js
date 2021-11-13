@@ -36,13 +36,13 @@ const CardMetaRenderer = ({metaPreview,postElementSize}) => {
 
     return (
            <CardMetaDataStyledSpan className='card-meta' postElementSize={postElementSize}>
-                {(metaPreview || []).filter(meta => meta?.name?.length > 1).map((meta,index) => {
+                {(metaPreview || []).filter(meta => meta?.name?.length > 1).map((meta) => {
                     const typePath = meta.type === 'tags' ? 'tag' :
                                      meta.type === 'categories' ? 'category' :
                                      meta.type === 'actors' ? 'actor' : 'category'
 
                     return (
-                        <Link href={`/${typePath}/${meta._id}`} key={index}>
+                        <Link href={`/${typePath}/${meta._id}`} key={meta._id}>
                             <a className='card-meta-data' title={meta.name}>
                                {meta.name}
                             </a>

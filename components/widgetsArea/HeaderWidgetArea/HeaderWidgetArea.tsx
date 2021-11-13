@@ -6,13 +6,14 @@ import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 let StyledHeader = styled.header`
   grid-area: header;
   background-color: var(--header-background-color, #000);
+ // max-width: 100vw;
 
   .header-content {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
-    margin: 0 5px;
+    //padding: 0 5px;
     height: 100%;
     width: 100%;
   }

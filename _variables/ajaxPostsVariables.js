@@ -40,25 +40,26 @@ export const getMultipleMeta = async (data,metaType,cache) => {
     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL+ `/api/v1/posts/getMultipleMeta${queries}`)
 };
 
-export const getSingleMeta = async (id,cache) => {
-    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getSingleMeta?id=${id}&cache=${cache}`)
-};
 
-export const updateMeta = async (data) => {
-    const body = {
-        data,
-        token: localStorage.wt
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/updateMeta`, body)
-};
+// export const getSingleMeta = async (id,cache) => {
+//     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getMeta?id=${id}&cache=${cache}`)
+// };
 
-export const deleteMeta = async (id) => {
-    const body = {
-        _id:id,
-        token: localStorage.wt
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteMeta`, body)
-};
+// export const updateMeta = async (data) => {
+//     const body = {
+//         data,
+//         token: localStorage.wt
+//     };
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/updateMeta`, body)
+// };
+
+// export const deleteMeta = async (id) => {
+//     const body = {
+//         _id:id,
+//         token: localStorage.wt
+//     };
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteMeta`, body)
+// };
 
 
 

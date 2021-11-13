@@ -22,7 +22,7 @@ router.post('/newComment',clientNewComment)
 router.post('/checkRemovedContent',clientCheckRemovedContent)
 router.post('/fixMetaImage',clientFixMetaImage)
 router.get('/getMultipleMeta',cacheSuccesses,clientGetMultipleMeta)
-router.get('/getSingleMeta',cacheSuccesses,clientGetSingleMeta)
+router.get('/getMeta',cacheSuccesses,clientGetSingleMeta)
 router.post('/getComments',clientGetComments)
 router.post('/userCreateNewPost',authMiddleware,clientUserCreateNewPost)
 
