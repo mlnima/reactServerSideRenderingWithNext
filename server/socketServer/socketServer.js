@@ -43,6 +43,8 @@ io.on('connection', socket => {
         socket.emit("socketId", socket.id)
     })
 
+
+
     socket.on('setIdAndJoinConversation', async (userID, conversationId) => {
         //setCustomId(userID)
         socket.join(conversationId)

@@ -254,8 +254,8 @@ export const adminCheckAndRemoveDeletedVideos = ( ) =>async (dispatch: any) => {
         type: types.LOADING,
         payload: true
     })
-   await axios.post(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`).then(res=>{
-        // console.log(res)
+   await axios.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`).then(res=>{
+        // console.log(res.data)
         // dispatch({
         //     type: types.SERVER_LOG,
         //     payload: {message: 'Checking Started', type: 'success'}

@@ -34,7 +34,7 @@ router.post('/createNewByApi',adminCreateNewPostByApi)
 router.post('/getComments',adminAuthMiddleware,adminGetComments)
 router.get('/getPost',adminAuthMiddleware,adminGetPost)
 router.get('/getMeta',adminAuthMiddleware,adminGetMeta)
-router.post('/checkAndRemoveDeletedVideos',adminAuthMiddleware,adminCheckAndRemoveDeletedVideos)
+router.get('/checkAndRemoveDeletedVideos',adminAuthMiddleware,adminCheckAndRemoveDeletedVideos)
 router.get('/setMetaThumbnailsAndCount',adminAuthMiddleware,adminSetMetaThumbnailsAndCount)
 
 module.exports = router
