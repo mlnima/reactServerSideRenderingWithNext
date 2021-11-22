@@ -26,9 +26,11 @@ export const getServerSideProps = wrapper.getServerSideProps(store =>
 
     // @ts-ignore
     async (context ) => {
+
         const firstLoadData = await getFirstLoadData(context.req,
             ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-            store
+            store,
+            context.locale
         )
         return {
             props: {

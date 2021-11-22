@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-import {adminEditMeta, adminDeleteMeta, adminGetMeta, adminUpdateMeta} from "../../../store/actions/adminPanelPostsActions";
+import {adminEditMeta, adminDeleteMeta, adminGetMeta, adminUpdateMeta} from "../../../store/adminActions/adminPanelPostsActions";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {languagesOptions} from "../../../_variables/_variables";
 

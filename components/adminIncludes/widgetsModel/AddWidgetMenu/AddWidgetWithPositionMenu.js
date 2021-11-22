@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import * as widgetModels from './models'
-import {addNewWidget} from '../../../../store/actions/widgetsActions'
+import {adminAddNewWidget} from '../../../../store/adminActions/adminWidgetsActions'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
 import _ from "lodash";
 import {useDispatch, useSelector} from 'react-redux';
@@ -84,7 +84,7 @@ const AddWidgetWithPositionMenu = props => {
             type,
             widgetIndex:highestIndexInTheSamePosition + 1,
         };
-        dispatch(addNewWidget(dataToSave))
+        dispatch(adminAddNewWidget(dataToSave))
         setOpen(false)
 
     }

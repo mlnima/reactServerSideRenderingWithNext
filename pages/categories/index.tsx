@@ -66,7 +66,12 @@ const categoriesPage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'], store);
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'],
+        store,
+        context.locale
+    );
     const metaData = await getMultipleMeta(context.query, 'categories', true);
 
     store.dispatch({

@@ -65,7 +65,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const firstLoadData = await getFirstLoadData(
         context.req,
         ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar'],
-        store
+        store,
+        context.locale
     );
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true);
     const postsData = await getPosts(gettingPostsQueries);

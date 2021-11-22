@@ -5,7 +5,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
 import {useDispatch} from "react-redux";
-import {clearCaches} from "../../../store/actions/adminPanelGlobalStateActions";
+import {clearCaches} from "../../../store/adminActions/adminPanelGlobalStateActions";
 import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`

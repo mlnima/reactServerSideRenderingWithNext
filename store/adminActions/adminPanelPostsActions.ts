@@ -248,3 +248,60 @@ export const adminBulkActionPost = (ids: string[], status: string) => (dispatch:
     })
 
 }
+
+export const adminCheckAndRemoveDeletedVideos = ( ) =>async (dispatch: any) => {
+    dispatch({
+        type: types.LOADING,
+        payload: true
+    })
+   await axios.post(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`).then(res=>{
+        // console.log(res)
+        // dispatch({
+        //     type: types.SERVER_LOG,
+        //     payload: {message: 'Checking Started', type: 'success'}
+        // })
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: 'Checking Removed Video Started', type: 'success'}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    }).catch((err)=>{
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: err.response.data.message, type: 'error', err}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    })
+}
+
+export const setMetaThumbnailsAndCount = ( ) =>async (dispatch: any) => {
+    dispatch({
+        type: types.LOADING,
+        payload: true
+    })
+    await axios.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}`).then(res=>{
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: 'Setting New Image and Fix Count For Meta Data Started', type: 'success'}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    }).catch((err)=>{
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: err.response.data.message, type: 'error', err}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    })
+}

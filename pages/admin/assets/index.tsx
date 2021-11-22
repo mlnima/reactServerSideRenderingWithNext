@@ -63,6 +63,22 @@ const assets = (props:any) => {
     //     console.log(finalPageData)
     // }, [finalPageData]);
 
+    const openAllHandler =()=>{
+        // @ts-ignore
+        if (router.query.assetsType === 'metas' && finalPageData.metas?.length && typeof window !=='undefined'){
+            // @ts-ignore
+            finalPageData.metas.forEach(meta=>{
+                // @ts-ignore
+               return  window.open(`/admin/meta?id=${meta._id}`, '_blank')
+                // focus()
+                // console.log(`/admin/meta?id=${meta._id}`)
+            })
+
+        }
+
+    }
+
+
     const getAndSetAssetData = async () => {
 
         const assetType = router.query.assetsType
@@ -108,8 +124,6 @@ const assets = (props:any) => {
                     })
 
                 }
-
-
             } else {
                 setFinalPageData({
                     ...finalPageData,
@@ -117,21 +131,19 @@ const assets = (props:any) => {
                     ...ajaxRequestData.data
                 })
             }
-            // setState({
-            //     ...state,
-            //     ...dataConfig
-            // })
         }
     }
 
 
     return (
         <AdminAssetPageStyledDiv className='admin-asset-page'>
+
             <TableControls finalPageData={finalPageData}
                            dataConfig={dataConfig}
                            setDataConfig={setDataConfig}
                            selectedItems={selectedItems}
                            setSelectedItems={setSelectedItems}/>
+
             <TableHeader finalPageData={finalPageData} selectedItems={selectedItems}
                          setSelectedItems={setSelectedItems}/>
             <TableBody finalPageData={finalPageData} selectedItems={selectedItems}

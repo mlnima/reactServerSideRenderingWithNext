@@ -42,7 +42,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const firstLoadData = await getFirstLoadData(
         context.req,
         ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],
-        store
+        store,
+        context.locale
     );
 
 

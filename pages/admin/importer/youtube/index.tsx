@@ -1,6 +1,6 @@
 import {useEffect, useState, useRef, ChangeEvent} from 'react';
 import {getSetting, youtubeDataScrapper} from '../../../../_variables/ajaxVariables'
-import withRouter from 'next/dist/client/with-router';
+
 import {savePost} from '../../../../_variables/ajaxPostsVariables'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
@@ -95,10 +95,10 @@ const youtube = () => {
                                 views: 0
                             }
 
-                            await savePost(videoData, window.location.origin).then(() => {
+                            await savePost(videoData).then(() => {
 
                             }).catch(err => {
-                                console.log(err.response.data.error)
+                                console.log(err?.response?.data?.error)
                                 dispatch(setAlert({message: err.response.data.error + ' => ' + videoData.title, type: 'error', active: true}))
                             })
                         }
@@ -153,7 +153,6 @@ const youtube = () => {
                 <h1>Youtube Importer</h1>
                 <textarea ref={urlsElement}/>
                 <button className='saveBtn greenActionBtn' onClick={() => onImportHandler()}>Import</button>
-                {/*<button className='saveBtn greenActionBtn' onClick={() => onSetDataForTest()}>setTestData</button>*/}
             </div>
         </StyledDiv>
     );
@@ -167,4 +166,4 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
-export default withRouter(youtube);
+export default youtube;

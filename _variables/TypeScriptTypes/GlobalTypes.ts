@@ -59,6 +59,7 @@ export interface User {
     following:object[];
 }
 
+
 export interface UserState {
     userData?: User;
     socketId?: string;
@@ -93,6 +94,17 @@ export interface settingsPropTypes {
         post: PostTypes,
         comments: object[]
     };
+}
+
+
+// user
+export interface PageTypes {
+    _id?: string;
+    pageName:string,
+    sidebar:string,
+    status: string,
+    imageUrl:string,
+    pageStyle:string
 }
 
 // export interface SettingsTypes {
@@ -147,16 +159,11 @@ export interface Meta {
 }
 
 
-export interface WidgetInterface {
-    data: {
-        position: string
-        widgetIndex: number
-    }
-}
+
 
 export interface WidgetsStateInterface {
     widgets: {
-        widgets: WidgetInterface[]
+        widgets: WidgetPropTypes[]
     }
 }
 

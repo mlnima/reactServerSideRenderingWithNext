@@ -48,7 +48,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     const firstLoadData = await getFirstLoadData(context.req,
         ['messengerPagePageLeftSidebar', 'messengerPageRightSidebar', 'messengerPage'],
-        store
+        store,
+        context.locale
     )
 
     return {

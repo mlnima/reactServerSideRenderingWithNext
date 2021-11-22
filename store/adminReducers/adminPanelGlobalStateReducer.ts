@@ -3,11 +3,13 @@ import * as types from '../types'
 
 const initialState = {
     customPages:[],
-    sidebar:false
+    sidebar:false,
+    serverLog:[]
 }
 
 export interface AdminPanelGlobalState {
     customPages:string[],
+    serverLog:string[],
     sidebar:boolean
 }
 
@@ -23,6 +25,11 @@ export const adminPanelGlobalStateReducer = (state : AdminPanelGlobalState = ini
             return {
                 ...state,
                 sidebar:action.payload
+            };
+        case types.SERVER_LOG:
+            return {
+                ...state,
+                serverLog:[...state.serverLog.slice(state.serverLog.length - 100),action.payload]
             };
 
         default:

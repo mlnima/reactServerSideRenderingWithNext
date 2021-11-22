@@ -34,7 +34,12 @@ const posts: NextPage<any> = props => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['postsPageLeftSidebar', 'postsPageRightSidebar'], store)
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['postsPageLeftSidebar', 'postsPageRightSidebar'],
+        store,
+        context.locale
+    )
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, null, true)
     const postsData = await getPosts(gettingPostsQueries)
     store.dispatch({

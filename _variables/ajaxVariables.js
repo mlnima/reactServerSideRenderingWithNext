@@ -8,16 +8,10 @@ export const getSetting = async (type, cache) => {
     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/settings/getSetting?type=${type}&cache=${cache}&token=${localStorage.wt}`);
 };
 
-export const addNewWidget = async (data) => {
-    const body = {
-        data,
-        token: localStorage.wt
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/addNewWidget', body);
-}
 
-export const getMultipleWidgetWithData = async (widgets, cache) => {
-    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(widgets.widgets, cache)}`)
+
+export const getMultipleWidgetWithData = async (widgets, cache,locale) => {
+    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(widgets.widgets, cache,locale)}`)
 }
 
 export const getMultipleSetting = async (settings, cache) => {
@@ -26,21 +20,21 @@ export const getMultipleSetting = async (settings, cache) => {
 };
 
 
-export const updateWidgets = async (widgetData) => {
-    const body = {
-        widgetData,
-        token: localStorage.wt
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/updateWidget', body)
-}
+// export const updateWidgets = async (widgetData) => {
+//     const body = {
+//         widgetData,
+//         token: localStorage.wt
+//     };
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/updateWidget', body)
+// }
 
-export const deleteWidgets = async (id) => {
-    const body = {
-        id,
-        token: localStorage.wt
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/deleteWidget', body)
-}
+// export const deleteWidgets = async (id) => {
+//     const body = {
+//         id,
+//         token: localStorage.wt
+//     };
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/deleteWidget', body)
+// }
 
 export const executor = async (command) => {
     const body = {
@@ -155,13 +149,13 @@ export const getOrders = async (data, domainName) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/orders/getOrders`, body)
 };
 
-export const getFirstLoadData = async (req, dynamicWidgets,store) => {
+export const getFirstLoadData = async (req, dynamicWidgets,store,locale) => {
     try {
 
         const cache = process.env.NODE_ENV !== 'development'
         const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length ? [...dynamicWidgets] : [];
         const staticWidgets = process.env.NEXT_PUBLIC_STATIC_WIDGETS ? JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS) : []
-        const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet]}, cache)
+        const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet]}, cache,locale)
         const dynamicWidgetsData = widgetData.data?.widgets ?? []
         const allWidgets = [...staticWidgets,...dynamicWidgetsData]
         const identity = process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {}

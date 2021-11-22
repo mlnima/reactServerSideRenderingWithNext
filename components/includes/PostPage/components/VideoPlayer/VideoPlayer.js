@@ -44,6 +44,9 @@ const VideoPlayerStyledDiv = styled.div`
 
 
 const VideoPlayer = ({post}) => {
+
+
+
     return (
         <VideoPlayerStyledDiv className='video-player'>
 
@@ -59,7 +62,7 @@ const VideoPlayer = ({post}) => {
                         <source src={post.videoUrl}/>
                     </video>
                     : post.videoEmbedCode && !post.videoUrl ?
-                        <iframe className={post._id} title={post.title} src={post.videoEmbedCode} frameBorder="0" width='640' height='360' scrolling="no"/>
+                        <iframe className={post._id} title={post.title} src={post.videoEmbedCode} onLoad={()=>onLoadHandler()} frameBorder="0" width='640' height='360' scrolling="no"/>
                         : !post.videoUrl && !post.videoEmbedCode && post.videoScriptCode ?
                             post.videoScriptCode :
                             null

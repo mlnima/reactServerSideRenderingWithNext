@@ -108,7 +108,12 @@ const Profile = (props:ClientPagesTypes) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], store);
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
+        store,
+        context.locale
+    );
 
     return {
         props: {

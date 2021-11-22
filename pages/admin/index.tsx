@@ -69,6 +69,10 @@ const AdminHomePage = () => {
             {
                 name: 'Terminal',
                 pathURL: '/admin/tools/terminal',
+            },
+            {
+                name: 'Tools',
+                pathURL: '/admin/tools',
             }
         ]
     })

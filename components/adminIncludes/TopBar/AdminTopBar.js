@@ -7,7 +7,7 @@ import {faBars, faHome, faPlus} from "@fortawesome/free-solid-svg-icons";
 import {faUser} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {clearCaches, setSidebarStatus} from "../../../store/actions/adminPanelGlobalStateActions";
+import {clearCaches, setSidebarStatus} from "../../../store/adminActions/adminPanelGlobalStateActions";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -17,6 +17,7 @@ let StyledDiv = styled.div`
   height: 30px;
   background-color: var(--admin-topbar-background-color);
   grid-area: admin-topbar;
+  opacity: .9;
 
   .developmentModeSwitch {
     display: flex;

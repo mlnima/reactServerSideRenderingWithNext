@@ -16,6 +16,8 @@ const adminCreateNewPostByApi = require('./adminPostsControllers/adminCreateNewP
 const adminGetComments = require('./adminPostsControllers/adminGetComments')
 const adminGetPost = require('./adminPostsControllers/adminGetPost')
 const adminGetMeta = require('./adminPostsControllers/adminGetMeta')
+const adminCheckAndRemoveDeletedVideos = require('./adminPostsControllers/adminCheckAndRemoveDeletedVideos')
+const adminSetMetaThumbnailsAndCount = require('./adminPostsControllers/adminSetMetaThumbnailsAndCount')
 
 
 router.post('/createNewPost',adminAuthMiddleware,adminCreateNewPost)
@@ -32,8 +34,7 @@ router.post('/createNewByApi',adminCreateNewPostByApi)
 router.post('/getComments',adminAuthMiddleware,adminGetComments)
 router.get('/getPost',adminAuthMiddleware,adminGetPost)
 router.get('/getMeta',adminAuthMiddleware,adminGetMeta)
-
-
-
+router.post('/checkAndRemoveDeletedVideos',adminAuthMiddleware,adminCheckAndRemoveDeletedVideos)
+router.get('/setMetaThumbnailsAndCount',adminAuthMiddleware,adminSetMetaThumbnailsAndCount)
 
 module.exports = router

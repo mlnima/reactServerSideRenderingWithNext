@@ -11,9 +11,11 @@ import MultipleLinkWidgetModelFields from "./MultipleLinkWidgetModelFields/Multi
 import _ from "lodash";
 import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteWidget, updateWidget, addNewWidget} from "../../../../store/actions/widgetsActions";
+import {adminAddNewWidget,adminDeleteWidget,adminUpdateWidget} from "../../../../store/adminActions/adminWidgetsActions";
 import staticPositions from '../staticPositions';
 import postTypes from "../../../global/postTypes";
+import styled from "styled-components";
+import SelectFieldForWidget from "./SelectFieldForWidget/SelectFieldForWidget";
 
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
@@ -29,8 +31,7 @@ const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'));
 const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'));
 const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'));
 const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false});
-import styled from "styled-components";
-import SelectFieldForWidget from "./SelectFieldForWidget/SelectFieldForWidget";
+
 
 const WidgetModelStyledDiv = styled.div`
   z-index: 3;
@@ -227,7 +228,7 @@ const WidgetModel = props => {
         const widgetsInTheSamePosition = widgets.filter(widget => widget?.data?.position === widgetData.position)
         const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(widget => widgetData.widgetIndex), 0)
 
-        dispatch(addNewWidget({
+        dispatch(adminAddNewWidget({
             ...widgetData,
             widgetIndex: highestIndexInTheSamePosition + 1,
             posts: [],
@@ -236,12 +237,12 @@ const WidgetModel = props => {
     }
     const onDeleteHandler = () => {
         if (props.widgetId) {
-            dispatch(deleteWidget(props.widgetId))
+            dispatch(adminDeleteWidget(props.widgetId))
         }
     };
     const changeWidgetIndex = (action) => {
         const valueToSet = action ? widgetData.widgetIndex + 1 : widgetData.widgetIndex - 1;
-        dispatch(updateWidget({
+        dispatch(adminUpdateWidget({
             _id: props?.widgetId,
             data: {
                 ...widgetData,
@@ -257,7 +258,7 @@ const WidgetModel = props => {
 
     };
     const onSaveHandler = () => {
-        dispatch(updateWidget({
+        dispatch(adminUpdateWidget({
             _id: props?.widgetId,
             data: {
                 ...widgetData,
@@ -267,7 +268,7 @@ const WidgetModel = props => {
         }))
     };
     const onLockHandler = () => {
-        dispatch(updateWidget({
+        dispatch(adminUpdateWidget({
             _id: props?.widgetId,
             data: {
                 ...widgetData,

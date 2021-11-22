@@ -69,7 +69,13 @@ const actorsPage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['actorsPageTop', 'actorsPageLeftSidebar', 'actorsPageBottom', 'actorsPageRightSidebar'], store);
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['actorsPageTop', 'actorsPageLeftSidebar', 'actorsPageBottom', 'actorsPageRightSidebar'],
+        store,
+        context.locale
+    );
+
     const metaData = await getMultipleMeta(context.query, 'actors', true)
 
     store.dispatch({

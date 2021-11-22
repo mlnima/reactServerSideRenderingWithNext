@@ -7,7 +7,7 @@ import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {setSidebarStatus} from "../../../store/actions/adminPanelGlobalStateActions";
+import {setSidebarStatus} from "../../../store/adminActions/adminPanelGlobalStateActions";
 
 let StyledDiv = styled.div`
   position: absolute;
@@ -16,12 +16,13 @@ let StyledDiv = styled.div`
   top: 0;
   grid-area: adminSideBar;
   min-height: 100%;
-  width: 160px;
+  width: 256px;
   background-color: var(--admin-sidebar-background-color);
   display: flex;
   align-items: flex-start;
   flex-direction: column;
   z-index: 16;
+  opacity: .9;
 
   .SideBarItemElement {
     width: 100%;
@@ -34,11 +35,9 @@ let StyledDiv = styled.div`
         text-decoration: none;
         color: var(--admin-sidebar-text-color);
         width: 100%;
-        padding: 5px 0;
+        padding: 13px 16px;
         margin: 5px;
         display: block;
-
-
       }
 
       span {
@@ -52,12 +51,12 @@ let StyledDiv = styled.div`
 
       &:hover {
         background-color: #181818;
+        transition: .5s;
         font-weight: bold;
       }
 
       &:active {
         background-color: white;
-        color: $dark90;
       }
     }
 
@@ -69,6 +68,7 @@ let StyledDiv = styled.div`
         padding: 10px 0 10px 20px;
         display: block;
         &:hover {
+          transition: .5s;
           font-weight: bold;
         }
       }
@@ -179,37 +179,32 @@ const SideBar = () => {
     const [hovered, setHovered] = useState('')
 
     const renderItems = Object.keys(state).map(item => {
-        const onHoverHandler = state[item].subItems.map(subItem => {
-            if (hovered === item) {
-                return (
-                    <Link  key={_.uniqueId('id_')} href={subItem.url} >
-                        <a className='SideBarItem-SubItem' onClick={()=>dispatch(setSidebarStatus(false))}>
-                            {convertVariableNameToName(subItem.name)}
-                        </a>
-                    </Link>
-                )
-            } else return null
-
-        })
-        const RenderArrowsForSubMenus = () => {
-            if (state[item].subItems.length ) {
-                return (
-                    <span key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
-                        <FontAwesomeIcon icon={ hovered === item ? faSortUp : faSortDown} className='fontawesomeSvgVerySmall' />
-
-                    </span>
-                )
-            } else return null
-        }
-
         return (
             <div key={item} className='SideBarItemElement'>
                 <div className='SideBarItemTitle' onMouseOver={() => setHovered(item)}>
                     <Link href={state[item].pathURL}><a className='SideBarItem' onClick={()=>dispatch(setSidebarStatus(false))}>{convertVariableNameToName(item)}</a></Link>
-                    <RenderArrowsForSubMenus/>
+                    {state[item].subItems.length?
+                        <span key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
+                            <FontAwesomeIcon icon={ faSortDown} style={{transform:  hovered === item ? 'rotate(0deg)' : 'rotate(90deg)'}} className='fontawesomeSvgVerySmall' />
+                       </span>
+                        :null}
+
                 </div>
                 <div className='SideBarItemElementSubItems'>
-                    {onHoverHandler}
+                    {state[item].subItems.length ?
+                        state[item].subItems.map(subItem => {
+                            if (hovered === item) {
+                                return (
+                                    <Link  key={_.uniqueId('id_')} href={subItem.url} >
+                                        <a className='SideBarItem-SubItem' onClick={()=>dispatch(setSidebarStatus(false))}>
+                                            {convertVariableNameToName(subItem.name)}
+                                        </a>
+                                    </Link>
+                                )
+                            } else return null
+                        }):null
+                    }
+                    {/*{onHoverHandler}*/}
                 </div>
             </div>
         )

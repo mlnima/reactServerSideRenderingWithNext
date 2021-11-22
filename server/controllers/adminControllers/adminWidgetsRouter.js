@@ -5,13 +5,12 @@ const adminAuthMiddleware = require('../../middlewares/adminAuthMiddleware')
 const adminAddNewWidget = require('./adminWidgetsControllers/adminAddNewWidget')
 const {adminUpdateWidget} = require('./adminWidgetsControllers/adminUpdateWidget')
 const adminDeleteWidget = require('./adminWidgetsControllers/adminDeleteWidget')
-const adminGetMultipleWidgets = require('./adminWidgetsControllers/adminGetMultipleWidgets')
+const adminGetWidgets = require('./adminWidgetsControllers/adminGetWidgets')
 
-
-router.post('/addNewWidget',adminAuthMiddleware,adminAddNewWidget)
-router.post('/updateWidget',adminAuthMiddleware,adminUpdateWidget)
-router.post('/deleteWidget',adminAuthMiddleware,adminDeleteWidget)
-router.get('/getMultipleWidgets',adminAuthMiddleware,adminGetMultipleWidgets)
+router.post('/adminAddNewWidget',adminAuthMiddleware,adminAddNewWidget)
+router.post('/adminUpdateWidget',adminAuthMiddleware,adminUpdateWidget)
+router.post('/adminDeleteWidget',adminAuthMiddleware,adminDeleteWidget)
+router.get('/adminGetWidgets',adminAuthMiddleware,adminGetWidgets)
 
 
 

@@ -6,11 +6,6 @@ import styled from "styled-components";
 let StyledDiv = styled.div`
   .asset-page-table-body-item-content {
     padding: 10px;
-    border: .2px solid rgba(0, 0, 0, .1);
-    border-bottom: none;
-    //display: grid;
-    //grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
-    //grid-gap: 10px;
     display: flex;
     align-items: center;
     justify-content: space-between;
@@ -27,23 +22,25 @@ let StyledDiv = styled.div`
     align-items: center;
     height: 35px;
     width: 300px;
-    border: .2px solid rgba(0, 0, 0, .1);
-    border-top: none;
     cursor: pointer;
-
+    //margin-bottom: 30px;
     span, a {
-      text-decoration: none;
-      border: none;
-      color: var(--admin-light-blue-color);
-      width: 50px;
-      height: 20px;
-      font-size: 13px;
-      background-color: transparent;
-      margin-left: 10px;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      //text-decoration: none;
+      //border: none;
+      //color: var(--admin-light-blue-color);
+      //width: 50px;
+      //height: 20px;
+      //
+      //background-color: transparent;
+      //margin-left: 10px;
+      //display: flex;
+      //align-items: center;
+      //justify-content: center;
+   
+      padding: 6px 3px;
+      margin: 6px 3px;
       font-size: 12px;
+
     }
 
     button {
@@ -62,7 +59,7 @@ let StyledDiv = styled.div`
 const TableBodyItem = props => {
     const [state, setState] = useState({
         properties: [],
-        isHover: false
+        isHover: true
     });
 
     useEffect(() => {
@@ -112,17 +109,17 @@ const TableBodyItem = props => {
     }, [props]);
 
     const onMouseEnterHandler = () => {
-        setState({
-            ...state,
-            isHover: true
-        })
+        // setState({
+        //     ...state,
+        //     isHover: true
+        // })
     }
 
     const onMouseOutHandler = () => {
-        setState({
-            ...state,
-            isHover: false
-        })
+        // setState({
+        //     ...state,
+        //     isHover: false
+        // })
     }
 
     const onSelectChangeHandler = e => {

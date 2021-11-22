@@ -17,7 +17,12 @@ const Login = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store =>
     // @ts-ignore
     async (context ) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['login'],     store)
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['login'],
+        store,
+        context.locale
+    )
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),

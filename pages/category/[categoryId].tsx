@@ -62,7 +62,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const firstLoadData = await getFirstLoadData(
         context.req,
         ['categoryPageTop', 'categoryPageLeftSidebar', 'categoryPageBottom', 'categoryPageRightSidebar'],
-        store
+        store,
+        context.locale
     );
 
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.categoryId, true)

@@ -66,7 +66,11 @@ const tagsPage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['tagsPageTop', 'tagsPageLeftSidebar', 'tagsPageBottom', 'tagsPageRightSidebar'], store);
+    const firstLoadData = await getFirstLoadData(context.req,
+        ['tagsPageTop', 'tagsPageLeftSidebar', 'tagsPageBottom', 'tagsPageRightSidebar'],
+        store,
+        context.locale
+    );
     const metaData = await getMultipleMeta(context.query, 'tags', true)
 
     store.dispatch({

@@ -13,6 +13,7 @@ const CardTitleStyledDiv = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 12px;
+ 
 
   .card-actors, .card-tags, .card-categories {
     margin: 0 3px;
@@ -51,6 +52,7 @@ const CardTitleStyledDiv = styled.div`
 
 
   &:hover {
+ 
     display: inline-block;
     white-space: normal;
     overflow: hidden;

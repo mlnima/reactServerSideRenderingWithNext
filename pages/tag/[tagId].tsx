@@ -64,7 +64,8 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const firstLoadData = await getFirstLoadData(
         context.req,
         ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar'],
-        store
+        store,
+        context.locale
     );
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.tagId, true);
     const postsData = await getPosts(gettingPostsQueries)

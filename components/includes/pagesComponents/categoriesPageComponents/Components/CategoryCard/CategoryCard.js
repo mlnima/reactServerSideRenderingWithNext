@@ -4,6 +4,7 @@ import CategoryCardMedia from "./CategoryCardMedia";
 import {withTranslation} from "next-i18next";
 
 const CategoryCard = ({t, cardWidth, category, onActivateLoadingHandler}) => {
+
     const router = useRouter()
     return (
         <Link href={`/category/${category?._id}`}>

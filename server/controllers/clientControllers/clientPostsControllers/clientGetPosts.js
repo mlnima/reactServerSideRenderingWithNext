@@ -4,7 +4,6 @@ const metaSchema = require('../../../models/metaSchema');
 const _queryGeneratorForGettingPosts = require('../_variables/_queryGeneratorForGettingPosts')
 
 module.exports = async (req, res) => {
-
     try {
         const findingPostsOptions = _queryGeneratorForGettingPosts(req.query)
         const populateMeta = [
@@ -21,7 +20,6 @@ module.exports = async (req, res) => {
                 sort: findingPostsOptions.sortQuery
             }).populate(populateMeta).exec()
         const meta = req.query?.metaId || req.query?.selectedMetaForPosts ? await metaSchema.findById(req.query?.metaId || req.query?.selectedMetaForPosts).exec() : {}
-
         res.json({posts,totalCount,meta})
     }catch (err){
         console.log(err.stack)
@@ -29,5 +27,4 @@ module.exports = async (req, res) => {
             message: 'Server Error'
         })
     }
-
 };

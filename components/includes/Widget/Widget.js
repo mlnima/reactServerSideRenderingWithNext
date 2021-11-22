@@ -5,14 +5,13 @@ const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 import styled from "styled-components";
 import WidgetCustomScript from "./WidgetCustomScript/WidgetCustomScript";
 
-//import WidgetFooter from "./WidgetFooter/WidgetFooter";
-
 let WidgetStyledSection = styled.section`
   ${props => props?.customStyles}
 `
 
 const Widget = props => {
     const idAttribute = props.data?.extraId ? {id: props.data?.extraId} : {}
+
     return (
         <WidgetStyledSection className={'widget ' + (props.data?.extraClassName ?? '')}  {...idAttribute} customStyles={props.data?.customStyles || ''}>
             {props.data.title ? <WidgetHeader {...props.data}/> : null}

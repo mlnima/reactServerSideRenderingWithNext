@@ -21,11 +21,11 @@ const AdminPanelGlobalStyles = createGlobalStyle`
     --admin-input-background-color: #fff;
     --admin-input-text-color: #23282d;
 
-    --admin-topbar-background-color: #24282d;
+    --admin-topbar-background-color: #000;
     --admin-topbar-text-color: #fff;
 
     --admin-sidebar-text-color: #fff;
-    --admin-sidebar-background-color: #24282d;
+    --admin-sidebar-background-color: #000;
 
   }
 

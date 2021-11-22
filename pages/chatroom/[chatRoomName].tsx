@@ -97,7 +97,12 @@ const chatRoom = (props: ClientPagesTypes) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['homePageLeftSidebar', 'homePageRightSidebar', 'home'], store)
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
+        store,
+        context.locale
+    )
 
     return {
         props: {

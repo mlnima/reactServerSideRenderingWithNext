@@ -2,7 +2,7 @@ import React from "react";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
-import {adminEditPost} from "../../../../store/actions/adminPanelPostsActions";
+import {adminEditPost} from "../../../../store/adminActions/adminPanelPostsActions";
 import postTypes from "../../../global/postTypes";
 
 const FormatStyledDiv = styled.div`

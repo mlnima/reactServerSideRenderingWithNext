@@ -156,7 +156,12 @@ const user = (props: ClientPagesTypes) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, ['userPageRightSidebar,userPageLeftSidebar'], store)
+    const firstLoadData = await getFirstLoadData(
+        context.req,
+        ['userPageRightSidebar,userPageLeftSidebar'],
+        store,
+        context.locale
+    )
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),

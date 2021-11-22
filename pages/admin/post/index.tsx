@@ -14,7 +14,7 @@ import _ from "lodash";
 import styled from "styled-components";
 import {setAlert, setLoading} from "../../../store/actions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
-import {adminChangeActiveEditingLanguage, adminEditPost, adminGetPost, adminNewPost, adminSaveNewPost, adminUpdatePost} from "../../../store/actions/adminPanelPostsActions";
+import {adminChangeActiveEditingLanguage, adminEditPost, adminGetPost, adminNewPost, adminSaveNewPost, adminUpdatePost} from "../../../store/adminActions/adminPanelPostsActions";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";

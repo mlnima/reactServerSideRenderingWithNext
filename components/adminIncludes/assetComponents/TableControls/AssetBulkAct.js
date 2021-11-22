@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
 import withRouter from 'next/dist/client/with-router'
 import {bulkAction} from "../../../../_variables/ajaxPostsVariables";
-import {adminBulkActionPost} from "../../../../store/actions/adminPanelPostsActions";
+import {adminBulkActionPost} from "../../../../store/adminActions/adminPanelPostsActions";
 import {useDispatch} from "react-redux";
 import styled from "styled-components";
 import {setAlert} from "../../../../store/actions/globalStateActions";
