@@ -146,6 +146,7 @@ export interface GetServerSidePropsContext {
 }
 
 export interface Meta {
+    _id:string;
     name: string;
     description: string;
     type: string;
@@ -178,9 +179,9 @@ export interface ChatroomStateTypes {
 
 export interface PostStateTypes {
     posts: PostTypes[],
-    actorData: object,
-    categoryData: object,
-    tagData: object,
+    actorData: Meta,
+    categoryData: Meta,
+    tagData: Meta,
     totalCount: number,
     post: PostTypes,
     comments: object[],

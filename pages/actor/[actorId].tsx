@@ -8,39 +8,39 @@ import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {useRouter} from "next/router";
-import {ClientPagesTypes, _FirstLoadData} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
 import {useSelector} from "react-redux";
-import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {SET_POSTS_DATA} from "../../store/types";
 import ActorBio from '../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 const StyledMain = styled.main`
+  
   grid-area: main;
   width: 100%;
-
+  height: 100%;
   .posts-page-info {
     margin: 5px 0;
-
     h1 {
       margin: 0;
       padding: 0 10px;
     }
   }
-
   ${(props: { stylesData: string }) => props.stylesData || ''}
+  
 `
 
 const actorPage = (props: ClientPagesTypes) => {
 
-    // @ts-ignore
-    const actor = useSelector(store => store.posts.actorData)
-    const settings = useSelector((store: settingsPropTypes) => store.settings);
+    const actor = useSelector((store: StoreTypes) => store.posts.actorData)
+    const settings = useSelector((store: StoreTypes) => store.settings);
     const router = useRouter()
 
     return (
+
         <StyledMain className="main posts-page" stylesData={settings.design?.actorPageStyle || ''}>
             <ActorBio/>
             {actor ? <MetaDataToSiteHead title={actor.name} description={actor.description} url={`${router.asPath}`} image={actor.imageUrl}/> : null}
@@ -54,6 +54,7 @@ const actorPage = (props: ClientPagesTypes) => {
                 referer={props.referer}
             />
         </StyledMain>
+
     )
 };
 

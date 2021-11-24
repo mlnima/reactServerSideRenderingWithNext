@@ -16,15 +16,19 @@ let VideoCardStyledDiv = styled.div`
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
-  
+
   .video-card-under-media {
+  
     width: calc(50vw - 5.6px);
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin-left: 0;
-
+//.video-card-title{
+//  transition: all 5s ;
+//}
+    
     .video-card-link {
 
       .video-card-under-media-info {
@@ -65,6 +69,8 @@ let VideoCardStyledDiv = styled.div`
 
 
   }
+  
+
 
   @media only screen and (min-width: 768px) {
     width: ${props => `${props?.cardWidth}px`};
