@@ -2,7 +2,6 @@ import React from 'react';
 import Document, {Html, Head, Main, NextScript,DocumentInitialProps, DocumentContext} from 'next/document'
 import {ServerStyleSheet} from 'styled-components';
 
-// @ts-ignore
 class MyDocument extends Document {
     static async getInitialProps(ctx:DocumentContext) :Promise<DocumentInitialProps> {
         const sheet = new ServerStyleSheet();
