@@ -8,6 +8,7 @@ const metaSchema =  new Schema({
         unique:true
     },
     type: String,
+    index:Number,
     description: String,
     status: String,
     imageUrl:String,

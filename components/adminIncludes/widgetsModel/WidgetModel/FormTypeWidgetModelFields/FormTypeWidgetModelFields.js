@@ -6,7 +6,7 @@ import styled from "styled-components";
 
 const FormTypeWidgetModelFieldsStyledDiv = styled.div`
   .add-new-filed{
-    border: var( --default-border);
+   // border: var( --default-border);
     padding: 20px 0;
   }
 `

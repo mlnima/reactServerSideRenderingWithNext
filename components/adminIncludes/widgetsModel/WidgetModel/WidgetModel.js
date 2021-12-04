@@ -11,7 +11,7 @@ import MultipleLinkWidgetModelFields from "./MultipleLinkWidgetModelFields/Multi
 import _ from "lodash";
 import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields";
 import {useDispatch, useSelector} from "react-redux";
-import {adminAddNewWidget,adminDeleteWidget,adminUpdateWidget} from "../../../../store/adminActions/adminWidgetsActions";
+import {adminAddNewWidget, adminDeleteWidget, adminUpdateWidget} from "../../../../store/adminActions/adminWidgetsActions";
 import staticPositions from '../staticPositions';
 import postTypes from "../../../global/postTypes";
 import styled from "styled-components";
@@ -70,6 +70,11 @@ const WidgetModelStyledDiv = styled.div`
       margin: 0;
     }
   }
+  .monaco-editor-section{
+    p{
+      margin:  10px;
+    }
+  }
 
   textarea {
     min-height: 250px;
@@ -109,6 +114,7 @@ const WidgetModel = props => {
 
 
     useEffect(() => {
+
         setPositions((prevPositions) => [
             ...prevPositions,
             ..._.flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
@@ -385,12 +391,12 @@ const WidgetModel = props => {
                     />
 
 
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'meta' || widgetData.type === 'postsSlider' ?
                         <SelectFieldForWidget title={'Sort By:'}
                                               name={'sortBy'}
                                               ref={null}
                                               value={widgetData.sortBy}
-                                              options={['updatedAt', 'createdAt', 'views', 'likes', 'random']}
+                                              options={widgetData.type === 'metaWithImage' || widgetData.type === 'meta' ? ['updatedAt', 'createdAt', 'count', 'index'] : ['updatedAt', 'createdAt', 'views', 'likes', 'random']}
                                               onChangeHandler={onChangeHandler}
                         /> : null
                     }
@@ -565,17 +571,20 @@ const WidgetModel = props => {
                     </button>
                     {widgetSettings.preview ? <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/> : null}
 
-                    <p>Custom Styles:</p>
+                    <div className={'monaco-editor-section'}>
+                        <p>Custom Styles:</p>
 
-                    <MonacoEditorComponent
-                        language='scss'
-                        nameValue='customStyles'
-                        defaultValue={widgetData.customStyles || ''}
-                        value={widgetData.customStyles || ''}
-                        setWidgetData={setWidgetData}
-                        widgetData={widgetData}
-                        classNameValue='customStylesTextarea'
-                    />
+                        <MonacoEditorComponent
+                            language='scss'
+                            nameValue='customStyles'
+                            defaultValue={widgetData.customStyles || ''}
+                            value={widgetData.customStyles || ''}
+                            setWidgetData={setWidgetData}
+                            widgetData={widgetData}
+                            classNameValue='customStylesTextarea'
+                        />
+                    </div>
+
 
                     <SelectFieldForWidget title={'Custom Script Strategy:'}
                                           name={'customScriptStrategy'}
@@ -584,16 +593,18 @@ const WidgetModel = props => {
                                           options={['lazyOnload', 'afterInteractive', 'beforeInteractive']}
                                           onChangeHandler={onChangeHandler}
                     />
-                    <p>Custom Script:</p>
-                    <MonacoEditorComponent
-                        language='javascript'
-                        nameValue='customScript'
-                        defaultValue={widgetData.customScript || ''}
-                        value={widgetData.customScript || ''}
-                        setWidgetData={setWidgetData}
-                        widgetData={widgetData}
-                        classNameValue='customStylesTextarea'
-                    />
+                    <div className={'monaco-editor-section'}>
+                        <p>Custom Script:</p>
+                        <MonacoEditorComponent
+                            language='javascript'
+                            nameValue='customScript'
+                            defaultValue={widgetData.customScript || ''}
+                            value={widgetData.customScript || ''}
+                            setWidgetData={setWidgetData}
+                            widgetData={widgetData}
+                            classNameValue='customStylesTextarea'
+                        />
+                    </div>
 
                     <div className='control-buttons'>
                         <button title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{width: '15px', height: '15px'}}/></button>

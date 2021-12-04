@@ -9,6 +9,7 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   width: 100%;
   position: initial;
   margin: 5px;
+
   .widgetAdminPanelItemHeader {
     height: 50px;
     margin: 0;
@@ -30,6 +31,7 @@ const WidgetGroupByPositionStyledDiv = styled.div`
 `
 const WidgetGroupByPosition = props => {
     const widgets = useSelector(store => store?.widgets.widgets)
+    const customPages = useSelector(store => store?.adminPanelGlobalState?.customPages)
     const [widgetInThisPosition, setWidgetInThisPosition] = useState([])
 
     useEffect(() => {
@@ -43,7 +45,7 @@ const WidgetGroupByPosition = props => {
             <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(props.position)}</p>
             {widgetInThisPosition.map((widget) => {
                 return (
-                    <WidgetModel key={widget._id} widgetId={widget._id} />
+                    <WidgetModel key={widget._id} widgetId={widget._id}/>
                 )
             })}
         </WidgetGroupByPositionStyledDiv>

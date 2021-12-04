@@ -9,6 +9,7 @@ module.exports = async (req, res) => {
         const page = parseInt(req.query.page);
         const startWithQuery = req.query?.startWith === 'any' ? {} : {name: {$regex: '^' + req.query?.startWith, $options: 'i'}}
         const countQuery = {count:{ $gt: 0 }}
+        //const sortQuery =  req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}
         const searchQuery = req.query.keyword === '' || !req.query.keyword ? {} :
             !req.query.lang || req.query.lang === 'default' ? {$or: [{name: new RegExp(req.query.keyword, 'i')}, {description: new RegExp(req.query.keyword, 'i')}]} :
                 {
@@ -21,7 +22,7 @@ module.exports = async (req, res) => {
 
         let sortQuery = !req.query.sort ? {count: -1} : req.query.sort && typeof req.query.sort === 'string' ? req.query.sort : {[req.query.sort]: -1}
         const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]}).exec()
-        metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
+        metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]},{},{sort:req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
             res.json({metas,totalCount:metaCount})
 
         }).catch(err => {

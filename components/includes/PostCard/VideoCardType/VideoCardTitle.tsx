@@ -5,6 +5,7 @@ import Link from "next/link";
 const CardTitleStyledDiv = styled.div`
 
   color: var(--post-element-text-color, #ccc);
+
   width: calc(50vw - 5.6px);
   max-width: 98%;
   display: flex;
@@ -13,6 +14,7 @@ const CardTitleStyledDiv = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
+
 
   *{
     font-size: 12px;

@@ -20,7 +20,7 @@ const TextWidgetTypeFields = props => {
 
     if (props.rendering){
         return (
-            <>
+            <div className={'monaco-editor-section'}>
                 <p>Text:</p>
                 <Editor
                     language='html'
@@ -38,7 +38,7 @@ const TextWidgetTypeFields = props => {
                     width={props.width || '100%'}
                     height={props.height || '300px'}
                 />
-            </>
+            </div>
         );
     }else return null
 

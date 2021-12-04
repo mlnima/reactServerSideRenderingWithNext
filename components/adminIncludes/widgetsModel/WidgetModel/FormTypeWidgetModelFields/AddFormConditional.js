@@ -40,11 +40,11 @@ const AddFormConditional = props => {
         <form className='add-new-filed' onSubmit={e => onCreateFieldHandler(e)}>
             <div className={'TextInputFieldForWidget'}>
                 <p>Filed Name :</p>
-                <input className='form-control-input' type='text' required={true} name='fieldName' value={state.fieldName} onChange={e => onChangeHandler(e)}/>
+                <input className={'form-control-input'} type='text' required={true} name='fieldName' value={state.fieldName} onChange={e => onChangeHandler(e)}/>
             </div>
             <div className={'TextInputFieldForWidget'}>
                 <p>Place Holder :</p>
-                <input className='form-control-input' type='text' name='fieldPlaceHolder' value={state.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
+                <input className={'form-control-input'} type='text' name='fieldPlaceHolder' value={state.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
             </div>
             <div className={'selectFieldForWidget'}>
                 <p>Required :</p>

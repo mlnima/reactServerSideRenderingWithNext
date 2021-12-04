@@ -55,7 +55,13 @@ const adminUpdateWidget = async (req, res) => {
         const countQuery = {count: {$gt: 0}}
         const typeQuery = {type: widgetData.metaType}
         const statusQuery = {status: 'published'}
-        const metas = widgetData.metaType ? await metaSchema.find({$and: [countQuery, typeQuery, statusQuery]}).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
+        const metas = widgetData.metaType ? await metaSchema.find(
+            {$and: [countQuery, typeQuery, statusQuery]},
+            {},
+            {
+                sort:widgetData.sort === 'createdAt' || !widgetData.sort ? {} : {[widgetData.sort]: -1}
+            }
+        ).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
         const dateForUpdateWidget = {
             ...widgetData,
             metaData: metas.map(meta => meta._id),

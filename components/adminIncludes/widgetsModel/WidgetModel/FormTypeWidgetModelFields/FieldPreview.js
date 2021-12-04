@@ -9,25 +9,39 @@ let StyledDiv = styled.div`
   margin-top: 10px;
   border-radius: 10px;
   background-color: black;
-  border: solid 2px rgba(0, 0, 0, .1);
+  //border: solid 2px rgba(0, 0, 0, .1);
   display: flex;
 
   flex-direction: column;
+
 
   .field-index-control {
     display: flex;
     justify-content: space-between;
     width: 100%;
 
+
     button {
-      background-color: transparent;
-      color: white;
-      border: none;
+      //background-color: transparent;
+      //color: white;
+      //border: none;
       transition: .5s;
 
       &:hover {
         transform: scale(1.5);
       }
+    }
+  }
+
+  .edit-form-fields {
+    padding: 5px;
+    display: flex;
+    //align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    
+    input {
+      max-width: 90%;
     }
   }
 `
@@ -97,31 +111,31 @@ const FieldPreview = props => {
     return (
         <StyledDiv className='form-item-view' key={props.field.filedId}>
             <div className='field-index-control'>
-                <button onClick={() => state.open ? setState({...state, open: false}) : setState({...state, open: true})}>
-                    <FontAwesomeIcon style={{transform: state.open ? 'rotate(90deg)' : 'rotate(0deg)', transition: '.5s all'}} icon={faBars} className='navigation-mobile-button-logo'/>
+                <button onClick={() => state.open ? setState({...state, open: false}) : setState({...state, open: true})} className={'btn btn-secondary'}>
+                    <FontAwesomeIcon style={{transform: state.open ? 'rotate(90deg)' : 'rotate(0deg)', transition: '.5s all'}} icon={faBars} />
                 </button>
                 <p>{'ID : ' + props.field.filedId}</p>
                 <p>{props.field.fieldType + ' : ' + props.field.fieldName}</p>
                 <p>index:{props.field.fieldIndex}</p>
-                <button onClick={() => fieldIndexPlus(-1)}><FontAwesomeIcon icon={faArrowUp} className='navigation-mobile-button-logo'/></button>
-                <button onClick={() => fieldIndexPlus(+1)}><FontAwesomeIcon icon={faArrowDown} className='navigation-mobile-button-logo'/></button>
-                <button onClick={() => onDeleteHandler(props.field.fieldName)}><FontAwesomeIcon icon={faTrash} className='navigation-mobile-button-logo'/></button>
+                <button onClick={() => fieldIndexPlus(-1)} className={'btn btn-secondary'} ><FontAwesomeIcon icon={faArrowUp} /></button>
+                <button onClick={() => fieldIndexPlus(+1)} className={'btn btn-secondary'}><FontAwesomeIcon icon={faArrowDown} /></button>
+                <button onClick={() => onDeleteHandler(props.field.fieldName)} className={'btn btn-secondary'}><FontAwesomeIcon icon={faTrash} /></button>
             </div>
             {state.open ?
-                <div className='edit-form-field'>
+                <div className='edit-form-fields'>
                     <form className='add-new-filed' onSubmit={e => onEditHandler(e)}>
                         <p>Filed Name :</p>
-                        <input required={true} name='fieldName' value={fieldData.fieldName} onChange={e => onChangeHandler(e)}/>
+                        <input className={'form-control-input'} required={true} name='fieldName' value={fieldData.fieldName} onChange={e => onChangeHandler(e)}/>
                         <p>Place Holder :</p>
-                        <input name='fieldPlaceHolder' value={fieldData.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
+                        <input className={'form-control-input'} name='fieldPlaceHolder' value={fieldData.fieldPlaceHolder} onChange={e => onChangeHandler(e)}/>
 
                         <p>Required :</p>
-                        <select name='required' value={fieldData.required} onChange={e => onChangeHandler(e)}>
+                        <select className={'custom-select'} name='required' value={fieldData.required} onChange={e => onChangeHandler(e)}>
                             <option value='true'>True</option>
                             <option value='false'>False</option>
                         </select>
                         <p>Filed Type :</p>
-                        <select required={true} value={fieldData.fieldType} required={true} value={fieldData.fieldType} name='fieldType' onChange={e => onChangeHandler(e)}>
+                        <select className={'custom-select'} required={true} value={fieldData.fieldType} name='fieldType' onChange={e => onChangeHandler(e)}>
                             <option>Select</option>
                             <option value='textarea'>Text Area</option>
                             <option value='text'>Text</option>
@@ -138,7 +152,7 @@ const FieldPreview = props => {
                             <option value='time'>time</option>
                             <option value='url'>url</option>
                         </select>
-                        <button type='submit'>Edit</button>
+                        <button className={'btn btn-primary'} type='submit'>Edit</button>
                     </form>
                 </div>
                 : null

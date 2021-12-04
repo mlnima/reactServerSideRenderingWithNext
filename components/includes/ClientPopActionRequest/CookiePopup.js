@@ -18,7 +18,8 @@ const CookiePopupStyledDiv = styled.div`
   width: 100%;
   align-items: center;
   z-index: 1005;
-
+  backdrop-filter: blur(5px);
+  
   .cookie-popup-content {
     background-color: var(--main-text-color);
     padding: 20px;
@@ -99,7 +100,7 @@ const CookiePopup = props => {
     if (settings?.identity?.cookiePopupMessage && !state.accepted) {
         return (
             <CookiePopupStyledDiv className='cookie-popup-parent'>
-            <span className='cookie-popup-content'>
+             <span className='cookie-popup-content'>
                 <span className='cookie-popup-header'>
                     <LanguagesSwitcher cookiePage={true}/>
                 </span>
@@ -119,10 +120,10 @@ const CookiePopup = props => {
                     </button>
 
                 </div>
-                {settings?.identity?.cookieReadMoreLink ?
-                    <Link href={settings?.identity?.cookieReadMoreLink}><a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>Accept and Read More</a></Link>
-                    : null
-                }
+                    {settings?.identity?.cookieReadMoreLink ?
+                        <Link href={settings?.identity?.cookieReadMoreLink}><a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>Accept and Read More</a></Link>
+                        : null
+                    }
             </span>
             </CookiePopupStyledDiv>
         );

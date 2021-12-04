@@ -179,9 +179,9 @@ const meta = (props: any) => {
             </div>
             <div className='action-buttons'>
                 {/*// @ts-ignore*/}
-                <button className='green-action-btn-link' onClick={() => dispatch(adminUpdateMeta(meta))}>Update</button>
+                <button className='btn btn-primary' onClick={() => dispatch(adminUpdateMeta(meta))}>Update</button>
                 {/*// @ts-ignore*/}
-                <button className=' red-action-btn-link' onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}>delete</button>
+                <button className='btn btn-danger' onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}>delete</button>
             </div>
 
 

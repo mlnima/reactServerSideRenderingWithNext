@@ -7,6 +7,7 @@ import {faSlidersH} from "@fortawesome/free-solid-svg-icons";
 import {faCss3Alt, faJs, faSass, fas} from "@fortawesome/free-brands-svg-icons";
 import {faFile, faFolder} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
+import {fileUpload} from "../../../../_variables/ajaxVariables";
 
 const FileManagerAreaStyledDiv = styled.div`
   display: grid;
@@ -123,8 +124,28 @@ const FileManagerArea = props => {
         )
     });
 
+    const onDropFileHandler = (e)=>{
+        e.preventDefault()
+        const fileData = e.dataTransfer.files[0]
+        if (fileData){
+            const filesData = new FormData()
+            filesData.append('token', localStorage.wt)
+            filesData.append('uploadingFile', fileData)
+            fileUpload(filesData).then(res => {
+                props.setState({
+                    ...props.state,
+                    clickedItem: res.data.path.replace('./', ''),
+                    clickedItemName: res.data.path.split('/')[res.data.path.split('/').length - 1]
+                })
+            }).catch(err => {
+                console.log(err)
+            })
+        }
+    }
+
+
     return (
-        <FileManagerAreaStyledDiv className='FileManagerArea'>
+        <FileManagerAreaStyledDiv className='FileManagerArea' onDrop={e=>onDropFileHandler(e)} onDragOver={e=>e.preventDefault()}>
 
             {renderDir}
         </FileManagerAreaStyledDiv>

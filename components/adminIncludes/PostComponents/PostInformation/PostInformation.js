@@ -133,6 +133,7 @@ const PostInformation = props => {
             <Quality rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='videoEmbedCode' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='redirectLink' rendering={post.postType === 'promotion'} onChangeHandler={props.onChangeHandler}/>
             <TextAreaComponent name='videoScriptCode' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <RenderIframe rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>

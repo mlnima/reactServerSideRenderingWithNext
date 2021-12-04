@@ -12,7 +12,7 @@ let VideoCardStyledDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  background-color: var(--post-element-background-color, #131314);
+  //background-color: var(--post-element-background-color, #131314);
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
