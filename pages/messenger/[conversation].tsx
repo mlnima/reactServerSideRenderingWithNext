@@ -95,7 +95,7 @@ const conversation = (props: ClientPagesTypes) => {
                 // @ts-ignore
                 userData={userData}
                 connectedUserData={connectedUserData}
-                setConnectedUserData={setConnectedUserData}
+                // setConnectedUserData={setConnectedUserData}
             />
             <MessengerConversationMessageTools
                 setMessageState={setMessageState}
