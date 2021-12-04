@@ -2,6 +2,12 @@ import React, { useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
+interface styleProps{
+    cardWidth:number,
+    postElementSize:string
+}
+
+
 let VideoCardMediaStyled = styled.div`
   @keyframes opacityAnimationStart {
     0% {
@@ -13,30 +19,33 @@ let VideoCardMediaStyled = styled.div`
   }
 
   .video-card-trailer {
-    width: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? '116.6px' : '100%'};
-    height: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
+    
+    width: ${(props : styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
+    height: ${(props : styleProps) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
     animation: opacityAnimationStart 2s alternate;
   }
 
   .video-card-image {
-    width: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? '116.6px' : '100%'};
-    height: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
+    width: ${(props : styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
+    height: ${(props : styleProps) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
     object-fit: contain;
   }
 
   @media only screen and (min-width: 768px) {
     .video-card-image {
-      width: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
-      height: calc(${(props : {cardWidth:number,postElementSize:string}) => props.cardWidth}px / 1.777);
+      width: ${(props : styleProps) => props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
+      height: calc(${(props : styleProps) => props.cardWidth}px / 1.777);
     }
 
     .video-card-trailer {
-      width: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
-      height: calc(${(props : {cardWidth?:number,postElementSize?:string}) => props.cardWidth}px / 1.777);
+      width: ${(props : styleProps) => props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
+      height: calc(${(props : styleProps) => props.cardWidth}px / 1.777);
     }
   }
 
 `
+
+
 
 const NoImageStyleDiv = styled.div`
   width: 100%;
