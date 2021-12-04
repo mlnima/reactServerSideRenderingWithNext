@@ -21,26 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/AddFormConditional.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FieldPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/FormTypeWidgetModelFields/FormTypeWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MultipleLinkWidgetModelFields/MultipleLinkWidgetSingleLinkPreview.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/TextWidgetTypeFields/TextWidgetTypeFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/TextWidgetTypeFields/TextWidgetTypeFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/design/widgets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/meta/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/meta/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminUpdateWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMultipleMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMultipleMeta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/metaSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/metaSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_document.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -928,7 +909,7 @@
       <workItem from="1638534991982" duration="4553000" />
       <workItem from="1638547121840" duration="205000" />
       <workItem from="1638547337024" duration="5586000" />
-      <workItem from="1638606398907" duration="2412000" />
+      <workItem from="1638606398907" duration="4454000" />
     </task>
     <servers />
   </component>
