@@ -305,3 +305,31 @@ export const setMetaThumbnailsAndCount = ( ) =>async (dispatch: any) => {
         })
     })
 }
+export const importPosts = ( posts) =>async (dispatch: any) => {
+    dispatch({
+        type: types.LOADING,
+        payload: true
+    })
+    await axios.post(`/api/admin/posts/adminImportPosts`,{
+        posts,
+        token:localStorage.wt
+    }).then(res=>{
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: 'posts are imported', type: 'success'}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    }).catch((err)=>{
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: err.response.data.message, type: 'error', err}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    })
+}

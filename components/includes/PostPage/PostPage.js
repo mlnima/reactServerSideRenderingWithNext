@@ -94,7 +94,7 @@ const PostPage = ( ) => {
             {post.postType !== 'promotion' && post.postType !== 'article' ? <PostTitle title={post.title} translations={post.translations}/> : null}
 
             <div className='rating-price-download'>
-                <RatingButtons _id={post._id} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData}/>
+                <RatingButtons _id={post._id} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData} rating={true}/>
                 {post.postType === 'product' ? <Price price={post.price} currency={post.currency} /> : null}
                 <DownloadLink downloadLink={post.downloadLink} render={post.downloadLink}/>
             </div>

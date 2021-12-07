@@ -1,6 +1,4 @@
 import React, { useRef } from 'react';
-import { DelayInput } from 'react-delay-input';
-
 import UploadFileBtn from '../UploadFileBtn/uploadFileBtn'
 import { convertVariableNameToName } from '../../../_variables/_variables'
 import {fileUpload,postThumbnailsUpload} from "../../../_variables/ajaxVariables";
@@ -25,7 +23,7 @@ const TextInputWithUploadBtn = props => {
                 <p>{ convertVariableNameToName(props.name) }</p>
             </div>
             <div className="editor">
-                <DelayInput inputRef={ inputElement } className='textInputWithUpload' name={ props.name } value={ props.postData[props.name] } delayTimeout={ 1000 } onChange={ e => props.onChangeHandler(e) }/>
+                <input inputRef={ inputElement } className={'form-control-input'} name={ props.name } value={ props.postData[props.name] }  onChange={ e => props.onChangeHandler(e) }/>
                 <UploadFileBtn returnElement={inputElement}  type={props.type} setFunction={ onSetHandler } name={ props.name }/>
             </div>
         </div>

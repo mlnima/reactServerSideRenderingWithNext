@@ -122,9 +122,6 @@ let StyledDiv = styled.div`
 
 const PostInformation = props => {
     const post = useSelector((store) => store?.adminPanelPosts?.post);
-    useEffect(() => {
-        console.log(post)
-    }, [post]);
     return (
         <StyledDiv className='post-information  product-information admin-widget'>
             <TextInputWithUploadBtn type='thumbnail' onChangeHandler={props.onChangeHandler} thumbnailsType={true} name='mainThumbnail'
@@ -138,7 +135,7 @@ const PostInformation = props => {
             <TextAreaComponent name='videoScriptCode' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <RenderIframe rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInputWithUploadBtn name='VideoTrailerUrl' title='Video Trailer Url' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='downloadLink' title='Download Link' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='downloadLink' title='Download Link' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <Duration rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <ProductPrice rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='shippingCost' rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>

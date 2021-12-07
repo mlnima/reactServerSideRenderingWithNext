@@ -10,12 +10,13 @@ const SaveDesignChangesBtn = ({reload}) => {
     const router = useRouter()
 
     const onSaveHandler = () => {
+
         dispatch(setLoading(true))
         dispatch(updateSetting('design', design))
         if (reload){
             setTimeout(()=>{
                 router.reload()
-            },1000)
+            },2000)
         }
     };
 

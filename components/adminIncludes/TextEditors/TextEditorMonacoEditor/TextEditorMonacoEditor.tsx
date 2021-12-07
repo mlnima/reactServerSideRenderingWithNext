@@ -1,5 +1,7 @@
 import React, {useEffect} from 'react';
 import dynamic from "next/dynamic";
+import {isJsonString} from '../../../../_variables/util/isJsonString'
+
 
 const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
 import {DiffEditor, useMonaco, loader} from "@monaco-editor/react";
@@ -16,9 +18,20 @@ interface MonacoEditorProTypes {
 
 const TextEditorMonacoEditor = (props: MonacoEditorProTypes) => {
     // const monaco = useMonaco();
-    // useEffect(() => {
-    //     console.log(monaco)
-    // }, [monaco]);
+    useEffect(() => {
+        console.log(isJsonString(props.value) )
+
+    }, [props.value]);
+
+
+
+
+
+    const onValueChangeHandler = ()=>{
+
+    }
+
+
     return (
         <MonacoEditor
             // @ts-ignore
@@ -28,7 +41,8 @@ const TextEditorMonacoEditor = (props: MonacoEditorProTypes) => {
             value={typeof props.value === 'string' ? props.value : JSON.stringify(props.value)}
             defaultValue={''}
             // @ts-ignore
-            onChange={(value) => typeof props.value === 'string' ? props.onChangeHandler(value) : props.onChangeHandler(JSON.parse(value))}
+             onChange={(value) => isJsonString(props.value) ?props.onChangeHandler(JSON.parse(value))  :props.onChangeHandler(value) }
+           // onChange={(value) => console.log(typeof value)}
             saveViewState={false}
             className={'monaco-editor'}
         />

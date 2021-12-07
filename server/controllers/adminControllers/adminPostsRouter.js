@@ -1,7 +1,7 @@
 const express = require('express');
 const router = express.Router();
-const adminAuthMiddleware = require('../../middlewares/adminAuthMiddleware')
 
+const adminAuthMiddleware = require('../../middlewares/adminAuthMiddleware')
 const adminCreateNewPost = require('./adminPostsControllers/adminCreateNewPost')
 const adminUpdatePost = require('./adminPostsControllers/adminUpdatePost')
 const adminDeletePost = require('./adminPostsControllers/adminDeletePost')
@@ -18,9 +18,10 @@ const adminGetPost = require('./adminPostsControllers/adminGetPost')
 const adminGetMeta = require('./adminPostsControllers/adminGetMeta')
 const adminCheckAndRemoveDeletedVideos = require('./adminPostsControllers/adminCheckAndRemoveDeletedVideos')
 const adminSetMetaThumbnailsAndCount = require('./adminPostsControllers/adminSetMetaThumbnailsAndCount')
-
+const adminImportPosts = require('./adminPostsControllers/adminImportPosts')
 
 router.post('/createNewPost',adminAuthMiddleware,adminCreateNewPost)
+router.post('/adminImportPosts',adminAuthMiddleware,adminImportPosts)
 router.post('/updatePost',adminAuthMiddleware,adminUpdatePost)
 router.post('/deletePost',adminAuthMiddleware,adminDeletePost)
 router.post('/postsBulkAction',adminAuthMiddleware,adminPostsBulkAction)

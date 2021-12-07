@@ -53,7 +53,7 @@ const importContent = () => {
 
 
                     }) : []
-                    await savePost(post, window.location.origin)
+                    await savePost(post)
                 }
             }
         }

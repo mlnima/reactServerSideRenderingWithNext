@@ -1,0 +1,104 @@
+import React, {useState, useRef, useEffect} from 'react';
+import {savePost} from '../../../../_variables/ajaxPostsVariables'
+import {useSelector} from "react-redux";
+import {wrapper} from "../../../../store/store";
+import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+
+import styled from "styled-components";
+
+const PostsImporterStyledDiv = styled.div`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  .posts-importer-form {
+    width: 300px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-direction: column;
+    .posts-importer-form-actions {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+  }
+`
+
+const postsImporter = () => {
+    const userData = useSelector((store: StoreTypes) => store?.user.userData)
+    const statusElement = useRef(null)
+    const dataPreview = useRef(null)
+    const [state, setState] = useState({
+        status: 'draft'
+    });
+
+    const [posts, setPosts] = useState([])
+
+    const onImportPostsHandler = async () => {
+        let finalPostsDataToSave = []
+        for await (let post of posts) {
+            post.status =  statusElement.current.value ||  'draft'
+            post.author = post.author || userData._id
+            finalPostsDataToSave = [...finalPostsDataToSave,post]
+        }
+        console.log(finalPostsDataToSave)
+    }
+
+
+    const onSelectFileHandler = e => {
+        const reader = new FileReader()
+        reader.readAsText(e.target.files[0])
+        reader.onload = e => {
+            if (typeof e.target.result === "string") {
+                const parsedPosts = JSON.parse(e.target.result)
+                if (parsedPosts.length){
+
+
+                    setPosts(parsedPosts)
+                }
+            }
+        }
+    };
+
+    const onChangeHandler = (e) => {
+        setState({
+            ...state,
+            [e.target.name]: e.target.value
+        })
+    }
+
+
+    return (
+
+        <PostsImporterStyledDiv className='posts-importer'>
+            <div className={'posts-importer-form'}>
+                <select ref={statusElement} className={'custom-select'} name={'status'} onChange={e => onChangeHandler(e)}>
+                    <option>No Change</option>
+                    <option value='published'>Published</option>
+                    <option value='draft'>Draft</option>
+                    <option value='trash'>Trash</option>
+                    <option value='pending'>Pending</option>
+                    <option value='reported'>Reported</option>
+                </select>
+                <div className={'posts-importer-form-actions'}>
+                    <input type='file' onChange={async e => onSelectFileHandler(e)}/>
+                    <button className={'btn btn-primary'} onClick={() => onImportPostsHandler()}>Import Posts</button>
+                </div>
+
+                <textarea className={'form-control-input'} ref={dataPreview}/>
+            </div>
+
+        </PostsImporterStyledDiv>
+
+    );
+}
+
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    return {
+        props: {
+            ...(await serverSideTranslations(context.locale as string, ['common'])),
+        }
+    }
+})
+export default postsImporter;

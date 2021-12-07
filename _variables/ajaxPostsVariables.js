@@ -19,7 +19,7 @@ export const checkRemovedContent = async (data) => {
 };
 
 
-export const savePost = async (data, domainName) => {
+export const savePost = async (data) => {
     const body = {
         postData: data,
         token: localStorage.wt
@@ -125,9 +125,10 @@ export const likeDislikeView = async (id, type) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/posts/likeDislikeView', body)
 };
 
-export const exportPosts = async () => {
+export const exportPosts = async (data) => {
     const body = {
-        token: localStorage.wt
+        token: localStorage.wt,
+        data
     };
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/posts/exportPosts', body)
 };

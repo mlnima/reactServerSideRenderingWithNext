@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import React, {useState} from 'react';
 import Link from "next/link";
 import {convertVariableNameToName} from '../../../_variables/_variables'
 import withRouter from 'next/dist/client/with-router'
@@ -40,12 +40,21 @@ let StyledDiv = styled.div`
         display: block;
       }
 
-      span {
+      .sidebar-items-switch {
+
         background-color: transparent;
         border: none;
         outline: none;
         padding: 5px 10px;
         color: var(--admin-sidebar-text-color);
+        width: 50px;
+        transition: all .5s;
+
+        svg {
+          width: 20px;
+          height: 20px;
+
+        }
 
       }
 
@@ -62,11 +71,12 @@ let StyledDiv = styled.div`
 
     .SideBarItemElementSubItems {
       background-color: #181818;
-      
+
       .SideBarItem-SubItem {
         color: white;
         padding: 10px 0 10px 20px;
         display: block;
+
         &:hover {
           transition: .5s;
           font-weight: bold;
@@ -75,9 +85,10 @@ let StyledDiv = styled.div`
     }
 
   }
-@media only screen and (min-width: 768px) {
-  //position: initial;
-}
+
+  @media only screen and (min-width: 768px) {
+    //position: initial;
+  }
 `
 
 const SideBar = () => {
@@ -114,7 +125,7 @@ const SideBar = () => {
         },
         forms: {
             pathURL: '/admin/assets?assetsType=forms',
-            subItems: [ ]
+            subItems: []
         },
         comments: {
             pathURL: '/admin/assets?assetsType=comments',
@@ -155,9 +166,9 @@ const SideBar = () => {
                 {name: 'customScript', url: '/admin/settings/customScript'},
                 {name: 'general', url: '/admin/settings/general'},
                 {name: 'eCommerce', url: '/admin/settings/eCommerceSettings'},
-                ]
+            ]
         },
-        Translations:{
+        Translations: {
             pathURL: '/admin/translations',
             subItems: []
         },
@@ -166,6 +177,7 @@ const SideBar = () => {
             subItems: [
                 {name: 'youtube', url: '/admin/importer/youtube'},
                 {name: 'content', url: '/admin/importer/content'},
+                {name: 'Posts', url: '/admin/importer/postsImporter'},
             ]
         },
         Exporter: {
@@ -181,13 +193,13 @@ const SideBar = () => {
     const renderItems = Object.keys(state).map(item => {
         return (
             <div key={item} className='SideBarItemElement'>
-                <div className='SideBarItemTitle' onMouseOver={() => setHovered(item)}>
-                    <Link href={state[item].pathURL}><a className='SideBarItem' onClick={()=>dispatch(setSidebarStatus(false))}>{convertVariableNameToName(item)}</a></Link>
-                    {state[item].subItems.length?
-                        <span key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
-                            <FontAwesomeIcon icon={ faSortDown} style={{transform:  hovered === item ? 'rotate(0deg)' : 'rotate(90deg)'}} className='fontawesomeSvgVerySmall' />
+                <div className='SideBarItemTitle'>
+                    <Link href={state[item].pathURL}><a className='SideBarItem' onClick={() => dispatch(setSidebarStatus(false))}>{convertVariableNameToName(item)}</a></Link>
+                    {state[item].subItems.length ?
+                        <span className={'sidebar-items-switch'} onMouseOver={() => setHovered(item)}  key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
+                            <FontAwesomeIcon icon={faSortDown} style={{transform: hovered === item ? 'rotate(0deg)' : 'rotate(90deg)'}} className='fontawesomeSvgVerySmall'/>
                        </span>
-                        :null}
+                        : null}
 
                 </div>
                 <div className='SideBarItemElementSubItems'>
@@ -195,14 +207,14 @@ const SideBar = () => {
                         state[item].subItems.map(subItem => {
                             if (hovered === item) {
                                 return (
-                                    <Link  key={_.uniqueId('id_')} href={subItem.url} >
-                                        <a className='SideBarItem-SubItem' onClick={()=>dispatch(setSidebarStatus(false))}>
+                                    <Link key={_.uniqueId('id_')} href={subItem.url}>
+                                        <a className='SideBarItem-SubItem' onClick={() => dispatch(setSidebarStatus(false))}>
                                             {convertVariableNameToName(subItem.name)}
                                         </a>
                                     </Link>
                                 )
                             } else return null
-                        }):null
+                        }) : null
                     }
                     {/*{onHoverHandler}*/}
                 </div>

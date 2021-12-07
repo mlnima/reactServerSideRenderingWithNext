@@ -1,4 +1,4 @@
-import React, {useRef} from 'react';
+import React, {useRef,useEffect} from 'react';
 import SaveDesignChangesBtn from "../SaveDesignChangesBtn";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
@@ -11,17 +11,21 @@ const StyleSectionStyledDiv = styled.div`
   flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  .style-section-editor{
+
+  .style-section-editor {
     width: 100%;
-    .text-editors{
+
+    .text-editors {
       width: 100%;
-      .ql-container{
+
+      .ql-container {
         width: 100%;
         height: 70vh;
       }
     }
   }
-  .btn-primary{
+
+  .btn-primary {
     margin: 20px;
   }
 `
@@ -32,19 +36,22 @@ const StyleSection = props => {
     const design = useSelector(store => store?.settings.design)
 
     const onChangeHandler = (event) => {
-
-        if (typeof event === 'string'){
+        if (typeof event === 'string') {
             const e = {
-                target:{
-                    value:event,
+                target: {
+                    value: event,
                     name: props.name
                 }
             }
             dispatch(editDesign(e))
-        }else if (typeof event === 'object') {
+        } else if (typeof event === 'object') {
             dispatch(editDesign(event))
         }
     }
+
+    useEffect(() => {
+        console.log(design)
+    }, [design]);
 
     return (
         <StyleSectionStyledDiv className='style-section'>

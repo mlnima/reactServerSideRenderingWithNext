@@ -1,13 +1,12 @@
 import React from 'react';
-import {DelayInput} from "react-delay-input";
 
 const CountInput = props => {
 
     return (
         <>
             <p>Count:</p>
-            <DelayInput name='count' type='number' value={props.widgetData.count} placeholder='count'
-                        className='count' delayTimeout={1000} onChange={e => props.onChangeHandler(e)}/>
+            <input name='count' type='number' value={props.widgetData.count} placeholder='count'
+                        className='count form-control-input' onChange={e => props.onChangeHandler(e)}/>
         </>
     )
 };
