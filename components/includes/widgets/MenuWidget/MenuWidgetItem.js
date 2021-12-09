@@ -90,6 +90,7 @@ const MenuWidgetStyledLi = styled.li`
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler}) => {
     const router = useRouter()
     const [showSub, setShowSub] = useState(false)
+    //console.log(router.asPath,menuItem.target)
     const renderSubMenus = (menuItem.subItems || []).map((subItem, index) => {
 
         return (
@@ -115,7 +116,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
     return (
 
         <MenuWidgetStyledLi menuItem={menuItem}
-                            className={'menu-widget-item  '}
+                            className={router.asPath === menuItem.target? 'menu-widget-item active-link' : 'menu-widget-item' }
                             onMouseEnter={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
                             onMouseLeave={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
                             activeLink={menuItem?.target ? router.asPath.includes(menuItem?.target) :false}
@@ -129,6 +130,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                                 linkTranslations={menuItem?.translations}
                                 showSub={showSub}
                                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+
 
             />
             {menuItem?.subItems?.length ?
