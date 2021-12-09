@@ -1,64 +1,15 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-
-// import TextEditorMonacoEditor from "./TextEditorMonacoEditor/TextEditorMonacoEditor";
-// import TextEditorSunEditor from "./TextEditorSunEditor/TextEditorSunEditor";
-
-const TextEditorMonacoEditor = dynamic(() => import('./TextEditorMonacoEditor/TextEditorMonacoEditor'), {ssr: false})
+const TextEditorMonacoEditor = dynamic(() => import('./TextEditorMonacoEditor/TextEditorMonacoEditor'))
 const TextEditorSunEditor = dynamic(() => import('./TextEditorSunEditor/TextEditorSunEditor'), {ssr: false})
 const TextEditorReactQuill = dynamic(() => import('./TextEditorReactQuill/TextEditorReactQuill'), {ssr: false})
 const TextEditorReactPage = dynamic(() => import('./TextEditorReactPage/TextEditorReactPage'), {ssr: false})
 
-
 const TextEditorsStyledDiv = styled.div`
-
   .text-editors-switcher {
     .custom-select {
       width: 200px;
-    }
-  }
-
-  .text-editors-content {
-    section {
-      .monaco-editor {
-        position: relative;
-
-        .monaco-editor {
-          .overflow-guard {
-            .margin {
-              top: 0;
-              bottom: 0;
-
-              .glyph-margin {
-                display: none;
-                position: relative !important;
-                top: 0 !important;
-                bottom: 0 !important;
-              }
-            }
-
-            .monaco-scrollable-element {
-              top: 0;
-
-              .lines-content {
-                .view-lines {
-                  top: 0;
-                }
-              }
-            }
-
-            .minimap {
-              top: 0;
-              //display: none;
-              canvas {
-                top: 0;
-              }
-            }
-
-          }
-        }
-      }
     }
   }
 `
@@ -78,20 +29,10 @@ const TextEditors = ({value, onChangeHandler, language, height, width, name, use
 
     const [editor, setEditor] = useState<string | null>(null);
 
-
     useEffect(() => {
         setEditor(openWith)
     }, [openWith]);
 
-    // const onClickHandler = (e: React.MouseEvent<HTMLButtonElement, MouseEvent>) => {
-    //     // @ts-ignore
-    //     setEditor(e.target.name)
-    //     if (typeof window !== 'undefined') {
-    //         // @ts-ignore
-    //         localStorage.setItem('PreferredEditorForThisPostType', JSON.stringify({editor:e.target.name,postType:''}))
-    //     }
-    //
-    // }
 
     const onChangeEditorHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setEditor(e.target.value)
@@ -124,6 +65,7 @@ const TextEditors = ({value, onChangeHandler, language, height, width, name, use
                                             language={language}
                                             width={width}
                                             height={height}
+                                            name={name}
                     />
                     : null
                 }

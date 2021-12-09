@@ -5,7 +5,6 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {languagesOptions} from "../../../../_variables/_variables";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
-import MonacoEditorComponent from "../../MonacoEditorComponent/MonacoEditorComponent";
 import SearchTypeInputFields from "./SearchTypeInputFields/SearchTypeInputFields";
 import MultipleLinkWidgetModelFields from "./MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields";
 import _ from "lodash";
@@ -16,6 +15,7 @@ import staticPositions from '../staticPositions';
 import postTypes from "../../../global/postTypes";
 import styled from "styled-components";
 import SelectFieldForWidget from "./SelectFieldForWidget/SelectFieldForWidget";
+import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
@@ -23,9 +23,9 @@ const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'));
 const TextInputFieldForWidget = dynamic(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'), {ssr: false});
 const LinkTypeWidgetModelFields = dynamic(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'));
 const ImageSwiperTypeWidgetModelFields = dynamic(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'));
-const PostSwiperTypeWidgetModelFields = dynamic(() => import('./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields'));
+// const PostSwiperTypeWidgetModelFields = dynamic(() => import('./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields'));
 const MenuWidgetModelFields = dynamic(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'));
-const TextWidgetTypeFields = dynamic(() => import('./TextWidgetTypeFields/TextWidgetTypeFields'));
+// const TextWidgetTypeFields = dynamic(() => import('./TextWidgetTypeFields/TextWidgetTypeFields'));
 const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'));
 const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'));
 const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'));
@@ -177,7 +177,9 @@ const WidgetModel = props => {
             })
         }
     }
-    const onTextEditorChangeHandler = value => {
+
+
+    const onWidgetTextChangeHandler = value => {
         if (languageElement?.current?.value === 'default') {
             setWidgetData({
                 ...widgetData,
@@ -215,8 +217,7 @@ const WidgetModel = props => {
             }
         })
     }
-
-
+    
     const onCheckboxChangeHandler = e => {
         setWidgetData({
             ...widgetData,
@@ -369,25 +370,44 @@ const WidgetModel = props => {
                             widgetData.type === 'media' ||
                             widgetData.type === 'recentComments'}
                     />
-                    <TextWidgetTypeFields
-                        widgetSettings={widgetSettings}
-                        onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
+                    {/*<TextWidgetTypeFields*/}
+                    {/*    widgetSettings={widgetSettings}*/}
+                    {/*    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}*/}
 
-                        widgetData={widgetData}
-                        onChangeHandler={onChangeHandlerByName}
-                        rendering={
-                            widgetData.type === 'posts' ||
-                            widgetData.type === 'form' ||
-                            widgetData.type === 'postsSwiper' ||
-                            widgetData.type === 'imageSwiper' ||
-                            widgetData.type === 'meta' ||
-                            widgetData.type === 'metaWithImage' ||
-                            widgetData.type === 'media' ||
-                            widgetData.type === 'alphabeticalNumericalRange' ||
-                            widgetData.type === 'linkTo' ||
-                            widgetData.type === 'multipleLinkTo' ||
-                            widgetData.type === 'text' ||
-                            widgetData.type === 'recentComments'}
+                    {/*    widgetData={widgetData}*/}
+                    {/*    onChangeHandler={onChangeHandlerByName}*/}
+                    {/*    rendering={*/}
+                    {/*        widgetData.type === 'posts' ||*/}
+                    {/*        widgetData.type === 'form' ||*/}
+                    {/*        widgetData.type === 'postsSwiper' ||*/}
+                    {/*        widgetData.type === 'imageSwiper' ||*/}
+                    {/*        widgetData.type === 'meta' ||*/}
+                    {/*        widgetData.type === 'metaWithImage' ||*/}
+                    {/*        widgetData.type === 'media' ||*/}
+                    {/*        widgetData.type === 'alphabeticalNumericalRange' ||*/}
+                    {/*        widgetData.type === 'linkTo' ||*/}
+                    {/*        widgetData.type === 'multipleLinkTo' ||*/}
+                    {/*        widgetData.type === 'text' ||*/}
+                    {/*        widgetData.type === 'recentComments'}*/}
+                    {/*/>*/}
+
+                    <p>Widget Text or HTML</p>
+
+                    <MonacoEditor
+                        language={'html'}
+                        name={'text'}
+                        defaultValue={
+                                widgetSettings.activeEditingLanguage === 'default' ?  widgetData.text :
+                                widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
+                        }
+                        value={
+                                widgetSettings.activeEditingLanguage === 'default' ?  widgetData.text :
+                                widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
+                        }
+                        // defaultValue={widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text || widgetData.text }
+                        // value={widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text || widgetData.text }
+                        className={'widgetTextTextarea'}
+                        onChange={onTextInputsDataChangeHandler}
                     />
 
 
@@ -515,18 +535,18 @@ const WidgetModel = props => {
                         /> : null
                     }
 
-                    <TextEditor
-                        state={widgetData}
-                        activeEditingLanguage={widgetSettings.activeEditingLanguage}
-                        onChangeHandler={onTextEditorChangeHandler}
-                        valueData={
-                            (languageElement?.current?.value === 'default' || !languageElement?.current?.value) ? widgetData.text :
-                                widgetData?.translations?.[languageElement?.current?.value]?.text || ''
-                        }
-                        rendering={
-                            widgetData.type === 'textEditor'
-                        }
-                    />
+                    {/*<TextEditor*/}
+                    {/*    state={widgetData}*/}
+                    {/*    activeEditingLanguage={widgetSettings.activeEditingLanguage}*/}
+                    {/*    onChangeHandler={onWidgetTextChangeHandler}*/}
+                    {/*    valueData={*/}
+                    {/*        (languageElement?.current?.value === 'default' || !languageElement?.current?.value) ? widgetData.text :*/}
+                    {/*            widgetData?.translations?.[languageElement?.current?.value]?.text || ''*/}
+                    {/*    }*/}
+                    {/*    rendering={*/}
+                    {/*        widgetData.type === 'textEditor'*/}
+                    {/*    }*/}
+                    {/*/>*/}
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'postsSlider' ?
                         <TextInputFieldForWidget inputTitle='Selected Meta For Posts:' name='selectedMetaForPosts' type='text' value={widgetData.selectedMetaForPosts}
                                                  classNameValue='selectedMetaForPosts' placeHolder='selectedMetaForPosts'
@@ -573,15 +593,13 @@ const WidgetModel = props => {
 
                     <div className={'monaco-editor-section'}>
                         <p>Custom Styles:</p>
-
-                        <MonacoEditorComponent
-                            language='scss'
-                            nameValue='customStyles'
-                            defaultValue={widgetData.customStyles || ''}
-                            value={widgetData.customStyles || ''}
-                            setWidgetData={setWidgetData}
-                            widgetData={widgetData}
-                            classNameValue='customStylesTextarea'
+                        <MonacoEditor
+                            language={'scss'}
+                            name={'customStyles'}
+                            defaultValue={widgetData.customStyles}
+                            value={widgetData.customStyles}
+                            className={'customStylesTextarea'}
+                            onChange={onChangeHandler}
                         />
                     </div>
 
@@ -595,14 +613,13 @@ const WidgetModel = props => {
                     />
                     <div className={'monaco-editor-section'}>
                         <p>Custom Script:</p>
-                        <MonacoEditorComponent
-                            language='javascript'
-                            nameValue='customScript'
-                            defaultValue={widgetData.customScript || ''}
-                            value={widgetData.customScript || ''}
-                            setWidgetData={setWidgetData}
-                            widgetData={widgetData}
-                            classNameValue='customStylesTextarea'
+                        <MonacoEditor
+                            language={'javascript'}
+                            name={'customScript'}
+                            defaultValue={widgetData.customScript}
+                            value={widgetData.customScript}
+                            className={'customScriptTextarea'}
+                            onChange={onChangeHandler}
                         />
                     </div>
 

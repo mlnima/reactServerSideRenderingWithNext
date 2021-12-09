@@ -42,12 +42,6 @@ const formats = [
 ]
 
 const TextEditor = props => {
-    // const [editorState, setEditorState] = useState(false);
-    //
-    // useEffect(() => {
-    //     setEditorState(true)
-    // }, []);
-
 
     if (props.rendering) {
         return (

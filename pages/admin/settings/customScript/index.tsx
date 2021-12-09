@@ -8,6 +8,7 @@ import {setLoading} from "../../../../store/actions/globalStateActions";
 import {updateSetting} from "../../../../store/actions/settingsActions";
 import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import Head from "next/head";
 
 const customScript = (props: { width: any; height: any; }) => {
     const dispatch = useDispatch()
@@ -29,6 +30,15 @@ const customScript = (props: { width: any; height: any; }) => {
 
 
     return (
+        <>
+            <Head>
+                <link
+                    rel="stylesheet"
+                    type="text/css"
+                    data-name="vs/editor/editor.main"
+                    href="https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css"
+                />
+            </Head>
         <div>
             <div className='customScriptsAsStringSection'>
                 <Editor
@@ -45,6 +55,7 @@ const customScript = (props: { width: any; height: any; }) => {
                 <button className='saveBtn green-action-btn-link' onClick={() => onSaveHandler()}>Save</button>
             </div>
         </div>
+            </>
     );
 };
 

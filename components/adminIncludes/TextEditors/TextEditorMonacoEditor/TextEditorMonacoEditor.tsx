@@ -1,10 +1,11 @@
 import React, {useEffect} from 'react';
+import Head from "next/head";
 import dynamic from "next/dynamic";
 import {isJsonString} from '../../../../_variables/util/isJsonString'
+import Editor from "@monaco-editor/react";
+// const monacoPackage = require("monaco-editor/package.json");
 
-
-const MonacoEditor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
-import {DiffEditor, useMonaco, loader} from "@monaco-editor/react";
+//const Editor  = dynamic(() => import('@monaco-editor/react'), {ssr: false})
 
 
 interface MonacoEditorProTypes {
@@ -13,39 +14,42 @@ interface MonacoEditorProTypes {
     height?: string,
     width?: string,
     language?: string,
+    name?: string,
     editorRef?: any
 }
 
 const TextEditorMonacoEditor = (props: MonacoEditorProTypes) => {
-    // const monaco = useMonaco();
-    useEffect(() => {
-        console.log(isJsonString(props.value) )
 
-    }, [props.value]);
-
-
-
-
-
-    const onValueChangeHandler = ()=>{
-
+    const onChangeHandler = (value) => {
+        if (isJsonString(props.value)) {
+            props.onChangeHandler(JSON.parse(value),props.name)
+        } else {
+            props.onChangeHandler(value,props.name)
+        }
     }
 
-
     return (
-        <MonacoEditor
-            // @ts-ignore
-            language={typeof props.value === 'object' ? 'json' : props.language || 'scss'}
-            theme="vs-dark"
-            height={props.height || '80vh'}
-            value={typeof props.value === 'string' ? props.value : JSON.stringify(props.value)}
-            defaultValue={''}
-            // @ts-ignore
-             onChange={(value) => isJsonString(props.value) ?props.onChangeHandler(JSON.parse(value))  :props.onChangeHandler(value) }
-           // onChange={(value) => console.log(typeof value)}
-            saveViewState={false}
-            className={'monaco-editor'}
-        />
+        <>
+            <Head>
+                {/* issue fixed from https://github.com/suren-atoyan/monaco-react/issues/272 post */}
+                <link
+                    rel="stylesheet"
+                    type="text/css"
+                    data-name="vs/editor/editor.main"
+                    href="https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css"
+                />
+            </Head>
+            <Editor
+                language={typeof props.value === 'object' ? 'json' : props.language || 'scss'}
+                theme="vs-dark"
+                height={props.height || '80vh'}
+                value={typeof props.value === 'string' ? props.value : JSON.stringify(props.value)}
+                onChange={(value) => onChangeHandler(value)}
+                saveViewState={false}
+                className={'monaco-editor'}
+            />
+        </>
+
     );
 };
 

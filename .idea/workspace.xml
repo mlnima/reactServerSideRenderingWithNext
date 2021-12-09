@@ -20,27 +20,19 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/_variables/util/isJsonString.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/pages/admin/importer/postsImporter/index.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminImportPosts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/adminIncludes/MonacoEditor/MonacoEditor.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/PostInformation.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/SideBar/SideBar.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/MonacoEditorComponent/MonacoEditorComponent.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditor/TextEditor.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditor/TextEditor.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorMonacoEditor/TextEditorMonacoEditor.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorMonacoEditor/TextEditorMonacoEditor.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextInputWithUploadBtn/TextInputWithUploadBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextInputWithUploadBtn/TextInputWithUploadBtn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/SaveDesignChangesBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/SaveDesignChangesBtn.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactPage/TextEditorReactPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactPage/TextEditorReactPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditors.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditors.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/CountInput/CountInput.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/CountInput/CountInput.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/PostPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/VideoPlayer/VideoPlayer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/exporter/postsExporter/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/exporter/postsExporter/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/importer/content/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/content/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminExportPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminExportPosts.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/setup.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/setup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/TextEditorWidgetTypeFields/TextEditorWidgetTypeFields.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/page/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/page/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/translations/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/translations/index.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -171,9 +163,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.setup" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.startNext" />
       </list>
@@ -932,7 +924,11 @@
       <workItem from="1638648286887" duration="14714000" />
       <workItem from="1638698226098" duration="14101000" />
       <workItem from="1638800942051" duration="8278000" />
-      <workItem from="1638868958488" duration="1346000" />
+      <workItem from="1638868958488" duration="3758000" />
+      <workItem from="1638886529380" duration="10938000" />
+      <workItem from="1638960288749" duration="1842000" />
+      <workItem from="1638980582331" duration="1787000" />
+      <workItem from="1639052325969" duration="6582000" />
     </task>
     <servers />
   </component>
@@ -1163,10 +1159,6 @@
           <option name="timeStamp" value="100" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js</url>
-          <option name="timeStamp" value="101" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/trash/TopLeft.js</url>
           <option name="timeStamp" value="102" />
         </line-breakpoint>
@@ -1206,6 +1198,10 @@
           <url>file://$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts</url>
           <line>181</line>
           <option name="timeStamp" value="112" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/adminIncludes/design/StyleSection/StyleSection.js</url>
+          <option name="timeStamp" value="113" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

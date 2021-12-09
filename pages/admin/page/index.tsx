@@ -1,10 +1,11 @@
-import {ChangeEvent, useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {saveNewPage, getPageData, updatePage} from "../../../_variables/ajaxVariables";
 import {useRouter} from 'next/router'
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import Head from "next/head";
 
 let AdminEditCustomPageStyledDiv = styled.div`
   input {
@@ -80,6 +81,16 @@ const page = (props: any) => {
 
     // @ts-ignore
     return (
+        <>
+            <Head>
+                <link
+                    rel="stylesheet"
+                    type="text/css"
+                    data-name="vs/editor/editor.main"
+                    href="https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css"
+                />
+            </Head>
+
 
         <AdminEditCustomPageStyledDiv className='page-container'>
             <p>Page Name (without Space):</p>
@@ -115,7 +126,7 @@ const page = (props: any) => {
             <button onClick={onSaveHandler}>Save</button>
         </AdminEditCustomPageStyledDiv>
 
-
+        </>
     );
 };
 

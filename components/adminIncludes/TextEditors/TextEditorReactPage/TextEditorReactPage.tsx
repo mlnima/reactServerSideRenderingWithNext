@@ -37,7 +37,6 @@ const TextEditorReactPage = (props: any) => {
     const [value, setValue] = useState<Value>(null);
 
     useEffect(() => {
-        console.log(value)
         props.onChangeHandler(value)
     }, [value]);
 

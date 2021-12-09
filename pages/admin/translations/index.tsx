@@ -4,6 +4,9 @@ import {readTranslationsFile, updateTranslationsFile} from "../../../_variables/
 import {languagesOptions} from "../../../_variables/_variables";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import Head from "next/head";
+
+
 // @ts-ignore
 const translations = props => {
     const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
@@ -44,6 +47,15 @@ const translations = props => {
 
 
     return (
+        <>
+            <Head>
+                <link
+                    rel="stylesheet"
+                    type="text/css"
+                    data-name="vs/editor/editor.main"
+                    href="https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css"
+                />
+            </Head>
         <div className='translations'>
             translations
             <select onChange={e => onActiveEditingLanguageChangeHandler(e)}>
@@ -66,6 +78,7 @@ const translations = props => {
                 <button onClick={onSaveHandler}>Save</button>
             </div>
         </div>
+        </>
     );
 };
 
