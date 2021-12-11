@@ -32,7 +32,7 @@ const MonacoEditor = props => {
                 onChange={onChangeHandler}
                 className={props.className}
                 width={props.width || '100%'}
-                height={props.height || '300px'}
+                height={props.height || '500px'}
                 options={{
                     noSemanticValidation: true,
                     noSyntaxValidation:true

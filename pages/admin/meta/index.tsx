@@ -11,10 +11,20 @@ import {languagesOptions} from "../../../_variables/_variables";
 let AdminMetaPageStyledDiv = styled.div`
   width: 95%;
   max-width: 1300px;
-
+  display: flex;
+  align-items: center;
+  flex-direction: column;
   .single-meta-page-section {
-    max-width: 600px;
+    width: 700px;
     margin: auto;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    
+    p{
+      width: 200px;
+    }
 
     input, textarea {
       min-width: 300px;
@@ -29,12 +39,16 @@ let AdminMetaPageStyledDiv = styled.div`
       min-height: 200px;
     }
 
-    .preview-image {
-      margin: 10px 0;
 
-      img {
-        width: 280px;
-      }
+  }
+  .preview-image {
+    margin: 10px 0;
+    max-width: 600px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    img {
+      width: 280px;
     }
   }
 
@@ -42,7 +56,7 @@ let AdminMetaPageStyledDiv = styled.div`
     display: flex;
     justify-content: space-between;
     align-items: center;
-
+    width: 100%;
     .red-action-btn-link {
       background-color: red;
       border: none;
@@ -62,10 +76,11 @@ const meta = (props: any) => {
     const [editingData, setEditingData] = useState({
         activeEditingLanguage: 'default'
     })
+    const [deleteButton, setDeleteButton] = useState(false)
 
-    useEffect(() => {
-        console.log(meta)
-    }, [meta]);
+    // useEffect(() => {
+    //     console.log(meta)
+    // }, [meta]);
 
 
     useEffect(() => {
@@ -76,6 +91,7 @@ const meta = (props: any) => {
                 type: router.query.metaType,
                 description: '',
                 imageUrl: '',
+                imageUrlLock:false,
                 translations: {},
                 count: 0,
                 lang: router.query.lang || 'default'
@@ -99,6 +115,7 @@ const meta = (props: any) => {
 
 
     const onInputChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
+
         if (editingData.activeEditingLanguage === 'default') {
             dispatch(adminEditMeta({[e.target.name]: e.target.value}))
         } else {
@@ -121,14 +138,14 @@ const meta = (props: any) => {
     return (
 
         <AdminMetaPageStyledDiv className='single-meta-page'>
-            <div className='single-meta-page-section'>
+            <div className={'single-meta-page-section'}>
                 <p>Language :</p>
                 <select className={'custom-select'} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
                     <option value='default'>Default</option>
                     {languagesOptions}
                 </select>
             </div>
-            <div className='single-meta-page-section'>
+            <div className={'single-meta-page-section'}>
                 <p>Meta Name :</p>
                 <input className={'form-control-input'} name='name' onChange={e => onInputChangeHandler(e)} value={
                     // @ts-ignore
@@ -143,17 +160,22 @@ const meta = (props: any) => {
                                 meta.translations[editingData.activeEditingLanguage].name || '' : '' : ''
                 }/>
             </div>
-            <div className='single-meta-page-section'>
+            <div className={'single-meta-page-section'}>
                 <p>Meta Image :</p>
                 {/*// @ts-ignore*/}
-                <input className={'form-control-input'} name='imageUrl' onChange={e => onInputChangeHandler(e)} value={meta?.imageUrl || ''}/>
-                <div className='preview-image'>
-                    {meta?.imageUrl ? <img src={meta.imageUrl} alt=""/> : null}
-                </div>
+                <input className={'form-control-input'} name={'imageUrl'} onChange={e => onInputChangeHandler(e)} value={meta?.imageUrl || ''}/>
+
             </div>
-            <div className='single-meta-page-section'>
+            <div className={'single-meta-page-section preview-image'}>
+                {meta?.imageUrl ? <img src={meta.imageUrl} alt=""/> : null}
+            </div>
+            <div className={'single-meta-page-section'}>
+                <p>Lock Meta Image :</p>
+                <input type={'checkbox'} checked={meta.imageUrlLock} name={'imageUrlLock'} onChange={e=> dispatch(adminEditMeta({imageUrlLock: e.target.checked}))}/>
+            </div>
+            <div className={'single-meta-page-section'}>
                 <p>Status :</p>
-                <select className={'custom-select'} name='status' onChange={e => onInputChangeHandler(e)} value={meta?.status}>
+                <select className={'custom-select'} name={'status'} onChange={e => onInputChangeHandler(e)} value={meta?.status}>
                     <option>select</option>
                     <option value='draft'>Draft</option>
                     <option value='published'>Published</option>
@@ -161,10 +183,10 @@ const meta = (props: any) => {
                     <option value='pending'>Pending</option>
                 </select>
             </div>
-            <div className='single-meta-page-section'>
+            <div className={'single-meta-page-section'}>
                 <p>Meta Description :</p>
                 <textarea className={'form-control-input'}
-                          name='description'
+                          name={'description'}
                           onChange={e => onInputChangeHandler(e)}
                           value={editingData?.activeEditingLanguage && editingData?.activeEditingLanguage === 'default' ? meta?.description || '' :
                               meta?.translations ?
@@ -178,10 +200,11 @@ const meta = (props: any) => {
                 />
             </div>
             <div className='action-buttons'>
-                {/*// @ts-ignore*/}
                 <button className='btn btn-primary' onClick={() => dispatch(adminUpdateMeta(meta))}>Update</button>
-                {/*// @ts-ignore*/}
-                <button className='btn btn-danger' onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}>delete</button>
+
+                {!deleteButton? <button className='btn btn-danger' onClick={() => setDeleteButton(true)}>I Want To Delete This Meta</button> :null}
+                {deleteButton? <button className='btn btn-danger' onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}>Delete</button> :null}
+
             </div>
 
 

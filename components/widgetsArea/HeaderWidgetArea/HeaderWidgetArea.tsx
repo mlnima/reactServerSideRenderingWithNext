@@ -42,14 +42,14 @@ interface HeaderWidgetAreaProps {
     widgets: WidgetPropTypes[]
 }
 
-const HeaderWidgetArea = ({stylesData, className, position, referer, rendering}: HeaderWidgetAreaProps) => {
+const HeaderWidgetArea = ({stylesData, className, position, rendering}: HeaderWidgetAreaProps) => {
     return (
         <StyledHeader stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='header-content'>
                 <WidgetsRenderer
                     rendering={rendering}
                     position={position}
-                    referer={referer}
+
                 />
             </div>
 

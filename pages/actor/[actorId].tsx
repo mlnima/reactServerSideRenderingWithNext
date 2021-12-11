@@ -46,12 +46,10 @@ const actorPage = (props: ClientPagesTypes) => {
             {actor ? <MetaDataToSiteHead title={actor.name} description={actor.description} url={`${router.asPath}`} image={actor.imageUrl}/> : null}
             <WidgetsRenderer
                 position='actorPageTop'
-                referer={props.referer}
             />
             <PostsPage/>
             <WidgetsRenderer
                 position='actorPageBottom'
-                referer={props.referer}
             />
         </StyledMain>
 

@@ -45,7 +45,7 @@ const searchPage = (props: ClientPagesTypes) => {
 
             <WidgetsRenderer
                 position={'searchPageTop'}
-                referer={props.referer}
+
             />
             {router.query.keyword ? <PostsPageInfo titleToRender={router.query.keyword}/> : null}
 
@@ -59,7 +59,6 @@ const searchPage = (props: ClientPagesTypes) => {
             <PostsPage  />
             <WidgetsRenderer
                 position={'searchPageBottom'}
-                referer={props.referer}
             />
         </StyledMain>
     )

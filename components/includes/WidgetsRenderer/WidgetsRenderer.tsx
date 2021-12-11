@@ -1,7 +1,11 @@
-import React, { useState, useEffect} from 'react';
+import React, {useState, useEffect} from 'react';
 import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
+import {useSelector} from "react-redux";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+
 const Posts = dynamic(() => import('../Posts/Posts'))
 const CategoriesRenderer = dynamic(() => import('../pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer'))
 const TagsRenderer = dynamic(() => import('../pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer'))
@@ -18,21 +22,19 @@ const Authentication = dynamic(() => import('../widgets/Authentication/Authentic
 const LinkTo = dynamic(() => import('../widgets/LinkTo/LinkTo'))
 const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'), {ssr: false})
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'), {ssr: false})
-// @ts-ignore
 const PostsSlider = dynamic(() => import('../widgets/PostsSlider/PostsSlider'))
 const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
-import {useSelector} from "react-redux";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+
 
 interface WidgetsRendererProps {
     position: string;
-    _id?: any;
-    homePageSidebar?: any;
-    referer?: any;
-    rendering?: any
+    _id?: string;
+    //homePageSidebar?: any;
+   // referer?: any;
+    rendering?: boolean
 }
 
 
@@ -40,13 +42,11 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const widgets = useSelector((store: StoreTypes) => store.widgets.widgets)
     const settings = useSelector((store: StoreTypes) => store.settings);
-    const userData = useSelector((store: StoreTypes)  => store?.user.userData)
-
-
+    const userData = useSelector((store: StoreTypes) => store?.user.userData)
     const router = useRouter()
+    const today = new Date().toLocaleString('en-us', {weekday: 'long'}).toLowerCase()
 
-    const widgetsData = widgets.filter((widget) => widget.data?.position === position).sort((a, b) => {
-        // @ts-ignore
+    const widgetsData = widgets.filter((widget) => widget.data?.position === position).sort((a: WidgetPropTypes, b: WidgetPropTypes) => {
         return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
     })
 
@@ -57,41 +57,39 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
     }, [widgets]);
 
 
-
-
-         const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
-
+    const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
         const languageToRender = widget.data.languageToRender || 'all';
-        const activeLanguage = router.locale ;
-
+        const activeLanguage = router.locale;
         const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
+        const renderByDayCondition = widget.data?.specificDayToRender === today || widget.data?.specificDayToRender === 'all' || !widget.data?.specificDayToRender;
+
 
         const isEditMode = widget.data.editMode && userData?.role !== 'administrator';
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
             widget.data.type === 'postsSwiper' ? PostSwiper :
-            widget.data.type === 'postsSlider' ? PostsSlider :
-                widget.data.type === 'multipleLinkTo' ? MultipleLinkTo :
-                    widget.data.type === 'media' ? MediaWidget :
-                        widget.data.type === 'recentComments' ? RecentComments :
-                            widget.data.type === 'meta' ? MetaWidget :
-                                widget.data.type === 'metaWithImage' && widget.data.metaType === 'categories' ? CategoriesRenderer :
-                                    widget.data.type === 'metaWithImage' && widget.data.metaType === 'tags' ? TagsRenderer :
-                                        widget.data.type === 'metaWithImage' && widget.data.metaType === 'actors' ? ActorsRenderer :
-                                            widget.data.type === 'searchBar' ? SearchInputComponent :
-                                                widget.data.type === 'searchButton' ? SearchButton :
-                                                    widget.data.type === 'logo' ? Logo :
-                                                        widget.data.type === 'alphabeticalNumericalRange' ? AlphabeticalNumericalRangeLinksWidget :
-                                                            widget.data.type === 'language' ? LanguagesSwitcher :
-                                                                widget.data.type === 'authentication' ? Authentication :
-                                                                    widget.data.type === 'linkTo' ? LinkTo :
-                                                                        widget.data.type === 'imageSwiper' ? ImageSwiper :
-                                                                            widget.data.type === 'menu' ? MenuWidget :
-                                                                                widget.data.type === 'shoppingCart' ? ShoppingCart :
-                                                                                    widget.data.type === 'form' ? FormWidget
-                                                                                        : null;
+                widget.data.type === 'postsSlider' ? PostsSlider :
+                    widget.data.type === 'multipleLinkTo' ? MultipleLinkTo :
+                        widget.data.type === 'media' ? MediaWidget :
+                            widget.data.type === 'recentComments' ? RecentComments :
+                                widget.data.type === 'meta' ? MetaWidget :
+                                    widget.data.type === 'metaWithImage' && widget.data.metaType === 'categories' ? CategoriesRenderer :
+                                        widget.data.type === 'metaWithImage' && widget.data.metaType === 'tags' ? TagsRenderer :
+                                            widget.data.type === 'metaWithImage' && widget.data.metaType === 'actors' ? ActorsRenderer :
+                                                widget.data.type === 'searchBar' ? SearchInputComponent :
+                                                    widget.data.type === 'searchButton' ? SearchButton :
+                                                        widget.data.type === 'logo' ? Logo :
+                                                            widget.data.type === 'alphabeticalNumericalRange' ? AlphabeticalNumericalRangeLinksWidget :
+                                                                widget.data.type === 'language' ? LanguagesSwitcher :
+                                                                    widget.data.type === 'authentication' ? Authentication :
+                                                                        widget.data.type === 'linkTo' ? LinkTo :
+                                                                            widget.data.type === 'imageSwiper' ? ImageSwiper :
+                                                                                widget.data.type === 'menu' ? MenuWidget :
+                                                                                    widget.data.type === 'shoppingCart' ? ShoppingCart :
+                                                                                        widget.data.type === 'form' ? FormWidget
+                                                                                            : null;
 
-        if (renderByLanguageCondition && !isEditMode) {
+        if (renderByLanguageCondition && renderByDayCondition && !isEditMode) {
 
             return (
                 <Widget

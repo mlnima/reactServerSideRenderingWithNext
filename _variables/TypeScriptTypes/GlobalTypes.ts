@@ -123,7 +123,8 @@ export interface WidgetPropTypes {
         viewType: string,
         deviceTypeToRender: string,
         languageToRender: string,
-        editMode: boolean
+        editMode: boolean,
+        widgetIndex:number
     }
 }
 
@@ -146,17 +147,18 @@ export interface GetServerSidePropsContext {
 }
 
 export interface Meta {
-    _id:string;
-    name: string;
-    description: string;
-    type: string;
-    status: string;
-    imageUrl: string;
-    translations: Translations;
-    count: number;
-    additionalInfo: object;
-    createdAt: Date;
-    updatedAt: Date;
+    _id:string,
+    name: string,
+    description: string,
+    type: string,
+    status: string,
+    imageUrl: string,
+    imageUrlLock:boolean,
+    translations: Translations,
+    count: number,
+    additionalInfo: object,
+    createdAt: Date,
+    updatedAt: Date,
 }
 
 

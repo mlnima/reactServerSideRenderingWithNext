@@ -4,9 +4,7 @@ const ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = async (req, res) => {
     try {
-        console.log(req.query._id)
         const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id.match(/^[0-9a-fA-F]{24}$/) : false;
-
         if (validateId){
             await  metaSchema.findById(req.query._id).exec().then(meta => {
                 if (meta){

@@ -43,14 +43,13 @@ interface TopBarWidgetAreaProps {
 
 
 const TopBarWidgetArea = (
-    {stylesData,className,position,referer}:TopBarWidgetAreaProps
+    {stylesData,className,position}:TopBarWidgetAreaProps
 ) => {
     return (
         <StyledDiv stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='top-bar-content'>
                 <WidgetsRenderer
                     position={position}
-                    referer={referer}
                 />
             </div>
         </StyledDiv>

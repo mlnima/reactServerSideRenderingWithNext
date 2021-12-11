@@ -336,6 +336,13 @@ const WidgetModel = props => {
                                           options={['all', 'mobile', 'desktop']}
                                           onChangeHandler={onChangeHandler}
                     />
+                    <SelectFieldForWidget title={'Specific Day Type To Render:'}
+                                          name={'specificDayToRender'}
+                                          ref={null}
+                                          value={widgetData.specificDayToRender}
+                                          options={['all','monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']}
+                                          onChangeHandler={onChangeHandler}
+                    />
 
                     <SelectFieldForWidget title={'Language To Render:'}
                                           name={'languageToRender'}

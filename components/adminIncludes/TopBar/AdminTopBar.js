@@ -8,6 +8,7 @@ import {faUser} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {clearCaches, setSidebarStatus} from "../../../store/adminActions/adminPanelGlobalStateActions";
+import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -58,6 +59,7 @@ let StyledDiv = styled.div`
 `
 
 const AdminTopBar = () => {
+    const router = useRouter()
     const dispatch = useDispatch()
     const sidebar = useSelector(store => store?.adminPanelGlobalState?.sidebar)
     const [state, dispatchState] = useState({
@@ -107,7 +109,7 @@ const AdminTopBar = () => {
                     </Link>
                     <span className='adminNewActionBtn adminTopBarItem' onClick={() => newItemMenuHandler()}><FontAwesomeIcon icon={faPlus} className='post-element-info-logo'/></span>
                     <NewItemMenu active={state.NewItemMenu}/>
-                    <p className='clearCache adminTopBarItem' onClick={() => dispatch(clearCaches())}>Clear Caches</p>
+                    <p className='clearCache adminTopBarItem' onClick={() => dispatch(clearCaches(router))}>Clear Caches</p>
                 </div>
                 <button className='adminActionBtn adminTopBarItem' onClick={() => adminActionHandler()}>
                     <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faUser} className='post-element-info-logo'/>

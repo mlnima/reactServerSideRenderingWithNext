@@ -45,12 +45,12 @@ const tagPage = (props: ClientPagesTypes) => {
 
             <WidgetsRenderer
                 position={'tagPageTop'}
-                referer={props.referer}
+
             />
             <PostsPage/>
             <WidgetsRenderer
                 position={'tagPageBottom'}
-                referer={props.referer}
+
             />
         </StyledMain>
     )

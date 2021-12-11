@@ -16,6 +16,7 @@ const widgetDataSchema =  mongoose.Schema({
     customScriptStrategy: String,
     deviceTypeToRender: String,
     languageToRender: String,
+    specificDayToRender: String,
     metaType: String,
     postType: String,
     sortBy: String,

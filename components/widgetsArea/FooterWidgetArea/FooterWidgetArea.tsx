@@ -28,14 +28,13 @@ interface FooterWidgetAreaProps {
     widgets: WidgetPropTypes[]
 }
 
-const FooterWidgetArea = ({stylesData, className, position, referer, rendering}:FooterWidgetAreaProps) => {
+const FooterWidgetArea = ({stylesData, className, position, rendering}:FooterWidgetAreaProps) => {
     return (
         <StyledFooter stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <div className='footer-content'>
                 <WidgetsRenderer
                     rendering={rendering}
                     position={position}
-                    referer={referer}
                 />
             </div>
 

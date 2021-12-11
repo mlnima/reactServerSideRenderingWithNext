@@ -117,10 +117,10 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
             type: types.LOADING,
             payload: true
         })
-        await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getMeta?_id=${_id}&token=${localStorage.wt}`).then(res=>{
+        await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getMeta?_id=${_id}&token=${localStorage.wt}`).then(res => {
 
             // @ts-ignore
-            if (res?.data?.meta){
+            if (res?.data?.meta) {
                 dispatch({
                     type: types.ADMIN_GET_META,
                     // @ts-ignore
@@ -132,7 +132,7 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
                 type: types.LOADING,
                 payload: false
             })
-        }).catch(err=>{
+        }).catch(err => {
             dispatch({
                 type: types.LOADING,
                 payload: false
@@ -142,13 +142,13 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
 }
 
 
-export const adminEditMeta = ( change:object ) =>  (dispatch: any) => {
+export const adminEditMeta = (change: object) => (dispatch: any) => {
     dispatch({
         type: types.ADMIN_EDIT_META,
         payload: change
     })
 }
-export const adminDeleteMeta = ( _id:string ) =>async  (dispatch: any) => {
+export const adminDeleteMeta = (_id: string | string[]) => async (dispatch: any) => {
     dispatch({
         type: types.LOADING,
         payload: true
@@ -158,7 +158,7 @@ export const adminDeleteMeta = ( _id:string ) =>async  (dispatch: any) => {
         _id,
         token: localStorage.wt
     };
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteMeta`, body).then(res=>{
+    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteMeta`, body).then(res => {
         dispatch({
             type: types.SET_ALERT,
             // @ts-ignore
@@ -168,7 +168,7 @@ export const adminDeleteMeta = ( _id:string ) =>async  (dispatch: any) => {
             type: types.LOADING,
             payload: false
         })
-    }).catch(err=>{
+    }).catch(err => {
         dispatch({
             type: types.SET_ALERT,
             payload: {message: err.response.data.message, type: 'error', err}
@@ -181,7 +181,7 @@ export const adminDeleteMeta = ( _id:string ) =>async  (dispatch: any) => {
 
 }
 
-export const adminUpdateMeta = ( data:object ) => async (dispatch: any) => {
+export const adminUpdateMeta = (data: object) => async (dispatch: any) => {
     dispatch({
         type: types.LOADING,
         payload: true
@@ -190,27 +190,27 @@ export const adminUpdateMeta = ( data:object ) => async (dispatch: any) => {
         data,
         token: localStorage.wt
     };
-     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/updateMeta`, body).then(res=>{
+    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/updateMeta`, body).then(res => {
 
-         dispatch({
-             type: types.SET_ALERT,
-             // @ts-ignore
-             payload: {message: res.data?.message, type: 'success'}
-         })
-         dispatch({
-             type: types.LOADING,
-             payload: false
-         })
-     }).catch(err=>{
-         dispatch({
-             type: types.SET_ALERT,
-             payload: {message: err.response.data.message, type: 'error', err}
-         })
-         dispatch({
-             type: types.LOADING,
-             payload: false
-         })
-     })
+        dispatch({
+            type: types.SET_ALERT,
+            // @ts-ignore
+            payload: {message: res.data?.message, type: 'success'}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    }).catch(err => {
+        dispatch({
+            type: types.SET_ALERT,
+            payload: {message: err.response.data.message, type: 'error', err}
+        })
+        dispatch({
+            type: types.LOADING,
+            payload: false
+        })
+    })
 
 }
 
@@ -249,12 +249,12 @@ export const adminBulkActionPost = (ids: string[], status: string) => (dispatch:
 
 }
 
-export const adminCheckAndRemoveDeletedVideos = ( ) =>async (dispatch: any) => {
+export const adminCheckAndRemoveDeletedVideos = () => async (dispatch: any) => {
     dispatch({
         type: types.LOADING,
         payload: true
     })
-   await axios.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`).then(res=>{
+    await axios.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`).then(res => {
         // console.log(res.data)
         // dispatch({
         //     type: types.SERVER_LOG,
@@ -268,7 +268,7 @@ export const adminCheckAndRemoveDeletedVideos = ( ) =>async (dispatch: any) => {
             type: types.LOADING,
             payload: false
         })
-    }).catch((err)=>{
+    }).catch((err) => {
         dispatch({
             type: types.SET_ALERT,
             payload: {message: err.response.data.message, type: 'error', err}
@@ -280,12 +280,12 @@ export const adminCheckAndRemoveDeletedVideos = ( ) =>async (dispatch: any) => {
     })
 }
 
-export const setMetaThumbnailsAndCount = ( ) =>async (dispatch: any) => {
+export const setMetaThumbnailsAndCount = (type?: string) => async (dispatch: any) => {
     dispatch({
         type: types.LOADING,
         payload: true
     })
-    await axios.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}`).then(res=>{
+    await axios.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}${type ? `&type=${type}` : ''}`).then(res => {
         dispatch({
             type: types.SET_ALERT,
             payload: {message: 'Setting New Image and Fix Count For Meta Data Started', type: 'success'}
@@ -294,7 +294,7 @@ export const setMetaThumbnailsAndCount = ( ) =>async (dispatch: any) => {
             type: types.LOADING,
             payload: false
         })
-    }).catch((err)=>{
+    }).catch((err) => {
         dispatch({
             type: types.SET_ALERT,
             payload: {message: err.response.data.message, type: 'error', err}
@@ -305,15 +305,15 @@ export const setMetaThumbnailsAndCount = ( ) =>async (dispatch: any) => {
         })
     })
 }
-export const importPosts = ( posts) =>async (dispatch: any) => {
+export const importPosts = (posts) => async (dispatch: any) => {
     dispatch({
         type: types.LOADING,
         payload: true
     })
-    await axios.post(`/api/admin/posts/adminImportPosts`,{
+    await axios.post(`/api/admin/posts/adminImportPosts`, {
         posts,
-        token:localStorage.wt
-    }).then(res=>{
+        token: localStorage.wt
+    }).then(res => {
         dispatch({
             type: types.SET_ALERT,
             payload: {message: 'posts are imported', type: 'success'}
@@ -322,7 +322,7 @@ export const importPosts = ( posts) =>async (dispatch: any) => {
             type: types.LOADING,
             payload: false
         })
-    }).catch((err)=>{
+    }).catch((err) => {
         dispatch({
             type: types.SET_ALERT,
             payload: {message: err.response.data.message, type: 'error', err}

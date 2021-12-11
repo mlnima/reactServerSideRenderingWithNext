@@ -18,13 +18,12 @@ interface SectionWidgetAreaProps {
     widgets: WidgetPropTypes[]
 }
 
-const SectionWidgetArea = ({stylesData,className,position,referer,rendering}:SectionWidgetAreaProps) => {
+const SectionWidgetArea = ({stylesData,className,position,rendering}:SectionWidgetAreaProps) => {
     return (
         <StyledSection stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <WidgetsRenderer
                 rendering={rendering}
                 position={position}
-                referer={referer}
             />
         </StyledSection>
     );

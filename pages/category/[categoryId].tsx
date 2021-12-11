@@ -44,12 +44,10 @@ const categoryPage = (props: ClientPagesTypes) => {
             {category ? <MetaDataToSiteHead title={category?.name} description={category?.description} url={`${router.asPath}`} image={category?.imageUrl}/> : null}
             <WidgetsRenderer
                 position={'categoryPageTop'}
-                referer={props.referer}
             />
             <PostsPage/>
             <WidgetsRenderer
                 position={'categoryBottom'}
-                referer={props.referer}
             />
         </StyledMain>
     )

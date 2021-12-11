@@ -12,6 +12,7 @@ const metaSchema =  new Schema({
     description: String,
     status: String,
     imageUrl:String,
+    imageUrlLock:Boolean,
     translations:mongoose.Mixed,
     count:Number,
     additionalInfo:mongoose.Mixed
