@@ -124,7 +124,10 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
                 dispatch({
                     type: types.ADMIN_GET_META,
                     // @ts-ignore
-                    payload: res.data.meta
+                    payload: {...res.data.meta,
+                        // @ts-ignore
+                        imageUrlLock:res.data?.meta?.imageUrlLock || false
+                    }
                 })
             }
 
