@@ -5,12 +5,16 @@ const Schema = mongoose.Schema
 const metaSchema =  new Schema({
     name:{
         type:String,
-        unique:true
+        uppercase: false,
+
     },
     type: String,
     index:Number,
     description: String,
-    status: String,
+    status: {
+        type:String,
+        uppercase: false,
+    },
     imageUrl:String,
     imageUrlLock:Boolean,
     translations:mongoose.Mixed,

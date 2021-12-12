@@ -45,7 +45,7 @@ const Meta = props => {
             let newItems = newItemsElement.current.value.split(',');
             const newItemsToSchemaForm = newItems.map(newItem => {
                 const newItemData = {
-                    name: newItem.trim(),
+                    name: newItem.trim().toLowerCase(),
                     type: props.type
                 }
                 return newItemData
@@ -54,7 +54,7 @@ const Meta = props => {
             props.onPostMetaChangeHandler(props.type, addedItemFromType)
         } else if (newItemsElement.current.value) {
             const newItemData = {
-                name: newItemsElement.current.value.trim(),
+                name: newItemsElement.current.value.trim().toLowerCase(),
                 type: props.type
             }
             const addedItemFromType = [newItemData]

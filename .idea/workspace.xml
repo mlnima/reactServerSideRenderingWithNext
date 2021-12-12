@@ -21,7 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/Meta/Meta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/metaSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/metaSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -152,9 +154,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.setup" />
         <item itemvalue="npm.startNext" />
       </list>
@@ -921,7 +923,9 @@
       <workItem from="1639135673889" duration="3060000" />
       <workItem from="1639162343139" duration="8938000" />
       <workItem from="1639239867675" duration="7903000" />
-      <workItem from="1639256663999" duration="2783000" />
+      <workItem from="1639256663999" duration="3125000" />
+      <workItem from="1639294727879" duration="2126000" />
+      <workItem from="1639319011383" duration="5719000" />
     </task>
     <servers />
   </component>
