@@ -1,10 +1,13 @@
+import {useMemo} from "react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import ActorCardMedia from "./ActorCardMedia";
 import {withTranslation} from "next-i18next";
+import capitalizeFirstLetter from "../../../../../../_variables/util/capitalizeFirstLetter";
 
 const ActorCard = ({t, cardWidth, actor, onActivateLoadingHandler}) => {
     const router = useRouter()
+    const title = useMemo(()=> actor?.translations?.[router.locale]?.name || t([t(`customTranslation:${actor?.name}`)]))
     return (
         <div className={'actor-card'}>
             <div className={'actor-card-image'}>
@@ -17,7 +20,8 @@ const ActorCard = ({t, cardWidth, actor, onActivateLoadingHandler}) => {
             <div className={'actor-card-info'}>
                 <Link href={`/actor/${actor._id}`}>
                     <a className='actor-card-link' onClick={onActivateLoadingHandler}  >
-                        <h3 className='actor-card-title'> {actor?.translations?.[router.locale]?.name || t([t(`customTranslation:${actor?.name}`)])}</h3>
+                        {/*<h3 className='actor-card-title'> {actor?.translations?.[router.locale]?.name || t([t(`customTranslation:${actor?.name}`)])}</h3>*/}
+                        <h3 className='actor-card-title'> {capitalizeFirstLetter(title)}</h3>
                         {actor?.count ? <span>{actor?.count}</span> : null}
                     </a>
                 </Link>

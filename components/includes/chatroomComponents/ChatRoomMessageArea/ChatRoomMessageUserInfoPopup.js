@@ -117,6 +117,8 @@ const ChatRoomMessageUserInfoPopup = ({t}) => {
                         <div className={'chatroom-message-user-info-popup-header'}>
                                          <span onClick={() => {
                                              dispatch(setActiveVisibleProfile({}))
+                                         }} onTouchStart={() => {
+                                             dispatch(setActiveVisibleProfile({}))
                                          }}
                                                className='chatroom-message-user-info-popup-content-close-button'>
                     <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faTimes}/>
