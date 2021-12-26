@@ -11,6 +11,7 @@
 /static/uploads/*
 /temp.js
 /temp.html
+/temp.scss
 /temp.css
 generateFakeData.js
 tools/testAPI.js

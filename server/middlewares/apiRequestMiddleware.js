@@ -1,4 +1,3 @@
-const uuidAPIKey = require('uuid-apikey');
 const userSchema = require('../models/userSchema')
 
 module.exports = async (req, res, next) => {
@@ -6,6 +5,9 @@ module.exports = async (req, res, next) => {
     const username = req.body.username
     try {
         const userData = await userSchema.findOne({username}).exec()
+        if(!username || !apiKey || !userData.role || !userData.API_KEY){
+            throw new Error('Unauthorized')
+        }
         if (userData.role === 'administrator' && userData.API_KEY === apiKey) {
             next()
         } else {

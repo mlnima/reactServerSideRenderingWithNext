@@ -1,7 +1,13 @@
 const express = require('express');
 const router = express.Router();
 
+//middlewares
 const adminAuthMiddleware = require('../../middlewares/adminAuthMiddleware')
+const adminApiRequestMiddleware = require('../../middlewares/apiRequestMiddleware')
+//API Controllers
+const adminCreateNewPostByApi = require('./adminPostsControllers/adminCreateNewPostByApi')
+const adminUpdatePostByApi = require('./adminPostsControllers/adminUpdatePostByApi')
+//------
 const adminCreateNewPost = require('./adminPostsControllers/adminCreateNewPost')
 const adminUpdatePost = require('./adminPostsControllers/adminUpdatePost')
 const adminDeletePost = require('./adminPostsControllers/adminDeletePost')
@@ -12,7 +18,6 @@ const adminUpdateMeta = require('./adminPostsControllers/adminUpdateMeta')
 const adminDeleteMeta = require('./adminPostsControllers/adminDeleteMeta')
 const adminUpdateComment = require('./adminPostsControllers/adminUpdateComment')
 const adminDeleteComments = require('./adminPostsControllers/adminDeleteComments')
-const adminCreateNewPostByApi = require('./adminPostsControllers/adminCreateNewPostByApi')
 const adminGetComments = require('./adminPostsControllers/adminGetComments')
 const adminGetPost = require('./adminPostsControllers/adminGetPost')
 const adminGetMeta = require('./adminPostsControllers/adminGetMeta')
@@ -31,11 +36,13 @@ router.post('/updateMeta',adminAuthMiddleware,adminUpdateMeta)
 router.post('/deleteMeta',adminAuthMiddleware,adminDeleteMeta)
 router.post('/updateComment',adminAuthMiddleware,adminUpdateComment)
 router.post('/deleteComments',adminAuthMiddleware,adminDeleteComments)
-router.post('/createNewByApi',adminCreateNewPostByApi)
 router.post('/getComments',adminAuthMiddleware,adminGetComments)
 router.get('/getPost',adminAuthMiddleware,adminGetPost)
 router.get('/getMeta',adminAuthMiddleware,adminGetMeta)
 router.get('/checkAndRemoveDeletedVideos',adminAuthMiddleware,adminCheckAndRemoveDeletedVideos)
 router.get('/setMetaThumbnailsAndCount',adminAuthMiddleware,adminSetMetaThumbnailsAndCount)
-
+//API routes
+router.post('/createNewByApi',adminApiRequestMiddleware,adminCreateNewPostByApi)
+router.post('/updatePostByApi',adminApiRequestMiddleware,adminUpdatePostByApi)
+//------
 module.exports = router
