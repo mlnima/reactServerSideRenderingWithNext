@@ -60,15 +60,17 @@ export const adminSaveNewPost = (data?: object, router?: any) => async (dispatch
         dispatch({
             type: types.SET_ALERT,
             // @ts-ignore
-            payload: {message: res.data.message || 'Post Updated', type: 'success'}
+            payload: {message: res.data.message || 'Post Saved', type: 'success'}
         })
         dispatch({
             type: types.LOADING,
             payload: false
         })
+
+
         setTimeout(() => {
             // @ts-ignore
-            res.data?.savedPostData?._id ? router.push('/admin/post?id=' + res.data.savedPostData._id) : null
+            res.data?.savedPostData?._id && router ? router.push('/admin/post?id=' + res.data.savedPostData._id) : null
         }, 1500)
 
     }).catch(err => {

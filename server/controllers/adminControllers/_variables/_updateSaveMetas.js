@@ -13,7 +13,6 @@ module.exports = async (metas) => {
                     type: meta.type,
                     status:'published',
                 }
-
                 const findQuery = {$and:[{name: meta.name},{type: meta.type}]}
                 await metaSchema.findOneAndUpdate(findQuery, {$set:{...metaData}},{new:true, upsert: true}).exec().then(async meta=>{
                     const count = await postSchema.countDocuments({$and:[{[meta.type]: meta._id},{status:'published'}]}).exec()

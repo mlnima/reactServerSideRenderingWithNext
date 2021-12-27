@@ -4,6 +4,9 @@ import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import VideoCardTitle from "./VideoCardTitle";
 import _qualityConvertor from "../asset/_qualityConvertor";
+import {faEye,faClock} from "@fortawesome/free-regular-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 
 let VideoCardStyledDiv = styled.div`
   width: calc(48vw - 5.6px);
@@ -12,33 +15,25 @@ let VideoCardStyledDiv = styled.div`
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
-  //background-color: var(--post-element-background-color, #131314);
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
 
   .video-card-under-media {
-  
     width: calc(50vw - 5.6px);
     height: auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     margin-left: 0;
-//.video-card-title{
-//  transition: all 5s ;
-//}
-    
-    .video-card-link {
 
+    .video-card-link {
       .video-card-under-media-info {
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         margin: 0 2px;
-
-
         .video-card-info-data {
           width: calc(50% - 8px);
           display: flex;
@@ -46,7 +41,11 @@ let VideoCardStyledDiv = styled.div`
           align-items: center;
           margin: 2px 0;
           color: var(--post-element-info-text-color, #ccc);
-
+          .icon{
+            width: 14px;
+            height: 14px;
+            margin: 0 2px;
+          }
           span {
             margin: 0 2px;
           }
@@ -109,10 +108,34 @@ const VideoTypeCard = (props) => {
                 <Link href={postUrl} scroll={false}>
                     <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
                         <span className='video-card-under-media-info'>
-                        {props.post.quality && props.post.postType === ('video') ? <p className='video-card-quality video-card-info-data'>{_qualityConvertor(props.post.quality)} </p> : null}
-                        {props.post.duration && props.post.postType === ('video') ? <p className='video-card-duration video-card-info-data'>{props.post.duration} </p> : null}
-                        {props.post.postType === ('video') ? <p className='video-card-views video-card-info-data'><span>{props.views}</span>{props.t(`common:Views`)} </p> : null}
-                        {props.post.postType === ('video') ? <p className='video-card-rating video-card-info-data'><span>{props.rating}</span> % </p> : null}
+                        {props.post.quality && props.post.postType === ('video') ?
+                            <p className='video-card-quality video-card-info-data'>
+                                {_qualityConvertor(props.post.quality)}
+                            </p>
+                            : null
+                        }
+                        {props.post.duration && props.post.postType === ('video') ?
+                            <p className='video-card-duration video-card-info-data'>
+                                {props.post.duration}
+                                <FontAwesomeIcon icon={faClock} className='icon'/>
+                            </p>
+                            : null
+                        }
+                        {props.post.postType === ('video') ?
+                            <p className='video-card-views video-card-info-data'>
+                                <span>{props.views}</span>
+                                <FontAwesomeIcon icon={faEye} className='icon'/>
+                            </p>
+                            : null
+                        }
+                        {props.post.postType === ('video') ?
+                            <p className='video-card-rating video-card-info-data'>
+                                <span>{props.rating}</span>
+                                %
+                                <FontAwesomeIcon icon={faThumbsUp} className='icon'/>
+                            </p>
+                            : null
+                        }
                         </span>
                     </a>
                 </Link>

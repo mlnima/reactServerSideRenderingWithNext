@@ -1,11 +1,12 @@
 import React, {useState, useRef, useEffect} from 'react';
 import {savePost} from '../../../../_variables/ajaxPostsVariables'
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 import styled from "styled-components";
+import {adminSaveNewPost} from "../../../../store/adminActions/adminPanelPostsActions";
 
 const PostsImporterStyledDiv = styled.div`
   display: flex;
@@ -29,6 +30,7 @@ const postsImporter = () => {
     const userData = useSelector((store: StoreTypes) => store?.user.userData)
     const statusElement = useRef(null)
     const dataPreview = useRef(null)
+    const dispatch = useDispatch()
     const [state, setState] = useState({
         status: 'draft'
     });
@@ -36,13 +38,14 @@ const postsImporter = () => {
     const [posts, setPosts] = useState([])
 
     const onImportPostsHandler = async () => {
-        let finalPostsDataToSave = []
         for await (let post of posts) {
-            post.status =  statusElement.current.value ||  'draft'
-            post.author = post.author || userData._id
-            finalPostsDataToSave = [...finalPostsDataToSave,post]
+            const postDataToSave = {
+                ...post,
+                status:  statusElement.current.value || 'draft',
+                author:  userData._id
+            }
+            dispatch(adminSaveNewPost(postDataToSave,null))
         }
-        console.log(finalPostsDataToSave)
     }
 
 
@@ -53,8 +56,6 @@ const postsImporter = () => {
             if (typeof e.target.result === "string") {
                 const parsedPosts = JSON.parse(e.target.result)
                 if (parsedPosts.length){
-
-
                     setPosts(parsedPosts)
                 }
             }

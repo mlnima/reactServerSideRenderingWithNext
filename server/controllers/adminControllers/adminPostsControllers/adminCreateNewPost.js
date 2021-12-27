@@ -15,7 +15,6 @@ module.exports = async (req, res) => {
         const newPostDataToSave = new postSchema(editedNewPost);
         newPostDataToSave.save().then(savedPostData => {
             res.json({savedPostData,message: 'Post Has Been Saved'});
-
         }).catch(err => {
             if (err.code === 11000) {
                 res.status(400).send({message: 'Post with this Title already exist in the Database',err})

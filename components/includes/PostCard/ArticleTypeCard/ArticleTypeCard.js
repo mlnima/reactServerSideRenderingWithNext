@@ -1,13 +1,14 @@
 import Link from "next/link";
 import ArticleCardMedia from "./ArticleCardMedia";
-import _ from "lodash";
-import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
-import CardTitle from "../asset/CardTitle/CardTitle";
+import ArticleTypeCardTitle from "./ArticleTypeCardTitle";
+import {faEye} from "@fortawesome/free-regular-svg-icons";
+import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 
 const ArticleCard = styled.div`
-  width: ${props => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
+  width: ${props => props?.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
   max-width: ${props => props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
   display: flex;
   flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
@@ -32,7 +33,6 @@ const ArticleCard = styled.div`
     .article-card-under-media {
       width: 100%;
       height: ${props => props.postElementSize === 'list' ? '65px' : 'auto'};
-
       display: flex;
       flex-direction: column;
       justify-content: space-between;
@@ -54,7 +54,11 @@ const ArticleCard = styled.div`
           margin: 2px 0;
           padding: 0 2px;
           color: var(--post-element-info-text-color,#ccc);
-
+          .icon{
+            width: 14px;
+            height: 14px;
+            margin: 0 2px;
+          }
           span {
             margin: 0 2px;
           }
@@ -67,43 +71,54 @@ const ArticleCard = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
-
     width: ${props => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
     max-width: ${props => props.postElementSize === 'list' ? `320px` : `100%`};
     flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
-
     margin: 7px;
-
     .article-card-link {
       flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
     }
   }
-
 `
-
-
 const ArticleTypeCard = props => {
-
-    const metaPreviewData = [...(props.post.actors || []), ...(props.post.tags || []), ...(props.post.categories || [])]
-    const metaPreview = _.uniqBy(metaPreviewData, function (e) {
-        return e.name;
-    })
+    const postUrl = `/post/${props.post.postType}/${props.post._id}`
     return (
         <ArticleCard className='article-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                 <a rel='next' onClick={ props.onActivateLoadingHandler} className='article-card-link' title={props.title} >
-
                     <ArticleCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
+                </a>
+            </Link>
+            <ArticleTypeCardTitle title={props.post.title}
+                                  postUrl={postUrl}
+                                  onActivateLoadingHandler={props.onActivateLoadingHandler}
+                                  cardWidth={props.cardWidth}
+                                  tags={props.post?.tags}
+                                  categories={props.post?.categories}/>
+            <Link href={postUrl} scroll={false}>
+                <a rel='next' className='article-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
                     <div className='article-card-under-media'>
-                        <CardTitle title={props.title}/>
                         <div className='article-card-under-media-info'>
-                            {props.post.postType === ('article') ? <span className='article-card-views article-card-info-data'><span>{props.views}</span> {props.t(`common:Views`)}</span> : null}
-                            {props.post.postType === ('article') ? <span className='article-card-rating article-card-info-data'><span>{props.rating}</span> % </span> : null}
+                            {props.post.postType === ('article') ?
+                                <span className='article-card-views article-card-info-data'>
+                                    <span>{props.views}</span>
+                                    <FontAwesomeIcon icon={faEye} className='icon'/>
+                                    {/*{props.t(`common:Views`)}*/}
+                                </span>
+                                : null
+                            }
+                            {props.post.postType === ('article') ?
+                                <span className='article-card-rating article-card-info-data'>
+                                    <span>{props.rating}</span>
+                                    %
+                                    <FontAwesomeIcon icon={faThumbsUp} className='icon'/>
+                                </span>
+                                : null
+                            }
                         </div>
                     </div>
                 </a>
             </Link>
-            {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
         </ArticleCard>
 
     );
