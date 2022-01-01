@@ -1,10 +1,11 @@
 //queryGeneratorForGettingPosts
 module.exports = data =>{
-     const size = data?.size || data?.count
-     const sort = data?.sort || data?.sortBy
-     const meta = data.metaId || data?.selectedMetaForPosts
+     const size = parseInt(data?.size || data?.count || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || '30' );
+     const sort = data?.sort || data?.sortBy;
+     const meta = data.metaId || data?.selectedMetaForPosts;
+console.log(size)
     return {
-         size : size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE ? parseInt(size|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE )  > 500 ? 500 : parseInt(size|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE )  : 30,
+         size : size > 1000 ? 1000 : size,
          page : data?.page ? parseInt(data?.page) : 1,
          postTypeQuery : data?.postType ? {postType: data.postType} : {},
          statusQuery : data?.status ? data?.status === 'all' ? {status: {$ne: 'trash'}} : {status: data.status} : {status: 'published'} ,

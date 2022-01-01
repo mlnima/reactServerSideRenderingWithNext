@@ -6,14 +6,14 @@ import styled from "styled-components";
 const CardMetaItemStyledLink = styled.a`
   color: var(--main-active-color, #ccc);
   font-size: 12px;
-  transition: .3s;
+  transition: .5s;
   .icon{
     width: 10px;
     height: 8px;
     margin: 0 .5px 0 3px;
   }
   &:hover {
-    filter: invert(70%);
+    color: var(--post-element-text-color,#ccc);
   }
   @media only screen and (min-width: 768px) {
     font-size: 14px;
