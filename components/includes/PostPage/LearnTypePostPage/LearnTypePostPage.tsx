@@ -1,7 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import PostPageStyledMain from '../PostPageStyle'
 import {useSelector} from "react-redux";
-import {useRouter} from "next/router";
 import {settingsPropTypes, StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import styled from "styled-components";

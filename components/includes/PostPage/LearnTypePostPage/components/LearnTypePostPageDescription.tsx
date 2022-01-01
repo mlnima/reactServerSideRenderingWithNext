@@ -7,13 +7,13 @@ import spacer from '@react-page/plugins-spacer';
 import divider from '@react-page/plugins-divider';
 import html5video from '@react-page/plugins-html5-video';
 import video from '@react-page/plugins-video';
-// @ts-ignore
 import background, { ModeEnum } from '@react-page/plugins-background';
 import codeSnippet from '../../../../adminIncludes/TextEditors/TextEditorReactPage/plugins/codeSnippet';
 import '@react-page/editor/lib/index.css';
 import '@react-page/plugins-slate/lib/index.css';
 import '@react-page/plugins-image/lib/index.css';
 import styled from "styled-components";
+import { createTheme } from '@material-ui/core/styles';
 
 const cellPlugins = [slate(), background({
     // imageUpload: fakeImageUploadService('/images/sea-bg.jpg'),

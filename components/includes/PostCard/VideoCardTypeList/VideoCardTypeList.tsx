@@ -27,7 +27,6 @@ const VideoCardTypeListStyledArticle = styled.article`
     display: flex;
     flex-direction: column;
     justify-content: flex-start;
-    //padding: 3px 20px 3px 0;
     height: 100%;
     box-sizing: border-box;
 
@@ -47,41 +46,24 @@ const VideoCardTypeListStyledArticle = styled.article`
         margin: 2px 0;
         color: var(--post-element-info-text-color, #ccc);
         font-size: var(--video-card-list-info-font-size);
+        
         .icon {
           width: 14px;
           height: 14px;
           margin: 0 2px;
         }
+        
         .thumbs-up{
           width: 12px;
           height: 12px;
         }
+        
         span {
           margin: 0 2px;
         }
 
       }
-
-      //.video-card-duration {
-      //  justify-content: flex-end;
-      //}
-      //
-      //.video-card-views, .video-card-quality {
-      //  justify-content: flex-start;
-      //}
-      //
-      //.video-card-rating {
-      //  justify-content: flex-end;
-      //  width: calc(50% - 24px);
-      //}
-      //.last-update {
-      //  font-size: 9px;
-      //  margin: 2px 5px;
-      //}
-
     }
-
-
   }
 
   @media only screen and (min-width: 768px) {
@@ -89,11 +71,15 @@ const VideoCardTypeListStyledArticle = styled.article`
     --video-card-list-info-font-size: 12px;:${(props: { isSidebar: boolean }) => props.isSidebar ? '12px' : '14px'};
     width: ${(props: { isSidebar: boolean }) => props.isSidebar ? '320px' : '100%'};
     max-width: 750px;
+    transition: .3s;
+    &:hover{
+      transform: scale(1.03);
+    }
+
   }
 `
 
 interface VideoCardTypeListPropTypes {
-    t: any,
     post: PostTypes,
     cardWidth: number,
     views: string,
@@ -160,4 +146,5 @@ const VideoCardTypeList = (props: VideoCardTypeListPropTypes) => {
         </VideoCardTypeListStyledArticle>
     );
 };
-export default withTranslation(['common'])(VideoCardTypeList);
+//export default withTranslation(['common'])(VideoCardTypeList);
+export default VideoCardTypeList;

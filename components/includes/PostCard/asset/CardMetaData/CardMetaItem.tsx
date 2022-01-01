@@ -6,6 +6,7 @@ import styled from "styled-components";
 const CardMetaItemStyledLink = styled.a`
   color: var(--main-active-color, #ccc);
   font-size: 12px;
+  transition: .3s;
   .icon{
     width: 10px;
     height: 8px;

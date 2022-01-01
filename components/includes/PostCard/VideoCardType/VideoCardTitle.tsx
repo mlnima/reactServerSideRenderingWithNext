@@ -2,6 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Link from "next/link";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
+import {MetasPropTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const CardTitleStyledDiv = styled.div`
   color: var(--post-element-text-color, #ccc);
@@ -15,13 +16,13 @@ const CardTitleStyledDiv = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 12px;
-
-
+  -webkit-transition: all .3s ease-in-out;
   
   .video-card-title-link {
     color: var(--post-element-text-color, #ccc);
     text-decoration: none;
     margin: 0;
+    transition: .3s;
     &:hover {
       filter: invert(70%);
     }
@@ -47,21 +48,9 @@ interface VideoCardTitlePropTypes {
     postUrl: string,
     onActivateLoadingHandler: any,
     cardWidth: number,
-    actors: {
-        type: string,
-        name: string,
-        _id: string,
-    }[],
-    tags: {
-        type: string,
-        name: string,
-        _id: string,
-    }[],
-    categories: {
-        type: string,
-        name: string,
-        _id: string,
-    }[],
+    actors: MetasPropTypes[],
+    tags: MetasPropTypes[],
+    categories: MetasPropTypes[],
 }
 
 

@@ -1,6 +1,7 @@
 import React, { useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
+import VideoCardInfo from "./VideoCardInfo";
 
 interface styleProps{
     cardWidth:number,
@@ -8,6 +9,7 @@ interface styleProps{
 }
 
 let VideoCardMediaStyledDiv = styled.div`
+  position: relative;
   @keyframes opacityAnimationStart {
     0% {
       opacity: 0;
@@ -27,6 +29,45 @@ let VideoCardMediaStyledDiv = styled.div`
     width: ${(props : styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
     height: ${(props : styleProps) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
     object-fit: contain;
+  }
+
+  .video-card-info-data{
+    position: absolute;
+    color: var(--main-active-color, #ccc);
+    background-color: rgba(0,0,0,0.5);
+    margin: 0;
+    --video-card-info-distance:3px;
+    padding: 2px;
+    border-radius: 2px;
+    display: flex;
+    align-items: center;
+    font-size: 12px;
+    .icon{
+      width: 14px;
+      height: 14px;
+      margin: 0 2px;
+
+    }
+    .thumbs-up{
+      width: 12px;
+      height: 12px;
+    }
+  }
+  .video-card-quality{
+    top:var(--video-card-info-distance,2px);
+    left:var(--video-card-info-distance,2px);
+  }
+  .video-card-duration{
+    top:var(--video-card-info-distance,2px);
+    right:var(--video-card-info-distance,2px);
+  }
+  .video-card-views{
+    bottom:var(--video-card-info-distance,2px);
+    right:var(--video-card-info-distance,2px);
+  }
+  .video-card-rating{
+    bottom:var(--video-card-info-distance,2px);
+    left:var(--video-card-info-distance,2px);
   }
 
   @media only screen and (min-width: 768px) {
@@ -61,6 +102,10 @@ interface VideoCardMediaPropTypes {
     cardWidth:number,
     mediaAlt:string,
     noImageUrl:string,
+    views:number,
+    rating:number,
+    quality:string,
+    duration:string,
 }
 
 const VideoCardMedia = (props:VideoCardMediaPropTypes) => {
@@ -86,6 +131,11 @@ const VideoCardMedia = (props:VideoCardMediaPropTypes) => {
                     <source src={props.post.VideoTrailerUrl}/>
                     Sorry, your browser doesn't support embedded videos.
                 </video>
+               <VideoCardInfo  views={props.views}
+                               rating={props.rating}
+                               duration={props.duration}
+                               quality={props.quality}
+                />
             </VideoCardMediaStyledDiv>
         )
     } else {
@@ -105,6 +155,11 @@ const VideoCardMedia = (props:VideoCardMediaPropTypes) => {
                      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
                      onError={()=>setGotError(true)}
+                />
+                <VideoCardInfo  views={props.views}
+                                rating={props.rating}
+                                duration={props.duration}
+                                quality={props.quality}
                 />
             </VideoCardMediaStyledDiv>
         )
