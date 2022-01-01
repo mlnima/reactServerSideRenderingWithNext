@@ -38,6 +38,7 @@ const tagPage = (props: ClientPagesTypes) => {
     const settings = useSelector((store: settingsPropTypes) => store.settings);
 
     const router = useRouter()
+    console.log(process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE)
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
             {tag ? <PostsPageInfo titleToRender={tag.name}/> : null}

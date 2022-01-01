@@ -4,7 +4,7 @@ module.exports = data =>{
      const sort = data?.sort || data?.sortBy
      const meta = data.metaId || data?.selectedMetaForPosts
     return {
-         size : size ? parseInt(size)  > 500 ? 500 : parseInt(size)  : 30,
+         size : size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE ? parseInt(size|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE )  > 500 ? 500 : parseInt(size|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE )  : 30,
          page : data?.page ? parseInt(data?.page) : 1,
          postTypeQuery : data?.postType ? {postType: data.postType} : {},
          statusQuery : data?.status ? data?.status === 'all' ? {status: {$ne: 'trash'}} : {status: data.status} : {status: 'published'} ,

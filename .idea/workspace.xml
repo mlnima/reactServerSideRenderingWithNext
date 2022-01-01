@@ -20,8 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardTypeList/VideoCardTypeList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardTypeList/VideoCardTypeList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_queryGeneratorForGettingPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_queryGeneratorForGettingPosts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -942,7 +943,7 @@
       <workItem from="1640909974469" duration="1630000" />
       <workItem from="1640956587628" duration="3110000" />
       <workItem from="1640988919883" duration="623000" />
-      <workItem from="1641034410057" duration="19071000" />
+      <workItem from="1641034410057" duration="20765000" />
     </task>
     <servers />
   </component>
