@@ -3,9 +3,8 @@ import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
 import React from "react";
 
 let StyledSideBar = styled.aside`
-background-color: var(--sidebar-background-color,#18181b);
-grid-area: ${(props:{gridArea:string})  => props.gridArea ||''} ;
-
+  background-color: var(--sidebar-background-color,#18181b);
+  ${(props:{gridArea:string})  => `grid-area:${props.gridArea ||''}` } ;
 `
 interface SideBarWidgetAreaProps {
     className: string;
@@ -18,6 +17,7 @@ const SideBarWidgetArea = ({className,position,gridArea}:SideBarWidgetAreaProps)
         <StyledSideBar className={className + ' widget-area ' + position}  gridArea={gridArea}>
             <WidgetsRenderer
                 position={position}
+                isSidebar={true}
             />
         </StyledSideBar>
     );

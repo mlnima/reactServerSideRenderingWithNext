@@ -3,6 +3,7 @@ import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 
 let VideoCardTypeListMediaStyledDiv = styled.div`
+  width: 100%;
   @keyframes opacityAnimationStart {
     0% {
       opacity: 0;
@@ -13,17 +14,19 @@ let VideoCardTypeListMediaStyledDiv = styled.div`
   }
 
   .video-card-trailer {
-    width: 168px;
-    height: 94px;
-    margin-right: 8px;
+    //width: 168px;
+    //height: 94px;
+    width: 100%;
+  //  height: 94px;
+    //margin-right: 8px;
     animation: opacityAnimationStart 2s alternate;
     object-fit: contain;
   }
 
   .video-card-image {
-    width: 168px;
-    height: 94px;
-    margin-right: 8px;
+    width: 100%;
+   // height: calc(100%/1.777);
+    //margin-right: 8px;
     object-fit: contain;
     
   }
@@ -31,7 +34,7 @@ let VideoCardTypeListMediaStyledDiv = styled.div`
 
 const NoImageStyleDiv = styled.div`
   width: 100%;
-  height: calc(48vw / 1.777);
+  //height: calc(48vw / 1.777);
   display: flex;
   justify-content: center;
   align-items: center;
@@ -68,10 +71,8 @@ const VideoCardTypeListMedia = (props: VideoCardTypeListMediaPropTypes) => {
                     loop={false}
                     onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                     onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
-                    // @ts-ignore
-                    muted="muted"
-                    // @ts-ignore
-                    playsInline="playsinline"
+                    muted
+                    playsInline
                     className='video-card-trailer'>
                     <source src={props.post.VideoTrailerUrl}/>
                     Sorry, your browser doesn't support embedded videos.
@@ -89,7 +90,7 @@ const VideoCardTypeListMedia = (props: VideoCardTypeListMediaPropTypes) => {
             )
         } else return (
             // @ts-ignore
-            <VideoCardTypeListMediaStyledDiv className={'video-card-media'} postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
+            <VideoCardTypeListMediaStyledDiv className={'video-card-list-media'} postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
                 <img className='video-card-image'
                      alt={props.mediaAlt}
                      src={props?.post.mainThumbnail}

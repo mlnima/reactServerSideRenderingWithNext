@@ -50,6 +50,13 @@ const StyleSection = props => {
 
     return (
         <StyleSectionStyledDiv className='style-section'>
+            {props.name === 'customStyles' ?
+                <div className='style-section-editor'>
+                    <p>Sidebar width:</p>
+                    <input type={'number'} name={'sideBarWidth'} placeholder={'default value is 320px'} value={design?.sideBarWidth || ''} onChange={onChangeHandler}/>
+                </div>
+                :null
+            }
             <h1>{props.title}</h1>
             <div className='style-section-editor'>
                 <MonacoEditor

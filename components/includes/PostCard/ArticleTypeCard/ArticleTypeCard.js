@@ -54,10 +54,15 @@ const ArticleCard = styled.div`
           margin: 2px 0;
           padding: 0 2px;
           color: var(--post-element-info-text-color,#ccc);
+          font-size: 12px;
           .icon{
             width: 14px;
             height: 14px;
             margin: 0 2px;
+          }
+          .thumbs-up{
+            width: 12px;
+            height: 12px;
           }
           span {
             margin: 0 2px;
@@ -109,9 +114,8 @@ const ArticleTypeCard = props => {
                             }
                             {props.post.postType === ('article') ?
                                 <span className='article-card-rating article-card-info-data'>
-                                    <span>{props.rating}</span>
-                                    %
-                                    <FontAwesomeIcon icon={faThumbsUp} className='icon'/>
+                                    <FontAwesomeIcon icon={faThumbsUp} className='icon thumbs-up'/>
+                                    <span>{props.rating}%</span>
                                 </span>
                                 : null
                             }

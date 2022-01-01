@@ -5,6 +5,10 @@ import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import LearnTypeCardMedia from "./LearnTypeCardMedia";
+import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faEye} from "@fortawesome/free-regular-svg-icons";
+import LearnTypeCardTitle from "./LearnTypeCardTitle";
 
 const LearnTypeCardStyledDiv = styled.div`
   width: ${(props : {cardWidth:number,postElementSize:string}) => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
@@ -17,9 +21,7 @@ const LearnTypeCardStyledDiv = styled.div`
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
-  .card-title{
-    margin-top: 10px;
-  }
+
 
   .learn-post-card-link {
     position: relative;
@@ -57,9 +59,15 @@ const LearnTypeCardStyledDiv = styled.div`
           margin: 2px 0;
           padding: 0 2px;
           color: var(--post-element-info-text-color,#ccc);
-
-          span {
+          font-size: 12px;
+          .icon{
+            width: 14px;
+            height: 14px;
             margin: 0 2px;
+          }
+          .thumbs-up{
+            width: 12px;
+            height: 12px;
           }
         }
       }
@@ -84,25 +92,29 @@ const LearnTypeCardStyledDiv = styled.div`
 
 const LearnTypeCard = (props:any) => {
 
-    const metaPreviewData = [...(props.post?.actors || []), ...(props.post?.tags || []), ...(props.post?.categories || [])]
-    const metaPreview = _.uniqBy(metaPreviewData, function (e) {
-        return e.name;
-    })
+    const postUrl = `/post/${props.post?.postType}/${props.post?._id}`
     return (
         <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <Link href={`/post/${props.post?.postType}/${props.post?._id}`} scroll={false}>
+            <Link href={postUrl} scroll={false}>
                 <a rel='next' onClick={ props.onActivateLoadingHandler} className='learn-post-card-link' title={props.title}  >
                     <LearnTypeCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                     <div className='learn-post-card-under-media'>
-                        <CardTitle title={props.title} metas={undefined}/>
-                        {/*<div className='learn-post-card-under-media-info'>*/}
-                        {/*    <span className='learn-post-card-views learn-post-card-info-data'><span>{props.views}</span> {props.t(`common:Views`)}</span>*/}
-                        {/*    <span className='learn-post-card-rating learn-post-card-info-data'><span>{props.rating}</span> % </span>*/}
-                        {/*</div>*/}
+                        <LearnTypeCardTitle title={props.title}/>
+                        <div className='learn-post-card-under-media-info'>
+                            <span className='learn-post-card-views learn-post-card-info-data'>
+                                <span>
+                                    {props.views}
+                                </span>
+                               <FontAwesomeIcon icon={faEye} className='icon'/>
+                            </span>
+                            <span className='learn-post-card-rating learn-post-card-info-data'>
+                                <FontAwesomeIcon icon={faThumbsUp} className='icon thumbs-up'/>
+                                <span> {props.rating}%</span>
+                            </span>
+                        </div>
                     </div>
                 </a>
             </Link>
-            {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
         </LearnTypeCardStyledDiv>
 
     );

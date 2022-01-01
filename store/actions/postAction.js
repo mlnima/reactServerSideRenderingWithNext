@@ -52,13 +52,41 @@ export const addNewComment = (newComment)=>async dispatch=>{
 }
 
 export const deleteComments = (commentsListToDelete)=>async dispatch=>{
+    dispatch({
+        type:types.LOADING,
+        payload:true
+    })
    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteComments`, {
        commentsIds: commentsListToDelete,
        token: localStorage.wt
-   }).then(()=>{
+   }).then((res)=>{
        dispatch({
            type:types.DELETE_COMMENT,
            payload:commentsListToDelete
+       })
+       dispatch({
+           type:types.LOADING,
+           payload:false
+       })
+       dispatch({
+           type: types.SET_ALERT,
+           payload: {
+               message:res.data.message || 'Comment Deleted',
+               type: 'success'
+           }
+       }) ;
+   }).catch(err=>{
+       dispatch({
+           type:types.LOADING,
+           payload:false
+       })
+       dispatch({
+           type: types.SET_ALERT,
+           payload: {
+               message: 'Error While Deleting Comment',
+               type: 'error',
+               err
+           }
        })
    })
 }

@@ -21,6 +21,7 @@ const LearnTypeCard = dynamic(() => import('../PostCard/LearnTypeCard/LearnTypeC
 
 const PostsContentStyledDiv = styled.div`
   display: flex;
+  flex-direction: ${(props:{postElementSize:string}) => props.postElementSize === 'list' ? 'column' : 'row'} ;
   flex-wrap: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? 'nowrap' : 'wrap'};
   justify-content: center;
   overflow-y: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? 'scroll' : 'initial'};
@@ -35,15 +36,16 @@ const PostsContentStyledDiv = styled.div`
 `
 
 interface PostsComponentTypes {
-    viewType: string;
-    _id: string;
-    posts: PostTypes[];
+    viewType: string,
+    _id: string,
+    posts: PostTypes[],
     widgetId: string,
-    postElementSize:string
+    postElementSize:string,
+    isSidebar:boolean
 }
 
 
-const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentTypes) => {
+const Posts = ({viewType, _id, posts, widgetId,postElementSize,isSidebar}: PostsComponentTypes) => {
     const settings = useSelector((store: settingsPropTypes) => store.settings);
     const elementSize = postElementSize ? postElementSize : useSelector((store: settingsPropTypes) => store.settings?.design?.postElementSize);
     const dispatch = useDispatch()
@@ -56,7 +58,6 @@ const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentT
                 elementSize === 'small' ? 255 :
                     elementSize === 'medium' ? 320 : 255
     const noImageUrl = '/static/images/noImage/no-image-available.png';
-
     return (
         <PostsContentStyledDiv className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')} postElementSize={elementSize}>
 
@@ -83,14 +84,14 @@ const Posts = ({viewType, _id, posts, widgetId,postElementSize}: PostsComponentT
                 if (post.postType === 'video') {
                     if (elementSize === 'list') {
                         // @ts-ignore
-                        return <VideoCardTypeList onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                        return <VideoCardTypeList isSidebar={isSidebar} onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     } else {
                          return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     }
                 } else if (post.postType === 'promotion') {
                     if (elementSize === 'listSmall') {
                         // @ts-ignore
-                        return <PromotionCardListSmall onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                        return <PromotionCardListSmall isSidebar={isSidebar} onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     } else {
                         return <PromotionTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     }

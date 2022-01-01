@@ -7,11 +7,11 @@ module.exports = (req, res) => {
     })
 
     Promise.all(mapIdAndReturnDeletePromise).then(() => {
-        res.status(200)
+        res.json({message: 'Comments Deleted'});
 
     }).catch(err => {
         console.log(err)
-        res.status(500)
+        res.status(500).send({message: 'Something Went Wrong While Deleting Comments',err})
 
     })
 

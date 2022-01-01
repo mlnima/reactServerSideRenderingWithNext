@@ -7,7 +7,9 @@ const StyleSection = dynamic(() => import('../../../../components/adminIncludes/
 
 const customStyles = () => {
     return (
+        <>
         <StyleSection name='customStyles' title='Custom Styles :'/>
+        </>
     );
 };
 

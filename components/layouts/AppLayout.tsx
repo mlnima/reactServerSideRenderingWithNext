@@ -102,7 +102,7 @@ const AppLayout = (props: any) => {
             {/*// @ts-ignore*/}
             {userData?.role === 'administrator' ? <AdminDataSetter setSidebarsData={setSidebarsData} LayoutProps={props}/> : null}
             {/*// @ts-ignore*/}
-            <GlobalStyles colors={settings.design?.customColors || ''} globalStyleData={settings.design?.customStyles || ''}/>
+            <GlobalStyles colors={settings.design?.customColors || ''} globalStyleData={settings.design?.customStyles || ''} sideBarWidth={settings?.design?.sideBarWidth || 320}/>
             {/*// @ts-ignore*/}
             <SiteSettingSetter identity={settings.identity} design={settings.design} eCommerce={settings.eCommerce}/>
             {widgetsInGroups.topBar.length ?

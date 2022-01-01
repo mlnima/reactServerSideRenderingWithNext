@@ -7,8 +7,7 @@ interface styleProps{
     postElementSize:string
 }
 
-
-let VideoCardMediaStyled = styled.div`
+let VideoCardMediaStyledDiv = styled.div`
   @keyframes opacityAnimationStart {
     0% {
       opacity: 0;
@@ -17,7 +16,6 @@ let VideoCardMediaStyled = styled.div`
       opacity: 100%;
     }
   }
-
   .video-card-trailer {
     
     width: ${(props : styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
@@ -42,11 +40,7 @@ let VideoCardMediaStyled = styled.div`
       height: calc(${(props : styleProps) => props.cardWidth}px / 1.777);
     }
   }
-
 `
-
-
-
 const NoImageStyleDiv = styled.div`
   width: 100%;
   height: calc(48vw / 1.777);
@@ -61,11 +55,10 @@ const NoImageStyleDiv = styled.div`
     height: calc(${(props : {cardWidth?:number}) => props?.cardWidth}px / 1.777);
   }
 `
-
 interface VideoCardMediaPropTypes {
     post:PostTypes,
     postElementSize:string,
-    cardWidth:string,
+    cardWidth:number,
     mediaAlt:string,
     noImageUrl:string,
 }
@@ -79,46 +72,41 @@ const VideoCardMedia = (props:VideoCardMediaPropTypes) => {
     }
 
     if (props.post?.VideoTrailerUrl && hover) {
-
         return (
-            // @ts-ignore
-            <VideoCardMediaStyled className={'video-card-media'} postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
+            <VideoCardMediaStyledDiv className={'video-card-media'} postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
                 <video
                     // @ts-ignore
                     onMouseOver={event => event.target.play()}
                     loop={false}
                     onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                     onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
-                    // @ts-ignore
-                    muted="muted"
-                    // @ts-ignore
-                    playsInline="playsinline"
-                    className='video-card-trailer'>
+                    muted
+                    playsInline
+                    className={'video-card-trailer'}>
                     <source src={props.post.VideoTrailerUrl}/>
                     Sorry, your browser doesn't support embedded videos.
                 </video>
-            </VideoCardMediaStyled>
+            </VideoCardMediaStyledDiv>
         )
     } else {
 
         if (!props?.post.mainThumbnail || gotError){
             return (
-                // @ts-ignore
                 <NoImageStyleDiv cardWidth={props.cardWidth} className='no-image'>
                     <span className={'no-image-alt'}>{props.mediaAlt || 'NO IMAGE'}</span>
                 </NoImageStyleDiv>
             )
         }else return (
-            // @ts-ignore
-            <VideoCardMediaStyled className='video-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-                <img className='video-card-image'
+
+            <VideoCardMediaStyledDiv className={'video-card-media'} postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
+                <img className={'video-card-image'}
                      alt={props.mediaAlt}
                      src={props?.post.mainThumbnail}
                      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
                      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
                      onError={()=>setGotError(true)}
                 />
-            </VideoCardMediaStyled>
+            </VideoCardMediaStyledDiv>
         )
     }
 };

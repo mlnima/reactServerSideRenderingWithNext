@@ -20,6 +20,7 @@ const Widget = props => {
                 <props.widgetToRender
                     {...props.data}
                     widgetId={props.widgetId}
+                    isSidebar={props.isSidebar}
                     widget={true}
                     viewType={props.viewType}
                 /> : null}

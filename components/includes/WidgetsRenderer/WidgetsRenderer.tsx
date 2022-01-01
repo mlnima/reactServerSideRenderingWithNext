@@ -30,15 +30,14 @@ const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleL
 
 
 interface WidgetsRendererProps {
-    position: string;
-    _id?: string;
-    //homePageSidebar?: any;
-   // referer?: any;
+    position: string,
+    _id?: string,
+    isSidebar?:boolean,
     rendering?: boolean
 }
 
 
-const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
+const WidgetsRenderer = ({_id, position,isSidebar}: WidgetsRendererProps) => {
 
     const widgets = useSelector((store: StoreTypes) => store.widgets.widgets)
     const settings = useSelector((store: StoreTypes) => store.settings);
@@ -95,6 +94,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                 <Widget
                     key={index}
                     widgetId={widget._id}
+                    isSidebar={position ? position.includes('Sidebar'):false}
                     {...widget}
                     widgetToRender={widgetToRender}
                     postElementSize={settings.design?.postElementSize}

@@ -1,6 +1,7 @@
-
+import {MetasPropTypes} from './GlobalTypes'
 
 export interface PostTypes {
+    updatedAt: string;
     url?: string | undefined;
     currency: string;
     downloadLink: string;
@@ -20,12 +21,12 @@ export interface PostTypes {
     videoTrailerUrl?:string,
     price?:string,
     duration?:string,
-    actors?:object[],
+    actors?:MetasPropTypes[],
     quality?:string,
     _id?:string,
     mainThumbnail?:string,
     VideoTrailerUrl?:string,
-    categories:object[],
-    tags:object[]
+    categories:MetasPropTypes[],
+    tags:MetasPropTypes[]
 }
 

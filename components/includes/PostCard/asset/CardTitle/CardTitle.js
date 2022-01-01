@@ -10,15 +10,7 @@ const CardTitleStyledDiv = styled.div`
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
-  //justify-content: flex-start;
-  ////flex-direction: column;
-  //-webkit-line-clamp:1;
-  //text-overflow: ellipsis;
-  //overflow: hidden;
   display: -webkit-box !important;
-  //-webkit-box-orient: vertical;
- 
-
   .card-title-metas{
     margin: 0 3px;
     .card-meta-data{
@@ -31,9 +23,6 @@ const CardTitleStyledDiv = styled.div`
   }
 
   h3 {
-
-
-   
     font-weight: initial;
     font-size: 12px;
     margin: 0;
@@ -51,17 +40,6 @@ const CardTitleStyledDiv = styled.div`
 
   }
 `
-
-// -webkit-line-clamp: ${props => props?.postElementSize === 'list' ? 1 : 1};
-// width: ${props => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-// max-width: ${props => props.postElementSize === 'list' ? `50vw` : `calc(100% - 4px)`};
-// padding: ${props => props.postElementSize === 'list' ? 0 : '2px'} 2px;
-// width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
-// font-size: 14px;
-// h3 {
-//   width: ${props => props.postElementSize === 'list' ? `100%` : `${props.cardWidth}px`};
-//   font-size: 14px;
-// }
 const CardTitle = ({title, metas}) => {
 
 

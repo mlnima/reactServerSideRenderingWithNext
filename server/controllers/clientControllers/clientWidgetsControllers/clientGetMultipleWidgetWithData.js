@@ -4,12 +4,10 @@ module.exports = async (req, res) => {
 
     try {
         const locale = req.query.locale
-        // const today = new Date().toLocaleString('en-us', {weekday: 'long'}).toLowerCase()
         const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
         const excludeOtherLanguagesQuery = locale ? {select: locales.map(languageCode => languageCode !== locale ? `-data.translations.${languageCode}` : '').join(' ')} : {}
         const requestedWidgets = Array.isArray(req.query.widget.isArray) ? req.query.widget : [req.query.widget]
         const widgetsDataQuery = requestedWidgets.map(position => position === 'all' ? {} : {'data.position': position})
-        // const specificDayToRenderQuery = [{specificDayToRender: today},{specificDayToRender: 'all'},{specificDayToRender: undefined}]
         const widgets = await widgetSchema.find(
             {$or: [...widgetsDataQuery]},
             {},
@@ -18,7 +16,7 @@ module.exports = async (req, res) => {
                     {
                         path: 'data.posts',
                         populate: [{path: 'actors', select: {'name': 1, 'type': 1}, options: {limit: 3}}, {path: 'categories', select: {'name': 1, 'type': 1}, options: {limit: 3}}, {path: 'tags', select: {'name': 1, 'type': 1}}],
-                        select: {'_id': 1, 'redirectLink': 1, 'title': 1, 'mainThumbnail': 1, 'quality': 1, 'duration': 1, 'views': 1, 'translations': 1, 'VideoTrailerUrl': 1, 'postType': 1, 'likes': 1, 'disLikes': 1}
+                        select: {'_id': 1, 'redirectLink': 1, 'title': 1, 'mainThumbnail': 1, 'quality': 1, 'duration': 1, 'views': 1, 'translations': 1, 'VideoTrailerUrl': 1, 'postType': 1, 'likes': 1, 'disLikes': 1, 'updatedAt': 1}
                     },
             ])
             .sort({updatedAt: -1})

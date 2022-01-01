@@ -1,7 +1,11 @@
 import {createGlobalStyle} from "styled-components";
-
+interface GlobalStylesPropTypes {
+  colors:string,
+  globalStyleData:string,
+  sideBarWidth:number,
+}
 let GlobalStyles = createGlobalStyle`
-  ${props => props?.colors?.includes(':root') ? props.colors :`:root {${props.colors}}`}
+  ${(props:GlobalStylesPropTypes ) => props?.colors?.includes(':root') ? props.colors :`:root {${props.colors}}`}
   body {
     background-color: var(--main-background-color, #000);
     margin: 0;
@@ -201,7 +205,7 @@ let GlobalStyles = createGlobalStyle`
       font-size: 14px;
     }
     .leftSidebar {
-      grid-template-columns: 320px 1fr;
+      grid-template-columns: ${(props:GlobalStylesPropTypes )=> (props.sideBarWidth || 320)+'px'} 1fr;
       grid-template-areas:  'topbar topbar'
                                         'header header' 
                                         'navigation navigation'
@@ -267,7 +271,7 @@ let GlobalStyles = createGlobalStyle`
     }
   }
 
-  ${props => props.globalStyleData}
+  ${(props:GlobalStylesPropTypes ) => props.globalStyleData}
 `
 
 export default GlobalStyles;

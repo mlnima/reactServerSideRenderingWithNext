@@ -6,66 +6,89 @@ import VideoCardTypeListTitle from "./VideoCardTypeListTitle";
 import _qualityConvertor from "../asset/_qualityConvertor";
 import {withTranslation} from "next-i18next";
 import Link from "next/link";
+import moment from "moment";
+import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
+import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 
-const VideoCardTypeListStyledDiv = styled.div`
-  display: flex;
-  width: auto;
-  
-  *{
-    font-size: 12px;
-  }
-  
+const VideoCardTypeListStyledArticle = styled.article`
+  --video-card-list-font-size: 12px;
+  --video-card-list-info-font-size: 12px;
+  display: grid;
+  grid-template-columns: 40% 60%;
+  width: 100%;
+  max-width: 100vw;
+  font-size: var(--video-card-list-font-size);
+  margin: auto;
+
   .video-card-list-data {
-    position: relative;
+
     width: 100%;
-    min-width: 0;
-    
-    .metadata{
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      padding: 3px 20px 3px 0;
-      min-width: 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    //padding: 3px 20px 3px 0;
+    height: 100%;
+    box-sizing: border-box;
+
+    .video-card-link {
       width: 100%;
-      height: 100%;
-      box-sizing: border-box;
-      
-      .video-card-link{
-        .video-card-list-info {
-          display: flex;
-          justify-content: space-between;
-          align-items: center;
-          flex-wrap: wrap;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      margin: 2px 0;
+
+      .video-card-info-data {
+        width: calc(50% - 8px);
+        display: flex;
+        padding: 0 2px;
+        align-items: center;
+        margin: 2px 0;
+        color: var(--post-element-info-text-color, #ccc);
+        font-size: var(--video-card-list-info-font-size);
+        .icon {
+          width: 14px;
+          height: 14px;
           margin: 0 2px;
-
-          .video-card-info-data {
-            width: calc(50% - 8px);
-            display: flex;
-            padding: 0 2px;
-            align-items: center;
-            margin: 2px 0;
-            color: var(--post-element-info-text-color, #ccc);
-
-            span {
-              margin: 0 2px;
-            }
-          }
-
-          .video-card-duration {
-            justify-content: flex-end;
-          }
-
-          .video-card-views, .video-card-quality {
-            justify-content: flex-start;
-          }
-
-          .video-card-rating {
-            justify-content: flex-end;
-            width: calc(50% - 24px);
-          }
         }
+        .thumbs-up{
+          width: 12px;
+          height: 12px;
+        }
+        span {
+          margin: 0 2px;
+        }
+
       }
+
+      //.video-card-duration {
+      //  justify-content: flex-end;
+      //}
+      //
+      //.video-card-views, .video-card-quality {
+      //  justify-content: flex-start;
+      //}
+      //
+      //.video-card-rating {
+      //  justify-content: flex-end;
+      //  width: calc(50% - 24px);
+      //}
+      //.last-update {
+      //  font-size: 9px;
+      //  margin: 2px 5px;
+      //}
+
     }
+
+
+  }
+
+  @media only screen and (min-width: 768px) {
+    --video-card-list-font-size: ${(props: { isSidebar: boolean }) => props.isSidebar ? '14px' : '18px'};
+    --video-card-list-info-font-size: 12px;:${(props: { isSidebar: boolean }) => props.isSidebar ? '12px' : '14px'};
+    width: ${(props: { isSidebar: boolean }) => props.isSidebar ? '320px' : '100%'};
+    max-width: 750px;
   }
 `
 
@@ -77,7 +100,8 @@ interface VideoCardTypeListPropTypes {
     rating: string,
     postElementSize: string,
     onActivateLoadingHandler: any,
-    title: string
+    title: string,
+    isSidebar: boolean,
 }
 
 const VideoCardTypeList = (props: VideoCardTypeListPropTypes) => {
@@ -86,33 +110,54 @@ const VideoCardTypeList = (props: VideoCardTypeListPropTypes) => {
 
 
     return (
-        <VideoCardTypeListStyledDiv>
+        <VideoCardTypeListStyledArticle className={'video-card-list-type'} isSidebar={props.isSidebar}>
             <Link href={postUrl} scroll={false}>
-                <a rel='next' className='video-card-link' title={props.title} onClick={ props.onActivateLoadingHandler}>
+                <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
                     <VideoCardTypeListMedia postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                 </a>
             </Link>
 
             <div className={'video-card-list-data'}>
+                <VideoCardTypeListTitle postUrl={postUrl} onActivateLoadingHandler={props.onActivateLoadingHandler} title={props.title} actors={props.post?.actors} tags={props.post?.tags} categories={props.post?.categories}/>
+                <Link href={postUrl} scroll={false}>
+                    <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
+                        <p className='video-card-views video-card-info-data'>
+                            {props.views}
+                            <FontAwesomeIcon icon={faEye} className={'icon'}/>
+                        </p>
+                        {props.post?.updatedAt ?
+                            <p className={'last-update video-card-info-data'}>
+                                  {moment(new Date(props.post?.updatedAt), 'YYYYMMDD').fromNow(false)}
+                            </p>
+                            : null
+                        }
+                        {props.post.quality ?
+                            <p className='video-card-quality video-card-info-data'>
+                                {_qualityConvertor(props.post.quality)}
+                            </p>
+                            : null
+                        }
+                        {props.post.duration ?
+                            <p className='video-card-duration video-card-info-data'>
+                                {props.post.duration}
+                                <FontAwesomeIcon icon={faClock} className={'icon'}/>
+                            </p>
+                            : null
+                        }
 
-                <div className={'metadata'}>
-                {/*// @ts-ignore*/}
-                   <VideoCardTypeListTitle postUrl={postUrl} onActivateLoadingHandler={props.onActivateLoadingHandler} title={props.title} actors={props.post?.actors} tags={props.post?.tags} categories={props.post?.categories}/>
-                    <Link href={postUrl} scroll={false}>
-                        <a rel='next' className='video-card-link' title={props.title} onClick={ props.onActivateLoadingHandler}>
-                            <span className='video-card-list-info'>
-                                {props.post.quality ? <p className='video-card-quality video-card-info-data'>{_qualityConvertor(props.post.quality)} </p> : null}
-                                {props.post.duration ? <p className='video-card-duration video-card-info-data'>{props.post.duration} </p> : null}
-                                <p className='video-card-views video-card-info-data'><span>{props.views}</span>{props.t(`common:Views`)} </p>
-                                <p className='video-card-rating video-card-info-data'><span>{props.rating}</span> % </p>
-                            </span>
-                        </a>
-                    </Link>
-                </div>
+                        <p className='video-card-rating video-card-info-data'>
+                            <FontAwesomeIcon icon={faThumbsUp} className={'icon thumbs-up'}/>
+                            {props.rating || 0}
+                            %
+                        </p>
+
+                    </a>
+                </Link>
+
 
             </div>
 
-        </VideoCardTypeListStyledDiv>
+        </VideoCardTypeListStyledArticle>
     );
 };
 export default withTranslation(['common'])(VideoCardTypeList);
