@@ -24,6 +24,7 @@ let PostsContainer = styled.div`
 const PostsPage = () => {
     // @ts-ignore
     const posts = useSelector(store => store?.posts?.posts)
+    const postsCountPerPage = useSelector(store => store?.settings?.identity.postsCountPerPage ? parseInt(store?.settings?.identity.postsCountPerPage)  : 30)
     const totalCount = useSelector(store => store?.posts?.totalCount)
     const postsToRender = useMemo(()=>{
         return posts
@@ -40,8 +41,8 @@ const PostsPage = () => {
                 isActive={true}
                 currentPage={router.query.page || 1}
                 totalCount={totalCount}
-                size={ process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30}
-                maxPage={Math.ceil(totalCount / parseInt( process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30))}
+                size={ postsCountPerPage }
+                maxPage={Math.ceil(totalCount /postsCountPerPage)}
             />
             <PostsContainer className='posts-container'>
                 <Posts
@@ -52,8 +53,8 @@ const PostsPage = () => {
                 isActive={true}
                 currentPage={router.query.page || 1}
                 totalCount={totalCount}
-                size={process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30}
-                maxPage={Math.ceil(totalCount / parseInt( process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 30))}
+                size={ postsCountPerPage }
+                maxPage={Math.ceil(totalCount /postsCountPerPage)}
             />
         </React.Fragment>
     );
