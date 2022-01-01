@@ -72,10 +72,6 @@ const VideoCardTypeListStyledArticle = styled.article`
     width: ${(props: { isSidebar: boolean }) => props.isSidebar ? '320px' : '100%'};
     max-width: 750px;
     transition: .3s;
-    &:hover{
-      transform: scale(1.03);
-    }
-
   }
 `
 

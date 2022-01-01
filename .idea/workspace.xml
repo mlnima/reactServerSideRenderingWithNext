@@ -20,16 +20,8 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardInfo.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardTypeList/VideoCardTypeList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardTypeList/VideoCardTypeList.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -950,7 +942,7 @@
       <workItem from="1640909974469" duration="1630000" />
       <workItem from="1640956587628" duration="3110000" />
       <workItem from="1640988919883" duration="623000" />
-      <workItem from="1641034410057" duration="18352000" />
+      <workItem from="1641034410057" duration="19071000" />
     </task>
     <servers />
   </component>

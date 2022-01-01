@@ -35,9 +35,6 @@ let VideoCardStyledArticle = styled.article`
     margin: 7px;
     font-size: 14px;
     transition: .3s;
-    &:hover{
-      transform: scale(1.1);
-    }
   }
 `
 
