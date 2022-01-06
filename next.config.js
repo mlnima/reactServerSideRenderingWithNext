@@ -6,6 +6,7 @@ const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
 const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
+const allowedDomainForImages = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.split(' ')
 const withPWA = require('next-pwa')
 const withCSS = require('@zeit/next-css')
 const withSass = require('@zeit/next-sass')
@@ -67,7 +68,7 @@ const redirects = () => {
 
 const nextImageConfig = {
     images: {
-        domains: process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.split(' '),
+        domains: allowedDomainForImages,
         deviceSizes: [320, 375, 414, 540, 640, 717, 750, 768, 828, 1024, 1080, 1200, 1920, 2048, 3840],
     },
 }
