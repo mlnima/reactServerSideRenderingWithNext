@@ -59,7 +59,6 @@ module.exports = async (req, res) => {
                             .then(({filename}) => {
                                 sharp(filePathOriginalSize).resize(320, 180).toFile(filePath, async (err, info) => {
                                     if (err) {
-                                        console.log('sharp Error', err)
                                         res.status(500);
                                     } else {
                                         fsExtra.remove(filePathOriginalSize)

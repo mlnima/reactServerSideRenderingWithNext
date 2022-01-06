@@ -11,13 +11,13 @@ const CardTitleStyledDiv = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   display: -webkit-box !important;
+  font-size: 12px;
   .card-title-metas{
     margin: 0 3px;
     .card-meta-data{
-      font-size: 12px;
       color: var(--post-element-text-color, #ccc);
       &:hover {
-        filter: invert(70%);
+        color: var(--main-active-color,#fff);
       }
     }
   }
@@ -27,7 +27,7 @@ const CardTitleStyledDiv = styled.div`
     font-size: 12px;
     margin: 0;
     &:hover {
-      filter: invert(70%);
+      color: var(--main-active-color,#fff);
     }
   }
 
@@ -37,7 +37,10 @@ const CardTitleStyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
-
+    font-size: 14px;
+    h3{
+      font-size: 14px;
+    }
   }
 `
 const CardTitle = ({title, metas}) => {

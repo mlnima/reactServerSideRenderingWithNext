@@ -88,7 +88,6 @@ const nextConfigs = {
     eslint: {
         ignoreDuringBuilds: true,
     }
-    // redirects
 }
 
 module.exports = withPlugins([
@@ -105,20 +104,3 @@ module.exports = withPlugins([
     }),
     i18nConfig,
 ], nextConfigs);
-
-
-// const rewrites = () => {
-//     return {
-//         // ...staticPageGeneration,
-//         afterFiles: [
-//             {source: `/admin`, destination: '/admin', locale: false},
-//             {source: `/:locale(${languages})?/:postType(video|post|product|article|book)/:title`, destination: '/post'},
-//             {source: `/:postType(video|post|product|article|book)?/:title`, destination: '/post'},
-//             {source: `/:locale(${languages})?/login`, destination: '/auth/login'},
-//             {source: `/login`, destination: '/auth/login'},
-//             {source: `/:locale(${languages})?/register`, destination: '/auth/register'},
-//             {source: `/register`, destination: '/auth/register'},
-//         ],
-//         fallback: []
-//     }
-// }

@@ -23,11 +23,6 @@ export const clearCaches = ( router:NextRouter ) => async (dispatch: any) => {
     })
     await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res:AxiosResponse<unknown|any>)=>{
         dispatch({
-            type:types.LOADING,
-            payload:false
-        })
-
-        dispatch({
             type: types.SET_ALERT,
             payload: {
 
@@ -38,10 +33,6 @@ export const clearCaches = ( router:NextRouter ) => async (dispatch: any) => {
         setTimeout(()=>router.reload(),1000)
     }).catch(err=>{
         dispatch({
-            type:types.LOADING,
-            payload:false
-        })
-        dispatch({
             type: types.SET_ALERT,
             payload: {
                 message: 'Error While Deleting Cache',
@@ -49,7 +40,11 @@ export const clearCaches = ( router:NextRouter ) => async (dispatch: any) => {
                 err
             }
         })
-
+    }).catch(()=>{
+        dispatch({
+            type:types.LOADING,
+            payload:false
+        })
     })
 }
 

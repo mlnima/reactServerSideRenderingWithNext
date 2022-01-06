@@ -78,11 +78,6 @@ const meta = (props: any) => {
     })
     const [deleteButton, setDeleteButton] = useState(false)
 
-    // useEffect(() => {
-    //     console.log(meta)
-    // }, [meta]);
-
-
     useEffect(() => {
         if (router.query.new && router.query.metaType) {
             dispatch(adminEditMeta({

@@ -1,9 +1,13 @@
 import CardMetaItem from "./CardMetaItem";
+import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 
-const CardMetaRenderer = ({metas}) => {
+interface CardMetaRendererPropTypes{
+    metas:Meta[]
+}
+const CardMetaRenderer = ({metas}:CardMetaRendererPropTypes) => {
     return (
            <>
-                {(metas || []).filter(meta => meta?.name?.length > 1).map((meta,index) => {
+                {(metas || []).filter((meta:Meta) => meta?.name?.length > 1).map((meta,index) => {
                     return(
 
                             <CardMetaItem meta={meta} key={index}/>

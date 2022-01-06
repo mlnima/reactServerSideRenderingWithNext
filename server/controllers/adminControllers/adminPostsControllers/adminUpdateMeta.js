@@ -5,5 +5,6 @@ module.exports = (req, res) => {
         res.json({updated: updatedMeta,message:'updated'})
     }).catch(err => {
         console.log(err)
+        res.status(500).json({message:'Error While Trying To Update Meta',err})
     })
 }

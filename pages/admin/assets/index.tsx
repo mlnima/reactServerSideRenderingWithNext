@@ -59,10 +59,6 @@ const assets = (props:any) => {
         getAndSetAssetData()
     }, [props]);
 
-    // useEffect(() => {
-    //     console.log(finalPageData)
-    // }, [finalPageData]);
-
     const openAllHandler =()=>{
         // @ts-ignore
         if (router.query.assetsType === 'metas' && finalPageData.metas?.length && typeof window !=='undefined'){

@@ -3,20 +3,12 @@ import VideoCardMedia from "./VideoCardMedia";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import VideoCardTitle from "./VideoCardTitle";
-import _qualityConvertor from "../asset/_qualityConvertor";
-import {faEye,faClock} from "@fortawesome/free-regular-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
 let VideoCardStyledArticle = styled.article`
   width: calc(48vw - 5.6px);
   max-width: calc(50vw - 5.6px);
-  //display: flex;
-  //flex-direction: column;
-  //align-items: flex-start;
-  //justify-content: space-between;
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
@@ -24,7 +16,6 @@ let VideoCardStyledArticle = styled.article`
   .last-update{
     font-size: 9px;
     align-self: flex-start;
-    
   }
   
   @media only screen and (min-width: 768px) {
@@ -47,7 +38,6 @@ interface VideoTypeCardPropTypes {
     views:number,
     rating:number,
     post:PostTypes,
-
 }
 
 const VideoTypeCard = (props:VideoTypeCardPropTypes) => {

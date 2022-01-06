@@ -20,7 +20,7 @@ interface MonacoEditorProTypes {
 
 const TextEditorMonacoEditor = (props: MonacoEditorProTypes) => {
 
-    const onChangeHandler = (value) => {
+    const onChangeHandler = (value : string) => {
         if (isJsonString(props.value)) {
             props.onChangeHandler(JSON.parse(value),props.name)
         } else {

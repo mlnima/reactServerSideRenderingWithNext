@@ -1,15 +1,14 @@
-import React from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 import VideoCardTypeListMedia from "./VideoCardTypeListMedia";
 import VideoCardTypeListTitle from "./VideoCardTypeListTitle";
 import _qualityConvertor from "../asset/_qualityConvertor";
-import {withTranslation} from "next-i18next";
 import Link from "next/link";
 import moment from "moment";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
-import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import CardViews from "../asset/CardViews/CardViews";
+import CardQuality from "../asset/CardQuality/CardQuality";
+import CardDuration from "../asset/CardDuration/CardDuration";
+import CardRating from "../asset/CardRating/CardRating";
 
 const VideoCardTypeListStyledArticle = styled.article`
   --video-card-list-font-size: 12px;
@@ -78,8 +77,8 @@ const VideoCardTypeListStyledArticle = styled.article`
 interface VideoCardTypeListPropTypes {
     post: PostTypes,
     cardWidth: number,
-    views: string,
-    rating: string,
+    views: number,
+    rating: number,
     postElementSize: string,
     onActivateLoadingHandler: any,
     title: string,
@@ -87,10 +86,7 @@ interface VideoCardTypeListPropTypes {
 }
 
 const VideoCardTypeList = (props: VideoCardTypeListPropTypes) => {
-
     const postUrl = `/post/${props.post.postType}/${props.post._id}`
-
-
     return (
         <VideoCardTypeListStyledArticle className={'video-card-list-type'} isSidebar={props.isSidebar}>
             <Link href={postUrl} scroll={false}>
@@ -103,40 +99,18 @@ const VideoCardTypeList = (props: VideoCardTypeListPropTypes) => {
                 <VideoCardTypeListTitle postUrl={postUrl} onActivateLoadingHandler={props.onActivateLoadingHandler} title={props.title} actors={props.post?.actors} tags={props.post?.tags} categories={props.post?.categories}/>
                 <Link href={postUrl} scroll={false}>
                     <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
-                        <p className='video-card-views video-card-info-data'>
-                            {props.views}
-                            <FontAwesomeIcon icon={faEye} className={'icon'}/>
-                        </p>
+                        <CardViews views={props.views} className={'video-card-views video-card-info-data'}/>
+                        <CardQuality quality={_qualityConvertor(props.post.quality)} className={'video-card-quality video-card-info-data'}/>
+                        <CardDuration duration={props.post.duration}className={'video-card-duration video-card-info-data'}/>
+                        <CardRating rating={props.rating} className={'video-card-rating video-card-info-data'}/>
                         {props.post?.updatedAt ?
                             <p className={'last-update video-card-info-data'}>
                                   {moment(new Date(props.post?.updatedAt), 'YYYYMMDD').fromNow(false)}
                             </p>
                             : null
                         }
-                        {props.post.quality ?
-                            <p className='video-card-quality video-card-info-data'>
-                                {_qualityConvertor(props.post.quality)}
-                            </p>
-                            : null
-                        }
-                        {props.post.duration ?
-                            <p className='video-card-duration video-card-info-data'>
-                                {props.post.duration}
-                                <FontAwesomeIcon icon={faClock} className={'icon'}/>
-                            </p>
-                            : null
-                        }
-
-                        <p className='video-card-rating video-card-info-data'>
-                            <FontAwesomeIcon icon={faThumbsUp} className={'icon thumbs-up'}/>
-                            {props.rating || 0}
-                            %
-                        </p>
-
                     </a>
                 </Link>
-
-
             </div>
 
         </VideoCardTypeListStyledArticle>

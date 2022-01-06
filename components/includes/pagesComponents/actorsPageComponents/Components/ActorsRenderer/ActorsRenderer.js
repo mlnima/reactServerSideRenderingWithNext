@@ -3,72 +3,31 @@ import ActorCard from "../ActorCard/ActorCard";
 import styled from "styled-components";
 import {setLoading} from "../../../../../../store/actions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
-
+// width: ${props => props?.cardWidth}px;
 let ActorsRendererStyledDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
-
-
+  
   .actor-card-image{
     .actor-card-link {
-      width: 48vw;
+      width: 140px;
       margin: 1vw;
       display: flex;
       flex-direction: column;
       align-items: center;
       justify-content: center;
       text-decoration: none;
-
-
-
+      
       @media only screen and (min-width: 768px) {
-        width: ${props => props?.cardWidth}px;
+        width: 140px;
         margin: 5px;
-
         .actor-card-title {
           font-size: 14px;
         }
       }
     }
   }
-
-
-
-
-  .actor-card-info{
-    .actor-card-link{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 95%;
-      margin: auto;
-      color: var(--main-text-color);
-      .actor-card-title {
-        width: 100%;
-        color: var(--main-text-color);
-        text-overflow: ellipsis;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        font-size: 12px;
-        padding: 3px 0;
-        margin: 3px 0;
-
-        &:hover {
-          filter: invert(70%);
-        }
-      }
-    }
-  }
-  
-  
-  
-  
-  
-  
-
-
 `
 
 const ActorsRenderer = ({metaData, postElementSize}) => {

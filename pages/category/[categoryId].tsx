@@ -66,6 +66,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.categoryId, true)
     const postsData = await getPosts(gettingPostsQueries)
+
     // @ts-ignore
     if (categoryId && !postsData?.data?.meta || !postsData?.data.posts) return {notFound: true};
 
@@ -73,7 +74,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         type: SET_POSTS_DATA,
         payload: {
             // @ts-ignore
-            posts: postsData.data?.posts || [],
+            posts: postsData?.data?.posts || [],
             // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
             // @ts-ignore

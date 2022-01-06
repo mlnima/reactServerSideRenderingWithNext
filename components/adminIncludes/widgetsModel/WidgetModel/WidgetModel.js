@@ -1,8 +1,6 @@
 import React, {useEffect, useState, useRef} from 'react';
 import dynamic from 'next/dynamic'
-import {convertVariableNameToName} from "../../../../_variables/_variables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {languagesOptions} from "../../../../_variables/_variables";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import SearchTypeInputFields from "./SearchTypeInputFields/SearchTypeInputFields";
@@ -30,8 +28,7 @@ const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'
 const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'));
 const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'));
 const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'));
-const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false});
-
+// const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false});
 
 const WidgetModelStyledDiv = styled.div`
   z-index: 3;
@@ -44,18 +41,14 @@ const WidgetModelStyledDiv = styled.div`
   width: 100%;
   resize: both;
   overflow: hidden;
-
-
+  
   .widgetInfo {
     margin: auto;
     width: 95%;
-
   }
 
   .customStylesTextarea {
     width: 95%;
-    min-height: 250px;
-    margin: auto;
   }
 
   .widgetSection, .selectFieldForWidget, .TextInputFieldForWidget {
@@ -314,13 +307,6 @@ const WidgetModel = props => {
                     </div>
                     <TextInputFieldForWidget inputTitle='Name:' name='name' type='text' value={widgetData.name} placeHolder='name' onChangeHandler={e => onChangeHandler(e)}/>
                     <TextInputFieldForWidget inputTitle='index:' name='widgetIndex' type='number' value={widgetData.widgetIndex} placeHolder='widgetIndex' onChangeHandler={e => onChangeHandler(e)}/>
-                    {/*<div className='selectFieldForWidget widgetSection'>*/}
-                    {/*    <p>Translations:</p>*/}
-                    {/*    <select ref={languageElement} name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)} value={widgetSettings.activeEditingLanguage}>*/}
-                    {/*        <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>*/}
-                    {/*        {languagesOptions}*/}
-                    {/*    </select>*/}
-                    {/*</div>*/}
                     <SelectFieldForWidget title={'Translations:'}
                                           name={'activeEditingLanguage'}
                                           ref={languageElement}
@@ -589,14 +575,7 @@ const WidgetModel = props => {
                                              placeHolder='Extra Id'
                                              onChangeHandler={onChangeHandler}/>
 
-                    <button className={'btn btn-success'} onClick={() => {
-                        widgetSettings.preview ? setWidgetSettings({
-                            ...widgetSettings,
-                            preview: false
-                        }) : setWidgetSettings({...widgetSettings, preview: true})
-                    }}>Preview the Widget
-                    </button>
-                    {widgetSettings.preview ? <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/> : null}
+
 
                     <div className={'monaco-editor-section'}>
                         <p>Custom Styles:</p>
@@ -629,6 +608,14 @@ const WidgetModel = props => {
                             onChange={onChangeHandler}
                         />
                     </div>
+                    <button className={'btn btn-success'} onClick={() => {
+                        widgetSettings.preview ? setWidgetSettings({
+                            ...widgetSettings,
+                            preview: false
+                        }) : setWidgetSettings({...widgetSettings, preview: true})
+                    }}>Preview the Widget
+                    </button>
+                    {widgetSettings.preview ? <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/> : null}
 
                     <div className='control-buttons'>
                         <button title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{width: '15px', height: '15px'}}/></button>

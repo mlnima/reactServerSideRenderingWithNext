@@ -3,7 +3,7 @@ module.exports = data =>{
      const size = parseInt(data?.size || data?.count || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || '30' );
      const sort = data?.sort || data?.sortBy;
      const meta = data.metaId || data?.selectedMetaForPosts;
-console.log(size)
+
     return {
          size : size > 1000 ? 1000 : size,
          page : data?.page ? parseInt(data?.page) : 1,

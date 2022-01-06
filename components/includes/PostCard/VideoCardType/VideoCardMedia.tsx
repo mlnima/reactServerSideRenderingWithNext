@@ -41,12 +41,11 @@ let VideoCardMediaStyledDiv = styled.div`
     border-radius: 2px;
     display: flex;
     align-items: center;
-    font-size: 12px;
+  
     .icon{
       width: 14px;
       height: 14px;
       margin: 0 2px;
-
     }
     .thumbs-up{
       width: 12px;
@@ -54,16 +53,16 @@ let VideoCardMediaStyledDiv = styled.div`
     }
   }
   .video-card-quality{
-    top:var(--video-card-info-distance,2px);
-    left:var(--video-card-info-distance,2px);
+    top:3px;
+    left:3px;
   }
   .video-card-duration{
-    top:var(--video-card-info-distance,2px);
-    right:var(--video-card-info-distance,2px);
+    top:3px;
+    right:3px;
   }
   .video-card-views{
-    bottom:var(--video-card-info-distance,2px);
-    right:var(--video-card-info-distance,2px);
+    bottom:3px;
+    right:3px;
   }
   .video-card-rating{
     bottom:var(--video-card-info-distance,2px);

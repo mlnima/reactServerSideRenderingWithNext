@@ -19,7 +19,7 @@ module.exports = (req, res) => {
         {path: 'actors'},
     ]).exec()
         .then(finalData => {
-            console.log(options)
+            // console.log(options)
         res.json({exportedData: finalData})
 
             // const json = JSON.stringify(finalData);

@@ -6,7 +6,6 @@ const metaSchema =  new Schema({
     name:{
         type:String,
         uppercase: false,
-
     },
     type: String,
     index:Number,
@@ -16,6 +15,7 @@ const metaSchema =  new Schema({
         uppercase: false,
     },
     imageUrl:String,
+    coverImageUrl:String,
     imageUrlLock:Boolean,
     translations:mongoose.Mixed,
     count:Number,

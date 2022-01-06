@@ -12,6 +12,7 @@ const LearnTypeCardTitleStyledH3 = styled.h3`
   &:hover{
     display: inline-block;
     white-space: normal;
+    color: var(--main-active-color,#fff);
   }
   @media only screen and (min-width: 768px) {
     font-size: 14px;

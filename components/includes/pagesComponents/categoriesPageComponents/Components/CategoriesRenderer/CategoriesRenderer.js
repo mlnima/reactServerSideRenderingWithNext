@@ -9,27 +9,7 @@ let CategoriesRendererStyledDiv = styled.div`
   flex-wrap: wrap;
   justify-content: center;
   
-  .category-card-info-link{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    width: 95%;
-    margin: auto;
-    color: var(--main-text-color);
-    .category-card-title {
-      width: 100%;
-      text-overflow: ellipsis;
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-      -webkit-line-clamp: 1;
-      font-size: 12px;
-      padding: 3px 0;
-      margin: 3px 0;
-      &:hover {
-        filter: invert(70%);
-      }
-    }
-  }
+
   
   .category-card-link-image {
     width: 48vw;

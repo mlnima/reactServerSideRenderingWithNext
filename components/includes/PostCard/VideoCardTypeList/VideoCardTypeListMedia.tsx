@@ -1,4 +1,4 @@
-import React, { useState} from 'react';
+import {useState} from 'react';
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 
@@ -14,27 +14,20 @@ let VideoCardTypeListMediaStyledDiv = styled.div`
   }
 
   .video-card-trailer {
-    //width: 168px;
-    //height: 94px;
     width: 100%;
-  //  height: 94px;
-    //margin-right: 8px;
     animation: opacityAnimationStart 2s alternate;
     object-fit: contain;
   }
 
   .video-card-image {
     width: 100%;
-   // height: calc(100%/1.777);
-    //margin-right: 8px;
     object-fit: contain;
-    
   }
 `
 
 const NoImageStyleDiv = styled.div`
   width: 100%;
-  //height: calc(48vw / 1.777);
+
   display: flex;
   justify-content: center;
   align-items: center;
@@ -104,8 +97,3 @@ const VideoCardTypeListMedia = (props: VideoCardTypeListMediaPropTypes) => {
 };
 export default VideoCardTypeListMedia;
 
-
-// @media only screen and (min-width: 768px) {
-//   width: ${(props: { cardWidth?: number }) => props?.cardWidth}px;
-//   height: calc(${(props: { cardWidth?: number }) => props?.cardWidth}px / 1.777);
-// }

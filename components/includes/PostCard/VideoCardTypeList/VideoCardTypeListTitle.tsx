@@ -17,21 +17,11 @@ const VideoCardTypeListTitleStyledDiv = styled.div`
   
   .video-card-title-link {
     color: var(--post-element-text-color, #ccc);
-
-    //h3 {
-    //  font-weight: initial;
-    //  font-size: var(--video-card-list-font-size);
-    //  margin: 0;
-    //  display: -webkit-box;
-    //  overflow: hidden;
-    //
-    //}
     &:hover {
-      filter: invert(70%);
+      color: var(--main-active-color,#fff);
     }
   }
-
-
+  
   &:hover {
     display: inline-block;
     white-space: normal;
@@ -49,12 +39,7 @@ interface VideoCardTypeListTitlePropTypes {
     categories?: MetasPropTypes[] | undefined,
 }
 
-
 const VideoCardTypeListTitle = ({title, actors, tags, categories, postUrl, onActivateLoadingHandler}: VideoCardTypeListTitlePropTypes) => {
-
-
-
-
 
     return (
         <VideoCardTypeListTitleStyledDiv className='video-card-list-title' >
@@ -63,6 +48,7 @@ const VideoCardTypeListTitle = ({title, actors, tags, categories, postUrl, onAct
                         {title}
                 </a>
             </Link>
+            {/*// @ts-ignore*/}
             <CardMetaRenderer metas={[...actors || [], ...tags || [], ...categories || []]}/>
         </VideoCardTypeListTitleStyledDiv>
     );

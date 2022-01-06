@@ -23,8 +23,11 @@ const Custom404StyledDiv = styled.div`
             text-decoration: none;
           }
 `
+interface Custom404PropTypes{
+    t:any
+}
 
-const Custom404 = (props) => {
+const Custom404 = (props:Custom404PropTypes) => {
     return (
         <Custom404StyledDiv id='not-found-page main' className='main'>
             <h1>404 - {props.t(`Not Found`)}</h1>

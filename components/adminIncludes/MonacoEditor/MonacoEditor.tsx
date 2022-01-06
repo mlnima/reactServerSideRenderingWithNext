@@ -1,8 +1,18 @@
 import React from 'react';
 import Editor from "@monaco-editor/react";
 import Head from "next/head";
-
-const MonacoEditor = props => {
+interface MonacoEditorPropTypes {
+    name:string,
+    language:string,
+    theme:string,
+    defaultValue:string,
+    value:string,
+    width:string,
+    height:string,
+    className:string,
+    onChange:any
+}
+const MonacoEditor = (props:MonacoEditorPropTypes) => {
 
     const onChangeHandler = (value:string) => {
         const e = {

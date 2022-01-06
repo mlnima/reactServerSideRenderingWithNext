@@ -6,11 +6,12 @@ import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import CardTitle from "../asset/CardTitle/CardTitle";
-
+import CardViews from "../asset/CardViews/CardViews";
+import CardRating from "../asset/CardRating/CardRating";
 
 let PromotionCardStyledDiv = styled.div`
   position: relative;
-  width: ${props => props.postElementSize === 'list' ? '100%' : '48vw'};
+  width: ${(props :{postElementSize:string,cardWidth:number}) => props?.postElementSize === 'list' ? '100%' : '48vw'};
   max-width: ${props => props.postElementSize === 'list' ? '100%' : '48vw'};
   margin: 2.8px;
   display: flex;
@@ -51,13 +52,19 @@ let PromotionCardStyledDiv = styled.div`
         .promotion-card-views {
           height: 12px;
           margin: 0;
+          display: flex;
+          align-items: center;
+        }
+        .icon{
+          width: 14px;
+          height: 14px;
+          margin: 0 2px;
+        }
+        .thumbs-up{
+          width: 12px;
+          height: 12px;
         }
       }
-      
-    }
-
-    &:hover {
-      filter: invert(70%);
     }
   }
 
@@ -67,19 +74,14 @@ let PromotionCardStyledDiv = styled.div`
     max-width: ${props => props.postElementSize === 'list' ? `320px` : `100%`};
     flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
     margin: 7px;
-
+    font-size: 14px;
     .promotion-card-under-media {
       width: 100%;
       font-size: 14px;
-
       .promotion-card-link-internal {
         width: 100%;
-
-
       }
     }
-
-
   }
 
 `
@@ -87,13 +89,14 @@ let PromotionCardStyledDiv = styled.div`
 const PromotionTypeCard = props => {
 
     const onExternalLinkClickViewHandler = () => {
-        likeDislikeView(props.post._id, 'views')
+        likeDislikeView(props.post._id, 'views').finally()
     }
 
     const metaPreviewData = [...(props.post.actors || []), ...(props.post.tags || []), ...(props.post.categories || [])]
     const metaPreview = _.uniqBy(metaPreviewData, function (e) {
         return e.name;
     })
+
 
     return (
         <PromotionCardStyledDiv className='promotion-card' cardWidth={props.cardWidth} postElementSize={props.postElementSize}>
@@ -104,14 +107,15 @@ const PromotionTypeCard = props => {
             <div className='promotion-card-under-media'>
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
                     <a rel='next'  className='promotion-card-link-internal' onClick={ props.onActivateLoadingHandler}>
-                        <CardTitle title={props.title}/>
+                        <CardTitle title={props.title} metas={[]}/>
                         <div className='promotion-card-under-media-info'>
-                            <p className='promotion-card-views'><span>{props.views}</span> {props.t(`common:Views`)}</p>
-                            <span className='promotion-card-rating video-card-info-data'><span>{props.rating}</span> % </span>
+                            <CardViews views={props.views} className={'promotion-card-views'}/>
+                            <CardRating rating={props.rating} className={'promotion-card-rating video-card-info-data'}/>
                         </div>
                     </a>
                 </Link>
             </div>
+            {/*// @ts-ignore*/}
             {props.postElementSize !== 'list' ? <CardMetaRenderer metaPreview={metaPreview} postElementSize={props.postElementSize}/> : null}
         </PromotionCardStyledDiv>
     );

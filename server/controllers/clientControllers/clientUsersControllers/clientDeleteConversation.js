@@ -4,7 +4,7 @@ const conversationSchema = require('../../../models/conversationSchema')
 
 
 module.exports = async (req, res) => {
-    console.log(req.query._id,req.userData._id)
+
     try {
         const conversationId = req.query._id;
         const userData = await userSchema.findById(req.userData._id).exec();

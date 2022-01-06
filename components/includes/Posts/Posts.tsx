@@ -46,7 +46,7 @@ interface PostsComponentTypes {
 
 
 const Posts = ({viewType, _id, posts, widgetId,postElementSize,isSidebar}: PostsComponentTypes) => {
-    const settings = useSelector((store: settingsPropTypes) => store.settings);
+    // const settings = useSelector((store: settingsPropTypes) => store.settings);
     const elementSize = postElementSize ? postElementSize : useSelector((store: settingsPropTypes) => store.settings?.design?.postElementSize);
     const dispatch = useDispatch()
     const router = useRouter()

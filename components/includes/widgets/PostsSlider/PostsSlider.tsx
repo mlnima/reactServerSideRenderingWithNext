@@ -14,6 +14,7 @@ const PromotionTypeCard = dynamic(() => import('../../PostCard/PromotionTypeCard
 const ArticleTypeCard = dynamic(() => import('../../PostCard/ArticleTypeCard/ArticleTypeCard'))
 
 import styled from "styled-components";
+import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
 const PostsSliderStyledDiv = styled.div`
   overflow: hidden;
@@ -34,7 +35,15 @@ const PostsSliderStyledDiv = styled.div`
 
 
 
-const PostsSlider = (props:any) => {
+// @ts-ignore
+interface PostsSliderPropsTypes{
+    postElementSize:string,
+    widgetId:string,
+    posts:PostTypes[]
+}
+
+// @ts-ignore
+const PostsSlider = (props:PostsSliderPropsTypes) => {
     const [emblaRef] = useEmblaCarousel()
     const router = useRouter()
     const dispatch = useDispatch()

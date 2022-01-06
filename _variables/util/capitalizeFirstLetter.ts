@@ -1,10 +1,6 @@
- const capitalizeFirstLetter = (str:string)=> {
-  console.log(typeof str === 'string' ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() :str)
-  return typeof str === 'string' ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() :str
-
-// console.log(str[0].toUpperCase())
-// return str.charAt(0).toUpperCase() + str.slice(1).toLowerCase();
-
+ const capitalizeFirstLetter = (str: unknown)=> {
+  // return typeof str === 'string' ? str.charAt(0).toUpperCase() + str.slice(1).toLowerCase() :str
+  return typeof str === 'string' ? str.replace(/^(.)|\s+(.)/g, c => c.toUpperCase()) :str
  }
 
  export default capitalizeFirstLetter

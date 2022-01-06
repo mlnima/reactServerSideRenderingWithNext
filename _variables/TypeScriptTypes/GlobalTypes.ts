@@ -147,6 +147,7 @@ export interface GetServerSidePropsContext {
 }
 
 export interface Meta {
+    coverImageUrl?: string;
     _id:string,
     name: string,
     description: string,
@@ -159,6 +160,15 @@ export interface Meta {
     additionalInfo: object,
     createdAt: Date,
     updatedAt: Date,
+}
+
+export interface AxiosResponseTypes{
+    message?:string,
+    posts:PostTypes[]
+    post:PostTypes
+}
+export interface AxiosErrorTypes{
+    message?:string
 }
 
 

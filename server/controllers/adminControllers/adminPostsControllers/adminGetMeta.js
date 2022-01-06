@@ -18,10 +18,7 @@ module.exports = async (req, res) => {
                 res.status(400).json({message:'Bad Request'})
             })
         }else {
-            //res.status(404)
             res.status(404).json({message:'Not Found'})
-
-
         }
     }catch (err){
         console.log(err.stack)

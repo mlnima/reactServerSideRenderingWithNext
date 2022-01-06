@@ -113,8 +113,10 @@ const Index = () => {
         try {
             // @ts-ignore
             if (post?._id) {
+                // @ts-ignore
                 dispatch(adminUpdatePost({...post,author: post?.author ? post.author : userData?._id}))
             } else {
+                // @ts-ignore
                 dispatch(adminSaveNewPost({...post,author: userData?._id},router))
             }
         } catch (error) {

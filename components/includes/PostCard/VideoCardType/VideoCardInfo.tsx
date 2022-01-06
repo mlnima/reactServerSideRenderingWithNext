@@ -1,7 +1,8 @@
 import _qualityConvertor from "../asset/_qualityConvertor";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faClock, faEye} from "@fortawesome/free-regular-svg-icons";
-import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
+import CardViews from "../asset/CardViews/CardViews";
+import CardRating from "../asset/CardRating/CardRating";
+import CardQuality from "../asset/CardQuality/CardQuality";
+import CardDuration from "../asset/CardDuration/CardDuration";
 
 interface VideoCardInfoPropType {
     views:number,
@@ -10,32 +11,14 @@ interface VideoCardInfoPropType {
     duration:string,
 }
 
-const VideoCardInfo = (props:VideoCardInfoPropType)=>{
+const VideoCardInfo = (props:VideoCardInfoPropType) =>{
 
     return(
         <>
-            <p className={'video-card-quality video-card-info-data'}>
-                {props.quality ? _qualityConvertor(props.quality) : ''}
-            </p>
-            <p className={'video-card-duration video-card-info-data'}>
-                {props.duration ? <>
-                    {props.duration}
-                    <FontAwesomeIcon icon={faClock} className={'icon'}/>
-                </> : null }
-            </p>
-            <p className={'video-card-views video-card-info-data'}>
-                {props.views ?
-                    <>
-                        <span>{props.views}</span>
-                        <FontAwesomeIcon icon={faEye} className={'icon'}/>
-                    </>
-                    : null
-                }
-            </p>
-            <p className={'video-card-rating video-card-info-data'}>
-                <FontAwesomeIcon icon={faThumbsUp} className={'icon thumbs-up'}/>
-                <span>{props.rating || 0}%</span>
-            </p>
+            <CardQuality quality={_qualityConvertor(props.quality)} className={'video-card-quality video-card-info-data'}/>
+            <CardDuration duration={props.duration} className={'video-card-duration video-card-info-data'}/>
+            <CardViews views={props.views} className={'video-card-views video-card-info-data'}/>
+            <CardRating rating={props.rating} className={'video-card-rating video-card-info-data'}/>
         </>
     )
 }

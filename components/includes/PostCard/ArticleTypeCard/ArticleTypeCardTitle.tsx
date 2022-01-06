@@ -1,11 +1,6 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
 import styled from "styled-components";
 import Link from "next/link";
-import VideoCardTitle from "../VideoCardType/VideoCardTitle";
-import {faFolder, faTag, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
-
 
 const ArticleTypeCardTitleStyledDiv = styled.div`
   
@@ -29,7 +24,7 @@ const ArticleTypeCardTitleStyledDiv = styled.div`
       font-weight: initial;
       margin: 0;
       &:hover {
-        filter: invert(70%);
+        color: var(--main-active-color,#fff);
       }
     }
   }
@@ -74,6 +69,7 @@ const ArticleTypeCardTitle = ({title, tags, categories, cardWidth, onActivateLoa
                     </h3>
                 </a>
             </Link>
+            {/*// @ts-ignore*/}
             <CardMetaRenderer metas={[...tags || [],...categories || []]}/>
         </ArticleTypeCardTitleStyledDiv>
     )

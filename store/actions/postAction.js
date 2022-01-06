@@ -1,10 +1,9 @@
 import * as types from "../types";
 import axios from "axios";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
-import {getPosts,getPost} from "../../_variables/ajaxPostsVariables";
-import _postPageQueryGenerator from "../../_variables/clientVariables/_postPageQueryGenerator";
-import {DELETE_COMMENT, GET_POST, NEW_COMMENT, SET_POSTS, SET_POSTS_DATA} from "../types";
-
+import {getPosts} from "../../_variables/ajaxPostsVariables";
+// import _postPageQueryGenerator from "../../_variables/clientVariables/_postPageQueryGenerator";
+// import {DELETE_COMMENT, GET_POST, NEW_COMMENT, SET_POSTS, SET_POSTS_DATA} from "../types";
 
 export const setPostsData = postsData => async dispatch=>{
     dispatch({
@@ -65,10 +64,6 @@ export const deleteComments = (commentsListToDelete)=>async dispatch=>{
            payload:commentsListToDelete
        })
        dispatch({
-           type:types.LOADING,
-           payload:false
-       })
-       dispatch({
            type: types.SET_ALERT,
            payload: {
                message:res.data.message || 'Comment Deleted',
@@ -77,16 +72,17 @@ export const deleteComments = (commentsListToDelete)=>async dispatch=>{
        }) ;
    }).catch(err=>{
        dispatch({
-           type:types.LOADING,
-           payload:false
-       })
-       dispatch({
            type: types.SET_ALERT,
            payload: {
                message: 'Error While Deleting Comment',
                type: 'error',
                err
            }
+       })
+   }).finally(()=>{
+       dispatch({
+           type:types.LOADING,
+           payload:false
        })
    })
 }

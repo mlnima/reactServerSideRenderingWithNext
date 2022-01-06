@@ -13,7 +13,7 @@ module.exports = async (req, res) => {
                 categories: post.categories ? await updateSaveMetas(post.categories) : [],
                 actors: post.actors ? await updateSaveMetas(post.actors) : []
             }
-            console.log(newPostData)
+            // console.log(newPostData)
 
             // const newPostDataToSave = new postSchema(newPostData);
             // newPostDataToSave.save()

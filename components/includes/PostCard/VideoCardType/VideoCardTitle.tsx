@@ -24,7 +24,7 @@ const CardTitleStyledDiv = styled.div`
     margin: 0;
     transition: .3s;
     &:hover {
-      filter: invert(70%);
+      color: var(--main-active-color,#fff);
     }
   }
 
@@ -63,6 +63,7 @@ const VideoCardTitle = ({title, actors, tags, categories, cardWidth, onActivateL
                     {title}
                 </a>
             </Link>
+            {/*// @ts-ignore*/}
             <CardMetaRenderer metas={[...actors || [],...tags|| [],...categories|| []]}/>
         </CardTitleStyledDiv>
 

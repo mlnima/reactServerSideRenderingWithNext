@@ -24,6 +24,7 @@ const adminGetMeta = require('./adminPostsControllers/adminGetMeta')
 const adminCheckAndRemoveDeletedVideos = require('./adminPostsControllers/adminCheckAndRemoveDeletedVideos')
 const adminSetMetaThumbnailsAndCount = require('./adminPostsControllers/adminSetMetaThumbnailsAndCount')
 const adminImportPosts = require('./adminPostsControllers/adminImportPosts')
+const adminUpdateMetaByApi = require('./adminPostsControllers/adminUpdateMetaByApi')
 
 router.post('/createNewPost',adminAuthMiddleware,adminCreateNewPost)
 router.post('/adminImportPosts',adminAuthMiddleware,adminImportPosts)
@@ -44,5 +45,6 @@ router.get('/setMetaThumbnailsAndCount',adminAuthMiddleware,adminSetMetaThumbnai
 //API routes
 router.post('/createNewByApi',adminApiRequestMiddleware,adminCreateNewPostByApi)
 router.post('/updatePostByApi',adminApiRequestMiddleware,adminUpdatePostByApi)
+router.post('/updateMetaByApi',adminApiRequestMiddleware,adminUpdateMetaByApi)
 //------
 module.exports = router

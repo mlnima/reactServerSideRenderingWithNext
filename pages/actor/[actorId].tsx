@@ -42,8 +42,8 @@ const actorPage = (props: ClientPagesTypes) => {
     return (
 
         <StyledMain className="main posts-page" stylesData={settings.design?.actorPageStyle || ''}>
-            <ActorBio/>
             {actor ? <MetaDataToSiteHead title={actor.name} description={actor.description} url={`${router.asPath}`} image={actor.imageUrl}/> : null}
+            <ActorBio/>
             <WidgetsRenderer
                 position='actorPageTop'
             />

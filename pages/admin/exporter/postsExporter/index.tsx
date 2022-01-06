@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {ChangeEvent, useEffect, useState} from 'react';
 import {exportPosts} from '../../../../_variables/ajaxPostsVariables'
 import {useDispatch} from "react-redux";
 import {setLoading} from "../../../../store/actions/globalStateActions";
@@ -73,16 +73,12 @@ const postsExporter = () => {
         })
     }
 
-    const onChangeHandler = (e) => {
+    const onChangeHandler =(e:ChangeEvent<any>) => {
         setData({
             ...data,
             [e.target.name]: e.target.value
         })
     }
-
-    useEffect(() => {
-        console.log(data)
-    }, [data]);
 
     return (
 

@@ -24,9 +24,8 @@ module.exports = async (req,res) =>{
                     }
                     // console.log(updateData)
                    await metaSchema.findByIdAndUpdate(meta?._id, {$set:{...updateData}},{new: true}).exec().then((updated)=>{
-                        console.log(updated.type + ':' +updated.name,' updated')
                     }).catch(err=>{
-                        console.log('ERROR : ',meta?.name)
+
                     })
                 }else {
                     await  metaSchema.findByIdAndUpdate(meta?._id,{$set:{status:'draft'}}).exec()

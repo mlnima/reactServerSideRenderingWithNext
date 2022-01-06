@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef, useEffect, ChangeEvent} from 'react';
 import {savePost} from '../../../../_variables/ajaxPostsVariables'
 import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../../../../store/store";
@@ -49,7 +49,7 @@ const postsImporter = () => {
     }
 
 
-    const onSelectFileHandler = e => {
+    const onSelectFileHandler = (e:any) => {
         const reader = new FileReader()
         reader.readAsText(e.target.files[0])
         reader.onload = e => {
@@ -62,7 +62,7 @@ const postsImporter = () => {
         }
     };
 
-    const onChangeHandler = (e) => {
+    const onChangeHandler = (e:ChangeEvent<any>) => {
         setState({
             ...state,
             [e.target.name]: e.target.value

@@ -30,36 +30,6 @@ let TagsRendererStyledDiv = styled.div`
       }
     }
   }
-
-
-  .tag-card-info{
-    
-    .tag-card-link{
-      display: flex;
-      align-items: center;
-      justify-content: space-between;
-      width: 95%;
-      margin: auto;
-      color: var(--main-text-color);
-      .tag-card-title {
-        width: 100%;
-        color: var(--main-text-color);
-        text-overflow: ellipsis;
-        overflow: hidden;
-        -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
-        font-size: 12px;
-        padding: 3px 0;
-        margin: 3px 0;
-        &:hover {
-          filter: invert(70%);
-        }
-      }
-    }
-    
-
-  }
-
 `
 
 const TagsRenderer = ({metaData,postElementSize}) => {
