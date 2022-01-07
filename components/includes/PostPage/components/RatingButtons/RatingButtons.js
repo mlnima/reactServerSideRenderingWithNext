@@ -1,6 +1,7 @@
 import {useState, useRef} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEye, faThumbsDown, faThumbsUp} from "@fortawesome/free-regular-svg-icons";
+import {faEye} from "@fortawesome/free-regular-svg-icons";
+import {faThumbsDown, faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
 import _shortNumber from '../../../../../_variables/clientVariables/_shortNumber'
 import {withTranslation} from 'next-i18next';

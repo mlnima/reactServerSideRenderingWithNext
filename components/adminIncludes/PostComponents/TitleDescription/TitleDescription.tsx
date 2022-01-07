@@ -46,11 +46,11 @@ const TitleDescription = (props:any) => {
     const post = useSelector((state : StoreTypes)=> state?.adminPanelPosts.post);
     const activeEditingLanguage = useSelector((state : StoreTypes) => state?.adminPanelPosts.activeEditingLanguage);
 
-    const allowsEditorToUse = post?.postType === 'learn' ? ['ReactPage'] :
+    const allowsEditorToUse = post?.postType === 'learn' ? ['ReactPage','Monaco','SunEditor'] :
                               post?.postType === 'video' ? ['Monaco','SunEditor','ReactQuillEditor'] :
                               ['Monaco','SunEditor','ReactQuillEditor','ReactPage']
 
-    const openEditorOnLoad =  post?.postType === 'learn' ? 'ReactPage' :
+    const openEditorOnLoad =  post?.postType === 'learn' ? 'Monaco' :
                               post?.postType === 'video' ? 'Monaco' :
                              'SunEditor'
 

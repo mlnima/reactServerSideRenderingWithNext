@@ -1,6 +1,7 @@
 import {MetasPropTypes} from './GlobalTypes'
 
 export interface PostTypes {
+    source: any;
     updatedAt: string;
     url?: string | undefined;
     currency: string;

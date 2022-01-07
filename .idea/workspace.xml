@@ -20,8 +20,17 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/components/ScrapedDataDescriptionRenderer/ObjectKeyDescriptionRenderer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -944,7 +953,10 @@
       <workItem from="1641287747469" duration="17082000" />
       <workItem from="1641381983393" duration="7284000" />
       <workItem from="1641400567572" duration="173000" />
-      <workItem from="1641401672743" duration="16538000" />
+      <workItem from="1641401672743" duration="17613000" />
+      <workItem from="1641470721781" duration="2047000" />
+      <workItem from="1641480982965" duration="11080000" />
+      <workItem from="1641546753538" duration="7472000" />
     </task>
     <servers />
   </component>
@@ -1225,7 +1237,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardTitle.tsx</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="117" />
         </line-breakpoint>
       </breakpoints>

@@ -31,6 +31,7 @@ const PostsTypes = () => {
                 <option value='product'>Product</option>
                 <option value='food'>Food</option>
                 <option value='article'>Article</option>
+                <option value='learn'>Learn</option>
                 <option value='promotion'>Promotion</option>
             </select>
         </PostsTypesStyledDiv>
