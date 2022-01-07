@@ -1,3 +1,6 @@
+
+// need to switch in to redux
+
 import React, {useEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
 import {getPosts, getMultipleMeta, getComments} from '../../../_variables/ajaxPostsVariables'
@@ -5,6 +8,7 @@ import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
 import {getUsersListAsAdmin} from '../../../_variables/ajaxAuthVariables'
 import {getFormsData} from '../../../_variables/ajaxVariables'
 import {useRouter} from "next/router";
+import {useDispatch} from "react-redux";
 import _getPostsQueryGenerator from "../../../_variables/clientVariables/_getPostsQueryGenerator";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -23,11 +27,13 @@ const TableControls = dynamic(
 )
 
 import styled from "styled-components";
+import {adminGetPosts} from "../../../store/adminActions/adminPanelPostsActions";
 const AdminAssetPageStyledDiv = styled.div`
 
 `
 const assets = (props:any) => {
     const router = useRouter()
+    const dispatch = useDispatch()
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
 
@@ -56,7 +62,7 @@ const assets = (props:any) => {
 
 
     useEffect(() => {
-        getAndSetAssetData()
+        getAndSetAssetData().finally()
     }, [props]);
 
     const openAllHandler =()=>{
@@ -80,6 +86,10 @@ const assets = (props:any) => {
         const assetType = router.query.assetsType
 
         const gettingPostsQueries = _getPostsQueryGenerator(router?.query, router?.query.metaId, false)
+
+        // if (assetType === 'posts'){
+        //     dispatch(adminGetPosts(gettingPostsQueries))
+        // }
 
         const ajaxRequestData = assetType === 'posts' ? await getPosts(gettingPostsQueries) :
             assetType === 'users' ? await getUsersListAsAdmin(dataConfig, localStorage.wt) :

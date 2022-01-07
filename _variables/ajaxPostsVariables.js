@@ -3,6 +3,7 @@ import _metaPageQueryGenerator from "./clientVariables/_metaPageQueryGenerator";
 import _postPageQueryGenerator from "./clientVariables/_postPageQueryGenerator";
 
 export const getPosts = async (queriesData) => {
+    console.log(queriesData)
     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL +`/api/v1/posts/clientGetPosts${queriesData}`)
 };
 

@@ -1,0 +1,3 @@
+//POSTS
+
+export const ADMIN_GET_POSTS ='ADMIN_GET_POSTS'

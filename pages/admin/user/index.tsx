@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useRef, useState} from 'react';
 import {getUserData, updateUserData, newAPIKey} from '../../../_variables/ajaxAuthVariables'
 import {resetPassword} from '../../../_variables/ajaxAuthVariables'
 import {useRouter} from "next/router";
@@ -31,6 +31,7 @@ const UserStyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
     max-width: 300px;
 
     input {
@@ -49,6 +50,10 @@ const UserStyledDiv = styled.div`
     display: flex;
     flex-direction: column;
     justify-content: center;
+    align-items: center;
+    button{
+      margin: 20px;
+    }
   }
 
   .user-admin-edit-profile-page-delete-user {
@@ -62,6 +67,7 @@ const UserStyledDiv = styled.div`
 const user = () => {
     const dispatch = useDispatch()
     const router = useRouter()
+    const APIKeyElement = useRef(null)
 
     const [userData, setUserData] = useState({
         username: '',
@@ -211,8 +217,8 @@ const user = () => {
             </div>
             <div className='user-admin-edit-profile-page-section-API'>
                 <h2>API KEY</h2>
-                <label>{userData.API_KEY}</label>
-                <button className='saveBtn greenActionBtn' onClick={onNewAPIKeyRequest}>Generate API Key</button>
+                <label ref={APIKeyElement}>{userData.API_KEY}</label>
+                <button className='btn btn-primary' onClick={onNewAPIKeyRequest}>Generate API Key</button>
             </div>
             {
                 !userData.keyMaster ?

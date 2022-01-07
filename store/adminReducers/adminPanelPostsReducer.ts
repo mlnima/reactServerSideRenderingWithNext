@@ -1,5 +1,7 @@
 import * as types from '../types'
+import * as adminTypes from '../adminTypes'
 import {AdminPanelPostsTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {PostTypes} from "../../_variables/TypeScriptTypes/PostTypes";
 
 
 const initialState = {
@@ -7,9 +9,12 @@ const initialState = {
         title: '',
         description: ''
     },
+    posts:[],
     meta: {},
     activeEditingLanguage: 'default'
 }
+
+
 
 // @ts-ignore
 export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialState, action: { type: string, payload: any }) => {
@@ -56,7 +61,11 @@ export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialStat
                 activeEditingLanguage: 'default',
                 post: action.payload
             };
-
+        case adminTypes.ADMIN_GET_POSTS:
+            return {
+                ...state,
+                posts: action.payload
+            };
         default:
             return state
     }

@@ -20,17 +20,22 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/PostPage/components/ScrapedDataDescriptionRenderer/ObjectKeyDescriptionRenderer.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_queryGeneratorForGettingPosts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/store/adminTypes.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/tools/resetAdminPassword.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/PostsTypes.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/ScrapedDataDescriptionRenderer/ObjectKeyDescriptionRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/user/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/user/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsRouter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/adminReducers/adminPanelPostsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminReducers/adminPanelPostsReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -43,9 +48,9 @@
         <option value="HTML File" />
         <option value="tsconfig.json" />
         <option value="CSS File" />
-        <option value="JavaScript File" />
-        <option value="TypeScript File" />
         <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -78,7 +83,7 @@
     <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
     <property name="TERMINAL_CUSTOM_COMMANDS_GOT_IT" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/../job tasks/ospin-front-end-challenge" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/server/controllers/adminControllers/_variables" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -94,11 +99,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\adminControllers\_variables" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\fa" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\tr" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\da" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\zh" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\sv" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\global" />
@@ -108,8 +113,15 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash\old post page" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.temp.js">
-    <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/temp.js" working-dir="$PROJECT_DIR$">
+  <component name="RunManager">
+    <configuration name="ResetAdminPassword" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="ResetAdminPassword" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -154,11 +166,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
+        <item itemvalue="npm.ResetAdminPassword" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.buildDev" />
-        <item itemvalue="Node.js.temp.js" />
       </list>
     </recent_temporary>
   </component>
@@ -956,7 +968,7 @@
       <workItem from="1641401672743" duration="17613000" />
       <workItem from="1641470721781" duration="2047000" />
       <workItem from="1641480982965" duration="11080000" />
-      <workItem from="1641546753538" duration="7472000" />
+      <workItem from="1641546753538" duration="18925000" />
     </task>
     <servers />
   </component>

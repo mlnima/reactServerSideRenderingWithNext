@@ -25,7 +25,7 @@ const _getPostsQueryGenerator = (queryData, metaIdData, cache) => {
         .map(f => 'field=' + f).join('&')
 
     const getPostsData = {
-        // size:queryData?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE   || 30,
+        size:queryData?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE   || 30,
         page: queryData?.page || '1',
         ...status,
         ...author,

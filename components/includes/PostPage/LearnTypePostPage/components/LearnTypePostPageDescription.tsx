@@ -16,7 +16,7 @@ import styled from "styled-components";
 import parse from "html-react-parser";
 import {createTheme} from '@material-ui/core/styles';
 import ReactPageDescriptionRenderer from "../../components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer";
-import ObjectKeyDescriptionRenderer from "../../components/ScrapedDataDescriptionRenderer/ObjectKeyDescriptionRenderer";
+import ObjectKeyDescriptionRenderer from "../../components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer";
 
 const cellPlugins = [slate(), background({
     // imageUpload: fakeImageUploadService('/images/sea-bg.jpg'),

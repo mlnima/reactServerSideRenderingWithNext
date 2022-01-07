@@ -8,7 +8,8 @@
     "build": "next build",
     "start": "concurrently \"NODE_ENV=production node ./server.js\" \"node ./server/socketServer/socketServer.js\"",
     "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
-    "setup": "node ./tools/setup.js"
+    "setup": "node ./tools/setup.js",
+    "ResetAdminPassword": "node ./tools/resetAdminPassword.js"
   },
   "keywords": [],
   "author": "",
