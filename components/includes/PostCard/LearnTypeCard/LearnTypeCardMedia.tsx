@@ -1,4 +1,4 @@
-import React, { useMemo, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
@@ -7,6 +7,10 @@ let LearnTypeCardMediaStyledDiv = styled.div`
     width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : '100%'};
     height: calc(48vw / 1.777);
     object-fit: contain;
+    -webkit-transition: opacity 1s ease-in-out;
+    -moz-transition: opacity 1s ease-in-out;
+    -o-transition: opacity 1s ease-in-out;
+    transition: opacity 1s ease-in-out;
   }
 
   @media only screen and (min-width: 768px) {
@@ -43,10 +47,12 @@ interface LearnTypeCardMediaPropTypes {
     noImageUrl: string,
 }
 
+
+
 const LearnTypeCardMedia = (props: LearnTypeCardMediaPropTypes) => {
+    const dynamicImage = true
     const [gotError, setGotError] = useState(false)
-    const imageUrlToRender = useMemo(() => {
-        //categoriesImages
+    const [imageUrlToRender, setImageUrlToRender] = useState(() => {
         if (props?.post?.mainThumbnail) {
             return props?.post?.mainThumbnail
         } else if (props?.categoriesImages?.length) {
@@ -54,9 +60,15 @@ const LearnTypeCardMedia = (props: LearnTypeCardMediaPropTypes) => {
         } else {
             setGotError(true)
         }
-    }, [props])
+    })
 
-
+    useEffect(() => {
+      if (dynamicImage && !props?.post?.mainThumbnail && props?.categoriesImages?.length){
+          setInterval(()=>{
+              setImageUrlToRender(props.categoriesImages[Math.floor(Math.random() * props.categoriesImages.length)])
+          },7000)
+      }
+    }, []);
 
     if ((!props?.post?.mainThumbnail || gotError) && !props?.categoriesImages?.length) {
         return (
