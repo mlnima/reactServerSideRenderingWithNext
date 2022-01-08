@@ -95,9 +95,7 @@ const LearnTypeCard = (props: any) => {
 
     const postUrl = `/post/${props.post?.postType}/${props.post?._id}`
     const categoriesImages = props.post.categories.filter(category=>category.imageUrl).map(category=>category.imageUrl)
-    useEffect(() => {
-        console.log(categoriesImages)
-    }, [categoriesImages]);
+
     return (
         <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <Link href={postUrl} scroll={false}>
