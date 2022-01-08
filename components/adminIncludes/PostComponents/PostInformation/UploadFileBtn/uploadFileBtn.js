@@ -41,7 +41,7 @@ const UploadFileBtn = props => {
             elem.innerHTML = droppedHTML;
             const image = elem.getElementsByTagName("img");
             const url= (image[0] || image[1]).currentSrc
-            console.log(url)
+            // console.log(url)
           // props.setFunction(props.name,images[0].currentSrc);
         }else if (fileData){
             const filesData = new FormData()

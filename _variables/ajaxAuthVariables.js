@@ -41,7 +41,6 @@ export const getUsersListAsAdmin = async (id, token) => {
     const body = {
         id,
         token: localStorage.wt
-
     };
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/users/getUsersList', body)
 

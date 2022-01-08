@@ -1,5 +1,6 @@
 import type {NextApiRequest, NextApiResponse} from 'next'
 import {PostTypes} from "./PostTypes";
+import {AdminPanelUsersState} from "../../store/adminReducers/adminPanelUsersReducer";
 
 
 // SETTINGS
@@ -85,15 +86,16 @@ export interface UserState {
 
 
 export interface settingsPropTypes {
+    // adminPanelPosts: PostTypes[];
     user: UserState;
     settings: {
         design: DesignSettings,
         identity: IdentitySettings
     };
-    posts: {
-        post: PostTypes,
-        comments: object[]
-    };
+    // posts: {
+    //     post: PostTypes,
+    //     comments: object[]
+    // };
 }
 
 
@@ -231,27 +233,32 @@ export interface Translations {
 
 
 export interface AdminPanelPostsTypes {
-    post?: {
-        title?: string,
-        description?: string,
-        translations?: Translations,
-        author?: string,
-        _id?: string,
-        status?: string,
-        postType?: string,
-    },
+    users: User[];
+    post?: PostTypes,
+    posts?: PostTypes[],
     meta?:Meta,
+    metas?:Meta[],
     activeEditingLanguage: string
 }
 
+export interface AdminPanelGlobalState{
+    users:User[],
+    forms:[],
+    pages:[],
+    metas:[],
+    orders:[],
+}
+
 export interface StoreTypes {
+    adminPanelUsers: AdminPanelUsersState;
+    adminPanelGlobalState: AdminPanelGlobalState,
+    adminPanelPosts: AdminPanelPostsTypes
     chatroom: ChatroomStateTypes,
     settings: SettingsStateTypes,
     posts: PostStateTypes,
     user: UserState,
     widgets: WidgetsStateTypes,
     globalState: GlobalStateTypes;
-    adminPanelPosts: AdminPanelPostsTypes
 }
 
 

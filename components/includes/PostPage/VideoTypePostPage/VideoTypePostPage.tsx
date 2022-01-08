@@ -30,7 +30,7 @@ const VideoTypePostPage = () => {
     const postPageStyle = useSelector((store: StoreTypes) => store?.settings?.design.postPageStyle)
     const comments = useSelector((store: StoreTypes) => store?.posts?.comments)
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
-    const post = useSelector((store: settingsPropTypes) => store.posts.post);
+    const post = useSelector((store: StoreTypes) => store.posts.post);
 
     const [state, setState] = useState({
         likeValue: 0,

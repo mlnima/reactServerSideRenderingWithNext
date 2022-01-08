@@ -82,7 +82,7 @@ const FormWidget = props => {
             ...state,
             date: Date.now()
         }).then(res => {
-            console.log(res)
+            // console.log(res)
             setSubmit(true)
         })
     }

@@ -4,6 +4,7 @@ const fsExtra = require('fs-extra');
 const updateSaveMetas = require('../_variables/_updateSaveMetas')
 
 const savePostWithDuplicateContent = async newPost =>{
+
     try {
         const newPostWithMeta = {
             ...newPost,
@@ -22,7 +23,7 @@ const savePostWithDuplicateContent = async newPost =>{
 
 module.exports = async (req, res) => {
     const newPost = req.body.postData
-console.log( req.body.postData)
+
     try {
         if (req.body.duplicateContent) {
             savePostWithDuplicateContent(newPost).then(savedPost => {
@@ -38,10 +39,8 @@ console.log( req.body.postData)
                           {videoEmbedCode: req.body.postData.videoEmbedCode},
                     ]
                 }).exec().then(async posts => {
-                    console.log(posts)
                 if (posts.length) {
                     res.status(403).send({error: 'title ** ' + newPost.title + ' ** already exist in the Database'})
-                    // res.json({ savedPostData });
                 } else {
                     if (req.body.downloadImageContent) {
                         let thumbnailUrl = newPost.mainThumbnail

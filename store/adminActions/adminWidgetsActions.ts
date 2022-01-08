@@ -1,4 +1,5 @@
 import * as types from "../types";
+import * as adminTypes from "../types";
 import axios, {AxiosResponse} from "axios";
 import {WidgetPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
@@ -38,7 +39,7 @@ export const adminAddNewWidget = (newWidgetData: WidgetPropTypes) => async (disp
         .then((res: AxiosResponse<unknown | any>) => {
             if (res.data?.newWidgetData) {
                 dispatch({
-                    type: types.SAVE_NEW_WIDGET,
+                    type: adminTypes.SAVE_NEW_WIDGET,
                     payload: res.data?.newWidgetData
                 })
             }
@@ -50,7 +51,7 @@ export const adminAddNewWidget = (newWidgetData: WidgetPropTypes) => async (disp
 export const adminDeleteWidget = (_id:string) => async (dispatch: any) => {
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/adminDeleteWidget', {_id,token: localStorage.wt}).then((res:AxiosResponse<unknown|any>)=>{
         dispatch({
-            type: types.DELETE_WIDGET,
+            type: adminTypes.DELETE_WIDGET,
             payload: _id
         })
     }).catch(err=>{
@@ -63,7 +64,7 @@ export const adminUpdateWidget = (widgetData:WidgetPropTypes) => async (dispatch
         if (res.data?.updatedWidget){
 
             dispatch({
-                type: types.UPDATE_WIDGET,
+                type: adminTypes.UPDATE_WIDGET,
                 payload: res.data?.updatedWidget
             })
         }

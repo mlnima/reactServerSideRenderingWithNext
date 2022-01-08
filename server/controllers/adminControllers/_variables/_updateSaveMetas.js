@@ -27,6 +27,3 @@ module.exports = async (metas) => {
         console.log('error on saving meta')
     }
 }
-
-
-//findOneAndUpdate({users:{ "$eq" : [senderId,receiverId].sort()}}

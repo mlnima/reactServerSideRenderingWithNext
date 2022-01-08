@@ -7,9 +7,11 @@ import {settingsReducer} from "./reducers/settingsReducer";
 import {chatroomReducer} from "./reducers/chatroomReducer";
 import {adminPanelGlobalStateReducer} from "./adminReducers/adminPanelGlobalStateReducer";
 import {adminPanelPostsReducer} from "./adminReducers/adminPanelPostsReducer";
+import {adminPanelUsersReducer} from "./adminReducers/adminPanelUsersReducer";
 
 export default combineReducers({
     adminPanelPosts:adminPanelPostsReducer,
+    adminPanelUsers:adminPanelUsersReducer,
     adminPanelGlobalState:adminPanelGlobalStateReducer,
     chatroom:chatroomReducer,
     settings:settingsReducer,

@@ -13,7 +13,7 @@ export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) =
         await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 dispatch({
-                    type: types.ADMIN_GET_POST,
+                    type: adminTypes.ADMIN_GET_POST,
                     payload: res.data?.post
                 })
             }).catch((err: AxiosError<AxiosErrorTypes>) => {
@@ -29,13 +29,13 @@ export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) =
             })
     } else {
         dispatch({
-            type: types.ADMIN_GET_POST,
+            type: adminTypes.ADMIN_GET_POST,
             payload: {}
         })
     }
 }
 
-export const adminGetPosts = (queriesData?: object) => async (dispatch: any) => {
+export const adminGetPosts = (queriesData?: string) => async (dispatch: any) => {
     dispatch({
         type: types.LOADING,
         payload: true
@@ -43,7 +43,6 @@ export const adminGetPosts = (queriesData?: object) => async (dispatch: any) => 
     await axios.get(
           `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
         .then((res: AxiosResponse<any>) => {
-            console.log(res.data?.posts)
             dispatch({
                 type: adminTypes.ADMIN_GET_POSTS,
                 payload: res.data?.posts
@@ -120,7 +119,7 @@ export const adminSaveNewPost = (data?: PostTypes, router?: any) => async (dispa
 
 export const adminEditPost = (data?: any) => (dispatch: any) => {
     dispatch({
-        type: types.ADMIN_EDIT_POST,
+        type: adminTypes.ADMIN_EDIT_POST,
         payload: {...data}
     })
 }
@@ -156,7 +155,7 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
             .then((res: AxiosResponse<any>) => {
                 if (res?.data?.meta) {
                     dispatch({
-                        type: types.ADMIN_GET_META,
+                        type: adminTypes.ADMIN_GET_META,
                         payload: {
                             ...res.data.meta,
                             imageUrlLock: res.data?.meta?.imageUrlLock || false
@@ -181,11 +180,39 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
             })
     }
 }
+export const adminGetMetas = (queries: string | string[] | undefined) => async (dispatch: any) => {
+    if (localStorage.wt) {
+        dispatch({
+            type: types.LOADING,
+            payload: true
+        })
+        await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getMetas${queries}&token=${localStorage.wt}`)
+            .then((res: AxiosResponse<any>) => {
+                // console.log(res.data?.metas)
+                    dispatch({
+                        type: adminTypes.ADMIN_GET_METAS,
+                        payload: res.data?.metas
+                    })
+            }).catch((err: AxiosError<AxiosErrorTypes>) => {
+                dispatch({
+                    type: types.SET_ALERT,
+                    payload: {message: err.response.data.message, type: 'error', err}
+                })
+            }).finally(() => {
+                dispatch({
+                    type: types.LOADING,
+                    payload: false
+                })
+            })
+    }
+}
+
+
 
 
 export const adminEditMeta = (change: object) => (dispatch: any) => {
     dispatch({
-        type: types.ADMIN_EDIT_META,
+        type: adminTypes.ADMIN_EDIT_META,
         payload: change
     })
 }

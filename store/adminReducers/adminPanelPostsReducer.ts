@@ -11,6 +11,7 @@ const initialState = {
     },
     posts:[],
     meta: {},
+    metas: [],
     activeEditingLanguage: 'default'
 }
 
@@ -19,7 +20,7 @@ const initialState = {
 // @ts-ignore
 export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialState, action: { type: string, payload: any }) => {
     switch (action.type) {
-        case types.ADMIN_GET_POST:
+        case adminTypes.ADMIN_GET_POST:
             return {
                 ...state,
                 post: {
@@ -27,7 +28,7 @@ export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialStat
                 }
             };
 
-        case types.ADMIN_EDIT_POST:
+        case adminTypes.ADMIN_EDIT_POST:
             return {
                 ...state,
                 post: {
@@ -36,12 +37,17 @@ export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialStat
                 }
             };
 
-        case types.ADMIN_GET_META:
+        case adminTypes.ADMIN_GET_META:
             return {
                 ...state,
                 meta: action.payload
             };
-        case types.ADMIN_EDIT_META:
+        case adminTypes.ADMIN_GET_METAS:
+            return {
+                ...state,
+                metas: action.payload
+            };
+        case adminTypes.ADMIN_EDIT_META:
             return {
                 ...state,
                 meta: {

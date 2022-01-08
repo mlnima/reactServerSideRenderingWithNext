@@ -1,4 +1,5 @@
 import * as types from '../types'
+import * as adminTypes from '../types'
 import {HYDRATE} from 'next-redux-wrapper';
 
 const initialState = {
@@ -22,7 +23,7 @@ export const settingsReducer = (state=initialState,action)=>{
                 ...state,
                 ...action?.payload || {},
             }
-        case  types.EDIT_DESIGN:
+        case  adminTypes.EDIT_DESIGN:
             return {
                 ...state,
                 design:{

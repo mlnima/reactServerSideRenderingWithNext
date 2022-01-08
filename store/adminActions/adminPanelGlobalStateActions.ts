@@ -1,4 +1,5 @@
 import * as types from "../types";
+import * as adminTypes from "../types";
 import axios, {AxiosResponse} from "axios";
 import {NextRouter} from 'next/router'
 import {PageTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
@@ -7,7 +8,7 @@ export const getCustomPages = ( ) => async (dispatch: any) => {
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/pages/getPagesData', {token: localStorage.wt}).then((res:AxiosResponse<unknown|any>) => {
         if (res.data?.pages) {
             dispatch({
-                type: types.GET_CUSTOM_PAGES,
+                type: adminTypes.GET_CUSTOM_PAGES,
                 payload: res.data.pages.map((page:PageTypes) => page.pageName)
             })
         }
@@ -50,7 +51,7 @@ export const clearCaches = ( router:NextRouter ) => async (dispatch: any) => {
 
 export const setSidebarStatus = ( status:boolean ) => async (dispatch: any) => {
     dispatch({
-        type:types.SET_SIDEBAR_STATUS,
+        type:adminTypes.SET_SIDEBAR_STATUS,
         payload:status
     })
 }

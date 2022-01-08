@@ -53,7 +53,7 @@ const Loading = () => {
 
     if (render){
         return (
-            <StyledDiv className='Loading'>
+            <StyledDiv className='Loading' >
                 <button className='stopLoading fas fa-times' onClick={() => dispatch(setLoading(false))}>
                     <FontAwesomeIcon style={{width: '1rem', height: '1rem'}} icon={faTimes} className='stopLoading'/>
                 </button>

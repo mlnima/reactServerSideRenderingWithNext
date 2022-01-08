@@ -1,12 +1,12 @@
 import Head from "next/head";
 import _ from "lodash";
 import {useSelector} from "react-redux";
-import {settingsPropTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {settingsPropTypes, StoreTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 import {useRouter} from "next/router";
 import {useState} from "react";
 
 const PostMetaDataToSiteHead = () => {
-    const post = useSelector((store: settingsPropTypes) => store.posts.post);
+    const post = useSelector((store: StoreTypes) => store.posts.post);
     const router = useRouter()
 
     // @ts-ignore

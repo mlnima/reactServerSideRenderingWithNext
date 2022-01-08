@@ -10,7 +10,7 @@ const AssetSize = () => {
     const router = useRouter()
 
     const onChangeHandler = e => {
-        router.push({
+        router?.push({
             pathname: router.pathname,
             query: {...router.query, size: e.target.value}
         })
@@ -21,6 +21,7 @@ const AssetSize = () => {
                             defaultValue={'30'}
                             onChange={e => onChangeHandler(e)}
         >
+            <option value={process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE}>{process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE}</option>
             <option value={'10'}>10</option>
             <option value={'20'}>20</option>
             <option value={'30'}>30</option>
@@ -33,6 +34,7 @@ const AssetSize = () => {
             <option value={'100'}>100</option>
             <option value={'200'}>200</option>
             <option value={'500'}>500</option>
+            <option value={'1000'}>1000</option>
         </AssetSizeStyledDiv>
     );
 };

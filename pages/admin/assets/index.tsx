@@ -1,17 +1,16 @@
-
 // need to switch in to redux
 
 import React, {useEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
-import {getPosts, getMultipleMeta, getComments} from '../../../_variables/ajaxPostsVariables'
+import {getComments} from '../../../_variables/ajaxPostsVariables'
 import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
-import {getUsersListAsAdmin} from '../../../_variables/ajaxAuthVariables'
 import {getFormsData} from '../../../_variables/ajaxVariables'
 import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
+
 import _getPostsQueryGenerator from "../../../_variables/clientVariables/_getPostsQueryGenerator";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useDispatch, useSelector} from "react-redux";
 
 const TableHeader = dynamic(
     () => import('../../../components/adminIncludes/assetComponents/TableHeader/TableHeader'),
@@ -27,18 +26,45 @@ const TableControls = dynamic(
 )
 
 import styled from "styled-components";
-import {adminGetPosts} from "../../../store/adminActions/adminPanelPostsActions";
+import {adminGetMetas, adminGetPosts} from "../../../store/adminActions/adminPanelPostsActions";
+import {settingsPropTypes, StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {adminGetUsers} from "../../../store/adminActions/adminUserActions";
+import {adminPanelUsersReducer} from "../../../store/adminReducers/adminPanelUsersReducer";
+import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
+
 const AdminAssetPageStyledDiv = styled.div`
 
 `
-const assets = (props:any) => {
+const assets = (props: any) => {
     const router = useRouter()
     const dispatch = useDispatch()
+    const posts = useSelector((store: StoreTypes) => store?.adminPanelPosts?.posts)
+    const users = useSelector((store: StoreTypes) => store?.adminPanelUsers?.users)
+    const forms = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.forms)
+    const pages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.pages)
+    const metas = useSelector((store: StoreTypes) => store?.adminPanelPosts?.metas)
+    const orders = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.orders)
+
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
 
     const [dataConfig, setDataConfig] = useState({})
 
+    useEffect(() => {
+        setFinalPageData({
+            ...finalPageData,
+            posts,
+            users,
+            forms,
+            pages,
+            metas,
+            orders,
+        })
+    }, [posts,users,forms,pages,metas,orders]);
+
+    useEffect(() => {
+        console.log(metas)
+    }, [metas]);
 
     useEffect(() => {
         setDataConfig({
@@ -62,47 +88,30 @@ const assets = (props:any) => {
 
 
     useEffect(() => {
+        const assetType = router.query.assetsType
+        if (assetType === 'posts') {
+            const gettingPostsQueries = _getPostsQueryGenerator(router?.query, router?.query.metaId, false)
+            dispatch(adminGetPosts(gettingPostsQueries))
+        } else if (assetType === 'users') {
+            dispatch(adminGetUsers())
+        }else if (assetType === 'metas') {
+            const queries = _metaPageQueryGenerator(router?.query,router?.query.metaType,false)
+            dispatch(adminGetMetas(queries))
+        }
+
+
         getAndSetAssetData().finally()
     }, [props]);
 
-    const openAllHandler =()=>{
-        // @ts-ignore
-        if (router.query.assetsType === 'metas' && finalPageData.metas?.length && typeof window !=='undefined'){
-            // @ts-ignore
-            finalPageData.metas.forEach(meta=>{
-                // @ts-ignore
-               return  window.open(`/admin/meta?id=${meta._id}`, '_blank')
-                // focus()
-                // console.log(`/admin/meta?id=${meta._id}`)
-            })
-
-        }
-
-    }
-
-
     const getAndSetAssetData = async () => {
-
         const assetType = router.query.assetsType
-
-        const gettingPostsQueries = _getPostsQueryGenerator(router?.query, router?.query.metaId, false)
-
-        // if (assetType === 'posts'){
-        //     dispatch(adminGetPosts(gettingPostsQueries))
-        // }
-
-        const ajaxRequestData = assetType === 'posts' ? await getPosts(gettingPostsQueries) :
-            assetType === 'users' ? await getUsersListAsAdmin(dataConfig, localStorage.wt) :
-                // @ts-ignore
+        const ajaxRequestData =
                 assetType === 'forms' ? await getFormsData(dataConfig, localStorage.wt) :
-                    // @ts-ignore
-                    assetType === 'pages' ? await getPagesData(dataConfig, localStorage.wt) :
+                    assetType === 'pages' ? await getPagesData(dataConfig) :
                         assetType === 'comments' ? await getComments(dataConfig, false) :
-                            assetType === 'metas' && router.query.metaType ? await getMultipleMeta(router?.query, router?.query.metaType, false) :
                                 assetType === 'orders' ? await getOrders(dataConfig, process.env.NEXT_PUBLIC_PRODUCTION_URL) : null
 
         if (ajaxRequestData) {
-
             if (router.query.assetsType === 'orders') {
                 let ordersDataArr = []
                 // @ts-ignore

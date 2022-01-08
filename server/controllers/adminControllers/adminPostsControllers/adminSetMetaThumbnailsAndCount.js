@@ -22,7 +22,6 @@ module.exports = async (req,res) =>{
                         status: meta?.status ? meta.status : 'published',
                         ...randomImageData
                     }
-                    // console.log(updateData)
                    await metaSchema.findByIdAndUpdate(meta?._id, {$set:{...updateData}},{new: true}).exec().then((updated)=>{
                     }).catch(err=>{
 

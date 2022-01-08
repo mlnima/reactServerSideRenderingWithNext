@@ -1,4 +1,5 @@
 import * as types from "../types";
+import * as adminTypes from "../types";
 import { ChangeEvent } from "react";
 import axios, {AxiosResponse} from "axios";
 
@@ -36,7 +37,7 @@ export const updateSetting = (type : any, data :object) => async (dispatch:any)=
 
 export const editDesign = ( e :ChangeEvent<any>) => async (dispatch:any) => {
     dispatch({
-        type:types.EDIT_DESIGN,
+        type:adminTypes.EDIT_DESIGN,
         payload:{
             [e.target.name]: e.target.value
         }

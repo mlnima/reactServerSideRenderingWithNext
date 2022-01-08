@@ -1,10 +1,17 @@
 import * as types from '../types'
+import * as adminTypes from '../types'
+import {User} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
 
 const initialState = {
     customPages:[],
     sidebar:false,
-    serverLog:[]
+    serverLog:[],
+    users:[],
+    forms:[],
+    pages:[],
+    metas:[],
+    orders:[],
 }
 
 export interface AdminPanelGlobalState {
@@ -16,12 +23,12 @@ export interface AdminPanelGlobalState {
 export const adminPanelGlobalStateReducer = (state : AdminPanelGlobalState = initialState , action : {type:string,payload:any}) =>{
 
     switch (action.type){
-        case types.GET_CUSTOM_PAGES:
+        case adminTypes.GET_CUSTOM_PAGES:
             return {
                 ...state,
                 customPages:action.payload
             };
-        case types.SET_SIDEBAR_STATUS:
+        case adminTypes.SET_SIDEBAR_STATUS:
             return {
                 ...state,
                 sidebar:action.payload
