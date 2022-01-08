@@ -82,7 +82,7 @@ const TableBodyItem = props => {
                 properties,
             })
         } else if (props.assetsType === 'metas') {
-            let properties = ['name', 'description', 'type', 'count',  'ImageUrl', 'createdAt', 'updatedAt']
+            let properties = ['name', 'description', 'type', 'count',  'imageUrl', 'createdAt', 'updatedAt']
             setState({
                 ...state,
                 properties,

@@ -20,40 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/adminActions/adminUserActions.ts" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/store/adminReducers/adminPanelUsersReducer.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxAuthVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxAuthVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_metaPageQueryGenerator.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/PostInformation/UploadFileBtn/uploadFileBtn.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetSize.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Loading/Loading.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Loading/Loading.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMetaDataToSiteHead/PostMetaDataToSiteHead.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/FormWidget/FormWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/FormWidget/FormWidget.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_updateSaveMetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_updateSaveMetas.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminUsersControllers/adminGetUsersList.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMultipleMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMultipleMeta.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/settingsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/settingsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelGlobalStateActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelGlobalStateActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminWidgetsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminWidgetsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminReducers/adminPanelGlobalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminReducers/adminPanelGlobalStateReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminReducers/adminPanelPostsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminReducers/adminPanelPostsReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/reducers/settingsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/settingsReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/reducers/widgetsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/widgetsReducer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/rootReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/rootReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/types.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -988,7 +957,7 @@
       <workItem from="1641480982965" duration="11080000" />
       <workItem from="1641546753538" duration="26088000" />
       <workItem from="1641631889474" duration="9388000" />
-      <workItem from="1641648407222" duration="1188000" />
+      <workItem from="1641648407222" duration="2791000" />
     </task>
     <servers />
   </component>
