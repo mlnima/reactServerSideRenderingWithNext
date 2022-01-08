@@ -21,8 +21,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetMetas.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/LearnTypeCard/LearnTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/LearnTypeCard/LearnTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/LearnTypeCard/LearnTypeCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/LearnTypeCard/LearnTypeCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/components/LearnTypePostPageDescription.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminWidgetsControllers/adminGetWidgets.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -100,7 +107,10 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash\old post page" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="Node.js.clientGetMultipleWidgetWithData.js">
+    <configuration name="clientGetMultipleWidgetWithData.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" working-dir="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers">
+      <method v="2" />
+    </configuration>
     <configuration name="ResetAdminPassword" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -116,16 +126,6 @@
       <command value="run" />
       <scripts>
         <script value="build" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
-    <configuration name="buildDev" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="buildDev" />
       </scripts>
       <node-interpreter value="project" />
       <envs />
@@ -153,11 +153,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="Node.js.clientGetMultipleWidgetWithData.js" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.ResetAdminPassword" />
-        <item itemvalue="npm.start" />
-        <item itemvalue="npm.buildDev" />
       </list>
     </recent_temporary>
   </component>
@@ -957,7 +957,7 @@
       <workItem from="1641480982965" duration="11080000" />
       <workItem from="1641546753538" duration="26088000" />
       <workItem from="1641631889474" duration="9388000" />
-      <workItem from="1641648407222" duration="2791000" />
+      <workItem from="1641648407222" duration="6974000" />
     </task>
     <servers />
   </component>

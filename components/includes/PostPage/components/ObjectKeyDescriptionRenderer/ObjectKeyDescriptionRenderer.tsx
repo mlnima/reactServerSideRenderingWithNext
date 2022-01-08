@@ -37,7 +37,7 @@ const ObjectKeyDescriptionRenderer = ({description}: ComponentPropTypes) => {
     const renderParts = description.map(elementObject => {
         const ElementType = Object.keys(elementObject)[0] as any
         return ElementType === 'img' ?
-            <img className={'learn-description-element'} src={elementObject?.[ElementType]}/> :
+            <img key={_.uniqueId('id_')} className={'learn-description-element'} src={elementObject?.[ElementType]}/> :
             ElementType === 'code' ?
                 <CodeSnippet key={_.uniqueId('id_')} code={elementObject?.[ElementType]}
                              language={elementObject?.language || 'js'}

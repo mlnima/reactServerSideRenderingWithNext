@@ -62,9 +62,9 @@ const assets = (props: any) => {
         })
     }, [posts,users,forms,pages,metas,orders]);
 
-    useEffect(() => {
-        console.log(metas)
-    }, [metas]);
+    // useEffect(() => {
+    //     console.log(metas)
+    // }, [metas]);
 
     useEffect(() => {
         setDataConfig({
