@@ -27,7 +27,14 @@ const WidgetHeader = props => {
         return (
             <WidgetHeaderStyledDiv className='widget-Header' >
                 <h2 className='widget-header-title'>{title}</h2>
-                {props.redirectLink && props.redirectToTitle && !props?.footerLink ? <Link href={props.redirectLink}><a className={'btn btn-secondary'} aria-label={props.redirectToTitle}>{props.redirectToTitle}</a></Link>:null }
+                {props.redirectLink && props.redirectToTitle && !props?.footerLink ?
+                    <Link href={props.redirectLink}>
+                        <a className={'btn btn-secondary'} rel={'next'} title={title + ' content'} aria-label={props.redirectToTitle}>
+                            {props.redirectToTitle}
+                        </a>
+                    </Link>
+                    :null
+                }
             </WidgetHeaderStyledDiv>
         );
 

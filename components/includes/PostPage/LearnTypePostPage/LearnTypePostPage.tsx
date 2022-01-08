@@ -22,13 +22,18 @@ const LearnTypePostPageStyledMain = styled(PostPageStyledMain)`
   max-width: 1300px;
   width: fit-content;
 
-  //.rating-price-download {
-  //  .link-to-source {
-  //
-  //    //background-color: var(--main-active-color);
-  //    //color: ;
-  //  }
-  //}
+  .rating-price-download {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    width: 98%;
+    .link-to-source{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      margin: 5px 0;
+    }
+  }
 
   h1 {
     font-size: 4vw;
