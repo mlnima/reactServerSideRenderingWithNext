@@ -85,7 +85,7 @@ const LearnTypePostPage = () => {
     // @ts-ignore
     return (
         <LearnTypePostPageStyledMain className='main post-page' postPageStyle={postPageStyle}>
-            {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id}/> : null}
+            {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id} status={post.status}/> : null}
             <PostMetaDataToSiteHead/>
             <PostTitle title={post.title} translations={post.translations}/>
             {/*// @ts-ignore*/}

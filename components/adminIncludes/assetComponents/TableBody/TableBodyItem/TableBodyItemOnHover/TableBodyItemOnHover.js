@@ -4,13 +4,15 @@ import Link from 'next/link';
 import {deletePage} from "../../../../../../_variables/ajaxVariables";
 import {useDispatch} from "react-redux";
 import {adminBulkActionPost, adminDeleteMeta} from "../../../../../../store/adminActions/adminPanelPostsActions";
+import {reloadPageDataByAddingQuery} from "../../../../../../store/adminActions/adminPanelGlobalStateActions";
 
 const TableBodyItemOnHover = props => {
     const dispatch = useDispatch()
     const router = useRouter()
 
     const reGetData = () => {
-        router.push({pathname: router.pathname, query: {...router.query}})
+       // router.push({pathname: router.pathname, query: {...router.query}})
+        setTimeout(()=> dispatch(reloadPageDataByAddingQuery(router)),1000)
     }
 
     if (props.isHover) {
@@ -20,11 +22,11 @@ const TableBodyItemOnHover = props => {
                 <div className='asset-page-table-body-item-hover-item'>
                     <Link href={'/admin/post?id=' + props._id}><a className={'btn btn-info'}>Edit</a></Link>
                     <Link href={`/post/${props.postType}/${props._id}` }><a target={'_blank'} className={'btn btn-info'}>View</a></Link>
-                    {status !== 'trash' ? <span className={'btn btn-danger'} onClick={() => dispatch(adminBulkActionPost([props._id], 'trash'))}>Trash</span> : null}
-                    {status !== 'draft' ? <span className={'btn btn-info'} onClick={() => dispatch(adminBulkActionPost([props._id], 'draft'))}>Draft</span> : null}
-                    {status !== 'pending' ? <span className={'btn btn-info'} onClick={() => dispatch(adminBulkActionPost([props._id], 'pending'))}>Pending</span> : null}
-                    {status === 'trash' ? <span className={'btn btn-info'} onClick={() => dispatch(adminBulkActionPost([props._id], 'delete'))}>Delete</span> : null}
-                    {status !== 'published' || status !== 'all' || !status ? <span className={'btn btn-primary'} onClick={() => dispatch(adminBulkActionPost([props._id], 'published'))}>Publish</span> : null}
+                    {status !== 'trash' ? <span className={'btn btn-danger'} onClick={() => dispatch(adminBulkActionPost([props._id], 'trash',router))}>Trash</span> : null}
+                    {status !== 'draft' ? <span className={'btn btn-info'} onClick={() => dispatch(adminBulkActionPost([props._id], 'draft',router))}>Draft</span> : null}
+                    {status !== 'pending' ? <span className={'btn btn-info'} onClick={() => dispatch(adminBulkActionPost([props._id], 'pending',router))}>Pending</span> : null}
+                    {status === 'trash' ? <span className={'btn btn-info'} onClick={() => dispatch(adminBulkActionPost([props._id], 'delete',router))}>Delete</span> : null}
+                    {status !== 'published' || status !== 'all' || !status ? <span className={'btn btn-primary'} onClick={() => dispatch(adminBulkActionPost([props._id], 'published',router))}>Publish</span> : null}
                 </div>
             )
         } else if (props.assetsType === 'users') {

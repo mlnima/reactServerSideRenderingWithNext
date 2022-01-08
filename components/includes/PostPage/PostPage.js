@@ -69,7 +69,7 @@ const PostPage = ( ) => {
     return (
         <PostPageStyledMain className='main post-page' postPageStyle={postPageStyle}>
 
-            {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id}/> :null}
+            {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id} status={post.status}/> :null}
 
             <PostMetaDataToSiteHead/>
 

@@ -68,7 +68,7 @@ const VideoTypePostPage = () => {
 
     return (
         <VideoTypePostPageStyledMain className='main post-page' postPageStyle={postPageStyle}>
-            {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id}/> : null}
+            {userData?.role === 'administrator' ? <EditLinkForAdmin _id={post._id} status={post.status}/> : null}
             <PostMetaDataToSiteHead/>
             {post.postType === 'video' ? <VideoPlayer post={post}/> : null}
             <PostTitle title={post.title} translations={post.translations}/>

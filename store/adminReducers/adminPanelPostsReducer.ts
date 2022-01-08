@@ -2,6 +2,7 @@ import * as types from '../types'
 import * as adminTypes from '../adminTypes'
 import {AdminPanelPostsTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../_variables/TypeScriptTypes/PostTypes";
+import {ADMIN_SET_TOTAL_COUNT} from "../adminTypes";
 
 
 const initialState = {
@@ -9,6 +10,7 @@ const initialState = {
         title: '',
         description: ''
     },
+    totalCount:0,
     posts:[],
     meta: {},
     metas: [],
@@ -71,6 +73,11 @@ export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialStat
             return {
                 ...state,
                 posts: action.payload
+            };
+        case adminTypes.ADMIN_SET_TOTAL_COUNT:
+            return {
+                ...state,
+                totalCount: action.payload
             };
         default:
             return state

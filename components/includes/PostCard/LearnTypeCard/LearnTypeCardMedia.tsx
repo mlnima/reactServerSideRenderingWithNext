@@ -3,14 +3,12 @@ import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
 let LearnTypeCardMediaStyledDiv = styled.div`
+  
   .learn-post-card-image {
     width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : '100%'};
     height: calc(48vw / 1.777);
     object-fit: contain;
-    -webkit-transition: opacity 1s ease-in-out;
-    -moz-transition: opacity 1s ease-in-out;
-    -o-transition: opacity 1s ease-in-out;
-    transition: opacity 1s ease-in-out;
+
   }
 
   @media only screen and (min-width: 768px) {
@@ -46,8 +44,6 @@ interface LearnTypeCardMediaPropTypes {
     mediaAlt: string,
     noImageUrl: string,
 }
-
-
 
 const LearnTypeCardMedia = (props: LearnTypeCardMediaPropTypes) => {
     const dynamicImage = true

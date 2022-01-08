@@ -5,6 +5,8 @@ import {adminBulkActionPost} from "../../../../store/adminActions/adminPanelPost
 import {useDispatch} from "react-redux";
 import styled from "styled-components";
 import {setAlert} from "../../../../store/actions/globalStateActions";
+import {useRouter} from "next/router";
+import {reloadPageDataByAddingQuery} from "../../../../store/adminActions/adminPanelGlobalStateActions";
 
 const AssetBulkActStyledSelect = styled.select`
   width: 150px;
@@ -14,21 +16,25 @@ const AssetBulkActStyledSelect = styled.select`
   }
 
 `
+
 const AssetBulkAct = props => {
     const dispatch = useDispatch()
+    const router = useRouter()
     const bulkActionSelect = useRef(null)
     const reGetData = () => {
-        props.router.push({pathname: props.router.pathname, query: {...props.router.query}})
+        router.push({pathname: router.pathname, query: {...router.query}})
     }
 
 
     const onApplyHandler = () => {
         if (props.selectedItems.length && bulkActionSelect?.current?.value){
-            switch (props.router.query.assetsType) {
+            switch (router.query.assetsType) {
                 case 'posts':
                     dispatch(adminBulkActionPost(props.selectedItems || [], bulkActionSelect.current.value))
                     props.setSelectedItems([])
                     bulkActionSelect?.current?.value = ''
+                    setTimeout(()=> dispatch(reloadPageDataByAddingQuery(router)),1000)
+
                     break
                 case 'metas':
                     bulkAction('metas', bulkActionSelect.current.value, props.selectedItems).then(() => {
@@ -47,7 +53,7 @@ const AssetBulkAct = props => {
 
     }
 
-    // if (!props.router.query.status || props.router.query.status === 'all' || props.router.query.status === 'published') {
+    // if (!router.query.status || router.query.status === 'all' || router.query.status === 'published') {
     //     return (
     //             <AssetBulkActStyledSelect className={'custom-select'} ref={bulkActionSelect} placeholder='Bulk Actions' onChange={onApplyHandler}>
     //                 <option value='none'>Bulk Actions</option>
@@ -56,7 +62,7 @@ const AssetBulkAct = props => {
     //                 <option value='trash'>Trash</option>
     //             </AssetBulkActStyledSelect>
     //     )
-    // } else if (props.router.query.status === 'trash') {
+    // } else if (router.query.status === 'trash') {
     //     return (
     //
     //             <AssetBulkActStyledSelect className={'custom-select'} ref={bulkActionSelect} placeholder='Bulk Actions' onChange={onApplyHandler}>
@@ -67,7 +73,7 @@ const AssetBulkAct = props => {
     //             </AssetBulkActStyledSelect>
     //
     //     )
-    // } else if (props.router.query.status === 'draft') {
+    // } else if (router.query.status === 'draft') {
     //     return (
     //
     //             <AssetBulkActStyledSelect className={'custom-select'} ref={bulkActionSelect} placeholder='Bulk Actions' onChange={onApplyHandler}>
@@ -77,7 +83,7 @@ const AssetBulkAct = props => {
     //             </AssetBulkActStyledSelect>
     //
     //     )
-    // } else if (props.router.query.status === 'pending') {
+    // } else if (router.query.status === 'pending') {
     //     return (
     //
     //             <AssetBulkActStyledSelect className={'custom-select'} ref={bulkActionSelect} placeholder='Bulk Actions' onChange={onApplyHandler}>
@@ -89,7 +95,7 @@ const AssetBulkAct = props => {
     //             </AssetBulkActStyledSelect>
     //
     //     )
-    // } else if (props.router.query.status === 'reported') {
+    // } else if (router.query.status === 'reported') {
     //     return (
     //
     //             <AssetBulkActStyledSelect className={'custom-select'} ref={bulkActionSelect} placeholder='Bulk Actions' onChange={onApplyHandler}>
@@ -108,15 +114,15 @@ const AssetBulkAct = props => {
 
         <AssetBulkActStyledSelect className={'custom-select'} ref={bulkActionSelect} placeholder='Bulk Actions' onChange={onApplyHandler}>
             <option value=''>Bulk Actions</option>
-            {props.router.query.status !== 'published' ? <option value='published'>Published</option> : null}
-            {props.router.query.status !== 'draft' ? <option value='draft'>Draft</option> : null}
-            {props.router.query.status !== 'trash' ? <option value='trash'>Trash</option> : null}
-            {props.router.query.status !== 'pending' ?   <option value='pending'>Pending</option> : null}
-            {props.router.query.status === 'trash' ?    <option value='delete'>Delete</option> : null}
+            {router.query.status !== 'published' ? <option value='published'>Published</option> : null}
+            {router.query.status !== 'draft' ? <option value='draft'>Draft</option> : null}
+            {router.query.status !== 'trash' ? <option value='trash'>Trash</option> : null}
+            {router.query.status !== 'pending' ?   <option value='pending'>Pending</option> : null}
+            {router.query.status === 'trash' ?    <option value='delete'>Delete</option> : null}
         </AssetBulkActStyledSelect>
 
     )
 
 
 };
-export default withRouter(AssetBulkAct);
+export default AssetBulkAct;

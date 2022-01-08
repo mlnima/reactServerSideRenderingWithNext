@@ -39,6 +39,7 @@ const assets = (props: any) => {
     const router = useRouter()
     const dispatch = useDispatch()
     const posts = useSelector((store: StoreTypes) => store?.adminPanelPosts?.posts)
+    const totalCount = useSelector((store: StoreTypes) => store?.adminPanelPosts?.totalCount)
     const users = useSelector((store: StoreTypes) => store?.adminPanelUsers?.users)
     const forms = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.forms)
     const pages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.pages)
@@ -47,20 +48,20 @@ const assets = (props: any) => {
 
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
-
     const [dataConfig, setDataConfig] = useState({})
 
     useEffect(() => {
         setFinalPageData({
             ...finalPageData,
             posts,
+            totalCount,
             users,
             forms,
             pages,
             metas,
             orders,
         })
-    }, [posts,users,forms,pages,metas,orders]);
+    }, [posts,users,forms,pages,metas,orders,totalCount]);
 
     // useEffect(() => {
     //     console.log(metas)

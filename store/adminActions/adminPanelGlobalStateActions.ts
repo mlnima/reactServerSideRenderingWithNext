@@ -4,6 +4,7 @@ import axios, {AxiosResponse} from "axios";
 import {NextRouter} from 'next/router'
 import {PageTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
+
 export const getCustomPages = ( ) => async (dispatch: any) => {
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/pages/getPagesData', {token: localStorage.wt}).then((res:AxiosResponse<unknown|any>) => {
         if (res.data?.pages) {
@@ -54,6 +55,13 @@ export const setSidebarStatus = ( status:boolean ) => async (dispatch: any) => {
         type:adminTypes.SET_SIDEBAR_STATUS,
         payload:status
     })
+}
+
+export const reloadPageDataByAddingQuery = ( router:any ) =>  () => {
+      router?.push({
+          pathname:router?.pathname,
+          query:{...router.query,lastPageUpdate:Date.now()}
+      })
 }
 
 

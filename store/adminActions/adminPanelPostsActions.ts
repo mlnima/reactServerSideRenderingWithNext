@@ -3,6 +3,7 @@ import * as adminTypes from "../adminTypes";
 import axios, {AxiosResponse, AxiosError} from "axios";
 import {AxiosErrorTypes, Meta} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../_variables/TypeScriptTypes/PostTypes";
+import {ADMIN_SET_TOTAL_COUNT} from "../adminTypes";
 
 export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) => {
     dispatch({
@@ -43,9 +44,14 @@ export const adminGetPosts = (queriesData?: string) => async (dispatch: any) => 
     await axios.get(
           `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
         .then((res: AxiosResponse<any>) => {
+            console.log(res.data)
             dispatch({
                 type: adminTypes.ADMIN_GET_POSTS,
                 payload: res.data?.posts
+            })
+            dispatch({
+                type: adminTypes.ADMIN_SET_TOTAL_COUNT,
+                payload: res.data?.totalCount
             })
         }).catch((err: AxiosError<AxiosErrorTypes>) => {
             dispatch({
@@ -279,7 +285,7 @@ export const adminUpdateMeta = (data: Meta) => async (dispatch: any) => {
 }
 
 
-export const adminBulkActionPost = (ids: string[], status: string) => (dispatch: any) => {
+export const adminBulkActionPost = (ids: string[], status: string,router) => (dispatch: any) => {
     dispatch({
         type: types.LOADING,
         payload: true
@@ -304,6 +310,13 @@ export const adminBulkActionPost = (ids: string[], status: string) => (dispatch:
             type: types.LOADING,
             payload: false
         })
+        if (router){
+            router?.push({
+                pathname:router?.pathname,
+                query:{...router.query,lastPageUpdate:Date.now()}
+            })
+        }
+
     })
 
 }

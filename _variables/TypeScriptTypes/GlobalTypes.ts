@@ -235,6 +235,7 @@ export interface Translations {
 export interface AdminPanelPostsTypes {
     users: User[];
     post?: PostTypes,
+    totalCount:number,
     posts?: PostTypes[],
     meta?:Meta,
     metas?:Meta[],
