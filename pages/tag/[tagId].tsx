@@ -38,11 +38,11 @@ const tagPage = (props: ClientPagesTypes) => {
     const userData = useSelector((store :StoreTypes) => store?.user?.userData)
 
     const tag = useSelector((store: StoreTypes) => store.posts.tagData)
-    const settings = useSelector((store: StoreTypes) => store.settings);
+    const tagPageStyle = useSelector((store: StoreTypes) => store.settings.design?.tagPageStyle || '');
     const router = useRouter()
 
     return (
-        <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
+        <StyledMain className="main posts-page" stylesData={tagPageStyle || ''}>
             {userData?.role === 'administrator' ?
                 <div className='edit-as-admin'>
                     <Link href={'/admin/meta?id=' + router.query.tagId}>

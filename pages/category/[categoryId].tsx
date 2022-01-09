@@ -42,11 +42,11 @@ const categoryPage = (props: ClientPagesTypes) => {
     // @ts-ignore
     const userData = useSelector((store :StoreTypes) => store?.user?.userData)
     const category = useSelector((store: StoreTypes) => store.posts.categoryData)
-    const settings = useSelector((store: StoreTypes) => store.settings);
+    const categoryPageStyle = useSelector((store: StoreTypes) => store.settings.design?.categoryPageStyle || '');
     const router = useRouter()
 
     return (
-        <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
+        <StyledMain className="main posts-page" stylesData={categoryPageStyle}>
             {userData?.role === 'administrator' ?
                 <div className='edit-as-admin'>
                     <Link href={'/admin/meta?id=' + router.query.categoryId}>

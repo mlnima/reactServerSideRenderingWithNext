@@ -13,6 +13,8 @@ export interface DesignSettings {
     postElementStyle: string;
     navigationStyle: string;
     actorPageStyle: string;
+    categoryPageStyle: string;
+    tagPageStyle: string;
     postsPageStyle: string;
     postPageStyle: string;
     customColors: string;

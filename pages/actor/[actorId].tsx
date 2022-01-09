@@ -13,10 +13,10 @@ import {wrapper} from "../../store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {SET_POSTS_DATA} from "../../store/types";
-import ActorBio from '../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'
 import Link from "next/link";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
+const ActorBio = dynamic(() => import('../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'))
 
 const StyledMain = styled.main`
   
@@ -35,15 +35,15 @@ const StyledMain = styled.main`
 `
 
 const actorPage = (props: ClientPagesTypes) => {
-    const userData = useSelector((store :StoreTypes) => store?.user?.userData)
-    const actor = useSelector((store: StoreTypes) => store.posts.actorData)
-    const settings = useSelector((store: StoreTypes) => store.settings);
+    const role = useSelector((store :StoreTypes) => store?.user?.userData.role)
+    const actor = useSelector((store: StoreTypes) => store?.posts?.actorData)
+    const actorPageStyle = useSelector((store: StoreTypes) => store?.settings?.design?.actorPageStyle || '');
     const router = useRouter()
 
     return (
 
-        <StyledMain className="main posts-page" stylesData={settings.design?.actorPageStyle || ''}>
-            {userData?.role === 'administrator' ?
+        <StyledMain className="main posts-page" stylesData={actorPageStyle}>
+            {role === 'administrator' ?
                 <div className='edit-as-admin'>
                     <Link href={'/admin/meta?id=' + router.query.actorId}>
                         <a className={'btn btn-primary'} >
