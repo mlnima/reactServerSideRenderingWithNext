@@ -2,6 +2,10 @@ require('dotenv').config()
 require('./server/_variables/connectToDatabase')
 require('./server/_variables/_setSettingToEnvironmentVariables').finally()
 
+const cluster = require('cluster')
+const os = require('os')
+
+
 const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
@@ -36,10 +40,16 @@ const staticServeOptions = {
     headers: {'Content-Type': 'text/plain;charset=utf-8'}
 }
 
-app.prepare().then(() => {
-    const server = express();
 
+const runServer = () => {
+    const server = express();
     server.use(cors())
+    // if (cluster.isMaster){
+    //     cluster.fork()
+    //     cluster.fork()
+    // }else {
+    //     server.listen(process.env.PORT || 3000, err => err ?  err : console.log(`server run on ${process.env.PORT || 3000}`) )
+    // }
     server.listen(process.env.PORT || 3000, err => err ?  err : console.log(`server run on ${process.env.PORT || 3000}`) )
     server.use(cookieParser());
     server.use(fileUpload());
@@ -70,12 +80,44 @@ app.prepare().then(() => {
     server.use('/api/v1',clientMainRouter);
 
     server.get('*', (req, res) => {
+       // console.log('process req : ',process.pid)
         return handle(req, res)
     });
 
-}).catch((ex) => {
-    console.log('exit error:', ex.stack)
-});
+}
+
+
+if (!process.env.CPU_CORES_ALLOW_TO_USE){
+    app.prepare().then(()=>runServer()).catch((ex) => {
+        console.log('exit error:', ex.stack)
+    });
+}else{
+    if (cluster.isMaster){
+        const numberOfCpus = os.cpus().length
+        const numberOfCpusToUse = parseInt(process.env.CPU_CORES_ALLOW_TO_USE) || 1
+
+        if (numberOfCpusToUse < numberOfCpus ){
+            [...Array(numberOfCpusToUse)].forEach(()=>{
+                cluster.fork()
+            })
+        }
+    }else {
+      //  console.log('process from cluster : ',process.pid)
+        app.prepare().then(()=>runServer()).catch((ex) => {
+            console.log('exit error:', ex.stack)
+        });
+    }
+}
+
+
+
+
+
+// app.prepare().then(()=>runServer()).catch((ex) => {
+//     console.log('exit error:', ex.stack)
+// });
+
+
 
 // const credentials = process.env.NEXT_PUBLIC_SSL === 'true' ? {
 //     key: fs.readFileSync('./server/https/localhost-key.pem'),

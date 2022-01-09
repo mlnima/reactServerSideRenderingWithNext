@@ -20,15 +20,10 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/.idea/jsLibraryMappings.xml" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actor/[actorId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actor/[actorId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/category/[categoryId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/category/[categoryId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tag/[tagId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tag/[tagId].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -101,11 +96,11 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\zh" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\adminControllers\adminPostsControllers" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\global" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\store\adminActions" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\store" />
     </key>
   </component>
   <component name="RunManager" selected="Node.js.clientGetMultipleWidgetWithData.js">
@@ -154,9 +149,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
-        <item itemvalue="npm.start" />
         <item itemvalue="Node.js.clientGetMultipleWidgetWithData.js" />
         <item itemvalue="npm.ResetAdminPassword" />
       </list>
@@ -960,6 +955,7 @@
       <workItem from="1641631889474" duration="9388000" />
       <workItem from="1641648407222" duration="23769000" />
       <workItem from="1641714527431" duration="18739000" />
+      <workItem from="1641760804516" duration="6339000" />
     </task>
     <servers />
   </component>

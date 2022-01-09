@@ -32,14 +32,14 @@ const AssetBulkAct = props => {
                 case 'posts':
                     dispatch(adminBulkActionPost(props.selectedItems || [], bulkActionSelect.current.value))
                     props.setSelectedItems([])
-                    bulkActionSelect?.current?.value = ''
+                    // bulkActionSelect?.current?.value = ''
                     setTimeout(()=> dispatch(reloadPageDataByAddingQuery(router)),1000)
 
                     break
                 case 'metas':
                     bulkAction('metas', bulkActionSelect.current.value, props.selectedItems).then(() => {
                         props.setSelectedItems([])
-                        bulkActionSelect?.current?.value = ''
+                        // bulkActionSelect?.current?.setValue('')
                         reGetData()
                     })
                     break
@@ -48,7 +48,7 @@ const AssetBulkAct = props => {
             }
         }else{
             dispatch(setAlert({message: 'No Item Or Status is Selected',type: 'warning',active:true}))
-            bulkActionSelect?.current?.value = ''
+            // bulkActionSelect?.current?.value = ''
         }
 
     }
