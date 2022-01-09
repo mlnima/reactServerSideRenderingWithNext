@@ -20,23 +20,24 @@ const ObjectKeyDescriptionRendererStyledDiv = styled.div`
       iframe {
         max-width: 90vw;
         height: calc(90vw / 1.777);
-        aspect-ratio: 16 / 9;
+        //aspect-ratio: 16 / 9;
       }
     }
     ul, li, ol, blockquote,p >*{
-      max-width: 90vw;
+      max-width: 80vw;
     }
 
-    ul, li, ol, blockquote,p {
-      max-width: 98vw;
-      margin: 0;
+    ul, li, ol, blockquote {
+      max-width: 80vw;
+      margin: 0 10px;
       padding: 0;
+      word-break: break-word;
       *{
-        max-width: 90vw;
+        max-width: 80vw;
         *{
-          max-width: 90vw;
+          max-width: 80vw;
           *{
-            max-width: 90vw;
+            max-width: 80vw;
           }
         }
         img{
@@ -55,8 +56,8 @@ const ObjectKeyDescriptionRendererStyledDiv = styled.div`
       width: 100%;
       .learn-description-element-child {
         iframe, video {
-          width: 450px;
-          height: calc(450px / 1.777);
+          width: 700px;
+          height: calc(700px / 1.777);
         }
         img {
           max-width: 450px;

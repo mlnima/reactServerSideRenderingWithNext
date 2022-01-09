@@ -14,8 +14,9 @@ import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/Me
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
 import {useSelector} from "react-redux";
-import {settingsPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {settingsPropTypes, StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {SET_POSTS_DATA} from "../../store/types";
+import Link from "next/link";
 
 let StyledMain = styled.main`
   grid-area: main;
@@ -34,12 +35,23 @@ let StyledMain = styled.main`
 `
 const tagPage = (props: ClientPagesTypes) => {
     // @ts-ignore
-    const tag = useSelector((store: settingsPropTypes) => store.posts.tagData)
-    const settings = useSelector((store: settingsPropTypes) => store.settings);
+    const userData = useSelector((store :StoreTypes) => store?.user?.userData)
+
+    const tag = useSelector((store: StoreTypes) => store.posts.tagData)
+    const settings = useSelector((store: StoreTypes) => store.settings);
     const router = useRouter()
 
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
+            {userData?.role === 'administrator' ?
+                <div className='edit-as-admin'>
+                    <Link href={'/admin/meta?id=' + router.query.tagId}>
+                        <a className={'btn btn-primary'} >
+                            Edit
+                        </a>
+                    </Link>
+                </div>
+                :null}
             {tag ? <PostsPageInfo titleToRender={tag.name}/> : null}
             {tag ? <MetaDataToSiteHead title={tag?.name} description={tag?.description} url={`${router.asPath}`} image={tag?.imageUrl}/> : null}
 

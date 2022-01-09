@@ -42,7 +42,7 @@ export const adminGetPosts = (queriesData?: string) => async (dispatch: any) => 
         payload: true
     })
     await axios.get(
-          `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
+        `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
         .then((res: AxiosResponse<any>) => {
             console.log(res.data)
             dispatch({
@@ -160,6 +160,7 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
         await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getMeta?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 if (res?.data?.meta) {
+
                     dispatch({
                         type: adminTypes.ADMIN_GET_META,
                         payload: {
@@ -167,6 +168,7 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
                             imageUrlLock: res.data?.meta?.imageUrlLock || false
                         }
                     })
+
                 }
 
                 dispatch({
@@ -195,10 +197,14 @@ export const adminGetMetas = (queries: string | string[] | undefined) => async (
         await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getMetas${queries}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 // console.log(res.data?.metas)
-                    dispatch({
-                        type: adminTypes.ADMIN_GET_METAS,
-                        payload: res.data?.metas
-                    })
+                dispatch({
+                    type: adminTypes.ADMIN_GET_METAS,
+                    payload: res.data?.metas
+                })
+                dispatch({
+                    type: adminTypes.ADMIN_SET_TOTAL_COUNT,
+                    payload: res.data?.totalCount
+                })
             }).catch((err: AxiosError<AxiosErrorTypes>) => {
                 dispatch({
                     type: types.SET_ALERT,
@@ -212,8 +218,6 @@ export const adminGetMetas = (queries: string | string[] | undefined) => async (
             })
     }
 }
-
-
 
 
 export const adminEditMeta = (change: object) => (dispatch: any) => {
@@ -285,7 +289,7 @@ export const adminUpdateMeta = (data: Meta) => async (dispatch: any) => {
 }
 
 
-export const adminBulkActionPost = (ids: string[], status: string,router) => (dispatch: any) => {
+export const adminBulkActionPost = (ids: string[], status: string, router) => (dispatch: any) => {
     dispatch({
         type: types.LOADING,
         payload: true
@@ -310,10 +314,10 @@ export const adminBulkActionPost = (ids: string[], status: string,router) => (di
             type: types.LOADING,
             payload: false
         })
-        if (router){
+        if (router) {
             router?.push({
-                pathname:router?.pathname,
-                query:{...router.query,lastPageUpdate:Date.now()}
+                pathname: router?.pathname,
+                query: {...router.query, lastPageUpdate: Date.now()}
             })
         }
 

@@ -6,19 +6,26 @@ import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
+import Link from "next/link";
 
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 import {useRouter} from "next/router";
 import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {wrapper} from "../../store/store";
 import {useSelector} from "react-redux";
-import {settingsPropTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {settingsPropTypes, StoreTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {SET_POSTS_DATA} from "../../store/types";
 
 let StyledMain = styled.main`
   grid-area: main;
   width: 100%;
+  
+  .edit-as-admin{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
 
   .posts-page-info {
     margin: 5px 0;
@@ -33,13 +40,22 @@ let StyledMain = styled.main`
 `
 const categoryPage = (props: ClientPagesTypes) => {
     // @ts-ignore
-    const category = useSelector((store: settingsPropTypes) => store.posts.categoryData)
-    const settings = useSelector((store: settingsPropTypes) => store.settings);
-
+    const userData = useSelector((store :StoreTypes) => store?.user?.userData)
+    const category = useSelector((store: StoreTypes) => store.posts.categoryData)
+    const settings = useSelector((store: StoreTypes) => store.settings);
     const router = useRouter()
 
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
+            {userData?.role === 'administrator' ?
+                <div className='edit-as-admin'>
+                    <Link href={'/admin/meta?id=' + router.query.categoryId}>
+                        <a className={'btn btn-primary'} >
+                            Edit
+                        </a>
+                    </Link>
+                </div>
+                :null}
             {category ? <PostsPageInfo titleToRender={category?.name}/> : null}
             {category ? <MetaDataToSiteHead title={category?.name} description={category?.description} url={`${router.asPath}`} image={category?.imageUrl}/> : null}
             <WidgetsRenderer

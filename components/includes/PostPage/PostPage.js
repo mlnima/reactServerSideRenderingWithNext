@@ -59,12 +59,15 @@ const PostPage = ( ) => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            setState({
-                ...state,
-                likeValue: likeValueCalculator(post.likes, post.disLikes),
-            });
+            if (post.likes, post.disLikes){
+                setState({
+                    ...state,
+                    likeValue: likeValueCalculator(post.likes, post.disLikes),
+                });
+            }
+
         }
-    }, [post.likes, post.disLikes]);
+    }, [post?.likes, post?.disLikes]);
 
     return (
         <PostPageStyledMain className='main post-page' postPageStyle={postPageStyle}>

@@ -21,7 +21,6 @@ const postPage = () => {
         return (
             <VideoTypePostPage/>
         );
-
     }else {
         return (
             <PostPage/>
@@ -48,8 +47,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 
     const postData = await getPost({_id: context.query.id}, true)
+
     // @ts-ignore
     const post = postData?.data?.post;
+    if (!post) {
+        return {notFound: true}
+    }
     const commentsData = post ? await getComments({onDocument: post._id}, true) : {}
     // @ts-ignore
     const comments = commentsData?.data?.comments ? commentsData.data?.comments : []
