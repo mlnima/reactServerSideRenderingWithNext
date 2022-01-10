@@ -1,5 +1,3 @@
-// const postSchema = require('../../../models/postSchema')
-// const metaSchema = require('../../../models/metaSchema')
 const {Worker, isMainThread,parentPort} = require('worker_threads');
 
 module.exports = async (req,res) =>{
@@ -10,8 +8,7 @@ module.exports = async (req,res) =>{
             {workerData:{type:req.query.type}}
         )
 
-        worker.once('message',scriptResult =>{
-            console.log('result:',scriptResult.message)
+        worker.once('message',() =>{
             worker.postMessage({ exit: true })
         })
 
@@ -24,8 +21,9 @@ module.exports = async (req,res) =>{
         })
     }else{
 
-        parentPort.on("message", (value) => {
-            if (value.exit) {
+        parentPort.on("message", (commandFromMainThread) => {
+            if (commandFromMainThread.exit) {
+                console.log('terminating thread')
                 process.exit(0);
             }
         });

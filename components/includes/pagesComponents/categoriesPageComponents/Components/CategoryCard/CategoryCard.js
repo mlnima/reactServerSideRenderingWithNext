@@ -48,7 +48,10 @@ const CategoryCard = ({t, cardWidth, category, onActivateLoadingHandler}) => {
             </div>
             <div className={'category-card-info'}>
                 <Link href={`/category/${category?._id}`}>
-                    <a className='category-card-info-link' onClick={onActivateLoadingHandler}>
+                    <a className='category-card-info-link'
+                       onClick={onActivateLoadingHandler}
+                       title={category?.translations?.[router.locale]?.name || t([t(`customTranslation:${category?.name}`)])}
+                    >
                         <h3 className='category-card-title'>{category?.translations?.[router.locale]?.name || t([t(`customTranslation:${category?.name}`)])}</h3>
                         {category?.count ? <span className={'category-card-count'}>({category?.count})</span> : null}
                     </a>

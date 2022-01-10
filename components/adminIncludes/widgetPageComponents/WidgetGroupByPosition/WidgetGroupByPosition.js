@@ -25,7 +25,7 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
-    width: 450px;
+    width: 650px;
     position: relative;
   }
 `

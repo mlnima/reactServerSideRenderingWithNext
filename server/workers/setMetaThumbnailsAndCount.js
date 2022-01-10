@@ -21,23 +21,16 @@ const setMetaThumbnailsAndCount = async (workerData) => {
                         status: meta?.status ? meta.status : 'published',
                         ...randomImageData
                     }
-                    await metaSchema.findByIdAndUpdate(meta?._id, {$set: {...updateData}}, {new: true}).exec().then((updated) => {
-                        // console.log(updated.name, ' updated')
-                    }).catch(err => {
-
-                    })
+                    await metaSchema.findByIdAndUpdate(meta?._id, {$set: {...updateData}}, {new: true}).exec()
                 } else {
                     await metaSchema.findByIdAndUpdate(meta?._id, {$set: {status: 'draft'}}).exec()
                 }
             }
         })
-
     } catch (err) {
         console.log('ERROR', err.stack)
     }
-
-    return {message: 'done'}
-
+    return null
 }
 
 setMetaThumbnailsAndCount(workerData).then(res => {

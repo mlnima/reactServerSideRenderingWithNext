@@ -50,7 +50,10 @@ const TagCard = ({t, cardWidth, tag, onActivateLoadingHandler}) => {
             </div>
             <div className={'tag-card-info'}>
                 <Link href={`/tag/${tag._id}`}>
-                    <a className={'tag-card-link'} onClick={onActivateLoadingHandler}>
+                    <a className={'tag-card-link'}
+                       onClick={onActivateLoadingHandler}
+                       title={tag?.translations?.[router.locale]?.name || t([t(`customTranslation:${tag?.name}`)])}
+                    >
                         <h3 className={'tag-card-title'}> {tag?.translations?.[router.locale]?.name || t([t(`customTranslation:${tag?.name}`)])}</h3>
                         {tag?.count ? <span className={'tag-card-count'}>({tag?.count})</span> : null}
                     </a>

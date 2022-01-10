@@ -51,7 +51,10 @@ const ActorCard = ({t, cardWidth, actor, onActivateLoadingHandler}) => {
             </div>
             <div className={'actor-card-info'}>
                 <Link href={`/actor/${actor._id}`}>
-                    <a className='actor-card-link' onClick={onActivateLoadingHandler}  >
+                    <a className='actor-card-link'
+                       onClick={onActivateLoadingHandler}
+                       title={title}
+                    >
                         {/*<h3 className='actor-card-title'> {actor?.translations?.[router.locale]?.name || t([t(`customTranslation:${actor?.name}`)])}</h3>*/}
                         <h3 className='actor-card-title'> {capitalizeFirstLetter(title)}</h3>
                         {actor?.count ? <span className={'actor-card-count'}>{actor?.count} {t([t(`customTranslation:Videos`)])}</span> : null}

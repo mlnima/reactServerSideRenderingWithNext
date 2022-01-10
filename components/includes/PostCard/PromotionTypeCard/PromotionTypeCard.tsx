@@ -101,7 +101,7 @@ const PromotionTypeCard = props => {
     return (
         <PromotionCardStyledDiv className='promotion-card' cardWidth={props.cardWidth} postElementSize={props.postElementSize}>
 
-            <a href={props.post.redirectLink} className='promotion-card-link-external' onClick={onExternalLinkClickViewHandler} target='_blank' rel="nofollow noopener">
+            <a href={props.post.redirectLink} className='promotion-card-link-external' onClick={onExternalLinkClickViewHandler} target='_blank' rel="nofollow noopener external">
                 <PromotionCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
             </a>
             <div className='promotion-card-under-media'>

@@ -37,8 +37,6 @@ const WidgetHeader = props => {
                 }
             </WidgetHeaderStyledDiv>
         );
-
-
 };
 
 export default WidgetHeader;

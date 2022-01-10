@@ -28,14 +28,12 @@ const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
 
-
 interface WidgetsRendererProps {
     position: string,
     _id?: string,
     isSidebar?: boolean,
     rendering?: boolean
 }
-
 
 const WidgetsRenderer = ({_id, position, isSidebar}: WidgetsRendererProps) => {
 

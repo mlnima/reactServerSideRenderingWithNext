@@ -20,12 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/server/workers/checkAndRemoveDeletedVideos.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetHeader/WidgetHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetHeader/WidgetHeader.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/customScript/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/actions/settingsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/actions/settingsActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorCard/ActorCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorCard/ActorCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoryCard/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/categoriesPageComponents/Components/CategoryCard/CategoryCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/tagsPageComponents/Components/TagCard/TagCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/tagsPageComponents/Components/TagCard/TagCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCheckAndRemoveDeletedVideos.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminSetMetaThumbnailsAndCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -958,7 +964,8 @@
       <workItem from="1641648407222" duration="23769000" />
       <workItem from="1641714527431" duration="18739000" />
       <workItem from="1641760804516" duration="8492000" />
-      <workItem from="1641803709256" duration="3891000" />
+      <workItem from="1641803709256" duration="8887000" />
+      <workItem from="1641833970678" duration="6874000" />
     </task>
     <servers />
   </component>
