@@ -5,7 +5,6 @@ require('./server/_variables/_setSettingToEnvironmentVariables').finally()
 const cluster = require('cluster')
 const os = require('os')
 
-
 const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
@@ -44,12 +43,6 @@ const staticServeOptions = {
 const runServer = () => {
     const server = express();
     server.use(cors())
-    // if (cluster.isMaster){
-    //     cluster.fork()
-    //     cluster.fork()
-    // }else {
-    //     server.listen(process.env.PORT || 3000, err => err ?  err : console.log(`server run on ${process.env.PORT || 3000}`) )
-    // }
     server.listen(process.env.PORT || 3000, err => err ?  err : console.log(`server run on ${process.env.PORT || 3000}`) )
     server.use(cookieParser());
     server.use(fileUpload());
@@ -87,7 +80,7 @@ const runServer = () => {
 }
 
 
-if (!process.env.CPU_CORES_ALLOW_TO_USE){
+if (!process.env.CPU_CORES_ALLOW_TO_USE || process.env.NODE_ENV !== 'production'){
     app.prepare().then(()=>runServer()).catch((ex) => {
         console.log('exit error:', ex.stack)
     });

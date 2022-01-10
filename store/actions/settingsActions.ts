@@ -11,6 +11,10 @@ export const setSettings = (setting:any) => (dispatch:any)=>{
 }
 
 export const updateSetting = (type : any, data :object) => async (dispatch:any)=>{
+    dispatch({
+        type:types.LOADING,
+        payload:true
+    })
     const body = {
         type,
         data,

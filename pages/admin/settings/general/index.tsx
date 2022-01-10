@@ -48,19 +48,11 @@ let StyledForm = styled.form`
       color: white;
       padding: 10px;
 
-      input {
-        background-color: white;
-        margin: 10px;
-        border: 1px solid #33373c;
+      input,textarea {
+width: 90%;
       }
 
-      textarea {
-        background-color: white;
-        margin: 10px;
-        width: 90%;
-        border: 1px solid #33373c;
-        min-height: 200px;
-      }
+
 
       .items {
         display: flex;
@@ -109,6 +101,8 @@ const settings = () => {
     const [state, setState] = useState({
         keywords: [],
         translations: {},
+        anyoneCanRegister: ''
+
     });
 
     useEffect(() => {
@@ -267,20 +261,21 @@ const settings = () => {
         }
     }
 
+    // @ts-ignore
     return (
 
         <StyledForm className='site-settings-form' onSubmit={e => onSubmitHandler(e)}>
             <div className="forms">
                 <h2>site identity:</h2>
                 <h3>Site Info:</h3>
-                <select name='activeEditingLanguage' onChange={e => onChangeLanguageHandler(e)}>
+                <select name='activeEditingLanguage'   className={'custom-select'} onChange={e => onChangeLanguageHandler(e)}>
                     <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
                     {languagesOptions}
                 </select>
                 <div className="siteIdentity site-settings-form-section-parent">
                     <div className="site-settings-form-section">
                         <p>Site Title:</p>
-                        <input type='text' name='title' value={
+                        <input className={'form-control-input'} type='text' name='title' value={
                             // @ts-ignore
                             editingSettings.activeEditingLanguage === 'default' ? state.title :
                                 // @ts-ignore
@@ -289,7 +284,7 @@ const settings = () => {
                     </div>
                     <div className="site-settings-form-section">
                         <p>Description:</p>
-                        <textarea name='description' value={
+                        <textarea className={'form-control-input'} name='description' value={
                             // @ts-ignore
                             editingSettings.activeEditingLanguage === 'default' ? state.description :
                                 // @ts-ignore
@@ -298,7 +293,7 @@ const settings = () => {
                     </div>
                     <div className="site-settings-form-section keywords">
                         <p>Keywords:</p>
-                        <input ref={keywordsInput} name='keywords'/>
+                        <input className={'form-control-input'} ref={keywordsInput} name='keywords'/>
                         <button type='button' onClick={() => addKeyword()}>add</button>
                         <span>Separate tags with commas</span>
 
@@ -310,6 +305,7 @@ const settings = () => {
                         <p>site Mod:</p>
                         <h4>Careful</h4>
                         <select name='siteMode'
+                                className={'custom-select'}
                             // @ts-ignore
                                 value={state.siteMode}
                                 onChange={e => onChangeHandler(e)}>
@@ -322,7 +318,7 @@ const settings = () => {
                     </div>
                     <div className="site-settings-form-section developmentMode">
                         <p>Development Mode</p>
-                        <input type="checkbox" name='developmentMode'
+                        <input  type="checkbox" name='developmentMode'
                             // @ts-ignore
                                checked={state.developmentMode}
                                onChange={e => checkboxChangeHandler(e)}/>
@@ -348,19 +344,19 @@ const settings = () => {
                                onChange={e => checkboxChangeHandler(e)}/>
                         <p> Cookie Read More Link</p>
 
-                        <input type="text" name='cookieReadMoreLink'
+                        <input className={'form-control-input'} type="text" name='cookieReadMoreLink'
                             // @ts-ignore
                                value={state.cookieReadMoreLink || ''}
                                onChange={e => onChangeHandler(e)}/>
                         <p> Cookie Title Text</p>
-                        <input type='text' name='cookieTitleText' value={
+                        <input  className={'form-control-input'} type='text' name='cookieTitleText' value={
                             // @ts-ignore
                             editingSettings.activeEditingLanguage === 'default' ? state.cookieTitleText :
                                 // @ts-ignore
                                 state.translations?.[editingSettings.activeEditingLanguage]?.cookieTitleText || ""
                         } onChange={e => onChangeHandlerWithTranslate(e)}/>
                         <p> Cookie Message Text</p>
-                        <textarea name='cookieMessageText' value={
+                        <textarea className={'form-control-input'} name='cookieMessageText' value={
                             // @ts-ignore
                             editingSettings.activeEditingLanguage === 'default' ? state.cookieMessageText :
                                 // @ts-ignore
@@ -371,6 +367,7 @@ const settings = () => {
                     <div className="site-settings-form-section defaultPostType">
                         <p>Default new Post Type:</p>
                         <select name='defaultPostType'
+                                className={'custom-select'}
                             // @ts-ignore
                                 value={state.defaultPostType}
                                 onChange={e => onChangeHandler(e)}>
@@ -388,6 +385,7 @@ const settings = () => {
                     <div className="site-settings-form-section defaultPostRating">
                         <p>Default new Post Rating:</p>
                         <select name='defaultPostRating'
+                                className={'custom-select'}
                             // @ts-ignore
                                 value={state.defaultPostRating || false}
                                 onChange={e => onChangeHandler(e)}>
@@ -402,23 +400,45 @@ const settings = () => {
                         <input type='text'
                             // @ts-ignore
                                value={state.favIcon}
+                               className={'form-control-input'}
                                name='favIcon'
                                placeholder='Fav Icon Url..'
                                onChange={e => onChangeHandler(e)}/>
                     </div>
                     <div className="site-settings-form-section favIcon">
                         <p>PWA icons</p>
-                        {/*// @ts-ignore*/}
-                        <input type='text' value={state.pwa192} name='pwa192' placeholder='pwa192 Icon Url..' onChange={e => onChangeHandler(e)}/>
-                        {/*// @ts-ignore*/}
-                        <input type='text' value={state.pwa384} name='pwa384' placeholder='pwa384 Icon Url..' onChange={e => onChangeHandler(e)}/>
-                        {/*// @ts-ignore*/}
-                        <input type='text' value={state.pwa512} name='pwa512' placeholder='pwa512 Icon Url..' onChange={e => onChangeHandler(e)}/>
+
+                        <input type='text'
+                               className={'form-control-input'}
+                            // @ts-ignore
+                               value={state.pwa192}
+                               name='pwa192'
+                               placeholder='pwa192 Icon Url..'
+                               onChange={e => onChangeHandler(e)}
+                        />
+
+                        <input type='text'
+                               className={'form-control-input'}
+                            // @ts-ignore
+                               value={state.pwa384}
+                               name='pwa384'
+                               placeholder='pwa384 Icon Url..'
+                               onChange={e => onChangeHandler(e)}
+                        />
+                        <input type='text'
+                               className={'form-control-input'}
+                            // @ts-ignore
+                               value={state.pwa512}
+                               name='pwa512'
+                               placeholder='pwa512 Icon Url..'
+                               onChange={e => onChangeHandler(e)}
+                        />
                     </div>
 
                     <div className="site-settings-form-section membership">
                         <p>Membership:</p>
                         <select name='membership'
+                                className={'custom-select'}
                             // @ts-ignore
                                 value={state.membership || false}
                                 onChange={e => onChangeHandler(e)}>
@@ -429,6 +449,7 @@ const settings = () => {
                     <div className="site-settings-form-section allowUserToPost">
                         <p>Allow Users To Create New Post:</p>
                         <select name='allowUserToPost'
+                                className={'custom-select'}
                             // @ts-ignore
                                 value={state.allowUserToPost || false}
                                 onChange={e => onChangeHandler(e)}>
@@ -439,9 +460,11 @@ const settings = () => {
                     <div className="site-settings-form-section allowUserToPost">
                         <p>Site Protocol:</p>
                         <select name='siteProtocol'
+                                className={'custom-select'}
                             // @ts-ignore
                                 value={state.siteProtocol}
                                 onChange={e => onChangeHandler(e)}>
+
                             <option value='http'>HTTP</option>
                             <option value='https'>HTTPS</option>
                         </select>
@@ -450,8 +473,9 @@ const settings = () => {
                     <div className="site-settings-form-section anyoneCanRegister">
                         <p>Any One Can Register :</p>
                         <select name='anyoneCanRegister'
+                                className={'custom-select'}
                             // @ts-ignore
-                                value={state.anyoneCanRegister || false}
+                                value={state?.anyoneCanRegister || false}
                                 onChange={e => onChangeHandler(e)}>
                             <option value='true'>Enable</option>
                             <option value='false'>Disable</option>
@@ -463,6 +487,7 @@ const settings = () => {
                     <p>Theme Color:</p>
                     <input type='text'
                            name='themeColor'
+                           className={'form-control-input'}
                         // @ts-ignore
                            value={state.themeColor}
                            onChange={e => onChangeHandler(e)}/>
@@ -471,6 +496,7 @@ const settings = () => {
                     <p>Posts Per Page:</p>
                     <input type='number'
                            name='postsCountPerPage'
+                           className={'form-control-input'}
                         // @ts-ignore
                            value={state.postsCountPerPage}
                            onChange={e => onChangeHandler(e)}/>
@@ -483,7 +509,7 @@ const settings = () => {
                             <div className="site-settings-form-section" key={index}>
                                 <p>{convertVariableNameToName(sidebar)}:</p>
                                 {/*// @ts-ignore*/}
-                                <select name={sidebar} value={state[sidebar]} onChange={e => onChangeHandler(e)}>
+                                <select className={'custom-select'} name={sidebar} value={state[sidebar]} onChange={e => onChangeHandler(e)}>
                                     <option>select</option>
                                     <option value='left'>Left</option>
                                     <option value='right'>Right</option>
