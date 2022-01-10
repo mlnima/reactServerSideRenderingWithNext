@@ -2,6 +2,8 @@ import _ from "lodash";
 import styled from "styled-components";
 
 const MenuWidgetEditFormStyledFrom = styled.form`
+  width: 95%;
+  margin: auto;
   .formId {
     font-size: small;
   }
@@ -19,6 +21,9 @@ const MenuWidgetEditFormStyledFrom = styled.form`
     display: flex;
     align-items: center;
     justify-content: space-between;
+    input{
+      width: 70%;
+    }
   }
 `
 const MenuWidgetEditForm = props => {
@@ -39,7 +44,7 @@ const MenuWidgetEditForm = props => {
             {props.mode === 'Add' ?
                 <div className='menu-widget-form-form-field'>
                     <p>Parent:</p>
-                    <select name='parent' value={props.data.parent} onChange={e => props.onChangeHandler(e)}>
+                    <select     className={'custom-select'} name='parent' value={props.data.parent} onChange={e => props.onChangeHandler(e)}>
                         <option>select</option>
                         {renderItemsForParent}
                     </select>
@@ -48,14 +53,24 @@ const MenuWidgetEditForm = props => {
             }
             <div className='menu-widget-form-form-field'>
                 <p>Name:</p>
-                <input required={props.mode !== 'Edit'} type="text" name='name' onChange={e => props.onChangeHandlerWithTranslate(e)}
-                       value={props.activeEditingLanguage === 'default' ? props.data.name : props.data.translations?.[props.activeEditingLanguage]?.name || ''}
+                <input className={'form-control-input'}
+                       required={props.mode !== 'Edit'}
+                       type="text" name='name'
+                       onChange={e => props.onChangeHandlerWithTranslate(e)}
+                       value={props.activeEditingLanguage === 'default' ?
+                              props.data.name :
+                              props.data.translations?.[props.activeEditingLanguage]?.name || ''
+                       }
                 />
             </div>
 
             <div className='menu-widget-form-form-field'>
                 <p>Target:</p>
-                <input required={props.mode !== 'Edit'} type="text" name='target' value={props.data.target || ''} onChange={e => props.onChangeHandler(e)}/>
+                <input className={'form-control-input'}
+                       required={props.mode !== 'Edit'}
+                       type="text" name='target' value={props.data.target || ''}
+                       onChange={e => props.onChangeHandler(e)}
+                />
             </div>
 
             {/*<div className='menu-widget-form-form-field'>*/}
@@ -64,11 +79,22 @@ const MenuWidgetEditForm = props => {
             {/*</div>*/}
             <div className='menu-widget-form-form-field'>
                 <p>Item Index:</p>
-                <input required={props.mode !== 'Edit'} type='number' name='itemIndex' value={props.data.itemIndex || ''} onChange={e => props.onChangeHandler(e)}/>
+                <input required={props.mode !== 'Edit'}
+                       className={'form-control-input'}
+                       type='number'
+                       name='itemIndex'
+                       value={props.data.itemIndex || ''}
+                       onChange={e => props.onChangeHandler(e)}
+                />
             </div>
             <div className='menu-widget-form-form-field'>
                 <p>Type:</p>
-                <select required={props.mode !== 'Edit'} name='type' onChange={e => props.onChangeHandler(e)} value={props.data.type}>
+                <select required={props.mode !== 'Edit'}
+                        className={'custom-select'}
+                        name='type'
+                        onChange={e => props.onChangeHandler(e)}
+                        value={props.data.type}
+                >
                     <option>Select</option>
                     <option value='internal'>Internal</option>
                     <option value='external'>External</option>
@@ -76,9 +102,9 @@ const MenuWidgetEditForm = props => {
             </div>
 
             <div className='menu-widget-form-form-field'>
-                <button type='submit'>{props.mode}</button>
+                <button className={'btn btn-primary'} type='submit'>{props.mode}</button>
                 {props.mode === 'Edit' ?
-                    <button onClick={() => props.onDeleteHandler(props.data.itemId)}>Delete</button>
+                    <button className={'btn btn-danger'} onClick={() => props.onDeleteHandler(props.data.itemId)}>Delete</button>
                     : null
                 }
             </div>

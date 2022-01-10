@@ -25,13 +25,24 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
-    width: 650px;
+    width: ${props=>props?.filter !=='all'? '650px':'650px' } ;
+
     position: relative;
+    .widget-model{
+      width:  650px;
+    }
   }
 `
+
+//     ${props=>props?.filter !=='all'?
+//            `
+//            display:flex;
+//            justify-content:flex-start;
+//            `:
+//             ''
+// }
 const WidgetGroupByPosition = props => {
     const widgets = useSelector(store => store?.widgets.widgets)
-    const customPages = useSelector(store => store?.adminPanelGlobalState?.customPages)
     const [widgetInThisPosition, setWidgetInThisPosition] = useState([])
 
     useEffect(() => {
@@ -40,15 +51,18 @@ const WidgetGroupByPosition = props => {
         setWidgetInThisPosition(sortWidgetForThisPosition)
     }, [widgets]);
 
-    return (
-        <WidgetGroupByPositionStyledDiv className='widgetAdminPanelItem'>
-            <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(props.position)}</p>
-            {widgetInThisPosition.map((widget) => {
-                return (
-                    <WidgetModel key={widget._id} widgetId={widget._id}/>
-                )
-            })}
-        </WidgetGroupByPositionStyledDiv>
-    );
+    if (props.filter === props.position || props.filter === 'all' ){
+        return (
+            <WidgetGroupByPositionStyledDiv filter={props.filter} className='widgetAdminPanelItem'>
+                <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(props.position)}</p>
+                {widgetInThisPosition.map((widget) => {
+                    return (
+                        <WidgetModel key={widget._id} widgetId={widget._id}/>
+                    )
+                })}
+            </WidgetGroupByPositionStyledDiv>
+        );
+    }else return null
+
 };
 export default WidgetGroupByPosition;

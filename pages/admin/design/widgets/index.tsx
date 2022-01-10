@@ -6,6 +6,8 @@ import {useSelector} from "react-redux";
 import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import WidgetPositionsSelect from "../../../../components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
+import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
   display: flex;
@@ -48,7 +50,8 @@ let StyledDiv = styled.div`
 const AdminWidgets = () => {
     const widgets = useSelector((store: StoreTypes) => store?.widgets.widgets)
     const [availablePositions, setAvailablePositions] = useState([])
-
+    const [filter, setFilter] = useState('all')
+    const router = useRouter()
     useEffect(() => {
         // @ts-ignore
         setAvailablePositions(() => {
@@ -56,6 +59,16 @@ const AdminWidgets = () => {
             return [...new Set(widgets.map(widgets => widgets?.data?.position).sort())]
         })
     }, [widgets]);
+
+    const onFilter = (e) => {
+        setFilter(e.target.value)
+        localStorage.filterwidgetPosition = e.target.value
+    }
+    useEffect(() => {
+        typeof window !== 'undefined' && localStorage?.filterwidgetPosition !=='all' ?
+            setFilter(localStorage?.filterwidgetPosition):null
+    }, []);
+
 
     return (
         <StyledDiv className='admin-widgets-page'>
@@ -65,11 +78,13 @@ const AdminWidgets = () => {
                 <div className="top-panel">
                     <AddWidgetMenu/>
                 </div>
+                <h2>Filter Position:</h2>
+                <WidgetPositionsSelect filter={filter} onChangeHandler={onFilter}/>
                 <h2>Widgets:</h2>
                 <div className="widgets">
                     {availablePositions.map((position) => {
                         return (
-                            <WidgetGroupByPosition key={position} position={position}/>
+                            <WidgetGroupByPosition filter={filter} key={position} position={position}/>
                         )
                     })}
                 </div>

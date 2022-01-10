@@ -119,14 +119,19 @@ const MenuWidgetModelFields = props => {
         return (
             <MenuWidgetModelFieldsStyledDiv>
 
-                <div className='menu-form-field'>
-                    <p className='mobileNavigationLabel '><FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo' style={{width:'15px',height:'15px'}}/> Mobile Navigation: </p>
-                    <select required={true} name='mobileNavigation' value={props.mobileNavigation} onChange={e => onMenuStyleChangeHandler(e)}>
-                        <option>Select</option>
-                        <option value='true'>True</option>
-                        <option value='false'>False</option>
-                    </select>
-                </div>
+                {/*<div className='menu-form-field'>*/}
+                {/*    <p className='mobileNavigationLabel '><FontAwesomeIcon icon={faBars} className='navigation-mobile-btn-logo' style={{width:'15px',height:'15px'}}/> Mobile Navigation: </p>*/}
+                {/*    <select required={true}*/}
+                {/*            name='mobileNavigation'*/}
+                {/*            className={'custom-select'}*/}
+                {/*            value={props.mobileNavigation}*/}
+                {/*            onChange={e => onMenuStyleChangeHandler(e)}*/}
+                {/*    >*/}
+                {/*        <option>Select</option>*/}
+                {/*        <option value='true'>True</option>*/}
+                {/*        <option value='false'>False</option>*/}
+                {/*    </select>*/}
+                {/*</div>*/}
                 <MenuWidgetEditForm
                     onChangeHandler={onChangeHandler}
                     onSubmitHandler={onAddHandler}

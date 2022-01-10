@@ -245,6 +245,7 @@ export interface AdminPanelPostsTypes {
 }
 
 export interface AdminPanelGlobalState{
+    customPages: string[];
     users:User[],
     forms:[],
     pages:[],
