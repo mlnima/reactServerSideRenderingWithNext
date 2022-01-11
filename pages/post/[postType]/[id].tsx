@@ -1,5 +1,5 @@
 import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import {getComments, getPost} from "../../../_variables/ajaxPostsVariables";
+import {getComments, getPostById} from "../../../_variables/ajaxPostsVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "../../../store/store";
 import * as types from "../../../store/types";
@@ -30,13 +30,15 @@ const postPage = () => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+    console.log(context.query)
+
     if (!context.query?.id) {
         return {notFound: true}
     }
     // @ts-ignore
-    if (!context.query?.id?.match(/^[0-9a-fA-F]{24}$/)) {
-        return {notFound: true}
-    }
+    // if (!context.query?.id?.match(/^[0-9a-fA-F]{24}$/)) {
+    //     return {notFound: true}
+    // }
 
     const firstLoadData = await getFirstLoadData(
         context.req,
@@ -46,10 +48,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     );
 
 
-    const postData = await getPost({_id: context.query.id}, true)
+    const postData = await getPostById({_id: context.query.id}, true).catch(()=>{
+        return {notFound: true}
+    })
 
     // @ts-ignore
     const post = postData?.data?.post;
+
     if (!post) {
         return {notFound: true}
     }

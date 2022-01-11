@@ -1,3 +1,5 @@
+import 'react-app-polyfill/ie9';
+import 'react-app-polyfill/ie11';
 import React from 'react';
 import Document, {Html, Head, Main, NextScript,DocumentInitialProps, DocumentContext} from 'next/document'
 import {ServerStyleSheet} from 'styled-components';

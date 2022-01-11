@@ -60,9 +60,14 @@ const rewrites = () => {
     }
 }
 
+
 const redirects = () => {
     return [
-
+        // {
+        //     source: `/:postType(video|post|product|article|book|standard|promotion|learn|food|book)?/:idOrTitle`,
+        //     destination: '/post/:postType/:idOrTitle',
+        //     permanent: false
+        // }
     ]
 }
 
@@ -85,6 +90,7 @@ const pwaSettings = {
 const nextConfigs = {
     env: {},
     rewrites,
+    // redirects,
     // swcMinify: true,
     eslint: {
         ignoreDuringBuilds: true,
@@ -95,7 +101,7 @@ module.exports = withPlugins([
     withCSS(withSass()),
     i18n,
     svgLoader,
-    process.env.NODE_ENV === 'production'  && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
+    process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
     nextImageConfig,
     withImages,
     // reWriteRoutes,

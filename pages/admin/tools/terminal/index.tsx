@@ -14,10 +14,11 @@ let StyledDiv = styled.div`
     justify-content: flex-start;
     align-items: center;
     flex-wrap: wrap;
-    .quickAccessBtn {
-      padding: 10px 20px;
-      border-radius: 5px;
-      margin: 0 10px;
+    .process-id{
+      width: 100px;
+    }
+    button{
+      margin-left:  20px;
     }
   }
 
@@ -51,6 +52,7 @@ let StyledDiv = styled.div`
 const terminal = () => {
     const dispatch = useDispatch()
     const logElement = useRef(null)
+    const processIdElement = useRef(null)
 
     const [ state, setState ] = useState({
         command: 'dir',
@@ -90,12 +92,18 @@ const terminal = () => {
                 <h2> Terminal :</h2>
                 <div className='quickAccess'>
                     <h3>Quick Access</h3>
-                    <button className='quickAccessBtn' onClick={e=>onExecutorHandler(e,'npm run-script build')}>Build</button>
-                    <button className='quickAccessBtn' onClick={e=>onExecutorHandler(e,'chmod +x update.sh')}>Permission To Updater</button>
-                    <button className='quickAccessBtn' onClick={e=>onExecutorHandler(e,'./update.sh')}>Update</button>
-                    <button className='quickAccessBtn' onClick={e=>onExecutorHandler(e,'pm2 restart all')}>Restart Webserver</button>
-
-                    {/*<button className='quickAccessBtn' onClick={e=>onExecutorHandler(e,'chmod +x update.sh ; ./update.sh ; pm2 restart all')}>Update Build RestartServer</button>*/}
+                    <button className={'btn btn-primary'} onClick={e=>onExecutorHandler(e,'npm run-script build')}>
+                        Build
+                    </button>
+                    <button className={'btn btn-primary'}
+                            onClick={e=>onExecutorHandler(e,`chmod +x update.sh && ./update.sh && pm2 restart ${processIdElement?.current.value || 'all'}`)}>
+                        Update
+                    </button>
+                    <button className={'btn btn-primary'}
+                            onClick={e=>onExecutorHandler(e,`pm2 restart ${processIdElement?.current.value || 'all'}`)}>
+                            Restart Webserver
+                    </button>
+                    <input ref={processIdElement} className={'form-control-input process-id'} type="text" name={'processId'} placeholder={'process ID or Name'}/>
                 </div>
                 <textarea ref={logElement} id='terminalLog' value={state?.log}
                     // @ts-ignore

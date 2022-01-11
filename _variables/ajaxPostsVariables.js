@@ -6,7 +6,7 @@ export const getPosts = async (queriesData) => {
     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL +`/api/v1/posts/clientGetPosts${queriesData}`)
 };
 
-export const getPost = async (data, cache) => {
+export const getPostById = async (data, cache) => {
     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/clientGetPost${ _postPageQueryGenerator(data)}` )
 };
 
