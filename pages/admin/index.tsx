@@ -5,30 +5,11 @@ import _ from "lodash";
 import styled from "styled-components";
 import {wrapper} from "../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {ButtonGroup,Button} from '@material-ui/core';
+
 const AdminHomePageStyledDiv = styled.div`
   h1{
     text-align: center;
-  }
-  .quick-access{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-wrap: wrap;
-
-   .quick-access-link{
-     font-size: 12px;
-     width: 150px;
-     text-align: center;
-     padding: 30px 10px;
-     margin: 20px;
-     color: white;
-     background-color: black;
-     border-radius: 10px;
-     &:hover{
-       transition: .4s;
-       transform: scale(1.1);
-     }
-   }
   }
 `
 const AdminHomePage = () => {
@@ -81,9 +62,11 @@ const AdminHomePage = () => {
     const renderQuickAccessLinks = state.quickAccessLinks.map(linkData => {
         return(
             <Link key={_.uniqueId('id_')} href={linkData.pathURL}>
+                <Button variant="outlined">
                 <a className='quick-access-link'>
                     {linkData.name}
                 </a>
+                </Button>
             </Link>
         )
     })
@@ -91,9 +74,9 @@ const AdminHomePage = () => {
         <AdminHomePageStyledDiv>
             <h1>Dashboard</h1>
             <h2>Quick Access</h2>
-            <div className='quick-access'>
+            <ButtonGroup variant="contained" aria-label="outlined button group">
                 {renderQuickAccessLinks}
-            </div>
+            </ButtonGroup>
             {/*<Analytics/>*/}
         </AdminHomePageStyledDiv>
 

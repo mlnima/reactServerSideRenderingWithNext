@@ -110,11 +110,10 @@ const [gotError,setGotError] = useState(false)
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
                 {gotError ?
-                   <p>Error</p>
+                   <p>Error || No image</p>
                 :  <img src={props.dataValue} onError={(err)=>{
-                        console.log(err)
+                        // console.log(err)
                         setGotError(true)
-
                   }}/>
                 }
 

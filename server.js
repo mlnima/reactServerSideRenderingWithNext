@@ -43,7 +43,10 @@ const staticServeOptions = {
 const runServer = () => {
     const server = express();
     server.use(cors())
-    server.listen(process.env.PORT || 3000, err => err ?  err : console.log(`server run on ${process.env.PORT || 3000}`) )
+    server.listen(process.env.PORT || 3000, err => {
+        if (err) throw err
+        console.log(`process ${process.pid} : server ${process.env.PORT || 3000} `)
+    } )
     server.use(cookieParser());
     server.use(fileUpload());
     server.use(bodyParser.json());

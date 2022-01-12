@@ -65,7 +65,8 @@ const searchPage = (props: ClientPagesTypes) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const keyword = context.query.keyword
+    // @ts-ignore
+    const keyword = context.query.keyword ? encodeURIComponent(context?.query?.keyword) : '';
     if (!keyword) return {notFound: true};
     const firstLoadData = await getFirstLoadData(
         context.req,

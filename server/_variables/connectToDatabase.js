@@ -11,6 +11,4 @@ const mongoDBConnectionUrl = process.env.DB_LOCAL === 'true' ?
     `mongodb://localhost:${process.env.DB_PORT}/${process.env.DB_NAME}` :
     `mongodb://${process.env.DB_USER}:${process.env.DB_PASS}@${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`
 
-module.exports = mongoose.connect(mongoDBConnectionUrl,connectionOptions)
-    .then(() => console.log('connected to Database'))
-    .catch(err => console.log('error connection to Database', err));
+module.exports = mongoose.connect(mongoDBConnectionUrl,connectionOptions).catch(err => console.log('error connection to Database', err));

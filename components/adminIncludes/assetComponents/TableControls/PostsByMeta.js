@@ -25,13 +25,16 @@ const PostsByMeta = props => {
 
     const onSearchByMetaHandler = e => {
         e.preventDefault()
-        const query = {...router.query, metaId: metaInput.current.value}
-        delete query.page
-        delete query.keyword
-        router.push({
-            pathname: router.pathname,
-            query
-        })
+        if (metaInput.current.value.trim().match(/^[0-9a-fA-F]{24}$/)){
+            const query = {...router.query, metaId: metaInput.current.value}
+            delete query.page
+            delete query.keyword
+            router.push({
+                pathname: router.pathname,
+                query
+            })
+        }
+
     }
     const onDeleteMetaHandler = ()=>{
         if (metaInput.current){
