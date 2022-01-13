@@ -16,8 +16,9 @@ const imageDownloader = async (newPost) => {
     const today = new Date(Date.now());
     const directoryPath = `./public/uploads/image/${today.getFullYear()}/${today.getMonth() + 1}/`;
     !fs.existsSync(directoryPath) ?  fs.mkdirSync(directoryPath, { recursive: true }):null;
-    const filePathOriginalSize = directoryPath + 'originalSize_' + newPost.title + Date.now() + imageformat;
-    const filePath = `${directoryPath + newPost.title}-${Date.now()}.jpg`
+    const fileName =`${newPost.title.replace(/[^a-zA-Z ]/g, "")}${Date.now()}`;
+    const filePathOriginalSize = `${directoryPath}originalSize_${fileName + imageformat}`;
+    const filePath = `${directoryPath}${fileName + imageformat}`;
     const options = {
         url: newPost.mainThumbnail,
         dest: filePathOriginalSize
@@ -27,9 +28,15 @@ const imageDownloader = async (newPost) => {
         return await download.image(options)
             .then(async ({filename}) => {
                 try {
-                    return await sharp(filePathOriginalSize).resize(320, 180).toFile(filePath).then(()=>{
-                        fsExtra.remove(filePathOriginalSize)
-                        return filePath.replace('./public/', '/public/')
+                    return await sharp(filePathOriginalSize).resize(320, 180).toFile(filePath).then(async ()=>{
+                        try {
+                            await fsExtra.remove(filePathOriginalSize)
+                            return filePath.replace('./public/', '/public/')
+                        }catch (err) {
+                            console.log(err)
+                            return newPost.mainThumbnail
+                        }
+
                     }).catch((err)=>{
                         console.log(err)
                         return newPost.mainThumbnail
