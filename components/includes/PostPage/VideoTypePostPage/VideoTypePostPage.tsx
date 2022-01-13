@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import PostPageStyledMain from "../PostPageStyle";
 import {useSelector} from "react-redux";
-import {settingsPropTypes, StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import { StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 import {likeValueCalculator} from "../../../../_variables/_variables";
@@ -22,16 +22,16 @@ const VideoPlayer = dynamic(() => import('../components/VideoPlayer/VideoPlayer'
 const PostDescription = dynamic(() => import('../components/PostDescription/PostDescription'))
 
 const VideoTypePostPageStyledMain = styled(PostPageStyledMain)`
-  a {
-    color: var(--main-active-color);
-  }
+
 `
 const VideoTypePostPage = () => {
     const postPageStyle = useSelector((store: StoreTypes) => store?.settings?.design.postPageStyle)
     const comments = useSelector((store: StoreTypes) => store?.posts?.comments)
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const post = useSelector((store: StoreTypes) => store.posts.post);
-
+    useEffect(() => {
+        console.log(post)
+    }, [post]);
     const [state, setState] = useState({
         likeValue: 0,
         mode: 'view',
@@ -58,7 +58,7 @@ const VideoTypePostPage = () => {
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            if (post.likes, post.disLikes){
+            if (post.likes, post.disLikes) {
                 setState({
                     ...state,
                     likeValue: likeValueCalculator(post.likes, post.disLikes),
@@ -78,7 +78,7 @@ const VideoTypePostPage = () => {
             <div className='rating-price-download'>
                 <RatingButtons _id={post._id} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData} rating={true}/>
                 {post.postType === 'product' ? <Price price={post.price} currency={post.currency}/> : null}
-                <DownloadLink downloadLink={post.downloadLink} render={post.downloadLink}/>
+                <DownloadLink downloadLink={post.downloadLink || post.source} downloadLinks={post?.downloadLinks || []} render={post.downloadLink || post.downloadLinks.length }/>
             </div>
             <PostDescription description={post.description} translations={post.translations}/>
             <PostMeta type='actors' data={post.actors || []}/>

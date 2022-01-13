@@ -32,14 +32,15 @@ const AssetBulkAct = props => {
                 case 'posts':
                     dispatch(adminBulkActionPost(props.selectedItems || [], bulkActionSelect.current.value))
                     props.setSelectedItems([])
-                    // bulkActionSelect?.current?.value = ''
+                    bulkActionSelect?.current?.value = ''
+
                     setTimeout(()=> dispatch(reloadPageDataByAddingQuery(router)),1000)
 
                     break
                 case 'metas':
                     bulkAction('metas', bulkActionSelect.current.value, props.selectedItems).then(() => {
                         props.setSelectedItems([])
-                        // bulkActionSelect?.current?.setValue('')
+                        bulkActionSelect?.current?.value = ''
                         reGetData()
                     })
                     break

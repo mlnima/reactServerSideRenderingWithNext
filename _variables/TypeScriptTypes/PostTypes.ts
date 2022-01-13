@@ -7,6 +7,7 @@ export interface PostTypes {
     url?: string | undefined;
     currency: string;
     downloadLink: string;
+    downloadLinks: {url:string,title:string}[];
     description: string | object,
     translations?:{
         [key:string] :{

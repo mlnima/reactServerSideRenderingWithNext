@@ -12,7 +12,7 @@ const fileDownloader = require('../util/fileDownloader')
 const imageDownloader = async (newPost) => {
 
     const formats = ['.jpeg', '.jpg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg', '.webp']
-    const imageformat = formats.find(format => newPost.mainThumbnail.includes(format))
+    const imageformat = formats.find(format => newPost?.mainThumbnail?.includes(format))
     const today = new Date(Date.now());
     const directoryPath = `./public/uploads/image/${today.getFullYear()}/${today.getMonth() + 1}/`;
     !fs.existsSync(directoryPath) ?  fs.mkdirSync(directoryPath, { recursive: true }):null;
@@ -22,17 +22,26 @@ const imageDownloader = async (newPost) => {
         url: newPost.mainThumbnail,
         dest: filePathOriginalSize
     }
+
     try {
         return await download.image(options)
             .then(async ({filename}) => {
-               return  await sharp(filePathOriginalSize).resize(320, 180).toFile(filePath).then(()=>{
-                   fsExtra.remove(filePathOriginalSize)
-                    return filePath.replace('./public/', '/public/')
-                }).catch(()=>{
+                try {
+                    return await sharp(filePathOriginalSize).resize(320, 180).toFile(filePath).then(()=>{
+                        fsExtra.remove(filePathOriginalSize)
+                        return filePath.replace('./public/', '/public/')
+                    }).catch((err)=>{
+                        console.log(err)
+                        return newPost.mainThumbnail
+                    })
+                }catch (err) {
+                    console.log(err)
                     return newPost.mainThumbnail
-                })
+                }
+
             })
             .catch((err) => {
+                console.log(err)
                 return newPost.mainThumbnail
             })
     } catch (err) {
@@ -52,7 +61,6 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
         };
-
         const newPostDataToSave = new postSchema(newPostWithMeta)
         await newPostDataToSave.save((err, createdPost) => {
             if (err) {
@@ -84,7 +92,8 @@ const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
                             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
                             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
                         }
-                        const newPostDataToSave = new postSchema(editedNewPost);
+
+                        const newPostDataToSave = await new postSchema(editedNewPost);
 
                         await newPostDataToSave.save((err, createdPost) => {
                             if (err) {

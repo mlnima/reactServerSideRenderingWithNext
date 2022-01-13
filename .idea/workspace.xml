@@ -21,9 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminBulkAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminBulkAction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminPostsBulkAction.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/models/postSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/postSchema.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableControls/AssetBulkAct.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/createNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/workers/createNewPostByApi.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -964,7 +967,7 @@
       <workItem from="1641937897105" duration="17998000" />
       <workItem from="1641977803175" duration="16063000" />
       <workItem from="1642009640871" duration="10081000" />
-      <workItem from="1642064122088" duration="2610000" />
+      <workItem from="1642064122088" duration="9804000" />
     </task>
     <servers />
   </component>

@@ -30,8 +30,6 @@ const postPage = () => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    console.log(context.query)
-
     if (!context.query?.id) {
         return {notFound: true}
     }
@@ -39,7 +37,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     // if (!context.query?.id?.match(/^[0-9a-fA-F]{24}$/)) {
     //     return {notFound: true}
     // }
-
     const firstLoadData = await getFirstLoadData(
         context.req,
         ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],
