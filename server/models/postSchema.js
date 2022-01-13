@@ -1,6 +1,11 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
+const downloadLinks = mongoose.Schema({
+    title:String,
+    url:String
+})
+
 const postSchema =  new Schema({
     author: {type: Schema.Types.ObjectID, ref: 'user'},
     title: String,
@@ -25,6 +30,7 @@ const postSchema =  new Schema({
     videoScriptCode: String,
     VideoTrailerUrl: String,
     downloadLink: String,
+    downloadLinks: [downloadLinks],
     redirectLink: String,
     currency: String,
     iframe: String,

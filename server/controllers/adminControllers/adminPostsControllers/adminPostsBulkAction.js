@@ -1,13 +1,19 @@
 //adminPostsBulkAction
 const postSchema = require('../../../models/postSchema');
+const fs = require('fs');
 
 module.exports = async (req, res) => {
     const ids = req.body.ids || [];
     const status = req.body.status;
     let actions;
+
     if (status === 'delete') {
         actions = ids.map(async id => {
-            return postSchema.findByIdAndDelete(id)
+            return postSchema.findByIdAndDelete(id).exec().then(doc=>{
+                if (!doc.mainThumbnail.includes('http')){
+                    fs.unlinkSync(`.${doc.mainThumbnail}`);
+                }
+            })
         })
     } else {
         actions = ids.map(async id => {

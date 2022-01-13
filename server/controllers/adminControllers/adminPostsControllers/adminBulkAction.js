@@ -1,6 +1,7 @@
 //adminBulkAction
 const postSchema = require('../../../models/postSchema');
 const metaSchema = require('../../../models/metaSchema');
+const userSchema = require('../../../models/userSchema');
 const commentSchema = require('../../../models/commentSchema');
 
 module.exports = async (req, res) =>{
@@ -15,7 +16,7 @@ module.exports = async (req, res) =>{
                 type === 'users' ? userSchema : null
     if (status === 'delete') {
         actionsPromise = ids.map(id => {
-            return targetSchema.findByIdAndDelete(id)
+             targetSchema.findByIdAndDelete(id)
         })
     } else {
         actionsPromise = ids.map(id => {
