@@ -132,7 +132,10 @@ const VideoCardMedia = (props: VideoCardMediaPropTypes) => {
 
     if (props.post?.videoTrailerUrl && hover) {
         return (
-            <VideoCardMediaStyledDiv className={'video-card-media'} postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
+            <VideoCardMediaStyledDiv className={'video-card-media'}
+                                     postElementSize={props.postElementSize}
+                                     cardWidth={props.cardWidth}
+            >
                 <video
                     // @ts-ignore
                     ref={videoTrailer}

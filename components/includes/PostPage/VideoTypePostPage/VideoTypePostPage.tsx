@@ -29,9 +29,7 @@ const VideoTypePostPage = () => {
     const comments = useSelector((store: StoreTypes) => store?.posts?.comments)
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const post = useSelector((store: StoreTypes) => store.posts.post);
-    useEffect(() => {
-        console.log(post)
-    }, [post]);
+
     const [state, setState] = useState({
         likeValue: 0,
         mode: 'view',
