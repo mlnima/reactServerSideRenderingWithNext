@@ -9,116 +9,116 @@ const fsExtra = require("fs-extra");
 const fs = require("fs");
 const fileDownloader = require('../util/fileDownloader')
 
-const imageDownloader = async (newPost) => {
-
-    const formats = ['.jpeg', '.jpg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg', '.webp']
-    const imageformat = formats.find(format => newPost?.mainThumbnail?.includes(format))
-    const today = new Date(Date.now());
-    const directoryPath = `./public/uploads/image/${today.getFullYear()}/${today.getMonth() + 1}/`;
-    !fs.existsSync(directoryPath) ?  fs.mkdirSync(directoryPath, { recursive: true }):null;
-    const fileName =`${newPost.title.replace(/[^a-zA-Z ]/g, "")}${Date.now()}`;
-    const filePathOriginalSize = `${directoryPath}originalSize_${fileName + imageformat}`;
-    const filePath = `${directoryPath}${fileName + imageformat}`;
-    const options = {
-        url: newPost.mainThumbnail,
-        dest: filePathOriginalSize
-    }
-
-    try {
-        return await download.image(options)
-            .then(async ({filename}) => {
-                try {
-                    return await sharp(filePathOriginalSize).resize(320, 180).toFile(filePath).then(async ()=>{
-                        try {
-                            await fsExtra.remove(filePathOriginalSize)
-                            return filePath.replace('./public/', '/public/')
-                        }catch (err) {
-                            console.log(err)
-                            return newPost.mainThumbnail
-                        }
-
-                    }).catch((err)=>{
-                        console.log(err)
-                        return newPost.mainThumbnail
-                    })
-                }catch (err) {
-                    console.log(err)
-                    return newPost.mainThumbnail
-                }
-
-            })
-            .catch((err) => {
-                console.log(err)
-                return newPost.mainThumbnail
-            })
-    } catch (err) {
-        console.log(err)
-        return newPost.mainThumbnail
-    }
-}
-
-
-const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
-
-    try {
-        const newPostWithMeta = {
-            ...newPost,
-            tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
-            categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
-            actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
-            mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
-        };
-        const newPostDataToSave = new postSchema(newPostWithMeta)
-        await newPostDataToSave.save((err, createdPost) => {
-            if (err) {
-                parentPort.postMessage({message: 'Something Went Wrong While Saving! ' + newPost.title})
-            }
-            parentPort.postMessage({message: `${createdPost.title} Has Been Saved : ${createdPost._id} `})
-        })
-    } catch (err) {
-        parentPort.postMessage({message: 'Something Went Wrong! ' + newPost.title})
-    }
-}
+// const imageDownloader = async (newPost) => {
+//
+//     const formats = ['.jpeg', '.jpg', '.jfif', '.pjpeg', '.pjp', '.png', '.svg', '.webp']
+//     const imageformat = formats.find(format => newPost?.mainThumbnail?.includes(format))
+//     const today = new Date(Date.now());
+//     const directoryPath = `./public/uploads/image/${today.getFullYear()}/${today.getMonth() + 1}/`;
+//     !fs.existsSync(directoryPath) ?  fs.mkdirSync(directoryPath, { recursive: true }):null;
+//     const fileName =`${newPost.title.replace(/[^a-zA-Z ]/g, "")}${Date.now()}`;
+//     const filePathOriginalSize = `${directoryPath}originalSize_${fileName + imageformat}`;
+//     const filePath = `${directoryPath}${fileName + imageformat}`;
+//     const options = {
+//         url: newPost.mainThumbnail,
+//         dest: filePathOriginalSize
+//     }
+//
+//     try {
+//         return await download.image(options)
+//             .then(async ({filename}) => {
+//                 try {
+//                     return await sharp(filePathOriginalSize).resize(320, 180).toFile(filePath).then(async ()=>{
+//                         try {
+//                             await fsExtra.remove(filePathOriginalSize)
+//                             return filePath.replace('./public/', '/public/')
+//                         }catch (err) {
+//                             console.log(err)
+//                             return newPost.mainThumbnail
+//                         }
+//
+//                     }).catch((err)=>{
+//                         console.log(err)
+//                         return newPost.mainThumbnail
+//                     })
+//                 }catch (err) {
+//                     console.log(err)
+//                     return newPost.mainThumbnail
+//                 }
+//
+//             })
+//             .catch((err) => {
+//                 console.log(err)
+//                 return newPost.mainThumbnail
+//             })
+//     } catch (err) {
+//         console.log(err)
+//         return newPost.mainThumbnail
+//     }
+// }
 
 
-const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
+// const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
+//
+//     try {
+//         const newPostWithMeta = {
+//             ...newPost,
+//             tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
+//             categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
+//             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
+//             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
+//         };
+//         const newPostDataToSave = new postSchema(newPostWithMeta)
+//         await newPostDataToSave.save((err, createdPost) => {
+//             if (err) {
+//                 parentPort.postMessage({message: 'Something Went Wrong While Saving! ' + newPost.title})
+//             }
+//             parentPort.postMessage({message: `${createdPost.title} Has Been Saved : ${createdPost._id} `})
+//         })
+//     } catch (err) {
+//         parentPort.postMessage({message: 'Something Went Wrong! ' + newPost.title})
+//     }
+// }
 
-    try {
-        await postSchema.find({$or: [{title: newPost.title}]})
-            .exec()
-            .then(async posts => {
-                try {
-                    if (posts.length) {
-                        parentPort.postMessage({message: 'Duplicate Error! ' + newPost.title + ' Already Exist in the Database'})
-                    } else {
-                        const editedNewPost = {
-                            ...newPost,
-                            lastModify: Date.now(),
-                            tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
-                            categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
-                            actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
-                            mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
-                        }
 
-                        const newPostDataToSave = await new postSchema(editedNewPost);
-
-                        await newPostDataToSave.save((err, createdPost) => {
-                            if (err) {
-                                parentPort.postMessage({message: 'Something Went Wrong While Saving! ' + newPost.title})
-                            }
-                            parentPort.postMessage({message: `${createdPost.title} Has Been Saved : ${createdPost._id} `})
-                        })
-                    }
-                } catch (err) {
-                    console.log(err, '94')
-                    return {message: 'Something Went Wrong While finding Duplicate In the Database! ' + newPost.title}
-                }
-            })
-    } catch (err) {
-        console.log(err, '100')
-    }
-
-}
+// const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
+//
+//     try {
+//         await postSchema.find({$or: [{title: newPost.title}]})
+//             .exec()
+//             .then(async posts => {
+//                 try {
+//                     if (posts.length) {
+//                         parentPort.postMessage({message: 'Duplicate Error! ' + newPost.title + ' Already Exist in the Database'})
+//                     } else {
+//                         const editedNewPost = {
+//                             ...newPost,
+//                             lastModify: Date.now(),
+//                             tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
+//                             categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
+//                             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
+//                             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
+//                         }
+//
+//                         const newPostDataToSave = await new postSchema(editedNewPost);
+//
+//                         await newPostDataToSave.save((err, createdPost) => {
+//                             if (err) {
+//                                 parentPort.postMessage({message: 'Something Went Wrong While Saving! ' + newPost.title})
+//                             }
+//                             parentPort.postMessage({message: `${createdPost.title} Has Been Saved : ${createdPost._id} `})
+//                         })
+//                     }
+//                 } catch (err) {
+//                     console.log(err, '94')
+//                     return {message: 'Something Went Wrong While finding Duplicate In the Database! ' + newPost.title}
+//                 }
+//             })
+//     } catch (err) {
+//         console.log(err, '100')
+//     }
+//
+// }
 
 
 const createNewPostByApi = async (newPost, dontSaveDuplicate, downloadImageContent) => {
@@ -134,15 +134,31 @@ const createNewPostByApi = async (newPost, dontSaveDuplicate, downloadImageConte
     }
 }
 
-createNewPostByApi(workerData?.newPost, workerData?.dontSaveDuplicate, workerData?.downloadImageContent).catch(err => {
-    parentPort.postMessage({message: 'Something Went Wrong While running Creator! '})
-})
+const createMultiplePostsByAPI = async (newPost,dontSaveDuplicate, downloadImageContent)=>{
+  for await (const post of newPost){
+      await createNewPostByApi(post, dontSaveDuplicate, downloadImageContent)
+  }
+}
 
-parentPort.on("message", (commandFromMainThread) => {
-    if (commandFromMainThread.exit) {
-        process.exit(0);
-    }
-});
+if (Array.isArray(workerData?.newPost)){
+    createMultiplePostsByAPI(workerData?.newPost, workerData?.dontSaveDuplicate, workerData?.downloadImageContent).catch(err => {
+        parentPort.postMessage({message: 'Something Went Wrong While running Creator! '})
+    })
+}else {
+    createNewPostByApi(workerData?.newPost, workerData?.dontSaveDuplicate, workerData?.downloadImageContent).catch(err => {
+        parentPort.postMessage({message: 'Something Went Wrong While running Creator! '})
+    })
+}
+
+
+
+
+
+// parentPort.on("message", (commandFromMainThread) => {
+//     if (commandFromMainThread.exit) {
+//         process.exit(0);
+//     }
+// });
 
 
 // if (req.body.downloadImageContent) {

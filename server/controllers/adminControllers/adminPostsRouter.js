@@ -47,7 +47,7 @@ router.get('/getMetas',adminAuthMiddleware,adminGetMetas)
 router.get('/checkAndRemoveDeletedVideos',adminAuthMiddleware,adminCheckAndRemoveDeletedVideos)
 router.get('/setMetaThumbnailsAndCount',adminAuthMiddleware,adminSetMetaThumbnailsAndCount)
 //API routes
-router.post('/createNewByApi',adminApiRequestMiddleware,adminCreateNewPostByApi)
+router.post('/createNewByApi',express.json({limit:'50MB'}),adminApiRequestMiddleware,adminCreateNewPostByApi)
 router.post('/updatePostByApi',adminApiRequestMiddleware,adminUpdatePostByApi)
 router.post('/updateMetaByApi',adminApiRequestMiddleware,adminUpdateMetaByApi)
 //------
