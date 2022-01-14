@@ -5,10 +5,11 @@ import VideoCardTypeListTitle from "./VideoCardTypeListTitle";
 import _qualityConvertor from "../asset/_qualityConvertor";
 import Link from "next/link";
 import moment from "moment";
-import CardViews from "../asset/CardViews/CardViews";
-import CardQuality from "../asset/CardQuality/CardQuality";
-import CardDuration from "../asset/CardDuration/CardDuration";
-import CardRating from "../asset/CardRating/CardRating";
+import dynamic from "next/dynamic";
+const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
+const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
+const CardQuality = dynamic(() => import('../asset/CardQuality/CardQuality'))
+const CardDuration = dynamic(() => import('../asset/CardDuration/CardDuration'))
 
 const VideoCardTypeListStyledArticle = styled.article`
   --video-card-list-font-size: 12px;
@@ -99,10 +100,10 @@ const VideoCardTypeList = (props: VideoCardTypeListPropTypes) => {
                 <VideoCardTypeListTitle postUrl={postUrl} onActivateLoadingHandler={props.onActivateLoadingHandler} title={props.title} actors={props.post?.actors} tags={props.post?.tags} categories={props.post?.categories}/>
                 <Link href={postUrl} scroll={false}>
                     <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
-                        <CardViews views={props.views} className={'video-card-views video-card-info-data'}/>
-                        <CardQuality quality={_qualityConvertor(props.post.quality)} className={'video-card-quality video-card-info-data'}/>
-                        <CardDuration duration={props.post.duration}className={'video-card-duration video-card-info-data'}/>
-                        <CardRating rating={props.rating} className={'video-card-rating video-card-info-data'}/>
+                        {props.views ? <CardViews views={props.views} className={'video-card-views video-card-info-data'}/> :null}
+                        {props.post?.quality ?  <CardQuality quality={_qualityConvertor(props.post.quality)} className={'video-card-quality video-card-info-data'}/> :null}
+                        {props.post?.duration ?   <CardDuration duration={props.post.duration}className={'video-card-duration video-card-info-data'}/> :null}
+                        {props.rating ?  <CardRating rating={props.rating} className={'video-card-rating video-card-info-data'}/> :null}
                         {props.post?.updatedAt ?
                             <p className={'last-update video-card-info-data'}>
                                   {moment(new Date(props.post?.updatedAt), 'YYYYMMDD').fromNow(false)}
@@ -116,5 +117,5 @@ const VideoCardTypeList = (props: VideoCardTypeListPropTypes) => {
         </VideoCardTypeListStyledArticle>
     );
 };
-//export default withTranslation(['common'])(VideoCardTypeList);
+
 export default VideoCardTypeList;

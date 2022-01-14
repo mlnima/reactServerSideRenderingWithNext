@@ -18,17 +18,13 @@ const AdminDataSetterStyledSpan = styled.span`
 const AdminDataSetter = (props: any) => {
     const dispatch = useDispatch()
     const router = useRouter()
-    const settings = useSelector((store: StoreTypes) => store?.settings)
+   // const settings = useSelector((store: StoreTypes) => store?.settings)
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
 
     useEffect(() => {
         if (userData?.role === 'administrator') {
             getAndSetDataForAdmin().then(() => {
-                if (props.setSidebarsData){
-                    props.setSidebarsData(
-                        setAppLayoutDataFromProp(props.LayoutProps, router, settings)
-                    )
-                }
+                    props.setIsAdmin(true )
                 console.log('welcome Admin, latest uncached data are sent for you')
             })
         }

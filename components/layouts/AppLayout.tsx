@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React, {useEffect, useState,useMemo} from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
@@ -26,15 +26,47 @@ const AppLayout = (props: any) => {
     const globalState = useSelector((store: StoreTypes) => store?.globalState)
     const settings = useSelector((store: StoreTypes) => store?.settings)
     const widgets = useSelector((store: StoreTypes) => store?.widgets?.widgets)
+    const [isAdmin,setIsAdmin] = useState(false)
     const router = useRouter()
     const dispatch = useDispatch()
 
-    const [sidebarsData, setSidebarsData] = useState(() => setAppLayoutDataFromProp(props, router, settings))
+    const sidebarsData= useMemo(() => setAppLayoutDataFromProp(props, router, settings),[router.asPath, router.pathname,isAdmin])
 
-    const [isSidebarLess, setIsSidebarLess] = useState(() => {
+    const isSidebarLess = useMemo(() => {
         return router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
-    })
+    },[])
 
+    const mainLayoutClassNameForGrid = useMemo(()=>{
+        return isSidebarLess ? 'withOutSidebar' :
+            sidebarsData?.sidebarType === 'left' ? 'leftSidebar' :
+                sidebarsData?.sidebarType === 'right' ? 'rightSidebar' :
+                    sidebarsData?.sidebarType === 'both' ? 'bothSidebar' :
+                        'withOutSidebar';
+    },[])
+
+
+
+    const defaultProps = useMemo(()=>{
+        return {
+            postElementSize: settings.design?.postElementSize,
+            postElementStyle: settings.design?.postElementStyle,
+            postElementImageLoader: settings.design?.postElementImageLoader,
+            postElementImageLoaderType: settings.design?.postElementImageLoaderType,
+        }
+    },[])
+
+
+
+    const widgetsInGroups = useMemo(()=>{
+        return {
+            topBar: widgets ? widgets?.filter(widget => widget?.data?.position === 'topBar') || [] : [],
+            header: widgets ? widgets?.filter(widget => widget?.data?.position === 'header') || [] : [],
+            navigation: widgets ? widgets?.filter(widget => widget?.data?.position === 'navigation') || [] : [],
+            footer: widgets ? widgets?.filter(widget => widget?.data?.position === 'footer') || [] : [],
+            [sidebarsData?.leftSidebar?.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData?.leftSidebar?.name) || [] : [],
+            [sidebarsData?.rightSidebar?.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData?.rightSidebar?.name) || [] : [],
+        }
+    },[])
 
     useEffect(() => {
         globalState.loading ?
@@ -42,20 +74,7 @@ const AppLayout = (props: any) => {
             null
     }, [router.pathname]);
 
-    useEffect(() => {
-        setSidebarsData(() => {
-            return setAppLayoutDataFromProp(props, router, settings)
-        })
-    }, [router.asPath, router.pathname]);
 
-    const mainLayoutClassNameForGrid = isSidebarLess ? 'withOutSidebar' : sidebarsData?.sidebarType === 'left' ? 'leftSidebar' : sidebarsData?.sidebarType === 'right' ? 'rightSidebar' : sidebarsData?.sidebarType === 'both' ? 'bothSidebar' : 'withOutSidebar';
-
-    const defaultProps = {
-        postElementSize: settings.design?.postElementSize,
-        postElementStyle: settings.design?.postElementStyle,
-        postElementImageLoader: settings.design?.postElementImageLoader,
-        postElementImageLoaderType: settings.design?.postElementImageLoaderType,
-    }
 
     useEffect(() => {
 
@@ -79,28 +98,18 @@ const AppLayout = (props: any) => {
                     router.push('/admin') :
                     null
             })
-            // document.addEventListener('keydown', e => {
-            //     e.altKey && e.keyCode === 87 ?
-            //         router.push('/admin/design/widgets') :
-            //         null
-            // })
         }
     }, [loggedIn]);
 
-    const widgetsInGroups = {
-        topBar: widgets ? widgets?.filter(widget => widget?.data?.position === 'topBar') || [] : [],
-        header: widgets ? widgets?.filter(widget => widget?.data?.position === 'header') || [] : [],
-        navigation: widgets ? widgets?.filter(widget => widget?.data?.position === 'navigation') || [] : [],
-        footer: widgets ? widgets?.filter(widget => widget?.data?.position === 'footer') || [] : [],
-        [sidebarsData?.leftSidebar?.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData?.leftSidebar?.name) || [] : [],
-        [sidebarsData?.rightSidebar?.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData?.rightSidebar?.name) || [] : [],
-    }
+
+
+
 
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
             {/*// @ts-ignore*/}
-            {userData?.role === 'administrator' ? <AdminDataSetter setSidebarsData={setSidebarsData} LayoutProps={props}/> : null}
+            {userData?.role === 'administrator' ? <AdminDataSetter setIsAdmin={setIsAdmin} LayoutProps={props}/> : null}
             {/*// @ts-ignore*/}
             <GlobalStyles colors={settings.design?.customColors || ''} globalStyleData={settings.design?.customStyles || ''} sideBarWidth={settings?.design?.sideBarWidth || 320}/>
             {/*// @ts-ignore*/}
@@ -134,7 +143,7 @@ const AppLayout = (props: any) => {
                 />
                 : null}
 
-            {widgetsInGroups?.[sidebarsData?.leftSidebar?.name]?.length  && sidebarsData?.leftSidebar?.enable ?
+            {widgetsInGroups?.[sidebarsData?.leftSidebar?.name]?.length && sidebarsData?.leftSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import {likeValueCalculator} from "../../../_variables/_variables";
@@ -8,8 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
 import {settingsPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
-import VideoCardTypeList from "../PostCard/VideoCardTypeList/VideoCardTypeList";
-
+const VideoCardTypeList = dynamic(() => import('../PostCard/VideoCardTypeList/VideoCardTypeList'))
 const PromotionCardListSmall = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionCardListSmall'))
 const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeCard'))
 const PromotionTypeCard = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionTypeCard'))
@@ -17,20 +16,18 @@ const ArticleTypeCard = dynamic(() => import('../PostCard/ArticleTypeCard/Articl
 const DefaultTypeCard = dynamic(() => import('../PostCard/DefaultTypeCard/DefaultTypeCard'))
 const LearnTypeCard = dynamic(() => import('../PostCard/LearnTypeCard/LearnTypeCard'))
 
-
-
 const PostsContentStyledDiv = styled.div`
   display: flex;
-  flex-direction: ${(props:{postElementSize:string}) => props.postElementSize === 'list' ? 'column' : 'row'} ;
-  flex-wrap: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? 'nowrap' : 'wrap'};
+  flex-direction: ${(props: { postElementSize: string }) => props.postElementSize === 'list' ? 'column' : 'row'};
+  flex-wrap: ${(props: { postElementSize: string }) => props.postElementSize === 'listSmall' ? 'nowrap' : 'wrap'};
   justify-content: center;
-  overflow-y: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? 'scroll' : 'initial'};
-  height: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? '400px' : 'initial'};
-  max-width: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? '100%' : 'initial'};
-  flex-direction: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? 'column' : 'raw'};
+  overflow-y: ${(props: { postElementSize: string }) => props.postElementSize === 'listSmall' ? 'scroll' : 'initial'};
+  height: ${(props: { postElementSize: string }) => props.postElementSize === 'listSmall' ? '400px' : 'initial'};
+  max-width: ${(props: { postElementSize: string }) => props.postElementSize === 'listSmall' ? '100%' : 'initial'};
+  flex-direction: ${(props: { postElementSize: string }) => props.postElementSize === 'listSmall' ? 'column' : 'raw'};
 
   @media only screen and (min-width: 768px) {
-    max-width: ${(props:{postElementSize:string}) => props.postElementSize === 'listSmall' ? '320px' : 'initial'};
+    max-width: ${(props: { postElementSize: string }) => props.postElementSize === 'listSmall' ? '320px' : 'initial'};
   }
 
 `
@@ -40,23 +37,26 @@ interface PostsComponentTypes {
     _id: string,
     posts: PostTypes[],
     widgetId: string,
-    postElementSize:string,
-    isSidebar:boolean
+    postElementSize: string,
+    isSidebar: boolean
 }
 
 
-const Posts = ({viewType, _id, posts, widgetId,postElementSize,isSidebar}: PostsComponentTypes) => {
-    // const settings = useSelector((store: settingsPropTypes) => store.settings);
+const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: PostsComponentTypes) => {
     const elementSize = postElementSize ? postElementSize : useSelector((store: settingsPropTypes) => store.settings?.design?.postElementSize);
     const dispatch = useDispatch()
     const router = useRouter()
-    const locale = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '';
+    const locale = useMemo(() => (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '', [])
 
-    const cardWidth = elementSize === 'listSmall' ? 320 :
-        elementSize === 'list' ? 116.6 :
-            elementSize === 'smaller' ? 209.8 :
-                elementSize === 'small' ? 255 :
-                    elementSize === 'medium' ? 320 : 255
+    const cardWidth = useMemo(() => {
+        return elementSize === 'listSmall' ? 320 :
+            elementSize === 'list' ? 116.6 :
+                elementSize === 'smaller' ? 209.8 :
+                    elementSize === 'small' ? 255 :
+                        elementSize === 'medium' ? 320 : 255
+    }, [])
+
+
     const noImageUrl = '/static/images/noImage/no-image-available.png';
     return (
         <PostsContentStyledDiv className={'posts-content ' + (viewType ? viewType + '-posts-content' : 'standard')} postElementSize={elementSize}>
@@ -86,7 +86,7 @@ const Posts = ({viewType, _id, posts, widgetId,postElementSize,isSidebar}: Posts
                         // @ts-ignore
                         return <VideoCardTypeList isSidebar={isSidebar} onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     } else {
-                         return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                        return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     }
                 } else if (post.postType === 'promotion') {
                     if (elementSize === 'listSmall') {
@@ -99,7 +99,7 @@ const Posts = ({viewType, _id, posts, widgetId,postElementSize,isSidebar}: Posts
                     return <ArticleTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                 } else if (post.postType === 'learn') {
                     return <LearnTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
-                }else return (
+                } else return (
                     <DefaultTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                 )
             })}

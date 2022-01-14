@@ -21,16 +21,12 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/ArticleTypeCard/ArticleTypeCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/PromotionTypeCard/PromotionTypeCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardDuration/CardDuration.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardDuration/CardDuration.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardMetaData/CardMetaRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardQuality/CardQuality.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardQuality/CardQuality.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardRating/CardRating.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardRating/CardRating.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardViews/CardViews.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardViews/CardViews.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/workers/createNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/workers/createNewPostByApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardInfo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardInfo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardTypeList/VideoCardTypeList.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardTypeList/VideoCardTypeList.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Posts/Posts.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Posts/Posts.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,8 +152,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="Node.js.clientGetMultipleWidgetWithData.js" />
         <item itemvalue="npm.ResetAdminPassword" />
@@ -975,7 +971,7 @@
       <workItem from="1642094461162" duration="11544000" />
       <workItem from="1642151124575" duration="594000" />
       <workItem from="1642153783626" duration="1176000" />
-      <workItem from="1642154979648" duration="3129000" />
+      <workItem from="1642154979648" duration="6721000" />
     </task>
     <servers />
   </component>
@@ -1188,7 +1184,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/includes/Posts/Posts.tsx</url>
-          <line>21</line>
+          <line>18</line>
           <option name="timeStamp" value="93" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1262,6 +1258,12 @@
           <url>file://$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js</url>
           <line>36</line>
           <option name="timeStamp" value="118" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/layouts/AppLayout.tsx</url>
+          <line>113</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="119" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
