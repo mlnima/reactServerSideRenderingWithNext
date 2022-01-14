@@ -3,9 +3,10 @@ import ArticleCardMedia from "./ArticleCardMedia";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import ArticleTypeCardTitle from "./ArticleTypeCardTitle";
-import {faEye} from "@fortawesome/free-regular-svg-icons";
-import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+import dynamic from 'next/dynamic'
+const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
+const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
+
 
 const ArticleCard = styled.div`
   width: ${props => props?.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
@@ -14,7 +15,7 @@ const ArticleCard = styled.div`
   flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
   justify-content: space-between;
-  background-color: var(--post-element-background-color,#131314);
+  background-color: var(--post-element-background-color, #131314);
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
@@ -37,7 +38,7 @@ const ArticleCard = styled.div`
       flex-direction: column;
       justify-content: space-between;
       margin-left: ${props => props.postElementSize === 'list' ? 4 : 0}px;
-      
+
       .article-card-under-media-info {
         display: flex;
         justify-content: space-between;
@@ -53,17 +54,20 @@ const ArticleCard = styled.div`
           align-items: center;
           margin: 2px 0;
           padding: 0 2px;
-          color: var(--post-element-info-text-color,#ccc);
+          color: var(--post-element-info-text-color, #ccc);
           font-size: 12px;
-          .icon{
+
+          .icon {
             width: 14px;
             height: 14px;
             margin: 0 2px;
           }
-          .thumbs-up{
+
+          .thumbs-up {
             width: 12px;
             height: 12px;
           }
+
           span {
             margin: 0 2px;
           }
@@ -90,7 +94,7 @@ const ArticleTypeCard = props => {
     return (
         <ArticleCard className='article-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                <a rel='next' onClick={ props.onActivateLoadingHandler} className='article-card-link' title={props.title} >
+                <a rel='next' onClick={props.onActivateLoadingHandler} className='article-card-link' title={props.title}>
                     <ArticleCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
                 </a>
             </Link>
@@ -104,21 +108,9 @@ const ArticleTypeCard = props => {
                 <a rel='next' className='article-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
                     <div className='article-card-under-media'>
                         <div className='article-card-under-media-info'>
-                            {props.post.postType === ('article') ?
-                                <span className='article-card-views article-card-info-data'>
-                                    <span>{props.views}</span>
-                                    <FontAwesomeIcon icon={faEye} className='icon'/>
-                                    {/*{props.t(`common:Views`)}*/}
-                                </span>
-                                : null
-                            }
-                            {props.post.postType === ('article') ?
-                                <span className='article-card-rating article-card-info-data'>
-                                    <FontAwesomeIcon icon={faThumbsUp} className='icon thumbs-up'/>
-                                    <span>{props.rating}%</span>
-                                </span>
-                                : null
-                            }
+                            {props.views ? <CardViews views={props.views} className={'article-card-views article-card-info-data'}/> : null}
+                            {props.rating ? <CardRating rating={props.rating} className={'article-card-rating article-card-info-data'}/> : null}
+
                         </div>
                     </div>
                 </a>

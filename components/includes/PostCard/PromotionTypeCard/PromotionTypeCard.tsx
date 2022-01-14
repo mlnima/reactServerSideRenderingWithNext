@@ -6,19 +6,20 @@ import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import CardTitle from "../asset/CardTitle/CardTitle";
-import CardViews from "../asset/CardViews/CardViews";
-import CardRating from "../asset/CardRating/CardRating";
+import dynamic from "next/dynamic";
+const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
+const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 
 let PromotionCardStyledDiv = styled.div`
   position: relative;
-  width: ${(props :{postElementSize:string,cardWidth:number}) => props?.postElementSize === 'list' ? '100%' : '48vw'};
+  width: ${(props: { postElementSize: string, cardWidth: number }) => props?.postElementSize === 'list' ? '100%' : '48vw'};
   max-width: ${props => props.postElementSize === 'list' ? '100%' : '48vw'};
   margin: 2.8px;
   display: flex;
   flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
   justify-content: space-between;
-  background-color: var(--post-element-background-color,#131314);
+  background-color: var(--post-element-background-color, #131314);
   font-size: 12px;
   padding-bottom: 5px;
 
@@ -47,20 +48,22 @@ let PromotionCardStyledDiv = styled.div`
         align-items: center;
         margin: 0 2px;
         padding: 0 2px;
-        color: var(--post-element-info-text-color,#ccc);
+        color: var(--post-element-info-text-color, #ccc);
 
-        .promotion-card-views {
+        .promotion-card-views, .promotion-card-rating {
           height: 12px;
           margin: 0;
           display: flex;
           align-items: center;
         }
-        .icon{
+
+        .icon {
           width: 14px;
           height: 14px;
           margin: 0 2px;
         }
-        .thumbs-up{
+
+        .thumbs-up {
           width: 12px;
           height: 12px;
         }
@@ -78,6 +81,7 @@ let PromotionCardStyledDiv = styled.div`
     .promotion-card-under-media {
       width: 100%;
       font-size: 14px;
+
       .promotion-card-link-internal {
         width: 100%;
       }
@@ -106,11 +110,11 @@ const PromotionTypeCard = props => {
             </a>
             <div className='promotion-card-under-media'>
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
-                    <a rel='next'  className='promotion-card-link-internal' onClick={ props.onActivateLoadingHandler}>
+                    <a rel='next' className='promotion-card-link-internal' onClick={props.onActivateLoadingHandler}>
                         <CardTitle title={props.title} metas={[]}/>
                         <div className='promotion-card-under-media-info'>
-                            <CardViews views={props.views} className={'promotion-card-views'}/>
-                            <CardRating rating={props.rating} className={'promotion-card-rating video-card-info-data'}/>
+                            {props.views ? <CardViews views={props.views} className={'promotion-card-views'}/> : null}
+                            {props.rating ? <CardRating rating={props.rating} className={'promotion-card-rating '}/> : null}
                         </div>
                     </a>
                 </Link>

@@ -18,7 +18,6 @@ const CardDuration = ({duration,className}:CardViewsPropTypes) => {
     return (
         <CardViewsStyledDiv className={'card-duration '+className}>
             {duration}
-            <FontAwesomeIcon icon={faClock} className={'icon'}/>
         </CardViewsStyledDiv>
     );
 };

@@ -93,7 +93,19 @@ const SearchButton = ({t}) => {
     return (
         <>
             <SearchButtonStyledButton onClick={onOpenHandler} className='search-button-widget-open-btn ' aria-label='Center Align' title={t([`common:Search`])}>
-                <FontAwesomeIcon style={{width: '24px', height: '24px', color: 'var(--navigation-text-color, #ccc)'}} icon={faSearch} className='search-bar-btn-open-svg'/>
+                <svg xmlns="http://www.w3.org/2000/svg"
+                     width="24"
+                     height="24"
+                     viewBox="0 0 24 24"
+                     fill="none"
+                     stroke="currentColor"
+                     strokeWidth="2"
+                     strokeLinecap="round"
+                     strokeLinejoin="round"
+                     className="search-bar-btn-open-svg">
+                    <circle cx="11" cy="11" r="8"/>
+                    <line x1="21" y1="21" x2="16.65" y2="16.65"/>
+                </svg>
             </SearchButtonStyledButton>
             {open ?
                 <SearchButtonStyledDiv open={open} className='search-button-widget-form-actions'>
