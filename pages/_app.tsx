@@ -6,7 +6,6 @@ import {appWithTranslation} from 'next-i18next';
 import nextI18NextConfig from '../next-i18next.config.js';
 import type {AppProps} from 'next/app';
 const AppLayout = dynamic(() => import('../components/layouts/AppLayout'));
-const LoginRegisterPopup = dynamic(() => import('../components/includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'));
 const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false});
 
@@ -23,14 +22,12 @@ const MyApp = ({Component, pageProps}: AppProps) => {
         return (
             <MessengerLayout>
                 <Component {...pageProps} />
-                <LoginRegisterPopup/>
             </MessengerLayout>
         )
     } else return (
 
         <AppLayout>
             <Component {...pageProps} />
-            <LoginRegisterPopup/>
         </AppLayout>
 
 

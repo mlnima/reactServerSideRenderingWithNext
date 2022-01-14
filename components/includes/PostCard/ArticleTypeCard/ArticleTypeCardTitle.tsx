@@ -59,7 +59,6 @@ interface ArticleTypeCardTitlePropTypes {
 
 
 const ArticleTypeCardTitle = ({title, tags, categories, cardWidth, onActivateLoadingHandler, postUrl}: ArticleTypeCardTitlePropTypes) => {
-
     return(
         <ArticleTypeCardTitleStyledDiv className={'article-card-title'} cardWidth={cardWidth}>
             <Link href={postUrl} scroll={false}>

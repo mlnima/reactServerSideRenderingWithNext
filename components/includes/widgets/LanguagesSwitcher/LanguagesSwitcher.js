@@ -50,9 +50,9 @@ const LanguagesSwitcher = props => {
     return (
         <LanguagesSwitcherStyledDiv className='language-switcher-widget'>
 
-            <span className='globe-icon'>
-                <FontAwesomeIcon icon={faGlobeEurope} className='navigation-dropdown-icon'/>
-            </span>
+            {/*<span className='globe-icon'>*/}
+            {/*    <FontAwesomeIcon icon={faGlobeEurope} className='navigation-dropdown-icon'/>*/}
+            {/*</span>*/}
 
             <select className={'custom-select'} value={router.locale} aria-label='Center Align' onChange={e => onChangeHandler(e)}>
                 <option key='default' value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'default'}</option>

@@ -1,8 +1,6 @@
 import React from 'react';
 import LoginRegisterPopupForms from "./LoginRegisterPopupForms";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const LoginRegisterPopupStyledDiv = styled.div`
   background-color: rgba(0,0,0,.8);
@@ -22,18 +20,11 @@ const LoginRegisterPopupStyledDiv = styled.div`
 `;
 
 const LoginRegisterPopup = () => {
-
-    const globalState = useSelector((store:StoreTypes) => store.globalState)
-    const loggedIn = useSelector((store:StoreTypes) => store.user.loggedIn)
-
-    if (globalState?.loginRegisterFormPopup && !loggedIn){
-        return (
-            <LoginRegisterPopupStyledDiv className='login-register-popup' >
-                <LoginRegisterPopupForms />
-            </LoginRegisterPopupStyledDiv>
-        );
-    }else return null
-
+    return (
+        <LoginRegisterPopupStyledDiv className='login-register-popup' >
+            <LoginRegisterPopupForms />
+        </LoginRegisterPopupStyledDiv>
+    );
 };
 
 export default LoginRegisterPopup;

@@ -8,7 +8,7 @@ interface CardMetaRendererPropTypes{
 const  CardMetaRenderer = ({metas}:CardMetaRendererPropTypes) => {
     return (
            <>
-                {(metas || []).filter((meta:Meta) => meta?.name?.length > 1).map((meta,index) => {
+                {(metas || []).filter((meta:Meta) => meta?.name?.length > 1).slice(0,11).map((meta,index) => {
                     return(
 
                             <CardMetaItem meta={meta} key={index}/>

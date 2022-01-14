@@ -1,5 +1,5 @@
 import Link from "next/link";
-import VideoCardMedia from "./VideoCardMedia";
+import VideoCardMedia from "./VideoCardMedia/VideoCardMedia";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import VideoCardTitle from "./VideoCardTitle";

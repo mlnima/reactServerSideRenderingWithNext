@@ -1,7 +1,9 @@
-import React, {useEffect, useRef, useState} from 'react';
+import React, {useState} from 'react';
+import dynamic from "next/dynamic";
 import styled from "styled-components";
-import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
-import VideoCardInfo from "./VideoCardInfo";
+import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import VideoCardInfo from "../VideoCardInfo";
+const VideoCardTrailer = dynamic(() => import('./VideoCardTrailer'), {ssr: false});
 
 interface styleProps {
     cardWidth: number,
@@ -18,14 +20,7 @@ let VideoCardMediaStyledDiv = styled.div`
       opacity: 100%;
     }
   }
-
-  .video-card-trailer {
-
-    width: ${(props: styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
-    height: ${(props: styleProps) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
-    animation: opacityAnimationStart 2s alternate;
-  }
-
+  
   .video-card-image {
     width: ${(props: styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
     height: ${(props: styleProps) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
@@ -80,11 +75,7 @@ let VideoCardMediaStyledDiv = styled.div`
       width: ${(props: styleProps) => props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
       height: calc(${(props: styleProps) => props.cardWidth}px / 1.777);
     }
-
-    .video-card-trailer {
-      width: ${(props: styleProps) => props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
-      height: calc(${(props: styleProps) => props.cardWidth}px / 1.777);
-    }
+    
   }
 `
 const NoImageStyleDiv = styled.div`
@@ -117,44 +108,23 @@ interface VideoCardMediaPropTypes {
 }
 
 const VideoCardMedia = (props: VideoCardMediaPropTypes) => {
-    const videoTrailer = useRef(null)
+
     const [hover, setHover] = useState(false)
     const [gotError, setGotError] = useState(false)
 
-    useEffect(() => {
-        if (hover && videoTrailer?.current ){
-            videoTrailer.current.play()
-        }
-    }, [hover]);
+
     const hoverHandler = () => {
         hover ? setHover(false) : setHover(true)
     }
 
     if (props.post?.videoTrailerUrl && hover) {
         return (
-            <VideoCardMediaStyledDiv className={'video-card-media'}
-                                     postElementSize={props.postElementSize}
-                                     cardWidth={props.cardWidth}
-            >
-                <video
-                    // @ts-ignore
-                    ref={videoTrailer}
-                   // onMouseOver={event => event.target.play()}
-                    loop={false}
-                    onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
-                    onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
-                    muted
-                    playsInline
-                    className={'video-card-trailer'}>
-                    <source src={props.post.videoTrailerUrl}/>
-                    Sorry, your browser doesn't support embedded videos.
-                </video>
-                <VideoCardInfo views={props.views}
-                               rating={props.rating}
-                               duration={props.duration}
-                               quality={props.quality}
-                />
-            </VideoCardMediaStyledDiv>
+            <VideoCardTrailer hover={hover}
+                              hoverHandler={hoverHandler}
+                              postElementSize={props.postElementSize}
+                              cardWidth={props.cardWidth}
+                              videoTrailerUrl={props.post.videoTrailerUrl}
+            />
         )
     } else {
 

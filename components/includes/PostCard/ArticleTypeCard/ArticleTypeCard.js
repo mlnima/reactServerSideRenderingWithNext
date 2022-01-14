@@ -91,6 +91,8 @@ const ArticleCard = styled.div`
 `
 const ArticleTypeCard = props => {
     const postUrl = `/post/${props.post.postType}/${props.post._id}`
+
+
     return (
         <ArticleCard className='article-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>

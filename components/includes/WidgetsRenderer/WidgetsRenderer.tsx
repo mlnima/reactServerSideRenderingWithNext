@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, useMemo} from 'react';
 import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
@@ -18,7 +18,7 @@ const SearchButton = dynamic(() => import('../widgets/SearchButton/SearchButton'
 const AlphabeticalNumericalRangeLinksWidget = dynamic(() => import('../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'))
 const LanguagesSwitcher = dynamic(() => import('../widgets/LanguagesSwitcher/LanguagesSwitcher'))
 const Logo = dynamic(() => import('../widgets/Logo/Logo'))
-const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
+const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'), {ssr: false})
 const LinkTo = dynamic(() => import('../widgets/LinkTo/LinkTo'))
 const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'), {ssr: false})
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'), {ssr: false})
@@ -43,22 +43,11 @@ const WidgetsRenderer = ({_id, position, isSidebar}: WidgetsRendererProps) => {
     const router = useRouter()
     const today = new Date().toLocaleString('en-us', {weekday: 'long'}).toLowerCase()
 
-    const widgetsData = widgets.filter((widget) => widget.data?.position === position).sort((a: WidgetPropTypes, b: WidgetPropTypes) => {
-        return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
-    })
-
-    const [widgetsMemo, setWidgetsMemo] = useState(widgetsData)
-
-    useEffect(() => {
-        setWidgetsMemo(widgetsData)
-    }, [widgets]);
-
-    useEffect(() => {
-        if (isSidebar){
-            setWidgetsMemo(widgetsData)
-        }
-    }, [router.pathname]);
-
+    const widgetsMemo = useMemo(()=>{
+        return widgets.filter((widget) => widget.data?.position === position).sort((a: WidgetPropTypes, b: WidgetPropTypes) => {
+            return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
+        })
+    },[widgets,isSidebar,router.pathname])
 
     const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
         const languageToRender = widget.data.languageToRender || 'all';

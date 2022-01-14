@@ -1,17 +1,18 @@
-import React, {useEffect, useState,useMemo} from 'react';
+import React, {useEffect, useState, useMemo} from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
-import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import GlobalStyles from "../global/Styles/GlobalStyles";
 import {useDispatch, useSelector} from 'react-redux';
 import {autoUserLogin} from "../../store/actions/userActions";
-import {setLoading, setLoginRegisterFormStatus} from "../../store/actions/globalStateActions";
+import {setLoading} from "../../store/actions/globalStateActions";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
 const AdminDataSetter = dynamic(() => import('../global/AdminDataSetter'), {ssr: false});
+const LoginRegisterPopup = dynamic(() => import('../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SideBarWidgetArea/SideBarWidgetArea'))
+const SiteSettingSetter = dynamic(() => import('../includes/SiteSettingsSetter/SiteSettingsSetter'))
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'))
 const TopBarWidgetArea = dynamic(() => import('../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'))
 const NavigationWidgetArea = dynamic(() => import('../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'))
@@ -26,38 +27,35 @@ const AppLayout = (props: any) => {
     const globalState = useSelector((store: StoreTypes) => store?.globalState)
     const settings = useSelector((store: StoreTypes) => store?.settings)
     const widgets = useSelector((store: StoreTypes) => store?.widgets?.widgets)
-    const [isAdmin,setIsAdmin] = useState(false)
+    const [isAdmin, setIsAdmin] = useState(false)
     const router = useRouter()
     const dispatch = useDispatch()
 
-    const sidebarsData= useMemo(() => setAppLayoutDataFromProp(props, router, settings),[router.asPath, router.pathname,isAdmin])
+    const sidebarsData = useMemo(() => setAppLayoutDataFromProp(props, router, settings), [router.asPath, router.pathname, isAdmin])
 
     const isSidebarLess = useMemo(() => {
         return router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
-    },[])
+    }, [router.pathname])
 
-    const mainLayoutClassNameForGrid = useMemo(()=>{
+    const mainLayoutClassNameForGrid = useMemo(() => {
         return isSidebarLess ? 'withOutSidebar' :
             sidebarsData?.sidebarType === 'left' ? 'leftSidebar' :
                 sidebarsData?.sidebarType === 'right' ? 'rightSidebar' :
                     sidebarsData?.sidebarType === 'both' ? 'bothSidebar' :
                         'withOutSidebar';
-    },[])
+    }, [sidebarsData])
 
-
-
-    const defaultProps = useMemo(()=>{
+    const defaultProps = useMemo(() => {
         return {
             postElementSize: settings.design?.postElementSize,
             postElementStyle: settings.design?.postElementStyle,
             postElementImageLoader: settings.design?.postElementImageLoader,
             postElementImageLoaderType: settings.design?.postElementImageLoaderType,
         }
-    },[])
+    }, [])
 
 
-
-    const widgetsInGroups = useMemo(()=>{
+    const widgetsInGroups = useMemo(() => {
         return {
             topBar: widgets ? widgets?.filter(widget => widget?.data?.position === 'topBar') || [] : [],
             header: widgets ? widgets?.filter(widget => widget?.data?.position === 'header') || [] : [],
@@ -66,7 +64,7 @@ const AppLayout = (props: any) => {
             [sidebarsData?.leftSidebar?.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData?.leftSidebar?.name) || [] : [],
             [sidebarsData?.rightSidebar?.name]: widgets ? widgets?.filter(widget => widget?.data?.position === sidebarsData?.rightSidebar?.name) || [] : [],
         }
-    },[])
+    }, [widgets])
 
     useEffect(() => {
         globalState.loading ?
@@ -75,35 +73,29 @@ const AppLayout = (props: any) => {
     }, [router.pathname]);
 
 
-
     useEffect(() => {
-
-        if (localStorage.wt && !loggedIn) {
+        if (localStorage?.wt && !loggedIn) {
             dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']))
         }
     }, []);
 
-    useEffect(() => {
-        if (!loggedIn && typeof document !== 'undefined') {
-            document.addEventListener('keydown', e => {
-                e.metaKey || e.ctrlKey && e.keyCode === 76 ?
-                    dispatch(setLoginRegisterFormStatus('login')) :
-                    null
-            })
-        }
-
-        if (loggedIn && typeof document !== 'undefined' && userData?.role === 'administrator') {
-            document.addEventListener('keydown', e => {
-                e.metaKey || e.ctrlKey && e.keyCode === 76 ?
-                    router.push('/admin') :
-                    null
-            })
-        }
-    }, [loggedIn]);
-
-
-
-
+    // useEffect(() => {
+    //     if (!loggedIn && typeof document !== 'undefined') {
+    //         document.addEventListener('keydown', e => {
+    //             e.metaKey || e.ctrlKey && e.keyCode === 76 ?
+    //                 dispatch(setLoginRegisterFormStatus('login')) :
+    //                 null
+    //         })
+    //     }
+    //
+    //     if (loggedIn && typeof document !== 'undefined' && userData?.role === 'administrator') {
+    //         document.addEventListener('keydown', e => {
+    //             e.metaKey || e.ctrlKey && e.keyCode === 76 ?
+    //                 router.push('/admin') :
+    //                 null
+    //         })
+    //     }
+    // }, [loggedIn]);
 
 
     return (
@@ -169,6 +161,7 @@ const AppLayout = (props: any) => {
                     stylesData={settings.design?.footerStyle || ''}
                 />
                 : null}
+            {globalState?.loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/>:null}
             {userData?.role === 'administrator' ? <AdminTools/> : null}
             {globalState?.loading ? <Loading/> : null}
             {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
