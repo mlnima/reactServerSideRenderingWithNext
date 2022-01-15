@@ -20,9 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LogoTypeWidgetModelFields/LogoTypeWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LogoTypeWidgetModelFields/LogoTypeWidgetModelFields.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminCreateNewPostByApi.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -36,8 +36,8 @@
         <option value="tsconfig.json" />
         <option value="CSS File" />
         <option value="TypeScript File" />
-        <option value="JavaScript File" />
         <option value="TypeScript JSX File" />
+        <option value="JavaScript File" />
       </list>
     </option>
   </component>
@@ -102,18 +102,8 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\global" />
     </key>
   </component>
-  <component name="RunManager" selected="Node.js.clientGetMultipleWidgetWithData.js">
-    <configuration name="clientGetMultipleWidgetWithData.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers/clientGetMultipleWidgetWithData.js" working-dir="$PROJECT_DIR$/server/controllers/clientControllers/clientWidgetsControllers">
-      <method v="2" />
-    </configuration>
-    <configuration name="ResetAdminPassword" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="ResetAdminPassword" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
+  <component name="RunManager" selected="Node.js.mergeDuplicateMetaData.js">
+    <configuration name="mergeDuplicateMetaData.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" working-dir="$PROJECT_DIR$/tools">
       <method v="2" />
     </configuration>
     <configuration name="build" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
@@ -136,6 +126,16 @@
       <envs />
       <method v="2" />
     </configuration>
+    <configuration name="mergeDuplicateMetaData" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
+      <package-json value="$PROJECT_DIR$/package.json" />
+      <command value="run" />
+      <scripts>
+        <script value="mergeDuplicateMetaData" />
+      </scripts>
+      <node-interpreter value="project" />
+      <envs />
+      <method v="2" />
+    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -148,11 +148,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.mergeDuplicateMetaData" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.mergeDuplicateMetaData.js" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="Node.js.clientGetMultipleWidgetWithData.js" />
-        <item itemvalue="npm.ResetAdminPassword" />
       </list>
     </recent_temporary>
   </component>
@@ -970,7 +970,8 @@
       <workItem from="1642154979648" duration="19413000" />
       <workItem from="1642188722918" duration="1511000" />
       <workItem from="1642208641995" duration="4692000" />
-      <workItem from="1642242632898" duration="4326000" />
+      <workItem from="1642242632898" duration="15039000" />
+      <workItem from="1642285067199" duration="1919000" />
     </task>
     <servers />
   </component>
@@ -1264,7 +1265,6 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/LogoTypeWidgetModelFields/LogoTypeWidgetModelFields.js</url>
-          <properties lambdaOrdinal="-1" />
           <option name="timeStamp" value="121" />
         </line-breakpoint>
       </breakpoints>
