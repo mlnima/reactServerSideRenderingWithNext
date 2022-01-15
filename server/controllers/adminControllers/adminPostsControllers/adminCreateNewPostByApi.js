@@ -75,40 +75,63 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
     }
 }
 
+// const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
+//
+//     try {
+//       return await postSchema.find({$or: [{title: newPost.title}]})
+//             .exec()
+//             .then(async posts => {
+//                 try {
+//                     if (posts.length) {
+//                         return {message: 'Duplicate Error! ' + newPost.title + ' Already Exist in the Database'}
+//                     } else {
+//                         const editedNewPost = {
+//                             ...newPost,
+//                             tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
+//                             categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
+//                             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
+//                             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
+//                         }
+//
+//                         const newPostDataToSave =  new postSchema(editedNewPost);
+//
+//                         return await newPostDataToSave.save((err, createdPost) => {
+//                             if (err) {
+//                                return  {message: 'Something Went Wrong While Saving! ' + newPost.title}
+//                             }
+//                             console.log('saved')
+//                             return {message: `${createdPost.title} Has Been Saved : ${createdPost._id} `}
+//                         })
+//                     }
+//                 } catch (err) {
+//                     return {message: 'Something Went Wrong While finding Duplicate In the Database! ' + newPost.title}
+//                 }
+//             })
+//     } catch (err) {
+//         console.log(err, '100')
+//     }
+//
+// }
 const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
 
     try {
-      return   await postSchema.find({$or: [{title: newPost.title}]})
+        const editedNewPost = {
+            ...newPost,
+            tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
+            categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
+            actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
+            mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
+        }
+
+      return await postSchema.findOneAndUpdate({title: newPost.title},editedNewPost,{new:true,upsert:true})
             .exec()
-            .then(async posts => {
-                try {
-                    if (posts.length) {
-                        return {message: 'Duplicate Error! ' + newPost.title + ' Already Exist in the Database'}
-                    } else {
-                        const editedNewPost = {
-                            ...newPost,
-                            tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
-                            categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
-                            actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
-                            mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
-                        }
-
-                        const newPostDataToSave =  new postSchema(editedNewPost);
-
-                        return await newPostDataToSave.save((err, createdPost) => {
-                            if (err) {
-                               return  {message: 'Something Went Wrong While Saving! ' + newPost.title}
-                            }
-                            console.log('saved')
-                            return {message: `${createdPost.title} Has Been Saved : ${createdPost._id} `}
-                        })
-                    }
-                } catch (err) {
-                    return {message: 'Something Went Wrong While finding Duplicate In the Database! ' + newPost.title}
-                }
-            })
+            .then(async createdPost => {
+                return {message: `${createdPost.title} Has Been Saved : ${createdPost._id} `}
+            }).catch(err=>{
+              return {message: `Something Went Wrong While saving`,err}
+          })
     } catch (err) {
-        console.log(err, '100')
+        console.log(err)
     }
 
 }

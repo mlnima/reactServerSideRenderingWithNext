@@ -7,12 +7,12 @@ const LogoTypeWidgetModelFields = ({widgetSettings,widgetData,onTextInputsDataCh
         <>
             <div className='textInputFieldForWidget widgetSection'>
                 <p>Logo Text :</p>
-                <input name='LogoText'
+                <input name={'LogoText'}
+                       className={'LogoText form-control-input'}
                        value={
                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.LogoText :
                                widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.LogoText || ''
                        }
-                       className='LogoText'
                        onChange={e => onTextInputsDataChangeHandler(e)}/>
             </div>
             <div className='textInputFieldForWidget widgetSection'>
@@ -21,13 +21,20 @@ const LogoTypeWidgetModelFields = ({widgetSettings,widgetData,onTextInputsDataCh
                        value={
                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.headLine :
                                widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.headLine || ''
-
                        }
-                       className='headLine'
+                       className={'headLine form-control-input'}
                        onChange={e => onTextInputsDataChangeHandler(e)}/>
-                <TextInputFieldForWidget inputTitle='Logo image URL :' name='LogoUrl' type='text' value={widgetData.LogoUrl} classNameValue='logoUrl'
-                                         placeHolder='Logo image URL' onChangeHandler={onChangeHandler} rendering={widgetData.type === 'logo'}/>
+
             </div>
+            <TextInputFieldForWidget inputTitle='Logo image URL :'
+                                     name='LogoUrl'
+                                     type='text'
+                                     value={widgetData.LogoUrl}
+                                     classNameValue='logoUrl'
+                                     placeHolder='Logo image URL'
+                                     onChangeHandler={onChangeHandler}
+                                     rendering={widgetData.type === 'logo'}
+            />
         </>
     );
 };
