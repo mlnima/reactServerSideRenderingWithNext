@@ -1,13 +1,12 @@
-import React from 'react';
-import Link from "next/link";
-import ImageRenderer from "../../ImageRenderer/ImageRenderer";
-import {useRouter} from "next/router";
+import React, {useMemo, useState} from 'react';
 import styled from "styled-components";
+import Link from "next/link";
+import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
 import {setLoading} from "../../../../store/actions/globalStateActions";
 
 const LogoStyledSpan = styled.span`
-  .logo{
+  .logo {
     text-decoration: none;
     display: flex;
     flex-direction: row;
@@ -15,7 +14,9 @@ const LogoStyledSpan = styled.span`
     align-items: center;
     justify-content: flex-start;
     max-width: 300px;
+    max-height: 100px;
     cursor: pointer;
+
     .logo-text {
       font-size: xx-large;
     }
@@ -31,33 +32,32 @@ const LogoStyledSpan = styled.span`
 
 `
 const Logo = props => {
+    const [gotError, setGotError] = useState(false)
     const dispatch = useDispatch()
     const router = useRouter()
-    const logoText = props.translations ? props.translations[router.locale] ? props.translations[router.locale].LogoText || props.LogoText : props.LogoText : props.LogoText;
-    const headLineData = props.translations ? props.translations[router.locale] ? props.translations[router.locale].headLine || props.headLine : props.headLine : props.headLine;
-    const logoImageUrl = props.LogoUrl;
+    const logoText = useMemo(()=>props.translations ? props.translations[router.locale] ? props.translations[router.locale].LogoText || props.LogoText : props.LogoText : props.LogoText,[]);
+    const headLineData = useMemo(()=>props.translations ? props.translations[router.locale] ? props.translations[router.locale].headLine || props.headLine : props.headLine : props.headLine,[]);
 
     return (
         <LogoStyledSpan>
-        <Link href='/' locale={router.locale || false}>
-            <a className='logo' onClick={()=>dispatch(setLoading(true))}>
-                {logoImageUrl ?
-                    <ImageRenderer imageUrl={logoImageUrl}
-                                   altValue='logo'
-                                   quality={100}
-                                   loading='eager'
-                                   layout='fill'
-                                   classNameValue='logo-image'
-                    /> : null}
-                {logoText ?
-                    <span className='logo-text'>
-                        {logoText}
-                    </span>
-                    : null}
-                {headLineData ? <p className='logo-headline'>{headLineData}</p> : null}
-            </a>
-        </Link>
-            </LogoStyledSpan>
+            <Link href='/' >
+                <a className='logo' onClick={() => dispatch(setLoading(true))}>
+                    {props.LogoUrl && !gotError ?
+                        <img className={props.classNameValue}
+                             alt={'logo'}
+                             onMouseEnter={props.hoverHandler}
+                             onMouseOver={props.hoverHandler}
+                             onTouchStartCapture={props.hoverHandler}
+                             onTouchEnd={props.hoverHandler}
+                             src={props.LogoUrl}
+                             onError={()=>setGotError(true)}
+                        />
+                        : null}
+                    {logoText ? <span className='logo-text'> {logoText} </span>: null}
+                    {headLineData ? <p className='logo-headline'>{headLineData}</p> : null}
+                </a>
+            </Link>
+        </LogoStyledSpan>
     );
 };
 

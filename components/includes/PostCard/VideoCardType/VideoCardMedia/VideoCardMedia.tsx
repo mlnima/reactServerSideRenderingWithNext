@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
-import VideoCardInfo from "../VideoCardInfo";
+const VideoCardInfo = dynamic(() => import('../VideoCardInfo') );
 const VideoCardTrailer = dynamic(() => import('./VideoCardTrailer'), {ssr: false});
 
 interface styleProps {

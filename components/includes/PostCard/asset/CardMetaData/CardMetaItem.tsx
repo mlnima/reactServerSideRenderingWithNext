@@ -1,8 +1,9 @@
-import Link from "next/link";
 import React,{useMemo} from "react";
+import Link from "next/link";
 import styled from "styled-components";
 const CardMetaItemStyledLink = styled.a`
   color: var(--main-active-color, #ccc);
+  display: none;
   font-size: 12px;
   transition: .5s;
   margin: 0 .5px 0 3px;
@@ -14,6 +15,7 @@ const CardMetaItemStyledLink = styled.a`
   
   @media only screen and (min-width: 768px) {
     font-size: 14px;
+    display: initial;
   }
 `
 

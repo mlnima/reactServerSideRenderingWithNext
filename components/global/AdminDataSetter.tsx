@@ -1,14 +1,11 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import getMultipleSetting from "../../_variables/adminAjaxVariables/adminAjaxSettingsVariables/getMultipleSetting";
-
-
 import {setSettings} from "../../store/actions/settingsActions";
 import {getCustomPages} from "../../store/adminActions/adminPanelGlobalStateActions";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import setAppLayoutDataFromProp from "../../_variables/clientVariables/_setAppLayoutDataFromProp";
 import {adminGetWidgets} from "../../store/adminActions/adminWidgetsActions";
 
 const AdminDataSetterStyledSpan = styled.span`
@@ -18,13 +15,12 @@ const AdminDataSetterStyledSpan = styled.span`
 const AdminDataSetter = (props: any) => {
     const dispatch = useDispatch()
     const router = useRouter()
-   // const settings = useSelector((store: StoreTypes) => store?.settings)
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
 
     useEffect(() => {
         if (userData?.role === 'administrator') {
             getAndSetDataForAdmin().then(() => {
-                    props.setIsAdmin(true )
+                props.setIsAdmin ? props.setIsAdmin(true) : null
                 console.log('welcome Admin, latest uncached data are sent for you')
             })
         }
@@ -46,7 +42,6 @@ const AdminDataSetter = (props: any) => {
                     identity: identityData.data,
                 }))
             }
-
 
 
         } catch (err) {

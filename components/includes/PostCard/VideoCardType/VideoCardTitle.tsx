@@ -21,8 +21,12 @@ const CardTitleStyledDiv = styled.div`
   .video-card-title-link {
     color: var(--post-element-text-color, #ccc);
     text-decoration: none;
-    margin: 0;
     transition: .3s;
+    //height: 48px;
+    //margin: 8px;
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
     &:hover {
       color: var(--main-active-color,#fff);
     }
@@ -38,7 +42,8 @@ const CardTitleStyledDiv = styled.div`
     width: ${(props: { cardWidth: number }) => `${props?.cardWidth}px`};
     font-size: 14px;
     .video-card-title-link{
-     
+      height: initial;
+      margin: initial;
     }
   }
 `
