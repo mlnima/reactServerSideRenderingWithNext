@@ -1,9 +1,9 @@
-import React, {useState, useRef} from 'react';
+import React, {useState} from 'react';
 import Image from 'next/image'
 import styled from "styled-components";
 
 const ActorCardMediaStyledImage = styled(Image)`
- border-radius: 3px;
+  border-radius: 3px;
   object-fit: cover;
 `
 const NoImageStyleDiv = styled.div`
@@ -30,9 +30,7 @@ interface ActorCardMediaPropTypes {
 }
 
 const ActorCardMedia = (props: ActorCardMediaPropTypes) => {
-    // const imageRef = useRef(null)
     const [gotError, setGotError] = useState(false)
-
     if (!props.imageUrl || gotError) {
         return (
             <NoImageStyleDiv cardWidth={props.cardWidth} className='no-image'>
@@ -42,24 +40,18 @@ const ActorCardMedia = (props: ActorCardMediaPropTypes) => {
     } else {
         return (
             <ActorCardMediaStyledImage layout={'fixed'}
-                   quality={100}
-                   src={props.imageUrl}
-                   alt="Picture of the author"
-                   width={140}
-                   height={140}
+                                       quality={100}
+                                       src={props.imageUrl.includes('http') ?
+                                           props.imageUrl :
+                                           process.env.NEXT_PUBLIC_PRODUCTION_URL + props.imageUrl
+                                       }
+                                       alt="Picture of the author"
+                                       width={140}
+                                       height={140}
+                                       onError={()=>setGotError(true)}
             />
         );
     }
-    // else {
-    //     return (
-    //         <ActorCardMediaStyledImage ref={imageRef} className='actor-card-image'
-    //                                    src={props.imageUrl}
-    //                                    onError={()=>setGotError(true)}
-    //                                    alt={props.mediaAlt}
-    //         />
-    //     );
-    // }
-
 };
 export default ActorCardMedia;
 

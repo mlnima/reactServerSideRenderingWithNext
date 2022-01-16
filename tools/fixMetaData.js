@@ -14,6 +14,7 @@ const metaFixer = async () => {
                     const randomPostWithCurrentMeta = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).skip(random).exec()
                     const updateData = {
                         count: metaCount,
+                        name: meta?.name.toLowerCase(),
                         status: meta?.status ? meta.status : 'published',
                         imageUrl: randomPostWithCurrentMeta?.mainThumbnail || ''
                     }
