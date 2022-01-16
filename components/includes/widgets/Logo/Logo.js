@@ -13,8 +13,6 @@ const LogoStyledSpan = styled.span`
     flex-wrap: wrap;
     align-items: center;
     justify-content: flex-start;
-    max-width: 300px;
-    max-height: 100px;
     cursor: pointer;
 
     .logo-text {

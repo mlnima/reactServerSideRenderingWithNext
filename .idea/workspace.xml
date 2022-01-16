@@ -20,9 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/tools/mergeDuplicateMetaData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_app.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_app.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_document.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -148,11 +151,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.mergeDuplicateMetaData" />
         <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.mergeDuplicateMetaData.js" />
-        <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
       </list>
     </recent_temporary>
   </component>
@@ -971,7 +974,7 @@
       <workItem from="1642188722918" duration="1511000" />
       <workItem from="1642208641995" duration="4692000" />
       <workItem from="1642242632898" duration="15039000" />
-      <workItem from="1642285067199" duration="1919000" />
+      <workItem from="1642285067199" duration="9174000" />
     </task>
     <servers />
   </component>

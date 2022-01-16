@@ -15,6 +15,7 @@ const setMetaThumbnailsAndCount = async (workerData) => {
                     const random = Math.floor(Math.random() * (metaCount || 0))
                     const randomPostWithCurrentMeta = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).skip(random).exec()
                     const randomImageData = meta?.imageUrlLock ? {} : {imageUrl: randomPostWithCurrentMeta?.mainThumbnail || ''}
+
                     const updateData = {
                         count: metaCount,
                         name: meta?.name.toLowerCase(),
