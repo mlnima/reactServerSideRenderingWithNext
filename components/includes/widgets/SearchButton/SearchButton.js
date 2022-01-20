@@ -13,8 +13,6 @@ const SearchButtonStyledButton = styled.button`
   outline: none;
   color: var(--navigation-text-color, #ccc);
 `
-
-
 const SearchButton = ({t}) => {
 
     const [open, setOpen] = useState(false);
@@ -25,7 +23,7 @@ const SearchButton = ({t}) => {
 
     return (
         <>
-            <SearchButtonStyledButton onClick={onOpenHandler} className='search-button-widget-open-btn ' aria-label='Center Align' title={t([`common:Search`])}>
+            <SearchButtonStyledButton onClick={onOpenHandler}  aria-label={'Center Align'} title={t([`common:Search`])}>
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="24"
                      height="24"

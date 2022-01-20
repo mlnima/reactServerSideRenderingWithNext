@@ -1,10 +1,6 @@
-import React from 'react';
 import {useRouter} from "next/router";
 import {languagesOptions} from "../../../../_variables/_variables";
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faGlobeEurope} from "@fortawesome/free-solid-svg-icons";
 
 const LanguagesSwitcherStyledDiv = styled.div`
   display: flex;
@@ -36,25 +32,22 @@ const LanguagesSwitcherStyledDiv = styled.div`
     color: var(--navigation-text-color, #ccc);
   }
 `
-const LanguagesSwitcher = props => {
+const LanguagesSwitcher = () => {
     const router = useRouter()
 
     const onChangeHandler = e => {
-        if (e.target.value === 'default') {
-            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: process.env.NEXT_PUBLIC_DEFAULT_LOCAL})
-        } else {
-            router.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: e.target.value})
-        }
+        const localToSet = e.target.value === 'default' ? process.env.NEXT_PUBLIC_DEFAULT_LOCAL : e.target.value
+        router?.replace({pathname: router.pathname, query: router.query}, router.asPath, {locale: localToSet})
     }
 
     return (
         <LanguagesSwitcherStyledDiv className='language-switcher-widget'>
 
-            {/*<span className='globe-icon'>*/}
-            {/*    <FontAwesomeIcon icon={faGlobeEurope} className='navigation-dropdown-icon'/>*/}
-            {/*</span>*/}
-
-            <select className={'custom-select'} value={router.locale} aria-label='Center Align' onChange={e => onChangeHandler(e)}>
+            <select className={'custom-select'}
+                    value={router.locale}
+                    aria-label='Center Align'
+                    onChange={e => onChangeHandler(e)}
+            >
                 <option key='default' value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'default'}</option>
                 {languagesOptions}
             </select>
@@ -62,4 +55,4 @@ const LanguagesSwitcher = props => {
         </LanguagesSwitcherStyledDiv>
     );
 };
-export default withTranslation(['common'])(LanguagesSwitcher);
+export default LanguagesSwitcher;

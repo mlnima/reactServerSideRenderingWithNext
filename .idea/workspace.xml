@@ -20,9 +20,27 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/_variables/util/isAbsolutePath.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_variables/util/isImageAllowedForNextImage.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/_variables/util/isInternalUrl.ts" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardLastUpdate/CardLastUpdate.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/LogoUsingNextImage.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorCard/ActorCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorCard/ActorCardMedia.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/tools/fixMetaData.js" beforeDir="false" afterPath="$PROJECT_DIR$/tools/fixMetaData.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_setAppLayoutDataFromProp.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_setAppLayoutDataFromProp.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ImageRenderer/ImageRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ImageRenderer/ImageRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/LanguagesSwitcher/LanguagesSwitcher.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButtonForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButtonForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,9 +53,9 @@
         <option value="HTML File" />
         <option value="tsconfig.json" />
         <option value="CSS File" />
-        <option value="TypeScript File" />
-        <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
+        <option value="TypeScript File" />
       </list>
     </option>
   </component>
@@ -150,8 +168,8 @@
       <list>
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.mergeDuplicateMetaData" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.mergeDuplicateMetaData" />
         <item itemvalue="Node.js.mergeDuplicateMetaData.js" />
       </list>
     </recent_temporary>
@@ -972,6 +990,11 @@
       <workItem from="1642208641995" duration="4692000" />
       <workItem from="1642242632898" duration="15039000" />
       <workItem from="1642285067199" duration="10701000" />
+      <workItem from="1642329607038" duration="12293000" />
+      <workItem from="1642420116694" duration="5415000" />
+      <workItem from="1642442215850" duration="6465000" />
+      <workItem from="1642617088571" duration="13202000" />
+      <workItem from="1642675229620" duration="3382000" />
     </task>
     <servers />
   </component>
@@ -1234,7 +1257,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts</url>
-          <line>197</line>
+          <line>198</line>
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

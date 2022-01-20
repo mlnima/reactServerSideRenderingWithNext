@@ -90,7 +90,6 @@ const MenuWidgetStyledLi = styled.li`
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler}) => {
     const router = useRouter()
     const [showSub, setShowSub] = useState(false)
-    //console.log(router.asPath,menuItem.target)
     const renderSubMenus = (menuItem.subItems || []).map((subItem, index) => {
 
         return (

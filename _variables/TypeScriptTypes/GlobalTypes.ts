@@ -5,6 +5,7 @@ import {AdminPanelUsersState} from "../../store/adminReducers/adminPanelUsersRed
 
 // SETTINGS
 export interface DesignSettings {
+    sideBarWidth: number;
     customStyle: string;
     topBarStyle: string;
     headerStyle: string;

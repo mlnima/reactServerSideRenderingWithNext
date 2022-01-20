@@ -76,9 +76,9 @@ const SearchButtonForm = ({open,onOpenHandler,t}: SearchButtonFormPropTypes) => 
         setState({...state, [e.target.name]: e.target.value})
     }
     return (
-        <SearchButtonStyledDiv open={open} className='search-button-widget-form-actions'>
+        <SearchButtonStyledDiv open={open} className={'search-button-widget-form-actions'}>
 
-            <form className='search-button-widget-form' onSubmit={e => onSearchHandler(e)}>
+            <form className={'search-button-widget-form'} onSubmit={e => onSearchHandler(e)}>
                 <input type="text" onChange={e => onChangeHandler(e)} name='keyword' value={state.keyword} className='search-button-widget-form-keyword-input form-control-input' placeholder={t([`common:Search...`])}/>
                 <button type='submit' className='search-button-widget-form-submit-btn' title={t([`common:Search`])}>
                     <svg xmlns="http://www.w3.org/2000/svg"

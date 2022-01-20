@@ -24,12 +24,12 @@ const ImageRendererStyledDiv = styled.div`
   //
   // @media only screen and (min-width: 768px) {
   //   .post-element-image, .meta-element-image, .post-element-image > div > img, .meta-element-image > div > img {
-  //     width: ${props => props?.imageSize?.width || 255.8}px;
-  //     height: ${props => props?.imageSize?.height || 143.95}px;
+
   //   }
   // }
 `
-
+//     width: ${props => props?.imageSize?.width || 255.8}px;
+//     height: ${props => props?.imageSize?.height || 143.95}px;
 
 const ImageRenderer = props => {
     const [gotError, setGotError] = useState(false)

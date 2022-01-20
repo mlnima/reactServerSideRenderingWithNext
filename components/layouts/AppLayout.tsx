@@ -1,16 +1,16 @@
-import React, {useEffect, useState, useMemo} from 'react';
+import {useEffect, useState, useMemo} from 'react';
+import {useDispatch, useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
+import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import GlobalStyles from "../global/Styles/GlobalStyles";
-import {useDispatch, useSelector} from 'react-redux';
+import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
 import {autoUserLogin} from "../../store/actions/userActions";
 import {setLoading} from "../../store/actions/globalStateActions";
-import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
-const AdminDataSetter = dynamic(() => import('../global/AdminDataSetter'), {ssr: false});
-const LoginRegisterPopup = dynamic(() => import('../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
-const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
+// const {autoUserLogin} = dynamic(() => import('../../store/actions/userActions'), {ssr: false});
+// const {setLoading}  = dynamic(() => import('../../store/actions/globalStateActions'), {ssr: false});
+
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SideBarWidgetArea/SideBarWidgetArea'))
 const SiteSettingSetter = dynamic(() => import('../includes/SiteSettingsSetter/SiteSettingsSetter'))
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'))
@@ -20,18 +20,26 @@ const FooterWidgetArea = dynamic(() => import('../widgetsArea/FooterWidgetArea/F
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {ssr: false})
+const LoginRegisterPopup = dynamic(() => import('../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
+const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
+const AdminDataSetter = dynamic(() => import('../global/AdminDataSetter'), {ssr: false});
 
 const AppLayout = (props: any) => {
     const loggedIn = useSelector((store: StoreTypes) => store?.user.loggedIn)
-    const userData = useSelector((store: StoreTypes) => store?.user.userData)
-    const globalState = useSelector((store: StoreTypes) => store?.globalState)
-    const settings = useSelector((store: StoreTypes) => store?.settings)
+    const userRole = useSelector((store: StoreTypes) => store?.user?.userData?.role)
+    const design = useSelector((store: StoreTypes) => store?.settings?.design)
+    const identity = useSelector((store: StoreTypes) => store?.settings?.identity)
     const widgets = useSelector((store: StoreTypes) => store?.widgets?.widgets)
+    const loading = useSelector((store: StoreTypes) => store?.globalState?.loading)
+    const loginRegisterFormPopup = useSelector((store: StoreTypes) => store?.globalState?.loginRegisterFormPopup)
+    const alert = useSelector((store: StoreTypes) => store?.globalState?.alert)
+
+
     const [isAdmin, setIsAdmin] = useState(false)
     const router = useRouter()
     const dispatch = useDispatch()
 
-    const sidebarsData = useMemo(() => setAppLayoutDataFromProp(props, router, settings), [router.asPath, router.pathname, isAdmin])
+    const sidebarsData = useMemo(() => setAppLayoutDataFromProp(props, router, identity), [router.asPath, router.pathname, isAdmin])
 
     const isSidebarLess = useMemo(() => {
         return router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
@@ -47,10 +55,10 @@ const AppLayout = (props: any) => {
 
     const defaultProps = useMemo(() => {
         return {
-            postElementSize: settings.design?.postElementSize,
-            postElementStyle: settings.design?.postElementStyle,
-            postElementImageLoader: settings.design?.postElementImageLoader,
-            postElementImageLoaderType: settings.design?.postElementImageLoaderType,
+            postElementSize: design?.postElementSize,
+            postElementStyle: design?.postElementStyle,
+            postElementImageLoader: design?.postElementImageLoader,
+            postElementImageLoaderType: design?.postElementImageLoaderType,
         }
     }, [])
 
@@ -67,9 +75,7 @@ const AppLayout = (props: any) => {
     }, [widgets])
 
     useEffect(() => {
-        globalState.loading ?
-            dispatch(setLoading(false)) :
-            null
+            loading?dispatch(setLoading(false)):null
     }, [router.pathname]);
 
 
@@ -79,33 +85,11 @@ const AppLayout = (props: any) => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     if (!loggedIn && typeof document !== 'undefined') {
-    //         document.addEventListener('keydown', e => {
-    //             e.metaKey || e.ctrlKey && e.keyCode === 76 ?
-    //                 dispatch(setLoginRegisterFormStatus('login')) :
-    //                 null
-    //         })
-    //     }
-    //
-    //     if (loggedIn && typeof document !== 'undefined' && userData?.role === 'administrator') {
-    //         document.addEventListener('keydown', e => {
-    //             e.metaKey || e.ctrlKey && e.keyCode === 76 ?
-    //                 router.push('/admin') :
-    //                 null
-    //         })
-    //     }
-    // }, [loggedIn]);
-
-
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
-            {/*// @ts-ignore*/}
-            {userData?.role === 'administrator' ? <AdminDataSetter setIsAdmin={setIsAdmin} LayoutProps={props}/> : null}
-            {/*// @ts-ignore*/}
-            <GlobalStyles colors={settings.design?.customColors || ''} globalStyleData={settings.design?.customStyles || ''} sideBarWidth={settings?.design?.sideBarWidth || 320}/>
-            {/*// @ts-ignore*/}
-            <SiteSettingSetter identity={settings.identity} design={settings.design} eCommerce={settings.eCommerce}/>
+            {userRole === 'administrator' ? <AdminDataSetter setIsAdmin={setIsAdmin} LayoutProps={props}/> : null}
+            <GlobalStyles colors={design?.customColors || ''} globalStyleData={design?.customStyles || ''} sideBarWidth={design?.sideBarWidth || 320}/>
+            <SiteSettingSetter />
             {widgetsInGroups.topBar.length ?
                 // @ts-ignore
                 <TopBarWidgetArea
@@ -113,7 +97,7 @@ const AppLayout = (props: any) => {
                     widgets={widgetsInGroups.topBar}
                     className='topbar'
                     position='topBar'
-                    stylesData={settings.design?.topBarStyle || ''}
+                    stylesData={design?.topBarStyle || ''}
                 />
                 : null}
             {widgetsInGroups.header.length ?
@@ -122,7 +106,7 @@ const AppLayout = (props: any) => {
                     {...defaultProps}
                     widgets={widgetsInGroups.header}
                     className='header' position='header'
-                    stylesData={settings.design?.headerStyle || ''}
+                    stylesData={design?.headerStyle || ''}
                 />
                 : null}
             {widgetsInGroups.navigation.length ?
@@ -131,7 +115,7 @@ const AppLayout = (props: any) => {
                     {...defaultProps}
                     className='navigation'
                     position='navigation'
-                    stylesData={settings.design?.navigationStyle || ''}
+                    stylesData={design?.navigationStyle || ''}
                 />
                 : null}
 
@@ -158,13 +142,13 @@ const AppLayout = (props: any) => {
                     {...defaultProps}
                     widgets={widgetsInGroups.footer}
                     className='footer' position='footer'
-                    stylesData={settings.design?.footerStyle || ''}
+                    stylesData={design?.footerStyle || ''}
                 />
                 : null}
-            {globalState?.loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/>:null}
-            {userData?.role === 'administrator' ? <AdminTools/> : null}
-            {globalState?.loading ? <Loading/> : null}
-            {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
+            {loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/>:null}
+            {userRole === 'administrator' ? <AdminTools/> : null}
+            {loading ? <Loading/> : null}
+            {alert?.active && alert?.message ? <AlertBox/> : null}
             {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
                 <CookiePopup/>
                 : null : null

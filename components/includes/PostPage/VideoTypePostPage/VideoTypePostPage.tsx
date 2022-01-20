@@ -5,7 +5,7 @@ import {useSelector} from "react-redux";
 import { StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
-import {likeValueCalculator} from "../../../../_variables/_variables";
+// import {likeValueCalculator} from "../../../../_variables/_variables";
 import * as Scroll from "react-scroll";
 import PostTitle from "../components/PostTitle/PostTitle";
 
@@ -30,12 +30,12 @@ const VideoTypePostPage = () => {
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const post = useSelector((store: StoreTypes) => store.posts.post);
 
-    const [state, setState] = useState({
-        likeValue: 0,
-        mode: 'view',
-        isLiked: false,
-        isDisliked: false,
-    });
+    // const [state, setState] = useState({
+    //     likeValue: 0,
+    //     mode: 'view',
+    //     isLiked: false,
+    //     isDisliked: false,
+    // });
 
     const [ratingAndViewData, setRatingAndViewData] = useState({
         like: 0,
@@ -54,17 +54,17 @@ const VideoTypePostPage = () => {
         })
     }, []);
 
-    useEffect(() => {
-        if (typeof window !== 'undefined') {
-            if (post.likes, post.disLikes) {
-                setState({
-                    ...state,
-                    likeValue: likeValueCalculator(post.likes, post.disLikes),
-                });
-            }
-
-        }
-    }, [post.likes, post.disLikes]);
+    // useEffect(() => {
+    //     if (typeof window !== 'undefined') {
+    //         if (post.likes, post.disLikes) {
+    //             setState({
+    //                 ...state,
+    //                 likeValue: likeValueCalculator(post.likes, post.disLikes),
+    //             });
+    //         }
+    //
+    //     }
+    // }, [post.likes, post.disLikes]);
 
 
     return (
