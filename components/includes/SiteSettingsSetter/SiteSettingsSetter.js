@@ -1,10 +1,8 @@
-import dynamic from "next/dynamic";
 import Head from 'next/head'
 import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import {useMemo} from "react";
-
-const parse = dynamic(() => import('html-react-parser'))
+import parse from 'html-react-parser'
 
 const SiteSettingSetter = () => {
     const identity = useSelector(store => store?.settings?.identity)
