@@ -14,7 +14,6 @@ const page = (props: ClientPagesTypes) => {
     return (
         < MainWidgetArea
             position={props.pageInfo?.pageName}
-            rendering={true}
             className='page main'
             stylesData={props.pageInfo?.pageStyle || ''}
         />

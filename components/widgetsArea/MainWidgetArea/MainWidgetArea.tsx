@@ -8,12 +8,11 @@ let StyledMain = styled.main`
   ${(props:{stylesData:string}) => props.stylesData ?? ''}
 `;
 
-const MainWidgetArea = ({stylesData,className,position,rendering}:any) => {
+const MainWidgetArea = ({stylesData,className,position}:any) => {
 
     return (
         <StyledMain stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <WidgetsRenderer
-                rendering={rendering}
                 position={position}
             />
         </StyledMain>

@@ -1,11 +1,11 @@
-import React, {useState, useEffect, useMemo} from 'react';
-import Widget from '../Widget/Widget'
+// import Widget from '../Widget/Widget'
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
+const Widget = dynamic(() => import('../Widget/Widget'))
 const Posts = dynamic(() => import('../Posts/Posts'))
 const CategoriesRenderer = dynamic(() => import('../pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer'))
 const TagsRenderer = dynamic(() => import('../pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer'))
@@ -31,32 +31,38 @@ const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleL
 interface WidgetsRendererProps {
     position: string,
     _id?: string,
-    isSidebar?: boolean,
-    rendering?: boolean
 }
 
-const WidgetsRenderer = ({_id, position, isSidebar}: WidgetsRendererProps) => {
+const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
-    const widgets = useSelector((store: StoreTypes) => store.widgets.widgets)
-    const settings = useSelector((store: StoreTypes) => store.settings);
-    const userData = useSelector((store: StoreTypes) => store?.user.userData)
+
+    const widgetsMemo = useSelector((store: StoreTypes) => {
+        return store.widgets.widgets
+            .filter((widget) => widget.data?.position === position)
+            .sort((a: WidgetPropTypes, b: WidgetPropTypes) => {
+                return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
+            })
+    })
+    const postElementSize = useSelector((store: StoreTypes) => store.settings?.design?.postElementSize);
+    const userRole = useSelector((store: StoreTypes) => store?.user.userData?.role)
     const router = useRouter()
     const today = new Date().toLocaleString('en-us', {weekday: 'long'}).toLowerCase()
+    // useEffect(() => {
+    //     console.log(widgetsMemo)
+    // }, [widgetsMemo]);
 
-    const widgetsMemo = useMemo(()=>{
-        return widgets.filter((widget) => widget.data?.position === position).sort((a: WidgetPropTypes, b: WidgetPropTypes) => {
-            return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
-        })
-    },[widgets,isSidebar,router.pathname])
 
     const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
         const languageToRender = widget.data.languageToRender || 'all';
         const activeLanguage = router.locale;
-        const renderByLanguageCondition = languageToRender === activeLanguage || !languageToRender || languageToRender === 'all' || (languageToRender === 'default' && activeLanguage === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
-        const renderByDayCondition = widget.data?.specificDayToRender === today || widget.data?.specificDayToRender === 'all' || !widget.data?.specificDayToRender;
-
-
-        const isEditMode = widget.data.editMode && userData?.role !== 'administrator';
+        const renderByLanguageCondition = languageToRender === activeLanguage ||
+            !languageToRender ||
+            languageToRender === 'all' ||
+            (languageToRender === 'default' && activeLanguage === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
+        const renderByDayCondition = widget.data?.specificDayToRender === today ||
+            widget.data?.specificDayToRender === 'all' ||
+            !widget.data?.specificDayToRender;
+        const isEditMode = widget.data.editMode && userRole !== 'administrator';
 
         const widgetToRender = widget.data.type === 'posts' ? Posts :
             widget.data.type === 'postsSwiper' ? PostSwiper :
@@ -85,12 +91,12 @@ const WidgetsRenderer = ({_id, position, isSidebar}: WidgetsRendererProps) => {
 
             return (
                 <Widget
-                    key={index}
+                    key={widget._id}
                     widgetId={widget._id}
                     isSidebar={position ? position.includes('Sidebar') : false}
                     {...widget}
                     widgetToRender={widgetToRender}
-                    postElementSize={settings.design?.postElementSize}
+                    postElementSize={postElementSize}
                     viewType={widget.data?.viewType}
                 />
             )
@@ -105,3 +111,11 @@ const WidgetsRenderer = ({_id, position, isSidebar}: WidgetsRendererProps) => {
     )
 };
 export default WidgetsRenderer;
+
+
+// const widgets = useSelector((store: StoreTypes) => store.widgets.widgets)
+// const widgetsMemo = useMemo(() => {
+//     return widgets.filter((widget) => widget.data?.position === position).sort((a: WidgetPropTypes, b: WidgetPropTypes) => {
+//         return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
+//     })
+// }, [widgets, isSidebar, router.pathname])

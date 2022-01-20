@@ -20,7 +20,7 @@ const AdminDataSetter = (props: any) => {
     useEffect(() => {
         if (userData?.role === 'administrator') {
             getAndSetDataForAdmin().then(() => {
-                props.setIsAdmin ? props.setIsAdmin(true) : null
+                // props.setIsAdmin ? props.setIsAdmin(true) : null
                 console.log('welcome Admin, latest uncached data are sent for you')
             })
         }

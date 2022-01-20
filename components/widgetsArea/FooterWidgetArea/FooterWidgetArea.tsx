@@ -1,41 +1,28 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {useSelector} from "react-redux";
 
 const StyledFooter = styled.footer`
   background-color: var(--footer-background-color,#000);
   grid-area: footer;
+  
   .footer-content{
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
-  
   }
+  
   ${(props:{stylesData:string}) => props.stylesData ?? ''}
-`;
+`
 
-interface FooterWidgetAreaProps {
-    postElementStyle: string;
-    postElementSize: string;
-    stylesData: string;
-    className: string;
-    position: string;
-    postElementImageLoaderType: string;
-    postElementImageLoader: string;
-    referer: boolean;
-    rendering: boolean;
-    widgets: WidgetPropTypes[]
-}
-
-const FooterWidgetArea = ({stylesData, className, position, rendering}:FooterWidgetAreaProps) => {
+const FooterWidgetArea = ( ) => {
+    const footerStyle = useSelector((store: StoreTypes) => store?.settings?.design?.footerStyle)
     return (
-        <StyledFooter stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+        <StyledFooter stylesData={footerStyle || ''} className={'widget-area footer' }>
             <div className='footer-content'>
-                <WidgetsRenderer
-                    rendering={rendering}
-                    position={position}
-                />
+                <WidgetsRenderer position={'footer'}/>
             </div>
 
         </StyledFooter>

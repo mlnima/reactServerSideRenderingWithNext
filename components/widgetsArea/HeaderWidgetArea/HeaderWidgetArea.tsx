@@ -1,19 +1,17 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import React from "react";
-import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {useSelector} from "react-redux";
 
 let StyledHeader = styled.header`
   grid-area: header;
   background-color: var(--header-background-color, #000);
- // max-width: 100vw;
-
+  
   .header-content {
     display: flex;
     justify-content: space-evenly;
     flex-wrap: wrap;
     align-items: center;
-    //padding: 0 5px;
     height: 100%;
     width: 100%;
   }
@@ -22,35 +20,18 @@ let StyledHeader = styled.header`
     .header-content {
       margin: 0 5px;
       padding: 0 5px;
-      
     }
   }
   
   ${(props: { stylesData: string }) => props.stylesData ?? ''}
-`;
+`
 
-interface HeaderWidgetAreaProps {
-    postElementStyle: string;
-    postElementSize: string;
-    stylesData: string;
-    className: string;
-    position: string;
-    postElementImageLoaderType: string;
-    postElementImageLoader: string;
-    referer: boolean;
-    rendering: boolean;
-    widgets: WidgetPropTypes[]
-}
-
-const HeaderWidgetArea = ({stylesData, className, position, rendering}: HeaderWidgetAreaProps) => {
+const HeaderWidgetArea = () => {
+    const headerStyle = useSelector((store: StoreTypes) => store?.settings?.design?.headerStyle)
     return (
-        <StyledHeader stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+        <StyledHeader stylesData={headerStyle || ''} className={'widget-area header'}>
             <div className='header-content'>
-                <WidgetsRenderer
-                    rendering={rendering}
-                    position={position}
-
-                />
+                <WidgetsRenderer position={'header'}/>
             </div>
 
         </StyledHeader>

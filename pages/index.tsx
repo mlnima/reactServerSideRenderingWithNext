@@ -13,7 +13,6 @@ const Home = ({}: ClientPagesTypes) => {
 
     return (
         < MainWidgetArea
-            rendering={true}
             className='home-page main'
             position='home'
             stylesData={settings.design?.homePageStyle}

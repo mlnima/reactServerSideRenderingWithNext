@@ -17,7 +17,6 @@ const SideBarWidgetArea = ({className,position,gridArea}:SideBarWidgetAreaProps)
         <StyledSideBar className={className + ' widget-area ' + position}  gridArea={gridArea}>
             <WidgetsRenderer
                 position={position}
-                isSidebar={true}
             />
         </StyledSideBar>
     );

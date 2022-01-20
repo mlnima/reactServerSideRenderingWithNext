@@ -21,15 +21,10 @@ const SiteSettingSetter = () => {
         } else return <link rel="alternate" hrefLang={local} key={index} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${local}`}/>
     })
 
-    // useEffect(() => {
-    //     console.log(localsUrl)
-    // }, [localsUrl]);
-
     return (
         <Head>
             <title>{title}</title>
             <meta name="description" content={description}/>
-            <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&amp;display=swap" rel="stylesheet"/>
             {identity?.keywords?.length ? <meta name="keywords" content={keywords}/> : null}
             {router.pathname === '/post/[postType]/[id]' ? null : localsUrl}
             <meta name="theme-color" content={themeColor}/>
@@ -39,7 +34,7 @@ const SiteSettingSetter = () => {
             <link rel="shortcut icon" href={favIcon}/>
             <link rel="apple-touch-icon" href={favIcon}/>
             <link rel="manifest" href={'/manifest.json'}/>
-
+            <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&amp;display=swap" rel="stylesheet"/>
             {identity?.customScriptsAsString ? parse(identity?.customScriptsAsString) : null}
             {/*{identity?.siteMode === 'eCommerce' ?*/}
             {/*    <script src={`https://www.paypal.com/sdk/js?client-id=${settings.eCommerce?.payPalId}&currency=${settings.eCommerce?.currency}`}/>*/}
@@ -49,6 +44,3 @@ const SiteSettingSetter = () => {
     )
 };
 export default SiteSettingSetter;
-
-
-

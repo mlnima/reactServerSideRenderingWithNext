@@ -4,13 +4,17 @@ interface GlobalStylesPropTypes {
   globalStyleData:string,
   sideBarWidth:number,
 }
-let GlobalStyles = createGlobalStyle`
+const GlobalStyles = createGlobalStyle`
   ${(props:GlobalStylesPropTypes ) => props?.colors?.includes(':root') ? props.colors :`:root {${props.colors}}`}
+
+
+
   body {
     background-color: var(--main-background-color, #000);
     margin: 0;
     color: var(--main-text-color, '#ccc');
-    font-family: Montserrat, Verdana, sans-serif;
+  font-family: Montserrat, Verdana, sans-serif;
+  
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 12px;
@@ -43,7 +47,7 @@ let GlobalStyles = createGlobalStyle`
     color: var(--post-element-text-color, #ccc);
   }
   
-  .leftSidebar {
+  .left-sidebar {
     display: grid;
     grid-area: leftSidebar;
     grid-template-columns: 1fr;
@@ -60,7 +64,7 @@ let GlobalStyles = createGlobalStyle`
     grid-area: sidebar;
   }
 
-  .rightSidebar {
+  .right-sidebar {
     display: grid;
     grid-area: rightSidebar;
     grid-template-columns: 1fr;
@@ -73,7 +77,7 @@ let GlobalStyles = createGlobalStyle`
             'footer';
   }
 
-  .bothSidebar {
+  .both-sidebar {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -86,7 +90,7 @@ let GlobalStyles = createGlobalStyle`
             'footer';
   }
 
-  .withOutSidebar {
+  .without-sidebar {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -204,7 +208,7 @@ let GlobalStyles = createGlobalStyle`
     body {
       font-size: 14px;
     }
-    .leftSidebar {
+    .left-sidebar {
       grid-template-columns: ${(props:GlobalStylesPropTypes )=> (props.sideBarWidth || 320)+'px'} 1fr;
       grid-template-areas:  'topbar topbar'
                                         'header header' 
@@ -213,7 +217,7 @@ let GlobalStyles = createGlobalStyle`
                                         'footer footer'
     }
 
-    .rightSidebar {
+    .right-sidebar {
       grid-template-columns: 1fr 320px;
       grid-template-areas:  'topbar topbar'
                                         'header header'
@@ -222,7 +226,7 @@ let GlobalStyles = createGlobalStyle`
                                         'footer footer'
     }
 
-    .bothSidebar {
+    .both-sidebar {
       grid-template-columns: 320px 1fr 320px;
       grid-template-areas:  'topbar topbar topbar'
                                         'header header header'
@@ -231,7 +235,7 @@ let GlobalStyles = createGlobalStyle`
                                         'footer footer footer'
     }
 
-    .withOutSidebar {
+    .without-sidebar {
       grid-template-columns: 1fr;
     }
     

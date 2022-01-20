@@ -1,81 +1,85 @@
-import type {NextApiRequest, NextApiResponse} from 'next'
+import type {NextApiRequest, NextApiResponse} from 'next';
 import {PostTypes} from "./PostTypes";
 import {AdminPanelUsersState} from "../../store/adminReducers/adminPanelUsersReducer";
 
 
 // SETTINGS
 export interface DesignSettings {
-    sideBarWidth: number;
-    customStyle: string;
-    topBarStyle: string;
-    headerStyle: string;
-    footerStyle: string;
-    customStyles: string;
-    postElementStyle: string;
-    navigationStyle: string;
-    actorPageStyle: string;
-    categoryPageStyle: string;
-    tagPageStyle: string;
-    postsPageStyle: string;
-    postPageStyle: string;
-    customColors: string;
-    homePageSidebar: boolean;
-    homePageStyle: boolean;
-    postElementSize: string;
-    postElementImageLoader: string;
-    postElementImageLoaderType: string;
+    sideBarWidth: number,
+    customStyle: string,
+    topBarStyle: string,
+    headerStyle: string,
+    footerStyle: string,
+    customStyles: string,
+    postElementStyle: string,
+    navigationStyle: string,
+    actorPageStyle: string,
+    categoryPageStyle: string,
+    tagPageStyle: string,
+    postsPageStyle: string,
+    postPageStyle: string,
+    customColors: string,
+    homePageSidebar: boolean,
+    homePageStyle: boolean,
+    postElementSize: string,
+    postElementImageLoader: string,
+    postElementImageLoaderType: string,
 }
 
 export interface IdentitySettings {
-    keywords: string[];
-    translations: Translations;
-    title: string;
-    themeColor: string;
-    description: string;
-    homePageSidebar: boolean | string;
-    metaPageSidebar: boolean | string;
-    postPageSidebar: boolean | string;
-    postsPageSidebar: boolean | string;
-    userPageSidebar: boolean | string;
-    tagPageSidebar: boolean | string;
-    actorPageSidebar: boolean | string;
-    searchPageSidebar: boolean | string;
-    actorsPageSidebar: boolean | string;
-    customScriptsAsString: string;
-    siteMode: string;
-    cookieReadMoreLink: string;
-    cookieTitleText: string;
-    cookieMessageText: string;
-    anyoneCanRegister: boolean;
-    developmentMode: boolean;
-    cookiePopupMessage: boolean;
-    membership: boolean;
-    postsCountPerPage: number;
+    topbar?: string,
+    header?: string,
+    navigation?: string,
+    footer?: string,
+    keywords: string[],
+    translations: Translations,
+    title: string,
+    themeColor: string,
+    description: string,
+    homePageSidebar: boolean | string,
+    metaPageSidebar: boolean | string,
+    postPageSidebar: boolean | string,
+    postsPageSidebar: boolean | string,
+    userPageSidebar: boolean | string,
+    tagPageSidebar: boolean | string,
+    actorPageSidebar: boolean | string,
+    searchPageSidebar: boolean | string,
+    actorsPageSidebar: boolean | string,
+    customScriptsAsString: string,
+    siteMode: string,
+    cookieReadMoreLink: string,
+    cookieTitleText: string,
+    cookieMessageText: string,
+    anyoneCanRegister: boolean,
+    developmentMode: boolean,
+    cookiePopupMessage: boolean,
+    membership: boolean,
+    postsCountPerPage: number,
 }
 
 // user
 export interface User {
-    _id?: string;
-    username?: string;
-    role?: string;
-    profileImage?: string;
-    followers:object[];
-    following:object[];
+    _id?: string,
+    username?: string,
+    role?: string,
+    profileImage?: string,
+    followers:object[],
+    following:object[],
 }
 
 
 export interface UserState {
-    userData?: User;
-    socketId?: string;
-    loggedIn: boolean;
-    userPageData?: object;
-    conversations?: { _id: string }[];
+    userData?: User,
+    socketId?: string,
+    loggedIn: boolean,
+    userPageData?: object,
+    conversations?: { _id: string }[],
     activeConversation?: {
         messages?: object[],
         users?: User[]
-    };
+    },
     callData: {
-        myVideo?: any;
+        myVideo?: any,
         partnerVideo?:any,
         callerSignal?: any,
         calling?:boolean,
@@ -89,22 +93,22 @@ export interface UserState {
 
 
 export interface settingsPropTypes {
-    // adminPanelPosts: PostTypes[];
-    user: UserState;
+    // adminPanelPosts: PostTypes[],
+    user: UserState,
     settings: {
         design: DesignSettings,
         identity: IdentitySettings
-    };
+    },
     // posts: {
     //     post: PostTypes,
     //     comments: object[]
-    // };
+    // },
 }
 
 
 // user
 export interface PageTypes {
-    _id?: string;
+    _id?: string,
     pageName:string,
     sidebar:string,
     status: string,
@@ -139,20 +143,20 @@ export interface MetasPropTypes {
 }
 
 export interface GetServerSidePropsContext {
-    req?: object;
-    notFound?: boolean;
+    req?: object,
+    notFound?: boolean,
     query?: {
         actorId?: string | undefined
         tagId?: string | undefined
         categoryId?: string | undefined
     },
-    locale?: string | undefined;
-    locales?: string[];
-    defaultLocale?: string;
+    locale?: string | undefined,
+    locales?: string[],
+    defaultLocale?: string,
 }
 
 export interface Meta {
-    coverImageUrl?: string;
+    coverImageUrl?: string,
     _id:string,
     name: string,
     description: string,
@@ -236,7 +240,7 @@ export interface Translations {
 
 
 export interface AdminPanelPostsTypes {
-    users: User[];
+    users: User[],
     post?: PostTypes,
     totalCount:number,
     posts?: PostTypes[],
@@ -246,7 +250,7 @@ export interface AdminPanelPostsTypes {
 }
 
 export interface AdminPanelGlobalState{
-    customPages: string[];
+    customPages: string[],
     users:User[],
     forms:[],
     pages:[],
@@ -255,7 +259,7 @@ export interface AdminPanelGlobalState{
 }
 
 export interface StoreTypes {
-    adminPanelUsers: AdminPanelUsersState;
+    adminPanelUsers: AdminPanelUsersState,
     adminPanelGlobalState: AdminPanelGlobalState,
     adminPanelPosts: AdminPanelPostsTypes
     chatroom: ChatroomStateTypes,
@@ -263,17 +267,17 @@ export interface StoreTypes {
     posts: PostStateTypes,
     user: UserState,
     widgets: WidgetsStateTypes,
-    globalState: GlobalStateTypes;
+    globalState: GlobalStateTypes,
 }
 
 
 export interface ServerPropTypes {
-    req?: NextApiRequest;
-    res?: NextApiResponse;
-    locale: string;
-    locales: string[];
-    defaultLocale: string;
-    resolvedUrl?: string | undefined;
+    req?: NextApiRequest,
+    res?: NextApiResponse,
+    locale: string,
+    locales: string[],
+    defaultLocale: string,
+    resolvedUrl?: string | undefined,
 }
 
 

@@ -113,7 +113,7 @@ const settings = () => {
         });
     }, [identity]);
 
-    const [sidebars, setSidebars] = useState([
+    const sidebars = [
         'homePageSidebar',
         'postPageSidebar',
         'postsPageSidebar',
@@ -126,7 +126,9 @@ const settings = () => {
         'categoryPageSidebar',
         'actorPageSidebar',
         'searchPageSidebar',
-    ])
+    ]
+
+    const widgetAreas = ['topbar','header','footer','navigation']
 
 
     const onChangeLanguageHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
@@ -501,9 +503,23 @@ const settings = () => {
                            value={state.postsCountPerPage}
                            onChange={e => onChangeHandler(e)}/>
                 </div>
+                <h2>Widget Areas</h2>
+                <div className="sidebarsStatus site-settings-form-section-parent">
+                    {widgetAreas.map((widgetArea,index)=>{
+                        return(
+                            <div className="site-settings-form-section" key={index}>
+                                <p>{convertVariableNameToName(widgetArea)}:</p>
+                                <select className={'custom-select'} name={widgetArea} value={state[widgetArea]} onChange={e => onChangeHandler(e)}>
+                                    <option>select</option>
+                                    <option value='enable'>Enable</option>
+                                    <option value='disable'>Disable</option>
+                                </select>
+                            </div>
+                        )
+                    })}
+                </div>
                 <h2>Sidebars Status</h2>
                 <div className="sidebarsStatus site-settings-form-section-parent">
-
                     {sidebars.map((sidebar,index) => {
                         return (
                             <div className="site-settings-form-section" key={index}>
@@ -514,7 +530,7 @@ const settings = () => {
                                     <option value='left'>Left</option>
                                     <option value='right'>Right</option>
                                     <option value='both'>Both</option>
-                                    <option value='false'>No</option>
+                                    <option value='false'>Disable</option>
                                 </select>
                             </div>
                         )

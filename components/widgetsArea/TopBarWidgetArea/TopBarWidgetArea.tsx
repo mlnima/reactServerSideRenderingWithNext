@@ -1,14 +1,15 @@
-import React from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {useSelector} from "react-redux";
 
 let StyledDiv = styled.div`
   grid-area: topbar;
-  background-color: var(--topbar-background-color,#000);
+  background-color: var(--topbar-background-color, #000);
   height: 56px;
   display: flex;
   align-items: center;
+
   .top-bar-content {
     display: flex;
     justify-content: space-between;
@@ -19,38 +20,15 @@ let StyledDiv = styled.div`
     width: 100%;
     height: 100%;
   }
-
-  @media only screen and (min-width: 768px) {
-    .top-bar-content {
-   
-    }
-  }
-  ${(props:{stylesData:string}) => props.stylesData || ''}
+  ${(props: { stylesData: string }) => props.stylesData || ''}
 `
 
-interface TopBarWidgetAreaProps {
-    postElementStyle: string;
-    postElementSize: string;
-    stylesData: string;
-    className: string;
-    position: string;
-    postElementImageLoaderType: string;
-    postElementImageLoader: string;
-    referer: boolean;
-    rendering: boolean;
-    widgets: WidgetPropTypes[]
-}
-
-
-const TopBarWidgetArea = (
-    {stylesData,className,position}:TopBarWidgetAreaProps
-) => {
+const TopBarWidgetArea = () => {
+    const topBarStyle = useSelector((store: StoreTypes) => store?.settings?.design?.topBarStyle)
     return (
-        <StyledDiv stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+        <StyledDiv stylesData={topBarStyle || ''} className={'widget-area topbar'}>
             <div className='top-bar-content'>
-                <WidgetsRenderer
-                    position={position}
-                />
+                <WidgetsRenderer position={'topBar'}/>
             </div>
         </StyledDiv>
     );
