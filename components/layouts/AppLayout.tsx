@@ -57,10 +57,6 @@ const AppLayout = (props: any) => {
         }
     }, []);
 
-    // useEffect(() => {
-    //     console.log(sidebarsData)
-    // }, [sidebarsData]);
-
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
             <GlobalStyles colors={design?.customColors || ''}

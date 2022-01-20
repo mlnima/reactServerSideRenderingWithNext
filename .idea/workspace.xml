@@ -21,22 +21,15 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/AdminDataSetter.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia/VideoCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/VideoCardType/VideoCardMedia/VideoCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardRating/CardRating.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardRating/CardRating.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostCard/asset/CardViews/CardViews.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostCard/asset/CardViews/CardViews.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/FooterWidgetArea/FooterWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/HeaderWidgetArea/HeaderWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/MainWidgetArea/MainWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/NavigationWidgetArea/NavigationWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/SectionWidgetArea/SectionWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/SectionWidgetArea/SectionWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/SideBarWidgetArea/SideBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/SideBarWidgetArea/SideBarWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/TopBarWidgetArea/TopBarWidgetArea.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -162,9 +155,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.mergeDuplicateMetaData" />
         <item itemvalue="Node.js.mergeDuplicateMetaData.js" />
       </list>
@@ -992,7 +985,7 @@
       <workItem from="1642617088571" duration="13202000" />
       <workItem from="1642675229620" duration="5612000" />
       <workItem from="1642696917054" duration="5582000" />
-      <workItem from="1642709240593" duration="1674000" />
+      <workItem from="1642709240593" duration="7571000" />
     </task>
     <servers />
   </component>
@@ -1264,7 +1257,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/components/global/Styles/GlobalStyles.ts</url>
-          <line>211</line>
+          <line>210</line>
           <option name="timeStamp" value="114" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">

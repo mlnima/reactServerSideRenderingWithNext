@@ -29,7 +29,7 @@ let VideoCardMediaStyledDiv = styled.div`
 
   .video-card-info-data {
     position: absolute;
-    color: var(--main-active-color, #ccc);
+    color: var(--post-element-info-text-color, #ccc);
     background-color: rgba(0, 0, 0, 0.5);
     margin: 0;
     --video-card-info-distance: 3px;
@@ -37,17 +37,6 @@ let VideoCardMediaStyledDiv = styled.div`
     border-radius: 2px;
     display: flex;
     align-items: center;
-
-    .icon {
-      width: 14px;
-      height: 14px;
-      margin: 0 2px;
-    }
-
-    .thumbs-up {
-      width: 12px;
-      height: 12px;
-    }
   }
 
   .video-card-quality {

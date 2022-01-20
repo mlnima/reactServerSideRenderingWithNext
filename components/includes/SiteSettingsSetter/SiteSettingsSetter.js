@@ -34,7 +34,6 @@ const SiteSettingSetter = () => {
             <link rel="shortcut icon" href={favIcon}/>
             <link rel="apple-touch-icon" href={favIcon}/>
             <link rel="manifest" href={'/manifest.json'}/>
-            <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&amp;display=swap" rel="stylesheet"/>
             {identity?.customScriptsAsString ? parse(identity?.customScriptsAsString) : null}
             {/*{identity?.siteMode === 'eCommerce' ?*/}
             {/*    <script src={`https://www.paypal.com/sdk/js?client-id=${settings.eCommerce?.payPalId}&currency=${settings.eCommerce?.currency}`}/>*/}
@@ -44,3 +43,5 @@ const SiteSettingSetter = () => {
     )
 };
 export default SiteSettingSetter;
+
+

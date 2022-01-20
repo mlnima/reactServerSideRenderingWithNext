@@ -13,8 +13,7 @@ const GlobalStyles = createGlobalStyle`
     background-color: var(--main-background-color, #000);
     margin: 0;
     color: var(--main-text-color, '#ccc');
-  font-family: Montserrat, Verdana, sans-serif;
-  
+    font-family: Arial,serif;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
     font-size: 12px;

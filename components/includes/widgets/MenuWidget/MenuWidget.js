@@ -1,10 +1,10 @@
 import {useEffect, useState, useRef, useMemo} from 'react';
 import dynamic from "next/dynamic";
-const MenuWidgetItem = dynamic(() => import('./MenuWidgetItem'));
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {checkRouteAndSetLoading} from "../../../../store/actions/globalStateActions";
+const MenuWidgetItem = dynamic(() => import('./MenuWidgetItem'));
 
 const MenuWidgetStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -81,7 +81,7 @@ const MenuWidgetStyledDiv = styled.div`
       overflow-y: initial;
 
       .navigation-close-button {
-        visibility: hidden;
+        display: none;
       }
     }
 
