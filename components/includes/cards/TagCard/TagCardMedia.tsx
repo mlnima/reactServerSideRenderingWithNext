@@ -1,15 +1,16 @@
-import React, {useRef, useState} from 'react';
+import {FC, useRef, useState} from 'react';
 import styled from "styled-components";
+import CardImageRenderer from "../asset/CardImageRenderer/CardImageRenderer";
 
-const TagCardMediaStyledImage = styled.img`
-  width: 100%;
-  height: calc(48vw / 1.777);
-  object-fit: contain;
-  @media only screen and (min-width: 768px) {
-    width: ${(props : {cardWidth:number}) => props.cardWidth}px;
-    height: calc(${(props : {cardWidth:number}) => props.cardWidth}px / 1.777);
-  }
-`
+// const TagCardMediaStyledImage = styled.img`
+//   width: 100%;
+//   height: calc(48vw / 1.777);
+//   object-fit: contain;
+//   @media only screen and (min-width: 768px) {
+//     width: ${(props : {cardWidth:number}) => props.cardWidth}px;
+//     height: calc(${(props : {cardWidth:number}) => props.cardWidth}px / 1.777);
+//   }
+// `
 
 const NoImageStyleDiv = styled.div`
   display: flex;
@@ -33,12 +34,13 @@ interface TagCardMediaPropTypes{
     mediaAlt:string;
 }
 
-const TagCardMedia = (props:TagCardMediaPropTypes) => {
-    const imageRef = useRef(null)
+const TagCardMedia:FC<TagCardMediaPropTypes> = (props:TagCardMediaPropTypes) => {
+
     const [gotError, setGotError] = useState(false)
 
-
-
+    const errorHandler = () => {
+        !gotError ? setGotError(true) : null
+    }
 
     if (!props.imageUrl || gotError){
         return (
@@ -48,15 +50,22 @@ const TagCardMedia = (props:TagCardMediaPropTypes) => {
         );
     }else {
         return (
-            <TagCardMediaStyledImage ref={imageRef}
-                                     cardWidth={props.cardWidth}
-                                     className='tag-card-image'
-                                     src={props.imageUrl}
-                                     onError={()=>setGotError(true)}
-                                     alt={props.mediaAlt}
+            <CardImageRenderer imageUrl={props.imageUrl}
+                               alt={props.mediaAlt}
+                               width={props.cardWidth}
+                               height={props.cardWidth / 1.777}
+                               errorHandler={errorHandler}
             />
         );
     }
 
 };
 export default TagCardMedia;
+
+// <TagCardMediaStyledImage ref={imageRef}
+//                          cardWidth={props.cardWidth}
+//                          className='tag-card-image'
+//                          src={props.imageUrl}
+//                          onError={()=>setGotError(true)}
+//                          alt={props.mediaAlt}
+// />
