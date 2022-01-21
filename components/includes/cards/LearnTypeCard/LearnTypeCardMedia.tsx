@@ -1,9 +1,10 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
+import CardImageRenderer from "../asset/CardImageRenderer/CardImageRenderer";
 
 let LearnTypeCardMediaStyledDiv = styled.div`
-  
+
   .learn-post-card-image {
     width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : '100%'};
     height: calc(48vw / 1.777);
@@ -38,9 +39,9 @@ const NoImageStyleDiv = styled.div`
 
 interface LearnTypeCardMediaPropTypes {
     post: PostTypes,
-    categoriesImages: string[],
+    categoriesImages?: string[],
     postElementSize: string,
-    cardWidth: string,
+    cardWidth: number,
     mediaAlt: string,
     noImageUrl: string,
 }
@@ -59,12 +60,16 @@ const LearnTypeCardMedia = (props: LearnTypeCardMediaPropTypes) => {
     })
 
     useEffect(() => {
-      if (dynamicImage && !props?.post?.mainThumbnail && props?.categoriesImages?.length){
-          setInterval(()=>{
-              setImageUrlToRender(props.categoriesImages[Math.floor(Math.random() * props.categoriesImages.length)])
-          },7000)
-      }
+        if (dynamicImage && !props?.post?.mainThumbnail && props?.categoriesImages?.length) {
+            setInterval(() => {
+                setImageUrlToRender(props.categoriesImages[Math.floor(Math.random() * props.categoriesImages.length)])
+            }, 7000)
+        }
     }, []);
+
+    const errorHandler = () => {
+        !gotError ? setGotError(true) : null
+    }
 
     if ((!props?.post?.mainThumbnail || gotError) && !props?.categoriesImages?.length) {
         return (
@@ -76,13 +81,21 @@ const LearnTypeCardMedia = (props: LearnTypeCardMediaPropTypes) => {
     } else return (
         // @ts-ignore
         <LearnTypeCardMediaStyledDiv className='learn-post-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <img className='learn-post-card-image'
-                 alt={props.mediaAlt}
-                //src={props?.post?.mainThumbnail}
-                 src={imageUrlToRender}
-                 onError={() => setGotError(true)}
+            <CardImageRenderer imageUrl={imageUrlToRender}
+                               alt={props.mediaAlt}
+                               width={props.cardWidth}
+                               height={props.cardWidth/ 1.777}
+                               errorHandler={errorHandler}
             />
+
         </LearnTypeCardMediaStyledDiv>
     );
 };
 export default LearnTypeCardMedia;
+
+// <img className='learn-post-card-image'
+//      alt={props.mediaAlt}
+//     //src={props?.post?.mainThumbnail}
+//      src={imageUrlToRender}
+//      onError={() => setGotError(true)}
+// />

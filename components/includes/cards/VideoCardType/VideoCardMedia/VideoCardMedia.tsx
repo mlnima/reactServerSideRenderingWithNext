@@ -1,8 +1,10 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
-const VideoCardInfo = dynamic(() => import('../VideoCardInfo') );
+import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
+
+const VideoCardInfo = dynamic(() => import('../VideoCardInfo'));
 const VideoCardTrailer = dynamic(() => import('./VideoCardTrailer'), {ssr: false});
 
 interface styleProps {
@@ -20,10 +22,10 @@ let VideoCardMediaStyledDiv = styled.div`
       opacity: 100%;
     }
   }
-  
+
   .video-card-image {
-    width: ${(props: styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
-    height: ${(props: styleProps) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
+    width: 100%;
+    height: calc(48vw / 1.777);
     object-fit: contain;
   }
 
@@ -61,12 +63,15 @@ let VideoCardMediaStyledDiv = styled.div`
 
   @media only screen and (min-width: 768px) {
     .video-card-image {
-      width: ${(props: styleProps) => props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
-      height: calc(${(props: styleProps) => props.cardWidth}px / 1.777);
+      width: ${(props: styleProps) => `${props.cardWidth}px`};
+      height: ${(props: styleProps) => `calc(${props.cardWidth}/1.777)`};
     }
-    
+
   }
 `
+
+//    width: ${(props: styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
+//     height: ${(props: styleProps) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
 const NoImageStyleDiv = styled.div`
   width: 100%;
   height: calc(48vw / 1.777);
@@ -96,7 +101,7 @@ interface VideoCardMediaPropTypes {
     duration: string,
 }
 
-const VideoCardMedia = (props: VideoCardMediaPropTypes) => {
+const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
 
     const [hover, setHover] = useState(false)
     const [gotError, setGotError] = useState(false)
@@ -104,6 +109,9 @@ const VideoCardMedia = (props: VideoCardMediaPropTypes) => {
 
     const hoverHandler = () => {
         hover ? setHover(false) : setHover(true)
+    }
+    const errorHandler = () => {
+        !gotError ? setGotError(true) : null
     }
 
     if (props.post?.videoTrailerUrl && hover) {
@@ -125,13 +133,19 @@ const VideoCardMedia = (props: VideoCardMediaPropTypes) => {
             )
         } else return (
 
-            <VideoCardMediaStyledDiv className={'video-card-media'} postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-                <img className={'video-card-image'}
-                     alt={props.mediaAlt}
-                     src={props?.post.mainThumbnail}
-                     onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
-                     onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
-                     onError={() => setGotError(true)}
+            <VideoCardMediaStyledDiv className={'video-card-media'}
+                                     postElementSize={props.postElementSize}
+                                     cardWidth={props.cardWidth}
+                                     onMouseEnter={hoverHandler}
+                                     onMouseOut={hoverHandler}
+                                     onTouchStartCapture={hoverHandler}
+                                     onTouchEnd={hoverHandler}
+            >
+                <CardImageRenderer imageUrl={props?.post.mainThumbnail}
+                                   alt={props.mediaAlt}
+                                   width={props.cardWidth}
+                                   height={props.cardWidth / 1.777}
+                                   errorHandler={errorHandler}
                 />
                 <VideoCardInfo views={props.views}
                                rating={props.rating}
@@ -144,3 +158,10 @@ const VideoCardMedia = (props: VideoCardMediaPropTypes) => {
 };
 export default VideoCardMedia;
 
+// <img className={'video-card-image'}
+//      alt={props.mediaAlt}
+//      src={props?.post.mainThumbnail}
+//      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
+//      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
+//      onError={() => errorHandler}
+// />

@@ -1,9 +1,9 @@
 import React from 'react';
-import ActorCard from "../ActorCard/ActorCard";
+import ActorCard from "../../../../cards/ActorCard/ActorCard";
 import styled from "styled-components";
 import {setLoading} from "../../../../../../store/actions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
-// width: ${props => props?.cardWidth}px;
+
 let ActorsRendererStyledDiv = styled.div`
   display: flex;
   flex-wrap: wrap;

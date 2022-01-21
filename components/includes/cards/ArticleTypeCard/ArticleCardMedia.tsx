@@ -1,6 +1,7 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
+import CardImageRenderer from "../asset/CardImageRenderer/CardImageRenderer";
 
 let ArticleCardMediaStyled = styled.div`
   .article-card-image {
@@ -34,31 +35,38 @@ const NoImageStyleDiv = styled.div`
 interface ArticleCardMediaPropTypes {
     post:PostTypes,
     postElementSize:string,
-    cardWidth:string,
+    cardWidth:number,
     mediaAlt:string,
     noImageUrl:string,
 }
 
-const ArticleCardMedia = (props:ArticleCardMediaPropTypes) => {
+const ArticleCardMedia : FC<ArticleCardMediaPropTypes>= (props) => {
     const [gotError, setGotError] = useState(false)
-
+    const errorHandler = () => {
+        !gotError ? setGotError(true) : null
+    }
     if (!props?.post.mainThumbnail || gotError){
         return (
-            // @ts-ignore
             <NoImageStyleDiv cardWidth={props.cardWidth} className='no-image'>
                 <span className={'no-image-alt'}>{props.mediaAlt || 'NO IMAGE'}</span>
             </NoImageStyleDiv>
         )
     }else return (
-        // @ts-ignore
         <ArticleCardMediaStyled className='article-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <img className='article-card-image'
-                 alt={props.mediaAlt}
-                 src={props?.post.mainThumbnail}
-                 onError={()=>setGotError(true)}
+            <CardImageRenderer imageUrl={props?.post.mainThumbnail}
+                               alt={props.mediaAlt}
+                               width={props.cardWidth}
+                               height={props.cardWidth/1.777}
+                               errorHandler={ errorHandler}
             />
         </ArticleCardMediaStyled>
     );
 };
 export default ArticleCardMedia;
-    
+
+
+// <img className='article-card-image'
+//      alt={props.mediaAlt}
+//      src={props?.post.mainThumbnail}
+//      onError={()=>setGotError(true)}
+// />

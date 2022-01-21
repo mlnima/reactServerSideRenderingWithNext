@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
+import CardImageRenderer from "../asset/CardImageRenderer/CardImageRenderer";
 
 const PromotionCardMediaStyled = styled.div`
 
@@ -41,14 +42,16 @@ const NoImageStyleDiv = styled.div`
 interface PromotionCardMediaPropTypes {
     post: PostTypes,
     postElementSize: string,
-    cardWidth: string,
+    cardWidth: number,
     mediaAlt: string,
     noImageUrl: string,
 }
 
 const PromotionCardMedia = (props: PromotionCardMediaPropTypes) => {
     const [gotError, setGotError] = useState(false)
-
+    const errorHandler = () => {
+        !gotError ? setGotError(true) : null
+    }
     if (!props?.post.mainThumbnail || gotError){
         return (
             // @ts-ignore
@@ -59,13 +62,19 @@ const PromotionCardMedia = (props: PromotionCardMediaPropTypes) => {
     }else return (
         // @ts-ignore
         <PromotionCardMediaStyled className='promotion-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <img className='promotion-card-image'
-                 alt={props.mediaAlt}
-                 src={props?.post.mainThumbnail}
-                 onError={()=>setGotError(true)}
+            <CardImageRenderer imageUrl={props?.post.mainThumbnail}
+                               alt={props.mediaAlt}
+                               width={props.cardWidth}
+                               height={props.cardWidth / 1.777}
+                               errorHandler={errorHandler}
             />
         </PromotionCardMediaStyled>
     );
 };
 export default PromotionCardMedia;
 
+// <img className='promotion-card-image'
+//      alt={props.mediaAlt}
+//      src={props?.post.mainThumbnail}
+//      onError={()=>setGotError(true)}
+// />

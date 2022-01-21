@@ -3,7 +3,7 @@ import Link from "next/link";
 import {useRouter} from "next/router";
 import ActorCardMedia from "./ActorCardMedia";
 import {withTranslation} from "next-i18next";
-import capitalizeFirstLetter from "../../../../../../_variables/util/capitalizeFirstLetter";
+import capitalizeFirstLetter from "../../../../_variables/util/capitalizeFirstLetter";
 import styled from "styled-components";
 const ActorCardStyledDiv = styled.div`
   .actor-card-info{

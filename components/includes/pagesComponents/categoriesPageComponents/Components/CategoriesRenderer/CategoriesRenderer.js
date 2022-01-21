@@ -1,5 +1,5 @@
 import React from 'react';
-import CategoryCard from "../CategoryCard/CategoryCard";
+import CategoryCard from "../../../../cards/CategoryCard/CategoryCard";
 import styled from "styled-components";
 import {setLoading} from "../../../../../../store/actions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";

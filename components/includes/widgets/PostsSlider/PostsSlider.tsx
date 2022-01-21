@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext, useRef, useMemo} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
 import {setLoading} from "../../../../store/actions/globalStateActions";
-import PromotionCardListSmall from "../../PostCard/PromotionTypeCard/PromotionCardListSmall";
+import PromotionCardListSmall from "../../cards/PromotionTypeCard/PromotionCardListSmall";
 import {useRouter} from "next/router";
 import _shortNumber from "../../../../_variables/clientVariables/_shortNumber";
 import {likeValueCalculator} from "../../../../_variables/_variables";
@@ -9,9 +9,9 @@ import dynamic from "next/dynamic";
 import {useDispatch} from "react-redux";
 
 
-const VideoTypeCard = dynamic(() => import('../../PostCard/VideoCardType/VideoTypeCard'))
-const PromotionTypeCard = dynamic(() => import('../../PostCard/PromotionTypeCard/PromotionTypeCard'))
-const ArticleTypeCard = dynamic(() => import('../../PostCard/ArticleTypeCard/ArticleTypeCard'))
+const VideoTypeCard = dynamic(() => import('../../cards/VideoCardType/VideoTypeCard'))
+const PromotionTypeCard = dynamic(() => import('../../cards/PromotionTypeCard/PromotionTypeCard'))
+const ArticleTypeCard = dynamic(() => import('../../cards/ArticleTypeCard/ArticleTypeCard'))
 
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";

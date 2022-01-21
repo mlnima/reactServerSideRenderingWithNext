@@ -138,6 +138,7 @@ export interface WidgetPropTypes {
 }
 
 export interface MetasPropTypes {
+    imageUrl?: string;
     metas: Meta[],
     totalCount: number
 }

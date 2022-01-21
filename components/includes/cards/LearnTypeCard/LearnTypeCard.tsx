@@ -6,7 +6,9 @@ import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEye} from "@fortawesome/free-regular-svg-icons";
 import LearnTypeCardTitle from "./LearnTypeCardTitle";
-import {useEffect} from "react";
+import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
+import {FC} from "react";
+
 
 
 const LearnTypeCardStyledDiv = styled.div`
@@ -90,11 +92,20 @@ const LearnTypeCardStyledDiv = styled.div`
 
 `
 
-
-const LearnTypeCard = (props: any) => {
+interface VideoTypeCardPropTypes {
+    cardWidth: number,
+    postElementSize: string,
+    onActivateLoadingHandler: any,
+    title: string,
+    noImageUrl: string,
+    views: number,
+    rating: number,
+    post: PostTypes,
+}
+const LearnTypeCard : FC<VideoTypeCardPropTypes> = (props) => {
 
     const postUrl = `/post/${props.post?.postType}/${props.post?._id}`
-    const categoriesImages = props.post.categories.filter(category=>category.imageUrl).map(category=>category.imageUrl)
+    const categoriesImages = props.post.categories.filter(category=>category?.imageUrl).map(category=>category?.imageUrl)
 
     return (
         <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>

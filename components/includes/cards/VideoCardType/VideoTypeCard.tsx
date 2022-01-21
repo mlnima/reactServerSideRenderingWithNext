@@ -9,7 +9,7 @@ const VideoCardMedia = dynamic(() => import('./VideoCardMedia/VideoCardMedia'));
 
 let VideoCardStyledArticle = styled.article`
   width: calc(48vw - 5.6px);
-  max-width: calc(50vw - 5.6px);
+  max-width: calc(48vw - 5.6px);
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;

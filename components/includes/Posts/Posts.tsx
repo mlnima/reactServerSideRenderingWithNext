@@ -8,13 +8,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
 import {settingsPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
-const VideoCardTypeList = dynamic(() => import('../PostCard/VideoCardTypeList/VideoCardTypeList'))
-const PromotionCardListSmall = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionCardListSmall'))
-const VideoTypeCard = dynamic(() => import('../PostCard/VideoCardType/VideoTypeCard'))
-const PromotionTypeCard = dynamic(() => import('../PostCard/PromotionTypeCard/PromotionTypeCard'))
-const ArticleTypeCard = dynamic(() => import('../PostCard/ArticleTypeCard/ArticleTypeCard'))
-const DefaultTypeCard = dynamic(() => import('../PostCard/DefaultTypeCard/DefaultTypeCard'))
-const LearnTypeCard = dynamic(() => import('../PostCard/LearnTypeCard/LearnTypeCard'))
+const VideoCardTypeList = dynamic(() => import('../cards/VideoCardTypeList/VideoCardTypeList'))
+const PromotionCardListSmall = dynamic(() => import('../cards/PromotionTypeCard/PromotionCardListSmall'))
+const VideoTypeCard = dynamic(() => import('../cards/VideoCardType/VideoTypeCard'))
+const PromotionTypeCard = dynamic(() => import('../cards/PromotionTypeCard/PromotionTypeCard'))
+const ArticleTypeCard = dynamic(() => import('../cards/ArticleTypeCard/ArticleTypeCard'))
+const DefaultTypeCard = dynamic(() => import('../cards/DefaultTypeCard/DefaultTypeCard'))
+const LearnTypeCard = dynamic(() => import('../cards/LearnTypeCard/LearnTypeCard'))
 
 const PostsContentStyledDiv = styled.div`
   display: flex;

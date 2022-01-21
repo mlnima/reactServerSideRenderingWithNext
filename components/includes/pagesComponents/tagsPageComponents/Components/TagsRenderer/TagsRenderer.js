@@ -1,5 +1,5 @@
 import React from 'react';
-import TagCard from "../TagCard/TagCard";
+import TagCard from "../../../../cards/TagCard/TagCard";
 import styled from "styled-components";
 import {setLoading} from "../../../../../../store/actions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
