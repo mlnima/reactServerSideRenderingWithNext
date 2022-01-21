@@ -2,7 +2,7 @@ import React, {useState} from 'react';
 import Link from "next/link";
 import {convertVariableNameToName} from '../../../_variables/_variables'
 import withRouter from 'next/dist/client/with-router'
-import _ from "lodash";
+import {uniqueId} from "lodash";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
@@ -196,7 +196,7 @@ const SideBar = () => {
                 <div className='SideBarItemTitle'>
                     <Link href={state[item].pathURL}><a className='SideBarItem' onClick={() => dispatch(setSidebarStatus(false))}>{convertVariableNameToName(item)}</a></Link>
                     {state[item].subItems.length ?
-                        <span className={'sidebar-items-switch'} onMouseOver={() => setHovered(item)}  key={_.uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
+                        <span className={'sidebar-items-switch'} onMouseOver={() => setHovered(item)}  key={uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
                             <FontAwesomeIcon icon={faSortDown} style={{transform: hovered === item ? 'rotate(0deg)' : 'rotate(90deg)'}} className='fontawesomeSvgVerySmall'/>
                        </span>
                         : null}
@@ -207,7 +207,7 @@ const SideBar = () => {
                         state[item].subItems.map(subItem => {
                             if (hovered === item) {
                                 return (
-                                    <Link key={_.uniqueId('id_')} href={subItem.url}>
+                                    <Link key={uniqueId('id_')} href={subItem.url}>
                                         <a className='SideBarItem-SubItem' onClick={() => dispatch(setSidebarStatus(false))}>
                                             {convertVariableNameToName(subItem.name)}
                                         </a>

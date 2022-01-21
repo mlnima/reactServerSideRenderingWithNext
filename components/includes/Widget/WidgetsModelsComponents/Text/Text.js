@@ -1,4 +1,3 @@
-import React, {useRef} from 'react';
 import parse from 'html-react-parser';
 import styled from "styled-components";
 import {useRouter} from "next/router";
@@ -11,14 +10,13 @@ const TextStyledDiv = styled.div`
   }
 `
 
-const Text = props => {
+const Text = ({translations,text}) => {
     const router = useRouter();
-    const spanElement = useRef(null);
-    const textData = props.translations ? props.translations[router.locale] ? props.translations[router.locale].text || props.text : props.text : props.text;
+    const textData = translations ? translations[router.locale] ? translations[router.locale].text || text : text : text;
     const data = parse(textData);
 
     return (
-        <TextStyledDiv className='widgetText' ref={spanElement}>
+        <TextStyledDiv className='widgetText'>
             {data}
         </TextStyledDiv>
     );

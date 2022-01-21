@@ -1,4 +1,4 @@
-import {FC, useRef, useState} from 'react';
+import {FC, useState} from 'react';
 import styled from "styled-components";
 import CardImageRenderer from "../asset/CardImageRenderer/CardImageRenderer";
 

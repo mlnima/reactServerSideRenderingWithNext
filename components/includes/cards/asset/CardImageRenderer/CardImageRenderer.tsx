@@ -16,7 +16,7 @@ interface CardImageNextPropTypes {
 const CardImageRenderer: FC<CardImageNextPropTypes> = ({imageUrl,alt, width, height,errorHandler}) => {
     const imageUrlSource = useMemo(() => {
         return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
-    }, [])
+    }, [imageUrl])
 
     const CardImageProps = useMemo(()=>errorHandler ? {errorHandler}:{},[])
 

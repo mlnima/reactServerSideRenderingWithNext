@@ -3,6 +3,7 @@ import AddWidgetWithPositionMenu from './AddWidgetWithPositionMenu'
 import WidgetImporter from "./WidgetImporter/WidgetImporter";
 import WidgetExporter from "./WidgetExporter/WidgetExporter";
 import {convertVariableNameToName} from "../../../../_variables/_variables";
+import widgetsTypes from "../../../global/widgetsTypes";
 
 import styled from "styled-components";
 
@@ -37,31 +38,9 @@ const AddWidgetMenuStyledDiv = styled.div`
 `
 
 const AddWidgetMenu = () => {
-        const widgetTypes=[
-            'text',
-            'textEditor',
-            'menu',
-            'linkTo',
-            'multipleLinkTo',
-            'posts',
-            'media',
-            'recentComments',
-            'searchBar',
-            'searchButton',
-            'meta',
-            'metaWithImage',
-            'logo',
-            'form',
-            'shoppingCart',
-            'alphabeticalNumericalRange',
-            'language',
-            'authentication',
-            'postsSlider',
-            'imageSwiper',
-            'postsSwiper',
-        ]
 
-        const renderWidgetsTypes = widgetTypes.map((type,index)=>{
+
+        const renderWidgetsTypes = widgetsTypes.map((type,index)=>{
                 return <AddWidgetWithPositionMenu key={index}
                                                   type={type}
                                                   name={convertVariableNameToName(type)}

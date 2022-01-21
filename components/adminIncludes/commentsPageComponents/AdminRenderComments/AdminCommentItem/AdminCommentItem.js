@@ -1,5 +1,4 @@
-import React, { useEffect, useState, useContext, useRef } from 'react';
-import _ from 'lodash'
+import React, { useEffect, useState } from 'react';
 import withRouter from 'next/dist/client/with-router'
 import { updateComment } from '../../../../../_variables/ajaxPostsVariables'
 import styled from "styled-components";

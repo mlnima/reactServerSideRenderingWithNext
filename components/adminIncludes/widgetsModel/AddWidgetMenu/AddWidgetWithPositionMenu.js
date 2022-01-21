@@ -2,7 +2,7 @@ import React, {useRef, useState} from 'react';
 import * as widgetModels from './models'
 import {adminAddNewWidget} from '../../../../store/adminActions/adminWidgetsActions'
 import {convertVariableNameToName} from '../../../../_variables/_variables'
-import _ from "lodash";
+import {uniqueId} from "lodash";
 import {useDispatch, useSelector} from 'react-redux';
 import styled from "styled-components";
 import staticPositions from '../staticPositions';
@@ -93,7 +93,7 @@ const AddWidgetWithPositionMenu = props => {
     const renderPositions = staticPositions.map(position => {
         return (
 
-            <button key={_.uniqueId('position_')}
+            <button key={uniqueId('position_')}
                     className='btn btn-info'
                     onClick={() => onAddNewWidget(position, props.type)}
                     onMouseEnter={onIncreaseZIndexHandler}

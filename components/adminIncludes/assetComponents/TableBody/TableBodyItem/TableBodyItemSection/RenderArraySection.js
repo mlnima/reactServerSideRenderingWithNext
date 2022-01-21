@@ -1,8 +1,6 @@
-import React from 'react';
-import _ from "lodash";
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import Link from "next/link";
+
 
 const ArraySectionStyledDiv = styled.div`
   button{
@@ -16,12 +14,12 @@ const ArraySectionStyledDiv = styled.div`
 const RenderArraySection = props => {
     const router = useRouter()
 
-    const onClickHandler = (_id,) => {
+    const onClickHandler = (_id) => {
         console.log('onClickHandler')
         const query = {...router.query, metaId:_id}
         delete query.keyword
         delete query.page
-        router.push({
+        router?.push({
             pathname: router.pathname,
             query
         })

@@ -2,7 +2,7 @@ import {useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars} from "@fortawesome/free-solid-svg-icons";
 import MenuWidgetModelFieldsPreview from "./MenuWidgetModelFieldsPreview";
-import _ from "lodash";
+import {uniqueId} from "lodash";
 import MenuWidgetEditForm from "./MenuWidgetEditForm";
 
 import styled from "styled-components";
@@ -62,7 +62,7 @@ const MenuWidgetModelFields = props => {
                     {
                         ...formData,
                         itemIndex:formData.itemIndex ? parseInt(formData.itemIndex) : (props?.widgetData?.menuItems.length ||0),
-                        itemId : _.uniqueId('id_') + props?.widgetData?.menuItems.length  || _.uniqueId('id_')
+                        itemId : uniqueId('id_') + props?.widgetData?.menuItems.length  || uniqueId('id_')
                     }
                 ]
             })
@@ -74,7 +74,7 @@ const MenuWidgetModelFields = props => {
                 ...(parentData || {}),
                 subItems:[...((props?.widgetData?.menuItems?.[findParentIndex] || {})?.subItems||[]), {
                     ...formData,
-                    itemId : _.uniqueId('sub_') + props?.widgetData?.menuItems.length  || _.uniqueId('sub_'),
+                    itemId : uniqueId('sub_') + props?.widgetData?.menuItems.length  || uniqueId('sub_'),
                     itemIndex:parentData?.subItems?.length +1 || 0,
                 }]
             }
@@ -104,7 +104,7 @@ const MenuWidgetModelFields = props => {
 
     const renderCurrentItems = (props?.widgetData?.menuItems?.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || []).map(menuItem => {
         return (
-            <MenuWidgetModelFieldsPreview key={_.uniqueId('id_')}
+            <MenuWidgetModelFieldsPreview key={uniqueId('id_')}
                                           data={menuItem}
                                           widgetData={props.widgetData}
                                           setWidgetData={props.setWidgetData}

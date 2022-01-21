@@ -1,4 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
+import styled from "styled-components";
 import dynamic from 'next/dynamic'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
@@ -9,12 +10,12 @@ import _ from "lodash";
 import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields";
 import {useDispatch, useSelector} from "react-redux";
 import {adminAddNewWidget, adminDeleteWidget, adminUpdateWidget} from "../../../../store/adminActions/adminWidgetsActions";
-import staticPositions from '../staticPositions';
-import postTypes from "../../../global/postTypes";
-import styled from "styled-components";
 import SelectFieldForWidget from "./SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
+import staticPositions from '../staticPositions';
+import postTypes from "../../../global/postTypes";
 
+const AdvertiseWidgetModelFields = dynamic(() => import('./AdvertiseWidgetModelFields'));
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
 const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'));
@@ -41,7 +42,7 @@ const WidgetModelStyledDiv = styled.div`
   width: 100%;
   resize: both;
   overflow: hidden;
-  
+
   .widgetInfo {
     margin: auto;
     width: 95%;
@@ -63,9 +64,10 @@ const WidgetModelStyledDiv = styled.div`
       margin: 0;
     }
   }
-  .monaco-editor-section{
-    p{
-      margin:  10px;
+
+  .monaco-editor-section {
+    p {
+      margin: 10px;
     }
   }
 
@@ -210,7 +212,7 @@ const WidgetModel = props => {
             }
         })
     }
-    
+
     const onCheckboxChangeHandler = e => {
         setWidgetData({
             ...widgetData,
@@ -223,7 +225,7 @@ const WidgetModel = props => {
             [name]: value
         })
     };
-    // actions on widget
+
     const onCloneHandler = () => {
         const widgetsInTheSamePosition = widgets.filter(widget => widget?.data?.position === widgetData.position)
         const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(widget => widgetData.widgetIndex), 0)
@@ -301,6 +303,10 @@ const WidgetModel = props => {
                         <p>Edit Mode:</p>
                         <input type='checkbox' name='editMode' checked={widgetData.editMode} onChange={e => onCheckboxChangeHandler(e)}/>
                     </div>
+                    <div className='checkInputFieldForWidget widgetSection'>
+                        <p>No SSR:</p>
+                        <input type='checkbox' name='noSSR' checked={widgetData.noSSR} onChange={e => onCheckboxChangeHandler(e)}/>
+                    </div>
                     <div className='widgetInfo widgetSection'>
                         <p className='widget-info-id'>ID :</p>
                         <p>{props.widgetId || props.state?.widgetId || 'XXX'}</p>
@@ -326,7 +332,7 @@ const WidgetModel = props => {
                                           name={'specificDayToRender'}
                                           ref={null}
                                           value={widgetData.specificDayToRender}
-                                          options={['all','monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']}
+                                          options={['all', 'monday', 'tuesday', 'wednesday', 'thursday', 'friday', 'saturday', 'sunday']}
                                           onChangeHandler={onChangeHandler}
                     />
 
@@ -363,26 +369,7 @@ const WidgetModel = props => {
                             widgetData.type === 'media' ||
                             widgetData.type === 'recentComments'}
                     />
-                    {/*<TextWidgetTypeFields*/}
-                    {/*    widgetSettings={widgetSettings}*/}
-                    {/*    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}*/}
 
-                    {/*    widgetData={widgetData}*/}
-                    {/*    onChangeHandler={onChangeHandlerByName}*/}
-                    {/*    rendering={*/}
-                    {/*        widgetData.type === 'posts' ||*/}
-                    {/*        widgetData.type === 'form' ||*/}
-                    {/*        widgetData.type === 'postsSwiper' ||*/}
-                    {/*        widgetData.type === 'imageSwiper' ||*/}
-                    {/*        widgetData.type === 'meta' ||*/}
-                    {/*        widgetData.type === 'metaWithImage' ||*/}
-                    {/*        widgetData.type === 'media' ||*/}
-                    {/*        widgetData.type === 'alphabeticalNumericalRange' ||*/}
-                    {/*        widgetData.type === 'linkTo' ||*/}
-                    {/*        widgetData.type === 'multipleLinkTo' ||*/}
-                    {/*        widgetData.type === 'text' ||*/}
-                    {/*        widgetData.type === 'recentComments'}*/}
-                    {/*/>*/}
 
                     <p>Widget Text or HTML</p>
 
@@ -390,19 +377,21 @@ const WidgetModel = props => {
                         language={'html'}
                         name={'text'}
                         defaultValue={
-                                widgetSettings.activeEditingLanguage === 'default' ?  widgetData.text :
+                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
                                 widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
                         }
                         value={
-                                widgetSettings.activeEditingLanguage === 'default' ?  widgetData.text :
+                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
                                 widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
                         }
-                        // defaultValue={widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text || widgetData.text }
-                        // value={widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text || widgetData.text }
                         className={'widgetTextTextarea'}
                         onChange={onTextInputsDataChangeHandler}
                     />
 
+                    {widgetData.type === 'advertise'?
+                        <AdvertiseWidgetModelFields adCode={widgetData.adCode} onChangeHandler={onChangeHandler}/>
+                        :null
+                    }
 
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'meta' || widgetData.type === 'postsSlider' ?
                         <SelectFieldForWidget title={'Sort By:'}
@@ -574,7 +563,6 @@ const WidgetModel = props => {
                     <TextInputFieldForWidget inputTitle='Extra Id:' name='extraId' type='text' value={widgetData.extraId}
                                              placeHolder='Extra Id'
                                              onChangeHandler={onChangeHandler}/>
-
 
 
                     <div className={'monaco-editor-section'}>

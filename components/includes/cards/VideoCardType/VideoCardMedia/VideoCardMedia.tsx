@@ -1,4 +1,4 @@
-import React, {FC, useState} from 'react';
+import {FC, useState, useMemo, useEffect} from 'react';
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
@@ -105,7 +105,7 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
 
     const [hover, setHover] = useState(false)
     const [gotError, setGotError] = useState(false)
-
+    const videoTrailerUrlSource = useMemo(() => props.post.videoTrailerUrl, [props.post])
 
     const hoverHandler = () => {
         hover ? setHover(false) : setHover(true)
@@ -114,13 +114,17 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
         !gotError ? setGotError(true) : null
     }
 
+    useEffect(() => {
+        hover ? setHover(false) : null
+    }, [props.post]);
+
     if (props.post?.videoTrailerUrl && hover) {
         return (
             <VideoCardTrailer hover={hover}
                               hoverHandler={hoverHandler}
                               postElementSize={props.postElementSize}
                               cardWidth={props.cardWidth}
-                              videoTrailerUrl={props.post.videoTrailerUrl}
+                              videoTrailerUrl={videoTrailerUrlSource}
             />
         )
     } else {
@@ -158,10 +162,3 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
 };
 export default VideoCardMedia;
 
-// <img className={'video-card-image'}
-//      alt={props.mediaAlt}
-//      src={props?.post.mainThumbnail}
-//      onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
-//      onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
-//      onError={() => errorHandler}
-// />

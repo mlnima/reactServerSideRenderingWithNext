@@ -1,0 +1,26 @@
+const widgetsTypes = [
+    'text',
+    'advertise',
+    'textEditor',
+    'menu',
+    'linkTo',
+    'multipleLinkTo',
+    'posts',
+    'media',
+    'recentComments',
+    'searchBar',
+    'searchButton',
+    'meta',
+    'metaWithImage',
+    'logo',
+    'form',
+    'shoppingCart',
+    'alphabeticalNumericalRange',
+    'language',
+    'authentication',
+    'postsSlider',
+    'imageSwiper',
+    'postsSwiper',
+]
+
+export default widgetsTypes

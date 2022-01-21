@@ -1,5 +1,6 @@
-import React, {useEffect, useRef} from "react";
+import React, {useEffect, useRef, useMemo, useState} from "react";
 import styled from "styled-components";
+import {useRouter} from "next/router";
 
 const VideoCardTrailerStyledDiv = styled.div`
   position: relative;
@@ -40,15 +41,14 @@ interface ComponentPropTypes {
     cardWidth: number,
 }
 
-const VideoCardTrailer =
-    ({hover, hoverHandler,postElementSize, cardWidth, videoTrailerUrl}: ComponentPropTypes) => {
-
+const VideoCardTrailer = ({hover, hoverHandler, postElementSize, cardWidth, videoTrailerUrl}: ComponentPropTypes) => {
     const videoTrailer = useRef(null)
+    const videoTrailerUrlSource = useMemo(() => videoTrailerUrl, [videoTrailerUrl])
 
     useEffect(() => {
-        if (hover && videoTrailer?.current) {
-            videoTrailer.current.play()
-        }
+            hover && videoTrailer?.current ?
+            videoTrailer.current.play():
+            null
     }, [hover]);
 
     return (
@@ -58,12 +58,14 @@ const VideoCardTrailer =
         >
             <video ref={videoTrailer}
                    loop={false}
-                   onMouseEnter={hoverHandler} onMouseOut={hoverHandler}
-                   onTouchStartCapture={hoverHandler} onTouchEnd={hoverHandler}
+                   onMouseEnter={hoverHandler}
+                   onMouseOut={hoverHandler}
+                   onTouchStartCapture={hoverHandler}
+                   onTouchEnd={hoverHandler}
                    muted
                    playsInline
                    className={'video-card-trailer'}>
-                <source src={videoTrailerUrl}/>
+                <source src={videoTrailerUrlSource}/>
                 Sorry, your browser doesn't support embedded videos.
             </video>
 

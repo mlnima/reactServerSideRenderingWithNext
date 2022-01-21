@@ -1,10 +1,13 @@
 // import Widget from '../Widget/Widget'
+import {Fragment} from "react";
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
+
+const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'))
 const Widget = dynamic(() => import('../Widget/Widget'))
 const Posts = dynamic(() => import('../Posts/Posts'))
 const CategoriesRenderer = dynamic(() => import('../pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer'))
@@ -27,6 +30,8 @@ const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
+const Advertise = dynamic(() => import('../widgets/Advertise/Advertise'))
+
 
 interface WidgetsRendererProps {
     position: string,
@@ -47,10 +52,6 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
     const userRole = useSelector((store: StoreTypes) => store?.user.userData?.role)
     const router = useRouter()
     const today = new Date().toLocaleString('en-us', {weekday: 'long'}).toLowerCase()
-    // useEffect(() => {
-    //     console.log(widgetsMemo)
-    // }, [widgetsMemo]);
-
 
     const renderWidgets = widgetsMemo?.map((widget: any, index: number) => {
         const languageToRender = widget.data.languageToRender || 'all';
@@ -84,23 +85,24 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                                                                             widget.data.type === 'imageSwiper' ? ImageSwiper :
                                                                                 widget.data.type === 'menu' ? MenuWidget :
                                                                                     widget.data.type === 'shoppingCart' ? ShoppingCart :
-                                                                                        widget.data.type === 'form' ? FormWidget
-                                                                                            : null;
+                                                                                        widget.data.type === 'advertise' ? Advertise :
+                                                                                            widget.data.type === 'form' ? FormWidget
+                                                                                                : null;
 
         if (renderByLanguageCondition && renderByDayCondition && !isEditMode) {
-
+            const WidgetFragment = widget.data.noSSR ? DynamicNoSSR : Fragment
             return (
-                <Widget
-                    key={widget._id}
-                    widgetId={widget._id}
-                    isSidebar={position ? position.includes('Sidebar') : false}
-                    {...widget}
-                    widgetToRender={widgetToRender}
-                    postElementSize={postElementSize}
-                    viewType={widget.data?.viewType}
-                />
+                <WidgetFragment key={widget._id}>
+                    <Widget
+                        widgetId={widget._id}
+                        isSidebar={position ? position.includes('Sidebar') : false}
+                        {...widget}
+                        widgetToRender={widgetToRender}
+                        postElementSize={postElementSize}
+                        viewType={widget.data?.viewType}
+                    />
+                </WidgetFragment>
             )
-
         } else return null
     })
 

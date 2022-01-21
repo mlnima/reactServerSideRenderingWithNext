@@ -1,11 +1,12 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
-const widgetDataSchema =  mongoose.Schema({
+const widgetDataSchema = new Schema({
     extraClassName: String,
     extraId: String,
     position: String,
     text: String,
+    adCode: String,
     title: String,
     name: String,
     redirectLink: String,
@@ -21,15 +22,16 @@ const widgetDataSchema =  mongoose.Schema({
     postType: String,
     sortBy: String,
     LogoText: String,
-    LogoUrl:String,
+    LogoUrl: String,
     headLine: String,
     linkToType: String,
-    postElementSize:String,
+    postElementSize: String,
     linkToText: String,
     linkToAs: String,
     editMode: Boolean,
+    noSSR: Boolean,
     linkTo: String,
-    multipleLinks:Array,
+    multipleLinks: Array,
     mediaUrl: String,
     mediaType: String,
     widgetIndex: Number,
@@ -44,8 +46,8 @@ const widgetDataSchema =  mongoose.Schema({
     comments: [{type: Schema.Types.ObjectID, ref: 'comment'}]
 });
 
-const widgetSchema = mongoose.Schema({
-    // data:mongoose.Mixed,
+const widgetSchema = new Schema({
+
     data: widgetDataSchema,
 });
 

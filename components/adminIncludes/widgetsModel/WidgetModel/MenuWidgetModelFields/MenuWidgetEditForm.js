@@ -1,4 +1,4 @@
-import _ from "lodash";
+import {uniqueId} from "lodash";
 import styled from "styled-components";
 
 const MenuWidgetEditFormStyledFrom = styled.form`
@@ -30,7 +30,7 @@ const MenuWidgetEditForm = props => {
 
     const renderItemsForParent = props.parentsOption.map(parentOption => {
         return (
-            <option value={parentOption.itemId} key={_.uniqueId('id_')}>{parentOption?.translations?.[props.activeEditingLanguage]?.name || parentOption.name}</option>
+            <option value={parentOption.itemId} key={uniqueId('id_')}>{parentOption?.translations?.[props.activeEditingLanguage]?.name || parentOption.name}</option>
         )
     });
 

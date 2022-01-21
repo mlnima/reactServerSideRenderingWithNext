@@ -3,7 +3,6 @@ import Editor, { DiffEditor, useMonaco, loader } from "@monaco-editor/react";
 
 const TextWidgetTypeFields = props => {
 
-
     const onChangeHandler = value=>{
         const e={
             target:{
@@ -13,10 +12,6 @@ const TextWidgetTypeFields = props => {
         }
         props.onTextInputsDataChangeHandler(e)
     }
-
-
-
-
 
     if (props.rendering){
         return (

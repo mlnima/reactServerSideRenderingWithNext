@@ -7,9 +7,9 @@ interface MonacoEditorPropTypes {
     theme:string,
     defaultValue:string,
     value:string,
-    width:string,
-    height:string,
-    className:string,
+    width?:string,
+    height?:string,
+    className?:string,
     onChange:any
 }
 const MonacoEditor = (props:MonacoEditorPropTypes) => {
@@ -40,7 +40,7 @@ const MonacoEditor = (props:MonacoEditorPropTypes) => {
                 defaultValue={props.defaultValue || ''}
                 value={props.value || ''}
                 onChange={onChangeHandler}
-                className={props.className}
+                className={props.className || ''}
                 width={props.width || '100%'}
                 height={props.height || '500px'}
                 options={{
