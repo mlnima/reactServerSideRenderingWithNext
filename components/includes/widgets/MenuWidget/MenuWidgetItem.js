@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
-import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
+// import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+// import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import MenuWidgetItemLink from "./MenuWidgetItemLink";
 import styled from "styled-components";
 import {useRouter} from "next/router";
@@ -134,7 +134,7 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
             />
             {menuItem?.subItems?.length ?
                 <span className='open-submenus' aria-label='Center Align' onClick={onOpenSubmenusHandler}>
-                    <FontAwesomeIcon icon={showSub ? faSortUp : faSortDown} className='navigation-dropdown-icon' style={{color: 'white', width: '20px', height: '20px'}}/>
+                    {/*<FontAwesomeIcon icon={showSub ? faSortUp : faSortDown} className='navigation-dropdown-icon' style={{color: 'white', width: '20px', height: '20px'}}/>*/}
                 </span>
                 : null
             }

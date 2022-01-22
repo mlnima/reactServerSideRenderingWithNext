@@ -34,7 +34,6 @@ const CardImageNext: FC<CardImageNextPropTypes> = ({imageUrl,alt, width, height,
                    layout={'fill'}
                    quality={80}
                    onError={()=>errorHandler? errorHandler : null}
-                   // priority
             />
         </CardImageNextStyledDiv>
     )

@@ -1,5 +1,5 @@
 import Link from 'next/link';
-import {convertVariableNameToName} from '../../../../_variables/_variables'
+import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 

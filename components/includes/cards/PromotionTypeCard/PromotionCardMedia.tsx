@@ -64,8 +64,8 @@ const PromotionCardMedia = (props: PromotionCardMediaPropTypes) => {
         <PromotionCardMediaStyled className='promotion-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <CardImageRenderer imageUrl={props?.post.mainThumbnail}
                                alt={props.mediaAlt}
-                               width={props.cardWidth}
-                               height={props.cardWidth / 1.777}
+                               cardWidth={props.cardWidth}
+                               cardHeight={props.cardWidth / 1.777}
                                errorHandler={errorHandler}
             />
         </PromotionCardMediaStyled>

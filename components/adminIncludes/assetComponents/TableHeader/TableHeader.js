@@ -1,5 +1,5 @@
 import {useEffect, useState, useRef} from 'react';
-import {convertVariableNameToName} from '../../../../_variables/_variables'
+import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 

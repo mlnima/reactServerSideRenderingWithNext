@@ -3,8 +3,9 @@ import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 import dynamic from "next/dynamic";
+
 const CardLastUpdate = dynamic(() => import('../asset/CardLastUpdate/CardLastUpdate'));
-const VideoCardTitle = dynamic(() => import('./VideoCardTitle') );
+const VideoCardTitle = dynamic(() => import('./VideoCardTitle'));
 const VideoCardMedia = dynamic(() => import('./VideoCardMedia/VideoCardMedia'));
 
 let VideoCardStyledArticle = styled.article`
@@ -59,9 +60,7 @@ const VideoTypeCard = (props: VideoTypeCardPropTypes) => {
                     />
                 </a>
             </Link>
-            <VideoCardTitle postUrl={postUrl}
-                            onActivateLoadingHandler={props.onActivateLoadingHandler}
-                            cardWidth={props.cardWidth}
+            <VideoCardTitle cardWidth={props.cardWidth}
                             title={props.title}
                             actors={props.post?.actors}
                             tags={props.post?.tags}

@@ -1,13 +1,13 @@
 import React, {useRef, useState} from 'react';
 import * as widgetModels from './models'
 import {adminAddNewWidget} from '../../../../store/adminActions/adminWidgetsActions'
-import {convertVariableNameToName} from '../../../../_variables/_variables'
+import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import {uniqueId} from "lodash";
 import {useDispatch, useSelector} from 'react-redux';
 import styled from "styled-components";
 import staticPositions from '../staticPositions';
 import Draggable from 'react-draggable';
-import {postsWidgetModel} from "./models";
+
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
   position: relative;
@@ -24,7 +24,7 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
 
   .AddWidgetWithPositionMenuPositions {
     position: absolute;
-    width: 200px;
+    width: 250px;
     top: 35px;
     z-index: 1;
     background-color: var(--admin-darkcolor70);
@@ -32,16 +32,9 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
     grid-template-columns: 1fr;
 
     .btn {
-      width: 200px;
+      width: 100%;
     }
-
-    //button {
-    //  font-size: 12px;
-    //  z-index: auto;
-    //  padding: 2px;
-    //}
   }
-
 `
 
 const AddWidgetWithPositionMenu = props => {
@@ -50,10 +43,6 @@ const AddWidgetWithPositionMenu = props => {
     const customPages = useSelector(store => store?.adminPanelGlobalState?.customPages)
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
-
-
-    // const [positions,setPositions] = useState(()=>staticPosition)
-
 
     const onAddNewWidget = (position, type) => {
         const widgetModelData = type === 'text' || type === 'textEditor' ? widgetModels.textWidgetModel :
@@ -90,7 +79,7 @@ const AddWidgetWithPositionMenu = props => {
 
     }
 
-    const renderPositions = staticPositions.map(position => {
+    const renderPositions = staticPositions.sort((a, b) => a > b ? 1 : -1).map(position => {
         return (
 
             <button key={uniqueId('position_')}

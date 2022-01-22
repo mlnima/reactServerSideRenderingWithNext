@@ -1,5 +1,4 @@
-import React from 'react';
-import {convertVariableNameToName} from '../../../../../_variables/_variables'
+import convertVariableNameToName from "../../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 let StyledTextarea = styled.textarea`

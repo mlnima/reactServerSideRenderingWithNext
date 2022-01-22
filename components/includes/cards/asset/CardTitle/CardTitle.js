@@ -12,6 +12,7 @@ const CardTitleStyledDiv = styled.div`
   overflow: hidden;
   display: -webkit-box !important;
   font-size: 12px;
+  padding: 20px 0;
   .card-title-metas{
     margin: 0 3px;
     .card-meta-data{
@@ -37,6 +38,7 @@ const CardTitleStyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
+    padding:  0;
     font-size: 14px;
     h3{
       font-size: 14px;

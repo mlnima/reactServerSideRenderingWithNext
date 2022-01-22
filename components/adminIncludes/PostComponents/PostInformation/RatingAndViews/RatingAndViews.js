@@ -1,10 +1,8 @@
-import React from 'react';
-
-import {convertVariableNameToName} from '../../../../../_variables/_variables'
+import convertVariableNameToName from "../../../../../_variables/util/convertVariableNameToName";
 import {useSelector} from "react-redux";
 
 const RatingAndViews = props => {
-    const post = useSelector((store) => store.adminPanelPosts.post);
+    const post = useSelector((store) => store?.adminPanelPosts?.post);
     if (props.rendering) {
         return (
             <div className='post-information-section'>

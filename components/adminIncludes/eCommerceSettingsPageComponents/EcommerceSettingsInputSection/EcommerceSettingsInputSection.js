@@ -1,9 +1,9 @@
 import React from 'react';
-import {convertVariableNameToName, languagesOptions} from '../../../../_variables/_variables';
+// import {convertVariableNameToName, languagesOptions} from '../../../../_variables/_variables';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "../../../../store/actions/settingsActions";
-import {setLoading} from "../../../../store/actions/globalStateActions";
+// import {updateSetting} from "../../../../store/actions/settingsActions";
+// import {setLoading} from "../../../../store/actions/globalStateActions";
 let StyledDiv = styled.div`
   background-color: #222;
   width: 300px;

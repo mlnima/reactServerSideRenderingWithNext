@@ -1,13 +1,5 @@
 import {FC} from "react";
 import Image from 'next/image'
-import styled from "styled-components";
-
-
-const LogoUsingNextImageStyledDiv = styled.div`
-  width: 300px;
-  height: 100px;
-  position: relative;
-`
 
 interface LogoUsingNextImagePropTypes {
     logoUrl: string,
@@ -17,14 +9,16 @@ interface LogoUsingNextImagePropTypes {
 const LogoUsingNextImage: FC<LogoUsingNextImagePropTypes> = ({logoUrl, alt}) => {
 
     return (
-        <LogoUsingNextImageStyledDiv>
+        <div>
             <Image src={logoUrl}
                    alt={alt}
-                   layout={'fill'}
+                   layout={'intrinsic'}
                    quality={80}
                    loading={'lazy'}
+                   width={300}
+                   height={100}
             />
-        </LogoUsingNextImageStyledDiv>
+        </div>
     )
 
 };

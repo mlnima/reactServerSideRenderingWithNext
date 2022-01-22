@@ -1,16 +1,12 @@
-import React, {useEffect, useMemo, useState} from 'react';
-import styled from "styled-components";
+import {FC,useMemo} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
-
 import isInternalUrl from "../../../../_variables/util/isInternalUrl";
 import isImageAllowedForNextImage from "../../../../_variables/util/isImageAllowedForNextImage";
-import LogoUsingNextImage from "./LogoUsingNextImage";
 import isAbsolutePath from "../../../../_variables/util/isAbsolutePath";
+import dynamic from "next/dynamic";
 
-const LogoStyledLink = styled(Link)`
- 
-`
+const LogoUsingNextImage = dynamic(() => import('./LogoUsingNextImage'));
 
 interface LogoPropTypes {
     translations: {},
@@ -20,7 +16,7 @@ interface LogoPropTypes {
     hoverHandler: any,
 }
 
-const Logo: React.FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl, hoverHandler}) => {
+const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl, hoverHandler}) => {
     const router = useRouter()
 
     const logoUrlSource = useMemo(() => {
@@ -37,11 +33,11 @@ const Logo: React.FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUr
     }, [])
 
     return (
-        <LogoStyledLink href='/'>
+        <Link href='/'>
             <a className='logo'>
                 {logoUrlSource && logoData.isImageAllowedForNextImage ?
-                    <LogoUsingNextImage logoUrl={logoUrlSource} alt={'logo'}/>:
-                    logoUrlSource?
+                    <LogoUsingNextImage logoUrl={logoUrlSource} alt={'logo'}/> :
+                    logoUrlSource ?
                         <img alt={'logo'}
                              onMouseEnter={hoverHandler}
                              onMouseOver={hoverHandler}
@@ -53,7 +49,7 @@ const Logo: React.FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUr
                 {logoData.logoText ? <span className='logo-text'> {logoData.logoText} </span> : null}
                 {logoData.headLineData ? <p className='logo-headline'>{logoData.headLineData}</p> : null}
             </a>
-        </LogoStyledLink>
+        </Link>
     );
 };
 

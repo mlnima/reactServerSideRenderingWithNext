@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import Link from "next/link";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
-import {MetasPropTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {Meta} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const VideoCardTypeListTitleStyledDiv = styled.div`
   color: var(--post-element-text-color, #ccc);
@@ -34,9 +34,9 @@ interface VideoCardTypeListTitlePropTypes {
     title?: string,
     postUrl?: string,
     onActivateLoadingHandler?: any,
-    actors?: MetasPropTypes[] | undefined,
-    tags?: MetasPropTypes[] | undefined,
-    categories?: MetasPropTypes[] | undefined,
+    actors?: Meta[] | undefined,
+    tags?: Meta[] | undefined,
+    categories?: Meta[] | undefined,
 }
 
 const VideoCardTypeListTitle = ({title, actors, tags, categories, postUrl, onActivateLoadingHandler}: VideoCardTypeListTitlePropTypes) => {

@@ -160,16 +160,16 @@ export interface Meta {
     coverImageUrl?: string,
     _id:string,
     name: string,
-    description: string,
+    description?: string,
     type: string,
-    status: string,
-    imageUrl: string,
-    imageUrlLock:boolean,
-    translations: Translations,
-    count: number,
-    additionalInfo: object,
-    createdAt: Date,
-    updatedAt: Date,
+    status?: string,
+    imageUrl?: string,
+    imageUrlLock?:boolean,
+    translations?: Translations,
+    count?: number,
+    additionalInfo?: object,
+    createdAt?: Date,
+    updatedAt?: Date,
 }
 
 export interface AxiosResponseTypes{
@@ -177,6 +177,7 @@ export interface AxiosResponseTypes{
     posts:PostTypes[]
     post:PostTypes
 }
+
 export interface AxiosErrorTypes{
     message?:string
 }

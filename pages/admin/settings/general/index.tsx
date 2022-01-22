@@ -1,7 +1,8 @@
 import React, {useState, useRef,useEffect} from 'react';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {convertVariableNameToName, languagesOptions} from '../../../../_variables/_variables'
+import { languagesOptions} from '../../../../_variables/_variables'
+import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../../store/actions/globalStateActions";

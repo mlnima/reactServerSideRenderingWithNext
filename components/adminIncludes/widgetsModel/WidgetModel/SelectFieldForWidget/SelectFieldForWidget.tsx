@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import {convertVariableNameToName} from "../../../../../_variables/_variables";
+//import convertVariableNameToName from "../../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 const SelectFieldForWidgetStyledDiv = styled.div`
   display: flex;

@@ -2,7 +2,7 @@ import React from 'react';
 import AddWidgetWithPositionMenu from './AddWidgetWithPositionMenu'
 import WidgetImporter from "./WidgetImporter/WidgetImporter";
 import WidgetExporter from "./WidgetExporter/WidgetExporter";
-import {convertVariableNameToName} from "../../../../_variables/_variables";
+import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import widgetsTypes from "../../../global/widgetsTypes";
 
 import styled from "styled-components";

@@ -1,8 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
-import Link from "next/link";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
-import {MetasPropTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {Meta} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const CardTitleStyledDiv = styled.div`
   color: var(--post-element-text-color, #ccc);
@@ -17,16 +16,12 @@ const CardTitleStyledDiv = styled.div`
   overflow: hidden;
   font-size: 12px;
   -webkit-transition: all .3s ease-in-out;
+
   
   .video-card-title-link {
     color: var(--post-element-text-color, #ccc);
     text-decoration: none;
     transition: .3s;
-    //height: 48px;
-    //margin: 8px;
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
     &:hover {
       color: var(--main-active-color,#fff);
     }
@@ -50,25 +45,18 @@ const CardTitleStyledDiv = styled.div`
 
 interface VideoCardTitlePropTypes {
     title: string,
-    postUrl: string,
-    onActivateLoadingHandler: any,
     cardWidth: number,
-    actors: MetasPropTypes[],
-    tags: MetasPropTypes[],
-    categories: MetasPropTypes[],
+    actors: Meta[],
+    tags: Meta[],
+    categories: Meta[],
 }
 
 
-const VideoCardTitle = ({title, actors, tags, categories, cardWidth, onActivateLoadingHandler, postUrl}: VideoCardTitlePropTypes) => {
+const VideoCardTitle = ({title, actors, tags, categories, cardWidth}: VideoCardTitlePropTypes) => {
 
     return (
         <CardTitleStyledDiv className={'video-card-title'} cardWidth={cardWidth}>
-            <Link href={postUrl} scroll={false}>
-                <a rel='next' className='video-card-title-link' title={title} onClick={onActivateLoadingHandler}>
                     {title}
-                </a>
-            </Link>
-            {/*// @ts-ignore*/}
             <CardMetaRenderer metas={[...actors || [],...tags|| [],...categories|| []]}/>
         </CardTitleStyledDiv>
 

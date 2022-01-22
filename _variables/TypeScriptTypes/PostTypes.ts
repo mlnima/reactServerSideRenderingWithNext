@@ -1,4 +1,4 @@
-import {MetasPropTypes} from './GlobalTypes'
+import {Meta, MetasPropTypes} from './GlobalTypes'
 
 export interface PostTypes {
     status: string;
@@ -24,12 +24,12 @@ export interface PostTypes {
     videoTrailerUrl?:string,
     price?:string,
     duration?:string,
-    actors?:MetasPropTypes[],
+    actors?:Meta[],
     quality?:string,
     _id?:string,
     mainThumbnail?:string,
     VideoTrailerUrl?:string,
-    categories:MetasPropTypes[],
-    tags:MetasPropTypes[]
+    categories:Meta[],
+    tags:Meta[]
 }
 

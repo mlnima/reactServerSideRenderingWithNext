@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Link from "next/link";
-import {convertVariableNameToName} from '../../../_variables/_variables'
+import convertVariableNameToName from "../../../_variables/util/convertVariableNameToName";
 import withRouter from 'next/dist/client/with-router'
 import {uniqueId} from "lodash";
 import styled from "styled-components";

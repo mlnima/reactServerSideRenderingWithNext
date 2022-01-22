@@ -8,12 +8,12 @@ const CardImageNext = dynamic(() => import('../CardImageNext/CardImageNext'));
 interface CardImageNextPropTypes {
     imageUrl: string,
     alt:string,
-    width: number,
-    height: number,
+    cardWidth: number,
+    cardHeight: number,
     errorHandler?:any,
 }
 
-const CardImageRenderer: FC<CardImageNextPropTypes> = ({imageUrl,alt, width, height,errorHandler}) => {
+const CardImageRenderer: FC<CardImageNextPropTypes> = ({imageUrl,alt, cardWidth, cardHeight,errorHandler}) => {
     const imageUrlSource = useMemo(() => {
         return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
     }, [imageUrl])
@@ -22,11 +22,11 @@ const CardImageRenderer: FC<CardImageNextPropTypes> = ({imageUrl,alt, width, hei
 
     if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  ){
         return (
-            <CardImageNext imageUrl={imageUrlSource} alt={alt} width={width} height={height} {...CardImageProps}/>
+            <CardImageNext imageUrl={imageUrlSource} alt={alt} width={cardWidth} height={cardHeight} {...CardImageProps}/>
         )
     }else {
         return (
-            <CardImage imageUrl={imageUrlSource} alt={alt} width={width} height={height} {...CardImageProps}/>
+            <CardImage imageUrl={imageUrlSource} alt={alt} width={cardWidth} height={cardHeight} {...CardImageProps}/>
         )
     }
 

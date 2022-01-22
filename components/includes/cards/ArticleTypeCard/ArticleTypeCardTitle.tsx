@@ -1,3 +1,4 @@
+import {FC} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
@@ -9,18 +10,21 @@ const ArticleTypeCardTitleStyledDiv = styled.div`
   max-width: 98%;
   display: flex;
   align-items: center;
+  justify-content: center;
   -webkit-box-orient: vertical;
   white-space: nowrap;
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 12px;
   margin: 2px 0;
+  text-align: center;
+
 
   .article-card-title-link {
     color: var(--post-element-text-color, #ccc);
     text-decoration: none;
     max-width: 100%;
-    
+
     &:hover {
       color: var(--main-active-color, #fff);
     }
@@ -32,9 +36,12 @@ const ArticleTypeCardTitleStyledDiv = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
+ 
     width: ${(props: { cardWidth: number }) => `${props?.cardWidth - 2}px`};
     font-size: 14px;
-    .article-card-title-link{
+    text-align: initial;
+    justify-content: flex-start;
+    .article-card-title-link {
       height: initial;
       margin: initial;
     }
@@ -59,7 +66,8 @@ interface ArticleTypeCardTitlePropTypes {
 }
 
 
-const ArticleTypeCardTitle = ({title, tags, categories, cardWidth, onActivateLoadingHandler, postUrl}: ArticleTypeCardTitlePropTypes) => {
+const ArticleTypeCardTitle: FC<ArticleTypeCardTitlePropTypes> = ({title, tags, categories, cardWidth, onActivateLoadingHandler, postUrl}) => {
+
     return (
         <ArticleTypeCardTitleStyledDiv className={'article-card-title'} cardWidth={cardWidth}>
             <Link href={postUrl} scroll={false}>
@@ -67,7 +75,7 @@ const ArticleTypeCardTitle = ({title, tags, categories, cardWidth, onActivateLoa
                     {title}
                 </a>
             </Link>
-            {/*// @ts-ignore*/}
+
             <CardMetaRenderer metas={[...tags || [], ...categories || []]}/>
         </ArticleTypeCardTitleStyledDiv>
     )

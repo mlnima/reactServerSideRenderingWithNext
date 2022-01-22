@@ -83,8 +83,8 @@ const LearnTypeCardMedia = (props: LearnTypeCardMediaPropTypes) => {
         <LearnTypeCardMediaStyledDiv className='learn-post-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <CardImageRenderer imageUrl={imageUrlToRender}
                                alt={props.mediaAlt}
-                               width={props.cardWidth}
-                               height={props.cardWidth/ 1.777}
+                               cardWidth={props.cardWidth}
+                               cardHeight={props.cardWidth/ 1.777}
                                errorHandler={errorHandler}
             />
 

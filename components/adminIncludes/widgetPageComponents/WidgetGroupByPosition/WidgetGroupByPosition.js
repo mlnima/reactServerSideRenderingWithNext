@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {convertVariableNameToName} from "../../../../_variables/_variables";
+import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import WidgetModel from "../../widgetsModel/WidgetModel/WidgetModel";
 import styled from "styled-components";
 import {useSelector} from "react-redux";

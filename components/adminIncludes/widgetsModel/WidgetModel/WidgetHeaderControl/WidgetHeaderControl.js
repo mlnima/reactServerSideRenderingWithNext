@@ -1,7 +1,8 @@
 import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faLock, faLockOpen, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-import {convertVariableNameToName} from "../../../../../_variables/_variables";
+
+import convertVariableNameToName from "../../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 let StyledDiv = styled.div`
   display: grid;

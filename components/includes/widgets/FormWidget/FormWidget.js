@@ -1,6 +1,6 @@
 import {useEffect, useState} from 'react';
 import {saveFormWidgetData} from '../../../../_variables/ajaxVariables'
-import {convertVariableNameToName} from '../../../../_variables/_variables'
+import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 
 

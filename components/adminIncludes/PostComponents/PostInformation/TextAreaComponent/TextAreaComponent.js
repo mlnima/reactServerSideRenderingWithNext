@@ -1,4 +1,4 @@
-import { convertVariableNameToName } from '../../../../../_variables/_variables'
+import convertVariableNameToName from "../../../../../_variables/util/convertVariableNameToName";
 import {useSelector} from "react-redux";
 
 const TextAreaComponent = props => {

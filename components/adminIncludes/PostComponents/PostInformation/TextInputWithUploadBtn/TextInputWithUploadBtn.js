@@ -1,9 +1,9 @@
-import React, {useRef, useEffect} from 'react';
-
+import {useRef} from 'react';
 import UploadFileBtn from '../UploadFileBtn/uploadFileBtn'
-import {convertVariableNameToName} from '../../../../../_variables/_variables';
+import convertVariableNameToName from "../../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
+
 let StyledDiv = styled.div`
   width: 100%;
   background-color: white;

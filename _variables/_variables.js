@@ -48,9 +48,6 @@ export const fileTypeDetector = fileName => {
         application: ['exe'],
         archive: ['zip', 'rar']
     }
-    // const images = [ '.jpg', '.png', 'jpeg', 'svg' ]
-    // const video = [ '.mp4', '.3gp' ]
-    // const documents = [ '.js', '.css', '.env', '.scss' ]
     Object.keys(fileFormats).forEach(formatArr => {
         if (fileFormats[formatArr].includes(fileFormat)) {
             finalFormat = formatArr

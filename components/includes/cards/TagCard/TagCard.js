@@ -3,23 +3,23 @@ import {useRouter} from "next/router";
 import TagCardMedia from "./TagCardMedia";
 import {withTranslation} from "next-i18next";
 import styled from "styled-components";
-const TagCardStyledDiv = styled.div`
-  .tag-card-info{
 
-    .tag-card-link{
+const TagCardStyledDiv = styled.div`
+  margin: 5px;
+
+  .tag-card-link {
+    .tag-card-info{
       display: flex;
       align-items: center;
       justify-content: flex-start;
       width: 95%;
       margin: auto;
-      color: var(--main-text-color);
       .tag-card-title {
         width: fit-content;
         color: var(--main-active-color);
         text-overflow: ellipsis;
         overflow: hidden;
         -webkit-box-orient: vertical;
-        -webkit-line-clamp: 1;
         font-size: 12px;
         padding: 3px 0;
         margin: 3px 0;
@@ -27,38 +27,36 @@ const TagCardStyledDiv = styled.div`
           color: var(--post-element-text-color, #ccc);
         }
       }
-      .tag-card-count{
-        margin: 0 2px;
-        color: var(--main-text-color);
-      }
     }
-
-
+    
+    .tag-card-count {
+      margin: 0 2px;
+      color: var(--main-text-color);
+    }
   }
 `
 const TagCard = ({t, cardWidth, tag, onActivateLoadingHandler}) => {
-    const router = useRouter()
+    const locale = useRouter().locale
 
     return (
         <TagCardStyledDiv className={'tag-card'}>
-            <div className={'tag-card-image'}>
-                <Link href={`/tag/${tag._id}`}>
-                    <a className={'tag-card-link'} onClick={onActivateLoadingHandler}>
-                        <TagCardMedia cardWidth={cardWidth} imageUrl={tag.imageUrl} mediaAlt={tag?.translations?.[router.locale]?.name || tag.name} tagId={tag._id}/>
-                    </a>
-                </Link>
-            </div>
-            <div className={'tag-card-info'}>
-                <Link href={`/tag/${tag._id}`}>
-                    <a className={'tag-card-link'}
-                       onClick={onActivateLoadingHandler}
-                       title={tag?.translations?.[router.locale]?.name || t([t(`customTranslation:${tag?.name}`)])}
-                    >
-                        <h3 className={'tag-card-title'}> {tag?.translations?.[router.locale]?.name || t([t(`customTranslation:${tag?.name}`)])}</h3>
+            <Link href={`/tag/${tag._id}`}>
+                <a className={'tag-card-link'}
+                   onClick={onActivateLoadingHandler}
+                   title={tag?.translations?.[locale]?.name || t([t(`customTranslation:${tag?.name}`)])}
+                >
+                    <div className={'tag-card-image'}>
+                        <TagCardMedia cardWidth={cardWidth}
+                                      imageUrl={tag.imageUrl}
+                                      mediaAlt={tag?.translations?.[locale]?.name || tag.name}
+                        />
+                    </div>
+                    <div className={'tag-card-info'}>
+                        <h3 className={'tag-card-title'}> {tag?.translations?.[locale]?.name || t([t(`customTranslation:${tag?.name}`)])}</h3>
                         {tag?.count ? <span className={'tag-card-count'}>({tag?.count})</span> : null}
-                    </a>
-                </Link>
-            </div>
+                    </div>
+                </a>
+            </Link>
         </TagCardStyledDiv>
 
     );

@@ -2,15 +2,6 @@ import {FC, useState} from 'react';
 import styled from "styled-components";
 import CardImageRenderer from "../asset/CardImageRenderer/CardImageRenderer";
 
-// const CategoryCardMediaStyledImage = styled.img`
-//   width: 100%;
-//   height: calc(48vw / 1.777);
-//   object-fit: contain;
-//   @media only screen and (min-width: 768px) {
-//     width: ${(props : {cardWidth:number}) => props?.cardWidth}px;
-//     height: calc(${(props : {cardWidth:number}) => props.cardWidth}px / 1.777);
-//   }
-// `
 const NoImageStyleDiv = styled.div`
   width: 100%;
   height: calc(48vw / 1.777);
@@ -40,6 +31,7 @@ const CategoryCardMedia : FC<CategoryCardMediaPropTypes> = (props) => {
         !gotError ? setGotError(true) : null
     }
 
+
     if (!props.imageUrl || gotError){
         return (
             <NoImageStyleDiv cardWidth={props.cardWidth} className='no-image'>
@@ -50,8 +42,8 @@ const CategoryCardMedia : FC<CategoryCardMediaPropTypes> = (props) => {
         return (
             <CardImageRenderer imageUrl={props.imageUrl}
                                alt={props.mediaAlt}
-                               width={props.cardWidth}
-                               height={props.cardWidth / 1.777}
+                               cardWidth={props.cardWidth}
+                               cardHeight={props.cardWidth / 1.777}
                                errorHandler={errorHandler}
             />
         );
