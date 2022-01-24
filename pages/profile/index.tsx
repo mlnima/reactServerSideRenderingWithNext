@@ -1,4 +1,3 @@
-import React, {useState, useEffect, useContext} from 'react';
 import {getFirstLoadData} from '../../_variables/ajaxVariables';
 import ProfileNavigation from '../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
 import ProfileImage from "../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
@@ -6,12 +5,12 @@ import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
 import Link from "next/link";
 import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../../store/store";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {FC} from "react";
 
 const ProfileStyledMain = styled.main`
   display: flex;
@@ -76,7 +75,7 @@ const ProfileStyledMain = styled.main`
   }
 `
 
-const Profile = (props:ClientPagesTypes) => {
+const Profile : FC<ClientPagesTypes>= (props:ClientPagesTypes) => {
 
     // @ts-ignore
     const userData = useSelector((state : StoreTypes) => state.user.userData)

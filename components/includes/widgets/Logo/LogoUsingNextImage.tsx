@@ -15,6 +15,7 @@ const LogoUsingNextImage: FC<LogoUsingNextImagePropTypes> = ({logoUrl, alt}) => 
                    layout={'intrinsic'}
                    quality={80}
                    loading={'lazy'}
+                   objectFit={'contain'}
                    width={300}
                    height={100}
             />

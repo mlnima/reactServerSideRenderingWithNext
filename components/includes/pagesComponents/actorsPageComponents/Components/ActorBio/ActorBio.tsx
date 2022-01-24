@@ -1,9 +1,10 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React from 'react';
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../../../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 import styled from "styled-components";
 import ActorDetails from "./ActorDetails";
+import capitalizeFirstLetter from "../../../../../../_variables/util/capitalizeFirstLetter";
 const ActorBioStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
@@ -92,7 +93,7 @@ const ActorBio = () => {
                 }
             </div>
             <div className={'actor-data'}>
-                <h1 className={'actor-data-name'}>{actor.name}</h1>
+                <h1 className={'actor-data-name'}>{capitalizeFirstLetter(actor.name)}</h1>
                 <div className={'actor-data-description-details'}>
 
                     {actor.description?

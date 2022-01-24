@@ -6,9 +6,7 @@ interface GlobalStylesPropTypes {
 }
 const GlobalStyles = createGlobalStyle`
   ${(props:GlobalStylesPropTypes ) => props?.colors?.includes(':root') ? props.colors :`:root {${props.colors}}`}
-
-
-
+  
   body {
     background-color: var(--main-background-color, #000);
     margin: 0;

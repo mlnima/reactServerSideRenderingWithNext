@@ -8,7 +8,7 @@ const CardImageNextStyledDiv = styled.div`
   position:relative;
   span{
     img{
-      object-fit: contain;
+      //object-fit: contain;
     }
   }
   @media only screen and (min-width: 768px) {
@@ -31,8 +31,11 @@ const CardImageNext: FC<CardImageNextPropTypes> = ({imageUrl,alt, width, height,
             <Image src={imageUrl}
                    alt={alt}
                    loading={'lazy'}
-                   layout={'fill'}
+                   layout={'responsive'}
+                   width={width}
+                   height={height}
                    quality={80}
+                   objectFit={'contain'}
                    onError={()=>errorHandler? errorHandler : null}
             />
         </CardImageNextStyledDiv>

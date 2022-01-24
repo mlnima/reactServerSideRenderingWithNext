@@ -16,6 +16,7 @@ import {useSelector} from "react-redux";
 import {settingsPropTypes, StoreTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {SET_POSTS_DATA} from "../../store/types";
+import capitalizeFirstLetter from "../../_variables/util/capitalizeFirstLetter";
 
 let StyledMain = styled.main`
   grid-area: main;
@@ -56,7 +57,7 @@ const categoryPage = (props: ClientPagesTypes) => {
                     </Link>
                 </div>
                 :null}
-            {category ? <PostsPageInfo titleToRender={category?.name}/> : null}
+            {category ? <PostsPageInfo titleToRender={capitalizeFirstLetter(category?.name)}/> : null}
             {category ? <MetaDataToSiteHead title={category?.name} description={category?.description} url={`${router.asPath}`} image={category?.imageUrl}/> : null}
             <WidgetsRenderer
                 position={'categoryPageTop'}

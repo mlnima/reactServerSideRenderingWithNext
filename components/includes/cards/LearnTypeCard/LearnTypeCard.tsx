@@ -1,14 +1,13 @@
+import {FC} from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import {withTranslation} from "next-i18next";
 import LearnTypeCardMedia from "./LearnTypeCardMedia";
-import {faThumbsUp} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faEye} from "@fortawesome/free-regular-svg-icons";
 import LearnTypeCardTitle from "./LearnTypeCardTitle";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
-import {FC} from "react";
-
+import dynamic from "next/dynamic";
+const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
+const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 
 
 const LearnTypeCardStyledDiv = styled.div`
@@ -52,8 +51,7 @@ const LearnTypeCardStyledDiv = styled.div`
         margin: 0;
         height: 20px;
 
-
-        .learn-post-card-info-data {
+        .learn-card-info-data {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -67,12 +65,8 @@ const LearnTypeCardStyledDiv = styled.div`
             height: 14px;
             margin: 0 2px;
           }
-
-          .thumbs-up {
-            width: 12px;
-            height: 12px;
-          }
         }
+
       }
     }
   }
@@ -82,7 +76,6 @@ const LearnTypeCardStyledDiv = styled.div`
     width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
     max-width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? `320px` : `100%`};
     flex-direction: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? 'row' : 'column'};
-
     margin: 7px;
 
     .post-card-link {
@@ -102,10 +95,11 @@ interface VideoTypeCardPropTypes {
     rating: number,
     post: PostTypes,
 }
-const LearnTypeCard : FC<VideoTypeCardPropTypes> = (props) => {
+
+const LearnTypeCard: FC<VideoTypeCardPropTypes> = (props) => {
 
     const postUrl = `/post/${props.post?.postType}/${props.post?._id}`
-    const categoriesImages = props.post.categories.filter(category=>category?.imageUrl).map(category=>category?.imageUrl)
+    const categoriesImages = props.post.categories.filter(category => category?.imageUrl).map(category => category?.imageUrl)
 
     return (
         <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
@@ -113,26 +107,18 @@ const LearnTypeCard : FC<VideoTypeCardPropTypes> = (props) => {
                 <a rel='next' onClick={props.onActivateLoadingHandler} className='learn-post-card-link' title={props.title}>
 
                     <LearnTypeCardMedia
-                                        categoriesImages={categoriesImages}
-                                        noImageUrl={props.noImageUrl}
-                                        postElementSize={props.postElementSize}
-                                        post={props.post}
-                                        cardWidth={props.cardWidth}
-                                        mediaAlt={props.title}
+                        categoriesImages={categoriesImages}
+                        noImageUrl={props.noImageUrl}
+                        postElementSize={props.postElementSize}
+                        post={props.post}
+                        cardWidth={props.cardWidth}
+                        mediaAlt={props.title}
                     />
                     <div className='learn-post-card-under-media'>
                         <LearnTypeCardTitle title={props.title}/>
                         <div className='learn-post-card-under-media-info'>
-                            <span className='learn-post-card-views learn-post-card-info-data'>
-                                <span>
-                                    {props.views}
-                                </span>
-                               <FontAwesomeIcon icon={faEye} className='icon'/>
-                            </span>
-                            <span className='learn-post-card-rating learn-post-card-info-data'>
-                                <FontAwesomeIcon icon={faThumbsUp} className='icon thumbs-up'/>
-                                <span> {props.rating}%</span>
-                            </span>
+                            {props.views ? <CardViews views={props.views} className={'learn-card-views learn-card-info-data'}/> : null}
+                            {props.rating ? <CardRating rating={props.rating} className={'learn-card-rating learn-card-info-data'}/> : null}
                         </div>
                     </div>
                 </a>

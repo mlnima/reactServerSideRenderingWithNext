@@ -1,27 +1,25 @@
 import React, {useState} from 'react';
-// import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-// import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import MenuWidgetItemLink from "./MenuWidgetItemLink";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 
-const MenuWidgetSubItemStyledLi = styled.li`
-
-  .menu-widget-sub-item {
-    display: ${props => props?.showSub ? 'initial' : 'none'};
-    z-index: 10;
-    background-color: var(--navigation-background-color, #18181b);
-    width: 100px;
-    list-style-type: none;
-    padding: 10px 15px;
-  }
-
-  @media only screen and (min-width: 768px) {
-    .menu-widget-sub-item {
-      background-color: transparent;
-    }
-  }
-`
+// const MenuWidgetSubItemStyledLi = styled.li`
+//
+//   .menu-widget-sub-item {
+//     display: ${props => props?.showSub ? 'initial' : 'none'};
+//     z-index: 10;
+//     background-color: var(--navigation-background-color, #18181b);
+//     width: 100px;
+//     list-style-type: none;
+//     padding: 10px 15px;
+//   }
+//
+//   @media only screen and (min-width: 768px) {
+//     .menu-widget-sub-item {
+//       background-color: transparent;
+//     }
+//   }
+// `
 
 const MenuWidgetStyledLi = styled.li`
   list-style-type: none;
@@ -90,22 +88,22 @@ const MenuWidgetStyledLi = styled.li`
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler}) => {
     const router = useRouter()
     const [showSub, setShowSub] = useState(false)
-    const renderSubMenus = (menuItem.subItems || []).map((subItem, index) => {
-
-        return (
-            <MenuWidgetSubItemStyledLi showSub={showSub} className='menu-widget-sub-item' key={index}>
-                <MenuWidgetItemLink
-                    linkTargetType={subItem?.type}
-                    linkType='sub'
-                    linkTargetUrl={subItem?.target}
-                    linkName={subItem?.name}
-                    linkTranslations={subItem?.translations}
-                    showSub={showSub}
-                    mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
-                />
-            </MenuWidgetSubItemStyledLi>
-        )
-    })
+    // const renderSubMenus = (menuItem.subItems || []).map((subItem, index) => {
+    //
+    //     return (
+    //         <MenuWidgetSubItemStyledLi showSub={showSub} className='menu-widget-sub-item' key={index}>
+    //             <MenuWidgetItemLink
+    //                 linkTargetType={subItem?.type}
+    //                 linkType='sub'
+    //                 linkTargetUrl={subItem?.target}
+    //                 linkName={subItem?.name}
+    //                 linkTranslations={subItem?.translations}
+    //                 showSub={showSub}
+    //                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+    //             />
+    //         </MenuWidgetSubItemStyledLi>
+    //     )
+    // })
 
 
     const onOpenSubmenusHandler = () => {
@@ -116,8 +114,8 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
 
         <MenuWidgetStyledLi menuItem={menuItem}
                             className={router.asPath === menuItem.target? 'menu-widget-item active-link' : 'menu-widget-item' }
-                            onMouseEnter={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
-                            onMouseLeave={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
+                            // onMouseEnter={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
+                            // onMouseLeave={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
                             activeLink={menuItem?.target ? router.asPath.includes(menuItem?.target) :false}
         >
             <MenuWidgetItemLink
@@ -139,12 +137,12 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                 : null
             }
 
-            {showSub ?
-                <ul className='dropdown-content'>
-                    {renderSubMenus}
-                </ul>
-                : null
-            }
+            {/*{showSub ?*/}
+            {/*    <ul className='dropdown-content'>*/}
+            {/*        {renderSubMenus}*/}
+            {/*    </ul>*/}
+            {/*    : null*/}
+            {/*}*/}
 
         </MenuWidgetStyledLi>
     );

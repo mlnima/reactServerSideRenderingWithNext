@@ -10,6 +10,7 @@ const allowedDomainForImages = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.sp
 const withPWA = require('next-pwa')
 const withCSS = require('@zeit/next-css')
 const withSass = require('@zeit/next-sass')
+const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
 
 const svgLoader = {
     webpack(config) {
@@ -90,6 +91,7 @@ const pwaSettings = {
 const nextConfigs = {
     env: {},
     rewrites,
+
     // redirects,
     // swcMinify: true,
     eslint: {
@@ -99,6 +101,20 @@ const nextConfigs = {
 
 module.exports = withPlugins([
     withCSS(withSass()),
+    withBundleAnalyzer({
+        analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
+        analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
+        bundleAnalyzerConfig: {
+            server: {
+                analyzerMode: 'static',
+                reportFilename: './bundles/server.html'
+            },
+            browser: {
+                analyzerMode: 'static',
+                reportFilename: './bundles/client.html'
+            }
+        }
+    }),
     i18n,
     svgLoader,
     process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},

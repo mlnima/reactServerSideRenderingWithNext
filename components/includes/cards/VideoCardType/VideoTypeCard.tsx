@@ -1,8 +1,8 @@
+import {FC} from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
-import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 import dynamic from "next/dynamic";
+import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
 const CardLastUpdate = dynamic(() => import('../asset/CardLastUpdate/CardLastUpdate'));
 const VideoCardTitle = dynamic(() => import('./VideoCardTitle'));
@@ -42,36 +42,45 @@ interface VideoTypeCardPropTypes {
     post: PostTypes,
 }
 
-const VideoTypeCard = (props: VideoTypeCardPropTypes) => {
-    const postUrl = `/post/${props.post.postType}/${props.post._id}`
+const VideoTypeCard : FC<VideoTypeCardPropTypes> =
+    ({post,
+         cardWidth,
+         postElementSize,
+         onActivateLoadingHandler,
+         title,
+         noImageUrl,
+         views,
+         rating
+    }) => {
+    const postUrl = `/post/${post.postType}/${post._id}`
     return (
-        <VideoCardStyledArticle className={'video-card'} cardWidth={props.cardWidth} postElementSize={props.postElementSize}>
-            <Link href={postUrl} scroll={false}>
-                <a rel={'next'} className={'video-card-media-link'} title={props.title} onClick={props.onActivateLoadingHandler}>
-                    <VideoCardMedia noImageUrl={props.noImageUrl}
-                                    postElementSize={props.postElementSize}
-                                    post={props.post}
-                                    cardWidth={props.cardWidth}
-                                    mediaAlt={props.title}
-                                    views={props.views}
-                                    rating={props.rating}
-                                    duration={props.post.duration}
-                                    quality={props.post.quality}
+        <VideoCardStyledArticle className={'video-card'} cardWidth={cardWidth} postElementSize={postElementSize}>
+            <Link href={postUrl} >
+                <a rel={'next'} className={'video-card-media-link'} title={title} onClick={onActivateLoadingHandler}>
+                    <VideoCardMedia noImageUrl={noImageUrl}
+                                    postElementSize={postElementSize}
+                                    post={post}
+                                    cardWidth={cardWidth}
+                                    mediaAlt={title}
+                                    views={views}
+                                    rating={rating}
+                                    duration={post.duration}
+                                    quality={post.quality}
                     />
                 </a>
             </Link>
-            <VideoCardTitle cardWidth={props.cardWidth}
-                            title={props.title}
-                            actors={props.post?.actors}
-                            tags={props.post?.tags}
-                            categories={props.post?.categories}
+            <VideoCardTitle cardWidth={cardWidth}
+                            title={title}
+                            actors={post?.actors}
+                            tags={post?.tags}
+                            categories={post?.categories}
             />
-            {props.post?.updatedAt ?
-                <CardLastUpdate updatedAt={props.post?.updatedAt}/>
+            {post?.updatedAt ?
+                <CardLastUpdate updatedAt={post?.updatedAt}/>
                 : null
             }
 
         </VideoCardStyledArticle>
     );
 };
-export default withTranslation(['common'])(VideoTypeCard);
+export default VideoTypeCard;

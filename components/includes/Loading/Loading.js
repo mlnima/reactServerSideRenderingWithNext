@@ -3,8 +3,9 @@ import styled from "styled-components";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SyncLoader} from "react-spinners";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
+import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -42,14 +43,24 @@ let StyledDiv = styled.div`
 
 const Loading = () => {
     const dispatch = useDispatch()
+    const loading = useSelector((store)=>store?.globalState?.loading)
+    const pathname = useRouter()?.pathname
     const [render, setRender] = useState(false)
 
     useEffect(() => {
         let isMounted = true;
         setTimeout(()=>{
             if (isMounted) setRender(true)
-        },700)
+        },500)
     }, []);
+
+    useEffect(() => {
+        if (loading){
+            setTimeout(()=>{
+                dispatch(setLoading(false))
+            },500)
+        }
+    }, [pathname]);
 
     if (render){
         return (

@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import {getFirstLoadData} from '../../_variables/ajaxVariables';
 import {getPosts} from '../../_variables/ajaxPostsVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
@@ -17,6 +17,7 @@ import {useSelector} from "react-redux";
 import {settingsPropTypes, StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {SET_POSTS_DATA} from "../../store/types";
 import Link from "next/link";
+import capitalizeFirstLetter from "../../_variables/util/capitalizeFirstLetter";
 
 let StyledMain = styled.main`
   grid-area: main;
@@ -33,36 +34,46 @@ let StyledMain = styled.main`
 
   ${(props: { stylesData: string }) => props.stylesData || ''}
 `
-const tagPage = (props: ClientPagesTypes) => {
-    // @ts-ignore
-    const userData = useSelector((store :StoreTypes) => store?.user?.userData)
+const tagPage: FC = () => {
 
-    const tag = useSelector((store: StoreTypes) => store.posts.tagData)
-    const tagPageStyle = useSelector((store: StoreTypes) => store.settings.design?.tagPageStyle || '');
-    const router = useRouter()
+    const tagId = useRouter()?.query?.tagId
+    const asPath = useRouter()?.query?.asPath
+
+    const storeData = useSelector((store: StoreTypes) => {
+        return {
+            role: store?.user?.userData?.role,
+            tag: store.posts.tagData,
+            tagPageStyle: store.settings.design?.tagPageStyle,
+        }
+    })
 
     return (
-        <StyledMain className="main posts-page" stylesData={tagPageStyle || ''}>
-            {userData?.role === 'administrator' ?
+        <StyledMain className="main posts-page" stylesData={storeData.tagPageStyle || ''}>
+            {storeData?.role === 'administrator' ?
                 <div className='edit-as-admin'>
-                    <Link href={'/admin/meta?id=' + router.query.tagId}>
-                        <a className={'btn btn-primary'} >
+                    <Link href={'/admin/meta?id=' + tagId}>
+                        <a className={'btn btn-primary'}>
                             Edit
                         </a>
                     </Link>
                 </div>
-                :null}
-            {tag ? <PostsPageInfo titleToRender={tag.name}/> : null}
-            {tag ? <MetaDataToSiteHead title={tag?.name} description={tag?.description} url={`${router.asPath}`} image={tag?.imageUrl}/> : null}
+                : null}
+            {storeData.tag ? <PostsPageInfo titleToRender={capitalizeFirstLetter(storeData.tag.name)}/> : null}
+            {storeData.tag ?
+                <MetaDataToSiteHead title={storeData.tag?.name}
+                                    description={storeData.tag?.description}
+                                    url={`${asPath}`}
+                                    image={storeData.tag?.imageUrl}
+                />
+                : null
+            }
 
             <WidgetsRenderer
                 position={'tagPageTop'}
-
             />
             <PostsPage/>
             <WidgetsRenderer
                 position={'tagPageBottom'}
-
             />
         </StyledMain>
     )
@@ -81,19 +92,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     );
     const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.tagId, true);
     const postsData = await getPosts(gettingPostsQueries)
-
-    // @ts-ignore
-
     if (tagId && !postsData?.data?.meta || !postsData?.data.posts) return {notFound: true};
 
     store.dispatch({
         type: SET_POSTS_DATA,
         payload: {
-            // @ts-ignore
             posts: postsData.data?.posts || [],
-            // @ts-ignore
             totalCount: postsData?.data?.totalCount || 0,
-            // @ts-ignore
             tagData: postsData?.data?.meta || {},
         }
     })

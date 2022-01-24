@@ -1,12 +1,10 @@
-import {useEffect, useMemo} from 'react';
-import {useDispatch, useSelector} from 'react-redux';
+import {FC, useMemo} from 'react';
+import {useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import GlobalStyles from "../global/Styles/GlobalStyles";
 import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
-import {autoUserLogin} from "../../store/actions/userActions";
-import {setLoading} from "../../store/actions/globalStateActions";
 
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SideBarWidgetArea/SideBarWidgetArea'))
 const SiteSettingSetter = dynamic(() => import('../includes/SiteSettingsSetter/SiteSettingsSetter'))
@@ -21,81 +19,83 @@ const LoginRegisterPopup = dynamic(() => import('../includes/LoginRegisterPopup/
 const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
 const AdminDataSetter = dynamic(() => import('../global/AdminDataSetter'), {ssr: false});
 
-const AppLayout = (props: any) => {
-    const loggedIn = useSelector((store: StoreTypes) => store?.user?.loggedIn)
-    const userRole = useSelector((store: StoreTypes) => store?.user?.userData?.role)
-    const design = useSelector((store: StoreTypes) => store?.settings?.design)
-    const identity = useSelector((store: StoreTypes) => store?.settings?.identity)
-    const loading = useSelector((store: StoreTypes) => store?.globalState?.loading)
-    const loginRegisterFormPopup = useSelector((store: StoreTypes) => store?.globalState?.loginRegisterFormPopup)
-    const alert = useSelector((store: StoreTypes) => store?.globalState?.alert)
-    const router = useRouter()
-    const dispatch = useDispatch()
+interface AppLayoutPropTypes {
+    pageInfo?:{},
+    children:any
+}
 
-    const sidebarsData = useMemo(() => setAppLayoutDataFromProp(props, router, identity), [router.asPath, router.pathname, userRole])
 
-    const isSidebarLess = useMemo(() => {
-        return router.pathname === '/404' || router.pathname === '/500' || router.pathname === '/_error' || router.pathname.includes('/profile');
-    }, [router.pathname])
+const AppLayout : FC<AppLayoutPropTypes> = ({children,pageInfo}) => {
+
+    const pathname = useRouter()?.pathname
+    // const asPath = useRouter()?.asPath
+    
+    const appLayoutData = useSelector((store: StoreTypes) => {
+        return {
+            loggedIn : store?.user?.loggedIn,
+            userRole : store?.user?.userData?.role,
+            customColors : store?.settings?.design?.customColors,
+            customStyles : store?.settings?.design?.customStyles,
+            sideBarWidth : store?.settings?.design?.sideBarWidth,
+            identity : store?.settings?.identity,
+            loading : store?.globalState?.loading,
+            loginRegisterFormPopup : store?.globalState?.loginRegisterFormPopup,
+            alert : store?.globalState?.alert,
+            sidebarsData: setAppLayoutDataFromProp(pageInfo, pathname,  store?.settings?.identity),
+            isSidebarLess: pathname === '/404' || pathname === '/500' || pathname === '/_error' || pathname.includes('/profile'),
+
+        }
+    })
 
     const mainLayoutClassNameForGrid = useMemo(() => {
-        return isSidebarLess ? 'without-sidebar' :
-            sidebarsData?.sidebarType === 'left' ? 'left-sidebar' :
-                sidebarsData?.sidebarType === 'right' ? 'right-sidebar' :
-                    sidebarsData?.sidebarType === 'both' ? 'both-sidebar' :
+        return appLayoutData?.isSidebarLess ? 'without-sidebar' :
+            appLayoutData?.sidebarsData?.sidebarType === 'left' ? 'left-sidebar' :
+                appLayoutData?.sidebarsData?.sidebarType === 'right' ? 'right-sidebar' :
+                    appLayoutData?.sidebarsData?.sidebarType === 'both' ? 'both-sidebar' :
                         'without-sidebar';
-    }, [sidebarsData])
+    }, [appLayoutData?.sidebarsData])
 
-    useEffect(() => {
-        loading ? dispatch(setLoading(false)) : null
-    }, [router.pathname]);
-
-
-    useEffect(() => {
-        if (localStorage?.wt && !loggedIn) {
-            dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'followingCount', 'followersCount']))
-        }
-    }, []);
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>
-            <GlobalStyles colors={design?.customColors || ''}
-                          globalStyleData={design?.customStyles || ''}
-                          sideBarWidth={design?.sideBarWidth || 320}
+            <GlobalStyles colors={appLayoutData.customColors || ''}
+                          globalStyleData={appLayoutData.customStyles || ''}
+                          sideBarWidth={appLayoutData.sideBarWidth || 320}
             />
             <SiteSettingSetter/>
-            {!identity?.topbar || identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
-            {!identity?.header || identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
-            {!identity?.navigation || identity?.navigation === 'enable' ? <NavigationWidgetArea/> : null}
-            {sidebarsData?.leftSidebar?.enable ?
+            {!appLayoutData.identity?.topbar || appLayoutData.identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
+            {!appLayoutData.identity?.header || appLayoutData.identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
+            {!appLayoutData.identity?.navigation || appLayoutData.identity?.navigation === 'enable' ? <NavigationWidgetArea/> : null}
+            {appLayoutData?.sidebarsData?.leftSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'
-                    position={sidebarsData?.leftSidebar?.name}
+                    position={appLayoutData?.sidebarsData?.leftSidebar?.name}
                 />
                 : null
             }
 
-            {props.children}
+            {children}
 
-            {sidebarsData?.rightSidebar?.enable ?
+            {appLayoutData?.sidebarsData?.rightSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='rightSidebar'
                     className='right-sidebar'
-                    position={sidebarsData?.rightSidebar?.name}
+                    position={appLayoutData?.sidebarsData?.rightSidebar?.name}
                 />
                 : null
             }
-            {!identity?.footer || identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
-            {loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/> : null}
-            {userRole === 'administrator' ? <AdminTools/> : null}
-            {loading ? <Loading/> : null}
-            {alert?.active && alert?.message ? <AlertBox/> : null}
+            {!appLayoutData.identity?.footer || appLayoutData.identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
+            {appLayoutData.loginRegisterFormPopup && !appLayoutData.loggedIn ? <LoginRegisterPopup/> : null}
+            {appLayoutData.userRole === 'administrator' ? <AdminTools/> : null}
+            {appLayoutData.loading ? <Loading/> : null}
+            {appLayoutData.alert?.active && appLayoutData.alert?.message ? <AlertBox/> : null}
             {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
                 <CookiePopup/>
                 : null : null
             }
-            {userRole === 'administrator' ? <AdminDataSetter/> : null}
+            {appLayoutData.userRole === 'administrator' ? <AdminDataSetter/> : null}
+
         </div>
 
     );

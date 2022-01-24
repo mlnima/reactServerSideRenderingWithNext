@@ -1,9 +1,11 @@
-import {useEffect, useState, useRef, useMemo} from 'react';
+import {useEffect, useState, useMemo} from 'react';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {checkRouteAndSetLoading} from "../../../../store/actions/globalStateActions";
+import {FC} from "react";
+
 const MenuWidgetItem = dynamic(() => import('./MenuWidgetItem'));
 
 const MenuWidgetStyledDiv = styled.div`
@@ -38,8 +40,8 @@ const MenuWidgetStyledDiv = styled.div`
     margin: 0;
     transition: all 0.5s ease 0s;
     position: fixed;
-    ${props => props?.open ? `animation: navigationMobileSlide .3s linear alternate;` : `animation: none;`};
-    display: ${props => props.open ? 'flex' : 'none'};
+    ${(props:{open:boolean}) => props?.open ? `animation: navigationMobileSlide .3s linear alternate;` : `animation: none;`};
+    display: ${(props:{open:boolean}) => props.open ? 'flex' : 'none'};
     overflow-y: auto;
 
     .navigation-close-button {
@@ -91,35 +93,40 @@ const MenuWidgetStyledDiv = styled.div`
 
   }
 `
+interface MenuWidgetPropTypes{
+    menuItems:[]
+}
 
-const MenuWidget = props => {
-    const menuItemsElement = useRef(null)
+const MenuWidget:FC<MenuWidgetPropTypes> = ({menuItems}) => {
+
     const dispatch = useDispatch()
-    const router = useRouter()
+    const asPath = useRouter()?.asPath
+    const query = useRouter()?.query
+    const locale = useRouter()?.locale
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
             window.innerWidth >= 768 ? setOpen(true) : setOpen(false)
         }
-    }, [props]);
+    }, []);
 
     const mobileNavigationOnClickHandler = (nextPath) => {
-        dispatch(checkRouteAndSetLoading(router.asPath, nextPath))
+        dispatch(checkRouteAndSetLoading(asPath, nextPath))
     }
-    const renderMenuItemsData = useMemo(() => props.menuItems.sort((a, b) => a.itemIndex > b.itemIndex ? 1 : -1) || [], [])
+    const renderMenuItemsData = useMemo(() => menuItems.sort((a:{itemIndex:number}, b:{itemIndex:number}) => a.itemIndex > b.itemIndex ? 1 : -1) || [], [])
     const renderMenuParentsItems = useMemo(() => renderMenuItemsData.filter(i => !i.parent), [])
 
     const renderMenuItems = renderMenuParentsItems.map((menuItem, index) => {
-        const linkAsForMenuItems = (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? menuItem.as :
-            (!router.locale && !router.query.locale) ? menuItem.as :
-                `/${router.locale || router.query.locale}${menuItem.as}`;
+        const linkAsForMenuItems = (locale || query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? menuItem.as :
+            (!locale && !query.locale) ? menuItem.as :
+                `/${locale || query.locale}${menuItem.as}`;
         return (
             <MenuWidgetItem
                 menuItem={menuItem}
                 linkAsForMenuItems={linkAsForMenuItems}
                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
-                menuItems={props.menuItems}
+
                 key={index}
             />
         )
@@ -132,7 +139,7 @@ const MenuWidget = props => {
                 className='navigation-mobile-button-open btn btn-transparent-light'
                 aria-label="Center Align">
             </ul>
-            <ul className='menu-widget-items' ref={menuItemsElement}>
+            <ul className='menu-widget-items' >
                 <li onClick={() => open ? setOpen(false) : setOpen(true)}
                     className='navigation-close-button btn btn-transparent-light'>
                     <span className='navigation-mobile-button-logo'/>

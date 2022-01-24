@@ -5,7 +5,7 @@ import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {withTranslation} from 'next-i18next';
 
-const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl,activeLink, linkName, linkTranslations, showSub, mobileNavigationOnClickHandler, subItems}) => {
+const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl,activeLink, linkName, linkTranslations, showSub, mobileNavigationOnClickHandler, subItems,onOpenSubmenusHandler}) => {
 
     const router = useRouter()
 

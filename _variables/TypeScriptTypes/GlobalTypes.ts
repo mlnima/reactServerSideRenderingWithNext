@@ -27,6 +27,7 @@ export interface DesignSettings {
 }
 
 export interface IdentitySettings {
+    allowUserToPost: boolean;
     topbar?: string,
     header?: string,
     navigation?: string,
