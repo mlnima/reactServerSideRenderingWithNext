@@ -21,8 +21,8 @@ const SearchTypeInputFields = props => {
     return (
          <>
              <div className='textInputFieldForWidget widgetSection'>
-                 <p>Search Input Place Holder</p>
-                 <input  className='searchInputPlaceHolder' name='searchInputPlaceHolder' placeholder='Search Input PlaceHolder'
+                 <p>Search TextArea Place Holder</p>
+                 <input  className='searchInputPlaceHolder' name='searchInputPlaceHolder' placeholder='Search TextArea PlaceHolder'
                          value={
                              props.widgetSettings.activeEditingLanguage === 'default' ?
                                  props.widgetData.searchInputPlaceHolder :

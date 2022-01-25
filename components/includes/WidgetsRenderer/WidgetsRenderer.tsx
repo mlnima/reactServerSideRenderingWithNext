@@ -48,6 +48,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                 return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
             })
     })
+
     const postElementSize = useSelector((store: StoreTypes) => store.settings?.design?.postElementSize);
     const userRole = useSelector((store: StoreTypes) => store?.user.userData?.role)
     const router = useRouter()

@@ -37,6 +37,7 @@ const widgetDataSchema = new Schema({
     widgetIndex: Number,
     selectedMetaForPosts: String,
     count: Number,
+    pagination:Boolean,
     stayOpen: Boolean,
     translations: mongoose.Mixed,
     uniqueData: mongoose.Mixed,

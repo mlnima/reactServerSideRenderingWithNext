@@ -48,17 +48,18 @@ const Loading = () => {
     const [render, setRender] = useState(false)
 
     useEffect(() => {
-        let isMounted = true;
-        setTimeout(()=>{
-            if (isMounted) setRender(true)
-        },500)
+        // let isMounted = true;
+        // setTimeout(()=>{
+        //     if (isMounted) setRender(true)
+        // },500)
+        setRender(true)
     }, []);
 
     useEffect(() => {
         if (loading){
             setTimeout(()=>{
                 dispatch(setLoading(false))
-            },500)
+            },1000)
         }
     }, [pathname]);
 

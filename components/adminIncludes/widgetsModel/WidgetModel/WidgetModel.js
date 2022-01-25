@@ -371,6 +371,7 @@ const WidgetModel = props => {
                     />
 
 
+
                     <p>Widget Text or HTML</p>
 
                     <MonacoEditor
@@ -413,13 +414,21 @@ const WidgetModel = props => {
                         /> : null
                     }
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider' ?
+                        <>
                         <SelectFieldForWidget title={'Post Element Size:'}
                                               name={'postElementSize'}
                                               ref={null}
                                               value={widgetData.postElementSize}
                                               options={['listSmall', 'list', 'smaller', 'small', 'medium', 'large', 'larger']}
                                               onChangeHandler={onChangeHandler}
-                        /> : null
+                        />
+                            <div className='checkInputFieldForWidget widgetSection'>
+                                <p>Pagination:</p>
+                                <input type='checkbox' name='pagination' checked={widgetData.pagination} onChange={e => onCheckboxChangeHandler(e)}/>
+                            </div>
+                        </>
+                        : null
+
                     }
 
                     {widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ?
@@ -440,6 +449,8 @@ const WidgetModel = props => {
                                               onChangeHandler={onChangeHandler}
                         /> : null
                     }
+
+
 
                     {widgetData.type === 'logo' ?
                         <LogoTypeWidgetModelFields widgetSettings={widgetSettings}

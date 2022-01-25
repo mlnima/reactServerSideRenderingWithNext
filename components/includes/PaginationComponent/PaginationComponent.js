@@ -11,17 +11,13 @@ const PaginationComponentStyledDiv = styled.div`
   margin: 10px 0;
   flex-wrap: wrap;
   .pagination-item{
-
     color: var(--main-text-color);
     padding: 5px 10px;
     margin: 5px;
     border-radius: 5px;
     cursor: pointer;
-
-    
   }
 `
-// background-color: ${props=>(parseInt(props.page) === props.pageNumber) || (!props.page && props.pageNumber ===1) ? 'var(--main-active-color,#f90)' : '#282828'};
 const PaginationComponent = props => {
     const dispatch = useDispatch()
     const router = useRouter()

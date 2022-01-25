@@ -1,8 +1,11 @@
 import dynamic from "next/dynamic";
+
 const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 import styled from "styled-components";
+import {useEffect} from "react";
+import WidgetPagination from "./WidgetPagination/WidgetPagination";
 
 let WidgetStyledSection = styled.section`
   ${props => props?.customStyles}
@@ -30,7 +33,11 @@ const Widget = props => {
                 <WidgetCustomScript customScript={props.data.customScript}
                                     customScriptStrategy={props.data.customScriptStrategy}
                 />
-                :null
+                : null
+            }
+            {props.data?.pagination && props.data?.redirectLink ?
+                <WidgetPagination baseUrl={props.data.redirectLink}/>
+                : null
             }
         </WidgetStyledSection>
     );

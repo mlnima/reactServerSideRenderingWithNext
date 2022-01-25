@@ -8,38 +8,19 @@ import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {AxiosResponse} from "axios";
 import {wrapper} from "../../../../store/store";
+import Input from "../../../../components/global/commonComponents/Input/Input";
+import TextArea from "../../../../components/global/commonComponents/TextArea/TextArea";
 
 const NewPostStyledDiv = styled.div`
   display: flex;
   justify-content: center;
-  align-items: center;
-
+  
   .create-new-post-form {
     padding: 5px;
-    width: 300px;
-
+    width: 100%;
+    max-width: 1300px;
     .server-response {
       color: var(--main-text-color);
-    }
-
-    .create-new-post-form-section {
-      width: 100%;
-
-      .create-new-post-form-section-name {
-        width: 100%;
-        color: var(--main-text-color);
-      }
-
-      .create-new-post-form-section-input, .create-new-post-form-section-textarea {
-        width: 100%;
-      }
-
-      .create-new-post-form-section-input {
-      }
-
-      .create-new-post-form-section-textarea {
-        min-height: 300px;
-      }
     }
   }
 `
@@ -99,15 +80,9 @@ const newPost = () => {
         <NewPostStyledDiv className='create-new-post main'>
             <form className='create-new-post-form' onSubmit={e => onSubmitHandler(e)}>
                 <p className='server-response'>{state.serverResponse}</p>
-                <div className='create-new-post-form-section'>
-                    <p className='create-new-post-form-section-name'>Title</p>
-                    <input className='create-new-post-form-section-input' type="text" name='title' onChange={e => onChangeHandler(e)} value={formData.title}/>
-                </div>
-                <div className='create-new-post-form-section'>
-                    <p className='create-new-post-form-section-name'>Description</p>
-                    <textarea className='create-new-post-form-section-textarea' name='description' onChange={e => onChangeHandler(e)} value={formData.description}/>
-                </div>
-                <button type='submit'>Send</button>
+                <Input className={'title'} name={'title'} onChangeHandler={onChangeHandler} type={'text'} value={formData.title} placeHolder={'Title'}/>
+                <TextArea className={'description'} name={'title'} onChangeHandler={onChangeHandler} value={formData.title} placeHolder={'Description'}/>
+                <button type='submit' className={'btn btn-primary'}>Send</button>
             </form>
 
         </NewPostStyledDiv>
