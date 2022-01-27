@@ -4,7 +4,7 @@ import styled from "styled-components";
 import dynamic from "next/dynamic";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 
-const CardLastUpdate = dynamic(() => import('../asset/CardLastUpdate/CardLastUpdate'));
+const CardLastUpdate = dynamic(() => import('../asset/CardLastUpdate/CardLastUpdate'),{ssr:false});
 const VideoCardTitle = dynamic(() => import('./VideoCardTitle'));
 const VideoCardMedia = dynamic(() => import('./VideoCardMedia/VideoCardMedia'));
 
@@ -17,7 +17,6 @@ let VideoCardStyledArticle = styled.article`
 
   .last-update {
     font-size: 9px;
-    align-self: flex-start;
   }
 
   @media only screen and (min-width: 768px) {

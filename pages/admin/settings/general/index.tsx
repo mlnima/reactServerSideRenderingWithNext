@@ -409,6 +409,17 @@ const settings = () => {
                                onChange={e => onChangeHandler(e)}/>
                     </div>
                     <div className="site-settings-form-section favIcon">
+                        <p>Google Analytics ID:</p>
+
+                        <input type='text'
+                            // @ts-ignore
+                               value={state.googleAnalyticsId}
+                               className={'form-control-input'}
+                               name='googleAnalyticsId'
+                               placeholder='Google Analytics ID..'
+                               onChange={e => onChangeHandler(e)}/>
+                    </div>
+                    <div className="site-settings-form-section favIcon">
                         <p>PWA icons</p>
 
                         <input type='text'

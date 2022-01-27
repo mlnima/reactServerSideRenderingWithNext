@@ -10,7 +10,6 @@ const LoginRegisterPopup = dynamic(() => import('../includes/LoginRegisterPopup/
 const MessengerLayout = props => {
     const loggedIn = useSelector((store) => store?.user.loggedIn)
     const globalState = useSelector(store => store?.globalState)
-    const settings = useSelector(store => store?.settings)
     const dispatch = useDispatch()
 
     useEffect(() => {
@@ -22,7 +21,7 @@ const MessengerLayout = props => {
     return (
         <div className='MessengerLayout'>
             <GlobalStyles colors={props.design?.customColors || ''}/>
-            <SiteSettingSetter identity={settings?.identity} design={settings?.design} eCommerce={settings.eCommerce}/>
+            <SiteSettingSetter />
             {props.children}
             {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
             {globalState?.loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/>:null}

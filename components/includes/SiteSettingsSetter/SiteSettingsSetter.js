@@ -4,9 +4,9 @@ import {useRouter} from "next/router";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 
-const UserAutoLogin = dynamic(() => import('./UserAutoLogin'), {ssr: false})
 const ScriptParser = dynamic(() => import('./ScriptParser'))
-
+const GoogleAnalytics = dynamic(() => import('./GoogleAnalytics'), {ssr: false})
+const UserAutoLogin = dynamic(() => import('./UserAutoLogin'), {ssr: false})
 
 const SiteSettingSetter = () => {
     const [renderAutoLogin, setRenderAutoLogin] = useState(false)
@@ -16,6 +16,7 @@ const SiteSettingSetter = () => {
     const storeData = useSelector((store) => {
         return {
             customScriptsAsString: store?.settings?.identity?.customScriptsAsString,
+            googleAnalyticsId: store?.settings?.identity?.googleAnalyticsId,
             themeColor: store?.settings?.identity?.themeColor || '#000000',
             title: store?.settings?.identity?.translations?.[locale]?.title || store?.settings?.identity?.title || '',
             description: store?.settings?.identity?.translations?.[locale]?.description || store?.settings?.identity?.description || '',
@@ -35,6 +36,7 @@ const SiteSettingSetter = () => {
     return (
         <>
             <Head>
+
                 <title>{storeData.title}</title>
                 <meta name="description" content={storeData.description}/>
                 {storeData.keywords?.length ? <meta name="keywords" content={storeData.keywords}/> : null}
@@ -55,8 +57,8 @@ const SiteSettingSetter = () => {
                 <link rel="manifest" href={'/manifest.json'}/>
                 {storeData.customScriptsAsString ? <ScriptParser script={storeData.customScriptsAsString}/> : null}
 
-
             </Head>
+            {storeData.googleAnalyticsId ? <GoogleAnalytics googleAnalyticsId={storeData.googleAnalyticsId}/> : null}
             {renderAutoLogin ? <UserAutoLogin renderAutoLogin={renderAutoLogin}/> : null}
         </>
     )
@@ -69,5 +71,4 @@ export default SiteSettingSetter;
 //     <script src={`https://www.paypal.com/sdk/js?client-id=${settings.eCommerce?.payPalId}&currency=${settings.eCommerce?.currency}`}/>
 //     : null
 // }
-
 

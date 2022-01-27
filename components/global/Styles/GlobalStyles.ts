@@ -1,9 +1,11 @@
 import {createGlobalStyle} from "styled-components";
+
 interface GlobalStylesPropTypes {
   colors:string,
   globalStyleData:string,
   sideBarWidth:number,
 }
+
 const GlobalStyles = createGlobalStyle`
   ${(props:GlobalStylesPropTypes ) => props?.colors?.includes(':root') ? props.colors :`:root {${props.colors}}`}
   

@@ -20,30 +20,27 @@ const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/Coo
 const AdminDataSetter = dynamic(() => import('../global/AdminDataSetter'), {ssr: false});
 
 interface AppLayoutPropTypes {
-    pageInfo?:{},
-    children:any
+    pageInfo?: {},
+    children: any
 }
 
-
-const AppLayout : FC<AppLayoutPropTypes> = ({children,pageInfo}) => {
+const AppLayout: FC<AppLayoutPropTypes> = ({children, pageInfo}) => {
 
     const pathname = useRouter()?.pathname
-    // const asPath = useRouter()?.asPath
-    
+
     const appLayoutData = useSelector((store: StoreTypes) => {
         return {
-            loggedIn : store?.user?.loggedIn,
-            userRole : store?.user?.userData?.role,
-            customColors : store?.settings?.design?.customColors,
-            customStyles : store?.settings?.design?.customStyles,
-            sideBarWidth : store?.settings?.design?.sideBarWidth,
-            identity : store?.settings?.identity,
-            loading : store?.globalState?.loading,
-            loginRegisterFormPopup : store?.globalState?.loginRegisterFormPopup,
-            alert : store?.globalState?.alert,
-            sidebarsData: setAppLayoutDataFromProp(pageInfo, pathname,  store?.settings?.identity),
+            loggedIn: store?.user?.loggedIn,
+            userRole: store?.user?.userData?.role,
+            customColors: store?.settings?.design?.customColors,
+            customStyles: store?.settings?.design?.customStyles,
+            sideBarWidth: store?.settings?.design?.sideBarWidth,
+            identity: store?.settings?.identity,
+            loading: store?.globalState?.loading,
+            loginRegisterFormPopup: store?.globalState?.loginRegisterFormPopup,
+            alert: store?.globalState?.alert,
+            sidebarsData: setAppLayoutDataFromProp(pageInfo, pathname, store?.settings?.identity),
             isSidebarLess: pathname === '/404' || pathname === '/500' || pathname === '/_error' || pathname.includes('/profile'),
-
         }
     })
 
@@ -54,7 +51,6 @@ const AppLayout : FC<AppLayoutPropTypes> = ({children,pageInfo}) => {
                     appLayoutData?.sidebarsData?.sidebarType === 'both' ? 'both-sidebar' :
                         'without-sidebar';
     }, [appLayoutData?.sidebarsData])
-
 
     return (
         <div className={'App ' + mainLayoutClassNameForGrid}>

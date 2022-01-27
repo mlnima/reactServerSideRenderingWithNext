@@ -1,6 +1,6 @@
 import React, {PureComponent} from "react";
-import moment from "moment";
-
+import {formatDistance} from 'date-fns'
+import faIR from "date-fns/locale/fa-IR";
 import styled from "styled-components";
 
 const ChatRoomLogMessageStyledDiv = styled.div`
@@ -16,7 +16,6 @@ const ChatRoomLogMessageStyledDiv = styled.div`
 `
 
 
-
 const ChatRoomMessageStyledDiv = styled.div`
   display: flex;
   justify-content: flex-start;
@@ -25,6 +24,8 @@ const ChatRoomMessageStyledDiv = styled.div`
   max-width: 70vw;
   border-radius: 5px;
   padding: 5px 10px;
+
+
   .chatroom-message-area-message-username-time {
     display: flex;
     justify-content: space-between;
@@ -33,7 +34,7 @@ const ChatRoomMessageStyledDiv = styled.div`
   }
 
   .chatroom-message-area-message-text {
-    color:var(--navigation-text-color, #ccc);
+    color: var(--navigation-text-color, #ccc);
     margin: 10px 20px;
     overflow-wrap: break-word;
   }
@@ -61,6 +62,7 @@ const ChatRoomMessageStyledDiv = styled.div`
   }
 
   .chatroom-message-area-message-time {
+    direction: ${props=> props?.locale === 'fa' ? 'rtl' : 'ltr'};
     color: var(--navigation-text-color, #ccc);
     font-size: xx-small;
     margin-left: 30px;
@@ -68,24 +70,37 @@ const ChatRoomMessageStyledDiv = styled.div`
 `
 
 class ChatRoomMessage extends PureComponent {
+
     render() {
+        const locale = this.props.locale === 'fa' ? {locale:faIR} : {}
         if (this?.props?.message?.type === 'log') {
             return (
                 <ChatRoomLogMessageStyledDiv className='chatroom-message-area-message' type={this?.props?.message?.type}>
-                    <p className='chatroom-message-area-message-log'>{this?.props?.message?.username} joined the room</p>
+                    <p className='chatroom-message-area-message-log'>
+                        {this?.props?.message?.username}
+                        joined the room
+                    </p>
                 </ChatRoomLogMessageStyledDiv>
             )
         } else return (
-            <ChatRoomMessageStyledDiv className='chatroom-message-area-message'>
+            <ChatRoomMessageStyledDiv className='chatroom-message-area-message' locale={this.props.locale}>
                 <img onClick={() => {
-
-                    this?.props?.onShowProfileHandler(this?.props?.message?.username, this?.props?.message?.id, this?.props?.message?.profileImage)
-                }} className='chatroom-message-area-message-image' src={this?.props?.message?.profileImage ? this?.props?.message?.profileImage : '/public/asset/images/user/noGenderAvatar50.jpg'} alt="profileImage"/>
+                    this?.props?.onShowProfileHandler(this?.props?.message?.username,
+                        this?.props?.message?.id,
+                        this?.props?.message?.profileImage
+                    )
+                }}
+                     className='chatroom-message-area-message-image'
+                     src={this?.props?.message?.profileImage ? this?.props?.message?.profileImage : '/public/asset/images/user/noGenderAvatar50.jpg'}
+                     alt={'profileImage'}
+                />
 
                 <div className='chatroom-message-area-message-data'>
                     <span className='chatroom-message-area-message-username-time'>
                     {this?.props?.message?.username}
-                        <span className='chatroom-message-area-message-time'>{moment(new Date(this?.props?.message?.createdAt), "YYYYMMDD").fromNow(false)}</span>
+                        <span className='chatroom-message-area-message-time'>
+                            {formatDistance(new Date(this?.props?.message?.createdAt), new Date(), {addSuffix: true,...locale})}
+                        </span>
                     </span>
                     <p className='chatroom-message-area-message-text'>
                         {this?.props?.message?.messageData}
