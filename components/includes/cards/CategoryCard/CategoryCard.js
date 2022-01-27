@@ -57,7 +57,9 @@ const CategoryCard = ({t, cardWidth, category, onActivateLoadingHandler}) => {
                         <CategoryCardMedia cardWidth={cardWidth} imageUrl={category?.imageUrl} mediaAlt={category?.translations?.[locale]?.name || category?.name}/>
                     </div>
                     <div className={'category-card-info'}>
-                        <h3 className='category-card-title'>{category?.translations?.[locale]?.name || t([t(`customTranslation:${category?.name}`)])}</h3>
+                        <h3 className='category-card-title'>
+                            { category?.translations?.[locale]?.name || t(`customTranslation:${category?.name}`)}
+                        </h3>
                         {category?.count ? <span className={'category-card-count'}>({category?.count})</span> : null}
                     </div>
                 </a>

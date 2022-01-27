@@ -52,7 +52,9 @@ const TagCard = ({t, cardWidth, tag, onActivateLoadingHandler}) => {
                         />
                     </div>
                     <div className={'tag-card-info'}>
-                        <h3 className={'tag-card-title'}> {tag?.translations?.[locale]?.name || t([t(`customTranslation:${tag?.name}`)])}</h3>
+                        <h3 className={'tag-card-title'}>
+                            {tag?.translations?.[locale]?.name || t(`customTranslation:${tag?.name}`)}
+                        </h3>
                         {tag?.count ? <span className={'tag-card-count'}>({tag?.count})</span> : null}
                     </div>
                 </a>
