@@ -22,7 +22,6 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard/TagCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard/TagCard.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -996,7 +995,7 @@
       <workItem from="1643141349968" duration="4644000" />
       <workItem from="1643193461911" duration="9976000" />
       <workItem from="1643290468711" duration="5104000" />
-      <workItem from="1643315109595" duration="6054000" />
+      <workItem from="1643315109595" duration="6527000" />
     </task>
     <servers />
   </component>

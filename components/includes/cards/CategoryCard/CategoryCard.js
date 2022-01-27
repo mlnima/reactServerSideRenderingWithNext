@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 import CategoryCardMedia from "./CategoryCardMedia";
-import {withTranslation} from "next-i18next";
+import { useTranslation } from 'next-i18next';
 import styled from "styled-components";
 
 const CategoryCardStyledDiv = styled.div`
@@ -42,8 +42,8 @@ const CategoryCardStyledDiv = styled.div`
   }
 
 `
-const CategoryCard = ({t, cardWidth, category, onActivateLoadingHandler}) => {
-
+const CategoryCard = ({ cardWidth, category, onActivateLoadingHandler}) => {
+    const { t } = useTranslation('customTranslation');
     const locale = useRouter().locale
 
     return (
@@ -58,7 +58,7 @@ const CategoryCard = ({t, cardWidth, category, onActivateLoadingHandler}) => {
                     </div>
                     <div className={'category-card-info'}>
                         <h3 className='category-card-title'>
-                            { category?.translations?.[locale]?.name || t(`customTranslation:${category?.name}`)}
+                            { category?.translations?.[locale]?.name || t(category?.name)}
                         </h3>
                         {category?.count ? <span className={'category-card-count'}>({category?.count})</span> : null}
                     </div>
@@ -68,4 +68,5 @@ const CategoryCard = ({t, cardWidth, category, onActivateLoadingHandler}) => {
     );
 };
 
-export default withTranslation(['customTranslation'])(CategoryCard);
+// export default withTranslation(['customTranslation'])(CategoryCard);
+export default CategoryCard;
