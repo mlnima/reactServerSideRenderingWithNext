@@ -160,11 +160,17 @@ export const getFirstLoadData = async (req, dynamicWidgets,store,locale) => {
         const allWidgets = [...staticWidgets,...dynamicWidgetsData]
         const identity = process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {}
         const design =  process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {}
+        const userAgent = req.headers['user-agent'];
+        let isMobile = Boolean(userAgent.match(
+            /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+        ))
 
         store.dispatch({type:SET_WIDGETS,payload:allWidgets})
+
         store.dispatch({
             type:SET_SETTINGS,
             payload: {
+                isMobile,
                 design:design,
                 identity:identity,
                 eCommerce:{},

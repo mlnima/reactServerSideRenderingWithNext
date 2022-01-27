@@ -20,18 +20,16 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/GoogleAnalytics.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoCardType/VideoTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoCardType/VideoTypeCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/MessengerLayout.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/MessengerLayout.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/settings/general/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_document.js" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_document.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/reducers/globalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/globalStateReducer.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/reducers/settingsReducer.js" beforeDir="false" afterPath="$PROJECT_DIR$/store/reducers/settingsReducer.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -164,9 +162,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.analyze" />
         <item itemvalue="npm.mergeDuplicateMetaData" />
       </list>
@@ -1004,7 +1002,8 @@
       <workItem from="1643105739766" duration="4664000" />
       <workItem from="1643141349968" duration="4644000" />
       <workItem from="1643193461911" duration="9976000" />
-      <workItem from="1643290468711" duration="4418000" />
+      <workItem from="1643290468711" duration="5104000" />
+      <workItem from="1643315109595" duration="4312000" />
     </task>
     <servers />
   </component>

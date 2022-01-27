@@ -1,7 +1,6 @@
 import * as types from '../types'
 import {HYDRATE} from 'next-redux-wrapper';
 
-
 const initialState = {
     loginRegisterFormPopup:false,
     loading:false,
@@ -15,8 +14,6 @@ const initialState = {
         message:''
     }
 }
-
-
 
 export const globalStateReducer = (state= initialState , action : {type:string,payload:any}) =>{
     switch (action.type){

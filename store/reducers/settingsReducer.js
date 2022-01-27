@@ -3,16 +3,15 @@ import * as adminTypes from '../types'
 import {HYDRATE} from 'next-redux-wrapper';
 
 const initialState = {
-    design:{},
-    identity:{},
-    eCommerce:{},
-    adminSettings:{}
+    isMobile: false,
+    design: {},
+    identity: {},
+    eCommerce: {},
+    adminSettings: {}
 }
 
-
-
-export const settingsReducer = (state=initialState,action)=>{
-    switch (action.type){
+export const settingsReducer = (state = initialState, action) => {
+    switch (action.type) {
         case HYDRATE:
             return {
                 ...state,
@@ -26,7 +25,7 @@ export const settingsReducer = (state=initialState,action)=>{
         case  adminTypes.EDIT_DESIGN:
             return {
                 ...state,
-                design:{
+                design: {
                     ...state.design,
                     ...action?.payload || {}
                 }

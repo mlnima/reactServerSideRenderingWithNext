@@ -212,6 +212,7 @@ export interface PostStateTypes {
 }
 
 export interface SettingsStateTypes {
+    isMobile: boolean;
     design: DesignSettings,
     identity: IdentitySettings,
     eCommerce: object,
