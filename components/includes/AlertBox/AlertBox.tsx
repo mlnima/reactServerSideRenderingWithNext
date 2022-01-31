@@ -1,16 +1,14 @@
-import React,{useEffect} from 'react';
-
+import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from 'react-redux';
 import {closeAlert, setAlert} from "../../../store/actions/globalStateActions";
 import Draggable from 'react-draggable';
-
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {faCheckCircle, faExclamationCircle, faExclamationTriangle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 
-let StyledDiv = styled.div`
+const StyledDiv = styled.div`
   position: fixed;
   top: 0;
   left: 0;
@@ -48,7 +46,6 @@ let StyledDiv = styled.div`
         svg {
           width: 25px;
           height: 25px;
-
         }
       }
 
@@ -70,19 +67,19 @@ let StyledDiv = styled.div`
   }
 `
 
-// @ts-ignore
-const AlertBox = ({t}) => {
-    const dispatch = useDispatch()
-    const alert = useSelector((store: StoreTypes) => store?.globalState?.alert)
+const AlertBox = () => {
+    const {t} = useTranslation(['common', 'customTranslation', 'profile']);
+    const dispatch = useDispatch();
+    const alert = useSelector((store: StoreTypes) => store?.globalState?.alert);
 
     useEffect(() => {
-        if (alert.active){
+        if (alert.active) {
             const component = true
-            setTimeout(()=>{
-                if (component){
+            setTimeout(() => {
+                if (component) {
                     dispatch(setAlert({message: null, type: null, active: false}))
                 }
-            },3000)
+            }, 3000)
         }
     }, [alert]);
 
@@ -92,8 +89,10 @@ const AlertBox = ({t}) => {
                 <div className='alert-message'>
                     <div className='alert-message-header'>
                         <p className='alert-type'>
-                            {alert.type === 'success' ? <FontAwesomeIcon icon={faCheckCircle} style={{color: 'green'}}/> :
-                                alert.type === 'error' ? <FontAwesomeIcon icon={faExclamationTriangle} style={{color: 'red'}}/> :
+                            {alert.type === 'success' ?
+                                <FontAwesomeIcon icon={faCheckCircle} style={{color: 'green'}}/> :
+                                alert.type === 'error' ?
+                                    <FontAwesomeIcon icon={faExclamationTriangle} style={{color: 'red'}}/> :
                                     <FontAwesomeIcon icon={faExclamationCircle} style={{color: 'blue'}}/>
                             }
                         </p>
@@ -102,11 +101,9 @@ const AlertBox = ({t}) => {
                         </button>
                     </div>
                     <p className='alert'>
-                        {t([`common:${alert.message}`, t(`profile:${alert.message}`)])}
+                        {t([t(alert.message, {ns: 'common'}), t(alert.message, {ns: 'profile'})])}
                     </p>
-                    <p>{
-                        alert.err?.stack
-                    }</p>
+                    <p>{alert.err?.stack}</p>
                 </div>
             </Draggable>
         </StyledDiv>
@@ -114,4 +111,4 @@ const AlertBox = ({t}) => {
     );
 
 };
-export default withTranslation(['common', 'customTranslation', 'profile'])(AlertBox);
+export default AlertBox;

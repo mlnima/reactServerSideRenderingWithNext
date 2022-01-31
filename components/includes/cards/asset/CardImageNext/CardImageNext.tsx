@@ -2,41 +2,48 @@ import {FC} from 'react'
 import Image from 'next/image'
 import styled from "styled-components";
 
+interface CardImageNextPropTypes {
+    imageUrl: string,
+    alt: string,
+    cardHeight: number,
+    cardWidth: number,
+    errorHandler?: any,
+    objectFitValue?: string,
+    strictImageSize?:boolean
+}
+
+interface CardImageNextStylePropTypes {
+    imageWidth: number,
+    imageHeight: number,
+    objectFitValue?: string,
+    strictImageSize:boolean
+}
+
 const CardImageNextStyledDiv = styled.div`
-  width: calc(48vw - 5.6px);
-  height: calc(calc(48vw - 5.6px)/1.777);
-  position:relative;
-  span{
-    img{
-      //object-fit: contain;
-    }
-  }
+  ${({objectFitValue}) => objectFitValue ? `object-fit:${objectFitValue};` : ''}
+  width: ${({strictImageSize,imageWidth} :CardImageNextStylePropTypes )=> strictImageSize ? `${imageWidth}px` :  'calc(48vw - 5.6px)'};
+  height: ${({strictImageSize,imageHeight} :CardImageNextStylePropTypes )=> strictImageSize ? `${imageHeight}px` :  'calc(calc(48vw - 5.6px) / 1.777)'} ;
   @media only screen and (min-width: 768px) {
-    width: ${(props: { width: number, height: number }) => `${props.width}px`};
-    height: ${(props: { width: number, height: number }) => `${props.height}px`};
+    width: ${({imageWidth}: CardImageNextStylePropTypes) => `${imageWidth}px`};
+    height: ${({imageHeight}: CardImageNextStylePropTypes) => `${imageHeight}px`};
   }
 `
 
-interface CardImageNextPropTypes {
-    imageUrl: string,
-    alt:string,
-    width: number,
-    height: number,
-    errorHandler?:any
-}
+const CardImageNext: FC<CardImageNextPropTypes> = ({imageUrl, alt, cardWidth, cardHeight, objectFitValue,strictImageSize, errorHandler}) => {
 
-const CardImageNext: FC<CardImageNextPropTypes> = ({imageUrl,alt, width, height,errorHandler}) => {
     return (
-        <CardImageNextStyledDiv width={width} height={height}>
+        <CardImageNextStyledDiv imageWidth={cardWidth} imageHeight={cardHeight} objectFitValue={objectFitValue}   strictImageSize={strictImageSize}>
             <Image src={imageUrl}
                    alt={alt}
                    loading={'lazy'}
                    layout={'responsive'}
-                   width={width}
-                   height={height}
+                   width={cardWidth}
+                   height={cardHeight}
                    quality={80}
-                   objectFit={'contain'}
-                   onError={()=>errorHandler? errorHandler : null}
+
+                // @ts-ignore
+                   objectFit={objectFitValue || 'contain'}
+                   onError={() => errorHandler ? errorHandler : null}
             />
         </CardImageNextStyledDiv>
     )

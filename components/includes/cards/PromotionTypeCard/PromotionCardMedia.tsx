@@ -2,10 +2,21 @@ import React, {useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 import CardImageRenderer from "../asset/CardImageRenderer/CardImageRenderer";
+interface PromotionCardMediaPropTypes {
+    post: PostTypes,
+    postElementSize: string,
+    cardWidth: number,
+    mediaAlt: string,
+}
+interface PromotionCardMediaStyledDivPropTypes {
+    cardWidth: number,
+    postElementSize?: string
+}
 
-const PromotionCardMediaStyled = styled.div`
 
-  width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : '48vw'};
+const PromotionCardMediaStyledDiv = styled.div`
+
+  width: 48vw;
   height: calc(48vw / 1.777);
 
   .promotion-card-image {
@@ -15,11 +26,11 @@ const PromotionCardMediaStyled = styled.div`
   }
 
   @media only screen and (min-width: 768px) {
-    width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : '100%'};
-    height: calc(${props => props.cardWidth}px / 1.777);
+    width: ${({postElementSize}: PromotionCardMediaStyledDivPropTypes) => postElementSize === 'list' ? '116.6px' : '100%'};
+    height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
     .promotion-card-image {
-      width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : '100%'};
-      height: calc(${props => props.cardWidth}px / 1.777);
+      width: ${({postElementSize}: PromotionCardMediaStyledDivPropTypes) => postElementSize === 'list' ? '116.6px' : '100%'};
+      height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
     }
   }
 `
@@ -34,47 +45,40 @@ const NoImageStyleDiv = styled.div`
     color: var(--post-element-info-text-color,#ccc);
   }
   @media only screen and (min-width: 768px) {
-    width:  ${(props : {cardWidth?:number}) => props?.cardWidth}px;
-    height: calc(${(props : {cardWidth?:number}) => props?.cardWidth}px / 1.777);
+    width:  ${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => `${cardWidth}px`};
+    height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => `${cardWidth}px`} / 1.777);
   }
 `
 
-interface PromotionCardMediaPropTypes {
-    post: PostTypes,
-    postElementSize: string,
-    cardWidth: number,
-    mediaAlt: string,
-    noImageUrl: string,
-}
 
-const PromotionCardMedia = (props: PromotionCardMediaPropTypes) => {
+
+const PromotionCardMedia = ({post,postElementSize,cardWidth,mediaAlt}: PromotionCardMediaPropTypes) => {
     const [gotError, setGotError] = useState(false)
     const errorHandler = () => {
         !gotError ? setGotError(true) : null
     }
-    if (!props?.post.mainThumbnail || gotError){
+    if (!post.mainThumbnail || gotError){
         return (
-            // @ts-ignore
-            <NoImageStyleDiv cardWidth={props.cardWidth} className='no-image'>
-                <span className={'no-image-alt'}>{props.mediaAlt || 'NO IMAGE'}</span>
+            <NoImageStyleDiv cardWidth={cardWidth} className='no-image'>
+                <span className={'no-image-alt'}>{mediaAlt || 'NO IMAGE'}</span>
             </NoImageStyleDiv>
         )
     }else return (
         // @ts-ignore
-        <PromotionCardMediaStyled className='promotion-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <CardImageRenderer imageUrl={props?.post.mainThumbnail}
-                               alt={props.mediaAlt}
-                               cardWidth={props.cardWidth}
-                               cardHeight={props.cardWidth / 1.777}
+        <PromotionCardMediaStyledDiv className='promotion-card-media' postElementSize={postElementSize} cardWidth={cardWidth}>
+            <CardImageRenderer imageUrl={post?.mainThumbnail}
+                               mediaAlt={mediaAlt}
+                               cardWidth={cardWidth}
+                               cardHeight={cardWidth / 1.777}
                                errorHandler={errorHandler}
             />
-        </PromotionCardMediaStyled>
+        </PromotionCardMediaStyledDiv>
     );
 };
 export default PromotionCardMedia;
 
 // <img className='promotion-card-image'
-//      alt={props.mediaAlt}
+//      alt={mediaAlt}
 //      src={props?.post.mainThumbnail}
 //      onError={()=>setGotError(true)}
 // />

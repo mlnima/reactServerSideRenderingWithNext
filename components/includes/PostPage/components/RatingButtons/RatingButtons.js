@@ -1,6 +1,6 @@
 import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
 import _shortNumber from '../../../../../_variables/clientVariables/_shortNumber'
-import {withTranslation} from 'next-i18next';
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 
 const RatingButtonsStyledDiv = styled.div`
@@ -59,7 +59,9 @@ const RatingButtonsStyledDiv = styled.div`
 
 `
 
-const RatingButtons = ({t, _id, ratingAndViewData, rating, setRatingAndViewData}) => {
+const RatingButtons = ({_id, ratingAndViewData, rating, setRatingAndViewData}) => {
+
+    const {t} = useTranslation('common');
 
     const onRateHandler = (type) => {
         likeDislikeView(_id, type).then(res => {
@@ -73,7 +75,7 @@ const RatingButtons = ({t, _id, ratingAndViewData, rating, setRatingAndViewData}
         <RatingButtonsStyledDiv className="rating-buttons">
             {ratingAndViewData.views ?
                 <span className='like-disLike-count-items rating-item'
-                      title={t([`common:Views`, t(`customTranslation:Views`)])}
+                      title={t('Views')}
                 >
                         {/*<FontAwesomeIcon icon={faEye} className='rate-logo'/>*/}
                        {/*<svg className={'rate-logo'}*/}
@@ -100,18 +102,16 @@ const RatingButtons = ({t, _id, ratingAndViewData, rating, setRatingAndViewData}
                     <button className='rating-item'
                             onClick={() => onRateHandler('likes')}
                             aria-label="Center Align"
-                            title={t([`common:Like`, t(`customTranslation:Like`)])}
+                            title={t('Like')}
                     >
-                        {/*<FontAwesomeIcon icon={faThumbsUp} className='rate-logo'/>*/}
                         <span className='rate-logo thumbs-up' />
                         <p className='rating-item-value'>{ratingAndViewData.likes}</p>
                     </button>
                     <button className='rating-item'
                             onClick={() => onRateHandler('disLikes')}
                             aria-label="Center Align"
-                            title={t([`common:Dislike`, t(`customTranslation:Dislike`)])}
+                            title={t('Dislike')}
                     >
-                        {/*<FontAwesomeIcon icon={faThumbsDown} className='rate-logo'/>*/}
                         <span className='rate-logo thumbs-down' />
                         <p className='rating-item-value'>{ratingAndViewData.disLikes}</p>
                     </button>
@@ -122,5 +122,5 @@ const RatingButtons = ({t, _id, ratingAndViewData, rating, setRatingAndViewData}
     )
 };
 
-export default withTranslation(['common'])(RatingButtons);
+export default RatingButtons;
 

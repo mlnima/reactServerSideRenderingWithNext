@@ -1,7 +1,6 @@
 import React from 'react';
 import Link from "next/link";
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
 import { NextPageContext } from "next";
 
 const ErrorStyledDiv = styled.div`
@@ -27,6 +26,7 @@ interface ErrorComponentProps {
 }
 
 const Error = ({ statusCode }:ErrorComponentProps) => {
+
     return (
         <ErrorStyledDiv className='error-page'>
             <h1 className='error-page-message'>
@@ -46,6 +46,6 @@ Error.getInitialProps = ({ res  , err }:NextPageContext) => {
     return { statusCode }
 }
 
-export default withTranslation(['common','customTranslation'])(Error)
+export default Error
 
 

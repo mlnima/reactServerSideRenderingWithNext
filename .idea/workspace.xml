@@ -20,8 +20,68 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard/ActorCard.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetSubItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetEditForm.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetEditForm.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/MenuWidgetModelFields/MenuWidgetModelFields.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AlertBox/AlertBox.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/ClientPopActionRequest/CookiePopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentFrom/CommentFrom.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/DownloadLink/DownloadLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/PostMeta/PostMeta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RatingButtons/RatingButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/ActorCard/ActorCard.js" beforeDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/ActorCard/ActorCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ActorCard/ActorCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/ArticleTypeCard/ArticleCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/ArticleTypeCard/ArticleCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/DefaultTypeCard/DefaultTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/DefaultTypeCard/DefaultTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/LearnTypeCard/LearnTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/LearnTypeCard/LearnTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/PromotionTypeCard/PromotionCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/PromotionTypeCard/PromotionCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/PromotionTypeCard/PromotionTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/PromotionTypeCard/PromotionTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard/TagCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard/TagCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/TagCard/TagCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/TagCard/TagCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoCardType/VideoCardMedia/VideoCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoCardType/VideoCardMedia/VideoCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardImage/CardImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardImage/CardImage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardImageNext/CardImageNext.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardImageNext/CardImageNext.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardImageRenderer/CardImageRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardImageRenderer/CardImageRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationListHeader.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationListHeader.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer/ActorsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer/ActorsRenderer.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationSlideItems/AuthenticationSlideItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/AuthenticationSlideItems/AuthenticationSlideItems.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/Logo.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Logo/LogoUsingNextImage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Logo/LogoUsingNextImage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItem.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItemLink.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MenuWidgetItemLink.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButton.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButtonForm.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchButton/SearchButtonForm.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next-i18next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next-i18next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/nodemon.json" beforeDir="false" afterPath="$PROJECT_DIR$/nodemon.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/404.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/404.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/500.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/500.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/_error.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/_error.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/chatroom/[chatRoomName].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/edit.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/edit.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/user/[username].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/user/[username].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/de/profile.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/de/profile.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/en/profile.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/en/profile.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/public/locales/fa/profile.json" beforeDir="false" afterPath="$PROJECT_DIR$/public/locales/fa/profile.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,8 +95,8 @@
         <option value="tsconfig.json" />
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -52,7 +112,7 @@
     </file-type-list>
   </component>
   <component name="HighlightingSettingsPerFile">
-    <setting file="file://$PROJECT_DIR$/pages/profile/edit.tsx" root0="SKIP_HIGHLIGHTING" />
+    <setting file="file://$PROJECT_DIR$/pages/profile/edit.tsx" root0="FORCE_HIGHLIGHTING" />
   </component>
   <component name="ProjectId" id="1X4AMHmaidKcjF8abOtl5pD7Dp5" />
   <component name="ProjectLevelVcsManager" settingsEditedManually="true">
@@ -101,7 +161,10 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\adminControllers\adminPostsControllers" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.analyze">
+  <component name="RunManager" selected="Node.js.CategoryCard.tsx">
+    <configuration name="CategoryCard.tsx" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.tsx" working-dir="$PROJECT_DIR$/components/includes/cards/CategoryCard">
+      <method v="2" />
+    </configuration>
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -132,16 +195,6 @@
       <envs />
       <method v="2" />
     </configuration>
-    <configuration name="mergeDuplicateMetaData" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
-      <package-json value="$PROJECT_DIR$/package.json" />
-      <command value="run" />
-      <scripts>
-        <script value="mergeDuplicateMetaData" />
-      </scripts>
-      <node-interpreter value="project" />
-      <envs />
-      <method v="2" />
-    </configuration>
     <configuration name="start" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -154,11 +207,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
+        <item itemvalue="Node.js.CategoryCard.tsx" />
         <item itemvalue="npm.analyze" />
-        <item itemvalue="npm.mergeDuplicateMetaData" />
       </list>
     </recent_temporary>
   </component>
@@ -995,7 +1048,12 @@
       <workItem from="1643141349968" duration="4644000" />
       <workItem from="1643193461911" duration="9976000" />
       <workItem from="1643290468711" duration="5104000" />
-      <workItem from="1643315109595" duration="6527000" />
+      <workItem from="1643315109595" duration="19047000" />
+      <workItem from="1643364139848" duration="17740000" />
+      <workItem from="1643451902337" duration="7272000" />
+      <workItem from="1643472973869" duration="12056000" />
+      <workItem from="1643572975819" duration="644000" />
+      <workItem from="1643627667452" duration="3218000" />
     </task>
     <servers />
   </component>
@@ -1259,7 +1317,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts</url>
-          <line>205</line>
+          <line>214</line>
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1300,6 +1358,11 @@
           <url>file://$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.tsx</url>
           <line>2</line>
           <option name="timeStamp" value="123" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
+          <line>248</line>
+          <option name="timeStamp" value="124" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

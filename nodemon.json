@@ -12,7 +12,9 @@
     "./server.js",
     "./next.config.js",
     "./.swcrc",
-    "./.env"
+    "./.env",
+    "./next-i18next.config.js"
+
   ],
   "ext": "js json",
   "trace-warnings": true

@@ -98,7 +98,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                         widgetId={widget._id}
                         isSidebar={position ? position.includes('Sidebar') : false}
                         {...widget}
-                        widgetToRender={widgetToRender}
+                        WidgetToRender={widgetToRender}
                         postElementSize={postElementSize}
                         viewType={widget.data?.viewType}
                     />

@@ -54,7 +54,7 @@ const ArticleCardMedia : FC<ArticleCardMediaPropTypes>= (props) => {
     }else return (
         <ArticleCardMediaStyled className='article-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <CardImageRenderer imageUrl={props?.post.mainThumbnail}
-                               alt={props.mediaAlt}
+                               mediaAlt={props.mediaAlt}
                                cardWidth={props.cardWidth}
                                cardHeight={props.cardWidth/1.777}
                                errorHandler={ errorHandler}

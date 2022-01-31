@@ -64,8 +64,8 @@ export interface User {
     username?: string,
     role?: string,
     profileImage?: string,
-    followers:object[],
-    following:object[],
+    followers: object[],
+    following: object[],
 }
 
 
@@ -81,14 +81,14 @@ export interface UserState {
     },
     callData: {
         myVideo?: any,
-        partnerVideo?:any,
+        partnerVideo?: any,
         callerSignal?: any,
-        calling?:boolean,
-        receivingCall?:boolean,
-        callAccepted?:boolean,
-        callerName?:string,
-        callerId?:string,
-        userStreamData:any
+        calling?: boolean,
+        receivingCall?: boolean,
+        callAccepted?: boolean,
+        callerName?: string,
+        callerId?: string,
+        userStreamData: any
     }
 }
 
@@ -110,11 +110,11 @@ export interface settingsPropTypes {
 // user
 export interface PageTypes {
     _id?: string,
-    pageName:string,
-    sidebar:string,
+    pageName: string,
+    sidebar: string,
     status: string,
-    imageUrl:string,
-    pageStyle:string
+    imageUrl: string,
+    pageStyle: string
 }
 
 // export interface SettingsTypes {
@@ -126,16 +126,27 @@ export interface PageTypes {
 
 export interface WidgetPropTypes {
     _id: string,
-    data: {
-        position: string,
-        type: string,
-        metaType: string,
-        viewType: string,
-        deviceTypeToRender: string,
-        languageToRender: string,
-        editMode: boolean,
-        widgetIndex:number
-    }
+    data: WidgetDataPropTypes
+}
+
+export interface WidgetDataPropTypes {
+    pagination: boolean,
+    redirectLink: string,
+    customScriptStrategy: string,
+    customScript?: string,
+    text?: string,
+    position: string,
+    type: string,
+    extraClassName?: string,
+    extraId?: string,
+    title?: string,
+    customStyles?: string,
+    metaType: string,
+    viewType: string,
+    deviceTypeToRender: string,
+    languageToRender: string,
+    editMode: boolean,
+    widgetIndex: number
 }
 
 export interface MetasPropTypes {
@@ -159,13 +170,13 @@ export interface GetServerSidePropsContext {
 
 export interface Meta {
     coverImageUrl?: string,
-    _id:string,
+    _id: string,
     name: string,
     description?: string,
     type: string,
     status?: string,
     imageUrl?: string,
-    imageUrlLock?:boolean,
+    imageUrlLock?: boolean,
     translations?: Translations,
     count?: number,
     additionalInfo?: object,
@@ -173,17 +184,15 @@ export interface Meta {
     updatedAt?: Date,
 }
 
-export interface AxiosResponseTypes{
-    message?:string,
-    posts:PostTypes[]
-    post:PostTypes
+export interface AxiosResponseTypes {
+    message?: string,
+    posts: PostTypes[]
+    post: PostTypes
 }
 
-export interface AxiosErrorTypes{
-    message?:string
+export interface AxiosErrorTypes {
+    message?: string
 }
-
-
 
 
 export interface WidgetsStateInterface {
@@ -239,27 +248,29 @@ export interface GlobalStateTypes {
 }
 
 export interface Translations {
-    [key: string]: {}
+    [key: string]: {
+        name?: string
+    }
 }
 
 
 export interface AdminPanelPostsTypes {
     users: User[],
     post?: PostTypes,
-    totalCount:number,
+    totalCount: number,
     posts?: PostTypes[],
-    meta?:Meta,
-    metas?:Meta[],
+    meta?: Meta,
+    metas?: Meta[],
     activeEditingLanguage: string
 }
 
-export interface AdminPanelGlobalState{
+export interface AdminPanelGlobalState {
     customPages: string[],
-    users:User[],
-    forms:[],
-    pages:[],
-    metas:[],
-    orders:[],
+    users: User[],
+    forms: [],
+    pages: [],
+    metas: [],
+    orders: [],
 }
 
 export interface StoreTypes {

@@ -1,6 +1,6 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 
 const DownloadLinkStyledDiv = styled.div`
@@ -9,6 +9,7 @@ const DownloadLinkStyledDiv = styled.div`
   align-items: center;
   flex-wrap: wrap;
   margin: 0 5px;
+  
   .download-text{
     margin: 0 3px;
   }
@@ -36,24 +37,26 @@ const DownloadLinkStyledDiv = styled.div`
 
 `
 
-const DownloadLink = ({t, downloadLink, render, downloadLinks}) => {
+const DownloadLink = ({ downloadLink, render, downloadLinks}) => {
+    const {t} = useTranslation('common');
     if (render) {
         return (
-            <DownloadLinkStyledDiv target='_blank'
-                                   rel="noreferrer"
-
+            <DownloadLinkStyledDiv target={'_blank'}
+                                   rel={'noreferrer'}
             >
-                <span className={'download-text'}>{t([`common:Download`, t(`customTranslation:Download`)])}:</span>
+                <span className={'download-text'}>
+                    {t([t('Download', {ns: 'common'}), t('Download', {ns: 'customTranslation'})])}:
+                </span>
                 <div className={'multiple-download-links'}>
 
                     {downloadLinks.length ?
                         downloadLinks.map(link => {
                             return (
                                 <a href={link.url}
-                                   target='_blank'
+                                   target={'_blank'}
                                    className={'btn btn-primary'}
                                    rel={'noreferrer'}
-                                   title={t([`common:Download`, t(`customTranslation:Download`)])}
+                                   title={t(`Download`)}
                                 >
                                     <span>{link.title}</span>
                                 </a>
@@ -63,7 +66,10 @@ const DownloadLink = ({t, downloadLink, render, downloadLinks}) => {
                     }
                 </div>
                 {downloadLink ?
-                    <a className={'single-download-link btn btn-primary'} href={downloadLink} title={t([`common:Download`, t(`customTranslation:Download`)])}>
+                    <a className={'single-download-link btn btn-primary'}
+                       href={downloadLink}
+                       title={t([t('Download', {ns: 'common'}), t('Download', {ns: 'customTranslation'})])}
+                    >
                         <span style={{display: 'none'}}>download link for post</span>
                         <FontAwesomeIcon icon={faDownload}
                                          style={{width: '24px', height: '24px'}}
@@ -71,12 +77,10 @@ const DownloadLink = ({t, downloadLink, render, downloadLinks}) => {
                     </a>
                     : null
                 }
-
-
             </DownloadLinkStyledDiv>
         );
     } else return null
 
 };
 
-export default withTranslation(['common'])(DownloadLink);
+export default DownloadLink;

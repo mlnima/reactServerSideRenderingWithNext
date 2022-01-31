@@ -1,14 +1,14 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState, useEffect, FC} from 'react';
 import {login, registerUser} from "../../../_variables/ajaxAuthVariables";
-import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
+import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from 'react-redux';
 import {userLogin} from "../../../store/actions/userActions";
 import styled from "styled-components";
 import {setAlert, setLoginRegisterFormStatus} from "../../../store/actions/globalStateActions";
 import Draggable from 'react-draggable';
-import {StoreTypes, InputOnChangeHandlerTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import _passwordValidator from "../../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
 
@@ -102,7 +102,6 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
         }
 
 
-
       }
 
 
@@ -147,7 +146,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
     }
   }
 
-  .btn-secondary{
+  .btn-secondary {
     justify-self: center;
     align-self: center;
     font-size: 12px;
@@ -175,8 +174,8 @@ interface StateValidatorTypes {
     gender?: boolean,
 }
 
-const LoginRegisterPopupForms = (props: { t: any }) => {
-
+const LoginRegisterPopupForms: FC = () => {
+    const {t} = useTranslation('common');
     const dispatch = useDispatch()
     const globalState = useSelector((store: StoreTypes) => store?.globalState)
     const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
@@ -209,11 +208,11 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
         const checkPasswords = state.password === state.password2;
 
         if (!checkUsername) {
-            dispatch(setAlert({message: 'you can not use this username',type: 'error',active:true}))
+            dispatch(setAlert({message: 'you can not use this username', type: 'error', active: true}))
         }
 
         if (!checkPasswords) {
-            dispatch(setAlert({message: 'password is to short or is not match',type: 'error',active:true}))
+            dispatch(setAlert({message: 'password is to short or is not match', type: 'error', active: true}))
         }
 
 
@@ -226,7 +225,7 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                     type: 'success',
                 })
             }).catch(error => {
-                dispatch(setAlert({message:error.response.data.message,type: 'error',active:true}))
+                dispatch(setAlert({message: error.response.data.message, type: 'error', active: true}))
                 // setResponse({
                 //     ...response,
                 //     message: error.response.data.message,
@@ -236,7 +235,6 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
             })
 
     };
-
 
 
     useEffect(() => {
@@ -257,57 +255,107 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
 
     return (
         <Draggable handle=".form-header">
-            <LoginRegisterPopupFormsStyledDiv response={response} className='login-register-content'>
+            <LoginRegisterPopupFormsStyledDiv response={response}
+                                              className='login-register-content'
+            >
                 <div className='form-header'>
-                    <button onClick={() => dispatch(setLoginRegisterFormStatus(false))} onTouchStart={() => dispatch(setLoginRegisterFormStatus(false))} className='close-form-button' title={props.t(`common:Close`)}>
+                    <button onClick={() => dispatch(setLoginRegisterFormStatus(false))}
+                            onTouchStart={() => dispatch(setLoginRegisterFormStatus(false))}
+                            className='close-form-button' title={t(`Close`)}
+                    >
                         <FontAwesomeIcon icon={faTimes}/>
                     </button>
                 </div>
 
-                <h3 className='login-register-title'>{globalState.loginRegisterFormPopup === 'register' ? props.t(`common:Register`) : props.t(`common:Member login`)}</h3>
-                {response.message ? <p className='server-response'> {props.t(`common:${response.message}`)} </p> : null}
+                <h3 className='login-register-title'>
+                    {globalState.loginRegisterFormPopup === 'register' ? t(`Register`) : t(`Member login`)}
+                </h3>
+                {response.message ?
+                    <p className='server-response'>
+                        {t(`${response.message}`)}
+                    </p>
+                    : null
+                }
 
                 {globalState.loginRegisterFormPopup === 'register' ?
                     <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
                         <div className="login-register-form-fields">
                             <div className="login-register-form-field">
-                                <p>{props.t(`common:Username`)}</p>
-                                <input className={'form-control-input form-control-input-validator'} required={true} name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
+                                <p>{t(`Username`)}</p>
+                                <input className={'form-control-input form-control-input-validator'}
+                                       required={true}
+                                       name='username'
+                                       value={state.username}
+                                       onChange={e => onChangeHandler(e)}
+                                />
                                 <ValidInput valid={stateValidator.username}/>
                             </div>
                             <div className="login-register-form-field">
-                                <p>{props.t(`common:Email`)}</p>
-                                <input className={'form-control-input form-control-input-validator'} autoComplete="off" required={true} name='email' value={state.email} type='email' onChange={e => onChangeHandler(e)}/>
+                                <p>{t(`Email`)}</p>
+                                <input className={'form-control-input form-control-input-validator'}
+                                       autoComplete="off"
+                                       required={true}
+                                       name='email'
+                                       value={state.email}
+                                       type='email'
+                                       onChange={e => onChangeHandler(e)}
+                                />
 
                                 <ValidInput valid={stateValidator.email}/>
                             </div>
                             <div className="login-register-form-field gender">
-                                <p>{props.t(`common:Gender`)}</p>
-                                <div className='gender-options' onChange={e => onChangeHandler(e)}>
-                                    <input type='radio' name='gender' value='male' checked={state.gender === 'male'} onChange={e => {
-                                    }}/>
-                                    <p className='gender-icon'>{props.t(`common:Male`)}</p>
-                                    <input type='radio' name='gender' value='female' checked={state.gender === 'female'} onChange={e => {
-                                    }}/>
-                                    <p className='gender-icon'>{props.t(`common:Female`)}</p>
-                                    <input type='radio' name='gender' value='other' checked={state.gender === 'other'} onChange={e => {
-                                    }}/>
-                                    <p className='gender-icon'>{props.t(`common:Other`)}</p>
+                                <p>{t(`Gender`)}</p>
+                                <div className='gender-options'
+                                     onChange={e => onChangeHandler(e)}
+                                >
+                                    <input type='radio'
+                                           name='gender'
+                                           value='male'
+                                           checked={state.gender === 'male'}
+                                    />
+                                    <p className='gender-icon'>{t(`Male`)}</p>
+                                    <input type='radio'
+                                           name='gender'
+                                           value='female'
+                                           checked={state.gender === 'female'}
+                                    />
+                                    <p className='gender-icon'>{t(`Female`)}</p>
+                                    <input type='radio'
+                                           name='gender'
+                                           value='other'
+                                           checked={state.gender === 'other'}
+                                    />
+                                    <p className='gender-icon'>{t(`Other`)}</p>
                                 </div>
                             </div>
                             <div className="login-register-form-field">
-                                <p>{props.t(`common:Password`)} </p>
+                                <p>{t(`Password`)} </p>
                                 {
                                     !stateValidator.password ?
-                                        <span className='password-info'>{props.t(`common:Minimum eight characters, at least one letter and one number`)}</span> :
-                                        null
+                                        <span className='password-info'>
+                                            {t(`Minimum eight characters, at least one letter and one number`)}
+                                        </span>
+                                        : null
                                 }
-                                <input className={'form-control-input form-control-input-validator'} type='password' autoComplete="off" name='password' required={true} value={state.password}  onChange={e => onChangeHandler(e)}/>
+                                <input className={'form-control-input form-control-input-validator'}
+                                       type={'password'}
+                                       autoComplete={'off'}
+                                       name={'password'}
+                                       required={true} value={state.password}
+                                       onChange={e => onChangeHandler(e)}
+                                />
                                 <ValidInput valid={stateValidator.password}/>
                             </div>
-                            <div className="login-register-form-field">
-                                <p>{props.t(`common:Repeat Password`)}</p>
-                                <input className={'form-control-input form-control-input-validator'} type='password' autoComplete="off" name='password2'  required={true} value={state.password2}  onChange={e => onChangeHandler(e)}/>
+                            <div className={'login-register-form-field'}>
+                                <p>{t(`Repeat Password`)}</p>
+                                <input className={'form-control-input form-control-input-validator'}
+                                       type={'password'}
+                                       autoComplete={'off'}
+                                       name={'password2'}
+                                       required={true}
+                                       value={state.password2}
+                                       onChange={e => onChangeHandler(e)}
+                                />
                                 <ValidInput valid={stateValidator.password2}/>
                             </div>
                         </div>
@@ -318,21 +366,39 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                         !stateValidator.password2 &&
                         !stateValidator.gender
                         }
-                                type='submit' className='login-register-form-button simple-button'>{props.t(`common:Register`)}</button>
+                            type={'submit'}
+                            className={'login-register-form-button simple-button'}>
+                            {t(`Register`)}
+                        </button>
                     </form> : globalState.loginRegisterFormPopup === 'login' ?
-                        <form className='login-register-form' onSubmit={e => onLoginHandler(e)}>
+                        <form className='login-register-form'
+                              onSubmit={e => onLoginHandler(e)}
+                        >
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">
-                                    <p>{props.t(`common:Username`)}</p>
-                                    <input className={'form-control-input form-control-input-validator'} name='username' value={state.username} onChange={e => onChangeHandler(e)}/>
+                                    <p>{t(`Username`)}</p>
+                                    <input className={'form-control-input form-control-input-validator'}
+                                           name={'username'}
+                                           value={state.username}
+                                           onChange={e => onChangeHandler(e)}
+                                    />
                                     <ValidInput valid={stateValidator.username}/>
                                 </div>
                                 <div className="login-register-form-field">
-                                    <p>{props.t(`common:Password`)}</p>
-                                    <input className={'form-control-input'} name='password' value={state.password} type='password' onChange={e => onChangeHandler(e)}/>
+                                    <p>{t(`Password`)}</p>
+                                    <input className={'form-control-input'}
+                                           name={'password'}
+                                           value={state.password}
+                                           type={'password'}
+                                           onChange={e => onChangeHandler(e)}
+                                    />
                                 </div>
                             </div>
-                            <button disabled={!stateValidator.username && !state.password} type='submit' className='login-register-form-button simple-button'>{props.t(`common:Login`)}</button>
+                            <button disabled={!stateValidator.username && !state.password}
+                                    type={'submit'}
+                                    className={'login-register-form-button simple-button'}>
+                                {t(`Login`)}
+                            </button>
                         </form> : null
                 }
 
@@ -343,11 +409,13 @@ const LoginRegisterPopupForms = (props: { t: any }) => {
                     onrResetStateHandler()
                 }}
                       className='btn btn-secondary'>
-                      {globalState.loginRegisterFormPopup === 'register' ? props.t(`common:Do You Have An Account? Login Here`) : props.t(`common:Not A Member Yet? Register Here`)}
+                      {globalState.loginRegisterFormPopup === 'register' ?
+                          t(`Do You Have An Account? Login Here`) :
+                          t(`Not A Member Yet? Register Here`)}
                 </span>
 
             </LoginRegisterPopupFormsStyledDiv>
         </Draggable>
     );
 };
-export default withTranslation(['common'])(LoginRegisterPopupForms);
+export default LoginRegisterPopupForms;

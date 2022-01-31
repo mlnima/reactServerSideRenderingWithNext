@@ -4,7 +4,6 @@ import parse from 'html-react-parser';
 
 interface AdvertisePropTypes {
     adCode: string,
-
 }
 
 const Advertise: FC<AdvertisePropTypes> = ({adCode}) => {

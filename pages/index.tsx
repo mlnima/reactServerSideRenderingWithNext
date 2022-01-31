@@ -1,13 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {getFirstLoadData} from "../_variables/ajaxVariables";
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {wrapper} from "../store/store";
 import {useSelector} from "react-redux";
-import {ClientPagesTypes} from '../_variables/TypeScriptTypes/ClientPagesTypes'
 import {StoreTypes} from "../_variables/TypeScriptTypes/GlobalTypes";
 
-const Home = ({}: ClientPagesTypes) => {
+const Home : FC = () => {
 
     const settings = useSelector((store: StoreTypes) => store.settings);
 

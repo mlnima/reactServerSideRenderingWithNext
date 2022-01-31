@@ -1,12 +1,22 @@
 import {FC,useMemo} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
-import isInternalUrl from "../../../../_variables/util/isInternalUrl";
+// import isInternalUrl from "../../../../_variables/util/isInternalUrl";
 import isImageAllowedForNextImage from "../../../../_variables/util/isImageAllowedForNextImage";
 import isAbsolutePath from "../../../../_variables/util/isAbsolutePath";
 import dynamic from "next/dynamic";
-
+import styled from "styled-components";
 const LogoUsingNextImage = dynamic(() => import('./LogoUsingNextImage'));
+
+
+const LogoStyledLink = styled.a`
+  .logo-text,p{
+    color: var(--main-text-color);
+  }
+  .logo-text{
+    font-weight: bold;
+  }
+`
 
 interface LogoPropTypes {
     translations: {},
@@ -26,14 +36,14 @@ const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl, hov
             logoUrlSource,
             logoText: translations ? translations[locale] ? translations[locale].LogoText || LogoText : LogoText : LogoText,
             headLineData: translations ? translations[locale] ? translations[locale].headLine || headLine : headLine : headLine,
-            isInternalUrl: isInternalUrl(LogoUrl),
+            // isInternalUrl: isInternalUrl(LogoUrl),
             isImageAllowedForNextImage: isImageAllowedForNextImage(logoUrlSource)
         }
     }, [])
 
     return (
         <Link href='/'>
-            <a className='logo'>
+            <LogoStyledLink className='logo'>
                 {logoData?.logoUrlSource && logoData.isImageAllowedForNextImage ?
                     <LogoUsingNextImage logoUrl={logoData?.logoUrlSource} alt={'logo'}/> :
                     logoData?.logoUrlSource ?
@@ -47,7 +57,7 @@ const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl, hov
                         : null}
                 {logoData.logoText ? <span className='logo-text'> {logoData.logoText} </span> : null}
                 {logoData.headLineData ? <p className='logo-headline'>{logoData.headLineData}</p> : null}
-            </a>
+            </LogoStyledLink>
         </Link>
     );
 };

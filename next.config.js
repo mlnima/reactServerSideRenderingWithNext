@@ -41,11 +41,11 @@ const i18nConfig = locales.length === 1 ? {} : {
 const rewrites = () => {
     return {
         // ...staticPageGeneration,
-        beforeFiles:[
+        beforeFiles: [
             {
                 source: `/:postType(video|post|product|article|book|standard|promotion|learn|food|book)?/:title`,
                 destination: '/post/:postType/:id',
-                has: [{ type: 'query', key: 'id' }]
+                has: [{type: 'query', key: 'id'}]
             },
         ],
         afterFiles: [

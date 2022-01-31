@@ -1,8 +1,11 @@
 import Link from "next/link";
 import {useRouter} from "next/router";
 import CategoryCardMedia from "./CategoryCardMedia";
-import { useTranslation } from 'next-i18next';
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
+import {FC, useMemo} from "react";
+import capitalizeFirstLetter from "../../../../_variables/util/capitalizeFirstLetter";
+import {Meta} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const CategoryCardStyledDiv = styled.div`
   margin: 5px;
@@ -40,27 +43,47 @@ const CategoryCardStyledDiv = styled.div`
 
     }
   }
-
 `
-const CategoryCard = ({ cardWidth, category, onActivateLoadingHandler}) => {
-    const { t } = useTranslation('customTranslation');
-    const locale = useRouter().locale
+
+interface CategoryCardPropTypes {
+    cardWidth: number,
+    category: Meta,
+    onActivateLoadingHandler: any
+}
+
+const CategoryCard: FC<CategoryCardPropTypes> = ({cardWidth, category, onActivateLoadingHandler}) => {
+    const {t} = useTranslation('customTranslation');
+    const {locale} = useRouter();
+
+    const cardTitle = useMemo(() => {
+        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
+            category?.name :
+            category?.translations?.[locale]?.name || t(category?.name, {ns: 'customTranslation'})
+    }, [])
 
     return (
         <CategoryCardStyledDiv className={'category-card'}>
             <Link href={`/category/${category?._id}`}>
                 <a className='category-card-info-link'
                    onClick={onActivateLoadingHandler}
-                   title={category?.translations?.[locale]?.name || t([t(`customTranslation:${category?.name}`)])}
+                   title={cardTitle}
                 >
                     <div className={'category-card-image'}>
-                        <CategoryCardMedia cardWidth={cardWidth} imageUrl={category?.imageUrl} mediaAlt={category?.translations?.[locale]?.name || category?.name}/>
+                        <CategoryCardMedia cardWidth={cardWidth}
+                                           imageUrl={category?.imageUrl}
+                                           mediaAlt={category?.translations?.[locale]?.name || category?.name}
+                        />
                     </div>
                     <div className={'category-card-info'}>
                         <h3 className='category-card-title'>
-                            { category?.translations?.[locale]?.name || t(category?.name)}
+                            {capitalizeFirstLetter(cardTitle)}
                         </h3>
-                        {category?.count ? <span className={'category-card-count'}>({category?.count})</span> : null}
+                        {category?.count ?
+                            <span className={'category-card-count'}>
+                               (<var>{category?.count}</var>)
+                            </span>
+                            : null
+                        }
                     </div>
                 </a>
             </Link>
@@ -68,5 +91,4 @@ const CategoryCard = ({ cardWidth, category, onActivateLoadingHandler}) => {
     );
 };
 
-// export default withTranslation(['customTranslation'])(CategoryCard);
 export default CategoryCard;

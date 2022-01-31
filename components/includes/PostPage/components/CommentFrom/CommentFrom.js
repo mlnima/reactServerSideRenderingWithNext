@@ -1,7 +1,7 @@
 import {useRef } from 'react';
 import {newComment } from '../../../../../_variables/ajaxPostsVariables';
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from "react-redux";
 import {setLoginRegisterFormStatus} from "../../../../../store/actions/globalStateActions";
 import {addNewComment} from "../../../../../store/actions/postAction";
@@ -40,6 +40,7 @@ const CommentFromStyledForm = styled.form`
 `
 
 const CommentFrom = props => {
+    const {t} = useTranslation('common');
     const dispatch = useDispatch()
     const userData = useSelector(store => store?.user?.userData)
     const bodyInput = useRef(null);
@@ -84,11 +85,11 @@ const CommentFrom = props => {
         <CommentFromStyledForm className='comment-form' onSubmit={ e => onSubmitHandler(e) }>
             <div>
                 <div className='comment-form-input'>
-                    <textarea ref={ bodyInput } required={ true } placeholder={props.t(`common:Write a Comment`)} name='body'/>
+                    <textarea ref={ bodyInput } required={ true } placeholder={t(`Write a Comment`)} name='body'/>
                 </div>
             </div>
-            <button className='comment-form-submit-button' type='submit'>{props.t(`common:Post Comment`)}</button>
+            <button className='comment-form-submit-button' type='submit'>{t(`Post Comment`)}</button>
         </CommentFromStyledForm>
     );
 };
-export default withTranslation(['common'])(CommentFrom);
+export default CommentFrom;

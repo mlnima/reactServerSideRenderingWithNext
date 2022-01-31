@@ -1,11 +1,10 @@
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useState} from 'react';
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
-import {useSelector, useDispatch} from "react-redux";
+import {useDispatch} from "react-redux";
 import {userResetPassword} from "../../store/actions/userActions";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
@@ -24,26 +23,25 @@ const EditProfileStyledMain = styled.main`
     justify-content: flex-start;
     width: 300px;
     box-sizing: border-box;
-    
+
     .reset-password-form-field:last-of-type {
       margin-bottom: 20px;
     }
-
-
-    .reset-password-form-field{
+    
+    .reset-password-form-field {
       display: flex;
       justify-content: space-between;
       flex-wrap: wrap;
       align-items: center;
       width: 100%;
-      .password-info{
+
+      .password-info {
         margin: 5px 0;
         font-size: x-small;
       }
       p {
         width: 100%;
       }
-
     }
   }
 `
@@ -59,7 +57,8 @@ interface ChangePasswordData {
     repeatNewPassword?: string,
 }
 
-const edit = (props: ClientPagesTypes) => {
+const edit: FC = () => {
+    const {t} = useTranslation(['common', 'customTranslation', 'profile']);
     const dispatch = useDispatch()
 
     const [changePasswordData, setChangePasswordData] = useState<ChangePasswordData>({})
@@ -81,42 +80,62 @@ const edit = (props: ClientPagesTypes) => {
     useEffect(() => {
 
         setChangePasswordDataValidator({
-            newPassword: changePasswordData.newPassword ? _passwordValidator(changePasswordData.newPassword) :false,
-            repeatNewPassword: changePasswordData.repeatNewPassword ? changePasswordData.newPassword === changePasswordData.repeatNewPassword :false,
+            newPassword: changePasswordData.newPassword ? _passwordValidator(changePasswordData.newPassword) : false,
+            repeatNewPassword: changePasswordData.repeatNewPassword ? changePasswordData.newPassword === changePasswordData.repeatNewPassword : false,
         })
     }, [changePasswordData]);
 
     return (
         <EditProfileStyledMain className='main'>
-            <h1>{props.t(`profile:Edit Profile`)}</h1>
+            <h1> {t('Edit Profile', {ns: 'profile'})}</h1>
             <form className='reset-password-form' onSubmit={onSubmitHandler}>
-                <h2>{props.t(`profile:Change Password`)}</h2>
+                <h2>{t('Change Password', {ns: 'profile'})}</h2>
 
                 <div className='reset-password-form-field'>
-                    <p>{props.t([`common:Password`])}</p>
-                    <input className={'form-control-input'} type="password" autoComplete="off" name={'password'} value={changePasswordData.password} onChange={e => onChangePasswordInputsHandler(e)}/>
+                    <p>{t('Password', {ns: 'common'})}</p>
+                    <input className={'form-control-input'}
+                           type="password"
+                           autoComplete="off"
+                           name={'password'}
+                           value={changePasswordData.password}
+                           onChange={e => onChangePasswordInputsHandler(e)}
+                    />
 
                 </div>
 
                 <div className='reset-password-form-field'>
-                    <p>{props.t(`profile:New Password`)}</p>
+                    <p> {t('NewPassword', {ns: 'profile'})}</p>
                     {
                         !changePasswordDataValidator.newPassword ?
-                            <span className='password-info'>{props.t(`common:Minimum eight characters, at least one letter and one number`)}</span> :
-                            null
+                            <span className='password-info'>
+                                {t('Minimum eight characters, at least one letter and one number', {ns: 'common'})}
+                            </span>
+                            : null
                     }
-                    <input className={'form-control-input form-control-input-validator'} type="password" autoComplete="off" name={'newPassword'} value={changePasswordData.newPassword} onChange={e => onChangePasswordInputsHandler(e)}/>
+                    <input className={'form-control-input form-control-input-validator'}
+                           type="password"
+                           autoComplete="off"
+                           name={'newPassword'}
+                           value={changePasswordData.newPassword}
+                           onChange={e => onChangePasswordInputsHandler(e)}
+                    />
                     <ValidInput valid={changePasswordDataValidator.newPassword}/>
                 </div>
 
                 <div className={'reset-password-form-field'}>
-                    <p>{props.t(`profile:Repeat New Password`)}</p>
-                    <input className={'form-control-input form-control-input-validator'} type={'password'} autoComplete="off" name={'repeatNewPassword'} value={changePasswordData.repeatNewPassword} onChange={e => onChangePasswordInputsHandler(e)}/>
+                    <p>{t('Repeat New Password', {ns: 'profile'})}</p>
+                    <input className={'form-control-input form-control-input-validator'}
+                           type={'password'}
+                           autoComplete="off"
+                           name={'repeatNewPassword'}
+                           value={changePasswordData.repeatNewPassword}
+                           onChange={e => onChangePasswordInputsHandler(e)}
+                    />
                     <ValidInput valid={changePasswordDataValidator.repeatNewPassword}/>
                 </div>
 
                 <button type='submit' className={'btn btn-warning'}>
-                    {props.t(`profile:Change Password`)}
+                    {t('Change Password', {ns: 'profile'})}
                 </button>
             </form>
 
@@ -140,5 +159,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
-export default withTranslation(['common', 'customTranslation', 'profile'])(edit);
+export default edit;
 //export default edit;

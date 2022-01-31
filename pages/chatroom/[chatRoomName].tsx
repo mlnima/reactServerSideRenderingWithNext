@@ -16,7 +16,7 @@ import {wrapper} from "../../store/store";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {uniqBy} from 'lodash';
 
-const chatRoom = (props: ClientPagesTypes) => {
+const chatRoom = ( ) => {
     const dispatch = useDispatch()
 
     const user = useSelector((store: StoreTypes) => store.user)

@@ -1,7 +1,7 @@
 import React from 'react';
 import {followUser, unFollowUser, conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {useRouter} from "next/router";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {setLoginRegisterFormStatus} from "../../../../store/actions/globalStateActions";
@@ -38,11 +38,12 @@ const UserPageActionButtonsStyledDiv = styled.div`
   }
 `
 
-const UserPageActionButtons = ({t, _id}) => {
+const UserPageActionButtons = ({_id}) => {
+    const {t} = useTranslation('common');
     const router = useRouter()
     const dispatch = useDispatch()
-    const userData = useSelector(store => store.user.userData)
-    const userPageData = useSelector(store => store.user.userPageData)
+    const userData = useSelector(store => store?.user?.userData)
+    const userPageData = useSelector(store => store?.user?.userPageData)
 
     const onFollowHandler = () => {
         if (userPageData._id) {
@@ -83,11 +84,11 @@ const UserPageActionButtons = ({t, _id}) => {
         <UserPageActionButtonsStyledDiv className='user-page-action-buttons'>
 
 
-            <button className='user-page-action-button action-client-button-link' onClick={onConversationHandler}>{t([`common:Send Message`])}</button>
+            <button className='user-page-action-button action-client-button-link' onClick={onConversationHandler}>{t('Send Message')}</button>
             <div>
                 {userData?.following?.includes(userPageData._id) ?
-                    <button className='user-page-action-button action-client-button-link' onClick={onUnFollowHandler}>{t([`common:Unfollow`])}  </button> :
-                    <button className='user-page-action-button action-client-button-link' onClick={onFollowHandler}>{t([`common:Follow`])} </button>
+                    <button className='user-page-action-button action-client-button-link' onClick={onUnFollowHandler}>{t('Unfollow')}  </button> :
+                    <button className='user-page-action-button action-client-button-link' onClick={onFollowHandler}>{t('Follow')} </button>
                 }
             </div>
 
@@ -99,7 +100,7 @@ const UserPageActionButtons = ({t, _id}) => {
         </UserPageActionButtonsStyledDiv>
     );
 };
-export default withTranslation(['common'])(UserPageActionButtons);
+export default UserPageActionButtons;
 
 
 // {

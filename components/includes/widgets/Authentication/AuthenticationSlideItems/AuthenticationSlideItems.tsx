@@ -5,7 +5,7 @@ import Link from "next/link";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import {StoreTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 const LoggedOutItemsMenu = dynamic(() => import('../LoggedOutItemsMenu/LoggedOutItemsMenu'), {ssr: false});
 const LoggedInItemsForMenu = dynamic(() => import('../LoggedInItemsForMenu/LoggedInItemsForMenu'), {ssr: false});
 
@@ -104,10 +104,10 @@ const AuthenticationSlideItemsStyledDiv = styled.div`
 interface ComponentPropTypes {
     onOpenCloseHandler:any,
     open:boolean,
-    t:any
 }
 
-const AuthenticationSlideItems = ({onOpenCloseHandler,t,open}: ComponentPropTypes) => {
+const AuthenticationSlideItems = ({onOpenCloseHandler,open}: ComponentPropTypes) => {
+    const {t} = useTranslation('common');
     const user = useSelector((store : StoreTypes) => store?.user)
     const router = useRouter()
     return (
@@ -121,7 +121,7 @@ const AuthenticationSlideItems = ({onOpenCloseHandler,t,open}: ComponentPropType
                     <Link href={`/`}>
                         <a rel='next' className='logged-item btn btn-transparent-light'>
                             <span className={'home icon'}/>
-                            {t(`common:Home`)}
+                            {t(`Home`)}
                         </a>
                     </Link>
                     :null
@@ -136,4 +136,4 @@ const AuthenticationSlideItems = ({onOpenCloseHandler,t,open}: ComponentPropType
         </AuthenticationSlideItemsStyledDiv>
     )
 };
-export default withTranslation(['common'])(AuthenticationSlideItems)
+export default AuthenticationSlideItems;

@@ -1,14 +1,12 @@
 import {FC} from "react";
 import Link from "next/link";
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
 import LearnTypeCardMedia from "./LearnTypeCardMedia";
 import LearnTypeCardTitle from "./LearnTypeCardTitle";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
 import dynamic from "next/dynamic";
 const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
-
 
 const LearnTypeCardStyledDiv = styled.div`
   width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
@@ -21,8 +19,7 @@ const LearnTypeCardStyledDiv = styled.div`
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
-
-
+  
   .learn-post-card-link {
     position: relative;
     width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
@@ -127,5 +124,5 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> = (props) => {
 
     );
 };
-export default withTranslation(['common'])(LearnTypeCard);
+export default LearnTypeCard;
 

@@ -2,7 +2,7 @@ import Link from "next/link";
 import _ from "lodash";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from "next-i18next";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import DefaultTypeCardMedia from "./DefaultTypeCardMedia";
 
@@ -80,6 +80,7 @@ const DefaultTypeCardStyledDiv = styled.div`
 
 
 const DefaultTypeCard = props => {
+    const {t} = useTranslation('common');
 
     const metaPreviewData = [...(props.post?.actors || []), ...(props.post?.tags || []), ...(props.post?.categories || [])]
     const metaPreview = _.uniqBy(metaPreviewData, function (e) {
@@ -88,13 +89,24 @@ const DefaultTypeCard = props => {
     return (
         <DefaultTypeCardStyledDiv className='post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <Link href={`/post/${props.post?.postType}/${props.post?._id}`} scroll={false}>
-                <a rel='next' onClick={ props.onActivateLoadingHandler} className='post-card-link' title={props.title}  >
-                    <DefaultTypeCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
+                <a rel='next' onClick={ props.onActivateLoadingHandler} className='post-card-link' title={title}  >
+                    <DefaultTypeCardMedia noImageUrl={props.noImageUrl}
+                                          postElementSize={props.postElementSize}
+                                          post={props.post}
+                                          cardWidth={props.cardWidth}
+                                          mediaAlt={title}
+                    />
                     <div className='post-card-under-media'>
-                        <CardTitle title={props.title}/>
+                        <CardTitle title={title}/>
                         <div className='post-card-under-media-info'>
-                            <span className='post-card-views post-card-info-data'><span>{props.views}</span> {props.t(`common:Views`)}</span>
-                            <span className='post-card-rating post-card-info-data'><span>{props.rating}</span> % </span>
+                            <span className='post-card-views post-card-info-data'>
+                                <span>{props.views}</span>
+                                {t(`Views`)}
+                            </span>
+                            <span className='post-card-rating post-card-info-data'>
+                                <span>{props.rating}</span>
+                                %
+                            </span>
                         </div>
                     </div>
                 </a>
@@ -104,5 +116,5 @@ const DefaultTypeCard = props => {
 
     );
 };
-export default withTranslation(['common'])(DefaultTypeCard);
+export default DefaultTypeCard;
 

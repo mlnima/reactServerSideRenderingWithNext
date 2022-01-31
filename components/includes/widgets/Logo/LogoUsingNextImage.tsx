@@ -9,17 +9,15 @@ interface LogoUsingNextImagePropTypes {
 const LogoUsingNextImage: FC<LogoUsingNextImagePropTypes> = ({logoUrl, alt}) => {
 
     return (
-        <div>
             <Image src={logoUrl}
                    alt={alt}
-                   layout={'intrinsic'}
+                   layout={'responsive'}
                    quality={80}
                    loading={'lazy'}
                    objectFit={'contain'}
                    width={300}
                    height={100}
             />
-        </div>
     )
 
 };

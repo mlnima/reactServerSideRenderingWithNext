@@ -3,7 +3,7 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
 import {conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {useRouter} from "next/router";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
@@ -88,21 +88,22 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   }
 `
 
-const ChatRoomMessageUserInfoPopup = ({t}) => {
+const ChatRoomMessageUserInfoPopup = () => {
+    const {t} = useTranslation('common');
     const router = useRouter();
     const dispatch = useDispatch();
     const activeVisibleProfile = useSelector(store => store?.chatroom?.activeVisibleProfile);
     const loggedIn = useSelector(store => store?.user?.loggedIn)
 
     const onConversationHandler = () => {
-        if (loggedIn){
+        if (loggedIn) {
             conversation(activeVisibleProfile._id).then(res => {
                 const conversation = res.data.conversation
                 router.push(`/messenger/${conversation._id}`)
             }).catch(err => {
                 console.log(err)
             })
-        }else {
+        } else {
             dispatch(setLoginRegisterFormStatus('register'))
         }
     }
@@ -139,12 +140,12 @@ const ChatRoomMessageUserInfoPopup = ({t}) => {
                                 <div className='chatroom-message-user-info-popup-user-data-links'>
                                     <Link href={`/user/${activeVisibleProfile.username}`}>
                                         <a className={'btn btn-primary'}>
-                                            {t([`common:View Profile`])}
+                                            {t('View Profile')}
 
                                         </a>
                                     </Link>
                                     <button onClick={onConversationHandler} className={'btn btn-primary'}>
-                                        {t([`common:Send Message`])}
+                                        {t('Send Message')}
                                     </button>
                                 </div>
                             </div>
@@ -159,4 +160,4 @@ const ChatRoomMessageUserInfoPopup = ({t}) => {
     } else return null
 
 };
-export default withTranslation(['common'])(ChatRoomMessageUserInfoPopup);
+export default ChatRoomMessageUserInfoPopup;

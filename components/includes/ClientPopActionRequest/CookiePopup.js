@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Link from "next/link";
 import LanguagesSwitcher from "../widgets/LanguagesSwitcher/LanguagesSwitcher";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import styled from "styled-components";
@@ -19,7 +19,7 @@ const CookiePopupStyledDiv = styled.div`
   align-items: center;
   z-index: 1005;
   backdrop-filter: blur(5px);
-  
+
   .cookie-popup-content {
     background-color: var(--main-text-color);
     padding: 20px;
@@ -74,7 +74,8 @@ const CookiePopupStyledDiv = styled.div`
   }
 
 `
-const CookiePopup = props => {
+const CookiePopup = () => {
+    const {t} = useTranslation('common');
     const settings = useSelector(store => store?.settings)
     const router = useRouter()
 
@@ -111,24 +112,25 @@ const CookiePopup = props => {
                     {settings?.identity?.translations[router.locale]?.cookieMessageText || settings?.identity?.cookieMessageText}
                 </p>
                 <div className='cookie-popup-content-action-buttons'>
-                      <button className='cookie-popup-content-action-button-reject' onClick={onRejectHandler}>
-                          {props.t(`common:Decline`)}
-                      </button>
-
-
-                    <button className='cookie-popup-content-action-button-accept' onClick={onAcceptHandler}>
-                          {props.t(`common:Accept`)}
+                    <button className='cookie-popup-content-action-button-reject' onClick={onRejectHandler}>
+                        {t(`Decline`)}
                     </button>
-
+                    <button className='cookie-popup-content-action-button-accept' onClick={onAcceptHandler}>
+                        {t('Accept')}
+                    </button>
                 </div>
-                    {settings?.identity?.cookieReadMoreLink ?
-                        <Link href={settings?.identity?.cookieReadMoreLink}><a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>Accept and Read More</a></Link>
-                        : null
-                    }
+                 {settings?.identity?.cookieReadMoreLink ?
+                     <Link href={settings?.identity?.cookieReadMoreLink}>
+                         <a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>
+                             Accept and Read More
+                         </a>
+                     </Link>
+                     : null
+                 }
             </span>
             </CookiePopupStyledDiv>
         );
     } else return null
 
 };
-export default withTranslation(['common'])(CookiePopup);
+export default CookiePopup;

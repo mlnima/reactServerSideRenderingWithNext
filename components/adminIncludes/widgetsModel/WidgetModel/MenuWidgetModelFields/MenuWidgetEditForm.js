@@ -4,6 +4,7 @@ import styled from "styled-components";
 const MenuWidgetEditFormStyledFrom = styled.form`
   width: 95%;
   margin: auto;
+
   .formId {
     font-size: small;
   }
@@ -21,7 +22,8 @@ const MenuWidgetEditFormStyledFrom = styled.form`
     display: flex;
     align-items: center;
     justify-content: space-between;
-    input{
+
+    input {
       width: 70%;
     }
   }
@@ -44,7 +46,7 @@ const MenuWidgetEditForm = props => {
             {props.mode === 'Add' ?
                 <div className='menu-widget-form-form-field'>
                     <p>Parent:</p>
-                    <select     className={'custom-select'} name='parent' value={props.data.parent} onChange={e => props.onChangeHandler(e)}>
+                    <select className={'custom-select'} name='parent' value={props.data.parent} onChange={e => props.onChangeHandler(e)}>
                         <option>select</option>
                         {renderItemsForParent}
                     </select>
@@ -58,8 +60,8 @@ const MenuWidgetEditForm = props => {
                        type="text" name='name'
                        onChange={e => props.onChangeHandlerWithTranslate(e)}
                        value={props.activeEditingLanguage === 'default' ?
-                              props.data.name :
-                              props.data.translations?.[props.activeEditingLanguage]?.name || ''
+                           props.data.name :
+                           props.data.translations?.[props.activeEditingLanguage]?.name || ''
                        }
                 />
             </div>

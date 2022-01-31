@@ -1,6 +1,5 @@
 import React from 'react'
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
 import Authentication from "../../widgets/Authentication/Authentication";
 
 const MessengerConversationListHeaderStyledDiv = styled.div`
@@ -25,7 +24,7 @@ const MessengerConversationListHeaderStyledDiv = styled.div`
 `
 
 
-const MessengerConversationListHeader = props => {
+const MessengerConversationListHeader = () => {
     return (
         <MessengerConversationListHeaderStyledDiv className='messenger-conversations-list-header'>
             <div className='messenger-conversations-list-header-items'>
@@ -34,4 +33,4 @@ const MessengerConversationListHeader = props => {
         </MessengerConversationListHeaderStyledDiv>
     );
 };
-export default withTranslation(['common'])(MessengerConversationListHeader);
+export default MessengerConversationListHeader;

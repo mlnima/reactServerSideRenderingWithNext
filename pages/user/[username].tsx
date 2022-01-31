@@ -8,7 +8,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
 import {useDispatch, useSelector} from "react-redux";
@@ -73,7 +73,8 @@ const UserPageStyledDiv = styled.div`
   }
 `
 
-const user = (props: ClientPagesTypes) => {
+const user = () => {
+    const {t} = useTranslation('common');
     const dispatch = useDispatch()
     const router = useRouter()
     // @ts-ignore
@@ -130,11 +131,11 @@ const user = (props: ClientPagesTypes) => {
                     }
                     {userPageData?._id ?
                         <div className='follow-count'>
-                            <p>{props.t([`common:Followers`])} : <span>{
+                            <p>{t([`Followers`])} : <span>{
                                 // @ts-ignore
                                 userPageData?.followers ? userPageData.followers?.length : 0
                             }</span></p>
-                            <p>{props.t([`common:Following`])} : <span>{
+                            <p>{t([`Following`])} : <span>{
                                 // @ts-ignore
                                 userPageData?.following ? userPageData.following?.length : 0
                             }</span></p>
@@ -172,5 +173,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 })
 
 
-export default withTranslation(['common'])(user);
+export default user;
 

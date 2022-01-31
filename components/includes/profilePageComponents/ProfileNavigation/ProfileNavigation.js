@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import Link from 'next/link'
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import {useSelector} from "react-redux";
 import styled from "styled-components";
 
@@ -44,7 +44,7 @@ const ProfileNavigationStyledDiv = styled.div`
 
 `
 const ProfileNavigation = props => {
-
+    const {t} = useTranslation('common');
     const userData = useSelector(store => store?.user?.userData)
 
     const [navigationData, setNavigationData] = useState({
@@ -63,18 +63,21 @@ const ProfileNavigation = props => {
     return (
         <ProfileNavigationStyledDiv className='profile-navigation' style={navigationData.style}>
 
-
             <div className='profile-navigation-items'>
                 <span>{userData.followersCount || 0}</span>
-                <Link href='/profile/followers'>
+                <Link href={'/profile/followers'}>
                     <a style={navigationData.style} className='profile-navigation-item'>
-                        {props.t([`common:Followers`])}
+                        {t('Followers')}
                     </a>
                 </Link>
             </div>
             <div className='profile-navigation-items'>
                 <span>{userData.followingCount || 0}</span>
-                <Link href='/profile/following'><a style={navigationData.style} className='profile-navigation-item'>{props.t([`common:Following`])} </a></Link>
+                <Link href={'/profile/following'}>
+                    <a style={navigationData.style} className='profile-navigation-item'>
+                        {t('Following')}
+                    </a>
+                </Link>
             </div>
 
 
@@ -83,5 +86,5 @@ const ProfileNavigation = props => {
         </ProfileNavigationStyledDiv>
     );
 };
-export default withTranslation(['common'])(ProfileNavigation);
+export default ProfileNavigation;
 

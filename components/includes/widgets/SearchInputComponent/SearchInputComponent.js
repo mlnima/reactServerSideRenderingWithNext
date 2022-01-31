@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import {useRouter} from "next/router";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 
 const SearchInputComponentStyledForm = styled.form`
@@ -19,7 +19,8 @@ const SearchInputComponentStyledForm = styled.form`
     font-size: 1em;
   }
 `
-const SearchInputComponent = ({t}) => {
+const SearchInputComponent = () => {
+    const {t} = useTranslation('common');
     const router = useRouter()
     const [state, setState] = useState({
         keyword: '',
@@ -46,14 +47,19 @@ const SearchInputComponent = ({t}) => {
 
     return (
         <SearchInputComponentStyledForm className='search-bar' onSubmit={e => onSearchHandler(e)}>
-            <input className='form-control-input' type='text' name='keyword' onChange={e => onChangeHandler(e)} value={state.keyword} placeholder={t([`common:Search...`])}/>
+            <input className='form-control-input'
+                   type='text' name='keyword'
+                   onChange={e => onChangeHandler(e)}
+                   value={state.keyword}
+                   placeholder={t('Search...')}
+            />
             <button className='btn btn-primary' aria-label='Center Align' type='submit'>
-                {t([`common:Search`])}
+                {t('Search')}
             </button>
         </SearchInputComponentStyledForm>
     )
 
 };
 
-export default withTranslation(['common'])(SearchInputComponent);
+export default SearchInputComponent;
 

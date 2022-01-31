@@ -1,36 +1,51 @@
-import React from 'react';
+import React, {useMemo} from 'react';
 import Link from "next/link";
 import {useRouter} from "next/router";
-import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {withTranslation} from 'next-i18next';
+import {useTranslation} from 'next-i18next';
 
-const MenuWidgetItemLink = ({t, linkTargetType, linkType, linkTargetUrl,activeLink, linkName, linkTranslations, showSub, mobileNavigationOnClickHandler, subItems,onOpenSubmenusHandler}) => {
+const MenuWidgetItemLink = (
+    {
+        linkTargetType,
+        linkTargetUrl,
+        linkName,
+        linkTranslations,
+        mobileNavigationOnClickHandler,
+        // showSub,
+        // linkType,
+        // subItems,
+        // onOpenSubmenusHandler
+    }) => {
+    const {t} = useTranslation(['common', 'customTranslation']);
+    const {locale} = useRouter()
 
-    const router = useRouter()
+    const linkNameWithTranslate = useMemo(() => {
+        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
+            linkName :
+            t([t(linkName, {ns: 'common'}), t(linkName, {ns: 'customTranslation'})])
+    }, [])
 
     return (
         <React.Fragment>
             {linkTargetType === 'internal' ?
-                <Link href={linkTargetUrl}  scroll={false}>
+                <Link href={linkTargetUrl}>
                     <a className={'menu-widget-item-link'}
-                       rel='next'
-                       onClick={()=>linkTargetUrl.includes('#') ? null : mobileNavigationOnClickHandler(linkTargetUrl)}
-                       title={linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}
+                       onClick={() => linkTargetUrl.includes('#') ? null : mobileNavigationOnClickHandler(linkTargetUrl)}
+                       title={linkTranslations?.[locale]?.name || linkName}
                     >
-                        {linkTranslations?.[router.locale]?.name || t([`common:${linkName}`, t(`customTranslation:${linkName}`)])}
-
+                        {linkTranslations?.[locale]?.name || linkNameWithTranslate}
                     </a>
-                </Link> :
-                <a className='menu-widget-item-link' href={linkTargetUrl}>{linkName}</a>
+                </Link>
+                :
+                <a className='menu-widget-item-link'
+                   href={linkTargetUrl}
+                   title={linkTranslations?.[locale]?.name || linkNameWithTranslate}
+                >
+                    {linkTranslations?.[locale]?.name || linkNameWithTranslate}
+                </a>
             }
-            {linkType === 'parent' && subItems?.length ?
-                <button className='open-submenus' onClick={onOpenSubmenusHandler}>
-                    <FontAwesomeIcon icon={showSub ? faSortUp : faSortDown} className='navigation-dropdown-icon' style={{color: 'white', width: '20px', height: '20px'}}/>
-                </button>
-                : null}
         </React.Fragment>
     );
 };
 
-export default withTranslation(['customTranslation', 'common'])(MenuWidgetItemLink);
+export default MenuWidgetItemLink;
+

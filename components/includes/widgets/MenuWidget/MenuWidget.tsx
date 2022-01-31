@@ -40,8 +40,8 @@ const MenuWidgetStyledDiv = styled.div`
     margin: 0;
     transition: all 0.5s ease 0s;
     position: fixed;
-    ${(props:{open:boolean}) => props?.open ? `animation: navigationMobileSlide .3s linear alternate;` : `animation: none;`};
-    display: ${(props:{open:boolean}) => props.open ? 'flex' : 'none'};
+    ${(props: { open: boolean }) => props?.open ? `animation: navigationMobileSlide .3s linear alternate;` : `animation: none;`};
+    display: ${(props: { open: boolean }) => props.open ? 'flex' : 'none'};
     overflow-y: auto;
 
     .navigation-close-button {
@@ -93,16 +93,15 @@ const MenuWidgetStyledDiv = styled.div`
 
   }
 `
-interface MenuWidgetPropTypes{
-    menuItems:[]
+
+interface MenuWidgetPropTypes {
+    menuItems: []
 }
 
-const MenuWidget:FC<MenuWidgetPropTypes> = ({menuItems}) => {
+const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
 
     const dispatch = useDispatch()
     const asPath = useRouter()?.asPath
-    const query = useRouter()?.query
-    const locale = useRouter()?.locale
     const [open, setOpen] = useState(false);
 
     useEffect(() => {
@@ -114,24 +113,22 @@ const MenuWidget:FC<MenuWidgetPropTypes> = ({menuItems}) => {
     const mobileNavigationOnClickHandler = (nextPath) => {
         dispatch(checkRouteAndSetLoading(asPath, nextPath))
     }
-    const renderMenuItemsData = useMemo(() => menuItems.sort((a:{itemIndex:number}, b:{itemIndex:number}) => a.itemIndex > b.itemIndex ? 1 : -1) || [], [])
-    const renderMenuParentsItems = useMemo(() => renderMenuItemsData.filter(i => !i.parent), [])
 
-    const renderMenuItems = renderMenuParentsItems.map((menuItem, index) => {
-        const linkAsForMenuItems = (locale || query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? menuItem.as :
-            (!locale && !query.locale) ? menuItem.as :
-                `/${locale || query.locale}${menuItem.as}`;
+    const renderMenuItemsData = useMemo(() => {
+        return menuItems.sort((a: { itemIndex: number }, b: { itemIndex: number }) => a.itemIndex > b.itemIndex ? 1 : -1) || []
+    }, [])
+
+    const parentItems = useMemo(() => renderMenuItemsData.filter(i => !i.parent), [])
+
+    const renderMenuItems = parentItems.map((menuItem, index) => {
         return (
-            <MenuWidgetItem
-                menuItem={menuItem}
-                linkAsForMenuItems={linkAsForMenuItems}
-                mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
-
-                key={index}
+            <MenuWidgetItem menuItem={menuItem}
+                            linkAsForMenuItems={menuItem.target}
+                            mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+                            key={index}
             />
         )
     })
-
 
     return (
         <MenuWidgetStyledDiv className='menu-widget' open={open}>
@@ -139,7 +136,7 @@ const MenuWidget:FC<MenuWidgetPropTypes> = ({menuItems}) => {
                 className='navigation-mobile-button-open btn btn-transparent-light'
                 aria-label="Center Align">
             </ul>
-            <ul className='menu-widget-items' >
+            <ul className='menu-widget-items'>
                 <li onClick={() => open ? setOpen(false) : setOpen(true)}
                     className='navigation-close-button btn btn-transparent-light'>
                     <span className='navigation-mobile-button-logo'/>

@@ -32,21 +32,30 @@ let ActorsRendererStyledDiv = styled.div`
 
 const ActorsRenderer = ({metaData, postElementSize}) => {
 
-    const actorsMetas = metaData ? metaData : useSelector(store => store?.posts.actorsMetas)
-    const elementSize = postElementSize ? postElementSize : useSelector(store => store?.settings?.design?.postElementSize);
+    const actorsRendererData = useSelector(store => {
+        return{
+            actorsMetas: metaData ? metaData : store?.posts.actorsMetas,
+            elementSize: postElementSize ? postElementSize:store?.settings?.design?.postElementSize
+        }
+    })
 
     const dispatch = useDispatch()
 
-    const cardWidth = elementSize === 'list' ? 116.6 :
-        elementSize === 'smaller' ? 209.8 :
-            elementSize === 'small' ? 255 :
-                elementSize === 'medium' ? 320 : 255
+    const cardWidth = actorsRendererData.elementSize === 'list' ? 116.6 :
+        actorsRendererData.elementSize === 'smaller' ? 209.8 :
+            actorsRendererData.elementSize === 'small' ? 255 :
+                actorsRendererData.elementSize === 'medium' ? 320 : 255
 
     return (
         <ActorsRendererStyledDiv className='actors-content' cardWidth={cardWidth}>
             {
-                actorsMetas.map((actor, index) => {
-                    return <ActorCard onActivateLoadingHandler={() => dispatch(setLoading(true))} key={index} cardWidth={cardWidth} actor={actor} postElementSize={elementSize}/>
+                actorsRendererData.actorsMetas.map((actor, index) => {
+                    return <ActorCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                      key={index}
+                                      cardWidth={cardWidth}
+                                      actor={actor}
+                                      postElementSize={actorsRendererData.elementSize}
+                    />
                 })
             }
         </ActorsRendererStyledDiv>

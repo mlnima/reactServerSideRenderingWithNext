@@ -1,5 +1,5 @@
 import Authentication from "../../widgets/Authentication/Authentication";
-import {withTranslation} from "next-i18next";
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 
 const ChatRoomHeaderStyledHeader = styled.header`
@@ -24,16 +24,17 @@ const ChatRoomHeaderStyledHeader = styled.header`
   }
 `
 
-const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler,t}) => {
+const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler}) => {
+    const {t} = useTranslation('common');
     return (
         <ChatRoomHeaderStyledHeader className='chatroom-header'>
             <div className='chatroom-header-content'>
                 <Authentication/>
                 <button className='chatroom-header-open-online-users-list-button' onClick={onOnlineUserListVisibilityChangeHandler}>
-                    {t(`common:Users`)}
+                    {t(`Users`)}
                 </button>
             </div>
         </ChatRoomHeaderStyledHeader>
     );
 };
-export default withTranslation(['common'])(ChatRoomHeader);
+export default ChatRoomHeader;

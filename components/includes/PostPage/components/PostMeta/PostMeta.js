@@ -1,6 +1,6 @@
 import Link from "next/link";
-import _ from "lodash";
-import {withTranslation} from "next-i18next";
+import {uniqueId} from "lodash";
+import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 
 const PostMetaStyledDiv = styled.div`
@@ -38,7 +38,8 @@ const PostMetaStyledDiv = styled.div`
 `
 
 
-const PostMeta = ({t, data, type}) => {
+const PostMeta = ({ data, type}) => {
+    const {t} = useTranslation(['common', 'customTranslation']);
     const filterMeta = data.length ? data.filter(m => m.name.length > 1) : [];
     const renderData = filterMeta.map(item => {
         const typePath = item.type === 'tags' ? 'tag' :
@@ -46,7 +47,7 @@ const PostMeta = ({t, data, type}) => {
                 item.type === 'actors' ? 'actor' : 'category'
 
         return (
-            <div key={_.uniqueId(`${item.type}_`)} className='post-meta-item'>
+            <div key={uniqueId(`${item.type}_`)} className='post-meta-item'>
                 <Link href={`/${typePath}/${item._id}`}>
                     <a className={type + ' post-meta-item-link'} title={item.name}>{item.name}</a>
                 </Link>
@@ -57,7 +58,7 @@ const PostMeta = ({t, data, type}) => {
     if (data.length >= 1) {
         return (
             <PostMetaStyledDiv className={type + ' post-meta'}>
-                <span className='meta-type'> {t([`common:${type.charAt(0).toUpperCase() + type.substring(1)}`, t(`customTranslation:${type.charAt(0).toUpperCase() + type.substring(1)}`)])}:</span>
+                <span className='meta-type'> {t(`${type.charAt(0).toUpperCase() + type.substring(1)}`)}:</span>
                 <div className="content">
                     {renderData}
                 </div>
@@ -67,4 +68,4 @@ const PostMeta = ({t, data, type}) => {
 
 };
 
-export default withTranslation(['common', 'customTranslation'])(PostMeta);
+export default PostMeta;

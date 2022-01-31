@@ -51,7 +51,7 @@ const TagCardMedia:FC<TagCardMediaPropTypes> = (props:TagCardMediaPropTypes) => 
     }else {
         return (
             <CardImageRenderer imageUrl={props.imageUrl}
-                               alt={props.mediaAlt}
+                               mediaAlt={props.mediaAlt}
                                cardWidth={props.cardWidth}
                                cardHeight={props.cardWidth / 1.777}
                                errorHandler={errorHandler}

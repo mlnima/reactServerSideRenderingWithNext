@@ -7,13 +7,15 @@ const CardImageNext = dynamic(() => import('../CardImageNext/CardImageNext'));
 
 interface CardImageNextPropTypes {
     imageUrl: string,
-    alt:string,
+    mediaAlt:string,
     cardWidth: number,
     cardHeight: number,
     errorHandler?:any,
+    objectFitValue?:string,
+    strictImageSize?:boolean
 }
 
-const CardImageRenderer: FC<CardImageNextPropTypes> = ({imageUrl,alt, cardWidth, cardHeight,errorHandler}) => {
+const CardImageRenderer: FC<CardImageNextPropTypes> = ({imageUrl,mediaAlt, cardWidth, cardHeight,errorHandler,strictImageSize,objectFitValue}) => {
     const imageUrlSource = useMemo(() => {
         return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
     }, [imageUrl])
@@ -22,14 +24,12 @@ const CardImageRenderer: FC<CardImageNextPropTypes> = ({imageUrl,alt, cardWidth,
 
     if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  ){
         return (
-            <CardImageNext imageUrl={imageUrlSource} alt={alt} width={cardWidth} height={cardHeight} {...CardImageProps}/>
+            <CardImageNext imageUrl={imageUrlSource} alt={mediaAlt} cardWidth={cardWidth} cardHeight={cardHeight} objectFitValue={objectFitValue} strictImageSize={strictImageSize} {...CardImageProps}/>
         )
     }else {
         return (
-            <CardImage imageUrl={imageUrlSource} alt={alt} width={cardWidth} height={cardHeight} {...CardImageProps}/>
+            <CardImage imageUrl={imageUrlSource} alt={mediaAlt} cardWidth={cardWidth} cardHeight={cardHeight} objectFitValue={objectFitValue} strictImageSize={strictImageSize} {...CardImageProps}/>
         )
     }
-
-
 };
 export default CardImageRenderer

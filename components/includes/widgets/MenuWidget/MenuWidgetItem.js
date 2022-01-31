@@ -2,6 +2,9 @@ import React, {useState} from 'react';
 import MenuWidgetItemLink from "./MenuWidgetItemLink";
 import styled from "styled-components";
 import {useRouter} from "next/router";
+import dynamic from "next/dynamic";
+const MenuWidgetSubItem = dynamic(() => import('./MenuWidgetSubItem'));
+
 
 // const MenuWidgetSubItemStyledLi = styled.li`
 //
@@ -25,10 +28,10 @@ const MenuWidgetStyledLi = styled.li`
   list-style-type: none;
   width: 90%;
   font-size: 12px;
-  
+
   .menu-widget-item-link {
     color: var(--navigation-text-color, #ccc);
-    background: linear-gradient( 180deg,rgba(41,41,41,.5) .12%,rgba(30,30,30,.5) 100%);
+    background: linear-gradient(180deg, rgba(41, 41, 41, .5) .12%, rgba(30, 30, 30, .5) 100%);
     text-decoration: none;
     border-radius: 5px;
     display: flex;
@@ -36,18 +39,29 @@ const MenuWidgetStyledLi = styled.li`
     align-items: center;
     width: 100%;
     height: 56px;
-    &:active{
+
+    &:active {
       filter: invert(70%);
     }
   }
 
-  .open-submenus {
+  .open-sub-menus {
     background-color: transparent;
     border: none;
     outline: none;
     display: flex;
     justify-content: flex-end;
     align-items: center;
+
+    .open-sub-menus-btn {
+      margin: 0;
+      padding: 0;
+      width: 14px;
+      height: 14px;
+      background-color: var(--navigation-text-color, #ccc);
+      mask: url('/public/asset/images/icons/sort-down-solid.svg') no-repeat center;
+      -webkit-mask: url('/public/asset/images/icons/sort-down-solid.svg') no-repeat center;
+    }
   }
 
   .navigation-dropdown-icon {
@@ -57,17 +71,19 @@ const MenuWidgetStyledLi = styled.li`
   }
 
   .dropdown-content {
+
     width: 100%;
     max-width: 200px;
     position: absolute;
     top: 40px;
-    display: flex;
+    display: ${props => props?.showSub ? 'flex' : 'none'};
     flex-direction: column;
+
   }
 
   @media only screen and (min-width: 768px) {
     font-size: 1rem;
-    width: ${props => !props?.menuItem.parent ? (props?.menuItem.subItems || []).length  ? 'auto' : 'auto' : '50px '};
+    width: ${props => !props?.menuItem.parent ? (props?.menuItem.subItems || []).length ? 'auto' : 'auto' : '50px '};
     background: initial;
     height: 100%;
     padding: 0 12px ;
@@ -76,9 +92,9 @@ const MenuWidgetStyledLi = styled.li`
     align-items: center;
     .menu-widget-item-link {
       background: initial;
-     
-      padding: 0 ;
-      margin-left:  0;
+
+      padding: 0;
+      margin-left: 0;
       width: 100%;
       height: 100%;
     }
@@ -88,23 +104,6 @@ const MenuWidgetStyledLi = styled.li`
 const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHandler}) => {
     const router = useRouter()
     const [showSub, setShowSub] = useState(false)
-    // const renderSubMenus = (menuItem.subItems || []).map((subItem, index) => {
-    //
-    //     return (
-    //         <MenuWidgetSubItemStyledLi showSub={showSub} className='menu-widget-sub-item' key={index}>
-    //             <MenuWidgetItemLink
-    //                 linkTargetType={subItem?.type}
-    //                 linkType='sub'
-    //                 linkTargetUrl={subItem?.target}
-    //                 linkName={subItem?.name}
-    //                 linkTranslations={subItem?.translations}
-    //                 showSub={showSub}
-    //                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
-    //             />
-    //         </MenuWidgetSubItemStyledLi>
-    //     )
-    // })
-
 
     const onOpenSubmenusHandler = () => {
         showSub ? setShowSub(false) : setShowSub(true)
@@ -113,13 +112,13 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
     return (
 
         <MenuWidgetStyledLi menuItem={menuItem}
-                            className={router.asPath === menuItem.target? 'menu-widget-item active-link' : 'menu-widget-item' }
-                            // onMouseEnter={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
-                            // onMouseLeave={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
-                            activeLink={menuItem?.target ? router.asPath.includes(menuItem?.target) :false}
+                            showSub={showSub}
+                            className={router.asPath === menuItem.target ? 'menu-widget-item active-link' : 'menu-widget-item'}
+                            onMouseEnter={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
+                            onMouseLeave={menuItem.subItems?.length ? onOpenSubmenusHandler : null}
+                            activeLink={menuItem?.target ? router.asPath.includes(menuItem?.target) : false}
         >
-            <MenuWidgetItemLink
-                                linkTargetType={menuItem?.type}
+            <MenuWidgetItemLink linkTargetType={menuItem?.type}
                                 linkType={'parent'}
                                 linkTargetUrl={menuItem?.target}
                                 linkAs={linkAsForMenuItems}
@@ -127,26 +126,47 @@ const MenuWidgetItem = ({menuItem, linkAsForMenuItems, mobileNavigationOnClickHa
                                 linkTranslations={menuItem?.translations}
                                 showSub={showSub}
                                 mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
-
-
             />
+
             {menuItem?.subItems?.length ?
-                <span className='open-submenus' aria-label='Center Align' onClick={onOpenSubmenusHandler}>
-                    {/*<FontAwesomeIcon icon={showSub ? faSortUp : faSortDown} className='navigation-dropdown-icon' style={{color: 'white', width: '20px', height: '20px'}}/>*/}
+                <span className={'open-sub-menus'}
+                      aria-label={'Center Align'}
+                      onClick={onOpenSubmenusHandler}
+                >
+                     <button className={'open-sub-menus-btn'} aria-label={'Center Align'}/>
                 </span>
                 : null
             }
 
-            {/*{showSub ?*/}
-            {/*    <ul className='dropdown-content'>*/}
-            {/*        {renderSubMenus}*/}
-            {/*    </ul>*/}
-            {/*    : null*/}
-            {/*}*/}
+            {menuItem?.subItems?.length ?
+                <ul className={'dropdown-content'}>
+                    {(menuItem.subItems || []).map((subItem, index) => {
+                        return (
+                            <MenuWidgetSubItem showSub={showSub}
+                                               name={subItem?.name}
+                                               key={index}
+                                               type={'sub'}
+                                               target={subItem?.target}
+                                               translations={subItem?.translations}
+                                               mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+                            />
+                        )
+                    })}
+                </ul>
+                : null
+            }
 
         </MenuWidgetStyledLi>
     );
 };
 export default MenuWidgetItem;
 
-
+// <MenuWidgetItemLink
+//     linkTargetType={subItem?.type}
+//     linkType='sub'
+//     linkTargetUrl={subItem?.target}
+//     linkName={subItem?.name}
+//     linkTranslations={subItem?.translations}
+//     showSub={showSub}
+//     mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+// />

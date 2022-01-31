@@ -4,7 +4,6 @@ import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
 import _ from "lodash";
 import CardMetaRenderer from "../asset/CardMetaData/CardMetaRenderer";
 import styled from "styled-components";
-import {withTranslation} from "next-i18next";
 import CardTitle from "../asset/CardTitle/CardTitle";
 import dynamic from "next/dynamic";
 const CardViews = dynamic(() => import('../asset/CardViews/CardViews'))
@@ -91,7 +90,6 @@ let PromotionCardStyledDiv = styled.div`
 `
 
 const PromotionTypeCard = props => {
-
     const onExternalLinkClickViewHandler = () => {
         likeDislikeView(props.post._id, 'views').finally()
     }
@@ -106,7 +104,7 @@ const PromotionTypeCard = props => {
         <PromotionCardStyledDiv className='promotion-card' cardWidth={props.cardWidth} postElementSize={props.postElementSize}>
 
             <a href={props.post.redirectLink} className='promotion-card-link-external' onClick={onExternalLinkClickViewHandler} target='_blank' rel="nofollow noopener external">
-                <PromotionCardMedia noImageUrl={props.noImageUrl} postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
+                <PromotionCardMedia  postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
             </a>
             <div className='promotion-card-under-media'>
                 <Link href={`/post/${props.post.postType}/${props.post._id}`} scroll={false}>
@@ -124,4 +122,4 @@ const PromotionTypeCard = props => {
         </PromotionCardStyledDiv>
     );
 };
-export default withTranslation(['common'])(PromotionTypeCard);
+export default PromotionTypeCard;
