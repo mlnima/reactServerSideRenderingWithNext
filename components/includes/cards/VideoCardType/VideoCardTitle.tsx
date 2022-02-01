@@ -15,13 +15,11 @@ const CardTitleStyledDiv = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 12px;
-  -webkit-transition: all .3s ease-in-out;
-
   
   .video-card-title-link {
     color: var(--post-element-text-color, #ccc);
     text-decoration: none;
-    transition: .3s;
+ 
     &:hover {
       color: var(--main-active-color,#fff);
     }

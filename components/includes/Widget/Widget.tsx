@@ -7,7 +7,6 @@ const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
 
-
 interface WidgetComponentPropTypes {
     extraId: any;
     data:WidgetDataPropTypes,

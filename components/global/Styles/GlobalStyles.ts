@@ -201,8 +201,6 @@ const GlobalStyles = createGlobalStyle`
     border-radius: .25rem;
   }
   
-  
-
   @media only screen and (min-width: 768px) {
     body {
       font-size: 14px;
@@ -274,7 +272,7 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  ${(props:GlobalStylesPropTypes ) => props.globalStyleData}
+  ${(props:GlobalStylesPropTypes ) => props.globalStyleData ? props.globalStyleData : '' }
 `
 
 export default GlobalStyles;

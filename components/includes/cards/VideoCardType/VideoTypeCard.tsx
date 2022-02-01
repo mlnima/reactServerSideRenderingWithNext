@@ -11,6 +11,7 @@ const VideoCardMedia = dynamic(() => import('./VideoCardMedia/VideoCardMedia'));
 let VideoCardStyledArticle = styled.article`
   width: calc(48vw - 5.6px);
   max-width: calc(48vw - 5.6px);
+  background-color: var(--post-element-background-color, #131314);
   margin: 2.8px;
   font-size: 12px;
   padding-bottom: 5px;
@@ -53,9 +54,16 @@ const VideoTypeCard : FC<VideoTypeCardPropTypes> =
     }) => {
     const postUrl = `/post/${post.postType}/${post._id}`
     return (
-        <VideoCardStyledArticle className={'video-card'} cardWidth={cardWidth} postElementSize={postElementSize}>
+        <VideoCardStyledArticle className={'video-card'}
+                                cardWidth={cardWidth}
+                                postElementSize={postElementSize}
+        >
             <Link href={postUrl} >
-                <a rel={'next'} className={'video-card-media-link'} title={title} onClick={onActivateLoadingHandler}>
+                <a rel={'next'}
+                   className={'video-card-media-link'}
+                   title={title}
+                   onClick={onActivateLoadingHandler}
+                >
                     <VideoCardMedia noImageUrl={noImageUrl}
                                     postElementSize={postElementSize}
                                     post={post}

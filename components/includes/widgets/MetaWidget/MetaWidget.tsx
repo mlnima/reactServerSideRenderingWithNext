@@ -1,5 +1,7 @@
 import styled from "styled-components";
 import MetaWidgetElement from './MetaWidgetElement'
+import {FC, useMemo} from "react";
+import {Meta} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const MetaWidgetStyledDiv = styled.div`
   display: flex;
@@ -14,11 +16,21 @@ const MetaWidgetStyledDiv = styled.div`
   }
 `
 
-const MetaWidget = props => {
-    const renderMeta = (props.metaData || []).map((meta,index) => {
-        const typePath = meta.type === 'tags' ? 'tag' :
-                meta.type === 'categories' ? 'category' :
-                meta.type === 'actors' ? 'actor' : 'category'
+interface MetaWidgetPropType{
+    metaData:Meta[],
+    metaType:string
+}
+
+const MetaWidget: FC<MetaWidgetPropType> = ({metaData,metaType}) => {
+
+    const typePath = useMemo(()=>{
+        return metaType === 'tags' ? 'tag' :
+            metaType === 'categories' ? 'category' :
+                metaType === 'actors' ? 'actor' : 'category'
+    },[])
+
+    const renderMeta = (metaData || []).map((meta,index) => {
+
         return (
             <MetaWidgetElement typePath={typePath} id={meta._id} key={meta._id} name={meta.name}/>
         )

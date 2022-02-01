@@ -1,7 +1,13 @@
 import React, {PureComponent} from "react";
 import Link from 'next/link'
 
-class MetaWidgetElement extends PureComponent {
+interface MetaWidgetElementPropTypes{
+    typePath:string,
+    id:string,
+    name:string,
+}
+
+class MetaWidgetElement extends PureComponent<MetaWidgetElementPropTypes> {
     render() {
         return(
             <Link href={`/${this?.props?.typePath}/${this?.props?.id}`} key={this?.props?.name}>

@@ -3,6 +3,7 @@ import convertVariableNameToName from "../../../../_variables/util/convertVariab
 import WidgetModel from "../../widgetsModel/WidgetModel/WidgetModel";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
+import Draggable from 'react-draggable';
 
 const WidgetGroupByPositionStyledDiv = styled.div`
   background-color: transparent;
@@ -34,13 +35,6 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   }
 `
 
-//     ${props=>props?.filter !=='all'?
-//            `
-//            display:flex;
-//            justify-content:flex-start;
-//            `:
-//             ''
-// }
 const WidgetGroupByPosition = props => {
     const widgets = useSelector(store => store?.widgets.widgets)
     const [widgetInThisPosition, setWidgetInThisPosition] = useState([])
@@ -53,6 +47,7 @@ const WidgetGroupByPosition = props => {
 
     if (props.filter === props.position || props.filter === 'all' ){
         return (
+            <Draggable handle=".widgetAdminPanelItemHeader">
             <WidgetGroupByPositionStyledDiv filter={props.filter} className='widgetAdminPanelItem'>
                 <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(props.position)}</p>
                 {widgetInThisPosition.map((widget) => {
@@ -61,6 +56,7 @@ const WidgetGroupByPosition = props => {
                     )
                 })}
             </WidgetGroupByPositionStyledDiv>
+            </Draggable>
         );
     }else return null
 

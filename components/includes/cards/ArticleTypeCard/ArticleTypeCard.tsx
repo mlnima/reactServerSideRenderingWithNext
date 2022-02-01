@@ -11,12 +11,8 @@ const CardRating = dynamic(() => import('../asset/CardRating/CardRating'))
 
 
 const ArticleCard = styled.div`
-  width: calc(50vw - 5.6px);
-  max-width: calc(50vw - 5.6px);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: space-between;
+  width: calc(48vw - 5.6px);
+  max-width: calc(48vw - 5.6px);
   background-color: var(--post-element-background-color, #131314);
   margin: 2.8px;
   font-size: 12px;
@@ -39,8 +35,7 @@ const ArticleCard = styled.div`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-
-
+      
       .article-card-under-media-info {
         display: flex;
         justify-content: space-between;
@@ -48,8 +43,7 @@ const ArticleCard = styled.div`
         flex-wrap: wrap;
         margin: 0;
         height: 20px;
-
-
+        
         .article-card-info-data {
           display: flex;
           justify-content: center;
@@ -64,7 +58,6 @@ const ArticleCard = styled.div`
             height: 14px;
             margin: 0 2px;
           }
-
         }
       }
     }
@@ -108,7 +101,10 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
         return (
             <ArticleCard className='article-card' cardWidth={cardWidth}>
                 <Link href={`/post/${post.postType}/${post._id}`}>
-                    <a rel='next' onClick={onActivateLoadingHandler} className='article-card-link' title={title}>
+                    <a rel='next' onClick={onActivateLoadingHandler}
+                       className='article-card-link'
+                       title={title}
+                    >
                         <ArticleCardMedia noImageUrl={noImageUrl}
                                           postElementSize={postElementSize}
                                           post={post}
@@ -124,11 +120,23 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                                       tags={post?.tags}
                                       categories={post?.categories}/>
                 <Link href={postUrl}>
-                    <a rel='next' className='article-card-link' title={title} onClick={onActivateLoadingHandler}>
+                    <a rel='next'
+                       className='article-card-link'
+                       title={title}
+                       onClick={onActivateLoadingHandler}
+                    >
                         <div className='article-card-under-media'>
                             <div className='article-card-under-media-info'>
-                                {views ? <CardViews views={views} className={'article-card-views article-card-info-data'}/> : null}
-                                {rating ? <CardRating rating={rating} className={'article-card-rating article-card-info-data'}/> : null}
+                                {views ? <CardViews views={views}
+                                                    className={'article-card-views article-card-info-data'
+                                                    }/>
+                                    : null
+                                }
+                                {rating ? <CardRating rating={rating}
+                                                      className={'article-card-rating article-card-info-data'}
+                                />
+                                    : null
+                                }
                             </div>
                         </div>
                     </a>

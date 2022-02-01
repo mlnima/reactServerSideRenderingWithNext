@@ -31,15 +31,14 @@ let ActorsRendererStyledDiv = styled.div`
 `
 
 const ActorsRenderer = ({metaData, postElementSize}) => {
+    const dispatch = useDispatch()
 
     const actorsRendererData = useSelector(store => {
         return{
             actorsMetas: metaData ? metaData : store?.posts.actorsMetas,
-            elementSize: postElementSize ? postElementSize:store?.settings?.design?.postElementSize
+            elementSize: postElementSize ? postElementSize : store?.settings?.design?.postElementSize
         }
     })
-
-    const dispatch = useDispatch()
 
     const cardWidth = actorsRendererData.elementSize === 'list' ? 116.6 :
         actorsRendererData.elementSize === 'smaller' ? 209.8 :

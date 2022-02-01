@@ -1,7 +1,7 @@
 require('webpack')
 const {parsed: localEnv} = require('dotenv').config();
 const {i18n} = require('./next-i18next.config');
-const withImages = require('next-images')
+// const withImages = require('next-images')
 const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
@@ -119,7 +119,7 @@ module.exports = withPlugins([
     svgLoader,
     process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
     nextImageConfig,
-    withImages,
+    // withImages,
     // reWriteRoutes,
     nextEnv({
         staticPrefix: 'NEXT_PUBLIC_',
