@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import faIR from "date-fns/locale/fa-IR";
 
 interface CardLastUpdatePropTypes {
-    updatedAt: string
+    updatedAt: string | Date
 }
 
 const CardLastUpdate: FC<CardLastUpdatePropTypes> = ({updatedAt}) => {

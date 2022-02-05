@@ -79,7 +79,7 @@ const PostsSlider = (props:PostsSliderPropsTypes) => {
         }
 
         if (post.postType === 'video') {
-            return (<div className={'embla__slide'}>
+            return (<div className={'embla__slide'} key={postProps.post._id}>
                     <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                 </div>
             )

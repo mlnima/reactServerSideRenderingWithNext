@@ -19,9 +19,14 @@ module.exports = async (req, res) => {
                         {[`translations.${req.query.lang}.description`]: new RegExp(req.query.keyword, 'i')},]
                 }
 
-        let sortQuery = !req.query.sort ? {count: -1} : req.query.sort && typeof req.query.sort === 'string' ? req.query.sort : {[req.query.sort]: -1}
+        // let sortQuery = !req.query.sort ? {count: -1} : req.query.sort && typeof req.query.sort === 'string' ? req.query.sort : {[req.query.sort]: -1}
         const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]}).exec()
-        metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]},{},{sort:req.query.sort === 'createdAt' || !req.query.sort ? {} : {[req.query.sort]: -1}}).limit(size).skip(size * (page - 1)).sort(sortQuery).exec().then(async metas => {
+        metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]},{},{sort:req.query.sort === 'createdAt' || !req.query.sort ? {'updatedAt':-1} : {[req.query.sort]: -1}})
+            .limit(size)
+            .skip(size * (page - 1))
+            // .sort(sortQuery)
+            .exec()
+            .then(async metas => {
             res.json({metas,totalCount:metaCount})
         }).catch(err => {
             console.log(err)

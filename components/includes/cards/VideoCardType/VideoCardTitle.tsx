@@ -34,6 +34,10 @@ const CardTitleStyledDiv = styled.div`
   @media only screen and (min-width: 768px) {
     width: ${(props: { cardWidth: number }) => `${props?.cardWidth}px`};
     font-size: 14px;
+    //-webkit-box-orient: initial;
+    //white-space: initial;
+    //text-overflow: initial;
+    //overflow: initial;
     .video-card-title-link{
       height: initial;
       margin: initial;
