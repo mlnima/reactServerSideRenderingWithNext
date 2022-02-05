@@ -21,12 +21,9 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/CategoryCard/CategoryCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/VideoCardType/VideoCardTitle.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/VideoCardType/VideoCardTitle.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardMetaData/CardMetaItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardMetaData/CardMetaItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostsSlider/PostsSlider.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMultipleMeta.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetMultipleMeta.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/Styles/GlobalStyles.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/widgetsArea/SideBarWidgetArea/SideBarWidgetArea.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -997,7 +994,7 @@
       <workItem from="1643805308196" duration="2385000" />
       <workItem from="1643879782798" duration="7680000" />
       <workItem from="1643985170702" duration="3334000" />
-      <workItem from="1644060840496" duration="791000" />
+      <workItem from="1644060840496" duration="3778000" />
     </task>
     <servers />
   </component>
@@ -1191,7 +1188,7 @@
           <option name="timeStamp" value="88" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/widgetsArea/SideBarWidgetArea/SideBarWidgetArea.tsx</url>
+          <url>file://$PROJECT_DIR$/components/widgetsArea/SidebarWidgetArea/SidebarWidgetArea.tsx</url>
           <option name="timeStamp" value="89" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1307,6 +1304,12 @@
           <url>file://$PROJECT_DIR$/components/includes/LoginRegisterPopup/LoginRegisterPopupForms.tsx</url>
           <line>248</line>
           <option name="timeStamp" value="124" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/global/Styles/GlobalStyles.ts</url>
+          <line>162</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="126" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

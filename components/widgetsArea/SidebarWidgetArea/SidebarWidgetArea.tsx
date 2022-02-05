@@ -14,7 +14,7 @@ interface SideBarWidgetAreaProps {
     gridArea:string;
 }
 
-const SideBarWidgetArea = ({className,position,gridArea}:SideBarWidgetAreaProps) => {
+const SidebarWidgetArea = ({className,position,gridArea}:SideBarWidgetAreaProps) => {
     return (
         <StyledSideBar className={className + ' widget-area ' + position}  gridArea={gridArea}>
             <WidgetsRenderer
@@ -24,4 +24,4 @@ const SideBarWidgetArea = ({className,position,gridArea}:SideBarWidgetAreaProps)
     );
 };
 
-export default SideBarWidgetArea;
+export default SidebarWidgetArea;

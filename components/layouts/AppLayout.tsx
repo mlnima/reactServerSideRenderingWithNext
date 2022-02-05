@@ -6,7 +6,7 @@ import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLa
 import {useRouter} from "next/router";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
-const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SideBarWidgetArea/SideBarWidgetArea'));
+const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SidebarWidgetArea/SidebarWidgetArea'));
 const SiteSettingSetter = dynamic(() => import('../includes/SiteSettingsSetter/SiteSettingsSetter'));
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
@@ -46,11 +46,11 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children, pageInfo}) => {
     });
 
     const mainLayoutClassNameForGrid = useMemo(() => {
-        return appLayoutData?.isSidebarLess ? 'without-sidebar' :
-            appLayoutData?.sidebarsData?.sidebarType === 'left' ? 'left-sidebar' :
-                appLayoutData?.sidebarsData?.sidebarType === 'right' ? 'right-sidebar' :
-                    appLayoutData?.sidebarsData?.sidebarType === 'both' ? 'both-sidebar' :
-                        'without-sidebar';
+        return appLayoutData?.isSidebarLess ? 'without-sidebar-layout' :
+               appLayoutData?.sidebarsData?.sidebarType === 'left' ? 'left-sidebar-layout' :
+               appLayoutData?.sidebarsData?.sidebarType === 'right' ? 'right-sidebar-layout' :
+               appLayoutData?.sidebarsData?.sidebarType === 'both' ? 'both-sidebar-layout' :
+               'without-sidebar-layout';
     }, [appLayoutData?.sidebarsData]);
 
     return (

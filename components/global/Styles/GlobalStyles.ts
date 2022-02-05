@@ -46,7 +46,7 @@ const GlobalStyles = createGlobalStyle`
     color: var(--post-element-text-color, #ccc);
   }
   
-  .left-sidebar {
+  .left-sidebar-layout {
     display: grid;
     grid-area: leftSidebar;
     grid-template-columns: 1fr;
@@ -63,7 +63,7 @@ const GlobalStyles = createGlobalStyle`
     grid-area: sidebar;
   }
 
-  .right-sidebar {
+  .right-sidebar-layout {
     display: grid;
     grid-area: rightSidebar;
     grid-template-columns: 1fr;
@@ -76,7 +76,7 @@ const GlobalStyles = createGlobalStyle`
             'footer';
   }
 
-  .both-sidebar {
+  .both-sidebar-layout {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -89,7 +89,7 @@ const GlobalStyles = createGlobalStyle`
             'footer';
   }
 
-  .without-sidebar {
+  .without-sidebar-layout {
     display: grid;
     grid-template-columns: 1fr;
     grid-template-areas:
@@ -205,8 +205,8 @@ const GlobalStyles = createGlobalStyle`
     body {
       font-size: 14px;
     }
-    .left-sidebar {
-      grid-template-columns: ${(props:GlobalStylesPropTypes )=> (props.sideBarWidth || 320)+'px'} 1fr;
+    .left-sidebar-layout {
+      grid-template-columns: ${(props:GlobalStylesPropTypes )=> `${props.sideBarWidth || 320}px`} 1fr;
       grid-template-areas:  'topbar topbar'
                                         'header header' 
                                         'navigation navigation'
@@ -214,8 +214,8 @@ const GlobalStyles = createGlobalStyle`
                                         'footer footer'
     }
 
-    .right-sidebar {
-      grid-template-columns: 1fr 320px;
+    .right-sidebar-layout {
+      grid-template-columns: 1fr ${(props:GlobalStylesPropTypes )=> `${props.sideBarWidth || 320}px`} ;
       grid-template-areas:  'topbar topbar'
                                         'header header'
                                         'navigation navigation'
@@ -223,8 +223,9 @@ const GlobalStyles = createGlobalStyle`
                                         'footer footer'
     }
 
-    .both-sidebar {
-      grid-template-columns: 320px 1fr 320px;
+    .both-sidebar-layout {
+
+      grid-template-columns: ${(props:GlobalStylesPropTypes )=> `${props.sideBarWidth || 320}px`}  1fr ${(props:GlobalStylesPropTypes )=> `${props.sideBarWidth || 320}px`}  ;
       grid-template-areas:  'topbar topbar topbar'
                                         'header header header'
                                         'navigation navigation navigation'
@@ -232,7 +233,7 @@ const GlobalStyles = createGlobalStyle`
                                         'footer footer footer'
     }
 
-    .without-sidebar {
+    .without-sidebar-layout {
       grid-template-columns: 1fr;
     }
     
