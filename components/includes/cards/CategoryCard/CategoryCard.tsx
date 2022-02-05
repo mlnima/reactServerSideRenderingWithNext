@@ -60,7 +60,7 @@ const CategoryCard: FC<CategoryCardPropTypes> = ({cardWidth, category, onActivat
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
             category?.name :
             category?.translations?.[locale]?.name || t(category?.name, {ns: 'customTranslation'})
-    }, [])
+    }, [category?.name])
     return (
         <CategoryCardStyledDiv className={'category-card'}>
             <Link href={`/category/${category?._id}`}>

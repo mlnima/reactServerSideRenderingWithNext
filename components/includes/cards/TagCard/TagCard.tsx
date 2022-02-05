@@ -54,7 +54,7 @@ const TagCard : FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandle
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
             tag?.name :
             tag?.translations?.[locale]?.name || t(tag?.name, {ns: 'customTranslation'})
-    },[])
+    },[tag?.name])
 
     return (
         <TagCardStyledDiv className={'tag-card'}>
