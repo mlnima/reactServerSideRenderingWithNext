@@ -8,20 +8,12 @@ import CategoriesRenderer from "../../components/includes/pagesComponents/catego
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {settingsPropTypes, StoreTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {settingsPropTypes, StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {wrapper} from "../../store/store";
 import {SET_CATEGORIES_METAS} from "../../store/types";
 
-const CategoriesPageStyledDiv = styled.div`
+const CategoriesPageStyledMain = styled.main`
   grid-area: main;
-
-  .categories {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-  }
 `
 const categoriesPage = () => {
 
@@ -30,18 +22,16 @@ const categoriesPage = () => {
     const router = useRouter()
 
     return (
-        <CategoriesPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
-            <WidgetsRenderer
-                position={'categoriesPageTop'}
-            />
+        <CategoriesPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '}>
+            <WidgetsRenderer position={'categoriesPageTop'}/>
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
                 // @ts-ignore
-                size={parseInt(router.query?.size) || 60}
+                size={parseInt(router.query?.size) || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
                 // @ts-ignore
-                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 60))}
+                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE  || 20))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
@@ -52,16 +42,14 @@ const categoriesPage = () => {
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
                 // @ts-ignore
-                size={parseInt(router.query?.size) || 60}
+                size={parseInt(router.query?.size)|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
                 // @ts-ignore
-                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 60))}
+                maxPage={Math.ceil(totalCount / parseInt(router.query?.size|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <WidgetsRenderer
-                position={'categoriesPageBottom'}
-            />
-        </CategoriesPageStyledDiv>
+            <WidgetsRenderer position={'categoriesPageBottom'}/>
+        </CategoriesPageStyledMain>
     );
 };
 
@@ -77,9 +65,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     store.dispatch({
         type: SET_CATEGORIES_METAS,
         payload: {
-            // @ts-ignore
             categoriesMetas: metaData.data?.metas || [],
-            // @ts-ignore
             totalCount: metaData.data?.totalCount || 0,
         }
     })

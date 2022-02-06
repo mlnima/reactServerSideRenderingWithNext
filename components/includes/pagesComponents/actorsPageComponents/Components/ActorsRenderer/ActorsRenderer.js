@@ -1,5 +1,5 @@
 import React from 'react';
-import ActorCard from "../../../../cards/ActorCard/ActorCard";
+import ActorCard from "../../../../cards/desktop/ActorCard/ActorCard";
 import styled from "styled-components";
 import {setLoading} from "../../../../../../store/actions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";

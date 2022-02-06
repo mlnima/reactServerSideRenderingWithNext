@@ -6,15 +6,16 @@ import _shortNumber from '../../../_variables/clientVariables/_shortNumber'
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
-import {settingsPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
-const VideoCardTypeList = dynamic(() => import('../cards/VideoCardTypeList/VideoCardTypeList'))
-const PromotionCardListSmall = dynamic(() => import('../cards/PromotionTypeCard/PromotionCardListSmall'))
-const VideoTypeCard = dynamic(() => import('../cards/VideoCardType/VideoTypeCard'))
-const PromotionTypeCard = dynamic(() => import('../cards/PromotionTypeCard/PromotionTypeCard'))
-const ArticleTypeCard = dynamic(() => import('../cards/ArticleTypeCard/ArticleTypeCard'))
-const DefaultTypeCard = dynamic(() => import('../cards/DefaultTypeCard/DefaultTypeCard'))
-const LearnTypeCard = dynamic(() => import('../cards/LearnTypeCard/LearnTypeCard'))
+const VideoCardTypeList = dynamic(() => import('../cards/desktop/VideoCardTypeList/VideoCardTypeList'))
+const PromotionCardListSmall = dynamic(() => import('../cards/desktop/PromotionTypeCard/PromotionCardListSmall'))
+const VideoTypeCard = dynamic(() => import('../cards/desktop/VideoCard/VideoCard'))
+const MobileVideoCard = dynamic(() => import('../cards/mobile/MobileVideoCard/MobileVideoCard'))
+const PromotionTypeCard = dynamic(() => import('../cards/desktop/PromotionTypeCard/PromotionTypeCard'))
+const ArticleTypeCard = dynamic(() => import('../cards/desktop/ArticleTypeCard/ArticleTypeCard'))
+const DefaultTypeCard = dynamic(() => import('../cards/desktop/DefaultTypeCard/DefaultTypeCard'))
+const LearnTypeCard = dynamic(() => import('../cards/desktop/LearnTypeCard/LearnTypeCard'))
 
 const PostsContentStyledDiv = styled.div`
   display: flex;
@@ -29,7 +30,6 @@ const PostsContentStyledDiv = styled.div`
   @media only screen and (min-width: 768px) {
     max-width: ${(props: { postElementSize: string }) => props.postElementSize === 'listSmall' ? '320px' : 'initial'};
   }
-
 `
 
 interface PostsComponentTypes {
@@ -43,7 +43,10 @@ interface PostsComponentTypes {
 
 
 const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: PostsComponentTypes) => {
-    const elementSize = postElementSize ? postElementSize : useSelector((store: settingsPropTypes) => store.settings?.design?.postElementSize);
+    const elementSize = postElementSize ? postElementSize : useSelector((store: StoreTypes) => store.settings?.design?.postElementSize);
+    const postsPerRawForMobile = useSelector((store: StoreTypes) => store.settings?.identity?.postsPerRawForMobile || 2);
+    const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
+
     const dispatch = useDispatch()
     const router = useRouter()
     const locale = useMemo(() => (router.locale || router.query.locale) === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : router.locale || router.query.locale || '', [])
@@ -86,7 +89,13 @@ const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: Pos
                         // @ts-ignore
                         return <VideoCardTypeList isSidebar={isSidebar} onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                     } else {
-                        return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                        if (isMobile){
+                            // @ts-ignore
+                            return <MobileVideoCard onActivateLoadingHandler={() => dispatch(setLoading(true))} postsPerRawForMobile={postsPerRawForMobile} {...postProps} key={index}/>
+                        }else {
+                            return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                        }
+
                     }
                 } else if (post.postType === 'promotion') {
                     if (elementSize === 'listSmall') {

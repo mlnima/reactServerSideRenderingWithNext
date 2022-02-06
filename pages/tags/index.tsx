@@ -12,16 +12,8 @@ import { StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {wrapper} from "../../store/store";
 import {SET_TAGS_METAS} from "../../store/types";
 
-const TagsPageStyledDiv = styled.div`
+const TagsPageStyledMain = styled.main`
   grid-area: main;
-
-  .tags {
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-    justify-content: center;
-    max-width: 100%;
-  }
 `
 const tagsPage = () => {
     const isWithSidebar = useSelector((store: StoreTypes) => store.settings?.identity?.metaPageSidebar);
@@ -29,19 +21,16 @@ const tagsPage = () => {
     const router = useRouter()
 
     return (
-        <TagsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
-            <WidgetsRenderer
-                position={'tagsPageTop'}
-
-            />
+        <TagsPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '}>
+            <WidgetsRenderer position={'tagsPageTop'}/>
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
                 // @ts-ignore
-                size={parseInt(router.query?.size) || 60}
+                size={parseInt(router.query?.size) || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
                 // @ts-ignore
-                maxPage={Math.ceil(totalCount/ parseInt(router.query?.size || 60))}
+                maxPage={Math.ceil(totalCount/ parseInt(router.query?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
@@ -52,16 +41,14 @@ const tagsPage = () => {
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
                 // @ts-ignore
-                size={parseInt(router.query?.size) || 60}
+                size={parseInt(router.query?.size) || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
                 // @ts-ignore
-                maxPage={Math.ceil(totalCount/ parseInt(router.query?.size || 60))}
+                maxPage={Math.ceil(totalCount/ parseInt(router.query?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <WidgetsRenderer
-                position={'tagsPageBottom'}
-            />
-        </TagsPageStyledDiv>
+            <WidgetsRenderer position={'tagsPageBottom'}/>
+        </TagsPageStyledMain>
     );
 };
 
@@ -76,9 +63,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     store.dispatch({
         type: SET_TAGS_METAS,
         payload: {
-            // @ts-ignore
             tagsMetas: metaData.data?.metas || [],
-            // @ts-ignore
             totalCount: metaData.data?.totalCount || 0,
         }
     })

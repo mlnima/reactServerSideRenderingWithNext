@@ -27,6 +27,7 @@ export interface DesignSettings {
 }
 
 export interface IdentitySettings {
+    postsPerRawForMobile: number;
     allowUserToPost: boolean;
     topbar?: string,
     header?: string,

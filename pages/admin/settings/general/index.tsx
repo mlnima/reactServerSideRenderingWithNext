@@ -276,7 +276,7 @@ const settings = () => {
                     {languagesOptions}
                 </select>
                 <div className="siteIdentity site-settings-form-section-parent">
-                    <div className="site-settings-form-section">
+                    <div className={'site-settings-form-section'}>
                         <p>Site Title:</p>
                         <input className={'form-control-input'} type='text' name='title' value={
                             // @ts-ignore
@@ -285,7 +285,7 @@ const settings = () => {
                                 state.translations?.[editingSettings.activeEditingLanguage]?.title || ""
                         } onChange={e => onChangeHandlerWithTranslate(e)}/>
                     </div>
-                    <div className="site-settings-form-section">
+                    <div className={'site-settings-form-section'}>
                         <p>Description:</p>
                         <textarea className={'form-control-input'} name='description' value={
                             // @ts-ignore
@@ -497,7 +497,7 @@ const settings = () => {
                     </div>
                 </div>
 
-                <div className="site-settings-form-section">
+                <div className={'site-settings-form-section'}>
                     <p>Theme Color:</p>
                     <input type='text'
                            name='themeColor'
@@ -506,20 +506,29 @@ const settings = () => {
                            value={state.themeColor}
                            onChange={e => onChangeHandler(e)}/>
                 </div>
-                <div className="site-settings-form-section">
+                <div className={'site-settings-form-section'}>
                     <p>Posts Per Page:</p>
-                    <input type='number'
-                           name='postsCountPerPage'
+                    <input type={'number'}
+                           name={'postsCountPerPage'}
                            className={'form-control-input'}
                         // @ts-ignore
                            value={state.postsCountPerPage}
                            onChange={e => onChangeHandler(e)}/>
                 </div>
+                <div className={'site-settings-form-section'}>
+                    <p>Posts Per Row For Mobile</p>
+                    <input type={'number'}
+                           name={'postsPerRawForMobile'}
+                           className={'form-control-input'}
+                        // @ts-ignore
+                           value={state.postsPerRawForMobile}
+                           onChange={e => onChangeHandler(e)}/>
+                </div>
                 <h2>Widget Areas</h2>
-                <div className="sidebarsStatus site-settings-form-section-parent">
+                <div className={'sidebarsStatus site-settings-form-section-parent'}>
                     {widgetAreas.map((widgetArea,index)=>{
                         return(
-                            <div className="site-settings-form-section" key={index}>
+                            <div className={'site-settings-form-section'} key={index}>
                                 <p>{convertVariableNameToName(widgetArea)}:</p>
                                 <select className={'custom-select'} name={widgetArea} value={state[widgetArea]} onChange={e => onChangeHandler(e)}>
                                     <option>select</option>
@@ -531,10 +540,10 @@ const settings = () => {
                     })}
                 </div>
                 <h2>Sidebars Status</h2>
-                <div className="sidebarsStatus site-settings-form-section-parent">
+                <div className={'sidebarsStatus site-settings-form-section-parent'}>
                     {sidebars.map((sidebar,index) => {
                         return (
-                            <div className="site-settings-form-section" key={index}>
+                            <div className={'site-settings-form-section'} key={index}>
                                 <p>{convertVariableNameToName(sidebar)}:</p>
                                 {/*// @ts-ignore*/}
                                 <select className={'custom-select'} name={sidebar} value={state[sidebar]} onChange={e => onChangeHandler(e)}>

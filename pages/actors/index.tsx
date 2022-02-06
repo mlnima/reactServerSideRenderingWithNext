@@ -39,9 +39,9 @@ const actorsPage = () => {
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
                 // @ts-ignore
-                size={parseInt(router.query?.size) || 60}
+                size={parseInt(router.query?.size)|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
                 // @ts-ignore
-                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 60))}
+                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
@@ -54,9 +54,9 @@ const actorsPage = () => {
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
                 // @ts-ignore
-                size={parseInt(router.query?.size) || 60}
+                size={parseInt(router.query?.size)|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
                 // @ts-ignore
-                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 60))}
+                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 20))}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
