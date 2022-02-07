@@ -1,8 +1,11 @@
-
 require('../_variables/connectToDatabase')
 const {parentPort, workerData} = require("worker_threads");
 const metaSchema = require('../models/metaSchema')
 const postSchema = require("../models/postSchema");
+
+const randomNumberGenerator = (min, max) => {
+    return Math.ceil(Math.random() * (max - min) + min);
+}
 
 const setMetaThumbnailsAndCount = async (workerData) => {
     try {
@@ -12,19 +15,30 @@ const setMetaThumbnailsAndCount = async (workerData) => {
             for await (let meta of metas) {
                 const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).exec()
                 if (metaCount > 0) {
-                    const random = Math.floor(Math.random() * (metaCount || 0))
-                    const randomPostWithCurrentMeta = await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).skip(random).exec()
-                    const randomImageData = meta?.imageUrlLock ? {} : {imageUrl: randomPostWithCurrentMeta?.mainThumbnail || ''}
+                    const skipDocuments = randomNumberGenerator(1,10)
+                    const postWithCurrentMeta = meta?.imageUrl ?  await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).sort({ updatedAt: -1 }).skip(skipDocuments).exec() :
+                                                await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}]}).sort({ updatedAt: -1 }).exec()
 
+                    const randomImageData = meta?.imageUrlLock ? {} :
+                                            postWithCurrentMeta?.mainThumbnail ? {imageUrl: postWithCurrentMeta?.mainThumbnail} :
+                                            {}
                     const updateData = {
                         count: metaCount,
                         name: meta?.name.toLowerCase(),
                         status: meta?.status ? meta.status : 'published',
                         ...randomImageData
                     }
-                    await metaSchema.findByIdAndUpdate(meta?._id, {$set: {...updateData}}, {new: true}).exec()
+                    await metaSchema.findByIdAndUpdate(
+                        meta?._id,
+                        {$set: {...updateData}},
+                        {timestamps: false}
+                    ).exec()
                 } else {
-                    await metaSchema.findByIdAndUpdate(meta?._id, {$set: {status: 'draft'}}).exec()
+                    await metaSchema.findByIdAndUpdate(
+                        meta?._id,
+                        {$set: {status: 'draft'}},
+                        {timestamps: false}
+                    ).exec()
                 }
             }
         })
