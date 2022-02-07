@@ -23,6 +23,7 @@
     "@fortawesome/free-regular-svg-icons": "^5.15.4",
     "@fortawesome/free-solid-svg-icons": "^5.15.4",
     "@fortawesome/react-fontawesome": "^0.1.16",
+    "@loadable/component": "^5.15.2",
     "@material-ui/core": "^4.12.3",
     "@material-ui/icons": "^4.11.2",
     "@material-ui/styles": "^4.11.4",
@@ -112,9 +113,9 @@
     "jsonwebtoken": "^8.5.1",
     "next-fonts": "^1.5.1",
     "next-pwa": "^5.4.4",
+    "nodemon": "^2.0.15",
     "sass": "^1.49.0",
     "shelljs": "^0.8.5",
-    "suneditor-react": "^3.3.1",
-    "nodemon": "^2.0.15"
+    "suneditor-react": "^3.3.1"
   }
 }

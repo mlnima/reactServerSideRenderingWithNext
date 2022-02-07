@@ -22,6 +22,8 @@ const svgLoader = {
     }
 }
 
+
+
 const i18nConfig = locales.length === 1 ? {} : {
     i18n: {
         locales,

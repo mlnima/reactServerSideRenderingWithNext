@@ -8,8 +8,10 @@ const NoImageStyleDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
+  
   span{
     color: var(--post-element-info-text-color,#ccc);
+    
   }
   @media only screen and (min-width: 768px) {
     width:  ${(props : {cardWidth:number}) => props?.cardWidth}px;

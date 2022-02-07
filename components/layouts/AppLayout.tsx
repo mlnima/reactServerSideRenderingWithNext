@@ -26,11 +26,10 @@ interface AppLayoutPropTypes {
 
 const AppLayout: FC<AppLayoutPropTypes> = ({children, pageInfo}) => {
 
-    const pathname = useRouter()?.pathname;
+    const {pathname} = useRouter();
 
     const appLayoutData = useSelector((store: StoreTypes) => {
         return {
-            isMobile:store?.settings?.isMobile,
             loggedIn: store?.user?.loggedIn,
             userRole: store?.user?.userData?.role,
             customColors: store?.settings?.design?.customColors,

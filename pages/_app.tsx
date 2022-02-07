@@ -10,15 +10,15 @@ const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'));
 const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false});
 
 const MyApp = ({Component, pageProps}: AppProps) => {
-    const router = useRouter()
+    const {pathname} = useRouter()
 
-    if (router.pathname.includes('/admin')) {
+    if (pathname.includes('/admin')) {
         return (
             <AdminLayout>
                 <Component {...pageProps} />
             </AdminLayout>
         )
-    } else if (router.pathname.includes('/messenger') || router.pathname.includes('/chatroom')) {
+    } else if (pathname.includes('/messenger') || pathname.includes('/chatroom')) {
         return (
             <MessengerLayout>
                 <Component {...pageProps} />

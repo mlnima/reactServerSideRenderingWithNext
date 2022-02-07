@@ -1,9 +1,13 @@
 import {FC} from "react";
 import Link from "next/link";
 import styled from "styled-components";
+import dynamic from "next/dynamic";
 import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
 import MobileVideoCardMedia from "./MobileVideoCardMedia/MobileVideoCardMedia";
-import CardLastUpdate from "../../asset/CardLastUpdate/CardLastUpdate";
+// import CardLastUpdate from "../../asset/CardLastUpdate/CardLastUpdate";
+
+const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
+
 
 const MobileVideoCardStyledArticle = styled.article`
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};

@@ -24,6 +24,7 @@ const CategoryCardStyledDiv = styled.div`
           color: var(--main-active-color, #ccc);
         }
       }
+
       .category-card-title {
         width: fit-content;
         text-overflow: ellipsis;

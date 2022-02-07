@@ -1,4 +1,4 @@
-import {FC} from "react";
+import {FC, useMemo} from "react";
 import {formatDistance} from 'date-fns';
 import {useRouter} from "next/router";
 import faIR from "date-fns/locale/fa-IR";
@@ -8,18 +8,21 @@ interface CardLastUpdatePropTypes {
 }
 
 const CardLastUpdate: FC<CardLastUpdatePropTypes> = ({updatedAt}) => {
-    const currentLocale = useRouter()?.locale
-    const locale = currentLocale === 'fa' ? {locale: faIR} : {}
+    const {locale} = useRouter()
 
-    const options = {
-        ...locale,
-        addSuffix: true
-    }
+    const distanceToNow = useMemo(() => {
+        const activeLocaleData = locale === 'fa' ? {locale: faIR} : {}
+        const options = {...activeLocaleData, addSuffix: true}
+        try {
+            return formatDistance(new Date(updatedAt), new Date(), options)
+        } catch (err) {
+            return null
+        }
+    }, [updatedAt,locale])
 
     return (
-        <span className={'last-update'} >
-
-            {formatDistance(new Date(updatedAt), new Date(), options)}
+        <span className={'last-update'}>
+            {distanceToNow}
         </span>
     )
 };

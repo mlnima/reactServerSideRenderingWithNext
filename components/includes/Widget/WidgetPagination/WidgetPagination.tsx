@@ -1,5 +1,4 @@
 import {FC} from "react";
-import {rangeNumGenerator} from "../../../../_variables/_variables";
 import Link from 'next/link'
 import styled from "styled-components";
 const WidgetPaginationStyledDiv = styled.div`
@@ -21,7 +20,8 @@ interface WidgetPaginationPropTypes {
 }
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl}) => {
-   const pages = rangeNumGenerator(1,10)
+
+    const pages = [...Array(7).keys()].filter(number=>number>0)
 
     return (
         <WidgetPaginationStyledDiv>
