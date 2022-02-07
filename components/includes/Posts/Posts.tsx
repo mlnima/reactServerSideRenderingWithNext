@@ -11,11 +11,13 @@ import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
 const VideoCardTypeList = dynamic(() => import('../cards/desktop/VideoCardTypeList/VideoCardTypeList'))
 const PromotionCardListSmall = dynamic(() => import('../cards/desktop/PromotionTypeCard/PromotionCardListSmall'))
 const VideoTypeCard = dynamic(() => import('../cards/desktop/VideoCard/VideoCard'))
-const MobileVideoCard = dynamic(() => import('../cards/mobile/MobileVideoCard/MobileVideoCard'))
 const PromotionTypeCard = dynamic(() => import('../cards/desktop/PromotionTypeCard/PromotionTypeCard'))
 const ArticleTypeCard = dynamic(() => import('../cards/desktop/ArticleTypeCard/ArticleTypeCard'))
 const DefaultTypeCard = dynamic(() => import('../cards/desktop/DefaultTypeCard/DefaultTypeCard'))
 const LearnTypeCard = dynamic(() => import('../cards/desktop/LearnTypeCard/LearnTypeCard'))
+
+const MobileVideoCard = dynamic(() => import('../cards/mobile/MobileVideoCard/MobileVideoCard'))
+const MobileArticleCard = dynamic(() => import('../cards/mobile/MobileArticleCard/MobileArticleCard'))
 
 const PostsContentStyledDiv = styled.div`
   display: flex;
@@ -86,30 +88,64 @@ const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: Pos
 
                 if (post.postType === 'video') {
                     if (elementSize === 'list') {
-                        // @ts-ignore
-                        return <VideoCardTypeList isSidebar={isSidebar} onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                        return <VideoCardTypeList isSidebar={isSidebar}
+                                                  onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                  {...postProps}
+                                                  key={index}
+                        />
                     } else {
                         if (isMobile){
-                            // @ts-ignore
-                            return <MobileVideoCard onActivateLoadingHandler={() => dispatch(setLoading(true))} postsPerRawForMobile={postsPerRawForMobile} {...postProps} key={index}/>
+                            return <MobileVideoCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                    postsPerRawForMobile={postsPerRawForMobile}
+                                                    {...postProps}
+                                                    key={index}
+                            />
                         }else {
-                            return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                            return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                  {...postProps}
+                                                  key={index}
+                            />
                         }
 
                     }
                 } else if (post.postType === 'promotion') {
                     if (elementSize === 'listSmall') {
                         // @ts-ignore
-                        return <PromotionCardListSmall isSidebar={isSidebar} onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                        return <PromotionCardListSmall isSidebar={isSidebar}
+                                                       onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                       {...postProps}
+                                                       key={index}
+                        />
                     } else {
-                        return <PromotionTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                        return <PromotionTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                  {...postProps}
+                                                  key={index}
+                        />
                     }
                 } else if (post.postType === 'article') {
-                    return <ArticleTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                    if (isMobile){
+                        return <MobileArticleCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                  postsPerRawForMobile={postsPerRawForMobile}
+                                                  {...postProps}
+                                                  key={index}
+                        />
+                    }else {
+                        return <ArticleTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                {...postProps}
+                                                key={index}
+                        />
+                    }
+
                 } else if (post.postType === 'learn') {
-                    return <LearnTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                    return <LearnTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                          {...postProps}
+                                          key={index}
+                    />
                 } else return (
-                    <DefaultTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
+                    <DefaultTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                     {...postProps}
+                                     key={index}
+                    />
                 )
             })}
         </PostsContentStyledDiv>

@@ -4,7 +4,6 @@ import styled from "styled-components";
 import dynamic from "next/dynamic";
 import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
 import MobileVideoCardMedia from "./MobileVideoCardMedia/MobileVideoCardMedia";
-// import CardLastUpdate from "../../asset/CardLastUpdate/CardLastUpdate";
 
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
 
@@ -15,7 +14,7 @@ const MobileVideoCardStyledArticle = styled.article`
   font-size: 12px;
   .mobile-video-card-media-link {
     color: var(--post-element-text-color, #ccc);
-    font-size: 12px;
+   
     .mobile-video-card-title {
       font-size: 12px;
       text-align: center;
@@ -23,7 +22,7 @@ const MobileVideoCardStyledArticle = styled.article`
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      margin: 0;
+      margin: 2px 0;
     }
   }
 `

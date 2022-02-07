@@ -2,26 +2,21 @@ import {FC} from "react";
 import Link from "next/link";
 import dynamic from 'next/dynamic'
 import styled from "styled-components";
-import ArticleCardMedia from "./ArticleCardMedia";
-import ArticleTypeCardTitle from "./ArticleTypeCardTitle";
 import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import MobileArticleCardMedia from "./MobileArticleCardMedia";
 
-const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'))
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
+const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
 
-
-const ArticleCard = styled.div`
-  background-color: var(--post-element-background-color, #131314);
+const MobileArticleCardStyledArticle = styled.article`
+  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};
+  margin: 4px 2px ;
   font-size: 12px;
-  padding-bottom: 5px;
-  width: ${(props: { cardWidth: number }) => `${props?.cardWidth}px`};
-  max-width: 100%;
-  flex-direction: column;
-  margin: 7px;
-
 
   .article-card-link {
+    color: var(--post-element-text-color, #ccc);
+    font-size: 12px;
     position: relative;
     width: calc(100% - 4px);
     max-width: calc(100% - 4px);
@@ -31,31 +26,40 @@ const ArticleCard = styled.div`
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
-
+    
+    .mobile-article-card-title{
+      font-size: 12px;
+      font-weight: lighter;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      margin: 2px 0;
+    }
+    
     .article-card-under-media {
       width: 100%;
       height: auto;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      color: var(--post-element-info-text-color, #ccc);
-      
+
       .article-card-under-media-info {
+        font-size: 12px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         margin: 0;
         height: 20px;
-        
+
         .article-card-info-data {
           display: flex;
           justify-content: center;
           align-items: center;
           margin: 2px 0;
           padding: 0 2px;
+          color: var(--post-element-info-text-color, #ccc);
           font-size: 12px;
-
           .icon {
             width: 14px;
             height: 14px;
@@ -68,56 +72,39 @@ const ArticleCard = styled.div`
 `
 
 interface ArticleTypeCardPropTypes {
-    post: PostTypes,
-    cardWidth: number,
     onActivateLoadingHandler: any,
     title: string,
-    postElementSize: string,
-    noImageUrl: string,
     views: number,
     rating: number
+    post: PostTypes,
+    postsPerRawForMobile: number,
 }
 
-const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
+const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
     ({
          post,
-         cardWidth,
          onActivateLoadingHandler,
          title,
-         postElementSize,
-         noImageUrl,
+         postsPerRawForMobile,
          views,
          rating
      }) => {
         const postUrl = `/post/${post.postType}/${post._id}`
 
         return (
-            <ArticleCard className='article-card' cardWidth={cardWidth}>
-                <Link href={`/post/${post.postType}/${post._id}`}>
+            <MobileArticleCardStyledArticle className='article-card' postsPerRawForMobile={postsPerRawForMobile} >
+                <Link href={postUrl}>
                     <a rel='next' onClick={onActivateLoadingHandler}
                        className='article-card-link'
                        title={title}
                     >
-                        <ArticleCardMedia noImageUrl={noImageUrl}
-                                          postElementSize={postElementSize}
-                                          post={post}
-                                          cardWidth={cardWidth}
-                                          mediaAlt={title}
+                        <MobileArticleCardMedia post={post}
+                                                mediaAlt={title}
+                                                views={views}
+                                                rating={rating}
+                                                postsPerRawForMobile={postsPerRawForMobile}
                         />
-                    </a>
-                </Link>
-                <ArticleTypeCardTitle title={post.title}
-                                      postUrl={postUrl}
-                                      onActivateLoadingHandler={onActivateLoadingHandler}
-                                      cardWidth={cardWidth}
-                                      tags={post?.tags}
-                                      categories={post?.categories}/>
-                <Link href={postUrl}>
-                    <a rel='next'
-                       className='article-card-link'
-                       title={title}
-                       onClick={onActivateLoadingHandler}
-                    >
+                        <h3 className={'mobile-article-card-title'}>{title}</h3>
                         <div className='article-card-under-media'>
                             <div className='article-card-under-media-info'>
                                 {views ? <CardViews views={views}
@@ -127,21 +114,19 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                                 }
                                 {rating ? <CardRating rating={rating}
                                                       className={'article-card-rating article-card-info-data'}
-                                />
+                                    />
                                     : null
                                 }
                             </div>
-                            {post?.updatedAt ?
-                                <CardLastUpdate updatedAt={post?.updatedAt}/>
-                                : null
-                            }
                         </div>
+                        {post?.updatedAt ?
+                            <CardLastUpdate updatedAt={post?.updatedAt}/>
+                            : null
+                        }
                     </a>
                 </Link>
-            </ArticleCard>
-
+            </MobileArticleCardStyledArticle>
         );
     };
 
-export default ArticleTypeCard;
-
+export default MobileArticleCard;

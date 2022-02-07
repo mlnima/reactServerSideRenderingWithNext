@@ -21,7 +21,7 @@ interface WidgetPaginationPropTypes {
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl}) => {
 
-    const pages = [...Array(7).keys()].filter(number=>number>0)
+    const pages = [...Array(8).keys()].filter(number=>number>0)
 
     return (
         <WidgetPaginationStyledDiv>

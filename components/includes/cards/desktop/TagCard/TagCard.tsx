@@ -1,10 +1,10 @@
+import {FC, useMemo} from "react";
 import Link from "next/link";
 import {useRouter} from "next/router";
 import TagCardMedia from "./TagCardMedia";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
-import {FC, useMemo} from "react";
 import capitalizeFirstLetter from "../../../../../_variables/util/capitalizeFirstLetter";
 
 const TagCardStyledDiv = styled.div`
@@ -14,13 +14,13 @@ const TagCardStyledDiv = styled.div`
     .tag-card-info {
       display: flex;
       align-items: center;
-      justify-content: flex-start;
+      justify-content: center;
       width: 95%;
       margin: auto;
 
-      .tag-card-title {
+      .tag-card-title, .tag-card-count {
         width: fit-content;
-        color: var(--main-active-color);
+        color: var(--post-element-text-color, #ccc);
         text-overflow: ellipsis;
         overflow: hidden;
         -webkit-box-orient: vertical;
@@ -29,7 +29,7 @@ const TagCardStyledDiv = styled.div`
         margin: 3px 0;
 
         &:hover {
-          color: var(--post-element-text-color, #ccc);
+          color: var(--main-active-color, #ccc);
         }
       }
     }
@@ -40,42 +40,46 @@ const TagCardStyledDiv = styled.div`
     }
   }
 `
-interface TagCardPropTypes{
-    cardWidth:number,
-    tag:Meta,
-    onActivateLoadingHandler:any
+
+interface TagCardPropTypes {
+    cardWidth: number,
+    tag: Meta,
+    onActivateLoadingHandler: any
 }
 
-const TagCard : FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler}) => {
+const TagCard: FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler}) => {
     const {t} = useTranslation('customTranslation');
     const {locale} = useRouter();
 
-    const cardTitle = useMemo(()=>{
-        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
+    const cardTitle = useMemo(() => {
+        const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
             tag?.name :
             tag?.translations?.[locale]?.name || t(tag?.name, {ns: 'customTranslation'})
-    },[tag?.name])
+        return capitalizeFirstLetter(checkedTitle)
+    }, [tag?.name])
 
     return (
         <TagCardStyledDiv className={'tag-card'}>
             <Link href={`/tag/${tag._id}`}>
                 <a className={'tag-card-link'}
                    onClick={onActivateLoadingHandler}
-                   title={cardTitle}
+                   title={cardTitle as string}
                 >
                     <div className={'tag-card-image'}>
                         <TagCardMedia cardWidth={cardWidth}
                                       imageUrl={tag.imageUrl}
-                                      mediaAlt={cardTitle}
+                                      mediaAlt={cardTitle as string}
                         />
                     </div>
                     <div className={'tag-card-info'}>
                         <h3 className={'tag-card-title'}>
-                            {capitalizeFirstLetter(cardTitle)}
+                            {cardTitle}
                         </h3>
                         {tag?.count ? <span className={'tag-card-count'}>
-                            (<var>{tag?.count}</var>)
-                        </span> : null}
+                                      (<var>{tag?.count}</var>)
+                                      </span>
+                            : null
+                        }
                     </div>
                 </a>
             </Link>

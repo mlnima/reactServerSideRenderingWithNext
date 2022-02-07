@@ -4,7 +4,7 @@ import {useTranslation} from 'next-i18next';
 import capitalizeFirstLetter from "../../../../../_variables/util/capitalizeFirstLetter";
 import styled from "styled-components";
 import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
-import {FC} from "react";
+import {FC, useMemo} from "react";
 
 const ActorCardStyledDiv = styled.div`
   margin: 5px;
@@ -37,13 +37,14 @@ const ActorCardStyledDiv = styled.div`
   }
 `
 interface ActorCardPropTypes{
-    cardWidth:number,
     actor:Meta,
     onActivateLoadingHandler:any
 }
 
-const ActorCard : FC<ActorCardPropTypes> = ({cardWidth, actor, onActivateLoadingHandler}) => {
+const ActorCard : FC<ActorCardPropTypes> = ({ actor, onActivateLoadingHandler}) => {
     const {t} = useTranslation('common');
+
+    const actorName = useMemo(()=>capitalizeFirstLetter(actor?.name),[actor.name])
     return (
         <ActorCardStyledDiv className={'actor-card'}>
             <Link href={`/actor/${actor._id}`}>
@@ -54,7 +55,7 @@ const ActorCard : FC<ActorCardPropTypes> = ({cardWidth, actor, onActivateLoading
                     <div className={'actor-card-image'}>
                         <ActorCardMedia imageUrl={actor.imageUrl} mediaAlt={actor.name}/>
                     </div>
-                    <h3 className='actor-card-title'> {capitalizeFirstLetter(actor?.name)}</h3>
+                    <h3 className='actor-card-title'> {actorName}</h3>
                     {actor?.count ? <span className={'actor-card-count'}>{actor?.count} {t('Videos')}</span> : null}
                 </a>
             </Link>

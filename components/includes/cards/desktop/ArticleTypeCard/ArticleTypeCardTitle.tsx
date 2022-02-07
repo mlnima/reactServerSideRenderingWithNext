@@ -15,12 +15,14 @@ const ArticleTypeCardTitleStyledDiv = styled.div`
   text-overflow: ellipsis;
   overflow: hidden;
   font-size: 12px;
-  //text-align: center;
-
-
+  
   .article-card-title-link {
     color: var(--post-element-text-color, #ccc);
     text-decoration: none;
+    h3{
+      font-weight: lighter;
+      margin: 2px 0;
+    }
     
     &:hover {
       color: var(--main-active-color, #fff);
@@ -75,7 +77,7 @@ const ArticleTypeCardTitle: FC<ArticleTypeCardTitlePropTypes> = ({title, tags, c
                    title={title}
                    onClick={onActivateLoadingHandler}
                 >
-                    {title}
+                    <h3>{title}</h3>
                 </a>
             </Link>
 
