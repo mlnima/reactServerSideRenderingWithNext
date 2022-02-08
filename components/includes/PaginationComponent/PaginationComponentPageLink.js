@@ -6,7 +6,7 @@ const PaginationComponentPageLink = props => {
     const router = useRouter()
 
     return (
-        <Link key={props.pageNumber.toString()} href={{pathname:router.pathname,query: {...router.query,page:props.pageNumber}}} scroll={false}>
+        <Link key={props.pageNumber.toString()} href={{pathname:router.pathname,query: {...router.query,page:props.pageNumber}}}>
             <a onClick={props.onActivateLoadingHandler}
                className='pagination-item'
                style={{

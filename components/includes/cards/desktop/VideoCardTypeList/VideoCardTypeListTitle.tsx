@@ -43,7 +43,7 @@ const VideoCardTypeListTitle = ({title, actors, tags, categories, postUrl, onAct
 
     return (
         <VideoCardTypeListTitleStyledDiv className='video-card-list-title' >
-            <Link href={postUrl} scroll={false}>
+            <Link href={postUrl} >
                 <a rel='next' className='video-card-title-link' title={title} onClick={onActivateLoadingHandler}>
                         {title}
                 </a>

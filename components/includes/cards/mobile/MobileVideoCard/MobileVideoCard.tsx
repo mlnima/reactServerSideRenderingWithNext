@@ -7,7 +7,6 @@ import MobileVideoCardMedia from "./MobileVideoCardMedia/MobileVideoCardMedia";
 
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
 
-
 const MobileVideoCardStyledArticle = styled.article`
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};
   margin: 4px 2px ;
@@ -17,7 +16,6 @@ const MobileVideoCardStyledArticle = styled.article`
    
     .mobile-video-card-title {
       font-size: 12px;
-      text-align: center;
       font-weight: lighter;
       white-space: nowrap;
       text-overflow: ellipsis;

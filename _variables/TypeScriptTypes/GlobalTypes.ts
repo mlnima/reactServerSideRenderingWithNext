@@ -180,7 +180,7 @@ export interface Meta {
     imageUrlLock?: boolean,
     translations?: Translations,
     count?: number,
-    additionalInfo?: object,
+    additionalInfo?: {},
     createdAt?: Date,
     updatedAt?: Date,
 }
@@ -212,6 +212,7 @@ export interface ChatroomStateTypes {
 }
 
 export interface PostStateTypes {
+    actorsMetas: Meta;
     posts: PostTypes[],
     actorData: Meta,
     categoryData: Meta,

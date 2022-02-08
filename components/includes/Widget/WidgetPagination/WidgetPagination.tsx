@@ -27,7 +27,7 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl}) => {
         <WidgetPaginationStyledDiv>
             {pages.map(pageNumber=>{
                 return(
-                    <Link key={pageNumber.toString()} href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` :  baseUrl + `?page=${pageNumber}` }`} scroll={false}>
+                    <Link key={pageNumber.toString()} href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` :  baseUrl + `?page=${pageNumber}` }`} >
                         <a
                            className='pagination-item'
                            style={{

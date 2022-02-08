@@ -71,7 +71,7 @@ const ArticleTypeCardTitle: FC<ArticleTypeCardTitlePropTypes> = ({title, tags, c
         <ArticleTypeCardTitleStyledDiv className={'article-card-title'}
                                        cardWidth={cardWidth}
         >
-            <Link href={postUrl} scroll={false}>
+            <Link href={postUrl} >
                 <a rel='next'
                    className='article-card-title-link'
                    title={title}

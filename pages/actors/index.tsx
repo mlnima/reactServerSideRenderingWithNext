@@ -26,8 +26,10 @@ const ActorsPageStyledDiv = styled.div`
 `
 const actorsPage = () => {
     const isWithSidebar = useSelector((store: StoreTypes) => store.settings?.identity?.metaPageSidebar);
-    const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
+    const totalCount = useSelector((store: StoreTypes) => store?.posts?.totalCount)
+    const actorsMetas = useSelector((store: StoreTypes) =>  store?.posts?.actorsMetas)
     const router = useRouter();
+
 
     return (
         <ActorsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
@@ -45,9 +47,8 @@ const actorsPage = () => {
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-
-            <ActorsRenderer metaData={undefined} postElementSize={undefined}/>
-
+            {/*// @ts-ignore*/}
+            <ActorsRenderer metaData={actorsMetas} />
 
             <PaginationComponent
                 isActive={true}

@@ -8,45 +8,31 @@ interface PromotionCardMediaPropTypes {
     cardWidth: number,
     mediaAlt: string,
 }
+
 interface PromotionCardMediaStyledDivPropTypes {
     cardWidth: number,
     postElementSize?: string
 }
 
-
 const PromotionCardMediaStyledDiv = styled.div`
 
-  width: 48vw;
-  height: calc(48vw / 1.777);
-
+  width: 100%;
+  height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
   .promotion-card-image {
     width: 100%;
-    height: calc(48vw / 1.777);
-    object-fit: contain;
-  }
-
-  @media only screen and (min-width: 768px) {
-    width: ${({postElementSize}: PromotionCardMediaStyledDivPropTypes) => postElementSize === 'list' ? '116.6px' : '100%'};
     height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
-    .promotion-card-image {
-      width: ${({postElementSize}: PromotionCardMediaStyledDivPropTypes) => postElementSize === 'list' ? '116.6px' : '100%'};
-      height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
-    }
+    object-fit: contain;
   }
 `
 
 const NoImageStyleDiv = styled.div`
-  width: 100%;
-  height: calc(48vw / 1.777);
+  width:  ${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => `${cardWidth}px`};
+  height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => `${cardWidth}px`} / 1.777);
   display: flex;
   justify-content: center;
   align-items: center;
   span{
     color: var(--post-element-info-text-color,#ccc);
-  }
-  @media only screen and (min-width: 768px) {
-    width:  ${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => `${cardWidth}px`};
-    height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => `${cardWidth}px`} / 1.777);
   }
 `
 
@@ -76,9 +62,3 @@ const PromotionCardMedia = ({post,postElementSize,cardWidth,mediaAlt}: Promotion
     );
 };
 export default PromotionCardMedia;
-
-// <img className='promotion-card-image'
-//      alt={mediaAlt}
-//      src={props?.post.mainThumbnail}
-//      onError={()=>setGotError(true)}
-// />

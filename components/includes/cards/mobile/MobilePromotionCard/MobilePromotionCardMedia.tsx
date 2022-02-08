@@ -3,15 +3,15 @@ import styled from "styled-components";
 import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
 import MobileCardImageRenderer from "../../mobileAsset/MobileCardImageRenderer";
 
-let MobileArticleCardMediaStyledDiv = styled.div`
+let MobilePromotionCardMediaStyledDiv = styled.div`
   position: relative;
   
-  .article-card-views {
+  .promotion-card-views {
     bottom: 3px;
     right: 3px;
   }
 
-  .article-card-rating {
+  .promotion-card-rating {
     bottom: var(--video-card-info-distance, 2px);
     left: var(--video-card-info-distance, 2px);
   }
@@ -29,13 +29,13 @@ const NoImageStyleDiv = styled.div`
   }
 `
 
-interface MobileArticleCardMediaPropTypes {
+interface MobilePromotionCardMediaPropTypes {
     post: PostTypes,
     mediaAlt: string,
     postsPerRawForMobile: number,
 }
 
-const MobileArticleCardMedia: FC<MobileArticleCardMediaPropTypes> =
+const MobilePromotionCardMedia: FC<MobilePromotionCardMediaPropTypes> =
     ({
          post,
          mediaAlt,
@@ -56,16 +56,16 @@ const MobileArticleCardMedia: FC<MobileArticleCardMediaPropTypes> =
             )
         } else return (
 
-            <MobileArticleCardMediaStyledDiv className={'mobile-article-card-media'}>
+            <MobilePromotionCardMediaStyledDiv className={'mobile-promotion-card-media'}>
                 <MobileCardImageRenderer imageUrl={post.mainThumbnail}
                                          postsPerRawForMobile={postsPerRawForMobile}
                                          mediaAlt={mediaAlt}
                                          errorHandler={errorHandler}
                 />
 
-            </MobileArticleCardMediaStyledDiv>
+            </MobilePromotionCardMediaStyledDiv>
         )
 
     };
-export default MobileArticleCardMedia;
+export default MobilePromotionCardMedia;
 

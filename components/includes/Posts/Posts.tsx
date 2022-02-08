@@ -8,6 +8,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "../../../store/actions/globalStateActions";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
+import MobilePromotionCard from "../cards/mobile/MobilePromotionCard/MobilePromotionCard";
 const VideoCardTypeList = dynamic(() => import('../cards/desktop/VideoCardTypeList/VideoCardTypeList'))
 const PromotionCardListSmall = dynamic(() => import('../cards/desktop/PromotionTypeCard/PromotionCardListSmall'))
 const VideoTypeCard = dynamic(() => import('../cards/desktop/VideoCard/VideoCard'))
@@ -117,10 +118,19 @@ const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: Pos
                                                        key={index}
                         />
                     } else {
-                        return <PromotionTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                  {...postProps}
-                                                  key={index}
-                        />
+                        if (isMobile){
+                           return <MobilePromotionCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                       postsPerRawForMobile={postsPerRawForMobile}
+                                                       {...postProps}
+                                                       key={index}
+                            />
+                        }else {
+                            return <PromotionTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                      {...postProps}
+                                                      key={index}
+                            />
+                        }
+
                     }
                 } else if (post.postType === 'article') {
                     if (isMobile){

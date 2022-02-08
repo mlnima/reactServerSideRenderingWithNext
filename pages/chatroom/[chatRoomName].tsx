@@ -11,14 +11,13 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import {dispatchSocketId} from "../../store/actions/userActions";
 import {setChatroomUsers, setChatroomMessages, newMessage} from '../../store/actions/chatroomActions';
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 import {uniqBy} from 'lodash';
 
 const chatRoom = ( ) => {
     const dispatch = useDispatch()
-
+    console.log('here')
     const user = useSelector((store: StoreTypes) => store.user)
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
     const [isJoined, setIsJoined] = useState(false)

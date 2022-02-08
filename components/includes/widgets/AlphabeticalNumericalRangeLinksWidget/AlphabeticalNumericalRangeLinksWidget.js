@@ -32,7 +32,7 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
             <Link key={index} href={{
                 pathname: router.pathname,
                 query: {...router?.query, startWith: Letter,page:1}
-            }}  scroll={false}>
+            }}  >
                 <a className='alphabetical-range-widget-item'
                    onClick={() => dispatch(setLoading(true))}
                    style={{
@@ -52,7 +52,7 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
                 <Link key={'all'} href={{
                     pathname: router.pathname,
                     query: {...router?.query,startWith:''}
-                }}  scroll={false}>
+                }} >
                     <a className='alphabetical-range-widget-item'
                        onClick={() => dispatch(setLoading(true))}
                        style={{

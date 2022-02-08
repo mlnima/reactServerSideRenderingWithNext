@@ -45,6 +45,7 @@ const ActorCard : FC<ActorCardPropTypes> = ({ actor, onActivateLoadingHandler}) 
     const {t} = useTranslation('common');
 
     const actorName = useMemo(()=>capitalizeFirstLetter(actor?.name),[actor.name])
+
     return (
         <ActorCardStyledDiv className={'actor-card'}>
             <Link href={`/actor/${actor._id}`}>

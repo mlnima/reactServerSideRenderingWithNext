@@ -100,7 +100,7 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> = (props) => {
 
     return (
         <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <Link href={postUrl} scroll={false}>
+            <Link href={postUrl} >
                 <a rel='next' onClick={props.onActivateLoadingHandler} className='learn-post-card-link' title={props.title}>
 
                     <LearnTypeCardMedia

@@ -34,6 +34,7 @@ const MobileArticleCardStyledArticle = styled.article`
       text-overflow: ellipsis;
       overflow: hidden;
       margin: 2px 0;
+      width: 100%;
     }
     
     .article-card-under-media {
@@ -68,6 +69,10 @@ const MobileArticleCardStyledArticle = styled.article`
         }
       }
     }
+    .last-update{
+      width: 100%;
+    }
+    
   }
 `
 
@@ -94,35 +99,19 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
         return (
             <MobileArticleCardStyledArticle className='article-card' postsPerRawForMobile={postsPerRawForMobile} >
                 <Link href={postUrl}>
-                    <a rel='next' onClick={onActivateLoadingHandler}
-                       className='article-card-link'
-                       title={title}
-                    >
+                    <a rel='next' onClick={onActivateLoadingHandler} className='article-card-link' title={title}>
                         <MobileArticleCardMedia post={post}
                                                 mediaAlt={title}
-                                                views={views}
-                                                rating={rating}
                                                 postsPerRawForMobile={postsPerRawForMobile}
                         />
                         <h3 className={'mobile-article-card-title'}>{title}</h3>
                         <div className='article-card-under-media'>
                             <div className='article-card-under-media-info'>
-                                {views ? <CardViews views={views}
-                                                    className={'article-card-views article-card-info-data'
-                                                    }/>
-                                    : null
-                                }
-                                {rating ? <CardRating rating={rating}
-                                                      className={'article-card-rating article-card-info-data'}
-                                    />
-                                    : null
-                                }
+                                {views ? <CardViews views={views} className={'article-card-views article-card-info-data'}/> : null}
+                                {rating ? <CardRating rating={rating} className={'article-card-rating article-card-info-data'}/> : null}
                             </div>
                         </div>
-                        {post?.updatedAt ?
-                            <CardLastUpdate updatedAt={post?.updatedAt}/>
-                            : null
-                        }
+                        {post?.updatedAt ? <CardLastUpdate updatedAt={post?.updatedAt}/> : null}
                     </a>
                 </Link>
             </MobileArticleCardStyledArticle>
