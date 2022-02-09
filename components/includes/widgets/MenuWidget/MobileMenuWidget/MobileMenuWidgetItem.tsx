@@ -8,10 +8,11 @@ import Link from "next/link";
 const MobileMenuWidgetItemPropTypesStyledLi = styled.li`
   list-style-type: none;
   width: 100%;
-  font-size: 12px;
   .menu-item{
     color: var(--navigation-text-color, #ccc);
-    background: linear-gradient(180deg, rgba(41, 41, 41, .5) .12%, rgba(30, 30, 30, .5) 100%);
+    background-color: transparent;
+    font-weight: bold;
+    font-size: 14px;
     text-decoration: none;
     border-radius: 5px;
     display: flex;
