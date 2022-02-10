@@ -4,9 +4,11 @@ import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
 import {checkRouteAndSetLoading} from "../../../../store/actions/globalStateActions";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
-import DesktopMenuWidget from "./DesktopMenuWidget/DesktopMenuWidget";
 import {MenuItem} from "../../../../_variables/TypeScriptTypes/WidgetsInterfaces";
-import MobileMenuWidget from "./MobileMenuWidget/MobileMenuWidget";
+import dynamic from "next/dynamic";
+
+const DesktopMenuWidget = dynamic(() => import('./DesktopMenuWidget/DesktopMenuWidget'));
+const MobileMenuWidget = dynamic(() => import('./MobileMenuWidget/MobileMenuWidget'));
 
 interface MenuWidgetPropTypes {
     menuItems: MenuItem[]

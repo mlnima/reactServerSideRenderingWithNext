@@ -1,4 +1,3 @@
-//AuthenticationSlideItems
 import React from "react";
 import {useRouter} from "next/router";
 import Link from "next/link";
@@ -6,10 +5,14 @@ import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
 import {StoreTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 import {useTranslation} from 'next-i18next';
-const LoggedOutItemsMenu = dynamic(() => import('../LoggedOutItemsMenu/LoggedOutItemsMenu'), {ssr: false});
-const LoggedInItemsForMenu = dynamic(() => import('../LoggedInItemsForMenu/LoggedInItemsForMenu'), {ssr: false});
-
 import styled from "styled-components";
+
+const LoggedOutItemsMenu = dynamic(
+    () => import('../LoggedOutItemsMenu/LoggedOutItemsMenu'), {ssr: false});
+const LoggedInItemsForMenu = dynamic(
+    () => import('../LoggedInItemsForMenu/LoggedInItemsForMenu'), {ssr: false});
+
+
 const AuthenticationSlideItemsStyledDiv = styled.div`
   position: fixed;
   right: 0;
@@ -23,48 +26,56 @@ const AuthenticationSlideItemsStyledDiv = styled.div`
   z-index: 1000;
   background-color: var(--navigation-background-color, #18181b);
   width: 90%;
-  ${({open}: { open: boolean }) => open ? `animation: userMenuSlide .3s linear alternate;` : `animation: none;`}
 
+  ${({open}: { open: boolean }) => open ? `animation: userMenuSlide .3s linear alternate;` : `animation: none;`}
   .logged-item {
     width: 24px;
     height: 24px;
     display: flex;
     align-items: center;
-    .icon{
+
+    .icon {
       width: 24px;
       height: 24px;
       background-color: var(--navigation-text-color, #ccc);
       margin-right: 5px;
     }
-    .my-profile{
+
+    .my-profile {
       mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
     }
-    .add-new-Post{
+
+    .add-new-Post {
       mask: url('/public/asset/images/icons/plus-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/plus-solid.svg') no-repeat center;
     }
-    .messages{
+
+    .messages {
       mask: url('/public/asset/images/icons/envelope-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/envelope-solid.svg') no-repeat center;
     }
-    .sign-out{
+
+    .sign-out {
       mask: url('/public/asset/images/icons/sign-out-alt-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/sign-out-alt-solid.svg') no-repeat center;
     }
-    .sign-in{
+
+    .sign-in {
       mask: url('/public/asset/images/icons/sign-in-alt-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/sign-in-alt-solid.svg') no-repeat center;
     }
-    .close{
+
+    .close {
       mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
     }
-    .home{
+
+    .home {
       mask: url('/public/asset/images/icons/home-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/home-solid.svg') no-repeat center;
     }
-    
+
   }
 
   .close-btn {
@@ -97,18 +108,19 @@ const AuthenticationSlideItemsStyledDiv = styled.div`
     width: 100%;
   }
 
-  @media only screen and (min-width: 768px){
+  @media only screen and (min-width: 768px) {
     width: 200px;
   }
 `
+
 interface ComponentPropTypes {
-    onOpenCloseHandler:any,
-    open:boolean,
+    onOpenCloseHandler: any,
+    open: boolean,
 }
 
-const AuthenticationSlideItems = ({onOpenCloseHandler,open}: ComponentPropTypes) => {
+const AuthenticationSlideItems = ({onOpenCloseHandler, open}: ComponentPropTypes) => {
     const {t} = useTranslation('common');
-    const user = useSelector((store : StoreTypes) => store?.user)
+    const user = useSelector((store: StoreTypes) => store?.user)
     const router = useRouter()
     return (
         <AuthenticationSlideItemsStyledDiv open={open} className='auth-buttons-content'>
@@ -117,18 +129,18 @@ const AuthenticationSlideItems = ({onOpenCloseHandler,open}: ComponentPropTypes)
             </button>
             <div className='auth-buttons-content-items'>
 
-                {router.pathname.includes('/messenger') || router.pathname.includes('/chatroom')?
+                {router.pathname.includes('/messenger') || router.pathname.includes('/chatroom') ?
                     <Link href={`/`}>
                         <a rel='next' className='logged-item btn btn-transparent-light'>
                             <span className={'home icon'}/>
                             {t(`Home`)}
                         </a>
                     </Link>
-                    :null
+                    : null
                 }
 
-                {user.loggedIn && open ? <LoggedInItemsForMenu  /> :
-                    !user.loggedIn && open ?  <LoggedOutItemsMenu  />:
+                {user.loggedIn && open ? <LoggedInItemsForMenu/> :
+                    !user.loggedIn && open ? <LoggedOutItemsMenu/> :
                         null
                 }
             </div>

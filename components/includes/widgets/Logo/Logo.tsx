@@ -9,12 +9,16 @@ import styled from "styled-components";
 const LogoUsingNextImage = dynamic(() => import('./LogoUsingNextImage'));
 
 const LogoStyledDiv = styled.div`
+
   a{
     .logo-text,.logo-headline{
       color: var(--main-text-color);
     }
     .logo-text{
       font-weight: bold;
+    }
+    .logo-headline{
+      margin: 5px 0 0 0;
     }
   }
 `
@@ -31,7 +35,9 @@ const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl}) =>
     const {locale} = useRouter()
 
     const logoData = useMemo(() => {
-        const logoUrlSource =  LogoUrl && !isAbsolutePath(LogoUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${LogoUrl}` : LogoUrl
+        const logoUrlSource =  LogoUrl && !isAbsolutePath(LogoUrl) ?
+                              `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${LogoUrl}` :
+                                LogoUrl
         return {
             logoUrlSource,
             logoText: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? LogoText : translations?.[locale]?.LogoText,
@@ -49,7 +55,10 @@ const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl}) =>
                         logoData?.logoUrlSource ?
                             <img alt={'logo'} src={logoData?.logoUrlSource}/>
                             : null}
-                    {logoData.logoText ? <span className='logo-text'> {logoData.logoText} </span> : null}
+                    {logoData.logoText && !logoData?.logoUrlSource ?
+                        <span className='logo-text'> {logoData.logoText} </span>
+                        : null
+                    }
                     {logoData.headLineData ? <p className='logo-headline'>{logoData.headLineData}</p> : null}
                 </a>
             </Link>

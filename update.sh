@@ -4,6 +4,6 @@ git add *
 git stash
 git stash drop
 git pull origin master
-npm install
+npm install --legacy-peer-deps
 npm run build
 

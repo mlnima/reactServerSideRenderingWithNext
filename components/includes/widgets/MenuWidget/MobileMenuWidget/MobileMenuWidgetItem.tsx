@@ -12,7 +12,7 @@ const MobileMenuWidgetItemPropTypesStyledLi = styled.li`
     color: var(--navigation-text-color, #ccc);
     background-color: transparent;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 5vw;
     text-decoration: none;
     border-radius: 5px;
     display: flex;

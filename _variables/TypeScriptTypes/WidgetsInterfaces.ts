@@ -1,4 +1,3 @@
-
 export interface MenuItem {
     name: string,
     target: string,
@@ -6,5 +5,5 @@ export interface MenuItem {
     itemId: string,
     itemIndex: number,
     parent?: string
-    translations: {}
+    translations?: {}
 }
