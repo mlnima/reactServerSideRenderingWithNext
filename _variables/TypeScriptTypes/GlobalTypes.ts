@@ -212,7 +212,9 @@ export interface ChatroomStateTypes {
 }
 
 export interface PostStateTypes {
-    actorsMetas: Meta;
+    tagsMetas:Meta[],
+    categoriesMetas: Meta[],
+    actorsMetas: Meta,
     posts: PostTypes[],
     actorData: Meta,
     categoryData: Meta,

@@ -10,6 +10,7 @@ module.exports = async (req, res) =>{
             "theme_color": identityData.data.themeColor || '#000',
             "background_color": identityData.data.themeColor || '#000',
             "name": identityData.data.title || 'React CMS website',
+            "short_name": identityData.data.title || 'React CMS website',
             "icons": [
                 {
                     "src": identityData?.data?.pwa192 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/static/images/pwa/192.png',
@@ -21,13 +22,13 @@ module.exports = async (req, res) =>{
                     "src": identityData?.data?.pwa384 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/static/images/pwa/384.png',
                     "sizes": "384x384",
                     "type": "image/png",
-                    "purpose": "any maskable"
+                    "purpose": "image/png"
                 },
                 {
                     "src": identityData?.data?.pwa512 || process.env.NEXT_PUBLIC_PRODUCTION_URL + '/static/images/pwa/512.png',
                     "sizes": "512x512",
                     "type": "image/png",
-                    "purpose": "any maskable"
+                    "purpose": "image/png"
                 }
             ],
             "display": "standalone",

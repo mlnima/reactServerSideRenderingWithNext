@@ -26,7 +26,7 @@ const CardTitleStyledDiv = styled.div`
     h3 {
       margin: 0;
       font-size: 14px;
-      font-weight: lighter;
+      font-weight: normal;
     }
 
     &:hover {

@@ -8,57 +8,53 @@ const NoImageStyleDiv = styled.div`
   display: flex;
   justify-content: center;
   align-items: center;
-  
-  span{
-    color: var(--post-element-info-text-color,#ccc);
-    
+
+  span {
+    color: var(--post-element-info-text-color, #ccc);
   }
+
   @media only screen and (min-width: 768px) {
-    width:  ${(props : {cardWidth:number}) => props?.cardWidth}px;
-    height: calc(${(props : {cardWidth:number}) => props?.cardWidth}px / 1.777);
+    width: ${({cardWidth}: { cardWidth: number }) => cardWidth}px;
+    height: calc(${({cardWidth}: { cardWidth: number }) => cardWidth}px / 1.777);
   }
 `
 
-interface CategoryCardMediaPropTypes{
-    cardWidth:number;
-    imageUrl:string;
-    mediaAlt:string;
+interface CategoryCardMediaPropTypes {
+    cardWidth: number,
+    imageUrl: string,
+    mediaAlt: string,
 }
 
-const CategoryCardMedia : FC<CategoryCardMediaPropTypes> = (props) => {
+const CategoryCardMedia: FC<CategoryCardMediaPropTypes> =
+    ({
+         cardWidth,
+         imageUrl,
+         mediaAlt,
+     }) => {
 
-    const [gotError,setGotError] = useState(false)
+        const [gotError, setGotError] = useState(false)
 
-    const errorHandler = () => {
-        !gotError ? setGotError(true) : null
-    }
+        if (!imageUrl || gotError) {
+            return (
+                <NoImageStyleDiv cardWidth={cardWidth} className={'no-image'}>
+                    <span className={'no-image-alt'}>{mediaAlt || 'NO IMAGE'}</span>
+                </NoImageStyleDiv>
+            );
+        } else {
+            return (
+                <CardImageRenderer imageUrl={imageUrl}
+                                   mediaAlt={mediaAlt}
+                                   cardWidth={cardWidth}
+                                   cardHeight={cardWidth / 1.777}
+                                   errorHandler={() => setGotError(true)}
+                />
+            );
+        }
 
-
-    if (!props.imageUrl || gotError){
-        return (
-            <NoImageStyleDiv cardWidth={props.cardWidth} className='no-image'>
-                <span className={'no-image-alt'}>{props.mediaAlt || 'NO IMAGE'}</span>
-            </NoImageStyleDiv>
-        );
-    }else {
-        return (
-            <CardImageRenderer imageUrl={props.imageUrl}
-                               mediaAlt={props.mediaAlt}
-                               cardWidth={props.cardWidth}
-                               cardHeight={props.cardWidth / 1.777}
-                               errorHandler={errorHandler}
-            />
-        );
-    }
-
-};
+    };
 export default CategoryCardMedia;
 
 
-// <CategoryCardMediaStyledImage cardWidth={props.cardWidth}
-//                               ref={imageRef}
-//                               className='category-card-image'
-//                               src={props.imageUrl}
-//                               alt={props.mediaAlt}
-//                               onError={()=>setGotError(true)}
-// />
+// <NoImageStyleDiv cardWidth={props.cardWidth} className={'no-image'}>
+//     <span className={'no-image-alt'}>{props.mediaAlt || 'NO IMAGE'}</span>
+// </NoImageStyleDiv>

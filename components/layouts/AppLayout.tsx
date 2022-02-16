@@ -1,8 +1,8 @@
-import {FC, useMemo} from 'react';
+import {FC} from 'react';
 import {useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
 import GlobalStyles from "../global/Styles/GlobalStyles";
-import setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
+import _setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
 import {useRouter} from "next/router";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
@@ -28,72 +28,77 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children, pageInfo}) => {
 
     const {pathname} = useRouter();
 
-    const appLayoutData = useSelector((store: StoreTypes) => {
+    const layoutData = useSelector(({user,settings,globalState}: StoreTypes) => {
+        const isSidebarLess = pathname.match( /\/404|\/500|\/_error|\/profile/g)
+        const sidebarsData = _setAppLayoutDataFromProp(pageInfo, pathname, settings?.identity)
+
         return {
-            loggedIn: store?.user?.loggedIn,
-            userRole: store?.user?.userData?.role,
-            customColors: store?.settings?.design?.customColors,
-            customStyles: store?.settings?.design?.customStyles,
-            sideBarWidth: store?.settings?.design?.sideBarWidth,
-            identity: store?.settings?.identity,
-            loading: store?.globalState?.loading,
-            loginRegisterFormPopup: store?.globalState?.loginRegisterFormPopup,
-            alert: store?.globalState?.alert,
-            sidebarsData: setAppLayoutDataFromProp(pageInfo, pathname, store?.settings?.identity),
-            isSidebarLess: pathname === '/404' || pathname === '/500' || pathname === '/_error' || pathname.includes('/profile'),
+            loggedIn: user?.loggedIn,
+            userRole: user?.userData?.role,
+            customColors: settings?.design?.customColors || '',
+            customStyles: settings?.design?.customStyles || '',
+            sideBarWidth: settings?.design?.sideBarWidth || 320,
+            identity: settings?.identity,
+            loading: globalState?.loading,
+            loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
+            alert: globalState?.alert,
+            sidebarsData,
+            isSidebarLess,
+            mainLayoutClassNameForGrid:isSidebarLess ? 'without-sidebar-layout' :
+                                       sidebarsData?.sidebarType === 'left' ? 'left-sidebar-layout' :
+                                       sidebarsData?.sidebarType === 'right' ? 'right-sidebar-layout' :
+                                       sidebarsData?.sidebarType === 'both' ? 'both-sidebar-layout' :
+                                       'without-sidebar-layout',
         }
     });
 
-    const mainLayoutClassNameForGrid = useMemo(() => {
-        return appLayoutData?.isSidebarLess ? 'without-sidebar-layout' :
-               appLayoutData?.sidebarsData?.sidebarType === 'left' ? 'left-sidebar-layout' :
-               appLayoutData?.sidebarsData?.sidebarType === 'right' ? 'right-sidebar-layout' :
-               appLayoutData?.sidebarsData?.sidebarType === 'both' ? 'both-sidebar-layout' :
-               'without-sidebar-layout';
-    }, [appLayoutData?.sidebarsData]);
+
 
     return (
-        <div className={'App ' + mainLayoutClassNameForGrid}>
-            <GlobalStyles colors={appLayoutData.customColors || ''}
-                          globalStyleData={appLayoutData.customStyles || ''}
-                          sideBarWidth={appLayoutData.sideBarWidth || 320}
+        <div className={'App ' + layoutData.mainLayoutClassNameForGrid}>
+            <GlobalStyles colors={layoutData.customColors}
+                          globalStyleData={layoutData.customStyles}
+                          sideBarWidth={layoutData.sideBarWidth}
             />
             <SiteSettingSetter/>
-            {!appLayoutData.identity?.topbar || appLayoutData.identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
-            {!appLayoutData.identity?.header || appLayoutData.identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
-            {!appLayoutData.identity?.navigation || appLayoutData.identity?.navigation === 'enable' ? <NavigationWidgetArea/> : null}
-            {appLayoutData?.sidebarsData?.leftSidebar?.enable ?
+            {!layoutData.identity?.topbar || layoutData.identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
+            {!layoutData.identity?.header || layoutData.identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
+            {!layoutData.identity?.navigation || layoutData.identity?.navigation === 'enable' ? 
+                <NavigationWidgetArea/> 
+                : null
+            }
+            {layoutData?.sidebarsData?.leftSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'
-                    position={appLayoutData?.sidebarsData?.leftSidebar?.name}
+                    position={layoutData?.sidebarsData?.leftSidebar?.name}
                 />
                 : null
             }
 
             {children}
 
-            {appLayoutData?.sidebarsData?.rightSidebar?.enable ?
+            {layoutData?.sidebarsData?.rightSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='rightSidebar'
                     className='right-sidebar'
-                    position={appLayoutData?.sidebarsData?.rightSidebar?.name}
+                    position={layoutData?.sidebarsData?.rightSidebar?.name}
                 />
                 : null
             }
 
-            {!appLayoutData.identity?.footer || appLayoutData.identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
-            {appLayoutData.loginRegisterFormPopup && !appLayoutData.loggedIn ? <LoginRegisterPopup/> : null}
-            {appLayoutData.userRole === 'administrator' ? <AdminTools/> : null}
-            {appLayoutData.loading ? <Loading/> : null}
-            {appLayoutData.alert?.active && appLayoutData.alert?.message ? <AlertBox/> : null}
+            {!layoutData.identity?.footer || layoutData.identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
+            {layoutData.loginRegisterFormPopup && !layoutData.loggedIn ? <LoginRegisterPopup/> : null}
+            {layoutData.userRole === 'administrator' ? <AdminTools/> : null}
+            {layoutData.loading ? <Loading/> : null}
+            {layoutData.alert?.active && layoutData.alert?.message ? <AlertBox/> : null}
 
             {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
                 <CookiePopup/>
                 : null : null
             }
 
-            {appLayoutData.userRole === 'administrator' ? <AdminDataSetter/> : null}
+            {layoutData.userRole === 'administrator' ? <AdminDataSetter/> : null}
 
         </div>
     );

@@ -10,15 +10,15 @@ const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 const MobilePromotionCardStyledArticle = styled.article`
-  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};
+  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
   margin: 4px 2px ;
   font-size: 12px;
   background-color: var(--post-element-background-color, #131314);
   .mobile-promotion-card-link-internal{
     color: var(--post-element-text-color, #ccc);
     .mobile-promotion-card-title{
-      font-size: 12px;
-      font-weight: lighter;
+      font-size: 14px;
+      font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -93,15 +93,17 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
          views,
          rating
      }) => {
-        const postUrl = `/post/${post.postType}/${post._id}`
+
+        const postUrl = `/post/${post.postType}/${post._id}`;
+
         const onExternalLinkClickViewHandler = () => {
             likeDislikeView(post._id, 'views').finally()
-        }
+        };
 
         const onInternalLinkClickHandler = ()=>{
             onActivateLoadingHandler()
             onExternalLinkClickViewHandler()
-        }
+        };
 
         return (
             <MobilePromotionCardStyledArticle className='promotion-card' postsPerRawForMobile={postsPerRawForMobile} >

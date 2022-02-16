@@ -15,20 +15,44 @@ interface CardImageNextPropTypes {
     strictImageSize?:boolean
 }
 
-const CardImageRenderer: FC<CardImageNextPropTypes> = ({imageUrl,mediaAlt, cardWidth, cardHeight,errorHandler,strictImageSize,objectFitValue}) => {
+const CardImageRenderer: FC<CardImageNextPropTypes> =
+    ({
+         imageUrl,
+         mediaAlt,
+         cardWidth,
+         cardHeight,
+         errorHandler,
+         strictImageSize,
+         objectFitValue
+    }) => {
+
     const imageUrlSource = useMemo(() => {
         return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
-    }, [imageUrl])
+    }, [imageUrl]);
 
-    const CardImageProps = useMemo(()=>errorHandler ? {errorHandler}:{},[])
+    const CardImageProps = useMemo(()=>errorHandler ? {errorHandler}:{},[]);
 
     if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  ){
         return (
-            <CardImageNext imageUrl={imageUrlSource} alt={mediaAlt} cardWidth={cardWidth} cardHeight={cardHeight} objectFitValue={objectFitValue} strictImageSize={strictImageSize} {...CardImageProps}/>
+            <CardImageNext imageUrl={imageUrlSource}
+                           alt={mediaAlt}
+                           cardWidth={cardWidth}
+                           cardHeight={cardHeight}
+                           objectFitValue={objectFitValue}
+                           strictImageSize={strictImageSize}
+                           {...CardImageProps}
+            />
         )
     }else {
         return (
-            <CardImage imageUrl={imageUrlSource} alt={mediaAlt} cardWidth={cardWidth} cardHeight={cardHeight} objectFitValue={objectFitValue} strictImageSize={strictImageSize} {...CardImageProps}/>
+            <CardImage imageUrl={imageUrlSource}
+                       alt={mediaAlt}
+                       cardWidth={cardWidth}
+                       cardHeight={cardHeight}
+                       objectFitValue={objectFitValue}
+                       strictImageSize={strictImageSize}
+                       {...CardImageProps}
+            />
         )
     }
 };

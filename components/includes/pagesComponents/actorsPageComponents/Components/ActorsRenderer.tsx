@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
-import ActorCard from "../../../../cards/desktop/ActorCard/ActorCard";
+import ActorCard from "../../../cards/desktop/ActorCard/ActorCard";
 import styled from "styled-components";
-import {setLoading} from "../../../../../../store/actions/globalStateActions";
+import {setLoading} from "../../../../../store/actions/globalStateActions";
 import {useDispatch} from "react-redux";
-import {Meta} from "../../../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 let ActorsRendererStyledDiv = styled.div`
   display: flex;
@@ -19,12 +19,12 @@ let ActorsRendererStyledDiv = styled.div`
       align-items: center;
       justify-content: center;
       text-decoration: none;
+      font-size: 3vw;
       
       @media only screen and (min-width: 768px) {
-        width: 140px;
         margin: 5px;
         .actor-card-title {
-          font-size: 14px;
+          //font-size: 14px;
         }
       }
     }

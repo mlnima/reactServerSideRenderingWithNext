@@ -154,8 +154,9 @@ export const getFirstLoadData = async (req, dynamicWidgets,store,locale) => {
 
         const cache = process.env.NODE_ENV !== 'development'
         const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length ? [...dynamicWidgets] : [];
-        const staticWidgets = process.env.NEXT_PUBLIC_STATIC_WIDGETS ? JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS) : []
         const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet]}, cache,locale)
+        const staticWidgets = process.env.NEXT_PUBLIC_STATIC_WIDGETS ?
+                              JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS) : []
         const dynamicWidgetsData = widgetData.data?.widgets ?? []
         const allWidgets = [...staticWidgets,...dynamicWidgetsData]
         const identity = process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {}

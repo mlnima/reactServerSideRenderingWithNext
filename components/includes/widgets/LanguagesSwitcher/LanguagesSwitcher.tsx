@@ -1,6 +1,7 @@
 import {useRouter} from "next/router";
 import {languagesOptions} from "../../../../_variables/_variables";
 import styled from "styled-components";
+import {FC} from "react";
 
 const LanguagesSwitcherStyledDiv = styled.div`
   display: flex;
@@ -32,7 +33,7 @@ const LanguagesSwitcherStyledDiv = styled.div`
     color: var(--navigation-text-color, #ccc);
   }
 `
-const LanguagesSwitcher = () => {
+const LanguagesSwitcher :FC = () => {
     const router = useRouter()
 
     const onChangeHandler = e => {
@@ -47,6 +48,7 @@ const LanguagesSwitcher = () => {
                     value={router.locale}
                     aria-label='Center Align'
                     onChange={e => onChangeHandler(e)}
+                    title={'select language'}
             >
                 <option key='default' value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'default'}</option>
                 {languagesOptions}

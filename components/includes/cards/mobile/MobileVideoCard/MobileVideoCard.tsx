@@ -15,8 +15,8 @@ const MobileVideoCardStyledArticle = styled.article`
     color: var(--post-element-text-color, #ccc);
    
     .mobile-video-card-title {
-      font-size: 12px;
-      font-weight: lighter;
+      font-size: 14px;
+      font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -45,7 +45,9 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
          postsPerRawForMobile,
          rating
      }) => {
-        const postUrl = `/post/${post.postType}/${post._id}`
+
+        const postUrl = `/post/${post.postType}/${post._id}`;
+
         return (
             <MobileVideoCardStyledArticle postsPerRawForMobile={postsPerRawForMobile}>
                 <Link href={postUrl}>
@@ -54,6 +56,7 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
                        title={title}
                        onClick={onActivateLoadingHandler}
                     >
+
                         <MobileVideoCardMedia noImageUrl={noImageUrl}
                                               post={post}
                                               mediaAlt={title}
@@ -63,7 +66,9 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
                                               quality={post.quality}
                                               postsPerRawForMobile={postsPerRawForMobile}
                         />
+
                         <h3 className={'mobile-video-card-title'}>{title}</h3>
+
                         {post?.updatedAt ?
                             <CardLastUpdate updatedAt={post?.updatedAt}/>
                             : null

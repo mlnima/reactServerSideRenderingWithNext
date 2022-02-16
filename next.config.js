@@ -1,7 +1,6 @@
 require('webpack')
 const {parsed: localEnv} = require('dotenv').config();
 const {i18n} = require('./next-i18next.config');
-// const withImages = require('next-images')
 const withPlugins = require('next-compose-plugins');
 const nextEnv = require('next-env');
 const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
@@ -10,7 +9,9 @@ const allowedDomainForImages = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.sp
 const withPWA = require('next-pwa')
 const withCSS = require('@zeit/next-css')
 const withSass = require('@zeit/next-sass')
-const withBundleAnalyzer = require("@zeit/next-bundle-analyzer");
+const withBundleAnalyzer = require('@next/bundle-analyzer')({
+    enabled: process.env.ANALYZE === 'true',
+})
 
 const svgLoader = {
     webpack(config) {
@@ -21,8 +22,6 @@ const svgLoader = {
         return config;
     }
 }
-
-
 
 const i18nConfig = locales.length === 1 ? {} : {
     i18n: {
@@ -42,7 +41,6 @@ const i18nConfig = locales.length === 1 ? {} : {
 
 const rewrites = () => {
     return {
-        // ...staticPageGeneration,
         beforeFiles: [
             {
                 source: `/:postType(video|post|product|article|book|standard|promotion|learn|food|book)?/:title`,
@@ -61,17 +59,6 @@ const rewrites = () => {
         ],
         fallback: []
     }
-}
-
-
-const redirects = () => {
-    return [
-        // {
-        //     source: `/:postType(video|post|product|article|book|standard|promotion|learn|food|book)?/:idOrTitle`,
-        //     destination: '/post/:postType/:idOrTitle',
-        //     permanent: false
-        // }
-    ]
 }
 
 const nextImageConfig = {
@@ -93,8 +80,6 @@ const pwaSettings = {
 const nextConfigs = {
     env: {},
     rewrites,
-
-    // redirects,
     // swcMinify: true,
     eslint: {
         ignoreDuringBuilds: true,
@@ -103,26 +88,11 @@ const nextConfigs = {
 
 module.exports = withPlugins([
     withCSS(withSass()),
-    withBundleAnalyzer({
-        analyzeServer: ["server", "both"].includes(process.env.BUNDLE_ANALYZE),
-        analyzeBrowser: ["browser", "both"].includes(process.env.BUNDLE_ANALYZE),
-        bundleAnalyzerConfig: {
-            server: {
-                analyzerMode: 'static',
-                reportFilename: './bundles/server.html'
-            },
-            browser: {
-                analyzerMode: 'static',
-                reportFilename: './bundles/client.html'
-            }
-        }
-    }),
     i18n,
     svgLoader,
     process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
     nextImageConfig,
-    // withImages,
-    // reWriteRoutes,
+    withBundleAnalyzer,
     nextEnv({
         staticPrefix: 'NEXT_PUBLIC_',
         publicPrefix: 'NEXT_PUBLIC_'

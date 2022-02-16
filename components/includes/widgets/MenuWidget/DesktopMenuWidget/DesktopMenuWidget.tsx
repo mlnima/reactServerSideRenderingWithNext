@@ -19,7 +19,7 @@ interface DesktopMenuWidgetPropTypes {
 const DesktopMenuWidget: FC<DesktopMenuWidgetPropTypes> = ({menuItemsInOrder,mobileNavigationOnClickHandler}) => {
 
     return (
-        <DesktopMenuWidgetStyledUl>
+        <DesktopMenuWidgetStyledUl className={'menu-widget-items'}>
             {menuItemsInOrder.map(menuItem => <DesktopMenuWidgetItem menuItem={menuItem} key={menuItem.itemIndex} mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}/>)}
         </DesktopMenuWidgetStyledUl>
     )

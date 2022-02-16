@@ -10,7 +10,7 @@ const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
 
 const MobileArticleCardStyledArticle = styled.article`
-  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};
+  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
   margin: 4px 2px ;
   font-size: 12px;
 
@@ -28,8 +28,8 @@ const MobileArticleCardStyledArticle = styled.article`
     text-decoration: none;
     
     .mobile-article-card-title{
-      font-size: 12px;
-      font-weight: lighter;
+      font-size: 14px;
+      font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
@@ -45,7 +45,7 @@ const MobileArticleCardStyledArticle = styled.article`
       justify-content: space-between;
 
       .article-card-under-media-info {
-        font-size: 12px;
+        font-size: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
@@ -94,21 +94,26 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
          views,
          rating
      }) => {
-        const postUrl = `/post/${post.postType}/${post._id}`
+
+        const postUrl = `/post/${post.postType}/${post._id}`;
 
         return (
-            <MobileArticleCardStyledArticle className='article-card' postsPerRawForMobile={postsPerRawForMobile} >
+            <MobileArticleCardStyledArticle className={'article-card'} postsPerRawForMobile={postsPerRawForMobile} >
                 <Link href={postUrl}>
-                    <a rel='next' onClick={onActivateLoadingHandler} className='article-card-link' title={title}>
+                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'article-card-link'} title={title}>
                         <MobileArticleCardMedia post={post}
                                                 mediaAlt={title}
                                                 postsPerRawForMobile={postsPerRawForMobile}
                         />
                         <h3 className={'mobile-article-card-title'}>{title}</h3>
-                        <div className='article-card-under-media'>
-                            <div className='article-card-under-media-info'>
-                                {views ? <CardViews views={views} className={'article-card-views article-card-info-data'}/> : null}
-                                {rating ? <CardRating rating={rating} className={'article-card-rating article-card-info-data'}/> : null}
+                        <div className={'article-card-under-media'}>
+                            <div className={'article-card-under-media-info'}>
+                                {views ? <CardViews views={views} className={'article-card-views article-card-info-data'}/>
+                                    : null
+                                }
+                                {rating ? <CardRating rating={rating} className={'article-card-rating article-card-info-data'}/>
+                                    : null
+                                }
                             </div>
                         </div>
                         {post?.updatedAt ? <CardLastUpdate updatedAt={post?.updatedAt}/> : null}

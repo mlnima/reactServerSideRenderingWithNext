@@ -14,7 +14,7 @@ const ActorCardStyledDiv = styled.div`
     flex-direction: column;
     width: 140px;
     margin: auto;
-    font-size: 12px;
+    font-size: 14px;
 
     .actor-card-title {
       width: fit-content;
@@ -33,6 +33,13 @@ const ActorCardStyledDiv = styled.div`
     .actor-card-count {
       margin: 0 2px;
       color: var(--main-text-color);
+    }
+  }
+  @media only screen and (min-width: 768px) {
+    margin: 5px;
+    font-size: 14px;
+    .actor-card-title {
+      font-size: 14px;
     }
   }
 `

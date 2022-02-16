@@ -1,10 +1,10 @@
-import React from "react";
 import {wrapper} from '../store/store';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import {appWithTranslation} from 'next-i18next';
 import nextI18NextConfig from '../next-i18next.config.js';
 import type {AppProps} from 'next/app';
+import {useMemo} from "react";
 const AppLayout = dynamic(() => import('../components/layouts/AppLayout'));
 const AdminLayout = dynamic(() => import('../components/layouts/AdminLayout'));
 const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false});
@@ -12,30 +12,19 @@ const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLay
 const MyApp = ({Component, pageProps}: AppProps) => {
     const {pathname} = useRouter()
 
-    if (pathname.includes('/admin')) {
-        return (
-            <AdminLayout>
-                <Component {...pageProps} />
-            </AdminLayout>
-        )
-    } else if (pathname.includes('/messenger') || pathname.includes('/chatroom')) {
-        return (
-            <MessengerLayout>
-                <Component {...pageProps} />
-            </MessengerLayout>
-        )
-    } else return (
+    const ActiveLayout = useMemo(()=>{
+      return pathname.match( /\/admin/g ) ? AdminLayout :
+             pathname.match( /\/messenger|\/chatroom/g ) ? MessengerLayout:
+             AppLayout
+    },[pathname])
 
-        <AppLayout>
+    return(
+        <ActiveLayout >
             <Component {...pageProps} />
-        </AppLayout>
-
-
+        </ActiveLayout>
     )
 };
 
-
-//export default appWithTranslation(wrapper.withRedux(MyApp), nextI18NextConfig);
 export default wrapper.withRedux(appWithTranslation(MyApp, nextI18NextConfig));
 
 

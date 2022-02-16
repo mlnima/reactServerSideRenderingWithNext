@@ -4,7 +4,7 @@ import PaginationComponent from "../../components/includes/PaginationComponent/P
 import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
-import ActorsRenderer from "../../components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer/ActorsRenderer";
+import ActorsRenderer from "../../components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";

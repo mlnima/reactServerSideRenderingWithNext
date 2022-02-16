@@ -10,7 +10,7 @@ import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 const CategoryCardStyledDiv = styled.div`
   margin: 5px;
 
-  .category-card-info-link {
+  .category-card-link{
     width: 100%;
 
     .category-card-info {
@@ -34,7 +34,8 @@ const CategoryCardStyledDiv = styled.div`
         overflow: hidden;
         -webkit-box-orient: vertical;
         -webkit-line-clamp: 1;
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: normal;
         padding: 3px 0;
         margin: 3px 0;
       }
@@ -49,24 +50,30 @@ const CategoryCardStyledDiv = styled.div`
 interface CategoryCardPropTypes {
     cardWidth: number,
     category: Meta,
-    onActivateLoadingHandler: any
+    onActivateLoadingHandler: any,
 }
 
-const CategoryCard: FC<CategoryCardPropTypes> = ({cardWidth, category, onActivateLoadingHandler}) => {
+const CategoryCard: FC<CategoryCardPropTypes> =
+    ({
+         cardWidth,
+         category,
+         onActivateLoadingHandler,
+    }) => {
+
     const {t} = useTranslation('customTranslation');
     const {locale} = useRouter();
 
     const cardTitle = useMemo(() => {
         const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
-            category?.name :
-            category?.translations?.[locale]?.name || t(category?.name, {ns: 'customTranslation'})
+              category?.name :
+              category?.translations?.[locale]?.name || t(category?.name, {ns: 'customTranslation'})
         return capitalizeFirstLetter(checkedTitle)
-    }, [category?.name])
+    }, [category?.name]);
 
     return (
         <CategoryCardStyledDiv className={'category-card'}>
             <Link href={`/category/${category?._id}`}>
-                <a className='category-card-info-link'
+                <a className='category-card-link'
                    onClick={onActivateLoadingHandler}
                    title={cardTitle as string}
                 >
@@ -76,8 +83,9 @@ const CategoryCard: FC<CategoryCardPropTypes> = ({cardWidth, category, onActivat
                                            mediaAlt={cardTitle as string}
                         />
                     </div>
+
                     <div className={'category-card-info'}>
-                        <h3 className='category-card-title'>
+                        <h3 className={'category-card-title'}>
                             {cardTitle}
                         </h3>
                         {category?.count ? <span className={'category-card-count'}>

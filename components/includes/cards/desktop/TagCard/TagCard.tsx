@@ -4,8 +4,9 @@ import {useRouter} from "next/router";
 import TagCardMedia from "./TagCardMedia";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 import capitalizeFirstLetter from "../../../../../_variables/util/capitalizeFirstLetter";
+import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
+
 
 const TagCardStyledDiv = styled.div`
   margin: 5px;
@@ -24,7 +25,8 @@ const TagCardStyledDiv = styled.div`
         text-overflow: ellipsis;
         overflow: hidden;
         -webkit-box-orient: vertical;
-        font-size: 12px;
+        font-size: 14px;
+        font-weight: normal;
         padding: 3px 0;
         margin: 3px 0;
 
@@ -48,6 +50,7 @@ interface TagCardPropTypes {
 }
 
 const TagCard: FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler}) => {
+
     const {t} = useTranslation('customTranslation');
     const {locale} = useRouter();
 
@@ -56,7 +59,7 @@ const TagCard: FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler
             tag?.name :
             tag?.translations?.[locale]?.name || t(tag?.name, {ns: 'customTranslation'})
         return capitalizeFirstLetter(checkedTitle)
-    }, [tag?.name])
+    }, [tag?.name]);
 
     return (
         <TagCardStyledDiv className={'tag-card'}>

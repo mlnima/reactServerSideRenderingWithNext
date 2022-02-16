@@ -1,4 +1,4 @@
-import {FC, useMemo} from "react";
+import {FC, useEffect, useMemo} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import {useTranslation} from "next-i18next";
@@ -7,22 +7,31 @@ import {MenuItem} from "../../../../../_variables/TypeScriptTypes/WidgetsInterfa
 
 const DesktopMenuWidgetItemStyledLi = styled.li`
   color: var(--navigation-text-color, #ccc);
-  .menu-item{
-    padding: 6px 12px ;
+
+  .menu-widget-item {
+    padding: 6px 12px;
     color: var(--navigation-text-color, #ccc);
   }
 `
 
 interface DesktopMenuWidgetItemPropTypes {
-    menuItem:MenuItem,
-    mobileNavigationOnClickHandler:any
+    menuItem: MenuItem,
+    mobileNavigationOnClickHandler: any
 }
 
-const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> = ({menuItem,mobileNavigationOnClickHandler}) => {
+const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> = ({menuItem, mobileNavigationOnClickHandler}) => {
 
     const {t} = useTranslation(['common', 'customTranslation']);
 
-    const {locale} = useRouter()
+    const {locale, pathname} = useRouter()
+
+    const isActivePage = useMemo(() => {
+        const isHomPage = pathname === '/' && menuItem.target === '/'
+        const pathnameMatchTarget = pathname.includes(menuItem.target)
+        return isHomPage ?  true :
+               menuItem.target !== '/' ? pathnameMatchTarget :
+                   false
+    }, [pathname])
 
     const linkNameWithTranslate = useMemo(() => {
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
@@ -33,7 +42,8 @@ const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> = ({menuItem,mob
     return (
         <DesktopMenuWidgetItemStyledLi>
             <Link href={menuItem.target}>
-                <a className={'menu-item'} title={linkNameWithTranslate} onClick={mobileNavigationOnClickHandler}>
+                <a className={`menu-widget-item ${isActivePage ? 'active-link' : ''}`} title={linkNameWithTranslate}
+                   onClick={mobileNavigationOnClickHandler}>
                     {linkNameWithTranslate}
                 </a>
             </Link>
