@@ -37,9 +37,9 @@ const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> = ({menuItem, mo
     }, [])
 
     return (
-        <DesktopMenuWidgetItemStyledLi>
+        <DesktopMenuWidgetItemStyledLi className={isActivePage ? 'active-link' : ''}>
             <Link href={menuItem.target}>
-                <a className={`menu-widget-item${isActivePage ? ' active-link' : ''}`} title={linkNameWithTranslate}
+                <a className={`menu-widget-item`} title={linkNameWithTranslate}
                    onClick={mobileNavigationOnClickHandler}>
                     {linkNameWithTranslate}
                 </a>
