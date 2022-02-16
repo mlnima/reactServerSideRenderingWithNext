@@ -23,12 +23,12 @@ const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> = ({menuItem, mo
 
     const {t} = useTranslation(['common', 'customTranslation']);
 
-    const {locale, pathname,asPath} = useRouter()
+    const {locale,asPath} = useRouter()
 
     const isActivePage = useMemo(() => {
         return asPath === '/' && menuItem.target === '/' ? true :
                menuItem.target !== '/' && asPath.includes(menuItem.target)
-    }, [pathname])
+    }, [asPath])
 
     const linkNameWithTranslate = useMemo(() => {
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
