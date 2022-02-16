@@ -23,14 +23,11 @@ const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> = ({menuItem, mo
 
     const {t} = useTranslation(['common', 'customTranslation']);
 
-    const {locale, pathname} = useRouter()
+    const {locale, pathname,asPath} = useRouter()
 
     const isActivePage = useMemo(() => {
-        const isHomPage = pathname === '/' && menuItem.target === '/'
-        const pathnameMatchTarget = pathname.includes(menuItem.target)
-        return isHomPage ?  true :
-               menuItem.target !== '/' ? pathnameMatchTarget :
-                   false
+        return asPath === '/' && menuItem.target === '/' ? true :
+               menuItem.target !== '/' && asPath.includes(menuItem.target)
     }, [pathname])
 
     const linkNameWithTranslate = useMemo(() => {
@@ -42,7 +39,7 @@ const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> = ({menuItem, mo
     return (
         <DesktopMenuWidgetItemStyledLi>
             <Link href={menuItem.target}>
-                <a className={`menu-widget-item ${isActivePage ? 'active-link' : ''}`} title={linkNameWithTranslate}
+                <a className={`menu-widget-item${isActivePage ? ' active-link' : ''}`} title={linkNameWithTranslate}
                    onClick={mobileNavigationOnClickHandler}>
                     {linkNameWithTranslate}
                 </a>
