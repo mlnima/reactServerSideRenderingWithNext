@@ -2,7 +2,7 @@ import {useEffect, useState} from 'react';
 import {saveFormWidgetData} from '../../../../_variables/ajaxVariables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
-
+import {useRouter} from "next/router";
 
 const FormWidgetStyledDiv = styled.div`
   display: flex;
@@ -47,24 +47,18 @@ const FormWidgetStyledDiv = styled.div`
 
 const FormWidget = props => {
 
-    const [state, setState] = useState({
-        widgetId: '',
-        formName: '',
-        data: {}
+    const {locale} = useRouter()
+
+    const [state, setState] = useState(() => {
+        return {
+            language: locale,
+            widgetId: props.widgetId,
+            formName: props.uniqueData.formName,
+            data: {}
+        }
     })
 
     const [submit, setSubmit] = useState(false)
-
-    useEffect(() => {
-        if (props.id) {
-            setState({
-                ...state,
-                widgetId: props.id,
-                formName: props.formData.formName
-            })
-        }
-    }, [props]);
-
 
     const onFormFieldsChangeHandler = e => {
         setState({
@@ -82,43 +76,47 @@ const FormWidget = props => {
             ...state,
             date: Date.now()
         }).then(res => {
-            // console.log(res)
             setSubmit(true)
         })
     }
 
-
-    const renderFields = ((props?.uniqueData?.formData?.formFields||[]).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || []).map(field => {
-        if (field.fieldType === 'textarea') {
-            return (
-                <div className='form-widget-field' key={(props?.uniqueData?.formData?.formFields || []).indexOf(field)}>
-                    <p>{convertVariableNameToName(field.fieldName)}</p>
-                    <textarea className={'form-control-input'} name={field.fieldName} placeholder={field.fieldPlaceHolder} required={field.required} onChange={e => onFormFieldsChangeHandler(e)}/>
-                </div>
-            )
-        } else {
-            return (
-                <div className='form-widget-field' key={(props?.uniqueData?.formData?.formFields || []).indexOf(field)}>
-                    <p className='form-widget-field-title'>{convertVariableNameToName(field.fieldName)}</p>
-                    <input className={'form-control-input'} name={field.fieldName} type={field.fieldType} placeholder={field.fieldPlaceHolder} required={field.required} onChange={e => onFormFieldsChangeHandler(e)}/>
-                </div>
-            )
+    const renderFields = ((props?.uniqueData?.formFields || []).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1) || []).map(field => {
+        const fieldAttr = {
+            required : field.required ? Boolean(field.required) : false,
+            placeholder: field.fieldPlaceHolder || '',
+            name:field.fieldName,
+            onChange: (e) => onFormFieldsChangeHandler(e),
         }
+        return (
+            <div className='form-widget-field' key={(props?.uniqueData?.formFields || []).indexOf(field)}>
+                <p className='form-widget-field-title'>{convertVariableNameToName(field.fieldName)}</p>
+                {field.fieldType === 'textarea' ?
+                    <textarea className={'form-control-input'}
+                             {...fieldAttr}
+                    /> :
+                    <input className={'form-control-input'}
+                           {...fieldAttr}
+                           type={field.fieldType || 'text'}
+                    />
+                }
+            </div>
+        )
     })
 
     if (submit) {
         return (
             <FormWidgetStyledDiv className='form-widget'>
-                <h3 className='after-submit-message'>{props?.uniqueData?.formData.afterSubmitMessage || 'We got Your message and will get back to you soon as possible'}</h3>
+                <h3 className='after-submit-message'>{props?.uniqueData?.afterSubmitMessage || 'We got Your message and will get back to you soon as possible'}</h3>
             </FormWidgetStyledDiv>
         )
     } else {
         return (
             <FormWidgetStyledDiv className='form-widget'>
                 <form onSubmit={e => onSubmitHandler(e)} className='form-widget-the-form'>
-                    <h2>{props?.uniqueData?.formData?.formTitle}</h2>
+                    <h2>{props?.uniqueData?.formTitle}</h2>
                     {renderFields}
-                    <button type='submit' className='btn btn-primary'>{props?.uniqueData?.formData?.submitButtonText || 'Submit'}</button>
+                    <button type='submit'
+                            className='btn btn-primary'>{props?.uniqueData?.submitButtonText || 'Submit'}</button>
                 </form>
             </FormWidgetStyledDiv>
 

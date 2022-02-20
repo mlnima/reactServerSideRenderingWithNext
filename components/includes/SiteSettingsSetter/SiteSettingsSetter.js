@@ -10,17 +10,18 @@ const UserAutoLogin = dynamic(() => import('./UserAutoLogin'), {ssr: false})
 
 const SiteSettingSetter = () => {
     const [renderAutoLogin, setRenderAutoLogin] = useState(false)
-    const locale = useRouter()?.locale
-    const pathname = useRouter()?.pathname
+    const {locale,pathname} = useRouter()
 
-    const storeData = useSelector((store) => {
+    const siteSettingSetterData = useSelector((store) => {
         return {
             customScriptsAsString: store?.settings?.identity?.customScriptsAsString,
             googleAnalyticsId: store?.settings?.identity?.googleAnalyticsId,
             themeColor: store?.settings?.identity?.themeColor || '#000000',
             title: store?.settings?.identity?.translations?.[locale]?.title || store?.settings?.identity?.title || '',
-            description: store?.settings?.identity?.translations?.[locale]?.description || store?.settings?.identity?.description || '',
-            keywords: (store?.settings?.identity?.translations?.[locale]?.keywords || store?.settings?.identity?.keywords || []).map(keyword => keyword.trim()),
+            description: store?.settings?.identity?.translations?.[locale]?.description ||
+                         store?.settings?.identity?.description || '',
+            keywords: (store?.settings?.identity?.translations?.[locale]?.keywords ||
+                      store?.settings?.identity?.keywords || []).map(keyword => keyword.trim()),
             favIcon: store?.settings?.identity?.favIcon || '/static/images/favIcon/favicon.png'
         }
     })
@@ -37,28 +38,37 @@ const SiteSettingSetter = () => {
         <>
             <Head>
 
-                <title>{storeData.title}</title>
-                <meta name="description" content={storeData.description}/>
-                {storeData.keywords?.length ? <meta name="keywords" content={storeData.keywords}/> : null}
+                <title>{siteSettingSetterData.title}</title>
+                <meta name="description" content={siteSettingSetterData.description}/>
+                {siteSettingSetterData.keywords?.length ?
+                    <meta name="keywords" content={siteSettingSetterData.keywords}/>
+                    : null
+                }
                 {pathname !== '/post/[postType]/[id]' ?
                     locals.map((local, index) => {
-                        if (local === process.env.NEXT_PUBLIC_DEFAULT_LOCAL) {
-                            return <link rel="alternate" hrefLang={local} key={index} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/`}/>
-                        } else return <link rel="alternate" hrefLang={local} key={index} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${local}`}/>
+                        const hrefUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/
+                                         ${local === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : local}`
+                        return <link rel="alternate" hrefLang={local} key={index} href={hrefUrl}/>
                     })
                     : null
                 }
-                <meta name="theme-color" content={storeData.themeColor || '#000000' }/>
+                <meta name="theme-color" content={siteSettingSetterData.themeColor || '#000000' }/>
                 <meta name="apple-mobile-web-app-status-bar-style" content='#000000'/>
                 <meta name="viewport" content="width=device-width, initial-scale=1"/>
                 <meta charSet="utf-8"/>
-                <link rel="shortcut icon" href={storeData.favIcon}/>
-                <link rel="apple-touch-icon" href={storeData.favIcon}/>
+                <link rel="shortcut icon" href={siteSettingSetterData.favIcon}/>
+                <link rel="apple-touch-icon" href={siteSettingSetterData.favIcon}/>
                 <link rel="manifest" href={'/manifest.json'}/>
-                {storeData.customScriptsAsString ? <ScriptParser script={storeData.customScriptsAsString}/> : null}
+                {siteSettingSetterData.customScriptsAsString ?
+                    <ScriptParser script={siteSettingSetterData.customScriptsAsString}/>
+                    : null
+                }
 
             </Head>
-            {storeData.googleAnalyticsId ? <GoogleAnalytics googleAnalyticsId={storeData.googleAnalyticsId}/> : null}
+            {siteSettingSetterData.googleAnalyticsId ?
+                <GoogleAnalytics googleAnalyticsId={siteSettingSetterData.googleAnalyticsId}/>
+                : null
+            }
             {renderAutoLogin ? <UserAutoLogin renderAutoLogin={renderAutoLogin}/> : null}
         </>
     )

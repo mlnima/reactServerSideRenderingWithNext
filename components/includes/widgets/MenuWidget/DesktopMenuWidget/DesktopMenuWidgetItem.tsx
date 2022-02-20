@@ -19,7 +19,11 @@ interface DesktopMenuWidgetItemPropTypes {
     mobileNavigationOnClickHandler: any
 }
 
-const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> = ({menuItem, mobileNavigationOnClickHandler}) => {
+const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> =
+    ({
+         menuItem,
+         mobileNavigationOnClickHandler
+    }) => {
 
     const {t} = useTranslation(['common', 'customTranslation']);
 

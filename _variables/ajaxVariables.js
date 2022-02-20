@@ -1,7 +1,8 @@
 import axios from "axios";
+import _reduceWidgetsToGroups from '../_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups'
 import _getMultipleSettingsQueryGenerator from "./clientVariables/_getMultipleSettingsQueryGenerator";
 import _getMultipleWidgetWithDataQueryGenerator from "./clientVariables/_getMultipleWidgetWithDataQueryGenerator";
-import {SET_SETTINGS,SET_WIDGETS} from "../store/types";
+import {SET_SETTINGS, SET_WIDGETS, SET_WIDGETS_IN_GROUPS} from "../store/types";
 
 
 export const getSetting = async (type, cache) => {
@@ -75,7 +76,7 @@ export const saveFormWidgetData = async (data) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/forms/saveFormData', body)
 }
 
-export const getFormsData = async (data, wt) => {
+export const getFormsData = async (data) => {
     const body = {
         data,
         token: localStorage.wt
@@ -112,9 +113,10 @@ export const getPageData = async (data) => {
     }
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/pages/getPageData', body)
 }
-export const getPagesDataForStaticGeneration = async () => {
-    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/pages/getPagesData')
-}
+// export const getPagesDataForStaticGeneration = async () => {
+//     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/pages/getPagesData')
+// }
+
 export const deletePage = async (id) => {
     const body = {
         id,
@@ -151,76 +153,87 @@ export const getOrders = async (data, domainName) => {
 
 export const getFirstLoadData = async (req, dynamicWidgets,store,locale) => {
     try {
-
         const cache = process.env.NODE_ENV !== 'development'
-        const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length ? [...dynamicWidgets] : [];
-        const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet]}, cache,locale)
+        const widgetData = await getMultipleWidgetWithData({widgets: dynamicWidgets || []}, cache,locale);
+        const dynamicWidgetsData = widgetData.data?.widgets || []
         const staticWidgets = process.env.NEXT_PUBLIC_STATIC_WIDGETS ?
-                              JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS) : []
-        const dynamicWidgetsData = widgetData.data?.widgets ?? []
-        const allWidgets = [...staticWidgets,...dynamicWidgetsData]
-        const identity = process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {}
-        const design =  process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {}
+                              JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS)
+                              : []
+
+        //const widgetInGroups = _reduceWidgetsToGroups([...dynamicWidgetsData,...staticWidgets] )
+        const widgetInGroups = [...dynamicWidgetsData,...staticWidgets]
+
         const userAgent = req.headers['user-agent'];
+
         let isMobile = Boolean(userAgent.match(
             /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
         ))
 
-        store.dispatch({type:SET_WIDGETS,payload:allWidgets})
+         store.dispatch({
+            type:SET_SETTINGS,
+            payload: {
+                design: process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {},
+                identity: process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {},
+                eCommerce:{},
+            }
+        })
+
+        store.dispatch({
+            type:SET_WIDGETS_IN_GROUPS,
+            payload:widgetInGroups
+        })
 
         store.dispatch({
             type:SET_SETTINGS,
             payload: {
                 isMobile,
-                design:design,
-                identity:identity,
                 eCommerce:{},
             }
         })
 
-        return { }
-    } catch (e) {
-        console.log(e)
+        return {}
+    } catch (err) {
+        console.log(err)
     }
 }
 
-export const getFirstLoadDataStatic = async ( dynamicWidgets,store) => {
-    try {
-        const cache = process.env.NODE_ENV !== 'development'
-        const referer = false;
-        const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length  ? [...dynamicWidgets] : [];
-        const staticWidgetsToGet = referer ? [] : ['footer', 'header', 'topBar', 'navigation'];
-        const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
-        const widgets = widgetData.data?.widgets || []
-        const settings = await getMultipleSetting({settings: ['identity', 'design']},false)
-
-        const identityData = settings.data.settings ? settings.data.settings.find(s=>s.type==='identity') :{}
-        const designData = settings.data.settings ? settings.data.settings.find(s=>s.type==='design') : {}
-
-        const identity = identityData.data
-        const design =  designData.data
-
-
-        store.dispatch({type:SET_WIDGETS,payload:widgets})
-
-        store.dispatch({
-            type:SET_SETTINGS,
-            payload: {
-                design:design,
-                identity:identity,
-                eCommerce:{},
-            }
-        })
-
-        return {
-            // identity,
-            // design,
-            // widgets,
-            // referer,
-
-        }
-    } catch (e) {
-        console.log(e)
-    }
-}
+// export const getFirstLoadDataStatic = async ( dynamicWidgets,store) => {
+//     try {
+//         const cache = process.env.NODE_ENV !== 'development'
+//         const referer = false;
+//         const dynamicWidgetsToGet = dynamicWidgets && dynamicWidgets.length  ? [...dynamicWidgets] : [];
+//         const staticWidgetsToGet = referer ? [] : ['footer', 'header', 'topBar', 'navigation'];
+//         const widgetData = await getMultipleWidgetWithData({widgets: [...dynamicWidgetsToGet, ...staticWidgetsToGet]}, cache)
+//         const widgets = widgetData.data?.widgets || []
+//         const settings = await getMultipleSetting({settings: ['identity', 'design']},false)
+//
+//         const identityData = settings.data.settings ? settings.data.settings.find(s=>s.type==='identity') :{}
+//         const designData = settings.data.settings ? settings.data.settings.find(s=>s.type==='design') : {}
+//
+//         const identity = identityData.data
+//         const design =  designData.data
+//
+//
+//         store.dispatch({type:SET_WIDGETS,payload:widgets})
+//
+//         store.dispatch({
+//             type:SET_SETTINGS,
+//             payload: {
+//                 design:design,
+//                 identity:identity,
+//                 eCommerce:{},
+//             }
+//         })
+//
+//         return {
+//             // identity,
+//             // design,
+//             // widgets,
+//             // referer,
+//
+//         }
+//     } catch (e) {
+//         console.log(e)
+//     }
+// }
 

@@ -131,6 +131,8 @@ export interface WidgetPropTypes {
 }
 
 export interface WidgetDataPropTypes {
+    noSSR: boolean;
+    specificDayToRender: string;
     pagination: boolean,
     redirectLink: string,
     customScriptStrategy: string,
@@ -232,6 +234,7 @@ export interface SettingsStateTypes {
 }
 
 export interface WidgetsStateTypes {
+    widgetInGroups:{};
     widgets: WidgetPropTypes[],
 }
 

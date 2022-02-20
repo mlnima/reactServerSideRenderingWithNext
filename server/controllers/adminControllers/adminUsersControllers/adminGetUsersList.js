@@ -1,8 +1,10 @@
 //adminGetUsersList
 const userSchema = require('../../../models/userSchema');
 
-module.exports = (req, res) => {
+
+module.exports = async (req, res) => {
+    const totalCount = await userSchema.countDocuments({}).exec()
     userSchema.find({}).exec().then(users => {
-        res.json({ users });
+        res.json({ users,totalCount });
     })
 };

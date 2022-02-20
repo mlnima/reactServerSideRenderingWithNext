@@ -1,4 +1,4 @@
-import {wrapper} from '../store/store';
+import {wrapper} from '@store/store';
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
 import {appWithTranslation} from 'next-i18next';

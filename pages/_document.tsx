@@ -2,7 +2,7 @@ import Document from 'next/document'
 import {ServerStyleSheet} from 'styled-components';
 
 class MyDocument extends Document {
-    // @ts-ignore
+
     static async getInitialProps(ctx)  {
         const sheet = new ServerStyleSheet();
         const originalRenderPage = ctx.renderPage;

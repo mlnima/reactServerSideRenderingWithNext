@@ -51,7 +51,8 @@ const CardImageNext: FC<CardImageNextPropTypes> =
                                     strictImageSize={strictImageSize}>
                 <Image src={imageUrl}
                        alt={alt}
-                       loading={'lazy'}
+                       // loading={'lazy'}
+                       priority
                        layout={'responsive'}
                        width={cardWidth}
                        height={cardHeight}

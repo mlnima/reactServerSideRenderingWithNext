@@ -112,6 +112,7 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
 //     }
 //
 // }
+
 const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
 
     try {

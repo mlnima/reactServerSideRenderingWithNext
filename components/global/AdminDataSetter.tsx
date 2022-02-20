@@ -12,9 +12,9 @@ const AdminDataSetterStyledSpan = styled.span`
   display: none;
 `
 
-const AdminDataSetter = (props: any) => {
+const AdminDataSetter = () => {
     const dispatch = useDispatch()
-    const router = useRouter()
+    const {pathname} = useRouter()
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
 
     useEffect(() => {
@@ -23,11 +23,12 @@ const AdminDataSetter = (props: any) => {
                 console.log('welcome Admin, latest uncached data are sent for you')
             })
         }
-    }, [userData, router.pathname]);
+    }, [userData, pathname]);
 
     const getAndSetDataForAdmin = async () => {
         try {
             const settingsData = await getMultipleSetting({settings: ['identity', 'design', 'adminSettings']}, localStorage.wt)
+
             dispatch(adminGetWidgets())
             dispatch(getCustomPages())
 
@@ -41,8 +42,6 @@ const AdminDataSetter = (props: any) => {
                     identity: identityData.data,
                 }))
             }
-
-
         } catch (err) {
             console.log(err)
         }

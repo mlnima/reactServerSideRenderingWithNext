@@ -18,7 +18,7 @@ const FormTypeWidgetModelFields = props => {
         formFields: []
     });
 
-    const formFieldsSorted = (props.widgetData?.uniqueData?.formData?.formFields || []).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
+    const formFieldsSorted = (props.widgetData?.uniqueData?.formFields || []).sort((a, b) => (a.fieldIndex > b.fieldIndex) ? 1 : -1)
 
     const renderExistingFields = formFieldsSorted.map(field => {
         return (
@@ -31,10 +31,7 @@ const FormTypeWidgetModelFields = props => {
             ...prevWidgetData,
             uniqueData:{
                 ...(prevWidgetData?.uniqueData || {}),
-                formData:{
-                    ...(prevWidgetData?.uniqueData?.formData || {}),
-                    [e.target.name]: e.target.value
-                }
+                [e.target.name]: e.target.value
             }
         }))
     }
@@ -44,10 +41,10 @@ const FormTypeWidgetModelFields = props => {
     if (props.rendering){
         return (
             <FormTypeWidgetModelFieldsStyledDiv>
-                <TextInputFieldForWidget inputTitle='Form Name :' name='formName' type='text' value={props.widgetData?.uniqueData?.formData?.formName} placeHolder='Form Name' onChangeHandler={e => onChangeHandler(e)}/>
-                <TextInputFieldForWidget inputTitle='Form Title :' name='formTitle' type='text' value={props.widgetData?.uniqueData?.formData?.formTitle} placeHolder='Form Title' onChangeHandler={e => onChangeHandler(e)}/>
-                <TextInputFieldForWidget inputTitle='After Submit Message :' name='afterSubmitMessage' type='text' value={props.widgetData?.uniqueData?.formData?.afterSubmitMessage} placeHolder='After Submit Message' onChangeHandler={e => onChangeHandler(e)}/>
-                <TextInputFieldForWidget inputTitle='Submit button text :' name='submitButtonText' type='text' value={props.widgetData?.uniqueData?.formData?.submitButtonText} placeHolder='Submit button text' onChangeHandler={e => onChangeHandler(e)}/>
+                <TextInputFieldForWidget inputTitle='Form Name :' name='formName' type='text' value={props.widgetData?.uniqueData?.formName} placeHolder='Form Name' onChangeHandler={e => onChangeHandler(e)}/>
+                <TextInputFieldForWidget inputTitle='Form Title :' name='formTitle' type='text' value={props.widgetData?.uniqueData?.formTitle} placeHolder='Form Title' onChangeHandler={e => onChangeHandler(e)}/>
+                <TextInputFieldForWidget inputTitle='After Submit Message :' name='afterSubmitMessage' type='text' value={props.widgetData?.uniqueData?.afterSubmitMessage} placeHolder='After Submit Message' onChangeHandler={e => onChangeHandler(e)}/>
+                <TextInputFieldForWidget inputTitle='Submit button text :' name='submitButtonText' type='text' value={props.widgetData?.uniqueData?.submitButtonText} placeHolder='Submit button text' onChangeHandler={e => onChangeHandler(e)}/>
                 <AddFormConditional state={state}
                                     setState={setState}
                                     {...props}

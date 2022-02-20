@@ -17,5 +17,6 @@ const MainWidgetArea = ({stylesData,className,position}:any) => {
             />
         </StyledMain>
     );
+
 };
 export default MainWidgetArea;

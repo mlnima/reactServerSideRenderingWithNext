@@ -23,14 +23,11 @@ const AddFormConditional = props => {
             ...prevWidgetData,
             uniqueData:{
                 ...(prevWidgetData?.uniqueData || {}),
-                formData: {
-                    ...(prevWidgetData?.uniqueData?.formData || {}),
-                    formFields: [...(prevWidgetData?.uniqueData?.formData?.formFields|| []), {
+                    formFields: [...(prevWidgetData?.uniqueData?.formFields|| []), {
                         ...fieldData,
-                        fieldIndex: prevWidgetData?.uniqueData?.formData?.formFields?.length || 0,
-                        filedId: prevWidgetData?.uniqueData?.formData?.formFields?.length || 0
+                        fieldIndex: prevWidgetData?.uniqueData?.formFields?.length || 0,
+                        filedId: prevWidgetData?.uniqueData?.formFields?.length || 0
                     }]
-                }
             }
         }))
     }
@@ -48,7 +45,8 @@ const AddFormConditional = props => {
             </div>
             <div className={'selectFieldForWidget'}>
                 <p>Required :</p>
-                <select className={'custom-select'} name='required' value={state.required}>
+                <select className={'custom-select'} name='required' value={state.required} required={true} onChange={e => onChangeHandler(e)}>
+                    <option >select</option>
                     <option value='true'>True</option>
                     <option value='false'>False</option>
                 </select>

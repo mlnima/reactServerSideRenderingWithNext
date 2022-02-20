@@ -1,8 +1,8 @@
-import React, {FC} from 'react';
+import {FC} from 'react';
 import {getFirstLoadData} from "../_variables/ajaxVariables";
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
-import {wrapper} from "../store/store";
+import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../_variables/TypeScriptTypes/GlobalTypes";
 
@@ -17,23 +17,24 @@ const Home : FC = () => {
             stylesData={settings.design?.homePageStyle}
         />
     );
+
 };
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store =>
 
-    // @ts-ignore
     async (context ) => {
-
-        const firstLoadData = await getFirstLoadData(context.req,
+        await getFirstLoadData(context.req,
             ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
             store,
             context.locale
         )
         return {
             props: {
-                ...(await serverSideTranslations(context.locale as string , ['common', 'customTranslation'])),
-                ...firstLoadData,
+                ...(
+                    await serverSideTranslations(context.locale as string ,
+                        ['common', 'customTranslation']
+                    )),
             }
         }
     });

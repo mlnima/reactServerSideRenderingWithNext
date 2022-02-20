@@ -2,26 +2,32 @@ import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {FC} from "react";
 import {WidgetDataPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+
 const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
 
 interface WidgetComponentPropTypes {
-    extraId: any;
-    data:WidgetDataPropTypes,
-    customStyles:string,
-    widgetId:string,
-    isSidebar:boolean,
-    WidgetToRender:any,
-    viewType?:string
+    data: WidgetDataPropTypes,
+    widgetId: string,
+    isSidebar: boolean,
+    WidgetToRender: any,
+    viewType?: string
 }
 
 let WidgetStyledSection = styled.section`
-  ${({customStyles}:{customStyles:string}) => customStyles || ''}
+  ${({customStyles}: { customStyles: string }) => customStyles || ''}
 `
 
-const Widget : FC<WidgetComponentPropTypes> = ({data,WidgetToRender,widgetId,isSidebar,viewType}) => {
+const Widget: FC<WidgetComponentPropTypes> =
+    ({
+         data,
+         WidgetToRender,
+         widgetId,
+         isSidebar,
+         viewType
+    }) => {
     const idAttribute = data?.extraId ? {id: data?.extraId} : {}
 
     return (
@@ -38,7 +44,9 @@ const Widget : FC<WidgetComponentPropTypes> = ({data,WidgetToRender,widgetId,isS
                     isSidebar={isSidebar}
                     widget={true}
                     viewType={viewType}
-                /> : null}
+                />
+                : null
+            }
             {data.customScript ?
                 <WidgetCustomScript customScript={data.customScript}
                                     customScriptStrategy={data.customScriptStrategy}

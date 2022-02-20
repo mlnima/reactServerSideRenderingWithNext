@@ -6,11 +6,16 @@ import {getComments} from '../../../_variables/ajaxPostsVariables'
 import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
 import {getFormsData} from '../../../_variables/ajaxVariables'
 import {useRouter} from "next/router";
-
 import _getPostsQueryGenerator from "../../../_variables/clientVariables/_getPostsQueryGenerator";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
+import styled from "styled-components";
+import {adminGetMetas, adminGetPosts} from "../../../store/adminActions/adminPanelPostsActions";
+import {settingsPropTypes, StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {adminGetUsers} from "../../../store/adminActions/adminUserActions";
+import {adminPanelUsersReducer} from "../../../store/adminReducers/adminPanelUsersReducer";
+import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
 
 const TableHeader = dynamic(
     () => import('../../../components/adminIncludes/assetComponents/TableHeader/TableHeader'),
@@ -25,12 +30,7 @@ const TableControls = dynamic(
     {ssr: false}
 )
 
-import styled from "styled-components";
-import {adminGetMetas, adminGetPosts} from "../../../store/adminActions/adminPanelPostsActions";
-import {settingsPropTypes, StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
-import {adminGetUsers} from "../../../store/adminActions/adminUserActions";
-import {adminPanelUsersReducer} from "../../../store/adminReducers/adminPanelUsersReducer";
-import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
+
 
 const AdminAssetPageStyledDiv = styled.div`
 
@@ -39,7 +39,9 @@ const assets = (props: any) => {
     const router = useRouter()
     const dispatch = useDispatch()
     const posts = useSelector((store: StoreTypes) => store?.adminPanelPosts?.posts)
-    const totalCount = useSelector((store: StoreTypes) => store?.adminPanelPosts?.totalCount)
+    const totalCount = useSelector((store: StoreTypes) => {
+        return store?.adminPanelPosts?.totalCount || store?.adminPanelUsers?.totalCount
+    })
     const users = useSelector((store: StoreTypes) => store?.adminPanelUsers?.users)
     const forms = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.forms)
     const pages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.pages)
@@ -48,7 +50,24 @@ const assets = (props: any) => {
 
     const [selectedItems, setSelectedItems] = useState([]);
     const [finalPageData, setFinalPageData] = useState({});
-    const [dataConfig, setDataConfig] = useState({})
+    const [dataConfig, setDataConfig] = useState(()=>{
+        return {
+            size: router.query.size ? parseInt(router.query.size as string) : 30,
+            page: router.query.page ? parseInt(router.query.page as string) : 1,
+            postType: router?.query?.postType ?? null,
+            fields: ['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt'],
+            keyword: router?.query?.keyword ?? '',
+            author: router?.query?.author ?? 'all',
+            status: router?.query?.status ?? 'all',
+            sort: router?.query?.sort ?? 'updatedAt',
+            content: router?.query?.content ?? 'all',
+            metaType: router?.query?.metaType || null,
+            orderType: router?.query?.orderType ?? 'all',
+            metaId: router?.query?.metaId || null,
+            searchForImageIn: router?.query?.type,
+            startWith: '',
+        }
+    })
 
     useEffect(() => {
         setFinalPageData({
@@ -81,7 +100,6 @@ const assets = (props: any) => {
             metaType: router?.query?.metaType || null,
             orderType: router?.query?.orderType ?? 'all',
             metaId: router?.query?.metaId || null,
-            //page: router?.query?.page ? parseInt(router.query.page) : 1,
             searchForImageIn: router?.query?.type,
             startWith: '',
         })
@@ -107,7 +125,7 @@ const assets = (props: any) => {
     const getAndSetAssetData = async () => {
         const assetType = router.query.assetsType
         const ajaxRequestData =
-                assetType === 'forms' ? await getFormsData(dataConfig, localStorage.wt) :
+                assetType === 'forms' ? await getFormsData(dataConfig) :
                     assetType === 'pages' ? await getPagesData(dataConfig) :
                         assetType === 'comments' ? await getComments(dataConfig, false) :
                                 assetType === 'orders' ? await getOrders(dataConfig, process.env.NEXT_PUBLIC_PRODUCTION_URL) : null

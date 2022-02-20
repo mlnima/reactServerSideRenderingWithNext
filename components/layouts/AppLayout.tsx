@@ -5,9 +5,9 @@ import GlobalStyles from "../global/Styles/GlobalStyles";
 import _setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
 import {useRouter} from "next/router";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
 
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SidebarWidgetArea/SidebarWidgetArea'));
-const SiteSettingSetter = dynamic(() => import('../includes/SiteSettingsSetter/SiteSettingsSetter'));
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
 const NavigationWidgetArea = dynamic(() => import('../widgetsArea/NavigationWidgetArea/NavigationWidgetArea'));

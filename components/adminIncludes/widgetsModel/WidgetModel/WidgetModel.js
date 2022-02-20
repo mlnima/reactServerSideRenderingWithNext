@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef} from 'react';
+import React, {useEffect, useState, useRef, useMemo} from 'react';
 import styled from "styled-components";
 import dynamic from 'next/dynamic'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -9,7 +9,11 @@ import MultipleLinkWidgetModelFields from "./MultipleLinkWidgetModelFields/Multi
 import _ from "lodash";
 import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields";
 import {useDispatch, useSelector} from "react-redux";
-import {adminAddNewWidget, adminDeleteWidget, adminUpdateWidget} from "../../../../store/adminActions/adminWidgetsActions";
+import {
+    adminAddNewWidget,
+    adminDeleteWidget,
+    adminUpdateWidget
+} from "../../../../store/adminActions/adminWidgetsActions";
 import SelectFieldForWidget from "./SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import staticPositions from '../staticPositions';
@@ -93,6 +97,11 @@ const WidgetModelStyledDiv = styled.div`
 const WidgetModel = props => {
     const dispatch = useDispatch()
     const widgets = useSelector(store => store?.widgets?.widgets)
+
+    const currentWidgetData = useSelector(store =>
+        store?.widgets?.widgetInGroups?.[props.position].find(widget => widget._id === props.widgetId)
+    )
+
     const customPages = useSelector(store => store?.adminPanelGlobalState?.customPages)
 
     const [widgetSettings, setWidgetSettings] = useState({
@@ -105,29 +114,19 @@ const WidgetModel = props => {
     const [widgetData, setWidgetData] = useState({
         translations: {},
     })
-    const [positions, setPositions] = useState(() => staticPositions)
-
-
-    useEffect(() => {
-
-        setPositions((prevPositions) => [
-            ...prevPositions,
-            ..._.flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
-        ])
-    }, [customPages]);
+    const positions = useMemo(() => [...staticPositions,..._.flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))],[customPages])
 
     const languageElement = useRef(null)
 
 
     useEffect(() => {
-        const currentWidgetData = widgets.find(widget => widget._id === props.widgetId)
         if (currentWidgetData) {
             setWidgetData({
                 ...widgetData,
                 ...currentWidgetData?.data,
             })
         }
-    }, [widgets]);
+    }, [currentWidgetData]);
 
     const onChangeLanguageHandler = e => {
         setWidgetSettings({
@@ -301,18 +300,23 @@ const WidgetModel = props => {
 
                     <div className='checkInputFieldForWidget widgetSection'>
                         <p>Edit Mode:</p>
-                        <input type='checkbox' name='editMode' checked={widgetData.editMode} onChange={e => onCheckboxChangeHandler(e)}/>
+                        <input type='checkbox' name='editMode' checked={widgetData.editMode}
+                               onChange={e => onCheckboxChangeHandler(e)}/>
                     </div>
                     <div className='checkInputFieldForWidget widgetSection'>
                         <p>No SSR:</p>
-                        <input type='checkbox' name='noSSR' checked={widgetData.noSSR} onChange={e => onCheckboxChangeHandler(e)}/>
+                        <input type='checkbox' name='noSSR' checked={widgetData.noSSR}
+                               onChange={e => onCheckboxChangeHandler(e)}/>
                     </div>
                     <div className='widgetInfo widgetSection'>
                         <p className='widget-info-id'>ID :</p>
                         <p>{props.widgetId || props.state?.widgetId || 'XXX'}</p>
                     </div>
-                    <TextInputFieldForWidget inputTitle='Name:' name='name' type='text' value={widgetData.name} placeHolder='name' onChangeHandler={e => onChangeHandler(e)}/>
-                    <TextInputFieldForWidget inputTitle='index:' name='widgetIndex' type='number' value={widgetData.widgetIndex} placeHolder='widgetIndex' onChangeHandler={e => onChangeHandler(e)}/>
+                    <TextInputFieldForWidget inputTitle='Name:' name='name' type='text' value={widgetData.name}
+                                             placeHolder='name' onChangeHandler={e => onChangeHandler(e)}/>
+                    <TextInputFieldForWidget inputTitle='index:' name='widgetIndex' type='number'
+                                             value={widgetData.widgetIndex} placeHolder='widgetIndex'
+                                             onChangeHandler={e => onChangeHandler(e)}/>
                     <SelectFieldForWidget title={'Translations:'}
                                           name={'activeEditingLanguage'}
                                           ref={languageElement}
@@ -371,7 +375,6 @@ const WidgetModel = props => {
                     />
 
 
-
                     <p>Widget Text or HTML</p>
 
                     <MonacoEditor
@@ -389,9 +392,9 @@ const WidgetModel = props => {
                         onChange={onTextInputsDataChangeHandler}
                     />
 
-                    {widgetData.type === 'advertise'?
+                    {widgetData.type === 'advertise' ?
                         <AdvertiseWidgetModelFields adCode={widgetData.adCode} onChangeHandler={onChangeHandler}/>
-                        :null
+                        : null
                     }
 
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'meta' || widgetData.type === 'postsSlider' ?
@@ -415,16 +418,17 @@ const WidgetModel = props => {
                     }
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider' ?
                         <>
-                        <SelectFieldForWidget title={'Post Element Size:'}
-                                              name={'postElementSize'}
-                                              ref={null}
-                                              value={widgetData.postElementSize}
-                                              options={['listSmall', 'list', 'smaller', 'small', 'medium', 'large', 'larger']}
-                                              onChangeHandler={onChangeHandler}
-                        />
+                            <SelectFieldForWidget title={'Post Element Size:'}
+                                                  name={'postElementSize'}
+                                                  ref={null}
+                                                  value={widgetData.postElementSize}
+                                                  options={['listSmall', 'list', 'smaller', 'small', 'medium', 'large', 'larger']}
+                                                  onChangeHandler={onChangeHandler}
+                            />
                             <div className='checkInputFieldForWidget widgetSection'>
                                 <p>Pagination:</p>
-                                <input type='checkbox' name='pagination' checked={widgetData.pagination} onChange={e => onCheckboxChangeHandler(e)}/>
+                                <input type='checkbox' name='pagination' checked={widgetData.pagination}
+                                       onChange={e => onCheckboxChangeHandler(e)}/>
                             </div>
                         </>
                         : null
@@ -449,7 +453,6 @@ const WidgetModel = props => {
                                               onChangeHandler={onChangeHandler}
                         /> : null
                     }
-
 
 
                     {widgetData.type === 'logo' ?
@@ -541,8 +544,10 @@ const WidgetModel = props => {
                     {/*    }*/}
                     {/*/>*/}
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'postsSlider' ?
-                        <TextInputFieldForWidget inputTitle='Selected Meta For Posts:' name='selectedMetaForPosts' type='text' value={widgetData.selectedMetaForPosts}
-                                                 classNameValue='selectedMetaForPosts' placeHolder='selectedMetaForPosts'
+                        <TextInputFieldForWidget inputTitle='Selected Meta For Posts:' name='selectedMetaForPosts'
+                                                 type='text' value={widgetData.selectedMetaForPosts}
+                                                 classNameValue='selectedMetaForPosts'
+                                                 placeHolder='selectedMetaForPosts'
                                                  onChangeHandler={onChangeHandler}/> : null
                     }
 
@@ -567,11 +572,13 @@ const WidgetModel = props => {
                                                        setWidgetData={setWidgetData}/> : null
                     }
 
-                    <TextInputFieldForWidget inputTitle='Extra ClassName:' name='extraClassName' type='text' value={widgetData.extraClassName}
+                    <TextInputFieldForWidget inputTitle='Extra ClassName:' name='extraClassName' type='text'
+                                             value={widgetData.extraClassName}
                                              placeHolder='Extra ClassName'
                                              onChangeHandler={onChangeHandler}/>
 
-                    <TextInputFieldForWidget inputTitle='Extra Id:' name='extraId' type='text' value={widgetData.extraId}
+                    <TextInputFieldForWidget inputTitle='Extra Id:' name='extraId' type='text'
+                                             value={widgetData.extraId}
                                              placeHolder='Extra Id'
                                              onChangeHandler={onChangeHandler}/>
 
@@ -614,19 +621,30 @@ const WidgetModel = props => {
                         }) : setWidgetSettings({...widgetSettings, preview: true})
                     }}>Preview the Widget
                     </button>
-                    {widgetSettings.preview ? <WidgetPreview widgetData={widgetData} position={widgetData.position} preview={widgetSettings.preview}/> : null}
+                    {widgetSettings.preview ? <WidgetPreview widgetData={widgetData} position={widgetData.position}
+                                                             preview={widgetSettings.preview}/> : null}
 
                     <div className='control-buttons'>
-                        <button title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{width: '15px', height: '15px'}}/></button>
+                        <button title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{
+                            width: '15px',
+                            height: '15px'
+                        }}/></button>
                         <ExportWidget data={{...widgetData}}/>
-                        <button title="clone" onClick={() => onCloneHandler()}><FontAwesomeIcon icon={faClone} style={{width: '15px', height: '15px'}}/></button>
-                        <button title="delete" onClick={() => widgetSettings.renderDeleteBtn ? setWidgetSettings({...widgetSettings, renderDeleteBtn: false}) : setWidgetSettings({
+                        <button title="clone" onClick={() => onCloneHandler()}><FontAwesomeIcon icon={faClone} style={{
+                            width: '15px',
+                            height: '15px'
+                        }}/></button>
+                        <button title="delete" onClick={() => widgetSettings.renderDeleteBtn ? setWidgetSettings({
+                            ...widgetSettings,
+                            renderDeleteBtn: false
+                        }) : setWidgetSettings({
                             ...widgetSettings,
                             renderDeleteBtn: true
                         })}>
                             <FontAwesomeIcon icon={faTrash} style={{width: '15px', height: '15px'}}/>
                         </button>
-                        {widgetSettings.renderDeleteBtn ? <button onClick={() => onDeleteHandler()}>Delete</button> : null}
+                        {widgetSettings.renderDeleteBtn ?
+                            <button onClick={() => onDeleteHandler()}>Delete</button> : null}
                     </div>
                 </div>
                 : null

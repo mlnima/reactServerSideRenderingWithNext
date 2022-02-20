@@ -1,10 +1,10 @@
-import * as types from '../types'
-import * as adminTypes from '../types'
 import {HYDRATE} from 'next-redux-wrapper';
+import {SET_SETTINGS} from "../types";
+import {EDIT_DESIGN} from "../adminTypes";
 
 const initialState = {
     isMobile: false,
-    design: {},
+    design:  {},
     identity: {},
     eCommerce: {},
     adminSettings: {}
@@ -17,12 +17,15 @@ export const settingsReducer = (state = initialState, action) => {
                 ...state,
                 ...action.payload?.settings || {}
             };
-        case  types.SET_SETTINGS:
+        case SET_SETTINGS:
             return {
                 ...state,
-                ...action?.payload || {},
+                ...action?.payload || {
+                    design: process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {},
+                    identity: process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {},
+                },
             }
-        case  adminTypes.EDIT_DESIGN:
+        case  EDIT_DESIGN:
             return {
                 ...state,
                 design: {

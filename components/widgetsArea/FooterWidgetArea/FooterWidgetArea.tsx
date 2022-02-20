@@ -19,6 +19,7 @@ const StyledFooter = styled.footer`
 
 const FooterWidgetArea = ( ) => {
     const footerStyle = useSelector((store: StoreTypes) => store?.settings?.design?.footerStyle)
+
     return (
         <StyledFooter stylesData={footerStyle || ''} className={'widget-area footer' }>
             <div className='footer-content'>

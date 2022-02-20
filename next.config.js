@@ -80,7 +80,7 @@ const pwaSettings = {
 const nextConfigs = {
     env: {},
     rewrites,
-    // swcMinify: true,
+    swcMinify: true,
     eslint: {
         ignoreDuringBuilds: true,
     }
@@ -90,7 +90,7 @@ module.exports = withPlugins([
     withCSS(withSass()),
     i18n,
     svgLoader,
-    process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
+    // process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},
     nextImageConfig,
     withBundleAnalyzer,
     nextEnv({

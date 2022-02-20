@@ -1,33 +1,22 @@
-import React, { useEffect, useState, useContext } from 'react';
-import { getUsersList, getUsersListAsAdmin } from "../../../_variables/ajaxAuthVariables";
-import {wrapper} from "../../../store/store";
+import React, {useEffect, useState} from 'react';
+import {adminGetUsers} from "../../../store/adminActions/adminUserActions";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useDispatch} from "react-redux";
+
 
 const users = () => {
-    const [ usersList, setUsersList ] = useState([]);
+    const dispatch = useDispatch()
 
     useEffect(() => {
-        getUsersListAsAdmin().then(res => {
-            // @ts-ignore
-            setUsersList(res.data.users)
-        })
+        dispatch(adminGetUsers())
     }, []);
-
-    const renderUsers = usersList.map(user => {
-
-        return (
-            <p
-                // @ts-ignore
-                key={ user.username }>{ user.username }
-            </p>
-        )
-    })
 
     return (
 
-            <div>
-                { renderUsers }
-            </div>
+        <div>
+
+        </div>
 
     );
 };

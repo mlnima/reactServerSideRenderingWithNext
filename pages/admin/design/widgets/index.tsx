@@ -7,7 +7,7 @@ import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import WidgetPositionsSelect from "../../../../components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
-import {useRouter} from "next/router";
+
 
 let StyledDiv = styled.div`
   display: flex;
@@ -48,17 +48,10 @@ let StyledDiv = styled.div`
 `
 
 const AdminWidgets = () => {
-    const widgets = useSelector((store: StoreTypes) => store?.widgets.widgets)
-    const [availablePositions, setAvailablePositions] = useState([])
+
+    const availablePositions = useSelector((store :StoreTypes) => Object.keys(store?.widgets?.widgetInGroups))
+
     const [filter, setFilter] = useState('all')
-    const router = useRouter()
-    useEffect(() => {
-        // @ts-ignore
-        setAvailablePositions(() => {
-            // @ts-ignore
-            return [...new Set(widgets.map(widgets => widgets?.data?.position).sort())]
-        })
-    }, [widgets]);
 
     const onFilter = (e) => {
         setFilter(e.target.value)
