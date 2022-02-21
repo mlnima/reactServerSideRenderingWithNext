@@ -106,7 +106,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                         />
                     </a>
                 </Link>
-                <ArticleTypeCardTitle title={post.title}
+                <ArticleTypeCardTitle title={title}
                                       postUrl={postUrl}
                                       onActivateLoadingHandler={onActivateLoadingHandler}
                                       cardWidth={cardWidth}

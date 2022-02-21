@@ -80,9 +80,9 @@ const Posts = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isS
                 // const title = (post?.translations?.[locale as string]?.title || post?.title as string)
                 //     ?.replace('#', '');
 
-                const title = (process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ? post?.title :
-                              post?.translations?.[locale as string]?.title ? post?.translations?.[locale as string]?.title :
-                              post?.title)?.replace('#', '');
+                const title = process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ? post?.title?.replace('#', '') :
+                              post?.translations?.[locale as string]?.title ? post?.translations?.[locale as string]?.title?.replace('#', '') :
+                              post?.title?.replace('#', '');
 
 
 

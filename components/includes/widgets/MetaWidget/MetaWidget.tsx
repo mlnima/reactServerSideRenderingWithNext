@@ -17,14 +17,13 @@ const MetaWidgetStyledDiv = styled.div`
 `
 
 interface MetaWidgetPropType{
-    metaData:Meta[],
     uniqueData?:{
         metaData?:Meta[],
     },
     metaType:string
 }
 
-const MetaWidget: FC<MetaWidgetPropType> = ({metaData,metaType,uniqueData}) => {
+const MetaWidget: FC<MetaWidgetPropType> = ({metaType,uniqueData}) => {
 
     const typePath = useMemo(()=>{
         return metaType === 'tags' ? 'tag' :
@@ -32,6 +31,7 @@ const MetaWidget: FC<MetaWidgetPropType> = ({metaData,metaType,uniqueData}) => {
                metaType === 'actors' ? 'actor' : 'category'
     },[])
 
+    // console.log(uniqueData?.metaData)
     const renderMeta = (uniqueData?.metaData || []).map((meta,index) => {
         return (
             <MetaWidgetElement typePath={typePath} id={meta._id} key={meta._id} name={meta.name}/>
