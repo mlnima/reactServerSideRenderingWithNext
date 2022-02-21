@@ -104,6 +104,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
             return (
                 <WidgetFragment key={widget._id}>
                     <Widget
+                        key={widget._id}
                         widgetId={widget._id}
                         isSidebar={position ? position.includes('Sidebar') : false}
                         {...widget}
