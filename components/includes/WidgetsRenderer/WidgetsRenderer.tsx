@@ -47,7 +47,8 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
     const widgetsRendererData = useSelector((store: StoreTypes) => {
         return {
             widgets: store?.widgets?.widgetInGroups?.[position],
-            userRole: store?.user.userData?.role
+            userRole: store?.user.userData?.role,
+            isMobile : store.settings?.isMobile,
         }
     })
 
@@ -56,18 +57,22 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
         ?.map((widget: WidgetPropTypes) => {
 
         const languageToRender = widget.data.languageToRender || 'all';
+        const renderByDevice = widgetsRendererData.isMobile && widget.data.deviceTypeToRender === 'mobile' ||
+                               !widgetsRendererData.isMobile && widget.data.deviceTypeToRender === 'desktop' ||
+                               !widget.data.deviceTypeToRender
+
         const renderByLanguageCondition = languageToRender === locale || !languageToRender ||
             languageToRender === 'all' ||
             (languageToRender === 'default' && locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
 
 
         const renderByDayCondition = widget.data?.specificDayToRender === 'all' ||
-        !widget.data?.specificDayToRender ? true :
-            !widget.data?.specificDayToRender && !widget.data?.specificDayToRender ?
-                widget.data?.specificDayToRender === new Date()
-                    .toLocaleString('en-us', {weekday: 'long'})
-                    .toLowerCase() :
-                false;
+                                     !widget.data?.specificDayToRender ? true :
+                                     !widget.data?.specificDayToRender && !widget.data?.specificDayToRender ?
+                                     widget.data?.specificDayToRender === new Date()
+                                        .toLocaleString('en-us', {weekday: 'long'})
+                                        .toLowerCase() :
+                                     false;
 
         const isEditMode = widget.data.editMode && widgetsRendererData.userRole !== 'administrator';
 
@@ -99,7 +104,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                                 widget.data.type === 'form' ? FormWidget
                                 : null;
 
-        if (renderByLanguageCondition && renderByDayCondition && !isEditMode) {
+        if (renderByLanguageCondition && renderByDayCondition && !isEditMode && renderByDevice) {
             const WidgetFragment = widget.data.noSSR ? DynamicNoSSR : Fragment
             return (
                 <WidgetFragment key={widget._id}>
@@ -123,23 +128,3 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 };
 export default WidgetsRenderer;
 
-// const widgets = useSelector((store: StoreTypes) => {
-//     return store.widgets.widgets
-//         .filter((widget) => widget.data?.position === position)
-//         .sort((a: WidgetPropTypes, b: WidgetPropTypes) => {
-//             return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
-//         })
-// })
-
-
-// const widgets = useSelector((store: StoreTypes) => store.widgets.widgets)
-// const widgets = useMemo(() => {
-//     return widgets.filter((widget) => widget.data?.position === position).sort((a: WidgetPropTypes, b: WidgetPropTypes) => {
-//         return a.data.widgetIndex > b.data.widgetIndex ? 1 : -1
-//     })
-// }, [widgets, isSidebar, router.pathname])
-
-// const today = new Date().toLocaleString('en-us', {weekday: 'long'}).toLowerCase()
-// const renderByDayCondition = widget.data?.specificDayToRender === today ||
-//     widget.data?.specificDayToRender === 'all' ||
-//     !widget.data?.specificDayToRender;
