@@ -7,14 +7,14 @@ import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
 import {getFormsData} from '../../../_variables/ajaxVariables'
 import {useRouter} from "next/router";
 import _getPostsQueryGenerator from "../../../_variables/clientVariables/_getPostsQueryGenerator";
-import {wrapper} from "../../../store/store";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import {adminGetMetas, adminGetPosts} from "../../../store/adminActions/adminPanelPostsActions";
+import {adminGetMetas, adminGetPosts} from "@store/adminActions/adminPanelPostsActions";
 import {settingsPropTypes, StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
-import {adminGetUsers} from "../../../store/adminActions/adminUserActions";
-import {adminPanelUsersReducer} from "../../../store/adminReducers/adminPanelUsersReducer";
+import {adminGetUsers} from "@store/adminActions/adminUserActions";
+import {adminPanelUsersReducer} from "@store/adminReducers/adminPanelUsersReducer";
 import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
 
 const TableHeader = dynamic(
@@ -112,7 +112,7 @@ const assets = (props: any) => {
             const gettingPostsQueries = _getPostsQueryGenerator(router?.query, router?.query.metaId, false)
             dispatch(adminGetPosts(gettingPostsQueries))
         } else if (assetType === 'users') {
-            dispatch(adminGetUsers())
+            dispatch(adminGetUsers({}))
         }else if (assetType === 'metas') {
             const queries = _metaPageQueryGenerator(router?.query,router?.query.metaType,false)
             dispatch(adminGetMetas(queries))

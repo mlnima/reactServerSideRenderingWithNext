@@ -14,7 +14,7 @@ module.exports = (req, res) => {
                     widgetSchema.findOne({'data.posts': post._id}).exec().then(widget => {
                         if (widget) {
                             updatePostWidget(widget).then(updatedWidgets => {
-                                widgetSchema.findByIdAndUpdate(widget._id, {'data.posts': [...updatedWidgets.posts]}, {new: true}).exec()
+                                widgetSchema.findByIdAndUpdate(widget._id, {'data..uniqueData.posts': [...updatedWidgets.posts]}, {new: true}).exec()
                             })
                         }
                     })

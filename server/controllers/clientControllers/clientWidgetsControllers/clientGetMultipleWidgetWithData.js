@@ -13,10 +13,14 @@ module.exports = async (req, res) => {
             {},
             excludeOtherLanguagesQuery).populate([
             {
-                path: 'data.metaData'
+                model:'meta',
+                path: 'data.uniqueData.metaData',
+
             },
             {
-                path: 'data.posts',
+
+                model:'post',
+                path: 'data.uniqueData.posts',
                 populate: [
                     {
                         path: 'actors',

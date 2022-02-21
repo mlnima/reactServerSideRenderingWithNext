@@ -1,6 +1,21 @@
 const mongoose = require('mongoose');
 const Schema = mongoose.Schema
 
+
+
+const postsWidgetSchema = new Schema({
+    posts: [{type: Schema.Types.ObjectID, ref: 'post'}],
+    totalCount:Number
+})
+const metaWidgetSchema = new Schema({
+    metaData: [{type: Schema.Types.ObjectID, ref: 'meta'}],
+    totalCount:Number
+})
+
+
+
+
+
 const widgetDataSchema = new Schema({
     extraClassName: String,
     extraId: String,
@@ -40,13 +55,14 @@ const widgetDataSchema = new Schema({
     pagination:Boolean,
     stayOpen: Boolean,
     translations: mongoose.Mixed,
+   // uniqueData: postsWidgetSchema | metaWidgetSchema | mongoose.Mixed,
     uniqueData: mongoose.Mixed,
     menuItems: mongoose.Mixed,
-    posts: [{type: Schema.Types.ObjectID, ref: 'post'}],
-    metaData: [{type: Schema.Types.ObjectID, ref: 'meta'}],
+    // posts: [{type: Schema.Types.ObjectID, ref: 'post'}],
+    // metaData: [{type: Schema.Types.ObjectID, ref: 'meta'}],
     comments: [{type: Schema.Types.ObjectID, ref: 'comment'}]
 });
-
+//{strict: false}
 const widgetSchema = new Schema({
 
     data: widgetDataSchema,

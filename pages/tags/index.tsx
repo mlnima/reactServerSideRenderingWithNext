@@ -34,7 +34,7 @@ const tagsPage = () => {
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <TagsRenderer metaData={undefined} postElementSize={undefined} />
+            <TagsRenderer  postElementSize={undefined} />
 
             <PaginationComponent
                 isActive={true}

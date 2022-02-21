@@ -40,27 +40,31 @@ interface PostsComponentTypes {
     viewType: string,
     _id: string,
     posts: PostTypes[],
+    uniqueData: {
+        posts: PostTypes[],
+        totalCount: number
+    }
     widgetId: string,
     postElementSize: string,
     isSidebar: boolean
 }
 
 
-const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: PostsComponentTypes) => {
+const Posts = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isSidebar}: PostsComponentTypes) => {
     const dispatch = useDispatch()
     const {locale} = useRouter()
 
     const postsData = useSelector((store: StoreTypes) => {
         const elementSize = postElementSize ? postElementSize : store.settings?.design?.postElementSize
-        return{
+        return {
             elementSize,
-            postsPerRawForMobile:store.settings?.identity?.postsPerRawForMobile || 2,
-            isMobile:store.settings?.isMobile,
+            postsPerRawForMobile: store.settings?.identity?.postsPerRawForMobile || 2,
+            isMobile: store.settings?.isMobile,
             cardWidth: elementSize === 'listSmall' ? 320 :
-                       elementSize === 'list' ? 116.6 :
-                       elementSize === 'smaller' ? 209.8 :
-                       elementSize === 'small' ? 255 :
-                       elementSize === 'medium' ? 320 : 255
+                elementSize === 'list' ? 116.6 :
+                    elementSize === 'smaller' ? 209.8 :
+                        elementSize === 'small' ? 255 :
+                            elementSize === 'medium' ? 320 : 255
         }
     });
 
@@ -71,11 +75,19 @@ const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: Pos
                                postElementSize={postsData.elementSize}
         >
 
-            {(posts || []).map((post: PostTypes, index: number) => {
-                const title = (post?.translations?.[locale as string]?.title || post?.title as string)
-                              .replace('#', '');
+            {(uniqueData?.posts || posts || []).map((post: PostTypes, index: number) => {
+
+                // const title = (post?.translations?.[locale as string]?.title || post?.title as string)
+                //     ?.replace('#', '');
+
+                const title = (process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ? post?.title :
+                              post?.translations?.[locale as string]?.title ? post?.translations?.[locale as string]?.title :
+                              post?.title)?.replace('#', '');
+
+
+
                 const dir = locale === 'fa' || locale === 'ar' && post?.translations?.[locale as string]?.title ?
-                            'rtl' : 'ltr'
+                    'rtl' : 'ltr'
                 const viewsNumber = post.views || 0
                 const views = _shortNumber(viewsNumber)
                 const rating = likeValueCalculator(post.likes, post.disLikes)
@@ -88,7 +100,7 @@ const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: Pos
                     post,
                     postElementSize: postsData.elementSize,
                     widgetId,
-                    cardWidth:postsData.cardWidth,
+                    cardWidth: postsData.cardWidth,
                     title
 
                 }
@@ -101,13 +113,13 @@ const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: Pos
                                                   key={index}
                         />
                     } else {
-                        if (postsData.isMobile){
+                        if (postsData.isMobile) {
                             return <MobileVideoCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                                     postsPerRawForMobile={postsData.postsPerRawForMobile}
                                                     {...postProps}
                                                     key={index}
                             />
-                        }else {
+                        } else {
                             return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                                   {...postProps}
                                                   key={index}
@@ -124,13 +136,13 @@ const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: Pos
                                                        key={index}
                         />
                     } else {
-                        if (postsData.isMobile){
-                           return <MobilePromotionCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                       postsPerRawForMobile={postsData.postsPerRawForMobile}
-                                                       {...postProps}
-                                                       key={index}
+                        if (postsData.isMobile) {
+                            return <MobilePromotionCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                        postsPerRawForMobile={postsData.postsPerRawForMobile}
+                                                        {...postProps}
+                                                        key={index}
                             />
-                        }else {
+                        } else {
                             return <PromotionTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                                       {...postProps}
                                                       key={index}
@@ -139,13 +151,13 @@ const Posts = ({viewType, _id, posts, widgetId, postElementSize, isSidebar}: Pos
 
                     }
                 } else if (post.postType === 'article') {
-                    if (postsData.isMobile){
+                    if (postsData.isMobile) {
                         return <MobileArticleCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                                   postsPerRawForMobile={postsData.postsPerRawForMobile}
                                                   {...postProps}
                                                   key={index}
                         />
-                    }else {
+                    } else {
                         return <ArticleTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                                 {...postProps}
                                                 key={index}

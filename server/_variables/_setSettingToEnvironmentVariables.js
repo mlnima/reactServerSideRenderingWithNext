@@ -8,9 +8,9 @@ const _setSettingToEnvironmentVariables = async () => {
         const identity = await settingSchema.findOne({type: 'identity'}).exec()
         const design = await settingSchema.findOne({type: 'design'}).exec()
         const widgets = await widgetSchema.find({$or: staticWidgetsQuery}).populate([
-            {path: 'data.metaData'},
+            {path: 'data.uniqueData.metaData'},
             {
-                path: 'data.posts',
+                path: 'data.uniqueData.posts',
                 populate: [{
                     path: 'actors',
                     select: {'name': 1, 'type': 1},

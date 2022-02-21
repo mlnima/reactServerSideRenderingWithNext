@@ -8,8 +8,8 @@ const WidgetExporter = () => {
 
     const exportAllWidgets=()=>{
         const data = widgets.map(widget=>{
-            widget.data.posts =[]
-            widget.data.metaData =[]
+            widget.data.uniqueData.posts =[]
+            widget.data.uniqueData.metaData =[]
             widget.data.comments =[]
             return widget.data
         })

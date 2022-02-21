@@ -35,7 +35,7 @@ const categoriesPage = () => {
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <CategoriesRenderer metaData={undefined} postElementSize={undefined}/>
+            <CategoriesRenderer  postElementSize={undefined}/>
 
             <PaginationComponent
                 isActive={true}

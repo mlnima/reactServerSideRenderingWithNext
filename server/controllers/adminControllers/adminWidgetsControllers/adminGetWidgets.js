@@ -3,9 +3,12 @@ const widgetSchema = require('../../../models/widgetSchema');
 module.exports = async (req, res) => {
     try {
         const widgets = await widgetSchema.find({}).populate([
-            {path: 'data.metaData'},
             {
-                path: 'data.posts',
+                model:'meta',
+                path: 'data.uniqueData.metaData'},
+            {
+                model:'post',
+                path: 'data.uniqueData.posts',
                 populate: [
                     {
                         path: 'actors',

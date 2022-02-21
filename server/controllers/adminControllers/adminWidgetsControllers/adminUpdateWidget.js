@@ -2,6 +2,7 @@ const widgetSchema = require('../../../models/widgetSchema');
 const metaSchema = require('../../../models/metaSchema');
 const postSchema = require('../../../models/postSchema');
 const _queryGeneratorForGettingPosts = require('../../clientControllers/_variables/_queryGeneratorForGettingPosts')
+const {map} = require("lodash");
 
 
 const updatePostWidget = async (widget) => {
@@ -17,9 +18,16 @@ const updatePostWidget = async (widget) => {
                     limit: findingPostsOptions.size,
                     sort: findingPostsOptions.sortQuery
                 }).exec()
+            //     .then(postsData=>postsData.reduce((returnArr,currentPost)=>{
+            //     returnArr = [...returnArr,currentPost._id]
+            //     return returnArr
+            // },[]))
             const dateForUpdateWidget = {
                 ...widgetData,
-                posts
+                uniqueData:{
+                    posts:posts.map(post=>post._id),
+                    totalCount
+                }
             }
             return dateForUpdateWidget
         } catch (err) {
@@ -64,8 +72,9 @@ const adminUpdateWidget = async (req, res) => {
         ).select('_id').limit(parseInt(widgetData.count)).sort(sortMethod).exec() : []
         const dateForUpdateWidget = {
             ...widgetData,
-            metaData: metas.map(meta => meta._id),
-
+            uniqueData:{
+                metaData: metas.map(meta => meta._id),
+            }
         }
         widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: dateForUpdateWidget}, {new: true}).exec().then(updatedWidget => {
             res.json({updatedWidget})

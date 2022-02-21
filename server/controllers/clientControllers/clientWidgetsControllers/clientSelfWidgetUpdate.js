@@ -7,7 +7,7 @@ module.exports = async (req,res)=>{
 
     await widgetSchema.findById(req.body._id).exec().then(widget=>{
         updatePostWidget(widget).then(updatedWidgets=>{
-            widgetSchema.findByIdAndUpdate(req.body._id, {'data.posts':[...updatedWidgets.posts]}, {new: true}).exec().then(afterUpdate => {
+            widgetSchema.findByIdAndUpdate(req.body._id, {'data.uniqueData.posts':[...updatedWidgets.posts]}, {new: true}).exec().then(afterUpdate => {
                 res.json({updatedWidgets:afterUpdate})
 
             }).catch(err => {

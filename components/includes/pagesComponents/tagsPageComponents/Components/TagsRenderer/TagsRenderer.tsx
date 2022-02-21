@@ -13,13 +13,15 @@ let TagsRendererStyledDiv = styled.div`
 `
 
 interface TagsRendererPropTypes {
-    metaData: Meta[],
+    uniqueData?:{
+        metaData?:Meta[],
+    },
     postElementSize: string,
 }
 
-const TagsRenderer: FC<TagsRendererPropTypes> = ({metaData, postElementSize}) => {
+const TagsRenderer: FC<TagsRendererPropTypes> = ({ postElementSize,uniqueData}) => {
     const dispatch = useDispatch()
-    const tagsMetas = metaData ? metaData : useSelector((store: StoreTypes) => store?.posts.tagsMetas)
+    const tagsMetas = uniqueData?.metaData ? uniqueData?.metaData : useSelector((store: StoreTypes) => store?.posts.tagsMetas)
     const elementSize = postElementSize ? postElementSize : useSelector((store: StoreTypes) => store?.settings?.design?.postElementSize);
     const cardWidth = useMemo(() => cardSizeCalculator(elementSize), [])
 

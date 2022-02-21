@@ -14,14 +14,18 @@ let CategoriesRendererStyledDiv = styled.div`
 `
 
 interface CategoriesRendererPropTypes {
-    metaData: Meta[],
+    uniqueData?:{
+        metaData?:Meta[],
+    },
+
     postElementSize: string,
 }
 
-const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({metaData, postElementSize}) => {
+const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ postElementSize,uniqueData}) => {
 
     const dispatch = useDispatch()
-    const categoriesMetas = metaData ? metaData : useSelector((store: StoreTypes) => store?.posts?.categoriesMetas)
+    const categoriesMetas = uniqueData?.metaData ? uniqueData?.metaData :
+                            useSelector((store: StoreTypes) => store?.posts?.categoriesMetas)
     const elementSize = postElementSize ? postElementSize : useSelector((store: StoreTypes) => store?.settings?.design?.postElementSize);
     const cardWidth = useMemo(() => cardSizeCalculator(elementSize), [])
 
