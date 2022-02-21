@@ -1,6 +1,6 @@
 import {FC, useMemo} from 'react';
 import styled from "styled-components";
-import {setLoading} from "../../../../../../store/actions/globalStateActions";
+import {setLoading} from "@store/actions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
 import cardSizeCalculator from "../../../../../../_variables/util/cardSizeCalculator";
 import {Meta, StoreTypes} from "../../../../../../_variables/TypeScriptTypes/GlobalTypes";
@@ -17,17 +17,20 @@ interface CategoriesRendererPropTypes {
     uniqueData?:{
         metaData?:Meta[],
     },
-
     postElementSize: string,
 }
 
 const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ postElementSize,uniqueData}) => {
 
-    const dispatch = useDispatch()
+    const dispatch = useDispatch();
+
     const categoriesMetas = uniqueData?.metaData ? uniqueData?.metaData :
-                            useSelector((store: StoreTypes) => store?.posts?.categoriesMetas)
-    const elementSize = postElementSize ? postElementSize : useSelector((store: StoreTypes) => store?.settings?.design?.postElementSize);
-    const cardWidth = useMemo(() => cardSizeCalculator(elementSize), [])
+                            useSelector((store: StoreTypes) => store?.posts?.categoriesMetas);
+
+    const elementSize = postElementSize ? postElementSize :
+                        useSelector((store: StoreTypes) => store?.settings?.design?.postElementSize);
+
+    const cardWidth = useMemo(() => cardSizeCalculator(elementSize), []);
 
     return (
         <CategoriesRendererStyledDiv className='categories-block'>

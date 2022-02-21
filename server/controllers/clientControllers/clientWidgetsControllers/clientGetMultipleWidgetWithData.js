@@ -15,10 +15,8 @@ module.exports = async (req, res) => {
             {
                 model:'meta',
                 path: 'data.uniqueData.metaData',
-
             },
             {
-
                 model:'post',
                 path: 'data.uniqueData.posts',
                 populate: [
