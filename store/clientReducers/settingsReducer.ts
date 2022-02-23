@@ -1,5 +1,5 @@
 import {HYDRATE} from 'next-redux-wrapper';
-import {SET_SETTINGS} from "../types";
+import {SET_SETTINGS,GET_SETTINGS} from "../types";
 import {EDIT_DESIGN} from "../adminTypes";
 
 const initialState = {
@@ -20,10 +20,12 @@ export const settingsReducer = (state = initialState, action) => {
         case SET_SETTINGS:
             return {
                 ...state,
-                ...action?.payload || {
-                    design: process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {},
-                    identity: process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {},
-                },
+                ...action?.payload
+            }
+        case GET_SETTINGS:
+            return {
+                ...state,
+                ...action?.payload
             }
         case  EDIT_DESIGN:
             return {

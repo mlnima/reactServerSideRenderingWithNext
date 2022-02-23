@@ -2,12 +2,11 @@ import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import PostPageStyledMain from "../PostPageStyle";
 import {useSelector} from "react-redux";
-import { StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import { StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
-import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
+import {likeDislikeView} from "@_variables/ajaxPostsVariables";
 import {animateScroll}  from "react-scroll";
 import PostTitle from "../components/PostTitle/PostTitle";
-
 const PostMetaDataToSiteHead = dynamic(() => import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
 const EditLinkForAdmin = dynamic(() => import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
 const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
@@ -28,12 +27,10 @@ const VideoTypePostPage = () => {
     const videoTypePostPageData = useSelector((store: StoreTypes) => {
         return{
             postPageStyle:store?.settings?.design.postPageStyle,
-            comments:store?.posts?.comments,
             userData:store?.user?.userData,
             post:store.posts.post
         }
     })
-
 
     const [ratingAndViewData, setRatingAndViewData] = useState({
         like: 0,
@@ -87,7 +84,7 @@ const VideoTypePostPage = () => {
                 <WidgetsRenderer position='underPost'/>
             </div>
             <CommentFrom documentId={videoTypePostPageData?.post._id} documentTitle={videoTypePostPageData?.post.title}/>
-            {videoTypePostPageData?.comments?.length ? <CommentsRenderer/> : null}
+            {videoTypePostPageData?.post?.comments?.length ? <CommentsRenderer/> : null}
         </VideoTypePostPageStyledMain>
     );
 };

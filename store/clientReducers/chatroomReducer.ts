@@ -1,5 +1,5 @@
-import * as types from '../types'
-import {SET_ACTIVE_VISIBLE_PROFILE} from "../types";
+import {NEW_MESSAGE, SET_ACTIVE_VISIBLE_PROFILE, SET_MESSAGES, SET_ONLINE_USERS} from "@store/types";
+
 
 const initialState = {
     onlineUsers:[],
@@ -9,22 +9,22 @@ const initialState = {
 
 export const chatroomReducer = (state=initialState,action)=>{
     switch (action.type){
-        case  types.SET_ONLINE_USERS:
+        case  SET_ONLINE_USERS:
             return {
                 ...state,
                 onlineUsers : action.payload,
             }
-        case  types.SET_MESSAGES:
+        case  SET_MESSAGES:
             return {
                 ...state,
                 messages : action.payload,
             }
-        case  types.NEW_MESSAGE:
+        case  NEW_MESSAGE:
             return {
                 ...state,
                 messages : [...state.messages ,action.payload] ,
             }
-        case  types.SET_ACTIVE_VISIBLE_PROFILE:
+        case  SET_ACTIVE_VISIBLE_PROFILE:
             return {
                 ...state,
                 activeVisibleProfile : action.payload ,

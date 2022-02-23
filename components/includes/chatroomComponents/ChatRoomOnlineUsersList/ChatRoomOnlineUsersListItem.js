@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch} from "react-redux";
-import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
+import {setActiveVisibleProfile} from "../../../../store/clientActions/chatroomActions";
 import styled from "styled-components";
 const ChatRoomOnlineUsersListItemStyledDiv = styled.div`
   display: flex;

@@ -1,5 +1,23 @@
-import * as types from '../types'
-import {UserState} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {
+    AUTO_LOGIN,
+    DELETE_CONVERSATION,
+    DISPATCH_SOCKET_ID, END_CALL,
+    GET_CONVERSATION,
+    GET_CONVERSATIONS,
+    GET_SPECIFIC_USER_DATA,
+    GET_USER_PAGE_DATA,
+    INCOMING_CALL,
+    LOGIN,
+    LOGOUT,
+    NEW_MESSAGE_IN_CONVERSATION,
+    OUTGOING_CALL,
+    SET_CALL_ACCEPTED,
+    SET_CALLING_STATUS,
+    SET_MY_VIDEO,
+    SET_PARTNER_VIDEO,
+    SET_USER_PAGE_DATA
+} from "@store/types";
+import {UserState} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const initialState = {
     userData:{},
@@ -26,23 +44,23 @@ const initialState = {
 // @ts-ignore
 export const userReducer = (state: UserState  = initialState,action: {type:string,payload:any})=>{
     switch (action.type){
-        case  types.SET_USER_PAGE_DATA:
+        case  SET_USER_PAGE_DATA:
             return {
                 ...state,
                 userPageData:action.payload
             }
-        case  types.GET_USER_PAGE_DATA:
+        case  GET_USER_PAGE_DATA:
             return {
                 ...state,
                 userPageData:action.payload
             }
-        case  types.AUTO_LOGIN:
+        case  AUTO_LOGIN:
             return {
                 ...state,
                 userData:action.payload.userData,
                 loggedIn:action.payload.loggedIn,
             }
-        case  types.GET_SPECIFIC_USER_DATA:
+        case  GET_SPECIFIC_USER_DATA:
             return {
                 ...state,
                 userData: {
@@ -50,39 +68,39 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     ...action.payload.userData
                 },
             }
-        case  types.LOGIN:
+        case  LOGIN:
             return {
                 ...state,
                 userData:action.payload.userData,
                 loggedIn:action.payload.loggedIn,
             }
-        case  types.LOGOUT:
+        case  LOGOUT:
             return {
                 ...state,
                 userData:{},
             }
-        case  types.DISPATCH_SOCKET_ID:
+        case  DISPATCH_SOCKET_ID:
             return {
                 ...state,
                 socketId:action.payload,
             }
-        case  types.GET_CONVERSATIONS:
+        case  GET_CONVERSATIONS:
             return {
                 ...state,
                 conversations:action.payload,
             }
-        case  types.GET_CONVERSATION:
+        case  GET_CONVERSATION:
             return {
                 ...state,
                 activeConversation:action.payload,
             }
 
-        case  types.DELETE_CONVERSATION:
+        case  DELETE_CONVERSATION:
             return {
                 ...state,
                 conversations: state.conversations?.filter(conversation=> conversation._id !== action.payload),
             }
-        case  types.NEW_MESSAGE_IN_CONVERSATION:
+        case  NEW_MESSAGE_IN_CONVERSATION:
             return {
                 ...state,
                 activeConversation:{
@@ -90,7 +108,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     messages: [...(state.activeConversation?.messages || []), action.payload]
                 }
             }
-        case  types.SET_MY_VIDEO:
+        case  SET_MY_VIDEO:
             return {
                 ...state,
                 callData: {
@@ -98,7 +116,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     myVideo:action.payload,
                 }
             }
-        case  types.SET_PARTNER_VIDEO:
+        case  SET_PARTNER_VIDEO:
             return {
                 ...state,
                 callData: {
@@ -106,7 +124,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     partnerVideo:action.payload,
                 }
             }
-        case  types.SET_CALLING_STATUS:
+        case  SET_CALLING_STATUS:
             return {
                 ...state,
                 callData: {
@@ -114,7 +132,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     calling:action.payload,
                 }
             }
-        case  types.INCOMING_CALL:
+        case  INCOMING_CALL:
             return {
                 ...state,
                 callData: {
@@ -122,7 +140,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     ...action.payload,
                 }
             }
-        case  types.OUTGOING_CALL:
+        case  OUTGOING_CALL:
             return {
                 ...state,
                 callData: {
@@ -130,7 +148,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     ...action.payload,
                 }
             }
-        case  types.SET_CALL_ACCEPTED:
+        case  SET_CALL_ACCEPTED:
             return {
                 ...state,
                 callData: {
@@ -139,7 +157,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                 }
             }
 
-        case  types.END_CALL:
+        case  END_CALL:
             return {
                 ...state,
                 callData:{

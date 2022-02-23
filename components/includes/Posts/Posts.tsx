@@ -1,14 +1,13 @@
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-import {likeValueCalculator} from "../../../_variables/_variables";
+//import {likeValueCalculator} from "../../../_variables/_variables";
 import _shortNumber from '../../../_variables/clientVariables/_shortNumber'
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../store/actions/globalStateActions";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
-import {PostTypes} from "../../../_variables/TypeScriptTypes/PostTypes";
-
-
+import {setLoading} from "@store/clientActions/globalStateActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import ratingCalculator from "@_variables/util/ratingCalculator";
 const MobilePromotionCard = dynamic(() => import('../cards/mobile/MobilePromotionCard/MobilePromotionCard'))
 const VideoCardTypeList = dynamic(() => import('../cards/desktop/VideoCardTypeList/VideoCardTypeList'))
 const PromotionCardListSmall = dynamic(() =>
@@ -90,7 +89,7 @@ const Posts = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isS
                     'rtl' : 'ltr'
                 const viewsNumber = post.views || 0
                 const views = _shortNumber(viewsNumber)
-                const rating = likeValueCalculator(post.likes, post.disLikes)
+                const rating = ratingCalculator(post.likes, post.disLikes)
 
                 const postProps = {
                     dir,

@@ -1,20 +1,16 @@
-import React, {useEffect} from 'react';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import {getFirstLoadData} from "../../_variables/ajaxVariables";
-import {getPosts} from "../../_variables/ajaxPostsVariables";
+import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
-import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {useRouter} from "next/router";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {wrapper} from "../../store/store";
+import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
-import {SET_POSTS_DATA} from "../../store/types";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
-
+import {getPosts} from "@store/clientActions/postsAction";
+import {FC} from "react";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 const ActorBio = dynamic(() => import('../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'))
 
@@ -34,7 +30,7 @@ const StyledMain = styled.main`
   
 `
 
-const actorPage = (props: ClientPagesTypes) => {
+const actorPage: FC = () => {
     const role = useSelector((store :StoreTypes) => store?.user?.userData.role)
     const actor = useSelector((store: StoreTypes) => store?.posts?.actorData)
     const actorPageStyle = useSelector((store: StoreTypes) => store?.settings?.design?.actorPageStyle || '');
@@ -71,38 +67,20 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const actorId = context.query.actorId as string
     if (!actorId) return {notFound: true};
     if (!actorId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
-    const firstLoadData = await getFirstLoadData(
+    await getFirstLoadData(
         context.req,
         ['actorPageTop', 'actorPageLeftSidebar', 'actorPageBottom', 'actorPageRightSidebar'],
         store,
         context.locale
     );
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.actorId, true);
-    const postsData = await getPosts(gettingPostsQueries);
-
     // @ts-ignore
-    if (actorId && !postsData?.data?.meta || !postsData?.data.posts) return {notFound: true};
-
-    store.dispatch({
-        type: SET_POSTS_DATA,
-        payload: {
-            // @ts-ignore
-            posts: postsData.data?.posts || [],
-            // @ts-ignore
-            totalCount: postsData?.data?.totalCount || 0,
-            // @ts-ignore
-            actorData: postsData?.data?.meta || {},
-        }
-    })
+    await store.dispatch(getPosts(context.query, context.query.actorId, true,'actorData'))
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            ...firstLoadData,
-            query: context.query,
         }
     }
-
 });
 
 

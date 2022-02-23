@@ -2,7 +2,7 @@ import React, {useEffect, useRef} from 'react';
 import ChatRoomMessage from "./ChatRoomMessage";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
+import {setActiveVisibleProfile} from "../../../../store/clientActions/chatroomActions";
 import {useRouter} from "next/router";
 
 const ChatRoomMessageAreaStyledMain = styled.main`

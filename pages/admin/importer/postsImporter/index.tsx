@@ -82,7 +82,7 @@ const postsImporter = () => {
                     <option value='pending'>Pending</option>
                     <option value='reported'>Reported</option>
                 </select>
-                <div className={'posts-importer-form-actions'}>
+                <div className={'posts-importer-form-clientActions'}>
                     <input type='file' onChange={async e => onSelectFileHandler(e)}/>
                     <button className={'btn btn-primary'} onClick={() => onImportPostsHandler()}>Import Posts</button>
                 </div>

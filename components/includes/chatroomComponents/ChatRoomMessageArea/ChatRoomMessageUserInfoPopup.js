@@ -6,9 +6,9 @@ import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {setActiveVisibleProfile} from "../../../../store/actions/chatroomActions";
+import {setActiveVisibleProfile} from "../../../../store/clientActions/chatroomActions";
 import Draggable from 'react-draggable';
-import {setLoginRegisterFormStatus} from "../../../../store/actions/globalStateActions";
+import {setLoginRegisterFormStatus} from "../../../../store/clientActions/globalStateActions";
 
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;

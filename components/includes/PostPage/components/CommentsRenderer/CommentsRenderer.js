@@ -12,7 +12,8 @@ const CommentsRendererStyledDiv = styled.div`
   padding: 5px;
 `
 const CommentsRenderer = () => {
-    const comments = useSelector(store => store?.posts?.comments)
+
+    const comments = useSelector(store => store?.posts?.post?.comments)
 
     return (
         <CommentsRendererStyledDiv className='comments'>

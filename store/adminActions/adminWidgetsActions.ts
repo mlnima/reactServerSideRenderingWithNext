@@ -1,5 +1,5 @@
 import axios, {AxiosResponse} from "axios";
-import {WidgetPropTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {WidgetPropTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {SET_WIDGETS_IN_GROUPS, LOADING, SET_ALERT} from "../types";
 import {DELETE_WIDGET, SAVE_NEW_WIDGET, UPDATE_WIDGET} from "../adminTypes";
 

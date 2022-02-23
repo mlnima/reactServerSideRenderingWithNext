@@ -1,8 +1,9 @@
 import axios from "axios";
-import _reduceWidgetsToGroups from '../_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups'
 import _getMultipleSettingsQueryGenerator from "./clientVariables/_getMultipleSettingsQueryGenerator";
 import _getMultipleWidgetWithDataQueryGenerator from "./clientVariables/_getMultipleWidgetWithDataQueryGenerator";
-import {SET_SETTINGS, SET_WIDGETS, SET_WIDGETS_IN_GROUPS} from "../store/types";
+import {SET_SETTINGS, SET_WIDGETS_IN_GROUPS} from "@store/types";
+import {getSettings} from "@store/clientActions/settingsActions";
+import {getWidgets} from "@store/clientActions/clientWidgetsActions";
 
 
 export const getSetting = async (type, cache) => {
@@ -16,37 +17,18 @@ export const getMultipleWidgetWithData = async (widgets, cache,locale) => {
 }
 
 export const getMultipleSetting = async (settings, cache) => {
-
     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/settings/getMultipleSettings${_getMultipleSettingsQueryGenerator(settings.settings, cache)}`)
 };
 
-
-// export const updateWidgets = async (widgetData) => {
+// export const executor = async (command) => {
 //     const body = {
-//         widgetData,
+//         command,
 //         token: localStorage.wt
 //     };
-//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/updateWidget', body)
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/terminal/commandExecutor', body)
 // }
-
-// export const deleteWidgets = async (id) => {
-//     const body = {
-//         id,
-//         token: localStorage.wt
-//     };
-//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/widgets/deleteWidget', body)
-// }
-
-export const executor = async (command) => {
-    const body = {
-        command,
-        token: localStorage.wt
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/terminal/commandExecutor', body)
-}
 
 export const fileUpload = async (file) => {
-
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/uploadFile', file)
 }
 
@@ -154,43 +136,9 @@ export const getOrders = async (data, domainName) => {
 export const getFirstLoadData = async (req, dynamicWidgets,store,locale) => {
     try {
         const cache = process.env.NODE_ENV !== 'development'
-        const widgetData = await getMultipleWidgetWithData({widgets: dynamicWidgets || []}, cache,locale);
-        const dynamicWidgetsData = widgetData.data?.widgets || []
-        const staticWidgets = process.env.NEXT_PUBLIC_STATIC_WIDGETS ?
-                              JSON.parse(process.env.NEXT_PUBLIC_STATIC_WIDGETS)
-                              : []
-
-        //const widgetInGroups = _reduceWidgetsToGroups([...dynamicWidgetsData,...staticWidgets] )
-        const widgetInGroups = [...dynamicWidgetsData,...staticWidgets]
-
         const userAgent = req.headers['user-agent'];
-
-        let isMobile = Boolean(userAgent.match(
-            /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-        ))
-
-         store.dispatch({
-            type:SET_SETTINGS,
-            payload: {
-                design: process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {},
-                identity: process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {},
-                eCommerce:{},
-            }
-        })
-
-        store.dispatch({
-            type:SET_WIDGETS_IN_GROUPS,
-            payload:widgetInGroups
-        })
-
-        store.dispatch({
-            type:SET_SETTINGS,
-            payload: {
-                isMobile,
-                eCommerce:{},
-            }
-        })
-
+        await store.dispatch(getWidgets(dynamicWidgets,locale,cache))
+        store.dispatch(getSettings(userAgent))
         return {}
     } catch (err) {
         console.log(err)

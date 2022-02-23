@@ -2,7 +2,7 @@ import React, {useEffect} from 'react';
 import MessengerConversationPreview from "./MessengerConversationPreview";
 import {useDispatch, useSelector} from "react-redux";
 import MessengerConversationListHeader from "./MessengerConversationListHeader";
-import {getConversations} from "../../../../store/actions/userActions";
+import {getConversations} from "../../../../store/clientActions/userActions";
 import styled from "styled-components";
 
 const MessengerConversationsListStyledDiv = styled.div`

@@ -1,14 +1,13 @@
-import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import {getComments, getPostById} from "../../../_variables/ajaxPostsVariables";
+import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "../../../store/store";
-import * as types from "../../../store/types";
+import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
-const LearnTypePostPage = dynamic(() => import('../../../components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
-const VideoTypePostPage = dynamic(() => import('../../../components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
-const PostPage = dynamic(() => import('../../../components/includes/PostPage/PostPage'))
+import {getPost} from "@store/clientActions/postsAction";
+const LearnTypePostPage = dynamic(() => import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
+const VideoTypePostPage = dynamic(() => import('@components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
+const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 
 const postPage = () => {
     const postType = useSelector((store: StoreTypes) => store?.posts?.post?.postType);
@@ -17,11 +16,11 @@ const postPage = () => {
         return (
             <LearnTypePostPage/>
         )
-    }else if(postType === 'video'){
+    } else if (postType === 'video') {
         return (
             <VideoTypePostPage/>
         );
-    }else {
+    } else {
         return (
             <PostPage/>
         );
@@ -33,44 +32,19 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     if (!context.query?.id) {
         return {notFound: true}
     }
-    // @ts-ignore
-    // if (!context.query?.id?.match(/^[0-9a-fA-F]{24}$/)) {
-    //     return {notFound: true}
-    // }
-    const firstLoadData = await getFirstLoadData(
+    await getFirstLoadData(
         context.req,
         ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],
         store,
         context.locale
     );
 
-
-    const postData = await getPostById({_id: context.query.id}, true).catch(()=>{
-        return {notFound: true}
-    })
-
     // @ts-ignore
-    const post = postData?.data?.post;
-
-    if (!post) {
-        return {notFound: true}
-    }
-    const commentsData = post ? await getComments({onDocument: post._id}, true) : {}
-    // @ts-ignore
-    const comments = commentsData?.data?.comments ? commentsData.data?.comments : []
-
-    store.dispatch({
-        type: types.GET_POST,
-        payload: {
-            post,
-            comments,
-        }
-    })
+    await store.dispatch(getPost(context.query?.id))
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            ...firstLoadData,
             query: context.query
         }
     }

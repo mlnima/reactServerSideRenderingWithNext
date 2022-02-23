@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import {FC} from "react";
 
 let PostsPageInfoStyledDiv = styled.div`
   display: flex;
@@ -8,12 +9,16 @@ let PostsPageInfoStyledDiv = styled.div`
     color:var(--main-text-color);
     text-align: center;
   }
-
 `
 
-const PostsPageInfo = ({titleToRender}) => {
+interface PostsPageInfoPropTypes {
+    titleToRender:string
+}
 
-    const title = decodeURIComponent(titleToRender|| '')
+const PostsPageInfo :FC<PostsPageInfoPropTypes> = ({titleToRender}) => {
+
+    const title = decodeURIComponent(titleToRender || '')
+
     return (
         <PostsPageInfoStyledDiv className='posts-page-info'>
             <h1> {title.trim()}</h1>

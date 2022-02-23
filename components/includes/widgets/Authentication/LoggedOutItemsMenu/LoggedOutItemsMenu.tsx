@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import {useTranslation} from 'next-i18next';
 import {useDispatch} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../../store/actions/globalStateActions";
+import {setLoginRegisterFormStatus} from "../../../../../store/clientActions/globalStateActions";
 
 const LoggedOutItemsMenu: FC = () => {
     const {t} = useTranslation('common');

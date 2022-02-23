@@ -2,7 +2,7 @@ import React from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faFileExport} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../../../store/actions/globalStateActions";
+import {setLoading} from "../../../../../store/clientActions/globalStateActions";
 
 const ExportWidget = props => {
     const dispatch = useDispatch()
@@ -30,7 +30,7 @@ const ExportWidget = props => {
 
 
     return (
-        <button title="export" onClick={() => onExportHandler()}><FontAwesomeIcon icon={faFileExport} style={{width:'15px',height:'15px'}}/></button>
+        <button className={'btn btn-primary'} title="export" onClick={() => onExportHandler()}><FontAwesomeIcon icon={faFileExport} style={{width:'15px',height:'15px'}}/></button>
     );
 };
 export default ExportWidget;

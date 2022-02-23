@@ -9,22 +9,23 @@ interface InputPropTypes {
     onChangeHandler: any
 }
 
-const Input: FC<InputPropTypes> = ({
-                                       name,
-                                       type,
-                                       className,
-                                       onChangeHandler,
-                                       value,
-                                       placeHolder
-                                   }) => {
-    return (
-        <input type={type}
-               name={name}
-               className={className + ' form-control-input'}
-               value={value}
-               placeholder={placeHolder}
-               onChange={e => onChangeHandler(e)}
-        />
-    )
-};
+const Input: FC<InputPropTypes> =
+    ({
+         name,
+         type,
+         className,
+         onChangeHandler,
+         value,
+         placeHolder
+     }) => {
+        return (
+            <input type={type}
+                   name={name}
+                   className={className + ' form-control-input'}
+                   value={value}
+                   placeholder={placeHolder}
+                   onChange={e => onChangeHandler(e)}
+            />
+        )
+    };
 export default Input

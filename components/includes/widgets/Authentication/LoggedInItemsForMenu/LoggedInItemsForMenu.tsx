@@ -2,8 +2,8 @@ import {FC} from 'react';
 import Link from "next/link";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from "react-redux";
-import {userLogOut} from "../../../../../store/actions/userActions";
-import {setLoginRegisterFormStatus} from "../../../../../store/actions/globalStateActions";
+import {userLogOut} from "../../../../../store/clientActions/userActions";
+import {setLoginRegisterFormStatus} from "../../../../../store/clientActions/globalStateActions";
 import {StoreTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 
 const LoggedInItemsForMenu: FC = () => {

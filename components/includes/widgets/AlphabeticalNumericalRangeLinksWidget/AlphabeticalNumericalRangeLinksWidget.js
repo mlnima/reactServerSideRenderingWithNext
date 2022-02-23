@@ -2,7 +2,7 @@ import {useState} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import styled from "styled-components";
-import {setLoading} from "../../../../store/actions/globalStateActions";
+import {setLoading} from "../../../../store/clientActions/globalStateActions";
 import {useDispatch} from "react-redux";
 
 const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`

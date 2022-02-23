@@ -4,7 +4,7 @@ import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SyncLoader} from "react-spinners";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../store/actions/globalStateActions";
+import {setLoading} from "../../../store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`

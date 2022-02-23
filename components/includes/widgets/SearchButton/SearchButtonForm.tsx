@@ -78,7 +78,7 @@ const SearchButtonForm = ({open, onOpenHandler}: SearchButtonFormPropTypes) => {
         setState({...state, [e.target.name]: e.target.value})
     }
     return (
-        <SearchButtonStyledDiv open={open} className={'search-button-widget-form-actions'}>
+        <SearchButtonStyledDiv open={open} className={'search-button-widget-form-clientActions'}>
 
             <form className={'search-button-widget-form'} onSubmit={e => onSearchHandler(e)}>
                 <input type="text"

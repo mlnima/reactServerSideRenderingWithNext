@@ -3,9 +3,9 @@ import {userImageUpload} from '../../../../_variables/ajaxVariables'
 import ProfileImage from '../ProfileImage/ProfileImage'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
-import {autoUserLogin} from "../../../../store/actions/userActions";
+import {autoUserLogin} from "../../../../store/clientActions/userActions";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../../store/actions/globalStateActions";
+import {setLoading} from "../../../../store/clientActions/globalStateActions";
 import styled from "styled-components";
 
 const ProfileCoverImageStyledDiv = styled.div`

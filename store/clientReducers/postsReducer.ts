@@ -1,5 +1,13 @@
-import * as types from '../types'
 import {HYDRATE} from "next-redux-wrapper";
+import {
+    DELETE_COMMENT,
+    GET_COMMENTS, GET_METAS,
+    GET_POST,
+    GET_POSTS,
+    INITIAL_POSTS,
+    NEW_COMMENT, SET_ACTORS_METAS, SET_CATEGORIES_METAS, SET_POST,
+    SET_POSTS_DATA, SET_TAGS_METAS
+} from "@store/types";
 
 const initialState = {
     posts: [],
@@ -14,71 +22,73 @@ const initialState = {
     actorsMetas:[],
 }
 
-export const postReducer = (state = initialState, action) => {
+export const postsReducer = (state = initialState, action) => {
     switch (action.type) {
         case HYDRATE:
             return {
                 ...state,
                 ...action.payload.posts
             };
-        case  types.SET_POSTS_DATA:
+        case  SET_POSTS_DATA:
             return {
                 ...state,
                 ...action.payload
             }
-        case  types.GET_POSTS:
+        case  GET_POSTS:
             return {
                 ...state,
-                posts: action.payload.posts,
-                totalCount: action.payload.totalCount,
-                loading: false,
-                error: null
+                ...action.payload
             }
-        case  types.INITIAL_POSTS:
+        case  INITIAL_POSTS:
             return {
                 ...state,
                 posts: action.payload,
                 loading: false,
                 error: null
             }
-        case  types.GET_POST:
+        case  GET_POST:
             return {
                 ...state,
-                ...action.payload,
+                post: action.payload,
             }
-        case  types.GET_COMMENTS:
+        case  GET_COMMENTS:
             return {
                 ...state,
-                ...action.payload,
+                comments:action.payload,
             }
-        case  types.NEW_COMMENT:
+        case  NEW_COMMENT:
             const commentsPlusNewComment = [...state.comments, action.payload]
             return {
                 ...state,
                 comments: commentsPlusNewComment.sort((a, b) => a.createdAt > b.createdAt ? -1 : 1)
             }
-        case  types.DELETE_COMMENT:
+        case  DELETE_COMMENT:
             const updatedComments = state.comments.filter(comment => !action.payload.includes(comment._id))
             return {
                 ...state,
                 comments: updatedComments
             }
-        case  types.SET_POST:
+        case  SET_POST:
             return {
                 ...state,
                 ...action.payload,
             }
-        case  types.SET_CATEGORIES_METAS:
+        case  GET_METAS:
             return {
                 ...state,
                 ...action.payload,
             }
-        case  types.SET_TAGS_METAS:
+        case  SET_CATEGORIES_METAS:
             return {
                 ...state,
                 ...action.payload,
             }
-        case  types.SET_ACTORS_METAS:
+        case  SET_TAGS_METAS:
+            return {
+                ...state,
+                ...action.payload,
+            }
+        case  SET_ACTORS_METAS:
             return {
                 ...state,
                 ...action.payload,

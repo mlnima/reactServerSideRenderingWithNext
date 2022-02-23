@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import ActorCard from "../../../cards/desktop/ActorCard/ActorCard";
 import styled from "styled-components";
-import {setLoading} from "../../../../../store/actions/globalStateActions";
+import {setLoading} from "../../../../../store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
 import {Meta, StoreTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 

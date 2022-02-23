@@ -1,12 +1,12 @@
 import React, {useEffect} from 'react';
 import {useDispatch, useSelector} from "react-redux";
 import getMultipleSetting from "../../_variables/adminAjaxVariables/adminAjaxSettingsVariables/getMultipleSetting";
-import {setSettings} from "../../store/actions/settingsActions";
-import {getCustomPages} from "../../store/adminActions/adminPanelGlobalStateActions";
-import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {setSettings} from "@store/clientActions/settingsActions";
+import {getCustomPages} from "@store/adminActions/adminPanelGlobalStateActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {adminGetWidgets} from "../../store/adminActions/adminWidgetsActions";
+import {adminGetWidgets} from "@store/adminActions/adminWidgetsActions";
 
 const AdminDataSetterStyledSpan = styled.span`
   display: none;

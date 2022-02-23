@@ -14,6 +14,7 @@
     "paths": {
       "@store/*": ["store/*"],
       "@components/*": ["components/*"],
+      "@_variables/*": ["_variables/*"],
     },
     "allowJs": true,
     "checkJs": false,

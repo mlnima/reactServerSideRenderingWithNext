@@ -1,4 +1,11 @@
-import * as types from "../types";
+import {
+    AUTO_LOGIN, DELETE_CONVERSATION,
+    DISPATCH_SOCKET_ID, END_CALL, GET_CONVERSATION,
+    GET_CONVERSATIONS,
+    GET_SPECIFIC_USER_DATA, GET_USER_PAGE_DATA, INCOMING_CALL,
+    LOGIN, NEW_MESSAGE_IN_CONVERSATION, OUTGOING_CALL,
+    SET_ALERT, SET_CALL_ACCEPTED, SET_PARTNER_VIDEO
+} from '@store/types';
 import axios from 'axios';
 import Peer from 'simple-peer'
 import socket from "../../_variables/socket";
@@ -8,13 +15,13 @@ export const userLogin = (username, password) => async dispatch => {
         await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/login', {username, password}).then(res => {
             res.data.token ? localStorage.setItem('wt', res.data.token) : null
             dispatch({
-                type: types.LOGIN,
+                type: LOGIN,
                 payload: {userData: res.data, loggedIn: true}
             })
         })
     } catch (error) {
         dispatch({
-            type: types.SET_ALERT,
+            type: SET_ALERT,
             payload: {message: error.response.data.message, type: 'error'}
         })
         localStorage.wt ? localStorage.removeItem('wt') : null
@@ -27,7 +34,7 @@ export const autoUserLogin = (fields) => async dispatch => {
             await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
 
                 dispatch({
-                    type: types.AUTO_LOGIN,
+                    type: AUTO_LOGIN,
                     payload: {userData: res.data.userData, loggedIn: true}
                 })
             })
@@ -43,18 +50,18 @@ export const userResetPassword = (data) => async dispatch => {
         if (localStorage.wt) {
             await axios.post('/api/v1/users/resetPassword', {token: localStorage.wt, data}).then(res => {
                 dispatch({
-                    type: types.SET_ALERT,
+                    type: SET_ALERT,
                     payload: {message: res.data.message, type: 'success'}
                 })
             }).catch(err => {
                 dispatch({
-                    type: types.SET_ALERT,
+                    type: SET_ALERT,
                     payload: {message: err.response.data.message, type: 'error'}
                 })
             })
         } else {
             dispatch({
-                type: types.SET_ALERT,
+                type: SET_ALERT,
                 payload: {message: 'You Need To Login', type: 'error'}
             })
         }
@@ -68,7 +75,7 @@ export const getSpecificUserData = (fields) => async dispatch => {
         if (localStorage.wt) {
             await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
                 dispatch({
-                    type: types.GET_SPECIFIC_USER_DATA,
+                    type: GET_SPECIFIC_USER_DATA,
                     payload: {userData: res.data.userData, loggedIn: true}
                 })
             })
@@ -83,7 +90,7 @@ export const getSpecificUserData = (fields) => async dispatch => {
 //         if (localStorage.wt){
 //             await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt,fields}).then(res=>{
 //                 dispatch({
-//                     type:types.GET_SPECIFIC_USER_DATA,
+//                     type:GET_SPECIFIC_USER_DATA,
 //                     payload:{userData:res.data.userData,loggedIn: true}
 //                 })
 //             })
@@ -95,14 +102,14 @@ export const getSpecificUserData = (fields) => async dispatch => {
 export const userLogOut = () => dispatch => {
     localStorage.wt ? localStorage.removeItem('wt') : null
     dispatch({
-        type: types.LOGIN,
+        type: LOGIN,
         payload: {userData: {}, loggedIn: false}
     })
 }
 
 export const dispatchSocketId = socketId => dispatch => {
     dispatch({
-        type: types.DISPATCH_SOCKET_ID,
+        type: DISPATCH_SOCKET_ID,
         payload: socketId
     })
 }
@@ -113,7 +120,7 @@ export const getConversations = _id => async dispatch => {
         .then(res => {
             if (res.data?.conversations) {
                 dispatch({
-                    type: types.GET_CONVERSATIONS,
+                    type: GET_CONVERSATIONS,
                     payload: res.data.conversations
                 })
             }
@@ -130,7 +137,7 @@ export const getConversation = (_id, loadAmount) => async dispatch => {
         .then(res => {
             if (res.data?.conversation) {
                 dispatch({
-                    type: types.GET_CONVERSATION,
+                    type: GET_CONVERSATION,
                     payload: res.data.conversation
                 })
             }
@@ -141,16 +148,16 @@ export const deleteConversation = _id => async dispatch => {
     await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)
         .then(res => {
             dispatch({
-                type: types.DELETE_CONVERSATION,
+                type: DELETE_CONVERSATION,
                 payload: _id
             })
             dispatch({
-                type: types.SET_ALERT,
+                type: SET_ALERT,
                 payload: {message: res.data.message, type: 'success'}
             })
         }).catch(err => {
             dispatch({
-                type: types.SET_ALERT,
+                type: SET_ALERT,
                 payload: {message: err.response.data.message, type: 'error'}
             })
         })
@@ -158,7 +165,7 @@ export const deleteConversation = _id => async dispatch => {
 
 export const newMessageInConversation = newMessage => dispatch => {
     dispatch({
-        type: types.NEW_MESSAGE_IN_CONVERSATION,
+        type: NEW_MESSAGE_IN_CONVERSATION,
         payload: newMessage
     })
 }
@@ -171,7 +178,7 @@ export const getUserPageData = (username, _id, fields) => async dispatch => {
     }
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/getUserPreviewData', body).then(res => {
         dispatch({
-            type: types.GET_USER_PAGE_DATA,
+            type: GET_USER_PAGE_DATA,
             payload: res.data.userData
         })
     }).catch(error => {
@@ -182,7 +189,7 @@ export const getUserPageData = (username, _id, fields) => async dispatch => {
 export const setPartnerVideo = (partnerVideo) => async dispatch => {
     try {
         dispatch({
-            type: types.SET_PARTNER_VIDEO,
+            type: SET_PARTNER_VIDEO,
             payload: partnerVideo
         })
 
@@ -193,7 +200,7 @@ export const setPartnerVideo = (partnerVideo) => async dispatch => {
 
 export const endCall = () => async dispatch => {
     dispatch({
-        type: types.END_CALL,
+        type: END_CALL,
         payload: true
     })
 }
@@ -202,7 +209,7 @@ export const incomingCall = (data) => async dispatch => {
     try {
         await navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(async myVideo => {
             dispatch({
-                type: types.INCOMING_CALL,
+                type: INCOMING_CALL,
                 payload: {
                     receivingCall: true,
                     myVideo,
@@ -212,7 +219,7 @@ export const incomingCall = (data) => async dispatch => {
         })
     } catch (err) {
         dispatch({
-            type: types.SET_ALERT,
+            type: SET_ALERT,
             payload: {message: 'Can Not Access The Camera', type: 'error', err}
         })
     }
@@ -220,7 +227,7 @@ export const incomingCall = (data) => async dispatch => {
 
 export const answerTheCall = (myVideo,conversation,callerSignal,router) => async dispatch => {
     dispatch({
-        type: types.SET_CALL_ACCEPTED,
+        type: SET_CALL_ACCEPTED,
         payload: {
             callAccepted: true,
         }
@@ -237,7 +244,7 @@ export const answerTheCall = (myVideo,conversation,callerSignal,router) => async
 
     peer.on('stream', (partnerVideo) => {
         dispatch({
-            type: types.SET_PARTNER_VIDEO,
+            type: SET_PARTNER_VIDEO,
             payload: partnerVideo
         })
     })
@@ -246,7 +253,7 @@ export const answerTheCall = (myVideo,conversation,callerSignal,router) => async
 
     socket.on('endCall', () => {
         dispatch({
-            type: types.END_CALL,
+            type: END_CALL,
             payload: true
         })
         peer.destroy()
@@ -267,7 +274,7 @@ export const outgoingCall = (conversation,mySocketId,callerName,router ) => asyn
     try {
         await navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(async myVideo => {
             await dispatch({
-                type: types.OUTGOING_CALL,
+                type: OUTGOING_CALL,
                 payload: {
                     calling: true,
                     myVideo,
@@ -291,14 +298,14 @@ export const outgoingCall = (conversation,mySocketId,callerName,router ) => asyn
             peer.on('stream', (stream) => {
                 console.log(stream)
                 dispatch({
-                    type: types.SET_PARTNER_VIDEO,
+                    type: SET_PARTNER_VIDEO,
                     payload: stream
                 })
             })
 
             socket.on('callAccepted', (signal) => {
                 dispatch({
-                    type: types.SET_CALL_ACCEPTED,
+                    type: SET_CALL_ACCEPTED,
                     payload: {
                         callAccepted:true,
                     }
@@ -317,7 +324,7 @@ export const outgoingCall = (conversation,mySocketId,callerName,router ) => asyn
         })
     } catch (err) {
         dispatch({
-            type: types.SET_ALERT,
+            type: SET_ALERT,
             payload: {message: 'Can Not Access The Camera', type: 'error', err}
         })
     }
@@ -331,12 +338,12 @@ export const userCreateOrder = (data)=> async dispatch =>{
         }
         axios.post('/api/v1/orders/create/payPal', body).then(res=>{
             dispatch({
-                type: types.SET_ALERT,
+                type: SET_ALERT,
                 payload: {message: res.data.message, type: 'success'}
             })
         }).catch(()=>{
             dispatch({
-                type: types.SET_ALERT,
+                type: SET_ALERT,
                 payload: {message: 'Something Went Wrong', type: 'error'}
             })
         })

@@ -3,7 +3,7 @@ import {getFirstLoadData} from "../../../../_variables/ajaxVariables";
 import {userCreateNewPost} from "../../../../_variables/ajaxPostsVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../store/actions/globalStateActions";
+import {setLoginRegisterFormStatus} from "../../../../store/clientActions/globalStateActions";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {AxiosResponse} from "axios";

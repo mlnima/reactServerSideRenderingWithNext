@@ -19,7 +19,7 @@ import {
         newMessageInConversation,
         outgoingCall,
         setPartnerVideo,
-       } from "../../store/actions/userActions";
+       } from "../../store/clientActions/userActions";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
 
 const conversation = (props: ClientPagesTypes) => {

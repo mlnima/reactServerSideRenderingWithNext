@@ -70,9 +70,16 @@ const WidgetModelStyledDiv = styled.div`
   }
 
   .monaco-editor-section {
-    p {
-      margin: 10px;
+    .editor-section{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 95%;
+      p {
+        margin: 10px;
+      }
     }
+
   }
 
   textarea {
@@ -106,7 +113,10 @@ const WidgetModel = props => {
 
     const [widgetSettings, setWidgetSettings] = useState({
         open: false,
-        preview: false,
+        textBox: false,
+        customStyleBox: false,
+        customScriptBox: false,
+        // preview: false,
         renderDeleteBtn: false,
         activeEditingLanguage: 'default'
     })
@@ -114,7 +124,12 @@ const WidgetModel = props => {
     const [widgetData, setWidgetData] = useState({
         translations: {},
     })
-    const positions = useMemo(() => [...staticPositions,..._.flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))],[customPages])
+    const positions = useMemo(() => {
+        return [
+            ...staticPositions,
+            ..._.flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
+        ]
+    }, [customPages])
 
     const languageElement = useRef(null)
 
@@ -173,26 +188,7 @@ const WidgetModel = props => {
     }
 
 
-    const onWidgetTextChangeHandler = value => {
-        if (languageElement?.current?.value === 'default') {
-            setWidgetData({
-                ...widgetData,
-                text: value
-            })
 
-        } else {
-            setWidgetData({
-                ...widgetData,
-                translations: {
-                    ...(widgetData?.translations || {}),
-                    [languageElement?.current?.value]: {
-                        ...(widgetData?.translations?.[languageElement?.current?.value] || {}),
-                        text: value
-                    }
-                }
-            })
-        }
-    }
 
     const onChangeHandler = e => {
         const value = e.target.value
@@ -218,12 +214,8 @@ const WidgetModel = props => {
             [e.target.name]: e.target.checked
         })
     }
-    const onChangeHandlerByName = (name, value) => {
-        setWidgetData({
-            ...widgetData,
-            [name]: value
-        })
-    };
+
+
 
     const onCloneHandler = () => {
         const widgetsInTheSamePosition = widgets.filter(widget => widget?.data?.position === widgetData.position)
@@ -373,24 +365,37 @@ const WidgetModel = props => {
                             widgetData.type === 'media' ||
                             widgetData.type === 'recentComments'}
                     />
-
-
-                    <p>Widget Text or HTML</p>
-
-                    <MonacoEditor
-                        language={'html'}
-                        name={'text'}
-                        defaultValue={
-                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
-                                widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
+                    <div className={'monaco-editor-section'}>
+                        <div className={'editor-section'}>
+                            <p>Widget Text or HTML</p>
+                            <button className={'btn btn-primary'} onClick={() => setWidgetSettings({
+                                ...widgetSettings,
+                                textBox: !widgetSettings.textBox
+                            })}
+                            >
+                                open
+                            </button>
+                        </div>
+                        {widgetSettings.textBox ?
+                            <MonacoEditor
+                                language={'html'}
+                                name={'text'}
+                                defaultValue={
+                                    widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
+                                        widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
+                                }
+                                value={
+                                    widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
+                                        widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
+                                }
+                                className={'widgetTextTextarea'}
+                                onChange={onTextInputsDataChangeHandler}
+                            />
+                            : null
                         }
-                        value={
-                            widgetSettings.activeEditingLanguage === 'default' ? widgetData.text :
-                                widgetData?.translations?.[widgetSettings.activeEditingLanguage]?.text
-                        }
-                        className={'widgetTextTextarea'}
-                        onChange={onTextInputsDataChangeHandler}
-                    />
+                    </div>
+
+
 
                     {widgetData.type === 'advertise' ?
                         <AdvertiseWidgetModelFields adCode={widgetData.adCode} onChangeHandler={onChangeHandler}/>
@@ -584,15 +589,25 @@ const WidgetModel = props => {
 
 
                     <div className={'monaco-editor-section'}>
-                        <p>Custom Styles:</p>
-                        <MonacoEditor
-                            language={'scss'}
-                            name={'customStyles'}
-                            defaultValue={widgetData.customStyles}
-                            value={widgetData.customStyles}
-                            className={'customStylesTextarea'}
-                            onChange={onChangeHandler}
-                        />
+                        <div className={'editor-section'}>
+                            <p>Custom Styles:</p>
+                            <button className={'btn btn-primary'} onClick={() => setWidgetSettings({
+                                ...widgetSettings,
+                                customStyleBox: !widgetSettings.customStyleBox
+                            })}>open
+                            </button>
+                        </div>
+                        {widgetSettings.customStyleBox ?
+                            <MonacoEditor
+                                language={'scss'}
+                                name={'customStyles'}
+                                defaultValue={widgetData.customStyles}
+                                value={widgetData.customStyles}
+                                className={'customStylesTextarea'}
+                                onChange={onChangeHandler}
+                            />
+                            : null
+                        }
                     </div>
 
 
@@ -604,15 +619,27 @@ const WidgetModel = props => {
                                           onChangeHandler={onChangeHandler}
                     />
                     <div className={'monaco-editor-section'}>
-                        <p>Custom Script:</p>
-                        <MonacoEditor
-                            language={'javascript'}
-                            name={'customScript'}
-                            defaultValue={widgetData.customScript}
-                            value={widgetData.customScript}
-                            className={'customScriptTextarea'}
-                            onChange={onChangeHandler}
-                        />
+
+                        <div className={'editor-section'}>
+                            <p>Custom Script:</p>
+                            <button className={'btn btn-primary'} onClick={() => setWidgetSettings({
+                                ...widgetSettings,
+                                customScriptBox: !widgetSettings.customScriptBox
+                            })}>open
+                            </button>
+                        </div>
+                        {widgetSettings.customScriptBox ?
+                            <MonacoEditor
+                                language={'javascript'}
+                                name={'customScript'}
+                                defaultValue={widgetData.customScript}
+                                value={widgetData.customScript}
+                                className={'customScriptTextarea'}
+                                onChange={onChangeHandler}
+                            />
+                            : null
+                        }
+
                     </div>
                     <button className={'btn btn-success'} onClick={() => {
                         widgetSettings.preview ? setWidgetSettings({
@@ -621,20 +648,24 @@ const WidgetModel = props => {
                         }) : setWidgetSettings({...widgetSettings, preview: true})
                     }}>Preview the Widget
                     </button>
-                    {widgetSettings.preview ? <WidgetPreview widgetData={widgetData} position={widgetData.position}
-                                                             preview={widgetSettings.preview}/> : null}
+                    {/*{widgetSettings.preview ?*/}
+                    {/*    <WidgetPreview widgetId={props.widgetId}*/}
+                    {/*                   position={widgetData.position}*/}
+                    {/*    />*/}
+                    {/*    : null*/}
+                    {/*}*/}
 
                     <div className='control-buttons'>
-                        <button title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{
+                        <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{
                             width: '15px',
                             height: '15px'
                         }}/></button>
                         <ExportWidget data={{...widgetData}}/>
-                        <button title="clone" onClick={() => onCloneHandler()}><FontAwesomeIcon icon={faClone} style={{
+                        <button className={'btn btn-primary'} title="clone" onClick={() => onCloneHandler()}><FontAwesomeIcon icon={faClone} style={{
                             width: '15px',
                             height: '15px'
                         }}/></button>
-                        <button title="delete" onClick={() => widgetSettings.renderDeleteBtn ? setWidgetSettings({
+                        <button className={'btn btn-primary'} title="delete" onClick={() => widgetSettings.renderDeleteBtn ? setWidgetSettings({
                             ...widgetSettings,
                             renderDeleteBtn: false
                         }) : setWidgetSettings({
@@ -644,7 +675,7 @@ const WidgetModel = props => {
                             <FontAwesomeIcon icon={faTrash} style={{width: '15px', height: '15px'}}/>
                         </button>
                         {widgetSettings.renderDeleteBtn ?
-                            <button onClick={() => onDeleteHandler()}>Delete</button> : null}
+                            <button className={'btn btn-danger'} onClick={() => onDeleteHandler()}>Delete</button> : null}
                     </div>
                 </div>
                 : null
@@ -656,3 +687,30 @@ const WidgetModel = props => {
 };
 export default WidgetModel;
 
+// const onWidgetTextChangeHandler = value => {
+//     if (languageElement?.current?.value === 'default') {
+//         setWidgetData({
+//             ...widgetData,
+//             text: value
+//         })
+//
+//     } else {
+//         setWidgetData({
+//             ...widgetData,
+//             translations: {
+//                 ...(widgetData?.translations || {}),
+//                 [languageElement?.current?.value]: {
+//                     ...(widgetData?.translations?.[languageElement?.current?.value] || {}),
+//                     text: value
+//                 }
+//             }
+//         })
+//     }
+// }
+
+// const onChangeHandlerByName = (name, value) => {
+//     setWidgetData({
+//         ...widgetData,
+//         [name]: value
+//     })
+// };

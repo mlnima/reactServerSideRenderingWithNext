@@ -9,7 +9,7 @@ import {ClientPagesTypes} from "../../../_variables/TypeScriptTypes/ClientPagesT
 import {wrapper} from "../../../store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
-import {getSpecificUserData} from "../../../store/actions/userActions";
+import {getSpecificUserData} from "../../../store/clientActions/userActions";
 
 import styled from "styled-components";
 

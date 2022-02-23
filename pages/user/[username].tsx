@@ -12,7 +12,7 @@ import {useTranslation} from 'next-i18next';
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 import {wrapper} from "../../store/store";
 import {useDispatch, useSelector} from "react-redux";
-import {getSpecificUserData, getUserPageData} from "../../store/actions/userActions";
+import {getSpecificUserData, getUserPageData} from "../../store/clientActions/userActions";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);

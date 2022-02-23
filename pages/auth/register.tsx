@@ -3,7 +3,7 @@ import {getFirstLoadData} from '../../_variables/ajaxVariables'
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "../../store/store";
 import {useDispatch} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../store/actions/globalStateActions";
+import {setLoginRegisterFormStatus} from "../../store/clientActions/globalStateActions";
 
 const Register = () => {
     const dispatch = useDispatch()

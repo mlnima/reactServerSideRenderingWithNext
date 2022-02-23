@@ -1,15 +1,15 @@
 import React, {useState, useRef,useEffect} from 'react';
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import { languagesOptions} from '../../../../_variables/_variables'
+import { languagesOptions} from '@_variables/_variables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../../store/actions/globalStateActions";
-import {updateSetting} from "../../../../store/actions/settingsActions";
-import {wrapper} from "../../../../store/store";
+import {setLoading} from "@store/clientActions/globalStateActions";
+import {updateSetting} from "@store/clientActions/settingsActions";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 let StyledForm = styled.form`
   background-color: white;

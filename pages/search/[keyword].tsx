@@ -3,12 +3,12 @@ import {getFirstLoadData} from '../../_variables/ajaxVariables';
 import {getPosts} from '../../_variables/ajaxPostsVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
+import PostsPageInfo from "@components/includes/Posts/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
-import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {wrapper} from "../../store/store";
 import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
 
@@ -41,13 +41,17 @@ const searchPage = (props: ClientPagesTypes) => {
     const router = useRouter()
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
-            {router.query.keyword ? <MetaDataToSiteHead title={router.query.keyword} url={`${router.asPath}`}/> : null}
+            {router.query.keyword ?
+                <MetaDataToSiteHead title={router.query.keyword as string}
+                                    url={`${router.asPath}`}/>
+                : null
+            }
 
             <WidgetsRenderer
                 position={'searchPageTop'}
 
             />
-            {router.query.keyword ? <PostsPageInfo titleToRender={router.query.keyword}/> : null}
+            {router.query.keyword ? <PostsPageInfo titleToRender={router.query.keyword as string}/> : null}
 
 
             {

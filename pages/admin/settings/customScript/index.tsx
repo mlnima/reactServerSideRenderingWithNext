@@ -3,7 +3,7 @@ import dynamic from "next/dynamic";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
 import {useDispatch, useSelector} from "react-redux";
-import {updateSetting} from "../../../../store/actions/settingsActions";
+import {updateSetting} from "../../../../store/clientActions/settingsActions";
 import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import Head from "next/head";

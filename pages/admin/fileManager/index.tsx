@@ -6,7 +6,7 @@ import withRouter from 'next/dist/client/with-router'
 import UploadedPopView from '../../../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
 import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../store/actions/globalStateActions";
+import {setLoading} from "../../../store/clientActions/globalStateActions";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 

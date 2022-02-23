@@ -1,5 +1,4 @@
 import React from 'react';
-import { getComments } from '../../../_variables/ajaxPostsVariables'
 import AdminRenderComments from '../../../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminRenderComments'
 import AdminCommentsControl from '../../../components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl'
 import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'

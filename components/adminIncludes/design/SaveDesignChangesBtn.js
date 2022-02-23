@@ -1,7 +1,7 @@
 import React from 'react';
-import {updateSetting} from '../../../store/actions/settingsActions'
+import {updateSetting} from '../../../store/clientActions/settingsActions'
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../store/actions/globalStateActions";
+import {setLoading} from "../../../store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 
 const SaveDesignChangesBtn = ({reload}) => {

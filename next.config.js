@@ -83,7 +83,11 @@ const nextConfigs = {
     swcMinify: true,
     eslint: {
         ignoreDuringBuilds: true,
-    }
+    },
+    compiler: {
+        // ssr and displayName are configured by default
+        styledComponents: true,
+    },
 }
 
 module.exports = withPlugins([

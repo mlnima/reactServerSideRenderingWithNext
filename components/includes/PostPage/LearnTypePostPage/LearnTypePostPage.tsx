@@ -8,8 +8,7 @@ import PostTitle from '../components/PostTitle/PostTitle'
 import LearnTypePostPageDescription from "./components/LearnTypePostPageDescription";
 import * as Scroll from "react-scroll";
 import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
-import {likeValueCalculator} from "../../../../_variables/_variables";
-
+import ratingCalculator from "@_variables/util/ratingCalculator";
 const EditLinkForAdmin = dynamic(() => import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
 const PostMetaDataToSiteHead = dynamic(() => import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
 const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
@@ -81,7 +80,7 @@ const LearnTypePostPage = () => {
         if (typeof window !== 'undefined') {
             setState({
                 ...state,
-                likeValue: likeValueCalculator(post.likes, post.disLikes),
+                likeValue: ratingCalculator(post.likes, post.disLikes),
             });
         }
     }, [post.likes, post.disLikes]);

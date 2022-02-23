@@ -4,7 +4,7 @@ import {resetPassword} from '../../../_variables/ajaxAuthVariables'
 import {useRouter} from "next/router";
 import deleteUser from "../../../_variables/adminAjaxVariables/adminAjaxUsersVariables/deleteUser";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../store/actions/globalStateActions";
+import {setLoading} from "../../../store/clientActions/globalStateActions";
 import styled from "styled-components";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";

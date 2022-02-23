@@ -1,10 +1,9 @@
 import React, { useMemo} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
-import {setLoading} from "../../../../store/actions/globalStateActions";
+import {setLoading} from "../../../../store/clientActions/globalStateActions";
 import PromotionCardListSmall from "../../cards/desktop/PromotionTypeCard/PromotionCardListSmall";
 import {useRouter} from "next/router";
 import _shortNumber from "../../../../_variables/clientVariables/_shortNumber";
-import {likeValueCalculator} from "../../../../_variables/_variables";
 import dynamic from "next/dynamic";
 import {useDispatch} from "react-redux";
 const VideoTypeCard = dynamic(() => import('../../cards/desktop/VideoCard/VideoCard'))
@@ -12,6 +11,7 @@ const PromotionTypeCard = dynamic(() => import('../../cards/desktop/PromotionTyp
 const ArticleTypeCard = dynamic(() => import('../../cards/desktop/ArticleTypeCard/ArticleTypeCard'))
 import styled from "styled-components";
 import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
+import ratingCalculator from "@_variables/util/ratingCalculator";
 
 const PostsSliderStyledDiv = styled.div`
   overflow: hidden;
@@ -63,7 +63,7 @@ const PostsSlider = (props:PostsSliderPropsTypes) => {
         const dir = router.locale === 'fa' || router.locale === 'ar' && post?.translations?.[locale as string]?.title ? 'rtl' : 'ltr'
         const viewsNumber = post.views || 0
         const views = _shortNumber(viewsNumber)
-        const rating = likeValueCalculator(post.likes, post.disLikes)
+        const rating = ratingCalculator(post.likes, post.disLikes)
 
         const postProps = {
             dir,

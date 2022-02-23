@@ -4,8 +4,8 @@ import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../store/actions/globalStateActions";
-import {getSpecificUserData} from "../../../../store/actions/userActions";
+import {setLoginRegisterFormStatus} from "../../../../store/clientActions/globalStateActions";
+import {getSpecificUserData} from "../../../../store/clientActions/userActions";
 
 const UserPageActionButtonsStyledDiv = styled.div`
   display: flex;

@@ -4,8 +4,8 @@ import {getSetting, youtubeDataScrapper} from '../../../../_variables/ajaxVariab
 import {savePost} from '../../../../_variables/ajaxPostsVariables'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {setAlert, setLoading} from "../../../../store/actions/globalStateActions";
-import {updateSetting} from "../../../../store/actions/settingsActions";
+import {setAlert, setLoading} from "../../../../store/clientActions/globalStateActions";
+import {updateSetting} from "../../../../store/clientActions/settingsActions";
 import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 

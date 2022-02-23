@@ -1,9 +1,9 @@
 import React from 'react';
 import WidgetsRenderer from "../../../../includes/WidgetsRenderer/WidgetsRenderer";
 
-const WidgetPreview = props => {
+const WidgetPreview = ({widgetId,position}) => {
         return (
-            <WidgetsRenderer widgets={[{data:props.widgetData}]} position={props.position} />
+            <WidgetsRenderer  _id={widgetId} position={position} />
         );
 };
 export default WidgetPreview;

@@ -1,14 +1,14 @@
 import axios from "axios";
 import _metaPageQueryGenerator from "./clientVariables/_metaPageQueryGenerator";
-import _postPageQueryGenerator from "./clientVariables/_postPageQueryGenerator";
+// import _postPageQueryGenerator from "./clientVariables/_postPageQueryGenerator";
 
 export const getPosts = async (queriesData) => {
     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL +`/api/v1/posts/clientGetPosts${queriesData}`)
 };
-
-export const getPostById = async (data, cache) => {
-    return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/clientGetPost${ _postPageQueryGenerator(data)}` )
-};
+//
+// export const getPostById = async (data) => {
+//     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/clientGetPost${ _postPageQueryGenerator(data)}` )
+// };
 
 export const checkRemovedContent = async (data) => {
     const body = {
@@ -66,13 +66,13 @@ export const adminGetComments = async (data, domainName, cache) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
 };
 
-export const getComments = async (data,  cache) => {
-    const body = {
-        ...data,
-        cache,
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
-};
+// export const getComments = async (data,  cache) => {
+//     const body = {
+//         ...data,
+//         cache,
+//     };
+//     return await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
+// };
 
 
 export const updateComment = async (data) => {

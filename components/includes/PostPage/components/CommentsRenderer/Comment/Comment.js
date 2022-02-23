@@ -3,7 +3,7 @@ import moment from "moment";
 
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {deleteComments} from "../../../../../../store/actions/postAction";
+import {deleteComments} from "../../../../../../store/clientActions/postsAction";
 
 const CommentStyledDiv = styled.div`
   display: flex;

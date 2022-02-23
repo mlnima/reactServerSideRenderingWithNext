@@ -5,7 +5,7 @@ import {faEllipsisV, faSearch, faTrash, faUserCircle} from "@fortawesome/free-so
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {deleteConversation} from "../../../../store/actions/userActions";
+import {deleteConversation} from "../../../../store/clientActions/userActions";
 
 const MessengerConversationPreviewStyledDiv = styled.div`
   width: calc(100% - 20px);
@@ -128,7 +128,7 @@ const MessengerConversationPreview = ({conversationData, userId}) => {
 
         </a>
         </Link>
-    <span className={'conversation-actions'}>
+    <span className={'conversation-clientActions'}>
                 <FontAwesomeIcon icon={faEllipsisV} onClick={()=>actionMenu ? setActionMenu(false):setActionMenu(true)}/>
         {actionMenu?
             <div className={'action-menu'}>

@@ -1,4 +1,5 @@
-import * as adminTypes from "../adminTypes";
+import {ADMIN_GET_USER, ADMIN_GET_USERS} from "@store/adminTypes";
+
 
 const initialState = {
     users: [],
@@ -14,13 +15,13 @@ export interface AdminPanelUsersState {
 
 export const adminPanelUsersReducer = (state: AdminPanelUsersState = initialState, action: { type: string, payload: any }) => {
     switch (action.type) {
-        case adminTypes.ADMIN_GET_USERS:
+        case ADMIN_GET_USERS:
             return {
                 ...state,
                 users: action.payload.users,
                 totalCount: action.payload.totalCount
             };
-        case adminTypes.ADMIN_GET_USER:
+        case ADMIN_GET_USER:
             return {
                 ...state,
                 user: action.payload

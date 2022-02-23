@@ -1,8 +1,8 @@
-import * as types from '../types'
-import * as adminTypes from '../types'
 import {HYDRATE} from 'next-redux-wrapper';
 import _ from 'lodash'
 import _reduceWidgetsToGroups from "../../_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
+import {SET_WIDGETS, SET_WIDGETS_IN_GROUPS} from "@store/types";
+import {DELETE_WIDGET, SAVE_NEW_WIDGET, UPDATE_WIDGET} from "@store/adminTypes";
 
 const initialState = {
     widgets: [],
@@ -17,32 +17,31 @@ export const widgetsReducer = (state = initialState, action) => {
                 ...state,
                 ...action?.payload?.widgets || []
             };
-        case  types.SET_WIDGETS:
+        case  SET_WIDGETS:
             return {
                 ...state,
                 widgets: action?.payload
             }
-        case  types.SET_WIDGETS_IN_GROUPS:
+        case  SET_WIDGETS_IN_GROUPS:
             return {
                 ...state,
                 widgetInGroups: {
                     ...state.widgetInGroups,
                     ..._reduceWidgetsToGroups(action?.payload)
-
                 }
             }
-        // case  types.SET_WIDGETS_FOR_ADMIN:
+        // case  SET_WIDGETS_FOR_ADMIN:
         //     return{
         //        ...state,
         //         widgets : action?.payload
         //     }
-        case adminTypes.SAVE_NEW_WIDGET:
+        case SAVE_NEW_WIDGET:
 
             return {
                 ...state,
                 widgets: [...state.widgets, action.payload]
             };
-        case adminTypes.UPDATE_WIDGET:
+        case UPDATE_WIDGET:
             const index = _.findIndex(state.widgets, {_id: action.payload._id});
             const currentWidgets = state.widgets;
             currentWidgets.splice(index, 1, action.payload);
@@ -50,7 +49,7 @@ export const widgetsReducer = (state = initialState, action) => {
                 ...state,
                 widgets: currentWidgets
             };
-        case adminTypes.DELETE_WIDGET:
+        case DELETE_WIDGET:
             return {
                 ...state,
                 widgets: state.widgets.filter(widget => widget._id !== action.payload)

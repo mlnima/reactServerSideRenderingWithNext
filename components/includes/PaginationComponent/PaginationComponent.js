@@ -1,9 +1,9 @@
 import PaginationComponentPageLink from "./PaginationComponentPageLink";
-import {rangeNumGenerator} from "../../../_variables/_variables";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../store/actions/globalStateActions";
+import {setLoading} from "../../../store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
+import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
 
 const PaginationComponentStyledDiv = styled.div`
   display: flex;

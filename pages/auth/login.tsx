@@ -3,7 +3,7 @@ import {getFirstLoadData} from '../../_variables/ajaxVariables'
 import {login} from "../../_variables/ajaxAuthVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../store/actions/globalStateActions";
+import {setLoginRegisterFormStatus} from "../../store/clientActions/globalStateActions";
 import {wrapper} from "../../store/store";
 
 const Login = () => {

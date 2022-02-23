@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from 'react-redux';
-import {closeAlert, setAlert} from "../../../store/actions/globalStateActions";
+import {closeAlert, setAlert} from "../../../store/clientActions/globalStateActions";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {faCheckCircle, faExclamationCircle, faExclamationTriangle, faTimes} from "@fortawesome/free-solid-svg-icons";

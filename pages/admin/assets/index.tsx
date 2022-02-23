@@ -2,7 +2,7 @@
 
 import React, {useEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
-import {getComments} from '../../../_variables/ajaxPostsVariables'
+// import {getComments} from '../../../_variables/ajaxPostsVariables'
 import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
 import {getFormsData} from '../../../_variables/ajaxVariables'
 import {useRouter} from "next/router";
@@ -127,7 +127,7 @@ const assets = (props: any) => {
         const ajaxRequestData =
                 assetType === 'forms' ? await getFormsData(dataConfig) :
                     assetType === 'pages' ? await getPagesData(dataConfig) :
-                        assetType === 'comments' ? await getComments(dataConfig, false) :
+                        // assetType === 'comments' ? await getComments(dataConfig, false) :
                                 assetType === 'orders' ? await getOrders(dataConfig, process.env.NEXT_PUBLIC_PRODUCTION_URL) : null
 
         if (ajaxRequestData) {

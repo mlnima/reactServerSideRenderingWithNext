@@ -1,5 +1,5 @@
 import {useDispatch, useSelector} from "react-redux";
-import {editDesign} from "../../../../store/actions/settingsActions";
+import {editDesign} from "../../../../store/clientActions/settingsActions";
 import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";

@@ -8,7 +8,7 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "../../../store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
-import {getSpecificUserData} from "../../../store/actions/userActions";
+import {getSpecificUserData} from "../../../store/clientActions/userActions";
 import styled from "styled-components";
 const FollowersStyledDiv = styled.div`
   max-width: 940px;

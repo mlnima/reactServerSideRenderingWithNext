@@ -131,6 +131,7 @@ export interface WidgetPropTypes {
 }
 
 export interface WidgetDataPropTypes {
+    uniqueData: any;
     noSSR: boolean;
     specificDayToRender: string;
     pagination: boolean,
@@ -262,7 +263,7 @@ export interface Translations {
 
 
 export interface AdminPanelPostsTypes {
-    users: User[],
+    // users: User[],
     post?: PostTypes,
     totalCount: number,
     posts?: PostTypes[],
@@ -280,10 +281,18 @@ export interface AdminPanelGlobalState {
     orders: [],
 }
 
+export interface AdminPanelTerminalState{
+    command: string,
+    logs:string[],
+    lastCommandResult:string,
+    commandsHistory:string[]
+}
+
 export interface StoreTypes {
     adminPanelUsers: AdminPanelUsersState,
     adminPanelGlobalState: AdminPanelGlobalState,
-    adminPanelPosts: AdminPanelPostsTypes
+    adminPanelPosts: AdminPanelPostsTypes,
+    adminPanelTerminalState: AdminPanelTerminalState,
     chatroom: ChatroomStateTypes,
     settings: SettingsStateTypes,
     posts: PostStateTypes,

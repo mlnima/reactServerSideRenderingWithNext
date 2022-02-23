@@ -1,9 +1,13 @@
-//adminUserActions
-import * as adminTypes from "../adminTypes";
 import axios, {AxiosError, AxiosResponse} from "axios";
-import {AxiosErrorTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {AxiosErrorTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {LOADING} from "@store/types";
+import {ADMIN_GET_USERS} from "../adminTypes";
 
 export const adminGetUsers = (data) => async dispatch => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
     try{
         const body = {
             data,
@@ -13,17 +17,26 @@ export const adminGetUsers = (data) => async dispatch => {
             .then((res: AxiosResponse<any>)=>{
 
             dispatch({
-                type: adminTypes.ADMIN_GET_USERS,
+                type: ADMIN_GET_USERS,
                 payload: {
                     users:res.data.users,
                     totalCount:res.data.totalCount || 0
                 }
             })
+
         }).catch((err: AxiosError<AxiosErrorTypes>)=>{
 
         })
-    }catch (err){
 
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
+    }catch (err){
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
     }
 
 }

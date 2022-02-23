@@ -1,7 +1,7 @@
 import React, {FC, useMemo} from 'react';
 import TagCard from "../../../../cards/desktop/TagCard/TagCard";
 import styled from "styled-components";
-import {setLoading} from "../../../../../../store/actions/globalStateActions";
+import {setLoading} from "../../../../../../store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
 import cardSizeCalculator from "../../../../../../_variables/util/cardSizeCalculator";
 import {Meta, StoreTypes} from "../../../../../../_variables/TypeScriptTypes/GlobalTypes";

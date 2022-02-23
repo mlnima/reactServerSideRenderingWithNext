@@ -1,16 +1,15 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
-import {getFirstLoadData} from "../../_variables/ajaxVariables";
-import {getMultipleMeta} from "../../_variables/ajaxPostsVariables";
+import {getFirstLoadData} from "@_variables/ajaxVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import TagsRenderer from "../../components/includes/pagesComponents/tagsPageComponents/Components/TagsRenderer/TagsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import { StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
-import {wrapper} from "../../store/store";
-import {SET_TAGS_METAS} from "../../store/types";
+import { StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {wrapper} from "@store/store";
+import {getMetas} from "@store/clientActions/postsAction";
 
 const TagsPageStyledMain = styled.main`
   grid-area: main;
@@ -53,25 +52,18 @@ const tagsPage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req,
+    await getFirstLoadData(context.req,
         ['tagsPageTop', 'tagsPageLeftSidebar', 'tagsPageBottom', 'tagsPageRightSidebar'],
         store,
         context.locale
     );
-    const metaData = await getMultipleMeta(context.query, 'tags', true)
 
-    store.dispatch({
-        type: SET_TAGS_METAS,
-        payload: {
-            tagsMetas: metaData.data?.metas || [],
-            totalCount: metaData.data?.totalCount || 0,
-        }
-    })
+    // @ts-ignore
+    await  store.dispatch(getMetas(context.query, 'tags', true))
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            ...firstLoadData,
         }
     }
 

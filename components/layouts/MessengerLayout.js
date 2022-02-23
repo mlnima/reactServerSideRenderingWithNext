@@ -1,7 +1,7 @@
 import React, {useEffect} from 'react';
 import GlobalStyles from "../global/Styles/GlobalStyles";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
-import {autoUserLogin} from "../../store/actions/userActions";
+import {autoUserLogin} from "../../store/clientActions/userActions";
 import {useDispatch, useSelector} from 'react-redux';
 import AlertBox from "../includes/AlertBox/AlertBox";
 import dynamic from "next/dynamic";

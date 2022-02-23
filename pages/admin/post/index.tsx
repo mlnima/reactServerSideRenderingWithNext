@@ -12,7 +12,7 @@ import PostInformation from "../../../components/adminIncludes/PostComponents/Po
 import {languagesOptions} from "../../../_variables/_variables";
 import _ from "lodash";
 import styled from "styled-components";
-import {setAlert, setLoading} from "../../../store/actions/globalStateActions";
+import {setAlert, setLoading} from "../../../store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
 import {adminChangeActiveEditingLanguage, adminEditPost, adminGetPost, adminNewPost, adminSaveNewPost, adminUpdatePost} from "../../../store/adminActions/adminPanelPostsActions";
 import {wrapper} from "../../../store/store";

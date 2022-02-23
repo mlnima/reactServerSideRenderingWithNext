@@ -1,10 +1,11 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {fileTypeDetector} from '../../../../_variables/_variables';
+
 import {readFile, deleteFile} from '../../../../_variables/_ajaxFilesVariables';
 import UploadedFilePreviewImage from "./UploadedFilePreviewImage";
 import UploadedFilePreviewVideo from "./UploadedFilePreviewVideo";
 import UploadedFilePreviewText from "./UploadedFilePreviewText";
 import styled from "styled-components";
+import fileTypeDetector from "@_variables/util/fileTypeDetector";
 
 const UploadedPopViewStyledDiv = styled.div`
   position: fixed;

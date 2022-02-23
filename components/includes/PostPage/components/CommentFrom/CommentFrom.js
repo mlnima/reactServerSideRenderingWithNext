@@ -3,8 +3,8 @@ import {newComment } from '../../../../../_variables/ajaxPostsVariables';
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../../store/actions/globalStateActions";
-import {addNewComment} from "../../../../../store/actions/postAction";
+import {setLoginRegisterFormStatus} from "../../../../../store/clientActions/globalStateActions";
+import {addNewComment} from "../../../../../store/clientActions/postsAction";
 
 const CommentFromStyledForm = styled.form`
  

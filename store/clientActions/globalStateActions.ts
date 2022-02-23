@@ -1,29 +1,29 @@
-import * as types from "../types";
 import {HYDRATE} from 'next-redux-wrapper';
+import {CHECK_ROUTE_AND_SET_LOADING, CLOSE_ALERT, LOADING, LOGIN_REGISTER_FORM, SET_ALERT} from "@store/types";
 
 export const setLoginRegisterFormStatus = (statusType) => dispatch => {
     dispatch({
-        type:types.LOGIN_REGISTER_FORM,
+        type:LOGIN_REGISTER_FORM,
         payload:statusType
     })
 }
 
 export const setLoading = (statusType) => dispatch => {
     dispatch({
-        type:types.LOADING,
+        type:LOADING,
         payload:statusType
     })
 }
 
 export const setAlert = (payload) => dispatch => {
     dispatch({
-        type:types.SET_ALERT,
+        type:SET_ALERT,
         payload
     })
 
     setTimeout(()=>{
         dispatch({
-            type:types.SET_ALERT,
+            type:SET_ALERT,
             payload:{
                 active:false,
                 type:null,
@@ -32,9 +32,10 @@ export const setAlert = (payload) => dispatch => {
         })
     },8000)
 }
+
 export const closeAlert = ( ) => dispatch => {
     dispatch({
-        type:types.CLOSE_ALERT,
+        type:CLOSE_ALERT,
         payload:null
     })
 }
@@ -42,7 +43,7 @@ export const closeAlert = ( ) => dispatch => {
 export const checkRouteAndSetLoading = (path,nextPath) => dispatch => {
     if (path !== nextPath){
         dispatch({
-            type:types.CHECK_ROUTE_AND_SET_LOADING,
+            type:CHECK_ROUTE_AND_SET_LOADING,
             payload:true
         })
     }

@@ -5,7 +5,7 @@ import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {wrapper} from "../../store/store";
 import {useDispatch} from "react-redux";
-import {userResetPassword} from "../../store/actions/userActions";
+import {userResetPassword} from "../../store/clientActions/userActions";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
 

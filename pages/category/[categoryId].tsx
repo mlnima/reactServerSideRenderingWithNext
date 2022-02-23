@@ -1,22 +1,20 @@
-import {getFirstLoadData} from '../../_variables/ajaxVariables';
-import {getPosts} from '../../_variables/ajaxPostsVariables';
+import {getFirstLoadData} from '@_variables/ajaxVariables';
 import PostsPage from "../../components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import PostsPageInfo from "../../components/includes/Posts/PostsPageInfo";
+import PostsPageInfo from "@components/includes/Posts/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import Link from "next/link";
-
-const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 import {useRouter} from "next/router";
-import MetaDataToSiteHead from "../../components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
-import {wrapper} from "../../store/store";
+import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
-import {settingsPropTypes, StoreTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {SET_POSTS_DATA} from "../../store/types";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import capitalizeFirstLetter from "../../_variables/util/capitalizeFirstLetter";
+import {getPosts} from "@store/clientActions/postsAction";
+import {FC} from "react";
+const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
+
 
 let StyledMain = styled.main`
   grid-area: main;
@@ -39,11 +37,11 @@ let StyledMain = styled.main`
 
   ${(props: { stylesData: string }) => props.stylesData}
 `
-const categoryPage = (props: ClientPagesTypes) => {
-    // @ts-ignore
+const categoryPage: FC = () => {
+
     const userData = useSelector((store :StoreTypes) => store?.user?.userData)
     const category = useSelector((store: StoreTypes) => store.posts.categoryData)
-    const categoryPageStyle = useSelector((store: StoreTypes) => store.settings.design?.categoryPageStyle || '');
+    const categoryPageStyle = useSelector((store: StoreTypes) => store.settings.design?.categoryPageStyle ||'');
     const router = useRouter()
 
     return (
@@ -58,7 +56,14 @@ const categoryPage = (props: ClientPagesTypes) => {
                 </div>
                 :null}
             {category ? <PostsPageInfo titleToRender={capitalizeFirstLetter(category?.name)}/> : null}
-            {category ? <MetaDataToSiteHead title={category?.name} description={category?.description} url={`${router.asPath}`} image={category?.imageUrl}/> : null}
+            {category ?
+                <MetaDataToSiteHead title={category?.name}
+                                    description={category?.description}
+                                    url={`${router.asPath}`}
+                                    image={category?.imageUrl}
+                />
+                : null
+            }
             <WidgetsRenderer
                 position={'categoryPageTop'}
             />
@@ -74,38 +79,20 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const categoryId = context.query.categoryId as string
     if (!categoryId) return {notFound: true};
     if (!categoryId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
-    const firstLoadData = await getFirstLoadData(
+    await getFirstLoadData(
         context.req,
         ['categoryPageTop', 'categoryPageLeftSidebar', 'categoryPageBottom', 'categoryPageRightSidebar'],
         store,
         context.locale
     );
 
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query, context.query.categoryId, true)
-    const postsData = await getPosts(gettingPostsQueries)
-
     // @ts-ignore
-    if (categoryId && !postsData?.data?.meta || !postsData?.data.posts) return {notFound: true};
-
-    store.dispatch({
-        type: SET_POSTS_DATA,
-        payload: {
-            // @ts-ignore
-            posts: postsData?.data?.posts || [],
-            // @ts-ignore
-            totalCount: postsData?.data?.totalCount || 0,
-            // @ts-ignore
-            categoryData: postsData?.data?.meta || {},
-        }
-    })
+    await store.dispatch(getPosts(context.query, context.query.categoryId, true,'categoryData'))
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            ...firstLoadData,
-            query: context.query,
         }
     }
-
 });
 
 export default categoryPage;

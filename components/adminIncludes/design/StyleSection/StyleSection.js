@@ -2,7 +2,7 @@ import React, {useRef} from 'react';
 import SaveDesignChangesBtn from "../SaveDesignChangesBtn";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {editDesign} from "../../../../store/actions/settingsActions";
+import {editDesign} from "../../../../store/clientActions/settingsActions";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 
 const StyleSectionStyledDiv = styled.div`

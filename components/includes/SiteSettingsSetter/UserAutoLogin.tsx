@@ -1,6 +1,6 @@
 import {FC, useEffect} from "react";
 import {useDispatch, useSelector} from "react-redux";
-import {autoUserLogin} from "../../../store/actions/userActions";
+import {autoUserLogin} from "../../../store/clientActions/userActions";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 
 interface UserAutoLoginPropTypes{

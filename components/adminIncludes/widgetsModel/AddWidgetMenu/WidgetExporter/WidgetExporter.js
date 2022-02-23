@@ -1,6 +1,6 @@
 import React from 'react';
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../../../store/actions/globalStateActions";
+import {setLoading} from "../../../../../store/clientActions/globalStateActions";
 
 const WidgetExporter = () => {
     const widgets = useSelector(store => store?.widgets.widgets)

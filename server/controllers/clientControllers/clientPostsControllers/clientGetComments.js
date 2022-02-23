@@ -1,28 +1,16 @@
 const commentSchema = require('../../../models/commentSchema');
 
-module.exports = (req, res) => {
-    const requestedSize = parseInt(req.body.size)
-    const requestedPage = parseInt(req.body.pageNo)
+module.exports = async (req, res) => {
 
-    const size = requestedSize ? requestedSize > 50 ? 50 : requestedSize : 50
-    const pageNo = requestedPage ? requestedPage : 1
+    const onDocument = req.query.onDocument ? {onDocumentId: req.query.onDocument} : {}
 
-    const onDocument = req.body.onDocument ? {onDocumentId: req.body.onDocument} : {}
-    const status = !req.body.status || req.body.status === 'all' ? {status: 'approved'} : {status: req.body.status}
-    let sortQuery = req.body.sort === 'latest' ? '-_id' : {[req.body.sort]: -1}
-    const searchQuery = !req.body.keyword ? {} : {
-        $or: [
-            {author: new RegExp(req.body.keyword, 'i')},
-            {body: new RegExp(req.body.keyword, 'i')},
-            {email: new RegExp(req.body.keyword, 'i')},
-        ]
-    };
+    const comments = await commentSchema
+                     .find(onDocument,{},{sort:{createdAt:-1}})
+                     .populate([{path:'author',select:['username','profileImage']}]).exec()
+   console.log(comments)
 
-    const comments = commentSchema.find({$and: [onDocument, status, searchQuery]},{},{sort:{createdAt:-1}}).populate([{path:'author',select:['username','profileImage']}]).skip(size * (pageNo - 1)).limit(size).sort(sortQuery).exec()
-    const commentsCount = commentSchema.countDocuments({$and: [onDocument, status, searchQuery]}).exec()
-
-    Promise.all([comments, commentsCount]).then(data => {
-        res.json({comments: data[0], count: data[1]})
+    Promise.all([comments]).then(data => {
+        res.json({comments: data[0],})
     }).catch(err => {
         console.error('comments :',err)
         res.end()

@@ -4,7 +4,7 @@ import {bulkAction} from "../../../../_variables/ajaxPostsVariables";
 import {adminBulkActionPost} from "../../../../store/adminActions/adminPanelPostsActions";
 import {useDispatch} from "react-redux";
 import styled from "styled-components";
-import {setAlert} from "../../../../store/actions/globalStateActions";
+import {setAlert} from "../../../../store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import {reloadPageDataByAddingQuery} from "../../../../store/adminActions/adminPanelGlobalStateActions";
 

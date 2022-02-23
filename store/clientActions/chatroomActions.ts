@@ -1,30 +1,30 @@
-import * as types from "../types";
-import {SET_ACTIVE_VISIBLE_PROFILE} from "../types";
+import {NEW_MESSAGE, SET_ACTIVE_VISIBLE_PROFILE, SET_MESSAGES, SET_ONLINE_USERS} from "@store/types";
+
 
 export const setChatroomUsers = usersList => dispatch=>{
     dispatch({
-        type:types.SET_ONLINE_USERS,
+        type:SET_ONLINE_USERS,
         payload: usersList
     })
 }
 
 export const setChatroomMessages = Messages => dispatch=>{
     dispatch({
-        type:types.SET_MESSAGES,
+        type:SET_MESSAGES,
         payload: Messages
     })
 }
 
 export const newMessage = Message => dispatch=>{
     dispatch({
-        type:types.NEW_MESSAGE,
+        type:NEW_MESSAGE,
         payload: Message
     })
 }
 
 export const setActiveVisibleProfile = activeProfile => dispatch=>{
     dispatch({
-        type:types.SET_ACTIVE_VISIBLE_PROFILE,
+        type:SET_ACTIVE_VISIBLE_PROFILE,
         payload: activeProfile
     })
 }

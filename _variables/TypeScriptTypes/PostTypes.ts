@@ -1,6 +1,7 @@
 import {Meta, MetasPropTypes} from './GlobalTypes'
 
 export interface PostTypes {
+    comments: [];
     status: string;
     source: any;
     updatedAt: string;

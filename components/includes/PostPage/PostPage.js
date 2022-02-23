@@ -1,12 +1,12 @@
 import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
-import {likeValueCalculator} from "../../../_variables/_variables";
-import {getComments, likeDislikeView} from "../../../_variables/ajaxPostsVariables";
+import {likeDislikeView} from "../../../_variables/ajaxPostsVariables";
 import dynamic from "next/dynamic";
 import PostPageStyledMain from './PostPageStyle'
 import {useSelector} from "react-redux";
 import {settingsPropTypes, StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import ratingCalculator from "../../../_variables/util/ratingCalculator";
 const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
 const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'),{ssr:false})
 const PostMetaDataToSiteHead = dynamic(() => import('./components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
@@ -62,7 +62,7 @@ const PostPage = ( ) => {
             if (post.likes, post.disLikes){
                 setState({
                     ...state,
-                    likeValue: likeValueCalculator(post.likes, post.disLikes),
+                    likeValue: ratingCalculator(post.likes, post.disLikes),
                 });
             }
 

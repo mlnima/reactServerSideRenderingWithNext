@@ -1,9 +1,15 @@
-import * as types from '../types'
-import * as adminTypes from '../adminTypes'
-import {AdminPanelPostsTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
-import {PostTypes} from "../../_variables/TypeScriptTypes/PostTypes";
-import {ADMIN_SET_TOTAL_COUNT} from "../adminTypes";
+import {AdminPanelPostsTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
+import {
+    ADMIN_EDIT_META,
+    ADMIN_EDIT_POST,
+    ADMIN_GET_META,
+    ADMIN_GET_METAS,
+    ADMIN_GET_POST, ADMIN_GET_POSTS,
+    ADMIN_SET_TOTAL_COUNT
+} from "../adminTypes";
+
+import {CHANGE_ACTIVE_EDITING_LANGUAGE, NEW_POST} from "@store/types";
 
 const initialState = {
     post: {
@@ -17,12 +23,10 @@ const initialState = {
     activeEditingLanguage: 'default'
 }
 
-
-
 // @ts-ignore
 export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialState, action: { type: string, payload: any }) => {
     switch (action.type) {
-        case adminTypes.ADMIN_GET_POST:
+        case ADMIN_GET_POST:
             return {
                 ...state,
                 post: {
@@ -30,7 +34,7 @@ export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialStat
                 }
             };
 
-        case adminTypes.ADMIN_EDIT_POST:
+        case ADMIN_EDIT_POST:
             return {
                 ...state,
                 post: {
@@ -39,17 +43,17 @@ export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialStat
                 }
             };
 
-        case adminTypes.ADMIN_GET_META:
+        case ADMIN_GET_META:
             return {
                 ...state,
                 meta: action.payload
             };
-        case adminTypes.ADMIN_GET_METAS:
+        case ADMIN_GET_METAS:
             return {
                 ...state,
                 metas: action.payload
             };
-        case adminTypes.ADMIN_EDIT_META:
+        case ADMIN_EDIT_META:
             return {
                 ...state,
                 meta: {
@@ -57,24 +61,24 @@ export const adminPanelPostsReducer = (state: AdminPanelPostsTypes = initialStat
                     ...action.payload
                 }
             };
-        case types.CHANGE_ACTIVE_EDITING_LANGUAGE:
+        case CHANGE_ACTIVE_EDITING_LANGUAGE:
             return {
                 ...state,
                 activeEditingLanguage: action.payload
             };
 
-        case types.NEW_POST:
+        case NEW_POST:
             return {
                 ...state,
                 activeEditingLanguage: 'default',
                 post: action.payload
             };
-        case adminTypes.ADMIN_GET_POSTS:
+        case ADMIN_GET_POSTS:
             return {
                 ...state,
                 posts: action.payload
             };
-        case adminTypes.ADMIN_SET_TOTAL_COUNT:
+        case ADMIN_SET_TOTAL_COUNT:
             return {
                 ...state,
                 totalCount: action.payload
