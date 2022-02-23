@@ -1,6 +1,9 @@
 import {FC} from "react";
 import Link from 'next/link'
 import styled from "styled-components";
+import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
+import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const WidgetPaginationStyledDiv = styled.div`
   display: flex;
@@ -23,16 +26,17 @@ interface WidgetPaginationPropTypes {
 }
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount}) => {
-
-    const maxPage = totalCount ? [Math.ceil(totalCount / parseInt(process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE))] : []
-    const pagesToRender = maxPage[0] > 8 ? 8 : maxPage
-    const pages = [
-        ...Array(pagesToRender).keys(),
-        ...maxPage
-    ].filter(number => number > 0)
+    const postsCountPerPage = useSelector((store:StoreTypes) => {
+        return store?.settings?.identity?.postsCountPerPage ?
+              // @ts-ignore
+               parseInt(store?.settings?.identity?.postsCountPerPage)
+               : 20
+    })
+    const maxPage = totalCount ? Math.ceil(totalCount / postsCountPerPage) : []
+    const pages = [...rangeNumGenerator(1,maxPage),maxPage]
 
     return (
-        <WidgetPaginationStyledDiv>
+        <WidgetPaginationStyledDiv className={'widget-pagination'}>
             {pages.map(pageNumber => {
                 return (
                     <Link key={pageNumber.toString()}

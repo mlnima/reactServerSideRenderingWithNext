@@ -24,7 +24,7 @@ let PostsContainer = styled.div`
 const PostsPage = () => {
     // @ts-ignore
     const posts = useSelector(store => store?.posts?.posts)
-    const postsCountPerPage = useSelector(store => store?.settings?.identity.postsCountPerPage ? parseInt(store?.settings?.identity.postsCountPerPage)  : 30)
+    const postsCountPerPage = useSelector(store => store?.settings?.identity.postsCountPerPage ? parseInt(store?.settings?.identity.postsCountPerPage)  : 20)
     const totalCount = useSelector(store => store?.posts?.totalCount)
     const postsToRender = useMemo(()=>{
         return posts
