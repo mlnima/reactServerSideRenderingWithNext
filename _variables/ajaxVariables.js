@@ -138,7 +138,7 @@ export const getFirstLoadData = async (req, dynamicWidgets,store,locale) => {
         const cache = process.env.NODE_ENV !== 'development'
         const userAgent = req.headers['user-agent'];
         await store.dispatch(getWidgets(dynamicWidgets,locale,cache))
-        store.dispatch(getSettings(userAgent))
+        await store.dispatch(getSettings(userAgent))
         return {}
     } catch (err) {
         console.log(err)
