@@ -53,6 +53,7 @@ export const initialPosts = (posts) => async dispatch => {
 
 export const getPost = (_id: string) => async dispatch => {
     await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
+
         dispatch({
             type: GET_POST,
             payload: res.data.post

@@ -1,4 +1,4 @@
-import {getFirstLoadData} from '../../_variables/ajaxVariables';
+import {getFirstLoadData} from '@_variables/ajaxVariables';
 import ProfileNavigation from '../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
 import ProfileImage from "../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
@@ -6,10 +6,9 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import Link from "next/link";
-import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "../../store/store";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {useSelector} from "react-redux";
+import {wrapper} from "@store/store";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {FC} from "react";
 
 const ProfileStyledMain = styled.main`
@@ -75,7 +74,7 @@ const ProfileStyledMain = styled.main`
   }
 `
 
-const Profile : FC<ClientPagesTypes>= (props:ClientPagesTypes) => {
+const Profile : FC= () => {
 
     // @ts-ignore
     const userData = useSelector((state : StoreTypes) => state.user.userData)
@@ -107,7 +106,7 @@ const Profile : FC<ClientPagesTypes>= (props:ClientPagesTypes) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(
+     await getFirstLoadData(
         context.req,
         ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
         store,
@@ -117,8 +116,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation', 'profile'])),
-            ...firstLoadData,
-            query: context.query
         }
     }
 })

@@ -1,6 +1,5 @@
-import React, {useEffect} from 'react';
-import {getFirstLoadData} from "../../_variables/ajaxVariables";
-import {getUserPreviewData} from "../../_variables/_userSocialAjaxVariables";
+import React, {FC, useEffect} from 'react';
+import {getFirstLoadData} from "@_variables/ajaxVariables";
 import UserPageProfileImage from "../../components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage";
 import UserPageActionButtons from "../../components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 import {useRouter} from "next/router";
@@ -9,10 +8,9 @@ import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {wrapper} from "../../store/store";
+import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
-import {getSpecificUserData, getUserPageData} from "../../store/clientActions/userActions";
+import {getSpecificUserData, getUserPageData} from "@store/clientActions/userActions";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -73,7 +71,7 @@ const UserPageStyledDiv = styled.div`
   }
 `
 
-const user = () => {
+const user : FC = () => {
     const {t} = useTranslation('common');
     const dispatch = useDispatch()
     const router = useRouter()
@@ -157,7 +155,7 @@ const user = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(
+    await getFirstLoadData(
         context.req,
         ['userPageRightSidebar,userPageLeftSidebar'],
         store,
@@ -166,8 +164,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            ...firstLoadData,
-            query: context.query,
         }
     }
 })

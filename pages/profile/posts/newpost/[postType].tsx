@@ -1,13 +1,13 @@
-import React, {useEffect, useState} from 'react';
-import {getFirstLoadData} from "../../../../_variables/ajaxVariables";
-import {userCreateNewPost} from "../../../../_variables/ajaxPostsVariables";
+import React, {FC, useEffect, useState} from 'react';
+import {getFirstLoadData} from "@_variables/ajaxVariables";
+import {userCreateNewPost} from "@_variables/ajaxPostsVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../store/clientActions/globalStateActions";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {AxiosResponse} from "axios";
-import {wrapper} from "../../../../store/store";
+import {wrapper} from "@store/store";
 import Input from "../../../../components/global/commonComponents/Input/Input";
 import TextArea from "../../../../components/global/commonComponents/TextArea/TextArea";
 
@@ -24,7 +24,7 @@ const NewPostStyledDiv = styled.div`
     }
   }
 `
-const newPost = () => {
+const newPost: FC = () => {
     const userData = useSelector((store: StoreTypes) => store?.user.userData)
     const dispatch = useDispatch()
 
@@ -90,18 +90,21 @@ const newPost = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store =>
-
-    // @ts-ignore
     async (context) => {
-        const firstLoadData = await getFirstLoadData(context.req, ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'], 'profilePage')
+
+        await getFirstLoadData(
+            context.req,
+            ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
+            store,
+            context.locale
+        )
 
         return {
             props: {
                 ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-                ...firstLoadData,
-                query: context.query
             }
         }
+
     })
 
 

@@ -1,21 +1,17 @@
-import React from "react";
-import {getFirstLoadData} from '../../_variables/ajaxVariables';
-import {getPosts} from '../../_variables/ajaxPostsVariables';
-import PostsPage from "../../components/includes/PostsPage/PostsPage";
+import React, {FC} from "react";
+import {getFirstLoadData} from '@_variables/ajaxVariables';
+import {getPosts} from "@store/clientActions/postsAction";
+import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "@components/includes/Posts/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
 import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
-import {wrapper} from "../../store/store";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-
+import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
-import {settingsPropTypes, WidgetsStateInterface} from "../../_variables/TypeScriptTypes/GlobalTypes";
-import {SET_POSTS_DATA} from "../../store/types";
-import {StoreTypes} from '../../_variables/TypeScriptTypes/GlobalTypes'
+import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'
+
 let StyledMain = styled.main`
   width: 100%;
 
@@ -35,8 +31,8 @@ let StyledMain = styled.main`
 
   ${(props:{stylesData:string}) => props.stylesData || ''}
 `
-const searchPage = (props: ClientPagesTypes) => {
-    const settings = useSelector((store: settingsPropTypes) => store.settings);
+const searchPage : FC = ( ) => {
+    const settings = useSelector((store: StoreTypes) => store.settings);
     const posts = useSelector((store:StoreTypes) => store.posts.posts)
     const router = useRouter()
     return (
@@ -72,32 +68,32 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     // @ts-ignore
     const keyword = context.query.keyword ? encodeURIComponent(context?.query?.keyword) : '';
     if (!keyword) return {notFound: true};
-    const firstLoadData = await getFirstLoadData(
+    await getFirstLoadData(
         context.req,
         ['searchPageTop', 'searchPageLeftSidebar', 'searchPageBottom', 'searchPageRightSidebar'],
         store,
         context.locale
     );
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query, null, true);
-    const postsData = await getPosts(gettingPostsQueries);
-
-    store.dispatch({
-        type: SET_POSTS_DATA,
-        payload: {
-            // @ts-ignore
-            posts: postsData.data?.posts || [],
-            // @ts-ignore
-            totalCount: postsData?.data?.totalCount || 0,
-            // @ts-ignore
-
-        }
-    })
+    // const gettingPostsQueries = _getPostsQueryGenerator(context.query, null, true);
+    // const postsData = await getPosts(gettingPostsQueries);
+    //
+    // store.dispatch({
+    //     type: SET_POSTS_DATA,
+    //     payload: {
+    //         // @ts-ignore
+    //         posts: postsData.data?.posts || [],
+    //         // @ts-ignore
+    //         totalCount: postsData?.data?.totalCount || 0,
+    //         // @ts-ignore
+    //
+    //     }
+    // })
+    // @ts-ignore
+    await store.dispatch(getPosts(context.query, null, true,null))
 
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            ...firstLoadData,
-            query: context.query,
         }
     }
 })

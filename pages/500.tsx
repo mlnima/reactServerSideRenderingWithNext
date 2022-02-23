@@ -3,7 +3,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "../store/store";
+import {wrapper} from "@store/store";
 
 const Custom500StyledDiv = styled.div`
   display: flex;
@@ -15,11 +15,11 @@ const Custom500StyledDiv = styled.div`
   grid-area: main;
 
   h1 {
-    color: var(--main-text-color);
+    color: var(--main-text-color,#fff);
   }
 
   .back-to-homepage {
-    color: var(--main-text-color);
+    color: var(--main-text-color,#fff);
     text-decoration: none;
   }
 `

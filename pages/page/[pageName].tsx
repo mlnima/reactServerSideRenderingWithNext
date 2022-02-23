@@ -24,7 +24,7 @@ const page = (props: ClientPagesTypes) => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     if (!context.query.pageName)   return {notFound: true}
-    const firstLoadData = await getFirstLoadData(
+    await getFirstLoadData(
         context.req,
         [context.query.pageName, context.query.pageName + 'LeftSidebar',context.query.pageName + 'RightSidebar'],
         store,
@@ -39,7 +39,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
-            ...firstLoadData,
             // @ts-ignore
             pageInfo:pageData.data ? pageData?.data?.pageData : {},
             query:context.query,

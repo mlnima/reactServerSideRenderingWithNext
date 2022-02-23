@@ -27,6 +27,9 @@ const actorsPage = () => {
     const totalCount = useSelector((store: StoreTypes) => store?.posts?.totalCount)
     const router = useRouter();
 
+    const postsCountPerPage = router.query?.size ? parseInt(router.query?.size as string) :
+        useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
+
     return (
         <ActorsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
             <WidgetsRenderer
@@ -36,10 +39,8 @@ const actorsPage = () => {
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
-                // @ts-ignore
-                size={parseInt(router.query?.size) || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
-                // @ts-ignore
-                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20))}
+                size={postsCountPerPage}
+                maxPage={Math.ceil(totalCount / postsCountPerPage)}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
@@ -50,10 +51,8 @@ const actorsPage = () => {
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
-                // @ts-ignore
-                size={parseInt(router.query?.size) || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
-                // @ts-ignore
-                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || 20))}
+                size={postsCountPerPage}
+                maxPage={Math.ceil(totalCount /postsCountPerPage)}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />

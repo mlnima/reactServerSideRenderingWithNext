@@ -4,10 +4,10 @@ import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
 import {useRouter} from "next/router";
 import _ from 'lodash'
-const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
+const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 
 let StyledDiv = styled.div`
   display: flex;
@@ -308,12 +308,10 @@ const checkout = props => {
 };
 
 export const getServerSideProps = async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req, [])
+    await getFirstLoadData(context.req, [])
     return {
         props: {
             ...(await serverSideTranslations(context.locale, ['common', 'customTranslation'])),
-            ...firstLoadData,
-            query: context.query,
         }
     }
 }

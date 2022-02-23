@@ -1,18 +1,16 @@
-import React, {useEffect, useMemo} from 'react';
+import {useEffect,Fragment} from 'react';
 import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
 import Posts from "../Posts/Posts";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 let PostsContainer = styled.div`
   width: 100%;
-
   .posts-page-info {
     margin: 5px 0;
-
     h1 {
       margin: 0;
       padding: 0 10px;
@@ -20,43 +18,40 @@ let PostsContainer = styled.div`
   }
 `
 
-
 const PostsPage = () => {
-    // @ts-ignore
-    const posts = useSelector(store => store?.posts?.posts)
-    const postsCountPerPage = useSelector(store => store?.settings?.identity.postsCountPerPage ? parseInt(store?.settings?.identity.postsCountPerPage)  : 20)
-    const totalCount = useSelector(store => store?.posts?.totalCount)
-    const postsToRender = useMemo(()=>{
-        return posts
-    },posts)
-    const router = useRouter()
+    
+    const {query} = useRouter()
+    const posts = useSelector((store: StoreTypes) => store?.posts?.posts)
+    const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
+        useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
+    const totalCount = useSelector((store: StoreTypes) => store?.posts?.totalCount)
 
     useEffect(() => {
         Scroll.animateScroll.scrollToTop();
-    }, [router.query]);
+    }, [query]);
 
     return (
-        <React.Fragment>
+        <Fragment>
             <PaginationComponent
                 isActive={true}
-                currentPage={router.query.page || 1}
+                currentPage={query.page || 1}
                 totalCount={totalCount}
                 size={ postsCountPerPage }
                 maxPage={Math.ceil(totalCount /postsCountPerPage)}
             />
             <PostsContainer className='posts-container'>
                 <Posts
-                    posts={postsToRender}
-                />
+                    posts={posts}
+                 />
             </PostsContainer>
             <PaginationComponent
                 isActive={true}
-                currentPage={router.query.page || 1}
+                currentPage={query.page || 1}
                 totalCount={totalCount}
                 size={ postsCountPerPage }
                 maxPage={Math.ceil(totalCount /postsCountPerPage)}
             />
-        </React.Fragment>
+        </Fragment>
     );
 };
 export default PostsPage;

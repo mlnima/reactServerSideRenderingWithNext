@@ -1,3 +1,5 @@
+import staticDataJson from '../../static/staticData.json'
+
 const _getPostsQueryGenerator = (queryData, metaIdData, cache) => {
     const sort = queryData?.sort ? {sort: queryData?.sort} : {sort: 'updatedAt'}
     const postType = queryData?.postType ? {postType: queryData?.postType} : {}
@@ -25,7 +27,7 @@ const _getPostsQueryGenerator = (queryData, metaIdData, cache) => {
         .map(f => 'field=' + f).join('&')
 
     const getPostsData = {
-        size:queryData?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE   || 30,
+        size: queryData?.size || staticDataJson?.identity?.postsCountPerPage,
         page: queryData?.page || '1',
         ...status,
         ...author,

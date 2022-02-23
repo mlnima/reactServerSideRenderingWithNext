@@ -1,6 +1,7 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import staticDataJson from '../../../../static/staticData.json'
 
 const AssetSizeStyledDiv = styled.select`
   width: 100px;
@@ -21,7 +22,7 @@ const AssetSize = () => {
                             defaultValue={'30'}
                             onChange={e => onChangeHandler(e)}
         >
-            <option value={process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE}>{process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE}</option>
+            <option value={staticDataJson?.identity?.postsCountPerPage}>{staticDataJson?.identity?.postsCountPerPage}</option>
             <option value={'10'}>10</option>
             <option value={'20'}>20</option>
             <option value={'30'}>30</option>

@@ -56,7 +56,7 @@ export interface IdentitySettings {
     developmentMode: boolean,
     cookiePopupMessage: boolean,
     membership: boolean,
-    postsCountPerPage: number,
+    postsCountPerPage: string,
 }
 
 // user

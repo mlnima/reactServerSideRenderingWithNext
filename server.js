@@ -1,6 +1,7 @@
 require('dotenv').config()
 require('./server/_variables/connectToDatabase')
-require('./server/_variables/_setSettingToEnvironmentVariables').finally()
+// require('./server/_variables/_setSettingToEnvironmentVariables').finally()
+require('./server/_variables/_writeSettingsAndStaticWidgetsToJsonFile').finally()
 
 const cluster = require('cluster')
 const os = require('os')

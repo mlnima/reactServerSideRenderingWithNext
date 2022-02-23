@@ -12,11 +12,11 @@ const ErrorStyledDiv = styled.div`
   background-color: var(--main-background-color,#000);
   grid-area: main;
   h1 {
-    color: var(--main-text-color);
+    color: var(--main-text-color,#fff);
   }
 
   .back-to-homepage {
-    color: var(--main-text-color);
+    color: var(--main-text-color,#fff);
     text-decoration: none;
   }
 `

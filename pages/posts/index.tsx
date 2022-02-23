@@ -1,6 +1,6 @@
 import {NextPage} from 'next';
 import {getFirstLoadData} from '@_variables/ajaxVariables';
-import PostsPage from "../../components/includes/PostsPage/PostsPage";
+import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";

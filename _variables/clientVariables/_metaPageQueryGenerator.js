@@ -1,4 +1,4 @@
-
+import staticDataJson from '../../static/staticData.json'
 
 const _metaPageQueryGenerator = (queryData,metaType,cache) =>{
     const sort = queryData?.sort ? {sort: queryData?.sort}: {}
@@ -7,7 +7,7 @@ const _metaPageQueryGenerator = (queryData,metaType,cache) =>{
     const dataForGettingMeta = {
         metaType,
         page: queryData?.page || 1,
-        size: queryData.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 60,
+        size: queryData.size || staticDataJson?.identity?.postsCountPerPage,
         startWith: queryData?.startWith || 'any',
         lang: queryData?.lang || 'default',
         status: queryData.status || 'published',

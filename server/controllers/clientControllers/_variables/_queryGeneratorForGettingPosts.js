@@ -1,10 +1,10 @@
-//queryGeneratorForGettingPosts
-const mongoose = require("mongoose");
+const {isValidObjectId} = require("mongoose");
+
 module.exports = data =>{
-     const size = parseInt(data?.size || data?.count || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || '30' );
+     const size = parseInt(data?.size ||  '20' );
      const sort = data?.sort || data?.sortBy;
      const meta = data.metaId || data?.selectedMetaForPosts;
-     const validateId = meta ? mongoose?.isValidObjectId(meta) && meta.match(/^[0-9a-fA-F]{24}$/) : false;
+     const validateId = meta ? isValidObjectId(meta) && meta.match(/^[0-9a-fA-F]{24}$/) : false;
      const metaQuery = validateId ? {$or: [{categories: meta}, {tags: meta}, {actors: meta}]} : {};
      const keyword = data.keyword ? decodeURIComponent(data.keyword) : ''
      const searchQuery = !keyword ? {} :

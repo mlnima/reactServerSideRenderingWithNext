@@ -1,27 +1,27 @@
-import React, {useEffect, useState} from 'react';
-import {getFirstLoadData} from "../../../_variables/ajaxVariables";
+import React, {FC, useEffect, useState} from 'react';
+import {getFirstLoadData} from "@_variables/ajaxVariables";
 import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
-import {getPosts} from "../../../_variables/ajaxPostsVariables";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import ProfileImage from "../../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
-import {wrapper} from "../../../store/store";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {wrapper} from "@store/store";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const PostsStyledDiv = styled.div`
   max-width: 940px;
   margin: auto;
+
   .create-new-post-link {
     color: var(--main-text-color);
     border: solid .4px var(--main-text-color);
     padding: 5px 10px;
   }
 `
-const Posts = () => {
-    const userData = useSelector((store:StoreTypes) => store?.user.userData)
+const Posts: FC = () => {
+    const userData = useSelector((store: StoreTypes) => store?.user.userData)
     const router = useRouter();
 
     const [state, setState] = useState({
@@ -65,21 +65,19 @@ const Posts = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store =>
+    async (context) => {
 
-    // @ts-ignore
-    async (context ) => {
-    const firstLoadData = await getFirstLoadData(context.req,
-        ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
-        store,
-        context.locale
-    )
+        await getFirstLoadData(
+            context.req,
+            ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
+            store,
+            context.locale
+        )
 
-    return {
-        props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            ...firstLoadData,
-            query: context.query
+        return {
+            props: {
+                ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
+            }
         }
-    }
-})
+    })
 export default Posts;

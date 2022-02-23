@@ -1,20 +1,18 @@
-import React, {useEffect, useState} from 'react';
-import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariables";
-// @ts-ignore
-import _ from "lodash";
+import React, {FC, useEffect, useState} from 'react';
+import {getFirstLoadData} from "@_variables/ajaxVariables";
+import {getMultipleUserDataById} from "@_variables/_userSocialAjaxVariables";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "../../../store/store";
+import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
-import {getSpecificUserData} from "../../../store/clientActions/userActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {getSpecificUserData} from "@store/clientActions/userActions";
 import styled from "styled-components";
 const FollowersStyledDiv = styled.div`
   max-width: 940px;
   margin: auto;
 `
-const Followers = ( ) => {
+const Followers : FC = ( ) => {
     const userData = useSelector((state : StoreTypes) => state?.user?.userData)
     const dispatch = useDispatch()
     const [followers, setFollowers] = useState([]);
@@ -47,7 +45,7 @@ const Followers = ( ) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(
+    await getFirstLoadData(
         context.req,
         ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
         store,
@@ -56,8 +54,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
-            ...firstLoadData,
-            query: context.query
         }
     }
 })

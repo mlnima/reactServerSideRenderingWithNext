@@ -1,10 +1,14 @@
-import {SET_WIDGETS_IN_GROUPS} from '../types'
+import {SET_WIDGETS_IN_GROUPS} from '../types';
 import Axios from "@_variables/util/Axios";
 import _getMultipleWidgetWithDataQueryGenerator from "@_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator";
+import staticWidgetsJson from '../../static/staticWidgets.json';
 
 export const getWidgets = (dynamicWidgets,locale,cache) => async (dispatch: any) => {
-    const staticWidgetsFromEnv = process.env.NEXT_PUBLIC_STATIC_WIDGETS
-    const staticWidgets = staticWidgetsFromEnv ? JSON.parse(staticWidgetsFromEnv) : []
+    // const staticWidgetsFromEnv = process.env.NEXT_PUBLIC_STATIC_WIDGETS
+    // const staticWidgets = staticWidgetsFromEnv ? JSON.parse(staticWidgetsFromEnv) : []
+
+    const staticWidgets = staticWidgetsJson?.widgets || []
+
     await Axios.get(`/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(dynamicWidgets, cache, locale)}`
     ).then(res=>{
         dispatch({

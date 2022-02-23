@@ -24,3 +24,5 @@ tools/testAPI.js
 .env.test.local
 .env.production.local
 *.env
+/static/staticData.json
+/static/staticWidgets.json

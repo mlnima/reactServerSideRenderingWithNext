@@ -3,7 +3,8 @@ import {useRouter} from "next/router";
 import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
 import {getFirstLoadData} from "@_variables/ajaxVariables";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
-import CategoriesRenderer from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
+import CategoriesRenderer
+    from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
@@ -15,10 +16,11 @@ const CategoriesPageStyledMain = styled.main`
   grid-area: main;
 `
 const categoriesPage = () => {
-
+    const router = useRouter()
     const isWithSidebar = useSelector((store: settingsPropTypes) => store.settings?.identity?.metaPageSidebar);
     const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
-    const router = useRouter()
+    const postsCountPerPage = router.query?.size ? parseInt(router.query?.size as string) :
+        useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
         <CategoriesPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '}>
@@ -27,23 +29,19 @@ const categoriesPage = () => {
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
-                // @ts-ignore
-                size={parseInt(router.query?.size) || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
-                // @ts-ignore
-                maxPage={Math.ceil(totalCount / parseInt(router.query?.size || process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE  || 20))}
+                size={postsCountPerPage}
+                maxPage={Math.ceil(totalCount / postsCountPerPage)}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
-            <CategoriesRenderer  postElementSize={undefined}/>
+            <CategoriesRenderer postElementSize={undefined}/>
 
             <PaginationComponent
                 isActive={true}
                 currentPage={router.query?.page || 1}
                 totalCount={totalCount}
-                // @ts-ignore
-                size={parseInt(router.query?.size)|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20}
-                // @ts-ignore
-                maxPage={Math.ceil(totalCount / parseInt(router.query?.size|| process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE || 20))}
+                size={postsCountPerPage}
+                maxPage={Math.ceil(totalCount / postsCountPerPage)}
                 queryData={router.query}
                 pathnameData={router.pathname}
             />
@@ -53,7 +51,7 @@ const categoriesPage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-   await getFirstLoadData(
+    await getFirstLoadData(
         context.req,
         ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'],
         store,
@@ -61,7 +59,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     );
 
     // @ts-ignore
-    await  store.dispatch(getMetas(context.query, 'categories', true))
+    await store.dispatch(getMetas(context.query, 'categories', true))
 
     return {
         props: {

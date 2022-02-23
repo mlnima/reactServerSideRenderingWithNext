@@ -4,7 +4,7 @@ const metaSchema = require('../../../models/metaSchema');
 module.exports = async (req, res) => {
     try {
         const type = {type: req.query.metaType}
-        const size = parseInt(req.query.size) || parseInt(process.env.NEXT_PUBLIC_SETTING_POSTS_COUNT_PER_PAGE)
+        const size = parseInt(req.query.size || '20')
         const statusQuery = req.query.status === 'all' ? {status: {$ne: 'trash'}} : !req.query.status ? {}  : {status: req.query.status};
         const page = parseInt(req.query.page);
         const startWithQuery = req.query?.startWith === 'any' ? {} : {name: {$regex: '^' + req.query?.startWith, $options: 'i'}}

@@ -1,6 +1,6 @@
 import React, {FC} from "react";
 import {getFirstLoadData} from '@_variables/ajaxVariables';
-import PostsPage from "../../components/includes/PostsPage/PostsPage";
+import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "@components/includes/Posts/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";

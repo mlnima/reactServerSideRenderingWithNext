@@ -1,11 +1,11 @@
 import React, {FC, useEffect, useState} from 'react';
-import {getFirstLoadData} from "../../_variables/ajaxVariables";
+import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import {wrapper} from "../../store/store";
+import {wrapper} from "@store/store";
 import {useDispatch} from "react-redux";
-import {userResetPassword} from "../../store/clientActions/userActions";
+import {userResetPassword} from "@store/clientActions/userActions";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
 
@@ -27,7 +27,7 @@ const EditProfileStyledMain = styled.main`
     .reset-password-form-field:last-of-type {
       margin-bottom: 20px;
     }
-    
+
     .reset-password-form-field {
       display: flex;
       justify-content: space-between;
@@ -39,6 +39,7 @@ const EditProfileStyledMain = styled.main`
         margin: 5px 0;
         font-size: x-small;
       }
+
       p {
         width: 100%;
       }
@@ -144,7 +145,8 @@ const edit: FC = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(context.req,
+    await getFirstLoadData(
+        context.req,
         ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
         store,
         context.locale
@@ -153,8 +155,6 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation', 'profile'])),
-            ...firstLoadData,
-            query: context.query
         }
     }
 })

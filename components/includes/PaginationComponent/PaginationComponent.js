@@ -1,7 +1,7 @@
 import PaginationComponentPageLink from "./PaginationComponentPageLink";
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../store/clientActions/globalStateActions";
+import {setLoading} from "@store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
 

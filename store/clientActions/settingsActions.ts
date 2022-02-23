@@ -2,6 +2,8 @@ import { ChangeEvent } from "react";
 import axios, {AxiosResponse} from "axios";
 import {GET_SETTINGS, LOADING, SET_ALERT, SET_SETTINGS} from "../types";
 import {EDIT_DESIGN} from "@store/adminTypes";
+import staticDataJson from '../../static/staticData.json'
+
 
 export const setSettings = (setting:any) => (dispatch:any)=>{
     dispatch({
@@ -11,17 +13,29 @@ export const setSettings = (setting:any) => (dispatch:any)=>{
 }
 
 export const getSettings = ( userAgent ) => (dispatch:any)=>{
+
     dispatch({
         type:GET_SETTINGS,
         payload: {
-            design: process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {},
-            identity: process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {},
+            design:staticDataJson?.design || {},
+            identity: staticDataJson?.identity || {},
             eCommerce:{},
             isMobile: Boolean(userAgent.match(
                 /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
             ))
         }
     })
+    // dispatch({
+    //     type:GET_SETTINGS,
+    //     payload: {
+    //         design: process.env.NEXT_PUBLIC_SETTING_DESIGN ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_DESIGN) : {},
+    //         identity: process.env.NEXT_PUBLIC_SETTING_IDENTITY ? JSON.parse(process.env.NEXT_PUBLIC_SETTING_IDENTITY) : {},
+    //         eCommerce:{},
+    //         isMobile: Boolean(userAgent.match(
+    //             /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
+    //         ))
+    //     }
+    // })
 }
 
 

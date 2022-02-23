@@ -36,16 +36,16 @@ const PostsContentStyledDiv = styled.div`
 `
 
 interface PostsComponentTypes {
-    viewType: string,
-    _id: string,
-    posts: PostTypes[],
-    uniqueData: {
+    viewType?: string,
+    _id?: string,
+    posts?: PostTypes[],
+    uniqueData?: {
         posts: PostTypes[],
         totalCount: number
     }
-    widgetId: string,
-    postElementSize: string,
-    isSidebar: boolean
+    widgetId?: string,
+    postElementSize?: string,
+    isSidebar?: boolean
 }
 
 

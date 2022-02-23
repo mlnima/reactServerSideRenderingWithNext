@@ -1,15 +1,12 @@
-import React, {useEffect, useState} from 'react';
-import {getFirstLoadData} from "../../../_variables/ajaxVariables";
-import {getMultipleUserDataById} from "../../../_variables/_userSocialAjaxVariables";
+import React, {FC, useEffect, useState} from 'react';
+import {getFirstLoadData} from "@_variables/ajaxVariables";
+import {getMultipleUserDataById} from "@_variables/_userSocialAjaxVariables";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
-// @ts-ignore
-import _ from "lodash";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {ClientPagesTypes} from "../../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {wrapper} from "../../../store/store";
+import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
-import {getSpecificUserData} from "../../../store/clientActions/userActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {getSpecificUserData} from "@store/clientActions/userActions";
 
 import styled from "styled-components";
 
@@ -17,7 +14,7 @@ const FollowingStyledDiv = styled.div`
   max-width: 940px;
   margin: auto;
 `
-const Following = (props: ClientPagesTypes) => {
+const Following : FC = ( ) => {
     const userData = useSelector((store: StoreTypes) => store?.user?.userData)
     const dispatch = useDispatch()
     const [following, setFollowing] = useState([]);
@@ -28,7 +25,6 @@ const Following = (props: ClientPagesTypes) => {
 
 
     useEffect(() => {
-        // @ts-ignore
         if (userData?.following?.length) {
             getMultipleUserDataById(userData?.following).then(res => {
                 // @ts-ignore
@@ -56,19 +52,17 @@ const Following = (props: ClientPagesTypes) => {
 
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    const firstLoadData = await getFirstLoadData(
+
+    await getFirstLoadData(
         context.req,
         ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
         store,
         context.locale
     )
 
-
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
-            ...firstLoadData,
-            query: context.query
         }
     }
 })
