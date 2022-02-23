@@ -1,3 +1,3 @@
 require('dotenv').config()
 require('./server/_variables/connectToDatabase')
-require('./server/_variables/_writeSettingsAndStaticWidgetsToJsonFile').finally()
+require('./server/_variables/_writeSettingsAndStaticWidgetsToJsonFile').finally(()=>process.exit(0))
