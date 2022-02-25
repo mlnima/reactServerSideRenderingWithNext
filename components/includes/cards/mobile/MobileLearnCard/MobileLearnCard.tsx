@@ -3,8 +3,9 @@ import {FC} from "react";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
-import MobileCardImageRenderer from "./MobileLearnCardMedia";
+// import MobileCardImageRenderer from "./MobileLearnCardMedia";
 import dynamic from "next/dynamic";
+import LearnTypeCardMedia from "@components/includes/cards/desktop/LearnTypeCard/LearnTypeCardMedia";
 
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
@@ -13,9 +14,11 @@ interface MobileLearnCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
     views: number,
+    cardWidth: number,
     rating: number
     post: PostTypes,
     postsPerRawForMobile: number,
+    postElementSize: string,
 }
 
 
@@ -94,16 +97,24 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
          title,
          postsPerRawForMobile,
          views,
+         postElementSize,
+         cardWidth,
          rating
      }) =>{
         const postUrl = `/post/${post.postType}/${post._id}`;
+        const categoriesImages = post.categories.filter(category => category?.imageUrl).map(category => category?.imageUrl)
         return (
             <MobileLearnCardStyledArticle className={'learn-card'} postsPerRawForMobile={postsPerRawForMobile}>
                 <Link href={postUrl}>
                     <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-learn-card-link'} title={title}>
-                        <MobileCardImageRenderer post={post}
-                                                mediaAlt={title}
-                                                postsPerRawForMobile={postsPerRawForMobile}
+
+                        <LearnTypeCardMedia
+                            categoriesImages={categoriesImages}
+                            noImageUrl={''}
+                            postElementSize={postElementSize}
+                            post={post}
+                            cardWidth={cardWidth}
+                            mediaAlt={title}
                         />
                         <h3 className={'mobile-learn-card-title'}>{title}</h3>
                         <div className={'learn-card-under-media'}>
@@ -123,3 +134,8 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
         )
     };
 export default MobileLearnCard
+
+// {/*<MobileCardImageRenderer post={post}*/}
+// {/*                        mediaAlt={title}*/}
+// {/*                        postsPerRawForMobile={postsPerRawForMobile}*/}
+// {/*/>*/}
