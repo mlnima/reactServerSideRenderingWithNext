@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useSelector} from "react-redux";
 
 let StyledDiv = styled.div`
@@ -24,7 +24,7 @@ let StyledDiv = styled.div`
 `
 
 const TopBarWidgetArea = () => {
-    const topBarStyle = useSelector((store: StoreTypes) => store?.settings?.design?.topBarStyle)
+    const topBarStyle = useSelector(({settings}: StoreTypes) => settings?.design?.topBarStyle)
     return (
         <StyledDiv stylesData={topBarStyle || ''} className={'widget-area topbar'}>
             <div className='top-bar-content'>

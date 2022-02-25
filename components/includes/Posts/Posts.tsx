@@ -1,6 +1,5 @@
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-//import {likeValueCalculator} from "../../../_variables/_variables";
 import _shortNumber from '../../../_variables/clientVariables/_shortNumber'
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,17 +7,11 @@ import {setLoading} from "@store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
-const MobilePromotionCard = dynamic(() => import('../cards/mobile/MobilePromotionCard/MobilePromotionCard'))
-const VideoCardTypeList = dynamic(() => import('../cards/desktop/VideoCardTypeList/VideoCardTypeList'))
-const PromotionCardListSmall = dynamic(() =>
-    import('../cards/desktop/PromotionTypeCard/PromotionCardListSmall'))
-const VideoTypeCard = dynamic(() => import('../cards/desktop/VideoCard/VideoCard'))
-const PromotionTypeCard = dynamic(() => import('../cards/desktop/PromotionTypeCard/PromotionTypeCard'))
-const ArticleTypeCard = dynamic(() => import('../cards/desktop/ArticleTypeCard/ArticleTypeCard'))
+const ArticleCardToRender = dynamic(() => import('@components/includes/Posts/ArticleCardToRender'))
+const LearnCardToRender = dynamic(() => import('@components/includes/Posts/LearnCardToRender'))
+const VideoCardToRender = dynamic(() => import('@components/includes/Posts/VideoCardToRender'))
+const PromotionCardToRender = dynamic(() => import('@components/includes/Posts/PromotionCardToRender'))
 const DefaultTypeCard = dynamic(() => import('../cards/desktop/DefaultTypeCard/DefaultTypeCard'))
-const LearnTypeCard = dynamic(() => import('../cards/desktop/LearnTypeCard/LearnTypeCard'))
-const MobileVideoCard = dynamic(() => import('../cards/mobile/MobileVideoCard/MobileVideoCard'))
-const MobileArticleCard = dynamic(() => import('../cards/mobile/MobileArticleCard/MobileArticleCard'))
 
 const PostsContentStyledDiv = styled.div`
   display: flex;
@@ -80,16 +73,16 @@ const Posts = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isS
                 //     ?.replace('#', '');
 
                 const title = process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ? post?.title?.replace('#', '') :
-                              post?.translations?.[locale as string]?.title ? post?.translations?.[locale as string]?.title?.replace('#', '') :
-                              post?.title?.replace('#', '');
-
+                    post?.translations?.[locale as string]?.title ? post?.translations?.[locale as string]?.title?.replace('#', '') :
+                        post?.title?.replace('#', '');
 
 
                 const dir = locale === 'fa' || locale === 'ar' && post?.translations?.[locale as string]?.title ?
                     'rtl' : 'ltr'
+
                 const viewsNumber = post.views || 0
                 const views = _shortNumber(viewsNumber)
-                const rating = ratingCalculator(post.likes, post.disLikes)
+                const rating = post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null
 
                 const postProps = {
                     dir,
@@ -99,80 +92,24 @@ const Posts = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isS
                     post,
                     postElementSize: postsData.elementSize,
                     widgetId,
+                    postsPerRawForMobile: postsData.postsPerRawForMobile,
                     cardWidth: postsData.cardWidth,
-                    title
-
+                    title,
+                    isMobile: postsData.isMobile,
+                    isSidebar: isSidebar,
+                    onActivateLoadingHandler: () => dispatch(setLoading(true))
                 }
 
                 if (post.postType === 'video') {
-                    if (postsData.elementSize === 'list') {
-                        return <VideoCardTypeList isSidebar={isSidebar}
-                                                  onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                  {...postProps}
-                                                  key={index}
-                        />
-                    } else {
-                        if (postsData.isMobile) {
-                            return <MobileVideoCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                    postsPerRawForMobile={postsData.postsPerRawForMobile}
-                                                    {...postProps}
-                                                    key={index}
-                            />
-                        } else {
-                            return <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                  {...postProps}
-                                                  key={index}
-                            />
-                        }
-
-                    }
+                    return <VideoCardToRender postProps={postProps} key={index}/>
                 } else if (post.postType === 'promotion') {
-                    if (postsData.elementSize === 'listSmall') {
-                        // @ts-ignore
-                        return <PromotionCardListSmall isSidebar={isSidebar}
-                                                       onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                       {...postProps}
-                                                       key={index}
-                        />
-                    } else {
-                        if (postsData.isMobile) {
-                            return <MobilePromotionCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                        postsPerRawForMobile={postsData.postsPerRawForMobile}
-                                                        {...postProps}
-                                                        key={index}
-                            />
-                        } else {
-                            return <PromotionTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                      {...postProps}
-                                                      key={index}
-                            />
-                        }
-
-                    }
+                    return <PromotionCardToRender postProps={postProps} key={index}/>
                 } else if (post.postType === 'article') {
-                    if (postsData.isMobile) {
-                        return <MobileArticleCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                  postsPerRawForMobile={postsData.postsPerRawForMobile}
-                                                  {...postProps}
-                                                  key={index}
-                        />
-                    } else {
-                        return <ArticleTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                                {...postProps}
-                                                key={index}
-                        />
-                    }
-
+                    return <ArticleCardToRender postProps={postProps} key={index}/>
                 } else if (post.postType === 'learn') {
-                    return <LearnTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                          {...postProps}
-                                          key={index}
-                    />
+                    return <LearnCardToRender postProps={postProps} key={index}/>
                 } else return (
-                    <DefaultTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                     {...postProps}
-                                     key={index}
-                    />
+                    <DefaultTypeCard {...postProps} key={index}/>
                 )
             })}
         </PostsContentStyledDiv>

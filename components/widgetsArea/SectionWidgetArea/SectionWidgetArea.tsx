@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {WidgetPropTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {WidgetPropTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 let StyledSection = styled.section`${(props:{stylesData:string}) => props.stylesData ?? ''}`
 
 interface SectionWidgetAreaProps {

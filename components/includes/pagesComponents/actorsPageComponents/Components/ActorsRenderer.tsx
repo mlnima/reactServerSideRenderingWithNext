@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import ActorCard from "../../../cards/desktop/ActorCard/ActorCard";
 import styled from "styled-components";
-import {setLoading} from "../../../../../store/clientActions/globalStateActions";
+import {setLoading} from "@store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
-import {Meta, StoreTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 let ActorsRendererStyledDiv = styled.div`
   display: flex;
@@ -23,9 +23,6 @@ let ActorsRendererStyledDiv = styled.div`
 
       @media only screen and (min-width: 768px) {
         margin: 5px;
-        .actor-card-title {
-          //font-size: 14px;
-        }
       }
     }
   }
@@ -41,7 +38,8 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
     const dispatch = useDispatch()
 
     const actorsMetas = uniqueData?.metaData ? uniqueData?.metaData :
-        useSelector((store: StoreTypes) => store?.posts?.actorsMetas)
+          useSelector(({posts}: StoreTypes) => posts?.actorsMetas)
+
     return (
         <ActorsRendererStyledDiv className='actors-content'>
             {actorsMetas instanceof Array ?

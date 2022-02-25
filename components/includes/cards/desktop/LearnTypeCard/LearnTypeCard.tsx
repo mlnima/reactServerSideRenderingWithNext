@@ -3,42 +3,51 @@ import Link from "next/link";
 import styled from "styled-components";
 import LearnTypeCardMedia from "./LearnTypeCardMedia";
 import LearnTypeCardTitle from "./LearnTypeCardTitle";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import dynamic from "next/dynamic";
+
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
+// width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
+// max-width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
+// width: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+// max-width: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+interface LearnTypeCardStyledDivPropType {
+    postsPerRawForMobile: number,
+    cardWidth: number,
+    postElementSize: string
+}
 
 const LearnTypeCardStyledDiv = styled.div`
-  width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
-  max-width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
+  background-color: var(--post-element-background-color, #131314);
+  width: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
+  flex-direction: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? 'row' : 'column'};
   display: flex;
-  flex-direction: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? 'row' : 'column'};
   align-items: center;
   justify-content: space-between;
-  background-color: var(--post-element-background-color, #131314);
-  margin: 2.8px;
-  font-size: 12px;
+  font-size: 14px;
   padding-bottom: 5px;
+  margin: 7px;
   
   .learn-post-card-link {
     position: relative;
-    width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-    max-width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-    margin: 4px;
+    width: 100%;
+    flex-direction: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? 'row' : 'column'};
+    margin-bottom: 4px;
     display: flex;
-    flex-direction: ${props => props.postElementSize === 'list' ? 'row' : 'column'};
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
 
     .learn-post-card-under-media {
-      width: 100%;
-      height: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '65px' : 'auto'};
+      
+      width: calc(100% - 4px);
+      height: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? '65px' : 'auto'};
 
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      margin-left: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? 4 : 0}px;
+      margin-left: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? 4 : 0}px;
 
       .learn-post-card-under-media-info {
         display: flex;
@@ -67,24 +76,12 @@ const LearnTypeCardStyledDiv = styled.div`
       }
     }
   }
-
-  @media only screen and (min-width: 768px) {
-
-    width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-    max-width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? `320px` : `100%`};
-    flex-direction: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? 'row' : 'column'};
-    margin: 7px;
-
-    .post-card-link {
-      flex-direction: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? 'row' : 'column'};
-    }
-  }
-
 `
 
 interface VideoTypeCardPropTypes {
     cardWidth: number,
     postElementSize: string,
+    postsPerRawForMobile?: number,
     onActivateLoadingHandler: any,
     title: string,
     noImageUrl: string,
@@ -99,9 +96,11 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> = (props) => {
     const categoriesImages = props.post.categories.filter(category => category?.imageUrl).map(category => category?.imageUrl)
 
     return (
-        <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <Link href={postUrl} >
-                <a rel='next' onClick={props.onActivateLoadingHandler} className='learn-post-card-link' title={props.title}>
+        <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize}
+                                cardWidth={props.cardWidth} postsPerRawForMobile={props.postsPerRawForMobile}>
+            <Link href={postUrl}>
+                <a rel='next' onClick={props.onActivateLoadingHandler} className='learn-post-card-link'
+                   title={props.title}>
 
                     <LearnTypeCardMedia
                         categoriesImages={categoriesImages}
@@ -114,8 +113,10 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> = (props) => {
                     <div className='learn-post-card-under-media'>
                         <LearnTypeCardTitle title={props.title}/>
                         <div className='learn-post-card-under-media-info'>
-                            {props.views ? <CardViews views={props.views} className={'learn-card-views learn-card-info-data'}/> : null}
-                            {props.rating ? <CardRating rating={props.rating} className={'learn-card-rating learn-card-info-data'}/> : null}
+                            {props.views ? <CardViews views={props.views}
+                                                      className={'learn-card-views learn-card-info-data'}/> : null}
+                            {props.rating ? <CardRating rating={props.rating}
+                                                        className={'learn-card-rating learn-card-info-data'}/> : null}
                         </div>
                     </div>
                 </a>
@@ -126,3 +127,8 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> = (props) => {
 };
 export default LearnTypeCard;
 
+
+// @media only screen and (min-width: 768px) {
+//
+//
+//   }

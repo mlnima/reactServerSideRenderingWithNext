@@ -1,21 +1,21 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
-
+//  width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : '100%'};
 let LearnTypeCardMediaStyledDiv = styled.div`
-
+   width: 100%;
   .learn-post-card-image {
-    width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : '100%'};
-    height: calc(48vw / 1.777);
+    width: 100%;
+    height: calc( 100% / 1.777);
     object-fit: contain;
 
   }
 
   @media only screen and (min-width: 768px) {
     .learn-post-card-image {
-      width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
-      height: calc(${(props: { cardWidth: number, postElementSize: string }) => props.cardWidth}px / 1.777);
+      width: ${(props: { cardWidth: number, postElementSize: string }) => props.cardWidth}px;
+      height: calc(${(props: { cardWidth: number, postElementSize: string }) => props.cardWidth} / 1.777)px;
     }
   }
 `

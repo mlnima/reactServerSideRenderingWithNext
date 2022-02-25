@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import styled from "styled-components";
 import ArticleCardMedia from "./ArticleCardMedia";
 import ArticleTypeCardTitle from "./ArticleTypeCardTitle";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'))
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
@@ -17,7 +17,10 @@ const ArticleCard = styled.div`
   padding-bottom: 5px;
   width: ${(props: { cardWidth: number }) => `${props?.cardWidth}px`};
   max-width: 100%;
+  display: flex;
   flex-direction: column;
+  justify-content: center;
+  align-items: center;
   margin: 7px;
 
 
@@ -64,7 +67,12 @@ const ArticleCard = styled.div`
         }
       }
     }
+    .last-update {
+      font-size: 9px;
+      margin: 0 4px;
+    }
   }
+
 `
 
 interface ArticleTypeCardPropTypes {
@@ -95,7 +103,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
             <ArticleCard className='article-card' cardWidth={cardWidth}>
                 <Link href={`/post/${post.postType}/${post._id}`}>
                     <a rel='next' onClick={onActivateLoadingHandler}
-                       className='article-card-link'
+                       className='article-card-media-link'
                        title={title}
                     >
                         <ArticleCardMedia noImageUrl={noImageUrl}

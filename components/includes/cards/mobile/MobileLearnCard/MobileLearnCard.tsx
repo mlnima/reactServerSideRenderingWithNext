@@ -1,22 +1,32 @@
+//MobileLearnCard
 import {FC} from "react";
-import Link from "next/link";
-import dynamic from 'next/dynamic'
-import styled from "styled-components";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
-import MobileArticleCardMedia from "./MobileArticleCardMedia";
+import styled from "styled-components";
+import Link from "next/link";
+import MobileCardImageRenderer from "./MobileLearnCardMedia";
+import dynamic from "next/dynamic";
 
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
+interface MobileLearnCardPropTypes {
+    onActivateLoadingHandler: any,
+    title: string,
+    views: number,
+    rating: number
+    post: PostTypes,
+    postsPerRawForMobile: number,
+}
 
-const MobileArticleCardStyledArticle = styled.article`
+
+
+const MobileLearnCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
   margin: 4px 2px ;
   font-size: 12px;
   max-width: 750px;
-  
-  .mobile-article-card-link {
+  .mobile-learn-card-link {
     color: var(--post-element-text-color, #ccc);
     font-size: 12px;
     position: relative;
@@ -27,8 +37,8 @@ const MobileArticleCardStyledArticle = styled.article`
     align-items: center;
     justify-content: space-between;
     text-decoration: none;
-    
-    .mobile-article-card-title{
+
+    .mobile-learn-card-title{
       font-size: 14px;
       font-weight: normal;
       white-space: nowrap;
@@ -37,15 +47,15 @@ const MobileArticleCardStyledArticle = styled.article`
       margin: 2px 0;
       width: 100%;
     }
-    
-    .article-card-under-media {
-      width: calc(100% - 4px);
+
+    .learn-card-under-media {
+      width: 100%;
       height: auto;
       display: flex;
       flex-direction: column;
       justify-content: space-between;
 
-      .article-card-under-media-info {
+      .learn-card-under-media-info {
         font-size: 14px;
         display: flex;
         justify-content: space-between;
@@ -54,7 +64,7 @@ const MobileArticleCardStyledArticle = styled.article`
         margin: 0;
         height: 20px;
 
-        .article-card-info-data {
+        .learn-card-info-data {
           display: flex;
           justify-content: center;
           align-items: center;
@@ -71,22 +81,13 @@ const MobileArticleCardStyledArticle = styled.article`
       }
     }
     .last-update{
-      width: calc(100% - 4px);
+      width: 100%;
     }
-    
+
   }
 `
 
-interface ArticleTypeCardPropTypes {
-    onActivateLoadingHandler: any,
-    title: string,
-    views: number,
-    rating: number
-    post: PostTypes,
-    postsPerRawForMobile: number,
-}
-
-const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
+const MobileLearnCard: FC<MobileLearnCardPropTypes> =
     ({
          post,
          onActivateLoadingHandler,
@@ -94,25 +95,23 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
          postsPerRawForMobile,
          views,
          rating
-     }) => {
-
+     }) =>{
         const postUrl = `/post/${post.postType}/${post._id}`;
-
         return (
-            <MobileArticleCardStyledArticle className={'article-card'} postsPerRawForMobile={postsPerRawForMobile} >
+            <MobileLearnCardStyledArticle className={'learn-card'} postsPerRawForMobile={postsPerRawForMobile}>
                 <Link href={postUrl}>
-                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-article-card-link'} title={title}>
-                        <MobileArticleCardMedia post={post}
+                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-learn-card-link'} title={title}>
+                        <MobileCardImageRenderer post={post}
                                                 mediaAlt={title}
                                                 postsPerRawForMobile={postsPerRawForMobile}
                         />
-                        <h3 className={'mobile-article-card-title'}>{title}</h3>
-                        <div className={'article-card-under-media'}>
-                            <div className={'article-card-under-media-info'}>
-                                {views ? <CardViews views={views} className={'article-card-views article-card-info-data'}/>
+                        <h3 className={'mobile-learn-card-title'}>{title}</h3>
+                        <div className={'learn-card-under-media'}>
+                            <div className={'learn-card-under-media-info'}>
+                                {views ? <CardViews views={views} className={'learn-card-views learn-card-info-data'}/>
                                     : null
                                 }
-                                {rating ? <CardRating rating={rating} className={'article-card-rating article-card-info-data'}/>
+                                {rating ? <CardRating rating={rating} className={'learn-card-rating learn-card-info-data'}/>
                                     : null
                                 }
                             </div>
@@ -120,8 +119,7 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
                         {post?.updatedAt ? <CardLastUpdate updatedAt={post?.updatedAt}/> : null}
                     </a>
                 </Link>
-            </MobileArticleCardStyledArticle>
-        );
+            </MobileLearnCardStyledArticle>
+        )
     };
-
-export default MobileArticleCard;
+export default MobileLearnCard

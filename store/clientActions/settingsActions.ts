@@ -2,7 +2,7 @@ import { ChangeEvent } from "react";
 import axios, {AxiosResponse} from "axios";
 import {GET_SETTINGS, LOADING, SET_ALERT, SET_SETTINGS} from "../types";
 import {EDIT_DESIGN} from "@store/adminTypes";
-import staticDataJson from '../../static/staticData.json'
+import staticDataJson from '../../static/jsons/staticData.json'
 
 
 export const setSettings = (setting:any) => (dispatch:any)=>{

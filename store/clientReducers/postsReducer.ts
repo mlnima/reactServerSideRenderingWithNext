@@ -1,7 +1,7 @@
 import {HYDRATE} from "next-redux-wrapper";
 import {
     DELETE_COMMENT,
-    GET_COMMENTS, GET_METAS,
+    GET_COMMENTS, GET_METAS, GET_PAGE_DATA,
     GET_POST,
     GET_POSTS,
     INITIAL_POSTS,
@@ -11,6 +11,7 @@ import {
 
 const initialState = {
     posts: [],
+    pageData:{},
     actorData: {},
     categoryData: {},
     tagData: {},
@@ -92,6 +93,11 @@ export const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload,
+            }
+        case  GET_PAGE_DATA:
+            return {
+                ...state,
+                pageData:action.payload
             }
         default:
             return state

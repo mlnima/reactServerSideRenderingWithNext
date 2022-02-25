@@ -1,5 +1,5 @@
 import React from 'react';
-import {clickPathGenerator} from '../../../../_variables/_variables';
+import {clickPathGenerator} from '@_variables/_variables';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import withRouter from 'next/dist/client/with-router'
 
@@ -7,7 +7,7 @@ import {faSlidersH} from "@fortawesome/free-solid-svg-icons";
 import {faCss3Alt, faJs, faSass, fas} from "@fortawesome/free-brands-svg-icons";
 import {faFile, faFolder} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
-import {fileUpload} from "../../../../_variables/ajaxVariables";
+import {fileUpload} from "@_variables/ajaxVariables";
 import fileTypeDetector from "@_variables/util/fileTypeDetector";
 
 const FileManagerAreaStyledDiv = styled.div`

@@ -1,9 +1,9 @@
 import React, {useEffect} from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from 'react-redux';
-import {closeAlert, setAlert} from "../../../store/clientActions/globalStateActions";
+import {closeAlert, setAlert} from "@store/clientActions/globalStateActions";
 import Draggable from 'react-draggable';
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {faCheckCircle, faExclamationCircle, faExclamationTriangle, faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';
@@ -40,23 +40,74 @@ const StyledDiv = styled.div`
         color: var(--navigation-text-color, #ccc);;
         background-color: transparent;
         border: none;
-        margin: 0;
-        padding: 0 10px;
+        //margin: 0;
+        //padding: 0 10px;
+        height: 25px;
+        width: 40px;
+        display: flex;
+        justify-content: center;
 
-        svg {
+        .faTimes{
           width: 25px;
           height: 25px;
+          margin: 0 2px;
+          background-color: var(--post-element-info-text-color, #ccc);
+          mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
+          -webkit-mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
         }
+
+        //svg {
+        //  width: 25px;
+        //  height: 25px;
+        //}
       }
 
       .alert-type {
         padding: 0 10px;
         margin: 0;
-
-        svg {
+        height: 25px;
+        width: 25px;
+        display: flex;
+        justify-content: center;
+        
+        .icon{
           width: 25px;
           height: 25px;
         }
+        
+        .faCheckCircle{
+          width: 25px;
+          height: 25px;
+          margin: 0 2px;
+          background-color: var(--post-element-info-text-color, green);
+          mask: url('/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
+          -webkit-mask: url('/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
+        }        
+        .faExclamationCircle{
+          width: 25px;
+          height: 25px;
+          margin: 0 2px;
+          background-color: var(--post-element-info-text-color,blue);
+          mask: url('/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
+          -webkit-mask: url('/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
+        }       
+        .faExclamationTriangle{
+          width: 25px;
+          height: 25px;
+          margin: 0 2px;
+          background-color: var(--post-element-info-text-color, red);
+          mask: url('/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
+          -webkit-mask: url('/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
+        }
+        
+
+        //
+        //svg {
+        //  width: 25px;
+        //  height: 25px;
+        //}
+        
+        
       }
     }
 
@@ -90,14 +141,15 @@ const AlertBox = () => {
                     <div className='alert-message-header'>
                         <p className='alert-type'>
                             {alert.type === 'success' ?
-                                <FontAwesomeIcon icon={faCheckCircle} style={{color: 'green'}}/> :
+                                <span className={'icon faCheckCircle'}/> :
                                 alert.type === 'error' ?
-                                    <FontAwesomeIcon icon={faExclamationTriangle} style={{color: 'red'}}/> :
-                                    <FontAwesomeIcon icon={faExclamationCircle} style={{color: 'blue'}}/>
+                                    <span className={'icon faExclamationTriangle'}/> :
+                                    <span className={'icon faExclamationCircle'}/>
                             }
                         </p>
                         <button className='close-alert' onClick={() => dispatch(closeAlert())}>
-                            <FontAwesomeIcon icon={faTimes}/>
+                            <span className={'icon faTimes'}/>
+
                         </button>
                     </div>
                     <p className='alert'>
@@ -112,3 +164,11 @@ const AlertBox = () => {
 
 };
 export default AlertBox;
+
+// {/*{alert.type === 'success' ?*/}
+// {/*    <FontAwesomeIcon icon={faCheckCircle} style={{color: 'green'}}/> :*/}
+// {/*    alert.type === 'error' ?*/}
+// {/*        <FontAwesomeIcon icon={faExclamationTriangle} style={{color: 'red'}}/> :*/}
+// {/*        <FontAwesomeIcon icon={faExclamationCircle} style={{color: 'blue'}}/>*/}
+// {/*}*/}
+// {/*<FontAwesomeIcon icon={faTimes}/>*/}

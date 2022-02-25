@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
-import staticDataJson from '../../../../static/staticData.json'
+import staticDataJson from '../../../../static/jsons/staticData.json'
 
 const AssetSizeStyledDiv = styled.select`
   width: 100px;

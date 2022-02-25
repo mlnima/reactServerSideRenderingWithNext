@@ -214,10 +214,20 @@ export interface ChatroomStateTypes {
 
 }
 
+export interface PageDataPropTypes{
+    pageName:string,
+    _id:string,
+    sidebar:string,
+    status:string,
+    imageUrl:string,
+    pageStyle:string,
+}
+
 export interface PostStateTypes {
     tagsMetas:Meta[],
     categoriesMetas: Meta[],
     actorsMetas: Meta,
+    pageData:PageDataPropTypes,
     posts: PostTypes[],
     actorData: Meta,
     categoryData: Meta,

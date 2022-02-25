@@ -2,32 +2,24 @@ import {FC} from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
-
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'),{ssr:false});
 const VideoCardTitle = dynamic(() => import('./VideoCardTitle'));
 const VideoCardMedia = dynamic(() => import('./VideoCardMedia/VideoCardMedia'));
 
 let VideoCardStyledArticle = styled.article`
-  width: calc(48vw - 5.6px);
-  max-width: calc(48vw - 5.6px);
   background-color: var(--post-element-background-color, #131314);
-  margin: 2.8px;
-  font-size: 12px;
   padding-bottom: 5px;
-
+  width: ${(props: { cardWidth: number, postElementSize: string }) => `${props?.cardWidth}px`};
+  max-width: 100%;
+  flex-direction: column;
+  justify-content: space-between;
+  margin: 7px;
+  font-size: 14px;
+  transition: .3s;
   .last-update {
     font-size: 9px;
-  }
-
-  @media only screen and (min-width: 768px) {
-    width: ${(props: { cardWidth: number, postElementSize: string }) => `${props?.cardWidth}px`};
-    max-width: 100%;
-    flex-direction: column;
-    justify-content: space-between;
-    margin: 7px;
-    font-size: 14px;
-    transition: .3s;
+    margin: 0 4px;
   }
 `
 

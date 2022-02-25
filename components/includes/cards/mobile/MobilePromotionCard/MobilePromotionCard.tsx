@@ -2,20 +2,37 @@ import {FC} from "react";
 import Link from "next/link";
 import dynamic from 'next/dynamic'
 import styled from "styled-components";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import MobilePromotionCardMedia from "./MobilePromotionCardMedia";
-import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
-
+import {likeDislikeView} from "@_variables/ajaxPostsVariables";
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 const MobilePromotionCardStyledArticle = styled.article`
+  
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
   margin: 4px 2px ;
-  font-size: 12px;
   background-color: var(--post-element-background-color, #131314);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content:center;
+  
+  .promotion-card-link-external{
+    color: var(--post-element-text-color, #ccc);
+    position: relative;
+    width: calc(100% - 4px);
+    margin-bottom: 4px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+    text-decoration: none;
+  }
+  
   .mobile-promotion-card-link-internal{
     color: var(--post-element-text-color, #ccc);
+    width: 100%;
     .mobile-promotion-card-title{
       font-size: 14px;
       font-weight: normal;
@@ -32,6 +49,7 @@ const MobilePromotionCardStyledArticle = styled.article`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
+      font-size: 12px;
 
       .promotion-card-under-media-info {
         font-size: 12px;
@@ -58,20 +76,6 @@ const MobilePromotionCardStyledArticle = styled.article`
         }
       }
     }
-  }
-
-  .promotion-card-link-external{
-    color: var(--post-element-text-color, #ccc);
-    font-size: 12px;
-    position: relative;
-    width: calc(100% - 4px);
-    max-width: calc(100% - 4px);
-    margin: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
   }
 `
 

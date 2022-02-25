@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useSelector} from "react-redux";
 
 const StyledFooter = styled.footer`
@@ -18,7 +18,7 @@ const StyledFooter = styled.footer`
 `
 
 const FooterWidgetArea = ( ) => {
-    const footerStyle = useSelector((store: StoreTypes) => store?.settings?.design?.footerStyle)
+    const footerStyle = useSelector(({settings}: StoreTypes) => settings?.design?.footerStyle)
 
     return (
         <StyledFooter stylesData={footerStyle || ''} className={'widget-area footer' }>

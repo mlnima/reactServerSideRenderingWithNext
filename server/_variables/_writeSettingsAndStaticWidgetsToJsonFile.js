@@ -26,11 +26,11 @@ const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
             },
         ]).sort({updatedAt: -1}).exec()
 
-        fs.writeFileSync('./static/staticData.json', JSON.stringify({
+        fs.writeFileSync('./static/jsons/staticData.json', JSON.stringify({
             identity:identity.data,
             design:design.data,
         }))
-        fs.writeFileSync('./static/staticWidgets.json', JSON.stringify({
+        fs.writeFileSync('./static/jsons/staticWidgets.json', JSON.stringify({
             widgets:widgets,
         }))
 

@@ -7,12 +7,12 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const Home : FC = () => {
-    const settings = useSelector((store: StoreTypes) => store.settings);
+    const homePageStyle = useSelector(({settings}: StoreTypes) => settings.design?.homePageStyle);
     return (
         < MainWidgetArea
             className='home-page main'
             position='home'
-            stylesData={settings.design?.homePageStyle}
+            stylesData={homePageStyle}
         />
     );
 };

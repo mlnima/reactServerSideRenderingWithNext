@@ -1,14 +1,14 @@
 import React, {useState, useEffect, FC} from 'react';
-import {login, registerUser} from "../../../_variables/ajaxAuthVariables";
+import {login, registerUser} from "@_variables/ajaxAuthVariables";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from 'react-redux';
-import {userLogin} from "../../../store/clientActions/userActions";
+import {userLogin} from "@store/clientActions/userActions";
 import styled from "styled-components";
-import {setAlert, setLoginRegisterFormStatus} from "../../../store/clientActions/globalStateActions";
+import {setAlert, setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
 import Draggable from 'react-draggable';
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import _passwordValidator from "../../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "./ValidInput";
 

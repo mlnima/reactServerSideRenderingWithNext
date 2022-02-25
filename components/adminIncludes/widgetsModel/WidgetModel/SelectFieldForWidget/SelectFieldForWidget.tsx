@@ -33,6 +33,9 @@ const SelectFieldForWidget = (props: selectFieldTypes) => {
         <SelectFieldForWidgetStyledDiv className='selectFieldForWidget'>
             <p>{props.title}</p>
             <select ref={props.ref} name={props.name} onChange={e => props.onChangeHandler(e)} value={props.value} className={'custom-select'}>
+                <option key={'x'} >
+                 Select
+                </option>
                 {props.options.map((option: string, index: number) => {
                     return (
                         <option key={index} value={option}>

@@ -3,7 +3,7 @@ import _postPageQueryGenerator from "@_variables/clientVariables/_postPageQueryG
 import Axios from "@_variables/util/Axios";
 import {
     DELETE_COMMENT,
-    GET_COMMENTS, GET_METAS,
+    GET_COMMENTS, GET_METAS, GET_PAGE_DATA,
     GET_POST,
     GET_POSTS,
     INITIAL_POSTS,
@@ -12,6 +12,7 @@ import {
     SET_POSTS_DATA
 } from "@store/types";
 import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
+import axios from "axios";
 
 export const setPostsData = postsData => async dispatch => {
     dispatch({
@@ -142,7 +143,17 @@ export const deleteComments = (commentsListToDelete) => async dispatch => {
 }
 
 
-
+export const getPageData = (pageName) => async dispatch => {
+    const body = {
+        pageName
+    }
+    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/pages/getPageData', body).then(res=>{
+        dispatch({
+            type: GET_PAGE_DATA,
+            payload: res.data?.pageData || {}
+        })
+    })
+}
 
 // const id = _id ? {_id} : {}
 // const cacheStatus = cache ? {cache} : {}

@@ -4,9 +4,8 @@ import dynamic from "next/dynamic";
 import GlobalStyles from "../global/Styles/GlobalStyles";
 import _setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
 import {useRouter} from "next/router";
-import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
-
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SidebarWidgetArea/SidebarWidgetArea'));
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
@@ -24,13 +23,13 @@ interface AppLayoutPropTypes {
     children: any
 }
 
-const AppLayout: FC<AppLayoutPropTypes> = ({children, pageInfo}) => {
+const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
     const {pathname} = useRouter();
 
-    const layoutData = useSelector(({user,settings,globalState}: StoreTypes) => {
+    const layoutData = useSelector(({user,settings,globalState,posts}: StoreTypes) => {
         const isSidebarLess = pathname.match( /\/404|\/500|\/_error|\/profile/g)
-        const sidebarsData = _setAppLayoutDataFromProp(pageInfo, pathname, settings?.identity)
+        const sidebarsData = _setAppLayoutDataFromProp(posts.pageData, pathname, settings?.identity)
 
         return {
             loggedIn: user?.loggedIn,

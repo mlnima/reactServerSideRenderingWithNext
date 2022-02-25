@@ -1,7 +1,7 @@
 import {SET_WIDGETS_IN_GROUPS} from '../types';
 import Axios from "@_variables/util/Axios";
 import _getMultipleWidgetWithDataQueryGenerator from "@_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator";
-import staticWidgetsJson from '../../static/staticWidgets.json';
+import staticWidgetsJson from '../../static/jsons/staticWidgets.json';
 
 export const getWidgets = (dynamicWidgets,locale,cache) => async (dispatch: any) => {
     // const staticWidgetsFromEnv = process.env.NEXT_PUBLIC_STATIC_WIDGETS

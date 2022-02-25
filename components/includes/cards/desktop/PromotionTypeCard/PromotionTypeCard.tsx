@@ -1,24 +1,21 @@
 import Link from "next/link";
 import PromotionCardMedia from "./PromotionCardMedia";
-import {likeDislikeView} from "../../../../../_variables/ajaxPostsVariables";
-import _ from "lodash";
-import CardMetaRenderer from "../../asset/CardMetaData/CardMetaRenderer";
+import {likeDislikeView} from "@_variables/ajaxPostsVariables";
+import {FC} from "react";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
-import {FC} from "react";
-
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 let PromotionCardStyledDiv = styled.div`
+  width: ${(cardWidth: { cardWidth: number }) => `${cardWidth}px`};
   position: relative;
   display: flex;
-  width: ${(cardWidth: { cardWidth: number }) => `${cardWidth}px`};
-  max-width: 100%;
   flex-direction: column;
   align-items: center;
-  justify-content: space-between;
+  justify-content: flex-start;
+  max-width: 100%;
   background-color: var(--post-element-background-color, #131314);
   padding-bottom: 5px;
   margin: 7px;
@@ -36,6 +33,7 @@ let PromotionCardStyledDiv = styled.div`
 
 .promotion-card-link-external {
   width: 100%;
+  
 }
 
 .promotion-card-under-media {

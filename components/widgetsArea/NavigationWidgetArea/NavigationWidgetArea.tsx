@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import WidgetsRenderer from "../../includes/WidgetsRenderer/WidgetsRenderer";
-import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useSelector} from "react-redux";
 
 let StyledNavigation = styled.nav`
@@ -31,7 +31,7 @@ let StyledNavigation = styled.nav`
 `
 
 const NavigationWidgetArea = () => {
-    const navigationStyle = useSelector((store: StoreTypes) => store?.settings?.design?.navigationStyle)
+    const navigationStyle = useSelector(({settings}: StoreTypes) => settings?.design?.navigationStyle)
     return (
         <StyledNavigation stylesData={navigationStyle || ''} className={'widget-area navigation'}>
             <div className='navigation-content'>

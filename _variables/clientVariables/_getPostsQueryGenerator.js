@@ -1,4 +1,4 @@
-import staticDataJson from '../../static/staticData.json'
+import staticDataJson from '../../static/jsons/staticData.json'
 
 const _getPostsQueryGenerator = (queryData, metaIdData, cache) => {
     const sort = queryData?.sort ? {sort: queryData?.sort} : {sort: 'updatedAt'}

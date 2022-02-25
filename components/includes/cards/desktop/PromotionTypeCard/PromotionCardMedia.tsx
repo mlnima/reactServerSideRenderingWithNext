@@ -1,6 +1,6 @@
 import React, {useState} from 'react';
 import styled from "styled-components";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
 interface PromotionCardMediaPropTypes {
     post: PostTypes,

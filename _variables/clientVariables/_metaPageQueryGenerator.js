@@ -1,4 +1,4 @@
-import staticDataJson from '../../static/staticData.json'
+import staticDataJson from '../../static/jsons/staticData.json'
 
 const _metaPageQueryGenerator = (queryData,metaType,cache) =>{
     const sort = queryData?.sort ? {sort: queryData?.sort}: {}

@@ -1,19 +1,21 @@
-import {
-    getFirstLoadData,
-    getPageData,
-    // getFirstLoadDataStatic,
-    // getPagesDataForStaticGeneration
-} from "../../_variables/ajaxVariables";
+import {getFirstLoadData} from "@_variables/ajaxVariables";
 import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {wrapper} from "../../store/store";
+import {ClientPagesTypes} from "@_variables/TypeScriptTypes/ClientPagesTypes";
+import {wrapper} from "@store/store";
+import {getPageData} from "@store/clientActions/postsAction";
+import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const page = (props: ClientPagesTypes) => {
 
+    const pageData = useSelector(({posts}: StoreTypes) => {
+        return posts.pageData
+    })
+
     return (
         < MainWidgetArea
-            position={props.pageInfo?.pageName}
+            position={pageData?.pageName}
             className='page main'
             stylesData={props.pageInfo?.pageStyle || ''}
         />
@@ -23,26 +25,26 @@ const page = (props: ClientPagesTypes) => {
 //************SSR***************
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    if (!context.query.pageName)   return {notFound: true}
+    if (!context.query.pageName) return {notFound: true}
     await getFirstLoadData(
         context.req,
-        [context.query.pageName, context.query.pageName + 'LeftSidebar',context.query.pageName + 'RightSidebar'],
+        [
+            context.query.pageName,
+            context.query.pageName + 'LeftSidebar',
+            context.query.pageName + 'RightSidebar'
+        ],
         store,
         context.locale
     )
-    let responseCode = 200
-    const pageData = await getPageData({pageName: context.query.pageName})
+console.log(        context.query.pageName,
+    context.query.pageName + 'LeftSidebar',
+    context.query.pageName + 'RightSidebar')
     // @ts-ignore
-    if (!pageData?.data?.pageData)return { notFound: true}
-
+    await store.dispatch(getPageData(context.query.pageName))
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
-            // @ts-ignore
-            pageInfo:pageData.data ? pageData?.data?.pageData : {},
-            query:context.query,
-            responseCode
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
         }
     }
 })

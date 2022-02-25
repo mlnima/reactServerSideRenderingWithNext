@@ -5,7 +5,7 @@ import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 
 const CardTitleStyledDiv = styled.div`
-  width: ${(props: { cardWidth: number }) => `${props?.cardWidth}px`};
+  width: ${(props: { cardWidth: number }) => `calc(${props?.cardWidth} - 4)px`};
   font-size: 14px;
   color: var(--post-element-text-color, #ccc);
   margin: 2px 0;

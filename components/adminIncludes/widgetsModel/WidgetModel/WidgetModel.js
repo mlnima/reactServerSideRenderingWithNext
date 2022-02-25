@@ -13,7 +13,7 @@ import {
     adminAddNewWidget,
     adminDeleteWidget,
     adminUpdateWidget
-} from "../../../../store/adminActions/adminWidgetsActions";
+} from "@store/adminActions/adminWidgetsActions";
 import SelectFieldForWidget from "./SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import staticPositions from '../staticPositions';
@@ -26,14 +26,12 @@ const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'));
 const TextInputFieldForWidget = dynamic(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'), {ssr: false});
 const LinkTypeWidgetModelFields = dynamic(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'));
 const ImageSwiperTypeWidgetModelFields = dynamic(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'));
-// const PostSwiperTypeWidgetModelFields = dynamic(() => import('./PostSwiperTypeWidgetModelFields/PostSwiperTypeWidgetModelFields'));
 const MenuWidgetModelFields = dynamic(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'));
-// const TextWidgetTypeFields = dynamic(() => import('./TextWidgetTypeFields/TextWidgetTypeFields'));
 const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'));
 const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'));
 const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'));
 const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'));
-// const TextEditor = dynamic(() => import('../../TextEditor/TextEditor'), {ssr: false});
+
 
 const WidgetModelStyledDiv = styled.div`
   z-index: 3;
@@ -46,6 +44,10 @@ const WidgetModelStyledDiv = styled.div`
   width: 100%;
   resize: both;
   overflow: hidden;
+  
+  .widgetModel{
+    overflow-y: auto;
+  }
 
   .widgetInfo {
     margin: auto;
@@ -412,7 +414,7 @@ const WidgetModel = props => {
                         /> : null
                     }
 
-                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider' ?
+                    {widgetData.type === 'posts' || widgetData.type === 'postsSwiper'  || widgetData.type === 'postsSlider' ?
                         <SelectFieldForWidget title={'Post Type:'}
                                               name={'postType'}
                                               ref={null}
@@ -440,15 +442,15 @@ const WidgetModel = props => {
 
                     }
 
-                    {widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ?
-                        <SelectFieldForWidget title={'Sort By:'}
-                                              name={'sortBy'}
-                                              ref={null}
-                                              value={widgetData.sortBy}
-                                              options={['_id', 'count']}
-                                              onChangeHandler={onChangeHandler}
-                        /> : null
-                    }
+                    {/*{widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ?*/}
+                    {/*    <SelectFieldForWidget title={'Sort By:'}*/}
+                    {/*                          name={'sortBy'}*/}
+                    {/*                          ref={null}*/}
+                    {/*                          value={widgetData.sortBy}*/}
+                    {/*                          options={['_id', 'count']}*/}
+                    {/*                          onChangeHandler={onChangeHandler}*/}
+                    {/*    /> : null*/}
+                    {/*}*/}
                     {widgetData.type === 'meta' || widgetData.type === 'metaWithImage' ?
                         <SelectFieldForWidget title={'Meta Type:'}
                                               name={'metaType'}
