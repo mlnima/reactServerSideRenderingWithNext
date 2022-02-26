@@ -3,7 +3,7 @@ import {getFirstLoadData} from '@_variables/ajaxVariables';
 import {getPosts} from "@store/clientActions/postsAction";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import PostsPageInfo from "@components/includes/Posts/PostsPageInfo";
+import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";

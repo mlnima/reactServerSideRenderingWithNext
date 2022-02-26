@@ -2,7 +2,7 @@ import {useEffect,Fragment} from 'react';
 import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
-import Posts from "../Posts/Posts";
+import PostsRenderer from "../PostsRenderer/PostsRenderer";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -40,7 +40,7 @@ const PostsPage = () => {
                 maxPage={Math.ceil(totalCount /postsCountPerPage)}
             />
             <PostsContainer className='posts-container'>
-                <Posts
+                <PostsRenderer
                     posts={posts}
                  />
             </PostsContainer>

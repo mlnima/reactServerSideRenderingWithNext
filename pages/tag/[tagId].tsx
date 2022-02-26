@@ -2,7 +2,7 @@ import React, {FC} from "react";
 import {getFirstLoadData} from '@_variables/ajaxVariables';
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
-import PostsPageInfo from "@components/includes/Posts/PostsPageInfo";
+import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))

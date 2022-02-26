@@ -551,7 +551,7 @@ const WidgetModel = props => {
                     {/*    }*/}
                     {/*/>*/}
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'postsSlider' ?
-                        <TextInputFieldForWidget inputTitle='Selected Meta For Posts:' name='selectedMetaForPosts'
+                        <TextInputFieldForWidget inputTitle='Selected Meta For PostsRenderer:' name='selectedMetaForPosts'
                                                  type='text' value={widgetData.selectedMetaForPosts}
                                                  classNameValue='selectedMetaForPosts'
                                                  placeHolder='selectedMetaForPosts'

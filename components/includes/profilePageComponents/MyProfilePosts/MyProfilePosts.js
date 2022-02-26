@@ -1,7 +1,7 @@
 import React, { useEffect, useState} from 'react';
 import withRouter from 'next/dist/client/with-router'
 import { getPosts } from '../../../../_variables/ajaxPostsVariables'
-import Posts from '../../Posts/Posts'
+import PostsRenderer from '../../PostsRenderer/PostsRenderer'
 import {useSelector} from "react-redux";
 const MyProfilePosts = props => {
     const userData = useSelector(store => store?.user.userData)
@@ -43,7 +43,7 @@ const MyProfilePosts = props => {
     return (
         <div className='my-profile-posts'>
           <h1>MyProfilePosts</h1>
-            <Posts posts={ state.posts || [] }/>
+            <PostsRenderer posts={ state.posts || [] }/>
         </div>
     );
 };

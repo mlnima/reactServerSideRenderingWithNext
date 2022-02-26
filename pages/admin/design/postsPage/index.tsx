@@ -6,7 +6,7 @@ const StyleSection = dynamic(() => import('../../../../components/adminIncludes/
 
 const postPage = () => {
     return (
-        <StyleSection name='postsPageStyle' title='Posts Page Design :' />
+        <StyleSection name='postsPageStyle' title='PostsRenderer Page Design :' />
     );
 };
 

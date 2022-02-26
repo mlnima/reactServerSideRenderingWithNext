@@ -58,7 +58,7 @@ const Posts: FC = () => {
             <ProfileImage/>
             <ProfileNavigation/>
             <Link href={'/profile.json/posts/newpost'}><a className='create-new-post-link'>create new post</a></Link>
-            {/*<Posts posts={ state.posts || [] }/>*/}
+            {/*<PostsRenderer posts={ state.posts || [] }/>*/}
             {/*posts*/}
         </PostsStyledDiv>
     );

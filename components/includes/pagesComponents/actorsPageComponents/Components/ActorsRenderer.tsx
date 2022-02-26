@@ -8,7 +8,7 @@ import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 let ActorsRendererStyledDiv = styled.div`
   display: flex;
   flex-wrap: wrap;
-  justify-content: center;
+  justify-content: space-evenly;
 
   .actor-card-image {
     .actor-card-link {
@@ -23,6 +23,7 @@ let ActorsRendererStyledDiv = styled.div`
 
       @media only screen and (min-width: 768px) {
         margin: 5px;
+        justify-content: center;
       }
     }
   }

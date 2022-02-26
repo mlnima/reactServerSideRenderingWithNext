@@ -4,8 +4,6 @@ import {useDispatch, useSelector} from 'react-redux';
 import {closeAlert, setAlert} from "@store/clientActions/globalStateActions";
 import Draggable from 'react-draggable';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {faCheckCircle, faExclamationCircle, faExclamationTriangle, faTimes} from "@fortawesome/free-solid-svg-icons";
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';
 
 const StyledDiv = styled.div`
@@ -55,11 +53,6 @@ const StyledDiv = styled.div`
           mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
           -webkit-mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
         }
-
-        //svg {
-        //  width: 25px;
-        //  height: 25px;
-        //}
       }
 
       .alert-type {
@@ -79,7 +72,7 @@ const StyledDiv = styled.div`
           width: 25px;
           height: 25px;
           margin: 0 2px;
-          background-color: var(--post-element-info-text-color, green);
+          background-color: green;
           mask: url('/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
           -webkit-mask: url('/public/asset/images/icons/circle-check-solid.svg') no-repeat center;
         }        
@@ -87,7 +80,7 @@ const StyledDiv = styled.div`
           width: 25px;
           height: 25px;
           margin: 0 2px;
-          background-color: var(--post-element-info-text-color,blue);
+          background-color: blue;
           mask: url('/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
           -webkit-mask: url('/public/asset/images/icons/circle-exclamation-solid.svg') no-repeat center;
         }       
@@ -95,19 +88,10 @@ const StyledDiv = styled.div`
           width: 25px;
           height: 25px;
           margin: 0 2px;
-          background-color: var(--post-element-info-text-color, red);
+          background-color: red;
           mask: url('/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
           -webkit-mask: url('/public/asset/images/icons/triangle-exclamation-solid.svg') no-repeat center;
         }
-        
-
-        //
-        //svg {
-        //  width: 25px;
-        //  height: 25px;
-        //}
-        
-        
       }
     }
 

@@ -14,8 +14,8 @@ interface MobileCardImageNextStylePropTypes {
 }
 
 const MobileCardImageNextStyledDiv = styled.div`
-  width: ${({postsPerRawForMobile}: MobileCardImageNextStylePropTypes) => `calc(96vw  / ${postsPerRawForMobile || 1})`};
-  height: ${({postsPerRawForMobile}: MobileCardImageNextStylePropTypes) => `calc((96vw  / ${postsPerRawForMobile || 1})  / 1.777)`};
+  width: ${({postsPerRawForMobile}: MobileCardImageNextStylePropTypes) => `calc(96vw  / ${postsPerRawForMobile || 2})`};
+  height: ${({postsPerRawForMobile}: MobileCardImageNextStylePropTypes) => `calc((96vw  / ${postsPerRawForMobile || 2})  / 1.777)`};
 `
 
 const MobileCardImageNext: FC<MobileCardImageNextStyledDiv> =

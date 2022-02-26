@@ -4,13 +4,13 @@ import {useRouter} from "next/router";
 import TagCardMedia from "./TagCardMedia";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import capitalizeFirstLetter from "../../../../../_variables/util/capitalizeFirstLetter";
-import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
+import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 
 const TagCardStyledDiv = styled.div`
   margin: 5px;
-
+  background-color: var(--post-element-background-color, #131314);
   .tag-card-link {
     .tag-card-info {
       display: flex;

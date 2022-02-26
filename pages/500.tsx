@@ -40,14 +40,12 @@ const Custom500 = () => {
 //
 export const getStaticProps = wrapper.getServerSideProps(store =>
     async (context) => {
-        // const firstLoadData = await getFirstLoadDataStatic(['500'],store)
         return {
             props: {
                 ...(await serverSideTranslations(
                     context.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL as string,
                     ['common', 'customTranslation']
                 )),
-                // ...firstLoadData
             }
         }
     })

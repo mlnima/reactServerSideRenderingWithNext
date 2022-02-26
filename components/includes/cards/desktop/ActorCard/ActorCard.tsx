@@ -8,6 +8,7 @@ import {FC, useMemo} from "react";
 
 const ActorCardStyledDiv = styled.div`
   margin: 5px;
+  background-color: var(--post-element-background-color, #131314);
   .actor-card-link {
     display: flex;
     justify-content: flex-start;

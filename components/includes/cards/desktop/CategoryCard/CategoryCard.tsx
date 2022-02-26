@@ -4,15 +4,15 @@ import {useRouter} from "next/router";
 import CategoryCardMedia from "./CategoryCardMedia";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import capitalizeFirstLetter from "../../../../../_variables/util/capitalizeFirstLetter";
-import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
+import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
+import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const CategoryCardStyledDiv = styled.div`
   margin: 5px;
+  background-color: var(--post-element-background-color, #131314);
 
   .category-card-link{
     width: 100%;
-
     .category-card-info {
       display: flex;
       align-items: center;

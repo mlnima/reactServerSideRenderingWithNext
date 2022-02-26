@@ -4,7 +4,7 @@ import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
 
 const NoImageStyleDiv = styled.div`
   width: 100%;
-  height: calc(48vw / 1.777);
+  height: calc(100% / 1.777);
   display: flex;
   justify-content: center;
   align-items: center;

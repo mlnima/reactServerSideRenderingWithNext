@@ -23,7 +23,7 @@ module.exports = async (req, res) => {
 
     } catch (err) {
         console.log(err)
-        res.status(500).send({message: 'Something Went Wrong While Saving Posts', err})
+        res.status(500).send({message: 'Something Went Wrong While Saving PostsRenderer', err})
 
     }
 }

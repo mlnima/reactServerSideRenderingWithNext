@@ -7,10 +7,10 @@ import {setLoading} from "@store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
-const ArticleCardToRender = dynamic(() => import('@components/includes/Posts/ArticleCardToRender'))
-const LearnCardToRender = dynamic(() => import('@components/includes/Posts/LearnCardToRender'))
-const VideoCardToRender = dynamic(() => import('@components/includes/Posts/VideoCardToRender'))
-const PromotionCardToRender = dynamic(() => import('@components/includes/Posts/PromotionCardToRender'))
+const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
+const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
+const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
+const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
 const DefaultTypeCard = dynamic(() => import('../cards/desktop/DefaultTypeCard/DefaultTypeCard'))
 
 const PostsContentStyledDiv = styled.div`
@@ -42,7 +42,7 @@ interface PostsComponentTypes {
 }
 
 
-const Posts = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isSidebar}: PostsComponentTypes) => {
+const PostsRenderer = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isSidebar}: PostsComponentTypes) => {
     const dispatch = useDispatch()
     const {locale} = useRouter()
 
@@ -116,4 +116,4 @@ const Posts = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isS
     );
 };
 
-export default Posts
+export default PostsRenderer

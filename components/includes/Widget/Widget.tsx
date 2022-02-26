@@ -7,7 +7,7 @@ const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
-const Posts = dynamic(() => import('../Posts/Posts'))
+const Posts = dynamic(() => import('../PostsRenderer/PostsRenderer'))
 const CategoriesRenderer = dynamic(() =>
     import('../pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer'))
 const TagsRenderer = dynamic(() =>
