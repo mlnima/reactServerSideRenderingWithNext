@@ -75,36 +75,36 @@ const savePostWithDuplicateContent = async (newPost, downloadImageContent) => {
     }
 }
 
-// const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
+// const savePostIfThereIsNoDuplicate = async (index, downloadImageContent) => {
 //
 //     try {
-//       return await postSchema.find({$or: [{title: newPost.title}]})
+//       return await postSchema.find({$or: [{title: index.title}]})
 //             .exec()
 //             .then(async posts => {
 //                 try {
 //                     if (posts.length) {
-//                         return {message: 'Duplicate Error! ' + newPost.title + ' Already Exist in the Database'}
+//                         return {message: 'Duplicate Error! ' + index.title + ' Already Exist in the Database'}
 //                     } else {
 //                         const editedNewPost = {
-//                             ...newPost,
-//                             tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
-//                             categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
-//                             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : [],
-//                             mainThumbnail: downloadImageContent ? await imageDownloader(newPost) : newPost.mainThumbnail
+//                             ...index,
+//                             tags: index.tags ? await updateSaveMetas(index.tags) : [],
+//                             categories: index.categories ? await updateSaveMetas(index.categories) : [],
+//                             actors: index.actors ? await updateSaveMetas(index.actors) : [],
+//                             mainThumbnail: downloadImageContent ? await imageDownloader(index) : index.mainThumbnail
 //                         }
 //
 //                         const newPostDataToSave =  new postSchema(editedNewPost);
 //
 //                         return await newPostDataToSave.save((err, createdPost) => {
 //                             if (err) {
-//                                return  {message: 'Something Went Wrong While Saving! ' + newPost.title}
+//                                return  {message: 'Something Went Wrong While Saving! ' + index.title}
 //                             }
 //                             console.log('saved')
 //                             return {message: `${createdPost.title} Has Been Saved : ${createdPost._id} `}
 //                         })
 //                     }
 //                 } catch (err) {
-//                     return {message: 'Something Went Wrong While finding Duplicate In the Database! ' + newPost.title}
+//                     return {message: 'Something Went Wrong While finding Duplicate In the Database! ' + index.title}
 //                 }
 //             })
 //     } catch (err) {

@@ -9,10 +9,10 @@ import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponent
 import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-import {dispatchSocketId} from "../../store/clientActions/userActions";
-import {setChatroomUsers, setChatroomMessages, newMessage} from '../../store/clientActions/chatroomActions';
-import {wrapper} from "../../store/store";
-import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {dispatchSocketId} from "@store/clientActions/userActions";
+import {setChatroomUsers, setChatroomMessages, newMessage} from '@store/clientActions/chatroomActions';
+import {wrapper} from "@store/store";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {uniqBy} from 'lodash';
 
 const chatRoom = ( ) => {

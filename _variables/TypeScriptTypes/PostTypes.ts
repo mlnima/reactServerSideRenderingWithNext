@@ -1,14 +1,26 @@
-import {Meta, MetasPropTypes} from './GlobalTypes'
+import {Meta, MetasPropTypes,User} from './GlobalTypes'
+
+export interface Comment{
+    onDocumentId: string,
+    _id:string,
+    author:string,
+    reply:[],
+    likes:number,
+    disLikes:number,
+    body: string,
+    status:string
+}
 
 export interface PostTypes {
-    comments: [];
-    status: string;
-    source: any;
-    updatedAt: string;
-    url?: string | undefined;
-    currency: string;
-    downloadLink: string;
-    downloadLinks: {url:string,title:string}[];
+    comments:Comment[],
+    author:User,
+    status: string,
+    source: any,
+    updatedAt: string,
+    url?: string | undefined,
+    currency: string,
+    downloadLink: string,
+    downloadLinks: {url:string,title:string}[],
     description: string | object,
     translations?:{
         [key:string] :{

@@ -4,7 +4,7 @@ import Head from "next/head";
 interface MonacoEditorPropTypes {
     name:string,
     language:string,
-    theme:string,
+    theme?:string,
     defaultValue:string,
     value:string,
     width?:string,

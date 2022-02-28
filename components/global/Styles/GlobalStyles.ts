@@ -152,12 +152,12 @@ const GlobalStyles = createGlobalStyle`
   }
   .btn-transparent-dark{
     background-color: transparent;
-    color: #343a40;
+    color:  var(--transparent-dark-button-color, #343a40); 
     border-color:  transparent;
   }
   .btn-transparent-light{
     background-color: transparent;
-    color: #fff;
+    color: var(--transparent-light-button-color,  #fff); 
     border-color:  transparent;
   }
   .btn-dark{

@@ -42,7 +42,7 @@ const FormTypeWidgetModelFields = props => {
         return (
             <FormTypeWidgetModelFieldsStyledDiv>
                 <TextInputFieldForWidget inputTitle='Form Name :' name='formName' type='text' value={props.widgetData?.uniqueData?.formName} placeHolder='Form Name' onChangeHandler={e => onChangeHandler(e)}/>
-                <TextInputFieldForWidget inputTitle='Form Title :' name='formTitle' type='text' value={props.widgetData?.uniqueData?.formTitle} placeHolder='Form Title' onChangeHandler={e => onChangeHandler(e)}/>
+                <TextInputFieldForWidget inputTitle='Form TextInput :' name='formTitle' type='text' value={props.widgetData?.uniqueData?.formTitle} placeHolder='Form TextInput' onChangeHandler={e => onChangeHandler(e)}/>
                 <TextInputFieldForWidget inputTitle='After Submit Message :' name='afterSubmitMessage' type='text' value={props.widgetData?.uniqueData?.afterSubmitMessage} placeHolder='After Submit Message' onChangeHandler={e => onChangeHandler(e)}/>
                 <TextInputFieldForWidget inputTitle='Submit button text :' name='submitButtonText' type='text' value={props.widgetData?.uniqueData?.submitButtonText} placeHolder='Submit button text' onChangeHandler={e => onChangeHandler(e)}/>
                 <AddFormConditional state={state}

@@ -40,7 +40,10 @@ export const SET_SETTINGS ='SET_SETTINGS'
 //POSTS TYPES
 export const GET_POSTS = 'GET_POSTS'
 export const GET_POST = 'GET_POST'
+export const GET_EDITING_POST = 'GET_EDITING_POST'
+export const EDIT_POST_FIELD = 'EDIT_POST_FIELD'
 export const SET_POST = 'SET_POST'
+
 //comments
 export const GET_COMMENTS = 'GET_COMMENTS'
 // export const GET_COMMENT = 'GET_COMMENT'

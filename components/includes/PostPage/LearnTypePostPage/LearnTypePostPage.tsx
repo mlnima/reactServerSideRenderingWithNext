@@ -1,13 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import PostPageStyledMain from '../PostPageStyle'
 import {useSelector} from "react-redux";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import PostTitle from '../components/PostTitle/PostTitle'
 import LearnTypePostPageDescription from "./components/LearnTypePostPageDescription";
 import * as Scroll from "react-scroll";
-import {likeDislikeView} from "../../../../_variables/ajaxPostsVariables";
+import {likeDislikeView} from "@_variables/ajaxPostsVariables";
 import ratingCalculator from "@_variables/util/ratingCalculator";
 const EditLinkForAdmin = dynamic(() => import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
 const PostMetaDataToSiteHead = dynamic(() => import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))

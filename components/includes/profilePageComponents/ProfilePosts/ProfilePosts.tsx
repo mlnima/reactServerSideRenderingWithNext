@@ -1,15 +1,17 @@
 import React, { useEffect, useState} from 'react';
 import withRouter from 'next/dist/client/with-router'
-import { getPosts } from '../../../../_variables/ajaxPostsVariables'
+import { getPosts } from '@_variables/ajaxPostsVariables'
 import PostsRenderer from '../../PostsRenderer/PostsRenderer'
 import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 const MyProfilePosts = props => {
-    const userData = useSelector(store => store?.user.userData)
+    const userData = useSelector(({user}:StoreTypes) => user.userData)
 
     const [ state, setState ] = useState({
         posts:[],
         totalCount:0
     });
+
     useEffect(() => {
         if (props.router){
             if (props.router.query.username){
@@ -26,19 +28,17 @@ const MyProfilePosts = props => {
                     category: props.router.query.category || 'all',
                     sort: props.router.query.sort || 'latest',
                 }
-               getPosts(getPostsData,  window.location.origin,true,window.location.href).then(res=>{
-                   setState({
-                       ...state,
-                       posts:res.data.posts,
-                       totalCount: res.data.totalCount
-                   })
-               })
+
+               // getPosts(getPostsData,  window.location.origin,true,window.location.href).then(res=>{
+               //     setState({
+               //         ...state,
+               //         posts:res.data.posts,
+               //         totalCount: res.data.totalCount
+               //     })
+               // })
 
             }
         }
-
-
-
     }, []);
     return (
         <div className='my-profile-posts'>

@@ -4,6 +4,7 @@ const widgetsTypes = [
     'textEditor',
     'menu',
     'linkTo',
+    'dayModeNightMode',
     'multipleLinkTo',
     'posts',
     'media',

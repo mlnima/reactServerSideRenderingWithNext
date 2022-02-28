@@ -13,7 +13,9 @@ const clientGetMultipleMeta = require('./clientPostsControllers/clientGetMultipl
 const clientGetSingleMeta = require('./clientPostsControllers/clientGetSingleMeta')
 const clientGetComments = require('./clientPostsControllers/clientGetComments')
 const clientUserCreateNewPost = require('./clientPostsControllers/clientUserCreateNewPost')
+const clientUserUpdatePost = require('./clientPostsControllers/clientUserUpdatePost')
 const clientFixMetaImage = require('./clientPostsControllers/clientFixMetaImage')
+
 
 router.get('/clientGetPosts',cacheSuccesses,clientGetPosts)
 router.get('/clientGetPost',cacheSuccesses,clientGetPost)
@@ -25,5 +27,6 @@ router.get('/getMultipleMeta',cacheSuccesses,clientGetMultipleMeta)
 router.get('/getMeta',cacheSuccesses,clientGetSingleMeta)
 router.get('/getComments',clientGetComments)
 router.post('/userCreateNewPost',authMiddleware,clientUserCreateNewPost)
+router.post('/userUpdatePost',authMiddleware,clientUserUpdatePost)
 
 module.exports = router

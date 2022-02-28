@@ -1,12 +1,20 @@
 import {HYDRATE} from "next-redux-wrapper";
 import {
     DELETE_COMMENT,
-    GET_COMMENTS, GET_METAS, GET_PAGE_DATA,
+    GET_COMMENTS,
+    GET_EDITING_POST,
+    GET_METAS,
+    GET_PAGE_DATA,
     GET_POST,
     GET_POSTS,
     INITIAL_POSTS,
-    NEW_COMMENT, SET_ACTORS_METAS, SET_CATEGORIES_METAS, SET_POST,
-    SET_POSTS_DATA, SET_TAGS_METAS
+    EDIT_POST_FIELD,
+    NEW_COMMENT,
+    SET_ACTORS_METAS,
+    SET_CATEGORIES_METAS,
+    SET_POST,
+    SET_POSTS_DATA,
+    SET_TAGS_METAS
 } from "@store/types";
 
 const initialState = {
@@ -17,6 +25,7 @@ const initialState = {
     tagData: {},
     totalCount: 0,
     post: {},
+    editingPost:{},
     comments: [],
     categoriesMetas:[],
     tagsMetas:[],
@@ -51,6 +60,19 @@ export const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 post: action.payload,
+            }
+        case  GET_EDITING_POST:
+            return {
+                ...state,
+                editingPost : action.payload
+            }
+        case  EDIT_POST_FIELD:
+            return {
+                ...state,
+                editingPost:{
+                    ...state.editingPost,
+                    ...action.payload
+                }
             }
         case  GET_COMMENTS:
             return {

@@ -22,6 +22,7 @@ const SearchButton = dynamic(() => import('../widgets/SearchButton/SearchButton'
 const AlphabeticalNumericalRangeLinksWidget = dynamic(() =>
     import('../widgets/AlphabeticalNumericalRangeLinksWidget/AlphabeticalNumericalRangeLinksWidget'))
 const LanguagesSwitcher = dynamic(() => import('../widgets/LanguagesSwitcher/LanguagesSwitcher'))
+const DayModeNightMode = dynamic(() => import('../widgets/DayModeNightMode/DayModeNightMode'))
 const Logo = dynamic(() => import('../widgets/Logo/Logo'))
 const LinkTo = dynamic(() => import('../widgets/LinkTo/LinkTo'))
 const PostsSlider = dynamic(() => import('../widgets/PostsSlider/PostsSlider'))
@@ -80,10 +81,10 @@ const Widget: FC<WidgetComponentPropTypes> =
             data.type === 'menu' ? MenuWidget :
             data.type === 'shoppingCart' ? ShoppingCart :
             data.type === 'advertise' ? Advertise :
-            data.type === 'form' ? FormWidget
+            data.type === 'form' ? FormWidget:
+            data.type === 'dayModeNightMode' ? DayModeNightMode
             : null;
     },[])
-
 
     return (
         <WidgetStyledSection {...idAttribute}

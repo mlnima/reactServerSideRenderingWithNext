@@ -1,8 +1,8 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import MyProfileInfo from '../MyProfileInfo/MyProfileInfo'
-import MyProfilePosts from '../MyProfilePosts/MyProfilePosts'
+import MyProfileInfo from '../ProfileInfo/ProfileInfo'
+import MyProfilePosts from '../ProfilePosts/ProfilePosts'
 import {useRouter} from "next/router";
-import MyProfileFollowers from "../MyProfileFollowers/MyProfileFollowers";
+import ProfileFollowers from "../ProfileFollowers/ProfileFollowers";
 
 const ProfileComponentsRenderer = ({activeTab}) => {
     const router = useRouter();
@@ -17,7 +17,7 @@ const ProfileComponentsRenderer = ({activeTab}) => {
         )
     } else if (activeTab === 'followers') {
         return (
-            <MyProfileFollowers/>
+            <ProfileFollowers/>
         )
     } else return null
 

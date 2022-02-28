@@ -162,15 +162,15 @@ if (Array.isArray(workerData?.newPost)){
 
 
 // if (req.body.downloadImageContent) {
-// let thumbnailUrl = newPost.mainThumbnail
+// let thumbnailUrl = index.mainThumbnail
 // const today = new Date(Date.now());
 // const year = today.getFullYear();
 // const month = today.getMonth() + 1;
 // const directoryPath = './static/uploads/image/' + year + '/' + month + '/';
-// const filePathOriginalSize = directoryPath + 'originalSize_' + newPost.title + Date.now() + '.jpg'
-// const filePath = directoryPath + newPost.title + Date.now() + '.jpg'
+// const filePathOriginalSize = directoryPath + 'originalSize_' + index.title + Date.now() + '.jpg'
+// const filePath = directoryPath + index.title + Date.now() + '.jpg'
 // const options = {
-//     url: newPost.mainThumbnail,
+//     url: index.mainThumbnail,
 //     dest: filePathOriginalSize               // will be saved to /path/to/dest/image.jpg
 // }
 //
@@ -182,18 +182,18 @@ if (Array.isArray(workerData?.newPost)){
 //             } else {
 //                 fsExtra.remove(filePathOriginalSize)
 //                 const editedNewPost = {
-//                     ...newPost,
+//                     ...index,
 //                     lastModify: Date.now(),
-//                     tags: newPost.tags ? await metasSaver(newPost.tags) : [],
-//                     categories: newPost.categories ? await metasSaver(newPost.categories) : [],
-//                     actors: newPost.actors ? await metasSaver(newPost.actors) : [],
+//                     tags: index.tags ? await metasSaver(index.tags) : [],
+//                     categories: index.categories ? await metasSaver(index.categories) : [],
+//                     actors: index.actors ? await metasSaver(index.actors) : [],
 //                     mainThumbnail: filePath.replace('./static/', '/static/')
 //                 }
 //                 const newPostDataToSave = new postSchema(editedNewPost);
 //                 newPostDataToSave.save().then(savedPostData => {
-//                     res.json({message: 'post ' + newPost.title + ' has been saved'})
+//                     res.json({message: 'post ' + index.title + ' has been saved'})
 //                 }).catch(err => {
-//                     res.json({message: '****error!***** ' + 'post ' + newPost.title + ' Can not be save  in the Database'})
+//                     res.json({message: '****error!***** ' + 'post ' + index.title + ' Can not be save  in the Database'})
 //                     res.status(500);
 //                 })
 //             }

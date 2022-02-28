@@ -6,6 +6,7 @@ module.exports = async (req, res) => {
     try {
         if (_id){
           await  postSchema.findById(_id).populate([
+                {path: 'author',select:['username','profileImage','role']},
                 {path: 'categories',select:{'name':1,'type':1}},
                 {path: 'tags',select:{'name':1,'type':1}},
                 {path: 'actors',select:{'name':1,'type':1}},

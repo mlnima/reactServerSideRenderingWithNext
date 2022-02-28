@@ -3,16 +3,22 @@ import _postPageQueryGenerator from "@_variables/clientVariables/_postPageQueryG
 import Axios from "@_variables/util/Axios";
 import {
     DELETE_COMMENT,
-    GET_COMMENTS, GET_METAS, GET_PAGE_DATA,
+    GET_COMMENTS,
+    GET_METAS,
+    GET_PAGE_DATA,
     GET_POST,
     GET_POSTS,
     INITIAL_POSTS,
     LOADING,
-    NEW_COMMENT, SET_ALERT,
-    SET_POSTS_DATA
+    NEW_COMMENT,
+    GET_EDITING_POST,
+    SET_ALERT,
+    SET_POSTS_DATA,
+    EDIT_POST_FIELD
 } from "@store/types";
 import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
 import axios from "axios";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 
 export const setPostsData = postsData => async dispatch => {
     dispatch({
@@ -54,13 +60,147 @@ export const initialPosts = (posts) => async dispatch => {
 
 export const getPost = (_id: string) => async dispatch => {
     await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
-
         dispatch({
             type: GET_POST,
             payload: res.data.post
         })
     }).catch(err => {
 
+    })
+}
+
+export const getEditingPost = (_id: string) => async dispatch => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
+    await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
+        dispatch({
+            type: GET_EDITING_POST,
+            payload: res.data.post
+        })
+
+    }).catch(err => {
+
+    }).finally(()=>{
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
+    })
+}
+
+
+
+
+export const userCreateNewPost = (data: PostTypes,router) => async dispatch => {
+
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
+
+    const comments = data.comments ? {comments: data.comments.map(comment => comment._id)}:{}
+    const categories = data.categories? {categories:data.categories.map(category=>category._id)}:{}
+    const tags = data.tags? {tags:data.tags.map(tag=>tag._id)}:{}
+    const actors = data.actors? {actors:data.actors.map(actor=>actor._id)}:{}
+
+    const postData = {
+        ...data,
+        ...comments,
+        ...categories,
+        ...tags,
+        ...actors
+    }
+    const body = {
+        postData,
+        token: localStorage.wt
+    };
+    await Axios.post(  `/api/v1/posts/userCreateNewPost`, body).then(res => {
+        console.log(res.data)
+        dispatch({
+            type: GET_EDITING_POST,
+            payload: res.data.post
+        })
+        if (res.data?.message){
+            dispatch({
+                type:SET_ALERT,
+                payload:{
+                    active:true,
+                    type:'success',
+                    message:res.data.message
+                }
+            })
+        }
+
+        if(res.data?.post?._id){
+            router.push(`/profile/post?id=${res.data.post._id}`)
+        }
+    }).catch(err => {
+
+    }).finally(()=>{
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
+    })
+}
+
+export const userUpdatePost = (data: PostTypes) => async dispatch => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
+    const comments = data.comments ? {comments: data.comments.map(comment => comment._id)}:{}
+    const categories = data.categories? {categories:data.categories.map(category=>category._id)}:{}
+    const tags = data.tags? {tags:data.tags.map(tag=>tag._id)}:{}
+    const actors = data.actors? {actors:data.actors.map(actor=>actor._id)}:{}
+    const author = data.author? {author:data.author._id}:{}
+    const postData = {
+        ...data,
+        ...comments,
+        ...categories,
+        ...author,
+        ...tags,
+        ...actors
+    }
+
+    const body = {
+        postData,
+        token: localStorage.wt
+    };
+
+    await Axios.post(  `/api/v1/posts/userUpdatePost`, body).then(res => {
+        dispatch({
+            type: GET_EDITING_POST,
+            payload: res.data.post
+        })
+        if (res.data?.message){
+            dispatch({
+                type:SET_ALERT,
+                payload:{
+                    active:true,
+                    type:'success',
+                    message:res.data.message
+                }
+            })
+        }
+    }).catch(err => {
+
+    }).finally(()=>{
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
+    })
+}
+
+export const editPostField = (key: string,value:any) =>  dispatch => {
+    dispatch({
+        type: EDIT_POST_FIELD,
+        payload: {
+            [key]: value
+        }
     })
 }
 
@@ -154,6 +294,26 @@ export const getPageData = (pageName) => async dispatch => {
         })
     })
 }
+
+
+
+export const createEditPostByUser = (pageName) => async dispatch => {
+    // const body = {
+    //     pageName
+    // }
+    // await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/pages/getPageData', body).then(res=>{
+    //     dispatch({
+    //         type: GET_PAGE_DATA,
+    //         payload: res.data?.pageData || {}
+    //     })
+    // })
+}
+
+
+
+
+
+
 
 // const id = _id ? {_id} : {}
 // const cacheStatus = cache ? {cache} : {}

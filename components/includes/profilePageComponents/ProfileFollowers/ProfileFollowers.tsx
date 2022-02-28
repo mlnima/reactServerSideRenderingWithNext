@@ -1,9 +1,6 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 
-const MyProfileFollowers = props => {
-    const [state, setState] = useState({});
-    useEffect(() => {
-    }, []);
+const ProfileFollowers = props => {
 
     return (
         <div className='my-profile-followers-list'>
@@ -11,4 +8,4 @@ const MyProfileFollowers = props => {
         </div>
     );
 };
-export default MyProfileFollowers;
+export default ProfileFollowers;

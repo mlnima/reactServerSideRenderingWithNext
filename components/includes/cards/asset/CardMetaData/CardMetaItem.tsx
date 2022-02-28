@@ -9,9 +9,9 @@ const CardMetaItemStyledLink = styled.a`
     color: var(--main-active-color, #ccc);
     margin: 0 .5px 0 3px;
     &:hover {
-      color: var(--post-element-info-text-color,#ccc);
+      color: var(--post-element-text-color,#ccc);
       .icon {
-        background-color: var(--post-element-info-text-color, #ccc);
+        background-color: var(--post-element-text-color, #ccc);
       }
     }
     .icon{

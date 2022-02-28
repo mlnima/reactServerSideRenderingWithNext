@@ -59,7 +59,7 @@ const TitleDescription = (props:any) => {
             <input type="text" name='title'
                 // @ts-ignore
                    value={(activeEditingLanguage === 'default' ? post?.title : post?.translations?.[activeEditingLanguage]?.title) || ''}
-                   className='form-control-input' placeholder='Enter The Title Here'
+                   className='form-control-input' placeholder='Enter The TextInput Here'
                    onChange={e => props.onChangeHandler(e)}/>
             {/*// @ts-ignore*/}
             <TextEditors value={activeEditingLanguage === 'default' ? post.description : post?.translations?.[activeEditingLanguage]?.description || {}}

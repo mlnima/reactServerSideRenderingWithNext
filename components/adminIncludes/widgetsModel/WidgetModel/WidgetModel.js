@@ -18,6 +18,8 @@ import SelectFieldForWidget from "./SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
 import staticPositions from '../staticPositions';
 import postTypes from "../../../global/postTypes";
+import DayModeNightModeFields
+    from "@components/adminIncludes/widgetsModel/WidgetModel/DayModeNightModeFields/DayModeNightModeFields";
 
 const AdvertiseWidgetModelFields = dynamic(() => import('./AdvertiseWidgetModelFields'));
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
@@ -367,6 +369,13 @@ const WidgetModel = props => {
                             widgetData.type === 'media' ||
                             widgetData.type === 'recentComments'}
                     />
+                    {widgetData.type === 'dayModeNightMode'?
+                         <DayModeNightModeFields onChangeHandler={onUniqueDataChangeHandler}
+                                                 dayNightModeData={widgetData?.uniqueData?.dayNightModeData || ''}
+                         />
+                        :null
+                    }
+
                     <div className={'monaco-editor-section'}>
                         <div className={'editor-section'}>
                             <p>Widget Text or HTML</p>

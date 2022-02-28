@@ -47,6 +47,9 @@ const EditLinkForAdmin = ({_id,status}:EditLinkForAdminPropTypes) => {
                     <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
                         Edit As Admin
                     </a>
+                    <a className='btn btn-primary' href={`/profile/post?id=${_id}`} target='_blank'>
+                        Edit As Author (Beta)
+                    </a>
                     <span className={'btn btn-danger'} onClick={() => dispatch(adminBulkActionPost([_id], 'trash',router))}>
                         Trash
                     </span>

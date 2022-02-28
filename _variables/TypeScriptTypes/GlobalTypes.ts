@@ -61,6 +61,9 @@ export interface IdentitySettings {
 
 // user
 export interface User {
+    firstName: string,
+    lastName: string,
+    email: string,
     _id?: string,
     username?: string,
     role?: string,
@@ -234,6 +237,7 @@ export interface PostStateTypes {
     tagData: Meta,
     totalCount: number,
     post: PostTypes,
+    editingPost: PostTypes,
     comments: object[],
 }
 
@@ -333,3 +337,5 @@ export interface InputOnChangeHandlerTypes {
         value?: any
     }
 }
+
+
