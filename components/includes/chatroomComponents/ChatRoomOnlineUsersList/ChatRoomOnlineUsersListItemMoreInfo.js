@@ -14,8 +14,8 @@ const ChatRoomOnlineUsersListItemMoreInfo = ({username,moreInfo}) => {
         return (
             <StyledChatRoomOnlineUsersListItemMoreInfoDiv className='chatroom-online-users-list-item-more-info'>
                 <Link href={`/user/${username}`} as={`/user/${username}`} >
-                    <a className='chatroom-online-users-list-item-more-info-link'>
-                        <FontAwesomeIcon style={{width: '30px', height: '30px'}} icon={faUserCircle}  aria-label='view profile'/>
+                    <a className='chatroom-online-users-list-item-more-info-link' aria-label='view profile'>
+                        <FontAwesomeIcon style={{width: '30px', height: '30px'}} icon={faUserCircle}  />
                     </a>
                 </Link>
             </StyledChatRoomOnlineUsersListItemMoreInfoDiv>

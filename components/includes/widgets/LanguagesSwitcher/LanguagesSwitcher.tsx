@@ -46,7 +46,7 @@ const LanguagesSwitcher :FC = () => {
 
             <select className={'custom-select'}
                     value={router.locale}
-                    aria-label='Center Align'
+                    aria-label='switch language'
                     onChange={e => onChangeHandler(e)}
                     title={'select language'}
             >

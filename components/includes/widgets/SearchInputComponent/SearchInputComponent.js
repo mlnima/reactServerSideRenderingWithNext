@@ -53,7 +53,7 @@ const SearchInputComponent = () => {
                    value={state.keyword}
                    placeholder={t('Search...')}
             />
-            <button className='btn btn-primary' aria-label='Center Align' type='submit'>
+            <button className='btn btn-primary' aria-label='search' type='submit'>
                 {t('Search')}
             </button>
         </SearchInputComponentStyledForm>

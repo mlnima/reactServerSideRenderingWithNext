@@ -72,7 +72,7 @@ const MobileMenuWidget: FC<MobileMenuWidgetPropTypes> = ({menuItemsInOrder,mobil
         <MobileMenuWidgetStyledDiv open={open}>
             <ul onClick={() => open ? setOpen(false) : setOpen(true)}
                 className='navigation-mobile-button-open btn btn-transparent-light'
-                aria-label="Center Align">
+                aria-label="open navigation">
             </ul>
             <ul className='menu-widget-items'>
                 <li onClick={() => open ? setOpen(false) : setOpen(true)}

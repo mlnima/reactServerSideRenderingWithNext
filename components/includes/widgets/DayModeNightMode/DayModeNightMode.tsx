@@ -1,4 +1,4 @@
-import {FC, useEffect, useState} from "react";
+import {FC, useState} from "react";
 import styled, {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -59,6 +59,7 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
     return (
         <DayModeNightModeStyledDiv >
             <button className={'btn btn-primary'}
+                    aria-label={state.mode === 'night' ? 'day mode' : 'night mode'}
                     onClick={()=>{
                         state.mode === 'night' ?
                             onSelectHandler('day') :

@@ -24,7 +24,7 @@ const SearchButton = () => {
     return (
         <>
             <SearchButtonStyledButton onClick={onOpenHandler}
-                                      aria-label={'Center Align'}
+                                      aria-label={'search'}
                                       title={t('Search')}
             >
                 <svg xmlns="http://www.w3.org/2000/svg"

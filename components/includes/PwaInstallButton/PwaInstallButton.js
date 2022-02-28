@@ -58,7 +58,7 @@ const PwaInstallButton = props => {
                     onLoad={()=>onLoadHandler()}
                     className="link-button"
                     id="setup_button"
-                    aria-label="Install app"
+                    aria-label="install app"
                     title="Install app"
             >
                 install

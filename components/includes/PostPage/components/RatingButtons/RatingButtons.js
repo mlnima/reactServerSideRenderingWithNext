@@ -101,7 +101,7 @@ const RatingButtons = ({_id, ratingAndViewData, rating, setRatingAndViewData}) =
                 <>
                     <button className='rating-item'
                             onClick={() => onRateHandler('likes')}
-                            aria-label="Center Align"
+                            aria-label="like"
                             title={t('Like')}
                     >
                         <span className='rate-logo thumbs-up' />
@@ -109,7 +109,7 @@ const RatingButtons = ({_id, ratingAndViewData, rating, setRatingAndViewData}) =
                     </button>
                     <button className='rating-item'
                             onClick={() => onRateHandler('disLikes')}
-                            aria-label="Center Align"
+                            aria-label="dislike"
                             title={t('Dislike')}
                     >
                         <span className='rate-logo thumbs-down' />
