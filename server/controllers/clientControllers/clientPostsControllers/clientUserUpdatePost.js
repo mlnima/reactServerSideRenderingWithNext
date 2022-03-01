@@ -2,10 +2,8 @@ const postSchema = require("../../../models/postSchema");
 
 module.exports = async (req, res) =>{
     const postData = req.body.postData;
-    console.log('userData:',req.userData)
-    console.log('UpdatePost:',postData)
-    try {
 
+    try {
         postSchema.findByIdAndUpdate(postData._id,postData,{new:true}).exec().then(updatedPost=>{
             res.json({
                 message:'post successfully updated after a moderator review changes will be published',

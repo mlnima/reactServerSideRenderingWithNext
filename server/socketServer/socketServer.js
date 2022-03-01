@@ -30,7 +30,7 @@ const io = require('socket.io')(server, {
 
 
 app.get('/*', (req, res) => {
-      res.end()
+    res.end()
 });
 
 server.listen(process.env.SOCKET_PORT, () => {
@@ -39,10 +39,14 @@ server.listen(process.env.SOCKET_PORT, () => {
 
 
 io.on('connection', socket => {
+
     socket.on('socketId', () => {
         socket.emit("socketId", socket.id)
     })
 
+    socket.on('giveSocketsList', () => {
+        socket.emit('takeSocketLists', (io.sockets?.server?.engine?.clientsCount || 1 )- 1)
+    })
 
 
     socket.on('setIdAndJoinConversation', async (userID, conversationId) => {
@@ -61,15 +65,11 @@ io.on('connection', socket => {
     })
 
 
-
-
 // ----------------------videoCall---------------------
-
-
     socket.on("disconnect", () => {
-        try{
-            const disconnectedUserData =  chatroomOnlineUsers.find(u=>u.socketId === socket.id)
-            if (disconnectedUserData ){
+        try {
+            const disconnectedUserData = chatroomOnlineUsers.find(u => u.socketId === socket.id)
+            if (disconnectedUserData) {
                 chatroomOnlineUsers = chatroomOnlineUsers.filter(u => u.socketId !== socket.id)
                 socket.to(disconnectedUserData.chatRoomName).emit('userListUpdated', chatroomOnlineUsers)
             }
@@ -78,7 +78,7 @@ io.on('connection', socket => {
             //     socket.broadcast.emit("endCall")
             // }
 
-        }catch (err) {
+        } catch (err) {
             console.log(err)
         }
 
@@ -104,8 +104,8 @@ io.on('connection', socket => {
 //--------------------chatroom--------------------------
 
     socket.on('joinUserToTheRoom', async userData => {
-        const updatedUserList = [...chatroomOnlineUsers,userData]
-        chatroomOnlineUsers =  _.uniqBy(updatedUserList,  e => e.username);
+        const updatedUserList = [...chatroomOnlineUsers, userData]
+        chatroomOnlineUsers = _.uniqBy(updatedUserList, e => e.username);
         io.in(userData.chatRoomName).emit('userListUpdated', chatroomOnlineUsers)
     });
 
@@ -114,38 +114,47 @@ io.on('connection', socket => {
     });
 
     socket.on('onlineUsersList', () => {
-        io.to(socket.id).emit('onlineUsersList',_.uniqBy(chatroomOnlineUsers,  e => e.username))
+        io.to(socket.id).emit('onlineUsersList', _.uniqBy(chatroomOnlineUsers, e => e.username))
     });
 
     socket.on('messageToChatroom', async newMessageData => {
 
         try {
-            const chatroomData = await chatroomSchema.findOne({name:newMessageData.roomName}).exec()
-            if (chatroomData){
-                if (chatroomData.messages.length > 50){
-                    let updatedMessagesLimited = chatroomData.messages.slice(chatroomData.messages.length - 50,chatroomData.messages.length +1)
+            const chatroomData = await chatroomSchema.findOne({name: newMessageData.roomName}).exec()
+            if (chatroomData) {
+                if (chatroomData.messages.length > 50) {
+                    let updatedMessagesLimited = chatroomData.messages.slice(chatroomData.messages.length - 50, chatroomData.messages.length + 1)
                     const updatedMessages = [...updatedMessagesLimited, newMessageData]
-                    chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{messages:updatedMessages},{upsert: true,new:true}).then(updatedChatroomData=>{
+                    chatroomSchema.findOneAndUpdate({name: newMessageData.roomName}, {messages: updatedMessages}, {
+                        upsert: true,
+                        new: true
+                    }).then(updatedChatroomData => {
                         io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
                     })
-                }else{
-                    chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{$push:{messages:newMessageData}},{upsert: true,new:true}).then(updatedChatroomData=>{
+                } else {
+                    chatroomSchema.findOneAndUpdate({name: newMessageData.roomName}, {$push: {messages: newMessageData}}, {
+                        upsert: true,
+                        new: true
+                    }).then(updatedChatroomData => {
                         io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
                     })
                 }
-            }else {
-                chatroomSchema.findOneAndUpdate({name:newMessageData.roomName},{$push:{messages:newMessageData}},{upsert: true,new:true}).then(updatedChatroomData=>{
+            } else {
+                chatroomSchema.findOneAndUpdate({name: newMessageData.roomName}, {$push: {messages: newMessageData}}, {
+                    upsert: true,
+                    new: true
+                }).then(updatedChatroomData => {
                     io.in(newMessageData.roomName).emit('messageFromChatroom', newMessageData)
                 })
             }
-        }catch (err) {
+        } catch (err) {
             console.log(err)
         }
     });
 
     socket.on('recentChatRoomMessages', chatRoomName => {
-        chatroomSchema.findOne({name:chatRoomName}).then(chatroomData=>{
-            io.to(socket.id).emit('recentChatRoomMessages',chatroomData?.messages || [])
+        chatroomSchema.findOne({name: chatRoomName}).then(chatroomData => {
+            io.to(socket.id).emit('recentChatRoomMessages', chatroomData?.messages || [])
         })
 
 

@@ -15,6 +15,7 @@ const clientGetComments = require('./clientPostsControllers/clientGetComments')
 const clientUserCreateNewPost = require('./clientPostsControllers/clientUserCreateNewPost')
 const clientUserUpdatePost = require('./clientPostsControllers/clientUserUpdatePost')
 const clientFixMetaImage = require('./clientPostsControllers/clientFixMetaImage')
+const ClientMetaSuggestion = require('./clientPostsControllers/ClientMetaSuggestion')
 
 
 router.get('/clientGetPosts',cacheSuccesses,clientGetPosts)
@@ -28,5 +29,6 @@ router.get('/getMeta',cacheSuccesses,clientGetSingleMeta)
 router.get('/getComments',clientGetComments)
 router.post('/userCreateNewPost',authMiddleware,clientUserCreateNewPost)
 router.post('/userUpdatePost',authMiddleware,clientUserUpdatePost)
+router.get('/metaSuggestion',ClientMetaSuggestion)
 
 module.exports = router

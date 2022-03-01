@@ -19,6 +19,7 @@ import {
 import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
 import axios from "axios";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import {reduceArrayOfDataToIds} from "@_variables/_variables";
 
 export const setPostsData = postsData => async dispatch => {
     dispatch({
@@ -100,10 +101,11 @@ export const userCreateNewPost = (data: PostTypes,router) => async dispatch => {
         payload: true
     })
 
-    const comments = data.comments ? {comments: data.comments.map(comment => comment._id)}:{}
-    const categories = data.categories? {categories:data.categories.map(category=>category._id)}:{}
-    const tags = data.tags? {tags:data.tags.map(tag=>tag._id)}:{}
-    const actors = data.actors? {actors:data.actors.map(actor=>actor._id)}:{}
+
+    const comments = data.comments ? {comments:reduceArrayOfDataToIds(data.comments)}:{}
+    const categories = data.categories? {categories:reduceArrayOfDataToIds(data.categories)}:{}
+    const tags = data.tags? {tags: reduceArrayOfDataToIds(data.tags)}:{}
+    const actors = data.actors? {actors:reduceArrayOfDataToIds(data.actors) }:{}
 
     const postData = {
         ...data,
@@ -147,15 +149,14 @@ export const userCreateNewPost = (data: PostTypes,router) => async dispatch => {
 }
 
 export const userUpdatePost = (data: PostTypes) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
-    const comments = data.comments ? {comments: data.comments.map(comment => comment._id)}:{}
-    const categories = data.categories? {categories:data.categories.map(category=>category._id)}:{}
-    const tags = data.tags? {tags:data.tags.map(tag=>tag._id)}:{}
-    const actors = data.actors? {actors:data.actors.map(actor=>actor._id)}:{}
+    dispatch({type: LOADING, payload: true})
+
+    const comments = data.comments ? {comments:reduceArrayOfDataToIds(data.comments)}:{}
+    const categories = data.categories? {categories:reduceArrayOfDataToIds(data.categories)}:{}
+    const tags = data.tags? {tags: reduceArrayOfDataToIds(data.tags)}:{}
+    const actors = data.actors? {actors:reduceArrayOfDataToIds(data.actors) }:{}
     const author = data.author? {author:data.author._id}:{}
+
     const postData = {
         ...data,
         ...comments,
@@ -171,10 +172,6 @@ export const userUpdatePost = (data: PostTypes) => async dispatch => {
     };
 
     await Axios.post(  `/api/v1/posts/userUpdatePost`, body).then(res => {
-        dispatch({
-            type: GET_EDITING_POST,
-            payload: res.data.post
-        })
         if (res.data?.message){
             dispatch({
                 type:SET_ALERT,
@@ -185,22 +182,18 @@ export const userUpdatePost = (data: PostTypes) => async dispatch => {
                 }
             })
         }
+        getEditingPost(res.data.post._id)
     }).catch(err => {
 
     }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
+        dispatch({type: LOADING, payload: false})
     })
 }
 
-export const editPostField = (key: string,value:any) =>  dispatch => {
+export const editPostField = (data) => async dispatch => {
     dispatch({
         type: EDIT_POST_FIELD,
-        payload: {
-            [key]: value
-        }
+        payload: data
     })
 }
 
@@ -208,7 +201,6 @@ export const getMetas = (data,metaType,cache) => async dispatch =>{
     const typeOfMetaDispatch = metaType === 'categories' ? 'categoriesMetas' :
                                metaType === 'tags' ? 'tagsMetas' :
                                metaType === 'actors' ? 'actorsMetas' : 'categoriesMetas'
-    //GET_METAS
     const queries = _metaPageQueryGenerator(data,metaType,cache)
     await Axios.get( `/api/v1/posts/getMultipleMeta${queries}`).then(res=>{
         dispatch({

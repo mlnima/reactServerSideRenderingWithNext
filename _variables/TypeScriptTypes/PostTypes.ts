@@ -12,6 +12,7 @@ export interface Comment{
 }
 
 export interface PostTypes {
+    format: string;
     comments:Comment[],
     author:User,
     status: string,

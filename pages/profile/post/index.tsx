@@ -2,7 +2,7 @@ import React, {FC, useEffect, useMemo, useState} from 'react';
 import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+//import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {wrapper} from "@store/store";
@@ -11,6 +11,7 @@ import CreateEditArticlePostField
     from "@components/includes/profilePageComponents/profilePost/CreateEditArticlePostField/CreateEditArticlePostField";
 import {editPostField, getEditingPost, userCreateNewPost, userUpdatePost} from "@store/clientActions/postsAction";
 import TextInput from "@components/includes/profilePageComponents/profilePost/common/TextInput";
+import MetaDataSelector from "@components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
 
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px 5px;
@@ -36,72 +37,101 @@ const ProfilePostPageStyledDiv = styled.div`
 
 `
 const post: FC = () => {
+
     const dispatch = useDispatch();
     const {query} = useRouter();
     const router = useRouter();
     const postType = query?.postType;
-    const userData = useSelector((store: StoreTypes) => store?.user.userData)
-    const editingPostData = useSelector((store: StoreTypes) => store?.posts?.editingPost)
 
-    // useEffect(() => {
-    //     console.log(editingPostData)
-    // }, [editingPostData]);
+    const postData = useSelector((store: StoreTypes) => {
+        return {
+            userData: store?.user.userData,
+            editingPost: store?.posts?.editingPost,
+        }
+    })
 
     useEffect(() => {
         if (query.id) dispatch(getEditingPost(query.id as string));
-        if (!query.id && query.postType) dispatch(editPostField('postType', query.postType));
-
-
-        // if (userData?._id) {
-        //     setPostData({
-        //         ...postData,
-        //         author: userData._id
-        //     })
-        // } else {
-        //     dispatch(setLoginRegisterFormStatus('login'))
-        // }
+        if (!query.id && query.postType) dispatch(editPostField({['postType']: query.postType}));
     }, []);
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {
-        dispatch(editPostField(e.target.name, e.target.value))
+        dispatch(editPostField({[e.target.name]: e.target.value}))
     }
 
     const onSubmitHandler = (e) => {
         e.preventDefault()
         if (
-            editingPostData._id &&
-            (userData?._id === editingPostData.author?._id || userData.role === 'administrator')&&
+            postData.editingPost._id &&
+            (postData.userData?._id === postData.editingPost.author?._id || postData.userData.role === 'administrator') &&
             query.id
-        ){
-
-           dispatch(userUpdatePost(editingPostData))
-        }else if (!editingPostData._id) {
+        ) {
+            dispatch(userUpdatePost(postData.editingPost))
+        } else if (!postData.editingPost._id) {
             dispatch(userCreateNewPost({
-                ...editingPostData,
-                status: userData.role === 'administrator' ?  editingPostData.status || 'pending' : 'pending',
+                ...postData.editingPost,
+                status: postData.userData.role === 'administrator' ? postData.editingPost.status || 'pending' : 'pending',
                 //@ts-ignore
-                author:userData?._id
-            },router))
+                author: postData.userData?._id
+            }, router))
         }
+    }
+
+    const onMetaChangeHandler = (metas, type) => {
+        dispatch(editPostField({[type]: metas}))
     }
 
     return (
         <ProfilePostPageStyledDiv className='create-new-post main'>
-            <form className={'create-new-post-fields'} onSubmit={e=>onSubmitHandler(e)}>
-                {editingPostData?.status?
-                    <label>Status: {editingPostData?.status}</label>
-                    :null
+            <form className={'create-new-post-fields'} onSubmit={e => onSubmitHandler(e)}>
+
+                {postData.editingPost?.status ?
+                    <label>Status: {postData.editingPost?.status}</label>
+                    : null
+                }
+                {postData.editingPost?.author ?
+                    <label>Author: {postData.editingPost?.author?.username}</label>
+                    : null
                 }
 
-                <TextInput required={true} name={'title'} type={'text'} value={editingPostData?.title} title={'Title'}
+                {postData.editingPost?.postType ?
+                    <label>Post Type: {postData.editingPost?.postType}</label>
+                    : null
+                }
+
+                <TextInput required={true} name={'title'} type={'text'} value={postData.editingPost?.title}
+                           title={'Title'}
                            onChangeHandler={onChangeHandler}/>
-                <TextInput required={true} name={'description'} type={'textarea'} value={editingPostData?.description}
+                <TextInput required={true} name={'description'} type={'textarea'}
+                           value={postData.editingPost?.description}
                            title={'Description'}
                            onChangeHandler={onChangeHandler} className={'description'}/>
                 {postType === 'article' ?
                     <CreateEditArticlePostField onChangeHandler={onChangeHandler}/>
                     : null
                 }
+                <label>Categories:</label>
+                <MetaDataSelector type={'categories'}
+                                  onMetaChangeHandler={onMetaChangeHandler}
+                                  onChangeHandler={onChangeHandler}
+                />
+                <label>Tags:</label>
+                <MetaDataSelector type={'tags'}
+                                  onMetaChangeHandler={onMetaChangeHandler}
+                                  onChangeHandler={onChangeHandler}
+                />
+                {postData.editingPost?.postType === 'video' ?
+                    <>
+                        <label>Actors:</label>
+                        <MetaDataSelector type={'actors'}
+                                          onMetaChangeHandler={onMetaChangeHandler}
+                                          onChangeHandler={onChangeHandler}
+                        />
+                    </>
+                    : null
+                }
+
+
                 <button className={'btn btn-primary'} type={'submit'}>Save</button>
             </form>
 
@@ -121,7 +151,11 @@ export const getServerSideProps = wrapper.getServerSideProps(store =>
 
         return {
             props: {
-                ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
+                ...(
+                    await serverSideTranslations(
+                        context.locale as string, ['common', 'customTranslation']
+                    )
+                ),
             }
         }
 

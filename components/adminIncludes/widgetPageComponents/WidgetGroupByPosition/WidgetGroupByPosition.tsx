@@ -11,7 +11,7 @@ const WidgetGroupByPositionStyledDiv = styled.div`
   width: 100%;
   position: initial;
   margin: 5px;
-
+  
   .widgetAdminPanelItemHeader {
     height: 50px;
     margin: 0;
@@ -31,6 +31,12 @@ const WidgetGroupByPositionStyledDiv = styled.div`
     position: relative;
     .widget-model {
       width: 650px;
+    }
+  }
+  @media only screen and (min-width: 1024px) {
+    width: 30vw;
+    .widget-model {
+      width: 30vw;
     }
   }
 `
