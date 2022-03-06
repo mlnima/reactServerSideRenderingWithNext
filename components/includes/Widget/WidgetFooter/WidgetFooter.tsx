@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import {FC} from "react";
 
 const WidgetFooterStyledDiv = styled.div`
   display: flex;
@@ -12,12 +13,21 @@ const WidgetFooterStyledDiv = styled.div`
     color: var( --widget-h-f-text-color);
   }
 `
-const WidgetFooter = props => {
-    if (props.redirectLink && props.redirectToTitle && props.footerLink){
+
+interface WidgetFooterPropTypes {
+    translations: {},
+    title: string,
+    redirectLink: string,
+    redirectToTitle: string,
+    footerLink: string,
+}
+
+const WidgetFooter:FC<WidgetFooterPropTypes> = ({redirectLink,redirectToTitle,footerLink}) => {
+    if (redirectLink && redirectToTitle && footerLink){
         return (
             <WidgetFooterStyledDiv className='widget-footer'>
-                <Link href={props.redirectLink} >
-                    <a>{props.redirectToTitle}</a>
+                <Link href={redirectLink} >
+                    <a>{redirectToTitle}</a>
                 </Link>
             </WidgetFooterStyledDiv>
         );

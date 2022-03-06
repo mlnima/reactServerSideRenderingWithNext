@@ -8,7 +8,7 @@ export const setLoginRegisterFormStatus = (statusType) => dispatch => {
     })
 }
 
-export const setLoading = (statusType) => dispatch => {
+export const setLoading = (statusType ) => dispatch => {
     dispatch({
         type:LOADING,
         payload:statusType

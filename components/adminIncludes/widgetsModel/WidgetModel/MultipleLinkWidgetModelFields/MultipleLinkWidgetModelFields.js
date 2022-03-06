@@ -1,7 +1,6 @@
-import React, {useEffect, useState} from 'react';
-import LinkTypeWidgetModelFields from "../LinkTypeWidgetModelFields/LinkTypeWidgetModelFields";
+import  {useState} from 'react';
 import MultipleLinkWidgetSingleLinkPreview from "./MultipleLinkWidgetSingleLinkPreview";
-import _ from "lodash";
+import {uniqueId} from "lodash";
 
 import styled from "styled-components";
 
@@ -21,11 +20,14 @@ const MultipleLinkWidgetModelFieldsStyledForm = styled.form`
 
     .form-control-input {
       width: 90%;
-
+      background-color: #333;
+      color: #ccc;
     }
 
     .custom-select {
       width: 95%;
+      background-color: #333;
+      color: #ccc;
     }
   }
 
@@ -85,7 +87,7 @@ const MultipleLinkWidgetModelFields = props => {
 
     const renderAddedItems = (props.widgetData.multipleLinks || []).sort((a, b) => a.linkIndex - b.linkIndex).map(eachLink => {
         return (
-            <MultipleLinkWidgetSingleLinkPreview key={_.uniqueId('id_')} linkData={eachLink} widgetSettings={props.widgetSettings} widgetData={props.widgetData} setWidgetData={props.setWidgetData}/>
+            <MultipleLinkWidgetSingleLinkPreview key={uniqueId('id_')} linkData={eachLink} widgetSettings={props.widgetSettings} widgetData={props.widgetData} setWidgetData={props.setWidgetData}/>
         )
     })
 
@@ -111,29 +113,29 @@ const MultipleLinkWidgetModelFields = props => {
                               value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData.linkDescription ?? '' : editingData?.translations[props.widgetSettings.activeEditingLanguage]?.linkDescription ?? ''}/>
                 </div>
                 <div className='menu-form-field'>
-                    <p>Link To :</p>
+                    <p>Url :</p>
                     <input name='linkTo'
                            type='text'
                            className={'form-control-input'}
                            onChange={e => onChangeHandler(e)}
                            value={editingData.linkTo}/>
                 </div>
-                <div className='menu-form-field'>
-                    <p>Link To As :</p>
-                    <input name='linkToAs'
-                           type='text'
-                           className={'form-control-input'}
-                           onChange={e => onChangeHandler(e)}
-                           value={editingData.linkToAs}/>
-                </div>
-                <div className='menu-form-field'>
-                    <p>Link Type :</p>
-                    <select className={'custom-select'} name='linkToType' value={editingData.linkToType} onChange={e => onChangeHandler(e)}>
-                        <option>select</option>
-                        <option value='internal'>Internal</option>
-                        <option value='external'>External</option>
-                    </select>
-                </div>
+                {/*<div className='menu-form-field'>*/}
+                {/*    <p>Link To As :</p>*/}
+                {/*    <input name='linkToAs'*/}
+                {/*           type='text'*/}
+                {/*           className={'form-control-input'}*/}
+                {/*           onChange={e => onChangeHandler(e)}*/}
+                {/*           value={editingData.linkToAs}/>*/}
+                {/*</div>*/}
+                {/*<div className='menu-form-field'>*/}
+                {/*    <p>Link Type :</p>*/}
+                {/*    <select className={'custom-select'} name='linkToType' value={editingData.linkToType} onChange={e => onChangeHandler(e)}>*/}
+                {/*        <option>select</option>*/}
+                {/*        <option value='internal'>Internal</option>*/}
+                {/*        <option value='external'>External</option>*/}
+                {/*    </select>*/}
+                {/*</div>*/}
                 <div className='menu-form-field'>
                     <p>rel :</p>
                     <select className={'custom-select'} name='linkRel' value={editingData.linkRel} onChange={e => onChangeHandler(e)}>
@@ -167,20 +169,14 @@ const MultipleLinkWidgetModelFields = props => {
                 </div>
 
                 <div className='menu-form-field'>
-
+                    <p>Link To Window Type :</p>
+                    <select className={'custom-select'} name='linkToWindowType' value={editingData.linkToWindowType} onChange={e => onChangeHandler(e)}>
+                        <option>select</option>
+                        <option value='_blank'>Open New Window</option>
+                        <option value='_self'>Redirect To Link In The Same Window</option>
+                    </select>
                 </div>
 
-
-                {editingData.linkToType === 'external' ?
-                    <div className='menu-form-field'>
-                        <p>Link To Window Type :</p>
-                        <select className={'custom-select'} name='linkToWindowType' value={editingData.linkToWindowType} onChange={e => onChangeHandler(e)}>
-                            <option>select</option>
-                            <option value='_blank'>Open New Window</option>
-                            <option value='_self'>Redirect To Link In The Same Window</option>
-                        </select>
-                    </div> : null
-                }
                 <div className='menu-form-field'>
                     <p>link Index :</p>
                     <input name='linkIndex'

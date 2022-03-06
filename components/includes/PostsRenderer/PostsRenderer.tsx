@@ -7,6 +7,7 @@ import {setLoading} from "@store/clientActions/globalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
+import {FC} from "react";
 const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
 const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
 const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
@@ -33,7 +34,10 @@ interface PostsComponentTypes {
     _id?: string,
     posts?: PostTypes[],
     uniqueData?: {
+        speed: number;
         posts: PostTypes[],
+        sliderEffect:string,
+        spaceBetween:number,
         totalCount: number
     }
     widgetId?: string,
@@ -42,7 +46,7 @@ interface PostsComponentTypes {
 }
 
 
-const PostsRenderer = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isSidebar}: PostsComponentTypes) => {
+const PostsRenderer:FC<PostsComponentTypes> = ({viewType, _id, posts, uniqueData, widgetId, postElementSize, isSidebar}) => {
     const dispatch = useDispatch()
     const {locale} = useRouter()
 

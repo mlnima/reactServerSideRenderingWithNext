@@ -12,6 +12,7 @@ export interface Comment{
 }
 
 export interface PostTypes {
+    videoEmbedCode: string;
     format: string;
     comments:Comment[],
     author:User,

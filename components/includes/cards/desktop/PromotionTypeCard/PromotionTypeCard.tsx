@@ -9,7 +9,7 @@ const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 let PromotionCardStyledDiv = styled.div`
-  width: ${(cardWidth: { cardWidth: number }) => `${cardWidth}px`};
+  width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
   position: relative;
   display: flex;
   flex-direction: column;
@@ -117,7 +117,7 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
             onActivateLoadingHandler()
             onExternalLinkClickViewHandler()
         }
-
+// console.log(cardWidth)
         return (
             <PromotionCardStyledDiv className='promotion-card' cardWidth={cardWidth}>
 

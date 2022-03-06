@@ -12,6 +12,9 @@ import CreateEditArticlePostField
 import {editPostField, getEditingPost, userCreateNewPost, userUpdatePost} from "@store/clientActions/postsAction";
 import TextInput from "@components/includes/profilePageComponents/profilePost/common/TextInput";
 import MetaDataSelector from "@components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
+import Dropzone from 'react-dropzone'
+import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
+import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
 
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px 5px;
@@ -110,6 +113,36 @@ const post: FC = () => {
                     <CreateEditArticlePostField onChangeHandler={onChangeHandler}/>
                     : null
                 }
+
+                <ThumbnailUploader mainThumbnail={postData.editingPost.mainThumbnail}/>
+                {postData.userData.role === 'administrator' ?
+                    <>
+                    <TextInput required={true} name={'mainThumbnail'} type={'text'}
+                               value={postData.editingPost?.mainThumbnail}
+                               title={'Main Thumbnail'}
+                               onChangeHandler={onChangeHandler} className={'mainThumbnail'}/>
+                        <TextInput required={true} name={'views'} type={'number'}
+                                   value={postData.editingPost?.views}
+                                   title={'views'}
+                                   onChangeHandler={onChangeHandler} className={'views'}/>
+
+                        <TextInput required={true} name={'likes'} type={'number'}
+                                   value={postData.editingPost?.likes}
+                                   title={'Likes'}
+                                   onChangeHandler={onChangeHandler} className={'likes'}/>
+
+                        <TextInput required={true} name={'disLikes'} type={'number'}
+                                   value={postData.editingPost?.disLikes}
+                                   title={'disLikes'}
+                                   onChangeHandler={onChangeHandler} className={'disLikes'}/>
+
+                    </>
+                    :null
+                }
+
+
+
+
                 <label>Categories:</label>
                 <MetaDataSelector type={'categories'}
                                   onMetaChangeHandler={onMetaChangeHandler}
@@ -130,6 +163,12 @@ const post: FC = () => {
                     </>
                     : null
                 }
+
+                { postData.editingPost?.postType === 'video' ?
+                    <VideoTypeFields onChangeHandler={onChangeHandler}/>
+                    : null
+                }
+
 
 
                 <button className={'btn btn-primary'} type={'submit'}>Save</button>

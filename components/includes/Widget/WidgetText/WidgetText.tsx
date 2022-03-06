@@ -6,4 +6,5 @@ const WidgetText = props => {
         <Text {...props}/>
     )
 };
+
 export default WidgetText;

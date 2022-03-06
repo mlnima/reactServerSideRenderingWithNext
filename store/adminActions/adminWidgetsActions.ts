@@ -42,6 +42,7 @@ export const adminAddNewWidget = (newWidgetData: WidgetPropTypes) => async (disp
                     type: SAVE_NEW_WIDGET,
                     payload: res.data?.newWidgetData
                 })
+                // adminGetWidgets()
             }
         }).catch(err => {
             console.log(err)

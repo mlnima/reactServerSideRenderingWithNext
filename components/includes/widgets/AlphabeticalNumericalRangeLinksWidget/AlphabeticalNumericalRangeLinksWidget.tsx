@@ -1,8 +1,8 @@
-import {useState} from "react";
+import {FC, useMemo} from "react";
 import Link from 'next/link'
 import {useRouter} from 'next/router'
 import styled from "styled-components";
-import {setLoading} from "../../../../store/clientActions/globalStateActions";
+import {setLoading} from "@store/clientActions/globalStateActions";
 import {useDispatch} from "react-redux";
 
 const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
@@ -17,23 +17,25 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
     border-radius: 5px;
   }
 `
-const AlphabeticalNumericalRangeLinksWidget = () => {
+const AlphabeticalNumericalRangeLinksWidget : FC = () => {
     const dispatch = useDispatch()
 
-    const router = useRouter()
-    const activePage = router.query.startWith
-    const [range,setRange] = useState(()=>{
-        return router.pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] : [...'abcdefghijklmnopqrstuvwxyz0123456789']
-    })
+    const {pathname,query} = useRouter()
+    const activePage = query.startWith;
+
+    const range = useMemo(()=>{
+        return pathname === '/actors' ? [...'abcdefghijklmnopqrstuvwxyz'] : [...'abcdefghijklmnopqrstuvwxyz0123456789'];
+    },[])
 
     const renderRange = range.map((Letter,index) => {
 
         return (
             <Link key={index} href={{
-                pathname: router.pathname,
-                query: {...router?.query, startWith: Letter,page:1}
+                pathname: pathname,
+                query: {...query, startWith: Letter,page:1}
             }}  >
                 <a className='alphabetical-range-widget-item'
+
                    onClick={() => dispatch(setLoading(true))}
                    style={{
                        backgroundColor:  Letter === activePage ? 'var(--main-active-color,#f90)': 'var(--navigation-background-color,#18181b)',
@@ -50,8 +52,8 @@ const AlphabeticalNumericalRangeLinksWidget = () => {
         <AlphabeticalNumericalRangeLinksWidgetStyledDiv className='alphabetical-range-widget'>
             {
                 <Link key={'all'} href={{
-                    pathname: router.pathname,
-                    query: {...router?.query,startWith:''}
+                    pathname: pathname,
+                    query: {...query,startWith:''}
                 }} >
                     <a className='alphabetical-range-widget-item'
                        onClick={() => dispatch(setLoading(true))}

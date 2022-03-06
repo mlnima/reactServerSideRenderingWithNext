@@ -33,6 +33,7 @@ const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleL
 const Advertise = dynamic(() => import('../widgets/Advertise/Advertise'))
 const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'), {ssr: false})
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'), {ssr: false})
+
 const Authentication = dynamic(() =>
     import('../widgets/Authentication/Authentication'), {ssr: false})
 
@@ -55,6 +56,7 @@ const Widget: FC<WidgetComponentPropTypes> =
          viewType
     }) => {
     const idAttribute = data?.extraId ? {id: data?.extraId} : {}
+
     const WidgetToRender = useMemo(()=>{
             return data.type === 'posts' ? Posts :
             data.type === 'postsSwiper' ? PostSwiper :
@@ -91,8 +93,22 @@ const Widget: FC<WidgetComponentPropTypes> =
                              className={'widget ' + (data?.extraClassName ?? '')}
                              customStyles={data?.customStyles || ''}
         >
-            {data.title ? <WidgetHeader {...data}/> : null}
-            {data.text ? <WidgetText {...data} id={widgetId}/> : null}
+            {data.title ?
+                <WidgetHeader translations={data.translations}
+                              title={data.title}
+                              redirectLink={data.redirectLink}
+                              redirectToTitle={data.redirectToTitle}
+                              footerLink={data.footerLink}
+
+                />
+                : null
+            }
+            {data.text ?
+                <WidgetText translations={data.translations}
+                            text={data.text}
+                />
+                : null
+            }
             {WidgetToRender ?
                 <WidgetToRender
                     {...data}
@@ -110,7 +126,9 @@ const Widget: FC<WidgetComponentPropTypes> =
                 : null
             }
             {data?.pagination && data?.redirectLink ?
-                <WidgetPagination baseUrl={data.redirectLink} totalCount={data.uniqueData.totalCount}/>
+                <WidgetPagination baseUrl={data.redirectLink}
+                                  totalCount={data.uniqueData.totalCount}
+                />
                 : null
             }
         </WidgetStyledSection>

@@ -27,6 +27,7 @@ const widgetDataSchema = new Schema({
     redirectLink: String,
     redirectToTitle: String,
     type: String,
+    linkToWindowType: String,
     customStyles: String,
     customScript: String,
     customScriptStrategy: String,

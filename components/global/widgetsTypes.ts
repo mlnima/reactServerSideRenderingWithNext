@@ -8,7 +8,6 @@ const widgetsTypes = [
     'multipleLinkTo',
     'posts',
     'media',
-    'recentComments',
     'searchBar',
     'searchButton',
     'meta',
@@ -19,9 +18,11 @@ const widgetsTypes = [
     'alphabeticalNumericalRange',
     'language',
     'authentication',
-    'postsSlider',
     'imageSwiper',
     'postsSwiper',
+    //disabled
+    // 'recentComments',
+    // 'postsSlider',
 ]
 
 export default widgetsTypes

@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import styled from "styled-components";
 
 interface CardImagePropTypes {
@@ -40,14 +40,16 @@ const CardImage: FC<CardImagePropTypes> =
          strictImageSize,
          errorHandler
      }) => {
+        const [gotError,setGotError] = useState(false)
+
         return (
-            <CardImageStyledImg src={imageUrl}
+            <CardImageStyledImg src={!gotError ? imageUrl : '/static/images/noImage/no-image-available.png'}
                                 alt={alt}
                                 strictImageSize={strictImageSize}
                                 cardWidth={cardWidth}
                                 cardHeight={cardHeight}
                                 objectFitValue={objectFitValue || 'contain'}
-                                onError={() => errorHandler ? errorHandler : null}
+                                onError={() => setGotError(true)}
             />
         )
     };

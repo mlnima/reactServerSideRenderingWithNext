@@ -9,6 +9,7 @@ import {
 import axios from 'axios';
 import Peer from 'simple-peer'
 import socket from "../../_variables/socket";
+import {EXPORT_DETAIL} from "next/constants";
 
 export const userLogin = (username, password) => async dispatch => {
     try {
@@ -84,20 +85,6 @@ export const getSpecificUserData = (fields) => async dispatch => {
         console.log(err)
     }
 }
-
-// export const getSpecificUserData = (fields) => async dispatch=>{
-//     try{
-//         if (localStorage.wt){
-//             await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt,fields}).then(res=>{
-//                 dispatch({
-//                     type:GET_SPECIFIC_USER_DATA,
-//                     payload:{userData:res.data.userData,loggedIn: true}
-//                 })
-//             })
-//         }
-//     }catch (err){
-//     }
-// }
 
 export const userLogOut = () => dispatch => {
     localStorage.wt ? localStorage.removeItem('wt') : null
@@ -348,6 +335,21 @@ export const userCreateOrder = (data)=> async dispatch =>{
             })
         })
     }
+}
+
+
+export const likeDislikeView = (id, type)=> async dispatch =>{
+    const body = {
+        id,
+        type
+    };
+    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/posts/likeDislikeView', body).then(res=>{
+
+    })
+}
+
+export const userDislikePost = (data)=> async dispatch =>{
+
 }
 
 

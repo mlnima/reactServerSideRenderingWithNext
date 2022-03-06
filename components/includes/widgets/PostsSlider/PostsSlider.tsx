@@ -1,17 +1,17 @@
 import React, { useMemo} from 'react';
 import useEmblaCarousel from 'embla-carousel-react'
-import {setLoading} from "../../../../store/clientActions/globalStateActions";
+import {setLoading} from "@store/clientActions/globalStateActions";
 import PromotionCardListSmall from "../../cards/desktop/PromotionTypeCard/PromotionCardListSmall";
 import {useRouter} from "next/router";
 import _shortNumber from "../../../../_variables/clientVariables/_shortNumber";
 import dynamic from "next/dynamic";
 import {useDispatch} from "react-redux";
+import styled from "styled-components";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import ratingCalculator from "@_variables/util/ratingCalculator";
 const VideoTypeCard = dynamic(() => import('../../cards/desktop/VideoCard/VideoCard'))
 const PromotionTypeCard = dynamic(() => import('../../cards/desktop/PromotionTypeCard/PromotionTypeCard'))
 const ArticleTypeCard = dynamic(() => import('../../cards/desktop/ArticleTypeCard/ArticleTypeCard'))
-import styled from "styled-components";
-import {PostTypes} from "../../../../_variables/TypeScriptTypes/PostTypes";
-import ratingCalculator from "@_variables/util/ratingCalculator";
 
 const PostsSliderStyledDiv = styled.div`
   overflow: hidden;
@@ -31,15 +31,13 @@ const PostsSliderStyledDiv = styled.div`
 `
 
 
-
-// @ts-ignore
 interface PostsSliderPropsTypes{
     postElementSize:string,
     widgetId:string,
     posts:PostTypes[]
 }
 
-// @ts-ignore
+
 const PostsSlider = (props:PostsSliderPropsTypes) => {
     const [emblaRef] = useEmblaCarousel()
     const router = useRouter()

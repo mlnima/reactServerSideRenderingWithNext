@@ -8,8 +8,8 @@ const LinkTypeWidgetModelFields = props => {
             <>
                 <TextInputFieldForWidget element='input' inputTitle='Link To :' name='linkTo' type='text' value={props.linkTo} classNameValue='linkTo' placeHolder='linkTo'
                                          onChangeHandler={props.onChangeHandler} rendering={props.widgetData.type ==='linkTo'}/>
-                <TextInputFieldForWidget element='input' inputTitle='Link To As :' name='linkToAs' type='text' value={props.linkToAs} classNameValue='linkToAs' placeHolder='Link To As'
-                                         onChangeHandler={props.onChangeHandler} rendering={props.widgetData.type ==='linkTo'}/>
+                {/*<TextInputFieldForWidget element='input' inputTitle='Link To As :' name='linkToAs' type='text' value={props.linkToAs} classNameValue='linkToAs' placeHolder='Link To As'*/}
+                {/*                         onChangeHandler={props.onChangeHandler} rendering={props.widgetData.type ==='linkTo'}/>*/}
                 {/*<TextInputFieldForWidget element='input' inputTitle='Link To Text :' name='linkToText' type='text' value={props.linkToText} classNameValue='linkToText' placeHolder='Link To Text'*/}
                 {/*                         onChangeHandler={props.onTextInputsDataChangeHandler}/>*/}
                 <TextInputFieldForWidget
@@ -26,16 +26,20 @@ const LinkTypeWidgetModelFields = props => {
                     placeHolder='Link To Text'
                     onChangeHandler={e=>props.onTextInputsDataChangeHandler(e)} rendering={props.widgetData.type ==='linkTo'}/>
                 <div className='selectInputFieldForWidget widgetSection'>
-                <p>Link Type :</p>
-                <select name='linkToType' value={props.linkToType} onChange={e=>props.onChangeHandler(e)}>
-                    <option >select</option>
-                    <option value='internal'>Internal</option>
-                    <option value='external'>External</option>
-                </select>
+                {/*<p>Link Type :</p>*/}
+                {/*<select className={'custom-select'} name='linkToType' value={props.linkToType} onChange={e=>props.onChangeHandler(e)}>*/}
+                {/*    <option >select</option>*/}
+                {/*    <option value='internal'>Internal</option>*/}
+                {/*    <option value='external'>External</option>*/}
+                {/*</select>*/}
                 </div>
                 <div className='selectInputFieldForWidget widgetSection'>
                 <p>Link To Window Type:</p>
-                <select name='linkToWindowType' value={props.linkToWindowType} onChange={e=>props.onChangeHandler(e)}>
+                <select className={'custom-select'}
+                        name='linkToWindowType'
+                        value={props.linkToWindowType}
+                        onChange={e=>props.onChangeHandler(e)}
+                >
                     <option >select</option>
                     <option value='_blank'>Open New Window</option>
                     <option value='_self'>Redirect To Link In The Same Window</option>

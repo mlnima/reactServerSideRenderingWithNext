@@ -1,4 +1,3 @@
-import React, {useEffect} from 'react';
 import Quality from "./Quality/Quality";
 import TextInputWithUploadBtn from "./TextInputWithUploadBtn/TextInputWithUploadBtn";
 import TextInput from "./TextInput/TextInput";

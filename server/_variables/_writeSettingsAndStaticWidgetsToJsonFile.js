@@ -3,9 +3,11 @@ const widgetSchema = require("../models/widgetSchema");
 const fs = require('fs')
 
 const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
-    const staticWidgetsQuery = ['footer', 'header', 'topBar', 'navigation'].map(position => position === 'all' ? {} : {'data.position': position})
-    try {
+    const staticWidgetsQuery = ['footer', 'header', 'topBar', 'navigation'].map(position => {
+       return  {'data.position': position}
+    })
 
+    try {
         const identity = await settingSchema.findOne({type: 'identity'}).exec()
         const design = await settingSchema.findOne({type: 'design'}).exec()
         const widgets = await widgetSchema.find({$or: staticWidgetsQuery}).populate([
@@ -21,8 +23,29 @@ const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
                     select: {'name': 1, 'type': 1},
                     options: {limit: 3}
                 },
-                    {path: 'categories', select: {'name': 1, 'type': 1}, options: {limit: 3}}, {path: 'tags', select: {'name': 1, 'type': 1}, options: {limit: 3}}],
-                select: {'_id': 1, 'redirectLink': 1, 'title': 1, 'mainThumbnail': 1, 'quality': 1, 'duration': 1, 'views': 1, 'translations': 1, 'VideoTrailerUrl': 1, 'postType': 1, 'likes': 1, 'disLikes': 1}
+                    {
+                        path: 'categories',
+                        select: {'name': 1, 'type': 1},
+                        options: {limit: 3}},
+                    {
+                        path: 'tags',
+                        select: {'name': 1, 'type': 1},
+                        options: {limit: 3}
+                    }],
+                select: {
+                    '_id': 1,
+                    'redirectLink': 1,
+                    'title': 1,
+                    'mainThumbnail': 1,
+                    'quality': 1,
+                    'duration': 1,
+                    'views': 1,
+                    'translations': 1,
+                    'VideoTrailerUrl': 1,
+                    'postType': 1,
+                    'likes': 1,
+                    'disLikes': 1
+                }
             },
         ]).sort({updatedAt: -1}).exec()
 

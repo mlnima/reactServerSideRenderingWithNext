@@ -127,6 +127,8 @@ const WidgetModel = props => {
 
     const [widgetData, setWidgetData] = useState({
         translations: {},
+
+
     })
     const positions = useMemo(() => {
         return [
@@ -547,18 +549,7 @@ const WidgetModel = props => {
                         /> : null
                     }
 
-                    {/*<TextEditor*/}
-                    {/*    state={widgetData}*/}
-                    {/*    activeEditingLanguage={widgetSettings.activeEditingLanguage}*/}
-                    {/*    onChangeHandler={onWidgetTextChangeHandler}*/}
-                    {/*    valueData={*/}
-                    {/*        (languageElement?.current?.value === 'default' || !languageElement?.current?.value) ? widgetData.text :*/}
-                    {/*            widgetData?.translations?.[languageElement?.current?.value]?.text || ''*/}
-                    {/*    }*/}
-                    {/*    rendering={*/}
-                    {/*        widgetData.type === 'textEditor'*/}
-                    {/*    }*/}
-                    {/*/>*/}
+
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'postsSlider' ?
                         <TextInputFieldForWidget inputTitle='Selected Meta For PostsRenderer:' name='selectedMetaForPosts'
                                                  type='text' value={widgetData.selectedMetaForPosts}
@@ -659,13 +650,6 @@ const WidgetModel = props => {
                         }) : setWidgetSettings({...widgetSettings, preview: true})
                     }}>Preview the Widget
                     </button>
-                    {/*{widgetSettings.preview ?*/}
-                    {/*    <WidgetPreview widgetId={props.widgetId}*/}
-                    {/*                   position={widgetData.position}*/}
-                    {/*    />*/}
-                    {/*    : null*/}
-                    {/*}*/}
-
                     <div className='control-buttons'>
                         <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{
                             width: '15px',

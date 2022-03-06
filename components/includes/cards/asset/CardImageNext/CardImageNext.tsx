@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import Image from 'next/image'
 import styled from "styled-components";
 
@@ -45,21 +45,21 @@ const CardImageNext: FC<CardImageNextPropTypes> =
          strictImageSize,
          errorHandler
      }) => {
-
+        const [gotError,setGotError] = useState(false)
         return (
             <CardImageNextStyledDiv imageWidth={cardWidth} imageHeight={cardHeight} objectFitValue={objectFitValue}
                                     strictImageSize={strictImageSize}>
-                <Image src={imageUrl}
+                <Image src={!gotError ? imageUrl : '/static/images/noImage/no-image-available.png'}
                        alt={alt}
-                       // loading={'lazy'}
+                    // loading={'lazy'}
                        priority
                        layout={'responsive'}
                        width={cardWidth}
                        height={cardHeight}
                        quality={80}
-                        // @ts-ignore
-                       objectFit={objectFitValue  || 'contain'}
-                       onError={() => errorHandler ? errorHandler : null}
+                    // @ts-ignore
+                       objectFit={objectFitValue || 'contain'}
+                       onError={() => setGotError(true)}
                 />
             </CardImageNextStyledDiv>
         )

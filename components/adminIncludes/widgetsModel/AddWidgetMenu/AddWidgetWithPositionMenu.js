@@ -1,6 +1,6 @@
 import React, {useRef, useState} from 'react';
 import * as widgetModels from './models'
-import {adminAddNewWidget} from '../../../../store/adminActions/adminWidgetsActions'
+import {adminAddNewWidget, adminGetWidgets} from '@store/adminActions/adminWidgetsActions'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import {uniqueId} from "lodash";
 import {useDispatch, useSelector} from 'react-redux';
@@ -11,7 +11,7 @@ import Draggable from 'react-draggable';
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
   position: relative;
-  width: 200px;
+  width: 320px;
   height: 35px;
   display: flex;
   justify-content: center;
@@ -24,7 +24,7 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
 
   .AddWidgetWithPositionMenuPositions {
     position: absolute;
-    width: 250px;
+    width: 320px;
     top: 35px;
     z-index: 1;
     background-color: var(--admin-darkcolor70);
@@ -75,6 +75,7 @@ const AddWidgetWithPositionMenu = props => {
             widgetIndex: highestIndexInTheSamePosition + 1,
         };
         dispatch(adminAddNewWidget(dataToSave))
+        setTimeout(()=>dispatch(adminGetWidgets()),1000)
         setOpen(false)
 
     }

@@ -134,6 +134,9 @@ export interface WidgetPropTypes {
 }
 
 export interface WidgetDataPropTypes {
+    footerLink: string;
+    redirectToTitle: string;
+    translations: {};
     uniqueData: any;
     noSSR: boolean;
     specificDayToRender: string;

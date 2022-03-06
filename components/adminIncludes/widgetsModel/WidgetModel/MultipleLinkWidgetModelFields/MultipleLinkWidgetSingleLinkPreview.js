@@ -1,5 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-
+import {useEffect, useState} from 'react';
 import styled from "styled-components";
 
 const MultipleLinkWidgetSingleLinkPreviewStyledDiv = styled.div`
@@ -13,11 +12,12 @@ const MultipleLinkWidgetSingleLinkPreviewStyledDiv = styled.div`
 
   .multiple-link-widget-single-link-preview-header {
     width: 95%;
-   
+
   }
 
   .multiple-link-widget-single-link-preview-form {
     width: 95%;
+
     .menu-form-field, .menu-form-textarea {
       display: flex;
       flex-direction: column;
@@ -31,12 +31,19 @@ const MultipleLinkWidgetSingleLinkPreviewStyledDiv = styled.div`
 
       .form-control-input {
         width: 90%;
-
+        background-color: #222;
+        color: #ccc;
       }
 
       .custom-select {
         width: 95%;
+        background-color: #222;
+        color: #ccc;
       }
+    }
+
+    .btn {
+      margin: 10px 0;
     }
   }
 
@@ -120,7 +127,8 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                 <p>{editingData.linkIndex} - {editingData?.linkTitle}</p>
                 <button className={'btn btn-secondary'} onClick={() => onIndexChangeHandler(false)}>-</button>
                 <button className={'btn btn-secondary'} onClick={() => onIndexChangeHandler(true)}>+</button>
-                <button className={'btn btn-secondary'} onClick={() => open ? setOpen(false) : setOpen(true)}>{open ? 'close' : 'open'}</button>
+                <button className={'btn btn-secondary'}
+                        onClick={() => open ? setOpen(false) : setOpen(true)}>{open ? 'close' : 'open'}</button>
             </div>
 
             {open ?
@@ -142,7 +150,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                                   value={props.widgetSettings.activeEditingLanguage === 'default' ? editingData.linkDescription ?? '' : editingData?.translations?.[props.widgetSettings.activeEditingLanguage]?.linkDescription ?? ''}/>
                     </div>
                     <div className='menu-form-field'>
-                        <p>Link To :</p>
+                        <p>Url :</p>
                         <input name='linkTo'
                                type='text'
                                className={'form-control-input'}
@@ -150,24 +158,9 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                                value={editingData.linkTo}/>
                     </div>
                     <div className='menu-form-field'>
-                        <p>Link To As :</p>
-                        <input name='linkToAs'
-                               type='text'
-                               className={'form-control-input'}
-                               onChange={e => onChangeHandler(e)}
-                               value={editingData.linkToAs}/>
-                    </div>
-                    <div className='menu-form-field'>
-                        <p>Link Type :</p>
-                        <select className={'custom-select'} name='linkToType' value={editingData.linkToType} onChange={e => onChangeHandler(e)}>
-                            <option>select</option>
-                            <option value='internal'>Internal</option>
-                            <option value='external'>External</option>
-                        </select>
-                    </div>
-                    <div className='menu-form-field'>
                         <p>rel :</p>
-                        <select className={'custom-select'} name='linkRel' value={editingData.linkRel} onChange={e => onChangeHandler(e)}>
+                        <select className={'custom-select'} name='linkRel' value={editingData.linkRel}
+                                onChange={e => onChangeHandler(e)}>
                             <option>select</option>
                             <option value='alternate'>alternate</option>
                             <option value='author'>author</option>
@@ -196,21 +189,16 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                             <option value='tag'>tag</option>
                         </select>
                     </div>
+
                     <div className='menu-form-field'>
-
+                        <p>Link To Window Type :</p>
+                        <select className={'custom-select'} name='linkToWindowType' value={editingData.linkToWindowType}
+                                onChange={e => onChangeHandler(e)}>
+                            <option>select</option>
+                            <option value='_blank'>Open New Window</option>
+                            <option value='_self'>Redirect To Link In The Same Window</option>
+                        </select>
                     </div>
-
-
-                    {editingData.linkToType === 'external' ?
-                        <div className='menu-form-field'>
-                            <p>Link To Window Type :</p>
-                            <select className={'custom-select'} name='linkToWindowType' value={editingData.linkToWindowType} onChange={e => onChangeHandler(e)}>
-                                <option>select</option>
-                                <option value='_blank'>Open New Window</option>
-                                <option value='_self'>Redirect To Link In The Same Window</option>
-                            </select>
-                        </div> : null
-                    }
                     <div className='menu-form-field'>
                         <p>link Index :</p>
                         <input name='linkIndex'

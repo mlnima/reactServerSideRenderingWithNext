@@ -1,5 +1,6 @@
 import Link from "next/link";
 import styled from "styled-components";
+import {useEffect} from "react";
 
 let RecentCommentsStyledDiv = styled.div`
   padding: 10px;
@@ -23,14 +24,16 @@ let RecentCommentsStyledDiv = styled.div`
   }
 `
 const RecentComments = props => {
-
+    // useEffect(() => {
+    //     console.log(props)
+    // }, [props]);
     const renderComments = props.comments.map(comment => {
         return (
             <div key={props.comments.indexOf(comment)} className='recent-comments-item'>
 
-                <Link href={`/post/${comment.onDocumentTitle}?id=${comment.onDocumentId}`}>
+                <Link href={`/post/${comment?.onDocumentTitle}?id=${comment.onDocumentId}`}>
                     <a>
-                        <strong className='recent-comments-item-author'>{comment.onDocumentTitle}</strong>
+                        <strong className='recent-comments-item-author'>{comment?.onDocumentTitle}</strong>
                     </a>
                 </Link>
 

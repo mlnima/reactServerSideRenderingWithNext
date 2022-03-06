@@ -7,6 +7,7 @@ const initialState = { id: 1 };
 const mockStore = configureStore();
 
 const useRouter = jest.spyOn(require('next/router'), 'useRouter');
+
 useRouter.mockImplementation(() => ({
     pathname: '/',
 }));

@@ -6,6 +6,8 @@ export const LOGOUT ='LOGOUT'
 export const GET_SPECIFIC_USER_DATA ='GET_SPECIFIC_USER_DATA'
 export const DISPATCH_SOCKET_ID ='SET_SOCKET_ID'
 export const RESET_PASSWORD ='RESET_PASSWORD'
+export const LIKE_POST ='LIKE_POST'
+export const DISLIKE_POST ='DISLIKE_POST'
 //messenger
 export const GET_CONVERSATIONS ='GET_CONVERSATIONS'
 export const GET_CONVERSATION ='GET_CONVERSATION'
@@ -70,14 +72,8 @@ export const NEW_POST = 'NEW_POST'
 
 //PAGES-TYPES
 export const GET_PAGE_DATA = 'GET_PAGE_DATA'
-//ADMIN TYPES
-// export const GET_CUSTOM_PAGES = 'GET_CUSTOM_PAGES'
-// export const SAVE_NEW_WIDGET = 'SAVE_NEW_WIDGET'
-// export const UPDATE_WIDGET = 'UPDATE_WIDGET'
-// export const DELETE_WIDGET = 'DELETE_WIDGET'
-// export const SET_SIDEBAR_STATUS = 'SET_SIDEBAR_STATUS'
-// export const EDIT_DESIGN = 'EDIT_DESIGN'
-// export const SERVER_LOG = 'SERVER_LOG'
+
+
 
 
 

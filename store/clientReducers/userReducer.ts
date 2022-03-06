@@ -17,10 +17,12 @@ import {
     SET_PARTNER_VIDEO,
     SET_USER_PAGE_DATA
 } from "@store/types";
+
 import {UserState} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const initialState = {
     userData:{},
+    userRatingData:{},
     loggedIn:false,
     userPageData:{},
     conversations:[],
