@@ -90,8 +90,7 @@ const DefaultTypeCard = props => {
         <DefaultTypeCardStyledDiv className='post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <Link href={`/post/${props.post?.postType}/${props.post?._id}`} >
                 <a rel='next' onClick={ props.onActivateLoadingHandler} className='post-card-link' title={title}  >
-                    <DefaultTypeCardMedia noImageUrl={props.noImageUrl}
-                                          postElementSize={props.postElementSize}
+                    <DefaultTypeCardMedia postElementSize={props.postElementSize}
                                           post={props.post}
                                           cardWidth={props.cardWidth}
                                           mediaAlt={title}

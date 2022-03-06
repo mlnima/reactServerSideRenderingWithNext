@@ -7,7 +7,6 @@ interface CardImageNextPropTypes {
     alt: string,
     cardHeight: number,
     cardWidth: number,
-    errorHandler?: any,
     objectFitValue?: string,
     strictImageSize?: boolean
 }
@@ -43,15 +42,13 @@ const CardImageNext: FC<CardImageNextPropTypes> =
          cardHeight,
          objectFitValue,
          strictImageSize,
-         errorHandler
      }) => {
-        const [gotError,setGotError] = useState(false)
+        const [gotError, setGotError] = useState(false)
         return (
             <CardImageNextStyledDiv imageWidth={cardWidth} imageHeight={cardHeight} objectFitValue={objectFitValue}
                                     strictImageSize={strictImageSize}>
-                <Image src={!gotError ? imageUrl : '/static/images/noImage/no-image-available.png'}
+                <Image src={gotError || !imageUrl ? '/static/images/noImage/no-image-available.png' : imageUrl}
                        alt={alt}
-                    // loading={'lazy'}
                        priority
                        layout={'responsive'}
                        width={cardWidth}

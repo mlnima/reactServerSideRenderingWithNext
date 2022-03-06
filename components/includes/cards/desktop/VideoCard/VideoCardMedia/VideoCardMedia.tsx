@@ -1,15 +1,26 @@
 import {FC, useState, useMemo, useEffect} from 'react';
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-import {PostTypes} from "../../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import CardImageRenderer from "../../../asset/CardImageRenderer/CardImageRenderer";
-
 const VideoCardInfo = dynamic(() => import('../VideoCardInfo'));
 const VideoCardTrailer = dynamic(() => import('./VideoCardTrailer'), {ssr: false});
 
 interface styleProps {
     cardWidth: number,
     postElementSize: string
+}
+
+interface VideoCardMediaPropTypes {
+    post: PostTypes,
+    postElementSize: string,
+    cardWidth: number,
+    mediaAlt: string,
+    noImageUrl: string,
+    views: number,
+    rating: number,
+    quality: string,
+    duration: string,
 }
 
 let VideoCardMediaStyledDiv = styled.div`
@@ -70,48 +81,15 @@ let VideoCardMediaStyledDiv = styled.div`
   }
 `
 
-//    width: ${(props: styleProps) => props.postElementSize === 'list' ? '116.6px' : '100%'};
-//     height: ${(props: styleProps) => props.postElementSize === 'list' ? 'calc(116.6px / 1.777)' : 'calc(50vw / 1.777)'};
-const NoImageStyleDiv = styled.div`
-  width: 100%;
-  height: calc(48vw / 1.777);
-  display: flex;
-  justify-content: center;
-  align-items: center;
 
-  span {
-    color: var(--post-element-info-text-color, #ccc);
-  }
-
-  @media only screen and (min-width: 768px) {
-    width: ${(props: { cardWidth?: number }) => props?.cardWidth}px;
-    height: calc(${(props: { cardWidth?: number }) => props?.cardWidth}px / 1.777);
-  }
-`
-
-interface VideoCardMediaPropTypes {
-    post: PostTypes,
-    postElementSize: string,
-    cardWidth: number,
-    mediaAlt: string,
-    noImageUrl: string,
-    views: number,
-    rating: number,
-    quality: string,
-    duration: string,
-}
 
 const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
 
     const [hover, setHover] = useState(false)
-    const [gotError, setGotError] = useState(false)
     const videoTrailerUrlSource = useMemo(() => props.post.videoTrailerUrl, [props.post])
 
     const hoverHandler = () => {
         hover ? setHover(false) : setHover(true)
-    }
-    const errorHandler = () => {
-        !gotError ? setGotError(true) : null
     }
 
     useEffect(() => {
@@ -129,13 +107,7 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
         )
     } else {
 
-        if (!props?.post.mainThumbnail || gotError) {
-            return (
-                <NoImageStyleDiv cardWidth={props.cardWidth} className='no-image'>
-                    <span className={'no-image-alt'}>{props.mediaAlt || 'NO IMAGE'}</span>
-                </NoImageStyleDiv>
-            )
-        } else return (
+        return (
 
             <VideoCardMediaStyledDiv className={'video-card-media'}
                                      postElementSize={props.postElementSize}
@@ -149,7 +121,6 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
                                    mediaAlt={props.mediaAlt}
                                    cardWidth={props.cardWidth}
                                    cardHeight={props.cardWidth / 1.777}
-                                   errorHandler={errorHandler}
                 />
                 <VideoCardInfo views={props.views}
                                rating={props.rating}

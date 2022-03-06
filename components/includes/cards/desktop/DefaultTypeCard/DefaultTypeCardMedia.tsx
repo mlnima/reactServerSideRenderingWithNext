@@ -1,61 +1,47 @@
-import React, {useState} from 'react';
+import {FC} from 'react';
 import styled from "styled-components";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+
+interface DefaultTypeCardMediaPropTypes {
+    post:PostTypes,
+    postElementSize:string,
+    cardWidth:number,
+    mediaAlt:string,
+}
+
+interface DefaultTypeCardMediaStyledDivPropTypes{
+    cardWidth:number,
+    postElementSize:string
+}
 
 let DefaultTypeCardMediaStyledDiv = styled.div`
   .post-card-image {
-    width: ${(props : {cardWidth:number,postElementSize:string}) =>props.postElementSize === 'list' ? '116.6px' : '100%'};
+    width: ${({postElementSize} : DefaultTypeCardMediaStyledDivPropTypes) => postElementSize === 'list' ? '116.6px' : '100%'};
     height: calc(48vw / 1.777);
     object-fit: contain;
   }
   @media only screen and (min-width: 768px) { 
     .post-card-image {
-      width: ${(props : {cardWidth:number,postElementSize:string}) =>props.postElementSize === 'list' ? '116.6px' : `${props.cardWidth}px`};
-      height: calc(${(props : {cardWidth:number,postElementSize:string}) => props.cardWidth}px / 1.777);
+      width: ${({postElementSize,cardWidth}  : DefaultTypeCardMediaStyledDivPropTypes) =>postElementSize === 'list' ? '116.6px' : `${cardWidth}px`};
+      height: calc(${({cardWidth} : DefaultTypeCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
     }
   }
 `
 
-const NoImageStyleDiv = styled.div`
-  width: 100%;
-  height: calc(48vw / 1.777);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  span{
-    color: var(--post-element-info-text-color,#ccc);
-  }
-  @media only screen and (min-width: 768px) {
-    width:  ${(props : {cardWidth?:number}) => props?.cardWidth}px;
-    height: calc(${(props : {cardWidth?:number}) => props?.cardWidth}px / 1.777);
-  }
-`
 
-interface DefaultTypeCardMediaPropTypes {
-    post:PostTypes,
-    postElementSize:string,
-    cardWidth:string,
-    mediaAlt:string,
-    noImageUrl:string,
-}
+const DefaultTypeCardMedia:FC<DefaultTypeCardMediaPropTypes> =
+    ({
+         cardWidth,
+         postElementSize,
+         post,
+         mediaAlt,
+    }) => {
 
-const DefaultTypeCardMedia = (props:DefaultTypeCardMediaPropTypes) => {
-    const [gotError, setGotError] = useState(false)
-
-    if (!props?.post?.mainThumbnail || gotError){
-        return (
-            // @ts-ignore
-            <NoImageStyleDiv cardWidth={props.cardWidth} className='no-image'>
-                <span className={'no-image-alt'}>{props.mediaAlt || 'NO IMAGE'}</span>
-            </NoImageStyleDiv>
-        )
-    }else return (
-        // @ts-ignore
-        <DefaultTypeCardMediaStyledDiv className='post-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
+    return (
+        <DefaultTypeCardMediaStyledDiv className='post-card-media' postElementSize={postElementSize} cardWidth={cardWidth}>
             <img className='post-card-image'
-                 alt={props.mediaAlt}
-                 src={props?.post?.mainThumbnail}
-                 onError={()=>setGotError(true)}
+                 alt={mediaAlt}
+                 src={post?.mainThumbnail}
             />
         </DefaultTypeCardMediaStyledDiv>
     );

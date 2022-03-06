@@ -1,4 +1,4 @@
-import {FC, useState} from "react";
+import {FC, useEffect, useState} from "react";
 import styled, {createGlobalStyle} from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -16,12 +16,12 @@ const DayModeNightModeStyledDiv = styled.div`
     align-items: center;
     background-color: transparent;
     border: none;
-    
+
     .light {
       width: 25px;
       height: 25px;
       margin: 0 2px;
-      background-color: var(--main-active-color,#f90) ;
+      background-color: var(--main-active-color, #f90);
       mask: url('/public/asset/images/icons/lightbulb-solid.svg') no-repeat center;
       -webkit-mask: url('/public/asset/images/icons/lightbulb-solid.svg') no-repeat center;
     }
@@ -39,7 +39,7 @@ const ModeStyles = createGlobalStyle`
 
 const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
 
-    const customColors = useSelector(({settings}: StoreTypes)=> settings?.design?.customColors || '')
+    const customColors = useSelector(({settings}: StoreTypes) => settings?.design?.customColors || '')
 
     const [state, setstate] = useState({
         active: false,
@@ -54,13 +54,27 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
             open: false,
             mode
         })
+        if (typeof window !== 'undefined' && mode) {
+            localStorage.setItem('theme', mode)
+        }
     }
 
+    useEffect(() => {
+        if (typeof window !== 'undefined') {
+            if (localStorage.theme){
+                setstate({
+                    ...state,
+                    mode: localStorage.theme
+                })
+            }
+        }
+    }, [uniqueData]);
+
     return (
-        <DayModeNightModeStyledDiv >
+        <DayModeNightModeStyledDiv>
             <button className={'btn btn-primary'}
                     aria-label={state.mode === 'night' ? 'day mode' : 'night mode'}
-                    onClick={()=>{
+                    onClick={() => {
                         state.mode === 'night' ?
                             onSelectHandler('day') :
                             onSelectHandler('night')
@@ -68,8 +82,8 @@ const DayModeNightMode: FC<DayModeNightModePropTypes> = ({uniqueData}) => {
             >
                 <span className={'light'}/>
             </button>
-            <ModeStyles dayNightModeData={state.mode === uniqueData.dayNightModeDefault  ?
-                                          customColors : uniqueData.dayNightModeData || ''}
+            <ModeStyles dayNightModeData={state.mode === uniqueData.dayNightModeDefault ?
+                customColors : uniqueData.dayNightModeData || ''}
             />
         </DayModeNightModeStyledDiv>
     )

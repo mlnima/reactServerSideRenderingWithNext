@@ -10,7 +10,6 @@ interface CardImageNextPropTypes {
     mediaAlt:string,
     cardWidth: number,
     cardHeight: number,
-    errorHandler?:any,
     objectFitValue?:string,
     strictImageSize?:boolean
 }
@@ -21,7 +20,6 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
          mediaAlt,
          cardWidth,
          cardHeight,
-         errorHandler,
          strictImageSize,
          objectFitValue
     }) => {
@@ -29,8 +27,6 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
     const imageUrlSource = useMemo(() => {
         return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
     }, [imageUrl]);
-
-    const CardImageProps = useMemo(()=>errorHandler ? {errorHandler}:{},[]);
 
     if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  ){
         return (
@@ -40,7 +36,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                            cardHeight={cardHeight}
                            objectFitValue={objectFitValue}
                            strictImageSize={strictImageSize}
-                           {...CardImageProps}
+
             />
         )
     }else {
@@ -51,7 +47,7 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
                        cardHeight={cardHeight}
                        objectFitValue={objectFitValue}
                        strictImageSize={strictImageSize}
-                       {...CardImageProps}
+
             />
         )
     }

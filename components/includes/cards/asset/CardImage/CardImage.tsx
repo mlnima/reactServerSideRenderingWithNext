@@ -6,7 +6,6 @@ interface CardImagePropTypes {
     alt: string,
     cardWidth: number,
     cardHeight: number,
-    errorHandler?: any,
     objectFitValue?: string,
     strictImageSize?: boolean
 }
@@ -38,12 +37,11 @@ const CardImage: FC<CardImagePropTypes> =
          cardHeight,
          objectFitValue,
          strictImageSize,
-         errorHandler
      }) => {
         const [gotError,setGotError] = useState(false)
 
         return (
-            <CardImageStyledImg src={!gotError ? imageUrl : '/static/images/noImage/no-image-available.png'}
+            <CardImageStyledImg src={gotError || !imageUrl ? '/static/images/noImage/no-image-available.png' : imageUrl}
                                 alt={alt}
                                 strictImageSize={strictImageSize}
                                 cardWidth={cardWidth}
