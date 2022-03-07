@@ -8,7 +8,7 @@ interface TagCardMediaPropTypes{
 }
 
 const TagCardMedia:FC<TagCardMediaPropTypes> = ({cardWidth,imageUrl,mediaAlt}) => {
-console.log(imageUrl)
+
     return (
         <CardImageRenderer imageUrl={imageUrl}
                            mediaAlt={mediaAlt}

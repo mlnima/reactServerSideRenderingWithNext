@@ -1,6 +1,15 @@
 const {isValidObjectId} = require("mongoose");
 
 module.exports = data =>{
+     const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
+
+     const excludeContent = excludesPostFromSources.map(excludeWord=>{
+          const expression = `.*${excludeWord}.*`
+          return {'videoEmbedCode':{$not:   new RegExp(expression , "g")}}
+     })
+
+     const excludeQuery = {$or:excludeContent}
+
      const size = parseInt(data?.size ||  '20' );
      const sort = data?.sort || data?.sortBy;
      const meta = data.metaId || data?.selectedMetaForPosts;
@@ -16,6 +25,7 @@ module.exports = data =>{
          postTypeQuery : data?.postType ? {postType: data.postType} : {},
          statusQuery : data?.status ? data?.status === 'all' ? {status: {$ne: 'trash'}} : {status: data.status} : {status: 'published'} ,
          authorQuery : data.author ? data.author === 'all' ? {} : {author: data.author}:{},
+         excludeQuery,
          metaQuery,
          searchQuery,
          selectedFields : data.fields && data.fields?.length || !data.fields ? [] : data.fields,

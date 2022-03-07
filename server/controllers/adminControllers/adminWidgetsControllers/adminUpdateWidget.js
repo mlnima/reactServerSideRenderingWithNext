@@ -10,7 +10,7 @@ const updatePostWidget = async (widget) => {
     if (widgetData) {
         try {
             const findingPostsOptions = _queryGeneratorForGettingPosts(widget?.data)
-            const findPostsQueries = {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}
+            const findPostsQueries = {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery,findingPostsOptions.excludeQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}
             let totalCount = await postSchema.countDocuments(findPostsQueries).exec()
             let posts = await postSchema.find(findPostsQueries, ['_id'],
                 {
