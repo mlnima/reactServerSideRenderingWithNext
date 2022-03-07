@@ -4,7 +4,7 @@ const isImageAllowedForNextImage = (url:string)=>{
             const AllowedSource = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES ?
                 process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.split(' '):[]
             const parseUrl = new URL(url)
-            return AllowedSource.includes(parseUrl.hostname)
+            return AllowedSource?.includes(parseUrl.hostname)
         }
     }catch (err){
         return  false

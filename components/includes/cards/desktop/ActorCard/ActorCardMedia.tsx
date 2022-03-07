@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {FC, useMemo} from 'react';
 import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
 
 interface ActorCardMediaPropTypes {
@@ -14,10 +14,7 @@ const ActorCardMedia:FC<ActorCardMediaPropTypes> = ({mediaAlt, imageUrl} ) => {
                            cardHeight={140}
                            objectFitValue={'cover'}
                            strictImageSize={true}
-                           imageUrl={imageUrl.includes('http') ?
-                               imageUrl :
-                               process.env.NEXT_PUBLIC_PRODUCTION_URL + imageUrl
-                           }
+                           imageUrl={imageUrl}
         />
     );
 
