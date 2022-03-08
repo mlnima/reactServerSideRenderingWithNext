@@ -58,13 +58,13 @@ export const saveFormWidgetData = async (data) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/forms/saveFormData', body)
 }
 
-export const getFormsData = async (data) => {
-    const body = {
-        data,
-        token: localStorage.wt
-    }
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/forms/getFormsData', body)
-}
+// export const getFormsData = async (data) => {
+//     const body = {
+//         data,
+//         token: localStorage.wt
+//     }
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/forms/getFormsData', body)
+// }
 
 export const getFormData = async (data) => {
     const body = {
@@ -123,15 +123,15 @@ export const youtubeDataScrapper = async (url) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/scrapper/scrapYoutubeInfo', body)
 }
 
-export const getOrders = async (data, domainName) => {
-
-    const body = {
-        ...data,
-        token: localStorage.wt
-    };
-
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/orders/getOrders`, body)
-};
+// export const getOrders = async (data, domainName) => {
+//
+//     const body = {
+//         ...data,
+//         token: localStorage.wt
+//     };
+//
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/orders/getOrders`, body)
+// };
 
 export const getFirstLoadData = async (req, dynamicWidgets,store,locale) => {
     try {

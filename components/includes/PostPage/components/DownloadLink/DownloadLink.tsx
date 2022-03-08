@@ -2,6 +2,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faDownload} from "@fortawesome/free-solid-svg-icons";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
+import {FC} from "react";
 
 const DownloadLinkStyledDiv = styled.div`
   display: flex;
@@ -37,13 +38,20 @@ const DownloadLinkStyledDiv = styled.div`
 
 `
 
-const DownloadLink = ({ downloadLink, render, downloadLinks}) => {
+interface DownloadLinkPropTypes{
+    downloadLink:string,
+    render:string|number,
+    downloadLinks:{
+        url:string,
+        title:string
+    }[]
+}
+
+const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, downloadLinks}) => {
     const {t} = useTranslation('common');
     if (render) {
         return (
-            <DownloadLinkStyledDiv target={'_blank'}
-                                   rel={'noreferrer'}
-            >
+            <DownloadLinkStyledDiv>
                 <span className={'download-text'}>
                     {t([t('Download', {ns: 'common'}), t('Download', {ns: 'customTranslation'})])}:
                 </span>
@@ -68,6 +76,7 @@ const DownloadLink = ({ downloadLink, render, downloadLinks}) => {
                 {downloadLink ?
                     <a className={'single-download-link btn btn-primary'}
                        href={downloadLink}
+                       target={'_blank'}
                        title={t([t('Download', {ns: 'common'}), t('Download', {ns: 'customTranslation'})])}
                     >
                         <span style={{display: 'none'}}>download link for post</span>

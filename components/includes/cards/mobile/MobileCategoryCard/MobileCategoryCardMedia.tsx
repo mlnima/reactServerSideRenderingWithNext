@@ -1,8 +1,6 @@
-import {FC, useState} from "react";
+import {FC} from "react";
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-const MobileCardNoImage = dynamic(() =>
-    import('@components/includes/cards/mobileAsset/MobileCardNoImage/MobileCardNoImage'));
 const MobileCardImageRenderer = dynamic(() =>
     import('@components/includes/cards/mobileAsset/MobileCardImageRenderer'));
 
@@ -23,26 +21,16 @@ const MobileCategoryCardMedia: FC<MobileCategoryCardMediaPropTypes> =
          mediaAlt,
          postsPerRawForMobile
      }) => {
-        const [gotError, setGotError] = useState(false)
 
-        const errorHandler = () => {
-            !gotError ? setGotError(true) : null
-        }
+        return (
+            <MobileCategoryCardMediaStyledDiv>
+                <MobileCardImageRenderer mediaAlt={mediaAlt}
+                                         imageUrl={imageUrl}
+                                         postsPerRawForMobile={postsPerRawForMobile}
 
-        if (!imageUrl || gotError) {
-            return <MobileCardNoImage mediaAlt={mediaAlt}/>
-        } else {
-            return (
-                <MobileCategoryCardMediaStyledDiv>
-                    <MobileCardImageRenderer mediaAlt={mediaAlt}
-                                             imageUrl={imageUrl}
-                                             postsPerRawForMobile={postsPerRawForMobile}
-                                             errorHandler={errorHandler}
-                    />
-                </MobileCategoryCardMediaStyledDiv>
-            )
-
-        }
+                />
+            </MobileCategoryCardMediaStyledDiv>
+        )
 
     }
 ;

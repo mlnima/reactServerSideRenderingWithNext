@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import MobileCardImageRenderer from "../../mobileAsset/MobileCardImageRenderer";
@@ -6,7 +6,7 @@ import MobileCardImageRenderer from "../../mobileAsset/MobileCardImageRenderer";
 let MobileLearnCardMediaStyledDiv = styled.div`
   position: relative;
   width: 100%;
-  
+
   .learn-card-views {
     bottom: 3px;
     right: 3px;
@@ -15,18 +15,6 @@ let MobileLearnCardMediaStyledDiv = styled.div`
   .learn-card-rating {
     bottom: var(--video-card-info-distance, 2px);
     left: var(--video-card-info-distance, 2px);
-  }
-`
-
-const NoImageStyleDiv = styled.div`
-  width: 100%;
-  height: calc(100% / 1.777);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  span {
-    color: var(--post-element-info-text-color, #ccc);
   }
 `
 
@@ -43,27 +31,13 @@ const MobileLearnCardMedia: FC<MobileLearnCardMediaPropTypes> =
          postsPerRawForMobile,
      }) => {
 
-        const [gotError, setGotError] = useState(false)
-
-        const errorHandler = () => {
-            !gotError ? setGotError(true) : null
-        }
-
-        if (!post.mainThumbnail || gotError) {
-            return (
-                <NoImageStyleDiv className='no-image'>
-                    <span className={'no-image-alt'}>{mediaAlt || 'NO IMAGE'}</span>
-                </NoImageStyleDiv>
-            )
-        } else return (
+        return (
 
             <MobileLearnCardMediaStyledDiv className={'mobile-learn-card-media'}>
                 <MobileCardImageRenderer imageUrl={post.mainThumbnail}
                                          postsPerRawForMobile={postsPerRawForMobile}
                                          mediaAlt={mediaAlt}
-                                         errorHandler={errorHandler}
                 />
-
             </MobileLearnCardMediaStyledDiv>
         )
 

@@ -1,10 +1,5 @@
-// need to switch in to redux
-
-import React, {useEffect, useState} from 'react';
+import React, {FC, useEffect, useMemo, useState} from 'react';
 import dynamic from 'next/dynamic'
-// import {getComments} from '../../../_variables/ajaxPostsVariables'
-import {getPagesData, getOrders} from "../../../_variables/ajaxVariables";
-import {getFormsData} from '../../../_variables/ajaxVariables'
 import {useRouter} from "next/router";
 import _getPostsQueryGenerator from "../../../_variables/clientVariables/_getPostsQueryGenerator";
 import {wrapper} from "@store/store";
@@ -12,176 +7,122 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import {adminGetMetas, adminGetPosts} from "@store/adminActions/adminPanelPostsActions";
-import {settingsPropTypes, StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminGetUsers} from "@store/adminActions/adminUserActions";
-import {adminPanelUsersReducer} from "@store/adminReducers/adminPanelUsersReducer";
 import _metaPageQueryGenerator from "../../../_variables/clientVariables/_metaPageQueryGenerator";
+import {adminGetComments} from "@store/adminActions/adminPanelCommentsActions";
+import {adminGetForms} from "@store/adminActions/adminPanelFormsActions";
+import {adminGetPages} from "@store/adminActions/adminPanelPagesActions";
+import {adminGetOrders} from "@store/adminActions/adminPanelOrdersActions";
 
 const TableHeader = dynamic(
-    () => import('../../../components/adminIncludes/assetComponents/TableHeader/TableHeader'),
+    () => import('@components/adminIncludes/assetComponents/TableHeader/TableHeader'),
     {ssr: false}
 )
 const TableBody = dynamic(
-    () => import('../../../components/adminIncludes/assetComponents/TableBody/TableBody'),
+    () => import('@components/adminIncludes/assetComponents/TableBody/TableBody'),
     {ssr: false}
 )
 const TableControls = dynamic(
-    () => import('../../../components/adminIncludes/assetComponents/TableControls/TableControls'),
+    () => import('@components/adminIncludes/assetComponents/TableControls/TableControls'),
     {ssr: false}
 )
-
 
 
 const AdminAssetPageStyledDiv = styled.div`
 
 `
-const assets = (props: any) => {
-    const router = useRouter()
+const assets: FC = () => {
+    const {query, pathname, asPath,push} = useRouter()
     const dispatch = useDispatch()
-    const posts = useSelector((store: StoreTypes) => store?.adminPanelPosts?.posts)
-    const totalCount = useSelector((store: StoreTypes) => {
-        return store?.adminPanelPosts?.totalCount || store?.adminPanelUsers?.totalCount
+
+
+    const assetPageData = useSelector((store: StoreTypes) => {
+        return {
+            totalCount: store?.adminPanelPosts?.totalCount || store?.adminPanelUsers?.totalCount,
+            posts: store?.adminPanelPosts?.posts,
+            users: store?.adminPanelUsers?.users,
+            comments: store?.adminPanelComments?.comments,
+            forms: store?.adminPanelForms?.forms,
+            pages: store?.adminPanelPages?.pages,
+            metas: store?.adminPanelPosts?.metas,
+            orders: store?.adminPanelOrders?.orders
+        }
     })
-    const users = useSelector((store: StoreTypes) => store?.adminPanelUsers?.users)
-    const forms = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.forms)
-    const pages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.pages)
-    const metas = useSelector((store: StoreTypes) => store?.adminPanelPosts?.metas)
-    const orders = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.orders)
 
     const [selectedItems, setSelectedItems] = useState([]);
-    const [finalPageData, setFinalPageData] = useState({});
-    const [dataConfig, setDataConfig] = useState(()=>{
+
+
+    const dataConfig = useMemo(() => {
         return {
-            size: router.query.size ? parseInt(router.query.size as string) : 30,
-            page: router.query.page ? parseInt(router.query.page as string) : 1,
-            postType: router?.query?.postType ?? null,
+            size: query.size ? parseInt(query.size as string) : 30,
+            page: query.page ? parseInt(query.page as string) : 1,
+            postType: query?.postType ?? null,
             fields: ['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt'],
-            keyword: router?.query?.keyword ?? '',
-            author: router?.query?.author ?? 'all',
-            status: router?.query?.status ?? 'all',
-            sort: router?.query?.sort ?? 'updatedAt',
-            content: router?.query?.content ?? 'all',
-            metaType: router?.query?.metaType || null,
-            orderType: router?.query?.orderType ?? 'all',
-            metaId: router?.query?.metaId || null,
-            searchForImageIn: router?.query?.type,
+            keyword: query?.keyword ?? '',
+            author: query?.author ?? 'all',
+            status: query?.status ?? 'all',
+            sort: query?.sort ?? 'updatedAt',
+            content: query?.content ?? 'all',
+            metaType: query?.metaType || null,
+            orderType: query?.orderType ?? 'all',
+            metaId: query?.metaId || null,
+            searchForImageIn: query?.type,
             startWith: '',
         }
-    })
-
-    useEffect(() => {
-        setFinalPageData({
-            ...finalPageData,
-            posts,
-            totalCount,
-            users,
-            forms,
-            pages,
-            metas,
-            orders,
-        })
-    }, [posts,users,forms,pages,metas,orders,totalCount]);
-
-    // useEffect(() => {
-    //     console.log(metas)
-    // }, [metas]);
-
-    useEffect(() => {
-        setDataConfig({
-            size: router.query.size ? parseInt(router.query.size as string) : 30,
-            page: router.query.page ? parseInt(router.query.page as string) : 1,
-            postType: router?.query?.postType ?? null,
-            fields: ['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt'],
-            keyword: router?.query?.keyword ?? '',
-            author: router?.query?.author ?? 'all',
-            status: router?.query?.status ?? 'all',
-            sort: router?.query?.sort ?? 'updatedAt',
-            content: router?.query?.content ?? 'all',
-            metaType: router?.query?.metaType || null,
-            orderType: router?.query?.orderType ?? 'all',
-            metaId: router?.query?.metaId || null,
-            searchForImageIn: router?.query?.type,
-            startWith: '',
-        })
-    }, [router.pathname]);
+    }, [query, pathname, asPath])
 
 
-    useEffect(() => {
-        const assetType = router.query.assetsType
+
+    const getData = () =>{
+        const assetType = query.assetsType
         if (assetType === 'posts') {
-            const gettingPostsQueries = _getPostsQueryGenerator(router?.query, router?.query.metaId, false)
+            const gettingPostsQueries = _getPostsQueryGenerator(query, query.metaId, false)
             dispatch(adminGetPosts(gettingPostsQueries))
-        } else if (assetType === 'users') {
+        } else if (assetType === 'users'){
             dispatch(adminGetUsers({}))
-        }else if (assetType === 'metas') {
-            const queries = _metaPageQueryGenerator(router?.query,router?.query.metaType,false)
+        } else if (assetType === 'metas') {
+            const queries = _metaPageQueryGenerator(query, query.metaType, false)
             dispatch(adminGetMetas(queries))
-        }
-
-
-        getAndSetAssetData().finally()
-    }, [props]);
-
-    const getAndSetAssetData = async () => {
-        const assetType = router.query.assetsType
-        const ajaxRequestData =
-                assetType === 'forms' ? await getFormsData(dataConfig) :
-                    assetType === 'pages' ? await getPagesData(dataConfig) :
-                        // assetType === 'comments' ? await getComments(dataConfig, false) :
-                                assetType === 'orders' ? await getOrders(dataConfig, process.env.NEXT_PUBLIC_PRODUCTION_URL) : null
-
-        if (ajaxRequestData) {
-            if (router.query.assetsType === 'orders') {
-                let ordersDataArr = []
-                // @ts-ignore
-                if (!ajaxRequestData.data.error) {
-                    setFinalPageData({
-                        ...finalPageData,
-                        // @ts-ignore
-                        ...ajaxRequestData.data.orders.map(orderData => {
-
-                            return {
-                                status: orderData?.status ?? 'empty',
-                                type: orderData?.type ?? 'empty',
-                                create_time: orderData?.payPalData?.create_time ?? 'empty',
-                                transactionId: orderData?.payPalData?.id ?? 'empty',
-                                paymentStatus: orderData?.payPalData?.status ?? 'empty',
-                                payer: orderData?.payPalData?.payer ?? 'empty',
-                                payerEmail: orderData?.payPalData?.payer?.email_address ?? 'empty',
-                                payerId: orderData?.payPalData?.payer?.payer_id ?? 'empty',
-                                payerName: orderData?.payPalData?.payer?.name?.given_name + ' ' + orderData?.payPalData?.payer?.name?.surname ?? 'empty',
-                                amount: orderData?.payPalData?.purchase_units?.amount?.value + ' ' + orderData?.payPalData?.purchase_units?.amount?.currency_code ?? 'empty',
-                                shippingName: orderData?.payPalData?.purchase_units?.shipping?.name?.full_name ?? 'empty',
-                                shippingAddress: JSON.stringify(orderData?.payPalData?.purchase_units?.shipping?.address) ?? 'empty',
-                            }
-                        })
-                    })
-
-                }
-            } else {
-                setFinalPageData({
-                    ...finalPageData,
-                    // @ts-ignore
-                    ...ajaxRequestData.data
-                })
-            }
+        } else if (assetType === 'comments') {
+            dispatch(adminGetComments(dataConfig))
+        } else if (assetType === 'forms') {
+            dispatch(adminGetForms(dataConfig))
+        } else if (assetType === 'pages') {
+            dispatch(adminGetPages(dataConfig))
+        } else if (assetType === 'orders') {
+            dispatch(adminGetOrders(dataConfig))
         }
     }
 
+    useEffect(() => {
+        getData()
+    }, [dataConfig]);
+
+    // const regetData = ()=>{
+    //     push({
+    //         pathname,
+    //         query:{...query,lastPageUpdate:Date.now()}
+    //     }).finally()
+    // }
+    //
 
     return (
         <AdminAssetPageStyledDiv className='admin-asset-page'>
 
-            <TableControls finalPageData={finalPageData}
-                           dataConfig={dataConfig}
-                           setDataConfig={setDataConfig}
+            <TableControls assetPageData={assetPageData}
                            selectedItems={selectedItems}
-                           setSelectedItems={setSelectedItems}/>
+                           setSelectedItems={setSelectedItems}
+            />
 
-            <TableHeader finalPageData={finalPageData} selectedItems={selectedItems}
-                         setSelectedItems={setSelectedItems}/>
-            <TableBody finalPageData={finalPageData} selectedItems={selectedItems}
-                       setSelectedItems={setSelectedItems}/>
+            <TableHeader selectedItems={selectedItems}
+                         setSelectedItems={setSelectedItems}
+                         assetPageData={assetPageData}
+            />
+            <TableBody assetPageData={assetPageData}
+                       selectedItems={selectedItems}
+                       setSelectedItems={setSelectedItems}
+            />
         </AdminAssetPageStyledDiv>
     );
 };
@@ -198,3 +139,112 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 export default assets;
 
+
+// const [dataConfig, setDataConfig] = useState(()=>{
+//     return {
+//         size: query.size ? parseInt(query.size as string) : 30,
+//         page: query.page ? parseInt(query.page as string) : 1,
+//         postType: query?.postType ?? null,
+//         fields: ['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt'],
+//         keyword: query?.keyword ?? '',
+//         author: query?.author ?? 'all',
+//         status: query?.status ?? 'all',
+//         sort: query?.sort ?? 'updatedAt',
+//         content: query?.content ?? 'all',
+//         metaType: query?.metaType || null,
+//         orderType: query?.orderType ?? 'all',
+//         metaId: query?.metaId || null,
+//         searchForImageIn: query?.type,
+//         startWith: '',
+//     }
+// })
+//
+// useEffect(() => {
+//     setDataConfig({
+//         size: query.size ? parseInt(query.size as string) : 30,
+//         page: query.page ? parseInt(query.page as string) : 1,
+//         postType: query?.postType ?? null,
+//         fields: ['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt'],
+//         keyword: query?.keyword ?? '',
+//         author: query?.author ?? 'all',
+//         status: query?.status ?? 'all',
+//         sort: query?.sort ?? 'updatedAt',
+//         content: query?.content ?? 'all',
+//         metaType: query?.metaType || null,
+//         orderType: query?.orderType ?? 'all',
+//         metaId: query?.metaId || null,
+//         searchForImageIn: query?.type,
+//         startWith: '',
+//     })
+// }, [pathname]);
+
+
+// const posts = useSelector((store: StoreTypes) => store?.adminPanelPosts?.posts)
+// const totalCount = useSelector((store: StoreTypes) => {
+//     return store?.adminPanelPosts?.totalCount || store?.adminPanelUsers?.totalCount
+// })
+// const users = useSelector((store: StoreTypes) => store?.adminPanelUsers?.users)
+// const comments = useSelector((store: StoreTypes) => store?.adminPanelComments?.comments)
+// const forms = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.forms)
+// const pages = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.pages)
+// const metas = useSelector((store: StoreTypes) => store?.adminPanelPosts?.metas)
+// const orders = useSelector((store: StoreTypes) => store?.adminPanelGlobalState?.orders)
+
+// useEffect(() => {
+//     setFinalPageData({
+//         ...finalPageData,
+//         posts: assetPageData.posts,
+//         totalCount: assetPageData.totalCount,
+//         users: assetPageData.users,
+//         comments: assetPageData.comments,
+//         forms: assetPageData.forms,
+//         pages: assetPageData.pages,
+//         metas: assetPageData.metas,
+//         orders: assetPageData.orders,
+//     })
+// }, [assetPageData.posts, assetPageData.users, assetPageData.forms, assetPageData.pages, assetPageData.metas, assetPageData.orders, assetPageData.totalCount, assetPageData.comments]);
+// const [finalPageData, setFinalPageData] = useState({});
+
+// const getAndSetAssetData = async () => {
+//     const assetType = query.assetsType
+// const ajaxRequestData =
+// assetType === 'pages' ? await getPagesData(dataConfig) :
+//        assetType === 'orders' ? await getOrders(dataConfig, process.env.NEXT_PUBLIC_PRODUCTION_URL) : null
+
+// if (ajaxRequestData) {
+//     if (query.assetsType === 'orders') {
+//         let ordersDataArr = []
+//         // @ts-ignore
+//         if (!ajaxRequestData.data.error) {
+//             setFinalPageData({
+//                 ...finalPageData,
+//                 // @ts-ignore
+//                 ...ajaxRequestData.data.orders.map(orderData => {
+//
+//                     return {
+//                         status: orderData?.status ?? 'empty',
+//                         type: orderData?.type ?? 'empty',
+//                         create_time: orderData?.payPalData?.create_time ?? 'empty',
+//                         transactionId: orderData?.payPalData?.id ?? 'empty',
+//                         paymentStatus: orderData?.payPalData?.status ?? 'empty',
+//                         payer: orderData?.payPalData?.payer ?? 'empty',
+//                         payerEmail: orderData?.payPalData?.payer?.email_address ?? 'empty',
+//                         payerId: orderData?.payPalData?.payer?.payer_id ?? 'empty',
+//                         payerName: orderData?.payPalData?.payer?.name?.given_name + ' ' + orderData?.payPalData?.payer?.name?.surname ?? 'empty',
+//                         amount: orderData?.payPalData?.purchase_units?.amount?.value + ' ' + orderData?.payPalData?.purchase_units?.amount?.currency_code ?? 'empty',
+//                         shippingName: orderData?.payPalData?.purchase_units?.shipping?.name?.full_name ?? 'empty',
+//                         shippingAddress: JSON.stringify(orderData?.payPalData?.purchase_units?.shipping?.address) ?? 'empty',
+//                     }
+//                 })
+//             })
+//
+//         }
+//     } else {
+//         setFinalPageData({
+//             ...finalPageData,
+//             // @ts-ignore
+//             ...ajaxRequestData.data
+//         })
+//     }
+// }
+// }

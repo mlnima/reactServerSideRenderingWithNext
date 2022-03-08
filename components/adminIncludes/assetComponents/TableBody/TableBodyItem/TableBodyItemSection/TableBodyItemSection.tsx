@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState, useContext, useRef, FC} from 'react';
 import RenderArraySection from './RenderArraySection';
 import moment from "moment";
 
@@ -30,88 +30,94 @@ let StyledDiv = styled.div`
   }
 
 `
-const TableBodyItemSection = props => {
+
+interface TableBodyItemSectionPropTypes{
+    dataValue:any,
+    dataName:string
+}
+
+const TableBodyItemSection: FC<TableBodyItemSectionPropTypes> = ({dataValue,dataName}) => {
 const [gotError,setGotError] = useState(false)
 
 
-    if (props.dataName === '_id') {
+    if (dataName === '_id') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue}</p>
+                <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'postedDate') {
+    } else if (dataName === 'postedDate') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue}</p>
+                <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'status') {
+    } else if (dataName === 'status') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue}</p>
+                <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'author') {
+    } else if (dataName === 'author') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue ?props.dataValue.username:'Private' || 'Private'}</p>
+                <p>{dataValue ?dataValue.username:'Private' || 'Private'}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'authorID') {
+    } else if (dataName === 'authorID') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue}</p>
+                <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'email') {
+    } else if (dataName === 'email') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue}</p>
+                <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'onDocument') {
+    } else if (dataName === 'onDocument') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue}</p>
+                <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'body') {
+    } else if (dataName === 'body') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue}</p>
+                <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'title') {
+    } else if (dataName === 'title') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{props.dataValue}</p>
+                <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (props.dataName === 'tags') {
+    } else if (dataName === 'tags') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <RenderArraySection data={props.dataValue}/>
+                <RenderArraySection data={dataValue}/>
             </StyledDiv>
         )
-    } else if (props.dataName === 'categories') {
+    } else if (dataName === 'categories') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <RenderArraySection data={props.dataValue}/>
+                <RenderArraySection data={dataValue}/>
             </StyledDiv>
         )
-    } else if (props.dataName === 'actors') {
+    } else if (dataName === 'actors') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <RenderArraySection data={props.dataValue}/>
+                <RenderArraySection data={dataValue}/>
             </StyledDiv>
         )
-    } else if (props.dataName === 'mainThumbnail'||props.dataName === 'noImageUrl'||props.dataName === 'imageUrl') {
+    } else if (dataName === 'mainThumbnail'||dataName === 'noImageUrl'||dataName === 'imageUrl') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
                 {gotError ?
                    <p>Error || No image</p>
-                :  <img src={props.dataValue} onError={(err)=>{
+                :  <img src={dataValue} onError={(err)=>{
                         // console.log(err)
                         setGotError(true)
                   }}/>
@@ -119,15 +125,15 @@ const [gotError,setGotError] = useState(false)
 
             </StyledDiv>
         )
-    } else if (props.dataName === 'createdAt'||props.dataName === 'updatedAt') {
+    } else if (dataName === 'createdAt'||dataName === 'updatedAt') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{moment(new Date(props.dataValue), "YYYYMMDD").fromNow(false)}</p>
+                <p>{moment(new Date(dataValue), "YYYYMMDD").fromNow(false)}</p>
             </StyledDiv>
         )
     } else return (
         <StyledDiv className='asset-page-table-body-item-section'>
-            <p>{props.dataValue}</p>
+            <p>{dataValue}</p>
         </StyledDiv>
     )
 
@@ -135,4 +141,4 @@ const [gotError,setGotError] = useState(false)
 export default TableBodyItemSection;
 
 
-//moment(new Date(this.props.message.createdAt), "YYYYMMDD").fromNow(false)
+//moment(new Date(this.message.createdAt), "YYYYMMDD").fromNow(false)

@@ -1,9 +1,8 @@
 import {FC, useState, useMemo, useEffect} from 'react';
 import dynamic from "next/dynamic";
 import styled from "styled-components";
-import {PostTypes} from "../../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import MobileCardImageRenderer from "../../../mobileAsset/MobileCardImageRenderer";
-
 const VideoCardInfo = dynamic(() => import('../MobileVideoCardInfo'));
 const MobileVideoCardTrailer = dynamic(() => import('./MobileVideoCardTrailer'), {ssr: false});
 
@@ -49,18 +48,6 @@ let MobileVideoCardMediaStyledDiv = styled.div`
   }
 `
 
-const NoImageStyleDiv = styled.div`
-  width: 100%;
-  height: calc(100% / 1.777);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  span {
-    color: var(--post-element-info-text-color, #ccc);
-  }
-`
-
 interface MobileVideoCardMediaPropTypes {
     post: PostTypes,
     mediaAlt: string,
@@ -75,14 +62,10 @@ interface MobileVideoCardMediaPropTypes {
 const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = (props) => {
 
     const [hover, setHover] = useState(false)
-    const [gotError, setGotError] = useState(false)
     const videoTrailerUrlSource = useMemo(() => props.post.videoTrailerUrl, [props.post])
 
     const hoverHandler = () => {
         hover ? setHover(false) : setHover(true)
-    }
-    const errorHandler = () => {
-        !gotError ? setGotError(true) : null
     }
 
     useEffect(() => {
@@ -99,13 +82,7 @@ const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = (props) => {
         )
     } else {
 
-        if (!props?.post.mainThumbnail || gotError) {
-            return (
-                <NoImageStyleDiv className='no-image'>
-                    <span className={'no-image-alt'}>{props.mediaAlt || 'NO IMAGE'}</span>
-                </NoImageStyleDiv>
-            )
-        } else return (
+        return (
 
             <MobileVideoCardMediaStyledDiv className={'mobile-video-card-media'}
                                            onMouseEnter={hoverHandler}
@@ -116,7 +93,6 @@ const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = (props) => {
                 <MobileCardImageRenderer imageUrl={props?.post.mainThumbnail}
                                          postsPerRawForMobile={props?.postsPerRawForMobile}
                                          mediaAlt={props.mediaAlt}
-                                         errorHandler={errorHandler}
                 />
                 <VideoCardInfo views={props.views}
                                rating={props.rating}

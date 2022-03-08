@@ -1,10 +1,9 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import styled from "styled-components";
 
 interface MobileCardImagePropTypes {
     imageUrl: string,
     mediaAlt: string,
-    errorHandler?: any,
     postsPerRawForMobile: number
 }
 
@@ -24,13 +23,13 @@ const MobileCardImage: FC<MobileCardImagePropTypes> =
          imageUrl,
          mediaAlt,
          postsPerRawForMobile,
-         errorHandler
      }) => {
+        const [gotError, setGotError] = useState(false)
         return (
-            <CardImageStyledImg src={imageUrl}
+            <CardImageStyledImg src={gotError || !imageUrl ? '/static/images/noImage/no-image-available.png' : imageUrl}
                                 alt={mediaAlt}
                                 postsPerRawForMobile={postsPerRawForMobile}
-                                onError={() => errorHandler ? errorHandler : null}
+                                onError={() => setGotError(true)}
             />
         )
     };

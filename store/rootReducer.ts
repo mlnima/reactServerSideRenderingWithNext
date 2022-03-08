@@ -9,16 +9,24 @@ import {adminPanelGlobalStateReducer} from "./adminReducers/adminPanelGlobalStat
 import {adminPanelPostsReducer} from "./adminReducers/adminPanelPostsReducer";
 import {adminPanelUsersReducer} from "./adminReducers/adminPanelUsersReducer";
 import {adminTerminalReducer} from "./adminReducers/adminTerminalReducer";
+import {adminPanelCommentsReducer} from "./adminReducers/adminCommentsReducer";
+import {adminPanelFormsReducer} from "./adminReducers/adminPanelFormsReducer";
+import {adminPanelPagesReducer} from "./adminReducers/adminPanelPagesReducer";
+import {adminPanelOrdersReducer} from "./adminReducers/adminPanelOrdersReducer";
 
 export default combineReducers({
-    adminPanelPosts:adminPanelPostsReducer,
-    adminPanelUsers:adminPanelUsersReducer,
-    adminPanelGlobalState:adminPanelGlobalStateReducer,
-    adminPanelTerminalState:adminTerminalReducer,
     chatroom:chatroomReducer,
     settings:settingsReducer,
     posts:postsReducer,
     user:userReducer,
     widgets:widgetsReducer,
-    globalState:globalStateReducer
+    globalState:globalStateReducer,
+    adminPanelPosts:adminPanelPostsReducer,
+    adminPanelForms:adminPanelFormsReducer,
+    adminPanelOrders:adminPanelOrdersReducer,
+    adminPanelPages:adminPanelPagesReducer,
+    adminPanelComments:adminPanelCommentsReducer,
+    adminPanelUsers:adminPanelUsersReducer,
+    adminPanelGlobalState:adminPanelGlobalStateReducer,
+    adminPanelTerminalState:adminTerminalReducer
 })

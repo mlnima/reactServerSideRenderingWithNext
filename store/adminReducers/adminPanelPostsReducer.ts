@@ -1,5 +1,5 @@
 import {AdminPanelPostsTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-
+import {CHANGE_ACTIVE_EDITING_LANGUAGE, NEW_POST} from "@store/types";
 import {
     ADMIN_EDIT_META,
     ADMIN_EDIT_POST,
@@ -8,8 +8,6 @@ import {
     ADMIN_GET_POST, ADMIN_GET_POSTS,
     ADMIN_SET_TOTAL_COUNT
 } from "../adminTypes";
-
-import {CHANGE_ACTIVE_EDITING_LANGUAGE, NEW_POST} from "@store/types";
 
 const initialState = {
     post: {

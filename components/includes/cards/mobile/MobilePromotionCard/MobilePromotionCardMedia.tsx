@@ -1,6 +1,6 @@
-import {FC, useState} from 'react';
+import {FC} from 'react';
 import styled from "styled-components";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import MobileCardImageRenderer from "../../mobileAsset/MobileCardImageRenderer";
 
 let MobilePromotionCardMediaStyledDiv = styled.div`
@@ -17,18 +17,6 @@ let MobilePromotionCardMediaStyledDiv = styled.div`
   }
 `
 
-const NoImageStyleDiv = styled.div`
-  width: 100%;
-  height: calc(100% / 1.777);
-  display: flex;
-  justify-content: center;
-  align-items: center;
-
-  span {
-    color: var(--post-element-info-text-color, #ccc);
-  }
-`
-
 interface MobilePromotionCardMediaPropTypes {
     post: PostTypes,
     mediaAlt: string,
@@ -42,27 +30,13 @@ const MobilePromotionCardMedia: FC<MobilePromotionCardMediaPropTypes> =
          postsPerRawForMobile,
      }) => {
 
-        const [gotError, setGotError] = useState(false)
-
-        const errorHandler = () => {
-            !gotError ? setGotError(true) : null
-        }
-
-        if (!post.mainThumbnail || gotError) {
-            return (
-                <NoImageStyleDiv className='no-image'>
-                    <span className={'no-image-alt'}>{mediaAlt || 'NO IMAGE'}</span>
-                </NoImageStyleDiv>
-            )
-        } else return (
+        return (
 
             <MobilePromotionCardMediaStyledDiv className={'mobile-promotion-card-media'}>
                 <MobileCardImageRenderer imageUrl={post.mainThumbnail}
                                          postsPerRawForMobile={postsPerRawForMobile}
                                          mediaAlt={mediaAlt}
-                                         errorHandler={errorHandler}
                 />
-
             </MobilePromotionCardMediaStyledDiv>
         )
 

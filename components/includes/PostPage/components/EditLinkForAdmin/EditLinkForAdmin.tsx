@@ -1,11 +1,12 @@
 import styled from "styled-components";
-import {adminBulkActionPost} from "../../../../../store/adminActions/adminPanelPostsActions";
+import {adminBulkActionPost} from "@store/adminActions/adminPanelPostsActions";
 import React from "react";
 import {useRouter} from "next/router";
 import {useDispatch} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEllipsisV} from "@fortawesome/free-solid-svg-icons/faEllipsisV";
 import Draggable from 'react-draggable';
+import {reloadPageDataByAddingQuery} from "@store/adminActions/adminPanelGlobalStateActions";
 
 const EditLinkForAdminStyledDiv = styled.div`
   display: flex;
@@ -39,7 +40,13 @@ interface EditLinkForAdminPropTypes{
 }
 
 const EditLinkForAdmin = ({_id,status}:EditLinkForAdminPropTypes) => {
-    const router = useRouter()
+    const {query, push, pathname} = useRouter()
+
+    const onStatusChangeHandler = (status)=>{
+        dispatch(adminBulkActionPost([_id], status))
+        dispatch(reloadPageDataByAddingQuery(query, push, pathname))
+    }
+
     const dispatch = useDispatch()
         return (
             <Draggable handle=".edit-as-admin-handler">
@@ -50,16 +57,16 @@ const EditLinkForAdmin = ({_id,status}:EditLinkForAdminPropTypes) => {
                     <a className='btn btn-primary' href={`/profile/post?id=${_id}`} target='_blank'>
                         Edit As Author (Beta)
                     </a>
-                    <span className={'btn btn-danger'} onClick={() => dispatch(adminBulkActionPost([_id], 'trash',router))}>
+                    <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>
                         Trash
                     </span>
-                    <span className={'btn btn-info'} onClick={() => dispatch(adminBulkActionPost([_id], 'draft',router))}>
+                    <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>
                         Draft
                     </span>
-                    <span className={'btn btn-info'} onClick={() => dispatch(adminBulkActionPost([_id], 'pending',router))}>
+                    <span className={'btn btn-info'}  onClick={() => onStatusChangeHandler('pending')}>
                         Pending
                     </span>
-                    <span className={'btn btn-primary'} onClick={() => dispatch(adminBulkActionPost([_id], 'published',router))}>
+                    <span className={'btn btn-primary'}  onClick={() => onStatusChangeHandler('published')}>
                         Publish
                     </span>
                     <h4 className='status'>Status : {status}</h4>

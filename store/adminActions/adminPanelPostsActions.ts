@@ -1,4 +1,5 @@
-import axios, {AxiosResponse, AxiosError} from "axios";
+import {AxiosResponse, AxiosError} from "axios";
+import Axios from "@_variables/util/Axios";
 import {AxiosErrorTypes, Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {
@@ -18,7 +19,7 @@ export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) =
         payload: true
     })
     if (_id) {
-        await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
+        await Axios.get( `/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 dispatch({
                     type: ADMIN_GET_POST,
@@ -48,10 +49,9 @@ export const adminGetPosts = (queriesData?: string) => async (dispatch: any) => 
         type: LOADING,
         payload: true
     })
-    await axios.get(
-        `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
+    await Axios.get(
+        `/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
         .then((res: AxiosResponse<any>) => {
-            console.log(res.data)
             dispatch({
                 type: ADMIN_GET_POSTS,
                 payload: res.data?.posts
@@ -82,7 +82,7 @@ export const adminUpdatePost = (data?: PostTypes) => async (dispatch: any) => {
         postData: data,
         token: localStorage.wt
     }
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/updatePost`, body)
+    await Axios.post( `/api/admin/posts/updatePost`, body)
         .then((res: AxiosResponse<any>) => {
             dispatch({
                 type: SET_ALERT,
@@ -106,7 +106,7 @@ export const adminSaveNewPost = (data?: PostTypes, router?: any) => async (dispa
         postData: data,
         token: localStorage.wt
     };
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/createNewPost`, body)
+    await Axios.post(`/api/admin/posts/createNewPost`, body)
         .then((res: AxiosResponse<any>) => {
             dispatch({
                 type: SET_ALERT,
@@ -164,7 +164,7 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
             type: LOADING,
             payload: true
         })
-        await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getMeta?_id=${_id}&token=${localStorage.wt}`)
+        await Axios.get(`/api/admin/posts/getMeta?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 if (res?.data?.meta) {
 
@@ -201,7 +201,7 @@ export const adminGetMetas = (queries: string | string[] | undefined) => async (
             type: LOADING,
             payload: true
         })
-        await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getMetas${queries}&token=${localStorage.wt}`)
+        await Axios.get(`/api/admin/posts/getMetas${queries}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
                 // console.log(res.data?.metas)
                 dispatch({
@@ -243,7 +243,7 @@ export const adminDeleteMeta = (_id: string | string[]) => async (dispatch: any)
         _id,
         token: localStorage.wt
     };
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/deleteMeta`, body)
+    await Axios.post( `/api/admin/posts/deleteMeta`, body)
         .then((res: AxiosResponse<any>) => {
             dispatch({
                 type: SET_ALERT,
@@ -273,7 +273,7 @@ export const adminUpdateMeta = (data: Meta) => async (dispatch: any) => {
         data,
         token: localStorage.wt
     };
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/updateMeta`, body)
+    await Axios.post(`/api/admin/posts/updateMeta`, body)
         .then((res: AxiosResponse<any>) => {
 
             dispatch({
@@ -296,7 +296,7 @@ export const adminUpdateMeta = (data: Meta) => async (dispatch: any) => {
 }
 
 
-export const adminBulkActionPost = (ids: string[], status: string, router) => (dispatch: any) => {
+export const adminBulkActionPost = (ids: string[], status: string) => (dispatch: any) => {
     dispatch({
         type: LOADING,
         payload: true
@@ -306,7 +306,7 @@ export const adminBulkActionPost = (ids: string[], status: string, router) => (d
         status,
         token: localStorage.wt
     };
-    axios.post('/api/admin/posts/postsBulkAction', body).then((res: AxiosResponse<any>) => {
+    Axios.post('/api/admin/posts/postsBulkAction', body).then((res: AxiosResponse<any>) => {
         dispatch({
             type: SET_ALERT,
             payload: {message: res.data?.message, type: 'success'}
@@ -321,13 +321,6 @@ export const adminBulkActionPost = (ids: string[], status: string, router) => (d
             type: LOADING,
             payload: false
         })
-        if (router) {
-            router?.push({
-                pathname: router?.pathname,
-                query: {...router.query, lastPageUpdate: Date.now()}
-            })
-        }
-
     })
 
 }
@@ -337,7 +330,7 @@ export const adminCheckAndRemoveDeletedVideos = () => async (dispatch: any) => {
         type: LOADING,
         payload: true
     })
-    await axios.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`)
+    await Axios.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`)
         .then((res: AxiosResponse<any>) => {
             dispatch({
                 type: SET_ALERT,
@@ -361,7 +354,7 @@ export const setMetaThumbnailsAndCount = (type?: string) => async (dispatch: any
         type: LOADING,
         payload: true
     })
-    await axios.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
+    await Axios.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
         .then((res: AxiosResponse<any>) => {
             dispatch({
                 type: SET_ALERT,
@@ -387,7 +380,7 @@ export const importPosts = (posts: PostTypes[]) => async (dispatch: any) => {
         type: LOADING,
         payload: true
     })
-    await axios.post(`/api/admin/posts/adminImportPosts`, {
+    await Axios.post(`/api/admin/posts/adminImportPosts`, {
         posts,
         token: localStorage.wt
     }).then((res: AxiosResponse<any>) => {

@@ -1,5 +1,5 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
-import {PostTypes} from "./PostTypes";
+import {Comment, PostTypes} from "./PostTypes";
 import {AdminPanelUsersState} from "../../store/adminReducers/adminPanelUsersReducer";
 
 
@@ -290,6 +290,26 @@ export interface AdminPanelPostsTypes {
     activeEditingLanguage: string
 }
 
+export interface AdminPanelCommentsTypes {
+    comments:Comment[],
+    comment:Comment
+}
+
+export interface AdminPanelFormsTypes {
+    forms:any[],
+    form:any
+}
+
+export interface AdminPanelPagesTypes {
+    pages:any[],
+    page:any
+}
+
+export interface AdminPanelOrdersTypes {
+    orders:any[],
+    order:any
+}
+
 export interface AdminPanelGlobalState {
     customPages: string[],
     users: User[],
@@ -307,6 +327,10 @@ export interface AdminPanelTerminalState{
 }
 
 export interface StoreTypes {
+    adminPanelComments: AdminPanelCommentsTypes;
+    adminPanelForms: AdminPanelFormsTypes;
+    adminPanelPages: AdminPanelPagesTypes;
+    adminPanelOrders: AdminPanelOrdersTypes;
     adminPanelUsers: AdminPanelUsersState,
     adminPanelGlobalState: AdminPanelGlobalState,
     adminPanelPosts: AdminPanelPostsTypes,

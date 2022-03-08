@@ -1,4 +1,4 @@
-import {FC} from 'react'
+import {FC, useState} from 'react'
 import Image from 'next/image'
 import styled from "styled-components";
 
@@ -6,7 +6,6 @@ interface MobileCardImageNextStyledDiv {
     imageUrl: string,
     mediaAlt: string,
     postsPerRawForMobile?: number,
-    errorHandler?: any,
 }
 
 interface MobileCardImageNextStylePropTypes {
@@ -23,18 +22,19 @@ const MobileCardImageNext: FC<MobileCardImageNextStyledDiv> =
          imageUrl,
          mediaAlt,
          postsPerRawForMobile,
-         errorHandler
      }) => {
+
+        const [gotError, setGotError] = useState(false)
 
         return (
             <MobileCardImageNextStyledDiv postsPerRawForMobile={postsPerRawForMobile}>
-                <Image src={imageUrl}
+                <Image src={gotError || !imageUrl ? '/static/images/noImage/no-image-available.png' : imageUrl}
                        alt={mediaAlt}
                        loading={'lazy'}
                        layout={'fill'}
                        quality={80}
                        objectFit={'contain'}
-                       onError={() => errorHandler ? errorHandler : null}
+                       onError={() => setGotError(true)}
                 />
             </MobileCardImageNextStyledDiv>
         )
