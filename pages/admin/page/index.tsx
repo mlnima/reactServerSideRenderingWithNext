@@ -1,11 +1,18 @@
-import React, {ChangeEvent, useEffect, useState} from 'react';
-import {saveNewPage, getPageData, updatePage} from "../../../_variables/ajaxVariables";
+import React, {ChangeEvent, useEffect} from 'react';
 import {useRouter} from 'next/router'
 import Editor from "@monaco-editor/react";
 import styled from "styled-components";
-import {wrapper} from "../../../store/store";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import Head from "next/head";
+import {useSelector, useDispatch} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {
+    adminEditPageField,
+    adminGetPage,
+    adminSaveNewPage,
+    adminUpdatePage
+} from "@store/adminActions/adminPanelPagesActions";
 
 let AdminEditCustomPageStyledDiv = styled.div`
   input {
@@ -14,117 +21,74 @@ let AdminEditCustomPageStyledDiv = styled.div`
   }
 `
 
-
-//**********TS is not applied here correctly *********
 const page = (props: any) => {
-    const router = useRouter()
-    const [state, setState] = useState({
-        pageName: '',
-        sidebar: true,
-        status: 'publish',
-        imageUrl: '',
-        pageStyle: ''
-
-    });
+    const {query,push} = useRouter()
+    const dispatch = useDispatch()
+    const pageData = useSelector(({adminPanelPages}: StoreTypes) => adminPanelPages.page)
 
     useEffect(() => {
-        if (router.query.id) {
-            getPageData({id: router.query.id}).then(res => {
-                // @ts-ignore
-                if (res?.data?.pageData) {
-                    // @ts-ignore
-                    setState({
-                        ...state,
-                        // @ts-ignore
-                        ...res.data.pageData
-                    })
-                }
-
-            })
+        if (query.id) {
+            dispatch(adminGetPage(query.id))
         }
-
     }, [props]);
 
-
     const onChangeHandler = (e: ChangeEvent<HTMLInputElement> | ChangeEvent<HTMLSelectElement>) => {
-        setState({
-            ...state,
-            [e.target.name]: e.target.value
-        })
+        dispatch(adminEditPageField({[e.target.name]: e.target.value}))
     }
 
-
     const onStyleChangeHandler = (value: string) => {
-        setState({
-            ...state,
-            pageStyle: value
-        })
+        dispatch(adminEditPageField({pageStyle: value}))
     }
 
     const onSaveHandler = () => {
-        if (router.query.id) {
-
-            updatePage({pageData: state}).then(res => {
-
-            })
+        if (query.id) {
+            dispatch(adminUpdatePage(pageData))
         } else {
-            saveNewPage({pageData: {...state, pageName: state.pageName.replace(' ', '')}}).then(res => {
-                // @ts-ignore
-                const pageId = res.data.savedPageData._id
-                router.push(`/admin/page?id=${pageId}`)
-
-            })
+            dispatch(adminSaveNewPage(pageData,push))
         }
-
     }
 
-
-    // @ts-ignore
     return (
         <>
             <Head>
                 <link
-                    rel="stylesheet"
-                    type="text/css"
-                    data-name="vs/editor/editor.main"
-                    href="https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css"
+                    rel={'stylesheet'}
+                    type={'text/css'}
+                    data-name={'vs/editor/editor.main'}
+                    href={'https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css'}
                 />
             </Head>
 
+            <a href={'/admin/page?new=1'} className={'btn btn-primary'} >New Page</a>
 
-        <AdminEditCustomPageStyledDiv className='page-container'>
-            <p>Page Name (without Space):</p>
-            <input name='pageName' placeholder='page name' value={state.pageName} onChange={e => onChangeHandler(e)}/>
-            <p>Sidebar:</p>
-            <select name='sidebar'
-                    onChange={e => onChangeHandler(e)}
-                // @ts-ignore
-                    value={state.sidebar}
-            >
-                <option value='left'>Left</option>
-                <option value='right'>Right</option>
-                <option value='both'>Both</option>
-                <option value='false'>No</option>
-            </select>
-            <p>status:</p>
-            <select name='status' onChange={e => onChangeHandler(e)} value={state.status}>
-                <option value='publish'>Publish</option>
-                <option value='draft'>Draft</option>
-                <option value='trash'>Trash</option>
-            </select>
-            <Editor
-                language='scss'
-                width={props.width || '100%'}
-                height={props.height || '80vh'}
-                theme="vs-dark"
-                defaultValue={state.pageStyle || ''}
-                value={state.pageStyle || ''}
-                // @ts-ignore
-                onChange={onStyleChangeHandler}
-                //className='style-section-editor'
-            />
-            <button onClick={onSaveHandler}>Save</button>
-        </AdminEditCustomPageStyledDiv>
+            <AdminEditCustomPageStyledDiv className={'page-container'}>
+                <p>Page Name (without Space):</p>
+                <input name={'pageName'} placeholder={'page name'} value={pageData.pageName}
+                       onChange={e => onChangeHandler(e)}/>
+                <p>Sidebar:</p>
+                <select name={'sidebar'} onChange={e => onChangeHandler(e)} value={pageData.sidebar}>
+                    <option value={'left'}>Left</option>
+                    <option value={'right'}>Right</option>
+                    <option value={'both'}>Both</option>
+                    <option value={'false'}>No</option>
+                </select>
+                <p>status:</p>
+                <select name={'status'} onChange={e => onChangeHandler(e)} value={pageData.status}>
+                    <option value={'publish'}>Publish</option>
+                    <option value={'draft'}>Draft</option>
+                    <option value={'trash'}>Trash</option>
+                </select>
+                <Editor
+                    language={'scss'}
+                    width={props.width || '100%'}
+                    height={props.height || '80vh'}
+                    theme={'vs-dark'}
+                    defaultValue={pageData.pageStyle || ''}
+                    value={pageData.pageStyle || ''}
+                    onChange={onStyleChangeHandler}
+                />
+                <button onClick={onSaveHandler}>Save</button>
+            </AdminEditCustomPageStyledDiv>
 
         </>
     );

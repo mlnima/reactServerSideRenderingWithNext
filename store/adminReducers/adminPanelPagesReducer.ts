@@ -1,5 +1,5 @@
 import {AdminPanelPagesTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {ADMIN_GET_PAGES, ADMIN_GET_PAGE} from "@store/adminTypes";
+import {ADMIN_GET_PAGES, ADMIN_GET_PAGE, ADMIN_EDIT_PAGE_FIELD} from "@store/adminTypes";
 
 const initialState = {
     pages:[],
@@ -17,6 +17,14 @@ export const adminPanelPagesReducer = (state: AdminPanelPagesTypes = initialStat
             return {
                 ...state,
                 page: action.payload
+            };
+        case ADMIN_EDIT_PAGE_FIELD:
+            return {
+                ...state,
+                page: {
+                    ...state.page,
+                    ...action.payload
+                }
             };
         default:
             return state

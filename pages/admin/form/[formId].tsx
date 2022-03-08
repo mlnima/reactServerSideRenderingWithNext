@@ -1,10 +1,11 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import {getFormData} from "../../../_variables/ajaxVariables";
+import {useEffect} from 'react';
 import {useRouter} from "next/router";
-
 import styled from "styled-components";
-import {wrapper} from "../../../store/store";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {useDispatch, useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {adminDeleteForm, adminGetForm} from "@store/adminActions/adminPanelFormsActions";
 
 let StyledDiv = styled.div`
   .form-data-container {
@@ -28,80 +29,37 @@ let StyledDiv = styled.div`
 `
 
 const formPage = () => {
-    const router = useRouter()
-    const [state, setState] = useState({
-        formData: {
-            data: {}
-        }
-    });
-
+    const {pathname, query,push} = useRouter()
+    const dispatch = useDispatch()
+    const formData = useSelector(({adminPanelForms}: StoreTypes) => adminPanelForms.form)
 
     useEffect(() => {
-        const requestBody = {
-            _id: router.query.formId,
-        };
-        getFormData(requestBody).then(res => {
-            // @ts-ignore
-            if (res?.data?.form) {
-                setState({
-                    ...state,
-                    // @ts-ignore
-                    formData: res?.data?.form
-                })
-            }
-        })
+        dispatch(adminGetForm(query.formId))
+    }, [pathname]);
 
-
-    }, [router.pathname]);
-
-    const renderData = (Object.keys(state.formData.data) || []).map(fieldData => {
-
-
-        return (
-            <div className='form-field-data'>
-                <h3>{fieldData} :</h3>
-
-                    {/*// @ts-ignore*/}
-                <p>{state.formData.data[fieldData]}</p>
-            </div>
-        )
-    })
+    const onDeleteHandler = ()=>{
+        dispatch(adminDeleteForm(query.formId))
+        push('/admin/assets?assetsType=forms').finally()
+    }
 
     return (
         <StyledDiv>
-            {/*// @ts-ignore*/}
-            <h1>{state.formData.formName}</h1>
-            {/*// @ts-ignore*/}
-            <span>{state.formData.date}</span>
+            <h1>{formData?.formName}</h1>
+            <span>{formData?.date}</span>
             <div className='form-data-container'>
-                {renderData}
+                {(formData?.data ? Object.keys(formData?.data) : []).map(fieldData => {
+                    return (
+                        <div className='form-field-data'>
+                            <h3>{fieldData} :</h3>
+                            <p>{formData?.data?.[fieldData]}</p>
+                        </div>
+                    )
+                })}
             </div>
-
+            <button onClick={onDeleteHandler}>Delete</button>
         </StyledDiv>
     );
 };
-
-// formPage.getInitialProps = async ({query, req}) => {
-//     const domainName = req ? await getAbsolutePath(req) : '';
-//     let formData;
-//     let form;
-//     const requestBody = {
-//         _id: query.id,
-//     };
-//     formData = await getSingleFormData(requestBody,domainName)
-//     return {formData:formData.data ?formData.data:{},query}
-// };
-// export const getServerSideProps = async ({req,query}) => {
-//     // const domainName = req ? await getAbsolutePath(req) : '';
-//     // // let formData;
-//     // // let form;
-//     // // const requestBody = {
-//     // //     _id: query.id,
-//     // // };
-//     // // formData = await getSingleFormData(requestBody,domainName)
-//     return {props: {formData: formData.data ? formData.data : {}, query}}
-// }
-
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
@@ -110,6 +68,5 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         }
     }
 })
-
 
 export default formPage;

@@ -1,12 +1,12 @@
 import {useEffect, useState, useRef, ChangeEvent} from 'react';
-import {getSetting, youtubeDataScrapper} from '../../../../_variables/ajaxVariables'
+import {youtubeDataScrapper} from '@_variables/ajaxVariables'
 
-import {savePost} from '../../../../_variables/ajaxPostsVariables'
+import {savePost} from '@_variables/ajaxPostsVariables'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
-import {setAlert, setLoading} from "../../../../store/clientActions/globalStateActions";
-import {updateSetting} from "../../../../store/clientActions/settingsActions";
-import {wrapper} from "../../../../store/store";
+import {setAlert, setLoading} from "@store/clientActions/globalStateActions";
+import {updateSetting} from "@store/clientActions/settingsActions";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 let StyledDiv = styled.div`
@@ -130,17 +130,17 @@ const youtube = () => {
         setState({...state, [e.target.name]: e.target.value})
     }
 
-    useEffect(() => {
-        // @ts-ignore
-        getSetting('youtubeApiKey', window.location.origin, false, 'youtubeImporter').then(res => {
-            // @ts-ignore
-            const apiKeyData = res.data.setting ? res.data.setting.data.apiKey : ''
-            setState({
-                ...state,
-                apiKey: apiKeyData
-            })
-        })
-    }, []);
+    // useEffect(() => {
+    //     // @ts-ignore
+    //     getSetting('youtubeApiKey', window.location.origin, false, 'youtubeImporter').then(res => {
+    //         // @ts-ignore
+    //         const apiKeyData = res.data.setting ? res.data.setting.data.apiKey : ''
+    //         setState({
+    //             ...state,
+    //             apiKey: apiKeyData
+    //         })
+    //     })
+    // }, []);
 
     return (
         <StyledDiv>

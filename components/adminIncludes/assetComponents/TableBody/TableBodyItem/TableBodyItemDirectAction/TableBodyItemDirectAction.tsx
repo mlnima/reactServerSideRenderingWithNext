@@ -5,6 +5,7 @@ import {deletePage} from "@_variables/ajaxVariables";
 import {useDispatch} from "react-redux";
 import {adminBulkActionPost, adminDeleteMeta} from "@store/adminActions/adminPanelPostsActions";
 import {reloadPageDataByAddingQuery} from "@store/adminActions/adminPanelGlobalStateActions";
+import {adminDeleteForm} from "@store/adminActions/adminPanelFormsActions";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -92,7 +93,10 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
         return (
             <div className='asset-page-table-body-item-hover-item'>
                 <Link href={'/admin/form/' + _id}><a>Edit</a></Link>
-                <span className={'btn btn-danger'} onClick={() => dispatch(adminDeleteMeta(_id))}>Delete</span>
+                <span className={'btn btn-danger'} onClick={() => {
+                    dispatch(adminDeleteForm(_id))
+                    reGetData()
+                }}>Delete</span>
             </div>
         );
     } else if (assetsType === 'pages') {
