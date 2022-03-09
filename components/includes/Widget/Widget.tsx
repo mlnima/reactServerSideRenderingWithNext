@@ -128,6 +128,7 @@ const Widget: FC<WidgetComponentPropTypes> =
             {data?.pagination && data?.redirectLink ?
                 <WidgetPagination baseUrl={data.redirectLink}
                                   totalCount={data.uniqueData.totalCount}
+                                  count={data?.count}
                 />
                 : null
             }

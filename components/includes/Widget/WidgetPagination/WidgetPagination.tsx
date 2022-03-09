@@ -22,10 +22,11 @@ const WidgetPaginationStyledDiv = styled.div`
 
 interface WidgetPaginationPropTypes {
     baseUrl: string,
-    totalCount: number
+    totalCount: number,
+    count:number
 }
 
-const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount}) => {
+const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,count}) => {
     const postsCountPerPage = useSelector((store:StoreTypes) => {
         return store?.settings?.identity?.postsCountPerPage ?
               // @ts-ignore
@@ -44,8 +45,12 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount}) 
                         <a
                             className='pagination-item'
                             style={{
-                                backgroundColor: pageNumber === 1 ? 'var(--main-active-color,#f90)' : 'var(--navigation-background-color,#18181b)',
-                                color: pageNumber === 1 ? 'var(--navigation-background-color,#18181b)' : 'var(--navigation-text-color,#ccc)'
+                                backgroundColor: pageNumber === 1 && postsCountPerPage === count?
+                                                 'var(--main-active-color,#f90)' :
+                                                 'var(--navigation-background-color,#18181b)',
+                                color: pageNumber === 1 && postsCountPerPage === count ?
+                                       'var(--navigation-background-color,#18181b)' :
+                                       'var(--navigation-text-color,#ccc)'
                             }}
                         >
                             {pageNumber}

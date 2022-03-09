@@ -156,7 +156,8 @@ export interface WidgetDataPropTypes {
     deviceTypeToRender: string,
     languageToRender: string,
     editMode: boolean,
-    widgetIndex: number
+    widgetIndex: number,
+    count: number,
 }
 
 export interface MetasPropTypes {
