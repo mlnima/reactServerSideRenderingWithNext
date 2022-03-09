@@ -6,6 +6,7 @@ import {useDispatch} from "react-redux";
 import {adminBulkActionPost, adminDeleteMeta} from "@store/adminActions/adminPanelPostsActions";
 import {reloadPageDataByAddingQuery} from "@store/adminActions/adminPanelGlobalStateActions";
 import {adminDeleteForm} from "@store/adminActions/adminPanelFormsActions";
+import {adminDeleteComments} from "@store/adminActions/adminPanelCommentsActions";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -80,7 +81,12 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     } else if (assetsType === 'comments') {
         return (
             <div className='asset-page-table-body-item-hover-item'>
-                comments
+                <button className={'btn btn-danger'} onClick={()=>{
+                    dispatch(adminDeleteComments([_id]))
+                    reGetData()
+                }}>
+                    Delete
+                </button>
             </div>
         );
     } else if (assetsType === 'metas') {

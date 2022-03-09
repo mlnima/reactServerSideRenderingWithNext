@@ -3,7 +3,7 @@ import AdminRenderComments from '../../../components/adminIncludes/commentsPageC
 import AdminCommentsControl from '../../../components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl'
 import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
 import {useRouter} from "next/router";
-import {wrapper} from "../../../store/store";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 
 const comments = (props:any) => {

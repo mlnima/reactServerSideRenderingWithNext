@@ -119,7 +119,6 @@ export const userCreateNewPost = (data: PostTypes,router) => async dispatch => {
         token: localStorage.wt
     };
     await Axios.post(  `/api/v1/posts/userCreateNewPost`, body).then(res => {
-        console.log(res.data)
         dispatch({
             type: GET_EDITING_POST,
             payload: res.data.post
@@ -215,7 +214,7 @@ export const getMetas = (data,metaType,cache) => async dispatch =>{
     })
 }
 
-export const getComments = async (_id: string) => async dispatch => {
+export const getComments =  (_id: string) => async dispatch => {
     // @ts-ignore
     await Axios.get(`/api/v1/posts/getComments?onDocument=${_id}`).then(res => {
         dispatch({

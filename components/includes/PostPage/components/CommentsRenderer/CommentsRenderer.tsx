@@ -1,6 +1,8 @@
 import Comment from "./Comment/Comment";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {FC} from "react";
 
 const CommentsRendererStyledDiv = styled.div`
   display: flex;
@@ -11,9 +13,9 @@ const CommentsRendererStyledDiv = styled.div`
   max-width: 90%;
   padding: 5px;
 `
-const CommentsRenderer = () => {
+const CommentsRenderer :FC = () => {
 
-    const comments = useSelector(store => store?.posts?.post?.comments)
+    const comments = useSelector(({posts}:StoreTypes) => posts?.post?.comments)
 
     return (
         <CommentsRendererStyledDiv className='comments'>

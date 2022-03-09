@@ -24,7 +24,9 @@ const initialState = {
     categoryData: {},
     tagData: {},
     totalCount: 0,
-    post: {},
+    post: {
+        comments:  []
+    },
     editingPost:{},
     comments: [],
     categoriesMetas:[],
@@ -77,19 +79,29 @@ export const postsReducer = (state = initialState, action) => {
         case  GET_COMMENTS:
             return {
                 ...state,
-                comments:action.payload,
+                post:{
+                    ...state.post,
+                    comments: action.payload || []
+                }
+
             }
         case  NEW_COMMENT:
-            const commentsPlusNewComment = [...state.comments, action.payload]
+            const commentsPlusNewComment = [...(state.post?.comments || []), action.payload]
             return {
                 ...state,
-                comments: commentsPlusNewComment.sort((a, b) => a.createdAt > b.createdAt ? -1 : 1)
+                post:{
+                    ...state.post,
+                    comments: commentsPlusNewComment.sort((a, b) => a.createdAt > b.createdAt ? -1 : 1) || []
+                }
             }
         case  DELETE_COMMENT:
-            const updatedComments = state.comments.filter(comment => !action.payload.includes(comment._id))
+            const updatedComments = (state.post?.comments || []).filter(comment => !action.payload.includes(comment._id))
             return {
                 ...state,
-                comments: updatedComments
+                post:{
+                    ...state.post,
+                    comments: updatedComments
+                }
             }
         case  SET_POST:
             return {

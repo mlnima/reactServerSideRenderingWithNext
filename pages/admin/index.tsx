@@ -80,7 +80,6 @@ const AdminHomePage = () => {
     useEffect(() => {
 
         socket.on('takeSocketLists', (socketsCount: number) => {
-            console.log(socketsCount)
             setState({
                 ...state,
                 socketsCount

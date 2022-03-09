@@ -33,9 +33,6 @@ const users = () => {
         dispatch(adminGetUsers(dataConfig))
     }, []);
 
-    useEffect(() => {
-        console.log(usersData)
-    }, [usersData]);
 
     return (
 

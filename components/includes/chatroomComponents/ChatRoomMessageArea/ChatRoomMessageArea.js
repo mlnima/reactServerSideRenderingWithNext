@@ -32,10 +32,6 @@ const ChatRoomMessageArea = () => {
         })
     }, [chatroomMessages]);
 
-    useEffect(() => {
-        console.log(chatroomMessages)
-    }, [chatroomMessages]);
-
 
     const onShowProfileHandler = (username, _id, profileImage) => {
         dispatch(setActiveVisibleProfile({

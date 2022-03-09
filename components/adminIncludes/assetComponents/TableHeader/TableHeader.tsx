@@ -1,7 +1,8 @@
-import {useEffect, useState, useRef, FC} from 'react';
+import {useEffect, useState, useRef, FC, useMemo} from 'react';
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import tableItemProperties from "@components/adminIncludes/assetComponents/tableBodyItemProperties";
 
 const TableHeaderStyledDiv = styled.div`
   padding: 10px;
@@ -33,63 +34,15 @@ const TableHeader : FC<TableHeaderPropType> = props => {
     
     const selectAllCheckBox = useRef(null)
     const {query} = useRouter()
-    
-    const [state, setState] = useState({
-        items: []
-    });
-    
-    useEffect(() => {
-        if (query.assetsType === 'posts') {
-            let items = ['title', 'author', 'status', 'tags', 'categories', 'mainThumbnail', 'createdAt', 'updatedAt']
-            setState({
-                ...state,
-                items,
-            })
-        } else if (query.assetsType === 'users') {
-            let items = ['username', 'email', 'role', 'createdAt', 'updatedAt']
-            setState({
-                ...state,
-                items,
-            })
-        } else if (query.assetsType === 'comments') {
-            let items = ['author', 'body', 'onDocument', 'email', 'createdAt', 'updatedAt']
-            setState({
-                ...state,
-                items,
-            })
-        } else if (query.assetsType === 'metas') {
-            let items = ['name', 'description', 'type', 'count', 'image', 'createdAt', 'updatedAt']
-            setState({
-                ...state,
-                items,
-            })
-        } else if (query.assetsType === 'forms') {
-            let items = ['formName', 'widgetId', 'createdAt', 'updatedAt']
-            setState({
-                ...state,
-                items,
-            })
-        } else if (query.assetsType === 'pages') {
-            let items = ['pageName', 'status', 'sidebar', 'createdAt', 'updatedAt']
-            setState({
-                ...state,
-                items,
-            })
-        } else if (query.assetsType === 'orders') {
-            let items = ['buyer', 'status', 'type', 'isPaid', 'createdAt', 'updatedAt']
-            setState({
-                ...state,
-                items,
-            })
-        }
 
-    }, [query.page, query.assetsType]);
+    const items = useMemo(()=>{
+        return query?.assetsType ? tableItemProperties?.[query?.assetsType as string] : []
+    },[query.page, query.assetsType])
 
     useEffect(() => {
         if (props.selectedItems.length === 0) {
             selectAllCheckBox.current.checked = false
         }
-
     }, [props.selectedItems]);
 
     const onSelectChangeHandler = e => {
@@ -98,7 +51,7 @@ const TableHeader : FC<TableHeaderPropType> = props => {
             props.setSelectedItems([])
     }
 
-    const renderHeaderItems = state.items.map(item => {
+    const renderHeaderItems = items.map(item => {
         return (
             <p key={item} className='asset-page-table-header-item'>
                 {convertVariableNameToName(item)}

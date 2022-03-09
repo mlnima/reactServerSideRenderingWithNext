@@ -1,10 +1,11 @@
-import {useRef } from 'react';
-import {newComment } from '../../../../../_variables/ajaxPostsVariables';
+import {FC, useRef} from 'react';
+import {newComment } from '@_variables/ajaxPostsVariables';
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../../../../store/clientActions/globalStateActions";
-import {addNewComment} from "../../../../../store/clientActions/postsAction";
+import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import {addNewComment} from "@store/clientActions/postsAction";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const CommentFromStyledForm = styled.form`
  
@@ -39,10 +40,14 @@ const CommentFromStyledForm = styled.form`
   }
 `
 
-const CommentFrom = props => {
+interface CommentFromPropTypes{
+    documentId:string
+}
+
+const CommentFrom:FC<CommentFromPropTypes> = props => {
     const {t} = useTranslation('common');
     const dispatch = useDispatch()
-    const userData = useSelector(store => store?.user?.userData)
+    const userData = useSelector(({user}:StoreTypes) => user?.userData)
     const bodyInput = useRef(null);
 
     const onSubmitHandler = e => {

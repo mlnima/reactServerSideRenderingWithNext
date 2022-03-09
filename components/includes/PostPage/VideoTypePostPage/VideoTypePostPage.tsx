@@ -32,6 +32,8 @@ const VideoTypePostPage = () => {
         }
     })
 
+
+
     const [ratingAndViewData, setRatingAndViewData] = useState({
         like: 0,
         disLike: 0,
@@ -83,7 +85,7 @@ const VideoTypePostPage = () => {
             <div className='under-post-widget-area'>
                 <WidgetsRenderer position='underPost'/>
             </div>
-            <CommentFrom documentId={videoTypePostPageData?.post._id} documentTitle={videoTypePostPageData?.post.title}/>
+            <CommentFrom documentId={videoTypePostPageData?.post._id} />
             {videoTypePostPageData?.post?.comments?.length ? <CommentsRenderer/> : null}
         </VideoTypePostPageStyledMain>
     );

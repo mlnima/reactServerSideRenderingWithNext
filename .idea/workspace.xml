@@ -20,20 +20,26 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminFormsControllers/adminDeleteFormData.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/ajaxVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/ajaxPostsVariables.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItem.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemDirectAction/TableBodyItemDirectAction.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemDirectAction/TableBodyItemDirectAction.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/form/[formId].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/form/[formId].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/importer/youtube/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/importer/youtube/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/page/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/page/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminFormsRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminFormsRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminCreateNewPage.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelFormsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelFormsActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelPagesActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelPagesActions.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminReducers/adminPanelPagesReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminReducers/adminPanelPagesReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/adminTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/TableBodyItemSection/TableBodyItemSection.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableBody/TableBodyItem/tableBodyItemProperties.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/tableBodyItemProperties.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableHeader/TableHeader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/assetComponents/TableHeader/TableHeader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/CommentsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/comments/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/comments/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminDeleteComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelCommentsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelCommentsActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientActions/postsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/postsAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientReducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientReducers/postsReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,14 +113,14 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\da" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\profile\post" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\profile\posts" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\pagesComponents\actorsPageComponents\Components" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.build">
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -167,8 +173,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.test" />
         <item itemvalue="npm.analyze" />
@@ -1069,7 +1075,8 @@
       <workItem from="1646554624218" duration="5659000" />
       <workItem from="1646598647586" duration="15979000" />
       <workItem from="1646647781703" duration="10676000" />
-      <workItem from="1646736110871" duration="31312000" />
+      <workItem from="1646736110871" duration="40084000" />
+      <workItem from="1646817101911" duration="3251000" />
     </task>
     <servers />
   </component>

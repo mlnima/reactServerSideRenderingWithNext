@@ -57,14 +57,14 @@ export const newComment = async (data) => {
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/posts/newComment`, body)
 };
 
-export const adminGetComments = async (data, domainName, cache) => {
-    const body = {
-        ...data,
-        cache,
-        token: localStorage.wt
-    };
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
-};
+// export const adminGetComments = async (data, domainName, cache) => {
+//     const body = {
+//         ...data,
+//         cache,
+//         token: localStorage.wt
+//     };
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/posts/getComments?onDocument=${data.onDocument || 'adminPage'}`, body)
+// };
 
 // export const getComments = async (data,  cache) => {
 //     const body = {

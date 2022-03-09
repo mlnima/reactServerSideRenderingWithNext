@@ -6,7 +6,7 @@ import {
     ADMIN_DELETE_COMMENT,
     ADMIN_EDIT_COMMENT, ADMIN_GET_POST,
 } from "../adminTypes";
-import {LOADING} from "@store/types";
+import {DELETE_COMMENT, LOADING, SET_ALERT} from "@store/types";
 
 export const adminGetComments = (data) => async (dispatch: any) =>{
     dispatch({
@@ -33,6 +33,40 @@ export const adminGetComments = (data) => async (dispatch: any) =>{
     })
 
 
+}
+
+
+export const adminDeleteComments = (commentsIds) => async dispatch => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
+    await Axios.post(`/api/admin/posts/deleteComments`, {
+        commentsIds: commentsIds,
+        token: localStorage.wt
+    }).then((res) => {
+        dispatch({
+            type: SET_ALERT,
+            payload: {
+                message: res.data.message || 'Comment Deleted',
+                type: 'success'
+            }
+        });
+    }).catch(err => {
+        dispatch({
+            type: SET_ALERT,
+            payload: {
+                message: 'Error While Deleting Comment',
+                type: 'error',
+                err
+            }
+        })
+    }).finally(() => {
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
+    })
 }
 
 export const adminGetComment = (_id?: string | string[]) => async (dispatch: any) =>{

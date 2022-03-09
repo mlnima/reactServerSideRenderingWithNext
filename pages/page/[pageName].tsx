@@ -36,9 +36,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         store,
         context.locale
     )
-console.log(        context.query.pageName,
-    context.query.pageName + 'LeftSidebar',
-    context.query.pageName + 'RightSidebar')
+
     // @ts-ignore
     await store.dispatch(getPageData(context.query.pageName))
 

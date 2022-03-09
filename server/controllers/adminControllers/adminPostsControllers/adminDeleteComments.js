@@ -2,6 +2,7 @@ const commentSchema = require('../../../models/commentSchema');
 
 module.exports = (req, res) => {
     const commentsIds = req.body.commentsIds || []
+
     const mapIdAndReturnDeletePromise = commentsIds.map(commentId => {
         return commentSchema.findByIdAndDelete(commentId, {useFindAndModify: false}).exec()
     })

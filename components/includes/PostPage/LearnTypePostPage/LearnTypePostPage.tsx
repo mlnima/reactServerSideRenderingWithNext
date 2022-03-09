@@ -106,7 +106,7 @@ const LearnTypePostPage = () => {
             <div className='under-post-widget-area'>
                 <WidgetsRenderer position='underPost'/>
             </div>
-            <CommentFrom documentId={post._id} documentTitle={post.title}/>
+            <CommentFrom documentId={post._id} />
             {comments?.length ? <CommentsRenderer/> : null}
         </LearnTypePostPageStyledMain>
     );

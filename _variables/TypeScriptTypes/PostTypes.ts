@@ -3,11 +3,12 @@ import {Meta, MetasPropTypes,User} from './GlobalTypes'
 export interface Comment{
     onDocumentId: string,
     _id:string,
-    author:string,
+    author: User,
     reply:[],
     likes:number,
     disLikes:number,
     body: string,
+    createdAt: string,
     status:string
 }
 

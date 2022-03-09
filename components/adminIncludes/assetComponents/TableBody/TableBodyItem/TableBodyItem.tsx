@@ -2,7 +2,7 @@ import {FC} from 'react';
 import TableBodyItemSection from './TableBodyItemSection/TableBodyItemSection'
 import TableBodyItemDirectAction from './TableBodyItemDirectAction/TableBodyItemDirectAction'
 import styled from "styled-components";
-import tableBodyItemProperties from './tableBodyItemProperties'
+import tableItemProperties from '../../tableBodyItemProperties'
 
 let StyledDiv = styled.div`
   .asset-page-table-body-item-content {
@@ -64,7 +64,7 @@ const TableBodyItem: FC<TableBodyItemPropType> =
          setSelectedItems
     }) => {
 
-    const properties = tableBodyItemProperties?.[assetsType] || []
+    const properties = tableItemProperties?.[assetsType] || []
 
     const onSelectChangeHandler = e => {
         e.target.checked ?
@@ -73,13 +73,11 @@ const TableBodyItem: FC<TableBodyItemPropType> =
     }
 
     const renderProperties = properties.map(property => {
-        if (data?.[property]) {
-            return (
-                <TableBodyItemSection key={property} dataValue={data[property]} dataName={property}/>
-            )
-        }
+        return (
+            <TableBodyItemSection key={property} dataValue={data[property]} dataName={property}/>
+        )
     })
-
+console.log(data)
     return (
 
             <StyledDiv className='asset-page-table-body-item'>

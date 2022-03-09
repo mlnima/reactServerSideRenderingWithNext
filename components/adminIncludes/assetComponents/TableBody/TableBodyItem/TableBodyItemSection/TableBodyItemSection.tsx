@@ -1,5 +1,6 @@
-import React, {useEffect, useState, useContext, useRef, FC} from 'react';
+import React, { useState, FC} from 'react';
 import RenderArraySection from './RenderArraySection';
+import Link from 'next/link'
 import moment from "moment";
 
 import styled from "styled-components";
@@ -61,7 +62,14 @@ const [gotError,setGotError] = useState(false)
     } else if (dataName === 'author') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{dataValue ?dataValue.username:'Private' || 'Private'}</p>
+                { dataValue?.username && dataValue?._id ?
+                    <Link href={`/admin/user?id=${dataValue?._id}`}>
+                        <a target={'blank'}>
+                            <p>{dataValue.username}</p>
+                        </a>
+                    </Link>
+                    :<p> Account might be deleted</p>
+                }
             </StyledDiv>
         )
     } else if (dataName === 'authorID') {
@@ -76,10 +84,17 @@ const [gotError,setGotError] = useState(false)
                 <p>{dataValue}</p>
             </StyledDiv>
         )
-    } else if (dataName === 'onDocument') {
+    } else if (dataName === 'onDocumentId') {
         return (
             <StyledDiv className='asset-page-table-body-item-section'>
-                <p>{dataValue}</p>
+                { dataValue?.postType && dataValue?._id ?
+                    <Link href={`/post/${dataValue?.postType}/${dataValue?._id}`}>
+                        <a target={'blank'}>
+                            <p>{dataValue?.title || dataValue?._id || 'something went wrong'}</p>
+                        </a>
+                    </Link>
+                    :<p> Post might be deleted</p>
+                }
             </StyledDiv>
         )
     } else if (dataName === 'body') {

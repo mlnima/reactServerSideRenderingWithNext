@@ -17,7 +17,6 @@ import {uniqBy} from 'lodash';
 
 const chatRoom = ( ) => {
     const dispatch = useDispatch()
-    console.log('here')
     const user = useSelector((store: StoreTypes) => store.user)
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
     const [isJoined, setIsJoined] = useState(false)
