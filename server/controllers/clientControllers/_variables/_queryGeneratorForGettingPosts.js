@@ -25,7 +25,7 @@ module.exports = data =>{
          postTypeQuery : data?.postType ? {postType: data.postType} : {},
          statusQuery : data?.status ? data?.status === 'all' ? {status: {$ne: 'trash'}} : {status: data.status} : {status: 'published'} ,
          authorQuery : data.author ? data.author === 'all' ? {} : {author: data.author}:{},
-         excludeQuery,
+         excludeQuery : process.env.EXCLUDE_POSTS_SOURCE ? excludeQuery : {} ,
          metaQuery,
          searchQuery,
          selectedFields : data.fields && data.fields?.length || !data.fields ? [] : data.fields,
