@@ -46,8 +46,8 @@ const SiteSettingSetter = () => {
                 }
                 {pathname !== '/post/[postType]/[id]' ?
                     locals.map((local, index) => {
-                        const hrefUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/
-                                         ${local === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : local}`
+                        const hrefUrl = `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${local === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : local}`
+                        
                         return <link rel="alternate" hrefLang={local} key={index} href={hrefUrl}/>
                     })
                     : null

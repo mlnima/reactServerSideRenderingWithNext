@@ -21,10 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetPagination/WidgetPagination.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_queryGeneratorForGettingPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_queryGeneratorForGettingPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/SiteSettingsSetter/SiteSettingsSetter.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1062,7 +1059,8 @@
       <workItem from="1646647781703" duration="10676000" />
       <workItem from="1646736110871" duration="40084000" />
       <workItem from="1646817101911" duration="5070000" />
-      <workItem from="1646852411553" duration="4498000" />
+      <workItem from="1646852411553" duration="5275000" />
+      <workItem from="1646908225445" duration="1204000" />
     </task>
     <servers />
   </component>
