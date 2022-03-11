@@ -2,12 +2,12 @@ import {FC, useMemo} from "react";
 import Head from "next/head";
 import {uniqueId} from "lodash";
 import {useSelector} from "react-redux";
-import {Meta, StoreTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useRouter} from "next/router";
 
 const PostMetaDataToSiteHead: FC = () => {
     const post = useSelector((store: StoreTypes) => store.posts.post);
-    const router = useRouter()
+    const {asPath,locale} = useRouter()
 
     const PostMetaDataToSiteHeadData = useSelector((store: StoreTypes) => {
         return {
@@ -21,14 +21,14 @@ const PostMetaDataToSiteHead: FC = () => {
         return <link rel="alternate"
                      key={uniqueId('link_')}
                      hrefLang={local}
-                     href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${ (local === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : `/${local}`) + router.asPath}`}
+                     href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${ (local === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : `/${local}`) + asPath}`}
         />
     })
 
     const descriptionValue = useMemo(() => {
         return PostMetaDataToSiteHeadData?.post.translations ?
-            PostMetaDataToSiteHeadData?.post.translations?.[router.locale] ?
-                PostMetaDataToSiteHeadData?.post.translations?.[router.locale]?.description || PostMetaDataToSiteHeadData?.post.description :
+            PostMetaDataToSiteHeadData?.post.translations?.[locale] ?
+                PostMetaDataToSiteHeadData?.post.translations?.[locale]?.description || PostMetaDataToSiteHeadData?.post.description :
                 PostMetaDataToSiteHeadData?.post.description :
             PostMetaDataToSiteHeadData?.post.description
     }, []);
@@ -49,12 +49,14 @@ const PostMetaDataToSiteHead: FC = () => {
                   'video.other' :
                   PostMetaDataToSiteHeadData?.post.postType}
             />
-            <meta property={'og:url'} content={process.env.NEXT_PUBLIC_PRODUCTION_URL + router.asPath}/>
+            <meta property={'og:url'} content={process.env.NEXT_PUBLIC_PRODUCTION_URL + asPath}/>
             <meta property={'og:image'} content={PostMetaDataToSiteHeadData?.post.mainThumbnail}/>
             {PostMetaDataToSiteHeadData?.post.postType === 'video' ?
                 <meta property={'og:video:duration'} content={PostMetaDataToSiteHeadData?.post.duration}/>
                 : null
             }
+            <link rel="alternate" hrefLang="x-default" href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/>
+
             {hrefLangs}
         </Head>
     )

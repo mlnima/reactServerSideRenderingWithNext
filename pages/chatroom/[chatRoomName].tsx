@@ -2,7 +2,7 @@ import React, {useEffect, useState} from 'react';
 import socket from '@_variables/socket';
 import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {useRouter} from "next/router";
-import ChatRoomHeader from "../../components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader";
+import ChatRoomHeader from "@components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader";
 import ChatRoomMessageArea from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";

@@ -10,7 +10,7 @@ const UserAutoLogin = dynamic(() => import('./UserAutoLogin'), {ssr: false})
 
 const SiteSettingSetter : FC = () => {
     const [renderAutoLogin, setRenderAutoLogin] = useState(false)
-    const {locale,pathname} = useRouter()
+    const {locale,pathname,asPath} = useRouter()
 
     const {
         customScriptsAsString,
@@ -43,7 +43,9 @@ const SiteSettingSetter : FC = () => {
         if (localStorage?.wt) {
             setRenderAutoLogin(true)
         }
+        console.log(asPath)
     }, []);
+
 
     return (
         <>
@@ -52,18 +54,15 @@ const SiteSettingSetter : FC = () => {
                 <title>{title}</title>
                 <meta name="description" content={description}/>
                 {keywords?.length ? <meta name="keywords" content={keywords?.join(' ')}/> : null}
+                <link rel="alternate" hrefLang="x-default" href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/>
                 {pathname !== '/post/[postType]/[id]' ?
                     languages.map((lang, index) => {
+                        const languageToRender =  lang === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? '' : `/${lang}`
+                        const dynamicHref =  `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${languageToRender}${asPath}`
                         return <link rel="alternate"
                                      hrefLang={lang}
                                      key={index}
-                                     href={
-                                         `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${
-                                             lang === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
-                                                 '' :
-                                                 lang
-                                         }`
-                                     }
+                                     href={dynamicHref}
                         />
                     })
                     : null

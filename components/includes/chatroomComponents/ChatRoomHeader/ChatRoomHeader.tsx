@@ -1,6 +1,7 @@
 import Authentication from "../../widgets/Authentication/Authentication";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
+import {FC} from "react";
 
 const ChatRoomHeaderStyledHeader = styled.header`
   background-color: var(--navigation-background-color,#18181b);
@@ -24,7 +25,11 @@ const ChatRoomHeaderStyledHeader = styled.header`
   }
 `
 
-const ChatRoomHeader = ({onOnlineUserListVisibilityChangeHandler}) => {
+interface ChatRoomHeaderPropTypes{
+    onOnlineUserListVisibilityChangeHandler:any
+}
+
+const ChatRoomHeader:FC<ChatRoomHeaderPropTypes> = ({onOnlineUserListVisibilityChangeHandler}) => {
     const {t} = useTranslation('common');
     return (
         <ChatRoomHeaderStyledHeader className='chatroom-header'>

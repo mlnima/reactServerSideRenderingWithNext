@@ -64,6 +64,7 @@ const PostMeta:FC<PostMetaPropType> = ({  type}) => {
             </div>
         )
     });
+    if (filterMeta.length){
         return (
             <PostMetaStyledDiv className={type + ' post-meta'}>
                 <span className='meta-type'> {t(`${type.charAt(0).toUpperCase() + type.substring(1)}`)}:</span>
@@ -72,6 +73,8 @@ const PostMeta:FC<PostMetaPropType> = ({  type}) => {
                 </div>
             </PostMetaStyledDiv>
         );
+    }else return null
+
 };
 
 export default PostMeta;
