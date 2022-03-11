@@ -14,7 +14,7 @@ import {
     SET_CATEGORIES_METAS,
     SET_POST,
     SET_POSTS_DATA,
-    SET_TAGS_METAS
+    SET_TAGS_METAS, LIKE_POST, DISLIKE_POST, VIEW_POST
 } from "@store/types";
 
 const initialState = {
@@ -25,7 +25,10 @@ const initialState = {
     tagData: {},
     totalCount: 0,
     post: {
-        comments:  []
+        comments:  [],
+        likes: 0,
+        disLikes: 0,
+        views: 0
     },
     editingPost:{},
     comments: [],
@@ -127,6 +130,30 @@ export const postsReducer = (state = initialState, action) => {
             return {
                 ...state,
                 ...action.payload,
+            }
+        case  LIKE_POST:
+            return {
+                ...state,
+                post:{
+                    ...state.post,
+                    likes: (state.post?.likes || 0) + 1
+                }
+            }
+        case  DISLIKE_POST:
+            return {
+                ...state,
+                post:{
+                    ...state.post,
+                    disLikes: (state.post?.disLikes || 0) + 1
+                }
+            }
+        case  VIEW_POST:
+            return {
+                ...state,
+                post:{
+                    ...state.post,
+                    views: (state.post?.views || 0) + 1
+                }
             }
         case  GET_PAGE_DATA:
             return {

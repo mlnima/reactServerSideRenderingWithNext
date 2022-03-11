@@ -40,13 +40,10 @@ const CommentFromStyledForm = styled.form`
   }
 `
 
-interface CommentFromPropTypes{
-    documentId:string
-}
-
-const CommentFrom:FC<CommentFromPropTypes> = props => {
+const CommentFrom:FC = () => {
     const {t} = useTranslation('common');
     const dispatch = useDispatch()
+    const {_id} = useSelector(({posts}:StoreTypes)=>posts.post)
     const userData = useSelector(({user}:StoreTypes) => user?.userData)
     const bodyInput = useRef(null);
 
@@ -57,9 +54,9 @@ const CommentFrom:FC<CommentFromPropTypes> = props => {
             const commentData = {
                 body: bodyInput.current.value,
                 author: userData._id,
-                onDocumentId: props.documentId,
+                onDocumentId: _id,
             };
-            if (props.documentId) {
+            if (_id) {
                 newComment(commentData).then(res => {
                     bodyInput.current.value=''
                     const now =  new Date(Date.now())

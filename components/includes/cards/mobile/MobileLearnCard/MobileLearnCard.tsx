@@ -1,15 +1,13 @@
-//MobileLearnCard
 import {FC} from "react";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import styled from "styled-components";
 import Link from "next/link";
-// import MobileCardImageRenderer from "./MobileLearnCardMedia";
 import dynamic from "next/dynamic";
 import LearnTypeCardMedia from "@components/includes/cards/desktop/LearnTypeCard/LearnTypeCardMedia";
-
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
+
 interface MobileLearnCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
@@ -20,8 +18,6 @@ interface MobileLearnCardPropTypes {
     postsPerRawForMobile: number,
     postElementSize: string,
 }
-
-
 
 const MobileLearnCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
@@ -101,15 +97,18 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
          cardWidth,
          rating
      }) =>{
-        const postUrl = `/post/${post.postType}/${post._id}`;
-        const categoriesImages = post.categories.filter(category => category?.imageUrl).map(category => category?.imageUrl)
+
         return (
             <MobileLearnCardStyledArticle className={'learn-card'} postsPerRawForMobile={postsPerRawForMobile}>
-                <Link href={postUrl}>
+                <Link href={`/post/${post.postType}/${post._id}`}>
                     <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-learn-card-link'} title={title}>
 
                         <LearnTypeCardMedia
-                            categoriesImages={categoriesImages}
+                            categoriesImages={
+                                post.categories.filter(
+                                    category => category?.imageUrl).map(category => category?.imageUrl
+                                )
+                            }
                             noImageUrl={''}
                             postElementSize={postElementSize}
                             post={post}
@@ -119,10 +118,12 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
                         <h3 className={'mobile-learn-card-title'}>{title}</h3>
                         <div className={'learn-card-under-media'}>
                             <div className={'learn-card-under-media-info'}>
-                                {views ? <CardViews views={views} className={'learn-card-views learn-card-info-data'}/>
+                                {views ?
+                                    <CardViews views={views} className={'learn-card-views learn-card-info-data'}/>
                                     : null
                                 }
-                                {rating ? <CardRating rating={rating} className={'learn-card-rating learn-card-info-data'}/>
+                                {rating ?
+                                    <CardRating rating={rating} className={'learn-card-rating learn-card-info-data'}/>
                                     : null
                                 }
                             </div>
@@ -134,8 +135,3 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
         )
     };
 export default MobileLearnCard
-
-// {/*<MobileCardImageRenderer post={post}*/}
-// {/*                        mediaAlt={title}*/}
-// {/*                        postsPerRawForMobile={postsPerRawForMobile}*/}
-// {/*/>*/}

@@ -8,7 +8,7 @@ import {autoUserLogin} from "../../store/clientActions/userActions";
 import AdminPanelGlobalStyles from "../global/Styles/AdminPanelGlobalStyles";
 import Link from "next/link";
 import AdminDataSetter from "../global/AdminDataSetter";
-import GlobalStyles from "../global/Styles/GlobalStyles";
+import GlobalStyles from "../global/Styles/GlobalStylesComponent";
 
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})

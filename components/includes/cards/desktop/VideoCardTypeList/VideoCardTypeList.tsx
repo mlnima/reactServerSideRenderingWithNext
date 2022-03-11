@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import VideoCardTypeListMedia from "./VideoCardTypeListMedia";
 import VideoCardTypeListTitle from "./VideoCardTypeListTitle";
 import _qualityConvertor from "../../asset/_qualityConvertor";
@@ -67,9 +67,9 @@ const VideoCardTypeListStyledArticle = styled.article`
   }
 
   @media only screen and (min-width: 768px) {
-    --video-card-list-font-size: ${(props: { isSidebar: boolean }) => props.isSidebar ? '14px' : '18px'};
-    --video-card-list-info-font-size: 12px;:${(props: { isSidebar: boolean }) => props.isSidebar ? '12px' : '14px'};
-    width: ${(props: { isSidebar: boolean }) => props.isSidebar ? '320px' : '100%'};
+    --video-card-list-font-size: ${({isSidebar}: { isSidebar: boolean }) => isSidebar ? '14px' : '18px'};
+    --video-card-list-info-font-size: 12px;:${({isSidebar}: { isSidebar: boolean }) => isSidebar ? '12px' : '14px'};
+    width: ${({isSidebar}: { isSidebar: boolean }) => isSidebar ? '320px' : '100%'};
     max-width: 750px;
     transition: .3s;
   }
@@ -86,27 +86,38 @@ interface VideoCardTypeListPropTypes {
     isSidebar: boolean,
 }
 
-const VideoCardTypeList = (props: VideoCardTypeListPropTypes) => {
-    const postUrl = `/post/${props.post.postType}/${props.post._id}`
+const VideoCardTypeList = 
+    ({
+        post,
+         isSidebar,
+         onActivateLoadingHandler,
+         cardWidth,
+         postElementSize,
+         title,
+         rating,
+         views
+        
+     }: VideoCardTypeListPropTypes) => {
+    const postUrl = `/post/${post.postType}/${post._id}`
     return (
-        <VideoCardTypeListStyledArticle className={'video-card-list-type'} isSidebar={props.isSidebar}>
+        <VideoCardTypeListStyledArticle className={'video-card-list-type'} isSidebar={isSidebar}>
             <Link href={postUrl} >
-                <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
-                    <VideoCardTypeListMedia postElementSize={props.postElementSize} post={props.post} cardWidth={props.cardWidth} mediaAlt={props.title}/>
+                <a rel='next' className='video-card-link' title={title} onClick={onActivateLoadingHandler}>
+                    <VideoCardTypeListMedia postElementSize={postElementSize} post={post} cardWidth={cardWidth} mediaAlt={title}/>
                 </a>
             </Link>
 
             <div className={'video-card-list-data'}>
-                <VideoCardTypeListTitle postUrl={postUrl} onActivateLoadingHandler={props.onActivateLoadingHandler} title={props.title} actors={props.post?.actors} tags={props.post?.tags} categories={props.post?.categories}/>
+                <VideoCardTypeListTitle postUrl={postUrl} onActivateLoadingHandler={onActivateLoadingHandler} title={title} actors={post?.actors} tags={post?.tags} categories={post?.categories}/>
                 <Link href={postUrl} >
-                    <a rel='next' className='video-card-link' title={props.title} onClick={props.onActivateLoadingHandler}>
-                        {props.views ? <CardViews views={props.views} className={'video-card-views video-card-info-data'}/> :null}
-                        {props.post?.quality ?  <CardQuality quality={_qualityConvertor(props.post.quality)} className={'video-card-quality video-card-info-data'}/> :null}
-                        {props.post?.duration ?   <CardDuration duration={props.post.duration}className={'video-card-duration video-card-info-data'}/> :null}
-                        {props.rating ?  <CardRating rating={props.rating} className={'video-card-rating video-card-info-data'}/> :null}
-                        {props.post?.updatedAt ?
+                    <a rel='next' className='video-card-link' title={title} onClick={onActivateLoadingHandler}>
+                        {views ? <CardViews views={views} className={'video-card-views video-card-info-data'}/> :null}
+                        {post?.quality ?  <CardQuality quality={_qualityConvertor(post.quality)} className={'video-card-quality video-card-info-data'}/> :null}
+                        {post?.duration ?   <CardDuration duration={post.duration}className={'video-card-duration video-card-info-data'}/> :null}
+                        {rating ?  <CardRating rating={rating} className={'video-card-rating video-card-info-data'}/> :null}
+                        {post?.updatedAt ?
                             <p className={'last-update video-card-info-data'}>
-                                  {moment(new Date(props.post?.updatedAt), 'YYYYMMDD').fromNow(false)}
+                                  {moment(new Date(post?.updatedAt), 'YYYYMMDD').fromNow(false)}
                             </p>
                             : null
                         }

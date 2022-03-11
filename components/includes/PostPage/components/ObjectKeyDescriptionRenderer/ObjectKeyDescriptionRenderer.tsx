@@ -71,9 +71,7 @@ const ObjectKeyDescriptionRendererStyledDiv = styled.div`
 `
 
 interface ComponentPropTypes {
-    description: {
-        language: string;
-    }[]
+    description: any
 }
 
 const ObjectKeyDescriptionRenderer = ({description}: ComponentPropTypes) => {

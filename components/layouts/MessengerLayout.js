@@ -1,5 +1,5 @@
 import React, {useEffect} from 'react';
-import GlobalStyles from "../global/Styles/GlobalStyles";
+import GlobalStyles from "../global/Styles/GlobalStylesComponent";
 import SiteSettingSetter from "../includes/SiteSettingsSetter/SiteSettingsSetter";
 import {autoUserLogin} from "../../store/clientActions/userActions";
 import {useDispatch, useSelector} from 'react-redux';

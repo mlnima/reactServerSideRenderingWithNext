@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {languagesOptions} from "../../../../../_variables/_variables";
+import {languagesOptions} from "@_variables/_variables";
 
 const SearchTypeInputFields = props => {
     const [state, setState] = useState({});

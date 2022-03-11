@@ -1,5 +1,7 @@
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const PostTitleStyledH1 = styled.h1`
   color: var(--post-page-info-color,#ccc);
@@ -7,8 +9,10 @@ const PostTitleStyledH1 = styled.h1`
   text-align: center;
 `
 
-const PostTitle = ({title, translations}) => {
+const PostTitle = () => {
     const router = useRouter()
+
+    const {title,translations} = useSelector(({posts}:StoreTypes)=>posts.post)
 
     return (
         <PostTitleStyledH1 className='post-title'>

@@ -5,16 +5,18 @@ export interface Comment{
     _id:string,
     author: User,
     reply:[],
-    likes:number,
-    disLikes:number,
+    // likes:number,
+    // disLikes:number,
     body: string,
     createdAt: string,
     status:string
 }
 
 export interface PostTypes {
-    videoEmbedCode: string;
-    format: string;
+    videoEmbedCode: string,
+    videoUrl: string,
+    videoScriptCode: string,
+    format: string,
     comments:Comment[],
     author:User,
     status: string,

@@ -2,6 +2,9 @@ import Link from "next/link";
 import {uniqueId} from "lodash";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
+import {FC} from "react";
+import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const PostMetaStyledDiv = styled.div`
   display: flex;
@@ -37,10 +40,17 @@ const PostMetaStyledDiv = styled.div`
   }
 `
 
+interface PostMetaPropType{
+    type:string
+}
 
-const PostMeta = ({ data, type}) => {
+
+const PostMeta:FC<PostMetaPropType> = ({  type}) => {
     const {t} = useTranslation(['common', 'customTranslation']);
-    const filterMeta = data.length ? data.filter(m => m.name.length > 1) : [];
+
+    const post = useSelector(({posts}:StoreTypes)=>posts.post)
+
+    const filterMeta = post?.[type].length ? post?.[type].filter(m => m.name.length > 1) : [];
     const renderData = filterMeta.map(item => {
         const typePath = item.type === 'tags' ? 'tag' :
             item.type === 'categories' ? 'category' :
@@ -54,8 +64,6 @@ const PostMeta = ({ data, type}) => {
             </div>
         )
     });
-
-    if (data.length >= 1) {
         return (
             <PostMetaStyledDiv className={type + ' post-meta'}>
                 <span className='meta-type'> {t(`${type.charAt(0).toUpperCase() + type.substring(1)}`)}:</span>
@@ -64,8 +72,6 @@ const PostMeta = ({ data, type}) => {
                 </div>
             </PostMetaStyledDiv>
         );
-    } else return null
-
 };
 
 export default PostMeta;

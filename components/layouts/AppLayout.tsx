@@ -1,7 +1,7 @@
 import {FC} from 'react';
 import {useSelector} from 'react-redux';
 import dynamic from "next/dynamic";
-import GlobalStyles from "../global/Styles/GlobalStyles";
+import GlobalStylesComponent from "../global/Styles/GlobalStylesComponent";
 import _setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppLayoutDataFromProp';
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -27,77 +27,73 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
     const {pathname} = useRouter();
 
-    const layoutData = useSelector(({user,settings,globalState,posts}: StoreTypes) => {
-        const isSidebarLess = pathname.match( /\/404|\/500|\/_error|\/profile/g)
+    const {
+        loggedIn,
+        userRole,
+        identity,
+        loading,
+        loginRegisterFormPopup,
+        alert,
+        sidebarsData,
+        mainLayoutClassNameForGrid
+    } = useSelector(({user,settings,globalState,posts}: StoreTypes) => {
         const sidebarsData = _setAppLayoutDataFromProp(posts.pageData, pathname, settings?.identity)
 
         return {
             loggedIn: user?.loggedIn,
             userRole: user?.userData?.role,
-            customColors: settings?.design?.customColors || '',
-            customStyles: settings?.design?.customStyles || '',
-            sideBarWidth: settings?.design?.sideBarWidth || 320,
             identity: settings?.identity,
             loading: globalState?.loading,
             loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
             alert: globalState?.alert,
             sidebarsData,
-            isSidebarLess,
-            mainLayoutClassNameForGrid:isSidebarLess ? 'without-sidebar-layout' :
-                                       sidebarsData?.sidebarType === 'left' ? 'left-sidebar-layout' :
-                                       sidebarsData?.sidebarType === 'right' ? 'right-sidebar-layout' :
-                                       sidebarsData?.sidebarType === 'both' ? 'both-sidebar-layout' :
-                                       'without-sidebar-layout',
+            mainLayoutClassNameForGrid:  pathname.match( /\/404|\/500|\/_error|\/profile/g) ?
+                                         'without-sidebar-layout' :
+                                         `${sidebarsData ? sidebarsData?.sidebarType : 'without'}-sidebar-layout`
         }
     });
 
 
 
     return (
-        <div className={'App ' + layoutData.mainLayoutClassNameForGrid}>
-            <GlobalStyles colors={layoutData.customColors}
-                          globalStyleData={layoutData.customStyles}
-                          sideBarWidth={layoutData.sideBarWidth}
-            />
+        <div className={'App ' + mainLayoutClassNameForGrid}>
+            <GlobalStylesComponent/>
             <SiteSettingSetter/>
-            {!layoutData.identity?.topbar || layoutData.identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
-            {!layoutData.identity?.header || layoutData.identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
-            {!layoutData.identity?.navigation || layoutData.identity?.navigation === 'enable' ? 
-                <NavigationWidgetArea/> 
-                : null
-            }
-            {layoutData?.sidebarsData?.leftSidebar?.enable ?
+            {identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
+            {identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
+            {identity?.navigation === 'enable' ? <NavigationWidgetArea/> : null}
+            {sidebarsData?.leftSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'
-                    position={layoutData?.sidebarsData?.leftSidebar?.name}
+                    position={sidebarsData?.leftSidebar?.name}
                 />
                 : null
             }
 
             {children}
 
-            {layoutData?.sidebarsData?.rightSidebar?.enable ?
+            {sidebarsData?.rightSidebar?.enable ?
                 <SideBarWidgetArea
                     gridArea='rightSidebar'
                     className='right-sidebar'
-                    position={layoutData?.sidebarsData?.rightSidebar?.name}
+                    position={sidebarsData?.rightSidebar?.name}
                 />
                 : null
             }
 
-            {!layoutData.identity?.footer || layoutData.identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
-            {layoutData.loginRegisterFormPopup && !layoutData.loggedIn ? <LoginRegisterPopup/> : null}
-            {layoutData.userRole === 'administrator' ? <AdminTools/> : null}
-            {layoutData.loading ? <Loading/> : null}
-            {layoutData.alert?.active && layoutData.alert?.message ? <AlertBox/> : null}
+            {identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
+            {loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/> : null}
+            {userRole === 'administrator' ? <AdminTools/> : null}
+            {loading ? <Loading/> : null}
+            {alert?.active && alert?.message ? <AlertBox/> : null}
 
             {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
                 <CookiePopup/>
                 : null : null
             }
 
-            {layoutData.userRole === 'administrator' ? <AdminDataSetter/> : null}
+            {userRole === 'administrator' ? <AdminDataSetter/> : null}
 
         </div>
     );

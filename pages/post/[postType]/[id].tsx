@@ -4,7 +4,7 @@ import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
-import {getComments, getPost} from "@store/clientActions/postsAction";
+import {getComments, getPost, viewPost} from "@store/clientActions/postsAction";
 import Error from 'next/error'
 import {useRouter} from "next/router";
 import {useEffect} from "react";
@@ -16,10 +16,11 @@ const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 const postPage = () => {
     const {query} = useRouter()
     const dispatch = useDispatch()
-    const postType = useSelector((store: StoreTypes) => store?.posts?.post?.postType);
+    const {postType,_id} = useSelector((store: StoreTypes) => store?.posts?.post);
 
     useEffect(() => {
         dispatch(getComments(query.id as string))
+        dispatch(viewPost(_id))
     }, [])
 
     if (!postType) return <Error statusCode={404}/>

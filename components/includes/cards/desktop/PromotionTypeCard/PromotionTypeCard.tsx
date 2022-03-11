@@ -1,10 +1,11 @@
 import Link from "next/link";
 import PromotionCardMedia from "./PromotionCardMedia";
-import {likeDislikeView} from "@_variables/ajaxPostsVariables";
 import {FC} from "react";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import {useDispatch} from "react-redux";
+import {viewPost} from "@store/clientActions/postsAction";
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
@@ -108,21 +109,17 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
          rating
      }) => {
         const postUrl = `/post/${post.postType}/${post._id}`
-
-        const onExternalLinkClickViewHandler = () => {
-            likeDislikeView(post._id, 'views').finally()
-        }
+        const dispatch = useDispatch()
 
         const onInternalLinkClickHandler = () => {
             onActivateLoadingHandler()
-            onExternalLinkClickViewHandler()
         }
-// console.log(cardWidth)
+
         return (
             <PromotionCardStyledDiv className='promotion-card' cardWidth={cardWidth}>
 
                 <a href={post.redirectLink} className={'promotion-card-link-external'}
-                   onClick={onExternalLinkClickViewHandler}
+                   onClick={()=>dispatch(viewPost(post._id))}
                    target={'_blank'} rel={'nofollow noopener external'}
                 >
                     <PromotionCardMedia postElementSize={postElementSize} post={post} cardWidth={cardWidth} mediaAlt={title}/>

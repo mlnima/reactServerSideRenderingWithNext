@@ -6,8 +6,7 @@ export const LOGOUT ='LOGOUT'
 export const GET_SPECIFIC_USER_DATA ='GET_SPECIFIC_USER_DATA'
 export const DISPATCH_SOCKET_ID ='SET_SOCKET_ID'
 export const RESET_PASSWORD ='RESET_PASSWORD'
-export const LIKE_POST ='LIKE_POST'
-export const DISLIKE_POST ='DISLIKE_POST'
+
 //messenger
 export const GET_CONVERSATIONS ='GET_CONVERSATIONS'
 export const GET_CONVERSATION ='GET_CONVERSATION'
@@ -45,7 +44,9 @@ export const GET_POST = 'GET_POST'
 export const GET_EDITING_POST = 'GET_EDITING_POST'
 export const EDIT_POST_FIELD = 'EDIT_POST_FIELD'
 export const SET_POST = 'SET_POST'
-
+export const LIKE_POST ='LIKE_POST'
+export const DISLIKE_POST ='DISLIKE_POST'
+export const VIEW_POST ='VIEW_POST'
 //comments
 export const GET_COMMENTS = 'GET_COMMENTS'
 // export const GET_COMMENT = 'GET_COMMENT'

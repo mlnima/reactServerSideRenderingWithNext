@@ -21,23 +21,21 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const {locale} = useRouter()
 
-    const widgetsRendererData = useSelector((store: StoreTypes) => {
+    const {widgets,userRole,isMobile} = useSelector(({widgets,user,settings}: StoreTypes) => {
         return {
-            widgets: store?.widgets?.widgetInGroups?.[position],
-            userRole: store?.user.userData?.role,
-            isMobile: store.settings?.isMobile,
+            widgets: widgets?.widgetInGroups?.[position],
+            userRole: user.userData?.role,
+            isMobile: settings?.isMobile,
         }
     })
 
-    // console.log(widgetsRendererData.widgets)
-
-    const renderWidgets = widgetsRendererData?.widgets?.sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
+    const renderWidgets = widgets?.sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
         ?.map((widget: WidgetPropTypes) => {
             if (
                 _renderByLanguageCondition(locale, widget.data.languageToRender) &&
                 _renderByDayCondition(widget.data?.specificDayToRender) &&
-                _renderByDevice(widgetsRendererData.isMobile, widget.data.deviceTypeToRender) &&
-                !_isEditMode(widget.data.editMode, widgetsRendererData.userRole)
+                _renderByDevice(isMobile, widget.data.deviceTypeToRender) &&
+                !_isEditMode(widget.data.editMode, userRole)
             ) {
                 const widgetProps = {
                     key:widget._id,

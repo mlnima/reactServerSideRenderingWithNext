@@ -1,7 +1,7 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
 import Editor, {DiffEditor, useMonaco, loader} from "@monaco-editor/react";
 import {readTranslationsFile, updateTranslationsFile} from "../../../_variables/_ajaxFilesVariables";
-import {languagesOptions} from "../../../_variables/_variables";
+import {languagesOptions} from "@_variables/_variables";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import Head from "next/head";

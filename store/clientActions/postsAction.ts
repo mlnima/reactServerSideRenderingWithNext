@@ -14,12 +14,13 @@ import {
     GET_EDITING_POST,
     SET_ALERT,
     SET_POSTS_DATA,
-    EDIT_POST_FIELD
+    EDIT_POST_FIELD, LIKE_POST, DISLIKE_POST, VIEW_POST
 } from "@store/types";
 import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
 import axios from "axios";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {reduceArrayOfDataToIds} from "@_variables/_variables";
+import {Comment} from '@_variables/TypeScriptTypes/PostTypes'
 
 export const setPostsData = postsData => async dispatch => {
     dispatch({
@@ -282,6 +283,56 @@ export const getPageData = (pageName) => async dispatch => {
         dispatch({
             type: GET_PAGE_DATA,
             payload: res.data?.pageData || {}
+        })
+    })
+}
+
+export const likePost = (id:string) => async dispatch => {
+    const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes:[],disLikes:[]};
+    ratingData.likes = [... new Set([...ratingData.likes,id])]
+    ratingData.disLikes = ratingData.disLikes.filter(disLiked=>disLiked !== id)
+    localStorage.setItem('ratingData',JSON.stringify(ratingData))
+
+    const body = {
+        id,
+        type : 'likes'
+    };
+
+    await Axios.post('/api/v1/posts/likeDislikeView', body).then(res=>{
+        dispatch({
+            type: LIKE_POST,
+        })
+    })
+
+}
+
+export const disLikePost = (id:string) => async dispatch => {
+    const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes:[],disLikes:[]};
+    ratingData.disLikes =  [... new Set([...ratingData.disLikes,id])]
+    ratingData.likes = ratingData.likes.filter(liked=>liked !== id)
+    localStorage.setItem('ratingData',JSON.stringify(ratingData))
+
+    const body = {
+        id,
+        type : 'disLikes'
+    };
+
+    await Axios.post('/api/v1/posts/likeDislikeView', body).then(res=>{
+        dispatch({
+            type: DISLIKE_POST,
+        })
+    })
+}
+
+export const viewPost = (id:string) => async dispatch => {
+    const body = {
+        id,
+        type : 'views'
+    };
+    await Axios.post('/api/v1/posts/likeDislikeView', body).then(res=>{
+        dispatch({
+            type: VIEW_POST,
+            // payload: res.data?.pageData || {}
         })
     })
 }

@@ -36,7 +36,7 @@ const ReactPageDescriptionRendererStyledDiv = styled.div`
   }
 `
 interface LearnTypePostPageDescriptionPropTypes {
-    description: object,
+    description: string |object,
 }
 
 const ReactPageDescriptionRenderer = ({description}: LearnTypePostPageDescriptionPropTypes) => {

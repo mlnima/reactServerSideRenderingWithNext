@@ -27,6 +27,8 @@ export interface DesignSettings {
 }
 
 export interface IdentitySettings {
+    favIcon: string;
+    googleAnalyticsId: string;
     postsPerRawForMobile: number;
     allowUserToPost: boolean;
     topbar?: string,
@@ -276,6 +278,9 @@ export interface GlobalStateTypes {
 
 export interface Translations {
     [key: string]: {
+        title: string;
+        keywords: string[];
+        description: string;
         name?: string
     }
 }

@@ -1,13 +1,16 @@
 import {createGlobalStyle} from "styled-components";
+import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {FC} from "react";
 
 interface GlobalStylesPropTypes {
-  colors:string,
-  globalStyleData:string,
+  customColors:string,
+  customStyles:string,
   sideBarWidth:number,
 }
 
-const GlobalStyles = createGlobalStyle`
-  ${(props:GlobalStylesPropTypes ) => props?.colors?.includes(':root') ? props.colors :`:root {${props.colors}}`}
+const GlobalStyles= createGlobalStyle`
+  ${({customColors}:GlobalStylesPropTypes ) => customColors?.includes(':root') ? customColors :`:root {${customColors}}`}
   
   body {
     background-color: var(--main-background-color, #000);
@@ -206,7 +209,7 @@ const GlobalStyles = createGlobalStyle`
       font-size: 14px;
     }
     .left-sidebar-layout {
-      grid-template-columns: ${(props:GlobalStylesPropTypes )=> `${props.sideBarWidth || 320}px`} 1fr;
+      grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr`} ;
       grid-template-areas:  'topbar topbar'
                                         'header header' 
                                         'navigation navigation'
@@ -215,7 +218,7 @@ const GlobalStyles = createGlobalStyle`
     }
 
     .right-sidebar-layout {
-      grid-template-columns: 1fr ${(props:GlobalStylesPropTypes )=> `${props.sideBarWidth || 320}px`} ;
+      grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> ` 1fr ${sideBarWidth}px`} ;
       grid-template-areas:  'topbar topbar'
                                         'header header'
                                         'navigation navigation'
@@ -225,7 +228,7 @@ const GlobalStyles = createGlobalStyle`
 
     .both-sidebar-layout {
 
-      grid-template-columns: ${(props:GlobalStylesPropTypes )=> `${props.sideBarWidth || 320}px`}  1fr ${(props:GlobalStylesPropTypes )=> `${props.sideBarWidth || 320}px`}  ;
+      grid-template-columns: ${({sideBarWidth}:GlobalStylesPropTypes )=> `${sideBarWidth}px 1fr ${sideBarWidth}px` }  ;
       grid-template-areas:  'topbar topbar topbar'
                                         'header header header'
                                         'navigation navigation navigation'
@@ -273,8 +276,16 @@ const GlobalStyles = createGlobalStyle`
     }
   }
 
-  ${(props:GlobalStylesPropTypes ) => props.globalStyleData ? props.globalStyleData : '' }
+  ${({customStyles}:GlobalStylesPropTypes ) => customStyles ? customStyles : '' }
 `
 
-export default GlobalStyles;
+const GlobalStylesComponent : FC = () =>{
+  const {customColors,customStyles,sideBarWidth} = useSelector(({settings}:StoreTypes)=>settings?.design)
+  return (
+      <GlobalStyles customColors={customColors} customStyles={customStyles} sideBarWidth={sideBarWidth || 320}/>
+  )
+}
+
+export default GlobalStylesComponent;
+
 

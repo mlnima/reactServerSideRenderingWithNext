@@ -77,7 +77,10 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
                     <a className={'single-download-link btn btn-primary'}
                        href={downloadLink}
                        target={'_blank'}
-                       title={t([t('Download', {ns: 'common'}), t('Download', {ns: 'customTranslation'})])}
+                       title={t([
+                               t('Download', {ns: 'common'}),
+                               t('Download', {ns: 'customTranslation'})
+                           ])}
                     >
                         <span style={{display: 'none'}}>download link for post</span>
                         <FontAwesomeIcon icon={faDownload}
