@@ -1,4 +1,4 @@
-import React, {useRef, useState} from 'react';
+import React, {FC, useRef, useState} from 'react';
 import * as widgetModels from './models'
 import {adminAddNewWidget, adminGetWidgets} from '@store/adminActions/adminWidgetsActions'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
@@ -7,6 +7,7 @@ import {useDispatch, useSelector} from 'react-redux';
 import styled from "styled-components";
 import staticPositions from '../staticPositions';
 import Draggable from 'react-draggable';
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 
 const AddWidgetWithPositionMenuStyledDiv = styled.div`
@@ -37,14 +38,23 @@ const AddWidgetWithPositionMenuStyledDiv = styled.div`
   }
 `
 
-const AddWidgetWithPositionMenu = props => {
+interface AddWidgetWithPositionMenuPropType{
+    type:string,
+    name:string
+}
+
+const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,name}) => {
+
+    const adminPanelWidgets = useSelector(({adminPanelWidgets}:StoreTypes) => adminPanelWidgets?.adminPanelWidgets)
+
+
     const refToElement = useRef(null)
-    const widgets = useSelector(store => store?.widgets.widgets)
-    const customPages = useSelector(store => store?.adminPanelGlobalState?.customPages)
+    const widgets = useSelector((store:StoreTypes) => store?.widgets.widgets)
+    const customPages = useSelector((store:StoreTypes) => store?.adminPanelGlobalState?.customPages)
     const dispatch = useDispatch()
     const [open, setOpen] = useState(false)
 
-    const onAddNewWidget = (position, type) => {
+    const onAddNewWidget = (position:string, type:string) => {
         const widgetModelData = type === 'text' || type === 'textEditor' ? widgetModels.textWidgetModel :
             type === 'menu' ? widgetModels.menuWidgetModel :
                 type === 'linkTo' ? widgetModels.linkToWidgetModel :
@@ -65,8 +75,7 @@ const AddWidgetWithPositionMenu = props => {
                                                                     type === 'postsSlider' ? widgetModels.postsWidgetModel :
                                                                         widgetModels;
 
-        const widgetsInTheSamePosition = widgets.filter(widget => widget?.data?.position === position)
-        const highestIndexInTheSamePosition = Math.max(...widgetsInTheSamePosition.map(widget => widget?.data?.widgetIndex), 0)
+        const highestIndexInTheSamePosition = Math.max(...(adminPanelWidgets?.[position] || []).map(widget => widget?.data?.widgetIndex), 0)
 
         let dataToSave = {
             ...widgetModelData,
@@ -74,6 +83,7 @@ const AddWidgetWithPositionMenu = props => {
             type,
             widgetIndex: highestIndexInTheSamePosition + 1,
         };
+        //@ts-ignore
         dispatch(adminAddNewWidget(dataToSave))
         setTimeout(()=>dispatch(adminGetWidgets()),1000)
         setOpen(false)
@@ -85,7 +95,7 @@ const AddWidgetWithPositionMenu = props => {
 
             <button key={uniqueId('position_')}
                     className='btn btn-info'
-                    onClick={() => onAddNewWidget(position, props.type)}
+                    onClick={() => onAddNewWidget(position, type)}
                     onMouseEnter={onIncreaseZIndexHandler}
             >
                 {convertVariableNameToName(position)}
@@ -98,9 +108,9 @@ const AddWidgetWithPositionMenu = props => {
     const renderCustomPagesPosition = customPages.map((customPage, index) => {
         return (
             <React.Fragment key={index}>
-                <button className='btn btn-info' onClick={() => onAddNewWidget(customPage, props.type)}>{convertVariableNameToName(customPage)}</button>
-                <button className='btn btn-info' onClick={() => onAddNewWidget(customPage + 'LeftSidebar', props.type)}>{convertVariableNameToName(customPage) + ' Left Sidebar'}</button>
-                <button className='btn btn-info' onClick={() => onAddNewWidget(customPage + 'RightSidebar', props.type)}>{convertVariableNameToName(customPage) + ' Right Sidebar'}</button>
+                <button className='btn btn-info' onClick={() => onAddNewWidget(customPage, type)}>{convertVariableNameToName(customPage)}</button>
+                <button className='btn btn-info' onClick={() => onAddNewWidget(customPage + 'LeftSidebar', type)}>{convertVariableNameToName(customPage) + ' Left Sidebar'}</button>
+                <button className='btn btn-info' onClick={() => onAddNewWidget(customPage + 'RightSidebar', type)}>{convertVariableNameToName(customPage) + ' Right Sidebar'}</button>
             </React.Fragment>
         )
     })
@@ -118,8 +128,14 @@ const AddWidgetWithPositionMenu = props => {
 
     return (
         <Draggable handle=".AddWidgetWithPositionMenu">
-            <AddWidgetWithPositionMenuStyledDiv ref={refToElement} className='AddWidgetWithPositionMenu' onClickCapture={onIncreaseZIndexHandler} onMouseOut={onReduceZIndexHandler}>
-                <button className='btn btn-info' onClick={() => open ? setOpen(false) : setOpen(true)}>{props.name}</button>
+            <AddWidgetWithPositionMenuStyledDiv ref={refToElement}
+                                                className='AddWidgetWithPositionMenu'
+                                                onClickCapture={onIncreaseZIndexHandler}
+                                                onMouseOut={onReduceZIndexHandler}
+            >
+                <button className='btn btn-info' onClick={() => open ? setOpen(false) : setOpen(true)}>
+                    {name}
+                </button>
                 {open ?
                     <div className="AddWidgetWithPositionMenuPositions">
                         {renderPositions}

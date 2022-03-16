@@ -4,21 +4,23 @@ import dynamic from 'next/dynamic'
 import styled from "styled-components";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import MobilePromotionCardMedia from "./MobilePromotionCardMedia";
-import {likeDislikeView} from "@_variables/ajaxPostsVariables";
+import {viewPost} from "@store/clientActions/postsAction";
+import {useDispatch} from "react-redux";
+
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 const MobilePromotionCardStyledArticle = styled.article`
-  
+
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
-  margin: 4px 2px ;
+  margin: 4px 2px;
   background-color: var(--post-element-background-color, #131314);
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content:center;
-  
-  .promotion-card-link-external{
+  justify-content: center;
+
+  .promotion-card-link-external {
     color: var(--post-element-text-color, #ccc);
     position: relative;
     width: calc(100% - 4px);
@@ -29,17 +31,18 @@ const MobilePromotionCardStyledArticle = styled.article`
     justify-content: space-between;
     text-decoration: none;
   }
-  
-  .mobile-promotion-card-link-internal{
+
+  .mobile-promotion-card-link-internal {
     color: var(--post-element-text-color, #ccc);
     width: 100%;
-    .mobile-promotion-card-title{
+
+    .mobile-promotion-card-title {
       font-size: 14px;
       font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      margin: 2px ;
+      margin: 2px;
       width: 100%;
     }
 
@@ -68,6 +71,7 @@ const MobilePromotionCardStyledArticle = styled.article`
           padding: 0 2px;
           color: var(--post-element-info-text-color, #ccc);
           font-size: 12px;
+
           .icon {
             width: 14px;
             height: 14px;
@@ -98,20 +102,18 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
          rating
      }) => {
 
+        const dispatch = useDispatch();
         const postUrl = `/post/${post.postType}/${post._id}`;
 
-        const onExternalLinkClickViewHandler = () => {
-            likeDislikeView(post._id, 'views').finally()
-        };
-
-        const onInternalLinkClickHandler = ()=>{
-            onActivateLoadingHandler()
-            onExternalLinkClickViewHandler()
+        const onInternalLinkClickHandler = () => {
+            onActivateLoadingHandler();
+            // dispatch(viewPost(post._id));
         };
 
         return (
-            <MobilePromotionCardStyledArticle className='promotion-card' postsPerRawForMobile={postsPerRawForMobile} >
-                <a href={post.redirectLink} className='promotion-card-link-external' onClick={onExternalLinkClickViewHandler} target='_blank' rel="nofollow noopener external">
+            <MobilePromotionCardStyledArticle className='promotion-card' postsPerRawForMobile={postsPerRawForMobile}>
+                <a href={post.redirectLink} className='promotion-card-link-external'
+                   onClick={() => dispatch(viewPost(post._id))} target='_blank' rel="nofollow noopener external">
                     <MobilePromotionCardMedia post={post}
                                               mediaAlt={title}
                                               postsPerRawForMobile={postsPerRawForMobile}
@@ -119,12 +121,19 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
                 </a>
 
                 <Link href={postUrl}>
-                    <a className='mobile-promotion-card-link-internal' title={title} onClick={onInternalLinkClickHandler}>
+                    <a className='mobile-promotion-card-link-internal' title={title}
+                       onClick={onInternalLinkClickHandler}>
                         <h3 className={'mobile-promotion-card-title'}>{title}</h3>
                         <div className='promotion-card-under-media'>
                             <div className='promotion-card-under-media-info'>
-                                {views ? <CardViews views={views} className={'promotion-card-views promotion-card-info-data'}/> : null}
-                                {rating ? <CardRating rating={rating} className={'promotion-card-rating promotion-card-info-data'}/> : null}
+                                {views ? <CardViews views={views}
+                                                    className={'promotion-card-views promotion-card-info-data'}/>
+                                    : null
+                                }
+                                {rating ? <CardRating rating={rating}
+                                                      className={'promotion-card-rating promotion-card-info-data'}/>
+                                    : null
+                                }
                             </div>
                         </div>
                     </a>

@@ -1,15 +1,14 @@
-import React, {useEffect, useState, useRef} from 'react';
-import {getFirstLoadData} from "../../_variables/ajaxVariables";
+import React, {useEffect, useState} from 'react';
 import {useRouter} from "next/router";
 import MessengerConversationHeader from "../../components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader";
 import MessengerConversationMessageArea from "../../components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea";
 import MessengerConversationMessageTools from "../../components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools";
-import socket from '../../_variables/socket'
+import socket from '@_variables/socket'
 import MessengerCall from "../../components/includes/messengerPageComponents/MessengerCall/MessengerCall";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
+import {ClientPagesTypes} from "@_variables/TypeScriptTypes/ClientPagesTypes";
 import {useDispatch, useSelector} from "react-redux";
-import {wrapper} from "../../store/store";
+import {wrapper} from "@store/store";
 // @ts-ignore
 import {
         answerTheCall,
@@ -21,6 +20,7 @@ import {
         setPartnerVideo,
        } from "../../store/clientActions/userActions";
 import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const conversation = (props: ClientPagesTypes) => {
     const dispatch = useDispatch()
@@ -115,12 +115,9 @@ const conversation = (props: ClientPagesTypes) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-  await getFirstLoadData(
-        context.req,
-        ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-        store,
-        context.locale
-    )
+
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(context, []))
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),

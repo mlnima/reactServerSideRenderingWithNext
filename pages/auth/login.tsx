@@ -1,10 +1,8 @@
 import React, {useEffect} from 'react';
-import {getFirstLoadData} from '../../_variables/ajaxVariables'
-import {login} from "../../_variables/ajaxAuthVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch} from "react-redux";
-import {setLoginRegisterFormStatus} from "../../store/clientActions/globalStateActions";
-import {wrapper} from "../../store/store";
+import {getDefaultPageData, setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
+import {wrapper} from "@store/store";
 
 const Login = () => {
     const dispatch = useDispatch()
@@ -14,15 +12,11 @@ const Login = () => {
     return null
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store =>
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+
     // @ts-ignore
-    async (context ) => {
-    await getFirstLoadData(
-        context.req,
-        ['login'],
-        store,
-        context.locale
-    )
+    await store.dispatch(getDefaultPageData(context, []))
+
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),

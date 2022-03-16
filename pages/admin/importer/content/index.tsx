@@ -1,13 +1,14 @@
 import React, { useState, useRef} from 'react';
-import {savePost} from '../../../../_variables/ajaxPostsVariables'
-import {useSelector} from "react-redux";
-import {wrapper} from "../../../../store/store";
+import {useDispatch, useSelector} from "react-redux";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {adminSaveNewPost} from "@store/adminActions/adminPanelPostsActions";
 
 const importContent = () => {
     const userData = useSelector((store:StoreTypes) => store?.user.userData)
     const dataPreview = useRef(null)
+    const dispatch = useDispatch()
     const [state, setState] = useState({
         data: []
     });
@@ -47,13 +48,9 @@ const importContent = () => {
                         }else{
                             return {name: actor.trim(), type: 'actors'}
                         }
-
-
-
-
-
                     }) : []
-                    await savePost(post)
+                    dispatch(adminSaveNewPost(post,null))
+
                 }
             }
         }

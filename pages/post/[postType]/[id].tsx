@@ -1,4 +1,3 @@
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
@@ -8,9 +7,13 @@ import {getComments, getPost, viewPost} from "@store/clientActions/postsAction";
 import Error from 'next/error'
 import {useRouter} from "next/router";
 import {useEffect} from "react";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
-const LearnTypePostPage = dynamic(() => import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
-const VideoTypePostPage = dynamic(() => import('@components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
+const LearnTypePostPage = dynamic(() =>
+    import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
+const VideoTypePostPage = dynamic(() =>
+    import('@components/includes/PostPage/VideoTypePostPage/VideoTypePostPage'))
+
 const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 
 const postPage = () => {
@@ -33,12 +36,15 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     if (!context.query?.id) {
         return {notFound: true}
     }
-    await getFirstLoadData(
-        context.req,
-        ['postPageLeftSidebar', 'postPageRightSidebar', 'underPost'],
-        store,
-        context.locale
-    );
+
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'postPageLeftSidebar',
+            'postPageRightSidebar',
+            'underPost'
+        ]))
 
     // @ts-ignore
     await store.dispatch(getPost(context.query?.id))

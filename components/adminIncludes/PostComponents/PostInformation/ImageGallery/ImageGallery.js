@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useContext, useRef} from 'react';
-import {uploadFiles} from "../../../../../_variables/ajaxVariables";
+import {uploadFiles} from "../../../../../_variables/_ajaxFilesVariables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faPlus, faTimes, faUpload} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";

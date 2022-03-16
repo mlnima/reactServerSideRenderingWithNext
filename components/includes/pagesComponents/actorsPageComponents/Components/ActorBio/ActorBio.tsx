@@ -1,24 +1,24 @@
 import React from 'react';
 import {useSelector} from "react-redux";
-import {StoreTypes} from "../../../../../../_variables/TypeScriptTypes/GlobalTypes";
-
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import ActorDetails from "./ActorDetails";
 import capitalizeFirstLetter from "../../../../../../_variables/util/capitalizeFirstLetter";
+
 const ActorBioStyledDiv = styled.div`
   display: flex;
   flex-direction: column;
   max-width: 1600px;
   margin: 10px auto;
 
-  .actor-images{
+  .actor-images {
     display: flex;
     flex-direction: column;
     width: 100%;
     justify-content: center;
     align-items: center;
 
-    .cover-image{
+    .cover-image {
       top: 0;
       left: 0;
       right: 0;
@@ -26,7 +26,7 @@ const ActorBioStyledDiv = styled.div`
       width: 100%;
     }
 
-    .actor-image{
+    .actor-image {
       border-radius: 75%;
       width: 35vw;
       height: 35vw;
@@ -35,41 +35,46 @@ const ActorBioStyledDiv = styled.div`
       left: 0;
     }
   }
-  
-  .actor-data{
+
+  .actor-data {
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
 
-    .actor-data-name{
-      
+    .actor-data-name {
+
     }
-    .actor-data-description-details{
-       background-color: var(--navigation-background-color);
+
+    .actor-data-description-details {
+      background-color: var(--navigation-background-color);
       width: 100%;
-      .actor-data-description{
+
+      .actor-data-description {
         display: flex;
         flex-direction: column;
         padding: 1%;
         width: 95%;
         margin: 10px auto;
       }
-      .actor-data-details{
-        
+
+      .actor-data-details {
+
       }
     }
   }
-  @media only screen and (min-width: 768px){
-    .actor-images{
-      .actor-image{
+
+  @media only screen and (min-width: 768px) {
+    .actor-images {
+      .actor-image {
         border-radius: 0;
         width: 200px;
         height: 200px;
       }
     }
-     .actor-data{
-      .actor-data-description-details{
+
+    .actor-data {
+      .actor-data-description-details {
         display: flex;
       }
     }
@@ -77,40 +82,44 @@ const ActorBioStyledDiv = styled.div`
 `
 
 const ActorBio = () => {
-    const actor = useSelector((store:StoreTypes) => store?.posts?.actorData)
+
+    const {actorData} = useSelector(({posts}: StoreTypes) => posts)
+    const posts = useSelector(({posts}: StoreTypes) => posts)
+    console.log(posts)
 
     return (
-        <ActorBioStyledDiv className={'actor-information'} >
+        <ActorBioStyledDiv className={'actor-information'}>
 
             <div className={'actor-images'}>
-                {actor?.coverImageUrl?
-                    <img className={'cover-image'} src={actor.coverImageUrl} alt={actor.name + 'cover image'}/>
-                    :null
+                {actorData?.coverImageUrl ?
+                    <img className={'cover-image'} src={actorData.coverImageUrl} alt={actorData.name + 'cover image'}/>
+                    : null
                 }
-                {actor.imageUrl ?
-                 <img className={'actor-image'} src={actor.imageUrl} alt={actor.name}/>
-                    :null
+                {actorData.imageUrl ?
+                    <img className={'actor-image'} src={actorData.imageUrl} alt={actorData.name}/>
+                    : null
                 }
             </div>
+
             <div className={'actor-data'}>
-                <h1 className={'actor-data-name'}>{capitalizeFirstLetter(actor.name)}</h1>
+                <h1 className={'actor-data-name'}>{capitalizeFirstLetter(actorData.name)}</h1>
                 <div className={'actor-data-description-details'}>
 
-                    {actor.description?
+                    {actorData.description ?
                         <p className={'actor-data-description'}>
                             <h2>
-                                About {actor.name}
+                                About {actorData.name}
                             </h2>
-                            {actor.description}
+                            {actorData.description}
                         </p>
-                        :null
+                        : null
                     }
                     {
                         // @ts-ignore
-                        actor?.additionalInfo?.length ?
+                        actorData?.additionalInfo?.length ?
                             // @ts-ignore
-                             <ActorDetails additionalInfo={actor.additionalInfo } />
-                        :null
+                            <ActorDetails additionalInfo={actorData.additionalInfo}/>
+                            : null
                     }
                 </div>
 

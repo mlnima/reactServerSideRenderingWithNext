@@ -1,10 +1,10 @@
 import {NextPage} from 'next';
-import {getFirstLoadData} from '@_variables/ajaxVariables';
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
 import {getPosts} from "@store/clientActions/postsAction";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -28,12 +28,15 @@ const posts: NextPage<any> = props => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-     await getFirstLoadData(
-        context.req,
-        ['postsPageLeftSidebar', 'postsPageRightSidebar'],
-        store,
-        context.locale
-    )
+
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'postsPageLeftSidebar',
+            'postsPageRightSidebar',
+        ]))
+
     // @ts-ignore
     await store.dispatch(getPosts(context.query, null, true,null))
 

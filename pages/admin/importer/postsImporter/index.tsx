@@ -1,5 +1,5 @@
 import React, {useState, useRef, useEffect, ChangeEvent} from 'react';
-import {savePost} from '../../../../_variables/ajaxPostsVariables'
+
 import {useDispatch, useSelector} from "react-redux";
 import {wrapper} from "../../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";

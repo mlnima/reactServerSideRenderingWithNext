@@ -1,9 +1,9 @@
 import React, {FC} from 'react';
 import ActorCard from "../../../cards/desktop/ActorCard/ActorCard";
 import styled from "styled-components";
-import {setLoading} from "@store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
 import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {setLoading} from "@store/clientActions/globalStateActions";
 
 let ActorsRendererStyledDiv = styled.div`
   display: flex;
@@ -32,27 +32,25 @@ let ActorsRendererStyledDiv = styled.div`
 interface ActorsRendererPropTypes {
     uniqueData?: {
         metaData?: Meta[],
-    },
+    }
 }
 
 const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
-    const dispatch = useDispatch()
 
-    const actorsMetas = uniqueData?.metaData ? uniqueData?.metaData :
-          useSelector(({posts}: StoreTypes) => posts?.actorsMetas)
+    const dispatch = useDispatch();
+    const actorsMetas = useSelector(({posts}: StoreTypes) => uniqueData?.metaData || posts?.actorsMetas || [])
 
     return (
         <ActorsRendererStyledDiv className='actors-content'>
-            {actorsMetas instanceof Array ?
-                actorsMetas?.map((actor: Meta) => {
-                    return <ActorCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                      key={actor._id}
-                                      actor={actor}
-                    />
-                })
-                : null
-            }
+            {actorsMetas.map((actor) => {
+                return <ActorCard key={actor._id}
+                                  actor={actor}
+                                  onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                />
+                }
+            )}
         </ActorsRendererStyledDiv>
     );
 };
+
 export default ActorsRenderer;

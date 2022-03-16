@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faBars, faLock, faLockOpen, faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
 
@@ -6,7 +6,7 @@ import convertVariableNameToName from "../../../../../_variables/util/convertVar
 import styled from "styled-components";
 let StyledDiv = styled.div`
   display: grid;
-  grid-template-columns:  1fr 5fr 2fr  ;
+  grid-template-columns:  1fr 1fr 5fr 2fr  ;
   align-items: center;
   background-color: var(--admin-darkcolor70);
   color: var(--admin-text-color);
@@ -32,6 +32,10 @@ let StyledDiv = styled.div`
         //background-color: var(--admin-darkcolor80);
       }
     }
+  }
+  .btn{
+    font-size: 12px;
+    margin: 0 10px;
   }
   .widget-name-index{
     p{
@@ -69,28 +73,49 @@ let StyledDiv = styled.div`
   }
 `
 
-const WidgetHeaderControl = props => {
+interface WidgetHeaderControlPropType{
+    setKey?:boolean,
+    widgetSettings:any,
+    widgetData:any,
+    onLockHandler:any,
+    changeWidgetIndex:any,
+    onObjectModeHandler:any,
+    widgetId:string
+    
+}
 
-    const keyStatus = props.setKey ? {key:props.widgetId} :{}
+const WidgetHeaderControl:FC<WidgetHeaderControlPropType> = 
+    ({
+         setKey,
+         widgetSettings,
+         widgetData,
+         onLockHandler,
+         changeWidgetIndex,
+         onObjectModeHandler,
+         widgetId,
+     }) => {
+
+    const keyStatus = setKey ? {key:widgetId} :{}
 
     return (
         <StyledDiv className='widget-open-control' {...keyStatus}>
-            {/*<div className='widget-open-close-button' onClick={props.onOpenHandler}>*/}
-            {/*    <FontAwesomeIcon icon={faBars} className='widget-header-handler-admin' style={{*/}
-            {/*        transform: props.widgetSettings.open ? ' rotate(90deg)' : ' rotate(0deg)',*/}
-            {/*    }}/>*/}
-            {/*</div>*/}
-            <div className='widget-open-close-button' onClick={props.onLockHandler} >
-                <FontAwesomeIcon icon={props.widgetData.stayOpen ? faLockOpen : faLock} className='widget-header-handler-admin' />
+            <div className='widget-open-close-button' onClick={onLockHandler} >
+                <FontAwesomeIcon icon={widgetData.stayOpen ? faLockOpen : faLock} className='widget-header-handler-admin' />
+
             </div>
+            <button className={'btn btn-danger'} onClick={onObjectModeHandler}>
+                {widgetSettings.objectEditingMode? 'FORM MODE' :'OBJECT MODE' }
+
+            </button>
             <div className='widget-name-index'>
-                <p>{props.widgetData.name || convertVariableNameToName(props.widgetData.type)} index: {props.widgetData.widgetIndex || '0'}</p>
+                <p>{widgetData.name || convertVariableNameToName(widgetData.type)} index: {widgetData.widgetIndex || '0'}</p>
             </div>
+
             <div className='widget-open-control-group-buttons'>
-                <button className='changeWidgetIndexBtn' onClick={() => props.changeWidgetIndex(false)}>
+                <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(false)}>
                     <FontAwesomeIcon icon={faSortUp} className='widget-header-handler-admin' />
                 </button>
-                <button className='changeWidgetIndexBtn' onClick={() => props.changeWidgetIndex(true)}>
+                <button className='changeWidgetIndexBtn' onClick={() => changeWidgetIndex(true)}>
                     <FontAwesomeIcon icon={faSortDown} className='widget-header-handler-admin' />
                 </button>
             </div>

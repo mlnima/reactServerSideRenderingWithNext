@@ -4,14 +4,14 @@ import WidgetModel from "../../widgetsModel/WidgetModel/WidgetModel";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import Draggable from 'react-draggable';
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const WidgetGroupByPositionStyledDiv = styled.div`
   background-color: transparent;
   width: 100%;
   position: initial;
   margin: 5px;
-  
+
   .widgetAdminPanelItemHeader {
     height: 50px;
     margin: 0;
@@ -34,9 +34,9 @@ const WidgetGroupByPositionStyledDiv = styled.div`
     }
   }
   @media only screen and (min-width: 1024px) {
-    width: 30vw;
+    width: 50vw;
     .widget-model {
-      width: 30vw;
+      width: 50vw;
     }
   }
 `
@@ -48,15 +48,17 @@ interface WidgetGroupByPositionPropTypes {
 
 const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filter, position}) => {
 
-    const widgets = useSelector((store:StoreTypes) =>
-        store?.widgets?.widgetInGroups?.[position]?.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1))
+    const widgets = useSelector(
+        ({adminPanelWidgets}: StoreTypes) => adminPanelWidgets?.adminPanelWidgets?.[position]
+        ?.sort((a, b) => (a.data.widgetIndex > b.data.widgetIndex) ? 1 : -1)
+    )
 
     if (filter === position || filter === 'all') {
         return (
             <Draggable handle=".widgetAdminPanelItemHeader">
                 <WidgetGroupByPositionStyledDiv filter={filter} className='widgetAdminPanelItem'>
                     <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
-                    {widgets.map((widget) => {
+                    {widgets?.map((widget) => {
                         return (
                             <WidgetModel key={widget._id} widgetId={widget._id} position={position}/>
                         )

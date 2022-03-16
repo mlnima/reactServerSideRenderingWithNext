@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import {fileUpload, uploadFiles} from "../../../../../_variables/ajaxVariables";
+import {fileUpload, uploadFiles} from "@_variables/_ajaxFilesVariables";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faUpload} from "@fortawesome/free-solid-svg-icons";
 import styled from "styled-components";

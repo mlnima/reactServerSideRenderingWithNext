@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
@@ -8,6 +7,7 @@ import {useDispatch} from "react-redux";
 import {userResetPassword} from "@store/clientActions/userActions";
 import _passwordValidator from "../../_variables/clientVariables/_passwordValidator";
 import ValidInput from "../../components/includes/LoginRegisterPopup/ValidInput";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const EditProfileStyledMain = styled.main`
   grid-area: main;
@@ -145,12 +145,15 @@ const edit: FC = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    await getFirstLoadData(
-        context.req,
-        ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
-        store,
-        context.locale
-    );
+
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'profilePageRightSidebar',
+            'profilePageLeftSidebar',
+            'profilePage'
+        ]))
 
     return {
         props: {

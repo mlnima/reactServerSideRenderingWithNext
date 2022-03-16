@@ -1,4 +1,3 @@
-import {getFirstLoadData} from '@_variables/ajaxVariables';
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
@@ -13,6 +12,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import capitalizeFirstLetter from "../../_variables/util/capitalizeFirstLetter";
 import {getPosts} from "@store/clientActions/postsAction";
 import {FC} from "react";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 
@@ -79,18 +79,23 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const categoryId = context.query.categoryId as string
     if (!categoryId) return {notFound: true};
     if (!categoryId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
-    await getFirstLoadData(
-        context.req,
-        ['categoryPageTop', 'categoryPageLeftSidebar', 'categoryPageBottom', 'categoryPageRightSidebar'],
-        store,
-        context.locale
-    );
 
     // @ts-ignore
-    await store.dispatch(getPosts(context.query, context.query.categoryId, true,'categoryData'))
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'categoryPageTop',
+            'categoryPageLeftSidebar',
+            'categoryPageBottom',
+            'categoryPageRightSidebar'
+        ]))
+
+    // @ts-ignore
+    await store.dispatch(getPosts(context.query, context.query.categoryId, true,'categories'))
+
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
+            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation']))
         }
     }
 });

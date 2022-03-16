@@ -9,7 +9,9 @@ module.exports =async (req, res) => {
         const existingMeta =  await  metaSchema.findOne(findQuery).exec()
 
         if (existingMeta){
-            metaSchema.findByIdAndUpdate(existingMeta._id, {$set:{...metaData}}, {new: true}).exec().then(updatedMeta => {
+            metaSchema.findByIdAndUpdate(existingMeta._id, {$set:{...metaData}}, {new: true})
+                .exec()
+                .then(updatedMeta => {
                 res.json({updated: updatedMeta,message: existingMeta?.name + ' updated'})
             }).catch(err => {
                 res.status(500).json({message:'Error While Trying To Save New Meta From API',err})

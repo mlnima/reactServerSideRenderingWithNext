@@ -1,8 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCheck, faTimes} from "@fortawesome/free-solid-svg-icons";
-
 import styled from "styled-components";
+
 const ValidInputStyledDiv = styled.div`
   width: 4%;
   display: flex;
@@ -15,12 +15,16 @@ const ValidInputStyledDiv = styled.div`
   }
 `
 
-const ValidInput = ({valid}:{valid:boolean|undefined}) => {
+interface ValidInputPropTypes {
+    valid: boolean | undefined
+}
+
+const ValidInput: FC<ValidInputPropTypes> = ({valid}) => {
     return (
         <ValidInputStyledDiv className='validator'> {
             valid ?
-                <FontAwesomeIcon icon={faCheck} style={{color:'green'}}/> :
-                <FontAwesomeIcon icon={faTimes}  style={{color:'red'}}/>
+                <FontAwesomeIcon icon={faCheck} style={{color: 'green'}}/> :
+                <FontAwesomeIcon icon={faTimes} style={{color: 'red'}}/>
         }</ValidInputStyledDiv>
     );
 };

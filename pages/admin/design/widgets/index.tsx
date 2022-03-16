@@ -1,12 +1,15 @@
 import {useState, useEffect} from 'react';
-import AddWidgetMenu from '../../../../components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
-import WidgetGroupByPosition from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
+import AddWidgetMenu from '@components/adminIncludes/widgetsModel/AddWidgetMenu/AddWidgetMenu'
+import WidgetGroupByPosition
+    from "../../../../components/adminIncludes/widgetPageComponents/WidgetGroupByPosition/WidgetGroupByPosition";
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {wrapper} from "../../../../store/store";
+import {useDispatch, useSelector} from "react-redux";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
-import WidgetPositionsSelect from "../../../../components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import WidgetPositionsSelect
+    from "../../../../components/adminIncludes/widgetsModel/WidgetPositionsSelect/WidgetPositionsSelect";
+import {adminPanelGetWidgets} from "@store/adminActions/adminWidgetsActions";
 
 
 let StyledDiv = styled.div`
@@ -49,7 +52,9 @@ let StyledDiv = styled.div`
 
 const AdminWidgets = () => {
 
-    const availablePositions = useSelector((store :StoreTypes) => Object.keys(store?.widgets?.widgetInGroups))
+    const availablePositions = useSelector(({adminPanelWidgets}: StoreTypes) => Object.keys(adminPanelWidgets?.adminPanelWidgets))
+
+    const dispatch = useDispatch()
 
     const [filter, setFilter] = useState('all')
 
@@ -57,11 +62,12 @@ const AdminWidgets = () => {
         setFilter(e.target.value)
         localStorage.filterwidgetPosition = e.target.value
     }
-    useEffect(() => {
-        typeof window !== 'undefined' && localStorage?.filterwidgetPosition !=='all' ?
-            setFilter(localStorage?.filterwidgetPosition):null
-    }, []);
 
+    useEffect(() => {
+        dispatch(adminPanelGetWidgets())
+        typeof window !== 'undefined' && localStorage?.filterwidgetPosition !== 'all' ?
+            setFilter(localStorage?.filterwidgetPosition) : null
+    }, []);
 
     return (
         <StyledDiv className='admin-widgets-page'>

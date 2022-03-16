@@ -1,7 +1,7 @@
 import React from 'react';
 import AdminRenderComments from '../../../components/adminIncludes/commentsPageComponents/AdminRenderComments/AdminRenderComments'
 import AdminCommentsControl from '../../../components/adminIncludes/commentsPageComponents/AdminCommentsControl/AdminCommentsControl'
-import PaginationComponent from '../../../components/includes/PaginationComponent/PaginationComponent'
+import PaginationComponent from '@components/includes/PaginationComponent/PaginationComponent'
 import {useRouter} from "next/router";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -21,8 +21,6 @@ const comments = (props:any) => {
                     totalCount={ props.totalComments }
                     size={ props.getCommentsData.size }
                     maxPage={ Math.ceil(parseInt(props.totalComments) / parseInt(props.getCommentsData.size)) }
-                    queryData={ props.query || props.router.query }
-                    pathnameData={ router.pathname }
                 />
                 <AdminRenderComments { ...props }/>
             </div>

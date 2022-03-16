@@ -1,15 +1,15 @@
 import React from 'react';
-import {getFirstLoadData} from "../../_variables/ajaxVariables";
 import MessengerConversationsList from "../../components/includes/messengerPageComponents/MessengerConversationsList/MessengerConversationsList";
 import Link from "next/link";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {wrapper} from "../../store/store";
-import {ClientPagesTypes} from "../../_variables/TypeScriptTypes/ClientPagesTypes";
-import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+import {wrapper} from "@store/store";
+import {ClientPagesTypes} from "@_variables/TypeScriptTypes/ClientPagesTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 import { useSelector} from "react-redux";
 
 import styled from "styled-components";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const MessengerPageStyledMain = styled.main`
   display: flex;
@@ -46,11 +46,14 @@ const messengerPage = (props: ClientPagesTypes) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await getFirstLoadData(context.req,
-        ['messengerPagePageLeftSidebar', 'messengerPageRightSidebar', 'messengerPage'],
-        store,
-        context.locale
-    )
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'messengerPagePageLeftSidebar',
+            'messengerPageRightSidebar',
+            'messengerPage',
+        ]))
 
     return {
         props: {

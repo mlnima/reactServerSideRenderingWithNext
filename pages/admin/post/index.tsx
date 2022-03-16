@@ -109,7 +109,6 @@ const Index = () => {
     }
 
     const onSaveHandler = async () => {
-        dispatch(setLoading(true))
         try {
             // @ts-ignore
             if (post?._id) {
@@ -122,7 +121,6 @@ const Index = () => {
         } catch (error) {
             // @ts-ignore
             dispatch(setAlert({message: error.stack, type: 'error', active: true}))
-            dispatch(setLoading(false))
         }
     }
 

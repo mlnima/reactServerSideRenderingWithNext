@@ -1,19 +1,21 @@
-import React, {useState} from 'react';
 import Link from "next/link";
 import convertVariableNameToName from "../../../_variables/util/convertVariableNameToName";
 import withRouter from 'next/dist/client/with-router'
 import {uniqueId} from "lodash";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faSortDown, faSortUp} from "@fortawesome/free-solid-svg-icons";
+import {faSortDown} from "@fortawesome/free-solid-svg-icons";
 import {useDispatch, useSelector} from "react-redux";
-import {setSidebarStatus} from "../../../store/adminActions/adminPanelGlobalStateActions";
+import {setSidebarStatus} from "@store/adminActions/adminPanelGlobalStateActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {useState} from "react";
 
+// need to rewrite later
 let StyledDiv = styled.div`
   position: absolute;
-  font-size: 14px;
+  font-size: 12px;
   left: 0;
-  top: 0;
+  top: 40px;
   grid-area: adminSideBar;
   min-height: 100%;
   width: 256px;
@@ -26,16 +28,18 @@ let StyledDiv = styled.div`
 
   .SideBarItemElement {
     width: 100%;
+    border-bottom: .5px solid #333;
 
     .SideBarItemTitle {
       display: flex;
       justify-content: space-between;
+      align-items: center;
 
       .SideBarItem {
         text-decoration: none;
         color: var(--admin-sidebar-text-color);
         width: 100%;
-        padding: 13px 16px;
+        padding: 6px 8px;
         margin: 5px;
         display: block;
       }
@@ -53,7 +57,6 @@ let StyledDiv = styled.div`
         svg {
           width: 20px;
           height: 20px;
-
         }
 
       }
@@ -71,11 +74,12 @@ let StyledDiv = styled.div`
 
     .SideBarItemElementSubItems {
       background-color: #181818;
-
+  
       .SideBarItem-SubItem {
         color: white;
         padding: 10px 0 10px 20px;
         display: block;
+        transition: 1s height;
 
         &:hover {
           transition: .5s;
@@ -87,11 +91,11 @@ let StyledDiv = styled.div`
   }
 `
 
-const SideBar = () => {
+const AdminPanelMainMenu = () => {
     const dispatch = useDispatch()
-    const sidebar = useSelector(store => store?.adminPanelGlobalState?.sidebar)
+    const {sidebar} = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState)
 
-    const [state, setState] = useState({
+    const sidebarItems = {
         Dashboard: {
             pathURL: '/admin',
             subItems: []
@@ -182,37 +186,49 @@ const SideBar = () => {
                 {name: 'posts', url: '/admin/exporter/postsExporter'},
             ]
         }
-    })
+    }
 
     const [hovered, setHovered] = useState('')
 
-    const renderItems = Object.keys(state).map(item => {
+    const renderItems = Object.keys(sidebarItems).map(item => {
         return (
             <div key={item} className='SideBarItemElement'>
                 <div className='SideBarItemTitle'>
-                    <Link href={state[item].pathURL}><a className='SideBarItem' onClick={() => dispatch(setSidebarStatus(false))}>{convertVariableNameToName(item)}</a></Link>
-                    {state[item].subItems.length ?
-                        <span className={'sidebar-items-switch'} onMouseOver={() => setHovered(item)}  key={uniqueId('id_')} onClick={() => hovered === item ? setHovered('') : setHovered(item)}>
-                            <FontAwesomeIcon icon={faSortDown} style={{transform: hovered === item ? 'rotate(0deg)' : 'rotate(90deg)'}} className='fontawesomeSvgVerySmall'/>
+                    <Link href={sidebarItems[item].pathURL}>
+                        <a className='SideBarItem' onClick={() => dispatch(setSidebarStatus(false))}>
+                            {convertVariableNameToName(item)}
+                        </a>
+                    </Link>
+                    {sidebarItems[item].subItems.length ?
+                        <span className={'sidebar-items-switch'}
+                              onMouseOver={() => setHovered(item)}
+                              key={uniqueId('id_')}
+                              onClick={() => hovered === item ? setHovered('') : setHovered(item)}
+                        >
+                            <FontAwesomeIcon icon={faSortDown}
+                                             style={{transform: hovered === item ? 'rotate(0deg)' : 'rotate(90deg)'}}
+                                             className='fontawesomeSvgVerySmall'/>
                        </span>
                         : null}
 
                 </div>
                 <div className='SideBarItemElementSubItems'>
-                    {state[item].subItems.length ?
-                        state[item].subItems.map(subItem => {
-                            if (hovered === item) {
+                    {sidebarItems[item].subItems.length ?
+                        sidebarItems[item].subItems.map(subItem => {
                                 return (
                                     <Link key={uniqueId('id_')} href={subItem.url}>
-                                        <a className='SideBarItem-SubItem' onClick={() => dispatch(setSidebarStatus(false))}>
+                                        <a className='SideBarItem-SubItem'
+                                           style={{
+                                               display:hovered === item ? 'flex' : 'none'
+                                           }}
+                                           onClick={() => dispatch(setSidebarStatus(false))}>
                                             {convertVariableNameToName(subItem.name)}
                                         </a>
                                     </Link>
                                 )
-                            } else return null
                         }) : null
                     }
-                    {/*{onHoverHandler}*/}
+
                 </div>
             </div>
         )
@@ -226,4 +242,16 @@ const SideBar = () => {
         );
     } else return null
 };
-export default withRouter(SideBar);
+export default withRouter(AdminPanelMainMenu);
+
+//
+// if (hovered === item) {
+//     return (
+//         <Link key={uniqueId('id_')} href={subItem.url}>
+//             <a className='SideBarItem-SubItem'
+//                onClick={() => dispatch(setSidebarStatus(false))}>
+//                 {convertVariableNameToName(subItem.name)}
+//             </a>
+//         </Link>
+//     )
+// } else return null

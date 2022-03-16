@@ -1,7 +1,7 @@
 import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {FC, useMemo} from "react";
-import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 
 const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
@@ -110,6 +110,7 @@ const Widget: FC<WidgetComponentPropTypes> =
                 : null
             }
             {WidgetToRender ?
+                //@ts-ignore
                 <WidgetToRender
                     {...data}
                     widgetId={widgetId}

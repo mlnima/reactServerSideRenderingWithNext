@@ -1,7 +1,6 @@
 import React from 'react';
 import {useRouter} from "next/router";
-import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
-import {getFirstLoadData} from "@_variables/ajaxVariables";
+import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import ActorsRenderer from "../../components/includes/pagesComponents/actorsPageComponents/Components/ActorsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -10,6 +9,7 @@ import {useSelector} from "react-redux";
 import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getMetas} from "@store/clientActions/postsAction";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const ActorsPageStyledDiv = styled.div`
   grid-area: main;
@@ -25,9 +25,9 @@ const actorsPage = () => {
 
     const isWithSidebar = useSelector((store: StoreTypes) => store.settings?.identity?.metaPageSidebar);
     const totalCount = useSelector((store: StoreTypes) => store?.posts?.totalCount)
-    const router = useRouter();
+    const {query} = useRouter();
 
-    const postsCountPerPage = router.query?.size ? parseInt(router.query?.size as string) :
+    const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
         useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
@@ -37,24 +37,20 @@ const actorsPage = () => {
             />
             <PaginationComponent
                 isActive={true}
-                currentPage={router.query?.page || 1}
+                currentPage={query?.page ? parseInt(query?.page as string) : 1}
                 totalCount={totalCount}
                 size={postsCountPerPage}
                 maxPage={Math.ceil(totalCount / postsCountPerPage)}
-                queryData={router.query}
-                pathnameData={router.pathname}
             />
 
             <ActorsRenderer/>
 
             <PaginationComponent
                 isActive={true}
-                currentPage={router.query?.page || 1}
+                currentPage={query?.page ? parseInt(query?.page as string) : 1}
                 totalCount={totalCount}
                 size={postsCountPerPage}
                 maxPage={Math.ceil(totalCount /postsCountPerPage)}
-                queryData={router.query}
-                pathnameData={router.pathname}
             />
             <WidgetsRenderer
                 position={'actorsPageBottom'}
@@ -65,13 +61,16 @@ const actorsPage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    await getFirstLoadData(
-        context.req,
-        ['actorsPageTop', 'actorsPageLeftSidebar', 'actorsPageBottom', 'actorsPageRightSidebar'],
-        store,
-        context.locale
-    );
 
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'actorsPageTop',
+            'actorsPageLeftSidebar',
+            'actorsPageBottom',
+            'actorsPageRightSidebar'
+        ]))
     // @ts-ignore
     await store.dispatch(getMetas(context.query, 'actors', true))
 

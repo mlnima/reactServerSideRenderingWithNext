@@ -1,5 +1,5 @@
 import React, {useEffect, useState, useRef} from 'react';
-import {userImageUpload} from '../../../../_variables/ajaxVariables'
+import {userImageUpload} from '../../../../_variables/_ajaxFilesVariables'
 import ProfileImage from '../ProfileImage/ProfileImage'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";

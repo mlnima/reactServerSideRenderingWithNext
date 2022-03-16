@@ -1,13 +1,12 @@
-import {useEffect, useState, useRef, ChangeEvent} from 'react';
+import { useState, useRef, ChangeEvent} from 'react';
 import {youtubeDataScrapper} from '@_variables/ajaxVariables'
-
-import {savePost} from '@_variables/ajaxPostsVariables'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {setAlert, setLoading} from "@store/clientActions/globalStateActions";
 import {updateSetting} from "@store/clientActions/settingsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {adminSaveNewPost} from "@store/adminActions/adminPanelPostsActions";
 
 let StyledDiv = styled.div`
   .admin-import-page-youtube {
@@ -89,18 +88,18 @@ const youtube = () => {
                                 postType: 'video',
                                 downloadLink: url,
                                 status: 'draft',
-                                lastModify: Date.now(),
                                 likes: 0,
                                 disLikes: 0,
                                 views: 0
                             }
-
-                            await savePost(videoData).then(() => {
-
-                            }).catch(err => {
-                                console.log(err?.response?.data?.error)
-                                dispatch(setAlert({message: err.response.data.error + ' => ' + videoData.title, type: 'error', active: true}))
-                            })
+                            // @ts-ignore
+                            dispatch(adminSaveNewPost(videoData,null))
+                            // await savePost(videoData).then(() => {
+                            //
+                            // }).catch(err => {
+                            //     console.log(err?.response?.data?.error)
+                            //     dispatch(setAlert({message: err.response.data.error + ' => ' + videoData.title, type: 'error', active: true}))
+                            // })
                         }
                     }
 

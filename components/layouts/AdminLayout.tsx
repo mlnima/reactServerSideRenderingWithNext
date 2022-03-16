@@ -1,19 +1,19 @@
 import React, {useRef, useEffect} from 'react';
 import dynamic from "next/dynamic";
-import Head from "next/head";
-import TopBar from "../adminIncludes/TopBar/AdminTopBar";
-import SideBar from "../adminIncludes/SideBar/SideBar";
+import AdminPanelTopBar from "../adminIncludes/TopBar/AdminPanelTopBar";
+import AdminPanelMainMenu from "../adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu";
 import {useDispatch, useSelector} from 'react-redux';
-import {autoUserLogin} from "../../store/clientActions/userActions";
+import {autoUserLogin} from "@store/clientActions/userActions";
 import AdminPanelGlobalStyles from "../global/Styles/AdminPanelGlobalStyles";
 import Link from "next/link";
 import AdminDataSetter from "../global/AdminDataSetter";
 import GlobalStyles from "../global/Styles/GlobalStylesComponent";
-
+import {Provider} from "react-redux";
+import {adminStore} from '@store/adminStore'
+import styled from "styled-components";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
-
-import styled from "styled-components";
 
 const AdminLayout403StyledDiv = styled.div`
   display: flex;
@@ -21,7 +21,7 @@ const AdminLayout403StyledDiv = styled.div`
   align-items: center;
   background-color: var(--admin-main-background-color);
   width: 100vw;
-  height: 100vh;
+  min-height: 100vh;
 
   a {
     color: var(--admin-main-text-color);
@@ -32,7 +32,9 @@ const AdminLayout403StyledDiv = styled.div`
 const AdminLayoutStyledDiv = styled.div`
   display: grid;
   grid-template-columns: 1fr;
-  grid-template-areas:  'admin-content' 'admin-footer';
+  grid-template-areas: 'admin-panel-topbar'
+                       'admin-content' 
+                       'admin-footer';
   position: relative;
 
   .Admin {
@@ -51,13 +53,21 @@ const AdminLayoutStyledDiv = styled.div`
   }
 `
 const AdminLayout = props => {
-    const settings = useSelector(store => store?.settings)
-    const globalState = useSelector(store => store?.globalState)
+
     const dispatch = useDispatch()
-    const loggedIn = useSelector(store => store?.user?.loggedIn)
-    const userData = useSelector(store => store?.user?.userData)
     const container = useRef(null);
     const Admin = useRef(null);
+
+    const {globalState, loggedIn, userData,loading,alert} = useSelector(({settings, globalState, user}: StoreTypes) => {
+        return {
+            settings,
+            globalState,
+            loggedIn: user.loggedIn,
+            userData: user.userData,
+            loading: globalState.loading,
+            alert: globalState.alert.active,
+        }
+    })
 
     useEffect(() => {
         if (localStorage.wt && !loggedIn) {
@@ -67,28 +77,20 @@ const AdminLayout = props => {
 
     if (userData.role === 'administrator') {
         return (
-            <>
-                <Head>
-                    <title>Admin Panel</title>
-                    <meta name="theme-color" content="#000000"/>
-                    <meta name="viewport" content="width=device-width, initial-scale=1"/>
-                    <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&amp;display=swap" rel="stylesheet"/>
-                    <meta charSet="utf-8"/>
-                </Head>
-                <AdminDataSetter/>
-                <AdminPanelGlobalStyles/>
-                <GlobalStyles colors={settings.design?.customColors || ''} globalStyleData={settings.design?.customStyles || ''}/>
-                <TopBar/>
+            <Provider store={adminStore}>
                 <AdminLayoutStyledDiv ref={container} className="admin-container">
-                    <SideBar/>
-                    <div ref={Admin} className="Admin">
+                    <AdminDataSetter/>
+                    <AdminPanelGlobalStyles/>
+                    <GlobalStyles/>
+                    <AdminPanelTopBar/>
+                    <AdminPanelMainMenu/>
+                    <main ref={Admin} className="Admin">
                         {props.children}
-                    </div>
+                    </main>
+                    {loading ? <Loading/> : null}
+                    {alert && globalState?.alert?.message ? <AlertBox/> : null}
                 </AdminLayoutStyledDiv>
-
-                {globalState?.loading ? <Loading/> : null}
-                {globalState?.alert?.active && globalState?.alert?.message ? <AlertBox/> : null}
-            </>
+            </Provider>
         );
     } else return (
         <AdminLayout403StyledDiv className='access-denied-admin'>

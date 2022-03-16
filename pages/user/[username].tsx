@@ -1,5 +1,4 @@
 import React, {FC, useEffect} from 'react';
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import UserPageProfileImage from "../../components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage";
 import UserPageActionButtons from "../../components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 import {useRouter} from "next/router";
@@ -11,6 +10,7 @@ import {useTranslation} from 'next-i18next';
 import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {getSpecificUserData, getUserPageData} from "@store/clientActions/userActions";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const UserPageStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -155,12 +155,16 @@ const user : FC = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    await getFirstLoadData(
-        context.req,
-        ['userPageRightSidebar,userPageLeftSidebar'],
-        store,
-        context.locale
-    )
+
+
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'userPageRightSidebar',
+            'userPageLeftSidebar',
+        ]))
+
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),

@@ -2,9 +2,9 @@ import {FC} from "react";
 import {useMemo} from 'react';
 import {useRouter} from "next/router";
 import {useDispatch, useSelector} from "react-redux";
-import {checkRouteAndSetLoading} from "../../../../store/clientActions/globalStateActions";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
-import {MenuItem} from "../../../../_variables/TypeScriptTypes/WidgetsInterfaces";
+import {checkRouteAndSetLoading} from "@store/clientActions/globalStateActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 import dynamic from "next/dynamic";
 
 const DesktopMenuWidget = dynamic(() => import('./DesktopMenuWidget/DesktopMenuWidget'));

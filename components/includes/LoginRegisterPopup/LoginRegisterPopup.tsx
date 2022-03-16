@@ -1,9 +1,9 @@
-import React from 'react';
+import {FC} from 'react';
 import LoginRegisterPopupForms from "./LoginRegisterPopupForms";
 import styled from "styled-components";
 
 const LoginRegisterPopupStyledDiv = styled.div`
-  background-color: rgba(0,0,0,.8);
+  background-color: rgba(0, 0, 0, .8);
   display: flex;
   justify-content: center;
   flex-direction: column;
@@ -19,10 +19,10 @@ const LoginRegisterPopupStyledDiv = styled.div`
   z-index: 1001;
 `;
 
-const LoginRegisterPopup = () => {
+const LoginRegisterPopup: FC = () => {
     return (
-        <LoginRegisterPopupStyledDiv className='login-register-popup' >
-            <LoginRegisterPopupForms />
+        <LoginRegisterPopupStyledDiv className='login-register-popup'>
+            <LoginRegisterPopupForms/>
         </LoginRegisterPopupStyledDiv>
     );
 };

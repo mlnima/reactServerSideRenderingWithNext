@@ -1,11 +1,12 @@
-import React, {useState,useEffect} from 'react';
+import React, {useState, useEffect, FC} from 'react';
 import styled from "styled-components";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {SyncLoader} from "react-spinners";
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../store/clientActions/globalStateActions";
+import {setLoading} from "@store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 let StyledDiv = styled.div`
   position: fixed;
@@ -41,10 +42,10 @@ let StyledDiv = styled.div`
 `
 
 
-const Loading = () => {
+const Loading: FC = () => {
     const dispatch = useDispatch()
-    const loading = useSelector((store)=>store?.globalState?.loading)
-    const pathname = useRouter()?.pathname
+    const loading = useSelector(({globalState}: StoreTypes) => globalState?.loading)
+    const {pathname} = useRouter()
     const [render, setRender] = useState(false)
 
     useEffect(() => {
@@ -56,23 +57,23 @@ const Loading = () => {
     }, []);
 
     useEffect(() => {
-        if (loading){
-            setTimeout(()=>{
+        if (loading) {
+            setTimeout(() => {
                 dispatch(setLoading(false))
-            },1000)
+            }, 1000)
         }
     }, [pathname]);
 
-    if (render){
+    if (render) {
         return (
-            <StyledDiv className='Loading' >
+            <StyledDiv className='Loading'>
                 <button className='stopLoading fas fa-times' onClick={() => dispatch(setLoading(false))}>
                     <FontAwesomeIcon style={{width: '1rem', height: '1rem'}} icon={faTimes} className='stopLoading'/>
                 </button>
                 <SyncLoader color='var(--main-active-color,blue)' loading={true} size={20}/>
             </StyledDiv>
         );
-    }else return null
+    } else return null
 };
 
 export default Loading;

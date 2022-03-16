@@ -1,11 +1,9 @@
 import React, {FC} from "react";
-import {getFirstLoadData} from '@_variables/ajaxVariables';
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 import {useRouter} from "next/router";
 import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {wrapper} from "@store/store";
@@ -14,6 +12,8 @@ import { StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import capitalizeFirstLetter from "../../_variables/util/capitalizeFirstLetter";
 import {getPosts} from "@store/clientActions/postsAction";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 let StyledMain = styled.main`
   grid-area: main;
@@ -42,7 +42,6 @@ const tagPage: FC = () => {
             tagPageStyle: store.settings.design?.tagPageStyle,
         }
     })
-    // console.log(storeData)
 
     return (
         <StyledMain className="main posts-page" stylesData={storeData.tagPageStyle || ''}>
@@ -81,14 +80,20 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     const tagId = context.query.tagId as string;
     if (!tagId) return {notFound: true};
     if (!tagId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
-    await getFirstLoadData(
-        context.req,
-        ['tagPageTop', 'tagPageLeftSidebar', 'tagPageBottom', 'tagPageRightSidebar'],
-        store,
-        context.locale
-    );
+
     // @ts-ignore
-    await store.dispatch(getPosts(context.query, context.query.tagId, true,'tagData'))
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'tagPageTop',
+            'tagPageLeftSidebar',
+            'tagPageBottom',
+            'tagPageRightSidebar'
+        ]))
+
+    // @ts-ignore
+    await store.dispatch(getPosts(context.query, context.query.tagId, true,'tags'))
+
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),

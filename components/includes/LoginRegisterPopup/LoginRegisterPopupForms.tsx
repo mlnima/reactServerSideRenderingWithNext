@@ -1,10 +1,10 @@
 import React, {useState, useEffect, FC} from 'react';
-import {login, registerUser} from "@_variables/ajaxAuthVariables";
+
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from 'react-redux';
-import {userLogin} from "@store/clientActions/userActions";
+import {userLogin,userRegister} from "@store/clientActions/userActions";
 import styled from "styled-components";
 import {setAlert, setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
 import Draggable from 'react-draggable';
@@ -85,16 +85,7 @@ const LoginRegisterPopupFormsStyledDiv = styled.div`
         display: flex;
         flex-wrap: wrap;
         justify-content: space-between;
-
-        //input {
-        //  outline: none;
-        //  border: none;
-        //  padding: 0 7px;
-        //  height: 30px;
-        //  width: 90%;
-        //  font-size: 14px;
-        //}
-
+        
         p {
           margin: 4px 0;
           color: var(--main-text-color);
@@ -177,7 +168,7 @@ interface StateValidatorTypes {
 const LoginRegisterPopupForms: FC = () => {
     const {t} = useTranslation('common');
     const dispatch = useDispatch()
-    const globalState = useSelector((store: StoreTypes) => store?.globalState)
+    const globalState = useSelector(({globalState}: StoreTypes) => globalState)
     const [submitButtonDisable, setSubmitButtonDisable] = useState(true)
     const [state, setState] = useState<StateTypes>({});
     const [stateValidator, setStateValidator] = useState<StateValidatorTypes>({});
@@ -217,22 +208,23 @@ const LoginRegisterPopupForms: FC = () => {
 
 
         if (checkUsername && checkPasswords)
-            registerUser(state).then(res => {
-                setResponse({
-                    ...response,
-                    // @ts-ignore
-                    message: res.data.message,
-                    type: 'success',
-                })
-            }).catch(error => {
-                dispatch(setAlert({message: error.response.data.message, type: 'error', active: true}))
-                // setResponse({
-                //     ...response,
-                //     message: error.response.data.message,
-                //     type: 'error',
-                // })
-
-            })
+            dispatch(userRegister(state))
+            // registerUser(state).then(res => {
+            //     setResponse({
+            //         ...response,
+            //         // @ts-ignore
+            //         message: res.data.message,
+            //         type: 'success',
+            //     })
+            // }).catch(error => {
+            //     dispatch(setAlert({message: error.response.data.message, type: 'error', active: true}))
+            //     // setResponse({
+            //     //     ...response,
+            //     //     message: error.response.data.message,
+            //     //     type: 'error',
+            //     // })
+            //
+            // })
 
     };
 

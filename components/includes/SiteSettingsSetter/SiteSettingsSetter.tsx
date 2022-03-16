@@ -43,7 +43,6 @@ const SiteSettingSetter : FC = () => {
         if (localStorage?.wt) {
             setRenderAutoLogin(true)
         }
-        console.log(asPath)
     }, []);
 
 

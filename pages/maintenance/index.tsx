@@ -1,6 +1,6 @@
 import React from 'react';
 import styled from "styled-components";
-import {wrapper} from "../../store/store";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 // import {getFirstLoadDataStatic} from "../../_variables/ajaxVariables";
 // import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -33,14 +33,4 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     }
 })
 
-// export const getStaticProps = wrapper.getServerSideProps(store=>
-//     async (context) => {
-//     const firstLoadData = await getFirstLoadDataStatic(['maintenance'],store)
-//     return {
-//         props: {
-//             ...(await serverSideTranslations(context.locale as string, ['common','customTranslation'])),
-//             ...firstLoadData
-//         }
-//     }
-// })
 export default maintenance;

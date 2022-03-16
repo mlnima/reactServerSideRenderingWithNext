@@ -71,3 +71,26 @@ export const newFile = (fileName, filePath) => {
     };
     return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/server/files/admin-newFile', body)
 };
+
+
+export const fileUpload = async (file) => {
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/uploadFile', file)
+}
+
+export const uploadFiles = async (image) => {
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/uploadFiles', image)
+}
+
+export const postThumbnailsUpload = async (image) => {
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/fileManager/postThumbnailsUpload', image)
+}
+
+
+export const postProductTypeImages = async (image) => {
+    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/settings/fileManagerControllers-postProductTypeImages', image)
+}
+
+
+export const userImageUpload = (image) => {
+    return axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/fileManager/userImageUpload', image)
+}

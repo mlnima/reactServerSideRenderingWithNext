@@ -1,5 +1,5 @@
 import {
-    AUTO_LOGIN,
+    USER_AUTO_LOGIN,
     DELETE_CONVERSATION,
     DISPATCH_SOCKET_ID, END_CALL,
     GET_CONVERSATION,
@@ -7,8 +7,8 @@ import {
     GET_SPECIFIC_USER_DATA,
     GET_USER_PAGE_DATA,
     INCOMING_CALL,
-    LOGIN,
-    LOGOUT,
+    USER_LOGIN,
+    USER_LOGOUT,
     NEW_MESSAGE_IN_CONVERSATION,
     OUTGOING_CALL,
     SET_CALL_ACCEPTED,
@@ -56,7 +56,7 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                 ...state,
                 userPageData:action.payload
             }
-        case  AUTO_LOGIN:
+        case  USER_AUTO_LOGIN:
             return {
                 ...state,
                 userData:action.payload.userData,
@@ -70,13 +70,13 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
                     ...action.payload.userData
                 },
             }
-        case  LOGIN:
+        case  USER_LOGIN:
             return {
                 ...state,
                 userData:action.payload.userData,
                 loggedIn:action.payload.loggedIn,
             }
-        case  LOGOUT:
+        case  USER_LOGOUT:
             return {
                 ...state,
                 userData:{},

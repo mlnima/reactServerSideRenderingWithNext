@@ -1,12 +1,13 @@
+import  {FC} from "react";
 import styled from "styled-components";
 import {adminBulkActionPost} from "@store/adminActions/adminPanelPostsActions";
-import React from "react";
 import {useRouter} from "next/router";
-import {useDispatch} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faEllipsisV} from "@fortawesome/free-solid-svg-icons/faEllipsisV";
 import Draggable from 'react-draggable';
 import {reloadPageDataByAddingQuery} from "@store/adminActions/adminPanelGlobalStateActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const EditLinkForAdminStyledDiv = styled.div`
   display: flex;
@@ -34,13 +35,10 @@ const EditLinkForAdminStyledDiv = styled.div`
   }
 `
 
-interface EditLinkForAdminPropTypes{
-    _id:string,
-    status:string
-}
+const EditLinkForAdmin :FC = () => {
 
-const EditLinkForAdmin = ({_id,status}:EditLinkForAdminPropTypes) => {
     const {query, push, pathname} = useRouter()
+    const {_id,status} = useSelector(({posts}:StoreTypes)=>posts.post)
 
     const onStatusChangeHandler = (status)=>{
         dispatch(adminBulkActionPost([_id], status))
@@ -75,6 +73,7 @@ const EditLinkForAdmin = ({_id,status}:EditLinkForAdminPropTypes) => {
                     </div>
                 </EditLinkForAdminStyledDiv>
             </Draggable>
+
         )
 };
 export default EditLinkForAdmin;

@@ -1,22 +1,32 @@
 import {
-    AUTO_LOGIN, DELETE_CONVERSATION,
-    DISPATCH_SOCKET_ID, END_CALL, GET_CONVERSATION,
+    USER_AUTO_LOGIN,
+    DELETE_CONVERSATION,
+    DISPATCH_SOCKET_ID,
+    END_CALL,
+    GET_CONVERSATION,
     GET_CONVERSATIONS,
-    GET_SPECIFIC_USER_DATA, GET_USER_PAGE_DATA, INCOMING_CALL,
-    LOGIN, NEW_MESSAGE_IN_CONVERSATION, OUTGOING_CALL,
-    SET_ALERT, SET_CALL_ACCEPTED, SET_PARTNER_VIDEO
+    GET_SPECIFIC_USER_DATA,
+    GET_USER_PAGE_DATA,
+    INCOMING_CALL,
+    USER_LOGIN,
+    NEW_MESSAGE_IN_CONVERSATION,
+    OUTGOING_CALL,
+    SET_ALERT,
+    SET_CALL_ACCEPTED,
+    SET_PARTNER_VIDEO, LOADING, LOGIN_REGISTER_FORM
 } from '@store/types';
 import axios from 'axios';
 import Peer from 'simple-peer'
-import socket from "../../_variables/socket";
+import socket from "@_variables/socket";
 import {EXPORT_DETAIL} from "next/constants";
+import Axios from "@_variables/util/Axios";
 
 export const userLogin = (username, password) => async dispatch => {
     try {
         await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/login', {username, password}).then(res => {
             res.data.token ? localStorage.setItem('wt', res.data.token) : null
             dispatch({
-                type: LOGIN,
+                type: USER_LOGIN,
                 payload: {userData: res.data, loggedIn: true}
             })
         })
@@ -29,13 +39,42 @@ export const userLogin = (username, password) => async dispatch => {
     }
 }
 
+export const userRegister = (data) => async dispatch => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
+    await Axios.post( '/api/v1/users/register', data).then(res=>{
+        dispatch({
+            type: SET_ALERT,
+            payload: {message: res.data.message, type: 'success'}
+        })
+        dispatch({
+            type: LOGIN_REGISTER_FORM,
+            payload: 'login'
+        })
+
+    }).catch(err=>{
+        dispatch({
+            type: SET_ALERT,
+            payload: {message: err.response.data.message, type: 'error'}
+        })
+
+    }).finally(()=>{
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
+    })
+}
+
 export const autoUserLogin = (fields) => async dispatch => {
     try {
         if (localStorage.wt) {
             await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
 
                 dispatch({
-                    type: AUTO_LOGIN,
+                    type: USER_AUTO_LOGIN,
                     payload: {userData: res.data.userData, loggedIn: true}
                 })
             })
@@ -89,7 +128,7 @@ export const getSpecificUserData = (fields) => async dispatch => {
 export const userLogOut = () => dispatch => {
     localStorage.wt ? localStorage.removeItem('wt') : null
     dispatch({
-        type: LOGIN,
+        type: USER_LOGIN,
         payload: {userData: {}, loggedIn: false}
     })
 }
@@ -338,15 +377,15 @@ export const userCreateOrder = (data)=> async dispatch =>{
 }
 
 
-export const likeDislikeView = (id, type)=> async dispatch =>{
-    const body = {
-        id,
-        type
-    };
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/posts/likeDislikeView', body).then(res=>{
-
-    })
-}
+// export const likeDislikeView = (id, type)=> async dispatch =>{
+//     const body = {
+//         id,
+//         type
+//     };
+//     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/posts/likeDislikeView', body).then(res=>{
+//
+//     })
+// }
 
 export const userDislikePost = (data)=> async dispatch =>{
 

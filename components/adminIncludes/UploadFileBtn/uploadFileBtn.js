@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import {fileUpload, postThumbnailsUpload, uploadFiles} from '../../../_variables/ajaxVariables'
+import {fileUpload, postThumbnailsUpload, uploadFiles} from '../../../_variables/_ajaxFilesVariables'
 
 const UploadFileBtn = props => {
     const uploadInputElement = useRef(null)

@@ -1,11 +1,11 @@
 import {FC} from 'react';
 import styled from "styled-components";
-import {setLoading} from "@store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
+import dynamic from "next/dynamic";
+import {setLoading} from "@store/clientActions/globalStateActions";
 import cardSizeCalculator from "@_variables/util/cardSizeCalculator";
 import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import dynamic from "next/dynamic";
-const CategoryCard = dynamic(() => import('../../../../cards/desktop/CategoryCard/CategoryCard'));
+const CategoryCard = dynamic(() => import('@components/includes/cards/desktop/CategoryCard/CategoryCard'));
 const MobileCategoryCard = dynamic(() =>
     import('@components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCard'));
 
@@ -26,7 +26,7 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ postElementSize,u
 
     const dispatch = useDispatch();
 
-    const categoriesRendererData = useSelector(({settings,posts}: StoreTypes)=>{
+    const {categoriesMetas,postsPerRawForMobile,isMobile,cardWidth} = useSelector(({settings,posts}: StoreTypes)=>{
         const elementSize = postElementSize ? postElementSize : settings?.design?.postElementSize;
         return{
             categoriesMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.categoriesMetas,
@@ -38,10 +38,10 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ postElementSize,u
 
     return (
         <CategoriesRendererStyledDiv className='categories-block'>
-            {categoriesRendererData.categoriesMetas.map((category) => {
+            {categoriesMetas.map((category) => {
 
-                if (categoriesRendererData.isMobile){
-                    return <MobileCategoryCard postsPerRawForMobile={categoriesRendererData.postsPerRawForMobile}
+                if (isMobile){
+                    return <MobileCategoryCard postsPerRawForMobile={postsPerRawForMobile}
                                                category={category}
                                                key={category._id}
                                                onActivateLoadingHandler={() => dispatch(setLoading(true))}
@@ -49,7 +49,7 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ postElementSize,u
                 }else{
                     return <CategoryCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                          key={category._id}
-                                         cardWidth={categoriesRendererData.cardWidth}
+                                         cardWidth={cardWidth}
                                          category={category}
 
                     />

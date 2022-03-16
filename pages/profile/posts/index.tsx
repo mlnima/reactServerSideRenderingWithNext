@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import {useRouter} from "next/router";
 import Link from "next/link";
@@ -9,6 +8,7 @@ import {useSelector} from "react-redux";
 import styled from "styled-components";
 import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const PostsStyledDiv = styled.div`
   max-width: 940px;
@@ -64,15 +64,16 @@ const Posts: FC = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store =>
-    async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-        await getFirstLoadData(
-            context.req,
-            ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
-            store,
-            context.locale
-        )
+        // @ts-ignore
+        await store.dispatch(getDefaultPageData(
+            context,
+            [
+                'profilePageRightSidebar',
+                'profilePageLeftSidebar',
+                'profilePage'
+            ]))
 
         return {
             props: {

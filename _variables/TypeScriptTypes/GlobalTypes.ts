@@ -1,6 +1,7 @@
 import type {NextApiRequest, NextApiResponse} from 'next';
 import {Comment, PostTypes} from "./PostTypes";
-import {AdminPanelUsersState} from "../../store/adminReducers/adminPanelUsersReducer";
+import {AdminPanelUsersState} from "@store/adminReducers/adminPanelUsersReducer";
+import {AdminPanelWidgetsTypes, WidgetsStateTypes} from "@_variables/TypeScriptTypes/Widgets";
 
 
 // SETTINGS
@@ -63,15 +64,20 @@ export interface IdentitySettings {
 
 // user
 export interface User {
-    firstName: string,
-    lastName: string,
-    email: string,
+    keyMaster?: boolean;
+    API_KEY?: string;
+    status?: string;
+    about?: string;
+    nickName?: string;
+    firstName?: string,
+    lastName?: string,
+    email?: string,
     _id?: string,
-    username?: string,
-    role?: string,
+    username: string,
+    role: string,
     profileImage?: string,
-    followers: object[],
-    following: object[],
+    followers?: object[],
+    following?: object[],
 }
 
 
@@ -130,37 +136,7 @@ export interface PageTypes {
 // }
 
 
-export interface WidgetPropTypes {
-    _id: string,
-    data: WidgetDataPropTypes
-}
 
-export interface WidgetDataPropTypes {
-    footerLink: string;
-    redirectToTitle: string;
-    translations: {};
-    uniqueData: any;
-    noSSR: boolean;
-    specificDayToRender: string;
-    pagination: boolean,
-    redirectLink: string,
-    customScriptStrategy: string,
-    customScript?: string,
-    text?: string,
-    position: string,
-    type: string,
-    extraClassName?: string,
-    extraId?: string,
-    title?: string,
-    customStyles?: string,
-    metaType: string,
-    viewType: string,
-    deviceTypeToRender: string,
-    languageToRender: string,
-    editMode: boolean,
-    widgetIndex: number,
-    count: number,
-}
 
 export interface MetasPropTypes {
     imageUrl?: string;
@@ -207,14 +183,6 @@ export interface AxiosErrorTypes {
     message?: string
 }
 
-
-export interface WidgetsStateInterface {
-    widgets: {
-        widgets: WidgetPropTypes[]
-    }
-}
-
-
 export interface ChatroomStateTypes {
 
     onlineUsers: object[],
@@ -223,20 +191,20 @@ export interface ChatroomStateTypes {
 
 }
 
-export interface PageDataPropTypes{
-    pageName:string,
-    _id:string,
-    sidebar:string,
-    status:string,
-    imageUrl:string,
-    pageStyle:string,
+export interface PageDataPropTypes {
+    pageName: string,
+    _id: string,
+    sidebar: string,
+    status: string,
+    imageUrl: string,
+    pageStyle: string,
 }
 
 export interface PostStateTypes {
-    tagsMetas:Meta[],
+    tagsMetas: Meta[],
     categoriesMetas: Meta[],
-    actorsMetas: Meta,
-    pageData:PageDataPropTypes,
+    actorsMetas: Meta[],
+    pageData: PageDataPropTypes,
     posts: PostTypes[],
     actorData: Meta,
     categoryData: Meta,
@@ -255,10 +223,6 @@ export interface SettingsStateTypes {
     eCommerce: object,
 }
 
-export interface WidgetsStateTypes {
-    widgetInGroups:{};
-    widgets: WidgetPropTypes[],
-}
 
 export interface GlobalStateTypes {
     loginRegisterFormPopup: boolean | string,
@@ -278,9 +242,11 @@ export interface GlobalStateTypes {
 
 export interface Translations {
     [key: string]: {
-        title: string;
-        keywords: string[];
-        description: string;
+        cookieTitleText?: string,
+        cookieMessageText?: string,
+        title: string,
+        keywords: string[],
+        description: string,
         name?: string
     }
 }
@@ -297,26 +263,27 @@ export interface AdminPanelPostsTypes {
 }
 
 export interface AdminPanelCommentsTypes {
-    comments:Comment[],
-    comment:Comment
+    comments: Comment[],
+    comment: Comment
 }
 
 export interface AdminPanelFormsTypes {
-    forms:any[],
-    form:any
+    forms: any[],
+    form: any
 }
 
 export interface AdminPanelPagesTypes {
-    pages:any[],
-    page:any
+    pages: any[],
+    page: any
 }
 
 export interface AdminPanelOrdersTypes {
-    orders:any[],
-    order:any
+    orders: any[],
+    order: any
 }
 
 export interface AdminPanelGlobalState {
+    sidebar: boolean;
     customPages: string[],
     users: User[],
     forms: [],
@@ -325,11 +292,11 @@ export interface AdminPanelGlobalState {
     orders: [],
 }
 
-export interface AdminPanelTerminalState{
+export interface AdminPanelTerminalState {
     command: string,
-    logs:string[],
-    lastCommandResult:string,
-    commandsHistory:string[]
+    logs: string[],
+    lastCommandResult: string,
+    commandsHistory: string[]
 }
 
 export interface StoreTypes {
@@ -341,6 +308,7 @@ export interface StoreTypes {
     adminPanelGlobalState: AdminPanelGlobalState,
     adminPanelPosts: AdminPanelPostsTypes,
     adminPanelTerminalState: AdminPanelTerminalState,
+    adminPanelWidgets: AdminPanelWidgetsTypes,
     chatroom: ChatroomStateTypes,
     settings: SettingsStateTypes,
     posts: PostStateTypes,
@@ -373,3 +341,35 @@ export interface InputOnChangeHandlerTypes {
 }
 
 
+//-------------------------------
+// export interface WidgetPropTypes {
+//     _id: string,
+//     data: WidgetDataPropTypes
+// }
+//
+// export interface WidgetDataPropTypes {
+//     footerLink: string;
+//     redirectToTitle: string;
+//     translations: {};
+//     uniqueData: any;
+//     noSSR: boolean;
+//     specificDayToRender: string;
+//     pagination: boolean,
+//     redirectLink: string,
+//     customScriptStrategy: string,
+//     customScript?: string,
+//     text?: string,
+//     position: string,
+//     type: string,
+//     extraClassName?: string,
+//     extraId?: string,
+//     title?: string,
+//     customStyles?: string,
+//     metaType: string,
+//     viewType: string,
+//     deviceTypeToRender: string,
+//     languageToRender: string,
+//     editMode: boolean,
+//     widgetIndex: number,
+//     count: number,
+// }

@@ -1,7 +1,7 @@
 import React, {useRef} from 'react';
-import {userImageUpload} from '../../../../_variables/ajaxVariables'
+import {userImageUpload} from '@_variables/_ajaxFilesVariables'
 import {useDispatch, useSelector} from "react-redux";
-import {setLoading} from "../../../../store/clientActions/globalStateActions";
+import {setLoading} from "@store/clientActions/globalStateActions";
 import styled from "styled-components";
 
 const ProfileImageStyledDiv = styled.div`

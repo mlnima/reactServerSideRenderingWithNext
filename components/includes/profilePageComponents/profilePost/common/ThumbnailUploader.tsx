@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useRef} from "react";
 import styled from "styled-components";
-import {fileUpload, uploadFiles} from "@_variables/ajaxVariables";
+import {fileUpload, uploadFiles} from "@_variables/_ajaxFilesVariables";
 import {useDispatch} from "react-redux";
 import {editPostField} from "@store/clientActions/postsAction";
 

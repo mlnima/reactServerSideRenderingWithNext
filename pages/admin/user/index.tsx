@@ -1,13 +1,16 @@
-import React, {useEffect, useRef, useState} from 'react';
-import {getUserData, updateUserData, newAPIKey} from '../../../_variables/ajaxAuthVariables'
-import {resetPassword} from '../../../_variables/ajaxAuthVariables'
+import React,{useEffect, useRef, useState} from 'react';
 import {useRouter} from "next/router";
-import deleteUser from "../../../_variables/adminAjaxVariables/adminAjaxUsersVariables/deleteUser";
-import {useDispatch} from "react-redux";
-import {setLoading} from "../../../store/clientActions/globalStateActions";
+import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
-import {wrapper} from "../../../store/store";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {
+    adminPanelChangePassword,
+    adminPanelChangeUserData, adminPanelDeleteUser,
+    adminPanelGetUserData, adminPanelUpdateUserData,
+    newAPIKey
+} from "@store/adminActions/adminUserActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const UserStyledDiv = styled.div`
   .user-admin-edit-profile-page-section {
@@ -51,7 +54,8 @@ const UserStyledDiv = styled.div`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    button{
+
+    button {
       margin: 20px;
     }
   }
@@ -64,26 +68,12 @@ const UserStyledDiv = styled.div`
     }
   }
 `
+
 const user = () => {
     const dispatch = useDispatch()
     const router = useRouter()
+    const userData = useSelector(({adminPanelUsers}: StoreTypes) => adminPanelUsers.user)
     const APIKeyElement = useRef(null)
-
-    const [userData, setUserData] = useState({
-        username: '',
-        status: '',
-        keyMaster: '',
-        API_KEY: '',
-        profileImage: '',
-        email: '',
-        firstName: '',
-        lastName: '',
-        nickName: '',
-        about: '',
-        role: '',
-        _id: '',
-
-    });
 
     const [resetPasswordData, setResetPasswordData] = useState({
         oldPassword: '',
@@ -91,11 +81,9 @@ const user = () => {
         newPassword2: ''
     })
 
-    const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>) => {
-        setUserData({
-            ...userData,
-            [e.target.name]: e.target.value
-        })
+    const onChangeHandler =
+        (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement> | React.ChangeEvent<HTMLSelectElement>) => {
+        dispatch(adminPanelChangeUserData({[e.target.name]: e.target.value}))
     }
 
     const onPasswordDataChangeHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
@@ -107,52 +95,35 @@ const user = () => {
     }
 
     const onPasswordResetHandler = () => {
-
-        resetPassword(resetPasswordData.oldPassword, resetPasswordData.newPassword1, resetPasswordData.newPassword2)
+        dispatch(
+            adminPanelChangePassword(
+                resetPasswordData.oldPassword,
+                resetPasswordData.newPassword1,
+                resetPasswordData.newPassword2
+            )
+        )
     }
 
     const onNewAPIKeyRequest = () => {
-        // @ts-ignore
-        newAPIKey(process.env.NEXT_PUBLIC_PRODUCTION_URL).then(res => {
-
-            setUserData({
-                ...userData,
-                // @ts-ignore
-                ...res.data.updatedData
-            })
-        })
-    }
-
-    const onSaveHandler = () => {
-        dispatch(setLoading(true))
-        updateUserData(userData).then(() => {
-            dispatch(setLoading(false))
-        }).catch(err => {
-            console.log(err)
-            dispatch(setLoading(false))
-        })
+        dispatch(newAPIKey())
+        dispatch(adminPanelGetUserData(router.query.id))
     }
 
     const onDeleteUserHandler = () => {
-        deleteUser(userData._id).then(() => router.back())
+        dispatch(adminPanelDeleteUser(userData._id,router))
     }
 
     useEffect(() => {
-        if (router.query.id) {
-            getUserData(router.query.id).then(res => {
-                // @ts-ignore
-                setUserData({...userData, ...res.data.user})
-            })
-        }
+        if (router.query.id) dispatch(adminPanelGetUserData(router.query.id))
     }, []);
 
-    // @ts-ignore
     return (
 
         <UserStyledDiv className='user-admin-edit-profile-page'>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Username :</p>
-                <input name='username' value={userData.username} onChange={e => onChangeHandler(e)} disabled={userData.username === 'admin' || userData.username === 'Admin'}/>
+                <input name='username' value={userData.username} onChange={e => onChangeHandler(e)}
+                       disabled={userData.username === 'admin' || userData.username === 'Admin'}/>
             </div>
             <div className='user-admin-edit-profile-page-section'>
                 <p>Email :</p>
@@ -183,7 +154,6 @@ const user = () => {
                 <select value={userData.role}
                         name='role'
                         onChange={e => onChangeHandler(e)}
-                       // @ts-ignore
                         disabled={userData.keyMaster}>
                     <option value='administrator'>Administrator</option>
                     <option value='author'>Author</option>
@@ -196,7 +166,6 @@ const user = () => {
                 <select value={userData.status}
                         name='status'
                         onChange={e => onChangeHandler(e)}
-                    // @ts-ignore
                         disabled={userData.keyMaster}>
                     <option value='unverified'>unverified</option>
                     <option value='verified'>verified</option>
@@ -204,15 +173,20 @@ const user = () => {
                     <option value='suspended'>suspended</option>
                 </select>
             </div>
-            <button className='saveBtn greenActionBtn' onClick={() => onSaveHandler()}>Save Changes</button>
+            <button className='saveBtn greenActionBtn' onClick={() => dispatch(adminPanelUpdateUserData(userData))}>
+                Save Changes
+            </button>
             <div className='user-admin-edit-profile-page-section-reset-password'>
                 <h2>Reset Password:</h2>
                 <p>Old Password:</p>
-                <input name='oldPassword' value={resetPasswordData.oldPassword} onChange={e => onPasswordDataChangeHandler(e)}/>
+                <input name='oldPassword' value={resetPasswordData.oldPassword}
+                       onChange={e => onPasswordDataChangeHandler(e)}/>
                 <p>New Password:</p>
-                <input name='newPassword1' value={resetPasswordData.newPassword1} onChange={e => onPasswordDataChangeHandler(e)}/>
+                <input name='newPassword1' value={resetPasswordData.newPassword1}
+                       onChange={e => onPasswordDataChangeHandler(e)}/>
                 <p>Repeat New Password:</p>
-                <input name='newPassword2' value={resetPasswordData.newPassword2} onChange={e => onPasswordDataChangeHandler(e)}/>
+                <input name='newPassword2' value={resetPasswordData.newPassword2}
+                       onChange={e => onPasswordDataChangeHandler(e)}/>
                 <button className='saveBtn greenActionBtn' onClick={onPasswordResetHandler}>Reset The Password</button>
             </div>
             <div className='user-admin-edit-profile-page-section-API'>

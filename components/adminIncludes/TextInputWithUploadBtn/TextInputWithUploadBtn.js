@@ -2,7 +2,7 @@ import React, { useRef } from 'react';
 import UploadFileBtn from '../UploadFileBtn/uploadFileBtn'
 import convertVariableNameToName from "../../../_variables/util/convertVariableNameToName";
 
-import {fileUpload,postThumbnailsUpload} from "../../../_variables/ajaxVariables";
+import {fileUpload,postThumbnailsUpload} from "../../../_variables/_ajaxFilesVariables";
 
 const TextInputWithUploadBtn = props => {
     const inputElement = useRef(null)

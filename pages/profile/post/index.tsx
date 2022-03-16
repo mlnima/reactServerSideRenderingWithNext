@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 //import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
@@ -15,6 +14,7 @@ import MetaDataSelector from "@components/includes/profilePageComponents/profile
 import Dropzone from 'react-dropzone'
 import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const ProfilePostPageStyledDiv = styled.div`
   margin: 20px 5px;
@@ -178,23 +178,20 @@ const post: FC = () => {
     );
 };
 
-export const getServerSideProps = wrapper.getServerSideProps(store =>
-    async (context) => {
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-        await getFirstLoadData(
-            context.req,
-            ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
-            store,
-            context.locale
-        )
+        // @ts-ignore
+        await store.dispatch(getDefaultPageData(
+            context,
+            [
+                'profilePageRightSidebar',
+                'profilePageLeftSidebar',
+                'profilePage'
+            ]))
 
         return {
             props: {
-                ...(
-                    await serverSideTranslations(
-                        context.locale as string, ['common', 'customTranslation']
-                    )
-                ),
+                ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
             }
         }
 

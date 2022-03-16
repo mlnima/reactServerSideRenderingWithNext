@@ -1,7 +1,6 @@
 import React from 'react';
 import {useRouter} from "next/router";
-import PaginationComponent from "../../components/includes/PaginationComponent/PaginationComponent";
-import {getFirstLoadData} from "@_variables/ajaxVariables";
+import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import CategoriesRenderer
     from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
@@ -11,15 +10,16 @@ import {useSelector} from "react-redux";
 import {settingsPropTypes, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {wrapper} from "@store/store";
 import {getMetas} from "@store/clientActions/postsAction";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const CategoriesPageStyledMain = styled.main`
   grid-area: main;
 `
 const categoriesPage = () => {
-    const router = useRouter()
+    const {query} = useRouter()
     const isWithSidebar = useSelector((store: settingsPropTypes) => store.settings?.identity?.metaPageSidebar);
     const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
-    const postsCountPerPage = router.query?.size ? parseInt(router.query?.size as string) :
+    const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
         useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
@@ -27,24 +27,20 @@ const categoriesPage = () => {
             <WidgetsRenderer position={'categoriesPageTop'}/>
             <PaginationComponent
                 isActive={true}
-                currentPage={router.query?.page || 1}
+                currentPage={query?.page ? parseInt(query?.page as string) : 1}
                 totalCount={totalCount}
                 size={postsCountPerPage}
                 maxPage={Math.ceil(totalCount / postsCountPerPage)}
-                queryData={router.query}
-                pathnameData={router.pathname}
             />
 
             <CategoriesRenderer postElementSize={undefined}/>
 
             <PaginationComponent
                 isActive={true}
-                currentPage={router.query?.page || 1}
+                currentPage={query?.page ? parseInt(query?.page as string) : 1}
                 totalCount={totalCount}
                 size={postsCountPerPage}
                 maxPage={Math.ceil(totalCount / postsCountPerPage)}
-                queryData={router.query}
-                pathnameData={router.pathname}
             />
             <WidgetsRenderer position={'categoriesPageBottom'}/>
         </CategoriesPageStyledMain>
@@ -52,13 +48,16 @@ const categoriesPage = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    await getFirstLoadData(
-        context.req,
-        ['categoriesPageTop', 'categoriesPageLeftSidebar', 'categoriesPageBottom', 'categoriesPageRightSidebar'],
-        store,
-        context.locale
-    );
 
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'categoriesPageTop',
+            'categoriesPageLeftSidebar',
+            'categoriesPageBottom',
+            'categoriesPageRightSidebar'
+        ]))
     // @ts-ignore
     await store.dispatch(getMetas(context.query, 'categories', true))
 

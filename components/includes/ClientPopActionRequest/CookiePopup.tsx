@@ -1,10 +1,11 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import Link from "next/link";
 import LanguagesSwitcher from "../widgets/LanguagesSwitcher/LanguagesSwitcher";
 import {useTranslation} from 'next-i18next';
 import {useSelector} from "react-redux";
 import {useRouter} from "next/router";
 import styled from "styled-components";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const CookiePopupStyledDiv = styled.div`
 
@@ -74,10 +75,17 @@ const CookiePopupStyledDiv = styled.div`
   }
 
 `
-const CookiePopup = () => {
+const CookiePopup: FC = () => {
+    const {locale} = useRouter()
     const {t} = useTranslation('common');
-    const settings = useSelector(store => store?.settings)
-    const router = useRouter()
+    const {
+        translations,
+        cookieTitleText,
+        cookieMessageText,
+        cookieReadMoreLink,
+        cookiePopupMessage
+    } = useSelector(({settings}: StoreTypes) => settings?.identity)
+
 
     const [state, setState] = useState({
         accepted: false,
@@ -99,17 +107,17 @@ const CookiePopup = () => {
         }
     }
 
-    if (settings?.identity?.cookiePopupMessage && !state.accepted) {
+    if (cookiePopupMessage && !state.accepted) {
         return (
             <CookiePopupStyledDiv className='cookie-popup-parent'>
              <span className='cookie-popup-content'>
                 <span className='cookie-popup-header'>
-                    <LanguagesSwitcher cookiePage={true}/>
+                    <LanguagesSwitcher/>
                 </span>
 
-              <h2>{settings?.identity?.translations[router.locale]?.cookieTitleText || settings?.identity?.cookieTitleText}</h2>
+              <h2>{translations[locale]?.cookieTitleText || cookieTitleText}</h2>
                 <p>
-                    {settings?.identity?.translations[router.locale]?.cookieMessageText || settings?.identity?.cookieMessageText}
+                    {translations[locale]?.cookieMessageText || cookieMessageText}
                 </p>
                 <div className='cookie-popup-content-action-buttons'>
                     <button className='cookie-popup-content-action-button-reject' onClick={onRejectHandler}>
@@ -119,8 +127,8 @@ const CookiePopup = () => {
                         {t('Accept')}
                     </button>
                 </div>
-                 {settings?.identity?.cookieReadMoreLink ?
-                     <Link href={settings?.identity?.cookieReadMoreLink}>
+                 {cookieReadMoreLink ?
+                     <Link href={cookieReadMoreLink}>
                          <a className='cookie-popup-content-action-read-more' onClick={onAcceptHandler}>
                              Accept and Read More
                          </a>

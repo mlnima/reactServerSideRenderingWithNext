@@ -17,10 +17,9 @@ import {
     EDIT_POST_FIELD, LIKE_POST, DISLIKE_POST, VIEW_POST
 } from "@store/types";
 import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
-import axios from "axios";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {reduceArrayOfDataToIds} from "@_variables/_variables";
-import {Comment} from '@_variables/TypeScriptTypes/PostTypes'
+
 
 export const setPostsData = postsData => async dispatch => {
     dispatch({
@@ -33,7 +32,10 @@ export const getPosts = (query,metaId,cache,metaType) => async dispatch => {
     const gettingPostsQueries = _getPostsQueryGenerator(query, metaId, cache)
     await Axios.get(`/api/v1/posts/clientGetPosts${gettingPostsQueries}`)
         .then(res=>{
-            const metaData = [metaType] && res?.data?.meta ? {[metaType]: res?.data?.meta} : {}
+            const dataForm = metaType ==='actors' ? 'actorData' :
+                metaType ==='tags' ? 'tagData':
+                metaType ==='categories' ? 'categoryData': null
+            const metaData = dataForm && res?.data?.meta ? {[dataForm]: res?.data?.meta} : {}
             dispatch({
                 type: GET_POSTS,
                 payload: {
@@ -53,12 +55,7 @@ export const getPosts = (query,metaId,cache,metaType) => async dispatch => {
 
 }
 
-export const initialPosts = (posts) => async dispatch => {
-    dispatch({
-        type: INITIAL_POSTS,
-        payload: posts
-    })
-}
+
 
 export const getPost = (_id: string) => async dispatch => {
     await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
@@ -77,6 +74,7 @@ export const getEditingPost = (_id: string) => async dispatch => {
         payload: true
     })
     await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
+
         dispatch({
             type: GET_EDITING_POST,
             payload: res.data.post
@@ -237,6 +235,35 @@ export const addNewComment = (newComment) => async dispatch => {
     })
 }
 
+export const newComment = (commentData) => async dispatch => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
+    const body = {
+        ...commentData,
+    };
+    await Axios.post(`/api/v1/posts/newComment`, body).catch(()=>{
+        dispatch({
+            type:SET_ALERT,
+            payload:{
+                active:true,
+                type:'error',
+                message:'Something Went Wrong'
+            }
+        })
+
+    }).finally(()=>{
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
+    })
+}
+
+
+
+
 export const deleteComments = (commentsListToDelete) => async dispatch => {
     dispatch({
         type: LOADING,
@@ -279,7 +306,7 @@ export const getPageData = (pageName) => async dispatch => {
     const body = {
         pageName
     }
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/pages/getPageData', body).then(res=>{
+    await Axios.post('/api/v1/pages/getPageData', body).then(res=>{
         dispatch({
             type: GET_PAGE_DATA,
             payload: res.data?.pageData || {}

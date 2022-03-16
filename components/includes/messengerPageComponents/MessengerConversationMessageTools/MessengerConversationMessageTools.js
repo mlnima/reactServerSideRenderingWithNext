@@ -2,7 +2,7 @@ import {useRef, useEffect} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import {messageToConversation} from "../../../../_variables/_userSocialAjaxVariables";
-import socket from "../../../../_variables/socket";
+import socket from "@_variables/socket";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";

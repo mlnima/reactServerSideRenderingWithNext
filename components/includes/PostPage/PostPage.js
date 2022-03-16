@@ -1,11 +1,8 @@
 import React, {useEffect, useState} from 'react';
-import {useRouter} from "next/router";
 import * as Scroll from "react-scroll";
-import {likeDislikeView} from "../../../_variables/ajaxPostsVariables";
 import dynamic from "next/dynamic";
 import PostPageStyledMain from './PostPageStyle'
 import {useSelector} from "react-redux";
-import {settingsPropTypes, StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import ratingCalculator from "../../../_variables/util/ratingCalculator";
 const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
 const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'),{ssr:false})
@@ -28,8 +25,8 @@ const PostPage = ( ) => {
     const identity = useSelector((store) => store?.settings.identity);
     const comments = useSelector(store => store?.posts?.comments)
     const post = useSelector((store ) => store?.posts.post);
-    const settings = useSelector((store) => store?.settings);
-    const router = useRouter()
+    // const settings = useSelector((store) => store?.settings);
+    // const router = useRouter()
 
     const [state, setState] = useState({
         likeValue: 0,
@@ -37,6 +34,7 @@ const PostPage = ( ) => {
         isLiked: false,
         isDisliked: false,
     });
+
     const [deviceWidth, setDeviceWidth] = useState(null);
 
     const [ratingAndViewData, setRatingAndViewData] = useState({
@@ -50,11 +48,6 @@ const PostPage = ( ) => {
         if (typeof window !== 'undefined') {
             setDeviceWidth(window.innerWidth)
         }
-        likeDislikeView(post._id, 'views').then(res => {
-            if (res.data.updatedData) {
-                setRatingAndViewData(res.data.updatedData)
-            }
-        })
     }, []);
 
     useEffect(() => {

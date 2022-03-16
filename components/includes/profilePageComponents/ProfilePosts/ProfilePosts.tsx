@@ -1,6 +1,6 @@
 import React, { useEffect, useState} from 'react';
 import withRouter from 'next/dist/client/with-router'
-import { getPosts } from '@_variables/ajaxPostsVariables'
+//import { getPosts } from '@_variables/ajaxPostsVariables'
 import PostsRenderer from '../../PostsRenderer/PostsRenderer'
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";

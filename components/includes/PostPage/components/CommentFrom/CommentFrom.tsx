@@ -1,10 +1,9 @@
 import {FC, useRef} from 'react';
-import {newComment } from '@_variables/ajaxPostsVariables';
 import styled from "styled-components";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from "react-redux";
 import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
-import {addNewComment} from "@store/clientActions/postsAction";
+import {newComment, getComments} from "@store/clientActions/postsAction";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const CommentFromStyledForm = styled.form`
@@ -57,26 +56,9 @@ const CommentFrom:FC = () => {
                 onDocumentId: _id,
             };
             if (_id) {
-                newComment(commentData).then(res => {
-                    bodyInput.current.value=''
-                    const now =  new Date(Date.now())
-                    dispatch(addNewComment({
-                        ...commentData,
-                        createdAt:now.toISOString(),
-                        updatedAt:now.toISOString() ,
-                        reply: [],
-                        likes: 0,
-                        disLikes: 0,
-                        status: 'approved',
-                        author: {
-                            _id:  userData._id,
-                            username:  userData.username,
-                            profileImage: userData.profileImage
-                        },
-                    }))
-                }).catch(err => {
-                    console.log(err)
-                });
+                dispatch(newComment(commentData))
+                bodyInput.current.value=''
+                dispatch(getComments(_id))
             }
         }else {
             dispatch(setLoginRegisterFormStatus('login'))

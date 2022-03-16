@@ -1,12 +1,13 @@
 import React, {useEffect, useState} from 'react';
 import socket from '@_variables/socket';
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {useRouter} from "next/router";
 import ChatRoomHeader from "@components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader";
 import ChatRoomMessageArea from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea";
 import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
-import ChatRoomOnlineUsersList from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
-import ChatRoomMessageUserInfoPopup from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
+import ChatRoomOnlineUsersList
+    from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
+import ChatRoomMessageUserInfoPopup
+    from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import {dispatchSocketId} from "@store/clientActions/userActions";
@@ -14,8 +15,9 @@ import {setChatroomUsers, setChatroomMessages, newMessage} from '@store/clientAc
 import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {uniqBy} from 'lodash';
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
-const chatRoom = ( ) => {
+const chatRoom = () => {
     const dispatch = useDispatch()
     const user = useSelector((store: StoreTypes) => store.user)
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
@@ -95,12 +97,9 @@ const chatRoom = ( ) => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-    await getFirstLoadData(
-        context.req,
-        ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-        store,
-        context.locale
-    )
+
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(context, []))
 
     return {
         props: {

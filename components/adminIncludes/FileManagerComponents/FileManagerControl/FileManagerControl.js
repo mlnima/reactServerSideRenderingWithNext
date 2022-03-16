@@ -1,5 +1,5 @@
 import React, {useState, useRef} from 'react';
-import {fileUpload} from '../../../../_variables/ajaxVariables';
+import {fileUpload} from '../../../../_variables/_ajaxFilesVariables';
 import styled from "styled-components";
 
 const FileManagerControlStyledDiv = styled.div`

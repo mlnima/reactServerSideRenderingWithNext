@@ -1,12 +1,14 @@
 //settings
 export const EDIT_DESIGN = 'EDIT_DESIGN'
 //widgets
+export const ADMIN_PANEL_GET_WIDGETS = 'ADMIN_PANEL_GET_WIDGETS'
 export const SAVE_NEW_WIDGET = 'SAVE_NEW_WIDGET'
 export const UPDATE_WIDGET = 'UPDATE_WIDGET'
 export const DELETE_WIDGET = 'DELETE_WIDGET'
 //users
 export const ADMIN_GET_USERS ='ADMIN_GET_USERS'
 export const ADMIN_GET_USER ='ADMIN_GET_USER'
+export const ADMIN_EDIT_USER_DATA ='ADMIN_EDIT_USER_DATA'
 //metas
 export const ADMIN_GET_META='ADMIN_GET_META'
 export const ADMIN_GET_METAS='ADMIN_GET_METAS'

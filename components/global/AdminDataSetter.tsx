@@ -7,6 +7,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {adminGetWidgets} from "@store/adminActions/adminWidgetsActions";
+import Head from 'next/head'
 
 const AdminDataSetterStyledSpan = styled.span`
   display: none;
@@ -48,7 +49,15 @@ const AdminDataSetter = () => {
     }
 
     return (
-        <AdminDataSetterStyledSpan/>
+        <>
+            <Head>
+                <meta name="theme-color" content="#000000"/>
+                <meta name="viewport" content="width=device-width, initial-scale=1"/>
+                <link href="https://fonts.googleapis.com/css?family=Montserrat:300,400,500,600&amp;display=swap"
+                      rel="stylesheet"/>
+                <meta charSet="utf-8"/>
+            </Head>
+        </>
     );
 };
 export default AdminDataSetter;

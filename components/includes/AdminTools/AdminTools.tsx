@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCogs, faEraser, faUserShield} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
@@ -10,7 +10,7 @@ import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
   position: fixed;
-  bottom: 3%;
+  bottom: 10%;
   left: 40px;
   display: flex;
   justify-content: flex-start;
@@ -42,7 +42,8 @@ let StyledDiv = styled.div`
     }
   }
 `
-const AdminTools = () => {
+
+const AdminTools :FC = () => {
 
     const dispatch = useDispatch()
     const router = useRouter()
@@ -68,9 +69,7 @@ const AdminTools = () => {
                                 <FontAwesomeIcon icon={faUserShield} className='admin-tools-item-logo'/>
                             </a>
                         </Link>
-                        <button className='admin-tools-item'
-                                rel="noreferrer" onClick={() => dispatch(clearCaches(router))}
-                        >
+                        <button className='admin-tools-item' onClick={() => dispatch(clearCaches(router))}>
                             <FontAwesomeIcon icon={faEraser} className='admin-tools-item-logo'/>
                         </button>
 
@@ -80,8 +79,5 @@ const AdminTools = () => {
             </StyledDiv>
         </Draggable>
     );
-
-
-
 };
 export default AdminTools;

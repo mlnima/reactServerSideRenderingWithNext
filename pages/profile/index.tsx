@@ -1,4 +1,3 @@
-import {getFirstLoadData} from '@_variables/ajaxVariables';
 import ProfileNavigation from '../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
 import ProfileImage from "../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
@@ -10,6 +9,7 @@ import {useSelector} from "react-redux";
 import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {FC} from "react";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const ProfileStyledMain = styled.main`
   display: flex;
@@ -106,12 +106,15 @@ const Profile : FC= () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-     await getFirstLoadData(
-        context.req,
-        ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
-        store,
-        context.locale
-    );
+
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'profilePageRightSidebar',
+            'profilePageLeftSidebar',
+            'profilePage'
+        ]))
 
     return {
         props: {

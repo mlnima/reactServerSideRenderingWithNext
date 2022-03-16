@@ -1,7 +1,8 @@
 import axios, {AxiosResponse} from "axios";
-import {WidgetPropTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {SET_WIDGETS_IN_GROUPS, LOADING, SET_ALERT} from "../types";
-import {DELETE_WIDGET, SAVE_NEW_WIDGET, UPDATE_WIDGET} from "../adminTypes";
+import {ADMIN_PANEL_GET_WIDGETS, DELETE_WIDGET, SAVE_NEW_WIDGET, UPDATE_WIDGET} from "../adminTypes";
+import Axios from "@_variables/util/Axios";
 
 export const adminGetWidgets = () => async (dispatch: any) => {
     dispatch({
@@ -30,6 +31,33 @@ export const adminGetWidgets = () => async (dispatch: any) => {
                     type: 'error',
                     err
                 }
+            })
+        })
+}
+export const adminPanelGetWidgets = () => async (dispatch: any) => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
+    await Axios.get( `/api/admin/widgets/adminPanelGetWidgets?token=${localStorage.wt}`)
+        .then((res: AxiosResponse<unknown | any>) => {
+            dispatch({
+                type:ADMIN_PANEL_GET_WIDGETS,
+                payload:res.data.widgets
+            })
+        }).catch(err => {
+            dispatch({
+                type: SET_ALERT,
+                payload: {
+                    message: 'Error While Getting Widgets',
+                    type: 'error',
+                    err
+                }
+            })
+        }).finally(()=>{
+            dispatch({
+                type: LOADING,
+                payload: false
             })
         })
 }

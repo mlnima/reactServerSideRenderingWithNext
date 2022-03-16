@@ -16,6 +16,9 @@
     "./next-i18next.config.js"
 
   ],
+  "execMap": {
+    "ts": "ts-node"
+  },
   "ext": "js json",
   "trace-warnings": true
 }

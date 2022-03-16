@@ -5,8 +5,10 @@ import dynamic from "next/dynamic";
 import styled from "styled-components";
 import PostTitle from '../components/PostTitle/PostTitle'
 import LearnTypePostPageDescription from "./components/LearnTypePostPageDescription";
-const EditLinkForAdmin = dynamic(() => import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
-const PostMetaDataToSiteHead = dynamic(() => import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
+const EditLinkForAdmin = dynamic(() =>
+    import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
+const PostMetaDataToSiteHead = dynamic(() =>
+    import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
 const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('../components/CommentFrom/CommentFrom'))
@@ -48,16 +50,13 @@ const LearnTypePostPage = () => {
         return {
             postPageStyle: settings?.design.postPageStyle,
             post: posts.post,
-            userData: user?.userData
+            role: user?.userData.role
         }
     })
 
     return (
         <LearnTypePostPageStyledMain className='main post-page' postPageStyle={learnTypePostPageData.postPageStyle}>
-            {learnTypePostPageData.userData?.role === 'administrator' ?
-                <EditLinkForAdmin _id={learnTypePostPageData.post._id} status={learnTypePostPageData.post.status}/>
-                : null
-            }
+            {learnTypePostPageData?.role === 'administrator' ? <EditLinkForAdmin/> : null}
             <PostMetaDataToSiteHead/>
             <PostTitle/>
             <LearnTypePostPageDescription/>

@@ -1,12 +1,12 @@
 import {FC} from 'react';
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import MainWidgetArea from "../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from 'next-i18next/serverSideTranslations';
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import { getDefaultPageData} from "@store/clientActions/globalStateActions";
 
-const Home : FC = () => {
+const Home: FC = () => {
     const homePageStyle = useSelector(({settings}: StoreTypes) => settings.design?.homePageStyle);
     return (
         < MainWidgetArea
@@ -17,20 +17,13 @@ const Home : FC = () => {
     );
 };
 
-
-export const getServerSideProps = wrapper.getServerSideProps(store =>
-
-    async (context ) => {
-
-        await getFirstLoadData(context.req,
-            ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
-            store,
-            context.locale
-        )
+export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+        //@ts-ignore
+        await store.dispatch(getDefaultPageData(context, ['homePageLeftSidebar', 'homePageRightSidebar', 'home']))
 
         return {
             props: {
-                ...(await serverSideTranslations(context.locale as string , ['common', 'customTranslation']))
+                ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation']))
             }
         }
 

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react'
+import {FC, useEffect, useState} from 'react'
 //import Analytics from '../../components/adminIncludes/Analytics/Analytics'
 import Link from "next/link";
 import _ from "lodash";
@@ -27,7 +27,7 @@ const AdminHomePageStyledDiv = styled.div`
 
   }
 `
-const AdminHomePage = () => {
+const AdminHomePage:FC = () => {
 
     const ip = useSelector((store: StoreTypes) => store?.settings.ip)
 

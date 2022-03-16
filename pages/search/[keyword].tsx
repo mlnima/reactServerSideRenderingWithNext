@@ -1,5 +1,4 @@
 import React, {FC} from "react";
-import {getFirstLoadData} from '@_variables/ajaxVariables';
 import {getPosts} from "@store/clientActions/postsAction";
 import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
@@ -11,6 +10,7 @@ import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDat
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 let StyledMain = styled.main`
   width: 100%;
@@ -68,26 +68,15 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     // @ts-ignore
     const keyword = context.query.keyword ? encodeURIComponent(context?.query?.keyword) : '';
     if (!keyword) return {notFound: true};
-    await getFirstLoadData(
-        context.req,
-        ['searchPageTop', 'searchPageLeftSidebar', 'searchPageBottom', 'searchPageRightSidebar'],
-        store,
-        context.locale
-    );
-    // const gettingPostsQueries = _getPostsQueryGenerator(context.query, null, true);
-    // const postsData = await getPosts(gettingPostsQueries);
-    //
-    // store.dispatch({
-    //     type: SET_POSTS_DATA,
-    //     payload: {
-    //         // @ts-ignore
-    //         posts: postsData.data?.posts || [],
-    //         // @ts-ignore
-    //         totalCount: postsData?.data?.totalCount || 0,
-    //         // @ts-ignore
-    //
-    //     }
-    // })
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'searchPageTop',
+            'searchPageLeftSidebar',
+            'searchPageBottom',
+            'searchPageRightSidebar'
+        ]))
     // @ts-ignore
     await store.dispatch(getPosts(context.query, null, true,null))
 

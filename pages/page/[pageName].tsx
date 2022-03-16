@@ -1,4 +1,3 @@
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import MainWidgetArea from "../../components/widgetsArea/MainWidgetArea/MainWidgetArea";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {ClientPagesTypes} from "@_variables/TypeScriptTypes/ClientPagesTypes";
@@ -6,6 +5,7 @@ import {wrapper} from "@store/store";
 import {getPageData} from "@store/clientActions/postsAction";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const page = (props: ClientPagesTypes) => {
 
@@ -26,16 +26,15 @@ const page = (props: ClientPagesTypes) => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     if (!context.query.pageName) return {notFound: true}
-    await getFirstLoadData(
-        context.req,
+
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
         [
-            context.query.pageName,
+            context.query.pageName as string,
             context.query.pageName + 'LeftSidebar',
             context.query.pageName + 'RightSidebar'
-        ],
-        store,
-        context.locale
-    )
+        ]))
 
     // @ts-ignore
     await store.dispatch(getPageData(context.query.pageName))

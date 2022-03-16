@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {FC} from 'react';
 import AddWidgetWithPositionMenu from './AddWidgetWithPositionMenu'
 import WidgetImporter from "./WidgetImporter/WidgetImporter";
 import WidgetExporter from "./WidgetExporter/WidgetExporter";
@@ -37,15 +37,7 @@ const AddWidgetMenuStyledDiv = styled.div`
   }
 `
 
-const AddWidgetMenu = () => {
-
-
-        const renderWidgetsTypes = widgetsTypes.map((type,index)=>{
-                return <AddWidgetWithPositionMenu key={index}
-                                                  type={type}
-                                                  name={convertVariableNameToName(type)}
-                />
-        })
+const AddWidgetMenu : FC = () => {
 
     return (
         <AddWidgetMenuStyledDiv className='add-export-widgets'>
@@ -54,7 +46,9 @@ const AddWidgetMenu = () => {
                 <WidgetExporter/>
             </div>
             <div className='add-widget-buttons'>
-                {renderWidgetsTypes}
+                {widgetsTypes.map((type :string,index:number)=>{
+                    return <AddWidgetWithPositionMenu key={index} type={type} name={convertVariableNameToName(type)}/>
+                })}
             </div>
         </AddWidgetMenuStyledDiv>
     );

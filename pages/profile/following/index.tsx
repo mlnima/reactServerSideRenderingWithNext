@@ -1,5 +1,4 @@
 import React, {FC, useEffect, useState} from 'react';
-import {getFirstLoadData} from "@_variables/ajaxVariables";
 import {getMultipleUserDataById} from "@_variables/_userSocialAjaxVariables";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -9,6 +8,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getSpecificUserData} from "@store/clientActions/userActions";
 
 import styled from "styled-components";
+import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const FollowingStyledDiv = styled.div`
   max-width: 940px;
@@ -53,12 +53,14 @@ const Following : FC = ( ) => {
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
-    await getFirstLoadData(
-        context.req,
-        ['profilePageRightSidebar,profilePageLeftSidebar', 'profilePage'],
-        store,
-        context.locale
-    )
+    // @ts-ignore
+    await store.dispatch(getDefaultPageData(
+        context,
+        [
+            'profilePageRightSidebar',
+            'profilePageLeftSidebar',
+            'profilePage'
+        ]))
 
     return {
         props: {

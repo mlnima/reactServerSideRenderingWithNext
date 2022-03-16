@@ -1,4 +1,5 @@
-import {DesignSettings,IdentitySettings,Meta,WidgetPropTypes,MetasPropTypes} from './GlobalTypes'
+import {DesignSettings,IdentitySettings,Meta,MetasPropTypes} from './GlobalTypes'
+import {WidgetPropTypes} from './Widgets'
 
 export interface ClientPagesTypes {
     actor: Meta,

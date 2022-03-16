@@ -2,7 +2,7 @@ import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {WidgetPropTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {WidgetPropTypes} from '@_variables/TypeScriptTypes/Widgets'
 import {
     _isEditMode,
     _renderByDayCondition,

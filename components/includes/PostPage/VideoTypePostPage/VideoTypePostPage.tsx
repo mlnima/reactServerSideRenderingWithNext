@@ -5,15 +5,17 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import PostTitle from "../components/PostTitle/PostTitle";
-const PostMetaDataToSiteHead = dynamic(() => import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
-const EditLinkForAdmin = dynamic(() => import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
+const PostMetaDataToSiteHead = dynamic(() =>
+    import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
+const EditLinkForAdmin = dynamic(() =>
+    import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
 const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('../components/CommentFrom/CommentFrom'))
 const WidgetsRenderer = dynamic(() => import('../../WidgetsRenderer/WidgetsRenderer'))
 const RatingButtons = dynamic(() => import('../components/RatingButtons/RatingButtons'))
 const DownloadLink = dynamic(() => import('../components/DownloadLink/DownloadLink'))
-const Price = dynamic(() => import('../components/Price/Price'))
+// const Price = dynamic(() => import('../components/Price/Price'))
 const VideoPlayer = dynamic(() => import('../components/VideoPlayer/VideoPlayer'))
 const PostDescription = dynamic(() => import('../components/PostDescription/PostDescription'))
 
@@ -25,36 +27,26 @@ const VideoTypePostPage = () => {
     const videoTypePostPageData = useSelector(({settings, user, posts}: StoreTypes) => {
         return {
             postPageStyle: settings?.design.postPageStyle,
-            userData: user?.userData,
+            role: user?.userData?.role,
             post: posts.post
         }
     })
 
     return (
         <VideoTypePostPageStyledMain className='main post-page' postPageStyle={videoTypePostPageData?.postPageStyle}>
-            {videoTypePostPageData?.userData?.role === 'administrator' ?
-                <EditLinkForAdmin _id={videoTypePostPageData?.post._id} status={videoTypePostPageData?.post.status}/>
-                : null
-            }
+            {videoTypePostPageData?.role === 'administrator' ? <EditLinkForAdmin/> : null}
             <PostMetaDataToSiteHead/>
-            {videoTypePostPageData?.post.postType === 'video' ?
-                <VideoPlayer/> : null}
+            <VideoPlayer/>
             <PostTitle/>
             <div className='rating-price-download'>
                 <RatingButtons rating={true}/>
-                {videoTypePostPageData?.post.postType === 'product' ?
-                    <Price price={videoTypePostPageData?.post.price} currency={videoTypePostPageData?.post.currency}/>
-                    : null
-                }
                 <DownloadLink
                     downloadLink={videoTypePostPageData?.post.downloadLink || videoTypePostPageData?.post.source}
                     downloadLinks={videoTypePostPageData?.post?.downloadLinks || []}
                     render={videoTypePostPageData?.post.downloadLink || videoTypePostPageData?.post.downloadLinks.length}
                 />
             </div>
-            <PostDescription description={videoTypePostPageData?.post.description}
-                             translations={videoTypePostPageData?.post.translations}
-            />
+            <PostDescription />
             <PostMeta type='actors'/>
             <PostMeta type='tags'/>
             <PostMeta type='categories'/>
@@ -67,3 +59,9 @@ const VideoTypePostPage = () => {
     );
 };
 export default VideoTypePostPage;
+
+
+// {videoTypePostPageData?.post.postType === 'product' ?
+//     <Price price={videoTypePostPageData?.post.price} currency={videoTypePostPageData?.post.currency}/>
+//     : null
+// }

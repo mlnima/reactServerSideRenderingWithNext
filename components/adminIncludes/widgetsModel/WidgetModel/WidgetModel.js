@@ -47,6 +47,10 @@ const WidgetModelStyledDiv = styled.div`
   resize: both;
   overflow: hidden;
   
+  .objectEditingModeEditor{
+    min-height: 1024px;
+  }
+  
   .widgetModel{
     overflow-y: auto;
   }
@@ -107,10 +111,11 @@ const WidgetModelStyledDiv = styled.div`
 
 const WidgetModel = props => {
     const dispatch = useDispatch()
-    const widgets = useSelector(store => store?.widgets?.widgets)
+    //const widgets = useSelector(store => store?.widgets?.widgets)
+    const widgets = useSelector(store => store?.adminPanelWidgets?.adminPanelWidgets)
 
     const currentWidgetData = useSelector(store =>
-        store?.widgets?.widgetInGroups?.[props.position].find(widget => widget._id === props.widgetId)
+        store?.adminPanelWidgets?.adminPanelWidgets?.[props.position]?.find(widget => widget._id === props.widgetId)
     )
 
     const customPages = useSelector(store => store?.adminPanelGlobalState?.customPages)
@@ -120,6 +125,7 @@ const WidgetModel = props => {
         textBox: false,
         customStyleBox: false,
         customScriptBox: false,
+        objectEditingMode: false,
         // preview: false,
         renderDeleteBtn: false,
         activeEditingLanguage: 'default'
@@ -148,6 +154,12 @@ const WidgetModel = props => {
             })
         }
     }, [currentWidgetData]);
+
+    const onObjectModeHandler = ()=>{
+        widgetSettings.objectEditingMode ?
+            setWidgetSettings({...widgetSettings,objectEditingMode:false}):
+            setWidgetSettings({...widgetSettings,objectEditingMode:true})
+    }
 
     const onChangeLanguageHandler = e => {
         setWidgetSettings({
@@ -193,7 +205,10 @@ const WidgetModel = props => {
         }
     }
 
-
+    const onObjectEditingModeChangeHandler = e =>{
+        console.log(e.target.value)
+         setWidgetData(JSON.parse(e.target.value))
+    }
 
 
     const onChangeHandler = e => {
@@ -282,6 +297,8 @@ const WidgetModel = props => {
         })
     };
 
+
+
     return (
         <WidgetModelStyledDiv className='widget-model'>
 
@@ -289,10 +306,36 @@ const WidgetModel = props => {
                                  widgetSettings={widgetSettings}
                                  widgetId={props.widgetId}
                                  widgetData={widgetData}
+                                 onObjectModeHandler={onObjectModeHandler}
                                  onLockHandler={onLockHandler}
                                  changeWidgetIndex={changeWidgetIndex}
             />
-            {widgetData.stayOpen ?
+
+
+            { widgetData.stayOpen && widgetSettings.objectEditingMode?
+
+                <MonacoEditor
+                    language={'json'}
+                    name={'widgetData'}
+                    height={1024}
+                    width={800}
+                    defaultValue={ JSON.stringify(widgetData,null,'\t')}
+                    value={JSON.stringify(widgetData,null,'\t') }
+                    className={'objectEditingModeEditor'}
+                    onChange={onObjectEditingModeChangeHandler}
+                />
+                : null
+            }
+
+
+
+
+
+
+
+
+
+            {widgetData.stayOpen && !widgetSettings.objectEditingMode?
 
                 <div className='widgetModel'>
 
@@ -643,39 +686,74 @@ const WidgetModel = props => {
                         }
 
                     </div>
-                    <button className={'btn btn-success'} onClick={() => {
-                        widgetSettings.preview ? setWidgetSettings({
-                            ...widgetSettings,
-                            preview: false
-                        }) : setWidgetSettings({...widgetSettings, preview: true})
-                    }}>Preview the Widget
-                    </button>
-                    <div className='control-buttons'>
-                        <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{
-                            width: '15px',
-                            height: '15px'
-                        }}/></button>
-                        <ExportWidget data={{...widgetData}}/>
-                        <button className={'btn btn-primary'} title="clone" onClick={() => onCloneHandler()}><FontAwesomeIcon icon={faClone} style={{
-                            width: '15px',
-                            height: '15px'
-                        }}/></button>
-                        <button className={'btn btn-primary'} title="delete" onClick={() => widgetSettings.renderDeleteBtn ? setWidgetSettings({
-                            ...widgetSettings,
-                            renderDeleteBtn: false
-                        }) : setWidgetSettings({
-                            ...widgetSettings,
-                            renderDeleteBtn: true
-                        })}>
-                            <FontAwesomeIcon icon={faTrash} style={{width: '15px', height: '15px'}}/>
-                        </button>
-                        {widgetSettings.renderDeleteBtn ?
-                            <button className={'btn btn-danger'} onClick={() => onDeleteHandler()}>Delete</button> : null}
-                    </div>
+                    {/*<button className={'btn btn-success'} onClick={() => {*/}
+                    {/*    widgetSettings.preview ? setWidgetSettings({*/}
+                    {/*        ...widgetSettings,*/}
+                    {/*        preview: false*/}
+                    {/*    }) : setWidgetSettings({...widgetSettings, preview: true})*/}
+                    {/*}}>Preview the Widget*/}
+                    {/*</button>*/}
+                    {/*<div className='control-buttons'>*/}
+                    {/*    <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{*/}
+                    {/*        width: '15px',*/}
+                    {/*        height: '15px'*/}
+                    {/*    }}/></button>*/}
+                    {/*    <ExportWidget data={{...widgetData}}/>*/}
+                    {/*    <button className={'btn btn-primary'} title="clone" onClick={() => onCloneHandler()}><FontAwesomeIcon icon={faClone} style={{*/}
+                    {/*        width: '15px',*/}
+                    {/*        height: '15px'*/}
+                    {/*    }}/></button>*/}
+                    {/*    <button className={'btn btn-primary'} title="delete" onClick={() => widgetSettings.renderDeleteBtn ? setWidgetSettings({*/}
+                    {/*        ...widgetSettings,*/}
+                    {/*        renderDeleteBtn: false*/}
+                    {/*    }) : setWidgetSettings({*/}
+                    {/*        ...widgetSettings,*/}
+                    {/*        renderDeleteBtn: true*/}
+                    {/*    })}>*/}
+                    {/*        <FontAwesomeIcon icon={faTrash} style={{width: '15px', height: '15px'}}/>*/}
+                    {/*    </button>*/}
+                    {/*    {widgetSettings.renderDeleteBtn ?*/}
+                    {/*        <button className={'btn btn-danger'} onClick={() => onDeleteHandler()}>Delete</button> : null}*/}
+                    {/*</div>*/}
                 </div>
                 : null
             }
-        </WidgetModelStyledDiv>
+
+            {widgetData.stayOpen?
+                <>
+                {/*<button className={'btn btn-success'} onClick={() => {*/}
+                {/*    widgetSettings.preview ? setWidgetSettings({*/}
+                {/*        ...widgetSettings,*/}
+                {/*        preview: false*/}
+                {/*    }) : setWidgetSettings({...widgetSettings, preview: true})*/}
+                {/*}}>Preview the Widget*/}
+                {/*</button>*/}
+                <div className='control-buttons'>
+                    <button className={'btn btn-primary'} title="save" onClick={() => onSaveHandler()}><FontAwesomeIcon icon={faSave} style={{
+                        width: '15px',
+                        height: '15px'
+                    }}/></button>
+                    <ExportWidget data={{...widgetData}}/>
+                    <button className={'btn btn-primary'} title="clone" onClick={() => onCloneHandler()}><FontAwesomeIcon icon={faClone} style={{
+                        width: '15px',
+                        height: '15px'
+                    }}/></button>
+                    <button className={'btn btn-primary'} title="delete" onClick={() => widgetSettings.renderDeleteBtn ? setWidgetSettings({
+                        ...widgetSettings,
+                        renderDeleteBtn: false
+                    }) : setWidgetSettings({
+                        ...widgetSettings,
+                        renderDeleteBtn: true
+                    })}>
+                        <FontAwesomeIcon icon={faTrash} style={{width: '15px', height: '15px'}}/>
+                    </button>
+                    {widgetSettings.renderDeleteBtn ?
+                        <button className={'btn btn-danger'} onClick={() => onDeleteHandler()}>Delete</button> : null}
+                </div>
+                </>
+                :null
+            }
+            </WidgetModelStyledDiv>
 
     );
 

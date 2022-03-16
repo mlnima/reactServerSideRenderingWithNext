@@ -102,6 +102,10 @@ export const adminUpdatePost = (data?: PostTypes) => async (dispatch: any) => {
 }
 
 export const adminSaveNewPost = (data?: PostTypes, router?: any) => async (dispatch: any) => {
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
     const body = {
         postData: data,
         token: localStorage.wt
