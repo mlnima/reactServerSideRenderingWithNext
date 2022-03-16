@@ -84,8 +84,7 @@ const ActorBioStyledDiv = styled.div`
 const ActorBio = () => {
 
     const {actorData} = useSelector(({posts}: StoreTypes) => posts)
-    const posts = useSelector(({posts}: StoreTypes) => posts)
-    console.log(posts)
+    // const posts = useSelector(({posts}: StoreTypes) => posts)
 
     return (
         <ActorBioStyledDiv className={'actor-information'}>

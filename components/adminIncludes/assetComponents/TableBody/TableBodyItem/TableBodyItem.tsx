@@ -77,7 +77,7 @@ const TableBodyItem: FC<TableBodyItemPropType> =
             <TableBodyItemSection key={property} dataValue={data[property]} dataName={property}/>
         )
     })
-console.log(data)
+
     return (
 
             <StyledDiv className='asset-page-table-body-item'>

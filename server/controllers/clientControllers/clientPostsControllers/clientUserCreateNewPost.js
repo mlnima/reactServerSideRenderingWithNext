@@ -3,8 +3,8 @@ const postSchema = require("../../../models/postSchema");
 
 module.exports = async (req, res) => {
     const newPost = req.body.postData;
-    console.log('userData:',req.userData)
-    console.log('newPost:',newPost)
+    // console.log('userData:',req.userData)
+    // console.log('newPost:',newPost)
     try {
         const newPostDataToSave = new postSchema(newPost);
 
