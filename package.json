@@ -59,6 +59,7 @@
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
+    "mailparser": "^3.4.0",
     "moment": "^2.29.1",
     "mongoose": "^6.1.8",
     "next": "^12.1.0",
@@ -125,6 +126,7 @@
     "redux-mock-store": "^1.5.4",
     "sass": "^1.49.0",
     "shelljs": "^0.8.5",
+    "smtp-server": "^3.10.0",
     "suneditor-react": "^3.3.1",
     "tsconfig-paths": "^3.12.0"
   }
