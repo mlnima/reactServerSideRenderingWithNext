@@ -1,7 +1,6 @@
-import React from 'react';
-import {wrapper} from "../../../../store/store";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import StyleSection from '../../../../components/adminIncludes/design/StyleSection/StyleSection'
+import StyleSection from '@components/adminIncludes/design/StyleSection/StyleSection'
 
 const postPage = () => {
     return (

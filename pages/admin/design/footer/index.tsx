@@ -1,9 +1,7 @@
-import React from 'react';
 import dynamic from "next/dynamic";
-const StyleSection = dynamic(() => import('../../../../components/adminIncludes/design/StyleSection/StyleSection'),{ssr:false});
-import {wrapper} from "../../../../store/store";
+const StyleSection = dynamic(() => import('@components/adminIncludes/design/StyleSection/StyleSection'),{ssr:false});
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-
 
 const footer = () => {
     return (

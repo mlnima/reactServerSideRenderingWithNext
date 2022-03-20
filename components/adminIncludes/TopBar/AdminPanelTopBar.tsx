@@ -62,10 +62,6 @@ const AdminTopBar: FC = () => {
     const router = useRouter()
     const dispatch = useDispatch()
     const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
-    const storeData = useSelector((store: StoreTypes) => store)
-    useEffect(() => {
-        console.log(storeData)
-    }, [storeData]);
 
     const AdminSideBarOpenCloseHandler = () => {
         sidebar ? dispatch(setSidebarStatus(false)) : dispatch(setSidebarStatus(true))

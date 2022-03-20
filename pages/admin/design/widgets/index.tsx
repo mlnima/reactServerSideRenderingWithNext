@@ -52,7 +52,8 @@ let StyledDiv = styled.div`
 
 const AdminWidgets = () => {
 
-    const availablePositions = useSelector(({adminPanelWidgets}: StoreTypes) => Object.keys(adminPanelWidgets?.adminPanelWidgets))
+    const availablePositions = useSelector(({adminPanelWidgets}: StoreTypes) =>
+        Object.keys(adminPanelWidgets?.adminPanelWidgets))
 
     const dispatch = useDispatch()
 

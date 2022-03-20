@@ -76,8 +76,8 @@ export interface User {
     username: string,
     role: string,
     profileImage?: string,
-    followers?: object[],
-    following?: object[],
+    followers?: {}[],
+    following?: {}[],
 }
 
 
@@ -85,10 +85,10 @@ export interface UserState {
     userData?: User,
     socketId?: string,
     loggedIn: boolean,
-    userPageData?: object,
+    userPageData?: {},
     conversations?: { _id: string }[],
     activeConversation?: {
-        messages?: object[],
+        messages?: {}[],
         users?: User[]
     },
     callData: {
@@ -145,7 +145,7 @@ export interface MetasPropTypes {
 }
 
 export interface GetServerSidePropsContext {
-    req?: object,
+    req?: {},
     notFound?: boolean,
     query?: {
         actorId?: string | undefined
@@ -185,9 +185,9 @@ export interface AxiosErrorTypes {
 
 export interface ChatroomStateTypes {
 
-    onlineUsers: object[],
-    messages: object[],
-    activeVisibleProfile: object
+    onlineUsers: {}[],
+    messages: {}[],
+    activeVisibleProfile: {}
 
 }
 
@@ -212,7 +212,7 @@ export interface PostStateTypes {
     totalCount: number,
     post: PostTypes,
     editingPost: PostTypes,
-    comments: object[],
+    comments: {}[],
 }
 
 export interface SettingsStateTypes {
@@ -220,7 +220,7 @@ export interface SettingsStateTypes {
     ip?: string,
     design: DesignSettings,
     identity: IdentitySettings,
-    eCommerce: object,
+    eCommerce: {},
 }
 
 
@@ -261,6 +261,16 @@ export interface AdminPanelPostsTypes {
     metas?: Meta[],
     activeEditingLanguage: string
 }
+export interface AdminPanelSettingsTypes {
+    isMobile?: boolean,
+    ip?: string,
+    design: DesignSettings,
+    identity: IdentitySettings,
+    eCommerce?: {},
+}
+
+
+
 
 export interface AdminPanelCommentsTypes {
     comments: Comment[],
@@ -301,6 +311,7 @@ export interface AdminPanelTerminalState {
 
 export interface StoreTypes {
     adminPanelComments: AdminPanelCommentsTypes;
+    adminPanelSettings: AdminPanelSettingsTypes;
     adminPanelForms: AdminPanelFormsTypes;
     adminPanelPages: AdminPanelPagesTypes;
     adminPanelOrders: AdminPanelOrdersTypes;

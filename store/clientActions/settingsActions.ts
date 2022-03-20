@@ -1,8 +1,8 @@
 import {ChangeEvent} from "react";
-import axios, {AxiosResponse} from "axios";
-import {GET_SETTINGS, LOADING, SET_ALERT, SET_SETTINGS} from "../types";
+import {AxiosResponse} from "axios";
+import { LOADING, SET_ALERT, SET_SETTINGS} from "../types";
 import {EDIT_DESIGN} from "@store/adminTypes";
-// import staticDataJson from '../../static/jsons/staticData.json'
+import Axios from "@_variables/util/Axios";
 
 export const setSettings = (setting: any) => (dispatch: any) => {
     dispatch({
@@ -21,7 +21,7 @@ export const updateSetting = (type: any, data: object) => async (dispatch: any) 
         data,
         token: localStorage.wt,
     };
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/settings/update', body).then((res: AxiosResponse<any>) => {
+    await Axios.post( '/api/admin/settings/update', body).then((res: AxiosResponse<any>) => {
         dispatch({
             type: SET_ALERT,
             payload: {message: res.data.message || 'updated', type: 'success'}

@@ -52,7 +52,9 @@ const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
     try {
         const identity = await settingSchema.findOne({type: 'identity'}).exec()
         const design = await settingSchema.findOne({type: 'design'}).exec()
-        const staticWidgets = await widgetSchema.find({$or: staticWidgetsQuery}).populate(widgetPopulateModel).exec()
+        const staticWidgets = await widgetSchema.find({$or: staticWidgetsQuery})
+            .populate(widgetPopulateModel)
+            .exec()
 
         fs.writeFileSync('./static/jsons/staticData.json', JSON.stringify({
             identity:identity.data,

@@ -1,15 +1,11 @@
-import React from 'react';
 import dynamic from "next/dynamic";
-import {wrapper} from "../../../../store/store";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-const StyleSection = dynamic(() => import('../../../../components/adminIncludes/design/StyleSection/StyleSection'),{ssr:false});
-
+const StyleSection = dynamic(() => import('@components/adminIncludes/design/StyleSection/StyleSection'),{ssr:false});
 
 const customStyles = () => {
     return (
-        <>
         <StyleSection name='customStyles' title='Custom Styles :'/>
-        </>
     );
 };
 

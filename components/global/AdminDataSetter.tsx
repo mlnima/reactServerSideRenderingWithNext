@@ -1,17 +1,11 @@
 import React, {FC, useEffect} from 'react';
-import {useDispatch, useSelector} from "react-redux";
-import getMultipleSetting from "../../_variables/adminAjaxVariables/adminAjaxSettingsVariables/getMultipleSetting";
-import {setSettings} from "@store/clientActions/settingsActions";
+import {useDispatch, } from "react-redux";
 import {getCustomPages} from "@store/adminActions/adminPanelGlobalStateActions";
-// import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import styled from "styled-components";
 import {useRouter} from "next/router";
 import {adminGetWidgets} from "@store/adminActions/adminWidgetsActions";
 import Head from 'next/head'
+import {adminPanelGetSettings} from "@store/adminActions/adminPanelSettingsActions";
 
-const AdminDataSetterStyledSpan = styled.span`
-  display: none;
-`
 interface AdminDataSetterPropTypes{
     userRole:string
 }
@@ -19,8 +13,6 @@ interface AdminDataSetterPropTypes{
 const AdminDataSetter:FC<AdminDataSetterPropTypes> = ({userRole}) => {
     const dispatch = useDispatch()
     const {pathname} = useRouter()
-  //  const userRole = useSelector((store: StoreTypes) => store?.user?.userData?.role)
-  //   const user = useSelector((store: StoreTypes) => store?.user)
 
     useEffect(() => {
         if (userRole === 'administrator') {
@@ -30,33 +22,18 @@ const AdminDataSetter:FC<AdminDataSetterPropTypes> = ({userRole}) => {
         }
     }, [userRole, pathname]);
 
-    // useEffect(() => {
-    //     console.log(user)
-    // }, [user]);
-
     const getAndSetDataForAdmin = async () => {
         try {
-            const settingsData = await getMultipleSetting({settings: ['identity', 'design', 'adminSettings']}, localStorage.wt)
-
             dispatch(adminGetWidgets())
             dispatch(getCustomPages())
-
-            if (settingsData?.data) {
-                // @ts-ignore
-                const identityData = settingsData.data.settings ? settingsData.data.settings.find((setting: any) => setting.type === 'identity') : {}
-                // @ts-ignore
-                const designData = settingsData.data.settings ? settingsData.data.settings.find((setting: any) => setting.type === 'design') : {}
-                dispatch(setSettings({
-                    design: designData.data,
-                    identity: identityData.data,
-                }))
-            }
+            dispatch(adminPanelGetSettings())
         } catch (err) {
             console.log(err)
         }
     }
 
-    return (
+    if (pathname.match( /\/admin/g )){
+        return (
 
             <Head>
                 <title>Admin</title>
@@ -67,6 +44,8 @@ const AdminDataSetter:FC<AdminDataSetterPropTypes> = ({userRole}) => {
                 <meta charSet="utf-8"/>
             </Head>
 
-    );
+        );
+    }else return null
+
 };
 export default AdminDataSetter;

@@ -151,6 +151,7 @@ const settings = () => {
             [e.target.name]: e.target.checked
         })
     }
+
     const onChangeHandler = (e: React.ChangeEvent<HTMLSelectElement> | React.ChangeEvent<HTMLInputElement>) => {
         const finalValue = e.target.value === 'true' ? true :
             e.target.value === 'false' ? false :

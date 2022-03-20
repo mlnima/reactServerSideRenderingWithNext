@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react';
+import React from 'react';
 import dynamic from "next/dynamic";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
@@ -7,25 +7,18 @@ import {updateSetting} from "@store/clientActions/settingsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import Head from "next/head";
+import {adminPanelEditIdentity} from "@store/adminActions/adminPanelSettingsActions";
 
 const customScript = (props: { width: any; height: any; }) => {
     const dispatch = useDispatch()
-    const identity = useSelector((store: StoreTypes) => store.settings.identity)
-    const [customScriptsAsString, setCustomScriptsAsString] = useState('')
-
-    useEffect(() => {
-        setCustomScriptsAsString(identity.customScriptsAsString)
-    }, [identity.customScriptsAsString]);
+    const identity = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.identity)
 
     const onSaveHandler = () => {
-        dispatch(updateSetting('identity', {
-            ...identity,
-            customScriptsAsString
-        }))
+        dispatch(updateSetting('identity', identity))
     }
 
     const onCustomScriptsAsStringChangeHandler = (value: any) => {
-        setCustomScriptsAsString(value)
+        dispatch(adminPanelEditIdentity({customScriptsAsString: value}))
     }
 
     return (
@@ -45,7 +38,7 @@ const customScript = (props: { width: any; height: any; }) => {
                         // @ts-ignore
                         name={'customScriptsAsString'}
                         theme={'vs-dark'}
-                        value={customScriptsAsString || ''}
+                        value={identity?.customScriptsAsString || ''}
                         onChange={onCustomScriptsAsStringChangeHandler}
                         classname='customScriptsAsString'
                         width={props.width || '100%'}

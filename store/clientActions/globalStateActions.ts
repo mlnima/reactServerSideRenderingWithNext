@@ -7,11 +7,12 @@ import {
     SET_ALERT,
     SET_WIDGETS_IN_GROUPS
 } from "@store/types";
-import staticWidgetsJson from "../../static/jsons/staticWidgets.json";
+
 import Axios from "@_variables/util/Axios";
 import _getMultipleWidgetWithDataQueryGenerator
     from "@_variables/clientVariables/_getMultipleWidgetWithDataQueryGenerator";
 import staticDataJson from "../../static/jsons/staticData.json";
+import staticWidgetsJson from "../../static/jsons/staticWidgets.json";
 import {GetServerSidePropsContext} from "next";
 // import {WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 

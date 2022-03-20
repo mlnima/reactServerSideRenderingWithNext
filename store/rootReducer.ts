@@ -14,6 +14,7 @@ import {adminPanelFormsReducer} from "./adminReducers/adminPanelFormsReducer";
 import {adminPanelPagesReducer} from "./adminReducers/adminPanelPagesReducer";
 import {adminPanelOrdersReducer} from "./adminReducers/adminPanelOrdersReducer";
 import {adminPanelWidgetsReducer} from "./adminReducers/adminWidgetsReducer";
+import {adminPanelSettingsReducer} from "@store/adminReducers/adminPanelSettingsReducer";
 
 export default combineReducers({
     chatroom:chatroomReducer,
@@ -23,6 +24,7 @@ export default combineReducers({
     widgets:widgetsReducer,
     globalState:globalStateReducer,
     adminPanelPosts:adminPanelPostsReducer,
+    adminPanelSettings:adminPanelSettingsReducer,
     adminPanelWidgets:adminPanelWidgetsReducer,
     adminPanelForms:adminPanelFormsReducer,
     adminPanelOrders:adminPanelOrdersReducer,

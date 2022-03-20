@@ -1,9 +1,10 @@
-import React, {useRef} from 'react';
-import SaveDesignChangesBtn from "../SaveDesignChangesBtn";
+import React from 'react';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {editDesign} from "../../../../store/clientActions/settingsActions";
+import {updateSetting} from "@store/clientActions/settingsActions";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {adminPanelEditDesign} from "@store/adminActions/adminPanelSettingsActions";
 
 const StyleSectionStyledDiv = styled.div`
   width: 100%;
@@ -32,20 +33,18 @@ const StyleSectionStyledDiv = styled.div`
 
 const StyleSection = props => {
     const dispatch = useDispatch()
-    const design = useSelector(store => store?.settings.design)
+    const design = useSelector(({adminPanelSettings}: StoreTypes) => adminPanelSettings?.design)
 
     const onChangeHandler = (event) => {
         if (typeof event === 'string') {
-            const e = {
-                target: {
-                    value: event,
-                    name: props.name
-                }
-            }
-            dispatch(editDesign(e))
-        } else if (typeof event === 'object') {
-            dispatch(editDesign(event))
+            dispatch(adminPanelEditDesign({[props.name]: event}))
+        }else{
+            dispatch(adminPanelEditDesign({[event.target.name]: event.target.value}))
         }
+    }
+
+    const onSaveHandler = () => {
+        dispatch(updateSetting('design', design))
     }
 
     return (
@@ -53,9 +52,10 @@ const StyleSection = props => {
             {props.name === 'customStyles' ?
                 <div className='style-section-editor'>
                     <p>Sidebar width:</p>
-                    <input type={'number'} name={'sideBarWidth'} placeholder={'default value is 320px'} value={design?.sideBarWidth || ''} onChange={onChangeHandler}/>
+                    <input type={'number'} name={'sideBarWidth'} placeholder={'default value is 320px'}
+                           value={design?.sideBarWidth || ''} onChange={onChangeHandler}/>
                 </div>
-                :null
+                : null
             }
             <h1>{props.title}</h1>
             <div className='style-section-editor'>
@@ -69,7 +69,10 @@ const StyleSection = props => {
                     height={'70vh'}
                 />
             </div>
-            <SaveDesignChangesBtn reload={false} />
+            <button className={'btn btn-primary'} onClick={onSaveHandler}>
+                Save Changes
+            </button>
+
         </StyleSectionStyledDiv>
     );
 };
