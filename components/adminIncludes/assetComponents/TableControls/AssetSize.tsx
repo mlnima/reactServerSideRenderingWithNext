@@ -20,6 +20,7 @@ const AssetSize: FC = () => {
     }
 
     return (
+        //@ts-ignore
         <AssetSizeStyledDiv className={'custom-select'} defaultValue={staticDataJson?.identity?.postsCountPerPage || 30}
                             onChange={e => onChangeHandler(e)}
         >
