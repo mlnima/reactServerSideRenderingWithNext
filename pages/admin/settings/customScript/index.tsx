@@ -51,7 +51,9 @@ const customScript = (props: { width: any; height: any; }) => {
                         width={props.width || '100%'}
                         height={props.height || '70vh'}
                     />
-                    <button className={'saveBtn btn btn-primary'} onClick={() => onSaveHandler()}>Save</button>
+                    <button className={'saveBtn btn btn-primary'} onClick={() => onSaveHandler()}>
+                        Save
+                    </button>
                 </div>
             </div>
         </>
