@@ -20,7 +20,7 @@ subSiteMapsController.subSiteMapsController = (req, res) => {
             if (post) {
                 let lastModify = new Date(post.createdAt || post.lastModify || post.updatedAt || post._id.getTimestamp());
 
-                let postUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL + `/post/${post.postType}/${post._id}`;
+                let postUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL + `/post/${post?.postType}/${post._id}`;
                 // postsElements += '<url> \n ' +
                 //     `<loc>${ postUrl }</loc>\n` +
                 //     `<lastmod>${ lastModify.toISOString() }</lastmod>\n` +

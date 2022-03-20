@@ -62,7 +62,7 @@ const PromotionCardListSmall = (props: PromotionCardListSmallPropTypes) => {
                 <span>{props.title.charAt(0).toUpperCase()}</span>
                <h3>{props.title}</h3>
             </a>
-            <Link href={`/post/${props.post.postType}/${props.post._id}`} >
+            <Link href={`/post/${props.post?.postType}/${props.post._id}`} >
                 <a className='promotion-card-link-internal' onClick={props.onActivateLoadingHandler}>
                     <img src='/public/asset/images/icons/search.svg' alt={props.title}/>
                 </a>

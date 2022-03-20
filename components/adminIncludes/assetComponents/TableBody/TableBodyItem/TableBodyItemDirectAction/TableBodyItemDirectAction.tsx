@@ -1,12 +1,13 @@
 import React, {FC} from 'react';
 import {useRouter} from "next/router";
 import Link from 'next/link';
-import {deletePage} from "@_variables/ajaxVariables";
+// import {deletePage} from "@_variables/ajaxVariables";
 import {useDispatch} from "react-redux";
 import {adminBulkActionPost, adminDeleteMeta} from "@store/adminActions/adminPanelPostsActions";
 import {reloadPageDataByAddingQuery} from "@store/adminActions/adminPanelGlobalStateActions";
 import {adminDeleteForm} from "@store/adminActions/adminPanelFormsActions";
 import {adminDeleteComments} from "@store/adminActions/adminPanelCommentsActions";
+import {adminDeleteCustomPage} from "@store/adminActions/adminPanelPagesActions";
 
 interface TableBodyItemDirectActionPropTypes {
     assetsType: string,
@@ -21,6 +22,11 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
 
     const reGetData = () => {
         setTimeout(() => dispatch(reloadPageDataByAddingQuery(query, push, pathname)), 1000)
+    }
+
+    const onDeletePageHandler=()=>{
+        dispatch(adminDeleteCustomPage(_id))
+        reGetData()
     }
 
 
@@ -110,7 +116,7 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
             <div className='asset-page-table-body-item-hover-item'>
                 <Link href={'/admin/page?id=' + _id}><a>Edit</a></Link>
                 <span className={'btn btn-danger'}
-                      onClick={() => deletePage(_id).then(() => reGetData())}
+                      onClick={onDeletePageHandler}
                 >
                     Delete
                 </span>

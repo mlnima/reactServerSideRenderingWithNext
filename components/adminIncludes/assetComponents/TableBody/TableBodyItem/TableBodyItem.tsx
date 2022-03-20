@@ -91,7 +91,7 @@ const TableBodyItem: FC<TableBodyItemPropType> =
                 </div>
                 <TableBodyItemDirectAction assetsType={assetsType}
                                           _id={data._id}
-                                          postType={data.postType}
+                                          postType={data?.postType}
                                           title={data.title}
                 />
             </StyledDiv>

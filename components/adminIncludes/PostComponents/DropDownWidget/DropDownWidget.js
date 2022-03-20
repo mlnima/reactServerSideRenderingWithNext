@@ -27,9 +27,9 @@ const DropDownWidgetStyledDiv = styled.div`
 `
 const DropDownWidget = props => {
     const post = useSelector((store) => store?.adminPanelPosts.post);
-    if (post.postType !== 'video' && post.type === 'actors') {
+    if (post?.postType !== 'video' && post?.type === 'actors') {
         return null
-    } else if (post.postType === props.renderFor || props.renderFor === 'all') {
+    } else if (post?.postType === props.renderFor || props.renderFor === 'all') {
         return (
             <DropDownWidgetStyledDiv className='post-drop-down-section'>
                 <div className='post-drop-down-section-header'>

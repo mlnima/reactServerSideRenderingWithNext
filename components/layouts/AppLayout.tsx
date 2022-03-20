@@ -93,7 +93,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
                 : null : null
             }
 
-            {userRole === 'administrator' ? <AdminDataSetter/> : null}
+            {userRole === 'administrator' ? <AdminDataSetter userRole={userRole}/> : null}
 
         </div>
     );

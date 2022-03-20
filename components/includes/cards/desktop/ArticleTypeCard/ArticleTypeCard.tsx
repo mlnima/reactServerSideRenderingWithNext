@@ -97,11 +97,11 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
          views,
          rating
      }) => {
-        const postUrl = `/post/${post.postType}/${post._id}`
+        const postUrl = `/post/${post?.postType}/${post._id}`
 
         return (
             <ArticleCard className='article-card' cardWidth={cardWidth}>
-                <Link href={`/post/${post.postType}/${post._id}`}>
+                <Link href={`/post/${post?.postType}/${post._id}`}>
                     <a rel='next' onClick={onActivateLoadingHandler}
                        className='article-card-media-link'
                        title={title}

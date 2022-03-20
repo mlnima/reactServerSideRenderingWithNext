@@ -14,7 +14,7 @@ const ActionOnPost = props => {
     const post = useSelector((store) => store?.adminPanelPosts.post);
 
     const onViewHandler = () => {
-        window.open(`/post/${post.postType}/${post._id}`, '_blank')
+        window.open(`/post/${post?.postType}/${post?._id}`, '_blank')
     }
 
     return (

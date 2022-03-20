@@ -98,7 +98,7 @@ const VideoCardTypeList =
          views
         
      }: VideoCardTypeListPropTypes) => {
-    const postUrl = `/post/${post.postType}/${post._id}`
+    const postUrl = `/post/${post?.postType}/${post._id}`
     return (
         <VideoCardTypeListStyledArticle className={'video-card-list-type'} isSidebar={isSidebar}>
             <Link href={postUrl} >

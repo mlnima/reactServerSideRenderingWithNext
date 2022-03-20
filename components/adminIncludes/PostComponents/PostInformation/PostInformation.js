@@ -126,19 +126,19 @@ const PostInformation = props => {
             <TextInputWithUploadBtn type='thumbnail' onChangeHandler={props.onChangeHandler} thumbnailsType={true} name='mainThumbnail'
                                     title='Main thumbnail' rendering={true}/>
             <ImagePreview/>
-            <Quality rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-            <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='videoEmbedCode' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <Quality rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <TextInputWithUploadBtn type='video' {...props} name='videoUrl' title='Video Url' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='videoEmbedCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='source' rendering={true} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='redirectLink' rendering={post.postType === 'promotion'} onChangeHandler={props.onChangeHandler}/>
-            <TextAreaComponent name='videoScriptCode' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-            <RenderIframe rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='redirectLink' rendering={post?.postType === 'promotion'} onChangeHandler={props.onChangeHandler}/>
+            <TextAreaComponent name='videoScriptCode' rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <RenderIframe rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInputWithUploadBtn name='VideoTrailerUrl' title='Video Trailer Url' rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
             <TextInput name='downloadLink' title='Download Link' rendering={true} onChangeHandler={props.onChangeHandler}/>
-            <Duration rendering={post.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
-            <ProductPrice rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
-            <TextInput name='shippingCost' rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
-            <ImageGallery rendering={post.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
+            <Duration rendering={post?.postType === 'video'} onChangeHandler={props.onChangeHandler}/>
+            <ProductPrice rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
+            <TextInput name='shippingCost' rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
+            <ImageGallery rendering={post?.postType === 'product'} onChangeHandler={props.onChangeHandler}/>
             <RatingAndViews name='views' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <RatingAndViews name='likes' rendering={true} onChangeHandler={props.onChangeHandler}/>
             <RatingAndViews name='disLikes' rendering={true} onChangeHandler={props.onChangeHandler}/>

@@ -3,7 +3,7 @@ const postSchema = require('../../../models/postSchema');
 
 module.exports = (req, res) => {
 
-    const postType = req.body.data.postType ? { postType: req.body.data.postType } :{}
+    const postType = req.body.data?.postType ? { postType: req.body.data.postType } :{}
     const metaId = req.body.data.metaId ? {$or: [{categories: req.body.data.metaId}, {tags: req.body.data.metaId}, {actors: req.body.data.metaId}]} :{}
     const author = req.body.data.author ? {author:req.body.data.author} : {}
     const limit = req.body.data.limit ? {limit:parseInt(req.body.data.limit)} :{}

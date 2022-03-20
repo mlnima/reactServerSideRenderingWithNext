@@ -69,14 +69,14 @@ const PostPage = ( ) => {
 
             <PostMetaDataToSiteHead/>
 
-            {post.postType === 'video' ? <VideoPlayer post={post}/> : null}
+            {post?.postType === 'video' ? <VideoPlayer post={post}/> : null}
 
-            {post.postType === 'product' ? <SlideShow post={post} sidebar={identity?.data?.postPageSidebar} deviceWidth={deviceWidth}/> : null}
+            {post?.postType === 'product' ? <SlideShow post={post} sidebar={identity?.data?.postPageSidebar} deviceWidth={deviceWidth}/> : null}
 
-            {post.postType === 'promotion' || post.postType === 'article' ? <PostTitle title={post.title} translations={post.translations}/> : null}
+            {post?.postType === 'promotion' || post?.postType === 'article' ? <PostTitle title={post.title} translations={post.translations}/> : null}
 
             {
-                post.mainThumbnail && post.postType === 'promotion' ?
+                post.mainThumbnail && post?.postType === 'promotion' ?
                     <div className='promotion-thumbnail-link'>
                         <a href={post.redirectLink}><img className='main-thumbnail' src={post.mainThumbnail} alt="title"/></a>
                         <a href={post.redirectLink} className='redirect-link' target='_blank'>go to {post.title}</a>
@@ -91,11 +91,11 @@ const PostPage = ( ) => {
 
             <div className='rating-price-download'>
                 <RatingButtons _id={post._id} ratingAndViewData={ratingAndViewData} setRatingAndViewData={setRatingAndViewData} rating={true}/>
-                {post.postType === 'product' ? <Price price={post.price} currency={post.currency} /> : null}
-                <DownloadLink downloadLink={post.downloadLink} render={post.downloadLink}/>
+                {post?.postType === 'product' ? <Price price={post.price} currency={post.currency} /> : null}
+                <DownloadLink downloadLink={post?.downloadLink} render={post.downloadLink}/>
             </div>
 
-            {post.postType !== 'promotion' && post.postType !== 'article' ? <PostDescription description={post.description} translations={post.translations}/> : null}
+            {post?.postType !== 'promotion' && post?.postType !== 'article' ? <PostDescription description={post.description} translations={post.translations}/> : null}
 
 
             {/*<PostInfo {...post} rating='enable'/>*/}

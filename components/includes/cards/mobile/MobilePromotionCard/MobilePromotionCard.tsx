@@ -103,7 +103,7 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
      }) => {
 
         const dispatch = useDispatch();
-        const postUrl = `/post/${post.postType}/${post._id}`;
+        const postUrl = `/post/${post?.postType}/${post?._id}`;
 
         const onInternalLinkClickHandler = () => {
             onActivateLoadingHandler();

@@ -3,7 +3,7 @@
 
 import {LOADING} from "@store/types";
 import Axios from "@_variables/util/Axios";
-import {AxiosError, AxiosResponse} from "axios";
+import axios, {AxiosError, AxiosResponse} from "axios";
 import {ADMIN_GET_PAGES, ADMIN_GET_PAGE, ADMIN_EDIT_PAGE_FIELD} from "@store/adminTypes";
 
 export const adminGetPages = (data) => async (dispatch: any) =>{
@@ -101,5 +101,26 @@ export const adminEditPageField  = (changes) => async (dispatch: any) =>{
     dispatch({
         type: ADMIN_EDIT_PAGE_FIELD,
         payload: changes
+    })
+}
+
+export const adminDeleteCustomPage  = (id) => async (dispatch: any) =>{
+    dispatch({
+        type: LOADING,
+        payload: true
+    })
+    const body = {
+        id,
+        token: localStorage.wt
+    }
+    await Axios.post('/api/admin/pages/deleteCustomPage', body).then(res=>{
+
+    }).catch(err=>{
+
+    }).finally(()=>{
+        dispatch({
+            type: LOADING,
+            payload: false
+        })
     })
 }

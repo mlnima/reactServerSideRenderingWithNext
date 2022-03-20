@@ -108,7 +108,7 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
          views,
          rating
      }) => {
-        const postUrl = `/post/${post.postType}/${post._id}`
+        const postUrl = `/post/${post?.postType}/${post._id}`
         const dispatch = useDispatch()
 
         const onInternalLinkClickHandler = () => {

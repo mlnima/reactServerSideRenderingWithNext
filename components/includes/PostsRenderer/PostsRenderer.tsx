@@ -101,13 +101,13 @@ const PostsRenderer:FC<PostsComponentTypes> =
                     onActivateLoadingHandler: () => dispatch(setLoading(true))
                 }
 
-                if (post.postType === 'video') {
+                if (post?.postType === 'video') {
                     return <VideoCardToRender postProps={postProps} key={index}/>
-                } else if (post.postType === 'promotion') {
+                } else if (post?.postType === 'promotion') {
                     return <PromotionCardToRender postProps={postProps} key={index}/>
-                } else if (post.postType === 'article') {
+                } else if (post?.postType === 'article') {
                     return <ArticleCardToRender postProps={postProps} key={index}/>
-                } else if (post.postType === 'learn') {
+                } else if (post?.postType === 'learn') {
                     return <LearnCardToRender postProps={postProps} key={index}/>
                 } else return (
                     <DefaultTypeCard {...postProps} key={index}/>

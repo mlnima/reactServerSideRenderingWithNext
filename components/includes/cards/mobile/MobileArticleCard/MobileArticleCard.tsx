@@ -96,7 +96,7 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
          rating
      }) => {
 
-        const postUrl = `/post/${post.postType}/${post._id}`;
+        const postUrl = `/post/${post?.postType}/${post._id}`;
 
         return (
             <MobileArticleCardStyledArticle className={'article-card'} postsPerRawForMobile={postsPerRawForMobile} >

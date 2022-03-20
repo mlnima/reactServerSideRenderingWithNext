@@ -44,13 +44,13 @@ const PostMetaDataToSiteHead: FC = () => {
             <meta name={'keywords'} content={keywords}/>
             <meta property={'og:title'} content={post.title}/>
             <meta property={'og:type'}
-                  content={post.postType === 'video' ?
+                  content={post?.postType === 'video' ?
                   'video.other' :
-                  post.postType}
+                  post?.postType}
             />
             <meta property={'og:url'} content={process.env.NEXT_PUBLIC_PRODUCTION_URL + asPath}/>
             <meta property={'og:image'} content={post.mainThumbnail}/>
-            {post.postType === 'video' ?
+            {post?.postType === 'video' ?
                 <meta property={'og:video:duration'} content={post.duration}/>
                 : null
             }

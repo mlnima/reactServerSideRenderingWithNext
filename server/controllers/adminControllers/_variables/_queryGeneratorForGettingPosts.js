@@ -21,7 +21,7 @@ module.exports = data => {
     return {
         size: size > 1000 ? 1000 : size,
         page: data?.page ? parseInt(data?.page) : 1,
-        postTypeQuery: data?.postType ? {postType: data.postType} : {},
+        postTypeQuery: data?.postType ? {postType: data?.postType} : {},
         statusQuery: data?.status ? data?.status === 'all' ? {status: {$ne: 'trash'}} : {status: data.status} : {status: 'published'},
         authorQuery: data.author ? data.author === 'all' ? {} : {author: data.author} : {},
         metaQuery,

@@ -155,10 +155,10 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
             }
             return (
                 <SwiperSlide tag="div" key={index} virtualIndex={index}>
-                    {post.postType === 'video' ? <VideoCardToRender postProps={postProps} key={index}/> :
-                        post.postType === 'promotion' ? <PromotionCardToRender postProps={postProps} key={index}/> :
-                            post.postType === 'article' ? <ArticleCardToRender postProps={postProps} key={index}/> :
-                                post.postType === 'learn' ? <LearnCardToRender postProps={postProps} key={index}/> :
+                    {post?.postType === 'video' ? <VideoCardToRender postProps={postProps} key={index}/> :
+                        post?.postType === 'promotion' ? <PromotionCardToRender postProps={postProps} key={index}/> :
+                            post?.postType === 'article' ? <ArticleCardToRender postProps={postProps} key={index}/> :
+                                post?.postType === 'learn' ? <LearnCardToRender postProps={postProps} key={index}/> :
                                     <DefaultTypeCard {...postProps} key={index}/>
                     }
                 </SwiperSlide>

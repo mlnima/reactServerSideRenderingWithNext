@@ -23,7 +23,7 @@ const PostsTypes = () => {
     return (
         <PostsTypesStyledDiv className='post-type asset-page-asset-type-selector'>
             <p>Post Type :</p>
-            <select className={'custom-select'} onChange={e => onFormatChangeHandler(e)} value={query.postType}>
+            <select className={'custom-select'} onChange={e => onFormatChangeHandler(e)} value={query?.postType}>
                 <option value='all'>All</option>
                 <option value='standard'>Standard</option>
                 <option value='video'>Video</option>

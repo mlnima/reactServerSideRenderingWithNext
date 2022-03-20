@@ -7,11 +7,11 @@ const adminAuthMiddleware = require('../../middlewares/adminAuthMiddleware')
 const adminCreateNewPage = require('./adminPagesControllers/adminCreateNewPage')
 const adminUpdatePage = require('./adminPagesControllers/adminUpdatePage')
 const adminGetPagesData = require('./adminPagesControllers/adminGetPagesData')
-const adminDeletePage = require('./adminPagesControllers/adminDeletePage')
+const adminDeleteCustomPage = require('./adminPagesControllers/adminDeleteCustomPage')
 
 router.post('/createNewPage',adminAuthMiddleware,adminCreateNewPage)
 router.post('/updatePage',adminAuthMiddleware,adminUpdatePage)
 router.post('/getPagesData',adminAuthMiddleware,adminGetPagesData)
-router.post('/deletePage',adminAuthMiddleware,adminDeletePage)
+router.post('/deleteCustomPage',adminAuthMiddleware,adminDeleteCustomPage)
 
 module.exports = router

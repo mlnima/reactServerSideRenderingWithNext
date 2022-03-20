@@ -76,12 +76,12 @@ const PostsSlider = (props:PostsSliderPropsTypes) => {
 
         }
 
-        if (post.postType === 'video') {
+        if (post?.postType === 'video') {
             return (<div className={'embla__slide'} key={postProps.post._id}>
                     <VideoTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>
                 </div>
             )
-        } else if (post.postType === 'promotion') {
+        } else if (post?.postType === 'promotion') {
             if (props.postElementSize === 'listSmall') {
                 // @ts-ignore
                 return (
@@ -98,7 +98,7 @@ const PostsSlider = (props:PostsSliderPropsTypes) => {
                 )
 
             }
-        } else if (post.postType === 'article') {
+        } else if (post?.postType === 'article') {
             return (
                 <div className={'embla__slide'}>
                     <ArticleTypeCard onActivateLoadingHandler={() => dispatch(setLoading(true))} {...postProps} key={index}/>

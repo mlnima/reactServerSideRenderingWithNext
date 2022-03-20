@@ -93,7 +93,7 @@ let StyledDiv = styled.div`
 
 const AdminPanelMainMenu = () => {
     const dispatch = useDispatch()
-    const {sidebar} = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState)
+    const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
 
     const sidebarItems = {
         Dashboard: {

@@ -29,7 +29,7 @@ siteMapsController.siteMapMonths = (req, res) => {
             postSchema.find({ createdAt: { $gte: parsedDate,$lt: endDate } }).select(' title , lastModify , postType ').limit(size).skip(size * (pageNo - 1)).exec().then(posts => {
                 renderPostData = posts.map(post => {
                     //let postUrl =process.env.NEXT_PUBLIC_PRODUCTION_URL + (`/${post.postType}/` || '/post/')+ encodeURIComponent(post.title)+'?id=' + post._id
-                    let postUrl =process.env.NEXT_PUBLIC_PRODUCTION_URL + `/post/${post.postType}/${post._id}` ;
+                    let postUrl =process.env.NEXT_PUBLIC_PRODUCTION_URL + `/post/${post?.postType}/${post._id}` ;
                     let lastModify = new Date(post.updatedAt || post.lastModify || post.createdAt || post._id.getTimestamp());
 
                     postsElements +=

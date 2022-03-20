@@ -1,4 +1,4 @@
-import {FC, useState} from 'react';
+import {FC, useEffect, useState} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
 import Link from 'next/link'
@@ -58,30 +58,38 @@ let StyledDiv = styled.div`
   }
 `
 
-const AdminTopBar:FC = () => {
+const AdminTopBar: FC = () => {
     const router = useRouter()
     const dispatch = useDispatch()
-    const {sidebar} = useSelector(({adminPanelGlobalState}:StoreTypes) => adminPanelGlobalState)
+    const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
+    const storeData = useSelector((store: StoreTypes) => store)
+    useEffect(() => {
+        console.log(storeData)
+    }, [storeData]);
 
     const AdminSideBarOpenCloseHandler = () => {
         sidebar ? dispatch(setSidebarStatus(false)) : dispatch(setSidebarStatus(true))
     };
 
     return (
-            <StyledDiv className={'admin-panel-topbar'}>
-                <div className={'admin-panel-topbar-control'}>
-                    <span className={'admin-panel-topbar-open-button adminTopBarItem'} onClick={AdminSideBarOpenCloseHandler}>
-                        <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faBars} className={'post-element-info-logo'}/>
+        <StyledDiv className={'admin-panel-topbar'}>
+            <div className={'admin-panel-topbar-control'}>
+                    <span className={'admin-panel-topbar-open-button adminTopBarItem'}
+                          onClick={AdminSideBarOpenCloseHandler}>
+                        <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faBars}
+                                         className={'post-element-info-logo'}/>
                     </span>
-                    <Link href={'/'}>
-                        <a className={'adminTopBarItem'}>
-                            <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faHome} className={'post-element-info-logo'}/>
-                        </a>
-                    </Link>
-                    <p className={'clearCache adminTopBarItem'} onClick={() => dispatch(clearCaches(router))}>Clear Caches</p>
-                </div>
-                <AdminActionMenu/>
-            </StyledDiv>
+                <Link href={'/'}>
+                    <a className={'adminTopBarItem'}>
+                        <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faHome}
+                                         className={'post-element-info-logo'}/>
+                    </a>
+                </Link>
+                <p className={'clearCache adminTopBarItem'} onClick={() => dispatch(clearCaches(router))}>Clear
+                    Caches</p>
+            </div>
+            <AdminActionMenu/>
+        </StyledDiv>
     );
 };
 export default AdminTopBar;

@@ -206,7 +206,6 @@ const WidgetModel = props => {
     }
 
     const onObjectEditingModeChangeHandler = e =>{
-        console.log(e.target.value)
          setWidgetData(JSON.parse(e.target.value))
     }
 
@@ -472,7 +471,7 @@ const WidgetModel = props => {
                         <SelectFieldForWidget title={'Post Type:'}
                                               name={'postType'}
                                               ref={null}
-                                              value={widgetData.postType}
+                                              value={widgetData?.postType}
                                               options={postTypes}
                                               onChangeHandler={onChangeHandler}
                         /> : null

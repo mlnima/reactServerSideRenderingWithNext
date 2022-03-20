@@ -1,19 +1,6 @@
 import axios from "axios";
 
-export const saveFormWidgetData = async (data) => {
-    const body = {
-        data
-    }
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/forms/saveFormData', body)
-}
 
-export const deletePage = async (id) => {
-    const body = {
-        id,
-        token: localStorage.wt
-    }
-    return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/pages/deletePage', body)
-}
 
 
 //others
@@ -24,6 +11,16 @@ export const youtubeDataScrapper = async (url) => {
     };
     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/scrapper/scrapYoutubeInfo', body)
 }
+
+
+
+// export const deletePage = async (id) => {
+//     const body = {
+//         id,
+//         token: localStorage.wt
+//     }
+//     return await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/pages/deletePage', body)
+// }
 
 //
 // export const getPagesData = async (data) => {

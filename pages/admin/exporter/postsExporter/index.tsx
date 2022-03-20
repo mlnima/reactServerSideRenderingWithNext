@@ -90,7 +90,7 @@ const postsExporter = () => {
                 </div>
 
                 <div>
-                    <select value={data.postType} className={'custom-select'} name={'postType'} onChange={e => onChangeHandler(e)}>
+                    <select value={data?.postType} className={'custom-select'} name={'postType'} onChange={e => onChangeHandler(e)}>
                         {postTypes.map((postType, index) => {
                             return (
                                 <option value={postType} key={index}>{postType}</option>

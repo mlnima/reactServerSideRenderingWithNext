@@ -47,7 +47,7 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
          rating
      }) => {
 
-        const postUrl = `/post/${post.postType}/${post._id}`;
+        const postUrl = `/post/${post?.postType}/${post._id}`;
 
         return (
             <MobileVideoCardStyledArticle postsPerRawForMobile={postsPerRawForMobile}>

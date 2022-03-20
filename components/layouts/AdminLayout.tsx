@@ -8,10 +8,9 @@ import AdminPanelGlobalStyles from "../global/Styles/AdminPanelGlobalStyles";
 import Link from "next/link";
 import AdminDataSetter from "../global/AdminDataSetter";
 import GlobalStyles from "../global/Styles/GlobalStylesComponent";
-import {Provider} from "react-redux";
-import {adminStore} from '@store/adminStore'
 import styled from "styled-components";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+
 const Loading = dynamic(() => import('../includes/Loading/Loading'), {ssr: false})
 const AlertBox = dynamic(() => import('../includes/AlertBox/AlertBox'), {ssr: false})
 
@@ -58,9 +57,12 @@ const AdminLayout = props => {
     const container = useRef(null);
     const Admin = useRef(null);
 
-    const {globalState, loggedIn, userData,loading,alert} = useSelector(({settings, globalState, user}: StoreTypes) => {
+    const {globalState, loggedIn, userData, loading, alert} = useSelector(({
+
+                                                                               globalState,
+                                                                               user
+                                                                           }: StoreTypes) => {
         return {
-            settings,
             globalState,
             loggedIn: user.loggedIn,
             userData: user.userData,
@@ -73,13 +75,13 @@ const AdminLayout = props => {
         if (localStorage.wt && !loggedIn) {
             dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'coverImage']))
         }
-    }, []);
+    }, [props]);
 
     if (userData.role === 'administrator') {
         return (
-            <Provider store={adminStore}>
+
                 <AdminLayoutStyledDiv ref={container} className="admin-container">
-                    <AdminDataSetter/>
+                    <AdminDataSetter userRole={userData.role}/>
                     <AdminPanelGlobalStyles/>
                     <GlobalStyles/>
                     <AdminPanelTopBar/>
@@ -90,7 +92,7 @@ const AdminLayout = props => {
                     {loading ? <Loading/> : null}
                     {alert && globalState?.alert?.message ? <AlertBox/> : null}
                 </AdminLayoutStyledDiv>
-            </Provider>
+
         );
     } else return (
         <AdminLayout403StyledDiv className='access-denied-admin'>
@@ -105,3 +107,7 @@ const AdminLayout = props => {
 };
 
 export default AdminLayout;
+
+
+// <Provider store={adminStore}>
+// </Provider>

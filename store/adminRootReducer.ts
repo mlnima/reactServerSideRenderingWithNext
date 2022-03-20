@@ -15,6 +15,7 @@ import {adminPanelPagesReducer} from "./adminReducers/adminPanelPagesReducer";
 import {adminPanelOrdersReducer} from "./adminReducers/adminPanelOrdersReducer";
 import {adminPanelWidgetsReducer} from "./adminReducers/adminWidgetsReducer";
 
+//NOT IN USE
 export default combineReducers({
     chatroom:chatroomReducer,
     settings:settingsReducer,

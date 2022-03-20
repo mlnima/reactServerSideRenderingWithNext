@@ -1,8 +1,9 @@
 import {FC, useState} from 'react';
-import {saveFormWidgetData} from '@_variables/ajaxVariables'
 import convertVariableNameToName from "../../../../_variables/util/convertVariableNameToName";
 import styled from "styled-components";
 import {useRouter} from "next/router";
+import {useDispatch} from "react-redux";
+import {saveFormData} from "@store/clientActions/clientWidgetsActions";
 
 const FormWidgetStyledDiv = styled.div`
   display: flex;
@@ -65,6 +66,7 @@ interface FormWidgetPropTypes {
 const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
 
     const {locale} = useRouter()
+    const dispatch = useDispatch()
 
     const [state, setState] = useState(() => {
         return {
@@ -89,12 +91,19 @@ const FormWidget: FC<FormWidgetPropTypes> = ({widgetId, uniqueData}) => {
 
     const onSubmitHandler = e => {
         e.preventDefault()
-        saveFormWidgetData({
-            ...state,
-            date: Date.now()
-        }).then(res => {
-            setSubmit(true)
-        })
+        dispatch(saveFormData(
+            {
+                ...state,
+                date: Date.now()
+            }
+        ))
+        setSubmit(true)
+        // saveFormWidgetData({
+        //     ...state,
+        //     date: Date.now()
+        // }).then(res => {
+        //     setSubmit(true)
+        // })
     }
 
     const renderFields = ((uniqueData?.formFields || [])

@@ -100,7 +100,7 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
 
         return (
             <MobileLearnCardStyledArticle className={'learn-card'} postsPerRawForMobile={postsPerRawForMobile}>
-                <Link href={`/post/${post.postType}/${post._id}`}>
+                <Link href={`/post/${post?.postType}/${post._id}`}>
                     <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-learn-card-link'} title={title}>
 
                         <LearnTypeCardMedia

@@ -4,7 +4,8 @@ import thunk from "redux-thunk";
 import reducer from './rootReducer';
 import {Context, createWrapper} from 'next-redux-wrapper';
 
-const debug = false;  //process.env.NODE_ENV === "development";
+const debug = false;
+//process.env.NODE_ENV === "development";
 
 export const makeStore = (context: Context) => {
     return createStore(reducer,

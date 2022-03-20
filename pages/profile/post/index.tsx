@@ -55,7 +55,7 @@ const post: FC = () => {
 
     useEffect(() => {
         if (query.id) dispatch(getEditingPost(query.id as string));
-        if (!query.id && query.postType) dispatch(editPostField({['postType']: query.postType}));
+        if (!query.id && query?.postType) dispatch(editPostField({['postType']: query.postType}));
     }, []);
 
     const onChangeHandler = (e: React.ChangeEvent<HTMLInputElement> | React.ChangeEvent<HTMLTextAreaElement>) => {

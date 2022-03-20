@@ -44,7 +44,7 @@ const VideoCard : FC<VideoTypeCardPropTypes> =
          views,
          rating
     }) => {
-    const postUrl = `/post/${post.postType}/${post._id}`
+    const postUrl = `/post/${post?.postType}/${post._id}`
     return (
         <VideoCardStyledArticle className={'video-card'}
                                 cardWidth={cardWidth}
