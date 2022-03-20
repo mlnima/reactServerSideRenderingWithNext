@@ -20,7 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/_variables/_writeSettingsAndStaticWidgetsToJsonFile.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/_variables/_writeSettingsAndStaticWidgetsToJsonFile.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1076,7 +1078,7 @@
       <workItem from="1647467147317" duration="2997000" />
       <workItem from="1647515971086" duration="4235000" />
       <workItem from="1647633276206" duration="4650000" />
-      <workItem from="1647731664320" duration="9585000" />
+      <workItem from="1647731664320" duration="11726000" />
     </task>
     <servers />
   </component>

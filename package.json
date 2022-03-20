@@ -5,8 +5,8 @@
   "main": "index.js",
   "scripts": {
     "dev": "concurrently \"nodemon --trace-warnings ./server.js\" \"nodemon --trace-warnings ./server/socketServer/socketServer.js\"",
-    "build": "concurrently \"NODE_ENV=production ts-node ./buildServer.js\" \"next build\"",
-    "start": "concurrently \"NODE_ENV=production ts-node ./server.js\" \"ts-node ./server/socketServer/socketServer.js\"",
+    "build": "concurrently \"NODE_ENV=production node ./buildServer.js\" \"next build\"",
+    "start": "concurrently \"NODE_ENV=production node ./server.js\" \"node ./server/socketServer/socketServer.js\"",
     "fixTimeStamsForPosts": "node tools/fixTimeStamsForPosts.js",
     "mergeDuplicateMetaData": "node tools/mergeDuplicateMetaData.js",
     "setup": "node ./tools/setup.js",

@@ -44,6 +44,7 @@ const widgetPopulateModel = [
 
 
 const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
+
     const staticWidgetsQuery = ['footer', 'header', 'topBar', 'navigation'].map(position => {
        return  {'data.position': position}
     })
@@ -52,7 +53,7 @@ const _writeSettingsAndStaticWidgetsToJsonFile = async ()=>{
         const identity = await settingSchema.findOne({type: 'identity'}).exec()
         const design = await settingSchema.findOne({type: 'design'}).exec()
         const staticWidgets = await widgetSchema.find({$or: staticWidgetsQuery}).populate(widgetPopulateModel).exec()
-//.sort({updatedAt: -1})
+
         fs.writeFileSync('./static/jsons/staticData.json', JSON.stringify({
             identity:identity.data,
             design:design.data,
