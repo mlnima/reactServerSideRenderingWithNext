@@ -24,9 +24,9 @@ const AssetSize: FC = () => {
         <AssetSizeStyledDiv className={'custom-select'} defaultValue={staticDataJson?.identity?.postsCountPerPage || 30}
                             onChange={e => onChangeHandler(e)}
         >
-            <option value={staticDataJson?.identity?.postsCountPerPage}>
-                {staticDataJson?.identity?.postsCountPerPage}
-            </option>
+            {/*<option value={staticDataJson?.identity?.postsCountPerPage}>*/}
+            {/*    {staticDataJson?.identity?.postsCountPerPage}*/}
+            {/*</option>*/}
             {range.map(unit=>{
                 return  <option value={unit}>{unit}</option>
             })}
