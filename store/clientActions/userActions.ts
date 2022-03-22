@@ -17,8 +17,8 @@ import {
 } from '@store/types';
 import axios from 'axios';
 import Peer from 'simple-peer'
-import socket from "@_variables/socket";
-import {EXPORT_DETAIL} from "next/constants";
+import {socket} from '@_variables/socket';
+//import {EXPORT_DETAIL} from "next/constants";
 import Axios from "@_variables/util/Axios";
 
 export const userLogin = (username, password) => async dispatch => {

@@ -3,7 +3,7 @@ import {useRouter} from "next/router";
 import MessengerConversationHeader from "../../components/includes/messengerPageComponents/MessengerConversationHeader/MessengerConversationHeader";
 import MessengerConversationMessageArea from "../../components/includes/messengerPageComponents/MessengerConversationMessageArea/MessengerConversationMessageArea";
 import MessengerConversationMessageTools from "../../components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools";
-import socket from '@_variables/socket'
+import {socket} from '@_variables/socket';
 import MessengerCall from "../../components/includes/messengerPageComponents/MessengerCall/MessengerCall";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {ClientPagesTypes} from "@_variables/TypeScriptTypes/ClientPagesTypes";

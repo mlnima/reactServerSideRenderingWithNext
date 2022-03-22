@@ -1,7 +1,8 @@
 import React, {useEffect, useState, useRef} from 'react';
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import socket from '@_variables/socket';
+import {socket} from '@_variables/socket';
+
 import {useRouter} from "next/router";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";

@@ -1,5 +1,5 @@
 import React, {useEffect, useState} from 'react';
-import socket from '@_variables/socket';
+import {socket} from '@_variables/socket';
 import {useRouter} from "next/router";
 import ChatRoomHeader from "@components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader";
 import ChatRoomMessageArea from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea";
