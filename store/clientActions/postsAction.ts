@@ -69,10 +69,7 @@ export const getPost = (_id: string) => async dispatch => {
 }
 
 export const getEditingPost = (_id: string) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
 
         dispatch({
@@ -82,12 +79,7 @@ export const getEditingPost = (_id: string) => async dispatch => {
 
     }).catch(err => {
 
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 
@@ -95,10 +87,7 @@ export const getEditingPost = (_id: string) => async dispatch => {
 
 export const userCreateNewPost = (data: PostTypes,router) => async dispatch => {
 
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
 
 
     const comments = data.comments ? {comments:reduceArrayOfDataToIds(data.comments)}:{}
@@ -138,12 +127,7 @@ export const userCreateNewPost = (data: PostTypes,router) => async dispatch => {
         }
     }).catch(err => {
 
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 export const userUpdatePost = (data: PostTypes) => async dispatch => {
@@ -236,10 +220,7 @@ export const addNewComment = (newComment) => async dispatch => {
 }
 
 export const newComment = (commentData) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         ...commentData,
     };
@@ -253,22 +234,14 @@ export const newComment = (commentData) => async dispatch => {
             }
         })
 
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 
 
 
 export const deleteComments = (commentsListToDelete) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.post(`/api/admin/posts/deleteComments`, {
         commentsIds: commentsListToDelete,
         token: localStorage.wt
@@ -293,12 +266,7 @@ export const deleteComments = (commentsListToDelete) => async dispatch => {
                 err
             }
         })
-    }).finally(() => {
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 

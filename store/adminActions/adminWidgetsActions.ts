@@ -5,10 +5,7 @@ import {ADMIN_PANEL_GET_WIDGETS, DELETE_WIDGET, SAVE_NEW_WIDGET, UPDATE_WIDGET} 
 import Axios from "@_variables/util/Axios";
 
 export const adminGetWidgets = () => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/widgets/adminGetWidgets?token=${localStorage.wt}`)
         .then((res: AxiosResponse<unknown | any>) => {
             dispatch({
@@ -35,10 +32,7 @@ export const adminGetWidgets = () => async (dispatch: any) => {
         })
 }
 export const adminPanelGetWidgets = () => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.get( `/api/admin/widgets/adminPanelGetWidgets?token=${localStorage.wt}`)
         .then((res: AxiosResponse<unknown | any>) => {
             dispatch({

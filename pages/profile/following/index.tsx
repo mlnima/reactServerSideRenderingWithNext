@@ -1,11 +1,11 @@
 import React, {FC, useEffect, useState} from 'react';
-import {getMultipleUserDataById} from "@_variables/_userSocialAjaxVariables";
+// import {getMultipleUserDataById} from "@_variables/_userSocialAjaxVariables";
 import UserSmallPreview from "../../../components/includes/socialComponents/UserSmallPreview/UserSmallPreview";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {getSpecificUserData} from "@store/clientActions/userActions";
+import {getMultipleUserDataById, getSpecificUserData} from "@store/clientActions/userActions";
 
 import styled from "styled-components";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
@@ -26,10 +26,7 @@ const Following : FC = ( ) => {
 
     useEffect(() => {
         if (userData?.following?.length) {
-            getMultipleUserDataById(userData?.following).then(res => {
-                // @ts-ignore
-                setFollowing(res?.data?.users || [])
-            })
+            dispatch(getMultipleUserDataById(userData?.followers,'following'))
         }
     }, [userData?.following]);
 

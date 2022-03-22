@@ -4,10 +4,7 @@ import Axios from "@_variables/util/Axios";
 import {AxiosError, AxiosResponse} from "axios";
 
 export const adminGetOrders = (data) => async (dispatch: any) =>{
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         ...data,
         token: localStorage.wt
@@ -20,10 +17,5 @@ export const adminGetOrders = (data) => async (dispatch: any) =>{
         })
     }).catch((err:AxiosError)=>{
 
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }

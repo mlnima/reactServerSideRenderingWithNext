@@ -1,5 +1,5 @@
 import ProfileNavigation from '../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation';
-import ProfileImage from "../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
+import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";

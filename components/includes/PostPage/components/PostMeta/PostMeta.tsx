@@ -50,7 +50,7 @@ const PostMeta:FC<PostMetaPropType> = ({  type}) => {
 
     const post = useSelector(({posts}:StoreTypes)=>posts.post)
 
-    const filterMeta = post?.[type].length ? post?.[type].filter(m => m.name.length > 1) : [];
+    const filterMeta = post?.[type]?.length ? post?.[type].filter(m => m.name?.length > 1) : [];
     const renderData = filterMeta.map(item => {
         const typePath = item.type === 'tags' ? 'tag' :
             item.type === 'categories' ? 'category' :
@@ -64,7 +64,7 @@ const PostMeta:FC<PostMetaPropType> = ({  type}) => {
             </div>
         )
     });
-    if (filterMeta.length){
+    if (filterMeta?.length){
         return (
             <PostMetaStyledDiv className={type + ' post-meta'}>
                 <span className='meta-type'> {t(`${type.charAt(0).toUpperCase() + type.substring(1)}`)}:</span>

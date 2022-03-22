@@ -1,4 +1,4 @@
-import {AxiosResponse, AxiosError} from "axios";
+import axios, {AxiosResponse, AxiosError} from "axios";
 import Axios from "@_variables/util/Axios";
 import {AxiosErrorTypes, Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
@@ -12,12 +12,10 @@ import {
     ADMIN_SET_TOTAL_COUNT
 } from "../adminTypes";
 import {CHANGE_ACTIVE_EDITING_LANGUAGE, LOADING, NEW_POST, SET_ALERT} from "@store/types";
+import {setLoading} from "@store/clientActions/globalStateActions";
 
 export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     if (_id) {
         await Axios.get( `/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
@@ -45,10 +43,7 @@ export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) =
 }
 
 export const adminGetPosts = (queriesData?: string) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.get(
         `/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
         .then((res: AxiosResponse<any>) => {
@@ -74,10 +69,7 @@ export const adminGetPosts = (queriesData?: string) => async (dispatch: any) => 
 }
 
 export const adminUpdatePost = (data?: PostTypes) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         postData: data,
         token: localStorage.wt
@@ -102,10 +94,7 @@ export const adminUpdatePost = (data?: PostTypes) => async (dispatch: any) => {
 }
 
 export const adminSaveNewPost = (data?: PostTypes, router?: any) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         postData: data,
         token: localStorage.wt
@@ -238,10 +227,7 @@ export const adminEditMeta = (change: object) => (dispatch: any) => {
     })
 }
 export const adminDeleteMeta = (_id: string | string[]) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
 
     const body = {
         _id,
@@ -269,10 +255,7 @@ export const adminDeleteMeta = (_id: string | string[]) => async (dispatch: any)
 }
 
 export const adminUpdateMeta = (data: Meta) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         data,
         token: localStorage.wt
@@ -301,10 +284,7 @@ export const adminUpdateMeta = (data: Meta) => async (dispatch: any) => {
 
 
 export const adminBulkActionPost = (ids: string[], status: string) => (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         ids,
         status,
@@ -320,20 +300,12 @@ export const adminBulkActionPost = (ids: string[], status: string) => (dispatch:
             type: SET_ALERT,
             payload: {message: err.response.data.message, type: 'error', err}
         })
-    }).finally(() => {
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 
 }
 
 export const adminCheckAndRemoveDeletedVideos = () => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`)
         .then((res: AxiosResponse<any>) => {
             dispatch({
@@ -354,10 +326,7 @@ export const adminCheckAndRemoveDeletedVideos = () => async (dispatch: any) => {
 }
 
 export const setMetaThumbnailsAndCount = (type?: string) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
         .then((res: AxiosResponse<any>) => {
             dispatch({
@@ -372,18 +341,22 @@ export const setMetaThumbnailsAndCount = (type?: string) => async (dispatch: any
                 type: SET_ALERT,
                 payload: {message: err.response.data.message, type: 'error', err}
             })
-        }).finally(() => {
-            dispatch({
-                type: LOADING,
-                payload: false
-            })
-        })
+        }).finally(() =>  dispatch({type: LOADING, payload: false}))
 }
+
+export const postThumbnailsUpload = (image?: any) => async (dispatch: any) => {
+    dispatch({type: LOADING, payload: true})
+    await Axios.post( '/api/admin/fileManager/postThumbnailsUpload', image).then(res=>{
+
+    }).catch(err=>{
+
+    }).finally(() =>  dispatch({type: LOADING, payload: false}))
+}
+
+
+
 export const importPosts = (posts: PostTypes[]) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.post(`/api/admin/posts/adminImportPosts`, {
         posts,
         token: localStorage.wt
@@ -398,9 +371,161 @@ export const importPosts = (posts: PostTypes[]) => async (dispatch: any) => {
             payload: {message: err?.response?.data?.message, type: 'error', err}
         })
     }).finally(() => {
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
+        dispatch({type: LOADING, payload: false})
     })
 }
+
+
+export const adminExportPosts = (data: {}) => async (dispatch: any) => {
+    dispatch({type: LOADING, payload: true})
+
+    const body = {
+        token: localStorage.wt,
+        data
+    };
+   await Axios.post( '/api/admin/posts/exportPosts', body).then(res=>{
+
+       const posts = res.data.exportedData.map(post => {
+           post.mainThumbnail = post.mainThumbnail ? post.mainThumbnail.includes('http') ? post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + post.mainThumbnail : '';
+           //@ts-ignore
+           !data.ID ?  delete post._id : null
+           delete post.__v;
+           delete post.author;
+           return post
+       })
+
+       let filename = `${Date.now().toLocaleString()}-posts.json`;
+       let contentType = "application/json;charset=utf-8;";
+       //@ts-ignore
+       if (window.navigator && window.navigator?.msSaveOrOpenBlob) {
+           let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(posts)))], {type: contentType});
+           // @ts-ignore
+           navigator.msSaveOrOpenBlob(blob, filename);
+           dispatch(setLoading(false))
+       } else {
+           let a = document.createElement('a');
+           a.download = filename;
+           a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(posts));
+           a.target = '_blank';
+           document.body.appendChild(a);
+           a.click();
+           document.body.removeChild(a);
+           dispatch(setLoading(false))
+       }
+
+   }).catch(err=>{
+
+       dispatch({
+           type: SET_ALERT,
+           payload: {message: err?.response?.data?.message, type: 'error', err}
+       })
+
+   }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+
+
+export const adminBulkActionMeta = (type,status,ids) => async (dispatch: any) => {
+    dispatch({type: LOADING, payload: true})
+    const body = {
+        type,
+        status,
+        ids,
+        token: localStorage.wt
+    };
+    await Axios.post( `/api/admin/posts/bulkAction`, body).then(res=>{
+
+    }).catch(err=>{
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+
+export const checkRemovedContent = (data: {}) => async (dispatch: any) => {
+
+    const body = {
+        ...data,
+        token: localStorage.wt
+    };
+
+    await Axios.post( `/api/v1/posts/checkRemovedContent` , body)
+
+}
+
+
+export const updateComment = (data) => async (dispatch: any) => {
+    const body = {
+        ...data,
+    };
+    await Axios.post( `/api/admin/posts/updateComment`, body)
+}
+
+
+export const adminYoutubeDataScrapper = (url) => async (dispatch: any) => {
+
+
+    const durationToString = duration => {
+        const hours = duration.hours === 0 ? '' :
+            duration.hours < 10 ? '0' + duration.hours.toString() + ':' :
+                duration.hours.toString() + ':'
+        const min = duration.minutes === 0 ? '' :
+            duration.minutes < 10 ? '0' + duration.minutes.toString() + ':' :
+                duration.minutes.toString() + ':'
+        const sec = duration.seconds < 10 ?
+            '0' + duration.seconds.toString() :
+            duration.seconds.toString()
+        return hours + min + sec
+    }
+
+    const body = {
+        url,
+        token: localStorage.wt
+    };
+
+    await Axios.post('/api/admin/scrapper/scrapYoutubeInfo', body).then(async res=>{
+        for await (let video of res.data.videos) {
+            if (video.id) {
+                const videoData = {
+                    title: video.title ? video.title : '',
+                    quality: video.raw.contentDetails ? video.raw.contentDetails.definition === 'hd' ? '1080p' : '480p' : '1080',
+                    //quality:'1080',
+                    mainThumbnail: video.thumbnails.medium ? video.thumbnails.medium.url : '',
+                    duration: video.duration ? durationToString(video.duration) : '00:00',
+                    videoEmbedCode: `https://www.youtube.com/embed/${video.id}`,
+                    description: video.description ? video.description : '',
+                    postType: 'video',
+                    downloadLink: url,
+                    status: 'draft',
+                    likes: 0,
+                    disLikes: 0,
+                    views: 0
+                }
+                // @ts-ignore
+                await Axios.post(`/api/admin/posts/createNewPost`, {
+                    postData: videoData,
+                    token: localStorage.wt
+                })
+            }
+        }
+    })
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

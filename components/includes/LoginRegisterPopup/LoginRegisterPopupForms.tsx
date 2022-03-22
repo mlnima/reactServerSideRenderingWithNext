@@ -195,7 +195,7 @@ const LoginRegisterPopupForms: FC = () => {
     };
     const onRegisterHandler = (e: React.FormEvent<HTMLFormElement>) => {
         e.preventDefault()
-        const checkUsername = state.username ? state.username.length <= 16 && state.username.length >= 6 && (/[a-zA-Z]/).test(state.username) : false
+        const checkUsername = state.username ? state.username.length <= 16 && state?.username?.length >= 6 && (/[a-zA-Z]/).test(state.username) : false
         const checkPasswords = state.password === state.password2;
 
         if (!checkUsername) {
@@ -231,8 +231,8 @@ const LoginRegisterPopupForms: FC = () => {
 
     useEffect(() => {
         setStateValidator({
-            username: state.username ? state.username.length <= 16 &&
-                state.username.length >= 6 &&
+            username: state.username ? state?.username?.length <= 16 &&
+                state?.username?.length >= 6 &&
                 (/[a-zA-Z]/).test(state.username) &&
                 (/^((?!admin).)*$/i).test(state.username) || (
                     globalState.loginRegisterFormPopup === 'login' &&

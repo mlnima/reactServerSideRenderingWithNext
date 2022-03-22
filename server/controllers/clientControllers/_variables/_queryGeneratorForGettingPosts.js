@@ -10,7 +10,7 @@ module.exports = data =>{
 
      const excludeQuery = {$or:excludeContent}
 
-     const size = parseInt(data?.size || data?.count || '20' );
+     const size = parseInt(data?.size || data?.count || '20' ) || 20;
      const sort = data?.sort || data?.sortBy;
      const meta = data.metaId || data?.selectedMetaForPosts;
      const validateId = meta ? isValidObjectId(meta) && meta.match(/^[0-9a-fA-F]{24}$/) : false;

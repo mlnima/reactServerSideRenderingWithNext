@@ -52,7 +52,7 @@ const searchPage : FC = ( ) => {
 
             {
                 // @ts-ignore
-               posts.length < 1 ?
+               posts?.length < 1 ?
                     <h2 className='no-result-message'>No Result for {router.query.keyword}</h2> :
                     null
             }

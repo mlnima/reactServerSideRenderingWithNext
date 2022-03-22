@@ -1,6 +1,6 @@
 import React, {FC, useState} from 'react';
-import {bulkAction} from "@_variables/ajaxPostsVariables";
-import {adminBulkActionPost} from "@store/adminActions/adminPanelPostsActions";
+
+import {adminBulkActionMeta, adminBulkActionPost} from "@store/adminActions/adminPanelPostsActions";
 import {useDispatch} from "react-redux";
 import styled from "styled-components";
 import {setAlert} from "@store/clientActions/globalStateActions";
@@ -32,7 +32,7 @@ const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelect
     }
 
     const onApplyHandler = () => {
-        if (selectedItems.length && status) {
+        if (selectedItems?.length && status) {
             switch (query.assetsType) {
                 case 'posts':
                     dispatch(adminBulkActionPost(selectedItems, status))
@@ -40,10 +40,13 @@ const AssetBulkAction: FC<AssetBulkActionPropTypes> = ({selectedItems, setSelect
                     reGetData()
                     break
                 case 'metas':
-                    bulkAction('metas', status, selectedItems).then(() => {
-                        setSelectedItems([])
-                        reGetData()
-                    })
+                    dispatch(adminBulkActionMeta('metas', status, selectedItems))
+                    reGetData()
+                    //
+                    // bulkAction('metas', status, selectedItems).then(() => {
+                    //     setSelectedItems([])
+                    //     reGetData()
+                    // })
                     break
                 default:
                     break

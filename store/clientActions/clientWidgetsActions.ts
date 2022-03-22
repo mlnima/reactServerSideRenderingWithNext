@@ -25,10 +25,7 @@ export const getWidgets = (dynamicWidgets,locale,cache) => async (dispatch: any)
 }
 
 export const saveFormData = (data) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
    await Axios.post('/api/v1/forms/saveFormData', {data}).then(res=>{
 
    }).catch(err=>{

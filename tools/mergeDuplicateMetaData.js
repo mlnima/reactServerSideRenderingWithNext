@@ -19,7 +19,7 @@ const mergeDuplicateMetaData = async (type) => {
                     if (lowerCasedMeta) {
                         console.log(meta?.name)
                         await postSchema.find({[type]: meta?._id}).exec().then(async posts => {
-                            if (posts.length){
+                            if (posts?.length){
                                 for await (const post of posts){
                                     await postSchema.findByIdAndUpdate(post?._id,{$pull:{[type]:meta?._id}},{new:true}).exec().then(async updatedPost=>{
                                         await postSchema.findByIdAndUpdate(post?._id,{$push:{[type]:lowerCasedMeta._id}},{new:true}).exec().then(updatedPost=>{

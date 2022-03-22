@@ -23,7 +23,7 @@ const svgLoader = {
     }
 }
 
-const i18nConfig = locales.length === 1 ? {} : {
+const i18nConfig = locales?.length === 1 ? {} : {
     i18n: {
         locales,
         defaultLocale: process.env.NEXT_PUBLIC_DEFAULT_LOCAL,

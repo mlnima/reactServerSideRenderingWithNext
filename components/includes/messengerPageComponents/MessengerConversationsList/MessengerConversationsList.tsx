@@ -36,7 +36,7 @@ const MessengerConversationsList = () => {
         <MessengerConversationsListStyledDiv className='messenger-conversations-list'>
             <MessengerConversationListHeader/>
             {renderConversationsPreview}
-            {!conversations || conversations.length < 1 ? <p className='no-message'>there is no messages yet</p> : null}
+            {!conversations || conversations?.length < 1 ? <p className='no-message'>there is no messages yet</p> : null}
         </MessengerConversationsListStyledDiv>
     );
 };

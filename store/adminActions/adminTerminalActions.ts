@@ -4,10 +4,7 @@ import {LOADING} from "@store/types";
 import {EXECUTE_COMMAND} from "../adminTypes";
 
 export const terminalCommandExecutor = (command) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     try{
         const body = {
             command,
@@ -34,11 +31,8 @@ export const terminalCommandExecutor = (command) => async dispatch => {
                         command,
                     }
                 })
-            })
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
+            }).finally(()=>dispatch({type: LOADING, payload: false}))
+
     }catch (err){
         dispatch({
             type: LOADING,

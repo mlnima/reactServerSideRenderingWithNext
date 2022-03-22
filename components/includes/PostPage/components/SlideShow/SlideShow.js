@@ -64,7 +64,7 @@ const SlideShow = ({post, sidebar, deviceWidth}) => {
     useEffect(() => {
         setState({
             ...state,
-            imagesArrayLength: post.images.length
+            imagesArrayLength: post.images?.length
         })
     }, [post.images]);
     const nextImage = () => {
@@ -99,10 +99,10 @@ const SlideShow = ({post, sidebar, deviceWidth}) => {
         }
     }
     const RenderImageElement = () => {
-        const activeImageSrc = post.images.length ? post.images[state.activeImageIndex] : post.mainThumbnail
+        const activeImageSrc = post.images?.length ? post.images[state.activeImageIndex] : post.mainThumbnail
 
         if (activeImageSrc.includes('http')) {
-            if (post.images.length) {
+            if (post.images?.length) {
                 return (
                     <img className='active-image' src={activeImageSrc} alt="activeImageSrc"/>
                 )

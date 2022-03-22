@@ -2,6 +2,7 @@ import type {NextApiRequest, NextApiResponse} from 'next';
 import {Comment, PostTypes} from "./PostTypes";
 import {AdminPanelUsersState} from "@store/adminReducers/adminPanelUsersReducer";
 import {AdminPanelWidgetsTypes, WidgetsStateTypes} from "@_variables/TypeScriptTypes/Widgets";
+import {adminPanelFileManagerReducer} from "@store/adminReducers/adminPanelFileManagerReducer";
 
 
 // SETTINGS
@@ -85,7 +86,9 @@ export interface UserState {
     userData?: User,
     socketId?: string,
     loggedIn: boolean,
-    userPageData?: {},
+    userPageData?: {
+        _id:string
+    },
     conversations?: { _id: string }[],
     activeConversation?: {
         messages?: {}[],
@@ -261,6 +264,28 @@ export interface AdminPanelPostsTypes {
     metas?: Meta[],
     activeEditingLanguage: string
 }
+export interface AdminPanelFileManagerTypes {
+    path: string,
+    prevPath: string,
+    files: [],
+    clickedItem: string,
+    clickedItemName: string,
+    file: string,
+    editFile: boolean,
+    action: string,
+    _do: string,
+    // AlertBox:false,
+    DeleteAlertBox: boolean,
+    confirm:Date,
+    message: string,
+    report: string,
+    inputBox: boolean,
+    newItemName: string,
+    lastUpdate:Date,
+    createNewFileFolderPop:boolean,
+    createNewFileFolderPopType:string,
+    translationsData:string,
+}
 export interface AdminPanelSettingsTypes {
     isMobile?: boolean,
     ip?: string,
@@ -312,6 +337,7 @@ export interface AdminPanelTerminalState {
 export interface StoreTypes {
     adminPanelComments: AdminPanelCommentsTypes;
     adminPanelSettings: AdminPanelSettingsTypes;
+    adminPanelFileManager: AdminPanelFileManagerTypes;
     adminPanelForms: AdminPanelFormsTypes;
     adminPanelPages: AdminPanelPagesTypes;
     adminPanelOrders: AdminPanelOrdersTypes;

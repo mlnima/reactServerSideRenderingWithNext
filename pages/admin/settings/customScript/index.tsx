@@ -1,13 +1,12 @@
 import React from 'react';
 import dynamic from "next/dynamic";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
 import {useDispatch, useSelector} from "react-redux";
 import {updateSetting} from "@store/clientActions/settingsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import Head from "next/head";
 import {adminPanelEditIdentity} from "@store/adminActions/adminPanelSettingsActions";
+const Editor = dynamic(() => import('@monaco-editor/react'), {ssr: false})
 
 const customScript = (props: { width: any; height: any; }) => {
     const dispatch = useDispatch()
@@ -22,15 +21,6 @@ const customScript = (props: { width: any; height: any; }) => {
     }
 
     return (
-        <>
-            <Head>
-                <link
-                    rel={'stylesheet'}
-                    type={'text/css'}
-                    data-name={'vs/editor/editor.main'}
-                    href={'https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css'}
-                />
-            </Head>
             <div>
                 <div className={'customScriptsAsStringSection'}>
                     <Editor
@@ -49,7 +39,6 @@ const customScript = (props: { width: any; height: any; }) => {
                     </button>
                 </div>
             </div>
-        </>
     );
 };
 

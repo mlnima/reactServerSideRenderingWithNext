@@ -280,9 +280,15 @@ const GlobalStyles= createGlobalStyle`
 `
 
 const GlobalStylesComponent : FC = () =>{
-  const {customColors,customStyles,sideBarWidth} = useSelector(({settings}:StoreTypes)=>settings?.design)
+  const {customColors,customStyles,sideBarWidth} = useSelector(({settings}:StoreTypes)=>{
+    return{
+      customColors: settings?.design?.customColors,
+      customStyles: settings?.design?.customStyles,
+      sideBarWidth: settings?.design?.sideBarWidth,
+    }
+  })
   return (
-      <GlobalStyles customColors={customColors} customStyles={customStyles} sideBarWidth={sideBarWidth || 320}/>
+      <GlobalStyles customColors={customColors || ''} customStyles={customStyles || ''} sideBarWidth={sideBarWidth || 320}/>
   )
 }
 

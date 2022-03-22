@@ -1,20 +1,27 @@
 import {useEffect, useState, useRef} from 'react';
 
 import TitleDescription from "../../../components/adminIncludes/PostComponents/TitleDescription/TitleDescription";
-import ActionOnPost from "../../../components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
-import DropDownWidget from "../../../components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
+import ActionOnPost from "@components/adminIncludes/PostComponents/ActionOnPost/ActionOnPost";
+import DropDownWidget from "@components/adminIncludes/PostComponents/DropDownWidget/DropDownWidget";
 import Format from "../../../components/adminIncludes/PostComponents/Format/Format";
-import Meta from "../../../components/adminIncludes/PostComponents/Meta/Meta";
+import Meta from "@components/adminIncludes/PostComponents/Meta/Meta";
 import Link from 'next/link'
-import RatingOption from '../../../components/adminIncludes/PostComponents/RatingOption/RatingOption'
+import RatingOption from '@components/adminIncludes/PostComponents/RatingOption/RatingOption'
 import {useRouter} from "next/router";
-import PostInformation from "../../../components/adminIncludes/PostComponents/PostInformation/PostInformation";
+import PostInformation from "@components/adminIncludes/PostComponents/PostInformation/PostInformation";
 import {languagesOptions} from "@_variables/_variables";
 import _ from "lodash";
 import styled from "styled-components";
 import {setAlert, setLoading} from "@store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
-import {adminChangeActiveEditingLanguage, adminEditPost, adminGetPost, adminNewPost, adminSaveNewPost, adminUpdatePost} from "../../../store/adminActions/adminPanelPostsActions";
+import {
+    adminChangeActiveEditingLanguage,
+    adminEditPost,
+    adminGetPost,
+    adminNewPost,
+    adminSaveNewPost,
+    adminUpdatePost
+} from "../../../store/adminActions/adminPanelPostsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -38,9 +45,8 @@ const AdminPostPageStyledDiv = styled.div`
 `
 
 const Index = () => {
-    const userData = useSelector((store:StoreTypes) => store.user.userData);
-    const post = useSelector((store:StoreTypes) => store.adminPanelPosts.post);
-    const activeEditingLanguage = useSelector((store:StoreTypes) => store.adminPanelPosts.activeEditingLanguage);
+    const post = useSelector((store: StoreTypes) => store.adminPanelPosts.post);
+    const activeEditingLanguage = useSelector((store: StoreTypes) => store.adminPanelPosts.activeEditingLanguage);
     const dispatch = useDispatch()
     const router = useRouter();
     const languageElement = useRef(null)
@@ -55,13 +61,11 @@ const Index = () => {
     }, [router.query.id]);
 
     const onChangeHandler = (e: { target: { name: any; value: any; }; }) => {
-        dispatch(adminEditPost({
-            [e.target.name]: e.target.value
-        }))
+        dispatch(adminEditPost({[e.target.name]: e.target.value}))
     };
 
     const onTranslatedInputChangeHandler = (e: { target: any; }) => {
-        if (activeEditingLanguage  === 'default') {
+        if (activeEditingLanguage === 'default') {
             dispatch(adminEditPost({
                 [e.target.name]: e.target.value
             }))
@@ -78,7 +82,7 @@ const Index = () => {
         }
     }
 
-    const onDescriptionChangeHandler = (data:string) => {
+    const onDescriptionChangeHandler = (data: string) => {
 
         const e = {
             target: {
@@ -89,44 +93,10 @@ const Index = () => {
         onTranslatedInputChangeHandler(e)
     }
 
-    const onPostMetaChangeHandler = (type : string, data:[]) => {
 
-        // @ts-ignore
-        const previousMetaData = post?.[type] || [];
-        const uniqItems = _.uniqBy([...previousMetaData, ...data], (e) => {
-            return e.name;
-        })
-        dispatch(adminEditPost({
-            [type]: uniqItems
-        }))
-    }
-
-    const onDeleteMetaFromPost = (type : string, name : string) => {
-        dispatch(adminEditPost({
-            // @ts-ignore
-            [type]: post[type].filter((i : {name:string}) => i.name !== name)
-        }))
-    }
-
-    const onSaveHandler = async () => {
-        try {
-            // @ts-ignore
-            if (post?._id) {
-                // @ts-ignore
-                dispatch(adminUpdatePost({...post,author: post?.author ? post.author : userData?._id}))
-            } else {
-                // @ts-ignore
-                dispatch(adminSaveNewPost({...post,author: userData?._id},router))
-            }
-        } catch (error) {
-            // @ts-ignore
-            dispatch(setAlert({message: error.stack, type: 'error', active: true}))
-        }
-    }
 
     return (
         <>
-
             <Link href={'/admin/post?new=1'}>
                 <a className={'btn btn-info'}>
                     New Post
@@ -134,61 +104,35 @@ const Index = () => {
             </Link>
             <AdminPostPageStyledDiv className={'admin-post'}>
                 <div className={'content'}>
-                    <select className={'custom-select'} ref={languageElement} onChange={e => dispatch(adminChangeActiveEditingLanguage(e.target.value))}>
+                    <select className={'custom-select'} ref={languageElement}
+                            onChange={e => dispatch(adminChangeActiveEditingLanguage(e.target.value))}>
                         <option value={'default'}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
                         {languagesOptions}
                     </select>
 
-                    <TitleDescription onChangeHandler={onTranslatedInputChangeHandler} onDescriptionChangeHandler={onDescriptionChangeHandler} onSaveHandler={onSaveHandler}/>
+                    <TitleDescription onChangeHandler={onTranslatedInputChangeHandler}
+                                      onDescriptionChangeHandler={onDescriptionChangeHandler}
+                                      onTranslatedInputChangeHandler={onTranslatedInputChangeHandler}
+                    />
 
-                    <PostInformation productInfo={productInfo} setProductInfo={setProductInfo}  onChangeHandler={onChangeHandler}/>
+                    <PostInformation productInfo={productInfo}
+                                     setProductInfo={setProductInfo}
+                                     onChangeHandler={onChangeHandler}/>
 
                 </div>
 
                 <div className={'side'}>
-                    <DropDownWidget renderFor={'all'}
-                                    component={ActionOnPost}
-                                    title={post?.status}
-                                    onChangeHandler={onChangeHandler}
-                                    onSaveHandler={onSaveHandler}
-                    />
-                    <DropDownWidget renderFor={'all'}
-                                    component={Format}
-                                    title={'Format'}
-                                    onChangeHandler={onChangeHandler}/>
+                    <DropDownWidget  component={ActionOnPost} title={post?.status}/>
+                    <DropDownWidget  component={Format} title={'Format'}/>
+                    <DropDownWidget  component={Meta} type={'categories'} title={'Post Category'}/>
+                    <DropDownWidget  component={Meta} type={'tags'} title={'Post Tags'}/>
 
-                    <DropDownWidget renderFor={'all'}
-                                    component={Meta}
-                                    type={'categories'}
-                                    title={'Post Category'}
-                                    onChangeHandler={onChangeHandler}
-                                    onPostMetaChangeHandler={onPostMetaChangeHandler}
-                                    onDeleteHandler={onDeleteMetaFromPost}/>
-
-                    <DropDownWidget renderFor={'all'}
-                                    component={Meta}
-                                    type={'tags'}
-                                    title={'Post Tags'}
-                                    onChangeHandler={onChangeHandler}
-                                    onPostMetaChangeHandler={onPostMetaChangeHandler}
-                                    onDeleteHandler={onDeleteMetaFromPost}/>
-
-                    {
-                        post?.postType === 'video' ?
-                            <DropDownWidget renderFor={'all'}
-                                            component={Meta}
-                                            type={'actors'}
-                                            title={'Post Actors'}
-                                            onChangeHandler={onChangeHandler}
-                                            onPostMetaChangeHandler={onPostMetaChangeHandler}
-                                            onDeleteHandler={onDeleteMetaFromPost}/>
+                    { post?.postType === 'video' ?
+                            <DropDownWidget  component={Meta} type={'actors'} title={'Post Actors'}/>
                             : null
                     }
 
-                    <DropDownWidget renderFor={'all'}
-                                    component={RatingOption}
-                                    title={'Rating'}
-                                    onChangeHandler={onChangeHandler}/>
+                    <DropDownWidget  component={RatingOption} title={'Rating'}/>
 
                 </div>
 
@@ -198,8 +142,6 @@ const Index = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store =>
-
-
     async (context) => {
         return {
             props: {

@@ -1,20 +1,24 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
-import Editor, {DiffEditor, useMonaco, loader} from "@monaco-editor/react";
-import {readTranslationsFile, updateTranslationsFile} from "../../../_variables/_ajaxFilesVariables";
-import {languagesOptions} from "@_variables/_variables";
-import {wrapper} from "../../../store/store";
+import React, {useEffect, useState} from 'react';
+import Editor from "@monaco-editor/react";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import Head from "next/head";
+import {useDispatch, useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {
+    adminPanelEditTranslationsFile,
+    adminPanelReadTranslationsFile, adminPanelUpdateTranslationsFile
+} from "@store/adminActions/adminPanelFileManagerActions";
 
 
 // @ts-ignore
-const translations = props => {
+const translations: FC = () => {
+    const dispatch = useDispatch()
+    const translationsData = useSelector(({adminPanelFileManager}: StoreTypes) => adminPanelFileManager.translationsData)
     const [activeEditingLanguage, seActiveEditingLanguage] = useState(() => process.env.NEXT_PUBLIC_DEFAULT_LOCAL);
-    const [translationsData, setTranslationsData] = useState('');
     const [translationsFilePath, setTranslationsFilePath] = useState(() => `./public/locales/${activeEditingLanguage}/customTranslation.json`);
-    // @ts-ignore
+
     const onChangeHandler = data => {
-        setTranslationsData(data)
+        dispatch(adminPanelEditTranslationsFile(data))
     }
     // @ts-ignore
     const languagesOptions = (process.env.NEXT_PUBLIC_LOCALS.split(' ').filter(lang => lang !== process.env.NEXT_PUBLIC_DEFAULT_LOCAL) || []).map(lang => {
@@ -32,37 +36,21 @@ const translations = props => {
     }, [activeEditingLanguage]);
 
     useEffect(() => {
-        readTranslationsFile(translationsFilePath).then(res => {
-            // @ts-ignore
-            setTranslationsData(res.data.data)
-
-        })
+        dispatch(adminPanelReadTranslationsFile(translationsFilePath))
     }, [translationsFilePath]);
 
     const onSaveHandler = () => {
-        updateTranslationsFile(translationsFilePath, translationsData).then(res => {
-
-        })
+        dispatch(adminPanelUpdateTranslationsFile(translationsFilePath, translationsData))
     }
 
-
     return (
-        <>
-            <Head>
-                <link
-                    rel="stylesheet"
-                    type="text/css"
-                    data-name="vs/editor/editor.main"
-                    href="https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css"
-                />
-            </Head>
+
         <div className='translations'>
             translations
             <select onChange={e => onActiveEditingLanguageChangeHandler(e)}>
-
-                <option value={process.env.NEXT_PUBLIC_DEFAULT_LOCAL}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
+                <option
+                    value={process.env.NEXT_PUBLIC_DEFAULT_LOCAL}>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL || 'Default'}</option>
                 {languagesOptions}
-
             </select>
             <div className='editor-area'>
                 <Editor
@@ -73,12 +61,11 @@ const translations = props => {
                     defaultValue={translationsData}
                     value={translationsData}
                     onChange={onChangeHandler}
-                    //className='style-section-editor'
                 />
                 <button onClick={onSaveHandler}>Save</button>
             </div>
         </div>
-        </>
+
     );
 };
 

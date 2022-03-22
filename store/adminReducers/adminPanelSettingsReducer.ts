@@ -27,7 +27,7 @@ export const adminPanelSettingsReducer = (state: AdminPanelSettingsTypes = initi
             return {
                 ...state,
                 design: {
-                    ...state.identity,
+                    ...state.design,
                     ...action.payload
                 }
             };

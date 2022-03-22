@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
-import FileManagerControl from '../../../components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl'
-import FileManagerArea from '../../../components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea';
-import { readPath } from '../../../_variables/_ajaxFilesVariables'
+import FileManagerControl from '@components/adminIncludes/FileManagerComponents/FileManagerControl/FileManagerControl'
+import FileManagerArea from '@components/adminIncludes/FileManagerComponents/FileManagerArea/FileManagerArea';
+// import { readPath } from '@_variables/_ajaxFilesVariables'
 import withRouter from 'next/dist/client/with-router'
-import UploadedPopView from '../../../components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
+import UploadedPopView from '@components/adminIncludes/FileManagerComponents/UploadedPopView/UploadedPopView'
 import CreateNewFileFolderPop from "../../../components/adminIncludes/FileManagerComponents/CreateNewFileFolderPop/CreateNewFileFolderPop";
-import {useDispatch} from "react-redux";
-import {setLoading} from "../../../store/clientActions/globalStateActions";
-import {wrapper} from "../../../store/store";
+import {useDispatch, useSelector} from "react-redux";
+import {setLoading} from "@store/clientActions/globalStateActions";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+import {adminPanelFileManagerReadPath} from "@store/adminActions/adminPanelFileManagerActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const fileManager = () => {
     const dispatch = useDispatch()
+    const fileManagerData = useSelector(({adminPanelFileManager}:StoreTypes)=>adminPanelFileManager)
 
     const [ state, setState ] = useState({
         path: '.',
@@ -37,56 +40,26 @@ const fileManager = () => {
 
     useEffect(() => {
         setData()
-    }, [ state.path,state.lastUpdate ]);
+    }, [ fileManagerData.path,fileManagerData.lastUpdate ]);
 
     const setData = () => {
-        dispatch(setLoading(true))
-        readPath(state.path).then(res => {
-            // @ts-ignore
-            if (res.data.type === 'dir') {
-                setState({
-                    ...state,
-                    // @ts-ignore
-                    files: res.data.data,
-                })
-                dispatch(setLoading(false))
-                // @ts-ignore
-            } else if (res.data.type === 'file') {
+        dispatch(adminPanelFileManagerReadPath(fileManagerData.path,fileManagerData.prevPath))
+    }
 
-                setState({
-                    ...state,
-                    clickedItem: state.path,
-                    path:state.prevPath,
-                    // @ts-ignore
-                    file:res.data.data
-                })
-                dispatch(setLoading(false))
-            } else {
-                setState({
-                    ...state,
-                    // @ts-ignore
-                    error: true
-                })
-                dispatch(setLoading(false))
-            }
-        }).catch(err => {
-            dispatch(setLoading(false))
-        })
-    }
-    // @ts-ignore
-    const setStateHandler = (key, value) => {
-        setState({
-            ...state,
-            [key]: value
-        })
-    }
+    // // @ts-ignore
+    // const setStateHandler = (key, value) => {
+    //     setState({
+    //         ...state,
+    //         [key]: value
+    //     })
+    // }
 
     return (
         <>
-            <UploadedPopView clickedItem={ state.clickedItem } setStateHandler={ setStateHandler } state={ state } setState={ setState }/>
+            <UploadedPopView/>
             <div className='fileManager'>
-                <FileManagerControl setStateHandler={ setStateHandler } data={ state } state={ state } setState={ setState }/>
-                <FileManagerArea setStateHandler={ setStateHandler } data={ state } state={ state } setState={ setState }/>
+                <FileManagerControl />
+                <FileManagerArea />
             </div>
             <CreateNewFileFolderPop render={state.createNewFileFolderPop} createNewFileFolderPopType={state.createNewFileFolderPopType} state={ state } setState={ setState }/>
         </>

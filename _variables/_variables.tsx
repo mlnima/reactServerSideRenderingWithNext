@@ -1,17 +1,5 @@
 import React from "react";
 
-export const clickPathGenerator = (clickedItemName : string, pathFromContexts :string) => {
-    if (pathFromContexts === '.') {
-        return './' + clickedItemName
-    } else {
-        return pathFromContexts + '/' + clickedItemName
-    }
-};
-
-export const setLanguageToLocalStorage = (language:string) => {
-    localStorage ? localStorage.setItem('lang', language) : null
-}
-
 export const languagesOptions = (process.env.NEXT_PUBLIC_LOCALS.split(' ').filter(lang=>lang!== process.env.NEXT_PUBLIC_DEFAULT_LOCAL) || []).map((lang:string) => {
     return (
         <option key={lang} value={lang}>

@@ -1,6 +1,6 @@
 import React, {useRef, useEffect} from 'react';
 import dynamic from "next/dynamic";
-import AdminPanelTopBar from "../adminIncludes/TopBar/AdminPanelTopBar";
+import AdminPanelTopBar from "../adminIncludes/AdminPanelTopBar/AdminPanelTopBar";
 import AdminPanelMainMenu from "../adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu";
 import {useDispatch, useSelector} from 'react-redux';
 import {autoUserLogin} from "@store/clientActions/userActions";
@@ -57,11 +57,7 @@ const AdminLayout = props => {
     const container = useRef(null);
     const Admin = useRef(null);
 
-    const {globalState, loggedIn, userData, loading, alert} = useSelector(({
-
-                                                                               globalState,
-                                                                               user
-                                                                           }: StoreTypes) => {
+    const {globalState, loggedIn, userData, loading, alert} = useSelector(({globalState, user}: StoreTypes) => {
         return {
             globalState,
             loggedIn: user.loggedIn,
@@ -73,25 +69,25 @@ const AdminLayout = props => {
 
     useEffect(() => {
         if (localStorage.wt && !loggedIn) {
-            dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage', 'coverImage']))
+            dispatch(autoUserLogin(['username', 'role', 'keyMaster', 'profileImage']))
         }
     }, [props]);
 
     if (userData.role === 'administrator') {
         return (
 
-                <AdminLayoutStyledDiv ref={container} className="admin-container">
-                    <AdminDataSetter userRole={userData.role}/>
-                    <AdminPanelGlobalStyles/>
-                    <GlobalStyles/>
-                    <AdminPanelTopBar/>
-                    <AdminPanelMainMenu/>
-                    <main ref={Admin} className="Admin">
-                        {props.children}
-                    </main>
-                    {loading ? <Loading/> : null}
-                    {alert && globalState?.alert?.message ? <AlertBox/> : null}
-                </AdminLayoutStyledDiv>
+            <AdminLayoutStyledDiv ref={container} className="admin-container">
+                <AdminDataSetter userRole={userData.role}/>
+                <AdminPanelGlobalStyles/>
+                <GlobalStyles/>
+                <AdminPanelTopBar/>
+                <AdminPanelMainMenu/>
+                <main ref={Admin} className="Admin">
+                    {props.children}
+                </main>
+                {loading ? <Loading/> : null}
+                {alert && globalState?.alert?.message ? <AlertBox/> : null}
+            </AdminLayoutStyledDiv>
 
         );
     } else return (

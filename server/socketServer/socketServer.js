@@ -122,8 +122,8 @@ io.on('connection', socket => {
         try {
             const chatroomData = await chatroomSchema.findOne({name: newMessageData.roomName}).exec()
             if (chatroomData) {
-                if (chatroomData.messages.length > 50) {
-                    let updatedMessagesLimited = chatroomData.messages.slice(chatroomData.messages.length - 50, chatroomData.messages.length + 1)
+                if (chatroomData?.messages?.length > 50) {
+                    let updatedMessagesLimited = chatroomData.messages.slice(chatroomData.messages?.length - 50, chatroomData.messages?.length + 1)
                     const updatedMessages = [...updatedMessagesLimited, newMessageData]
                     chatroomSchema.findOneAndUpdate({name: newMessageData.roomName}, {messages: updatedMessages}, {
                         upsert: true,

@@ -35,14 +35,14 @@ const LearnTypeCardMedia :FC<LearnTypeCardMediaPropTypes> = (props) => {
         if (props?.post?.mainThumbnail) {
             return props?.post?.mainThumbnail
         } else if (props?.categoriesImages?.length) {
-            return props.categoriesImages[Math.floor(Math.random() * props.categoriesImages.length)]
+            return props.categoriesImages[Math.floor(Math.random() * props?.categoriesImages?.length)]
         }
     })
 
     useEffect(() => {
         if (dynamicImage && !props?.post?.mainThumbnail && props?.categoriesImages?.length) {
             setInterval(() => {
-                setImageUrlToRender(props.categoriesImages[Math.floor(Math.random() * props.categoriesImages.length)])
+                setImageUrlToRender(props.categoriesImages[Math.floor(Math.random() * props.categoriesImages?.length)])
             }, 7000)
         }
     }, []);

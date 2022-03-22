@@ -6,7 +6,7 @@ const ProductPrice = props => {
     const priceType = useSelector((store) => store.adminPanelPosts.post?.priceType);
     const priceInputAcceptCharacterLimiter = e =>{
         const supportedChar = ['0','1','2','3','4','5','6','7','8','9','.']
-        const lastTypedChar = e.target.value.split('')[e.target.value.split('').length -1]
+        const lastTypedChar = e.target.value.split('')[e.target.value.split('')?.length -1]
        if (supportedChar.includes(lastTypedChar) ){
            props.onChangeHandler(e)
        }else{

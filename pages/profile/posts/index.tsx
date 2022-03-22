@@ -2,7 +2,7 @@ import React, {FC, useEffect, useState} from 'react';
 import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
 import {useRouter} from "next/router";
 import Link from "next/link";
-import ProfileImage from "../../../components/includes/profilePageComponents/ProfileImage/ProfileImage";
+import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import styled from "styled-components";

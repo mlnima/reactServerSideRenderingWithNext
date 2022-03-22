@@ -1,12 +1,13 @@
 import React, {ChangeEvent, useEffect, useState} from 'react';
-import {exportPosts} from '../../../../_variables/ajaxPostsVariables'
+// import {exportPosts} from '@_variables/ajaxPostsVariables'
 import {useDispatch} from "react-redux";
-import {setLoading} from "../../../../store/clientActions/globalStateActions";
-import {wrapper} from "../../../../store/store";
+// import {setLoading} from "@store/clientActions/globalStateActions";
+import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import postTypes from "../../../../components/global/postTypes";
-import {da} from "suneditor/src/lang";
+// import {da} from "suneditor/src/lang";
+import {adminExportPosts} from "@store/adminActions/adminPanelPostsActions";
 
 const PostsExporterStyledDiv = styled.div`
   display: flex;
@@ -40,38 +41,38 @@ const postsExporter = () => {
     })
 
 
-    const onExportPostsHandler = () => {
-        dispatch(setLoading(true))
-        // @ts-ignore
-        exportPosts(data).then(postsData => {
-            // @ts-ignore
-            const posts = postsData.data.exportedData.map(post => {
-                post.mainThumbnail = post.mainThumbnail ? post.mainThumbnail.includes('http') ? post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + post.mainThumbnail : '';
-                !data.ID ?   delete post._id : null
-                delete post.__v;
-                delete post.author;
-                return post
-            })
-            let filename = `${Date.now().toLocaleString()}-posts.json`;
-            let contentType = "application/json;charset=utf-8;";
-            // @ts-ignore
-            if (window.navigator && window.navigator.msSaveOrOpenBlob) {
-                let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(posts)))], {type: contentType});
-                // @ts-ignore
-                navigator.msSaveOrOpenBlob(blob, filename);
-                dispatch(setLoading(false))
-            } else {
-                let a = document.createElement('a');
-                a.download = filename;
-                a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(posts));
-                a.target = '_blank';
-                document.body.appendChild(a);
-                a.click();
-                document.body.removeChild(a);
-                dispatch(setLoading(false))
-            }
-        })
-    }
+    // const onExportPostsHandler = () => {
+    //     dispatch(setLoading(true))
+    //     // @ts-ignore
+    //     exportPosts(data).then(postsData => {
+    //         // @ts-ignore
+    //         const posts = postsData.data.exportedData.map(post => {
+    //             post.mainThumbnail = post.mainThumbnail ? post.mainThumbnail.includes('http') ? post.mainThumbnail : process.env.NEXT_PUBLIC_PRODUCTION_URL + post.mainThumbnail : '';
+    //             !data.ID ?   delete post._id : null
+    //             delete post.__v;
+    //             delete post.author;
+    //             return post
+    //         })
+    //         let filename = `${Date.now().toLocaleString()}-posts.json`;
+    //         let contentType = "application/json;charset=utf-8;";
+    //         // @ts-ignore
+    //         if (window.navigator && window.navigator.msSaveOrOpenBlob) {
+    //             let blob = new Blob([decodeURIComponent(encodeURI(JSON.stringify(posts)))], {type: contentType});
+    //             // @ts-ignore
+    //             navigator.msSaveOrOpenBlob(blob, filename);
+    //             dispatch(setLoading(false))
+    //         } else {
+    //             let a = document.createElement('a');
+    //             a.download = filename;
+    //             a.href = 'data:' + contentType + ',' + encodeURIComponent(JSON.stringify(posts));
+    //             a.target = '_blank';
+    //             document.body.appendChild(a);
+    //             a.click();
+    //             document.body.removeChild(a);
+    //             dispatch(setLoading(false))
+    //         }
+    //     })
+    // }
 
     const onChangeHandler =(e:ChangeEvent<any>) => {
         setData({
@@ -119,7 +120,7 @@ const postsExporter = () => {
                     <input checked={data.ID} className={'form-control-input'} type={'checkbox'} placeholder={'ID'} name={'ID'} onChange={e => setData({...data, ID: e.target.checked})}/>
                 </div>
             </div>
-            <button className={'btn btn-primary'} onClick={() => onExportPostsHandler()}>Export All The Posts To Json</button>
+            <button className={'btn btn-primary'} onClick={() => dispatch(adminExportPosts(data))}>Export All The Posts To Json</button>
         </PostsExporterStyledDiv>
 
     );

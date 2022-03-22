@@ -2,7 +2,7 @@ const sharp = require('sharp');
 const fsExtra = require('fs-extra')
 
 module.exports = async (req, res) => {
-    const file = req.files.uploadingFile
+    const file = req.files?.uploadingFile
     const fileType = file.mimetype.split('/')[0]
     const today = new Date(Date.now())
     const year = today.getFullYear()

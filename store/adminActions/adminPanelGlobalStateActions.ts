@@ -18,10 +18,7 @@ export const getCustomPages = () => async (dispatch: any) => {
 }
 
 export const clearCaches = (router: NextRouter) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res: AxiosResponse<unknown | any>) => {
         dispatch({
             type: SET_ALERT,
@@ -41,12 +38,9 @@ export const clearCaches = (router: NextRouter) => async (dispatch: any) => {
                 err
             }
         })
-    }).catch(() => {
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).catch(err => {
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 export const setSidebarStatus = (status: boolean) => async (dispatch: any) => {

@@ -5,10 +5,7 @@ import {ADMIN_EDIT_USER_DATA, ADMIN_GET_USER, ADMIN_GET_USERS} from "../adminTyp
 import Axios from "@_variables/util/Axios";
 
 export const adminGetUsers = (data) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     try{
         const body = {
             data,
@@ -25,12 +22,9 @@ export const adminGetUsers = (data) => async dispatch => {
 
         }).catch((err: AxiosError<AxiosErrorTypes>)=>{
 
-        })
+        }).finally(()=>dispatch({type: LOADING, payload: false}))
 
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
+
     }catch (err){
         dispatch({
             type: LOADING,
@@ -77,10 +71,7 @@ export const newAPIKey = () => async dispatch => {
 }
 
 export const adminPanelGetUserData = (_id) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         _id,
         token: localStorage.wt
@@ -117,10 +108,7 @@ export const adminPanelChangeUserData = (changes) => async dispatch => {
 }
 
 export const adminPanelUpdateUserData = (data) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         data,
         token: localStorage.wt
@@ -143,20 +131,12 @@ export const adminPanelUpdateUserData = (data) => async dispatch => {
                 message:'Can Not Get User Data'
             }
         })
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 
 export const adminPanelDeleteUser = (id,router) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         id,
         token: localStorage.wt
@@ -180,10 +160,7 @@ export const adminPanelDeleteUser = (id,router) => async dispatch => {
             }
         })
     }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
+        dispatch({type: LOADING, payload: false})
         router.back()
     })
 }
@@ -213,10 +190,5 @@ export const adminPanelChangePassword = (oldPass, newPass, newPass2) => async di
                 message:'Can Not Change The Password'
             }
         })
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }

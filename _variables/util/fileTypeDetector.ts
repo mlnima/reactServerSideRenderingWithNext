@@ -1,6 +1,6 @@
 const fileTypeDetector = fileName => {
     const splitFileName = fileName.split('.')
-    const fileFormat = splitFileName[splitFileName.length - 1].toLowerCase()
+    const fileFormat = splitFileName[splitFileName?.length - 1].toLowerCase()
     let finalFormat = ''
     const fileFormats = {
         image: ['jpg', 'png', 'jpeg', 'svg'],

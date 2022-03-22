@@ -5,7 +5,7 @@ const AddWidgetToPostMenuItem = props => {
     const [widgetsLength,setWidgetsLength] = useState(0)
 
     useEffect(() => {
-        setWidgetsLength(props.state.widgets ? props.state.widgets.length :0)
+        setWidgetsLength(props.state.widgets ? props.state.widgets?.length :0)
     }, [props]);
 
 

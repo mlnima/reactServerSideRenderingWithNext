@@ -37,7 +37,7 @@ export const adminPanelGlobalStateReducer = (state : AdminPanelGlobalState = ini
         case SERVER_LOG:
             return {
                 ...state,
-                serverLog:[...state.serverLog.slice(state.serverLog.length - 100),action.payload]
+                serverLog:[...state.serverLog.slice(state.serverLog?.length - 100),action.payload]
             };
 
         default:

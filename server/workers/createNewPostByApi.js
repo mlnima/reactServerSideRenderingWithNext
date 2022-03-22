@@ -88,7 +88,7 @@ const savePostIfThereIsNoDuplicate = async (newPost, downloadImageContent) => {
             .exec()
             .then(async posts => {
                 try {
-                    if (posts.length) {
+                    if (posts?.length) {
                         parentPort.postMessage({message: 'Duplicate Error! ' + newPost.title + ' Already Exist in the Database'})
                     } else {
                         const editedNewPost = {

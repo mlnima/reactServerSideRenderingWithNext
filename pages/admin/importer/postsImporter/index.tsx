@@ -55,7 +55,7 @@ const postsImporter = () => {
         reader.onload = e => {
             if (typeof e.target.result === "string") {
                 const parsedPosts = JSON.parse(e.target.result)
-                if (parsedPosts.length){
+                if (parsedPosts?.length){
                     setPosts(parsedPosts)
                 }
             }

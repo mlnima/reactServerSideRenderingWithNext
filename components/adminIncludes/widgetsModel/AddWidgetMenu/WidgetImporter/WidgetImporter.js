@@ -15,7 +15,7 @@ const WidgetImporter = () => {
     }, [state.data]);
 
     const onWidgetImportHandler = async ()=>{
-        if (state.data.length){
+        if (state?.data?.length){
             for await (let widget of widgets){
                 adminAddNewWidget(widget)
             }

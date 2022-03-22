@@ -61,8 +61,8 @@ const MenuWidgetModelFields = props => {
                     ...props?.widgetData?.menuItems || [],
                     {
                         ...formData,
-                        itemIndex:formData.itemIndex ? parseInt(formData.itemIndex) : (props?.widgetData?.menuItems.length ||0),
-                        itemId : uniqueId('id_') + props?.widgetData?.menuItems.length  || uniqueId('id_')
+                        itemIndex:formData.itemIndex ? parseInt(formData.itemIndex) : (props?.widgetData?.menuItems?.length ||0),
+                        itemId : uniqueId('id_') + props?.widgetData?.menuItems?.length  || uniqueId('id_')
                     }
                 ]
             })
@@ -74,7 +74,7 @@ const MenuWidgetModelFields = props => {
                 ...(parentData || {}),
                 subItems:[...((props?.widgetData?.menuItems?.[findParentIndex] || {})?.subItems||[]), {
                     ...formData,
-                    itemId : uniqueId('sub_') + props?.widgetData?.menuItems.length  || uniqueId('sub_'),
+                    itemId : uniqueId('sub_') + props?.widgetData?.menuItems?.length  || uniqueId('sub_'),
                     itemIndex:parentData?.subItems?.length +1 || 0,
                 }]
             }

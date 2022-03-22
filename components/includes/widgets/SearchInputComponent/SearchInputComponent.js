@@ -35,7 +35,7 @@ const SearchInputComponent = () => {
 
     const onSearchHandler = e => {
         e.preventDefault()
-        if (state.keyword.length > 2) {
+        if (state?.keyword?.length > 2) {
             router.push({
                 pathname: `/search/${state.keyword}`,
                 query: {

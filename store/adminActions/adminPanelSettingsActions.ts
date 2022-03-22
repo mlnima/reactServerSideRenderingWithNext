@@ -24,10 +24,7 @@ export const adminPanelEditDesign = (changes) => async (dispatch: any) => {
 }
 
 export const adminPanelGetSettings = () => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings'], false)}&token=${localStorage.wt}`)
         .then(res => {
 
@@ -37,10 +34,12 @@ export const adminPanelGetSettings = () => async (dispatch: any) => {
                 design: designSettings?.data,
                 identity: identitySettings?.data,
             }
+
             dispatch({
                 type: SET_SETTINGS,
                 payload: settings
             })
+
             dispatch({
                 type: ADMIN_GET_SETTINGS,
                 payload: settings

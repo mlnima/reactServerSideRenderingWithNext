@@ -1,10 +1,9 @@
 import React from 'react';
-// import {getAbsolutePath} from "../../../../_variables/_variables";
-// import {getSetting} from "../../../../_variables/ajaxVariables";
 import EcommerceSettingsInputSection from "../../../../components/adminIncludes/eCommerceSettingsPageComponents/EcommerceSettingsInputSection/EcommerceSettingsInputSection";
 import styled from "styled-components";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+
 let StyledDiv = styled.div`
   display: flex;
   flex-direction: column;

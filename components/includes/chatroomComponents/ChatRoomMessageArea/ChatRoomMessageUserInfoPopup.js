@@ -1,7 +1,7 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-import {conversation} from "../../../../_variables/_userSocialAjaxVariables";
+//import {conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
@@ -9,6 +9,7 @@ import {useDispatch, useSelector} from "react-redux";
 import {setActiveVisibleProfile} from "../../../../store/clientActions/chatroomActions";
 import Draggable from 'react-draggable';
 import {setLoginRegisterFormStatus} from "../../../../store/clientActions/globalStateActions";
+import {conversation} from "@store/clientActions/userActions";
 
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;
@@ -90,19 +91,20 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
 
 const ChatRoomMessageUserInfoPopup = () => {
     const {t} = useTranslation('common');
-    const router = useRouter();
+    const {push} = useRouter();
     const dispatch = useDispatch();
     const activeVisibleProfile = useSelector(store => store?.chatroom?.activeVisibleProfile);
     const loggedIn = useSelector(store => store?.user?.loggedIn)
 
     const onConversationHandler = () => {
         if (loggedIn) {
-            conversation(activeVisibleProfile._id).then(res => {
-                const conversation = res.data.conversation
-                router.push(`/messenger/${conversation._id}`)
-            }).catch(err => {
-                console.log(err)
-            })
+            dispatch(conversation(activeVisibleProfile._id,push))
+            // conversation(activeVisibleProfile._id).then(res => {
+            //     const conversation = res.data.conversation
+            //     router.push(`/messenger/${conversation._id}`)
+            // }).catch(err => {
+            //     console.log(err)
+            // })
         } else {
             dispatch(setLoginRegisterFormStatus('register'))
         }

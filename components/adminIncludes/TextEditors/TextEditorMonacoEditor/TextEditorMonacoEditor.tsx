@@ -30,15 +30,15 @@ const TextEditorMonacoEditor = (props: MonacoEditorProTypes) => {
 
     return (
         <>
-            <Head>
-                {/* issue fixed from https://github.com/suren-atoyan/monaco-react/issues/272 post */}
-                <link
-                    rel="stylesheet"
-                    type="text/css"
-                    data-name="vs/editor/editor.main"
-                    href="https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css"
-                />
-            </Head>
+            {/*<Head>*/}
+            {/*    /!* issue fixed from https://github.com/suren-atoyan/monaco-react/issues/272 post *!/*/}
+            {/*    <link*/}
+            {/*        rel="stylesheet"*/}
+            {/*        type="text/css"*/}
+            {/*        data-name="vs/editor/editor.main"*/}
+            {/*        href="https://cdn.jsdelivr.net/npm/monaco-editor@0.25.2/min/vs/editor/editor.main.css"*/}
+            {/*    />*/}
+            {/*</Head>*/}
             <Editor
                 language={typeof props.value === 'object' ? 'json' : props.language || 'scss'}
                 theme="vs-dark"

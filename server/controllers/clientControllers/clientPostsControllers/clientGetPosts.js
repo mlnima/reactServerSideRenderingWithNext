@@ -13,7 +13,8 @@ module.exports = async (req, res) => {
             {path: 'tags', select: {'name': 1, 'type': 1}}
         ]
         const findPostsQueries =  {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery,findingPostsOptions.excludeQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}
-        const totalCount = await postSchema.countDocuments(findPostsQueries).exec()
+        const totalCount = await postSchema.countDocuments(findPostsQueries).exec();
+        const skipValue =  req.body.sort === 'random' ? Math.floor(Math.random() * totalCount) : findingPostsOptions.size * (findingPostsOptions.page - 1);
         const posts = await postSchema.find( findPostsQueries,findingPostsOptions.selectedFields,
             {
                 skip: req.body.sort === 'random' ? Math.floor(Math.random() * totalCount) : findingPostsOptions.size * (findingPostsOptions.page - 1),

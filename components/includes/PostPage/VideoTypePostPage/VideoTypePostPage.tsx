@@ -43,7 +43,7 @@ const VideoTypePostPage = () => {
                 <DownloadLink
                     downloadLink={videoTypePostPageData?.post.downloadLink || videoTypePostPageData?.post.source}
                     downloadLinks={videoTypePostPageData?.post?.downloadLinks || []}
-                    render={videoTypePostPageData?.post.downloadLink || videoTypePostPageData?.post.downloadLinks.length}
+                    render={videoTypePostPageData?.post?.downloadLink || videoTypePostPageData?.post?.downloadLinks?.length}
                 />
             </div>
             <PostDescription />

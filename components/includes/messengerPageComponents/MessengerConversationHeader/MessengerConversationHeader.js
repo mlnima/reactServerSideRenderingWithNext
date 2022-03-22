@@ -39,6 +39,7 @@ const MessengerConversationHeaderStyledDiv = styled.div`
         height: 30px;
         border-radius: 50%;
         margin-left: 10px;
+        cursor: pointer;
       }
 
       .messenger-conversation-header-username {
@@ -47,6 +48,7 @@ const MessengerConversationHeaderStyledDiv = styled.div`
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
+        cursor: pointer;
       }
     }
     
@@ -81,7 +83,7 @@ const MessengerConversationHeader = ({profileImage, username, callUser}) => {
                         </a>
                     </Link>
                     <img onClick={() => router.push(`/user/${username}`)} src={profileImage ? profileImage : '/public/asset/images/user/noGenderAvatar150.jpg'} alt="messenger-conversation-header-profile-image" className="messenger-conversation-header-profile-image"/>
-                    <p className='messenger-conversation-header-username'>{username}</p>
+                    <p onClick={() => router.push(`/user/${username}`)} className='messenger-conversation-header-username'>{username}</p>
                 </div>
                 <div className='call-buttons'>
                     <button onClick={callUser} className='messenger-conversation-header-video-call-btn'>

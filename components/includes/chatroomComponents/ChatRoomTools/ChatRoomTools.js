@@ -101,7 +101,7 @@ const ChatRoomTools = () => {
 
         e.preventDefault()
 
-        if (userData._id && state.messageData.length) {
+        if (userData._id && state.messageData?.length) {
             const newMessageData = {
                 messageData: state.messageData,
                 roomName: router.query.chatRoomName,

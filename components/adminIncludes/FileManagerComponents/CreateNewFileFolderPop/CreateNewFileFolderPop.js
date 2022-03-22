@@ -77,7 +77,7 @@ const CreateNewFileFolderPop = props => {
 
 
     const onSaveHandler = () => {
-        if (props.state.path, state.fileFolderName) {
+        if (props.state.path && state.fileFolderName) {
             const data = {
                 Path: props.state.path,
                 fileFolderName: state.fileFolderName,

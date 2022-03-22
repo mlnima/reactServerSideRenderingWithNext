@@ -4,10 +4,7 @@ import Axios from "@_variables/util/Axios";
 import {AxiosError, AxiosResponse} from "axios";
 
 export const adminGetForms = (data) => async (dispatch: any) =>{
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         ...data,
         token: localStorage.wt
@@ -20,19 +17,11 @@ export const adminGetForms = (data) => async (dispatch: any) =>{
         })
     }).catch((err:AxiosError)=>{
 
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 export const adminGetForm = (_id) => async (dispatch: any) =>{
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         _id,
         token: localStorage.wt
@@ -44,19 +33,11 @@ export const adminGetForm = (_id) => async (dispatch: any) =>{
         })
     }).catch((err:AxiosError)=>{
 
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 export const adminDeleteForm = (_id) => async (dispatch: any) =>{
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         _id,
         token: localStorage.wt
@@ -78,10 +59,5 @@ export const adminDeleteForm = (_id) => async (dispatch: any) =>{
                 err
             }
         })
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }

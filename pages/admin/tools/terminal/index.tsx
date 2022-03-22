@@ -1,4 +1,4 @@
-import React, {useState, useRef, useEffect} from 'react';
+import React, {useState, useRef} from 'react';
 import {animateScroll} from 'react-scroll'
 import styled from "styled-components";
 import {setLoading} from "@store/clientActions/globalStateActions";
@@ -57,9 +57,9 @@ const terminal = () => {
     const logElement = useRef(null)
     const processIdElement = useRef(null)
     const terminalData = useSelector(({adminPanelTerminalState}: StoreTypes) => {
-        return{
-            logs:adminPanelTerminalState?.logs,
-            commandsHistory:adminPanelTerminalState?.commandsHistory,
+        return {
+            logs: adminPanelTerminalState?.logs,
+            commandsHistory: adminPanelTerminalState?.commandsHistory,
         }
     })
 
@@ -83,6 +83,7 @@ const terminal = () => {
             animateScroll.scrollToBottom({containerId: 'terminalLog'})
         }, 500)
     }
+    console.log(process.env.NODE_ENV)
 
     return (
         <StyledDiv className='terminal-simulator'>
@@ -92,10 +93,14 @@ const terminal = () => {
                 <button className={'btn btn-primary'} onClick={e => onExecutorHandler(e, 'npm run-script build')}>
                     Build
                 </button>
-                <button className={'btn btn-primary'}
-                        onClick={e => onExecutorHandler(e, `chmod +x update.sh && ./update.sh && pm2 restart ${processIdElement?.current.value || 'all'}`)}>
-                    Update
-                </button>
+                {process.env.NODE_ENV !== 'development' ?
+                    <button className={'btn btn-primary'}
+                            onClick={e => onExecutorHandler(e, `chmod +x update.sh && ./update.sh && pm2 restart ${processIdElement?.current.value || 'all'}`)}>
+                        Update
+                    </button>
+                    : null
+                }
+
                 <button className={'btn btn-primary'}
                         onClick={e => onExecutorHandler(e, `pm2 restart ${processIdElement?.current.value || 'all'}`)}>
                     Restart Webserver
@@ -106,7 +111,7 @@ const terminal = () => {
             <textarea ref={logElement}
                       id='terminalLog'
                       value={terminalData.logs.join('/n')}
-                      // @ts-ignore
+                // @ts-ignore
                       onChange={e => e.scrollTop = e.offsetHeight}/>
             <form className="terminalControl" onSubmit={e => onExecutorHandler(e, state?.command)}>
                 <input name='command' type="text" onChange={e => onchangeHandler(e)}/>

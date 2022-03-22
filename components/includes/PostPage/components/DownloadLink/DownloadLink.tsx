@@ -57,7 +57,7 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
                 </span>
                 <div className={'multiple-download-links'}>
 
-                    {downloadLinks.length ?
+                    {downloadLinks?.length ?
                         downloadLinks.map(link => {
                             return (
                                 <a href={link.url}

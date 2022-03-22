@@ -92,7 +92,7 @@ if (!process.env.CPU_CORES_ALLOW_TO_USE || process.env.NODE_ENV !== 'production'
     });
 }else{
     if (cluster.isMaster){
-        const numberOfCpus = os.cpus().length
+        const numberOfCpus = os.cpus()?.length
         const numberOfCpusToUse = parseInt(process.env.CPU_CORES_ALLOW_TO_USE) || 1
 
         if (numberOfCpusToUse < numberOfCpus ){

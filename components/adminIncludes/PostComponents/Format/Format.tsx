@@ -1,4 +1,4 @@
-import React from "react";
+import React, {FC} from "react";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
@@ -16,7 +16,7 @@ interface PostFormatPropTypes {
 
 }
 
-const Format = ({onChangeHandler,postType}:PostFormatPropTypes) => {
+const Format:FC<PostFormatPropTypes> = ({postType}) => {
     const dispatch = useDispatch()
     const post = useSelector((state : StoreTypes) => state.adminPanelPosts.post);
 

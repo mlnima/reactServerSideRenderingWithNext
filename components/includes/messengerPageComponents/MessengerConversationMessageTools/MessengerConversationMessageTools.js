@@ -1,11 +1,11 @@
-import {useRef, useEffect} from 'react'
+import {useRef} from 'react'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faArrowRight} from "@fortawesome/free-solid-svg-icons";
-import {messageToConversation} from "../../../../_variables/_userSocialAjaxVariables";
 import socket from "@_variables/socket";
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
+import {messageToConversation} from "@store/clientActions/userActions";
 
 const MessengerConversationMessageToolsStyledForm = styled.form`
   position: fixed;
@@ -32,13 +32,14 @@ const MessengerConversationMessageToolsStyledForm = styled.form`
 `
 
 const MessengerConversationMessageTools = props => {
+    const dispatch=useDispatch()
     const userData = useSelector((store) => store?.user.userData);
     const messageInput = useRef(null)
 
     const onSendMessageHandler = e => {
         e.preventDefault()
         const messageInputData = messageInput ? messageInput.current.value : ''
-        if (messageInputData.length && messageInputData.length < 500) {
+        if (messageInputData?.length && messageInputData?.length < 500) {
             const messageData = {
                 messageBody: messageInputData,
                 createdAt: Date.now(),
@@ -46,12 +47,15 @@ const MessengerConversationMessageTools = props => {
                 conversationId: props.conversationId
             }
             socket.emit('sendMessageToConversation', messageData, props.conversationId)
-            messageToConversation(props.conversationId, messageInputData).then(() => {
-                messageInput.current.value = '';
-                // props.getAndSetConversationData();
-            }).catch(err => {
-                console.log(err)
-            })
+            dispatch(messageToConversation(props.conversationId, messageInputData))
+            messageInput.current.value = '';
+            // props.getAndSetConversationData();
+            // messageToConversation(props.conversationId, messageInputData).then(() => {
+            //     messageInput.current.value = '';
+            //     // props.getAndSetConversationData();
+            // }).catch(err => {
+            //     console.log(err)
+            // })
         }
     }
 

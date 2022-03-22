@@ -199,7 +199,7 @@ const AdminPanelMainMenu = () => {
                             {convertVariableNameToName(item)}
                         </a>
                     </Link>
-                    {sidebarItems[item].subItems.length ?
+                    {sidebarItems[item].subItems?.length ?
                         <span className={'sidebar-items-switch'}
                               onMouseOver={() => setHovered(item)}
                               key={uniqueId('id_')}
@@ -213,7 +213,7 @@ const AdminPanelMainMenu = () => {
 
                 </div>
                 <div className='SideBarItemElementSubItems'>
-                    {sidebarItems[item].subItems.length ?
+                    {sidebarItems[item].subItems?.length ?
                         sidebarItems[item].subItems.map(subItem => {
                                 return (
                                     <Link key={uniqueId('id_')} href={subItem.url}>

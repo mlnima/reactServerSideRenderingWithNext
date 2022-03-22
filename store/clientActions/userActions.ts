@@ -13,7 +13,7 @@ import {
     OUTGOING_CALL,
     SET_ALERT,
     SET_CALL_ACCEPTED,
-    SET_PARTNER_VIDEO, LOADING, LOGIN_REGISTER_FORM
+    SET_PARTNER_VIDEO, LOADING, LOGIN_REGISTER_FORM, UPDATE_USER_DATA_FIELD
 } from '@store/types';
 import axios from 'axios';
 import Peer from 'simple-peer'
@@ -40,10 +40,7 @@ export const userLogin = (username, password) => async dispatch => {
 }
 
 export const userRegister = (data) => async dispatch => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     await Axios.post( '/api/v1/users/register', data).then(res=>{
         dispatch({
             type: SET_ALERT,
@@ -60,12 +57,7 @@ export const userRegister = (data) => async dispatch => {
             payload: {message: err.response.data.message, type: 'error'}
         })
 
-    }).finally(()=>{
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 export const autoUserLogin = (fields) => async dispatch => {
@@ -358,11 +350,12 @@ export const outgoingCall = (conversation,mySocketId,callerName,router ) => asyn
 
 
 export const userCreateOrder = (data)=> async dispatch =>{
+    dispatch({type: LOADING, payload: true})
     if (data.type === 'payPal') {
         const body = {
             data
         }
-        axios.post('/api/v1/orders/create/payPal', body).then(res=>{
+        Axios.post('/api/v1/orders/create/payPal', body).then(res=>{
             dispatch({
                 type: SET_ALERT,
                 payload: {message: res.data.message, type: 'success'}
@@ -372,9 +365,115 @@ export const userCreateOrder = (data)=> async dispatch =>{
                 type: SET_ALERT,
                 payload: {message: 'Something Went Wrong', type: 'error'}
             })
-        })
+        }).finally(()=>dispatch({type: LOADING, payload: false}))
     }
 }
+
+export const userProfileImageUpload = (image)=> async dispatch =>{
+    dispatch({type: LOADING, payload: true})
+    await Axios.post('/api/v1/fileManager/userImageUpload', image).then(res=>{
+
+    }).catch(err=>{
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+
+export const followUser = (_id:string)=> async dispatch =>{
+    dispatch({type: LOADING, payload: true})
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    await Axios.post('/api/v1/users/followUser', body).then(res=>{
+
+    }).catch(err=>{
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+export const unFollowUser = (_id:string)=> async dispatch =>{
+    dispatch({type: LOADING, payload: true})
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    await Axios.post('/api/v1/users/unFollowUser', body).then(res=>{
+
+    }).catch(err=>{
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+export const sendMessage = (_id:string,message:{})=> async dispatch =>{
+    dispatch({type: LOADING, payload: true})
+    const body = {
+        _id,
+        message,
+        token: localStorage.wt
+    }
+    await Axios.post('/api/v1/users/sendMessage', body).then(res=>{
+
+    }).catch(err=>{
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+export const conversation = (_id:string,push:any)=> async dispatch =>{
+    dispatch({type: LOADING, payload: true})
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    await Axios.post('/api/v1/users/conversation', body).then(res=>{
+        if (res.data?.conversation?._id){
+            push(`/messenger/${res.data?.conversation?._id}`)
+        }
+    }).catch(err=>{
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+export const messageToConversation = (conversationId:string,messageBody:{})=> async dispatch =>{
+    dispatch({type: LOADING, payload: true})
+    const body = {
+        conversationId,
+        messageBody,
+        token: localStorage.wt
+    }
+    await Axios.post('/api/v1/users/messageToConversation', body).then(res=>{
+
+    }).catch(err=>{
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+export const getMultipleUserDataById = (usersList:{}[],type)=> async dispatch =>{
+    dispatch({type: LOADING, payload: true})
+    const body = {
+        usersList
+    }
+    await Axios.post('/api/v1/users/getMultipleUserDataById', body).then(res=>{
+        if (type==='followers'){
+            //UPDATE_USER_DATA_FIELD
+            dispatch({
+                type: UPDATE_USER_DATA_FIELD,
+                payload: {followers:res?.data?.users || []}
+            })
+        }else if (type==='following'){
+            dispatch({
+                type: UPDATE_USER_DATA_FIELD,
+                payload: {following:res?.data?.users || []}
+            })
+        }
+
+    }).catch(err=>{
+
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
+}
+
+
+
 
 
 // export const likeDislikeView = (id, type)=> async dispatch =>{

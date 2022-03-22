@@ -1,12 +1,11 @@
 import { useState, useRef, ChangeEvent} from 'react';
-import {youtubeDataScrapper} from '@_variables/ajaxVariables'
 import styled from "styled-components";
 import {useDispatch} from "react-redux";
 import {setAlert, setLoading} from "@store/clientActions/globalStateActions";
 import {updateSetting} from "@store/clientActions/settingsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import {adminSaveNewPost} from "@store/adminActions/adminPanelPostsActions";
+import {adminSaveNewPost, adminYoutubeDataScrapper} from "@store/adminActions/adminPanelPostsActions";
 
 let StyledDiv = styled.div`
   .admin-import-page-youtube {
@@ -45,23 +44,23 @@ const youtube = () => {
         scrapedVideos: []
     });
 // @ts-ignore
-    const durationToString = duration => {
-        const hours = duration.hours === 0 ? '' :
-            duration.hours < 10 ? '0' + duration.hours.toString() + ':' :
-                duration.hours.toString() + ':'
-
-
-        const min = duration.minutes === 0 ? '' :
-            duration.minutes < 10 ? '0' + duration.minutes.toString() + ':' :
-                duration.minutes.toString() + ':'
-
-
-        const sec = duration.seconds < 10 ?
-            '0' + duration.seconds.toString() :
-            duration.seconds.toString()
-
-        return hours + min + sec
-    }
+//     const durationToString = duration => {
+//         const hours = duration.hours === 0 ? '' :
+//             duration.hours < 10 ? '0' + duration.hours.toString() + ':' :
+//                 duration.hours.toString() + ':'
+//
+//
+//         const min = duration.minutes === 0 ? '' :
+//             duration.minutes < 10 ? '0' + duration.minutes.toString() + ':' :
+//                 duration.minutes.toString() + ':'
+//
+//
+//         const sec = duration.seconds < 10 ?
+//             '0' + duration.seconds.toString() :
+//             duration.seconds.toString()
+//
+//         return hours + min + sec
+//     }
 
 
     const onImportHandler = async () => {
@@ -72,44 +71,45 @@ const youtube = () => {
 
         for await (let url of data) {
             if (url.includes('http')) {
-                dispatch(setLoading(true))
-                youtubeDataScrapper(url).then(async res => {
-// @ts-ignore
-                    for await (let video of res.data.videos) {
-                        if (video.id) {
-                            const videoData = {
-                                title: video.title ? video.title : '',
-                                quality: video.raw.contentDetails ? video.raw.contentDetails.definition === 'hd' ? '1080p' : '480p' : '1080',
-                                //quality:'1080',
-                                mainThumbnail: video.thumbnails.medium ? video.thumbnails.medium.url : '',
-                                duration: video.duration ? durationToString(video.duration) : '00:00',
-                                videoEmbedCode: `https://www.youtube.com/embed/${video.id}`,
-                                description: video.description ? video.description : '',
-                                postType: 'video',
-                                downloadLink: url,
-                                status: 'draft',
-                                likes: 0,
-                                disLikes: 0,
-                                views: 0
-                            }
-                            // @ts-ignore
-                            dispatch(adminSaveNewPost(videoData,null))
-                            // await savePost(videoData).then(() => {
-                            //
-                            // }).catch(err => {
-                            //     console.log(err?.response?.data?.error)
-                            //     dispatch(setAlert({message: err.response.data.error + ' => ' + videoData.title, type: 'error', active: true}))
-                            // })
-                        }
-                    }
-
-                    dispatch(setLoading(false))
-                    dispatch(setAlert({message: 'Done', type: 'success', active: true}))
-
-
-                }).catch(err => {
-                    dispatch(setLoading(false))
-                })
+                dispatch(adminYoutubeDataScrapper(url))
+//                 dispatch(setLoading(true))
+//                 youtubeDataScrapper(url).then(async res => {
+// // @ts-ignore
+//                     for await (let video of res.data.videos) {
+//                         if (video.id) {
+//                             const videoData = {
+//                                 title: video.title ? video.title : '',
+//                                 quality: video.raw.contentDetails ? video.raw.contentDetails.definition === 'hd' ? '1080p' : '480p' : '1080',
+//                                 //quality:'1080',
+//                                 mainThumbnail: video.thumbnails.medium ? video.thumbnails.medium.url : '',
+//                                 duration: video.duration ? durationToString(video.duration) : '00:00',
+//                                 videoEmbedCode: `https://www.youtube.com/embed/${video.id}`,
+//                                 description: video.description ? video.description : '',
+//                                 postType: 'video',
+//                                 downloadLink: url,
+//                                 status: 'draft',
+//                                 likes: 0,
+//                                 disLikes: 0,
+//                                 views: 0
+//                             }
+//                             // @ts-ignore
+//                             dispatch(adminSaveNewPost(videoData,null))
+//                             // await savePost(videoData).then(() => {
+//                             //
+//                             // }).catch(err => {
+//                             //     console.log(err?.response?.data?.error)
+//                             //     dispatch(setAlert({message: err.response.data.error + ' => ' + videoData.title, type: 'error', active: true}))
+//                             // })
+//                         }
+//                     }
+//
+//                     dispatch(setLoading(false))
+//                     dispatch(setAlert({message: 'Done', type: 'success', active: true}))
+//
+//
+//                 }).catch(err => {
+//                     dispatch(setLoading(false))
+//                 })
             }
         }
     }

@@ -40,7 +40,7 @@ const TableHeader : FC<TableHeaderPropType> = props => {
     },[query.page, query.assetsType])
 
     useEffect(() => {
-        if (props.selectedItems.length === 0) {
+        if (props.selectedItems?.length === 0) {
             selectAllCheckBox.current.checked = false
         }
     }, [props.selectedItems]);

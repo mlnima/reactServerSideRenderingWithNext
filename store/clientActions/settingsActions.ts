@@ -12,10 +12,7 @@ export const setSettings = (setting: any) => (dispatch: any) => {
 }
 
 export const updateSetting = (type: any, data: object) => async (dispatch: any) => {
-    dispatch({
-        type: LOADING,
-        payload: true
-    })
+    dispatch({type: LOADING, payload: true})
     const body = {
         type,
         data,
@@ -31,12 +28,7 @@ export const updateSetting = (type: any, data: object) => async (dispatch: any) 
             type: SET_ALERT,
             payload: {message: err.response.data.message || 'Something Went Wrong', type: 'error', err}
         })
-    }).finally(() => {
-        dispatch({
-            type: LOADING,
-            payload: false
-        })
-    })
+    }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
 

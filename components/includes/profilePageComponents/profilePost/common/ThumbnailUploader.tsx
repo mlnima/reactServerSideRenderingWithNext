@@ -1,8 +1,9 @@
 import React, {FC, useEffect, useRef} from "react";
 import styled from "styled-components";
-import {fileUpload, uploadFiles} from "@_variables/_ajaxFilesVariables";
+
 import {useDispatch} from "react-redux";
-import {editPostField} from "@store/clientActions/postsAction";
+// import {editPostField} from "@store/clientActions/postsAction";
+import {adminPanelUploadFile} from "@store/adminActions/adminPanelFileManagerActions";
 
 const ThumbnailUploaderStyledDiv = styled.div`
   width: 254.99px;
@@ -36,14 +37,16 @@ const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
         filesData.append('token', localStorage.wt)
         filesData.append('uploadingFile', e.target.files[0])
         filesData.append('type', 'thumbnail')
-        uploadFiles(filesData).then(res => {
-            if (res.data?.path){
-                dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))
-            }
-        }).catch(err => {
-            console.log(err)
-            // props.returnElement.current.value  = 'Something went Wrong'
-        })
+
+        dispatch(adminPanelUploadFile(filesData,'postMainThumbnail'))
+        // uploadFiles(filesData).then(res => {
+        //     if (res.data?.path){
+        //         dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))
+        //     }
+        // }).catch(err => {
+        //     console.log(err)
+        //     // props.returnElement.current.value  = 'Something went Wrong'
+        // })
     }
 
 
@@ -61,14 +64,17 @@ const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
             const filesData = new FormData()
             filesData.append('token', localStorage.wt)
             filesData.append('uploadingFile', fileData)
-            fileUpload(filesData).then(res => {
-                if (res.data?.path){
-                    dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))
-                }
-                // props.setFunction(props.name,res.data.path.replace('./','/'))
-            }).catch(err => {
-                console.log(err)
-            })
+
+            dispatch(adminPanelUploadFile(filesData,'postMainThumbnail'))
+
+            // fileUpload(filesData).then(res => {
+            //     if (res.data?.path){
+            //         dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))
+            //     }
+            //     // props.setFunction(props.name,res.data.path.replace('./','/'))
+            // }).catch(err => {
+            //     console.log(err)
+            // })
         }
     }
     useEffect(() => {

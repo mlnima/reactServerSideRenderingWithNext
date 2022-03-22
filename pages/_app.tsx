@@ -7,7 +7,7 @@ import type {AppProps} from 'next/app';
 import {useMemo} from "react";
 const AppLayout = dynamic(() => import('../components/layouts/AppLayout'));
 const AdminLayout = dynamic(() => import('@components/layouts/AdminLayout'), {ssr: false});
-const MessengerLayout = dynamic(() => import('../components/layouts/MessengerLayout'), {ssr: false});
+const MessengerLayout = dynamic(() => import('@components/layouts/MessengerLayout'), {ssr: false});
 
 const MyApp = ({Component, pageProps}: AppProps) => {
     const {pathname} = useRouter()

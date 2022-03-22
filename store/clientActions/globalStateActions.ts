@@ -91,7 +91,7 @@ export const getDefaultPageData = (context: GetServerSidePropsContext, dynamicWi
         }
     })
 
-    if (dynamicWidgets.length){
+    if (dynamicWidgets?.length){
         await Axios.get(`/api/v1/widgets/getMultipleWidgetWithData${_getMultipleWidgetWithDataQueryGenerator(dynamicWidgets, cache, context.locale)}`
         ).then(res => {
             dispatch({

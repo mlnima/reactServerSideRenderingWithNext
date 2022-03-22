@@ -15,7 +15,7 @@ import {
     SET_CALLING_STATUS,
     SET_MY_VIDEO,
     SET_PARTNER_VIDEO,
-    SET_USER_PAGE_DATA
+    SET_USER_PAGE_DATA, UPDATE_USER_DATA_FIELD
 } from "@store/types";
 
 import {UserState} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -50,6 +50,15 @@ export const userReducer = (state: UserState  = initialState,action: {type:strin
             return {
                 ...state,
                 userPageData:action.payload
+            }
+        case  UPDATE_USER_DATA_FIELD:
+            return {
+                ...state,
+                userData: {
+                    ...state.userData,
+                    ...action.payload
+                }
+
             }
         case  GET_USER_PAGE_DATA:
             return {

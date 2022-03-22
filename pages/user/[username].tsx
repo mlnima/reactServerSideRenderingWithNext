@@ -1,6 +1,6 @@
 import React, {FC, useEffect} from 'react';
 import UserPageProfileImage from "../../components/includes/userPageComponents/UserPageProfileImage/UserPageProfileImage";
-import UserPageActionButtons from "../../components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
+import UserPageActionButtons from "@components/includes/userPageComponents/UserPageActionButtons/UserPageActionButtons";
 import {useRouter} from "next/router";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faCamera} from "@fortawesome/free-solid-svg-icons";
