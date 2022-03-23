@@ -3,17 +3,17 @@ const {isValidObjectId} = require("mongoose");
 module.exports = data => {
     const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
 
-    const excludeContent = excludesPostFromSources.map(excludeWord=>{
+    const excludeContent = excludesPostFromSources.map(excludeWord => {
         const expression = `.*${excludeWord}.*`
-        return {'videoEmbedCode':{$not:   new RegExp(expression , "g")}}
+        return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
     })
 
-    const excludeQuery = {$or:excludeContent}
-    const size = parseInt(data?.size  || '20');
+    const excludeQuery = {$or: excludeContent}
+    const size = parseInt(data?.size || '20');
     const sort = data?.sort || data?.sortBy;
     const meta = data.metaId || data?.selectedMetaForPosts;
     const validateId = meta ? isValidObjectId(meta) && meta.match(/^[0-9a-fA-F]{24}$/) : false;
-    const metaQuery = validateId ? {$or: [{categories: meta}, {tags: meta}, {actors: meta}]} : {};
+    const metaQuery = validateId ? {$or: [{categories: {$in: meta}}, {tags: {$in: meta}}, {actors: {$in: meta}}]} : {};
     const keyword = data.keyword ? decodeURIComponent(data.keyword) : ''
     const searchQuery = !keyword ? {} :
         !data.lang || data.lang === 'default' ? {$or: [{title: new RegExp(keyword, 'i')}]} :

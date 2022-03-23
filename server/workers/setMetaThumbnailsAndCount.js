@@ -11,31 +11,29 @@ const setMetaThumbnailsAndCount = async (workerData) => {
     try {
         const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
 
-        const excludeContent = excludesPostFromSources.map(excludeWord=>{
+        const excludeContent = excludesPostFromSources.map(excludeWord => {
             const expression = `.*${excludeWord}.*`
-            return {'videoEmbedCode':{$not:   new RegExp(expression , "g")}}
+            return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
         })
 
-        const excludeQuery = {$or:excludeContent}
-
-
-
+        const excludeQuery = {$or: excludeContent}
 
 
         await metaSchema.syncIndexes()
         const type = workerData.type ? {type: workerData.type} : {}
         await metaSchema.find(type).exec().then(async (metas) => {
             for await (let meta of metas) {
-                const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: meta?._id}, {status: 'published'},excludeQuery]}).exec()
+                //const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: meta?._id}, {status: 'published'},excludeQuery]}).exec()
+                const metaCount = await postSchema.countDocuments({$and: [{[meta?.type]: {$in: meta?._id}}, {status: 'published'}, excludeQuery]}).exec()
                 if (metaCount > 0) {
-                    const skipDocuments = randomNumberGenerator(1,10)
+                    const skipDocuments = randomNumberGenerator(1, 10)
                     const postWithCurrentMeta = meta?.imageUrl ?
-                        await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'},excludeQuery]}).sort({ updatedAt: -1 }).skip(skipDocuments).exec() :
-                        await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'},excludeQuery]}).sort({ updatedAt: -1 }).exec()
+                        await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}, excludeQuery]}).sort({updatedAt: -1}).skip(skipDocuments).exec() :
+                        await postSchema.findOne({$and: [{[meta?.type]: meta?._id}, {status: 'published'}, excludeQuery]}).sort({updatedAt: -1}).exec()
 
                     const randomImageData = meta?.imageUrlLock ? {} :
-                                            postWithCurrentMeta?.mainThumbnail ? {imageUrl: postWithCurrentMeta?.mainThumbnail} :
-                                            {}
+                        postWithCurrentMeta?.mainThumbnail ? {imageUrl: postWithCurrentMeta?.mainThumbnail} :
+                            {}
                     const updateData = {
                         count: metaCount,
                         name: meta?.name.toLowerCase(),
@@ -47,14 +45,14 @@ const setMetaThumbnailsAndCount = async (workerData) => {
                         {$set: {...updateData}},
                         {timestamps: false}
                     ).exec()
-                    console.log(meta?.name,`count set to${metaCount}`)
+                    console.log(`${meta?.type} ${meta?.name} count set to${metaCount}`)
                 } else {
                     await metaSchema.findByIdAndUpdate(
                         meta?._id,
                         {$set: {status: 'draft'}},
                         {timestamps: false}
                     ).exec()
-                    console.log(meta?.name,`drafted`)
+                    console.log(meta?.name, `drafted`)
                 }
             }
         })
