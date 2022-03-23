@@ -1,15 +1,17 @@
 const {isValidObjectId} = require("mongoose");
 
 module.exports = data => {
-    const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
+    // const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
+    //
 
-
-    const excludeContent = excludesPostFromSources.map(excludeWord => {
+    const excludeContent = (process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : []).map(excludeWord => {
 
         const expression = `.*${excludeWord}.*`
 
         return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
     })
+
+    // console.log(excludeContent)
 
     const excludeQuery = process.env.EXCLUDE_POSTS_SOURCE ? [{$or: excludeContent}] : []
 
@@ -37,7 +39,6 @@ module.exports = data => {
             ]},
         size: size > 1000 ? 1000 : size,
         page: data?.page ? parseInt(data?.page) : 1,
-
         selectedFields: data?.field || [] ,
         sortQuery: sort === 'createdAt' || sort === 'random' || !sort ? {} : {[sort]: -1}
     }

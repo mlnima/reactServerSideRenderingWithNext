@@ -1,7 +1,7 @@
 const widgetSchema = require('../../../models/widgetSchema');
 const metaSchema = require('../../../models/metaSchema');
 const postSchema = require('../../../models/postSchema');
-const _queryGeneratorForGettingPosts = require('../../clientControllers/_variables/_queryGeneratorForGettingPosts')
+const _clientQueryGeneratorForGettingPosts = require('../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts')
 const {map} = require("lodash");
 
 
@@ -9,23 +9,19 @@ const updatePostWidget = async (widget) => {
     const widgetData = widget?.data
     if (widgetData) {
         try {
-            const findingPostsOptions = _queryGeneratorForGettingPosts(widget?.data)
-            const findPostsQueries = {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery,findingPostsOptions.excludeQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}
-            let totalCount = await postSchema.countDocuments(findPostsQueries).exec()
-            let posts = await postSchema.find(findPostsQueries, ['_id'],
+            const findingPostsOptions = _clientQueryGeneratorForGettingPosts(widget?.data)
+            let totalCount = await postSchema.countDocuments(findingPostsOptions.findPostsQueries).exec()
+            let posts = await postSchema.find(findingPostsOptions.findPostsQueries, ['_id'],
                 {
-                    skip: widgetData.sortBy === 'random' ? Math.floor(Math.random() * totalCount) : findingPostsOptions.size * (findingPostsOptions.page - 1),
+                    skip: widgetData.sortBy === 'random' ? Math.floor(Math.random() * totalCount) : (findingPostsOptions.size * findingPostsOptions.page) - findingPostsOptions.size,
                     limit: findingPostsOptions.size,
                     sort: findingPostsOptions.sortQuery
                 }).exec()
-            //     .then(postsData=>postsData.reduce((returnArr,currentPost)=>{
-            //     returnArr = [...returnArr,currentPost._id]
-            //     return returnArr
-            // },[]))
+
             const dateForUpdateWidget = {
                 ...widgetData,
                 uniqueData:{
-                    posts:posts.map(post=>post._id),
+                    posts:posts.map(post=>post?._id),
                     totalCount
                 }
             }

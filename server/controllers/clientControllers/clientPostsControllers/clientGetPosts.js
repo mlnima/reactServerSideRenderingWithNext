@@ -1,11 +1,11 @@
 //clientGetPosts
 const postSchema = require('../../../models/postSchema');
 const metaSchema = require('../../../models/metaSchema');
-const _queryGeneratorForGettingPosts = require('../_variables/_queryGeneratorForGettingPosts')
+const _clientQueryGeneratorForGettingPosts = require('../_variables/_clientQueryGeneratorForGettingPosts')
 
 module.exports = async (req, res) => {
     try {
-        const findingPostsOptions = _queryGeneratorForGettingPosts(req.query)
+        const findingPostsOptions = _clientQueryGeneratorForGettingPosts(req.query)
         // console.log(JSON.stringify(findingPostsOptions,null,'\t'))
         const populateMeta = [
             {path: 'actors', select: {'name': 1, 'type': 1}},

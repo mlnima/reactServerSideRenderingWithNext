@@ -1,11 +1,32 @@
-import {FC} from "react";
+import {FC, useEffect} from "react";
 import Script from 'next/script'
+import {useRouter} from "next/router";
 
 interface GoogleAnalyticsPropTypes {
     googleAnalyticsId: string
 }
 
 const GoogleAnalytics: FC<GoogleAnalyticsPropTypes> = ({googleAnalyticsId}) => {
+    const {asPath,events} = useRouter()
+
+    const handleRouteChange = (url) => {
+        if (typeof window !== 'undefined'){
+            //@ts-ignore
+            if (window?.gtag){
+                //@ts-ignore
+                window?.gtag('config', googleAnalyticsId, {
+                    page_path: url,
+                });
+            }
+        }
+    };
+
+    useEffect(() => {
+        events.on('routeChangeComplete', handleRouteChange);
+        return () => {
+            events.off('routeChangeComplete', handleRouteChange);
+        };
+    }, [asPath]);
 
     return (
         <>
@@ -24,5 +45,6 @@ const GoogleAnalytics: FC<GoogleAnalyticsPropTypes> = ({googleAnalyticsId}) => {
             </Script>
         </>
     )
+
 };
 export default GoogleAnalytics
