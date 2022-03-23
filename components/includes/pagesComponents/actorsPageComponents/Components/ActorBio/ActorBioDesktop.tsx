@@ -18,6 +18,7 @@ const ActorBioDesktopStyledSection = styled.section`
     justify-content: center;
     align-items: center;
     position: relative;
+    min-height: 200px;
 
     .cover-image {
       top: 0;
@@ -56,6 +57,7 @@ const ActorBioDesktopStyledSection = styled.section`
       background-color: var(--navigation-background-color);
       width: 100%;
       display: flex;
+ 
 
       .actor-data-description {
         display: flex;

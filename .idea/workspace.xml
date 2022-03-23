@@ -21,12 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/socket.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/socket.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/messengerPageComponents/MessengerConversationMessageTools/MessengerConversationMessageTools.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/messenger/[conversation].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/messenger/[conversation].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/userActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/userActions.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBioDesktop.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBioDesktop.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -107,7 +102,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\profile\post" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -160,9 +155,9 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.test" />
         <item itemvalue="npm.analyze" />
       </list>
@@ -1086,7 +1081,7 @@
       <workItem from="1647773630802" duration="46688000" />
       <workItem from="1647862215935" duration="2219000" />
       <workItem from="1647886487327" duration="5862000" />
-      <workItem from="1647937416290" duration="10620000" />
+      <workItem from="1647937416290" duration="11639000" />
     </task>
     <servers />
   </component>
