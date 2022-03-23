@@ -7,7 +7,7 @@ module.exports = async (req, res) => {
     try {
 
         const findingPostsOptions = _queryGeneratorForGettingPosts(req.query)
-        // console.log(findingPostsOptions)
+        console.log(findingPostsOptions)
         const populateMeta = [
             {path: 'actors', select: {'name': 1, 'type': 1}},
             {path: 'categories', select: {'name': 1, 'type': 1, 'imageUrl': 1}},
