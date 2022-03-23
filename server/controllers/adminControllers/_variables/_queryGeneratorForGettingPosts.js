@@ -18,6 +18,7 @@ module.exports = data => {
     const searchQuery = !keyword ? {} :
         !data.lang || data.lang === 'default' ? {$or: [{title: new RegExp(keyword, 'i')}]} :
             {$or: [{title: new RegExp(keyword, 'i')}, {[`translations.${data.lang}.title`]: new RegExp(keyword, 'i')}]}
+
     return {
         size: size > 1000 ? 1000 : size,
         page: data?.page ? parseInt(data?.page) : 1,
@@ -27,7 +28,8 @@ module.exports = data => {
         metaQuery,
         excludeQuery,
         searchQuery,
-        selectedFields: data.fields && data.fields?.length || !data.fields ? [] : data.fields,
+        //selectedFields: data.fields && data.fields?.length || !data.fields ? [] : data.fields,
+        selectedFields: data?.field || [] ,
         sortQuery: sort === 'createdAt' || sort === 'random' || !sort ? {} : {[sort]: -1}
     }
 }

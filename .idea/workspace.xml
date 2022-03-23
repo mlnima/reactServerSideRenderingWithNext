@@ -21,7 +21,8 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_queryGeneratorForGettingPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_queryGeneratorForGettingPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_queryGeneratorForGettingPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_queryGeneratorForGettingPosts.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPosts.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1082,7 +1083,7 @@
       <workItem from="1647773630802" duration="46688000" />
       <workItem from="1647862215935" duration="2219000" />
       <workItem from="1647886487327" duration="5862000" />
-      <workItem from="1647937416290" duration="18813000" />
+      <workItem from="1647937416290" duration="20401000" />
     </task>
     <servers />
   </component>
