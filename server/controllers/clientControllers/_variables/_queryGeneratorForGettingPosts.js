@@ -3,8 +3,11 @@ const {isValidObjectId} = require("mongoose");
 module.exports = data => {
     const excludesPostFromSources = process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : [];
 
+
     const excludeContent = excludesPostFromSources.map(excludeWord => {
+
         const expression = `.*${excludeWord}.*`
+
         return {'videoEmbedCode': {$not: new RegExp(expression, "g")}}
     })
 

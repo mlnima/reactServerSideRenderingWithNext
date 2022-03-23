@@ -5,9 +5,8 @@ const _queryGeneratorForGettingPosts = require('../_variables/_queryGeneratorFor
 
 module.exports = async (req, res) => {
     try {
-
         const findingPostsOptions = _queryGeneratorForGettingPosts(req.query)
-
+        console.log(JSON.stringify(findingPostsOptions,null,'\t'))
         const populateMeta = [
             {path: 'actors', select: {'name': 1, 'type': 1}},
             {path: 'categories', select: {'name': 1, 'type': 1, 'imageUrl': 1}},
@@ -15,17 +14,15 @@ module.exports = async (req, res) => {
         ]
         const findPostsQueries = {$and: [findingPostsOptions.postTypeQuery, findingPostsOptions.statusQuery, findingPostsOptions.excludeQuery, findingPostsOptions.authorQuery, findingPostsOptions.searchQuery, findingPostsOptions.metaQuery]}
         const totalCount = await postSchema.countDocuments(findPostsQueries).exec();
-        // const skipValue =  req.body.sort === 'random' ? Math.floor(Math.random() * totalCount) : findingPostsOptions.size * (findingPostsOptions.page - 1);
         const posts = await postSchema.find(findPostsQueries, findingPostsOptions.selectedFields,
             {
-                //skip: req.body.sort === 'random' ? Math.floor(Math.random() * totalCount) : findingPostsOptions.size * (findingPostsOptions.page - 1),
                 skip: req.body.sort === 'random' ? Math.floor(Math.random() * totalCount) : (findingPostsOptions.size * findingPostsOptions.page) - findingPostsOptions.size,
                 limit: findingPostsOptions.size,
-                // sort: findingPostsOptions.sortQuery
+                sort: findingPostsOptions.sortQuery
             })
-            .sort(findingPostsOptions.sortQuery)
             .populate(populateMeta)
             .exec()
+        console.log(posts.map(post=>post._id))
         const meta = req.query?.metaId || req.query?.selectedMetaForPosts ? await metaSchema.findById(req.query?.metaId || req.query?.selectedMetaForPosts).exec() : {}
         res.json({posts, totalCount, meta})
     } catch (err) {
@@ -35,3 +32,6 @@ module.exports = async (req, res) => {
         })
     }
 };
+
+
+//skip: req.body.sort === 'random' ? Math.floor(Math.random() * totalCount) : findingPostsOptions.size * (findingPostsOptions.page - 1),
