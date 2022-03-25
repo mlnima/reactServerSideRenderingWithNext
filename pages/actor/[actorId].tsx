@@ -2,7 +2,7 @@ import PostsPage from "@components/includes/PostsPage/PostsPage";
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+
 import {useRouter} from "next/router";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
@@ -55,13 +55,7 @@ const actorPage: FC = () => {
                     </Link>
                 </div>
                 :null}
-            {actorPageData.actor ? <MetaDataToSiteHead title={actorPageData.actor.name}
-                                                       description={actorPageData.actor.description}
-                                                       url={`${asPath}`}
-                                                       image={actorPageData.actor.imageUrl}
-                />
-                : null
-            }
+
             <ActorBio/>
             <WidgetsRenderer
                 position='actorPageTop'
@@ -89,9 +83,10 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'actorPageLeftSidebar',
             'actorPageBottom',
             'actorPageRightSidebar'
-        ]))
-    // @ts-ignore
-    await store.dispatch(getPosts(context.query, context.query.actorId, true,'actors'))
+        ]
+    ))
+//@ts-ignore
+    await store.dispatch(getPosts(context, context.query.actorId, true,'actors',{page:'actor'}))
 
     return {
         props: {
@@ -102,3 +97,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
 
 export default actorPage;
+
+//import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+// {actorPageData.actor ? <MetaDataToSiteHead title={actorPageData.actor.name}
+//                                            description={actorPageData.actor.description}
+//                                            url={`${asPath}`}
+//                                            image={actorPageData.actor.imageUrl}
+//     />
+//     : null
+// }

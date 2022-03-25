@@ -105,7 +105,7 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
 
                         <LearnTypeCardMedia
                             categoriesImages={
-                                post.categories.filter(
+                                post.categories?.filter(
                                     category => category?.imageUrl).map(category => category?.imageUrl
                                 )
                             }

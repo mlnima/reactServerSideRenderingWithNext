@@ -5,7 +5,6 @@ import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import {useRouter} from "next/router";
-import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import { StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -55,14 +54,7 @@ const tagPage: FC = () => {
                 </div>
                 : null}
             {storeData.tag ? <PostsPageInfo titleToRender={capitalizeFirstLetter(storeData.tag.name)}/> : null}
-            {storeData.tag ?
-                <MetaDataToSiteHead title={storeData.tag?.name}
-                                    description={storeData.tag?.description}
-                                    url={`${asPath}`}
-                                    image={storeData.tag?.imageUrl}
-                />
-                : null
-            }
+
 
             <WidgetsRenderer
                 position={'tagPageTop'}
@@ -92,7 +84,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ]))
 
     // @ts-ignore
-    await store.dispatch(getPosts(context.query, context.query.tagId, true,'tags'))
+    await store.dispatch(getPosts(context, context.query.tagId, true,'tags',{page:'tag'}))
 
     return {
         props: {
@@ -103,3 +95,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 });
 
 export default tagPage;
+
+//import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+// {storeData.tag ?
+//     <MetaDataToSiteHead title={storeData.tag?.name}
+//                         description={storeData.tag?.description}
+//                         url={`${asPath}`}
+//                         image={storeData.tag?.imageUrl}
+//     />
+//     : null
+// }

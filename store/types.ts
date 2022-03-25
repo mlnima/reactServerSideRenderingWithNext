@@ -31,6 +31,7 @@ export const SET_WIDGETS ='SET_WIDGETS'
 export const SET_WIDGETS_IN_GROUPS ='SET_WIDGETS_IN_GROUPS'
 // export const SET_WIDGETS_FOR_ADMIN ='SET_WIDGETS_FOR_ADMIN'
 //GLOBAL STATE TYPES
+export const SET_HEAD_DATA = 'SET_HEAD_DATA'
 export const LOGIN_REGISTER_FORM ='LOGIN_REGISTER_FORM'
 export const LOADING ='LOADING'
 export const SET_ALERT ='SET_ALERT'
@@ -75,6 +76,8 @@ export const NEW_POST = 'NEW_POST'
 
 //PAGES-TYPES
 export const GET_PAGE_DATA = 'GET_PAGE_DATA'
+
+
 
 
 

@@ -5,7 +5,6 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import {useRouter} from "next/router";
-import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -56,14 +55,7 @@ const categoryPage: FC = () => {
                 </div>
                 :null}
             {category ? <PostsPageInfo titleToRender={capitalizeFirstLetter(category?.name)}/> : null}
-            {category ?
-                <MetaDataToSiteHead title={category?.name}
-                                    description={category?.description}
-                                    url={`${router.asPath}`}
-                                    image={category?.imageUrl}
-                />
-                : null
-            }
+
             <WidgetsRenderer
                 position={'categoryPageTop'}
             />
@@ -91,7 +83,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ]))
 
     // @ts-ignore
-    await store.dispatch(getPosts(context.query, context.query.categoryId, true,'categories'))
+    await store.dispatch(getPosts(context, context.query.categoryId, true,'categories',{page:'category'}))
 
     return {
         props: {
@@ -101,3 +93,13 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 });
 
 export default categoryPage;
+
+//import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+// {category ?
+//     <MetaDataToSiteHead title={category?.name}
+//                         description={category?.description}
+//                         url={`${router.asPath}`}
+//                         image={category?.imageUrl}
+//     />
+//     : null
+// }

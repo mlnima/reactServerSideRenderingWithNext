@@ -25,8 +25,8 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
     }
 
     const onDeletePageHandler=()=>{
-        dispatch(adminDeleteCustomPage(_id))
-        reGetData()
+        // dispatch(adminDeleteCustomPage(_id))
+        // reGetData()
     }
 
 
@@ -115,11 +115,11 @@ const TableBodyItemDirectAction: FC<TableBodyItemDirectActionPropTypes> = ({asse
         return (
             <div className='asset-page-table-body-item-hover-item'>
                 <Link href={'/admin/page?id=' + _id}><a>Edit</a></Link>
-                <span className={'btn btn-danger'}
-                      onClick={onDeletePageHandler}
-                >
-                    Delete
-                </span>
+                {/*<span className={'btn btn-danger'}*/}
+                {/*      onClick={onDeletePageHandler}*/}
+                {/*>*/}
+                {/*    Delete*/}
+                {/*</span>*/}
             </div>
         );
     } else {

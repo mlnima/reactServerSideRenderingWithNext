@@ -34,7 +34,7 @@ let StyledDiv = styled.div`
       margin: auto;
       width: 100%;
       display: flex;
-      justify-content: flex-start;
+      justify-content: center;
       align-items: flex-start;
       flex-wrap: wrap;
     }

@@ -82,7 +82,14 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
 
     const {t} = useTranslation('common');
     const dispatch = useDispatch();
-    const {likes, disLikes, views, _id} = useSelector(({posts}: StoreTypes) => posts.post)
+    const {likes, disLikes, views, _id} = useSelector(({posts}: StoreTypes) =>{
+        return{
+            likes: posts.post?.likes,
+            disLikes: posts.post?.disLikes,
+            views: posts.post?.views,
+            _id: posts.post?._id,
+        }
+    })
 
     const ratingData = useMemo(() => {
         if (typeof window !== 'undefined')  return localStorage?.ratingData ?

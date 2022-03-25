@@ -18,7 +18,32 @@ export const cardWidthCalculator = (size : string)=>size === 'listSmall' ? 320 :
                 size === 'medium' ? 320 : 255
 
 
+export const getTextDataWithTranslation = (locale,name,parentObject)=>{
+    const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
+    return isDefaultLocale ? parentObject?.[name] : parentObject.translations?.[locale]?.[name] || parentObject?.[name] || null
+}
 
+export const convertMetasTypeToSingular = (metaType)=>{
+  return metaType === 'actors' ? 'actor' :
+         metaType === 'tags' ? 'tag' :
+         metaType === 'categories' ? 'category':''
+}
+//
+// export const defaultFieldForPosts = [
+//     'title',
+//     'mainThumbnail',
+//     'quality',
+//     'likes',
+//     'disLikes',
+//     'views',
+//     'duration',
+//     'postType',
+//     'price',
+//     'translations',
+//     'videoTrailerUrl',
+//     'rating',
+//     'redirectLink'
+// ]
 
 
 

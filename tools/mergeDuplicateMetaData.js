@@ -17,7 +17,7 @@ const mergeDuplicateMetaData = async (type) => {
                 if (meta?.name !== metaName) {
                     const lowerCasedMeta = await metaSchema.findOne({name: metaName}).exec()
                     if (lowerCasedMeta) {
-                        console.log(meta?.name)
+                        // console.log(meta?.name)
                         await postSchema.find({[type]: meta?._id}).exec().then(async posts => {
                             if (posts?.length){
                                 for await (const post of posts){

@@ -11,7 +11,7 @@ import {
     ADMIN_GET_POSTS,
     ADMIN_SET_TOTAL_COUNT
 } from "../adminTypes";
-import {CHANGE_ACTIVE_EDITING_LANGUAGE, LOADING, NEW_POST, SET_ALERT} from "@store/types";
+import {CHANGE_ACTIVE_EDITING_LANGUAGE, GET_POST, LOADING, NEW_POST, SET_ALERT} from "@store/types";
 import {setLoading} from "@store/clientActions/globalStateActions";
 
 export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) => {
@@ -19,10 +19,17 @@ export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) =
     if (_id) {
         await Axios.get( `/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
+
+                dispatch({
+                    type: GET_POST,
+                    payload: {post:res.data?.post,relatedPosts:[]}
+                })
+
                 dispatch({
                     type: ADMIN_GET_POST,
                     payload: res.data?.post
                 })
+
             }).catch((err: AxiosError<AxiosErrorTypes>) => {
                 dispatch({
                     type: SET_ALERT,

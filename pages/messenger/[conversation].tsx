@@ -18,8 +18,8 @@ import {
         newMessageInConversation,
         outgoingCall,
         setPartnerVideo,
-       } from "../../store/clientActions/userActions";
-import {StoreTypes} from "../../_variables/TypeScriptTypes/GlobalTypes";
+       } from "@store/clientActions/userActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const conversation = (props: ClientPagesTypes) => {
@@ -117,7 +117,12 @@ const conversation = (props: ClientPagesTypes) => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(context, []))
+    await store.dispatch(getDefaultPageData(context, [],
+        {
+            setHeadData:true,
+            page:'messenger'
+        }
+    ))
     return {
         props: {
             ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),

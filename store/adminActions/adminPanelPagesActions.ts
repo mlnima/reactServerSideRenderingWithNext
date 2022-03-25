@@ -25,10 +25,10 @@ export const adminGetPages = (data) => async (dispatch: any) =>{
 export const adminGetPage = (id) => async (dispatch: any) =>{
     dispatch({type: LOADING, payload: true})
     const body = {
-        id,
+        _id:id,
         token: localStorage.wt
     };
-    await Axios.post('/api/v1/pages/getPageData',body).then((response:AxiosResponse)=>{
+    await Axios.post('/api/admin/pages/getPageData',body).then((response:AxiosResponse)=>{
         dispatch({
             type: ADMIN_GET_PAGE,
             payload: response.data?.pageData
@@ -37,6 +37,7 @@ export const adminGetPage = (id) => async (dispatch: any) =>{
 
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
+
 export const adminUpdatePage = (pageData) => async (dispatch: any) =>{
     dispatch({type: LOADING, payload: true})
     const body = {

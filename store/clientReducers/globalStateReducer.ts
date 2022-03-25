@@ -1,5 +1,12 @@
 import {HYDRATE} from 'next-redux-wrapper';
-import {CHECK_ROUTE_AND_SET_LOADING, CLOSE_ALERT, LOADING, LOGIN_REGISTER_FORM, SET_ALERT} from "@store/types";
+import {
+    CHECK_ROUTE_AND_SET_LOADING,
+    CLOSE_ALERT,
+    LOADING,
+    LOGIN_REGISTER_FORM,
+    SET_ALERT,
+    SET_HEAD_DATA
+} from "@store/types";
 
 const initialState = {
     loginRegisterFormPopup:false,
@@ -7,6 +14,7 @@ const initialState = {
     isSiteIdentitySet:false,
     isSiteDesignSet:false,
     console:false,
+    headData:{},
     alert:{
         active:false,
         type:null,
@@ -21,6 +29,14 @@ export const globalStateReducer = (state= initialState , action : {type:string,p
             return {
                 ...state,
                 ...action.payload.globalState
+            };
+        case SET_HEAD_DATA :
+            return {
+                ...state,
+                headData:{
+                    ...state.headData,
+                    ...action.payload
+                }
             };
         case  LOGIN_REGISTER_FORM:
             return {

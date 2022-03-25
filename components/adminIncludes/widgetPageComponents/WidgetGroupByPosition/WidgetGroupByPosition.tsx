@@ -9,6 +9,7 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 const WidgetGroupByPositionStyledDiv = styled.div`
   background-color: transparent;
   width: 100%;
+
   position: initial;
   margin: 5px;
 
@@ -31,12 +32,13 @@ const WidgetGroupByPositionStyledDiv = styled.div`
     position: relative;
     .widget-model {
       width: 650px;
+    
     }
   }
   @media only screen and (min-width: 1024px) {
-    width: 50vw;
+    max-width: 50vw;
     .widget-model {
-      width: 50vw;
+      max-width: 50vw;
     }
   }
 `

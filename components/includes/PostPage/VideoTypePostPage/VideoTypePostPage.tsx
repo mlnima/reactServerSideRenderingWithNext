@@ -5,8 +5,9 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import PostTitle from "../components/PostTitle/PostTitle";
-const PostMetaDataToSiteHead = dynamic(() =>
-    import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
+import RelatedPostsRenderer from "@components/includes/PostPage/components/RelatedPostsRenderer";
+// const PostMetaDataToSiteHead = dynamic(() =>
+//     import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
 const EditLinkForAdmin = dynamic(() =>
     import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
 const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
@@ -20,7 +21,8 @@ const VideoPlayer = dynamic(() => import('../components/VideoPlayer/VideoPlayer'
 const PostDescription = dynamic(() => import('../components/PostDescription/PostDescription'))
 
 const VideoTypePostPageStyledMain = styled(PostPageStyledMain)`
-
+  max-width: 1300px;
+  margin: auto;
 `
 const VideoTypePostPage = () => {
 
@@ -35,7 +37,7 @@ const VideoTypePostPage = () => {
     return (
         <VideoTypePostPageStyledMain className='main post-page' postPageStyle={videoTypePostPageData?.postPageStyle}>
             {videoTypePostPageData?.role === 'administrator' ? <EditLinkForAdmin/> : null}
-            <PostMetaDataToSiteHead/>
+            {/*<PostMetaDataToSiteHead/>*/}
             <VideoPlayer/>
             <PostTitle/>
             <div className='rating-price-download'>
@@ -53,6 +55,7 @@ const VideoTypePostPage = () => {
             <div className='under-post-widget-area'>
                 <WidgetsRenderer position='underPost'/>
             </div>
+            <RelatedPostsRenderer/>
             <CommentFrom/>
             {videoTypePostPageData?.post?.comments?.length ? <CommentsRenderer/> : null}
         </VideoTypePostPageStyledMain>

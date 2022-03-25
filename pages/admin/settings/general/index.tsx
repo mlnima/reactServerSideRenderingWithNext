@@ -14,6 +14,12 @@ import {adminPanelEditIdentity} from "@store/adminActions/adminPanelSettingsActi
 let StyledForm = styled.form`
   background-color: white;
   padding: 20px;
+  
+  .forms{
+    .active-editing-language{
+      width: 100px;
+    }
+  }
 
   button {
     background-color: #f1f1f1;
@@ -224,11 +230,24 @@ const settings = () => {
             <div className="forms">
                 <h2>site identity:</h2>
                 <h3>Site Info:</h3>
-                <select name='activeEditingLanguage' className={'custom-select'}
+                <select name='activeEditingLanguage' className={'custom-select active-editing-language'}
                         onChange={e => onChangeLanguageHandler(e)}>
                     <option value='default'>{process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?? 'default'}</option>
                     {languagesOptions}
                 </select>
+                <div className="siteIdentity site-settings-form-section-parent">
+                    <div className={'site-settings-form-section'}>
+                        <p>Site Name:</p>
+                        <input className={'form-control-input'}
+                               type='text'
+                               name='siteName'
+                               value={identity.siteName}
+                               onChange={e => onChangeHandlerWithTranslate(e)}
+                        />
+                    </div>
+                </div>
+
+
                 <div className="siteIdentity site-settings-form-section-parent">
                     <div className={'site-settings-form-section'}>
                         <p>Site Title:</p>
@@ -236,14 +255,103 @@ const settings = () => {
                             editingSettings.activeEditingLanguage === 'default' ? identity.title :
                                 identity.translations?.[editingSettings.activeEditingLanguage]?.title || ""
                         } onChange={e => onChangeHandlerWithTranslate(e)}/>
-                    </div>
-                    <div className={'site-settings-form-section'}>
-                        <p>Description:</p>
+                        <p>Site Description:</p>
                         <textarea className={'form-control-input'} name='description' value={
                             editingSettings.activeEditingLanguage === 'default' ? identity.description :
                                 identity.translations?.[editingSettings.activeEditingLanguage]?.description || ""
                         } onChange={e => onChangeHandlerWithTranslate(e)}/>
+
                     </div>
+
+                    <div className={'site-settings-form-section'}>
+                        <p>Categories Page Title:</p>
+                        <input className={'form-control-input'} type='text' name='categoriesPageTitle' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.categoriesPageTitle :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.categoriesPageTitle || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                        <p>Categories Page Description:</p>
+                        <textarea className={'form-control-input'} name='categoriesPageDescription' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.categoriesPageDescription :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.categoriesPageDescription || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                        <p>Category + CategoryPage Title:</p>
+                        <input className={'form-control-input'} type='text' name='categoryPageTitle' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.categoryPageTitle :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.categoryPageTitle || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                        <p>Category Page Description + Category:</p>
+                        <textarea className={'form-control-input'} name='categoryPageDescription' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.categoryPageDescription :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.categoryPageDescription || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                    </div>
+
+                    <div className={'site-settings-form-section'}>
+                        <p>Tags Page Title:</p>
+                        <input className={'form-control-input'} type='text' name='tagsPageTitle' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.tagsPageTitle :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.tagsPageTitle || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                        <p>Tags Page Description:</p>
+                        <textarea className={'form-control-input'} name='tagsPageDescription' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.tagsPageDescription :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.tagsPageDescription || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                        <p>Tag + Tag Page Title:</p>
+                        <input className={'form-control-input'} type='text' name='tagPageTitle' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.tagPageTitle :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.tagPageTitle || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                        <p>Tag Page Description + Tag :</p>
+                        <textarea className={'form-control-input'} name='tagsPageDescription' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.tagPageDescription :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.tagPageDescription || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                    </div>
+
+                    {identity.siteMode === 'tube'?
+                        <>
+                            <div className={'site-settings-form-section'}>
+                                <p>Actors Page Title:</p>
+                                <input className={'form-control-input'} type='text' name='actorsPageTitle' value={
+                                    editingSettings.activeEditingLanguage === 'default' ? identity?.actorsPageTitle :
+                                        identity.translations?.[editingSettings.activeEditingLanguage]?.actorsPageTitle || ""
+                                } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                                <p>Actors  Page Description:</p>
+                                <textarea className={'form-control-input'} name='actorsPageDescription' value={
+                                    editingSettings.activeEditingLanguage === 'default' ? identity?.actorsPageDescription :
+                                        identity.translations?.[editingSettings.activeEditingLanguage]?.actorsPageDescription || ""
+                                } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                                <p>Actor + Actor Page Title:</p>
+                                <input className={'form-control-input'} type='text' name='actorPageTitle' value={
+                                    editingSettings.activeEditingLanguage === 'default' ? identity?.actorPageTitle :
+                                        identity.translations?.[editingSettings.activeEditingLanguage]?.actorPageTitle || ""
+                                } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                                <p>Actor Page Description + Actor:</p>
+                                <textarea className={'form-control-input'} name='actorPageDescription' value={
+                                    editingSettings.activeEditingLanguage === 'default' ? identity?.actorPageDescription :
+                                        identity.translations?.[editingSettings.activeEditingLanguage]?.actorPageDescription || ""
+                                } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                            </div>
+                        </>
+                        :null
+                    }
+
+                    <div className={'site-settings-form-section'}>
+                        <p>Keyword + Search Page Title :</p>
+                        <input className={'form-control-input'} type='text' name='searchPageTitle' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.searchPageTitle :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.searchPageTitle || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                        <p>Search Page Description + keyword:</p>
+                        <textarea className={'form-control-input'} name='searchPageDescription' value={
+                            editingSettings.activeEditingLanguage === 'default' ? identity?.searchPageDescription :
+                                identity.translations?.[editingSettings.activeEditingLanguage]?.searchPageDescription || ""
+                        } onChange={e => onChangeHandlerWithTranslate(e)}/>
+                    </div>
+
+
+
                     <div className="site-settings-form-section keywords">
                         <p>Keywords:</p>
                         <input className={'form-control-input'} ref={keywordsInput} name='keywords'/>
@@ -274,6 +382,13 @@ const settings = () => {
                         <input type="checkbox" name='developmentMode'
                             // @ts-ignore
                                checked={identity.developmentMode}
+                               onChange={e => checkboxChangeHandler(e)}/>
+                    </div>
+                    <div className="site-settings-form-section developmentMode">
+                        <p>RTA Label</p>
+                        <input type="checkbox" name='rtaContent'
+                            // @ts-ignore
+                               checked={identity.rtaContent}
                                onChange={e => checkboxChangeHandler(e)}/>
                     </div>
                     <div className="site-settings-form-section redirectToSSLPop checkbox-section">

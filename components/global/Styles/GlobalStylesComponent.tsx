@@ -174,6 +174,10 @@ const GlobalStyles= createGlobalStyle`
     border: none;
   }
   
+  .form-group{
+    margin-bottom: 1rem;
+  }
+  
   .form-control-input{
     width: 100%;
     display: block;

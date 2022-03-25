@@ -59,37 +59,41 @@ const Comment: FC<CommentPropTypes> = ({comment}) => {
         dispatch(deleteComments([id]))
     }
 
-    return (
-        <CommentStyledDiv className='comment'>
+    console.log(comment)
+    if (comment?.author && comment?.createdAt){
+        return (
+            <CommentStyledDiv className='comment'>
 
-            <div className='comment-header'>
+                <div className='comment-header'>
 
-                <img className='comment-author-image'
-                     src={comment?.author?.profileImage || '/public/asset/images/icons/profile-image.jpg'}
-                />
+                    <img className='comment-author-image'
+                         src={comment?.author?.profileImage || '/public/asset/images/icons/profile-image.jpg'}
+                    />
 
-                <Link href={`/user/${comment?.author?.username}`}>
-                    <a className='comment-author'>
-                        {comment.author.username}
-                    </a>
-                </Link>
+                    <Link href={`/user/${comment?.author?.username}`}>
+                        <a className='comment-author'>
+                            {comment?.author?.username||''}
+                        </a>
+                    </Link>
 
-                <span className='comment-date'>
+                    <span className='comment-date'>
                     {formatDistance(new Date(comment?.createdAt), new Date(), {addSuffix: true, ...localeData})}
                 </span>
-                {userData.role === 'administrator' ?
+                    {userData.role === 'administrator' ?
                         <div className='comments-admin-action-btns'>
                             <button onClick={() => onDeleteHandler(comment?._id)} className={'btn btn-danger'}>Delete
                             </button>
                         </div>
-                    : null
-                }
-            </div>
-            <div className='comment-body'>
-                {comment.body}
-            </div>
-        </CommentStyledDiv>
-    );
+                        : null
+                    }
+                </div>
+                <div className='comment-body'>
+                    {comment.body}
+                </div>
+            </CommentStyledDiv>
+        );
+    }
+
 };
 
 export default Comment;

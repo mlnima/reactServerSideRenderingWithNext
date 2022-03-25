@@ -6,8 +6,9 @@ import dynamic from "next/dynamic";
 import {getComments, getPost, viewPost} from "@store/clientActions/postsAction";
 import Error from 'next/error'
 import {useRouter} from "next/router";
-import {useEffect} from "react";
+import {useEffect, useState} from "react";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {adminGetPost} from "@store/adminActions/adminPanelPostsActions";
 
 const LearnTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
@@ -19,14 +20,37 @@ const PostPage = dynamic(() => import('@components/includes/PostPage/PostPage'))
 const postPage = () => {
     const {query} = useRouter()
     const dispatch = useDispatch()
-    const {postType,_id} = useSelector((store: StoreTypes) => store?.posts?.post);
+    const [returnNotFound,setReturnNotFound] = useState(false)
+    const {postType, _id, role} = useSelector((store: StoreTypes) => {
+        return {
+            postType: store?.posts?.post?.postType,
+            _id: store?.posts?.post?._id,
+            role: store?.user.userData.role
+        }
+    });
+    useEffect(() => {
+        if (role === 'administrator') {
+            dispatch(adminGetPost(query.id))
+        }
+    }, [role]);
+
+    useEffect(() => {
+        returnNotFoundToUserAfterCheckingRole()
+    }, [postType]);
+
+
+    const returnNotFoundToUserAfterCheckingRole=()=>{
+        if (!postType ){
+            setReturnNotFound(true)
+        }
+    }
 
     useEffect(() => {
         dispatch(getComments(query.id as string))
         dispatch(viewPost(_id))
     }, [])
 
-    if (!postType) return <Error statusCode={404}/>
+    if (returnNotFound && role !== 'administrator') return <Error statusCode={404}/>
     else if (postType === 'learn') return <LearnTypePostPage/>
     else if (postType === 'video') return <VideoTypePostPage/>
     else return <PostPage/>
@@ -44,10 +68,11 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'postPageLeftSidebar',
             'postPageRightSidebar',
             'underPost'
-        ]))
+        ]
+    ))
 
-    // @ts-ignore
-    await store.dispatch(getPost(context.query?.id))
+    //@ts-ignore
+    await store.dispatch(getPost(context.query?.id, context.locale))
 
     return {
         props: {

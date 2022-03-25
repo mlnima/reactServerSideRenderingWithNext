@@ -16,6 +16,7 @@ import {
     SET_POSTS_DATA,
     SET_TAGS_METAS, LIKE_POST, DISLIKE_POST, VIEW_POST
 } from "@store/types";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 
 const initialState = {
     posts: [],
@@ -29,6 +30,11 @@ const initialState = {
         likes: 0,
         disLikes: 0,
         views: 0
+    },
+    relatedPosts: {
+        actorsRelatedPosts:[],
+        categoriesRelatedPosts:[],
+        tagsRelatedPosts:[],
     },
     editingPost:{},
     comments: [],
@@ -52,7 +58,14 @@ export const postsReducer = (state = initialState, action) => {
         case  GET_POSTS:
             return {
                 ...state,
-                ...action.payload
+                post:{
+                    ...state.post,
+                    ...action.payload.post
+                },
+                relatedPosts:{
+                    ...action.payload
+                }
+
             }
         case  INITIAL_POSTS:
             return {
@@ -64,7 +77,8 @@ export const postsReducer = (state = initialState, action) => {
         case  GET_POST:
             return {
                 ...state,
-                post: action.payload,
+                ...action.payload
+
             }
         case  GET_EDITING_POST:
             return {

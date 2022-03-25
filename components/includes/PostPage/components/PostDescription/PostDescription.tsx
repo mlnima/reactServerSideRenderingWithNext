@@ -19,7 +19,12 @@ const PostDescriptionStyledDiv = styled.div`
 const PostDescription: FC = () => {
 
     const {locale} = useRouter();
-    const {description, translations} = useSelector(({posts}: StoreTypes) => posts.post)
+    const {description, translations} = useSelector(({posts}: StoreTypes) => {
+        return{
+            description:posts.post?.description,
+            translations:posts.post?.translations,
+        }
+    })
 
     const descriptionValue = useMemo(() => {
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?

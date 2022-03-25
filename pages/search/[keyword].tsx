@@ -6,7 +6,7 @@ import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
+//import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'
@@ -37,11 +37,11 @@ const searchPage : FC = ( ) => {
     const router = useRouter()
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
-            {router.query.keyword ?
-                <MetaDataToSiteHead title={router.query.keyword as string}
-                                    url={`${router.asPath}`}/>
-                : null
-            }
+            {/*{router.query.keyword ?*/}
+            {/*    <MetaDataToSiteHead title={router.query.keyword as string}*/}
+            {/*                        url={`${router.asPath}`}/>*/}
+            {/*    : null*/}
+            {/*}*/}
 
             <WidgetsRenderer
                 position={'searchPageTop'}
@@ -76,9 +76,14 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'searchPageLeftSidebar',
             'searchPageBottom',
             'searchPageRightSidebar'
-        ]))
+        ],
+        {
+            setHeadData: true,
+            page: 'search'
+        }
+    ))
     // @ts-ignore
-    await store.dispatch(getPosts(context.query, null, true,null))
+    await store.dispatch(getPosts(context, null, true,null))
 
     return {
         props: {

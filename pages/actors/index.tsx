@@ -13,6 +13,7 @@ import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const ActorsPageStyledDiv = styled.div`
   grid-area: main;
+
   .actors {
     display: flex;
     flex-wrap: wrap;
@@ -50,7 +51,7 @@ const actorsPage = () => {
                 currentPage={query?.page ? parseInt(query?.page as string) : 1}
                 totalCount={totalCount}
                 size={postsCountPerPage}
-                maxPage={Math.ceil(totalCount /postsCountPerPage)}
+                maxPage={Math.ceil(totalCount / postsCountPerPage)}
             />
             <WidgetsRenderer
                 position={'actorsPageBottom'}
@@ -70,7 +71,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'actorsPageLeftSidebar',
             'actorsPageBottom',
             'actorsPageRightSidebar'
-        ]))
+        ],
+        {
+            setHeadData: true,
+            page: 'actors'
+        }
+    ))
     // @ts-ignore
     await store.dispatch(getMetas(context.query, 'actors', true))
 

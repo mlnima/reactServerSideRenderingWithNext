@@ -56,7 +56,12 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             'tagsPageLeftSidebar',
             'tagsPageBottom',
             'tagsPageRightSidebar'
-        ]))
+        ],
+        {
+            setHeadData: true,
+            page: 'tags'
+        }
+    ))
 
     // @ts-ignore
     await  store.dispatch(getMetas(context.query, 'tags', true))

@@ -38,7 +38,12 @@ const EditLinkForAdminStyledDiv = styled.div`
 const EditLinkForAdmin :FC = () => {
 
     const {query, push, pathname} = useRouter()
-    const {_id,status} = useSelector(({posts}:StoreTypes)=>posts.post)
+    const {_id,status} = useSelector(({posts}:StoreTypes)=>{
+        return{
+            _id:posts.post?._id,
+            status:posts.post?.status,
+        }
+    })
 
     const onStatusChangeHandler = (status)=>{
         dispatch(adminBulkActionPost([_id], status))

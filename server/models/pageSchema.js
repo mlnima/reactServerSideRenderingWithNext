@@ -6,9 +6,13 @@ const pageSchema =  new Schema({
         type:String,
         unique:true
     },
+    title:String,
+    description:String,
+    keywords:String,
     sidebar:String,
     status: String,
     imageUrl:String,
+    translation:mongoose.Mixed,
     pageStyle:String
 });
 

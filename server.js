@@ -1,3 +1,4 @@
+
 require('dotenv').config()
 require('./server/_variables/connectToDatabase')
 // require('./server/_variables/_setSettingToEnvironmentVariables').finally()

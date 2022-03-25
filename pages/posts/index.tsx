@@ -35,10 +35,15 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         [
             'postsPageLeftSidebar',
             'postsPageRightSidebar',
-        ]))
+        ],
+        {
+            setHeadData: true,
+            page: 'posts'
+        }
+    ))
 
     // @ts-ignore
-    await store.dispatch(getPosts(context.query, null, true,null))
+    await store.dispatch(getPosts(context, null, true,null))
 
     return {
         props: {

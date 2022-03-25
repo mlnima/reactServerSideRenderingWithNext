@@ -18,8 +18,18 @@ const Home: FC = () => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
-        //@ts-ignore
-        await store.dispatch(getDefaultPageData(context, ['homePageLeftSidebar', 'homePageRightSidebar', 'home']))
+
+        await store.dispatch(
+            //@ts-ignore
+            getDefaultPageData(
+                context,
+                ['homePageLeftSidebar', 'homePageRightSidebar', 'home'],
+                {
+                    setHeadData:true,
+                    page:'home'
+                }
+            )
+        )
 
         return {
             props: {

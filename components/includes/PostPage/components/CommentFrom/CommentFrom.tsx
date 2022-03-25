@@ -42,7 +42,7 @@ const CommentFromStyledForm = styled.form`
 const CommentFrom:FC = () => {
     const {t} = useTranslation('common');
     const dispatch = useDispatch()
-    const {_id} = useSelector(({posts}:StoreTypes)=>posts.post)
+    const _id = useSelector(({posts}:StoreTypes)=>posts.post?._id)
     const userData = useSelector(({user}:StoreTypes) => user?.userData)
     const bodyInput = useRef(null);
 

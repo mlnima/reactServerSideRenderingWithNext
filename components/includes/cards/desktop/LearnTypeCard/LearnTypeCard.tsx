@@ -93,7 +93,7 @@ interface VideoTypeCardPropTypes {
 const LearnTypeCard: FC<VideoTypeCardPropTypes> = (props) => {
 
     const postUrl = `/post/${props.post?.postType}/${props.post?._id}`
-    const categoriesImages = props.post.categories.filter(category => category?.imageUrl).map(category => category?.imageUrl)
+    const categoriesImages = props.post?.categories?.filter(category => category?.imageUrl).map(category => category?.imageUrl)
 
     return (
         <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize}

@@ -12,7 +12,12 @@ const PostTitleStyledH1 = styled.h1`
 const PostTitle = () => {
 
     const {locale} = useRouter()
-    const {title,translations} = useSelector(({posts}:StoreTypes)=>posts.post)
+    const {title,translations} = useSelector(({posts}:StoreTypes)=>{
+        return{
+            title:posts?.post?.title,
+            translations:posts?.post?.translations,
+        }
+    })
 
     return (
         <PostTitleStyledH1 className='post-title'>

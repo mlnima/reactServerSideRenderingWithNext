@@ -15,7 +15,12 @@ const Login = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
 
     // @ts-ignore
-    await store.dispatch(getDefaultPageData(context, []))
+    await store.dispatch(getDefaultPageData(context, [],
+        {
+            setHeadData:true,
+            page:'login'
+        }
+    ))
 
     return {
         props: {
