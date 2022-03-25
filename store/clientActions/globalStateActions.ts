@@ -113,6 +113,7 @@ export const getDefaultPageData =
             const description = options.page && options.page.match('search|tags|categories|actors') ?
                 (options.page === 'search' ? `${context.query?.keyword} ` : '') +
                 getTextDataWithTranslation(context.locale, `${options.page}PageDescription`, staticData?.identity) +
+                //@ts-ignore
                 (staticData?.identity?.siteName ? ` | ${staticData?.identity?.siteName}` : ''):
                 getTextDataWithTranslation(context.locale, 'description', staticData?.identity)
 

@@ -20,7 +20,6 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1086,7 +1085,7 @@
       <workItem from="1648058807233" duration="8368000" />
       <workItem from="1648120889330" duration="31617000" />
       <workItem from="1648207060844" duration="20408000" />
-      <workItem from="1648235675241" duration="9338000" />
+      <workItem from="1648235675241" duration="9470000" />
     </task>
     <servers />
   </component>
