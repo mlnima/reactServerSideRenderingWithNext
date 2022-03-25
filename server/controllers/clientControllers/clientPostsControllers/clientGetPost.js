@@ -53,11 +53,7 @@ module.exports = async (req, res) => {
           ]).exec()
 
 
-            if (!post){
-                console.error('we didnt found')
-                res.status(404).json({message:'not found'})
-            }
-            else {
+            if (post){
                 console.error('we found but')
                 res.json( {
                     post,
@@ -68,6 +64,10 @@ module.exports = async (req, res) => {
                     },
                     error: false
                 });
+            }
+            else {
+                console.error('we didnt found')
+                res.status(404).json({message:'not found'})
             }
 
 
