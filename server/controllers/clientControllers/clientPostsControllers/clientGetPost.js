@@ -65,7 +65,7 @@ module.exports = async (req, res) => {
             res.status(404).json({message:'not found'})
         }
     }catch (err){
-        console.error(err)
+        console.error(err,'get post error')
         res.status(500).json({message:'Something went wrong please try again later'})
     }
 };
