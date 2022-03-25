@@ -23,7 +23,10 @@ const _getPostsQueryGenerator = (queryData, metaIdData, cache) => {
         'translations',
         'videoTrailerUrl',
         'rating',
-        'redirectLink']
+        'redirectLink',
+        'createdAt',
+        'updatedAt'
+    ]
         .map(f => 'field=' + f).join('&')
 
     const getPostsData = {
