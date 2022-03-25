@@ -21,7 +21,6 @@ const VideoPlayer = dynamic(() => import('../components/VideoPlayer/VideoPlayer'
 const PostDescription = dynamic(() => import('../components/PostDescription/PostDescription'))
 
 const VideoTypePostPageStyledMain = styled(PostPageStyledMain)`
-  max-width: 1300px;
   margin: auto;
 `
 const VideoTypePostPage = () => {
