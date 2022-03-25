@@ -42,24 +42,35 @@ module.exports = async (req, res) => {
     // const _id = req.query._id;
     const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id.match(/^[0-9a-fA-F]{24}$/) : false;
     try {
+        console.error('we try')
         if (validateId){
+            console.error('is valid')
           const post = await postSchema.findOne({_id:req.query._id,status:'published'},'-comments').populate([
               {path: 'author',select:['username','profileImage','role']},
               {path: 'categories',select:{'name':1,'type':1}},
               {path: 'tags',select:{'name':1,'type':1}},
               {path: 'actors',select:{'name':1,'type':1}},
           ]).exec()
-            if (!post)res.status(404).json({message:'not found'})
 
-            res.json( {
-                post,
-                relatedPosts:{
-                    ...await getRelatedPosts('actors',(post?.actors || [])?.slice(0,5)?.map(meta=>meta._id)),
-                    ...await getRelatedPosts('categories',(post?.categories || [])?.slice(0,5)?.map(meta=>meta._id)),
-                    ...await getRelatedPosts('tags',(post?.tags || [])?.slice(0,5)?.map(meta=>meta._id)),
-                },
-                error: false
-            });
+
+            if (!post){
+                console.error('we didnt found')
+                res.status(404).json({message:'not found'})
+            }
+            else {
+                console.error('we found but')
+                res.json( {
+                    post,
+                    relatedPosts:{
+                        ...await getRelatedPosts('actors',(post?.actors || [])?.slice(0,5)?.map(meta=>meta._id)),
+                        ...await getRelatedPosts('categories',(post?.categories || [])?.slice(0,5)?.map(meta=>meta._id)),
+                        ...await getRelatedPosts('tags',(post?.tags || [])?.slice(0,5)?.map(meta=>meta._id)),
+                    },
+                    error: false
+                });
+            }
+
+
 
         }else {
             res.status(404).json({message:'not found'})
