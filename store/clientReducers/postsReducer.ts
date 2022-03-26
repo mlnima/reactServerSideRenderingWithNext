@@ -58,13 +58,14 @@ export const postsReducer = (state = initialState, action) => {
         case  GET_POSTS:
             return {
                 ...state,
-                post:{
-                    ...state.post,
-                    ...action.payload.post
-                },
-                relatedPosts:{
-                    ...action.payload
-                }
+                ...action.payload
+                // post:{
+                //     ...state.post,
+                //     ...action.payload.post
+                // },
+                // relatedPosts:{
+                //     ...action.payload
+                // }
 
             }
         case  INITIAL_POSTS:

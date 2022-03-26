@@ -77,9 +77,9 @@ const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
             // })
         }
     }
-    useEffect(() => {
-        console.log(mainThumbnail)
-    }, [mainThumbnail]);
+    // useEffect(() => {
+    //     console.log(mainThumbnail)
+    // }, [mainThumbnail]);
 
     return (
         <ThumbnailUploaderStyledDiv onClick={() => uploadInputElement.current.click()}

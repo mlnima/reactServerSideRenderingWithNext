@@ -33,9 +33,9 @@ const Followers: FC = () => {
         }
     }, [userData?.followers]);
 
-    useEffect(() => {
-        console.log(userData)
-    }, [userData]);
+    // useEffect(() => {
+    //     console.log(userData)
+    // }, [userData]);
 
     const renderFollowers = followers.map((user, index) => {
         return (

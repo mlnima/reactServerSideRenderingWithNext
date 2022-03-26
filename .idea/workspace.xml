@@ -20,7 +20,12 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/profile/followers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/followers/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientActions/postsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/postsAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientReducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientReducers/postsReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1085,7 +1090,7 @@
       <workItem from="1648058807233" duration="8368000" />
       <workItem from="1648120889330" duration="31617000" />
       <workItem from="1648207060844" duration="20408000" />
-      <workItem from="1648235675241" duration="11079000" />
+      <workItem from="1648235675241" duration="16993000" />
     </task>
     <servers />
   </component>

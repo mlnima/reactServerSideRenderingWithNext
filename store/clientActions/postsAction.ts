@@ -41,6 +41,8 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
             const meta = res?.data?.meta
             const metaData = dataForm && meta ? {[dataForm]: meta} : {}
 
+            // console.log('we have the data ',metaData)
+
             dispatch({
                 type: GET_POSTS,
                 payload: {

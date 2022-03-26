@@ -40,21 +40,17 @@ const getRelatedPosts = async (relatedByType,relatedIds)=>{
 
 module.exports = async (req, res) => {
     // const _id = req.query._id;
-    const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id.match(/^[0-9a-fA-F]{24}$/) : false;
+
     try {
-        console.error('we try')
+        const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id.match(/^[0-9a-fA-F]{24}$/) : false;
         if (validateId){
-            console.error('is valid')
           const post = await postSchema.findOne({_id:req.query._id,status:'published'},'-comments').populate([
               {path: 'author',select:['username','profileImage','role']},
               {path: 'categories',select:{'name':1,'type':1}},
               {path: 'tags',select:{'name':1,'type':1}},
               {path: 'actors',select:{'name':1,'type':1}},
           ]).exec()
-
-
             if (post){
-                console.error('we found but')
                 res.json( {
                     post,
                     relatedPosts:{
