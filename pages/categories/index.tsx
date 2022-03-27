@@ -14,16 +14,18 @@ import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const CategoriesPageStyledMain = styled.main`
   grid-area: main;
+  ${({metasPageStyle}: { metasPageStyle: string }) => metasPageStyle || ''}
 `
 const categoriesPage = () => {
     const {query} = useRouter()
     const isWithSidebar = useSelector((store: settingsPropTypes) => store.settings?.identity?.metaPageSidebar);
+    const metasPageStyle = useSelector((store: StoreTypes) => store.settings?.design.metasPageStyle,);
     const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
     const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
         useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
-        <CategoriesPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '}>
+        <CategoriesPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '} metasPageStyle={metasPageStyle}>
             <WidgetsRenderer position={'categoriesPageTop'}/>
             <PaginationComponent
                 isActive={true}

@@ -29,7 +29,7 @@ const getRelatedPosts = async (relatedByType,relatedIds)=>{
       const relatedPosts = await postSchema.find(
             {$and:[{[relatedByType]:{$in:relatedIds}},{status:'published'}]},
             defaultFieldForPosts
-        ).populate(populateMeta).limit(6).sort('-updatedAt').exec()
+        ).populate(populateMeta).limit(8).sort('-updatedAt').exec()
         return {[`${relatedByType}RelatedPosts`] : relatedPosts}
     }catch (e){
         return {[`${relatedByType}RelatedPosts`] : []}
@@ -62,17 +62,16 @@ module.exports = async (req, res) => {
                 });
             }
             else {
-                console.error('we didnt found')
+               // console.error('we didnt found')
                 res.status(404).json({message:'not found'})
             }
-
-
 
         }else {
             res.status(404).json({message:'not found'})
         }
+
     }catch (err){
-        console.error(err,'get post error')
+      //  console.error(err,'get post error')
         res.status(500).json({message:'Something went wrong please try again later'})
     }
 };

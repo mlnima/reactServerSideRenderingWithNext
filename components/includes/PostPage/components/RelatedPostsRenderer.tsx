@@ -21,21 +21,21 @@ const RelatedPostsRenderer: FC<RelatedPostsRendererPropTypes> = (props) => {
     // }, [props]);
     return (
         <div>
-            {actorsRelatedPosts.length ?
+            {actorsRelatedPosts?.length ?
                 <>
                     <h2>Related By Actors:</h2>
                     <PostsRenderer posts={actorsRelatedPosts}/>
                 </>
                 :null
             }
-            {categoriesRelatedPosts.length ?
+            {categoriesRelatedPosts?.length ?
                 <>
                     <h2>Related By Categories:</h2>
                     <PostsRenderer posts={categoriesRelatedPosts}/>
                 </>
                 :null
             }
-            {tagsRelatedPosts.length ?
+            {tagsRelatedPosts?.length ?
                 <>
                     <h2>Related By Tags:</h2>
                     <PostsRenderer posts={tagsRelatedPosts}/>

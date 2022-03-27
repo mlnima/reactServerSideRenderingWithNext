@@ -107,10 +107,13 @@ export const getPost = (_id: string | string[], locale) => async dispatch => {
             postData?.description || '' :
             postData?.translations?.[locale]?.description || postData?.description || ''
 
-        dispatch({
-            type: GET_POST,
-            payload: {post:postData,relatedPosts:res.data.relatedPosts}
-        })
+        if (postData){
+            dispatch({
+                type: GET_POST,
+                payload: {post:postData,relatedPosts:res.data.relatedPosts}
+            })
+        }
+
 
 
         const keywords =  [
@@ -348,7 +351,7 @@ export const getPageData = (pageName) => async dispatch => {
         pageName
     }
     await Axios.post('/api/v1/pages/getPageData', body).then(res => {
-        console.log(res.data?.pageData)
+        // console.log(res.data?.pageData)
         dispatch({
             type: GET_PAGE_DATA,
             payload: res.data?.pageData || {}

@@ -19,6 +19,7 @@ export interface DesignSettings {
     categoryPageStyle: string,
     tagPageStyle: string,
     postsPageStyle: string,
+    metasPageStyle: string,
     postPageStyle: string,
     customColors: string,
     homePageSidebar: boolean,

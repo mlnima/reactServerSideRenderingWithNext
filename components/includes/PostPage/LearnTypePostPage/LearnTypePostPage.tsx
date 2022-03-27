@@ -43,6 +43,7 @@ const LearnTypePostPageStyledMain = styled(PostPageStyledMain)`
   a {
     color: var(--main-active-color);
   }
+  ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
 `
 
 

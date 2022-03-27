@@ -20,12 +20,21 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/pages/admin/design/metasPage/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/profilePageComponents/profilePost/common/ThumbnailUploader.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/profile/followers/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/profile/followers/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_postPageQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/clientVariables/_postPageQueryGenerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/AdminPanelMainMenu/AdminPanelMainMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/LearnTypePostPage/LearnTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/VideoTypePostPage/VideoTypePostPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/CommentsRenderer/Comment/Comment.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/RelatedPostsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/RelatedPostsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/clientActions/postsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/postsAction.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientReducers/postsReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientReducers/postsReducer.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -39,8 +48,8 @@
         <option value="tsconfig.json" />
         <option value="CSS File" />
         <option value="TypeScript File" />
-        <option value="TypeScript JSX File" />
         <option value="JavaScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -106,7 +115,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\profile\post" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.start">
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -159,9 +168,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="npm.test" />
         <item itemvalue="npm.analyze" />
       </list>
@@ -1090,7 +1099,9 @@
       <workItem from="1648058807233" duration="8368000" />
       <workItem from="1648120889330" duration="31617000" />
       <workItem from="1648207060844" duration="20408000" />
-      <workItem from="1648235675241" duration="16993000" />
+      <workItem from="1648235675241" duration="17632000" />
+      <workItem from="1648322054683" duration="4443000" />
+      <workItem from="1648417391559" duration="2731000" />
     </task>
     <servers />
   </component>
@@ -1322,7 +1333,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts</url>
-          <line>227</line>
+          <line>228</line>
           <option name="timeStamp" value="112" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1399,12 +1410,12 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts</url>
-          <line>400</line>
+          <line>401</line>
           <option name="timeStamp" value="135" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
           <url>file://$PROJECT_DIR$/store/adminActions/adminPanelPostsActions.ts</url>
-          <line>103</line>
+          <line>106</line>
           <option name="timeStamp" value="136" />
         </line-breakpoint>
       </breakpoints>

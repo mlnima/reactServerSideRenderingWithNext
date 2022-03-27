@@ -59,7 +59,6 @@ const Comment: FC<CommentPropTypes> = ({comment}) => {
         dispatch(deleteComments([id]))
     }
 
-    console.log(comment)
     if (comment?.author && comment?.createdAt){
         return (
             <CommentStyledDiv className='comment'>
@@ -92,7 +91,7 @@ const Comment: FC<CommentPropTypes> = ({comment}) => {
                 </div>
             </CommentStyledDiv>
         );
-    }
+    }else return null
 
 };
 

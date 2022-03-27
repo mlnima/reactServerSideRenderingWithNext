@@ -22,6 +22,7 @@ const PostDescription = dynamic(() => import('../components/PostDescription/Post
 
 const VideoTypePostPageStyledMain = styled(PostPageStyledMain)`
   margin: auto;
+  ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
 `
 const VideoTypePostPage = () => {
 

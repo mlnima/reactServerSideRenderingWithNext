@@ -145,6 +145,7 @@ const AdminPanelMainMenu = () => {
                 {name: 'widgets', url: '/admin/design/widgets'},
                 {name: 'postPage', url: '/admin/design/postPage'},
                 {name: 'postsPage', url: '/admin/design/postsPage'},
+                {name: 'metasPage', url: '/admin/design/metasPage'},
                 {name: 'postElement', url: '/admin/design/postElement'},
                 {name: 'footer', url: '/admin/design/footer'},
                 {name: 'customStyles', url: '/admin/design/customStyles'},

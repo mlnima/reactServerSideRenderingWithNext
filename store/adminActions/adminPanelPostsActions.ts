@@ -19,11 +19,13 @@ export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) =
     if (_id) {
         await Axios.get( `/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
+                if (res.data?.post){
+                    dispatch({
+                        type: GET_POST,
+                        payload: {post:res.data?.post || {},relatedPosts:[]}
+                    })
+                }
 
-                dispatch({
-                    type: GET_POST,
-                    payload: {post:res.data?.post,relatedPosts:[]}
-                })
 
                 dispatch({
                     type: ADMIN_GET_POST,
@@ -41,6 +43,7 @@ export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) =
                     payload: false
                 })
             })
+
     } else {
         dispatch({
             type: ADMIN_GET_POST,

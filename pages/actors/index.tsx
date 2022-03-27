@@ -21,10 +21,12 @@ const ActorsPageStyledDiv = styled.div`
     justify-content: center;
     max-width: 100%;
   }
+  ${({metasPageStyle}: { metasPageStyle: string }) => metasPageStyle || ''}
 `
 const actorsPage = () => {
 
     const isWithSidebar = useSelector((store: StoreTypes) => store.settings?.identity?.metaPageSidebar);
+    const metasPageStyle = useSelector((store: StoreTypes) => store.settings?.design.metasPageStyle,);
     const totalCount = useSelector((store: StoreTypes) => store?.posts?.totalCount)
     const {query} = useRouter();
 
@@ -32,7 +34,7 @@ const actorsPage = () => {
         useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
-        <ActorsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '}>
+        <ActorsPageStyledDiv className={isWithSidebar ? 'content main ' : 'content main '} metasPageStyle={metasPageStyle}>
             <WidgetsRenderer
                 position={'actorsPageTop'}
             />

@@ -13,17 +13,19 @@ import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const TagsPageStyledMain = styled.main`
   grid-area: main;
+  ${({metasPageStyle}: { metasPageStyle: string }) => metasPageStyle || ''}
 `
 const tagsPage = () => {
     const isWithSidebar = useSelector((store: StoreTypes) => store.settings?.identity?.metaPageSidebar);
     const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
+    const metasPageStyle = useSelector((store: StoreTypes) => store.settings?.design.metasPageStyle,);
     const {query} = useRouter()
 
     const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
         useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
 
     return (
-        <TagsPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '}>
+        <TagsPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '} metasPageStyle={metasPageStyle}>
             <WidgetsRenderer position={'tagsPageTop'}/>
             <PaginationComponent
                 isActive={true}
