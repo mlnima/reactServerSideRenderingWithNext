@@ -161,6 +161,7 @@ export const getDefaultPageData =
                     themeColor: staticData.identity?.themeColor || '#000',
                     //@ts-ignore
                     favIcon: staticData?.identity?.favIcon || '/static/images/favIcon/favicon.png',
+                    //@ts-ignore
                     customScriptsAsString: staticData?.identity?.customScriptsAsString || '',
                     //@ts-ignore
                     rtaContent: staticData?.identity?.rtaContent || false,
