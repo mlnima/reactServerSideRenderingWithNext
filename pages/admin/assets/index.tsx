@@ -1,6 +1,7 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import dynamic from 'next/dynamic'
 import {useRouter} from "next/router";
+//@ts-ignore
 import _AdminGetPostsQueryGenerator from "@_variables/adminVariables/_AdminGetPostsQueryGenerator";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
