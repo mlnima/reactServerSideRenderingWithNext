@@ -76,8 +76,8 @@ const VideoCard : FC<VideoTypeCardPropTypes> =
                             categories={post?.categories}
                             onActivateLoadingHandler={onActivateLoadingHandler}
             />
-            {post?.updatedAt ?
-                <CardLastUpdate updatedAt={post?.updatedAt}/>
+            {post?.updatedAt || post?.createdAt  ?
+                <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
                 : null
             }
 

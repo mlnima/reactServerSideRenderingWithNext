@@ -1,6 +1,6 @@
 import staticDataJson from '../../static/jsons/staticData.json'
 
-const _getPostsQueryGenerator = (queryData, metaIdData, cache) => {
+const _clientGetPostsQueryGenerator = (queryData, metaIdData, cache) => {
     const sort = queryData?.sort ? {sort: queryData?.sort} : {sort: 'updatedAt'}
     const postType = queryData?.postType ? {postType: queryData?.postType} : {}
     const metaId = metaIdData ? {metaId: metaIdData} : {}
@@ -48,4 +48,4 @@ const _getPostsQueryGenerator = (queryData, metaIdData, cache) => {
 
 }
 
-export default _getPostsQueryGenerator
+export default _clientGetPostsQueryGenerator

@@ -20,8 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/_variables/clientVariables/_clientGetPostsQueryGenerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/inspectionProfiles/Project_Default.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/_variables.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/_variables.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/adminVariables/_adminGetPostsQueryGenerator.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardLastUpdate/CardLastUpdate.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/ArticleTypeCard/ArticleTypeCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/ArticleTypeCard/ArticleTypeCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileArticleCard/MobileArticleCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobile/MobileArticleCard/MobileArticleCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileLearnCard/MobileLearnCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobile/MobileLearnCard/MobileLearnCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/admin/assets/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/assets/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_queryGeneratorForGettingPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/_variables/_adminQueryGeneratorForGettingPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPostsControllers/adminGetPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/_variables/_clientQueryGeneratorForGettingPosts.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/store/clientActions/postsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/postsAction.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -72,7 +87,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.17.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.17.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/components/global/commonComponents" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/_variables/adminVariables" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -88,11 +103,11 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\adminVariables" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\global\commonComponents" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\adminControllers\_variables" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\fa" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\tr" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\da" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
@@ -1091,7 +1106,8 @@
       <workItem from="1648417391559" duration="6221000" />
       <workItem from="1648460805736" duration="7213000" />
       <workItem from="1648486890280" duration="16699000" />
-      <workItem from="1648537023671" duration="24180000" />
+      <workItem from="1648537023671" duration="31660000" />
+      <workItem from="1648582609082" duration="396000" />
     </task>
     <servers />
   </component>
@@ -1344,7 +1360,7 @@
           <option name="timeStamp" value="117" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/_variables/clientVariables/_getPostsQueryGenerator.js</url>
+          <url>file://$PROJECT_DIR$/_variables/clientVariables/_clientGetPostsQueryGenerator.js</url>
           <line>41</line>
           <option name="timeStamp" value="118" />
         </line-breakpoint>

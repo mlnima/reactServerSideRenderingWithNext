@@ -1,6 +1,10 @@
-import _getPostsQueryGenerator from "../../_variables/clientVariables/_getPostsQueryGenerator";
+import _clientGetPostsQueryGenerator from "@_variables/clientVariables/_clientGetPostsQueryGenerator";
 import _postPageQueryGenerator from "@_variables/clientVariables/_postPageQueryGenerator";
 import Axios from "@_variables/util/Axios";
+import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import {convertMetasTypeToSingular, getTextDataWithTranslation, reduceArrayOfDataToIds} from "@_variables/_variables";
+import staticDataJson from "../../static/jsons/staticData.json";
 import {
     DELETE_COMMENT,
     GET_COMMENTS,
@@ -8,7 +12,7 @@ import {
     GET_PAGE_DATA,
     GET_POST,
     GET_POSTS,
-    INITIAL_POSTS,
+    // INITIAL_POSTS,
     LOADING,
     NEW_COMMENT,
     GET_EDITING_POST,
@@ -16,10 +20,7 @@ import {
     SET_POSTS_DATA,
     EDIT_POST_FIELD, LIKE_POST, DISLIKE_POST, VIEW_POST, SET_HEAD_DATA, SET_NOT_FOUND_PAGE
 } from "@store/types";
-import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
-import {convertMetasTypeToSingular, getTextDataWithTranslation, reduceArrayOfDataToIds} from "@_variables/_variables";
-import staticDataJson from "../../static/jsons/staticData.json";
+
 // const mongoIdValidator = require('../../_variables/util/mongoIdValidator')
 // import mongoIdValidator from '../../_variables/util/mongoIdValidator'
 
@@ -32,14 +33,14 @@ export const setPostsData = postsData => async dispatch => {
 }
 
 export const getPosts = (context, metaId, cache, metaType, options) => async dispatch => {
-    const gettingPostsQueries = _getPostsQueryGenerator(context.query, metaId, cache)
+    const gettingPostsQueries = _clientGetPostsQueryGenerator(context.query, metaId, cache)
     await Axios.get(`/api/v1/posts/clientGetPosts${gettingPostsQueries}`)
         .then(res => {
             // const dataForm = metaType === 'actors' ? 'actorData' :
             //     metaType === 'tags' ? 'tagData' :
             //         metaType === 'categories' ? 'categoryData' : null
-            const singularMetaForm = convertMetasTypeToSingular(metaType)
-            const dataForm = metaType && singularMetaForm ? `${singularMetaForm}Data` : ''
+            const singularMetaForm = convertMetasTypeToSingular(metaType);
+            const dataForm = metaType && singularMetaForm ? `${singularMetaForm}Data` : '';
             const meta = res?.data?.meta
             const metaData = dataForm && meta ? {[dataForm]: meta} : {}
 

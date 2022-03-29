@@ -128,7 +128,10 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
                                 }
                             </div>
                         </div>
-                        {post?.updatedAt ? <CardLastUpdate updatedAt={post?.updatedAt}/> : null}
+                        {post?.updatedAt || post?.createdAt  ?
+                            <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
+                            : null
+                        }
                     </a>
                 </Link>
             </MobileLearnCardStyledArticle>

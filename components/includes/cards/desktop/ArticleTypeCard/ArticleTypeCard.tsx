@@ -139,8 +139,8 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                                     : null
                                 }
                             </div>
-                            {post?.updatedAt ?
-                                <CardLastUpdate updatedAt={post?.updatedAt}/>
+                            {post?.updatedAt || post?.createdAt  ?
+                                <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
                                 : null
                             }
                         </div>

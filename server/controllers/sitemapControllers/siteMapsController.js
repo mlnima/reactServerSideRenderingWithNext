@@ -53,12 +53,11 @@ siteMapsController.siteMapMonths = async (req, res) => {
             let page = 0;
             const totalPages = Math.ceil(postsCountUpdatedInThisMonth / size);
 
-            console.log('is +500',totalPages,postsCountUpdatedInThisMonth)
             while ( page < totalPages ) {
                 page += 1;
                 subSiteMaps += `<sitemap>
                                   <loc>${process.env.NEXT_PUBLIC_PRODUCTION_URL }/sitemap/${ month }/${ page }.xml</loc>
-                                  <lastmod>${endDate}</lastmod>
+                                  <lastmod>${endDate.toISOString()}</lastmod>
                                 </sitemap>`
             }
 

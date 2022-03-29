@@ -28,6 +28,19 @@ export const convertMetasTypeToSingular = (metaType)=>{
          metaType === 'tags' ? 'tag' :
          metaType === 'categories' ? 'category':''
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
 //
 // export const defaultFieldForPosts = [
 //     'title',

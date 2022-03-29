@@ -70,8 +70,8 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
 
                         <h3 className={'mobile-video-card-title'}>{title}</h3>
 
-                        {post?.updatedAt ?
-                            <CardLastUpdate updatedAt={post?.updatedAt}/>
+                        {post?.updatedAt || post?.createdAt  ?
+                            <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
                             : null
                         }
 
