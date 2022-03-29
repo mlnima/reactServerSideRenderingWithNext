@@ -1,8 +1,7 @@
 import React, {FC, useEffect, useMemo, useState} from 'react';
 import dynamic from 'next/dynamic'
 import {useRouter} from "next/router";
-import _clientGetPostsQueryGenerator from "@_variables/clientVariables/_clientGetPostsQueryGenerator";
-import _AdminGetPostsQueryGenerator from "../../../_variables/adminVariables/_AdminGetPostsQueryGenerator";
+import _AdminGetPostsQueryGenerator from "@_variables/adminVariables/_AdminGetPostsQueryGenerator";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
