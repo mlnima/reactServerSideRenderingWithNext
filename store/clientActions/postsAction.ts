@@ -14,12 +14,14 @@ import {
     GET_EDITING_POST,
     SET_ALERT,
     SET_POSTS_DATA,
-    EDIT_POST_FIELD, LIKE_POST, DISLIKE_POST, VIEW_POST, SET_HEAD_DATA
+    EDIT_POST_FIELD, LIKE_POST, DISLIKE_POST, VIEW_POST, SET_HEAD_DATA, SET_NOT_FOUND_PAGE
 } from "@store/types";
 import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryGenerator";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {convertMetasTypeToSingular, getTextDataWithTranslation, reduceArrayOfDataToIds} from "@_variables/_variables";
 import staticDataJson from "../../static/jsons/staticData.json";
+const mongoIdValidator = require('../../_variables/util/mongoIdValidator')
+// import mongoIdValidator from '../../_variables/util/mongoIdValidator'
 
 
 export const setPostsData = postsData => async dispatch => {
@@ -67,17 +69,17 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
                     type: SET_HEAD_DATA,
                     payload: {
                         title: title || null,
-                        description: description || null,
+                        description: description?.substring(1, 155) || null,
                         keywords: [res?.data?.meta?.name] || null,
                         ogTitle: title || null,
                         ogType: 'website',
-                        ogDescription: description || null,
+                        ogDescription: description?.substring(1, 155) || null,
                         ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`,
                         ogImage: meta?.mainThumbnail || null,
                         twitterCard: true,
                         twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`,
                         twitterTitle: meta?.name || null,
-                        twitterDescription: meta?.description || null,
+                        twitterDescription: meta?.description?.substring(1, 155) || null,
                         twitterImage: meta?.imageUrl || null,
                     }
                 })
@@ -95,57 +97,56 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
 
 
 export const getPost = (_id: string | string[], locale) => async dispatch => {
-    const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL
-    await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
+    const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
+    if (mongoIdValidator(_id)){
+        await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
+            // console.log(res.data)
+            const postData = res.data.post;
+            const postTitle = isDefaultLocale ?
+                postData?.title || '' :
+                postData?.translations?.[locale]?.title || postData?.title || '';
+            const postDescription = isDefaultLocale ?
+                postData?.description || '' :
+                postData?.translations?.[locale]?.description || postData?.description || ''
 
-        // console.log(res.data)
-        const postData = res.data.post;
-        const postTitle = isDefaultLocale ?
-            postData?.title || '' :
-            postData?.translations?.[locale]?.title || postData?.title || '';
-        const postDescription = isDefaultLocale ?
-            postData?.description || '' :
-            postData?.translations?.[locale]?.description || postData?.description || ''
-
-        if (postData){
-            dispatch({
-                type: GET_POST,
-                payload: {post:postData,relatedPosts:res.data.relatedPosts}
-            })
-        }
-
-
-
-        const keywords =  [
-            ...(postData?.tags || []),
-            ...(postData?.categories || []),
-            ...(postData?.actors || [])
-        ].map(meta=>meta?.name)
-
-        dispatch({
-            type: SET_HEAD_DATA,
-            payload: {
-                title: postTitle,
-                description: postDescription,
-                keywords,
-
-                ogTitle: postTitle,
-                // ogType: postData?.postType === 'video' ? 'video.other' : postData?.postType || '',
-                ogType: 'website',
-                ogDescription: postDescription,
-                ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType}/${postData?._id}`,
-                ogImage: postData?.mainThumbnail || null,
-
-                twitterCard: true,
-                twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType}/${postData?._id}`,
-                twitterTitle: postTitle,
-                twitterDescription: postDescription,
-                twitterImage: postData?.mainThumbnail || null,
+            if (postData){
+                dispatch({
+                    type: GET_POST,
+                    payload: {post:postData,relatedPosts:res.data.relatedPosts}
+                })
             }
-        })
-    }).catch(err => {
 
-    })
+            const keywords =  [
+                ...(postData?.tags || []),
+                ...(postData?.categories || []),
+                ...(postData?.actors || [])
+            ].map(meta=>meta?.name)
+
+            dispatch({
+                type: SET_HEAD_DATA,
+                payload: {
+                    title: postTitle,
+                    description: postDescription?.substring(1, 155) || null,
+                    keywords,
+
+                    ogTitle: postTitle,
+                    // ogType: postData?.postType === 'video' ? 'video.other' : postData?.postType || '',
+                    ogType: 'website',
+                    ogDescription: postDescription?.substring(1, 155),
+                    ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType}/${postData?._id}`,
+                    ogImage: postData?.mainThumbnail || null,
+
+                    twitterCard: true,
+                    twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType}/${postData?._id}`,
+                    twitterTitle: postTitle,
+                    twitterDescription: postDescription?.substring(1, 155),
+                    twitterImage: postData?.mainThumbnail || null,
+                }
+            })
+        }).catch(err => {
+
+        })
+    }
 }
 
 export const getEditingPost = (_id: string) => async dispatch => {
@@ -347,33 +348,39 @@ export const deleteComments = (commentsListToDelete) => async dispatch => {
 
 
 export const getPageData = (pageName) => async dispatch => {
-    const body = {
-        pageName
-    }
-    await Axios.post('/api/v1/pages/getPageData', body).then(res => {
-        // console.log(res.data?.pageData)
-        dispatch({
-            type: GET_PAGE_DATA,
-            payload: res.data?.pageData || {}
-        })
-        dispatch({
-            type: SET_HEAD_DATA,
-            payload: {
-                title: res.data?.pageData?.title || pageName ,
-                description: res.data?.pageData?.description || null,
-                keywords:res.data?.pageData?.keywords|| null,
-                ogTitle: res.data?.pageData?.title || pageName,
-                ogType: 'website',
-                ogDescription: res.data?.pageData?.description || null,
-                ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
-                ogImage: res.data?.pageData?.imageUrl || null,
-                twitterCard: true,
-                twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
-                twitterTitle: res.data?.pageData?.title || pageName ,
-                twitterDescription: res.data?.pageData?.description || null,
-                twitterImage: res.data?.pageData?.imageUrl || null,
-            }
-        })
+    await Axios.get(`/api/v1/pages/getPageData?pageName=${pageName}`).then(res => {
+
+        if (res.data?.pageData && res.data?.pageData?.status === 'published'){
+            dispatch({
+                type: GET_PAGE_DATA,
+                payload: res.data?.pageData || {}
+            })
+
+            dispatch({
+                type: SET_HEAD_DATA,
+                payload: {
+                    title: res.data?.pageData?.title || pageName ,
+                    description: res.data?.pageData?.description?.substring(1, 155) || null,
+                    keywords:res.data?.pageData?.keywords|| null,
+                    ogTitle: res.data?.pageData?.title || pageName,
+                    ogType: 'website',
+                    ogDescription: res.data?.pageData?.description?.substring(1, 155) || null,
+                    ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
+                    ogImage: res.data?.pageData?.imageUrl || null,
+                    twitterCard: true,
+                    twitterUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
+                    twitterTitle: res.data?.pageData?.title || pageName ,
+                    twitterDescription: res.data?.pageData?.description?.substring(1, 155) || null,
+                    twitterImage: res.data?.pageData?.imageUrl || null,
+                }
+            })
+        }else{
+            dispatch({
+                type: SET_NOT_FOUND_PAGE,
+                payload: true
+            })
+        }
+        // return{}
     })
 }
 

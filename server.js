@@ -1,14 +1,11 @@
-
 require('dotenv').config()
 require('./server/_variables/connectToDatabase')
 // require('./server/_variables/_setSettingToEnvironmentVariables').finally()
 require('./server/_variables/_writeSettingsAndStaticWidgetsToJsonFile').finally()
 require('./server/workers/mailServer')
 
-
 const cluster = require('cluster')
 const os = require('os')
-
 const express = require('express');
 const next = require('next');
 const bodyParser = require('body-parser');
@@ -63,17 +60,17 @@ const runServer = () => {
         res.json({message:'Cache Deleted'})
     });
     server.get('/robots.txt', (req, res) => clientRobotTxtController(req, res));
-    server.get('/manifest.json', cacheSuccesses,(req,res)=>{clientMainFestController(req,res)})
+    server.get('/manifest.json', cacheSuccesses,(req,res)=>{clientMainFestController(req,res).finally()})
     //xml siteMap routes
     server.get('/sitemap.xsl', (req, res) => {return res.status(200).sendFile('sitemap.xsl', staticServeOptions)});
-    server.get('/sitemap.xml', (req, res) => {siteMapController.siteMap(req , res)});
-    server.get('/sitemap', (req, res) => {siteMapController.siteMap(req , res)});
-    server.get('/sitemaps/actors.xml', (req, res) => {metaSitemapController.actors(req , res)});
-    server.get('/sitemaps/categories.xml', (req, res) => {metaSitemapController.categories(req , res)});
-    server.get('/sitemaps/tags.xml', (req, res) => {metaSitemapController.tags(req , res)});
-    server.get('/sitemaps/pages.xml', (req, res) => {pageSitemapController(req , res)});
-    server.get('/sitemaps/:month', (req, res) => {siteMapsController.siteMapMonths(req , res)});
-    server.get('/sitemap/:month/:pageNo', (req, res) => {subSiteMapsController.subSiteMapsController(req , res)});
+    server.get('/sitemap.xml', (req, res) => {siteMapController.siteMap(req , res).finally()});
+    server.get('/sitemap', (req, res) => {siteMapController.siteMap(req , res).finally()});
+    server.get('/sitemaps/actors.xml', (req, res) => {metaSitemapController.actors(req , res).finally()});
+    server.get('/sitemaps/categories.xml', (req, res) => {metaSitemapController.categories(req , res).finally()});
+    server.get('/sitemaps/tags.xml', (req, res) => {metaSitemapController.tags(req , res).finally()});
+    server.get('/sitemaps/pages.xml', (req, res) => {pageSitemapController(req , res).finally()});
+    server.get('/sitemaps/:month', (req, res) => {siteMapsController.siteMapMonths(req , res).finally()});
+    server.get('/sitemap/:month/:pageNo', (req, res) => {subSiteMapsController.subSiteMapsController(req , res).finally()});
 
     //api routes
     server.use('/api/admin',adminMainRouter);

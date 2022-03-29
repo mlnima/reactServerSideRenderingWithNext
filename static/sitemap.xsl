@@ -41,7 +41,15 @@
                     }
 
                     td {
-                        width: 100%;
+                        width: 200px;
+                        font-size: 11px;
+                    }
+                    td:first-of-type {
+                        width: 500px;
+                        font-size: 11px;
+                    }
+                    td:last-of-type {
+                        width: 200px !important;
                         font-size: 11px;
                     }
 

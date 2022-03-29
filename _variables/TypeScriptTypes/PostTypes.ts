@@ -23,6 +23,7 @@ export interface PostTypes {
     status: string,
     source: any,
     updatedAt: string,
+    createdAt: string,
     url?: string | undefined,
     currency: string,
     downloadLink: string,

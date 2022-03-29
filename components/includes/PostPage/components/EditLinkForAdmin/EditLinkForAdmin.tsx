@@ -1,4 +1,4 @@
-import  {FC} from "react";
+import {FC} from "react";
 import styled from "styled-components";
 import {adminBulkActionPost} from "@store/adminActions/adminPanelPostsActions";
 import {useRouter} from "next/router";
@@ -19,66 +19,86 @@ const EditLinkForAdminStyledDiv = styled.div`
   padding: 10px;
   top: 0;
   border-radius: 3px;
-  .btn-primary{
+
+  .btn-primary {
     color: var(--primary-button-link-text-color);
   }
-  .status{
+
+  .status {
     margin: 0 10px;
   }
-  .edit-as-admin-handler{
+
+  .dates {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: flex-start;
+    padding: 2px 5px;
+  }
+
+  .edit-as-admin-handler {
     padding: 5px;
     margin: 5px;
-    svg{
+
+    svg {
       width: 20px;
       height: 20px;
     }
   }
 `
 
-const EditLinkForAdmin :FC = () => {
+const EditLinkForAdmin: FC = () => {
 
     const {query, push, pathname} = useRouter()
-    const {_id,status} = useSelector(({posts}:StoreTypes)=>{
-        return{
-            _id:posts.post?._id,
-            status:posts.post?.status,
+    const {_id, status, createdAt, updatedAt} = useSelector(({posts}: StoreTypes) => {
+        return {
+            _id: posts.post?._id,
+            status: posts.post?.status,
+            createdAt: posts.post?.createdAt,
+            updatedAt: posts.post?.updatedAt,
         }
     })
 
-    const onStatusChangeHandler = (status)=>{
+    const onStatusChangeHandler = (status) => {
         dispatch(adminBulkActionPost([_id], status))
         dispatch(reloadPageDataByAddingQuery(query, push, pathname))
     }
 
     const dispatch = useDispatch()
-        return (
-            <Draggable handle=".edit-as-admin-handler">
-                <EditLinkForAdminStyledDiv className='edit-as-admin'>
-                    <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
-                        Edit As Admin
-                    </a>
-                    <a className='btn btn-primary' href={`/profile/post?id=${_id}`} target='_blank'>
-                        Edit As Author (Beta)
-                    </a>
-                    <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>
+    return (
+        <Draggable handle=".edit-as-admin-handler">
+            <EditLinkForAdminStyledDiv className='edit-as-admin'>
+                <a className='btn btn-primary' href={`/admin/post?id=${_id}`} target='_blank'>
+                    Edit As Admin
+                </a>
+                <a className='btn btn-primary' href={`/profile/post?id=${_id}`} target='_blank'>
+                    Edit As Author (Beta)
+                </a>
+                <span className={'btn btn-danger'} onClick={() => onStatusChangeHandler('trash')}>
                         Trash
                     </span>
-                    <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>
+                <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('draft')}>
                         Draft
                     </span>
-                    <span className={'btn btn-info'}  onClick={() => onStatusChangeHandler('pending')}>
+                <span className={'btn btn-info'} onClick={() => onStatusChangeHandler('pending')}>
                         Pending
                     </span>
-                    <span className={'btn btn-primary'}  onClick={() => onStatusChangeHandler('published')}>
+                <span className={'btn btn-primary'} onClick={() => onStatusChangeHandler('published')}>
                         Publish
                     </span>
-                    <h4 className='status'>Status : {status}</h4>
-                    <div className={'edit-as-admin-handler'}>
-                        <FontAwesomeIcon icon={faEllipsisV} />
-                    </div>
-                </EditLinkForAdminStyledDiv>
-            </Draggable>
 
-        )
+                <div className={'dates'}>
+                    <span> Created At : {createdAt}</span>
+                    <span> Updated At : {updatedAt}</span>
+                </div>
+
+                <h4 className='status'>Status : {status}</h4>
+                <div className={'edit-as-admin-handler'}>
+                    <FontAwesomeIcon icon={faEllipsisV}/>
+                </div>
+            </EditLinkForAdminStyledDiv>
+        </Draggable>
+
+    )
 };
 export default EditLinkForAdmin;

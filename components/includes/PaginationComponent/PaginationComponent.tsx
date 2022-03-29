@@ -20,6 +20,16 @@ const PaginationComponentStyledDiv = styled.div`
     border-radius: 5px;
     cursor: pointer;
   }
+  @media only screen and (max-width: 768px) {
+    .pagination-item{
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+    }
+  }
 `
 
 interface PaginationComponentPropTypes {

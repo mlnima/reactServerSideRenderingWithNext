@@ -1,4 +1,4 @@
-import {FC, useEffect, useMemo} from "react";
+import {FC,  useMemo} from "react";
 import Head from 'next/head'
 import {useRouter} from "next/router";
 import dynamic from "next/dynamic";
@@ -21,7 +21,7 @@ const SiteHeadSetter: FC = () => {
                 : null
             }
             {headData.keywords && headData.keywords?.length ?
-                <meta name="keywords" content={headData.keywords?.join(',')}/>
+                <meta name="keywords" content={headData.keywords?.join(' , ')}/>
                 : null
             }
             <link rel="shortcut icon" href={headData.favIcon}/>
@@ -44,7 +44,8 @@ const SiteHeadSetter: FC = () => {
                 : null
             }
             <meta name={'theme-color'} content={headData.themeColor}/>
-            <link rel={'canonical'} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/>
+            {headData.canonical ?  <link rel={'canonical'} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/> :null}
+
             <meta name={'apple-mobile-web-app-status-bar-style'} content={headData.themeColor}/>
             <meta name={'viewport'} content={'width=device-width, initial-scale=1'}/>
             <meta charSet={'utf-8'}/>

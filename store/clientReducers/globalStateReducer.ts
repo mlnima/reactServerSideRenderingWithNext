@@ -5,12 +5,14 @@ import {
     LOADING,
     LOGIN_REGISTER_FORM,
     SET_ALERT,
-    SET_HEAD_DATA
+    SET_HEAD_DATA,
+    SET_NOT_FOUND_PAGE
 } from "@store/types";
 
 const initialState = {
     loginRegisterFormPopup:false,
     loading:false,
+    notFoundPage:false,
     isSiteIdentitySet:false,
     isSiteDesignSet:false,
     console:false,
@@ -42,6 +44,11 @@ export const globalStateReducer = (state= initialState , action : {type:string,p
             return {
                 ...state,
                 loginRegisterFormPopup:action.payload
+            };
+        case  SET_NOT_FOUND_PAGE:
+            return {
+                ...state,
+                notFoundPage:action.payload
             };
         case  LOADING:
             return {

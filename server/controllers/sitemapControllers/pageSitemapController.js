@@ -15,17 +15,17 @@ const template = (pagesData) => {
 
     return `<?xml version="1.0" encoding="UTF-8"?>
     <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>
-    <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+    <urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+            xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 
+            http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" 
+            xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
     ${pagesXmlData}
     </urlset>`
 }
 
-
-
-
 const pageSitemapController = async (req,res)=>{
     try {
-        const pages = await pageSchema.find({status:'publish'}).exec() || []
+        const pages = await pageSchema.find({status:'published'}).exec() || []
         res.set('Content-Type', 'text/xml');
         res.send(template(pages))
     }catch (err){

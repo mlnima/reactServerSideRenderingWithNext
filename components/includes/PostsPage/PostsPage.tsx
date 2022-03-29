@@ -32,13 +32,6 @@ const PostsPage = () => {
 
     return (
         <Fragment>
-            <PaginationComponent
-                isActive={true}
-                currentPage={query?.page ? parseInt(query?.page as string) : 1}
-                totalCount={totalCount}
-                size={ postsCountPerPage }
-                maxPage={Math.ceil(totalCount /postsCountPerPage)}
-            />
             <PostsContainer className='posts-container'>
                 <PostsRenderer
                     posts={posts}

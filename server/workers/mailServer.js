@@ -6,7 +6,7 @@ const server = new SMTPServer({
         parser(stream, {}, (err, parsed) => {
             if (err) console.log("Error:" , err)
 
-            console.log(parsed)
+            // console.log(parsed)
 
             stream.on("end", callback)
         })

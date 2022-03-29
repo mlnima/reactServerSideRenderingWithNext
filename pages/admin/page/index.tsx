@@ -112,8 +112,9 @@ const page = (props: any) => {
                 <div className={'form-group'}>
                     <p>status:</p>
                     <select name={'status'} className={'custom-select'} onChange={e => onChangeHandler(e)}
-                            value={pageData.status}>
-                        <option value={'publish'}>Publish</option>
+                            value={pageData.status} placeholder={'select'}>
+                        <option >select</option>
+                        <option value={'published'}>Published</option>
                         <option value={'draft'}>Draft</option>
                         <option value={'trash'}>Trash</option>
                     </select>

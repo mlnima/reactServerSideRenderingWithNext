@@ -122,7 +122,7 @@ export const getDefaultPageData =
                 type: SET_HEAD_DATA,
                 payload: {
                     title: title || null,
-                    description: description || null,
+                    description: description?.substring(1, 155) || null,
                     keywords: [options.page ,...(getTextDataWithTranslation(context.locale, 'keywords', staticData?.identity) || [])],
                     themeColor: staticData.identity?.themeColor || '#000',
                     //@ts-ignore
@@ -137,7 +137,7 @@ export const getDefaultPageData =
                     ogSiteName: staticData?.identity?.siteName || null,
                     ogLocale: context.locale,
                     ogTitle: title || null,
-                    ogDescription: description || null,
+                    ogDescription: description?.substring(1, 155) || null,
                     ogType: 'website',
                     ogUrl: process.env.NEXT_PUBLIC_PRODUCTION_URL,
                     //@ts-ignore
@@ -148,7 +148,7 @@ export const getDefaultPageData =
                     twitterTitle: title || null,
                     //@ts-ignore
                     twitterSite: staticData?.identity?.siteName || null,
-                    twitterDescription: description || null,
+                    twitterDescription: description?.substring(1, 155) || null,
                     //@ts-ignore
                     twitterImage: staticData?.identity?.favIcon || '/static/images/favIcon/favicon.png',
                 }
@@ -198,3 +198,5 @@ export const getDefaultPageData =
         }
 
     }
+
+

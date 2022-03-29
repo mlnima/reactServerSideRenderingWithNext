@@ -9,6 +9,7 @@ import {
     _renderByDevice,
     _renderByLanguageCondition,
 } from "@_variables/clientVariables/_widgetsRendererVariables";
+
 const DynamicNoSSR = dynamic(() => import('./DynamicNoSSR'))
 const Widget = dynamic(() => import('../Widget/Widget'))
 
@@ -21,7 +22,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const {locale} = useRouter()
 
-    const {widgets,userRole,isMobile} = useSelector(({widgets,user,settings}: StoreTypes) => {
+    const {widgets, userRole, isMobile} = useSelector(({widgets, user, settings}: StoreTypes) => {
         return {
             widgets: widgets?.widgetInGroups?.[position],
             userRole: user.userData?.role,
@@ -38,17 +39,17 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                 !_isEditMode(widget.data.editMode, userRole)
             ) {
                 const widgetProps = {
-                    key:widget._id,
-                    widgetId:widget._id,
-                    isSidebar:position ? position.includes('Sidebar') : false,
-                    viewType:widget.data?.viewType,
+                    key: widget._id,
+                    widgetId: widget._id,
+                    isSidebar: position ? position.includes('Sidebar') : false,
+                    viewType: widget.data?.viewType,
                     ...widget
                 }
 
-              return widget.data.noSSR ?
+                return widget.data.noSSR ?
                     <DynamicNoSSR>
                         <Widget{...widgetProps}/>
-                    </DynamicNoSSR>:
+                    </DynamicNoSSR> :
                     <Widget{...widgetProps}/>
 
             } else return null

@@ -38,16 +38,7 @@ const actorsPage = () => {
             <WidgetsRenderer
                 position={'actorsPageTop'}
             />
-            <PaginationComponent
-                isActive={true}
-                currentPage={query?.page ? parseInt(query?.page as string) : 1}
-                totalCount={totalCount}
-                size={postsCountPerPage}
-                maxPage={Math.ceil(totalCount / postsCountPerPage)}
-            />
-
             <ActorsRenderer/>
-
             <PaginationComponent
                 isActive={true}
                 currentPage={query?.page ? parseInt(query?.page as string) : 1}

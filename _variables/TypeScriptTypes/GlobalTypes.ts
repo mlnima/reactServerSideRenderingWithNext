@@ -255,12 +255,14 @@ export interface SettingsStateTypes {
 export interface GlobalStateTypes {
     loginRegisterFormPopup: boolean | string,
     loading: boolean,
+    notFoundPage: boolean,
     isSiteIdentitySet: boolean,
     isSiteDesignSet: boolean,
     console: boolean,
     headData:{
         rtaContent?:boolean,
         twitterCard?:boolean,
+        canonical?:boolean,
         keywords?: string[],
         title?: string,
         description?: string,
@@ -274,6 +276,7 @@ export interface GlobalStateTypes {
         ogImage?:string,
         ogSiteName?:string,
         ogLocale?:string,
+
         twitterSite?:string,
         twitterUrl?:string,
         twitterTitle?:string,

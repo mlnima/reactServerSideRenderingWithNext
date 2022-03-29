@@ -27,14 +27,6 @@ const categoriesPage = () => {
     return (
         <CategoriesPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '} metasPageStyle={metasPageStyle}>
             <WidgetsRenderer position={'categoriesPageTop'}/>
-            <PaginationComponent
-                isActive={true}
-                currentPage={query?.page ? parseInt(query?.page as string) : 1}
-                totalCount={totalCount}
-                size={postsCountPerPage}
-                maxPage={Math.ceil(totalCount / postsCountPerPage)}
-            />
-
             <CategoriesRenderer postElementSize={undefined}/>
 
             <PaginationComponent

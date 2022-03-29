@@ -1,5 +1,6 @@
 const postSchema = require('../../../models/postSchema');
-const mongoose = require("mongoose");
+// const mongoose = require("mongoose");
+const mongoIdValidator = require('../../../../_variables/util/mongoIdValidator')
 
 const defaultFieldForPosts= [
     'title',
@@ -42,7 +43,9 @@ module.exports = async (req, res) => {
     // const _id = req.query._id;
 
     try {
-        const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id.match(/^[0-9a-fA-F]{24}$/) : false;
+       // const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id.match(/^[0-9a-fA-F]{24}$/) : false;
+       // const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && mongoIdValidator(req.query._id) : false;
+        const validateId = mongoIdValidator(req.query._id);
         if (validateId){
           const post = await postSchema.findOne({_id:req.query._id,status:'published'},'-comments').populate([
               {path: 'author',select:['username','profileImage','role']},

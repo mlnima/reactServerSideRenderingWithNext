@@ -6,6 +6,7 @@ import _setAppLayoutDataFromProp from '../../_variables/clientVariables/_setAppL
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import SiteSettingSetter from '../includes/SiteSettingsSetter/SiteSettingsSetter'
+
 const SideBarWidgetArea = dynamic(() => import('../widgetsArea/SidebarWidgetArea/SidebarWidgetArea'));
 const HeaderWidgetArea = dynamic(() => import('../widgetsArea/HeaderWidgetArea/HeaderWidgetArea'));
 const TopBarWidgetArea = dynamic(() => import('../widgetsArea/TopBarWidgetArea/TopBarWidgetArea'));
@@ -17,6 +18,7 @@ const AdminTools = dynamic(() => import('../includes/AdminTools/AdminTools'), {s
 const LoginRegisterPopup = dynamic(() => import('../includes/LoginRegisterPopup/LoginRegisterPopup'), {ssr: false});
 const CookiePopup = dynamic(() => import('../includes/ClientPopActionRequest/CookiePopup'), {ssr: false});
 const AdminDataSetter = dynamic(() => import('../global/AdminDataSetter'), {ssr: false});
+const BackToTopButton = dynamic(() => import('@components/includes/BackToTopButton/BackToTopButton'), {ssr: false});
 
 interface AppLayoutPropTypes {
     pageInfo?: {},
@@ -36,7 +38,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
         alert,
         sidebarsData,
         mainLayoutClassNameForGrid
-    } = useSelector(({user,settings,globalState,posts}: StoreTypes) => {
+    } = useSelector(({user, settings, globalState, posts}: StoreTypes) => {
         const sidebarsData = _setAppLayoutDataFromProp(posts.pageData, pathname, settings?.identity)
 
         return {
@@ -47,12 +49,11 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
             alert: globalState?.alert,
             sidebarsData,
-            mainLayoutClassNameForGrid:  pathname.match( /\/404|\/500|\/_error|\/profile/g) ?
-                                         'without-sidebar-layout' :
-                                         `${sidebarsData ? sidebarsData?.sidebarType : 'without'}-sidebar-layout`
+            mainLayoutClassNameForGrid: pathname.match(/\/404|\/500|\/_error|\/profile/g) ?
+                'without-sidebar-layout' :
+                `${sidebarsData ? sidebarsData?.sidebarType : 'without'}-sidebar-layout`
         }
     });
-
 
 
     return (
@@ -62,7 +63,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             {identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
             {identity?.header === 'enable' ? <HeaderWidgetArea/> : null}
             {identity?.navigation === 'enable' ? <NavigationWidgetArea/> : null}
-            {sidebarsData?.leftSidebar?.enable ?
+            {sidebarsData?.leftSidebar?.enable && mainLayoutClassNameForGrid !==  'without-sidebar-layout'  ?
                 <SideBarWidgetArea
                     gridArea='leftSidebar'
                     className='left-sidebar'
@@ -73,7 +74,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
             {children}
 
-            {sidebarsData?.rightSidebar?.enable ?
+            {sidebarsData?.rightSidebar?.enable  && mainLayoutClassNameForGrid !==  'without-sidebar-layout'  ?
                 <SideBarWidgetArea
                     gridArea='rightSidebar'
                     className='right-sidebar'
@@ -81,12 +82,13 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
                 />
                 : null
             }
-
+            <BackToTopButton/>
             {identity?.footer === 'enable' ? <FooterWidgetArea/> : null}
             {loginRegisterFormPopup && !loggedIn ? <LoginRegisterPopup/> : null}
             {userRole === 'administrator' ? <AdminTools/> : null}
             {loading ? <Loading/> : null}
             {alert?.active && alert?.message ? <AlertBox/> : null}
+
 
             {typeof window !== 'undefined' ? localStorage.cookieAccepted !== 'true' ?
                 <CookiePopup/>

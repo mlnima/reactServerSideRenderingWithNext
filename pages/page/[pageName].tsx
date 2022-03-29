@@ -7,6 +7,7 @@ import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
+
 const page = (props: ClientPagesTypes) => {
 
     const pageData = useSelector(({posts}: StoreTypes) => {
@@ -20,7 +21,7 @@ const page = (props: ClientPagesTypes) => {
             stylesData={props.pageInfo?.pageStyle || ''}
         />
     )
-};
+}
 
 //************SSR***************
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
@@ -38,6 +39,9 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     // @ts-ignore
     await store.dispatch(getPageData(context.query.pageName))
+    const notFoundPage = store.getState().globalState?.notFoundPage
+
+    if (notFoundPage) return {notFound: true}
 
     return {
         props: {
