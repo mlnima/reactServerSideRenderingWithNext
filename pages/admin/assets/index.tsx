@@ -2,7 +2,7 @@ import React, {FC, useEffect, useMemo, useState} from 'react';
 import dynamic from 'next/dynamic'
 import {useRouter} from "next/router";
 //@ts-ignore
-import _AdminGetPostsQueryGenerator from "@_variables/adminVariables/_AdminGetPostsQueryGenerator";
+import _adminGetPostsQueryGenerator from "@_variables/adminVariables/_adminGetPostsQueryGenerator";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
@@ -78,7 +78,7 @@ const assets: FC = () => {
     const getData = () =>{
         const assetType = query.assetsType
         if (assetType === 'posts') {
-            const gettingPostsQueries = _AdminGetPostsQueryGenerator(query)
+            const gettingPostsQueries = _adminGetPostsQueryGenerator(query)
             dispatch(adminGetPosts(gettingPostsQueries))
         } else if (assetType === 'users'){
             dispatch(adminGetUsers({}))
