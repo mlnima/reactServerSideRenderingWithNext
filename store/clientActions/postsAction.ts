@@ -20,7 +20,7 @@ import _metaPageQueryGenerator from "@_variables/clientVariables/_metaPageQueryG
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import {convertMetasTypeToSingular, getTextDataWithTranslation, reduceArrayOfDataToIds} from "@_variables/_variables";
 import staticDataJson from "../../static/jsons/staticData.json";
-const mongoIdValidator = require('../../_variables/util/mongoIdValidator')
+// const mongoIdValidator = require('../../_variables/util/mongoIdValidator')
 // import mongoIdValidator from '../../_variables/util/mongoIdValidator'
 
 
@@ -98,9 +98,9 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
 
 export const getPost = (_id: string | string[], locale) => async dispatch => {
     const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
-    if (mongoIdValidator(_id)){
+    // if (mongoIdValidator(_id)){
         await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
-            // console.log(res.data)
+
             const postData = res.data.post;
             const postTitle = isDefaultLocale ?
                 postData?.title || '' :
@@ -146,7 +146,7 @@ export const getPost = (_id: string | string[], locale) => async dispatch => {
         }).catch(err => {
 
         })
-    }
+    // }
 }
 
 export const getEditingPost = (_id: string) => async dispatch => {

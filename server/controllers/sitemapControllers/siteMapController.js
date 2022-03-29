@@ -20,7 +20,7 @@ const monthsSitemapGenerator = async (allMonthsSinceStart) => {
        // const postCountInThisMonth = await postSchema.countDocuments({$and: [{'createdAt': {$gte: startDate}}, {'updatedAt': {$lte: endDate}}, {status: 'published'}]});
         const postCountInThisMonth = await postSchema.countDocuments(postQuery).exec();
 
-        console.log(month,' : ',startDate,endDate,' count : ',postCountInThisMonth)
+        // console.log(month,' : ',startDate,endDate,' count : ',postCountInThisMonth)
         // console.log(convertedStartDate,convertedEndDate,postCountInThisMonth)
         const lastDocumentUpdatedDate = await postSchema.findOne(postQuery)
             .select(['createdAt', 'updatedAt'])

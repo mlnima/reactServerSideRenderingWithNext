@@ -20,40 +20,11 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/_variables/util/mongoIdValidator.js" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/BackToTopButton/BackToTopButton.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/GlobalTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" beforeDir="false" afterPath="$PROJECT_DIR$/_variables/TypeScriptTypes/PostTypes.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/global/SiteHeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/SiteHeadSetter.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PaginationComponent/PaginationComponent.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsPage/PostsPage.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/layouts/AppLayout.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/actors/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/actors/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/admin/page/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/admin/page/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/categories/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/categories/index.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/page/[pageName].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/page/[pageName].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/tags/index.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/tags/index.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminGetPageData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/adminControllers/adminPagesControllers/adminGetPageData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesControllers/clientGetPageData.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesRouter.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPagesRouter.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetComments.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientPostsControllers/clientGetPost.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/clientControllers/clientRobotTxtController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/clientControllers/clientRobotTxtController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/metaSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/metaSitemapController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/pageSitemapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/pageSitemapController.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapsController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/subSiteMapsController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/subSiteMapsController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/workers/mailServer.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/workers/mailServer.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/static/sitemap.xsl" beforeDir="false" afterPath="$PROJECT_DIR$/static/sitemap.xsl" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/globalStateActions.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/store/clientActions/postsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/postsAction.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientReducers/globalStateReducer.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientReducers/globalStateReducer.ts" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/types.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/types.ts" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -134,7 +105,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\profile\post" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.start">
+  <component name="RunManager" selected="npm.build">
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -1123,7 +1094,7 @@
       <workItem from="1648417391559" duration="6221000" />
       <workItem from="1648460805736" duration="7213000" />
       <workItem from="1648486890280" duration="16699000" />
-      <workItem from="1648537023671" duration="20366000" />
+      <workItem from="1648537023671" duration="22216000" />
     </task>
     <servers />
   </component>
