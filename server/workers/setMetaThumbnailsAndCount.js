@@ -37,7 +37,8 @@ const setMetaThumbnailsAndCount = async (workerData) => {
                     const updateData = {
                         count: metaCount,
                         name: meta?.name.toLowerCase(),
-                        status: meta?.status ? meta.status : 'published',
+                        // status: meta?.status ? meta.status : 'published',
+                        status: 'published',
                         ...randomImageData
                     }
                     await metaSchema.findByIdAndUpdate(

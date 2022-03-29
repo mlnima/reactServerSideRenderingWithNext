@@ -21,10 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" beforeDir="false" afterPath="$PROJECT_DIR$/pages/post/[postType]/[id].tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/controllers/sitemapControllers/siteMapController.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/store/clientActions/postsAction.ts" beforeDir="false" afterPath="$PROJECT_DIR$/store/clientActions/postsAction.ts" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/workers/setMetaThumbnailsAndCount.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -105,7 +102,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\profile\post" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.start">
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -1094,7 +1091,7 @@
       <workItem from="1648417391559" duration="6221000" />
       <workItem from="1648460805736" duration="7213000" />
       <workItem from="1648486890280" duration="16699000" />
-      <workItem from="1648537023671" duration="22216000" />
+      <workItem from="1648537023671" duration="24180000" />
     </task>
     <servers />
   </component>
