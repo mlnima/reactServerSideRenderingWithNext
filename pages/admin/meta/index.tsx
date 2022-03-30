@@ -4,7 +4,12 @@ import {useRouter} from "next/router";
 import {wrapper} from "../../../store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
-import {adminEditMeta, adminDeleteMeta, adminGetMeta, adminUpdateMeta} from "../../../store/adminActions/adminPanelPostsActions";
+import {
+    adminEditMeta,
+    adminDeleteMeta,
+    adminGetMeta,
+    adminUpdateMeta
+} from "../../../store/adminActions/adminPanelPostsActions";
 import {StoreTypes} from "../../../_variables/TypeScriptTypes/GlobalTypes";
 import {languagesOptions} from "@_variables/_variables";
 
@@ -14,6 +19,7 @@ let AdminMetaPageStyledDiv = styled.div`
   display: flex;
   align-items: center;
   flex-direction: column;
+
   .single-meta-page-section {
     width: 700px;
     margin: auto;
@@ -21,8 +27,8 @@ let AdminMetaPageStyledDiv = styled.div`
     align-items: center;
     justify-content: space-between;
     flex-wrap: wrap;
-    
-    p{
+
+    p {
       width: 200px;
     }
 
@@ -41,12 +47,14 @@ let AdminMetaPageStyledDiv = styled.div`
 
 
   }
+
   .preview-image {
     margin: 10px 0;
     max-width: 600px;
     display: flex;
     align-items: center;
     justify-content: space-between;
+
     img {
       width: 280px;
     }
@@ -57,6 +65,7 @@ let AdminMetaPageStyledDiv = styled.div`
     justify-content: space-between;
     align-items: center;
     width: 100%;
+
     .red-action-btn-link {
       background-color: red;
       border: none;
@@ -86,7 +95,7 @@ const meta = (props: any) => {
                 type: router.query.metaType,
                 description: '',
                 imageUrl: '',
-                imageUrlLock:false,
+                imageUrlLock: false,
                 translations: {},
                 count: 0,
                 lang: router.query.lang || 'default'
@@ -100,6 +109,10 @@ const meta = (props: any) => {
         }
     }, [props]);
 
+
+    useEffect(() => {
+        console.log(meta)
+    }, [meta]);
 
     const onActiveEditingLanguageChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setEditingData({
@@ -128,11 +141,10 @@ const meta = (props: any) => {
     }
 
 
-
-
     return (
 
         <AdminMetaPageStyledDiv className='single-meta-page'>
+            <label>Type: {meta.type}</label>
             <div className={'single-meta-page-section'}>
                 <p>Language :</p>
                 <select className={'custom-select'} onChange={e => onActiveEditingLanguageChangeHandler(e)}>
@@ -158,7 +170,36 @@ const meta = (props: any) => {
             <div className={'single-meta-page-section'}>
                 <p>Meta Image :</p>
                 {/*// @ts-ignore*/}
-                <input className={'form-control-input'} name={'imageUrl'} onChange={e => onInputChangeHandler(e)} value={meta?.imageUrl || ''}/>
+                <input className={'form-control-input'} name={'imageUrl'} onChange={e => onInputChangeHandler(e)}
+                       value={meta?.imageUrl || ''}/>
+
+            </div>
+            <div className={'single-meta-page-section'}>
+                <p>Count :</p>
+                {/*// @ts-ignore*/}
+                <input type={'number'} className={'form-control-input'} name={'count'}
+                       onChange={e => onInputChangeHandler(e)} value={meta?.count || 0}/>
+
+            </div>
+            <div className={'single-meta-page-section'}>
+                <p>Likes :</p>
+                {/*// @ts-ignore*/}
+                <input type={'number'} className={'form-control-input'} name={'likes'}
+                       onChange={e => onInputChangeHandler(e)} value={meta?.likes || 0}/>
+
+            </div>
+            <div className={'single-meta-page-section'}>
+                <p>view :</p>
+                {/*// @ts-ignore*/}
+                <input type={'number'} className={'form-control-input'} name={'views'}
+                       onChange={e => onInputChangeHandler(e)} value={meta?.views || 0}/>
+
+            </div>
+            <div className={'single-meta-page-section'}>
+                <p>Rank :</p>
+                {/*// @ts-ignore*/}
+                <input type={'number'} className={'form-control-input'} name={'rank'}
+                       onChange={e => onInputChangeHandler(e)} value={meta?.rank || 0}/>
 
             </div>
             <div className={'single-meta-page-section preview-image'}>
@@ -166,11 +207,13 @@ const meta = (props: any) => {
             </div>
             <div className={'single-meta-page-section'}>
                 <p>Lock Meta Image :</p>
-                <input type={'checkbox'} checked={meta.imageUrlLock} name={'imageUrlLock'} onChange={e=> dispatch(adminEditMeta({imageUrlLock: e.target.checked}))}/>
+                <input type={'checkbox'} checked={meta.imageUrlLock} name={'imageUrlLock'}
+                       onChange={e => dispatch(adminEditMeta({imageUrlLock: e.target.checked}))}/>
             </div>
             <div className={'single-meta-page-section'}>
                 <p>Status :</p>
-                <select className={'custom-select'} name={'status'} onChange={e => onInputChangeHandler(e)} value={meta?.status}>
+                <select className={'custom-select'} name={'status'} onChange={e => onInputChangeHandler(e)}
+                        value={meta?.status}>
                     <option>select</option>
                     <option value='draft'>Draft</option>
                     <option value='published'>Published</option>
@@ -197,8 +240,11 @@ const meta = (props: any) => {
             <div className='action-buttons'>
                 <button className='btn btn-primary' onClick={() => dispatch(adminUpdateMeta(meta))}>Update</button>
 
-                {!deleteButton? <button className='btn btn-danger' onClick={() => setDeleteButton(true)}>I Want To Delete This Meta</button> :null}
-                {deleteButton? <button className='btn btn-danger' onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}>Delete</button> :null}
+                {!deleteButton ?
+                    <button className='btn btn-danger' onClick={() => setDeleteButton(true)}>I Want To Delete This
+                        Meta</button> : null}
+                {deleteButton ? <button className='btn btn-danger'
+                                        onClick={() => dispatch(adminDeleteMeta(router?.query?.id))}>Delete</button> : null}
 
             </div>
 

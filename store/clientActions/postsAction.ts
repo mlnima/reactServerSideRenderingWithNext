@@ -36,15 +36,10 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
     const gettingPostsQueries = _clientGetPostsQueryGenerator(context.query, metaId, cache)
     await Axios.get(`/api/v1/posts/clientGetPosts${gettingPostsQueries}`)
         .then(res => {
-            // const dataForm = metaType === 'actors' ? 'actorData' :
-            //     metaType === 'tags' ? 'tagData' :
-            //         metaType === 'categories' ? 'categoryData' : null
             const singularMetaForm = convertMetasTypeToSingular(metaType);
             const dataForm = metaType && singularMetaForm ? `${singularMetaForm}Data` : '';
             const meta = res?.data?.meta
             const metaData = dataForm && meta ? {[dataForm]: meta} : {}
-
-            // console.log('we have the data ',metaData)
 
             dispatch({
                 type: GET_POSTS,
@@ -264,7 +259,7 @@ export const getMetas = (data, metaType, cache) => async dispatch => {
         metaType === 'tags' ? 'tagsMetas' :
             metaType === 'actors' ? 'actorsMetas' : 'categoriesMetas'
     const queries = _metaPageQueryGenerator(data, metaType, cache)
-    await Axios.get(`/api/v1/posts/getMultipleMeta${queries}`).then(res => {
+    await Axios.get(`/api/v1/posts/getMetas${queries}`).then(res => {
         dispatch({
             type: GET_METAS,
             payload: {

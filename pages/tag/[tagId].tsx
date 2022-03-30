@@ -4,12 +4,10 @@ import styled from "styled-components";
 import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
-import {useRouter} from "next/router";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import { StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
-import capitalizeFirstLetter from "../../_variables/util/capitalizeFirstLetter";
 import {getPosts} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
@@ -27,33 +25,30 @@ let StyledMain = styled.main`
     }
   }
 
-  ${(props: { stylesData: string }) => props.stylesData || ''}
+  ${(props: { stylesData: string }) => props.stylesData}
 `
 const tagPage: FC = () => {
 
-    const tagId = useRouter()?.query?.tagId
-    const asPath = useRouter()?.query?.asPath
-
-    const storeData = useSelector((store: StoreTypes) => {
+    const {role, tag, tagPageStyle} = useSelector(({user, posts, settings}: StoreTypes) => {
         return {
-            role: store?.user?.userData?.role,
-            tag: store.posts.tagData,
-            tagPageStyle: store.settings.design?.tagPageStyle,
+            role: user?.userData?.role,
+            tag: posts.tagData,
+            tagPageStyle: settings.design?.tagPageStyle || '',
         }
     })
 
     return (
-        <StyledMain className="main posts-page" stylesData={storeData.tagPageStyle || ''}>
-            {storeData?.role === 'administrator' ?
+        <StyledMain className="main posts-page" stylesData={tagPageStyle}>
+            {role === 'administrator' ?
                 <div className='edit-as-admin'>
-                    <Link href={'/admin/meta?id=' + tagId}>
+                    <Link href={'/admin/meta?id=' + tag._id}>
                         <a className={'btn btn-primary'}>
                             Edit
                         </a>
                     </Link>
                 </div>
                 : null}
-            {storeData.tag ? <PostsPageInfo titleToRender={capitalizeFirstLetter(storeData.tag.name)}/> : null}
+            {tag ? <PostsPageInfo metaData={tag}/> : null}
 
 
             <WidgetsRenderer

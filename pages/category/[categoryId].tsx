@@ -4,22 +4,21 @@ import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import Link from "next/link";
-import {useRouter} from "next/router";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import capitalizeFirstLetter from "../../_variables/util/capitalizeFirstLetter";
 import {getPosts} from "@store/clientActions/postsAction";
 import {FC} from "react";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 
 let StyledMain = styled.main`
   grid-area: main;
   width: 100%;
-  
-  .edit-as-admin{
+
+  .edit-as-admin {
     display: flex;
     justify-content: center;
     align-items: center;
@@ -38,23 +37,27 @@ let StyledMain = styled.main`
 `
 const categoryPage: FC = () => {
 
-    const userData = useSelector((store :StoreTypes) => store?.user?.userData)
-    const category = useSelector((store: StoreTypes) => store.posts.categoryData)
-    const categoryPageStyle = useSelector((store: StoreTypes) => store.settings.design?.categoryPageStyle ||'');
-    const router = useRouter()
+    const {role, category, categoryPageStyle} = useSelector(({user, posts, settings}: StoreTypes) => {
+        return {
+            role: user?.userData?.role,
+            category: posts.categoryData,
+            categoryPageStyle: settings.design?.categoryPageStyle || '',
+        }
+    })
 
     return (
         <StyledMain className="main posts-page" stylesData={categoryPageStyle}>
-            {userData?.role === 'administrator' ?
+            {role === 'administrator' ?
                 <div className='edit-as-admin'>
-                    <Link href={'/admin/meta?id=' + router.query.categoryId}>
-                        <a className={'btn btn-primary'} >
+                    <Link href={'/admin/meta?id=' + category?._id}>
+                        <a className={'btn btn-primary'}>
                             Edit
                         </a>
                     </Link>
                 </div>
-                :null}
-            {category ? <PostsPageInfo titleToRender={capitalizeFirstLetter(category?.name)}/> : null}
+                : null}
+
+            {category ? <PostsPageInfo metaData={category} /> : null}
 
             <WidgetsRenderer
                 position={'categoryPageTop'}
@@ -83,7 +86,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ]))
 
     // @ts-ignore
-    await store.dispatch(getPosts(context, context.query.categoryId, true,'categories',{page:'category'}))
+    await store.dispatch(getPosts(context, context.query.categoryId, true, 'categories', {page: 'category'}))
 
     return {
         props: {

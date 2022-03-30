@@ -19,6 +19,9 @@ const metaSchema =  new Schema({
     imageUrlLock:Boolean,
     translations:mongoose.Mixed,
     count:Number,
+    likes:Number,
+    views:Number,
+    rank:Number,
     additionalInfo:mongoose.Mixed
 
 },{ timestamps: true });

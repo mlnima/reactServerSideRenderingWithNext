@@ -462,7 +462,10 @@ const WidgetModel = props => {
                                               name={'sortBy'}
                                               ref={null}
                                               value={widgetData.sortBy}
-                                              options={widgetData.type === 'metaWithImage' || widgetData.type === 'meta' ? ['updatedAt', 'createdAt', 'count', 'index'] : ['updatedAt', 'createdAt', 'views', 'likes', 'random']}
+                                              options={widgetData.type === 'metaWithImage' || widgetData.type === 'meta' ?
+                                                  ['updatedAt', 'createdAt', 'count', 'index','rank','views','likes'] :
+                                                  ['updatedAt', 'createdAt', 'views', 'likes', 'random']
+                                              }
                                               onChangeHandler={onChangeHandler}
                         /> : null
                     }

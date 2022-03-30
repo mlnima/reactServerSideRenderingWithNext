@@ -35,24 +35,19 @@ const searchPage : FC = ( ) => {
     const settings = useSelector((store: StoreTypes) => store.settings);
     const posts = useSelector((store:StoreTypes) => store.posts.posts)
     const router = useRouter()
+
+
+
     return (
         <StyledMain className="main posts-page" stylesData={settings.design?.postsPageStyle || ''}>
-            {/*{router.query.keyword ?*/}
-            {/*    <MetaDataToSiteHead title={router.query.keyword as string}*/}
-            {/*                        url={`${router.asPath}`}/>*/}
-            {/*    : null*/}
-            {/*}*/}
 
             <WidgetsRenderer
                 position={'searchPageTop'}
 
             />
-            {router.query.keyword ? <PostsPageInfo titleToRender={router.query.keyword as string}/> : null}
+            {router.query.keyword && posts?.length ? <PostsPageInfo keyword={router.query.keyword as string}/> : null}
 
-
-            {
-                // @ts-ignore
-               posts?.length < 1 ?
+            {!posts?.length ?
                     <h2 className='no-result-message'>No Result for {router.query.keyword}</h2> :
                     null
             }

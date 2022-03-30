@@ -42,7 +42,7 @@ const monthsSitemapGenerator = async (allMonthsSinceStart) => {
 }
 
 const metaAndStaticPagesSitemapGenerator = () => {
-    const pages = ['pages', 'categories', 'tags', 'actors']
+    const pages = ['pages', 'categories', 'tags', 'actors','search']
     return pages.map(page => {
         return `<sitemap>
                     <loc>${process.env.NEXT_PUBLIC_PRODUCTION_URL}/sitemaps/${page}.xml</loc>

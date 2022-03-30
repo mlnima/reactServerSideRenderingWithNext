@@ -1,6 +1,5 @@
 const metaSchema = require('../../../models/metaSchema');
 const mongoose = require('mongoose')
-const ObjectId = require('mongoose').Types.ObjectId;
 
 module.exports = async (req, res) => {
     try {

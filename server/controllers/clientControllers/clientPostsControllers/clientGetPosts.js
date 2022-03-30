@@ -1,7 +1,18 @@
 //clientGetPosts
 const postSchema = require('../../../models/postSchema');
 const metaSchema = require('../../../models/metaSchema');
+const searchKeywordSchema = require('../../../models/searchKeywordSchema');
 const _clientQueryGeneratorForGettingPosts = require('../_variables/_clientQueryGeneratorForGettingPosts')
+
+
+const saveSearchedKeyword = async (keyword,count)=>{
+    if (keyword){
+      await  searchKeywordSchema.findOneAndUpdate(
+          {name:keyword},
+          {name:keyword,count},
+          { upsert: true }).exec()
+    }
+}
 
 module.exports = async (req, res) => {
     try {
@@ -24,6 +35,9 @@ module.exports = async (req, res) => {
             .exec()
 
         const meta = req.query?.metaId || req.query?.selectedMetaForPosts ? await metaSchema.findById(req.query?.metaId || req.query?.selectedMetaForPosts).exec() : {}
+        if (req.query?.keyword){
+           await saveSearchedKeyword(req.query?.keyword,totalCount)
+        }
         res.json({posts, totalCount, meta})
     } catch (err) {
         console.log(err.stack)

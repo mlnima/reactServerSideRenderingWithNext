@@ -21,7 +21,12 @@ module.exports = async (req, res) => {
 
         // let sortQuery = !req.query.sort ? {count: -1} : req.query.sort && typeof req.query.sort === 'string' ? req.query.sort : {[req.query.sort]: -1}
         const metaCount = await metaSchema.countDocuments({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]}).exec()
-        metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]},{},{sort:req.query.sort === 'createdAt' || !req.query.sort ? {'updatedAt':-1} : {[req.query.sort]: -1}})
+       // const sortQuery = req.query.sort === 'createdAt' || !req.query.sort ? {'updatedAt':-1} : {[req.query.sort]: -1}
+        const sortQuery =  !req.query.sort ? {'rank':1,'likes':-1,'views':-1,'count':-1,'updatedAt':-1,'createdAt':-1} : {[req.query.sort]: -1}
+
+// console.log('sortQuery:',sortQuery)
+// console.log(req.query.sort)
+        metaSchema.find({$and: [type, searchQuery, startWithQuery, statusQuery,countQuery]},{},{sort:sortQuery})
             .limit(size)
             .skip(size * (page - 1))
             // .sort(sortQuery)

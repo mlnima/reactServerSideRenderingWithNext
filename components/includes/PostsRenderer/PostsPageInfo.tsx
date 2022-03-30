@@ -1,5 +1,8 @@
 import styled from "styled-components";
 import {FC} from "react";
+import {useSelector} from "react-redux";
+import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 
 let PostsPageInfoStyledDiv = styled.div`
   display: flex;
@@ -12,17 +15,21 @@ let PostsPageInfoStyledDiv = styled.div`
 `
 
 interface PostsPageInfoPropTypes {
-    titleToRender:string
+    metaData?:Meta
+    keyword?:string
 }
 
-const PostsPageInfo :FC<PostsPageInfoPropTypes> = ({titleToRender}) => {
+const PostsPageInfo :FC<PostsPageInfoPropTypes> = ({metaData,keyword}) => {
 
-    const title = decodeURIComponent(titleToRender || '')
+    const title = decodeURIComponent(capitalizeFirstLetter(metaData?.name || keyword ))
 
-    return (
-        <PostsPageInfoStyledDiv className='posts-page-info'>
-            <h1> {title.trim()}</h1>
-        </PostsPageInfoStyledDiv>
-    );
+    if (title){
+        return (
+            <PostsPageInfoStyledDiv className='posts-page-info'>
+                <h1> {title.trim()}</h1>
+            </PostsPageInfoStyledDiv>
+        );
+    }else return null
+
 };
 export default PostsPageInfo;
