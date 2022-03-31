@@ -29,6 +29,11 @@ const populateMeta = [
 
 const getRelatedPosts = async (relatedByType,relatedIds,currentPostId,postType)=>{
 
+    const sortOrder =  arraySortRandom(['likes','views','updateAt','createdAt']).reduce((final,current)=>{
+        final[current] = 1
+        return final
+    },{})
+
     const findRelatedPostsQuery = {
         $and:[
             {[relatedByType]:{$in:relatedIds}},
@@ -41,7 +46,7 @@ const getRelatedPosts = async (relatedByType,relatedIds,currentPostId,postType)=
       const relatedPosts = await postSchema.find(
           findRelatedPostsQuery,
           defaultFieldForPosts,
-          {sort:{likes:1,views:1,updateAt:1,createdAt:1}}
+          {sort:sortOrder}
       ).populate(populateMeta).limit(10).sort('-updatedAt').exec()
         return {[`${relatedByType}RelatedPosts`] : relatedPosts}
     }catch (e){

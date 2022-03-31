@@ -8,7 +8,7 @@ import {getComments, getPost, viewPost} from "@store/clientActions/postsAction";
 import {useRouter} from "next/router";
 import {useEffect, useState} from "react";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
-import {adminGetPost} from "@store/adminActions/adminPanelPostsActions";
+// import {adminGetPost} from "@store/adminActions/adminPanelPostsActions";
 
 const LearnTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))

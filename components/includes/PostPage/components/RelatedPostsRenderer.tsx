@@ -14,11 +14,6 @@ const RelatedPostsRenderer: FC<RelatedPostsRendererPropTypes> = (props) => {
         tagsRelatedPosts
     } = useSelector((store: StoreTypes) => store?.posts?.relatedPosts);
 
-    // useEffect(() => {
-    //     console.log(actorsRelatedPosts)
-    //     console.log(categoriesRelatedPosts)
-    //     console.log(tagsRelatedPosts)
-    // }, [props]);
     return (
         <div>
             {actorsRelatedPosts?.length ?
