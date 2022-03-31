@@ -15,14 +15,17 @@ const CommentsRendererStyledDiv = styled.div`
 `
 const CommentsRenderer :FC = () => {
 
-    const comments = useSelector(({posts}:StoreTypes) => posts?.post?.comments)
+    const comments = useSelector(({posts}:StoreTypes) => posts?.post?.comments || [])
 
-    return (
-        <CommentsRendererStyledDiv className='comments'>
-            {comments.map((comment, index) => {
-                return (<Comment key={index} comment={comment}/>)
-            })}
-        </CommentsRendererStyledDiv>
-    );
+    if (comments?.length){
+        return (
+            <CommentsRendererStyledDiv className='comments'>
+                {comments.map((comment, index) => {
+                    return (<Comment key={index} comment={comment}/>)
+                })}
+            </CommentsRendererStyledDiv>
+        );
+    }else return null
+
 };
 export default CommentsRenderer;

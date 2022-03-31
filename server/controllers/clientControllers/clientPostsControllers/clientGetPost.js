@@ -1,6 +1,6 @@
 const postSchema = require('../../../models/postSchema');
-// const mongoose = require("mongoose");
 const mongoIdValidator = require('../../../../_variables/util/mongoIdValidator')
+const arraySortRandom = require('../../../../_variables/util/arraySortRandom')
 
 const defaultFieldForPosts= [
     'title',
@@ -15,7 +15,9 @@ const defaultFieldForPosts= [
     'translations',
     'videoTrailerUrl',
     'rating',
-    'redirectLink'
+    'redirectLink',
+    'updateAt',
+    'createdAt',
 ]
 
 const populateMeta = [
@@ -25,12 +27,22 @@ const populateMeta = [
 ]
 
 
-const getRelatedPosts = async (relatedByType,relatedIds)=>{
+const getRelatedPosts = async (relatedByType,relatedIds,currentPostId,postType)=>{
+
+    const findRelatedPostsQuery = {
+        $and:[
+            {[relatedByType]:{$in:relatedIds}},
+            {status:'published'},
+            {_id:{$ne:currentPostId}},
+            {postType:postType}
+        ]
+    }
     try{
       const relatedPosts = await postSchema.find(
-            {$and:[{[relatedByType]:{$in:relatedIds}},{status:'published'}]},
-            defaultFieldForPosts
-        ).populate(populateMeta).limit(8).sort('-updatedAt').exec()
+          findRelatedPostsQuery,
+          defaultFieldForPosts,
+          {sort:{likes:1,views:1,updateAt:1,createdAt:1}}
+      ).populate(populateMeta).limit(10).sort('-updatedAt').exec()
         return {[`${relatedByType}RelatedPosts`] : relatedPosts}
     }catch (e){
         return {[`${relatedByType}RelatedPosts`] : []}
@@ -43,8 +55,6 @@ module.exports = async (req, res) => {
     // const _id = req.query._id;
 
     try {
-       // const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && req.query._id.match(/^[0-9a-fA-F]{24}$/) : false;
-       // const validateId = req.query._id ? mongoose.isValidObjectId(req.query._id) && mongoIdValidator(req.query._id) : false;
         const validateId = mongoIdValidator(req.query._id);
         if (validateId){
           const post = await postSchema.findOne({_id:req.query._id,status:'published'},'-comments').populate([
@@ -54,12 +64,31 @@ module.exports = async (req, res) => {
               {path: 'actors',select:{'name':1,'type':1}},
           ]).exec()
             if (post){
+
                 res.json( {
                     post,
                     relatedPosts:{
-                        ...await getRelatedPosts('actors',(post?.actors || [])?.slice(0,5)?.map(meta=>meta._id)),
-                        ...await getRelatedPosts('categories',(post?.categories || [])?.slice(0,5)?.map(meta=>meta._id)),
-                        ...await getRelatedPosts('tags',(post?.tags || [])?.slice(0,5)?.map(meta=>meta._id)),
+                        ...await getRelatedPosts(
+                            'actors',
+                            //(post?.actors || []).reverse()?.slice(0,5)?.map(meta=>meta._id).reverse()
+                            arraySortRandom((post?.actors || []))?.slice(0,5)?.map(meta=>meta._id),
+                            post._id,
+                            post.postType
+                        ),
+                        ...await getRelatedPosts(
+                            'categories',
+                           // (post?.categories || []).reverse()?.slice(0,5)?.map(meta=>meta._id).reverse()
+                            arraySortRandom((post?.categories || []))?.slice(0,5)?.map(meta=>meta._id),
+                            post._id,
+                            post.postType
+                        ),
+                        ...await getRelatedPosts(
+                            'tags',
+                           // (post?.tags || []).reverse()?.slice(0,5)?.map(meta=>meta._id).reverse()
+                            arraySortRandom((post?.tags || [])).reverse()?.slice(0,5)?.map(meta=>meta._id),
+                            post._id,
+                            post.postType
+                        )
                     },
                     error: false
                 });
@@ -78,3 +107,10 @@ module.exports = async (req, res) => {
         res.status(500).json({message:'Something went wrong please try again later'})
     }
 };
+
+
+
+//(post?.actors || []).filter((meta, index, arr) => index > (post?.actors || []).length - 6)
+// ...await getRelatedPosts('actors',(post?.actors || [])?.slice(0,5)?.map(meta=>meta._id)),
+// ...await getRelatedPosts('categories',(post?.categories || [])?.slice(0,5)?.map(meta=>meta._id)),
+// ...await getRelatedPosts('tags',(post?.tags || [])?.slice(0,5)?.map(meta=>meta._id)),

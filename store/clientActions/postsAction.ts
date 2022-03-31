@@ -274,17 +274,29 @@ export const getMetas = (data, metaType, cache) => async dispatch => {
 
 export const getComments = (_id: string) => async dispatch => {
     // @ts-ignore
-    await Axios.get(`/api/v1/posts/getComments?onDocument=${_id}`).then(res => {
-        dispatch({
-            type: GET_COMMENTS,
-            payload: res.data?.comments
+    try {
+        await Axios.get(`/api/v1/posts/getComments?onDocument=${_id}`).then(res => {
+            dispatch({
+                type: GET_COMMENTS,
+                payload: res.data?.comments
+            })
+        }).catch(err => {
+            dispatch({
+                type: GET_COMMENTS,
+                payload: []
+            })
         })
-    }).catch(err => {
+    }catch (err){
         dispatch({
-            type: GET_COMMENTS,
-            payload: []
+            type: SET_ALERT,
+            payload: {
+                active: true,
+                type: 'error',
+                message: 'Something Went Wrong'
+            }
         })
-    })
+    }
+
 };
 
 export const addNewComment = (newComment) => async dispatch => {

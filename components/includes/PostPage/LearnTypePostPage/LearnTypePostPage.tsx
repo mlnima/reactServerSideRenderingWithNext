@@ -77,8 +77,12 @@ const LearnTypePostPage = () => {
             </div>
             <RelatedPostsRenderer/>
             <CommentFrom/>
-            {learnTypePostPageData.post?.comments?.length ? <CommentsRenderer/> : null}
+            <CommentsRenderer/>
+
         </LearnTypePostPageStyledMain>
     );
 };
 export default LearnTypePostPage;
+
+
+// {learnTypePostPageData.post?.comments?.length ? <CommentsRenderer/> : null}
