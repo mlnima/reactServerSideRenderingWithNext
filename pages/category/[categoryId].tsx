@@ -73,7 +73,7 @@ const categoryPage: FC = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     const categoryId = context.query.categoryId as string
     if (!categoryId) return {notFound: true};
-    if (!categoryId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
+    if (!categoryId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
     // @ts-ignore
     await store.dispatch(getDefaultPageData(

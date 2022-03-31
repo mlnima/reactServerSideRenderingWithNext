@@ -29,7 +29,7 @@ const PostsByMeta: FC = () => {
 
     const onSearchByMetaHandler = e => {
         e.preventDefault()
-        if (metaId.trim().match(/^[0-9a-fA-F]{24}$/)) {
+        if (metaId?.trim()?.match(/^[0-9a-fA-F]{24}$/)) {
             const queryData = {...query, metaId}
             // @ts-ignore
             delete queryData.page

@@ -16,15 +16,13 @@ interface VideoCardMediaPropTypes {
     postElementSize: string,
     cardWidth: number,
     mediaAlt: string,
-    noImageUrl: string,
-    views: number,
-    rating: number,
     quality: string,
     duration: string,
 }
 
 let VideoCardMediaStyledDiv = styled.div`
   position: relative;
+
   @keyframes opacityAnimationStart {
     0% {
       opacity: 0;
@@ -35,15 +33,16 @@ let VideoCardMediaStyledDiv = styled.div`
   }
 
   .video-card-image {
-    width: 100%;
-    height: calc(48vw / 1.777);
+    width: ${({cardWidth}: styleProps) => `${cardWidth}px`};
+    height: ${({cardWidth}: styleProps) => `calc(${cardWidth}/1.777)`};
     object-fit: contain;
+
   }
 
   .video-card-info-data {
     position: absolute;
-    color: var(--post-element-info-text-color, #ccc);
-    background-color: rgba(0, 0, 0, 0.5);
+    z-index: 1;
+    color: var(--post-element-text-color, #ccc);
     margin: 0;
     --video-card-info-distance: 3px;
     padding: 2px;
@@ -53,40 +52,32 @@ let VideoCardMediaStyledDiv = styled.div`
   }
 
   .video-card-quality {
-    top: 3px;
-    left: 3px;
+    bottom: 3px;
+    right: 18%;
+    
   }
 
   .video-card-duration {
-    top: 3px;
-    right: 3px;
-  }
-
-  .video-card-views {
     bottom: 3px;
-    right: 3px;
-  }
-
-  .video-card-rating {
-    bottom: var(--video-card-info-distance, 2px);
-    left: var(--video-card-info-distance, 2px);
-  }
-
-  @media only screen and (min-width: 768px) {
-    .video-card-image {
-      width: ${(props: styleProps) => `${props.cardWidth}px`};
-      height: ${(props: styleProps) => `calc(${props.cardWidth}/1.777)`};
-    }
-
+    right: 2%;
+    
   }
 `
 
 
 
-const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
+const VideoCardMedia: FC<VideoCardMediaPropTypes> =
+    ({
+         post,
+         postElementSize,
+         cardWidth,
+         mediaAlt,
+         quality,
+         duration
+    }) => {
 
     const [hover, setHover] = useState(false)
-    const videoTrailerUrlSource = useMemo(() => props.post.videoTrailerUrl, [props.post])
+    const videoTrailerUrlSource = useMemo(() => post.videoTrailerUrl, [post])
 
     const hoverHandler = () => {
         hover ? setHover(false) : setHover(true)
@@ -94,14 +85,14 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
 
     useEffect(() => {
         hover ? setHover(false) : null
-    }, [props.post]);
+    }, [post]);
 
-    if (props.post?.videoTrailerUrl && hover) {
+    if (post?.videoTrailerUrl && hover) {
         return (
             <VideoCardTrailer hover={hover}
                               hoverHandler={hoverHandler}
-                              postElementSize={props.postElementSize}
-                              cardWidth={props.cardWidth}
+                              postElementSize={postElementSize}
+                              cardWidth={cardWidth}
                               videoTrailerUrl={videoTrailerUrlSource}
             />
         )
@@ -110,26 +101,25 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> = (props) => {
         return (
 
             <VideoCardMediaStyledDiv className={'video-card-media'}
-                                     postElementSize={props.postElementSize}
-                                     cardWidth={props.cardWidth}
+                                     postElementSize={postElementSize}
+                                     cardWidth={cardWidth}
                                      onMouseEnter={hoverHandler}
                                      onMouseOut={hoverHandler}
                                      onTouchStartCapture={hoverHandler}
                                      onTouchEnd={hoverHandler}
             >
-                <CardImageRenderer imageUrl={props?.post.mainThumbnail}
-                                   mediaAlt={props.mediaAlt}
-                                   cardWidth={props.cardWidth}
-                                   cardHeight={props.cardWidth / 1.777}
+                <CardImageRenderer imageUrl={post?.mainThumbnail}
+                                   mediaAlt={mediaAlt}
+                                   cardWidth={cardWidth}
+                                   cardHeight={cardWidth / 1.777}
                 />
-                <VideoCardInfo views={props.views}
-                               rating={props.rating}
-                               duration={props.duration}
-                               quality={props.quality}
+                <VideoCardInfo duration={duration}
+                               quality={quality}
                 />
             </VideoCardMediaStyledDiv>
         )
     }
 };
+
 export default VideoCardMedia;
 

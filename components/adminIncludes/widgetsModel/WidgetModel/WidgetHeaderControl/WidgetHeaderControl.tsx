@@ -108,7 +108,7 @@ const WidgetHeaderControl:FC<WidgetHeaderControlPropType> =
 
             </button>
             <div className='widget-name-index'>
-                <p>{widgetData.name || convertVariableNameToName(widgetData.type)} index: {widgetData.widgetIndex || '0'}</p>
+                <p>{convertVariableNameToName(widgetData.type)} : {widgetData.name} index: {widgetData.widgetIndex || '0'}</p>
             </div>
 
             <div className='widget-open-control-group-buttons'>

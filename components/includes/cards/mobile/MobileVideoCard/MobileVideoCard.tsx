@@ -6,22 +6,52 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import MobileVideoCardMedia from "./MobileVideoCardMedia/MobileVideoCardMedia";
 
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
+const CardViews = dynamic(() => import('@components/includes/cards/asset/CardViews/CardViews'));
+const CardRating = dynamic(() => import('@components/includes/cards/asset/CardRating/CardRating'));
 
 const MobileVideoCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};
   margin: 4px 2px ;
-  font-size: 12px;
+
   .mobile-video-card-media-link {
     color: var(--post-element-text-color, #ccc);
-   
-    .mobile-video-card-title {
-      font-size: 14px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+
+    .entry-header{
       font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      margin: 2px 0;
+      font-size: 14px;
+      .card-header {
+        margin: 2px 0;
+      }
+    }
+
+
+    .views-rating{
+      font-size: 12px;
+      height: 20px;
+      width: 100%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .video-card-views,.video-card-rating {
+        color: var(--post-element-info-text-color, #939393);
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+      }
+
+    }
+    .last-update{
+      
+      font-size: 9px;
+      margin:  4px;
+      color: var( --post-element-info-text-color,#939393);
     }
   }
 `
@@ -29,7 +59,6 @@ const MobileVideoCardStyledArticle = styled.article`
 interface MobileVideoCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
-    noImageUrl: string,
     views: number,
     rating: number,
     post: PostTypes,
@@ -41,7 +70,6 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
          post,
          onActivateLoadingHandler,
          title,
-         noImageUrl,
          views,
          postsPerRawForMobile,
          rating
@@ -58,18 +86,25 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
                        onClick={onActivateLoadingHandler}
                     >
 
-                        <MobileVideoCardMedia noImageUrl={noImageUrl}
-                                              post={post}
+                        <MobileVideoCardMedia post={post}
                                               mediaAlt={title}
-                                              views={views}
-                                              rating={rating}
                                               duration={post.duration}
                                               quality={post.quality}
                                               postsPerRawForMobile={postsPerRawForMobile}
                         />
 
-                        <h3 className={'mobile-video-card-title'}>{title}</h3>
+                        <header className={'entry-header'} >
+                            <span className={'card-header'}>{title}</span>
+                        </header>
 
+
+                        {post.views || rating ?
+                        <div className={'views-rating'}>
+                        {views ?   <CardViews views={views} className={'video-card-views video-card-info-data'}/> :null }
+                        {rating ?  <CardRating rating={rating} className={'video-card-rating video-card-info-data'}/> :null }
+                        </div>
+                            :null
+                        }
                         {post?.updatedAt || post?.createdAt  ?
                             <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
                             : null

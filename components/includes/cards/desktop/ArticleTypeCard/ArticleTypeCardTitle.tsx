@@ -5,23 +5,32 @@ import CardMetaRenderer from "../../asset/CardMetaData/CardMetaRenderer";
 
 const ArticleTypeCardTitleStyledDiv = styled.div`
   color: var(--post-element-text-color, #ccc);
-  width: calc(48vw - 6px);
+  width: ${(props: { cardWidth: number }) => `${props?.cardWidth - 2}px`};
+  //width: calc(48vw - 6px);
   margin: 2px 0;
   max-width: 98%;
   display: flex;
   align-items: center;
-  -webkit-box-orient: vertical;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-  font-size: 12px;
+  justify-content: space-between;
+  font-size: 14px;
+  //-webkit-box-orient: vertical;
+  //white-space: nowrap;
+  //text-overflow: ellipsis;
+  //overflow: hidden;
   
   .article-card-title-link {
     color: var(--post-element-text-color, #ccc);
     text-decoration: none;
+    text-align: center;
+    width: 100%;
+    height: initial;
+    margin: initial;
     h3{
+      text-align: center;
+      //justify-self: flex-start;
       font-weight: lighter;
       margin: 2px 0;
+  
     }
     
     &:hover {
@@ -34,17 +43,7 @@ const ArticleTypeCardTitleStyledDiv = styled.div`
     white-space: normal;
     
   }
-
-  @media only screen and (min-width: 768px) {
- 
-    width: ${(props: { cardWidth: number }) => `${props?.cardWidth - 2}px`};
-    font-size: 14px;
-
-    .article-card-title-link {
-      height: initial;
-      margin: initial;
-    }
-  }
+  
 `
 
 interface ArticleTypeCardTitlePropTypes {
@@ -52,20 +51,11 @@ interface ArticleTypeCardTitlePropTypes {
     postUrl: string,
     onActivateLoadingHandler: any,
     cardWidth: number,
-    tags: {
-        type: string,
-        name: string,
-        _id: string,
-    }[],
-    categories: {
-        type: string,
-        name: string,
-        _id: string,
-    }[],
+
 }
 
 
-const ArticleTypeCardTitle: FC<ArticleTypeCardTitlePropTypes> = ({title, tags, categories, cardWidth, onActivateLoadingHandler, postUrl}) => {
+const ArticleTypeCardTitle: FC<ArticleTypeCardTitlePropTypes> = ({title,  cardWidth, onActivateLoadingHandler, postUrl}) => {
 
     return (
         <ArticleTypeCardTitleStyledDiv className={'article-card-title'}
@@ -81,7 +71,7 @@ const ArticleTypeCardTitle: FC<ArticleTypeCardTitlePropTypes> = ({title, tags, c
                 </a>
             </Link>
 
-            <CardMetaRenderer metas={[...tags || [], ...categories || []]}/>
+            {/*<CardMetaRenderer metas={[...tags || [], ...categories || []]}/>*/}
         </ArticleTypeCardTitleStyledDiv>
     )
 }

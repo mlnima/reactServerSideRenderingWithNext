@@ -14,7 +14,7 @@ const MobileArticleCardStyledArticle = styled.article`
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
   margin: 4px 2px ;
   font-size: 12px;
-  max-width: 750px;
+  max-width: 320px;
   
   .mobile-article-card-link {
     color: var(--post-element-text-color, #ccc);
@@ -45,14 +45,14 @@ const MobileArticleCardStyledArticle = styled.article`
       flex-direction: column;
       justify-content: space-between;
 
-      .article-card-under-media-info {
+      .mobile-article-card-under-media-info {
         font-size: 14px;
         display: flex;
         justify-content: space-between;
         align-items: center;
         flex-wrap: wrap;
         margin: 0;
-        height: 20px;
+       // height: 20px;
 
         .article-card-info-data {
           display: flex;
@@ -67,13 +67,17 @@ const MobileArticleCardStyledArticle = styled.article`
             height: 14px;
             margin: 0 2px;
           }
+          
+        }
+        .last-update{
+
+          font-size: 9px;
+          margin:  4px;
+          color: var( --post-element-info-text-color,#6A6A6A);
         }
       }
     }
-    .last-update{
-      width: calc(100% - 4px);
-    }
-    
+
   }
 `
 
@@ -108,19 +112,20 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
                         />
                         <h3 className={'mobile-article-card-title'}>{title}</h3>
                         <div className={'article-card-under-media'}>
-                            <div className={'article-card-under-media-info'}>
+                            <div className={'mobile-article-card-under-media-info'}>
                                 {views ? <CardViews views={views} className={'article-card-views article-card-info-data'}/>
                                     : null
                                 }
                                 {rating ? <CardRating rating={rating} className={'article-card-rating article-card-info-data'}/>
                                     : null
                                 }
+                                {post?.updatedAt || post?.createdAt  ?
+                                    <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
+                                    : null
+                                }
                             </div>
                         </div>
-                        {post?.updatedAt || post?.createdAt  ?
-                            <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
-                            : null
-                        }
+
                     </a>
                 </Link>
             </MobileArticleCardStyledArticle>

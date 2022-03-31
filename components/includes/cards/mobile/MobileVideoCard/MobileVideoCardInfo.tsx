@@ -1,26 +1,21 @@
 import _qualityConvertor from "../../asset/_qualityConvertor";
 import dynamic from "next/dynamic";
-const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
-const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
+import {FC} from "react";
 const CardQuality = dynamic(() => import('../../asset/CardQuality/CardQuality'))
 const CardDuration = dynamic(() => import('../../asset/CardDuration/CardDuration'))
 
 
 interface VideoCardInfoPropType {
-    views:number,
-    rating:number,
     quality:string,
     duration:string,
 }
 
-const MobileVideoCardInfo = (props:VideoCardInfoPropType) =>{
+const MobileVideoCardInfo:FC<VideoCardInfoPropType> = ({quality,duration}) =>{
 
     return(
         <>
-            {props.quality ? <CardQuality quality={_qualityConvertor(props.quality)} className={'video-card-quality video-card-info-data'}/> :null }
-            {props.duration ?   <CardDuration duration={props.duration} className={'video-card-duration video-card-info-data'}/> :null }
-            {props.views ?   <CardViews views={props.views} className={'video-card-views video-card-info-data'}/> :null }
-            {props.rating ?  <CardRating rating={props.rating} className={'video-card-rating video-card-info-data'}/> :null }
+            {quality ? <CardQuality quality={_qualityConvertor(quality)} className={'video-card-quality video-card-info-data'}/> :null }
+            {duration ?   <CardDuration duration={duration} className={'video-card-duration video-card-info-data'}/> :null }
         </>
     )
 }

@@ -5,13 +5,9 @@ import LearnTypeCardMedia from "./LearnTypeCardMedia";
 import LearnTypeCardTitle from "./LearnTypeCardTitle";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import dynamic from "next/dynamic";
-
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
-// width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? '100%' : 'calc(50vw - 5.6px)'};
-// max-width: ${(props: { cardWidth: number, postElementSize: string }) => props.postElementSize === 'list' ? `100%` : 'calc(50vw - 5.6px)'};
-// width: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
-// max-width: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? `100%` : `calc(100% - 4px)`};
+
 interface LearnTypeCardStyledDivPropType {
     postsPerRawForMobile: number,
     cardWidth: number,
@@ -20,11 +16,8 @@ interface LearnTypeCardStyledDivPropType {
 
 const LearnTypeCardStyledDiv = styled.div`
   background-color: var(--post-element-background-color, #131314);
-  width: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? '100%' : `${props.cardWidth}px`};
-  flex-direction: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? 'row' : 'column'};
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  width: ${({postElementSize,cardWidth}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? '100%' : `${cardWidth}px`};
+  flex-direction: ${({postElementSize}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? 'row' : 'column'};
   font-size: 14px;
   padding-bottom: 5px;
   margin: 7px;
@@ -32,7 +25,7 @@ const LearnTypeCardStyledDiv = styled.div`
   .learn-post-card-link {
     position: relative;
     width: 100%;
-    flex-direction: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? 'row' : 'column'};
+    flex-direction: ${({postElementSize}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? 'row' : 'column'};
     margin-bottom: 4px;
     display: flex;
     align-items: center;
@@ -42,12 +35,12 @@ const LearnTypeCardStyledDiv = styled.div`
     .learn-post-card-under-media {
       
       width: calc(100% - 4px);
-      height: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? '65px' : 'auto'};
+      height: ${({postElementSize}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? '65px' : 'auto'};
 
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      margin-left: ${(props: LearnTypeCardStyledDivPropType) => props.postElementSize === 'list' ? 4 : 0}px;
+      margin-left: ${({postElementSize}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? 4 : 0}px;
 
       .learn-post-card-under-media-info {
         display: flex;
@@ -84,38 +77,46 @@ interface VideoTypeCardPropTypes {
     postsPerRawForMobile?: number,
     onActivateLoadingHandler: any,
     title: string,
-    noImageUrl: string,
     views: number,
     rating: number,
     post: PostTypes,
 }
 
-const LearnTypeCard: FC<VideoTypeCardPropTypes> = (props) => {
+const LearnTypeCard: FC<VideoTypeCardPropTypes> = 
+    ({
+         cardWidth,
+         postElementSize,
+         postsPerRawForMobile,
+         title,
+         views,
+         rating,
+         post,
+         onActivateLoadingHandler
+     }) => {
 
-    const postUrl = `/post/${props.post?.postType}/${props.post?._id}`
-    const categoriesImages = props.post?.categories?.filter(category => category?.imageUrl).map(category => category?.imageUrl)
+    const postUrl = `/post/${post?.postType}/${post?._id}`
+    const categoriesImages = post?.categories?.filter(category => category?.imageUrl).map(category => category?.imageUrl)
 
     return (
-        <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={props.postElementSize}
-                                cardWidth={props.cardWidth} postsPerRawForMobile={props.postsPerRawForMobile}>
+        <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={postElementSize}
+                                cardWidth={cardWidth} postsPerRawForMobile={postsPerRawForMobile}>
             <Link href={postUrl}>
-                <a rel='next' onClick={props.onActivateLoadingHandler} className='learn-post-card-link'
-                   title={props.title}>
+                <a rel='next' onClick={onActivateLoadingHandler} className='learn-post-card-link'
+                   title={title}>
 
                     <LearnTypeCardMedia
                         categoriesImages={categoriesImages}
-                        noImageUrl={props.noImageUrl}
-                        postElementSize={props.postElementSize}
-                        post={props.post}
-                        cardWidth={props.cardWidth}
-                        mediaAlt={props.title}
+                        postElementSize={postElementSize}
+                        post={post}
+                        cardWidth={cardWidth}
+                        mediaAlt={title}
                     />
                     <div className='learn-post-card-under-media'>
-                        <LearnTypeCardTitle title={props.title}/>
+                        <LearnTypeCardTitle title={title}/>
                         <div className='learn-post-card-under-media-info'>
-                            {props.views ? <CardViews views={props.views}
+                            {views ? <CardViews views={views}
                                                       className={'learn-card-views learn-card-info-data'}/> : null}
-                            {props.rating ? <CardRating rating={props.rating}
+                            {rating ? <CardRating rating={rating}
                                                         className={'learn-card-rating learn-card-info-data'}/> : null}
                         </div>
                     </div>

@@ -49,7 +49,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
             loginRegisterFormPopup: globalState?.loginRegisterFormPopup,
             alert: globalState?.alert,
             sidebarsData,
-            mainLayoutClassNameForGrid: pathname.match(/\/404|\/500|\/_error|\/profile/g) ?
+            mainLayoutClassNameForGrid: pathname?.match(/\/404|\/500|\/_error|\/profile/g) ?
                 'without-sidebar-layout' :
                 `${sidebarsData ? sidebarsData?.sidebarType : 'without'}-sidebar-layout`
         }

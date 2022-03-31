@@ -7,7 +7,6 @@ const CardViewsStyledDiv = styled.div`
     height: 14px;
     margin: 0 2px;
     background-color: var(--post-element-info-text-color, #ccc);
-    //mask: url('/public/asset/images/icons/eye-regular.svg') no-repeat center;
     -webkit-mask: url('/public/asset/images/icons/eye-regular.svg') no-repeat center;
   }
 `

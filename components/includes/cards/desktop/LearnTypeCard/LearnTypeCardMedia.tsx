@@ -26,7 +26,6 @@ interface LearnTypeCardMediaPropTypes {
     postElementSize: string,
     cardWidth: number,
     mediaAlt: string,
-    noImageUrl: string,
 }
 
 const LearnTypeCardMedia :FC<LearnTypeCardMediaPropTypes> = (props) => {

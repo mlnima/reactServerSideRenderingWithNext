@@ -18,6 +18,16 @@ const WidgetPaginationStyledDiv = styled.div`
     border-radius: 5px;
     cursor: pointer;
   }
+  @media only screen and (max-width: 768px) {
+    .pagination-item{
+      width: 40px;
+      height: 40px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      font-size: 1rem;
+    }
+  }
 `
 
 interface WidgetPaginationPropTypes {
@@ -39,24 +49,27 @@ const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,co
     return (
         <WidgetPaginationStyledDiv className={'widget-pagination'}>
             {pages.map(pageNumber => {
-                return (
-                    <Link key={pageNumber.toString()}
-                          href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}>
-                        <a
-                            className='pagination-item'
-                            style={{
-                                backgroundColor: pageNumber === 1 && postsCountPerPage === count?
-                                                 'var(--main-active-color,#f90)' :
-                                                 'var(--navigation-background-color,#18181b)',
-                                color: pageNumber === 1 && postsCountPerPage === count ?
-                                       'var(--navigation-background-color,#18181b)' :
-                                       'var(--navigation-text-color,#ccc)'
-                            }}
-                        >
-                            {pageNumber}
-                        </a>
-                    </Link>
-                )
+                if (pageNumber && typeof pageNumber === "number"){
+                    return (
+                        <Link key={pageNumber.toString()}
+                              href={`${baseUrl.includes('?') ? baseUrl + `&page=${pageNumber}` : baseUrl + `?page=${pageNumber}`}`}>
+                            <a
+                                className='pagination-item'
+                                style={{
+                                    backgroundColor: pageNumber === 1 && postsCountPerPage === count?
+                                        'var(--main-active-color,#f90)' :
+                                        'var(--navigation-background-color,#18181b)',
+                                    color: pageNumber === 1 && postsCountPerPage === count ?
+                                        'var(--navigation-background-color,#18181b)' :
+                                        'var(--navigation-text-color,#ccc)'
+                                }}
+                            >
+                                {pageNumber}
+                            </a>
+                        </Link>
+                    )
+                }else return null
+
             })}
         </WidgetPaginationStyledDiv>
     )

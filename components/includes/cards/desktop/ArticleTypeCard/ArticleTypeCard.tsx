@@ -1,10 +1,11 @@
-import {FC} from "react";
+import React, {FC} from "react";
 import Link from "next/link";
 import dynamic from 'next/dynamic'
 import styled from "styled-components";
 import ArticleCardMedia from "./ArticleCardMedia";
 import ArticleTypeCardTitle from "./ArticleTypeCardTitle";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import CardMetaRenderer from "@components/includes/cards/asset/CardMetaData/CardMetaRenderer";
 
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'))
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
@@ -13,16 +14,11 @@ const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 const ArticleCard = styled.div`
   background-color: var(--post-element-background-color, #131314);
-  font-size: 12px;
   padding-bottom: 5px;
   width: ${(props: { cardWidth: number }) => `${props?.cardWidth}px`};
   max-width: 100%;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
   margin: 7px;
-
+  font-size: 14px;
 
   .article-card-link {
     position: relative;
@@ -67,9 +63,16 @@ const ArticleCard = styled.div`
         }
       }
     }
+
+  }
+  .card-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
     .last-update {
       font-size: 9px;
-      margin: 0 4px;
+      margin:  4px;
     }
   }
 
@@ -81,7 +84,6 @@ interface ArticleTypeCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
     postElementSize: string,
-    noImageUrl: string,
     views: number,
     rating: number
 }
@@ -93,7 +95,6 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
          onActivateLoadingHandler,
          title,
          postElementSize,
-         noImageUrl,
          views,
          rating
      }) => {
@@ -106,8 +107,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                        className='article-card-media-link'
                        title={title}
                     >
-                        <ArticleCardMedia noImageUrl={noImageUrl}
-                                          postElementSize={postElementSize}
+                        <ArticleCardMedia postElementSize={postElementSize}
                                           post={post}
                                           cardWidth={cardWidth}
                                           mediaAlt={title}
@@ -117,9 +117,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                 <ArticleTypeCardTitle title={title}
                                       postUrl={postUrl}
                                       onActivateLoadingHandler={onActivateLoadingHandler}
-                                      cardWidth={cardWidth}
-                                      tags={post?.tags}
-                                      categories={post?.categories}/>
+                                      cardWidth={cardWidth}/>
                 <Link href={postUrl}>
                     <a rel='next'
                        className='article-card-link'
@@ -139,13 +137,21 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                                     : null
                                 }
                             </div>
-                            {post?.updatedAt || post?.createdAt  ?
-                                <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
-                                : null
-                            }
+
+
                         </div>
                     </a>
                 </Link>
+                <div className={'card-info'}>
+                    <CardMetaRenderer metas={[...post?.actors || [], ...post?.tags || [], ...post?.categories || []]}
+                                      cardWidth={cardWidth}
+                    />
+                    {post?.updatedAt || post?.createdAt  ?
+                        <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
+                        : null
+                    }
+
+                </div>
             </ArticleCard>
 
         );
@@ -153,3 +159,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
 
 export default ArticleTypeCard;
 
+// {post?.updatedAt || post?.createdAt  ?
+//     <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
+//     : null
+// }

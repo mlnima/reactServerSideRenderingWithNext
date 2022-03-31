@@ -109,7 +109,6 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
                                     category => category?.imageUrl).map(category => category?.imageUrl
                                 )
                             }
-                            noImageUrl={''}
                             postElementSize={postElementSize}
                             post={post}
                             cardWidth={cardWidth}
@@ -128,10 +127,10 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
                                 }
                             </div>
                         </div>
-                        {post?.updatedAt || post?.createdAt  ?
-                            <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
-                            : null
-                        }
+                        {/*{post?.updatedAt || post?.createdAt  ?*/}
+                        {/*    <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>*/}
+                        {/*    : null*/}
+                        {/*}*/}
                     </a>
                 </Link>
             </MobileLearnCardStyledArticle>

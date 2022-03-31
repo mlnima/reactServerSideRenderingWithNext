@@ -8,6 +8,18 @@ const MobileVideoCardTrailer = dynamic(() => import('./MobileVideoCardTrailer'),
 
 let MobileVideoCardMediaStyledDiv = styled.div`
   position: relative;
+  &:after{
+    display: block;
+    position: absolute;
+    top: 0;
+    height: 100%;
+    width: 100%;
+    content: '';
+    background: #000;
+    background: -moz-linear-gradient(top,rgba(255,255,255,0) 80%,#000 110%);
+    background: -webkit-linear-gradient(top,rgba(255,255,255,0) 80%,#000 110%);
+    background: linear-gradient(to bottom,rgba(255,255,255,0) 80%,#000 110%);
+  }
   
   .video-card-image {
     width: 100%;
@@ -17,8 +29,8 @@ let MobileVideoCardMediaStyledDiv = styled.div`
 
   .video-card-info-data {
     position: absolute;
-    color: var(--post-element-info-text-color, #ccc);
-    background-color: rgba(0, 0, 0, 0.5);
+    color: var(--post-element-text-color, #ccc);
+    z-index: 1;
     margin: 0;
     --video-card-info-distance: 3px;
     padding: 2px;
@@ -26,43 +38,38 @@ let MobileVideoCardMediaStyledDiv = styled.div`
     display: flex;
     align-items: center;
   }
-
+  
   .video-card-quality {
-    top: 3px;
-    left: 3px;
+    bottom: 3px;
+    right: 22%;
   }
 
   .video-card-duration {
-    top: 3px;
-    right: 3px;
-  }
-
-  .video-card-views {
     bottom: 3px;
-    right: 3px;
-  }
-
-  .video-card-rating {
-    bottom: var(--video-card-info-distance, 2px);
-    left: var(--video-card-info-distance, 2px);
+    right: 2%;
   }
 `
 
 interface MobileVideoCardMediaPropTypes {
     post: PostTypes,
     mediaAlt: string,
-    noImageUrl: string,
-    views: number,
-    rating: number,
     postsPerRawForMobile: number,
     quality: string,
     duration: string,
 }
 
-const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = (props) => {
+const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = 
+    ({
+         post,
+         mediaAlt,
+         postsPerRawForMobile,
+         quality,
+         duration
+     }) => {
+    
 
     const [hover, setHover] = useState(false)
-    const videoTrailerUrlSource = useMemo(() => props.post.videoTrailerUrl, [props.post])
+    const videoTrailerUrlSource = useMemo(() => post.videoTrailerUrl, [post])
 
     const hoverHandler = () => {
         hover ? setHover(false) : setHover(true)
@@ -70,14 +77,14 @@ const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = (props) => {
 
     useEffect(() => {
         hover ? setHover(false) : null
-    }, [props.post]);
+    }, [post]);
 
-    if (props.post?.videoTrailerUrl && hover) {
+    if (post?.videoTrailerUrl && hover) {
         return (
             <MobileVideoCardTrailer hover={hover}
                                     hoverHandler={hoverHandler}
                                     videoTrailerUrl={videoTrailerUrlSource}
-                                    postsPerRawForMobile={props?.postsPerRawForMobile}
+                                    postsPerRawForMobile={postsPerRawForMobile}
             />
         )
     } else {
@@ -90,14 +97,12 @@ const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = (props) => {
                                            onTouchStartCapture={hoverHandler}
                                            onTouchEnd={hoverHandler}
             >
-                <MobileCardImageRenderer imageUrl={props?.post.mainThumbnail}
-                                         postsPerRawForMobile={props?.postsPerRawForMobile}
-                                         mediaAlt={props.mediaAlt}
+                <MobileCardImageRenderer imageUrl={post.mainThumbnail}
+                                         postsPerRawForMobile={postsPerRawForMobile}
+                                         mediaAlt={mediaAlt}
                 />
-                <VideoCardInfo views={props.views}
-                               rating={props.rating}
-                               duration={props.duration}
-                               quality={props.quality}
+                <VideoCardInfo duration={duration}
+                               quality={quality}
                 />
             </MobileVideoCardMediaStyledDiv>
         )

@@ -16,6 +16,7 @@ const VideoCardToRender: FC<VideoCardToRenderPropTypes> = ({postProps}) => {
         if (postProps.isMobile) {
             return <MobileVideoCard {...postProps}/>
         } else {
+
             return <VideoTypeCard {...postProps} />
         }
     }

@@ -1,26 +1,72 @@
-import {FC} from "react";
+import React, {FC} from "react";
 import Link from "next/link";
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+import CardMetaRenderer from "@components/includes/cards/asset/CardMetaData/CardMetaRenderer";
+import VideoCardTitle from './VideoCardTitle'
+
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'),{ssr:false});
-const VideoCardTitle = dynamic(() => import('./VideoCardTitle'));
+const CardViews = dynamic(() => import('@components/includes/cards/asset/CardViews/CardViews'));
+const CardRating = dynamic(() => import('@components/includes/cards/asset/CardRating/CardRating'));
 const VideoCardMedia = dynamic(() => import('./VideoCardMedia/VideoCardMedia'));
 
 let VideoCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   padding-bottom: 5px;
-  width: ${(props: { cardWidth: number, postElementSize: string }) => `${props?.cardWidth}px`};
+  width: ${(props: { cardWidth: number }) => `${props?.cardWidth}px`};
   max-width: 100%;
-  flex-direction: column;
-  justify-content: space-between;
   margin: 7px;
   font-size: 14px;
-  transition: .3s;
-  .last-update {
-    font-size: 9px;
-    margin: 0 4px;
+  
+  .video-card-media-link{
+    position: relative;
+    display: block;
+    cursor: pointer;
+    &:after{
+      display: block;
+      position: absolute;
+      top: 0;
+      height: 100%;
+      width: 100%;
+      content: '';
+      background: #000;
+      background: -moz-linear-gradient(top,rgba(255,255,255,0) 80%,#000 110%);
+      background: -webkit-linear-gradient(top,rgba(255,255,255,0) 80%,#000 110%);
+      background: linear-gradient(to bottom,rgba(255,255,255,0) 80%,#000 110%);
+    }
   }
+
+
+  .views-rating{
+    height: 20px;
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    .video-card-views,.video-card-rating {
+      color: var(--post-element-info-text-color, #6A6A6A);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+
+  }
+
+  .card-info{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+   
+    .last-update {
+      font-size: 9px;
+      margin:  4px;
+      color: var( --post-element-info-text-color,#6A6A6A);
+    }
+  }
+
+  
 `
 
 interface VideoTypeCardPropTypes {
@@ -28,7 +74,6 @@ interface VideoTypeCardPropTypes {
     postElementSize: string,
     onActivateLoadingHandler: any,
     title: string,
-    noImageUrl: string,
     views: number,
     rating: number,
     post: PostTypes,
@@ -40,15 +85,14 @@ const VideoCard : FC<VideoTypeCardPropTypes> =
          postElementSize,
          onActivateLoadingHandler,
          title,
-         noImageUrl,
          views,
          rating
     }) => {
     const postUrl = `/post/${post?.postType}/${post._id}`
+
     return (
         <VideoCardStyledArticle className={'video-card'}
                                 cardWidth={cardWidth}
-                                postElementSize={postElementSize}
         >
             <Link href={postUrl} >
                 <a rel={'next'}
@@ -56,13 +100,10 @@ const VideoCard : FC<VideoTypeCardPropTypes> =
                    title={title}
                    onClick={onActivateLoadingHandler}
                 >
-                    <VideoCardMedia noImageUrl={noImageUrl}
-                                    postElementSize={postElementSize}
+                    <VideoCardMedia postElementSize={postElementSize}
                                     post={post}
                                     cardWidth={cardWidth}
                                     mediaAlt={title}
-                                    views={views}
-                                    rating={rating}
                                     duration={post.duration}
                                     quality={post.quality}
                     />
@@ -70,16 +111,28 @@ const VideoCard : FC<VideoTypeCardPropTypes> =
             </Link>
             <VideoCardTitle cardWidth={cardWidth}
                             title={title}
-                            actors={post?.actors}
-                            tags={post?.tags}
                             postUrl={postUrl}
-                            categories={post?.categories}
                             onActivateLoadingHandler={onActivateLoadingHandler}
             />
-            {post?.updatedAt || post?.createdAt  ?
-                <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
-                : null
+            {views || rating ?
+                <div className={'views-rating'}>
+                    {views ?   <CardViews views={views} className={'video-card-views'}/> :null }
+                    {rating ?  <CardRating rating={rating} className={'video-card-rating'}/> :null }
+                </div>
+                :null
             }
+
+
+            <div className={'card-info'}>
+                <CardMetaRenderer metas={[...post?.actors || [], ...post?.tags || [], ...post?.categories || []]}
+                                  cardWidth={cardWidth}
+                />
+                {post?.updatedAt || post?.createdAt  ?
+                    <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
+                    : null
+                }
+            </div>
+
 
         </VideoCardStyledArticle>
     );

@@ -1,10 +1,8 @@
 import React, {FC} from 'react';
 import styled from "styled-components";
-import CardMetaRenderer from "../../asset/CardMetaData/CardMetaRenderer";
-import {Meta} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 
-const CardTitleStyledDiv = styled.div`
+const CardTitleStyledHeader = styled.header`
   width: ${(props: { cardWidth: number }) => `calc(${props?.cardWidth} - 4)px`};
   font-size: 14px;
   color: var(--post-element-text-color, #ccc);
@@ -12,21 +10,19 @@ const CardTitleStyledDiv = styled.div`
   max-width: 98%;
   display: flex;
   align-items: center;
-  -webkit-box-orient: vertical;
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
-
+  
   .video-card-title-link {
     color: var(--post-element-text-color, #ccc);
     text-decoration: none;
     height: initial;
     margin: initial;
+    
 
-    h3 {
+    .card-header {
       margin: 0;
       font-size: 14px;
       font-weight: normal;
+      text-align: center;
     }
 
     &:hover {
@@ -44,9 +40,6 @@ const CardTitleStyledDiv = styled.div`
 interface VideoCardTitlePropTypes {
     title: string,
     cardWidth: number,
-    actors: Meta[],
-    tags: Meta[],
-    categories: Meta[],
     postUrl: string,
     onActivateLoadingHandler: any
 }
@@ -56,26 +49,23 @@ const VideoCardTitle: FC<VideoCardTitlePropTypes> =
     ({
          title,
          postUrl,
-         actors,
-         tags,
-         categories,
          cardWidth,
          onActivateLoadingHandler
      }) => {
 
         return (
-            <CardTitleStyledDiv className={'video-card-title'} cardWidth={cardWidth}>
+            <CardTitleStyledHeader className={'video-card-title entry-header'} cardWidth={cardWidth}>
                 <Link href={postUrl}>
                     <a rel={'next'}
                        className={'video-card-title-link'}
                        title={title}
                        onClick={onActivateLoadingHandler}
                     >
-                        <h3>{title}</h3>
+                        <span className={'card-header'}>{title}</span>
                     </a>
                 </Link>
-                <CardMetaRenderer metas={[...actors || [], ...tags || [], ...categories || []]}/>
-            </CardTitleStyledDiv>
+                {/*<CardMetaRenderer metas={[...actors || [], ...tags || [], ...categories || []]}/>*/}
+            </CardTitleStyledHeader>
 
         );
     };

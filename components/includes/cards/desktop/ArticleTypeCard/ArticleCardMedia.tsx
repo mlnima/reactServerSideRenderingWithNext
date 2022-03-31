@@ -15,7 +15,6 @@ interface ArticleCardMediaPropTypes {
     postElementSize:string,
     cardWidth:number,
     mediaAlt:string,
-    noImageUrl:string,
 }
 
 const ArticleCardMedia : FC<ArticleCardMediaPropTypes>= (props) => {

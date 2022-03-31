@@ -95,22 +95,22 @@ export const getDefaultPageData =
                 identity: staticData?.identity || {},
                 eCommerce: {},
                 ip: context.req?.headers['x-forwarded-for'] || context.req?.socket?.remoteAddress,
-                isMobile: Boolean(userAgent.match(
+                isMobile: Boolean(userAgent?.match(
                     /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
                 ))
             }
         })
 
-        if (options?.setHeadData && options.page.match('search|tags|categories|actors|home|posts|chatroom|messenger|login|register')) {
+        if (options?.setHeadData && options?.page?.match('search|tags|categories|actors|home|posts|chatroom|messenger|login|register')) {
 
-            const title = options.page && options.page.match('search|tags|categories|actors') ?
+            const title = options.page && options?.page?.match('search|tags|categories|actors') ?
                 (options.page === 'search' ? `${context.query?.keyword} ` : '') +
                 getTextDataWithTranslation(context.locale, `${options.page}PageTitle`, staticData?.identity) +
                 //@ts-ignore
                 (staticData?.identity?.siteName ? ` | ${staticData?.identity?.siteName}` : '') :
                 getTextDataWithTranslation(context.locale, 'title', staticData?.identity)
 
-            const description = options.page && options.page.match('search|tags|categories|actors') ?
+            const description = options.page && options?.page?.match('search|tags|categories|actors') ?
                 (options.page === 'search' ? `${context.query?.keyword} ` : '') +
                 getTextDataWithTranslation(context.locale, `${options.page}PageDescription`, staticData?.identity) +
                 //@ts-ignore

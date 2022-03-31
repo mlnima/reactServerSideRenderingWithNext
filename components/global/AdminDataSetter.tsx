@@ -32,7 +32,7 @@ const AdminDataSetter:FC<AdminDataSetterPropTypes> = ({userRole}) => {
         }
     }
 
-    if (pathname.match( /\/admin/g )){
+    if (pathname?.match( /\/admin/g )){
         return (
 
             <Head>

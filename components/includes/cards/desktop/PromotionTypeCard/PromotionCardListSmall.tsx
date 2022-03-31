@@ -1,21 +1,7 @@
-import React from 'react';
+import React, {FC} from 'react';
 import styled from "styled-components";
 import Link from "next/link";
-import {PostTypes} from "../../../../../_variables/TypeScriptTypes/PostTypes";
-
-interface PromotionCardListSmallPropTypes {
-    dir: string;
-    views: number;
-    rating: string;
-    noImageUrl: string;
-    postElementSize: string;
-    widgetId: string;
-    title: string;
-    cardWidth: string;
-    post: PostTypes;
-    onActivateLoadingHandler:any;
-
-}
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 
 const PromotionCardListSmallStyledDiv = styled.div`
   display: flex;
@@ -51,20 +37,31 @@ const PromotionCardListSmallStyledDiv = styled.div`
 `
 
 
-const PromotionCardListSmall = (props: PromotionCardListSmallPropTypes) => {
+interface PromotionCardListSmallPropTypes {
+    title: string;
+    post: PostTypes;
+    onActivateLoadingHandler:any;
+}
+
+const PromotionCardListSmall:FC<PromotionCardListSmallPropTypes> = 
+    ({
+         title,
+         post,
+         onActivateLoadingHandler,
+     }) => {
     return (
         <PromotionCardListSmallStyledDiv>
             <a target='_blank'
-               href={props?.post?.redirectLink}
+               href={post?.redirectLink}
                rel="nofollow noopener"
                className='promotion-card-link-external'
             >
-                <span>{props.title.charAt(0).toUpperCase()}</span>
-               <h3>{props.title}</h3>
+                <span>{title.charAt(0).toUpperCase()}</span>
+               <h3>{title}</h3>
             </a>
-            <Link href={`/post/${props.post?.postType}/${props.post._id}`} >
-                <a className='promotion-card-link-internal' onClick={props.onActivateLoadingHandler}>
-                    <img src='/public/asset/images/icons/search.svg' alt={props.title}/>
+            <Link href={`/post/${post?.postType}/${post._id}`} >
+                <a className='promotion-card-link-internal' onClick={onActivateLoadingHandler}>
+                    <img src='/public/asset/images/icons/search.svg' alt={title}/>
                 </a>
             </Link>
         </PromotionCardListSmallStyledDiv>

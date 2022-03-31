@@ -72,8 +72,6 @@ const PostsRenderer:FC<PostsComponentTypes> =
         }
     });
 
-    const noImageUrl = '/static/images/noImage/no-image-available.png';
-
     return (
         <PostsContentStyledDiv className={'posts-content ' + (viewType ? `${viewType}-posts-content` : 'standard')}
                                postElementSize={elementSize}
@@ -85,7 +83,6 @@ const PostsRenderer:FC<PostsComponentTypes> =
                         'rtl' : 'ltr',
                     views:_shortNumber(post.views || 0),
                     rating : post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null ,
-                    noImageUrl,
                     post,
                     postElementSize: elementSize,
                     widgetId,

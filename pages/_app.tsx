@@ -13,8 +13,8 @@ const MyApp = ({Component, pageProps}: AppProps) => {
     const {pathname} = useRouter()
 
     const ActiveLayout = useMemo(()=>{
-      return pathname.match( /\/admin/g ) ? AdminLayout :
-             pathname.match( /\/messenger|\/chatroom/g ) ? MessengerLayout:
+      return pathname?.match( /\/admin/g ) ? AdminLayout :
+             pathname?.match( /\/messenger|\/chatroom/g ) ? MessengerLayout:
              AppLayout
     },[pathname])
 

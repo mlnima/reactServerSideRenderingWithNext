@@ -73,7 +73,7 @@ const actorPage: FC = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     const actorId = context.query.actorId as string
     if (!actorId) return {notFound: true};
-    if (!actorId.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
+    if (!actorId?.match(/^[0-9a-fA-F]{24}$/)) return {notFound: true};
 
     // @ts-ignore
     await store.dispatch(getDefaultPageData(

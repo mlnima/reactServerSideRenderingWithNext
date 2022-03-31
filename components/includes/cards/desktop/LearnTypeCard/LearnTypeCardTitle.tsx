@@ -4,13 +4,14 @@ import styled from "styled-components";
 
 const LearnTypeCardTitleStyledH3 = styled.h3`
 
-  white-space: nowrap;
-  text-overflow: ellipsis;
-  overflow: hidden;
+  //white-space: nowrap;
+  //text-overflow: ellipsis;
+  //overflow: hidden;
   color: var(--post-element-text-color, #ccc);
   margin: 2px 0;
   font-size: 14px;
   font-weight: normal;
+  text-align: center;
   &:hover{
     display: inline-block;
     white-space: normal;
