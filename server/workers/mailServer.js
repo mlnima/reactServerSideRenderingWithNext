@@ -23,9 +23,11 @@ const server = new SMTPServer({
 //     })
 //
 // }
-if (process.env.MAIL_SERVER){
-    server.listen(25, ()=>{
+
+if (process.env.MAIL_SERVER ==='true' && process.env.MAIL_SERVER_PORT){
+    server.listen(process.env.MAIL_SERVER_PORT || 465, ()=>{
         console.log('mail server started')
     })
 }
+
 
