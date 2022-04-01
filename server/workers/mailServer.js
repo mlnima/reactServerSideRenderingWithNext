@@ -15,8 +15,17 @@ const server = new SMTPServer({
     disabledCommands: ['AUTH']
 });
 
+// if (process.env.MAIL_SERVER){
+//     server.listen(25, process.env.SERVER_IP).then(()=>{
+//         console.log('mail server started')
+//     }).catch(err=>{
+//         console.log('cant start the mail server')
+//     })
+//
+// }
 if (process.env.MAIL_SERVER){
-    server.listen(25, process.env.SERVER_IP)
-    console.log('mail server started')
+    server.listen(25, ()=>{
+        console.log('mail server started')
+    })
 }
 

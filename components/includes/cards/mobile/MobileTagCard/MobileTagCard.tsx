@@ -11,7 +11,7 @@ const MobileTagCardStyledArticle = styled.article`
   margin: 1vw;
   background-color: var(--post-element-background-color, #131314);
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
- 
+  //max-width: 320px;
   .tag-card-link{
     width: 100%;
     color: var(--post-element-text-color, #ccc);

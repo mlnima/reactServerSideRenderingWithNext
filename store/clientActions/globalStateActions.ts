@@ -85,7 +85,6 @@ export const getDefaultPageData =
         const cache = process.env.NODE_ENV !== 'development'
         const userAgent = context.req.headers['user-agent'];
         const staticWidgets = staticWidgetsJson?.widgets || []
-
         const staticData = staticDataJson
 
         dispatch({

@@ -13,6 +13,7 @@ const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const MobilePromotionCardStyledArticle = styled.article`
 
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
+  //max-width: 320px;
   margin: 4px 2px;
   background-color: var(--post-element-background-color, #131314);
   display: flex;

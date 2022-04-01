@@ -59,7 +59,7 @@ const Comment: FC<CommentPropTypes> = ({comment}) => {
         dispatch(deleteComments([id]))
     }
 
-    if (comment?.author && comment?.createdAt){
+    if (comment?.author?._id && comment?.createdAt){
         return (
             <CommentStyledDiv className='comment'>
 

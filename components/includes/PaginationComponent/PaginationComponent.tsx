@@ -6,7 +6,6 @@ import {setLoading} from "@store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
 import rangeNumGenerator from "@_variables/util/rangeNumGenerator";
 
-
 const PaginationComponentStyledDiv = styled.div`
   display: flex;
   justify-content: center;

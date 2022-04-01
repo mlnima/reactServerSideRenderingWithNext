@@ -13,6 +13,7 @@ const MobileVideoCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};
   margin: 4px 2px ;
+ // max-width: 320px;
 
   .mobile-video-card-media-link {
     color: var(--post-element-text-color, #ccc);

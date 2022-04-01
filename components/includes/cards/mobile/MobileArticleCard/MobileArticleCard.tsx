@@ -14,7 +14,7 @@ const MobileArticleCardStyledArticle = styled.article`
   width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
   margin: 4px 2px ;
   font-size: 12px;
-  max-width: 320px;
+  //max-width: 320px;
   
   .mobile-article-card-link {
     color: var(--post-element-text-color, #ccc);

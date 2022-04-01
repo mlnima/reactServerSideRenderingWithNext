@@ -7,6 +7,7 @@ let MobileLearnCardMediaStyledDiv = styled.div`
   position: relative;
   width: 100%;
 
+
   .learn-card-views {
     bottom: 3px;
     right: 3px;

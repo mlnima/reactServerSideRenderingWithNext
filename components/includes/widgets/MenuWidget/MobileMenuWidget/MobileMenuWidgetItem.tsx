@@ -1,6 +1,6 @@
 import {FC, useMemo} from "react";
 import styled from "styled-components";
-import {MenuItem} from "../../../../../_variables/TypeScriptTypes/WidgetsInterfaces";
+import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
 import Link from "next/link";
@@ -13,6 +13,7 @@ const MobileMenuWidgetItemPropTypesStyledLi = styled.li`
     background-color: transparent;
     font-weight: bold;
     font-size: 5vw;
+    
     text-decoration: none;
     border-radius: 5px;
     display: flex;
