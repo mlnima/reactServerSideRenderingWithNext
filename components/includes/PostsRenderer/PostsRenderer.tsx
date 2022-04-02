@@ -28,7 +28,8 @@ interface PostsComponentTypes {
     }
     widgetId?: string,
     postElementSize?: string,
-    isSidebar?: boolean
+    isSidebar?: boolean ,
+    index?:number
 }
 
 interface PostsContentStyledDivPropTypes{
@@ -99,15 +100,15 @@ const PostsRenderer:FC<PostsComponentTypes> =
                 }
 
                 if (post?.postType === 'video') {
-                    return <VideoCardToRender postProps={postProps} key={index}/>
+                    return <VideoCardToRender postProps={postProps} key={index} index={index}/>
                 } else if (post?.postType === 'promotion') {
-                    return <PromotionCardToRender postProps={postProps} key={index}/>
+                    return <PromotionCardToRender postProps={postProps} key={index} index={index} />
                 } else if (post?.postType === 'article') {
-                    return <ArticleCardToRender postProps={postProps} key={index}/>
+                    return <ArticleCardToRender postProps={postProps} key={index} index={index} />
                 } else if (post?.postType === 'learn') {
-                    return <LearnCardToRender postProps={postProps} key={index}/>
+                    return <LearnCardToRender postProps={postProps} key={index} index={index} />
                 } else return (
-                    <DefaultTypeCard {...postProps} key={index}/>
+                    <DefaultTypeCard {...postProps} key={index} index={index}/>
                 )
             })}
         </PostsContentStyledDiv>

@@ -18,6 +18,8 @@ interface VideoCardMediaPropTypes {
     mediaAlt: string,
     quality: string,
     duration: string,
+    index?:number
+
 }
 
 let VideoCardMediaStyledDiv = styled.div`
@@ -73,7 +75,8 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> =
          cardWidth,
          mediaAlt,
          quality,
-         duration
+         duration,
+         index
     }) => {
 
     const [hover, setHover] = useState(false)
@@ -112,6 +115,7 @@ const VideoCardMedia: FC<VideoCardMediaPropTypes> =
                                    mediaAlt={mediaAlt}
                                    cardWidth={cardWidth}
                                    cardHeight={cardWidth / 1.777}
+                                   index={index}
                 />
                 <VideoCardInfo duration={duration}
                                quality={quality}

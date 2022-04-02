@@ -21,6 +21,8 @@ interface MobilePromotionCardMediaPropTypes {
     post: PostTypes,
     mediaAlt: string,
     postsPerRawForMobile: number,
+    index: number,
+
 }
 
 const MobilePromotionCardMedia: FC<MobilePromotionCardMediaPropTypes> =
@@ -28,6 +30,7 @@ const MobilePromotionCardMedia: FC<MobilePromotionCardMediaPropTypes> =
          post,
          mediaAlt,
          postsPerRawForMobile,
+         index
      }) => {
 
         return (
@@ -36,6 +39,7 @@ const MobilePromotionCardMedia: FC<MobilePromotionCardMediaPropTypes> =
                 <MobileCardImageRenderer imageUrl={post.mainThumbnail}
                                          postsPerRawForMobile={postsPerRawForMobile}
                                          mediaAlt={mediaAlt}
+                                         index={index}
                 />
             </MobilePromotionCardMediaStyledDiv>
         )

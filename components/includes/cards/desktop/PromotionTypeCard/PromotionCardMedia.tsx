@@ -7,6 +7,7 @@ interface PromotionCardMediaPropTypes {
     postElementSize: string,
     cardWidth: number,
     mediaAlt: string,
+    index:number
 }
 
 interface PromotionCardMediaStyledDivPropTypes {
@@ -24,7 +25,7 @@ const PromotionCardMediaStyledDiv = styled.div`
     object-fit: contain;
   }
 `
-const PromotionCardMedia : FC<PromotionCardMediaPropTypes> = ({post,postElementSize,cardWidth,mediaAlt}) => {
+const PromotionCardMedia : FC<PromotionCardMediaPropTypes> = ({post,postElementSize,cardWidth,mediaAlt, index}) => {
 
     return (
         <PromotionCardMediaStyledDiv className='promotion-card-media' postElementSize={postElementSize} cardWidth={cardWidth}>
@@ -32,6 +33,7 @@ const PromotionCardMedia : FC<PromotionCardMediaPropTypes> = ({post,postElementS
                                mediaAlt={mediaAlt}
                                cardWidth={cardWidth}
                                cardHeight={cardWidth / 1.777}
+                               index={index}
             />
         </PromotionCardMediaStyledDiv>
     );

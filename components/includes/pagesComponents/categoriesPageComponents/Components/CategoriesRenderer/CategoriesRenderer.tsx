@@ -38,19 +38,21 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ postElementSize,u
 
     return (
         <CategoriesRendererStyledDiv className='categories-block'>
-            {categoriesMetas.map((category) => {
+            {categoriesMetas.map((category,index) => {
 
                 if (isMobile){
                     return <MobileCategoryCard postsPerRawForMobile={postsPerRawForMobile}
                                                category={category}
                                                key={category._id}
                                                onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                               index={index}
                     />
                 }else{
                     return <CategoryCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                          key={category._id}
                                          cardWidth={cardWidth}
                                          category={category}
+                                         index={index}
 
                     />
                 }

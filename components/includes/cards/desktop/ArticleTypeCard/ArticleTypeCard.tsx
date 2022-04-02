@@ -85,7 +85,8 @@ interface ArticleTypeCardPropTypes {
     title: string,
     postElementSize: string,
     views: number,
-    rating: number
+    rating: number ,
+    index?:number
 }
 
 const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
@@ -96,7 +97,8 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
          title,
          postElementSize,
          views,
-         rating
+         rating,
+         index
      }) => {
         const postUrl = `/post/${post?.postType}/${post._id}`
 
@@ -111,6 +113,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                                           post={post}
                                           cardWidth={cardWidth}
                                           mediaAlt={title}
+                                          index={index}
                         />
                     </a>
                 </Link>

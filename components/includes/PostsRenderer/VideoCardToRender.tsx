@@ -1,23 +1,24 @@
 import {FC} from "react";
 import dynamic from "next/dynamic";
-const VideoTypeCard = dynamic(() => import('../cards/desktop/VideoCard/VideoCard'))
+const VideoCard = dynamic(() => import('../cards/desktop/VideoCard/VideoCard'))
 const MobileVideoCard = dynamic(() => import('../cards/mobile/MobileVideoCard/MobileVideoCard'))
 const VideoCardTypeList = dynamic(() => import('../cards/desktop/VideoCardTypeList/VideoCardTypeList'))
 
 interface VideoCardToRenderPropTypes {
-    postProps:any
+    postProps:any,
+    index:number
 }
 
-const VideoCardToRender: FC<VideoCardToRenderPropTypes> = ({postProps}) => {
+const VideoCardToRender: FC<VideoCardToRenderPropTypes> = ({postProps,index}) => {
 
     if (postProps.elementSize === 'list') {
-        return <VideoCardTypeList {...postProps}/>
+        return <VideoCardTypeList {...postProps} index={index} />
     } else {
         if (postProps.isMobile) {
-            return <MobileVideoCard {...postProps}/>
+            return <MobileVideoCard {...postProps} index={index}/>
         } else {
 
-            return <VideoTypeCard {...postProps} />
+            return <VideoCard {...postProps} index={index}/>
         }
     }
 };

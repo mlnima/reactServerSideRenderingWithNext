@@ -5,14 +5,16 @@ interface CategoryCardMediaPropTypes {
     cardWidth: number,
     imageUrl: string,
     mediaAlt: string,
+    index?:number
 }
 
-const CategoryCardMedia: FC<CategoryCardMediaPropTypes> = ({cardWidth, imageUrl, mediaAlt,}) => {
+const CategoryCardMedia: FC<CategoryCardMediaPropTypes> = ({cardWidth, imageUrl, mediaAlt,index}) => {
         return (
             <CardImageRenderer imageUrl={imageUrl}
                                mediaAlt={mediaAlt}
                                cardWidth={cardWidth}
                                cardHeight={cardWidth / 1.777}
+                               index={index}
             />
         );
     };

@@ -12,14 +12,17 @@ const MobileTagCardMediaStyledDiv = styled.div`
 interface MobileTagCardMediaPropTypes {
     imageUrl: string,
     mediaAlt: string,
-    postsPerRawForMobile: number
+    postsPerRawForMobile: number,
+    index?:number
+
 }
 
 const MobileTagCardMedia: FC<MobileTagCardMediaPropTypes> =
     ({
          imageUrl,
          mediaAlt,
-         postsPerRawForMobile
+         postsPerRawForMobile,
+         index
      }) => {
 
         return (
@@ -27,6 +30,7 @@ const MobileTagCardMedia: FC<MobileTagCardMediaPropTypes> =
                 <MobileCardImageRenderer mediaAlt={mediaAlt}
                                          imageUrl={imageUrl}
                                          postsPerRawForMobile={postsPerRawForMobile}
+                                         index={index}
                 />
             </MobileTagCardMediaStyledDiv>
         )

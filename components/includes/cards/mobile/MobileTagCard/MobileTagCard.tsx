@@ -49,13 +49,15 @@ interface MobileTagCardPropTypes {
     postsPerRawForMobile: number,
     tag: Meta,
     onActivateLoadingHandler: any,
+    index?:number
 }
 
 const MobileTagCard: FC<MobileTagCardPropTypes> =
     ({
          tag,
          onActivateLoadingHandler,
-         postsPerRawForMobile
+         postsPerRawForMobile,
+         index
      }) => {
 
         const {t} = useTranslation('customTranslation');
@@ -78,6 +80,7 @@ const MobileTagCard: FC<MobileTagCardPropTypes> =
                         <div className={'mobile-tag-card-image'}>
                             <MobileTagCardMedia imageUrl={tag.imageUrl}
                                                      mediaAlt={cardTitle as string}
+                                                    index={index}
                                                      postsPerRawForMobile={postsPerRawForMobile}
                             />
                         </div>

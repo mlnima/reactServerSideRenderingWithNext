@@ -6,17 +6,18 @@ const PromotionCardListSmall = dynamic(() =>
 const PromotionTypeCard = dynamic(() => import('../cards/desktop/PromotionTypeCard/PromotionTypeCard'))
 
 interface PromotionCardToRenderPropTypes {
-    postProps:any
+    postProps:any,
+    index?:number
 }
 
-const PromotionCardToRender: FC<PromotionCardToRenderPropTypes> = ({postProps}) => {
+const PromotionCardToRender: FC<PromotionCardToRenderPropTypes> = ({postProps,index}) => {
     if (postProps.elementSize === 'listSmall') {
-        return <PromotionCardListSmall{...postProps}/>
+        return <PromotionCardListSmall{...postProps} index={index}/>
     } else {
         if (postProps.isMobile) {
-            return <MobilePromotionCard{...postProps}/>
+            return <MobilePromotionCard{...postProps} index={index}/>
         } else {
-            return <PromotionTypeCard{...postProps}/>
+            return <PromotionTypeCard{...postProps} index={index}/>
         }
     }
 };

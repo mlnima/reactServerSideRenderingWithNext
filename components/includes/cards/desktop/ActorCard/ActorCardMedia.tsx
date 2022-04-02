@@ -2,11 +2,12 @@ import {FC, useMemo} from 'react';
 import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
 
 interface ActorCardMediaPropTypes {
-    imageUrl: string;
-    mediaAlt: string;
+    imageUrl: string,
+    mediaAlt: string,
+    index?:number
 }
 
-const ActorCardMedia:FC<ActorCardMediaPropTypes> = ({mediaAlt, imageUrl} ) => {
+const ActorCardMedia:FC<ActorCardMediaPropTypes> = ({mediaAlt, imageUrl,index} ) => {
 
     return (
         <CardImageRenderer mediaAlt={mediaAlt}
@@ -15,6 +16,7 @@ const ActorCardMedia:FC<ActorCardMediaPropTypes> = ({mediaAlt, imageUrl} ) => {
                            objectFitValue={'cover'}
                            strictImageSize={true}
                            imageUrl={imageUrl}
+                           index={index}
         />
     );
 

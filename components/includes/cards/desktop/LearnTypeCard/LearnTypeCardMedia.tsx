@@ -26,6 +26,8 @@ interface LearnTypeCardMediaPropTypes {
     postElementSize: string,
     cardWidth: number,
     mediaAlt: string,
+    index?:number
+
 }
 
 const LearnTypeCardMedia :FC<LearnTypeCardMediaPropTypes> = (props) => {
@@ -53,6 +55,7 @@ const LearnTypeCardMedia :FC<LearnTypeCardMediaPropTypes> = (props) => {
                                mediaAlt={props.mediaAlt}
                                cardWidth={props.cardWidth}
                                cardHeight={props.cardWidth/ 1.777}
+                               index={props.index}
             />
         </LearnTypeCardMediaStyledDiv>
     );

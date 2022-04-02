@@ -11,7 +11,8 @@ interface CardImageNextPropTypes {
     cardWidth: number,
     cardHeight: number,
     objectFitValue?:string,
-    strictImageSize?:boolean
+    strictImageSize?:boolean,
+    index?:number
 }
 
 const CardImageRenderer: FC<CardImageNextPropTypes> =
@@ -21,14 +22,15 @@ const CardImageRenderer: FC<CardImageNextPropTypes> =
          cardWidth,
          cardHeight,
          strictImageSize,
-         objectFitValue
+         objectFitValue,
+         index
     }) => {
 
     const imageUrlSource = useMemo(() => {
         return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
     }, [imageUrl]);
 
-    if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  ){
+    if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource) && index >= 2  ){
         return (
             <CardImageNext imageUrl={imageUrlSource}
                            alt={mediaAlt}

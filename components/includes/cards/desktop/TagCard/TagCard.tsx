@@ -47,9 +47,10 @@ interface TagCardPropTypes {
     cardWidth: number,
     tag: Meta,
     onActivateLoadingHandler: any
+    index?:number
 }
 
-const TagCard: FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler}) => {
+const TagCard: FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler,index}) => {
 
     const {t} = useTranslation('customTranslation');
     const {locale} = useRouter();
@@ -72,6 +73,7 @@ const TagCard: FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler
                         <TagCardMedia cardWidth={cardWidth}
                                       imageUrl={tag.imageUrl}
                                       mediaAlt={cardTitle as string}
+                                      index={index}
                         />
                     </div>
                     <div className={'tag-card-info'}>

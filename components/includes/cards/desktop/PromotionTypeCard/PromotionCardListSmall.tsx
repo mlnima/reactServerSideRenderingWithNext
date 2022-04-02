@@ -38,9 +38,10 @@ const PromotionCardListSmallStyledDiv = styled.div`
 
 
 interface PromotionCardListSmallPropTypes {
-    title: string;
-    post: PostTypes;
-    onActivateLoadingHandler:any;
+    title: string,
+    post: PostTypes,
+    onActivateLoadingHandler:any,
+    index?:number
 }
 
 const PromotionCardListSmall:FC<PromotionCardListSmallPropTypes> = 
@@ -48,6 +49,7 @@ const PromotionCardListSmall:FC<PromotionCardListSmallPropTypes> =
          title,
          post,
          onActivateLoadingHandler,
+         index
      }) => {
     return (
         <PromotionCardListSmallStyledDiv>

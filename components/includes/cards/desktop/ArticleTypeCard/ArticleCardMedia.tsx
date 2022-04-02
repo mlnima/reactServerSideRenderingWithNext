@@ -15,16 +15,25 @@ interface ArticleCardMediaPropTypes {
     postElementSize:string,
     cardWidth:number,
     mediaAlt:string,
+    index?:number
 }
 
-const ArticleCardMedia : FC<ArticleCardMediaPropTypes>= (props) => {
+const ArticleCardMedia : FC<ArticleCardMediaPropTypes>=
+    ({
+         post,
+         postElementSize,
+         cardWidth,
+         mediaAlt,
+         index
+     }) => {
 
     return (
-        <ArticleCardMediaStyled className='article-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <CardImageRenderer imageUrl={props?.post.mainThumbnail}
-                               mediaAlt={props.mediaAlt}
-                               cardWidth={props.cardWidth}
-                               cardHeight={props.cardWidth/1.777}
+        <ArticleCardMediaStyled className='article-card-media' postElementSize={postElementSize} cardWidth={cardWidth}>
+            <CardImageRenderer imageUrl={post.mainThumbnail}
+                               mediaAlt={mediaAlt}
+                               cardWidth={cardWidth}
+                               cardHeight={cardWidth/1.777}
+                               index={index}
             />
         </ArticleCardMediaStyled>
     );

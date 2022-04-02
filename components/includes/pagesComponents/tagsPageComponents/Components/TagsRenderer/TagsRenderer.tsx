@@ -43,6 +43,7 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({ postElementSize,uniqueData}) 
                                           tag={tag}
                                           key={tag._id}
                                           onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                          index={index}
                     />
 
                 }else{
@@ -50,6 +51,7 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({ postElementSize,uniqueData}) 
                                     key={tag._id}
                                     cardWidth={tagRendererData.cardWidth}
                                     tag={tag}
+                                    index={index}
                     />
                 }
             })

@@ -63,7 +63,8 @@ interface MobileVideoCardPropTypes {
     views: number,
     rating: number,
     post: PostTypes,
-    postsPerRawForMobile: number
+    postsPerRawForMobile: number,
+    index?:number
 }
 
 const MobileVideoCard: FC<MobileVideoCardPropTypes> =
@@ -73,7 +74,9 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
          title,
          views,
          postsPerRawForMobile,
-         rating
+         rating,
+         index,
+
      }) => {
 
         const postUrl = `/post/${post?.postType}/${post._id}`;
@@ -92,6 +95,7 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
                                               duration={post.duration}
                                               quality={post.quality}
                                               postsPerRawForMobile={postsPerRawForMobile}
+                                              index={index}
                         />
 
                         <header className={'entry-header'} >

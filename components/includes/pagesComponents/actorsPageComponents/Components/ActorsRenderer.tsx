@@ -42,10 +42,11 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
 
     return (
         <ActorsRendererStyledDiv className='actors-content'>
-            {actorsMetas.map((actor) => {
+            {actorsMetas.map((actor ,index) => {
                 return <ActorCard key={actor._id}
                                   actor={actor}
                                   onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                  index={index}
                 />
                 }
             )}

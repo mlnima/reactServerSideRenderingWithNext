@@ -49,13 +49,15 @@ interface MobileCategoryCardPropTypes {
     postsPerRawForMobile: number,
     category: Meta,
     onActivateLoadingHandler: any,
+    index?:number
 }
 
 const MobileCategoryCard: FC<MobileCategoryCardPropTypes> =
     ({
          category,
          onActivateLoadingHandler,
-         postsPerRawForMobile
+         postsPerRawForMobile,
+         index
      }) => {
 
         const {t} = useTranslation('customTranslation');
@@ -79,6 +81,7 @@ const MobileCategoryCard: FC<MobileCategoryCardPropTypes> =
                             <MobileCategoryCardMedia imageUrl={category.imageUrl}
                                                      mediaAlt={cardTitle as string}
                                                      postsPerRawForMobile={postsPerRawForMobile}
+                                                     index={index}
                             />
                         </div>
                         <div className={'category-card-info'}>

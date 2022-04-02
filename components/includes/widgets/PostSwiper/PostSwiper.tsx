@@ -51,7 +51,8 @@ interface PostSwiperComponentTypes {
     }
     widgetId?: string,
     postElementSize?: string,
-    isSidebar?: boolean
+    isSidebar?: boolean,
+    index?:number
 }
 
 
@@ -100,7 +101,8 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
          uniqueData,
          widgetId,
          postElementSize,
-         isSidebar
+         isSidebar,
+         index
      }) => {
         const {locale} = useRouter()
         const dispatch = useDispatch()
@@ -155,7 +157,7 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
             }
             return (
                 <SwiperSlide tag="div" key={index} virtualIndex={index}>
-                    {post?.postType === 'video' ? <VideoCardToRender postProps={postProps} key={index}/> :
+                    {post?.postType === 'video' ? <VideoCardToRender postProps={postProps} key={index} index={index}/> :
                         post?.postType === 'promotion' ? <PromotionCardToRender postProps={postProps} key={index}/> :
                             post?.postType === 'article' ? <ArticleCardToRender postProps={postProps} key={index}/> :
                                 post?.postType === 'learn' ? <LearnCardToRender postProps={postProps} key={index}/> :
@@ -167,7 +169,7 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
 
         // useEffect(() => {
         //     if (typeof window !== 'undefined') {
-        //         swiperContainer.current.style.maxWidth = `${swiperParent.current.style.width - 50}px`
+        //         swiperContainer.current.style.maxWidth = `${swiperParent.current.style.widths - 50}px`
         //     }
         //
         // }, []);

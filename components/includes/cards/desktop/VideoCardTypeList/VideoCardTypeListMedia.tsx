@@ -44,6 +44,7 @@ interface VideoCardTypeListMediaPropTypes {
     postElementSize: string,
     cardWidth: number,
     mediaAlt: string,
+    index?:number
 }
 
 const VideoCardTypeListMedia = (props: VideoCardTypeListMediaPropTypes) => {

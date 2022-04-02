@@ -84,6 +84,7 @@ interface VideoCardTypeListPropTypes {
     onActivateLoadingHandler: any,
     title: string,
     isSidebar: boolean,
+    index?:number
 }
 
 const VideoCardTypeList = 
@@ -95,15 +96,17 @@ const VideoCardTypeList =
          postElementSize,
          title,
          rating,
-         views
+         views,
+         index
         
      }: VideoCardTypeListPropTypes) => {
     const postUrl = `/post/${post?.postType}/${post._id}`
     return (
         <VideoCardTypeListStyledArticle className={'video-card-list-type'} isSidebar={isSidebar}>
+
             <Link href={postUrl} >
                 <a rel='next' className='video-card-link' title={title} onClick={onActivateLoadingHandler}>
-                    <VideoCardTypeListMedia postElementSize={postElementSize} post={post} cardWidth={cardWidth} mediaAlt={title}/>
+                    <VideoCardTypeListMedia postElementSize={postElementSize} post={post} cardWidth={cardWidth} mediaAlt={title} index={index} />
                 </a>
             </Link>
 
@@ -113,7 +116,7 @@ const VideoCardTypeList =
                     <a rel='next' className='video-card-link' title={title} onClick={onActivateLoadingHandler}>
                         {views ? <CardViews views={views} className={'video-card-views video-card-info-data'}/> :null}
                         {post?.quality ?  <CardQuality quality={_qualityConvertor(post.quality)} className={'video-card-quality video-card-info-data'}/> :null}
-                        {post?.duration ?   <CardDuration duration={post.duration}className={'video-card-duration video-card-info-data'}/> :null}
+                        {post?.duration ?   <CardDuration duration={post.duration} className={'video-card-duration video-card-info-data'}/> :null}
                         {rating ?  <CardRating rating={rating} className={'video-card-rating video-card-info-data'}/> :null}
                         {post?.updatedAt ?
                             <p className={'last-update video-card-info-data'}>

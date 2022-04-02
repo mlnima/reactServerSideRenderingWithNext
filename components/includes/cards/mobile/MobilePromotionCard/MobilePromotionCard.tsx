@@ -91,6 +91,7 @@ interface MobilePromotionCardPropTypes {
     rating: number
     post: PostTypes,
     postsPerRawForMobile: number,
+    index:number
 }
 
 const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
@@ -100,7 +101,8 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
          title,
          postsPerRawForMobile,
          views,
-         rating
+         rating,
+         index
      }) => {
 
         const dispatch = useDispatch();
@@ -118,6 +120,7 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
                     <MobilePromotionCardMedia post={post}
                                               mediaAlt={title}
                                               postsPerRawForMobile={postsPerRawForMobile}
+                                              index={ index}
                     />
                 </a>
 

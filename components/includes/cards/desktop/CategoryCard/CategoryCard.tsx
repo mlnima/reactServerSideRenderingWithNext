@@ -51,6 +51,7 @@ interface CategoryCardPropTypes {
     cardWidth: number,
     category: Meta,
     onActivateLoadingHandler: any,
+    index?:number
 }
 
 const CategoryCard: FC<CategoryCardPropTypes> =
@@ -58,6 +59,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
          cardWidth,
          category,
          onActivateLoadingHandler,
+         index
     }) => {
 
     const {t} = useTranslation('customTranslation');
@@ -81,6 +83,7 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                         <CategoryCardMedia cardWidth={cardWidth}
                                            imageUrl={category?.imageUrl}
                                            mediaAlt={cardTitle as string}
+                                           index={index}
                         />
                     </div>
 

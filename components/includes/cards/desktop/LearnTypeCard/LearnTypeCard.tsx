@@ -80,6 +80,7 @@ interface VideoTypeCardPropTypes {
     views: number,
     rating: number,
     post: PostTypes,
+    index?:number
 }
 
 const LearnTypeCard: FC<VideoTypeCardPropTypes> = 
@@ -91,6 +92,7 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> =
          views,
          rating,
          post,
+         index,
          onActivateLoadingHandler
      }) => {
 
@@ -110,6 +112,7 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> =
                         post={post}
                         cardWidth={cardWidth}
                         mediaAlt={title}
+                        index={index}
                     />
                     <div className='learn-post-card-under-media'>
                         <LearnTypeCardTitle title={title}/>

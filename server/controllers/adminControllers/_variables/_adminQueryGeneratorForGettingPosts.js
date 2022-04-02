@@ -1,5 +1,10 @@
 const {isValidObjectId} = require("mongoose");
 
+const searchedKeywordLookForDefaultLanguage = (keyword) =>{
+
+}
+
+
 module.exports = data => {
     const excludeContent = (process.env.EXCLUDE_POSTS_SOURCE ? process.env.EXCLUDE_POSTS_SOURCE.split(' ') : []).map(excludeWord => {
 

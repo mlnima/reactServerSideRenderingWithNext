@@ -76,6 +76,7 @@ interface VideoTypeCardPropTypes {
     title: string,
     views: number,
     rating: number,
+    index?:number,
     post: PostTypes,
 }
 
@@ -86,7 +87,8 @@ const VideoCard : FC<VideoTypeCardPropTypes> =
          onActivateLoadingHandler,
          title,
          views,
-         rating
+         rating,
+         index
     }) => {
     const postUrl = `/post/${post?.postType}/${post._id}`
 
@@ -106,6 +108,7 @@ const VideoCard : FC<VideoTypeCardPropTypes> =
                                     mediaAlt={title}
                                     duration={post.duration}
                                     quality={post.quality}
+                                    index={index}
                     />
                 </a>
             </Link>

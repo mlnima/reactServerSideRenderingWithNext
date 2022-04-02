@@ -9,6 +9,7 @@ interface CardImageNextPropTypes {
     imageUrl: string,
     mediaAlt: string,
     postsPerRawForMobile?: number,
+    index?:number
 }
 
 const MobileCardImageRenderer: FC<CardImageNextPropTypes> =
@@ -16,13 +17,14 @@ const MobileCardImageRenderer: FC<CardImageNextPropTypes> =
          imageUrl,
          mediaAlt,
          postsPerRawForMobile,
+         index
      }) => {
 
         const imageUrlSource = useMemo(() => {
             return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
         }, [imageUrl])
 
-        if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)) {
+        if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  && index >= 2 ) {
             return (
                 <MobileCardImageNext imageUrl={imageUrlSource}
                                      mediaAlt={mediaAlt}

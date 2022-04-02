@@ -96,6 +96,7 @@ interface PromotionTypeCardPropTypes {
     rating: number,
     cardWidth: number,
     post: PostTypes,
+    index?:number
 }
 
 const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
@@ -106,7 +107,8 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
          cardWidth,
          postElementSize,
          views,
-         rating
+         rating,
+         index
      }) => {
         const postUrl = `/post/${post?.postType}/${post._id}`
         const dispatch = useDispatch()
@@ -122,7 +124,7 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
                    onClick={()=>dispatch(viewPost(post._id))}
                    target={'_blank'} rel={'nofollow noopener external'}
                 >
-                    <PromotionCardMedia postElementSize={postElementSize} post={post} cardWidth={cardWidth} mediaAlt={title}/>
+                    <PromotionCardMedia postElementSize={postElementSize} post={post} cardWidth={cardWidth} mediaAlt={title}  index={index}/>
                 </a>
                 <div className={'promotion-card-under-media'}>
                     <Link href={postUrl}>

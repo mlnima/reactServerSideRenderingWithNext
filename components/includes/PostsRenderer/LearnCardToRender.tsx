@@ -4,14 +4,15 @@ const LearnTypeCard = dynamic(() => import('../cards/desktop/LearnTypeCard/Learn
 const MobileLearnCard = dynamic(() => import('../cards/mobile/MobileLearnCard/MobileLearnCard'))
 
 interface LearnCardToRenderPropTypes {
-    postProps:any
+    postProps:any ,
+    index?:number
 }
 
-const LearnCardToRender: FC<LearnCardToRenderPropTypes> = ({postProps}) => {
+const LearnCardToRender: FC<LearnCardToRenderPropTypes> = ({postProps,index}) => {
     if (postProps.isMobile) {
-        return <MobileLearnCard {...postProps}/>
+        return <MobileLearnCard {...postProps} index={index}/>
     } else {
-        return <LearnTypeCard {...postProps} />
+        return <LearnTypeCard {...postProps} index={index} />
     }
 };
 export default LearnCardToRender

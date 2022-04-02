@@ -4,14 +4,15 @@ const ArticleTypeCard = dynamic(() => import('../cards/desktop/ArticleTypeCard/A
 const MobileArticleCard = dynamic(() => import('../cards/mobile/MobileArticleCard/MobileArticleCard'))
 
 interface ArticleCardToRenderPropTypes {
-    postProps:any
+    postProps:any ,
+    index?:number
 }
 
-const ArticleCardToRender: FC<ArticleCardToRenderPropTypes> = ({postProps}) => {
+const ArticleCardToRender: FC<ArticleCardToRenderPropTypes> = ({postProps,index} ) => {
     if (postProps.isMobile) {
-        return <MobileArticleCard {...postProps}/>
+        return <MobileArticleCard {...postProps} index={index}/>
     } else {
-        return <ArticleTypeCard{...postProps}/>
+        return <ArticleTypeCard{...postProps} index={index}/>
     }
 };
 export default ArticleCardToRender

@@ -56,6 +56,7 @@ interface MobileVideoCardMediaPropTypes {
     postsPerRawForMobile: number,
     quality: string,
     duration: string,
+    index?:number
 }
 
 const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = 
@@ -64,7 +65,8 @@ const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> =
          mediaAlt,
          postsPerRawForMobile,
          quality,
-         duration
+         duration,
+         index
      }) => {
     
 
@@ -100,6 +102,7 @@ const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> =
                 <MobileCardImageRenderer imageUrl={post.mainThumbnail}
                                          postsPerRawForMobile={postsPerRawForMobile}
                                          mediaAlt={mediaAlt}
+                                         index={index}
                 />
                 <VideoCardInfo duration={duration}
                                quality={quality}

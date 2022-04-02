@@ -47,10 +47,11 @@ const ActorCardStyledDiv = styled.div`
 `
 interface ActorCardPropTypes{
     actor:Meta,
-    onActivateLoadingHandler:any
+    onActivateLoadingHandler:any,
+    index?:number
 }
 
-const ActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler}) => {
+const ActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler,index}) => {
 
     const {t} = useTranslation('common');
     const actorName = capitalizeFirstLetter(actor?.name)
@@ -63,7 +64,7 @@ const ActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler}) =
                    title={actor?.name}
                 >
                     <div className={'actor-card-image'}>
-                        <ActorCardMedia imageUrl={actor.imageUrl} mediaAlt={actor.name}/>
+                        <ActorCardMedia imageUrl={actor.imageUrl} mediaAlt={actor.name}   index={index}/>
                     </div>
                     <h3 className={'actor-card-title'}> {actorName}</h3>
                     {actor?.count ? <span className={'actor-card-count'}>{actor?.count} {t('Videos')}</span> : null}
