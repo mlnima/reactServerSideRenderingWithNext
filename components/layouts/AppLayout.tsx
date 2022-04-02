@@ -57,7 +57,7 @@ const AppLayout: FC<AppLayoutPropTypes> = ({children}) => {
 
 
     return (
-        <div className={'App ' + mainLayoutClassNameForGrid}>
+        <div className={'App ' + mainLayoutClassNameForGrid} suppressHydrationWarning>
             <GlobalStylesComponent/>
             <SiteSettingSetter/>
             {identity?.topbar === 'enable' ? <TopBarWidgetArea/> : null}
