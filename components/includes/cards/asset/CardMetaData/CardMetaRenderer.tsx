@@ -38,7 +38,7 @@ interface CardMetaRendererPropTypes {
 const CardMetaRenderer: FC<CardMetaRendererPropTypes> = ({metas,cardWidth}) => {
     const [render, setRender] = useState(false)
 
-    if (metas.length){
+    if (metas?.length){
         return (
             <CardMetaRendererStyledDiv className={'card-meta'} render={render} cardWidth={cardWidth}>
 

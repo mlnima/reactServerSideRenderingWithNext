@@ -2,7 +2,7 @@ import React from 'react';
 import styled from "styled-components";
 import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 const TextEditors = dynamic(()=>import('../../TextEditors/TextEditors'))
 
 let TitleDescriptionStyledDiv = styled.div`

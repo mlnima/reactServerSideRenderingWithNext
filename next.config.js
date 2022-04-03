@@ -79,7 +79,7 @@ const pwaSettings = {
 
 const nextConfigs = {
     env: {},
-    reactStrictMode: true,
+    reactStrictMode: false,
     rewrites,
     swcMinify: true,
     eslint: {

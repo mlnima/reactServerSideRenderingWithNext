@@ -20,8 +20,18 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/_variables/_modules/jsx-runtime.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/PostComponents/TitleDescription/TitleDescription.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactPage/TextEditorReactPage.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactPage/TextEditorReactPage.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/global/SiteHeadSetter.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/global/SiteHeadSetter.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/AdminTools/AdminTools.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/PostsRenderer/PostsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/PostsRenderer/PostsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/asset/CardMetaData/CardMetaRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/asset/CardMetaData/CardMetaRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/models/postSchema.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/models/postSchema.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -102,7 +112,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\profile\post" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.dev">
+  <component name="RunManager" selected="npm.start">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/temp.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -148,9 +158,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.test" />
       </list>
@@ -1090,7 +1100,8 @@
       <workItem from="1648722094452" duration="27463000" />
       <workItem from="1648807302792" duration="4429000" />
       <workItem from="1648814041107" duration="17303000" />
-      <workItem from="1648913744358" duration="13963000" />
+      <workItem from="1648913744358" duration="17234000" />
+      <workItem from="1648995598627" duration="10467000" />
     </task>
     <servers />
   </component>
@@ -1411,6 +1422,18 @@
           <url>file://$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCard.tsx</url>
           <line>30</line>
           <option name="timeStamp" value="137" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/pages/admin/post/index.tsx</url>
+          <line>11</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="138" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" type="javascript">
+          <url>file://$PROJECT_DIR$/components/adminIncludes/TextEditors/TextEditorReactPage/TextEditorReactPage.tsx</url>
+          <line>11</line>
+          <properties lambdaOrdinal="-1" />
+          <option name="timeStamp" value="139" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

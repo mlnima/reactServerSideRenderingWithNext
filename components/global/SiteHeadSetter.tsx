@@ -26,8 +26,7 @@ const SiteHeadSetter: FC = () => {
             }
             <link rel="shortcut icon" href={headData.favIcon}/>
             <link rel="apple-touch-icon" href={headData.favIcon}/>
-            <link rel="manifest" href={'/manifest.json'}/>
-            <link rel="alternate" hrefLang="x-default" href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/>
+            {process.env.NEXT_PUBLIC_PWA === 'true' ? <link rel="manifest" href={'/manifest.json'}/>:null}
             <link rel="alternate" hrefLang="x-default" href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/>
             {siteLanguages && siteLanguages?.length ?
                 siteLanguages.map((lang, index) => {

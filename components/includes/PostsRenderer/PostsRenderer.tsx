@@ -107,9 +107,11 @@ const PostsRenderer:FC<PostsComponentTypes> =
                     return <ArticleCardToRender postProps={postProps} key={index} index={index} />
                 } else if (post?.postType === 'learn') {
                     return <LearnCardToRender postProps={postProps} key={index} index={index} />
-                } else return (
-                    <DefaultTypeCard {...postProps} key={index} index={index}/>
-                )
+                } else return null
+
+                //     return (
+                //     <DefaultTypeCard {...postProps} key={index} index={index}/>
+                // )
             })}
         </PostsContentStyledDiv>
     );

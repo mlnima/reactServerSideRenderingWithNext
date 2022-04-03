@@ -1,4 +1,5 @@
-import React, {useEffect, useState, useContext, useRef} from 'react';
+import React, {useEffect, useState} from 'react';
+// import {_jsx_runtime} from '@_variables/_modules/jsx-runtime'
 import type {Value} from '@react-page/editor';
 import Editor from '@react-page/editor';
 import slate from '@react-page/plugins-slate';
@@ -32,6 +33,7 @@ const cellPlugins = [slate(),  background({
         ModeEnum.GRADIENT_MODE_FLAG,
 }), image, spacer, divider, codeSnippet,html5video,video];
 
+
 const TextEditorReactPage = (props: any) => {
     // @ts-ignore
     const [value, setValue] = useState<Value>(null);
@@ -51,5 +53,6 @@ const TextEditorReactPage = (props: any) => {
             <Editor cellPlugins={cellPlugins} value={value} onChange={setValue} />
         </TextEditorReactPageStyledDiv>
     );
+    // return null
 };
 export default TextEditorReactPage;

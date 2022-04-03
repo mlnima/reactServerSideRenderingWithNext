@@ -86,17 +86,18 @@ const DefaultTypeCard = props => {
     const metaPreview = _.uniqBy(metaPreviewData, function (e) {
         return e.name;
     })
+    console.log(props)
     return (
         <DefaultTypeCardStyledDiv className='post-card' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
             <Link href={`/post/${props.post?.postType}/${props.post?._id}`} >
-                <a rel='next' onClick={ props.onActivateLoadingHandler} className='post-card-link' title={title}  >
+                <a rel='next' onClick={ props.onActivateLoadingHandler} className='post-card-link' title={props.title}  >
                     <DefaultTypeCardMedia postElementSize={props.postElementSize}
                                           post={props.post}
                                           cardWidth={props.cardWidth}
-                                          mediaAlt={title}
+                                          mediaAlt={props.title}
                     />
                     <div className='post-card-under-media'>
-                        <CardTitle title={title}/>
+                        <CardTitle title={props.title}/>
                         <div className='post-card-under-media-info'>
                             <span className='post-card-views post-card-info-data'>
                                 <span>{props.views}</span>

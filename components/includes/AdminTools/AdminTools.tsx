@@ -5,7 +5,7 @@ import Link from "next/link";
 import styled from "styled-components";
 import Draggable from 'react-draggable';
 import {useDispatch} from "react-redux";
-import {clearCaches} from "../../../store/adminActions/adminPanelGlobalStateActions";
+import {clearCaches} from "@store/adminActions/adminPanelGlobalStateActions";
 import {useRouter} from "next/router";
 
 let StyledDiv = styled.div`
@@ -16,6 +16,7 @@ let StyledDiv = styled.div`
   justify-content: flex-start;
   align-items: center;
   z-index: 1000;
+
   .admin-tools-item {
     background: #0073aa;
     padding: 10px;
@@ -29,43 +30,40 @@ let StyledDiv = styled.div`
     z-index: 2;
     text-decoration: none;
     margin: 0 5px;
+
     .admin-tools-item-logo {
       transition: .5s;
       color: white;
       width: 30px;
       height: 30px;
+
       &:hover {
-          color: black;
-          width: 40px;
-          height: 40px;
+        color: black;
+        width: 40px;
+        height: 40px;
       }
     }
   }
 `
 
-const AdminTools :FC = () => {
+const AdminTools: FC = () => {
 
     const dispatch = useDispatch()
     const router = useRouter()
-    const [state, setState] = useState({
-        open: false,
-        console: false
-    });
-
-    const onOpenCloseHandler = ()=>{
-        state.open ? setState({...state, open: false}) : setState({...state, open: true})
-    }
+    const [open, setOpen] = useState(false)
 
     return (
-        <Draggable  handle=".open-button"  >
-            <StyledDiv className='admin-tools' >
-                <button className='admin-tools-item open-button' onClick={onOpenCloseHandler } onTouchStartCapture={onOpenCloseHandler}>
+        <Draggable handle=".open-button">
+            <StyledDiv className='admin-tools'>
+                <button className='admin-tools-item open-button'
+                        onClick={() => setOpen(!open)}
+                        onTouchStartCapture={() => setOpen(!open)}>
                     <FontAwesomeIcon icon={faCogs} className='admin-tools-item-logo'/>
                 </button>
-                {state.open ?
+                {open ?
                     <>
                         <Link href={'/admin'} locale={false}>
-                            <a className='admin-tools-item' >
+                            <a className='admin-tools-item'>
                                 <FontAwesomeIcon icon={faUserShield} className='admin-tools-item-logo'/>
                             </a>
                         </Link>
@@ -74,7 +72,7 @@ const AdminTools :FC = () => {
                         </button>
 
                     </>
-                    :null
+                    : null
                 }
             </StyledDiv>
         </Draggable>
