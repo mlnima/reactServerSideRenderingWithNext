@@ -116,14 +116,24 @@ export const getDefaultPageData =
                 (staticData?.identity?.siteName ? ` | ${staticData?.identity?.siteName}` : ''):
                 getTextDataWithTranslation(context.locale, 'description', staticData?.identity)
 
+
+            const canonicalUrl= options?.page?.match('categories|tags|actors') ?
+                { canonicalUrl : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${options?.page}`} :
+                options?.page?.match('search') ?
+                    { canonicalUrl : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/search/${context.query?.keyword}`} :
+                options?.page?.match('home') ?
+                    { canonicalUrl : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}`} :
+                {}
+
             // console.log(title)
             dispatch({
                 type: SET_HEAD_DATA,
                 payload: {
                     title: title || null,
-                    description: description?.substring(1, 155) || null,
-                    keywords: [options.page ,...(getTextDataWithTranslation(context.locale, 'keywords', staticData?.identity) || [])],
+                    description: description?.substring(0, 155) || null,
+                    keywords: [(options.page !== 'home' ? options.page:'' ) ,...(getTextDataWithTranslation(context.locale, 'keywords', staticData?.identity) || [])],
                     themeColor: staticData.identity?.themeColor || '#000',
+                    ...canonicalUrl,
                     //@ts-ignore
                     favIcon: staticData?.identity?.favIcon || '/static/images/favIcon/favicon.png',
                     //@ts-ignore
@@ -136,7 +146,7 @@ export const getDefaultPageData =
                     ogSiteName: staticData?.identity?.siteName || null,
                     ogLocale: context.locale,
                     ogTitle: title || null,
-                    ogDescription: description?.substring(1, 155) || null,
+                    ogDescription: description?.substring(0, 155) || null,
                     ogType: 'website',
                     ogUrl: process.env.NEXT_PUBLIC_PRODUCTION_URL,
                     //@ts-ignore
@@ -147,7 +157,7 @@ export const getDefaultPageData =
                     twitterTitle: title || null,
                     //@ts-ignore
                     twitterSite: staticData?.identity?.siteName || null,
-                    twitterDescription: description?.substring(1, 155) || null,
+                    twitterDescription: description?.substring(0, 155) || null,
                     //@ts-ignore
                     twitterImage: staticData?.identity?.favIcon || '/static/images/favIcon/favicon.png',
                 }

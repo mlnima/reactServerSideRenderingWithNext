@@ -56,4 +56,5 @@ const CardMetaItem = ({meta}:CardMetaItemPropTypes) => {
             </Link>
     );
 };
+
 export default CardMetaItem;

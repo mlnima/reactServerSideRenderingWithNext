@@ -54,7 +54,7 @@ interface ActorDetailsPropTypes {
 const ActorDetails = (props: ActorDetailsPropTypes) => {
 
     const renderDetails = props.additionalInfo.filter((detail) => !detail?.name?.includes('Views'))
-        .map(detail => {
+        .map((detail,index) => {
 
             const convertNumberDate = (numberDate) => {
                 if (numberDate?.length === 8) {
@@ -68,10 +68,10 @@ const ActorDetails = (props: ActorDetailsPropTypes) => {
 
 
             return (
-                <div className={'actor-detail'}>
-                <span className={'actor-detail-name'}>
-                    {detail?.name.trim() + ':'}
-                </span>
+                <div className={'actor-detail'} key={index}>
+                    <span className={'actor-detail-name'}>
+                        {detail?.name.trim() + ':'}
+                    </span>
                     {value?.includes('http') ?
                         <a href={value} className={'actor-detail-value'} target={'_blank'} title={detail?.name}>External
                             Link </a> :

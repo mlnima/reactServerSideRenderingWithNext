@@ -97,12 +97,12 @@ const ActorBioDesktop: FC = () => {
                 <div className={'actor-data-description-details'}>
 
                     {actorData.description ?
-                        <p className={'actor-data-description'}>
-                            <h2>
+                        <section className={'actor-data-description'}>
+                            <h1>
                                 About {actorData.name}
-                            </h2>
+                            </h1>
                             {actorData.description}
-                        </p>
+                        </section>
                         : null
                     }
                     {

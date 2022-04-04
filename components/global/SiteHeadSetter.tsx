@@ -43,7 +43,8 @@ const SiteHeadSetter: FC = () => {
                 : null
             }
             <meta name={'theme-color'} content={headData.themeColor}/>
-            {headData.canonical ?  <link rel={'canonical'} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/> :null}
+            {/*{headData.canonical ?  <link rel={'canonical'} href={`${process.env.NEXT_PUBLIC_PRODUCTION_URL}${asPath}`}/> :null}*/}
+            {headData.canonicalUrl ?  <link rel={'canonical'} href={headData.canonicalUrl}/> :null}
 
             <meta name={'apple-mobile-web-app-status-bar-style'} content={headData.themeColor}/>
             <meta name={'viewport'} content={'width=device-width, initial-scale=1'}/>

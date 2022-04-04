@@ -61,6 +61,10 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
                                     ` ${res?.data?.meta?.name}`
 
 
+                const canonicalUrl= options?.page?.match('category|tag|actor') ?
+                    { canonicalUrl : `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`} : {}
+
+
                 dispatch({
                     type: SET_HEAD_DATA,
                     payload: {
@@ -70,6 +74,7 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
                         ogTitle: title || null,
                         ogType: 'website',
                         ogDescription: description?.substring(1, 155) || null,
+                        ...canonicalUrl,
                         ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/${singularMetaForm}/${metaId}`,
                         ogImage: meta?.mainThumbnail || null,
                         twitterCard: true,
@@ -124,7 +129,7 @@ export const getPost = (_id: string | string[], locale) => async dispatch => {
                     title: postTitle,
                     description: postDescription?.substring(1, 155) || null,
                     keywords,
-
+                    canonicalUrl:`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/post/${postData?.postType}/${postData?._id}`,
                     ogTitle: postTitle,
                     // ogType: postData?.postType === 'video' ? 'video.other' : postData?.postType || '',
                     ogType: 'website',
@@ -371,6 +376,7 @@ export const getPageData = (pageName) => async dispatch => {
                     description: res.data?.pageData?.description?.substring(1, 155) || null,
                     keywords:res.data?.pageData?.keywords|| null,
                     ogTitle: res.data?.pageData?.title || pageName,
+                    canonicalUrl:`${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,
                     ogType: 'website',
                     ogDescription: res.data?.pageData?.description?.substring(1, 155) || null,
                     ogUrl: `${process.env.NEXT_PUBLIC_PRODUCTION_URL}/page/${pageName}`,

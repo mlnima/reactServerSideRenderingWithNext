@@ -75,12 +75,12 @@ const ActorBioMobile: FC = () => {
                         : null
                 }
                 {actorData?.description ?
-                    <p className={'actor-data-description'}>
-                        <h2>
+                    <section className={'actor-data-description'}>
+                        <h1>
                             About {actorData.name}
-                        </h2>
+                        </h1>
                         {actorData.description}
-                    </p>
+                    </section>
                     : null
                 }
             </div>

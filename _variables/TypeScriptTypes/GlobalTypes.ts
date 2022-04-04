@@ -263,6 +263,7 @@ export interface GlobalStateTypes {
     isSiteDesignSet: boolean,
     console: boolean,
     headData:{
+        canonicalUrl: string;
         rtaContent?:boolean,
         twitterCard?:boolean,
         canonical?:boolean,
