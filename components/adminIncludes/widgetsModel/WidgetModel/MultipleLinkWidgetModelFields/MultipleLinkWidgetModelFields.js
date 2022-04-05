@@ -1,4 +1,4 @@
-import  {useState} from 'react';
+import React, {useState} from 'react';
 import MultipleLinkWidgetSingleLinkPreview from "./MultipleLinkWidgetSingleLinkPreview";
 import {uniqueId} from "lodash";
 
@@ -139,7 +139,7 @@ const MultipleLinkWidgetModelFields = props => {
                 <div className='menu-form-field'>
                     <p>rel :</p>
                     <select className={'custom-select'} name='linkRel' value={editingData.linkRel} onChange={e => onChangeHandler(e)}>
-                        <option>select</option>
+                        <option value='' >Select</option>
                         <option value='alternate'>alternate</option>
                         <option value='author'>author</option>
                         <option value='bookmark'>bookmark</option>

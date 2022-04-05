@@ -25,7 +25,7 @@ const ProductPrice = props => {
                 <div>
                     <p>Price Type:</p>
                     <select name='priceType' onChange={e => props.onChangeHandler(e)} value={priceType}>
-                        <option>Select</option>
+                        <option value='' >Select</option>
                         <option value='negotiable'>Negotiable</option>
                         <option value='last'>Last Price</option>
                         <option value='giveAway'>Give Away</option>

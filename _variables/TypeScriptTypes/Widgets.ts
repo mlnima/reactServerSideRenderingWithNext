@@ -1,4 +1,5 @@
 export interface WidgetDataPropTypes {
+    name: string;
     footerLink: string;
     redirectToTitle: string;
     translations: {};
@@ -27,6 +28,7 @@ export interface WidgetDataPropTypes {
 
 
 export interface WidgetPropTypes {
+
     _id: string,
     data: WidgetDataPropTypes
 }

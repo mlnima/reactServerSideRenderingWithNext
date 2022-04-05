@@ -19,7 +19,7 @@ const DayModeNightModeFields: FC<DayModeNightModeFieldsPropTypes> =
                     onChange={onChangeHandler}
                     className={'custom-select'}
             >
-                 <option>select</option>
+                <option value='' >Select</option>
                  <option value={'night'}>Night</option>
                  <option value={'day'}>Day</option>
             </select>

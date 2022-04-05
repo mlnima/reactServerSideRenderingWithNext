@@ -1,15 +1,21 @@
-import React, {useEffect, useState, useRef, FC} from 'react';
+import React, {useEffect, useState, useRef, FC, useMemo} from 'react';
 import dynamic from "next/dynamic";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {useRouter} from "next/router";
 import styled from "styled-components";
-
-const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
-const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
-const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
-const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
-const DefaultTypeCard = dynamic(() => import('@components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard'))
-
+import 'swiper/css';
+import 'swiper/css/autoplay';
+import 'swiper/css/controller';
+import 'swiper/css/effect-cards';
+import 'swiper/css/scrollbar';
+import "swiper/css/pagination";
+import "swiper/css/navigation";
+import {setLoading} from "@store/clientActions/globalStateActions";
+import _shortNumber from "../../../../_variables/clientVariables/_shortNumber";
+import ratingCalculator from "../../../../_variables/util/ratingCalculator";
+import {useDispatch, useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -25,34 +31,49 @@ import SwiperCore, {
     Parallax
 } from 'swiper'
 
-import 'swiper/css';
-import 'swiper/css/autoplay';
-import 'swiper/css/controller';
-import 'swiper/css/effect-cards';
-import 'swiper/css/scrollbar';
-import {setLoading} from "@store/clientActions/globalStateActions";
-import _shortNumber from "../../../../_variables/clientVariables/_shortNumber";
-import ratingCalculator from "../../../../_variables/util/ratingCalculator";
-import {useDispatch, useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
+const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
+const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
+const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
+const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
+const DefaultTypeCard = dynamic(() => import('@components/includes/cards/desktop/DefaultTypeCard/DefaultTypeCard'))
 
-
-SwiperCore.use([Navigation, Pagination, Scrollbar, Keyboard, Autoplay, Controller, EffectCube, EffectCoverflow, Lazy, EffectFlip, EffectFade, Parallax]);
+SwiperCore.use(
+    [
+        Navigation,
+        Pagination,
+        Scrollbar,
+        Keyboard,
+        Autoplay,
+        Controller,
+        EffectCube,
+        EffectCoverflow,
+        Lazy,
+        EffectFlip,
+        EffectFade,
+        Parallax
+    ]
+);
 
 interface PostSwiperComponentTypes {
     viewType?: string,
     _id?: string,
     posts?: PostTypes[],
     uniqueData?: {
-        sliderEffect: string;
+        sliderEffect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
         posts: PostTypes[],
-        totalCount: number
+        totalCount: number,
+        sliderSpeed: number,
+        spaceBetween: number,
+        navigation: boolean,
+        pagination: boolean,
+        centeredSlides: boolean,
+        paginationType: string,
+        slidesPerView: number | string,
     }
     widgetId?: string,
     postElementSize?: string,
     isSidebar?: boolean,
-    index?:number
+    index?: number
 }
 
 
@@ -106,7 +127,6 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
      }) => {
         const {locale} = useRouter()
         const dispatch = useDispatch()
-        const swiperContainer = useRef(null)
         const swiperParent = useRef(null)
         const [controlledSwiper, setControlledSwiper] = useState(null)
 
@@ -167,36 +187,44 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
             )
         })
 
-        // useEffect(() => {
-        //     if (typeof window !== 'undefined') {
-        //         swiperContainer.current.style.maxWidth = `${swiperParent.current.style.widths - 50}px`
-        //     }
-        //
-        // }, []);
+        const swiperProps = useMemo(() => {
+            const direction = typeof uniqueData?.paginationType === 'string' ?
+                uniqueData?.paginationType?.match('vertical') ? {direction: 'vertical'} : {} : {};
+            // const slidesPerView = uniqueData.slidesPerView ? {slidesPerView: uniqueData.slidesPerView} : {}
+            const spaceBetween = uniqueData.spaceBetween ? {spaceBetween: uniqueData.spaceBetween} : {}
+            const centeredSlides = uniqueData.centeredSlides ? {centeredSlides: uniqueData.spaceBetween} : {}
 
+
+            return {
+                modules: uniqueData?.sliderEffect === 'cube' ? [EffectCube, Pagination] : uniqueData.navigation ? [Pagination, Navigation] : [],
+                pagination: !uniqueData.pagination ? {} :
+                    typeof uniqueData?.paginationType === 'string' ?
+                        uniqueData?.paginationType?.match('progressbar|Fraction') ? {type: uniqueData.paginationType} :
+                            uniqueData?.paginationType?.match('dynamicBullets') ? {dynamicBullets: true} :
+                                uniqueData?.paginationType?.match('scrollbar') ? {hide: true} : {} : {},
+                ...direction,
+                ...spaceBetween,
+                // ...slidesPerView,
+                ...centeredSlides,
+            }
+        }, [uniqueData])
 
         return (
-            <PostSwiperStyledDiv ref={swiperParent} className='post-swiper-parent' cardWidth={PostSwiperData.cardWidth}
-                // @ts-ignore
-                                 modules={[Controller]} controller={{control: controlledSwiper}}>
-                <Swiper
-                    ref={swiperContainer}
-                    //  thumbs={{swiper: thumbsSwiper}}
-                    controller={{control: controlledSwiper}}
-                    className='post-swiper'
-                    tag="div"
-                    wrapperTag="div"
-                    keyboard
-                    autoplay
-                    // @ts-ignore
-                    speed={uniqueData?.speed || 1000}
-                    // scrollbar={{draggable: false}}
-                    // @ts-ignore
-                    effect={uniqueData?.sliderEffect || false}
-                    slidesPerView={window.innerWidth > 768 ? Math.floor(((window.innerWidth - 320) / PostSwiperData.cardWidth)) : Math.floor(window.innerWidth / PostSwiperData.cardWidth)}
-
-                    // @ts-ignore
+            <PostSwiperStyledDiv ref={swiperParent} className='post-swiper-parent' cardWidth={PostSwiperData.cardWidth}>
+                {/*// @ts-ignore*/}
+                <Swiper className='post-swiper'
+                        tag="div"
+                        wrapperTag="div"
+                        controller={{control: controlledSwiper}}
+                        {...swiperProps}
+                        keyboard
+                        autoplay
+                        speed={uniqueData?.sliderSpeed || 1000}
+                        navigation={uniqueData?.navigation || false}
+                        effect={uniqueData?.sliderEffect}
+                        slidesPerView={window.innerWidth > 768 ? Math.floor(((window.innerWidth - 320) / PostSwiperData.cardWidth)) : Math.floor(window.innerWidth / PostSwiperData.cardWidth)}
                     //spaceBetween={uniqueData?.spaceBetween || 10}
+                    // ref={swiperContainer}
                 >
                     {renderSlides}
                 </Swiper>

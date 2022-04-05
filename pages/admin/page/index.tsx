@@ -103,6 +103,7 @@ const page = (props: any) => {
                     <p>Sidebar:</p>
                     <select name={'sidebar'} className={'custom-select'} onChange={e => onChangeHandler(e)}
                             value={pageData.sidebar}>
+                        <option value='' >Select</option>
                         <option value={'left'}>Left</option>
                         <option value={'right'}>Right</option>
                         <option value={'both'}>Both</option>

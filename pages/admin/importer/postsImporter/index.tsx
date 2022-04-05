@@ -75,7 +75,8 @@ const postsImporter = () => {
         <PostsImporterStyledDiv className='posts-importer'>
             <div className={'posts-importer-form'}>
                 <select ref={statusElement} className={'custom-select'} name={'status'} onChange={e => onChangeHandler(e)}>
-                    <option>No Change</option>
+
+                    <option value='' >No Change</option>
                     <option value='published'>Published</option>
                     <option value='draft'>Draft</option>
                     <option value='trash'>Trash</option>

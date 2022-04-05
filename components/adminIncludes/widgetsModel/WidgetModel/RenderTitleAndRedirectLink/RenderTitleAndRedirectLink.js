@@ -40,7 +40,7 @@ const RenderTitleAndRedirectLink = props => {
                 <div className='textInputFieldForWidget widgetSection'>
                     <p>Link to Widget Footer:</p>
                     <select className={'custom-select'} name='footerLink' value={props.widgetData.footerLink} onChange={e => props.onChangeHandlerForBoolean(e)}>
-                        <option >select</option>
+                        <option value='' >Select</option>
                         <option value='true'>true</option>
                         <option value='false'>false</option>
                     </select>

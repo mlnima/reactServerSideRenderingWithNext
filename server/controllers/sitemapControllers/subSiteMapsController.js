@@ -5,7 +5,8 @@ const moment = require('moment');
 subSiteMapsController.subSiteMapsController = async (req, res) => {
 
     let month = req.params.month;
-    let pageNo = req.params.pageNo ? parseInt(req.params.pageNo.replace('.xml', '')) : 1;
+    let pageNamePath = req.params?.pageNo?.replace('.xml', '') || req.params?.pageNo || 1
+    let pageNo = req.params.pageNo ? parseInt(pageNamePath) : 1;
     let startDate = new Date(month + '-01');
 
     const endDate = moment(startDate).add(1, 'M').format('YYYY-MM-DD hh:mm:ss A Z');
@@ -26,7 +27,7 @@ subSiteMapsController.subSiteMapsController = async (req, res) => {
         .exec().then(posts => {
         renderPostData = posts.map(post => {
             if (post) {
-                let lastModify = new Date(post.updatedAt|| post.lastModify  ||post.createdAt   || post._id.getTimestamp());
+                let lastModify = new Date(post?.updatedAt ||post?.createdAt   || post?._id?.getTimestamp());
                 let postUrl = process.env.NEXT_PUBLIC_PRODUCTION_URL + `/post/${post?.postType}/${post._id}`;
                 postsElements += `
                    <url>
@@ -40,14 +41,8 @@ subSiteMapsController.subSiteMapsController = async (req, res) => {
         });
     }).then(() => {
 
-        postsElements = postsElements.replace('undefined', '');
-        // xmlTemplate =
-        //     '<?xml version="1.0" encoding="UTF-8"?>\n' +
-        //     '<?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>\n' +
-        //     '<urlset xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.sitemaps.org/schemas/sitemap/0.9 http://www.sitemaps.org/schemas/sitemap/0.9/sitemap.xsd" xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">\n' +
-        //     postsElements +
-        //     '\\n' +
-        //     '</urlset>';
+        postsElements = postsElements?.replace('undefined', '') || '';
+
 
         xmlTemplate =`<?xml version="1.0" encoding="UTF-8"?>
         <?xml-stylesheet type="text/xsl" href="/sitemap.xsl"?>

@@ -31,7 +31,7 @@ const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
 const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleLinkTo'))
 const Advertise = dynamic(() => import('../widgets/Advertise/Advertise'))
-const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'), {ssr: false})
+const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'))
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'), {ssr: false})
 
 const Authentication = dynamic(() =>

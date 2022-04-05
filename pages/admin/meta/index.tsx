@@ -214,7 +214,7 @@ const meta = (props: any) => {
                 <p>Status :</p>
                 <select className={'custom-select'} name={'status'} onChange={e => onInputChangeHandler(e)}
                         value={meta?.status}>
-                    <option>select</option>
+                    <option value='' >Select</option>
                     <option value='draft'>Draft</option>
                     <option value='published'>Published</option>
                     <option value='trash'>Trash</option>

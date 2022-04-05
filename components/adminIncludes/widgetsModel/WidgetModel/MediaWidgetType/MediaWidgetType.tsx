@@ -7,7 +7,8 @@ const MediaWidgetType = ({widgetData,rendering,onChangeHandler}) => {
             <div className={'selectInputFieldForWidget widgetSection'}>
                 <p>Media Type:</p>
                 <select className={'custom-select'} name='mediaType' value={widgetData.mediaType } onChange={e => onChangeHandler(e)}>
-                    <option >Select Media Type</option>
+                    <option  value=''>Select Media Type</option>
+
                     <option value='video'>Video</option>
                     <option value='image'>Image</option>
                     <option value='audio'>Audio</option>

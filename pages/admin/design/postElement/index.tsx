@@ -3,7 +3,7 @@ import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
-import {ChangeEvent, useEffect} from "react";
+import React, {ChangeEvent, useEffect} from "react";
 import {adminPanelEditDesign} from "@store/adminActions/adminPanelSettingsActions";
 
 const StyleSection = dynamic(() => import('@components/adminIncludes/design/StyleSection/StyleSection'), {ssr: false});
@@ -25,6 +25,7 @@ const postElement = () => {
                         value={design.postElementSize}
                         placeholder={'Post Element Size'}
                 >
+                    <option value='' >Select</option>
                     <option value='list'>List</option>
                     <option value='smaller'>smaller</option>
                     <option value='small'>small</option>
@@ -40,6 +41,7 @@ const postElement = () => {
                         value={design.postElementImageLoader}
                         placeholder={'Post Element Image Loader'}
                 >
+                    <option value='' >Select</option>
                     <option value='normal'>Normal</option>
                     <option value='next'>Next</option>
                 </select>

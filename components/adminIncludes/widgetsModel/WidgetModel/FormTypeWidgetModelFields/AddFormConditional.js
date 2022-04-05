@@ -46,7 +46,7 @@ const AddFormConditional = props => {
             <div className={'selectFieldForWidget'}>
                 <p>Required :</p>
                 <select className={'custom-select'} name='required' value={state.required} required={true} onChange={e => onChangeHandler(e)}>
-                    <option >select</option>
+                    <option value='' >Select</option>
                     <option value='true'>True</option>
                     <option value='false'>False</option>
                 </select>

@@ -1,4 +1,4 @@
-import {useEffect, useState} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 
 const MultipleLinkWidgetSingleLinkPreviewStyledDiv = styled.div`
@@ -161,7 +161,7 @@ const MultipleLinkWidgetSingleLinkPreview = props => {
                         <p>rel :</p>
                         <select className={'custom-select'} name='linkRel' value={editingData.linkRel}
                                 onChange={e => onChangeHandler(e)}>
-                            <option>select</option>
+                            <option value='' >Select</option>
                             <option value='alternate'>alternate</option>
                             <option value='author'>author</option>
                             <option value='bookmark'>bookmark</option>
