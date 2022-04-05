@@ -146,7 +146,7 @@ const ImageSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsPropT
             onUniqueDataChangeHandler({
                 target: {
                     name: 'imageSwiperData',
-                    value: [...uniqueData?.imageSwiperData, state]
+                    value: [...(uniqueData?.imageSwiperData || []), state]
                 }
             })
         }
