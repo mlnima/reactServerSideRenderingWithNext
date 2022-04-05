@@ -41,12 +41,12 @@ let MobileVideoCardMediaStyledDiv = styled.div`
   
   .video-card-quality {
     bottom: 3px;
-    right: 22%;
+    right: 45px;
   }
 
   .video-card-duration {
     bottom: 3px;
-    right: 2%;
+    right: 5px;
   }
 `
 

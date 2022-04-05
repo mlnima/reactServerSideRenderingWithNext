@@ -32,6 +32,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
 
     const renderWidgets = widgets?.sort((a, b) => a.data.widgetIndex > b.data.widgetIndex ? 1 : -1)
         ?.map((widget: WidgetPropTypes) => {
+
             if (
                 _renderByLanguageCondition(locale, widget.data.languageToRender) &&
                 _renderByDayCondition(widget.data?.specificDayToRender) &&

@@ -2,12 +2,14 @@ import React, {FC, useEffect, useState} from 'react';
 import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
 import {sliderDefaultData} from './sliderDefaultData'
+import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
 
 
 interface SliderWidgetTypeFieldsPropTypes {
     uniqueData: {
         details: string,
-        swiperConfig:{},
+        swiperConfigMobile:{},
+        swiperConfigDesktop:{},
         imageSwiperData: {
             imageUrl: string,
             imageAlt: string,
@@ -27,186 +29,91 @@ const SliderWidgetTypeFields: FC<SliderWidgetTypeFieldsPropTypes> =
          onUniqueDataJsonChangeHandler
      }) => {
 
-        const [openObjectEditor, setOpenObjectEditor] = useState(false)
+        const [openObjectEditorDesktop, setOpenObjectEditorDesktop] = useState(false)
+        const [openObjectEditorMobile, setOpenObjectEditorMobile] = useState(false)
 
-        const defaultDataInjector = (type)=>{
+        const defaultDataInjector = (type,device)=>{
             if (sliderDefaultData?.[type]){
                 const e = {
                     target :{
-                        name:'swiperConfig',
+                        name:device,
                         value: JSON.stringify(sliderDefaultData?.[type])
                     }
                 }
                 onUniqueDataJsonChangeHandler(e)
             }
-
         }
+
+        const renderInjectorButtonsDesktop = ['cube','fade','coverflow','flip','cards','creative'].map((type,index)=>{
+            return (
+                <button key={index} className={'btn btn-primary'} onClick={() => defaultDataInjector(type,'swiperConfigDesktop')}>
+                    {convertVariableNameToName(type)}
+                </button>
+            )
+        })
+
+        const renderInjectorButtonsMobile = ['cube','fade','coverflow','flip','cards','creative'].map((type,index)=>{
+            return (
+                <button key={index} className={'btn btn-primary'} onClick={() => defaultDataInjector(type,'swiperConfigMobile')}>
+                    {convertVariableNameToName(type)}
+                </button>
+            )
+        })
+
 
         return (
             <div className={'monaco-editor-section'}>
-                <h2> Swiper Config: </h2>
+                <h2> Swiper Config:   <a href={'https://swiperjs.com/demos'} target={'_blank'} className={'btn btn-info'}>Examples</a> </h2>
                 <div className={'editor-section'}>
-                    <p>Image Swiper Config:</p>
-                    <a href={'https://swiperjs.com/demos'} target={'_blank'}>Examples</a>
-                    <button className={'btn btn-primary'} onClick={() => setOpenObjectEditor(!openObjectEditor)}>
-                        open
-                    </button>
-                </div>
-                <div className={'editor-section'}>
-                    <p>Inject Default Data:</p>
-                    <button className={'btn btn-primary'} onClick={() => defaultDataInjector('cube')}>
-                        Cube
-                    </button>
-                    <button className={'btn btn-primary'} onClick={() => defaultDataInjector('fade')}>
-                        Fade
-                    </button>
-                    <button className={'btn btn-primary'} onClick={() => defaultDataInjector('coverflow')}>
-                        Coverflow
-                    </button>
-                    <button className={'btn btn-primary'} onClick={() => defaultDataInjector('flip')}>
-                        Flip
-                    </button>
-                    <button className={'btn btn-primary'} onClick={() => defaultDataInjector('cards')}>
-                        Cards
-                    </button>
-                    <button className={'btn btn-primary'} onClick={() => defaultDataInjector('creative')}>
-                        Creative
+                    <p>Image Swiper Config for Desktop:</p>
+                    <button className={'btn btn-primary'} onClick={() => setOpenObjectEditorDesktop(!openObjectEditorDesktop)}>
+                         {openObjectEditorDesktop ? 'close' : 'open'}
                     </button>
                 </div>
 
-
-                {openObjectEditor ?
+                {openObjectEditorDesktop ?
+                    <>
+                        <div className={'editor-section'}>
+                            <p>Inject Default Data:</p>
+                            {renderInjectorButtonsDesktop}
+                        </div>
                     <MonacoEditor
                         language={'json'}
-                        name={'swiperConfig'}
-                        defaultValue={JSON.stringify(uniqueData?.swiperConfig, null, '\t')}
-                        value={JSON.stringify(uniqueData?.swiperConfig, null, '\t')}
+                        name={'swiperConfigDesktop'}
+                        defaultValue={JSON.stringify(uniqueData?.swiperConfigDesktop, null, '\t')}
+                        value={JSON.stringify(uniqueData?.swiperConfigDesktop, null, '\t')}
                         className={'details'}
                         onChange={onUniqueDataJsonChangeHandler}
                     />
+                    </>
                     : null
                 }
 
+                <div className={'editor-section'}>
+                    <p>Image Swiper Config for Mobile:</p>
 
-                {/*<div className={'selectFieldForWidget'}>*/}
+                    <button className={'btn btn-primary'} onClick={() => setOpenObjectEditorMobile(!openObjectEditorMobile)}>
+                         {openObjectEditorMobile ? 'close' : 'open'}
+                    </button>
+                </div>
 
-
-                {/*    <p>Effect :</p>*/}
-                {/*    <select className={'custom-select'}*/}
-                {/*            name='sliderEffect'*/}
-                {/*            onChange={onUniqueDataChangeHandler}*/}
-                {/*            value={uniqueData?.sliderEffect}*/}
-                {/*    >*/}
-                {/*        <option value='' >Select</option>*/}
-                {/*        <option value='fade'>Fade</option>*/}
-                {/*        <option value='coverflow'>Coverflow</option>*/}
-                {/*        <option value='flip'>Flip</option>*/}
-                {/*        <option value='cube'>Cube</option>*/}
-                {/*        <option value='cards'>Cards</option>*/}
-                {/*        <option value='creative'>Creative</option>*/}
-                {/*    </select>*/}
-                {/*</div>*/}
-
-                {/*<div className={'selectFieldForWidget'}>*/}
-                {/*    <p>Auto Play :</p>*/}
-                {/*    <select className={'custom-select'}*/}
-                {/*            name='sliderAutoplay'*/}
-                {/*            onChange={onUniqueDataChangeHandler}*/}
-                {/*            value={uniqueData?.sliderAutoplay}*/}
-                {/*    >*/}
-                {/*        <option value='' >Select</option>*/}
-                {/*        <option value='false'>Fasle</option>*/}
-                {/*        <option value='true'>True</option>*/}
-                {/*    </select>*/}
-                {/*</div>*/}
-                {/*<div className={'selectFieldForWidget'}>*/}
-                {/*    <p>Navigation :</p>*/}
-                {/*    <select className={'custom-select'}*/}
-                {/*            name='navigation'*/}
-                {/*            onChange={onUniqueDataChangeHandler}*/}
-                {/*            value={uniqueData?.navigation}*/}
-                {/*    >*/}
-                {/*        <option value='' >Select</option>*/}
-                {/*        <option value='false'>Fasle</option>*/}
-                {/*        <option value='true'>True</option>*/}
-                {/*    </select>*/}
-                {/*</div>*/}
-                {/*<div className={'selectFieldForWidget'}>*/}
-                {/*    <p>Pagination :</p>*/}
-                {/*    <select className={'custom-select'}*/}
-                {/*            name='pagination'*/}
-                {/*            onChange={onUniqueDataChangeHandler}*/}
-                {/*            value={uniqueData?.pagination}*/}
-                {/*    >*/}
-                {/*        <option value='' >Select</option>*/}
-                {/*        <option value='false'>Fasle</option>*/}
-                {/*        <option value='true'>True</option>*/}
-                {/*    </select>*/}
-                {/*</div>*/}
-                {/*<div className={'selectFieldForWidget'}>*/}
-                {/*    <p>Pagination Type :</p>*/}
-                {/*    <select className={'custom-select'}*/}
-                {/*            name='paginationType'*/}
-                {/*            onChange={onUniqueDataChangeHandler}*/}
-                {/*            value={uniqueData?.paginationType}*/}
-                {/*    >*/}
-                {/*        <option value='' >Select</option>*/}
-                {/*        <option value='true'>True</option>*/}
-                {/*        <option value='fraction'>Fraction</option>*/}
-                {/*        <option value='progressbar'>Progressbar</option>*/}
-                {/*        <option value='scrollbar'>Scrollbar</option>*/}
-                {/*        <option value='vertical'>Vertical</option>*/}
-                {/*    </select>*/}
-                {/*</div>*/}
-
-
-                {/*<div className={'selectFieldForWidget'}>*/}
-                {/*    <p>Slides Per View :</p>*/}
-                {/*    <select className={'custom-select'}*/}
-                {/*            name='slidesPerView'*/}
-                {/*            onChange={onUniqueDataChangeHandler}*/}
-                {/*            value={uniqueData?.slidesPerView}*/}
-                {/*    >*/}
-                {/*        <option >Select</option>*/}
-                {/*        {['auto',1,2,3,4,5,6,7,8,9,10].map(option=>{*/}
-                {/*            return (*/}
-                {/*                <option value={option}>{option}</option>*/}
-                {/*            )*/}
-                {/*        })}*/}
-
-                {/*    </select>*/}
-                {/*</div>*/}
-                {/*<div className={'selectFieldForWidget'}>*/}
-                {/*    <p>Centered Slides :</p>*/}
-                {/*    <select className={'custom-select'}*/}
-                {/*            name='centeredSlides'*/}
-                {/*            onChange={onUniqueDataChangeHandler}*/}
-                {/*            value={uniqueData?.centeredSlides}*/}
-                {/*    >*/}
-                {/*        <option value='' >Select</option>*/}
-                {/*        <option value='false'>Fasle</option>*/}
-                {/*        <option value='true'>True</option>*/}
-                {/*    </select>*/}
-                {/*</div>*/}
-
-                {/*<TextInputFieldForWidget inputTitle='Speed :'*/}
-                {/*                         name='sliderSpeed'*/}
-                {/*                         type='number'*/}
-                {/*                         value={uniqueData?.sliderSpeed || 1000}*/}
-                {/*                         classNameValue='sliderSpeed'*/}
-                {/*                         placeHolder='Slider Speed'*/}
-                {/*                         onChangeHandler={onUniqueDataChangeHandler}*/}
-                {/*                         rendering={true}*/}
-                {/*/>*/}
-                {/*<TextInputFieldForWidget inputTitle='Space Between :'*/}
-                {/*                         name='spaceBetween'*/}
-                {/*                         type='number'*/}
-                {/*                         value={uniqueData?.spaceBetween || 0}*/}
-                {/*                         classNameValue='spaceBetween'*/}
-                {/*                         placeHolder='spaceBetween'*/}
-                {/*                         onChangeHandler={onUniqueDataChangeHandler}*/}
-                {/*                         rendering={true}*/}
-                {/*/>*/}
+                {openObjectEditorMobile ?
+                    <>
+                        <div className={'editor-section'}>
+                            <p>Inject Default Data:</p>
+                            {renderInjectorButtonsMobile}
+                        </div>
+                    <MonacoEditor
+                        language={'json'}
+                        name={'swiperConfigMobile'}
+                        defaultValue={JSON.stringify(uniqueData?.swiperConfigMobile, null, '\t')}
+                        value={JSON.stringify(uniqueData?.swiperConfigMobile, null, '\t')}
+                        className={'details'}
+                        onChange={onUniqueDataJsonChangeHandler}
+                    />
+                    </>
+                    : null
+                }
 
 
             </div>

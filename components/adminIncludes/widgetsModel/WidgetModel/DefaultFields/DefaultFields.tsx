@@ -157,7 +157,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                             textBox: !widgetSettings.textBox
                         })}
                         >
-                            open
+                            {widgetSettings.textBox ? 'close' : 'open'}
                         </button>
                     </div>
                     {widgetSettings.textBox ?
@@ -185,7 +185,8 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                         <button className={'btn btn-primary'} onClick={() => setWidgetSettings({
                             ...widgetSettings,
                             customStyleBox: !widgetSettings.customStyleBox
-                        })}>open
+                        })}>
+                            {widgetSettings.customStyleBox ? 'close' : 'open'}
                         </button>
                     </div>
                     {widgetSettings?.customStyleBox ?
@@ -217,7 +218,8 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                                 onClick={() => setWidgetSettings({
                                     ...widgetSettings,
                                     customScriptBox: !widgetSettings.customScriptBox
-                                })}>open
+                                })}>
+                            {widgetSettings.customScriptBox ? 'close' : 'open'}
                         </button>
                     </div>
                     {widgetSettings.customScriptBox ?

@@ -22,7 +22,16 @@
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields/DefaultFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/DefaultFields/DefaultFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetTypeFields/SliderWidgetTypeFields.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetTypeFields/SliderWidgetTypeFields.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetTypeFields/sliderDefaultData.ts" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetTypeFields/sliderDefaultData.ts" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" beforeDir="false" afterPath="$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/WidgetsRenderer/WidgetsRenderer.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCard.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCardMedia/MobileVideoCardMedia.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/mobile/MobileVideoCard/MobileVideoCardMedia/MobileVideoCardMedia.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/ImageSwiper/ImageSwiper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/ImageSwiper/ImageSwiper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiper.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/PostSwiper/PostSwiperPostCardImage.tsx" beforeDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -149,9 +158,9 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.build" />
+        <item itemvalue="npm.dev" />
         <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.test" />
       </list>
@@ -1094,7 +1103,7 @@
       <workItem from="1648913744358" duration="17234000" />
       <workItem from="1648995598627" duration="17052000" />
       <workItem from="1649067747056" duration="32652000" />
-      <workItem from="1649139348807" duration="19214000" />
+      <workItem from="1649139348807" duration="31470000" />
     </task>
     <servers />
   </component>

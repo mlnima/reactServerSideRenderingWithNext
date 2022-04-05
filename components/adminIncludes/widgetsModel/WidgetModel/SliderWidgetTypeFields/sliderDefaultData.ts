@@ -6,7 +6,7 @@ export const sliderDefaultData = {
             "control": "controlledSwiper"
         },
         "keyboard": false,
-        "autoplay": false,
+        "autoplay": true,
         "navigation": false,
         "effect": "cube",
         "modules": [
@@ -25,6 +25,7 @@ export const sliderDefaultData = {
     fade:{
         "spaceBetween":30,
         "effect": "fade",
+        "autoplay": true,
         "navigation":true,
         "pagination":{
             "clickable": true
@@ -37,6 +38,7 @@ export const sliderDefaultData = {
         "slidesPerView":"auto",
         "effect": "coverflow",
         "pagination":true,
+        "autoplay": true,
         "coverflowEffect":{
             "rotate": 50,
             "stretch": 0,
@@ -48,6 +50,7 @@ export const sliderDefaultData = {
     },
     flip:{
         "effect": "flip",
+        "autoplay": true,
         "grabCursor":true,
         "pagination":true,
         "navigation":true,
@@ -56,12 +59,14 @@ export const sliderDefaultData = {
     cards:{
         "effect": "cards",
         "grabCursor":true,
+        "centeredSlides":true,
         "autoplay": true,
         "modules":["EffectCards"]
     },
     creative:{
         "effect": "creative",
         "grabCursor":true,
+        "autoplay": true,
         "creativeEffect":{
             "prev": {
                 shadow: true,

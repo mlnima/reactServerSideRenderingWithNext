@@ -225,7 +225,7 @@ const WidgetModel = props => {
         const parseJsonData = JSON?.parse(e.target.value)
         if (parseJsonData){
             for (const property in parseJsonData){
-                console.log(property,parseJsonData[property])
+                // console.log(property,parseJsonData[property])
                 if (parseJsonData[property] === 'true'){
                     parseJsonData[property] = property === 'true'
                 }

@@ -30,6 +30,8 @@ import SwiperCore, {
     Lazy,
     Parallax
 } from 'swiper'
+import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 SwiperCore.use(
     [
@@ -52,15 +54,17 @@ SwiperCore.use(
 
 
 let StyledDiv = styled.div`
-  max-height: 80vh;
-
-  .image-swiper {
-    .swiper-wrapper {
-      .swiper-slide {
+  .swiper-slides-parent{
+    z-index: 10!important;
+    .swiper-button-prev,.swiper-button-next{
+      color: var(--main-active-color,#f90)!important;
+    }
+    .swiper-pagination{
+      span{
+        background-color: var(--main-active-color,#f90)!important;
       }
     }
   }
-
 `
 
 interface ImageSwiperPropTypes {
@@ -75,7 +79,15 @@ interface ImageSwiperPropTypes {
         }[],
         moreDetailsButtonTextContent: string,
         details: string,
-        swiperConfig:{
+        swiperConfigDesktop:{
+            effect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
+            spaceBetween: number,
+            navigation: boolean | {},
+            pagination: boolean | {},
+            centeredSlides: boolean,
+            slidesPerView: number ,
+        },
+        swiperConfigMobile:{
             effect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
             spaceBetween: number,
             navigation: boolean | {},
@@ -91,7 +103,7 @@ interface ImageSwiperPropTypes {
 const ImageSwiper: FC<ImageSwiperPropTypes> = ({uniqueData}) => {
 
     const [showDetails, setShowDetails] = useState(false);
-    //const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
+    const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
 
     const renderSlides = uniqueData?.imageSwiperData?.sort((a, b) => a.imageIndex > b.imageIndex ? 1 : -1)
         ?.map((imageData, index) => {
@@ -116,18 +128,19 @@ const ImageSwiper: FC<ImageSwiperPropTypes> = ({uniqueData}) => {
         })
 
     const swiperProps = useMemo(() => {
+        const deviceTypeData = isMobile ? 'swiperConfigMobile' : 'swiperConfigDesktop'
         return {
-            ...uniqueData.swiperConfig,
-            modules: uniqueData?.swiperConfig?.effect === 'cube' ? [EffectCube, Pagination] :
-                     uniqueData?.swiperConfig?.effect === 'flip' ? [EffectFlip, Pagination, Navigation] :
-                     uniqueData?.swiperConfig?.navigation === 'true' ? [Pagination, Navigation] : [],
+            ...(uniqueData?.[deviceTypeData] || {}),
+            modules: uniqueData?.[deviceTypeData]?.effect === 'cube' ? [EffectCube, Pagination] :
+                     uniqueData?.[deviceTypeData]?.effect === 'flip' ? [EffectFlip, Pagination, Navigation] :
+                     uniqueData?.[deviceTypeData]?.navigation === 'true' ? [Pagination, Navigation] : [],
         }
     }, [])
 
     return (
-        <StyledDiv className={'image-swiper-content'}>
+        <StyledDiv className={'swiper-content'}>
 
-            <Swiper className={`image-swiper ${uniqueData?.swiperConfig?.effect ? uniqueData?.swiperConfig?.effect : ''}`}
+            <Swiper className={`swiper-slides-parent ${swiperProps?.effect || '' }`}
                     {...swiperProps}
             >
                 {renderSlides}

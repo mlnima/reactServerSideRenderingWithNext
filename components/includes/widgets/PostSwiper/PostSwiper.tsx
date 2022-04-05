@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, FC, useMemo} from 'react';
+import React, {useRef, FC, useMemo} from 'react';
 import dynamic from "next/dynamic";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import {useRouter} from "next/router";
@@ -59,16 +59,33 @@ interface PostSwiperComponentTypes {
     _id?: string,
     posts?: PostTypes[],
     uniqueData?: {
-        sliderEffect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
         posts: PostTypes[],
         totalCount: number,
-        sliderSpeed: number,
-        spaceBetween: number,
-        navigation: boolean,
-        pagination: boolean,
-        centeredSlides: boolean,
-        paginationType: string,
-        slidesPerView: number | string,
+        // sliderEffect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
+
+        // sliderSpeed: number,
+        // spaceBetween: number,
+        // navigation: boolean,
+        // pagination: boolean,
+        // centeredSlides: boolean,
+        // paginationType: string,
+        // slidesPerView: number | string,
+        swiperConfigDesktop:{
+            effect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
+            spaceBetween: number,
+            navigation: boolean | {},
+            pagination: boolean | {},
+            centeredSlides: boolean,
+            slidesPerView: number ,
+        },
+        swiperConfigMobile:{
+            effect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
+            spaceBetween: number,
+            navigation: boolean | {},
+            pagination: boolean | {},
+            centeredSlides: boolean,
+            slidesPerView: number ,
+        },
     }
     widgetId?: string,
     postElementSize?: string,
@@ -77,38 +94,21 @@ interface PostSwiperComponentTypes {
 }
 
 
-interface PostSwiperStyledDivPropTypes {
-    cardWidth: number
-}
 
 
 let PostSwiperStyledDiv = styled.div`
-  width: calc(100vw);
 
-  .swiper {
-    height: ${({cardWidth}: PostSwiperStyledDivPropTypes) => ((cardWidth || 255) / 1.777) + 65}px;
-    padding-bottom: 50px;
-
-    .swiper-scrollbar {
-      height: 10px;
-      background-color: var(--post-element-text-color, #131314);
+  .swiper-slides-parent{
+    z-index: 2!important;
+    .swiper-button-prev,.swiper-button-next{
+      color: var(--main-active-color,#f90)!important;
     }
-
-    .swiper-wrapper {
-      position: relative;
-      margin: 0;
-
-      .swiper-slide {
-
+    .swiper-pagination{
+      bottom: 0px;
+      z-index: 3!important;
+      span{
+        background-color: var(--main-active-color,#f90)!important;
       }
-    }
-  }
-
-
-  @media only screen and (min-width: 768px) {
-    width: calc(100vw - 340px);
-    .swiper {
-      padding-bottom: 10px;
     }
   }
 `
@@ -116,19 +116,16 @@ let PostSwiperStyledDiv = styled.div`
 
 const PostSwiper: FC<PostSwiperComponentTypes> =
     ({
-         viewType,
          _id,
          posts,
          uniqueData,
          widgetId,
          postElementSize,
          isSidebar,
-         index
      }) => {
         const {locale} = useRouter()
         const dispatch = useDispatch()
         const swiperParent = useRef(null)
-        const [controlledSwiper, setControlledSwiper] = useState(null)
 
         const PostSwiperData = useSelector((store: StoreTypes) => {
             const elementSize = postElementSize ? postElementSize : store.settings?.design?.postElementSize
@@ -188,44 +185,19 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
         })
 
         const swiperProps = useMemo(() => {
-            const direction = typeof uniqueData?.paginationType === 'string' ?
-                uniqueData?.paginationType?.match('vertical') ? {direction: 'vertical'} : {} : {};
-            // const slidesPerView = uniqueData.slidesPerView ? {slidesPerView: uniqueData.slidesPerView} : {}
-            const spaceBetween = uniqueData.spaceBetween ? {spaceBetween: uniqueData.spaceBetween} : {}
-            const centeredSlides = uniqueData.centeredSlides ? {centeredSlides: uniqueData.spaceBetween} : {}
-
-
+            const deviceTypeData = PostSwiperData?.isMobile ? 'swiperConfigMobile' : 'swiperConfigDesktop'
             return {
-                modules: uniqueData?.sliderEffect === 'cube' ? [EffectCube, Pagination] : uniqueData.navigation ? [Pagination, Navigation] : [],
-                pagination: !uniqueData.pagination ? {} :
-                    typeof uniqueData?.paginationType === 'string' ?
-                        uniqueData?.paginationType?.match('progressbar|Fraction') ? {type: uniqueData.paginationType} :
-                            uniqueData?.paginationType?.match('dynamicBullets') ? {dynamicBullets: true} :
-                                uniqueData?.paginationType?.match('scrollbar') ? {hide: true} : {} : {},
-                ...direction,
-                ...spaceBetween,
-                // ...slidesPerView,
-                ...centeredSlides,
+                ...(uniqueData?.[deviceTypeData] || {}),
+                modules: uniqueData?.[deviceTypeData]?.effect === 'cube' ? [EffectCube, Pagination] :
+                    uniqueData?.[deviceTypeData]?.effect === 'flip' ? [EffectFlip, Pagination, Navigation] :
+                        uniqueData?.[deviceTypeData]?.navigation === 'true' ? [Pagination, Navigation] : [],
             }
-        }, [uniqueData])
+        }, [])
+
 
         return (
-            <PostSwiperStyledDiv ref={swiperParent} className='post-swiper-parent' cardWidth={PostSwiperData.cardWidth}>
-                {/*// @ts-ignore*/}
-                <Swiper className='post-swiper'
-                        tag="div"
-                        wrapperTag="div"
-                        controller={{control: controlledSwiper}}
-                        {...swiperProps}
-                        keyboard
-                        autoplay
-                        speed={uniqueData?.sliderSpeed || 1000}
-                        navigation={uniqueData?.navigation || false}
-                        effect={uniqueData?.sliderEffect}
-                        slidesPerView={window.innerWidth > 768 ? Math.floor(((window.innerWidth - 320) / PostSwiperData.cardWidth)) : Math.floor(window.innerWidth / PostSwiperData.cardWidth)}
-                    //spaceBetween={uniqueData?.spaceBetween || 10}
-                    // ref={swiperContainer}
-                >
+            <PostSwiperStyledDiv ref={swiperParent} className='swiper-content' >
+                <Swiper className='swiper-slides-parent'{...swiperProps}>
                     {renderSlides}
                 </Swiper>
             </PostSwiperStyledDiv>
@@ -235,26 +207,4 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
 export default PostSwiper;
 
 
-//background-color: var(--post-element-background-color, #131314);
-//margin: 0 5px !important;
-// width: ${({cardWidth}: { cardWidth: number }) => cardWidth}px !important;
 
-// a {
-//   img {
-//     width: ${({cardWidth}: { cardWidth: number }) => cardWidth}px;
-//     object-fit: contain;
-//   }
-//
-//   .post-slider-item-title {
-//     white-space: nowrap;
-//     overflow: hidden !important;
-//     text-overflow: ellipsis;
-//     display: block;
-//     font-size: small;
-//   }
-//
-//   h2 {
-//     color: var(--post-element-text-color);
-//     width: ${({cardWidth}: { cardWidth: number }) => cardWidth - 5}px;
-//   }
-// }

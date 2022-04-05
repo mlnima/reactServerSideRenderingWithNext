@@ -36,10 +36,11 @@ const MobileVideoCardStyledArticle = styled.article`
     .views-rating{
       font-size: 12px;
       height: 20px;
-      width: 100%;
+      width: 97%;
       display: flex;
       justify-content: space-between;
       align-items: center;
+      margin: auto;
       .video-card-views,.video-card-rating {
         color: var(--post-element-info-text-color, #939393);
         display: flex;
