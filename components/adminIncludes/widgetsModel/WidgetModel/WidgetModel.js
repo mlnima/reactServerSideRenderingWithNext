@@ -215,7 +215,7 @@ const WidgetModel = props => {
         setWidgetData({
             ...widgetData,
             uniqueData: {
-                ...(widgetData.uniqueData || {}),
+                ...(widgetData?.uniqueData || {}),
                 [e.target.name]: value
             }
         })
