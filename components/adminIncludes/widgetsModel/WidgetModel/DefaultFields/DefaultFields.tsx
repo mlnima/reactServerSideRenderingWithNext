@@ -1,4 +1,4 @@
-import React, {FC, useMemo} from "react";
+import React, {FC, useEffect, useMemo} from "react";
 import SelectFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
@@ -49,6 +49,14 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                 ..._.flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
             ]
         }, [customPages])
+
+
+        useEffect(() => {
+            if (widgetData.type === 'imageSwiper'){
+                console.log(widgetData)
+            }
+
+        }, [widgetData]);
         return (
             <>
                 <div className='checkInputFieldForWidget widgetSection'>

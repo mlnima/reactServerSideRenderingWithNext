@@ -220,6 +220,7 @@ const WidgetModel = props => {
             }
         })
     }
+
     const onUniqueDataJsonChangeHandler = (e) => {
         const parseJsonData = JSON?.parse(e.target.value)
         if (parseJsonData){
@@ -346,6 +347,7 @@ const WidgetModel = props => {
                     <DefaultFields widgetData={widgetData}
                                    widgetSettings={widgetSettings}
                                    onCheckboxChangeHandler={onCheckboxChangeHandler}
+                                   onChangeHandler={onChangeHandler}
                                    onTextInputsDataChangeHandler={onTextInputsDataChangeHandler}
                                    onChangeLanguageHandler={onChangeLanguageHandler}
                                    setWidgetSettings={setWidgetSettings}
