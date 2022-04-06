@@ -33,7 +33,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
         return {
             props: {
-                ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation']))
+               ...(await serverSideTranslations(context?.locale || process.env.NEXT_PUBLIC_DEFAULT_LOCAL as string, ['common', 'customTranslation']))
             }
         }
 

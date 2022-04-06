@@ -1,5 +1,6 @@
 import {FC, useMemo, useState} from 'react';
 import styled from "styled-components";
+import Link from "next/link";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css/autoplay';
 import 'swiper/css/controller';
@@ -13,7 +14,7 @@ import "swiper/css/effect-creative";
 import "swiper/css/effect-coverflow";
 import 'swiper/css';
 
-import Link from "next/link";
+
 import SwiperCore, {
     Navigation,
     Pagination,

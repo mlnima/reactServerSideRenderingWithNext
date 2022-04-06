@@ -110,9 +110,9 @@ const meta = (props: any) => {
     }, [props]);
 
 
-    useEffect(() => {
-        console.log(meta)
-    }, [meta]);
+    // useEffect(() => {
+    //     console.log(meta)
+    // }, [meta]);
 
     const onActiveEditingLanguageChangeHandler = (e: React.ChangeEvent<HTMLSelectElement>) => {
         setEditingData({

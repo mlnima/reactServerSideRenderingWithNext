@@ -81,6 +81,10 @@ export const hydrateGlobalState = (data) => dispatch => {
 
 export const getDefaultPageData =
     (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean }) => async dispatch => {
+        context.res.setHeader(
+            'Cache-Control',
+            'public, s-maxage=604800, stale-while-revalidate=604800'
+        )
 
         const cache = process.env.NODE_ENV !== 'development'
         const userAgent = context.req.headers['user-agent'];

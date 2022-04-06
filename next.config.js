@@ -68,14 +68,14 @@ const nextImageConfig = {
     },
 }
 
-const pwaSettings = {
-    pwa: {
-        dest: 'public',
-        register: true,
-        skipWaiting: true,
-        sw: '/sw.js'
-    }
-}
+// const pwaSettings = {
+//     pwa: {
+//         dest: 'public',
+//         register: true,
+//         skipWaiting: true,
+//         sw: '/sw.js'
+//     }
+// }
 
 const nextConfigs = {
     env: {},

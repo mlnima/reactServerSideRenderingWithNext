@@ -18,6 +18,7 @@ const dev = process.env.NODE_ENV !== 'production';
 const app = next({dev});
 const handle = app.getRequestHandler();
 const apiCache = require('apicache');
+
 const cors = require('cors');
 const compression = require('compression');
 const shouldCompress = require('./server/_variables/shouldCompress');
@@ -36,11 +37,50 @@ const searchSitemapController = require('./server/controllers/sitemapControllers
 // const _setSettingToEnvironmentVariables = require('./server/_variables/_setSettingToEnvironmentVariables')
 // _setSettingToEnvironmentVariables()
 
+
+
+
+//--------------------------------cache------------------------------------------
+const LRUCache = require('lru-cache');
+
+const ssrCache = new LRUCache({
+    max: 500 , /* cache size will be 100 MB using `return n.length` as length() function */
+    maxSize: 5000,
+    sizeCalculation: (value, key)=> {
+        return 1
+    },
+    dispose: (value, key) => {
+        // freeFromMemoryOrWhatever(value)
+    }
+    // maxAge: 1000 * 60 * 60 * 24 * 30
+});
+
+let pageCacheMiddleWare = async (req, res, next) => {
+
+    const key = req.url
+    const hasCache = ssrCache.has(key)
+
+    // End the request with page cache and bypass the rest code by omitting the next() and return
+    if (hasCache) {
+        console.log('we have the cache');
+        res.setHeader('x-cache', 'HIT')
+        return res.end(ssrCache.get(key))
+    }else{
+        console.log('we no NOT have the cache');
+        const html = await app.render(req, res, req.path, {...req.query,...req.params});
+        res.setHeader('x-cache', 'MISS');
+        ssrCache.set(key, html)
+        next()
+    }
+}
+
+
+
+//--------------------------------cache------------------------------------------
 const staticServeOptions = {
     root: './static/',
     headers: {'Content-Type': 'text/plain;charset=utf-8'}
 }
-
 
 const runServer = () => {
     const server = express();
@@ -51,6 +91,7 @@ const runServer = () => {
     } )
     server.use(cookieParser());
     server.use(fileUpload());
+    // server.use(middleware());
     server.use(bodyParser.json());
     server.use(xmlParser());
     server.use(compression({filter: shouldCompress}));
@@ -64,24 +105,43 @@ const runServer = () => {
     server.get('/manifest.json', cacheSuccesses,(req,res)=>{clientMainFestController(req,res)})
     //xml siteMap routes
     server.get('/sitemap.xsl', (req, res) => {return res.status(200).sendFile('sitemap.xsl', staticServeOptions)});
-    server.get('/sitemap.xml', (req, res) => {siteMapController.siteMap(req , res)});
-    server.get('/sitemap', (req, res) => {siteMapController.siteMap(req , res)});
-    server.get('/sitemaps/search.xml', (req, res) => {searchSitemapController(req , res)});
-    server.get('/sitemaps/actors.xml', (req, res) => {metaSitemapController.actors(req , res)});
-    server.get('/sitemaps/categories.xml', (req, res) => {metaSitemapController.categories(req , res)});
-    server.get('/sitemaps/tags.xml', (req, res) => {metaSitemapController.tags(req , res)});
-    server.get('/sitemaps/pages.xml', (req, res) => {pageSitemapController(req , res)});
-    server.get('/sitemaps/:month', (req, res) => {siteMapsController.siteMapMonths(req , res)});
-    server.get('/sitemap/:month/:pageNo', (req, res) => {subSiteMapsController.subSiteMapsController(req , res)});
+    server.get('/sitemap.xml',cacheSuccesses, (req, res) => {siteMapController.siteMap(req , res)});
+    server.get('/sitemap',cacheSuccesses, (req, res) => {siteMapController.siteMap(req , res)});
+    server.get('/sitemaps/search.xml',cacheSuccesses, (req, res) => {searchSitemapController(req , res)});
+    server.get('/sitemaps/actors.xml',cacheSuccesses, (req, res) => {metaSitemapController.actors(req , res)});
+    server.get('/sitemaps/categories.xml',cacheSuccesses, (req, res) => {metaSitemapController.categories(req , res)});
+    server.get('/sitemaps/tags.xml',cacheSuccesses, (req, res) => {metaSitemapController.tags(req , res)});
+    server.get('/sitemaps/pages.xml',cacheSuccesses, (req, res) => {pageSitemapController(req , res)});
+    server.get('/sitemaps/:month',cacheSuccesses, (req, res) => {siteMapsController.siteMapMonths(req , res)});
+    server.get('/sitemap/:month/:pageNo',cacheSuccesses, (req, res) => {subSiteMapsController.subSiteMapsController(req , res)});
 
     //api routes
     server.use('/api/admin',adminMainRouter);
     server.use('/api/v1',clientMainRouter);
 
-    server.get('*', (req, res) => {
-       // console.log('process req : ',process.pid)
+    // server.get('/_next/*', (req, res) => {
+    //     return  handle(req, res);
+    // });
+
+    server.get('/workbox/*', (req, res) => {
+        return  handle(req, res);
+    });
+
+    server.get('/admin/*', (req, res) => {
         return handle(req, res)
     });
+
+    server.get('/admin', (req, res) => {
+        return handle(req, res)
+    });
+
+    server.get('*', cacheSuccesses, (req, res) => {
+        return handle(req, res)
+    });
+
+    // server.get('*', (req, res) => {
+    //     return handle(req, res)
+    // });
 
 }
 

@@ -60,6 +60,7 @@
     "js-cookie": "^3.0.1",
     "jwt-decode": "^3.1.2",
     "lodash": "^4.17.21",
+    "lru-cache": "^7.7.3",
     "mailparser": "^3.4.0",
     "moment": "^2.29.1",
     "mongoose": "^6.2.9",
