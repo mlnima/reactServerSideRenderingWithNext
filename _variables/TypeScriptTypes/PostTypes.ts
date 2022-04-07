@@ -19,7 +19,7 @@ export interface PostTypes {
     videoScriptCode: string,
     format: string,
     comments:Comment[],
-    author:User,
+    author?:  User | string,
     status: string,
     source: any,
     updatedAt: string,

@@ -109,6 +109,7 @@ export const adminSaveNewPost = (data?: PostTypes, router?: any) => async (dispa
         postData: data,
         token: localStorage.wt
     };
+
     await Axios.post(`/api/admin/posts/createNewPost`, body)
         .then((res: AxiosResponse<any>) => {
             dispatch({

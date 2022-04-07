@@ -10,18 +10,15 @@ import RatingOption from '@components/adminIncludes/PostComponents/RatingOption/
 import {useRouter} from "next/router";
 import PostInformation from "@components/adminIncludes/PostComponents/PostInformation/PostInformation";
 import {languagesOptions} from "@_variables/_variables";
-import _ from "lodash";
 import styled from "styled-components";
-import {setAlert, setLoading} from "@store/clientActions/globalStateActions";
 import {useDispatch, useSelector} from "react-redux";
 import {
     adminChangeActiveEditingLanguage,
     adminEditPost,
     adminGetPost,
     adminNewPost,
-    adminSaveNewPost,
-    adminUpdatePost
-} from "../../../store/adminActions/adminPanelPostsActions";
+
+} from "@store/adminActions/adminPanelPostsActions";
 import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";

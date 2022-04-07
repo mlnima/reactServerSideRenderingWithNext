@@ -100,7 +100,7 @@ export interface User {
 
 
 export interface UserState {
-    userData?: User,
+    userData?: User ,
     socketId?: string,
     loggedIn: boolean,
     userPageData?: {

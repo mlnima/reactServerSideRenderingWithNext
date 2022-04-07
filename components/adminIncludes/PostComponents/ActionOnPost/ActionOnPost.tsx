@@ -3,39 +3,60 @@ import {useDispatch, useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {adminEditPost, adminSaveNewPost, adminUpdatePost} from "@store/adminActions/adminPanelPostsActions";
 import {setAlert} from "@store/clientActions/globalStateActions";
+import {useRouter} from "next/router";
+
 const ActionOnPostStyledDiv = styled.div`
   display: flex;
   justify-content: space-between;
   flex-wrap: wrap;
-  .custom-select{
+
+  .custom-select {
     width: 100%;
     margin: 10px 0;
   }
 `
 
 const ActionOnPost = () => {
-    const post = useSelector((store:StoreTypes) => store?.adminPanelPosts.post);
-    const userData = useSelector((store:StoreTypes) => store.user.userData);
+
+    const ActionOnPostData = useSelector((store: StoreTypes) =>{
+        return{
+            userId:store.user.userData?._id,
+            post:store?.adminPanelPosts.post
+        }
+    })
+
+    const router = useRouter()
     const dispatch = useDispatch()
 
     const onViewHandler = () => {
-        window.open(`/post/${post?.postType}/${post?._id}`, '_blank')
+        window.open(`/post/${ActionOnPostData?.post?.postType || 'video'}/${ActionOnPostData?.post?._id}`, '_blank')
     }
 
     const onSaveHandler = async () => {
         try {
-            if (post?._id) {
-                // @ts-ignore
-                dispatch(adminUpdatePost({...post,author: post?.author ? post.author : userData?._id}))
+            if (ActionOnPostData?.post?._id) {
+
+                dispatch(adminUpdatePost(
+                    {...ActionOnPostData?.post,
+                        //@ts-ignore
+                        author: ActionOnPostData?.post?.author?._id  || ActionOnPostData?.userId}))
             } else {
-                // @ts-ignore
-                dispatch(adminSaveNewPost({...post,author: userData?._id},router))
+
+                dispatch(adminSaveNewPost(
+                    {
+                         ...ActionOnPostData?.post,
+                          status : ActionOnPostData.post.status || 'draft',
+                          author: ActionOnPostData?.userId
+                      },
+                    router
+                ))
             }
         } catch (error) {
-            // @ts-ignore
             dispatch(setAlert({message: error.stack, type: 'error', active: true}))
         }
     }
+
+    console.log(ActionOnPostData)
 
 
     return (
@@ -43,8 +64,8 @@ const ActionOnPost = () => {
             <button className='btn btn-secondary' onClick={() => onViewHandler()}>View</button>
             <select className='custom-select'
                     name='status'
-                    value={post.status || 'draft'}
-                    onChange={e =>  dispatch(adminEditPost({[e.target.name]: e.target.value}))}
+                    value={ActionOnPostData?.post?.status || 'draft'}
+                    onChange={e => dispatch(adminEditPost({[e.target.name]: e.target.value}))}
             >
                 <option value='published'>Published</option>
                 <option value='draft'>Draft</option>
@@ -52,7 +73,7 @@ const ActionOnPost = () => {
                 <option value='pending'>Pending</option>
                 <option value='reported'>Reported</option>
             </select>
-            <button className='btn btn-primary' onClick={() => onSaveHandler()}>{post._id ? 'update' : 'save'}</button>
+            <button className='btn btn-primary' onClick={() => onSaveHandler()}>{ActionOnPostData?.post._id ? 'update' : 'save'}</button>
         </ActionOnPostStyledDiv>
     );
 };

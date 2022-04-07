@@ -8,6 +8,7 @@ module.exports = async (req, res) => {
         const findingPostsOptions = _adminQueryGeneratorForGettingPosts(req.query)
 
         const populateMeta = [
+            {path: 'author',select:['username','profileImage','role']},
             {path: 'actors', select: {'name': 1, 'type': 1}},
             {path: 'categories', select: {'name': 1, 'type': 1, 'imageUrl': 1}},
             {path: 'tags', select: {'name': 1, 'type': 1}}

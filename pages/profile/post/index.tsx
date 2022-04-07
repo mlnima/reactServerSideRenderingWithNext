@@ -66,7 +66,7 @@ const post: FC = () => {
         e.preventDefault()
         if (
             postData.editingPost._id &&
-            (postData.userData?._id === postData.editingPost.author?._id || postData.userData.role === 'administrator') &&
+            (postData.userData?._id === postData.editingPost.author || postData.userData.role === 'administrator') &&
             query.id
         ) {
             dispatch(userUpdatePost(postData.editingPost))
@@ -93,6 +93,7 @@ const post: FC = () => {
                     : null
                 }
                 {postData.editingPost?.author ?
+                    //@ts-ignore
                     <label>Author: {postData.editingPost?.author?.username}</label>
                     : null
                 }

@@ -217,6 +217,7 @@ export const userUpdatePost = (data: PostTypes) => async dispatch => {
     const categories = data.categories ? {categories: reduceArrayOfDataToIds(data.categories)} : {}
     const tags = data.tags ? {tags: reduceArrayOfDataToIds(data.tags)} : {}
     const actors = data.actors ? {actors: reduceArrayOfDataToIds(data.actors)} : {}
+    //@ts-ignore
     const author = data.author ? {author: data.author._id} : {}
 
     const postData = {

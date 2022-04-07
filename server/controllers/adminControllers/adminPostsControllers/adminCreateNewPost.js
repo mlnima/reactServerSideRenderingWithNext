@@ -7,7 +7,6 @@ module.exports = async (req, res) => {
     try {
         const editedNewPost = {
             ...newPost,
-            lastModify: Date.now(),
             tags: newPost.tags ? await updateSaveMetas(newPost.tags) : [],
             categories: newPost.categories ? await updateSaveMetas(newPost.categories) : [],
             actors: newPost.actors ? await updateSaveMetas(newPost.actors) : []
