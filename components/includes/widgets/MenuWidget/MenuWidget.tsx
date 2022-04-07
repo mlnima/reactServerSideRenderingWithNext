@@ -19,7 +19,6 @@ const MenuWidget: FC<MenuWidgetPropTypes> = ({menuItems}) => {
     const dispatch = useDispatch()
 
     const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
-
     const {asPath} = useRouter()
 
     const mobileNavigationOnClickHandler = (nextPath) => {

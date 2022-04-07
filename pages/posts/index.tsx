@@ -6,6 +6,7 @@ import {wrapper} from "@store/store";
 import {getPosts} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
+
 let StyledMain = styled.main`
   width: 100%;
   grid-area: main;
@@ -28,6 +29,7 @@ const posts: NextPage<any> = props => {
 };
 
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
+
 
     // @ts-ignore
     await store.dispatch(getDefaultPageData(

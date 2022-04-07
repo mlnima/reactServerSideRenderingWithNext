@@ -11,12 +11,17 @@ const Advertise: FC<AdvertisePropTypes> = ({adCode}) => {
     const [adCodeData, setAdCodeData] = useState(() => adCode)
 
     useEffect(() => {
-        setAdCodeData(adCode)
+        setAdCodeData(null)
+        setTimeout(()=>{
+            setAdCodeData(adCode)
+        },500)
     }, [router.pathname,router.query]);
 
     return (
         <>
-            {parse(adCodeData)}
+            {
+                adCodeData ? parse(adCodeData) : null
+            }
         </>
     )
 };

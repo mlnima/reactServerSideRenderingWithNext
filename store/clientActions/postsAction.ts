@@ -122,7 +122,7 @@ export const getPost = (_id: string | string[], locale) => async dispatch => {
                 ...(postData?.categories || []),
                 ...(postData?.actors || [])
             ].map(meta=>meta?.name)
-
+//video.movie
             dispatch({
                 type: SET_HEAD_DATA,
                 payload: {

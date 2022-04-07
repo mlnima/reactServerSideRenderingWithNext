@@ -26,18 +26,15 @@ const VideoTypePostPageStyledMain = styled(PostPageStyledMain)`
 `
 const VideoTypePostPage = () => {
 
-    const videoTypePostPageData = useSelector(({settings, user, posts}: StoreTypes) => {
+    const videoTypePostPageData = useSelector(({settings, posts}: StoreTypes) => {
         return {
             postPageStyle: settings?.design.postPageStyle,
-            role: user?.userData?.role,
             post: posts.post
         }
     })
 
     return (
         <VideoTypePostPageStyledMain className='main post-page' postPageStyle={videoTypePostPageData?.postPageStyle}>
-            {videoTypePostPageData?.role === 'administrator' ? <EditLinkForAdmin/> : null}
-            {/*<PostMetaDataToSiteHead/>*/}
             <VideoPlayer/>
             <PostTitle/>
             <div className='rating-price-download'>

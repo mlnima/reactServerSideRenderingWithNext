@@ -3,14 +3,14 @@ import styled from "styled-components";
 import {MenuItem} from "../../../../../_variables/TypeScriptTypes/WidgetsInterfaces";
 import MobileMenuWidgetItem from "./MobileMenuWidgetItem";
 
-const MobileMenuWidgetStyledDiv = styled.div`
-   background-color: var(--navigation-background-color, #18181b);
+const MobileMenuWidgetStyledAside = styled.aside`
+   //background-color: var(--navigation-background-color, #18181b);
    z-index: 10;
   .navigation-mobile-button-open {
     margin: 0;
     padding: 6px 12px;
-    width: 20px;
-    height: 20px;
+    width: 18px;
+    height: 16px;
     background-color: var(--navigation-text-color, #ccc);
     mask: url('/public/asset/images/icons/bars-solid.svg') no-repeat center;
     -webkit-mask: url('/public/asset/images/icons/bars-solid.svg') no-repeat center;
@@ -21,39 +21,42 @@ const MobileMenuWidgetStyledDiv = styled.div`
     top: 0;
     left: 0;
     bottom: 0;
-    width: 90%;
+    width: 85%;
     z-index: 1000;
     flex-direction: column;
     justify-content: flex-start;
-    padding: 0;
-    align-items: center;
+    padding: 50px 0 0 0;
+    align-items: flex-start;
     margin: 0;
     transition: all 0.5s ease 0s;
     position: fixed;
     ${(props: { open: boolean }) => props?.open ? `animation: navigationMobileSlide .2s linear alternate;` : `animation: none;`};
     display: ${(props: { open: boolean }) => props.open ? 'flex' : 'none'};
     overflow-y: auto;
-
+    
     .navigation-close-button {
+      position: absolute;
+      top: 16px;
+      right: 25px;
       align-self: flex-end;
       display: flex;
       justify-content: center;
       align-items: center;
       background-color: transparent;
       border: none;
-      width: 40px;
-      height: 40px;
-      margin-bottom: 20px;
+      width: 18px;
+      height: 18px;
+   
       color: var(--navigation-text-color, #ccc);
-      padding: 12px;
+      padding: 6px;
 
       .navigation-mobile-button-logo {
-        width: 24px;
-        height: 24px;
-        padding: 6px 12px;
+        width: 18px;
+        height: 18px;
+        padding: 6px ;
         background-color: var(--navigation-text-color, #ccc);
-        mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
-        -webkit-mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;
+        mask: url('/public/asset/images/icons/xmark-solid.svg') no-repeat center;
+        -webkit-mask: url('/public/asset/images/icons/xmark-solid.svg') no-repeat center;
       }
     }
   }
@@ -69,7 +72,7 @@ const MobileMenuWidget: FC<MobileMenuWidgetPropTypes> = ({menuItemsInOrder,mobil
     const [open, setOpen] = useState(false);
 
     return (
-        <MobileMenuWidgetStyledDiv open={open}>
+        <MobileMenuWidgetStyledAside open={open}>
             <ul onClick={() => open ? setOpen(false) : setOpen(true)}
                 className='navigation-mobile-button-open btn btn-transparent-light'
                 aria-label="open navigation">
@@ -81,7 +84,7 @@ const MobileMenuWidget: FC<MobileMenuWidgetPropTypes> = ({menuItemsInOrder,mobil
                 </li>
                 {menuItemsInOrder.map(menuItem=><MobileMenuWidgetItem menuItem={menuItem} key={menuItem.itemIndex} setOpen={setOpen} mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}/>)}
             </ul>
-        </MobileMenuWidgetStyledDiv>
+        </MobileMenuWidgetStyledAside>
     )
 };
 export default MobileMenuWidget

@@ -6,12 +6,10 @@ import {faTrash} from "@fortawesome/free-solid-svg-icons";
 import {faClone, faSave} from "@fortawesome/free-regular-svg-icons";
 import SearchTypeInputFields from "./SearchTypeInputFields/SearchTypeInputFields";
 import MultipleLinkWidgetModelFields from "./MultipleLinkWidgetModelFields/MultipleLinkWidgetModelFields";
-// import _ from "lodash";
 import LogoTypeWidgetModelFields from "./LogoTypeWidgetModelFields/LogoTypeWidgetModelFields";
 import {useDispatch, useSelector} from "react-redux";
 import SelectFieldForWidget from "./SelectFieldForWidget/SelectFieldForWidget";
 import MonacoEditor from "../../MonacoEditor/MonacoEditor";
-// import staticPositions from '../staticPositions';
 import postTypes from "../../../global/postTypes";
 import DayModeNightModeFields
     from "@components/adminIncludes/widgetsModel/WidgetModel/DayModeNightModeFields/DayModeNightModeFields";
@@ -21,7 +19,8 @@ import {
     adminUpdateWidget
 } from "@store/adminActions/adminWidgetsActions";
 import DefaultFields from "@components/adminIncludes/widgetsModel/WidgetModel/DefaultFields/DefaultFields";
-
+// import _ from "lodash";
+// import staticPositions from '../staticPositions';
 const AdvertiseWidgetModelFields = dynamic(() => import('./AdvertiseWidgetModelFields'));
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
 //const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));

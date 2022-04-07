@@ -1,14 +1,20 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
+import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import dynamic from "next/dynamic";
+
+const SearchButton = dynamic(() => import('../SearchButton/SearchButton'));
 
 const SearchInputComponentStyledForm = styled.form`
   display: flex;
   align-items: center;
-  width: clamp(100px, 200px, 400px);
+  width: clamp(100px, 100%, 400px);
   font-size: 1em;
   position: relative;
+
   .form-control-input {
     border: none;
   }
@@ -19,9 +25,14 @@ const SearchInputComponentStyledForm = styled.form`
     font-size: 1em;
   }
 `
-const SearchInputComponent = () => {
+
+
+const SearchInputComponent: FC = () => {
     const {t} = useTranslation('common');
     const router = useRouter()
+
+    const isMobile = useSelector((store: StoreTypes) => store.settings?.isMobile);
+
     const [state, setState] = useState({
         keyword: '',
     });
@@ -45,7 +56,9 @@ const SearchInputComponent = () => {
         }
     }
 
-    return (
+    if (isMobile) {
+        return <SearchButton/>
+    } else return (
         <SearchInputComponentStyledForm className='search-bar' onSubmit={e => onSearchHandler(e)}>
             <input className='form-control-input'
                    type='text' name='keyword'

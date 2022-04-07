@@ -26,6 +26,7 @@ const SearchButton = () => {
             <SearchButtonStyledButton onClick={onOpenHandler}
                                       aria-label={'search'}
                                       title={t('Search')}
+                                      className={'search-button'}
             >
                 <svg xmlns="http://www.w3.org/2000/svg"
                      width="24"

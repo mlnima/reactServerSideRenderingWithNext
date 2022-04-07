@@ -22,7 +22,7 @@ const SearchTypeInputFields = props => {
          <>
              <div className='textInputFieldForWidget widgetSection'>
                  <p>Search TextArea Place Holder</p>
-                 <input  className='searchInputPlaceHolder' name='searchInputPlaceHolder' placeholder='Search TextArea PlaceHolder'
+                 <input  className='searchInputPlaceHolder form-control-input' name='searchInputPlaceHolder' placeholder='Search TextArea PlaceHolder'
                          value={
                              props.widgetSettings.activeEditingLanguage === 'default' ?
                                  props.widgetData.searchInputPlaceHolder :
@@ -33,14 +33,14 @@ const SearchTypeInputFields = props => {
                          }
                          onChange={e => props.onTextInputsDataChangeHandler(e)}/>
              </div>
-             <div className='selectInputFieldForWidget widgetSection'>
-                 <p>Mobile Mode:</p>
-                 {/*<select name='mobileMode' value={props.widgetData.mobileMode} onChange={e => props.onChangeHandler(e)}>*/}
-                 {/*    <option value='true'>True</option>*/}
-                 {/*    <option value='false'>False</option>*/}
-                 {/*</select>*/}
-                 <input type='checkbox' name='mobileMode' value={props.widgetData.mobileMode} onChange={e=>mobileModeChangeHandler(e)}/>
-             </div>
+             {/*<div className='selectInputFieldForWidget widgetSection'>*/}
+             {/*    <p>Mobile Mode:</p>*/}
+             {/*    /!*<select name='mobileMode' value={props.widgetData.mobileMode} onChange={e => props.onChangeHandler(e)}>*!/*/}
+             {/*    /!*    <option value='true'>True</option>*!/*/}
+             {/*    /!*    <option value='false'>False</option>*!/*/}
+             {/*    /!*</select>*!/*/}
+             {/*    <input type='checkbox' name='mobileMode' value={props.widgetData.mobileMode} onChange={e=>mobileModeChangeHandler(e)}/>*/}
+             {/*</div>*/}
           </>
     );
 };

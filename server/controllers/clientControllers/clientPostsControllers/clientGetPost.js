@@ -57,12 +57,11 @@ const getRelatedPosts = async (relatedByType,relatedIds,currentPostId,postType)=
 
 
 module.exports = async (req, res) => {
-    // const _id = req.query._id;
 
     try {
         const validateId = mongoIdValidator(req.query._id);
         if (validateId){
-          const post = await postSchema.findOne({_id:req.query._id,status:'published'},'-comments').populate([
+          const post = await postSchema.findOne({_id:req.query._id},'-comments').populate([
               {path: 'author',select:['username','profileImage','role']},
               {path: 'categories',select:{'name':1,'type':1}},
               {path: 'tags',select:{'name':1,'type':1}},

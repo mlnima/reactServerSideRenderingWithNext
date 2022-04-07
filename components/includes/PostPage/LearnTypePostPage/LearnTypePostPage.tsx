@@ -49,17 +49,15 @@ const LearnTypePostPageStyledMain = styled(PostPageStyledMain)`
 
 const LearnTypePostPage = () => {
 
-    const learnTypePostPageData = useSelector(({settings, posts, user}: StoreTypes) => {
+    const learnTypePostPageData = useSelector(({settings, posts}: StoreTypes) => {
         return {
             postPageStyle: settings?.design.postPageStyle,
             post: posts.post,
-            role: user?.userData.role
         }
     })
 
     return (
         <LearnTypePostPageStyledMain className='main post-page' postPageStyle={learnTypePostPageData.postPageStyle}>
-            {learnTypePostPageData?.role === 'administrator' ? <EditLinkForAdmin/> : null}
             <PostTitle/>
             <LearnTypePostPageDescription/>
             <div className='rating-price-download'>

@@ -80,7 +80,7 @@ const AdminWidgets = () => {
                 </div>
                 <h2>Filter Position:</h2>
                 <WidgetPositionsSelect filter={filter} onChangeHandler={onFilter}/>
-                <h2>Widgets:</h2>
+                <h2>Widgets: <button onClick={()=>dispatch(adminPanelGetWidgets())} className={'btn btn-info'}>Refresh</button></h2>
                 <div className="widgets">
                     {availablePositions.map((position) => {
                         return (

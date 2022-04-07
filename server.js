@@ -34,49 +34,7 @@ const subSiteMapsController = require('./server/controllers/sitemapControllers/s
 const metaSitemapController = require('./server/controllers/sitemapControllers/metaSitemapController');
 const pageSitemapController = require('./server/controllers/sitemapControllers/pageSitemapController');
 const searchSitemapController = require('./server/controllers/sitemapControllers/searchSitemapController');
-// const _setSettingToEnvironmentVariables = require('./server/_variables/_setSettingToEnvironmentVariables')
-// _setSettingToEnvironmentVariables()
 
-
-
-
-//--------------------------------cache------------------------------------------
-const LRUCache = require('lru-cache');
-
-const ssrCache = new LRUCache({
-    max: 500 , /* cache size will be 100 MB using `return n.length` as length() function */
-    maxSize: 5000,
-    sizeCalculation: (value, key)=> {
-        return 1
-    },
-    dispose: (value, key) => {
-        // freeFromMemoryOrWhatever(value)
-    }
-    // maxAge: 1000 * 60 * 60 * 24 * 30
-});
-
-let pageCacheMiddleWare = async (req, res, next) => {
-
-    const key = req.url
-    const hasCache = ssrCache.has(key)
-
-    // End the request with page cache and bypass the rest code by omitting the next() and return
-    if (hasCache) {
-        console.log('we have the cache');
-        res.setHeader('x-cache', 'HIT')
-        return res.end(ssrCache.get(key))
-    }else{
-        console.log('we no NOT have the cache');
-        const html = await app.render(req, res, req.path, {...req.query,...req.params});
-        res.setHeader('x-cache', 'MISS');
-        ssrCache.set(key, html)
-        next()
-    }
-}
-
-
-
-//--------------------------------cache------------------------------------------
 const staticServeOptions = {
     root: './static/',
     headers: {'Content-Type': 'text/plain;charset=utf-8'}
@@ -123,17 +81,21 @@ const runServer = () => {
     //     return  handle(req, res);
     // });
 
-    server.get('/workbox/*', (req, res) => {
-        return  handle(req, res);
-    });
-
-    server.get('/admin/*', (req, res) => {
-        return handle(req, res)
-    });
-
-    server.get('/admin', (req, res) => {
-        return handle(req, res)
-    });
+    // server.get('/_next/image*', (req, res) => {
+    //     return  handle(req, res);
+    // });
+    //
+    // server.get('/workbox/*', (req, res) => {
+    //     return  handle(req, res);
+    // });
+    //
+    // server.get('/admin/*', (req, res) => {
+    //     return handle(req, res)
+    // });
+    //
+    // server.get('/admin', (req, res) => {
+    //     return handle(req, res)
+    // });
 
     server.get('*', cacheSuccesses, (req, res) => {
         return handle(req, res)
@@ -161,7 +123,7 @@ if (!process.env.CPU_CORES_ALLOW_TO_USE || process.env.NODE_ENV !== 'production'
             })
         }
     }else {
-      //  console.log('process from cluster : ',process.pid)
+
         app.prepare().then(()=>runServer()).catch((ex) => {
             console.log('exit error:', ex.stack)
         });
@@ -171,14 +133,3 @@ if (!process.env.CPU_CORES_ALLOW_TO_USE || process.env.NODE_ENV !== 'production'
 
 
 
-
-// app.prepare().then(()=>runServer()).catch((ex) => {
-//     console.log('exit error:', ex.stack)
-// });
-
-
-
-// const credentials = process.env.NEXT_PUBLIC_SSL === 'true' ? {
-//     key: fs.readFileSync('./server/https/localhost-key.pem'),
-//     cert: fs.readFileSync('./server/https/localhost.pem')
-// } : {}

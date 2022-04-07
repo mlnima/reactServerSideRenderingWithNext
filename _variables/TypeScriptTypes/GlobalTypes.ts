@@ -257,6 +257,7 @@ export interface SettingsStateTypes {
 
 export interface GlobalStateTypes {
     loginRegisterFormPopup: boolean | string,
+    beforeUnload:boolean,
     loading: boolean,
     notFoundPage: boolean,
     isSiteIdentitySet: boolean,

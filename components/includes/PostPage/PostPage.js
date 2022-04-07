@@ -6,9 +6,9 @@ import {useSelector} from "react-redux";
 import ratingCalculator from "../../../_variables/util/ratingCalculator";
 import RelatedPostsRenderer from "./components/RelatedPostsRenderer";
 const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
-const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'),{ssr:false})
+// const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'),{ssr:false})
 // const PostMetaDataToSiteHead = dynamic(() => import('./components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
-const VideoPlayer = dynamic(() => import('./components/VideoPlayer/VideoPlayer'))
+// const VideoPlayer = dynamic(() => import('./components/VideoPlayer/VideoPlayer'))
 const SlideShow = dynamic(() => import('./components/SlideShow/SlideShow'))
 const PostTitle = dynamic(() => import('./components/PostTitle/PostTitle'))
 const PostDescription = dynamic(() => import('./components/PostDescription/PostDescription'))
@@ -22,12 +22,10 @@ const CommentFrom = dynamic(() => import('./components/CommentFrom/CommentFrom')
 
 const PostPage = ( ) => {
     const postPageStyle = useSelector(store => store?.settings.design.postPageStyle)
-    const userData = useSelector((store) => store?.user?.userData)
     const identity = useSelector((store) => store?.settings.identity);
     const comments = useSelector(store => store?.posts?.comments)
     const post = useSelector((store ) => store?.posts.post);
-    // const settings = useSelector((store) => store?.settings);
-    // const router = useRouter()
+
 
     const [state, setState] = useState({
         likeValue: 0,
@@ -66,12 +64,6 @@ const PostPage = ( ) => {
     return (
         <PostPageStyledMain className='main post-page' postPageStyle={postPageStyle}>
 
-            {userData?.role === 'administrator' ? <EditLinkForAdmin /> :null}
-
-            {/*<PostMetaDataToSiteHead/>*/}
-
-            {post?.postType === 'video' ? <VideoPlayer post={post}/> : null}
-
             {post?.postType === 'product' ? <SlideShow post={post} sidebar={identity?.data?.postPageSidebar} deviceWidth={deviceWidth}/> : null}
 
             {post?.postType === 'promotion' || post?.postType === 'article' ? <PostTitle title={post?.title} translations={post?.translations}/> : null}
@@ -98,9 +90,6 @@ const PostPage = ( ) => {
 
             {post?.postType !== 'promotion' && post?.postType !== 'article' ? <PostDescription description={post?.description} translations={post?.translations}/> : null}
 
-
-            {/*<PostInfo {...post} rating='enable'/>*/}
-            <PostMeta type='actors' data={post?.actors || []}/>
             <PostMeta type='tags' data={post?.tags || []}/>
             <PostMeta type='categories' data={post?.categories || []}/>
             <div className='under-post-widget-area'>

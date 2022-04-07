@@ -11,6 +11,7 @@ import {
 
 const initialState = {
     loginRegisterFormPopup:false,
+    beforeUnload:false,
     loading:false,
     notFoundPage:false,
     isSiteIdentitySet:false,
