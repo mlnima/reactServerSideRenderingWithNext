@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import {ChangeEvent, FC} from 'react';
 import TableBodyItemSection from './TableBodyItemSection/TableBodyItemSection'
 import TableBodyItemDirectAction from './TableBodyItemDirectAction/TableBodyItemDirectAction'
 import styled from "styled-components";
@@ -64,17 +64,19 @@ const TableBodyItem: FC<TableBodyItemPropType> =
          setSelectedItems
     }) => {
 
-    const properties = tableItemProperties?.[assetsType] || []
+//@ts-ignore
+    const properties = tableItemProperties?.[assetsType]  || []
 
-    const onSelectChangeHandler = e => {
+    const onSelectChangeHandler = (e: ChangeEvent<HTMLInputElement>) => {
         e.target.checked ?
             setSelectedItems([...selectedItems, data._id]) :
             setSelectedItems(selectedItems.filter(i => i !== data._id))
     }
 
-    const renderProperties = properties.map(property => {
+    const renderProperties = properties.map((property : string) => {
         return (
-            <TableBodyItemSection key={property} dataValue={data[property]} dataName={property}/>
+           //@ts-ignore
+            <TableBodyItemSection key={property} dataValue={data?.[property]} dataName={property}/>
         )
     })
 

@@ -1,7 +1,7 @@
 import React, {FC} from 'react';
 import dynamic from "next/dynamic";
 import {useSelector} from 'react-redux';
-import {StoreTypes} from "../../../../_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const MobileAuthentication = dynamic(
     () => import('./MobileAuthentication/MobileAuthentication'), {ssr: false});

@@ -8,10 +8,9 @@ import {useRouter} from "next/router";
 import MobileCategoryCardMedia from "@components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCardMedia";
 
 const MobileCategoryCardStyledArticle = styled.article`
-  margin: 1vw;
   background-color: var(--post-element-background-color, #131314);
-  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
-  max-width: 320px;
+  width: 100%;
+
   .category-card-link{
     width: 100%;
     color: var(--post-element-text-color, #ccc);
@@ -19,8 +18,6 @@ const MobileCategoryCardStyledArticle = styled.article`
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 95%;
-      margin: auto;
       
       .category-card-title, .category-card-count {
         color: var(--post-element-text-color, #ccc);
@@ -46,18 +43,18 @@ const MobileCategoryCardStyledArticle = styled.article`
 `
 
 interface MobileCategoryCardPropTypes {
-    postsPerRawForMobile: number,
     category: Meta,
     onActivateLoadingHandler: any,
-    index?:number
+    index?:number,
+    isAppleMobileDevice:boolean
 }
 
 const MobileCategoryCard: FC<MobileCategoryCardPropTypes> =
     ({
          category,
          onActivateLoadingHandler,
-         postsPerRawForMobile,
-         index
+         index,
+         isAppleMobileDevice
      }) => {
 
         const {t} = useTranslation('customTranslation');
@@ -71,7 +68,7 @@ const MobileCategoryCard: FC<MobileCategoryCardPropTypes> =
         }, [category?.name]);
 
         return (
-            <MobileCategoryCardStyledArticle postsPerRawForMobile={postsPerRawForMobile} >
+            <MobileCategoryCardStyledArticle >
                 <Link href={`/category/${category?._id}`}>
                     <a className='category-card-link'
                        onClick={onActivateLoadingHandler}
@@ -80,8 +77,8 @@ const MobileCategoryCard: FC<MobileCategoryCardPropTypes> =
                         <div className={'mobile-category-card-image'}>
                             <MobileCategoryCardMedia imageUrl={category.imageUrl}
                                                      mediaAlt={cardTitle as string}
-                                                     postsPerRawForMobile={postsPerRawForMobile}
                                                      index={index}
+                                                     isAppleMobileDevice={isAppleMobileDevice}
                             />
                         </div>
                         <div className={'category-card-info'}>

@@ -33,9 +33,7 @@ const PostsPage = () => {
     return (
         <Fragment>
             <PostsContainer className='posts-container'>
-                <PostsRenderer
-                    posts={posts}
-                 />
+                <PostsRenderer posts={posts}/>
             </PostsContainer>
             <PaginationComponent
                 isActive={true}

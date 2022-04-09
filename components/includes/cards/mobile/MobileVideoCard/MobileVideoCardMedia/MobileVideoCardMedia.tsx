@@ -3,12 +3,14 @@ import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import MobileCardImageRenderer from "../../../mobileAsset/MobileCardImageRenderer";
+
 const VideoCardInfo = dynamic(() => import('../MobileVideoCardInfo'));
 const MobileVideoCardTrailer = dynamic(() => import('./MobileVideoCardTrailer'), {ssr: false});
 
 let MobileVideoCardMediaStyledDiv = styled.div`
   position: relative;
-  &:after{
+  
+  &:after {
     display: block;
     position: absolute;
     top: 0;
@@ -16,17 +18,18 @@ let MobileVideoCardMediaStyledDiv = styled.div`
     width: 100%;
     content: '';
     background: #000;
-    background: -moz-linear-gradient(top,rgba(255,255,255,0) 80%,#000 110%);
-    background: -webkit-linear-gradient(top,rgba(255,255,255,0) 80%,#000 110%);
-    background: linear-gradient(to bottom,rgba(255,255,255,0) 80%,#000 110%);
+    //background: -moz-linear-gradient(top, rgba(255, 255, 255, 0) 80%, #000 110%);
+    //background: -webkit-linear-gradient(top, rgba(255, 255, 255, 0) 80%, #000 110%);
+    //background: linear-gradient(to bottom, rgba(255, 255, 255, 0) 80%, #000 110%);
+
+    background: -moz-linear-gradient(to top,#000 -14%,rgba(0,0,0,0) 17%);
+    background: -webkit-gradient(to top,color-stop(-14%,#000),color-stop(17%,rgba(0,0,0,0)));
+    background: -webkit-linear-gradient(to top,#000 -14%,rgba(0,0,0,0) 17%);
+    background: -o-linear-gradient(to top,#000 -14%,rgba(0,0,0,0) 17%);
+    background: -ms-linear-gradient(to top,#000 -14%,rgba(0,0,0,0) 17%);
+    background: linear-gradient(to top,#000 -14%,rgba(0,0,0,0) 17%);
   }
   
-  .video-card-image {
-    width: 100%;
-    height: calc(100% / 1.777);
-    object-fit: contain;
-  }
-
   .video-card-info-data {
     position: absolute;
     color: var(--post-element-text-color, #ccc);
@@ -38,14 +41,14 @@ let MobileVideoCardMediaStyledDiv = styled.div`
     display: flex;
     align-items: center;
   }
-  
+
   .video-card-quality {
-    bottom: 3px;
+    bottom: 1px;
     right: 45px;
   }
 
   .video-card-duration {
-    bottom: 3px;
+    bottom: 1px;
     right: 5px;
   }
 `
@@ -53,63 +56,60 @@ let MobileVideoCardMediaStyledDiv = styled.div`
 interface MobileVideoCardMediaPropTypes {
     post: PostTypes,
     mediaAlt: string,
-    postsPerRawForMobile: number,
     quality: string,
     duration: string,
-    index?:number
+    index?: number,
+    isAppleMobileDevice:boolean
 }
 
-const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> = 
+const VideoCardMedia: FC<MobileVideoCardMediaPropTypes> =
     ({
          post,
          mediaAlt,
-         postsPerRawForMobile,
          quality,
          duration,
-         index
+         index,
+         isAppleMobileDevice
      }) => {
-    
 
-    const [hover, setHover] = useState(false)
-    const videoTrailerUrlSource = useMemo(() => post.videoTrailerUrl, [post])
+        const [hover, setHover] = useState(false)
+        const videoTrailerUrlSource = useMemo(() => post.videoTrailerUrl, [post])
 
-    const hoverHandler = () => {
-        hover ? setHover(false) : setHover(true)
-    }
+        const hoverHandler = () => {
+            hover ? setHover(false) : setHover(true)
+        }
 
-    useEffect(() => {
-        hover ? setHover(false) : null
-    }, [post]);
+        useEffect(() => {
+            hover ? setHover(false) : null
+        }, [post]);
 
-    if (post?.videoTrailerUrl && hover) {
-        return (
-            <MobileVideoCardTrailer hover={hover}
-                                    hoverHandler={hoverHandler}
-                                    videoTrailerUrl={videoTrailerUrlSource}
-                                    postsPerRawForMobile={postsPerRawForMobile}
+        if (post?.videoTrailerUrl && hover) {
+            return <MobileVideoCardTrailer hover={hover}
+                                           hoverHandler={hoverHandler}
+                                           videoTrailerUrl={videoTrailerUrlSource}
             />
-        )
-    } else {
+        } else {
 
-        return (
+            return (
 
-            <MobileVideoCardMediaStyledDiv className={'mobile-video-card-media'}
-                                           onMouseEnter={hoverHandler}
-                                           onMouseOut={hoverHandler}
-                                           onTouchStartCapture={hoverHandler}
-                                           onTouchEnd={hoverHandler}
-            >
-                <MobileCardImageRenderer imageUrl={post.mainThumbnail}
-                                         postsPerRawForMobile={postsPerRawForMobile}
-                                         mediaAlt={mediaAlt}
-                                         index={index}
-                />
-                <VideoCardInfo duration={duration}
-                               quality={quality}
-                />
-            </MobileVideoCardMediaStyledDiv>
-        )
-    }
-};
+                <MobileVideoCardMediaStyledDiv className={'mobile-video-card-media'}
+                                               onMouseEnter={hoverHandler}
+                                               onMouseOut={hoverHandler}
+                                               onTouchStartCapture={hoverHandler}
+                                               onTouchEnd={hoverHandler}
+                >
+                    <MobileCardImageRenderer imageUrl={post.mainThumbnail}
+                                             mediaAlt={mediaAlt}
+                                             index={index}
+                                             isAppleMobileDevice={isAppleMobileDevice}
+                    />
+
+                    <VideoCardInfo duration={duration}
+                                   quality={quality}
+                    />
+                </MobileVideoCardMediaStyledDiv>
+            )
+        }
+    };
 export default VideoCardMedia;
 

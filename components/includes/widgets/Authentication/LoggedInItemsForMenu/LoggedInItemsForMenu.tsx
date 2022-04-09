@@ -15,28 +15,32 @@ const LoggedInItemsForMenu: FC = () => {
         <>
             {identity.membership ?
                 <>
-                    <Link href={`/profile`}>
+                    <Link href={`/messenger`}>
                         <a className={'logged-item btn btn-transparent-light'}>
-                            <span className={'my-profile icon'}/>
-                            {t(`Profile`)}
+                            <span className={'messages icon'}/>
+                            {/*{t(`Messages`)}*/}
                         </a>
                     </Link>
+
+
                     {identity.allowUserToPost ?
                         <Link href={`/profile/posts/newPost?postType=article`}>
                             <a className={'logged-item btn btn-transparent-light add-new-Post'}>
                                 <span className={'add-new-Post icon'}/>
-                                {t(`Create New Post`)}
+                                {/*{t(`Create New Post`)}*/}
                             </a>
                         </Link>
                         : null
                     }
 
-                    <Link href={`/messenger`}>
-                        <a className={'logged-item btn btn-transparent-light'}>
-                            <span className={'messages icon'}/>
-                            {t(`Messages`)}
+                    <Link href={`/profile`}>
+                        <a className={'logged-item btn btn-transparent-light'} >
+                            <span className={'my-profile icon'}/>
+                            {/*{t(`Profile`)}*/}
                         </a>
                     </Link>
+
+
                 </>
                 : null
             }
@@ -45,7 +49,7 @@ const LoggedInItemsForMenu: FC = () => {
                 dispatch(setLoginRegisterFormStatus(false))
             }}>
                 <span className={'sign-out icon'}/>
-                {t(`Logout`)}
+                {/*{t(`Logout`)}*/}
             </span>
         </>
     )

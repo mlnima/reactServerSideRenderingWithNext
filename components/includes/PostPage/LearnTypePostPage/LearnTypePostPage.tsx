@@ -7,8 +7,6 @@ import PostTitle from '../components/PostTitle/PostTitle'
 import LearnTypePostPageDescription from "./components/LearnTypePostPageDescription";
 import RelatedPostsRenderer from "@components/includes/PostPage/components/RelatedPostsRenderer";
 import React from "react";
-const EditLinkForAdmin = dynamic(() =>
-    import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
 
 const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/CommentsRenderer'))

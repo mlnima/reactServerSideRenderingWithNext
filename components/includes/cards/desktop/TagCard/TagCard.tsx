@@ -9,15 +9,20 @@ import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 
 const TagCardStyledDiv = styled.div`
-  margin: 5px;
   background-color: var(--post-element-background-color, #131314);
+  width: 100%;
+  font-size: 14px;
+  
   .tag-card-link {
+    position: relative;
+    display: block;
+    cursor: pointer;
     .tag-card-info {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 95%;
-      margin: auto;
+      //width: 95%;
+      //margin: auto;
 
       .tag-card-title, .tag-card-count {
         width: fit-content;
@@ -44,13 +49,12 @@ const TagCardStyledDiv = styled.div`
 `
 
 interface TagCardPropTypes {
-    cardWidth: number,
     tag: Meta,
     onActivateLoadingHandler: any
     index?:number
 }
 
-const TagCard: FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler,index}) => {
+const TagCard: FC<TagCardPropTypes> = ({ tag, onActivateLoadingHandler,index}) => {
 
     const {t} = useTranslation('customTranslation');
     const {locale} = useRouter();
@@ -69,13 +73,12 @@ const TagCard: FC<TagCardPropTypes> = ({cardWidth, tag, onActivateLoadingHandler
                    onClick={onActivateLoadingHandler}
                    title={cardTitle as string}
                 >
-                    <div className={'tag-card-image'}>
-                        <TagCardMedia cardWidth={cardWidth}
-                                      imageUrl={tag.imageUrl}
+                    {/*<div className={'tag-card-image'}>*/}
+                        <TagCardMedia imageUrl={tag.imageUrl}
                                       mediaAlt={cardTitle as string}
                                       index={index}
                         />
-                    </div>
+                    {/*</div>*/}
                     <div className={'tag-card-info'}>
                         <h3 className={'tag-card-title'}>
                             {cardTitle}

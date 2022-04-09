@@ -4,67 +4,50 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
 
 let LearnTypeCardMediaStyledDiv = styled.div`
-   width: 100%;
-  .learn-post-card-image {
-    width: 100%;
-    height: calc( 100% / 1.777);
-    object-fit: contain;
-
-  }
-
-  @media only screen and (min-width: 768px) {
-    .learn-post-card-image {
-      width: ${(props: { cardWidth: number, postElementSize: string }) => props.cardWidth}px;
-      height: calc(${(props: { cardWidth: number, postElementSize: string }) => props.cardWidth} / 1.777)px;
-    }
-  }
+  position: relative;
 `
 
 interface LearnTypeCardMediaPropTypes {
     post: PostTypes,
     categoriesImages?: string[],
-    postElementSize: string,
-    cardWidth: number,
     mediaAlt: string,
-    index?:number
-
+    index?: number
 }
 
-const LearnTypeCardMedia :FC<LearnTypeCardMediaPropTypes> = (props) => {
-    const dynamicImage = true
-    const [imageUrlToRender, setImageUrlToRender] = useState(() => {
-        if (props?.post?.mainThumbnail) {
-            return props?.post?.mainThumbnail
-        } else if (props?.categoriesImages?.length) {
-            return props.categoriesImages[Math.floor(Math.random() * props?.categoriesImages?.length)]
-        }
-    })
+const LearnTypeCardMedia: FC<LearnTypeCardMediaPropTypes> =
+    ({
+         mediaAlt,
+         index,
+         post,
+         categoriesImages
 
-    useEffect(() => {
-        if (dynamicImage && !props?.post?.mainThumbnail && props?.categoriesImages?.length) {
-            setInterval(() => {
-                setImageUrlToRender(props.categoriesImages[Math.floor(Math.random() * props.categoriesImages?.length)])
-            }, 7000)
-        }
-    }, []);
+     }) => {
+        const dynamicImage = true
+        const [imageUrlToRender, setImageUrlToRender] = useState(() => {
+            if (post?.mainThumbnail) {
+                return post?.mainThumbnail
+            } else if (categoriesImages?.length) {
+                return categoriesImages[Math.floor(Math.random() * categoriesImages?.length)]
+            }
+        })
 
-    return (
+        useEffect(() => {
+            if (dynamicImage && !post?.mainThumbnail && categoriesImages?.length) {
+                setInterval(() => {
+                    setImageUrlToRender(categoriesImages[Math.floor(Math.random() * categoriesImages?.length)])
+                }, 7000)
+            }
+        }, []);
 
-        <LearnTypeCardMediaStyledDiv className='learn-post-card-media' postElementSize={props.postElementSize} cardWidth={props.cardWidth}>
-            <CardImageRenderer imageUrl={imageUrlToRender}
-                               mediaAlt={props.mediaAlt}
-                               cardWidth={props.cardWidth}
-                               cardHeight={props.cardWidth/ 1.777}
-                               index={props.index}
-            />
-        </LearnTypeCardMediaStyledDiv>
-    );
-};
+        return (
+
+            <LearnTypeCardMediaStyledDiv className='learn-post-card-media'>
+                <CardImageRenderer imageUrl={imageUrlToRender}
+                                   mediaAlt={mediaAlt}
+                                   index={index}
+
+                />
+            </LearnTypeCardMediaStyledDiv>
+        );
+    };
 export default LearnTypeCardMedia;
-
-// <img className='learn-post-card-image'
-//      alt={props.mediaAlt}
-//     //src={props?.post?.mainThumbnail}
-//      src={imageUrlToRender}
-//      onError={() => setGotError(true)}
-// />

@@ -8,53 +8,81 @@ import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 
 const ActorCardStyledDiv = styled.div`
-  margin: 5px;
   background-color: var(--post-element-background-color, #131314);
+  //width: 100%;
+  width: 140px;
+  font-size: 14px;
+  margin: auto;
   .actor-card-link {
-    display: flex;
-    justify-content: flex-start;
-    flex-direction: column;
-    width: 140px;
-    margin: auto;
-    font-size: 14px;
+    position: relative;
+    display: block;
+    cursor: pointer;
+    
+    .actor-card-image{
+      margin: auto;
+      display: flex;
+      justify-content: center;
+      width: 140px;
+      height: 140px;
+      position: relative;
+      img{
+        object-fit: cover;
+        width: 140px !important;
+        height: 140px !important;
+      }
+      div{
+        span{
+          img{
+            object-fit: cover !important;
+            width: 140px !important;
+            height: 140px !important;
+          }
+        }
+      }
 
-    .actor-card-title {
-      width: fit-content;
-      color: var(--main-active-color);
-      text-overflow: ellipsis;
-      overflow: hidden;
-      -webkit-box-orient: vertical;
-      padding: 3px 0;
-      margin: 3px 0;
-
-      &:hover {
-        color: var(--post-element-text-color, #fff);
+    }
+    
+    header{
+      width: 100%;
+      .card-header{
+        width: min-content;
+        color: var(--main-active-color);
+        text-overflow: ellipsis;
+        overflow: hidden;
+        -webkit-box-orient: vertical;
+        
+        &:hover {
+          color: var(--post-element-text-color, #fff);
+        }
       }
     }
-
+    
     .actor-card-count {
-      margin: 0 2px;
+      width: min-content;
+      //margin: 0 2px;
       color: var(--main-text-color);
     }
   }
-  @media only screen and (min-width: 768px) {
-    margin: 5px;
-    font-size: 14px;
-    .actor-card-title {
-      font-size: 14px;
-    }
-  }
+  //@media only screen and (min-width: 768px) {
+  //  margin: 5px;
+  //  font-size: 14px;
+  //  .actor-card-title {
+  //    font-size: 14px;
+  //  }
+  //}
 `
 interface ActorCardPropTypes{
     actor:Meta,
     onActivateLoadingHandler:any,
-    index?:number
+    index?:number,
+    isAppleMobileDevice?:boolean
 }
 
 const ActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler,index}) => {
 
     const {t} = useTranslation('common');
     const actorName = capitalizeFirstLetter(actor?.name)
+
 
     return (
         <ActorCardStyledDiv className={'actor-card'}>
@@ -64,9 +92,15 @@ const ActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler,ind
                    title={actor?.name}
                 >
                     <div className={'actor-card-image'}>
-                        <ActorCardMedia imageUrl={actor.imageUrl} mediaAlt={actor.name}   index={index}/>
+                        <ActorCardMedia imageUrl={actor.imageUrl}
+                                        mediaAlt={actor.name}
+                                        index={index}
+                        />
                     </div>
-                    <h3 className={'actor-card-title'}> {actorName}</h3>
+                    <header>
+                        <span className={'card-header'}> {actorName}</span>
+                    </header>
+
                     {actor?.count ? <span className={'actor-card-count'}>{actor?.count} {t('Videos')}</span> : null}
                 </a>
             </Link>

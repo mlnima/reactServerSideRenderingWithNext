@@ -8,17 +8,18 @@ import capitalizeFirstLetter from "@_variables/util/capitalizeFirstLetter";
 import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const CategoryCardStyledDiv = styled.div`
-  margin: 5px;
   background-color: var(--post-element-background-color, #131314);
-
+  width: 100%;
+  font-size: 14px;
   .category-card-link{
-    width: 100%;
+    position: relative;
+    display: block;
+    cursor: pointer;
     .category-card-info {
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 95%;
-      margin: auto;
+
 
       .category-card-title, .category-card-count {
         color: var(--post-element-text-color, #ccc);
@@ -48,19 +49,12 @@ const CategoryCardStyledDiv = styled.div`
 `
 
 interface CategoryCardPropTypes {
-    cardWidth: number,
     category: Meta,
     onActivateLoadingHandler: any,
     index?:number
 }
 
-const CategoryCard: FC<CategoryCardPropTypes> =
-    ({
-         cardWidth,
-         category,
-         onActivateLoadingHandler,
-         index
-    }) => {
+const CategoryCard: FC<CategoryCardPropTypes> = ({category, onActivateLoadingHandler, index}) => {
 
     const {t} = useTranslation('customTranslation');
     const {locale} = useRouter();
@@ -79,13 +73,12 @@ const CategoryCard: FC<CategoryCardPropTypes> =
                    onClick={onActivateLoadingHandler}
                    title={cardTitle as string}
                 >
-                    <div className={'category-card-image'}>
-                        <CategoryCardMedia cardWidth={cardWidth}
-                                           imageUrl={category?.imageUrl}
+                    {/*<div className={'category-card-image'}>*/}
+                        <CategoryCardMedia imageUrl={category?.imageUrl}
                                            mediaAlt={cardTitle as string}
                                            index={index}
                         />
-                    </div>
+                    {/*</div>*/}
 
                     <div className={'category-card-info'}>
                         <h3 className={'category-card-title'}>

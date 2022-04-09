@@ -6,7 +6,6 @@ import PostsPageInfo from "@components/includes/PostsRenderer/PostsPageInfo";
 import {useRouter} from "next/router";
 import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
-//import MetaDataToSiteHead from "@components/includes/PostsDataToSiteHead/MetaDataToSiteHead";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
 import {StoreTypes} from '@_variables/TypeScriptTypes/GlobalTypes'

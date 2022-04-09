@@ -7,6 +7,8 @@ import {adminPanelFileManagerReducer} from "@store/adminReducers/adminPanelFileM
 
 // SETTINGS
 export interface DesignSettings {
+    postsPerRawForMobile: number;
+    cardWidthDesktop: number;
     sideBarWidth: number,
     customStyle: string,
     topBarStyle: string,
@@ -24,7 +26,6 @@ export interface DesignSettings {
     customColors: string,
     homePageSidebar: boolean,
     homePageStyle: boolean,
-    postElementSize: string,
     postElementImageLoader: string,
     postElementImageLoaderType: string,
 }
@@ -32,7 +33,6 @@ export interface DesignSettings {
 export interface IdentitySettings {
     favIcon: string;
     googleAnalyticsId: string;
-    postsPerRawForMobile: number;
     allowUserToPost: boolean;
     topbar?: string,
     header?: string,
@@ -248,6 +248,7 @@ export interface PostStateTypes {
 
 export interface SettingsStateTypes {
     isMobile: boolean,
+    isAppleMobileDevice:boolean,
     ip?: string,
     design: DesignSettings,
     identity: IdentitySettings,

@@ -8,36 +8,27 @@ const MobileCardImageNext = dynamic(() => import('./MobileCardImageNext/MobileCa
 interface CardImageNextPropTypes {
     imageUrl: string,
     mediaAlt: string,
-    postsPerRawForMobile?: number,
-    index?:number
+    index?:number,
+    isAppleMobileDevice :boolean
 }
 
 const MobileCardImageRenderer: FC<CardImageNextPropTypes> =
     ({
          imageUrl,
          mediaAlt,
-         postsPerRawForMobile,
-         index
+         index,
+         isAppleMobileDevice
      }) => {
 
         const imageUrlSource = useMemo(() => {
             return imageUrl && !isAbsolutePath(imageUrl) ? `${process.env.NEXT_PUBLIC_PRODUCTION_URL}${imageUrl}` : imageUrl
         }, [imageUrl])
 
-        if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  && index >= 2 ) {
-            return (
-                <MobileCardImageNext imageUrl={imageUrlSource}
-                                     mediaAlt={mediaAlt}
-                                     postsPerRawForMobile={postsPerRawForMobile}
-                />
-            )
-        } else {
-            return (
-                <MobileCardImage imageUrl={imageUrlSource}
-                                 mediaAlt={mediaAlt}
-                                 postsPerRawForMobile={postsPerRawForMobile}
-                />
-            )
-        }
+        if (imageUrlSource && isImageAllowedForNextImage(imageUrlSource)  && index >= 2 )
+            return <MobileCardImageNext imageUrl={imageUrlSource} mediaAlt={mediaAlt} isAppleMobileDevice={isAppleMobileDevice}/>
+
+        else return  <MobileCardImage imageUrl={imageUrlSource} mediaAlt={mediaAlt} isAppleMobileDevice={isAppleMobileDevice}/>
+
+        //return  <MobileCardImage imageUrl={imageUrl} mediaAlt={mediaAlt} isAppleMobileDevice={isAppleMobileDevice}/>
     };
 export default MobileCardImageRenderer

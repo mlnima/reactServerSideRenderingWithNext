@@ -5,29 +5,49 @@ import styled from "styled-components";
 interface MobileCardImageNextStyledDiv {
     imageUrl: string,
     mediaAlt: string,
-    postsPerRawForMobile?: number,
+    isAppleMobileDevice: boolean,
 }
 
-interface MobileCardImageNextStylePropTypes {
-    postsPerRawForMobile: number
-}
+const MobileCardImageStyledDiv = styled.div`
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  img{
+      position: unset !important;
+  }
+`
 
-const MobileCardImageNextStyledDiv = styled.div`
-  width: ${({postsPerRawForMobile}: MobileCardImageNextStylePropTypes) => `calc(96vw  / ${postsPerRawForMobile || 2})`};
-  height: ${({postsPerRawForMobile}: MobileCardImageNextStylePropTypes) => `calc((96vw  / ${postsPerRawForMobile || 2})  / 1.777)`};
+const AppleCardImageStyledDiv = styled.div`
+
+  aspect-ratio: 16 / 9;
+  width: 100%;
+  height: calc(100% / 1.777);
+  position: relative;
+  overflow: hidden;
+  padding-top: 56.25%;
+
+  div {
+    position: absolute;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    width: 100%;
+  }
 `
 
 const MobileCardImageNext: FC<MobileCardImageNextStyledDiv> =
     ({
          imageUrl,
          mediaAlt,
-         postsPerRawForMobile,
+         isAppleMobileDevice,
      }) => {
 
         const [gotError, setGotError] = useState(false)
 
+        const StyleToRender =  isAppleMobileDevice ? AppleCardImageStyledDiv : MobileCardImageStyledDiv
+
         return (
-            <MobileCardImageNextStyledDiv postsPerRawForMobile={postsPerRawForMobile}>
+            <StyleToRender>
                 <Image src={gotError || !imageUrl ? '/static/images/noImage/no-image-available.png' : imageUrl}
                        alt={mediaAlt}
                        loading={'lazy'}
@@ -36,7 +56,9 @@ const MobileCardImageNext: FC<MobileCardImageNextStyledDiv> =
                        objectFit={'contain'}
                        onError={() => setGotError(true)}
                 />
-            </MobileCardImageNextStyledDiv>
+            </StyleToRender>
         )
     };
+
 export default MobileCardImageNext
+

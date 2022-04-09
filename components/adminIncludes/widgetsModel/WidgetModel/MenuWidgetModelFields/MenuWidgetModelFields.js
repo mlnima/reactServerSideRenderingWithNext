@@ -1,6 +1,4 @@
 import {useState} from 'react';
-import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {faBars} from "@fortawesome/free-solid-svg-icons";
 import MenuWidgetModelFieldsPreview from "./MenuWidgetModelFieldsPreview";
 import {uniqueId} from "lodash";
 import MenuWidgetEditForm from "./MenuWidgetEditForm";

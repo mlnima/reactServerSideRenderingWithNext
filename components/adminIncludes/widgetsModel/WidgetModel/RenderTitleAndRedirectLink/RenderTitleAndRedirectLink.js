@@ -6,8 +6,8 @@ const RenderTitleAndRedirectLink = props => {
         return (
             <>
                 <div className='textInputFieldForWidget widgetSection'>
-                    <p>TextInput:</p>
-                    <input  name='title' className='form-control-input' placeholder='TextInput' value={
+                    <p>Title:</p>
+                    <input  name='title' className='form-control-input' placeholder='Title' value={
                         props.widgetSettings.activeEditingLanguage === 'default' ?
                             props.widgetData.title :
                             props.widgetData.translations ?

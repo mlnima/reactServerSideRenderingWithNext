@@ -7,10 +7,10 @@ import CategoriesRenderer
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
-import {settingsPropTypes, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {wrapper} from "@store/store";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getMetas} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {wrapper} from "@store/store";
 
 const CategoriesPageStyledMain = styled.main`
   grid-area: main;
@@ -18,16 +18,27 @@ const CategoriesPageStyledMain = styled.main`
 `
 const categoriesPage = () => {
     const {query} = useRouter()
-    const isWithSidebar = useSelector((store: settingsPropTypes) => store.settings?.identity?.metaPageSidebar);
-    const metasPageStyle = useSelector((store: StoreTypes) => store.settings?.design.metasPageStyle,);
-    const totalCount = useSelector((store: StoreTypes) => store.posts.totalCount)
-    const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
-        useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
+
+    const {
+        isWithSidebar,
+        metasPageStyle,
+        totalCount,
+        postsCountPerPage
+    } = useSelector(({settings, posts}: StoreTypes) => {
+        return {
+            isWithSidebar: settings?.identity?.metaPageSidebar,
+            metasPageStyle: settings?.design.metasPageStyle,
+            totalCount: posts.totalCount,
+            postsCountPerPage: query?.size ? parseInt(query?.size as string) : parseInt(settings?.identity?.postsCountPerPage || '20')
+        }
+    })
+
 
     return (
-        <CategoriesPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '} metasPageStyle={metasPageStyle}>
+        <CategoriesPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '}
+                                  metasPageStyle={metasPageStyle}>
             <WidgetsRenderer position={'categoriesPageTop'}/>
-            <CategoriesRenderer postElementSize={undefined}/>
+            <CategoriesRenderer cardWidthDesktop={undefined}/>
 
             <PaginationComponent
                 isActive={true}
@@ -36,6 +47,7 @@ const categoriesPage = () => {
                 size={postsCountPerPage}
                 maxPage={Math.ceil(totalCount / postsCountPerPage)}
             />
+
             <WidgetsRenderer position={'categoriesPageBottom'}/>
         </CategoriesPageStyledMain>
     );
@@ -56,7 +68,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
             setHeadData: true,
             page: 'categories'
         }
-        ))
+    ))
     // @ts-ignore
     await store.dispatch(getMetas(context.query, 'categories', true))
 

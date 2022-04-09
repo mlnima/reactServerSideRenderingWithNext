@@ -51,11 +51,7 @@ const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl}) =>
         <LogoStyledDiv className={'logo-wrapper'}>
             <Link href='/'>
                 <a className='logo' href='/'>
-                    {logoData?.logoUrlSource && logoData?.isImageAllowedForNextImage ?
-                        <LogoUsingNextImage logoUrl={logoData?.logoUrlSource} alt={'logo'}/> :
-                        logoData?.logoUrlSource ?
-                            <img alt={'logo'} src={logoData?.logoUrlSource}/>
-                            : null}
+                    <img alt={'logo'} src={logoData?.logoUrlSource}/>
                     {logoData.logoText && !logoData?.logoUrlSource ?
                         <span className='logo-text'> {logoData.logoText} </span>
                         : null
@@ -69,3 +65,19 @@ const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl}) =>
 };
 
 export default Logo;
+
+
+// <Link href='/'>
+//     <a className='logo' href='/'>
+//         {logoData?.logoUrlSource && logoData?.isImageAllowedForNextImage ?
+//             <LogoUsingNextImage logoUrl={logoData?.logoUrlSource} alt={'logo'}/> :
+//             logoData?.logoUrlSource ?
+//                 <img alt={'logo'} src={logoData?.logoUrlSource}/>
+//                 : null}
+//         {logoData.logoText && !logoData?.logoUrlSource ?
+//             <span className='logo-text'> {logoData.logoText} </span>
+//             : null
+//         }
+//         {logoData.headLineData ? <p className='logo-headline'>{logoData.headLineData}</p> : null}
+//     </a>
+// </Link>

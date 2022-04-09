@@ -6,17 +6,13 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
 import PostTitle from "../components/PostTitle/PostTitle";
 import RelatedPostsRenderer from "@components/includes/PostPage/components/RelatedPostsRenderer";
-// const PostMetaDataToSiteHead = dynamic(() =>
-//     import('../components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
-const EditLinkForAdmin = dynamic(() =>
-    import('../components/EditLinkForAdmin/EditLinkForAdmin'), {ssr: false})
 const PostMeta = dynamic(() => import('../components/PostMeta/PostMeta'))
 const CommentsRenderer = dynamic(() => import('../components/CommentsRenderer/CommentsRenderer'))
 const CommentFrom = dynamic(() => import('../components/CommentFrom/CommentFrom'))
 const WidgetsRenderer = dynamic(() => import('../../WidgetsRenderer/WidgetsRenderer'))
 const RatingButtons = dynamic(() => import('../components/RatingButtons/RatingButtons'))
 const DownloadLink = dynamic(() => import('../components/DownloadLink/DownloadLink'))
-// const Price = dynamic(() => import('../components/Price/Price'))
+
 const VideoPlayer = dynamic(() => import('../components/VideoPlayer/VideoPlayer'))
 const PostDescription = dynamic(() => import('../components/PostDescription/PostDescription'))
 
@@ -24,6 +20,7 @@ const VideoTypePostPageStyledMain = styled(PostPageStyledMain)`
   margin: auto;
   ${({postPageStyle}: { postPageStyle: string }) => postPageStyle || ''}
 `
+
 const VideoTypePostPage = () => {
 
     const videoTypePostPageData = useSelector(({settings, posts}: StoreTypes) => {
@@ -59,9 +56,3 @@ const VideoTypePostPage = () => {
     );
 };
 export default VideoTypePostPage;
-
-
-// {videoTypePostPageData?.post.postType === 'product' ?
-//     <Price price={videoTypePostPageData?.post.price} currency={videoTypePostPageData?.post.currency}/>
-//     : null
-// }

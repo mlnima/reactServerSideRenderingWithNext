@@ -14,22 +14,13 @@ const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 const ArticleCard = styled.div`
   background-color: var(--post-element-background-color, #131314);
-  padding-bottom: 5px;
-  width: ${(props: { cardWidth: number }) => `${props?.cardWidth}px`};
-  max-width: 100%;
-  margin: 7px;
+  width: 100%;
   font-size: 14px;
 
   .article-card-link {
     position: relative;
-    width: calc(100% - 4px);
-    max-width: calc(100% - 4px);
-    margin: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
+    display: block;
+    cursor: pointer;
 
     .article-card-under-media {
       width: 100%;
@@ -80,10 +71,8 @@ const ArticleCard = styled.div`
 
 interface ArticleTypeCardPropTypes {
     post: PostTypes,
-    cardWidth: number,
     onActivateLoadingHandler: any,
     title: string,
-    postElementSize: string,
     views: number,
     rating: number ,
     index?:number
@@ -92,10 +81,8 @@ interface ArticleTypeCardPropTypes {
 const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
     ({
          post,
-         cardWidth,
          onActivateLoadingHandler,
          title,
-         postElementSize,
          views,
          rating,
          index
@@ -103,15 +90,13 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
         const postUrl = `/post/${post?.postType}/${post._id}`
 
         return (
-            <ArticleCard className='article-card' cardWidth={cardWidth}>
+            <ArticleCard className='article-card'>
                 <Link href={`/post/${post?.postType}/${post._id}`}>
                     <a rel='next' onClick={onActivateLoadingHandler}
                        className='article-card-media-link'
                        title={title}
                     >
-                        <ArticleCardMedia postElementSize={postElementSize}
-                                          post={post}
-                                          cardWidth={cardWidth}
+                        <ArticleCardMedia post={post}
                                           mediaAlt={title}
                                           index={index}
                         />
@@ -120,7 +105,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                 <ArticleTypeCardTitle title={title}
                                       postUrl={postUrl}
                                       onActivateLoadingHandler={onActivateLoadingHandler}
-                                      cardWidth={cardWidth}/>
+                />
                 <Link href={postUrl}>
                     <a rel='next'
                        className='article-card-link'
@@ -146,9 +131,8 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                     </a>
                 </Link>
                 <div className={'card-info'}>
-                    <CardMetaRenderer metas={[...post?.actors || [], ...post?.tags || [], ...post?.categories || []]}
-                                      cardWidth={cardWidth}
-                    />
+                    <CardMetaRenderer metas={[...post?.actors || [], ...post?.tags || [], ...post?.categories || []]}/>
+
                     {post?.updatedAt || post?.createdAt  ?
                         <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
                         : null
@@ -162,7 +146,3 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
 
 export default ArticleTypeCard;
 
-// {post?.updatedAt || post?.createdAt  ?
-//     <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
-//     : null
-// }

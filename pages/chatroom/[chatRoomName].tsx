@@ -14,7 +14,8 @@ import {dispatchSocketId} from "@store/clientActions/userActions";
 import {setChatroomUsers, setChatroomMessages, newMessage} from '@store/clientActions/chatroomActions';
 import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import {uniqBy} from 'lodash';
+// import {uniqBy} from 'lodash';
+import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
 const chatRoom = () => {
@@ -64,7 +65,8 @@ const chatRoom = () => {
         })
 
         socket.on('onlineUsersList', (chatroomOnlineUsers: { username: string }[]) => {
-            dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
+            //dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
+            dispatch(setChatroomUsers(_uniqBy(chatroomOnlineUsers,'username')))
         })
 
         socket.on('recentChatRoomMessages', (chatroomMessages: object[]) => {
@@ -72,7 +74,8 @@ const chatRoom = () => {
         })
 
         socket.on('userListUpdated', (chatroomOnlineUsers: { username: string }[]) => {
-            dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
+            // dispatch(setChatroomUsers(uniqBy(chatroomOnlineUsers, e => e.username)))
+            dispatch(setChatroomUsers(_uniqBy(chatroomOnlineUsers,'username')))
         })
 
         socket.on('messageFromChatroom', (newMessageData: object) => {

@@ -8,7 +8,7 @@ import TextInputFieldForWidget
     from "@components/adminIncludes/widgetsModel/WidgetModel/TextInputFieldForWidget/TextInputFieldForWidget";
 import {useSelector} from "react-redux";
 import staticPositions from "@components/adminIncludes/widgetsModel/staticPositions";
-import _ from "lodash";
+import {flatMap} from "lodash";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 interface DefaultFieldsPropTypes {
@@ -46,7 +46,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
         const positions = useMemo(() => {
             return [
                 ...staticPositions,
-                ..._.flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
+                ...flatMap(customPages, (customPage => [customPage, customPage + 'LeftSidebar', customPage + 'RightSidebar']))
             ]
         }, [customPages])
 
@@ -222,6 +222,7 @@ const DefaultFields: FC<DefaultFieldsPropTypes> =
                             {widgetSettings.customScriptBox ? 'close' : 'open'}
                         </button>
                     </div>
+
                     {widgetSettings.customScriptBox ?
                         <MonacoEditor
                             language={'javascript'}

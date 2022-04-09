@@ -1,14 +1,14 @@
 import React, {useEffect, useState} from 'react';
 import dynamic from 'next/dynamic'
-import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
+// import CheckOutItemPreview from "../../components/includes/checkOutPageComponents/CheckOutItemPreview/CheckOutItemPreview";
 import {useRouter} from "next/router";
-import _ from 'lodash'
+// import _ from 'lodash'
 import styled from "styled-components";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useDispatch, useSelector} from "react-redux";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import {wrapper} from "@store/store";
-const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
+// const PayWithPayPal = dynamic(() => import('../../components/includes/checkOutPageComponents/PayWithPaypal/PayWithPaypal'), {ssr: false})
 
 let StyledDiv = styled.div`
   display: flex;

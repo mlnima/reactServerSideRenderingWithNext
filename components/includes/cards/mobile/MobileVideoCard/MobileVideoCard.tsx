@@ -11,29 +11,29 @@ const CardRating = dynamic(() => import('@components/includes/cards/asset/CardRa
 
 const MobileVideoCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
-  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};
-  margin: 4px 2px ;
- // max-width: 320px;
+  width: 100%;
+  font-size: 14px;
 
   .mobile-video-card-media-link {
     color: var(--post-element-text-color, #ccc);
     position: relative;
     display: block;
-    cursor: pointer;
-
-    .entry-header{
+    
+    .entry-header {
       font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
       font-size: 14px;
+      width: 100%;
+      overflow-wrap: break-word;
       .card-header {
         margin: 2px 0;
       }
     }
 
 
-    .views-rating{
+    .views-rating {
       font-size: 12px;
       height: 20px;
       width: 97%;
@@ -41,7 +41,8 @@ const MobileVideoCardStyledArticle = styled.article`
       justify-content: space-between;
       align-items: center;
       margin: auto;
-      .video-card-views,.video-card-rating {
+
+      .video-card-views, .video-card-rating {
         color: var(--post-element-info-text-color, #939393);
         display: flex;
         justify-content: space-between;
@@ -49,11 +50,12 @@ const MobileVideoCardStyledArticle = styled.article`
       }
 
     }
-    .last-update{
-      
+
+    .last-update {
+
       font-size: 9px;
-      margin:  4px;
-      color: var( --post-element-info-text-color,#939393);
+      margin: 4px;
+      color: var(--post-element-info-text-color, #939393);
     }
   }
 `
@@ -64,8 +66,8 @@ interface MobileVideoCardPropTypes {
     views: number,
     rating: number,
     post: PostTypes,
-    postsPerRawForMobile: number,
-    index?:number
+    index?: number,
+    isAppleMobileDevice:boolean
 }
 
 const MobileVideoCard: FC<MobileVideoCardPropTypes> =
@@ -74,16 +76,16 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
          onActivateLoadingHandler,
          title,
          views,
-         postsPerRawForMobile,
          rating,
          index,
+         isAppleMobileDevice
 
      }) => {
 
         const postUrl = `/post/${post?.postType}/${post._id}`;
 
         return (
-            <MobileVideoCardStyledArticle postsPerRawForMobile={postsPerRawForMobile}>
+            <MobileVideoCardStyledArticle>
                 <Link href={postUrl}>
                     <a rel={'next'}
                        className={'mobile-video-card-media-link'}
@@ -95,24 +97,26 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
                                               mediaAlt={title}
                                               duration={post.duration}
                                               quality={post.quality}
-                                              postsPerRawForMobile={postsPerRawForMobile}
                                               index={index}
+                                              isAppleMobileDevice={isAppleMobileDevice}
                         />
 
-                        <header className={'entry-header'} >
+                        <header className={'entry-header'}>
                             <span className={'card-header'}>{title}</span>
                         </header>
 
 
                         {post.views || rating ?
-                        <div className={'views-rating'}>
-                        {views ?   <CardViews views={views} className={'video-card-views video-card-info-data'}/> :null }
-                        {rating ?  <CardRating rating={rating} className={'video-card-rating video-card-info-data'}/> :null }
-                        </div>
-                            :null
+                            <div className={'views-rating'}>
+                                {views ? <CardViews views={views}
+                                                    className={'video-card-views video-card-info-data'}/> : null}
+                                {rating ? <CardRating rating={rating}
+                                                      className={'video-card-rating video-card-info-data'}/> : null}
+                            </div>
+                            : null
                         }
-                        {post?.updatedAt || post?.createdAt  ?
-                            <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
+                        {post?.updatedAt || post?.createdAt ?
+                            <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
                             : null
                         }
 
@@ -122,3 +126,9 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
         )
     };
 export default MobileVideoCard
+
+
+// margin: 4px 2px ;
+// // width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 1})`};
+// // max-width: 320px;
+// // max-height: 320px;

@@ -5,60 +5,55 @@ import styled from "styled-components";
 interface CardImageNextPropTypes {
     imageUrl: string,
     alt: string,
-    cardHeight: number,
-    cardWidth: number,
-    objectFitValue?: string,
-    strictImageSize?: boolean
-}
-
-interface CardImageNextStylePropTypes {
-    imageWidth: number,
-    imageHeight: number,
-    objectFitValue?: string,
-    strictImageSize: boolean
 }
 
 const CardImageNextStyledDiv = styled.div`
-  ${({objectFitValue}) => objectFitValue ? `object-fit:${objectFitValue};` : ''};
-  width: ${({
-              strictImageSize,
-              imageWidth
-            }: CardImageNextStylePropTypes) => strictImageSize ? `${imageWidth}px` : 'calc(48vw - 5.6px)'};
-  height: ${({
-               strictImageSize,
-               imageHeight
-             }: CardImageNextStylePropTypes) => strictImageSize ? `${imageHeight}px` : 'calc(calc(48vw - 5.6px) / 1.777)'};
-  @media only screen and (min-width: 768px) {
-    width: ${({imageWidth}: CardImageNextStylePropTypes) => `${imageWidth}px`};
-    height: ${({imageHeight}: CardImageNextStylePropTypes) => `${imageHeight}px`};
+  width: 100%;
+  aspect-ratio: 16 / 9;
+
+  div {
+    position: unset !important;
   }
 `
 
-const CardImageNext: FC<CardImageNextPropTypes> =
-    ({
-         imageUrl,
-         alt,
-         cardWidth,
-         cardHeight,
-         objectFitValue,
-         strictImageSize,
-     }) => {
+const CardImageNext: FC<CardImageNextPropTypes> = ({imageUrl, alt}) => {
         const [gotError, setGotError] = useState(false)
+
+        // const onHoverProps = onHoverHandler ? {
+        //     onMouseEnter: onHoverHandler(true),
+        //     onMouseOver: onHoverHandler(true),
+        //     onMouseOut: onHoverHandler(false),
+        //     onTouchStartCapture: onHoverHandler(true),
+        //     onMouseDown: onHoverHandler(false),
+        // } :{}
+
         return (
-            <CardImageNextStyledDiv imageWidth={cardWidth} imageHeight={cardHeight} objectFitValue={objectFitValue}
-                                    strictImageSize={strictImageSize}>
+            <CardImageNextStyledDiv >
                 <Image src={gotError || !imageUrl ? '/static/images/noImage/no-image-available.png' : imageUrl}
                        alt={alt}
-                       priority
-                       layout={'responsive'}
-                       width={cardWidth}
-                       height={cardHeight}
+                    // priority
+                       layout={'fill'}
+                       loading={'lazy'}
                        quality={80}
-                    // @ts-ignore
-                       objectFit={objectFitValue || 'contain'}
+                       objectFit={'contain'}
                        onError={() => setGotError(true)}
                 />
             </CardImageNextStyledDiv>
         )
     };
 export default CardImageNext
+
+
+// ${({objectFitValue}) => objectFitValue ? `object-fit:${objectFitValue};` : ''};
+// width: ${({
+//               strictImageSize,
+//               imageWidth
+//             }: CardImageNextStylePropTypes) => strictImageSize ? `${imageWidth}px` : 'calc(48vw - 5.6px)'};
+// height: ${({
+//                strictImageSize,
+//                imageHeight
+//              }: CardImageNextStylePropTypes) => strictImageSize ? `${imageHeight}px` : 'calc(calc(48vw - 5.6px) / 1.777)'};
+// @media only screen and (min-width: 768px) {
+//     width: ${({imageWidth}: CardImageNextStylePropTypes) => `${imageWidth}px`};
+// height: ${({imageHeight}: CardImageNextStylePropTypes) => `${imageHeight}px`};
+// }

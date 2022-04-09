@@ -3,9 +3,10 @@ import styled from "styled-components";
 import Link from "next/link";
 
 const CardTitleStyledHeader = styled.header`
-  width: ${(props: { cardWidth: number }) => `calc(${props?.cardWidth} - 4)px`};
-  font-size: 14px;
+  
   color: var(--post-element-text-color, #ccc);
+  width: 100%;
+  font-size: 14px;
   margin: 2px 0;
   max-width: 98%;
   display: flex;
@@ -17,7 +18,6 @@ const CardTitleStyledHeader = styled.header`
     height: initial;
     margin: initial;
     
-
     .card-header {
       margin: 0;
       font-size: 14px;
@@ -26,7 +26,7 @@ const CardTitleStyledHeader = styled.header`
     }
 
     &:hover {
-      color: var(--main-active-color, #fff);
+      color: var(--main-active-color, #f90);
     }
   }
 
@@ -34,37 +34,27 @@ const CardTitleStyledHeader = styled.header`
     flex-wrap: wrap;
     white-space: normal;
   }
-
 `
 
 interface VideoCardTitlePropTypes {
     title: string,
-    cardWidth: number,
     postUrl: string,
     onActivateLoadingHandler: any
 }
 
-
-const VideoCardTitle: FC<VideoCardTitlePropTypes> =
-    ({
-         title,
-         postUrl,
-         cardWidth,
-         onActivateLoadingHandler
-     }) => {
+const VideoCardTitle: FC<VideoCardTitlePropTypes> = ({title, postUrl, onActivateLoadingHandler}) => {
 
         return (
-            <CardTitleStyledHeader className={'video-card-title entry-header'} cardWidth={cardWidth}>
+            <CardTitleStyledHeader className={'video-card-title entry-header'}>
                 <Link href={postUrl}>
                     <a rel={'next'}
                        className={'video-card-title-link'}
                        title={title}
-                       onClick={onActivateLoadingHandler}
-                    >
+                       onClick={onActivateLoadingHandler}>
                         <span className={'card-header'}>{title}</span>
                     </a>
+
                 </Link>
-                {/*<CardMetaRenderer metas={[...actors || [], ...tags || [], ...categories || []]}/>*/}
             </CardTitleStyledHeader>
 
         );

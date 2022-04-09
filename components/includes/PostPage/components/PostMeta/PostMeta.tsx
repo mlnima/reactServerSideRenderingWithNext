@@ -1,10 +1,10 @@
 import Link from "next/link";
-import {uniqueId} from "lodash";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {FC} from "react";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {convertMetasTypeToSingular} from "@_variables/_variables";
 
 const PostMetaStyledDiv = styled.div`
   display: flex;
@@ -51,19 +51,17 @@ const PostMeta:FC<PostMetaPropType> = ({  type}) => {
     const post = useSelector(({posts}:StoreTypes)=>posts.post)
 
     const filterMeta = post?.[type]?.length ? post?.[type].filter(m => m.name?.length > 1) : [];
-    const renderData = filterMeta.map(item => {
-        const typePath = item.type === 'tags' ? 'tag' :
-            item.type === 'categories' ? 'category' :
-                item.type === 'actors' ? 'actor' : 'category'
 
+    const renderData = filterMeta.map(item => {
         return (
-            <div key={uniqueId(`${item.type}_`)} className='post-meta-item'>
-                <Link href={`/${typePath}/${item._id}`}>
+            <div key={`${item.type}_${item._id}`} className='post-meta-item'>
+                <Link href={`/${convertMetasTypeToSingular(item.type)}/${item._id}`}>
                     <a className={type + ' post-meta-item-link'} title={item.name}>{item.name}</a>
                 </Link>
             </div>
         )
     });
+
     if (filterMeta?.length){
         return (
             <PostMetaStyledDiv className={type + ' post-meta'}>

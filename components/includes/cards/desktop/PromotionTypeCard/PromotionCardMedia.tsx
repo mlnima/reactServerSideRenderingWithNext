@@ -2,40 +2,35 @@ import styled from "styled-components";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
 import {FC} from "react";
+
 interface PromotionCardMediaPropTypes {
     post: PostTypes,
-    postElementSize: string,
-    cardWidth: number,
     mediaAlt: string,
     index:number
 }
 
-interface PromotionCardMediaStyledDivPropTypes {
-    cardWidth: number,
-    postElementSize?: string
-}
-
 const PromotionCardMediaStyledDiv = styled.div`
+  position: relative;
 
-  width: 100%;
-  height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
   .promotion-card-image {
-    width: 100%;
-    height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
     object-fit: contain;
   }
 `
-const PromotionCardMedia : FC<PromotionCardMediaPropTypes> = ({post,postElementSize,cardWidth,mediaAlt, index}) => {
+const PromotionCardMedia : FC<PromotionCardMediaPropTypes> = ({post,mediaAlt, index}) => {
 
     return (
-        <PromotionCardMediaStyledDiv className='promotion-card-media' postElementSize={postElementSize} cardWidth={cardWidth}>
+        <PromotionCardMediaStyledDiv className='promotion-card-media' >
             <CardImageRenderer imageUrl={post?.mainThumbnail}
                                mediaAlt={mediaAlt}
-                               cardWidth={cardWidth}
-                               cardHeight={cardWidth / 1.777}
                                index={index}
             />
         </PromotionCardMediaStyledDiv>
     );
 };
 export default PromotionCardMedia;
+
+
+// width: 100%;
+// height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);
+// width: 100%;
+// height: calc(${({cardWidth}: PromotionCardMediaStyledDivPropTypes) => cardWidth}px / 1.777);

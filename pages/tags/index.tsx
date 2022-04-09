@@ -27,7 +27,7 @@ const tagsPage = () => {
     return (
         <TagsPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '} metasPageStyle={metasPageStyle}>
             <WidgetsRenderer position={'tagsPageTop'}/>
-            <TagsRenderer  postElementSize={undefined} />
+            <TagsRenderer  cardWidthDesktop={undefined} />
             <PaginationComponent
                 isActive={true}
                 currentPage={query?.page ? parseInt(query?.page as string) : 1}

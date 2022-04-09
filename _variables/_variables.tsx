@@ -10,25 +10,21 @@ export const languagesOptions = (process.env.NEXT_PUBLIC_LOCALS.split(' ').filte
 
 export const reduceArrayOfDataToIds = (dataArr:any)=> Array.isArray(dataArr) ?  dataArr.map(data=>data._id) : []
 
-
-export const cardWidthCalculator = (size : string)=>size === 'listSmall' ? 320 :
-    size === 'list' ? 116.6 :
-        size === 'smaller' ? 209.8 :
-            size === 'small' ? 255 :
-                size === 'medium' ? 320 : 255
-
-
-export const getTextDataWithTranslation = (locale,name,parentObject)=>{
+export const getTextDataWithTranslation = (locale : string,name: string,parentObject :any)=>{
     const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
     return isDefaultLocale ? parentObject?.[name] : parentObject.translations?.[locale]?.[name] || parentObject?.[name] || null
 }
 
-export const convertMetasTypeToSingular = (metaType)=>{
+export const convertMetasTypeToSingular = (metaType:string)=>{
   return metaType === 'actors' ? 'actor' :
          metaType === 'tags' ? 'tag' :
          metaType === 'categories' ? 'category':''
 }
 
+
+export const isAppleMobileDevice = (userAgent:string)=>{
+    return /iPhone|iPad|iPod/i.test(userAgent)
+}
 
 
 

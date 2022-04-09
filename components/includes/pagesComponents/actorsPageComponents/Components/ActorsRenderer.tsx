@@ -4,48 +4,62 @@ import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {setLoading} from "@store/clientActions/globalStateActions";
+//import cardSizeCalculator from "@_variables/util/cardSizeCalculator";
+
+interface ActorsContentStyledDivPropTypes{
+    postsPerRawForMobile:number,
+    cardWidth:number,
+}
 
 let ActorsRendererStyledDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: space-evenly;
 
-  .actor-card-image {
-    .actor-card-link {
-      width: 140px;
-      margin: 1vw;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
-      text-decoration: none;
-      font-size: 3vw;
+  display: grid;
+  width: 98%;
+  margin: auto;
+  grid-gap: 5px;
+  grid-template-columns: repeat( auto-fill, minmax(${({postsPerRawForMobile}:ActorsContentStyledDivPropTypes)=>`${96/postsPerRawForMobile}`}vw, 2fr) );
 
-      @media only screen and (min-width: 768px) {
-        margin: 5px;
-        justify-content: center;
-      }
-    }
+  @media only screen and (min-width: 768px) {
+    grid-gap: 30px;
+    grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:ActorsContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );
   }
 `
 
 interface ActorsRendererPropTypes {
     uniqueData?: {
         metaData?: Meta[],
+
     }
 }
 
 const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
 
     const dispatch = useDispatch();
-    const actorsMetas = useSelector(({posts}: StoreTypes) => uniqueData?.metaData || posts?.actorsMetas || [])
+
+    const {cardWidth,postsPerRawForMobile,actorsMetas,isAppleMobileDevice} = useSelector(({settings,posts}: StoreTypes)=>{
+       // const elementSize = settings?.design?.postElementSize;
+        return {
+            postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
+            isMobile: settings?.isMobile,
+            actorsMetas :  uniqueData?.metaData || posts?.actorsMetas || [],
+            // cardWidth: cardSizeCalculator(elementSize),
+            cardWidth: 140,
+            isAppleMobileDevice:settings?.isAppleMobileDevice
+        }
+    })
+    //
+    // const actorsMetas = useSelector(({posts}: StoreTypes) => uniqueData?.metaData || posts?.actorsMetas || [])
 
     return (
-        <ActorsRendererStyledDiv className='actors-content'>
+        <ActorsRendererStyledDiv className='actors-content'
+                                 cardWidth={cardWidth}
+                                 postsPerRawForMobile={postsPerRawForMobile}>
+
             {actorsMetas.map((actor ,index) => {
                 return <ActorCard key={actor._id}
                                   actor={actor}
                                   onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                  isAppleMobileDevice={isAppleMobileDevice}
                                   index={index}
                 />
                 }

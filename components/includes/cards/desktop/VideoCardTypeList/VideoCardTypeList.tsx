@@ -80,7 +80,7 @@ interface VideoCardTypeListPropTypes {
     cardWidth: number,
     views: number,
     rating: number,
-    postElementSize: string,
+    postElementSize:  number | string,
     onActivateLoadingHandler: any,
     title: string,
     isSidebar: boolean,

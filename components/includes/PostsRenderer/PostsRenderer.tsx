@@ -8,16 +8,13 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
 import {FC} from "react";
-import {cardWidthCalculator} from "@_variables/_variables";
 const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
 const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
 const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
 const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
-const DefaultTypeCard = dynamic(() => import('../cards/desktop/DefaultTypeCard/DefaultTypeCard'))
 
 interface PostsComponentTypes {
     viewType?: string,
-    _id?: string,
     posts?: PostTypes[],
     uniqueData?: {
         speed: number;
@@ -27,68 +24,67 @@ interface PostsComponentTypes {
         totalCount: number
     }
     widgetId?: string,
-    postElementSize?: string,
     isSidebar?: boolean ,
-    index?:number
+    index?:number,
+    cardWidthDesktop?:number,
 }
 
 interface PostsContentStyledDivPropTypes{
-    postElementSize:string
+    postsPerRawForMobile:number,
+    cardWidth:number,
+    isMobile:boolean,
 }
 const PostsContentStyledDiv = styled.div`
-  display: flex;
-  flex-direction: ${({postElementSize}: PostsContentStyledDivPropTypes) => postElementSize === 'list' ? 'column' : 'row'};
-  flex-wrap: ${({postElementSize}: PostsContentStyledDivPropTypes) => postElementSize === 'listSmall' ? 'nowrap' : 'wrap'};
-  justify-content: center;
-  overflow-y: ${({postElementSize}:PostsContentStyledDivPropTypes) => postElementSize === 'listSmall' ? 'scroll' : 'initial'};
-  height: ${({postElementSize}: PostsContentStyledDivPropTypes) => postElementSize === 'listSmall' ? '400px' : 'initial'};
-  max-width: ${({postElementSize}: PostsContentStyledDivPropTypes) => postElementSize === 'listSmall' ? '100%' : 'initial'};
-  flex-direction: ${({postElementSize}: PostsContentStyledDivPropTypes) => postElementSize === 'listSmall' ? 'column' : 'raw'};
+  padding: 20px 0;
+  display: grid;
+  width: 100%;
+  margin: auto;
+  grid-gap: 5px;
+  grid-template-columns: repeat( auto-fill, minmax(${({postsPerRawForMobile}:PostsContentStyledDivPropTypes)=>`${96/postsPerRawForMobile}`}vw, 2fr) );
 
   @media only screen and (min-width: 768px) {
-    max-width: ${({postElementSize}: PostsContentStyledDivPropTypes) => postElementSize === 'listSmall' ? '320px' : 'initial'};
+    grid-gap: 15px 10px;
+    grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );
   }
 `
 
 const PostsRenderer:FC<PostsComponentTypes> = 
     ({
-         viewType,
-         _id,
+
          posts,
          uniqueData,
          widgetId,
-         postElementSize,
+         cardWidthDesktop,
          isSidebar
     }) => {
     const dispatch = useDispatch()
     const {locale} = useRouter()
 
-    const {elementSize,postsPerRawForMobile,isMobile,cardWidth} = useSelector(({settings}: StoreTypes) => {
-        const elementSize = postElementSize ? postElementSize : settings?.design?.postElementSize
+    const {cardWidth,postsPerRawForMobile,isMobile,isAppleMobileDevice} = useSelector(({settings}: StoreTypes) => {
+        const cardWidth = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255
+
         return {
-            elementSize,
-            postsPerRawForMobile: settings?.identity?.postsPerRawForMobile || 2,
+            cardWidth,
+            cardWidthDesktop,
+            postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
             isMobile: settings?.isMobile,
-            cardWidth: cardWidthCalculator(elementSize)
+            isAppleMobileDevice:settings?.isAppleMobileDevice
         }
     });
 
     return (
-        <PostsContentStyledDiv className={'posts-content ' + (viewType ? `${viewType}-posts-content` : 'standard')}
-                               postElementSize={elementSize}
+        <PostsContentStyledDiv className={'posts-content'}
+                               postsPerRawForMobile={postsPerRawForMobile}
+                               isMobile={isMobile}
+                               cardWidth={cardWidth}
         >
             {(uniqueData?.posts || posts || []).map((post: PostTypes, index: number) => {
 
                 const postProps = {
-                    dir:locale === 'fa' || locale === 'ar' && post?.translations?.[locale as string]?.title ?
-                        'rtl' : 'ltr',
                     views:_shortNumber(post.views || 0),
                     rating : post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null ,
                     post,
-                    postElementSize: elementSize,
                     widgetId,
-                    postsPerRawForMobile: postsPerRawForMobile,
-                    cardWidth: cardWidth,
                     title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
                            post?.title?.replace('#', '') :
                            post?.translations?.[locale as string]?.title ?
@@ -96,7 +92,9 @@ const PostsRenderer:FC<PostsComponentTypes> =
                            post?.title?.replace('#', ''),
                     isMobile: isMobile,
                     isSidebar: isSidebar,
-                    onActivateLoadingHandler: () => dispatch(setLoading(true))
+                    isAppleMobileDevice,
+                    onActivateLoadingHandler: () => dispatch(setLoading(true)),
+
                 }
 
                 if (post?.postType === 'video') {
@@ -108,10 +106,6 @@ const PostsRenderer:FC<PostsComponentTypes> =
                 } else if (post?.postType === 'learn') {
                     return <LearnCardToRender postProps={postProps} key={index} index={index} />
                 } else return null
-
-                //     return (
-                //     <DefaultTypeCard {...postProps} key={index} index={index}/>
-                // )
             })}
         </PostsContentStyledDiv>
     );

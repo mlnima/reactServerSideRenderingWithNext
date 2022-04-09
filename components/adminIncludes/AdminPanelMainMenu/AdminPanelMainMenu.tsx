@@ -1,7 +1,7 @@
+//@ts-nocheck
 import Link from "next/link";
 import convertVariableNameToName from "../../../_variables/util/convertVariableNameToName";
 import withRouter from 'next/dist/client/with-router'
-import {uniqueId} from "lodash";
 import styled from "styled-components";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faSortDown} from "@fortawesome/free-solid-svg-icons";
@@ -9,6 +9,13 @@ import {useDispatch, useSelector} from "react-redux";
 import {setSidebarStatus} from "@store/adminActions/adminPanelGlobalStateActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useState} from "react";
+
+// interface menuItemTypes{
+//     [key:string] :{
+//         pathURL?:string
+//         subItems?:{name?:string,url?:string}[] | []
+//     }
+// }
 
 // need to rewrite later
 let StyledDiv = styled.div`
@@ -74,7 +81,7 @@ let StyledDiv = styled.div`
 
     .SideBarItemElementSubItems {
       background-color: #181818;
-  
+
       .SideBarItem-SubItem {
         color: white;
         padding: 10px 0 10px 20px;
@@ -98,6 +105,7 @@ const AdminPanelMainMenu = () => {
     const sidebarItems = {
         Dashboard: {
             pathURL: '/admin',
+
             subItems: []
         },
         Posts: {
@@ -191,7 +199,7 @@ const AdminPanelMainMenu = () => {
 
     const [hovered, setHovered] = useState('')
 
-    const renderItems = Object.keys(sidebarItems).map(item => {
+    const renderItems = Object.keys(sidebarItems).map((item: string) => {
         return (
             <div key={item} className='SideBarItemElement'>
                 <div className='SideBarItemTitle'>
@@ -203,7 +211,6 @@ const AdminPanelMainMenu = () => {
                     {sidebarItems[item].subItems?.length ?
                         <span className={'sidebar-items-switch'}
                               onMouseOver={() => setHovered(item)}
-                              key={uniqueId('id_')}
                               onClick={() => hovered === item ? setHovered('') : setHovered(item)}
                         >
                             <FontAwesomeIcon icon={faSortDown}
@@ -216,17 +223,17 @@ const AdminPanelMainMenu = () => {
                 <div className='SideBarItemElementSubItems'>
                     {sidebarItems[item].subItems?.length ?
                         sidebarItems[item].subItems.map(subItem => {
-                                return (
-                                    <Link key={uniqueId('id_')} href={subItem.url}>
-                                        <a className='SideBarItem-SubItem'
-                                           style={{
-                                               display:hovered === item ? 'flex' : 'none'
-                                           }}
-                                           onClick={() => dispatch(setSidebarStatus(false))}>
-                                            {convertVariableNameToName(subItem.name)}
-                                        </a>
-                                    </Link>
-                                )
+                            return (
+                                <Link key={subItem.url} href={subItem.url}>
+                                    <a className='SideBarItem-SubItem'
+                                       style={{
+                                           display: hovered === item ? 'flex' : 'none'
+                                       }}
+                                       onClick={() => dispatch(setSidebarStatus(false))}>
+                                        {convertVariableNameToName(subItem.name)}
+                                    </a>
+                                </Link>
+                            )
                         }) : null
                     }
 

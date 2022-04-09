@@ -97,7 +97,7 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
 }
 
 
-export const getPost = (_id: string | string[], locale) => async dispatch => {
+export const getPost = (_id: string , locale : string) => async dispatch => {
     const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
     // if (mongoIdValidator(_id)){
         await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
@@ -261,15 +261,12 @@ export const editPostField = (data) => async dispatch => {
 }
 
 export const getMetas = (data, metaType, cache) => async dispatch => {
-    const typeOfMetaDispatch = metaType === 'categories' ? 'categoriesMetas' :
-        metaType === 'tags' ? 'tagsMetas' :
-            metaType === 'actors' ? 'actorsMetas' : 'categoriesMetas'
     const queries = _metaPageQueryGenerator(data, metaType, cache)
     await Axios.get(`/api/v1/posts/getMetas${queries}`).then(res => {
         dispatch({
             type: GET_METAS,
             payload: {
-                [typeOfMetaDispatch]: res.data?.metas || [],
+                [`${metaType}Metas`]: res.data?.metas || [],
                 totalCount: res.data?.totalCount || 0,
             }
         })
@@ -302,7 +299,6 @@ export const getComments = (_id: string) => async dispatch => {
             }
         })
     }
-
 };
 
 export const addNewComment = (newComment) => async dispatch => {
@@ -326,7 +322,15 @@ export const newComment = (commentData) => async dispatch => {
                 message: 'Something Went Wrong'
             }
         })
-
+    }).catch(err=>{
+        dispatch({
+            type: SET_ALERT,
+            payload: {
+                message: 'Something Went Wrong Please Try Again Later',
+                type: 'error',
+                err
+            }
+        })
     }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 

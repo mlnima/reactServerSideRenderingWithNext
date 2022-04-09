@@ -1,47 +1,55 @@
-import {FC} from 'react';
+import {FC, useEffect, useState} from 'react';
 import styled from "styled-components";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import MobileCardImageRenderer from "../../mobileAsset/MobileCardImageRenderer";
 
 let MobileLearnCardMediaStyledDiv = styled.div`
   position: relative;
-  width: 100%;
-
-
-  .learn-card-views {
-    bottom: 3px;
-    right: 3px;
-  }
-
-  .learn-card-rating {
-    bottom: var(--video-card-info-distance, 2px);
-    left: var(--video-card-info-distance, 2px);
-  }
 `
 
 interface MobileLearnCardMediaPropTypes {
     post: PostTypes,
+    categoriesImages?: string[],
     mediaAlt: string,
-    postsPerRawForMobile: number,
+    index?:number,
+    isAppleMobileDevice:boolean
 }
 
 const MobileLearnCardMedia: FC<MobileLearnCardMediaPropTypes> =
     ({
          post,
          mediaAlt,
-         postsPerRawForMobile,
-     }) => {
+         categoriesImages,
+         isAppleMobileDevice
+    }) => {
+    const dynamicImage = true
+
+    const [imageUrlToRender, setImageUrlToRender] = useState(() => {
+        if (post?.mainThumbnail) {
+            return post?.mainThumbnail
+        } else if (categoriesImages?.length) {
+            return categoriesImages[Math.floor(Math.random() * categoriesImages?.length)]
+        }
+    })
+
+    useEffect(() => {
+        if (dynamicImage && !post?.mainThumbnail && categoriesImages?.length) {
+            setInterval(() => {
+                setImageUrlToRender(categoriesImages[Math.floor(Math.random() * categoriesImages?.length)])
+            }, 7000)
+        }
+    }, []);
 
         return (
-
             <MobileLearnCardMediaStyledDiv className={'mobile-learn-card-media'}>
-                <MobileCardImageRenderer imageUrl={post.mainThumbnail}
-                                         postsPerRawForMobile={postsPerRawForMobile}
+                <MobileCardImageRenderer imageUrl={imageUrlToRender}
                                          mediaAlt={mediaAlt}
+                                         isAppleMobileDevice={isAppleMobileDevice}
                 />
             </MobileLearnCardMediaStyledDiv>
         )
 
     };
+
 export default MobileLearnCardMedia;
 

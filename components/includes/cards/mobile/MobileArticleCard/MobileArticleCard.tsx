@@ -10,32 +10,28 @@ const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
 
 const MobileArticleCardStyledArticle = styled.article`
+
   background-color: var(--post-element-background-color, #131314);
-  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
-  margin: 4px 2px ;
-  font-size: 12px;
-  //max-width: 320px;
+  width: 100%;
+  font-size: 14px;
   
   .mobile-article-card-link {
     color: var(--post-element-text-color, #ccc);
-    font-size: 12px;
     position: relative;
-    max-width: 100%;
-    margin-bottom: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-    
-    .mobile-article-card-title{
-      font-size: 14px;
+    display: block;
+
+
+    .entry-header {
       font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      margin: 2px 0;
+      font-size: 14px;
       width: 100%;
+      overflow-wrap: break-word;
+      .card-header {
+        margin: 2px 0;
+      }
     }
     
     .article-card-under-media {
@@ -87,7 +83,7 @@ interface ArticleTypeCardPropTypes {
     views: number,
     rating: number
     post: PostTypes,
-    postsPerRawForMobile: number,
+    isAppleMobileDevice:boolean
 }
 
 const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
@@ -95,22 +91,26 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
          post,
          onActivateLoadingHandler,
          title,
-         postsPerRawForMobile,
          views,
-         rating
+         rating,
+         isAppleMobileDevice
      }) => {
 
         const postUrl = `/post/${post?.postType}/${post._id}`;
 
         return (
-            <MobileArticleCardStyledArticle className={'article-card'} postsPerRawForMobile={postsPerRawForMobile} >
+            <MobileArticleCardStyledArticle className={'article-card card'} >
                 <Link href={postUrl}>
                     <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-article-card-link'} title={title}>
                         <MobileArticleCardMedia post={post}
                                                 mediaAlt={title}
-                                                postsPerRawForMobile={postsPerRawForMobile}
+                                                isAppleMobileDevice={isAppleMobileDevice}
+
                         />
-                        <h3 className={'mobile-article-card-title'}>{title}</h3>
+                        <header className={'entry-header'}>
+                            <span className={'card-header'}>{title}</span>
+                        </header>
+
                         <div className={'article-card-under-media'}>
                             <div className={'mobile-article-card-under-media-info'}>
                                 {views ? <CardViews views={views} className={'article-card-views article-card-info-data'}/>
@@ -133,3 +133,11 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
     };
 
 export default MobileArticleCard;
+
+
+// background-color: var(--post-element-background-color, #131314);
+// width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
+// margin: 4px 2px ;
+// font-size: 12px;
+// max-width: 320px;
+// max-height: 320px;

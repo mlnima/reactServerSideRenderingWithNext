@@ -13,11 +13,11 @@ const WidgetHeaderStyledDiv = styled.div`
   background-color: var(--widget-header-footer-background-color,transparent) ;
   .widget-header-title{
     font-weight: initial;
-    font-size: 14px;
+    font-size: 20px;
     padding: 0 2px;
     color: var( --widget-header-footer-text-color,#fff);
   }
-  a{
+  .widget-header-redirect-link{
     font-weight: bold;
   }
 `
@@ -40,7 +40,7 @@ const WidgetHeader:FC<WidgetHeaderPropTypes> = ({translations,title,redirectLink
                 <h2 className='widget-header-title'>{widgetHeaderTitle}</h2>
                 {redirectLink && redirectToTitle && !footerLink ?
                     <Link href={redirectLink}>
-                        <a className={'btn btn-secondary'} rel={'next'} title={widgetHeaderTitle + ' content'} aria-label={redirectToTitle}>
+                        <a className={'btn btn-secondary widget-header-redirect-link'} rel={'next'} title={widgetHeaderTitle + ' content'} aria-label={redirectToTitle}>
                             {redirectToTitle}
                         </a>
                     </Link>

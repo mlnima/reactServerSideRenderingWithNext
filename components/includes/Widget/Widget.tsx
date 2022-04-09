@@ -25,7 +25,6 @@ const LanguagesSwitcher = dynamic(() => import('../widgets/LanguagesSwitcher/Lan
 const DayModeNightMode = dynamic(() => import('../widgets/DayModeNightMode/DayModeNightMode'))
 const Logo = dynamic(() => import('../widgets/Logo/Logo'))
 const LinkTo = dynamic(() => import('../widgets/LinkTo/LinkTo'))
-const PostsSlider = dynamic(() => import('../widgets/PostsSlider/PostsSlider'))
 const MenuWidget = dynamic(() => import('../widgets/MenuWidget/MenuWidget'))
 const ShoppingCart = dynamic(() => import('../widgets/ShoppingCart/ShoppingCart'))
 const FormWidget = dynamic(() => import('../widgets/FormWidget/FormWidget'))
@@ -60,7 +59,6 @@ const Widget: FC<WidgetComponentPropTypes> =
     const WidgetToRender = useMemo(()=>{
             return data.type === 'posts' ? Posts :
             data.type === 'postsSwiper' ? PostSwiper :
-            data.type === 'postsSlider' ? PostsSlider :
             data.type === 'multipleLinkTo' ? MultipleLinkTo :
             data.type === 'media' ? MediaWidget :
             data.type === 'recentComments' ? RecentComments :
@@ -116,7 +114,7 @@ const Widget: FC<WidgetComponentPropTypes> =
                     //@ts-ignore
                     widgetId={widgetId}
                     isSidebar={isSidebar}
-                    widget={true}
+                    // widget={true}
                     viewType={viewType}
                 />
                 : null

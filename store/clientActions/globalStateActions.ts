@@ -13,7 +13,7 @@ import {
     SET_ALERT, SET_HEAD_DATA,
     SET_WIDGETS_IN_GROUPS
 } from "@store/types";
-import {getTextDataWithTranslation} from "@_variables/_variables";
+import {getTextDataWithTranslation,  isAppleMobileDevice} from "@_variables/_variables";
 
 
 export const setLoginRegisterFormStatus = (statusType) => dispatch => {
@@ -99,8 +99,9 @@ export const getDefaultPageData =
                 eCommerce: {},
                 ip: context.req?.headers['x-forwarded-for'] || context.req?.socket?.remoteAddress,
                 isMobile: Boolean(userAgent?.match(
-                    /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
-                ))
+                    /Android|BlackBerry|iPhone|iPod|Opera Mini|IEMobile|WPDesktop/i
+                )),
+                isAppleMobileDevice: isAppleMobileDevice(userAgent)
             }
         })
 

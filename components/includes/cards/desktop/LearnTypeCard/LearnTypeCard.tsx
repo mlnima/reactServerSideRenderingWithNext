@@ -8,40 +8,18 @@ import dynamic from "next/dynamic";
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
-interface LearnTypeCardStyledDivPropType {
-    postsPerRawForMobile: number,
-    cardWidth: number,
-    postElementSize: string
-}
-
 const LearnTypeCardStyledDiv = styled.div`
   background-color: var(--post-element-background-color, #131314);
-  width: ${({postElementSize,cardWidth}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? '100%' : `${cardWidth}px`};
-  flex-direction: ${({postElementSize}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? 'row' : 'column'};
+  width: 100%;
   font-size: 14px;
-  padding-bottom: 5px;
-  margin: 7px;
   
   .learn-post-card-link {
     position: relative;
-    width: 100%;
-    flex-direction: ${({postElementSize}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? 'row' : 'column'};
-    margin-bottom: 4px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
-
+    display: block;
+    
     .learn-post-card-under-media {
+      position: relative;
       
-      width: calc(100% - 4px);
-      height: ${({postElementSize}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? '65px' : 'auto'};
-
-      display: flex;
-      flex-direction: column;
-      justify-content: space-between;
-      margin-left: ${({postElementSize}: LearnTypeCardStyledDivPropType) => postElementSize === 'list' ? 4 : 0}px;
-
       .learn-post-card-under-media-info {
         display: flex;
         justify-content: space-between;
@@ -72,9 +50,6 @@ const LearnTypeCardStyledDiv = styled.div`
 `
 
 interface VideoTypeCardPropTypes {
-    cardWidth: number,
-    postElementSize: string,
-    postsPerRawForMobile?: number,
     onActivateLoadingHandler: any,
     title: string,
     views: number,
@@ -85,32 +60,26 @@ interface VideoTypeCardPropTypes {
 
 const LearnTypeCard: FC<VideoTypeCardPropTypes> = 
     ({
-         cardWidth,
-         postElementSize,
-         postsPerRawForMobile,
          title,
          views,
          rating,
          post,
          index,
-         onActivateLoadingHandler
+         onActivateLoadingHandler,
      }) => {
 
     const postUrl = `/post/${post?.postType}/${post?._id}`
     const categoriesImages = post?.categories?.filter(category => category?.imageUrl).map(category => category?.imageUrl)
 
     return (
-        <LearnTypeCardStyledDiv className='learn-post-card' postElementSize={postElementSize}
-                                cardWidth={cardWidth} postsPerRawForMobile={postsPerRawForMobile}>
+        <LearnTypeCardStyledDiv className='learn-post-card'>
             <Link href={postUrl}>
                 <a rel='next' onClick={onActivateLoadingHandler} className='learn-post-card-link'
                    title={title}>
 
                     <LearnTypeCardMedia
                         categoriesImages={categoriesImages}
-                        postElementSize={postElementSize}
                         post={post}
-                        cardWidth={cardWidth}
                         mediaAlt={title}
                         index={index}
                     />
@@ -132,7 +101,3 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> =
 export default LearnTypeCard;
 
 
-// @media only screen and (min-width: 768px) {
-//
-//
-//   }

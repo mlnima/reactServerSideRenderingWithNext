@@ -1,10 +1,9 @@
 import {HYDRATE} from 'next-redux-wrapper';
-import _ from 'lodash'
 import _reduceWidgetsToGroups from "../../_variables/_reduceWidgetsToGroups/_reduceWidgetsToGroups";
 import {SET_WIDGETS, SET_WIDGETS_IN_GROUPS} from "@store/types";
+// import {findIndex} from 'lodash'
 import {
     DELETE_WIDGET,
-    SAVE_NEW_WIDGET,
     UPDATE_WIDGET
 } from "@store/adminTypes";
 
@@ -46,7 +45,8 @@ export const widgetsReducer = (state = initialState, action) => {
         //         widgets: [...state.widgets, action.payload]
         //     };
         case UPDATE_WIDGET:
-            const index = _.findIndex(state.widgets, {_id: action.payload._id});
+           // const index =  findIndex(state.widgets, {_id: action.payload._id});
+            const index = state.widgets.findIndex(widget=>widget._id === action.payload._id);
             const currentWidgets = state.widgets;
             currentWidgets.splice(index, 1, action.payload);
             return {

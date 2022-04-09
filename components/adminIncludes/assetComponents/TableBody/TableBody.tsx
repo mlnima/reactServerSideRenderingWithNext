@@ -17,7 +17,7 @@ const TableBody: FC<TableBodyPropTypes> = ({assetPageData, selectedItems, setSel
 
     const {query} = useRouter()
 
-    const renderItems = (assetPageData[query.assetsType as string] || []).map(item => {
+    const renderItems = (assetPageData[query.assetsType as string] || []).map((item:{_id:string,data:{}}) => {
         return (
             <TableBodyItem key={item._id}
                            data={item}

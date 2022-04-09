@@ -1,4 +1,4 @@
-import React, {useEffect, useState, useRef, useMemo} from 'react';
+import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
 import dynamic from 'next/dynamic'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
@@ -19,11 +19,9 @@ import {
     adminUpdateWidget
 } from "@store/adminActions/adminWidgetsActions";
 import DefaultFields from "@components/adminIncludes/widgetsModel/WidgetModel/DefaultFields/DefaultFields";
-// import _ from "lodash";
-// import staticPositions from '../staticPositions';
+
 const AdvertiseWidgetModelFields = dynamic(() => import('./AdvertiseWidgetModelFields'));
 const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
-//const RenderTitleAndRedirectLink = dynamic(() => import('./RenderTitleAndRedirectLink/RenderTitleAndRedirectLink'));
 const TextInputFieldForWidget = dynamic(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'), {ssr: false});
 const LinkTypeWidgetModelFields = dynamic(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'));
 const ImageSwiperTypeWidgetModelFields = dynamic(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'));
@@ -32,7 +30,6 @@ const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'
 const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'));
 const FormTypeWidgetModelFields = dynamic(() => import('./FormTypeWidgetModelFields/FormTypeWidgetModelFields'));
 const WidgetHeaderControl = dynamic(() => import('./WidgetHeaderControl/WidgetHeaderControl'));
-//const WidgetPreview = dynamic(() => import('./WidgetPreview/WidgetPreview'));
 
 const WidgetModelStyledDiv = styled.div`
   z-index: 3;
@@ -503,11 +500,11 @@ const WidgetModel = props => {
                     }
                     {widgetData.type === 'posts' || widgetData.type === 'postsSwiper' || widgetData.type === 'metaWithImage' || widgetData.type === 'postsSlider' ?
                         <>
-                            <SelectFieldForWidget title={'Post Element Size:'}
-                                                  name={'postElementSize'}
+                            <SelectFieldForWidget title={'Card Width Desktop:'}
+                                                  name={'cardWidthDesktop'}
                                                   ref={null}
-                                                  value={widgetData.postElementSize}
-                                                  options={['listSmall', 'list', 'smaller', 'small', 'medium', 'large', 'larger']}
+                                                  value={widgetData.cardWidthDesktop}
+                                                  options={[ 116.6, 209.8,255, 320]}
                                                   onChangeHandler={onChangeHandler}
                             />
                             <div className='checkInputFieldForWidget widgetSection'>

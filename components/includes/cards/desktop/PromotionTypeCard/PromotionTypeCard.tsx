@@ -9,18 +9,23 @@ import {viewPost} from "@store/clientActions/postsAction";
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
-let PromotionCardStyledDiv = styled.div`
-  width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: flex-start;
-  max-width: 100%;
+let PromotionCardStyledArticle = styled.article`
+  //width: 100%;
+  //position: relative;
+  //display: flex;
+  //flex-direction: column;
+  //align-items: center;
+  //justify-content: flex-start;
+  //max-width: 100%;
+  //background-color: var(--post-element-background-color, #131314);
+  //padding-bottom: 5px;
+  //font-size: 14px;
   background-color: var(--post-element-background-color, #131314);
-  padding-bottom: 5px;
-  margin: 7px;
+  width: 100%;
   font-size: 14px;
+  position: relative;
+  display: block;
+  cursor: pointer;
 
   .promotion-card-under-media {
     width: 100%;
@@ -30,7 +35,7 @@ let PromotionCardStyledDiv = styled.div`
       width: 100%;
     }
   }
-}
+
 
 .promotion-card-link-external {
   width: 100%;
@@ -44,7 +49,7 @@ let PromotionCardStyledDiv = styled.div`
 
 
   .promotion-card-link-internal {
-    height: 45px;
+    //height: 45px;
     width: 100%;
     text-decoration: none;
     color: var(--post-element-text-color, #ccc);
@@ -52,7 +57,7 @@ let PromotionCardStyledDiv = styled.div`
     flex-direction: column;
     justify-content: space-evenly;
 
-    h3 {
+    .card-header {
       font-weight: lighter;
       margin: 2px 0;
     }
@@ -91,10 +96,8 @@ let PromotionCardStyledDiv = styled.div`
 interface PromotionTypeCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
-    postElementSize: string,
     views: number,
     rating: number,
-    cardWidth: number,
     post: PostTypes,
     index?:number
 }
@@ -104,8 +107,6 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
          post,
          onActivateLoadingHandler,
          title,
-         cardWidth,
-         postElementSize,
          views,
          rating,
          index
@@ -118,26 +119,27 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
         }
 
         return (
-            <PromotionCardStyledDiv className='promotion-card' cardWidth={cardWidth}>
+            <PromotionCardStyledArticle className='promotion-card' >
 
                 <a href={post.redirectLink} className={'promotion-card-link-external'}
                    onClick={()=>dispatch(viewPost(post._id))}
-                   target={'_blank'} rel={'nofollow noopener external'}
-                >
-                    <PromotionCardMedia postElementSize={postElementSize} post={post} cardWidth={cardWidth} mediaAlt={title}  index={index}/>
+                   target={'_blank'} rel={'nofollow noopener external'}>
+                    <PromotionCardMedia  mediaAlt={title}  index={index} post={post}/>
                 </a>
-                <div className={'promotion-card-under-media'}>
+
+                <header className={'promotion-card-under-media'}>
                     <Link href={postUrl}>
                         <a className={'promotion-card-link-internal'} onClick={onInternalLinkClickHandler}>
-                            <h3>{title}</h3>
+                            <span className={'card-header'}>{title}</span>
                             <div className={'promotion-card-under-media-info'}>
                                 {views ? <CardViews views={views} className={'promotion-card-views'}/> : null}
                                 {rating ? <CardRating rating={rating} className={'promotion-card-rating'}/> : null}
                             </div>
                         </a>
                     </Link>
-                </div>
-            </PromotionCardStyledDiv>
+                </header>
+
+            </PromotionCardStyledArticle>
         );
     };
 export default PromotionTypeCard;

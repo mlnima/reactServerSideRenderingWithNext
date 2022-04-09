@@ -1,7 +1,6 @@
 import styled from "styled-components";
 import CodeSnippet from "../../../../adminIncludes/TextEditors/TextEditorReactPage/components/CodeSnippet";
 import parse from "html-react-parser";
-import _ from "lodash";
 
 const ObjectKeyDescriptionRendererStyledDiv = styled.div`
 
@@ -80,17 +79,16 @@ const ObjectKeyDescriptionRenderer = ({description}: ComponentPropTypes) => {
         const ElementType = Object.keys(elementObject)[0] as any
 
         return (
-            <div className={'learn-description-element'} key={_.uniqueId('id_')}>
+            <div className={'learn-description-element'} key={ElementType + index}>
                 {
                     ElementType === 'img' ?
                         <img  className={'learn-description-element-child learn-description-element-image'} src={elementObject?.[ElementType]}/> :
                         ElementType === 'code' ?
-                            <CodeSnippet key={index} code={elementObject?.[ElementType]}
+                            <CodeSnippet code={elementObject?.[ElementType]}
                                          language={elementObject?.language || 'js'}
                             /> :
-                            <ElementType key={_.uniqueId('id_')} className={'learn-description-element-child'}>
+                            <ElementType  className={'learn-description-element-child'}>
                                 {parse(elementObject?.[ElementType])}
-                                {/*{elementObject?.[ElementType]}*/}
                             </ElementType>
                 }
             </div>
@@ -105,15 +103,3 @@ const ObjectKeyDescriptionRenderer = ({description}: ComponentPropTypes) => {
 };
 
 export default ObjectKeyDescriptionRenderer;
-
-
-// return ElementType === 'img' ?
-//        <img key={_.uniqueId('id_')} className={'learn-description-element'} src={elementObject?.[ElementType]}/> :
-//        ElementType === 'code' ?
-//         <CodeSnippet key={_.uniqueId('id_')} code={elementObject?.[ElementType]}
-//                      language={elementObject?.language || 'js'}
-//         /> :
-//         <ElementType key={_.uniqueId('id_')} className={'learn-description-element'}>
-//             {parse(elementObject?.[ElementType])}
-//             {/*{elementObject?.[ElementType]}*/}
-//         </ElementType>

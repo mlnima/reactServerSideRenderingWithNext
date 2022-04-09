@@ -3,7 +3,7 @@ import {wrapper} from "@store/store";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import dynamic from "next/dynamic";
-import React, {ChangeEvent, useEffect} from "react";
+import React, {ChangeEvent} from "react";
 import {adminPanelEditDesign} from "@store/adminActions/adminPanelSettingsActions";
 
 const StyleSection = dynamic(() => import('@components/adminIncludes/design/StyleSection/StyleSection'), {ssr: false});
@@ -19,20 +19,24 @@ const postElement = () => {
     return (
         <>
             <div>
-                <p>Post Element Size:</p>
-                <select name='postElementSize'
-                        onChange={(e: ChangeEvent<HTMLSelectElement>) => onChangeHandler(e)}
-                        value={design.postElementSize}
-                        placeholder={'Post Element Size'}
-                >
-                    <option value='' >Select</option>
-                    <option value='list'>List</option>
-                    <option value='smaller'>smaller</option>
-                    <option value='small'>small</option>
-                    <option value='medium'>medium</option>
-                    <option value='large'>large</option>
-                    <option value='larger'>larger</option>
-                </select>
+                <p>Card Width Desktop:</p>
+                <input className={'form-control-input'}
+                       type={'number'}
+                       name={'cardWidthDesktop'}
+                       placeholder={'Card Width Desktop px' }
+                       value={design.cardWidthDesktop}
+                       onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeHandler(e)}
+                />
+            </div>
+            <div>
+                <p>Posts Per Raw For Mobile:</p>
+                <input className={'form-control-input'}
+                       type={'number'}
+                       name={'postsPerRawForMobile'}
+                       placeholder={'Posts Per Raw For Mobile' }
+                       value={design.postsPerRawForMobile}
+                       onChange={(e: ChangeEvent<HTMLInputElement>) => onChangeHandler(e)}
+                />
             </div>
             <div>
                 <p>Post Element Image Loader:</p>
@@ -40,6 +44,7 @@ const postElement = () => {
                         onChange={(e: ChangeEvent<HTMLSelectElement>) => onChangeHandler(e)}
                         value={design.postElementImageLoader}
                         placeholder={'Post Element Image Loader'}
+                        className={'custom-select'}
                 >
                     <option value='' >Select</option>
                     <option value='normal'>Normal</option>
@@ -49,8 +54,6 @@ const postElement = () => {
             {design.postElementImageLoader === 'next' ?
                 <div>
                     <p>Post Element Image Loader Type:</p>
-
-
                     <select name='postElementImageLoaderType'
                             onChange={(e: ChangeEvent<HTMLSelectElement>) => onChangeHandler(e)}
                             value={design.postElementImageLoaderType}

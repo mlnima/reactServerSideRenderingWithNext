@@ -20,30 +20,29 @@ let MobilePromotionCardMediaStyledDiv = styled.div`
 interface MobilePromotionCardMediaPropTypes {
     post: PostTypes,
     mediaAlt: string,
-    postsPerRawForMobile: number,
     index: number,
-
+    isAppleMobileDevice:boolean
 }
 
 const MobilePromotionCardMedia: FC<MobilePromotionCardMediaPropTypes> =
     ({
          post,
          mediaAlt,
-         postsPerRawForMobile,
-         index
-     }) => {
+         index,
+         isAppleMobileDevice
+    }) => {
 
         return (
-
             <MobilePromotionCardMediaStyledDiv className={'mobile-promotion-card-media'}>
                 <MobileCardImageRenderer imageUrl={post.mainThumbnail}
-                                         postsPerRawForMobile={postsPerRawForMobile}
                                          mediaAlt={mediaAlt}
                                          index={index}
+                                         isAppleMobileDevice={isAppleMobileDevice}
                 />
             </MobilePromotionCardMediaStyledDiv>
         )
 
     };
+
 export default MobilePromotionCardMedia;
 

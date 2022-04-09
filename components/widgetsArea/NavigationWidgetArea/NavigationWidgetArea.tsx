@@ -5,12 +5,12 @@ import {useSelector} from "react-redux";
 
 let StyledNavigation = styled.nav`
   grid-area: navigation;
-  background-color: var(--navigation-background-color,#000);
+  background-color: var(--navigation-background-color, #000);
   height: 56px;
   display: flex;
   align-items: center;
-  
-  .navigation-content{
+
+  .navigation-content {
     display: flex;
     justify-content: space-between;
     flex-wrap: wrap;
@@ -20,14 +20,14 @@ let StyledNavigation = styled.nav`
     width: 100%;
     height: 100%;
   }
-  
-  @media only screen and (min-width: 768px){
-    .navigation-content{
+
+  @media only screen and (min-width: 768px) {
+    .navigation-content {
       align-items: center;
     }
   }
-  
-  ${(props:{stylesData:string}) => props.stylesData ?? ''}
+
+  ${(props: { stylesData: string }) => props.stylesData ?? ''}
 `
 
 const NavigationWidgetArea = () => {
@@ -35,7 +35,7 @@ const NavigationWidgetArea = () => {
     return (
         <StyledNavigation stylesData={navigationStyle || ''} className={'widget-area navigation'}>
             <div className='navigation-content'>
-            <WidgetsRenderer position={'navigation'}/>
+                <WidgetsRenderer position={'navigation'}/>
             </div>
         </StyledNavigation>
     );

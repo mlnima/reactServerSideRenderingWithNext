@@ -4,14 +4,14 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 
 interface DefaultTypeCardMediaPropTypes {
     post:PostTypes,
-    postElementSize:string,
+    postElementSize: number | string,
     cardWidth:number,
     mediaAlt:string,
 }
 
 interface DefaultTypeCardMediaStyledDivPropTypes{
     cardWidth:number,
-    postElementSize:string
+    postElementSize: number | string
 }
 
 let DefaultTypeCardMediaStyledDiv = styled.div`

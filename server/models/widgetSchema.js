@@ -41,7 +41,7 @@ const widgetDataSchema = new Schema({
     LogoUrl: String,
     headLine: String,
     linkToType: String,
-    postElementSize: String,
+    cardWidthDesktop: Number,
     linkToText: String,
     linkToAs: String,
     editMode: Boolean,

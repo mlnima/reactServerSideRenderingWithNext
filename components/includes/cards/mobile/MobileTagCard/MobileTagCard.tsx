@@ -8,10 +8,9 @@ import {useRouter} from "next/router";
 import MobileTagCardMedia from "./MobileTagCardMedia";
 
 const MobileTagCardStyledArticle = styled.article`
-  margin: 1vw;
   background-color: var(--post-element-background-color, #131314);
-  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
-  //max-width: 320px;
+  width: 100%;
+
   .tag-card-link{
     width: 100%;
     color: var(--post-element-text-color, #ccc);
@@ -19,8 +18,6 @@ const MobileTagCardStyledArticle = styled.article`
       display: flex;
       align-items: center;
       justify-content: center;
-      width: 95%;
-      margin: auto;
       
       .tag-card-title, .tag-card-count {
         color: var(--post-element-text-color, #ccc);
@@ -46,19 +43,19 @@ const MobileTagCardStyledArticle = styled.article`
 `
 
 interface MobileTagCardPropTypes {
-    postsPerRawForMobile: number,
     tag: Meta,
     onActivateLoadingHandler: any,
-    index?:number
+    index?:number,
+    isAppleMobileDevice :boolean
 }
 
 const MobileTagCard: FC<MobileTagCardPropTypes> =
     ({
          tag,
          onActivateLoadingHandler,
-         postsPerRawForMobile,
-         index
-     }) => {
+         index,
+         isAppleMobileDevice
+    }) => {
 
         const {t} = useTranslation('customTranslation');
         const {locale} = useRouter();
@@ -71,7 +68,7 @@ const MobileTagCard: FC<MobileTagCardPropTypes> =
         }, [tag?.name]);
 
         return (
-            <MobileTagCardStyledArticle postsPerRawForMobile={postsPerRawForMobile} >
+            <MobileTagCardStyledArticle  >
                 <Link href={`/tag/${tag?._id}`}>
                     <a className='tag-card-link'
                        onClick={onActivateLoadingHandler}
@@ -79,9 +76,9 @@ const MobileTagCard: FC<MobileTagCardPropTypes> =
                     >
                         <div className={'mobile-tag-card-image'}>
                             <MobileTagCardMedia imageUrl={tag.imageUrl}
-                                                     mediaAlt={cardTitle as string}
-                                                    index={index}
-                                                     postsPerRawForMobile={postsPerRawForMobile}
+                                                mediaAlt={cardTitle as string}
+                                                index={index}
+                                                isAppleMobileDevice={isAppleMobileDevice}
                             />
                         </div>
                         <div className={'tag-card-info'}>

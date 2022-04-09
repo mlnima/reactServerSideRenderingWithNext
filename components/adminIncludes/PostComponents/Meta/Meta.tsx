@@ -5,7 +5,9 @@ import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {adminEditPost} from "@store/adminActions/adminPanelPostsActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-import _ from "lodash";
+// import {uniqBy} from "lodash";
+import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
+
 const MetaStyledDiv = styled.div`
   .add-new-meta {
     display: flex;
@@ -61,9 +63,10 @@ const Meta:FC<MetaPropType> = props => {
         })
 
         const previousMetaData = post?.[props.type] || [];
-        const uniqItems = _.uniqBy([...previousMetaData, ...newItemsToSchemaForm], (e) => {
-            return e.name;
-        })
+        // const uniqItems = uniqBy([...previousMetaData, ...newItemsToSchemaForm], (e) => {
+        //     return e.name;
+        // })
+        const uniqItems = _uniqBy([...previousMetaData, ...newItemsToSchemaForm],'name')
 
         dispatch(adminEditPost({
             [props.type]: uniqItems

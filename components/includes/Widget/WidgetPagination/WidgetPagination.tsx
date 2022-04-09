@@ -37,13 +37,14 @@ interface WidgetPaginationPropTypes {
 }
 
 const WidgetPagination: FC<WidgetPaginationPropTypes> = ({baseUrl, totalCount,count}) => {
-    const postsCountPerPage = useSelector((store:StoreTypes) => {
-        return store?.settings?.identity?.postsCountPerPage ?
-              // @ts-ignore
-               parseInt(store?.settings?.identity?.postsCountPerPage)
+
+    const postsCountPerPage = useSelector(({settings}:StoreTypes) => {
+        return settings?.identity?.postsCountPerPage ?
+               parseInt(settings?.identity?.postsCountPerPage)
                : 20
     })
-    const maxPage = totalCount ? Math.ceil(totalCount / postsCountPerPage) : []
+
+    const maxPage = totalCount ? Math.ceil(totalCount / postsCountPerPage) : 0
     const pages = [...rangeNumGenerator(1,maxPage),maxPage]
 
     return (

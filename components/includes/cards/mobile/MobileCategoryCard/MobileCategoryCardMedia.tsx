@@ -12,25 +12,24 @@ const MobileCategoryCardMediaStyledDiv = styled.div`
 interface MobileCategoryCardMediaPropTypes {
     imageUrl: string,
     mediaAlt: string,
-    postsPerRawForMobile: number,
-    index?:number
+    index?:number,
+    isAppleMobileDevice:boolean
 }
 
 const MobileCategoryCardMedia: FC<MobileCategoryCardMediaPropTypes> =
     ({
          imageUrl,
          mediaAlt,
-         postsPerRawForMobile,
-         index
+         index,
+         isAppleMobileDevice
      }) => {
 
         return (
             <MobileCategoryCardMediaStyledDiv>
                 <MobileCardImageRenderer mediaAlt={mediaAlt}
                                          imageUrl={imageUrl}
-                                         postsPerRawForMobile={postsPerRawForMobile}
-
                                          index={index}
+                                         isAppleMobileDevice={isAppleMobileDevice}
                 />
             </MobileCategoryCardMediaStyledDiv>
         )

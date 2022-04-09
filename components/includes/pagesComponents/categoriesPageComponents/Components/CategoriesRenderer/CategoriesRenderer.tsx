@@ -9,48 +9,66 @@ const CategoryCard = dynamic(() => import('@components/includes/cards/desktop/Ca
 const MobileCategoryCard = dynamic(() =>
     import('@components/includes/cards/mobile/MobileCategoryCard/MobileCategoryCard'));
 
-let CategoriesRendererStyledDiv = styled.div`
-  display: flex;
-  flex-wrap: wrap;
-  justify-content: center;
-`
-
 interface CategoriesRendererPropTypes {
     uniqueData?:{
         metaData?:Meta[],
     },
-    postElementSize: string,
+    cardWidthDesktop:  number ,
 }
 
-const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ postElementSize,uniqueData}) => {
+interface CategoriesContentStyledDivPropTypes{
+    postsPerRawForMobile:number,
+    cardWidth:number,
+}
+
+
+let CategoriesRendererStyledDiv = styled.div`
+  display: grid;
+  width: 98%;
+  margin: auto;
+  grid-gap: 5px;
+  grid-template-columns: repeat( auto-fill, minmax(${({postsPerRawForMobile}:CategoriesContentStyledDivPropTypes)=>`${96/postsPerRawForMobile}`}vw, 2fr) );
+  
+  @media only screen and (min-width: 768px) {
+    grid-gap: 10px;
+    grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:CategoriesContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );
+  }
+`
+
+
+
+const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ cardWidthDesktop,uniqueData}) => {
 
     const dispatch = useDispatch();
 
-    const {categoriesMetas,postsPerRawForMobile,isMobile,cardWidth} = useSelector(({settings,posts}: StoreTypes)=>{
-        const elementSize = postElementSize ? postElementSize : settings?.design?.postElementSize;
+    const {categoriesMetas,postsPerRawForMobile,isMobile,cardWidth,isAppleMobileDevice} = useSelector(({settings,posts}: StoreTypes)=>{
+
         return{
             categoriesMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.categoriesMetas,
-            postsPerRawForMobile: settings?.identity?.postsPerRawForMobile || 2,
+            postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
             isMobile: settings?.isMobile,
-            cardWidth: cardSizeCalculator(elementSize)
+            cardWidth: cardWidthDesktop || 255,
+            isAppleMobileDevice:settings?.isAppleMobileDevice
         }
     })
 
     return (
-        <CategoriesRendererStyledDiv className='categories-block'>
+        <CategoriesRendererStyledDiv className={'categories-block'}
+                                     cardWidth={cardWidth}
+                                     postsPerRawForMobile={postsPerRawForMobile}>
+
             {categoriesMetas.map((category,index) => {
 
                 if (isMobile){
-                    return <MobileCategoryCard postsPerRawForMobile={postsPerRawForMobile}
-                                               category={category}
+                    return <MobileCategoryCard category={category}
                                                key={category._id}
                                                onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                                index={index}
+                                               isAppleMobileDevice={isAppleMobileDevice}
                     />
                 }else{
                     return <CategoryCard onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                          key={category._id}
-                                         cardWidth={cardWidth}
                                          category={category}
                                          index={index}
 

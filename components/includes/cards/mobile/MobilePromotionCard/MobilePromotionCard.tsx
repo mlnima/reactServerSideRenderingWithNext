@@ -11,40 +11,31 @@ const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 const MobilePromotionCardStyledArticle = styled.article`
-
-  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
-  //max-width: 320px;
-  margin: 4px 2px;
   background-color: var(--post-element-background-color, #131314);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-
+  width: 100%;
+  font-size: 14px;
+  
   .promotion-card-link-external {
     color: var(--post-element-text-color, #ccc);
     position: relative;
-    width: calc(100% - 4px);
-    margin-bottom: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
+    display: block;
   }
 
   .mobile-promotion-card-link-internal {
     color: var(--post-element-text-color, #ccc);
     width: 100%;
 
-    .mobile-promotion-card-title {
-      font-size: 14px;
+    .entry-header {
       font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      margin: 2px;
+      font-size: 14px;
       width: 100%;
+      overflow-wrap: break-word;
+      .card-header {
+        margin: 2px 0;
+      }
     }
 
     .promotion-card-under-media {
@@ -90,8 +81,8 @@ interface MobilePromotionCardPropTypes {
     views: number,
     rating: number
     post: PostTypes,
-    postsPerRawForMobile: number,
-    index:number
+    index:number,
+    isAppleMobileDevice:boolean
 }
 
 const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
@@ -99,10 +90,11 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
          post,
          onActivateLoadingHandler,
          title,
-         postsPerRawForMobile,
          views,
          rating,
-         index
+         index,
+         isAppleMobileDevice
+
      }) => {
 
         const dispatch = useDispatch();
@@ -114,20 +106,22 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
         };
 
         return (
-            <MobilePromotionCardStyledArticle className='promotion-card' postsPerRawForMobile={postsPerRawForMobile}>
+            <MobilePromotionCardStyledArticle className='promotion-card'>
                 <a href={post.redirectLink} className='promotion-card-link-external'
                    onClick={() => dispatch(viewPost(post._id))} target='_blank' rel="nofollow noopener external">
                     <MobilePromotionCardMedia post={post}
                                               mediaAlt={title}
-                                              postsPerRawForMobile={postsPerRawForMobile}
                                               index={ index}
+                                              isAppleMobileDevice={isAppleMobileDevice}
                     />
                 </a>
 
                 <Link href={postUrl}>
                     <a className='mobile-promotion-card-link-internal' title={title}
                        onClick={onInternalLinkClickHandler}>
-                        <h3 className={'mobile-promotion-card-title'}>{title}</h3>
+                        <header className={'entry-header'}>
+                            <span className={'card-header'}>{title}</span>
+                        </header>
                         <div className='promotion-card-under-media'>
                             <div className='promotion-card-under-media-info'>
                                 {views ? <CardViews views={views}
@@ -147,3 +141,15 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
     };
 
 export default MobilePromotionCard;
+
+
+// width: 100%;
+// // width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
+// //max-width: 320px;
+// //max-height: 320px;
+// margin: 4px 2px;
+// background-color: var(--post-element-background-color, #131314);
+// display: flex;
+// flex-direction: column;
+// align-items: center;
+// justify-content: center;

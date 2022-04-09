@@ -14,8 +14,7 @@ const MobileVideoCardTrailerStyledDiv = styled.div`
 
   .video-card-trailer {
     object-fit: contain;
-    width: ${({postsPerRawForMobile}: {postsPerRawForMobile:number}) => `calc(96vw  / ${postsPerRawForMobile || 1})`};
-    height: ${({postsPerRawForMobile}: {postsPerRawForMobile:number}) => `calc((96vw  / ${postsPerRawForMobile || 1})  / 1.777)`};
+    aspect-ratio: 16 / 9;
     animation: opacityAnimationStart 2s alternate;
   }
 `
@@ -25,10 +24,9 @@ interface ComponentPropTypes {
     hover: boolean,
     hoverHandler: any,
     videoTrailerUrl: string,
-    postsPerRawForMobile:number
 }
 
-const MobileVideoCardTrailer = ({hover, hoverHandler, videoTrailerUrl,postsPerRawForMobile}: ComponentPropTypes) => {
+const MobileVideoCardTrailer = ({hover, hoverHandler, videoTrailerUrl}: ComponentPropTypes) => {
     const videoTrailer = useRef(null)
     const videoTrailerUrlSource = useMemo(() => videoTrailerUrl, [videoTrailerUrl])
 
@@ -39,7 +37,7 @@ const MobileVideoCardTrailer = ({hover, hoverHandler, videoTrailerUrl,postsPerRa
     }, [hover]);
 
     return (
-        <MobileVideoCardTrailerStyledDiv className={'video-card-media'} postsPerRawForMobile={postsPerRawForMobile}>
+        <MobileVideoCardTrailerStyledDiv className={'video-card-media'} >
             <video ref={videoTrailer}
                    loop={false}
                    onMouseEnter={hoverHandler}
@@ -58,3 +56,7 @@ const MobileVideoCardTrailer = ({hover, hoverHandler, videoTrailerUrl,postsPerRa
     )
 };
 export default MobileVideoCardTrailer
+
+
+// width: ${({postsPerRawForMobile}: {postsPerRawForMobile:number}) => `calc(96vw  / ${postsPerRawForMobile || 1})`};
+// height: ${({postsPerRawForMobile}: {postsPerRawForMobile:number}) => `calc((96vw  / ${postsPerRawForMobile || 1})  / 1.777)`};

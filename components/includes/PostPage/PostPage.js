@@ -6,9 +6,6 @@ import {useSelector} from "react-redux";
 import ratingCalculator from "../../../_variables/util/ratingCalculator";
 import RelatedPostsRenderer from "./components/RelatedPostsRenderer";
 const WidgetsRenderer = dynamic(() => import('../WidgetsRenderer/WidgetsRenderer'))
-// const EditLinkForAdmin = dynamic(() => import('./components/EditLinkForAdmin/EditLinkForAdmin'),{ssr:false})
-// const PostMetaDataToSiteHead = dynamic(() => import('./components/PostMetaDataToSiteHead/PostMetaDataToSiteHead'))
-// const VideoPlayer = dynamic(() => import('./components/VideoPlayer/VideoPlayer'))
 const SlideShow = dynamic(() => import('./components/SlideShow/SlideShow'))
 const PostTitle = dynamic(() => import('./components/PostTitle/PostTitle'))
 const PostDescription = dynamic(() => import('./components/PostDescription/PostDescription'))

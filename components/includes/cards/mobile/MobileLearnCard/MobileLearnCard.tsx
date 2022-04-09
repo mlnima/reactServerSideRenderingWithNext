@@ -4,6 +4,8 @@ import styled from "styled-components";
 import Link from "next/link";
 import dynamic from "next/dynamic";
 import LearnTypeCardMedia from "@components/includes/cards/desktop/LearnTypeCard/LearnTypeCardMedia";
+import MobileLearnCardMedia from "@components/includes/cards/mobile/MobileLearnCard/MobileLearnCardMedia";
+
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
@@ -12,39 +14,33 @@ interface MobileLearnCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
     views: number,
-    cardWidth: number,
     rating: number
     post: PostTypes,
-    postsPerRawForMobile: number,
-    postElementSize: string,
+    isAppleMobileDevice: boolean
 }
 
 const MobileLearnCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
-  width: ${({postsPerRawForMobile}: { postsPerRawForMobile: number }) => `calc(96vw / ${postsPerRawForMobile || 2})`};
-  margin: 4px 2px ;
-  font-size: 12px;
-  //max-width: 320px;
+  width: 100%;
+  font-size: 14px;
+
   .mobile-learn-card-link {
     color: var(--post-element-text-color, #ccc);
-    font-size: 12px;
     position: relative;
-    max-width: 100%;
-    margin-bottom: 4px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: space-between;
-    text-decoration: none;
+    display: block;
 
-    .mobile-learn-card-title{
-      font-size: 14px;
+    .entry-header {
       font-weight: normal;
       white-space: nowrap;
       text-overflow: ellipsis;
       overflow: hidden;
-      margin: 2px 0;
+      font-size: 14px;
       width: 100%;
+      overflow-wrap: break-word;
+
+      .card-header {
+        margin: 2px 0;
+      }
     }
 
     .learn-card-under-media {
@@ -71,6 +67,7 @@ const MobileLearnCardStyledArticle = styled.article`
           padding: 0 2px;
           color: var(--post-element-info-text-color, #ccc);
           font-size: 12px;
+
           .icon {
             width: 14px;
             height: 14px;
@@ -79,7 +76,8 @@ const MobileLearnCardStyledArticle = styled.article`
         }
       }
     }
-    .last-update{
+
+    .last-update {
       width: 100%;
     }
 
@@ -91,30 +89,38 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
          post,
          onActivateLoadingHandler,
          title,
-         postsPerRawForMobile,
          views,
-         postElementSize,
-         cardWidth,
-         rating
-     }) =>{
+         rating,
+         isAppleMobileDevice
+     }) => {
 
         return (
-            <MobileLearnCardStyledArticle className={'learn-card'} postsPerRawForMobile={postsPerRawForMobile}>
+            <MobileLearnCardStyledArticle className={'learn-card'}>
                 <Link href={`/post/${post?.postType}/${post._id}`}>
-                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-learn-card-link'} title={title}>
+                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-learn-card-link'}
+                       title={title}>
 
-                        <LearnTypeCardMedia
-                            categoriesImages={
-                                post.categories?.filter(
-                                    category => category?.imageUrl).map(category => category?.imageUrl
-                                )
-                            }
-                            postElementSize={postElementSize}
-                            post={post}
-                            cardWidth={cardWidth}
-                            mediaAlt={title}
-                        />
-                        <h3 className={'mobile-learn-card-title'}>{title}</h3>
+                        {/*<LearnTypeCardMedia*/}
+                        {/*    categoriesImages={*/}
+                        {/*        post.categories?.filter(*/}
+                        {/*            category => category?.imageUrl).map(category => category?.imageUrl*/}
+                        {/*        )*/}
+                        {/*    }*/}
+                        {/*    post={post}*/}
+                        {/*    mediaAlt={title}*/}
+                        {/*/>*/}
+                        <MobileLearnCardMedia post={post}
+                                              mediaAlt={title}
+                                              isAppleMobileDevice={isAppleMobileDevice}
+                                              categoriesImages={
+                                                  post.categories?.filter(
+                                                      category => category?.imageUrl).map(category => category?.imageUrl
+                                                  )
+                                              }/>
+
+                        <header className={'entry-header'}>
+                            <span className={'card-header'}>{title}</span>
+                        </header>
                         <div className={'learn-card-under-media'}>
                             <div className={'learn-card-under-media-info'}>
                                 {views ?

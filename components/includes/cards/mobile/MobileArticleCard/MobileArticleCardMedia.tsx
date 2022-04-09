@@ -6,40 +6,21 @@ import MobileCardImageRenderer from "../../mobileAsset/MobileCardImageRenderer";
 let MobileArticleCardMediaStyledDiv = styled.div`
   position: relative;
   width: 100%;
-  
-  .article-card-views {
-    bottom: 3px;
-    right: 3px;
-  }
-
-  .article-card-rating {
-    bottom: var(--video-card-info-distance, 2px);
-    left: var(--video-card-info-distance, 2px);
-  }
+  height: calc(100% / 1.777);
 `
 
 
 interface MobileArticleCardMediaPropTypes {
     post: PostTypes,
     mediaAlt: string,
-    postsPerRawForMobile: number,
+    isAppleMobileDevice
 }
 
-const MobileArticleCardMedia: FC<MobileArticleCardMediaPropTypes> =
-    ({
-         post,
-         mediaAlt,
-         postsPerRawForMobile,
-     }) => {
+const MobileArticleCardMedia: FC<MobileArticleCardMediaPropTypes> = ({post, mediaAlt,isAppleMobileDevice}) => {
 
         return (
-
             <MobileArticleCardMediaStyledDiv className={'mobile-article-card-media'}>
-                <MobileCardImageRenderer imageUrl={post.mainThumbnail}
-                                         postsPerRawForMobile={postsPerRawForMobile}
-                                         mediaAlt={mediaAlt}
-                />
-
+                <MobileCardImageRenderer imageUrl={post.mainThumbnail} mediaAlt={mediaAlt} isAppleMobileDevice={isAppleMobileDevice}/>
             </MobileArticleCardMediaStyledDiv>
         )
 

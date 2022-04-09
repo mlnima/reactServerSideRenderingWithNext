@@ -144,7 +144,7 @@ export const menuWidgetModel = {
 export const postsWidgetModel = {
     ...generalModel,
     count:8,
-    postElementSize:'small',
+    postElementSize:255,
     sortBy:'-lastModify'
 }
 

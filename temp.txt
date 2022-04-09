@@ -1,0 +1,71 @@
+[1] Page                                       Size     First Load JS
+[1] ┌ λ /                                      1.49 kB         131 kB
+[1] ├   /_app                                  0 B             117 kB
+[1] ├ ○ /404                                   2.74 kB         132 kB
+[1] ├ ● /500                                   2.72 kB         132 kB
+[1] ├ λ /actor/[actorId]                       3.54 kB         151 kB
+[1] ├ λ /actors                                5.76 kB         144 kB
+
+[1] ├ λ /admin                                 3.32 kB         176 kB
+[1] ├ λ /admin/assets                          3.6 kB          145 kB
+[1] ├ λ /admin/design/customColors             395 B           117 kB
+[1] ├ λ /admin/design/customStyles             395 B           117 kB
+[1] ├ λ /admin/design/footer                   396 B           117 kB
+[1] ├ λ /admin/design/header                   397 B           117 kB
+[1] ├ λ /admin/design/metasPage                398 B           117 kB
+[1] ├ λ /admin/design/navigation               397 B           117 kB
+[1] ├ λ /admin/design/postElement              1.62 kB         125 kB
+[1] ├ λ /admin/design/postPage                 2.59 kB         143 kB
+[1] ├ λ /admin/design/postsPage                408 B           117 kB
+[1] ├ λ /admin/design/topBar                   401 B           117 kB
+[1] ├ λ /admin/design/widgets                  12.9 kB         216 kB
+[1] ├ λ /admin/design/widgets/widget           299 B           117 kB
+[1] ├ λ /admin/exporter/postsExporter          1.4 kB          143 kB
+[1] ├ λ /admin/fileManager                     6.7 kB          171 kB
+[1] ├ λ /admin/form/[formId]                   1.69 kB         137 kB
+[1] ├ λ /admin/importer                        284 B           117 kB
+[1] ├ λ /admin/importer/content                1.47 kB         130 kB
+[1] ├ λ /admin/importer/postsImporter          1.84 kB         143 kB
+[1] ├ λ /admin/importer/youtube                2.03 kB         144 kB
+[1] ├ λ /admin/meta                            1.98 kB         144 kB
+[1] ├ λ /admin/page                            2.61 kB         143 kB
+[1] ├ λ /admin/post                            6.35 kB         178 kB
+[1] ├ λ /admin/settings                        2.52 kB         132 kB
+[1] ├ λ /admin/settings/customScript           1.57 kB         125 kB
+[1] ├ λ /admin/settings/eCommerceSettings      1.21 kB         131 kB
+[1] ├ λ /admin/settings/general                5.89 kB         167 kB
+[1] ├ λ /admin/settings/socialMediaSettings    295 B           117 kB
+[1] ├ λ /admin/tools                           2.89 kB         144 kB
+[1] ├ λ /admin/tools/terminal                  2.48 kB         148 kB
+[1] ├ λ /admin/translations                    1.23 kB         131 kB
+[1] ├ λ /admin/user                            2.72 kB         138 kB
+[1] ├ λ /admin/users                           1.64 kB         125 kB
+
+[1] ├ λ /auth/login                            405 B           127 kB
+[1] ├ λ /auth/register                         406 B           127 kB
+[1] ├ λ /categories                            4.84 kB         143 kB
+[1] ├ λ /category/[categoryId]                 3.73 kB         152 kB
+[1] ├ λ /chatroom/[chatRoomName]               11.4 kB         260 kB
+[1] ├ λ /checkout                              1.04 kB         131 kB
+[1] ├ λ /maintenance                           539 B           130 kB
+[1] ├ λ /messenger                             4.93 kB         234 kB
+[1] ├ λ /messenger/[conversation]              7.53 kB         269 kB
+[1] ├ λ /page/[pageName]                       1.5 kB          131 kB
+[1] ├ λ /post/[postType]/[id]                  5.79 kB         175 kB
+[1] ├ λ /posts                                 3.26 kB         151 kB
+[1] ├ λ /profile                               4.52 kB         214 kB
+[1] ├ λ /profile/edit                          2.11 kB         212 kB
+[1] ├ λ /profile/followers                     892 B           188 kB
+[1] ├ λ /profile/following                     895 B           188 kB
+[1] ├ λ /profile/post                          32.5 kB         198 kB
+[1] ├ λ /profile/posts                         3.72 kB         188 kB
+[1] ├ λ /search/[keyword]                      4.15 kB         152 kB
+[1] ├ λ /tag/[tagId]                           3.71 kB         152 kB
+[1] ├ λ /tags                                  4.87 kB         144 kB
+[1] └ λ /user/[username]                       2.65 kB         216 kB
+
+[1] + First Load JS shared by all              117 kB
+[1]   ├ chunks/framework-7ef35bf4aadc7504.js   46.8 kB
+[1]   ├ chunks/main-acdb36f21dd2afa4.js        34.5 kB
+[1]   ├ chunks/pages/_app-88742ce55b856fed.js  30.1 kB
+[1]   └ chunks/webpack-b35ac2c630dad23d.js     5.62 kB

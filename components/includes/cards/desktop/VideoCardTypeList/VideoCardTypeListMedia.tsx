@@ -41,7 +41,7 @@ const NoImageStyleDiv = styled.div`
 
 interface VideoCardTypeListMediaPropTypes {
     post: PostTypes,
-    postElementSize: string,
+    postElementSize:  number | string,
     cardWidth: number,
     mediaAlt: string,
     index?:number

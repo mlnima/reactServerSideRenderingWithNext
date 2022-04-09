@@ -2,7 +2,7 @@ const widgetSchema = require('../../../models/widgetSchema');
 const metaSchema = require('../../../models/metaSchema');
 const postSchema = require('../../../models/postSchema');
 const _clientQueryGeneratorForGettingPosts = require('../../clientControllers/_variables/_clientQueryGeneratorForGettingPosts')
-// const {map} = require("lodash");
+
 
 
 const updatePostWidget = async (widget) => {

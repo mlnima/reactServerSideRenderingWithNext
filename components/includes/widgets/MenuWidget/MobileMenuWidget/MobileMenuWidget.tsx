@@ -82,7 +82,15 @@ const MobileMenuWidget: FC<MobileMenuWidgetPropTypes> = ({menuItemsInOrder,mobil
                     className='navigation-close-button btn btn-transparent-light'>
                     <span className='navigation-mobile-button-logo'/>
                 </li>
-                {menuItemsInOrder.map(menuItem=><MobileMenuWidgetItem menuItem={menuItem} key={menuItem.itemIndex} setOpen={setOpen} mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}/>)}
+                {menuItemsInOrder.map(menuItem=>{
+                    return (
+                        <MobileMenuWidgetItem menuItem={menuItem}
+                                              key={menuItem.itemIndex}
+                                              setOpen={setOpen}
+                                              mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}
+                        />
+                    )
+                })}
             </ul>
         </MobileMenuWidgetStyledAside>
     )

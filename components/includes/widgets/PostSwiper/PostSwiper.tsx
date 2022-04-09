@@ -88,7 +88,7 @@ interface PostSwiperComponentTypes {
         },
     }
     widgetId?: string,
-    postElementSize?: string,
+    cardWidthDesktop?:  number ,
     isSidebar?: boolean,
     index?: number
 }
@@ -104,7 +104,7 @@ let PostSwiperStyledDiv = styled.div`
       color: var(--main-active-color,#f90)!important;
     }
     .swiper-pagination{
-      bottom: 0px;
+      bottom: 0;
       z-index: 3!important;
       span{
         background-color: var(--main-active-color,#f90)!important;
@@ -120,24 +120,20 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
          posts,
          uniqueData,
          widgetId,
-         postElementSize,
+         cardWidthDesktop,
          isSidebar,
      }) => {
         const {locale} = useRouter()
         const dispatch = useDispatch()
         const swiperParent = useRef(null)
 
-        const PostSwiperData = useSelector((store: StoreTypes) => {
-            const elementSize = postElementSize ? postElementSize : store.settings?.design?.postElementSize
+        const {elementSize,postsPerRawForMobile,isMobile,cardWidth} = useSelector((store: StoreTypes) => {
+            const elementSize = cardWidthDesktop ? cardWidthDesktop : store.settings?.design?.cardWidthDesktop || 255
             return {
                 elementSize,
                 postsPerRawForMobile: 1,
                 isMobile: store.settings?.isMobile,
-                cardWidth: elementSize === 'listSmall' ? 320 :
-                    elementSize === 'list' ? 116.6 :
-                        elementSize === 'smaller' ? 209.8 :
-                            elementSize === 'small' ? 255 :
-                                elementSize === 'medium' ? 320 : 255
+                cardWidth:elementSize
             }
         })
 
@@ -163,12 +159,12 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
                 rating,
                 noImageUrl,
                 post,
-                postElementSize: PostSwiperData.elementSize,
+                cardWidthDesktop: elementSize,
                 widgetId,
-                postsPerRawForMobile: PostSwiperData.postsPerRawForMobile,
-                cardWidth: PostSwiperData.cardWidth,
+                postsPerRawForMobile: postsPerRawForMobile,
+                cardWidth: cardWidth,
                 title,
-                isMobile: PostSwiperData.isMobile,
+                isMobile: isMobile,
                 isSidebar: isSidebar,
                 onActivateLoadingHandler: () => dispatch(setLoading(true))
             }
@@ -185,7 +181,7 @@ const PostSwiper: FC<PostSwiperComponentTypes> =
         })
 
         const swiperProps = useMemo(() => {
-            const deviceTypeData = PostSwiperData?.isMobile ? 'swiperConfigMobile' : 'swiperConfigDesktop'
+            const deviceTypeData = isMobile ? 'swiperConfigMobile' : 'swiperConfigDesktop'
             return {
                 ...(uniqueData?.[deviceTypeData] || {}),
                 modules: uniqueData?.[deviceTypeData]?.effect === 'cube' ? [EffectCube, Pagination] :

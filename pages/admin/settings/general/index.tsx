@@ -580,15 +580,15 @@ const settings = () => {
                            value={identity.postsCountPerPage}
                            onChange={e => onChangeHandler(e)}/>
                 </div>
-                <div className={'site-settings-form-section'}>
-                    <p>Posts Per Row For Mobile</p>
-                    <input type={'number'}
-                           name={'postsPerRawForMobile'}
-                           className={'form-control-input'}
-                        // @ts-ignore
-                           value={identity.postsPerRawForMobile}
-                           onChange={e => onChangeHandler(e)}/>
-                </div>
+                {/*<div className={'site-settings-form-section'}>*/}
+                {/*    <p>Posts Per Row For Mobile</p>*/}
+                {/*    <input type={'number'}*/}
+                {/*           name={'postsPerRawForMobile'}*/}
+                {/*           className={'form-control-input'}*/}
+                {/*        // @ts-ignore*/}
+                {/*           value={identity.postsPerRawForMobile}*/}
+                {/*           onChange={e => onChangeHandler(e)}/>*/}
+                {/*</div>*/}
                 <h2>Widget Areas</h2>
                 <div className={'sidebarsStatus site-settings-form-section-parent'}>
                     {widgetAreas.map((widgetArea, index) => {
