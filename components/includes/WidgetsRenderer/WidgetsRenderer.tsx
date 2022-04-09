@@ -48,7 +48,7 @@ const WidgetsRenderer = ({_id, position}: WidgetsRendererProps) => {
                 }
 
                 return widget.data.noSSR ?
-                    <DynamicNoSSR>
+                    <DynamicNoSSR key={ widget._id}>
                         <Widget{...widgetProps}/>
                     </DynamicNoSSR> :
                     <Widget{...widgetProps}/>
