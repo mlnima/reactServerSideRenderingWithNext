@@ -56,6 +56,11 @@ const DesktopAuthenticationItemsStyledDiv = styled.div`
     mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
     -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
   }
+  
+  .sign-out-button {
+    mask: url('/public/asset/images/icons/sign-out-alt-solid.svg') no-repeat center;
+    -webkit-mask: url('/public/asset/images/icons/sign-out-alt-solid.svg') no-repeat center;
+  }
 
   .close {
     mask: url('/public/asset/images/icons/times-solid.svg') no-repeat center;

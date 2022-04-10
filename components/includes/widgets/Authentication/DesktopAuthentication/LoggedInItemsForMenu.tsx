@@ -48,7 +48,7 @@ const LoggedInItemsForMenu: FC = () => {
                 dispatch(userLogOut())
                 dispatch(setLoginRegisterFormStatus(false))
             }}>
-                <span className={'sign-out icon'}/>
+                <span className={'sign-out-button icon'}/>
                  <p className={'text-data'}>{t(`Logout`)}</p>
             </span>
         </>

@@ -20,23 +20,9 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedInItemsMobile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedOutItemsMobile.tsx" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/pen-solid.svg" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/user-pen-solid.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/DesktopAuthentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/DesktopAuthentication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedInItemsForMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedOutItemsMenu.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/AuthenticationSlideItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/AuthenticationSlideItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/MobileAuthentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/MobileAuthentication.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidget.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidgetItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidgetItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MobileMenuWidget/MobileMenuWidgetItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MobileMenuWidget/MobileMenuWidgetItem.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/middlewares/apiCache.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middlewares/apiCache.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedInItemsForMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedInItemsForMenu.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -117,7 +103,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="analyze" type="js.build_tools.npm" temporary="true" nameIsGenerated="true">
       <package-json value="$PROJECT_DIR$/package.json" />
       <command value="run" />
@@ -170,8 +156,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
         <item itemvalue="npm.dev" />
+        <item itemvalue="npm.build" />
         <item itemvalue="npm.start" />
         <item itemvalue="npm.test" />
         <item itemvalue="npm.analyze" />
@@ -1123,7 +1109,7 @@
       <workItem from="1649461092127" duration="8313000" />
       <workItem from="1649498457109" duration="45070000" />
       <workItem from="1649581366825" duration="6827000" />
-      <workItem from="1649600722407" duration="13574000" />
+      <workItem from="1649600722407" duration="14408000" />
     </task>
     <servers />
   </component>
