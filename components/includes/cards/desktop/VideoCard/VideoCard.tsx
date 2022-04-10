@@ -14,6 +14,7 @@ const VideoCardMedia = dynamic(() => import('./VideoCardMedia/VideoCardMedia'));
 let VideoCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}:{cardWidth:number,videoTrailerUrl:string})=>`${cardWidth}px`};
   font-size: 14px;
 
   @keyframes opacityAnimationStart {
@@ -33,7 +34,7 @@ let VideoCardStyledArticle = styled.article`
   //  }
   //}
 
-${({videoTrailerUrl}:{videoTrailerUrl:string})=> videoTrailerUrl ? `
+${({videoTrailerUrl}:{cardWidth:number,videoTrailerUrl:string})=> videoTrailerUrl ? `
 
   &:hover {
     transition: transform .5s;
@@ -102,6 +103,7 @@ ${({videoTrailerUrl}:{videoTrailerUrl:string})=> videoTrailerUrl ? `
 interface VideoTypeCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
+    cardWidth: number,
     views: number,
     rating: number,
     index?: number,
@@ -115,7 +117,8 @@ const VideoCard: FC<VideoTypeCardPropTypes> =
          title,
          views,
          rating,
-         index
+         index,
+         cardWidth
      }) => {
         const [hover, setHover] = useState(false)
         const postUrl = `/post/${post?.postType}/${post._id}`
@@ -128,6 +131,7 @@ const VideoCard: FC<VideoTypeCardPropTypes> =
                                     onTouchStartCapture={() => setHover(true)}
                                     onMouseDown={() => setHover(false)}
                                     videoTrailerUrl={post.videoTrailerUrl}
+                                    cardWidth={cardWidth}
             >
                 <Link href={postUrl}>
                     <a rel={'next'}

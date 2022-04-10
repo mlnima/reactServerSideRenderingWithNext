@@ -13,6 +13,7 @@ const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLast
 interface MobileLearnCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
+    cardWidth: number,
     views: number,
     rating: number
     post: PostTypes,
@@ -22,6 +23,7 @@ interface MobileLearnCardPropTypes {
 const MobileLearnCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
   font-size: 14px;
 
   .mobile-learn-card-link {
@@ -91,11 +93,12 @@ const MobileLearnCard: FC<MobileLearnCardPropTypes> =
          title,
          views,
          rating,
-         isAppleMobileDevice
+         isAppleMobileDevice,
+         cardWidth
      }) => {
 
         return (
-            <MobileLearnCardStyledArticle className={'learn-card'}>
+            <MobileLearnCardStyledArticle className={'learn-card'} cardWidth={cardWidth}>
                 <Link href={`/post/${post?.postType}/${post._id}`}>
                     <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-learn-card-link'}
                        title={title}>

@@ -11,50 +11,54 @@ import Link from "next/link";
 import {getPosts} from "@store/clientActions/postsAction";
 import {FC} from "react";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 const ActorBio = dynamic(() =>
     import('../../components/includes/pagesComponents/actorsPageComponents/Components/ActorBio/ActorBio'))
 
 const StyledMain = styled.main`
-  
+
   grid-area: main;
   width: 100%;
   height: 100%;
+
   .posts-page-info {
     margin: 5px 0;
+
     h1 {
       margin: 0;
       padding: 0 10px;
     }
   }
+
   ${(props: { stylesData: string }) => props.stylesData || ''}
-  
+
 `
 
 const actorPage: FC = () => {
 
-    const {query,asPath} = useRouter()
+    const {query} = useRouter()
 
-    const actorPageData = useSelector(({posts,user,settings} :StoreTypes)=>{
-        return{
-            actor:posts?.actorData,
-            role:user?.userData.role,
-            actorPageStyle: settings?.design?.actorPageStyle || ''
+    const actorPageData = useSelector(({posts, user, settings}: StoreTypes) => {
+        return {
+            actor: posts?.actorData,
+            role: user?.userData.role,
+            actorPageStyle: settings?.design?.actorPageStyle
         }
     })
 
     return (
 
-        <StyledMain className="main posts-page" stylesData={actorPageData.actorPageStyle}>
+        <StyledMain id={'main-content'} className="main posts-page" stylesData={actorPageData.actorPageStyle}>
             {actorPageData.role === 'administrator' ?
                 <div className='edit-as-admin'>
                     <Link href={'/admin/meta?id=' + query.actorId}>
-                        <a className={'btn btn-primary'} >
+                        <a className={'btn btn-primary'}>
                             Edit
                         </a>
                     </Link>
                 </div>
-                :null}
+                : null}
 
             <ActorBio/>
             <WidgetsRenderer
@@ -86,7 +90,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ]
     ))
 //@ts-ignore
-    await store.dispatch(getPosts(context, context.query.actorId, true,'actors',{page:'actor'}))
+    await store.dispatch(getPosts(context, context.query.actorId, true, 'actors', {page: 'actor'}))
 
     return {
         props: {

@@ -37,18 +37,14 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
     const dispatch = useDispatch();
 
     const {cardWidth,postsPerRawForMobile,actorsMetas,isAppleMobileDevice} = useSelector(({settings,posts}: StoreTypes)=>{
-       // const elementSize = settings?.design?.postElementSize;
         return {
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
             isMobile: settings?.isMobile,
             actorsMetas :  uniqueData?.metaData || posts?.actorsMetas || [],
-            // cardWidth: cardSizeCalculator(elementSize),
             cardWidth: 140,
             isAppleMobileDevice:settings?.isAppleMobileDevice
         }
     })
-    //
-    // const actorsMetas = useSelector(({posts}: StoreTypes) => uniqueData?.metaData || posts?.actorsMetas || [])
 
     return (
         <ActorsRendererStyledDiv className='actors-content'

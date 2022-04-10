@@ -14,29 +14,28 @@ import {wrapper} from "@store/store";
 
 const CategoriesPageStyledMain = styled.main`
   grid-area: main;
-  ${({metasPageStyle}: { metasPageStyle: string }) => metasPageStyle || ''}
+  ${({categoriesPageStyle}: { categoriesPageStyle: string }) => categoriesPageStyle || ''}
 `
 const categoriesPage = () => {
     const {query} = useRouter()
 
     const {
-        isWithSidebar,
-        metasPageStyle,
+        categoriesPageStyle,
         totalCount,
         postsCountPerPage
     } = useSelector(({settings, posts}: StoreTypes) => {
         return {
-            isWithSidebar: settings?.identity?.metaPageSidebar,
-            metasPageStyle: settings?.design.metasPageStyle,
+            categoriesPageStyle: settings?.design?.categoriesPageStyle,
             totalCount: posts.totalCount,
-            postsCountPerPage: query?.size ? parseInt(query?.size as string) : parseInt(settings?.identity?.postsCountPerPage || '20')
+            postsCountPerPage: query?.size ? parseInt(query?.size as string) :
+                               parseInt(settings?.identity?.postsCountPerPage || '20')
         }
     })
 
 
     return (
-        <CategoriesPageStyledMain className={isWithSidebar ? 'content main ' : 'content main '}
-                                  metasPageStyle={metasPageStyle}>
+        <CategoriesPageStyledMain id={'main-content'} className={'content main '}
+                                  categoriesPageStyle={categoriesPageStyle}>
             <WidgetsRenderer position={'categoriesPageTop'}/>
             <CategoriesRenderer cardWidthDesktop={undefined}/>
 

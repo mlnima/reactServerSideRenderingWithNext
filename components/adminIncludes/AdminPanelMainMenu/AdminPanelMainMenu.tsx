@@ -153,6 +153,16 @@ const AdminPanelMainMenu = () => {
                 {name: 'widgets', url: '/admin/design/widgets'},
                 {name: 'postPage', url: '/admin/design/postPage'},
                 {name: 'postsPage', url: '/admin/design/postsPage'},
+
+                {name: 'actorPage', url: '/admin/design/actorPage'},
+                {name: 'actorsPage', url: '/admin/design/actorsPage'},
+
+                {name: 'categoryPage', url: '/admin/design/categoryPage'},
+                {name: 'categoriesPage', url: '/admin/design/categoriesPage'},
+
+                {name: 'tagPage', url: '/admin/design/tagPage'},
+                {name: 'tagsPage', url: '/admin/design/tagsPage'},
+
                 {name: 'metasPage', url: '/admin/design/metasPage'},
                 {name: 'postElement', url: '/admin/design/postElement'},
                 {name: 'footer', url: '/admin/design/footer'},

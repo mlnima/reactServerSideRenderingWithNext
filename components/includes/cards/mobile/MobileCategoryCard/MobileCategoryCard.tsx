@@ -10,6 +10,7 @@ import MobileCategoryCardMedia from "@components/includes/cards/mobile/MobileCat
 const MobileCategoryCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
 
   .category-card-link{
     width: 100%;
@@ -45,6 +46,7 @@ const MobileCategoryCardStyledArticle = styled.article`
 interface MobileCategoryCardPropTypes {
     category: Meta,
     onActivateLoadingHandler: any,
+    cardWidth: number,
     index?:number,
     isAppleMobileDevice:boolean
 }
@@ -54,7 +56,8 @@ const MobileCategoryCard: FC<MobileCategoryCardPropTypes> =
          category,
          onActivateLoadingHandler,
          index,
-         isAppleMobileDevice
+         isAppleMobileDevice,
+         cardWidth
      }) => {
 
         const {t} = useTranslation('customTranslation');
@@ -68,7 +71,7 @@ const MobileCategoryCard: FC<MobileCategoryCardPropTypes> =
         }, [category?.name]);
 
         return (
-            <MobileCategoryCardStyledArticle >
+            <MobileCategoryCardStyledArticle cardWidth={cardWidth}>
                 <Link href={`/category/${category?._id}`}>
                     <a className='category-card-link'
                        onClick={onActivateLoadingHandler}

@@ -5,24 +5,36 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {wrapper} from "@store/store";
 import {getPosts} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+import {useSelector} from "react-redux";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 
 let StyledMain = styled.main`
-  width: 100%;
+  //width: 100%;
   grid-area: main;
+
   .posts-page-info {
     margin: 5px 0;
+
     h1 {
       margin: 0;
       padding: 0 10px;
     }
   }
-  ${(props: { stylesData: string }) => props.stylesData}
+
+  ${({postsPageStyle}: { postsPageStyle: string }) => postsPageStyle || ''}
 `
 
-const posts: NextPage<any> = props => {
+const posts: NextPage<any> = () => {
+
+    const {postsPageStyle} = useSelector(({settings}: StoreTypes) => {
+        return {
+            postsPageStyle: settings?.design?.postsPageStyle
+        }
+    })
+
     return (
-        <StyledMain className="main posts-page" stylesData={props.design?.postsPageStyle || ''}>
+        <StyledMain id={'main-content'} className="main posts-page" postsPageStyle={postsPageStyle || ''}>
             <PostsPage/>
         </StyledMain>
     )
@@ -45,7 +57,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
     ))
 
     // @ts-ignore
-    await store.dispatch(getPosts(context, null, true,null))
+    await store.dispatch(getPosts(context, null, true, null))
 
     return {
         props: {

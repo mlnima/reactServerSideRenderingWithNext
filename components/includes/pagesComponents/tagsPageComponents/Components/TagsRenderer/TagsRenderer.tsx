@@ -13,8 +13,9 @@ interface TagsRenderContentStyledDivPropTypes{
 }
 
 let TagsRendererStyledDiv = styled.div`
+  padding: 20px 0;
   display: grid;
-  width: 98%;
+  width: 100%;
   margin: auto;
   grid-gap: 5px;
   grid-template-columns: repeat( auto-fill, minmax(${({postsPerRawForMobile}:TagsRenderContentStyledDivPropTypes)=>`${96/postsPerRawForMobile}`}vw, 2fr) );
@@ -33,11 +34,10 @@ interface TagsRendererPropTypes {
     cardWidthDesktop:  number,
 }
 
-const TagsRenderer: FC<TagsRendererPropTypes> = ({ cardWidthDesktop,uniqueData}) => {
+const TagsRenderer: FC<TagsRendererPropTypes> = ({ uniqueData}) => {
     const dispatch = useDispatch()
 
     const {tagsMetas,postsPerRawForMobile,isMobile,cardWidth,isAppleMobileDevice} = useSelector(({settings,posts}: StoreTypes)=>{
-        const elementSize = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255;
         return{
             tagsMetas: uniqueData?.metaData ? uniqueData?.metaData : posts?.tagsMetas,
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
@@ -46,6 +46,7 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({ cardWidthDesktop,uniqueData})
             isAppleMobileDevice:settings?.isAppleMobileDevice
         }
     })
+
 
     return (
         <TagsRendererStyledDiv className='tags-block'
@@ -60,6 +61,7 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({ cardWidthDesktop,uniqueData})
                                           onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                           index={index}
                                           isAppleMobileDevice={isAppleMobileDevice}
+                                          cardWidth={cardWidth}
                     />
 
                 }else{
@@ -67,6 +69,7 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({ cardWidthDesktop,uniqueData})
                                     key={tag._id}
                                     tag={tag}
                                     index={index}
+                                    cardWidth={cardWidth}
                     />
                 }
             })

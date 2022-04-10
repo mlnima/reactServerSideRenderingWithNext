@@ -10,11 +10,14 @@ import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 const CategoryCardStyledDiv = styled.div`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
   font-size: 14px;
-  .category-card-link{
+  
+  .category-card-link {
     position: relative;
     display: block;
     cursor: pointer;
+
     .category-card-info {
       display: flex;
       align-items: center;
@@ -51,35 +54,33 @@ const CategoryCardStyledDiv = styled.div`
 interface CategoryCardPropTypes {
     category: Meta,
     onActivateLoadingHandler: any,
-    index?:number
+    cardWidth: number,
+    index?: number
 }
 
-const CategoryCard: FC<CategoryCardPropTypes> = ({category, onActivateLoadingHandler, index}) => {
+const CategoryCard: FC<CategoryCardPropTypes> = ({category, onActivateLoadingHandler, index,cardWidth}) => {
 
     const {t} = useTranslation('customTranslation');
     const {locale} = useRouter();
 
     const cardTitle = useMemo(() => {
         const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
-              category?.name :
-              category?.translations?.[locale]?.name || t(category?.name, {ns: 'customTranslation'})
+            category?.name :
+            category?.translations?.[locale]?.name || t(category?.name, {ns: 'customTranslation'})
         return capitalizeFirstLetter(checkedTitle)
     }, [category?.name]);
 
     return (
-        <CategoryCardStyledDiv className={'category-card'}>
+        <CategoryCardStyledDiv className={'category-card'} cardWidth={cardWidth}>
             <Link href={`/category/${category?._id}`}>
                 <a className='category-card-link'
                    onClick={onActivateLoadingHandler}
                    title={cardTitle as string}
                 >
-                    {/*<div className={'category-card-image'}>*/}
-                        <CategoryCardMedia imageUrl={category?.imageUrl}
-                                           mediaAlt={cardTitle as string}
-                                           index={index}
-                        />
-                    {/*</div>*/}
-
+                    <CategoryCardMedia imageUrl={category?.imageUrl}
+                                       mediaAlt={cardTitle as string}
+                                       index={index}
+                    />
                     <div className={'category-card-info'}>
                         <h3 className={'category-card-title'}>
                             {cardTitle}

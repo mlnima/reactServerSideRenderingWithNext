@@ -4,6 +4,7 @@ import styled from "styled-components";
 
 const CategoryCardMediaStyledDiv = styled.div`
   position: relative;
+  width: 100%;
 `
 
 interface CategoryCardMediaPropTypes {

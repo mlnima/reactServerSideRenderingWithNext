@@ -8,10 +8,11 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import ratingCalculator from "@_variables/util/ratingCalculator";
 import {FC} from "react";
-const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
-const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
+
 const VideoCardToRender = dynamic(() => import('@components/includes/PostsRenderer/VideoCardToRender'))
 const PromotionCardToRender = dynamic(() => import('@components/includes/PostsRenderer/PromotionCardToRender'))
+const ArticleCardToRender = dynamic(() => import('@components/includes/PostsRenderer/ArticleCardToRender'))
+const LearnCardToRender = dynamic(() => import('@components/includes/PostsRenderer/LearnCardToRender'))
 
 interface PostsComponentTypes {
     viewType?: string,
@@ -50,22 +51,18 @@ const PostsContentStyledDiv = styled.div`
 
 const PostsRenderer:FC<PostsComponentTypes> = 
     ({
-
          posts,
          uniqueData,
          widgetId,
-         cardWidthDesktop,
          isSidebar
     }) => {
+
     const dispatch = useDispatch()
     const {locale} = useRouter()
 
     const {cardWidth,postsPerRawForMobile,isMobile,isAppleMobileDevice} = useSelector(({settings}: StoreTypes) => {
-        const cardWidth = cardWidthDesktop ? cardWidthDesktop : settings?.design?.cardWidthDesktop || 255
-
         return {
-            cardWidth,
-            cardWidthDesktop,
+            cardWidth:settings?.design?.cardWidthDesktop || 255,
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
             isMobile: settings?.isMobile,
             isAppleMobileDevice:settings?.isAppleMobileDevice
@@ -82,6 +79,7 @@ const PostsRenderer:FC<PostsComponentTypes> =
 
                 const postProps = {
                     views:_shortNumber(post.views || 0),
+                    cardWidth,
                     rating : post.likes || post.disLikes ? ratingCalculator(post.likes, post.disLikes) : null ,
                     post,
                     widgetId,
@@ -98,9 +96,9 @@ const PostsRenderer:FC<PostsComponentTypes> =
                 }
 
                 if (post?.postType === 'video') {
-                    return <VideoCardToRender postProps={postProps} key={index} index={index}/>
+                    return <VideoCardToRender postProps={postProps} key={index} index={index} />
                 } else if (post?.postType === 'promotion') {
-                    return <PromotionCardToRender postProps={postProps} key={index} index={index} />
+                    return <PromotionCardToRender postProps={postProps} key={index} index={index}  />
                 } else if (post?.postType === 'article') {
                     return <ArticleCardToRender postProps={postProps} key={index} index={index} />
                 } else if (post?.postType === 'learn') {

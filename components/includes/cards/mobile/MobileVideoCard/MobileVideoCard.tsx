@@ -12,8 +12,9 @@ const CardRating = dynamic(() => import('@components/includes/cards/asset/CardRa
 const MobileVideoCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}:{cardWidth:number})=>`${cardWidth}px`};
   font-size: 14px;
-
+  
   .mobile-video-card-media-link {
     color: var(--post-element-text-color, #ccc);
     position: relative;
@@ -63,6 +64,7 @@ const MobileVideoCardStyledArticle = styled.article`
 interface MobileVideoCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
+    cardWidth: number,
     views: number,
     rating: number,
     post: PostTypes,
@@ -78,14 +80,15 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
          views,
          rating,
          index,
-         isAppleMobileDevice
+         isAppleMobileDevice,
+         cardWidth
 
      }) => {
 
         const postUrl = `/post/${post?.postType}/${post._id}`;
 
         return (
-            <MobileVideoCardStyledArticle>
+            <MobileVideoCardStyledArticle  cardWidth={cardWidth}>
                 <Link href={postUrl}>
                     <a rel={'next'}
                        className={'mobile-video-card-media-link'}
@@ -99,6 +102,7 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
                                               quality={post.quality}
                                               index={index}
                                               isAppleMobileDevice={isAppleMobileDevice}
+
                         />
 
                         <header className={'entry-header'}>

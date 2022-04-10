@@ -33,7 +33,7 @@ let StyledMain = styled.main`
     }
   }
 
-  ${(props: { stylesData: string }) => props.stylesData}
+  ${({categoryPageStyle}: { categoryPageStyle: string }) => categoryPageStyle || ''}
 `
 const categoryPage: FC = () => {
 
@@ -41,12 +41,12 @@ const categoryPage: FC = () => {
         return {
             role: user?.userData?.role,
             category: posts.categoryData,
-            categoryPageStyle: settings.design?.categoryPageStyle || '',
+            categoryPageStyle: settings.design?.categoryPageStyle,
         }
     })
 
     return (
-        <StyledMain className="main posts-page" stylesData={categoryPageStyle}>
+        <StyledMain id={'main-content'} className="main posts-page" categoryPageStyle={categoryPageStyle}>
             {role === 'administrator' ?
                 <div className='edit-as-admin'>
                     <Link href={'/admin/meta?id=' + category?._id}>

@@ -11,6 +11,7 @@ import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
 const TagCardStyledDiv = styled.div`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}:{cardWidth:number})=>`${cardWidth}px`};
   font-size: 14px;
   
   .tag-card-link {
@@ -51,10 +52,11 @@ const TagCardStyledDiv = styled.div`
 interface TagCardPropTypes {
     tag: Meta,
     onActivateLoadingHandler: any
-    index?:number
+    index?:number,
+    cardWidth?:number,
 }
 
-const TagCard: FC<TagCardPropTypes> = ({ tag, onActivateLoadingHandler,index}) => {
+const TagCard: FC<TagCardPropTypes> = ({ tag, onActivateLoadingHandler,index,cardWidth}) => {
 
     const {t} = useTranslation('customTranslation');
     const {locale} = useRouter();
@@ -67,7 +69,7 @@ const TagCard: FC<TagCardPropTypes> = ({ tag, onActivateLoadingHandler,index}) =
     }, [tag?.name]);
 
     return (
-        <TagCardStyledDiv className={'tag-card'}>
+        <TagCardStyledDiv className={'tag-card'} cardWidth={cardWidth}>
             <Link href={`/tag/${tag._id}`}>
                 <a className={'tag-card-link'}
                    onClick={onActivateLoadingHandler}

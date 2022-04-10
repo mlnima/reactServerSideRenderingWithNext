@@ -22,6 +22,7 @@ let PromotionCardStyledArticle = styled.article`
   //font-size: 14px;
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
   font-size: 14px;
   position: relative;
   display: block;
@@ -96,6 +97,7 @@ let PromotionCardStyledArticle = styled.article`
 interface PromotionTypeCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
+    cardWidth: number,
     views: number,
     rating: number,
     post: PostTypes,
@@ -109,7 +111,8 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
          title,
          views,
          rating,
-         index
+         index,
+         cardWidth
      }) => {
         const postUrl = `/post/${post?.postType}/${post._id}`
         const dispatch = useDispatch()
@@ -119,7 +122,7 @@ const PromotionTypeCard: FC<PromotionTypeCardPropTypes> =
         }
 
         return (
-            <PromotionCardStyledArticle className='promotion-card' >
+            <PromotionCardStyledArticle className='promotion-card' cardWidth={cardWidth}>
 
                 <a href={post.redirectLink} className={'promotion-card-link-external'}
                    onClick={()=>dispatch(viewPost(post._id))}

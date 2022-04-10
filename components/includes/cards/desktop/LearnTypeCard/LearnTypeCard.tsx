@@ -5,21 +5,23 @@ import LearnTypeCardMedia from "./LearnTypeCardMedia";
 import LearnTypeCardTitle from "./LearnTypeCardTitle";
 import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import dynamic from "next/dynamic";
+
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 const LearnTypeCardStyledDiv = styled.div`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
   font-size: 14px;
-  
+
   .learn-post-card-link {
     position: relative;
     display: block;
-    
+
     .learn-post-card-under-media {
       position: relative;
-      
+
       .learn-post-card-under-media-info {
         display: flex;
         justify-content: space-between;
@@ -52,13 +54,14 @@ const LearnTypeCardStyledDiv = styled.div`
 interface VideoTypeCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
+    cardWidth: number,
     views: number,
     rating: number,
     post: PostTypes,
-    index?:number
+    index?: number
 }
 
-const LearnTypeCard: FC<VideoTypeCardPropTypes> = 
+const LearnTypeCard: FC<VideoTypeCardPropTypes> =
     ({
          title,
          views,
@@ -66,38 +69,39 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> =
          post,
          index,
          onActivateLoadingHandler,
+         cardWidth
      }) => {
 
-    const postUrl = `/post/${post?.postType}/${post?._id}`
-    const categoriesImages = post?.categories?.filter(category => category?.imageUrl).map(category => category?.imageUrl)
+        const postUrl = `/post/${post?.postType}/${post?._id}`
+        const categoriesImages = post?.categories?.filter(category => category?.imageUrl).map(category => category?.imageUrl)
 
-    return (
-        <LearnTypeCardStyledDiv className='learn-post-card'>
-            <Link href={postUrl}>
-                <a rel='next' onClick={onActivateLoadingHandler} className='learn-post-card-link'
-                   title={title}>
+        return (
+            <LearnTypeCardStyledDiv className='learn-post-card' cardWidth={cardWidth}>
+                <Link href={postUrl}>
+                    <a rel='next' onClick={onActivateLoadingHandler} className='learn-post-card-link'
+                       title={title}>
 
-                    <LearnTypeCardMedia
-                        categoriesImages={categoriesImages}
-                        post={post}
-                        mediaAlt={title}
-                        index={index}
-                    />
-                    <div className='learn-post-card-under-media'>
-                        <LearnTypeCardTitle title={title}/>
-                        <div className='learn-post-card-under-media-info'>
-                            {views ? <CardViews views={views}
-                                                      className={'learn-card-views learn-card-info-data'}/> : null}
-                            {rating ? <CardRating rating={rating}
-                                                        className={'learn-card-rating learn-card-info-data'}/> : null}
+                        <LearnTypeCardMedia
+                            categoriesImages={categoriesImages}
+                            post={post}
+                            mediaAlt={title}
+                            index={index}
+                        />
+                        <div className='learn-post-card-under-media'>
+                            <LearnTypeCardTitle title={title}/>
+                            <div className='learn-post-card-under-media-info'>
+                                {views ? <CardViews views={views}
+                                                    className={'learn-card-views learn-card-info-data'}/> : null}
+                                {rating ? <CardRating rating={rating}
+                                                      className={'learn-card-rating learn-card-info-data'}/> : null}
+                            </div>
                         </div>
-                    </div>
-                </a>
-            </Link>
-        </LearnTypeCardStyledDiv>
+                    </a>
+                </Link>
+            </LearnTypeCardStyledDiv>
 
-    );
-};
+        );
+    };
 export default LearnTypeCard;
 
 

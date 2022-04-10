@@ -6,10 +6,11 @@ import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import dynamic from "next/dynamic";
 import {wrapper} from "@store/store";
 import {useSelector} from "react-redux";
-import { StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import Link from "next/link";
 import {getPosts} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
+
 const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 let StyledMain = styled.main`
@@ -25,7 +26,7 @@ let StyledMain = styled.main`
     }
   }
 
-  ${(props: { stylesData: string }) => props.stylesData}
+  ${({tagPageStyle}: { tagPageStyle: string }) => tagPageStyle || ''}
 `
 const tagPage: FC = () => {
 
@@ -33,12 +34,12 @@ const tagPage: FC = () => {
         return {
             role: user?.userData?.role,
             tag: posts.tagData,
-            tagPageStyle: settings.design?.tagPageStyle || '',
+            tagPageStyle: settings.design?.tagPageStyle,
         }
     })
 
     return (
-        <StyledMain className="main posts-page" stylesData={tagPageStyle}>
+        <StyledMain id={'main-content'} className="main posts-page" tagPageStyle={tagPageStyle}>
             {role === 'administrator' ?
                 <div className='edit-as-admin'>
                     <Link href={'/admin/meta?id=' + tag._id}>
@@ -79,7 +80,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
         ]))
 
     // @ts-ignore
-    await store.dispatch(getPosts(context, context.query.tagId, true,'tags',{page:'tag'}))
+    await store.dispatch(getPosts(context, context.query.tagId, true, 'tags', {page: 'tag'}))
 
     return {
         props: {

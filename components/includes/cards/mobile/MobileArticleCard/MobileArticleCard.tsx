@@ -13,8 +13,9 @@ const MobileArticleCardStyledArticle = styled.article`
 
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
+  max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
   font-size: 14px;
-  
+
   .mobile-article-card-link {
     color: var(--post-element-text-color, #ccc);
     position: relative;
@@ -29,11 +30,12 @@ const MobileArticleCardStyledArticle = styled.article`
       font-size: 14px;
       width: 100%;
       overflow-wrap: break-word;
+
       .card-header {
         margin: 2px 0;
       }
     }
-    
+
     .article-card-under-media {
       width: calc(100% - 4px);
       height: auto;
@@ -48,7 +50,7 @@ const MobileArticleCardStyledArticle = styled.article`
         align-items: center;
         flex-wrap: wrap;
         margin: 0;
-       // height: 20px;
+        // height: 20px;
 
         .article-card-info-data {
           display: flex;
@@ -58,18 +60,20 @@ const MobileArticleCardStyledArticle = styled.article`
           padding: 0 2px;
           color: var(--post-element-info-text-color, #ccc);
           font-size: 12px;
+
           .icon {
             width: 14px;
             height: 14px;
             margin: 0 2px;
           }
-          
+
         }
-        .last-update{
+
+        .last-update {
 
           font-size: 9px;
-          margin:  4px;
-          color: var( --post-element-info-text-color,#6A6A6A);
+          margin: 4px;
+          color: var(--post-element-info-text-color, #6A6A6A);
         }
       }
     }
@@ -80,10 +84,11 @@ const MobileArticleCardStyledArticle = styled.article`
 interface ArticleTypeCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
+    cardWidth: number,
     views: number,
     rating: number
     post: PostTypes,
-    isAppleMobileDevice:boolean
+    isAppleMobileDevice: boolean
 }
 
 const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
@@ -93,15 +98,17 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
          title,
          views,
          rating,
-         isAppleMobileDevice
+         isAppleMobileDevice,
+         cardWidth
      }) => {
 
         const postUrl = `/post/${post?.postType}/${post._id}`;
 
         return (
-            <MobileArticleCardStyledArticle className={'article-card card'} >
+            <MobileArticleCardStyledArticle className={'article-card card'} cardWidth={cardWidth}>
                 <Link href={postUrl}>
-                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-article-card-link'} title={title}>
+                    <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-article-card-link'}
+                       title={title}>
                         <MobileArticleCardMedia post={post}
                                                 mediaAlt={title}
                                                 isAppleMobileDevice={isAppleMobileDevice}
@@ -113,14 +120,16 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
 
                         <div className={'article-card-under-media'}>
                             <div className={'mobile-article-card-under-media-info'}>
-                                {views ? <CardViews views={views} className={'article-card-views article-card-info-data'}/>
+                                {views ?
+                                    <CardViews views={views} className={'article-card-views article-card-info-data'}/>
                                     : null
                                 }
-                                {rating ? <CardRating rating={rating} className={'article-card-rating article-card-info-data'}/>
+                                {rating ? <CardRating rating={rating}
+                                                      className={'article-card-rating article-card-info-data'}/>
                                     : null
                                 }
-                                {post?.updatedAt || post?.createdAt  ?
-                                    <CardLastUpdate targetedDate={post?.updatedAt|| post?.createdAt}/>
+                                {post?.updatedAt || post?.createdAt ?
+                                    <CardLastUpdate targetedDate={post?.updatedAt || post?.createdAt}/>
                                     : null
                                 }
                             </div>

@@ -11,7 +11,7 @@ let StyledMain = styled.main`
 const MainWidgetArea = ({stylesData,className,position}:any) => {
 
     return (
-        <StyledMain stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
+        <StyledMain id={'main-content'} stylesData={stylesData ?? ''} className={className + ' widget-area ' + position}>
             <WidgetsRenderer
                 position={position}
             />

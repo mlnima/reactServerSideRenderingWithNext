@@ -17,11 +17,19 @@ export interface DesignSettings {
     customStyles: string,
     postElementStyle: string,
     navigationStyle: string,
-    actorPageStyle: string,
-    categoryPageStyle: string,
-    tagPageStyle: string,
+
     postsPageStyle: string,
     metasPageStyle: string,
+
+    actorsPageStyle: string,
+    actorPageStyle: string,
+
+    categoryPageStyle: string,
+    categoriesPageStyle: string,
+
+    tagPageStyle: string,
+    tagsPageStyle: string,
+
     postPageStyle: string,
     customColors: string,
     homePageSidebar: boolean,
