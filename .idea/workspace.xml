@@ -20,11 +20,23 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
+      <change afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedInItemsMobile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/LoggedOutItemsMobile.tsx" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/pen-solid.svg" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/public/asset/images/icons/user-pen-solid.svg" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/Authentication.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/DesktopAuthentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/DesktopAuthentication.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedInItemsForMenu.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedOutItemsMenu/LoggedOutItemsMenu.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedOutItemsMenu.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/AuthenticationSlideItems.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/AuthenticationSlideItems.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/SearchInputComponent/SearchInputComponent.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/MobileAuthentication.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/MobileAuthentication.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidget.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidgetItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/DesktopMenuWidget/DesktopMenuWidgetItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MobileMenuWidget/MobileMenuWidgetItem.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/MenuWidget/MobileMenuWidget/MobileMenuWidgetItem.tsx" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server/middlewares/apiCache.js" beforeDir="false" afterPath="$PROJECT_DIR$/server/middlewares/apiCache.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -38,8 +50,8 @@
         <option value="tsconfig.json" />
         <option value="CSS File" />
         <option value="JavaScript File" />
-        <option value="TypeScript JSX File" />
         <option value="TypeScript File" />
+        <option value="TypeScript JSX File" />
       </list>
     </option>
   </component>
@@ -75,7 +87,7 @@
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="javascript.nodejs.core.library.configured.version" value="14.17.3" />
     <property name="javascript.nodejs.core.library.typings.version" value="14.17.3" />
-    <property name="last_opened_file_path" value="$PROJECT_DIR$/_variables/adminVariables" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/public/asset/images/icons" />
     <property name="list.type.of.created.stylesheet" value="CSS" />
     <property name="node.js.detected.package.eslint" value="true" />
     <property name="node.js.detected.package.tslint" value="true" />
@@ -91,18 +103,18 @@
   </component>
   <component name="RecentsManager">
     <key name="CopyFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\asset\images\icons" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\_variables\adminVariables" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\global\commonComponents" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\server\controllers\adminControllers\_variables" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\fa" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\public\locales\tr" />
     </key>
     <key name="MoveFile.RECENT_KEYS">
+      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\includes\widgets\Authentication\DesktopAuthentication" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\trash\old post page" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\store" />
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents" />
-      <recent name="I:\Dev Project\reactServerSideRenderingWithNext\pages\profile\post" />
     </key>
   </component>
   <component name="RunManager" selected="npm.build">
@@ -1109,7 +1121,9 @@
       <workItem from="1649319165132" duration="28638000" />
       <workItem from="1649410382434" duration="18206000" />
       <workItem from="1649461092127" duration="8313000" />
-      <workItem from="1649498457109" duration="44758000" />
+      <workItem from="1649498457109" duration="45070000" />
+      <workItem from="1649581366825" duration="6827000" />
+      <workItem from="1649600722407" duration="13574000" />
     </task>
     <servers />
   </component>
@@ -1212,7 +1226,7 @@
           <option name="timeStamp" value="58" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/includes/widgets/Authentication/LoggedInItemsForMenu/LoggedInItemsForMenu.tsx</url>
+          <url>file://$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedInItemsForMenu.tsx</url>
           <option name="timeStamp" value="62" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
@@ -1406,10 +1420,10 @@
           <option name="timeStamp" value="143" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/includes/widgets/Authentication/MobileAuthentication/AuthenticationSlideItems.tsx</url>
-          <line>63</line>
+          <url>file://$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedOutItemsMenu.tsx</url>
+          <line>13</line>
           <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="144" />
+          <option name="timeStamp" value="145" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

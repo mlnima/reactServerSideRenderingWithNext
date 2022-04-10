@@ -1,4 +1,4 @@
-import {FC} from 'react';
+import React, {FC} from 'react';
 import Link from "next/link";
 import {useTranslation} from 'next-i18next';
 import {useDispatch, useSelector} from "react-redux";
@@ -16,27 +16,27 @@ const LoggedInItemsForMenu: FC = () => {
             {identity.membership ?
                 <>
                     <Link href={`/messenger`}>
-                        <a className={'logged-item btn btn-transparent-light'}>
+                        <a className={'logged-item logged-in btn btn-transparent-light'}>
                             <span className={'messages icon'}/>
-                            {/*{t(`Messages`)}*/}
+                            <p className={'text-data'}>{t(`Messages`)}</p>
                         </a>
                     </Link>
 
 
                     {identity.allowUserToPost ?
                         <Link href={`/profile/posts/newPost?postType=article`}>
-                            <a className={'logged-item btn btn-transparent-light add-new-Post'}>
+                            <a className={'logged-item logged-in btn btn-transparent-light add-new-Post'}>
                                 <span className={'add-new-Post icon'}/>
-                                {/*{t(`Create New Post`)}*/}
+                                <p className={'text-data'}>{t(`Create New Post`)}</p>
                             </a>
                         </Link>
                         : null
                     }
 
                     <Link href={`/profile`}>
-                        <a className={'logged-item btn btn-transparent-light'} >
+                        <a className={'logged-item btn logged-in btn-transparent-light'} >
                             <span className={'my-profile icon'}/>
-                            {/*{t(`Profile`)}*/}
+                            <p className={'text-data'}>{t(`Profile`)}</p>
                         </a>
                     </Link>
 
@@ -44,12 +44,12 @@ const LoggedInItemsForMenu: FC = () => {
                 </>
                 : null
             }
-            <span className='logged-item btn btn-transparent-light' onClick={() => {
+            <span className='logged-item logged-in btn btn-transparent-light' onClick={() => {
                 dispatch(userLogOut())
                 dispatch(setLoginRegisterFormStatus(false))
             }}>
                 <span className={'sign-out icon'}/>
-                {/*{t(`Logout`)}*/}
+                 <p className={'text-data'}>{t(`Logout`)}</p>
             </span>
         </>
     )

@@ -8,7 +8,7 @@ interface AdvertisePropTypes {
 
 const Advertise: FC<AdvertisePropTypes> = ({adCode}) => {
     const router = useRouter();
-    const [adCodeData, setAdCodeData] = useState(() => adCode)
+    const [adCodeData, setAdCodeData] = useState(null)
 
     useEffect(() => {
         setAdCodeData(null)

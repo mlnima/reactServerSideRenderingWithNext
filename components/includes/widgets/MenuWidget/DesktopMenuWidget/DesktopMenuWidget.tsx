@@ -1,13 +1,14 @@
 import {FC} from "react";
 import styled from "styled-components";
 import DesktopMenuWidgetItem from "./DesktopMenuWidgetItem";
-import {MenuItem} from "../../../../../_variables/TypeScriptTypes/WidgetsInterfaces";
+import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 
 const DesktopMenuWidgetStyledUl = styled.ul`
   display: flex;
   justify-content: flex-start;
   align-items: center;
   list-style-type: none;
+  overflow: hidden;
   padding: 0;
 `
 

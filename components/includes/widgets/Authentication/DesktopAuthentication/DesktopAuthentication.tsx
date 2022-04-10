@@ -4,13 +4,21 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useRouter} from "next/router";
 import Link from "next/link";
 import dynamic from "next/dynamic";
-const LoggedOutItemsMenu = dynamic(() => import('../LoggedOutItemsMenu/LoggedOutItemsMenu'), {ssr: false});
-const LoggedInItemsForMenu = dynamic(() => import('../LoggedInItemsForMenu/LoggedInItemsForMenu'), {ssr: false});
+const LoggedOutItemsMenu = dynamic(() => import('./LoggedOutItemsMenu'));
+const LoggedInItemsForMenu = dynamic(() => import('./LoggedInItemsForMenu'), {ssr: false});
 import styled from "styled-components";
+
 const DesktopAuthenticationItemsStyledDiv = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  
+  .logged-in{
+    .text-data{
+      display: none;
+    }
+  }
+  
   a,span{
     display: flex;
     justify-content: center;
@@ -39,14 +47,14 @@ const DesktopAuthenticationItemsStyledDiv = styled.div`
     -webkit-mask: url('/public/asset/images/icons/envelope-solid.svg') no-repeat center;
   }
 
-  .sign-out {
-    mask: url('/public/asset/images/icons/sign-out-alt-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/sign-out-alt-solid.svg') no-repeat center;
+  .register-button {
+    mask: url('/public/asset/images/icons/pen-solid.svg') no-repeat center;
+    -webkit-mask: url('/public/asset/images/icons/pen-solid.svg') no-repeat center;
   }
 
-  .sign-in {
-    mask: url('/public/asset/images/icons/sign-in-alt-solid.svg') no-repeat center;
-    -webkit-mask: url('/public/asset/images/icons/sign-in-alt-solid.svg') no-repeat center;
+  .sign-in-button {
+    mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
+    -webkit-mask: url('/public/asset/images/icons/user-solid.svg') no-repeat center;
   }
 
   .close {
@@ -75,8 +83,8 @@ const DesktopAuthentication: FC = () => {
                 :null
             }
 
-            {user.loggedIn && open ? <LoggedInItemsForMenu  /> :
-                !user.loggedIn && open ?  <LoggedOutItemsMenu  />:
+            {user.loggedIn ? <LoggedInItemsForMenu  /> :
+                !user.loggedIn  ?  <LoggedOutItemsMenu  />:
                     null
             }
         </DesktopAuthenticationItemsStyledDiv>

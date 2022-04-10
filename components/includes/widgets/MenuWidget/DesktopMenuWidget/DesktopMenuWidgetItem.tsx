@@ -1,9 +1,9 @@
-import {FC, useEffect, useMemo} from "react";
+import {FC, useMemo} from "react";
 import styled from "styled-components";
 import Link from "next/link";
 import {useTranslation} from "next-i18next";
 import {useRouter} from "next/router";
-import {MenuItem} from "../../../../../_variables/TypeScriptTypes/WidgetsInterfaces";
+import {MenuItem} from "@_variables/TypeScriptTypes/WidgetsInterfaces";
 
 const DesktopMenuWidgetItemStyledLi = styled.li`
   color: var(--navigation-text-color, #ccc);
@@ -11,6 +11,9 @@ const DesktopMenuWidgetItemStyledLi = styled.li`
   .menu-widget-item {
     padding: 6px 12px;
     color: var(--navigation-text-color, #ccc);
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis
   }
 `
 

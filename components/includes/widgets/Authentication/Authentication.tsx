@@ -4,9 +4,9 @@ import {useSelector} from 'react-redux';
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const MobileAuthentication = dynamic(
-    () => import('./MobileAuthentication/MobileAuthentication'), {ssr: false});
+    () => import('./MobileAuthentication/MobileAuthentication'));
 const DesktopAuthentication = dynamic(
-    () => import('./DesktopAuthentication/DesktopAuthentication'), {ssr: false});
+    () => import('./DesktopAuthentication/DesktopAuthentication'));
 
 const Authentication: FC = () => {
 

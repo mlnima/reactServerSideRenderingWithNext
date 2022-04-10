@@ -10,7 +10,6 @@ apiCache.options({
             /Android|BlackBerry|iPhone|iPad|iPod|Opera Mini|IEMobile|WPDesktop/i
         ))
         return  '-' +  (isMobile  ? 'Mobile' : 'Desktop')
-
     }
 })
 
