@@ -3,8 +3,7 @@ import {useRouter} from "next/router";
 import Link from "next/link";
 import {useSelector} from "react-redux";
 import dynamic from "next/dynamic";
-import {StoreTypes} from "../../../../../_variables/TypeScriptTypes/GlobalTypes";
-import {useTranslation} from 'next-i18next';
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import styled from "styled-components";
 
 const LoggedOutItemsMenu = dynamic(
@@ -119,7 +118,7 @@ interface ComponentPropTypes {
 }
 
 const AuthenticationSlideItems = ({onOpenCloseHandler, open}: ComponentPropTypes) => {
-    const {t} = useTranslation('common');
+
     const user = useSelector((store: StoreTypes) => store?.user)
     const router = useRouter()
     return (
@@ -133,7 +132,6 @@ const AuthenticationSlideItems = ({onOpenCloseHandler, open}: ComponentPropTypes
                     <Link href={`/`}>
                         <a rel='next' className='logged-item btn btn-transparent-light'>
                             <span className={'home icon'}/>
-                            {t(`Home`)}
                         </a>
                     </Link>
                     : null

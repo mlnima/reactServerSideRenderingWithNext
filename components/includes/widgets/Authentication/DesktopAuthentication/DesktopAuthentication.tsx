@@ -1,5 +1,4 @@
 import React, {FC} from "react";
-import {useTranslation} from "next-i18next";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {useRouter} from "next/router";
@@ -62,7 +61,7 @@ const DesktopAuthenticationItemsStyledDiv = styled.div`
 `
 
 const DesktopAuthentication: FC = () => {
-    const {t} = useTranslation('common');
+
     const user = useSelector((store : StoreTypes) => store?.user)
     const router = useRouter()
     return (
@@ -71,7 +70,6 @@ const DesktopAuthentication: FC = () => {
                 <Link href={`/`}>
                     <a rel='next' className='logged-item btn btn-transparent-light'>
                         <span className={'home icon'}/>
-                        {t(`Home`)}
                     </a>
                 </Link>
                 :null

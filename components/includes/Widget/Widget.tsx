@@ -34,7 +34,7 @@ const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'))
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'))
 
 const Authentication = dynamic(() =>
-    import('../widgets/Authentication/Authentication'), {ssr: false})
+    import('../widgets/Authentication/Authentication'))
 
 interface WidgetComponentPropTypes {
     data: WidgetDataPropTypes,

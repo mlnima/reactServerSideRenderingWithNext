@@ -14,23 +14,24 @@ const SearchInputComponentStyledForm = styled.form`
   position: relative;
   font-size: 1em;
   width: 100%;
-  
-  .search-bar-search-btn{
+
+  .search-bar-search-btn {
     position: absolute;
     left: 0;
     right: 0;
-    width: 20px;
+    width: 40px;
     height: 26px;
     background-color: transparent;
     color: var(--navigation-text-color, #ccc);
     border: none;
-    svg{
-      width:  20px;
+
+    svg {
+      width: 20px;
       height: 26px;
       color: var(--navigation-text-color, #ccc);
     }
   }
-  
+
   .search-bar-input {
     width: 100%;
     height: 26px;
@@ -47,18 +48,10 @@ const SearchInputComponentStyledForm = styled.form`
     outline: 0;
     vertical-align: top;
     box-sizing: border-box;
-    position: static;
-    padding-left: 30px;
+    padding-left: 60px;
     text-decoration: none;
   }
-  
 
-
-  //@media only screen and (min-width: 768px) {
-  //  display: flex;
-  //  width: clamp(250px, 400px, 600px);
-  //  font-size: 1em;
-  //}
 `
 
 
@@ -94,6 +87,7 @@ const SearchInputComponent: FC = () => {
     if (isMobile) {
         return <SearchButton/>
     } else return (
+
         <SearchInputComponentStyledForm className='search-bar' onSubmit={e => onSearchHandler(e)}>
             <button className='search-bar-search-btn' aria-label='search' type='submit'>
                 <svg xmlns="http://www.w3.org/2000/svg"
@@ -116,7 +110,6 @@ const SearchInputComponent: FC = () => {
                    value={state.keyword}
                    placeholder={t('Search...')}
             />
-
         </SearchInputComponentStyledForm>
     )
 
