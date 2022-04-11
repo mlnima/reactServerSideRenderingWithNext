@@ -2,6 +2,7 @@ import parse from 'html-react-parser';
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {FC, useMemo} from "react";
+import {Suspense} from 'react'
 
 const WidgetTextTextDataStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -16,14 +17,16 @@ interface TextPropTypes {
 const Text: FC<TextPropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 
-    const textToRender = useMemo(()=>{
+    const textToRender = useMemo(() => {
         return parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '');
-    },[])
+    }, [])
 
     return (
-        <WidgetTextTextDataStyledDiv className={'widgetText widget-text'}>
-            {textToRender}
-        </WidgetTextTextDataStyledDiv>
+        <Suspense fallback={<p>Loading....</p>}>
+            <WidgetTextTextDataStyledDiv className={'widgetText widget-text'}>
+                {textToRender}
+            </WidgetTextTextDataStyledDiv>
+        </Suspense>
     );
 
 };
