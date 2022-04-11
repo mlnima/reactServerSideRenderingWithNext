@@ -1,5 +1,6 @@
 import React, {useEffect, useState} from 'react';
 import styled from "styled-components";
+import parse from 'html-react-parser';
 import dynamic from 'next/dynamic'
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTrash} from "@fortawesome/free-solid-svg-icons";
@@ -151,6 +152,7 @@ const WidgetModel = props => {
 
     const onTextInputsDataChangeHandler = (e) => {
 
+        console.log( parse(e.target.value)    )
         if (widgetSettings.activeEditingLanguage === 'default') {
             setWidgetData({
                 ...widgetData,

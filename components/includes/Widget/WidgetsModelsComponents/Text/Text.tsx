@@ -17,15 +17,26 @@ interface TextPropTypes {
 const Text: FC<TextPropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 
+    // const textToRender = useMemo(() => {
+    //     return parse((locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '').replaceAll('\n','').replace(/  +/g, ' '), { trim: true });
+    // }, [])
+
+    // return (
+    //     <Suspense fallback={<span>Loading....</span>}>
+    //         <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}>
+    //             {textToRender}
+    //         </WidgetTextTextDataStyledSpan>
+    //     </Suspense>
+    // );
+
     const textToRender = useMemo(() => {
-        return parse((locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '').replaceAll('\n','').replace(/  +/g, ' '), { trim: true });
+        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
     }, [])
 
     return (
         <Suspense fallback={<span>Loading....</span>}>
-            <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}>
-                {textToRender}
-            </WidgetTextTextDataStyledSpan>
+            <WidgetTextTextDataStyledSpan className={'widgetText widget-text'} dangerouslySetInnerHTML={{__html:textToRender}}/>
+
         </Suspense>
     );
 
