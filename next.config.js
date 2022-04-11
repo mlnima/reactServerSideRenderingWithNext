@@ -90,9 +90,7 @@ const nextConfigs = {
         // ssr and displayName are configured by default
         styledComponents: true,
     },
-    experimental: {
-        runtime: 'nodejs',
-    },
+
 }
 
 module.exports = withPlugins([
@@ -108,3 +106,8 @@ module.exports = withPlugins([
     }),
     i18nConfig,
 ], nextConfigs);
+
+
+// experimental: {
+//     runtime: 'nodejs',
+// },
