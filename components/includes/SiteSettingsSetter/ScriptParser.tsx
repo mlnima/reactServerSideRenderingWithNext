@@ -6,9 +6,10 @@ interface ScriptParserPropTypes {
 }
 
 const ScriptParser: FC<ScriptParserPropTypes> = ({script}) => {
+    console.log(script)
     return (
         <>
-            {parse(script)}
+            {parse(script,{trim:true})}
         </>
     )
 };

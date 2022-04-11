@@ -1,11 +1,9 @@
 import {FC,  useMemo} from "react";
 import Head from 'next/head'
 import {useRouter} from "next/router";
-//import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import parse from 'html-react-parser'
-//const ScriptParser = dynamic(() => import('../includes/SiteSettingsSetter/ScriptParser'),{ssr:false})
 
 const SiteHeadSetter: FC = () => {
     const {asPath} = useRouter();
@@ -76,4 +74,3 @@ const SiteHeadSetter: FC = () => {
     )
 };
 export default SiteHeadSetter
-//      {headData.customScriptsAsString ? <ScriptParser script={headData.customScriptsAsString}/> : null}

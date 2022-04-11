@@ -36,14 +36,17 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
         },500)
     }, [router.pathname,router.query]);
 
-    return (
-        <AdvertiseStyledDiv dangerouslySetInnerHTML={{
-            __html:adCodeData ? adCodeData :
-                `<div class='pre-load'>
+    if (adCodeData){
+        return (
+            <AdvertiseStyledDiv dangerouslySetInnerHTML={{
+                __html:adCodeData ? adCodeData :
+                    `<div class='pre-load'>
                     <span>loading...</span>
                  </div>`
-        }}/>
-    )
+            }}/>
+        )
+    }else return null
+
 };
 export default Advertise
 
