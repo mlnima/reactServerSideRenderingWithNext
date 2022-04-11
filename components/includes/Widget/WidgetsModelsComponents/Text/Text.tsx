@@ -18,7 +18,7 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 
     const textToRender = useMemo(() => {
-        return parse((locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '').replaceAll('\n','').replaceAll('  ',' '), { trim: true });
+        return parse((locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '').replaceAll('\n','').replace(/  +/g, ' '), { trim: true });
     }, [])
 
     return (
