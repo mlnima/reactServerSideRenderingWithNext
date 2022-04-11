@@ -2,7 +2,7 @@
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {FC, useMemo} from "react";
-import {Suspense} from 'react'
+// import {Suspense} from 'react'
 
 const WidgetTextTextDataStyledSpan = styled.span`
   color: var(--main-text-color);
@@ -24,21 +24,29 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
     }, [])
 
-    return (
-        <Suspense fallback={<span>Loading....</span>}>
-            {/*<WidgetTextTextDataStyledDiv className={'widgetText widget-text'}>*/}
-            {/*    {textToRender}*/}
-            {/*</WidgetTextTextDataStyledDiv>*/}
-            {textToRender ?
-                <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
-                                              dangerouslySetInnerHTML={{ __html: textToRender }}
-                />
-                :null
-            }
+    // return (
+    //     <Suspense fallback={<span>Loading....</span>}>
+    //         {/*<WidgetTextTextDataStyledDiv className={'widgetText widget-text'}>*/}
+    //         {/*    {textToRender}*/}
+    //         {/*</WidgetTextTextDataStyledDiv>*/}
+    //         {textToRender ?
+    //             <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
+    //                                           dangerouslySetInnerHTML={{ __html: textToRender }}
+    //             />
+    //             :null
+    //         }
+    //
+    //
+    //     </Suspense>
+    // );
 
-
-        </Suspense>
-    );
+    if (textToRender){
+        return (
+            <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
+                                          dangerouslySetInnerHTML={{ __html: textToRender }}
+            />
+        );
+    }else return null
 
 };
 
