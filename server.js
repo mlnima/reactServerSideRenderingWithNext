@@ -43,6 +43,7 @@ const staticServeOptions = {
 const runServer = () => {
     const server = express();
     server.use(cors())
+
     server.listen(process.env.PORT || 3000, err => {
         if (err) throw err
         console.log(`process ${process.pid} : server ${process.env.PORT || 3000} `)
@@ -77,33 +78,9 @@ const runServer = () => {
     server.use('/api/admin',adminMainRouter);
     server.use('/api/v1',clientMainRouter);
 
-    // server.get('/_next/*', (req, res) => {
-    //     return  handle(req, res);
-    // });
-
-    // server.get('/_next/image*', (req, res) => {
-    //     return  handle(req, res);
-    // });
-    //
-    // server.get('/workbox/*', (req, res) => {
-    //     return  handle(req, res);
-    // });
-    //
-    // server.get('/admin/*', (req, res) => {
-    //     return handle(req, res)
-    // });
-    //
-    // server.get('/admin', (req, res) => {
-    //     return handle(req, res)
-    // });
-
     server.get('*', cacheSuccesses, (req, res) => {
         return handle(req, res)
     });
-
-    // server.get('*', (req, res) => {
-    //     return handle(req, res)
-    // });
 
 }
 

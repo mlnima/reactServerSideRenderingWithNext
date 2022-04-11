@@ -1,6 +1,6 @@
 import React, {FC, useMemo} from "react";
 import {useRouter} from "next/router";
-import parse from "html-react-parser";
+// import parse from "html-react-parser";
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
@@ -33,11 +33,12 @@ const PostDescription: FC = () => {
     }, [description, translations]);
 
     return (
-        <PostDescriptionStyledDiv className="description">
-            {descriptionValue ? parse(descriptionValue as string) : ''}
-        </PostDescriptionStyledDiv>
+        <PostDescriptionStyledDiv className="description" dangerouslySetInnerHTML={{__html:descriptionValue as string}}/>
     )
 };
 
 export default PostDescription;
-
+//
+// <PostDescriptionStyledDiv className="description" dangerouslySetInnerHTML={{__html:descriptionValue as string}}>
+//     {descriptionValue ? parse(descriptionValue as string) : ''}
+// </PostDescriptionStyledDiv>

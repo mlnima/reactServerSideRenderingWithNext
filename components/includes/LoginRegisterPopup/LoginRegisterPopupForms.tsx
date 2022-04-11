@@ -1,5 +1,4 @@
 import React, {useState, useEffect, FC} from 'react';
-
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {useTranslation} from 'next-i18next';

@@ -1,6 +1,5 @@
 import {NEW_MESSAGE, SET_ACTIVE_VISIBLE_PROFILE, SET_MESSAGES, SET_ONLINE_USERS} from "@store/types";
 
-
 export const setChatroomUsers = usersList => dispatch=>{
     dispatch({
         type:SET_ONLINE_USERS,

@@ -120,6 +120,7 @@ const AlertBox = () => {
 
     return (
         <StyledDiv className='alert-box' onClick={() => dispatch(closeAlert())}>
+            {/*//@ts-ignore*/}
             <Draggable handle=".alert-message-header">
                 <div className='alert-message'>
                     <div className='alert-message-header'>
@@ -137,6 +138,7 @@ const AlertBox = () => {
                         </button>
                     </div>
                     <p className='alert'>
+                        {/*//@ts-ignore*/}
                         {t([t(alert.message, {ns: 'common'}), t(alert.message, {ns: 'profile'})])}
                     </p>
                     <p>{alert.err?.stack}</p>

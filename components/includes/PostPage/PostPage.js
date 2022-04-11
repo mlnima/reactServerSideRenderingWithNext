@@ -1,5 +1,4 @@
 import React, {useEffect, useState} from 'react';
-import * as Scroll from "react-scroll";
 import dynamic from "next/dynamic";
 import PostPageStyledMain from './PostPageStyle'
 import {useSelector} from "react-redux";
@@ -40,15 +39,14 @@ const PostPage = ( ) => {
     })
 
     useEffect(() => {
-        Scroll.animateScroll.scrollToTop();
         if (typeof window !== 'undefined') {
-            setDeviceWidth(window.innerWidth)
+            window.scrollTo({top: 0, behavior: 'smooth'})
         }
     }, []);
 
     useEffect(() => {
         if (typeof window !== 'undefined') {
-            if (post?.likes, post?.disLikes){
+            if (post?.likes && post?.disLikes){
                 setState({
                     ...state,
                     likeValue: ratingCalculator(post?.likes, post?.disLikes),

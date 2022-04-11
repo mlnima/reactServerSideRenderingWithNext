@@ -101,7 +101,11 @@ const ActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler,ind
                         <span className={'card-header'}> {actorName}</span>
                     </header>
 
-                    {actor?.count ? <span className={'actor-card-count'}>{actor?.count} {t('Videos')}</span> : null}
+                    {actor?.count ?
+                        <span className={'actor-card-count'}>
+                            {actor?.count} {t('Videos')}
+                        </span>
+                        : null}
                 </a>
             </Link>
         </ActorCardStyledDiv>

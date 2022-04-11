@@ -15,15 +15,15 @@ import {
     SET_CALL_ACCEPTED,
     SET_PARTNER_VIDEO, LOADING, LOGIN_REGISTER_FORM, UPDATE_USER_DATA_FIELD
 } from '@store/types';
-import axios from 'axios';
+
 import Peer from 'simple-peer'
 import {socket} from '@_variables/socket';
-//import {EXPORT_DETAIL} from "next/constants";
 import Axios from "@_variables/util/Axios";
 
 export const userLogin = (username, password) => async dispatch => {
+
     try {
-        await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/login', {username, password}).then(res => {
+        await Axios.post( '/api/v1/users/login', {username, password}).then(res => {
             res.data.token ? localStorage.setItem('wt', res.data.token) : null
             dispatch({
                 type: USER_LOGIN,
@@ -33,7 +33,7 @@ export const userLogin = (username, password) => async dispatch => {
     } catch (error) {
         dispatch({
             type: SET_ALERT,
-            payload: {message: error.response.data.message, type: 'error'}
+            payload: {message: error?.response?.data?.message, type: 'error'}
         })
         localStorage.wt ? localStorage.removeItem('wt') : null
     }
@@ -63,7 +63,7 @@ export const userRegister = (data) => async dispatch => {
 export const autoUserLogin = (fields) => async dispatch => {
     try {
         if (localStorage.wt) {
-            await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
+            await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
 
                 dispatch({
                     type: USER_AUTO_LOGIN,
@@ -80,7 +80,7 @@ export const userResetPassword = (data) => async dispatch => {
 
     try {
         if (localStorage.wt) {
-            await axios.post('/api/v1/users/resetPassword', {token: localStorage.wt, data}).then(res => {
+            await Axios.post('/api/v1/users/resetPassword', {token: localStorage.wt, data}).then(res => {
                 dispatch({
                     type: SET_ALERT,
                     payload: {message: res.data.message, type: 'success'}
@@ -105,7 +105,7 @@ export const userResetPassword = (data) => async dispatch => {
 export const getSpecificUserData = (fields) => async dispatch => {
     try {
         if (localStorage.wt) {
-            await axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
+            await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
                 dispatch({
                     type: GET_SPECIFIC_USER_DATA,
                     payload: {userData: res.data.userData, loggedIn: true}
@@ -133,7 +133,7 @@ export const dispatchSocketId = socketId => dispatch => {
 }
 
 export const getConversations = _id => async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/getConversations',
+    await Axios.post( '/api/v1/users/getConversations',
         {_id, token: localStorage.wt})
         .then(res => {
             if (res.data?.conversations) {
@@ -146,7 +146,7 @@ export const getConversations = _id => async dispatch => {
 }
 
 export const getConversation = (_id, loadAmount) => async dispatch => {
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/getConversation',
+    await Axios.post('/api/v1/users/getConversation',
         {
             _id,
             loadAmount,
@@ -163,7 +163,7 @@ export const getConversation = (_id, loadAmount) => async dispatch => {
 }
 
 export const deleteConversation = _id => async dispatch => {
-    await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)
+    await Axios.get( `/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)
         .then(res => {
             dispatch({
                 type: DELETE_CONVERSATION,
@@ -194,7 +194,7 @@ export const getUserPageData = (username, _id, fields) => async dispatch => {
         fields,
         _id
     }
-    await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/v1/users/getUserPreviewData', body).then(res => {
+    await Axios.post('/api/v1/users/getUserPreviewData', body).then(res => {
         dispatch({
             type: GET_USER_PAGE_DATA,
             payload: res.data.userData

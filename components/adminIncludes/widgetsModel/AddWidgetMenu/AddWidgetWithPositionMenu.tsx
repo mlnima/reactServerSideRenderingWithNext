@@ -126,6 +126,7 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
     }
 
     return (
+        //@ts-ignore
         <Draggable handle=".AddWidgetWithPositionMenu">
             <AddWidgetWithPositionMenuStyledDiv ref={refToElement}
                                                 className='AddWidgetWithPositionMenu'

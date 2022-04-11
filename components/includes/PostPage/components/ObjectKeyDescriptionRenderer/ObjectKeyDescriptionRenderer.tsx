@@ -1,6 +1,6 @@
 import styled from "styled-components";
 import CodeSnippet from "@components/global/CodeSnippet";
-import parse from "html-react-parser";
+// import parse from "html-react-parser";
 
 const ObjectKeyDescriptionRendererStyledDiv = styled.div`
 
@@ -87,9 +87,9 @@ const ObjectKeyDescriptionRenderer = ({description}: ComponentPropTypes) => {
                             <CodeSnippet code={elementObject?.[ElementType]}
                                          language={elementObject?.language || 'js'}
                             /> :
-                            <ElementType  className={'learn-description-element-child'}>
-                                {parse(elementObject?.[ElementType])}
-                            </ElementType>
+                            <ElementType  className={'learn-description-element-child'}
+                                          dangerouslySetInnerHTML={{__html:elementObject?.[ElementType]}}
+                            />
                 }
             </div>
         )
@@ -103,3 +103,8 @@ const ObjectKeyDescriptionRenderer = ({description}: ComponentPropTypes) => {
 };
 
 export default ObjectKeyDescriptionRenderer;
+
+//
+// <ElementType  className={'learn-description-element-child'}>
+//     {parse(elementObject?.[ElementType])}
+// </ElementType>

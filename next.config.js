@@ -7,8 +7,8 @@ const languages = process.env.NEXT_PUBLIC_LOCALS.replace(' ', '|')
 const locales = process.env.NEXT_PUBLIC_LOCALS.split(' ')
 const allowedDomainForImages = process.env.NEXT_PUBLIC_ALLOWED_IMAGES_SOURCES.split(' ')
 //const withPWA = require('next-pwa')
-const withCSS = require('@zeit/next-css')
-const withSass = require('@zeit/next-sass')
+// const withCSS = require('@zeit/next-css')
+// const withSass = require('@zeit/next-sass')
 const withBundleAnalyzer = require('@next/bundle-analyzer')({
     enabled: process.env.ANALYZE === 'true',
 })
@@ -89,12 +89,11 @@ const nextConfigs = {
     compiler: {
 
         styledComponents: true,
-    },
-
+    }
 }
 
 module.exports = withPlugins([
-    withCSS(withSass()),
+    // withCSS(withSass()),
     i18n,
     svgLoader,
     // process.env.NODE_ENV === 'production' && process.env.NEXT_PUBLIC_PWA === 'true' ? withPWA(pwaSettings) : {},

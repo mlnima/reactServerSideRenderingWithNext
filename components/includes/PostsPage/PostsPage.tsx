@@ -1,6 +1,5 @@
 import {useEffect,Fragment} from 'react';
 import {useRouter} from "next/router";
-import * as Scroll from "react-scroll";
 import PaginationComponent from "../PaginationComponent/PaginationComponent";
 import PostsRenderer from "../PostsRenderer/PostsRenderer";
 import styled from "styled-components";
@@ -21,13 +20,20 @@ let PostsContainer = styled.div`
 const PostsPage = () => {
     
     const {query} = useRouter()
-    const posts = useSelector((store: StoreTypes) => store?.posts?.posts)
-    const postsCountPerPage = query?.size ? parseInt(query?.size as string) :
-        useSelector((store: StoreTypes) => parseInt(store?.settings?.identity?.postsCountPerPage || '20'))
-    const totalCount = useSelector((store: StoreTypes) => store?.posts?.totalCount)
+
+    const {posts,postsCountPerPage,totalCount}= useSelector(({posts,settings}: StoreTypes) =>{
+        return{
+            posts: posts?.posts,
+            totalCount:posts?.totalCount,
+            postsCountPerPage: parseInt(query?.size as string || settings?.identity?.postsCountPerPage || '20')
+        }
+    })
+
 
     useEffect(() => {
-        Scroll.animateScroll.scrollToTop();
+        if (typeof window !== 'undefined') {
+            window.scrollTo({top: 0, behavior: 'smooth'})
+        }
     }, [query]);
 
     return (

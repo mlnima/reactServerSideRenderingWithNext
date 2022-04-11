@@ -57,7 +57,8 @@ const WidgetGroupByPosition: FC<WidgetGroupByPositionPropTypes> = ({filter, posi
 
     if (filter === position || filter === 'all') {
         return (
-            <Draggable handle=".widgetAdminPanelItemHeader">
+            //@ts-ignore
+            <Draggable handle={'.widgetAdminPanelItemHeader'}>
                 <WidgetGroupByPositionStyledDiv filter={filter} className='widgetAdminPanelItem'>
                     <p className='widgetAdminPanelItemHeader'>{convertVariableNameToName(position)}</p>
                     {widgets?.map((widget) => {

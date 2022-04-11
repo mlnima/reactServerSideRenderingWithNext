@@ -14,7 +14,7 @@ const SiteHeadSetter: FC = () => {
     const headData = useSelector(({globalState}: StoreTypes) => globalState.headData)
 
     return (
-        <Head>
+        <Head >
             {headData.title ? <title>{headData.title}</title> : null}
             {headData.description && typeof headData.description === 'string' ?
                 <meta name="description" content={headData.description}/>

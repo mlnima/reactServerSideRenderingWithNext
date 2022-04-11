@@ -473,7 +473,10 @@ const WidgetModel = props => {
 
 
                     {widgetData.type === 'advertise' ?
-                        <AdvertiseWidgetModelFields adCode={widgetData.adCode} onChangeHandler={onChangeHandler}/>
+                        <AdvertiseWidgetModelFields uniqueData={widgetData?.uniqueData}
+                                                    onChangeHandler={onChangeHandler}
+                                                    onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                        />
                         : null
                     }
 

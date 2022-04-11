@@ -11,7 +11,6 @@ import CreateEditArticlePostField
 import {editPostField, getEditingPost, userCreateNewPost, userUpdatePost} from "@store/clientActions/postsAction";
 import TextInput from "@components/includes/profilePageComponents/profilePost/common/TextInput";
 import MetaDataSelector from "@components/includes/profilePageComponents/profilePost/common/MetaDataSelector";
-import Dropzone from 'react-dropzone'
 import ThumbnailUploader from "@components/includes/profilePageComponents/profilePost/common/ThumbnailUploader";
 import VideoTypeFields from "@components/includes/profilePageComponents/profilePost/VideoTypeFields/VideoTypeFields";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
