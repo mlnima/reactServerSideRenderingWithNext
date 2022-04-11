@@ -14,8 +14,12 @@ interface TextPropTypes {
 }
 
 const Text: FC<TextPropTypes> = ({translations, text}) => {
-    const router = useRouter();
-    const textData = translations ? translations[router.locale] ? translations[router.locale].text || text : text : text;
+    const {locale} = useRouter();
+
+
+    //const textData = translations ? translations[locale] ? translations[locale].text || text : text : text;
+    const textData = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || ''
+
     const data = parse(textData);
     //remove widgetText className after live project custom styles updated
     return (

@@ -1,7 +1,12 @@
-import React from 'react';
+import React, {FC} from 'react';
 import Text from '../WidgetsModelsComponents/Text/Text'
 
-const WidgetText = props => {
+interface WidgetTextProps{
+    translations:{},
+    text:string
+}
+
+const WidgetText:FC<WidgetTextProps> = props => {
     return (
         <Text {...props}/>
     )

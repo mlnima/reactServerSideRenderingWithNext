@@ -21,7 +21,7 @@ const DesktopMenuWidget: FC<DesktopMenuWidgetPropTypes> = ({menuItemsInOrder,mob
 
     return (
         <DesktopMenuWidgetStyledUl className={'menu-widget-items'}>
-            {menuItemsInOrder.map(menuItem => <DesktopMenuWidgetItem menuItem={menuItem} key={menuItem.itemIndex} mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}/>)}
+            {menuItemsInOrder.map(menuItem => <DesktopMenuWidgetItem menuItem={menuItem} key={menuItem.itemIndex+menuItem.name} mobileNavigationOnClickHandler={mobileNavigationOnClickHandler}/>)}
         </DesktopMenuWidgetStyledUl>
     )
 };
