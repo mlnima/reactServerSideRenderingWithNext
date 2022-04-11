@@ -5,7 +5,7 @@ import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
-const ScriptParser = dynamic(() => import('../includes/SiteSettingsSetter/ScriptParser'))
+const ScriptParser = dynamic(() => import('../includes/SiteSettingsSetter/ScriptParser'),{ssr:false})
 
 const SiteHeadSetter: FC = () => {
     const {asPath} = useRouter();
