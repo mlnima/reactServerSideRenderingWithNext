@@ -20,9 +20,9 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
     // const textToRender = useMemo(() => {
     //     return parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '');
     // }, [])
-    const textToRender = useMemo(() => {
-        return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
-    }, [])
+    // const textToRender = useMemo(() => {
+    //     return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
+    // }, [])
 
     // return (
     //     <Suspense fallback={<span>Loading....</span>}>
@@ -40,13 +40,20 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
     //     </Suspense>
     // );
 
-    if (textToRender){
-        return (
-            <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
-                                          dangerouslySetInnerHTML={{ __html: textToRender }}
-            />
-        );
-    }else return null
+    // if (textToRender){
+    //     return (
+    //         <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
+    //                                       dangerouslySetInnerHTML={{ __html: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '' }}
+    //         />
+    //     );
+    // }else return null
+
+
+    return (
+        <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
+                                      dangerouslySetInnerHTML={{ __html: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '' }}
+        />
+    );
 
 };
 
