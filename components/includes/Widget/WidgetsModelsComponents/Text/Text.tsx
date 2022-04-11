@@ -1,8 +1,8 @@
-// import parse from 'html-react-parser';
+import parse from 'html-react-parser';
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {FC, useMemo} from "react";
-// import {Suspense} from 'react'
+import {Suspense} from 'react'
 
 const WidgetTextTextDataStyledSpan = styled.span`
   color: var(--main-text-color);
@@ -17,42 +17,16 @@ interface TextPropTypes {
 const Text: FC<TextPropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 
-    // const textToRender = useMemo(() => {
-    //     return parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '');
-    // }, [])
-    // const textToRender = useMemo(() => {
-    //     return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '';
-    // }, [])
-
-    // return (
-    //     <Suspense fallback={<span>Loading....</span>}>
-    //         {/*<WidgetTextTextDataStyledDiv className={'widgetText widget-text'}>*/}
-    //         {/*    {textToRender}*/}
-    //         {/*</WidgetTextTextDataStyledDiv>*/}
-    //         {textToRender ?
-    //             <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
-    //                                           dangerouslySetInnerHTML={{ __html: textToRender }}
-    //             />
-    //             :null
-    //         }
-    //
-    //
-    //     </Suspense>
-    // );
-
-    // if (textToRender){
-    //     return (
-    //         <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
-    //                                       dangerouslySetInnerHTML={{ __html: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '' }}
-    //         />
-    //     );
-    // }else return null
-
+    const textToRender = useMemo(() => {
+        return parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '', { trim: true });
+    }, [])
 
     return (
-        <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
-                                      dangerouslySetInnerHTML={{ __html: locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '' }}
-        />
+        <Suspense fallback={<span>Loading....</span>}>
+            <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}>
+                {textToRender}
+            </WidgetTextTextDataStyledSpan>
+        </Suspense>
     );
 
 };
