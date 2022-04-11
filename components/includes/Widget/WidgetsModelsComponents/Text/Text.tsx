@@ -1,4 +1,4 @@
-import parse from 'html-react-parser';
+// import parse from 'html-react-parser';
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {FC} from "react";
@@ -20,12 +20,14 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
     //const textData = translations ? translations[locale] ? translations[locale].text || text : text : text;
     const textData = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || ''
 
-    const data = parse(textData);
+    // const data = parse(textData);
     //remove widgetText className after live project custom styles updated
     return (
         <TextStyledDiv className='widgetText widget-text'>
-            {data}
+
+            {textData}
         </TextStyledDiv>
     );
 };
 export default Text;
+// {/*{data}*/}
