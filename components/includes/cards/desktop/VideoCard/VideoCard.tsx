@@ -147,7 +147,7 @@ const VideoCard: FC<VideoTypeCardPropTypes> =
                                         index={index}
                                         hover={hover}
                         />
-                        />
+
                     </a>
                 </Link>
                 <VideoCardTitle title={title}

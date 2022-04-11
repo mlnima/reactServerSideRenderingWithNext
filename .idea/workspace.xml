@@ -20,10 +20,7 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
-      <change afterPath="$PROJECT_DIR$/temp.json" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCard.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/cards/desktop/VideoCard/VideoCard.tsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/widgets/Advertise/Advertise.tsx" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -1108,7 +1105,7 @@
       <workItem from="1649581366825" duration="6827000" />
       <workItem from="1649600722407" duration="15187000" />
       <workItem from="1649630920186" duration="16772000" />
-      <workItem from="1649671010585" duration="41035000" />
+      <workItem from="1649671010585" duration="41155000" />
     </task>
     <servers />
   </component>
