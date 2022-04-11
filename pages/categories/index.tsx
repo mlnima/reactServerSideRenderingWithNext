@@ -19,6 +19,7 @@ const CategoriesPageStyledMain = styled.main`
   grid-area: main;
   ${({categoriesPageStyle}: { categoriesPageStyle: string }) => categoriesPageStyle || ''}
 `
+
 const categoriesPage = () => {
     const {query} = useRouter()
 

@@ -80,7 +80,7 @@ const nextImageConfig = {
 
 const nextConfigs = {
     env: {},
-    reactStrictMode: true,
+    reactStrictMode: false,
     rewrites,
     swcMinify: true,
     eslint: {
