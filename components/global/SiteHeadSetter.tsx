@@ -1,11 +1,11 @@
 import {FC,  useMemo} from "react";
 import Head from 'next/head'
 import {useRouter} from "next/router";
-import dynamic from "next/dynamic";
+//import dynamic from "next/dynamic";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-
-const ScriptParser = dynamic(() => import('../includes/SiteSettingsSetter/ScriptParser'),{ssr:false})
+import parse from 'html-react-parser'
+//const ScriptParser = dynamic(() => import('../includes/SiteSettingsSetter/ScriptParser'),{ssr:false})
 
 const SiteHeadSetter: FC = () => {
     const {asPath} = useRouter();
@@ -70,8 +70,10 @@ const SiteHeadSetter: FC = () => {
                 <meta property={'twitter:description'} content={headData?.twitterDescription}/>: null}
             {headData?.twitterImage? <meta property={'twitter:image'} content={headData?.twitterImage}/>: null}
             {headData?.rtaContent ? <meta name={'RATING'} content={'RTA-5042-1996-1400-1577-RTA'}/> : null }
-            {headData.customScriptsAsString ? <ScriptParser script={headData.customScriptsAsString}/> : null}
+            {headData.customScriptsAsString ?<>{parse(headData.customScriptsAsString,{trim:true})}</>  : null}
+
         </Head>
     )
 };
 export default SiteHeadSetter
+//      {headData.customScriptsAsString ? <ScriptParser script={headData.customScriptsAsString}/> : null}
