@@ -46,14 +46,10 @@ let WidgetStyledSection = styled.section`
   ${({customStyles}: { customStyles: string }) => customStyles || ''}
 `
 
-const Widget: FC<WidgetComponentPropTypes> =
-    ({
-         data,
-         widgetId,
-         isSidebar,
-         viewType
-    }) => {
-    const idAttribute = data?.extraId ? {id: data?.extraId} : {}
+const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewType}) => {
+
+    const idAttribute = useMemo(()=>data?.extraId ? {id: data?.extraId} : {},[data])
+    // const idAttribute = data?.extraId ? {id: data?.extraId} : {}
 
     const WidgetToRender = useMemo(()=>{
             return data.type === 'posts' ? Posts :
@@ -90,19 +86,19 @@ const Widget: FC<WidgetComponentPropTypes> =
                              className={'widget ' + (data?.extraClassName ?? '')}
                              customStyles={data?.customStyles || ''}
         >
-            {data.title ?
-                <WidgetHeader translations={data.translations}
-                              title={data.title}
-                              redirectLink={data.redirectLink}
-                              redirectToTitle={data.redirectToTitle}
-                              footerLink={data.footerLink}
+            {data?.title ?
+                <WidgetHeader translations={data?.translations}
+                              title={data?.title}
+                              redirectLink={data?.redirectLink}
+                              redirectToTitle={data?.redirectToTitle}
+                              footerLink={data?.footerLink}
 
                 />
                 : null
             }
-            {data.text ?
-                <WidgetText translations={data.translations}
-                            text={data.text}
+            {data?.text ?
+                <WidgetText translations={data?.translations}
+                            text={data?.text}
                 />
                 : null
             }
@@ -110,7 +106,6 @@ const Widget: FC<WidgetComponentPropTypes> =
                 //@ts-ignore
                 <WidgetToRender
                     {...data}
-
                     widgetId={widgetId}
                     isSidebar={isSidebar}
                     // widget={true}
@@ -118,15 +113,15 @@ const Widget: FC<WidgetComponentPropTypes> =
                 />
                 : null
             }
-            {data.customScript ?
-                <WidgetCustomScript customScript={data.customScript}
-                                    customScriptStrategy={data.customScriptStrategy}
+            {data?.customScript ?
+                <WidgetCustomScript customScript={data?.customScript}
+                                    customScriptStrategy={data?.customScriptStrategy}
                 />
                 : null
             }
             {data?.pagination && data?.redirectLink ?
-                <WidgetPagination baseUrl={data.redirectLink}
-                                  totalCount={data.uniqueData.totalCount}
+                <WidgetPagination baseUrl={data?.redirectLink}
+                                  totalCount={data?.uniqueData?.totalCount}
                                   count={data?.count}
                 />
                 : null
