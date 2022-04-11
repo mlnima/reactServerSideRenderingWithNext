@@ -6,7 +6,7 @@ import {PostTypes} from "@_variables/TypeScriptTypes/PostTypes";
 import CardMetaRenderer from "@components/includes/cards/asset/CardMetaData/CardMetaRenderer";
 import VideoCardTitle from './VideoCardTitle'
 
-const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'), {ssr: false});
+const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate') );
 const CardViews = dynamic(() => import('@components/includes/cards/asset/CardViews/CardViews'));
 const CardRating = dynamic(() => import('@components/includes/cards/asset/CardRating/CardRating'));
 const VideoCardMedia = dynamic(() => import('./VideoCardMedia/VideoCardMedia'));
@@ -146,6 +146,7 @@ const VideoCard: FC<VideoTypeCardPropTypes> =
                                         quality={post.quality}
                                         index={index}
                                         hover={hover}
+                        />
                         />
                     </a>
                 </Link>

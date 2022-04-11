@@ -9,6 +9,8 @@ const AdvertiseStyledDiv = styled.div`
    align-items:center;
    min-height: 100px;
    min-width: 300px;
+   margin-top: 10px ;
+   margin-bottom: 10px ;
   
   .pre-load{
     display: flex;
