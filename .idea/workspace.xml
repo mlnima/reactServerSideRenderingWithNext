@@ -21,6 +21,7 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/WidgetsModelsComponents/Text/Text.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/next.config.js" beforeDir="false" afterPath="$PROJECT_DIR$/next.config.js" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -102,7 +103,7 @@
       <recent name="I:\Dev Project\reactServerSideRenderingWithNext\components\adminIncludes\assetComponents" />
     </key>
   </component>
-  <component name="RunManager" selected="npm.build">
+  <component name="RunManager" selected="npm.dev">
     <configuration name="temp.js" type="NodeJSConfigurationType" temporary="true" nameIsGenerated="true" path-to-js-file="$PROJECT_DIR$/temp.js" working-dir="$PROJECT_DIR$">
       <method v="2" />
     </configuration>
@@ -148,10 +149,10 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="npm.build" />
-        <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.dev" />
         <item itemvalue="npm.start" />
+        <item itemvalue="npm.build" />
+        <item itemvalue="Node.js.temp.js" />
         <item itemvalue="npm.analyze" />
       </list>
     </recent_temporary>
@@ -1103,7 +1104,7 @@
       <workItem from="1649581366825" duration="6827000" />
       <workItem from="1649600722407" duration="15187000" />
       <workItem from="1649630920186" duration="16772000" />
-      <workItem from="1649671010585" duration="16786000" />
+      <workItem from="1649671010585" duration="17850000" />
     </task>
     <servers />
   </component>
