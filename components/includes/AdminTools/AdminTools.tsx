@@ -53,7 +53,7 @@ const AdminTools: FC = () => {
     const [open, setOpen] = useState(false)
 
     return (
-        <Draggable handle=".open-button">
+        <Draggable handle={'.open-button'}>
             <StyledDiv className='admin-tools'>
                 <button className='admin-tools-item open-button'
                         onClick={() => setOpen(!open)}

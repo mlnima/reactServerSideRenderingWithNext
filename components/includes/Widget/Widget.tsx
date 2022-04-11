@@ -103,9 +103,10 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
                 : null
             }
             {WidgetToRender ?
-                //@ts-ignore
+
                 <WidgetToRender
                     {...data}
+                    //@ts-ignore
                     widgetId={widgetId}
                     isSidebar={isSidebar}
                     // widget={true}

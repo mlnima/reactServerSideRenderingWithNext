@@ -107,28 +107,32 @@ const runServer = () => {
 
 }
 
+app.prepare().then(()=>runServer()).catch((ex) => {
+    console.log('exit error:', ex.stack)
+});
 
-if (!process.env.CPU_CORES_ALLOW_TO_USE || process.env.NODE_ENV !== 'production'){
-    app.prepare().then(()=>runServer()).catch((ex) => {
-        console.log('exit error:', ex.stack)
-    });
-}else{
-    if (cluster.isMaster){
-        const numberOfCpus = os.cpus()?.length
-        const numberOfCpusToUse = parseInt(process.env.CPU_CORES_ALLOW_TO_USE) || 1
 
-        if (numberOfCpusToUse < numberOfCpus ){
-            [...Array(numberOfCpusToUse)].forEach(()=>{
-                cluster.fork()
-            })
-        }
-    }else {
-
-        app.prepare().then(()=>runServer()).catch((ex) => {
-            console.log('exit error:', ex.stack)
-        });
-    }
-}
+// if (!process.env.CPU_CORES_ALLOW_TO_USE || process.env.NODE_ENV !== 'production'){
+//     app.prepare().then(()=>runServer()).catch((ex) => {
+//         console.log('exit error:', ex.stack)
+//     });
+// }else{
+//     if (cluster.isMaster){
+//         const numberOfCpus = os.cpus()?.length
+//         const numberOfCpusToUse = parseInt(process.env.CPU_CORES_ALLOW_TO_USE) || 1
+//
+//         if (numberOfCpusToUse < numberOfCpus ){
+//             [...Array(numberOfCpusToUse)].forEach(()=>{
+//                 cluster.fork()
+//             })
+//         }
+//     }else {
+//
+//         app.prepare().then(()=>runServer()).catch((ex) => {
+//             console.log('exit error:', ex.stack)
+//         });
+//     }
+// }
 
 
 

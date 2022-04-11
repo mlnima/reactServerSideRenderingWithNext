@@ -1,7 +1,7 @@
 import parse from 'html-react-parser';
 import styled from "styled-components";
 import {useRouter} from "next/router";
-import {FC, useMemo, useState} from "react";
+import {FC, useMemo} from "react";
 
 const WidgetTextTextDataStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -17,14 +17,8 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
     const {locale} = useRouter();
 
     const textToRender = useMemo(()=>{
-        //return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || ''
         return parse(locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || '');
     },[])
-
-    //const textData = translations ? translations[locale] ? translations[locale].text || text : text : text;
-    // const textData = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ? text : translations?.[locale]?.text || text || ''
-    // const data = parse(textToRender);
-    //remove widgetText className after live project custom styles updated
 
     return (
         <WidgetTextTextDataStyledDiv className={'widgetText widget-text'}>

@@ -2,7 +2,7 @@ const apiCache = require('apicache')
 const cache = apiCache.middleware;
 
 apiCache.options({
-   debug: process.env.NODE_ENV !== 'production',
+    debug: process.env.NODE_ENV !== 'production',
     //debug: true,
     appendKey: (req, res) => {
         const userAgent = req.headers['user-agent'];

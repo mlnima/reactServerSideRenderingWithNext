@@ -2,7 +2,9 @@ import React, {useState, useEffect, FC} from 'react';
 import styled from "styled-components";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
-import {SyncLoader} from "react-spinners";
+// import {SyncLoader} from "react-spinners";
+// "@emotion/react": "^11.8.2",
+import ReactLoading from 'react-loading';
 import {useDispatch, useSelector} from "react-redux";
 import {setLoading} from "@store/clientActions/globalStateActions";
 import {useRouter} from "next/router";
@@ -49,11 +51,11 @@ const Loading: FC = () => {
     const [render, setRender] = useState(false)
 
     useEffect(() => {
-        // let isMounted = true;
-        // setTimeout(()=>{
-        //     if (isMounted) setRender(true)
-        // },500)
-        setRender(true)
+        let isMounted = true;
+        setTimeout(()=>{
+            if (isMounted) setRender(true)
+        },700)
+        // setRender(true)
     }, []);
 
     useEffect(() => {
@@ -70,7 +72,8 @@ const Loading: FC = () => {
                 <button className='stopLoading fas fa-times' onClick={() => dispatch(setLoading(false))}>
                     <FontAwesomeIcon style={{width: '1rem', height: '1rem'}} icon={faTimes} className='stopLoading'/>
                 </button>
-                <SyncLoader color='var(--main-active-color,blue)' loading={true} size={20}/>
+                <ReactLoading type={'spin'} color={'var(--main-active-color,#f90)'} height={100} width={100} />
+                {/*<SyncLoader color='var(--main-active-color,blue)' loading={true} size={20}/>*/}
             </StyledDiv>
         );
     } else return null
