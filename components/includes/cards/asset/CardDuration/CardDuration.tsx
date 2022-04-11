@@ -15,7 +15,7 @@ interface CardViewsPropTypes {
 const CardDuration = ({duration, className}: CardViewsPropTypes) => {
     return (
         <CardDurationStyledDiv className={'card-duration ' + className}>
-            <var>  {duration}</var>
+            <var>{duration}</var>
         </CardDurationStyledDiv>
     );
 };
