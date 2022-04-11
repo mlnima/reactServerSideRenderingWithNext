@@ -1104,7 +1104,7 @@
       <workItem from="1649581366825" duration="6827000" />
       <workItem from="1649600722407" duration="15187000" />
       <workItem from="1649630920186" duration="16772000" />
-      <workItem from="1649671010585" duration="15146000" />
+      <workItem from="1649671010585" duration="16022000" />
     </task>
     <servers />
   </component>
@@ -1399,12 +1399,6 @@
           <url>file://$PROJECT_DIR$/components/includes/widgets/Authentication/DesktopAuthentication/LoggedOutItemsMenu.tsx</url>
           <line>13</line>
           <option name="timeStamp" value="145" />
-        </line-breakpoint>
-        <line-breakpoint enabled="true" type="javascript">
-          <url>file://$PROJECT_DIR$/components/adminIncludes/widgetsModel/WidgetModel/WidgetModel.js</url>
-          <line>152</line>
-          <properties lambdaOrdinal="-1" />
-          <option name="timeStamp" value="146" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>
