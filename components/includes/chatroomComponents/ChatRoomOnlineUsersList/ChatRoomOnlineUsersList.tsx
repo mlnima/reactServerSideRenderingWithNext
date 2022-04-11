@@ -1,7 +1,8 @@
-import _ from "lodash";
 import ChatRoomOnlineUsersListItem from "./ChatRoomOnlineUsersListItem";
 import {useSelector} from "react-redux";
 import styled from "styled-components";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 
 const ChatRoomOnlineUsersListStyledDiv = styled.div`
   display: initial;
@@ -14,13 +15,15 @@ const ChatRoomOnlineUsersListStyledDiv = styled.div`
   padding: 5px;
   overflow-y: scroll;
 `
+
 const ChatRoomOnlineUsersList = () => {
 
-    const chatroomUsers = useSelector(store => store?.chatroom?.onlineUsers)
+    const chatroomUsers = useSelector(({chatroom}:StoreTypes) => chatroom?.onlineUsers)
 
-    const renderOnlineUsers = _.uniqBy(chatroomUsers, e => e.username).sort((a, b) => a.username > b.username ? 1 : -1).map(onlineUser => {
+    const renderOnlineUsers = _uniqBy(chatroomUsers,'username')
+        .sort((a, b) => a.username > b.username ? 1 : -1).map(onlineUser => {
             return (
-                <ChatRoomOnlineUsersListItem key={_.uniqueId('message_')} onlineUser={onlineUser}/>
+                <ChatRoomOnlineUsersListItem key={`${onlineUser.username + Date.now()}`} onlineUser={onlineUser}/>
             )
         }
     )
@@ -30,5 +33,6 @@ const ChatRoomOnlineUsersList = () => {
             {renderOnlineUsers}
         </ChatRoomOnlineUsersListStyledDiv>
     );
+
 };
 export default ChatRoomOnlineUsersList;

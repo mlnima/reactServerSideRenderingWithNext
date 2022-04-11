@@ -1,7 +1,8 @@
-import React from 'react';
+import React, {FC} from 'react';
 import {useDispatch} from "react-redux";
-import {setActiveVisibleProfile} from "../../../../store/clientActions/chatroomActions";
+import {setActiveVisibleProfile} from "@store/clientActions/chatroomActions";
 import styled from "styled-components";
+
 const ChatRoomOnlineUsersListItemStyledDiv = styled.div`
   display: flex;
   align-items: center;
@@ -42,7 +43,16 @@ const ChatRoomOnlineUsersListItemStyledDiv = styled.div`
     justify-content: space-between;
   }
 `
-const ChatRoomOnlineUsersListItem = ({onlineUser}) => {
+
+interface ChatRoomOnlineUsersListItemPropType{
+    onlineUser:{
+        username: string,
+        id: string,
+        profileImage: string
+    }
+}
+
+const ChatRoomOnlineUsersListItem:FC<ChatRoomOnlineUsersListItemPropType> = ({onlineUser}) => {
 
     const dispatch = useDispatch()
 

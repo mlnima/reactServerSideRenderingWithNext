@@ -8,8 +8,12 @@ import {getComments, getPost, viewPost} from "@store/clientActions/postsAction";
 import {useRouter} from "next/router";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import isValidObjectId from '@_variables/util/mongoIdValidator'
-import Soft404 from "@components/includes/Soft404/Soft404";
-import EditLinkForAdmin from "@components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin";
+
+const Soft404 = dynamic(() =>
+    import('@components/includes/Soft404/Soft404'))
+const EditLinkForAdmin = dynamic(() =>
+    import('@components/includes/PostPage/components/EditLinkForAdmin/EditLinkForAdmin'))
+
 const LearnTypePostPage = dynamic(() =>
     import('@components/includes/PostPage/LearnTypePostPage/LearnTypePostPage'))
 const VideoTypePostPage = dynamic(() =>

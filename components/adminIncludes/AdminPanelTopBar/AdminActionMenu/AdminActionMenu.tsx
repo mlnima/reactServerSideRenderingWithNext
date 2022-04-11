@@ -30,6 +30,7 @@ const AdminActionMenu:FC = () => {
             <StyledDiv className='admin-panel-topbar-action-menu'>
                 <span className={'adminActionBtn adminTopBarItem'}>
                     <FontAwesomeIcon style={{width: '20px', height: '20px'}}
+                                     //@ts-ignore
                                      icon={faUser}
                                      className={'post-element-info-logo'}
                     />

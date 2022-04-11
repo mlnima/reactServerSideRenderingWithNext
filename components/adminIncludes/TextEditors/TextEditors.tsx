@@ -4,7 +4,7 @@ import styled from "styled-components";
 const TextEditorMonacoEditor = dynamic(() => import('./TextEditorMonacoEditor/TextEditorMonacoEditor'))
 const TextEditorSunEditor = dynamic(() => import('./TextEditorSunEditor/TextEditorSunEditor'), {ssr: false})
 const TextEditorReactQuill = dynamic(() => import('./TextEditorReactQuill/TextEditorReactQuill'), {ssr: false})
-const TextEditorReactPage = dynamic(() => import('./TextEditorReactPage/TextEditorReactPage'), {ssr: false})
+// const TextEditorReactPage = dynamic(() => import('./TextEditorReactPage/TextEditorReactPage'), {ssr: false})
 
 const TextEditorsStyledDiv = styled.div`
   .text-editors-switcher {
@@ -87,15 +87,15 @@ const TextEditors = ({value, onChangeHandler, language, height, width, name, use
                     />
                     : null
                 }
-                {editor === 'ReactPage' && use?.includes('ReactPage') || !use ?
-                    <TextEditorReactPage value={value || {}}
-                                         onChangeHandler={onChangeHandler}
-                                         language={language}
-                                         width={width}
-                                         height={height}
-                    />
-                    : null
-                }
+                {/*{editor === 'ReactPage' && use?.includes('ReactPage') || !use ?*/}
+                {/*    <TextEditorReactPage value={value || {}}*/}
+                {/*                         onChangeHandler={onChangeHandler}*/}
+                {/*                         language={language}*/}
+                {/*                         width={width}*/}
+                {/*                         height={height}*/}
+                {/*    />*/}
+                {/*    : null*/}
+                {/*}*/}
 
                 {editor === 'TextArea' && use?.includes('TextArea') || !use ?
                     <textarea value={value}

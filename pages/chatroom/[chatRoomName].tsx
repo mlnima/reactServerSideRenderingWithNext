@@ -2,19 +2,17 @@ import React, {useEffect, useState} from 'react';
 import {socket} from '@_variables/socket';
 import {useRouter} from "next/router";
 import ChatRoomHeader from "@components/includes/chatroomComponents/ChatRoomHeader/ChatRoomHeader";
-import ChatRoomMessageArea from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea";
-import ChatRoomTools from "../../components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
+import ChatRoomMessageArea from "@components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageArea";
+import ChatRoomTools from "@components/includes/chatroomComponents/ChatRoomTools/ChatRoomTools";
 import ChatRoomOnlineUsersList
-    from "../../components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
+    from "@components/includes/chatroomComponents/ChatRoomOnlineUsersList/ChatRoomOnlineUsersList";
 import ChatRoomMessageUserInfoPopup
-    from "../../components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+    from "@components/includes/chatroomComponents/ChatRoomMessageArea/ChatRoomMessageUserInfoPopup";
 import {useDispatch, useSelector} from "react-redux";
 import {dispatchSocketId} from "@store/clientActions/userActions";
 import {setChatroomUsers, setChatroomMessages, newMessage} from '@store/clientActions/chatroomActions';
 import {wrapper} from "@store/store";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-// import {uniqBy} from 'lodash';
 import {_uniqBy} from "@_variables/util/arrayUtils/_uniqBy";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 
@@ -23,7 +21,7 @@ const chatRoom = () => {
     const user = useSelector((store: StoreTypes) => store.user)
     const [onlineUserListVisibility, setOnlineUserListVisibility] = useState(false)
     const [isJoined, setIsJoined] = useState(false)
-    const router = useRouter()
+    const {query} = useRouter()
 
     const onOnlineUserListVisibilityChangeHandler = () => {
         onlineUserListVisibility ?
@@ -34,7 +32,7 @@ const chatRoom = () => {
     useEffect(() => {
 
         if (
-            router.query.chatRoomName &&
+            query.chatRoomName &&
             user.userData?.username &&
             user.userData._id &&
             !isJoined &&
@@ -42,7 +40,7 @@ const chatRoom = () => {
         ) {
             setIsJoined(true)
             const userDataForJoiningRoom = {
-                chatRoomName: router.query.chatRoomName,
+                chatRoomName: query.chatRoomName,
                 username: user.userData.username,
                 id: user.userData._id,
                 profileImage: user.userData.profileImage,
@@ -57,8 +55,8 @@ const chatRoom = () => {
 
         socket.emit('socketId')
         socket.emit('onlineUsersList')
-        socket.emit('recentChatRoomMessages', router.query.chatRoomName)
-        socket.emit('joinSocketToTheChatroom', router.query.chatRoomName)
+        socket.emit('recentChatRoomMessages', query.chatRoomName)
+        socket.emit('joinSocketToTheChatroom', query.chatRoomName)
 
         socket.on('socketId', (socketId: string) => {
             dispatch(dispatchSocketId(socketId))
@@ -111,7 +109,7 @@ export const getServerSideProps = wrapper.getServerSideProps(store => async (con
 
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
+            // ...(await serverSideTranslations(context.locale as string, ['common', 'customTranslation'])),
         }
     }
 })

@@ -1,6 +1,6 @@
 import React, {FC, useEffect, useState} from 'react';
 import ProfileNavigation from '../../../components/includes/profilePageComponents/ProfileNavigation/ProfileNavigation'
-import {useRouter} from "next/router";
+// import {useRouter} from "next/router";
 import Link from "next/link";
 import ProfileImage from "@components/includes/profilePageComponents/ProfileImage/ProfileImage";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -22,12 +22,12 @@ const PostsStyledDiv = styled.div`
 `
 const Posts: FC = () => {
     const userData = useSelector((store: StoreTypes) => store?.user.userData)
-    const router = useRouter();
-
-    const [state, setState] = useState({
-        posts: [],
-        totalCount: 0
-    });
+    // const router = useRouter();
+    //
+    // const [state, setState] = useState({
+    //     posts: [],
+    //     totalCount: 0
+    // });
 
     useEffect(() => {
         if (userData?.username && userData?._id && userData?.username !== 'guest') {
@@ -53,11 +53,14 @@ const Posts: FC = () => {
             // })
         }
     }, []);
+
     return (
         <PostsStyledDiv className='my-profile-posts main'>
             <ProfileImage/>
             <ProfileNavigation/>
-            <Link href={'/profile.json/posts/newpost'}><a className='create-new-post-link'>create new post</a></Link>
+            <Link href={'/profile.json/posts/newpost'}>
+                <a className='create-new-post-link'>create new post</a>
+            </Link>
             {/*<PostsRenderer posts={ state.posts || [] }/>*/}
             {/*posts*/}
         </PostsStyledDiv>

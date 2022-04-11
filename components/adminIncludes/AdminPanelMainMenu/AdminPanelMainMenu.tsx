@@ -223,6 +223,7 @@ const AdminPanelMainMenu = () => {
                               onMouseOver={() => setHovered(item)}
                               onClick={() => hovered === item ? setHovered('') : setHovered(item)}
                         >
+                             {/*//@ts-ignore*/}
                             <FontAwesomeIcon icon={faSortDown}
                                              style={{transform: hovered === item ? 'rotate(0deg)' : 'rotate(90deg)'}}
                                              className='fontawesomeSvgVerySmall'/>

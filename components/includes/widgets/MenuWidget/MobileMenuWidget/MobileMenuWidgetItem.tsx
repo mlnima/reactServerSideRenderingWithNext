@@ -48,7 +48,7 @@ const MobileMenuWidgetItem: FC<MobileMenuWidgetItemPropTypes> = ({menuItem,setOp
     return (
         <MobileMenuWidgetItemPropTypesStyledLi>
             <Link href={menuItem.target}>
-                <a className={'menu-item'} title={linkNameWithTranslate} onClick={onClickHandler}>
+                <a className={'menu-item'} target={menuItem.target.includes('http') ? '_blank' : '_self'} title={linkNameWithTranslate} onClick={onClickHandler}>
                     {linkNameWithTranslate}
                 </a>
             </Link>

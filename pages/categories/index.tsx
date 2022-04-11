@@ -1,7 +1,7 @@
 import React from 'react';
 import {useRouter} from "next/router";
 import PaginationComponent from "@components/includes/PaginationComponent/PaginationComponent";
-import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
+//import WidgetsRenderer from "../../components/includes/WidgetsRenderer/WidgetsRenderer";
 import CategoriesRenderer
     from "../../components/includes/pagesComponents/categoriesPageComponents/Components/CategoriesRenderer/CategoriesRenderer";
 import {serverSideTranslations} from "next-i18next/serverSideTranslations";
@@ -11,6 +11,9 @@ import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {getMetas} from "@store/clientActions/postsAction";
 import {getDefaultPageData} from "@store/clientActions/globalStateActions";
 import {wrapper} from "@store/store";
+import dynamic from "next/dynamic";
+
+const WidgetsRenderer = dynamic(() => import('../../components/includes/WidgetsRenderer/WidgetsRenderer'))
 
 const CategoriesPageStyledMain = styled.main`
   grid-area: main;
@@ -21,14 +24,20 @@ const categoriesPage = () => {
 
     const {
         categoriesPageStyle,
+        topWidgets,
+        bottomWidgets,
         totalCount,
         postsCountPerPage
-    } = useSelector(({settings, posts}: StoreTypes) => {
+    } = useSelector(({settings, posts, widgets}: StoreTypes) => {
         return {
             categoriesPageStyle: settings?.design?.categoriesPageStyle,
             totalCount: posts.totalCount,
+            //@ts-ignore
+            topWidgets: widgets?.widgetInGroups?.categoriesPageTop?.length,
+            //@ts-ignore
+            bottomWidgets: widgets?.widgetInGroups?.categoriesPageBottom?.length,
             postsCountPerPage: query?.size ? parseInt(query?.size as string) :
-                               parseInt(settings?.identity?.postsCountPerPage || '20')
+                parseInt(settings?.identity?.postsCountPerPage || '20')
         }
     })
 
@@ -37,7 +46,8 @@ const categoriesPage = () => {
         <CategoriesPageStyledMain id={'main-content'} className={'content main '}
                                   categoriesPageStyle={categoriesPageStyle}>
             <WidgetsRenderer position={'categoriesPageTop'}/>
-            <CategoriesRenderer cardWidthDesktop={undefined}/>
+            {topWidgets ? <CategoriesRenderer cardWidthDesktop={undefined}/> : null}
+
 
             <PaginationComponent
                 isActive={true}
@@ -46,8 +56,8 @@ const categoriesPage = () => {
                 size={postsCountPerPage}
                 maxPage={Math.ceil(totalCount / postsCountPerPage)}
             />
+            {bottomWidgets ? <WidgetsRenderer position={'categoriesPageBottom'}/> : null}
 
-            <WidgetsRenderer position={'categoriesPageBottom'}/>
         </CategoriesPageStyledMain>
     );
 };

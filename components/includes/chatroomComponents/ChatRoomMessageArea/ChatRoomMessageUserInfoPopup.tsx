@@ -1,15 +1,14 @@
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import {faTimes} from "@fortawesome/free-solid-svg-icons";
 import Link from "next/link";
-//import {conversation} from "../../../../_variables/_userSocialAjaxVariables";
 import {useRouter} from "next/router";
-import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
-import {setActiveVisibleProfile} from "../../../../store/clientActions/chatroomActions";
+import {setActiveVisibleProfile} from "@store/clientActions/chatroomActions";
 import Draggable from 'react-draggable';
-import {setLoginRegisterFormStatus} from "../../../../store/clientActions/globalStateActions";
+import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateActions";
 import {conversation} from "@store/clientActions/userActions";
+import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;
@@ -68,6 +67,7 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
         align-items: flex-start;
         justify-content: space-between;
         height: 100%;
+        width: 100%;
 
         .chatroom-message-user-info-popup-username {
           color: var(--main-text-color);
@@ -75,12 +75,32 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
 
         .chatroom-message-user-info-popup-user-data-links {
           display: flex;
-          justify-content: space-between;
+          justify-content: space-evenly;
           flex-direction: row;
           width: 100%;
 
           .btn-primary {
             margin: 0 5px;
+            display: flex;
+            justify-content: center;
+
+            .icon {
+              width: 24px !important;
+              height: 24px !important;
+              background-color: var(--primary-button-link-text-color, #000);
+            }
+
+            .send-message {
+              mask: url('/public/asset/images/icons/rocketchat-brands.svg') no-repeat center;
+              -webkit-mask: url('/public/asset/images/icons/rocketchat-brands.svg') no-repeat center;
+            }
+
+            //eye-regular.svg
+            .view-profile {
+              mask: url('/public/asset/images/icons/eye-regular.svg') no-repeat center;
+              -webkit-mask: url('/public/asset/images/icons/eye-regular.svg') no-repeat center;
+            }
+
           }
 
         }
@@ -90,21 +110,21 @@ const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
 `
 
 const ChatRoomMessageUserInfoPopup = () => {
-    const {t} = useTranslation('common');
+
     const {push} = useRouter();
     const dispatch = useDispatch();
-    const activeVisibleProfile = useSelector(store => store?.chatroom?.activeVisibleProfile);
-    const loggedIn = useSelector(store => store?.user?.loggedIn)
+
+    const {activeVisibleProfile, loggedIn, userId} = useSelector(({chatroom, user}: StoreTypes) => {
+        return {
+            activeVisibleProfile: chatroom?.activeVisibleProfile,
+            userId: user?.userData._id,
+            loggedIn: user?.loggedIn
+        }
+    })
 
     const onConversationHandler = () => {
         if (loggedIn) {
-            dispatch(conversation(activeVisibleProfile._id,push))
-            // conversation(activeVisibleProfile._id).then(res => {
-            //     const conversation = res.data.conversation
-            //     router.push(`/messenger/${conversation._id}`)
-            // }).catch(err => {
-            //     console.log(err)
-            // })
+            dispatch(conversation(activeVisibleProfile._id, push))
         } else {
             dispatch(setLoginRegisterFormStatus('register'))
         }
@@ -137,24 +157,23 @@ const ChatRoomMessageUserInfoPopup = () => {
                                  }
                                  alt="chatroom-message-user"
                             />
-                            <div className='chatroom-message-user-info-popup-user-data'>
-                                <p className='chatroom-message-user-info-popup-username'>{activeVisibleProfile.username}</p>
-                                <div className='chatroom-message-user-info-popup-user-data-links'>
-                                    <Link href={`/user/${activeVisibleProfile.username}`}>
-                                        <a className={'btn btn-primary'}>
-                                            {t('View Profile')}
-
-                                        </a>
-                                    </Link>
-                                    <button onClick={onConversationHandler} className={'btn btn-primary'}>
-                                        {t('Send Message')}
-                                    </button>
+                            {userId !== activeVisibleProfile._id ?
+                                <div className='chatroom-message-user-info-popup-user-data'>
+                                    <p className='chatroom-message-user-info-popup-username'>{activeVisibleProfile.username}</p>
+                                    <div className='chatroom-message-user-info-popup-user-data-links'>
+                                        <Link href={`/user/${activeVisibleProfile.username}`}>
+                                            <a className={'btn btn-primary'}>
+                                                <span className={'icon view-profile'}/>
+                                            </a>
+                                        </Link>
+                                        <button onClick={onConversationHandler} className={'btn btn-primary'}>
+                                            <span className={'icon send-message'}/>
+                                        </button>
+                                    </div>
                                 </div>
-                            </div>
-
+                                : null
+                            }
                         </div>
-
-
                     </div>
                 </Draggable>
             </ChatRoomMessageUserInfoPopupStyledDiv>

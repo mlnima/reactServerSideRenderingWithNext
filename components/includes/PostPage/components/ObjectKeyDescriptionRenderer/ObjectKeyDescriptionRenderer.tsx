@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import CodeSnippet from "../../../../adminIncludes/TextEditors/TextEditorReactPage/components/CodeSnippet";
+import CodeSnippet from "@components/global/CodeSnippet";
 import parse from "html-react-parser";
 
 const ObjectKeyDescriptionRendererStyledDiv = styled.div`

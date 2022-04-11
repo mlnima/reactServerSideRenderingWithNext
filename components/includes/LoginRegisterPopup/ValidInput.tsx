@@ -23,7 +23,9 @@ const ValidInput: FC<ValidInputPropTypes> = ({valid}) => {
     return (
         <ValidInputStyledDiv className='validator'> {
             valid ?
+                //@ts-ignore
                 <FontAwesomeIcon icon={faCheck} style={{color: 'green'}}/> :
+                //@ts-ignore
                 <FontAwesomeIcon icon={faTimes} style={{color: 'red'}}/>
         }</ValidInputStyledDiv>
     );

@@ -1,7 +1,6 @@
 import Authentication from "../../widgets/Authentication/Authentication";
-import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-import {FC} from "react";
+import React, {FC} from "react";
 
 const ChatRoomHeaderStyledHeader = styled.header`
   background-color: var(--navigation-background-color,#18181b);
@@ -18,9 +17,20 @@ const ChatRoomHeaderStyledHeader = styled.header`
     align-items:center;
     .chatroom-header-open-online-users-list-button{
       background-color: transparent;
-      color: var(--navigation-text-color, #ccc);
       border:none;
-      padding: 5px ;
+      width: 24px !important;
+      height: 24px !important;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      padding: 0;
+      .users-icon {
+        width: 24px !important;
+        height: 24px !important;
+        background-color: var(--navigation-text-color, #ccc);
+        mask: url('/public/asset/images/icons/users-solid.svg') no-repeat center;
+        -webkit-mask: url('/public/asset/images/icons/users-solid.svg') no-repeat center;
+      }
     }
   }
 `
@@ -30,13 +40,12 @@ interface ChatRoomHeaderPropTypes{
 }
 
 const ChatRoomHeader:FC<ChatRoomHeaderPropTypes> = ({onOnlineUserListVisibilityChangeHandler}) => {
-    const {t} = useTranslation('common');
     return (
         <ChatRoomHeaderStyledHeader className='chatroom-header'>
             <div className='chatroom-header-content'>
                 <Authentication/>
                 <button className='chatroom-header-open-online-users-list-button' onClick={onOnlineUserListVisibilityChangeHandler}>
-                    {t(`Users`)}
+                    <span className={'users-icon'}/>
                 </button>
             </div>
         </ChatRoomHeaderStyledHeader>

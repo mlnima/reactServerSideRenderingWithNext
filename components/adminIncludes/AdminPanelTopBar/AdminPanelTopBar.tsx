@@ -3,7 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
 import Link from 'next/link'
 import {faBars, faHome} from "@fortawesome/free-solid-svg-icons";
-import {faUser} from "@fortawesome/free-regular-svg-icons";
+//import {faUser} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {clearCaches, setSidebarStatus} from "@store/adminActions/adminPanelGlobalStateActions";
@@ -72,11 +72,13 @@ const AdminTopBar: FC = () => {
             <div className={'admin-panel-topbar-control'}>
                     <span className={'admin-panel-topbar-open-button adminTopBarItem'}
                           onClick={AdminSideBarOpenCloseHandler}>
+                        {/*//@ts-ignore*/}
                         <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faBars}
                                          className={'post-element-info-logo'}/>
                     </span>
                 <Link href={'/'}>
                     <a className={'adminTopBarItem'}>
+                        {/*//@ts-ignore*/}
                         <FontAwesomeIcon style={{width: '20px', height: '20px'}} icon={faHome}
                                          className={'post-element-info-logo'}/>
                     </a>

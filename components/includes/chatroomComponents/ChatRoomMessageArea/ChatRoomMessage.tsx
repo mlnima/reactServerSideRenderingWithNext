@@ -2,6 +2,7 @@ import React, {PureComponent} from "react";
 import {formatDistance} from 'date-fns'
 import faIR from "date-fns/locale/fa-IR";
 import styled from "styled-components";
+import {ChatroomMessageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const ChatRoomLogMessageStyledDiv = styled.div`
   background-color: var(--navigation-background-color, #18181b);
@@ -62,20 +63,26 @@ const ChatRoomMessageStyledDiv = styled.div`
   }
 
   .chatroom-message-area-message-time {
-    direction: ${props=> props?.locale === 'fa' ? 'rtl' : 'ltr'};
+    direction: ${({locale}:{locale:string})=> locale === 'fa' ? 'rtl' : 'ltr'};
     color: var(--navigation-text-color, #ccc);
     font-size: xx-small;
     margin-left: 30px;
   }
 `
 
-class ChatRoomMessage extends PureComponent {
+interface ChatRoomMessagePropTypes {
+    locale:string,
+    message:ChatroomMessageTypes,
+    onShowProfileHandler:any
+}
+
+class ChatRoomMessage extends PureComponent<ChatRoomMessagePropTypes> {
 
     render() {
         const locale = this.props.locale === 'fa' ? {locale:faIR} : {}
         if (this?.props?.message?.type === 'log') {
             return (
-                <ChatRoomLogMessageStyledDiv className='chatroom-message-area-message' type={this?.props?.message?.type}>
+                <ChatRoomLogMessageStyledDiv className='chatroom-message-area-message' >
                     <p className='chatroom-message-area-message-log'>
                         {this?.props?.message?.username}
                         joined the room
@@ -85,6 +92,7 @@ class ChatRoomMessage extends PureComponent {
         } else return (
             <ChatRoomMessageStyledDiv className='chatroom-message-area-message' locale={this.props.locale}>
                 <img onClick={() => {
+                    //@ts-ignore
                     this?.props?.onShowProfileHandler(this?.props?.message?.username,
                         this?.props?.message?.id,
                         this?.props?.message?.profileImage

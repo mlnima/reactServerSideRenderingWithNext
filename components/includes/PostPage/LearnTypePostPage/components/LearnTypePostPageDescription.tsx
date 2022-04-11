@@ -4,7 +4,7 @@ import dynamic from 'next/dynamic'
 import styled from "styled-components";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
-const ReactPageDescriptionRenderer = dynamic(() => import('../../components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer'))
+// const ReactPageDescriptionRenderer = dynamic(() => import('../../components/ReactPageDescriptionRenderer/ReactPageDescriptionRenderer'))
 const ObjectKeyDescriptionRenderer = dynamic(() => import('../../components/ObjectKeyDescriptionRenderer/ObjectKeyDescriptionRenderer'))
 
 const PostDescriptionStyledDiv = styled.div`
@@ -38,12 +38,9 @@ const LearnTypePostPageDescription :FC = () => {
 
     return (
         <PostDescriptionStyledDiv className={'learn-post-description'}>
-
-            {!source && typeof description === 'object' ? <ReactPageDescriptionRenderer description={descriptionValue} /> :
-              Array.isArray(description) && source ? <ObjectKeyDescriptionRenderer description={descriptionValue}/>:
+            {Array.isArray(description) && source ? <ObjectKeyDescriptionRenderer description={descriptionValue}/>:
                 null
             }
-
         </PostDescriptionStyledDiv>
     );
 };

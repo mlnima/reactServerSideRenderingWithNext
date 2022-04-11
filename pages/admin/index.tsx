@@ -2,10 +2,10 @@ import {FC, useEffect, useState} from 'react'
 //import Analytics from '../../components/adminIncludes/Analytics/Analytics'
 import {socket} from '@_variables/socket'
 import Link from "next/link";
-import _ from "lodash";
+// import _ from "lodash";
 import styled from "styled-components";
 import {wrapper} from "@store/store";
-import {serverSideTranslations} from "next-i18next/serverSideTranslations";
+// import {serverSideTranslations} from "next-i18next/serverSideTranslations";
 import {useSelector} from "react-redux";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
@@ -97,7 +97,7 @@ const AdminHomePage:FC = () => {
 
     const renderQuickAccessLinks = state.quickAccessLinks.map(linkData => {
         return (
-            <Link key={_.uniqueId('id_')} href={linkData.pathURL}>
+            <Link key={linkData.name} href={linkData.pathURL}>
 
                     <a className='btn btn-secondary'>
                         {linkData.name}
@@ -131,7 +131,7 @@ const AdminHomePage:FC = () => {
 export const getServerSideProps = wrapper.getServerSideProps(store => async (context) => {
     return {
         props: {
-            ...(await serverSideTranslations(context.locale as string, ['common'])),
+            // ...(await serverSideTranslations(context.locale as string, ['common'])),
         }
     }
 })

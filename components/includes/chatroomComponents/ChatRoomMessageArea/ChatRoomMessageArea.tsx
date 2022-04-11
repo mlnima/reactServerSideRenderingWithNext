@@ -4,6 +4,7 @@ import {useDispatch, useSelector} from "react-redux";
 import styled from "styled-components";
 import {setActiveVisibleProfile} from "@store/clientActions/chatroomActions";
 import {useRouter} from "next/router";
+import {ChatroomMessageTypes, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
 const ChatRoomMessageAreaStyledMain = styled.main`
   position: fixed;
@@ -19,11 +20,18 @@ const ChatRoomMessageAreaStyledMain = styled.main`
 
 const ChatRoomMessageArea = () => {
     const dispatch = useDispatch()
-    const locale = useRouter()?.locale
+    const {locale} = useRouter()
     const messageAreaRef = useRef(null)
-    const chatroomMessages = useSelector(store => {
-        return store?.chatroom?.messages.sort((message,nextMessage)=> message.createdAt > nextMessage.createdAt ? 1 : -1)
+
+    const {chatroomMessages} = useSelector(({chatroom}: StoreTypes) => {
+        return {
+            chatroomMessages: chatroom?.messages?.sort(
+                (message, nextMessage) =>
+                    message.createdAt > nextMessage.createdAt ? 1 : -1
+            )
+        }
     })
+
 
     useEffect(() => {
         messageAreaRef.current.scroll({
@@ -47,8 +55,9 @@ const ChatRoomMessageArea = () => {
             className='chatroom-message-area'
             id='chatroom-message-area'
         >
-            {
-                chatroomMessages.map((message, index) => {
+            {chatroomMessages?.length ?
+                //@ts-ignore
+                chatroomMessages.map((message: ChatroomMessageTypes, index: number) => {
                     return (
                         <ChatRoomMessage
                             message={message}
@@ -58,6 +67,7 @@ const ChatRoomMessageArea = () => {
                         />
                     )
                 })
+                : null
             }
 
         </ChatRoomMessageAreaStyledMain>

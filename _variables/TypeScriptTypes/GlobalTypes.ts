@@ -214,11 +214,27 @@ export interface AxiosErrorTypes {
     message?: string
 }
 
+export interface ChatroomMessageTypes{
+    createdAt: string,
+    type:string,
+    messageData:string,
+    id:string,
+    profileImage:string,
+    username:string,
+}
+
+
 export interface ChatroomStateTypes {
 
-    onlineUsers: {}[],
-    messages: {}[],
-    activeVisibleProfile: {}
+    onlineUsers: {
+        username:string,
+    }[],
+    messages: ChatroomMessageTypes[],
+    activeVisibleProfile: {
+        username: string,
+        _id: string,
+        profileImage: string,
+    }
 
 }
 
