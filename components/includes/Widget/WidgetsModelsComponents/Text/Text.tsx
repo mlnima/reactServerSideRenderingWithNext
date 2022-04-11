@@ -4,7 +4,7 @@ import {useRouter} from "next/router";
 import {FC, useMemo} from "react";
 import {Suspense} from 'react'
 
-const WidgetTextTextDataStyledDiv = styled.div`
+const WidgetTextTextDataStyledSpan = styled.span`
   color: var(--main-text-color);
   max-width: 100vw;
 `
@@ -25,13 +25,13 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
     }, [])
 
     return (
-        <Suspense fallback={<p>Loading....</p>}>
+        <Suspense fallback={<span>Loading....</span>}>
             {/*<WidgetTextTextDataStyledDiv className={'widgetText widget-text'}>*/}
             {/*    {textToRender}*/}
             {/*</WidgetTextTextDataStyledDiv>*/}
             {textToRender ?
-                <WidgetTextTextDataStyledDiv className={'widgetText widget-text'}
-                                             dangerouslySetInnerHTML={{ __html: textToRender }}
+                <WidgetTextTextDataStyledSpan className={'widgetText widget-text'}
+                                              dangerouslySetInnerHTML={{ __html: textToRender }}
                 />
                 :null
             }
