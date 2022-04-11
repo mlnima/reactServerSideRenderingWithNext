@@ -21,7 +21,6 @@
   <component name="ChangeListManager">
     <list default="true" id="e9b1f483-2a6e-4e11-81fc-4e5659869476" name="Default Changelist" comment="ContextAPIAdded">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" beforeDir="false" afterPath="$PROJECT_DIR$/components/includes/Widget/Widget.tsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/package.json" beforeDir="false" afterPath="$PROJECT_DIR$/package.json" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -1110,7 +1109,7 @@
       <workItem from="1649498457109" duration="45070000" />
       <workItem from="1649581366825" duration="6827000" />
       <workItem from="1649600722407" duration="15187000" />
-      <workItem from="1649630920186" duration="16327000" />
+      <workItem from="1649630920186" duration="16772000" />
     </task>
     <servers />
   </component>
