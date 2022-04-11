@@ -51,7 +51,8 @@ const Logo: FC<LogoPropTypes> = ({translations, LogoText, headLine, LogoUrl}) =>
         <LogoStyledDiv className={'logo-wrapper'}>
             <Link href='/'>
                 <a className='logo' href='/'>
-                    <img alt={'logo'} src={logoData?.logoUrlSource}/>
+                    {logoData?.logoUrlSource?   <img alt={'logo'} src={logoData?.logoUrlSource}/>:null}
+
                     {logoData.logoText && !logoData?.logoUrlSource ?
                         <span className='logo-text'> {logoData.logoText} </span>
                         : null
