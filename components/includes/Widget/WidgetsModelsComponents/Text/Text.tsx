@@ -1,6 +1,7 @@
 import styled from "styled-components";
 import {useRouter} from "next/router";
 import {FC, useMemo} from "react";
+import parse from 'html-react-parser'
 
 const WidgetTextTextDataStyledDiv = styled.div`
   color: var(--main-text-color);
@@ -20,7 +21,9 @@ const Text: FC<TextPropTypes> = ({translations, text}) => {
     }, [])
 
     return (
-            <WidgetTextTextDataStyledDiv className={'widgetText widget-text'} dangerouslySetInnerHTML={{__html:textToRender}}/>
+        <WidgetTextTextDataStyledDiv className={'widgetText widget-text'} >
+            {parse(textToRender)}
+        </WidgetTextTextDataStyledDiv>
     );
 
 };

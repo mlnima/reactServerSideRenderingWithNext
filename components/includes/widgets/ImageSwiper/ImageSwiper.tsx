@@ -1,5 +1,6 @@
 import {FC, useMemo, useState} from 'react';
 import styled from "styled-components";
+import parse from 'html-react-parser'
 import Link from "next/link";
 import {Swiper, SwiperSlide} from 'swiper/react';
 import 'swiper/css/autoplay';
@@ -155,7 +156,7 @@ const ImageSwiper: FC<ImageSwiperPropTypes> = ({uniqueData}) => {
             }
             {uniqueData?.details ?
                 <div className={'details'} style={{display: showDetails ? 'block' : 'none'}}>
-                    {uniqueData?.details}
+                    {parse(uniqueData?.details,{trim:true})}
                 </div>
                 : null
             }

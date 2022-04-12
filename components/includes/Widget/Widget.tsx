@@ -2,8 +2,6 @@ import dynamic from "next/dynamic";
 import styled from "styled-components";
 import {FC, useMemo} from "react";
 import {WidgetDataPropTypes} from "@_variables/TypeScriptTypes/Widgets";
-
-const WidgetText = dynamic(() => import('./WidgetText/WidgetText'))
 const WidgetHeader = dynamic(() => import('./WidgetHeader/WidgetHeader'))
 const WidgetCustomScript = dynamic(() => import('./WidgetCustomScript/WidgetCustomScript'))
 const WidgetPagination = dynamic(() => import('./WidgetPagination/WidgetPagination'))
@@ -32,7 +30,7 @@ const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleL
 const Advertise = dynamic(() => import('../widgets/Advertise/Advertise'))
 const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'))
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'))
-
+const Text = dynamic(() => import('./WidgetsModelsComponents/Text/Text'))
 const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
 
 interface WidgetComponentPropTypes {
@@ -96,11 +94,13 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
                 />
                 : null
             }
-            {data?.text ?
-                <WidgetText translations={data?.translations}
-                            text={data?.text}
-                />
-                : null
+            {/*{data?.text ?*/}
+            {/*    <WidgetText translations={data?.translations}*/}
+            {/*                text={data?.text}*/}
+            {/*    />*/}
+            {/*    : null*/}
+            {/*}*/}
+            {data?.text ? <Text translations={data?.translations} text={data?.text}/> : null
             }
             {WidgetToRender ?
 
