@@ -13,6 +13,8 @@ const AlphabeticalNumericalRangeLinksWidgetStyledDiv = styled.div`
   flex-wrap: wrap;
   flex-direction: column;
   max-width: 95vw;
+  margin-bottom: 10px;
+  margin-top: 10px;
 
 
   .alphabetical-range-content {
