@@ -1,7 +1,6 @@
-import {FC, useEffect, useState} from 'react'
+import {FC,  useState} from 'react'
 import styled from "styled-components";
-import {useSelector} from "react-redux";
-import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+
 
 interface MobileCardImagePropTypes {
     imageUrl: string,
@@ -33,6 +32,7 @@ const AppleCardImageStyledDiv = styled.div`
 const MobileCardImageStyledDiv = styled.div`
   width: 100%;
   height: auto;
+  aspect-ratio: 16 / 9;
   img{
     width: 100%;
     aspect-ratio: 16 / 9;
@@ -50,7 +50,7 @@ const MobileCardImage: FC<MobileCardImagePropTypes> =
         const [gotError, setGotError] = useState(false)
 
         const StyleToRender =  isAppleMobileDevice ? AppleCardImageStyledDiv : MobileCardImageStyledDiv
-
+console.log(isAppleMobileDevice)
         return (
             <StyleToRender>
                 <img
