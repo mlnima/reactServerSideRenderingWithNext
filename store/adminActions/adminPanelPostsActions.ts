@@ -207,7 +207,6 @@ export const adminGetMetas = (queries: string | string[] | undefined) => async (
         })
         await Axios.get(`/api/admin/posts/getMetas${queries}&token=${localStorage.wt}`)
             .then((res: AxiosResponse<any>) => {
-                // console.log(res.data?.metas)
                 dispatch({
                     type: ADMIN_GET_METAS,
                     payload: res.data?.metas

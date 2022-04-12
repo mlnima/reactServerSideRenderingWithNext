@@ -14,7 +14,7 @@ module.exports = async (req, res) => {
                 }
 
             }).catch(err => {
-                // console.log(err.stack)
+
                 res.status(400).json({message:'Bad Request'})
             })
         }else {
@@ -24,7 +24,7 @@ module.exports = async (req, res) => {
 
         }
     }catch (err){
-        // console.log(err.stack)
+
         res.status(500).json({message:'Server Error'})
     }
 }

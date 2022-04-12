@@ -16,7 +16,6 @@ module.exports = async (req, res) => {
         const filePath = directoryPath + file.name
         file.mv(filePath, function (err) {
             if (err) {
-                console.log(err)
                 res.json({response: 'something is wrong', type: 'error', error: err})
             } else {
                 res.json({response: 'Uploaded', path: filePath})
@@ -24,7 +23,7 @@ module.exports = async (req, res) => {
         });
 
     }).catch(err => {
-        console.log(err)
+
         res.end()
     })
 }

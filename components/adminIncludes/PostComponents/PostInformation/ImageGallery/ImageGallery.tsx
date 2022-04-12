@@ -107,7 +107,6 @@ const ImageGallery:FC<ImageGalleryPropTypes> = ({onChangeHandler, rendering}) =>
         //     onChangeHandler(e)
         //
         // }).catch(err => {
-        //     console.log(err)
         //
         // })
     }

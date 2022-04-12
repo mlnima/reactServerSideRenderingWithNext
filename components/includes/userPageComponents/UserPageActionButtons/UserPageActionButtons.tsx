@@ -79,7 +79,6 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
             //     const conversation = res.data.conversation
             //     router.push(`/messenger/${conversation._id}`)
             // }).catch(err => {
-            //     console.log(err)
             // })
         } else {
             dispatch(setLoginRegisterFormStatus('login'))

@@ -50,7 +50,7 @@ const MobileCardImage: FC<MobileCardImagePropTypes> =
         const [gotError, setGotError] = useState(false)
 
         const StyleToRender =  isAppleMobileDevice ? AppleCardImageStyledDiv : MobileCardImageStyledDiv
-console.log(isAppleMobileDevice)
+
         return (
             <StyleToRender>
                 <img

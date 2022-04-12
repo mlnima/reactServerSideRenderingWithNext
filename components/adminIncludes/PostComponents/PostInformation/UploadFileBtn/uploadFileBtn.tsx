@@ -34,7 +34,6 @@ const UploadFileBtn = props => {
         // uploadFiles(filesData).then(res=>{
         //     props.setFunction(props.name,res.data.path.replace('./','/'))
         // }).catch(err=>{
-        //     console.log( err)
         //     props.returnElement.current.value  = 'Something went Wrong'
         // })
     }
@@ -64,7 +63,6 @@ const UploadFileBtn = props => {
             // fileUpload(filesData).then(res => {
             //     props.setFunction(props.name,res.data.path.replace('./','/'))
             // }).catch(err => {
-            //     console.log(err)
             // })
         }
     }

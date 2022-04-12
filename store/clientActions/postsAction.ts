@@ -476,5 +476,4 @@ export const createEditPostByUser = (pageName) => async dispatch => {
 //         payload:res.data?.post
 //     })
 // }).catch(err=>{
-//     console.log(err)
 // })

@@ -77,7 +77,7 @@ export default page;
 //         }
 //
 //     } catch (err) {
-//         console.log(err)
+
 //     }
 //
 // }

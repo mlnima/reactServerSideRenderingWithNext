@@ -138,7 +138,6 @@ const checkout = props => {
     //         //     items: []
     //         // })
     //     }).catch(err => {
-    //         console.log(err)
     //         setState({
     //             ...state,
     //             serverError: err,

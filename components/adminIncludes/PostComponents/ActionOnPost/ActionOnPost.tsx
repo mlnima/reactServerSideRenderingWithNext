@@ -56,7 +56,7 @@ const ActionOnPost = () => {
         }
     }
 
-    console.log(ActionOnPostData)
+
 
 
     return (

@@ -83,7 +83,7 @@ const terminal = () => {
             animateScroll.scrollToBottom({containerId: 'terminalLog'})
         }, 500)
     }
-    console.log(process.env.NODE_ENV)
+
 
     return (
         <StyledDiv className='terminal-simulator'>

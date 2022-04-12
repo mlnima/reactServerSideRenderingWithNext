@@ -11,7 +11,6 @@ module.exports = (req, res) => {
         res.json({message: 'Comments Deleted'});
 
     }).catch(err => {
-        console.log(err)
         res.status(500).send({message: 'Something Went Wrong While Deleting Comments',err})
 
     })

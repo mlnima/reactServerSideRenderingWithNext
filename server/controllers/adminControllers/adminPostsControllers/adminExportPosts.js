@@ -19,7 +19,7 @@ module.exports = (req, res) => {
         {path: 'actors'},
     ]).exec()
         .then(finalData => {
-            // console.log(options)
+
         res.json({exportedData: finalData})
 
             // const json = JSON.stringify(finalData);
@@ -29,7 +29,7 @@ module.exports = (req, res) => {
             // res.setHeader('Content-disposition','attachment; filename='+filename);
             // res.json( json );
     }).catch(err => {
-            console.log(err)
+
             res.status(500)
         })
 };

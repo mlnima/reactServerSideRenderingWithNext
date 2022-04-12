@@ -19,7 +19,7 @@ module.exports = (req,res)=>{
     Promise.all([orders, ordersCount]).then(async data => {
         res.json({orders: data[0], error: false, totalCount: data[1]})
     }).catch(err=>{
-        console.log(err)
+
         return res.status(500).json({
             message: 'Server Error'
         })

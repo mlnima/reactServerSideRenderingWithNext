@@ -22,7 +22,6 @@ module.exports = async (req,res) =>{
     }else{
         parentPort.on("message", (commandFromMainThread) => {
             if (commandFromMainThread.exit) {
-                console.log('terminating thread')
                 process.exit(0);
             }
         });
@@ -66,11 +65,9 @@ module.exports = async (req,res) =>{
 //                 }
 //                 // res.end()
 //             }catch (err){
-//                 console.log(err)
 //                 // res.end()
 //             }
 //         })
 //     }catch (err){
-//         console.log(err)
 //     }
 // }

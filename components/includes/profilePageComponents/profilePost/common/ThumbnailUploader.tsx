@@ -44,7 +44,6 @@ const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
         //         dispatch(editPostField({'mainThumbnail': res.data?.path?.replace('./','/')}))
         //     }
         // }).catch(err => {
-        //     console.log(err)
         //     // props.returnElement.current.value  = 'Something went Wrong'
         // })
     }
@@ -77,9 +76,6 @@ const ThumbnailUploader: FC<ThumbnailUploaderPropTypes> = ({mainThumbnail}) => {
             // })
         }
     }
-    // useEffect(() => {
-    //     console.log(mainThumbnail)
-    // }, [mainThumbnail]);
 
     return (
         <ThumbnailUploaderStyledDiv onClick={() => uploadInputElement.current.click()}

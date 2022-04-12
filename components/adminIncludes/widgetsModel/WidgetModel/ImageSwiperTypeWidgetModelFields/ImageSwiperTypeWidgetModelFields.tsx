@@ -101,10 +101,6 @@ const ImageSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsPropT
          onUniqueDataChangeHandler
      }) => {
 
-        // useEffect(() => {
-        //     console.log(uniqueData)
-        // }, [uniqueData]);
-
         const [state, setState] = useState({
             imageUrl: '',
             imageAlt: '',

@@ -68,7 +68,7 @@ const conversation = (props: ClientPagesTypes) => {
             // @ts-ignore
             dispatch(outgoingCall(router.query.conversation,mySocketId,userData?.username,router))
         } catch (err) {
-            console.log(err)
+
         }
     }
 

@@ -34,7 +34,6 @@ const imageDownloader = async (newPost) => {
                         }
 
                     }).catch((err)=>{
-                        console.log(err)
                         return newPost.mainThumbnail
                     })
                 }catch (err) {

@@ -31,7 +31,7 @@ module.exports = async (req, res) => {
                 res.json({videos:[video]})
             })
             .catch(err=>{
-                console.log(err)
+
                 res.end()
             });
     }

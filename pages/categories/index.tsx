@@ -47,6 +47,7 @@ const categoriesPage = () => {
         <CategoriesPageStyledMain id={'main-content'} className={'content main '}
                                   categoriesPageStyle={categoriesPageStyle}>
             <WidgetsRenderer position={'categoriesPageTop'}/>
+
             {topWidgets ? <CategoriesRenderer cardWidthDesktop={undefined}/> : null}
 
 
