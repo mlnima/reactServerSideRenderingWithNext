@@ -11,10 +11,7 @@ const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 const MobilePromotionCardStyledArticle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
-  width: 100%;
-  max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
-  font-size: 14px;
+
   
   .promotion-card-link-external {
     color: var(--post-element-text-color, #ccc);
@@ -79,7 +76,6 @@ const MobilePromotionCardStyledArticle = styled.article`
 interface MobilePromotionCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
-    cardWidth: number,
     views: number,
     rating: number
     post: PostTypes,
@@ -96,7 +92,7 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
          rating,
          index,
          isAppleMobileDevice,
-         cardWidth
+
 
      }) => {
 
@@ -109,7 +105,7 @@ const MobilePromotionCard: FC<MobilePromotionCardPropTypes> =
         };
 
         return (
-            <MobilePromotionCardStyledArticle className='promotion-card' cardWidth={cardWidth}>
+            <MobilePromotionCardStyledArticle className={'mobile-card promotion-card'} >
                 <a href={post.redirectLink} className='promotion-card-link-external'
                    onClick={() => dispatch(viewPost(post._id))} target='_blank' rel="nofollow noopener external">
                     <MobilePromotionCardMedia post={post}

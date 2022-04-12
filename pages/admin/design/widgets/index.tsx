@@ -30,7 +30,12 @@ let StyledDiv = styled.div`
       width: 100%;
     }
 
+    .filter-positions {
+      width: 100%;
+    }
+
     .widgets {
+      min-height: 600px;
       margin: auto;
       width: 100%;
       display: flex;
@@ -64,6 +69,12 @@ const AdminWidgets = () => {
         localStorage.filterwidgetPosition = e.target.value
     }
 
+    const onFilterByButton = (position: string) => {
+        setFilter(position)
+        localStorage.filterwidgetPosition = position
+    }
+
+
     useEffect(() => {
         dispatch(adminPanelGetWidgets())
         typeof window !== 'undefined' && localStorage?.filterwidgetPosition !== 'all' ?
@@ -78,9 +89,14 @@ const AdminWidgets = () => {
                 <div className="top-panel">
                     <AddWidgetMenu/>
                 </div>
-                <h2>Filter Position:</h2>
-                <WidgetPositionsSelect filter={filter} onChangeHandler={onFilter}/>
-                <h2>Widgets: <button onClick={()=>dispatch(adminPanelGetWidgets())} className={'btn btn-info'}>Refresh</button></h2>
+                <div className={'filter-positions'}>
+                    <h2>Filter Position:</h2>
+                    <WidgetPositionsSelect filter={filter} onChangeHandler={onFilter}
+                                           onFilterByButton={onFilterByButton}/>
+                </div>
+
+                <h2>Widgets: <button onClick={() => dispatch(adminPanelGetWidgets())}
+                                     className={'btn btn-info'}>Refresh</button></h2>
                 <div className="widgets">
                     {availablePositions.map((position) => {
                         return (

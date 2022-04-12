@@ -60,6 +60,8 @@ const adminUpdateWidget = async (req, res) => {
         const countQuery = {count: {$gt: 0}}
         const typeQuery = {type: widgetData.metaType}
         const statusQuery = {status: 'published'}
+        let totalCount = await metaSchema.countDocuments({$and: [countQuery, typeQuery, statusQuery]}).exec()
+
         const metas = widgetData.metaType ? await metaSchema.find(
             {$and: [countQuery, typeQuery, statusQuery]},
             {},
@@ -74,6 +76,7 @@ const adminUpdateWidget = async (req, res) => {
             ...widgetData,
             uniqueData:{
                 metaData: metas.map(meta => meta._id),
+                totalCount
             }
         }
         widgetSchema.findByIdAndUpdate(req.body?.widgetData._id, {data: dateForUpdateWidget}, {new: true}).exec().then(updatedWidget => {

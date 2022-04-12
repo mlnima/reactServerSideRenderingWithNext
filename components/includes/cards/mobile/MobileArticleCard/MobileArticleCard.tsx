@@ -10,12 +10,7 @@ const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 const CardLastUpdate = dynamic(() => import('../../asset/CardLastUpdate/CardLastUpdate'));
 
 const MobileArticleCardStyledArticle = styled.article`
-
-  background-color: var(--post-element-background-color, #131314);
-  width: 100%;
-  max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
-  font-size: 14px;
-
+  
   .mobile-article-card-link {
     color: var(--post-element-text-color, #ccc);
     position: relative;
@@ -84,7 +79,6 @@ const MobileArticleCardStyledArticle = styled.article`
 interface ArticleTypeCardPropTypes {
     onActivateLoadingHandler: any,
     title: string,
-    cardWidth: number,
     views: number,
     rating: number
     post: PostTypes,
@@ -99,13 +93,12 @@ const MobileArticleCard: FC<ArticleTypeCardPropTypes> =
          views,
          rating,
          isAppleMobileDevice,
-         cardWidth
      }) => {
 
         const postUrl = `/post/${post?.postType}/${post._id}`;
 
         return (
-            <MobileArticleCardStyledArticle className={'article-card card'} cardWidth={cardWidth}>
+            <MobileArticleCardStyledArticle className={'mobile-card article-card card'} >
                 <Link href={postUrl}>
                     <a rel={'next'} onClick={onActivateLoadingHandler} className={'mobile-article-card-link'}
                        title={title}>

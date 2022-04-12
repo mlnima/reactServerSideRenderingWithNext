@@ -30,6 +30,14 @@ let CategoriesRendererStyledDiv = styled.div`
   grid-gap: 5px;
   grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: CategoriesContentStyledDivPropTypes) => `${96 / postsPerRawForMobile}`}vw, 2fr));
 
+  @media only screen and (min-width: 414px) {
+    grid-gap: 15px 10px;
+    grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: CategoriesContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
+    .mobile-card{
+      max-width: ${({cardWidth}:CategoriesContentStyledDivPropTypes)=>`${cardWidth}px`};
+    }
+  }
+
   @media only screen and (min-width: 768px) {
     grid-gap: 10px;
     grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: CategoriesContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
@@ -66,7 +74,7 @@ const CategoriesRenderer: FC<CategoriesRendererPropTypes> = ({ uniqueData}) => {
                                                onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                                index={index}
                                                isAppleMobileDevice={isAppleMobileDevice}
-                                               cardWidth={cardWidth}
+
                     />
                 } else {
                     return <CategoryCard onActivateLoadingHandler={() => dispatch(setLoading(true))}

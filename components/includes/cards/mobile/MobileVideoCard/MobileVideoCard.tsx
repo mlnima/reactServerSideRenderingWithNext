@@ -10,10 +10,6 @@ const CardViews = dynamic(() => import('@components/includes/cards/asset/CardVie
 const CardRating = dynamic(() => import('@components/includes/cards/asset/CardRating/CardRating'));
 
 const MobileVideoCardStyledArticle = styled.article`
-  background-color: var(--post-element-background-color, #131314);
-  width: 100%;
-  max-width: ${({cardWidth}:{cardWidth:number})=>`${cardWidth}px`};
-  font-size: 14px;
   
   .mobile-video-card-media-link {
     color: var(--post-element-text-color, #ccc);
@@ -81,14 +77,12 @@ const MobileVideoCard: FC<MobileVideoCardPropTypes> =
          rating,
          index,
          isAppleMobileDevice,
-         cardWidth
-
      }) => {
 
         const postUrl = `/post/${post?.postType}/${post._id}`;
 
         return (
-            <MobileVideoCardStyledArticle  cardWidth={cardWidth}>
+            <MobileVideoCardStyledArticle className={'mobile-card'}>
                 <Link href={postUrl}>
                     <a rel={'next'}
                        className={'mobile-video-card-media-link'}

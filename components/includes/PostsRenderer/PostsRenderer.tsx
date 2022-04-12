@@ -31,9 +31,9 @@ interface PostsComponentTypes {
 }
 
 interface PostsContentStyledDivPropTypes{
-    postsPerRawForMobile:number,
-    cardWidth:number,
-    isMobile:boolean,
+    postsPerRawForMobile?:number,
+    cardWidth?:number,
+    isMobile?:boolean,
 }
 const PostsContentStyledDiv = styled.div`
   padding: 20px 0;
@@ -42,7 +42,22 @@ const PostsContentStyledDiv = styled.div`
   margin: auto;
   grid-gap: 5px;
   grid-template-columns: repeat( auto-fill, minmax(${({postsPerRawForMobile}:PostsContentStyledDivPropTypes)=>`${96/postsPerRawForMobile}`}vw, 2fr) );
-
+  .mobile-card{
+    background-color: var(--post-element-background-color, #131314);
+    width: 100%;
+    font-size: 14px;
+    margin: auto;
+  }
+  
+  
+  @media only screen and (min-width: 414px) {
+    grid-gap: 15px 10px;
+    grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );
+    .mobile-card{
+      max-width: ${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`};
+    }
+  }  
+  
   @media only screen and (min-width: 768px) {
     grid-gap: 15px 10px;
     grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:PostsContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );

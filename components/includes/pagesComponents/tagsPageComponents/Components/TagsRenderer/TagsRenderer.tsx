@@ -61,7 +61,6 @@ const TagsRenderer: FC<TagsRendererPropTypes> = ({ uniqueData}) => {
                                           onActivateLoadingHandler={() => dispatch(setLoading(true))}
                                           index={index}
                                           isAppleMobileDevice={isAppleMobileDevice}
-                                          cardWidth={cardWidth}
                     />
 
                 }else{

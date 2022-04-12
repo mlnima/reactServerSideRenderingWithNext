@@ -1,14 +1,18 @@
 import React, {FC} from 'react';
-import ActorCard from "../../../cards/desktop/ActorCard/ActorCard";
+
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {Meta, StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {setLoading} from "@store/clientActions/globalStateActions";
+import dynamic from "next/dynamic";
 //import cardSizeCalculator from "@_variables/util/cardSizeCalculator";
+const ActorCard = dynamic(() => import('../../../cards/desktop/ActorCard/ActorCard'));
+const MobileActorCard = dynamic(() => import('../../../cards/mobile/MobileActorCard/MobileActorCard'));
 
-interface ActorsContentStyledDivPropTypes{
-    postsPerRawForMobile:number,
-    cardWidth:number,
+
+interface ActorsContentStyledDivPropTypes {
+    postsPerRawForMobile: number,
+    cardWidth: number,
 }
 
 let ActorsRendererStyledDiv = styled.div`
@@ -17,11 +21,19 @@ let ActorsRendererStyledDiv = styled.div`
   width: 98%;
   margin: auto;
   grid-gap: 5px;
-  grid-template-columns: repeat( auto-fill, minmax(${({postsPerRawForMobile}:ActorsContentStyledDivPropTypes)=>`${96/postsPerRawForMobile}`}vw, 2fr) );
+  grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: ActorsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
+  // grid-template-columns: repeat(auto-fill, minmax(${({postsPerRawForMobile}: ActorsContentStyledDivPropTypes) => `${96 / postsPerRawForMobile}`}vw, 2fr));
 
+  // @media only screen and (min-width: 414px) {
+  //   grid-gap: 15px 10px;
+  //   grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: ActorsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
+  // }
+  
+  
+  
   @media only screen and (min-width: 768px) {
     grid-gap: 30px;
-    grid-template-columns: repeat( auto-fill, minmax(${({cardWidth}:ActorsContentStyledDivPropTypes)=>`${cardWidth}px`}, 1fr) );
+    grid-template-columns: repeat(auto-fill, minmax(${({cardWidth}: ActorsContentStyledDivPropTypes) => `${cardWidth}px`}, 1fr));
   }
 `
 
@@ -36,13 +48,16 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
 
     const dispatch = useDispatch();
 
-    const {cardWidth,postsPerRawForMobile,actorsMetas,isAppleMobileDevice} = useSelector(({settings,posts}: StoreTypes)=>{
+    const {cardWidth, postsPerRawForMobile, actorsMetas, isAppleMobileDevice,isMobile} = useSelector(({
+                                                                                                 settings,
+                                                                                                 posts
+                                                                                             }: StoreTypes) => {
         return {
             postsPerRawForMobile: settings?.design?.postsPerRawForMobile || 2,
             isMobile: settings?.isMobile,
-            actorsMetas :  uniqueData?.metaData || posts?.actorsMetas || [],
+            actorsMetas: uniqueData?.metaData || posts?.actorsMetas || [],
             cardWidth: 140,
-            isAppleMobileDevice:settings?.isAppleMobileDevice
+            isAppleMobileDevice: settings?.isAppleMobileDevice
         }
     })
 
@@ -51,13 +66,23 @@ const ActorsRenderer: FC<ActorsRendererPropTypes> = ({uniqueData}) => {
                                  cardWidth={cardWidth}
                                  postsPerRawForMobile={postsPerRawForMobile}>
 
-            {actorsMetas.map((actor ,index) => {
-                return <ActorCard key={actor._id}
-                                  actor={actor}
-                                  onActivateLoadingHandler={() => dispatch(setLoading(true))}
-                                  isAppleMobileDevice={isAppleMobileDevice}
-                                  index={index}
-                />
+            {actorsMetas.map((actor, index) => {
+
+                    if (isMobile) {
+                        return <MobileActorCard key={actor._id}
+                                                actor={actor}
+                                                onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                                isAppleMobileDevice={isAppleMobileDevice}
+                                                index={index}/>
+                    } else {
+                        return <ActorCard key={actor._id}
+                                          actor={actor}
+                                          onActivateLoadingHandler={() => dispatch(setLoading(true))}
+                                          isAppleMobileDevice={isAppleMobileDevice}
+                                          index={index}
+                        />
+                    }
+
                 }
             )}
         </ActorsRendererStyledDiv>

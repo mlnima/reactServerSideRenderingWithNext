@@ -10,8 +10,8 @@ import MobileTagCardMedia from "./MobileTagCardMedia";
 const MobileTagCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
-  max-width: ${({cardWidth}:{cardWidth:number})=>`${cardWidth}px`};
 
+  margin:auto;
   .tag-card-link{
     width: 100%;
     color: var(--post-element-text-color, #ccc);
@@ -47,7 +47,6 @@ interface MobileTagCardPropTypes {
     tag: Meta,
     onActivateLoadingHandler: any,
     index?:number,
-    cardWidth?:number,
     isAppleMobileDevice :boolean
 }
 
@@ -57,7 +56,7 @@ const MobileTagCard: FC<MobileTagCardPropTypes> =
          onActivateLoadingHandler,
          index,
          isAppleMobileDevice,
-         cardWidth
+
     }) => {
 
         const {t} = useTranslation('customTranslation');
@@ -71,7 +70,7 @@ const MobileTagCard: FC<MobileTagCardPropTypes> =
         }, [tag?.name]);
 
         return (
-            <MobileTagCardStyledArticle cardWidth={cardWidth} >
+            <MobileTagCardStyledArticle className={'mobile-card'}>
                 <Link href={`/tag/${tag?._id}`}>
                     <a className='tag-card-link'
                        onClick={onActivateLoadingHandler}

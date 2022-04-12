@@ -1,13 +1,15 @@
+//MobileActorCard
+
 import {FC} from "react";
 import Link from "next/link";
-import ActorCardMedia from "./ActorCardMedia";
+// import ActorCardMedia from "./ActorCardMedia";
+import CardImageRenderer from "../../asset/CardImageRenderer/CardImageRenderer";
 import {useTranslation} from 'next-i18next';
 import capitalizeFirstLetter from "../../../../../_variables/util/capitalizeFirstLetter";
 import styled from "styled-components";
 import {Meta} from "@_variables/TypeScriptTypes/GlobalTypes";
-import CardImageRenderer from "@components/includes/cards/asset/CardImageRenderer/CardImageRenderer";
 
-const ActorCardStyledDiv = styled.div`
+const MobileActorCardStyledDiv = styled.div`
   background-color: var(--post-element-background-color, #131314);
   width: 140px;
   font-size: 14px;
@@ -70,14 +72,14 @@ interface ActorCardPropTypes{
     isAppleMobileDevice?:boolean
 }
 
-const ActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler,index}) => {
+const MobileActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler,index}) => {
 
     const {t} = useTranslation('common');
     const actorName = capitalizeFirstLetter(actor?.name)
 
 
     return (
-        <ActorCardStyledDiv className={'actor-card'}>
+        <MobileActorCardStyledDiv className={'actor-card'}>
             <Link href={`/actor/${actor._id}`}>
                 <a className={'actor-card-link'}
                    onClick={onActivateLoadingHandler}
@@ -97,9 +99,9 @@ const ActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler,ind
                         : null}
                 </a>
             </Link>
-        </ActorCardStyledDiv>
+        </MobileActorCardStyledDiv>
     );
 };
 
-export default ActorCard;
+export default MobileActorCard;
 
