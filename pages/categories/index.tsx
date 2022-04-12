@@ -46,11 +46,11 @@ const categoriesPage = () => {
     return (
         <CategoriesPageStyledMain id={'main-content'} className={'content main '}
                                   categoriesPageStyle={categoriesPageStyle}>
-            <WidgetsRenderer position={'categoriesPageTop'}/>
-
-            {topWidgets ? <CategoriesRenderer cardWidthDesktop={undefined}/> : null}
 
 
+            {topWidgets ? <WidgetsRenderer position={'categoriesPageTop'}/> : null}
+
+            <CategoriesRenderer cardWidthDesktop={undefined}/>
             <PaginationComponent
                 isActive={true}
                 currentPage={query?.page ? parseInt(query?.page as string) : 1}
