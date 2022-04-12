@@ -40,10 +40,7 @@ const Advertise: FC<AdvertisePropTypes> = ({uniqueData}) => {
 
     return (
         <AdvertiseStyledDiv dangerouslySetInnerHTML={{
-            __html:adCodeData ? adCodeData :
-                `<div class='pre-load'>
-                    <span>loading...</span>
-                 </div>`
+            __html:adCodeData ? adCodeData : `<div class='pre-load'><span>loading...</span></div>`
         }}/>
     )
 
