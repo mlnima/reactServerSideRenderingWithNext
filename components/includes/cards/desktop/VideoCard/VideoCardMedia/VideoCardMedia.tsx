@@ -8,9 +8,7 @@ const VideoCardTrailer = dynamic(() => import('./VideoCardTrailer'), {ssr: false
 
 let VideoCardMediaStyledDiv = styled.div`
   position: relative;
-
-
-
+  
   .video-card-info-data {
     position: absolute;
     z-index: 1;
@@ -32,7 +30,6 @@ let VideoCardMediaStyledDiv = styled.div`
   .video-card-duration {
     bottom: 3px;
     right: 2%;
-
   }
 `
 

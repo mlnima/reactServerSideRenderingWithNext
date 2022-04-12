@@ -2,9 +2,8 @@ import styled from "styled-components";
 
 const CardDurationStyledDiv = styled.div`
   font-size: 12px;
-  var {
-    font-style: normal;
-  }
+  font-style: normal;
+
 `
 
 interface CardViewsPropTypes {
@@ -15,7 +14,7 @@ interface CardViewsPropTypes {
 const CardDuration = ({duration, className}: CardViewsPropTypes) => {
     return (
         <CardDurationStyledDiv className={'card-duration ' + className}>
-            <var>{duration}</var>
+            {duration}
         </CardDurationStyledDiv>
     );
 };
