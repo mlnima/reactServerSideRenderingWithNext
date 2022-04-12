@@ -84,16 +84,21 @@ const PostsRenderer:FC<PostsComponentTypes> =
                     post,
                     widgetId,
                     title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
-                           post?.title?.replace('#', '') :
-                           post?.translations?.[locale as string]?.title ?
-                           post?.translations?.[locale as string]?.title?.replace('#', '') :
-                           post?.title?.replace('#', ''),
+                           post?.title :
+                           post?.translations?.[locale as string]?.title || post?.title,
                     isMobile: isMobile,
                     isSidebar: isSidebar,
                     isAppleMobileDevice,
                     onActivateLoadingHandler: () => dispatch(setLoading(true)),
 
                 }
+
+
+                // title: process.env.NEXT_PUBLIC_DEFAULT_LOCAL === locale ?
+                //     post?.title?.replace('#', '') :
+                //     post?.translations?.[locale as string]?.title ?
+                //         post?.translations?.[locale as string]?.title?.replace('#', '') :
+                //         post?.title?.replace('#', ''),
 
                 if (post?.postType === 'video') {
                     return <VideoCardToRender postProps={postProps} key={index} index={index} />
