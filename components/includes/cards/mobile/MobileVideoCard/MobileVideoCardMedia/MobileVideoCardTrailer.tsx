@@ -3,6 +3,8 @@ import styled from "styled-components";
 
 const MobileVideoCardTrailerStyledDiv = styled.div`
   position: relative;
+  height: 100%;
+  width: 100%;
   @keyframes opacityAnimationStart {
     0% {
       opacity: 0;
@@ -15,6 +17,8 @@ const MobileVideoCardTrailerStyledDiv = styled.div`
   .video-card-trailer {
     object-fit: contain;
     aspect-ratio: 16 / 9;
+    height: 100%;
+    width: 100%;
     animation: opacityAnimationStart 2s alternate;
   }
 `

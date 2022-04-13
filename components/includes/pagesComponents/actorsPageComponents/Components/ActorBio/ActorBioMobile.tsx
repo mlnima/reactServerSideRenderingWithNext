@@ -19,6 +19,9 @@ const ActorBioMobileStyledSection = styled.section`
 
     .actor-image {
       border-radius: 50%;
+      width: 140px;
+      height: 140px;
+      object-fit: cover;
     }
 
     .actor-data-name {
@@ -57,6 +60,7 @@ const ActorBioMobile: FC = () => {
             window.scrollTo({top: 0, behavior: 'smooth'});
         }
     }
+
     return (
         <ActorBioMobileStyledSection showMore={showMore}>
             <div className={'actor-images'}>
@@ -84,11 +88,17 @@ const ActorBioMobile: FC = () => {
                     : null
                 }
             </div>
-            <button onClick={onShowDetailsHandler}
-                    className={'btn btn-primary show-more-detail-btn'}
-            >
-                {showMore ? '-' : '+'}
-            </button>
+            {
+                // @ts-ignore
+                actorData?.additionalInfo?.length || actorData?.description ?
+                <button onClick={onShowDetailsHandler}
+                        className={'btn btn-primary show-more-detail-btn'}
+                >
+                    {showMore ? '-' : '+'}
+                </button>
+                :null
+            }
+
         </ActorBioMobileStyledSection>
     )
 };
