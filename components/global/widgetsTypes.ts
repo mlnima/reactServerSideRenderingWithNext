@@ -18,11 +18,11 @@ const widgetsTypes = [
     'alphabeticalNumericalRange',
     'language',
     'authentication',
-    'imageSwiper',
+    'imagesSwiper',
     'postsSwiper',
     //disabled
     // 'recentComments',
-    // 'postsSlider',
+    'postsSlider',
 ]
 
 export default widgetsTypes

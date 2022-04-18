@@ -28,10 +28,10 @@ const Custom500 = () => {
     const {t} = useTranslation(['common', 'customTranslation']);
     return (
         <Custom500StyledDiv id='not-found-page' className='main'>
-            <h1>500 - {t(`Server Error`)}</h1>
+            <h1>500 - {t<string>(`Server Error`)}</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
-                    <h2>{t(`Go To Homepage`)}</h2>
+                    <h2>{t<string>(`Go To Homepage`)}</h2>
                 </a>
             </Link>
         </Custom500StyledDiv>

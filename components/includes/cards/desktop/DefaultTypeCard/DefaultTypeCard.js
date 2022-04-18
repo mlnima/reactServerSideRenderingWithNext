@@ -101,7 +101,7 @@ const DefaultTypeCard = props => {
                         <div className='post-card-under-media-info'>
                             <span className='post-card-views post-card-info-data'>
                                 <span>{props.views}</span>
-                                {t(`Views`)}
+                                {t<string>(`Views`)}
                             </span>
                             <span className='post-card-rating post-card-info-data'>
                                 <span>{props.rating}</span>

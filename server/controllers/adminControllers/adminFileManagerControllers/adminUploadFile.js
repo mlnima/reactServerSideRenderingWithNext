@@ -2,7 +2,7 @@ const fsExtra = require('fs-extra')
 const fs = require('fs')
 
 module.exports = async (req, res) => {
-    const file = req.files.uploadingFile
+    const file = req?.files?.uploadingFile
     const fileType = file.mimetype.split('/')[0]
     const desiredMode = 0o2775
     const options = {
@@ -12,18 +12,27 @@ module.exports = async (req, res) => {
     const year = today.getFullYear()
     const month = today.getMonth() + 1
     const directoryPath = './public/uploads/' + fileType + '/' + year + '/' + month + '/'
-    fsExtra.ensureDir(directoryPath).then(() => {
-        const filePath = directoryPath + file.name
-        file.mv(filePath, function (err) {
-            if (err) {
-                res.json({response: 'something is wrong', type: 'error', error: err})
-            } else {
-                res.json({response: 'Uploaded', path: filePath})
+    fsExtra.ensureDir(directoryPath).then(async () => {
+        try {
+            const filePath = directoryPath + file.name
+            const fileExist =  fs.existsSync(filePath)
+            if (fileExist){
+                await fs.unlinkSync(filePath)
             }
-        });
+
+            file.mv(filePath, function (err) {
+                if (err) {
+                    res.json({response: 'something is wrong', type: 'error', error: err})
+                } else {
+                    res.json({response: 'Uploaded', path: filePath})
+                }
+            });
+        }catch (err){
+            console.log(err)
+        }
 
     }).catch(err => {
-
+           console.log(err)
         res.end()
     })
 }

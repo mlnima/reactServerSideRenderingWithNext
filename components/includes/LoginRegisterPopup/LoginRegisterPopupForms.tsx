@@ -259,11 +259,11 @@ const LoginRegisterPopupForms: FC = () => {
                 </div>
 
                 <h3 className='login-register-title'>
-                    {globalState.loginRegisterFormPopup === 'register' ? t(`Register`) : t(`Member login`)}
+                    {globalState.loginRegisterFormPopup === 'register' ? t<string>(`Register`) : t<string>(`Member login`)}
                 </h3>
                 {response.message ?
                     <p className='server-response'>
-                        {t(`${response.message}`)}
+                        {t<string>(`${response.message}`)}
                     </p>
                     : null
                 }
@@ -272,7 +272,7 @@ const LoginRegisterPopupForms: FC = () => {
                     <form className='login-register-form' onSubmit={e => onRegisterHandler(e)}>
                         <div className="login-register-form-fields">
                             <div className="login-register-form-field">
-                                <p>{t(`Username`)}</p>
+                                <p>{t<string>(`Username`)}</p>
                                 <input className={'form-control-input form-control-input-validator'}
                                        required={true}
                                        name='username'
@@ -282,7 +282,7 @@ const LoginRegisterPopupForms: FC = () => {
                                 <ValidInput valid={stateValidator.username}/>
                             </div>
                             <div className="login-register-form-field">
-                                <p>{t(`Email`)}</p>
+                                <p>{t<string>(`Email`)}</p>
                                 <input className={'form-control-input form-control-input-validator'}
                                        autoComplete="off"
                                        required={true}
@@ -295,7 +295,7 @@ const LoginRegisterPopupForms: FC = () => {
                                 <ValidInput valid={stateValidator.email}/>
                             </div>
                             <div className="login-register-form-field gender">
-                                <p>{t(`Gender`)}</p>
+                                <p>{t<string>(`Gender`)}</p>
                                 <div className='gender-options'
                                      onChange={e => onChangeHandler(e)}
                                 >
@@ -304,27 +304,27 @@ const LoginRegisterPopupForms: FC = () => {
                                            value='male'
                                            checked={state.gender === 'male'}
                                     />
-                                    <p className='gender-icon'>{t(`Male`)}</p>
+                                    <p className='gender-icon'>{t<string>(`Male`)}</p>
                                     <input type='radio'
                                            name='gender'
                                            value='female'
                                            checked={state.gender === 'female'}
                                     />
-                                    <p className='gender-icon'>{t(`Female`)}</p>
+                                    <p className='gender-icon'>{t<string>(`Female`)}</p>
                                     <input type='radio'
                                            name='gender'
                                            value='other'
                                            checked={state.gender === 'other'}
                                     />
-                                    <p className='gender-icon'>{t(`Other`)}</p>
+                                    <p className='gender-icon'>{t<string>(`Other`)}</p>
                                 </div>
                             </div>
                             <div className="login-register-form-field">
-                                <p>{t(`Password`)} </p>
+                                <p>{t<string>(`Password`)} </p>
                                 {
                                     !stateValidator.password ?
                                         <span className='password-info'>
-                                            {t(`Minimum eight characters, at least one letter and one number`)}
+                                            {t<string>(`Minimum eight characters, at least one letter and one number`)}
                                         </span>
                                         : null
                                 }
@@ -338,7 +338,7 @@ const LoginRegisterPopupForms: FC = () => {
                                 <ValidInput valid={stateValidator.password}/>
                             </div>
                             <div className={'login-register-form-field'}>
-                                <p>{t(`Repeat Password`)}</p>
+                                <p>{t<string>(`Repeat Password`)}</p>
                                 <input className={'form-control-input form-control-input-validator'}
                                        type={'password'}
                                        autoComplete={'off'}
@@ -359,7 +359,7 @@ const LoginRegisterPopupForms: FC = () => {
                         }
                             type={'submit'}
                             className={'login-register-form-button simple-button'}>
-                            {t(`Register`)}
+                            {t<string>(`Register`)}
                         </button>
                     </form> : globalState.loginRegisterFormPopup === 'login' ?
                         <form className='login-register-form'
@@ -367,7 +367,7 @@ const LoginRegisterPopupForms: FC = () => {
                         >
                             <div className="login-register-form-fields">
                                 <div className="login-register-form-field">
-                                    <p>{t(`Username`)}</p>
+                                    <p>{t<string>(`Username`)}</p>
                                     <input className={'form-control-input form-control-input-validator'}
                                            name={'username'}
                                            value={state.username}
@@ -376,7 +376,7 @@ const LoginRegisterPopupForms: FC = () => {
                                     <ValidInput valid={stateValidator.username}/>
                                 </div>
                                 <div className="login-register-form-field">
-                                    <p>{t(`Password`)}</p>
+                                    <p>{t<string>(`Password`)}</p>
                                     <input className={'form-control-input'}
                                            name={'password'}
                                            value={state.password}
@@ -388,7 +388,7 @@ const LoginRegisterPopupForms: FC = () => {
                             <button disabled={!stateValidator.username && !state.password}
                                     type={'submit'}
                                     className={'login-register-form-button simple-button'}>
-                                {t(`Login`)}
+                                {t<string>(`Login`)}
                             </button>
                         </form> : null
                 }
@@ -401,8 +401,8 @@ const LoginRegisterPopupForms: FC = () => {
                 }}
                       className='btn btn-secondary'>
                       {globalState.loginRegisterFormPopup === 'register' ?
-                          t(`Do You Have An Account? Login Here`) :
-                          t(`Not A Member Yet? Register Here`)}
+                          t<string>(`Do You Have An Account? Login Here`) :
+                          t<string>(`Not A Member Yet? Register Here`)}
                 </span>
 
             </LoginRegisterPopupFormsStyledDiv>

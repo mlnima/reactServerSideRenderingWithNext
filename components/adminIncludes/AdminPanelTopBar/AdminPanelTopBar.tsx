@@ -1,14 +1,14 @@
-import {FC, useEffect, useState} from 'react';
+import {FC} from 'react';
 import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import AdminActionMenu from "./AdminActionMenu/AdminActionMenu";
 import Link from 'next/link'
 import {faBars, faHome} from "@fortawesome/free-solid-svg-icons";
-//import {faUser} from "@fortawesome/free-regular-svg-icons";
 import styled from "styled-components";
 import {useDispatch, useSelector} from "react-redux";
 import {clearCaches, setSidebarStatus} from "@store/adminActions/adminPanelGlobalStateActions";
 import {useRouter} from "next/router";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+
 
 let StyledDiv = styled.div`
   display: flex;
@@ -64,7 +64,7 @@ const AdminTopBar: FC = () => {
     const sidebar = useSelector(({adminPanelGlobalState}: StoreTypes) => adminPanelGlobalState?.sidebar)
 
     const AdminSideBarOpenCloseHandler = () => {
-        sidebar ? dispatch(setSidebarStatus(false)) : dispatch(setSidebarStatus(true))
+        dispatch(setSidebarStatus(!sidebar))
     };
 
     return (

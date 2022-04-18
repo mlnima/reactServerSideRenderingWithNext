@@ -7,13 +7,16 @@ import {Context, createWrapper} from 'next-redux-wrapper';
 const debug = false;
 //process.env.NODE_ENV === "development";
 
+export const store = createStore(reducer,
+    process.env.NODE_ENV === "production" ?
+        compose(applyMiddleware(thunk)) :
+        composeWithDevTools(applyMiddleware(thunk))
+);
+
 export const makeStore = (context: Context) => {
-    return createStore(reducer,
-        process.env.NODE_ENV === "production" ?
-            compose(applyMiddleware(thunk)) :
-            composeWithDevTools(applyMiddleware(thunk))
-    );
+    return store
 };
 
 export const wrapper = createWrapper(makeStore, {debug});
+
 

@@ -13,14 +13,14 @@ const LoggedOutItemsMenu: FC = () => {
                   aria-label='logged-out-items'
             >
                 <span className={'sign-in-button icon'}/>
-                <p className={'text-data'}>{t(`Login`)}</p>
+                <p className={'text-data'}>{t<string>(`Login`)}</p>
             </span>
             <span onClick={() => dispatch(setLoginRegisterFormStatus('register'))}
                   className='logged-item btn logged-out btn-transparent-light'
                   aria-label='logged-out-items'
             >
                 <span className={'register-button icon'}/>
-                <p className={'text-data'}>{t(`Register`)}</p>
+                <p className={'text-data'}>{t<string>(`Register`)}</p>
             </span>
         </>
     )

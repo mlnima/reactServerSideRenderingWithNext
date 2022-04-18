@@ -67,7 +67,7 @@ const ProfileNavigation = props => {
                 <span>{userData.followersCount || 0}</span>
                 <Link href={'/profile/followers'}>
                     <a style={navigationData.style} className='profile-navigation-item'>
-                        {t('Followers')}
+                        {t<string>('Followers')}
                     </a>
                 </Link>
             </div>
@@ -75,7 +75,7 @@ const ProfileNavigation = props => {
                 <span>{userData.followingCount || 0}</span>
                 <Link href={'/profile/following'}>
                     <a style={navigationData.style} className='profile-navigation-item'>
-                        {t('Following')}
+                        {t<string>('Following')}
                     </a>
                 </Link>
             </div>

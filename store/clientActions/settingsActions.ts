@@ -3,15 +3,18 @@ import {AxiosResponse} from "axios";
 import { LOADING, SET_ALERT, SET_SETTINGS} from "../types";
 import {EDIT_DESIGN} from "@store/adminTypes";
 import Axios from "@_variables/util/Axios";
+import {AnyAction} from "redux";
 
-export const setSettings = (setting: any) => (dispatch: any) => {
+//@ts-ignore
+export const setSettings = (setting: any):AnyAction  => (dispatch: any) => {
     dispatch({
         type: SET_SETTINGS,
         payload: setting
     })
 }
 
-export const updateSetting = (type: any, data: object) => async (dispatch: any) => {
+//@ts-ignore
+export const updateSetting = (type: any, data: object):AnyAction  => async (dispatch: any) => {
     dispatch({type: LOADING, payload: true})
     const body = {
         type,
@@ -31,8 +34,8 @@ export const updateSetting = (type: any, data: object) => async (dispatch: any) 
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
-
-export const editDesign = (e: ChangeEvent<any>) => async (dispatch: any) => {
+//@ts-ignore
+export const editDesign = (e: ChangeEvent<any>):AnyAction  => async (dispatch: any) => {
     dispatch({
         type: EDIT_DESIGN,
         payload: {

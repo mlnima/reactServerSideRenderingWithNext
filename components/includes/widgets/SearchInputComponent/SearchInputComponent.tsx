@@ -108,7 +108,7 @@ const SearchInputComponent: FC = () => {
                    type='text' name='keyword'
                    onChange={e => onChangeHandler(e)}
                    value={state.keyword}
-                   placeholder={t('Search...')}
+                   placeholder={t<string>('Search...')}
             />
         </SearchInputComponentStyledForm>
     )

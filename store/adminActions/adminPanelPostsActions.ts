@@ -13,8 +13,10 @@ import {
 } from "../adminTypes";
 import {CHANGE_ACTIVE_EDITING_LANGUAGE, GET_POST, LOADING, NEW_POST, SET_ALERT} from "@store/types";
 import {setLoading} from "@store/clientActions/globalStateActions";
+import {AnyAction} from "redux";
 
-export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) => {
+//@ts-ignore
+export const adminGetPost = (_id?: string | string[]):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     if (_id) {
         await Axios.get( `/api/admin/posts/getPost?_id=${_id}&token=${localStorage.wt}`)
@@ -52,7 +54,8 @@ export const adminGetPost = (_id?: string | string[]) => async (dispatch: any) =
     }
 }
 
-export const adminGetPosts = (queriesData?: string) => async (dispatch: any) => {
+//@ts-ignore
+export const adminGetPosts = (queriesData?: string):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     await Axios.get(
         `/api/admin/posts/getPosts${queriesData}&token=${localStorage.wt}`)
@@ -78,7 +81,9 @@ export const adminGetPosts = (queriesData?: string) => async (dispatch: any) => 
         })
 }
 
-export const adminUpdatePost = (data?: PostTypes) => async (dispatch: any) => {
+
+//@ts-ignore
+export const adminUpdatePost = (data?: PostTypes):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         postData: data,
@@ -103,7 +108,9 @@ export const adminUpdatePost = (data?: PostTypes) => async (dispatch: any) => {
         })
 }
 
-export const adminSaveNewPost = (data?: PostTypes, router?: any) => async (dispatch: any) => {
+
+//@ts-ignore
+export const adminSaveNewPost = (data?: PostTypes, router?: any):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         postData: data,
@@ -134,14 +141,17 @@ export const adminSaveNewPost = (data?: PostTypes, router?: any) => async (dispa
         })
 }
 
-export const adminEditPost = (data?: any) => (dispatch: any) => {
+
+//@ts-ignore
+export const adminEditPost = (data?: any):AnyAction => dispatch => {
     dispatch({
         type: ADMIN_EDIT_POST,
         payload: {...data}
     })
 }
 
-export const adminChangeActiveEditingLanguage = (language: string) => (dispatch: any) => {
+//@ts-ignore
+export const adminChangeActiveEditingLanguage = (language: string):AnyAction => dispatch => {
 
     dispatch({
         type: CHANGE_ACTIVE_EDITING_LANGUAGE,
@@ -149,7 +159,8 @@ export const adminChangeActiveEditingLanguage = (language: string) => (dispatch:
     })
 }
 
-export const adminNewPost = () => (dispatch: any) => {
+//@ts-ignore
+export const adminNewPost = ():AnyAction => dispatch => {
 
     const postType = typeof window !== 'undefined' && localStorage?.preferAdminPostType ? localStorage?.preferAdminPostType : 'standard';
 
@@ -161,8 +172,8 @@ export const adminNewPost = () => (dispatch: any) => {
     })
 }
 
-
-export const adminGetMeta = (_id: string | string[] | undefined) => async (dispatch: any) => {
+//@ts-ignore
+export const adminGetMeta = (_id: string | string[] | undefined):AnyAction => async dispatch => {
     if (_id && localStorage.wt) {
         dispatch({
             type: LOADING,
@@ -199,7 +210,10 @@ export const adminGetMeta = (_id: string | string[] | undefined) => async (dispa
             })
     }
 }
-export const adminGetMetas = (queries: string | string[] | undefined) => async (dispatch: any) => {
+
+
+//@ts-ignore
+export const adminGetMetas = (queries: string | string[] | undefined):AnyAction => async dispatch => {
     if (localStorage.wt) {
         dispatch({
             type: LOADING,
@@ -229,14 +243,16 @@ export const adminGetMetas = (queries: string | string[] | undefined) => async (
     }
 }
 
-
-export const adminEditMeta = (change: object) => (dispatch: any) => {
+//@ts-ignore
+export const adminEditMeta = (change: object):AnyAction => (dispatch) => {
     dispatch({
         type: ADMIN_EDIT_META,
         payload: change
     })
 }
-export const adminDeleteMeta = (_id: string | string[]) => async (dispatch: any) => {
+
+//@ts-ignore
+export const adminDeleteMeta = (_id: string | string[]):AnyAction => async (dispatch) => {
     dispatch({type: LOADING, payload: true})
 
     const body = {
@@ -264,7 +280,8 @@ export const adminDeleteMeta = (_id: string | string[]) => async (dispatch: any)
 
 }
 
-export const adminUpdateMeta = (data: Meta) => async (dispatch: any) => {
+//@ts-ignore
+export const adminUpdateMeta = (data: Meta):AnyAction => async (dispatch) => {
     dispatch({type: LOADING, payload: true})
     const body = {
         data,
@@ -292,8 +309,8 @@ export const adminUpdateMeta = (data: Meta) => async (dispatch: any) => {
 
 }
 
-
-export const adminBulkActionPost = (ids: string[], status: string) => (dispatch: any) => {
+//@ts-ignore
+export const adminBulkActionPost = (ids: string[], status: string):AnyAction => (dispatch) => {
     dispatch({type: LOADING, payload: true})
     const body = {
         ids,
@@ -314,7 +331,8 @@ export const adminBulkActionPost = (ids: string[], status: string) => (dispatch:
 
 }
 
-export const adminCheckAndRemoveDeletedVideos = () => async (dispatch: any) => {
+//@ts-ignore
+export const adminCheckAndRemoveDeletedVideos = ():AnyAction => async (dispatch) => {
     dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/admin/posts/checkAndRemoveDeletedVideos?token=${localStorage.wt}`)
         .then((res: AxiosResponse<any>) => {
@@ -335,7 +353,8 @@ export const adminCheckAndRemoveDeletedVideos = () => async (dispatch: any) => {
         })
 }
 
-export const setMetaThumbnailsAndCount = (type?: string) => async (dispatch: any) => {
+//@ts-ignore
+export const setMetaThumbnailsAndCount = (type?: string):AnyAction => async (dispatch) => {
     dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/admin/posts/setMetaThumbnailsAndCount?token=${localStorage.wt}${type ? `&type=${type}` : ''}`)
         .then((res: AxiosResponse<any>) => {
@@ -354,7 +373,8 @@ export const setMetaThumbnailsAndCount = (type?: string) => async (dispatch: any
         }).finally(() =>  dispatch({type: LOADING, payload: false}))
 }
 
-export const postThumbnailsUpload = (image?: any) => async (dispatch: any) => {
+//@ts-ignore
+export const postThumbnailsUpload = (image?: any):AnyAction => async (dispatch) => {
     dispatch({type: LOADING, payload: true})
     await Axios.post( '/api/admin/fileManager/postThumbnailsUpload', image).then(res=>{
 
@@ -364,8 +384,8 @@ export const postThumbnailsUpload = (image?: any) => async (dispatch: any) => {
 }
 
 
-
-export const importPosts = (posts: PostTypes[]) => async (dispatch: any) => {
+//@ts-ignore
+export const importPosts = (posts: PostTypes[]):AnyAction => async (dispatch) => {
     dispatch({type: LOADING, payload: true})
     await Axios.post(`/api/admin/posts/adminImportPosts`, {
         posts,
@@ -385,8 +405,8 @@ export const importPosts = (posts: PostTypes[]) => async (dispatch: any) => {
     })
 }
 
-
-export const adminExportPosts = (data: {}) => async (dispatch: any) => {
+//@ts-ignore
+export const adminExportPosts = (data: {}):AnyAction => async (dispatch) => {
     dispatch({type: LOADING, payload: true})
 
     const body = {
@@ -434,8 +454,8 @@ export const adminExportPosts = (data: {}) => async (dispatch: any) => {
 }
 
 
-
-export const adminBulkActionMeta = (type,status,ids) => async (dispatch: any) => {
+//@ts-ignore
+export const adminBulkActionMeta = (type,status,ids):AnyAction => async (dispatch) => {
     dispatch({type: LOADING, payload: true})
     const body = {
         type,
@@ -450,8 +470,8 @@ export const adminBulkActionMeta = (type,status,ids) => async (dispatch: any) =>
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
-
-export const checkRemovedContent = (data: {}) => async (dispatch: any) => {
+//@ts-ignore
+export const checkRemovedContent = (data: {}):AnyAction => async (dispatch) => {
 
     const body = {
         ...data,
@@ -462,16 +482,16 @@ export const checkRemovedContent = (data: {}) => async (dispatch: any) => {
 
 }
 
-
-export const updateComment = (data) => async (dispatch: any) => {
+//@ts-ignore
+export const updateComment = (data):AnyAction => async (dispatch) => {
     const body = {
         ...data,
     };
     await Axios.post( `/api/admin/posts/updateComment`, body)
 }
 
-
-export const adminYoutubeDataScrapper = (url) => async (dispatch: any) => {
+//@ts-ignore
+export const adminYoutubeDataScrapper = (url):AnyAction => async (dispatch) => {
 
 
     const durationToString = duration => {

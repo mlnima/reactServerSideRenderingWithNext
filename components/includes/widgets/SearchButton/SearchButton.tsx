@@ -1,8 +1,7 @@
-import React, {useState} from 'react';
+import React, {FC, useState} from 'react';
 import dynamic from "next/dynamic";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
-
 const SearchButtonForm = dynamic(() => import('./SearchButtonForm'), {ssr: false});
 
 const SearchButtonStyledButton = styled.button`
@@ -14,7 +13,9 @@ const SearchButtonStyledButton = styled.button`
   outline: none;
   color: var(--navigation-text-color, #ccc);
 `
-const SearchButton = () => {
+
+const SearchButton: FC = () => {
+
     const {t} = useTranslation('common');
     const [open, setOpen] = useState(false);
     const onOpenHandler = () => {
@@ -25,7 +26,7 @@ const SearchButton = () => {
         <>
             <SearchButtonStyledButton onClick={onOpenHandler}
                                       aria-label={'search'}
-                                      title={t('Search')}
+                                      title={t<string>('Search')}
                                       className={'search-button'}
             >
                 <svg xmlns="http://www.w3.org/2000/svg"

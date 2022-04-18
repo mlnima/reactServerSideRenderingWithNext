@@ -66,7 +66,7 @@ const CategoryCard: FC<CategoryCardPropTypes> = ({category, onActivateLoadingHan
     const cardTitle = useMemo(() => {
         const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
             category?.name :
-            category?.translations?.[locale]?.name || t(category?.name, {ns: 'customTranslation'})
+            category?.translations?.[locale]?.name || t<string>(category?.name, {ns: 'customTranslation'})
         return capitalizeFirstLetter(checkedTitle)
     }, [category?.name]);
 

@@ -2,8 +2,9 @@ import axios, {AxiosError, AxiosResponse} from "axios";
 import {AxiosErrorTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {LOADING} from "@store/types";
 import {EXECUTE_COMMAND} from "../adminTypes";
-
-export const terminalCommandExecutor = (command) => async dispatch => {
+import {AnyAction} from "redux";
+//@ts-ignore
+export const terminalCommandExecutor = (command):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     try{
         const body = {

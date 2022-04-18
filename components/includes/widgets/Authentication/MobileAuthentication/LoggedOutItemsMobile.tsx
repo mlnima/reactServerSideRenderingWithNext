@@ -114,7 +114,7 @@ const LoggedOutItemsMobile: FC<LoggedOutItemsMobilePropTypes> = ({onOpenCloseHan
                     <div className={'icon-wrapper'}>
                            <span className={'sign-in-button icon'}/>
                     </div>
-                    <p className={'text-data'}>{t(`Login`)}</p>
+                    <p className={'text-data'}>{t<string>(`Login`)}</p>
                 </span>
                 <span className='logged-item logged-item-action'
                       onClick={(e) => {
@@ -127,7 +127,7 @@ const LoggedOutItemsMobile: FC<LoggedOutItemsMobilePropTypes> = ({onOpenCloseHan
                     <div className={'icon-wrapper'}>
                         <span className={'register-button icon'}/>
                     </div>
-                    <p className={'text-data'}>{t(`Register`)}</p>
+                    <p className={'text-data'}>{t<string>(`Register`)}</p>
                 </span>
             </div>
 
@@ -138,7 +138,7 @@ const LoggedOutItemsMobile: FC<LoggedOutItemsMobilePropTypes> = ({onOpenCloseHan
                             <div className={'icon-wrapper'}>
                                 <span className={'home-button icon'}/>
                             </div>
-                            <p className={'text-data'}>{t(`Home`)}</p>
+                            <p className={'text-data'}>{t<string>(`Home`)}</p>
                         </a>
                     </Link>
                     : null

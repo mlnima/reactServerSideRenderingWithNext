@@ -14,23 +14,24 @@ import {
     SET_WIDGETS_IN_GROUPS
 } from "@store/types";
 import {getTextDataWithTranslation,  isAppleMobileDevice} from "@_variables/_variables";
+import {AnyAction} from "redux";
 
-
-export const setLoginRegisterFormStatus = (statusType) => dispatch => {
+//@ts-ignore
+export const setLoginRegisterFormStatus = (statusType):AnyAction => dispatch => {
     dispatch({
         type: LOGIN_REGISTER_FORM,
         payload: statusType
     })
 }
-
-export const setLoading = (statusType) => dispatch => {
+//@ts-ignore
+export const setLoading = (statusType):AnyAction  => dispatch => {
     dispatch({
         type: LOADING,
         payload: statusType
     })
 }
-
-export const setAlert = (payload) => dispatch => {
+//@ts-ignore
+export const setAlert = (payload):AnyAction  => dispatch => {
     dispatch({
         type: SET_ALERT,
         payload
@@ -47,22 +48,22 @@ export const setAlert = (payload) => dispatch => {
         })
     }, 8000)
 }
-
-export const closeAlert = () => dispatch => {
+//@ts-ignore
+export const closeAlert = ():AnyAction  => dispatch => {
     dispatch({
         type: CLOSE_ALERT,
         payload: null
     })
 }
-
-export const setSideHeadData = (headData) => dispatch => {
+//@ts-ignore
+export const setSideHeadData = (headData):AnyAction  => dispatch => {
     dispatch({
         type: SET_HEAD_DATA,
         payload: headData
     })
 }
-
-export const checkRouteAndSetLoading = (path, nextPath) => dispatch => {
+//@ts-ignore
+export const checkRouteAndSetLoading = (path, nextPath):AnyAction  => dispatch => {
     if (path !== nextPath) {
         dispatch({
             type: CHECK_ROUTE_AND_SET_LOADING,
@@ -70,8 +71,8 @@ export const checkRouteAndSetLoading = (path, nextPath) => dispatch => {
         })
     }
 }
-
-export const hydrateGlobalState = (data) => dispatch => {
+//@ts-ignore
+export const hydrateGlobalState = (data):AnyAction  => dispatch => {
     dispatch({
         type: HYDRATE,
         payload: data
@@ -80,7 +81,8 @@ export const hydrateGlobalState = (data) => dispatch => {
 
 
 export const getDefaultPageData =
-    (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean }) => async dispatch => {
+    //@ts-ignore
+    (context: GetServerSidePropsContext, dynamicWidgets: string[], options?: { page: string, setHeadData: boolean }):AnyAction  => async dispatch => {
         context.res.setHeader(
             'Cache-Control',
             'public, s-maxage=604800, stale-while-revalidate=604800'

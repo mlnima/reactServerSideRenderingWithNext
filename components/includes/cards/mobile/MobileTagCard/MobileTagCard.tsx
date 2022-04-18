@@ -65,7 +65,7 @@ const MobileTagCard: FC<MobileTagCardPropTypes> =
         const cardTitle = useMemo(() => {
             const checkedTitle = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
                 tag?.name :
-                tag?.translations?.[locale]?.name || t(tag?.name, {ns: 'customTranslation'})
+                tag?.translations?.[locale]?.name || t<string>(tag?.name, {ns: 'customTranslation'})
             return capitalizeFirstLetter(checkedTitle)
         }, [tag?.name]);
 

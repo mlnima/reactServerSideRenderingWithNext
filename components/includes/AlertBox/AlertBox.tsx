@@ -139,7 +139,7 @@ const AlertBox = () => {
                     </div>
                     <p className='alert'>
                         {/*//@ts-ignore*/}
-                        {t([t(alert.message, {ns: 'common'}), t(alert.message, {ns: 'profile'})])}
+                        {t<string>([t<string>(alert.message, {ns: 'common'}), t<string>(alert.message, {ns: 'profile'})])}
                     </p>
                     <p>{alert.err?.stack}</p>
                 </div>

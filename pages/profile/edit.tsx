@@ -88,12 +88,12 @@ const edit: FC = () => {
 
     return (
         <EditProfileStyledMain className='main'>
-            <h1> {t('Edit Profile', {ns: 'profile'})}</h1>
+            <h1> {t<string>('Edit Profile', {ns: 'profile'})}</h1>
             <form className='reset-password-form' onSubmit={onSubmitHandler}>
-                <h2>{t('Change Password', {ns: 'profile'})}</h2>
+                <h2>{t<string>('Change Password', {ns: 'profile'})}</h2>
 
                 <div className='reset-password-form-field'>
-                    <p>{t('Password', {ns: 'common'})}</p>
+                    <p>{t<string>('Password', {ns: 'common'})}</p>
                     <input className={'form-control-input'}
                            type="password"
                            autoComplete="off"
@@ -105,11 +105,11 @@ const edit: FC = () => {
                 </div>
 
                 <div className='reset-password-form-field'>
-                    <p> {t('NewPassword', {ns: 'profile'})}</p>
+                    <p> {t<string>('NewPassword', {ns: 'profile'})}</p>
                     {
                         !changePasswordDataValidator.newPassword ?
                             <span className='password-info'>
-                                {t('Minimum eight characters, at least one letter and one number', {ns: 'common'})}
+                                {t<string>('Minimum eight characters, at least one letter and one number', {ns: 'common'})}
                             </span>
                             : null
                     }
@@ -124,7 +124,7 @@ const edit: FC = () => {
                 </div>
 
                 <div className={'reset-password-form-field'}>
-                    <p>{t('Repeat New Password', {ns: 'profile'})}</p>
+                    <p>{t<string>('Repeat New Password', {ns: 'profile'})}</p>
                     <input className={'form-control-input form-control-input-validator'}
                            type={'password'}
                            autoComplete="off"
@@ -136,7 +136,7 @@ const edit: FC = () => {
                 </div>
 
                 <button type='submit' className={'btn btn-warning'}>
-                    {t('Change Password', {ns: 'profile'})}
+                    {t<string>('Change Password', {ns: 'profile'})}
                 </button>
             </form>
 

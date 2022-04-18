@@ -85,11 +85,11 @@ const SearchButtonForm = ({open, onOpenHandler}: SearchButtonFormPropTypes) => {
                        onChange={e => onChangeHandler(e)}
                        name='keyword' value={state.keyword}
                        className='search-button-widget-form-keyword-input form-control-input'
-                       placeholder={t('Search...')}
+                       placeholder={t<string>('Search...')}
                 />
                 <button type='submit'
                         className='search-button-widget-form-submit-btn'
-                        title={t('Search')}
+                        title={t<string>('Search')}
                 >
                     <svg xmlns="http://www.w3.org/2000/svg"
                          width="24"
@@ -105,7 +105,7 @@ const SearchButtonForm = ({open, onOpenHandler}: SearchButtonFormPropTypes) => {
                         <line x1="21" y1="21" x2="16.65" y2="16.65"/>
                     </svg>
                 </button>
-                <span className='search-button-widget-close-btn' title={t('Close')}>
+                <span className='search-button-widget-close-btn' title={t<string>('Close')}>
                            <FontAwesomeIcon onClick={onOpenHandler}
                                             style={{width: '24px', height: '24px',}}
                                             icon={faTimes}

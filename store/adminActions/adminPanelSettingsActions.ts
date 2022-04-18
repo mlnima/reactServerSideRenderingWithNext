@@ -2,28 +2,31 @@ import {ADMIN_EDIT_DESIGN, ADMIN_EDIT_IDENTITY, ADMIN_EDIT_SETTING, ADMIN_GET_SE
 import {LOADING, SET_SETTINGS} from "@store/types";
 import Axios from "@_variables/util/Axios";
 import _getMultipleSettingsQueryGenerator from "@_variables/clientVariables/_getMultipleSettingsQueryGenerator";
+import {AnyAction} from "redux";
 
-export const editSettings = (changes) => async (dispatch: any) => {
+//@ts-ignore
+export const editSettings = (changes):AnyAction => async (dispatch: any) => {
     dispatch({
         type: ADMIN_EDIT_SETTING,
         payload: changes
     })
 }
-export const adminPanelEditIdentity = (changes) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelEditIdentity = (changes):AnyAction => async (dispatch: any) => {
     dispatch({
         type: ADMIN_EDIT_IDENTITY,
         payload: changes
     })
 }
-
-export const adminPanelEditDesign = (changes) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelEditDesign = (changes):AnyAction => async (dispatch: any) => {
     dispatch({
         type: ADMIN_EDIT_DESIGN,
         payload: changes
     })
 }
-
-export const adminPanelGetSettings = () => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelGetSettings = ():AnyAction => async (dispatch: any) => {
     dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/admin/settings/getMultipleSetting${_getMultipleSettingsQueryGenerator(['identity', 'design', 'adminSettings'], false)}&token=${localStorage.wt}`)
         .then(res => {

@@ -12,7 +12,7 @@ const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
 
-const ArticleCard = styled.div`
+const ArticleCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
   max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
@@ -95,7 +95,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
         const postUrl = `/post/${post?.postType}/${post._id}`
 
         return (
-            <ArticleCard className='article-card' cardWidth={cardWidth}>
+            <ArticleCardStyledArticle className='article-card' cardWidth={cardWidth}>
                 <Link href={`/post/${post?.postType}/${post._id}`}>
                     <a rel='next' onClick={onActivateLoadingHandler}
                        className='article-card-media-link'
@@ -144,7 +144,7 @@ const ArticleTypeCard: FC<ArticleTypeCardPropTypes> =
                     }
 
                 </div>
-            </ArticleCard>
+            </ArticleCardStyledArticle>
 
         );
     };

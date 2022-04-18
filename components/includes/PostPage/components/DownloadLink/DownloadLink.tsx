@@ -53,7 +53,7 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
         return (
             <DownloadLinkStyledDiv>
                 <span className={'download-text'}>
-                    {t([t('Download', {ns: 'common'}), t('Download', {ns: 'customTranslation'})])}:
+                    {t<string>([t<string>('Download', {ns: 'common'}), t<string>('Download', {ns: 'customTranslation'})])}:
                 </span>
                 <div className={'multiple-download-links'}>
 
@@ -64,7 +64,7 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
                                    target={'_blank'}
                                    className={'btn btn-primary'}
                                    rel={'noreferrer'}
-                                   title={t(`Download`)}
+                                   title={t<string>(`Download`)}
                                 >
                                     <span>{link.title}</span>
                                 </a>
@@ -77,9 +77,9 @@ const DownloadLink:FC<DownloadLinkPropTypes> = ({ downloadLink, render, download
                     <a className={'single-download-link btn btn-primary'}
                        href={downloadLink}
                        target={'_blank'}
-                       title={t([
-                               t('Download', {ns: 'common'}),
-                               t('Download', {ns: 'customTranslation'})
+                       title={t<string>([
+                               t<string>('Download', {ns: 'common'}),
+                               t<string>('Download', {ns: 'customTranslation'})
                            ])}
                     >
                         <span style={{display: 'none'}}>download link for post</span>

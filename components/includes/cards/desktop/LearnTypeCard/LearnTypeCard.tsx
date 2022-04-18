@@ -9,7 +9,7 @@ import dynamic from "next/dynamic";
 const CardViews = dynamic(() => import('../../asset/CardViews/CardViews'))
 const CardRating = dynamic(() => import('../../asset/CardRating/CardRating'))
 
-const LearnTypeCardStyledDiv = styled.div`
+const LearnTypeCardStyledArticle = styled.article`
   background-color: var(--post-element-background-color, #131314);
   width: 100%;
   max-width: ${({cardWidth}: { cardWidth: number }) => `${cardWidth}px`};
@@ -76,7 +76,7 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> =
         const categoriesImages = post?.categories?.filter(category => category?.imageUrl).map(category => category?.imageUrl)
 
         return (
-            <LearnTypeCardStyledDiv className='learn-post-card' cardWidth={cardWidth}>
+            <LearnTypeCardStyledArticle className='learn-post-card' cardWidth={cardWidth}>
                 <Link href={postUrl}>
                     <a rel='next' onClick={onActivateLoadingHandler} className='learn-post-card-link'
                        title={title}>
@@ -98,7 +98,7 @@ const LearnTypeCard: FC<VideoTypeCardPropTypes> =
                         </div>
                     </a>
                 </Link>
-            </LearnTypeCardStyledDiv>
+            </LearnTypeCardStyledArticle>
 
         );
     };

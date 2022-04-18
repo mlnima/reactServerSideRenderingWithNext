@@ -1,7 +1,7 @@
 import React, {FC, useEffect, useState} from 'react';
 import TextInputFieldForWidget from "../TextInputFieldForWidget/TextInputFieldForWidget";
 import MonacoEditor from "@components/adminIncludes/MonacoEditor/MonacoEditor";
-import {sliderDefaultData} from './sliderDefaultData'
+import {sliderDefaultData} from './swiperDefaultData'
 import convertVariableNameToName from "@_variables/util/convertVariableNameToName";
 
 
@@ -23,7 +23,7 @@ interface SliderWidgetTypeFieldsPropTypes {
     onUniqueDataJsonChangeHandler: any,
 }
 
-const SliderWidgetTypeFields: FC<SliderWidgetTypeFieldsPropTypes> =
+const SwiperWidgetFields: FC<SliderWidgetTypeFieldsPropTypes> =
     ({
          uniqueData,
          onUniqueDataJsonChangeHandler
@@ -120,4 +120,4 @@ const SliderWidgetTypeFields: FC<SliderWidgetTypeFieldsPropTypes> =
         );
 
     };
-export default SliderWidgetTypeFields;
+export default SwiperWidgetFields;

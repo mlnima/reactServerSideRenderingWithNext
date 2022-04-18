@@ -3,8 +3,9 @@ import {WidgetPropTypes} from "@_variables/TypeScriptTypes/Widgets";
 import {SET_WIDGETS_IN_GROUPS, LOADING, SET_ALERT} from "../types";
 import {ADMIN_PANEL_GET_WIDGETS, DELETE_WIDGET, SAVE_NEW_WIDGET, UPDATE_WIDGET} from "../adminTypes";
 import Axios from "@_variables/util/Axios";
-
-export const adminGetWidgets = () => async (dispatch: any) => {
+import {AnyAction} from "redux";
+//@ts-ignore
+export const adminGetWidgets = ():AnyAction => async (dispatch: any) => {
     dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/admin/widgets/adminGetWidgets?token=${localStorage.wt}`)
         .then((res: AxiosResponse<unknown | any>) => {
@@ -31,7 +32,8 @@ export const adminGetWidgets = () => async (dispatch: any) => {
             })
         })
 }
-export const adminPanelGetWidgets = () => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelGetWidgets = ():AnyAction => async (dispatch: any) => {
     dispatch({type: LOADING, payload: true})
     await Axios.get( `/api/admin/widgets/adminPanelGetWidgets?token=${localStorage.wt}`)
         .then((res: AxiosResponse<unknown | any>) => {
@@ -56,7 +58,8 @@ export const adminPanelGetWidgets = () => async (dispatch: any) => {
         })
 }
 
-export const adminAddNewWidget = (newWidgetData: WidgetPropTypes) => async (dispatch: any) => {
+//@ts-ignore
+export const adminAddNewWidget = (newWidgetData: WidgetPropTypes):AnyAction => async (dispatch: any) => {
     await Axios.post('/api/admin/widgets/adminAddNewWidget', {data: newWidgetData, token: localStorage.wt})
         .then((res: AxiosResponse<unknown | any>) => {
             if (res.data?.newWidgetData) {
@@ -71,7 +74,8 @@ export const adminAddNewWidget = (newWidgetData: WidgetPropTypes) => async (disp
         })
 }
 
-export const adminDeleteWidget = (_id:string) => async (dispatch: any) => {
+//@ts-ignore
+export const adminDeleteWidget = (_id:string):AnyAction => async (dispatch: any) => {
     await Axios.post( '/api/admin/widgets/adminDeleteWidget', {_id,token: localStorage.wt}).then((res:AxiosResponse<unknown|any>)=>{
         dispatch({
             type: DELETE_WIDGET,
@@ -82,7 +86,8 @@ export const adminDeleteWidget = (_id:string) => async (dispatch: any) => {
     })
 }
 
-export const adminUpdateWidget = (widgetData:WidgetPropTypes) => async (dispatch: any) => {
+//@ts-ignore
+export const adminUpdateWidget = (widgetData:WidgetPropTypes):AnyAction => async (dispatch: any) => {
     await Axios.post(
         '/api/admin/widgets/adminUpdateWidget',
         {widgetData,token: localStorage.wt})

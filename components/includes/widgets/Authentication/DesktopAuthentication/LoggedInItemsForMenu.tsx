@@ -18,7 +18,7 @@ const LoggedInItemsForMenu: FC = () => {
                     <Link href={`/messenger`}>
                         <a className={'logged-item logged-in btn btn-transparent-light'}>
                             <span className={'messages icon'}/>
-                            <p className={'text-data'}>{t(`Messages`)}</p>
+                            <p className={'text-data'}>{t<string>(`Messages`)}</p>
                         </a>
                     </Link>
 
@@ -27,7 +27,7 @@ const LoggedInItemsForMenu: FC = () => {
                         <Link href={`/profile/posts/newPost?postType=article`}>
                             <a className={'logged-item logged-in btn btn-transparent-light add-new-Post'}>
                                 <span className={'add-new-Post icon'}/>
-                                <p className={'text-data'}>{t(`Create New Post`)}</p>
+                                <p className={'text-data'}>{t<string>(`Create New Post`)}</p>
                             </a>
                         </Link>
                         : null
@@ -36,7 +36,7 @@ const LoggedInItemsForMenu: FC = () => {
                     <Link href={`/profile`}>
                         <a className={'logged-item btn logged-in btn-transparent-light'} >
                             <span className={'my-profile icon'}/>
-                            <p className={'text-data'}>{t(`Profile`)}</p>
+                            <p className={'text-data'}>{t<string>(`Profile`)}</p>
                         </a>
                     </Link>
 
@@ -49,7 +49,7 @@ const LoggedInItemsForMenu: FC = () => {
                 dispatch(setLoginRegisterFormStatus(false))
             }}>
                 <span className={'sign-out-button icon'}/>
-                 <p className={'text-data'}>{t(`Logout`)}</p>
+                 <p className={'text-data'}>{t<string>(`Logout`)}</p>
             </span>
         </>
     )

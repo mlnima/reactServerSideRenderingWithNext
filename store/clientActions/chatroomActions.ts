@@ -1,29 +1,31 @@
 import {NEW_MESSAGE, SET_ACTIVE_VISIBLE_PROFILE, SET_MESSAGES, SET_ONLINE_USERS} from "@store/types";
+import {AnyAction} from "redux";
 
-export const setChatroomUsers = usersList => dispatch=>{
+//@ts-ignore
+export const setChatroomUsers = (usersList): AnyAction => dispatch => {
     dispatch({
-        type:SET_ONLINE_USERS,
+        type: SET_ONLINE_USERS,
         payload: usersList
     })
 }
-
-export const setChatroomMessages = Messages => dispatch=>{
+//@ts-ignore
+export const setChatroomMessages = (Messages): AnyAction => dispatch => {
     dispatch({
-        type:SET_MESSAGES,
+        type: SET_MESSAGES,
         payload: Messages
     })
 }
-
-export const newMessage = Message => dispatch=>{
+//@ts-ignore
+export const newMessage = (Message): AnyAction => dispatch => {
     dispatch({
-        type:NEW_MESSAGE,
+        type: NEW_MESSAGE,
         payload: Message
     })
 }
-
-export const setActiveVisibleProfile = activeProfile => dispatch=>{
+//@ts-ignore
+export const setActiveVisibleProfile = (activeProfile): AnyAction => dispatch => {
     dispatch({
-        type:SET_ACTIVE_VISIBLE_PROFILE,
+        type: SET_ACTIVE_VISIBLE_PROFILE,
         payload: activeProfile
     })
 }

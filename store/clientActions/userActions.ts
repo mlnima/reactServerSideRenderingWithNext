@@ -19,11 +19,13 @@ import {
 import Peer from 'simple-peer'
 import {socket} from '@_variables/socket';
 import Axios from "@_variables/util/Axios";
+import {AnyAction} from "redux";
 
-export const userLogin = (username, password) => async dispatch => {
 
+//@ts-ignore
+export const userLogin = (username, password): AnyAction => async dispatch => {
     try {
-        await Axios.post( '/api/v1/users/login', {username, password}).then(res => {
+        await Axios.post('/api/v1/users/login', {username, password}).then(res => {
             res.data.token ? localStorage.setItem('wt', res.data.token) : null
             dispatch({
                 type: USER_LOGIN,
@@ -39,9 +41,10 @@ export const userLogin = (username, password) => async dispatch => {
     }
 }
 
-export const userRegister = (data) => async dispatch => {
+//@ts-ignore
+export const userRegister = (data): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
-    await Axios.post( '/api/v1/users/register', data).then(res=>{
+    await Axios.post('/api/v1/users/register', data).then(res => {
         dispatch({
             type: SET_ALERT,
             payload: {message: res.data.message, type: 'success'}
@@ -51,16 +54,17 @@ export const userRegister = (data) => async dispatch => {
             payload: 'login'
         })
 
-    }).catch(err=>{
+    }).catch(err => {
         dispatch({
             type: SET_ALERT,
             payload: {message: err.response.data.message, type: 'error'}
         })
 
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
+    }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-export const autoUserLogin = (fields) => async dispatch => {
+//@ts-ignore
+export const autoUserLogin = (fields): AnyAction => async dispatch => {
     try {
         if (localStorage.wt) {
             await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
@@ -76,7 +80,8 @@ export const autoUserLogin = (fields) => async dispatch => {
     }
 }
 
-export const userResetPassword = (data) => async dispatch => {
+//@ts-ignore
+export const userResetPassword = (data): AnyAction => async dispatch => {
 
     try {
         if (localStorage.wt) {
@@ -102,7 +107,8 @@ export const userResetPassword = (data) => async dispatch => {
     }
 }
 
-export const getSpecificUserData = (fields) => async dispatch => {
+//@ts-ignore
+export const getSpecificUserData = (fields): AnyAction => async dispatch => {
     try {
         if (localStorage.wt) {
             await Axios.post('/api/v1/users/getSignedInUserData', {token: localStorage.wt, fields}).then(res => {
@@ -117,7 +123,8 @@ export const getSpecificUserData = (fields) => async dispatch => {
     }
 }
 
-export const userLogOut = () => dispatch => {
+//@ts-ignore
+export const userLogOut = (): AnyAction => dispatch => {
     localStorage.wt ? localStorage.removeItem('wt') : null
     dispatch({
         type: USER_LOGIN,
@@ -125,15 +132,17 @@ export const userLogOut = () => dispatch => {
     })
 }
 
-export const dispatchSocketId = socketId => dispatch => {
+//@ts-ignore
+export const dispatchSocketId = (socketId): AnyAction => dispatch => {
     dispatch({
         type: DISPATCH_SOCKET_ID,
         payload: socketId
     })
 }
 
-export const getConversations = _id => async dispatch => {
-    await Axios.post( '/api/v1/users/getConversations',
+//@ts-ignore
+export const getConversations = (_id): AnyAction => async dispatch => {
+    await Axios.post('/api/v1/users/getConversations',
         {_id, token: localStorage.wt})
         .then(res => {
             if (res.data?.conversations) {
@@ -145,7 +154,8 @@ export const getConversations = _id => async dispatch => {
         })
 }
 
-export const getConversation = (_id, loadAmount) => async dispatch => {
+//@ts-ignore
+export const getConversation = (_id, loadAmount): AnyAction => async dispatch => {
     await Axios.post('/api/v1/users/getConversation',
         {
             _id,
@@ -162,8 +172,9 @@ export const getConversation = (_id, loadAmount) => async dispatch => {
         })
 }
 
-export const deleteConversation = _id => async dispatch => {
-    await Axios.get( `/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)
+//@ts-ignore
+export const deleteConversation = (_id): AnyAction => async dispatch => {
+    await Axios.get(`/api/v1/users/deleteConversation?_id=${_id}&token=${localStorage.wt}`)
         .then(res => {
             dispatch({
                 type: DELETE_CONVERSATION,
@@ -181,14 +192,16 @@ export const deleteConversation = _id => async dispatch => {
         })
 }
 
-export const newMessageInConversation = newMessage => dispatch => {
+//@ts-ignore
+export const newMessageInConversation = (newMessage): AnyAction => dispatch => {
     dispatch({
         type: NEW_MESSAGE_IN_CONVERSATION,
         payload: newMessage
     })
 }
 
-export const getUserPageData = (username, _id, fields) => async dispatch => {
+//@ts-ignore
+export const getUserPageData = (username, _id, fields): AnyAction => async dispatch => {
     const body = {
         username,
         fields,
@@ -204,7 +217,8 @@ export const getUserPageData = (username, _id, fields) => async dispatch => {
     })
 }
 
-export const setPartnerVideo = (partnerVideo) => async dispatch => {
+//@ts-ignore
+export const setPartnerVideo = (partnerVideo): AnyAction => async dispatch => {
     try {
         dispatch({
             type: SET_PARTNER_VIDEO,
@@ -216,14 +230,16 @@ export const setPartnerVideo = (partnerVideo) => async dispatch => {
     }
 }
 
-export const endCall = () => async dispatch => {
+//@ts-ignore
+export const endCall = (): AnyAction => async dispatch => {
     dispatch({
         type: END_CALL,
         payload: true
     })
 }
 
-export const incomingCall = (data) => async dispatch => {
+//@ts-ignore
+export const incomingCall = (data): AnyAction => async dispatch => {
     try {
         await navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(async myVideo => {
             dispatch({
@@ -243,7 +259,8 @@ export const incomingCall = (data) => async dispatch => {
     }
 }
 
-export const answerTheCall = (myVideo,conversation,callerSignal,router) => async dispatch => {
+//@ts-ignore
+export const answerTheCall = (myVideo, conversation, callerSignal, router): AnyAction => async dispatch => {
     dispatch({
         type: SET_CALL_ACCEPTED,
         payload: {
@@ -253,11 +270,11 @@ export const answerTheCall = (myVideo,conversation,callerSignal,router) => async
     const peer = new Peer({
         initiator: false,
         trickle: false,
-        stream:myVideo
+        stream: myVideo
     })
 
     peer.on('signal', (data) => {
-        socket.emit('answerCall', { signal:data, conversation})
+        socket.emit('answerCall', {signal: data, conversation})
     })
 
     peer.on('stream', (partnerVideo) => {
@@ -280,15 +297,14 @@ export const answerTheCall = (myVideo,conversation,callerSignal,router) => async
 
 
     peer.on("error", (error) => {
-      console.log(error)
+        console.log(error)
     })
 
 
 }
 
-
-
-export const outgoingCall = (conversation,mySocketId,callerName,router ) => async dispatch => {
+//@ts-ignore
+export const outgoingCall = (conversation, mySocketId, callerName, router): AnyAction => async dispatch => {
     try {
         await navigator?.mediaDevices?.getUserMedia({video: true, audio: true}).then(async myVideo => {
             await dispatch({
@@ -301,14 +317,14 @@ export const outgoingCall = (conversation,mySocketId,callerName,router ) => asyn
             const peer = new Peer({
                 initiator: true,
                 trickle: false,
-                stream:myVideo
+                stream: myVideo
             })
 
             peer.on('signal', (data) => {
                 socket.emit("callToConversation", {
                     conversation,
-                    callerSignal:data,
-                    callerId:mySocketId,
+                    callerSignal: data,
+                    callerId: mySocketId,
                     callerName
                 })
             })
@@ -325,7 +341,7 @@ export const outgoingCall = (conversation,mySocketId,callerName,router ) => asyn
                 dispatch({
                     type: SET_CALL_ACCEPTED,
                     payload: {
-                        callAccepted:true,
+                        callAccepted: true,
                     }
                 })
                 peer.signal(signal)
@@ -348,132 +364,135 @@ export const outgoingCall = (conversation,mySocketId,callerName,router ) => asyn
     }
 }
 
-
-export const userCreateOrder = (data)=> async dispatch =>{
+//@ts-ignore
+export const userCreateOrder = (data): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     if (data.type === 'payPal') {
         const body = {
             data
         }
-        Axios.post('/api/v1/orders/create/payPal', body).then(res=>{
+        Axios.post('/api/v1/orders/create/payPal', body).then(res => {
             dispatch({
                 type: SET_ALERT,
                 payload: {message: res.data.message, type: 'success'}
             })
-        }).catch(()=>{
+        }).catch(() => {
             dispatch({
                 type: SET_ALERT,
                 payload: {message: 'Something Went Wrong', type: 'error'}
             })
-        }).finally(()=>dispatch({type: LOADING, payload: false}))
+        }).finally(() => dispatch({type: LOADING, payload: false}))
     }
 }
 
-export const userProfileImageUpload = (image)=> async dispatch =>{
+//@ts-ignore
+export const userProfileImageUpload = (image): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
-    await Axios.post('/api/v1/fileManager/userImageUpload', image).then(res=>{
+    await Axios.post('/api/v1/fileManager/userImageUpload', image).then(res => {
 
-    }).catch(err=>{
+    }).catch(err => {
 
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
+    }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-
-export const followUser = (_id:string)=> async dispatch =>{
-    dispatch({type: LOADING, payload: true})
-    const body = {
-        _id,
-        token: localStorage.wt
-    }
-    await Axios.post('/api/v1/users/followUser', body).then(res=>{
-
-    }).catch(err=>{
-
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
-}
-
-export const unFollowUser = (_id:string)=> async dispatch =>{
+//@ts-ignore
+export const followUser = (_id: string): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         _id,
         token: localStorage.wt
     }
-    await Axios.post('/api/v1/users/unFollowUser', body).then(res=>{
+    await Axios.post('/api/v1/users/followUser', body).then(res => {
 
-    }).catch(err=>{
+    }).catch(err => {
 
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
+    }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-export const sendMessage = (_id:string,message:{})=> async dispatch =>{
+//@ts-ignore
+export const unFollowUser = (_id: string): AnyAction => async dispatch => {
+    dispatch({type: LOADING, payload: true})
+    const body = {
+        _id,
+        token: localStorage.wt
+    }
+    await Axios.post('/api/v1/users/unFollowUser', body).then(res => {
+
+    }).catch(err => {
+
+    }).finally(() => dispatch({type: LOADING, payload: false}))
+}
+
+//@ts-ignore
+export const sendMessage = (_id: string, message: {}): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         _id,
         message,
         token: localStorage.wt
     }
-    await Axios.post('/api/v1/users/sendMessage', body).then(res=>{
+    await Axios.post('/api/v1/users/sendMessage', body).then(res => {
 
-    }).catch(err=>{
+    }).catch(err => {
 
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
+    }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-export const conversation = (_id:string,push:any)=> async dispatch =>{
+//@ts-ignore
+export const conversation = (_id: string, push: any): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         _id,
         token: localStorage.wt
     }
-    await Axios.post('/api/v1/users/conversation', body).then(res=>{
-        if (res.data?.conversation?._id){
+    await Axios.post('/api/v1/users/conversation', body).then(res => {
+        if (res.data?.conversation?._id) {
             push(`/messenger/${res.data?.conversation?._id}`)
         }
-    }).catch(err=>{
+    }).catch(err => {
 
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
+    }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-export const messageToConversation = (conversationId:string,messageBody:{})=> async dispatch =>{
+//@ts-ignore
+export const messageToConversation = (conversationId: string, messageBody: {}): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         conversationId,
         messageBody,
         token: localStorage.wt
     }
-    await Axios.post('/api/v1/users/messageToConversation', body).then(res=>{
+    await Axios.post('/api/v1/users/messageToConversation', body).then(res => {
 
-    }).catch(err=>{
+    }).catch(err => {
 
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
+    }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-export const getMultipleUserDataById = (usersList:{}[],type)=> async dispatch =>{
+//@ts-ignore
+export const getMultipleUserDataById = (usersList: {}[], type): AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         usersList
     }
-    await Axios.post('/api/v1/users/getMultipleUserDataById', body).then(res=>{
-        if (type==='followers'){
+    await Axios.post('/api/v1/users/getMultipleUserDataById', body).then(res => {
+        if (type === 'followers') {
             //UPDATE_USER_DATA_FIELD
             dispatch({
                 type: UPDATE_USER_DATA_FIELD,
-                payload: {followers:res?.data?.users || []}
+                payload: {followers: res?.data?.users || []}
             })
-        }else if (type==='following'){
+        } else if (type === 'following') {
             dispatch({
                 type: UPDATE_USER_DATA_FIELD,
-                payload: {following:res?.data?.users || []}
+                payload: {following: res?.data?.users || []}
             })
         }
 
-    }).catch(err=>{
+    }).catch(err => {
 
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
+    }).finally(() => dispatch({type: LOADING, payload: false}))
 }
-
-
-
 
 
 // export const likeDislikeView = (id, type)=> async dispatch =>{
@@ -485,15 +504,15 @@ export const getMultipleUserDataById = (usersList:{}[],type)=> async dispatch =>
 //
 //     })
 // }
-
-export const userDislikePost = (data)=> async dispatch =>{
+//@ts-ignore
+export const userDislikePost = (data): AnyAction => async dispatch => {
 
 }
 
 
 //ecommerce
-
-export const addItemToBasket = (data)=> async dispatch =>{
+//@ts-ignore
+export const addItemToBasket = (data): AnyAction => async dispatch => {
 
 }
 

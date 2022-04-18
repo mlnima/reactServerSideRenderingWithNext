@@ -121,10 +121,10 @@ const CookiePopup: FC = () => {
                 </p>
                 <div className='cookie-popup-content-action-buttons'>
                     <button className='cookie-popup-content-action-button-reject' onClick={onRejectHandler}>
-                        {t(`Decline`)}
+                        {t<string>(`Decline`)}
                     </button>
                     <button className='cookie-popup-content-action-button-accept' onClick={onAcceptHandler}>
-                        {t('Accept')}
+                        {t<string>('Accept')}
                     </button>
                 </div>
                  {cookieReadMoreLink ?

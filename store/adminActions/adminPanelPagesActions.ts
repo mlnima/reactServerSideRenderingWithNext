@@ -5,8 +5,9 @@ import {LOADING} from "@store/types";
 import Axios from "@_variables/util/Axios";
 import axios, {AxiosError, AxiosResponse} from "axios";
 import {ADMIN_GET_PAGES, ADMIN_GET_PAGE, ADMIN_EDIT_PAGE_FIELD} from "@store/adminTypes";
-
-export const adminGetPages = (data) => async (dispatch: any) =>{
+import {AnyAction} from "redux";
+//@ts-ignore
+export const adminGetPages = (data):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         ...data,
@@ -22,7 +23,9 @@ export const adminGetPages = (data) => async (dispatch: any) =>{
 
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
-export const adminGetPage = (id) => async (dispatch: any) =>{
+
+//@ts-ignore
+export const adminGetPage = (id):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         _id:id,
@@ -38,7 +41,8 @@ export const adminGetPage = (id) => async (dispatch: any) =>{
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
-export const adminUpdatePage = (pageData) => async (dispatch: any) =>{
+//@ts-ignore
+export const adminUpdatePage = (pageData):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         pageData,
@@ -50,7 +54,9 @@ export const adminUpdatePage = (pageData) => async (dispatch: any) =>{
 
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
-export const adminSaveNewPage = (pageData,push) => async (dispatch: any) =>{
+
+//@ts-ignore
+export const adminSaveNewPage = (pageData,push):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         pageData,
@@ -66,14 +72,16 @@ export const adminSaveNewPage = (pageData,push) => async (dispatch: any) =>{
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
-export const adminEditPageField  = (changes) => async (dispatch: any) =>{
+//@ts-ignore
+export const adminEditPageField  = (changes):AnyAction => async dispatch =>{
     dispatch({
         type: ADMIN_EDIT_PAGE_FIELD,
         payload: changes
     })
 }
 
-export const adminDeleteCustomPage  = (id) => async (dispatch: any) =>{
+//@ts-ignore
+export const adminDeleteCustomPage  = (id):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         id,

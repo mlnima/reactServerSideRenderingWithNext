@@ -5,6 +5,7 @@ import {
     ADMIN_EDIT_COMMENT,
 } from "../adminTypes";
 import {AdminPanelCommentsTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
+import {AnyAction} from "redux";
 
 
 const initialState = {
@@ -13,7 +14,7 @@ const initialState = {
 }
 
 // @ts-ignore
-export const adminPanelCommentsReducer = (state: AdminPanelCommentsTypes = initialState, action: { type: string, payload: any }) =>{
+export const adminPanelCommentsReducer = (state = initialState, action:AnyAction) =>{
     switch (action.type) {
         case ADMIN_GET_COMMENTS:
             return {

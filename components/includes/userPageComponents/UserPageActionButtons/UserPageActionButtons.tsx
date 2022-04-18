@@ -1,5 +1,4 @@
-import React, {FC} from 'react';
-// import {conversation} from "@_variables/_userSocialAjaxVariables";
+import React, {FC, useEffect} from 'react';
 import {useRouter} from "next/router";
 import {useTranslation} from 'next-i18next';
 import styled from "styled-components";
@@ -47,16 +46,16 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const {t} = useTranslation('common');
     const {push} = useRouter()
     const dispatch = useDispatch()
-    const userData = useSelector((store: StoreTypes) => store?.user?.userData)
+    const {userData,loggedIn} = useSelector((store: StoreTypes) => store?.user)
     const userPageData = useSelector((store: StoreTypes) => store?.user?.userPageData)
 
+    useEffect(() => {
+        console.log(loggedIn)
+    }, [userData]);
     const onFollowHandler = () => {
-        if (userPageData?._id) {
+        if (userPageData?._id && loggedIn && userData._id ) {
             dispatch(followUser(userPageData._id))
             dispatch(getSpecificUserData(['following']))
-            // followUser(userPageData._id).then(() => {
-            //     dispatch(getSpecificUserData(['following']))
-            // })
         } else {
             dispatch(setLoginRegisterFormStatus('login'))
         }
@@ -65,16 +64,13 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
     const onUnFollowHandler = () => {
         dispatch(unFollowUser(userPageData._id))
         dispatch(getSpecificUserData(['following']))
-        // unFollowUser(userPageData._id).then(() => {
-        //     dispatch(getSpecificUserData(['following']))
-        // })
     }
 
 
     const onConversationHandler = () => {
 
         if (userData._id && userPageData._id) {
-            dispatch(conversation(userPageData._id,push))
+            dispatch(conversation(userPageData._id, push))
             // conversation(userPageData._id).then(res => {
             //     const conversation = res.data.conversation
             //     router.push(`/messenger/${conversation._id}`)
@@ -93,13 +89,13 @@ const UserPageActionButtons: FC<UserPageActionButtonsPropType> = ({_id}) => {
 
 
             <button className='user-page-action-button action-client-button-link'
-                    onClick={onConversationHandler}>{t('Send Message')}</button>
+                    onClick={onConversationHandler}>{t<string>('Send Message')}</button>
             <div>
                 {userData?.following?.includes(userPageData._id) ?
                     <button className='user-page-action-button action-client-button-link'
-                            onClick={onUnFollowHandler}>{t('Unfollow')}  </button> :
+                            onClick={onUnFollowHandler}>{t<string>('Unfollow')}  </button> :
                     <button className='user-page-action-button action-client-button-link'
-                            onClick={onFollowHandler}>{t('Follow')} </button>
+                            onClick={onFollowHandler}>{t<string>('Follow')} </button>
                 }
             </div>
 

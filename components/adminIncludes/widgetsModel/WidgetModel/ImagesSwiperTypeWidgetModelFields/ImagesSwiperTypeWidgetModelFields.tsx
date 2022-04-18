@@ -95,7 +95,7 @@ interface ImageSwiperTypeWidgetModelFieldsPropTypes {
 
 }
 
-const ImageSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsPropTypes> =
+const ImagesSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsPropTypes> =
     ({
          uniqueData,
          onUniqueDataChangeHandler
@@ -298,7 +298,7 @@ const ImageSwiperTypeWidgetModelFields: FC<ImageSwiperTypeWidgetModelFieldsPropT
             </ImageSwiperTypeWidgetModelFieldsStyledDiv>
         );
     };
-export default ImageSwiperTypeWidgetModelFields;
+export default ImagesSwiperTypeWidgetModelFields;
 
 
 // {/*<TextInputFieldForWidget element='input' inputTitle='Image Swiper Images Amount In View Mobile :' name='imageSwiperAmountMobile' type='number' value={props.imageSwiperAmountMobile}*/}

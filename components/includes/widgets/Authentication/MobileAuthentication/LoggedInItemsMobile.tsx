@@ -192,7 +192,7 @@ const LoggedInItemsMobile: FC<LoggedInItemsMobilePropTypes> = ({onOpenCloseHandl
                                     <div className={'icon-wrapper'}>
                                 <span className={'messages-button icon'}/>
                                 </div>
-                                    <p className={'text-data'}>{t(`Messages`)}</p>
+                                    <p className={'text-data'}>{t<string>(`Messages`)}</p>
                                 </span>
                             </a>
                         </Link>
@@ -203,7 +203,7 @@ const LoggedInItemsMobile: FC<LoggedInItemsMobilePropTypes> = ({onOpenCloseHandl
                                         <div className={'icon-wrapper'}>
                                     <span className={'plus-button icon'}/>
                                     </div>
-                                        <p className={'text-data'}>{t(`New Post`)}</p>
+                                        <p className={'text-data'}>{t<string>(`New Post`)}</p>
                                     </span>
                                 </a>
                             </Link>
@@ -226,7 +226,7 @@ const LoggedInItemsMobile: FC<LoggedInItemsMobilePropTypes> = ({onOpenCloseHandl
                             <div className={'icon-wrapper'}>
                                 <span className={'home-button icon'}/>
                             </div>
-                            <p className={'text-data'}>{t(`Home`)}</p>
+                            <p className={'text-data'}>{t<string>(`Home`)}</p>
                         </a>
                     </Link>
                     : null
@@ -240,7 +240,7 @@ const LoggedInItemsMobile: FC<LoggedInItemsMobilePropTypes> = ({onOpenCloseHandl
                         <div className={'icon-wrapper'}>
                            <span className={'sign-out-button icon'}/>
                         </div>
-                        <p className={'text-data'}>{t(`Logout`)}</p>
+                        <p className={'text-data'}>{t<string>(`Logout`)}</p>
                     </span>
 
             </div>

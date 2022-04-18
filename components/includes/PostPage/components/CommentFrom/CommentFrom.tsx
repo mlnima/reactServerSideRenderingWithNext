@@ -69,10 +69,10 @@ const CommentFrom:FC = () => {
         <CommentFromStyledForm className='comment-form' onSubmit={ e => onSubmitHandler(e) }>
             <div>
                 <div className='comment-form-input'>
-                    <textarea ref={ bodyInput } required={ true } placeholder={t(`Write a Comment`)} name='body'/>
+                    <textarea ref={ bodyInput } required={ true } placeholder={t<string>(`Write a Comment`)} name='body'/>
                 </div>
             </div>
-            <button className='comment-form-submit-button' type='submit'>{t(`Post Comment`)}</button>
+            <button className='comment-form-submit-button' type='submit'>{t<string>(`Post Comment`)}</button>
         </CommentFromStyledForm>
     );
 };

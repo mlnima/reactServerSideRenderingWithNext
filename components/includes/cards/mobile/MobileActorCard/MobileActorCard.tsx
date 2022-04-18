@@ -14,26 +14,29 @@ const MobileActorCardStyledDiv = styled.div`
   width: 140px;
   font-size: 14px;
   margin: auto;
+
   .actor-card-link {
     position: relative;
     display: block;
     cursor: pointer;
-    
-    .actor-card-image{
+
+    .actor-card-image {
       margin: auto;
       display: flex;
       justify-content: center;
       width: 140px;
       height: 140px;
       position: relative;
-      img{
+
+      img {
         object-fit: cover;
         width: 140px !important;
         height: 140px !important;
       }
-      div{
-        span{
-          img{
+
+      div {
+        span {
+          img {
             object-fit: cover !important;
             width: 140px !important;
             height: 140px !important;
@@ -42,22 +45,23 @@ const MobileActorCardStyledDiv = styled.div`
       }
 
     }
-    
-    header{
+
+    header {
       width: 100%;
-      .card-header{
+
+      .card-header {
         width: min-content;
         color: var(--main-active-color);
         text-overflow: ellipsis;
         overflow: hidden;
         -webkit-box-orient: vertical;
-        
+
         &:hover {
           color: var(--post-element-text-color, #fff);
         }
       }
     }
-    
+
     .actor-card-count {
       width: min-content;
       //margin: 0 2px;
@@ -65,14 +69,15 @@ const MobileActorCardStyledDiv = styled.div`
     }
   }
 `
-interface ActorCardPropTypes{
-    actor:Meta,
-    onActivateLoadingHandler:any,
-    index?:number,
-    isAppleMobileDevice?:boolean
+
+interface ActorCardPropTypes {
+    actor: Meta,
+    onActivateLoadingHandler: any,
+    index?: number,
+    isAppleMobileDevice?: boolean
 }
 
-const MobileActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandler,index}) => {
+const MobileActorCard: FC<ActorCardPropTypes> = ({actor, onActivateLoadingHandler, index}) => {
 
     const {t} = useTranslation('common');
     const actorName = capitalizeFirstLetter(actor?.name)
@@ -94,7 +99,9 @@ const MobileActorCard : FC<ActorCardPropTypes> = ({ actor,onActivateLoadingHandl
 
                     {actor?.count ?
                         <span className={'actor-card-count'}>
-                            {actor?.count} {t('Videos')}
+                             <>
+                                {actor?.count} {t<string>('Videos')}
+                             </>
                         </span>
                         : null}
                 </a>

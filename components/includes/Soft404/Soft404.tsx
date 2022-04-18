@@ -30,10 +30,10 @@ const Soft404: FC<Soft404PropTypes> = (props) => {
 
     return (
         <Soft404StyledDiv>
-            <h1>404 - {t(`Not Found`)}</h1>
+            <h1>404 - {t<string>(`Not Found`)}</h1>
             <Link href="/">
                 <a className='back-to-homepage'>
-                    <h2>{t(`Go To Homepage`)}</h2>
+                    <h2>{t<string>(`Go To Homepage`)}</h2>
                 </a>
             </Link>
         </Soft404StyledDiv>

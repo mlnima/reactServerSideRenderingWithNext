@@ -61,15 +61,6 @@ interface PostSwiperComponentTypes {
     uniqueData?: {
         posts: PostTypes[],
         totalCount: number,
-        // sliderEffect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
-
-        // sliderSpeed: number,
-        // spaceBetween: number,
-        // navigation: boolean,
-        // pagination: boolean,
-        // centeredSlides: boolean,
-        // paginationType: string,
-        // slidesPerView: number | string,
         swiperConfigDesktop:{
             effect: "slide" | "fade" | "cube" | "coverflow" | "flip" | "creative" | "cards";
             spaceBetween: number,

@@ -2,8 +2,10 @@ import {ADMIN_GET_ORDERS, ADMIN_GET_ORDER} from "@store/adminTypes";
 import {LOADING} from "@store/types";
 import Axios from "@_variables/util/Axios";
 import {AxiosError, AxiosResponse} from "axios";
+import {AnyAction} from "redux";
 
-export const adminGetOrders = (data) => async (dispatch: any) =>{
+//@ts-ignore
+export const adminGetOrders = (data):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         ...data,

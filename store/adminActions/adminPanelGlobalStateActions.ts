@@ -3,8 +3,9 @@ import {NextRouter} from 'next/router'
 import {PageTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {GET_CUSTOM_PAGES, SET_SIDEBAR_STATUS} from "@store/adminTypes";
 import {LOADING, SET_ALERT} from "../types";
-
-export const getCustomPages = () => async (dispatch: any) => {
+import {AnyAction} from "redux";
+//@ts-ignore
+export const getCustomPages = ():AnyAction => async dispatch => {
     await axios.post(process.env.NEXT_PUBLIC_PRODUCTION_URL + '/api/admin/pages/getPagesData', {token: localStorage.wt}).then((res: AxiosResponse<unknown | any>) => {
         if (res.data?.pages) {
             dispatch({
@@ -16,8 +17,8 @@ export const getCustomPages = () => async (dispatch: any) => {
         console.log(err)
     })
 }
-
-export const clearCaches = (router: NextRouter) => async (dispatch: any) => {
+//@ts-ignore
+export const clearCaches = (router?: NextRouter):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     await axios.get(process.env.NEXT_PUBLIC_PRODUCTION_URL + `/api/admin/settings/clearCaches?token=${localStorage.wt}`).then((res: AxiosResponse<unknown | any>) => {
         dispatch({
@@ -40,17 +41,19 @@ export const clearCaches = (router: NextRouter) => async (dispatch: any) => {
         })
     }).catch(err => {
 
-    }).finally(()=>dispatch({type: LOADING, payload: false}))
+    }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-export const setSidebarStatus = (status: boolean) => async (dispatch: any) => {
+//@ts-ignore
+export const setSidebarStatus = (status:boolean):AnyAction => (dispatch) => {
     dispatch({
         type: SET_SIDEBAR_STATUS,
         payload: status
     })
 }
 
-export const reloadPageDataByAddingQuery = (query, push, pathname) => () => {
+//@ts-ignore
+export const reloadPageDataByAddingQuery = (query, push, pathname):AnyAction => dispatch => {
     push({
         pathname: pathname,
         query: {...query, lastPageUpdate: Date.now()}

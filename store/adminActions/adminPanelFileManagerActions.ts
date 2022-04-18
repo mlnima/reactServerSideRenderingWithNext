@@ -12,9 +12,10 @@ import {
     ADMIN_PANEL_FILE_MANAGER_READ_PATH,
     ADMIN_PANEL_READ_TRANSLATIONS_FILE
 } from "@store/adminTypes";
+import {AnyAction} from "redux";
 // import {readTranslationsFile} from "@_variables/_ajaxFilesVariables";
-
-export const adminPanelFileManagerReadPath = (path: string,prevPath:string) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelFileManagerReadPath = (path: string,prevPath:string):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     let body = {
         path,
@@ -52,7 +53,8 @@ export const adminPanelFileManagerReadPath = (path: string,prevPath:string) => a
 
 
 //*****************need to check again
-export const adminPanelFileManagerDeleteFile = (filePath: string,data:{}) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelFileManagerDeleteFile = (filePath: string,data:{}):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     let body = {
         filePath,
@@ -76,7 +78,8 @@ export const adminPanelFileManagerDeleteFile = (filePath: string,data:{}) => asy
         })
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
-export const adminPanelFileManagerCreateNewFolder = (folderName: string,folderPath:string) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelFileManagerCreateNewFolder = (folderName: string,folderPath:string):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     let body = {
         folderName,
@@ -96,8 +99,8 @@ export const adminPanelFileManagerCreateNewFolder = (folderName: string,folderPa
         })
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
-
-export const adminPanelFileManagerCreateNewFile = (fileName: string,filePath:string) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelFileManagerCreateNewFile = (fileName: string,filePath:string):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     let body = {
         fileName,
@@ -119,16 +122,16 @@ export const adminPanelFileManagerCreateNewFile = (fileName: string,filePath:str
 }
 
 
-
-export const adminPanelFileManagerClosePopup = (data:{}) =>  (dispatch: any) => {
+//@ts-ignore
+export const adminPanelFileManagerClosePopup = (data:{}):AnyAction =>  dispatch => {
     dispatch({
         type: ADMIN_PANEL_FILE_MANAGER_CLOSE_POPUP,
         payload: data
     })
 }
 
-
-export const adminPanelReadTranslationsFile = (path: string) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelReadTranslationsFile = (path: string):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     let body = {
         path,
@@ -147,21 +150,24 @@ export const adminPanelReadTranslationsFile = (path: string) => async (dispatch:
         })
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
-export const adminPanelEditState = (changes: {}) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelEditState = (changes: {}):AnyAction => async dispatch => {
 
     dispatch({
         type: ADMIN_PANEL_FILE_MANAGER_EDIT_STATE,
         payload: changes
     })
 }
-export const adminPanelEditTranslationsFile = (data: string) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelEditTranslationsFile = (data: string):AnyAction => async dispatch => {
 
     dispatch({
         type: ADMIN_PANEL_EDIT_TRANSLATIONS_FILE,
         payload: data
     })
 }
-export const adminPanelUpdateTranslationsFile = (path:string,data: string) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelUpdateTranslationsFile = (path:string,data: string):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     let body = {
         path,
@@ -181,8 +187,8 @@ export const adminPanelUpdateTranslationsFile = (path:string,data: string) => as
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 
 }
-
-export const adminPanelUploadFile = (file: any,useType:string,postData?:{}) => async (dispatch: any) => {
+//@ts-ignore
+export const adminPanelUploadFile = (file: any,useType:string,postData?:{}):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     await Axios.post('/api/admin/fileManager/uploadFile', file).then(res=>{
         if (useType === 'fileManagerFileUpload'){

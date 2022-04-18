@@ -45,17 +45,56 @@ export const textWidgetModel = {
  ...generalModel
 }
 
-export const imageSwiperWidgetModel = {
+export const swiperWidgetModel = {
     ...generalModel,
-    imageSwiperData:[],
-    slideAmountInMobile:1,
-    slideAmountInDesktop:3,
-    spaceBetweenAmountMobile:0,
-    spaceBetweenAmountDesktop:0,
-    sliderEffect:'fade',
-    sliderAutoplay:true,
-    sliderSpeed:1000
+uniqueData:{
+    swiperConfigDesktop: {
+        effect: "cards",
+        grabCursor: true,
+        autoplay: true,
+        modules: [
+            "EffectCards"
+        ]
+    },
+    swiperConfigMobile: {
+        tag: "div",
+        wrapperTag: "div",
+        controller: {
+            control: "controlledSwiper"
+        },
+        keyboard: false,
+        autoplay: true,
+        navigation: false,
+        effect: "cube",
+        modules: [
+            "EffectCube",
+            "Pagination"
+        ],
+        pagination: false,
+        grabCursor: false,
+        cubeEffect: {
+            shadow: true,
+            slideShadows: true,
+            shadowOffset: 20,
+            shadowScale: 0.94
+        }
+    }
 }
+}
+
+export const slider = {
+    ...generalModel,
+    uniqueData:{
+        sliderConfig:{
+            pagination:true,
+            navigation:true
+        }
+    }
+
+}
+
+
+
 
 export const authenticationWidgetModel = {
     ...generalModel,

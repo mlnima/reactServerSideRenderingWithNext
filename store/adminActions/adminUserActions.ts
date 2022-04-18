@@ -3,8 +3,10 @@ import {AxiosErrorTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 import {LOADING, SET_ALERT} from "@store/types";
 import {ADMIN_EDIT_USER_DATA, ADMIN_GET_USER, ADMIN_GET_USERS} from "../adminTypes";
 import Axios from "@_variables/util/Axios";
+import {AnyAction} from "redux";
 
-export const adminGetUsers = (data) => async dispatch => {
+//@ts-ignore
+export const adminGetUsers = (data):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     try{
         const body = {
@@ -34,7 +36,8 @@ export const adminGetUsers = (data) => async dispatch => {
 
 }
 
-export const newAPIKey = () => async dispatch => {
+//@ts-ignore
+export const newAPIKey = ():AnyAction => async dispatch => {
     if (localStorage.wt){
         dispatch({
             type: LOADING,
@@ -69,8 +72,8 @@ export const newAPIKey = () => async dispatch => {
             })
     }
 }
-
-export const adminPanelGetUserData = (_id) => async dispatch => {
+//@ts-ignore
+export const adminPanelGetUserData = (_id):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         _id,
@@ -99,15 +102,15 @@ export const adminPanelGetUserData = (_id) => async dispatch => {
             })
         })
 }
-
-export const adminPanelChangeUserData = (changes) => async dispatch => {
+//@ts-ignore
+export const adminPanelChangeUserData = (changes):AnyAction => async dispatch => {
     dispatch({
         type: ADMIN_EDIT_USER_DATA,
         payload: changes
     })
 }
-
-export const adminPanelUpdateUserData = (data) => async dispatch => {
+//@ts-ignore
+export const adminPanelUpdateUserData = (data):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         data,
@@ -134,8 +137,8 @@ export const adminPanelUpdateUserData = (data) => async dispatch => {
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
 
-
-export const adminPanelDeleteUser = (id,router) => async dispatch => {
+//@ts-ignore
+export const adminPanelDeleteUser = (id,router):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         id,
@@ -164,8 +167,8 @@ export const adminPanelDeleteUser = (id,router) => async dispatch => {
         router.back()
     })
 }
-
-export const adminPanelChangePassword = (oldPass, newPass, newPass2) => async dispatch => {
+//@ts-ignore
+export const adminPanelChangePassword = (oldPass, newPass, newPass2):AnyAction => async dispatch => {
     let body = {
         oldPass,
         newPass,

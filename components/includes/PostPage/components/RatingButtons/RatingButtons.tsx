@@ -105,7 +105,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
         <RatingButtonsStyledDiv className="rating-buttons" buttonsDisabledStatus={isRated}>
             {views ?
                 <span className='like-disLike-count-items rating-item'
-                      title={t('Views')}
+                      title={t<string>('Views')}
                 >
                      <span className='rate-logo view'/>
                         <p className='rating-item-value'>{_shortNumber(views)} </p>
@@ -119,7 +119,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                             onClick={() => dispatch(likePost(_id))}
                             disabled={isRated }
                             aria-label="like"
-                            title={t('Like')}
+                            title={t<string>('Like')}
                     >
                         <span className='rate-logo thumbs-up'/>
                         <p className='rating-item-value'>{likes}</p>
@@ -128,7 +128,7 @@ const RatingButtons: FC<RatingButtonsPropTypes> = ({rating}) => {
                             onClick={() => dispatch(disLikePost(_id))}
                             disabled={isRated }
                             aria-label="dislike"
-                            title={t('Dislike')}
+                            title={t<string>('Dislike')}
                     >
                         <span className='rate-logo thumbs-down'/>
                         <p className='rating-item-value'>{disLikes}</p>

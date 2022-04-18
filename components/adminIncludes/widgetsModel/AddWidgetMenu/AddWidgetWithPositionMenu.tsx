@@ -56,6 +56,8 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
     const onAddNewWidget = (position:string, type:string) => {
         const widgetModelData = type === 'text' || type === 'textEditor' ? widgetModels.textWidgetModel :
             type === 'menu' ? widgetModels.menuWidgetModel :
+            type === 'postsSlider' || type === 'imagesSlider' ? widgetModels.slider :
+            type === 'postsSlider' || type === 'imagesSlider' ? widgetModels.slider :
                 type === 'linkTo' ? widgetModels.linkToWidgetModel :
                     type === 'multipleLinkTo' ? widgetModels.multipleLinkToWidgetModel :
                         type === 'posts' ? widgetModels.postsWidgetModel :
@@ -69,8 +71,7 @@ const AddWidgetWithPositionMenu :FC<AddWidgetWithPositionMenuPropType> = ({type,
                                                         type === 'alphabeticalNumericalRange' ? widgetModels.alphabeticalNumericalRangeWidgetModel :
                                                             type === 'language' ? widgetModels.languageWidgetModel :
                                                                 type === 'alphabeticalNumericalRange' ? widgetModels.authenticationWidgetModel :
-                                                                    // type ==='imageSwiper'? widgetModels.imageSwiperWidgetModel:
-                                                                    // type ==='postsSwiper'? widgetModels.postsSwiperWidgetModel:
+                                                                  type ==='imagesSwiper' || type ==='postsSwiper'? widgetModels.swiperWidgetModel:
                                                                     type === 'postsSlider' ? widgetModels.postsWidgetModel :
                                                                         widgetModels;
 

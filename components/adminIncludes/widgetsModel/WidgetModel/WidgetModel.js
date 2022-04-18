@@ -19,12 +19,15 @@ import {
     adminUpdateWidget
 } from "@store/adminActions/adminWidgetsActions";
 import DefaultFields from "@components/adminIncludes/widgetsModel/WidgetModel/DefaultFields/DefaultFields";
+// import SliderWidgetFields
+//     from "@components/adminIncludes/widgetsModel/WidgetModel/SliderWidgetFields/SliderWidgetFields";
 
 const AdvertiseWidgetModelFields = dynamic(() => import('./AdvertiseWidgetModelFields'));
-const SliderWidgetTypeFields = dynamic(() => import('./SliderWidgetTypeFields/SliderWidgetTypeFields'));
+const SliderWidgetFields = dynamic(() => import('./SliderWidgetFields/SliderWidgetFields'));
+const SwiperWidgetTypeFields = dynamic(() => import('./SwiperWidgetFields/SwiperWidgetFields'));
 const TextInputFieldForWidget = dynamic(() => import('./TextInputFieldForWidget/TextInputFieldForWidget'), {ssr: false});
 const LinkTypeWidgetModelFields = dynamic(() => import('./LinkTypeWidgetModelFields/LinkTypeWidgetModelFields'));
-const ImageSwiperTypeWidgetModelFields = dynamic(() => import('./ImageSwiperTypeWidgetModelFields/ImageSwiperTypeWidgetModelFields'));
+const ImagesSwiperTypeWidgetModelFields = dynamic(() => import('./ImagesSwiperTypeWidgetModelFields/ImagesSwiperTypeWidgetModelFields'));
 const MenuWidgetModelFields = dynamic(() => import('./MenuWidgetModelFields/MenuWidgetModelFields'));
 const MediaWidgetType = dynamic(() => import('./MediaWidgetType/MediaWidgetType'));
 const ExportWidget = dynamic(() => import('./ExportWidget/ExportWidget'));
@@ -520,16 +523,24 @@ const WidgetModel = props => {
                         : null
 
                     }
-                    {widgetData.type === 'imageSwiper' ?
-                        <ImageSwiperTypeWidgetModelFields onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                    {widgetData.type === 'imagesSwiper' ?
+                        <ImagesSwiperTypeWidgetModelFields onUniqueDataChangeHandler={onUniqueDataChangeHandler}
                                                           uniqueData={widgetData.uniqueData}
                         />
                         : null
                     }
 
-                    {widgetData.type === 'postsSwiper' || widgetData.type === 'imageSwiper' ?
-                        <SliderWidgetTypeFields
-                            onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                    {widgetData.type === 'postsSwiper'  || widgetData.type === 'imagesSwiper'  ?
+                        <SwiperWidgetTypeFields
+                            // onUniqueDataChangeHandler={onUniqueDataChangeHandler}
+                            onUniqueDataJsonChangeHandler={onUniqueDataJsonChangeHandler}
+                            uniqueData={widgetData.uniqueData}
+                        />
+                        : null
+                    }
+                    {widgetData.type === 'postsSlider' || widgetData.type === 'imagesSlider' ?
+                        <SliderWidgetFields
+                            // onUniqueDataChangeHandler={onUniqueDataChangeHandler}
                             onUniqueDataJsonChangeHandler={onUniqueDataJsonChangeHandler}
                             uniqueData={widgetData.uniqueData}
                         />

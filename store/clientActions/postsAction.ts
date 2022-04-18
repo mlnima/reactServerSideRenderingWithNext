@@ -20,12 +20,13 @@ import {
     SET_POSTS_DATA,
     EDIT_POST_FIELD, LIKE_POST, DISLIKE_POST, VIEW_POST, SET_HEAD_DATA, SET_NOT_FOUND_PAGE
 } from "@store/types";
+import {AnyAction} from "redux";
 
 // const mongoIdValidator = require('../../_variables/util/mongoIdValidator')
 // import mongoIdValidator from '../../_variables/util/mongoIdValidator'
 
-
-export const setPostsData = postsData => async dispatch => {
+//@ts-ignore
+export const setPostsData = (postsData):AnyAction  => async dispatch => {
     dispatch({
         type: SET_POSTS_DATA,
         payload: postsData
@@ -96,8 +97,8 @@ export const getPosts = (context, metaId, cache, metaType, options) => async dis
 
 }
 
-
-export const getPost = (_id: string , locale : string) => async dispatch => {
+//@ts-ignore
+export const getPost = (_id: string , locale : string):AnyAction  => async dispatch => {
     const isDefaultLocale = locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL;
     // if (mongoIdValidator(_id)){
         await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
@@ -150,7 +151,8 @@ export const getPost = (_id: string , locale : string) => async dispatch => {
     // }
 }
 
-export const getEditingPost = (_id: string) => async dispatch => {
+//@ts-ignore
+export const getEditingPost = (_id: string):AnyAction  => async dispatch => {
     dispatch({type: LOADING, payload: true})
     await Axios.get(`/api/v1/posts/clientGetPost${_postPageQueryGenerator({_id})}`).then(res => {
 
@@ -164,8 +166,8 @@ export const getEditingPost = (_id: string) => async dispatch => {
     }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-
-export const userCreateNewPost = (data: PostTypes, router) => async dispatch => {
+//@ts-ignore
+export const userCreateNewPost = (data: PostTypes, router):AnyAction  => async dispatch => {
 
     dispatch({type: LOADING, payload: true})
 
@@ -210,7 +212,8 @@ export const userCreateNewPost = (data: PostTypes, router) => async dispatch => 
     }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-export const userUpdatePost = (data: PostTypes) => async dispatch => {
+//@ts-ignore
+export const userUpdatePost = (data: PostTypes):AnyAction  => async dispatch => {
     dispatch({type: LOADING, payload: true})
 
     const comments = data.comments ? {comments: reduceArrayOfDataToIds(data.comments)} : {}
@@ -253,14 +256,16 @@ export const userUpdatePost = (data: PostTypes) => async dispatch => {
     })
 }
 
-export const editPostField = (data) => async dispatch => {
+//@ts-ignore
+export const editPostField = (data):AnyAction  => async dispatch => {
     dispatch({
         type: EDIT_POST_FIELD,
         payload: data
     })
 }
 
-export const getMetas = (data, metaType, cache) => async dispatch => {
+//@ts-ignore
+export const getMetas = (data, metaType, cache):AnyAction  => async dispatch => {
     const queries = _metaPageQueryGenerator(data, metaType, cache)
     await Axios.get(`/api/v1/posts/getMetas${queries}`).then(res => {
         dispatch({
@@ -275,7 +280,8 @@ export const getMetas = (data, metaType, cache) => async dispatch => {
     })
 }
 
-export const getComments = (_id: string) => async dispatch => {
+//@ts-ignore
+export const getComments = (_id: string):AnyAction  => async dispatch => {
     // @ts-ignore
     try {
         await Axios.get(`/api/v1/posts/getComments?onDocument=${_id}`).then(res => {
@@ -301,14 +307,16 @@ export const getComments = (_id: string) => async dispatch => {
     }
 };
 
-export const addNewComment = (newComment) => async dispatch => {
+//@ts-ignore
+export const addNewComment = (newComment):AnyAction  => async dispatch => {
     dispatch({
         type: NEW_COMMENT,
         payload: newComment
     })
 }
 
-export const newComment = (commentData) => async dispatch => {
+//@ts-ignore
+export const newComment = (commentData):AnyAction  => async dispatch => {
     dispatch({type: LOADING, payload: true})
     const body = {
         ...commentData,
@@ -334,8 +342,8 @@ export const newComment = (commentData) => async dispatch => {
     }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-
-export const deleteComments = (commentsListToDelete) => async dispatch => {
+//@ts-ignore
+export const deleteComments = (commentsListToDelete):AnyAction  => async dispatch => {
     dispatch({type: LOADING, payload: true})
     await Axios.post(`/api/admin/posts/deleteComments`, {
         commentsIds: commentsListToDelete,
@@ -364,8 +372,8 @@ export const deleteComments = (commentsListToDelete) => async dispatch => {
     }).finally(() => dispatch({type: LOADING, payload: false}))
 }
 
-
-export const getPageData = (pageName) => async dispatch => {
+//@ts-ignore
+export const getPageData = (pageName):AnyAction  => async dispatch => {
     await Axios.get(`/api/v1/pages/getPageData?pageName=${pageName}`).then(res => {
 
         if (res.data?.pageData && res.data?.pageData?.status === 'published'){
@@ -403,7 +411,8 @@ export const getPageData = (pageName) => async dispatch => {
     })
 }
 
-export const likePost = (id: string) => async dispatch => {
+//@ts-ignore
+export const likePost = (id: string):AnyAction  => async dispatch => {
     const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes: [], disLikes: []};
     ratingData.likes = [...new Set([...ratingData.likes, id])]
     ratingData.disLikes = ratingData.disLikes.filter(disLiked => disLiked !== id)
@@ -422,7 +431,8 @@ export const likePost = (id: string) => async dispatch => {
 
 }
 
-export const disLikePost = (id: string) => async dispatch => {
+//@ts-ignore
+export const disLikePost = (id: string):AnyAction  => async dispatch => {
     const ratingData = localStorage?.ratingData ? JSON.parse(localStorage.ratingData) : {likes: [], disLikes: []};
     ratingData.disLikes = [...new Set([...ratingData.disLikes, id])]
     ratingData.likes = ratingData.likes.filter(liked => liked !== id)
@@ -440,7 +450,8 @@ export const disLikePost = (id: string) => async dispatch => {
     })
 }
 
-export const viewPost = (id: string) => async dispatch => {
+//@ts-ignore
+export const viewPost = (id: string):AnyAction  => async dispatch => {
     const body = {
         id,
         type: 'views'
@@ -453,8 +464,8 @@ export const viewPost = (id: string) => async dispatch => {
     })
 }
 
-
-export const createEditPostByUser = (pageName) => async dispatch => {
+//@ts-ignore
+export const createEditPostByUser = (pageName):AnyAction  => async dispatch => {
     // const body = {
     //     pageName
     // }

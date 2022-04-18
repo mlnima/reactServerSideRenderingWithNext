@@ -2,8 +2,9 @@ import {ADMIN_GET_FORMS, ADMIN_GET_FORM} from "@store/adminTypes";
 import {LOADING, SET_ALERT} from "@store/types";
 import Axios from "@_variables/util/Axios";
 import {AxiosError, AxiosResponse} from "axios";
-
-export const adminGetForms = (data) => async (dispatch: any) =>{
+import {AnyAction} from "redux";
+//@ts-ignore
+export const adminGetForms = (data):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         ...data,
@@ -19,8 +20,8 @@ export const adminGetForms = (data) => async (dispatch: any) =>{
 
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
-
-export const adminGetForm = (_id) => async (dispatch: any) =>{
+//@ts-ignore
+export const adminGetForm = (_id):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         _id,
@@ -35,8 +36,8 @@ export const adminGetForm = (_id) => async (dispatch: any) =>{
 
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
-
-export const adminDeleteForm = (_id) => async (dispatch: any) =>{
+//@ts-ignore
+export const adminDeleteForm = (_id):AnyAction => async dispatch =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         _id,

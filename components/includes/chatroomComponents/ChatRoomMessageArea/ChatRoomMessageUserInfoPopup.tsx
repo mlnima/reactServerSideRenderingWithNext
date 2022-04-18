@@ -10,6 +10,7 @@ import {setLoginRegisterFormStatus} from "@store/clientActions/globalStateAction
 import {conversation} from "@store/clientActions/userActions";
 import {StoreTypes} from "@_variables/TypeScriptTypes/GlobalTypes";
 
+
 const ChatRoomMessageUserInfoPopupStyledDiv = styled.div`
   display: flex;
   justify-content: center;

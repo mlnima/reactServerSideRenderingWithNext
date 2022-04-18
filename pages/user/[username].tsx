@@ -129,11 +129,11 @@ const user : FC = () => {
                     }
                     {userPageData?._id ?
                         <div className='follow-count'>
-                            <p>{t([`Followers`])} : <span>{
+                            <p>{t<string>([`Followers`])} : <span>{
                                 // @ts-ignore
                                 userPageData?.followers ? userPageData.followers?.length : 0
                             }</span></p>
-                            <p>{t([`Following`])} : <span>{
+                            <p>{t<string>([`Following`])} : <span>{
                                 // @ts-ignore
                                 userPageData?.following ? userPageData.following?.length : 0
                             }</span></p>

@@ -7,8 +7,10 @@ import {
     ADMIN_EDIT_COMMENT, ADMIN_GET_POST,
 } from "../adminTypes";
 import {DELETE_COMMENT, LOADING, SET_ALERT} from "@store/types";
+import {AnyAction} from "redux";
 
-export const adminGetComments = (data) => async (dispatch: any) =>{
+//@ts-ignore
+export const adminGetComments = (data):AnyAction => async (dispatch) =>{
     dispatch({type: LOADING, payload: true})
     const body = {
         ...data,
@@ -27,8 +29,8 @@ export const adminGetComments = (data) => async (dispatch: any) =>{
 
 }
 
-
-export const adminDeleteComments = (commentsIds) => async dispatch => {
+//@ts-ignore
+export const adminDeleteComments = (commentsIds):AnyAction => async dispatch => {
     dispatch({type: LOADING, payload: true})
     await Axios.post(`/api/admin/posts/deleteComments`, {
         commentsIds: commentsIds,
@@ -52,7 +54,7 @@ export const adminDeleteComments = (commentsIds) => async dispatch => {
         })
     }).finally(()=>dispatch({type: LOADING, payload: false}))
 }
-
-export const adminGetComment = (_id?: string | string[]) => async (dispatch: any) =>{
+//@ts-ignore
+export const adminGetComment = (_id?: string | string[]):AnyAction => async dispatch =>{
 
 }

@@ -40,7 +40,7 @@ const DesktopMenuWidgetItem: FC<DesktopMenuWidgetItemPropTypes> =
     const linkNameWithTranslate = useMemo(() => {
         return locale === process.env.NEXT_PUBLIC_DEFAULT_LOCAL ?
             menuItem.name :
-            t([t(menuItem.name, {ns: 'common'}), t(menuItem.name, {ns: 'customTranslation'})])
+            t<string>([t<string>(menuItem.name, {ns: 'common'}), t<string>(menuItem.name, {ns: 'customTranslation'})])
     }, [])
 
     return (

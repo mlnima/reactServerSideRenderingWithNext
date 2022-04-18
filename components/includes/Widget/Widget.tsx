@@ -30,6 +30,7 @@ const MultipleLinkTo = dynamic(() => import('../widgets/MultipleLinkTo/MultipleL
 const Advertise = dynamic(() => import('../widgets/Advertise/Advertise'))
 const ImageSwiper = dynamic(() => import('../widgets/ImageSwiper/ImageSwiper'))
 const PostSwiper = dynamic(() => import('../widgets/PostSwiper/PostSwiper'))
+const PostSlider = dynamic(() => import('../widgets/PostsSlider/PostsSlider'))
 const Text = dynamic(() => import('./WidgetsModelsComponents/Text/Text'))
 const Authentication = dynamic(() => import('../widgets/Authentication/Authentication'))
 
@@ -52,6 +53,7 @@ const Widget: FC<WidgetComponentPropTypes> = ({data, widgetId, isSidebar, viewTy
     const WidgetToRender = useMemo(()=>{
             return data.type === 'posts' ? Posts :
             data.type === 'postsSwiper' ? PostSwiper :
+            data.type === 'postsSlider' ? PostSlider :
             data.type === 'multipleLinkTo' ? MultipleLinkTo :
             data.type === 'media' ? MediaWidget :
             data.type === 'recentComments' ? RecentComments :
